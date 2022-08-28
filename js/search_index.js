@@ -1,0 +1,1 @@
+var search_data = {"index":{"searchIndex":["activeservice","specification"],"longSearchIndex":["activeservice","activeservice::specification"],"info":[["ActiveService","","classes/ActiveService.html","",""],["ActiveService::Specification","","classes/ActiveService/Specification.html","",""]]}}
