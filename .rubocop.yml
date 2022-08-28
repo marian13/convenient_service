@@ -1,0 +1,44 @@
+inherit_from:
+  - .rubocop_rspec.yml
+
+##
+# Standard based Rubocop config.
+# - https://github.com/testdouble/standard
+# - https://github.com/testdouble/standard#usage-via-rubocop
+# - https://evilmartians.com/chronicles/rubocoping-with-legacy-bring-your-ruby-code-up-to-standard
+#
+require:
+  ##
+  # Rubocop for RSpec files.
+  # https://github.com/rubocop/rubocop-rspec#usage
+  #
+  - rubocop-rspec
+  ##
+  # NOTE: `rubocop-performance' is automatically bundled with Standard.
+  #
+  - rubocop-performance
+  ##
+  # NOTE: Custom Standard cop that should be loaded before `config/base.yml'.
+  #
+  - standard/cop/block_single_line_braces
+
+inherit_gem:
+  standard: config/base.yml
+
+AllCops:
+  ##
+  # NOTE: `TargetRubyVersion: 2.5' is the oldest supported Ruby version by Rubocop.
+  # As a result, Rubocop may miss incompatible code with Ruby 2.3 and Ruby 2.4, but it will be caught by specs (if they are written of course).
+  # https://github.com/testdouble/standard#how-do-i-specify-a-ruby-version-what-is-supported
+  #
+  # TODO: Update when support for Rubies lower than 2.5 will be dropped.
+  #
+  TargetRubyVersion: 2.5
+
+  ##
+  # NOTE: Excludes vendor from linting. Needed by GitHub Actions.
+  # - https://github.com/rubocop/rubocop/issues/9832
+  # - https://github.com/rubocop/rubocop/issues/9832#issuecomment-873398952
+  #
+  Exclude:
+    - vendor/**/*

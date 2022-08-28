@@ -1,0 +1,141 @@
+##
+# CI using GitHub Actions.
+#
+# NOTE: GitHub Actions DSL.
+# - https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions#understanding-the-workflow-file
+# - https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions
+#
+# NOTE: Ruby workflow example.
+# - https://github.com/ruby/setup-ruby#usage
+#
+# NOTE: Building and testing Ruby.
+# - https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-ruby
+#
+# NOTE: More examples.
+# - https://gist.github.com/geonizeli/57376c15f23feecdabf5ea213c3d7f41
+# - https://docs.knapsackpro.com/2019/how-to-run-rspec-on-github-actions-for-ruby-on-rails-app-using-parallel-jobs
+#
+# NOTE: Sharing data between jobs and post-workflow artifacts.
+# - https://docs.github.com/en/actions/learn-github-actions/essential-features-of-github-actions#sharing-data-between-jobs
+# - https://github.com/actions/upload-artifact
+# - https://github.com/actions/download-artifact
+#
+# NOTE: Virtual Environments.
+# - https://github.com/actions/virtual-environments
+#
+# NOTE: How to collect and upload coverage reports for Coveralls?
+# - https://github.com/marketplace/actions/coveralls-github-action#complete-parallel-job-example
+# - https://github.com/coverallsapp/github-action/issues/29
+# - https://github.com/coverallsapp/github-action/issues/29#issuecomment-704366557
+#
+# NOTE: What is the purpose of bundle-audit?
+# - https://github.com/rubysec/bundler-audit
+#
+# IMPORTANT: This workflow is heavily based on Shopify/packwerk workflow.
+# - https://github.com/Shopify/packwerk/blob/main/.github/workflows/ci.yml
+# - https://github.com/Shopify/packwerk/actions/runs/331834549/workflow
+#
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+  lint:
+    runs-on: ubuntu-20.04
+    name: Lint
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.1
+          ##
+          # NOTE: Installs the latest compatible Bundler version, runs `bundle install' and caches installed gems.
+          # - https://github.com/ruby/setup-ruby#usage
+          # - https://github.com/ruby/setup-ruby#bundler
+          #
+          bundler-cache: true
+      - name: Run Rubocop
+        run: bundle exec rubocop --config .rubocop.yml
+
+  test:
+    needs:
+      - lint
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        gemfile:
+          - Gemfile
+        ruby:
+          - 2.3
+          - 2.4
+          - 2.5
+          - 2.6
+          - 2.7
+          ##
+          # NOTE: 3.0 is wrapped by quotes in order to avoid misparsing it as integer.
+          # https://github.com/actions/runner/issues/849
+          #
+          - "3.0"
+          - 3.1
+    env:
+      BUNDLE_GEMFILE: ${{ matrix.gemfile }}
+
+    name: "Test Ruby `${{ matrix.ruby }}' with Gemfile `${{ matrix.gemfile }}'"
+    steps:
+      - uses: actions/checkout@v2
+      - name: "Set up Ruby `${{ matrix.ruby }}'"
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          ##
+          # NOTE: Installs the latest compatible Bundler version, runs `bundle install' and caches installed gems.
+          # - https://github.com/ruby/setup-ruby#usage
+          # - https://github.com/ruby/setup-ruby#bundler
+          #
+          bundler-cache: true
+      - name: Run RSpec
+        run: bundle exec rspec
+      - name: Collect coverage reports for Coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.github_token }}
+          flag-name: run-${{ matrix.ruby }}-${{ matrix.gemfile }}
+          parallel: true
+          path-to-lcov: "./coverage/lcov.info"
+
+  coverage:
+    needs:
+      - test
+    runs-on: ubuntu-20.04
+    name: Gather coverage
+    steps:
+      - name: Upload coverage reports to Coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.github_token }}
+          parallel-finished: true
+
+  bundle-audit:
+    runs-on: ubuntu-20.04
+    name: bundle-audit
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.1
+          ##
+          # NOTE: Installs the latest compatible Bundler version, runs `bundle install' and caches installed gems.
+          # - https://github.com/ruby/setup-ruby#usage
+          # - https://github.com/ruby/setup-ruby#bundler
+          #
+          bundler-cache: true
+      - name: Check for vulnerable gem versions, insecure gem sources, etc...
+        run: bundle exec bundle-audit check --update

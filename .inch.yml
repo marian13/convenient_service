@@ -1,0 +1,7 @@
+##
+# Configures Inch (inch gives you hints where to improve your docs).
+# https://github.com/rrrene/inch#configuration
+#
+files:
+  included:
+    - lib/**/*.rb

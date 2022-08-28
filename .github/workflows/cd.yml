@@ -1,0 +1,47 @@
+##
+# CD using GitHub Actions.
+#
+# NOTE: GitHub Actions DSL.
+# - https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions#understanding-the-workflow-file
+# - https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions
+#
+# NOTE: Ruby workflow example.
+# - https://github.com/ruby/setup-ruby#usage
+#
+# NOTE: How to set the working directory for the run directive (working-directory)?
+# - https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsrunhttps://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsrun
+#
+# NOTE: How to deploy to GitHub Pages using GitHub Actions?
+# - https://github.com/marketplace/actions/github-pages-action
+#
+name: CD
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-20.04
+    name: Deploy
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.1
+          ##
+          # NOTE: Installs the latest compatible Bundler version, runs `bundle install' and caches installed gems.
+          # - https://github.com/ruby/setup-ruby#usage
+          # - https://github.com/ruby/setup-ruby#bundler
+          #
+          bundler-cache: true
+      - name: Generate docs
+        working-directory: ./
+        run: bundle exec sdoc lib -T rails -o docs --github
+      - name: Deploy docs to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs
