@@ -23,8 +23,12 @@
     <meta property="og:title" value="ConvenientService">
 
   
+    
+    <meta name="description" content="Base class for all ‘ConvenientService’ errors. Can be used as a catch-all solution, for example:  begin   any_service.result rescue ConvenientService::Error =&gt; error   puts error.">
+    <meta property="og:description" content="Base class for all ‘ConvenientService’ errors. Can be used as a catch-all solution, for example:  begin   any_service.result rescue ConvenientService::Error =&gt; error   puts error.">
+  
 
-    <meta name="keywords" content="ConvenientService class, ">
+    <meta name="keywords" content="ConvenientService class, require_rspec_extentions, require_examples, logger">
 </head>
 
 <body>
@@ -61,7 +65,503 @@
             
             <li><a href="../files/lib/convenient_service_rb.html">lib/convenient_service.rb</a></li>
             
+            <li><a href="../files/lib/convenient_service/aliases_rb.html">lib/convenient_service/aliases.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/common/plugins/assigns_attributes_in_constructor/using_active_model_attribute_assignment/concern_rb.html">lib/convenient_service/common/plugins/assigns_attributes_in_constructor/using_active_model_attribute_assignment/concern.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/common/plugins/assigns_attributes_in_constructor/using_active_model_attribute_assignment/middleware_rb.html">lib/convenient_service/common/plugins/assigns_attributes_in_constructor/using_active_model_attribute_assignment/middleware.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/common/plugins/assigns_attributes_in_constructor/using_dry_initializer/concern_rb.html">lib/convenient_service/common/plugins/assigns_attributes_in_constructor/using_dry_initializer/concern.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/common/plugins/caches_constructor_params/concern_rb.html">lib/convenient_service/common/plugins/caches_constructor_params/concern.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/common/plugins/caches_constructor_params/entities/constructor_params_rb.html">lib/convenient_service/common/plugins/caches_constructor_params/entities/constructor_params.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/common/plugins/caches_constructor_params/middleware_rb.html">lib/convenient_service/common/plugins/caches_constructor_params/middleware.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/common/plugins/caches_return_value/entities/key_rb.html">lib/convenient_service/common/plugins/caches_return_value/entities/key.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/common/plugins/caches_return_value/middleware_rb.html">lib/convenient_service/common/plugins/caches_return_value/middleware.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/common/plugins/can_be_copied/concern_rb.html">lib/convenient_service/common/plugins/can_be_copied/concern.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/common/plugins/has_around_callbacks/concern_rb.html">lib/convenient_service/common/plugins/has_around_callbacks/concern.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/common/plugins/has_around_callbacks/errors_rb.html">lib/convenient_service/common/plugins/has_around_callbacks/errors.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/common/plugins/has_around_callbacks/middleware_rb.html">lib/convenient_service/common/plugins/has_around_callbacks/middleware.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/common/plugins/has_attributes/concern_rb.html">lib/convenient_service/common/plugins/has_attributes/concern.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/common/plugins/has_attributes/patches/active_model_attributes_rb.html">lib/convenient_service/common/plugins/has_attributes/patches/active_model_attributes.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/common/plugins/has_callbacks/concern_rb.html">lib/convenient_service/common/plugins/has_callbacks/concern.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/common/plugins/has_callbacks/entities/callback_rb.html">lib/convenient_service/common/plugins/has_callbacks/entities/callback.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/common/plugins/has_callbacks/entities/callback_collection_rb.html">lib/convenient_service/common/plugins/has_callbacks/entities/callback_collection.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/common/plugins/has_callbacks/entities/type_rb.html">lib/convenient_service/common/plugins/has_callbacks/entities/type.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/common/plugins/has_callbacks/entities/type/class_methods_rb.html">lib/convenient_service/common/plugins/has_callbacks/entities/type/class_methods.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/common/plugins/has_callbacks/entities/type_collection_rb.html">lib/convenient_service/common/plugins/has_callbacks/entities/type_collection.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/common/plugins/has_callbacks/middleware_rb.html">lib/convenient_service/common/plugins/has_callbacks/middleware.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/common/plugins/has_config/concern_rb.html">lib/convenient_service/common/plugins/has_config/concern.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/common/plugins/has_config/entities/config_rb.html">lib/convenient_service/common/plugins/has_config/entities/config.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/common/plugins/has_config/entities/read_default_write_config_rb.html">lib/convenient_service/common/plugins/has_config/entities/read_default_write_config.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/common/plugins/has_config/entities/read_only_config_rb.html">lib/convenient_service/common/plugins/has_config/entities/read_only_config.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/common/plugins/has_constructor/concern_rb.html">lib/convenient_service/common/plugins/has_constructor/concern.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/common/plugins/has_internals/commands/create_internals_class_rb.html">lib/convenient_service/common/plugins/has_internals/commands/create_internals_class.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/common/plugins/has_internals/concern_rb.html">lib/convenient_service/common/plugins/has_internals/concern.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/common/plugins/has_internals/entities/internals_rb.html">lib/convenient_service/common/plugins/has_internals/entities/internals.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/common/plugins/has_internals/entities/internals/concern_rb.html">lib/convenient_service/common/plugins/has_internals/entities/internals/concern.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/common/plugins/has_internals/entities/internals/plugins/has_cache/concern_rb.html">lib/convenient_service/common/plugins/has_internals/entities/internals/plugins/has_cache/concern.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/common/plugins/has_internals/entities/internals/plugins/has_cache/entities/cache_rb.html">lib/convenient_service/common/plugins/has_internals/entities/internals/plugins/has_cache/entities/cache.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/common/plugins/has_internals/entities/internals/plugins/has_missing_concerns/concern_rb.html">lib/convenient_service/common/plugins/has_internals/entities/internals/plugins/has_missing_concerns/concern.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/common/plugins/normalizes_env/middleware_rb.html">lib/convenient_service/common/plugins/normalizes_env/middleware.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/configs/custom_rb.html">lib/convenient_service/configs/custom.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/configs/dry_rb.html">lib/convenient_service/configs/dry.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/configs/rails_rb.html">lib/convenient_service/configs/rails.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/configs/standard_rb.html">lib/convenient_service/configs/standard.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/core_rb.html">lib/convenient_service/core.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/core/aliases_rb.html">lib/convenient_service/core/aliases.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/core/class_methods_rb.html">lib/convenient_service/core/class_methods.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/core/commands/assert_middleware_stack_not_fixed_rb.html">lib/convenient_service/core/commands/assert_middleware_stack_not_fixed.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/core/commands/configure_middleware_stack_rb.html">lib/convenient_service/core/commands/configure_middleware_stack.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/core/commands/enable_concern_middleware_stack_rb.html">lib/convenient_service/core/commands/enable_concern_middleware_stack.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/core/commands/enable_method_middleware_stack_rb.html">lib/convenient_service/core/commands/enable_method_middleware_stack.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/core/commands/prepend_module_rb.html">lib/convenient_service/core/commands/prepend_module.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/core/commands/resolve_prepend_module_rb.html">lib/convenient_service/core/commands/resolve_prepend_module.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/core/entities/chain_rb.html">lib/convenient_service/core/entities/chain.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/core/entities/classic_middleware_rb.html">lib/convenient_service/core/entities/classic_middleware.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/core/entities/concerns/concern_middleware_rb.html">lib/convenient_service/core/entities/concerns/concern_middleware.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/core/entities/concerns/middleware_stack_rb.html">lib/convenient_service/core/entities/concerns/middleware_stack.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/core/entities/middlewares/method_chain_middleware_rb.html">lib/convenient_service/core/entities/middlewares/method_chain_middleware.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/core/entities/middlewares/middleware_stack_rb.html">lib/convenient_service/core/entities/middlewares/middleware_stack.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/core/errors_rb.html">lib/convenient_service/core/errors.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/core/instance_methods_rb.html">lib/convenient_service/core/instance_methods.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/error_rb.html">lib/convenient_service/error.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/examples/gemfile/entries/format_rb.html">lib/convenient_service/examples/gemfile/entries/format.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/examples/gemfile/services/assert_file_exists_rb.html">lib/convenient_service/examples/gemfile/services/assert_file_exists.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/examples/gemfile/services/assert_file_not_empty_rb.html">lib/convenient_service/examples/gemfile/services/assert_file_not_empty.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/examples/gemfile/services/assert_node_available_rb.html">lib/convenient_service/examples/gemfile/services/assert_node_available.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/examples/gemfile/services/assert_npm_package_available_rb.html">lib/convenient_service/examples/gemfile/services/assert_npm_package_available.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/examples/gemfile/services/assert_valid_ruby_syntax_rb.html">lib/convenient_service/examples/gemfile/services/assert_valid_ruby_syntax.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/examples/gemfile/services/format_rb.html">lib/convenient_service/examples/gemfile/services/format.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/examples/gemfile/services/format_body_rb.html">lib/convenient_service/examples/gemfile/services/format_body.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/examples/gemfile/services/format_gems_with_envs_rb.html">lib/convenient_service/examples/gemfile/services/format_gems_with_envs.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/examples/gemfile/services/format_gems_without_envs_rb.html">lib/convenient_service/examples/gemfile/services/format_gems_without_envs.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/examples/gemfile/services/format_header_rb.html">lib/convenient_service/examples/gemfile/services/format_header.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/examples/gemfile/services/parse_content_rb.html">lib/convenient_service/examples/gemfile/services/parse_content.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/examples/gemfile/services/print_shell_command_rb.html">lib/convenient_service/examples/gemfile/services/print_shell_command.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/examples/gemfile/services/read_file_content_rb.html">lib/convenient_service/examples/gemfile/services/read_file_content.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/examples/gemfile/services/run_shell_rb.html">lib/convenient_service/examples/gemfile/services/run_shell.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/examples/gemfile/services/strip_comments_rb.html">lib/convenient_service/examples/gemfile/services/strip_comments.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/extractions/active_support_concern/concern_rb.html">lib/convenient_service/extractions/active_support_concern/concern.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/extractions/ruby_middleware/middleware/builder_rb.html">lib/convenient_service/extractions/ruby_middleware/middleware/builder.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/extractions/ruby_middleware/middleware/logger_rb.html">lib/convenient_service/extractions/ruby_middleware/middleware/logger.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/extractions/ruby_middleware/middleware/runner_rb.html">lib/convenient_service/extractions/ruby_middleware/middleware/runner.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/logger_rb.html">lib/convenient_service/logger.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/rspec/helpers_rb.html">lib/convenient_service/rspec/helpers.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/rspec/helpers/custom/ignoring_error_rb.html">lib/convenient_service/rspec/helpers/custom/ignoring_error.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/rspec/helpers/custom/stub_service_rb.html">lib/convenient_service/rspec/helpers/custom/stub_service.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/rspec/helpers/custom/stub_service/entities/result_spec_rb.html">lib/convenient_service/rspec/helpers/custom/stub_service/entities/result_spec.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/rspec/helpers/custom/stub_service/entities/stubbed_service_rb.html">lib/convenient_service/rspec/helpers/custom/stub_service/entities/stubbed_service.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/rspec/helpers/custom/wrap_method_rb.html">lib/convenient_service/rspec/helpers/custom/wrap_method.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/rspec/helpers/custom/wrap_method/entities/wrapped_method_rb.html">lib/convenient_service/rspec/helpers/custom/wrap_method/entities/wrapped_method.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/rspec/helpers/custom/wrap_method/errors_rb.html">lib/convenient_service/rspec/helpers/custom/wrap_method/errors.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/rspec/helpers/ignoring_error_rb.html">lib/convenient_service/rspec/helpers/ignoring_error.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/rspec/helpers/stub_service_rb.html">lib/convenient_service/rspec/helpers/stub_service.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/rspec/helpers/wrap_method_rb.html">lib/convenient_service/rspec/helpers/wrap_method.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/rspec/matchers_rb.html">lib/convenient_service/rspec/matchers.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/rspec/matchers/be_descendant_of_rb.html">lib/convenient_service/rspec/matchers/be_descendant_of.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/rspec/matchers/be_direct_descendant_of_rb.html">lib/convenient_service/rspec/matchers/be_direct_descendant_of.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/rspec/matchers/cache_its_value_rb.html">lib/convenient_service/rspec/matchers/cache_its_value.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/rspec/matchers/call_chain_next_rb.html">lib/convenient_service/rspec/matchers/call_chain_next.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/rspec/matchers/custom/be_descendant_of_rb.html">lib/convenient_service/rspec/matchers/custom/be_descendant_of.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/rspec/matchers/custom/be_direct_descendant_of_rb.html">lib/convenient_service/rspec/matchers/custom/be_direct_descendant_of.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/rspec/matchers/custom/cache_its_value_rb.html">lib/convenient_service/rspec/matchers/custom/cache_its_value.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/rspec/matchers/custom/call_chain_next_rb.html">lib/convenient_service/rspec/matchers/custom/call_chain_next.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/rspec/matchers/custom/delegate_to_rb.html">lib/convenient_service/rspec/matchers/custom/delegate_to.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/rspec/matchers/custom/extend_module_rb.html">lib/convenient_service/rspec/matchers/custom/extend_module.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/rspec/matchers/custom/have_abstract_method_rb.html">lib/convenient_service/rspec/matchers/custom/have_abstract_method.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/rspec/matchers/custom/have_alias_method_rb.html">lib/convenient_service/rspec/matchers/custom/have_alias_method.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/rspec/matchers/custom/have_attr_accessor_rb.html">lib/convenient_service/rspec/matchers/custom/have_attr_accessor.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/rspec/matchers/custom/have_attr_reader_rb.html">lib/convenient_service/rspec/matchers/custom/have_attr_reader.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/rspec/matchers/custom/have_attr_writer_rb.html">lib/convenient_service/rspec/matchers/custom/have_attr_writer.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/rspec/matchers/custom/include_module_rb.html">lib/convenient_service/rspec/matchers/custom/include_module.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/rspec/matchers/custom/prepend_module_rb.html">lib/convenient_service/rspec/matchers/custom/prepend_module.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/rspec/matchers/custom/results/be_error_rb.html">lib/convenient_service/rspec/matchers/custom/results/be_error.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/rspec/matchers/custom/results/be_failure_rb.html">lib/convenient_service/rspec/matchers/custom/results/be_failure.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/rspec/matchers/custom/results/be_success_rb.html">lib/convenient_service/rspec/matchers/custom/results/be_success.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/rspec/matchers/delegate_to_rb.html">lib/convenient_service/rspec/matchers/delegate_to.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/rspec/matchers/extend_module_rb.html">lib/convenient_service/rspec/matchers/extend_module.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/rspec/matchers/have_abstract_method_rb.html">lib/convenient_service/rspec/matchers/have_abstract_method.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/rspec/matchers/have_alias_method_rb.html">lib/convenient_service/rspec/matchers/have_alias_method.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/rspec/matchers/have_attr_accessor_rb.html">lib/convenient_service/rspec/matchers/have_attr_accessor.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/rspec/matchers/have_attr_reader_rb.html">lib/convenient_service/rspec/matchers/have_attr_reader.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/rspec/matchers/have_attr_writer_rb.html">lib/convenient_service/rspec/matchers/have_attr_writer.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/rspec/matchers/include_module_rb.html">lib/convenient_service/rspec/matchers/include_module.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/rspec/matchers/prepend_module_rb.html">lib/convenient_service/rspec/matchers/prepend_module.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/rspec/matchers/results_rb.html">lib/convenient_service/rspec/matchers/results.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/rspec/matchers/results/be_error_rb.html">lib/convenient_service/rspec/matchers/results/be_error.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/rspec/matchers/results/be_failure_rb.html">lib/convenient_service/rspec/matchers/results/be_failure.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/rspec/matchers/results/be_success_rb.html">lib/convenient_service/rspec/matchers/results/be_success.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/can_recalculate_result/concern_rb.html">lib/convenient_service/service/plugins/can_recalculate_result/concern.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_missing_concerns/concern_rb.html">lib/convenient_service/service/plugins/has_missing_concerns/concern.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result/commands/create_result_class_rb.html">lib/convenient_service/service/plugins/has_result/commands/create_result_class.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result/concern_rb.html">lib/convenient_service/service/plugins/has_result/concern.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result/concern/class_methods_rb.html">lib/convenient_service/service/plugins/has_result/concern/class_methods.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result/concern/instance_methods_rb.html">lib/convenient_service/service/plugins/has_result/concern/instance_methods.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result/constants_rb.html">lib/convenient_service/service/plugins/has_result/constants.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result/entities/result_rb.html">lib/convenient_service/service/plugins/has_result/entities/result.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result/entities/result/commands/cast_result_params_rb.html">lib/convenient_service/service/plugins/has_result/entities/result/commands/cast_result_params.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result/entities/result/concern_rb.html">lib/convenient_service/service/plugins/has_result/entities/result/concern.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result/entities/result/concern/instance_methods_rb.html">lib/convenient_service/service/plugins/has_result/entities/result/concern/instance_methods.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result/entities/result/entities/code_rb.html">lib/convenient_service/service/plugins/has_result/entities/result/entities/code.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result/entities/result/entities/code/class_methods_rb.html">lib/convenient_service/service/plugins/has_result/entities/result/entities/code/class_methods.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result/entities/result/entities/data_rb.html">lib/convenient_service/service/plugins/has_result/entities/result/entities/data.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result/entities/result/entities/data/class_methods_rb.html">lib/convenient_service/service/plugins/has_result/entities/result/entities/data/class_methods.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result/entities/result/entities/message_rb.html">lib/convenient_service/service/plugins/has_result/entities/result/entities/message.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result/entities/result/entities/message/class_methods_rb.html">lib/convenient_service/service/plugins/has_result/entities/result/entities/message/class_methods.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result/entities/result/entities/status_rb.html">lib/convenient_service/service/plugins/has_result/entities/result/entities/status.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result/entities/result/entities/status/class_methods_rb.html">lib/convenient_service/service/plugins/has_result/entities/result/entities/status/class_methods.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result/entities/result/errors_rb.html">lib/convenient_service/service/plugins/has_result/entities/result/errors.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result/entities/result/plugins/can_recalculate_result/concern_rb.html">lib/convenient_service/service/plugins/has_result/entities/result/plugins/can_recalculate_result/concern.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result/entities/result/plugins/has_missing_concerns/concern_rb.html">lib/convenient_service/service/plugins/has_result/entities/result/plugins/has_missing_concerns/concern.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result/entities/result/plugins/has_result_short_syntax/concern_rb.html">lib/convenient_service/service/plugins/has_result/entities/result/plugins/has_result_short_syntax/concern.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result/entities/result/plugins/has_result_short_syntax/concern/instance_methods_rb.html">lib/convenient_service/service/plugins/has_result/entities/result/plugins/has_result_short_syntax/concern/instance_methods.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result/entities/result/plugins/marks_result_status_as_checked/middleware_rb.html">lib/convenient_service/service/plugins/has_result/entities/result/plugins/marks_result_status_as_checked/middleware.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result/entities/result/plugins/raises_on_not_checked_result_status/errors_rb.html">lib/convenient_service/service/plugins/has_result/entities/result/plugins/raises_on_not_checked_result_status/errors.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result/entities/result/plugins/raises_on_not_checked_result_status/middleware_rb.html">lib/convenient_service/service/plugins/has_result/entities/result/plugins/raises_on_not_checked_result_status/middleware.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result/entities/result/structs/result_params_rb.html">lib/convenient_service/service/plugins/has_result/entities/result/structs/result_params.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result/errors_rb.html">lib/convenient_service/service/plugins/has_result/errors.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result/middleware_rb.html">lib/convenient_service/service/plugins/has_result/middleware.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result_method_steps/errors_rb.html">lib/convenient_service/service/plugins/has_result_method_steps/errors.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result_method_steps/middleware_rb.html">lib/convenient_service/service/plugins/has_result_method_steps/middleware.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result_method_steps/services/config_rb.html">lib/convenient_service/service/plugins/has_result_method_steps/services/config.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result_method_steps/services/run_method_in_organizer_rb.html">lib/convenient_service/service/plugins/has_result_method_steps/services/run_method_in_organizer.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result_method_steps/services/run_own_method_in_organizer_rb.html">lib/convenient_service/service/plugins/has_result_method_steps/services/run_own_method_in_organizer.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result_params_validations/using_active_model_validations/concern_rb.html">lib/convenient_service/service/plugins/has_result_params_validations/using_active_model_validations/concern.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result_params_validations/using_active_model_validations/middleware_rb.html">lib/convenient_service/service/plugins/has_result_params_validations/using_active_model_validations/middleware.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result_params_validations/using_dry_validation/concern_rb.html">lib/convenient_service/service/plugins/has_result_params_validations/using_dry_validation/concern.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result_params_validations/using_dry_validation/middleware_rb.html">lib/convenient_service/service/plugins/has_result_params_validations/using_dry_validation/middleware.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result_short_syntax/concern_rb.html">lib/convenient_service/service/plugins/has_result_short_syntax/concern.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result_short_syntax/error/commands/assert_args_count_lower_than_three_rb.html">lib/convenient_service/service/plugins/has_result_short_syntax/error/commands/assert_args_count_lower_than_three.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result_short_syntax/error/commands/assert_either_args_or_kwargs_are_passed_rb.html">lib/convenient_service/service/plugins/has_result_short_syntax/error/commands/assert_either_args_or_kwargs_are_passed.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result_short_syntax/error/errors_rb.html">lib/convenient_service/service/plugins/has_result_short_syntax/error/errors.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result_short_syntax/error/middleware_rb.html">lib/convenient_service/service/plugins/has_result_short_syntax/error/middleware.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result_short_syntax/failure/commands/refute_kwargs_contain_data_and_extra_keys_rb.html">lib/convenient_service/service/plugins/has_result_short_syntax/failure/commands/refute_kwargs_contain_data_and_extra_keys.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result_short_syntax/failure/errors_rb.html">lib/convenient_service/service/plugins/has_result_short_syntax/failure/errors.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result_short_syntax/failure/middleware_rb.html">lib/convenient_service/service/plugins/has_result_short_syntax/failure/middleware.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result_short_syntax/success/commands/refute_kwargs_contain_data_and_extra_keys_rb.html">lib/convenient_service/service/plugins/has_result_short_syntax/success/commands/refute_kwargs_contain_data_and_extra_keys.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result_short_syntax/success/errors_rb.html">lib/convenient_service/service/plugins/has_result_short_syntax/success/errors.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result_short_syntax/success/middleware_rb.html">lib/convenient_service/service/plugins/has_result_short_syntax/success/middleware.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result_steps/commands/create_step_class_rb.html">lib/convenient_service/service/plugins/has_result_steps/commands/create_step_class.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result_steps/concern_rb.html">lib/convenient_service/service/plugins/has_result_steps/concern.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result_steps/entities/method_rb.html">lib/convenient_service/service/plugins/has_result_steps/entities/method.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result_steps/entities/method/commands/cast_method_rb.html">lib/convenient_service/service/plugins/has_result_steps/entities/method/commands/cast_method.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result_steps/entities/method/commands/cast_method_caller_rb.html">lib/convenient_service/service/plugins/has_result_steps/entities/method/commands/cast_method_caller.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result_steps/entities/method/commands/cast_method_direction_rb.html">lib/convenient_service/service/plugins/has_result_steps/entities/method/commands/cast_method_direction.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result_steps/entities/method/commands/cast_method_key_rb.html">lib/convenient_service/service/plugins/has_result_steps/entities/method/commands/cast_method_key.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result_steps/entities/method/commands/cast_method_name_rb.html">lib/convenient_service/service/plugins/has_result_steps/entities/method/commands/cast_method_name.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result_steps/entities/method/commands/define_method_in_container_rb.html">lib/convenient_service/service/plugins/has_result_steps/entities/method/commands/define_method_in_container.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result_steps/entities/method/concern_rb.html">lib/convenient_service/service/plugins/has_result_steps/entities/method/concern.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result_steps/entities/method/concern/class_methods_rb.html">lib/convenient_service/service/plugins/has_result_steps/entities/method/concern/class_methods.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result_steps/entities/method/concern/instance_methods_rb.html">lib/convenient_service/service/plugins/has_result_steps/entities/method/concern/instance_methods.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result_steps/entities/method/entities/callers/alias_rb.html">lib/convenient_service/service/plugins/has_result_steps/entities/method/entities/callers/alias.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result_steps/entities/method/entities/callers/base_rb.html">lib/convenient_service/service/plugins/has_result_steps/entities/method/entities/callers/base.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result_steps/entities/method/entities/callers/proc_rb.html">lib/convenient_service/service/plugins/has_result_steps/entities/method/entities/callers/proc.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result_steps/entities/method/entities/callers/raw_rb.html">lib/convenient_service/service/plugins/has_result_steps/entities/method/entities/callers/raw.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result_steps/entities/method/entities/callers/usual_rb.html">lib/convenient_service/service/plugins/has_result_steps/entities/method/entities/callers/usual.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result_steps/entities/method/entities/directions/base_rb.html">lib/convenient_service/service/plugins/has_result_steps/entities/method/entities/directions/base.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result_steps/entities/method/entities/directions/input_rb.html">lib/convenient_service/service/plugins/has_result_steps/entities/method/entities/directions/input.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result_steps/entities/method/entities/directions/output_rb.html">lib/convenient_service/service/plugins/has_result_steps/entities/method/entities/directions/output.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result_steps/entities/method/entities/key_rb.html">lib/convenient_service/service/plugins/has_result_steps/entities/method/entities/key.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result_steps/entities/method/entities/name_rb.html">lib/convenient_service/service/plugins/has_result_steps/entities/method/entities/name.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result_steps/entities/method/entities/values/raw_rb.html">lib/convenient_service/service/plugins/has_result_steps/entities/method/entities/values/raw.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result_steps/entities/method/errors_rb.html">lib/convenient_service/service/plugins/has_result_steps/entities/method/errors.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result_steps/entities/service_rb.html">lib/convenient_service/service/plugins/has_result_steps/entities/service.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result_steps/entities/service/class_methods_rb.html">lib/convenient_service/service/plugins/has_result_steps/entities/service/class_methods.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result_steps/entities/step_rb.html">lib/convenient_service/service/plugins/has_result_steps/entities/step.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result_steps/entities/step/commands/cast_params_rb.html">lib/convenient_service/service/plugins/has_result_steps/entities/step/commands/cast_params.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result_steps/entities/step/commands/extract_params_rb.html">lib/convenient_service/service/plugins/has_result_steps/entities/step/commands/extract_params.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result_steps/entities/step/concern_rb.html">lib/convenient_service/service/plugins/has_result_steps/entities/step/concern.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result_steps/entities/step/concern/instance_methods_rb.html">lib/convenient_service/service/plugins/has_result_steps/entities/step/concern/instance_methods.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result_steps/entities/step/errors_rb.html">lib/convenient_service/service/plugins/has_result_steps/entities/step/errors.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result_steps/entities/step/structs/params_rb.html">lib/convenient_service/service/plugins/has_result_steps/entities/step/structs/params.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result_steps/entities/step_collection_rb.html">lib/convenient_service/service/plugins/has_result_steps/entities/step_collection.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/has_result_steps/middleware_rb.html">lib/convenient_service/service/plugins/has_result_steps/middleware.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/raises_on_double_result/errors_rb.html">lib/convenient_service/service/plugins/raises_on_double_result/errors.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/raises_on_double_result/middleware_rb.html">lib/convenient_service/service/plugins/raises_on_double_result/middleware.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/service/plugins/wraps_result_in_db_transaction/middleware_rb.html">lib/convenient_service/service/plugins/wraps_result_in_db_transaction/middleware.rb</a></li>
+            
             <li><a href="../files/lib/convenient_service/specification_rb.html">lib/convenient_service/specification.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/support/abstract_method_rb.html">lib/convenient_service/support/abstract_method.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/support/castable_rb.html">lib/convenient_service/support/castable.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/support/castable/errors_rb.html">lib/convenient_service/support/castable/errors.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/support/command_rb.html">lib/convenient_service/support/command.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/support/concern_rb.html">lib/convenient_service/support/concern.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/support/copyable_rb.html">lib/convenient_service/support/copyable.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/support/delegate_rb.html">lib/convenient_service/support/delegate.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/support/dependency_rb.html">lib/convenient_service/support/dependency.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/support/dependency/commands/get_printable_method_rb.html">lib/convenient_service/support/dependency/commands/get_printable_method.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/support/dependency/commands/get_printable_receiver_rb.html">lib/convenient_service/support/dependency/commands/get_printable_receiver.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/support/dependency/entities/dependency_rb.html">lib/convenient_service/support/dependency/entities/dependency.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/support/dependency/entities/dependency_collection_rb.html">lib/convenient_service/support/dependency/entities/dependency_collection.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/support/dependency/errors_rb.html">lib/convenient_service/support/dependency/errors.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/support/finite_loop_rb.html">lib/convenient_service/support/finite_loop.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/support/middleware/stack_builder_rb.html">lib/convenient_service/support/middleware/stack_builder.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/support/pattern_matching_rb.html">lib/convenient_service/support/pattern_matching.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/support/pattern_matching/entities/pattern_rb.html">lib/convenient_service/support/pattern_matching/entities/pattern.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/support/struct_rb.html">lib/convenient_service/support/struct.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/utils/array_rb.html">lib/convenient_service/utils/array.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/utils/array/contain_exactly_rb.html">lib/convenient_service/utils/array/contain_exactly.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/utils/array/errors_rb.html">lib/convenient_service/utils/array/errors.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/utils/array/find_last_rb.html">lib/convenient_service/utils/array/find_last.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/utils/array/merge_rb.html">lib/convenient_service/utils/array/merge.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/utils/array/rjust_rb.html">lib/convenient_service/utils/array/rjust.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/utils/array/wrap_rb.html">lib/convenient_service/utils/array/wrap.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/utils/bool_rb.html">lib/convenient_service/utils/bool.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/utils/bool/to_bool_rb.html">lib/convenient_service/utils/bool/to_bool.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/utils/hash_rb.html">lib/convenient_service/utils/hash.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/utils/hash/except_rb.html">lib/convenient_service/utils/hash/except.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/utils/method_rb.html">lib/convenient_service/utils/method.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/utils/method/defined_rb.html">lib/convenient_service/utils/method/defined.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/utils/method/find_own_rb.html">lib/convenient_service/utils/method/find_own.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/utils/object_rb.html">lib/convenient_service/utils/object.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/utils/object/find_own_const_rb.html">lib/convenient_service/utils/object/find_own_const.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/utils/object/resolve_type_rb.html">lib/convenient_service/utils/object/resolve_type.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/utils/proc_rb.html">lib/convenient_service/utils/proc.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/utils/proc/conjunct_rb.html">lib/convenient_service/utils/proc/conjunct.rb</a></li>
             
             <li><a href="../files/lib/convenient_service/version_rb.html">lib/convenient_service/version.rb</a></li>
             
@@ -71,6 +571,235 @@
 
     <main id="bodyContent">
         <div id="content">
+  
+    <div class="description">
+      
+<p>Base class for all ‘ConvenientService’ errors. Can be used as a catch-all solution, for example:</p>
+
+<pre><code>begin
+  any_service.result
+rescue ConvenientService::Error =&gt; error
+  puts error.message
+end
+</code></pre>
+
+<p>Usage example:</p>
+
+<p>result = <a href="ConvenientService/Examples/Gemfile/Entries/Format.html#method-i-result"><code>ConvenientService::Examples::Gemfile::Entries::Format.result</code></a>(path: “Gemfile”) result = <a href="ConvenientService/Examples/Gemfile/Entries/Format.html#method-i-result"><code>ConvenientService::Examples::Gemfile::Entries::Format.result</code></a>(path: “spec/cli/gemfile/format/fixtures/Gemfile”)</p>
+
+<p>Usage example:</p>
+
+<pre><code>ConvenientService::Examples::Gemfile::Services::AssertNodeAvailable.result
+</code></pre>
+
+<p>Usage example:</p>
+
+<pre><code>ConvenientService::Examples::Gemfile::Services::AssertNpmPackageAvailable.result(name: &quot;lodash&quot;)
+</code></pre>
+
+<p>Usage example:</p>
+
+<p>result = ConvenientService::Examples::Gemfile::Services::Format.result(path: “Gemfile”) result = ConvenientService::Examples::Gemfile::Services::Format.result(path: “spec/cli/gemfile/format/fixtures/Gemfile”)</p>
+
+<p>Usage example:</p>
+
+<p>result = <a href="ConvenientService/Examples/Gemfile/Services/FormatBody.html#method-i-result"><code>ConvenientService::Examples::Gemfile::Services::FormatBody.result</code></a>(</p>
+
+<pre><code>parsed_content: {
+  gems: [
+    {
+      envs: [],
+      line: %(gem &quot;bootsnap&quot;, &quot;&gt;= 1.4.4&quot;, require: false)
+    },
+    {
+      envs: [],
+      line: %(gem &quot;pg&quot;)
+    },
+    {
+      envs: [:development],
+      line: %(gem &quot;listen&quot;, &quot;~&gt; 3.3&quot;)
+    },
+    {
+      envs: [:development],
+      line: %(gem &quot;web-console&quot;, &quot;&gt;= 4.1.0&quot;)
+    },
+    {
+      envs: [:development, :test],
+      line: %(gem &quot;rspec-rails&quot;)
+    },
+    {
+      envs: [:test],
+      line: %(gem &quot;simplecov&quot;, require: false)
+    },
+    {
+      envs: [],
+      line: %(gem &quot;tzinfo-data&quot;, platforms: [:mingw, :mswin, :x64_mingw, :jruby])
+    }
+  ]
+}
+</code></pre>
+
+<p>)</p>
+
+<p>NOTE: Check the corresponding spec file to see more examples.</p>
+
+<p>Usage example:</p>
+
+<p>result = <a href="ConvenientService/Examples/Gemfile/Services/FormatGemsWithEnvs.html#method-i-result"><code>ConvenientService::Examples::Gemfile::Services::FormatGemsWithEnvs.result</code></a>(</p>
+
+<pre><code>parsed_content: {
+  gems: [
+    {
+      envs: [:development],
+      line: %(gem &quot;listen&quot;, &quot;~&gt; 3.3&quot;)
+    },
+    {
+      envs: [:development],
+      line: %(gem &quot;web-console&quot;, &quot;&gt;= 4.1.0&quot;)
+    },
+    {
+      envs: [:development, :test],
+      line: %(gem &quot;rspec-rails&quot;)
+    },
+    {
+      envs: [:test],
+      line: %(gem &quot;simplecov&quot;, require: false)
+    }
+  ]
+}
+</code></pre>
+
+<p>)</p>
+
+<p>NOTE: Check the corresponding spec file to see more examples.</p>
+
+<p>Usage example:</p>
+
+<p>result = <a href="ConvenientService/Examples/Gemfile/Services/FormatGemsWithoutEnvs.html#method-i-result"><code>ConvenientService::Examples::Gemfile::Services::FormatGemsWithoutEnvs.result</code></a>(</p>
+
+<pre><code>parsed_content: {
+  gems: [
+    {
+      envs: [],
+      line: %(gem &quot;bootsnap&quot;, &quot;&gt;= 1.4.4&quot;, require: false)
+    },
+    {
+      envs: [],
+      line: %(gem &quot;pg&quot;)
+    },
+    {
+      envs: [],
+      line: %(gem &quot;rails&quot;, &quot;~&gt; 6.1.3&quot;, &quot;&gt;= 6.1.3.2&quot;)
+    },
+    {
+      envs: [],
+      line: %(gem &quot;webpacker&quot;, &quot;~&gt; 5.0&quot;)
+    },
+    {
+      envs: [],
+      line: %(gem &quot;tzinfo-data&quot;, platforms: [:mingw, :mswin, :x64_mingw, :jruby])
+    }
+  ]
+}
+</code></pre>
+
+<p>)</p>
+
+<p>NOTE: Check the corresponding spec file to see more examples.</p>
+
+<p>Usage example:</p>
+
+<p>result = <a href="ConvenientService/Examples/Gemfile/Services/FormatHeader.html#method-i-result"><code>ConvenientService::Examples::Gemfile::Services::FormatHeader.result</code></a>(</p>
+
+<pre><code>parsed_content: {
+  ruby: [
+    %(ruby &quot;3.0.1&quot;)
+  ],
+  source: [
+    %(source &quot;https://rubygems.org&quot;)
+  ],
+  git_source: [
+    %(git_source(:github) { |repo| &quot;https://github.com/\#{repo}.git&quot; })
+  ]
+},
+skip_frozen_string_literal: true
+</code></pre>
+
+<p>)</p>
+
+<p>NOTE: Check the corresponding spec file to see more examples.</p>
+
+<pre><code>  group :development, :test do
+    gem &quot;rspec-rails&quot;
+  end
+RUBY
+</code></pre>
+
+<p>)</p>
+
+<p>NOTE: Check the corresponding spec file to see more examples.</p>
+
+<p>Usage example:</p>
+
+<pre><code>ConvenientService::Examples::Gemfile::Services::PrintShellCommand.result(text: &quot;ls -a&quot;)
+</code></pre>
+
+<p>Usage:</p>
+
+<pre><code>require &quot;convenient_service&quot;
+
+ConvenientService::Examples::Gemfile::Services::StripComments.result(content: &quot;abc&quot;)
+</code></pre>
+
+<p>Usage example:</p>
+
+<pre><code>ConvenientService::Logger.instance
+ConvenientService::Logger.instance.level = ::Logger::WARN
+ConvenientService::Logger.instance.warn { &quot;log message&quot; }
+</code></pre>
+
+<p>Docs:</p>
+<ul><li>
+<p><a href="https://ruby-doc.org/stdlib-3.1.0/libdoc/logger/rdoc/Logger.html">ruby-doc.org/stdlib-3.1.0/libdoc/logger/rdoc/Logger.html</a></p>
+</li><li>
+<p><a href="https://newbedev.com/ruby-create-singleton-with-parameters">newbedev.com/ruby-create-singleton-with-parameters</a></p>
+</li></ul>
+
+<p>Usage example:</p>
+
+<pre><code>ConvenientService::Utils::Hash::Except.call({foo: :bar, baz: :qux}, keys: [:foo])
+</code></pre>
+
+<p>Usage example:</p>
+
+<pre><code>module Test
+end
+
+ConvenientService::Utils::Object::FindOwnConst.call(Test, :File)
+# =&gt; nil, not File from Ruby Core.
+
+module Test
+  class File
+  end
+end
+
+ConvenientService::Utils::Object::FindOwnConst.call(Test, :File)
+# =&gt; Test::File
+</code></pre>
+
+<p>Usage example:</p>
+
+<pre><code>ConvenientService::Utils::Object::ResolveType.call(&quot;foo&quot;)
+# =&gt; &quot;instance&quot;
+
+ConvenientService::Utils::Object::ResolveType.call(Array)
+# =&gt; &quot;class&quot;
+
+ConvenientService::Utils::Object::ResolveType.call(Kernel)
+# =&gt; &quot;module&quot;
+</code></pre>
+
+    </div>
   
 
 
@@ -88,13 +817,113 @@
       
         <li>
           <span class="type">MODULE</span>
+          <a href="ConvenientService/Common.html">ConvenientService::Common</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="ConvenientService/Configs.html">ConvenientService::Configs</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="ConvenientService/Core.html">ConvenientService::Core</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="ConvenientService/Errors.html">ConvenientService::Errors</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="ConvenientService/Examples.html">ConvenientService::Examples</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="ConvenientService/Extractions.html">ConvenientService::Extractions</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="ConvenientService/Plugins.html">ConvenientService::Plugins</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="ConvenientService/RSpec.html">ConvenientService::RSpec</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="ConvenientService/Service.html">ConvenientService::Service</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
           <a href="ConvenientService/Specification.html">ConvenientService::Specification</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="ConvenientService/Support.html">ConvenientService::Support</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="ConvenientService/Utils.html">ConvenientService::Utils</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="ConvenientService/Error.html">ConvenientService::Error</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="ConvenientService/Logger.html">ConvenientService::Logger</a>
         </li>
       
     </ul>
   
 
 
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>L</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-logger">logger</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>R</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-require_examples">require_examples</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-c-require_rspec_extentions">require_rspec_extentions</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
   
 
   
@@ -133,6 +962,144 @@
 
     <!-- Methods -->
     
+      <h2 class="sectiontitle">Class Public methods</h2>
+      
+        <div class="method">
+          <h3 class="title method-title" id="method-c-logger">
+            
+              <b>logger</b>()
+            
+            <a href="../classes/ConvenientService.html#method-c-logger" name="method-c-logger" class="permalink">Link</a>
+          </h3>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                 Source: 
+
+                
+                  <a href="javascript:toggleSource('method-c-logger_source')" id="l_method-c-logger_source">show</a>
+                
+
+                
+
+                
+              </p>
+              <div id="method-c-logger_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/convenient_service/logger.rb, line 63</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">logger</span>
+  <span class="ruby-constant">Logger</span>.<span class="ruby-identifier">instance</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <h3 class="title method-title" id="method-c-require_examples">
+            
+              <b>require_examples</b>()
+            
+            <a href="../classes/ConvenientService.html#method-c-require_examples" name="method-c-require_examples" class="permalink">Link</a>
+          </h3>
+
+          
+            <div class="description">
+              <p>Loads examples.</p>
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                 Source: 
+
+                
+                  <a href="javascript:toggleSource('method-c-require_examples_source')" id="l_method-c-require_examples_source">show</a>
+                
+
+                
+
+                
+              </p>
+              <div id="method-c-require_examples_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/convenient_service.rb, line 48</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">require_examples</span>
+  <span class="ruby-identifier">require</span> <span class="ruby-string">&quot;progressbar&quot;</span>
+
+  <span class="ruby-identifier">require_relative</span> <span class="ruby-string">&quot;convenient_service/examples&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <h3 class="title method-title" id="method-c-require_rspec_extentions">
+            
+              <b>require_rspec_extentions</b>()
+            
+            <a href="../classes/ConvenientService.html#method-c-require_rspec_extentions" name="method-c-require_rspec_extentions" class="permalink">Link</a>
+          </h3>
+
+          
+            <div class="description">
+              <p>Loads <a href="ConvenientService/RSpec.html"><code>RSpec</code></a> extensions like ‘be_success’ matcher, ‘stub_service’ helper, etc.</p>
+
+<p>NOTE: Expected to be called from ‘spec_helper.rb’.</p>
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                 Source: 
+
+                
+                  <a href="javascript:toggleSource('method-c-require_rspec_extentions_source')" id="l_method-c-require_rspec_extentions_source">show</a>
+                
+
+                
+
+                
+              </p>
+              <div id="method-c-require_rspec_extentions_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/convenient_service.rb, line 39</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">require_rspec_extentions</span>
+  <span class="ruby-identifier">require</span> <span class="ruby-string">&quot;method_source&quot;</span>
+
+  <span class="ruby-identifier">require_relative</span> <span class="ruby-string">&quot;convenient_service/rspec&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+      
     
     
   

@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>ConvenientService::RSpec::Matchers::Custom::CallChainNext</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="../../../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../../../css/panel.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../../../js/jquery-3.5.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../../js/turbolinks.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../../js/search_index.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../../js/searcher.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../../panel/tree.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../../js/searchdoc.js" type="text/javascript" charset="utf-8"></script>
+<meta name="data-rel-prefix" content="../../../../../">
+<meta name="data-tree-keys" content='["ConvenientService", "RSpec", "Matchers", "Custom", "CallChainNext"]'>
+
+
+    <meta property="og:title" value="ConvenientService::RSpec::Matchers::Custom::CallChainNext">
+
+  
+    
+    <meta name="description" content="expect { method.call }  .to call_chain_next.on(method) .with_arguments(*args, **kwargs, &amp;block) .">
+    <meta property="og:description" content="expect { method.call }  .to call_chain_next.on(method) .with_arguments(*args, **kwargs, &amp;block) .">
+  
+
+    <meta name="keywords" content="ConvenientService::RSpec::Matchers::Custom::CallChainNext class, matches?, does_not_match?, supports_block_expectations?, description, failure_message, failure_message_when_negated, on, with_arguments, and_return_its_value">
+</head>
+
+<body>
+    <a class="sr-only sr-only-focusable" href="#content" data-turbolinks="false">Skip to Content</a>
+    <a class="sr-only sr-only-focusable" href="#search" data-turbolinks="false">Skip to Search</a>
+
+    <input type="checkbox" id="hamburger" class="panel_checkbox">
+<label class="panel_mobile_button" for="hamburger"><span></span> Menu</label>
+<nav class="panel panel_tree" id="panel" data-turbolinks-permanent>
+  <div class="header">
+    <input type="text" placeholder="Search (/) for a class, method, ..." autosave="searchdoc" results="10" id="search" autocomplete="off" tabindex="-1" />
+    <label class="panel_mobile_button_close" for="hamburger"><span></span> Close</label>
+  </div>
+  <div class="tree">
+    <ul>
+    </ul>
+  </div>
+  <div class="result">
+    <ul>
+    </ul>
+  </div>
+  <a href="links.html" id="links">index</a>
+</nav>
+
+
+    <div class="banner">
+        
+        <h2>
+            <span class="type">Class</span>
+            ConvenientService::RSpec::Matchers::Custom::CallChainNext
+            
+                <span class="parent">&lt;
+                    
+                    <a href="../../../../Object.html">Object</a>
+                    
+                </span>
+            
+        </h2>
+        <ul class="files">
+            
+            <li><a href="../../../../../files/lib/convenient_service/rspec/matchers/custom/call_chain_next_rb.html">lib/convenient_service/rspec/matchers/custom/call_chain_next.rb</a></li>
+            
+        </ul>
+        
+    </div>
+
+    <main id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>expect { method.call }</p>
+
+<pre><code>.to call_chain_next.on(method)
+.with_arguments(*args, **kwargs, &amp;block)
+.and_return_its_value
+</code></pre>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>A</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-and_return_its_value">and_return_its_value</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>D</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-description">description</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-does_not_match-3F">does_not_match?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>F</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-failure_message">failure_message</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-failure_message_when_negated">failure_message_when_negated</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>M</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-matches-3F">matches?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>O</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-on">on</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-supports_block_expectations-3F">supports_block_expectations?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>W</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-with_arguments">with_arguments</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+    <!-- Includes -->
+    <div class="sectiontitle">Included Modules</div>
+    <ul>
+      
+        <li>
+          
+            ::RSpec::Expectations
+          
+        </li>
+      
+        <li>
+          
+            ::RSpec::Matchers
+          
+        </li>
+      
+        <li>
+          
+            ::RSpec::Mocks::ExampleMethods
+          
+        </li>
+      
+    </ul>
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+    
+      <h2 class="sectiontitle">Instance Public methods</h2>
+      
+        <div class="method">
+          <h3 class="title method-title" id="method-i-and_return_its_value">
+            
+              <b>and_return_its_value</b>()
+            
+            <a href="../../../../../classes/ConvenientService/RSpec/Matchers/Custom/CallChainNext.html#method-i-and_return_its_value" name="method-i-and_return_its_value" class="permalink">Link</a>
+          </h3>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                 Source: 
+
+                
+                  <a href="javascript:toggleSource('method-i-and_return_its_value_source')" id="l_method-i-and_return_its_value_source">show</a>
+                
+
+                
+
+                
+              </p>
+              <div id="method-i-and_return_its_value_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/convenient_service/rspec/matchers/custom/call_chain_next.rb, line 98</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">and_return_its_value</span>
+  <span class="ruby-identifier">chain</span>[<span class="ruby-value">:and_return_its_value</span>] = <span class="ruby-keyword">true</span>
+
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <h3 class="title method-title" id="method-i-description">
+            
+              <b>description</b>()
+            
+            <a href="../../../../../classes/ConvenientService/RSpec/Matchers/Custom/CallChainNext.html#method-i-description" name="method-i-description" class="permalink">Link</a>
+          </h3>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                 Source: 
+
+                
+                  <a href="javascript:toggleSource('method-i-description_source')" id="l_method-i-description_source">show</a>
+                
+
+                
+
+                
+              </p>
+              <div id="method-i-description_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/convenient_service/rspec/matchers/custom/call_chain_next.rb, line 74</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">description</span>
+  <span class="ruby-string">&quot;call `chain.next&#39;&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <h3 class="title method-title" id="method-i-does_not_match-3F">
+            
+              <b>does_not_match?</b>(block_expectation)
+            
+            <a href="../../../../../classes/ConvenientService/RSpec/Matchers/Custom/CallChainNext.html#method-i-does_not_match-3F" name="method-i-does_not_match-3F" class="permalink">Link</a>
+          </h3>
+
+          
+            <div class="description">
+              <p><a href="https://github.com/rspec/rspec-expectations/blob/main/lib/rspec/matchers/built_in/change.rb#L50">github.com/rspec/rspec-expectations/blob/main/lib/rspec/matchers/built_in/change.rb#L50</a></p>
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                 Source: 
+
+                
+                  <a href="javascript:toggleSource('method-i-does_not_match-3F_source')" id="l_method-i-does_not_match-3F_source">show</a>
+                
+
+                
+
+                
+              </p>
+              <div id="method-i-does_not_match-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/convenient_service/rspec/matchers/custom/call_chain_next.rb, line 41</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">does_not_match?</span>(<span class="ruby-identifier">block_expectation</span>)
+  <span class="ruby-ivar">@block_expectation</span> = <span class="ruby-identifier">block_expectation</span>
+
+  <span class="ruby-identifier">value</span> = <span class="ruby-keyword">nil</span>
+
+  <span class="ruby-comment">##</span>
+  <span class="ruby-comment"># NOTE: `expect { value = block_expectation.call }.not_to change(method, :chain_called?).from(false).to(true)&#39; raises the following error:</span>
+  <span class="ruby-comment">#</span>
+  <span class="ruby-comment">#   NotImplementedError:</span>
+  <span class="ruby-comment">#     `expect { }.not_to change { }.to()` is not supported</span>
+  <span class="ruby-comment">#</span>
+  <span class="ruby-comment"># That is why `expect(method.chain_called?).to eq(false)&#39; is introduced.</span>
+  <span class="ruby-comment">#</span>
+  <span class="ruby-identifier">expect</span>(<span class="ruby-identifier">method</span>.<span class="ruby-identifier">chain_called?</span>).<span class="ruby-identifier">to</span> <span class="ruby-identifier">eq</span>(<span class="ruby-keyword">false</span>)
+  <span class="ruby-identifier">expect</span> { <span class="ruby-identifier">value</span> = <span class="ruby-identifier">block_expectation</span>.<span class="ruby-identifier">call</span> }.<span class="ruby-identifier">not_to</span> <span class="ruby-identifier">change</span>(<span class="ruby-identifier">method</span>, <span class="ruby-value">:chain_called?</span>)
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">used_with_arguments?</span>
+    <span class="ruby-identifier">expect</span>(<span class="ruby-identifier">method</span>.<span class="ruby-identifier">chain_args</span>).<span class="ruby-identifier">not_to</span> <span class="ruby-identifier">eq</span>(<span class="ruby-identifier">expected_args</span>)
+    <span class="ruby-identifier">expect</span>(<span class="ruby-identifier">method</span>.<span class="ruby-identifier">chain_kwargs</span>).<span class="ruby-identifier">not_to</span> <span class="ruby-identifier">eq</span>(<span class="ruby-identifier">expected_kwargs</span>)
+    <span class="ruby-identifier">expect</span>(<span class="ruby-identifier">method</span>.<span class="ruby-identifier">chain_block</span>).<span class="ruby-identifier">not_to</span> <span class="ruby-identifier">eq</span>(<span class="ruby-identifier">expected_block</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">used_and_return_its_value?</span>
+    <span class="ruby-identifier">expect</span>(<span class="ruby-identifier">value</span>).<span class="ruby-identifier">not_to</span> <span class="ruby-identifier">eq</span>(<span class="ruby-identifier">method</span>.<span class="ruby-identifier">chain_value</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <h3 class="title method-title" id="method-i-failure_message">
+            
+              <b>failure_message</b>()
+            
+            <a href="../../../../../classes/ConvenientService/RSpec/Matchers/Custom/CallChainNext.html#method-i-failure_message" name="method-i-failure_message" class="permalink">Link</a>
+          </h3>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                 Source: 
+
+                
+                  <a href="javascript:toggleSource('method-i-failure_message_source')" id="l_method-i-failure_message_source">show</a>
+                
+
+                
+
+                
+              </p>
+              <div id="method-i-failure_message_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/convenient_service/rspec/matchers/custom/call_chain_next.rb, line 78</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">failure_message</span>
+  <span class="ruby-string">&quot;expected to call `chain.next&#39;&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <h3 class="title method-title" id="method-i-failure_message_when_negated">
+            
+              <b>failure_message_when_negated</b>()
+            
+            <a href="../../../../../classes/ConvenientService/RSpec/Matchers/Custom/CallChainNext.html#method-i-failure_message_when_negated" name="method-i-failure_message_when_negated" class="permalink">Link</a>
+          </h3>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                 Source: 
+
+                
+                  <a href="javascript:toggleSource('method-i-failure_message_when_negated_source')" id="l_method-i-failure_message_when_negated_source">show</a>
+                
+
+                
+
+                
+              </p>
+              <div id="method-i-failure_message_when_negated_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/convenient_service/rspec/matchers/custom/call_chain_next.rb, line 82</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">failure_message_when_negated</span>
+  <span class="ruby-string">&quot;expected NOT to call `chain.next&#39;&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <h3 class="title method-title" id="method-i-matches-3F">
+            
+              <b>matches?</b>(block_expectation)
+            
+            <a href="../../../../../classes/ConvenientService/RSpec/Matchers/Custom/CallChainNext.html#method-i-matches-3F" name="method-i-matches-3F" class="permalink">Link</a>
+          </h3>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                 Source: 
+
+                
+                  <a href="javascript:toggleSource('method-i-matches-3F_source')" id="l_method-i-matches-3F_source">show</a>
+                
+
+                
+
+                
+              </p>
+              <div id="method-i-matches-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/convenient_service/rspec/matchers/custom/call_chain_next.rb, line 18</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">matches?</span>(<span class="ruby-identifier">block_expectation</span>)
+  <span class="ruby-ivar">@block_expectation</span> = <span class="ruby-identifier">block_expectation</span>
+
+  <span class="ruby-identifier">value</span> = <span class="ruby-keyword">nil</span>
+
+  <span class="ruby-identifier">expect</span> { <span class="ruby-identifier">value</span> = <span class="ruby-identifier">block_expectation</span>.<span class="ruby-identifier">call</span> }.<span class="ruby-identifier">to</span> <span class="ruby-identifier">change</span>(<span class="ruby-identifier">method</span>, <span class="ruby-value">:chain_called?</span>).<span class="ruby-identifier">from</span>(<span class="ruby-keyword">false</span>).<span class="ruby-identifier">to</span>(<span class="ruby-keyword">true</span>)
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">used_with_arguments?</span>
+    <span class="ruby-identifier">expect</span>(<span class="ruby-identifier">method</span>.<span class="ruby-identifier">chain_args</span>).<span class="ruby-identifier">to</span> <span class="ruby-identifier">eq</span>(<span class="ruby-identifier">expected_args</span>)
+    <span class="ruby-identifier">expect</span>(<span class="ruby-identifier">method</span>.<span class="ruby-identifier">chain_kwargs</span>).<span class="ruby-identifier">to</span> <span class="ruby-identifier">eq</span>(<span class="ruby-identifier">expected_kwargs</span>)
+    <span class="ruby-identifier">expect</span>(<span class="ruby-identifier">method</span>.<span class="ruby-identifier">chain_block</span>).<span class="ruby-identifier">to</span> <span class="ruby-identifier">eq</span>(<span class="ruby-identifier">expected_block</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">used_and_return_its_value?</span>
+    <span class="ruby-identifier">expect</span>(<span class="ruby-identifier">value</span>).<span class="ruby-identifier">to</span> <span class="ruby-identifier">eq</span>(<span class="ruby-identifier">method</span>.<span class="ruby-identifier">chain_value</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <h3 class="title method-title" id="method-i-on">
+            
+              <b>on</b>(method)
+            
+            <a href="../../../../../classes/ConvenientService/RSpec/Matchers/Custom/CallChainNext.html#method-i-on" name="method-i-on" class="permalink">Link</a>
+          </h3>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                 Source: 
+
+                
+                  <a href="javascript:toggleSource('method-i-on_source')" id="l_method-i-on_source">show</a>
+                
+
+                
+
+                
+              </p>
+              <div id="method-i-on_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/convenient_service/rspec/matchers/custom/call_chain_next.rb, line 86</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">on</span>(<span class="ruby-identifier">method</span>)
+  <span class="ruby-identifier">chain</span>[<span class="ruby-value">:method</span>] = <span class="ruby-identifier">method</span>
+
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <h3 class="title method-title" id="method-i-supports_block_expectations-3F">
+            
+              <b>supports_block_expectations?</b>()
+            
+            <a href="../../../../../classes/ConvenientService/RSpec/Matchers/Custom/CallChainNext.html#method-i-supports_block_expectations-3F" name="method-i-supports_block_expectations-3F" class="permalink">Link</a>
+          </h3>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                 Source: 
+
+                
+                  <a href="javascript:toggleSource('method-i-supports_block_expectations-3F_source')" id="l_method-i-supports_block_expectations-3F_source">show</a>
+                
+
+                
+
+                
+              </p>
+              <div id="method-i-supports_block_expectations-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/convenient_service/rspec/matchers/custom/call_chain_next.rb, line 70</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">supports_block_expectations?</span>
+  <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <h3 class="title method-title" id="method-i-with_arguments">
+            
+              <b>with_arguments</b>(*args, **kwargs, &amp;block)
+            
+            <a href="../../../../../classes/ConvenientService/RSpec/Matchers/Custom/CallChainNext.html#method-i-with_arguments" name="method-i-with_arguments" class="permalink">Link</a>
+          </h3>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                 Source: 
+
+                
+                  <a href="javascript:toggleSource('method-i-with_arguments_source')" id="l_method-i-with_arguments_source">show</a>
+                
+
+                
+
+                
+              </p>
+              <div id="method-i-with_arguments_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/convenient_service/rspec/matchers/custom/call_chain_next.rb, line 92</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">with_arguments</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">kwargs</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">chain</span>[<span class="ruby-value">:with_arguments</span>] = {<span class="ruby-value">args:</span> <span class="ruby-identifier">args</span>, <span class="ruby-value">kwargs:</span> <span class="ruby-identifier">kwargs</span>, <span class="ruby-value">block:</span> <span class="ruby-identifier">block</span>}
+
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+      
+    
+  
+</div>
+
+    </main>
+  </body>
+</html>
