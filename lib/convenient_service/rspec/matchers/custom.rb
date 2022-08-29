@@ -1,0 +1,16 @@
+# frozen_string_literal: true
+
+require_relative "custom/be_descendant_of"
+require_relative "custom/be_direct_descendant_of"
+require_relative "custom/cache_its_value"
+require_relative "custom/call_chain_next"
+require_relative "custom/delegate_to"
+require_relative "custom/extend_module"
+require_relative "custom/have_abstract_method"
+require_relative "custom/have_alias_method"
+require_relative "custom/have_attr_accessor"
+require_relative "custom/have_attr_reader"
+require_relative "custom/have_attr_writer"
+require_relative "custom/include_module"
+require_relative "custom/prepend_module"
+require_relative "custom/results"

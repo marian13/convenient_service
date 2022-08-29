@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative "coverage_helper"
 
 require "bundler/setup"
@@ -14,3 +16,6 @@ RSpec.configure do |config|
     c.syntax = :expect
   end
 end
+
+require_relative "support/convenient_service"
+require_relative "support/shoulda_matchers"

@@ -1,0 +1,4 @@
+# frozen_string_literal: true
+
+require_relative "using_active_model_attribute_assignment/concern"
+require_relative "using_active_model_attribute_assignment/middleware"

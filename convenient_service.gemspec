@@ -41,4 +41,17 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "sdoc"
   spec.add_development_dependency "simplecov"
   spec.add_development_dependency "simplecov-lcov"
+
+  ##
+  # TODO: Specs when a project does NOT use `activemodel' or `dry-initializer'.
+  #
+  # IMPORTANT: Implement fallbacks when the following libraries are NOT used.
+  #
+  spec.add_development_dependency "activemodel"
+  spec.add_development_dependency "activerecord"
+  spec.add_development_dependency "dry-initializer"
+  spec.add_development_dependency "dry-validation"
+  spec.add_development_dependency "progressbar"
+  spec.add_development_dependency "shoulda-matchers"
+  spec.add_development_dependency "paint"
 end

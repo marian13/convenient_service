@@ -1,0 +1,4 @@
+# frozen_string_literal: true
+
+require_relative "assigns_attributes_in_constructor/using_active_model_attribute_assignment"
+require_relative "assigns_attributes_in_constructor/using_dry_initializer"
