@@ -13,6 +13,7 @@ require "active_record"
 require "dry-initializer"
 require "dry-validation"
 
+require "awesome_print"
 require "byebug"
 require "paint"
 
