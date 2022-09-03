@@ -66,11 +66,9 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo do
           #     bar(...)
           #   end
           #
-          # rubocop:disable Style/ArgumentsForwarding
           def foo(*args, **kwargs, &block)
             bar(*args, **kwargs, &block)
           end
-          # rubocop:enable Style/ArgumentsForwarding
 
           def bar(*args, **kwargs, &block)
             [args, kwargs, block]

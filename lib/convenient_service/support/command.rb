@@ -13,11 +13,9 @@ module ConvenientService
         #     new(...).call
         #   end
         #
-        # rubocop:disable Style/ArgumentsForwarding
         def call(*args, **kwargs, &block)
           new(*args, **kwargs, &block).call
         end
-        # rubocop:enable Style/ArgumentsForwarding
       end
 
       ##

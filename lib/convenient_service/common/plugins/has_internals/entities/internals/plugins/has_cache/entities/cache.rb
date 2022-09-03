@@ -57,11 +57,9 @@ module ConvenientService
                     ##
                     # https://api.rubyonrails.org/classes/ActiveSupport/Cache/Store.html#method-i-delete
                     #
-                    # rubocop:disable Rails/Delegate
                     def delete(key)
                       hash.delete(key)
                     end
-                    # rubocop:enable Rails/Delegate
 
                     ##
                     # https://api.rubyonrails.org/classes/ActiveSupport/Cache/Store.html#method-i-fetch

@@ -18,13 +18,11 @@ module ConvenientService
                   #     chain.next(*args, **kwargs, &block)
                   #   end
                   #
-                  # rubocop:disable Style/ArgumentsForwarding
                   def next(*args, **kwargs, &block)
                     assert_has_checked_status!
 
                     chain.next(*args, **kwargs, &block)
                   end
-                  # rubocop:enable Style/ArgumentsForwarding
 
                   private
 

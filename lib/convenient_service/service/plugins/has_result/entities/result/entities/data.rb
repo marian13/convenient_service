@@ -39,11 +39,9 @@ module ConvenientService
                 ##
                 # TODO: Unify `inspect'. Specs for `inspect'.
                 #
-                # rubocop:disable Rails/Delegate
                 def inspect
                   to_h.inspect
                 end
-                # rubocop:enable Rails/Delegate
               end
             end
           end

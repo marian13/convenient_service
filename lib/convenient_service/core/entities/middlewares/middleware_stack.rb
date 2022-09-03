@@ -75,7 +75,6 @@ module ConvenientService
           # NOTE: This method is a subject to change.
           # TODO: Refactor.
           #
-          # rubocop:disable Rails/Delegate
           def empty?
             to_a.empty?
           end
@@ -84,7 +83,6 @@ module ConvenientService
           ##
           # NOTE: This method is a subject to change.
           #
-          # rubocop:disable Rails/Delegate
           def to_a
             stack.to_a
           end
@@ -93,11 +91,9 @@ module ConvenientService
           ##
           # TODO: Unify `inspect'. Specs for `inspect'.
           #
-          # rubocop:disable Rails/Delegate
           def inspect
             to_a.inspect
           end
-          # rubocop:enable Rails/Delegate
         end
       end
     end

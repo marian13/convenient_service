@@ -11,11 +11,9 @@ module ConvenientService
           #     ::ActiveRecord::Base.transaction { chain.next(...) }
           #   end
           #
-          # rubocop:disable Style/ArgumentsForwarding
           def next(*args, **kwargs, &block)
             ::ActiveRecord::Base.transaction { chain.next(*args, **kwargs, &block) }
           end
-          # rubocop:enable Style/ArgumentsForwarding
         end
       end
     end

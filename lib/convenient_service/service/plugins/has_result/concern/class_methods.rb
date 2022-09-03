@@ -7,14 +7,12 @@ module ConvenientService
         module Concern
           module ClassMethods
             ##
-            # NOTE: Remove `Style/ArgumentsForwarding' when support for Rubies lower than 2.7 is dropped.
+            # NOTE: Update to `def result(...)' when support for Rubies lower than 2.7 is dropped.
             # https://www.rubydoc.info/gems/rubocop/RuboCop/Cop/Style/ArgumentsForwarding
             #
-            # rubocop:disable Style/ArgumentsForwarding
             def result(*args, **kwargs, &block)
               new(*args, **kwargs, &block).result
             end
-            # rubocop:enable Style/ArgumentsForwarding
 
             ##
             # https://ruby-doc.org/core-2.5.0/Class.html#method-i-allocate

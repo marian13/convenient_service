@@ -15,13 +15,11 @@ module ConvenientService
             #     chain.next(...)
             #   end
             #
-            # rubocop:disable Style/ArgumentsForwarding
             def next(*args, **kwargs, &block)
               return entity.failure(data: errors) if errors.any?
 
               chain.next(*args, **kwargs, &block)
             end
-            # rubocop:enable Style/ArgumentsForwarding
 
             private
 

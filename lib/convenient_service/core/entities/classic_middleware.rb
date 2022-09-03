@@ -10,11 +10,9 @@ module ConvenientService
           @stack = stack
         end
 
-        # rubocop:disable Rails/Delegate
         def call(env)
           stack.call(env)
         end
-        # rubocop:enable Rails/Delegate
 
         ##
         # TODO: Unify `inspect'. Specs for `inspect'.

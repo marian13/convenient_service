@@ -35,10 +35,15 @@ AllCops:
   #
   TargetRubyVersion: 2.5
 
-  ##
-  # NOTE: Excludes vendor from linting. Needed by GitHub Actions.
-  # - https://github.com/rubocop/rubocop/issues/9832
-  # - https://github.com/rubocop/rubocop/issues/9832#issuecomment-873398952
-  #
   Exclude:
+    ##
+    # NOTE: Excludes vendor from linting. Needed by GitHub Actions.
+    # - https://github.com/rubocop/rubocop/issues/9832
+    # - https://github.com/rubocop/rubocop/issues/9832#issuecomment-873398952
+    #
     - vendor/**/*
+
+    ##
+    # NOTE: Excludes extractions from linting.
+    #
+    - lib/convenient_service/extractions/**/*

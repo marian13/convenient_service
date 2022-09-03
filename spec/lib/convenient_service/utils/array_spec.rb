@@ -95,11 +95,9 @@ RSpec.describe ConvenientService::Utils::Array do
               value == other.value
             end
 
-            # rubocop:disable Rails/Delegate
             def hash
               value.hash
             end
-            # rubocop:enable Rails/Delegate
 
             def eql?(other)
               hash == other.hash

@@ -34,11 +34,9 @@ module ConvenientService
           ##
           # TODO: Specs.
           #
-          # rubocop:disable Rails/Delegate
           def <<(dependency)
             dependencies << dependency
           end
-          # rubocop:enable Rails/Delegate
 
           def ==(other)
             return unless other.instance_of?(self.class)

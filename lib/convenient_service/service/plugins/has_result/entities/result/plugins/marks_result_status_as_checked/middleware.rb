@@ -18,13 +18,11 @@ module ConvenientService
                   #     chain.next(*args, **kwargs, &block)
                   #   end
                   #
-                  # rubocop:disable Style/ArgumentsForwarding
                   def next(*args, **kwargs, &block)
                     entity.internals.cache[:has_checked_status] = true
 
                     chain.next(*args, **kwargs, &block)
                   end
-                  # rubocop:enable Style/ArgumentsForwarding
                 end
               end
             end

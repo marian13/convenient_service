@@ -23,7 +23,7 @@ module ConvenientService
       # NOTE: `super' is `Logger.new'.
       # https://ruby-doc.org/stdlib-3.1.0/libdoc/logger/rdoc/Logger.html#method-c-new
       #
-      # rubocop:disable Style/GlobalStdStream, Lint/Env
+      # rubocop:disable Style/GlobalStdStream
       def new
         super(STDOUT).tap do |logger|
           logger.level = ENV["ACTIVE_SERVICE_LOGGER_LEVEL"] || "INFO"
@@ -31,7 +31,7 @@ module ConvenientService
           logger.formatter = colored_formatter if ENV["ACTIVE_SERVICE_LOGGER_ENABLE_COLORS"] == "true"
         end
       end
-      # rubocop:enable Style/GlobalStdStream, Lint/Env
+      # rubocop:enable Style/GlobalStdStream
 
       def original_formatter
         ::Logger::Formatter.new

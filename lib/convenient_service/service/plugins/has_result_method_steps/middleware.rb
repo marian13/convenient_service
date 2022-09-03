@@ -10,9 +10,6 @@ module ConvenientService
           # since splat for `args' and double splat for `kwargs'
           # always create new arrays and hashes respectively.
           #
-          # NOTE: `raw' is NOT from Rails in this particular case, it is from HasResultSteps::Concern.
-          #
-          # rubocop:disable Rails/OutputSafety
           def next(*args, **kwargs, &block)
             return chain.next(*args, **kwargs, &block) unless args.first.instance_of?(::Symbol)
 
@@ -22,7 +19,6 @@ module ConvenientService
 
             chain.next(*args, **kwargs, &block)
           end
-          # rubocop:enable Rails/OutputSafety
 
           private
 

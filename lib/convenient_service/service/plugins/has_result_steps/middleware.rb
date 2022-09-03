@@ -16,13 +16,11 @@ module ConvenientService
           #     # ...
           #   end
           #
-          # rubocop:disable Style/ArgumentsForwarding
           def next(*args, **kwargs, &block)
             return chain.next(*args, **kwargs, &block) if entity.steps.none?
 
             last_step.result
           end
-          # rubocop:enable Style/ArgumentsForwarding
 
           private
 

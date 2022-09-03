@@ -14,13 +14,11 @@ module ConvenientService
           #     chain.next(...)
           #   end
           #
-          # rubocop:disable Style/ArgumentsForwarding
           def next(*args, **kwargs, &block)
             refute_has_result! || mark_as_has_result!
 
             chain.next(*args, **kwargs, &block)
           end
-          # rubocop:enable Style/ArgumentsForwarding
 
           private
 

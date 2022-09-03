@@ -15,11 +15,9 @@ module ConvenientService
                     ##
                     # NOTE: `Support::Delegate' is NOT used intentionally in order to NOT pollute the public interface.
                     #
-                    # rubocop:disable Rails/Delegate
                     def [](key)
                       data[key]
                     end
-                    # rubocop:enable Rails/Delegate
                   end
                 end
               end
