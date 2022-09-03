@@ -145,8 +145,6 @@
   chain.next(*args, **kwargs, &amp;block)
 end
 </code></pre>
-
-<p>rubocop:disable Style/ArgumentsForwarding</p>
             </div>
           
 
@@ -170,7 +168,7 @@ end
                 
               </p>
               <div id="method-i-next_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/convenient_service/service/plugins/has_result/entities/result/plugins/marks_result_status_as_checked/middleware.rb, line 22</span>
+                <pre><span class="ruby-comment"># File lib/convenient_service/service/plugins/has_result/entities/result/plugins/marks_result_status_as_checked/middleware.rb, line 21</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">next</span>(<span class="ruby-operator">*</span><span class="ruby-identifier ruby-title">args</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">kwargs</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-identifier">entity</span>.<span class="ruby-identifier">internals</span>.<span class="ruby-identifier">cache</span>[<span class="ruby-value">:has_checked_status</span>] = <span class="ruby-keyword">true</span>
 

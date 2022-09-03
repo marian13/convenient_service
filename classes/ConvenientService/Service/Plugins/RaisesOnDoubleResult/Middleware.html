@@ -145,8 +145,6 @@
   chain.next(...)
 end
 </code></pre>
-
-<p>rubocop:disable Style/ArgumentsForwarding</p>
             </div>
           
 
@@ -170,7 +168,7 @@ end
                 
               </p>
               <div id="method-i-next_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/convenient_service/service/plugins/raises_on_double_result/middleware.rb, line 18</span>
+                <pre><span class="ruby-comment"># File lib/convenient_service/service/plugins/raises_on_double_result/middleware.rb, line 17</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">next</span>(<span class="ruby-operator">*</span><span class="ruby-identifier ruby-title">args</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">kwargs</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-identifier">refute_has_result!</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">mark_as_has_result!</span>
 

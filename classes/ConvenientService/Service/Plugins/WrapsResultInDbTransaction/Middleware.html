@@ -143,8 +143,6 @@
   ::ActiveRecord::Base.transaction { chain.next(...) }
 end
 </code></pre>
-
-<p>rubocop:disable Style/ArgumentsForwarding</p>
             </div>
           
 
@@ -168,7 +166,7 @@ end
                 
               </p>
               <div id="method-i-next_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/convenient_service/service/plugins/wraps_result_in_db_transaction/middleware.rb, line 15</span>
+                <pre><span class="ruby-comment"># File lib/convenient_service/service/plugins/wraps_result_in_db_transaction/middleware.rb, line 14</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">next</span>(<span class="ruby-operator">*</span><span class="ruby-identifier ruby-title">args</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">kwargs</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-operator">::</span><span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">transaction</span> { <span class="ruby-identifier">chain</span>.<span class="ruby-identifier">next</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">kwargs</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>) }
 <span class="ruby-keyword">end</span></pre>

@@ -145,8 +145,6 @@
   chain.next(...)
 end
 </code></pre>
-
-<p>rubocop:disable Style/ArgumentsForwarding</p>
             </div>
           
 
@@ -170,7 +168,7 @@ end
                 
               </p>
               <div id="method-i-next_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/convenient_service/service/plugins/has_result_params_validations/using_dry_validation/middleware.rb, line 19</span>
+                <pre><span class="ruby-comment"># File lib/convenient_service/service/plugins/has_result_params_validations/using_dry_validation/middleware.rb, line 18</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">next</span>(<span class="ruby-operator">*</span><span class="ruby-identifier ruby-title">args</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">kwargs</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">entity</span>.<span class="ruby-identifier">failure</span>(<span class="ruby-value">data:</span> <span class="ruby-identifier">errors</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">any?</span>
 

@@ -208,7 +208,7 @@
                 
               </p>
               <div id="method-i-error_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/convenient_service/service/plugins/has_result/concern/class_methods.rb, line 63</span>
+                <pre><span class="ruby-comment"># File lib/convenient_service/service/plugins/has_result/concern/class_methods.rb, line 61</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">error</span>(
   <span class="ruby-value">service:</span> <span class="ruby-constant">Constants</span><span class="ruby-operator">::</span><span class="ruby-constant">DEFAULT_SERVICE_INSTANCE</span>,
   <span class="ruby-value">message:</span> <span class="ruby-constant">Constants</span><span class="ruby-operator">::</span><span class="ruby-constant">DEFAULT_ERROR_MESSAGE</span>,
@@ -261,7 +261,7 @@
                 
               </p>
               <div id="method-i-failure_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/convenient_service/service/plugins/has_result/concern/class_methods.rb, line 46</span>
+                <pre><span class="ruby-comment"># File lib/convenient_service/service/plugins/has_result/concern/class_methods.rb, line 44</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">failure</span>(
   <span class="ruby-value">service:</span> <span class="ruby-constant">Constants</span><span class="ruby-operator">::</span><span class="ruby-constant">DEFAULT_SERVICE_INSTANCE</span>,
   <span class="ruby-value">data:</span> <span class="ruby-constant">Constants</span><span class="ruby-operator">::</span><span class="ruby-constant">DEFAULT_FAILURE_DATA</span>,
@@ -314,7 +314,7 @@
                 
               </p>
               <div id="method-i-new_without_initialize_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/convenient_service/service/plugins/has_result/concern/class_methods.rb, line 23</span>
+                <pre><span class="ruby-comment"># File lib/convenient_service/service/plugins/has_result/concern/class_methods.rb, line 21</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">new_without_initialize</span>
   <span class="ruby-identifier">allocate</span>
 <span class="ruby-keyword">end</span></pre>
@@ -333,9 +333,7 @@
 
           
             <div class="description">
-              <p>NOTE: Remove ‘Style/ArgumentsForwarding’ when support for Rubies lower than 2.7 is dropped. <a href="https://www.rubydoc.info/gems/rubocop/RuboCop/Cop/Style/ArgumentsForwarding">www.rubydoc.info/gems/rubocop/RuboCop/Cop/Style/ArgumentsForwarding</a></p>
-
-<p>rubocop:disable Style/ArgumentsForwarding</p>
+              <p>NOTE: Update to ‘def result(…)’ when support for Rubies lower than 2.7 is dropped. <a href="https://www.rubydoc.info/gems/rubocop/RuboCop/Cop/Style/ArgumentsForwarding">www.rubydoc.info/gems/rubocop/RuboCop/Cop/Style/ArgumentsForwarding</a></p>
             </div>
           
 
@@ -359,7 +357,7 @@
                 
               </p>
               <div id="method-i-result_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/convenient_service/service/plugins/has_result/concern/class_methods.rb, line 14</span>
+                <pre><span class="ruby-comment"># File lib/convenient_service/service/plugins/has_result/concern/class_methods.rb, line 13</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">result</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">kwargs</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-identifier">new</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">kwargs</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>).<span class="ruby-identifier">result</span>
 <span class="ruby-keyword">end</span></pre>
@@ -402,7 +400,7 @@
                 
               </p>
               <div id="method-i-result_class_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/convenient_service/service/plugins/has_result/concern/class_methods.rb, line 77</span>
+                <pre><span class="ruby-comment"># File lib/convenient_service/service/plugins/has_result/concern/class_methods.rb, line 75</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">result_class</span>
   <span class="ruby-ivar">@result_class</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Commands</span><span class="ruby-operator">::</span><span class="ruby-constant">CreateResultClass</span>.<span class="ruby-identifier">call</span>(<span class="ruby-value">service_class:</span> <span class="ruby-keyword">self</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -445,7 +443,7 @@
                 
               </p>
               <div id="method-i-success_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/convenient_service/service/plugins/has_result/concern/class_methods.rb, line 30</span>
+                <pre><span class="ruby-comment"># File lib/convenient_service/service/plugins/has_result/concern/class_methods.rb, line 28</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">success</span>(
   <span class="ruby-value">service:</span> <span class="ruby-constant">Constants</span><span class="ruby-operator">::</span><span class="ruby-constant">DEFAULT_SERVICE_INSTANCE</span>,
   <span class="ruby-value">data:</span> <span class="ruby-constant">Constants</span><span class="ruby-operator">::</span><span class="ruby-constant">DEFAULT_SUCCESS_DATA</span>
