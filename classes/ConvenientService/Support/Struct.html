@@ -23,6 +23,10 @@
     <meta property="og:title" value="ConvenientService::Support::Struct">
 
   
+    
+    <meta name="description" content="Allows to ‘keyword_init’ for Rubies lower than 2.5.">
+    <meta property="og:description" content="Allows to ‘keyword_init’ for Rubies lower than 2.5.">
+  
 
     <meta name="keywords" content="ConvenientService::Support::Struct class, new">
 </head>
@@ -74,6 +78,12 @@
     <main id="bodyContent">
         <div id="content">
   
+    <div class="description">
+      
+<p>Allows to ‘keyword_init’ for Rubies lower than 2.5.</p>
+
+    </div>
+  
 
 
   
@@ -97,7 +107,7 @@
             
               
               <li>
-                <a href="#method-i-new">new</a>
+                <a href="#method-c-new">new</a>
               </li>
             
           </ul>
@@ -124,22 +134,19 @@
 
     <!-- Methods -->
     
-    
-      <h2 class="sectiontitle">Instance Public methods</h2>
+      <h2 class="sectiontitle">Class Public methods</h2>
       
         <div class="method">
-          <h3 class="title method-title" id="method-i-new">
+          <h3 class="title method-title" id="method-c-new">
             
               <b>new</b>(*members, keyword_init: false, &amp;block)
             
-            <a href="../../../classes/ConvenientService/Support/Struct.html#method-i-new" name="method-i-new" class="permalink">Link</a>
+            <a href="../../../classes/ConvenientService/Support/Struct.html#method-c-new" name="method-c-new" class="permalink">Link</a>
           </h3>
 
           
             <div class="description">
-              <p>NOTE: Copied with cosmetic modifications from: <a href="https://github.com/marcandre/backports/blob/d422e696791317b3e8cf5af436b46a33ae276f70/lib/backports/2.5.0/struct/new.rb">github.com/marcandre/backports/blob/d422e696791317b3e8cf5af436b46a33ae276f70/lib/backports/2.5.0/struct/new.rb</a></p>
-
-<p>TODO: Test on Ruby lower than “2.5.0”</p>
+              
             </div>
           
 
@@ -155,42 +162,43 @@
                  Source: 
 
                 
-                  <a href="javascript:toggleSource('method-i-new_source')" id="l_method-i-new_source">show</a>
+                  <a href="javascript:toggleSource('method-c-new_source')" id="l_method-c-new_source">show</a>
                 
 
                 
 
                 
               </p>
-              <div id="method-i-new_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/convenient_service/support/struct.rb, line 13</span>
-        <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">new</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">members</span>, <span class="ruby-value">keyword_init:</span> <span class="ruby-keyword">false</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
-          <span class="ruby-identifier">klass</span> = <span class="ruby-keyword">super</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">members</span>)
+              <div id="method-c-new_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/convenient_service/support/struct.rb, line 15</span>
+          <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">new</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">members</span>, <span class="ruby-value">keyword_init:</span> <span class="ruby-keyword">false</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+            <span class="ruby-identifier">klass</span> = <span class="ruby-keyword">super</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">members</span>)
 
-          <span class="ruby-keyword">if</span> <span class="ruby-identifier">keyword_init</span>
-            <span class="ruby-identifier">members</span>.<span class="ruby-identifier">shift</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">members</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Symbol</span>)
+            <span class="ruby-keyword">if</span> <span class="ruby-identifier">keyword_init</span>
+              <span class="ruby-identifier">members</span>.<span class="ruby-identifier">shift</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">members</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Symbol</span>)
 
-            <span class="ruby-identifier">arg_list</span> = <span class="ruby-identifier">members</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span> <span class="ruby-node">&quot;#{m}: nil&quot;</span> }.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;, &quot;</span>)
+              <span class="ruby-identifier">arg_list</span> = <span class="ruby-identifier">members</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span> <span class="ruby-node">&quot;#{m}: nil&quot;</span> }.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;, &quot;</span>)
 
-            <span class="ruby-identifier">setter</span> = <span class="ruby-identifier">members</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span> <span class="ruby-node">&quot;self.#{m} = #{m} &quot;</span> }.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\n&quot;</span>)
+              <span class="ruby-identifier">setter</span> = <span class="ruby-identifier">members</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span> <span class="ruby-node">&quot;self.#{m} = #{m} &quot;</span> }.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\n&quot;</span>)
 
-            <span class="ruby-identifier">&lt;&lt;~RUBY</span>.<span class="ruby-identifier">tap</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">code</span><span class="ruby-operator">|</span> <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">class_eval</span>(<span class="ruby-identifier">code</span>, <span class="ruby-keyword">__FILE__</span>, <span class="ruby-keyword">__LINE__</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>) }
-<span class="ruby-value">              def initialize(#{arg_list})
-                #{setter}
-              end
-</span><span class="ruby-identifier">            RUBY</span>
-          <span class="ruby-keyword">end</span>
+              <span class="ruby-identifier">&lt;&lt;~RUBY</span>.<span class="ruby-identifier">tap</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">code</span><span class="ruby-operator">|</span> <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">class_eval</span>(<span class="ruby-identifier">code</span>, <span class="ruby-keyword">__FILE__</span>, <span class="ruby-keyword">__LINE__</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>) }
+<span class="ruby-value">                def initialize(#{arg_list})
+                  #{setter}
+                end
+</span><span class="ruby-identifier">              RUBY</span>
+            <span class="ruby-keyword">end</span>
 
-          <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">class_eval</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">block</span>
+            <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">class_eval</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">block</span>
 
-          <span class="ruby-identifier">klass</span>
-        <span class="ruby-keyword">end</span></pre>
+            <span class="ruby-identifier">klass</span>
+          <span class="ruby-keyword">end</span></pre>
               </div>
             </div>
             
           </div>
         
       
+    
     
   
 </div>
