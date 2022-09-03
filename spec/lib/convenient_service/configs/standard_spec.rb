@@ -27,7 +27,6 @@ RSpec.describe ConvenientService::Configs::Standard do
       example_group "service" do
         let(:concerns) do
           [
-            ConvenientService::Service::Plugins::HasMissingConcerns::Concern,
             ConvenientService::Common::Plugins::HasInternals::Concern,
             ConvenientService::Common::Plugins::HasConstructor::Concern,
             ConvenientService::Common::Plugins::CachesConstructorParams::Concern,
@@ -119,7 +118,6 @@ RSpec.describe ConvenientService::Configs::Standard do
         example_group "service internals" do
           let(:concerns) do
             [
-              ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Plugins::HasMissingConcerns::Concern,
               ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Plugins::HasCache::Concern
             ]
           end
@@ -132,7 +130,6 @@ RSpec.describe ConvenientService::Configs::Standard do
         example_group "service result" do
           let(:concerns) do
             [
-              ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasMissingConcerns::Concern,
               ConvenientService::Plugins::Common::HasInternals::Concern,
               ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasResultShortSyntax::Concern,
               ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanRecalculateResult::Concern
@@ -245,7 +242,6 @@ RSpec.describe ConvenientService::Configs::Standard do
           example_group "service result internals" do
             let(:concerns) do
               [
-                ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Plugins::HasMissingConcerns::Concern,
                 ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Plugins::HasCache::Concern
               ]
             end
@@ -271,7 +267,6 @@ RSpec.describe ConvenientService::Configs::Standard do
           example_group "service step internals" do
             let(:concerns) do
               [
-                ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Plugins::HasMissingConcerns::Concern,
                 ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Plugins::HasCache::Concern
               ]
             end

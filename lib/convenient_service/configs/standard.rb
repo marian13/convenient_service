@@ -18,8 +18,6 @@ module ConvenientService
         include Core
 
         concerns do
-          use Plugins::Service::HasMissingConcerns::Concern
-
           use Plugins::Common::HasInternals::Concern
           use Plugins::Common::HasConstructor::Concern
 
@@ -90,8 +88,6 @@ module ConvenientService
           include Core
 
           concerns do
-            use Plugins::Internals::HasMissingConcerns::Concern
-
             use Plugins::Internals::HasCache::Concern
           end
         end
@@ -100,8 +96,6 @@ module ConvenientService
           include Core
 
           concerns do
-            use Plugins::Result::HasMissingConcerns::Concern
-
             use Plugins::Common::HasInternals::Concern
 
             use Plugins::Result::HasResultShortSyntax::Concern
@@ -166,8 +160,6 @@ module ConvenientService
             include Core
 
             concerns do
-              use Plugins::Internals::HasMissingConcerns::Concern
-
               use Plugins::Internals::HasCache::Concern
             end
           end
@@ -177,10 +169,6 @@ module ConvenientService
           include Core
 
           concerns do
-            ##
-            # TODO: Plugins::Step::HasMissingConcerns::Concern
-            #
-
             use Plugins::Common::HasInternals::Concern
           end
 
@@ -194,8 +182,6 @@ module ConvenientService
             include Core
 
             concerns do
-              use Plugins::Internals::HasMissingConcerns::Concern
-
               use Plugins::Internals::HasCache::Concern
             end
           end
