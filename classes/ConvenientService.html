@@ -28,7 +28,7 @@
     <meta property="og:description" content="Base class for all ‘ConvenientService’ errors. Can be used as a catch-all solution, for example:  begin   any_service.result rescue ConvenientService::Error =&gt; error   puts error.">
   
 
-    <meta name="keywords" content="ConvenientService class, require_rspec_extentions, require_examples, logger">
+    <meta name="keywords" content="ConvenientService class, require_assigns_attributes_in_constructor_using_active_model_attribute_assignment, require_assigns_attributes_in_constructor_using_dry_initializer, require_has_attributes_using_active_model_attributes, require_has_result_params_validations_using_active_model_validations, require_has_result_params_validations_using_dry_validation, require_development_tools, require_rspec_extentions, require_examples, logger">
 </head>
 
 <body>
@@ -91,9 +91,9 @@
             
             <li><a href="../files/lib/convenient_service/common/plugins/has_around_callbacks/middleware_rb.html">lib/convenient_service/common/plugins/has_around_callbacks/middleware.rb</a></li>
             
-            <li><a href="../files/lib/convenient_service/common/plugins/has_attributes/concern_rb.html">lib/convenient_service/common/plugins/has_attributes/concern.rb</a></li>
+            <li><a href="../files/lib/convenient_service/common/plugins/has_attributes/using_active_model_attributes/concern_rb.html">lib/convenient_service/common/plugins/has_attributes/using_active_model_attributes/concern.rb</a></li>
             
-            <li><a href="../files/lib/convenient_service/common/plugins/has_attributes/patches/active_model_attributes_rb.html">lib/convenient_service/common/plugins/has_attributes/patches/active_model_attributes.rb</a></li>
+            <li><a href="../files/lib/convenient_service/common/plugins/has_attributes/using_active_model_attributes/patches/active_model_attributes_rb.html">lib/convenient_service/common/plugins/has_attributes/using_active_model_attributes/patches/active_model_attributes.rb</a></li>
             
             <li><a href="../files/lib/convenient_service/common/plugins/has_callbacks/concern_rb.html">lib/convenient_service/common/plugins/has_callbacks/concern.rb</a></li>
             
@@ -133,11 +133,15 @@
             
             <li><a href="../files/lib/convenient_service/common/plugins/normalizes_env/middleware_rb.html">lib/convenient_service/common/plugins/normalizes_env/middleware.rb</a></li>
             
-            <li><a href="../files/lib/convenient_service/configs/custom_rb.html">lib/convenient_service/configs/custom.rb</a></li>
+            <li><a href="../files/lib/convenient_service/configs/assigns_attributes_in_constructor/using_active_model_attribute_assignment_rb.html">lib/convenient_service/configs/assigns_attributes_in_constructor/using_active_model_attribute_assignment.rb</a></li>
             
-            <li><a href="../files/lib/convenient_service/configs/dry_rb.html">lib/convenient_service/configs/dry.rb</a></li>
+            <li><a href="../files/lib/convenient_service/configs/assigns_attributes_in_constructor/using_dry_initializer_rb.html">lib/convenient_service/configs/assigns_attributes_in_constructor/using_dry_initializer.rb</a></li>
             
-            <li><a href="../files/lib/convenient_service/configs/rails_rb.html">lib/convenient_service/configs/rails.rb</a></li>
+            <li><a href="../files/lib/convenient_service/configs/has_attributes/using_active_model_attributes_rb.html">lib/convenient_service/configs/has_attributes/using_active_model_attributes.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/configs/has_result_params_validations/using_active_model_validations_rb.html">lib/convenient_service/configs/has_result_params_validations/using_active_model_validations.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/configs/has_result_params_validations/using_dry_validation_rb.html">lib/convenient_service/configs/has_result_params_validations/using_dry_validation.rb</a></li>
             
             <li><a href="../files/lib/convenient_service/configs/standard_rb.html">lib/convenient_service/configs/standard.rb</a></li>
             
@@ -894,7 +898,37 @@ ConvenientService::Utils::Object::ResolveType.call(Kernel)
             
               
               <li>
+                <a href="#method-c-require_assigns_attributes_in_constructor_using_active_model_attribute_assignment">require_assigns_attributes_in_constructor_using_active_model_attribute_assignment</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-c-require_assigns_attributes_in_constructor_using_dry_initializer">require_assigns_attributes_in_constructor_using_dry_initializer</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-c-require_development_tools">require_development_tools</a>,
+              </li>
+            
+              
+              <li>
                 <a href="#method-c-require_examples">require_examples</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-c-require_has_attributes_using_active_model_attributes">require_has_attributes_using_active_model_attributes</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-c-require_has_result_params_validations_using_active_model_validations">require_has_result_params_validations_using_active_model_validations</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-c-require_has_result_params_validations_using_dry_validation">require_has_result_params_validations_using_dry_validation</a>,
               </li>
             
               
@@ -990,6 +1024,143 @@ ConvenientService::Utils::Object::ResolveType.call(Kernel)
           </div>
         
         <div class="method">
+          <h3 class="title method-title" id="method-c-require_assigns_attributes_in_constructor_using_active_model_attribute_assignment">
+            
+              <b>require_assigns_attributes_in_constructor_using_active_model_attribute_assignment</b>()
+            
+            <a href="../classes/ConvenientService.html#method-c-require_assigns_attributes_in_constructor_using_active_model_attribute_assignment" name="method-c-require_assigns_attributes_in_constructor_using_active_model_attribute_assignment" class="permalink">Link</a>
+          </h3>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                 Source: 
+
+                
+                  <a href="javascript:toggleSource('method-c-require_assigns_attributes_in_constructor_using_active_model_attribute_assignment_source')" id="l_method-c-require_assigns_attributes_in_constructor_using_active_model_attribute_assignment_source">show</a>
+                
+
+                
+
+                
+              </p>
+              <div id="method-c-require_assigns_attributes_in_constructor_using_active_model_attribute_assignment_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/convenient_service.rb, line 27</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">require_assigns_attributes_in_constructor_using_active_model_attribute_assignment</span>
+  <span class="ruby-identifier">require</span> <span class="ruby-string">&quot;active_model&quot;</span>
+
+  <span class="ruby-identifier">require_relative</span> <span class="ruby-string">&quot;convenient_service/configs/assigns_attributes_in_constructor/using_active_model_attribute_assignment&quot;</span>
+  <span class="ruby-identifier">require_relative</span> <span class="ruby-string">&quot;convenient_service/common/plugins/assigns_attributes_in_constructor/using_active_model_attribute_assignment&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <h3 class="title method-title" id="method-c-require_assigns_attributes_in_constructor_using_dry_initializer">
+            
+              <b>require_assigns_attributes_in_constructor_using_dry_initializer</b>()
+            
+            <a href="../classes/ConvenientService.html#method-c-require_assigns_attributes_in_constructor_using_dry_initializer" name="method-c-require_assigns_attributes_in_constructor_using_dry_initializer" class="permalink">Link</a>
+          </h3>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                 Source: 
+
+                
+                  <a href="javascript:toggleSource('method-c-require_assigns_attributes_in_constructor_using_dry_initializer_source')" id="l_method-c-require_assigns_attributes_in_constructor_using_dry_initializer_source">show</a>
+                
+
+                
+
+                
+              </p>
+              <div id="method-c-require_assigns_attributes_in_constructor_using_dry_initializer_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/convenient_service.rb, line 37</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">require_assigns_attributes_in_constructor_using_dry_initializer</span>
+  <span class="ruby-identifier">require</span> <span class="ruby-string">&quot;dry-initializer&quot;</span>
+
+  <span class="ruby-identifier">require_relative</span> <span class="ruby-string">&quot;convenient_service/configs/assigns_attributes_in_constructor/using_dry_initializer&quot;</span>
+  <span class="ruby-identifier">require_relative</span> <span class="ruby-string">&quot;convenient_service/common/plugins/assigns_attributes_in_constructor/using_dry_initializer&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <h3 class="title method-title" id="method-c-require_development_tools">
+            
+              <b>require_development_tools</b>()
+            
+            <a href="../classes/ConvenientService.html#method-c-require_development_tools" name="method-c-require_development_tools" class="permalink">Link</a>
+          </h3>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                 Source: 
+
+                
+                  <a href="javascript:toggleSource('method-c-require_development_tools_source')" id="l_method-c-require_development_tools_source">show</a>
+                
+
+                
+
+                
+              </p>
+              <div id="method-c-require_development_tools_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/convenient_service.rb, line 78</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">require_development_tools</span>
+  <span class="ruby-identifier">require</span> <span class="ruby-string">&quot;awesome_print&quot;</span>
+  <span class="ruby-identifier">require</span> <span class="ruby-string">&quot;byebug&quot;</span>
+  <span class="ruby-identifier">require</span> <span class="ruby-string">&quot;paint&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
           <h3 class="title method-title" id="method-c-require_examples">
             
               <b>require_examples</b>()
@@ -1023,11 +1194,150 @@ ConvenientService::Utils::Object::ResolveType.call(Kernel)
                 
               </p>
               <div id="method-c-require_examples_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/convenient_service.rb, line 49</span>
+                <pre><span class="ruby-comment"># File lib/convenient_service.rb, line 98</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">require_examples</span>
   <span class="ruby-identifier">require</span> <span class="ruby-string">&quot;progressbar&quot;</span>
 
   <span class="ruby-identifier">require_relative</span> <span class="ruby-string">&quot;convenient_service/examples&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <h3 class="title method-title" id="method-c-require_has_attributes_using_active_model_attributes">
+            
+              <b>require_has_attributes_using_active_model_attributes</b>()
+            
+            <a href="../classes/ConvenientService.html#method-c-require_has_attributes_using_active_model_attributes" name="method-c-require_has_attributes_using_active_model_attributes" class="permalink">Link</a>
+          </h3>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                 Source: 
+
+                
+                  <a href="javascript:toggleSource('method-c-require_has_attributes_using_active_model_attributes_source')" id="l_method-c-require_has_attributes_using_active_model_attributes_source">show</a>
+                
+
+                
+
+                
+              </p>
+              <div id="method-c-require_has_attributes_using_active_model_attributes_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/convenient_service.rb, line 47</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">require_has_attributes_using_active_model_attributes</span>
+  <span class="ruby-identifier">require</span> <span class="ruby-string">&quot;active_model&quot;</span>
+
+  <span class="ruby-identifier">require_relative</span> <span class="ruby-string">&quot;convenient_service/configs/has_attributes/using_active_model_attributes&quot;</span>
+  <span class="ruby-identifier">require_relative</span> <span class="ruby-string">&quot;convenient_service/common/plugins/has_attributes/using_active_model_attributes&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <h3 class="title method-title" id="method-c-require_has_result_params_validations_using_active_model_validations">
+            
+              <b>require_has_result_params_validations_using_active_model_validations</b>()
+            
+            <a href="../classes/ConvenientService.html#method-c-require_has_result_params_validations_using_active_model_validations" name="method-c-require_has_result_params_validations_using_active_model_validations" class="permalink">Link</a>
+          </h3>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                 Source: 
+
+                
+                  <a href="javascript:toggleSource('method-c-require_has_result_params_validations_using_active_model_validations_source')" id="l_method-c-require_has_result_params_validations_using_active_model_validations_source">show</a>
+                
+
+                
+
+                
+              </p>
+              <div id="method-c-require_has_result_params_validations_using_active_model_validations_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/convenient_service.rb, line 57</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">require_has_result_params_validations_using_active_model_validations</span>
+  <span class="ruby-identifier">require</span> <span class="ruby-string">&quot;active_model&quot;</span>
+  <span class="ruby-identifier">require</span> <span class="ruby-string">&quot;active_record&quot;</span>
+
+  <span class="ruby-identifier">require_relative</span> <span class="ruby-string">&quot;convenient_service/configs/has_result_params_validations/using_active_model_validations&quot;</span>
+  <span class="ruby-identifier">require_relative</span> <span class="ruby-string">&quot;convenient_service/service/plugins/has_result_params_validations/using_active_model_validations&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <h3 class="title method-title" id="method-c-require_has_result_params_validations_using_dry_validation">
+            
+              <b>require_has_result_params_validations_using_dry_validation</b>()
+            
+            <a href="../classes/ConvenientService.html#method-c-require_has_result_params_validations_using_dry_validation" name="method-c-require_has_result_params_validations_using_dry_validation" class="permalink">Link</a>
+          </h3>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                 Source: 
+
+                
+                  <a href="javascript:toggleSource('method-c-require_has_result_params_validations_using_dry_validation_source')" id="l_method-c-require_has_result_params_validations_using_dry_validation_source">show</a>
+                
+
+                
+
+                
+              </p>
+              <div id="method-c-require_has_result_params_validations_using_dry_validation_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/convenient_service.rb, line 68</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">require_has_result_params_validations_using_dry_validation</span>
+  <span class="ruby-identifier">require</span> <span class="ruby-string">&quot;dry-validation&quot;</span>
+
+  <span class="ruby-identifier">require_relative</span> <span class="ruby-string">&quot;convenient_service/configs/has_result_params_validations/using_dry_validation&quot;</span>
+  <span class="ruby-identifier">require_relative</span> <span class="ruby-string">&quot;convenient_service/service/plugins/has_result_params_validations/using_dry_validation&quot;</span>
 <span class="ruby-keyword">end</span></pre>
               </div>
             </div>
@@ -1070,7 +1380,7 @@ ConvenientService::Utils::Object::ResolveType.call(Kernel)
                 
               </p>
               <div id="method-c-require_rspec_extentions_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/convenient_service.rb, line 40</span>
+                <pre><span class="ruby-comment"># File lib/convenient_service.rb, line 89</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">require_rspec_extentions</span>
   <span class="ruby-identifier">require</span> <span class="ruby-string">&quot;method_source&quot;</span>
 
