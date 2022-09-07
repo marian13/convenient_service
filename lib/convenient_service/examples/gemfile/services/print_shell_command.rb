@@ -10,7 +10,11 @@ module ConvenientService
     module Gemfile
       module Services
         class PrintShellCommand
-          include ConvenientService::Configs::Rails
+          include ConvenientService::Configs::Standard
+
+          include ConvenientService::Configs::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment
+          include ConvenientService::Configs::HasAttributes::UsingActiveModelAttributes
+          include ConvenientService::Configs::HasResultParamsValidations::UsingActiveModelValidations
 
           attribute :text, :string
           attribute :out, default: $stdout

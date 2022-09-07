@@ -20,7 +20,10 @@ RSpec.describe ConvenientService::Examples::Gemfile::Services::StripComments do
   example_group "modules" do
     subject { described_class }
 
-    it { is_expected.to include_module(ConvenientService::Configs::Rails) }
+    it { is_expected.to include_module(ConvenientService::Configs::Standard) }
+    it { is_expected.to include_module(ConvenientService::Configs::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment) }
+    it { is_expected.to include_module(ConvenientService::Configs::HasAttributes::UsingActiveModelAttributes) }
+    it { is_expected.to include_module(ConvenientService::Configs::HasResultParamsValidations::UsingActiveModelValidations) }
   end
 
   example_group "attributes" do

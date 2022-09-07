@@ -6,7 +6,6 @@
 require_relative "plugins/can_recalculate_result"
 require_relative "plugins/has_result"
 require_relative "plugins/has_result_method_steps"
-require_relative "plugins/has_result_params_validations"
 require_relative "plugins/has_result_short_syntax"
 require_relative "plugins/has_result_steps"
 require_relative "plugins/raises_on_double_result"

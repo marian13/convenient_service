@@ -45,7 +45,10 @@ module ConvenientService
     module Gemfile
       module Services
         class FormatBody
-          include ConvenientService::Configs::Dry
+          include ConvenientService::Configs::Standard
+
+          include ConvenientService::Configs::AssignsAttributesInConstructor::UsingDryInitializer
+          include ConvenientService::Configs::HasResultParamsValidations::UsingDryValidation
 
           option :parsed_content
 

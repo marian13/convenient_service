@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
-RSpec.describe ConvenientService::Configs::Rails do
+RSpec.describe ConvenientService::Configs::HasResultParamsValidations::UsingActiveModelValidations do
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
 
@@ -22,20 +22,12 @@ RSpec.describe ConvenientService::Configs::Rails do
         end
       end
 
-      specify { expect(service_class).to include_module(ConvenientService::Configs::Standard) }
+      specify { expect(service_class).to include_module(ConvenientService::Core) }
 
       example_group "service" do
         let(:concerns) do
           [
-            ConvenientService::Common::Plugins::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment::Concern,
-            ConvenientService::Common::Plugins::HasAttributes::Concern,
             ConvenientService::Service::Plugins::HasResultParamsValidations::UsingActiveModelValidations::Concern
-          ]
-        end
-
-        let(:initialize_middlewares) do
-          [
-            ConvenientService::Common::Plugins::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment::Middleware
           ]
         end
 
@@ -46,15 +38,11 @@ RSpec.describe ConvenientService::Configs::Rails do
         end
 
         it "sets service concerns" do
-          expect(service_class.concerns.to_a.map(&:first).map(&:concern).last(concerns.size)).to eq(concerns)
-        end
-
-        it "sets service middlewares for `initialize'" do
-          expect(service_class.middlewares(for: :initialize).to_a.map(&:first).last(initialize_middlewares.size)).to eq(initialize_middlewares)
+          expect(service_class.concerns.to_a.map(&:first).map(&:concern)).to eq(concerns)
         end
 
         it "sets service middlewares for `result'" do
-          expect(service_class.middlewares(for: :result).to_a.map(&:first).last(result_middlewares.size)).to eq(result_middlewares)
+          expect(service_class.middlewares(for: :result).to_a.map(&:first)).to eq(result_middlewares)
         end
       end
     end

@@ -1,4 +1,0 @@
-# frozen_string_literal: true
-
-require_relative "has_result_params_validations/using_active_model_validations"
-require_relative "has_result_params_validations/using_dry_validation"

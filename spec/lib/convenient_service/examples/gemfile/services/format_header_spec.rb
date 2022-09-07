@@ -20,7 +20,9 @@ RSpec.describe ConvenientService::Examples::Gemfile::Services::FormatHeader do
   example_group "modules" do
     subject { described_class }
 
-    it { is_expected.to include_module(ConvenientService::Configs::Dry) }
+    it { is_expected.to include_module(ConvenientService::Configs::Standard) }
+    it { is_expected.to include_module(ConvenientService::Configs::AssignsAttributesInConstructor::UsingDryInitializer) }
+    it { is_expected.to include_module(ConvenientService::Configs::HasResultParamsValidations::UsingDryValidation) }
   end
 
   example_group "attributes" do

@@ -40,7 +40,10 @@ module ConvenientService
           EMPTY_LINE = ""
           ENTER = "\n"
 
-          include ConvenientService::Configs::Dry
+          include ConvenientService::Configs::Standard
+
+          include ConvenientService::Configs::AssignsAttributesInConstructor::UsingDryInitializer
+          include ConvenientService::Configs::HasResultParamsValidations::UsingDryValidation
 
           option :parsed_content
 

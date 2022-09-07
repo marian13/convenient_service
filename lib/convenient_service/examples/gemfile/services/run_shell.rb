@@ -5,7 +5,11 @@ module ConvenientService
     module Gemfile
       module Services
         class RunShell
-          include ConvenientService::Configs::Rails
+          include ConvenientService::Configs::Standard
+
+          include ConvenientService::Configs::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment
+          include ConvenientService::Configs::HasAttributes::UsingActiveModelAttributes
+          include ConvenientService::Configs::HasResultParamsValidations::UsingActiveModelValidations
 
           attribute :command, :string
           attribute :debug, :boolean, default: false

@@ -5,7 +5,11 @@ module ConvenientService
     module Gemfile
       module Services
         class AssertFileExists
-          include ConvenientService::Configs::Rails
+          include ConvenientService::Configs::Standard
+
+          include ConvenientService::Configs::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment
+          include ConvenientService::Configs::HasAttributes::UsingActiveModelAttributes
+          include ConvenientService::Configs::HasResultParamsValidations::UsingActiveModelValidations
 
           ##
           # NOTE: accessor is needed for ActiveModel::AttributeAssignment
