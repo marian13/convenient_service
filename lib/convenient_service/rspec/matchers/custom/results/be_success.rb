@@ -42,7 +42,7 @@ module ConvenientService
               #
               parts = []
 
-              parts << "be a success"
+              parts << "be a `success'"
               parts << "of `#{service_class}'" if used_of?
               parts << "with data `#{data}'" if used_data?
               parts << "\n\n"
@@ -59,7 +59,7 @@ module ConvenientService
               #
               parts = []
 
-              parts << "expected that `#{result}' would be a success"
+              parts << "expected that `#{result}' would be a `success'"
               parts << "of `#{service_class}'" if used_of?
               parts << "with data `#{data}'" if used_data?
               parts << "\n\n"
@@ -79,7 +79,7 @@ module ConvenientService
               #
               parts = []
 
-              parts << "expected that #{result} would NOT be a success"
+              parts << "expected that #{result} would NOT be a `success'"
               parts << "of `#{service_class}'" if used_of?
               parts << "with data `#{data}'" if used_data?
               parts << "\n\n"

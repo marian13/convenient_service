@@ -61,7 +61,7 @@ module ConvenientService
               #
               parts = []
 
-              parts << "be an error"
+              parts << "be an `error'"
               parts << "of `#{service_class}'" if used_of?
               parts << "with message `#{message}'" if used_message?
               parts << "with code `#{code}'" if used_code?
@@ -80,7 +80,7 @@ module ConvenientService
               #
               parts = []
 
-              parts << "expected that `#{result}' would be an error"
+              parts << "expected that `#{result}' would be an `error'"
               parts << "of `#{service_class}'" if used_of?
               parts << "with message `#{message}'" if used_message?
               parts << "with code `#{code}'" if used_code?
@@ -102,7 +102,7 @@ module ConvenientService
               #
               parts = []
 
-              parts << "expected that #{result} would NOT be an error"
+              parts << "expected that #{result} would NOT be an `error'"
               parts << "of `#{service_class}'" if used_of?
               parts << "with message `#{message}'" if used_message?
               parts << "with code `#{code}'" if used_code?
