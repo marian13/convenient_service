@@ -8,15 +8,16 @@ module ConvenientService
           class AssertFileNotEmpty
             include ConvenientService::Configs::Standard
 
-            include ConvenientService::Configs::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment
-            include ConvenientService::Configs::HasAttributes::UsingActiveModelAttributes
-            include ConvenientService::Configs::HasResultParamsValidations::UsingActiveModelValidations
-
             attr_accessor :path
 
-            validates :path, presence: true
+            def initialize(path:)
+              @path = path
+            end
 
             def result
+              return failure(data: {path: "Path is `nil'"}) if path.nil?
+              return failure(data: {path: "Path is empty"}) if path.empty?
+
               return error(message: "File with path `#{path}' is empty") if ::File.zero?(path)
 
               success

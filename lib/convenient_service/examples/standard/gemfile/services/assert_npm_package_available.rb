@@ -13,13 +13,9 @@ module ConvenientService
           class AssertNpmPackageAvailable
             include ConvenientService::Configs::Standard
 
-            include ConvenientService::Configs::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment
-            include ConvenientService::Configs::HasAttributes::UsingActiveModelAttributes
-            include ConvenientService::Configs::HasResultParamsValidations::UsingActiveModelValidations
+            attr_reader :name
 
-            attr_accessor :name
-
-            validates :name, presence: true
+            step :validate_name
 
             step Services::AssertNodeAvailable
 
@@ -31,6 +27,19 @@ module ConvenientService
             # https://docs.npmjs.com/cli/v7/commands/npm-ls
             #
             step Services::RunShell, in: {command: -> { "npm list #{name} --depth=0 > /dev/null 2>&1" }}
+
+            def initialize(name:)
+              @name = name
+            end
+
+            private
+
+            def validate_name
+              return failure(data: {name: "Name is `nil'"}) if name.nil?
+              return failure(data: {name: "Name is empty"}) if name.empty?
+
+              success
+            end
           end
         end
       end

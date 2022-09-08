@@ -8,19 +8,16 @@ module ConvenientService
           class AssertFileExists
             include ConvenientService::Configs::Standard
 
-            include ConvenientService::Configs::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment
-            include ConvenientService::Configs::HasAttributes::UsingActiveModelAttributes
-            include ConvenientService::Configs::HasResultParamsValidations::UsingActiveModelValidations
-
-            ##
-            # NOTE: accessor is needed for ActiveModel::AttributeAssignment
-            # https://api.rubyonrails.org/classes/ActiveModel/AttributeAssignment.html
-            #
             attr_accessor :path
 
-            validates :path, presence: true
+            def initialize(path:)
+              @path = path
+            end
 
             def result
+              return failure(path: "Path is `nil'") if path.nil?
+              return failure(path: "Path is empty") if path.empty?
+
               return error("File with path `#{path}' does NOT exist") unless ::File.exist?(path)
 
               success

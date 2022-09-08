@@ -31,39 +31,53 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::AssertF
     it { is_expected.to have_attr_accessor(:path) }
   end
 
-  example_group "validations" do
-    subject { service }
-
-    it { is_expected.to validate_presence_of(:path) }
-  end
-
   describe "#result" do
     subject(:result) { service.result }
 
-    let(:path) { tempfile.path }
+    context "when path is NOT valid" do
+      context "when path is nil" do
+        let(:path) { nil }
 
-    context "when file is NOT empty" do
-      ##
-      # NOTE: Tempfile uses its own let in order to prevent its premature garbage collection.
-      #
-      let(:tempfile) { Tempfile.new.tap { |file| file.write("content") }.tap(&:close) }
+        it "returns failure with data" do
+          expect(result).to be_failure.with_data(path: "Path is `nil'")
+        end
+      end
 
-      it "returns success" do
-        ##
-        # TODO: Matcher.
-        #
-        expect(result).to be_success
+      context "when path is empty" do
+        let(:path) { "" }
+
+        it "returns failure with data" do
+          expect(result).to be_failure.with_data(path: "Path is empty")
+        end
       end
     end
 
-    context "when file is empty" do
-      ##
-      # NOTE: Tempfile uses its own let in order to prevent its premature garbage collection.
-      #
-      let(:tempfile) { Tempfile.new }
+    context "when path is valid" do
+      let(:path) { tempfile.path }
 
-      it "returns error with message" do
-        expect(result).to be_error.with_message("File with path `#{path}' is empty")
+      context "when file is NOT empty" do
+        ##
+        # NOTE: Tempfile uses its own let in order to prevent its premature garbage collection.
+        #
+        let(:tempfile) { Tempfile.new.tap { |file| file.write("content") }.tap(&:close) }
+
+        it "returns success" do
+          ##
+          # TODO: Matcher.
+          #
+          expect(result).to be_success
+        end
+      end
+
+      context "when file is empty" do
+        ##
+        # NOTE: Tempfile uses its own let in order to prevent its premature garbage collection.
+        #
+        let(:tempfile) { Tempfile.new }
+
+        it "returns error with message" do
+          expect(result).to be_error.with_message("File with path `#{path}' is empty")
+        end
       end
     end
   end

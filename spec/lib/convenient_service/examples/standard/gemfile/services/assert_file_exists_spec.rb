@@ -31,35 +31,49 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::AssertF
     it { is_expected.to have_attr_accessor(:path) }
   end
 
-  example_group "validations" do
-    subject { service }
-
-    it { is_expected.to validate_presence_of(:path) }
-  end
-
   describe "#result" do
     subject(:result) { service.result }
 
-    context "when file with path does NOT exist" do
-      let(:path) { "non_existing_path" }
+    context "when path is NOT valid" do
+      context "when path is nil" do
+        let(:path) { nil }
 
-      it "returns error with message" do
-        expect(result).to be_error.with_message("File with path `#{path}' does NOT exist")
+        it "returns failure with data" do
+          expect(result).to be_failure.with_data(path: "Path is `nil'")
+        end
+      end
+
+      context "when path is empty" do
+        let(:path) { "" }
+
+        it "returns failure with data" do
+          expect(result).to be_failure.with_data(path: "Path is empty")
+        end
       end
     end
 
-    context "when file with path exists" do
-      ##
-      # NOTE: Tempfile uses its own let in order to prevent its premature garbage collection.
-      #
-      let(:tempfile) { Tempfile.new }
-      let(:path) { tempfile.path }
+    context "when path is valid" do
+      context "when file with path does NOT exist" do
+        let(:path) { "non_existing_path" }
 
-      it "returns success" do
+        it "returns error with message" do
+          expect(result).to be_error.with_message("File with path `#{path}' does NOT exist")
+        end
+      end
+
+      context "when file with path exists" do
         ##
-        # TODO: Matcher.
+        # NOTE: Tempfile uses its own let in order to prevent its premature garbage collection.
         #
-        expect(result).to be_success
+        let(:tempfile) { Tempfile.new }
+        let(:path) { tempfile.path }
+
+        it "returns success" do
+          ##
+          # TODO: Matcher.
+          #
+          expect(result).to be_success
+        end
       end
     end
   end
