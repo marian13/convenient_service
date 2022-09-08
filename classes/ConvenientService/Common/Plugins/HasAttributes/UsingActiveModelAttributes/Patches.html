@@ -28,7 +28,7 @@
     <meta property="og:description" content="TODO: Remove this patch when Rails updates ‘def initialize(*)’ to  ‘def initialize(*args, **kwargs, &amp;block)’. github.">
   
 
-    <meta name="keywords" content="ConvenientService::Common::Plugins::HasAttributes::UsingActiveModelAttributes::Patches class, new">
+    <meta name="keywords" content="ConvenientService::Common::Plugins::HasAttributes::UsingActiveModelAttributes::Patches class, ">
 </head>
 
 <body>
@@ -91,24 +91,6 @@
 
 
   
-    <!-- Method ref -->
-    <div class="sectiontitle">Methods</div>
-    <dl class="methods">
-      
-        <dt>N</dt>
-        <dd>
-          <ul>
-            
-              
-              <li>
-                <a href="#method-c-new">new</a>
-              </li>
-            
-          </ul>
-        </dd>
-      
-    </dl>
-  
 
   
 
@@ -128,14 +110,28 @@
           <tr valign='top'>
             <td class="attr-name">ActiveModelAttributes</td>
             <td>=</td>
-            <td class="attr-value"></td>
+            <td class="attr-value">::ActiveModel::Attributes.dup.tap do |mod|
+mod.module_eval do
+##
+# NOTE: Overrides `initialize&#39; since current Rails implementation can not accept kwargs.
+#
+# TODO: Open a PR to Rails.
+#
+def initialize(*args, **kwargs, &amp;block)
+##
+# IMPORTANT: Should be kept in sync with:
+# https://github.com/rails/rails/blob/3872bc0e54d32e8bf3a6299b0bfe173d94b072fc/activemodel/lib/active_model/attributes.rb#L78
+#
+@attributes = self.class._default_attributes.deep_dup
+super
+end
+end
+end</td>
           </tr>
           
             <tr valign='top'>
               <td>&nbsp;</td>
-              <td colspan="2" class="attr-desc"><p>NOTE: Naming/ConstantName is disabled to allow dynamic module creation.</p>
-
-<p>rubocop:disable Naming/ConstantName</p></td>
+              <td colspan="2" class="attr-desc"><p>Copy of ‘ActiveModel::Attributes’. <a href="https://api.rubyonrails.org/classes/ActiveModel/Attributes/ClassMethods.html">api.rubyonrails.org/classes/ActiveModel/Attributes/ClassMethods.html</a></p></td>
             </tr>
           
         
@@ -148,59 +144,6 @@
 
     <!-- Methods -->
     
-      <h2 class="sectiontitle">Class Public methods</h2>
-      
-        <div class="method">
-          <h3 class="title method-title" id="method-c-new">
-            
-              <b>new</b>(*args, **kwargs, &amp;block)
-            
-            <a href="../../../../../../classes/ConvenientService/Common/Plugins/HasAttributes/UsingActiveModelAttributes/Patches.html#method-c-new" name="method-c-new" class="permalink">Link</a>
-          </h3>
-
-          
-            <div class="description">
-              <p>NOTE: Overrides ‘initialize’ since current Rails implementation can not accept kwargs.</p>
-
-<p>TODO: Open a PR to Rails.</p>
-            </div>
-          
-
-          
-
-          
-
-          
-            
-            <div class="sourcecode">
-              
-              <p class="source-link">
-                 Source: 
-
-                
-                  <a href="javascript:toggleSource('method-c-new_source')" id="l_method-c-new_source">show</a>
-                
-
-                
-
-                
-              </p>
-              <div id="method-c-new_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/convenient_service/common/plugins/has_attributes/using_active_model_attributes/patches/active_model_attributes.rb, line 29</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">kwargs</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
-  <span class="ruby-comment">##</span>
-  <span class="ruby-comment"># IMPORTANT: Should be kept in sync with:</span>
-  <span class="ruby-comment"># https://github.com/rails/rails/blob/3872bc0e54d32e8bf3a6299b0bfe173d94b072fc/activemodel/lib/active_model/attributes.rb#L78</span>
-  <span class="ruby-comment">#</span>
-  <span class="ruby-ivar">@attributes</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">_default_attributes</span>.<span class="ruby-identifier">deep_dup</span>
-  <span class="ruby-keyword">super</span>
-<span class="ruby-keyword">end</span></pre>
-              </div>
-            </div>
-            
-          </div>
-        
-      
     
     
   
