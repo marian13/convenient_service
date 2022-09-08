@@ -24,7 +24,7 @@
 
   
 
-    <meta name="keywords" content="ConvenientService::Examples::Standard::Gemfile::Services::AssertFileNotEmpty class, result">
+    <meta name="keywords" content="ConvenientService::Examples::Standard::Gemfile::Services::AssertFileNotEmpty class, new, result">
 </head>
 
 <body>
@@ -91,6 +91,18 @@
     <div class="sectiontitle">Methods</div>
     <dl class="methods">
       
+        <dt>N</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-new">new</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
         <dt>R</dt>
         <dd>
           <ul>
@@ -115,30 +127,6 @@
           
             <a href="../../../../Configs/Standard.html">
               ConvenientService::Configs::Standard
-            </a>
-          
-        </li>
-      
-        <li>
-          
-            <a href="../../../../Configs/AssignsAttributesInConstructor/UsingActiveModelAttributeAssignment.html">
-              ConvenientService::Configs::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment
-            </a>
-          
-        </li>
-      
-        <li>
-          
-            <a href="../../../../Configs/HasAttributes/UsingActiveModelAttributes.html">
-              ConvenientService::Configs::HasAttributes::UsingActiveModelAttributes
-            </a>
-          
-        </li>
-      
-        <li>
-          
-            <a href="../../../../Configs/HasResultParamsValidations/UsingActiveModelValidations.html">
-              ConvenientService::Configs::HasResultParamsValidations::UsingActiveModelValidations
             </a>
           
         </li>
@@ -176,6 +164,52 @@
 
     <!-- Methods -->
     
+      <h2 class="sectiontitle">Class Public methods</h2>
+      
+        <div class="method">
+          <h3 class="title method-title" id="method-c-new">
+            
+              <b>new</b>(path:)
+            
+            <a href="../../../../../../classes/ConvenientService/Examples/Standard/Gemfile/Services/AssertFileNotEmpty.html#method-c-new" name="method-c-new" class="permalink">Link</a>
+          </h3>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                 Source: 
+
+                
+                  <a href="javascript:toggleSource('method-c-new_source')" id="l_method-c-new_source">show</a>
+                
+
+                
+
+                
+              </p>
+              <div id="method-c-new_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/convenient_service/examples/standard/gemfile/services/assert_file_not_empty.rb, line 13</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-value">path:</span>)
+  <span class="ruby-ivar">@path</span> = <span class="ruby-identifier">path</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+      
     
       <h2 class="sectiontitle">Instance Public methods</h2>
       
@@ -213,8 +247,11 @@
                 
               </p>
               <div id="method-i-result_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/convenient_service/examples/standard/gemfile/services/assert_file_not_empty.rb, line 19</span>
+                <pre><span class="ruby-comment"># File lib/convenient_service/examples/standard/gemfile/services/assert_file_not_empty.rb, line 17</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">result</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">failure</span>(<span class="ruby-value">data:</span> {<span class="ruby-value">path:</span> <span class="ruby-string">&quot;Path is `nil&#39;&quot;</span>}) <span class="ruby-keyword">if</span> <span class="ruby-identifier">path</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">failure</span>(<span class="ruby-value">data:</span> {<span class="ruby-value">path:</span> <span class="ruby-string">&quot;Path is empty&quot;</span>}) <span class="ruby-keyword">if</span> <span class="ruby-identifier">path</span>.<span class="ruby-identifier">empty?</span>
+
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">error</span>(<span class="ruby-value">message:</span> <span class="ruby-node">&quot;File with path `#{path}&#39; is empty&quot;</span>) <span class="ruby-keyword">if</span> <span class="ruby-operator">::</span><span class="ruby-constant">File</span>.<span class="ruby-identifier">zero?</span>(<span class="ruby-identifier">path</span>)
 
   <span class="ruby-identifier">success</span>
