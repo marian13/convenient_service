@@ -95,10 +95,10 @@ module ConvenientService
     ##
     # Loads examples.
     #
-    def require_examples
+    def require_standard_examples
       require "progressbar"
 
-      require_relative "convenient_service/examples"
+      require_relative "convenient_service/examples/standard/gemfile"
     end
   end
 end

@@ -14,4 +14,4 @@ ConvenientService.require_development_tools
 
 ConvenientService.require_rspec_extentions
 
-ConvenientService.require_examples
+ConvenientService.require_standard_examples
