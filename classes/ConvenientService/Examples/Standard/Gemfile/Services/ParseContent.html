@@ -24,7 +24,7 @@
 
   
 
-    <meta name="keywords" content="ConvenientService::Examples::Standard::Gemfile::Services::ParseContent class, result, parse_content">
+    <meta name="keywords" content="ConvenientService::Examples::Standard::Gemfile::Services::ParseContent class, new, result">
 </head>
 
 <body>
@@ -91,13 +91,13 @@
     <div class="sectiontitle">Methods</div>
     <dl class="methods">
       
-        <dt>P</dt>
+        <dt>N</dt>
         <dd>
           <ul>
             
               
               <li>
-                <a href="#method-i-parse_content">parse_content</a>
+                <a href="#method-c-new">new</a>
               </li>
             
           </ul>
@@ -127,30 +127,6 @@
           
             <a href="../../../../Configs/Standard.html">
               ConvenientService::Configs::Standard
-            </a>
-          
-        </li>
-      
-        <li>
-          
-            <a href="../../../../Configs/AssignsAttributesInConstructor/UsingActiveModelAttributeAssignment.html">
-              ConvenientService::Configs::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment
-            </a>
-          
-        </li>
-      
-        <li>
-          
-            <a href="../../../../Configs/HasAttributes/UsingActiveModelAttributes.html">
-              ConvenientService::Configs::HasAttributes::UsingActiveModelAttributes
-            </a>
-          
-        </li>
-      
-        <li>
-          
-            <a href="../../../../Configs/HasResultParamsValidations/UsingActiveModelValidations.html">
-              ConvenientService::Configs::HasResultParamsValidations::UsingActiveModelValidations
             </a>
           
         </li>
@@ -260,19 +236,32 @@
 
 
     
+      <!-- Section attributes -->
+      <h2 class="sectiontitle">Attributes</h2>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>content</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+      </table>
+    
 
 
     <!-- Methods -->
     
-    
-      <h2 class="sectiontitle">Instance Public methods</h2>
+      <h2 class="sectiontitle">Class Public methods</h2>
       
         <div class="method">
-          <h3 class="title method-title" id="method-i-parse_content">
+          <h3 class="title method-title" id="method-c-new">
             
-              <b>parse_content</b>()
+              <b>new</b>(content:)
             
-            <a href="../../../../../../classes/ConvenientService/Examples/Standard/Gemfile/Services/ParseContent.html#method-i-parse_content" name="method-i-parse_content" class="permalink">Link</a>
+            <a href="../../../../../../classes/ConvenientService/Examples/Standard/Gemfile/Services/ParseContent.html#method-c-new" name="method-c-new" class="permalink">Link</a>
           </h3>
 
           
@@ -293,50 +282,27 @@
                  Source: 
 
                 
-                  <a href="javascript:toggleSource('method-i-parse_content_source')" id="l_method-i-parse_content_source">show</a>
+                  <a href="javascript:toggleSource('method-c-new_source')" id="l_method-c-new_source">show</a>
                 
 
                 
 
                 
               </p>
-              <div id="method-i-parse_content_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/convenient_service/examples/standard/gemfile/services/parse_content.rb, line 58</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">parse_content</span>
-  <span class="ruby-identifier">hash</span> = <span class="ruby-operator">::</span><span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">h</span>, <span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-identifier">h</span>[<span class="ruby-identifier">k</span>] = [] }
-
-  <span class="ruby-operator">::</span><span class="ruby-constant">StringIO</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">content</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">io</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">envs</span> = []
-
-    <span class="ruby-keyword">until</span> <span class="ruby-identifier">io</span>.<span class="ruby-identifier">eof?</span>
-      <span class="ruby-identifier">line</span> = <span class="ruby-identifier">io</span>.<span class="ruby-identifier">readline</span>.<span class="ruby-identifier">rstrip</span>
-
-      <span class="ruby-keyword">case</span> <span class="ruby-identifier">line</span>
-      <span class="ruby-keyword">when</span> <span class="ruby-constant">RUBY_REGEX</span>
-        <span class="ruby-identifier">hash</span>[<span class="ruby-value">:ruby</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">line</span>
-      <span class="ruby-keyword">when</span> <span class="ruby-constant">SOURCE_REGEX</span>
-        <span class="ruby-identifier">hash</span>[<span class="ruby-value">:source</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">line</span>
-      <span class="ruby-keyword">when</span> <span class="ruby-constant">GIT_SOURCE_REGEX</span>
-        <span class="ruby-identifier">hash</span>[<span class="ruby-value">:git_source</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">line</span>
-      <span class="ruby-keyword">when</span> <span class="ruby-constant">GROUP_REGEX</span>
-        <span class="ruby-identifier">envs</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-constant">ENV_SCAN_REGEX</span>).<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:first</span>).<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:to_sym</span>)
-      <span class="ruby-keyword">when</span> <span class="ruby-constant">GEM_REGEX</span>
-        <span class="ruby-identifier">hash</span>[<span class="ruby-value">:gems</span>] <span class="ruby-operator">&lt;&lt;</span> {<span class="ruby-value">envs:</span> <span class="ruby-identifier">envs</span>, <span class="ruby-value">line:</span> <span class="ruby-identifier">line</span>.<span class="ruby-identifier">lstrip</span>}
-      <span class="ruby-keyword">when</span> <span class="ruby-constant">BLOCK_END_REGEX</span>
-        <span class="ruby-identifier">envs</span> = []
-      <span class="ruby-keyword">else</span>
-        <span class="ruby-identifier">hash</span>[<span class="ruby-value">:rest</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">line</span>
-      <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-identifier">hash</span>
+              <div id="method-c-new_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/convenient_service/examples/standard/gemfile/services/parse_content.rb, line 49</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-value">content:</span>)
+  <span class="ruby-ivar">@content</span> = <span class="ruby-identifier">content</span>
 <span class="ruby-keyword">end</span></pre>
               </div>
             </div>
             
           </div>
         
+      
+    
+      <h2 class="sectiontitle">Instance Public methods</h2>
+      
         <div class="method">
           <h3 class="title method-title" id="method-i-result">
             
@@ -371,7 +337,7 @@
                 
               </p>
               <div id="method-i-result_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/convenient_service/examples/standard/gemfile/services/parse_content.rb, line 54</span>
+                <pre><span class="ruby-comment"># File lib/convenient_service/examples/standard/gemfile/services/parse_content.rb, line 53</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">result</span>
   <span class="ruby-identifier">success</span>(<span class="ruby-value">data:</span> {<span class="ruby-value">parsed_content:</span> <span class="ruby-identifier">parse_content</span>})
 <span class="ruby-keyword">end</span></pre>

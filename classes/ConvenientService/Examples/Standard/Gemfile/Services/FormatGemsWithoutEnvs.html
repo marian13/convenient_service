@@ -24,7 +24,7 @@
 
   
 
-    <meta name="keywords" content="ConvenientService::Examples::Standard::Gemfile::Services::FormatGemsWithoutEnvs class, result">
+    <meta name="keywords" content="ConvenientService::Examples::Standard::Gemfile::Services::FormatGemsWithoutEnvs class, new, result">
 </head>
 
 <body>
@@ -91,6 +91,18 @@
     <div class="sectiontitle">Methods</div>
     <dl class="methods">
       
+        <dt>N</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-new">new</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
         <dt>R</dt>
         <dd>
           <ul>
@@ -115,22 +127,6 @@
           
             <a href="../../../../Configs/Standard.html">
               ConvenientService::Configs::Standard
-            </a>
-          
-        </li>
-      
-        <li>
-          
-            <a href="../../../../Configs/AssignsAttributesInConstructor/UsingDryInitializer.html">
-              ConvenientService::Configs::AssignsAttributesInConstructor::UsingDryInitializer
-            </a>
-          
-        </li>
-      
-        <li>
-          
-            <a href="../../../../Configs/HasResultParamsValidations/UsingDryValidation.html">
-              ConvenientService::Configs::HasResultParamsValidations::UsingDryValidation
             </a>
           
         </li>
@@ -180,10 +176,70 @@
 
 
     
+      <!-- Section attributes -->
+      <h2 class="sectiontitle">Attributes</h2>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>parsed_content</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+      </table>
+    
 
 
     <!-- Methods -->
     
+      <h2 class="sectiontitle">Class Public methods</h2>
+      
+        <div class="method">
+          <h3 class="title method-title" id="method-c-new">
+            
+              <b>new</b>(parsed_content:)
+            
+            <a href="../../../../../../classes/ConvenientService/Examples/Standard/Gemfile/Services/FormatGemsWithoutEnvs.html#method-c-new" name="method-c-new" class="permalink">Link</a>
+          </h3>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                 Source: 
+
+                
+                  <a href="javascript:toggleSource('method-c-new_source')" id="l_method-c-new_source">show</a>
+                
+
+                
+
+                
+              </p>
+              <div id="method-c-new_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/convenient_service/examples/standard/gemfile/services/format_gems_without_envs.rb, line 48</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-value">parsed_content:</span>)
+  <span class="ruby-ivar">@parsed_content</span> = <span class="ruby-identifier">parsed_content</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+      
     
       <h2 class="sectiontitle">Instance Public methods</h2>
       
@@ -221,7 +277,7 @@
                 
               </p>
               <div id="method-i-result_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/convenient_service/examples/standard/gemfile/services/format_gems_without_envs.rb, line 62</span>
+                <pre><span class="ruby-comment"># File lib/convenient_service/examples/standard/gemfile/services/format_gems_without_envs.rb, line 52</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">result</span>
   <span class="ruby-identifier">success</span>(<span class="ruby-value">formatted_content:</span> <span class="ruby-identifier">format_content</span>)
 <span class="ruby-keyword">end</span></pre>

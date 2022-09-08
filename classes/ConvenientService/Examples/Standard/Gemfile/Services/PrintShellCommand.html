@@ -24,7 +24,7 @@
 
   
 
-    <meta name="keywords" content="ConvenientService::Examples::Standard::Gemfile::Services::PrintShellCommand class, result">
+    <meta name="keywords" content="ConvenientService::Examples::Standard::Gemfile::Services::PrintShellCommand class, new, result">
 </head>
 
 <body>
@@ -91,6 +91,18 @@
     <div class="sectiontitle">Methods</div>
     <dl class="methods">
       
+        <dt>N</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-new">new</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
         <dt>R</dt>
         <dd>
           <ul>
@@ -119,30 +131,6 @@
           
         </li>
       
-        <li>
-          
-            <a href="../../../../Configs/AssignsAttributesInConstructor/UsingActiveModelAttributeAssignment.html">
-              ConvenientService::Configs::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment
-            </a>
-          
-        </li>
-      
-        <li>
-          
-            <a href="../../../../Configs/HasAttributes/UsingActiveModelAttributes.html">
-              ConvenientService::Configs::HasAttributes::UsingActiveModelAttributes
-            </a>
-          
-        </li>
-      
-        <li>
-          
-            <a href="../../../../Configs/HasResultParamsValidations/UsingActiveModelValidations.html">
-              ConvenientService::Configs::HasResultParamsValidations::UsingActiveModelValidations
-            </a>
-          
-        </li>
-      
     </ul>
   
 
@@ -158,10 +146,79 @@
 
 
     
+      <!-- Section attributes -->
+      <h2 class="sectiontitle">Attributes</h2>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>out</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>text</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+      </table>
+    
 
 
     <!-- Methods -->
     
+      <h2 class="sectiontitle">Class Public methods</h2>
+      
+        <div class="method">
+          <h3 class="title method-title" id="method-c-new">
+            
+              <b>new</b>(text:, out: $stdout)
+            
+            <a href="../../../../../../classes/ConvenientService/Examples/Standard/Gemfile/Services/PrintShellCommand.html#method-c-new" name="method-c-new" class="permalink">Link</a>
+          </h3>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                 Source: 
+
+                
+                  <a href="javascript:toggleSource('method-c-new_source')" id="l_method-c-new_source">show</a>
+                
+
+                
+
+                
+              </p>
+              <div id="method-c-new_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/convenient_service/examples/standard/gemfile/services/print_shell_command.rb, line 18</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-value">text:</span>, <span class="ruby-value">out:</span> <span class="ruby-identifier">$stdout</span>)
+  <span class="ruby-ivar">@text</span> = <span class="ruby-identifier">text</span>
+  <span class="ruby-ivar">@out</span> = <span class="ruby-identifier">out</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+      
     
       <h2 class="sectiontitle">Instance Public methods</h2>
       
@@ -199,8 +256,11 @@
                 
               </p>
               <div id="method-i-result_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/convenient_service/examples/standard/gemfile/services/print_shell_command.rb, line 25</span>
+                <pre><span class="ruby-comment"># File lib/convenient_service/examples/standard/gemfile/services/print_shell_command.rb, line 23</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">result</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">failure</span>(<span class="ruby-value">text:</span> <span class="ruby-string">&quot;Text is `nil&#39;&quot;</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">text</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">failure</span>(<span class="ruby-value">text:</span> <span class="ruby-string">&quot;Text is empty?&quot;</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">text</span>.<span class="ruby-identifier">empty?</span>
+
   <span class="ruby-identifier">out</span>.<span class="ruby-identifier">puts</span>
 
   <span class="ruby-identifier">out</span>.<span class="ruby-identifier">puts</span> <span class="ruby-operator">::</span><span class="ruby-constant">Paint</span>[<span class="ruby-node">&quot;$ #{text}&quot;</span>, <span class="ruby-value">:blue</span>, <span class="ruby-value">:bold</span>]
