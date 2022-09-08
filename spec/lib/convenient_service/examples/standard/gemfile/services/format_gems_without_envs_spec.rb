@@ -9,7 +9,6 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::FormatG
   include ConvenientService::RSpec::Matchers::Results
   include ConvenientService::RSpec::Matchers::HaveAttrReader
   include ConvenientService::RSpec::Matchers::IncludeModule
-  include Shoulda::Matchers::ActiveModel
 
   let(:service) { described_class.new(**default_options) }
 
@@ -20,109 +19,12 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::FormatG
     subject { described_class }
 
     it { is_expected.to include_module(ConvenientService::Configs::Standard) }
-    it { is_expected.to include_module(ConvenientService::Configs::AssignsAttributesInConstructor::UsingDryInitializer) }
-    it { is_expected.to include_module(ConvenientService::Configs::HasResultParamsValidations::UsingDryValidation) }
   end
 
   example_group "attributes" do
     subject { service }
 
     it { is_expected.to have_attr_reader(:parsed_content) }
-  end
-
-  example_group "validations" do
-    example_group "`parsed_content'" do
-      subject(:result) { service.result }
-
-      context "when `parsed_content' is NOT hash" do
-        let(:parsed_content) { [] }
-
-        it "returns failure" do
-          expect(result).to be_failure
-        end
-      end
-
-      context "when `parsed_content' is hash" do
-        context "when that hash is empty" do
-          let(:parsed_content) { {} }
-
-          it "does NOT return failure" do
-            expect(result).not_to be_failure
-          end
-        end
-
-        context "when `parsed_content' has `gems' key" do
-          context "when value for `gems' is NOT array" do
-            let(:parsed_content) { {gems: {}} }
-
-            it "returns failure" do
-              expect(result).to be_failure
-            end
-          end
-
-          context "when value for `gems' is array" do
-            context "when any item from that array is NOT hash" do
-              let(:parsed_content) { {gems: [42]} }
-
-              it "returns failure" do
-                expect(result).to be_failure
-              end
-            end
-
-            context "when all items from that array are hashes" do
-              context "when any hash from that array does NOT contain `envs' key" do
-                let(:parsed_content) do
-                  {
-                    gems: [
-                      {
-                        line: %(gem "simplecov", require: false)
-                      }
-                    ]
-                  }
-                end
-
-                it "returns failure" do
-                  expect(result).to be_failure
-                end
-              end
-
-              context "when any hash from that array does NOT contain `line' key" do
-                let(:parsed_content) do
-                  {
-                    gems: [
-                      {
-                        envs: [:test]
-                      }
-                    ]
-                  }
-                end
-
-                it "returns failure" do
-                  expect(result).to be_failure
-                end
-              end
-
-              context "when all hashes from that array contains both `envs` and `line' keys" do
-                let(:parsed_content) do
-                  {
-                    gems: [
-                      {
-                        envs: [:test],
-                        line: %(gem "simplecov", require: false)
-                      }
-                    ]
-                  }
-                end
-
-                it "does NOT return failure" do
-                  expect(result).not_to be_failure
-                end
-              end
-            end
-          end
-        end
-      end
-    end
   end
 
   describe "#result" do

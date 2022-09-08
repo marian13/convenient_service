@@ -13,16 +13,17 @@ module ConvenientService
           class PrintShellCommand
             include ConvenientService::Configs::Standard
 
-            include ConvenientService::Configs::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment
-            include ConvenientService::Configs::HasAttributes::UsingActiveModelAttributes
-            include ConvenientService::Configs::HasResultParamsValidations::UsingActiveModelValidations
+            attr_reader :text, :out
 
-            attribute :text, :string
-            attribute :out, default: $stdout
-
-            validates :text, presence: true
+            def initialize(text:, out: $stdout)
+              @text = text
+              @out = out
+            end
 
             def result
+              return failure(text: "Text is `nil'") if text.nil?
+              return failure(text: "Text is empty?") if text.empty?
+
               out.puts
 
               out.puts ::Paint["$ #{text}", :blue, :bold]

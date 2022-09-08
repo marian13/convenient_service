@@ -7,9 +7,8 @@ require "convenient_service"
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::RunShell do
   include ConvenientService::RSpec::Matchers::Results
-  include ConvenientService::RSpec::Matchers::HaveAttrAccessor
+  include ConvenientService::RSpec::Matchers::HaveAttrReader
   include ConvenientService::RSpec::Matchers::IncludeModule
-  include Shoulda::Matchers::ActiveModel
 
   let(:service) { described_class.new(**default_options) }
 
@@ -21,22 +20,13 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::RunShel
     subject { described_class }
 
     it { is_expected.to include_module(ConvenientService::Configs::Standard) }
-    it { is_expected.to include_module(ConvenientService::Configs::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment) }
-    it { is_expected.to include_module(ConvenientService::Configs::HasAttributes::UsingActiveModelAttributes) }
-    it { is_expected.to include_module(ConvenientService::Configs::HasResultParamsValidations::UsingActiveModelValidations) }
   end
 
   example_group "attributes" do
     subject { service }
 
-    it { is_expected.to have_attr_accessor(:command) }
-    it { is_expected.to have_attr_accessor(:debug) }
-  end
-
-  example_group "validations" do
-    subject { service }
-
-    it { is_expected.to validate_presence_of(:command) }
+    it { is_expected.to have_attr_reader(:command) }
+    it { is_expected.to have_attr_reader(:debug) }
   end
 
   describe "#result" do

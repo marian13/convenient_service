@@ -8,9 +8,8 @@ require "convenient_service"
 RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::ParseContent do
   include ConvenientService::RSpec::Helpers::StubService
   include ConvenientService::RSpec::Matchers::Results
-  include ConvenientService::RSpec::Matchers::HaveAttrAccessor
+  include ConvenientService::RSpec::Matchers::HaveAttrReader
   include ConvenientService::RSpec::Matchers::IncludeModule
-  include Shoulda::Matchers::ActiveModel
 
   let(:service) { described_class.new(**default_options) }
 
@@ -112,21 +111,12 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::ParseCo
     subject { described_class }
 
     it { is_expected.to include_module(ConvenientService::Configs::Standard) }
-    it { is_expected.to include_module(ConvenientService::Configs::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment) }
-    it { is_expected.to include_module(ConvenientService::Configs::HasAttributes::UsingActiveModelAttributes) }
-    it { is_expected.to include_module(ConvenientService::Configs::HasResultParamsValidations::UsingActiveModelValidations) }
   end
 
   example_group "attributes" do
     subject { service }
 
-    it { is_expected.to have_attr_accessor(:content) }
-  end
-
-  example_group "validations" do
-    subject { service }
-
-    it { is_expected.to validate_presence_of(:content) }
+    it { is_expected.to have_attr_reader(:content) }
   end
 
   describe "#result" do

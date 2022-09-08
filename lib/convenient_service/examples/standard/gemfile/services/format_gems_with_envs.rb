@@ -45,20 +45,10 @@ module ConvenientService
 
             include ConvenientService::Configs::Standard
 
-            include ConvenientService::Configs::AssignsAttributesInConstructor::UsingDryInitializer
-            include ConvenientService::Configs::HasResultParamsValidations::UsingDryValidation
+            attr_reader :parsed_content
 
-            option :parsed_content
-
-            contract do
-              schema do
-                required(:parsed_content).hash do
-                  optional(:gems).array(:hash) do
-                    required(:envs).array(type?: Symbol)
-                    required(:line).value(:string)
-                  end
-                end
-              end
+            def initialize(parsed_content:)
+              @parsed_content = parsed_content
             end
 
             def result

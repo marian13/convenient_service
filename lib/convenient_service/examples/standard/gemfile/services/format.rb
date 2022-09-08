@@ -14,12 +14,6 @@ module ConvenientService
           class Format
             include ConvenientService::Configs::Standard
 
-            include ConvenientService::Configs::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment
-            include ConvenientService::Configs::HasAttributes::UsingActiveModelAttributes
-            include ConvenientService::Configs::HasResultParamsValidations::UsingActiveModelValidations
-
-            attribute :path, :string
-
             step Services::ReadFileContent, in: :path, out: :content
             step Services::StripComments, in: :content, out: :content_without_comments
             step Services::ParseContent, in: {content: :content_without_comments}, out: :parsed_content
@@ -32,6 +26,10 @@ module ConvenientService
 
             after :step do |step_result|
               @progressbar.increment
+            end
+
+            def initialize(path:)
+              @path = path
             end
           end
         end

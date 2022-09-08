@@ -32,22 +32,11 @@ module ConvenientService
 
             include ConvenientService::Configs::Standard
 
-            include ConvenientService::Configs::AssignsAttributesInConstructor::UsingDryInitializer
-            include ConvenientService::Configs::HasResultParamsValidations::UsingDryValidation
+            attr_reader :parsed_content, :skip_frozen_string_literal
 
-            option :parsed_content
-            option :skip_frozen_string_literal, default: -> { false }
-
-            contract do
-              schema do
-                required(:parsed_content).hash do
-                  optional(:ruby).array(:string)
-                  optional(:source).array(:string)
-                  optional(:git_source).array(:string)
-                end
-
-                optional(:skip_frozen_string_literal).value(:bool?)
-              end
+            def initialize(parsed_content:, skip_frozen_string_literal: false)
+              @parsed_content = parsed_content
+              @skip_frozen_string_literal = skip_frozen_string_literal
             end
 
             def result

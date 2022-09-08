@@ -15,19 +15,17 @@ module ConvenientService
           class StripComments
             include ConvenientService::Configs::Standard
 
-            include ConvenientService::Configs::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment
-            include ConvenientService::Configs::HasAttributes::UsingActiveModelAttributes
-            include ConvenientService::Configs::HasResultParamsValidations::UsingActiveModelValidations
-
-            attr_accessor :content
-
-            validates :content, presence: true
+            attr_reader :content
 
             alias_method :content_with_comments, :content
 
             step Services::AssertNpmPackageAvailable, in: {name: -> { "strip-comments" }}
             step Services::RunShell, in: {command: -> { "node -e '#{js_script}' #{file_with_comments.path} #{file_without_comments.path}" }}
             step :result, in: :file_without_comments, out: :content_without_comments
+
+            def initialize(content:)
+              @content = content
+            end
 
             def result
               success(data: {content_without_comments: file_without_comments.read})

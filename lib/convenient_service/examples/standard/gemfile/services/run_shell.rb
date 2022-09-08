@@ -8,17 +8,15 @@ module ConvenientService
           class RunShell
             include ConvenientService::Configs::Standard
 
-            include ConvenientService::Configs::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment
-            include ConvenientService::Configs::HasAttributes::UsingActiveModelAttributes
-            include ConvenientService::Configs::HasResultParamsValidations::UsingActiveModelValidations
+            attr_reader :command, :debug
 
-            attribute :command, :string
-            attribute :debug, :boolean, default: false
-
-            validates :command, presence: true
+            def initialize(command:, debug: false)
+              @command = command
+              @debug = debug
+            end
 
             def result
-              Services::PrintShellCommand.result(text: command) if debug
+              Services::PrintShellCommand[text: command] if debug
 
               ##
               # NOTE: When the command exit code is 0, `system' return true, and false otherwise.

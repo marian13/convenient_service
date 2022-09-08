@@ -8,20 +8,28 @@ module ConvenientService
           class ReadFileContent
             include ConvenientService::Configs::Standard
 
-            include ConvenientService::Configs::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment
-            include ConvenientService::Configs::HasAttributes::UsingActiveModelAttributes
-            include ConvenientService::Configs::HasResultParamsValidations::UsingActiveModelValidations
+            attr_reader :path
 
-            attr_accessor :path
-
-            validates :path, presence: true
-
+            step :validate_path
             step Services::AssertFileExists, in: :path
             step Services::AssertFileNotEmpty, in: :path
             step :result, in: :path, out: :content
 
+            def initialize(path:)
+              @path = path
+            end
+
             def result
               success(data: {content: ::File.read(path)})
+            end
+
+            private
+
+            def validate_path
+              return failure(path: "Path is `nil'") if path.nil?
+              return failure(path: "Path is empty") if path.empty?
+
+              success
             end
           end
         end

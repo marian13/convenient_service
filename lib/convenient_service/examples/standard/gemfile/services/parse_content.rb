@@ -40,19 +40,27 @@ module ConvenientService
 
             include ConvenientService::Configs::Standard
 
-            include ConvenientService::Configs::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment
-            include ConvenientService::Configs::HasAttributes::UsingActiveModelAttributes
-            include ConvenientService::Configs::HasResultParamsValidations::UsingActiveModelValidations
+            attr_reader :content
 
-            attribute :content, :string
-
-            validates :content, presence: true
-
+            step :validate_content
             step Services::AssertValidRubySyntax, in: :content
             step :result, in: :content, out: :parsed_content
 
+            def initialize(content:)
+              @content = content
+            end
+
             def result
               success(data: {parsed_content: parse_content})
+            end
+
+            private
+
+            def validate_content
+              return failure(content: "Content is `nil'") if content.nil?
+              return failure(content: "Content is empty") if content.empty?
+
+              success
             end
 
             def parse_content
