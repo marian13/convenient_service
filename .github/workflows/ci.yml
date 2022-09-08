@@ -73,10 +73,6 @@ jobs:
         gemfile:
           - Gemfile
         ruby:
-          - 2.3
-          - 2.4
-          - 2.5
-          - 2.6
           - 2.7
           ##
           # NOTE: 3.0 is wrapped by quotes in order to avoid misparsing it as integer.
