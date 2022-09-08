@@ -11,14 +11,10 @@ module ConvenientService
           #
           module Patches
             ##
-            # NOTE: Naming/ConstantName is disabled to allow dynamic module creation.
+            # Copy of `ActiveModel::Attributes'.
+            # https://api.rubyonrails.org/classes/ActiveModel/Attributes/ClassMethods.html
             #
-            # rubocop:disable Naming/ConstantName
             ActiveModelAttributes =
-              ##
-              # Copy of `ActiveModel::Attributes'.
-              # https://api.rubyonrails.org/classes/ActiveModel/Attributes/ClassMethods.html
-              #
               ::ActiveModel::Attributes.dup.tap do |mod|
                 mod.module_eval do
                   ##
@@ -36,7 +32,6 @@ module ConvenientService
                   end
                 end
               end
-            # rubocop:enable Naming/ConstantName
           end
         end
       end

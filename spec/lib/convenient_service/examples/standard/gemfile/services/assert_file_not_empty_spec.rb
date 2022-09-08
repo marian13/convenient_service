@@ -4,11 +4,11 @@ require "spec_helper"
 
 require "convenient_service"
 
+# rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::AssertFileNotEmpty do
   include ConvenientService::RSpec::Matchers::Results
   include ConvenientService::RSpec::Matchers::HaveAttrAccessor
   include ConvenientService::RSpec::Matchers::IncludeModule
-  include Shoulda::Matchers::ActiveModel
 
   let(:service) { described_class.new(**default_options) }
 
@@ -82,3 +82,4 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::AssertF
     end
   end
 end
+# rubocop:enable RSpec/NestedGroups

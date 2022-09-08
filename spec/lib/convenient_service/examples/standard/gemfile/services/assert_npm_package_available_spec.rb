@@ -10,7 +10,6 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::AssertN
   include ConvenientService::RSpec::Matchers::Results
   include ConvenientService::RSpec::Matchers::HaveAttrReader
   include ConvenientService::RSpec::Matchers::IncludeModule
-  include Shoulda::Matchers::ActiveModel
 
   let(:service) { described_class.new(**default_options) }
 
