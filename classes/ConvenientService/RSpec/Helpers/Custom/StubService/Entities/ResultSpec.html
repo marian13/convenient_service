@@ -24,7 +24,7 @@
 
   
 
-    <meta name="keywords" content="ConvenientService::RSpec::Helpers::Custom::StubService::Entities::ResultSpec class, new, for, calculate_value">
+    <meta name="keywords" content="ConvenientService::RSpec::Helpers::Custom::StubService::Entities::ResultSpec class, new, for, with_data, with_message, with_code, and_data, and_message, and_code, calculate_value">
 </head>
 
 <body>
@@ -91,6 +91,28 @@
     <div class="sectiontitle">Methods</div>
     <dl class="methods">
       
+        <dt>A</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-and_code">and_code</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-and_data">and_data</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-and_message">and_message</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
         <dt>C</dt>
         <dd>
           <ul>
@@ -127,6 +149,28 @@
           </ul>
         </dd>
       
+        <dt>W</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-with_code">with_code</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-with_data">with_data</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-with_message">with_message</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
     </dl>
   
 
@@ -153,7 +197,7 @@
         <div class="method">
           <h3 class="title method-title" id="method-c-new">
             
-              <b>new</b>(status:, service_class: nil)
+              <b>new</b>(status:, service_class: nil, chain: {})
             
             <a href="../../../../../../../classes/ConvenientService/RSpec/Helpers/Custom/StubService/Entities/ResultSpec.html#method-c-new" name="method-c-new" class="permalink">Link</a>
           </h3>
@@ -185,9 +229,10 @@
               </p>
               <div id="method-c-new_source" class="dyn-source">
                 <pre><span class="ruby-comment"># File lib/convenient_service/rspec/helpers/custom/stub_service/entities/result_spec.rb, line 13</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-value">status:</span>, <span class="ruby-value">service_class:</span> <span class="ruby-keyword">nil</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-value">status:</span>, <span class="ruby-value">service_class:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">chain:</span> {})
   <span class="ruby-ivar">@status</span> = <span class="ruby-identifier">status</span>
   <span class="ruby-ivar">@service_class</span> = <span class="ruby-identifier">service_class</span>
+  <span class="ruby-ivar">@chain</span> = <span class="ruby-identifier">chain</span>
 <span class="ruby-keyword">end</span></pre>
               </div>
             </div>
@@ -198,6 +243,141 @@
     
       <h2 class="sectiontitle">Instance Public methods</h2>
       
+        <div class="method">
+          <h3 class="title method-title" id="method-i-and_code">
+            
+              <b>and_code</b>(code)
+            
+            <a href="../../../../../../../classes/ConvenientService/RSpec/Helpers/Custom/StubService/Entities/ResultSpec.html#method-i-and_code" name="method-i-and_code" class="permalink">Link</a>
+          </h3>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                 Source: 
+
+                
+                  <a href="javascript:toggleSource('method-i-and_code_source')" id="l_method-i-and_code_source">show</a>
+                
+
+                
+
+                
+              </p>
+              <div id="method-i-and_code_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/convenient_service/rspec/helpers/custom/stub_service/entities/result_spec.rb, line 53</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">and_code</span>(<span class="ruby-identifier">code</span>)
+  <span class="ruby-identifier">chain</span>[<span class="ruby-value">:code</span>] = <span class="ruby-identifier">code</span>
+
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <h3 class="title method-title" id="method-i-and_data">
+            
+              <b>and_data</b>(data)
+            
+            <a href="../../../../../../../classes/ConvenientService/RSpec/Helpers/Custom/StubService/Entities/ResultSpec.html#method-i-and_data" name="method-i-and_data" class="permalink">Link</a>
+          </h3>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                 Source: 
+
+                
+                  <a href="javascript:toggleSource('method-i-and_data_source')" id="l_method-i-and_data_source">show</a>
+                
+
+                
+
+                
+              </p>
+              <div id="method-i-and_data_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/convenient_service/rspec/helpers/custom/stub_service/entities/result_spec.rb, line 41</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">and_data</span>(<span class="ruby-identifier">data</span>)
+  <span class="ruby-identifier">chain</span>[<span class="ruby-value">:data</span>] = <span class="ruby-identifier">data</span>
+
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <h3 class="title method-title" id="method-i-and_message">
+            
+              <b>and_message</b>(message)
+            
+            <a href="../../../../../../../classes/ConvenientService/RSpec/Helpers/Custom/StubService/Entities/ResultSpec.html#method-i-and_message" name="method-i-and_message" class="permalink">Link</a>
+          </h3>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                 Source: 
+
+                
+                  <a href="javascript:toggleSource('method-i-and_message_source')" id="l_method-i-and_message_source">show</a>
+                
+
+                
+
+                
+              </p>
+              <div id="method-i-and_message_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/convenient_service/rspec/helpers/custom/stub_service/entities/result_spec.rb, line 47</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">and_message</span>(<span class="ruby-identifier">message</span>)
+  <span class="ruby-identifier">chain</span>[<span class="ruby-value">:message</span>] = <span class="ruby-identifier">message</span>
+
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
         <div class="method">
           <h3 class="title method-title" id="method-i-calculate_value">
             
@@ -232,7 +412,7 @@
                 
               </p>
               <div id="method-i-calculate_value_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/convenient_service/rspec/helpers/custom/stub_service/entities/result_spec.rb, line 22</span>
+                <pre><span class="ruby-comment"># File lib/convenient_service/rspec/helpers/custom/stub_service/entities/result_spec.rb, line 59</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">calculate_value</span>
   <span class="ruby-comment">##</span>
   <span class="ruby-comment"># TODO: Assert.</span>
@@ -278,9 +458,144 @@
                 
               </p>
               <div id="method-i-for_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/convenient_service/rspec/helpers/custom/stub_service/entities/result_spec.rb, line 18</span>
+                <pre><span class="ruby-comment"># File lib/convenient_service/rspec/helpers/custom/stub_service/entities/result_spec.rb, line 19</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">for</span>(<span class="ruby-identifier ruby-title">service_class</span>)
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">status:</span> <span class="ruby-identifier">status</span>, <span class="ruby-value">service_class:</span> <span class="ruby-identifier">service_class</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">status:</span> <span class="ruby-identifier">status</span>, <span class="ruby-value">service_class:</span> <span class="ruby-identifier">service_class</span>, <span class="ruby-value">chain:</span> <span class="ruby-identifier">chain</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <h3 class="title method-title" id="method-i-with_code">
+            
+              <b>with_code</b>(code)
+            
+            <a href="../../../../../../../classes/ConvenientService/RSpec/Helpers/Custom/StubService/Entities/ResultSpec.html#method-i-with_code" name="method-i-with_code" class="permalink">Link</a>
+          </h3>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                 Source: 
+
+                
+                  <a href="javascript:toggleSource('method-i-with_code_source')" id="l_method-i-with_code_source">show</a>
+                
+
+                
+
+                
+              </p>
+              <div id="method-i-with_code_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/convenient_service/rspec/helpers/custom/stub_service/entities/result_spec.rb, line 35</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">with_code</span>(<span class="ruby-identifier">code</span>)
+  <span class="ruby-identifier">chain</span>[<span class="ruby-value">:code</span>] = <span class="ruby-identifier">code</span>
+
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <h3 class="title method-title" id="method-i-with_data">
+            
+              <b>with_data</b>(data)
+            
+            <a href="../../../../../../../classes/ConvenientService/RSpec/Helpers/Custom/StubService/Entities/ResultSpec.html#method-i-with_data" name="method-i-with_data" class="permalink">Link</a>
+          </h3>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                 Source: 
+
+                
+                  <a href="javascript:toggleSource('method-i-with_data_source')" id="l_method-i-with_data_source">show</a>
+                
+
+                
+
+                
+              </p>
+              <div id="method-i-with_data_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/convenient_service/rspec/helpers/custom/stub_service/entities/result_spec.rb, line 23</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">with_data</span>(<span class="ruby-identifier">data</span>)
+  <span class="ruby-identifier">chain</span>[<span class="ruby-value">:data</span>] = <span class="ruby-identifier">data</span>
+
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <h3 class="title method-title" id="method-i-with_message">
+            
+              <b>with_message</b>(message)
+            
+            <a href="../../../../../../../classes/ConvenientService/RSpec/Helpers/Custom/StubService/Entities/ResultSpec.html#method-i-with_message" name="method-i-with_message" class="permalink">Link</a>
+          </h3>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                 Source: 
+
+                
+                  <a href="javascript:toggleSource('method-i-with_message_source')" id="l_method-i-with_message_source">show</a>
+                
+
+                
+
+                
+              </p>
+              <div id="method-i-with_message_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/convenient_service/rspec/helpers/custom/stub_service/entities/result_spec.rb, line 29</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">with_message</span>(<span class="ruby-identifier">message</span>)
+  <span class="ruby-identifier">chain</span>[<span class="ruby-value">:message</span>] = <span class="ruby-identifier">message</span>
+
+  <span class="ruby-keyword">self</span>
 <span class="ruby-keyword">end</span></pre>
               </div>
             </div>
