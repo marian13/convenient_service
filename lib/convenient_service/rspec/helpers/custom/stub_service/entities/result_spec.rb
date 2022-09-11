@@ -10,13 +10,50 @@ module ConvenientService
         class StubService < Support::Command
           module Entities
             class ResultSpec
-              def initialize(status:, service_class: nil)
+              def initialize(status:, service_class: nil, chain: {})
                 @status = status
                 @service_class = service_class
+                @chain = chain
               end
 
               def for(service_class)
-                self.class.new(status: status, service_class: service_class)
+                self.class.new(status: status, service_class: service_class, chain: chain)
+              end
+
+              def with_data(data)
+                chain[:data] = data
+
+                self
+              end
+
+              def with_message(message)
+                chain[:message] = message
+
+                self
+              end
+
+              def with_code(code)
+                chain[:code] = code
+
+                self
+              end
+
+              def and_data(data)
+                chain[:data] = data
+
+                self
+              end
+
+              def and_message(message)
+                chain[:message] = message
+
+                self
+              end
+
+              def and_code(code)
+                chain[:code] = code
+
+                self
               end
 
               def calculate_value
@@ -28,7 +65,7 @@ module ConvenientService
 
               private
 
-              attr_reader :status, :service_class
+              attr_reader :status, :service_class, :chain
 
               def kwargs
                 @kwargs ||= calculate_kwargs
@@ -56,10 +93,6 @@ module ConvenientService
 
               def used_code?
                 chain.key?(:code)
-              end
-
-              def chain
-                @chain ||= {}
               end
 
               def data

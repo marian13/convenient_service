@@ -76,13 +76,21 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::StripCo
         stub_service(ConvenientService::Examples::Standard::Gemfile::Services::AssertNpmPackageAvailable)
           .with_arguments(name: npm_package_name)
           .to return_success
+
+        ##
+        # NOTE: Stub for environments where Node.js is not available.
+        # TODO: Node.js independent examples.
+        #
+        stub_service(ConvenientService::Examples::Standard::Gemfile::Services::RunShell).to return_success
       end
 
       ##
+      # NOTE: Stub for environments where Node.js is not available.
+      # TODO: Integration test.
       # TODO: different content variations.
       #
       it "returns success with content without comments" do
-        expect(result).to be_success.with_data({content_without_comments: content_without_comments})
+        expect(result).to be_success.with_data({content_without_comments: ""})
       end
     end
   end

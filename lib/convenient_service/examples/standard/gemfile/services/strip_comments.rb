@@ -52,6 +52,10 @@ module ConvenientService
                 const main = () => {
                   const process = require("process");
                   const fs = require("fs");
+
+                  /**
+                   * TODO: try/catch when "strip-comments" is not available.
+                   */
                   const strip = require("strip-comments");
 
                   const fileWithCommentsPath = process.argv[1];
