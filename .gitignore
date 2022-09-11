@@ -17,5 +17,8 @@
 # Ignore `Gemfile.lock`
 Gemfile.lock
 
+# Ignore `Gemfile` amd `Gemfile.lock` from docker containers.
+Gemfile*
+
 # Ignore docs
 /docs/*
