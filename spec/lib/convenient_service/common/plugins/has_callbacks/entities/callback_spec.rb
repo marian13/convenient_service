@@ -78,6 +78,8 @@ RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Entities::Callb
     end
 
     describe "#call" do
+      include ConvenientService::RSpec::Matchers::DelegateTo
+
       it "calls block" do
         allow(block).to receive(:call).and_call_original
 
@@ -93,11 +95,10 @@ RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Entities::Callb
       it "passes all its args to block" do
         args = [:foo, :bar]
 
-        allow(block).to receive(:call).with(*args).and_call_original
-
-        callback.call(*args)
-
-        expect(block).to have_received(:call)
+        expect { callback.call(*args) }
+          .to delegate_to(block, :call)
+          .with_arguments(*args)
+          .and_return_its_value
       end
 
       it "passes all its kwargs to block" do
@@ -116,6 +117,8 @@ RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Entities::Callb
     end
 
     describe "#call_in_context" do
+      include ConvenientService::RSpec::Matchers::DelegateTo
+
       let(:context) { Object.new }
 
       it "calls instance exec of context" do
@@ -133,11 +136,10 @@ RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Entities::Callb
       it "passes all its args to instance exec of context" do
         args = [:foo, :bar]
 
-        allow(context).to receive(:instance_exec).with(*args).and_call_original
-
-        callback.call_in_context(context, *args)
-
-        expect(context).to have_received(:instance_exec)
+        expect { callback.call_in_context(context, *args) }
+          .to delegate_to(context, :instance_exec)
+          .with_arguments(*args, &block)
+          .and_return_its_value
       end
 
       it "passes all its kwargs to instance exec of context" do

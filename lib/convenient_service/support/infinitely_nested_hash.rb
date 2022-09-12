@@ -16,7 +16,7 @@ module ConvenientService
       private
 
       def create_hash
-        ::Hash.new.tap { |hash| hash.default_proc = proc { create_hash }}
+        {}.tap { |hash| hash.default_proc = proc { create_hash } }
       end
     end
   end
