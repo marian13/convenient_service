@@ -5,6 +5,7 @@ require "delegate"
 require "logger"
 require "ostruct"
 require "singleton"
+require "tempfile"
 
 require_relative "convenient_service/logger"
 require_relative "convenient_service/error"
