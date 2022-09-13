@@ -29,6 +29,7 @@ Gem::Specification.new do |spec|
 
   spec.require_paths = ["lib"]
 
+  spec.add_development_dependency "appraisal"
   spec.add_development_dependency "awesome_print"
   spec.add_development_dependency "bundler-audit"
   spec.add_development_dependency "byebug", "~> 10.0"
