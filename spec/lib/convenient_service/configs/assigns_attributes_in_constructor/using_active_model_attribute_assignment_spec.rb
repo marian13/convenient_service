@@ -4,6 +4,8 @@ require "spec_helper"
 
 require "convenient_service"
 
+return unless defined? ConvenientService::Configs::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment
+
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Configs::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment do
   example_group "modules" do

@@ -4,6 +4,8 @@ require "spec_helper"
 
 require "convenient_service"
 
+return unless defined? ConvenientService::Service::Plugins::HasResultParamsValidations::UsingDryValidation
+
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Service::Plugins::HasResultParamsValidations::UsingDryValidation::Middleware do
   example_group "inheritance" do

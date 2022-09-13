@@ -4,6 +4,8 @@ require "spec_helper"
 
 require "convenient_service"
 
+return unless defined? ConvenientService::Service::Plugins::HasResultParamsValidations::UsingDryValidation
+
 RSpec.describe ConvenientService::Service::Plugins::HasResultParamsValidations::UsingDryValidation::Concern do
   include ConvenientService::RSpec::Matchers::IncludeModule
   include ConvenientService::RSpec::Matchers::ExtendModule

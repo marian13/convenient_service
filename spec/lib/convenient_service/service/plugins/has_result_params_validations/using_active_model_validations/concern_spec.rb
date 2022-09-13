@@ -4,6 +4,8 @@ require "spec_helper"
 
 require "convenient_service"
 
+return unless defined? ConvenientService::Service::Plugins::HasResultParamsValidations::UsingActiveModelValidations
+
 RSpec.describe ConvenientService::Service::Plugins::HasResultParamsValidations::UsingActiveModelValidations::Concern do
   include ConvenientService::RSpec::Matchers::IncludeModule
 

@@ -4,8 +4,9 @@ require "spec_helper"
 
 require "convenient_service"
 
-# rubocop:disable RSpec/MultipleMemoizedHelpers
+return unless defined? ConvenientService::Common::Plugins::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment
 
+# rubocop:disable RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Common::Plugins::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment::Middleware do
   let(:concern) { ConvenientService::Common::Plugins::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment::Concern }
 
