@@ -1,3 +1,14 @@
+##
+# NOTE: A command to build image.
+#
+#   cd convenient_service
+#   docker build . -f docker/2.7/Dockerfile -t convenient_service:2.7
+#
+# NOTE: A command to run bash in container.
+#
+#   cd convenient_service
+#   docker run --rm -it -v $(pwd):/gem convenient_service:2.7 bash
+#
 FROM ruby:2.7
 
 RUN mkdir -p /gem
@@ -14,3 +25,5 @@ COPY . /gem
 ENV BUNDLE_GEMFILE=Gemfile.2.7
 
 RUN bundle install
+
+RUN bundle exec appraisal install
