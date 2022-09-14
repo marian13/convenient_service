@@ -98,7 +98,23 @@ jobs:
           bundler-cache: true
       - name: Run RSpec
         run: bundle exec rspec
-      - name: Collect coverage reports for Coveralls
+      ##
+      # NOTE: `lcov-result-merger' is written in JS.
+      #
+      - name: Set up Node.js 16.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+      ##
+      # NOTE: `lcov-result-merger' docs.
+      # https://github.com/mweibel/lcov-result-merger
+      #
+      # NOTE: `npx --yes' option.
+      # https://stackoverflow.com/questions/70742968/automatically-accept-installing-npx-package
+      #
+      - name: Merge coverage reports into single file
+        run: npx --yes lcov-result-merger ./coverage/**/lcov.info ./coverage/lcov.info
+      - name: Configure coverage reports for Coveralls
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.github_token }}
