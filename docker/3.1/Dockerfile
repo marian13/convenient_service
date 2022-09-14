@@ -2,6 +2,7 @@
 # NOTE: A command to build image.
 #
 #   cd convenient_service
+#   cp Gemfile Gemfile.3.1
 #   docker build . -f docker/3.1/Dockerfile -t convenient_service:3.1
 #
 # NOTE: A command to run bash in container.
