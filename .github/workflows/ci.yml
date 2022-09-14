@@ -133,21 +133,3 @@ jobs:
         with:
           github-token: ${{ secrets.github_token }}
           parallel-finished: true
-
-  bundle-audit:
-    runs-on: ubuntu-20.04
-    name: bundle-audit
-    steps:
-      - uses: actions/checkout@v2
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: 3.1
-          ##
-          # NOTE: Installs the latest compatible Bundler version, runs `bundle install' and caches installed gems.
-          # - https://github.com/ruby/setup-ruby#usage
-          # - https://github.com/ruby/setup-ruby#bundler
-          #
-          bundler-cache: true
-      - name: Check for vulnerable gem versions, insecure gem sources, etc...
-        run: bundle exec bundle-audit check --update
