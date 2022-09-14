@@ -57,7 +57,6 @@ module ConvenientService
     #
     def require_has_result_params_validations_using_active_model_validations
       require "active_model"
-      require "active_record"
 
       require_relative "convenient_service/configs/has_result_params_validations/using_active_model_validations"
       require_relative "convenient_service/service/plugins/has_result_params_validations/using_active_model_validations"
