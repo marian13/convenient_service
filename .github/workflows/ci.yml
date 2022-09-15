@@ -96,6 +96,9 @@ jobs:
           # - https://github.com/ruby/setup-ruby#bundler
           #
           bundler-cache: true
+      ##
+      # TODO: Rake tasks to abstract away all params.
+      #
       - name: Run RSpec
         run: bundle exec rspec --format progress
       - name: Install dependencies for appraisals
@@ -108,6 +111,8 @@ jobs:
         run: bundle exec appraisal rails_6.1 rspec --format progress --require rails_helper
       - name: Run RSpec with Rails 7.0
         run: bundle exec appraisal rails_7.0 rspec --format progress --require rails_helper
+      - name: Run RSpec with Dry
+        run: bundle exec appraisal dry rspec --format progress --require dry_helper
       ##
       # NOTE: `lcov-result-merger' is written in JS.
       #

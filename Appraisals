@@ -27,5 +27,5 @@ end
 appraise "dry" do
   gem "dry-initializer", "~> 3.0.0"
 
-  gem "dry-validation", "~> 1.0.0"
+  gem "dry-validation", "~> 1.5.0"
 end
