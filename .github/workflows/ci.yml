@@ -97,7 +97,17 @@ jobs:
           #
           bundler-cache: true
       - name: Run RSpec
-        run: bundle exec rspec
+        run: bundle exec rspec --format progress
+      - name: Install dependencies for appraisals
+        run: bundle exec appraisal install
+      - name: Run RSpec with Rails 5.2
+        run: bundle exec appraisal rails_5.2 rspec --format progress --require rails_helper
+      - name: Run RSpec with Rails 6.0
+        run: bundle exec appraisal rails_6.0 rspec --format progress --require rails_helper
+      - name: Run RSpec with Rails 6.1
+        run: bundle exec appraisal rails_6.1 rspec --format progress --require rails_helper
+      - name: Run RSpec with Rails 7.0
+        run: bundle exec appraisal rails_7.0 rspec --format progress --require rails_helper
       ##
       # NOTE: `lcov-result-merger' is written in JS.
       #
@@ -112,8 +122,17 @@ jobs:
       # NOTE: `npx --yes' option.
       # https://stackoverflow.com/questions/70742968/automatically-accept-installing-npx-package
       #
+      # NOTE: `lcov-result-merger' uses `vinyl-fs' for globs which in turn uses `node-glob'.
+      # - https://github.com/mweibel/lcov-result-merger/blob/v3.3.0/bin/lcov-result-merger.js#L38
+      # - https://github.com/gulpjs/vinyl-fs#srcglobs-options
+      # - https://github.com/isaacs/node-glob#glob-primer
+      #
+      # NOTE: Append `&& cat coverage/lcov.info' to debug.
+      #
+      # IMPORTANT: 'coverage/**/lcov.info' single quotes are mandatory.
+      #
       - name: Merge coverage reports into single file
-        run: npx --yes lcov-result-merger ./coverage/**/lcov.info ./coverage/lcov.info
+        run: npx --yes lcov-result-merger 'coverage/**/lcov.info' coverage/lcov.info
       - name: Configure coverage reports for Coveralls
         uses: coverallsapp/github-action@master
         with:

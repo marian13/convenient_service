@@ -44,14 +44,21 @@ SimpleCov::Formatter::LcovFormatter.config do |config|
   config.report_with_single_file = true
 
   ##
+  # NOTE: Replaces dots since they have specific meaning in globs. Check:
+  # - https://github.com/isaacs/node-glob#glob-primer
+  # - convenient_service/.github/workflows/ci.yml
+  #
+  escape = ->(name) { name.tr(".", "_") }
+
+  ##
   # NOTE: `ENV["APPRAISAL_NAME"]' is set in `spec_helper'.
   #
-  appraisal_name = ENV["APPRAISAL_NAME"].to_s.empty? ? "without_appraisal" : ENV["APPRAISAL_NAME"].to_s
+  appraisal_name = escape[ENV["APPRAISAL_NAME"].to_s.empty? ? "without_appraisal" : ENV["APPRAISAL_NAME"].to_s]
 
   ##
   # NOTE: `ENV["RUBY_VERSION"]' is set by Ruby.
   #
-  ruby_version = ENV["RUBY_VERSION"].to_s
+  ruby_version = escape[ENV["RUBY_VERSION"].to_s]
 
   config.single_report_path = File.join("coverage", ruby_version, appraisal_name, "lcov.info")
 end

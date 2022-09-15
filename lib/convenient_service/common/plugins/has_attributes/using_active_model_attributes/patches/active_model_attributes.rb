@@ -12,7 +12,12 @@ module ConvenientService
           module Patches
             ##
             # Copy of `ActiveModel::Attributes'.
-            # https://api.rubyonrails.org/classes/ActiveModel/Attributes/ClassMethods.html
+            # - https://api.rubyonrails.org/classes/ActiveModel/Attributes/ClassMethods.html
+            #
+            # - https://github.com/rails/rails/blob/v7.0.0/activemodel/lib/active_model/attributes.rb
+            # - https://github.com/rails/rails/blob/v6.1.0/activemodel/lib/active_model/attributes.rbhttps://github.com/rails/rails/blob/v6.1.0/activemodel/lib/active_model/attributes.rb
+            # - https://github.com/rails/rails/blob/v6.0.0/activemodel/lib/active_model/attributes.rb
+            # - https://github.com/rails/rails/blob/v5.2.0/activemodel/lib/active_model/attributes.rb
             #
             ActiveModelAttributes =
               ::ActiveModel::Attributes.dup.tap do |mod|
