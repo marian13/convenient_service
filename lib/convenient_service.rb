@@ -93,12 +93,21 @@ module ConvenientService
     end
 
     ##
-    # Loads examples.
+    # Loads standard config examples.
     #
     def require_standard_examples
       require "progressbar"
 
       require_relative "convenient_service/examples/standard/gemfile"
+    end
+
+    ##
+    # Loads rails config examples.
+    #
+    def require_rails_examples
+      require "progressbar"
+
+      require_relative "convenient_service/examples/rails/gemfile"
     end
   end
 end
