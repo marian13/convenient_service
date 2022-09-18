@@ -3,7 +3,7 @@
 appraise "rails_5.2" do
   gem "activemodel", "~> 5.2.0"
 
-  gem "shoulda-matchers", "~> 4.0.0"
+  gem "shoulda-matchers", "~> 5.0.0"
 end
 
 appraise "rails_6.0" do
