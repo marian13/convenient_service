@@ -9,16 +9,26 @@
 /tmp/
 
 # rspec failure tracking
-.rspec_status
+/.rspec_status
 
 # Hide `byebug` history
-.byebug_history
+/.byebug_history
 
 # Ignore `Gemfile.lock`
-Gemfile.lock
+/Gemfile.lock
 
-# Ignore `Gemfile` amd `Gemfile.lock` from docker containers.
-Gemfile*
+##
+# NOTE: Ignores `Gemfile' amd `Gemfile.lock' used in docker containers.
+#
+# NOTE: `Gemfile*' matches all files that start with Gemfile in any nesting.
+# NOTE: `/Gemfile*' matches all files that start with Gemfile only from root folder.
+#
+/Gemfile*
+
+##
+# NOTE: Ignores `.DS_Store' in any nesting.
+#
+.DS_Store
 
 # Ignore docs
 /docs/*
