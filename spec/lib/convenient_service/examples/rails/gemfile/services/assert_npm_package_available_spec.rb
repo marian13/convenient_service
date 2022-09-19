@@ -12,7 +12,10 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::AssertNpmP
   include ConvenientService::RSpec::Matchers::Results
   include ConvenientService::RSpec::Matchers::HaveAttrAccessor
   include ConvenientService::RSpec::Matchers::IncludeModule
-  include Shoulda::Matchers::ActiveModel
+  ##
+  # NOTE: Waits for `should-matchers' full support.
+  #
+  # include Shoulda::Matchers::ActiveModel
 
   let(:service) { described_class.new(**default_options) }
 
@@ -32,7 +35,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::AssertNpmP
   it { is_expected.to have_attr_accessor(:name) }
 
   ##
-  # NOTE: Waits for `should-matchers' support.
+  # NOTE: Waits for `should-matchers' full support.
   #
   # it { is_expected.to validate_presence_of(:name) }
 

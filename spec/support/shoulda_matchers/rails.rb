@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 ##
-# NOTE: Waits for `should-matchers' support.
+# NOTE: Waits for `should-matchers' full support.
 #
 # TODO: Contribute. Remove "shoulda-matchers" dependency on ActiveRecord.
 # - https://github.com/thoughtbot/shoulda-matchers/blob/v5.0.0/lib/shoulda/matchers/active_model/validate_presence_of_matcher.rb#L360
