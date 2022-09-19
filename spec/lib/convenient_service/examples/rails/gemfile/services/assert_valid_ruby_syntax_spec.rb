@@ -4,6 +4,8 @@ require "spec_helper"
 
 require "convenient_service"
 
+return unless defined? ConvenientService::Examples::Rails
+
 RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::AssertValidRubySyntax do
   include ConvenientService::RSpec::Matchers::Results
   include ConvenientService::RSpec::Matchers::HaveAttrReader
