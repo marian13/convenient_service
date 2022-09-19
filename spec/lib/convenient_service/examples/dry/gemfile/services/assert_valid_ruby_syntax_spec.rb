@@ -4,9 +4,9 @@ require "spec_helper"
 
 require "convenient_service"
 
-return unless defined? ConvenientService::Examples::Rails
+return unless defined? ConvenientService::Examples::Dry
 
-RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::AssertValidRubySyntax do
+RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::AssertValidRubySyntax do
   include ConvenientService::RSpec::Matchers::Results
   include ConvenientService::RSpec::Matchers::IncludeModule
 
@@ -18,7 +18,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::AssertVali
   example_group "modules" do
     subject { described_class }
 
-    it { is_expected.to include_module(ConvenientService::Examples::Rails::Gemfile::RailsServiceConfig) }
+    it { is_expected.to include_module(ConvenientService::Examples::Dry::Gemfile::DryServiceConfig) }
   end
 
   describe "#result" do

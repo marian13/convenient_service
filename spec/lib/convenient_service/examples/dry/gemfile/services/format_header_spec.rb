@@ -4,15 +4,12 @@ require "spec_helper"
 
 require "convenient_service"
 
-return unless defined? ConvenientService::Examples::Rails
+return unless defined? ConvenientService::Examples::Dry
 
-RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::FormatHeader do
+# rubocop:disable RSpec/NestedGroups
+RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::FormatHeader do
   include ConvenientService::RSpec::Matchers::Results
   include ConvenientService::RSpec::Matchers::IncludeModule
-  ##
-  # NOTE: Waits for `should-matchers' full support.
-  #
-  # include Shoulda::Matchers::ActiveModel
 
   let(:service) { described_class.new(**default_options) }
 
@@ -23,7 +20,135 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::FormatHead
   example_group "modules" do
     subject { described_class }
 
-    it { is_expected.to include_module(ConvenientService::Examples::Rails::Gemfile::RailsServiceConfig) }
+    it { is_expected.to include_module(ConvenientService::Examples::Dry::Gemfile::DryServiceConfig) }
+  end
+
+  example_group "validations" do
+    example_group "`parsed_content'" do
+      subject(:result) { service.result }
+
+      context "when `parsed_content' is NOT hash" do
+        let(:parsed_content) { [] }
+
+        it "returns failure" do
+          expect(result).to be_failure
+        end
+      end
+
+      context "when `parsed_content' is hash" do
+        context "when that hash is empty" do
+          let(:parsed_content) { {} }
+
+          it "does NOT return failure" do
+            expect(result).not_to be_failure
+          end
+        end
+
+        context "when `parsed_content' has `ruby' key" do
+          context "when value for `ruby' is NOT array" do
+            let(:parsed_content) { {ruby: {}} }
+
+            it "returns failure" do
+              expect(result).to be_failure
+            end
+          end
+
+          context "when value for `ruby' is array" do
+            context "when any item from that array is NOT string" do
+              let(:parsed_content) { {ruby: [42]} }
+
+              it "returns failure" do
+                expect(result).to be_failure
+              end
+            end
+
+            context "when all items from that array are strings" do
+              let(:parsed_content) { {ruby: [%(ruby "3.0.1")]} }
+
+              it "does NOT return failure" do
+                expect(result).not_to be_failure
+              end
+            end
+          end
+        end
+
+        context "when `parsed_content' has `source' key" do
+          context "when value for `source' is NOT array" do
+            let(:parsed_content) { {source: {}} }
+
+            it "returns failure" do
+              expect(result).to be_failure
+            end
+          end
+
+          context "when value for `source' is array" do
+            context "when any item from that array is NOT string" do
+              let(:parsed_content) { {source: [42]} }
+
+              it "returns failure" do
+                expect(result).to be_failure
+              end
+            end
+
+            context "when all items from that array are strings" do
+              let(:parsed_content) { {source: [%(source "https://rubygems.org")]} }
+
+              it "does NOT return failure" do
+                expect(result).not_to be_failure
+              end
+            end
+          end
+        end
+
+        context "when `parsed_content' has `git_source' key" do
+          context "when value for `git_source' is NOT array" do
+            let(:parsed_content) { {git_source: {}} }
+
+            it "returns failure" do
+              expect(result).to be_failure
+            end
+          end
+
+          context "when value for `git_source' is array" do
+            context "when any item from that array is NOT string" do
+              let(:parsed_content) { {git_source: [42]} }
+
+              it "returns failure" do
+                expect(result).to be_failure
+              end
+            end
+
+            context "when all items from that array are strings" do
+              let(:parsed_content) { {git_source: [%(git_source(:github) { |repo| "https://github.com/\#{repo}.git" })]} }
+
+              it "does NOT return failure" do
+                expect(result).not_to be_failure
+              end
+            end
+          end
+        end
+      end
+    end
+
+    example_group "`skip_frozen_string_literal'" do
+      subject(:result) { described_class.result(parsed_content: parsed_content, skip_frozen_string_literal: skip_frozen_string_literal) }
+
+      context "when `skip_frozen_string_literal' is NOT boolean" do
+        let(:skip_frozen_string_literal) { 42 }
+
+        it "returns failure" do
+          expect(result).to be_failure
+        end
+      end
+
+      context "when `skip_frozen_string_literal' is boolean" do
+        let(:skip_frozen_string_literal) { false }
+
+        it "does NOT return failure" do
+          expect(result).not_to be_failure
+        end
+      end
+    end
   end
 
   describe "#result" do
@@ -175,3 +300,4 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::FormatHead
     end
   end
 end
+# rubocop:enable RSpec/NestedGroups

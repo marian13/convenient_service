@@ -3,8 +3,6 @@
 ##
 # Usage:
 #
-#   require "convenient_service"
-#
 #   ConvenientService::Examples::Standard::Gemfile::Services::StripComments.result(content: "abc")
 #
 module ConvenientService

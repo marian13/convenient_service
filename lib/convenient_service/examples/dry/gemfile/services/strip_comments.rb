@@ -3,19 +3,23 @@
 ##
 # Usage:
 #
-#   ConvenientService::Examples::Rails::Gemfile::Services::StripComments.result(content: "abc")
+#   ConvenientService::Examples::Dry::Gemfile::Services::StripComments.result(content: "abc")
 #
 module ConvenientService
   module Examples
-    module Rails
+    module Dry
       module Gemfile
         module Services
           class StripComments
-            include RailsServiceConfig
+            include DryServiceConfig
 
-            attribute :content, :string
+            option :content
 
-            validates :content, presence: true
+            contract do
+              schema do
+                required(:content).value(:string)
+              end
+            end
 
             alias_method :content_with_comments, :content
 
@@ -26,6 +30,8 @@ module ConvenientService
             def result
               success(data: {content_without_comments: file_without_comments.read})
             end
+
+            private
 
             ##
             # NOTE: When you have no time to do something well, delegate that task to someone who already works with it all the time.
@@ -46,10 +52,6 @@ module ConvenientService
                 const main = () => {
                   const process = require("process");
                   const fs = require("fs");
-
-                  /**
-                   * TODO: try/catch when "strip-comments" is not available.
-                   */
                   const strip = require("strip-comments");
 
                   const fileWithCommentsPath = process.argv[1];
