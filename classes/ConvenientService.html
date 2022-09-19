@@ -28,7 +28,7 @@
     <meta property="og:description" content="Base class for all ‘ConvenientService’ errors. Can be used as a catch-all solution, for example:  begin   any_service.result rescue ConvenientService::Error =&gt; error   puts error.">
   
 
-    <meta name="keywords" content="ConvenientService class, require_assigns_attributes_in_constructor_using_active_model_attribute_assignment, require_assigns_attributes_in_constructor_using_dry_initializer, require_has_attributes_using_active_model_attributes, require_has_result_params_validations_using_active_model_validations, require_has_result_params_validations_using_dry_validation, require_development_tools, require_rspec_extentions, require_standard_examples, logger">
+    <meta name="keywords" content="ConvenientService class, require_assigns_attributes_in_constructor_using_active_model_attribute_assignment, require_assigns_attributes_in_constructor_using_dry_initializer, require_has_attributes_using_active_model_attributes, require_has_result_params_validations_using_active_model_validations, require_has_result_params_validations_using_dry_validation, require_development_tools, require_rspec_extentions, require_standard_examples, require_rails_examples, logger">
 </head>
 
 <body>
@@ -184,6 +184,38 @@
             <li><a href="../files/lib/convenient_service/examples/dry/gemfile_rb.html">lib/convenient_service/examples/dry/gemfile.rb</a></li>
             
             <li><a href="../files/lib/convenient_service/examples/rails/gemfile_rb.html">lib/convenient_service/examples/rails/gemfile.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/examples/rails/gemfile/rails_service_config_rb.html">lib/convenient_service/examples/rails/gemfile/rails_service_config.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/examples/rails/gemfile/services/assert_file_exists_rb.html">lib/convenient_service/examples/rails/gemfile/services/assert_file_exists.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/examples/rails/gemfile/services/assert_file_not_empty_rb.html">lib/convenient_service/examples/rails/gemfile/services/assert_file_not_empty.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/examples/rails/gemfile/services/assert_node_available_rb.html">lib/convenient_service/examples/rails/gemfile/services/assert_node_available.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/examples/rails/gemfile/services/assert_npm_package_available_rb.html">lib/convenient_service/examples/rails/gemfile/services/assert_npm_package_available.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/examples/rails/gemfile/services/assert_valid_ruby_syntax_rb.html">lib/convenient_service/examples/rails/gemfile/services/assert_valid_ruby_syntax.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/examples/rails/gemfile/services/format_rb.html">lib/convenient_service/examples/rails/gemfile/services/format.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/examples/rails/gemfile/services/format_body_rb.html">lib/convenient_service/examples/rails/gemfile/services/format_body.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/examples/rails/gemfile/services/format_gems_with_envs_rb.html">lib/convenient_service/examples/rails/gemfile/services/format_gems_with_envs.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/examples/rails/gemfile/services/format_gems_without_envs_rb.html">lib/convenient_service/examples/rails/gemfile/services/format_gems_without_envs.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/examples/rails/gemfile/services/format_header_rb.html">lib/convenient_service/examples/rails/gemfile/services/format_header.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/examples/rails/gemfile/services/parse_content_rb.html">lib/convenient_service/examples/rails/gemfile/services/parse_content.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/examples/rails/gemfile/services/print_shell_command_rb.html">lib/convenient_service/examples/rails/gemfile/services/print_shell_command.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/examples/rails/gemfile/services/read_file_content_rb.html">lib/convenient_service/examples/rails/gemfile/services/read_file_content.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/examples/rails/gemfile/services/run_shell_rb.html">lib/convenient_service/examples/rails/gemfile/services/run_shell.rb</a></li>
+            
+            <li><a href="../files/lib/convenient_service/examples/rails/gemfile/services/strip_comments_rb.html">lib/convenient_service/examples/rails/gemfile/services/strip_comments.rb</a></li>
             
             <li><a href="../files/lib/convenient_service/examples/standard/gemfile_rb.html">lib/convenient_service/examples/standard/gemfile.rb</a></li>
             
@@ -585,6 +617,169 @@ end
 
 <p>Usage example:</p>
 
+<p>result = <a href="ConvenientService/Examples/Rails/Gemfile.html#method-c-format"><code>ConvenientService::Examples::Rails::Gemfile.format</code></a>(path: “Gemfile”) result = <a href="ConvenientService/Examples/Rails/Gemfile.html#method-c-format"><code>ConvenientService::Examples::Rails::Gemfile.format</code></a>(path: “spec/cli/gemfile/format/fixtures/Gemfile”)</p>
+
+<p>Usage example:</p>
+
+<pre><code>ConvenientService::Examples::Rails::Gemfile::Services::AssertNodeAvailable.result
+</code></pre>
+
+<p>Usage example:</p>
+
+<pre><code>ConvenientService::Examples::Rails::Gemfile::Services::AssertNpmPackageAvailable.result(name: &quot;lodash&quot;)
+</code></pre>
+
+<p>Usage example:</p>
+
+<p>result = ConvenientService::Examples::Rails::Gemfile::Services::Format.result(path: “Gemfile”) result = ConvenientService::Examples::Rails::Gemfile::Services::Format.result(path: “spec/cli/gemfile/format/fixtures/Gemfile”)</p>
+
+<p>Usage example:</p>
+
+<p>result = <a href="ConvenientService/Examples/Rails/Gemfile/Services/FormatBody.html#method-i-result"><code>ConvenientService::Examples::Rails::Gemfile::Services::FormatBody.result</code></a>(</p>
+
+<pre><code>parsed_content: {
+  gems: [
+    {
+      envs: [],
+      line: %(gem &quot;bootsnap&quot;, &quot;&gt;= 1.4.4&quot;, require: false)
+    },
+    {
+      envs: [],
+      line: %(gem &quot;pg&quot;)
+    },
+    {
+      envs: [:development],
+      line: %(gem &quot;listen&quot;, &quot;~&gt; 3.3&quot;)
+    },
+    {
+      envs: [:development],
+      line: %(gem &quot;web-console&quot;, &quot;&gt;= 4.1.0&quot;)
+    },
+    {
+      envs: [:development, :test],
+      line: %(gem &quot;rspec-rails&quot;)
+    },
+    {
+      envs: [:test],
+      line: %(gem &quot;simplecov&quot;, require: false)
+    },
+    {
+      envs: [],
+      line: %(gem &quot;tzinfo-data&quot;, platforms: [:mingw, :mswin, :x64_mingw, :jruby])
+    }
+  ]
+}
+</code></pre>
+
+<p>)</p>
+
+<p>NOTE: Check the corresponding spec file to see more examples.</p>
+
+<p>Usage example:</p>
+
+<p>result = <a href="ConvenientService/Examples/Rails/Gemfile/Services/FormatGemsWithEnvs.html#method-i-result"><code>ConvenientService::Examples::Rails::Gemfile::Services::FormatGemsWithEnvs.result</code></a>(</p>
+
+<pre><code>parsed_content: {
+  gems: [
+    {
+      envs: [:development],
+      line: %(gem &quot;listen&quot;, &quot;~&gt; 3.3&quot;)
+    },
+    {
+      envs: [:development],
+      line: %(gem &quot;web-console&quot;, &quot;&gt;= 4.1.0&quot;)
+    },
+    {
+      envs: [:development, :test],
+      line: %(gem &quot;rspec-rails&quot;)
+    },
+    {
+      envs: [:test],
+      line: %(gem &quot;simplecov&quot;, require: false)
+    }
+  ]
+}
+</code></pre>
+
+<p>)</p>
+
+<p>NOTE: Check the corresponding spec file to see more examples.</p>
+
+<p>Usage example:</p>
+
+<p>result = <a href="ConvenientService/Examples/Rails/Gemfile/Services/FormatGemsWithoutEnvs.html#method-i-result"><code>ConvenientService::Examples::Rails::Gemfile::Services::FormatGemsWithoutEnvs.result</code></a>(</p>
+
+<pre><code>parsed_content: {
+  gems: [
+    {
+      envs: [],
+      line: %(gem &quot;bootsnap&quot;, &quot;&gt;= 1.4.4&quot;, require: false)
+    },
+    {
+      envs: [],
+      line: %(gem &quot;pg&quot;)
+    },
+    {
+      envs: [],
+      line: %(gem &quot;rails&quot;, &quot;~&gt; 6.1.3&quot;, &quot;&gt;= 6.1.3.2&quot;)
+    },
+    {
+      envs: [],
+      line: %(gem &quot;webpacker&quot;, &quot;~&gt; 5.0&quot;)
+    },
+    {
+      envs: [],
+      line: %(gem &quot;tzinfo-data&quot;, platforms: [:mingw, :mswin, :x64_mingw, :jruby])
+    }
+  ]
+}
+</code></pre>
+
+<p>)</p>
+
+<p>NOTE: Check the corresponding spec file to see more examples.</p>
+
+<p>Usage example:</p>
+
+<p>result = <a href="ConvenientService/Examples/Rails/Gemfile/Services/FormatHeader.html#method-i-result"><code>ConvenientService::Examples::Rails::Gemfile::Services::FormatHeader.result</code></a>(</p>
+
+<pre><code>parsed_content: {
+  ruby: [
+    %(ruby &quot;3.0.1&quot;)
+  ],
+  source: [
+    %(source &quot;https://rubygems.org&quot;)
+  ],
+  git_source: [
+    %(git_source(:github) { |repo| &quot;https://github.com/\#{repo}.git&quot; })
+  ]
+},
+skip_frozen_string_literal: true
+</code></pre>
+
+<p>)</p>
+
+<p>NOTE: Check the corresponding spec file to see more examples.</p>
+
+<pre><code>  group :development, :test do
+    gem &quot;rspec-rails&quot;
+  end
+RUBY
+</code></pre>
+
+<p>)</p>
+
+<p>NOTE: Check the corresponding spec file to see more examples.</p>
+
+<p>Usage example:</p>
+
+<pre><code>ConvenientService::Examples::Rails::Gemfile::Services::PrintShellCommand.result(text: &quot;ls -a&quot;)
+</code></pre>
+
+<p><a href="ConvenientService/Examples/Rails/Gemfile/Services/StripComments.html#method-i-result"><code>ConvenientService::Examples::Rails::Gemfile::Services::StripComments.result</code></a>(content: “abc”)</p>
+
+<p>Usage example:</p>
+
 <p>result = <a href="ConvenientService/Examples/Standard/Gemfile.html#method-c-format"><code>ConvenientService::Examples::Standard::Gemfile.format</code></a>(path: “Gemfile”) result = <a href="ConvenientService/Examples/Standard/Gemfile.html#method-c-format"><code>ConvenientService::Examples::Standard::Gemfile.format</code></a>(path: “spec/cli/gemfile/format/fixtures/Gemfile”)</p>
 
 <p>Usage example:</p>
@@ -938,6 +1133,11 @@ ConvenientService::Utils::Object::ResolveType.call(Kernel)
               
               <li>
                 <a href="#method-c-require_has_result_params_validations_using_dry_validation">require_has_result_params_validations_using_dry_validation</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-c-require_rails_examples">require_rails_examples</a>,
               </li>
             
               
@@ -1313,6 +1513,51 @@ ConvenientService::Utils::Object::ResolveType.call(Kernel)
           </div>
         
         <div class="method">
+          <h3 class="title method-title" id="method-c-require_rails_examples">
+            
+              <b>require_rails_examples</b>()
+            
+            <a href="../classes/ConvenientService.html#method-c-require_rails_examples" name="method-c-require_rails_examples" class="permalink">Link</a>
+          </h3>
+
+          
+            <div class="description">
+              <p>Loads rails config examples.</p>
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                 Source: 
+
+                
+                  <a href="javascript:toggleSource('method-c-require_rails_examples_source')" id="l_method-c-require_rails_examples_source">show</a>
+                
+
+                
+
+                
+              </p>
+              <div id="method-c-require_rails_examples_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/convenient_service.rb, line 107</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">require_rails_examples</span>
+  <span class="ruby-identifier">require</span> <span class="ruby-string">&quot;progressbar&quot;</span>
+
+  <span class="ruby-identifier">require_relative</span> <span class="ruby-string">&quot;convenient_service/examples/rails/gemfile&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
           <h3 class="title method-title" id="method-c-require_rspec_extentions">
             
               <b>require_rspec_extentions</b>()
@@ -1369,7 +1614,7 @@ ConvenientService::Utils::Object::ResolveType.call(Kernel)
 
           
             <div class="description">
-              <p>Loads examples.</p>
+              <p>Loads standard config examples.</p>
             </div>
           
 
