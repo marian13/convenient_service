@@ -28,7 +28,11 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::AssertNpmP
   # https://stackoverflow.com/a/31686199/12201472
   #
   it { is_expected.to have_attr_accessor(:name) }
-  it { is_expected.to validate_presence_of(:name) }
+
+  ##
+  # NOTE: Waits for `should-matchers' support.
+  #
+  # it { is_expected.to validate_presence_of(:name) }
 
   describe "#result" do
     subject(:result) { service.result }

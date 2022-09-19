@@ -30,4 +30,8 @@ RSpec.configure do |config|
 end
 
 require_relative "support/convenient_service"
-require_relative "support/shoulda_matchers"
+
+##
+# NOTE: Waits for `should-matchers' support.
+#
+# require_relative "support/shoulda_matchers"

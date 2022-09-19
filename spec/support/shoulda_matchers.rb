@@ -1,3 +1,6 @@
 # frozen_string_literal: true
 
-require "shoulda-matchers"
+##
+# NOTE: Waits for `should-matchers' support.
+#
+# require "shoulda-matchers"

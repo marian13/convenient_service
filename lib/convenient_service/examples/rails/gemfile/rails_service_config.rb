@@ -14,7 +14,7 @@ module ConvenientService
           include Support::Concern
 
           included do
-            include Configs::Standard
+            include Configs::StandardUncommitted
 
             ##
             # NOTE: `AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment' plugin.
@@ -44,6 +44,8 @@ module ConvenientService
             middlewares for: :result do
               use Plugins::Service::HasResultParamsValidations::UsingActiveModelValidations::Middleware
             end
+
+            commit_config!
           end
         end
       end

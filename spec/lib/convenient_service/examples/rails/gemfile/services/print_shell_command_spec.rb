@@ -29,11 +29,14 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::PrintShell
     it { is_expected.to have_attr_accessor(:out) }
   end
 
-  example_group "validations" do
-    subject { service }
-
-    it { is_expected.to validate_presence_of(:text) }
-  end
+  ##
+  # NOTE: Waits for `should-matchers' support.
+  #
+  # example_group "validations" do
+  #   subject { service }
+  #
+  #   it { is_expected.to validate_presence_of(:text) }
+  # end
 
   describe "#result" do
     subject(:result) { service.result }
