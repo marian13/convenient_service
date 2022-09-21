@@ -30,3 +30,13 @@ ENV BUNDLE_GEMFILE=Gemfile.3.1
 RUN bundle install
 
 RUN bundle exec appraisal install
+
+##
+# NOTE: Makes `rk' (an alias for `bundle exec rake') available inside container.
+#
+COPY ./shell/commands/rk /bin/rk
+
+##
+# NOTE: Makes `rk' an executable.
+#
+RUN chmod +x /bin/rk
