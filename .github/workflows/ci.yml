@@ -104,15 +104,15 @@ jobs:
       - name: Install dependencies for appraisals
         run: bundle exec appraisal install
       - name: Run RSpec with Rails 5.2
-        run: bundle exec appraisal rails_5.2 rspec --format progress --require rails_helper
+        run: bundle exec rake rails_5.2:rspec
       - name: Run RSpec with Rails 6.0
-        run: bundle exec appraisal rails_6.0 rspec --format progress --require rails_helper
+        run: bundle exec rake rails_6.0:rspec
       - name: Run RSpec with Rails 6.1
-        run: bundle exec appraisal rails_6.1 rspec --format progress --require rails_helper
+        run: bundle exec rake rails_6.1:rspec
       - name: Run RSpec with Rails 7.0
-        run: bundle exec appraisal rails_7.0 rspec --format progress --require rails_helper
+        run: bundle exec rake rails_7.0:rspec
       - name: Run RSpec with Dry
-        run: bundle exec appraisal dry rspec --format progress --require dry_helper
+        run: bundle exec rake dry:rspec
       ##
       # NOTE: `lcov-result-merger' is written in JS.
       #
