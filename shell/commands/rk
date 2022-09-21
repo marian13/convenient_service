@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+##
+# `rk' is an "alias" for `bundle exec rake'.
+#
+
+##
+# NOTE: Forces the shell to exit immediately if any of its commands return a non-zero status.
+# https://www.gnu.org/software/bash/manual/bash.html#The-Set-Builtin
+#
+set -e
+
+##
+# NOTE: Prints empty line.
+#
+echo
+
+##
+# NOTE: Prints original command in bold blue color.
+#
+echo -e "$(tput bold)\e[34mbundle exec rake $@\e[0m$(tput sgr0)"
+
+##
+# NOTE: Actually executes the command.
+#
+# NOTE: `$@' forwards all arguments.
+# https://stackoverflow.com/a/3898681/12201472
+#
+bundle exec rake $@
