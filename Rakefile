@@ -18,8 +18,9 @@ def run(command)
 
   ##
   # NOTE: Prints original command in bold blue color.
+  # https://stackoverflow.com/a/69648792/12201472
   #
-  system %(echo "$(tput bold)\e[34m#{command}\e[0m$(tput sgr0)")
+  system %(echo "\033[1;34m#{command}\033[0m")
 
   ##
   # NOTE: Actually executes the command.
