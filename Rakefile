@@ -54,6 +54,6 @@ end
 
 namespace :dry do
   task :rspec do
-    run %(bundle exec appraisal dry rspec --format progress --require rails_helper)
+    run %(bundle exec appraisal dry rspec --format progress --require dry_helper)
   end
 end
