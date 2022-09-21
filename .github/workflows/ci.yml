@@ -62,7 +62,7 @@ jobs:
           #
           bundler-cache: true
       - name: Run Rubocop
-        run: bundle exec rubocop --config .rubocop.yml
+        run: bundle exec rake rubocop
 
   test:
     needs:
@@ -100,7 +100,7 @@ jobs:
       # TODO: Rake tasks to abstract away all params.
       #
       - name: Run RSpec
-        run: bundle exec rspec --format progress
+        run: bundle exec rake rspec
       - name: Install dependencies for appraisals
         run: bundle exec appraisal install
       - name: Run RSpec with Rails 5.2

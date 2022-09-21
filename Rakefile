@@ -1,11 +1,6 @@
 # frozen_string_literal: true
 
 require "bundler/gem_tasks"
-require "rspec/core/rake_task"
-
-RSpec::Core::RakeTask.new(:spec)
-
-task default: :spec
 
 ##
 # Prints a shell command and then executes it.
@@ -26,6 +21,16 @@ def run(command)
   # NOTE: Actually executes the command.
   #
   system command
+end
+
+task default: :rspec
+
+task :rspec do
+  run %(bundle exec rspec --format progress)
+end
+
+task :rubocop do
+  run %(bundle exec rubocop --config .rubocop.yml)
 end
 
 namespace :"rails_5.2" do
