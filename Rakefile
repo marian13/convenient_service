@@ -3,6 +3,10 @@
 require "bundler/gem_tasks"
 
 ##
+# IMPORTANT: All rake tasks listed in this file should be executed from the root folder.
+#
+
+##
 # Prints a shell command and then executes it.
 #
 def run(command)
@@ -23,7 +27,7 @@ def run(command)
   success = system command
 
   ##
-  # NOTE: Forces `rake' to exit immediately if any of its `run' commands return a non-zero status.
+  # NOTE: Forces rake to exit immediately if any of its `run' commands return a non-zero status.
   #
   exit(1) unless success
 end
@@ -99,6 +103,12 @@ namespace :dry do
 end
 
 namespace :docker do
+  task :build do
+    run %(docker build . -f docker/2.7/Dockerfile -t convenient_service:2.7)
+    run %(docker build . -f docker/3.0/Dockerfile -t convenient_service:3.0)
+    run %(docker build . -f docker/3.1/Dockerfile -t convenient_service:3.1)
+  end
+
   namespace :"ruby_2.7" do
     task :build do
       run %(docker build . -f docker/2.7/Dockerfile -t convenient_service:2.7)
@@ -108,9 +118,7 @@ namespace :docker do
       run %(docker run --rm -it -v $(pwd):/gem convenient_service:2.7 bash)
     end
   end
-end
 
-namespace :docker do
   namespace :"ruby_3.0" do
     task :build do
       run %(docker build . -f docker/3.0/Dockerfile -t convenient_service:3.0)
@@ -120,9 +128,7 @@ namespace :docker do
       run %(docker run --rm -it -v $(pwd):/gem convenient_service:3.0 bash)
     end
   end
-end
 
-namespace :docker do
   namespace :"ruby_3.1" do
     task :build do
       run %(docker build . -f docker/3.1/Dockerfile -t convenient_service:3.1)
