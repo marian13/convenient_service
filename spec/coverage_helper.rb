@@ -41,8 +41,6 @@ require "simplecov"
 require "simplecov-lcov"
 
 SimpleCov::Formatter::LcovFormatter.config do |config|
-  config.report_with_single_file = true
-
   ##
   # NOTE: Replaces dots since they have specific meaning in globs. Check:
   # - https://github.com/isaacs/node-glob#glob-primer
@@ -60,6 +58,14 @@ SimpleCov::Formatter::LcovFormatter.config do |config|
   #
   ruby_version = escape[ENV["RUBY_VERSION"].to_s]
 
+  ##
+  # https://github.com/fortissimo1997/simplecov-lcov#output-report-as-single-file
+  #
+  config.report_with_single_file = true
+
+  ##
+  # https://github.com/fortissimo1997/simplecov-lcov#output-report-as-single-file
+  #
   config.single_report_path = File.join("coverage", ruby_version, appraisal_name, "lcov.info")
 end
 
