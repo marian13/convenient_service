@@ -49,12 +49,12 @@ SimpleCov::Formatter::LcovFormatter.config do |config|
   escape = ->(name) { name.tr(".", "_") }
 
   ##
-  # NOTE: `ENV["APPRAISAL_NAME"]' is set in `spec_helper'.
+  # NOTE: `ENV["APPRAISAL_NAME"]' is set in `env.rb'.
   #
   appraisal_name = escape[ENV["APPRAISAL_NAME"].to_s.empty? ? "without_appraisal" : ENV["APPRAISAL_NAME"].to_s]
 
   ##
-  # NOTE: `ENV["RUBY_VERSION"]' is set by Ruby.
+  # NOTE: `ENV["RUBY_VERSION"]' is set in `env.rb'
   #
   ruby_version = escape[ENV["RUBY_VERSION"].to_s]
 
