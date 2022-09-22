@@ -39,7 +39,7 @@ jobs:
           bundler-cache: true
       - name: Generate docs
         working-directory: ./
-        run: bundle exec sdoc lib -T rails -o docs --github
+        run: bundle exec rake docs:generate
       - name: Deploy docs to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:

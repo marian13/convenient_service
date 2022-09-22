@@ -66,6 +66,16 @@ namespace :deps do
   end
 end
 
+namespace :docs do
+  task :generate do
+    run %(bundle exec sdoc lib -T rails -o docs --github)
+  end
+
+  task :open do
+    run %(open docs/index.html)
+  end
+end
+
 namespace :standard do
   task :rspec do
     run %(bundle exec rspec --format progress)
