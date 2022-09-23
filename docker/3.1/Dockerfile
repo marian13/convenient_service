@@ -40,3 +40,9 @@ COPY ./shell/commands/rk /bin/rk
 # NOTE: Makes `rk' an executable.
 #
 RUN chmod +x /bin/rk
+
+##
+# NOTE: Is used to check whether a command is executed inside a Docker container. See Rakefile for examples.
+# https://stackoverflow.com/a/65942222/12201472
+#
+ENV IN_DOCKER_CONTAINER=true
