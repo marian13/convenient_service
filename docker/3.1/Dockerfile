@@ -32,14 +32,10 @@ RUN bundle install
 RUN bundle exec appraisal install
 
 ##
-# NOTE: Makes `rk' (an alias for `bundle exec rake') available inside container.
+# NOTE: Installs `task'.
+# https://taskfile.dev/installation/#install-script
 #
-COPY ./shell/commands/rk /bin/rk
-
-##
-# NOTE: Makes `rk' an executable.
-#
-RUN chmod +x /bin/rk
+RUN sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d
 
 ##
 # NOTE: Is used to check whether a command is executed inside a Docker container. See Rakefile for examples.

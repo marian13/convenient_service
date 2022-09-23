@@ -37,9 +37,16 @@ jobs:
           # - https://github.com/ruby/setup-ruby#bundler
           #
           bundler-cache: true
+      ##
+      # NOTE: Installs Task (task runner).
+      # https://taskfile.dev/installation/#github-actions
+      # https://github.com/go-task/task
+      #
+      - name: Install Task (task runner)
+        uses: arduino/setup-task@v1
       - name: Generate docs
         working-directory: ./
-        run: bundle exec rake docs:generate
+        run: task docs:generate
       - name: Deploy docs to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:

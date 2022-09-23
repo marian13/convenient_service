@@ -1,0 +1,131 @@
+version: '3'
+
+##
+# IMPORTANT: All tasks listed in this file should be executed from the root folder.
+# https://taskfile.dev/usage/#task-directory
+#
+# NOTE: Examples of multiline strings in YAML.
+# https://yaml-multiline.info/
+#
+tasks:
+  default:
+    cmds:
+      - task: rspec
+
+  coverage:lcov:merge:
+    cmds:
+      - npx --yes lcov-result-merger 'coverage/**/lcov.info' coverage/lcov.info
+
+  coverage:open:
+    cmds:
+      - open coverage/index.html
+    preconditions:
+      - bash: '[ "${IN_DOCKER_CONTAINER}" == "true" ]'
+        msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
+
+  deps:install:
+    cmds:
+      - bundle install
+      - bundle exec appraisal install
+
+  docker:bash:ruby_2.7:
+    cmds:
+      - docker run --rm -it -v $(pwd):/gem convenient_service:2.7 bash
+    interactive: true
+    preconditions:
+      - bash: '[ "${IN_DOCKER_CONTAINER}" == "true" ]'
+        msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
+
+  docker:bash:ruby_3.0:
+    cmds:
+      - docker run --rm -it -v $(pwd):/gem convenient_service:3.0 bash
+    interactive: true
+    preconditions:
+      - bash: '[ "${IN_DOCKER_CONTAINER}" == "true" ]'
+        msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
+
+  docker:bash:ruby_3.1:
+    cmds:
+      - docker run --rm -it -v $(pwd):/gem convenient_service:3.1 bash
+    interactive: true
+    preconditions:
+      - bash: '[ "${IN_DOCKER_CONTAINER}" == "true" ]'
+        msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
+
+  docker:build:
+    cmds:
+      - task: docker:build:ruby_2.7
+      - task: docker:build:ruby_3.0
+      - task: docker:build:ruby_3.1
+    preconditions:
+      - bash: '[ "${IN_DOCKER_CONTAINER}" == "true" ]'
+        msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
+
+  docker:build:ruby_2.7:
+    cmds:
+      - docker build . -f docker/2.7/Dockerfile -t convenient_service:2.7
+    preconditions:
+      - bash: '[ "${IN_DOCKER_CONTAINER}" == "true" ]'
+        msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
+
+  docker:build:ruby_3.0:
+    cmds:
+      - docker build . -f docker/3.0/Dockerfile -t convenient_service:3.0
+    preconditions:
+      - bash: '[ "${IN_DOCKER_CONTAINER}" == "true" ]'
+        msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
+
+  docker:build:ruby_3.1:
+    cmds:
+      - docker build . -f docker/3.1/Dockerfile -t convenient_service:3.1
+    preconditions:
+      - bash: '[ "${IN_DOCKER_CONTAINER}" == "true" ]'
+        msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
+
+  docs:generate:
+    cmds:
+      - bundle exec sdoc lib -T rails -o docs --github
+
+  docs:open:
+    cmds:
+      - open docs/index.html
+    preconditions:
+      - bash: '[ "${IN_DOCKER_CONTAINER}" == "true" ]'
+        msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
+
+  rspec:
+    cmds:
+      - task: standard:rspec
+      - task: rails_5.2:rspec
+      - task: rails_6.0:rspec
+      - task: rails_6.1:rspec
+      - task: rails_7.0:rspec
+      - task: dry:rspec
+
+  rspec:dry:
+    cmds:
+      - bundle exec appraisal dry rspec --format progress --require dry_helper
+
+  rspec:rails_5.2:
+    cmds:
+      - bundle exec appraisal rails_5.2 rspec --format progress --require rails_helper
+
+  rspec:rails_6.0:
+    cmds:
+      - bundle exec appraisal rails_6.0 rspec --format progress --require rails_helper
+
+  rspec:rails_6.1:
+    cmds:
+      - bundle exec appraisal rails_6.1 rspec --format progress --require rails_helper
+
+  rspec:rails_7.0:
+    cmds:
+      - bundle exec appraisal rails_7.0 rspec --format progress --require rails_helper
+
+  rspec:standard:
+    cmds:
+      - bundle exec rspec --format progress
+
+  rubocop:
+    cmds:
+      - bundle exec rubocop --config .rubocop.yml

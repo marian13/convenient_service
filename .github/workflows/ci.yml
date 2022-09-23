@@ -61,8 +61,15 @@ jobs:
           # - https://github.com/ruby/setup-ruby#bundler
           #
           bundler-cache: true
+      ##
+      # NOTE: Installs Task (task runner).
+      # https://taskfile.dev/installation/#github-actions
+      # https://github.com/go-task/task
+      #
+      - name: Install Task (task runner)
+        uses: arduino/setup-task@v1
       - name: Run Rubocop
-        run: bundle exec rake rubocop
+        run: task rubocop
 
   test:
     needs:
@@ -97,22 +104,26 @@ jobs:
           #
           bundler-cache: true
       ##
-      # TODO: Rake tasks to abstract away all params.
+      # NOTE: Installs Task (task runner).
+      # https://taskfile.dev/installation/#github-actions
+      # https://github.com/go-task/task
       #
+      - name: Install Task (task runner)
+        uses: arduino/setup-task@v1
       - name: Run RSpec without appraisals
-        run: bundle exec rake standard:rspec
+        run: task rspec:standard
       - name: Install dependencies for appraisals
-        run: bundle exec rake deps:install
+        run: task deps:install
       - name: Run RSpec with Rails 5.2
-        run: bundle exec rake rails_5.2:rspec
+        run: task rspec:rails_5.2
       - name: Run RSpec with Rails 6.0
-        run: bundle exec rake rails_6.0:rspec
+        run: task rspec:rails_6.0
       - name: Run RSpec with Rails 6.1
-        run: bundle exec rake rails_6.1:rspec
+        run: task rspec:rails_6.1
       - name: Run RSpec with Rails 7.0
-        run: bundle exec rake rails_7.0:rspec
+        run: task rspec:rails_7.0
       - name: Run RSpec with Dry
-        run: bundle exec rake dry:rspec
+        run: task rspec:dry
       ##
       # NOTE: `lcov-result-merger' is written in JS.
       #
@@ -137,7 +148,7 @@ jobs:
       # IMPORTANT: 'coverage/**/lcov.info' single quotes are mandatory.
       #
       - name: Merge coverage reports into single file
-        run: bundle exec rake coverage:lcov:merge
+        run: task coverage:lcov:merge
       - name: Configure coverage reports for Coveralls
         uses: coverallsapp/github-action@master
         with:
