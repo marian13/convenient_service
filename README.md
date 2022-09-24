@@ -6,6 +6,7 @@
 
 <!-- badges:start -->
 [![Gem Version](https://badge.fury.io/rb/convenient_service.svg)](https://rubygems.org/gems/convenient_service) [![GitHub Actions CI](https://github.com/marian13/convenient_service/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/marian13/convenient_service/actions/workflows/ci.yml) [![Ruby Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://github.com/testdouble/standard) [![Coverage Status](https://coveralls.io/repos/github/marian13/convenient_service/badge.svg)](https://coveralls.io/github/marian13/convenient_service?branch=main) [![inline docs](http://inch-ci.org/github/marian13/convenient_service.svg?branch=main)](http://inch-ci.org/github/marian13/convenient_service)
+[![Convenient Service on stackoverflow](https://img.shields.io/badge/stackoverflow-community-orange.svg?logo=stackoverflow)](https://stackoverflow.com/tags/convenient-service)
 [![Patreon](https://img.shields.io/badge/patreon-donate-orange.svg)](https://www.patreon.com/user?u=31435716&fan_landing=true)
 [![License: MIT](https://img.shields.io/badge/license-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 <!-- badges:end -->
