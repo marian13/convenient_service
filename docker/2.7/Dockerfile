@@ -6,11 +6,13 @@
 #   cd convenient_service
 #   cp Gemfile Gemfile.2.7
 #   docker build . -f docker/2.7/Dockerfile -t convenient_service:2.7
+#   # or `task docker:build:ruby_2.7'
 #
 # NOTE: A command to run bash in container.
 #
 #   cd convenient_service
 #   docker run --rm -it -v $(pwd):/gem convenient_service:2.7 bash
+#   # or `task docker:bash:ruby_2.7'
 #
 FROM ruby:2.7
 
@@ -35,7 +37,9 @@ RUN bundle exec appraisal install
 # NOTE: Installs `task'.
 # https://taskfile.dev/installation/#install-script
 #
-RUN sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d
+# NOTE: `task' is installed into `~/bin`. That is why `-b /bin' is used. See `echo ${PATH}' to debug.
+#
+RUN sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b /bin
 
 ##
 # NOTE: Is used to check whether a command is executed inside a Docker container. See Rakefile for examples.
