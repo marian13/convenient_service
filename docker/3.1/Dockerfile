@@ -5,7 +5,6 @@
 #
 #   docker run --rm -i ghcr.io/hadolint/hadolint < docker/3.1/Dockerfile
 #
-#
 # NOTE: A command to build image.
 #
 #   cd convenient_service

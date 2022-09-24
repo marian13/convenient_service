@@ -14,6 +14,36 @@ tasks:
     cmds:
       - task: rspec
 
+  console:dry:
+    cmds:
+      - bundle exec appraisal dry bin/console
+    interactive: true
+
+  console:rails_5.2:
+    cmds:
+      - bundle exec appraisal rails_5.2 bin/console
+    interactive: true
+
+  console:rails_6.0:
+    cmds:
+      - bundle exec appraisal rails_6.0 bin/console
+    interactive: true
+
+  console:rails_6.1:
+    cmds:
+      - bundle exec appraisal rails_6.1 bin/console
+    interactive: true
+
+  console:rails_7.0:
+    cmds:
+      - bundle exec appraisal rails_7.0 bin/console
+    interactive: true
+
+  console:standard:
+    cmds:
+      - bundle exec appraisal standard bin/console
+    interactive: true
+
   coverage:lcov:merge:
     cmds:
       - npx --yes lcov-result-merger 'coverage/**/lcov.info' coverage/lcov.info
