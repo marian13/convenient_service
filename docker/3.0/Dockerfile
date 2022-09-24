@@ -1,5 +1,9 @@
 ##
-# TODO: Ruby with Node.js.
+# Ruby 3.0 with Node.js 16.x.
+#
+# NOTE: Linted by hadolint.
+#
+#   docker run --rm -i ghcr.io/hadolint/hadolint < docker/3.0/Dockerfile
 #
 # NOTE: A command to build image.
 #
@@ -14,7 +18,28 @@
 #   docker run --rm -it -v $(pwd):/gem convenient_service:3.0 bash
 #   # or `task docker:bash:ruby_3.0'
 #
-FROM ruby:3.0
+# NOTE: If there are no memory, performance, or cost constraints, prefer to use as standard Linux distribution as it is possible.
+# In a general case, you simply won't have enough time to resolve all the "quirks" of more specific distributions if you are an application developer.
+# That is why a `slim' version is used instead of `alpine'.
+# Also `slim' is more similar to Ubuntu used in CI.
+# - https://github.com/timbru31/docker-ruby-node/tree/master/3.0/16
+# - https://medium.com/swlh/alpine-slim-stretch-buster-jessie-bullseye-bookworm-what-are-the-differences-in-docker-62171ed4531d
+# - https://hub.docker.com/r/timbru31/ruby-node/tags
+#
+# NOTE: Gallium means Node.js 16.x
+# https://github.com/nodejs/Release
+#
+FROM timbru31/ruby-node:3.0-slim-gallium
+
+##
+# NOTE: `bundle install` dependencies.
+#
+RUN apt-get update -qq \
+  && apt-get install --no-install-recommends -y git \
+  && apt-get install --no-install-recommends -y make \
+  && apt-get install --no-install-recommends -y gcc \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p /gem
 

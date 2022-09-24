@@ -47,6 +47,12 @@ on:
 
 jobs:
   lint:
+    ##
+    # NOTE: If there are no memory, performance, or cost constraints, prefer to use as standard Linux distribution as it is possible.
+    # In a general case, you simply won't have enough time to resolve all the "quirks" of more specific distributions if you are an application developer.
+    # That is why the well-known Ubuntu is used.
+    # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#choosing-github-hosted-runners
+    #
     runs-on: ubuntu-20.04
     name: Lint
     steps:
@@ -74,6 +80,12 @@ jobs:
   test:
     needs:
       - lint
+    ##
+    # NOTE: If there are no memory, performance, or cost constraints, prefer to use as standard Linux distribution as it is possible.
+    # In a general case, you simply won't have enough time to resolve all the "quirks" of more specific distributions if you are an application developer.
+    # That is why the well-known Ubuntu is used.
+    # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#choosing-github-hosted-runners
+    #
     runs-on: ubuntu-20.04
     strategy:
       matrix:
@@ -160,6 +172,12 @@ jobs:
   coverage:
     needs:
       - test
+    ##
+    # NOTE: If there are no memory, performance, or cost constraints, prefer to use as standard Linux distribution as it is possible.
+    # In a general case, you simply won't have enough time to resolve all the "quirks" of more specific distributions if you are an application developer.
+    # That is why the well-known Ubuntu is used.
+    # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#choosing-github-hosted-runners
+    #
     runs-on: ubuntu-20.04
     name: Gather coverage
     steps:
