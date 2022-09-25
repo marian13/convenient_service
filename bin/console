@@ -4,6 +4,12 @@ require "bundler/setup"
 
 require "irb"
 
+require_relative "../env"
+
 require "convenient_service"
+
+require_relative "../spec/support/convenient_service"
+require_relative "../spec/support/convenient_service/rails" if ENV["APPRAISAL_NAME"] == "all" || ENV["APPRAISAL_NAME"].include?("rails")
+require_relative "../spec/support/convenient_service/dry" if ENV["APPRAISAL_NAME"] == "all" || ENV["APPRAISAL_NAME"].include?("dry")
 
 IRB.start(__FILE__)

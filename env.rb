@@ -8,6 +8,8 @@
 #
 # IMPORTANT: `APPRAISAL_NAME' env variable should be initialized as far as it is possible.
 #
+# IMPORTANT: ENV variables declared in this file should NOT be used inside the lib folder.
+#
 ENV["APPRAISAL_NAME"] ||= ENV["BUNDLE_GEMFILE"].to_s.then(&File.method(:basename)).then { |name| name.end_with?(".gemfile") ? name.delete_suffix(".gemfile") : "" }
 
 ##
