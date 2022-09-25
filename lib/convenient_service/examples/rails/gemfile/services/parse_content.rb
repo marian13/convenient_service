@@ -38,7 +38,7 @@ module ConvenientService
             BLOCK_END_REGEX = /\A\s*end/
             ENV_SCAN_REGEX = /:(\w+)/
 
-            include RailsServiceConfig
+            include RailsService::Config
 
             attribute :content, :string
 

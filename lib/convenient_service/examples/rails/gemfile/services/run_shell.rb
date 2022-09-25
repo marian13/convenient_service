@@ -6,7 +6,7 @@ module ConvenientService
       module Gemfile
         module Services
           class RunShell
-            include RailsServiceConfig
+            include RailsService::Config
 
             attribute :command, :string
             attribute :debug, :boolean, default: false

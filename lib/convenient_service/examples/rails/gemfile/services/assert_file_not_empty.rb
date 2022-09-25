@@ -6,7 +6,7 @@ module ConvenientService
       module Gemfile
         module Services
           class AssertFileNotEmpty
-            include RailsServiceConfig
+            include RailsService::Config
 
             attribute :path, :string
 

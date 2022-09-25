@@ -6,7 +6,7 @@ module ConvenientService
       module Gemfile
         module Services
           class AssertFileExists
-            include RailsServiceConfig
+            include RailsService::Config
 
             attribute :path, :string
 

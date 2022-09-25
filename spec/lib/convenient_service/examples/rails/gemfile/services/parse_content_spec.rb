@@ -116,7 +116,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::ParseConte
   example_group "modules" do
     subject { described_class }
 
-    it { is_expected.to include_module(ConvenientService::Examples::Rails::Gemfile::RailsServiceConfig) }
+    it { is_expected.to include_module(ConvenientService::Examples::Rails::Gemfile::RailsService::Config) }
   end
 
   example_group "attributes" do

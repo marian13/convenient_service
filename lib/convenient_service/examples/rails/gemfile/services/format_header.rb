@@ -30,7 +30,7 @@ module ConvenientService
             EMPTY_LINE = ""
             ENTER = "\n"
 
-            include RailsServiceConfig
+            include RailsService::Config
 
             ##
             # NOTE: `attribute' has no `hash' type.

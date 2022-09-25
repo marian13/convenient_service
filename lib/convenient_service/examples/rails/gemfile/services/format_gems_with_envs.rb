@@ -43,7 +43,7 @@ module ConvenientService
             SPACE = " "
             TAB = "  "
 
-            include RailsServiceConfig
+            include RailsService::Config
 
             attr_accessor :parsed_content
 

@@ -11,7 +11,7 @@ module ConvenientService
       module Gemfile
         module Services
           class AssertNpmPackageAvailable
-            include RailsServiceConfig
+            include RailsService::Config
 
             attribute :name, :string
 

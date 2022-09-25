@@ -12,7 +12,7 @@ module ConvenientService
       module Gemfile
         module Services
           class Format
-            include RailsServiceConfig
+            include RailsService::Config
 
             attribute :path, :string
 

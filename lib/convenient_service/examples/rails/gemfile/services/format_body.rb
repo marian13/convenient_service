@@ -46,7 +46,7 @@ module ConvenientService
       module Gemfile
         module Services
           class FormatBody
-            include RailsServiceConfig
+            include RailsService::Config
 
             attr_accessor :parsed_content
 

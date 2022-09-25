@@ -6,7 +6,7 @@ module ConvenientService
       module Gemfile
         module Services
           class ReadFileContent
-            include RailsServiceConfig
+            include RailsService::Config
 
             attribute :path, :string
 

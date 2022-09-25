@@ -6,7 +6,7 @@ module ConvenientService
       module Gemfile
         module Services
           class AssertValidRubySyntax
-            include RailsServiceConfig
+            include RailsService::Config
 
             attribute :content, :string
 

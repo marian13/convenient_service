@@ -11,7 +11,7 @@ module ConvenientService
       module Gemfile
         module Services
           class PrintShellCommand
-            include RailsServiceConfig
+            include RailsService::Config
 
             attribute :text, :string
             attribute :out, default: $stdout

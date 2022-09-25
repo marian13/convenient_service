@@ -41,7 +41,7 @@ module ConvenientService
             EMPTY_LINE = ""
             ENTER = "\n"
 
-            include RailsServiceConfig
+            include RailsService::Config
 
             attr_accessor :parsed_content
 

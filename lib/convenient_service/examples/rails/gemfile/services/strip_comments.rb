@@ -11,7 +11,7 @@ module ConvenientService
       module Gemfile
         module Services
           class StripComments
-            include RailsServiceConfig
+            include RailsService::Config
 
             attribute :content, :string
 
