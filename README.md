@@ -34,7 +34,8 @@ This library is under heavy development. Public API may be subject to change. Th
 
 <details open>
   <summary>
-    <h3 style="display: inline-block;">
+    <!-- NOTE: style does NOT work in GitHub -->
+    <h3 style="display: inline-block; margin-top: 0; margin-bottom: 0;">
       Standard
     </h3>
   </summary>
@@ -158,7 +159,8 @@ This library is under heavy development. Public API may be subject to change. Th
 
 <details>
   <summary>
-    <h3 style="display: inline-block;">
+    <!-- NOTE: style does NOT work in GitHub -->
+    <h3 style="display: inline-block; margin-top: 0; margin-bottom: 0;">
       Rails
     </h3>
   </summary>
@@ -303,7 +305,8 @@ This library is under heavy development. Public API may be subject to change. Th
 
 <details>
   <summary>
-    <h3 style="display: inline-block;">
+    <!-- NOTE: style does NOT work in GitHub -->
+    <h3 style="display: inline-block; margin-top: 0; margin-bottom: 0;">
       Dry
     </h3>
   </summary>
