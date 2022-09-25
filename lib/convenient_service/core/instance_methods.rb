@@ -3,10 +3,6 @@
 module ConvenientService
   module Core
     module InstanceMethods
-      def initialize(*args, **kwargs, &block)
-        # NOTE: Do nothing...
-      end
-
       def concerns(&block)
         self.class.concerns(&block)
       end
