@@ -10,7 +10,7 @@ module ConvenientService
   module Examples
     module Rails
       module Gemfile
-        module RailsService
+        class RailsService
           module Config
             def self.included(service_class)
               service_class.class_exec do

@@ -166,9 +166,16 @@ This library is under heavy development. Public API may be subject to change. Th
   ```ruby
   # frozen_string_literal: true
 
+  ##
+  # NOTE: Minimal `active_model' version - `5.2.0'.
+  #
   require "active_model"
 
   require "convenient_service"
+
+  ConvenientService.require_assigns_attributes_in_constructor_using_active_model_attribute_assignment
+  ConvenientService.require_has_attributes_using_active_model_attributes
+  ConvenientService.require_has_result_params_validations_using_active_model_validations
   ```
 
   ```ruby
@@ -230,7 +237,7 @@ This library is under heavy development. Public API may be subject to change. Th
     validates :path, presence: true
 
     def result
-      return error("File with path `#{path}' does NOT exist") unless ::File.exist?(path)
+      return error(message: "File with path `#{path}' does NOT exist") unless ::File.exist?(path)
 
       success
     end
@@ -272,6 +279,154 @@ This library is under heavy development. Public API may be subject to change. Th
     attribute :path, :string
 
     validates :path, presence: true
+
+    step AssertFileExists, in: :path
+    step AssertFileNotEmpty, in: :path
+    step :result, in: :path, out: :content
+
+    def result
+      success(data: {content: ::File.read(path)})
+    end
+  end
+  ```
+
+  ```ruby
+  result = ReadFileContent.result(path: "Gemfile")
+
+  if result.success?
+    puts result.data[:content]
+  else
+    puts result.message
+  end
+  ```
+</details>
+
+<details>
+  <summary>
+    <h3 style="display: inline-block;">
+      Dry
+    </h3>
+  </summary>
+
+  ```ruby
+  # frozen_string_literal: true
+
+  ##
+  # NOTE: Minimal `dry-initializer' version - `3.0.0'.
+  #
+  require "dry-initializer"
+
+  ##
+  # NOTE: Minimal `dry-validation' version - `1.5.0'.
+  #
+  require "dry-validation"
+
+  require "convenient_service"
+
+  ConvenientService.require_assigns_attributes_in_constructor_using_dry_initializer
+  ConvenientService.require_has_result_params_validations_using_dry_validation
+  ```
+
+  ```ruby
+  class DryService
+    module Config
+      def self.included(service_class)
+        service_class.class_exec do
+          ##
+          # Replace to `include ConvenientService::Standard::UncommitedConfig' in Ruby 2.7.
+          #
+          include ConvenientService::Standard::Config
+
+          ##
+          # NOTE: `AssignsAttributesInConstructor::UsingDryInitializer' plugin.
+          #
+          concerns do
+            use ConvenientService::Plugins::Common::AssignsAttributesInConstructor::UsingDryInitializer::Concern
+          end
+
+          ##
+          # NOTE: `HasResultParamsValidations::UsingDryValidation' plugin.
+          #
+          concerns do
+            use ConvenientService::Plugins::Service::HasResultParamsValidations::UsingDryValidation::Concern
+          end
+
+          middlewares for: :result do
+            use ConvenientService::Plugins::Service::HasResultParamsValidations::UsingDryValidation::Middleware
+          end
+
+          # commit_config! # Uncomment in Ruby 2.7.
+        end
+      end
+    end
+  end
+  ```
+
+  ```ruby
+  # frozen_string_literal: true
+
+  class AssertFileExists
+    include DryService::Config
+
+    option :path
+
+    contract do
+      schema do
+        required(:path).value(:string)
+      end
+    end
+
+    def result
+      return error(message: "File with path `#{path}' does NOT exist") unless ::File.exist?(path)
+
+      success
+    end
+  end
+  ```
+
+  ```ruby
+  result = AssertFileExists.result(path: "Gemfile")
+  ```
+
+  ```ruby
+  # frozen_string_literal: true
+
+  class AssertFileNotEmpty
+    include DryService::Config
+
+    option :path
+
+    contract do
+      schema do
+        required(:path).value(:string)
+      end
+    end
+
+    def result
+      return error(message: "File with path `#{path}' is empty") if ::File.zero?(path)
+
+      success
+    end
+  end
+  ```
+
+  ```ruby
+  result = AssertFileNotEmpty.result(path: "Gemfile")
+  ```
+
+  ```ruby
+  # frozen_string_literal: true
+
+  class ReadFileContent
+    include DryService::Config
+
+    option :path
+
+    contract do
+      schema do
+        required(:path).value(:string)
+      end
+    end
 
     step AssertFileExists, in: :path
     step AssertFileNotEmpty, in: :path

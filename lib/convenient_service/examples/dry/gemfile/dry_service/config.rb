@@ -10,7 +10,7 @@ module ConvenientService
   module Examples
     module Dry
       module Gemfile
-        module DryService
+        class DryService
           module Config
             def self.included(service_class)
               service_class.class_exec do
