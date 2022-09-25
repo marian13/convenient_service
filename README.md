@@ -155,6 +155,144 @@ This library is under heavy development. Public API may be subject to change. Th
   end
   ```
 </details>
+
+<details>
+  <summary>
+    <h3 style="display: inline-block;">
+      Rails
+    </h3>
+  </summary>
+
+  ```ruby
+  # frozen_string_literal: true
+
+  require "active_model"
+
+  require "convenient_service"
+  ```
+
+  ```ruby
+  # frozen_string_literal: true
+
+  class RailsService
+    module Config
+      def self.included(service_class)
+        service_class.class_exec do
+          ##
+          # Replace to `include ConvenientService::Standard::UncommitedConfig' in Ruby 2.7.
+          #
+          include ConvenientService::Standard::Config
+
+          ##
+          # NOTE: `AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment' plugin.
+          #
+          concerns do
+            use ConvenientService::Plugins::Common::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment::Concern
+          end
+
+          middlewares for: :initialize do
+            use ConvenientService::Plugins::Common::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment::Middleware
+          end
+
+          ##
+          # NOTE: `HasAttributes::UsingActiveModelAttributes' plugin.
+          #
+          concerns do
+            use ConvenientService::Plugins::Common::HasAttributes::UsingActiveModelAttributes::Concern
+          end
+
+          ##
+          # NOTE: `HasResultParamsValidations::UsingActiveModelValidations' plugin.
+          #
+          concerns do
+            use ConvenientService::Plugins::Service::HasResultParamsValidations::UsingActiveModelValidations::Concern
+          end
+
+          middlewares for: :result do
+            use ConvenientService::Plugins::Service::HasResultParamsValidations::UsingActiveModelValidations::Middleware
+          end
+
+          # commit_config! # Uncomment in Ruby 2.7.
+        end
+      end
+    end
+  end
+  ```
+
+  ```ruby
+  # frozen_string_literal: true
+
+  class AssertFileExists
+    include RailsService::Config
+
+    attribute :path, :string
+
+    validates :path, presence: true
+
+    def result
+      return error("File with path `#{path}' does NOT exist") unless ::File.exist?(path)
+
+      success
+    end
+  end
+  ```
+
+  ```ruby
+  result = AssertFileExists.result(path: "Gemfile")
+  ```
+
+  ```ruby
+  # frozen_string_literal: true
+
+  class AssertFileNotEmpty
+    include RailsService::Config
+
+    attribute :path, :string
+
+    validates :path, presence: true
+
+    def result
+      return error(message: "File with path `#{path}' is empty") if ::File.zero?(path)
+
+      success
+    end
+  end
+  ```
+
+  ```ruby
+  result = AssertFileNotEmpty.result(path: "Gemfile")
+  ```
+
+  ```ruby
+  # frozen_string_literal: true
+
+  class ReadFileContent
+    include RailsService::Config
+
+    attribute :path, :string
+
+    validates :path, presence: true
+
+    step AssertFileExists, in: :path
+    step AssertFileNotEmpty, in: :path
+    step :result, in: :path, out: :content
+
+    def result
+      success(data: {content: ::File.read(path)})
+    end
+  end
+  ```
+
+  ```ruby
+  result = ReadFileContent.result(path: "Gemfile")
+
+  if result.success?
+    puts result.data[:content]
+  else
+    puts result.message
+  end
+  ```
+</details>
 <!-- usage:end -->
 
 ---
