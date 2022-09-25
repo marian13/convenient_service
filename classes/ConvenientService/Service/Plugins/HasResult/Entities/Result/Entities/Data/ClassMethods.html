@@ -159,7 +159,7 @@
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">cast</span>(<span class="ruby-identifier">other</span>)
   <span class="ruby-keyword">case</span> <span class="ruby-identifier">other</span>
   <span class="ruby-keyword">when</span> <span class="ruby-operator">::</span><span class="ruby-constant">Hash</span>
-    <span class="ruby-identifier">new</span>(<span class="ruby-value">value:</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">symbolize_keys</span>)
+    <span class="ruby-identifier">new</span>(<span class="ruby-value">value:</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">transform_keys</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:to_sym</span>))
   <span class="ruby-keyword">when</span> <span class="ruby-constant">Data</span>
     <span class="ruby-identifier">new</span>(<span class="ruby-value">value:</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">value</span>)
   <span class="ruby-keyword">end</span>
