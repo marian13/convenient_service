@@ -33,6 +33,12 @@ tasks:
       - bundle install
       - bundle exec appraisal install
 
+  deps:clean:
+    cmds:
+      - "bundle exec rake confirm \"This task removes Gemfile*.lock and gemfiles/**/*. Are you sure?\""
+      - rm Gemfile*.lock
+      - rm -rf gemfiles
+
   docker:bash:ruby_2.7:
     cmds:
       - docker run --rm -it -v $(pwd):/gem convenient_service:2.7 bash
