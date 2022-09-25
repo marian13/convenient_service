@@ -11,7 +11,7 @@ module ConvenientService
       module Gemfile
         module Services
           class AssertNodeAvailable
-            include DryServiceConfig
+            include DryService::Config
 
             ##
             # NOTE: `> /dev/null 2>&1' is used to hide output.

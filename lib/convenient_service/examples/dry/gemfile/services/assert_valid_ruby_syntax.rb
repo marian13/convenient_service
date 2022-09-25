@@ -6,7 +6,7 @@ module ConvenientService
       module Gemfile
         module Services
           class AssertValidRubySyntax
-            include DryServiceConfig
+            include DryService::Config
 
             option :content
 

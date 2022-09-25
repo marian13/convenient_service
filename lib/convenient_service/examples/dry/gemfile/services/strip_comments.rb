@@ -11,7 +11,7 @@ module ConvenientService
       module Gemfile
         module Services
           class StripComments
-            include DryServiceConfig
+            include DryService::Config
 
             option :content
 

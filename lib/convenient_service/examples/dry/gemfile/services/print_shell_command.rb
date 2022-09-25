@@ -11,7 +11,7 @@ module ConvenientService
       module Gemfile
         module Services
           class PrintShellCommand
-            include DryServiceConfig
+            include DryService::Config
 
             option :text
             option :out, default: -> { $stdout }

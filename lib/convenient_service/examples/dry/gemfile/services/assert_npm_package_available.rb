@@ -11,7 +11,7 @@ module ConvenientService
       module Gemfile
         module Services
           class AssertNpmPackageAvailable
-            include DryServiceConfig
+            include DryService::Config
 
             option :name
 

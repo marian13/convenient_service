@@ -6,7 +6,7 @@ module ConvenientService
       module Gemfile
         module Services
           class RunShell
-            include DryServiceConfig
+            include DryService::Config
 
             option :command
             option :debug, default: -> { false }

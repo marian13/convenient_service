@@ -6,7 +6,7 @@ module ConvenientService
       module Gemfile
         module Services
           class AssertFileExists
-            include DryServiceConfig
+            include DryService::Config
 
             option :path
 

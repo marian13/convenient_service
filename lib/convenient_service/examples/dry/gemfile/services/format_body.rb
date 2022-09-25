@@ -46,7 +46,7 @@ module ConvenientService
       module Gemfile
         module Services
           class FormatBody
-            include DryServiceConfig
+            include DryService::Config
 
             option :parsed_content
 

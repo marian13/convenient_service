@@ -41,7 +41,7 @@ module ConvenientService
             EMPTY_LINE = ""
             ENTER = "\n"
 
-            include DryServiceConfig
+            include DryService::Config
 
             option :parsed_content
 

@@ -19,7 +19,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::PrintShellCo
   example_group "modules" do
     subject { described_class }
 
-    it { is_expected.to include_module(ConvenientService::Examples::Dry::Gemfile::DryServiceConfig) }
+    it { is_expected.to include_module(ConvenientService::Examples::Dry::Gemfile::DryService::Config) }
   end
 
   describe "#result" do

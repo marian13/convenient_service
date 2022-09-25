@@ -30,7 +30,7 @@ module ConvenientService
             EMPTY_LINE = ""
             ENTER = "\n"
 
-            include DryServiceConfig
+            include DryService::Config
 
             option :parsed_content
             option :skip_frozen_string_literal, default: -> { false }

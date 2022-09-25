@@ -43,7 +43,7 @@ module ConvenientService
             SPACE = " "
             TAB = "  "
 
-            include DryServiceConfig
+            include DryService::Config
 
             option :parsed_content
 

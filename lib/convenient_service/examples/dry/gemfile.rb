@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "gemfile/dry_service_config"
+require_relative "gemfile/dry_service"
 require_relative "gemfile/services"
 
 ##

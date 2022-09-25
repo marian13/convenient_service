@@ -12,7 +12,7 @@ module ConvenientService
       module Gemfile
         module Services
           class Format
-            include DryServiceConfig
+            include DryService::Config
 
             option :path
 
