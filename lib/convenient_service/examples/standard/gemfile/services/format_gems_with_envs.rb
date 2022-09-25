@@ -43,7 +43,7 @@ module ConvenientService
             SPACE = " "
             TAB = "  "
 
-            include ConvenientService::Configs::Standard
+            include ConvenientService::Standard::Config
 
             attr_reader :parsed_content
 

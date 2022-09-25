@@ -38,7 +38,7 @@ module ConvenientService
             BLOCK_END_REGEX = /\A\s*end/
             ENV_SCAN_REGEX = /:(\w+)/
 
-            include ConvenientService::Configs::Standard
+            include ConvenientService::Standard::Config
 
             attr_reader :content
 

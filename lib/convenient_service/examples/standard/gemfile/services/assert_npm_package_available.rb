@@ -11,7 +11,7 @@ module ConvenientService
       module Gemfile
         module Services
           class AssertNpmPackageAvailable
-            include ConvenientService::Configs::Standard
+            include ConvenientService::Standard::Config
 
             attr_reader :name
 

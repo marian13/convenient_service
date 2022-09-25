@@ -11,7 +11,7 @@ module ConvenientService
       module Gemfile
         module Services
           class StripComments
-            include ConvenientService::Configs::Standard
+            include ConvenientService::Standard::Config
 
             attr_reader :content
 

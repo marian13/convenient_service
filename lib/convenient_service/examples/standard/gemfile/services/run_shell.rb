@@ -6,7 +6,7 @@ module ConvenientService
       module Gemfile
         module Services
           class RunShell
-            include ConvenientService::Configs::Standard
+            include ConvenientService::Standard::Config
 
             attr_reader :command, :debug
 

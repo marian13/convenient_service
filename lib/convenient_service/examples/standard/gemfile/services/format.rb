@@ -12,7 +12,7 @@ module ConvenientService
       module Gemfile
         module Services
           class Format
-            include ConvenientService::Configs::Standard
+            include ConvenientService::Standard::Config
 
             step Services::ReadFileContent, in: :path, out: :content
             step Services::StripComments, in: :content, out: :content_without_comments

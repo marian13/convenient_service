@@ -41,7 +41,7 @@ module ConvenientService
             EMPTY_LINE = ""
             ENTER = "\n"
 
-            include ConvenientService::Configs::Standard
+            include ConvenientService::Standard::Config
 
             attr_reader :parsed_content
 

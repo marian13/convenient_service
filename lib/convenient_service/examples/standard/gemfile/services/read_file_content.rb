@@ -6,7 +6,7 @@ module ConvenientService
       module Gemfile
         module Services
           class ReadFileContent
-            include ConvenientService::Configs::Standard
+            include ConvenientService::Standard::Config
 
             attr_reader :path
 

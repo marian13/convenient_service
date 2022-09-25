@@ -11,7 +11,7 @@ module ConvenientService
       module Gemfile
         module Services
           class PrintShellCommand
-            include ConvenientService::Configs::Standard
+            include ConvenientService::Standard::Config
 
             attr_reader :text, :out
 

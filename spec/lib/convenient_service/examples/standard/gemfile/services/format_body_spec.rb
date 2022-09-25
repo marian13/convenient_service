@@ -21,7 +21,7 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::FormatB
   example_group "modules" do
     subject { described_class }
 
-    it { is_expected.to include_module(ConvenientService::Configs::Standard) }
+    it { is_expected.to include_module(ConvenientService::Standard::Config) }
   end
 
   example_group "attributes" do

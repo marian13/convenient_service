@@ -11,7 +11,7 @@ module ConvenientService
       module Gemfile
         module Services
           class AssertNodeAvailable
-            include ConvenientService::Configs::Standard
+            include ConvenientService::Standard::Config
 
             ##
             # NOTE: `commit_config!' is used explicitly, since `step' method is NOT missed. It will be taken from `Turnip'.
