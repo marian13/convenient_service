@@ -100,42 +100,42 @@ tasks:
 
   playground:
     cmds:
-      - bundle exec bin/playground
+      - bundle exec rake playground
     interactive: true
 
   playground:all:
     cmds:
-      - bundle exec appraisal all bin/playground
+      - bundle exec appraisal all rake playground
     interactive: true
 
   playground:dry:
     cmds:
-      - bundle exec appraisal dry bin/playground
+      - bundle exec appraisal dry rake playground
     interactive: true
 
   playground:rails_5.2:
     cmds:
-      - bundle exec appraisal rails_5.2 bin/playground
+      - bundle exec appraisal rails_5.2 rake playground
     interactive: true
 
   playground:rails_6.0:
     cmds:
-      - bundle exec appraisal rails_6.0 bin/playground
+      - bundle exec appraisal rails_6.0 rake playground
     interactive: true
 
   playground:rails_6.1:
     cmds:
-      - bundle exec appraisal rails_6.1 bin/playground
+      - bundle exec appraisal rails_6.1 rake playground
     interactive: true
 
   playground:rails_7.0:
     cmds:
-      - bundle exec appraisal rails_7.0 bin/playground
+      - bundle exec appraisal rails_7.0 rake playground
     interactive: true
 
   playground:standard:
     cmds:
-      - bundle exec bin/playground
+      - bundle exec rake playground
     interactive: true
 
   rspec:
