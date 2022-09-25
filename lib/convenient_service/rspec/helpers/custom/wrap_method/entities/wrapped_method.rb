@@ -32,7 +32,7 @@ module ConvenientService
                       ##
                       # TODO: Enforce to always pass args, kwargs, block.
                       #
-                      entity.send(method, *env[:args], **env[:kwargs], &env[:block])
+                      entity.__send__(method, *env[:args], **env[:kwargs], &env[:block])
                         .tap { |value| @chain_value = value }
                         .tap { @chain_arguments = {args: env[:args], kwargs: env[:kwargs], block: env[:block]} }
                     end

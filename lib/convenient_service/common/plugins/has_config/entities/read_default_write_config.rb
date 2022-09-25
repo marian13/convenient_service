@@ -15,11 +15,11 @@ module ConvenientService
               if method.end_with?("=")
                 define_singleton_method(method) { |value| @hash.store(key.chomp("="), value) }
 
-                send(method, value)
+                __send__(method, value)
               else
                 define_singleton_method(method) { @hash.fetch(key) { @hash.store(key, self.class.new) } }
 
-                send(method)
+                __send__(method)
               end
             end
 

@@ -72,7 +72,7 @@ module ConvenientService
 
         ConvenientService.logger.debug { "[Core] Enabled concern middleware stack for `#{self}' | Triggered by `method_missing' | Method: `.#{method}' " }
 
-        send(method, *args, **kwargs, &block)
+        __send__(method, *args, **kwargs, &block)
       end
 
       ##

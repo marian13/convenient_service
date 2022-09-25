@@ -42,7 +42,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
     end
 
     describe "#calculate_value" do
-      it "delegates to `organizer.send'" do
+      it "delegates to `organizer.__send__'" do
         allow(organizer).to receive(:__send__).with(method.name.to_s).and_call_original
 
         caller.calculate_value(method)
@@ -50,7 +50,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
         expect(organizer).to have_received(:__send__)
       end
 
-      it "returns value of `organizer.send'" do
+      it "returns value of `organizer.__send__'" do
         expect(caller.calculate_value(method)).to eq(return_value)
       end
     end

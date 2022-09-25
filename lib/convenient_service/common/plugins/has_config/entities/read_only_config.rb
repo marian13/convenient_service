@@ -16,7 +16,7 @@ module ConvenientService
 
               define_singleton_method(method) { @hash[key] }
 
-              send(method)
+              __send__(method)
             end
 
             ##

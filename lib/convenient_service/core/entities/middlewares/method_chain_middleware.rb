@@ -25,7 +25,7 @@ module ConvenientService
             ##
             # TODO: Enforce to always pass args, kwargs, block.
             #
-            send(:next, *env[:args], **env[:kwargs], &env[:block])
+            __send__(:next, *env[:args], **env[:kwargs], &env[:block])
           end
 
           ##

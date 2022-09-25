@@ -13,7 +13,7 @@ module ConvenientService
             @object = object
 
             begin
-              object.send(method_name)
+              object.__send__(method_name)
 
               false
             rescue ConvenientService::Support::AbstractMethod::Errors::AbstractMethodNotOverridden
