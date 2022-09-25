@@ -284,7 +284,7 @@
   <span class="ruby-comment">##</span>
   <span class="ruby-comment"># TODO: Enforce to always pass args, kwargs, block.</span>
   <span class="ruby-comment">#</span>
-  <span class="ruby-identifier">send</span>(<span class="ruby-value">:next</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">env</span>[<span class="ruby-value">:args</span>], <span class="ruby-operator">**</span><span class="ruby-identifier">env</span>[<span class="ruby-value">:kwargs</span>], <span class="ruby-operator">&amp;</span><span class="ruby-identifier">env</span>[<span class="ruby-value">:block</span>])
+  <span class="ruby-identifier">__send__</span>(<span class="ruby-value">:next</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">env</span>[<span class="ruby-value">:args</span>], <span class="ruby-operator">**</span><span class="ruby-identifier">env</span>[<span class="ruby-value">:kwargs</span>], <span class="ruby-operator">&amp;</span><span class="ruby-identifier">env</span>[<span class="ruby-value">:block</span>])
 <span class="ruby-keyword">end</span></pre>
               </div>
             </div>
