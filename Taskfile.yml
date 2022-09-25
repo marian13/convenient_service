@@ -14,41 +14,6 @@ tasks:
     cmds:
       - task: rspec
 
-  console:all:
-    cmds:
-      - bundle exec appraisal all bin/console
-    interactive: true
-
-  console:dry:
-    cmds:
-      - bundle exec appraisal dry bin/console
-    interactive: true
-
-  console:rails_5.2:
-    cmds:
-      - bundle exec appraisal rails_5.2 bin/console
-    interactive: true
-
-  console:rails_6.0:
-    cmds:
-      - bundle exec appraisal rails_6.0 bin/console
-    interactive: true
-
-  console:rails_6.1:
-    cmds:
-      - bundle exec appraisal rails_6.1 bin/console
-    interactive: true
-
-  console:rails_7.0:
-    cmds:
-      - bundle exec appraisal rails_7.0 bin/console
-    interactive: true
-
-  console:standard:
-    cmds:
-      - bundle exec appraisal standard bin/console
-    interactive: true
-
   coverage:lcov:merge:
     cmds:
       - npx --yes lcov-result-merger 'coverage/**/lcov.info' coverage/lcov.info
@@ -129,6 +94,46 @@ tasks:
     preconditions:
       - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
         msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
+
+  playground:
+    cmds:
+      - bundle exec bin/playground
+    interactive: true
+
+  playground:all:
+    cmds:
+      - bundle exec appraisal all bin/playground
+    interactive: true
+
+  playground:dry:
+    cmds:
+      - bundle exec appraisal dry bin/playground
+    interactive: true
+
+  playground:rails_5.2:
+    cmds:
+      - bundle exec appraisal rails_5.2 bin/playground
+    interactive: true
+
+  playground:rails_6.0:
+    cmds:
+      - bundle exec appraisal rails_6.0 bin/playground
+    interactive: true
+
+  playground:rails_6.1:
+    cmds:
+      - bundle exec appraisal rails_6.1 bin/playground
+    interactive: true
+
+  playground:rails_7.0:
+    cmds:
+      - bundle exec appraisal rails_7.0 bin/playground
+    interactive: true
+
+  playground:standard:
+    cmds:
+      - bundle exec bin/playground
+    interactive: true
 
   rspec:
     cmds:
