@@ -27,14 +27,17 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
       it { is_expected.to have_attr_reader(:value) }
     end
 
-    example_group "delegators" do
-      include Shoulda::Matchers::Independent
-
-      subject { key }
-
-      it { is_expected.to delegate_method(:to_s).to(:value) }
-      it { is_expected.to delegate_method(:to_sym).to(:value) }
-    end
+    ##
+    # NOTE: Waits for `should-matchers' full support.
+    #
+    # example_group "delegators" do
+    #   include Shoulda::Matchers::Independent
+    #
+    #   subject { key }
+    #
+    #   it { is_expected.to delegate_method(:to_s).to(:value) }
+    #   it { is_expected.to delegate_method(:to_sym).to(:value) }
+    # end
 
     example_group "comparison" do
       describe "#==" do

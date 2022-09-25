@@ -25,13 +25,16 @@ RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Entities::Type 
     it { is_expected.to have_attr_reader(:value) }
   end
 
-  example_group "delegators" do
-    include Shoulda::Matchers::Independent
-
-    subject { described_class.new(value: :before) }
-
-    it { is_expected.to delegate_method(:hash).to(:value) }
-  end
+  ##
+  # NOTE: Waits for `should-matchers' full support.
+  #
+  # example_group "delegators" do
+  #   include Shoulda::Matchers::Independent
+  #
+  #   subject { described_class.new(value: :before) }
+  #
+  #   it { is_expected.to delegate_method(:hash).to(:value) }
+  # end
 
   example_group "instance_methods" do
     let(:type) { described_class.new(value: value) }

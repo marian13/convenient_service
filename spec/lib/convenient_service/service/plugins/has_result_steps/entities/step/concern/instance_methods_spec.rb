@@ -67,24 +67,27 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::St
     it { is_expected.to include_module(ConvenientService::Support::Delegate) }
   end
 
-  example_group "delegators" do
-    include Shoulda::Matchers::Independent
-
-    subject { step }
-
-    it { is_expected.to delegate_method(:success?).to(:result) }
-    it { is_expected.to delegate_method(:failure?).to(:result) }
-    it { is_expected.to delegate_method(:error?).to(:result) }
-    it { is_expected.to delegate_method(:not_success?).to(:result) }
-    it { is_expected.to delegate_method(:not_failure?).to(:result) }
-    it { is_expected.to delegate_method(:not_error?).to(:result) }
-
-    it { is_expected.to delegate_method(:service).to(:params) }
-    it { is_expected.to delegate_method(:outputs).to(:params) }
-    it { is_expected.to delegate_method(:index).to(:params) }
-    it { is_expected.to delegate_method(:container).to(:params) }
-    it { is_expected.to delegate_method(:organizer).to(:params) }
-  end
+  ##
+  # NOTE: Waits for `should-matchers' full support.
+  #
+  # example_group "delegators" do
+  #   include Shoulda::Matchers::Independent
+  #
+  #   subject { step }
+  #
+  #   it { is_expected.to delegate_method(:success?).to(:result) }
+  #   it { is_expected.to delegate_method(:failure?).to(:result) }
+  #   it { is_expected.to delegate_method(:error?).to(:result) }
+  #   it { is_expected.to delegate_method(:not_success?).to(:result) }
+  #   it { is_expected.to delegate_method(:not_failure?).to(:result) }
+  #   it { is_expected.to delegate_method(:not_error?).to(:result) }
+  #
+  #   it { is_expected.to delegate_method(:service).to(:params) }
+  #   it { is_expected.to delegate_method(:outputs).to(:params) }
+  #   it { is_expected.to delegate_method(:index).to(:params) }
+  #   it { is_expected.to delegate_method(:container).to(:params) }
+  #   it { is_expected.to delegate_method(:organizer).to(:params) }
+  # end
 
   example_group "instance methods" do
     include ConvenientService::RSpec::Matchers::DelegateTo

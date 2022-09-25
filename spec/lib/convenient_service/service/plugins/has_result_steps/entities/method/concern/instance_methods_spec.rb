@@ -63,13 +63,16 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
       it { is_expected.to have_attr_reader(:organizer) }
     end
 
-    example_group "delegators" do
-      include Shoulda::Matchers::Independent
-
-      subject { method_instance }
-
-      it { is_expected.to delegate_method(:to_s).to(:name) }
-    end
+    ##
+    # NOTE: Waits for `should-matchers' full support.
+    #
+    # example_group "delegators" do
+    #   include Shoulda::Matchers::Independent
+    #
+    #   subject { method_instance }
+    #
+    #   it { is_expected.to delegate_method(:to_s).to(:name) }
+    # end
 
     example_group "comparison" do
       describe "#==" do

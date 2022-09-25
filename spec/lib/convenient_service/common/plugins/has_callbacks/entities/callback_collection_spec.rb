@@ -22,15 +22,18 @@ RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Entities::Callb
     it { is_expected.to have_attr_reader(:callbacks) }
   end
 
-  example_group "delegators" do
-    include Shoulda::Matchers::Independent
-
-    subject { described_class.new }
-
-    it { is_expected.to delegate_method(:each).to(:callbacks) }
-    it { is_expected.to delegate_method(:include?).to(:callbacks) }
-    it { is_expected.to delegate_method(:<<).to(:callbacks) }
-  end
+  ##
+  # NOTE: Waits for `should-matchers' full support.
+  #
+  # example_group "delegators" do
+  #   include Shoulda::Matchers::Independent
+  #
+  #   subject { described_class.new }
+  #
+  #   it { is_expected.to delegate_method(:each).to(:callbacks) }
+  #   it { is_expected.to delegate_method(:include?).to(:callbacks) }
+  #   it { is_expected.to delegate_method(:<<).to(:callbacks) }
+  # end
 
   example_group "instance_methods" do
     subject(:callback_collection) { described_class.new }

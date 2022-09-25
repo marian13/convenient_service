@@ -12,7 +12,7 @@ module ConvenientService
                   def cast(other)
                     case other
                     when ::Hash
-                      new(value: other.symbolize_keys)
+                      new(value: other.transform_keys(&:to_sym))
                     when Data
                       new(value: other.value)
                     end
