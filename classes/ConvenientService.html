@@ -1600,7 +1600,7 @@ ConvenientService::Utils::Object::ResolveType.call(Kernel)
                 
               </p>
               <div id="method-c-require_dry_examples_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/convenient_service.rb, line 111</span>
+                <pre><span class="ruby-comment"># File lib/convenient_service.rb, line 115</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">require_dry_examples</span>
   <span class="ruby-identifier">require</span> <span class="ruby-string">&quot;progressbar&quot;</span>
 
@@ -1780,7 +1780,7 @@ ConvenientService::Utils::Object::ResolveType.call(Kernel)
                 
               </p>
               <div id="method-c-require_rails_examples_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/convenient_service.rb, line 102</span>
+                <pre><span class="ruby-comment"># File lib/convenient_service.rb, line 106</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">require_rails_examples</span>
   <span class="ruby-identifier">require</span> <span class="ruby-string">&quot;progressbar&quot;</span>
 
@@ -1829,6 +1829,10 @@ ConvenientService::Utils::Object::ResolveType.call(Kernel)
               <div id="method-c-require_rspec_extentions_source" class="dyn-source">
                 <pre><span class="ruby-comment"># File lib/convenient_service.rb, line 84</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">require_rspec_extentions</span>
+  <span class="ruby-identifier">require</span> <span class="ruby-string">&quot;rspec/expectations&quot;</span>
+  <span class="ruby-identifier">require</span> <span class="ruby-string">&quot;rspec/matchers&quot;</span>
+  <span class="ruby-identifier">require</span> <span class="ruby-string">&quot;rspec/mocks&quot;</span>
+
   <span class="ruby-identifier">require</span> <span class="ruby-string">&quot;method_source&quot;</span>
 
   <span class="ruby-identifier">require_relative</span> <span class="ruby-string">&quot;convenient_service/rspec&quot;</span>
@@ -1872,7 +1876,7 @@ ConvenientService::Utils::Object::ResolveType.call(Kernel)
                 
               </p>
               <div id="method-c-require_standard_examples_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/convenient_service.rb, line 93</span>
+                <pre><span class="ruby-comment"># File lib/convenient_service.rb, line 97</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">require_standard_examples</span>
   <span class="ruby-identifier">require</span> <span class="ruby-string">&quot;progressbar&quot;</span>
 
