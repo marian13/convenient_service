@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "commands/assert_middleware_stack_not_fixed"
+require_relative "commands/assert_middleware_stack_not_committed"
 require_relative "commands/enable_concern_middleware_stack"
 require_relative "commands/enable_method_middleware_stack"
 require_relative "commands/configure_middleware_stack"

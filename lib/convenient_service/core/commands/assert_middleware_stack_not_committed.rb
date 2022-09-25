@@ -3,7 +3,7 @@
 module ConvenientService
   module Core
     module Commands
-      class AssertConcernMiddlewareStackNotFixed < Support::Command
+      class AssertConcernMiddlewareStackNotCommitted < Support::Command
         attr_reader :stack
 
         def initialize(stack:)

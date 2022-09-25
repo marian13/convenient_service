@@ -15,7 +15,7 @@ module ConvenientService
       def concerns(&block)
         (@concerns ||= Entities::Concerns::MiddlewareStack.new(entity: self))
           .tap { |stack| return stack unless block }
-          .tap { |stack| Commands::AssertConcernMiddlewareStackNotFixed.call(stack: stack) }
+          .tap { |stack| Commands::AssertConcernMiddlewareStackNotCommitted.call(stack: stack) }
           .tap { |stack| Commands::ConfigureMiddlewareStack.call(stack: stack, block: block) }
       end
 
