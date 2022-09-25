@@ -29,6 +29,134 @@ Yet another approach to revisit the service object pattern, but this time focusi
 This library is under heavy development. Public API may be subject to change. The first major release is still to come. Use the current version at your own risk. Thanks.
 <!-- warning:end -->
 
+<!-- usage:start -->
+## Usage
+
+<details open>
+  <summary>
+    <h3 style="display: inline-block;">
+      Standard
+    </h3>
+  </summary>
+
+  ```ruby
+  # frozen_string_literal: true
+
+  require "convenient_service"
+  ```
+
+  ```ruby
+  # frozen_string_literal: true
+
+  class ApplicationService
+    module Config
+      def self.included(service_class)
+        service_class.class_exec do
+          include ConvenientService::Standard::Config
+        end
+      end
+    end
+  end
+  ```
+
+  ```ruby
+  # frozen_string_literal: true
+
+  class AssertFileExists
+    include ApplicationService::Config
+
+    attr_accessor :path
+
+    def initialize(path:)
+      @path = path
+    end
+
+    def result
+      return failure(data: {path: "Path is `nil'"}) if path.nil?
+      return failure(data: {path: "Path is empty"}) if path.empty?
+
+      return error(message: "File with path `#{path}' does NOT exist") unless ::File.exist?(path)
+
+      success
+    end
+  end
+  ```
+
+  ```ruby
+  result = AssertFileExists.result(path: "Gemfile")
+  ```
+
+  ```ruby
+  # frozen_string_literal: true
+
+  class AssertFileNotEmpty
+    include ApplicationService::Config
+
+    attr_accessor :path
+
+    def initialize(path:)
+      @path = path
+    end
+
+    def result
+      return failure(data: {path: "Path is `nil'"}) if path.nil?
+      return failure(data: {path: "Path is empty"}) if path.empty?
+
+      return error(message: "File with path `#{path}' is empty") if ::File.zero?(path)
+
+      success
+    end
+  end
+  ```
+
+  ```ruby
+  result = AssertFileNotEmpty.result(path: "Gemfile")
+  ```
+
+  ```ruby
+  # frozen_string_literal: true
+
+  class ReadFileContent
+    include ApplicationService::Config
+
+    attr_reader :path
+
+    step :validate_path
+    step AssertFileExists, in: :path
+    step AssertFileNotEmpty, in: :path
+    step :result, in: :path, out: :content
+
+    def initialize(path:)
+      @path = path
+    end
+
+    def result
+      success(data: {content: ::File.read(path)})
+    end
+
+    private
+
+    def validate_path
+      return failure(data: {path: "Path is `nil'"}) if path.nil?
+      return failure(data: {path: "Path is empty"}) if path.empty?
+
+      success
+    end
+  end
+  ```
+
+  ```ruby
+  result = ReadFileContent.result(path: "Gemfile")
+
+  if result.success?
+    puts result.data[:content]
+  else
+    puts result.message
+  end
+  ```
+</details>
+<!-- usage:end -->
+
 ---
 
 <!-- author:start -->
