@@ -2,11 +2,8 @@
 
 module ConvenientService
   module Core
-    ##
-    # Aliases.
-    #
-    ClassicMiddleware = Entities::ClassicMiddleware
-    ConcernMiddleware = Entities::Concerns::ConcernMiddleware
-    MethodChainMiddleware = Entities::Middlewares::MethodChainMiddleware
+    ClassicMiddleware = ::ConvenientService::Core::Entities::ClassicMiddleware
+    ConcernMiddleware = ::ConvenientService::Core::Entities::Concerns::ConcernMiddleware
+    MethodChainMiddleware = ::ConvenientService::Core::Entities::Middlewares::MethodChainMiddleware
   end
 end

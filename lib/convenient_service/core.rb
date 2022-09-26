@@ -7,15 +7,10 @@ require_relative "core/commands"
 require_relative "core/entities"
 require_relative "core/errors"
 
+require_relative "core/aliases"
+
 module ConvenientService
   module Core
-    ##
-    # Aliases.
-    #
-    ClassicMiddleware = Entities::ClassicMiddleware
-    ConcernMiddleware = Entities::Concerns::ConcernMiddleware
-    MethodChainMiddleware = Entities::Middlewares::MethodChainMiddleware
-
     include Support::Concern
 
     included do |service_class|

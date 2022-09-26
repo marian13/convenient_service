@@ -17,7 +17,6 @@ require_relative "convenient_service/core"
 require_relative "convenient_service/common"
 require_relative "convenient_service/service"
 require_relative "convenient_service/configs"
-require_relative "convenient_service/aliases"
 
 module ConvenientService
   class << self
