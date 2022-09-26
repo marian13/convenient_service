@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: ConvenientService::Support::Delegate
+  
+    &mdash; Documentation by YARD 0.9.28
+  
+</title>
+
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "ConvenientService::Support::Delegate";
+  relpath = '../../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../../_index.html">Index (D)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Support.html" title="ConvenientService::Support (module)">Support</a></span></span>
+     &raquo; 
+    <span class="title">Delegate</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: ConvenientService::Support::Delegate
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  <dl>
+      <dt>Includes:</dt>
+      <dd><span class='object_link'><a href="Concern.html" title="ConvenientService::Support::Concern (module)">Concern</a></span></dd>
+  </dl>
+  
+  
+
+  
+  <dl>
+    <dt>Included in:</dt>
+    <dd><span class='object_link'><a href="../Common/Plugins/HasCallbacks/Entities/CallbackCollection.html" title="ConvenientService::Common::Plugins::HasCallbacks::Entities::CallbackCollection (class)">Common::Plugins::HasCallbacks::Entities::CallbackCollection</a></span>, <span class='object_link'><a href="../Common/Plugins/HasCallbacks/Entities/Type.html" title="ConvenientService::Common::Plugins::HasCallbacks::Entities::Type (class)">Common::Plugins::HasCallbacks::Entities::Type</a></span>, <span class='object_link'><a href="../Core/Commands/EnableMethodMiddlewareStack.html" title="ConvenientService::Core::Commands::EnableMethodMiddlewareStack (class)">Core::Commands::EnableMethodMiddlewareStack</a></span>, <span class='object_link'><a href="../Service/Plugins/HasResult/Entities/Result/Concern/InstanceMethods.html" title="ConvenientService::Service::Plugins::HasResult::Entities::Result::Concern::InstanceMethods (module)">ConvenientService::Service::Plugins::HasResult::Entities::Result::Concern::InstanceMethods</a></span>, <span class='object_link'><a href="../Service/Plugins/HasResultSteps/Entities/Method/Commands/DefineMethodInContainer.html" title="ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Commands::DefineMethodInContainer (class)">ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Commands::DefineMethodInContainer</a></span>, <span class='object_link'><a href="../Service/Plugins/HasResultSteps/Entities/Method/Concern/InstanceMethods.html" title="ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Concern::InstanceMethods (module)">ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Concern::InstanceMethods</a></span>, <span class='object_link'><a href="../Service/Plugins/HasResultSteps/Entities/Method/Entities/Key.html" title="ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Entities::Key (class)">ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Entities::Key</a></span>, <span class='object_link'><a href="../Service/Plugins/HasResultSteps/Entities/Method/Entities/Name.html" title="ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Entities::Name (class)">ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Entities::Name</a></span>, <span class='object_link'><a href="../Service/Plugins/HasResultSteps/Entities/Service.html" title="ConvenientService::Service::Plugins::HasResultSteps::Entities::Service (class)">ConvenientService::Service::Plugins::HasResultSteps::Entities::Service</a></span>, <span class='object_link'><a href="../Service/Plugins/HasResultSteps/Entities/Step/Concern/InstanceMethods.html" title="ConvenientService::Service::Plugins::HasResultSteps::Entities::Step::Concern::InstanceMethods (module)">ConvenientService::Service::Plugins::HasResultSteps::Entities::Step::Concern::InstanceMethods</a></span>, <span class='object_link'><a href="InfinitelyNestedHash.html" title="ConvenientService::Support::InfinitelyNestedHash (class)">InfinitelyNestedHash</a></span></dd>
+  </dl>
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/convenient_service/support/delegate.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>A wrapper for Ruby's stdlib `::Forwardable' module.
+<a href="https://ruby-doc.org/stdlib-2.5.1/libdoc/forwardable/rdoc/Forwardable.html">https://ruby-doc.org/stdlib-2.5.1/libdoc/forwardable/rdoc/Forwardable.html</a></p>
+<p>Tries to follow Rails `delegate' interface.
+<a href="https://api.rubyonrails.org/classes/Module.html#method-i-delegate">https://api.rubyonrails.org/classes/Module.html#method-i-delegate</a></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Delegate/ClassMethodsForForwardable.html" title="ConvenientService::Support::Delegate::ClassMethodsForForwardable (module)">ClassMethodsForForwardable</a></span>
+    
+  
+    
+  
+</p>
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  <h2>Method Summary</h2>
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="Concern.html" title="ConvenientService::Support::Concern (module)">Concern</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Concern.html#included-class_method" title="ConvenientService::Support::Concern.included (method)">included</a></span></p>
+
+
+</div>
+
+      <div id="footer">
+  Generated on Mon Sep 26 20:03:37 2022 by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.28 (ruby-3.1.2).
+</div>
+
+    </div>
+  </body>
+</html>

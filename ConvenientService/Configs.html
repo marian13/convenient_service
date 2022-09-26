@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: ConvenientService::Configs
+  
+    &mdash; Documentation by YARD 0.9.28
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "ConvenientService::Configs";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (C)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span>
+     &raquo; 
+    <span class="title">Configs</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: ConvenientService::Configs
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/convenient_service/configs/standard.rb<span class="defines">,<br />
+  lib/convenient_service/configs/standard.rb,<br /> lib/convenient_service/configs/standard.rb</span>
+</dd>
+  </dl>
+  
+</div>
+
+<h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Configs/StandardUncommitted.html" title="ConvenientService::Configs::StandardUncommitted (module)">StandardUncommitted</a></span>
+    
+  
+    
+  
+</p>
+
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="StandardCommitted-constant" class="">StandardCommitted =
+          <div class="docstring">
+  <div class="discussion">
+    <p>NOTE: A copy of <code>StandardUncommitted' config, that automatically commits itself after the </code>include' invocation.</p>
+<p>For example:</p>
+<p>class PerformOperation
+include ConvenientService::Configs::StandardCommitted
+# ...
+end</p>
+<p>is roughly equivalent to:</p>
+<p>class PerformOperation
+include ConvenientService::Configs::StandardUncommitted</p>
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_commit_config!'>commit_config!</span>
+<span class='comment'># ...
+</span></code></pre>
+<p>end</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='const'><span class='object_link'><a href="Configs/StandardUncommitted.html" title="ConvenientService::Configs::StandardUncommitted (module)">StandardUncommitted</a></span></span><span class='period'>.</span><span class='id identifier rubyid_dup'>dup</span><span class='period'>.</span><span class='id identifier rubyid_tap'>tap</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_mod'>mod</span><span class='op'>|</span>
+  <span class='id identifier rubyid_mod'>mod</span><span class='period'>.</span><span class='id identifier rubyid_module_exec'>module_exec</span> <span class='kw'>do</span>
+    <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_included'>included</span><span class='lparen'>(</span><span class='id identifier rubyid_klass'>klass</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_klass'>klass</span><span class='period'>.</span><span class='id identifier rubyid_commit_config!'>commit_config!</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre></dd>
+      
+        <dt id="Standard-constant" class="">Standard =
+          <div class="docstring">
+  <div class="discussion">
+    <p>IMPORTANT: Breaking change!!!
+Automatic config commitment by <code>method_missing' does NOT work in Ruby 2.7. That is probably caused by </code>(*args, **kwargs, &amp;block)' delegation.
+Check the following article for more information: <a href="https://eregon.me/blog/2021/02/13/correct-delegation-in-ruby-2-27-3.html">https://eregon.me/blog/2021/02/13/correct-delegation-in-ruby-2-27-3.html</a>
+As a workaround, the <code>Standard' config is committed by default in Ruby 2.7. Ruby 3.0 and higher use </code>StandardUncommitted' as <code>Standard' since they have no issues with </code>(*args, **kwargs, &amp;block)' delegation.</p>
+<p>For migration purposes, you can control config commitment, by using <code>StandardUncommitted' and </code>StandardCommitted' explicitly, for example:</p>
+<p>class PerformOperation
+include ConvenientService::Configs::Standard
+# ...
+end</p>
+<p>is equivalent to the following in Ruby 2.7</p>
+<p>class PerformOperation
+include ConvenientService::Configs::StandardCommitted
+# ...
+end</p>
+<p>and in Ruby 3.0+</p>
+<p>class PerformOperation
+include ConvenientService::Configs::StandardUncommitted
+# ...
+# Trigger <code>commit_config!</code> manually or it is automatically triggered by first `method_missing'.
+end</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='op'>::</span><span class='const'>RUBY_VERSION</span> <span class='op'>&gt;=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>3.0</span><span class='tstring_end'>&quot;</span></span> <span class='op'>?</span> <span class='const'><span class='object_link'><a href="Configs/StandardUncommitted.html" title="ConvenientService::Configs::StandardUncommitted (module)">StandardUncommitted</a></span></span> <span class='op'>:</span> <span class='const'><span class='object_link'><a href="#StandardCommitted-constant" title="ConvenientService::Configs::StandardCommitted (constant)">StandardCommitted</a></span></span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+
+
+
+</div>
+
+      <div id="footer">
+  Generated on Mon Sep 26 20:03:37 2022 by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.28 (ruby-3.1.2).
+</div>
+
+    </div>
+  </body>
+</html>
