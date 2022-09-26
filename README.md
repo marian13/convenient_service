@@ -52,9 +52,7 @@ This library is under heavy development. Public API may be subject to change. Th
   class ApplicationService
     module Config
       def self.included(service_class)
-        service_class.class_exec do
-          include ConvenientService::Standard::Config
-        end
+        service_class.include ConvenientService::Standard::Config
       end
     end
   end
