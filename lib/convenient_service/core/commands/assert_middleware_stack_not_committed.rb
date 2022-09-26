@@ -13,7 +13,7 @@ module ConvenientService
         def call
           return unless stack.called?
 
-          raise Errors::ConcernMiddlewareStackIsFixed.new(stack: stack)
+          raise Errors::ConcernMiddlewareStackIsCommitted.new(stack: stack)
         end
       end
     end
