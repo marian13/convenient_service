@@ -103,7 +103,7 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>IMPORTANT: Since <code>contain_exactly' uses hashes under the hood, </code>first_array' and <code>second_array' items should be comparable by </code>hash' and `eql?'.
+    <p>IMPORTANT: Since <code>contain_exactly</code> uses hashes under the hood, <code>first_array</code> and <code>second_array</code> items should be comparable by <code>hash</code> and <code>eql?</code>.
 It may sometimes introduce hash collisions, which in turn can degrade the performance.
 But since the probability is relatively low, because it is NOT too common to have hashes that contain keys with different classes,
 hashes comparison is still preferred over array comparison.
@@ -111,7 +111,7 @@ Check specs for more details.
 <a href="https://github.com/ruby/spec/blob/master/core/hash/shared/eql.rb">https://github.com/ruby/spec/blob/master/core/hash/shared/eql.rb</a>
 <a href="https://stackoverflow.com/questions/54961311/ruby-why-does-hash-need-to-overridden-whenever-eql-is-overridden">https://stackoverflow.com/questions/54961311/ruby-why-does-hash-need-to-overridden-whenever-eql-is-overridden</a>
 <a href="https://ruby-doc.org/core-3.1.2/Object.html#method-i-hash">https://ruby-doc.org/core-3.1.2/Object.html#method-i-hash</a></p>
-<p>NOTE: Inspired by <code>contain_exactly' from </code>RSpec'.
+<p>NOTE: Inspired by <code>contain_exactly</code> from <code>RSpec</code>.
 <a href="https://relishapp.com/rspec/rspec-expectations/docs/built-in-matchers/contain-exactly-matcher">https://relishapp.com/rspec/rspec-expectations/docs/built-in-matchers/contain-exactly-matcher</a></p>
 
 
@@ -441,7 +441,7 @@ Check specs for more details.
 </div>
 
       <div id="footer">
-  Generated on Mon Sep 26 20:15:15 2022 by
+  Generated on Mon Sep 26 20:25:42 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>

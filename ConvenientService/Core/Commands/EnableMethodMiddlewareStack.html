@@ -362,7 +362,9 @@
 36
 37
 38
-39</pre>
+39
+40
+41</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/core/commands/enable_method_middleware_stack.rb', line 21</span>
@@ -371,6 +373,8 @@
   <span class='kw'>return</span> <span class='kw'>if</span> <span class='const'><span class='object_link'><a href="../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Utils/Method.html" title="ConvenientService::Utils::Method (module)">Method</a></span></span><span class='period'>.</span><span class='id identifier rubyid_defined?'><span class='object_link'><a href="../../Utils/Method.html#defined%3F-class_method" title="ConvenientService::Utils::Method.defined? (method)">defined?</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='label'>in:</span> <span class='id identifier rubyid_mod'>mod</span><span class='rparen'>)</span>
 
   <span class='comment'>##
+</span>  <span class='comment'># TODO: `call_with`
+</span>  <span class='comment'>#
 </span>  <span class='comment'># NOTE: Assignment in the beginning for easier debugging.
 </span>  <span class='comment'>#
 </span>  <span class='heredoc_beg'>&lt;&lt;~RUBY</span><span class='period'>.</span><span class='id identifier rubyid_tap'>tap</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_code'>code</span><span class='op'>|</span> <span class='id identifier rubyid_mod'>mod</span><span class='period'>.</span><span class='id identifier rubyid_class_eval'>class_eval</span><span class='lparen'>(</span><span class='id identifier rubyid_code'>code</span><span class='comma'>,</span> <span class='kw'>__FILE__</span><span class='comma'>,</span> <span class='kw'>__LINE__</span> <span class='op'>+</span> <span class='int'>1</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
@@ -396,7 +400,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Sep 26 20:15:16 2022 by
+  Generated on Mon Sep 26 20:25:43 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>

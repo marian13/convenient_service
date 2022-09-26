@@ -207,11 +207,11 @@
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>service:</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_message'>message</span> <span class='op'>=</span> <span class='heredoc_beg'>&lt;&lt;~TEXT</span>
-<span class='tstring_content'>    `</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='embexpr_end'>}</span><span class='tstring_content'>&#39; service has a double result.
+<span class='tstring_content'>    `</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='embexpr_end'>}</span><span class='tstring_content'>` service has a double result.
 </span><span class='tstring_content'>
-</span><span class='tstring_content'>    Make sure its #result calls only one from the following methods `success&#39;, `failure&#39;, or `error&#39; and only once.
+</span><span class='tstring_content'>    Make sure its #result calls only one from the following methods `success`, `failure`, or `error` and only once.
 </span><span class='tstring_content'>
-</span><span class='tstring_content'>    Maybe you missed `return&#39;? The most common scenario is similar to this one:
+</span><span class='tstring_content'>    Maybe you missed `return`? The most common scenario is similar to this one:
 </span><span class='tstring_content'>
 </span><span class='tstring_content'>    def result
 </span><span class='tstring_content'>      # ...
@@ -236,7 +236,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Sep 26 20:15:16 2022 by
+  Generated on Mon Sep 26 20:25:43 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>

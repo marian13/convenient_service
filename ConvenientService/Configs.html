@@ -107,7 +107,7 @@
         <dt id="StandardCommitted-constant" class="">StandardCommitted =
           <div class="docstring">
   <div class="discussion">
-    <p>NOTE: A copy of <code>StandardUncommitted' config, that automatically commits itself after the </code>include' invocation.</p>
+    <p>NOTE: A copy of <code>StandardUncommitted</code> config, that automatically commits itself after the <code>include</code> invocation.</p>
 <p>For example:</p>
 <p>class PerformOperation
 include ConvenientService::Configs::StandardCommitted
@@ -141,10 +141,12 @@ include ConvenientService::Configs::StandardUncommitted</p>
           <div class="docstring">
   <div class="discussion">
     <p>IMPORTANT: Breaking change!!!
-Automatic config commitment by <code>method_missing' does NOT work in Ruby 2.7. That is probably caused by </code>(*args, **kwargs, &amp;block)' delegation.
+Automatic config commitment by <code>method_missing</code> does NOT work in Ruby 2.7.
+That is probably caused by <code>(*args, **kwargs, &amp;block)</code> delegation.
 Check the following article for more information: <a href="https://eregon.me/blog/2021/02/13/correct-delegation-in-ruby-2-27-3.html">https://eregon.me/blog/2021/02/13/correct-delegation-in-ruby-2-27-3.html</a>
-As a workaround, the <code>Standard' config is committed by default in Ruby 2.7. Ruby 3.0 and higher use </code>StandardUncommitted' as <code>Standard' since they have no issues with </code>(*args, **kwargs, &amp;block)' delegation.</p>
-<p>For migration purposes, you can control config commitment, by using <code>StandardUncommitted' and </code>StandardCommitted' explicitly, for example:</p>
+As a workaround, the <code>Standard</code> config is committed by default in Ruby 2.7.
+Ruby 3.0 and higher use <code>StandardUncommitted</code> as <code>Standard</code> since they have no issues with <code>(*args, **kwargs, &amp;block)</code> delegation.</p>
+<p>For migration purposes, you can control config commitment, by using <code>StandardUncommitted</code> and <code>StandardCommitted</code> explicitly, for example:</p>
 <p>class PerformOperation
 include ConvenientService::Configs::Standard
 # ...
@@ -158,7 +160,7 @@ end</p>
 <p>class PerformOperation
 include ConvenientService::Configs::StandardUncommitted
 # ...
-# Trigger <code>commit_config!</code> manually or it is automatically triggered by first `method_missing'.
+# Trigger <code>commit_config!</code> manually or it is automatically triggered by first <code>method_missing</code>.
 end</p>
 
 
@@ -185,7 +187,7 @@ end</p>
 </div>
 
       <div id="footer">
-  Generated on Mon Sep 26 20:15:14 2022 by
+  Generated on Mon Sep 26 20:25:40 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>

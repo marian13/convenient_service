@@ -102,12 +102,12 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <ul>
-<li>Single splat <code>*' converts </code>nil' to empty array.</li>
-<li>Double splat <code>**' raises on </code>nil'.</li>
-<li>Umpersand <code>&amp;' converts </code>nil' to `nil'.</li>
+<li>Single splat <code>*</code> converts <code>nil</code> to empty array.</li>
+<li>Double splat <code>**</code> raises on <code>nil</code>.</li>
+<li>Umpersand <code>&amp;</code> converts <code>nil</code> to <code>nil</code>.</li>
 </ul>
-<p>The following decorator <code>proc' converts </code>env[:kwargs]' to a hash.
-This way <code>stack.call(*env[:args], **env[:kwargs], &amp;env[:block])' won't fail even if a user passes </code>nil' as `kwargs'.</p>
+<p>The following decorator <code>proc</code> converts <code>env[:kwargs]</code> to a hash.
+This way <code>stack.call(*env[:args], **env[:kwargs], &amp;env[:block])</code> won't fail even if a user passes <code>nil</code> as <code>kwargs</code>.</p>
 <p>Check the following link for more details:</p>
 <ul>
 <li><a href="https://bugs.ruby-lang.org/issues/8507">https://bugs.ruby-lang.org/issues/8507</a></li>
@@ -206,7 +206,7 @@ This way <code>stack.call(*env[:args], **env[:kwargs], &amp;env[:block])' won't 
 </div>
 
       <div id="footer">
-  Generated on Mon Sep 26 20:15:16 2022 by
+  Generated on Mon Sep 26 20:25:42 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>

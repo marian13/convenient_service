@@ -334,7 +334,7 @@
 All procs should accept only one argument.</p>
 <p>For example, let's assume we have two arbitrary functions:
 f(x) and g(x)</p>
-<p>Application of the `conjunct' procedure gives a new function h(x) that can be written as follows:
+<p>Application of the <code>conjunct</code> procedure gives a new function h(x) that can be written as follows:
 h(x) = f(x) &amp;&amp; g(x)</p>
 <p>IMPORTANT: Please, learn what is a conjunction before diving into implementation details.</p>
 <ul>
@@ -380,7 +380,7 @@ h(x) = f(x) &amp;&amp; g(x)</p>
 </span>  <span class='comment'># NOTE: reduce tries to use first element as its initial value if not specified explicitly.
 </span>  <span class='comment'># https://ruby-doc.org/core-2.6/Enumerable.html#method-i-reduce
 </span>  <span class='comment'>#
-</span>  <span class='comment'># NOTE: proc can be called by `[]&#39;.
+</span>  <span class='comment'># NOTE: proc can be called by `[]`.
 </span>  <span class='comment'># https://ruby-doc.org/core-2.7.1/Proc.html#method-i-5B-5D
 </span>  <span class='comment'>#
 </span>  <span class='id identifier rubyid_procs'>procs</span><span class='period'>.</span><span class='id identifier rubyid_reduce'>reduce</span><span class='lparen'>(</span><span class='tlambda'>-&gt;</span><span class='lparen'>(</span><span class='id identifier rubyid_item'>item</span><span class='rparen'>)</span> <span class='tlambeg'>{</span> <span class='kw'>true</span> <span class='rbrace'>}</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_conjunction'>conjunction</span><span class='comma'>,</span> <span class='id identifier rubyid_proc'>proc</span><span class='op'>|</span> <span class='tlambda'>-&gt;</span><span class='lparen'>(</span><span class='id identifier rubyid_item'>item</span><span class='rparen'>)</span> <span class='tlambeg'>{</span> <span class='id identifier rubyid_conjunction'>conjunction</span><span class='lbracket'>[</span><span class='id identifier rubyid_item'>item</span><span class='rbracket'>]</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_proc'>proc</span><span class='lbracket'>[</span><span class='id identifier rubyid_item'>item</span><span class='rbracket'>]</span> <span class='rbrace'>}</span> <span class='rbrace'>}</span>
@@ -395,7 +395,7 @@ h(x) = f(x) &amp;&amp; g(x)</p>
 </div>
 
       <div id="footer">
-  Generated on Mon Sep 26 20:15:15 2022 by
+  Generated on Mon Sep 26 20:25:41 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>

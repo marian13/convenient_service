@@ -85,7 +85,7 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>TODO: Remove this patch when Rails updates <code>def initialize(*)' to  </code>def initialize(*args, **kwargs, &amp;block)'.
+    <p>TODO: Remove this patch when Rails updates <code>def initialize(*)</code> to  <code>def initialize(*args, **kwargs, &amp;block)</code>.
 <a href="https://github.com/rails/rails/blob/3872bc0e54d32e8bf3a6299b0bfe173d94b072fc/activemodel/lib/active_model/attributes.rb#L78">https://github.com/rails/rails/blob/3872bc0e54d32e8bf3a6299b0bfe173d94b072fc/activemodel/lib/active_model/attributes.rb#L78</a></p>
 
 
@@ -106,7 +106,7 @@
         <dt id="ActiveModelAttributes-constant" class="">ActiveModelAttributes =
           <div class="docstring">
   <div class="discussion">
-    <p>Copy of `ActiveModel::Attributes'.</p>
+    <p>Copy of <code>ActiveModel::Attributes</code>.</p>
 <ul>
 <li>
 <p><a href="https://api.rubyonrails.org/classes/ActiveModel/Attributes/ClassMethods.html">https://api.rubyonrails.org/classes/ActiveModel/Attributes/ClassMethods.html</a></p>
@@ -136,7 +136,7 @@
         <dd><pre class="code"><span class='op'>::</span><span class='const'>ActiveModel</span><span class='op'>::</span><span class='const'>Attributes</span><span class='period'>.</span><span class='id identifier rubyid_dup'>dup</span><span class='period'>.</span><span class='id identifier rubyid_tap'>tap</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_mod'>mod</span><span class='op'>|</span>
   <span class='id identifier rubyid_mod'>mod</span><span class='period'>.</span><span class='id identifier rubyid_module_eval'>module_eval</span> <span class='kw'>do</span>
     <span class='comment'>##
-</span>    <span class='comment'># NOTE: Overrides `initialize&#39; since current Rails implementation can not accept kwargs.
+</span>    <span class='comment'># NOTE: Overrides `initialize` since current Rails implementation can not accept kwargs.
 </span>    <span class='comment'>#
 </span>    <span class='comment'># TODO: Open a PR to Rails.
 </span>    <span class='comment'>#
@@ -165,7 +165,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Sep 26 20:15:15 2022 by
+  Generated on Mon Sep 26 20:25:41 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>

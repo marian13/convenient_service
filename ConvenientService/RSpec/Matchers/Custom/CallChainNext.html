@@ -400,7 +400,7 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/call_chain_next.rb', line 74</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_description'>description</span>
-  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>call `chain.next&#39;</span><span class='tstring_end'>&quot;</span></span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>call `chain.next`</span><span class='tstring_end'>&quot;</span></span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -483,12 +483,12 @@
   <span class='id identifier rubyid_value'>value</span> <span class='op'>=</span> <span class='kw'>nil</span>
 
   <span class='comment'>##
-</span>  <span class='comment'># NOTE: `expect { value = block_expectation.call }.not_to change(method, :chain_called?).from(false).to(true)&#39; raises the following error:
+</span>  <span class='comment'># NOTE: `expect { value = block_expectation.call }.not_to change(method, :chain_called?).from(false).to(true)` raises the following error:
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#   NotImplementedError:
 </span>  <span class='comment'>#     `expect { }.not_to change { }.to()` is not supported
 </span>  <span class='comment'>#
-</span>  <span class='comment'># That is why `expect(method.chain_called?).to eq(false)&#39; is introduced.
+</span>  <span class='comment'># That is why `expect(method.chain_called?).to eq(false)` is introduced.
 </span>  <span class='comment'>#
 </span>  <span class='id identifier rubyid_expect'>expect</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='period'>.</span><span class='id identifier rubyid_chain_called?'>chain_called?</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to'>to</span> <span class='id identifier rubyid_eq'>eq</span><span class='lparen'>(</span><span class='kw'>false</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_expect'>expect</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_value'>value</span> <span class='op'>=</span> <span class='id identifier rubyid_block_expectation'>block_expectation</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span> <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_not_to'>not_to</span> <span class='id identifier rubyid_change'>change</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='symbol'>:chain_called?</span><span class='rparen'>)</span>
@@ -533,7 +533,7 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/call_chain_next.rb', line 78</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_failure_message'>failure_message</span>
-  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>expected to call `chain.next&#39;</span><span class='tstring_end'>&quot;</span></span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>expected to call `chain.next`</span><span class='tstring_end'>&quot;</span></span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -563,7 +563,7 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/call_chain_next.rb', line 82</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_failure_message_when_negated'>failure_message_when_negated</span>
-  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>expected NOT to call `chain.next&#39;</span><span class='tstring_end'>&quot;</span></span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>expected NOT to call `chain.next`</span><span class='tstring_end'>&quot;</span></span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -779,7 +779,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Sep 26 20:15:16 2022 by
+  Generated on Mon Sep 26 20:25:42 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>

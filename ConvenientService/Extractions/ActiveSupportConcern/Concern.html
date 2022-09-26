@@ -323,7 +323,7 @@ prepended as well.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>NOTE: Customization compared to original `Concern' implementation.</p>
+    <span class="summary_desc"><div class='inline'><p>NOTE: Customization compared to original <code>Concern</code> implementation.</p>
 </div></span>
   
 </li>
@@ -492,9 +492,9 @@ prepended as well.</p>
     <span class='id identifier rubyid_base'>base</span><span class='period'>.</span><span class='id identifier rubyid_class_eval'>class_eval</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='ivar'>@_included_block</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_instance_variable_defined?'>instance_variable_defined?</span><span class='lparen'>(</span><span class='symbol'>:@_included_block</span><span class='rparen'>)</span>
 
     <span class='comment'>##
-</span>    <span class='comment'># NOTE: Customization compared to original `Concern&#39; implementation.
-</span>    <span class='comment'># TODO: Why original `Concern&#39; implementation uses `const_defined?(:ClassMethods)`, not `const_defined?(:ClassMethods, false)&#39;?
-</span>    <span class='comment'># NOTE: Changed order to have a way to control when to include `InstanceMethods&#39; and `ClassMethods&#39; from `included&#39; block.
+</span>    <span class='comment'># NOTE: Customization compared to original `Concern` implementation.
+</span>    <span class='comment'># TODO: Why original `Concern` implementation uses `const_defined?(:ClassMethods)`, not `const_defined?(:ClassMethods, false)`?
+</span>    <span class='comment'># NOTE: Changed order to have a way to control when to include `InstanceMethods` and `ClassMethods` from `included` block.
 </span>    <span class='comment'>#
 </span>    <span class='id identifier rubyid_base'>base</span><span class='period'>.</span><span class='id identifier rubyid_include'>include</span> <span class='id identifier rubyid_const_get'>const_get</span><span class='lparen'>(</span><span class='symbol'>:InstanceMethods</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_const_defined?'>const_defined?</span><span class='lparen'>(</span><span class='symbol'>:InstanceMethods</span><span class='rparen'>)</span>
 
@@ -643,7 +643,7 @@ When you define more than one +included+ block, it raises an exception.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>NOTE: Customization compared to original `Concern' implementation.</p>
+    <p>NOTE: Customization compared to original <code>Concern</code> implementation.</p>
 
 
   </div>
@@ -742,9 +742,9 @@ When you define more than one +included+ block, it raises an exception.</p>
     <span class='id identifier rubyid_base'>base</span><span class='period'>.</span><span class='id identifier rubyid_class_eval'>class_eval</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='ivar'>@_prepended_block</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_instance_variable_defined?'>instance_variable_defined?</span><span class='lparen'>(</span><span class='symbol'>:@_prepended_block</span><span class='rparen'>)</span>
 
     <span class='comment'>##
-</span>    <span class='comment'># NOTE: Customization compared to original `Concern&#39; implementation.
-</span>    <span class='comment'># TODO: Why original `Concern&#39; implementation uses `const_defined?(:ClassMethods)`, not `const_defined?(:ClassMethods, false)&#39;?
-</span>    <span class='comment'># NOTE: Changed order to have a way to control when to include `InstanceMethods&#39; and `ClassMethods&#39; from `included&#39; block.
+</span>    <span class='comment'># NOTE: Customization compared to original `Concern` implementation.
+</span>    <span class='comment'># TODO: Why original `Concern` implementation uses `const_defined?(:ClassMethods)`, not `const_defined?(:ClassMethods, false)`?
+</span>    <span class='comment'># NOTE: Changed order to have a way to control when to include `InstanceMethods` and `ClassMethods` from `included` block.
 </span>    <span class='comment'>#
 </span>    <span class='id identifier rubyid_base'>base</span><span class='period'>.</span><span class='id identifier rubyid_prepend'>prepend</span> <span class='id identifier rubyid_const_get'>const_get</span><span class='lparen'>(</span><span class='symbol'>:InstanceMethods</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_const_defined?'>const_defined?</span><span class='lparen'>(</span><span class='symbol'>:InstanceMethods</span><span class='rparen'>)</span>
 
@@ -823,7 +823,7 @@ When you define more than one +prepended+ block, it raises an exception.</p>
 </div>
 
       <div id="footer">
-  Generated on Mon Sep 26 20:15:15 2022 by
+  Generated on Mon Sep 26 20:25:41 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>

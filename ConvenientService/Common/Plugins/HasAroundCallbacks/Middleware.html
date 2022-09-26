@@ -289,8 +289,8 @@
 
 <span class='kw'>def</span> <span class='kw'>next</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='comment'>##
-</span>  <span class='comment'># A variable that stores return value of middleware `chain.next&#39; aka `original_value&#39;.
-</span>  <span class='comment'># It is reassigned later by the `initial_around_callback&#39;.
+</span>  <span class='comment'># A variable that stores return value of middleware `chain.next` aka `original_value`.
+</span>  <span class='comment'># It is reassigned later by the `initial_around_callback`.
 </span>  <span class='comment'>#
 </span>  <span class='id identifier rubyid_original_value'>original_value</span> <span class='op'>=</span> <span class='kw'>nil</span>
 
@@ -308,43 +308,43 @@
   <span class='rparen'>)</span>
 
   <span class='comment'>##
-</span>  <span class='comment'># Let&#39;s suppose that we have 3 `around&#39; callbacks:
+</span>  <span class='comment'># Let&#39;s suppose that we have 3 `around` callbacks:
 </span>  <span class='comment'>#
 </span>  <span class='comment'># class Service
 </span>  <span class='comment'>#   # first
 </span>  <span class='comment'>#   around do |chain|
-</span>  <span class='comment'>#     # part before `chain.yield&#39;
+</span>  <span class='comment'>#     # part before `chain.yield`
 </span>  <span class='comment'>#     original_value = chain.yield
-</span>  <span class='comment'>#     # part after `chain.yield&#39;
+</span>  <span class='comment'>#     # part after `chain.yield`
 </span>  <span class='comment'>#   end
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#   # second
 </span>  <span class='comment'>#   around do |chain|
-</span>  <span class='comment'>#     # part before `chain.yield&#39;
+</span>  <span class='comment'>#     # part before `chain.yield`
 </span>  <span class='comment'>#     original_value = chain.yield
-</span>  <span class='comment'>#     # part after `chain.yield&#39;
+</span>  <span class='comment'>#     # part after `chain.yield`
 </span>  <span class='comment'>#   end
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#   # third
 </span>  <span class='comment'>#   around do |chain|
-</span>  <span class='comment'>#     # part before `chain.yield&#39;
+</span>  <span class='comment'>#     # part before `chain.yield`
 </span>  <span class='comment'>#     original_value = chain.yield
-</span>  <span class='comment'>#     # part after `chain.yield&#39;
+</span>  <span class='comment'>#     # part after `chain.yield`
 </span>  <span class='comment'>#   end
 </span>  <span class='comment'># end
 </span>  <span class='comment'>#
-</span>  <span class='comment'># NOTE: if a user forgets to call `chain.yield&#39; - an error is raised.
+</span>  <span class='comment'># NOTE: if a user forgets to call `chain.yield` - an error is raised.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># Then `composed&#39; may be built with the following preudocode (that is why `reverse&#39; is needed):
+</span>  <span class='comment'># Then `composed` may be built with the following preudocode (that is why `reverse` is needed):
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#   composed = original
 </span>  <span class='comment'>#   composed = proc { instance_exec(composed, &amp;third) }
 </span>  <span class='comment'>#   composed = proc { instance_exec(composed, &amp;second) }
 </span>  <span class='comment'>#   composed = proc { instance_exec(composed, &amp;first) }
 </span>  <span class='comment'>#
-</span>  <span class='comment'># Where `first&#39;, `second&#39;, `third&#39; are taken from `entity.callbacks.for([:around, method])&#39;.
+</span>  <span class='comment'># Where `first`, `second`, `third` are taken from `entity.callbacks.for([:around, method])`.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># Original implementation is modified in order to return `original_value&#39; from all `chain.yield` calls.
+</span>  <span class='comment'># Original implementation is modified in order to return `original_value` from all `chain.yield` calls.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#   # Original implementation:
 </span>  <span class='comment'>#   composed =
@@ -366,13 +366,13 @@
 </span>  <span class='comment'># Call sequence:
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#   composed.call
-</span>  <span class='comment'>#   proc { instance_exec(composed, &amp;first) }.call  # part before `chain.yield&#39;
-</span>  <span class='comment'>#   proc { instance_exec(composed, &amp;second) }.call # part before `chain.yield&#39;
-</span>  <span class='comment'>#   proc { instance_exec(composed, &amp;third) }.call  # part before `chain.yield&#39;
+</span>  <span class='comment'>#   proc { instance_exec(composed, &amp;first) }.call  # part before `chain.yield`
+</span>  <span class='comment'>#   proc { instance_exec(composed, &amp;second) }.call # part before `chain.yield`
+</span>  <span class='comment'>#   proc { instance_exec(composed, &amp;third) }.call  # part before `chain.yield`
 </span>  <span class='comment'>#   initial_around_callback
-</span>  <span class='comment'>#   proc { instance_exec(composed, &amp;third) }.call  # part after `chain.yield&#39;
-</span>  <span class='comment'>#   proc { instance_exec(composed, &amp;second) }.call # part after `chain.yield&#39;
-</span>  <span class='comment'>#   proc { instance_exec(composed, &amp;first) }.call  # part after `chain.yield&#39;
+</span>  <span class='comment'>#   proc { instance_exec(composed, &amp;third) }.call  # part after `chain.yield`
+</span>  <span class='comment'>#   proc { instance_exec(composed, &amp;second) }.call # part after `chain.yield`
+</span>  <span class='comment'>#   proc { instance_exec(composed, &amp;first) }.call  # part after `chain.yield`
 </span>  <span class='comment'>#
 </span>  <span class='id identifier rubyid_composed'>composed</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span>
 
@@ -398,7 +398,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Sep 26 20:15:16 2022 by
+  Generated on Mon Sep 26 20:25:43 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>

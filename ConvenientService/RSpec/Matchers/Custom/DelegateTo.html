@@ -122,7 +122,7 @@ expect { method_class.cast(other, **options) }
 <h1>=&gt; chain[:with]</h1>
 <p>and_return_its_value</p>
 <h1>=&gt; chain[:and_return_its_value]</h1>
-<p>NOTE: A similar (with different behaviour) matcher exists in `saharspec'.
+<p>NOTE: A similar (with different behaviour) matcher exists in <code>saharspec</code>.
 <a href="https://github.com/zverok/saharspec#send_messageobject-method-matcher">https://github.com/zverok/saharspec#send_messageobject-method-matcher</a></p>
 
 
@@ -207,7 +207,7 @@ expect { method_class.cast(other, **options) }
   
 
   
-    <span class="summary_desc"><div class='inline'><p>NOTE: <code>failure_message' is only called when </code>mathces?' returns `false'.</p>
+    <span class="summary_desc"><div class='inline'><p>NOTE: <code>failure_message</code> is only called when <code>mathces?</code> returns <code>false</code>.</p>
 </div></span>
   
 </li>
@@ -230,7 +230,7 @@ expect { method_class.cast(other, **options) }
   
 
   
-    <span class="summary_desc"><div class='inline'><p>NOTE: <code>failure_message_when_negated' is only called when </code>mathces?' returns `false'.</p>
+    <span class="summary_desc"><div class='inline'><p>NOTE: <code>failure_message_when_negated</code> is only called when <code>mathces?</code> returns <code>false</code>.</p>
 </div></span>
   
 </li>
@@ -487,7 +487,7 @@ expect { method_class.cast(other, **options) }
       <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/delegate_to.rb', line 128</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_description'>description</span>
-  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>delegate to `</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_printable_method'>printable_method</span><span class='embexpr_end'>}</span><span class='tstring_content'>&#39;</span><span class='tstring_end'>&quot;</span></span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>delegate to `</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_printable_method'>printable_method</span><span class='embexpr_end'>}</span><span class='tstring_content'>`</span><span class='tstring_end'>&quot;</span></span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -505,7 +505,7 @@ expect { method_class.cast(other, **options) }
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>NOTE: <code>failure_message' is only called when </code>mathces?' returns `false'.
+    <p>NOTE: <code>failure_message</code> is only called when <code>mathces?</code> returns <code>false</code>.
 <a href="https://rubydoc.info/github/rspec/rspec-expectations/RSpec/Matchers/MatcherProtocol#failure_message-instance_method">https://rubydoc.info/github/rspec/rspec-expectations/RSpec/Matchers/MatcherProtocol#failure_message-instance_method</a></p>
 
 
@@ -528,7 +528,7 @@ expect { method_class.cast(other, **options) }
       <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/delegate_to.rb', line 136</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_failure_message'>failure_message</span>
-  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>expected </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_printable_block'>printable_block</span><span class='embexpr_end'>}</span><span class='tstring_content'> to delegate to `</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_printable_method'>printable_method</span><span class='embexpr_end'>}</span><span class='tstring_content'>&#39;</span><span class='tstring_end'>&quot;</span></span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>expected </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_printable_block'>printable_block</span><span class='embexpr_end'>}</span><span class='tstring_content'> to delegate to `</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_printable_method'>printable_method</span><span class='embexpr_end'>}</span><span class='tstring_content'>`</span><span class='tstring_end'>&quot;</span></span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -546,7 +546,7 @@ expect { method_class.cast(other, **options) }
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>NOTE: <code>failure_message_when_negated' is only called when </code>mathces?' returns `false'.
+    <p>NOTE: <code>failure_message_when_negated</code> is only called when <code>mathces?</code> returns <code>false</code>.
 <a href="https://rubydoc.info/github/rspec/rspec-expectations/RSpec/Matchers/MatcherProtocol#failure_message-instance_method">https://rubydoc.info/github/rspec/rspec-expectations/RSpec/Matchers/MatcherProtocol#failure_message-instance_method</a></p>
 
 
@@ -569,7 +569,7 @@ expect { method_class.cast(other, **options) }
       <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/delegate_to.rb', line 144</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_failure_message_when_negated'>failure_message_when_negated</span>
-  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>expected </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_printable_block'>printable_block</span><span class='embexpr_end'>}</span><span class='tstring_content'> NOT to delegate to `</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_printable_method'>printable_method</span><span class='embexpr_end'>}</span><span class='tstring_content'>&#39;</span><span class='tstring_end'>&quot;</span></span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>expected </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_printable_block'>printable_block</span><span class='embexpr_end'>}</span><span class='tstring_content'> NOT to delegate to `</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_printable_method'>printable_method</span><span class='embexpr_end'>}</span><span class='tstring_content'>`</span><span class='tstring_end'>&quot;</span></span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -672,13 +672,13 @@ expect { method_class.cast(other, **options) }
 
   <span class='kw'>if</span> <span class='id identifier rubyid_used_with_arguments?'>used_with_arguments?</span>
     <span class='comment'>##
-</span>    <span class='comment'># NOTE: RSpec `allow(object).to receive(method).with(*args, **kwargs)&#39; does NOT support block.
+</span>    <span class='comment'># NOTE: RSpec `allow(object).to receive(method).with(*args, **kwargs)` does NOT support block.
 </span>    <span class='comment'># https://github.com/rspec/rspec-mocks/issues/1182#issuecomment-679820352
 </span>    <span class='comment'>#
-</span>    <span class='comment'># NOTE: RSpec `allow(object).to receive(method) do&#39; does NOT support `and_call_original&#39;.
+</span>    <span class='comment'># NOTE: RSpec `allow(object).to receive(method) do` does NOT support `and_call_original`.
 </span>    <span class='comment'># https://github.com/rspec/rspec-mocks/issues/774#issuecomment-54245277
 </span>    <span class='comment'>#
-</span>    <span class='comment'># NOTE: That is why `and_wrap_original&#39; is used.
+</span>    <span class='comment'># NOTE: That is why `and_wrap_original` is used.
 </span>    <span class='comment'># https://relishapp.com/rspec/rspec-mocks/docs/configuring-responses/wrapping-the-original-implementation
 </span>    <span class='comment'>#
 </span>    <span class='id identifier rubyid_allow'>allow</span><span class='lparen'>(</span><span class='id identifier rubyid_object'>object</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to'>to</span> <span class='id identifier rubyid_receive'>receive</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_and_wrap_original'>and_wrap_original</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_original'>original</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_actual_args'>actual_args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_actual_kwargs'>actual_kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_actual_block'>actual_block</span><span class='op'>|</span>
@@ -691,7 +691,7 @@ expect { method_class.cast(other, **options) }
       <span class='id identifier rubyid_expect'>expect</span><span class='lparen'>(</span><span class='id identifier rubyid_actual_block'>actual_block</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to'>to</span> <span class='id identifier rubyid_eq'>eq</span><span class='lparen'>(</span><span class='id identifier rubyid_expected_block'>expected_block</span><span class='rparen'>)</span>
 
       <span class='comment'>##
-</span>      <span class='comment'># NOTE: Imitates `and_call_original&#39;.
+</span>      <span class='comment'># NOTE: Imitates `and_call_original`.
 </span>      <span class='comment'>#
 </span>      <span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_actual_args'>actual_args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_actual_kwargs'>actual_kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_actual_block'>actual_block</span><span class='rparen'>)</span>
     <span class='kw'>end</span>
@@ -700,7 +700,7 @@ expect { method_class.cast(other, **options) }
   <span class='kw'>end</span>
 
   <span class='comment'>##
-</span>  <span class='comment'># NOTE: Calls `block_expectation&#39; before checking expections.
+</span>  <span class='comment'># NOTE: Calls `block_expectation` before checking expections.
 </span>  <span class='comment'>#
 </span>  <span class='id identifier rubyid_value'>value</span> <span class='op'>=</span> <span class='id identifier rubyid_block_expectation'>block_expectation</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span>
 
@@ -712,8 +712,8 @@ expect { method_class.cast(other, **options) }
 </span>  <span class='comment'># IMPORTANT: A matcher should always return a boolean.
 </span>  <span class='comment'># https://github.com/zverok/saharspec/blob/master/lib/saharspec/matchers/send_message.rb#L59
 </span>  <span class='comment'>#
-</span>  <span class='comment'># NOTE: RSpec raises exception when any `expect&#39; is NOT satisfied.
-</span>  <span class='comment'># So, this `true&#39; is returned only when all `expect&#39; are successful.
+</span>  <span class='comment'># NOTE: RSpec raises exception when any `expect` is NOT satisfied.
+</span>  <span class='comment'># So, this `true` is returned only when all `expect` are successful.
 </span>  <span class='comment'>#
 </span>  <span class='kw'>true</span>
 <span class='kw'>end</span></pre>
@@ -891,7 +891,7 @@ expect { method_class.cast(other, **options) }
 </div>
 
       <div id="footer">
-  Generated on Mon Sep 26 20:15:15 2022 by
+  Generated on Mon Sep 26 20:25:42 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>

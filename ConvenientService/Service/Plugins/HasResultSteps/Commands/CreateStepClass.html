@@ -364,13 +364,13 @@
   <span class='id identifier rubyid_step_class'>step_class</span><span class='period'>.</span><span class='id identifier rubyid_include'>include</span> <span class='const'><span class='object_link'><a href="../Entities.html" title="ConvenientService::Service::Plugins::HasResultSteps::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Entities/Step.html" title="ConvenientService::Service::Plugins::HasResultSteps::Entities::Step (class)">Step</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Entities/Step/Concern.html" title="ConvenientService::Service::Plugins::HasResultSteps::Entities::Step::Concern (module)">Concern</a></span></span>
 
   <span class='comment'>##
-</span>  <span class='comment'># class Step &lt; ConvenientService::Service::Plugins::HasResultSteps::Entities::Step # or just `class Step&#39; if service class defines its own.
+</span>  <span class='comment'># class Step &lt; ConvenientService::Service::Plugins::HasResultSteps::Entities::Step # or just `class Step` if service class defines its own.
 </span>  <span class='comment'>#   include ConvenientService::Service::Plugins::HasResultSteps::Entities::Step::Concern
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#   class &lt;&lt; self
 </span>  <span class='comment'>#     def service_class
 </span>  <span class='comment'>#       ##
-</span>  <span class='comment'>#       # NOTE: Returns `service_class&#39; passed to `CreateResultClass&#39;.
+</span>  <span class='comment'>#       # NOTE: Returns `service_class` passed to `CreateResultClass`.
 </span>  <span class='comment'>#       #
 </span>  <span class='comment'>#       service_class
 </span>  <span class='comment'>#     end
@@ -387,7 +387,7 @@
     <span class='id identifier rubyid_define_singleton_method'>define_singleton_method</span><span class='lparen'>(</span><span class='symbol'>:service_class</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_service_class'>service_class</span> <span class='rbrace'>}</span>
 
     <span class='comment'>##
-</span>    <span class='comment'># TODO: Fix a bug with `ap&#39;.
+</span>    <span class='comment'># TODO: Fix a bug with `ap`.
 </span>    <span class='comment'>#
 </span>    <span class='id identifier rubyid_define_singleton_method'>define_singleton_method</span><span class='lparen'>(</span><span class='symbol'>:==</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_other'>other</span><span class='op'>|</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_service_class'>service_class</span> <span class='op'>==</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_service_class'>service_class</span> <span class='kw'>if</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
   <span class='kw'>end</span>
@@ -404,7 +404,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Sep 26 20:15:17 2022 by
+  Generated on Mon Sep 26 20:25:45 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>

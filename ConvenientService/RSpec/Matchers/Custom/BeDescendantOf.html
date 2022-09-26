@@ -101,7 +101,7 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>NOTE: Navigate to the link below and `Ctrl + F' for &quot;Custom Matcher from scratch&quot;
+    <p>NOTE: Navigate to the link below and <code>Ctrl + F</code> for &quot;Custom Matcher from scratch&quot;
 for a guide of how to define a complex custom matcher.
 <a href="https://rubydoc.info/github/rspec/rspec-expectations/RSpec/Matchers">https://rubydoc.info/github/rspec/rspec-expectations/RSpec/Matchers</a></p>
 <p>More info:</p>
@@ -171,7 +171,7 @@ for a guide of how to define a complex custom matcher.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>NOTE: <code>failure_message' is only called when </code>mathces?' returns `false'.</p>
+    <span class="summary_desc"><div class='inline'><p>NOTE: <code>failure_message</code> is only called when <code>mathces?</code> returns <code>false</code>.</p>
 </div></span>
   
 </li>
@@ -194,7 +194,7 @@ for a guide of how to define a complex custom matcher.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>NOTE: <code>failure_message_when_negated' is only called when </code>mathces?' returns `false'.</p>
+    <span class="summary_desc"><div class='inline'><p>NOTE: <code>failure_message_when_negated</code> is only called when <code>mathces?</code> returns <code>false</code>.</p>
 </div></span>
   
 </li>
@@ -323,7 +323,7 @@ for a guide of how to define a complex custom matcher.
       <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/be_descendant_of.rb', line 28</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_description'>description</span>
-  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>be a descendant of `</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_base_klass'>base_klass</span><span class='embexpr_end'>}</span><span class='tstring_content'>&#39;</span><span class='tstring_end'>&quot;</span></span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>be a descendant of `</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_base_klass'>base_klass</span><span class='embexpr_end'>}</span><span class='tstring_content'>`</span><span class='tstring_end'>&quot;</span></span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -341,7 +341,7 @@ for a guide of how to define a complex custom matcher.
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>NOTE: <code>failure_message' is only called when </code>mathces?' returns `false'.
+    <p>NOTE: <code>failure_message</code> is only called when <code>mathces?</code> returns <code>false</code>.
 <a href="https://rubydoc.info/github/rspec/rspec-expectations/RSpec/Matchers/MatcherProtocol#failure_message-instance_method">https://rubydoc.info/github/rspec/rspec-expectations/RSpec/Matchers/MatcherProtocol#failure_message-instance_method</a></p>
 
 
@@ -364,7 +364,7 @@ for a guide of how to define a complex custom matcher.
       <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/be_descendant_of.rb', line 36</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_failure_message'>failure_message</span>
-  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>expected </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_klass'>klass</span><span class='embexpr_end'>}</span><span class='tstring_content'> to be a descendant of `</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_base_klass'>base_klass</span><span class='embexpr_end'>}</span><span class='tstring_content'>&#39;</span><span class='tstring_end'>&quot;</span></span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>expected </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_klass'>klass</span><span class='embexpr_end'>}</span><span class='tstring_content'> to be a descendant of `</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_base_klass'>base_klass</span><span class='embexpr_end'>}</span><span class='tstring_content'>`</span><span class='tstring_end'>&quot;</span></span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -382,7 +382,7 @@ for a guide of how to define a complex custom matcher.
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>NOTE: <code>failure_message_when_negated' is only called when </code>mathces?' returns `false'.
+    <p>NOTE: <code>failure_message_when_negated</code> is only called when <code>mathces?</code> returns <code>false</code>.
 <a href="https://rubydoc.info/github/rspec/rspec-expectations/RSpec/Matchers/MatcherProtocol#failure_message-instance_method">https://rubydoc.info/github/rspec/rspec-expectations/RSpec/Matchers/MatcherProtocol#failure_message-instance_method</a></p>
 
 
@@ -405,7 +405,7 @@ for a guide of how to define a complex custom matcher.
       <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/be_descendant_of.rb', line 44</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_failure_message_when_negated'>failure_message_when_negated</span>
-  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>expected </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_klass'>klass</span><span class='embexpr_end'>}</span><span class='tstring_content'> NOT to be a descendant of `</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_base_klass'>base_klass</span><span class='embexpr_end'>}</span><span class='tstring_content'>&#39;</span><span class='tstring_end'>&quot;</span></span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>expected </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_klass'>klass</span><span class='embexpr_end'>}</span><span class='tstring_content'> NOT to be a descendant of `</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_base_klass'>base_klass</span><span class='embexpr_end'>}</span><span class='tstring_content'>`</span><span class='tstring_end'>&quot;</span></span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -473,7 +473,7 @@ for a guide of how to define a complex custom matcher.
 </div>
 
       <div id="footer">
-  Generated on Mon Sep 26 20:15:16 2022 by
+  Generated on Mon Sep 26 20:25:42 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>
