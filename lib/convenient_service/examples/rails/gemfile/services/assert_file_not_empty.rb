@@ -13,7 +13,7 @@ module ConvenientService
             validates :path, presence: true
 
             def result
-              return error(message: "File with path `#{path}' is empty") if ::File.zero?(path)
+              return error(message: "File with path `#{path}` is empty") if ::File.zero?(path)
 
               success
             end

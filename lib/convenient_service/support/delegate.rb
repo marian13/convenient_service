@@ -3,10 +3,10 @@
 module ConvenientService
   module Support
     ##
-    # A wrapper for Ruby's stdlib `::Forwardable' module.
+    # A wrapper for Ruby's stdlib `::Forwardable` module.
     # https://ruby-doc.org/stdlib-2.5.1/libdoc/forwardable/rdoc/Forwardable.html
     #
-    # Tries to follow Rails `delegate' interface.
+    # Tries to follow Rails `delegate` interface.
     # https://api.rubyonrails.org/classes/Module.html#method-i-delegate
     #
     module Delegate
@@ -19,8 +19,8 @@ module ConvenientService
       end
 
       ##
-      # `ClassMethods' is loaded faster than `included' by `Concern'.
-      # Since `Forwardable' has it own `delegate' - a different name is used.
+      # `ClassMethods` is loaded faster than `included` by `Concern`.
+      # Since `Forwardable` has it own `delegate` - a different name is used.
       #
       module ClassMethodsForForwardable
         def delegate(*methods, to:)

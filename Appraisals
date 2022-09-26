@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 ##
-# TODO: GitHub wiki for `shouda-matchers'.
+# TODO: GitHub wiki for `shouda-matchers`.
 #
-# IMPORTANT: `shoulda-matchers' loads active support core extensions.
+# IMPORTANT: `shoulda-matchers` loads active support core extensions.
 # https://guides.rubyonrails.org/active_support_core_extensions.html
 # https://apidock.com/rails/v6.1.3.1/Hash/symbolize_keys
 #
@@ -14,7 +14,7 @@
 #   # Works well with Active Support
 #
 #   {"a" => 1}.symbolize_keys
-#   # undefined method `symbolize_keys' for {"a"=>1}:Hash (NoMethodError)
+#   # undefined method `symbolize_keys` for {"a"=>1}:Hash (NoMethodError)
 #   # Raises for Ruby 3.1 and lower.
 #
 # To debug who actually requires Active Support, use the following snippet:
@@ -32,7 +32,7 @@ appraise "rails_5.2" do
   gem "activemodel", "~> 5.2.0"
 
   ##
-  # NOTE: Waits for `should-matchers' full support.
+  # NOTE: Waits for `should-matchers` full support.
   #
   # gem "shoulda-matchers", "~> 5.0.0"
 end
@@ -41,7 +41,7 @@ appraise "rails_6.0" do
   gem "activemodel", "~> 6.0.0"
 
   ##
-  # NOTE: Waits for `should-matchers' full support.
+  # NOTE: Waits for `should-matchers` full support.
   #
   # gem "shoulda-matchers", "~> 5.0.0"
 end
@@ -50,7 +50,7 @@ appraise "rails_6.1" do
   gem "activemodel", "~> 6.1.0"
 
   ##
-  # NOTE: Waits for `should-matchers' full support.
+  # NOTE: Waits for `should-matchers` full support.
   #
   # gem "shoulda-matchers", "~> 5.0.0"
 end
@@ -59,7 +59,7 @@ appraise "rails_7.0" do
   gem "activemodel", "~> 7.0.0"
 
   ##
-  # NOTE: Waits for `should-matchers' full support.
+  # NOTE: Waits for `should-matchers` full support.
   #
   # gem "shoulda-matchers", "~> 5.0.0"
 end
@@ -71,7 +71,7 @@ appraise "dry" do
 end
 
 ##
-# NOTE: A combination of all the highest versions of gems. Just for quick hacking in `task console:all'.
+# NOTE: A combination of all the highest versions of gems. Just for quick hacking in `task console:all`.
 # IMPORTANT: Should not be enforced in CI, since integrity checks between external gems are not the goal of this library (a least for now).
 #
 appraise "all" do
@@ -82,7 +82,7 @@ appraise "all" do
   gem "dry-validation", "~> 1.5.0"
 
   ##
-  # NOTE: Waits for `should-matchers' full support.
+  # NOTE: Waits for `should-matchers` full support.
   #
   # gem "shoulda-matchers", "~> 5.0.0"
 end

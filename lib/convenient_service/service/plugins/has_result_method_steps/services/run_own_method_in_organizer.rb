@@ -20,7 +20,7 @@ module ConvenientService
               own_method = Utils::Method.find_own(method_name, organizer)
 
               ##
-              # NOTE: `kwargs' are intentionally NOT passed, since all the corresponding methods are available inside `own_method' body.
+              # NOTE: `kwargs` are intentionally NOT passed, since all the corresponding methods are available inside `own_method` body.
               #
               return own_method.call if own_method
 

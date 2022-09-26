@@ -14,11 +14,11 @@ require:
   #
   - rubocop-rspec
   ##
-  # NOTE: `rubocop-performance' is automatically bundled with Standard.
+  # NOTE: `rubocop-performance` is automatically bundled with Standard.
   #
   - rubocop-performance
   ##
-  # NOTE: Custom Standard cop that should be loaded before `config/base.yml'.
+  # NOTE: Custom Standard cop that should be loaded before `config/base.yml`.
   #
   - standard/cop/block_single_line_braces
 
@@ -27,7 +27,7 @@ inherit_gem:
 
 AllCops:
   ##
-  # NOTE: `TargetRubyVersion: 2.5' is the oldest supported Ruby version by Rubocop.
+  # NOTE: `TargetRubyVersion: 2.5` is the oldest supported Ruby version by Rubocop.
   # As a result, Rubocop may miss incompatible code with Ruby 2.3 and Ruby 2.4, but it will be caught by specs (if they are written of course).
   # https://github.com/testdouble/standard#how-do-i-specify-a-ruby-version-what-is-supported
   #

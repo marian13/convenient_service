@@ -47,7 +47,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::AssertFileNo
       let(:tempfile) { Tempfile.new }
 
       it "returns error with message" do
-        expect(result).to be_error.with_message("File with path `#{path}' is empty")
+        expect(result).to be_error.with_message("File with path `#{path}` is empty")
       end
     end
   end

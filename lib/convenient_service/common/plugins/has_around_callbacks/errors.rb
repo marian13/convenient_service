@@ -8,9 +8,9 @@ module ConvenientService
           class AroundCallbackChainIsNotContinued < ConvenientService::Error
             def initialize(callback:)
               message = <<~TEXT
-                Around callback chain is NOT continued from `#{callback.block.source_location}'.
+                Around callback chain is NOT continued from `#{callback.block.source_location}`.
 
-                Did you forget to call `chain.yield'? For example:
+                Did you forget to call `chain.yield`? For example:
 
                 around :result do |chain|
                   # ...

@@ -23,7 +23,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanRecalculateResult::Concer
     let(:service_instance_copy_result) { double }
 
     describe "#recalculate_result" do
-      it "delegates to `copy'" do
+      it "delegates to `copy`" do
         allow(service_instance).to receive(:copy).and_call_original
 
         service_instance.recalculate_result
@@ -31,7 +31,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanRecalculateResult::Concer
         expect(service_instance).to have_received(:copy)
       end
 
-      it "delegates to `result'" do
+      it "delegates to `result`" do
         allow(service_instance_copy).to receive(:result).and_call_original
 
         service_instance.recalculate_result
@@ -39,7 +39,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanRecalculateResult::Concer
         expect(service_instance_copy).to have_received(:result)
       end
 
-      it "returns return value of `copy.result'" do
+      it "returns return value of `copy.result`" do
         expect(service_instance.recalculate_result).to eq(service_instance_copy_result)
       end
     end

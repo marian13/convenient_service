@@ -24,15 +24,15 @@ module ConvenientService
           end
 
           def description
-            "have abstract method `#{method_name}'"
+            "have abstract method `#{method_name}`"
           end
 
           def failure_message
-            "expected `#{object.class}' to have abstract method `#{method_name}'"
+            "expected `#{object.class}` to have abstract method `#{method_name}`"
           end
 
           def failure_message_when_negated
-            "expected `#{object.class}' NOT to have abstract method `#{method_name}'"
+            "expected `#{object.class}` NOT to have abstract method `#{method_name}`"
           end
 
           private

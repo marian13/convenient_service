@@ -2,9 +2,9 @@
 
 ##
 # NOTE:
-#   Copied from `Ibsciss/ruby-middleware' without any logic modification. Version: v0.4.2.
-#   Just wrapped in a namespace `ConvenientService::Extractions::RubyMiddleware'.
-#   Replaced `require' into `require_relative'.
+#   Copied from `Ibsciss/ruby-middleware` without any logic modification. Version: v0.4.2.
+#   Just wrapped in a namespace `ConvenientService::Extractions::RubyMiddleware`.
+#   Replaced `require` into `require_relative`.
 #
 # - https://github.com/marian13/ruby-middleware/blob/v0.4.2/middleware.gemspec
 # - https://github.com/Ibsciss/ruby-middleware/blob/v0.4.2/middleware.gemspec

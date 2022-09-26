@@ -45,25 +45,25 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultMethodSteps::Servic
       let(:organizer) { organizer_service_class.new }
       let(:kwargs) { {} }
 
-      context "when `organizer' does NOT have own method" do
+      context "when `organizer` does NOT have own method" do
         let(:organizer_service_class) { organizer_base_service_class }
 
         let(:error_message) do
           <<~TEXT
-            Service #{organizer.class} tries to use `#{method_name}' method in a step, but it NOT defined.
+            Service #{organizer.class} tries to use `#{method_name}` method in a step, but it NOT defined.
 
             Did you forget to define it?
           TEXT
         end
 
-        it "raises `ConvenientService::Service::Plugins::HasResultMethodSteps::Errors::MethodForStepIsNotDefined'" do
+        it "raises `ConvenientService::Service::Plugins::HasResultMethodSteps::Errors::MethodForStepIsNotDefined`" do
           expect { service_result }
             .to raise_error(ConvenientService::Service::Plugins::HasResultMethodSteps::Errors::MethodForStepIsNotDefined)
             .with_message(error_message)
         end
       end
 
-      context "when `organizer' has own method" do
+      context "when `organizer` has own method" do
         let(:organizer_service_class) do
           Class.new(organizer_base_service_class).tap do |klass|
             klass.class_exec(method_name) do |method_name|
@@ -74,13 +74,13 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultMethodSteps::Servic
 
         it "calls that own method" do
           ##
-          # NOTE: Own method returns `success', while prepended returns `failure`.
+          # NOTE: Own method returns `success`, while prepended returns `failure`.
           # See `organizer_service_class` definition above.
           #
           expect(service_result).to be_success
         end
 
-        context "when `kwargs' are passed" do
+        context "when `kwargs` are passed" do
           let(:organizer_service_class) do
             Class.new(organizer_base_service_class).tap do |klass|
               klass.class_exec(method_name) do |method_name|

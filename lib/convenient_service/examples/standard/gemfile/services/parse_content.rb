@@ -57,7 +57,7 @@ module ConvenientService
             private
 
             def validate_content
-              return failure(content: "Content is `nil'") if content.nil?
+              return failure(content: "Content is `nil`") if content.nil?
               return failure(content: "Content is empty") if content.empty?
 
               success

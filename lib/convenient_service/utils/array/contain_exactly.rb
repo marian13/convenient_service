@@ -4,7 +4,7 @@ module ConvenientService
   module Utils
     module Array
       ##
-      # IMPORTANT: Since `contain_exactly' uses hashes under the hood, `first_array' and `second_array' items should be comparable by `hash' and `eql?'.
+      # IMPORTANT: Since `contain_exactly` uses hashes under the hood, `first_array` and `second_array` items should be comparable by `hash` and `eql?`.
       # It may sometimes introduce hash collisions, which in turn can degrade the performance.
       # But since the probability is relatively low, because it is NOT too common to have hashes that contain keys with different classes,
       # hashes comparison is still preferred over array comparison.
@@ -13,7 +13,7 @@ module ConvenientService
       # https://stackoverflow.com/questions/54961311/ruby-why-does-hash-need-to-overridden-whenever-eql-is-overridden
       # https://ruby-doc.org/core-3.1.2/Object.html#method-i-hash
       #
-      # NOTE: Inspired by `contain_exactly' from `RSpec'.
+      # NOTE: Inspired by `contain_exactly` from `RSpec`.
       # https://relishapp.com/rspec/rspec-expectations/docs/built-in-matchers/contain-exactly-matcher
       #
       class ContainExactly < Support::Command

@@ -18,7 +18,7 @@ module ConvenientService
 
             def result
               ##
-              # NOTE: `kwargs' are intentionally NOT passed, since all the corresponding methods are available inside `organizer.__send__(method_name)' body.
+              # NOTE: `kwargs` are intentionally NOT passed, since all the corresponding methods are available inside `organizer.__send__(method_name)` body.
               #
               organizer.__send__(method_name)
             end

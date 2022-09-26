@@ -21,7 +21,7 @@ module ConvenientService
             end
 
             def result
-              return failure(text: "Text is `nil'") if text.nil?
+              return failure(text: "Text is `nil`") if text.nil?
               return failure(text: "Text is empty?") if text.empty?
 
               out.puts

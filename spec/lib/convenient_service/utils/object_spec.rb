@@ -15,18 +15,18 @@ RSpec.describe ConvenientService::Utils::Object do
       context "when const is NOT defined at all" do
         let(:const_name) { :NotExistingConst }
 
-        it "returns `nil'" do
+        it "returns `nil`" do
           expect(result).to be_nil
         end
       end
 
       context "when const is defined outside object namespace" do
         ##
-        # NOTE: `File' is defined in `Object' class from Ruby Core.
+        # NOTE: `File` is defined in `Object` class from Ruby Core.
         #
         let(:const_name) { :File }
 
-        it "returns `nil'" do
+        it "returns `nil`" do
           expect(result).to be_nil
         end
       end
@@ -50,26 +50,26 @@ RSpec.describe ConvenientService::Utils::Object do
   describe ".resolve_type" do
     let(:result) { described_class.resolve_type(object) }
 
-    context "when `object' is module" do
+    context "when `object` is module" do
       let(:object) { Kernel }
 
-      it "returns `module' string" do
+      it "returns `module` string" do
         expect(result).to eq("module")
       end
     end
 
-    context "when `object' is class" do
+    context "when `object` is class" do
       let(:object) { Array }
 
-      it "returns `class' string" do
+      it "returns `class` string" do
         expect(result).to eq("class")
       end
     end
 
-    context "when `object' is neither module nor class" do
+    context "when `object` is neither module nor class" do
       let(:object) { "foo" }
 
-      it "returns `instance' string" do
+      it "returns `instance` string" do
         expect(result).to eq("instance")
       end
     end

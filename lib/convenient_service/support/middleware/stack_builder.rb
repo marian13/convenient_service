@@ -6,7 +6,7 @@ module ConvenientService
       ##
       # TODO: Contribute.
       #
-      # NOTE: Minimal `ibsciss-middleware' version - `0.4.2'.
+      # NOTE: Minimal `ibsciss-middleware` version - `0.4.2`.
       # https://github.com/Ibsciss/ruby-middleware/tree/v0.4.2
       #
       class StackBuilder < Extractions::RubyMiddleware::Middleware::Builder
@@ -23,11 +23,11 @@ module ConvenientService
         end
 
         ##
-        # NOTE: `use' can accept additional arguments and block,
-        # that is why `stack' contains tuples like [middleware, args, block].
+        # NOTE: `use` can accept additional arguments and block,
+        # that is why `stack` contains tuples like [middleware, args, block].
         # https://github.com/Ibsciss/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L76
         #
-        # TODO: better name than just `to_a'.
+        # TODO: better name than just `to_a`.
         #
         def to_a
           stack

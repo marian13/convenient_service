@@ -18,18 +18,20 @@ module ConvenientService
 
         ##
         # NOTE: If concerns are just enabled (are just included into the mixing class) then retries the missing method,
-        # otherwise raises `NoMethodError' (since method is still missing even after including concerns).
+        # otherwise raises `NoMethodError` (since method is still missing even after including concerns).
         #
         # TODO: Logger spec.
         #
         return super unless just_enabled
 
-        ConvenientService.logger.debug { "[Core] Enabled concern middleware stack for `#{self.class}' | Triggered by `method_missing' | Method: `##{method}' " }
+        ConvenientService.logger.debug { "[Core] Enabled concern middleware stack for `#{self.class}` | Triggered by `method_missing` | Method: `##{method}` " }
 
         __send__(method, *args, **kwargs, &block)
       end
 
       ##
+      # TODO: How?
+      #
       # TODO: Implement.
       # https://thoughtbot.com/blog/always-define-respond-to-missing-when-overriding
       #

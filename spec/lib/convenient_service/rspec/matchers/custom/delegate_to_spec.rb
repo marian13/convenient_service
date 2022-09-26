@@ -35,24 +35,24 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo do
 
       it "works" do
         ##
-        # NOTE: `expect { object.foo }.to delegate_to(object, :bar)'
+        # NOTE: `expect { object.foo }.to delegate_to(object, :bar)`
         #
         matcher_result
       end
     end
 
-    context "when used with `and_return_its_value'" do
+    context "when used with `and_return_its_value`" do
       let(:matcher) { described_class.new(object, method).and_return_its_value }
 
       it "works" do
         ##
-        # NOTE: `expect { object.foo }.to delegate_to(object, :bar).and_return_its_value'
+        # NOTE: `expect { object.foo }.to delegate_to(object, :bar).and_return_its_value`
         #
         matcher_result
       end
     end
 
-    context "when used with `with_arguments(*args, **kwargs, &block)'" do
+    context "when used with `with_arguments(*args, **kwargs, &block)`" do
       let(:matcher) { described_class.new(object, method).with_arguments(*args, **kwargs, &block) }
 
       let(:block_expectation) { proc { object.foo(*args, **kwargs, &block) } }
@@ -82,7 +82,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo do
 
       it "works" do
         ##
-        # NOTE: `expect { object.foo }.to delegate_to(object, :bar).with_arguments(*args, **kwargs, &block)'
+        # NOTE: `expect { object.foo }.to delegate_to(object, :bar).with_arguments(*args, **kwargs, &block)`
         #
         matcher_result
       end
@@ -93,18 +93,18 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo do
     it "returns message" do
       matcher_result
 
-      expect(matcher.description).to eq("delegate to `#{printable_method}'")
+      expect(matcher.description).to eq("delegate to `#{printable_method}`")
     end
   end
 
   describe "#supports_block_expectations?" do
-    it "returns `true'" do
+    it "returns `true`" do
       expect(matcher.supports_block_expectations?).to eq(true)
     end
   end
 
   describe "#printable_method" do
-    context "when `object' is class" do
+    context "when `object` is class" do
       let(:object) do
         Class.new do
           def self.bar
@@ -119,7 +119,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo do
       end
     end
 
-    context "when `object' is module" do
+    context "when `object` is module" do
       let(:object) do
         Module.new do
           def self.bar
@@ -134,7 +134,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo do
       end
     end
 
-    context "when `object' is instance" do
+    context "when `object` is instance" do
       let(:klass) do
         Class.new do
           def bar
@@ -163,7 +163,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo do
     it "returns message" do
       matcher_result
 
-      expect(matcher.failure_message).to eq("expected #{printable_block} to delegate to `#{printable_method}'")
+      expect(matcher.failure_message).to eq("expected #{printable_block} to delegate to `#{printable_method}`")
     end
   end
 
@@ -171,7 +171,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo do
     it "returns message" do
       matcher_result
 
-      expect(matcher.failure_message_when_negated).to eq("expected #{printable_block} NOT to delegate to `#{printable_method}'")
+      expect(matcher.failure_message_when_negated).to eq("expected #{printable_block} NOT to delegate to `#{printable_method}`")
     end
   end
 

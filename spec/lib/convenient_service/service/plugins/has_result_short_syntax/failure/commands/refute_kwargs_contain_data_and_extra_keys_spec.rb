@@ -12,7 +12,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultShortSyntax::Failur
     describe ".call" do
       subject(:command_result) { described_class.call(kwargs: kwargs) }
 
-      context "when kwargs do NOT contain `:data' key" do
+      context "when kwargs do NOT contain `:data` key" do
         let(:kwargs) { {foo: :bar} }
 
         it "does NOT raise" do
@@ -20,7 +20,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultShortSyntax::Failur
         end
       end
 
-      context "when kwargs contain `:data' key" do
+      context "when kwargs contain `:data` key" do
         context "when kwargs do NOT contain extra keys" do
           let(:kwargs) { {data: {foo: :bar}} }
 
@@ -34,7 +34,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultShortSyntax::Failur
 
           let(:error_message) do
             <<~TEXT
-              `kwargs' passed to `failure' method contain `data' and extra keys. That's NOT allowed.
+              `kwargs` passed to `failure` method contain `data` and extra keys. That's NOT allowed.
 
               Please, consider something like:
 
@@ -43,7 +43,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultShortSyntax::Failur
             TEXT
           end
 
-          it "raises `ConvenientService::Service::Plugins::HasResultShortSyntax::Failure::Errors::KwargsContainDataAndExtraKeys'" do
+          it "raises `ConvenientService::Service::Plugins::HasResultShortSyntax::Failure::Errors::KwargsContainDataAndExtraKeys`" do
             expect { command_result }
               .to raise_error(ConvenientService::Service::Plugins::HasResultShortSyntax::Failure::Errors::KwargsContainDataAndExtraKeys)
               .with_message(error_message)

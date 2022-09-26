@@ -37,7 +37,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Middleware do
 
       specify { expect { method_value }.to call_chain_next.on(method) }
 
-      context "when `result' class does NOT include `ConvenientService::Service::Plugins::HasResult::Entities::Result::Concern'" do
+      context "when `result` class does NOT include `ConvenientService::Service::Plugins::HasResult::Entities::Result::Concern`" do
         let(:service_class) do
           Class.new do
             include ConvenientService::Service::Plugins::HasResult::Concern
@@ -50,21 +50,21 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Middleware do
 
         let(:error_message) do
           <<~TEXT
-            Return value of service `#{service_class}' is NOT a `Result'.
-            It is a `String'.
+            Return value of service `#{service_class}` is NOT a `Result`.
+            It is a `String`.
 
-            Did you forget to call `success', `failure', or `error' from the `result' method?
+            Did you forget to call `success`, `failure`, or `error` from the `result` method?
           TEXT
         end
 
-        it "raises `ConvenientService::Service::Plugins::HasResult::Errors::ServiceReturnValueNotKindOfResult'" do
+        it "raises `ConvenientService::Service::Plugins::HasResult::Errors::ServiceReturnValueNotKindOfResult`" do
           expect { method_value }
             .to raise_error(ConvenientService::Service::Plugins::HasResult::Errors::ServiceReturnValueNotKindOfResult)
             .with_message(error_message)
         end
       end
 
-      context "when `result' class includes `ConvenientService::Service::Plugins::HasResult::Entities::Result::Concern'" do
+      context "when `result` class includes `ConvenientService::Service::Plugins::HasResult::Entities::Result::Concern`" do
         let(:service_class) do
           Class.new do
             include ConvenientService::Service::Plugins::HasResult::Concern

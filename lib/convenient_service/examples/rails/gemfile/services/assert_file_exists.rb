@@ -13,7 +13,7 @@ module ConvenientService
             validates :path, presence: true
 
             def result
-              return error("File with path `#{path}' does NOT exist") unless ::File.exist?(path)
+              return error("File with path `#{path}` does NOT exist") unless ::File.exist?(path)
 
               success
             end

@@ -75,9 +75,9 @@ module ConvenientService
     end
 
     ##
-    # Loads RSpec extensions like `be_success' matcher, `stub_service' helper, etc.
+    # Loads RSpec extensions like `be_success` matcher, `stub_service` helper, etc.
     #
-    # NOTE: Expected to be called from `spec_helper.rb'.
+    # NOTE: Expected to be called from `spec_helper.rb`.
     #
     def require_rspec_extentions
       require "rspec/expectations"

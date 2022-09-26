@@ -23,7 +23,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Entities::Callb
   end
 
   ##
-  # NOTE: Waits for `should-matchers' full support.
+  # NOTE: Waits for `should-matchers` full support.
   #
   # example_group "delegators" do
   #   include Shoulda::Matchers::Independent
@@ -74,7 +74,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Entities::Callb
         end
       end
 
-      context "when callback collections have different `callbacks'" do
+      context "when callback collections have different `callbacks`" do
         let(:other) { described_class.new.tap { |collection| collection << callback } }
 
         it "returns false" do

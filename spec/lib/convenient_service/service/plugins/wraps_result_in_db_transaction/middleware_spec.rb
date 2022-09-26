@@ -38,13 +38,13 @@
 #       ##
 #       # NOTE: How does this spec confirm that result is called inside transaction block (shortly, the condition to prove)?
 #       #
-#       # 1. `method_value' returns "result value" as it is defined in `service_class'. See let above.
-#       # 2. Mock for `ActiveRecord::Base.transaction' returns "transaction value". See spec body.
-#       # 3. If `method_value' returns "transaction value" instead of success, it confirms the condition to prove.
+#       # 1. `method_value` returns "result value" as it is defined in `service_class`. See let above.
+#       # 2. Mock for `ActiveRecord::Base.transaction` returns "transaction value". See spec body.
+#       # 3. If `method_value` returns "transaction value" instead of success, it confirms the condition to prove.
 #       #
 #       # TODO: Write a spec that makes real SQL queries and rollbacks them.
 #       #
-#       it "is called inside `ActiveRecord::Base.transaction'" do
+#       it "is called inside `ActiveRecord::Base.transaction`" do
 #         allow(ActiveRecord::Base).to receive(:transaction).and_return("transaction value")
 #
 #         expect(method_value).to eq("transaction value")

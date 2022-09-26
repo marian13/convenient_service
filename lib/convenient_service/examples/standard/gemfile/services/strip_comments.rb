@@ -33,13 +33,13 @@ module ConvenientService
 
             ##
             # NOTE: When you have no time to do something well, delegate that task to someone who already works with it all the time.
-            # That is why `strip-comments' npm package is used to remove comments.
+            # That is why `strip-comments` npm package is used to remove comments.
             #
             def js_script
               ##
-              # NOTE: `main' function is created in order to have an ability to use early returns.
+              # NOTE: `main` function is created in order to have an ability to use early returns.
               #
-              # IMPORTANT: Use only double quotes inside this JS script, since it is later consumed by `node -e' option wrapped by single quoutes.
+              # IMPORTANT: Use only double quotes inside this JS script, since it is later consumed by `node -e` option wrapped by single quoutes.
               #
               # TODO: Consider to use WeakRef if memory is a concern.
               # https://ruby-doc.org/stdlib-2.5.1/libdoc/weakref/rdoc/WeakRef.html

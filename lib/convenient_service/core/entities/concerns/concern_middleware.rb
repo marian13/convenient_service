@@ -20,16 +20,16 @@ module ConvenientService
           private
 
           ##
-          # NOTE: `self.class.concern' is overridden by descendants. Descendants are created dynamically. See `Concerns::MiddlewareStack#cast'.
+          # NOTE: `self.class.concern` is overridden by descendants. Descendants are created dynamically. See `Concerns::MiddlewareStack#cast`.
           #
-          # IMPORTANT: Must be kept in sync with `cast' in `ConvenientService::Core::Entities::Concerns::MiddlewareStack'.
+          # IMPORTANT: Must be kept in sync with `cast` in `ConvenientService::Core::Entities::Concerns::MiddlewareStack`.
           #
           def concern
             self.class.concern
           end
 
           ##
-          # TODO: Unify `inspect'. Specs for `inspect'.
+          # TODO: Unify `inspect`. Specs for `inspect`.
           #
           def inspect
             self.class.inspect

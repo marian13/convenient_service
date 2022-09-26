@@ -142,7 +142,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasConfig::Entities::Config d
       describe "#==" do
         let(:config) { described_class.new({"foo" => "bar"}) }
 
-        context "when `other' has different class" do
+        context "when `other` has different class" do
           let(:other) { 42 }
 
           it "returns false" do
@@ -150,7 +150,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasConfig::Entities::Config d
           end
         end
 
-        context "when `other' has different `to_h'" do
+        context "when `other` has different `to_h`" do
           let(:other) { described_class.new({"baz" => "qux"}) }
 
           it "returns false" do
@@ -158,7 +158,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasConfig::Entities::Config d
           end
         end
 
-        context "when `other' has same attributes" do
+        context "when `other` has same attributes" do
           let(:other) { described_class.new({"foo" => "bar"}) }
 
           it "returns true" do
@@ -184,7 +184,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasConfig::Entities::Config d
 
         let(:read_default_write_config) { ConvenientService::Common::Plugins::HasConfig::Entities::ReadDefaultWriteConfig.new({"foo" => "bar"}) }
 
-        it "returns `read_default_write_config' representation of config" do
+        it "returns `read_default_write_config` representation of config" do
           expect(config.to_read_default_write_config).to eq(read_default_write_config)
         end
 
@@ -209,7 +209,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasConfig::Entities::Config d
             )
           end
 
-          it "returns `read_default_write_config' representations for nestings" do
+          it "returns `read_default_write_config` representations for nestings" do
             expect(config.to_read_default_write_config).to eq(read_default_write_config)
           end
         end
@@ -239,7 +239,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasConfig::Entities::Config d
             )
           end
 
-          it "returns `read_default_write_config' representations for nestings" do
+          it "returns `read_default_write_config` representations for nestings" do
             expect(config.to_read_default_write_config).to eq(read_default_write_config)
           end
         end
@@ -250,7 +250,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasConfig::Entities::Config d
 
         let(:read_only_config) { ConvenientService::Common::Plugins::HasConfig::Entities::ReadOnlyConfig.new({"foo" => "bar"}) }
 
-        it "returns `read_only_config' representation of config" do
+        it "returns `read_only_config` representation of config" do
           expect(config.to_read_only_config).to eq(read_only_config)
         end
 
@@ -275,7 +275,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasConfig::Entities::Config d
             )
           end
 
-          it "returns `read_only_config' representations for nestings" do
+          it "returns `read_only_config` representations for nestings" do
             expect(config.to_read_only_config).to eq(read_only_config)
           end
         end
@@ -305,7 +305,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasConfig::Entities::Config d
             )
           end
 
-          it "returns `read_only_config' representations for nestings" do
+          it "returns `read_only_config` representations for nestings" do
             expect(config.to_read_only_config).to eq(read_only_config)
           end
         end

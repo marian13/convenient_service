@@ -9,31 +9,31 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Constants do
     describe "::DEFAULT_SERVICE_CLASS" do
       include ConvenientService::RSpec::Matchers::IncludeModule
 
-      it "returns class that includes `ConvenientService::Service::Plugins::Core'" do
+      it "returns class that includes `ConvenientService::Service::Plugins::Core`" do
         expect(described_class::DEFAULT_SERVICE_CLASS).to include_module(ConvenientService::Core)
       end
     end
 
     describe "::DEFAULT_SERVICE_INSTANCE" do
-      it "returns `ConvenientService::Service::Plugins::HasResult::Constants::DEFAULT_SERVICE_CLASS' instance" do
+      it "returns `ConvenientService::Service::Plugins::HasResult::Constants::DEFAULT_SERVICE_CLASS` instance" do
         expect(described_class::DEFAULT_SERVICE_INSTANCE).to be_instance_of(ConvenientService::Service::Plugins::HasResult::Constants::DEFAULT_SERVICE_CLASS)
       end
     end
 
     describe "::SUCCESS_STATUS" do
-      it "returns `:success'" do
+      it "returns `:success`" do
         expect(described_class::SUCCESS_STATUS).to eq(:success)
       end
     end
 
     describe "::FAILURE_STATUS" do
-      it "returns `:failure'" do
+      it "returns `:failure`" do
         expect(described_class::FAILURE_STATUS).to eq(:failure)
       end
     end
 
     describe "::ERROR_STATUS" do
-      it "returns `:error'" do
+      it "returns `:error`" do
         expect(described_class::ERROR_STATUS).to eq(:error)
       end
     end
@@ -75,19 +75,19 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Constants do
     end
 
     describe "::SUCCESS_CODE" do
-      it "returns `:success'" do
+      it "returns `:success`" do
         expect(described_class::SUCCESS_CODE).to eq(:success)
       end
     end
 
     describe "::FAILURE_CODE" do
-      it "returns `:failure'" do
+      it "returns `:failure`" do
         expect(described_class::FAILURE_CODE).to eq(:failure)
       end
     end
 
     describe "::DEFAULT_ERROR_CODE" do
-      it "returns `:default_error'" do
+      it "returns `:default_error`" do
         expect(described_class::DEFAULT_ERROR_CODE).to eq(:default_error)
       end
     end

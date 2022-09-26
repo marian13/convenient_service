@@ -35,11 +35,11 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
 
       let(:error_message) do
         <<~TEXT
-          Method `#{method.name}' is NOT an `in' method.
+          Method `#{method.name}` is NOT an `in` method.
         TEXT
       end
 
-      it "raises `ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Errors::MethodIsNotInputMethod'" do
+      it "raises `ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Errors::MethodIsNotInputMethod`" do
         expect { direction.validate_as_input_for_container!(container, method: method) }
           .to raise_error(ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Errors::MethodIsNotInputMethod)
           .with_message(error_message)
@@ -49,7 +49,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
     describe "#validate_as_output_for_container!" do
       let(:options) { {direction: :output} }
 
-      it "returns `true'" do
+      it "returns `true`" do
         expect(direction.validate_as_output_for_container!(container, method: method)).to eq(true)
       end
     end
@@ -58,7 +58,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
       let(:options) { {direction: :output} }
       let(:index) { 0 }
 
-      it "returns `true'" do
+      it "returns `true`" do
         expect(direction.define_output_in_container!(container, index: 0, method: method)).to eq(true)
       end
     end

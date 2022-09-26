@@ -14,7 +14,7 @@ module ConvenientService
             #
             class WrappedMethod
               ##
-              # NOTE: `middlewares' are `MethodChainMiddleware' classes.
+              # NOTE: `middlewares` are `MethodChainMiddleware` classes.
               #
               def initialize(entity:, method:, middlewares:)
                 @entity = entity
@@ -25,7 +25,7 @@ module ConvenientService
                   middlewares.each { |middleware| stack.use middleware }
 
                   ##
-                  # NOTE: The following proc middleware is triggered only when `chain.next' is called from method chain middleware.
+                  # NOTE: The following proc middleware is triggered only when `chain.next` is called from method chain middleware.
                   #
                   stack.use(
                     proc do |env|

@@ -42,11 +42,11 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultMethodSteps::Servic
       let(:organizer) { organizer_service_class.new }
       let(:kwargs) { {} }
 
-      it "calls method in `organizer' context" do
+      it "calls method in `organizer` context" do
         expect(service_result).to be_success.with_data(value: method_return_value)
       end
 
-      context "when `kwargs' are passed" do
+      context "when `kwargs` are passed" do
         let(:organizer_service_class) do
           Class.new(organizer_base_service_class).tap do |klass|
             klass.class_exec(method_name) do |method_name|

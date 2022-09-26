@@ -12,7 +12,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::StripComme
   include ConvenientService::RSpec::Matchers::HaveAttrAccessor
   include ConvenientService::RSpec::Matchers::IncludeModule
   ##
-  # NOTE: Waits for `should-matchers' full support.
+  # NOTE: Waits for `should-matchers` full support.
   #
   # include Shoulda::Matchers::ActiveModel
 
@@ -32,14 +32,14 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::StripComme
     subject { service }
 
     ##
-    # NOTE: have_attr_writer is needed by `validate_presence_of'.
+    # NOTE: have_attr_writer is needed by `validate_presence_of`.
     # https://stackoverflow.com/a/31686199/12201472
     #
     it { is_expected.to have_attr_accessor(:content) }
   end
 
   ##
-  # NOTE: Waits for `should-matchers' full support.
+  # NOTE: Waits for `should-matchers` full support.
   #
   # example_group "validations" do
   #   subject { service }
@@ -78,7 +78,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::StripComme
       RUBY
     end
 
-    context "when `strip-comments' npm package is not available" do
+    context "when `strip-comments` npm package is not available" do
       before do
         stub_service(ConvenientService::Examples::Rails::Gemfile::Services::AssertNpmPackageAvailable)
           .with_arguments(name: npm_package_name)
@@ -90,7 +90,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::StripComme
       end
     end
 
-    context "when `strip-comments' npm package is available" do
+    context "when `strip-comments` npm package is available" do
       before do
         stub_service(ConvenientService::Examples::Rails::Gemfile::Services::AssertNpmPackageAvailable)
           .with_arguments(name: npm_package_name)

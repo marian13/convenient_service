@@ -11,15 +11,15 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
       let(:options) { double }
       let(:casted) { described_class.call(other: other, options: options) }
 
-      context "when `other' is NOT castable" do
+      context "when `other` is NOT castable" do
         let(:other) { 42 }
 
-        it "returns `nil'" do
+        it "returns `nil`" do
           expect(casted).to be_nil
         end
       end
 
-      context "when `other' is symbol" do
+      context "when `other` is symbol" do
         let(:other) { :foo }
 
         it "returns symbol casted to method name" do
@@ -27,7 +27,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
         end
       end
 
-      context "when `other' is string" do
+      context "when `other` is string" do
         let(:other) { "foo" }
 
         it "returns string casted to method name" do
@@ -35,11 +35,11 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
         end
       end
 
-      context "when `other' is hash" do
+      context "when `other` is hash" do
         context "when that hash has no keys" do
           let(:other) { {} }
 
-          it "returns `nil'" do
+          it "returns `nil`" do
             expect(casted).to be_nil
           end
         end
@@ -48,7 +48,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
           context "when value by that key is NOT castable" do
             let(:other) { {foo: 42} }
 
-            it "returns `nil'" do
+            it "returns `nil`" do
               expect(casted).to be_nil
             end
           end
@@ -89,13 +89,13 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
         context "when that hash has multiple keys" do
           let(:other) { {foo: :bar, baz: :qux} }
 
-          it "returns `nil'" do
+          it "returns `nil`" do
             expect(casted).to be_nil
           end
         end
       end
 
-      context "when `other' is method" do
+      context "when `other` is method" do
         let(:other) { ConvenientService::Service::Plugins::HasResultSteps::Entities::Method.cast(:foo, direction: :input) }
 
         it "returns its name copy" do

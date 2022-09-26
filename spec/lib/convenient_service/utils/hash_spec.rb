@@ -9,7 +9,7 @@ RSpec.describe ConvenientService::Utils::Hash do
     let(:hash) { {foo: "foo", bar: "bar", baz: "baz"} }
     let(:util_result) { described_class.except(hash, keys: keys) }
 
-    context "when hash does NOT contain any key from `keys'" do
+    context "when hash does NOT contain any key from `keys`" do
       let(:keys) { [:qux] }
 
       it "returns hash with same keys as original hash" do
@@ -21,7 +21,7 @@ RSpec.describe ConvenientService::Utils::Hash do
       end
     end
 
-    context "when hash contain single key from `keys'" do
+    context "when hash contain single key from `keys`" do
       let(:keys) { [:baz] }
 
       it "returns hash without that key" do
@@ -33,7 +33,7 @@ RSpec.describe ConvenientService::Utils::Hash do
       end
     end
 
-    context "when hash contain multiple keys from `keys'" do
+    context "when hash contain multiple keys from `keys`" do
       let(:keys) { [:foo, :baz] }
 
       it "returns hash without those keys" do

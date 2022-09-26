@@ -44,7 +44,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultShortSyntax::Error:
 
         let(:error_message) do
           <<~TEXT
-            More than two `args' are passed to the `error' method.
+            More than two `args` are passed to the `error` method.
 
             Did you mean something like:
 
@@ -53,7 +53,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultShortSyntax::Error:
           TEXT
         end
 
-        it "raises `ConvenientService::Service::Plugins::HasResultShortSyntax::Error::Errors::MoreThanTwoArgsArePassed'" do
+        it "raises `ConvenientService::Service::Plugins::HasResultShortSyntax::Error::Errors::MoreThanTwoArgsArePassed`" do
           expect { command_result }
             .to raise_error(ConvenientService::Service::Plugins::HasResultShortSyntax::Error::Errors::MoreThanTwoArgsArePassed)
             .with_message(error_message)

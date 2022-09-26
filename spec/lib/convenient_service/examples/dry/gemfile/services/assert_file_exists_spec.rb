@@ -28,7 +28,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::AssertFileEx
       let(:path) { "non_existing_path" }
 
       it "returns error with message" do
-        expect(result).to be_error.with_message("File with path `#{path}' does NOT exist")
+        expect(result).to be_error.with_message("File with path `#{path}` does NOT exist")
       end
     end
 

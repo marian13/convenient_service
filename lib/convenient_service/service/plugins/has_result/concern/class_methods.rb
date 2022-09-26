@@ -7,7 +7,7 @@ module ConvenientService
         module Concern
           module ClassMethods
             ##
-            # NOTE: Update to `def result(...)' when support for Rubies lower than 2.7 is dropped.
+            # NOTE: Update to `def result(...)` when support for Rubies lower than 2.7 is dropped.
             # https://www.rubydoc.info/gems/rubocop/RuboCop/Cop/Style/ArgumentsForwarding
             #
             def result(*args, **kwargs, &block)
@@ -23,7 +23,7 @@ module ConvenientService
             end
 
             ##
-            # NOTE: This method is internally used by custom RSpec helper `stub_service'. It should NOT be used in the client code.
+            # NOTE: This method is internally used by custom RSpec helper `stub_service`. It should NOT be used in the client code.
             #
             def success(
               service: Constants::DEFAULT_SERVICE_INSTANCE,
@@ -39,7 +39,7 @@ module ConvenientService
             end
 
             ##
-            # NOTE: This method is internally used by custom RSpec helper `stub_service'. It should NOT be used in the client code.
+            # NOTE: This method is internally used by custom RSpec helper `stub_service`. It should NOT be used in the client code.
             #
             def failure(
               service: Constants::DEFAULT_SERVICE_INSTANCE,
@@ -56,7 +56,7 @@ module ConvenientService
             end
 
             ##
-            # NOTE: This method is internally used by custom RSpec helper `stub_service'. It should NOT be used in the client code.
+            # NOTE: This method is internally used by custom RSpec helper `stub_service`. It should NOT be used in the client code.
             #
             def error(
               service: Constants::DEFAULT_SERVICE_INSTANCE,

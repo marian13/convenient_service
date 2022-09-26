@@ -33,7 +33,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
     describe "#validate_as_input_for_container!" do
       let(:options) { {direction: :input} }
 
-      it "returns `true'" do
+      it "returns `true`" do
         expect(direction.validate_as_input_for_container!(container, method: method)).to eq(true)
       end
     end
@@ -43,11 +43,11 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
 
       let(:error_message) do
         <<~TEXT
-          Method `#{method.name}' is NOT an `out' method.
+          Method `#{method.name}` is NOT an `out` method.
         TEXT
       end
 
-      it "raises `ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Errors::MethodIsNotOutputMethod'" do
+      it "raises `ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Errors::MethodIsNotOutputMethod`" do
         expect { direction.validate_as_output_for_container!(container, method: method) }
           .to raise_error(ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Errors::MethodIsNotOutputMethod)
           .with_message(error_message)
@@ -60,11 +60,11 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
 
       let(:error_message) do
         <<~TEXT
-          Method `#{method.name}' is NOT an `out' method.
+          Method `#{method.name}` is NOT an `out` method.
         TEXT
       end
 
-      it "raises `ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Errors::MethodIsNotOutputMethod'" do
+      it "raises `ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Errors::MethodIsNotOutputMethod`" do
         expect { direction.define_output_in_container!(container, index: index, method: method) }
           .to raise_error(ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Errors::MethodIsNotOutputMethod)
           .with_message(error_message)

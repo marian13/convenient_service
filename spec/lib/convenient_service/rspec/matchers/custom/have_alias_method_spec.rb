@@ -25,14 +25,14 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::HaveAliasMethod do
   let(:object) { klass.new }
 
   describe "#matches?" do
-    context "when `object' does NOT have method with original method name" do
+    context "when `object` does NOT have method with original method name" do
       let(:klass) { Class.new }
 
-      it "returns `false'" do
+      it "returns `false`" do
         expect(matcher_result).to eq(false)
       end
 
-      it "delegates to `ConvenientService::Utils::Method.defined?'" do
+      it "delegates to `ConvenientService::Utils::Method.defined?`" do
         allow(ConvenientService::Utils::Method).to receive(:defined?).with(original_name, in: object.class).and_call_original
 
         matcher_result
@@ -41,7 +41,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::HaveAliasMethod do
       end
     end
 
-    context "when `object' has method with original method name" do
+    context "when `object` has method with original method name" do
       let(:klass) do
         Class.new do
           def foo
@@ -49,7 +49,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::HaveAliasMethod do
         end
       end
 
-      context "when `object' does NOT have method with alias method" do
+      context "when `object` does NOT have method with alias method" do
         let(:klass) do
           Class.new do
             def foo
@@ -57,11 +57,11 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::HaveAliasMethod do
           end
         end
 
-        it "returns `false'" do
+        it "returns `false`" do
           expect(matcher_result).to eq(false)
         end
 
-        it "delegates to `ConvenientService::Utils::Method.defined?'" do
+        it "delegates to `ConvenientService::Utils::Method.defined?`" do
           allow(ConvenientService::Utils::Method).to receive(:defined?).with(original_name, in: object.class).and_call_original
           allow(ConvenientService::Utils::Method).to receive(:defined?).with(alias_name, in: object.class).and_call_original
 
@@ -71,7 +71,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::HaveAliasMethod do
         end
       end
 
-      context "when `object' has method with alias method name" do
+      context "when `object` has method with alias method name" do
         context "when that method is NOT actually alias" do
           let(:klass) do
             Class.new do
@@ -83,7 +83,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::HaveAliasMethod do
             end
           end
 
-          it "returns `false'" do
+          it "returns `false`" do
             expect(matcher_result).to eq(false)
           end
         end
@@ -98,7 +98,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::HaveAliasMethod do
             end
           end
 
-          it "returns `true'" do
+          it "returns `true`" do
             expect(matcher_result).to eq(true)
           end
         end
@@ -110,7 +110,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::HaveAliasMethod do
     it "returns message" do
       matcher_result
 
-      expect(matcher.description).to eq("have alias method `#{alias_name}' for `#{original_name}'")
+      expect(matcher.description).to eq("have alias method `#{alias_name}` for `#{original_name}`")
     end
   end
 
@@ -118,7 +118,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::HaveAliasMethod do
     it "returns message" do
       matcher_result
 
-      expect(matcher.failure_message).to eq("expected `#{object.class}' to have alias method `#{alias_name}' for `#{original_name}'")
+      expect(matcher.failure_message).to eq("expected `#{object.class}` to have alias method `#{alias_name}` for `#{original_name}`")
     end
   end
 
@@ -126,7 +126,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::HaveAliasMethod do
     it "returns message" do
       matcher_result
 
-      expect(matcher.failure_message_when_negated).to eq("expected `#{object.class}' NOT to have alias method `#{alias_name}' for `#{original_name}'")
+      expect(matcher.failure_message_when_negated).to eq("expected `#{object.class}` NOT to have alias method `#{alias_name}` for `#{original_name}`")
     end
   end
 end

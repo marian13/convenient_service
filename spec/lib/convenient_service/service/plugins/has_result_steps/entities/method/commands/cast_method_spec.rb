@@ -13,50 +13,50 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
 
       let(:casted) { described_class.call(other: other, options: options) }
 
-      context "when `key' is NOT castable" do
+      context "when `key` is NOT castable" do
         before do
           allow(ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Commands::CastMethodKey).to receive(:call).and_return(nil)
         end
 
-        it "returns `nil'" do
+        it "returns `nil`" do
           expect(casted).to be_nil
         end
       end
 
-      context "when `key' is castable" do
-        context "when `name' is NOT castable" do
+      context "when `key` is castable" do
+        context "when `name` is NOT castable" do
           before do
             allow(ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Commands::CastMethodName).to receive(:call).and_return(nil)
           end
 
-          it "returns `nil'" do
+          it "returns `nil`" do
             expect(casted).to be_nil
           end
         end
 
-        context "when `name' is castable" do
-          context "when `caller' is NOT castable" do
+        context "when `name` is castable" do
+          context "when `caller` is NOT castable" do
             before do
               allow(ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Commands::CastMethodCaller).to receive(:call).and_return(nil)
             end
 
-            it "returns `nil'" do
+            it "returns `nil`" do
               expect(casted).to be_nil
             end
           end
 
-          context "when `caller' is castable" do
-            context "when `direction' is NOT castable" do
+          context "when `caller` is castable" do
+            context "when `direction` is NOT castable" do
               before do
                 allow(ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Commands::CastMethodDirection).to receive(:call).and_return(nil)
               end
 
-              it "returns `nil'" do
+              it "returns `nil`" do
                 expect(casted).to be_nil
               end
             end
 
-            context "when `direction' is castable" do
+            context "when `direction` is castable" do
               let(:method) do
                 ConvenientService::Service::Plugins::HasResultSteps::Entities::Method.new(
                   key: ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Commands::CastMethodKey.call(other: other, options: options),
@@ -74,7 +74,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
         end
       end
 
-      context "when `other' is method" do
+      context "when `other` is method" do
         let(:other) { ConvenientService::Service::Plugins::HasResultSteps::Entities::Method.cast(:foo, direction: :input) }
 
         it "returns its copy" do

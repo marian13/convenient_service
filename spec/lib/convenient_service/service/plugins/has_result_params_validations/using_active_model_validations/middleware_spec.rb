@@ -41,7 +41,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultParamsValidations::
           attr_reader :foo
 
           ##
-          # NOTE: Rails 6 and 7 differently handle nested hashes in `validates' call. See links below.
+          # NOTE: Rails 6 and 7 differently handle nested hashes in `validates` call. See links below.
           # - https://github.com/rails/rails/blob/v6.0.0/activemodel/lib/active_model/translation.rb#L67
           # - https://github.com/rails/rails/blob/v7.0.0/activemodel/lib/active_model/translation.rb#L67
           # - https://github.com/rails/rails/commit/4645f2d34fc1d9f037096de988e5cc5ca41a3cf3

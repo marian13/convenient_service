@@ -16,8 +16,8 @@ module ConvenientService
 
           def match_first(*values)
             ##
-            # TODO: Explain why `hash[values]' won't work.
-            # TODO: Explain why `hash.find { |key| key == values }'.
+            # TODO: Explain why `hash[values]` won't work.
+            # TODO: Explain why `hash.find { |key| key == values }`.
             #
             _key, matched = hash.find { |key, _matched| key == values }
 

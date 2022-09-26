@@ -12,47 +12,47 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
       let(:options) { {direction: :input} }
       let(:casted) { described_class.call(other: other, options: options) }
 
-      context "when `options[:direction]' is NOT castable" do
+      context "when `options[:direction]` is NOT castable" do
         let(:options) { {direction: 42} }
 
-        it "returns `nil'" do
+        it "returns `nil`" do
           expect(casted).to be_nil
         end
       end
 
-      context "when `options[:direction]' is `:input'" do
+      context "when `options[:direction]` is `:input`" do
         let(:options) { {direction: :input} }
 
-        it "returns `:input' casted to method direction" do
+        it "returns `:input` casted to method direction" do
           expect(casted).to eq(ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Entities::Directions::Input.new)
         end
       end
 
-      context "when `options[:direction]' is `:output'" do
+      context "when `options[:direction]` is `:output`" do
         let(:options) { {direction: :output} }
 
-        it "returns `:output' casted to method direction" do
+        it "returns `:output` casted to method direction" do
           expect(casted).to eq(ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Entities::Directions::Output.new)
         end
       end
 
-      context "when `options[:direction]' is `input'" do
+      context "when `options[:direction]` is `input`" do
         let(:options) { {direction: "input"} }
 
-        it "returns `input' casted to method direction" do
+        it "returns `input` casted to method direction" do
           expect(casted).to eq(ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Entities::Directions::Input.new)
         end
       end
 
-      context "when `options[:direction]' is `output'" do
+      context "when `options[:direction]` is `output`" do
         let(:options) { {direction: "output"} }
 
-        it "returns `output' casted to method direction" do
+        it "returns `output` casted to method direction" do
           expect(casted).to eq(ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Entities::Directions::Output.new)
         end
       end
 
-      context "when `other' is method" do
+      context "when `other` is method" do
         let(:other) { ConvenientService::Service::Plugins::HasResultSteps::Entities::Method.cast(:foo, direction: :input) }
 
         it "returns its direction copy" do

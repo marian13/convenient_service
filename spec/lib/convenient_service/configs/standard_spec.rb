@@ -91,27 +91,27 @@ RSpec.describe ConvenientService::Configs::Standard do
           expect(service_class.concerns.to_a.map(&:first).map(&:concern)).to eq(concerns)
         end
 
-        it "sets service middlewares for `initialize'" do
+        it "sets service middlewares for `initialize`" do
           expect(service_class.middlewares(for: :initialize).to_a.map(&:first)).to eq(initialize_middlewares)
         end
 
-        it "sets service middlewares for `result'" do
+        it "sets service middlewares for `result`" do
           expect(service_class.middlewares(for: :result).to_a.map(&:first)).to eq(result_middlewares)
         end
 
-        it "sets service middlewares for `success'" do
+        it "sets service middlewares for `success`" do
           expect(service_class.middlewares(for: :success).to_a.map(&:first)).to eq(success_middlewares)
         end
 
-        it "sets service middlewares for `failure'" do
+        it "sets service middlewares for `failure`" do
           expect(service_class.middlewares(for: :failure).to_a.map(&:first)).to eq(failure_middlewares)
         end
 
-        it "sets service middlewares for `error'" do
+        it "sets service middlewares for `error`" do
           expect(service_class.middlewares(for: :error).to_a.map(&:first)).to eq(error_middlewares)
         end
 
-        it "sets service middlewares for class `step'" do
+        it "sets service middlewares for class `step`" do
           expect(service_class.middlewares(for: :step, scope: :class).to_a.map(&:first)).to eq(step_class_middlewares)
         end
 
@@ -203,39 +203,39 @@ RSpec.describe ConvenientService::Configs::Standard do
             expect(service_class::Result.concerns.to_a.map(&:first).map(&:concern)).to eq(concerns)
           end
 
-          it "sets service result middlewares for `success?'" do
+          it "sets service result middlewares for `success?`" do
             expect(service_class::Result.middlewares(for: :success?).to_a.map(&:first)).to eq(is_success_middlewares)
           end
 
-          it "sets service result middlewares for `failure?'" do
+          it "sets service result middlewares for `failure?`" do
             expect(service_class::Result.middlewares(for: :failure?).to_a.map(&:first)).to eq(is_failure_middlewares)
           end
 
-          it "sets service result middlewares for `error?'" do
+          it "sets service result middlewares for `error?`" do
             expect(service_class::Result.middlewares(for: :error?).to_a.map(&:first)).to eq(is_error_middlewares)
           end
 
-          it "sets service result middlewares for `not_success?'" do
+          it "sets service result middlewares for `not_success?`" do
             expect(service_class::Result.middlewares(for: :not_success?).to_a.map(&:first)).to eq(is_not_success_middlewares)
           end
 
-          it "sets service result middlewares for `not_failure?'" do
+          it "sets service result middlewares for `not_failure?`" do
             expect(service_class::Result.middlewares(for: :not_failure?).to_a.map(&:first)).to eq(is_not_failure_middlewares)
           end
 
-          it "sets service result middlewares for `not_error?'" do
+          it "sets service result middlewares for `not_error?`" do
             expect(service_class::Result.middlewares(for: :not_error?).to_a.map(&:first)).to eq(is_not_error_middlewares)
           end
 
-          it "sets service result middlewares for `data'" do
+          it "sets service result middlewares for `data`" do
             expect(service_class::Result.middlewares(for: :data).to_a.map(&:first)).to eq(data_middlewares)
           end
 
-          it "sets service result middlewares for `message'" do
+          it "sets service result middlewares for `message`" do
             expect(service_class::Result.middlewares(for: :message).to_a.map(&:first)).to eq(message_middlewares)
           end
 
-          it "sets service result middlewares for `code'" do
+          it "sets service result middlewares for `code`" do
             expect(service_class::Result.middlewares(for: :code).to_a.map(&:first)).to eq(code_middlewares)
           end
 
@@ -260,7 +260,7 @@ RSpec.describe ConvenientService::Configs::Standard do
             ]
           end
 
-          it "sets service step middlewares for `result'" do
+          it "sets service step middlewares for `result`" do
             expect(service_class::Step.middlewares(for: :result).to_a.map(&:first)).to eq(result_middlewares)
           end
 

@@ -7,7 +7,7 @@ module ConvenientService
         class Middleware < Core::MethodChainMiddleware
           ##
           # NOTE: It is okish to assign to next method arguments here,
-          # since splat for `args' and double splat for `kwargs'
+          # since splat for `args` and double splat for `kwargs`
           # always create new arrays and hashes respectively.
           #
           def next(*args, **kwargs, &block)
@@ -23,7 +23,7 @@ module ConvenientService
           private
 
           ##
-          # TODO: `Plugins::HasResultSteps::Entities::Method.raw_value'.
+          # TODO: `Plugins::HasResultSteps::Entities::Method.raw_value`.
           #
           def raw(object)
             Plugins::HasResultSteps::Entities::Method::Entities::Values::Raw.wrap(object)

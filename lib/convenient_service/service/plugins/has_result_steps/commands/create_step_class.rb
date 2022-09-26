@@ -16,13 +16,13 @@ module ConvenientService
               step_class.include Entities::Step::Concern
 
               ##
-              # class Step < ConvenientService::Service::Plugins::HasResultSteps::Entities::Step # or just `class Step' if service class defines its own.
+              # class Step < ConvenientService::Service::Plugins::HasResultSteps::Entities::Step # or just `class Step` if service class defines its own.
               #   include ConvenientService::Service::Plugins::HasResultSteps::Entities::Step::Concern
               #
               #   class << self
               #     def service_class
               #       ##
-              #       # NOTE: Returns `service_class' passed to `CreateResultClass'.
+              #       # NOTE: Returns `service_class` passed to `CreateResultClass`.
               #       #
               #       service_class
               #     end
@@ -39,7 +39,7 @@ module ConvenientService
                 define_singleton_method(:service_class) { service_class }
 
                 ##
-                # TODO: Fix a bug with `ap'.
+                # TODO: Fix a bug with `ap`.
                 #
                 define_singleton_method(:==) { |other| self.service_class == other.service_class if other.instance_of?(self.class) }
               end

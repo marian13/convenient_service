@@ -44,12 +44,12 @@ module ConvenientService
             value = nil
 
             ##
-            # NOTE: `expect { value = block_expectation.call }.not_to change(method, :chain_called?).from(false).to(true)' raises the following error:
+            # NOTE: `expect { value = block_expectation.call }.not_to change(method, :chain_called?).from(false).to(true)` raises the following error:
             #
             #   NotImplementedError:
             #     `expect { }.not_to change { }.to()` is not supported
             #
-            # That is why `expect(method.chain_called?).to eq(false)' is introduced.
+            # That is why `expect(method.chain_called?).to eq(false)` is introduced.
             #
             expect(method.chain_called?).to eq(false)
             expect { value = block_expectation.call }.not_to change(method, :chain_called?)
@@ -72,15 +72,15 @@ module ConvenientService
           end
 
           def description
-            "call `chain.next'"
+            "call `chain.next`"
           end
 
           def failure_message
-            "expected to call `chain.next'"
+            "expected to call `chain.next`"
           end
 
           def failure_message_when_negated
-            "expected NOT to call `chain.next'"
+            "expected NOT to call `chain.next`"
           end
 
           def on(method)
@@ -134,7 +134,7 @@ module ConvenientService
           alias_method :expected_kwargs, :kwargs
 
           ##
-          # NOTE: `if defined?' is used in order to cache `nil' if needed.
+          # NOTE: `if defined?` is used in order to cache `nil` if needed.
           #
           def block
             return @block if defined? @block

@@ -32,7 +32,7 @@ jobs:
         with:
           ruby-version: 3.1
           ##
-          # NOTE: Installs the latest compatible Bundler version, runs `bundle install' and caches installed gems.
+          # NOTE: Installs the latest compatible Bundler version, runs `bundle install` and caches installed gems.
           # - https://github.com/ruby/setup-ruby#usage
           # - https://github.com/ruby/setup-ruby#bundler
           #

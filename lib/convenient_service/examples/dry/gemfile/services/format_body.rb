@@ -55,7 +55,7 @@ module ConvenientService
                 required(:parsed_content).hash do
                   optional(:gems).array(:hash) do
                     ##
-                    # NOTE: required(:envs).array(:symbol) raises `Dry::Container::KeyError: key not found: "{:type?=>Symbol}"'.
+                    # NOTE: required(:envs).array(:symbol) raises `Dry::Container::KeyError: key not found: "{:type?=>Symbol}"`.
                     #
                     required(:envs).array(type?: ::Symbol)
                     required(:line).value(:string)

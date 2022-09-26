@@ -21,7 +21,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
     let(:result_instance) { result_class.new }
 
     describe "#result" do
-      it "delegates to `service.recalculate_result'" do
+      it "delegates to `service.recalculate_result`" do
         allow(service).to receive(:recalculate_result).and_call_original
 
         result_instance.recalculate
@@ -29,7 +29,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
         expect(service).to have_received(:recalculate_result)
       end
 
-      it "returns return value of `service.recalculate_result'" do
+      it "returns return value of `service.recalculate_result`" do
         expect(result_instance.recalculate).to eq(service.recalculate_result)
       end
     end

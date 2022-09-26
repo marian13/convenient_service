@@ -10,15 +10,15 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
     describe ".cast" do
       let(:casted) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Entities::Data.cast(other) }
 
-      context "when `other' is NOT castable" do
+      context "when `other` is NOT castable" do
         let(:other) { nil }
 
-        it "returns `nil'" do
+        it "returns `nil`" do
           expect(casted).to be_nil
         end
       end
 
-      context "when `other' is hash" do
+      context "when `other` is hash" do
         let(:other) { {foo: :bar} }
         let(:data) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Entities::Data.new(value: other) }
 
@@ -36,11 +36,11 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
         end
       end
 
-      context "when `other' is data" do
+      context "when `other` is data" do
         let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Entities::Data.new(value: {foo: :bar}) }
         let(:data) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Entities::Data.new(value: other.value) }
 
-        it "returns copy of `other'" do
+        it "returns copy of `other`" do
           expect(casted).to eq(data)
         end
       end

@@ -40,11 +40,11 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
     describe ".call" do
       subject(:command_result) { described_class.call(method: method, container: container, index: index) }
 
-      it "returns `true'" do
+      it "returns `true`" do
         expect(command_result).to eq(true)
       end
 
-      it "defines `method' in `container'" do
+      it "defines `method` in `container`" do
         expect { command_result }.to change { ConvenientService::Utils::Method.defined?(method.to_s, in: container.klass) }.from(false).to(true)
       end
 
@@ -60,13 +60,13 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
         context "when step is NOT completed" do
           let(:error_message) do
             <<~TEXT
-              `out' method `#{method}' is called before its corresponding step `#{step.service}' is completed.
+              `out` method `#{method}` is called before its corresponding step `#{step.service}` is completed.
 
               Maybe it makes sense to change the steps order?
             TEXT
           end
 
-          it "raises `ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Errors::NotCompletedStep'" do
+          it "raises `ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Errors::NotCompletedStep`" do
             expect { organizer_service_instance.bar }
               .to raise_error(ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Errors::NotCompletedStep)
               .with_message(error_message)

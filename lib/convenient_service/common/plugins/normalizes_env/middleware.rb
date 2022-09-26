@@ -5,12 +5,12 @@ module ConvenientService
     module Plugins
       module NormalizesEnv
         ##
-        # - Single splat `*' converts `nil' to empty array.
-        # - Double splat `**' raises on `nil'.
-        # - Umpersand `&' converts `nil' to `nil'.
+        # - Single splat `*` converts `nil` to empty array.
+        # - Double splat `**` raises on `nil`.
+        # - Umpersand `&` converts `nil` to `nil`.
         #
-        # The following decorator `proc' converts `env[:kwargs]' to a hash.
-        # This way `stack.call(*env[:args], **env[:kwargs], &env[:block])' won't fail even if a user passes `nil' as `kwargs'.
+        # The following decorator `proc` converts `env[:kwargs]` to a hash.
+        # This way `stack.call(*env[:args], **env[:kwargs], &env[:block])` won't fail even if a user passes `nil` as `kwargs`.
         #
         # Check the following link for more details:
         # - https://bugs.ruby-lang.org/issues/8507

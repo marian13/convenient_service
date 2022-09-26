@@ -10,7 +10,7 @@ module ConvenientService
               class MethodHasNoOrganizer < ::ConvenientService::Error
                 def initialize(method:)
                   message = <<~TEXT
-                    Organizer for method `#{method.name}' is NOT assigned yet.
+                    Organizer for method `#{method.name}` is NOT assigned yet.
 
                     Did you forget to set it?
                   TEXT
@@ -22,7 +22,7 @@ module ConvenientService
               class InputMethodIsNotDefinedInContainer < ::ConvenientService::Error
                 def initialize(method:, container:)
                   message = <<~TEXT
-                    `in' method `#{method.name}' is NOT defined in `#{container.klass}'.
+                    `in` method `#{method.name}` is NOT defined in `#{container.klass}`.
 
                     Did you forget to define it?
                   TEXT
@@ -34,7 +34,7 @@ module ConvenientService
               class OutputMethodIsDefinedInContainer < ::ConvenientService::Error
                 def initialize(method:, container:)
                   message = <<~TEXT
-                    `out' method `#{method.name}' is already defined in `#{container.klass}'.
+                    `out` method `#{method.name}` is already defined in `#{container.klass}`.
 
                     Did you forget to remove it?
                   TEXT
@@ -46,7 +46,7 @@ module ConvenientService
               class AliasInputMethodIsNotDefinedInContainer < ::ConvenientService::Error
                 def initialize(method:, container:)
                   message = <<~TEXT
-                    Alias `in' method `#{method.name}' is NOT defined in `#{container.klass}'.
+                    Alias `in` method `#{method.name}` is NOT defined in `#{container.klass}`.
 
                     Did you forget to define it?
                   TEXT
@@ -58,7 +58,7 @@ module ConvenientService
               class AliasOutputMethodIsDefinedInContainer < ::ConvenientService::Error
                 def initialize(method:, container:)
                   message = <<~TEXT
-                    Alias `out' method `#{method.name}' is already defined in `#{container.klass}'.
+                    Alias `out` method `#{method.name}` is already defined in `#{container.klass}`.
 
                     Did you forget to remove it?
                   TEXT
@@ -70,7 +70,7 @@ module ConvenientService
               class OutputMethodProc < ConvenientService::Error
                 def initialize(method:, container:)
                   message = <<~TEXT
-                    Procs are not allowed for `out' methods.
+                    Procs are not allowed for `out` methods.
                   TEXT
 
                   super(message)
@@ -80,7 +80,7 @@ module ConvenientService
               class OutputMethodRawValue < ConvenientService::Error
                 def initialize(method:, container:)
                   message = <<~TEXT
-                    Raw values are not allowed for `out' methods.
+                    Raw values are not allowed for `out` methods.
                   TEXT
 
                   super(message)
@@ -90,7 +90,7 @@ module ConvenientService
               class MethodIsNotInputMethod < ConvenientService::Error
                 def initialize(method:, container:)
                   message = <<~TEXT
-                    Method `#{method.name}' is NOT an `in' method.
+                    Method `#{method.name}` is NOT an `in` method.
                   TEXT
 
                   super(message)
@@ -100,7 +100,7 @@ module ConvenientService
               class MethodIsNotOutputMethod < ConvenientService::Error
                 def initialize(method:, container:)
                   message = <<~TEXT
-                    Method `#{method.name}' is NOT an `out' method.
+                    Method `#{method.name}` is NOT an `out` method.
                   TEXT
 
                   super(message)
@@ -110,7 +110,7 @@ module ConvenientService
               class NotCompletedStep < ConvenientService::Error
                 def initialize(method_name:, step:)
                   message = <<~TEXT
-                    `out' method `#{method_name}' is called before its corresponding step `#{step.service}' is completed.
+                    `out` method `#{method_name}` is called before its corresponding step `#{step.service}` is completed.
 
                     Maybe it makes sense to change the steps order?
                   TEXT

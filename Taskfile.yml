@@ -7,7 +7,7 @@ version: '3'
 # NOTE: Examples of multiline strings in YAML.
 # https://yaml-multiline.info/
 #
-# NOTE: Use `[ "${IN_DOCKER_CONTAINER}" == "true" ] && echo true || echo false' to debug ``[ "${IN_DOCKER_CONTAINER}" == "true" ]'.
+# NOTE: Use `[ "${IN_DOCKER_CONTAINER}" == "true" ] && echo true || echo false` to debug ``[ "${IN_DOCKER_CONTAINER}" == "true" ]`.
 #
 # NOTE: Forwarding CLI arguments to commands ({{.CLI_ARGS}}).
 # https://taskfile.dev/usage/#forwarding-cli-arguments-to-commands
@@ -94,18 +94,18 @@ tasks:
         msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
 
   ##
-  # NOTE: `sdoc' (wrapper for `rdoc') is replaced by `yard', since you have a feeling like every time is a first time with `rdoc'.
+  # NOTE: `sdoc` (wrapper for `rdoc`) is replaced by `yard`, since you have a feeling like every time is a first time with `rdoc`.
   # - https://kapeli.com/cheat_sheets/Yard.docset/Contents/Resources/Documents/index
   # - https://rubydoc.info/gems/yard/file/README.md
-  # - `yardoc --help'
+  # - `yardoc --help`
   #
-  # NOTE: `commonmarker' supports GitHub Flavored Markdown.
+  # NOTE: `commonmarker` supports GitHub Flavored Markdown.
   # - https://github.com/gjtorikian/commonmarker
   # - https://github.github.com/gfm/
   # - https://github.com/github/markup#markups
   # - https://github.com/lsegal/yard/pull/1388
   #
-  # TODO: Contribute. Forward `--parse-option LIBERAL_HTML_TAG' to commonmarker.
+  # TODO: Contribute. Forward `--parse-option LIBERAL_HTML_TAG` to commonmarker.
   #
   docs:generate:
     cmds:

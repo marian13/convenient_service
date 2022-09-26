@@ -43,7 +43,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
     end
 
     describe "#calculate_value" do
-      it "delegates to `organizer.__send__'" do
+      it "delegates to `organizer.__send__`" do
         allow(organizer).to receive(:__send__).with(method.name.to_s).and_call_original
 
         caller.calculate_value(method)
@@ -51,7 +51,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
         expect(organizer).to have_received(:__send__)
       end
 
-      it "returns value of `organizer.__send__'" do
+      it "returns value of `organizer.__send__`" do
         expect(caller.calculate_value(method)).to eq(return_value)
       end
     end
@@ -64,13 +64,13 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
 
         let(:error_message) do
           <<~TEXT
-            `in' method `#{method.name}' is NOT defined in `#{container.klass}'.
+            `in` method `#{method.name}` is NOT defined in `#{container.klass}`.
 
             Did you forget to define it?
           TEXT
         end
 
-        it "raises `ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Errors::InputMethodIsNotDefinedInContainer'" do
+        it "raises `ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Errors::InputMethodIsNotDefinedInContainer`" do
           expect { caller.validate_as_input_for_container!(container, method: method) }
             .to raise_error(ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Errors::InputMethodIsNotDefinedInContainer)
             .with_message(error_message)
@@ -78,7 +78,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
       end
 
       context "when container has defined method" do
-        it "returns `true'" do
+        it "returns `true`" do
           expect(caller.validate_as_input_for_container!(container, method: method)).to eq(true)
         end
       end
@@ -90,7 +90,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
       context "when container does NOT have defined method" do
         let(:service_class) { Class.new }
 
-        it "returns `true'" do
+        it "returns `true`" do
           expect(caller.validate_as_output_for_container!(container, method: method)).to eq(true)
         end
       end
@@ -98,13 +98,13 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
       context "when container has defined method" do
         let(:error_message) do
           <<~TEXT
-            `out' method `#{method.name}' is already defined in `#{container.klass}'.
+            `out` method `#{method.name}` is already defined in `#{container.klass}`.
 
             Did you forget to remove it?
           TEXT
         end
 
-        it "raises `ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Errors::OutputMethodIsDefinedInContainer'" do
+        it "raises `ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Errors::OutputMethodIsDefinedInContainer`" do
           expect { caller.validate_as_output_for_container!(container, method: method) }
             .to raise_error(ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Errors::OutputMethodIsDefinedInContainer)
             .with_message(error_message)

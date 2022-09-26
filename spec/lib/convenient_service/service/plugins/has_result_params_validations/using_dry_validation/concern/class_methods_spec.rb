@@ -20,14 +20,14 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultParamsValidations::
         end
       end
 
-      context "when `block' is NOT passed" do
-        it "returns `Dry::Validation::Contract' direct descendant" do
+      context "when `block` is NOT passed" do
+        it "returns `Dry::Validation::Contract` direct descendant" do
           expect(service_class.contract).to be_direct_descendant_of(Dry::Validation::Contract)
         end
       end
 
-      context "when `block' is passed" do
-        it "returns `Dry::Validation::Contract' direct descendant" do
+      context "when `block` is passed" do
+        it "returns `Dry::Validation::Contract` direct descendant" do
           expect(service_class.contract).to be_direct_descendant_of(Dry::Validation::Contract)
         end
 
@@ -35,7 +35,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultParamsValidations::
         # RSpec/MessageSpies does NOT supports expectations for blocks.
         #
         # rubocop:disable RSpec/MessageSpies, RSpec/MultipleExpectations, RSpec/ExampleLength, RSpec/StubbedMock
-        it "executes `block' in the context of `contract'" do
+        it "executes `block` in the context of `contract`" do
           block_with_rules = proc do
             ##
             # https://dry-rb.org/gems/dry-validation/1.8/#quick-start

@@ -55,7 +55,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasAroundCallbacks::Middlewar
           TEXT
         end
 
-        it "runs only middleware `chain.next'" do
+        it "runs only middleware `chain.next`" do
           method_value
 
           expect(output).to eq(text)
@@ -81,7 +81,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasAroundCallbacks::Middlewar
           end
         end
 
-        it "runs that around callback in addition to middleware `chain.next'" do
+        it "runs that around callback in addition to middleware `chain.next`" do
           method_value
 
           expect(output).to eq(text)
@@ -117,7 +117,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasAroundCallbacks::Middlewar
           end
         end
 
-        it "runs that around callback in addition to middleware `chain.next'" do
+        it "runs that around callback in addition to middleware `chain.next`" do
           method_value
 
           expect(output).to eq(text)
@@ -129,12 +129,12 @@ RSpec.describe ConvenientService::Common::Plugins::HasAroundCallbacks::Middlewar
           service_class.after(:result) { |result| result.success? }
         end
 
-        it "passes middleware `chain.next' to all after callbacks as first argument" do
+        it "passes middleware `chain.next` to all after callbacks as first argument" do
           expect { method_value }.not_to raise_error
         end
       end
 
-      example_group "callback `chain.yield' return value in around callbacks" do
+      example_group "callback `chain.yield` return value in around callbacks" do
         before do
           service_class.around(:result) do |chain|
             out.puts "first around before result"
@@ -142,7 +142,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasAroundCallbacks::Middlewar
             result = chain.yield
 
             ##
-            # NOTE: `result_original_value' is NOT available inside service instance context.
+            # NOTE: `result_original_value` is NOT available inside service instance context.
             # That is why "result original value" literal is used.
             #
             raise if result != "result original value"
@@ -156,7 +156,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasAroundCallbacks::Middlewar
             result = chain.yield
 
             ##
-            # NOTE: `result_original_value' is NOT available inside service instance context.
+            # NOTE: `result_original_value` is NOT available inside service instance context.
             # That is why "result original value" literal is used.
             #
             raise if result != "result original value"
@@ -165,13 +165,13 @@ RSpec.describe ConvenientService::Common::Plugins::HasAroundCallbacks::Middlewar
           end
         end
 
-        it "passes middleware `chain.next' to all after callbacks as first argument" do
+        it "passes middleware `chain.next` to all after callbacks as first argument" do
           expect { method_value }.not_to raise_error
         end
       end
 
-      example_group "NOT called callback `chain.yield'" do
-        context "when first around callback does NOT call callback `chain.yield'" do
+      example_group "NOT called callback `chain.yield`" do
+        context "when first around callback does NOT call callback `chain.yield`" do
           before do
             service_class.around(:result) do |chain|
               out.puts "first around before result"
@@ -190,9 +190,9 @@ RSpec.describe ConvenientService::Common::Plugins::HasAroundCallbacks::Middlewar
 
           let(:error_message) do
             <<~TEXT
-              Around callback chain is NOT continued from `#{service_instance.callbacks.for([:around, :result]).first.block.source_location}'.
+              Around callback chain is NOT continued from `#{service_instance.callbacks.for([:around, :result]).first.block.source_location}`.
 
-              Did you forget to call `chain.yield'? For example:
+              Did you forget to call `chain.yield`? For example:
 
               around :result do |chain|
                 # ...
@@ -202,14 +202,14 @@ RSpec.describe ConvenientService::Common::Plugins::HasAroundCallbacks::Middlewar
             TEXT
           end
 
-          it "raises `ConvenientService::Common::Plugins::HasAroundCallbacks::Errors::AroundCallbackChainIsNotContinued'" do
+          it "raises `ConvenientService::Common::Plugins::HasAroundCallbacks::Errors::AroundCallbackChainIsNotContinued`" do
             expect { method_value }
               .to raise_error(ConvenientService::Common::Plugins::HasAroundCallbacks::Errors::AroundCallbackChainIsNotContinued)
               .with_message(error_message)
           end
         end
 
-        context "when intermediate around callback does NOT call callback `chain.yield'" do
+        context "when intermediate around callback does NOT call callback `chain.yield`" do
           before do
             service_class.around(:result) do |chain|
               out.puts "first around before result"
@@ -236,9 +236,9 @@ RSpec.describe ConvenientService::Common::Plugins::HasAroundCallbacks::Middlewar
 
           let(:error_message) do
             <<~TEXT
-              Around callback chain is NOT continued from `#{service_instance.callbacks.for([:around, :result])[1].block.source_location}'.
+              Around callback chain is NOT continued from `#{service_instance.callbacks.for([:around, :result])[1].block.source_location}`.
 
-              Did you forget to call `chain.yield'? For example:
+              Did you forget to call `chain.yield`? For example:
 
               around :result do |chain|
                 # ...
@@ -248,14 +248,14 @@ RSpec.describe ConvenientService::Common::Plugins::HasAroundCallbacks::Middlewar
             TEXT
           end
 
-          it "raises `ConvenientService::Common::Plugins::HasAroundCallbacks::Errors::AroundCallbackChainIsNotContinued'" do
+          it "raises `ConvenientService::Common::Plugins::HasAroundCallbacks::Errors::AroundCallbackChainIsNotContinued`" do
             expect { method_value }
               .to raise_error(ConvenientService::Common::Plugins::HasAroundCallbacks::Errors::AroundCallbackChainIsNotContinued)
               .with_message(error_message)
           end
         end
 
-        context "when last around callback does NOT call callback `chain.yield'" do
+        context "when last around callback does NOT call callback `chain.yield`" do
           before do
             service_class.around(:result) do |chain|
               out.puts "first around before result"
@@ -274,9 +274,9 @@ RSpec.describe ConvenientService::Common::Plugins::HasAroundCallbacks::Middlewar
 
           let(:error_message) do
             <<~TEXT
-              Around callback chain is NOT continued from `#{service_instance.callbacks.for([:around, :result]).last.block.source_location}'.
+              Around callback chain is NOT continued from `#{service_instance.callbacks.for([:around, :result]).last.block.source_location}`.
 
-              Did you forget to call `chain.yield'? For example:
+              Did you forget to call `chain.yield`? For example:
 
               around :result do |chain|
                 # ...
@@ -286,7 +286,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasAroundCallbacks::Middlewar
             TEXT
           end
 
-          it "raises `ConvenientService::Common::Plugins::HasAroundCallbacks::Errors::AroundCallbackChainIsNotContinued'" do
+          it "raises `ConvenientService::Common::Plugins::HasAroundCallbacks::Errors::AroundCallbackChainIsNotContinued`" do
             expect { method_value }
               .to raise_error(ConvenientService::Common::Plugins::HasAroundCallbacks::Errors::AroundCallbackChainIsNotContinued)
               .with_message(error_message)

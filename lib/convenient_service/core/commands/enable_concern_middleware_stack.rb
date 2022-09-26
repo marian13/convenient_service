@@ -11,7 +11,7 @@ module ConvenientService
         end
 
         ##
-        # NOTE: Works in a similar way to `require'. If just enabled then returns `true', if already enabled - returns `false'.
+        # NOTE: Works in a similar way to `require`. If just enabled then returns `true`, if already enabled - returns `false`.
         #
         def call
           return false if stack.called?

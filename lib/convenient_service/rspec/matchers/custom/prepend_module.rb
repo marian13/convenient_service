@@ -6,7 +6,7 @@ module ConvenientService
       module Custom
         class PrependModule
           ##
-          # NOTE: `mod' since `module' is a keyword.
+          # NOTE: `mod` since `module` is a keyword.
           #
           def initialize(mod)
             @mod = mod
@@ -19,15 +19,15 @@ module ConvenientService
           end
 
           def description
-            "prepend module `#{mod}'"
+            "prepend module `#{mod}`"
           end
 
           def failure_message
-            "expected `#{klass}' to prepend module `#{mod}'"
+            "expected `#{klass}` to prepend module `#{mod}`"
           end
 
           def failure_message_when_negated
-            "expected `#{klass}' NOT to prepend module `#{mod}'"
+            "expected `#{klass}` NOT to prepend module `#{mod}`"
           end
 
           private

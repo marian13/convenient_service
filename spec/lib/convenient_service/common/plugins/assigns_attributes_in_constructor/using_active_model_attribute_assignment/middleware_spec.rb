@@ -53,10 +53,10 @@ RSpec.describe ConvenientService::Common::Plugins::AssignsAttributesInConstructo
       }
 
       ##
-      # NOTE: disabled `RSpec/AnyInstance' in order to check method call in `initialize'.
+      # NOTE: disabled `RSpec/AnyInstance` in order to check method call in `initialize`.
       #
       # rubocop:disable RSpec/AnyInstance
-      it "calls `assign_attributes' with `kwargs' (from `ActiveModel::AttributeAssignment')" do
+      it "calls `assign_attributes` with `kwargs` (from `ActiveModel::AttributeAssignment`)" do
         ##
         # https://relishapp.com/rspec/rspec-mocks/v/3-10/docs/working-with-legacy-code/any-instance
         # https://stackoverflow.com/questions/40025889/rspec-how-to-test-if-object-sends-messages-to-self-in-initialize

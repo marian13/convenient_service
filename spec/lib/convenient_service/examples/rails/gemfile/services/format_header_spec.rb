@@ -10,7 +10,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::FormatHead
   include ConvenientService::RSpec::Matchers::Results
   include ConvenientService::RSpec::Matchers::IncludeModule
   ##
-  # NOTE: Waits for `should-matchers' full support.
+  # NOTE: Waits for `should-matchers` full support.
   #
   # include Shoulda::Matchers::ActiveModel
 
@@ -61,7 +61,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::FormatHead
       expect(result).to be_success.with_data(formatted_content: formatted_content)
     end
 
-    context "when `parsed_content' does NOT contains `ruby'" do
+    context "when `parsed_content` does NOT contains `ruby`" do
       let(:parsed_content) do
         {
           source: [
@@ -83,12 +83,12 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::FormatHead
         RUBY
       end
 
-      it "returns success with formatted content without `ruby'" do
+      it "returns success with formatted content without `ruby`" do
         expect(result).to be_success.with_data(formatted_content: formatted_content)
       end
     end
 
-    context "when `parsed_content' does NOT contains `source'" do
+    context "when `parsed_content` does NOT contains `source`" do
       let(:parsed_content) do
         {
           ruby: [
@@ -110,12 +110,12 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::FormatHead
         RUBY
       end
 
-      it "returns success with formatted content without `source'" do
+      it "returns success with formatted content without `source`" do
         expect(result).to be_success.with_data(formatted_content: formatted_content)
       end
     end
 
-    context "when `parsed_content' does NOT contains `git_source'" do
+    context "when `parsed_content` does NOT contains `git_source`" do
       let(:parsed_content) do
         {
           ruby: [
@@ -137,12 +137,12 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::FormatHead
         RUBY
       end
 
-      it "returns success with formatted content without `git_source'" do
+      it "returns success with formatted content without `git_source`" do
         expect(result).to be_success.with_data(formatted_content: formatted_content)
       end
     end
 
-    context "when `skip_frozen_string_literal' is set to `true'" do
+    context "when `skip_frozen_string_literal` is set to `true`" do
       let(:skip_frozen_string_literal) { true }
 
       let(:parsed_content) do
@@ -169,7 +169,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::FormatHead
         RUBY
       end
 
-      it "returns success with formatted content without `git_source'" do
+      it "returns success with formatted content without `git_source`" do
         expect(result).to be_success.with_data(formatted_content: formatted_content)
       end
     end

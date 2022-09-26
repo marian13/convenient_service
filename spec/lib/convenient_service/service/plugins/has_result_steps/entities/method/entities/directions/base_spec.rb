@@ -30,18 +30,18 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
 
     example_group "comparison" do
       describe "#==" do
-        context "when `other' has different class" do
+        context "when `other` has different class" do
           let(:other) { 42 }
 
-          it "returns `false'" do
+          it "returns `false`" do
             expect(direction == other).to be_nil
           end
         end
 
-        context "when `other' has same attributes" do
+        context "when `other` has same attributes" do
           let(:other) { described_class.new }
 
-          it "returns `true'" do
+          it "returns `true`" do
             expect(direction == other).to eq(true)
           end
         end

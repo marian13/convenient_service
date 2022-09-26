@@ -8,7 +8,7 @@ module ConvenientService
           include Support::Concern
 
           ##
-          # TODO: `internals.cache[:constructor_params] || Entities::NullConstructorParams.new'
+          # TODO: `internals.cache[:constructor_params] || Entities::NullConstructorParams.new`
           #
           instance_methods do
             def constructor_params

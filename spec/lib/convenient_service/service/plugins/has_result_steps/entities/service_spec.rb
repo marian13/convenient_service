@@ -22,7 +22,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Se
   end
 
   ##
-  # NOTE: Waits for `should-matchers' full support.
+  # NOTE: Waits for `should-matchers` full support.
   #
   # example_group "delegations" do
   #   include Shoulda::Matchers::Independent
@@ -39,39 +39,39 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Se
         let(:klass) { Class.new }
         let(:service) { described_class.new(klass) }
 
-        context "when `other' is NOT castable" do
+        context "when `other` is NOT castable" do
           let(:other) { 42 }
 
           before do
             allow(described_class).to receive(:cast).and_return(nil)
           end
 
-          it "returns `nil'" do
+          it "returns `nil`" do
             expect(service == other).to be_nil
           end
         end
 
-        context "when `other' is castable" do
-          context "when `other' has different klass" do
+        context "when `other` is castable" do
+          context "when `other` has different klass" do
             let(:other) { described_class.new(Class.new.tap { |klass| }) }
 
             before do
               allow(described_class).to receive(:cast).and_call_original
             end
 
-            it "returns `false'" do
+            it "returns `false`" do
               expect(service == other).to eq(false)
             end
           end
 
-          context "when `other' has same attributes" do
+          context "when `other` has same attributes" do
             let(:other) { described_class.new(klass) }
 
             before do
               allow(described_class).to receive(:cast).and_call_original
             end
 
-            it "returns `true'" do
+            it "returns `true`" do
               expect(service == other).to eq(true)
             end
           end
@@ -85,7 +85,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Se
       let(:service) { described_class.new(klass) }
       let(:method) { ConvenientService::Service::Plugins::HasResultSteps::Entities::Method.cast(method_name, direction: :input) }
 
-      it "converts `method' to string" do
+      it "converts `method` to string" do
         allow(method).to receive(:to_s).and_call_original
 
         service.has_defined_method?(method)
@@ -93,7 +93,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Se
         expect(method).to have_received(:to_s)
       end
 
-      it "delegates to `Module#method_defined?'" do
+      it "delegates to `Module#method_defined?`" do
         allow(klass).to receive(:method_defined?).with(method_name.to_s).and_call_original
 
         service.has_defined_method?(method)
@@ -101,15 +101,15 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Se
         expect(klass).to have_received(:method_defined?)
       end
 
-      context "when `method' is NOT defined" do
+      context "when `method` is NOT defined" do
         let(:klass) { Class.new }
 
-        it "returns `false'" do
+        it "returns `false`" do
           expect(service.has_defined_method?(method)).to eq(false)
         end
       end
 
-      context "when public `method' is defined" do
+      context "when public `method` is defined" do
         let(:klass) do
           Class.new do
             def foo
@@ -117,12 +117,12 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Se
           end
         end
 
-        it "returns `true'" do
+        it "returns `true`" do
           expect(service.has_defined_method?(method)).to eq(true)
         end
       end
 
-      context "when private `method' is defined" do
+      context "when private `method` is defined" do
         let(:klass) do
           Class.new do
             private
@@ -132,7 +132,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Se
           end
         end
 
-        it "returns `true'" do
+        it "returns `true`" do
           expect(service.has_defined_method?(method)).to eq(true)
         end
       end

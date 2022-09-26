@@ -70,7 +70,7 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::FormatG
       expect(result).to be_success.with_data(formatted_content: formatted_content)
     end
 
-    context "when `parsed_content' does NOT contain `gems'" do
+    context "when `parsed_content` does NOT contain `gems`" do
       let(:parsed_content) { {} }
       let(:formatted_content) { "" }
 
@@ -79,7 +79,7 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::FormatG
       end
     end
 
-    context "when `parsed_content' does NOT contain `gems' without envs" do
+    context "when `parsed_content` does NOT contain `gems` without envs" do
       let(:parsed_content) do
         {
           gems: [

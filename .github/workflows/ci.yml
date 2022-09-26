@@ -62,7 +62,7 @@ jobs:
         with:
           ruby-version: 3.1
           ##
-          # NOTE: Installs the latest compatible Bundler version, runs `bundle install' and caches installed gems.
+          # NOTE: Installs the latest compatible Bundler version, runs `bundle install` and caches installed gems.
           # - https://github.com/ruby/setup-ruby#usage
           # - https://github.com/ruby/setup-ruby#bundler
           #
@@ -102,15 +102,15 @@ jobs:
     env:
       BUNDLE_GEMFILE: ${{ matrix.gemfile }}
 
-    name: "Test Ruby `${{ matrix.ruby }}' with Gemfile `${{ matrix.gemfile }}'"
+    name: "Test Ruby `${{ matrix.ruby }}` with Gemfile `${{ matrix.gemfile }}`"
     steps:
       - uses: actions/checkout@v2
-      - name: "Set up Ruby `${{ matrix.ruby }}'"
+      - name: "Set up Ruby `${{ matrix.ruby }}`"
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
           ##
-          # NOTE: Installs the latest compatible Bundler version, runs `bundle install' and caches installed gems.
+          # NOTE: Installs the latest compatible Bundler version, runs `bundle install` and caches installed gems.
           # - https://github.com/ruby/setup-ruby#usage
           # - https://github.com/ruby/setup-ruby#bundler
           #
@@ -137,25 +137,25 @@ jobs:
       - name: Run RSpec with Dry
         run: task rspec:dry
       ##
-      # NOTE: `lcov-result-merger' is written in JS.
+      # NOTE: `lcov-result-merger` is written in JS.
       #
       - name: Set up Node.js 16.x
         uses: actions/setup-node@v3
         with:
           node-version: 16.x
       ##
-      # NOTE: `lcov-result-merger' docs.
+      # NOTE: `lcov-result-merger` docs.
       # https://github.com/mweibel/lcov-result-merger
       #
-      # NOTE: `npx --yes' option.
+      # NOTE: `npx --yes` option.
       # https://stackoverflow.com/questions/70742968/automatically-accept-installing-npx-package
       #
-      # NOTE: `lcov-result-merger' uses `vinyl-fs' for globs which in turn uses `node-glob'.
+      # NOTE: `lcov-result-merger` uses `vinyl-fs` for globs which in turn uses `node-glob`.
       # - https://github.com/mweibel/lcov-result-merger/blob/v3.3.0/bin/lcov-result-merger.js#L38
       # - https://github.com/gulpjs/vinyl-fs#srcglobs-options
       # - https://github.com/isaacs/node-glob#glob-primer
       #
-      # NOTE: Append `&& cat coverage/lcov.info' to debug.
+      # NOTE: Append `&& cat coverage/lcov.info` to debug.
       #
       # IMPORTANT: 'coverage/**/lcov.info' single quotes are mandatory.
       #

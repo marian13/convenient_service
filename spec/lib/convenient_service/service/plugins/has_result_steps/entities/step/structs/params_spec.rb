@@ -15,7 +15,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::St
       context "when other has different `service`" do
         let(:other) { described_class.new(**kwargs.merge(service: Class.new)) }
 
-        it "returns `false'" do
+        it "returns `false`" do
           expect(params == other).to eq(false)
         end
       end
@@ -23,7 +23,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::St
       context "when other has different `inputs`" do
         let(:other) { described_class.new(**kwargs.merge(inputs: [:baz])) }
 
-        it "returns `false'" do
+        it "returns `false`" do
           expect(params == other).to eq(false)
         end
       end
@@ -31,7 +31,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::St
       context "when other has different `outputs`" do
         let(:other) { described_class.new(**kwargs.merge(outputs: [:qux])) }
 
-        it "returns `false'" do
+        it "returns `false`" do
           expect(params == other).to eq(false)
         end
       end
@@ -39,7 +39,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::St
       context "when other has different `index`" do
         let(:other) { described_class.new(**kwargs.merge(index: 1)) }
 
-        it "returns `false'" do
+        it "returns `false`" do
           expect(params == other).to eq(false)
         end
       end
@@ -47,7 +47,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::St
       context "when other has different `organizer`" do
         let(:other) { described_class.new(**kwargs.merge(organizer: Object.new)) }
 
-        it "returns `false'" do
+        it "returns `false`" do
           expect(params == other).to eq(false)
         end
       end
@@ -55,7 +55,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::St
       context "when other has same attributes" do
         let(:other) { described_class.new(**kwargs) }
 
-        it "returns `true'" do
+        it "returns `true`" do
           expect(params == other).to eq(true)
         end
       end

@@ -22,6 +22,8 @@ module ConvenientService
           return if Utils::Method.defined?(method, in: mod)
 
           ##
+          # TODO: `call_with`
+          #
           # NOTE: Assignment in the beginning for easier debugging.
           #
           <<~RUBY.tap { |code| mod.class_eval(code, __FILE__, __LINE__ + 1) }

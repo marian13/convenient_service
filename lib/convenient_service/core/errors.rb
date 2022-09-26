@@ -7,7 +7,7 @@ module ConvenientService
         message = <<~TEXT
           Concern middleware stack is already committed.
 
-          Did you call `concerns(&block)' after using any plugin, after calling `commit_config!'?
+          Did you call `concerns(&block)` after using any plugin, after calling `commit_config!`?
         TEXT
 
         super(message)

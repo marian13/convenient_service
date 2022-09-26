@@ -38,23 +38,23 @@ RSpec.describe ConvenientService::Support::Delegate do
     end
 
     describe ".delegate" do
-      it "delegates to `Forwardable#def_delegators'" do
+      it "delegates to `Forwardable#def_delegators`" do
         allow(klass).to receive(:def_delegators).with(:itself, :to_s).and_call_original
 
         ##
-        # TODO: Contribute. `Forwardable' can not accept `:class'.
+        # TODO: Contribute. `Forwardable` can not accept `:class`.
         #
         klass.delegate :to_s, to: :itself
 
         expect(klass).to have_received(:def_delegators)
       end
 
-      context "when `to' is `class`" do
-        it "delegates to `Forwardable#def_delegators' with `self.class'" do
+      context "when `to` is `class`" do
+        it "delegates to `Forwardable#def_delegators` with `self.class`" do
           allow(klass).to receive(:def_delegators).with(:"self.class", :to_s).and_call_original
 
           ##
-          # TODO: Contribute. `Forwardable' can not accept `:class'.
+          # TODO: Contribute. `Forwardable` can not accept `:class`.
           #
           klass.delegate :to_s, to: :class
 

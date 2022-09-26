@@ -32,7 +32,7 @@ module ConvenientService
             end
 
             ##
-            # NOTE: Allows to pass a value to `in' method without processing it.
+            # NOTE: Allows to pass a value to `in` method without processing it.
             #
             def raw(value)
               Entities::Method::Entities::Values::Raw.wrap(value)

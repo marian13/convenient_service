@@ -54,7 +54,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::StripComment
       RUBY
     end
 
-    context "when `strip-comments' npm package is not available" do
+    context "when `strip-comments` npm package is not available" do
       before do
         stub_service(ConvenientService::Examples::Dry::Gemfile::Services::AssertNpmPackageAvailable)
           .with_arguments(name: npm_package_name)
@@ -66,7 +66,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::StripComment
       end
     end
 
-    context "when `strip-comments' npm package is available" do
+    context "when `strip-comments` npm package is available" do
       before do
         stub_service(ConvenientService::Examples::Dry::Gemfile::Services::AssertNpmPackageAvailable)
           .with_arguments(name: npm_package_name)

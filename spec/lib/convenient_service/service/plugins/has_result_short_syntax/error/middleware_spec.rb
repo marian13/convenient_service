@@ -32,7 +32,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultShortSyntax::Error:
         end
       end
 
-      it "delegates to `ConvenientService::Service::Plugins::HasResultShortSyntax::Error::Commands::AssertEitherArgsOrKwargsArePassed'" do
+      it "delegates to `ConvenientService::Service::Plugins::HasResultShortSyntax::Error::Commands::AssertEitherArgsOrKwargsArePassed`" do
         allow(ConvenientService::Service::Plugins::HasResultShortSyntax::Error::Commands::AssertEitherArgsOrKwargsArePassed).to receive(:call).with(hash_including(args: [], kwargs: {})).and_call_original
 
         method_value
@@ -40,7 +40,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultShortSyntax::Error:
         expect(ConvenientService::Service::Plugins::HasResultShortSyntax::Error::Commands::AssertEitherArgsOrKwargsArePassed).to have_received(:call)
       end
 
-      it "delegates to `ConvenientService::Service::Plugins::HasResultShortSyntax::Error::Commands::AssertArgsCountLowerThanThree'" do
+      it "delegates to `ConvenientService::Service::Plugins::HasResultShortSyntax::Error::Commands::AssertArgsCountLowerThanThree`" do
         allow(ConvenientService::Service::Plugins::HasResultShortSyntax::Error::Commands::AssertArgsCountLowerThanThree).to receive(:call).with(hash_including(args: [])).and_call_original
 
         method_value
@@ -48,10 +48,10 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultShortSyntax::Error:
         expect(ConvenientService::Service::Plugins::HasResultShortSyntax::Error::Commands::AssertArgsCountLowerThanThree).to have_received(:call)
       end
 
-      context "when `args' are NOT passed" do
+      context "when `args` are NOT passed" do
         let(:args) { [] }
 
-        context "when `kwargs' are NOT passed" do
+        context "when `kwargs` are NOT passed" do
           let(:kwargs) { {} }
 
           it "returns error with default message and default code" do
@@ -59,7 +59,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultShortSyntax::Error:
           end
         end
 
-        context "when `kwargs' are passed" do
+        context "when `kwargs` are passed" do
           let(:kwargs) { {message: "Helpful text", code: :descriptive_code} }
 
           it "returns error with message and code" do
@@ -68,10 +68,10 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultShortSyntax::Error:
         end
       end
 
-      context "when `args' are passed" do
+      context "when `args` are passed" do
         let(:args) { ["Helpful text", :descriptive_code] }
 
-        context "when `kwargs' are NOT passed" do
+        context "when `kwargs` are NOT passed" do
           let(:kwargs) { {} }
 
           context "when one arg is passed" do
@@ -95,7 +95,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultShortSyntax::Error:
 
             let(:error_message) do
               <<~TEXT
-                More than two `args' are passed to the `error' method.
+                More than two `args` are passed to the `error` method.
 
                 Did you mean something like:
 
@@ -104,7 +104,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultShortSyntax::Error:
               TEXT
             end
 
-            it "raises `ConvenientService::Service::Plugins::HasResultShortSyntax::Error::Errors::MoreThanTwoArgsArePassed'" do
+            it "raises `ConvenientService::Service::Plugins::HasResultShortSyntax::Error::Errors::MoreThanTwoArgsArePassed`" do
               expect { method_value }
                 .to raise_error(ConvenientService::Service::Plugins::HasResultShortSyntax::Error::Errors::MoreThanTwoArgsArePassed)
                 .with_message(error_message)
@@ -112,12 +112,12 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultShortSyntax::Error:
           end
         end
 
-        context "when `kwargs' are passed" do
+        context "when `kwargs` are passed" do
           let(:kwargs) { {message: "Helpful text", code: :descriptive_code} }
 
           let(:error_message) do
             <<~TEXT
-              Both `args' and `kwargs' are passed to the `error' method.
+              Both `args` and `kwargs` are passed to the `error` method.
 
               Did you mean something like:
 
@@ -129,7 +129,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultShortSyntax::Error:
             TEXT
           end
 
-          it "raises `ConvenientService::Service::Plugins::HasResultShortSyntax::Error::Errors::BothArgsAndKwargsArePassed'" do
+          it "raises `ConvenientService::Service::Plugins::HasResultShortSyntax::Error::Errors::BothArgsAndKwargsArePassed`" do
             expect { method_value }
               .to raise_error(ConvenientService::Service::Plugins::HasResultShortSyntax::Error::Errors::BothArgsAndKwargsArePassed)
               .with_message(error_message)

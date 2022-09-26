@@ -6,7 +6,7 @@ module ConvenientService
       module HasResult
         module Constants
           ##
-          # TODO: Consider to include `::ConvenientService::Configs::Minimal'
+          # TODO: Consider to include `::ConvenientService::Configs::Minimal`
           #
           DEFAULT_SERVICE_CLASS = ::Class.new { include ::ConvenientService::Core }
           DEFAULT_SERVICE_INSTANCE = DEFAULT_SERVICE_CLASS.new

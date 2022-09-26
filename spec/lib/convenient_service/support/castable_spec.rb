@@ -39,11 +39,11 @@ RSpec.describe ConvenientService::Support::Castable do
     describe ".cast" do
       let(:error_message) do
         <<~TEXT
-          `#{klass}' should implement abstract class method `cast'.
+          `#{klass}` should implement abstract class method `cast`.
         TEXT
       end
 
-      it "raises `ConvenientService::Support::AbstractMethod::Errors::AbstractMethodNotOverridden'" do
+      it "raises `ConvenientService::Support::AbstractMethod::Errors::AbstractMethodNotOverridden`" do
         expect { klass.cast(other) }
           .to raise_error(ConvenientService::Support::AbstractMethod::Errors::AbstractMethodNotOverridden)
           .with_message(error_message)
@@ -51,12 +51,12 @@ RSpec.describe ConvenientService::Support::Castable do
     end
 
     describe ".cast!" do
-      context "when `other' is NOT castable" do
+      context "when `other` is NOT castable" do
         include ConvenientService::RSpec::Helpers::IgnoringError
 
         let(:message) do
           <<~TEXT
-            Failed to cast `#{other.inspect}' into `#{klass}'.
+            Failed to cast `#{other.inspect}` into `#{klass}`.
           TEXT
         end
 
@@ -64,7 +64,7 @@ RSpec.describe ConvenientService::Support::Castable do
           allow(klass).to receive(:cast).and_return(nil)
         end
 
-        it "delegates to `.cast'" do
+        it "delegates to `.cast`" do
           ##
           # NOTE: Error is NOT the purpose of this spec. That is why it is caught.
           # But if it is NOT caught, the spec should fail.
@@ -74,25 +74,25 @@ RSpec.describe ConvenientService::Support::Castable do
           expect(klass).to have_received(:cast).with(other)
         end
 
-        it "raises `ConvenientService::Support::Castable::Errors::FailedToCast'" do
+        it "raises `ConvenientService::Support::Castable::Errors::FailedToCast`" do
           expect { klass.cast!(other) }
             .to raise_error(ConvenientService::Support::Castable::Errors::FailedToCast)
             .with_message(message)
         end
       end
 
-      context "when `other' is castable" do
+      context "when `other` is castable" do
         before do
           allow(klass).to receive(:cast).and_return(casted)
         end
 
-        it "delegates to `.cast'" do
+        it "delegates to `.cast`" do
           klass.cast!(other)
 
           expect(klass).to have_received(:cast).with(other)
         end
 
-        it "returns casted `other'" do
+        it "returns casted `other`" do
           expect(klass.cast!(other)).to eq(casted)
         end
       end
@@ -120,13 +120,13 @@ RSpec.describe ConvenientService::Support::Castable do
         allow(klass).to receive(:cast)
       end
 
-      it "delegates to `.cast'" do
+      it "delegates to `.cast`" do
         instance.public_cast(other)
 
         expect(klass).to have_received(:cast)
       end
 
-      it "returns result of `.cast'" do
+      it "returns result of `.cast`" do
         expect(instance.public_cast(other)).to eq(klass.cast(other))
       end
     end
@@ -151,13 +151,13 @@ RSpec.describe ConvenientService::Support::Castable do
         allow(klass).to receive(:cast!)
       end
 
-      it "delegates to `.cast!'" do
+      it "delegates to `.cast!`" do
         instance.public_cast!(other)
 
         expect(klass).to have_received(:cast!)
       end
 
-      it "returns result of `.cast!'" do
+      it "returns result of `.cast!`" do
         expect(instance.public_cast!(other)).to eq(klass.cast!(other))
       end
     end

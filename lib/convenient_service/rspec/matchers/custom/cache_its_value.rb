@@ -9,7 +9,7 @@ module ConvenientService
             @block_expectation = block_expectation
 
             ##
-            # NOTE: Identical to `block_expectation.call.object_id == block_expectation.call.object_id'.
+            # NOTE: Identical to `block_expectation.call.object_id == block_expectation.call.object_id`.
             #
             block_expectation.call.equal?(block_expectation.call)
           end

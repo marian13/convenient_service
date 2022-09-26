@@ -10,7 +10,7 @@ module ConvenientService
               class ChainAttributePreliminaryAccess < ::StandardError
                 def initialize(attribute:)
                   message <<~TEXT
-                    Chain attribute `#{attribute}' is accessed before the chain is called.
+                    Chain attribute `#{attribute}` is accessed before the chain is called.
                   TEXT
 
                   super(message)

@@ -48,7 +48,7 @@ RSpec.describe ConvenientService::Common::Plugins::CachesConstructorParams::Midd
 
       specify { expect { method_value }.to call_chain_next.on(method).with_arguments(*args, **kwargs, &block) }
 
-      it "writes `ConvenientService::Common::Plugins::CachesConstructorParams::Entities::ConstructorParams' instance to cache with `constructor_params' as key" do
+      it "writes `ConvenientService::Common::Plugins::CachesConstructorParams::Entities::ConstructorParams` instance to cache with `constructor_params` as key" do
         expect { method_value }
           .to delegate_to(service_instance.internals.cache, :write)
           .with_arguments(:constructor_params, ConvenientService::Common::Plugins::CachesConstructorParams::Entities::ConstructorParams.new(args: args, kwargs: kwargs, block: block))

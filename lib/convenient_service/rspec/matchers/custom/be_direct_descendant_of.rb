@@ -5,7 +5,7 @@ module ConvenientService
     module Matchers
       module Custom
         ##
-        # NOTE: Navigate to the link below and `Ctrl + F' for "Custom Matcher from scratch"
+        # NOTE: Navigate to the link below and `Ctrl + F` for "Custom Matcher from scratch"
         # for a guide of how to define a complex custom matcher.
         # https://rubydoc.info/github/rspec/rspec-expectations/RSpec/Matchers
         #
@@ -26,23 +26,23 @@ module ConvenientService
           end
 
           def description
-            "be a direct descendant of `#{base_klass}'"
+            "be a direct descendant of `#{base_klass}`"
           end
 
           ##
-          # NOTE: `failure_message' is only called when `mathces?' returns `false'.
+          # NOTE: `failure_message` is only called when `mathces?` returns `false`.
           # https://rubydoc.info/github/rspec/rspec-expectations/RSpec/Matchers/MatcherProtocol#failure_message-instance_method
           #
           def failure_message
-            "expected #{klass} to be a direct descendant of `#{base_klass}'"
+            "expected #{klass} to be a direct descendant of `#{base_klass}`"
           end
 
           ##
-          # NOTE: `failure_message_when_negated' is only called when `mathces?' returns `false'.
+          # NOTE: `failure_message_when_negated` is only called when `mathces?` returns `false`.
           # https://rubydoc.info/github/rspec/rspec-expectations/RSpec/Matchers/MatcherProtocol#failure_message-instance_method
           #
           def failure_message_when_negated
-            "expected #{klass} NOT to be a direct descendant of `#{base_klass}'"
+            "expected #{klass} NOT to be a direct descendant of `#{base_klass}`"
           end
 
           private

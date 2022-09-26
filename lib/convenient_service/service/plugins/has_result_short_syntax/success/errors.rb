@@ -9,7 +9,7 @@ module ConvenientService
             class KwargsContainDataAndExtraKeys < ::ConvenientService::Error
               def initialize
                 message = <<~TEXT
-                  `kwargs' passed to `success' method contain `data' and extra keys. That's NOT allowed.
+                  `kwargs` passed to `success` method contain `data` and extra keys. That's NOT allowed.
 
                   Please, consider something like:
 

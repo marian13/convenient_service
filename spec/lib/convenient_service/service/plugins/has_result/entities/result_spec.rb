@@ -35,7 +35,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result 
   end
 
   ##
-  # NOTE: Waits for `should-matchers' full support.
+  # NOTE: Waits for `should-matchers` full support.
   #
   # example_group "delegations" do
   #   include Shoulda::Matchers::Independent
@@ -58,7 +58,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result 
 
   example_group "class methods" do
     describe ".new" do
-      it "delegates to `ConvenientService::Service::Plugins::HasResult::Entities::Result::Commands::CastResultParams'" do
+      it "delegates to `ConvenientService::Service::Plugins::HasResult::Entities::Result::Commands::CastResultParams`" do
         allow(ConvenientService::Service::Plugins::HasResult::Entities::Result::Commands::CastResultParams).to receive(:call).with(hash_including(params: params)).and_call_original
 
         result
@@ -70,31 +70,31 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result 
 
   example_group "instance methods" do
     describe "#service" do
-      it "returns `service'" do
+      it "returns `service`" do
         expect(result.service).to eq(params[:service])
       end
     end
 
     describe "#status" do
-      it "returns casted `status'" do
+      it "returns casted `status`" do
         expect(result.status).to eq(ConvenientService::Service::Plugins::HasResult::Entities::Result::Entities::Status.cast(params[:status]))
       end
     end
 
     describe "#data" do
-      it "returns casted `data'" do
+      it "returns casted `data`" do
         expect(result.data).to eq(ConvenientService::Service::Plugins::HasResult::Entities::Result::Entities::Data.cast(params[:data]))
       end
     end
 
     describe "#message" do
-      it "returns casted `message'" do
+      it "returns casted `message`" do
         expect(result.message).to eq(ConvenientService::Service::Plugins::HasResult::Entities::Result::Entities::Message.cast(params[:message]))
       end
     end
 
     describe "#code" do
-      it "returns casted `code'" do
+      it "returns casted `code`" do
         expect(result.code).to eq(ConvenientService::Service::Plugins::HasResult::Entities::Result::Entities::Code.cast(params[:code]))
       end
     end
@@ -103,7 +103,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result 
       context "when results have different classes" do
         let(:other) { "string" }
 
-        it "returns `nil'" do
+        it "returns `nil`" do
           expect(result == other).to eq(nil)
         end
       end
@@ -112,7 +112,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result 
         context "when those services has different classes" do
           let(:other) { described_class.new(**params.merge(service: Object.new)) }
 
-          it "returns `false'" do
+          it "returns `false`" do
             expect(result == other).to eq(false)
           end
         end
@@ -120,7 +120,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result 
         context "when those services has same classes" do
           let(:other) { described_class.new(**params.merge(service: service_class.new)) }
 
-          it "returns `false'" do
+          it "returns `false`" do
             expect(result == other).to eq(true)
           end
         end
@@ -129,7 +129,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result 
       context "when results have different status" do
         let(:other) { described_class.new(**params.merge(status: :bar)) }
 
-        it "returns `false'" do
+        it "returns `false`" do
           expect(result == other).to eq(false)
         end
       end
@@ -137,7 +137,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result 
       context "when results have different data" do
         let(:other) { described_class.new(**params.merge(data: {bar: :foo})) }
 
-        it "returns `false'" do
+        it "returns `false`" do
           expect(result == other).to eq(false)
         end
       end
@@ -145,7 +145,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result 
       context "when results have different messages" do
         let(:other) { described_class.new(**params.merge(message: "bar")) }
 
-        it "returns `false'" do
+        it "returns `false`" do
           expect(result == other).to eq(false)
         end
       end
@@ -153,7 +153,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result 
       context "when results have different code" do
         let(:other) { described_class.new(**params.merge(code: :bar)) }
 
-        it "returns `false'" do
+        it "returns `false`" do
           expect(result == other).to eq(false)
         end
       end
@@ -161,7 +161,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result 
       context "when results have same attributes" do
         let(:other) { described_class.new(**params) }
 
-        it "returns `true'" do
+        it "returns `true`" do
           expect(result == other).to eq(true)
         end
       end

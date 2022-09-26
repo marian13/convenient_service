@@ -11,7 +11,7 @@ module ConvenientService
             message = <<~TEXT
               Max iteration count is exceeded. Current limit is #{limit}.
 
-              Consider using `max_iteration_count' or `raise_on_exceedance' options if that is not the expected behavior.
+              Consider using `max_iteration_count` or `raise_on_exceedance` options if that is not the expected behavior.
             TEXT
 
             super(message)
@@ -21,7 +21,7 @@ module ConvenientService
         class NoBlockGiven < ::StandardError
           def initialize
             message = <<~TEXT
-              `finite_loop' always expects a block to be given.
+              `finite_loop` always expects a block to be given.
             TEXT
 
             super(message)

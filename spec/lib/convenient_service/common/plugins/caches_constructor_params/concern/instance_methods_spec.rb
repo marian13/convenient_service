@@ -28,7 +28,7 @@ RSpec.describe ConvenientService::Common::Plugins::CachesConstructorParams::Conc
       include ConvenientService::RSpec::Matchers::DelegateTo
 
       ##
-      # NOTE: Makes sure that `internals.cache.write(:constructor_params)' returns unique object for test.
+      # NOTE: Makes sure that `internals.cache.write(:constructor_params)` returns unique object for test.
       #
       before do
         service_instance.internals.cache.write(:constructor_params, double)
@@ -41,7 +41,7 @@ RSpec.describe ConvenientService::Common::Plugins::CachesConstructorParams::Conc
           .and_return_its_value
       }
 
-      it "returns `cache.read(:constructor_params)'" do
+      it "returns `cache.read(:constructor_params)`" do
         expect(service_instance.constructor_params).to eq(service_instance.internals.cache.read(:constructor_params))
       end
     end

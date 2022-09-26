@@ -9,7 +9,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Entities::Type:
   describe "#cast" do
     let(:type_class) { ConvenientService::Common::Plugins::HasCallbacks::Entities::Type }
 
-    context "when `other' is NOT castable" do
+    context "when `other` is NOT castable" do
       let(:other) { 42 }
 
       it "returns nil" do
@@ -17,11 +17,11 @@ RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Entities::Type:
       end
     end
 
-    context "when `other' is castable" do
-      context "when `other' is string" do
+    context "when `other` is castable" do
+      context "when `other` is string" do
         let(:other) { "before" }
 
-        it "returns that string casted to `type'" do
+        it "returns that string casted to `type`" do
           expect(type_class.cast(other)).to eq(ConvenientService::Common::Plugins::HasCallbacks::Entities::Type.new(value: :before))
         end
 
@@ -30,18 +30,18 @@ RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Entities::Type:
         end
       end
 
-      context "when `other' is symbol" do
+      context "when `other` is symbol" do
         let(:other) { :before }
 
-        it "returns that string casted to `type'" do
+        it "returns that string casted to `type`" do
           expect(type_class.cast(other)).to eq(ConvenientService::Common::Plugins::HasCallbacks::Entities::Type.new(value: :before))
         end
       end
 
-      context "when `other' is `ConvenientService::Common::Plugins::HasCallbacks::Entities::Type'" do
+      context "when `other` is `ConvenientService::Common::Plugins::HasCallbacks::Entities::Type`" do
         let(:other) { ConvenientService::Common::Plugins::HasCallbacks::Entities::Type.new(value: :before) }
 
-        it "returns that type casted to `type'" do
+        it "returns that type casted to `type`" do
           expect(type_class.cast(other)).to eq(ConvenientService::Common::Plugins::HasCallbacks::Entities::Type.new(value: :before))
         end
       end

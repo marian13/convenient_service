@@ -33,7 +33,7 @@ module ConvenientService
             end
 
             ##
-            # IMPORTANT: `Key' instances are used as Ruby hash keys.
+            # IMPORTANT: `Key` instances are used as Ruby hash keys.
             #
             # This method is overridden in order to avoid the following case:
             #

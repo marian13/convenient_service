@@ -30,7 +30,7 @@ module ConvenientService
 
         def call
           ##
-          # NOTE: > If `inherit' is `false', the lookup only checks the constants in the receiver:
+          # NOTE: > If `inherit` is `false`, the lookup only checks the constants in the receiver:
           # https://ruby-doc.org/core-3.0.0/Module.html#method-i-const_defined-3F
           #
           return unless object.const_defined?(const_name, false)

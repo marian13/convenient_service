@@ -9,7 +9,7 @@ module ConvenientService
             class BothArgsAndKwargsArePassed < ::ConvenientService::Error
               def initialize
                 message = <<~TEXT
-                  Both `args' and `kwargs' are passed to the `error' method.
+                  Both `args` and `kwargs` are passed to the `error` method.
 
                   Did you mean something like:
 
@@ -27,7 +27,7 @@ module ConvenientService
             class MoreThanTwoArgsArePassed < ::ConvenientService::Error
               def initialize
                 message = <<~TEXT
-                  More than two `args' are passed to the `error' method.
+                  More than two `args` are passed to the `error` method.
 
                   Did you mean something like:
 

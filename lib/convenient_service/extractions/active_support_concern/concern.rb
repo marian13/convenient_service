@@ -141,9 +141,9 @@ module ConvenientService
             base.class_eval(&@_included_block) if instance_variable_defined?(:@_included_block)
 
             ##
-            # NOTE: Customization compared to original `Concern' implementation.
-            # TODO: Why original `Concern' implementation uses `const_defined?(:ClassMethods)`, not `const_defined?(:ClassMethods, false)'?
-            # NOTE: Changed order to have a way to control when to include `InstanceMethods' and `ClassMethods' from `included' block.
+            # NOTE: Customization compared to original `Concern` implementation.
+            # TODO: Why original `Concern` implementation uses `const_defined?(:ClassMethods)`, not `const_defined?(:ClassMethods, false)`?
+            # NOTE: Changed order to have a way to control when to include `InstanceMethods` and `ClassMethods` from `included` block.
             #
             base.include const_get(:InstanceMethods) if const_defined?(:InstanceMethods)
 
@@ -163,9 +163,9 @@ module ConvenientService
             base.class_eval(&@_prepended_block) if instance_variable_defined?(:@_prepended_block)
 
             ##
-            # NOTE: Customization compared to original `Concern' implementation.
-            # TODO: Why original `Concern' implementation uses `const_defined?(:ClassMethods)`, not `const_defined?(:ClassMethods, false)'?
-            # NOTE: Changed order to have a way to control when to include `InstanceMethods' and `ClassMethods' from `included' block.
+            # NOTE: Customization compared to original `Concern` implementation.
+            # TODO: Why original `Concern` implementation uses `const_defined?(:ClassMethods)`, not `const_defined?(:ClassMethods, false)`?
+            # NOTE: Changed order to have a way to control when to include `InstanceMethods` and `ClassMethods` from `included` block.
             #
             base.prepend const_get(:InstanceMethods) if const_defined?(:InstanceMethods)
 
@@ -208,7 +208,7 @@ module ConvenientService
         end
 
         ##
-        # NOTE: Customization compared to original `Concern' implementation.
+        # NOTE: Customization compared to original `Concern` implementation.
         #
         def instance_methods(&instance_methods_module_definition)
           mod = const_defined?(:InstanceMethods, false) ?

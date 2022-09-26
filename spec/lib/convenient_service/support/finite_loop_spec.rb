@@ -65,7 +65,7 @@ RSpec.describe ConvenientService::Support::FiniteLoop do
 
         let(:error_message) do
           <<~TEXT
-            `finite_loop' always expects a block to be given.
+            `finite_loop` always expects a block to be given.
           TEXT
         end
 
@@ -76,7 +76,7 @@ RSpec.describe ConvenientService::Support::FiniteLoop do
         end
       end
 
-      context "when `max_iteration_count' is NOT exceeded" do
+      context "when `max_iteration_count` is NOT exceeded" do
         let(:klass) do
           Class.new(base_klass) do
             ##
@@ -90,21 +90,21 @@ RSpec.describe ConvenientService::Support::FiniteLoop do
           end
         end
 
-        it "returns `break' value" do
+        it "returns `break` value" do
           expect(instance.foo).to eq(3)
         end
       end
 
-      context "when `max_iteration_count' is exceeded" do
+      context "when `max_iteration_count` is exceeded" do
         let(:error_message) do
           <<~TEXT
             Max iteration count is exceeded. Current limit is #{max_iteration_count}.
 
-            Consider using `max_iteration_count' or `raise_on_exceedance' options if that is not the expected behavior.
+            Consider using `max_iteration_count` or `raise_on_exceedance` options if that is not the expected behavior.
           TEXT
         end
 
-        context "when `raise_on_exceedance' is NOT passed" do
+        context "when `raise_on_exceedance` is NOT passed" do
           let(:klass) do
             Class.new(base_klass) do
               ##
@@ -112,20 +112,20 @@ RSpec.describe ConvenientService::Support::FiniteLoop do
               #
               def foo
                 finite_loop do |index|
-                  # NOTE: No `break' to exceed max iteration count.
+                  # NOTE: No `break` to exceed max iteration count.
                 end
               end
             end
           end
 
-          it "defaults `raise_on_exceedance' to `true'" do
+          it "defaults `raise_on_exceedance` to `true`" do
             expect { instance.foo }
               .to raise_error(ConvenientService::Support::FiniteLoop::Errors::MaxIterationCountExceeded)
               .with_message(error_message)
           end
         end
 
-        context "when `raise_on_exceedance' is set to `false'" do
+        context "when `raise_on_exceedance` is set to `false`" do
           let(:klass) do
             Class.new(base_klass) do
               ##
@@ -133,7 +133,7 @@ RSpec.describe ConvenientService::Support::FiniteLoop do
               #
               def foo
                 finite_loop(raise_on_exceedance: false) do |index|
-                  # NOTE: No `break' to exceed max iteration count.
+                  # NOTE: No `break` to exceed max iteration count.
                 end
               end
             end
@@ -144,7 +144,7 @@ RSpec.describe ConvenientService::Support::FiniteLoop do
           end
         end
 
-        context "when `raise_on_exceedance' is set to `true'" do
+        context "when `raise_on_exceedance` is set to `true`" do
           let(:klass) do
             Class.new(base_klass) do
               ##
@@ -152,7 +152,7 @@ RSpec.describe ConvenientService::Support::FiniteLoop do
               #
               def foo
                 finite_loop(raise_on_exceedance: true) do |index|
-                  # NOTE: No `break' to exceed max iteration count.
+                  # NOTE: No `break` to exceed max iteration count.
                 end
               end
             end
@@ -166,7 +166,7 @@ RSpec.describe ConvenientService::Support::FiniteLoop do
         end
       end
 
-      context "when `max_iteration_count' is NOT passed" do
+      context "when `max_iteration_count` is NOT passed" do
         let(:klass) do
           Class.new(base_klass) do
             ##
@@ -182,7 +182,7 @@ RSpec.describe ConvenientService::Support::FiniteLoop do
           end
         end
 
-        it "uses `ConvenientService::Support::FiniteLoop::MAX_ITERATION_COUNT' as `max_iteration_count' default value" do
+        it "uses `ConvenientService::Support::FiniteLoop::MAX_ITERATION_COUNT` as `max_iteration_count` default value" do
           ##
           # NOTE:
           # - MAX_ITERATION_COUNT is stubbed to 5.

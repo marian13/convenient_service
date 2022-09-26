@@ -12,9 +12,9 @@ module ConvenientService
                   class StatusIsNotChecked < ConvenientService::Error
                     def initialize(attribute:)
                       message = <<~TEXT
-                        Attribute `#{attribute}' is accessed before result status is checked.
+                        Attribute `#{attribute}` is accessed before result status is checked.
 
-                        Did you forget to call `success?', `failure?', or `error?' on result?
+                        Did you forget to call `success?`, `failure?`, or `error?` on result?
                       TEXT
 
                       super(message)

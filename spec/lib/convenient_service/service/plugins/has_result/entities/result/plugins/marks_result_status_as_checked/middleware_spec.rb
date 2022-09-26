@@ -50,7 +50,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
         }
       end
 
-      it "writes `true' to cache with `has_checked_status' key" do
+      it "writes `true` to cache with `has_checked_status` key" do
         allow(result_instance.internals.cache).to receive(:write).with(:has_checked_status, true).and_call_original
 
         method_value

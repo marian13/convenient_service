@@ -30,7 +30,7 @@ module ConvenientService
                 end
 
                 ##
-                # TODO: `cast_many`, `cast_many!'.
+                # TODO: `cast_many`, `cast_many!`.
                 #
                 def inputs
                   @inputs ||= original_params.inputs.map { |input| Entities::Method.cast!(input, direction: :input) }

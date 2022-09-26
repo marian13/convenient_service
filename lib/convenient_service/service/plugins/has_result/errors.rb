@@ -8,7 +8,7 @@ module ConvenientService
           class ResultIsNotOverridden < ConvenientService::Error
             def initialize(service:)
               message = <<~TEXT
-                Result method (#result) of `#{service.class}' is NOT overridden.
+                Result method (#result) of `#{service.class}` is NOT overridden.
               TEXT
 
               super(message)
@@ -18,10 +18,10 @@ module ConvenientService
           class ServiceReturnValueNotKindOfResult < ConvenientService::Error
             def initialize(service:, result:)
               message = <<~TEXT
-                Return value of service `#{service.class}' is NOT a `Result'.
-                It is a `#{result.class}'.
+                Return value of service `#{service.class}` is NOT a `Result`.
+                It is a `#{result.class}`.
 
-                Did you forget to call `success', `failure', or `error' from the `result' method?
+                Did you forget to call `success`, `failure`, or `error` from the `result` method?
               TEXT
 
               super(message)

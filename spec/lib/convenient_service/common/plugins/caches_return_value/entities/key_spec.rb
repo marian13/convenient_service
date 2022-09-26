@@ -26,43 +26,43 @@ RSpec.describe ConvenientService::Common::Plugins::CachesReturnValue::Entities::
 
   example_group "instance methods" do
     describe "#==" do
-      context "when `other' has different class" do
+      context "when `other` has different class" do
         let(:other) { 42 }
 
-        it "returns `false'" do
+        it "returns `false`" do
           expect(key == other).to be_nil
         end
       end
 
-      context "when `other' has different `method'" do
+      context "when `other` has different `method`" do
         let(:other) { described_class.new(**params.merge(method: [:step])) }
 
-        it "returns `false'" do
+        it "returns `false`" do
           expect(key == other).to eq(false)
         end
       end
 
-      context "when `other' has different `args'" do
+      context "when `other` has different `args`" do
         let(:other) { described_class.new(**params.merge(args: [:baz])) }
 
-        it "returns `false'" do
+        it "returns `false`" do
           expect(key == other).to eq(false)
         end
       end
 
-      context "when `other' has different `kwargs'" do
+      context "when `other` has different `kwargs`" do
         let(:other) { described_class.new(**params.merge(kwargs: {baz: :qux})) }
 
-        it "returns `false'" do
+        it "returns `false`" do
           expect(key == other).to eq(false)
         end
       end
 
-      context "when `other' has different `block'" do
+      context "when `other` has different `block`" do
         let(:other) { described_class.new(**params.merge(block: other_block)) }
         let(:other_block) { proc { :baz } }
 
-        it "returns `false'" do
+        it "returns `false`" do
           expect(key == other).to eq(false)
         end
 
@@ -70,7 +70,7 @@ RSpec.describe ConvenientService::Common::Plugins::CachesReturnValue::Entities::
         # TODO: Refactor.
         #
         # rubocop:disable Lint/Void, RSpec/ExampleLength
-        it "uses `source_location' to compare blocks" do
+        it "uses `source_location` to compare blocks" do
           constructor_params_source_location = double
           other_block_source_location = double
 
@@ -85,20 +85,20 @@ RSpec.describe ConvenientService::Common::Plugins::CachesReturnValue::Entities::
         # rubocop:enable Lint/Void, RSpec/ExampleLength
       end
 
-      context "when `other' has same attributes" do
+      context "when `other` has same attributes" do
         let(:other) { described_class.new(**params) }
 
-        it "returns `true'" do
+        it "returns `true`" do
           expect(key == other).to eq(true)
         end
       end
     end
 
     describe "#eql?" do
-      context "when `other' has different class" do
+      context "when `other` has different class" do
         let(:other) { 42 }
 
-        it "returns `false'" do
+        it "returns `false`" do
           expect(key == other).to be_nil
         end
       end
@@ -106,7 +106,7 @@ RSpec.describe ConvenientService::Common::Plugins::CachesReturnValue::Entities::
       context "when keys have different hashes" do
         let(:other) { described_class.new(**params.merge(method: [:step])) }
 
-        it "returns `false'" do
+        it "returns `false`" do
           expect(key == other).to eq(false)
         end
       end
@@ -114,21 +114,21 @@ RSpec.describe ConvenientService::Common::Plugins::CachesReturnValue::Entities::
       context "when keys have same hashes" do
         let(:other) { described_class.new(**params) }
 
-        it "returns `true'" do
+        it "returns `true`" do
           expect(key == other).to eq(true)
         end
       end
     end
 
     describe "#hash" do
-      it "returns hash based on `method', `args', `kwargs', and `block' source location" do
+      it "returns hash based on `method`, `args`, `kwargs`, and `block` source location" do
         expect(key.hash).to eq([method, args, kwargs, block.source_location].hash)
       end
 
-      context "when `block' in `nil'" do
+      context "when `block` in `nil`" do
         let(:block) { nil }
 
-        it "uses `nil' hash for `block'" do
+        it "uses `nil` hash for `block`" do
           expect(key.hash).to eq([method, args, kwargs, nil].hash)
         end
       end

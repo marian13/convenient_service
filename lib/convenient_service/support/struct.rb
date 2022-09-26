@@ -3,7 +3,7 @@
 module ConvenientService
   module Support
     ##
-    # Allows to `keyword_init' for Rubies lower than 2.5.
+    # Allows to `keyword_init` for Rubies lower than 2.5.
     #
     class Struct < ::Struct
       if Gem::Version.new(RUBY_VERSION) >= Gem::Version.new("2.0.0") && Gem::Version.new(RUBY_VERSION) < Gem::Version.new("2.5.0")

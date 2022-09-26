@@ -11,7 +11,7 @@ module ConvenientService
                 module Concern
                   module InstanceMethods
                     ##
-                    # NOTE: `Support::Delegate' is NOT used intentionally in order to NOT pollute the public interface.
+                    # NOTE: `Support::Delegate` is NOT used intentionally in order to NOT pollute the public interface.
                     #
                     def [](key)
                       data[key]

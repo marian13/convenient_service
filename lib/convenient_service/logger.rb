@@ -20,7 +20,7 @@ module ConvenientService
       private
 
       ##
-      # NOTE: `super' is `Logger.new'.
+      # NOTE: `super` is `Logger.new`.
       # https://ruby-doc.org/stdlib-3.1.0/libdoc/logger/rdoc/Logger.html#method-c-new
       #
       # rubocop:disable Style/GlobalStdStream

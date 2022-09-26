@@ -6,7 +6,7 @@ module ConvenientService
       module HasConfig
         module Entities
           ##
-          # TODO: Specs. Currently checked by `ClassMethods'.
+          # TODO: Specs. Currently checked by `ClassMethods`.
           #
           class ReadDefaultWriteConfig < Entities::Config
             def method_missing(method, value = nil)

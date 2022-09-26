@@ -9,7 +9,7 @@ RSpec.describe ConvenientService::Utils::Array do
   describe ".contain_exactly?" do
     subject(:result) { described_class.contain_exactly?(first_array, second_array) }
 
-    context "when `first_array' contains same elements as `second_array'" do
+    context "when `first_array` contains same elements as `second_array`" do
       context "when those elements do NOT have same positions" do
         let(:first_array) { [1, 2, 3] }
         let(:second_array) { [2, 3, 1] }
@@ -28,7 +28,7 @@ RSpec.describe ConvenientService::Utils::Array do
         end
       end
 
-      context "when `first_array' contains duplicates" do
+      context "when `first_array` contains duplicates" do
         context "when `second_array` does NOT contain same amount of duplicates" do
           let(:first_array) { [1, 1, 2, 2] }
           let(:second_array) { [1, 1, 2, 3] }
@@ -49,7 +49,7 @@ RSpec.describe ConvenientService::Utils::Array do
       end
     end
 
-    context "when `first_array' contains different elements comparing to `second_array'" do
+    context "when `first_array` contains different elements comparing to `second_array`" do
       let(:first_array) { [1, 2, 3] }
       let(:second_array) { [2, 3, 4] }
 
@@ -62,7 +62,7 @@ RSpec.describe ConvenientService::Utils::Array do
       let(:first_array) { [klass.new(1), klass.new(2), klass.new(3)] }
       let(:second_array) { [klass.new(1), klass.new(2), klass.new(3)] }
 
-      context "when that class does NOT implement `hash' and `eql?' instance methods" do
+      context "when that class does NOT implement `hash` and `eql?` instance methods" do
         let(:klass) do
           Class.new do
             attr_reader :value
@@ -82,7 +82,7 @@ RSpec.describe ConvenientService::Utils::Array do
         end
       end
 
-      context "when that class implements `hash' and `eql?' instance methods" do
+      context "when that class implements `hash` and `eql?` instance methods" do
         let(:klass) do
           Class.new do
             attr_reader :value
@@ -146,41 +146,41 @@ RSpec.describe ConvenientService::Utils::Array do
     let(:array) { [:a, :b, :c] }
     let(:raise_on_non_integer_index) { true }
 
-    context "when `overrides' is NOT empty" do
-      context "when `overrides' contains one `index/value' pair" do
+    context "when `overrides` is NOT empty" do
+      context "when `overrides` contains one `index/value` pair" do
         let(:overrides) { {0 => :foo} }
 
-        it "sets `value' by `index' in `array' for that pair" do
+        it "sets `value` by `index` in `array` for that pair" do
           expect(result).to eq([:foo, :b, :c])
         end
 
-        it "returns `array' copy" do
+        it "returns `array` copy" do
           expect(result.object_id).not_to eq(array.object_id)
         end
       end
 
-      context "when `overrides' contains multiple index/value pairs" do
+      context "when `overrides` contains multiple index/value pairs" do
         let(:overrides) { {0 => :foo, 1 => :bar} }
 
-        it "sets `value' by `index' in `array' for those pairs" do
+        it "sets `value` by `index` in `array` for those pairs" do
           expect(result).to eq([:foo, :bar, :c])
         end
 
-        it "returns `array' copy" do
+        it "returns `array` copy" do
           expect(result.object_id).not_to eq(array.object_id)
         end
       end
 
-      context "when `overrides' contains non integer keys" do
+      context "when `overrides` contains non integer keys" do
         let(:overrides) { {:a => :foo, 1 => :bar} }
 
         let(:error_message) do
           <<~TEXT
-            Index `:a' is NOT an integer.
+            Index `:a` is NOT an integer.
           TEXT
         end
 
-        context "when `raise_on_non_integer_index' is `false'" do
+        context "when `raise_on_non_integer_index` is `false`" do
           let(:raise_on_non_integer_index) { false }
 
           it "skips those non integer keys" do
@@ -188,20 +188,20 @@ RSpec.describe ConvenientService::Utils::Array do
           end
         end
 
-        context "when `raise_on_non_integer_index' is `true'" do
+        context "when `raise_on_non_integer_index` is `true`" do
           let(:raise_on_non_integer_index) { true }
 
-          it "raises `ConvenientService::Utils::Array::Errors::NonIntegerIndex'" do
+          it "raises `ConvenientService::Utils::Array::Errors::NonIntegerIndex`" do
             expect { result }
               .to raise_error(ConvenientService::Utils::Array::Errors::NonIntegerIndex)
               .with_message(error_message)
           end
         end
 
-        context "when `raise_on_non_integer_index' is NOT passed" do
+        context "when `raise_on_non_integer_index` is NOT passed" do
           subject(:result) { described_class.merge(array, overrides) }
 
-          it "raises `ConvenientService::Utils::Array::Errors::NonIntegerIndex'" do
+          it "raises `ConvenientService::Utils::Array::Errors::NonIntegerIndex`" do
             expect { result }
               .to raise_error(ConvenientService::Utils::Array::Errors::NonIntegerIndex)
               .with_message(error_message)
@@ -210,10 +210,10 @@ RSpec.describe ConvenientService::Utils::Array do
       end
     end
 
-    context "when `overrides' is empty" do
+    context "when `overrides` is empty" do
       let(:overrides) { {} }
 
-      it "returns `array' copy" do
+      it "returns `array` copy" do
         expect(result.object_id).not_to eq(array.object_id)
       end
     end
@@ -225,33 +225,33 @@ RSpec.describe ConvenientService::Utils::Array do
     let(:array) { [:a, :b, :c] }
     let(:pad) { :x }
 
-    context "when `array' size is lower than `size'" do
+    context "when `array` size is lower than `size`" do
       let(:size) { 1 }
 
-      it "returns `array'" do
+      it "returns `array`" do
         expect(result).to eq(array)
       end
     end
 
-    context "when `array' size is equal to `size'" do
+    context "when `array` size is equal to `size`" do
       let(:size) { 3 }
 
-      it "returns `array'" do
+      it "returns `array`" do
         expect(result).to eq(array)
       end
     end
 
-    context "when `array' size is greater than `size'" do
+    context "when `array` size is greater than `size`" do
       let(:size) { 10 }
 
-      it "returns `array' with `size' with `pad' for added items" do
+      it "returns `array` with `size` with `pad` for added items" do
         expect(result).to eq([:a, :b, :c, :x, :x, :x, :x, :x, :x, :x])
       end
 
       context "when pad is NOT passed" do
         subject(:result) { described_class.rjust(array, size) }
 
-        it "returns `array' with `size' with `nil' for added items" do
+        it "returns `array` with `size` with `nil` for added items" do
           expect(result).to eq([:a, :b, :c, nil, nil, nil, nil, nil, nil, nil])
         end
       end
@@ -261,7 +261,7 @@ RSpec.describe ConvenientService::Utils::Array do
   describe ".wrap" do
     subject(:result) { described_class.wrap(object) }
 
-    context "when object is `nil'" do
+    context "when object is `nil`" do
       let(:object) { nil }
 
       it "returns empty array" do
@@ -269,10 +269,10 @@ RSpec.describe ConvenientService::Utils::Array do
       end
     end
 
-    context "when object responds to `to_ary'" do
+    context "when object responds to `to_ary`" do
       let(:object) { OpenStruct.new(to_ary: value) }
 
-      context "when `to_ary' returns falsey value" do
+      context "when `to_ary` returns falsey value" do
         let(:value) { nil }
 
         it "returns object inside array" do
@@ -280,7 +280,7 @@ RSpec.describe ConvenientService::Utils::Array do
         end
       end
 
-      context "when `to_ary' returns truthy value" do
+      context "when `to_ary` returns truthy value" do
         let(:value) { [1, 2, 3] }
 
         it "returns that truthy value" do
@@ -289,7 +289,7 @@ RSpec.describe ConvenientService::Utils::Array do
       end
     end
 
-    context "when object is NEITHER nil NOR responds to `to_ary'" do
+    context "when object is NEITHER nil NOR responds to `to_ary`" do
       let(:object) { "string" }
 
       it "returns object inside array" do

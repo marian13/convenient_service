@@ -6,7 +6,7 @@ module ConvenientService
       module Custom
         class IncludeModule
           ##
-          # NOTE: `mod' since `module' is a keyword.
+          # NOTE: `mod` since `module` is a keyword.
           #
           def initialize(mod)
             @mod = mod
@@ -19,15 +19,15 @@ module ConvenientService
           end
 
           def description
-            "include module `#{mod}'"
+            "include module `#{mod}`"
           end
 
           def failure_message
-            "expected `#{klass}' to include module `#{mod}'"
+            "expected `#{klass}` to include module `#{mod}`"
           end
 
           def failure_message_when_negated
-            "expected `#{klass}' NOT to include module `#{mod}'"
+            "expected `#{klass}` NOT to include module `#{mod}`"
           end
 
           private

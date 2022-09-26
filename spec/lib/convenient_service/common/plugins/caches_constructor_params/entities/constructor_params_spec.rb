@@ -28,7 +28,7 @@ RSpec.describe ConvenientService::Common::Plugins::CachesConstructorParams::Enti
 
       let(:params) { {args: [:foo], kwargs: {foo: :bar}, block: proc { :foo }} }
 
-      context "when `other' has different class" do
+      context "when `other` has different class" do
         let(:other) { 42 }
 
         it "returns false" do
@@ -36,7 +36,7 @@ RSpec.describe ConvenientService::Common::Plugins::CachesConstructorParams::Enti
         end
       end
 
-      context "when `other' has different `args'" do
+      context "when `other` has different `args`" do
         let(:other) { described_class.new(**params.merge(args: [:baz])) }
 
         it "returns false" do
@@ -44,7 +44,7 @@ RSpec.describe ConvenientService::Common::Plugins::CachesConstructorParams::Enti
         end
       end
 
-      context "when `other' has different `kwargs'" do
+      context "when `other` has different `kwargs`" do
         let(:other) { described_class.new(**params.merge(kwargs: {baz: :qux})) }
 
         it "returns false" do
@@ -52,7 +52,7 @@ RSpec.describe ConvenientService::Common::Plugins::CachesConstructorParams::Enti
         end
       end
 
-      context "when `other' has different `block'" do
+      context "when `other` has different `block`" do
         let(:other) { described_class.new(**params.merge(block: other_block)) }
         let(:other_block) { proc { :baz } }
 
@@ -64,7 +64,7 @@ RSpec.describe ConvenientService::Common::Plugins::CachesConstructorParams::Enti
         # TODO: Refactor.
         #
         # rubocop:disable Lint/Void, RSpec/ExampleLength
-        it "uses `source_location' to compare blocks" do
+        it "uses `source_location` to compare blocks" do
           constructor_params_source_location = double
           other_block_source_location = double
 
@@ -79,7 +79,7 @@ RSpec.describe ConvenientService::Common::Plugins::CachesConstructorParams::Enti
         # rubocop:enable Lint/Void, RSpec/ExampleLength
       end
 
-      context "when `other' has same attributes" do
+      context "when `other` has same attributes" do
         let(:other) { described_class.new(**params) }
 
         it "returns true" do

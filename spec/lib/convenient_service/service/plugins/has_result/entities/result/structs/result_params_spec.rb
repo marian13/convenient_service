@@ -14,50 +14,50 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
       let(:result_params) { described_class.new(**params) }
       let(:params) { {service: service_instance, status: :foo, data: {foo: :bar}, message: "foo", code: :foo} }
 
-      context "when `other' has different `service`" do
+      context "when `other` has different `service`" do
         let(:other) { described_class.new(**params.merge(service: Object.new)) }
 
-        it "returns `false'" do
+        it "returns `false`" do
           expect(result_params == other).to eq(false)
         end
       end
 
-      context "when `other' has different `status`" do
+      context "when `other` has different `status`" do
         let(:other) { described_class.new(**params.merge(status: :bar)) }
 
-        it "returns `false'" do
+        it "returns `false`" do
           expect(result_params == other).to eq(false)
         end
       end
 
-      context "when `other' has different `data`" do
+      context "when `other` has different `data`" do
         let(:other) { described_class.new(**params.merge(data: {baz: :qux})) }
 
-        it "returns `false'" do
+        it "returns `false`" do
           expect(result_params == other).to eq(false)
         end
       end
 
-      context "when `other' has different `message`" do
+      context "when `other` has different `message`" do
         let(:other) { described_class.new(**params.merge(message: "bar")) }
 
-        it "returns `false'" do
+        it "returns `false`" do
           expect(result_params == other).to eq(false)
         end
       end
 
-      context "when `other' has different `code`" do
+      context "when `other` has different `code`" do
         let(:other) { described_class.new(**params.merge(code: :bar)) }
 
-        it "returns `false'" do
+        it "returns `false`" do
           expect(result_params == other).to eq(false)
         end
       end
 
-      context "when `other' has same attributes" do
+      context "when `other` has same attributes" do
         let(:other) { described_class.new(**params) }
 
-        it "returns `true'" do
+        it "returns `true`" do
           expect(result_params == other).to eq(true)
         end
       end

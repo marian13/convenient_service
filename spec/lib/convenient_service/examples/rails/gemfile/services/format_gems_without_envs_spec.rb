@@ -11,7 +11,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::FormatGems
   include ConvenientService::RSpec::Matchers::HaveAttrReader
   include ConvenientService::RSpec::Matchers::IncludeModule
   ##
-  # NOTE: Waits for `should-matchers' full support.
+  # NOTE: Waits for `should-matchers` full support.
   #
   # include Shoulda::Matchers::ActiveModel
 
@@ -76,7 +76,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::FormatGems
       expect(result).to be_success.with_data(formatted_content: formatted_content)
     end
 
-    context "when `parsed_content' does NOT contain `gems'" do
+    context "when `parsed_content` does NOT contain `gems`" do
       let(:parsed_content) { {} }
       let(:formatted_content) { "" }
 
@@ -85,7 +85,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::FormatGems
       end
     end
 
-    context "when `parsed_content' does NOT contain `gems' without envs" do
+    context "when `parsed_content` does NOT contain `gems` without envs" do
       let(:parsed_content) do
         {
           gems: [

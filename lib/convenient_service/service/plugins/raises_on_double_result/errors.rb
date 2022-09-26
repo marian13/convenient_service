@@ -8,11 +8,11 @@ module ConvenientService
           class DoubleResult < ConvenientService::Error
             def initialize(service:)
               message = <<~TEXT
-                `#{service.class}' service has a double result.
+                `#{service.class}` service has a double result.
 
-                Make sure its #result calls only one from the following methods `success', `failure', or `error' and only once.
+                Make sure its #result calls only one from the following methods `success`, `failure`, or `error` and only once.
 
-                Maybe you missed `return'? The most common scenario is similar to this one:
+                Maybe you missed `return`? The most common scenario is similar to this one:
 
                 def result
                   # ...

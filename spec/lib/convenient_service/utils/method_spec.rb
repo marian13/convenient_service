@@ -9,16 +9,16 @@ RSpec.describe ConvenientService::Utils::Method do
   describe ".defined?" do
     let(:method) { :foo }
 
-    context "when `class' does NOT have `method'" do
+    context "when `class` does NOT have `method`" do
       let(:klass) { Class.new }
 
-      it "returns `false'" do
+      it "returns `false`" do
         expect(described_class.defined?(method, in: klass)).to eq(false)
       end
     end
 
-    context "when `class' has `method'" do
-      context "when that `method' is `public'" do
+    context "when `class` has `method`" do
+      context "when that `method` is `public`" do
         let(:klass) do
           Class.new do
             def foo
@@ -26,12 +26,12 @@ RSpec.describe ConvenientService::Utils::Method do
           end
         end
 
-        it "returns `true'" do
+        it "returns `true`" do
           expect(described_class.defined?(method, in: klass)).to eq(true)
         end
       end
 
-      context "when that `method' is `protected'" do
+      context "when that `method` is `protected`" do
         let(:klass) do
           Class.new do
             protected
@@ -41,12 +41,12 @@ RSpec.describe ConvenientService::Utils::Method do
           end
         end
 
-        it "returns `true'" do
+        it "returns `true`" do
           expect(described_class.defined?(method, in: klass)).to eq(true)
         end
       end
 
-      context "when that `method' is `private'" do
+      context "when that `method` is `private`" do
         let(:klass) do
           Class.new do
             private
@@ -56,7 +56,7 @@ RSpec.describe ConvenientService::Utils::Method do
           end
         end
 
-        it "returns `true'" do
+        it "returns `true`" do
           expect(described_class.defined?(method, in: klass)).to eq(true)
         end
       end
@@ -165,7 +165,7 @@ RSpec.describe ConvenientService::Utils::Method do
           <<~TEXT
             Max iteration count is exceeded. Current limit is #{max_iteration_count}.
 
-            Consider using `max_iteration_count' or `raise_on_exceedance' options if that is not the expected behavior.
+            Consider using `max_iteration_count` or `raise_on_exceedance` options if that is not the expected behavior.
           TEXT
         end
 

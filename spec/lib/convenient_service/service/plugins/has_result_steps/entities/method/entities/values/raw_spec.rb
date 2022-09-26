@@ -31,7 +31,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
         context "when results have different classes" do
           let(:other) { "string" }
 
-          it "returns `nil'" do
+          it "returns `nil`" do
             expect(raw_value == other).to eq(nil)
           end
         end
@@ -39,7 +39,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
         context "when other has different object" do
           let(:other) { described_class.wrap(:bar) }
 
-          it "returns `false'" do
+          it "returns `false`" do
             expect(raw_value == other).to eq(false)
           end
         end
@@ -47,7 +47,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
         context "when other has same object" do
           let(:other) { described_class.wrap(:foo) }
 
-          it "returns `true'" do
+          it "returns `true`" do
             expect(raw_value == other).to eq(true)
           end
         end
@@ -55,7 +55,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
     end
 
     describe "#unwrap" do
-      it "returns `object'" do
+      it "returns `object`" do
         expect(described_class.wrap(object).unwrap).to eq(object)
       end
     end

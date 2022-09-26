@@ -18,7 +18,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Concern::ClassM
 
   example_group "class methods" do
     describe ".callbacks" do
-      it "returns `ConvenientService::Common::Plugins::HasCallbacks::Entities::CallbackCollection' instance" do
+      it "returns `ConvenientService::Common::Plugins::HasCallbacks::Entities::CallbackCollection` instance" do
         expect(service_class.callbacks).to eq(ConvenientService::Common::Plugins::HasCallbacks::Entities::CallbackCollection.new)
       end
     end
@@ -26,7 +26,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Concern::ClassM
     describe ".before" do
       let(:callback) { ConvenientService::Common::Plugins::HasCallbacks::Entities::Callback.new(types: [:before, type], block: block) }
 
-      it "adds before callback to `callbacks'" do
+      it "adds before callback to `callbacks`" do
         service_class.before(type, &block)
 
         expect(service_class.callbacks).to include(callback)
@@ -40,7 +40,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Concern::ClassM
     describe ".after" do
       let(:callback) { ConvenientService::Common::Plugins::HasCallbacks::Entities::Callback.new(types: [:after, type], block: block) }
 
-      it "adds after callback to `callbacks'" do
+      it "adds after callback to `callbacks`" do
         service_class.after(type, &block)
 
         expect(service_class.callbacks).to include(callback)

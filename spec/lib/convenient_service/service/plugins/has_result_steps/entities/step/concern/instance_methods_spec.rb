@@ -68,7 +68,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::St
   end
 
   ##
-  # NOTE: Waits for `should-matchers' full support.
+  # NOTE: Waits for `should-matchers` full support.
   #
   # example_group "delegators" do
   #   include Shoulda::Matchers::Independent
@@ -97,7 +97,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::St
         context "when steps have different classes" do
           let(:other) { "string" }
 
-          it "returns `nil'" do
+          it "returns `nil`" do
             expect(step == other).to eq(nil)
           end
         end
@@ -105,7 +105,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::St
         context "when steps have different services" do
           let(:other) { step_class.new(Class.new, **kwargs) }
 
-          it "returns `false'" do
+          it "returns `false`" do
             expect(step == other).to eq(false)
           end
         end
@@ -113,7 +113,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::St
         context "when steps have different inputs" do
           let(:other) { step_class.new(*args, **kwargs.merge(in: [])) }
 
-          it "returns `false'" do
+          it "returns `false`" do
             expect(step == other).to eq(false)
           end
         end
@@ -121,7 +121,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::St
         context "when steps have different outputs" do
           let(:other) { step_class.new(*args, **kwargs.merge(out: [])) }
 
-          it "returns `false'" do
+          it "returns `false`" do
             expect(step == other).to eq(false)
           end
         end
@@ -129,7 +129,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::St
         context "when steps have different indices" do
           let(:other) { step_class.new(*args, **kwargs.merge(index: 1)) }
 
-          it "returns `false'" do
+          it "returns `false`" do
             expect(step == other).to eq(false)
           end
         end
@@ -137,7 +137,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::St
         context "when steps have different containers" do
           let(:other) { step_class.new(*args, **kwargs.merge(container: Class.new)) }
 
-          it "returns `false'" do
+          it "returns `false`" do
             expect(step == other).to eq(false)
           end
         end
@@ -145,7 +145,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::St
         context "when steps have different organizers" do
           let(:other) { step_class.new(*args, **kwargs.merge(organizer: nil)) }
 
-          it "returns `false'" do
+          it "returns `false`" do
             expect(step == other).to eq(false)
           end
         end
@@ -153,7 +153,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::St
         context "when steps have same attributes" do
           let(:other) { step_class.new(*args, **kwargs) }
 
-          it "returns `true'" do
+          it "returns `true`" do
             expect(step == other).to eq(true)
           end
         end
@@ -161,32 +161,32 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::St
     end
 
     describe "#has_organizer?" do
-      context "when `organizer' is NOT set" do
+      context "when `organizer` is NOT set" do
         let(:organizer) { nil }
 
-        it "returns `false'" do
+        it "returns `false`" do
           expect(step.has_organizer?).to eq(false)
         end
       end
 
-      context "when `organizer' is set" do
+      context "when `organizer` is set" do
         let(:organizer) { double }
 
-        it "returns `true'" do
+        it "returns `true`" do
           expect(step.has_organizer?).to eq(true)
         end
       end
     end
 
     describe "#completed?" do
-      context "when `step' is NOT completed" do
-        it "returns `false'" do
+      context "when `step` is NOT completed" do
+        it "returns `false`" do
           expect(step.completed?).to eq(false)
         end
       end
 
-      context "when `step' is completed" do
-        it "returns `true'" do
+      context "when `step` is completed" do
+        it "returns `true`" do
           step.result
 
           expect(step.completed?).to eq(true)
@@ -215,7 +215,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::St
           .with_arguments(step.container)
       }
 
-      it "returns `true'" do
+      it "returns `true`" do
         expect(step.validate!).to eq(true)
       end
     end
@@ -229,31 +229,31 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::St
           .with_arguments(step.container, index: index)
       }
 
-      it "returns `true'" do
+      it "returns `true`" do
         expect(step.define!).to eq(true)
       end
     end
 
     describe "#input_values" do
-      context "when `organizer' is NOT set" do
+      context "when `organizer` is NOT set" do
         let(:organizer) { nil }
 
         let(:message) do
           <<~TEXT
-            Step `#{step.service}' has not assigned organizer.
+            Step `#{step.service}` has not assigned organizer.
 
             Did you forget to set it?
           TEXT
         end
 
-        it "raises `ConvenientService::Service::Plugins::HasResultSteps::Errors::StepHasNoOrganizer'" do
+        it "raises `ConvenientService::Service::Plugins::HasResultSteps::Errors::StepHasNoOrganizer`" do
           expect { step.input_values }
             .to raise_error(ConvenientService::Service::Plugins::HasResultSteps::Errors::StepHasNoOrganizer)
             .with_message(message)
         end
       end
 
-      context "when `organizer' is set" do
+      context "when `organizer` is set" do
         it "returns input values" do
           expect(step.input_values).to eq({foo: :organizer_foo})
         end
@@ -263,25 +263,25 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::St
     end
 
     describe "#result" do
-      context "when `organizer' is NOT set" do
+      context "when `organizer` is NOT set" do
         let(:organizer) { nil }
 
         let(:message) do
           <<~TEXT
-            Step `#{step.service}' has not assigned organizer.
+            Step `#{step.service}` has not assigned organizer.
 
             Did you forget to set it?
           TEXT
         end
 
-        it "raises `ConvenientService::Service::Plugins::HasResultSteps::Errors::StepHasNoOrganizer'" do
+        it "raises `ConvenientService::Service::Plugins::HasResultSteps::Errors::StepHasNoOrganizer`" do
           expect { step.result }
             .to raise_error(ConvenientService::Service::Plugins::HasResultSteps::Errors::StepHasNoOrganizer)
             .with_message(message)
         end
       end
 
-      context "when `organizer' is set" do
+      context "when `organizer` is set" do
         specify {
           expect { step.result }
             .to delegate_to(service, :result)
@@ -289,7 +289,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::St
             .and_return_its_value
         }
 
-        it "marks `step' as complete" do
+        it "marks `step` as complete" do
           expect { step.result }.to change(step, :completed?).from(false).to(true)
         end
       end

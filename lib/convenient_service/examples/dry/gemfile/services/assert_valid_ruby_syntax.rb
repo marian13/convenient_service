@@ -18,12 +18,12 @@ module ConvenientService
 
             def result
               ##
-              # NOTE: `> /dev/null 2>&1' is used to hide output.
+              # NOTE: `> /dev/null 2>&1` is used to hide output.
               # https://unix.stackexchange.com/a/119650/394253
               #
               check_ruby_syntax_result = Services::RunShell.result(command: "ruby -c #{file.path} > /dev/null 2>&1")
 
-              return error("`#{content}' contains invalid Ruby syntax") unless check_ruby_syntax_result.success?
+              return error("`#{content}` contains invalid Ruby syntax") unless check_ruby_syntax_result.success?
 
               success
             end

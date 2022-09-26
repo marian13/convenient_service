@@ -13,7 +13,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::IncludeModule do
   let(:klass) { Class.new }
 
   describe "#matches?" do
-    context "when `klass' does NOT include `module'" do
+    context "when `klass` does NOT include `module`" do
       let(:klass) { Class.new }
 
       it "returns false" do
@@ -21,7 +21,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::IncludeModule do
       end
     end
 
-    context "when `klass' includes `module'" do
+    context "when `klass` includes `module`" do
       let(:klass) do
         Class.new.tap do |klass|
           klass.class_exec(mod) do |mod|
@@ -40,7 +40,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::IncludeModule do
     it "returns message" do
       matcher_result
 
-      expect(matcher.description).to eq("include module `#{mod}'")
+      expect(matcher.description).to eq("include module `#{mod}`")
     end
   end
 
@@ -48,7 +48,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::IncludeModule do
     it "returns message" do
       matcher_result
 
-      expect(matcher.failure_message).to eq("expected `#{klass}' to include module `#{mod}'")
+      expect(matcher.failure_message).to eq("expected `#{klass}` to include module `#{mod}`")
     end
   end
 
@@ -56,7 +56,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::IncludeModule do
     it "returns message" do
       matcher_result
 
-      expect(matcher.failure_message_when_negated).to eq("expected `#{klass}' NOT to include module `#{mod}'")
+      expect(matcher.failure_message_when_negated).to eq("expected `#{klass}` NOT to include module `#{mod}`")
     end
   end
 end

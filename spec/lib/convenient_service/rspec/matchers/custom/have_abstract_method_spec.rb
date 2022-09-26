@@ -35,7 +35,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::HaveAbstractMethod do
     end
 
     context "when call of method raises" do
-      context "when call of method raises NOT `ConvenientService::Support::AbstractMethod::Errors::AbstractMethodNotOverridden'" do
+      context "when call of method raises NOT `ConvenientService::Support::AbstractMethod::Errors::AbstractMethodNotOverridden`" do
         let(:klass) do
           Class.new do
             include ConvenientService::Support::AbstractMethod
@@ -51,7 +51,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::HaveAbstractMethod do
         end
       end
 
-      context "when call of method raises `ConvenientService::Support::AbstractMethod::Errors::AbstractMethodNotOverridden'" do
+      context "when call of method raises `ConvenientService::Support::AbstractMethod::Errors::AbstractMethodNotOverridden`" do
         let(:klass) do
           Class.new do
             include ConvenientService::Support::AbstractMethod
@@ -71,7 +71,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::HaveAbstractMethod do
     it "returns message" do
       matcher_result
 
-      expect(matcher.description).to eq("have abstract method `#{method_name}'")
+      expect(matcher.description).to eq("have abstract method `#{method_name}`")
     end
   end
 
@@ -79,7 +79,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::HaveAbstractMethod do
     it "returns message" do
       matcher_result
 
-      expect(matcher.failure_message).to eq("expected `#{object.class}' to have abstract method `#{method_name}'")
+      expect(matcher.failure_message).to eq("expected `#{object.class}` to have abstract method `#{method_name}`")
     end
   end
 
@@ -87,7 +87,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::HaveAbstractMethod do
     it "returns message" do
       matcher_result
 
-      expect(matcher.failure_message_when_negated).to eq("expected `#{object.class}' NOT to have abstract method `#{method_name}'")
+      expect(matcher.failure_message_when_negated).to eq("expected `#{object.class}` NOT to have abstract method `#{method_name}`")
     end
   end
 end

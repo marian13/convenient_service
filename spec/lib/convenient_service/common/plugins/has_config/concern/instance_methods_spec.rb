@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 ##
-# NOTE: Waits for `should-matchers' full support.
+# NOTE: Waits for `should-matchers` full support.
 #
 # require "spec_helper"
 #

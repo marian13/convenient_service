@@ -11,7 +11,7 @@ module ConvenientService
           # NOTE: Service is a wrapper for a service class (klass). For example:
           #
           #   step SomeService, in: :foo, out: :bar
-          #   # klass is `SomeService' in this particular case.
+          #   # klass is `SomeService` in this particular case.
           #
           class Service
             include Support::Castable
@@ -42,7 +42,7 @@ module ConvenientService
             end
 
             ##
-            # TODO: Unify `inspect'. Specs for `inspect'.
+            # TODO: Unify `inspect`. Specs for `inspect`.
             #
             def inspect
               "HasResultSteps::Service(#{klass})"

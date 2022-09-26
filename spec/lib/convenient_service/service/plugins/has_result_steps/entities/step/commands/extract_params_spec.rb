@@ -15,64 +15,64 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::St
       let(:organizer) { Object.new }
       let(:command_result) { described_class.call(args: args, kwargs: kwargs) }
 
-      example_group "`service'" do
-        it "returns `args.first' as `service'" do
+      example_group "`service`" do
+        it "returns `args.first` as `service`" do
           expect(command_result.service).to eq(args.first)
         end
       end
 
-      example_group "`in'" do
-        it "returns `kwargs[:in]' as `inputs'" do
+      example_group "`in`" do
+        it "returns `kwargs[:in]` as `inputs`" do
           expect(command_result.inputs).to eq(kwargs[:in])
         end
 
-        context "when `kwargs[:in]' is NOT passed" do
+        context "when `kwargs[:in]` is NOT passed" do
           let(:kwargs) { ConvenientService::Utils::Hash.except(default_kwargs, keys: [:in]) }
 
-          it "defaults `inputs' to empty array" do
+          it "defaults `inputs` to empty array" do
             expect(command_result.inputs).to eq([])
           end
         end
 
-        context "when `kwargs[:in]' is single value" do
+        context "when `kwargs[:in]` is single value" do
           let(:kwargs) { default_kwargs.merge(in: :foo) }
 
-          it "wraps `inputs' by array" do
+          it "wraps `inputs` by array" do
             expect(command_result.inputs).to be_instance_of(Array)
           end
         end
       end
 
-      example_group "`out'" do
-        it "returns `kwargs[:out]' as `outputs'" do
+      example_group "`out`" do
+        it "returns `kwargs[:out]` as `outputs`" do
           expect(command_result.outputs).to eq(kwargs[:out])
         end
 
-        context "when `kwargs[:out]' is NOT passed" do
+        context "when `kwargs[:out]` is NOT passed" do
           let(:kwargs) { ConvenientService::Utils::Hash.except(default_kwargs, keys: [:out]) }
 
-          it "defaults `outputs' to empty array" do
+          it "defaults `outputs` to empty array" do
             expect(command_result.outputs).to eq([])
           end
         end
 
-        context "when `kwargs[:out]' is single value" do
+        context "when `kwargs[:out]` is single value" do
           let(:kwargs) { default_kwargs.merge(out: :foo) }
 
-          it "wraps `outputs' by array" do
+          it "wraps `outputs` by array" do
             expect(command_result.outputs).to be_instance_of(Array)
           end
         end
       end
 
-      example_group "`index'" do
-        it "returns `kwargs[:index]' as `index'" do
+      example_group "`index`" do
+        it "returns `kwargs[:index]` as `index`" do
           expect(command_result.index).to eq(index)
         end
       end
 
-      example_group "`organizer'" do
-        it "returns `kwargs[:organizer]' as `organizer'" do
+      example_group "`organizer`" do
+        it "returns `kwargs[:organizer]` as `organizer`" do
           expect(command_result.organizer).to eq(organizer)
         end
       end

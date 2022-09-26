@@ -24,10 +24,10 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::FormatHeader
   end
 
   example_group "validations" do
-    example_group "`parsed_content'" do
+    example_group "`parsed_content`" do
       subject(:result) { service.result }
 
-      context "when `parsed_content' is NOT hash" do
+      context "when `parsed_content` is NOT hash" do
         let(:parsed_content) { [] }
 
         it "returns failure" do
@@ -35,7 +35,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::FormatHeader
         end
       end
 
-      context "when `parsed_content' is hash" do
+      context "when `parsed_content` is hash" do
         context "when that hash is empty" do
           let(:parsed_content) { {} }
 
@@ -44,8 +44,8 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::FormatHeader
           end
         end
 
-        context "when `parsed_content' has `ruby' key" do
-          context "when value for `ruby' is NOT array" do
+        context "when `parsed_content` has `ruby` key" do
+          context "when value for `ruby` is NOT array" do
             let(:parsed_content) { {ruby: {}} }
 
             it "returns failure" do
@@ -53,7 +53,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::FormatHeader
             end
           end
 
-          context "when value for `ruby' is array" do
+          context "when value for `ruby` is array" do
             context "when any item from that array is NOT string" do
               let(:parsed_content) { {ruby: [42]} }
 
@@ -72,8 +72,8 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::FormatHeader
           end
         end
 
-        context "when `parsed_content' has `source' key" do
-          context "when value for `source' is NOT array" do
+        context "when `parsed_content` has `source` key" do
+          context "when value for `source` is NOT array" do
             let(:parsed_content) { {source: {}} }
 
             it "returns failure" do
@@ -81,7 +81,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::FormatHeader
             end
           end
 
-          context "when value for `source' is array" do
+          context "when value for `source` is array" do
             context "when any item from that array is NOT string" do
               let(:parsed_content) { {source: [42]} }
 
@@ -100,8 +100,8 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::FormatHeader
           end
         end
 
-        context "when `parsed_content' has `git_source' key" do
-          context "when value for `git_source' is NOT array" do
+        context "when `parsed_content` has `git_source` key" do
+          context "when value for `git_source` is NOT array" do
             let(:parsed_content) { {git_source: {}} }
 
             it "returns failure" do
@@ -109,7 +109,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::FormatHeader
             end
           end
 
-          context "when value for `git_source' is array" do
+          context "when value for `git_source` is array" do
             context "when any item from that array is NOT string" do
               let(:parsed_content) { {git_source: [42]} }
 
@@ -130,10 +130,10 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::FormatHeader
       end
     end
 
-    example_group "`skip_frozen_string_literal'" do
+    example_group "`skip_frozen_string_literal`" do
       subject(:result) { described_class.result(parsed_content: parsed_content, skip_frozen_string_literal: skip_frozen_string_literal) }
 
-      context "when `skip_frozen_string_literal' is NOT boolean" do
+      context "when `skip_frozen_string_literal` is NOT boolean" do
         let(:skip_frozen_string_literal) { 42 }
 
         it "returns failure" do
@@ -141,7 +141,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::FormatHeader
         end
       end
 
-      context "when `skip_frozen_string_literal' is boolean" do
+      context "when `skip_frozen_string_literal` is boolean" do
         let(:skip_frozen_string_literal) { false }
 
         it "does NOT return failure" do
@@ -186,7 +186,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::FormatHeader
       expect(result).to be_success.with_data(formatted_content: formatted_content)
     end
 
-    context "when `parsed_content' does NOT contains `ruby'" do
+    context "when `parsed_content` does NOT contains `ruby`" do
       let(:parsed_content) do
         {
           source: [
@@ -208,12 +208,12 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::FormatHeader
         RUBY
       end
 
-      it "returns success with formatted content without `ruby'" do
+      it "returns success with formatted content without `ruby`" do
         expect(result).to be_success.with_data(formatted_content: formatted_content)
       end
     end
 
-    context "when `parsed_content' does NOT contains `source'" do
+    context "when `parsed_content` does NOT contains `source`" do
       let(:parsed_content) do
         {
           ruby: [
@@ -235,12 +235,12 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::FormatHeader
         RUBY
       end
 
-      it "returns success with formatted content without `source'" do
+      it "returns success with formatted content without `source`" do
         expect(result).to be_success.with_data(formatted_content: formatted_content)
       end
     end
 
-    context "when `parsed_content' does NOT contains `git_source'" do
+    context "when `parsed_content` does NOT contains `git_source`" do
       let(:parsed_content) do
         {
           ruby: [
@@ -262,12 +262,12 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::FormatHeader
         RUBY
       end
 
-      it "returns success with formatted content without `git_source'" do
+      it "returns success with formatted content without `git_source`" do
         expect(result).to be_success.with_data(formatted_content: formatted_content)
       end
     end
 
-    context "when `skip_frozen_string_literal' is set to `true'" do
+    context "when `skip_frozen_string_literal` is set to `true`" do
       let(:skip_frozen_string_literal) { true }
 
       let(:parsed_content) do
@@ -294,7 +294,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::FormatHeader
         RUBY
       end
 
-      it "returns success with formatted content without `git_source'" do
+      it "returns success with formatted content without `git_source`" do
         expect(result).to be_success.with_data(formatted_content: formatted_content)
       end
     end

@@ -13,7 +13,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::ReadFileCo
   include ConvenientService::RSpec::Matchers::HaveAttrAccessor
   include ConvenientService::RSpec::Matchers::IncludeModule
   ##
-  # NOTE: Waits for `should-matchers' full support.
+  # NOTE: Waits for `should-matchers` full support.
   #
   # include Shoulda::Matchers::ActiveModel
 
@@ -32,14 +32,14 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::ReadFileCo
     subject { service }
 
     ##
-    # NOTE: have_attr_writer is needed by `validate_presence_of'.
+    # NOTE: have_attr_writer is needed by `validate_presence_of`.
     # https://stackoverflow.com/a/31686199/12201472
     #
     it { is_expected.to have_attr_accessor(:path) }
   end
 
   ##
-  # NOTE: Waits for `should-matchers' full support.
+  # NOTE: Waits for `should-matchers` full support.
   #
   # example_group "validations" do
   #   subject { service }

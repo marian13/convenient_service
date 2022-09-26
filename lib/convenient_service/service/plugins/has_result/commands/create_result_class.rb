@@ -16,13 +16,13 @@ module ConvenientService
               result_class.include Entities::Result::Concern
 
               ##
-              # class Result < ConvenientService::Service::Plugins::HasResult::Entities::Result # or just `class Result' if service class defines its own.
+              # class Result < ConvenientService::Service::Plugins::HasResult::Entities::Result # or just `class Result` if service class defines its own.
               #   include ConvenientService::Service::Plugins::HasResult::Entities::Result::Concern
               #
               #   class << self
               #     def service_class
               #       ##
-              #       # NOTE: Returns `service_class' passed to `CreateResultClass'.
+              #       # NOTE: Returns `service_class` passed to `CreateResultClass`.
               #       #
               #       service_class
               #     end

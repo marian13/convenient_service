@@ -103,7 +103,7 @@ module ConvenientService
                 end
 
                 ##
-                # IMPORTANT: `service.result(**input_values)' is the reason, why services should have only kwargs as arguments.
+                # IMPORTANT: `service.result(**input_values)` is the reason, why services should have only kwargs as arguments.
                 #
                 def calculate_result
                   assert_has_organizer!

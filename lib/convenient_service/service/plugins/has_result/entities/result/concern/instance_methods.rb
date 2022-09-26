@@ -52,7 +52,7 @@ module ConvenientService
                 end
 
                 ##
-                # TODO: Unify `inspect'. Specs for `inspect'.
+                # TODO: Unify `inspect`. Specs for `inspect`.
                 #
                 def inspect
                   "#{status.to_s.capitalize}Result(#{service.class})"

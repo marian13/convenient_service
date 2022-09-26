@@ -29,7 +29,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultMethodSteps::Servic
         ])
       end
 
-      it "adds middlewares for `result'" do
+      it "adds middlewares for `result`" do
         expect(service_class.middlewares(for: :result).to_a.map(&:first).last(1)).to eq([
           ConvenientService::Service::Plugins::HasResult::Middleware
         ])

@@ -26,13 +26,13 @@ RSpec.describe ConvenientService::Support::PatternMatching do
 
       ##
       # NOTE:
-      #   The following spec can NOT universally prove that an object with `==' method that always return `true' is returned.
+      #   The following spec can NOT universally prove that an object with `==` method that always return `true` is returned.
       #   Its purpose to catch syntax errors.
       #
       #   https://ruby-doc.org/core-3.1.2/BasicObject.html#method-c-new
       #   https://ruby-doc.org/core-3.1.2/Object.html#method-i-define_singleton_method
       #
-      it "return object with `==' method that always return `true'" do
+      it "return object with `==` method that always return `true`" do
         expect(others.map { |other| described_class.anything == other }.uniq).to eq([true])
       end
     end
@@ -51,7 +51,7 @@ RSpec.describe ConvenientService::Support::PatternMatching do
         ##
         # NOTE:
         #   The following expection won't work since stub is too global.
-        #   `Object.new' can be used somewhere inside `RSpec' for example.
+        #   `Object.new` can be used somewhere inside `RSpec` for example.
         #
         #   expect { described_class.unique_value }.to delegate_to(Object, :new).and_return_its_value
         #

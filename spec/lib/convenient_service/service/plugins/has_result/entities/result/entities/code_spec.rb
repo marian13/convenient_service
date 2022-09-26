@@ -29,39 +29,39 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
 
   example_group "comparisons" do
     describe "#==" do
-      context "when `other' is NOT castable" do
+      context "when `other` is NOT castable" do
         let(:other) { 42 }
 
         before do
           allow(code).to receive(:cast).and_return(nil)
         end
 
-        it "returns `nil'" do
+        it "returns `nil`" do
           expect(code == other).to be_nil
         end
       end
 
-      context "when `other' is castable" do
-        context "when `other' has different `value'" do
+      context "when `other` is castable" do
+        context "when `other` has different `value`" do
           let(:other) { described_class.new(value: :bar) }
 
           before do
             allow(code).to receive(:cast).and_return(other)
           end
 
-          it "returns `false'" do
+          it "returns `false`" do
             expect(code == other).to eq(false)
           end
         end
 
-        context "when `other' has same `value'" do
+        context "when `other` has same `value`" do
           let(:other) { described_class.new(value: :foo) }
 
           before do
             allow(code).to receive(:cast).and_return(other)
           end
 
-          it "returns `true'" do
+          it "returns `true`" do
             expect(code == other).to eq(true)
           end
         end
@@ -71,7 +71,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
 
   example_group "conversions" do
     describe "#to_s" do
-      it "returns string representation of `code'" do
+      it "returns string representation of `code`" do
         expect(code.to_s).to eq("foo")
       end
 
@@ -81,7 +81,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
     end
 
     describe "#to_sym" do
-      it "returns symbol representation of `code'" do
+      it "returns symbol representation of `code`" do
         expect(code.to_sym).to eq(:foo)
       end
 

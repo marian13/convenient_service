@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 ##
-# Base class for all `ConvenientService' errors.
+# Base class for all `ConvenientService` errors.
 # Can be used as a catch-all solution, for example:
 #
 #   begin

@@ -30,12 +30,12 @@ module ConvenientService
             end
 
             ##
-            # NOTE: Used by `contain_exactly'. Check its specs.
+            # NOTE: Used by `contain_exactly`. Check its specs.
             #
             # NOTE: This method is intented to be used only for hash keys comparison,
-            # when you know for sure that `other' is always an `Entities::Type' instance.
+            # when you know for sure that `other` is always an `Entities::Type` instance.
             #
-            # IMPORTANT: Do NOT use `eql?' without a strong reason, prefer `=='.
+            # IMPORTANT: Do NOT use `eql?` without a strong reason, prefer `==`.
             #
             def eql?(other)
               return unless other.instance_of?(self.class)

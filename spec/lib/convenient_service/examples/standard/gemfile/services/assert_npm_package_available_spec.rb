@@ -32,11 +32,11 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::AssertN
     subject(:result) { service.result }
 
     context "when name is NOT valid" do
-      context "when name is `nil'" do
+      context "when name is `nil`" do
         let(:name) { nil }
 
         it "returns failure with data" do
-          expect(result).to be_failure.with_data(name: "Name is `nil'")
+          expect(result).to be_failure.with_data(name: "Name is `nil`")
         end
       end
 

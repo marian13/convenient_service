@@ -23,10 +23,10 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::FormatGemsWi
   end
 
   example_group "validations" do
-    example_group "`parsed_content'" do
+    example_group "`parsed_content`" do
       subject(:result) { service.result }
 
-      context "when `parsed_content' is NOT hash" do
+      context "when `parsed_content` is NOT hash" do
         let(:parsed_content) { [] }
 
         it "returns failure" do
@@ -34,7 +34,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::FormatGemsWi
         end
       end
 
-      context "when `parsed_content' is hash" do
+      context "when `parsed_content` is hash" do
         context "when that hash is empty" do
           let(:parsed_content) { {} }
 
@@ -43,8 +43,8 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::FormatGemsWi
           end
         end
 
-        context "when `parsed_content' has `gems' key" do
-          context "when value for `gems' is NOT array" do
+        context "when `parsed_content` has `gems` key" do
+          context "when value for `gems` is NOT array" do
             let(:parsed_content) { {gems: {}} }
 
             it "returns failure" do
@@ -52,7 +52,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::FormatGemsWi
             end
           end
 
-          context "when value for `gems' is array" do
+          context "when value for `gems` is array" do
             context "when any item from that array is NOT hash" do
               let(:parsed_content) { {gems: [42]} }
 
@@ -62,7 +62,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::FormatGemsWi
             end
 
             context "when all items from that array are hashes" do
-              context "when any hash from that array does NOT contain `envs' key" do
+              context "when any hash from that array does NOT contain `envs` key" do
                 let(:parsed_content) do
                   {
                     gems: [
@@ -78,7 +78,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::FormatGemsWi
                 end
               end
 
-              context "when any hash from that array does NOT contain `line' key" do
+              context "when any hash from that array does NOT contain `line` key" do
                 let(:parsed_content) do
                   {
                     gems: [
@@ -94,7 +94,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::FormatGemsWi
                 end
               end
 
-              context "when all hashes from that array contains both `envs` and `line' keys" do
+              context "when all hashes from that array contains both `envs` and `line` keys" do
                 let(:parsed_content) do
                   {
                     gems: [
@@ -159,7 +159,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::FormatGemsWi
       expect(result).to be_success.with_data(formatted_content: formatted_content)
     end
 
-    context "when `parsed_content' does NOT contain `gems'" do
+    context "when `parsed_content` does NOT contain `gems`" do
       let(:parsed_content) { {} }
       let(:formatted_content) { "" }
 
@@ -168,7 +168,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::FormatGemsWi
       end
     end
 
-    context "when `parsed_content' does NOT contain `gems' with envs" do
+    context "when `parsed_content` does NOT contain `gems` with envs" do
       let(:parsed_content) do
         {
           gems: [

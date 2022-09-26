@@ -78,7 +78,7 @@ module ConvenientService
           end
 
           ##
-          # TODO: Unify `inspect'. Specs for `inspect'.
+          # TODO: Unify `inspect`. Specs for `inspect`.
           #
           def inspect
             to_a.inspect
@@ -90,11 +90,11 @@ module ConvenientService
             return value if value.is_a?(::Integer)
 
             ##
-            # NOTE: `ruby-middleware' expects a `Class' or object that responds to `call'.
+            # NOTE: `ruby-middleware` expects a `Class` or object that responds to `call`.
             # https://github.com/Ibsciss/ruby-middleware/blob/v0.4.2/lib/middleware/runner.rb#L52
             # https://github.com/Ibsciss/ruby-middleware#middleware-lambdas
             #
-            # IMPORTANT: Must be kept in sync with `def concern' in `ConvenientService::Core::Entities::Concerns::Middleware'.
+            # IMPORTANT: Must be kept in sync with `def concern` in `ConvenientService::Core::Entities::Concerns::Middleware`.
             #
             ::Class.new(Entities::Concerns::ConcernMiddleware).tap do |klass|
               klass.class_exec(value) do |concern|

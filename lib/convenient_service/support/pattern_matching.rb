@@ -20,7 +20,7 @@ module ConvenientService
         end
 
         ##
-        # TODO: Specs for `inspect'.
+        # TODO: Specs for `inspect`.
         #
         def anything
           @anything ||=
@@ -30,7 +30,7 @@ module ConvenientService
         end
 
         ##
-        # TODO: Specs for `inspect'. Specs for optional argument.
+        # TODO: Specs for `inspect`. Specs for optional argument.
         #
         def unique_value(inspect_value = "unique_value")
           ::Object.new

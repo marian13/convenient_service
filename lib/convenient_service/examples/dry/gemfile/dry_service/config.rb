@@ -17,14 +17,14 @@ module ConvenientService
                 include Configs::StandardUncommitted
 
                 ##
-                # NOTE: `AssignsAttributesInConstructor::UsingDryInitializer' plugin.
+                # NOTE: `AssignsAttributesInConstructor::UsingDryInitializer` plugin.
                 #
                 concerns do
                   use Plugins::Common::AssignsAttributesInConstructor::UsingDryInitializer::Concern
                 end
 
                 ##
-                # NOTE: `HasResultParamsValidations::UsingDryValidation' plugin.
+                # NOTE: `HasResultParamsValidations::UsingDryValidation` plugin.
                 #
                 concerns do
                   use Plugins::Service::HasResultParamsValidations::UsingDryValidation::Concern

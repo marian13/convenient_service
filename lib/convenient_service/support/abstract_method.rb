@@ -16,7 +16,7 @@ module ConvenientService
             method_type = Utils::Object.resolve_type(instance)
 
             message = <<~TEXT
-              `#{klass}' should implement abstract #{method_type} method `#{method}'.
+              `#{klass}` should implement abstract #{method_type} method `#{method}`.
             TEXT
 
             super(message)

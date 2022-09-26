@@ -49,7 +49,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Concern do
 
         specify { expect { service_instance.steps }.to delegate_to(service_class.steps, :commit!) }
 
-        it "returns `self.class.steps' with `organizer' set to each of them" do
+        it "returns `self.class.steps` with `organizer` set to each of them" do
           expect(service_instance.steps).to eq(service_class.steps.map { |step| step.copy(overrides: {kwargs: {organizer: service_instance}}) })
         end
 
@@ -59,11 +59,11 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Concern do
 
     example_group "class_methods" do
       describe ".step" do
-        it "returns `step'" do
+        it "returns `step`" do
           expect(service_class.step(*args, **kwargs)).to eq(step)
         end
 
-        it "adds `step' to `steps'" do
+        it "adds `step` to `steps`" do
           expect { service_class.step(*args, **kwargs) }.to change { service_class.steps.include?(step) }.from(false).to(true)
         end
       end

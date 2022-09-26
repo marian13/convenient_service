@@ -31,7 +31,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultShortSyntax::Failur
         end
       end
 
-      it "delegates to `ConvenientService::Service::Plugins::HasResultShortSyntax::Failure::Commands::RefuteKwargsContainDataAndExtraKeys'" do
+      it "delegates to `ConvenientService::Service::Plugins::HasResultShortSyntax::Failure::Commands::RefuteKwargsContainDataAndExtraKeys`" do
         allow(ConvenientService::Service::Plugins::HasResultShortSyntax::Failure::Commands::RefuteKwargsContainDataAndExtraKeys).to receive(:call).with(hash_including(kwargs: {})).and_call_original
 
         method_value
@@ -39,7 +39,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultShortSyntax::Failur
         expect(ConvenientService::Service::Plugins::HasResultShortSyntax::Failure::Commands::RefuteKwargsContainDataAndExtraKeys).to have_received(:call)
       end
 
-      context "when `kwargs' do NOT passed" do
+      context "when `kwargs` do NOT passed" do
         subject(:method_value) { method.call }
 
         it "returns failure with default data" do
@@ -47,8 +47,8 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultShortSyntax::Failur
         end
       end
 
-      context "when `kwargs' are passed" do
-        context "when `kwargs' do NOT contain `:data' key" do
+      context "when `kwargs` are passed" do
+        context "when `kwargs` do NOT contain `:data` key" do
           subject(:method_value) { method.call(foo: :bar) }
 
           it "returns failure with data" do
@@ -56,7 +56,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultShortSyntax::Failur
           end
         end
 
-        context "when `kwargs' contain `:data' key" do
+        context "when `kwargs` contain `:data` key" do
           subject(:method_value) { method.call(data: {foo: :bar}) }
 
           it "returns failure with data" do
@@ -64,12 +64,12 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultShortSyntax::Failur
           end
         end
 
-        context "when `kwargs' contain extra keys" do
+        context "when `kwargs` contain extra keys" do
           subject(:method_value) { method.call(data: {foo: :bar}, extra_key: "anything") }
 
           let(:error_message) do
             <<~TEXT
-              `kwargs' passed to `failure' method contain `data' and extra keys. That's NOT allowed.
+              `kwargs` passed to `failure` method contain `data` and extra keys. That's NOT allowed.
 
               Please, consider something like:
 
@@ -78,7 +78,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultShortSyntax::Failur
             TEXT
           end
 
-          it "raises `ConvenientService::Service::Plugins::HasResultShortSyntax::Failure::Errors::KwargsContainDataAndExtraKeys'" do
+          it "raises `ConvenientService::Service::Plugins::HasResultShortSyntax::Failure::Errors::KwargsContainDataAndExtraKeys`" do
             expect { method_value }
               .to raise_error(ConvenientService::Service::Plugins::HasResultShortSyntax::Failure::Errors::KwargsContainDataAndExtraKeys)
               .with_message(error_message)

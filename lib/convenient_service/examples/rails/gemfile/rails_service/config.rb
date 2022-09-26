@@ -17,7 +17,7 @@ module ConvenientService
                 include Configs::StandardUncommitted
 
                 ##
-                # NOTE: `AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment' plugin.
+                # NOTE: `AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment` plugin.
                 #
                 concerns do
                   use Plugins::Common::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment::Concern
@@ -28,14 +28,14 @@ module ConvenientService
                 end
 
                 ##
-                # NOTE: `HasAttributes::UsingActiveModelAttributes' plugin.
+                # NOTE: `HasAttributes::UsingActiveModelAttributes` plugin.
                 #
                 concerns do
                   use Plugins::Common::HasAttributes::UsingActiveModelAttributes::Concern
                 end
 
                 ##
-                # NOTE: `HasResultParamsValidations::UsingActiveModelValidations' plugin.
+                # NOTE: `HasResultParamsValidations::UsingActiveModelValidations` plugin.
                 #
                 concerns do
                   use Plugins::Service::HasResultParamsValidations::UsingActiveModelValidations::Concern

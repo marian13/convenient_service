@@ -12,7 +12,7 @@ module ConvenientService
               rules = []
 
               ##
-              # TODO: Remove `|| result.is_a?(ConvenientService::V1::Plugins::HasResult::Entities::Result)' when V1 is dropped.
+              # TODO: Remove `|| result.is_a?(ConvenientService::V1::Plugins::HasResult::Entities::Result)` when V1 is dropped.
               #
               rules << ->(result) { result.class.include?(ConvenientService::Service::Plugins::HasResult::Entities::Result::Concern) || result.is_a?(ConvenientService::V1::Plugins::HasResult::Entities::Result) }
               rules << ->(result) { result.failure? }
@@ -42,13 +42,13 @@ module ConvenientService
               #
               parts = []
 
-              parts << "be a `failure'"
-              parts << "of `#{service_class}'" if used_of?
-              parts << "with data `#{data}'" if used_data?
+              parts << "be a `failure`"
+              parts << "of `#{service_class}`" if used_of?
+              parts << "with data `#{data}`" if used_data?
               parts << "\n\n"
-              parts << "got `#{result.status}'"
-              parts << "of `#{result.service.class}'" if used_of?
-              parts << "with data `#{result.data.to_h}'" if used_data?
+              parts << "got `#{result.status}`"
+              parts << "of `#{result.service.class}`" if used_of?
+              parts << "with data `#{result.data.to_h}`" if used_data?
 
               parts.join(" ")
             end
@@ -59,13 +59,13 @@ module ConvenientService
               #
               parts = []
 
-              parts << "expected that `#{result}' would be a `failure'"
-              parts << "of `#{service_class}'" if used_of?
-              parts << "with data `#{data}'" if used_data?
+              parts << "expected that `#{result}` would be a `failure`"
+              parts << "of `#{service_class}`" if used_of?
+              parts << "with data `#{data}`" if used_data?
               parts << "\n\n"
-              parts << "got `#{result.status}'"
-              parts << "of `#{result.service.class}'" if used_of?
-              parts << "with data `#{result.data.to_h}'" if used_data?
+              parts << "got `#{result.status}`"
+              parts << "of `#{result.service.class}`" if used_of?
+              parts << "with data `#{result.data.to_h}`" if used_data?
 
               parts.join(" ")
             end
@@ -79,13 +79,13 @@ module ConvenientService
               #
               parts = []
 
-              parts << "expected that #{result} would NOT be a `failure'"
-              parts << "of `#{service_class}'" if used_of?
-              parts << "with data `#{data}'" if used_data?
+              parts << "expected that #{result} would NOT be a `failure`"
+              parts << "of `#{service_class}`" if used_of?
+              parts << "with data `#{data}`" if used_data?
               parts << "\n\n"
-              parts << "got `#{result.status}'"
-              parts << "of `#{result.service.class}'" if used_of?
-              parts << "with data `#{result.data.to_h}'" if used_data?
+              parts << "got `#{result.status}`"
+              parts << "of `#{result.service.class}`" if used_of?
+              parts << "with data `#{result.data.to_h}`" if used_data?
 
               parts.join(" ")
             end

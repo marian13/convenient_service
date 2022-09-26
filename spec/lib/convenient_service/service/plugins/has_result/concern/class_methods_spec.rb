@@ -31,7 +31,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern::ClassMet
 
     describe ".result" do
       # rubocop:disable RSpec/ExampleLength, RSpec/MultipleExpectations
-      it "delegates to `service_class.new'" do
+      it "delegates to `service_class.new`" do
         ##
         # TODO: Maybe a custom matcher?
         #
@@ -49,7 +49,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern::ClassMet
       end
       # rubocop:enable RSpec/ExampleLength, RSpec/MultipleExpectations
 
-      it "delegates to `service_instance.result'" do
+      it "delegates to `service_instance.result`" do
         allow(service_class).to receive(:new).and_return(service_instance)
         allow(service_instance).to receive(:result).and_call_original
 
@@ -58,7 +58,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern::ClassMet
         expect(service_instance).to have_received(:result)
       end
 
-      it "returns to `service_instance.result'" do
+      it "returns to `service_instance.result`" do
         expect(service_class.result).to eq(service_instance.result)
       end
     end
@@ -68,7 +68,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern::ClassMet
       let(:params) { {service: service_instance, data: data} }
       let(:data) { {foo: :bar} }
 
-      it "passes `service' to result constructor" do
+      it "passes `service` to result constructor" do
         allow(service_class.result_class).to receive(:new).with(hash_including(service: service_instance)).and_call_original
 
         result
@@ -76,7 +76,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern::ClassMet
         expect(service_class.result_class).to have_received(:new)
       end
 
-      it "internally passes `ConvenientService::Service::Plugins::HasResult::Constants::SUCCESS_STATUS' as `status' to result constructor" do
+      it "internally passes `ConvenientService::Service::Plugins::HasResult::Constants::SUCCESS_STATUS` as `status` to result constructor" do
         allow(service_class.result_class).to receive(:new).with(hash_including(status: ConvenientService::Service::Plugins::HasResult::Constants::SUCCESS_STATUS)).and_call_original
 
         result
@@ -84,7 +84,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern::ClassMet
         expect(service_class.result_class).to have_received(:new)
       end
 
-      it "passes `data' to result constructor" do
+      it "passes `data` to result constructor" do
         allow(service_class.result_class).to receive(:new).with(hash_including(data: data)).and_call_original
 
         result
@@ -92,7 +92,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern::ClassMet
         expect(service_class.result_class).to have_received(:new)
       end
 
-      it "internally passes `ConvenientService::Service::Plugins::HasResult::Constants::SUCCESS_MESSAGE' as `message' to result constructor" do
+      it "internally passes `ConvenientService::Service::Plugins::HasResult::Constants::SUCCESS_MESSAGE` as `message` to result constructor" do
         allow(service_class.result_class).to receive(:new).with(hash_including(message: ConvenientService::Service::Plugins::HasResult::Constants::SUCCESS_MESSAGE)).and_call_original
 
         result
@@ -100,7 +100,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern::ClassMet
         expect(service_class.result_class).to have_received(:new)
       end
 
-      it "internally passes `ConvenientService::Service::Plugins::HasResult::Constants::SUCCESS_CODE' as `code' to result constructor" do
+      it "internally passes `ConvenientService::Service::Plugins::HasResult::Constants::SUCCESS_CODE` as `code` to result constructor" do
         allow(service_class.result_class).to receive(:new).with(hash_including(code: ConvenientService::Service::Plugins::HasResult::Constants::SUCCESS_CODE)).and_call_original
 
         result
@@ -108,18 +108,18 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern::ClassMet
         expect(service_class.result_class).to have_received(:new)
       end
 
-      context "when `service' is NOT passed" do
+      context "when `service` is NOT passed" do
         let(:result) { service_class.success(**ConvenientService::Utils::Hash.except(params, keys: [:service])) }
 
-        it "defaults `service' to `ConvenientService::Service::Plugins::HasResult::Constants::DEFAULT_SERVICE_INSTANCE'" do
+        it "defaults `service` to `ConvenientService::Service::Plugins::HasResult::Constants::DEFAULT_SERVICE_INSTANCE`" do
           expect(result.service).to eq(ConvenientService::Service::Plugins::HasResult::Constants::DEFAULT_SERVICE_INSTANCE)
         end
       end
 
-      context "when `data' is NOT passed" do
+      context "when `data` is NOT passed" do
         let(:result) { service_class.success(**ConvenientService::Utils::Hash.except(params, keys: [:data])) }
 
-        it "defaults `data' to `ConvenientService::Service::Plugins::HasResult::Constants::DEFAUTL_SUCCESS_DATA'" do
+        it "defaults `data` to `ConvenientService::Service::Plugins::HasResult::Constants::DEFAUTL_SUCCESS_DATA`" do
           expect(result.data).to eq(ConvenientService::Service::Plugins::HasResult::Constants::DEFAULT_SUCCESS_DATA)
         end
       end
@@ -132,7 +132,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern::ClassMet
       let(:message) { "foo" }
       let(:first_pair_message) { data.first.join(" ") }
 
-      it "passes `service' to result constructor" do
+      it "passes `service` to result constructor" do
         allow(service_class.result_class).to receive(:new).with(hash_including(service: service_instance)).and_call_original
 
         result
@@ -140,7 +140,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern::ClassMet
         expect(service_class.result_class).to have_received(:new)
       end
 
-      it "internally passes `ConvenientService::Service::Plugins::HasResult::Constants::FAILURE_STATUS' as `status' to result constructor" do
+      it "internally passes `ConvenientService::Service::Plugins::HasResult::Constants::FAILURE_STATUS` as `status` to result constructor" do
         allow(service_class.result_class).to receive(:new).with(hash_including(status: ConvenientService::Service::Plugins::HasResult::Constants::FAILURE_STATUS)).and_call_original
 
         result
@@ -148,7 +148,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern::ClassMet
         expect(service_class.result_class).to have_received(:new)
       end
 
-      it "passes `data' to result constructor" do
+      it "passes `data` to result constructor" do
         allow(service_class.result_class).to receive(:new).with(hash_including(data: data)).and_call_original
 
         result
@@ -156,7 +156,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern::ClassMet
         expect(service_class.result_class).to have_received(:new)
       end
 
-      it "passes `message' to result constructor" do
+      it "passes `message` to result constructor" do
         allow(service_class.result_class).to receive(:new).with(hash_including(message: message)).and_call_original
 
         result
@@ -164,7 +164,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern::ClassMet
         expect(service_class.result_class).to have_received(:new)
       end
 
-      it "internally passes `ConvenientService::Service::Plugins::HasResult::Constants::FAILURE_CODE' as `code' to result constructor" do
+      it "internally passes `ConvenientService::Service::Plugins::HasResult::Constants::FAILURE_CODE` as `code` to result constructor" do
         allow(service_class.result_class).to receive(:new).with(hash_including(code: ConvenientService::Service::Plugins::HasResult::Constants::FAILURE_CODE)).and_call_original
 
         result
@@ -172,33 +172,33 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern::ClassMet
         expect(service_class.result_class).to have_received(:new)
       end
 
-      context "when `service' is NOT passed" do
+      context "when `service` is NOT passed" do
         let(:result) { service_class.failure(**ConvenientService::Utils::Hash.except(params, keys: [:service])) }
 
-        it "defaults `service' to `ConvenientService::Service::Plugins::HasResult::Constants::DEFAULT_SERVICE_INSTANCE'" do
+        it "defaults `service` to `ConvenientService::Service::Plugins::HasResult::Constants::DEFAULT_SERVICE_INSTANCE`" do
           expect(result.service).to eq(ConvenientService::Service::Plugins::HasResult::Constants::DEFAULT_SERVICE_INSTANCE)
         end
       end
 
-      context "when `data' is NOT passed" do
+      context "when `data` is NOT passed" do
         let(:result) { service_class.failure(**ConvenientService::Utils::Hash.except(params, keys: [:data])) }
 
-        it "defaults `data' to `ConvenientService::Service::Plugins::HasResult::Constants::DEFAULT_FAILURE_DATA'" do
+        it "defaults `data` to `ConvenientService::Service::Plugins::HasResult::Constants::DEFAULT_FAILURE_DATA`" do
           expect(result.data).to eq(ConvenientService::Service::Plugins::HasResult::Constants::DEFAULT_FAILURE_DATA)
         end
       end
 
-      context "when `message' is NOT passed" do
+      context "when `message` is NOT passed" do
         let(:result) { service_class.failure(**ConvenientService::Utils::Hash.except(params, keys: [:message])) }
 
-        it "defaults `message' to concatenated by space first key and first value from `data'" do
+        it "defaults `message` to concatenated by space first key and first value from `data`" do
           expect(result.message).to eq(first_pair_message)
         end
 
-        context "when `data' is empty" do
+        context "when `data` is empty" do
           let(:result) { service_class.failure(**ConvenientService::Utils::Hash.except(params, keys: [:message]).merge(data: {})) }
 
-          it "internally passes `ConvenientService::Service::Plugins::HasResult::Constants::DEFAULT_FAILURE_MESSAGE' as `message' to result constructor" do
+          it "internally passes `ConvenientService::Service::Plugins::HasResult::Constants::DEFAULT_FAILURE_MESSAGE` as `message` to result constructor" do
             allow(service_class.result_class).to receive(:new).with(hash_including(message: ConvenientService::Service::Plugins::HasResult::Constants::DEFAULT_FAILURE_MESSAGE)).and_call_original
 
             result
@@ -215,7 +215,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern::ClassMet
       let(:message) { "foo" }
       let(:code) { :custom }
 
-      it "passes `service' to result constructor" do
+      it "passes `service` to result constructor" do
         allow(service_class.result_class).to receive(:new).with(hash_including(service: service_instance)).and_call_original
 
         result
@@ -223,7 +223,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern::ClassMet
         expect(service_class.result_class).to have_received(:new)
       end
 
-      it "internally passes `ConvenientService::Service::Plugins::HasResult::Constants::ERROR_STATUS' as `status' to result constructor" do
+      it "internally passes `ConvenientService::Service::Plugins::HasResult::Constants::ERROR_STATUS` as `status` to result constructor" do
         allow(service_class.result_class).to receive(:new).with(hash_including(status: ConvenientService::Service::Plugins::HasResult::Constants::ERROR_STATUS)).and_call_original
 
         result
@@ -231,7 +231,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern::ClassMet
         expect(service_class.result_class).to have_received(:new)
       end
 
-      it "passes `message' to result constructor" do
+      it "passes `message` to result constructor" do
         allow(service_class.result_class).to receive(:new).with(hash_including(message: message)).and_call_original
 
         result
@@ -239,7 +239,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern::ClassMet
         expect(service_class.result_class).to have_received(:new)
       end
 
-      it "passes `code' to result constructor" do
+      it "passes `code` to result constructor" do
         allow(service_class.result_class).to receive(:new).with(hash_including(code: code)).and_call_original
 
         result
@@ -247,33 +247,33 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern::ClassMet
         expect(service_class.result_class).to have_received(:new)
       end
 
-      context "when `service' is NOT passed" do
+      context "when `service` is NOT passed" do
         let(:result) { service_class.error(**ConvenientService::Utils::Hash.except(params, keys: [:service])) }
 
-        it "defaults service to `ConvenientService::Service::Plugins::HasResult::Constants::DEFAULT_SERVICE_INSTANCE'" do
+        it "defaults service to `ConvenientService::Service::Plugins::HasResult::Constants::DEFAULT_SERVICE_INSTANCE`" do
           expect(result.service).to eq(ConvenientService::Service::Plugins::HasResult::Constants::DEFAULT_SERVICE_INSTANCE)
         end
       end
 
-      context "when `message' is NOT passed" do
+      context "when `message` is NOT passed" do
         let(:result) { service_class.error(**ConvenientService::Utils::Hash.except(params, keys: [:message])) }
 
-        it "defaults `message' to `ConvenientService::Service::Plugins::HasResult::Constants::DEFAULT_ERROR_MESSAGE'" do
+        it "defaults `message` to `ConvenientService::Service::Plugins::HasResult::Constants::DEFAULT_ERROR_MESSAGE`" do
           expect(result.message).to eq(ConvenientService::Service::Plugins::HasResult::Constants::DEFAULT_ERROR_MESSAGE)
         end
       end
 
-      context "when `code' is NOT passed" do
+      context "when `code` is NOT passed" do
         let(:result) { service_class.error(**ConvenientService::Utils::Hash.except(params, keys: [:code])) }
 
-        it "defaults `code' to `ConvenientService::Service::Plugins::HasResult::Constants::DEFAULT_ERROR_CODE'" do
+        it "defaults `code` to `ConvenientService::Service::Plugins::HasResult::Constants::DEFAULT_ERROR_CODE`" do
           expect(result.code).to eq(ConvenientService::Service::Plugins::HasResult::Constants::DEFAULT_ERROR_CODE)
         end
       end
     end
 
     describe ".result_class" do
-      it "delegates to `ConvenientService::Service::Plugins::HasResult::Commands::CreateResultClass'" do
+      it "delegates to `ConvenientService::Service::Plugins::HasResult::Commands::CreateResultClass`" do
         allow(ConvenientService::Service::Plugins::HasResult::Commands::CreateResultClass).to receive(:call).with(hash_including(service_class: service_class)).and_call_original
 
         service_class.result_class
@@ -281,7 +281,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern::ClassMet
         expect(ConvenientService::Service::Plugins::HasResult::Commands::CreateResultClass).to have_received(:call)
       end
 
-      it "returns `ConvenientService::Service::Plugins::HasResult::Commands::CreateResultClass' result" do
+      it "returns `ConvenientService::Service::Plugins::HasResult::Commands::CreateResultClass` result" do
         expect(service_class.result_class).to eq(ConvenientService::Service::Plugins::HasResult::Commands::CreateResultClass.call(service_class: service_class))
       end
     end

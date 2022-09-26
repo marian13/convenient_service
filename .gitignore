@@ -18,15 +18,15 @@
 /Gemfile.lock
 
 ##
-# NOTE: Ignores `Gemfile' amd `Gemfile.lock' used in docker containers.
+# NOTE: Ignores `Gemfile` amd `Gemfile.lock` used in docker containers.
 #
-# NOTE: `Gemfile*' matches all files that start with Gemfile in any nesting.
-# NOTE: `/Gemfile*' matches all files that start with Gemfile only from root folder.
+# NOTE: `Gemfile*` matches all files that start with Gemfile in any nesting.
+# NOTE: `/Gemfile*` matches all files that start with Gemfile only from root folder.
 #
 /Gemfile*
 
 ##
-# NOTE: Ignores `.DS_Store' in any nesting.
+# NOTE: Ignores `.DS_Store` in any nesting.
 #
 .DS_Store
 

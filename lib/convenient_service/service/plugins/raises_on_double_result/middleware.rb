@@ -23,7 +23,7 @@ module ConvenientService
           private
 
           ##
-          # NOTE: `refute' is `!assert'.
+          # NOTE: `refute` is `!assert`.
           # https://docs.seattlerb.org/minitest
           #
           def refute_has_result!

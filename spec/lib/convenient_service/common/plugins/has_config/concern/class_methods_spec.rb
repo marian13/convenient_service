@@ -25,7 +25,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasConfig::Concern::ClassMeth
       context "when parent class does NOT have config" do
         let(:service_base_class) { Class.new }
 
-        it "returns `ConvenientService::Common::Plugins::HasConfig::Entities::ReadOnlyConfig' instance" do
+        it "returns `ConvenientService::Common::Plugins::HasConfig::Entities::ReadOnlyConfig` instance" do
           expect(service_class.config).to be_instance_of(ConvenientService::Common::Plugins::HasConfig::Entities::ReadOnlyConfig)
         end
 
@@ -43,7 +43,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasConfig::Concern::ClassMeth
           end
         end
 
-        it "returns `ConvenientService::Common::Plugins::HasConfig::Entities::ReadOnlyConfig' instance" do
+        it "returns `ConvenientService::Common::Plugins::HasConfig::Entities::ReadOnlyConfig` instance" do
           expect(service_class.config).to be_instance_of(ConvenientService::Common::Plugins::HasConfig::Entities::ReadOnlyConfig)
         end
 
@@ -62,14 +62,14 @@ RSpec.describe ConvenientService::Common::Plugins::HasConfig::Concern::ClassMeth
     end
 
     describe "#configure" do
-      context "when `block' is NOT given" do
-        it "raises `LocalJumpError'" do
+      context "when `block` is NOT given" do
+        it "raises `LocalJumpError`" do
           expect { service_class.configure }.to raise_error(LocalJumpError)
         end
       end
 
-      context "when `block' is given" do
-        it "yields `read_default_write_config'" do
+      context "when `block` is given" do
+        it "yields `read_default_write_config`" do
           expect { |block| service_class.configure(&block) }.to yield_with_args(service_class.config.to_read_default_write_config)
         end
 

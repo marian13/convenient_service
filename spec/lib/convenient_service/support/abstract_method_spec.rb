@@ -7,7 +7,7 @@ require "convenient_service"
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Support::AbstractMethod do
   example_group "modules" do
-    it "extends `ConvenientService::Support::Concern'" do
+    it "extends `ConvenientService::Support::Concern`" do
       expect(described_class.included_modules).to include(ConvenientService::Support::Concern)
     end
   end
@@ -15,7 +15,7 @@ RSpec.describe ConvenientService::Support::AbstractMethod do
   example_group "when included" do
     let(:klass) { Class.new }
 
-    it "extends `ConvenientService::Support::AbstractMethod::ClassMethods' to class" do
+    it "extends `ConvenientService::Support::AbstractMethod::ClassMethods` to class" do
       klass.include described_class
 
       expect(klass.singleton_class.included_modules).to include(described_class::ClassMethods)
@@ -80,11 +80,11 @@ RSpec.describe ConvenientService::Support::AbstractMethod do
 
           let(:error_message) do
             <<~TEXT
-              `#{klass}' should implement abstract instance method `foo'.
+              `#{klass}` should implement abstract instance method `foo`.
             TEXT
           end
 
-          it "raises `ConvenientService::Support::AbstractMethod::Errors::AbstractMethodNotOverridden'" do
+          it "raises `ConvenientService::Support::AbstractMethod::Errors::AbstractMethodNotOverridden`" do
             expect { instance.foo }
               .to raise_error(ConvenientService::Support::AbstractMethod::Errors::AbstractMethodNotOverridden)
               .with_message(error_message)
@@ -104,11 +104,11 @@ RSpec.describe ConvenientService::Support::AbstractMethod do
 
           let(:error_message) do
             <<~TEXT
-              `#{klass}' should implement abstract class method `foo'.
+              `#{klass}` should implement abstract class method `foo`.
             TEXT
           end
 
-          it "raises `ConvenientService::Support::AbstractMethod::Errors::AbstractMethodNotOverridden'" do
+          it "raises `ConvenientService::Support::AbstractMethod::Errors::AbstractMethodNotOverridden`" do
             expect { klass.foo }
               .to raise_error(ConvenientService::Support::AbstractMethod::Errors::AbstractMethodNotOverridden)
               .with_message(error_message)

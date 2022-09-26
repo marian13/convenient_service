@@ -13,7 +13,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::ParseConte
   include ConvenientService::RSpec::Matchers::HaveAttrAccessor
   include ConvenientService::RSpec::Matchers::IncludeModule
   ##
-  # NOTE: Waits for `should-matchers' full support.
+  # NOTE: Waits for `should-matchers` full support.
   #
   # include Shoulda::Matchers::ActiveModel
 
@@ -126,7 +126,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::ParseConte
   end
 
   ##
-  # NOTE: Waits for `should-matchers' full support.
+  # NOTE: Waits for `should-matchers` full support.
   #
   # example_group "validations" do
   #   subject { service }
@@ -194,47 +194,47 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::ParseConte
         expect(result).to be_success.with_data(parsed_content: parsed_content)
       end
 
-      context "when `ruby' is missing" do
+      context "when `ruby` is missing" do
         let(:content) { remove(%(ruby "3.0.1"\n), from: default_content) }
         let(:parsed_content) { remove(:ruby, from: default_parsed_content) }
 
-        it "returns success with parsed content without `ruby'" do
+        it "returns success with parsed content without `ruby`" do
           expect(result).to be_success.with_data(parsed_content: parsed_content)
         end
       end
 
-      context "when `source' is missing" do
+      context "when `source` is missing" do
         let(:content) { remove(%(source "https://rubygems.org"\n), from: default_content) }
         let(:parsed_content) { remove(:source, from: default_parsed_content) }
 
-        it "returns success with parsed content without `source'" do
+        it "returns success with parsed content without `source`" do
           expect(result).to be_success.with_data(parsed_content: parsed_content)
         end
       end
 
-      context "when `git_source' is missing" do
+      context "when `git_source` is missing" do
         let(:content) { remove(%(git_source(:github) { |repo| "https://github.com/\#{repo}.git" }\n), from: default_content) }
         let(:parsed_content) { remove(:git_source, from: default_parsed_content) }
 
-        it "returns success with parsed content without `git_source'" do
+        it "returns success with parsed content without `git_source`" do
           expect(result).to be_success.with_data(parsed_content: parsed_content)
         end
       end
 
-      context "when `gems' without envs is missing" do
+      context "when `gems` without envs is missing" do
         let(:content) { remove(/^gem.*?\n/, from: default_content) }
         let(:parsed_content) { remove(:gems, condition: ->(gem) { gem[:envs].none? }, from: default_parsed_content) }
 
-        it "returns success with parsed content without `gems' without envs" do
+        it "returns success with parsed content without `gems` without envs" do
           expect(result).to be_success.with_data(parsed_content: parsed_content)
         end
       end
 
-      context "when `gems_with_envs' is missing" do
+      context "when `gems_with_envs` is missing" do
         let(:content) { remove(/^group.*?end\n/m, from: default_content) }
         let(:parsed_content) { remove(:gems, condition: ->(gem) { gem[:envs].any? }, from: default_parsed_content) }
 
-        it "returns success with parsed content without `gems' with envs" do
+        it "returns success with parsed content without `gems` with envs" do
           expect(result).to be_success.with_data(parsed_content: parsed_content)
         end
       end

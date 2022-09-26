@@ -10,18 +10,18 @@
 #   cd convenient_service
 #   cp Gemfile Gemfile.3.0
 #   docker build . -f docker/3.0/Dockerfile -t convenient_service:3.0
-#   # or `task docker:build:ruby_3.0'
+#   # or `task docker:build:ruby_3.0`
 #
 # NOTE: A command to run bash in container.
 #
 #   cd convenient_service
 #   docker run --rm -it -v $(pwd):/gem convenient_service:3.0 bash
-#   # or `task docker:bash:ruby_3.0'
+#   # or `task docker:bash:ruby_3.0`
 #
 # NOTE: If there are no memory, performance, or cost constraints, prefer to use as standard Linux distribution as it is possible.
 # In a general case, you simply won't have enough time to resolve all the "quirks" of more specific distributions if you are an application developer.
-# That is why a `slim' version is used instead of `alpine'.
-# Also `slim' is more similar to Ubuntu used in CI.
+# That is why a `slim` version is used instead of `alpine`.
+# Also `slim` is more similar to Ubuntu used in CI.
 # - https://github.com/timbru31/docker-ruby-node/tree/master/3.0/16
 # - https://medium.com/swlh/alpine-slim-stretch-buster-jessie-bullseye-bookworm-what-are-the-differences-in-docker-62171ed4531d
 # - https://hub.docker.com/r/timbru31/ruby-node/tags
@@ -48,7 +48,7 @@ WORKDIR /gem
 COPY . /gem
 
 ##
-# NOTE: Every container has its own copy of `Gemfile'. This way a developer doesn't need to delete `Gemfile.lock' all the time when changing containers.
+# NOTE: Every container has its own copy of `Gemfile`. This way a developer doesn't need to delete `Gemfile.lock` all the time when changing containers.
 # - https://docs.docker.com/engine/reference/builder/#env
 # - https://stackoverflow.com/questions/48863711/is-it-possible-to-override-gemfile-for-local-development
 #
@@ -59,10 +59,10 @@ RUN bundle install
 RUN bundle exec appraisal install
 
 ##
-# NOTE: Installs `task'.
+# NOTE: Installs `task`.
 # https://taskfile.dev/installation/#install-script
 #
-# NOTE: `task' is installed into `~/bin`. That is why `-b /bin' is used. See `echo ${PATH}' to debug.
+# NOTE: `task` is installed into `~/bin`. That is why `-b /bin` is used. See `echo ${PATH}` to debug.
 #
 RUN sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b /bin
 

@@ -37,11 +37,11 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern::Instance
     describe "#result" do
       let(:error_message) do
         <<~TEXT
-          Result method (#result) of `#{service_class}' is NOT overridden.
+          Result method (#result) of `#{service_class}` is NOT overridden.
         TEXT
       end
 
-      it "raises `ConvenientService::Service::Plugins::HasResult::Errors::ResultIsNotOverridden'" do
+      it "raises `ConvenientService::Service::Plugins::HasResult::Errors::ResultIsNotOverridden`" do
         expect { result }
           .to raise_error(ConvenientService::Service::Plugins::HasResult::Errors::ResultIsNotOverridden)
           .with_message(error_message)
@@ -61,7 +61,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern::Instance
         end
       end
 
-      it "delegates to `self.class.success'" do
+      it "delegates to `self.class.success`" do
         allow(service_class).to receive(:success).and_call_original
 
         result
@@ -69,11 +69,11 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern::Instance
         expect(service_class).to have_received(:success)
       end
 
-      it "returns `self.class.success'" do
+      it "returns `self.class.success`" do
         expect(result).to eq(service_class.success)
       end
 
-      it "passes `self' as service to `self.class.success'" do
+      it "passes `self` as service to `self.class.success`" do
         allow(service_class).to receive(:success).with(hash_including(service: service_instance))
 
         result
@@ -81,7 +81,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern::Instance
         expect(service_class).to have_received(:success)
       end
 
-      context "when `data' is passed" do
+      context "when `data` is passed" do
         let(:service_class) do
           Class.new(base_service_class).tap do |klass|
             klass.class_exec(data) do |data|
@@ -92,7 +92,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern::Instance
 
         let(:data) { {foo: :bar} }
 
-        it "passes `data' to `self.class.success'" do
+        it "passes `data` to `self.class.success`" do
           allow(service_class).to receive(:success).with(hash_including(data: data)).and_call_original
 
           result
@@ -111,7 +111,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern::Instance
         end
       end
 
-      it "delegates to `self.class.failure'" do
+      it "delegates to `self.class.failure`" do
         allow(service_class).to receive(:failure).and_call_original
 
         result
@@ -119,11 +119,11 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern::Instance
         expect(service_class).to have_received(:failure)
       end
 
-      it "returns `self.class.failure'" do
+      it "returns `self.class.failure`" do
         expect(result).to eq(service_class.failure)
       end
 
-      it "passes `self' as service to `self.class.failure'" do
+      it "passes `self` as service to `self.class.failure`" do
         allow(service_class).to receive(:failure).with(hash_including(service: service_instance))
 
         result
@@ -131,7 +131,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern::Instance
         expect(service_class).to have_received(:failure)
       end
 
-      context "when `data' is passed" do
+      context "when `data` is passed" do
         let(:service_class) do
           Class.new(base_service_class).tap do |klass|
             klass.class_exec(data) do |data|
@@ -142,7 +142,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern::Instance
 
         let(:data) { {foo: "bar"} }
 
-        it "passes `data' to `self.class.failure'" do
+        it "passes `data` to `self.class.failure`" do
           allow(service_class).to receive(:failure).with(hash_including(data: data)).and_call_original
 
           result
@@ -161,7 +161,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern::Instance
         end
       end
 
-      it "delegates to `self.class.error'" do
+      it "delegates to `self.class.error`" do
         allow(service_class).to receive(:error).and_call_original
 
         result
@@ -169,11 +169,11 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern::Instance
         expect(service_class).to have_received(:error)
       end
 
-      it "returns `self.class.error'" do
+      it "returns `self.class.error`" do
         expect(result).to eq(service_class.error)
       end
 
-      it "passes `self' as service to `self.class.error'" do
+      it "passes `self` as service to `self.class.error`" do
         allow(service_class).to receive(:error).with(hash_including(service: service_instance))
 
         result
@@ -181,7 +181,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern::Instance
         expect(service_class).to have_received(:error)
       end
 
-      context "when `message' is passed" do
+      context "when `message` is passed" do
         let(:service_class) do
           Class.new(base_service_class).tap do |klass|
             klass.class_exec(message) do |message|
@@ -192,7 +192,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern::Instance
 
         let(:message) { "foo" }
 
-        it "passes `message' to `self.class.error'" do
+        it "passes `message` to `self.class.error`" do
           allow(service_class).to receive(:error).with(hash_including(message: message)).and_call_original
 
           result
@@ -201,7 +201,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern::Instance
         end
       end
 
-      context "when `code' is passed" do
+      context "when `code` is passed" do
         let(:service_class) do
           Class.new(base_service_class).tap do |klass|
             klass.class_exec(code) do |code|
@@ -212,7 +212,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern::Instance
 
         let(:code) { :foo }
 
-        it "passes `code' to `self.class.error'" do
+        it "passes `code` to `self.class.error`" do
           allow(service_class).to receive(:error).with(hash_including(code: code)).and_call_original
 
           result

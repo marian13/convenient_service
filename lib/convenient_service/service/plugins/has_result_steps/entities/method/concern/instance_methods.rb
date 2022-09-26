@@ -79,7 +79,7 @@ module ConvenientService
                 end
 
                 ##
-                # TODO: Return `true' for valid assertions.
+                # TODO: Return `true` for valid assertions.
                 #
                 def assert_has_organizer!
                   return if has_organizer?

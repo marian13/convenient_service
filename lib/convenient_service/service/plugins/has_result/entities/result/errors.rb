@@ -10,7 +10,7 @@ module ConvenientService
               class NotExistingAttribute < ConvenientService::Error
                 def initialize(attribute:)
                   message = <<~TEXT
-                    Data attribute `#{attribute}' does NOT exist. Make sure the corresponding result returns it.
+                    Data attribute `#{attribute}` does NOT exist. Make sure the corresponding result returns it.
                   TEXT
 
                   super(message)

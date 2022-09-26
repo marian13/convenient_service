@@ -7,7 +7,7 @@ module ConvenientService
         class NonIntegerIndex < Error
           def initialize(index:)
             message = <<~TEXT
-              Index `#{index.inspect}' is NOT an integer.
+              Index `#{index.inspect}` is NOT an integer.
             TEXT
 
             super(message)

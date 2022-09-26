@@ -24,7 +24,7 @@ module ConvenientService
             private
 
             ##
-            # NOTE: An example of `Dry::Validation::Contract' usage.
+            # NOTE: An example of `Dry::Validation::Contract` usage.
             # https://dry-rb.org/gems/dry-validation/1.8/#quick-start
             #
             # TODO: Return one or all errors?

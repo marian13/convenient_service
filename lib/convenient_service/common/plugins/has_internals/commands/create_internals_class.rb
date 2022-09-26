@@ -16,13 +16,13 @@ module ConvenientService
               internals_class.include Entities::Internals::Concern
 
               ##
-              # class Internals < ConvenientService::Common::Plugins::HasInternals::Entities::Internals # or just `class Internals' if service class defines its own.
+              # class Internals < ConvenientService::Common::Plugins::HasInternals::Entities::Internals # or just `class Internals` if service class defines its own.
               #   include ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Concern
               #
               #   class << self
               #     def service_class
               #       ##
-              #       # NOTE: Returns `service_class' passed to `CreateInternalsClass'.
+              #       # NOTE: Returns `service_class` passed to `CreateInternalsClass`.
               #       #
               #       service_class
               #     end

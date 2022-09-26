@@ -33,7 +33,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::CacheItsValue do
         end
       end
 
-      it "returns `false'" do
+      it "returns `false`" do
         expect(matcher_result).to eq(false)
       end
     end
@@ -47,7 +47,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::CacheItsValue do
         end
       end
 
-      it "returns `true'" do
+      it "returns `true`" do
         expect(matcher_result).to eq(true)
       end
     end

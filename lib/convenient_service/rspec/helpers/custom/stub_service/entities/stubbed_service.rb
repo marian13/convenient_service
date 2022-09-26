@@ -11,14 +11,14 @@ module ConvenientService
             #
             class StubbedService < Support::Command
               ##
-              # NOTE: `include ::RSpec::Matchers'.
+              # NOTE: `include ::RSpec::Matchers`.
               # - https://github.com/rspec/rspec-expectations/blob/v3.11.0/lib/rspec/matchers.rb
               # - https://github.com/rspec/rspec-expectations/blob/main/lib/rspec/matchers.rb
               #
               include ::RSpec::Matchers
 
               ##
-              # NOTE: `include ::RSpec::Mocks::ExampleMethods'.
+              # NOTE: `include ::RSpec::Mocks::ExampleMethods`.
               # - https://github.com/rspec/rspec-mocks/blob/v3.11.1/lib/rspec/mocks/example_methods.rb
               # - https://github.com/rspec/rspec-mocks/blob/main/lib/rspec/mocks/example_methods.rb
               #
@@ -81,7 +81,7 @@ module ConvenientService
               alias_method :expected_kwargs, :kwargs
 
               ##
-              # NOTE: `if defined?' is used in order to cache `nil' if needed.
+              # NOTE: `if defined?` is used in order to cache `nil` if needed.
               #
               def block
                 return @block if defined? @block

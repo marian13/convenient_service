@@ -54,7 +54,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Middleware do
           TEXT
         end
 
-        it "runs only `chain.next'" do
+        it "runs only `chain.next`" do
           method_value
 
           expect(output).to eq(text)
@@ -73,7 +73,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Middleware do
           service_class.before(:result) { out.puts "first before result" }
         end
 
-        it "runs that before callback in addition to `chain.next'" do
+        it "runs that before callback in addition to `chain.next`" do
           method_value
 
           expect(output).to eq(text)
@@ -92,7 +92,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Middleware do
           service_class.after(:result) { out.puts "first after result" }
         end
 
-        it "runs that after callback in addition to `chain.next'" do
+        it "runs that after callback in addition to `chain.next`" do
           method_value
 
           expect(output).to eq(text)
@@ -113,7 +113,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Middleware do
           service_class.before(:result) { out.puts "second before result" }
         end
 
-        it "runs those before callbacks in addition to `chain.next'" do
+        it "runs those before callbacks in addition to `chain.next`" do
           method_value
 
           expect(output).to eq(text)
@@ -134,7 +134,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Middleware do
           service_class.after(:result) { out.puts "second after result" }
         end
 
-        it "runs those after callbacks in addition to `chain.next'" do
+        it "runs those after callbacks in addition to `chain.next`" do
           method_value
 
           expect(output).to eq(text)
@@ -160,7 +160,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Middleware do
           service_class.after(:result) { out.puts "second after result" }
         end
 
-        it "runs those before and after callbacks in addition to `chain.next'" do
+        it "runs those before and after callbacks in addition to `chain.next`" do
           method_value
 
           expect(output).to eq(text)
@@ -170,13 +170,13 @@ RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Middleware do
       example_group "after callbacks first argument" do
         before do
           ##
-          # NOTE: `result_original_value' is NOT available inside service instance context.
+          # NOTE: `result_original_value` is NOT available inside service instance context.
           # That is why "chain next value" literal is used.
           #
           service_class.after(:result) { |result| raise if result != "result original value" }
         end
 
-        it "passes `chain.next' to all after callbacks as first argument" do
+        it "passes `chain.next` to all after callbacks as first argument" do
           expect { method_value }.not_to raise_error
         end
       end

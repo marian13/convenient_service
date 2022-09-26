@@ -26,7 +26,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Entities::Type 
   end
 
   ##
-  # NOTE: Waits for `should-matchers' full support.
+  # NOTE: Waits for `should-matchers` full support.
   #
   # example_group "delegators" do
   #   include Shoulda::Matchers::Independent
@@ -67,10 +67,10 @@ RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Entities::Type 
     end
 
     describe "#eql?" do
-      context "when `other' has different class" do
+      context "when `other` has different class" do
         let(:other) { 42 }
 
-        it "returns `false'" do
+        it "returns `false`" do
           expect(type == other).to be_nil
         end
       end

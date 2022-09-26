@@ -60,13 +60,13 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
 
         let(:error_message) do
           <<~TEXT
-            Attribute `#{method_name}' is accessed before result status is checked.
+            Attribute `#{method_name}` is accessed before result status is checked.
 
-            Did you forget to call `success?', `failure?', or `error?' on result?
+            Did you forget to call `success?`, `failure?`, or `error?` on result?
           TEXT
         end
 
-        it "raises `ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::RaisesOnNotCheckedResultStatus::Errors::StatusIsNotChecked'" do
+        it "raises `ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::RaisesOnNotCheckedResultStatus::Errors::StatusIsNotChecked`" do
           expect { method_value }
             .to raise_error(ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::RaisesOnNotCheckedResultStatus::Errors::StatusIsNotChecked)
             .with_message(error_message)

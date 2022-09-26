@@ -21,7 +21,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
       let(:options) { {direction: :input} }
 
       ##
-      # NOTE: `it { is_expected...' does NOT support blocks.
+      # NOTE: `it { is_expected...` does NOT support blocks.
       # https://github.com/rspec/rspec-expectations/issues/805
       #
       specify {

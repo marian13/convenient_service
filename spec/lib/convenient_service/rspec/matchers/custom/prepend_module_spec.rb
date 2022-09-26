@@ -13,7 +13,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::PrependModule do
   let(:klass) { Class.new }
 
   describe "#matches?" do
-    context "when `klass' does NOT prepend `module'" do
+    context "when `klass` does NOT prepend `module`" do
       let(:klass) { Class.new }
 
       it "returns false" do
@@ -21,7 +21,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::PrependModule do
       end
     end
 
-    context "when `klass' prepends `module'" do
+    context "when `klass` prepends `module`" do
       let(:klass) do
         Class.new.tap do |klass|
           klass.class_exec(mod) do |mod|
@@ -40,7 +40,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::PrependModule do
     it "returns message" do
       matcher_result
 
-      expect(matcher.description).to eq("prepend module `#{mod}'")
+      expect(matcher.description).to eq("prepend module `#{mod}`")
     end
   end
 
@@ -48,7 +48,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::PrependModule do
     it "returns message" do
       matcher_result
 
-      expect(matcher.failure_message).to eq("expected `#{klass}' to prepend module `#{mod}'")
+      expect(matcher.failure_message).to eq("expected `#{klass}` to prepend module `#{mod}`")
     end
   end
 
@@ -56,7 +56,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::PrependModule do
     it "returns message" do
       matcher_result
 
-      expect(matcher.failure_message_when_negated).to eq("expected `#{klass}' NOT to prepend module `#{mod}'")
+      expect(matcher.failure_message_when_negated).to eq("expected `#{klass}` NOT to prepend module `#{mod}`")
     end
   end
 end

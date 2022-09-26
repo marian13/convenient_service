@@ -13,7 +13,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::AssertNpmP
   include ConvenientService::RSpec::Matchers::HaveAttrAccessor
   include ConvenientService::RSpec::Matchers::IncludeModule
   ##
-  # NOTE: Waits for `should-matchers' full support.
+  # NOTE: Waits for `should-matchers` full support.
   #
   # include Shoulda::Matchers::ActiveModel
 
@@ -29,13 +29,13 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::AssertNpmP
   end
 
   ##
-  # NOTE: have_attr_writer is needed by `validate_presence_of'.
+  # NOTE: have_attr_writer is needed by `validate_presence_of`.
   # https://stackoverflow.com/a/31686199/12201472
   #
   it { is_expected.to have_attr_accessor(:name) }
 
   ##
-  # NOTE: Waits for `should-matchers' full support.
+  # NOTE: Waits for `should-matchers` full support.
   #
   # it { is_expected.to validate_presence_of(:name) }
 

@@ -51,7 +51,7 @@ RSpec.describe ConvenientService::Service::Plugins::RaisesOnDoubleResult::Middle
           service_instance.internals.cache.delete(:has_result)
         end
 
-        it "writes `true' to cache with `has_result' key" do
+        it "writes `true` to cache with `has_result` key" do
           allow(service_instance.internals.cache).to receive(:write).with(:has_result, true).and_call_original
 
           method_value
@@ -75,11 +75,11 @@ RSpec.describe ConvenientService::Service::Plugins::RaisesOnDoubleResult::Middle
 
         let(:error_message) do
           <<~TEXT
-            `#{service_class}' service has a double result.
+            `#{service_class}` service has a double result.
 
-            Make sure its #result calls only one from the following methods `success', `failure', or `error' and only once.
+            Make sure its #result calls only one from the following methods `success`, `failure`, or `error` and only once.
 
-            Maybe you missed `return'? The most common scenario is similar to this one:
+            Maybe you missed `return`? The most common scenario is similar to this one:
 
             def result
               # ...
@@ -92,7 +92,7 @@ RSpec.describe ConvenientService::Service::Plugins::RaisesOnDoubleResult::Middle
           TEXT
         end
 
-        it "raises `ConvenientService::Service::Plugins::RaisesOnDoubleResult::Errors::DoubleResult'" do
+        it "raises `ConvenientService::Service::Plugins::RaisesOnDoubleResult::Errors::DoubleResult`" do
           expect { method_value }
             .to raise_error(ConvenientService::Service::Plugins::RaisesOnDoubleResult::Errors::DoubleResult)
             .with_message(error_message)

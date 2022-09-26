@@ -12,7 +12,7 @@ module ConvenientService
               rules = []
 
               ##
-              # TODO: Remove `|| result.is_a?(ConvenientService::V1::Plugins::HasResult::Entities::Result)' when V1 is dropped.
+              # TODO: Remove `|| result.is_a?(ConvenientService::V1::Plugins::HasResult::Entities::Result)` when V1 is dropped.
               #
               rules << ->(result) { result.class.include?(ConvenientService::Service::Plugins::HasResult::Entities::Result::Concern) || result.is_a?(ConvenientService::V1::Plugins::HasResult::Entities::Result) }
               rules << ->(result) { result.error? }
@@ -61,15 +61,15 @@ module ConvenientService
               #
               parts = []
 
-              parts << "be an `error'"
-              parts << "of `#{service_class}'" if used_of?
-              parts << "with message `#{message}'" if used_message?
-              parts << "with code `#{code}'" if used_code?
+              parts << "be an `error`"
+              parts << "of `#{service_class}`" if used_of?
+              parts << "with message `#{message}`" if used_message?
+              parts << "with code `#{code}`" if used_code?
               parts << "\n\n"
-              parts << "got `#{result.status}'"
-              parts << "of `#{result.service.class}'" if used_of?
-              parts << "with message `#{result.message}'" if used_message?
-              parts << "with code `#{result.code}'" if used_code?
+              parts << "got `#{result.status}`"
+              parts << "of `#{result.service.class}`" if used_of?
+              parts << "with message `#{result.message}`" if used_message?
+              parts << "with code `#{result.code}`" if used_code?
 
               parts.join(" ")
             end
@@ -80,15 +80,15 @@ module ConvenientService
               #
               parts = []
 
-              parts << "expected that `#{result}' would be an `error'"
-              parts << "of `#{service_class}'" if used_of?
-              parts << "with message `#{message}'" if used_message?
-              parts << "with code `#{code}'" if used_code?
+              parts << "expected that `#{result}` would be an `error`"
+              parts << "of `#{service_class}`" if used_of?
+              parts << "with message `#{message}`" if used_message?
+              parts << "with code `#{code}`" if used_code?
               parts << "\n\n"
-              parts << "got `#{result.status}'"
-              parts << "of `#{result.service.class}'" if used_of?
-              parts << "with message `#{result.message}'" if used_message?
-              parts << "with code `#{result.code}'" if used_code?
+              parts << "got `#{result.status}`"
+              parts << "of `#{result.service.class}`" if used_of?
+              parts << "with message `#{result.message}`" if used_message?
+              parts << "with code `#{result.code}`" if used_code?
 
               parts.join(" ")
             end
@@ -102,15 +102,15 @@ module ConvenientService
               #
               parts = []
 
-              parts << "expected that #{result} would NOT be an `error'"
-              parts << "of `#{service_class}'" if used_of?
-              parts << "with message `#{message}'" if used_message?
-              parts << "with code `#{code}'" if used_code?
+              parts << "expected that #{result} would NOT be an `error`"
+              parts << "of `#{service_class}`" if used_of?
+              parts << "with message `#{message}`" if used_message?
+              parts << "with code `#{code}`" if used_code?
               parts << "\n\n"
-              parts << "got `#{result.status}'"
-              parts << "of `#{result.service.class}'" if used_of?
-              parts << "with message `#{result.message}'" if used_message?
-              parts << "with code `#{result.code}'" if used_code?
+              parts << "got `#{result.status}`"
+              parts << "of `#{result.service.class}`" if used_of?
+              parts << "with message `#{result.message}`" if used_message?
+              parts << "with code `#{result.code}`" if used_code?
 
               parts.join(" ")
             end

@@ -25,7 +25,7 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::AssertF
     subject { service }
 
     ##
-    # NOTE: have_attr_writer is needed by `validate_presence_of'.
+    # NOTE: have_attr_writer is needed by `validate_presence_of`.
     # https://stackoverflow.com/a/31686199/12201472
     #
     it { is_expected.to have_attr_accessor(:path) }
@@ -39,7 +39,7 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::AssertF
         let(:path) { nil }
 
         it "returns failure with data" do
-          expect(result).to be_failure.with_data(path: "Path is `nil'")
+          expect(result).to be_failure.with_data(path: "Path is `nil`")
         end
       end
 
@@ -57,7 +57,7 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::AssertF
         let(:path) { "non_existing_path" }
 
         it "returns error with message" do
-          expect(result).to be_error.with_message("File with path `#{path}' does NOT exist")
+          expect(result).to be_error.with_message("File with path `#{path}` does NOT exist")
         end
       end
 

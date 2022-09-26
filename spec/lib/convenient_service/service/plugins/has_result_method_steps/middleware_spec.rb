@@ -46,7 +46,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultMethodSteps::Middle
       context "when step service is symbol" do
         let(:step_service) { method_name }
 
-        context "when step service is NOT `:result'" do
+        context "when step service is NOT `:result`" do
           let(:method_name) { :foo }
 
           let(:customized_step) do
@@ -65,7 +65,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultMethodSteps::Middle
             expect(method_value).to eq(customized_step)
           end
 
-          it "sets step service to `ConvenientService::Service::Plugins::HasResultMethodSteps::Services::RunMethodInOrganizer'" do
+          it "sets step service to `ConvenientService::Service::Plugins::HasResultMethodSteps::Services::RunMethodInOrganizer`" do
             expect(method_value.service.klass).to eq(ConvenientService::Service::Plugins::HasResultMethodSteps::Services::RunMethodInOrganizer)
           end
 
@@ -78,7 +78,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultMethodSteps::Middle
           end
         end
 
-        context "when step service is `:result'" do
+        context "when step service is `:result`" do
           let(:method_name) { :result }
 
           let(:customized_step) do
@@ -97,7 +97,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultMethodSteps::Middle
             expect(method_value).to eq(customized_step)
           end
 
-          it "sets step service to `ConvenientService::Service::Plugins::HasResultMethodSteps::Services::RunOwnMethodInOrganizer'" do
+          it "sets step service to `ConvenientService::Service::Plugins::HasResultMethodSteps::Services::RunOwnMethodInOrganizer`" do
             expect(method_value.service.klass).to eq(ConvenientService::Service::Plugins::HasResultMethodSteps::Services::RunOwnMethodInOrganizer)
           end
 

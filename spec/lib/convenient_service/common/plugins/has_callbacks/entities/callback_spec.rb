@@ -22,7 +22,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Entities::Callb
       let(:types) { [:before, :result] }
       let(:casted_types) { ConvenientService::Common::Plugins::HasCallbacks::Entities::TypeCollection.new(types: types) }
 
-      it "casts types to `ConvenientService::Common::Plugins::HasCallbacks::Entities::TypeCollection' instance" do
+      it "casts types to `ConvenientService::Common::Plugins::HasCallbacks::Entities::TypeCollection` instance" do
         expect(callback.types).to eq(casted_types)
       end
     end
@@ -174,7 +174,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Entities::Callb
         end
       end
 
-      context "when `other' has different `block'" do
+      context "when `other` has different `block`" do
         let(:other) { described_class.new(**params.merge(block: other_block)) }
         let(:other_block) { proc { :baz } }
 
@@ -186,7 +186,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Entities::Callb
         # TODO: Refactor.
         #
         # rubocop:disable Lint/Void, RSpec/ExampleLength
-        it "uses `source_location' to compare blocks" do
+        it "uses `source_location` to compare blocks" do
           callback_block_source_location = double
           other_block_source_location = double
 

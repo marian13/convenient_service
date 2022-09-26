@@ -34,7 +34,7 @@ module ConvenientService
       #
       def middlewares(**kwargs, &block)
         ##
-        # TODO: Consider `Utils::Hash.rename_key(old_key, new_key, hash)'?
+        # TODO: Consider `Utils::Hash.rename_key(old_key, new_key, hash)`?
         # https://stackoverflow.com/a/19298437/12201472
         #
         kwargs[:method] = kwargs.delete(:for)
@@ -53,7 +53,7 @@ module ConvenientService
       def commit_config!
         concerns.tap { |stack| Commands::EnableConcernMiddlewareStack.call(stack: stack) }
 
-        ConvenientService.logger.debug { "[Core] Enabled concern middleware stack for `#{self}' | Triggered by `.commit_config!'" }
+        ConvenientService.logger.debug { "[Core] Enabled concern middleware stack for `#{self}` | Triggered by `.commit_config!`" }
 
         middlewares(scope: :instance).values.each { |stack| Commands::EnableMethodMiddlewareStack.call(stack: stack) }
         middlewares(scope: :class).values.each { |stack| Commands::EnableMethodMiddlewareStack.call(stack: stack) }
@@ -66,16 +66,18 @@ module ConvenientService
 
         ##
         # NOTE: If concerns are just enabled (are just included into the mixing class) then retries the missing method,
-        # otherwise raises `NoMethodError' (since method is still missing even after including concerns).
+        # otherwise raises `NoMethodError` (since method is still missing even after including concerns).
         #
         return super unless just_enabled
 
-        ConvenientService.logger.debug { "[Core] Enabled concern middleware stack for `#{self}' | Triggered by `method_missing' | Method: `.#{method}' " }
+        ConvenientService.logger.debug { "[Core] Enabled concern middleware stack for `#{self}` | Triggered by `method_missing` | Method: `.#{method}` " }
 
         __send__(method, *args, **kwargs, &block)
       end
 
       ##
+      # TODO: How?
+      #
       # TODO: Implement.
       # https://thoughtbot.com/blog/always-define-respond-to-missing-when-overriding
       #

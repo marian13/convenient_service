@@ -13,18 +13,18 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::BeDescendantOf do
   let(:klass) { Class.new }
 
   describe "#matches?" do
-    context "when `klass' is NOT descandant of `base_klass'" do
+    context "when `klass` is NOT descandant of `base_klass`" do
       let(:klass) { Class.new }
 
-      it "returns `false'" do
+      it "returns `false`" do
         expect(matcher_result).to eq(false)
       end
     end
 
-    context "when `klass' is descandant of `base_klass'" do
+    context "when `klass` is descandant of `base_klass`" do
       let(:klass) { Class.new(base_klass) }
 
-      it "returns `true'" do
+      it "returns `true`" do
         expect(matcher_result).to eq(true)
       end
     end
@@ -34,7 +34,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::BeDescendantOf do
     it "returns message" do
       matcher_result
 
-      expect(matcher.description).to eq("be a descendant of `#{base_klass}'")
+      expect(matcher.description).to eq("be a descendant of `#{base_klass}`")
     end
   end
 
@@ -42,7 +42,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::BeDescendantOf do
     it "returns message" do
       matcher_result
 
-      expect(matcher.failure_message).to eq("expected #{klass} to be a descendant of `#{base_klass}'")
+      expect(matcher.failure_message).to eq("expected #{klass} to be a descendant of `#{base_klass}`")
     end
   end
 
@@ -50,7 +50,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::BeDescendantOf do
     it "returns message" do
       matcher_result
 
-      expect(matcher.failure_message_when_negated).to eq("expected #{klass} NOT to be a descendant of `#{base_klass}'")
+      expect(matcher.failure_message_when_negated).to eq("expected #{klass} NOT to be a descendant of `#{base_klass}`")
     end
   end
 end

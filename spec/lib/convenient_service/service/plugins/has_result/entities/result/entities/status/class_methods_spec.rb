@@ -10,7 +10,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
     describe ".cast" do
       let(:casted) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Entities::Status.cast(other) }
 
-      context "when `other' is NOT castable" do
+      context "when `other` is NOT castable" do
         let(:other) { nil }
 
         it "returns nil" do
@@ -18,7 +18,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
         end
       end
 
-      context "when `other' is symbol" do
+      context "when `other` is symbol" do
         let(:other) { :foo }
         let(:status) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Entities::Status.new(value: other) }
 
@@ -27,7 +27,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
         end
       end
 
-      context "when `other' is string" do
+      context "when `other` is string" do
         let(:other) { "foo" }
         let(:status) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Entities::Status.new(value: other.to_sym) }
 
@@ -36,11 +36,11 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
         end
       end
 
-      context "when `other' is status" do
+      context "when `other` is status" do
         let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Entities::Status.new(value: :foo) }
         let(:status) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Entities::Status.new(value: other.value) }
 
-        it "returns copy of `other'" do
+        it "returns copy of `other`" do
           expect(casted).to eq(status)
         end
       end

@@ -8,8 +8,8 @@ module ConvenientService
       ##
       # IMPORTANT: Order of plugins matters.
       #
-      # NOTE: `class_exec' (that is used under the hood by `included') defines `class Result' in the global namespace.
-      # That is why `class self::Result' is used.
+      # NOTE: `class_exec` (that is used under the hood by `included`) defines `class Result` in the global namespace.
+      # That is why `class self::Result` is used.
       #
       # https://stackoverflow.com/a/51965126/12201472
       #
@@ -195,7 +195,7 @@ end
 module ConvenientService
   module Configs
     ##
-    # NOTE: A copy of `StandardUncommitted' config, that automatically commits itself after the `include' invocation.
+    # NOTE: A copy of `StandardUncommitted` config, that automatically commits itself after the `include` invocation.
     #
     # For example:
     #
@@ -227,13 +227,13 @@ module ConvenientService
   module Configs
     ##
     # IMPORTANT: Breaking change!!!
-    # Automatic config commitment by `method_missing' does NOT work in Ruby 2.7.
-    # That is probably caused by `(*args, **kwargs, &block)' delegation.
+    # Automatic config commitment by `method_missing` does NOT work in Ruby 2.7.
+    # That is probably caused by `(*args, **kwargs, &block)` delegation.
     # Check the following article for more information: https://eregon.me/blog/2021/02/13/correct-delegation-in-ruby-2-27-3.html
-    # As a workaround, the `Standard' config is committed by default in Ruby 2.7.
-    # Ruby 3.0 and higher use `StandardUncommitted' as `Standard' since they have no issues with `(*args, **kwargs, &block)' delegation.
+    # As a workaround, the `Standard` config is committed by default in Ruby 2.7.
+    # Ruby 3.0 and higher use `StandardUncommitted` as `Standard` since they have no issues with `(*args, **kwargs, &block)` delegation.
     #
-    # For migration purposes, you can control config commitment, by using `StandardUncommitted' and `StandardCommitted' explicitly, for example:
+    # For migration purposes, you can control config commitment, by using `StandardUncommitted` and `StandardCommitted` explicitly, for example:
     #
     #   class PerformOperation
     #     include ConvenientService::Configs::Standard
@@ -252,7 +252,7 @@ module ConvenientService
     #   class PerformOperation
     #     include ConvenientService::Configs::StandardUncommitted
     #     # ...
-    #     # Trigger `commit_config!` manually or it is automatically triggered by first `method_missing'.
+    #     # Trigger `commit_config!` manually or it is automatically triggered by first `method_missing`.
     #   end
     #
     Standard = ::RUBY_VERSION >= "3.0" ? StandardUncommitted : StandardCommitted

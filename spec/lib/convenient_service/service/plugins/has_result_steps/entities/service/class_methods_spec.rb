@@ -10,15 +10,15 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Se
 
   example_group "class methods" do
     describe "#cast" do
-      context "when `other' is NOT castable" do
+      context "when `other` is NOT castable" do
         let(:other) { nil }
 
-        it "returns `nil'" do
+        it "returns `nil`" do
           expect(service_class.cast(other)).to be_nil
         end
       end
 
-      context "when `other' is klass" do
+      context "when `other` is klass" do
         let(:klass) { Class.new }
         let(:other) { klass }
 
@@ -27,7 +27,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Se
         end
       end
 
-      context "when `other' is service" do
+      context "when `other` is service" do
         let(:klass) { Class.new }
         let(:other) { service_class.new(klass) }
 

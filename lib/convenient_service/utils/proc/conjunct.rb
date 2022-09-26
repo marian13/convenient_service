@@ -22,7 +22,7 @@ module ConvenientService
         # For example, let's assume we have two arbitrary functions:
         #   f(x) and g(x)
         #
-        # Application of the `conjunct' procedure gives a new function h(x) that can be written as follows:
+        # Application of the `conjunct` procedure gives a new function h(x) that can be written as follows:
         #   h(x) = f(x) && g(x)
         #
         # IMPORTANT: Please, learn what is a conjunction before diving into implementation details.
@@ -37,7 +37,7 @@ module ConvenientService
           # NOTE: reduce tries to use first element as its initial value if not specified explicitly.
           # https://ruby-doc.org/core-2.6/Enumerable.html#method-i-reduce
           #
-          # NOTE: proc can be called by `[]'.
+          # NOTE: proc can be called by `[]`.
           # https://ruby-doc.org/core-2.7.1/Proc.html#method-i-5B-5D
           #
           procs.reduce(->(item) { true }) { |conjunction, proc| ->(item) { conjunction[item] && proc[item] } }

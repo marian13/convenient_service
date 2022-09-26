@@ -28,7 +28,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::AssertVali
       let(:content) { "2 */ 2" }
 
       it "returns error with message" do
-        expect(result).to be_error.with_message("`#{content}' contains invalid Ruby syntax")
+        expect(result).to be_error.with_message("`#{content}` contains invalid Ruby syntax")
       end
     end
 

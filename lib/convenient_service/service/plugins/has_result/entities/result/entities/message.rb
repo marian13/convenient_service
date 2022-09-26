@@ -33,7 +33,7 @@ module ConvenientService
                 end
 
                 ##
-                # TODO: Unify `inspect'. Specs for `inspect'.
+                # TODO: Unify `inspect`. Specs for `inspect`.
                 #
               end
             end

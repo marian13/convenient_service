@@ -51,7 +51,7 @@ RSpec.describe ConvenientService::Common::Plugins::CachesReturnValue::Middleware
 
         specify { expect { method_value }.to call_chain_next.on(method) }
 
-        it "writes `chain.next' to cache with key" do
+        it "writes `chain.next` to cache with key" do
           allow(service_instance.internals.cache).to receive(:write).with(key, service_result_value).and_call_original
 
           method_value

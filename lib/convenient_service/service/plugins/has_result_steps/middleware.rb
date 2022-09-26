@@ -26,7 +26,7 @@ module ConvenientService
 
           def last_step
             ##
-            # TODO: Use `entity.steps.find { |step| step.result.tap { |result| entity.step(result) }.not_success? }' for callbacks.
+            # TODO: Use `entity.steps.find { |step| step.result.tap { |result| entity.step(result) }.not_success? }` for callbacks.
             #
             @last_step ||= entity.steps.find(&:not_success?) || entity.steps.last
           end

@@ -13,7 +13,7 @@ module ConvenientService
                   include Support::Copyable
 
                   ##
-                  # TODO: A better name for `object'. Wrapped object, `target'?
+                  # TODO: A better name for `object`. Wrapped object, `target`?
                   #
                   attr_reader :object
 

@@ -11,7 +11,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::PrintShell
   include ConvenientService::RSpec::Matchers::HaveAttrAccessor
   include ConvenientService::RSpec::Matchers::IncludeModule
   ##
-  # NOTE: Waits for `should-matchers' full support.
+  # NOTE: Waits for `should-matchers` full support.
   #
   # include Shoulda::Matchers::ActiveModel
 
@@ -35,7 +35,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::PrintShell
   end
 
   ##
-  # NOTE: Waits for `should-matchers' full support.
+  # NOTE: Waits for `should-matchers` full support.
   #
   # example_group "validations" do
   #   subject { service }

@@ -29,28 +29,28 @@ module ConvenientService
           end
 
           ##
-          # NOTE: `@env' is set inside `call'.
+          # NOTE: `@env` is set inside `call`.
           #
           def entity
             @env[:entity]
           end
 
           ##
-          # NOTE: `@env' is set inside `call'.
+          # NOTE: `@env` is set inside `call`.
           #
           def method
             @env[:method]
           end
 
           ##
-          # NOTE: `@env' is set inside `call'.
+          # NOTE: `@env` is set inside `call`.
           #
           def chain
             @chain ||= Entities::Chain.new(stack: @stack)
           end
 
           ##
-          # TODO: Unify `inspect'. Specs for `inspect'.
+          # TODO: Unify `inspect`. Specs for `inspect`.
           #
           def inspect
             self.class.inspect

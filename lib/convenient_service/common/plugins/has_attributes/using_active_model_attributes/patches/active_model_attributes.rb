@@ -6,12 +6,12 @@ module ConvenientService
       module HasAttributes
         module UsingActiveModelAttributes
           ##
-          # TODO: Remove this patch when Rails updates `def initialize(*)' to  `def initialize(*args, **kwargs, &block)'.
+          # TODO: Remove this patch when Rails updates `def initialize(*)` to  `def initialize(*args, **kwargs, &block)`.
           # https://github.com/rails/rails/blob/3872bc0e54d32e8bf3a6299b0bfe173d94b072fc/activemodel/lib/active_model/attributes.rb#L78
           #
           module Patches
             ##
-            # Copy of `ActiveModel::Attributes'.
+            # Copy of `ActiveModel::Attributes`.
             # - https://api.rubyonrails.org/classes/ActiveModel/Attributes/ClassMethods.html
             #
             # - https://github.com/rails/rails/blob/v7.0.0/activemodel/lib/active_model/attributes.rb
@@ -23,7 +23,7 @@ module ConvenientService
               ::ActiveModel::Attributes.dup.tap do |mod|
                 mod.module_eval do
                   ##
-                  # NOTE: Overrides `initialize' since current Rails implementation can not accept kwargs.
+                  # NOTE: Overrides `initialize` since current Rails implementation can not accept kwargs.
                   #
                   # TODO: Open a PR to Rails.
                   #

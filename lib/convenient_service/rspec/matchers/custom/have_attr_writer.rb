@@ -26,15 +26,15 @@ module ConvenientService
           end
 
           def description
-            "have attr writer `#{attr_name}'"
+            "have attr writer `#{attr_name}`"
           end
 
           def failure_message
-            "expected `#{object.class}' to have attr writer `#{attr_name}'"
+            "expected `#{object.class}` to have attr writer `#{attr_name}`"
           end
 
           def failure_message_when_negated
-            "expected `#{object.class}' NOT to have attr writer `#{attr_name}'"
+            "expected `#{object.class}` NOT to have attr writer `#{attr_name}`"
           end
 
           private

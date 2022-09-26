@@ -33,7 +33,7 @@ module ConvenientService
             include RailsService::Config
 
             ##
-            # NOTE: `attribute' has no `hash' type.
+            # NOTE: `attribute` has no `hash` type.
             # https://github.com/rails/rails/blob/v7.0.4/activemodel/lib/active_model/type.rb#L42
             #
             # TODO: Implement custom types.

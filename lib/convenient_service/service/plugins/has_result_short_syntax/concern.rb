@@ -9,14 +9,14 @@ module ConvenientService
 
           class_methods do
             ##
-            # NOTE: Delegates to `result' instead of aliasing in order to have an ability
+            # NOTE: Delegates to `result` instead of aliasing in order to have an ability
             # to use the same RSpec stubs for short and usual syntax.
             #
             # For example:
             #
             #   allow(Service).to receive(:result).with(foo: :bar)and_call_original
             #
-            # works for both `Service.result(foo: :bar)' and `Service[foo: :bar]'.
+            # works for both `Service.result(foo: :bar)` and `Service[foo: :bar]`.
             #
             def [](**kwargs)
               result(**kwargs)

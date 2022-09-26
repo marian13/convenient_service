@@ -7,8 +7,8 @@ module ConvenientService
         class Middleware < Core::MethodChainMiddleware
           def next(*args, **kwargs, &block)
             ##
-            # A variable that stores return value of middleware `chain.next' aka `original_value'.
-            # It is reassigned later by the `initial_around_callback'.
+            # A variable that stores return value of middleware `chain.next` aka `original_value`.
+            # It is reassigned later by the `initial_around_callback`.
             #
             original_value = nil
 
@@ -26,43 +26,43 @@ module ConvenientService
             )
 
             ##
-            # Let's suppose that we have 3 `around' callbacks:
+            # Let's suppose that we have 3 `around` callbacks:
             #
             # class Service
             #   # first
             #   around do |chain|
-            #     # part before `chain.yield'
+            #     # part before `chain.yield`
             #     original_value = chain.yield
-            #     # part after `chain.yield'
+            #     # part after `chain.yield`
             #   end
             #
             #   # second
             #   around do |chain|
-            #     # part before `chain.yield'
+            #     # part before `chain.yield`
             #     original_value = chain.yield
-            #     # part after `chain.yield'
+            #     # part after `chain.yield`
             #   end
             #
             #   # third
             #   around do |chain|
-            #     # part before `chain.yield'
+            #     # part before `chain.yield`
             #     original_value = chain.yield
-            #     # part after `chain.yield'
+            #     # part after `chain.yield`
             #   end
             # end
             #
-            # NOTE: if a user forgets to call `chain.yield' - an error is raised.
+            # NOTE: if a user forgets to call `chain.yield` - an error is raised.
             #
-            # Then `composed' may be built with the following preudocode (that is why `reverse' is needed):
+            # Then `composed` may be built with the following preudocode (that is why `reverse` is needed):
             #
             #   composed = original
             #   composed = proc { instance_exec(composed, &third) }
             #   composed = proc { instance_exec(composed, &second) }
             #   composed = proc { instance_exec(composed, &first) }
             #
-            # Where `first', `second', `third' are taken from `entity.callbacks.for([:around, method])'.
+            # Where `first`, `second`, `third` are taken from `entity.callbacks.for([:around, method])`.
             #
-            # Original implementation is modified in order to return `original_value' from all `chain.yield` calls.
+            # Original implementation is modified in order to return `original_value` from all `chain.yield` calls.
             #
             #   # Original implementation:
             #   composed =
@@ -84,13 +84,13 @@ module ConvenientService
             # Call sequence:
             #
             #   composed.call
-            #   proc { instance_exec(composed, &first) }.call  # part before `chain.yield'
-            #   proc { instance_exec(composed, &second) }.call # part before `chain.yield'
-            #   proc { instance_exec(composed, &third) }.call  # part before `chain.yield'
+            #   proc { instance_exec(composed, &first) }.call  # part before `chain.yield`
+            #   proc { instance_exec(composed, &second) }.call # part before `chain.yield`
+            #   proc { instance_exec(composed, &third) }.call  # part before `chain.yield`
             #   initial_around_callback
-            #   proc { instance_exec(composed, &third) }.call  # part after `chain.yield'
-            #   proc { instance_exec(composed, &second) }.call # part after `chain.yield'
-            #   proc { instance_exec(composed, &first) }.call  # part after `chain.yield'
+            #   proc { instance_exec(composed, &third) }.call  # part after `chain.yield`
+            #   proc { instance_exec(composed, &second) }.call # part after `chain.yield`
+            #   proc { instance_exec(composed, &first) }.call  # part after `chain.yield`
             #
             composed.call
 

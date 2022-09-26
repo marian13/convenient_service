@@ -74,10 +74,10 @@ This library is under heavy development. Public API may be subject to change. Th
     end
 
     def result
-      return failure(data: {path: "Path is `nil'"}) if path.nil?
+      return failure(data: {path: "Path is `nil`"}) if path.nil?
       return failure(data: {path: "Path is empty"}) if path.empty?
 
-      return error(message: "File with path `#{path}' does NOT exist") unless ::File.exist?(path)
+      return error(message: "File with path `#{path}` does NOT exist") unless ::File.exist?(path)
 
       success
     end
@@ -101,10 +101,10 @@ This library is under heavy development. Public API may be subject to change. Th
     end
 
     def result
-      return failure(data: {path: "Path is `nil'"}) if path.nil?
+      return failure(data: {path: "Path is `nil`"}) if path.nil?
       return failure(data: {path: "Path is empty"}) if path.empty?
 
-      return error(message: "File with path `#{path}' is empty") if ::File.zero?(path)
+      return error(message: "File with path `#{path}` is empty") if ::File.zero?(path)
 
       success
     end
@@ -139,7 +139,7 @@ This library is under heavy development. Public API may be subject to change. Th
     private
 
     def validate_path
-      return failure(data: {path: "Path is `nil'"}) if path.nil?
+      return failure(data: {path: "Path is `nil`"}) if path.nil?
       return failure(data: {path: "Path is empty"}) if path.empty?
 
       success
@@ -170,7 +170,7 @@ This library is under heavy development. Public API may be subject to change. Th
   # frozen_string_literal: true
 
   ##
-  # NOTE: Minimal `active_model' version - `5.2.0'.
+  # NOTE: Minimal `active_model` version - `5.2.0`.
   #
   require "active_model"
 
@@ -189,12 +189,12 @@ This library is under heavy development. Public API may be subject to change. Th
       def self.included(service_class)
         service_class.class_exec do
           ##
-          # Replace to `include ConvenientService::Standard::UncommitedConfig' in Ruby 2.7.
+          # Replace to `include ConvenientService::Standard::UncommitedConfig` in Ruby 2.7.
           #
           include ConvenientService::Standard::Config
 
           ##
-          # NOTE: `AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment' plugin.
+          # NOTE: `AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment` plugin.
           #
           concerns do
             use ConvenientService::Plugins::Common::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment::Concern
@@ -205,14 +205,14 @@ This library is under heavy development. Public API may be subject to change. Th
           end
 
           ##
-          # NOTE: `HasAttributes::UsingActiveModelAttributes' plugin.
+          # NOTE: `HasAttributes::UsingActiveModelAttributes` plugin.
           #
           concerns do
             use ConvenientService::Plugins::Common::HasAttributes::UsingActiveModelAttributes::Concern
           end
 
           ##
-          # NOTE: `HasResultParamsValidations::UsingActiveModelValidations' plugin.
+          # NOTE: `HasResultParamsValidations::UsingActiveModelValidations` plugin.
           #
           concerns do
             use ConvenientService::Plugins::Service::HasResultParamsValidations::UsingActiveModelValidations::Concern
@@ -240,7 +240,7 @@ This library is under heavy development. Public API may be subject to change. Th
     validates :path, presence: true
 
     def result
-      return error(message: "File with path `#{path}' does NOT exist") unless ::File.exist?(path)
+      return error(message: "File with path `#{path}` does NOT exist") unless ::File.exist?(path)
 
       success
     end
@@ -262,7 +262,7 @@ This library is under heavy development. Public API may be subject to change. Th
     validates :path, presence: true
 
     def result
-      return error(message: "File with path `#{path}' is empty") if ::File.zero?(path)
+      return error(message: "File with path `#{path}` is empty") if ::File.zero?(path)
 
       success
     end
@@ -316,12 +316,12 @@ This library is under heavy development. Public API may be subject to change. Th
   # frozen_string_literal: true
 
   ##
-  # NOTE: Minimal `dry-initializer' version - `3.0.0'.
+  # NOTE: Minimal `dry-initializer` version - `3.0.0`.
   #
   require "dry-initializer"
 
   ##
-  # NOTE: Minimal `dry-validation' version - `1.5.0'.
+  # NOTE: Minimal `dry-validation` version - `1.5.0`.
   #
   require "dry-validation"
 
@@ -337,19 +337,19 @@ This library is under heavy development. Public API may be subject to change. Th
       def self.included(service_class)
         service_class.class_exec do
           ##
-          # Replace to `include ConvenientService::Standard::UncommitedConfig' in Ruby 2.7.
+          # Replace to `include ConvenientService::Standard::UncommitedConfig` in Ruby 2.7.
           #
           include ConvenientService::Standard::Config
 
           ##
-          # NOTE: `AssignsAttributesInConstructor::UsingDryInitializer' plugin.
+          # NOTE: `AssignsAttributesInConstructor::UsingDryInitializer` plugin.
           #
           concerns do
             use ConvenientService::Plugins::Common::AssignsAttributesInConstructor::UsingDryInitializer::Concern
           end
 
           ##
-          # NOTE: `HasResultParamsValidations::UsingDryValidation' plugin.
+          # NOTE: `HasResultParamsValidations::UsingDryValidation` plugin.
           #
           concerns do
             use ConvenientService::Plugins::Service::HasResultParamsValidations::UsingDryValidation::Concern
@@ -381,7 +381,7 @@ This library is under heavy development. Public API may be subject to change. Th
     end
 
     def result
-      return error(message: "File with path `#{path}' does NOT exist") unless ::File.exist?(path)
+      return error(message: "File with path `#{path}` does NOT exist") unless ::File.exist?(path)
 
       success
     end
@@ -407,7 +407,7 @@ This library is under heavy development. Public API may be subject to change. Th
     end
 
     def result
-      return error(message: "File with path `#{path}' is empty") if ::File.zero?(path)
+      return error(message: "File with path `#{path}` is empty") if ::File.zero?(path)
 
       success
     end

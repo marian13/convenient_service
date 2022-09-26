@@ -21,6 +21,6 @@ end
 require_relative "support/convenient_service"
 
 ##
-# NOTE: Waits for `should-matchers' full support.
+# NOTE: Waits for `should-matchers` full support.
 #
 # require_relative "support/shoulda_matchers"

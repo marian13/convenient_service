@@ -31,7 +31,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
     let(:key) { :foo }
 
     describe "#result" do
-      it "delegates to `data[key]'" do
+      it "delegates to `data[key]`" do
         allow(data_instance).to receive(:[]).with(key).and_call_original
 
         result_instance[key]
@@ -39,7 +39,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
         expect(data_instance).to have_received(:[])
       end
 
-      it "returns return value of `data[key]'" do
+      it "returns return value of `data[key]`" do
         expect(result_instance[key]).to eq(data_instance[key])
       end
     end
