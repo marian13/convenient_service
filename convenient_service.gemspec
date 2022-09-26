@@ -32,6 +32,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "appraisal"
   spec.add_development_dependency "awesome_print"
   spec.add_development_dependency "byebug", "~> 10.0"
+  spec.add_development_dependency "commonmarker"
   spec.add_development_dependency "inch"
   spec.add_development_dependency "paint"
   spec.add_development_dependency "progressbar"
@@ -42,8 +43,8 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rubocop-rspec"
   spec.add_development_dependency "tty-prompt"
   spec.add_development_dependency "standard"
-  spec.add_development_dependency "sdoc"
   spec.add_development_dependency "shoulda-matchers"
   spec.add_development_dependency "simplecov"
   spec.add_development_dependency "simplecov-lcov"
+  spec.add_development_dependency "yard"
 end

@@ -1,4 +1,5 @@
 <!-- header:start -->
+<!-- TODO: Remove html to display in YARD with commonmark -->
 <h1 align="center">
   Convenient Service
 </h1>
@@ -12,6 +13,7 @@
 <!-- badges:end -->
 
 <!-- logo:start -->
+<!-- TODO: Remove html to display in YARD with commonmark -->
 <p align="center">
   <img src="https://raw.githubusercontent.com/marian13/convenient_service/main/logo.png" width="300">
 </p>
@@ -24,7 +26,7 @@ Yet another approach to revisit the service object pattern, but this time focusi
 <!-- general_description:end -->
 
 <!-- warning:start -->
-### WARNING ❗❗❗
+## WARNING ❗❗❗
 
 This library is under heavy development. Public API may be subject to change. The first major release is still to come. Use the current version at your own risk. Thanks.
 <!-- warning:end -->
