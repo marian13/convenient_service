@@ -5,7 +5,6 @@ require_relative "core/class_methods"
 
 require_relative "core/commands"
 require_relative "core/entities"
-require_relative "core/errors"
 
 require_relative "core/aliases"
 

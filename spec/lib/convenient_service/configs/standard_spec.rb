@@ -88,7 +88,7 @@ RSpec.describe ConvenientService::Configs::Standard do
         end
 
         it "sets service concerns" do
-          expect(service_class.concerns.to_a.map(&:first).map(&:concern)).to eq(concerns)
+          expect(service_class.concerns.to_a).to eq(concerns)
         end
 
         it "sets service middlewares for `initialize`" do
@@ -123,7 +123,7 @@ RSpec.describe ConvenientService::Configs::Standard do
           end
 
           it "sets service internals concerns" do
-            expect(service_class::Internals.concerns.to_a.map(&:first).map(&:concern)).to eq(concerns)
+            expect(service_class::Internals.concerns.to_a).to eq(concerns)
           end
         end
 
@@ -200,7 +200,7 @@ RSpec.describe ConvenientService::Configs::Standard do
           end
 
           it "sets service result concerns" do
-            expect(service_class::Result.concerns.to_a.map(&:first).map(&:concern)).to eq(concerns)
+            expect(service_class::Result.concerns.to_a).to eq(concerns)
           end
 
           it "sets service result middlewares for `success?`" do
@@ -247,7 +247,7 @@ RSpec.describe ConvenientService::Configs::Standard do
             end
 
             it "sets service result internals concerns" do
-              expect(service_class::Internals.concerns.to_a.map(&:first).map(&:concern)).to eq(concerns)
+              expect(service_class::Internals.concerns.to_a).to eq(concerns)
             end
           end
         end
@@ -272,7 +272,7 @@ RSpec.describe ConvenientService::Configs::Standard do
             end
 
             it "sets service internals concerns" do
-              expect(service_class::Step::Internals.concerns.to_a.map(&:first).map(&:concern)).to eq(concerns)
+              expect(service_class::Step::Internals.concerns.to_a).to eq(concerns)
             end
           end
         end

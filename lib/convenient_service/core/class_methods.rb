@@ -4,19 +4,24 @@ module ConvenientService
   module Core
     module ClassMethods
       ##
-      # Usage example:
-      #
-      #   # Getters:
+      # @example Getter.
       #   concerns
       #
-      #   # Setters:
-      #   concerns(&block)
+      # @example Setter.
+      #   concerns(&configuration_block)
       #
-      def concerns(&block)
-        (@concerns ||= Entities::Concerns::MiddlewareStack.new(entity: self))
-          .tap { |stack| return stack unless block }
-          .tap { |stack| Commands::AssertConcernMiddlewareStackNotCommitted.call(stack: stack) }
-          .tap { |stack| Commands::ConfigureMiddlewareStack.call(stack: stack, block: block) }
+      # @return [ConvenientService::Core::Entities::Concerns] concerns for self.
+      #
+      def concerns(&configuration_block)
+        @concerns ||= Entities::Concerns.new(entity: self)
+
+        return @concerns unless configuration_block
+
+        @concerns.assert_not_included!
+
+        @concerns.configure(&configuration_block)
+
+        @concerns
       end
 
       ##
@@ -46,14 +51,14 @@ module ConvenientService
           .tap { |stacks| return stacks unless kwargs[:method] }
           .fetch(kwargs[:method]) { @middlewares[kwargs[:scope]][kwargs[:method]] = Entities::Middlewares::MiddlewareStack.new(**kwargs) }
           .tap { |stack| return stack unless block }
-          .tap { |stack| Commands::ConfigureMiddlewareStack.call(stack: stack, block: block) }
+          .tap { |stack| stack.instance_exec(&block) } # TODO: configure(&block)
           .tap { |stack| Commands::EnableMethodMiddlewareStack.call(stack: stack) }
       end
 
       def commit_config!
-        concerns.tap { |stack| Commands::EnableConcernMiddlewareStack.call(stack: stack) }
+        concerns.include!
 
-        ConvenientService.logger.debug { "[Core] Enabled concern middleware stack for `#{self}` | Triggered by `.commit_config!`" }
+        ConvenientService.logger.debug { "[Core] Included concerns into `#{self}` | Triggered by `.commit_config!`" }
 
         middlewares(scope: :instance).values.each { |stack| Commands::EnableMethodMiddlewareStack.call(stack: stack) }
         middlewares(scope: :class).values.each { |stack| Commands::EnableMethodMiddlewareStack.call(stack: stack) }
@@ -62,15 +67,15 @@ module ConvenientService
       private
 
       def method_missing(method, *args, **kwargs, &block)
-        just_enabled = Commands::EnableConcernMiddlewareStack.call(stack: concerns)
+        concerns.include!
 
         ##
-        # NOTE: If concerns are just enabled (are just included into the mixing class) then retries the missing method,
+        # NOTE: If concerns are just included into the mixing class then retries the missing method,
         # otherwise raises `NoMethodError` (since method is still missing even after including concerns).
         #
-        return super unless just_enabled
+        return super unless concerns.just_included?
 
-        ConvenientService.logger.debug { "[Core] Enabled concern middleware stack for `#{self}` | Triggered by `method_missing` | Method: `.#{method}` " }
+        ConvenientService.logger.debug { "[Core] Included concerns into `#{self}` | Triggered by `method_missing` | Method: `.#{method}` " }
 
         __send__(method, *args, **kwargs, &block)
       end

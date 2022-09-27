@@ -24,7 +24,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultMethodSteps::Servic
       specify { expect(service_class).to include_module(ConvenientService::Core) }
 
       it "adds concerns" do
-        expect(service_class.concerns.to_a.map(&:first).map(&:concern).last(1)).to eq([
+        expect(service_class.concerns.to_a.last(1)).to eq([
           ConvenientService::Service::Plugins::HasResult::Concern
         ])
       end
