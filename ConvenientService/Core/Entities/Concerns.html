@@ -4,7 +4,7 @@
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>
-  Module: ConvenientService::Core::Entities::Concerns
+  Class: ConvenientService::Core::Entities::Concerns
   
     &mdash; Documentation by YARD 0.9.28
   
@@ -59,12 +59,28 @@
         <div class="clear"></div>
       </div>
 
-      <div id="content"><h1>Module: ConvenientService::Core::Entities::Concerns
+      <div id="content"><h1>Class: ConvenientService::Core::Entities::Concerns
   
   
   
 </h1>
 <div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">ConvenientService::Core::Entities::Concerns</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
   
 
   
@@ -78,8 +94,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/convenient_service/core/entities/concerns/middleware_stack.rb<span class="defines">,<br />
-  lib/convenient_service/core/entities/concerns/concern_middleware.rb</span>
+    <dd>lib/convenient_service/core/entities/concerns.rb<span class="defines">,<br />
+  lib/convenient_service/core/entities/concerns/errors.rb,<br /> lib/convenient_service/core/entities/concerns/entities/stack.rb,<br /> lib/convenient_service/core/entities/concerns/entities/middleware.rb</span>
 </dd>
   </dl>
   
@@ -89,9 +105,9 @@
 <p class="children">
   
     
-  
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Concerns/Entities.html" title="ConvenientService::Core::Entities::Concerns::Entities (module)">Entities</a></span>, <span class='object_link'><a href="Concerns/Errors.html" title="ConvenientService::Core::Entities::Concerns::Errors (module)">Errors</a></span>
     
-      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Concerns/ConcernMiddleware.html" title="ConvenientService::Core::Entities::Concerns::ConcernMiddleware (class)">ConcernMiddleware</a></span>, <span class='object_link'><a href="Concerns/MiddlewareStack.html" title="ConvenientService::Core::Entities::Concerns::MiddlewareStack (class)">MiddlewareStack</a></span>
+  
     
   
 </p>
@@ -102,12 +118,629 @@
 
 
 
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
 
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#already_included%3F-instance_method" title="#already_included? (instance method)">#<strong>already_included?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Checks whether concerns are already included into entity (include! was called multiple times).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#assert_not_included!-instance_method" title="#assert_not_included! (instance method)">#<strong>assert_not_included!</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#configure-instance_method" title="#configure (instance method)">#<strong>configure</strong>(&amp;configuration_block)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#include!-instance_method" title="#include! (instance method)">#<strong>include!</strong>  &#x21d2; Boolen </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Includes concerns into entity when called for the first time.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#included%3F-instance_method" title="#included? (instance method)">#<strong>included?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Checks whether concerns are included into entity (include! was called at least once).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(entity:)  &#x21d2; Concerns </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A new instance of Concerns.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#just_included%3F-instance_method" title="#just_included? (instance method)">#<strong>just_included?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Checks whether concerns are just included into entity (include! was called only once).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_a-instance_method" title="#to_a (instance method)">#<strong>to_a</strong>  &#x21d2; Array&lt;Module&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Concerns as plain modules.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>(entity:)  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::Core::Entities::Concerns (class)">Concerns</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a new instance of Concerns.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+13
+14
+15
+16
+17</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns.rb', line 13</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>entity:</span><span class='rparen'>)</span>
+  <span class='ivar'>@stack</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Concerns/Entities.html" title="ConvenientService::Core::Entities::Concerns::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Concerns/Entities/Stack.html" title="ConvenientService::Core::Entities::Concerns::Entities::Stack (class)">Stack</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Concerns/Entities/Stack.html#initialize-instance_method" title="ConvenientService::Core::Entities::Concerns::Entities::Stack#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>entity:</span> <span class='id identifier rubyid_entity'>entity</span><span class='rparen'>)</span>
+
+  <span class='id identifier rubyid_initialize_include_state!'>initialize_include_state!</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="already_included?-instance_method">
+  
+    #<strong>already_included?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Checks whether concerns are already included into entity (include! was called multiple times).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+54
+55
+56</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns.rb', line 54</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_already_included?'>already_included?</span>
+  <span class='id identifier rubyid_include_state'>include_state</span> <span class='op'>==</span> <span class='symbol'>:already_included</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="assert_not_included!-instance_method">
+  
+    #<strong>assert_not_included!</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Concerns/Errors/ConcernsAreIncluded.html" title="ConvenientService::Core::Entities::Concerns::Errors::ConcernsAreIncluded (class)">Errors::ConcernsAreIncluded</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+22
+23
+24
+25
+26</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns.rb', line 22</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_assert_not_included!'>assert_not_included!</span>
+  <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_included?'>included?</span>
+
+  <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="Concerns/Errors.html" title="ConvenientService::Core::Entities::Concerns::Errors (module)">Errors</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Concerns/Errors/ConcernsAreIncluded.html" title="ConvenientService::Core::Entities::Concerns::Errors::ConcernsAreIncluded (class)">ConcernsAreIncluded</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Concerns/Errors/ConcernsAreIncluded.html#initialize-instance_method" title="ConvenientService::Core::Entities::Concerns::Errors::ConcernsAreIncluded#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>concerns:</span> <span class='id identifier rubyid_concerns'>concerns</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="configure-instance_method">
+  
+    #<strong>configure</strong>(&amp;configuration_block)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+31
+32
+33</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns.rb', line 31</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_configure'>configure</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_configuration_block'>configuration_block</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_stack'>stack</span><span class='period'>.</span><span class='id identifier rubyid_instance_exec'>instance_exec</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_configuration_block'>configuration_block</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="include!-instance_method">
+  
+    #<strong>include!</strong>  &#x21d2; <tt>Boolen</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Includes concerns into entity when called for the first time.
+Does nothing for the subsequent calls.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolen</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if called for the first time, false otherwise.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+41
+42
+43
+44
+45
+46
+47</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns.rb', line 41</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_include!'>include!</span>
+  <span class='id identifier rubyid_stack'>stack</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='label'>entity:</span> <span class='id identifier rubyid_stack'>stack</span><span class='period'>.</span><span class='id identifier rubyid_entity'>entity</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_included?'>included?</span>
+
+  <span class='id identifier rubyid_transit_to_next_include_state!'>transit_to_next_include_state!</span>
+
+  <span class='id identifier rubyid_just_included?'>just_included?</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="included?-instance_method">
+  
+    #<strong>included?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Checks whether concerns are included into entity (include! was called at least once).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+72
+73
+74</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns.rb', line 72</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_included?'>included?</span>
+  <span class='id identifier rubyid_already_included?'>already_included?</span> <span class='op'>||</span> <span class='id identifier rubyid_just_included?'>just_included?</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="just_included?-instance_method">
+  
+    #<strong>just_included?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Checks whether concerns are just included into entity (include! was called only once).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+63
+64
+65</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns.rb', line 63</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_just_included?'>just_included?</span>
+  <span class='id identifier rubyid_include_state'>include_state</span> <span class='op'>==</span> <span class='symbol'>:just_included</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="to_a-instance_method">
+  
+    #<strong>to_a</strong>  &#x21d2; <tt>Array&lt;Module&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns concerns as plain modules.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;Module&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>concerns as plain modules.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+79
+80
+81</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns.rb', line 79</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_to_a'>to_a</span>
+  <span class='id identifier rubyid_stack'>stack</span><span class='period'>.</span><span class='id identifier rubyid_to_a'>to_a</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:first</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:concern</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
 
 </div>
 
       <div id="footer">
-  Generated on Mon Sep 26 20:25:41 2022 by
+  Generated on Tue Sep 27 21:01:21 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>
