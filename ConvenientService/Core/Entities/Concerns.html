@@ -129,29 +129,6 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#already_included%3F-instance_method" title="#already_included? (instance method)">#<strong>already_included?</strong>  &#x21d2; Boolean </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'><p>Checks whether concerns are already included into entity (include! was called multiple times).</p>
-</div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
       <a href="#assert_not_included!-instance_method" title="#assert_not_included! (instance method)">#<strong>assert_not_included!</strong>  &#x21d2; Object </a>
     
 
@@ -242,6 +219,52 @@
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#included_multiple_times%3F-instance_method" title="#included_multiple_times? (instance method)">#<strong>included_multiple_times?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Checks whether concerns are included multiple times into entity (include! was called multiple times).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#included_once%3F-instance_method" title="#included_once? (instance method)">#<strong>included_once?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Checks whether concerns are included once into entity (include! was called only once).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(entity:)  &#x21d2; Concerns </a>
     
 
@@ -259,29 +282,6 @@
 
   
     <span class="summary_desc"><div class='inline'><p>A new instance of Concerns.</p>
-</div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#just_included%3F-instance_method" title="#just_included? (instance method)">#<strong>just_included?</strong>  &#x21d2; Boolean </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'><p>Checks whether concerns are just included into entity (include! was called only once).</p>
 </div></span>
   
 </li>
@@ -368,60 +368,7 @@
 
     
       <div class="method_details first">
-  <h3 class="signature first" id="already_included?-instance_method">
-  
-    #<strong>already_included?</strong>  &#x21d2; <tt>Boolean</tt> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    <p>Checks whether concerns are already included into entity (include! was called multiple times).</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>Boolean</tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-54
-55
-56</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns.rb', line 54</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_already_included?'>already_included?</span>
-  <span class='id identifier rubyid_include_state'>include_state</span> <span class='op'>==</span> <span class='symbol'>:already_included</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="assert_not_included!-instance_method">
+  <h3 class="signature first" id="assert_not_included!-instance_method">
   
     #<strong>assert_not_included!</strong>  &#x21d2; <tt>Object</tt> 
   
@@ -565,7 +512,7 @@ Does nothing for the subsequent calls.</p>
 
   <span class='id identifier rubyid_transit_to_next_include_state!'>transit_to_next_include_state!</span>
 
-  <span class='id identifier rubyid_just_included?'>just_included?</span>
+  <span class='id identifier rubyid_included_once?'>included_once?</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -618,7 +565,7 @@ Does nothing for the subsequent calls.</p>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns.rb', line 72</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_included?'>included?</span>
-  <span class='id identifier rubyid_already_included?'>already_included?</span> <span class='op'>||</span> <span class='id identifier rubyid_just_included?'>just_included?</span>
+  <span class='id identifier rubyid_included_multiple_times?'>included_multiple_times?</span> <span class='op'>||</span> <span class='id identifier rubyid_included_once?'>included_once?</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -626,9 +573,9 @@ Does nothing for the subsequent calls.</p>
 </div>
     
       <div class="method_details ">
-  <h3 class="signature " id="just_included?-instance_method">
+  <h3 class="signature " id="included_multiple_times?-instance_method">
   
-    #<strong>just_included?</strong>  &#x21d2; <tt>Boolean</tt> 
+    #<strong>included_multiple_times?</strong>  &#x21d2; <tt>Boolean</tt> 
   
 
   
@@ -636,7 +583,60 @@ Does nothing for the subsequent calls.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks whether concerns are just included into entity (include! was called only once).</p>
+    <p>Checks whether concerns are included multiple times into entity (include! was called multiple times).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+54
+55
+56</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns.rb', line 54</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_included_multiple_times?'>included_multiple_times?</span>
+  <span class='id identifier rubyid_include_state'>include_state</span> <span class='op'>==</span> <span class='symbol'>:included_multiple_times</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="included_once?-instance_method">
+  
+    #<strong>included_once?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Checks whether concerns are included once into entity (include! was called only once).</p>
 
 
   </div>
@@ -670,8 +670,8 @@ Does nothing for the subsequent calls.</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns.rb', line 63</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_just_included?'>just_included?</span>
-  <span class='id identifier rubyid_include_state'>include_state</span> <span class='op'>==</span> <span class='symbol'>:just_included</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_included_once?'>included_once?</span>
+  <span class='id identifier rubyid_include_state'>include_state</span> <span class='op'>==</span> <span class='symbol'>:included_once</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -740,7 +740,7 @@ Does nothing for the subsequent calls.</p>
 </div>
 
       <div id="footer">
-  Generated on Tue Sep 27 21:01:21 2022 by
+  Generated on Wed Sep 28 18:48:59 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>
