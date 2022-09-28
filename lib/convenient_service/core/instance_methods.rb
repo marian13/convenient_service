@@ -22,7 +22,7 @@ module ConvenientService
         #
         # TODO: Logger spec.
         #
-        return super unless concerns.just_included?
+        return super unless concerns.included_once?
 
         ConvenientService.logger.debug { "[Core] Included concerns into `#{self.class}` | Triggered by `method_missing` | Method: `##{method}` " }
 

@@ -43,25 +43,25 @@ module ConvenientService
 
           transit_to_next_include_state!
 
-          just_included?
+          included_once?
         end
 
         ##
-        # Checks whether concerns are already included into entity (include! was called multiple times).
+        # Checks whether concerns are included multiple times into entity (include! was called multiple times).
         #
         # @return [Boolean]
         #
-        def already_included?
-          include_state == :already_included
+        def included_multiple_times?
+          include_state == :included_multiple_times
         end
 
         ##
-        # Checks whether concerns are just included into entity (include! was called only once).
+        # Checks whether concerns are included once into entity (include! was called only once).
         #
         # @return [Boolean]
         #
-        def just_included?
-          include_state == :just_included
+        def included_once?
+          include_state == :included_once
         end
 
         ##
@@ -70,7 +70,7 @@ module ConvenientService
         # @return [Boolean]
         #
         def included?
-          already_included? || just_included?
+          included_multiple_times? || included_once?
         end
 
         ##
@@ -93,9 +93,9 @@ module ConvenientService
 
           next_state =
             case current_state
-            when :not_included then :just_included
-            when :just_included then :already_included
-            when :already_included then :already_included
+            when :not_included then :included_once
+            when :included_once then :included_multiple_times
+            when :included_multiple_times then :included_multiple_times
             end
 
           @include_state = next_state

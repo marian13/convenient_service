@@ -73,7 +73,7 @@ module ConvenientService
         # NOTE: If concerns are just included into the mixing class then retries the missing method,
         # otherwise raises `NoMethodError` (since method is still missing even after including concerns).
         #
-        return super unless concerns.just_included?
+        return super unless concerns.included_once?
 
         ConvenientService.logger.debug { "[Core] Included concerns into `#{self}` | Triggered by `method_missing` | Method: `.#{method}` " }
 
