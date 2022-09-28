@@ -95,7 +95,7 @@
   <dl>
     <dt>Defined in:</dt>
     <dd>lib/convenient_service/core/entities/method_middlewares.rb<span class="defines">,<br />
-  lib/convenient_service/core/entities/method_middlewares/entities/chain.rb,<br /> lib/convenient_service/core/entities/method_middlewares/entities/stack.rb,<br /> lib/convenient_service/core/entities/method_middlewares/entities/middleware.rb,<br /> lib/convenient_service/core/entities/method_middlewares/commands/define_runner.rb,<br /> lib/convenient_service/core/entities/method_middlewares/commands/prepend_module.rb,<br /> lib/convenient_service/core/entities/method_middlewares/commands/resolve_prepend_module.rb</span>
+  lib/convenient_service/core/entities/method_middlewares/entities/chain.rb,<br /> lib/convenient_service/core/entities/method_middlewares/entities/stack.rb,<br /> lib/convenient_service/core/entities/method_middlewares/entities/middleware.rb,<br /> lib/convenient_service/core/entities/method_middlewares/commands/define_caller.rb,<br /> lib/convenient_service/core/entities/method_middlewares/commands/prepend_module.rb,<br /> lib/convenient_service/core/entities/method_middlewares/commands/resolve_prepend_module.rb</span>
 </dd>
   </dl>
   
@@ -346,7 +346,7 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares.rb', line 24</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_define!'>define!</span>
-  <span class='const'><span class='object_link'><a href="MethodMiddlewares/Commands.html" title="ConvenientService::Core::Entities::MethodMiddlewares::Commands (module)">Commands</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="MethodMiddlewares/Commands/DefineRunner.html" title="ConvenientService::Core::Entities::MethodMiddlewares::Commands::DefineRunner (class)">DefineRunner</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="MethodMiddlewares/Commands/DefineRunner.html#call-instance_method" title="ConvenientService::Core::Entities::MethodMiddlewares::Commands::DefineRunner#call (method)">call</a></span></span><span class='lparen'>(</span><span class='label'>stack:</span> <span class='id identifier rubyid_stack'>stack</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="MethodMiddlewares/Commands.html" title="ConvenientService::Core::Entities::MethodMiddlewares::Commands (module)">Commands</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="MethodMiddlewares/Commands/DefineCaller.html" title="ConvenientService::Core::Entities::MethodMiddlewares::Commands::DefineCaller (class)">DefineCaller</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="MethodMiddlewares/Commands/DefineCaller.html#call-instance_method" title="ConvenientService::Core::Entities::MethodMiddlewares::Commands::DefineCaller#call (method)">call</a></span></span><span class='lparen'>(</span><span class='label'>stack:</span> <span class='id identifier rubyid_stack'>stack</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -428,7 +428,7 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Sep 28 21:21:28 2022 by
+  Generated on Wed Sep 28 21:26:29 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>
