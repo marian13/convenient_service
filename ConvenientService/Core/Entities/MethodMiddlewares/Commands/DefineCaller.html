@@ -390,7 +390,7 @@
 </span><span class='tstring_content'>
 </span><span class='tstring_content'>      original = proc { |env| super(*env[:args], **env[:kwargs], &amp;env[:block]) }
 </span><span class='tstring_content'>
-</span><span class='tstring_content'>      middlewares(for: method, scope: scope).run(env, original)
+</span><span class='tstring_content'>      middlewares(for: method, scope: scope).call(env, original)
 </span><span class='tstring_content'>    end
 </span><span class='heredoc_end'>  RUBY
 </span>
@@ -406,7 +406,7 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Sep 28 21:26:31 2022 by
+  Generated on Wed Sep 28 21:27:17 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>
