@@ -28,6 +28,9 @@ module ConvenientService
       # Usage example:
       #
       #   # Getters:
+      #   middlewares
+      #   middlewares(scope: :instance)
+      #   middlewares(scope: :class)
       #   middlewares(for: :result)
       #   middlewares(for: :result, scope: :instance)
       #   middlewares(for: :result, scope: :class)
@@ -37,22 +40,34 @@ module ConvenientService
       #   middlewares(for: :result, scope: :instance, &block)
       #   middlewares(for: :result, scope: :class, &block)
       #
-      def middlewares(**kwargs, &block)
-        ##
-        # TODO: Consider `Utils::Hash.rename_key(old_key, new_key, hash)`?
-        # https://stackoverflow.com/a/19298437/12201472
-        #
-        kwargs[:method] = kwargs.delete(:for)
-        kwargs[:scope] ||= :instance
-        kwargs[:container] = self
+      def middlewares(**kwargs, &configuration_block)
+        scope = kwargs[:scope] || :instance
+        method = kwargs[:for] || (raise ::ArgumentError if configuration_block)
+        container = self
 
-        (@middlewares ||= {})
-          .fetch(kwargs[:scope]) { @middlewares[kwargs[:scope]] = {} }
-          .tap { |stacks| return stacks unless kwargs[:method] }
-          .fetch(kwargs[:method]) { @middlewares[kwargs[:scope]][kwargs[:method]] = Entities::Middlewares::MiddlewareStack.new(**kwargs) }
-          .tap { |stack| return stack unless block }
-          .tap { |stack| stack.instance_exec(&block) } # TODO: configure(&block)
-          .tap { |stack| Commands::EnableMethodMiddlewareStack.call(stack: stack) }
+        @middlewares ||= {}
+
+        @middlewares[scope] ||= {}
+
+        ##
+        # NOTE: Setter.
+        #
+        if configuration_block
+          @middlewares[scope][method] ||= Entities::MethodMiddlewares.new(scope: scope, method: method, container: container)
+
+          @middlewares[scope][method].configure(&configuration_block)
+
+          @middlewares[scope][method].define!
+
+          return @middlewares[scope][method]
+        end
+
+        ##
+        # NOTE: Getter
+        #
+        return @middlewares[scope] unless method
+
+        @middlewares[scope][method]
       end
 
       def commit_config!
@@ -60,8 +75,8 @@ module ConvenientService
 
         ConvenientService.logger.debug { "[Core] Included concerns into `#{self}` | Triggered by `.commit_config!`" }
 
-        middlewares(scope: :instance).values.each { |stack| Commands::EnableMethodMiddlewareStack.call(stack: stack) }
-        middlewares(scope: :class).values.each { |stack| Commands::EnableMethodMiddlewareStack.call(stack: stack) }
+        middlewares(scope: :instance).values.each(&:define!)
+        middlewares(scope: :class).values.each(&:define!)
       end
 
       private

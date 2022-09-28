@@ -8,6 +8,6 @@ require "convenient_service"
 RSpec.describe "convenient_service/core/aliases" do
   specify { expect(ConvenientService::Core::ClassicMiddleware).to eq(ConvenientService::Core::Entities::ClassicMiddleware) }
   specify { expect(ConvenientService::Core::ConcernMiddleware).to eq(ConvenientService::Core::Entities::Concerns::Entities::Middleware) }
-  specify { expect(ConvenientService::Core::MethodChainMiddleware).to eq(ConvenientService::Core::Entities::Middlewares::MethodChainMiddleware) }
+  specify { expect(ConvenientService::Core::MethodChainMiddleware).to eq(ConvenientService::Core::Entities::MethodMiddlewares::Entities::Middleware) }
 end
 # rubocop:enable RSpec/DescribeClass
