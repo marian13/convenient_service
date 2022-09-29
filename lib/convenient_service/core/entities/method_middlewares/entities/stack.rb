@@ -9,16 +9,13 @@ module ConvenientService
           #
           #
           class Stack
-            attr_reader :container, :scope, :method, :name, :stack
+            attr_reader :name, :stack
 
             ##
             #
             #
             def initialize(**kwargs)
-              @method = kwargs.fetch(:method)
-              @scope = kwargs.fetch(:scope)
-              @container = kwargs.fetch(:container)
-              @name = kwargs.fetch(:name) { "Middlewares::#{@container}::#{@scope.capitalize}::#{@method.capitalize}" }
+              @name = kwargs[:name]
               @stack = kwargs.fetch(:stack) { Support::Middleware::StackBuilder.new(name: @name) }
             end
 
@@ -26,20 +23,14 @@ module ConvenientService
             #
             #
             def dup
-              self.class.new(
-                method: method,
-                scope: scope,
-                container: container,
-                name: name.dup,
-                stack: stack.dup
-              )
+              self.class.new(name: name.dup, stack: stack.dup)
             end
 
             ##
             #
             #
-            def call(env = {})
-              stack.call(env.merge(method: method))
+            def call(env)
+              stack.call(env)
             end
 
             ##
@@ -112,7 +103,6 @@ module ConvenientService
             def empty?
               to_a.empty?
             end
-            # rubocop:enable Rails/Delegate
 
             ##
             # NOTE: This method is a subject to change.
@@ -120,7 +110,6 @@ module ConvenientService
             def to_a
               stack.to_a
             end
-            # rubocop:enable Rails/Delegate
 
             ##
             # TODO: Unify `inspect`. Specs for `inspect`.
