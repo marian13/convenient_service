@@ -120,7 +120,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Example:   person = Person.new('John', 'Doe', age: 42, gender: :male) do |p|     puts p   end.</p>
+    <span class="summary_desc"><div class='inline'><p>NOTE: Inline logic instead of private methods is used intentionally in order to NOT pollute the public interface.</p>
 </div></span>
   
 </li>
@@ -146,16 +146,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Example:
-person = Person.new('John', 'Doe', age: 42, gender: :male) do |p|
-puts p
-end</p>
-<p>copy = person.copy
-copy = person.copy(overrides: ['Jane'])
-copy = person.copy(overrides: {0 =&gt; 'Jane'})
-copy = person.copy(overrides: {age: 18})
-copy = person.copy(overrides: proc { |p| print p })</p>
-<p>NOTE: Inline logic instead of private methods is used intentionally in order to NOT pollute the public interface.
+    <p>NOTE: Inline logic instead of private methods is used intentionally in order to NOT pollute the public interface.
 NOTE: This method is NOT likely to be ever changed, that is why inline logic is preferred over command classes in this particular case.</p>
 
 
@@ -163,6 +154,22 @@ NOTE: This method is NOT likely to be ever changed, that is why inline logic is 
 </div>
 <div class="tags">
   
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_person'>person</span> <span class='op'>=</span> <span class='const'>Person</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>John</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Doe</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='label'>age:</span> <span class='int'>42</span><span class='comma'>,</span> <span class='label'>gender:</span> <span class='symbol'>:male</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_p'>p</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_p'>p</span>
+<span class='kw'>end</span>
+
+<span class='id identifier rubyid_copy'>copy</span> <span class='op'>=</span> <span class='id identifier rubyid_person'>person</span><span class='period'>.</span><span class='id identifier rubyid_copy'>copy</span>
+<span class='id identifier rubyid_copy'>copy</span> <span class='op'>=</span> <span class='id identifier rubyid_person'>person</span><span class='period'>.</span><span class='id identifier rubyid_copy'>copy</span><span class='lparen'>(</span><span class='label'>overrides:</span> <span class='lbrace'>{</span><span class='label'>args:</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Jane</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_copy'>copy</span> <span class='op'>=</span> <span class='id identifier rubyid_person'>person</span><span class='period'>.</span><span class='id identifier rubyid_copy'>copy</span><span class='lparen'>(</span><span class='label'>overrides:</span> <span class='lbrace'>{</span><span class='label'>args:</span> <span class='lbrace'>{</span><span class='int'>0</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Jane</span><span class='tstring_end'>&#39;</span></span><span class='rbrace'>}</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_copy'>copy</span> <span class='op'>=</span> <span class='id identifier rubyid_person'>person</span><span class='period'>.</span><span class='id identifier rubyid_copy'>copy</span><span class='lparen'>(</span><span class='label'>overrides:</span> <span class='lbrace'>{</span><span class='label'>kwargs:</span> <span class='lbrace'>{</span><span class='label'>age:</span> <span class='int'>18</span><span class='rbrace'>}</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_copy'>copy</span> <span class='op'>=</span> <span class='id identifier rubyid_person'>person</span><span class='period'>.</span><span class='id identifier rubyid_copy'>copy</span><span class='lparen'>(</span><span class='label'>overrides:</span> <span class='lbrace'>{</span><span class='label'>block:</span> <span class='id identifier rubyid_proc'>proc</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_p'>p</span><span class='op'>|</span> <span class='id identifier rubyid_print'>print</span> <span class='id identifier rubyid_p'>p</span> <span class='rbrace'>}</span><span class='rbrace'>}</span><span class='rparen'>)</span></code></pre>
+    
+  </div>
+
 
 </div><table class="source_code">
   <tr>
@@ -244,7 +251,7 @@ NOTE: This method is NOT likely to be ever changed, that is why inline logic is 
 </div>
 
       <div id="footer">
-  Generated on Fri Sep 30 20:17:44 2022 by
+  Generated on Fri Sep 30 20:38:21 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>
