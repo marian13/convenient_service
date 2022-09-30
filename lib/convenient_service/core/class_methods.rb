@@ -4,13 +4,23 @@ module ConvenientService
   module Core
     module ClassMethods
       ##
-      # @example Getter.
+      # Sets or gets concerns for a service class.
+      #
+      # @overload concerns
+      #   Returns all concerns.
+      #   @return [ConvenientService::Core::Entities::Concerns]
+      #
+      # @overload concerns(&configuration_block)
+      #   Configures concerns.
+      #   @param configuration_block [Proc] Block that configures middlewares.
+      #   @see https://github.com/marian13/ruby-middleware#a-basic-example
+      #   @return [ConvenientService::Core::Entities::Concerns]
+      #
+      # @example Getter
       #   concerns
       #
-      # @example Setter.
+      # @example Setter
       #   concerns(&configuration_block)
-      #
-      # @return [ConvenientService::Core::Entities::Concerns] concerns for self.
       #
       def concerns(&configuration_block)
         @concerns ||= Entities::Concerns.new(entity: self)
@@ -25,24 +35,59 @@ module ConvenientService
       end
 
       ##
-      # Usage example:
+      # Sets or gets middlewares for a service class.
       #
-      #   # Getters:
+      # @overload middlewares
+      #   Returns all instance middewares.
+      #   @return [Hash<Symbol, Hash<Symbol, ConvenientService::Core::Entities::MethodMiddlewares>>]
+      #
+      # @overload middlewares(scope:)
+      #   Returns all scoped middewares.
+      #   @param scope [:instance, :class]
+      #   @return [Hash<Symbol, Hash<Symbol, ConvenientService::Core::Entities::MethodMiddlewares>>]
+      #
+      # @overload middlewares(method:)
+      #   Returns all instance middlewares for particular method.
+      #   @param for [Symbol] Method name.
+      #   @return [Hash<Symbol, Hash<Symbol, ConvenientService::Core::Entities::MethodMiddlewares>>]
+      #
+      # @overload middlewares(method:, scope:)
+      #   Returns all scoped middlewares for particular method.
+      #   @param for [Symbol] Method name.
+      #   @param scope [:instance, :class]
+      #   @return [Hash<Symbol, Hash<Symbol, ConvenientService::Core::Entities::MethodMiddlewares>>]
+      #
+      # @overload middlewares(method:, &configuration_block)
+      #   Configures instance middlewares for particular method.
+      #   @param for [Symbol] Method name.
+      #   @param configuration_block [Proc] Block that configures middlewares.
+      #   @see https://github.com/marian13/ruby-middleware#a-basic-example
+      #   @return [ConvenientService::Core::Entities::MethodMiddlewares]
+      #
+      # @overload middlewares(method:, scope:, &configuration_block)
+      #   Configures scoped middlewares for particular method.
+      #   @param for [Symbol] Method name.
+      #   @param scope [:instance, :class]
+      #   @param configuration_block [Proc] Block that configures middlewares.
+      #   @see https://github.com/marian13/ruby-middleware#a-basic-example
+      #   @return [ConvenientService::Core::Entities::MethodMiddlewares]
+      #
+      # @example Getters
       #   middlewares
       #   middlewares(scope: :instance)
       #   middlewares(scope: :class)
-      #   middlewares(for: :result)
-      #   middlewares(for: :result, scope: :instance)
-      #   middlewares(for: :result, scope: :class)
+      #   middlewares(method: :result)
+      #   middlewares(method: :result, scope: :instance)
+      #   middlewares(method: :result, scope: :class)
       #
-      #   # Setters:
-      #   middlewares(for: :result, &block)
-      #   middlewares(for: :result, scope: :instance, &block)
-      #   middlewares(for: :result, scope: :class, &block)
+      # @example Setters
+      #   middlewares(method: :result, &configuration_block)
+      #   middlewares(method: :result, scope: :instance, &configuration_block)
+      #   middlewares(method: :result, scope: :class, &configuration_block)
       #
       def middlewares(**kwargs, &configuration_block)
         scope = kwargs[:scope] || :instance
-        method = kwargs[:for] || (raise ::ArgumentError if configuration_block)
+        method = kwargs[:method] || (raise ::ArgumentError if configuration_block)
         container = self
 
         @middlewares ||= {}
@@ -70,6 +115,9 @@ module ConvenientService
         @middlewares[scope][method]
       end
 
+      ##
+      # @return [void]
+      #
       def commit_config!
         concerns.include!
 

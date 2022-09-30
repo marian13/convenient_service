@@ -37,7 +37,7 @@ module ConvenientService
                       env = {entity: self, args: args, kwargs: kwargs, block: block}
                       original = proc { |env| super(*env[:args], **env[:kwargs], &env[:block]) }
 
-                      middlewares(for: method, scope: scope).call(env, original)
+                      middlewares(method: method, scope: scope).call(env, original)
                     end
                   RUBY
 

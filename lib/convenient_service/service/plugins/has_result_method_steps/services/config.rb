@@ -15,7 +15,7 @@ module ConvenientService
                 use Service::Plugins::HasResult::Concern
               end
 
-              middlewares for: :result do
+              middlewares method: :result do
                 use Common::Plugins::NormalizesEnv::Middleware
 
                 use Service::Plugins::HasResult::Middleware

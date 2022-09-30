@@ -12,6 +12,12 @@ module ConvenientService
               @stack = stack
             end
 
+            ##
+            # @param [Hash] env
+            # @option env [Class] :entity
+            #
+            # @return [void]
+            #
             def call(env)
               env[:entity].include concern
 

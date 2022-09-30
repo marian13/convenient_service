@@ -23,7 +23,7 @@ module ConvenientService
                   use Plugins::Common::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment::Concern
                 end
 
-                middlewares for: :initialize do
+                middlewares method: :initialize do
                   use Plugins::Common::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment::Middleware
                 end
 
@@ -41,7 +41,7 @@ module ConvenientService
                   use Plugins::Service::HasResultParamsValidations::UsingActiveModelValidations::Concern
                 end
 
-                middlewares for: :result do
+                middlewares method: :result do
                   use Plugins::Service::HasResultParamsValidations::UsingActiveModelValidations::Middleware
                 end
 

@@ -14,6 +14,9 @@ module ConvenientService
           end
 
           class_methods do
+            ##
+            # @api private
+            #
             def callbacks
               @callbacks ||= Entities::CallbackCollection.new
             end

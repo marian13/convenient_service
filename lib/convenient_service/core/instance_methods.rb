@@ -3,10 +3,20 @@
 module ConvenientService
   module Core
     module InstanceMethods
-      def concerns(&block)
-        self.class.concerns(&block)
+      ##
+      # @param (see ConvenientService::Core::ClassMethods#concerns)
+      #
+      # @return [ConvenientService::Core::Entities::Concerns]
+      #
+      def concerns(&configuration_block)
+        self.class.concerns(&configuration_block)
       end
 
+      ##
+      # @param (see ConvenientService::Core::ClassMethods#middlewares)
+      #
+      # @return [ConvenientService::Core::Entities::MethodMiddlewares]
+      #
       def middlewares(**kwargs, &block)
         self.class.middlewares(**kwargs, &block)
       end

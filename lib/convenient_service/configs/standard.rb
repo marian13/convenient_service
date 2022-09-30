@@ -39,13 +39,13 @@ module ConvenientService
           #
         end
 
-        middlewares for: :initialize do
+        middlewares method: :initialize do
           use Plugins::Common::NormalizesEnv::Middleware
 
           use Plugins::Common::CachesConstructorParams::Middleware
         end
 
-        middlewares for: :result do
+        middlewares method: :result do
           use Plugins::Common::NormalizesEnv::Middleware
 
           use Plugins::Service::HasResult::Middleware
@@ -60,25 +60,25 @@ module ConvenientService
           use Plugins::Common::CachesReturnValue::Middleware
         end
 
-        middlewares for: :success do
+        middlewares method: :success do
           use Plugins::Common::NormalizesEnv::Middleware
 
           use Plugins::Service::HasResultShortSyntax::Success::Middleware
         end
 
-        middlewares for: :failure do
+        middlewares method: :failure do
           use Plugins::Common::NormalizesEnv::Middleware
 
           use Plugins::Service::HasResultShortSyntax::Failure::Middleware
         end
 
-        middlewares for: :error do
+        middlewares method: :error do
           use Plugins::Common::NormalizesEnv::Middleware
 
           use Plugins::Service::HasResultShortSyntax::Error::Middleware
         end
 
-        middlewares for: :step, scope: :class do
+        middlewares method: :step, scope: :class do
           use Plugins::Common::NormalizesEnv::Middleware
 
           use Plugins::Service::HasResultMethodSteps::Middleware
@@ -102,55 +102,55 @@ module ConvenientService
             use Plugins::Result::CanRecalculateResult::Concern
           end
 
-          middlewares for: :success? do
+          middlewares method: :success? do
             use Plugins::Common::NormalizesEnv::Middleware
 
             use Plugins::Result::MarksResultStatusAsChecked::Middleware
           end
 
-          middlewares for: :failure? do
+          middlewares method: :failure? do
             use Plugins::Common::NormalizesEnv::Middleware
 
             use Plugins::Result::MarksResultStatusAsChecked::Middleware
           end
 
-          middlewares for: :error? do
+          middlewares method: :error? do
             use Plugins::Common::NormalizesEnv::Middleware
 
             use Plugins::Result::MarksResultStatusAsChecked::Middleware
           end
 
-          middlewares for: :not_success? do
+          middlewares method: :not_success? do
             use Plugins::Common::NormalizesEnv::Middleware
 
             use Plugins::Result::MarksResultStatusAsChecked::Middleware
           end
 
-          middlewares for: :not_failure? do
+          middlewares method: :not_failure? do
             use Plugins::Common::NormalizesEnv::Middleware
 
             use Plugins::Result::MarksResultStatusAsChecked::Middleware
           end
 
-          middlewares for: :not_error? do
+          middlewares method: :not_error? do
             use Plugins::Common::NormalizesEnv::Middleware
 
             use Plugins::Result::MarksResultStatusAsChecked::Middleware
           end
 
-          middlewares for: :data do
+          middlewares method: :data do
             use Plugins::Common::NormalizesEnv::Middleware
 
             use Plugins::Result::RaisesOnNotCheckedResultStatus::Middleware
           end
 
-          middlewares for: :message do
+          middlewares method: :message do
             use Plugins::Common::NormalizesEnv::Middleware
 
             use Plugins::Result::RaisesOnNotCheckedResultStatus::Middleware
           end
 
-          middlewares for: :code do
+          middlewares method: :code do
             use Plugins::Common::NormalizesEnv::Middleware
 
             use Plugins::Result::RaisesOnNotCheckedResultStatus::Middleware
@@ -172,7 +172,7 @@ module ConvenientService
             use Plugins::Common::HasInternals::Concern
           end
 
-          middlewares for: :result do
+          middlewares method: :result do
             use Plugins::Common::NormalizesEnv::Middleware
 
             use Plugins::Common::CachesReturnValue::Middleware

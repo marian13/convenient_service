@@ -2,6 +2,9 @@
 
 module ConvenientService
   module Support
+    ##
+    # @abstract Subclass and override {#initialize} and {#call} to implement a Command.
+    #
     class Command
       class << self
         ##
