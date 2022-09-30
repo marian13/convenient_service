@@ -4,7 +4,7 @@ module ConvenientService
   module Support
     module Copyable
       ##
-      # Example:
+      # @example
       #   person = Person.new('John', 'Doe', age: 42, gender: :male) do |p|
       #     puts p
       #   end

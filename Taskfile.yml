@@ -118,6 +118,11 @@ tasks:
       - task: docs:generate
       - task: docs:open
 
+  docs:lint:
+    cmds:
+      - mkdir docs
+      - bundle exec yard-junk --text --html docs/junk-yard.html
+
   docs:open:
     cmds:
       - open docs/index.html

@@ -11,15 +11,15 @@ module ConvenientService
             attr_reader :service_class
 
             ##
-            # @param [Class] service_class
+            # @param service_class [Class]
             #
             def initialize(service_class:)
               @service_class = service_class
             end
 
             ##
-            # @param [:instance, :class] scope
-            # @param [Symbol] method
+            # @param scope [:instance, :class]
+            # @param method [Symbol]
             #
             # @return [Boolean]
             #
@@ -28,7 +28,7 @@ module ConvenientService
             end
 
             ##
-            # @param [:instance, :class] scope
+            # @param scope [:instance, :class]
             #
             # @return [Module]
             #

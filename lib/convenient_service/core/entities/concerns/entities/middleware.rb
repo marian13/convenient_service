@@ -13,7 +13,7 @@ module ConvenientService
             end
 
             ##
-            # @param [Hash] env
+            # @param env [Hash]
             # @option env [Class] :entity
             #
             # @return [void]

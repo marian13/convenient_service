@@ -19,7 +19,7 @@ module ConvenientService
             # Wraps `RubyMiddleware::Middleware::Builder#call`.
             # @see https://github.com/marian13/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L132
             #
-            # @param [Hash] env
+            # @param env [Hash]
             #
             # @return Value of the last middleware invocation in the stack.
             #

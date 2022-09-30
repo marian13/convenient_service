@@ -76,6 +76,8 @@ jobs:
         uses: arduino/setup-task@v1
       - name: Run Rubocop
         run: task rubocop
+      - name: Run Yard-Junk (docs linter)
+        run: task docs:lint
 
   test:
     needs:
