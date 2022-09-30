@@ -558,7 +558,7 @@
 </span><span class='tstring_content'>      env = {entity: self, args: args, kwargs: kwargs, block: block}
 </span><span class='tstring_content'>      original = proc { |env| super(*env[:args], **env[:kwargs], &amp;env[:block]) }
 </span><span class='tstring_content'>
-</span><span class='tstring_content'>      middlewares(for: method, scope: scope).call(env, original)
+</span><span class='tstring_content'>      middlewares(method: method, scope: scope).call(env, original)
 </span><span class='tstring_content'>    end
 </span><span class='heredoc_end'>  RUBY
 </span>
@@ -574,7 +574,7 @@
 </div>
 
       <div id="footer">
-  Generated on Fri Sep 30 18:44:42 2022 by
+  Generated on Fri Sep 30 20:17:48 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>

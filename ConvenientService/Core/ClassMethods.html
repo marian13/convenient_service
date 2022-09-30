@@ -101,7 +101,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#commit_config!-instance_method" title="#commit_config! (instance method)">#<strong>commit_config!</strong>  &#x21d2; Object </a>
+      <a href="#commit_config!-instance_method" title="#commit_config! (instance method)">#<strong>commit_config!</strong>  &#x21d2; void </a>
     
 
     
@@ -123,7 +123,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#concerns-instance_method" title="#concerns (instance method)">#<strong>concerns</strong>(&amp;configuration_block)  &#x21d2; ConvenientService::Core::Entities::Concerns </a>
+      <a href="#concerns-instance_method" title="#concerns (instance method)">#<strong>concerns</strong>(&amp;configuration_block)  &#x21d2; Object </a>
     
 
     
@@ -137,7 +137,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Concerns for self.</p>
+    <span class="summary_desc"><div class='inline'><p>Sets or gets concerns for a service class.</p>
 </div></span>
   
 </li>
@@ -160,7 +160,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Usage example:.</p>
+    <span class="summary_desc"><div class='inline'><p>Sets or gets middlewares for a service class.</p>
 </div></span>
   
 </li>
@@ -191,22 +191,22 @@
       <pre class="lines">
 
 
-84
-85
-86
-87
-88
-89
-90
-91
-92
-93
-94
-95
-96</pre>
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/class_methods.rb', line 84</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/class_methods.rb', line 132</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_method_missing'>method_missing</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_concerns'>concerns</span><span class='period'>.</span><span class='id identifier rubyid_include!'>include!</span>
@@ -236,29 +236,38 @@
       <div class="method_details first">
   <h3 class="signature first" id="commit_config!-instance_method">
   
-    #<strong>commit_config!</strong>  &#x21d2; <tt>Object</tt> 
+    #<strong>commit_config!</strong>  &#x21d2; <tt>void</tt> 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    <p class="note returns_void">This method returns an undefined value.</p>
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-73
-74
-75
-76
-77
-78
-79
-80</pre>
+121
+122
+123
+124
+125
+126
+127
+128</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/class_methods.rb', line 73</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/class_methods.rb', line 121</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_commit_config!'>commit_config!</span>
   <span class='id identifier rubyid_concerns'>concerns</span><span class='period'>.</span><span class='id identifier rubyid_include!'>include!</span>
@@ -276,7 +285,11 @@
       <div class="method_details ">
   <h3 class="signature " id="concerns-instance_method">
   
-    #<strong>concerns</strong>(&amp;configuration_block)  &#x21d2; <tt><span class='object_link'><a href="Entities/Concerns.html" title="ConvenientService::Core::Entities::Concerns (class)">ConvenientService::Core::Entities::Concerns</a></span></tt> 
+    
+      <span class="overload">#<strong>concerns</strong>  &#x21d2; <tt><span class='object_link'><a href="Entities/Concerns.html" title="ConvenientService::Core::Entities::Concerns (class)">ConvenientService::Core::Entities::Concerns</a></span></tt> </span>
+    
+      <span class="overload">#<strong>concerns</strong>(&amp;configuration_block)  &#x21d2; <tt><span class='object_link'><a href="Entities/Concerns.html" title="ConvenientService::Core::Entities::Concerns (class)">ConvenientService::Core::Entities::Concerns</a></span></tt> </span>
+    
   
 
   
@@ -284,7 +297,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns concerns for self.</p>
+    <p>Sets or gets concerns for a service class.</p>
 
 
   </div>
@@ -295,18 +308,81 @@
     <p class="tag_title">Examples:</p>
     
       
-        <p class="example_title"><div class='inline'><p>Getter.</p>
+        <p class="example_title"><div class='inline'><p>Getter</p>
 </div></p>
       
       <pre class="example code"><code><span class='id identifier rubyid_concerns'>concerns</span></code></pre>
     
       
-        <p class="example_title"><div class='inline'><p>Setter.</p>
+        <p class="example_title"><div class='inline'><p>Setter</p>
 </div></p>
       
       <pre class="example code"><code><span class='id identifier rubyid_concerns'>concerns</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_configuration_block'>configuration_block</span><span class='rparen'>)</span></code></pre>
     
   </div>
+
+  <p class="tag_title">Overloads:</p>
+  <ul class="overload">
+    
+      
+      <li class="overload_item">
+        <span class="signature">#<strong>concerns</strong>  &#x21d2; <tt><span class='object_link'><a href="Entities/Concerns.html" title="ConvenientService::Core::Entities::Concerns (class)">ConvenientService::Core::Entities::Concerns</a></span></tt> </span>
+        <div class="docstring">
+  <div class="discussion">
+    <p>Returns all concerns.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Entities/Concerns.html" title="ConvenientService::Core::Entities::Concerns (class)">ConvenientService::Core::Entities::Concerns</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+      </li>
+    
+      
+      <li class="overload_item">
+        <span class="signature">#<strong>concerns</strong>(&amp;configuration_block)  &#x21d2; <tt><span class='object_link'><a href="Entities/Concerns.html" title="ConvenientService::Core::Entities::Concerns (class)">ConvenientService::Core::Entities::Concerns</a></span></tt> </span>
+        <div class="docstring">
+  <div class="discussion">
+    <p>Configures concerns.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>configuration_block</span>
+      
+      
+        <span class='type'>(<tt>Proc</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Block that configures middlewares.</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 <p class="tag_title">Returns:</p>
 <ul class="return">
@@ -318,13 +394,22 @@
       
       
       
-        &mdash;
-        <div class='inline'><p>concerns for self.</p>
-</div>
-      
     </li>
   
 </ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://github.com/marian13/ruby-middleware#a-basic-example" target="_parent" title="https://github.com/marian13/ruby-middleware#a-basic-example">https://github.com/marian13/ruby-middleware#a-basic-example</a></li>
+    
+  </ul>
+
+</div>
+      </li>
+    
+  </ul>
+
 
 </div><table class="source_code">
   <tr>
@@ -332,20 +417,20 @@
       <pre class="lines">
 
 
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25</pre>
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/class_methods.rb', line 15</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/class_methods.rb', line 25</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_concerns'>concerns</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_configuration_block'>configuration_block</span><span class='rparen'>)</span>
   <span class='ivar'>@concerns</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="Entities.html" title="ConvenientService::Core::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Concerns.html" title="ConvenientService::Core::Entities::Concerns (class)">Concerns</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Entities/Concerns.html#initialize-instance_method" title="ConvenientService::Core::Entities::Concerns#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>entity:</span> <span class='kw'>self</span><span class='rparen'>)</span>
@@ -366,7 +451,19 @@
       <div class="method_details ">
   <h3 class="signature " id="middlewares-instance_method">
   
-    #<strong>middlewares</strong>(**kwargs, &amp;configuration_block)  &#x21d2; <tt>Object</tt> 
+    
+      <span class="overload">#<strong>middlewares</strong>  &#x21d2; <tt>Hash&lt;Symbol, Hash&lt;Symbol, <span class='object_link'><a href="Entities/MethodMiddlewares.html" title="ConvenientService::Core::Entities::MethodMiddlewares (class)">ConvenientService::Core::Entities::MethodMiddlewares</a></span>&gt;&gt;</tt> </span>
+    
+      <span class="overload">#<strong>middlewares</strong>(scope: )  &#x21d2; <tt>Hash&lt;Symbol, Hash&lt;Symbol, <span class='object_link'><a href="Entities/MethodMiddlewares.html" title="ConvenientService::Core::Entities::MethodMiddlewares (class)">ConvenientService::Core::Entities::MethodMiddlewares</a></span>&gt;&gt;</tt> </span>
+    
+      <span class="overload">#<strong>middlewares</strong>(method: )  &#x21d2; <tt>Hash&lt;Symbol, Hash&lt;Symbol, <span class='object_link'><a href="Entities/MethodMiddlewares.html" title="ConvenientService::Core::Entities::MethodMiddlewares (class)">ConvenientService::Core::Entities::MethodMiddlewares</a></span>&gt;&gt;</tt> </span>
+    
+      <span class="overload">#<strong>middlewares</strong>(method: , scope: )  &#x21d2; <tt>Hash&lt;Symbol, Hash&lt;Symbol, <span class='object_link'><a href="Entities/MethodMiddlewares.html" title="ConvenientService::Core::Entities::MethodMiddlewares (class)">ConvenientService::Core::Entities::MethodMiddlewares</a></span>&gt;&gt;</tt> </span>
+    
+      <span class="overload">#<strong>middlewares</strong>(method: , &amp;configuration_block)  &#x21d2; <tt><span class='object_link'><a href="Entities/MethodMiddlewares.html" title="ConvenientService::Core::Entities::MethodMiddlewares (class)">ConvenientService::Core::Entities::MethodMiddlewares</a></span></tt> </span>
+    
+      <span class="overload">#<strong>middlewares</strong>(method: , scope: , &amp;configuration_block)  &#x21d2; <tt><span class='object_link'><a href="Entities/MethodMiddlewares.html" title="ConvenientService::Core::Entities::MethodMiddlewares (class)">ConvenientService::Core::Entities::MethodMiddlewares</a></span></tt> </span>
+    
   
 
   
@@ -374,24 +471,379 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Usage example:</p>
-<h1>Getters:</h1>
-<p>middlewares
-middlewares(scope: :instance)
-middlewares(scope: :class)
-middlewares(for: :result)
-middlewares(for: :result, scope: :instance)
-middlewares(for: :result, scope: :class)</p>
-<h1>Setters:</h1>
-<p>middlewares(for: :result, &amp;block)
-middlewares(for: :result, scope: :instance, &amp;block)
-middlewares(for: :result, scope: :class, &amp;block)</p>
+    <p>Sets or gets middlewares for a service class.</p>
 
 
   </div>
 </div>
 <div class="tags">
   
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>Getters</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_middlewares'>middlewares</span>
+<span class='id identifier rubyid_middlewares'>middlewares</span><span class='lparen'>(</span><span class='label'>scope:</span> <span class='symbol'>:instance</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_middlewares'>middlewares</span><span class='lparen'>(</span><span class='label'>scope:</span> <span class='symbol'>:class</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_middlewares'>middlewares</span><span class='lparen'>(</span><span class='label'>method:</span> <span class='symbol'>:result</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_middlewares'>middlewares</span><span class='lparen'>(</span><span class='label'>method:</span> <span class='symbol'>:result</span><span class='comma'>,</span> <span class='label'>scope:</span> <span class='symbol'>:instance</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_middlewares'>middlewares</span><span class='lparen'>(</span><span class='label'>method:</span> <span class='symbol'>:result</span><span class='comma'>,</span> <span class='label'>scope:</span> <span class='symbol'>:class</span><span class='rparen'>)</span></code></pre>
+    
+      
+        <p class="example_title"><div class='inline'><p>Setters</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_middlewares'>middlewares</span><span class='lparen'>(</span><span class='label'>method:</span> <span class='symbol'>:result</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_configuration_block'>configuration_block</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_middlewares'>middlewares</span><span class='lparen'>(</span><span class='label'>method:</span> <span class='symbol'>:result</span><span class='comma'>,</span> <span class='label'>scope:</span> <span class='symbol'>:instance</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_configuration_block'>configuration_block</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_middlewares'>middlewares</span><span class='lparen'>(</span><span class='label'>method:</span> <span class='symbol'>:result</span><span class='comma'>,</span> <span class='label'>scope:</span> <span class='symbol'>:class</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_configuration_block'>configuration_block</span><span class='rparen'>)</span></code></pre>
+    
+  </div>
+
+  <p class="tag_title">Overloads:</p>
+  <ul class="overload">
+    
+      
+      <li class="overload_item">
+        <span class="signature">#<strong>middlewares</strong>  &#x21d2; <tt>Hash&lt;Symbol, Hash&lt;Symbol, <span class='object_link'><a href="Entities/MethodMiddlewares.html" title="ConvenientService::Core::Entities::MethodMiddlewares (class)">ConvenientService::Core::Entities::MethodMiddlewares</a></span>&gt;&gt;</tt> </span>
+        <div class="docstring">
+  <div class="discussion">
+    <p>Returns all instance middewares.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash&lt;Symbol, Hash&lt;Symbol, <span class='object_link'><a href="Entities/MethodMiddlewares.html" title="ConvenientService::Core::Entities::MethodMiddlewares (class)">ConvenientService::Core::Entities::MethodMiddlewares</a></span>&gt;&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+      </li>
+    
+      
+      <li class="overload_item">
+        <span class="signature">#<strong>middlewares</strong>(scope: )  &#x21d2; <tt>Hash&lt;Symbol, Hash&lt;Symbol, <span class='object_link'><a href="Entities/MethodMiddlewares.html" title="ConvenientService::Core::Entities::MethodMiddlewares (class)">ConvenientService::Core::Entities::MethodMiddlewares</a></span>&gt;&gt;</tt> </span>
+        <div class="docstring">
+  <div class="discussion">
+    <p>Returns all scoped middewares.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>scope</span>
+      
+      
+        <span class='type'>(<tt>:instance</tt>, <tt>:class</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt></tt>)</em>
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash&lt;Symbol, Hash&lt;Symbol, <span class='object_link'><a href="Entities/MethodMiddlewares.html" title="ConvenientService::Core::Entities::MethodMiddlewares (class)">ConvenientService::Core::Entities::MethodMiddlewares</a></span>&gt;&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+      </li>
+    
+      
+      <li class="overload_item">
+        <span class="signature">#<strong>middlewares</strong>(method: )  &#x21d2; <tt>Hash&lt;Symbol, Hash&lt;Symbol, <span class='object_link'><a href="Entities/MethodMiddlewares.html" title="ConvenientService::Core::Entities::MethodMiddlewares (class)">ConvenientService::Core::Entities::MethodMiddlewares</a></span>&gt;&gt;</tt> </span>
+        <div class="docstring">
+  <div class="discussion">
+    <p>Returns all instance middlewares for particular method.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>for</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Method name.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash&lt;Symbol, Hash&lt;Symbol, <span class='object_link'><a href="Entities/MethodMiddlewares.html" title="ConvenientService::Core::Entities::MethodMiddlewares (class)">ConvenientService::Core::Entities::MethodMiddlewares</a></span>&gt;&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+      </li>
+    
+      
+      <li class="overload_item">
+        <span class="signature">#<strong>middlewares</strong>(method: , scope: )  &#x21d2; <tt>Hash&lt;Symbol, Hash&lt;Symbol, <span class='object_link'><a href="Entities/MethodMiddlewares.html" title="ConvenientService::Core::Entities::MethodMiddlewares (class)">ConvenientService::Core::Entities::MethodMiddlewares</a></span>&gt;&gt;</tt> </span>
+        <div class="docstring">
+  <div class="discussion">
+    <p>Returns all scoped middlewares for particular method.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>for</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Method name.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>scope</span>
+      
+      
+        <span class='type'>(<tt>:instance</tt>, <tt>:class</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt></tt>)</em>
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash&lt;Symbol, Hash&lt;Symbol, <span class='object_link'><a href="Entities/MethodMiddlewares.html" title="ConvenientService::Core::Entities::MethodMiddlewares (class)">ConvenientService::Core::Entities::MethodMiddlewares</a></span>&gt;&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+      </li>
+    
+      
+      <li class="overload_item">
+        <span class="signature">#<strong>middlewares</strong>(method: , &amp;configuration_block)  &#x21d2; <tt><span class='object_link'><a href="Entities/MethodMiddlewares.html" title="ConvenientService::Core::Entities::MethodMiddlewares (class)">ConvenientService::Core::Entities::MethodMiddlewares</a></span></tt> </span>
+        <div class="docstring">
+  <div class="discussion">
+    <p>Configures instance middlewares for particular method.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>for</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Method name.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>configuration_block</span>
+      
+      
+        <span class='type'>(<tt>Proc</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Block that configures middlewares.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Entities/MethodMiddlewares.html" title="ConvenientService::Core::Entities::MethodMiddlewares (class)">ConvenientService::Core::Entities::MethodMiddlewares</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://github.com/marian13/ruby-middleware#a-basic-example" target="_parent" title="https://github.com/marian13/ruby-middleware#a-basic-example">https://github.com/marian13/ruby-middleware#a-basic-example</a></li>
+    
+  </ul>
+
+</div>
+      </li>
+    
+      
+      <li class="overload_item">
+        <span class="signature">#<strong>middlewares</strong>(method: , scope: , &amp;configuration_block)  &#x21d2; <tt><span class='object_link'><a href="Entities/MethodMiddlewares.html" title="ConvenientService::Core::Entities::MethodMiddlewares (class)">ConvenientService::Core::Entities::MethodMiddlewares</a></span></tt> </span>
+        <div class="docstring">
+  <div class="discussion">
+    <p>Configures scoped middlewares for particular method.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>for</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Method name.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>scope</span>
+      
+      
+        <span class='type'>(<tt>:instance</tt>, <tt>:class</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt></tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>configuration_block</span>
+      
+      
+        <span class='type'>(<tt>Proc</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Block that configures middlewares.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Entities/MethodMiddlewares.html" title="ConvenientService::Core::Entities::MethodMiddlewares (class)">ConvenientService::Core::Entities::MethodMiddlewares</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://github.com/marian13/ruby-middleware#a-basic-example" target="_parent" title="https://github.com/marian13/ruby-middleware#a-basic-example">https://github.com/marian13/ruby-middleware#a-basic-example</a></li>
+    
+  </ul>
+
+</div>
+      </li>
+    
+  </ul>
+
 
 </div><table class="source_code">
   <tr>
@@ -399,42 +851,42 @@ middlewares(for: :result, scope: :class, &amp;block)</p>
       <pre class="lines">
 
 
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
-55
-56
-57
-58
-59
-60
-61
-62
-63
-64
-65
-66
-67
-68
-69
-70
-71</pre>
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/class_methods.rb', line 43</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/class_methods.rb', line 88</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_middlewares'>middlewares</span><span class='lparen'>(</span><span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_configuration_block'>configuration_block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_scope'>scope</span> <span class='op'>=</span> <span class='id identifier rubyid_kwargs'>kwargs</span><span class='lbracket'>[</span><span class='symbol'>:scope</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='symbol'>:instance</span>
-  <span class='id identifier rubyid_method'>method</span> <span class='op'>=</span> <span class='id identifier rubyid_kwargs'>kwargs</span><span class='lbracket'>[</span><span class='symbol'>:for</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='lparen'>(</span><span class='id identifier rubyid_raise'>raise</span> <span class='op'>::</span><span class='const'>ArgumentError</span> <span class='kw'>if</span> <span class='id identifier rubyid_configuration_block'>configuration_block</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_method'>method</span> <span class='op'>=</span> <span class='id identifier rubyid_kwargs'>kwargs</span><span class='lbracket'>[</span><span class='symbol'>:method</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='lparen'>(</span><span class='id identifier rubyid_raise'>raise</span> <span class='op'>::</span><span class='const'>ArgumentError</span> <span class='kw'>if</span> <span class='id identifier rubyid_configuration_block'>configuration_block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_container'>container</span> <span class='op'>=</span> <span class='kw'>self</span>
 
   <span class='ivar'>@middlewares</span> <span class='op'>||=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
@@ -471,7 +923,7 @@ middlewares(for: :result, scope: :class, &amp;block)</p>
 </div>
 
       <div id="footer">
-  Generated on Fri Sep 30 18:44:38 2022 by
+  Generated on Fri Sep 30 20:17:44 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>
