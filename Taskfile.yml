@@ -107,9 +107,11 @@ tasks:
   #
   # TODO: Contribute. Forward `--parse-option LIBERAL_HTML_TAG` to commonmarker.
   #
+  # NOTE: options are specified in the `.yardopts` file.
+  #
   docs:generate:
     cmds:
-      - bundle exec yardoc 'lib/**/*.rb' --markup markdown --markup-provider commonmarker --output-dir docs - README.md
+      - bundle exec yardoc
 
   docs:generate:open:
     cmds:

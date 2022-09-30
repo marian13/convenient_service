@@ -1,0 +1,9 @@
+##
+# NOTE: `.yardopts` docs.
+# https://rubydoc.info/gems/yard/YARD/CLI/Yardoc
+#
+--markup markdown
+--markup-provider commonmarker
+--output-dir docs
+'lib/**/*.rb' -
+README.md
