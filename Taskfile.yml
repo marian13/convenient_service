@@ -130,6 +130,14 @@ tasks:
       - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
         msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
 
+  ##
+  # NOTE: A trailing "/**" matches everything inside.
+  # https://git-scm.com/docs/gitignore
+  #
+  git:staged:specs:
+    cmds:
+      - git diff --cached --name-only --diff-filter=d "spec/**"
+
   playground:
     cmds:
       - bundle exec rake playground
@@ -179,29 +187,97 @@ tasks:
       - task: rspec:rails_7.0
       - task: rspec:dry
 
+  ##
+  # NOTE: Run rspec only for git staged spec files.
+  # https://githowto.com/staging_and_committing
+  #
+  rspec:staged:
+    cmds:
+      - task: rspec:standard:staged
+      - task: rspec:rails_5.2:staged
+      - task: rspec:rails_6.0:staged
+      - task: rspec:rails_6.1:staged
+      - task: rspec:rails_7.0:staged
+      - task: rspec:dry:staged
+
   rspec:dry:
     cmds:
-      - bundle exec appraisal dry rspec --format progress --require dry_helper {{.CLI_ARGS}}
+      - bundle exec appraisal dry rspec --format progress --require dry_helper {{.GIT_STAGED_SPEC_FILES}} {{.CLI_ARGS}}
+
+  rspec:dry:staged:
+    - task: rspec:dry
+      vars:
+        GIT_STAGED_SPEC_FILES:
+          ##
+          # NOTE: `task: git:staged:specs` does NOT work.
+          #
+          sh: task git:staged:specs --silent
 
   rspec:rails_5.2:
     cmds:
-      - bundle exec appraisal rails_5.2 rspec --format progress --require rails_helper {{.CLI_ARGS}}
+      - bundle exec appraisal rails_5.2 rspec --format progress --require rails_helper {{.GIT_STAGED_SPEC_FILES}} {{.CLI_ARGS}}
+
+  rspec:rails_5.2:staged:
+    - task: rspec:rails_5.2
+      vars:
+        GIT_STAGED_SPEC_FILES:
+          ##
+          # NOTE: `task: git:staged:specs` does NOT work.
+          #
+          sh: task git:staged:specs --silent
 
   rspec:rails_6.0:
     cmds:
-      - bundle exec appraisal rails_6.0 rspec --format progress --require rails_helper {{.CLI_ARGS}}
+      - bundle exec appraisal rails_6.0 rspec --format progress --require rails_helper {{.GIT_STAGED_SPEC_FILES}} {{.CLI_ARGS}}
+
+  rspec:rails_6.0:staged:
+    - task: rspec:rails_6.0
+      vars:
+        GIT_STAGED_SPEC_FILES:
+          ##
+          # NOTE: `task: git:staged:specs` does NOT work.
+          #
+          sh: task git:staged:specs --silent
 
   rspec:rails_6.1:
     cmds:
-      - bundle exec appraisal rails_6.1 rspec --format progress --require rails_helper {{.CLI_ARGS}}
+      - bundle exec appraisal rails_6.1 rspec --format progress --require rails_helper {{.GIT_STAGED_SPEC_FILES}} {{.CLI_ARGS}}
+
+  rspec:rails_6.1:staged:
+    - task: rspec:rails_6.1
+      vars:
+        GIT_STAGED_SPEC_FILES:
+          ##
+          # NOTE: `task: git:staged:specs` does NOT work.
+          #
+          sh: task git:staged:specs --silent
 
   rspec:rails_7.0:
     cmds:
-      - bundle exec appraisal rails_7.0 rspec --format progress --require rails_helper {{.CLI_ARGS}}
+      - bundle exec appraisal rails_7.0 rspec --format progress --require rails_helper {{.GIT_STAGED_SPEC_FILES}} {{.CLI_ARGS}}
+
+  rspec:rails_7.0:staged:
+    - task: rspec:rails_7.0
+      vars:
+        GIT_STAGED_SPEC_FILES:
+          ##
+          # NOTE: `task: git:staged:specs` does NOT work.
+          #
+          sh: task git:staged:specs --silent
 
   rspec:standard:
     cmds:
-      - bundle exec rspec --format progress {{.CLI_ARGS}}
+      - bundle exec rspec --format progress {{.GIT_STAGED_SPEC_FILES}} {{.CLI_ARGS}}
+
+  rspec:standard:staged:
+    cmds:
+      - task: rspec:standard
+        vars:
+          GIT_STAGED_SPEC_FILES:
+            ##
+            # NOTE: `task: git:staged:specs` does NOT work.
+            #
+            sh: task git:staged:specs --silent
 
   rubocop:
     cmds:
