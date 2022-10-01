@@ -156,7 +156,7 @@
   
   
   
-  <span class="private note title">private</span>
+  
 
   
     <span class="summary_desc"><div class='inline'></div></span>
@@ -246,6 +246,8 @@
       <pre class="lines">
 
 
+51
+52
 53
 54
 55
@@ -258,12 +260,10 @@
 62
 63
 64
-65
-66
-67</pre>
+65</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/instance_methods.rb', line 53</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/instance_methods.rb', line 51</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_method_missing'>method_missing</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_concerns'>concerns</span><span class='period'>.</span><span class='id identifier rubyid_include!'>include!</span>
@@ -407,18 +407,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p class="note private">
-  <strong>This method is part of a private API.</strong>
-  You should avoid using this method if possible, as it may be removed or be changed in the future.
-</p>
-
-  <div class="note notetag">
-    <strong>Note:</strong>
-    <div class='inline'><p>Intended for the debugging purposes.</p>
-</div>
-  </div>
-
-
+    
 
   </div>
 </div>
@@ -481,6 +470,8 @@
       <pre class="lines">
 
 
+30
+31
 32
 33
 34
@@ -489,12 +480,10 @@
 37
 38
 39
-40
-41
-42</pre>
+40</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/instance_methods.rb', line 32</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/instance_methods.rb', line 30</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_respond_to_missing?'>respond_to_missing?</span><span class='lparen'>(</span><span class='id identifier rubyid_method_name'>method_name</span><span class='comma'>,</span> <span class='id identifier rubyid_include_private'>include_private</span> <span class='op'>=</span> <span class='kw'>false</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>true</span> <span class='kw'>if</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_method_defined?'>method_defined?</span><span class='lparen'>(</span><span class='id identifier rubyid_method_name'>method_name</span><span class='rparen'>)</span>
@@ -517,7 +506,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Oct  1 22:46:56 2022 by
+  Generated on Sat Oct  1 22:48:15 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>
