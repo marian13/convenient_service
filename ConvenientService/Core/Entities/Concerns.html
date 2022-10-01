@@ -925,7 +925,7 @@ Does nothing for the subsequent calls.</p>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns.rb', line 101</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_a'>to_a</span>
-  <span class='id identifier rubyid_stack'>stack</span><span class='period'>.</span><span class='id identifier rubyid_to_a'>to_a</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:first</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:concern</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_plain_concerns'>plain_concerns</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -937,7 +937,7 @@ Does nothing for the subsequent calls.</p>
 </div>
 
       <div id="footer">
-  Generated on Sat Oct  1 22:49:31 2022 by
+  Generated on Sat Oct  1 22:53:57 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>
