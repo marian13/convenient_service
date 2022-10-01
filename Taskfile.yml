@@ -120,8 +120,15 @@ tasks:
 
   docs:lint:
     cmds:
-      - mkdir docs
+      - mkdir -p docs
       - bundle exec yard-junk --text --html docs/junk-yard.html
+
+  docs:missed:
+    cmds:
+      ##
+      # NOTE: Options are taken from `.inch.yml`.
+      #
+      - bundle exec inch
 
   docs:open:
     cmds:
