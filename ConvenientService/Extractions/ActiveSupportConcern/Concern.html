@@ -309,7 +309,7 @@ prepended as well.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#instance_methods-instance_method" title="#instance_methods (instance method)">#<strong>instance_methods</strong>(&amp;instance_methods_module_definition)  &#x21d2; Object </a>
+      <a href="#instance_methods-instance_method" title="#instance_methods (instance method)">#<strong>instance_methods</strong>(include_private = false, &amp;instance_methods_module_definition)  &#x21d2; Object </a>
     
 
     
@@ -547,16 +547,16 @@ Buzz.bar # =&gt; private method 'bar' called for Buzz:Class(NoMethodError)</p>
       <pre class="lines">
 
 
-241
-242
-243
-244
-245
 246
-247</pre>
+247
+248
+249
+250
+251
+252</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/extractions/active_support_concern/concern.rb', line 241</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/extractions/active_support_concern/concern.rb', line 246</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_class_methods'>class_methods</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_class_methods_module_definition'>class_methods_module_definition</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_mod'>mod</span> <span class='op'>=</span> <span class='id identifier rubyid_const_defined?'>const_defined?</span><span class='lparen'>(</span><span class='symbol'>:ClassMethods</span><span class='comma'>,</span> <span class='kw'>false</span><span class='rparen'>)</span> <span class='op'>?</span>
@@ -635,7 +635,7 @@ When you define more than one +included+ block, it raises an exception.</p>
       <div class="method_details ">
   <h3 class="signature " id="instance_methods-instance_method">
   
-    #<strong>instance_methods</strong>(&amp;instance_methods_module_definition)  &#x21d2; <tt>Object</tt> 
+    #<strong>instance_methods</strong>(include_private = false, &amp;instance_methods_module_definition)  &#x21d2; <tt>Object</tt> 
   
 
   
@@ -663,12 +663,22 @@ When you define more than one +included+ block, it raises an exception.</p>
 216
 217
 218
-219</pre>
+219
+220
+221
+222
+223
+224</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/extractions/active_support_concern/concern.rb', line 213</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_instance_methods'>instance_methods</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_instance_methods_module_definition'>instance_methods_module_definition</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_instance_methods'>instance_methods</span><span class='lparen'>(</span><span class='id identifier rubyid_include_private'>include_private</span> <span class='op'>=</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_instance_methods_module_definition'>instance_methods_module_definition</span><span class='rparen'>)</span>
+  <span class='comment'>##
+</span>  <span class='comment'># NOTE: This `if` is propably the reason why Rails team decided to create only `class_methods` in the original Concern implementation.
+</span>  <span class='comment'>#
+</span>  <span class='kw'>return</span> <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_include_private'>include_private</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_instance_methods_module_definition'>instance_methods_module_definition</span>
+
   <span class='id identifier rubyid_mod'>mod</span> <span class='op'>=</span> <span class='id identifier rubyid_const_defined?'>const_defined?</span><span class='lparen'>(</span><span class='symbol'>:InstanceMethods</span><span class='comma'>,</span> <span class='kw'>false</span><span class='rparen'>)</span> <span class='op'>?</span>
     <span class='id identifier rubyid_const_get'>const_get</span><span class='lparen'>(</span><span class='symbol'>:InstanceMethods</span><span class='rparen'>)</span> <span class='op'>:</span>
     <span class='id identifier rubyid_const_set'>const_set</span><span class='lparen'>(</span><span class='symbol'>:InstanceMethods</span><span class='comma'>,</span> <span class='const'>Module</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='rparen'>)</span>
@@ -823,7 +833,7 @@ When you define more than one +prepended+ block, it raises an exception.</p>
 </div>
 
       <div id="footer">
-  Generated on Sat Oct  1 19:26:37 2022 by
+  Generated on Sat Oct  1 22:46:56 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>

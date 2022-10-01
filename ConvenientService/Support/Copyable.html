@@ -206,7 +206,10 @@ NOTE: This method is NOT likely to be ever changed, that is why inline logic is 
 47
 48
 49
-50</pre>
+50
+51
+52
+53</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/support/copyable.rb', line 21</span>
@@ -215,7 +218,10 @@ NOTE: This method is NOT likely to be ever changed, that is why inline logic is 
   <span class='id identifier rubyid_overrides'>overrides</span><span class='lbracket'>[</span><span class='symbol'>:args</span><span class='rbracket'>]</span> <span class='op'>||=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
   <span class='id identifier rubyid_overrides'>overrides</span><span class='lbracket'>[</span><span class='symbol'>:kwargs</span><span class='rbracket'>]</span> <span class='op'>||=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 
-  <span class='id identifier rubyid_args'>args</span> <span class='op'>=</span>
+  <span class='comment'>##
+</span>  <span class='comment'># TODO: Refactor runtime `respond_to?`. Investigate before refactoring.
+</span>  <span class='comment'>#
+</span>  <span class='id identifier rubyid_args'>args</span> <span class='op'>=</span>
     <span class='kw'>if</span> <span class='id identifier rubyid_respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='symbol'>:to_args</span><span class='rparen'>)</span>
       <span class='kw'>case</span> <span class='id identifier rubyid_overrides'>overrides</span><span class='lbracket'>[</span><span class='symbol'>:args</span><span class='rbracket'>]</span>
       <span class='kw'>when</span> <span class='op'>::</span><span class='const'>Array</span>
@@ -251,7 +257,7 @@ NOTE: This method is NOT likely to be ever changed, that is why inline logic is 
 </div>
 
       <div id="footer">
-  Generated on Sat Oct  1 19:26:37 2022 by
+  Generated on Sat Oct  1 22:46:56 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>

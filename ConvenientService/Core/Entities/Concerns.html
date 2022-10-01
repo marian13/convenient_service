@@ -129,7 +129,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#assert_not_included!-instance_method" title="#assert_not_included! (instance method)">#<strong>assert_not_included!</strong>  &#x21d2; Object </a>
+      <a href="#assert_not_included!-instance_method" title="#assert_not_included! (instance method)">#<strong>assert_not_included!</strong>  &#x21d2; void </a>
     
 
     
@@ -151,7 +151,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#configure-instance_method" title="#configure (instance method)">#<strong>configure</strong>(&amp;configuration_block)  &#x21d2; Object </a>
+      <a href="#configure-instance_method" title="#configure (instance method)">#<strong>configure</strong>(&amp;configuration_block)  &#x21d2; void </a>
     
 
     
@@ -265,7 +265,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(entity:)  &#x21d2; Concerns </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(entity:)  &#x21d2; void </a>
     
 
     
@@ -281,8 +281,51 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>A new instance of Concerns.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#method_defined%3F-instance_method" title="#method_defined? (instance method)">#<strong>method_defined?</strong>(method_name)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#private_method_defined%3F-instance_method" title="#private_method_defined? (instance method)">#<strong>private_method_defined?</strong>(method_name)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
   
 </li>
 
@@ -319,7 +362,7 @@
     <div class="method_details first">
   <h3 class="signature first" id="initialize-instance_method">
   
-    #<strong>initialize</strong>(entity:)  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::Core::Entities::Concerns (class)">Concerns</a></span></tt> 
+    #<strong>initialize</strong>(entity:)  &#x21d2; <tt>void</tt> 
   
 
   
@@ -327,8 +370,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a new instance of Concerns.</p>
-
+    
 
   </div>
 </div>
@@ -370,7 +412,7 @@
       <div class="method_details first">
   <h3 class="signature first" id="assert_not_included!-instance_method">
   
-    #<strong>assert_not_included!</strong>  &#x21d2; <tt>Object</tt> 
+    #<strong>assert_not_included!</strong>  &#x21d2; <tt>void</tt> 
   
 
   
@@ -378,7 +420,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
+    <p class="note returns_void">This method returns an undefined value.</p>
 
   </div>
 </div>
@@ -404,14 +446,14 @@
       <pre class="lines">
 
 
-22
-23
-24
-25
-26</pre>
+44
+45
+46
+47
+48</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns.rb', line 22</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns.rb', line 44</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_assert_not_included!'>assert_not_included!</span>
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_included?'>included?</span>
@@ -426,24 +468,33 @@
       <div class="method_details ">
   <h3 class="signature " id="configure-instance_method">
   
-    #<strong>configure</strong>(&amp;configuration_block)  &#x21d2; <tt>Object</tt> 
+    #<strong>configure</strong>(&amp;configuration_block)  &#x21d2; <tt>void</tt> 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    <p class="note returns_void">This method returns an undefined value.</p>
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-31
-32
-33</pre>
+53
+54
+55</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns.rb', line 31</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns.rb', line 53</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_configure'>configure</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_configuration_block'>configuration_block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_stack'>stack</span><span class='period'>.</span><span class='id identifier rubyid_instance_exec'>instance_exec</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_configuration_block'>configuration_block</span><span class='rparen'>)</span>
@@ -496,16 +547,16 @@ Does nothing for the subsequent calls.</p>
       <pre class="lines">
 
 
-41
-42
-43
-44
-45
-46
-47</pre>
+63
+64
+65
+66
+67
+68
+69</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns.rb', line 41</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns.rb', line 63</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_include!'>include!</span>
   <span class='id identifier rubyid_stack'>stack</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='label'>entity:</span> <span class='id identifier rubyid_stack'>stack</span><span class='period'>.</span><span class='id identifier rubyid_entity'>entity</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_included?'>included?</span>
@@ -557,12 +608,12 @@ Does nothing for the subsequent calls.</p>
       <pre class="lines">
 
 
-72
-73
-74</pre>
+94
+95
+96</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns.rb', line 72</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns.rb', line 94</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_included?'>included?</span>
   <span class='id identifier rubyid_included_multiple_times?'>included_multiple_times?</span> <span class='op'>||</span> <span class='id identifier rubyid_included_once?'>included_once?</span>
@@ -610,12 +661,12 @@ Does nothing for the subsequent calls.</p>
       <pre class="lines">
 
 
-54
-55
-56</pre>
+76
+77
+78</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns.rb', line 54</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns.rb', line 76</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_included_multiple_times?'>included_multiple_times?</span>
   <span class='id identifier rubyid_include_state'>include_state</span> <span class='op'>==</span> <span class='symbol'>:included_multiple_times</span>
@@ -663,15 +714,161 @@ Does nothing for the subsequent calls.</p>
       <pre class="lines">
 
 
-63
-64
-65</pre>
+85
+86
+87</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns.rb', line 63</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns.rb', line 85</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_included_once?'>included_once?</span>
   <span class='id identifier rubyid_include_state'>include_state</span> <span class='op'>==</span> <span class='symbol'>:included_once</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="method_defined?-instance_method">
+  
+    #<strong>method_defined?</strong>(method_name)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>method_name</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>, <tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+23
+24
+25
+26
+27
+28</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns.rb', line 23</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_method_defined?'>method_defined?</span><span class='lparen'>(</span><span class='id identifier rubyid_method_name'>method_name</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='kw'>true</span> <span class='kw'>if</span> <span class='id identifier rubyid_method_defined_in_instance_methods_modules?'>method_defined_in_instance_methods_modules?</span><span class='lparen'>(</span><span class='id identifier rubyid_method_name'>method_name</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='kw'>true</span> <span class='kw'>if</span> <span class='id identifier rubyid_method_defined_directly?'>method_defined_directly?</span><span class='lparen'>(</span><span class='id identifier rubyid_method_name'>method_name</span><span class='rparen'>)</span>
+
+  <span class='kw'>false</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="private_method_defined?-instance_method">
+  
+    #<strong>private_method_defined?</strong>(method_name)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>method_name</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>, <tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+34
+35
+36
+37
+38
+39</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns.rb', line 34</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_private_method_defined?'>private_method_defined?</span><span class='lparen'>(</span><span class='id identifier rubyid_method_name'>method_name</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='kw'>true</span> <span class='kw'>if</span> <span class='id identifier rubyid_private_method_defined_in_instance_methods_modules?'>private_method_defined_in_instance_methods_modules?</span><span class='lparen'>(</span><span class='id identifier rubyid_method_name'>method_name</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='kw'>true</span> <span class='kw'>if</span> <span class='id identifier rubyid_private_method_defined_directly?'>private_method_defined_directly?</span><span class='lparen'>(</span><span class='id identifier rubyid_method_name'>method_name</span><span class='rparen'>)</span>
+
+  <span class='kw'>false</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -720,12 +917,12 @@ Does nothing for the subsequent calls.</p>
       <pre class="lines">
 
 
-79
-80
-81</pre>
+101
+102
+103</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns.rb', line 79</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns.rb', line 101</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_a'>to_a</span>
   <span class='id identifier rubyid_stack'>stack</span><span class='period'>.</span><span class='id identifier rubyid_to_a'>to_a</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:first</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:concern</span><span class='rparen'>)</span>
@@ -740,7 +937,7 @@ Does nothing for the subsequent calls.</p>
 </div>
 
       <div id="footer">
-  Generated on Sat Oct  1 19:26:38 2022 by
+  Generated on Sat Oct  1 22:46:57 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>
