@@ -17,3 +17,4 @@
 | High | 🚧 | `respond_to_missing?` | |
 | Medium | ⏳ | Custom matcher to track `ConvenientService::Logger` messages | |
 | Medium | 🚧 | Remove `respond_to?` from `Copyable` | Investigate before making any decision |
+| High | 🚧 | Unified `inspect` | |
