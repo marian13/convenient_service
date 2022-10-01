@@ -22,6 +22,9 @@ module ConvenientService
         overrides[:args] ||= {}
         overrides[:kwargs] ||= {}
 
+        ##
+        # TODO: Refactor runtime `respond_to?`. Investigate before refactoring.
+        #
         args =
           if respond_to?(:to_args)
             case overrides[:args]

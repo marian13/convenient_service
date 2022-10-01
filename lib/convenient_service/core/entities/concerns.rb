@@ -8,7 +8,7 @@ module ConvenientService
     module Entities
       class Concerns
         ##
-        #
+        # @return [void]
         #
         def initialize(entity:)
           @stack = Entities::Stack.new(entity: entity)
@@ -17,7 +17,29 @@ module ConvenientService
         end
 
         ##
+        # @param method_name [Symbol, String]
+        # @return [Boolean]
         #
+        def method_defined?(method_name)
+          return true if method_defined_in_instance_methods_modules?(method_name)
+          return true if method_defined_directly?(method_name)
+
+          false
+        end
+
+        ##
+        # @param method_name [Symbol, String]
+        # @return [Boolean]
+        #
+        def private_method_defined?(method_name)
+          return true if private_method_defined_in_instance_methods_modules?(method_name)
+          return true if private_method_defined_directly?(method_name)
+
+          false
+        end
+
+        ##
+        # @return [void]
         #
         def assert_not_included!
           return unless included?
@@ -26,7 +48,7 @@ module ConvenientService
         end
 
         ##
-        #
+        # @return [void]
         #
         def configure(&configuration_block)
           stack.instance_exec(&configuration_block)
@@ -77,17 +99,40 @@ module ConvenientService
         # @return [Array<Module>] concerns as plain modules.
         #
         def to_a
-          stack.to_a.map(&:first).map(&:concern)
+          plain_concerns
         end
 
         private
 
-        attr_reader :stack, :include_state
+        ##
+        # @!attribute [r] stack
+        #   @return [ConvenientService::Core::Entities::Concerns::Entities::Stack]
+        #
+        attr_reader :stack
 
+        ##
+        # @!attribute [r] include_state
+        #   @return [:not_included, :included_once, :included_multiple_times]
+        #
+        attr_reader :include_state
+
+        ##
+        # @return [Array<Module>].
+        #
+        def plain_concerns
+          stack.to_a.map(&:first).map(&:concern)
+        end
+
+        ##
+        # @return [void]
+        #
         def initialize_include_state!
           @include_state = :not_included
         end
 
+        ##
+        # @return [void]
+        #
         def transit_to_next_include_state!
           current_state = @include_state
 
@@ -99,6 +144,47 @@ module ConvenientService
             end
 
           @include_state = next_state
+        end
+
+        ##
+        # @param method_name [Symbol, String]
+        # @return [Boolean]
+        #
+        def method_defined_in_instance_methods_modules?(method_name)
+          instance_methods_modules.any? { |mod| mod.method_defined?(method_name) }
+        end
+
+        ##
+        # @param method_name [Symbol, String]
+        # @return [Boolean]
+        #
+        def private_method_defined_in_instance_methods_modules?(method_name)
+          instance_methods_modules.any? { |mod| mod.private_method_defined?(method_name) }
+        end
+
+        ##
+        # @param method_name [Symbol, String]
+        # @return [Boolean]
+        #
+        def method_defined_directly?(method_name)
+          plain_concerns.any? { |concern| concern.method_defined?(method_name) }
+        end
+
+        ##
+        # @param method_name [Symbol, String]
+        # @return [Boolean]
+        #
+        def private_method_defined_directly?(method_name)
+          plain_concerns.any? { |concern| concern.private_method_defined?(method_name) }
+        end
+
+        ##
+        # @return [Array<Module>]
+        #
+        def instance_methods_modules
+          plain_concerns
+            .select { |concern| concern.const_defined?(:InstanceMethods, false) }
+            .map { |concern| concern.const_get(:InstanceMethods) }
         end
       end
     end

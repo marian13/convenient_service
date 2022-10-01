@@ -210,7 +210,12 @@ module ConvenientService
         ##
         # NOTE: Customization compared to original `Concern` implementation.
         #
-        def instance_methods(&instance_methods_module_definition)
+        def instance_methods(include_private = false, &instance_methods_module_definition)
+          ##
+          # NOTE: This `if` is propably the reason why Rails team decided to create only `class_methods` in the original Concern implementation.
+          #
+          return super(include_private) unless instance_methods_module_definition
+
           mod = const_defined?(:InstanceMethods, false) ?
             const_get(:InstanceMethods) :
             const_set(:InstanceMethods, Module.new)

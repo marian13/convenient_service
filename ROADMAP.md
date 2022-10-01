@@ -14,4 +14,6 @@
 | Low | 🚧 | Create an example of `id_or_record` [attribute](https://api.rubyonrails.org/classes/ActiveRecord/Attributes/ClassMethods.html) |
 | Low | 🚧 | GitHub Wiki/Gists for Support | |
 | Low | 🚧 | Contribute to Shoulda Matchers | |
-| High | 🚧 | `respond_to_missing?` | |s
+| High | 🚧 | `respond_to_missing?` | |
+| Medium | ⏳ | Custom matcher to track `ConvenientService::Logger` messages | |
+| Medium | 🚧 | Remove `respond_to?` from `Copyable` | Investigate before making any decision |

@@ -13,6 +13,9 @@
 # - https://newbedev.com/ruby-create-singleton-with-parameters
 #
 module ConvenientService
+  ##
+  # TODO: Custom matcher to track log messages.
+  #
   class Logger < ::Logger
     include ::Singleton
 
@@ -41,17 +44,17 @@ module ConvenientService
       # https://ruby-doc.org/stdlib-2.4.0/libdoc/logger/rdoc/Logger.html#method-i-add
       #
       def colored_formatter
-        return original_formatter unless defined? Paint
+        return original_formatter unless defined? ::Paint
 
         proc do |severity, datetime, progname, message|
           log = original_formatter.call(severity, datetime, progname, message)
 
           case severity.to_s.downcase
-          when "info" then Paint[log, :cyan, :bold]
-          when "warn" then Paint[log, :yellow, :bold]
-          when "error" then Paint[log, :red, :bold]
-          when "fatal" then Paint[log, :red, :underline]
-          when "debug" then Paint[log, :magenta, :bold]
+          when "info" then ::Paint[log, :cyan, :bold]
+          when "warn" then ::Paint[log, :yellow, :bold]
+          when "error" then ::Paint[log, :red, :bold]
+          when "fatal" then ::Paint[log, :red, :underline]
+          when "debug" then ::Paint[log, :magenta, :bold]
           else log
           end
         end
