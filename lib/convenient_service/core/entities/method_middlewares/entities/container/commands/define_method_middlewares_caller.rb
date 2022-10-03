@@ -65,6 +65,10 @@ module ConvenientService
 
                         env = {entity: self, args: args, kwargs: kwargs, block: block}
 
+                        ##
+                        # NOTE: Full namespace should specified all the time, e.g: `ConvenientService::...`),
+                        # since this method is called in the context of the end user code.
+                        #
                         original_method =
                           if self.is_a?(Class)
                             self.commit_config!
@@ -74,8 +78,7 @@ module ConvenientService
 
                               self.singleton_class
                                 .ancestors
-                                .drop_while { |mod| mod != self::ClassMethodsMiddlewaresCallers }
-                                .drop(1)
+                                .then { |ancestors| ConvenientService::Utils::Array.drop_while(ancestors, inclusively: true) { |ancestor| ancestor != self::ClassMethodsMiddlewaresCallers } }
                                 .find { |mod| mod.instance_methods(false).include?(method) || mod.private_instance_methods(false).include?(method) }
                                 .instance_method(method)
                                 .bind(self)
@@ -89,8 +92,7 @@ module ConvenientService
 
                               self.class
                                 .ancestors
-                                .drop_while { |mod| mod != self.class::InstanceMethodsMiddlewaresCallers }
-                                .drop(1)
+                                .then { |ancestors| ConvenientService::Utils::Array.drop_while(ancestors, inclusively: true) { |ancestor| ancestor != self.class::InstanceMethodsMiddlewaresCallers } }
                                 .find { |mod| mod.instance_methods(false).include?(method) || mod.private_instance_methods(false).include?(method) }
                                 .then { |mod| ConvenientService::Utils::Method.find_own_from_class(method, mod) }
                                 .bind(self)

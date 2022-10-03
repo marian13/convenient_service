@@ -17,6 +17,9 @@ module ConvenientService
             end
 
             def result
+              ##
+              # TODO: A possible bottleneck. Should be removed if received negative feedback.
+              #
               own_method = Utils::Method.find_own(method_name, organizer)
 
               ##

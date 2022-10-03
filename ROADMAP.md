@@ -20,3 +20,4 @@
 | High | 🚧 | Unified `inspect` | |
 | High | 🚧 | Remove race condition for `method_missing` | |
 | High | 🚧 | Remove incompatiility of [Module#include](https://gist.github.com/marian13/9c25041f835564e945d978839097d419) | |
+| Medium | 🚧 | Split `Utils` specs into separate files | |

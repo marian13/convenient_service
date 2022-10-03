@@ -6,6 +6,9 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Utils::Array do
+  ##
+  # TODO: Split into separate files.
+  #
   describe ".contain_exactly?" do
     subject(:result) { described_class.contain_exactly?(first_array, second_array) }
 

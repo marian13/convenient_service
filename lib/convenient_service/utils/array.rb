@@ -3,6 +3,7 @@
 require_relative "array/errors"
 
 require_relative "array/contain_exactly"
+require_relative "array/drop_while"
 require_relative "array/find_last"
 require_relative "array/merge"
 require_relative "array/rjust"
@@ -14,6 +15,10 @@ module ConvenientService
       class << self
         def contain_exactly?(first_array, second_array)
           ContainExactly.call(first_array, second_array)
+        end
+
+        def drop_while(array, inclusively: false, &condition_block)
+          DropWhile.call(array, inclusively: inclusively, &condition_block)
         end
 
         def find_last(array, &block)
