@@ -2,7 +2,7 @@
 
 module ConvenientService
   module Configs
-    module StandardUncommitted
+    module Standard
       include Support::Concern
 
       ##
@@ -189,72 +189,5 @@ module ConvenientService
       end
       # rubocop:enable Lint/ConstantDefinitionInBlock
     end
-  end
-end
-
-module ConvenientService
-  module Configs
-    ##
-    # NOTE: A copy of `StandardUncommitted` config, that automatically commits itself after the `include` invocation.
-    #
-    # For example:
-    #
-    #   class PerformOperation
-    #     include ConvenientService::Configs::StandardCommitted
-    #     # ...
-    #   end
-    #
-    # is roughly equivalent to:
-    #
-    #   class PerformOperation
-    #     include ConvenientService::Configs::StandardUncommitted
-    #
-    #     commit_config!
-    #     # ...
-    #   end
-    #
-    StandardCommitted = StandardUncommitted.dup.tap do |mod|
-      mod.module_exec do
-        def self.included(klass)
-          klass.commit_config!
-        end
-      end
-    end
-  end
-end
-
-module ConvenientService
-  module Configs
-    ##
-    # IMPORTANT: Breaking change!!!
-    # Automatic config commitment by `method_missing` does NOT work in Ruby 2.7.
-    # That is probably caused by `(*args, **kwargs, &block)` delegation.
-    # Check the following article for more information: https://eregon.me/blog/2021/02/13/correct-delegation-in-ruby-2-27-3.html
-    # As a workaround, the `Standard` config is committed by default in Ruby 2.7.
-    # Ruby 3.0 and higher use `StandardUncommitted` as `Standard` since they have no issues with `(*args, **kwargs, &block)` delegation.
-    #
-    # For migration purposes, you can control config commitment, by using `StandardUncommitted` and `StandardCommitted` explicitly, for example:
-    #
-    #   class PerformOperation
-    #     include ConvenientService::Configs::Standard
-    #     # ...
-    #   end
-    #
-    # is equivalent to the following in Ruby 2.7
-    #
-    #   class PerformOperation
-    #     include ConvenientService::Configs::StandardCommitted
-    #     # ...
-    #   end
-    #
-    # and in Ruby 3.0+
-    #
-    #   class PerformOperation
-    #     include ConvenientService::Configs::StandardUncommitted
-    #     # ...
-    #     # Trigger `commit_config!` manually or it is automatically triggered by first `method_missing`.
-    #   end
-    #
-    Standard = ::RUBY_VERSION >= "3.0" ? StandardUncommitted : StandardCommitted
   end
 end

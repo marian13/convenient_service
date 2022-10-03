@@ -14,7 +14,7 @@ module ConvenientService
           module Config
             def self.included(service_class)
               service_class.class_exec do
-                include Configs::StandardUncommitted
+                include Configs::Standard
 
                 ##
                 # NOTE: `AssignsAttributesInConstructor::UsingDryInitializer` plugin.
@@ -33,8 +33,6 @@ module ConvenientService
                 middlewares method: :result do
                   use Plugins::Service::HasResultParamsValidations::UsingDryValidation::Middleware
                 end
-
-                commit_config!
               end
             end
           end

@@ -26,25 +26,83 @@ module ConvenientService
 
                   prepend_methods_middlewares_callers_to_container
 
-                  ##
-                  # NOTE: Assignment in the beginning for easier debugging.
-                  #
-                  <<~RUBY.tap { |code| methods_middlewares_callers.module_eval(code, __FILE__, __LINE__ + 1) }
-                    def #{method}(*args, **kwargs, &block)
-                      scope = :#{scope}
-                      method = :#{method}
-
-                      env = {entity: self, args: args, kwargs: kwargs, block: block}
-                      original = proc { |env| super(*env[:args], **env[:kwargs], &env[:block]) }
-
-                      middlewares(method: method, scope: scope).call(env, original)
-                    end
-                  RUBY
+                  define_method
 
                   true
                 end
 
                 private
+
+                ##
+                # @return [void]
+                #
+                # @internal
+                #   NOTE: Assignment of `scope` and `method` in the beginning for easier debugging.
+                #
+                if ::RUBY_VERSION >= "3.0"
+                  def define_method
+                    <<~RUBY.tap { |code| methods_middlewares_callers.module_eval(code, __FILE__, __LINE__ + 1) }
+                      def #{method}(*args, **kwargs, &block)
+                        scope = :#{scope}
+                        method = :#{method}
+
+                        env = {entity: self, args: args, kwargs: kwargs, block: block}
+                        original_method = proc { |env| super(*env[:args], **env[:kwargs], &env[:block]) }
+
+                        middlewares(method: method, scope: scope).call(env, original_method)
+                      end
+                    RUBY
+                  end
+                else
+                  ##
+                  # @see https://gist.github.com/marian13/9c25041f835564e945d978839097d419
+                  #
+                  def define_method
+                    <<~RUBY.tap { |code| methods_middlewares_callers.module_eval(code, __FILE__, __LINE__ + 1) }
+                      def #{method}(*args, **kwargs, &block)
+                        scope = :#{scope}
+                        method = :#{method}
+
+                        env = {entity: self, args: args, kwargs: kwargs, block: block}
+
+                        original_method =
+                          if self.is_a?(Class)
+                            self.commit_config!
+
+                            proc do |env|
+                              # byebug
+
+                              self.singleton_class
+                                .ancestors
+                                .drop_while { |mod| mod != self::ClassMethodsMiddlewaresCallers }
+                                .drop(1)
+                                .find { |mod| mod.instance_methods(false).include?(method) || mod.private_instance_methods(false).include?(method) }
+                                .instance_method(method)
+                                .bind(self)
+                                .call(*env[:args], **env[:kwargs], &env[:block])
+                            end
+                          else
+                            self.class.commit_config!
+
+                            proc do |env|
+                              # byebug if self.class == ConvenientService::Examples::Standard::Gemfile::Services::RunShell
+
+                              self.class
+                                .ancestors
+                                .drop_while { |mod| mod != self.class::InstanceMethodsMiddlewaresCallers }
+                                .drop(1)
+                                .find { |mod| mod.instance_methods(false).include?(method) || mod.private_instance_methods(false).include?(method) }
+                                .then { |mod| ConvenientService::Utils::Method.find_own_from_class(method, mod) }
+                                .bind(self)
+                                .call(*env[:args], **env[:kwargs], &env[:block])
+                            end
+                          end
+
+                        middlewares(method: method, scope: scope).call(env, original_method)
+                      end
+                    RUBY
+                  end
+                end
 
                 ##
                 # @return [Module]
@@ -53,6 +111,9 @@ module ConvenientService
                   @methods_middlewares_callers ||= container.resolve_methods_middlewares_callers(scope)
                 end
 
+                ##
+                # @return [void]
+                #
                 def prepend_methods_middlewares_callers_to_container
                   Commands::PrependModule.call(scope: scope, container: container, mod: methods_middlewares_callers)
                 end

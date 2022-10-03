@@ -18,3 +18,5 @@
 | Medium | ⏳ | Custom matcher to track `ConvenientService::Logger` messages | |
 | Medium | 🚧 | Remove `respond_to?` from `Copyable` | Investigate before making any decision |
 | High | 🚧 | Unified `inspect` | |
+| High | 🚧 | Remove race condition for `method_missing` | |
+| High | 🚧 | Remove incompatiility of [Module#include](https://gist.github.com/marian13/9c25041f835564e945d978839097d419) | |
