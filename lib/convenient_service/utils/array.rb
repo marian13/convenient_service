@@ -17,6 +17,12 @@ module ConvenientService
           ContainExactly.call(first_array, second_array)
         end
 
+        ##
+        # @param array [Array]
+        # @param inclusively [Boolean]
+        # @param condition_block [Proc]
+        # @return [Array]
+        #
         def drop_while(array, inclusively: false, &condition_block)
           DropWhile.call(array, inclusively: inclusively, &condition_block)
         end

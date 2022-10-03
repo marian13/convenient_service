@@ -76,6 +76,14 @@ module ConvenientService
                             proc do |env|
                               # byebug
 
+                              # self.singleton_class
+                              #   .ancestors
+                              #   .then { |ancestors| ConvenientService::Utils::Array.drop_while(ancestors, inclusively: true) { |ancestor| ancestor != self::ClassMethodsMiddlewaresCallers } }
+                              #   .find { |ancestor| ConvenientService::Utils::Method.has_own_method?(method, ancestor) }
+                              #   .instance_method(method)
+                              #   .bind(self)
+                              #   .call(*env[:args], **env[:kwargs], &env[:block])
+
                               self.singleton_class
                                 .ancestors
                                 .then { |ancestors| ConvenientService::Utils::Array.drop_while(ancestors, inclusively: true) { |ancestor| ancestor != self::ClassMethodsMiddlewaresCallers } }

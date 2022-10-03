@@ -1,0 +1,28 @@
+# frozen_string_literal: true
+
+require_relative "module/find_own_const"
+
+module ConvenientService
+  module Utils
+    ##
+    # NOTE: `Class` is descendant of `Module`, that is why `Module` is more generic term.
+    # TODO: Better generic term for both `Module` and `Class`.
+    #
+    module Module
+      class << self
+        ##
+        # @param mod [Class, Module]
+        # @param const_name [Symbol]
+        # @return [Object] Value of own const. Can be any type.
+        #
+        # @example:
+        #   ConvenientService::Utils::Module.find_own_const(Object, :File)
+        #   ConvenientService::Utils::Module.find_own_const(Class, :File)
+        #
+        def find_own_const(mod, const_name)
+          FindOwnConst.call(mod, const_name)
+        end
+      end
+    end
+  end
+end
