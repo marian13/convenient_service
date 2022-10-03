@@ -74,20 +74,10 @@ module ConvenientService
                             self.commit_config!
 
                             proc do |env|
-                              # byebug
-
-                              # self.singleton_class
-                              #   .ancestors
-                              #   .then { |ancestors| ConvenientService::Utils::Array.drop_while(ancestors, inclusively: true) { |ancestor| ancestor != self::ClassMethodsMiddlewaresCallers } }
-                              #   .find { |ancestor| ConvenientService::Utils::Method.has_own_method?(method, ancestor) }
-                              #   .instance_method(method)
-                              #   .bind(self)
-                              #   .call(*env[:args], **env[:kwargs], &env[:block])
-
                               self.singleton_class
                                 .ancestors
                                 .then { |ancestors| ConvenientService::Utils::Array.drop_while(ancestors, inclusively: true) { |ancestor| ancestor != self::ClassMethodsMiddlewaresCallers } }
-                                .find { |mod| mod.instance_methods(false).include?(method) || mod.private_instance_methods(false).include?(method) }
+                                .find { |ancestor| ConvenientService::Utils::Module.respond_to_own?(ancestor, method, private: true) }
                                 .instance_method(method)
                                 .bind(self)
                                 .call(*env[:args], **env[:kwargs], &env[:block])
@@ -101,7 +91,7 @@ module ConvenientService
                               self.class
                                 .ancestors
                                 .then { |ancestors| ConvenientService::Utils::Array.drop_while(ancestors, inclusively: true) { |ancestor| ancestor != self.class::InstanceMethodsMiddlewaresCallers } }
-                                .find { |mod| mod.instance_methods(false).include?(method) || mod.private_instance_methods(false).include?(method) }
+                                .find { |ancestor| ConvenientService::Utils::Module.respond_to_own?(ancestor, method, private: true) }
                                 .then { |mod| ConvenientService::Utils::Method.find_own_from_class(method, mod) }
                                 .bind(self)
                                 .call(*env[:args], **env[:kwargs], &env[:block])

@@ -5,7 +5,7 @@
 #   module Test
 #   end
 #
-#   ConvenientService::Utils::Object::FindOwnConst.call(Test, :File)
+#   ConvenientService::Utils::Module::FindOwnConst.call(Test, :File)
 #   # => nil, not File from Ruby Core.
 #
 #   module Test
@@ -13,7 +13,7 @@
 #     end
 #   end
 #
-#   ConvenientService::Utils::Object::FindOwnConst.call(Test, :File)
+#   ConvenientService::Utils::Module::FindOwnConst.call(Test, :File)
 #   # => Test::File
 #
 module ConvenientService
@@ -21,13 +21,13 @@ module ConvenientService
     module Module
       class FindOwnConst < Support::Command
         ##
-        # @!attribute [r] stack
+        # @!attribute [r] mod
         #   @return [Class, Module]
         #
-        attr_reader :mod, :const_name
+        attr_reader :mod
 
         ##
-        # @!attribute [r] stack
+        # @!attribute [r] const_name
         #   @return [Symbol]
         #
         attr_reader :const_name

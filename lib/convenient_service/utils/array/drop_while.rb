@@ -5,20 +5,20 @@ module ConvenientService
     module Array
       class DropWhile < Support::Command
         ##
-        # @!attribute [r] stack
-        #   @param array [Array]
+        # @!attribute [r] array
+        #   @return [Array]
         #
         attr_reader :array
 
         ##
-        # @!attribute [r] stack
-        #   @param inclusively [Boolean]
+        # @!attribute [r] inclusively
+        #   @return [Boolean]
         #
         attr_reader :inclusively
 
         ##
-        # @!attribute [r] stack
-        #   @param condition_block [Proc]
+        # @!attribute [r] condition_block
+        #   @return [Proc]
         #
         attr_reader :condition_block
 
