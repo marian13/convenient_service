@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "module/find_own_const"
-require_relative "module/respond_to_own"
+require_relative "module/has_own_instance_method"
 
 module ConvenientService
   module Utils
@@ -30,8 +30,8 @@ module ConvenientService
         # @param private [Boolean]
         # @return [Boolean]
         #
-        def respond_to_own?(mod, method, private: true)
-          RespondToOwn.call(mod, method, private: private)
+        def has_own_instance_method?(mod, method, private: true)
+          HasOwnInstanceMethod.call(mod, method, private: private)
         end
       end
     end

@@ -3,7 +3,7 @@
 module ConvenientService
   module Utils
     module Module
-      class RespondToOwn < Support::Command
+      class HasOwnInstanceMethod < Support::Command
         ##
         # @!attribute [r] mod
         #   @return [Class, Module]

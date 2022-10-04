@@ -77,7 +77,7 @@ module ConvenientService
                               self.singleton_class
                                 .ancestors
                                 .then { |ancestors| ConvenientService::Utils::Array.drop_while(ancestors, inclusively: true) { |ancestor| ancestor != self::ClassMethodsMiddlewaresCallers } }
-                                .find { |ancestor| ConvenientService::Utils::Module.respond_to_own?(ancestor, method, private: true) }
+                                .find { |ancestor| ConvenientService::Utils::Module.has_own_instance_method?(ancestor, method, private: true) }
                                 .instance_method(method)
                                 .bind(self)
                                 .call(*env[:args], **env[:kwargs], &env[:block])
@@ -91,7 +91,7 @@ module ConvenientService
                               self.class
                                 .ancestors
                                 .then { |ancestors| ConvenientService::Utils::Array.drop_while(ancestors, inclusively: true) { |ancestor| ancestor != self.class::InstanceMethodsMiddlewaresCallers } }
-                                .find { |ancestor| ConvenientService::Utils::Module.respond_to_own?(ancestor, method, private: true) }
+                                .find { |ancestor| ConvenientService::Utils::Module.has_own_instance_method?(ancestor, method, private: true) }
                                 .then { |mod| ConvenientService::Utils::Method.find_own_from_class(method, mod) }
                                 .bind(self)
                                 .call(*env[:args], **env[:kwargs], &env[:block])
