@@ -65,34 +65,13 @@ module ConvenientService
 
                         env = {entity: self, args: args, kwargs: kwargs, block: block}
 
-                        case scope
-                        when :class
-                          self.commit_config!
-
-                          ancestors = self.singleton_class.ancestors
-
-                          methods_middlewares_callers = self::ClassMethodsMiddlewaresCallers
-                        when :instance
-                          self.class.commit_config!
-
-                          ancestors = self.class.ancestors
-
-                          methods_middlewares_callers = self.class::InstanceMethodsMiddlewaresCallers
-                        end
-
                         ##
                         # NOTE: Full namespace should specified all the time, e.g: `ConvenientService::...`),
                         # since this method is called in the context of the end user code.
                         #
-                        original_method =
-                          proc do |env|
-                            ancestors
-                              .then { |ancestors| ConvenientService::Utils::Array.drop_while(ancestors, inclusively: true) { |ancestor| ancestor != methods_middlewares_callers } }
-                              .find { |ancestor| ConvenientService::Utils::Module.has_own_instance_method?(ancestor, method, private: true) }
-                              .then { |ancestor| ConvenientService::Utils::Module.get_own_instance_method(ancestor, method, private: true) }
-                              .bind(self)
-                              .call(*env[:args], **env[:kwargs], &env[:block])
-                          end
+                        super_method = ConvenientService::Core::Entities::MethodMiddlewares::Entities::Caller.resolve_super_method(self, scope, method)
+
+                        original_method = proc { |env| super_method.call(*env[:args], **env[:kwargs], &env[:block]) }
 
                         middlewares(method: method, scope: scope).call(env, original_method)
                       end
