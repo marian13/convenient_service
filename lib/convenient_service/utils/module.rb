@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require_relative "module/get_own_instance_method"
 require_relative "module/find_own_const"
 require_relative "module/has_own_instance_method"
 
@@ -11,6 +12,17 @@ module ConvenientService
     #
     module Module
       class << self
+        ##
+        # @param mod [Class, Module]
+        # @param method_name [Symbol, String]
+        # @param private [Boolean]
+        # @param max_iteration_count [Integer]
+        # @return [UnboundMethod, nil]
+        #
+        def get_own_instance_method(mod, method_name, **kwargs)
+          GetOwnInstanceMethod.call(mod, method_name, **kwargs)
+        end
+
         ##
         # @param mod [Class, Module]
         # @param const_name [Symbol]

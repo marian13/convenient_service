@@ -11,10 +11,10 @@ module ConvenientService
         attr_reader :mod
 
         ##
-        # @!attribute [r] method
+        # @!attribute [r] method_name
         #   @return [String, Symbol]
         #
-        attr_reader :method
+        attr_reader :method_name
 
         ##
         # @!attribute [r] private
@@ -24,13 +24,13 @@ module ConvenientService
 
         ##
         # @param mod [Class, Module]
-        # @param method [String, Symbol]
+        # @param method_name [String, Symbol]
         # @param private [Boolean]
         # @return [void]
         #
-        def initialize(mod, method, private: false)
+        def initialize(mod, method_name, private: false)
           @mod = mod
-          @method = method
+          @method_name = method_name
           @private = private
         end
 
@@ -38,12 +38,12 @@ module ConvenientService
         # @return [Boolean]
         #
         def call
-          method_name = method.to_sym
+          method = method_name.to_sym
 
-          return true if own_instance_methods.include?(method_name)
+          return true if own_instance_methods.include?(method)
 
           if private
-            return true if private_own_instance_methods.include?(method_name)
+            return true if private_own_instance_methods.include?(method)
           end
 
           false

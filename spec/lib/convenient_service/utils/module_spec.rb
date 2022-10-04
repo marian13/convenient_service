@@ -61,12 +61,12 @@ RSpec.describe ConvenientService::Utils::Module do
     # NOTE: `+` unfreezes string.
     # https://ruby-doc.org/core-3.1.2/String.html#method-i-2B-40
     #
-    let(:method) { +"foo" }
+    let(:method_name) { +"foo" }
     let(:private) { false }
     let(:default_kwargs) { {private: private} }
     let(:kwargs) { default_kwargs }
 
-    let(:result) { described_class.has_own_instance_method?(mod, method, **kwargs) }
+    let(:result) { described_class.has_own_instance_method?(mod, method_name, **kwargs) }
 
     context "when `mod` does NOT have own instance method" do
       let(:mod) do
@@ -142,7 +142,7 @@ RSpec.describe ConvenientService::Utils::Module do
     end
 
     it "converts `method` to symbol" do
-      expect { result }.to delegate_to(method, :to_sym)
+      expect { result }.to delegate_to(method_name, :to_sym)
     end
 
     it "delegates to `instance_methods(false)` to find public and protected own methods" do
