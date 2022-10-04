@@ -23,8 +23,9 @@ module ConvenientService
         attr_reader :private
 
         ##
-        # @param [Class, Module]
-        # @param [String, Symbol]
+        # @param mod [Class, Module]
+        # @param method [String, Symbol]
+        # @param private [Boolean]
         # @return [void]
         #
         def initialize(mod, method, private: false)
