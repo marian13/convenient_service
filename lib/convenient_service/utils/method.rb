@@ -14,8 +14,8 @@ module ConvenientService
           Defined.call(method_name, **kwargs)
         end
 
-        def find_own(method_name, object, **kwargs)
-          FindOwn.call(method_name, object, **kwargs)
+        def find_own(method_name, instance, **kwargs)
+          FindOwn.call(method_name, instance, **kwargs)
         end
       end
     end

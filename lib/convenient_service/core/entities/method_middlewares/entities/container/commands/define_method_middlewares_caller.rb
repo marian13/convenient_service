@@ -26,25 +26,57 @@ module ConvenientService
 
                   prepend_methods_middlewares_callers_to_container
 
-                  ##
-                  # NOTE: Assignment in the beginning for easier debugging.
-                  #
-                  <<~RUBY.tap { |code| methods_middlewares_callers.module_eval(code, __FILE__, __LINE__ + 1) }
-                    def #{method}(*args, **kwargs, &block)
-                      scope = :#{scope}
-                      method = :#{method}
-
-                      env = {entity: self, args: args, kwargs: kwargs, block: block}
-                      original = proc { |env| super(*env[:args], **env[:kwargs], &env[:block]) }
-
-                      middlewares(method: method, scope: scope).call(env, original)
-                    end
-                  RUBY
+                  define_method
 
                   true
                 end
 
                 private
+
+                ##
+                # @return [void]
+                #
+                # @internal
+                #   NOTE: Assignment of `scope` and `method` in the beginning for easier debugging.
+                #
+                #   NOTE: Check the following link in order to get an idea why two versions of `define_method` exist.
+                #   https://gist.github.com/marian13/9c25041f835564e945d978839097d419
+                #
+                if ::RUBY_VERSION >= "3.0"
+                  def define_method
+                    <<~RUBY.tap { |code| methods_middlewares_callers.module_eval(code, __FILE__, __LINE__ + 1) }
+                      def #{method}(*args, **kwargs, &block)
+                        scope = :#{scope}
+                        method = :#{method}
+
+                        env = {entity: self, args: args, kwargs: kwargs, block: block}
+                        original_method = proc { |env| super(*env[:args], **env[:kwargs], &env[:block]) }
+
+                        middlewares(method: method, scope: scope).call(env, original_method)
+                      end
+                    RUBY
+                  end
+                else
+                  def define_method
+                    <<~RUBY.tap { |code| methods_middlewares_callers.module_eval(code, __FILE__, __LINE__ + 1) }
+                      def #{method}(*args, **kwargs, &block)
+                        scope = :#{scope}
+                        method = :#{method}
+
+                        env = {entity: self, args: args, kwargs: kwargs, block: block}
+
+                        ##
+                        # NOTE: Full namespace should be specified, since the generated method is called in the context of the end user code.
+                        #
+                        super_method = ConvenientService::Core::Entities::MethodMiddlewares.resolve_super_method(self, scope, method)
+
+                        original_method = proc { |env| super_method.call(*env[:args], **env[:kwargs], &env[:block]) }
+
+                        middlewares(method: method, scope: scope).call(env, original_method)
+                      end
+                    RUBY
+                  end
+                end
 
                 ##
                 # @return [Module]
@@ -53,6 +85,9 @@ module ConvenientService
                   @methods_middlewares_callers ||= container.resolve_methods_middlewares_callers(scope)
                 end
 
+                ##
+                # @return [void]
+                #
                 def prepend_methods_middlewares_callers_to_container
                   Commands::PrependModule.call(scope: scope, container: container, mod: methods_middlewares_callers)
                 end
