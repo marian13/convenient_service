@@ -79,7 +79,7 @@
   <dl>
     <dt>Defined in:</dt>
     <dd>lib/convenient_service/utils/array.rb<span class="defines">,<br />
-  lib/convenient_service/utils/array/wrap.rb,<br /> lib/convenient_service/utils/array/merge.rb,<br /> lib/convenient_service/utils/array/rjust.rb,<br /> lib/convenient_service/utils/array/errors.rb,<br /> lib/convenient_service/utils/array/find_last.rb,<br /> lib/convenient_service/utils/array/contain_exactly.rb</span>
+  lib/convenient_service/utils/array/wrap.rb,<br /> lib/convenient_service/utils/array/merge.rb,<br /> lib/convenient_service/utils/array/rjust.rb,<br /> lib/convenient_service/utils/array/errors.rb,<br /> lib/convenient_service/utils/array/find_last.rb,<br /> lib/convenient_service/utils/array/drop_while.rb,<br /> lib/convenient_service/utils/array/contain_exactly.rb</span>
 </dd>
   </dl>
   
@@ -93,7 +93,7 @@
     
   
     
-      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Array/ContainExactly.html" title="ConvenientService::Utils::Array::ContainExactly (class)">ContainExactly</a></span>, <span class='object_link'><a href="Array/FindLast.html" title="ConvenientService::Utils::Array::FindLast (class)">FindLast</a></span>, <span class='object_link'><a href="Array/Merge.html" title="ConvenientService::Utils::Array::Merge (class)">Merge</a></span>, <span class='object_link'><a href="Array/RJust.html" title="ConvenientService::Utils::Array::RJust (class)">RJust</a></span>, <span class='object_link'><a href="Array/Wrap.html" title="ConvenientService::Utils::Array::Wrap (class)">Wrap</a></span>
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Array/ContainExactly.html" title="ConvenientService::Utils::Array::ContainExactly (class)">ContainExactly</a></span>, <span class='object_link'><a href="Array/DropWhile.html" title="ConvenientService::Utils::Array::DropWhile (class)">DropWhile</a></span>, <span class='object_link'><a href="Array/FindLast.html" title="ConvenientService::Utils::Array::FindLast (class)">FindLast</a></span>, <span class='object_link'><a href="Array/Merge.html" title="ConvenientService::Utils::Array::Merge (class)">Merge</a></span>, <span class='object_link'><a href="Array/RJust.html" title="ConvenientService::Utils::Array::RJust (class)">RJust</a></span>, <span class='object_link'><a href="Array/Wrap.html" title="ConvenientService::Utils::Array::Wrap (class)">Wrap</a></span>
     
   
 </p>
@@ -116,6 +116,28 @@
   <span class="summary_signature">
     
       <a href="#contain_exactly%3F-class_method" title="contain_exactly? (class method)">.<strong>contain_exactly?</strong>(first_array, second_array)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#drop_while-class_method" title="drop_while (class method)">.<strong>drop_while</strong>(array, inclusively: false, &amp;condition_block)  &#x21d2; Array </a>
     
 
     
@@ -268,15 +290,106 @@
       <pre class="lines">
 
 
-15
 16
-17</pre>
+17
+18</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/array.rb', line 15</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/array.rb', line 16</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_contain_exactly?'>contain_exactly?</span><span class='lparen'>(</span><span class='id identifier rubyid_first_array'>first_array</span><span class='comma'>,</span> <span class='id identifier rubyid_second_array'>second_array</span><span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="Array/ContainExactly.html" title="ConvenientService::Utils::Array::ContainExactly (class)">ContainExactly</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="Array/ContainExactly.html#call-instance_method" title="ConvenientService::Utils::Array::ContainExactly#call (method)">call</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_first_array'>first_array</span><span class='comma'>,</span> <span class='id identifier rubyid_second_array'>second_array</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="drop_while-class_method">
+  
+    .<strong>drop_while</strong>(array, inclusively: false, &amp;condition_block)  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::Utils::Array (module)">Array</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>array</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="ConvenientService::Utils::Array (module)">Array</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>inclusively</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>false</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>condition_block</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Proc.html" title="ConvenientService::Utils::Proc (module)">Proc</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="ConvenientService::Utils::Array (module)">Array</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+26
+27
+28</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/array.rb', line 26</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_drop_while'>drop_while</span><span class='lparen'>(</span><span class='id identifier rubyid_array'>array</span><span class='comma'>,</span> <span class='label'>inclusively:</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_condition_block'>condition_block</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="Array/DropWhile.html" title="ConvenientService::Utils::Array::DropWhile (class)">DropWhile</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="Array/DropWhile.html#call-instance_method" title="ConvenientService::Utils::Array::DropWhile#call (method)">call</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_array'>array</span><span class='comma'>,</span> <span class='label'>inclusively:</span> <span class='id identifier rubyid_inclusively'>inclusively</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_condition_block'>condition_block</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -298,12 +411,12 @@
       <pre class="lines">
 
 
-19
-20
-21</pre>
+30
+31
+32</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/array.rb', line 19</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/array.rb', line 30</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_find_last'>find_last</span><span class='lparen'>(</span><span class='id identifier rubyid_array'>array</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="Array/FindLast.html" title="ConvenientService::Utils::Array::FindLast (class)">FindLast</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="Array/FindLast.html#call-instance_method" title="ConvenientService::Utils::Array::FindLast#call (method)">call</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_array'>array</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
@@ -328,12 +441,12 @@
       <pre class="lines">
 
 
-23
-24
-25</pre>
+34
+35
+36</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/array.rb', line 23</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/array.rb', line 34</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='id identifier rubyid_array'>array</span><span class='comma'>,</span> <span class='id identifier rubyid_overrides'>overrides</span><span class='comma'>,</span> <span class='label'>raise_on_non_integer_index:</span> <span class='kw'>true</span><span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="Array/Merge.html" title="ConvenientService::Utils::Array::Merge (class)">Merge</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="Array/Merge.html#call-instance_method" title="ConvenientService::Utils::Array::Merge#call (method)">call</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_array'>array</span><span class='comma'>,</span> <span class='id identifier rubyid_overrides'>overrides</span><span class='comma'>,</span> <span class='label'>raise_on_non_integer_index:</span> <span class='id identifier rubyid_raise_on_non_integer_index'>raise_on_non_integer_index</span><span class='rparen'>)</span>
@@ -358,12 +471,12 @@
       <pre class="lines">
 
 
-27
-28
-29</pre>
+38
+39
+40</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/array.rb', line 27</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/array.rb', line 38</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_rjust'>rjust</span><span class='lparen'>(</span><span class='id identifier rubyid_array'>array</span><span class='comma'>,</span> <span class='id identifier rubyid_size'>size</span><span class='comma'>,</span> <span class='id identifier rubyid_pad'>pad</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="Array/RJust.html" title="ConvenientService::Utils::Array::RJust (class)">RJust</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="Array/RJust.html#call-instance_method" title="ConvenientService::Utils::Array::RJust#call (method)">call</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_array'>array</span><span class='comma'>,</span> <span class='id identifier rubyid_size'>size</span><span class='comma'>,</span> <span class='id identifier rubyid_pad'>pad</span><span class='rparen'>)</span>
@@ -388,12 +501,12 @@
       <pre class="lines">
 
 
-31
-32
-33</pre>
+42
+43
+44</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/array.rb', line 31</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/array.rb', line 42</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_wrap'>wrap</span><span class='lparen'>(</span><span class='id identifier rubyid_object'>object</span><span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="Array/Wrap.html" title="ConvenientService::Utils::Array::Wrap (class)">Wrap</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="Array/Wrap.html#call-instance_method" title="ConvenientService::Utils::Array::Wrap#call (method)">call</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_object'>object</span><span class='rparen'>)</span>
@@ -408,7 +521,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Oct  1 23:22:02 2022 by
+  Generated on Thu Oct  6 18:12:10 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>

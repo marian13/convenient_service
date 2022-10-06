@@ -78,9 +78,7 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/convenient_service/configs/standard.rb<span class="defines">,<br />
-  lib/convenient_service/configs/standard.rb,<br /> lib/convenient_service/configs/standard.rb</span>
-</dd>
+    <dd>lib/convenient_service/configs/standard.rb</dd>
   </dl>
   
 </div>
@@ -89,92 +87,12 @@
 <p class="children">
   
     
-      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Configs/StandardUncommitted.html" title="ConvenientService::Configs::StandardUncommitted (module)">StandardUncommitted</a></span>
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Configs/Standard.html" title="ConvenientService::Configs::Standard (module)">Standard</a></span>
     
   
     
   
 </p>
-
-  
-    <h2>
-      Constant Summary
-      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
-    </h2>
-
-    <dl class="constants">
-      
-        <dt id="StandardCommitted-constant" class="">StandardCommitted =
-          <div class="docstring">
-  <div class="discussion">
-    <p>NOTE: A copy of <code>StandardUncommitted</code> config, that automatically commits itself after the <code>include</code> invocation.</p>
-<p>For example:</p>
-<p>class PerformOperation
-include ConvenientService::Configs::StandardCommitted
-# ...
-end</p>
-<p>is roughly equivalent to:</p>
-<p>class PerformOperation
-include ConvenientService::Configs::StandardUncommitted</p>
-<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_commit_config!'>commit_config!</span>
-<span class='comment'># ...
-</span></code></pre>
-<p>end</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-
-</div>
-        </dt>
-        <dd><pre class="code"><span class='const'><span class='object_link'><a href="Configs/StandardUncommitted.html" title="ConvenientService::Configs::StandardUncommitted (module)">StandardUncommitted</a></span></span><span class='period'>.</span><span class='id identifier rubyid_dup'>dup</span><span class='period'>.</span><span class='id identifier rubyid_tap'>tap</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_mod'>mod</span><span class='op'>|</span>
-  <span class='id identifier rubyid_mod'>mod</span><span class='period'>.</span><span class='id identifier rubyid_module_exec'>module_exec</span> <span class='kw'>do</span>
-    <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_included'>included</span><span class='lparen'>(</span><span class='id identifier rubyid_klass'>klass</span><span class='rparen'>)</span>
-      <span class='id identifier rubyid_klass'>klass</span><span class='period'>.</span><span class='id identifier rubyid_commit_config!'>commit_config!</span>
-    <span class='kw'>end</span>
-  <span class='kw'>end</span>
-<span class='kw'>end</span></pre></dd>
-      
-        <dt id="Standard-constant" class="">Standard =
-          <div class="docstring">
-  <div class="discussion">
-    <p>IMPORTANT: Breaking change!!!
-Automatic config commitment by <code>method_missing</code> does NOT work in Ruby 2.7.
-That is probably caused by <code>(*args, **kwargs, &amp;block)</code> delegation.
-Check the following article for more information: <a href="https://eregon.me/blog/2021/02/13/correct-delegation-in-ruby-2-27-3.html">https://eregon.me/blog/2021/02/13/correct-delegation-in-ruby-2-27-3.html</a>
-As a workaround, the <code>Standard</code> config is committed by default in Ruby 2.7.
-Ruby 3.0 and higher use <code>StandardUncommitted</code> as <code>Standard</code> since they have no issues with <code>(*args, **kwargs, &amp;block)</code> delegation.</p>
-<p>For migration purposes, you can control config commitment, by using <code>StandardUncommitted</code> and <code>StandardCommitted</code> explicitly, for example:</p>
-<p>class PerformOperation
-include ConvenientService::Configs::Standard
-# ...
-end</p>
-<p>is equivalent to the following in Ruby 2.7</p>
-<p>class PerformOperation
-include ConvenientService::Configs::StandardCommitted
-# ...
-end</p>
-<p>and in Ruby 3.0+</p>
-<p>class PerformOperation
-include ConvenientService::Configs::StandardUncommitted
-# ...
-# Trigger <code>commit_config!</code> manually or it is automatically triggered by first <code>method_missing</code>.
-end</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-
-</div>
-        </dt>
-        <dd><pre class="code"><span class='op'>::</span><span class='const'>RUBY_VERSION</span> <span class='op'>&gt;=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>3.0</span><span class='tstring_end'>&quot;</span></span> <span class='op'>?</span> <span class='const'><span class='object_link'><a href="Configs/StandardUncommitted.html" title="ConvenientService::Configs::StandardUncommitted (module)">StandardUncommitted</a></span></span> <span class='op'>:</span> <span class='const'><span class='object_link'><a href="#StandardCommitted-constant" title="ConvenientService::Configs::StandardCommitted (constant)">StandardCommitted</a></span></span></pre></dd>
-      
-    </dl>
-  
 
 
 
@@ -187,7 +105,7 @@ end</p>
 </div>
 
       <div id="footer">
-  Generated on Sat Oct  1 23:22:02 2022 by
+  Generated on Thu Oct  6 18:12:10 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>

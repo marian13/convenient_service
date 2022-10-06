@@ -122,6 +122,34 @@
       <li class="public ">
   <span class="summary_signature">
     
+      <a href="#instance-instance_method" title="#instance (instance method)">#<strong>instance</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the value of attribute instance.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#max_iteration_count-instance_method" title="#max_iteration_count (instance method)">#<strong>max_iteration_count</strong>  &#x21d2; Object </a>
     
 
@@ -175,34 +203,6 @@
 </li>
 
     
-      <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#object-instance_method" title="#object (instance method)">#<strong>object</strong>  &#x21d2; Object </a>
-    
-
-    
-  </span>
-  
-  
-  
-    
-      <span class="note title readonly">readonly</span>
-    
-    
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'><p>Returns the value of attribute object.</p>
-</div></span>
-  
-</li>
-
-    
   </ul>
 
 
@@ -241,7 +241,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(method_name, object, max_iteration_count: Support::FiniteLoop::MAX_ITERATION_COUNT)  &#x21d2; FindOwn </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(method_name, instance, max_iteration_count: Support::FiniteLoop::MAX_ITERATION_COUNT)  &#x21d2; FindOwn </a>
     
 
     
@@ -289,7 +289,7 @@
     <div class="method_details first">
   <h3 class="signature first" id="initialize-instance_method">
   
-    #<strong>initialize</strong>(method_name, object, max_iteration_count: Support::FiniteLoop::MAX_ITERATION_COUNT)  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::Utils::Method::FindOwn (class)">FindOwn</a></span></tt> 
+    #<strong>initialize</strong>(method_name, instance, max_iteration_count: Support::FiniteLoop::MAX_ITERATION_COUNT)  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::Utils::Method::FindOwn (class)">FindOwn</a></span></tt> 
   
 
   
@@ -320,9 +320,9 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/method/find_own.rb', line 11</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_method_name'>method_name</span><span class='comma'>,</span> <span class='id identifier rubyid_object'>object</span><span class='comma'>,</span> <span class='label'>max_iteration_count:</span> <span class='const'><span class='object_link'><a href="../../Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Support/FiniteLoop.html" title="ConvenientService::Support::FiniteLoop (module)">FiniteLoop</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Support/FiniteLoop.html#MAX_ITERATION_COUNT-constant" title="ConvenientService::Support::FiniteLoop::MAX_ITERATION_COUNT (constant)">MAX_ITERATION_COUNT</a></span></span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_method_name'>method_name</span><span class='comma'>,</span> <span class='id identifier rubyid_instance'>instance</span><span class='comma'>,</span> <span class='label'>max_iteration_count:</span> <span class='const'><span class='object_link'><a href="../../Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Support/FiniteLoop.html" title="ConvenientService::Support::FiniteLoop (module)">FiniteLoop</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Support/FiniteLoop.html#MAX_ITERATION_COUNT-constant" title="ConvenientService::Support::FiniteLoop::MAX_ITERATION_COUNT (constant)">MAX_ITERATION_COUNT</a></span></span><span class='rparen'>)</span>
   <span class='ivar'>@method_name</span> <span class='op'>=</span> <span class='id identifier rubyid_method_name'>method_name</span>
-  <span class='ivar'>@object</span> <span class='op'>=</span> <span class='id identifier rubyid_object'>object</span>
+  <span class='ivar'>@instance</span> <span class='op'>=</span> <span class='id identifier rubyid_instance'>instance</span>
   <span class='ivar'>@max_iteration_count</span> <span class='op'>=</span> <span class='id identifier rubyid_max_iteration_count'>max_iteration_count</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -338,7 +338,49 @@
       
       <span id=""></span>
       <div class="method_details first">
-  <h3 class="signature first" id="max_iteration_count-instance_method">
+  <h3 class="signature first" id="instance-instance_method">
+  
+    #<strong>instance</strong>  &#x21d2; <tt><span class='object_link'><a href="../Object.html" title="ConvenientService::Utils::Object (module)">Object</a></span></tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the value of attribute instance.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+9
+10
+11</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/method/find_own.rb', line 9</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_instance'>instance</span>
+  <span class='ivar'>@instance</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="max_iteration_count-instance_method">
   
     #<strong>max_iteration_count</strong>  &#x21d2; <tt><span class='object_link'><a href="../Object.html" title="ConvenientService::Utils::Object (module)">Object</a></span></tt>  <span class="extras">(readonly)</span>
   
@@ -419,48 +461,6 @@
 </table>
 </div>
     
-      
-      <span id=""></span>
-      <div class="method_details ">
-  <h3 class="signature " id="object-instance_method">
-  
-    #<strong>object</strong>  &#x21d2; <tt><span class='object_link'><a href="../Object.html" title="ConvenientService::Utils::Object (module)">Object</a></span></tt>  <span class="extras">(readonly)</span>
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    <p>Returns the value of attribute object.</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-9
-10
-11</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/method/find_own.rb', line 9</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_object'>object</span>
-  <span class='ivar'>@object</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
   </div>
 
 
@@ -494,17 +494,21 @@
 25
 26
 27
-28</pre>
+28
+29
+30</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/method/find_own.rb', line 17</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span>
-  <span class='id identifier rubyid_method'>method</span> <span class='op'>=</span> <span class='id identifier rubyid_object'>object</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='id identifier rubyid_method_name'>method_name</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_object'>object</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='id identifier rubyid_method_name'>method_name</span><span class='rparen'>)</span>
+  <span class='comment'># method = instance.method(method_name) if instance.respond_to?(method_name, true)
+</span>
+  <span class='id identifier rubyid_method'>method</span> <span class='op'>=</span> <span class='id identifier rubyid_instance'>instance</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='id identifier rubyid_method_name'>method_name</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_instance'>instance</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='id identifier rubyid_method_name'>method_name</span><span class='rparen'>)</span>
 
   <span class='id identifier rubyid_finite_loop'>finite_loop</span> <span class='kw'>do</span>
     <span class='kw'>break</span> <span class='kw'>if</span> <span class='id identifier rubyid_method'>method</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
-    <span class='kw'>break</span> <span class='kw'>if</span> <span class='id identifier rubyid_method'>method</span><span class='period'>.</span><span class='id identifier rubyid_owner'>owner</span> <span class='op'>==</span> <span class='id identifier rubyid_object'>object</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span>
+    <span class='kw'>break</span> <span class='kw'>if</span> <span class='id identifier rubyid_method'>method</span><span class='period'>.</span><span class='id identifier rubyid_owner'>owner</span> <span class='op'>==</span> <span class='id identifier rubyid_instance'>instance</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span>
 
     <span class='id identifier rubyid_method'>method</span> <span class='op'>=</span> <span class='id identifier rubyid_method'>method</span><span class='period'>.</span><span class='id identifier rubyid_super_method'>super_method</span>
   <span class='kw'>end</span>
@@ -521,7 +525,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Oct  1 23:22:03 2022 by
+  Generated on Thu Oct  6 18:12:11 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>

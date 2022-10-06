@@ -524,20 +524,7 @@
 29
 30
 31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45</pre>
+32</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/entities/container/commands/define_method_middlewares_caller.rb', line 24</span>
@@ -547,21 +534,8 @@
 
   <span class='id identifier rubyid_prepend_methods_middlewares_callers_to_container'>prepend_methods_middlewares_callers_to_container</span>
 
-  <span class='comment'>##
-</span>  <span class='comment'># NOTE: Assignment in the beginning for easier debugging.
-</span>  <span class='comment'>#
-</span>  <span class='heredoc_beg'>&lt;&lt;~RUBY</span><span class='period'>.</span><span class='id identifier rubyid_tap'>tap</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_code'>code</span><span class='op'>|</span> <span class='id identifier rubyid_methods_middlewares_callers'>methods_middlewares_callers</span><span class='period'>.</span><span class='id identifier rubyid_module_eval'>module_eval</span><span class='lparen'>(</span><span class='id identifier rubyid_code'>code</span><span class='comma'>,</span> <span class='kw'>__FILE__</span><span class='comma'>,</span> <span class='kw'>__LINE__</span> <span class='op'>+</span> <span class='int'>1</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
-<span class='tstring_content'>    def </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_method'>method</span><span class='embexpr_end'>}</span><span class='tstring_content'>(*args, **kwargs, &amp;block)
-</span><span class='tstring_content'>      scope = :</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_scope'>scope</span><span class='embexpr_end'>}</span><span class='tstring_content'>
-</span><span class='tstring_content'>      method = :</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_method'>method</span><span class='embexpr_end'>}</span><span class='tstring_content'>
-</span><span class='tstring_content'>
-</span><span class='tstring_content'>      env = {entity: self, args: args, kwargs: kwargs, block: block}
-</span><span class='tstring_content'>      original = proc { |env| super(*env[:args], **env[:kwargs], &amp;env[:block]) }
-</span><span class='tstring_content'>
-</span><span class='tstring_content'>      middlewares(method: method, scope: scope).call(env, original)
-</span><span class='tstring_content'>    end
-</span><span class='heredoc_end'>  RUBY
-</span>
+  <span class='id identifier rubyid_define_method'>define_method</span>
+
   <span class='kw'>true</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -574,7 +548,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Oct  1 23:22:05 2022 by
+  Generated on Thu Oct  6 18:12:14 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>
