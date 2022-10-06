@@ -50,7 +50,7 @@ module ConvenientService
             private
 
             def step_class
-              @step_class ||= Utils::Module.find_own_const(service_class, :Step) || ::Class.new(Entities::Step)
+              @step_class ||= Utils::Module.get_own_const(service_class, :Step) || ::Class.new(Entities::Step)
             end
           end
         end

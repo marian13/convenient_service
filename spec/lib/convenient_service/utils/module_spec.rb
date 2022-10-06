@@ -6,8 +6,8 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Utils::Module do
-  describe ".find_own_const" do
-    let(:result) { described_class.find_own_const(mod, const_name) }
+  describe ".get_own_const" do
+    let(:result) { described_class.get_own_const(mod, const_name) }
 
     let(:mod) { Class.new }
 
