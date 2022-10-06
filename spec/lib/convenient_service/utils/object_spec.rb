@@ -4,7 +4,6 @@ require "spec_helper"
 
 require "convenient_service"
 
-# rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Utils::Object do
   describe ".resolve_type" do
     let(:result) { described_class.resolve_type(object) }
@@ -34,4 +33,3 @@ RSpec.describe ConvenientService::Utils::Object do
     end
   end
 end
-# rubocop:enable RSpec/NestedGroups

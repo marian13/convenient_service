@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-# rubocop:disable RSpec/NestedGroups
+# rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Utils::Module do
   describe ".find_own_const" do
     let(:result) { described_class.find_own_const(mod, const_name) }
@@ -167,4 +167,4 @@ RSpec.describe ConvenientService::Utils::Module do
     end
   end
 end
-# rubocop:enable RSpec/NestedGroups
+# rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers

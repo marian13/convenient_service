@@ -13,7 +13,7 @@ module ConvenientService
         # @param container [Class]
         # @return [void]
         #
-        def initialize(:scope, :method, :container)
+        def initialize(scope:, method:, container:)
           @scope = scope
           @method = method
           @container = Entities::Container.new(service_class: container)
