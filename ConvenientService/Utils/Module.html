@@ -79,7 +79,7 @@
   <dl>
     <dt>Defined in:</dt>
     <dd>lib/convenient_service/utils/module.rb<span class="defines">,<br />
-  lib/convenient_service/utils/module/find_own_const.rb,<br /> lib/convenient_service/utils/module/get_own_instance_method.rb,<br /> lib/convenient_service/utils/module/has_own_instance_method.rb</span>
+  lib/convenient_service/utils/module/get_own_const.rb,<br /> lib/convenient_service/utils/module/get_own_instance_method.rb,<br /> lib/convenient_service/utils/module/has_own_instance_method.rb</span>
 </dd>
   </dl>
   
@@ -102,7 +102,7 @@ TODO: Better generic term for both <code>Module</code> and <code>Class</code>.</
     
   
     
-      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Module/FindOwnConst.html" title="ConvenientService::Utils::Module::FindOwnConst (class)">FindOwnConst</a></span>, <span class='object_link'><a href="Module/GetOwnInstanceMethod.html" title="ConvenientService::Utils::Module::GetOwnInstanceMethod (class)">GetOwnInstanceMethod</a></span>, <span class='object_link'><a href="Module/HasOwnInstanceMethod.html" title="ConvenientService::Utils::Module::HasOwnInstanceMethod (class)">HasOwnInstanceMethod</a></span>
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Module/GetOwnConst.html" title="ConvenientService::Utils::Module::GetOwnConst (class)">GetOwnConst</a></span>, <span class='object_link'><a href="Module/GetOwnInstanceMethod.html" title="ConvenientService::Utils::Module::GetOwnInstanceMethod (class)">GetOwnInstanceMethod</a></span>, <span class='object_link'><a href="Module/HasOwnInstanceMethod.html" title="ConvenientService::Utils::Module::HasOwnInstanceMethod (class)">HasOwnInstanceMethod</a></span>
     
   
 </p>
@@ -124,7 +124,7 @@ TODO: Better generic term for both <code>Module</code> and <code>Class</code>.</
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#find_own_const-class_method" title="find_own_const (class method)">.<strong>find_own_const</strong>(mod, const_name)  &#x21d2; Object </a>
+      <a href="#get_own_const-class_method" title="get_own_const (class method)">.<strong>get_own_const</strong>(mod, const_name)  &#x21d2; Object </a>
     
 
     
@@ -138,7 +138,7 @@ TODO: Better generic term for both <code>Module</code> and <code>Class</code>.</
   
 
   
-    <span class="summary_desc"><div class='inline'><p>@example:   ConvenientService::Utils::Module.find_own_const(Object, :File)   ConvenientService::Utils::Module.find_own_const(Class, :File).</p>
+    <span class="summary_desc"><div class='inline'><p>@example:   ConvenientService::Utils::Module.get_own_const(Object, :File)   ConvenientService::Utils::Module.get_own_const(Class, :File).</p>
 </div></span>
   
 </li>
@@ -198,9 +198,9 @@ TODO: Better generic term for both <code>Module</code> and <code>Class</code>.</
 
     
       <div class="method_details first">
-  <h3 class="signature first" id="find_own_const-class_method">
+  <h3 class="signature first" id="get_own_const-class_method">
   
-    .<strong>find_own_const</strong>(mod, const_name)  &#x21d2; <tt><span class='object_link'><a href="Object.html" title="ConvenientService::Utils::Object (module)">Object</a></span></tt> 
+    .<strong>get_own_const</strong>(mod, const_name)  &#x21d2; <tt><span class='object_link'><a href="Object.html" title="ConvenientService::Utils::Object (module)">Object</a></span></tt> 
   
 
   
@@ -209,8 +209,8 @@ TODO: Better generic term for both <code>Module</code> and <code>Class</code>.</
 </h3><div class="docstring">
   <div class="discussion">
     <p>@example:
-ConvenientService::Utils::Module.find_own_const(Object, :File)
-ConvenientService::Utils::Module.find_own_const(Class, :File)</p>
+ConvenientService::Utils::Module.get_own_const(Object, :File)
+ConvenientService::Utils::Module.get_own_const(Class, :File)</p>
 
 
   </div>
@@ -274,8 +274,8 @@ ConvenientService::Utils::Module.find_own_const(Class, :File)</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/module.rb', line 35</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_find_own_const'>find_own_const</span><span class='lparen'>(</span><span class='id identifier rubyid_mod'>mod</span><span class='comma'>,</span> <span class='id identifier rubyid_const_name'>const_name</span><span class='rparen'>)</span>
-  <span class='const'><span class='object_link'><a href="Module/FindOwnConst.html" title="ConvenientService::Utils::Module::FindOwnConst (class)">FindOwnConst</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="Module/FindOwnConst.html#call-instance_method" title="ConvenientService::Utils::Module::FindOwnConst#call (method)">call</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_mod'>mod</span><span class='comma'>,</span> <span class='id identifier rubyid_const_name'>const_name</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_get_own_const'>get_own_const</span><span class='lparen'>(</span><span class='id identifier rubyid_mod'>mod</span><span class='comma'>,</span> <span class='id identifier rubyid_const_name'>const_name</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="Module/GetOwnConst.html" title="ConvenientService::Utils::Module::GetOwnConst (class)">GetOwnConst</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="Module/GetOwnConst.html#call-instance_method" title="ConvenientService::Utils::Module::GetOwnConst#call (method)">call</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_mod'>mod</span><span class='comma'>,</span> <span class='id identifier rubyid_const_name'>const_name</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -482,7 +482,7 @@ ConvenientService::Utils::Module.find_own_const(Class, :File)</p>
 </div>
 
       <div id="footer">
-  Generated on Thu Oct  6 18:12:10 2022 by
+  Generated on Thu Oct  6 18:41:02 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>
