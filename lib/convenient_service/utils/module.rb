@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "module/get_own_instance_method"
-require_relative "module/find_own_const"
+require_relative "module/get_own_const"
 require_relative "module/has_own_instance_method"
 
 module ConvenientService
@@ -29,11 +29,11 @@ module ConvenientService
         # @return [Object] Value of own const. Can be any type.
         #
         # @example:
-        #   ConvenientService::Utils::Module.find_own_const(Object, :File)
-        #   ConvenientService::Utils::Module.find_own_const(Class, :File)
+        #   ConvenientService::Utils::Module.get_own_const(Object, :File)
+        #   ConvenientService::Utils::Module.get_own_const(Class, :File)
         #
-        def find_own_const(mod, const_name)
-          FindOwnConst.call(mod, const_name)
+        def get_own_const(mod, const_name)
+          GetOwnConst.call(mod, const_name)
         end
 
         ##

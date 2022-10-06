@@ -46,7 +46,7 @@ module ConvenientService
             private
 
             def result_class
-              @result_class ||= Utils::Module.find_own_const(service_class, :Result) || ::Class.new(Entities::Result)
+              @result_class ||= Utils::Module.get_own_const(service_class, :Result) || ::Class.new(Entities::Result)
             end
           end
         end
