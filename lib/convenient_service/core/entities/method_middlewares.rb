@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require_relative "method_middlewares/commands"
 require_relative "method_middlewares/entities"
 
 module ConvenientService
@@ -7,12 +8,29 @@ module ConvenientService
     module Entities
       class MethodMiddlewares
         ##
+        # @param scope [:instance, :class]
+        # @param method [Symbol, String]
+        # @param container [Class]
+        # @return [void]
         #
+        def initialize(:scope, :method, :container)
+          @scope = scope
+          @method = method
+          @container = Entities::Container.new(service_class: container)
+        end
+
+        ##
+        # @param entity [Object, Class]
+        # @param scope [:instance, :class]
+        # @param method [Symbol, String]
+        # @return [Method, nil]
         #
-        def initialize(**kwargs)
-          @scope = kwargs[:scope]
-          @method = kwargs[:method]
-          @container = Entities::Container.new(service_class: kwargs[:container])
+        def self.resolve_super_method(entity, scope, method)
+          caller = Commands::CastCaller.call(other: {entity: entity, scope: scope})
+
+          return unless caller
+
+          caller.resolve_super_method(method)
         end
 
         ##
@@ -43,7 +61,7 @@ module ConvenientService
         end
 
         ##
-        #
+        # @return [Array<ConvenientService::Core::Entities::MethodMiddlewares::Entities::Middleware>]
         #
         def to_a
           stack.to_a.map(&:first)
@@ -51,7 +69,23 @@ module ConvenientService
 
         private
 
-        attr_reader :scope, :method, :container
+        ##
+        # @!attrubure [r] scope
+        #   @return [:instance, :class]
+        #
+        attr_reader :scope
+
+        ##
+        # @!attrubure [r] method
+        #   @return [Symbol, String]
+        #
+        attr_reader :method
+
+        ##
+        # @!attrubure [r] container
+        #   @return [Class]
+        #
+        attr_reader :container
 
         ##
         # @return [ConvenientService::Core::Entities::MethodMiddlewares::Entities::Stack]
@@ -62,6 +96,9 @@ module ConvenientService
 
         ##
         # @return [String]
+        #
+        # @internal
+        #   TODO: method.camelize.capitalize
         #
         def stack_name
           @stack_name ||= "#{container.service_class}::MethodMiddlewares::#{scope.capitalize}::#{method.capitalize}"
