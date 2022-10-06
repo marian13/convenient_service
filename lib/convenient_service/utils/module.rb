@@ -19,8 +19,8 @@ module ConvenientService
         # @param max_iteration_count [Integer]
         # @return [UnboundMethod, nil]
         #
-        def get_own_instance_method(mod, method_name, **kwargs)
-          GetOwnInstanceMethod.call(mod, method_name, **kwargs)
+        def get_own_instance_method(mod, method_name, private: false, max_iteration_count: Support::FiniteLoop::MAX_ITERATION_COUNT)
+          GetOwnInstanceMethod.call(mod, method_name, private: private, max_iteration_count: max_iteration_count)
         end
 
         ##

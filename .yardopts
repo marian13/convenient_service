@@ -2,8 +2,12 @@
 # NOTE: `.yardopts` docs.
 # https://rubydoc.info/gems/yard/YARD/CLI/Yardoc
 #
+# NOTE: `@internal` tag.
+# https://github.com/lsegal/yard/issues/484#issuecomment-442596174
+#
 --markup markdown
 --markup-provider commonmarker
 --output-dir docs
+--tag internal --hide-tag internal
 'lib/**/*.rb' -
 README.md
