@@ -70,19 +70,19 @@ module ConvenientService
         private
 
         ##
-        # @!attrubure [r] scope
+        # @!attribute [r] scope
         #   @return [:instance, :class]
         #
         attr_reader :scope
 
         ##
-        # @!attrubure [r] method
+        # @!attribute [r] method
         #   @return [Symbol, String]
         #
         attr_reader :method
 
         ##
-        # @!attrubure [r] container
+        # @!attribute [r] container
         #   @return [Class]
         #
         attr_reader :container
