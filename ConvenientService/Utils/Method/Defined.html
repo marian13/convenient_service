@@ -111,7 +111,7 @@
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#klass-instance_method" title="#klass (instance method)">#<strong>klass</strong>  &#x21d2; Object </a>
+      <a href="#klass-instance_method" title="#klass (instance method)">#<strong>klass</strong>  &#x21d2; Class </a>
     
 
     
@@ -130,8 +130,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Returns the value of attribute klass.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'></div></span>
   
 </li>
 
@@ -164,6 +163,34 @@
 </li>
 
     
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#private-instance_method" title="#private (instance method)">#<strong>private</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the value of attribute private.</p>
+</div></span>
+  
+</li>
+
+    
   </ul>
 
 
@@ -180,7 +207,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#call-instance_method" title="#call (instance method)">#<strong>call</strong>  &#x21d2; Object </a>
+      <a href="#call-instance_method" title="#call (instance method)">#<strong>call</strong>  &#x21d2; void </a>
     
 
     
@@ -202,7 +229,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(method, **kwargs)  &#x21d2; Defined </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(method, klass, private:)  &#x21d2; void </a>
     
 
     
@@ -218,8 +245,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>A new instance of Defined.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'></div></span>
   
 </li>
 
@@ -244,7 +270,7 @@
     <div class="method_details first">
   <h3 class="signature first" id="initialize-instance_method">
   
-    #<strong>initialize</strong>(method, **kwargs)  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::Utils::Method::Defined (class)">Defined</a></span></tt> 
+    #<strong>initialize</strong>(method, klass, private:)  &#x21d2; <tt>void</tt> 
   
 
   
@@ -252,13 +278,38 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a new instance of Defined.</p>
-
+    
 
   </div>
 </div>
 <div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
   
+    <li>
+      
+        <span class='name'>method</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>, <tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>klass</span>
+      
+      
+        <span class='type'>(<tt>Class</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
 
 </div><table class="source_code">
   <tr>
@@ -266,17 +317,19 @@
       <pre class="lines">
 
 
-9
-10
-11
-12</pre>
+30
+31
+32
+33
+34</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/method/defined.rb', line 9</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/method/defined.rb', line 30</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='id identifier rubyid_klass'>klass</span><span class='comma'>,</span> <span class='label'>private:</span><span class='rparen'>)</span>
   <span class='ivar'>@method</span> <span class='op'>=</span> <span class='id identifier rubyid_method'>method</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
-  <span class='ivar'>@klass</span> <span class='op'>=</span> <span class='id identifier rubyid_kwargs'>kwargs</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='symbol'>:in</span><span class='rparen'>)</span>
+  <span class='ivar'>@klass</span> <span class='op'>=</span> <span class='id identifier rubyid_klass'>klass</span>
+  <span class='ivar'>@private</span> <span class='op'>=</span> <span class='id identifier rubyid_private'>private</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -293,7 +346,7 @@
       <div class="method_details first">
   <h3 class="signature first" id="klass-instance_method">
   
-    #<strong>klass</strong>  &#x21d2; <tt><span class='object_link'><a href="../Object.html" title="ConvenientService::Utils::Object (module)">Object</a></span></tt>  <span class="extras">(readonly)</span>
+    #<strong>klass</strong>  &#x21d2; <tt>Class</tt>  <span class="extras">(readonly)</span>
   
 
   
@@ -301,13 +354,25 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the value of attribute klass.</p>
-
+    
 
   </div>
 </div>
 <div class="tags">
   
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Class</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
 
 </div><table class="source_code">
   <tr>
@@ -315,12 +380,12 @@
       <pre class="lines">
 
 
-7
-8
-9</pre>
+17
+18
+19</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/method/defined.rb', line 7</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/method/defined.rb', line 17</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_klass'>klass</span>
   <span class='ivar'>@klass</span>
@@ -357,15 +422,57 @@
       <pre class="lines">
 
 
-7
-8
-9</pre>
+11
+12
+13</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/method/defined.rb', line 7</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/method/defined.rb', line 11</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_method'>method</span>
   <span class='ivar'>@method</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="private-instance_method">
+  
+    #<strong>private</strong>  &#x21d2; <tt><span class='object_link'><a href="../Object.html" title="ConvenientService::Utils::Object (module)">Object</a></span></tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the value of attribute private.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+23
+24
+25</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/method/defined.rb', line 23</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_private'>private</span>
+  <span class='ivar'>@private</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -382,27 +489,44 @@
       <div class="method_details first">
   <h3 class="signature first" id="call-instance_method">
   
-    #<strong>call</strong>  &#x21d2; <tt><span class='object_link'><a href="../Object.html" title="ConvenientService::Utils::Object (module)">Object</a></span></tt> 
+    #<strong>call</strong>  &#x21d2; <tt>void</tt> 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    <p class="note returns_void">This method returns an undefined value.</p>
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-14
-15
-16</pre>
+39
+40
+41
+42
+43
+44
+45</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/method/defined.rb', line 14</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/method/defined.rb', line 39</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span>
-  <span class='id identifier rubyid_klass'>klass</span><span class='period'>.</span><span class='id identifier rubyid_method_defined?'>method_defined?</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='id identifier rubyid_klass'>klass</span><span class='period'>.</span><span class='id identifier rubyid_private_method_defined?'>private_method_defined?</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='kw'>true</span> <span class='kw'>if</span> <span class='id identifier rubyid_klass'>klass</span><span class='period'>.</span><span class='id identifier rubyid_method_defined?'>method_defined?</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='rparen'>)</span>
+
+  <span class='kw'>return</span> <span class='id identifier rubyid_klass'>klass</span><span class='period'>.</span><span class='id identifier rubyid_private_method_defined?'>private_method_defined?</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_private'>private</span>
+
+  <span class='kw'>false</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -414,7 +538,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Oct  6 18:41:03 2022 by
+  Generated on Fri Oct  7 21:21:52 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>
