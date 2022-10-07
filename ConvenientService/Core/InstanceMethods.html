@@ -477,11 +477,11 @@ If <code>method</code> is still NOT defined, raises <code>NoMethodError</code>, 
 
 <span class='kw'>def</span> <span class='id identifier rubyid_respond_to_missing?'>respond_to_missing?</span><span class='lparen'>(</span><span class='id identifier rubyid_method_name'>method_name</span><span class='comma'>,</span> <span class='id identifier rubyid_include_private'>include_private</span> <span class='op'>=</span> <span class='kw'>false</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>true</span> <span class='kw'>if</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_method_defined?'>method_defined?</span><span class='lparen'>(</span><span class='id identifier rubyid_method_name'>method_name</span><span class='rparen'>)</span>
-  <span class='kw'>return</span> <span class='kw'>true</span> <span class='kw'>if</span> <span class='id identifier rubyid_concerns'>concerns</span><span class='period'>.</span><span class='id identifier rubyid_method_defined?'>method_defined?</span><span class='lparen'>(</span><span class='id identifier rubyid_method_name'>method_name</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='kw'>true</span> <span class='kw'>if</span> <span class='id identifier rubyid_concerns'>concerns</span><span class='period'>.</span><span class='id identifier rubyid_instance_method_defined?'>instance_method_defined?</span><span class='lparen'>(</span><span class='id identifier rubyid_method_name'>method_name</span><span class='rparen'>)</span>
 
   <span class='kw'>if</span> <span class='id identifier rubyid_include_private'>include_private</span>
     <span class='kw'>return</span> <span class='kw'>true</span> <span class='kw'>if</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_private_method_defined?'>private_method_defined?</span><span class='lparen'>(</span><span class='id identifier rubyid_method_name'>method_name</span><span class='rparen'>)</span>
-    <span class='kw'>return</span> <span class='kw'>true</span> <span class='kw'>if</span> <span class='id identifier rubyid_concerns'>concerns</span><span class='period'>.</span><span class='id identifier rubyid_private_method_defined?'>private_method_defined?</span><span class='lparen'>(</span><span class='id identifier rubyid_method_name'>method_name</span><span class='rparen'>)</span>
+    <span class='kw'>return</span> <span class='kw'>true</span> <span class='kw'>if</span> <span class='id identifier rubyid_concerns'>concerns</span><span class='period'>.</span><span class='id identifier rubyid_private_instance_method_defined?'>private_instance_method_defined?</span><span class='lparen'>(</span><span class='id identifier rubyid_method_name'>method_name</span><span class='rparen'>)</span>
   <span class='kw'>end</span>
 
   <span class='kw'>false</span>
@@ -496,7 +496,7 @@ If <code>method</code> is still NOT defined, raises <code>NoMethodError</code>, 
 </div>
 
       <div id="footer">
-  Generated on Fri Oct  7 21:21:51 2022 by
+  Generated on Fri Oct  7 22:09:39 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>
