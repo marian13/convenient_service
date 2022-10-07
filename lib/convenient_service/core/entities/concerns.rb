@@ -56,7 +56,9 @@ module ConvenientService
         # Includes concerns into entity when called for the first time.
         # Does nothing for the subsequent calls.
         #
-        # @return [Boolean] true if called for the first time, false otherwise.
+        # @return [Boolean] true if called for the first time, false otherwise (similarly as Kernel#require).
+        #
+        # @see https://ruby-doc.org/core-3.1.2/Kernel.html#method-i-require
         #
         def include!
           return false if included?
