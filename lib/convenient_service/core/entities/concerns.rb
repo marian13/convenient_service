@@ -18,9 +18,9 @@ module ConvenientService
         # @param method_name [Symbol, String]
         # @return [Boolean]
         #
-        def method_defined?(method_name)
-          return true if method_defined_in_instance_methods_modules?(method_name)
-          return true if method_defined_directly?(method_name)
+        def instance_method_defined?(method_name)
+          return true if instance_method_defined_in_instance_methods_modules?(method_name)
+          return true if instance_method_defined_directly?(method_name)
 
           false
         end
@@ -29,11 +29,27 @@ module ConvenientService
         # @param method_name [Symbol, String]
         # @return [Boolean]
         #
-        def private_method_defined?(method_name)
-          return true if private_method_defined_in_instance_methods_modules?(method_name)
-          return true if private_method_defined_directly?(method_name)
+        def private_instance_method_defined?(method_name)
+          return true if private_instance_method_defined_in_instance_methods_modules?(method_name)
+          return true if private_instance_method_defined_directly?(method_name)
 
           false
+        end
+
+        ##
+        # @param method_name [Symbol, String]
+        # @return [Boolean]
+        #
+        def class_method_defined?(method_name)
+          class_method_defined_in_class_methods_modules?(method_name)
+        end
+
+        ##
+        # @param method_name [Symbol, String]
+        # @return [Boolean]
+        #
+        def private_class_method_defined?(method_name)
+          private_class_method_defined_in_class_methods_modules?(method_name)
         end
 
         ##
@@ -105,23 +121,7 @@ module ConvenientService
         # @param method_name [Symbol, String]
         # @return [Boolean]
         #
-        def method_defined_in_instance_methods_modules?(method_name)
-          instance_methods_modules.any? { |mod| mod.method_defined?(method_name) }
-        end
-
-        ##
-        # @param method_name [Symbol, String]
-        # @return [Boolean]
-        #
-        def private_method_defined_in_instance_methods_modules?(method_name)
-          instance_methods_modules.any? { |mod| mod.private_method_defined?(method_name) }
-        end
-
-        ##
-        # @param method_name [Symbol, String]
-        # @return [Boolean]
-        #
-        def method_defined_directly?(method_name)
+        def instance_method_defined_directly?(method_name)
           plain_concerns.any? { |concern| concern.method_defined?(method_name) }
         end
 
@@ -129,8 +129,40 @@ module ConvenientService
         # @param method_name [Symbol, String]
         # @return [Boolean]
         #
-        def private_method_defined_directly?(method_name)
+        def private_instance_method_defined_directly?(method_name)
           plain_concerns.any? { |concern| concern.private_method_defined?(method_name) }
+        end
+
+        ##
+        # @param method_name [Symbol, String]
+        # @return [Boolean]
+        #
+        def instance_method_defined_in_instance_methods_modules?(method_name)
+          instance_methods_modules.any? { |mod| mod.method_defined?(method_name) }
+        end
+
+        ##
+        # @param method_name [Symbol, String]
+        # @return [Boolean]
+        #
+        def private_instance_method_defined_in_instance_methods_modules?(method_name)
+          instance_methods_modules.any? { |mod| mod.private_method_defined?(method_name) }
+        end
+
+        ##
+        # @param method_name [Symbol, String]
+        # @return [Boolean]
+        #
+        def class_method_defined_in_class_methods_modules?(method_name)
+          class_methods_modules.any? { |mod| mod.method_defined?(method_name) }
+        end
+
+        ##
+        # @param method_name [Symbol, String]
+        # @return [Boolean]
+        #
+        def private_class_method_defined_in_class_methods_modules?(method_name)
+          class_methods_modules.any? { |mod| mod.private_method_defined?(method_name) }
         end
 
         ##
@@ -140,6 +172,15 @@ module ConvenientService
           plain_concerns
             .select { |concern| concern.const_defined?(:InstanceMethods, false) }
             .map { |concern| concern.const_get(:InstanceMethods) }
+        end
+
+        ##
+        # @return [Array<Module>]
+        #
+        def class_methods_modules
+          plain_concerns
+            .select { |concern| concern.const_defined?(:ClassMethods, false) }
+            .map { |concern| concern.const_get(:ClassMethods) }
         end
 
         ##

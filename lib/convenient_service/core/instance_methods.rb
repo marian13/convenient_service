@@ -29,11 +29,11 @@ module ConvenientService
       #
       def respond_to_missing?(method_name, include_private = false)
         return true if self.class.method_defined?(method_name)
-        return true if concerns.method_defined?(method_name)
+        return true if concerns.instance_method_defined?(method_name)
 
         if include_private
           return true if self.class.private_method_defined?(method_name)
-          return true if concerns.private_method_defined?(method_name)
+          return true if concerns.private_instance_method_defined?(method_name)
         end
 
         false
