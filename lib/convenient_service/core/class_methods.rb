@@ -127,6 +127,26 @@ module ConvenientService
         middlewares(scope: :class).values.each(&:define!)
       end
 
+      ##
+      # @see https://thoughtbot.com/blog/always-define-respond-to-missing-when-overriding
+      # @see https://stackoverflow.com/a/3304683/12201472
+      #
+      # @param method_name [Symbol, String]
+      # @param include_private [Boolean]
+      # @return [Boolean]
+      #
+      def respond_to_missing?(method_name, include_private = false)
+        return true if self.singleton_class.method_defined?(method_name)
+        return true if concerns.class_method_defined?(method_name)
+
+        if include_private
+          return true if self.singleton_class.private_method_defined?(method_name)
+          return true if concerns.private_class_method_defined?(method_name)
+        end
+
+        false
+      end
+
       private
 
       ##
@@ -150,16 +170,6 @@ module ConvenientService
         ConvenientService.logger.debug { "[Core] Included concerns into `#{self}` | Triggered by `method_missing` | Method: `.#{method}`" }
 
         __send__(method, *args, **kwargs, &block)
-      end
-
-      ##
-      # TODO: How?
-      #
-      # TODO: Implement.
-      # https://thoughtbot.com/blog/always-define-respond-to-missing-when-overriding
-      #
-      def respond_to_missing?(method_name, include_private = false)
-        false
       end
     end
   end
