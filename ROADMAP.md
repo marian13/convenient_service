@@ -19,6 +19,6 @@
 | Medium | 🚧 | Remove `respond_to?` from `Copyable` | Investigate before making any decision |
 | High | 🚧 | Unified `inspect` | |
 | High | ✅ | Remove race condition for `method_missing` | https://github.com/marian13/convenient_service/pull/5 |
-| High | 🚧 | Remove incompatiility of [Module#include](https://gist.github.com/marian13/9c25041f835564e945d978839097d419) | |
+| High | ✅ | Remove incompatiility of [Module#include](https://gist.github.com/marian13/9c25041f835564e945d978839097d419) | https://github.com/marian13/convenient_service/pull/3 |
 | Medium | 🚧 | Split `Utils` specs into separate files | |
 | Medium | 🚧 | How to test thread-safety? | |
