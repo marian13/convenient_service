@@ -136,11 +136,11 @@ module ConvenientService
       # @return [Boolean]
       #
       def respond_to_missing?(method_name, include_private = false)
-        return true if self.singleton_class.method_defined?(method_name)
+        return true if singleton_class.method_defined?(method_name)
         return true if concerns.class_method_defined?(method_name)
 
         if include_private
-          return true if self.singleton_class.private_method_defined?(method_name)
+          return true if singleton_class.private_method_defined?(method_name)
           return true if concerns.private_class_method_defined?(method_name)
         end
 
