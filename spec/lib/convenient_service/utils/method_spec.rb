@@ -13,7 +13,7 @@ RSpec.describe ConvenientService::Utils::Method do
       let(:klass) { Class.new }
 
       it "returns `false`" do
-        expect(described_class.defined?(method, in: klass)).to eq(false)
+        expect(described_class.defined?(method, klass)).to eq(false)
       end
     end
 
@@ -27,7 +27,7 @@ RSpec.describe ConvenientService::Utils::Method do
         end
 
         it "returns `true`" do
-          expect(described_class.defined?(method, in: klass)).to eq(true)
+          expect(described_class.defined?(method, klass)).to eq(true)
         end
       end
 
@@ -42,7 +42,7 @@ RSpec.describe ConvenientService::Utils::Method do
         end
 
         it "returns `true`" do
-          expect(described_class.defined?(method, in: klass)).to eq(true)
+          expect(described_class.defined?(method, klass)).to eq(true)
         end
       end
 
@@ -56,8 +56,16 @@ RSpec.describe ConvenientService::Utils::Method do
           end
         end
 
-        it "returns `true`" do
-          expect(described_class.defined?(method, in: klass)).to eq(true)
+        context "when `private` is false" do
+          it "returns `false`" do
+            expect(described_class.defined?(method, klass, private: false)).to eq(false)
+          end
+        end
+
+        context "when `private` is true" do
+          it "returns `true`" do
+            expect(described_class.defined?(method, klass, private: true)).to eq(true)
+          end
         end
       end
     end

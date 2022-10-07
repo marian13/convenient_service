@@ -22,7 +22,7 @@ module ConvenientService
                 # @return [Boolean] true if method middlewares caller is just defined, false if already defined.
                 #
                 def call
-                  return false if Utils::Method.defined?(method, in: methods_middlewares_callers)
+                  return false if Utils::Method.defined?(method, methods_middlewares_callers, private: true)
 
                   prepend_methods_middlewares_callers_to_container
 

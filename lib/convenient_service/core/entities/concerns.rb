@@ -12,8 +12,6 @@ module ConvenientService
         #
         def initialize(entity:)
           @stack = Entities::Stack.new(entity: entity)
-
-          initialize_include_state!
         end
 
         ##
@@ -58,32 +56,18 @@ module ConvenientService
         # Includes concerns into entity when called for the first time.
         # Does nothing for the subsequent calls.
         #
-        # @return [Boolen] true if called for the first time, false otherwise.
+        # @return [Boolean] true if called for the first time, false otherwise (similarly as Kernel#require).
+        #
+        # @see https://ruby-doc.org/core-3.1.2/Kernel.html#method-i-require
         #
         def include!
-          stack.call(entity: stack.entity) unless included?
+          return false if included?
 
-          transit_to_next_include_state!
+          stack.call(entity: stack.entity)
 
-          included_once?
-        end
+          mark_as_included!
 
-        ##
-        # Checks whether concerns are included multiple times into entity (include! was called multiple times).
-        #
-        # @return [Boolean]
-        #
-        def included_multiple_times?
-          include_state == :included_multiple_times
-        end
-
-        ##
-        # Checks whether concerns are included once into entity (include! was called only once).
-        #
-        # @return [Boolean]
-        #
-        def included_once?
-          include_state == :included_once
+          true
         end
 
         ##
@@ -92,7 +76,7 @@ module ConvenientService
         # @return [Boolean]
         #
         def included?
-          included_multiple_times? || included_once?
+          Utils::Bool.to_bool(@included)
         end
 
         ##
@@ -111,39 +95,10 @@ module ConvenientService
         attr_reader :stack
 
         ##
-        # @!attribute [r] include_state
-        #   @return [:not_included, :included_once, :included_multiple_times]
-        #
-        attr_reader :include_state
-
-        ##
-        # @return [Array<Module>].
+        # @return [Array<Module>]
         #
         def plain_concerns
           stack.to_a.map(&:first).map(&:concern)
-        end
-
-        ##
-        # @return [void]
-        #
-        def initialize_include_state!
-          @include_state = :not_included
-        end
-
-        ##
-        # @return [void]
-        #
-        def transit_to_next_include_state!
-          current_state = @include_state
-
-          next_state =
-            case current_state
-            when :not_included then :included_once
-            when :included_once then :included_multiple_times
-            when :included_multiple_times then :included_multiple_times
-            end
-
-          @include_state = next_state
         end
 
         ##
@@ -185,6 +140,13 @@ module ConvenientService
           plain_concerns
             .select { |concern| concern.const_defined?(:InstanceMethods, false) }
             .map { |concern| concern.const_get(:InstanceMethods) }
+        end
+
+        ##
+        # @return [void]
+        #
+        def mark_as_included!
+          @included = true
         end
       end
     end
