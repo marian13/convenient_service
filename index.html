@@ -200,10 +200,7 @@
   <span class='kw'>module</span> <span class='const'>Config</span>
     <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_included'>included</span><span class='lparen'>(</span><span class='id identifier rubyid_service_class'>service_class</span><span class='rparen'>)</span>
       <span class='id identifier rubyid_service_class'>service_class</span><span class='period'>.</span><span class='id identifier rubyid_class_exec'>class_exec</span> <span class='kw'>do</span>
-        <span class='comment'>##
-</span>        <span class='comment'># Replace to `include ConvenientService::Standard::UncommitedConfig` in Ruby 2.7.
-</span>        <span class='comment'>#
-</span>        <span class='id identifier rubyid_include'>include</span> <span class='const'><span class='object_link'><a href="ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="ConvenientService/Standard.html" title="ConvenientService::Standard (module)">Standard</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="ConvenientService/Standard.html#Config-constant" title="ConvenientService::Standard::Config (constant)">Config</a></span></span>
+        <span class='id identifier rubyid_include'>include</span> <span class='const'><span class='object_link'><a href="ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="ConvenientService/Standard.html" title="ConvenientService::Standard (module)">Standard</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="ConvenientService/Standard.html#Config-constant" title="ConvenientService::Standard::Config (constant)">Config</a></span></span>
 
         <span class='comment'>##
 </span>        <span class='comment'># NOTE: `AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment` plugin.
@@ -233,9 +230,7 @@
         <span class='id identifier rubyid_middlewares'>middlewares</span> <span class='label'>method:</span> <span class='symbol'>:result</span> <span class='kw'>do</span>
           <span class='id identifier rubyid_use'>use</span> <span class='const'><span class='object_link'><a href="ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="ConvenientService/Plugins.html" title="ConvenientService::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="ConvenientService/Plugins.html#Service-constant" title="ConvenientService::Plugins::Service (constant)">Service</a></span></span><span class='op'>::</span><span class='const'>HasResultParamsValidations</span><span class='op'>::</span><span class='const'>UsingActiveModelValidations</span><span class='op'>::</span><span class='const'>Middleware</span>
         <span class='kw'>end</span>
-
-        <span class='comment'># commit_config! # Uncomment in Ruby 2.7.
-</span>      <span class='kw'>end</span>
+      <span class='kw'>end</span>
     <span class='kw'>end</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span>
@@ -325,10 +320,7 @@
   <span class='kw'>module</span> <span class='const'>Config</span>
     <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_included'>included</span><span class='lparen'>(</span><span class='id identifier rubyid_service_class'>service_class</span><span class='rparen'>)</span>
       <span class='id identifier rubyid_service_class'>service_class</span><span class='period'>.</span><span class='id identifier rubyid_class_exec'>class_exec</span> <span class='kw'>do</span>
-        <span class='comment'>##
-</span>        <span class='comment'># Replace to `include ConvenientService::Standard::UncommitedConfig` in Ruby 2.7.
-</span>        <span class='comment'>#
-</span>        <span class='id identifier rubyid_include'>include</span> <span class='const'><span class='object_link'><a href="ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="ConvenientService/Standard.html" title="ConvenientService::Standard (module)">Standard</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="ConvenientService/Standard.html#Config-constant" title="ConvenientService::Standard::Config (constant)">Config</a></span></span>
+        <span class='id identifier rubyid_include'>include</span> <span class='const'><span class='object_link'><a href="ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="ConvenientService/Standard.html" title="ConvenientService::Standard (module)">Standard</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="ConvenientService/Standard.html#Config-constant" title="ConvenientService::Standard::Config (constant)">Config</a></span></span>
 
         <span class='comment'>##
 </span>        <span class='comment'># NOTE: `AssignsAttributesInConstructor::UsingDryInitializer` plugin.
@@ -347,9 +339,7 @@
         <span class='id identifier rubyid_middlewares'>middlewares</span> <span class='label'>method:</span> <span class='symbol'>:result</span> <span class='kw'>do</span>
           <span class='id identifier rubyid_use'>use</span> <span class='const'><span class='object_link'><a href="ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="ConvenientService/Plugins.html" title="ConvenientService::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="ConvenientService/Plugins.html#Service-constant" title="ConvenientService::Plugins::Service (constant)">Service</a></span></span><span class='op'>::</span><span class='const'>HasResultParamsValidations</span><span class='op'>::</span><span class='const'>UsingDryValidation</span><span class='op'>::</span><span class='const'>Middleware</span>
         <span class='kw'>end</span>
-
-        <span class='comment'># commit_config! # Uncomment in Ruby 2.7.
-</span>      <span class='kw'>end</span>
+      <span class='kw'>end</span>
     <span class='kw'>end</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span>
@@ -436,7 +426,7 @@
 </div></div>
 
       <div id="footer">
-  Generated on Fri Oct  7 22:13:04 2022 by
+  Generated on Fri Oct  7 22:15:59 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>
