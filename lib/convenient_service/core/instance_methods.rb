@@ -42,22 +42,22 @@ module ConvenientService
       private
 
       ##
+      # Includes `concerns` into the mixing class.
+      # If `method` is still NOT defined, raises `NoMethodError`, otherwise - retries to call the `method`.
+      #
       # @param method [Symbol]
-      # @param args [Array]
-      # @param kwargs [Hash]
+      # @param args [Array<Object>]
+      # @param kwargs [Hash<Symbol, Object>]
       # @param block [Proc]
       # @return [void]
+      #
+      # @internal
+      #   IMPORTANT: `method_missing` should be thread-safe.
       #
       def method_missing(method, *args, **kwargs, &block)
         concerns.include!
 
-        ##
-        # NOTE: If concerns are just included into the mixing class then retries the missing method,
-        # otherwise raises `NoMethodError` (since method is still missing even after including concerns).
-        #
-        # TODO: Logger spec.
-        #
-        return super unless concerns.included_once?
+        return super unless Utils::Method.defined?(method, self.class, private: true)
 
         ConvenientService.logger.debug { "[Core] Included concerns into `#{self.class}` | Triggered by `method_missing` | Method: `##{method}`" }
 

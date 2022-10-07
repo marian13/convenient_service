@@ -45,7 +45,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
       end
 
       it "defines `method` in `container`" do
-        expect { command_result }.to change { ConvenientService::Utils::Method.defined?(method.to_s, in: container.klass) }.from(false).to(true)
+        expect { command_result }.to change { ConvenientService::Utils::Method.defined?(method.to_s, container.klass, private: true) }.from(false).to(true)
       end
 
       example_group "generated method" do

@@ -28,7 +28,7 @@ module ConvenientService
             end
 
             def has_defined_method?(method)
-              Utils::Method.defined?(method, in: klass)
+              Utils::Method.defined?(method, klass, private: true)
             end
 
             def ==(other)

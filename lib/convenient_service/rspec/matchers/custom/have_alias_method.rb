@@ -13,9 +13,9 @@ module ConvenientService
           def matches?(object)
             @object = object
 
-            return false unless Utils::Method.defined?(original_name, in: object.class)
+            return false unless Utils::Method.defined?(original_name, object.class, private: true)
 
-            return false unless Utils::Method.defined?(alias_name, in: object.class)
+            return false unless Utils::Method.defined?(alias_name, object.class, private: true)
 
             ##
             # https://stackoverflow.com/a/45640516/12201472

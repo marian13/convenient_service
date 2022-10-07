@@ -33,7 +33,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::HaveAliasMethod do
       end
 
       it "delegates to `ConvenientService::Utils::Method.defined?`" do
-        allow(ConvenientService::Utils::Method).to receive(:defined?).with(original_name, in: object.class).and_call_original
+        allow(ConvenientService::Utils::Method).to receive(:defined?).with(original_name, object.class, private: true).and_call_original
 
         matcher_result
 
@@ -62,8 +62,8 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::HaveAliasMethod do
         end
 
         it "delegates to `ConvenientService::Utils::Method.defined?`" do
-          allow(ConvenientService::Utils::Method).to receive(:defined?).with(original_name, in: object.class).and_call_original
-          allow(ConvenientService::Utils::Method).to receive(:defined?).with(alias_name, in: object.class).and_call_original
+          allow(ConvenientService::Utils::Method).to receive(:defined?).with(original_name, object.class, private: true).and_call_original
+          allow(ConvenientService::Utils::Method).to receive(:defined?).with(alias_name, object.class, private: true).and_call_original
 
           matcher_result
 
