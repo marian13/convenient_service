@@ -188,9 +188,6 @@ This library is under heavy development. Public API may be subject to change. Th
     module Config
       def self.included(service_class)
         service_class.class_exec do
-          ##
-          # Replace to `include ConvenientService::Standard::UncommitedConfig` in Ruby 2.7.
-          #
           include ConvenientService::Standard::Config
 
           ##
@@ -221,8 +218,6 @@ This library is under heavy development. Public API may be subject to change. Th
           middlewares method: :result do
             use ConvenientService::Plugins::Service::HasResultParamsValidations::UsingActiveModelValidations::Middleware
           end
-
-          # commit_config! # Uncomment in Ruby 2.7.
         end
       end
     end
@@ -336,9 +331,6 @@ This library is under heavy development. Public API may be subject to change. Th
     module Config
       def self.included(service_class)
         service_class.class_exec do
-          ##
-          # Replace to `include ConvenientService::Standard::UncommitedConfig` in Ruby 2.7.
-          #
           include ConvenientService::Standard::Config
 
           ##
@@ -358,8 +350,6 @@ This library is under heavy development. Public API may be subject to change. Th
           middlewares method: :result do
             use ConvenientService::Plugins::Service::HasResultParamsValidations::UsingDryValidation::Middleware
           end
-
-          # commit_config! # Uncomment in Ruby 2.7.
         end
       end
     end
