@@ -145,7 +145,7 @@ module ConvenientService
       def method_missing(method, *args, **kwargs, &block)
         concerns.include!
 
-        return super unless Utils::Method.defined?(method, self.singleton_class, private: true)
+        return super unless Utils::Method.defined?(method, singleton_class, private: true)
 
         ConvenientService.logger.debug { "[Core] Included concerns into `#{self}` | Triggered by `method_missing` | Method: `.#{method}`" }
 
