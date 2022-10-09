@@ -85,7 +85,7 @@ module ConvenientService
             end
 
             ##
-            # @param [ConvenientService::Core::Entities::Concerns::Entities::Stack, Object]
+            # @param other [ConvenientService::Core::Entities::Concerns::Entities::Stack, Object]
             # @return [Boolean, nil]
             #
             def ==(other)

@@ -4,14 +4,19 @@ module ConvenientService
   module Support
     module Middleware
       ##
-      # TODO: Contribute.
+      # @internal
+      #   TODO: Contribute.
       #
-      # NOTE: Minimal `ibsciss-middleware` version - `0.4.2`.
-      # https://github.com/Ibsciss/ruby-middleware/tree/v0.4.2
+      #   NOTE: Minimal `ibsciss-middleware` version - `0.4.2`.
+      #   https://github.com/Ibsciss/ruby-middleware/tree/v0.4.2
       #
       class StackBuilder < Extractions::RubyMiddleware::Middleware::Builder
         ##
-        # https://github.com/Ibsciss/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L43
+        # @param opts [Hash]
+        # @param block [Proc]
+        # @return [void]
+        #
+        # @see https://github.com/Ibsciss/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L43
         #
         def initialize(opts = {}, &block)
           super
@@ -23,7 +28,7 @@ module ConvenientService
         end
 
         ##
-        # @param [ConvenientService::Support::Middleware::StackBuilder, Object]
+        # @param other [ConvenientService::Support::Middleware::StackBuilder, Object]
         # @return [Boolean, nil]
         #
         def ==(other)
@@ -35,16 +40,21 @@ module ConvenientService
         end
 
         ##
-        # NOTE: `use` can accept additional arguments and block,
-        # that is why `stack` contains tuples like [middleware, args, block].
-        # https://github.com/Ibsciss/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L76
+        # @return [Array]
         #
-        # TODO: better name than just `to_a`.
+        # @internal
+        #   NOTE: `use` can accept additional arguments and block, that is why `stack` contains tuples like [middleware, args, block].
+        #   https://github.com/Ibsciss/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L76
+        #
+        #   TODO: better name than just `to_a`.
         #
         def to_a
           stack
         end
 
+        ##
+        # @return [ConvenientService::Support::Middleware::StackBuilder]
+        #
         def dup
           self.class.new(
             ##
