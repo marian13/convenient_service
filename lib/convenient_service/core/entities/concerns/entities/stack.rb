@@ -27,42 +27,73 @@ module ConvenientService
               stack.call(env)
             end
 
+            ##
+            # @param index_or_concern [Integer, ConvenientService::Support::Concern, Module]
+            # @param concern [ConvenientService::Support::Concern, Module]
+            # @return [ConvenientService::Core::Entities::Concerns::Entities::Stack]
+            #
             def insert_before(index_or_concern, concern)
               stack.insert_before cast(index_or_concern), cast(concern)
 
               self
             end
 
+            ##
+            # @param index_or_concern [Integer, ConvenientService::Support::Concern, Module]
+            # @param concern [ConvenientService::Support::Concern, Module]
+            # @return [ConvenientService::Core::Entities::Concerns::Entities::Stack]
+            #
             def insert_after(index_or_concern, concern)
               stack.insert_after cast(index_or_concern), cast(concern)
 
               self
             end
 
+            ##
+            # @param concern [ConvenientService::Support::Concern, Module]
+            # @return [ConvenientService::Core::Entities::Concerns::Entities::Stack]
+            #
             def insert_before_each(concern)
               stack.insert_before_each cast(concern)
 
               self
             end
 
+            ##
+            # @param concern [ConvenientService::Support::Concern, Module]
+            # @return [ConvenientService::Core::Entities::Concerns::Entities::Stack]
+            #
             def insert_after_each(concern)
               stack.insert_after_each cast(concern)
 
               self
             end
 
+            ##
+            # @param index_or_concern [Integer, ConvenientService::Support::Concern, Module]
+            # @param concern [ConvenientService::Support::Concern, Module]
+            # @return [ConvenientService::Core::Entities::Concerns::Entities::Stack]
+            #
             def replace(index_or_concern, concern)
               stack.replace cast(index_or_concern), cast(concern)
 
               self
             end
 
+            ##
+            # @param index_or_concern [Integer, ConvenientService::Support::Concern, Module]
+            # @return [ConvenientService::Core::Entities::Concerns::Entities::Stack]
+            #
             def delete(index_or_concern)
               stack.delete cast(index_or_concern)
 
               self
             end
 
+            ##
+            # @param concern [ConvenientService::Support::Concern, Module]
+            # @return [ConvenientService::Core::Entities::Concerns::Entities::Stack]
+            #
             def use(concern)
               stack.use cast(concern)
 
