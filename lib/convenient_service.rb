@@ -4,7 +4,6 @@ require "forwardable"
 require "logger"
 require "ostruct"
 require "singleton"
-require "tempfile"
 
 require_relative "convenient_service/logger"
 require_relative "convenient_service/error"
@@ -21,7 +20,7 @@ require_relative "convenient_service/configs"
 module ConvenientService
   class << self
     ##
-    #
+    # @return [Boolean]
     #
     def require_assigns_attributes_in_constructor_using_active_model_attribute_assignment
       require "active_model"
@@ -30,7 +29,7 @@ module ConvenientService
     end
 
     ##
-    #
+    # @return [Boolean]
     #
     def require_assigns_attributes_in_constructor_using_dry_initializer
       require "dry-initializer"
@@ -39,7 +38,7 @@ module ConvenientService
     end
 
     ##
-    #
+    # @return [Boolean]
     #
     def require_has_attributes_using_active_model_attributes
       require "active_model"
@@ -48,7 +47,7 @@ module ConvenientService
     end
 
     ##
-    #
+    # @return [Boolean]
     #
     def require_has_result_params_validations_using_active_model_validations
       require "active_model"
@@ -57,7 +56,7 @@ module ConvenientService
     end
 
     ##
-    #
+    # @return [Boolean]
     #
     def require_has_result_params_validations_using_dry_validation
       require "dry-validation"
@@ -66,18 +65,24 @@ module ConvenientService
     end
 
     ##
-    #
+    # @return [Boolean]
     #
     def require_development_tools
       require "awesome_print"
       require "byebug"
       require "paint"
+      require "rouge"
+      require "tempfile"
+
+      require_relative "convenient_service/extractions/byebug_syntax_highlighting"
     end
 
     ##
     # Loads RSpec extensions like `be_success` matcher, `stub_service` helper, etc.
     #
-    # NOTE: Expected to be called from `spec_helper.rb`.
+    # @return [Boolean]
+    #
+    # @note Expected to be called from `spec_helper.rb`.
     #
     def require_rspec_extentions
       require "rspec/expectations"
@@ -85,12 +90,15 @@ module ConvenientService
       require "rspec/mocks"
 
       require "method_source"
+      require "tempfile"
 
       require_relative "convenient_service/rspec"
     end
 
     ##
     # Loads standard config examples.
+    #
+    # @return [Boolean]
     #
     def require_standard_examples
       require "progressbar"
@@ -101,6 +109,8 @@ module ConvenientService
     ##
     # Loads rails config examples.
     #
+    # @return [Boolean]
+    #
     def require_rails_examples
       require "progressbar"
 
@@ -109,6 +119,8 @@ module ConvenientService
 
     ##
     # Loads dry config examples.
+    #
+    # @return [Boolean]
     #
     def require_dry_examples
       require "progressbar"

@@ -22,3 +22,4 @@
 | High | ✅ | Remove incompatiility of [Module#include](https://gist.github.com/marian13/9c25041f835564e945d978839097d419) | https://github.com/marian13/convenient_service/pull/3 |
 | Medium | 🚧 | Split `Utils` specs into separate files | |
 | Medium | 🚧 | How to test thread-safety? | |
+| Medium | 🚧 | Rename `Utils::Module.find_own_const` to `Utils::Module.get_own_const` | |

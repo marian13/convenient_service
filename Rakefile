@@ -17,7 +17,7 @@ task :confirm do
   message = ARGV[1] || "Are you sure?"
 
   ##
-  # NOTE: Why "tty-prompt"? No time to write, maintain complex, cross-platform bash scripts if you are an full-time application developer.
+  # NOTE: Why "tty-prompt"? No time to write, maintain complex, cross-platform bash scripts if you are a full-time application developer.
   #
   prompt = TTY::Prompt.new
 
