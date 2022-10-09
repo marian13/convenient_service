@@ -68,6 +68,12 @@ appraise "dry" do
   gem "dry-initializer", "~> 3.0.0"
 
   gem "dry-validation", "~> 1.5.0"
+
+  ##
+  # NOTE: Restricts temporarily `dry-configurable` version (dependency of `dry-validation`) until the following issue is resolved:
+  # https://github.com/dry-rb/dry-configurable/issues/146
+  #
+  gem "dry-configurable", "~> 0.15.0"
 end
 
 ##
@@ -80,6 +86,12 @@ appraise "all" do
   gem "dry-initializer", "~> 3.0.0"
 
   gem "dry-validation", "~> 1.5.0"
+
+  ##
+  # NOTE: Restricts temporarily `dry-configurable` version (dependency of `dry-validation`) until the following issue is resolved:
+  # https://github.com/dry-rb/dry-configurable/issues/146
+  #
+  gem "dry-configurable", "~> 0.15.0"
 
   ##
   # NOTE: Waits for `should-matchers` full support.
