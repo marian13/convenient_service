@@ -7,8 +7,75 @@ require "convenient_service"
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Core::ClassMethods do
   include ConvenientService::RSpec::Matchers::DelegateTo
+  include ConvenientService::RSpec::Matchers::CacheItsValue
 
-  let(:service_instance) { service_class.new }
+  describe "#concerns" do
+    let(:service_class) do
+      Class.new do
+        include ConvenientService::Core
+      end
+    end
+
+    context "when `configuration_block` is NOT passed" do
+      let(:concerns) { ConvenientService::Core::Entities::Concerns.new(entity: service_class) }
+
+      it "returns concerns" do
+        expect(service_class.concerns).to eq(concerns)
+      end
+
+      specify { expect { service_class.concerns }.to cache_its_value }
+    end
+
+    context "when `configuration_block` is passed" do
+      let(:concerns) do
+        ConvenientService::Core::Entities::Concerns.new(entity: service_class)
+          .tap { |concerns| concerns.configure(&configuration_block) }
+      end
+
+      let(:configuration_block) do
+        proc do
+          ##
+          # NOTE: Simplest concern is just a module.
+          #
+          concern = Module.new do
+            class << self
+              ##
+              # NOTE: `name` returns `nil` when module is anonymous.
+              # `name` and `==` are overridden to make sure that module was defined in this particular test suite.
+              # https://ruby-doc.org/core-2.7.0/Module.html#method-i-name
+              #
+              # NOTE: For `expect(service_class.concerns(&configuration_block)).to eq(concerns)`.
+              #
+              def name
+                "Anonymous module from test"
+              end
+
+              def ==(other)
+                name == other.name
+              end
+            end
+          end
+
+          use concern
+        end
+      end
+
+      specify {
+        expect { service_class.concerns(&configuration_block) }
+          .to delegate_to(service_class.concerns, :assert_not_included!)
+      }
+
+      specify {
+        expect { service_class.concerns(&configuration_block) }
+          .to delegate_to(service_class.concerns, :configure)
+          .with_arguments(&configuration_block)
+      }
+
+      it "returns concerns" do
+        expect(service_class.concerns(&configuration_block)).to eq(concerns)
+      end
+    end
+  end
 
   describe "#method_missing" do
     let(:service_class) do
@@ -284,7 +351,7 @@ RSpec.describe ConvenientService::Core::ClassMethods do
     end
 
     context "when `include_private` is NOT passed" do
-      let(:result) { service_instance.respond_to_missing?(method_name) }
+      let(:result) { service_class.respond_to_missing?(method_name) }
 
       let(:service_class) do
         Class.new do

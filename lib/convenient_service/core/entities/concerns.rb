@@ -96,19 +96,33 @@ module ConvenientService
         end
 
         ##
+        # @param [ConvenientService::Core::Entities::Concerns, Object]
+        # @return [Boolean, nil]
+        #
+        def ==(other)
+          return unless other.instance_of?(self.class)
+
+          return false if stack != other.stack
+
+          true
+        end
+
+        ##
         # @return [Array<Module>] concerns as plain modules.
         #
         def to_a
           plain_concerns
         end
 
-        private
+        protected
 
         ##
         # @!attribute [r] stack
         #   @return [ConvenientService::Core::Entities::Concerns::Entities::Stack]
         #
         attr_reader :stack
+
+        private
 
         ##
         # @return [Array<Module>]

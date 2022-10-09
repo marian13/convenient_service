@@ -85,6 +85,18 @@ module ConvenientService
             end
 
             ##
+            # @param [ConvenientService::Core::Entities::Concerns::Entities::Stack, Object]
+            # @return [Boolean, nil]
+            #
+            def ==(other)
+              return unless other.instance_of?(self.class)
+
+              return false if stack != other.stack
+
+              true
+            end
+
+            ##
             # TODO: Unify `inspect`. Specs for `inspect`.
             #
             def inspect

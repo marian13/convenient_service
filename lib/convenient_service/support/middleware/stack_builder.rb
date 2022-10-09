@@ -23,6 +23,18 @@ module ConvenientService
         end
 
         ##
+        # @param [ConvenientService::Support::Middleware::StackBuilder, Object]
+        # @return [Boolean, nil]
+        #
+        def ==(other)
+          return unless other.instance_of?(self.class)
+
+          return false if stack != other.stack
+
+          true
+        end
+
+        ##
         # NOTE: `use` can accept additional arguments and block,
         # that is why `stack` contains tuples like [middleware, args, block].
         # https://github.com/Ibsciss/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L76
