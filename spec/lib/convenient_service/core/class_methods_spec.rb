@@ -62,6 +62,11 @@ RSpec.describe ConvenientService::Core::ClassMethods do
 
       specify {
         expect { service_class.concerns(&configuration_block) }
+          .to delegate_to(service_class.concerns, :assert_not_included!)
+      }
+
+      specify {
+        expect { service_class.concerns(&configuration_block) }
           .to delegate_to(service_class.concerns, :configure)
           .with_arguments(&configuration_block)
       }

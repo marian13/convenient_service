@@ -27,6 +27,8 @@ module ConvenientService
 
         return @concerns unless configuration_block
 
+        @concerns.assert_not_included!
+
         @concerns.configure(&configuration_block)
 
         @concerns

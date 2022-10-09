@@ -55,19 +55,44 @@ module ConvenientService
         ##
         # @return [void]
         #
+        def assert_not_included!
+          return unless included?
+
+          raise Errors::ConcernsAreIncluded.new(concerns: concerns)
+        end
+
+        ##
+        # @return [void]
+        #
         def configure(&configuration_block)
           stack.instance_exec(&configuration_block)
         end
 
         ##
-        # Includes concerns into entity.
+        # Includes concerns into entity when called for the first time.
+        # Does nothing for the subsequent calls.
         #
-        # @return [void]
+        # @return [Boolean] true if called for the first time, false otherwise (similarly as Kernel#require).
         #
-        # @see https://stackoverflow.com/questions/1077412/what-is-an-idempotent-operation
+        # @see https://ruby-doc.org/core-3.1.2/Kernel.html#method-i-require
         #
         def include!
+          return false if included?
+
           stack.call(entity: stack.entity)
+
+          mark_as_included!
+
+          true
+        end
+
+        ##
+        # Checks whether concerns are included into entity (include! was called at least once).
+        #
+        # @return [Boolean]
+        #
+        def included?
+          Utils::Bool.to_bool(@included)
         end
 
         ##
@@ -170,6 +195,13 @@ module ConvenientService
           plain_concerns
             .select { |concern| concern.const_defined?(:ClassMethods, false) }
             .map { |concern| concern.const_get(:ClassMethods) }
+        end
+
+        ##
+        # @return [void]
+        #
+        def mark_as_included!
+          @included = true
         end
       end
     end
