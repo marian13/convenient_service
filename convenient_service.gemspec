@@ -44,7 +44,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rubocop-rspec"
   spec.add_development_dependency "tty-prompt"
   spec.add_development_dependency "standard"
-  spec.add_development_dependency "shoulda-matchers"
   spec.add_development_dependency "simplecov"
   spec.add_development_dependency "simplecov-lcov"
   spec.add_development_dependency "yard"
