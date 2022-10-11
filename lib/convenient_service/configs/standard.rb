@@ -39,13 +39,13 @@ module ConvenientService
           #
         end
 
-        middlewares method: :initialize do
+        middlewares :initialize do
           use Plugins::Common::NormalizesEnv::Middleware
 
           use Plugins::Common::CachesConstructorParams::Middleware
         end
 
-        middlewares method: :result do
+        middlewares :result do
           use Plugins::Common::NormalizesEnv::Middleware
 
           use Plugins::Service::HasResult::Middleware
@@ -60,25 +60,25 @@ module ConvenientService
           use Plugins::Common::CachesReturnValue::Middleware
         end
 
-        middlewares method: :success do
+        middlewares :success do
           use Plugins::Common::NormalizesEnv::Middleware
 
           use Plugins::Service::HasResultShortSyntax::Success::Middleware
         end
 
-        middlewares method: :failure do
+        middlewares :failure do
           use Plugins::Common::NormalizesEnv::Middleware
 
           use Plugins::Service::HasResultShortSyntax::Failure::Middleware
         end
 
-        middlewares method: :error do
+        middlewares :error do
           use Plugins::Common::NormalizesEnv::Middleware
 
           use Plugins::Service::HasResultShortSyntax::Error::Middleware
         end
 
-        middlewares method: :step, scope: :class do
+        middlewares :step, scope: :class do
           use Plugins::Common::NormalizesEnv::Middleware
 
           use Plugins::Service::HasResultMethodSteps::Middleware
@@ -102,55 +102,55 @@ module ConvenientService
             use Plugins::Result::CanRecalculateResult::Concern
           end
 
-          middlewares method: :success? do
+          middlewares :success? do
             use Plugins::Common::NormalizesEnv::Middleware
 
             use Plugins::Result::MarksResultStatusAsChecked::Middleware
           end
 
-          middlewares method: :failure? do
+          middlewares :failure? do
             use Plugins::Common::NormalizesEnv::Middleware
 
             use Plugins::Result::MarksResultStatusAsChecked::Middleware
           end
 
-          middlewares method: :error? do
+          middlewares :error? do
             use Plugins::Common::NormalizesEnv::Middleware
 
             use Plugins::Result::MarksResultStatusAsChecked::Middleware
           end
 
-          middlewares method: :not_success? do
+          middlewares :not_success? do
             use Plugins::Common::NormalizesEnv::Middleware
 
             use Plugins::Result::MarksResultStatusAsChecked::Middleware
           end
 
-          middlewares method: :not_failure? do
+          middlewares :not_failure? do
             use Plugins::Common::NormalizesEnv::Middleware
 
             use Plugins::Result::MarksResultStatusAsChecked::Middleware
           end
 
-          middlewares method: :not_error? do
+          middlewares :not_error? do
             use Plugins::Common::NormalizesEnv::Middleware
 
             use Plugins::Result::MarksResultStatusAsChecked::Middleware
           end
 
-          middlewares method: :data do
+          middlewares :data do
             use Plugins::Common::NormalizesEnv::Middleware
 
             use Plugins::Result::RaisesOnNotCheckedResultStatus::Middleware
           end
 
-          middlewares method: :message do
+          middlewares :message do
             use Plugins::Common::NormalizesEnv::Middleware
 
             use Plugins::Result::RaisesOnNotCheckedResultStatus::Middleware
           end
 
-          middlewares method: :code do
+          middlewares :code do
             use Plugins::Common::NormalizesEnv::Middleware
 
             use Plugins::Result::RaisesOnNotCheckedResultStatus::Middleware
@@ -172,7 +172,7 @@ module ConvenientService
             use Plugins::Common::HasInternals::Concern
           end
 
-          middlewares method: :result do
+          middlewares :result do
             use Plugins::Common::NormalizesEnv::Middleware
 
             use Plugins::Common::CachesReturnValue::Middleware

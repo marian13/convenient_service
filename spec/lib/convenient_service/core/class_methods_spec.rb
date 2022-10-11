@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-# rubocop:disable RSpec/NestedGroups
+# rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Core::ClassMethods do
   include ConvenientService::RSpec::Matchers::DelegateTo
   include ConvenientService::RSpec::Matchers::CacheItsValue
@@ -75,6 +75,95 @@ RSpec.describe ConvenientService::Core::ClassMethods do
         expect(service_class.concerns(&configuration_block)).to eq(concerns)
       end
     end
+  end
+
+  describe "#middlewares" do
+    let(:method) { :result }
+
+    let(:instance_method_middleware) do
+      Class.new(ConvenientService::Core::MethodChainMiddleware) do
+        def next(*args, **kwargs, &block)
+          chain.next(*args, **kwargs, &block)
+        end
+      end
+    end
+
+    let(:class_method_middleware) do
+      Class.new(ConvenientService::Core::MethodChainMiddleware) do
+        def next(*args, **kwargs, &block)
+          chain.next(*args, **kwargs, &block)
+        end
+      end
+    end
+
+    let(:service_class) do
+      Class.new.tap do |klass|
+        klass.class_exec(method, instance_method_middleware, class_method_middleware) do |method, instance_method_middleware, class_method_middleware|
+          include ConvenientService::Core
+
+          middlewares(method, scope: :instance).configure(instance_method_middleware) do |instance_method_middleware|
+            use instance_method_middleware
+          end
+
+          middlewares(method, scope: :class).configure(class_method_middleware) do |class_method_middleware|
+            use class_method_middleware
+          end
+        end
+      end
+    end
+
+    let(:configuration_block) do
+      proc do
+      end
+    end
+
+    context "when `configuration_block` is NOT passed" do
+      let(:middlewares) { service_class.middlewares(method, **kwargs) }
+
+      let(:instance_method_middlewares) { ConvenientService::Core::Entities::MethodMiddlewares.new(scope: :instance, method: method, container: service_class) }
+      let(:class_method_middlewares) { ConvenientService::Core::Entities::MethodMiddlewares.new(scope: :class, method: method, container: service_class) }
+
+      context "when `scope` is NOT passed" do
+        let(:middlewares) { service_class.middlewares(method) }
+
+        ##
+        # TODO:
+        #
+        xit "returns instance middlewares for `method`" do
+          expect(middlewares).to eq(instance_method_middlewares)
+        end
+      end
+
+      context "when `scope` is passed" do
+        let(:middlewares) { service_class.middlewares(method, scope: :instance) }
+
+        context "when `scope` is `:instance`" do
+          ##
+          # TODO:
+          #
+          xit "returns instance middlewares for `method`" do
+            expect(middlewares).to eq(instance_method_middlewares)
+          end
+        end
+
+        context "when `scope` is `:class`" do
+          let(:middlewares) { service_class.middlewares(method, scope: :class) }
+
+          ##
+          # TODO:
+          #
+          xit "returns class middlewares for `method`" do
+            expect(middlewares).to eq(class_method_middlewares)
+          end
+        end
+      end
+    end
+
+    ##
+    # TODO:
+    #
+    # context "when `configuration_block` is passed" do
+    # end
   end
 
   describe "#method_missing" do
@@ -375,4 +464,4 @@ RSpec.describe ConvenientService::Core::ClassMethods do
     end
   end
 end
-# rubocop:enable RSpec/NestedGroups
+# rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers

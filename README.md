@@ -197,7 +197,7 @@ This library is under heavy development. Public API may be subject to change. Th
             use ConvenientService::Plugins::Common::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment::Concern
           end
 
-          middlewares method: :initialize do
+          middlewares :initialize do
             use ConvenientService::Plugins::Common::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment::Middleware
           end
 
@@ -215,7 +215,7 @@ This library is under heavy development. Public API may be subject to change. Th
             use ConvenientService::Plugins::Service::HasResultParamsValidations::UsingActiveModelValidations::Concern
           end
 
-          middlewares method: :result do
+          middlewares :result do
             use ConvenientService::Plugins::Service::HasResultParamsValidations::UsingActiveModelValidations::Middleware
           end
         end
@@ -347,7 +347,7 @@ This library is under heavy development. Public API may be subject to change. Th
             use ConvenientService::Plugins::Service::HasResultParamsValidations::UsingDryValidation::Concern
           end
 
-          middlewares method: :result do
+          middlewares :result do
             use ConvenientService::Plugins::Service::HasResultParamsValidations::UsingDryValidation::Middleware
           end
         end

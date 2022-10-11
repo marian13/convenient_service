@@ -68,9 +68,11 @@ module ConvenientService
         end
 
         ##
+        # @param args [Array]
+        # @param kwargs [Hash]
         # @return [void]
         #
-        def configure(&configuration_block)
+        def configure(*args, **kwargs, &configuration_block)
           stack.instance_exec(&configuration_block)
         end
 
