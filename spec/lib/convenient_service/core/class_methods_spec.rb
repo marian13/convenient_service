@@ -120,16 +120,22 @@ RSpec.describe ConvenientService::Core::ClassMethods do
     context "when `configuration_block` is NOT passed" do
       let(:middlewares) { service_class.middlewares(method, **kwargs) }
 
-      let(:instance_method_middlewares) { ConvenientService::Core::Entities::MethodMiddlewares.new(scope: :instance, method: method, container: service_class) }
-      let(:class_method_middlewares) { ConvenientService::Core::Entities::MethodMiddlewares.new(scope: :class, method: method, container: service_class) }
+      let(:instance_method_middlewares) do
+        ConvenientService::Core::Entities::MethodMiddlewares
+          .new(scope: :instance, method: method, container: service_class)
+          .configure(instance_method_middleware) { |middleware| use middleware }
+      end
+
+      let(:class_method_middlewares) do
+        ConvenientService::Core::Entities::MethodMiddlewares
+          .new(scope: :class, method: method, container: service_class)
+          .configure(class_method_middleware) { |middleware| use middleware }
+      end
 
       context "when `scope` is NOT passed" do
         let(:middlewares) { service_class.middlewares(method) }
 
-        ##
-        # TODO:
-        #
-        xit "returns instance middlewares for `method`" do
+        it "returns instance middlewares for `method`" do
           expect(middlewares).to eq(instance_method_middlewares)
         end
       end
@@ -138,10 +144,7 @@ RSpec.describe ConvenientService::Core::ClassMethods do
         let(:middlewares) { service_class.middlewares(method, scope: :instance) }
 
         context "when `scope` is `:instance`" do
-          ##
-          # TODO:
-          #
-          xit "returns instance middlewares for `method`" do
+          it "returns instance middlewares for `method`" do
             expect(middlewares).to eq(instance_method_middlewares)
           end
         end
@@ -149,10 +152,7 @@ RSpec.describe ConvenientService::Core::ClassMethods do
         context "when `scope` is `:class`" do
           let(:middlewares) { service_class.middlewares(method, scope: :class) }
 
-          ##
-          # TODO:
-          #
-          xit "returns class middlewares for `method`" do
+          it "returns class middlewares for `method`" do
             expect(middlewares).to eq(class_method_middlewares)
           end
         end
