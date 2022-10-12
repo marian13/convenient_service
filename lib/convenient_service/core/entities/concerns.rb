@@ -68,12 +68,14 @@ module ConvenientService
         end
 
         ##
-        # @param args [Array]
-        # @param kwargs [Hash]
-        # @return [ConvenientService::Core::Entities::Concerns]
+        # @param configuration_block [Proc]
+        # @return [ConvenientService::Core::Entities::MethodMiddlewares]
         #
-        def configure(*args, **kwargs, &configuration_block)
-          stack.instance_exec(&configuration_block)
+        # @internal
+        #   TODO: Utils to check if block has one require positional argument.
+        #
+        def configure(&configuration_block)
+          configuration_block.arity == 1 ? configuration_block.call(stack) : stack.instance_exec(&configuration_block)
 
           self
         end
