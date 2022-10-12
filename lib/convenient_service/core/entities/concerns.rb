@@ -70,10 +70,12 @@ module ConvenientService
         ##
         # @param args [Array]
         # @param kwargs [Hash]
-        # @return [void]
+        # @return [ConvenientService::Core::Entities::Concerns]
         #
         def configure(*args, **kwargs, &configuration_block)
           stack.instance_exec(&configuration_block)
+
+          self
         end
 
         ##
