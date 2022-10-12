@@ -17,56 +17,37 @@ RSpec.describe ConvenientService::Core::ClassMethods do
     end
 
     context "when `configuration_block` is NOT passed" do
+      let(:result) { service_class.concerns }
+
       let(:concerns) { ConvenientService::Core::Entities::Concerns.new(entity: service_class) }
 
       it "returns concerns" do
-        expect(service_class.concerns).to eq(concerns)
+        expect(result).to eq(concerns)
       end
 
-      specify { expect { service_class.concerns }.to cache_its_value }
+      specify { expect { result }.to cache_its_value }
     end
 
     context "when `configuration_block` is passed" do
+      let(:result) { service_class.concerns(&configuration_block) }
+
+      ##
+      # NOTE: Simplest concern is just a module.
+      #
+      let(:concern) { Module.new }
+
       let(:concerns) do
-        ConvenientService::Core::Entities::Concerns.new(entity: service_class)
-          .tap { |concerns| concerns.configure(&configuration_block) }
+        ConvenientService::Core::Entities::Concerns
+          .new(entity: service_class)
+          .configure(concern, &configuration_block)
       end
 
-      let(:configuration_block) do
-        proc do
-          ##
-          # NOTE: Simplest concern is just a module.
-          #
-          concern = Module.new do
-            class << self
-              ##
-              # NOTE: `name` returns `nil` when module is anonymous.
-              # `name` and `==` are overridden to make sure that module was defined in this particular test suite.
-              # https://ruby-doc.org/core-2.7.0/Module.html#method-i-name
-              #
-              # NOTE: For `expect(service_class.concerns(&configuration_block)).to eq(concerns)`.
-              #
-              def name
-                "Anonymous module from test"
-              end
+      let(:configuration_block) { proc { |concern| use concern } }
 
-              def ==(other)
-                name == other.name
-              end
-            end
-          end
-
-          use concern
-        end
-      end
+      specify { expect { result }.to delegate_to(service_class.concerns, :assert_not_included!) }
 
       specify {
-        expect { service_class.concerns(&configuration_block) }
-          .to delegate_to(service_class.concerns, :assert_not_included!)
-      }
-
-      specify {
-        expect { service_class.concerns(&configuration_block) }
+        expect { result }
           .to delegate_to(service_class.concerns, :configure)
           .with_arguments(&configuration_block)
       }
@@ -118,7 +99,7 @@ RSpec.describe ConvenientService::Core::ClassMethods do
     end
 
     context "when `configuration_block` is NOT passed" do
-      let(:middlewares) { service_class.middlewares(method, **kwargs) }
+      let(:result) { service_class.middlewares(method, **kwargs) }
 
       let(:instance_method_middlewares) do
         ConvenientService::Core::Entities::MethodMiddlewares
@@ -133,27 +114,27 @@ RSpec.describe ConvenientService::Core::ClassMethods do
       end
 
       context "when `scope` is NOT passed" do
-        let(:middlewares) { service_class.middlewares(method) }
+        let(:result) { service_class.middlewares(method) }
 
         it "returns instance middlewares for `method`" do
-          expect(middlewares).to eq(instance_method_middlewares)
+          expect(result).to eq(instance_method_middlewares)
         end
       end
 
       context "when `scope` is passed" do
-        let(:middlewares) { service_class.middlewares(method, scope: :instance) }
+        let(:result) { service_class.middlewares(method, scope: :instance) }
 
         context "when `scope` is `:instance`" do
           it "returns instance middlewares for `method`" do
-            expect(middlewares).to eq(instance_method_middlewares)
+            expect(result).to eq(instance_method_middlewares)
           end
         end
 
         context "when `scope` is `:class`" do
-          let(:middlewares) { service_class.middlewares(method, scope: :class) }
+          let(:result) { service_class.middlewares(method, scope: :class) }
 
           it "returns class middlewares for `method`" do
-            expect(middlewares).to eq(class_method_middlewares)
+            expect(result).to eq(class_method_middlewares)
           end
         end
       end
