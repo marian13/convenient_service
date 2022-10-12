@@ -24,3 +24,4 @@
 | Medium | 🚧 | How to test thread-safety? | |
 | Medium | 🚧 | Rename `Utils::Module.find_own_const` to `Utils::Module.get_own_const` | |
 | Medium | 🚧 | Mark `@api private` methods, classes | [YARD Tags](https://www.rubydoc.info/gems/yard/file/docs/Tags.md) |
+| Medium | 🚧 | Util to check if block has one required positional argument | |

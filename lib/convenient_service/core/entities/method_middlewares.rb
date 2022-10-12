@@ -38,7 +38,7 @@ module ConvenientService
         # @return [ConvenientService::Core::Entities::MethodMiddlewares]
         #
         # @internal
-        #   TODO: Utils to check if block has one require positional argument.
+        #   TODO: Util to check if block has one required positional argument.
         #
         def configure(&configuration_block)
           configuration_block.arity == 1 ? configuration_block.call(stack) : stack.instance_exec(&configuration_block)
