@@ -24,7 +24,7 @@ require_relative "convenient_service/core"
 
 ##
 # @internal
-#   Convenient Service Plugins/Extensions.
+#   Convenient Service Default Plugins/Extensions.
 #
 require_relative "convenient_service/common"
 require_relative "convenient_service/service"

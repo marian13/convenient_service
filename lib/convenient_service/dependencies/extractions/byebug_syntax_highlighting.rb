@@ -1,9 +1,10 @@
 ##
-# Yet another hack how to enable the syntax highlighting for the byebug gem. Works for v10.0.0 and higher.
-# (See https://gist.github.com/marian13/5dade20a431d7254db30e543167058ce)
+# @internal
+#   Yet another hack how to enable the syntax highlighting for the byebug gem. Works for v10.0.0 and higher.
+#   (See https://gist.github.com/marian13/5dade20a431d7254db30e543167058ce)
 #
-# WARNING: Although this hack is based on the monkey patching,
-# use this technique for other issues in your own codebases with a precaution.
+#   WARNING: Although this hack is based on the monkey patching,
+#   use this technique for other issues in your own codebases with a precaution.
 #
 require "byebug/runner" unless defined? Byebug::VERSION
 
