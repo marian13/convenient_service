@@ -178,6 +178,28 @@
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#==-instance_method" title="#== (instance method)">#<strong>==</strong>(other)  &#x21d2; Boolean<sup>?</sup> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#call-instance_method" title="#call (instance method)">#<strong>call</strong>(env)  &#x21d2; Object </a>
     
 
@@ -201,7 +223,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#delete-instance_method" title="#delete (instance method)">#<strong>delete</strong>(index_or_concern)  &#x21d2; Object </a>
+      <a href="#delete-instance_method" title="#delete (instance method)">#<strong>delete</strong>(index_or_concern)  &#x21d2; ConvenientService::Core::Entities::Concerns::Entities::Stack </a>
     
 
     
@@ -271,7 +293,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#insert_after-instance_method" title="#insert_after (instance method)">#<strong>insert_after</strong>(index_or_concern, concern)  &#x21d2; Object </a>
+      <a href="#insert_after-instance_method" title="#insert_after (instance method)">#<strong>insert_after</strong>(index_or_concern, concern)  &#x21d2; ConvenientService::Core::Entities::Concerns::Entities::Stack </a>
     
 
     
@@ -293,7 +315,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#insert_after_each-instance_method" title="#insert_after_each (instance method)">#<strong>insert_after_each</strong>(concern)  &#x21d2; Object </a>
+      <a href="#insert_after_each-instance_method" title="#insert_after_each (instance method)">#<strong>insert_after_each</strong>(concern)  &#x21d2; ConvenientService::Core::Entities::Concerns::Entities::Stack </a>
     
 
     
@@ -315,7 +337,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#insert_before-instance_method" title="#insert_before (instance method)">#<strong>insert_before</strong>(index_or_concern, concern)  &#x21d2; Object </a>
+      <a href="#insert_before-instance_method" title="#insert_before (instance method)">#<strong>insert_before</strong>(index_or_concern, concern)  &#x21d2; ConvenientService::Core::Entities::Concerns::Entities::Stack </a>
     
 
     
@@ -337,7 +359,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#insert_before_each-instance_method" title="#insert_before_each (instance method)">#<strong>insert_before_each</strong>(concern)  &#x21d2; Object </a>
+      <a href="#insert_before_each-instance_method" title="#insert_before_each (instance method)">#<strong>insert_before_each</strong>(concern)  &#x21d2; ConvenientService::Core::Entities::Concerns::Entities::Stack </a>
     
 
     
@@ -382,7 +404,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#replace-instance_method" title="#replace (instance method)">#<strong>replace</strong>(index_or_concern, concern)  &#x21d2; Object </a>
+      <a href="#replace-instance_method" title="#replace (instance method)">#<strong>replace</strong>(index_or_concern, concern)  &#x21d2; ConvenientService::Core::Entities::Concerns::Entities::Stack </a>
     
 
     
@@ -427,7 +449,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#use-instance_method" title="#use (instance method)">#<strong>use</strong>(concern)  &#x21d2; Object </a>
+      <a href="#use-instance_method" title="#use (instance method)">#<strong>use</strong>(concern)  &#x21d2; ConvenientService::Core::Entities::Concerns::Entities::Stack </a>
     
 
     
@@ -591,7 +613,82 @@
 
     
       <div class="method_details first">
-  <h3 class="signature first" id="call-instance_method">
+  <h3 class="signature first" id="==-instance_method">
+  
+    #<strong>==</strong>(other)  &#x21d2; <tt>Boolean</tt><sup>?</sup> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>other</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="ConvenientService::Core::Entities::Concerns::Entities::Stack (class)">ConvenientService::Core::Entities::Concerns::Entities::Stack</a></span></tt>, <tt>Object</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>, <tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+122
+123
+124
+125
+126
+127
+128</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns/entities/stack.rb', line 122</span>
+
+<span class='kw'>def</span> <span class='op'>==</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='rparen'>)</span>
+
+  <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='id identifier rubyid_stack'>stack</span> <span class='op'>!=</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_stack'>stack</span>
+
+  <span class='kw'>true</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="call-instance_method">
   
     #<strong>call</strong>(env)  &#x21d2; <tt>Object</tt> 
   
@@ -673,26 +770,63 @@
       <div class="method_details ">
   <h3 class="signature " id="delete-instance_method">
   
-    #<strong>delete</strong>(index_or_concern)  &#x21d2; <tt>Object</tt> 
+    #<strong>delete</strong>(index_or_concern)  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::Core::Entities::Concerns::Entities::Stack (class)">ConvenientService::Core::Entities::Concerns::Entities::Stack</a></span></tt> 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>index_or_concern</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>, <tt><span class='object_link'><a href="../../../../Support/Concern.html" title="ConvenientService::Support::Concern (module)">ConvenientService::Support::Concern</a></span></tt>, <tt>Module</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="ConvenientService::Core::Entities::Concerns::Entities::Stack (class)">ConvenientService::Core::Entities::Concerns::Entities::Stack</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-60
-61
-62
-63
-64</pre>
+87
+88
+89
+90
+91</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns/entities/stack.rb', line 60</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns/entities/stack.rb', line 87</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='id identifier rubyid_index_or_concern'>index_or_concern</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_stack'>stack</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span> <span class='id identifier rubyid_cast'>cast</span><span class='lparen'>(</span><span class='id identifier rubyid_index_or_concern'>index_or_concern</span><span class='rparen'>)</span>
@@ -743,12 +877,12 @@ TODO: Refactor.</p>
       <pre class="lines">
 
 
-76
-77
-78</pre>
+107
+108
+109</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns/entities/stack.rb', line 76</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns/entities/stack.rb', line 107</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_empty?'>empty?</span>
   <span class='id identifier rubyid_to_a'>to_a</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
@@ -761,26 +895,74 @@ TODO: Refactor.</p>
       <div class="method_details ">
   <h3 class="signature " id="insert_after-instance_method">
   
-    #<strong>insert_after</strong>(index_or_concern, concern)  &#x21d2; <tt>Object</tt> 
+    #<strong>insert_after</strong>(index_or_concern, concern)  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::Core::Entities::Concerns::Entities::Stack (class)">ConvenientService::Core::Entities::Concerns::Entities::Stack</a></span></tt> 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>index_or_concern</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>, <tt><span class='object_link'><a href="../../../../Support/Concern.html" title="ConvenientService::Support::Concern (module)">ConvenientService::Support::Concern</a></span></tt>, <tt>Module</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>concern</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../../Support/Concern.html" title="ConvenientService::Support::Concern (module)">ConvenientService::Support::Concern</a></span></tt>, <tt>Module</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="ConvenientService::Core::Entities::Concerns::Entities::Stack (class)">ConvenientService::Core::Entities::Concerns::Entities::Stack</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-36
-37
-38
-39
-40</pre>
+46
+47
+48
+49
+50</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns/entities/stack.rb', line 36</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns/entities/stack.rb', line 46</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_insert_after'>insert_after</span><span class='lparen'>(</span><span class='id identifier rubyid_index_or_concern'>index_or_concern</span><span class='comma'>,</span> <span class='id identifier rubyid_concern'>concern</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_stack'>stack</span><span class='period'>.</span><span class='id identifier rubyid_insert_after'>insert_after</span> <span class='id identifier rubyid_cast'>cast</span><span class='lparen'>(</span><span class='id identifier rubyid_index_or_concern'>index_or_concern</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='id identifier rubyid_cast'>cast</span><span class='lparen'>(</span><span class='id identifier rubyid_concern'>concern</span><span class='rparen'>)</span>
@@ -795,26 +977,63 @@ TODO: Refactor.</p>
       <div class="method_details ">
   <h3 class="signature " id="insert_after_each-instance_method">
   
-    #<strong>insert_after_each</strong>(concern)  &#x21d2; <tt>Object</tt> 
+    #<strong>insert_after_each</strong>(concern)  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::Core::Entities::Concerns::Entities::Stack (class)">ConvenientService::Core::Entities::Concerns::Entities::Stack</a></span></tt> 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>concern</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../../Support/Concern.html" title="ConvenientService::Support::Concern (module)">ConvenientService::Support::Concern</a></span></tt>, <tt>Module</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="ConvenientService::Core::Entities::Concerns::Entities::Stack (class)">ConvenientService::Core::Entities::Concerns::Entities::Stack</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-48
-49
-50
-51
-52</pre>
+66
+67
+68
+69
+70</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns/entities/stack.rb', line 48</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns/entities/stack.rb', line 66</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_insert_after_each'>insert_after_each</span><span class='lparen'>(</span><span class='id identifier rubyid_concern'>concern</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_stack'>stack</span><span class='period'>.</span><span class='id identifier rubyid_insert_after_each'>insert_after_each</span> <span class='id identifier rubyid_cast'>cast</span><span class='lparen'>(</span><span class='id identifier rubyid_concern'>concern</span><span class='rparen'>)</span>
@@ -829,26 +1048,74 @@ TODO: Refactor.</p>
       <div class="method_details ">
   <h3 class="signature " id="insert_before-instance_method">
   
-    #<strong>insert_before</strong>(index_or_concern, concern)  &#x21d2; <tt>Object</tt> 
+    #<strong>insert_before</strong>(index_or_concern, concern)  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::Core::Entities::Concerns::Entities::Stack (class)">ConvenientService::Core::Entities::Concerns::Entities::Stack</a></span></tt> 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>index_or_concern</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>, <tt><span class='object_link'><a href="../../../../Support/Concern.html" title="ConvenientService::Support::Concern (module)">ConvenientService::Support::Concern</a></span></tt>, <tt>Module</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>concern</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../../Support/Concern.html" title="ConvenientService::Support::Concern (module)">ConvenientService::Support::Concern</a></span></tt>, <tt>Module</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="ConvenientService::Core::Entities::Concerns::Entities::Stack (class)">ConvenientService::Core::Entities::Concerns::Entities::Stack</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-30
-31
-32
-33
-34</pre>
+35
+36
+37
+38
+39</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns/entities/stack.rb', line 30</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns/entities/stack.rb', line 35</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_insert_before'>insert_before</span><span class='lparen'>(</span><span class='id identifier rubyid_index_or_concern'>index_or_concern</span><span class='comma'>,</span> <span class='id identifier rubyid_concern'>concern</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_stack'>stack</span><span class='period'>.</span><span class='id identifier rubyid_insert_before'>insert_before</span> <span class='id identifier rubyid_cast'>cast</span><span class='lparen'>(</span><span class='id identifier rubyid_index_or_concern'>index_or_concern</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='id identifier rubyid_cast'>cast</span><span class='lparen'>(</span><span class='id identifier rubyid_concern'>concern</span><span class='rparen'>)</span>
@@ -863,26 +1130,63 @@ TODO: Refactor.</p>
       <div class="method_details ">
   <h3 class="signature " id="insert_before_each-instance_method">
   
-    #<strong>insert_before_each</strong>(concern)  &#x21d2; <tt>Object</tt> 
+    #<strong>insert_before_each</strong>(concern)  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::Core::Entities::Concerns::Entities::Stack (class)">ConvenientService::Core::Entities::Concerns::Entities::Stack</a></span></tt> 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>concern</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../../Support/Concern.html" title="ConvenientService::Support::Concern (module)">ConvenientService::Support::Concern</a></span></tt>, <tt>Module</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="ConvenientService::Core::Entities::Concerns::Entities::Stack (class)">ConvenientService::Core::Entities::Concerns::Entities::Stack</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-42
-43
-44
-45
-46</pre>
+56
+57
+58
+59
+60</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns/entities/stack.rb', line 42</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns/entities/stack.rb', line 56</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_insert_before_each'>insert_before_each</span><span class='lparen'>(</span><span class='id identifier rubyid_concern'>concern</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_stack'>stack</span><span class='period'>.</span><span class='id identifier rubyid_insert_before_each'>insert_before_each</span> <span class='id identifier rubyid_cast'>cast</span><span class='lparen'>(</span><span class='id identifier rubyid_concern'>concern</span><span class='rparen'>)</span>
@@ -919,12 +1223,12 @@ TODO: Refactor.</p>
       <pre class="lines">
 
 
-90
-91
-92</pre>
+133
+134
+135</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns/entities/stack.rb', line 90</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns/entities/stack.rb', line 133</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_inspect'>inspect</span>
   <span class='id identifier rubyid_to_a'>to_a</span><span class='period'>.</span><span class='id identifier rubyid_inspect'>inspect</span>
@@ -937,26 +1241,74 @@ TODO: Refactor.</p>
       <div class="method_details ">
   <h3 class="signature " id="replace-instance_method">
   
-    #<strong>replace</strong>(index_or_concern, concern)  &#x21d2; <tt>Object</tt> 
+    #<strong>replace</strong>(index_or_concern, concern)  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::Core::Entities::Concerns::Entities::Stack (class)">ConvenientService::Core::Entities::Concerns::Entities::Stack</a></span></tt> 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>index_or_concern</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>, <tt><span class='object_link'><a href="../../../../Support/Concern.html" title="ConvenientService::Support::Concern (module)">ConvenientService::Support::Concern</a></span></tt>, <tt>Module</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>concern</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../../Support/Concern.html" title="ConvenientService::Support::Concern (module)">ConvenientService::Support::Concern</a></span></tt>, <tt>Module</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="ConvenientService::Core::Entities::Concerns::Entities::Stack (class)">ConvenientService::Core::Entities::Concerns::Entities::Stack</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-54
-55
-56
-57
-58</pre>
+77
+78
+79
+80
+81</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns/entities/stack.rb', line 54</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns/entities/stack.rb', line 77</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_replace'>replace</span><span class='lparen'>(</span><span class='id identifier rubyid_index_or_concern'>index_or_concern</span><span class='comma'>,</span> <span class='id identifier rubyid_concern'>concern</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_stack'>stack</span><span class='period'>.</span><span class='id identifier rubyid_replace'>replace</span> <span class='id identifier rubyid_cast'>cast</span><span class='lparen'>(</span><span class='id identifier rubyid_index_or_concern'>index_or_concern</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='id identifier rubyid_cast'>cast</span><span class='lparen'>(</span><span class='id identifier rubyid_concern'>concern</span><span class='rparen'>)</span>
@@ -993,12 +1345,12 @@ TODO: Refactor.</p>
       <pre class="lines">
 
 
-83
-84
-85</pre>
+114
+115
+116</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns/entities/stack.rb', line 83</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns/entities/stack.rb', line 114</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_a'>to_a</span>
   <span class='id identifier rubyid_stack'>stack</span><span class='period'>.</span><span class='id identifier rubyid_to_a'>to_a</span>
@@ -1011,26 +1363,63 @@ TODO: Refactor.</p>
       <div class="method_details ">
   <h3 class="signature " id="use-instance_method">
   
-    #<strong>use</strong>(concern)  &#x21d2; <tt>Object</tt> 
+    #<strong>use</strong>(concern)  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::Core::Entities::Concerns::Entities::Stack (class)">ConvenientService::Core::Entities::Concerns::Entities::Stack</a></span></tt> 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>concern</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../../Support/Concern.html" title="ConvenientService::Support::Concern (module)">ConvenientService::Support::Concern</a></span></tt>, <tt>Module</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="ConvenientService::Core::Entities::Concerns::Entities::Stack (class)">ConvenientService::Core::Entities::Concerns::Entities::Stack</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-66
-67
-68
-69
-70</pre>
+97
+98
+99
+100
+101</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns/entities/stack.rb', line 66</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns/entities/stack.rb', line 97</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_use'>use</span><span class='lparen'>(</span><span class='id identifier rubyid_concern'>concern</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_stack'>stack</span><span class='period'>.</span><span class='id identifier rubyid_use'>use</span> <span class='id identifier rubyid_cast'>cast</span><span class='lparen'>(</span><span class='id identifier rubyid_concern'>concern</span><span class='rparen'>)</span>
@@ -1047,7 +1436,7 @@ TODO: Refactor.</p>
 </div>
 
       <div id="footer">
-  Generated on Sun Oct  9 15:37:15 2022 by
+  Generated on Thu Oct 13 14:37:27 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>
