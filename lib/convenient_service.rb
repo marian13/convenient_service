@@ -1,18 +1,32 @@
 # frozen_string_literal: true
 
-require "forwardable"
-require "logger"
-require "ostruct"
-require "singleton"
+##
+# @internal
+#   Convenient Service Dependencies.
+#
+require_relative "convenient_service/dependencies"
 
+
+##
+# @internal
+#   Convenient Service
+#
 require_relative "convenient_service/logger"
 require_relative "convenient_service/error"
-require_relative "convenient_service/extractions"
 require_relative "convenient_service/support"
 require_relative "convenient_service/utils"
 require_relative "convenient_service/version"
 
+##
+# @internal
+#   Convenient Service Core.
+#
 require_relative "convenient_service/core"
+
+##
+# @internal
+#   Convenient Service Plugins/Extensions.
+#
 require_relative "convenient_service/common"
 require_relative "convenient_service/service"
 require_relative "convenient_service/configs"
@@ -74,7 +88,7 @@ module ConvenientService
       require "rouge"
       require "tempfile"
 
-      require_relative "convenient_service/extractions/byebug_syntax_highlighting"
+      require_relative "convenient_service/dependencies/extractions/byebug_syntax_highlighting"
     end
 
     ##

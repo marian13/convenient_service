@@ -44,6 +44,6 @@ AllCops:
     - vendor/**/*
 
     ##
-    # NOTE: Excludes extractions from linting.
+    # NOTE: Excludes dependencies from linting.
     #
-    - lib/convenient_service/extractions/**/*
+    - lib/convenient_service/dependencies/**/*
