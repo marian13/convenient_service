@@ -2,7 +2,7 @@
 
 require "convenient_service"
 
-ConvenientService.require_rspec_extentions
-ConvenientService.require_development_tools
+ConvenientService::Dependencies.require_rspec_extentions
+ConvenientService::Dependencies.require_development_tools
 
-ConvenientService.require_standard_examples
+ConvenientService::Dependencies.require_standard_examples

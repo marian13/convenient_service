@@ -10,7 +10,7 @@ module ConvenientService
       #   NOTE: Minimal `ibsciss-middleware` version - `0.4.2`.
       #   https://github.com/Ibsciss/ruby-middleware/tree/v0.4.2
       #
-      class StackBuilder < Extractions::RubyMiddleware::Middleware::Builder
+      class StackBuilder < Dependencies::Extractions::RubyMiddleware::Middleware::Builder
         ##
         # @param opts [Hash]
         # @param block [Proc]
