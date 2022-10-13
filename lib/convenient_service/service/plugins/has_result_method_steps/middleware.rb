@@ -6,9 +6,11 @@ module ConvenientService
       module HasResultMethodSteps
         class Middleware < Core::MethodChainMiddleware
           ##
-          # NOTE: It is okish to assign to next method arguments here,
-          # since splat for `args` and double splat for `kwargs`
-          # always create new arrays and hashes respectively.
+          # @internal
+          #   NOTE: It is okish to assign to next method arguments here,
+          #   since splat for `args` and double splat for `kwargs`
+          #   always create new arrays and hashes respectively.
+          #   https://github.com/ruby/spec/blob/c7ed8478a031d0df346d222495f4b4bbb298523b/language/keyword_arguments_spec.rb#L100
           #
           def next(*args, **kwargs, &block)
             return chain.next(*args, **kwargs, &block) unless args.first.instance_of?(::Symbol)

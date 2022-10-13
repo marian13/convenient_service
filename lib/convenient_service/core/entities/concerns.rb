@@ -196,18 +196,14 @@ module ConvenientService
         # @return [Array<Module>]
         #
         def instance_methods_modules
-          plain_concerns
-            .select { |concern| concern.const_defined?(:InstanceMethods, false) }
-            .map { |concern| concern.const_get(:InstanceMethods) }
+          plain_concerns.filter_map { |concern| Utils::Module.get_own_const(concern, :InstanceMethods) }
         end
 
         ##
         # @return [Array<Module>]
         #
         def class_methods_modules
-          plain_concerns
-            .select { |concern| concern.const_defined?(:ClassMethods, false) }
-            .map { |concern| concern.const_get(:ClassMethods) }
+          plain_concerns.filter_map { |concern| Utils::Module.get_own_const(concern, :ClassMethods) }
         end
       end
     end
