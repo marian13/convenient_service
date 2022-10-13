@@ -176,9 +176,9 @@ This library is under heavy development. Public API may be subject to change. Th
 
   require "convenient_service"
 
-  ConvenientService.require_assigns_attributes_in_constructor_using_active_model_attribute_assignment
-  ConvenientService.require_has_attributes_using_active_model_attributes
-  ConvenientService.require_has_result_params_validations_using_active_model_validations
+  ConvenientService::Dependencies.require_assigns_attributes_in_constructor_using_active_model_attribute_assignment
+  ConvenientService::Dependencies.require_has_attributes_using_active_model_attributes
+  ConvenientService::Dependencies.require_has_result_params_validations_using_active_model_validations
   ```
 
   ```ruby
@@ -322,8 +322,8 @@ This library is under heavy development. Public API may be subject to change. Th
 
   require "convenient_service"
 
-  ConvenientService.require_assigns_attributes_in_constructor_using_dry_initializer
-  ConvenientService.require_has_result_params_validations_using_dry_validation
+  ConvenientService::Dependencies.require_assigns_attributes_in_constructor_using_dry_initializer
+  ConvenientService::Dependencies.require_has_result_params_validations_using_dry_validation
   ```
 
   ```ruby
