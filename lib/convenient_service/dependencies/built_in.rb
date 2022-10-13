@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
 ##
-# This file load built-in dependencies (from Ruby standard library).
+# This files loads built-in dependencies (from Ruby standard library).
+#
+# @internal
+#   https://github.com/marian13/convenient_service/wiki/Docs:-Dependencies
 #
 
 ##

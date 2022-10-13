@@ -3,6 +3,12 @@
 require_relative "dependencies/built_in"
 require_relative "dependencies/extractions"
 
+##
+# `ConvenientService::Dependencies` can dynamically require plugins/extensions that have external dependencies.
+#
+# @internal
+#   https://github.com/marian13/convenient_service/wiki/Docs:-Dependencies
+#
 module ConvenientService
   module Dependencies
     class << self
