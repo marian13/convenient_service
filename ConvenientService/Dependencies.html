@@ -190,7 +190,7 @@
   
   
   
-  
+  <span class="private note title">private</span>
 
   
     <span class="summary_desc"><div class='inline'><p>Loads dry config examples.</p>
@@ -279,7 +279,7 @@
   
   
   
-  
+  <span class="private note title">private</span>
 
   
     <span class="summary_desc"><div class='inline'><p>Loads rails config examples.</p>
@@ -325,7 +325,7 @@
   
   
   
-  
+  <span class="private note title">private</span>
 
   
     <span class="summary_desc"><div class='inline'><p>Loads standard config examples.</p>
@@ -355,6 +355,13 @@
 </h3><div class="docstring">
   <div class="discussion">
     
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p>Expected to be called from app entry points like <code>initializers</code> in Rails.</p>
+</div>
+  </div>
+
+
 
   </div>
 </div>
@@ -380,14 +387,14 @@
       <pre class="lines">
 
 
-18
 19
 20
 21
-22</pre>
+22
+23</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies.rb', line 18</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies.rb', line 19</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_require_assigns_attributes_in_constructor_using_active_model_attribute_assignment'>require_assigns_attributes_in_constructor_using_active_model_attribute_assignment</span>
   <span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_model</span><span class='tstring_end'>&quot;</span></span>
@@ -411,6 +418,13 @@
 </h3><div class="docstring">
   <div class="discussion">
     
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p>Expected to be called from app entry points like <code>initializers</code> in Rails.</p>
+</div>
+  </div>
+
+
 
   </div>
 </div>
@@ -436,14 +450,14 @@
       <pre class="lines">
 
 
-27
-28
 29
 30
-31</pre>
+31
+32
+33</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies.rb', line 27</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies.rb', line 29</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_require_assigns_attributes_in_constructor_using_dry_initializer'>require_assigns_attributes_in_constructor_using_dry_initializer</span>
   <span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>dry-initializer</span><span class='tstring_end'>&quot;</span></span>
@@ -467,6 +481,13 @@
 </h3><div class="docstring">
   <div class="discussion">
     
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p>Expected to be called from <code>irb</code>, <code>pry</code>, <code>spec_helper.rb</code>, etc.</p>
+</div>
+  </div>
+
+
 
   </div>
 </div>
@@ -492,18 +513,18 @@
       <pre class="lines">
 
 
-63
-64
-65
-66
-67
-68
 69
 70
-71</pre>
+71
+72
+73
+74
+75
+76
+77</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies.rb', line 63</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies.rb', line 69</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_require_development_tools'>require_development_tools</span>
   <span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>awesome_print</span><span class='tstring_end'>&quot;</span></span>
@@ -530,7 +551,11 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Loads dry config examples.</p>
+    <p class="note private">
+  <strong>This method is part of a private API.</strong>
+  You should avoid using this method if possible, as it may be removed or be changed in the future.
+</p>
+<p>Loads dry config examples.</p>
 
 
   </div>
@@ -557,14 +582,14 @@
       <pre class="lines">
 
 
-118
-119
-120
-121
-122</pre>
+126
+127
+128
+129
+130</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies.rb', line 118</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies.rb', line 126</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_require_dry_examples'>require_dry_examples</span>
   <span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>progressbar</span><span class='tstring_end'>&quot;</span></span>
@@ -588,6 +613,13 @@
 </h3><div class="docstring">
   <div class="discussion">
     
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p>Expected to be called from app entry points like <code>initializers</code> in Rails.</p>
+</div>
+  </div>
+
+
 
   </div>
 </div>
@@ -613,14 +645,14 @@
       <pre class="lines">
 
 
-36
-37
-38
 39
-40</pre>
+40
+41
+42
+43</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies.rb', line 36</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies.rb', line 39</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_require_has_attributes_using_active_model_attributes'>require_has_attributes_using_active_model_attributes</span>
   <span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_model</span><span class='tstring_end'>&quot;</span></span>
@@ -644,6 +676,13 @@
 </h3><div class="docstring">
   <div class="discussion">
     
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p>Expected to be called from app entry points like <code>initializers</code> in Rails.</p>
+</div>
+  </div>
+
+
 
   </div>
 </div>
@@ -669,14 +708,14 @@
       <pre class="lines">
 
 
-45
-46
-47
-48
-49</pre>
+49
+50
+51
+52
+53</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies.rb', line 45</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies.rb', line 49</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_require_has_result_params_validations_using_active_model_validations'>require_has_result_params_validations_using_active_model_validations</span>
   <span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_model</span><span class='tstring_end'>&quot;</span></span>
@@ -700,6 +739,13 @@
 </h3><div class="docstring">
   <div class="discussion">
     
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p>Expected to be called from app entry points like <code>initializers</code> in Rails.</p>
+</div>
+  </div>
+
+
 
   </div>
 </div>
@@ -725,14 +771,14 @@
       <pre class="lines">
 
 
-54
-55
-56
-57
-58</pre>
+59
+60
+61
+62
+63</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies.rb', line 54</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies.rb', line 59</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_require_has_result_params_validations_using_dry_validation'>require_has_result_params_validations_using_dry_validation</span>
   <span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>dry-validation</span><span class='tstring_end'>&quot;</span></span>
@@ -755,7 +801,11 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Loads rails config examples.</p>
+    <p class="note private">
+  <strong>This method is part of a private API.</strong>
+  You should avoid using this method if possible, as it may be removed or be changed in the future.
+</p>
+<p>Loads rails config examples.</p>
 
 
   </div>
@@ -782,14 +832,14 @@
       <pre class="lines">
 
 
-107
-108
-109
-110
-111</pre>
+114
+115
+116
+117
+118</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies.rb', line 107</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies.rb', line 114</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_require_rails_examples'>require_rails_examples</span>
   <span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>progressbar</span><span class='tstring_end'>&quot;</span></span>
@@ -846,19 +896,19 @@
       <pre class="lines">
 
 
-80
-81
-82
-83
-84
 85
 86
 87
 88
-89</pre>
+89
+90
+91
+92
+93
+94</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies.rb', line 80</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies.rb', line 85</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_require_rspec_extentions'>require_rspec_extentions</span>
   <span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>rspec/expectations</span><span class='tstring_end'>&quot;</span></span>
@@ -886,7 +936,11 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Loads standard config examples.</p>
+    <p class="note private">
+  <strong>This method is part of a private API.</strong>
+  You should avoid using this method if possible, as it may be removed or be changed in the future.
+</p>
+<p>Loads standard config examples.</p>
 
 
   </div>
@@ -913,14 +967,14 @@
       <pre class="lines">
 
 
-96
-97
-98
-99
-100</pre>
+102
+103
+104
+105
+106</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies.rb', line 96</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies.rb', line 102</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_require_standard_examples'>require_standard_examples</span>
   <span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>progressbar</span><span class='tstring_end'>&quot;</span></span>
@@ -937,7 +991,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Oct 13 21:08:33 2022 by
+  Generated on Thu Oct 13 22:16:39 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>
