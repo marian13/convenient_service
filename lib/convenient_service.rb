@@ -8,7 +8,7 @@ require_relative "convenient_service/dependencies"
 
 ##
 # @internal
-#   Convenient Service Inner Parts.
+#   Convenient Service Inner Tools and Utilities.
 #
 require_relative "convenient_service/logger"
 require_relative "convenient_service/error"

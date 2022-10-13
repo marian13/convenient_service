@@ -14,6 +14,7 @@ module ConvenientService
     class << self
       ##
       # @return [Boolean]
+      # @note Expected to be called from app entry points like `initializers` in Rails.
       #
       def require_assigns_attributes_in_constructor_using_active_model_attribute_assignment
         require "active_model"
@@ -23,6 +24,7 @@ module ConvenientService
 
       ##
       # @return [Boolean]
+      # @note Expected to be called from app entry points like `initializers` in Rails.
       #
       def require_assigns_attributes_in_constructor_using_dry_initializer
         require "dry-initializer"
@@ -32,6 +34,7 @@ module ConvenientService
 
       ##
       # @return [Boolean]
+      # @note Expected to be called from app entry points like `initializers` in Rails.
       #
       def require_has_attributes_using_active_model_attributes
         require "active_model"
@@ -41,6 +44,7 @@ module ConvenientService
 
       ##
       # @return [Boolean]
+      # @note Expected to be called from app entry points like `initializers` in Rails.
       #
       def require_has_result_params_validations_using_active_model_validations
         require "active_model"
@@ -50,6 +54,7 @@ module ConvenientService
 
       ##
       # @return [Boolean]
+      # @note Expected to be called from app entry points like `initializers` in Rails.
       #
       def require_has_result_params_validations_using_dry_validation
         require "dry-validation"
@@ -59,6 +64,7 @@ module ConvenientService
 
       ##
       # @return [Boolean]
+      # @note Expected to be called from `irb`, `pry`, `spec_helper.rb`, etc.
       #
       def require_development_tools
         require "awesome_print"
@@ -74,7 +80,6 @@ module ConvenientService
       # Loads RSpec extensions like `be_success` matcher, `stub_service` helper, etc.
       #
       # @return [Boolean]
-      #
       # @note Expected to be called from `spec_helper.rb`.
       #
       def require_rspec_extentions
@@ -92,6 +97,7 @@ module ConvenientService
       # Loads standard config examples.
       #
       # @return [Boolean]
+      # @api private
       #
       def require_standard_examples
         require "progressbar"
@@ -103,6 +109,7 @@ module ConvenientService
       # Loads rails config examples.
       #
       # @return [Boolean]
+      # @api private
       #
       def require_rails_examples
         require "progressbar"
@@ -114,6 +121,7 @@ module ConvenientService
       # Loads dry config examples.
       #
       # @return [Boolean]
+      # @api private
       #
       def require_dry_examples
         require "progressbar"
