@@ -30,7 +30,7 @@ module ConvenientService
                   use Plugins::Service::HasResultParamsValidations::UsingDryValidation::Concern
                 end
 
-                middlewares method: :result do
+                middlewares :result do
                   use Plugins::Service::HasResultParamsValidations::UsingDryValidation::Middleware
                 end
               end

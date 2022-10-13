@@ -34,10 +34,14 @@ module ConvenientService
         end
 
         ##
+        # @param configuration_block [Proc]
         # @return [ConvenientService::Core::Entities::MethodMiddlewares]
         #
+        # @internal
+        #   TODO: Util to check if block has one required positional argument.
+        #
         def configure(&configuration_block)
-          stack.instance_exec(&configuration_block)
+          Utils::Proc.exec_config(configuration_block, stack)
 
           self
         end
@@ -61,13 +65,28 @@ module ConvenientService
         end
 
         ##
+        # @param other [ConvenientService::Core::Entities::MethodMiddlewares, Object]
+        # @return [Boolean, nil]
+        #
+        def ==(other)
+          return unless other.instance_of?(self.class)
+
+          return false if scope != other.scope
+          return false if method != other.method
+          return false if container != other.container
+          return false if stack != other.stack
+
+          true
+        end
+
+        ##
         # @return [Array<ConvenientService::Core::Entities::MethodMiddlewares::Entities::Middleware>]
         #
         def to_a
           stack.to_a.map(&:first)
         end
 
-        private
+        protected
 
         ##
         # @!attribute [r] scope
@@ -93,6 +112,8 @@ module ConvenientService
         def stack
           @stack ||= Entities::Stack.new(name: stack_name)
         end
+
+        private
 
         ##
         # @return [String]

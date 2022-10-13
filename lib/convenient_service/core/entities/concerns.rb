@@ -53,7 +53,13 @@ module ConvenientService
         end
 
         ##
+        # @note: Concerns are included either by `commit_config` or `method_missing` from `ConvenientService::Core`.
+        #
         # @return [void]
+        #
+        # @internal
+        #   NOTE: Concerns must be included only once since Ruby does NOT allow to modify the order of modules in the inheritance chain.
+        #   TODO: Redesign core to have an ability to change order of included/extended modules in v3? Does it really worth it?
         #
         def assert_not_included!
           return unless included?
@@ -62,10 +68,16 @@ module ConvenientService
         end
 
         ##
-        # @return [void]
+        # @param configuration_block [Proc]
+        # @return [ConvenientService::Core::Entities::MethodMiddlewares]
+        #
+        # @internal
+        #   TODO: Util to check if block has one required positional argument.
         #
         def configure(&configuration_block)
-          stack.instance_exec(&configuration_block)
+          Utils::Proc.exec_config(configuration_block, stack)
+
+          self
         end
 
         ##
@@ -79,9 +91,7 @@ module ConvenientService
         def include!
           return false if included?
 
-          stack.call(entity: stack.entity)
-
-          mark_as_included!
+          stack.dup.insert_before(0, Entities::DefaultConcern).call(entity: stack.entity)
 
           true
         end
@@ -91,8 +101,23 @@ module ConvenientService
         #
         # @return [Boolean]
         #
+        # @internal
+        #   IMPORTANT: `included?` should be thread-safe.
+        #
         def included?
-          Utils::Bool.to_bool(@included)
+          stack.entity.include?(Entities::DefaultConcern)
+        end
+
+        ##
+        # @param other [ConvenientService::Core::Entities::Concerns, Object]
+        # @return [Boolean, nil]
+        #
+        def ==(other)
+          return unless other.instance_of?(self.class)
+
+          return false if stack != other.stack
+
+          true
         end
 
         ##
@@ -102,13 +127,15 @@ module ConvenientService
           plain_concerns
         end
 
-        private
+        protected
 
         ##
         # @!attribute [r] stack
         #   @return [ConvenientService::Core::Entities::Concerns::Entities::Stack]
         #
         attr_reader :stack
+
+        private
 
         ##
         # @return [Array<Module>]
@@ -181,13 +208,6 @@ module ConvenientService
           plain_concerns
             .select { |concern| concern.const_defined?(:ClassMethods, false) }
             .map { |concern| concern.const_get(:ClassMethods) }
-        end
-
-        ##
-        # @return [void]
-        #
-        def mark_as_included!
-          @included = true
         end
       end
     end

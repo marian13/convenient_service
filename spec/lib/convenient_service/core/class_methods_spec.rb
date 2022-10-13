@@ -4,11 +4,203 @@ require "spec_helper"
 
 require "convenient_service"
 
-# rubocop:disable RSpec/NestedGroups
+# rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Core::ClassMethods do
   include ConvenientService::RSpec::Matchers::DelegateTo
+  include ConvenientService::RSpec::Matchers::CacheItsValue
 
-  let(:service_instance) { service_class.new }
+  describe "#concerns" do
+    let(:service_class) do
+      Class.new do
+        include ConvenientService::Core
+      end
+    end
+
+    context "when `configuration_block` is NOT passed" do
+      let(:result) { service_class.concerns }
+
+      let(:concerns) { ConvenientService::Core::Entities::Concerns.new(entity: service_class) }
+
+      specify { expect { result }.to cache_its_value }
+
+      it "returns concerns" do
+        expect(result).to eq(concerns)
+      end
+    end
+
+    context "when `configuration_block` is passed" do
+      let(:result) { service_class.concerns(&configuration_block) }
+
+      ##
+      # NOTE: Simplest concern is just a module.
+      #
+      let(:concern) { Module.new }
+
+      let(:concerns) do
+        ConvenientService::Core::Entities::Concerns
+          .new(entity: service_class)
+          .configure(&configuration_block)
+      end
+
+      let(:configuration_block) { proc { |stack| stack.use concern } }
+
+      specify { expect { result }.to delegate_to(service_class.concerns, :assert_not_included!) }
+
+      specify do
+        expect { result }
+          .to delegate_to(service_class.concerns, :configure)
+          .with_arguments(&configuration_block)
+      end
+
+      specify { expect { result }.to cache_its_value }
+
+      it "returns concerns" do
+        expect(result).to eq(concerns)
+      end
+    end
+  end
+
+  describe "#middlewares" do
+    let(:method) { :result }
+
+    let(:service_class) do
+      Class.new do
+        include ConvenientService::Core
+      end
+    end
+
+    context "when `configuration_block` is NOT passed" do
+      let(:result) { service_class.middlewares(method, **kwargs) }
+
+      let(:instance_method_middlewares) { ConvenientService::Core::Entities::MethodMiddlewares.new(scope: :instance, method: method, container: service_class) }
+      let(:class_method_middlewares) { ConvenientService::Core::Entities::MethodMiddlewares.new(scope: :class, method: method, container: service_class) }
+
+      context "when `scope` is NOT passed" do
+        let(:result) { service_class.middlewares(method) }
+
+        specify { expect { result }.to cache_its_value }
+
+        it "returns instance middlewares for `method`" do
+          expect(result).to eq(instance_method_middlewares)
+        end
+      end
+
+      context "when `scope` is passed" do
+        let(:result) { service_class.middlewares(method, scope: :instance) }
+
+        context "when `scope` is `:instance`" do
+          specify { expect { result }.to cache_its_value }
+
+          it "returns instance middlewares for `method`" do
+            expect(result).to eq(instance_method_middlewares)
+          end
+        end
+
+        context "when `scope` is `:class`" do
+          let(:result) { service_class.middlewares(method, scope: :class) }
+
+          specify { expect { result }.to cache_its_value }
+
+          it "returns class middlewares for `method`" do
+            expect(result).to eq(class_method_middlewares)
+          end
+        end
+      end
+    end
+
+    context "when `configuration_block` is passed" do
+      let(:instance_method_middleware) do
+        Class.new(ConvenientService::Core::MethodChainMiddleware) do
+          def next(*args, **kwargs, &block)
+            chain.next(*args, **kwargs, &block)
+          end
+        end
+      end
+
+      let(:class_method_middleware) do
+        Class.new(ConvenientService::Core::MethodChainMiddleware) do
+          def next(*args, **kwargs, &block)
+            chain.next(*args, **kwargs, &block)
+          end
+        end
+      end
+
+      let(:instance_method_configuration_block) { proc { |stack| stack.use instance_method_middleware } }
+      let(:class_method_configuration_block) { proc { |stack| stack.use class_method_middleware } }
+
+      let(:instance_method_middlewares) do
+        ConvenientService::Core::Entities::MethodMiddlewares
+          .new(scope: :instance, method: method, container: service_class)
+          .configure(&instance_method_configuration_block)
+      end
+
+      let(:class_method_middlewares) do
+        ConvenientService::Core::Entities::MethodMiddlewares
+          .new(scope: :class, method: method, container: service_class)
+          .configure(&class_method_configuration_block)
+      end
+
+      context "when `scope` is NOT passed" do
+        let(:result) { service_class.middlewares(method, &instance_method_configuration_block) }
+
+        specify do
+          expect { result }
+            .to delegate_to(service_class.middlewares(method), :configure)
+            .with_arguments(&instance_method_configuration_block)
+        end
+
+        specify { expect { result }.to delegate_to(service_class.middlewares(method), :define!) }
+
+        specify { expect { result }.to cache_its_value }
+
+        it "returns instance middlewares for `method`" do
+          expect(result).to eq(instance_method_middlewares)
+        end
+      end
+
+      context "when `scope` is passed" do
+        let(:result) { service_class.middlewares(method, scope: :instance, &instance_method_configuration_block) }
+
+        context "when `scope` is `:instance`" do
+          let(:scope) { :instance }
+
+          specify do
+            expect { result }
+              .to delegate_to(service_class.middlewares(method, scope: scope), :configure)
+              .with_arguments(&instance_method_configuration_block)
+          end
+
+          specify { expect { result }.to delegate_to(service_class.middlewares(method, scope: scope), :define!) }
+
+          specify { expect { result }.to cache_its_value }
+
+          it "returns instance middlewares for `method`" do
+            expect(result).to eq(instance_method_middlewares)
+          end
+        end
+
+        context "when `scope` is `:class`" do
+          let(:result) { service_class.middlewares(method, scope: :class, &class_method_configuration_block) }
+
+          let(:scope) { :class }
+
+          specify do
+            expect { result }
+              .to delegate_to(service_class.middlewares(method, scope: scope), :configure)
+              .with_arguments(&class_method_configuration_block)
+          end
+
+          specify { expect { result }.to delegate_to(service_class.middlewares(method, scope: scope), :define!) }
+
+          specify { expect { result }.to cache_its_value }
+
+          it "returns class middlewares for `method`" do
+            expect(result).to eq(class_method_middlewares)
+          end
+        end
+      end
+    end
+  end
 
   describe "#method_missing" do
     let(:service_class) do
@@ -284,7 +476,7 @@ RSpec.describe ConvenientService::Core::ClassMethods do
     end
 
     context "when `include_private` is NOT passed" do
-      let(:result) { service_instance.respond_to_missing?(method_name) }
+      let(:result) { service_class.respond_to_missing?(method_name) }
 
       let(:service_class) do
         Class.new do
@@ -308,4 +500,4 @@ RSpec.describe ConvenientService::Core::ClassMethods do
     end
   end
 end
-# rubocop:enable RSpec/NestedGroups
+# rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers

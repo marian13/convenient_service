@@ -35,6 +35,18 @@ module ConvenientService
             def resolve_methods_middlewares_callers(scope)
               Commands::ResolveMethodsMiddlewaresCallers.call(scope: scope, container: self)
             end
+
+            ##
+            # @param other [ConvenientService::Core::Entities::MethodMiddlewares::Entities::Container, Object]
+            # @return [Boolean, nil]
+            #
+            def ==(other)
+              return unless other.instance_of?(self.class)
+
+              return false if service_class != other.service_class
+
+              true
+            end
           end
         end
       end
