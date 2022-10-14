@@ -4,7 +4,7 @@
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>
-  Class: ConvenientService::Utils::Array::RJust
+  Class: ConvenientService::Utils::Array::Rjust
   
     &mdash; Documentation by YARD 0.9.28
   
@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="../../../css/common.css" type="text/css" />
 
 <script type="text/javascript">
-  pathId = "ConvenientService::Utils::Array::RJust";
+  pathId = "ConvenientService::Utils::Array::Rjust";
   relpath = '../../../';
 </script>
 
@@ -39,7 +39,7 @@
     <a href="../../../_index.html">Index (R)</a> &raquo;
     <span class='title'><span class='object_link'><a href="../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Array.html" title="ConvenientService::Utils::Array (module)">Array</a></span></span>
      &raquo; 
-    <span class="title">RJust</span>
+    <span class="title">Rjust</span>
   
 </div>
 
@@ -59,7 +59,7 @@
         <div class="clear"></div>
       </div>
 
-      <div id="content"><h1>Class: ConvenientService::Utils::Array::RJust
+      <div id="content"><h1>Class: ConvenientService::Utils::Array::Rjust
   
   
   
@@ -76,7 +76,7 @@
           
             <li class="next"><span class='object_link'><a href="../../Support/Command.html" title="ConvenientService::Support::Command (class)">Support::Command</a></span></li>
           
-            <li class="next">ConvenientService::Utils::Array::RJust</li>
+            <li class="next">ConvenientService::Utils::Array::Rjust</li>
           
         </ul>
         <a href="#" class="inheritanceTree">show all</a>
@@ -208,7 +208,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#call-instance_method" title="#call (instance method)">#<strong>call</strong>  &#x21d2; Object </a>
+      <a href="#call-instance_method" title="#call (instance method)">#<strong>call</strong>  &#x21d2; Array </a>
     
 
     
@@ -230,7 +230,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(array, size, pad = nil)  &#x21d2; RJust </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(array, size, pad = nil)  &#x21d2; void </a>
     
 
     
@@ -246,8 +246,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>A new instance of RJust.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'></div></span>
   
 </li>
 
@@ -272,7 +271,7 @@
     <div class="method_details first">
   <h3 class="signature first" id="initialize-instance_method">
   
-    #<strong>initialize</strong>(array, size, pad = nil)  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::Utils::Array::RJust (class)">RJust</a></span></tt> 
+    #<strong>initialize</strong>(array, size, pad = nil)  &#x21d2; <tt>void</tt> 
   
 
   
@@ -280,13 +279,55 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a new instance of RJust.</p>
-
+    
 
   </div>
 </div>
 <div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
   
+    <li>
+      
+        <span class='name'>array</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Array.html" title="ConvenientService::Utils::Array (module)">Array</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>size</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>pad</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Object.html" title="ConvenientService::Utils::Object (module)">Object</a></span></tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>Can be any type.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
 
 </div><table class="source_code">
   <tr>
@@ -294,14 +335,14 @@
       <pre class="lines">
 
 
-9
-10
-11
-12
-13</pre>
+31
+32
+33
+34
+35</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/array/rjust.rb', line 9</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/array/rjust.rb', line 31</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_array'>array</span><span class='comma'>,</span> <span class='id identifier rubyid_size'>size</span><span class='comma'>,</span> <span class='id identifier rubyid_pad'>pad</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='ivar'>@array</span> <span class='op'>=</span> <span class='id identifier rubyid_array'>array</span>
@@ -345,12 +386,12 @@
       <pre class="lines">
 
 
-7
-8
-9</pre>
+11
+12
+13</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/array/rjust.rb', line 7</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/array/rjust.rb', line 11</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_array'>array</span>
   <span class='ivar'>@array</span>
@@ -387,12 +428,12 @@
       <pre class="lines">
 
 
-7
-8
-9</pre>
+23
+24
+25</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/array/rjust.rb', line 7</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/array/rjust.rb', line 23</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_pad'>pad</span>
   <span class='ivar'>@pad</span>
@@ -429,12 +470,12 @@
       <pre class="lines">
 
 
-7
-8
-9</pre>
+17
+18
+19</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/array/rjust.rb', line 7</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/array/rjust.rb', line 17</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_size'>size</span>
   <span class='ivar'>@size</span>
@@ -454,28 +495,50 @@
       <div class="method_details first">
   <h3 class="signature first" id="call-instance_method">
   
-    #<strong>call</strong>  &#x21d2; <tt><span class='object_link'><a href="../Object.html" title="ConvenientService::Utils::Object (module)">Object</a></span></tt> 
+    #<strong>call</strong>  &#x21d2; <tt><span class='object_link'><a href="../Array.html" title="ConvenientService::Utils::Array (module)">Array</a></span></tt> 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Array.html" title="ConvenientService::Utils::Array (module)">Array</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-15
-16
-17
-18
-19
-20
-21</pre>
+40
+41
+42
+43
+44
+45
+46</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/array/rjust.rb', line 15</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/array/rjust.rb', line 40</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span>
   <span class='kw'>return</span> <span class='id identifier rubyid_array'>array</span> <span class='kw'>if</span> <span class='id identifier rubyid_size'>size</span> <span class='op'>&lt;=</span> <span class='id identifier rubyid_array'>array</span><span class='period'>.</span><span class='id identifier rubyid_size'>size</span>
@@ -494,7 +557,7 @@
 </div>
 
       <div id="footer">
-  Generated on Fri Oct 14 11:11:39 2022 by
+  Generated on Fri Oct 14 11:53:25 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>

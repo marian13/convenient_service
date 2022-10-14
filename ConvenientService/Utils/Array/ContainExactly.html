@@ -101,26 +101,7 @@
   
 </div>
 
-<h2>Overview</h2><div class="docstring">
-  <div class="discussion">
-    <p>IMPORTANT: Since <code>contain_exactly</code> uses hashes under the hood, <code>first_array</code> and <code>second_array</code> items should be comparable by <code>hash</code> and <code>eql?</code>.
-It may sometimes introduce hash collisions, which in turn can degrade the performance.
-But since the probability is relatively low, because it is NOT too common to have hashes that contain keys with different classes,
-hashes comparison is still preferred over array comparison.
-Check specs for more details.
-<a href="https://github.com/ruby/spec/blob/master/core/hash/shared/eql.rb">https://github.com/ruby/spec/blob/master/core/hash/shared/eql.rb</a>
-<a href="https://stackoverflow.com/questions/54961311/ruby-why-does-hash-need-to-overridden-whenever-eql-is-overridden">https://stackoverflow.com/questions/54961311/ruby-why-does-hash-need-to-overridden-whenever-eql-is-overridden</a>
-<a href="https://ruby-doc.org/core-3.1.2/Object.html#method-i-hash">https://ruby-doc.org/core-3.1.2/Object.html#method-i-hash</a></p>
-<p>NOTE: Inspired by <code>contain_exactly</code> from <code>RSpec</code>.
-<a href="https://relishapp.com/rspec/rspec-expectations/docs/built-in-matchers/contain-exactly-matcher">https://relishapp.com/rspec/rspec-expectations/docs/built-in-matchers/contain-exactly-matcher</a></p>
 
-
-  </div>
-</div>
-<div class="tags">
-  
-
-</div>
 
 
 
@@ -199,7 +180,7 @@ Check specs for more details.
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#call-instance_method" title="#call (instance method)">#<strong>call</strong>  &#x21d2; Object </a>
+      <a href="#call-instance_method" title="#call (instance method)">#<strong>call</strong>  &#x21d2; Boolean </a>
     
 
     
@@ -221,7 +202,7 @@ Check specs for more details.
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(first_array, second_array)  &#x21d2; ContainExactly </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(first_array, second_array)  &#x21d2; Boolean </a>
     
 
     
@@ -237,8 +218,7 @@ Check specs for more details.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>A new instance of ContainExactly.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'></div></span>
   
 </li>
 
@@ -263,7 +243,7 @@ Check specs for more details.
     <div class="method_details first">
   <h3 class="signature first" id="initialize-instance_method">
   
-    #<strong>initialize</strong>(first_array, second_array)  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::Utils::Array::ContainExactly (class)">ContainExactly</a></span></tt> 
+    #<strong>initialize</strong>(first_array, second_array)  &#x21d2; <tt>Boolean</tt> 
   
 
   
@@ -271,13 +251,38 @@ Check specs for more details.
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a new instance of ContainExactly.</p>
-
+    
 
   </div>
 </div>
 <div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
   
+    <li>
+      
+        <span class='name'>first_array</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Array.html" title="ConvenientService::Utils::Array (module)">Array</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>second_array</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Array.html" title="ConvenientService::Utils::Array (module)">Array</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
 
 </div><table class="source_code">
   <tr>
@@ -285,13 +290,13 @@ Check specs for more details.
       <pre class="lines">
 
 
-22
-23
-24
-25</pre>
+38
+39
+40
+41</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/array/contain_exactly.rb', line 22</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/array/contain_exactly.rb', line 38</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_first_array'>first_array</span><span class='comma'>,</span> <span class='id identifier rubyid_second_array'>second_array</span><span class='rparen'>)</span>
   <span class='ivar'>@first_array</span> <span class='op'>=</span> <span class='id identifier rubyid_first_array'>first_array</span>
@@ -334,12 +339,12 @@ Check specs for more details.
       <pre class="lines">
 
 
-20
-21
-22</pre>
+25
+26
+27</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/array/contain_exactly.rb', line 20</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/array/contain_exactly.rb', line 25</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_first_array'>first_array</span>
   <span class='ivar'>@first_array</span>
@@ -376,12 +381,12 @@ Check specs for more details.
       <pre class="lines">
 
 
-20
-21
-22</pre>
+31
+32
+33</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/array/contain_exactly.rb', line 20</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/array/contain_exactly.rb', line 31</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_second_array'>second_array</span>
   <span class='ivar'>@second_array</span>
@@ -401,28 +406,50 @@ Check specs for more details.
       <div class="method_details first">
   <h3 class="signature first" id="call-instance_method">
   
-    #<strong>call</strong>  &#x21d2; <tt><span class='object_link'><a href="../Object.html" title="ConvenientService::Utils::Object (module)">Object</a></span></tt> 
+    #<strong>call</strong>  &#x21d2; <tt>Boolean</tt> 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-27
-28
-29
-30
-31
-32
-33</pre>
+46
+47
+48
+49
+50
+51
+52</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/array/contain_exactly.rb', line 27</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/array/contain_exactly.rb', line 46</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span>
   <span class='id identifier rubyid_first_array_counts'>first_array_counts</span> <span class='op'>=</span> <span class='id identifier rubyid_first_array'>first_array</span><span class='period'>.</span><span class='id identifier rubyid_each_with_object'>each_with_object</span><span class='lparen'>(</span><span class='op'>::</span><span class='const'>Hash</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_h'>h</span><span class='comma'>,</span> <span class='id identifier rubyid_k'>k</span><span class='op'>|</span> <span class='id identifier rubyid_h'>h</span><span class='lbracket'>[</span><span class='id identifier rubyid_k'>k</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='int'>0</span> <span class='rbrace'>}</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_item'>item</span><span class='comma'>,</span> <span class='id identifier rubyid_counts'>counts</span><span class='op'>|</span> <span class='id identifier rubyid_counts'>counts</span><span class='lbracket'>[</span><span class='id identifier rubyid_item'>item</span><span class='rbracket'>]</span> <span class='op'>+=</span> <span class='int'>1</span> <span class='rbrace'>}</span>
@@ -441,7 +468,7 @@ Check specs for more details.
 </div>
 
       <div id="footer">
-  Generated on Fri Oct 14 11:11:40 2022 by
+  Generated on Fri Oct 14 11:53:26 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>

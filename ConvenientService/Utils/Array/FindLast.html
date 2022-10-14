@@ -194,7 +194,8 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'><p>Can be any type.</p>
+</div></span>
   
 </li>
 
@@ -202,7 +203,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(array, &amp;block)  &#x21d2; FindLast </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(array, &amp;block)  &#x21d2; void </a>
     
 
     
@@ -218,8 +219,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>A new instance of FindLast.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'></div></span>
   
 </li>
 
@@ -244,7 +244,7 @@
     <div class="method_details first">
   <h3 class="signature first" id="initialize-instance_method">
   
-    #<strong>initialize</strong>(array, &amp;block)  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::Utils::Array::FindLast (class)">FindLast</a></span></tt> 
+    #<strong>initialize</strong>(array, &amp;block)  &#x21d2; <tt>void</tt> 
   
 
   
@@ -252,13 +252,38 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a new instance of FindLast.</p>
-
+    
 
   </div>
 </div>
 <div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
   
+    <li>
+      
+        <span class='name'>array</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Array.html" title="ConvenientService::Utils::Array (module)">Array</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>block</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Proc.html" title="ConvenientService::Utils::Proc (module)">Proc</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
 
 </div><table class="source_code">
   <tr>
@@ -266,13 +291,13 @@
       <pre class="lines">
 
 
-9
-10
-11
-12</pre>
+24
+25
+26
+27</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/array/find_last.rb', line 9</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/array/find_last.rb', line 24</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_array'>array</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='ivar'>@array</span> <span class='op'>=</span> <span class='id identifier rubyid_array'>array</span>
@@ -315,12 +340,12 @@
       <pre class="lines">
 
 
-7
-8
-9</pre>
+11
+12
+13</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/array/find_last.rb', line 7</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/array/find_last.rb', line 11</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_array'>array</span>
   <span class='ivar'>@array</span>
@@ -357,12 +382,12 @@
       <pre class="lines">
 
 
-7
-8
-9</pre>
+17
+18
+19</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/array/find_last.rb', line 7</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/array/find_last.rb', line 17</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_block'>block</span>
   <span class='ivar'>@block</span>
@@ -388,18 +413,45 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Can be any type.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Object.html" title="ConvenientService::Utils::Object (module)">Object</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Can be any type.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-14
-15
-16</pre>
+32
+33
+34</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/array/find_last.rb', line 14</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/array/find_last.rb', line 32</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span>
   <span class='id identifier rubyid_array'>array</span><span class='period'>.</span><span class='id identifier rubyid_reverse'>reverse</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
@@ -414,7 +466,7 @@
 </div>
 
       <div id="footer">
-  Generated on Fri Oct 14 11:11:39 2022 by
+  Generated on Fri Oct 14 11:53:26 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>
