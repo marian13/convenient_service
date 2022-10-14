@@ -6,7 +6,7 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Utils::Array::Wrap do
-  describe ".wrap" do
+  describe ".call" do
     subject(:result) { described_class.call(object) }
 
     context "when object is `nil`" do

@@ -133,7 +133,11 @@ module ConvenientService
         # @return [String]
         #
         def camelized_method
-          Utils::String.camelize(scope)
+          camelized = Utils::String.camelize(method)
+
+          camelized += "QuestionMark" if method.end_with?("?")
+
+          camelized
         end
       end
     end
