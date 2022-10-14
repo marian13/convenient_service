@@ -5,23 +5,16 @@ require "spec_helper"
 require "convenient_service"
 
 RSpec.describe ConvenientService::Utils::Bool do
-  describe "#to_bool" do
-    subject(:result) { described_class.to_bool(object) }
+  include ConvenientService::RSpec::Matchers::DelegateTo
 
-    context "when object is falsey" do
-      let(:object) { nil }
+  describe ".to_bool" do
+    let(:object) { :foo }
 
-      it "returns false" do
-        expect(result).to eq(false)
-      end
-    end
-
-    context "when object is truthy" do
-      let(:object) { 42 }
-
-      it "returns true" do
-        expect(result).to eq(true)
-      end
+    specify do
+      expect { described_class.to_bool(object) }
+        .to delegate_to(ConvenientService::Utils::Bool::ToBool, :call)
+        .with_arguments(object)
+        .and_return_its_value
     end
   end
 end
