@@ -28,7 +28,7 @@ module ConvenientService
         # @param condition_block [Proc]
         # @return [void]
         #
-        def initialize(array, inclusively:, &condition_block)
+        def initialize(array, inclusively: false, &condition_block)
           @array = array
           @inclusively = inclusively
           @condition_block = condition_block

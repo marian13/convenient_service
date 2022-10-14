@@ -118,11 +118,22 @@ module ConvenientService
         ##
         # @return [String]
         #
-        # @internal
-        #   TODO: method.camelize.capitalize
-        #
         def stack_name
-          @stack_name ||= "#{container.service_class}::MethodMiddlewares::#{scope.capitalize}::#{method.capitalize}"
+          @stack_name ||= "#{container.service_class}::MethodMiddlewares::#{camelized_scope}::#{camelized_method}"
+        end
+
+        ##
+        # @return [String]
+        #
+        def camelized_scope
+          Utils::String.camelize(scope)
+        end
+
+        ##
+        # @return [String]
+        #
+        def camelized_method
+          Utils::String.camelize(scope)
         end
       end
     end

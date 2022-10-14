@@ -10,17 +10,12 @@ module ConvenientService
         ##
         # TODO: Specs.
         #
-        def conjunct(procs)
-          Conjunct.call(procs)
+        def conjunct(...)
+          Conjunct.call(...)
         end
 
-        ##
-        # @param proc [Proc]
-        # @param object [Object]
-        # @return [Object] Block return value. Can be any type.
-        #
-        def exec_config(proc, object)
-          ExecConfig.call(proc, object)
+        def exec_config(...)
+          ExecConfig.call(...)
         end
       end
     end

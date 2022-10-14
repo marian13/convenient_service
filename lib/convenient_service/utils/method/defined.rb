@@ -27,7 +27,7 @@ module ConvenientService
         # @param klass [Class]
         # @return [void]
         #
-        def initialize(method, klass, private:)
+        def initialize(method, klass, private: false)
           @method = method.to_s
           @klass = klass
           @private = private

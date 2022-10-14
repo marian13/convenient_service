@@ -7,21 +7,12 @@ module ConvenientService
   module Utils
     module Method
       class << self
-        ##
-        # @param method_name [Symbol, String]
-        # @param klass [Class]
-        # @param private [Boolean]
-        # @return [Boolean]
-        #
-        # @example
-        #   ConvenientService::Utils::Method.defined?(:reverse, String)
-        #
-        def defined?(method_name, klass, private: false)
-          Defined.call(method_name, klass, private: private)
+        def defined?(...)
+          Defined.call(...)
         end
 
-        def find_own(method_name, instance, **kwargs)
-          FindOwn.call(method_name, instance, **kwargs)
+        def find_own(...)
+          FindOwn.call(...)
         end
       end
     end

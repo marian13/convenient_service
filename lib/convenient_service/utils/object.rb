@@ -11,8 +11,8 @@ module ConvenientService
         #
         #   ConvenientService::Utils::Object.resolve_type("foo")
         #
-        def resolve_type(object)
-          ResolveType.call(object)
+        def resolve_type(...)
+          ResolveType.call(...)
         end
       end
     end

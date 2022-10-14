@@ -12,38 +12,16 @@ module ConvenientService
     #
     module Module
       class << self
-        ##
-        # @param mod [Class, Module]
-        # @param method_name [Symbol, String]
-        # @param private [Boolean]
-        # @param max_iteration_count [Integer]
-        # @return [UnboundMethod, nil]
-        #
-        def get_own_instance_method(mod, method_name, private: false, max_iteration_count: Support::FiniteLoop::MAX_ITERATION_COUNT)
-          GetOwnInstanceMethod.call(mod, method_name, private: private, max_iteration_count: max_iteration_count)
+        def get_own_instance_method(...)
+          GetOwnInstanceMethod.call(...)
         end
 
-        ##
-        # @param mod [Class, Module]
-        # @param const_name [Symbol]
-        # @return [Object] Value of own const. Can be any type.
-        #
-        # @example:
-        #   ConvenientService::Utils::Module.get_own_const(Object, :File)
-        #   ConvenientService::Utils::Module.get_own_const(Class, :File)
-        #
-        def get_own_const(mod, const_name)
-          GetOwnConst.call(mod, const_name)
+        def get_own_const(...)
+          GetOwnConst.call(...)
         end
 
-        ##
-        # @param mod [Class, Module]
-        # @param method [String, Symbol]
-        # @param private [Boolean]
-        # @return [Boolean]
-        #
-        def has_own_instance_method?(mod, method, private: true)
-          HasOwnInstanceMethod.call(mod, method, private: private)
+        def has_own_instance_method?(...)
+          HasOwnInstanceMethod.call(...)
         end
       end
     end

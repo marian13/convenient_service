@@ -6,7 +6,7 @@ module ConvenientService
       class Merge < Support::Command
         attr_reader :array, :overrides, :raise_on_non_integer_index
 
-        def initialize(array, overrides, raise_on_non_integer_index:)
+        def initialize(array, overrides, raise_on_non_integer_index: true)
           @array = array
           @overrides = overrides
           @raise_on_non_integer_index = raise_on_non_integer_index

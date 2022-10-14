@@ -6,7 +6,7 @@ module ConvenientService
       class RJust < Support::Command
         attr_reader :array, :size, :pad
 
-        def initialize(array, size, pad)
+        def initialize(array, size, pad = nil)
           @array = array
           @size = size
           @pad = pad

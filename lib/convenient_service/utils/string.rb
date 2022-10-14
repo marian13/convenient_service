@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-require_relative "hash/except"
+require_relative "string/camelize"
 
 module ConvenientService
   module Utils
-    module Hash
+    module String
       class << self
-        def except(...)
-          Except.call(...)
+        def camelize(...)
+          Camelize.call(...)
         end
       end
     end

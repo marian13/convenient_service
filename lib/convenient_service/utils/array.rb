@@ -13,34 +13,28 @@ module ConvenientService
   module Utils
     module Array
       class << self
-        def contain_exactly?(first_array, second_array)
-          ContainExactly.call(first_array, second_array)
+        def contain_exactly?(...)
+          ContainExactly.call(...)
         end
 
-        ##
-        # @param array [Array]
-        # @param inclusively [Boolean]
-        # @param condition_block [Proc]
-        # @return [Array]
-        #
-        def drop_while(array, inclusively: false, &condition_block)
-          DropWhile.call(array, inclusively: inclusively, &condition_block)
+        def drop_while(...)
+          DropWhile.call(...)
         end
 
-        def find_last(array, &block)
-          FindLast.call(array, &block)
+        def find_last(...)
+          FindLast.call(...)
         end
 
-        def merge(array, overrides, raise_on_non_integer_index: true)
-          Merge.call(array, overrides, raise_on_non_integer_index: raise_on_non_integer_index)
+        def merge(...)
+          Merge.call(...)
         end
 
-        def rjust(array, size, pad = nil)
-          RJust.call(array, size, pad)
+        def rjust(...)
+          RJust.call(...)
         end
 
-        def wrap(object)
-          Wrap.call(object)
+        def wrap(...)
+          Wrap.call(...)
         end
       end
     end
