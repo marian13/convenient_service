@@ -10,14 +10,8 @@ module ConvenientService
         ##
         # TODO: Specs.
         #
-        # TODO: Replace to the following when support for Rubies lower than 2.7 is dropped.
-        #
-        #   def call(...)
-        #     new(...).call
-        #   end
-        #
-        def call(*args, **kwargs, &block)
-          new(*args, **kwargs, &block).call
+        def call(...)
+          new(...).call
         end
       end
 

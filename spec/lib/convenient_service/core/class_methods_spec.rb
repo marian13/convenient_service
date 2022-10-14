@@ -111,16 +111,16 @@ RSpec.describe ConvenientService::Core::ClassMethods do
     context "when `configuration_block` is passed" do
       let(:instance_method_middleware) do
         Class.new(ConvenientService::Core::MethodChainMiddleware) do
-          def next(*args, **kwargs, &block)
-            chain.next(*args, **kwargs, &block)
+          def next(...)
+            chain.next(...)
           end
         end
       end
 
       let(:class_method_middleware) do
         Class.new(ConvenientService::Core::MethodChainMiddleware) do
-          def next(*args, **kwargs, &block)
-            chain.next(*args, **kwargs, &block)
+          def next(...)
+            chain.next(...)
           end
         end
       end
