@@ -131,8 +131,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>TODO: Replace to the following when support for Rubies lower than 2.7 is dropped.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'></div></span>
   
 </li>
 
@@ -155,35 +154,20 @@
   
 
   
-</h3><div class="docstring">
-  <div class="discussion">
-    <p>TODO: Replace to the following when support for Rubies lower than 2.7 is dropped.</p>
-<p>def next(...)
-# ...</p>
-<pre class="code ruby"><code class="ruby">entity.internals.cache.fetch(key) { chain.next(...) }
-</code></pre>
-<p>end</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-
-</div><table class="source_code">
+</h3><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-17
-18
-19
-20
-21</pre>
+8
+9
+10
+11
+12</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/caches_return_value/middleware.rb', line 17</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/caches_return_value/middleware.rb', line 8</span>
 
 <span class='kw'>def</span> <span class='kw'>next</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_key'>key</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Entities.html" title="ConvenientService::Common::Plugins::CachesReturnValue::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Key.html" title="ConvenientService::Common::Plugins::CachesReturnValue::Entities::Key (class)">Key</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Entities/Key.html#initialize-instance_method" title="ConvenientService::Common::Plugins::CachesReturnValue::Entities::Key#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>method:</span> <span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='label'>args:</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='label'>kwargs:</span> <span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='label'>block:</span> <span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
@@ -200,7 +184,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Oct 13 23:01:45 2022 by
+  Generated on Fri Oct 14 10:02:52 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>

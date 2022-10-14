@@ -117,7 +117,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#next-instance_method" title="#next (instance method)">#<strong>next</strong>(*args, **kwargs, &amp;block)  &#x21d2; Object </a>
+      <a href="#next-instance_method" title="#next (instance method)">#<strong>next</strong>  &#x21d2; Object </a>
     
 
     
@@ -148,7 +148,7 @@
       <div class="method_details first">
   <h3 class="signature first" id="next-instance_method">
   
-    #<strong>next</strong>(*args, **kwargs, &amp;block)  &#x21d2; <tt>Object</tt> 
+    #<strong>next</strong>  &#x21d2; <tt>Object</tt> 
   
 
   
@@ -193,8 +193,8 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_result/middleware.rb', line 8</span>
 
-<span class='kw'>def</span> <span class='kw'>next</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_original_result'>original_result</span> <span class='op'>=</span> <span class='id identifier rubyid_chain'>chain</span><span class='period'>.</span><span class='id identifier rubyid_next'>next</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='kw'>next</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_original_result'>original_result</span> <span class='op'>=</span> <span class='id identifier rubyid_chain'>chain</span><span class='period'>.</span><span class='id identifier rubyid_next'>next</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
 
   <span class='kw'>return</span> <span class='id identifier rubyid_original_result'>original_result</span> <span class='kw'>if</span> <span class='id identifier rubyid_original_result'>original_result</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="Entities.html" title="ConvenientService::Service::Plugins::HasResult::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Result.html" title="ConvenientService::Service::Plugins::HasResult::Entities::Result (class)">Result</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Result/Concern.html" title="ConvenientService::Service::Plugins::HasResult::Entities::Result::Concern (module)">Concern</a></span></span><span class='rparen'>)</span>
 
@@ -210,7 +210,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Oct 13 23:01:45 2022 by
+  Generated on Fri Oct 14 10:02:52 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>
