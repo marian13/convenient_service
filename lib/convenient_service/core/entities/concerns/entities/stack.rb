@@ -127,13 +127,6 @@ module ConvenientService
               true
             end
 
-            ##
-            # TODO: Unify `inspect`. Specs for `inspect`.
-            #
-            def inspect
-              to_a.inspect
-            end
-
             private
 
             def cast(value)

@@ -150,16 +150,6 @@ module ConvenientService
             def to_a
               stack.to_a
             end
-
-            ##
-            # @return [String]
-            #
-            # @internal
-            #   TODO: Unify `inspect`. Specs for `inspect`.
-            #
-            def inspect
-              to_a.inspect
-            end
           end
         end
       end

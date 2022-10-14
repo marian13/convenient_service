@@ -40,13 +40,6 @@ module ConvenientService
 
               true
             end
-
-            ##
-            # TODO: Unify `inspect`. Specs for `inspect`.
-            #
-            def inspect
-              "HasResultSteps::Service(#{klass})"
-            end
           end
         end
       end

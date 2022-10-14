@@ -35,13 +35,6 @@ module ConvenientService
                 def to_h
                   @to_h ||= value.to_h
                 end
-
-                ##
-                # TODO: Unify `inspect`. Specs for `inspect`.
-                #
-                def inspect
-                  to_h.inspect
-                end
               end
             end
           end

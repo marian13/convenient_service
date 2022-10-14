@@ -136,9 +136,10 @@ module ConvenientService
           camelized = Utils::String.camelize(method)
 
           prefix =
-            case
-            when method.end_with?("?") then "QuestionMark"
-            when method.end_with?("!") then "ExclamationMark"
+            if method.end_with?("?")
+              "QuestionMark"
+            elsif method.end_with?("!")
+              "ExclamationMark"
             end
 
           camelized += prefix if prefix

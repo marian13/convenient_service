@@ -137,15 +137,6 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Se
         end
       end
     end
-
-    describe "#inspect" do
-      let(:klass) { Class.new }
-      let(:service) { described_class.new(klass) }
-
-      it "returns inspect string" do
-        expect(service.inspect).to eq("HasResultSteps::Service(#{klass})")
-      end
-    end
   end
 end
 # rubocop:enable RSpec/NestedGroups

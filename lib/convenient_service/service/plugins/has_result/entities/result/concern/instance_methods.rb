@@ -51,13 +51,6 @@ module ConvenientService
                   {service: service, status: status, data: data, message: message, code: code}
                 end
 
-                ##
-                # TODO: Unify `inspect`. Specs for `inspect`.
-                #
-                def inspect
-                  "#{status.to_s.capitalize}Result(#{service.class})"
-                end
-
                 private
 
                 attr_reader :params

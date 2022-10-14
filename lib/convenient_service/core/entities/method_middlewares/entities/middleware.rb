@@ -49,13 +49,6 @@ module ConvenientService
             def chain
               @chain ||= Entities::Chain.new(stack: @stack)
             end
-
-            ##
-            # TODO: Unify `inspect`. Specs for `inspect`.
-            #
-            def inspect
-              self.class.inspect
-            end
           end
         end
       end

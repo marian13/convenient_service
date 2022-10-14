@@ -13,13 +13,6 @@ module ConvenientService
         def call(env)
           stack.call(env)
         end
-
-        ##
-        # TODO: Unify `inspect`. Specs for `inspect`.
-        #
-        def inspect
-          self.class.inspect
-        end
       end
     end
   end
