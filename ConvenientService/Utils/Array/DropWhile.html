@@ -230,7 +230,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(array, inclusively:, &amp;condition_block)  &#x21d2; void </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(array, inclusively: false, &amp;condition_block)  &#x21d2; void </a>
     
 
     
@@ -271,7 +271,7 @@
     <div class="method_details first">
   <h3 class="signature first" id="initialize-instance_method">
   
-    #<strong>initialize</strong>(array, inclusively:, &amp;condition_block)  &#x21d2; <tt>void</tt> 
+    #<strong>initialize</strong>(array, inclusively: false, &amp;condition_block)  &#x21d2; <tt>void</tt> 
   
 
   
@@ -306,6 +306,8 @@
         <span class='type'>(<tt>Boolean</tt>)</span>
       
       
+        <em class="default">(defaults to: <tt>false</tt>)</em>
+      
       
     </li>
   
@@ -338,7 +340,7 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/array/drop_while.rb', line 31</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_array'>array</span><span class='comma'>,</span> <span class='label'>inclusively:</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_condition_block'>condition_block</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_array'>array</span><span class='comma'>,</span> <span class='label'>inclusively:</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_condition_block'>condition_block</span><span class='rparen'>)</span>
   <span class='ivar'>@array</span> <span class='op'>=</span> <span class='id identifier rubyid_array'>array</span>
   <span class='ivar'>@inclusively</span> <span class='op'>=</span> <span class='id identifier rubyid_inclusively'>inclusively</span>
   <span class='ivar'>@condition_block</span> <span class='op'>=</span> <span class='id identifier rubyid_condition_block'>condition_block</span>
@@ -551,7 +553,7 @@
 </div>
 
       <div id="footer">
-  Generated on Fri Oct 14 10:02:51 2022 by
+  Generated on Fri Oct 14 11:10:27 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>

@@ -124,30 +124,7 @@ TODO: Better generic term for both <code>Module</code> and <code>Class</code>.</
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#get_own_const-class_method" title="get_own_const (class method)">.<strong>get_own_const</strong>(mod, const_name)  &#x21d2; Object </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'><p>@example:   ConvenientService::Utils::Module.get_own_const(Object, :File)   ConvenientService::Utils::Module.get_own_const(Class, :File).</p>
-</div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#get_own_instance_method-class_method" title="get_own_instance_method (class method)">.<strong>get_own_instance_method</strong>(mod, method_name, private: false, max_iteration_count: Support::FiniteLoop::MAX_ITERATION_COUNT)  &#x21d2; UnboundMethod<sup>?</sup> </a>
+      <a href="#get_own_const-class_method" title="get_own_const (class method)">.<strong>get_own_const</strong>  &#x21d2; Object </a>
     
 
     
@@ -169,7 +146,29 @@ TODO: Better generic term for both <code>Module</code> and <code>Class</code>.</
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#has_own_instance_method%3F-class_method" title="has_own_instance_method? (class method)">.<strong>has_own_instance_method?</strong>(mod, method, private: true)  &#x21d2; Boolean </a>
+      <a href="#get_own_instance_method-class_method" title="get_own_instance_method (class method)">.<strong>get_own_instance_method</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#has_own_instance_method%3F-class_method" title="has_own_instance_method? (class method)">.<strong>has_own_instance_method?</strong>  &#x21d2; Boolean </a>
     
 
     
@@ -200,82 +199,27 @@ TODO: Better generic term for both <code>Module</code> and <code>Class</code>.</
       <div class="method_details first">
   <h3 class="signature first" id="get_own_const-class_method">
   
-    .<strong>get_own_const</strong>(mod, const_name)  &#x21d2; <tt><span class='object_link'><a href="Object.html" title="ConvenientService::Utils::Object (module)">Object</a></span></tt> 
+    .<strong>get_own_const</strong>  &#x21d2; <tt><span class='object_link'><a href="Object.html" title="ConvenientService::Utils::Object (module)">Object</a></span></tt> 
   
 
   
 
   
-</h3><div class="docstring">
-  <div class="discussion">
-    <p>@example:
-ConvenientService::Utils::Module.get_own_const(Object, :File)
-ConvenientService::Utils::Module.get_own_const(Class, :File)</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  <p class="tag_title">Parameters:</p>
-<ul class="param">
-  
-    <li>
-      
-        <span class='name'>mod</span>
-      
-      
-        <span class='type'>(<tt>Class</tt>, <tt><span class='object_link'><a href="" title="ConvenientService::Utils::Module (module)">Module</a></span></tt>)</span>
-      
-      
-      
-    </li>
-  
-    <li>
-      
-        <span class='name'>const_name</span>
-      
-      
-        <span class='type'>(<tt>Symbol</tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
-
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt><span class='object_link'><a href="Object.html" title="ConvenientService::Utils::Object (module)">Object</a></span></tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'><p>Value of own const. Can be any type.</p>
-</div>
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
+</h3><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-35
-36
-37</pre>
+19
+20
+21</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/module.rb', line 35</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/module.rb', line 19</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_get_own_const'>get_own_const</span><span class='lparen'>(</span><span class='id identifier rubyid_mod'>mod</span><span class='comma'>,</span> <span class='id identifier rubyid_const_name'>const_name</span><span class='rparen'>)</span>
-  <span class='const'><span class='object_link'><a href="Module/GetOwnConst.html" title="ConvenientService::Utils::Module::GetOwnConst (class)">GetOwnConst</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="Module/GetOwnConst.html#call-instance_method" title="ConvenientService::Utils::Module::GetOwnConst#call (method)">call</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_mod'>mod</span><span class='comma'>,</span> <span class='id identifier rubyid_const_name'>const_name</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_get_own_const'>get_own_const</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="Module/GetOwnConst.html" title="ConvenientService::Utils::Module::GetOwnConst (class)">GetOwnConst</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="Module/GetOwnConst.html#call-instance_method" title="ConvenientService::Utils::Module::GetOwnConst#call (method)">call</a></span></span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -285,101 +229,27 @@ ConvenientService::Utils::Module.get_own_const(Class, :File)</p>
       <div class="method_details ">
   <h3 class="signature " id="get_own_instance_method-class_method">
   
-    .<strong>get_own_instance_method</strong>(mod, method_name, private: false, max_iteration_count: Support::FiniteLoop::MAX_ITERATION_COUNT)  &#x21d2; <tt>UnboundMethod</tt><sup>?</sup> 
+    .<strong>get_own_instance_method</strong>  &#x21d2; <tt><span class='object_link'><a href="Object.html" title="ConvenientService::Utils::Object (module)">Object</a></span></tt> 
   
 
   
 
   
-</h3><div class="docstring">
-  <div class="discussion">
-    
-
-  </div>
-</div>
-<div class="tags">
-  <p class="tag_title">Parameters:</p>
-<ul class="param">
-  
-    <li>
-      
-        <span class='name'>mod</span>
-      
-      
-        <span class='type'>(<tt>Class</tt>, <tt><span class='object_link'><a href="" title="ConvenientService::Utils::Module (module)">Module</a></span></tt>)</span>
-      
-      
-      
-    </li>
-  
-    <li>
-      
-        <span class='name'>method_name</span>
-      
-      
-        <span class='type'>(<tt>Symbol</tt>, <tt>String</tt>)</span>
-      
-      
-      
-    </li>
-  
-    <li>
-      
-        <span class='name'>private</span>
-      
-      
-        <span class='type'>(<tt>Boolean</tt>)</span>
-      
-      
-        <em class="default">(defaults to: <tt>false</tt>)</em>
-      
-      
-    </li>
-  
-    <li>
-      
-        <span class='name'>max_iteration_count</span>
-      
-      
-        <span class='type'>(<tt>Integer</tt>)</span>
-      
-      
-        <em class="default">(defaults to: <tt>Support::FiniteLoop::MAX_ITERATION_COUNT</tt>)</em>
-      
-      
-    </li>
-  
-</ul>
-
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>UnboundMethod</tt>, <tt>nil</tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
+</h3><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-22
-23
-24</pre>
+15
+16
+17</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/module.rb', line 22</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/module.rb', line 15</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_get_own_instance_method'>get_own_instance_method</span><span class='lparen'>(</span><span class='id identifier rubyid_mod'>mod</span><span class='comma'>,</span> <span class='id identifier rubyid_method_name'>method_name</span><span class='comma'>,</span> <span class='label'>private:</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='label'>max_iteration_count:</span> <span class='const'><span class='object_link'><a href="../Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Support/FiniteLoop.html" title="ConvenientService::Support::FiniteLoop (module)">FiniteLoop</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Support/FiniteLoop.html#MAX_ITERATION_COUNT-constant" title="ConvenientService::Support::FiniteLoop::MAX_ITERATION_COUNT (constant)">MAX_ITERATION_COUNT</a></span></span><span class='rparen'>)</span>
-  <span class='const'><span class='object_link'><a href="Module/GetOwnInstanceMethod.html" title="ConvenientService::Utils::Module::GetOwnInstanceMethod (class)">GetOwnInstanceMethod</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="Module/GetOwnInstanceMethod.html#call-instance_method" title="ConvenientService::Utils::Module::GetOwnInstanceMethod#call (method)">call</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_mod'>mod</span><span class='comma'>,</span> <span class='id identifier rubyid_method_name'>method_name</span><span class='comma'>,</span> <span class='label'>private:</span> <span class='id identifier rubyid_private'>private</span><span class='comma'>,</span> <span class='label'>max_iteration_count:</span> <span class='id identifier rubyid_max_iteration_count'>max_iteration_count</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_get_own_instance_method'>get_own_instance_method</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="Module/GetOwnInstanceMethod.html" title="ConvenientService::Utils::Module::GetOwnInstanceMethod (class)">GetOwnInstanceMethod</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="Module/GetOwnInstanceMethod.html#call-instance_method" title="ConvenientService::Utils::Module::GetOwnInstanceMethod#call (method)">call</a></span></span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -389,7 +259,7 @@ ConvenientService::Utils::Module.get_own_const(Class, :File)</p>
       <div class="method_details ">
   <h3 class="signature " id="has_own_instance_method?-class_method">
   
-    .<strong>has_own_instance_method?</strong>(mod, method, private: true)  &#x21d2; <tt>Boolean</tt> 
+    .<strong>has_own_instance_method?</strong>  &#x21d2; <tt>Boolean</tt> 
   
 
   
@@ -402,46 +272,7 @@ ConvenientService::Utils::Module.get_own_const(Class, :File)</p>
   </div>
 </div>
 <div class="tags">
-  <p class="tag_title">Parameters:</p>
-<ul class="param">
   
-    <li>
-      
-        <span class='name'>mod</span>
-      
-      
-        <span class='type'>(<tt>Class</tt>, <tt><span class='object_link'><a href="" title="ConvenientService::Utils::Module (module)">Module</a></span></tt>)</span>
-      
-      
-      
-    </li>
-  
-    <li>
-      
-        <span class='name'>method</span>
-      
-      
-        <span class='type'>(<tt>String</tt>, <tt>Symbol</tt>)</span>
-      
-      
-      
-    </li>
-  
-    <li>
-      
-        <span class='name'>private</span>
-      
-      
-        <span class='type'>(<tt>Boolean</tt>)</span>
-      
-      
-        <em class="default">(defaults to: <tt>true</tt>)</em>
-      
-      
-    </li>
-  
-</ul>
-
 <p class="tag_title">Returns:</p>
 <ul class="return">
   
@@ -462,15 +293,15 @@ ConvenientService::Utils::Module.get_own_const(Class, :File)</p>
       <pre class="lines">
 
 
-45
-46
-47</pre>
+23
+24
+25</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/module.rb', line 45</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/module.rb', line 23</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_has_own_instance_method?'>has_own_instance_method?</span><span class='lparen'>(</span><span class='id identifier rubyid_mod'>mod</span><span class='comma'>,</span> <span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='label'>private:</span> <span class='kw'>true</span><span class='rparen'>)</span>
-  <span class='const'><span class='object_link'><a href="Module/HasOwnInstanceMethod.html" title="ConvenientService::Utils::Module::HasOwnInstanceMethod (class)">HasOwnInstanceMethod</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="Module/HasOwnInstanceMethod.html#call-instance_method" title="ConvenientService::Utils::Module::HasOwnInstanceMethod#call (method)">call</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_mod'>mod</span><span class='comma'>,</span> <span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='label'>private:</span> <span class='id identifier rubyid_private'>private</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_has_own_instance_method?'>has_own_instance_method?</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="Module/HasOwnInstanceMethod.html" title="ConvenientService::Utils::Module::HasOwnInstanceMethod (class)">HasOwnInstanceMethod</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="Module/HasOwnInstanceMethod.html#call-instance_method" title="ConvenientService::Utils::Module::HasOwnInstanceMethod#call (method)">call</a></span></span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -482,7 +313,7 @@ ConvenientService::Utils::Module.get_own_const(Class, :File)</p>
 </div>
 
       <div id="footer">
-  Generated on Fri Oct 14 10:02:50 2022 by
+  Generated on Fri Oct 14 11:10:26 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>

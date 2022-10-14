@@ -229,7 +229,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(method, klass, private:)  &#x21d2; void </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(method, klass, private: false)  &#x21d2; void </a>
     
 
     
@@ -270,7 +270,7 @@
     <div class="method_details first">
   <h3 class="signature first" id="initialize-instance_method">
   
-    #<strong>initialize</strong>(method, klass, private:)  &#x21d2; <tt>void</tt> 
+    #<strong>initialize</strong>(method, klass, private: false)  &#x21d2; <tt>void</tt> 
   
 
   
@@ -291,7 +291,7 @@
         <span class='name'>method</span>
       
       
-        <span class='type'>(<tt>Symbol</tt>, <tt>String</tt>)</span>
+        <span class='type'>(<tt>Symbol</tt>, <tt><span class='object_link'><a href="../String.html" title="ConvenientService::Utils::String (module)">String</a></span></tt>)</span>
       
       
       
@@ -326,7 +326,7 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/method/defined.rb', line 30</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='id identifier rubyid_klass'>klass</span><span class='comma'>,</span> <span class='label'>private:</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='id identifier rubyid_klass'>klass</span><span class='comma'>,</span> <span class='label'>private:</span> <span class='kw'>false</span><span class='rparen'>)</span>
   <span class='ivar'>@method</span> <span class='op'>=</span> <span class='id identifier rubyid_method'>method</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
   <span class='ivar'>@klass</span> <span class='op'>=</span> <span class='id identifier rubyid_klass'>klass</span>
   <span class='ivar'>@private</span> <span class='op'>=</span> <span class='id identifier rubyid_private'>private</span>
@@ -538,7 +538,7 @@
 </div>
 
       <div id="footer">
-  Generated on Fri Oct 14 10:02:51 2022 by
+  Generated on Fri Oct 14 11:10:27 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>

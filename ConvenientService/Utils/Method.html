@@ -113,7 +113,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#defined%3F-class_method" title="defined? (class method)">.<strong>defined?</strong>(method_name, klass, private: false)  &#x21d2; Boolean </a>
+      <a href="#defined%3F-class_method" title="defined? (class method)">.<strong>defined?</strong>  &#x21d2; Boolean </a>
     
 
     
@@ -135,7 +135,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#find_own-class_method" title="find_own (class method)">.<strong>find_own</strong>(method_name, instance, **kwargs)  &#x21d2; Object </a>
+      <a href="#find_own-class_method" title="find_own (class method)">.<strong>find_own</strong>  &#x21d2; Object </a>
     
 
     
@@ -166,7 +166,7 @@
       <div class="method_details first">
   <h3 class="signature first" id="defined?-class_method">
   
-    .<strong>defined?</strong>(method_name, klass, private: false)  &#x21d2; <tt>Boolean</tt> 
+    .<strong>defined?</strong>  &#x21d2; <tt>Boolean</tt> 
   
 
   
@@ -180,53 +180,6 @@
 </div>
 <div class="tags">
   
-  <div class="examples">
-    <p class="tag_title">Examples:</p>
-    
-      
-      <pre class="example code"><code><span class='const'><span class='object_link'><a href="../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="ConvenientService::Utils::Method (module)">Method</a></span></span><span class='period'>.</span><span class='id identifier rubyid_defined?'>defined?</span><span class='lparen'>(</span><span class='symbol'>:reverse</span><span class='comma'>,</span> <span class='const'>String</span><span class='rparen'>)</span></code></pre>
-    
-  </div>
-<p class="tag_title">Parameters:</p>
-<ul class="param">
-  
-    <li>
-      
-        <span class='name'>method_name</span>
-      
-      
-        <span class='type'>(<tt>Symbol</tt>, <tt>String</tt>)</span>
-      
-      
-      
-    </li>
-  
-    <li>
-      
-        <span class='name'>klass</span>
-      
-      
-        <span class='type'>(<tt>Class</tt>)</span>
-      
-      
-      
-    </li>
-  
-    <li>
-      
-        <span class='name'>private</span>
-      
-      
-        <span class='type'>(<tt>Boolean</tt>)</span>
-      
-      
-        <em class="default">(defaults to: <tt>false</tt>)</em>
-      
-      
-    </li>
-  
-</ul>
-
 <p class="tag_title">Returns:</p>
 <ul class="return">
   
@@ -247,15 +200,15 @@
       <pre class="lines">
 
 
-19
-20
-21</pre>
+10
+11
+12</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/method.rb', line 19</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/method.rb', line 10</span>
 
-<span class='kw'>def</span> <span class='kw'>defined?</span><span class='lparen'>(</span><span class='id identifier rubyid_method_name'>method_name</span><span class='comma'>,</span> <span class='id identifier rubyid_klass'>klass</span><span class='comma'>,</span> <span class='label'>private:</span> <span class='kw'>false</span><span class='rparen'>)</span>
-  <span class='const'><span class='object_link'><a href="Method/Defined.html" title="ConvenientService::Utils::Method::Defined (class)">Defined</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="Method/Defined.html#call-instance_method" title="ConvenientService::Utils::Method::Defined#call (method)">call</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_method_name'>method_name</span><span class='comma'>,</span> <span class='id identifier rubyid_klass'>klass</span><span class='comma'>,</span> <span class='label'>private:</span> <span class='id identifier rubyid_private'>private</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='kw'>defined?</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="Method/Defined.html" title="ConvenientService::Utils::Method::Defined (class)">Defined</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="Method/Defined.html#call-instance_method" title="ConvenientService::Utils::Method::Defined#call (method)">call</a></span></span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -265,7 +218,7 @@
       <div class="method_details ">
   <h3 class="signature " id="find_own-class_method">
   
-    .<strong>find_own</strong>(method_name, instance, **kwargs)  &#x21d2; <tt><span class='object_link'><a href="Object.html" title="ConvenientService::Utils::Object (module)">Object</a></span></tt> 
+    .<strong>find_own</strong>  &#x21d2; <tt><span class='object_link'><a href="Object.html" title="ConvenientService::Utils::Object (module)">Object</a></span></tt> 
   
 
   
@@ -277,15 +230,15 @@
       <pre class="lines">
 
 
-23
-24
-25</pre>
+14
+15
+16</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/method.rb', line 23</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/method.rb', line 14</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_find_own'>find_own</span><span class='lparen'>(</span><span class='id identifier rubyid_method_name'>method_name</span><span class='comma'>,</span> <span class='id identifier rubyid_instance'>instance</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
-  <span class='const'><span class='object_link'><a href="Method/FindOwn.html" title="ConvenientService::Utils::Method::FindOwn (class)">FindOwn</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="Method/FindOwn.html#call-instance_method" title="ConvenientService::Utils::Method::FindOwn#call (method)">call</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_method_name'>method_name</span><span class='comma'>,</span> <span class='id identifier rubyid_instance'>instance</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_find_own'>find_own</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="Method/FindOwn.html" title="ConvenientService::Utils::Method::FindOwn (class)">FindOwn</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="Method/FindOwn.html#call-instance_method" title="ConvenientService::Utils::Method::FindOwn#call (method)">call</a></span></span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -297,7 +250,7 @@
 </div>
 
       <div id="footer">
-  Generated on Fri Oct 14 10:02:50 2022 by
+  Generated on Fri Oct 14 11:10:26 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>
