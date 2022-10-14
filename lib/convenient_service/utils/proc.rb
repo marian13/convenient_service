@@ -7,9 +7,6 @@ module ConvenientService
   module Utils
     module Proc
       class << self
-        ##
-        # TODO: Specs.
-        #
         def conjunct(...)
           Conjunct.call(...)
         end

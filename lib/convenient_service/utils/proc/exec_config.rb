@@ -3,12 +3,6 @@
 module ConvenientService
   module Utils
     module Proc
-      ##
-      # @return [Object] Can be any type.
-      #
-      # @internal
-      #   TODO: Specs.
-      #
       class ExecConfig < Support::Command
         ##
         # @!attribute [r] object
@@ -75,7 +69,66 @@ module ConvenientService
         #   TODO: Stronger check whether `proc` receives exactly one mandatory positional argument.
         #
         def call
-          proc.arity == 1 ? proc.call(object) : object.instance_exec(&proc)
+          proc_has_one_positional_argument? ? proc.call(object) : object.instance_exec(&proc)
+        end
+
+        private
+
+        ##
+        # @return [Boolean]
+        #
+        # @internal
+        #   NOTE: More about `parameters`, `:req`, `:opt`.
+        #   - https://jemma.dev/blog/ruby-method-parameters
+        #   - https://ruby-doc.org/core-2.7.0/Proc.html#method-i-parameters
+        #   - https://ruby-doc.org/core-2.7.0/Method.html#method-i-parameters
+        #
+        #   NOTE: `Proc#arity` is ambiguous. It can return `1` for different sets of arguments.
+        #   https://ruby-doc.org/core-2.7.0/Proc.html#method-i-arity
+        #
+        #   For example:
+        #     proc { |a| }.arity
+        #     # => 1
+        #
+        #     proc { |a:, b:, c: 0| }.arity
+        #     # => 1
+        #
+        def proc_has_one_positional_argument?
+          return false unless proc.parameters.one?
+
+          return false unless acceptable_proc_parameter_types.include?(proc_first_parameter_type)
+
+          true
+        end
+
+        ##
+        # @return [Array]
+        #
+        # @note
+        #   proc { |a| }.parameters
+        #   # => [[:opt, :a]]
+        #
+        #   proc { |a = 0| }.parameters
+        #   [[:opt, :a]]
+        #
+        #   ->(a) {}.parameters
+        #   # => [[:req, :a]]
+        #
+        #   ->(a = 0) {}.parameters
+        #   [[:opt, :a]]
+        #
+        def acceptable_proc_parameter_types
+          proc.lambda? ? [:req, :opt] : [:opt]
+        end
+
+        ##
+        # @return [Symbol]
+        #
+        # @internal
+        #   See `ConvenientService::Utils::Proc#acceptable_proc_parameter_types` why `first.first`.
+        #
+        def proc_first_parameter_type
+          proc.parameters.first.first
         end
       end
     end
