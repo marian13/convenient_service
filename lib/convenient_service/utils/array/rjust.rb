@@ -3,15 +3,40 @@
 module ConvenientService
   module Utils
     module Array
-      class RJust < Support::Command
-        attr_reader :array, :size, :pad
+      class Rjust < Support::Command
+        ##
+        # @!attribute [r] array
+        #   @return [Array]
+        #
+        attr_reader :array
 
+        ##
+        # @!attribute [r] size
+        #   @return [Integer]
+        #
+        attr_reader :size
+
+        ##
+        # @!attribute [r] pad
+        #   @return [Object] Can be any type.
+        #
+        attr_reader :pad
+
+        ##
+        # @param array [Array]
+        # @param size [Integer]
+        # @param pad [Object] Can be any type.
+        # @return [void]
+        #
         def initialize(array, size, pad = nil)
           @array = array
           @size = size
           @pad = pad
         end
 
+        ##
+        # @return [Array]
+        #
         def call
           return array if size <= array.size
 

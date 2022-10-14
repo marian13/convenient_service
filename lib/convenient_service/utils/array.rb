@@ -30,7 +30,7 @@ module ConvenientService
         end
 
         def rjust(...)
-          RJust.call(...)
+          Rjust.call(...)
         end
 
         def wrap(...)

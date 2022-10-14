@@ -145,6 +145,11 @@ tasks:
     cmds:
       - git diff --cached --name-only --diff-filter=d "spec/**"
 
+  lint:
+    cmds:
+      - task: rubocop
+      - task: docs:lint
+
   playground:
     cmds:
       - bundle exec rake playground
@@ -289,3 +294,7 @@ tasks:
   rubocop:
     cmds:
       - bundle exec rubocop --config .rubocop.yml {{.CLI_ARGS}}
+
+  rubocop:format:
+    cmds:
+      - bundle exec rubocop --config .rubocop.yml -A {{.CLI_ARGS}}

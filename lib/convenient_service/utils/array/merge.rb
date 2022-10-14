@@ -4,14 +4,40 @@ module ConvenientService
   module Utils
     module Array
       class Merge < Support::Command
-        attr_reader :array, :overrides, :raise_on_non_integer_index
+        ##
+        # @!attribute [r] array
+        #   @return [Array]
+        #
+        attr_reader :array
 
+        ##
+        # @!attribute [r] overrides
+        #   @return [Hash]
+        #
+        attr_reader :overrides
+
+        ##
+        # @!attribute [r] raise_on_non_integer_index
+        #   @return [Boolean]
+        #
+        attr_reader :raise_on_non_integer_index
+
+        ##
+        # @param array [Array]
+        # @param overrides [Hash]
+        # @param raise_on_non_integer_index [Boolean]
+        # @return [void]
+        #
         def initialize(array, overrides, raise_on_non_integer_index: true)
           @array = array
           @overrides = overrides
           @raise_on_non_integer_index = raise_on_non_integer_index
         end
 
+        ##
+        # @return [Array]
+        # @raise [ConvenientService::Utils::Array]
+        #
         def call
           ensure_valid_overrides!
 
@@ -20,6 +46,10 @@ module ConvenientService
 
         private
 
+        ##
+        # @return [void]
+        # @raise [ConvenientService::Utils::Array]
+        #
         def ensure_valid_overrides!
           return integer_key_overrides unless raise_on_non_integer_index
 
@@ -28,12 +58,15 @@ module ConvenientService
           raise Errors::NonIntegerIndex.new(index: non_integer_index)
         end
 
+        ##
+        # @return [Hash]
+        #
         def integer_key_overrides
           @integer_key_overrides ||= overrides.dup.keep_if { |index| index.is_a?(::Integer) }
         end
 
         ##
-        #
+        # @return [Object] Can be any type.
         #
         def non_integer_index
           @non_integer_index ||= overrides.keys.find { |index| !index.is_a?(::Integer) }
