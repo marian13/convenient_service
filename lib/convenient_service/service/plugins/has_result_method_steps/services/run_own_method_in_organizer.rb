@@ -18,14 +18,19 @@ module ConvenientService
 
             def result
               ##
-              # TODO: A possible bottleneck. Should be removed if receives negative feedback.
+              # @internal
+              #   TODO: A possible bottleneck. Should be removed if receives negative feedback.
               #
-              own_method = Utils::Method.find_own(method_name, organizer)
+              own_method = Utils::Module.get_own_instance_method(organizer.class, method_name, private: true)
 
               ##
-              # NOTE: `kwargs` are intentionally NOT passed, since all the corresponding methods are available inside `own_method` body.
+              # @internal
+              #   NOTE: `kwargs` are intentionally NOT passed, since all the corresponding methods are available inside `own_method` body.
+              #   NOTE: `own_method.bind_call(organizer)` is logically the same as `own_method.bind(organizer).call`.
+              #   - https://ruby-doc.org/core-2.7.1/UnboundMethod.html#method-i-bind_call
+              #   - https://blog.saeloun.com/2019/10/17/ruby-2-7-adds-unboundmethod-bind_call-method.html
               #
-              return own_method.call if own_method
+              return own_method.bind_call(organizer) if own_method
 
               raise Errors::MethodForStepIsNotDefined.new(service_class: organizer.class, method_name: method_name)
             end

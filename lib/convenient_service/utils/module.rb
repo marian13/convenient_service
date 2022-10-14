@@ -7,8 +7,9 @@ require_relative "module/has_own_instance_method"
 module ConvenientService
   module Utils
     ##
-    # NOTE: `Class` is descendant of `Module`, that is why `Module` is more generic term.
-    # TODO: Better generic term for both `Module` and `Class`.
+    # @internal
+    #   NOTE: `Class` is descendant of `Module`, that is why `Module` is more generic term.
+    #   TODO: Better generic term for both `Module` and `Class`.
     #
     module Module
       class << self
