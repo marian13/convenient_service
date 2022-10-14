@@ -5,14 +5,8 @@ module ConvenientService
     module Plugins
       module WrapsResultInDbTransaction
         class Middleware < Core::MethodChainMiddleware
-          # TODO: Replace to the following when support for Rubies lower than 2.7 is dropped.
-          #
-          #   def next(...)
-          #     ::ActiveRecord::Base.transaction { chain.next(...) }
-          #   end
-          #
-          def next(*args, **kwargs, &block)
-            ::ActiveRecord::Base.transaction { chain.next(*args, **kwargs, &block) }
+          def next(...)
+            ::ActiveRecord::Base.transaction { chain.next(...) }
           end
         end
       end

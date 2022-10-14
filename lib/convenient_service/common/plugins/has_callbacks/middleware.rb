@@ -5,10 +5,10 @@ module ConvenientService
     module Plugins
       module HasCallbacks
         class Middleware < Core::MethodChainMiddleware
-          def next(*args, **kwargs, &block)
+          def next(...)
             entity.callbacks.for([:before, method]).each { |callback| callback.call_in_context(entity) }
 
-            original_value = chain.next(*args, **kwargs, &block)
+            original_value = chain.next(...)
 
             entity.callbacks.for([:after, method]).reverse_each { |callback| callback.call_in_context(entity, original_value) }
 

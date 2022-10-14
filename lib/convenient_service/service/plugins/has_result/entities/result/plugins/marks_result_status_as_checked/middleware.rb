@@ -9,19 +9,10 @@ module ConvenientService
             module Plugins
               module MarksResultStatusAsChecked
                 class Middleware < Core::MethodChainMiddleware
-                  ##
-                  # TODO: Replace to the following when support for Rubies lower than 2.7 is dropped.
-                  #
-                  #   def next(*args, **kwargs, &block)
-                  #     # ...
-                  #
-                  #     chain.next(*args, **kwargs, &block)
-                  #   end
-                  #
-                  def next(*args, **kwargs, &block)
+                  def next(...)
                     entity.internals.cache[:has_checked_status] = true
 
-                    chain.next(*args, **kwargs, &block)
+                    chain.next(...)
                   end
                 end
               end

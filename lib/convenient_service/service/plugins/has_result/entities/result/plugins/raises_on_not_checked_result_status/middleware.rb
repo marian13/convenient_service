@@ -9,19 +9,10 @@ module ConvenientService
             module Plugins
               module RaisesOnNotCheckedResultStatus
                 class Middleware < Core::MethodChainMiddleware
-                  ##
-                  # TODO: Replace to the following when support for Rubies lower than 2.7 is dropped.
-                  #
-                  #   def next(*args, **kwargs, &block)
-                  #     # ...
-                  #
-                  #     chain.next(*args, **kwargs, &block)
-                  #   end
-                  #
-                  def next(*args, **kwargs, &block)
+                  def next(...)
                     assert_has_checked_status!
 
-                    chain.next(*args, **kwargs, &block)
+                    chain.next(...)
                   end
 
                   private

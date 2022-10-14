@@ -6,19 +6,10 @@ module ConvenientService
       module HasResultParamsValidations
         module UsingActiveModelValidations
           class Middleware < Core::MethodChainMiddleware
-            ##
-            # TODO: Replace to the following when support for Rubies lower than 2.7 is dropped.
-            #
-            #   def next(...)
-            #     # ...
-            #
-            #     chain.next(...)
-            #   end
-            #
-            def next(*args, **kwargs, &block)
+            def next(...)
               return entity.failure(data: errors) if errors.any?
 
-              chain.next(*args, **kwargs, &block)
+              chain.next(...)
             end
 
             private
