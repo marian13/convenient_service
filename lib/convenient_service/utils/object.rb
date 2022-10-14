@@ -7,8 +7,7 @@ module ConvenientService
     module Object
       class << self
         ##
-        # Usage example:
-        #
+        # @example
         #   ConvenientService::Utils::Object.resolve_type("foo")
         #
         def resolve_type(...)
