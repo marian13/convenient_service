@@ -15,8 +15,8 @@ module ConvenientService
       # @param (see ConvenientService::Core::ClassMethods#middlewares)
       # @return [ConvenientService::Core::Entities::MethodMiddlewares]
       #
-      def middlewares(*args, **kwargs, &block)
-        self.class.middlewares(*args, **kwargs, &block)
+      def middlewares(...)
+        self.class.middlewares(...)
       end
 
       ##

@@ -5,19 +5,8 @@ module ConvenientService
     module Plugins
       module HasResultSteps
         class Middleware < Core::MethodChainMiddleware
-          ##
-          # TODO: Specs.
-          #
-          # TODO: Replace to the following when support for Rubies lower than 2.7 is dropped.
-          #
-          #   def next(*args, **kwargs, &block)
-          #     return chain.next(*args, **kwargs, &block) if entity.steps.none?
-          #
-          #     # ...
-          #   end
-          #
-          def next(*args, **kwargs, &block)
-            return chain.next(*args, **kwargs, &block) if entity.steps.none?
+          def next(...)
+            return chain.next(...) if entity.steps.none?
 
             last_step.result
           end

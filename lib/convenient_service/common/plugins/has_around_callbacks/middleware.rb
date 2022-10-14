@@ -5,7 +5,7 @@ module ConvenientService
     module Plugins
       module HasAroundCallbacks
         class Middleware < Core::MethodChainMiddleware
-          def next(*args, **kwargs, &block)
+          def next(...)
             ##
             # A variable that stores return value of middleware `chain.next` aka `original_value`.
             # It is reassigned later by the `initial_around_callback`.
@@ -22,7 +22,7 @@ module ConvenientService
             #
             initial_around_callback = Plugins::HasCallbacks::Entities::Callback.new(
               types: [:around, method],
-              block: proc { original_value = chain.next(*args, **kwargs, &block) }
+              block: proc { original_value = chain.next(...) }
             )
 
             ##

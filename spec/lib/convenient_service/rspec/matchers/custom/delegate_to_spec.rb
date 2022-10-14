@@ -59,15 +59,8 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo do
 
       let(:klass) do
         Class.new do
-          ##
-          # TODO: Replace to the following when support for Rubies lower than 2.7 is dropped.
-          #
-          #   def foo(...)
-          #     bar(...)
-          #   end
-          #
-          def foo(*args, **kwargs, &block)
-            bar(*args, **kwargs, &block)
+          def foo(...)
+            bar(...)
           end
 
           def bar(*args, **kwargs, &block)

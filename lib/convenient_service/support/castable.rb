@@ -13,12 +13,12 @@ module ConvenientService
       instance_methods do
         private
 
-        def cast(other, **options)
-          self.class.cast(other, **options)
+        def cast(...)
+          self.class.cast(...)
         end
 
-        def cast!(other, **options)
-          self.class.cast!(other, **options)
+        def cast!(...)
+          self.class.cast!(...)
         end
       end
 

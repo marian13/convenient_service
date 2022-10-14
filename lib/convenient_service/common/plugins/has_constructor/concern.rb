@@ -8,7 +8,7 @@ module ConvenientService
           include Support::Concern
 
           instance_methods do
-            def initialize(*args, **kwargs, &block)
+            def initialize(...)
             end
           end
         end

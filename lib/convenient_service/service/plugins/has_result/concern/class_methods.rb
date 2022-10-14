@@ -7,11 +7,10 @@ module ConvenientService
         module Concern
           module ClassMethods
             ##
-            # NOTE: Update to `def result(...)` when support for Rubies lower than 2.7 is dropped.
-            # https://www.rubydoc.info/gems/rubocop/RuboCop/Cop/Style/ArgumentsForwarding
             #
-            def result(*args, **kwargs, &block)
-              new(*args, **kwargs, &block).result
+            #
+            def result(...)
+              new(...).result
             end
 
             ##

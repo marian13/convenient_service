@@ -5,19 +5,10 @@ module ConvenientService
     module Plugins
       module RaisesOnDoubleResult
         class Middleware < Core::MethodChainMiddleware
-          ##
-          # TODO: Replace to the following when support for Rubies lower than 2.7 is dropped.
-          #
-          #   def next(...)
-          #     # ...
-          #
-          #     chain.next(...)
-          #   end
-          #
-          def next(*args, **kwargs, &block)
+          def next(...)
             refute_has_result! || mark_as_has_result!
 
-            chain.next(*args, **kwargs, &block)
+            chain.next(...)
           end
 
           private
