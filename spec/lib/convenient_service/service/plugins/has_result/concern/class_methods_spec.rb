@@ -109,7 +109,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern::ClassMet
       end
 
       context "when `service` is NOT passed" do
-        let(:result) { service_class.success(**ConvenientService::Utils::Hash.except(params, keys: [:service])) }
+        let(:result) { service_class.success(**ConvenientService::Utils::Hash.except(params, [:service])) }
 
         it "defaults `service` to `ConvenientService::Service::Plugins::HasResult::Constants::DEFAULT_SERVICE_INSTANCE`" do
           expect(result.service).to eq(ConvenientService::Service::Plugins::HasResult::Constants::DEFAULT_SERVICE_INSTANCE)
@@ -117,7 +117,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern::ClassMet
       end
 
       context "when `data` is NOT passed" do
-        let(:result) { service_class.success(**ConvenientService::Utils::Hash.except(params, keys: [:data])) }
+        let(:result) { service_class.success(**ConvenientService::Utils::Hash.except(params, [:data])) }
 
         it "defaults `data` to `ConvenientService::Service::Plugins::HasResult::Constants::DEFAUTL_SUCCESS_DATA`" do
           expect(result.data).to eq(ConvenientService::Service::Plugins::HasResult::Constants::DEFAULT_SUCCESS_DATA)
@@ -173,7 +173,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern::ClassMet
       end
 
       context "when `service` is NOT passed" do
-        let(:result) { service_class.failure(**ConvenientService::Utils::Hash.except(params, keys: [:service])) }
+        let(:result) { service_class.failure(**ConvenientService::Utils::Hash.except(params, [:service])) }
 
         it "defaults `service` to `ConvenientService::Service::Plugins::HasResult::Constants::DEFAULT_SERVICE_INSTANCE`" do
           expect(result.service).to eq(ConvenientService::Service::Plugins::HasResult::Constants::DEFAULT_SERVICE_INSTANCE)
@@ -181,7 +181,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern::ClassMet
       end
 
       context "when `data` is NOT passed" do
-        let(:result) { service_class.failure(**ConvenientService::Utils::Hash.except(params, keys: [:data])) }
+        let(:result) { service_class.failure(**ConvenientService::Utils::Hash.except(params, [:data])) }
 
         it "defaults `data` to `ConvenientService::Service::Plugins::HasResult::Constants::DEFAULT_FAILURE_DATA`" do
           expect(result.data).to eq(ConvenientService::Service::Plugins::HasResult::Constants::DEFAULT_FAILURE_DATA)
@@ -189,14 +189,14 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern::ClassMet
       end
 
       context "when `message` is NOT passed" do
-        let(:result) { service_class.failure(**ConvenientService::Utils::Hash.except(params, keys: [:message])) }
+        let(:result) { service_class.failure(**ConvenientService::Utils::Hash.except(params, [:message])) }
 
         it "defaults `message` to concatenated by space first key and first value from `data`" do
           expect(result.message).to eq(first_pair_message)
         end
 
         context "when `data` is empty" do
-          let(:result) { service_class.failure(**ConvenientService::Utils::Hash.except(params, keys: [:message]).merge(data: {})) }
+          let(:result) { service_class.failure(**ConvenientService::Utils::Hash.except(params, [:message]).merge(data: {})) }
 
           it "internally passes `ConvenientService::Service::Plugins::HasResult::Constants::DEFAULT_FAILURE_MESSAGE` as `message` to result constructor" do
             allow(service_class.result_class).to receive(:new).with(hash_including(message: ConvenientService::Service::Plugins::HasResult::Constants::DEFAULT_FAILURE_MESSAGE)).and_call_original
@@ -248,7 +248,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern::ClassMet
       end
 
       context "when `service` is NOT passed" do
-        let(:result) { service_class.error(**ConvenientService::Utils::Hash.except(params, keys: [:service])) }
+        let(:result) { service_class.error(**ConvenientService::Utils::Hash.except(params, [:service])) }
 
         it "defaults service to `ConvenientService::Service::Plugins::HasResult::Constants::DEFAULT_SERVICE_INSTANCE`" do
           expect(result.service).to eq(ConvenientService::Service::Plugins::HasResult::Constants::DEFAULT_SERVICE_INSTANCE)
@@ -256,7 +256,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern::ClassMet
       end
 
       context "when `message` is NOT passed" do
-        let(:result) { service_class.error(**ConvenientService::Utils::Hash.except(params, keys: [:message])) }
+        let(:result) { service_class.error(**ConvenientService::Utils::Hash.except(params, [:message])) }
 
         it "defaults `message` to `ConvenientService::Service::Plugins::HasResult::Constants::DEFAULT_ERROR_MESSAGE`" do
           expect(result.message).to eq(ConvenientService::Service::Plugins::HasResult::Constants::DEFAULT_ERROR_MESSAGE)
@@ -264,7 +264,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern::ClassMet
       end
 
       context "when `code` is NOT passed" do
-        let(:result) { service_class.error(**ConvenientService::Utils::Hash.except(params, keys: [:code])) }
+        let(:result) { service_class.error(**ConvenientService::Utils::Hash.except(params, [:code])) }
 
         it "defaults `code` to `ConvenientService::Service::Plugins::HasResult::Constants::DEFAULT_ERROR_CODE`" do
           expect(result.code).to eq(ConvenientService::Service::Plugins::HasResult::Constants::DEFAULT_ERROR_CODE)

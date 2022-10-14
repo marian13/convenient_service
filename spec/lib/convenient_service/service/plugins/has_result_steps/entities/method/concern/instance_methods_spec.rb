@@ -136,7 +136,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
 
     describe "#has_orgnizer" do
       context "when `method` does NOT have `organizer`" do
-        let(:method_instance) { method_class.new(**ConvenientService::Utils::Hash.except(method_kwargs, keys: [:organizer])) }
+        let(:method_instance) { method_class.new(**ConvenientService::Utils::Hash.except(method_kwargs, [:organizer])) }
 
         it "returns `false`" do
           expect(method.has_organizer?).to eq(false)
@@ -231,7 +231,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
 
     describe "#value" do
       context "when `method` does NOT have `organizer`" do
-        let(:method_instance) { method_class.new(**ConvenientService::Utils::Hash.except(method_kwargs, keys: [:organizer])) }
+        let(:method_instance) { method_class.new(**ConvenientService::Utils::Hash.except(method_kwargs, [:organizer])) }
 
         let(:error_message) do
           <<~TEXT

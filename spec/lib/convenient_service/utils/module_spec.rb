@@ -75,7 +75,7 @@ RSpec.describe ConvenientService::Utils::Module do
       end
 
       context "when `private` is NOT passed" do
-        let(:kwargs) { ConvenientService::Utils::Hash.except(default_kwargs, keys: [:private]) }
+        let(:kwargs) { ConvenientService::Utils::Hash.except(default_kwargs, [:private]) }
 
         it "defaults to `false`" do
           ##

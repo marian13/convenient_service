@@ -27,7 +27,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::St
         end
 
         context "when `kwargs[:in]` is NOT passed" do
-          let(:kwargs) { ConvenientService::Utils::Hash.except(default_kwargs, keys: [:in]) }
+          let(:kwargs) { ConvenientService::Utils::Hash.except(default_kwargs, [:in]) }
 
           it "defaults `inputs` to empty array" do
             expect(command_result.inputs).to eq([])
@@ -49,7 +49,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::St
         end
 
         context "when `kwargs[:out]` is NOT passed" do
-          let(:kwargs) { ConvenientService::Utils::Hash.except(default_kwargs, keys: [:out]) }
+          let(:kwargs) { ConvenientService::Utils::Hash.except(default_kwargs, [:out]) }
 
           it "defaults `outputs` to empty array" do
             expect(command_result.outputs).to eq([])
