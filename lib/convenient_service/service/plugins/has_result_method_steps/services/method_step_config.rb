@@ -5,7 +5,7 @@ module ConvenientService
     module Plugins
       module HasResultMethodSteps
         module Services
-          module Config
+          module MethodStepConfig
             include Support::Concern
 
             included do

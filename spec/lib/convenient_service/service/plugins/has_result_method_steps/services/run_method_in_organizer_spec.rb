@@ -11,7 +11,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultMethodSteps::Servic
 
     subject { described_class }
 
-    it { is_expected.to include_module(ConvenientService::Service::Plugins::HasResultMethodSteps::Services::Config) }
+    it { is_expected.to include_module(ConvenientService::Service::Plugins::HasResultMethodSteps::Services::MethodStepConfig) }
   end
 
   example_group "class methods" do

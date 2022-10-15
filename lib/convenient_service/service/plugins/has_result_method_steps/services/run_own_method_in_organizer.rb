@@ -6,7 +6,7 @@ module ConvenientService
       module HasResultMethodSteps
         module Services
           class RunOwnMethodInOrganizer
-            include Config
+            include MethodStepConfig
 
             attr_reader :method_name, :organizer, :kwargs
 
