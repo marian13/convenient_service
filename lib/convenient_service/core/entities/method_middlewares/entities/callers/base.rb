@@ -42,6 +42,11 @@ module ConvenientService
               # @param method [Symbol, String]
               # @return [Method]
               #
+              # @internal
+              #   TODO: Consider to create `Utils::Array.find_map`
+              #   - https://github.com/rubyworks/facets/blob/main/lib/core/facets/enumerable/find_yield.rb
+              #   - https://stackoverflow.com/a/38457218/12201472
+              #
               def resolve_super_method(method)
                 commit_config!
 
