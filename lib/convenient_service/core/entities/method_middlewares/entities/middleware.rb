@@ -6,15 +6,54 @@ module ConvenientService
       class MethodMiddlewares
         module Entities
           ##
-          # https://github.com/Ibsciss/ruby-middleware#a-basic-example
+          # @abstract Subclass and override `#next`.
           #
-          # NOTE: Do NOT pollute the interface of this class until really needed. Avoid even pollution of private methods.
+          # @internal
+          #   NOTE: Do NOT pollute the interface of this class until really needed.
+          #   Avoid even pollution of private methods.
+          #   This way there is a lower risk that a plugin developer accidentally overwrites an internal middleware behavior.
+          #   https://github.com/Ibsciss/ruby-middleware#a-basic-example
           #
           class Middleware
-            def initialize(stack)
+            include Support::AbstractMethod
+
+            ##
+            # @return [Object] Can be any type.
+            # @raise [ConvenientService::Support::AbstractMethod::Errors::AbstractMethodNotOverridden] if NOT overridden in descendant.
+            #
+            # @example Subclass should call `value = chain.next(*args, **kwargs, &block)` to trigger next middleware in a stack.
+            #   def next(*args, **kwargs, &block)
+            #     # pre processing...
+            #
+            #     value = chain.next(*args, **kwargs, &block)
+            #
+            #     # post processing...
+            #
+            #     post_processed_value
+            #   end
+            #
+            # @see https://refactoring.guru/design-patterns/decorator
+            #
+            # @note But it completely OK, to omit `chain.next(*args, **kwargs, &block)` completely.
+            #   This way middleware stack is stopped in the "middle" and its "middle" value is returned.
+            # @see https://refactoring.guru/design-patterns/proxy
+            # @see https://refactoring.guru/design-patterns/chain-of-responsibility
+            #
+            abstract_method :next
+
+            ##
+            # @param stack [#call<Hash>]
+            # @return [void]
+            #
+            def initialize(stack, env: {})
               @stack = stack
+              @env = env
             end
 
+            ##
+            # @param env [Hash]
+            # @return [Object] Can be any type.
+            #
             def call(env)
               @env = env
 
@@ -24,27 +63,39 @@ module ConvenientService
               chain.instance_variable_set(:@env, env)
 
               ##
+              # NOTE: `__send__` is used since `next` is ruby keyword.
+              # https://ruby-doc.org/core-2.7.0/doc/keywords_rdoc.html
+              #
               # TODO: Enforce to always pass args, kwargs, block.
               #
               __send__(:next, *env[:args], **env[:kwargs], &env[:block])
             end
 
             ##
-            # NOTE: `@env` is set inside `call`.
+            # @return [Class, Object]
+            #
+            # @internal
+            #   NOTE: `@env` is set inside `call`.
             #
             def entity
               @env[:entity]
             end
 
             ##
-            # NOTE: `@env` is set inside `call`.
+            # @return [Symbol]
+            #
+            # @internal
+            #   NOTE: `@env` is set inside `call`.
             #
             def method
               @env[:method]
             end
 
             ##
-            # NOTE: `@env` is set inside `call`.
+            # @return [ConvenientService::Core::Entities::MethodMiddlewares::Entities::Chain]
+            #
+            # @internal
+            #   NOTE: `@env` is set inside `call`.
             #
             def chain
               @chain ||= Entities::Chain.new(stack: @stack)

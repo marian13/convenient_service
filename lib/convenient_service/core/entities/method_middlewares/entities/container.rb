@@ -8,10 +8,15 @@ module ConvenientService
       class MethodMiddlewares
         module Entities
           class Container
+            ##
+            # @!attribute [r] service_class
+            #   @return [Class]
+            #
             attr_reader :service_class
 
             ##
             # @param service_class [Class]
+            # @return [void]
             #
             def initialize(service_class:)
               @service_class = service_class
@@ -20,7 +25,6 @@ module ConvenientService
             ##
             # @param scope [:instance, :class]
             # @param method [Symbol]
-            #
             # @return [Boolean]
             #
             def define_method_middlewares_caller!(scope, method)
@@ -29,7 +33,6 @@ module ConvenientService
 
             ##
             # @param scope [:instance, :class]
-            #
             # @return [Module]
             #
             def resolve_methods_middlewares_callers(scope)
