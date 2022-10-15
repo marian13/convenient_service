@@ -25,3 +25,5 @@
 | Medium | 🚧 | Rename `Utils::Module.find_own_const` to `Utils::Module.get_own_const` | [ConvenientService::Utils::Module::GetOwnConst](https://github.com/marian13/convenient_service/blob/main/lib/convenient_service/utils/module/get_own_const.rb) |
 | Medium | 🚧 | Mark `@api private` methods, classes | [YARD Tags](https://www.rubydoc.info/gems/yard/file/docs/Tags.md) |
 | Medium | ✅ | A way to check if block has one required positional argument | [#proc_has_one_positional_argument?](https://github.com/marian13/convenient_service/blob/main/lib/convenient_service/utils/proc/exec_config.rb#L96) |
+| Medium | 🚧 | Factories for POROs in specs | |
+| Low | 🚧 | Define method middleware caller with visibility | |

@@ -14,6 +14,14 @@ RSpec.describe ConvenientService::Core::Entities::MethodMiddlewares::Entities::C
   let(:mod) { Module.new }
   let(:service_class) { Class.new }
 
+  example_group "modules" do
+    include ConvenientService::RSpec::Matchers::IncludeModule
+
+    subject { described_class }
+
+    it { is_expected.to include_module(ConvenientService::Support::Delegate) }
+  end
+
   example_group "attributes" do
     include ConvenientService::RSpec::Matchers::HaveAttrReader
 

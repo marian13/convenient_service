@@ -8,10 +8,30 @@ module ConvenientService
           class Container
             module Commands
               class DefineMethodMiddlewaresCaller < Support::Command
-                include Support::Delegate
+                ##
+                # @!attribute [r] scope
+                #   @return [:instance, :class]
+                #
+                attr_reader :scope
 
-                attr_reader :scope, :method, :container
+                ##
+                # @!attribute [r] method
+                #   @return [String, Symbol]
+                #
+                attr_reader :method
 
+                ##
+                # @!attribute [r] container
+                #   @return [ConvenientService::Core::Entities::MethodMiddlewares::Entities::Container]
+                #
+                attr_reader :container
+
+                ##
+                # @param scope [:instance, :class]
+                # @param method [String, Symbol]
+                # @param container [ConvenientService::Core::Entities::MethodMiddlewares::Entities::Container]
+                # @return [void]
+                #
                 def initialize(scope:, method:, container:)
                   @scope = scope
                   @method = method
@@ -26,7 +46,7 @@ module ConvenientService
 
                   prepend_methods_middlewares_callers_to_container
 
-                  define_method
+                  define_method_middlewares_caller
 
                   true
                 end
@@ -39,11 +59,11 @@ module ConvenientService
                 # @internal
                 #   NOTE: Assignment of `scope` and `method` in the beginning for easier debugging.
                 #
-                #   NOTE: Check the following link in order to get an idea why two versions of `define_method` exist.
+                #   NOTE: Check the following link in order to get an idea why two versions of `define_method_middlewares_caller` exist.
                 #   https://gist.github.com/marian13/9c25041f835564e945d978839097d419
                 #
                 if ::RUBY_VERSION >= "3.0"
-                  def define_method
+                  def define_method_middlewares_caller
                     <<~RUBY.tap { |code| methods_middlewares_callers.module_eval(code, __FILE__, __LINE__ + 1) }
                       def #{method}(*args, **kwargs, &block)
                         scope = :#{scope}
@@ -57,7 +77,7 @@ module ConvenientService
                     RUBY
                   end
                 else
-                  def define_method
+                  def define_method_middlewares_caller
                     <<~RUBY.tap { |code| methods_middlewares_callers.module_eval(code, __FILE__, __LINE__ + 1) }
                       def #{method}(*args, **kwargs, &block)
                         scope = :#{scope}
