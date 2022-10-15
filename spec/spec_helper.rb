@@ -4,7 +4,6 @@ require_relative "../env"
 require_relative "coverage_helper"
 
 require "bundler/setup"
-require "convenient_service"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

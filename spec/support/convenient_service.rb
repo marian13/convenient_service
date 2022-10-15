@@ -1,5 +1,10 @@
 # frozen_string_literal: true
 
+##
+# NOTE: Sometimes it is needed to debug something even before `convenient_service` is loaded.
+#
+require_relative "../../lib/convenient_service/dependencies/extractions/b"
+
 require "convenient_service"
 
 ConvenientService::Dependencies.require_rspec_extentions

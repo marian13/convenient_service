@@ -74,6 +74,7 @@ module ConvenientService
         require "tempfile"
 
         require_relative "dependencies/extractions/byebug_syntax_highlighting"
+        require_relative "dependencies/extractions/b"
       end
 
       ##
