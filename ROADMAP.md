@@ -28,3 +28,4 @@
 | Medium | 🚧 | Factories for POROs in specs | |
 | Low | 🚧 | Define method middleware caller with visibility | |
 | Low | 🚧 | Dependency containers to remove high coupling | |
+| Low | 🚧 | Measure performance | |
