@@ -22,9 +22,17 @@ RSpec.describe ConvenientService::Core::Entities::MethodMiddlewares::Entities::M
   let(:stack) { ConvenientService::Support::Middleware::StackBuilder.new }
   let(:env) { {entity: double, method: :result, args: args, kwargs: kwargs, block: block} }
 
-  let(:args) { :foo }
+  let(:args) { [:foo] }
   let(:kwargs) { {foo: :bar} }
   let(:block) { proc { :foo } }
+
+  example_group "abstract methods" do
+    include ConvenientService::RSpec::Matchers::HaveAbstractMethod
+
+    subject { described_class.new(stack) }
+
+    it { is_expected.to have_abstract_method(:next) }
+  end
 
   example_group "instance_methods" do
     include ConvenientService::RSpec::Matchers::DelegateTo

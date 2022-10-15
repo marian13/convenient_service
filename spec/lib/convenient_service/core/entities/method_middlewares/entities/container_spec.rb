@@ -56,7 +56,7 @@ RSpec.describe ConvenientService::Core::Entities::MethodMiddlewares::Entities::C
         context "when `other` has different class" do
           let(:other) { 42 }
 
-          it "returns false" do
+          it "returns `false`" do
             expect(container == other).to be_nil
           end
         end
@@ -64,7 +64,7 @@ RSpec.describe ConvenientService::Core::Entities::MethodMiddlewares::Entities::C
         context "when `other` has different `service_class`" do
           let(:other) { described_class.new(service_class: Class.new) }
 
-          it "returns false" do
+          it "returns `false`" do
             expect(container == other).to eq(false)
           end
         end
@@ -72,7 +72,7 @@ RSpec.describe ConvenientService::Core::Entities::MethodMiddlewares::Entities::C
         context "when `other` has same attributes" do
           let(:other) { described_class.new(service_class: service_class) }
 
-          it "returns true" do
+          it "returns `true`" do
             expect(container == other).to eq(true)
           end
         end

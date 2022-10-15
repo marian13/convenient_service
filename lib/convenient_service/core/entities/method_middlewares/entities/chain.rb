@@ -41,6 +41,7 @@ module ConvenientService
               return unless other.instance_of?(self.class)
 
               return false if stack != other.stack
+              return false if env != other.env
 
               true
             end
@@ -52,6 +53,12 @@ module ConvenientService
             #   @return [#call<Hash>]
             #
             attr_reader :stack
+
+            ##
+            # @!attribute [r] env
+            #   @return [Hash]
+            #
+            attr_reader :env
           end
         end
       end

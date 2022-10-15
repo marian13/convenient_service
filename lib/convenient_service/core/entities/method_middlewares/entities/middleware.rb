@@ -84,6 +84,8 @@ module ConvenientService
             ##
             # @return [Symbol]
             #
+            # @note Try to avoid `if` conditions based on `method` value when possible, prefer to create separate middlewares instead.
+            #
             # @internal
             #   NOTE: `@env` is set inside `call`.
             #
