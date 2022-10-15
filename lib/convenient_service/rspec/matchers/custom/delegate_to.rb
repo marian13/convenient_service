@@ -102,6 +102,51 @@ module ConvenientService
 
             expect(object).to have_received(method)
 
+            ##
+            # IMPORTANT: `and_return_its_value` works only when `delegate_to` checks a pure function.
+            #
+            # For example (1):
+            #   def require_dependencies_pure
+            #     RequireDependenciesPure.call
+            #   end
+            #
+            #   class RequireDependenciesPure
+            #     def self.call
+            #       dependencies.require!
+            #
+            #       true
+            #     end
+            #   end
+            #
+            #   # Works since `RequireDependenciesPure.call` always returns `true`.
+            #   specify do
+            #     expect { require_dependencies_pure }
+            #       .to delegate_to(RequireDependenciesPure, :call)
+            #       .and_return_its_value
+            #   end
+            #
+            # Example (2):
+            #   def require_dependencies_not_pure
+            #     RequireDependenciesNotPure.call
+            #   end
+            #
+            #   class RequireDependenciesNotPure
+            #     def self.call
+            #       return false if dependencies.required?
+            #
+            #       dependencies.require!
+            #
+            #       true
+            #     end
+            #   end
+            #
+            #   # Does NOT work since `RequireDependenciesNotPure.call` returns `true` for the first time and `false` for the subsequent call.
+            #   specify do
+            #     expect { require_dependencies_not_pure }
+            #       .to delegate_to(RequireDependenciesNotPure, :call)
+            #       .and_return_its_value
+            #   end
+            #
             expect(value).to eq(object.__send__(method, *args, **kwargs, &block)) if used_and_return_its_value?
 
             ##
