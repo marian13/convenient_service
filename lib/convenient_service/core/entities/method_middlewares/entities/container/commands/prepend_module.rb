@@ -10,16 +10,44 @@ module ConvenientService
               class PrependModule < Support::Command
                 include Support::Delegate
 
-                attr_reader :scope, :container, :mod
+                ##
+                # @!attribute [r] scope
+                #   @return [:instance, :scope]
+                #
+                attr_reader :scope
 
+                ##
+                # @!attribute [r] container
+                #   @return [Class]
+                #
+                attr_reader :container
+
+                ##
+                # @!attribute [r] mod
+                #   @return [ConvenientService::Core::Entities::MethodMiddlewares::Entities::Container]
+                #
+                attr_reader :mod
+
+                ##
+                # @return [Class]
+                #
                 delegate :service_class, to: :container
 
+                ##
+                # @param scope [:instance, :scope]
+                # @param container [Class]
+                # @param mod [ConvenientService::Core::Entities::MethodMiddlewares::Entities::Container]
+                # @return [void]
+                #
                 def initialize(scope:, container:, mod:)
                   @scope = scope
                   @container = container
                   @mod = mod
                 end
 
+                ##
+                # @return [void]
+                #
                 def call
                   case scope
                   when :instance
