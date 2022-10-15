@@ -490,12 +490,12 @@
       <pre class="lines">
 
 
-100
-101
-102</pre>
+102
+103
+104</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/entities/middleware.rb', line 100</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/entities/middleware.rb', line 102</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_chain'>chain</span>
   <span class='ivar'>@chain</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="../Entities.html" title="ConvenientService::Core::Entities::MethodMiddlewares::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Chain.html" title="ConvenientService::Core::Entities::MethodMiddlewares::Entities::Chain (class)">Chain</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Chain.html#initialize-instance_method" title="ConvenientService::Core::Entities::MethodMiddlewares::Entities::Chain#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>stack:</span> <span class='ivar'>@stack</span><span class='rparen'>)</span>
@@ -569,6 +569,13 @@
 </h3><div class="docstring">
   <div class="discussion">
     
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p>Try to avoid <code>if</code> conditions based on <code>method</code> value when possible, prefer to create separate middlewares instead.</p>
+</div>
+  </div>
+
+
 
   </div>
 </div>
@@ -594,12 +601,12 @@
       <pre class="lines">
 
 
-90
-91
-92</pre>
+92
+93
+94</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/entities/middleware.rb', line 90</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/entities/middleware.rb', line 92</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_method'>method</span>
   <span class='ivar'>@env</span><span class='lbracket'>[</span><span class='symbol'>:method</span><span class='rbracket'>]</span>
@@ -722,7 +729,7 @@ This way middleware stack is stopped in the &quot;middle&quot; and its &quot;mid
 </div>
 
       <div id="footer">
-  Generated on Sat Oct 15 20:43:55 2022 by
+  Generated on Sat Oct 15 22:04:14 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>
