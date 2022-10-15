@@ -18,13 +18,13 @@ module ConvenientService
 
                 ##
                 # @!attribute [r] container
-                #   @return [Class]
+                #   @return [ConvenientService::Core::Entities::MethodMiddlewares::Entities::Container]
                 #
                 attr_reader :container
 
                 ##
                 # @!attribute [r] mod
-                #   @return [ConvenientService::Core::Entities::MethodMiddlewares::Entities::Container]
+                #   @return [Module]
                 #
                 attr_reader :mod
 
@@ -35,8 +35,8 @@ module ConvenientService
 
                 ##
                 # @param scope [:instance, :scope]
-                # @param container [Class]
-                # @param mod [ConvenientService::Core::Entities::MethodMiddlewares::Entities::Container]
+                # @param container [ConvenientService::Core::Entities::MethodMiddlewares::Entities::Container]
+                # @param mod [Module]
                 # @return [void]
                 #
                 def initialize(scope:, container:, mod:)

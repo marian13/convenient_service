@@ -6,8 +6,6 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Core::Entities::MethodMiddlewares::Entities::Container::Commands::PrependModule do
-  include ConvenientService::RSpec::Matchers::DelegateTo
-
   let(:command_result) { described_class.call(scope: scope, container: container, mod: mod) }
   let(:command_instance) { described_class.new(scope: scope, container: container, mod: mod) }
 
