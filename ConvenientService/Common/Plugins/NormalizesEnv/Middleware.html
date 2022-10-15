@@ -106,7 +106,7 @@
 <li>Double splat <code>**</code> raises on <code>nil</code>.</li>
 <li>Umpersand <code>&amp;</code> converts <code>nil</code> to <code>nil</code>.</li>
 </ul>
-<p>The following decorator <code>proc</code> converts <code>env[:kwargs]</code> to a hash.
+<p>The following middleware converts <code>env[:kwargs]</code> to a hash.
 This way <code>stack.call(*env[:args], **env[:kwargs], &amp;env[:block])</code> won't fail even if a user passes <code>nil</code> as <code>kwargs</code>.</p>
 <p>Check the following link for more details:</p>
 <ul>
@@ -206,7 +206,7 @@ This way <code>stack.call(*env[:args], **env[:kwargs], &amp;env[:block])</code> 
 </div>
 
       <div id="footer">
-  Generated on Sat Oct 15 18:08:54 2022 by
+  Generated on Sat Oct 15 18:34:20 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>
