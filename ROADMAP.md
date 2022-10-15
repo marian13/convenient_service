@@ -27,3 +27,4 @@
 | Medium | ✅ | A way to check if block has one required positional argument | [#proc_has_one_positional_argument?](https://github.com/marian13/convenient_service/blob/main/lib/convenient_service/utils/proc/exec_config.rb#L96) |
 | Medium | 🚧 | Factories for POROs in specs | |
 | Low | 🚧 | Define method middleware caller with visibility | |
+| Low | 🚧 | Dependency containers to remove high coupling | |
