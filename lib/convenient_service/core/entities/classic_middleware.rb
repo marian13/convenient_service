@@ -4,15 +4,28 @@ module ConvenientService
   module Core
     module Entities
       class ClassicMiddleware
-        attr_reader :stack
-
+        ##
+        # @param stack [#call<Hash>]
+        # @return [void]
+        #
         def initialize(stack)
           @stack = stack
         end
 
+        ##
+        # @return [Object] Can be any type.
+        #
         def call(env)
           stack.call(env)
         end
+
+        private
+
+        ##
+        # @!attribute [r] stack
+        #   @return [#call<Hash>]
+        #
+        attr_reader :stack
       end
     end
   end

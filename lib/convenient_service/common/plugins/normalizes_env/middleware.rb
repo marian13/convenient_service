@@ -9,7 +9,7 @@ module ConvenientService
         # - Double splat `**` raises on `nil`.
         # - Umpersand `&` converts `nil` to `nil`.
         #
-        # The following decorator `proc` converts `env[:kwargs]` to a hash.
+        # The following middleware converts `env[:kwargs]` to a hash.
         # This way `stack.call(*env[:args], **env[:kwargs], &env[:block])` won't fail even if a user passes `nil` as `kwargs`.
         #
         # Check the following link for more details:
