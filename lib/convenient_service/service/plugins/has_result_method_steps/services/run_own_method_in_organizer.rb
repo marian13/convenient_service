@@ -28,6 +28,8 @@ module ConvenientService
             private
 
             ##
+            # @return [Method, nil]
+            #
             # @internal
             #   TODO: A possible bottleneck. Should be removed if receives negative feedback.
             #
