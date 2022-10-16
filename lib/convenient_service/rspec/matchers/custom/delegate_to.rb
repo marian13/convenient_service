@@ -100,6 +100,9 @@ module ConvenientService
             #
             value = block_expectation.call
 
+            ##
+            # NOTE: If this expectation fails, it means `delegate_to` is NOT met.
+            #
             expect(object).to have_received(method)
 
             ##
@@ -146,6 +149,8 @@ module ConvenientService
             #       .to delegate_to(RequireDependenciesNotPure, :call)
             #       .and_return_its_value
             #   end
+            #
+            # NOTE: If this expectation fails, it means `and_return_its_value` is NOT met.
             #
             expect(value).to eq(object.__send__(method, *args, **kwargs, &block)) if used_and_return_its_value?
 
@@ -205,9 +210,7 @@ module ConvenientService
           def printable_method
             @printable_method ||=
               case Utils::Object.resolve_type(object)
-              when "class"
-                "#{object}.#{method}"
-              when "module"
+              when "class", "module"
                 "#{object}.#{method}"
               when "instance"
                 "#{object.class}##{method}"

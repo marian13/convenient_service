@@ -29,3 +29,4 @@
 | Low | 🚧 | Define method middleware caller with visibility | |
 | Low | 🚧 | Dependency containers to remove high coupling | |
 | Low | 🚧 | Measure performance | |
+| Low | 🚧 | Rewrite middleware backend to count [convenient_service](https://github.com/marian13/convenient_service) specifics | |
