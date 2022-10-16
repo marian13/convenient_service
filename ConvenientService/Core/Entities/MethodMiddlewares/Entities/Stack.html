@@ -103,67 +103,6 @@
 
 
 
-  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
-  <ul class="summary">
-    
-      <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#name-instance_method" title="#name (instance method)">#<strong>name</strong>  &#x21d2; Object </a>
-    
-
-    
-  </span>
-  
-  
-  
-    
-      <span class="note title readonly">readonly</span>
-    
-    
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'><p>Returns the value of attribute name.</p>
-</div></span>
-  
-</li>
-
-    
-      <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#stack-instance_method" title="#stack (instance method)">#<strong>stack</strong>  &#x21d2; Object </a>
-    
-
-    
-  </span>
-  
-  
-  
-    
-      <span class="note title readonly">readonly</span>
-    
-    
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'><p>Returns the value of attribute stack.</p>
-</div></span>
-  
-</li>
-
-    
-  </ul>
-
 
 
 
@@ -289,7 +228,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(name:, stack: nil)  &#x21d2; void </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(name: nil, plain_stack: nil)  &#x21d2; Stack </a>
     
 
     
@@ -305,6 +244,31 @@
   
 
   
+    <span class="summary_desc"><div class='inline'><p>A new instance of Stack.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#insert-instance_method" title="#insert (instance method)">#<strong>insert</strong>(index_or_middleware, middleware, *args, &amp;block)  &#x21d2; ConvenientService::Core::Entities::MethodMiddlewares::Entities::Stack </a>
+    
+
+    
+      (also: #insert_before)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
     <span class="summary_desc"><div class='inline'></div></span>
   
 </li>
@@ -313,7 +277,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#insert_after-instance_method" title="#insert_after (instance method)">#<strong>insert_after</strong>(index_or_middleware, middleware)  &#x21d2; ConvenientService::Core::Entities::MethodMiddlewares::Entities::Stack </a>
+      <a href="#insert_after-instance_method" title="#insert_after (instance method)">#<strong>insert_after</strong>(index_or_middleware, middleware, *args, &amp;block)  &#x21d2; ConvenientService::Core::Entities::MethodMiddlewares::Entities::Stack </a>
     
 
     
@@ -335,7 +299,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#insert_after_each-instance_method" title="#insert_after_each (instance method)">#<strong>insert_after_each</strong>(middleware)  &#x21d2; ConvenientService::Core::Entities::MethodMiddlewares::Entities::Stack </a>
+      <a href="#insert_after_each-instance_method" title="#insert_after_each (instance method)">#<strong>insert_after_each</strong>(middleware, *args, &amp;block)  &#x21d2; ConvenientService::Core::Entities::MethodMiddlewares::Entities::Stack </a>
     
 
     
@@ -357,7 +321,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#insert_before-instance_method" title="#insert_before (instance method)">#<strong>insert_before</strong>(index_or_middleware, middleware)  &#x21d2; ConvenientService::Core::Entities::MethodMiddlewares::Entities::Stack </a>
+      <a href="#insert_before_each-instance_method" title="#insert_before_each (instance method)">#<strong>insert_before_each</strong>(middleware, *args, &amp;block)  &#x21d2; ConvenientService::Core::Entities::MethodMiddlewares::Entities::Stack </a>
     
 
     
@@ -379,7 +343,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#insert_before_each-instance_method" title="#insert_before_each (instance method)">#<strong>insert_before_each</strong>(middleware)  &#x21d2; ConvenientService::Core::Entities::MethodMiddlewares::Entities::Stack </a>
+      <a href="#name-instance_method" title="#name (instance method)">#<strong>name</strong>  &#x21d2; String </a>
     
 
     
@@ -401,7 +365,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#replace-instance_method" title="#replace (instance method)">#<strong>replace</strong>(index_or_middleware, middleware)  &#x21d2; ConvenientService::Core::Entities::MethodMiddlewares::Entities::Stack </a>
+      <a href="#replace-instance_method" title="#replace (instance method)">#<strong>replace</strong>(index_or_middleware, middleware, *args, &amp;block)  &#x21d2; ConvenientService::Core::Entities::MethodMiddlewares::Entities::Stack </a>
     
 
     
@@ -445,7 +409,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#use-instance_method" title="#use (instance method)">#<strong>use</strong>(middleware)  &#x21d2; ConvenientService::Core::Entities::MethodMiddlewares::Entities::Stack </a>
+      <a href="#use-instance_method" title="#use (instance method)">#<strong>use</strong>(middleware, *args, &amp;block)  &#x21d2; ConvenientService::Core::Entities::MethodMiddlewares::Entities::Stack </a>
     
 
     
@@ -473,13 +437,32 @@
     <div class="method_details first">
   <h3 class="signature first" id="initialize-instance_method">
   
-    #<strong>initialize</strong>(name:, stack: nil)  &#x21d2; <tt>void</tt> 
+    
+      <span class="overload">#<strong>initialize</strong>(name: )  &#x21d2; <tt>void</tt> </span>
+    
+      <span class="overload">#<strong>initialize</strong>(plain_stack: )  &#x21d2; <tt>void</tt> </span>
+    
   
 
   
 
   
 </h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a new instance of Stack.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <p class="tag_title">Overloads:</p>
+  <ul class="overload">
+    
+      
+      <li class="overload_item">
+        <span class="signature">#<strong>initialize</strong>(name: )  &#x21d2; <tt>void</tt> </span>
+        <div class="docstring">
   <div class="discussion">
     
 
@@ -497,18 +480,7 @@
         <span class='type'>(<tt>String</tt>)</span>
       
       
-      
-    </li>
-  
-    <li>
-      
-        <span class='name'>stack</span>
-      
-      
-        <span class='type'>(<tt><span class='object_link'><a href="" title="ConvenientService::Core::Entities::MethodMiddlewares::Entities::Stack (class)">ConvenientService::Core::Entities::MethodMiddlewares::Entities::Stack</a></span></tt>, <tt>nil</tt>)</span>
-      
-      
-        <em class="default">(defaults to: <tt>nil</tt>)</em>
+        <em class="default">(defaults to: <tt></tt>)</em>
       
       
     </li>
@@ -516,96 +488,41 @@
 </ul>
 
 
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-26
-27
-28
-29</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/entities/stack.rb', line 26</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>name:</span><span class='comma'>,</span> <span class='label'>stack:</span> <span class='kw'>nil</span><span class='rparen'>)</span>
-  <span class='ivar'>@name</span> <span class='op'>=</span> <span class='id identifier rubyid_name'>name</span>
-  <span class='ivar'>@stack</span> <span class='op'>=</span> <span class='id identifier rubyid_stack'>stack</span> <span class='op'>||</span> <span class='const'><span class='object_link'><a href="../../../../Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Support/Middleware.html" title="ConvenientService::Support::Middleware (module)">Middleware</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Support/Middleware/StackBuilder.html" title="ConvenientService::Support::Middleware::StackBuilder (class)">StackBuilder</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../../../Support/Middleware/StackBuilder.html#initialize-instance_method" title="ConvenientService::Support::Middleware::StackBuilder#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>name:</span> <span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
 </div>
-  
-</div>
-
-  <div id="instance_attr_details" class="attr_details">
-    <h2>Instance Attribute Details</h2>
+      </li>
     
       
-      <span id=""></span>
-      <div class="method_details first">
-  <h3 class="signature first" id="name-instance_method">
-  
-    #<strong>name</strong>  &#x21d2; <tt>Object</tt>  <span class="extras">(readonly)</span>
-  
-
-  
-
-  
-</h3><div class="docstring">
+      <li class="overload_item">
+        <span class="signature">#<strong>initialize</strong>(plain_stack: )  &#x21d2; <tt>void</tt> </span>
+        <div class="docstring">
   <div class="discussion">
-    <p>Returns the value of attribute name.</p>
-
+    
 
   </div>
 </div>
 <div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
   
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-13
-14
-15</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/entities/stack.rb', line 13</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_name'>name</span>
-  <span class='ivar'>@name</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
+    <li>
       
-      <span id=""></span>
-      <div class="method_details ">
-  <h3 class="signature " id="stack-instance_method">
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../../Support/Middleware/StackBuilder.html" title="ConvenientService::Support::Middleware::StackBuilder (class)">ConvenientService::Support::Middleware::StackBuilder</a></span></tt>)</span>
+      
+      
+      
+    </li>
   
-    #<strong>stack</strong>  &#x21d2; <tt>Object</tt>  <span class="extras">(readonly)</span>
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    <p>Returns the value of attribute stack.</p>
+</ul>
 
 
-  </div>
 </div>
-<div class="tags">
-  
+      </li>
+    
+  </ul>
+
 
 </div><table class="source_code">
   <tr>
@@ -613,22 +530,22 @@
       <pre class="lines">
 
 
+18
 19
-20
-21</pre>
+20</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/entities/stack.rb', line 19</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/entities/stack.rb', line 18</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_stack'>stack</span>
-  <span class='ivar'>@stack</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>name:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>plain_stack:</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='ivar'>@plain_stack</span> <span class='op'>=</span> <span class='id identifier rubyid_plain_stack'>plain_stack</span> <span class='op'>||</span> <span class='const'><span class='object_link'><a href="../../../../Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Support/Middleware.html" title="ConvenientService::Support::Middleware (module)">Middleware</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Support/Middleware/StackBuilder.html" title="ConvenientService::Support::Middleware::StackBuilder (class)">StackBuilder</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../../../Support/Middleware/StackBuilder.html#initialize-instance_method" title="ConvenientService::Support::Middleware::StackBuilder#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>name:</span> <span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
 </div>
-    
-  </div>
+  
+</div>
 
 
   <div id="instance_method_details" class="method_details_list">
@@ -687,23 +604,21 @@
       <pre class="lines">
 
 
-134
-135
-136
-137
-138
-139
-140
-141</pre>
+162
+163
+164
+165
+166
+167
+168</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/entities/stack.rb', line 134</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/entities/stack.rb', line 162</span>
 
 <span class='kw'>def</span> <span class='op'>==</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='rparen'>)</span>
 
-  <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='id identifier rubyid_name'>name</span> <span class='op'>!=</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span>
-  <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='id identifier rubyid_stack'>stack</span> <span class='op'>!=</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_stack'>stack</span>
+  <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='id identifier rubyid_plain_stack'>plain_stack</span> <span class='op'>!=</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_plain_stack'>plain_stack</span>
 
   <span class='kw'>true</span>
 <span class='kw'>end</span></pre>
@@ -763,6 +678,13 @@
   
 </ul>
 
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://github.com/marian13/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L132" target="_parent" title="https://github.com/marian13/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L132">https://github.com/marian13/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L132</a></li>
+    
+  </ul>
+
 </div><table class="source_code">
   <tr>
     <td>
@@ -777,7 +699,7 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/entities/stack.rb', line 42</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_env'>env</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_stack'>stack</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_env'>env</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_plain_stack'>plain_stack</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_env'>env</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -830,23 +752,30 @@
   
 </ul>
 
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://github.com/marian13/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L126" target="_parent" title="https://github.com/marian13/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L126">https://github.com/marian13/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L126</a></li>
+    
+  </ul>
+
 </div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-103
-104
-105
-106
-107</pre>
+131
+132
+133
+134
+135</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/entities/stack.rb', line 103</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/entities/stack.rb', line 131</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='id identifier rubyid_index_or_middleware'>index_or_middleware</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_stack'>stack</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span> <span class='id identifier rubyid_index_or_middleware'>index_or_middleware</span>
+  <span class='id identifier rubyid_plain_stack'>plain_stack</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='id identifier rubyid_index_or_middleware'>index_or_middleware</span><span class='rparen'>)</span>
 
   <span class='kw'>self</span>
 <span class='kw'>end</span></pre>
@@ -892,15 +821,15 @@
       <pre class="lines">
 
 
-34
-35
-36</pre>
+32
+33
+34</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/entities/stack.rb', line 34</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/entities/stack.rb', line 32</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_dup'>dup</span>
-  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='label'>name:</span> <span class='id identifier rubyid_name'>name</span><span class='period'>.</span><span class='id identifier rubyid_dup'>dup</span><span class='comma'>,</span> <span class='label'>stack:</span> <span class='id identifier rubyid_stack'>stack</span><span class='period'>.</span><span class='id identifier rubyid_dup'>dup</span><span class='rparen'>)</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='label'>plain_stack:</span> <span class='id identifier rubyid_plain_stack'>plain_stack</span><span class='period'>.</span><span class='id identifier rubyid_dup'>dup</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -944,12 +873,12 @@
       <pre class="lines">
 
 
-126
-127
-128</pre>
+154
+155
+156</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/entities/stack.rb', line 126</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/entities/stack.rb', line 154</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_empty?'>empty?</span>
   <span class='id identifier rubyid_to_a'>to_a</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
@@ -960,9 +889,124 @@
 </div>
     
       <div class="method_details ">
+  <h3 class="signature " id="insert-instance_method">
+  
+    #<strong>insert</strong>(index_or_middleware, middleware, *args, &amp;block)  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::Core::Entities::MethodMiddlewares::Entities::Stack (class)">ConvenientService::Core::Entities::MethodMiddlewares::Entities::Stack</a></span></tt> 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='insert_before-instance_method'>insert_before</span></span>
+    </span>
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>index_or_middleware</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>, <tt><span class='object_link'><a href="Middleware.html" title="ConvenientService::Core::Entities::MethodMiddlewares::Entities::Middleware (class)">ConvenientService::Core::Entities::MethodMiddlewares::Entities::Middleware</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>middleware</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Middleware.html" title="ConvenientService::Core::Entities::MethodMiddlewares::Entities::Middleware (class)">ConvenientService::Core::Entities::MethodMiddlewares::Entities::Middleware</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>args</span>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>block</span>
+      
+      
+        <span class='type'>(<tt>Proc</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="ConvenientService::Core::Entities::MethodMiddlewares::Entities::Stack (class)">ConvenientService::Core::Entities::MethodMiddlewares::Entities::Stack</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://github.com/marian13/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L88" target="_parent" title="https://github.com/marian13/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L88">https://github.com/marian13/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L88</a></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+55
+56
+57
+58
+59</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/entities/stack.rb', line 55</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_insert'>insert</span><span class='lparen'>(</span><span class='id identifier rubyid_index_or_middleware'>index_or_middleware</span><span class='comma'>,</span> <span class='id identifier rubyid_middleware'>middleware</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_plain_stack'>plain_stack</span><span class='period'>.</span><span class='id identifier rubyid_insert'>insert</span><span class='lparen'>(</span><span class='id identifier rubyid_index_or_middleware'>index_or_middleware</span><span class='comma'>,</span> <span class='id identifier rubyid_middleware'>middleware</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+
+  <span class='kw'>self</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
   <h3 class="signature " id="insert_after-instance_method">
   
-    #<strong>insert_after</strong>(index_or_middleware, middleware)  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::Core::Entities::MethodMiddlewares::Entities::Stack (class)">ConvenientService::Core::Entities::MethodMiddlewares::Entities::Stack</a></span></tt> 
+    #<strong>insert_after</strong>(index_or_middleware, middleware, *args, &amp;block)  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::Core::Entities::MethodMiddlewares::Entities::Stack (class)">ConvenientService::Core::Entities::MethodMiddlewares::Entities::Stack</a></span></tt> 
   
 
   
@@ -1000,6 +1044,28 @@
       
     </li>
   
+    <li>
+      
+        <span class='name'>args</span>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>block</span>
+      
+      
+        <span class='type'>(<tt>Proc</tt>)</span>
+      
+      
+      
+    </li>
+  
 </ul>
 
 <p class="tag_title">Returns:</p>
@@ -1016,23 +1082,30 @@
   
 </ul>
 
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://github.com/marian13/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L97" target="_parent" title="https://github.com/marian13/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L97">https://github.com/marian13/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L97</a></li>
+    
+  </ul>
+
 </div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-62
-63
-64
-65
-66</pre>
+76
+77
+78
+79
+80</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/entities/stack.rb', line 62</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/entities/stack.rb', line 76</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_insert_after'>insert_after</span><span class='lparen'>(</span><span class='id identifier rubyid_index_or_middleware'>index_or_middleware</span><span class='comma'>,</span> <span class='id identifier rubyid_middleware'>middleware</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_stack'>stack</span><span class='period'>.</span><span class='id identifier rubyid_insert_after'>insert_after</span> <span class='id identifier rubyid_index_or_middleware'>index_or_middleware</span><span class='comma'>,</span> <span class='id identifier rubyid_middleware'>middleware</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_insert_after'>insert_after</span><span class='lparen'>(</span><span class='id identifier rubyid_index_or_middleware'>index_or_middleware</span><span class='comma'>,</span> <span class='id identifier rubyid_middleware'>middleware</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_plain_stack'>plain_stack</span><span class='period'>.</span><span class='id identifier rubyid_insert_after'>insert_after</span><span class='lparen'>(</span><span class='id identifier rubyid_index_or_middleware'>index_or_middleware</span><span class='comma'>,</span> <span class='id identifier rubyid_middleware'>middleware</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
 
   <span class='kw'>self</span>
 <span class='kw'>end</span></pre>
@@ -1044,7 +1117,7 @@
       <div class="method_details ">
   <h3 class="signature " id="insert_after_each-instance_method">
   
-    #<strong>insert_after_each</strong>(middleware)  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::Core::Entities::MethodMiddlewares::Entities::Stack (class)">ConvenientService::Core::Entities::MethodMiddlewares::Entities::Stack</a></span></tt> 
+    #<strong>insert_after_each</strong>(middleware, *args, &amp;block)  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::Core::Entities::MethodMiddlewares::Entities::Stack (class)">ConvenientService::Core::Entities::MethodMiddlewares::Entities::Stack</a></span></tt> 
   
 
   
@@ -1071,72 +1144,12 @@
       
     </li>
   
-</ul>
-
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
     <li>
       
-      
-        <span class='type'>(<tt><span class='object_link'><a href="" title="ConvenientService::Core::Entities::MethodMiddlewares::Entities::Stack (class)">ConvenientService::Core::Entities::MethodMiddlewares::Entities::Stack</a></span></tt>)</span>
-      
+        <span class='name'>args</span>
       
       
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-82
-83
-84
-85
-86</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/entities/stack.rb', line 82</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_insert_after_each'>insert_after_each</span><span class='lparen'>(</span><span class='id identifier rubyid_middleware'>middleware</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_stack'>stack</span><span class='period'>.</span><span class='id identifier rubyid_insert_after_each'>insert_after_each</span> <span class='id identifier rubyid_middleware'>middleware</span>
-
-  <span class='kw'>self</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="insert_before-instance_method">
-  
-    #<strong>insert_before</strong>(index_or_middleware, middleware)  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::Core::Entities::MethodMiddlewares::Entities::Stack (class)">ConvenientService::Core::Entities::MethodMiddlewares::Entities::Stack</a></span></tt> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    
-
-  </div>
-</div>
-<div class="tags">
-  <p class="tag_title">Parameters:</p>
-<ul class="param">
-  
-    <li>
-      
-        <span class='name'>index_or_middleware</span>
-      
-      
-        <span class='type'>(<tt>Integer</tt>, <tt><span class='object_link'><a href="Middleware.html" title="ConvenientService::Core::Entities::MethodMiddlewares::Entities::Middleware (class)">ConvenientService::Core::Entities::MethodMiddlewares::Entities::Middleware</a></span></tt>)</span>
+        <span class='type'>(<tt>Array</tt>)</span>
       
       
       
@@ -1144,10 +1157,10 @@
   
     <li>
       
-        <span class='name'>middleware</span>
+        <span class='name'>block</span>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="Middleware.html" title="ConvenientService::Core::Entities::MethodMiddlewares::Entities::Middleware (class)">ConvenientService::Core::Entities::MethodMiddlewares::Entities::Middleware</a></span></tt>)</span>
+        <span class='type'>(<tt>Proc</tt>)</span>
       
       
       
@@ -1169,23 +1182,30 @@
   
 </ul>
 
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://github.com/marian13/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L111" target="_parent" title="https://github.com/marian13/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L111">https://github.com/marian13/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L111</a></li>
+    
+  </ul>
+
 </div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-51
-52
-53
-54
-55</pre>
+104
+105
+106
+107
+108</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/entities/stack.rb', line 51</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/entities/stack.rb', line 104</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_insert_before'>insert_before</span><span class='lparen'>(</span><span class='id identifier rubyid_index_or_middleware'>index_or_middleware</span><span class='comma'>,</span> <span class='id identifier rubyid_middleware'>middleware</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_stack'>stack</span><span class='period'>.</span><span class='id identifier rubyid_insert_before'>insert_before</span> <span class='id identifier rubyid_index_or_middleware'>index_or_middleware</span><span class='comma'>,</span> <span class='id identifier rubyid_middleware'>middleware</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_insert_after_each'>insert_after_each</span><span class='lparen'>(</span><span class='id identifier rubyid_middleware'>middleware</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_plain_stack'>plain_stack</span><span class='period'>.</span><span class='id identifier rubyid_insert_after_each'>insert_after_each</span><span class='lparen'>(</span><span class='id identifier rubyid_middleware'>middleware</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
 
   <span class='kw'>self</span>
 <span class='kw'>end</span></pre>
@@ -1197,7 +1217,7 @@
       <div class="method_details ">
   <h3 class="signature " id="insert_before_each-instance_method">
   
-    #<strong>insert_before_each</strong>(middleware)  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::Core::Entities::MethodMiddlewares::Entities::Stack (class)">ConvenientService::Core::Entities::MethodMiddlewares::Entities::Stack</a></span></tt> 
+    #<strong>insert_before_each</strong>(middleware, *args, &amp;block)  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::Core::Entities::MethodMiddlewares::Entities::Stack (class)">ConvenientService::Core::Entities::MethodMiddlewares::Entities::Stack</a></span></tt> 
   
 
   
@@ -1224,6 +1244,28 @@
       
     </li>
   
+    <li>
+      
+        <span class='name'>args</span>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>block</span>
+      
+      
+        <span class='type'>(<tt>Proc</tt>)</span>
+      
+      
+      
+    </li>
+  
 </ul>
 
 <p class="tag_title">Returns:</p>
@@ -1240,23 +1282,30 @@
   
 </ul>
 
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://github.com/marian13/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L104" target="_parent" title="https://github.com/marian13/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L104">https://github.com/marian13/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L104</a></li>
+    
+  </ul>
+
 </div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-72
-73
-74
-75
-76</pre>
+90
+91
+92
+93
+94</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/entities/stack.rb', line 72</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/entities/stack.rb', line 90</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_insert_before_each'>insert_before_each</span><span class='lparen'>(</span><span class='id identifier rubyid_middleware'>middleware</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_stack'>stack</span><span class='period'>.</span><span class='id identifier rubyid_insert_before_each'>insert_before_each</span> <span class='id identifier rubyid_middleware'>middleware</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_insert_before_each'>insert_before_each</span><span class='lparen'>(</span><span class='id identifier rubyid_middleware'>middleware</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_plain_stack'>plain_stack</span><span class='period'>.</span><span class='id identifier rubyid_insert_before_each'>insert_before_each</span><span class='lparen'>(</span><span class='id identifier rubyid_middleware'>middleware</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
 
   <span class='kw'>self</span>
 <span class='kw'>end</span></pre>
@@ -1266,9 +1315,61 @@
 </div>
     
       <div class="method_details ">
+  <h3 class="signature " id="name-instance_method">
+  
+    #<strong>name</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+25
+26
+27</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/entities/stack.rb', line 25</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_name'>name</span>
+  <span class='id identifier rubyid_plain_stack'>plain_stack</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
   <h3 class="signature " id="replace-instance_method">
   
-    #<strong>replace</strong>(index_or_middleware, middleware)  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::Core::Entities::MethodMiddlewares::Entities::Stack (class)">ConvenientService::Core::Entities::MethodMiddlewares::Entities::Stack</a></span></tt> 
+    #<strong>replace</strong>(index_or_middleware, middleware, *args, &amp;block)  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::Core::Entities::MethodMiddlewares::Entities::Stack (class)">ConvenientService::Core::Entities::MethodMiddlewares::Entities::Stack</a></span></tt> 
   
 
   
@@ -1306,6 +1407,28 @@
       
     </li>
   
+    <li>
+      
+        <span class='name'>args</span>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>block</span>
+      
+      
+        <span class='type'>(<tt>Proc</tt>)</span>
+      
+      
+      
+    </li>
+  
 </ul>
 
 <p class="tag_title">Returns:</p>
@@ -1322,23 +1445,30 @@
   
 </ul>
 
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://github.com/marian13/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L118" target="_parent" title="https://github.com/marian13/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L118">https://github.com/marian13/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L118</a></li>
+    
+  </ul>
+
 </div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-93
-94
-95
-96
-97</pre>
+119
+120
+121
+122
+123</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/entities/stack.rb', line 93</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/entities/stack.rb', line 119</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_replace'>replace</span><span class='lparen'>(</span><span class='id identifier rubyid_index_or_middleware'>index_or_middleware</span><span class='comma'>,</span> <span class='id identifier rubyid_middleware'>middleware</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_stack'>stack</span><span class='period'>.</span><span class='id identifier rubyid_replace'>replace</span> <span class='id identifier rubyid_index_or_middleware'>index_or_middleware</span><span class='comma'>,</span> <span class='id identifier rubyid_middleware'>middleware</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_replace'>replace</span><span class='lparen'>(</span><span class='id identifier rubyid_index_or_middleware'>index_or_middleware</span><span class='comma'>,</span> <span class='id identifier rubyid_middleware'>middleware</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_plain_stack'>plain_stack</span><span class='period'>.</span><span class='id identifier rubyid_replace'>replace</span><span class='lparen'>(</span><span class='id identifier rubyid_index_or_middleware'>index_or_middleware</span><span class='comma'>,</span> <span class='id identifier rubyid_middleware'>middleware</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
 
   <span class='kw'>self</span>
 <span class='kw'>end</span></pre>
@@ -1384,15 +1514,15 @@
       <pre class="lines">
 
 
-150
-151
-152</pre>
+173
+174
+175</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/entities/stack.rb', line 150</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/entities/stack.rb', line 173</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_a'>to_a</span>
-  <span class='id identifier rubyid_stack'>stack</span><span class='period'>.</span><span class='id identifier rubyid_to_a'>to_a</span>
+  <span class='id identifier rubyid_plain_stack'>plain_stack</span><span class='period'>.</span><span class='id identifier rubyid_to_a'>to_a</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1402,7 +1532,7 @@
       <div class="method_details ">
   <h3 class="signature " id="use-instance_method">
   
-    #<strong>use</strong>(middleware)  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::Core::Entities::MethodMiddlewares::Entities::Stack (class)">ConvenientService::Core::Entities::MethodMiddlewares::Entities::Stack</a></span></tt> 
+    #<strong>use</strong>(middleware, *args, &amp;block)  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::Core::Entities::MethodMiddlewares::Entities::Stack (class)">ConvenientService::Core::Entities::MethodMiddlewares::Entities::Stack</a></span></tt> 
   
 
   
@@ -1429,6 +1559,28 @@
       
     </li>
   
+    <li>
+      
+        <span class='name'>args</span>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>block</span>
+      
+      
+        <span class='type'>(<tt>Proc</tt>)</span>
+      
+      
+      
+    </li>
+  
 </ul>
 
 <p class="tag_title">Returns:</p>
@@ -1445,23 +1597,30 @@
   
 </ul>
 
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://github.com/marian13/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L76" target="_parent" title="https://github.com/marian13/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L76">https://github.com/marian13/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L76</a></li>
+    
+  </ul>
+
 </div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-113
-114
-115
-116
-117</pre>
+145
+146
+147
+148
+149</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/entities/stack.rb', line 113</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/entities/stack.rb', line 145</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_use'>use</span><span class='lparen'>(</span><span class='id identifier rubyid_middleware'>middleware</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_stack'>stack</span><span class='period'>.</span><span class='id identifier rubyid_use'>use</span> <span class='id identifier rubyid_middleware'>middleware</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_use'>use</span><span class='lparen'>(</span><span class='id identifier rubyid_middleware'>middleware</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_plain_stack'>plain_stack</span><span class='period'>.</span><span class='id identifier rubyid_use'>use</span><span class='lparen'>(</span><span class='id identifier rubyid_middleware'>middleware</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
 
   <span class='kw'>self</span>
 <span class='kw'>end</span></pre>
@@ -1475,7 +1634,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Oct 15 22:19:49 2022 by
+  Generated on Sun Oct 16 17:09:53 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>
