@@ -4,7 +4,6 @@ require "spec_helper"
 
 require "convenient_service"
 
-# rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Core::Entities::MethodMiddlewares::Entities::Callers::Base do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
@@ -54,4 +53,3 @@ RSpec.describe ConvenientService::Core::Entities::MethodMiddlewares::Entities::C
   #  end
   # end
 end
-# rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
