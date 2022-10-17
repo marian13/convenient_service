@@ -32,6 +32,18 @@ RSpec.describe ConvenientService::Utils::Array do
     end
   end
 
+  describe ".find_yield" do
+    let(:array) { ["foo bar"] }
+    let(:block) { proc { |item| item.match(/\w+/) } }
+
+    specify do
+      expect { described_class.find_yield(array, &block) }
+        .to delegate_to(ConvenientService::Utils::Array::FindYield, :call)
+        .with_arguments(array, &block)
+        .and_return_its_value
+    end
+  end
+
   describe ".find_last" do
     let(:array) { ["foo"] }
     let(:block) { proc { |item| item[0] == "b" } }
@@ -40,6 +52,18 @@ RSpec.describe ConvenientService::Utils::Array do
       expect { described_class.find_last(array, &block) }
         .to delegate_to(ConvenientService::Utils::Array::FindLast, :call)
         .with_arguments(array, &block)
+        .and_return_its_value
+    end
+  end
+
+  describe ".keep_after" do
+    let(:array) { [:foo, :bar, :baz] }
+    let(:object) { :bar }
+
+    specify do
+      expect { described_class.keep_after(array, object) }
+        .to delegate_to(ConvenientService::Utils::Array::KeepAfter, :call)
+        .with_arguments(array, object)
         .and_return_its_value
     end
   end
