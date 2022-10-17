@@ -11,10 +11,7 @@ module ConvenientService
 
               rules = []
 
-              ##
-              # TODO: Remove `|| result.is_a?(ConvenientService::V1::Plugins::HasResult::Entities::Result)` when V1 is dropped.
-              #
-              rules << ->(result) { result.class.include?(ConvenientService::Service::Plugins::HasResult::Entities::Result::Concern) || result.is_a?(ConvenientService::V1::Plugins::HasResult::Entities::Result) }
+              rules << ->(result) { result.class.include?(ConvenientService::Service::Plugins::HasResult::Entities::Result::Concern) }
               rules << ->(result) { result.failure? }
               rules << ->(result) { result.service.instance_of?(service_class) } if used_of?
               rules << ->(result) { result.data == data } if used_data?
