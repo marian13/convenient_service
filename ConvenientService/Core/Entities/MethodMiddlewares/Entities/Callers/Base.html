@@ -159,7 +159,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#ancestors-instance_method" title="#ancestors (instance method)">#<strong>ancestors</strong>  &#x21d2; Object </a>
+      <a href="#ancestors-instance_method" title="#ancestors (instance method)">#<strong>ancestors</strong>  &#x21d2; Array&lt;Class, Module&gt; </a>
     
 
     
@@ -181,7 +181,30 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#commit_config!-instance_method" title="#commit_config! (instance method)">#<strong>commit_config!</strong>  &#x21d2; Object </a>
+      <a href="#ancestors_greater_than_methods_middlewares_callers-instance_method" title="#ancestors_greater_than_methods_middlewares_callers (instance method)">#<strong>ancestors_greater_than_methods_middlewares_callers</strong>  &#x21d2; Array&lt;Class, Module&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns ancestors before the <code>methods_middlewares_callers</code> module.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#commit_config!-instance_method" title="#commit_config! (instance method)">#<strong>commit_config!</strong>  &#x21d2; void </a>
     
 
     
@@ -227,7 +250,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#methods_middlewares_callers-instance_method" title="#methods_middlewares_callers (instance method)">#<strong>methods_middlewares_callers</strong>  &#x21d2; Object </a>
+      <a href="#methods_middlewares_callers-instance_method" title="#methods_middlewares_callers (instance method)">#<strong>methods_middlewares_callers</strong>  &#x21d2; Module<sup>?</sup> </a>
     
 
     
@@ -249,7 +272,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#resolve_super_method-instance_method" title="#resolve_super_method (instance method)">#<strong>resolve_super_method</strong>(method)  &#x21d2; Method </a>
+      <a href="#resolve_super_method-instance_method" title="#resolve_super_method (instance method)">#<strong>resolve_super_method</strong>(method_name)  &#x21d2; Method<sup>?</sup> </a>
     
 
     
@@ -330,12 +353,12 @@
       <pre class="lines">
 
 
-37
-38
-39</pre>
+40
+41
+42</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/entities/callers/base.rb', line 37</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/entities/callers/base.rb', line 40</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>entity:</span><span class='rparen'>)</span>
   <span class='ivar'>@entity</span> <span class='op'>=</span> <span class='id identifier rubyid_entity'>entity</span>
@@ -402,22 +425,61 @@
       <div class="method_details first">
   <h3 class="signature first" id="ancestors-instance_method">
   
-    #<strong>ancestors</strong>  &#x21d2; <tt>Object</tt> 
+    #<strong>ancestors</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="Class.html" title="ConvenientService::Core::Entities::MethodMiddlewares::Entities::Callers::Class (class)">Class</a></span>, Module&gt;</tt> 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="Class.html" title="ConvenientService::Core::Entities::MethodMiddlewares::Entities::Callers::Class (class)">Class</a></span>, Module&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../../../Support/AbstractMethod/Errors/AbstractMethodNotOverridden.html" title="ConvenientService::Support::AbstractMethod::Errors::AbstractMethodNotOverridden (class)">ConvenientService::Support::AbstractMethod::Errors::AbstractMethodNotOverridden</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>if NOT overridden in descendant.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-26</pre>
+28</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/entities/callers/base.rb', line 26</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/entities/callers/base.rb', line 28</span>
 
 <span class='id identifier rubyid_abstract_method'>abstract_method</span> <span class='symbol'>:ancestors</span></pre>
     </td>
@@ -426,24 +488,149 @@
 </div>
     
       <div class="method_details ">
-  <h3 class="signature " id="commit_config!-instance_method">
+  <h3 class="signature " id="ancestors_greater_than_methods_middlewares_callers-instance_method">
   
-    #<strong>commit_config!</strong>  &#x21d2; <tt>Object</tt> 
-  
-
+    #<strong>ancestors_greater_than_methods_middlewares_callers</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="Class.html" title="ConvenientService::Core::Entities::MethodMiddlewares::Entities::Callers::Class (class)">Class</a></span>, Module&gt;</tt> 
   
 
   
-</h3><table class="source_code">
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns ancestors before the <code>methods_middlewares_callers</code> module. See the example below.
+When ancestors do NOT contain <code>methods_middlewares_callers</code>, returns an empty array.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>The entity is an object.</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='kw'>class</span> <span class='const'><span class='object_link'><a href="../../../../../Service.html" title="ConvenientService::Service (module)">Service</a></span></span>
+  <span class='id identifier rubyid_include'>include</span> <span class='const'><span class='object_link'><a href="../../../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../Core.html" title="ConvenientService::Core (module)">Core</a></span></span>
+
+  <span class='id identifier rubyid_middlewares'>middlewares</span> <span class='symbol'>:result</span> <span class='kw'>do</span>
+    <span class='id identifier rubyid_use'>use</span> <span class='const'><span class='object_link'><a href="../../../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../Plugins.html" title="ConvenientService::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../Plugins.html#Common-constant" title="ConvenientService::Plugins::Common (constant)">Common</a></span></span><span class='op'>::</span><span class='const'>NormalizesEnv</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span>
+
+<span class='id identifier rubyid_entity'>entity</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../Service.html" title="ConvenientService::Service (module)">Service</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+
+<span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_ancestors'>ancestors</span>
+<span class='comment'># [Service::InstanceMethodsMiddlewaresCallers, Service, ConvenientService::Core::InstanceMethods, ConvenientService::Core, ConvenientService::Support::Concern, Object, Kernel, BasicObject]
+</span>
+<span class='id identifier rubyid_ancestors_greater_than_methods_middlewares_callers'>ancestors_greater_than_methods_middlewares_callers</span> <span class='comment'># For the entity defined above.
+</span><span class='comment'># [Service, ConvenientService::Core::InstanceMethods, ConvenientService::Core, ConvenientService::Support::Concern, Object, Kernel, BasicObject]</span></code></pre>
+    
+      
+        <p class="example_title"><div class='inline'><p>The entity is class.</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='kw'>class</span> <span class='const'><span class='object_link'><a href="../../../../../Service.html" title="ConvenientService::Service (module)">Service</a></span></span>
+  <span class='id identifier rubyid_include'>include</span> <span class='const'><span class='object_link'><a href="../../../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../Core.html" title="ConvenientService::Core (module)">Core</a></span></span>
+
+  <span class='id identifier rubyid_middlewares'>middlewares</span> <span class='symbol'>:result</span><span class='comma'>,</span> <span class='label'>scope:</span> <span class='symbol'>:class</span> <span class='kw'>do</span>
+    <span class='id identifier rubyid_use'>use</span> <span class='const'><span class='object_link'><a href="../../../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../Plugins.html" title="ConvenientService::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../Plugins.html#Common-constant" title="ConvenientService::Plugins::Common (constant)">Common</a></span></span><span class='op'>::</span><span class='const'>NormalizesEnv</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span>
+
+<span class='id identifier rubyid_entity'>entity</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../Service.html" title="ConvenientService::Service (module)">Service</a></span></span>
+
+<span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_singleton_class'>singleton_class</span><span class='period'>.</span><span class='id identifier rubyid_ancestors'>ancestors</span>
+<span class='comment'># [Service::ClassMethodsMiddlewaresCallers, #&lt;Class:Service&gt;, ConvenientService::Core::ClassMethods, #&lt;Class:Object&gt;, #&lt;Class:BasicObject&gt;, Class, Module, Object, Kernel, BasicObject]
+</span>
+<span class='id identifier rubyid_ancestors_greater_than_methods_middlewares_callers'>ancestors_greater_than_methods_middlewares_callers</span> <span class='comment'># For the entity defined above.
+</span><span class='comment'># [#&lt;Class:Service&gt;, ConvenientService::Core::ClassMethods, #&lt;Class:Object&gt;, #&lt;Class:BasicObject&gt;, Class, Module, Object, Kernel, BasicObject]# [Service::ClassMethodsMiddlewaresCallers, #&lt;Class:Service&gt;, ConvenientService::Core::ClassMethods, #&lt;Class:Object&gt;, #&lt;Class:BasicObject&gt;, Class, Module, Object, Kernel, BasicObject]</span></code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="Class.html" title="ConvenientService::Core::Entities::MethodMiddlewares::Entities::Callers::Class (class)">Class</a></span>, Module&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-21</pre>
+91
+92
+93</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/entities/callers/base.rb', line 21</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/entities/callers/base.rb', line 91</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_ancestors_greater_than_methods_middlewares_callers'>ancestors_greater_than_methods_middlewares_callers</span>
+  <span class='const'><span class='object_link'><a href="../../../../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../Utils/Array.html" title="ConvenientService::Utils::Array (module)">Array</a></span></span><span class='period'>.</span><span class='id identifier rubyid_keep_after'><span class='object_link'><a href="../../../../../Utils/Array.html#keep_after-class_method" title="ConvenientService::Utils::Array.keep_after (method)">keep_after</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_ancestors'>ancestors</span><span class='comma'>,</span> <span class='id identifier rubyid_methods_middlewares_callers'>methods_middlewares_callers</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="commit_config!-instance_method">
+  
+    #<strong>commit_config!</strong>  &#x21d2; <tt>void</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p class="note returns_void">This method returns an undefined value.</p>
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../../../Support/AbstractMethod/Errors/AbstractMethodNotOverridden.html" title="ConvenientService::Support::AbstractMethod::Errors::AbstractMethodNotOverridden (class)">ConvenientService::Support::AbstractMethod::Errors::AbstractMethodNotOverridden</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>if NOT overridden in descendant.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+22</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/entities/callers/base.rb', line 22</span>
 
 <span class='id identifier rubyid_abstract_method'>abstract_method</span> <span class='symbol'>:commit_config!</span></pre>
     </td>
@@ -454,22 +641,61 @@
       <div class="method_details ">
   <h3 class="signature " id="methods_middlewares_callers-instance_method">
   
-    #<strong>methods_middlewares_callers</strong>  &#x21d2; <tt>Object</tt> 
+    #<strong>methods_middlewares_callers</strong>  &#x21d2; <tt>Module</tt><sup>?</sup> 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Module</tt>, <tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../../../Support/AbstractMethod/Errors/AbstractMethodNotOverridden.html" title="ConvenientService::Support::AbstractMethod::Errors::AbstractMethodNotOverridden (class)">ConvenientService::Support::AbstractMethod::Errors::AbstractMethodNotOverridden</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>if NOT overridden in descendant.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-31</pre>
+34</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/entities/callers/base.rb', line 31</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/entities/callers/base.rb', line 34</span>
 
 <span class='id identifier rubyid_abstract_method'>abstract_method</span> <span class='symbol'>:methods_middlewares_callers</span></pre>
     </td>
@@ -480,7 +706,7 @@
       <div class="method_details ">
   <h3 class="signature " id="resolve_super_method-instance_method">
   
-    #<strong>resolve_super_method</strong>(method)  &#x21d2; <tt>Method</tt> 
+    #<strong>resolve_super_method</strong>(method_name)  &#x21d2; <tt>Method</tt><sup>?</sup> 
   
 
   
@@ -498,7 +724,7 @@
   
     <li>
       
-        <span class='name'>method</span>
+        <span class='name'>method_name</span>
       
       
         <span class='type'>(<tt>Symbol</tt>, <tt>String</tt>)</span>
@@ -515,7 +741,7 @@
     <li>
       
       
-        <span class='type'>(<tt>Method</tt>)</span>
+        <span class='type'>(<tt>Method</tt>, <tt>nil</tt>)</span>
       
       
       
@@ -529,27 +755,27 @@
       <pre class="lines">
 
 
-50
-51
-52
-53
-54
-55
-56
-57
-58</pre>
+99
+100
+101
+102
+103
+104
+105
+106
+107</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/entities/callers/base.rb', line 50</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/entities/callers/base.rb', line 99</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_resolve_super_method'>resolve_super_method</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_resolve_super_method'>resolve_super_method</span><span class='lparen'>(</span><span class='id identifier rubyid_method_name'>method_name</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_commit_config!'>commit_config!</span>
 
-  <span class='id identifier rubyid_ancestors'>ancestors</span>
-    <span class='period'>.</span><span class='id identifier rubyid_then'>then</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_ancestors'>ancestors</span><span class='op'>|</span> <span class='const'><span class='object_link'><a href="../../../../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../Utils/Array.html" title="ConvenientService::Utils::Array (module)">Array</a></span></span><span class='period'>.</span><span class='id identifier rubyid_drop_while'><span class='object_link'><a href="../../../../../Utils/Array.html#drop_while-class_method" title="ConvenientService::Utils::Array.drop_while (method)">drop_while</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_ancestors'>ancestors</span><span class='comma'>,</span> <span class='label'>inclusively:</span> <span class='kw'>true</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_ancestor'>ancestor</span><span class='op'>|</span> <span class='id identifier rubyid_ancestor'>ancestor</span> <span class='op'>!=</span> <span class='id identifier rubyid_methods_middlewares_callers'>methods_middlewares_callers</span> <span class='rbrace'>}</span> <span class='rbrace'>}</span>
-    <span class='period'>.</span><span class='id identifier rubyid_find'>find</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_ancestor'>ancestor</span><span class='op'>|</span> <span class='const'><span class='object_link'><a href="../../../../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../Utils/Module.html" title="ConvenientService::Utils::Module (module)">Module</a></span></span><span class='period'>.</span><span class='id identifier rubyid_has_own_instance_method?'><span class='object_link'><a href="../../../../../Utils/Module.html#has_own_instance_method%3F-class_method" title="ConvenientService::Utils::Module.has_own_instance_method? (method)">has_own_instance_method?</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_ancestor'>ancestor</span><span class='comma'>,</span> <span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='label'>private:</span> <span class='kw'>true</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
-    <span class='period'>.</span><span class='id identifier rubyid_then'>then</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_ancestor'>ancestor</span><span class='op'>|</span> <span class='const'><span class='object_link'><a href="../../../../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../Utils/Module.html" title="ConvenientService::Utils::Module (module)">Module</a></span></span><span class='period'>.</span><span class='id identifier rubyid_get_own_instance_method'><span class='object_link'><a href="../../../../../Utils/Module.html#get_own_instance_method-class_method" title="ConvenientService::Utils::Module.get_own_instance_method (method)">get_own_instance_method</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_ancestor'>ancestor</span><span class='comma'>,</span> <span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='label'>private:</span> <span class='kw'>true</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
-    <span class='period'>.</span><span class='id identifier rubyid_bind'>bind</span><span class='lparen'>(</span><span class='id identifier rubyid_entity'>entity</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_method'>method</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../Utils/Array.html" title="ConvenientService::Utils::Array (module)">Array</a></span></span><span class='period'>.</span><span class='id identifier rubyid_find_yield'><span class='object_link'><a href="../../../../../Utils/Array.html#find_yield-class_method" title="ConvenientService::Utils::Array.find_yield (method)">find_yield</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_ancestors_greater_than_methods_middlewares_callers'>ancestors_greater_than_methods_middlewares_callers</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_ancestor'>ancestor</span><span class='op'>|</span> <span class='const'><span class='object_link'><a href="../../../../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../Utils/Module.html" title="ConvenientService::Utils::Module (module)">Module</a></span></span><span class='period'>.</span><span class='id identifier rubyid_get_own_instance_method'><span class='object_link'><a href="../../../../../Utils/Module.html#get_own_instance_method-class_method" title="ConvenientService::Utils::Module.get_own_instance_method (method)">get_own_instance_method</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_ancestor'>ancestor</span><span class='comma'>,</span> <span class='id identifier rubyid_method_name'>method_name</span><span class='comma'>,</span> <span class='label'>private:</span> <span class='kw'>true</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
+
+  <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_method'>method</span>
+
+  <span class='id identifier rubyid_method'>method</span><span class='period'>.</span><span class='id identifier rubyid_bind'>bind</span><span class='lparen'>(</span><span class='id identifier rubyid_entity'>entity</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -561,7 +787,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Oct 16 17:11:08 2022 by
+  Generated on Mon Oct 17 22:51:49 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>
