@@ -19,7 +19,7 @@ RSpec.describe ConvenientService::Utils::Array::FindLast do
     context "when array contains one item to find" do
       let(:array) { ["foo", "bar"] }
 
-      it "returns that item" do
+      it "returns that found item" do
         expect(result).to eq("bar")
       end
     end
@@ -27,7 +27,7 @@ RSpec.describe ConvenientService::Utils::Array::FindLast do
     context "when array contains multiple items to find" do
       let(:array) { ["foo", "bar", "baz"] }
 
-      it "returns last from those items" do
+      it "returns last from those found items" do
         expect(result).to eq("baz")
       end
     end
