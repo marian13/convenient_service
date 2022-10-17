@@ -61,7 +61,7 @@ module ConvenientService
               #   entity.class.ancestors
               #   # [Service::InstanceMethodsMiddlewaresCallers, Service, ConvenientService::Core::InstanceMethods, ConvenientService::Core, ConvenientService::Support::Concern, Object, Kernel, BasicObject]
               #
-              #   ancestors_before_methods_middlewares_callers # For the entity defined above.
+              #   ancestors_greater_than_methods_middlewares_callers # For the entity defined above.
               #   # [Service, ConvenientService::Core::InstanceMethods, ConvenientService::Core, ConvenientService::Support::Concern, Object, Kernel, BasicObject]
               #
               # @example The entity is class.
@@ -78,10 +78,14 @@ module ConvenientService
               #   entity.singleton_class.ancestors
               #   # [Service::ClassMethodsMiddlewaresCallers, #<Class:Service>, ConvenientService::Core::ClassMethods, #<Class:Object>, #<Class:BasicObject>, Class, Module, Object, Kernel, BasicObject]
               #
-              #   ancestors_before_methods_middlewares_callers # For the entity defined above.
+              #   ancestors_greater_than_methods_middlewares_callers # For the entity defined above.
               #   # [#<Class:Service>, ConvenientService::Core::ClassMethods, #<Class:Object>, #<Class:BasicObject>, Class, Module, Object, Kernel, BasicObject]# [Service::ClassMethodsMiddlewaresCallers, #<Class:Service>, ConvenientService::Core::ClassMethods, #<Class:Object>, #<Class:BasicObject>, Class, Module, Object, Kernel, BasicObject]
               #
-              def ancestors_before_methods_middlewares_callers
+              # @internal
+              #   NOTE: greater than -> higher in the inheritance chain than
+              #   https://ruby-doc.org/core-2.7.0/Module.html#method-i-3E
+              #
+              def ancestors_greater_than_methods_middlewares_callers
                 return [] unless ancestors.include?(methods_middlewares_callers)
 
                 Utils::Array.drop_while(ancestors, inclusively: true) { |ancestor| ancestor != methods_middlewares_callers }
@@ -94,7 +98,7 @@ module ConvenientService
               def resolve_super_method(method)
                 commit_config!
 
-                method = Utils::Array.find_yield(ancestors_before_methods_middlewares_callers) { |ancestor| Utils::Module.get_own_instance_method(ancestor, method, private: true) }
+                method = Utils::Array.find_yield(ancestors_greater_than_methods_middlewares_callers) { |ancestor| Utils::Module.get_own_instance_method(ancestor, method, private: true) }
 
                 return unless method
 

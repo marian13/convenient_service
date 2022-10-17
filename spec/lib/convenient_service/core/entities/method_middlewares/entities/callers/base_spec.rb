@@ -40,7 +40,7 @@ RSpec.describe ConvenientService::Core::Entities::MethodMiddlewares::Entities::C
   end
 
   # example_group "instance methods" do
-  #   describe "ancestors_before_methods_middlewares_callers" do
+  #   describe "ancestors_greater_than_methods_middlewares_callers" do
   #     ##
   #     # TODO:
   #     #
