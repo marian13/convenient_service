@@ -56,6 +56,18 @@ RSpec.describe ConvenientService::Utils::Array do
     end
   end
 
+  describe ".keep_after" do
+    let(:array) { [:foo, :bar, :baz] }
+    let(:object) { :bar }
+
+    specify do
+      expect { described_class.keep_after(array, object) }
+        .to delegate_to(ConvenientService::Utils::Array::KeepAfter, :call)
+        .with_arguments(array, object)
+        .and_return_its_value
+    end
+  end
+
   describe ".merge" do
     let(:array) { [:a, :b, :c] }
     let(:overrides) { {0 => :foo} }

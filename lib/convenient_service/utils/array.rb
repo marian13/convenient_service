@@ -6,6 +6,7 @@ require_relative "array/contain_exactly"
 require_relative "array/drop_while"
 require_relative "array/find_last"
 require_relative "array/find_yield"
+require_relative "array/keep_after"
 require_relative "array/merge"
 require_relative "array/rjust"
 require_relative "array/wrap"
@@ -28,6 +29,10 @@ module ConvenientService
 
         def find_yield(...)
           FindYield.call(...)
+        end
+
+        def keep_after(...)
+          KeepAfter.call(...)
         end
 
         def merge(...)
