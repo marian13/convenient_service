@@ -22,7 +22,7 @@ module ConvenientService
               end
 
               ##
-              # @return [Module]
+              # @return [Module, nil]
               #
               def methods_middlewares_callers
                 Utils::Module.get_own_const(entity.class, :InstanceMethodsMiddlewaresCallers)

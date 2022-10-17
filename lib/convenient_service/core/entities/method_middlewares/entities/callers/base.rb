@@ -28,7 +28,7 @@ module ConvenientService
               abstract_method :ancestors
 
               ##
-              # @return [Module]
+              # @return [Module, nil]
               # @raise [ConvenientService::Support::AbstractMethod::Errors::AbstractMethodNotOverridden] if NOT overridden in descendant.
               #
               abstract_method :methods_middlewares_callers
@@ -94,7 +94,7 @@ module ConvenientService
 
               ##
               # @param method_name [Symbol, String]
-              # @return [Method]
+              # @return [Method, nil]
               #
               def resolve_super_method(method_name)
                 commit_config!
