@@ -337,14 +337,14 @@
       <pre class="lines">
 
 
+43
+44
+45
 46
-47
-48
-49
-50</pre>
+47</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/results/be_error.rb', line 46</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/results/be_error.rb', line 43</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_and_code'>and_code</span><span class='lparen'>(</span><span class='id identifier rubyid_code'>code</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_chain'>chain</span><span class='lbracket'>[</span><span class='symbol'>:code</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_code'>code</span>
@@ -371,14 +371,14 @@
       <pre class="lines">
 
 
+31
+32
+33
 34
-35
-36
-37
-38</pre>
+35</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/results/be_error.rb', line 34</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/results/be_error.rb', line 31</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_and_message'>and_message</span><span class='lparen'>(</span><span class='id identifier rubyid_message'>message</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_chain'>chain</span><span class='lbracket'>[</span><span class='symbol'>:message</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_message'>message</span>
@@ -405,6 +405,9 @@
       <pre class="lines">
 
 
+55
+56
+57
 58
 59
 60
@@ -419,13 +422,10 @@
 69
 70
 71
-72
-73
-74
-75</pre>
+72</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/results/be_error.rb', line 58</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/results/be_error.rb', line 55</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_description'>description</span>
   <span class='comment'>##
@@ -465,6 +465,9 @@
       <pre class="lines">
 
 
+74
+75
+76
 77
 78
 79
@@ -479,13 +482,10 @@
 88
 89
 90
-91
-92
-93
-94</pre>
+91</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/results/be_error.rb', line 77</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/results/be_error.rb', line 74</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_failure_message'>failure_message</span>
   <span class='comment'>##
@@ -535,6 +535,9 @@
       <pre class="lines">
 
 
+96
+97
+98
 99
 100
 101
@@ -549,13 +552,10 @@
 110
 111
 112
-113
-114
-115
-116</pre>
+113</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/results/be_error.rb', line 99</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/results/be_error.rb', line 96</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_failure_message_when_negated'>failure_message_when_negated</span>
   <span class='comment'>##
@@ -631,10 +631,7 @@
 20
 21
 22
-23
-24
-25
-26</pre>
+23</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/results/be_error.rb', line 9</span>
@@ -644,10 +641,7 @@
 
   <span class='id identifier rubyid_rules'>rules</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
 
-  <span class='comment'>##
-</span>  <span class='comment'># TODO: Remove `|| result.is_a?(ConvenientService::V1::Plugins::HasResult::Entities::Result)` when V1 is dropped.
-</span>  <span class='comment'>#
-</span>  <span class='id identifier rubyid_rules'>rules</span> <span class='op'>&lt;&lt;</span> <span class='tlambda'>-&gt;</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span> <span class='tlambeg'>{</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Service.html" title="ConvenientService::Service (module)">Service</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Service/Plugins.html" title="ConvenientService::Service::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Service/Plugins/HasResult.html" title="ConvenientService::Service::Plugins::HasResult (module)">HasResult</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Service/Plugins/HasResult/Entities.html" title="ConvenientService::Service::Plugins::HasResult::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Service/Plugins/HasResult/Entities/Result.html" title="ConvenientService::Service::Plugins::HasResult::Entities::Result (class)">Result</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Service/Plugins/HasResult/Entities/Result/Concern.html" title="ConvenientService::Service::Plugins::HasResult::Entities::Result::Concern (module)">Concern</a></span></span><span class='rparen'>)</span> <span class='op'>||</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'>V1</span><span class='op'>::</span><span class='const'>Plugins</span><span class='op'>::</span><span class='const'>HasResult</span><span class='op'>::</span><span class='const'>Entities</span><span class='op'>::</span><span class='const'>Result</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
+  <span class='id identifier rubyid_rules'>rules</span> <span class='op'>&lt;&lt;</span> <span class='tlambda'>-&gt;</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span> <span class='tlambeg'>{</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Service.html" title="ConvenientService::Service (module)">Service</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Service/Plugins.html" title="ConvenientService::Service::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Service/Plugins/HasResult.html" title="ConvenientService::Service::Plugins::HasResult (module)">HasResult</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Service/Plugins/HasResult/Entities.html" title="ConvenientService::Service::Plugins::HasResult::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Service/Plugins/HasResult/Entities/Result.html" title="ConvenientService::Service::Plugins::HasResult::Entities::Result (class)">Result</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Service/Plugins/HasResult/Entities/Result/Concern.html" title="ConvenientService::Service::Plugins::HasResult::Entities::Result::Concern (module)">Concern</a></span></span><span class='rparen'>)</span> <span class='rbrace'>}</span>
   <span class='id identifier rubyid_rules'>rules</span> <span class='op'>&lt;&lt;</span> <span class='tlambda'>-&gt;</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span> <span class='tlambeg'>{</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_error?'>error?</span> <span class='rbrace'>}</span>
   <span class='id identifier rubyid_rules'>rules</span> <span class='op'>&lt;&lt;</span> <span class='tlambda'>-&gt;</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span> <span class='tlambeg'>{</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='id identifier rubyid_service_class'>service_class</span><span class='rparen'>)</span> <span class='rbrace'>}</span> <span class='kw'>if</span> <span class='id identifier rubyid_used_of?'>used_of?</span>
   <span class='id identifier rubyid_rules'>rules</span> <span class='op'>&lt;&lt;</span> <span class='tlambda'>-&gt;</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span> <span class='tlambeg'>{</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_message'>message</span> <span class='op'>==</span> <span class='id identifier rubyid_message'>message</span> <span class='rbrace'>}</span> <span class='kw'>if</span> <span class='id identifier rubyid_used_message?'>used_message?</span>
@@ -677,14 +671,14 @@
       <pre class="lines">
 
 
+49
+50
+51
 52
-53
-54
-55
-56</pre>
+53</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/results/be_error.rb', line 52</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/results/be_error.rb', line 49</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_of'>of</span><span class='lparen'>(</span><span class='id identifier rubyid_service_class'>service_class</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_chain'>chain</span><span class='lbracket'>[</span><span class='symbol'>:service_class</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_service_class'>service_class</span>
@@ -711,14 +705,14 @@
       <pre class="lines">
 
 
+37
+38
+39
 40
-41
-42
-43
-44</pre>
+41</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/results/be_error.rb', line 40</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/results/be_error.rb', line 37</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_with_code'>with_code</span><span class='lparen'>(</span><span class='id identifier rubyid_code'>code</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_chain'>chain</span><span class='lbracket'>[</span><span class='symbol'>:code</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_code'>code</span>
@@ -745,14 +739,14 @@
       <pre class="lines">
 
 
+25
+26
+27
 28
-29
-30
-31
-32</pre>
+29</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/results/be_error.rb', line 28</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/results/be_error.rb', line 25</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_with_message'>with_message</span><span class='lparen'>(</span><span class='id identifier rubyid_message'>message</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_chain'>chain</span><span class='lbracket'>[</span><span class='symbol'>:message</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_message'>message</span>
@@ -769,7 +763,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Oct 17 22:51:48 2022 by
+  Generated on Mon Oct 17 23:06:08 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>
