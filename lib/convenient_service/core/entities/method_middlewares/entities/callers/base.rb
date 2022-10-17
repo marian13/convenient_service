@@ -82,23 +82,24 @@ module ConvenientService
               #   # [#<Class:Service>, ConvenientService::Core::ClassMethods, #<Class:Object>, #<Class:BasicObject>, Class, Module, Object, Kernel, BasicObject]# [Service::ClassMethodsMiddlewaresCallers, #<Class:Service>, ConvenientService::Core::ClassMethods, #<Class:Object>, #<Class:BasicObject>, Class, Module, Object, Kernel, BasicObject]
               #
               # @internal
-              #   NOTE: greater than -> higher in the inheritance chain than
+              #   NOTE: greater than -> futher in the inheritance chain than
               #   https://ruby-doc.org/core-2.7.0/Module.html#method-i-3E
               #
+              #   NOTE: lower than -> closer in the inheritance chain than
+              #   https://ruby-doc.org/core-2.7.0/Module.html#method-i-ancestors
+              #
               def ancestors_greater_than_methods_middlewares_callers
-                return [] unless ancestors.include?(methods_middlewares_callers)
-
-                Utils::Array.drop_while(ancestors, inclusively: true) { |ancestor| ancestor != methods_middlewares_callers }
+                Utils::Array.keep_after(ancestors, methods_middlewares_callers)
               end
 
               ##
-              # @param method [Symbol, String]
+              # @param method_name [Symbol, String]
               # @return [Method]
               #
-              def resolve_super_method(method)
+              def resolve_super_method(method_name)
                 commit_config!
 
-                method = Utils::Array.find_yield(ancestors_greater_than_methods_middlewares_callers) { |ancestor| Utils::Module.get_own_instance_method(ancestor, method, private: true) }
+                method = Utils::Array.find_yield(ancestors_greater_than_methods_middlewares_callers) { |ancestor| Utils::Module.get_own_instance_method(ancestor, method_name, private: true) }
 
                 return unless method
 
