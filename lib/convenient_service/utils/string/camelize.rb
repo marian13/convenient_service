@@ -36,11 +36,19 @@ module ConvenientService
         # @return [String]
         #
         def call
-          camelized = string.split(/[:_?\-\ ]/).map(&:downcase).map(&:capitalize).join
+          camelized = string.split(/[:_?!\-\ ]/).map { |part| upcase_first_char(part) }.join
 
           camelized[0] = camelized[0].downcase unless capitalize_first_letter
 
           camelized
+        end
+
+        private
+
+        def upcase_first_char(part)
+          return part if part.empty?
+
+          "#{part[0].upcase}#{part[1..]}"
         end
       end
     end

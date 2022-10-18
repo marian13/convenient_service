@@ -40,6 +40,14 @@ RSpec.describe ConvenientService::Utils::String::Camelize do
       end
     end
 
+    context "when string contains exclamation mark" do
+      let(:string) { "foo!" }
+
+      it "returns camelized string" do
+        expect(result).to eq("Foo")
+      end
+    end
+
     context "when string contains dash" do
       let(:string) { "foo-bar" }
 
@@ -53,6 +61,18 @@ RSpec.describe ConvenientService::Utils::String::Camelize do
 
       it "returns camelized string" do
         expect(result).to eq("FooBar")
+      end
+    end
+
+    context "when string contains uppercase letter" do
+      let(:string) { "bAr" }
+
+      ##
+      # NOTE: Does NOT modifies that uppercase letter.
+      # https://textedit.tools/camelcase
+      #
+      it "returns camelized string" do
+        expect(result).to eq("BAr")
       end
     end
   end
