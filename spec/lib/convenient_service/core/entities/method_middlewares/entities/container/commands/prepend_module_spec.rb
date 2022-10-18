@@ -35,7 +35,7 @@ RSpec.describe ConvenientService::Core::Entities::MethodMiddlewares::Entities::C
   ##
   # NOTE: Waits for `should-matchers` full support.
   #
-  # example_group "delegations" do
+  # example_group "delegators" do
   #   include Shoulda::Matchers::Independent
   #
   #   subject { command }

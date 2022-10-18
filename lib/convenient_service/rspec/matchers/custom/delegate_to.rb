@@ -66,6 +66,9 @@ module ConvenientService
           def matches?(block_expectation)
             @block_expectation = block_expectation
 
+            ##
+            # TODO: Support multiple `with_arguments` calls.
+            #
             if used_with_arguments?
               ##
               # NOTE: RSpec `allow(object).to receive(method).with(*args, **kwargs)` does NOT support block.
@@ -81,6 +84,8 @@ module ConvenientService
                 ##
                 # TODO: Provide customized error messages?
                 # https://relishapp.com/rspec/rspec-expectations/docs/customized-message
+                #
+                # NOTE: `delegate_to` expects that delegation is executed only once during `block_expectation`.
                 #
                 expect(actual_args).to eq(expected_args)
                 expect(actual_kwargs).to eq(expected_kwargs)

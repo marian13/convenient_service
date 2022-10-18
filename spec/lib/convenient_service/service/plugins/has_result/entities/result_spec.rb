@@ -37,7 +37,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result 
   ##
   # NOTE: Waits for `should-matchers` full support.
   #
-  # example_group "delegations" do
+  # example_group "delegators" do
   #   include Shoulda::Matchers::Independent
   #
   #   subject { result }

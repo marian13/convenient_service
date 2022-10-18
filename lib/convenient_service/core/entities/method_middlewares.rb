@@ -60,6 +60,10 @@ module ConvenientService
         #
         # @return [Object]
         #
+        # @internal
+        #   Stack backend will be rewritten in Core v3 in order to optimize performance of `stack.dup`.
+        #   TODO: Measure before any rewrite.
+        #
         def call(env, original)
           stack.dup.use(original).call(env.merge(method: method))
         end
@@ -102,7 +106,7 @@ module ConvenientService
 
         ##
         # @!attribute [r] container
-        #   @return [Class]
+        #   @return [ConvenientService::Core::Entities::MethodMiddlewares::Entities::Container]
         #
         attr_reader :container
 
@@ -119,32 +123,7 @@ module ConvenientService
         # @return [String]
         #
         def stack_name
-          @stack_name ||= "#{container.service_class}::MethodMiddlewares::#{camelized_scope}::#{camelized_method}"
-        end
-
-        ##
-        # @return [String]
-        #
-        def camelized_scope
-          Utils::String.camelize(scope)
-        end
-
-        ##
-        # @return [String]
-        #
-        def camelized_method
-          camelized = Utils::String.camelize(method)
-
-          prefix =
-            if method.end_with?("?")
-              "QuestionMark"
-            elsif method.end_with?("!")
-              "ExclamationMark"
-            end
-
-          camelized += prefix if prefix
-
-          camelized
+          @stack_name ||= Commands::GenerateStackName.call(method: method, scope: scope, container: container)
         end
       end
     end
