@@ -362,7 +362,9 @@
 28
 29
 30
-31</pre>
+31
+32
+33</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/commands/cast_caller.rb', line 26</span>
@@ -371,6 +373,8 @@
   <span class='kw'>case</span> <span class='id identifier rubyid_other'>other</span>
   <span class='kw'>when</span> <span class='op'>::</span><span class='const'>Hash</span>
     <span class='id identifier rubyid_cast_hash'>cast_hash</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
+  <span class='kw'>when</span> <span class='const'><span class='object_link'><a href="../Entities.html" title="ConvenientService::Core::Entities::MethodMiddlewares::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Entities/Callers.html" title="ConvenientService::Core::Entities::MethodMiddlewares::Entities::Callers (class)">Callers</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Entities/Callers/Base.html" title="ConvenientService::Core::Entities::MethodMiddlewares::Entities::Callers::Base (class)">Base</a></span></span>
+    <span class='id identifier rubyid_cast_caller'>cast_caller</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -383,7 +387,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Oct 17 23:06:10 2022 by
+  Generated on Tue Oct 18 18:18:23 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>
