@@ -8,6 +8,7 @@ module ConvenientService
           class Callers
             class Base
               include Support::AbstractMethod
+              include Support::Copyable
 
               ##
               # @!attribute [r] entity
@@ -104,6 +105,25 @@ module ConvenientService
                 return unless method
 
                 method.bind(entity)
+              end
+
+              ##
+              # @param other [ConvenientService::Core::Entities::MethodMiddlewares::Entities::Callers::Base, Object]
+              # @return [Boolean]
+              #
+              def ==(other)
+                return unless other.instance_of?(self.class)
+
+                return false if entity != other.entity
+
+                true
+              end
+
+              ##
+              # @return [Hash]
+              #
+              def to_kwargs
+                {entity: entity}
               end
             end
           end
