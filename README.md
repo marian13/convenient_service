@@ -1,3 +1,11 @@
+<!-- stand_with_ukraine:start -->
+<h1 align="center">
+  #StandWithUkraine
+</h1>
+
+[![SWUbanner](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/banner-direct.svg)](https://vshymanskyy.github.io/StandWithUkraine)
+<!-- stand_with_ukraine:end -->
+
 <!-- header:start -->
 <!-- TODO: Remove html to display in YARD with commonmark -->
 <h1 align="center">
