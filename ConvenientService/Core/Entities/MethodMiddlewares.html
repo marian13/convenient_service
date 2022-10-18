@@ -95,7 +95,7 @@
   <dl>
     <dt>Defined in:</dt>
     <dd>lib/convenient_service/core/entities/method_middlewares.rb<span class="defines">,<br />
-  lib/convenient_service/core/entities/method_middlewares/entities/chain.rb,<br /> lib/convenient_service/core/entities/method_middlewares/entities/stack.rb,<br /> lib/convenient_service/core/entities/method_middlewares/entities/container.rb,<br /> lib/convenient_service/core/entities/method_middlewares/entities/middleware.rb,<br /> lib/convenient_service/core/entities/method_middlewares/commands/cast_caller.rb,<br /> lib/convenient_service/core/entities/method_middlewares/entities/callers/base.rb,<br /> lib/convenient_service/core/entities/method_middlewares/entities/callers/class.rb,<br /> lib/convenient_service/core/entities/method_middlewares/entities/callers/instance.rb,<br /> lib/convenient_service/core/entities/method_middlewares/entities/container/commands/prepend_module.rb,<br /> lib/convenient_service/core/entities/method_middlewares/entities/container/commands/define_method_middlewares_caller.rb,<br /> lib/convenient_service/core/entities/method_middlewares/entities/container/commands/resolve_methods_middlewares_callers.rb</span>
+  lib/convenient_service/core/entities/method_middlewares/entities/chain.rb,<br /> lib/convenient_service/core/entities/method_middlewares/entities/stack.rb,<br /> lib/convenient_service/core/entities/method_middlewares/entities/container.rb,<br /> lib/convenient_service/core/entities/method_middlewares/entities/middleware.rb,<br /> lib/convenient_service/core/entities/method_middlewares/commands/cast_caller.rb,<br /> lib/convenient_service/core/entities/method_middlewares/entities/callers/base.rb,<br /> lib/convenient_service/core/entities/method_middlewares/entities/callers/class.rb,<br /> lib/convenient_service/core/entities/method_middlewares/entities/callers/instance.rb,<br /> lib/convenient_service/core/entities/method_middlewares/commands/generate_stack_name.rb,<br /> lib/convenient_service/core/entities/method_middlewares/entities/container/commands/prepend_module.rb,<br /> lib/convenient_service/core/entities/method_middlewares/entities/container/commands/define_method_middlewares_caller.rb,<br /> lib/convenient_service/core/entities/method_middlewares/entities/container/commands/resolve_methods_middlewares_callers.rb</span>
 </dd>
   </dl>
   
@@ -541,19 +541,19 @@
       <pre class="lines">
 
 
-71
-72
-73
-74
 75
 76
 77
 78
 79
-80</pre>
+80
+81
+82
+83
+84</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares.rb', line 71</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares.rb', line 75</span>
 
 <span class='kw'>def</span> <span class='op'>==</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='rparen'>)</span>
@@ -608,12 +608,12 @@
       <pre class="lines">
 
 
-63
-64
-65</pre>
+67
+68
+69</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares.rb', line 63</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares.rb', line 67</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_env'>env</span><span class='comma'>,</span> <span class='id identifier rubyid_original'>original</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_stack'>stack</span><span class='period'>.</span><span class='id identifier rubyid_dup'>dup</span><span class='period'>.</span><span class='id identifier rubyid_use'>use</span><span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_env'>env</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='label'>method:</span> <span class='id identifier rubyid_method'>method</span><span class='rparen'>)</span><span class='rparen'>)</span>
@@ -784,12 +784,12 @@
       <pre class="lines">
 
 
-85
-86
-87</pre>
+89
+90
+91</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares.rb', line 85</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares.rb', line 89</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_a'>to_a</span>
   <span class='id identifier rubyid_stack'>stack</span><span class='period'>.</span><span class='id identifier rubyid_to_a'>to_a</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:first</span><span class='rparen'>)</span>
@@ -804,7 +804,7 @@
 </div>
 
       <div id="footer">
-  Generated on Tue Oct 18 21:19:57 2022 by
+  Generated on Tue Oct 18 21:22:28 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>
