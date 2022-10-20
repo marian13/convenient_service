@@ -14,8 +14,8 @@ RSpec.describe ConvenientService::Utils::Proc::Conjunct do
     context "when procs array is empty" do
       let(:procs) { [] }
 
-      it "returns proc that always evaluates to false" do
-        expect(conjuction[item]).to eq(false)
+      it "returns proc that always evaluates to true" do
+        expect(conjuction[item]).to eq(true)
       end
     end
 
