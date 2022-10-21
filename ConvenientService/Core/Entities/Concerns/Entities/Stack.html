@@ -103,67 +103,6 @@
 
 
 
-  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
-  <ul class="summary">
-    
-      <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#entity-instance_method" title="#entity (instance method)">#<strong>entity</strong>  &#x21d2; Object </a>
-    
-
-    
-  </span>
-  
-  
-  
-    
-      <span class="note title readonly">readonly</span>
-    
-    
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'><p>Returns the value of attribute entity.</p>
-</div></span>
-  
-</li>
-
-    
-      <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#stack-instance_method" title="#stack (instance method)">#<strong>stack</strong>  &#x21d2; Object </a>
-    
-
-    
-  </span>
-  
-  
-  
-    
-      <span class="note title readonly">readonly</span>
-    
-    
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'><p>Returns the value of attribute stack.</p>
-</div></span>
-  
-</li>
-
-    
-  </ul>
-
 
 
 
@@ -259,8 +198,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>NOTE: This method is a subject to change.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'></div></span>
   
 </li>
 
@@ -268,7 +206,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(entity:)  &#x21d2; Stack </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(name:)  &#x21d2; void </a>
     
 
     
@@ -284,8 +222,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>A new instance of Stack.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'></div></span>
   
 </li>
 
@@ -403,7 +340,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#to_a-instance_method" title="#to_a (instance method)">#<strong>to_a</strong>  &#x21d2; Object </a>
+      <a href="#to_a-instance_method" title="#to_a (instance method)">#<strong>to_a</strong>  &#x21d2; Array </a>
     
 
     
@@ -417,8 +354,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>NOTE: This method is a subject to change.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'></div></span>
   
 </li>
 
@@ -454,7 +390,7 @@
     <div class="method_details first">
   <h3 class="signature first" id="initialize-instance_method">
   
-    #<strong>initialize</strong>(entity:)  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::Core::Entities::Concerns::Entities::Stack (class)">Stack</a></span></tt> 
+    #<strong>initialize</strong>(name:)  &#x21d2; <tt>void</tt> 
   
 
   
@@ -462,13 +398,27 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a new instance of Stack.</p>
-
+    
 
   </div>
 </div>
 <div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
   
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
 
 </div><table class="source_code">
   <tr>
@@ -476,17 +426,15 @@
       <pre class="lines">
 
 
-11
-12
 13
-14</pre>
+14
+15</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns/entities/stack.rb', line 11</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns/entities/stack.rb', line 13</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>entity:</span><span class='rparen'>)</span>
-  <span class='ivar'>@stack</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Support/Middleware.html" title="ConvenientService::Support::Middleware (module)">Middleware</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Support/Middleware/StackBuilder.html" title="ConvenientService::Support::Middleware::StackBuilder (class)">StackBuilder</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../../../Support/Middleware/StackBuilder.html#initialize-instance_method" title="ConvenientService::Support::Middleware::StackBuilder#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>name:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Concerns::</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_entity'>entity</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
-  <span class='ivar'>@entity</span> <span class='op'>=</span> <span class='id identifier rubyid_entity'>entity</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>name:</span><span class='rparen'>)</span>
+  <span class='ivar'>@plain_stack</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Support/Middleware.html" title="ConvenientService::Support::Middleware (module)">Middleware</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Support/Middleware/StackBuilder.html" title="ConvenientService::Support::Middleware::StackBuilder (class)">StackBuilder</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../../../Support/Middleware/StackBuilder.html#initialize-instance_method" title="ConvenientService::Support::Middleware::StackBuilder#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>name:</span> <span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -494,95 +442,6 @@
 </div>
   
 </div>
-
-  <div id="instance_attr_details" class="attr_details">
-    <h2>Instance Attribute Details</h2>
-    
-      
-      <span id=""></span>
-      <div class="method_details first">
-  <h3 class="signature first" id="entity-instance_method">
-  
-    #<strong>entity</strong>  &#x21d2; <tt>Object</tt>  <span class="extras">(readonly)</span>
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    <p>Returns the value of attribute entity.</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-9
-10
-11</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns/entities/stack.rb', line 9</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_entity'>entity</span>
-  <span class='ivar'>@entity</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      
-      <span id=""></span>
-      <div class="method_details ">
-  <h3 class="signature " id="stack-instance_method">
-  
-    #<strong>stack</strong>  &#x21d2; <tt>Object</tt>  <span class="extras">(readonly)</span>
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    <p>Returns the value of attribute stack.</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-9
-10
-11</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns/entities/stack.rb', line 9</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_stack'>stack</span>
-  <span class='ivar'>@stack</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-  </div>
 
 
   <div id="instance_method_details" class="method_details_list">
@@ -641,21 +500,21 @@
       <pre class="lines">
 
 
+121
 122
 123
 124
 125
 126
-127
-128</pre>
+127</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns/entities/stack.rb', line 122</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns/entities/stack.rb', line 121</span>
 
 <span class='kw'>def</span> <span class='op'>==</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='rparen'>)</span>
 
-  <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='id identifier rubyid_stack'>stack</span> <span class='op'>!=</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_stack'>stack</span>
+  <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='id identifier rubyid_plain_stack'>plain_stack</span> <span class='op'>!=</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_plain_stack'>plain_stack</span>
 
   <span class='kw'>true</span>
 <span class='kw'>end</span></pre>
@@ -737,7 +596,7 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns/entities/stack.rb', line 26</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_env'>env</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_stack'>stack</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_env'>env</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_plain_stack'>plain_stack</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_env'>env</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -806,7 +665,7 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns/entities/stack.rb', line 87</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='id identifier rubyid_index_or_concern'>index_or_concern</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_stack'>stack</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span> <span class='id identifier rubyid_cast'>cast</span><span class='lparen'>(</span><span class='id identifier rubyid_index_or_concern'>index_or_concern</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_plain_stack'>plain_stack</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span> <span class='id identifier rubyid_cast'>cast</span><span class='lparen'>(</span><span class='id identifier rubyid_index_or_concern'>index_or_concern</span><span class='rparen'>)</span>
 
   <span class='kw'>self</span>
 <span class='kw'>end</span></pre>
@@ -826,9 +685,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>NOTE: This method is a subject to change.
-TODO: Refactor.</p>
-
+    
 
   </div>
 </div>
@@ -854,12 +711,12 @@ TODO: Refactor.</p>
       <pre class="lines">
 
 
+106
 107
-108
-109</pre>
+108</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns/entities/stack.rb', line 107</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns/entities/stack.rb', line 106</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_empty?'>empty?</span>
   <span class='id identifier rubyid_to_a'>to_a</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
@@ -942,7 +799,7 @@ TODO: Refactor.</p>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns/entities/stack.rb', line 46</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_insert_after'>insert_after</span><span class='lparen'>(</span><span class='id identifier rubyid_index_or_concern'>index_or_concern</span><span class='comma'>,</span> <span class='id identifier rubyid_concern'>concern</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_stack'>stack</span><span class='period'>.</span><span class='id identifier rubyid_insert_after'>insert_after</span> <span class='id identifier rubyid_cast'>cast</span><span class='lparen'>(</span><span class='id identifier rubyid_index_or_concern'>index_or_concern</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='id identifier rubyid_cast'>cast</span><span class='lparen'>(</span><span class='id identifier rubyid_concern'>concern</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_plain_stack'>plain_stack</span><span class='period'>.</span><span class='id identifier rubyid_insert_after'>insert_after</span> <span class='id identifier rubyid_cast'>cast</span><span class='lparen'>(</span><span class='id identifier rubyid_index_or_concern'>index_or_concern</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='id identifier rubyid_cast'>cast</span><span class='lparen'>(</span><span class='id identifier rubyid_concern'>concern</span><span class='rparen'>)</span>
 
   <span class='kw'>self</span>
 <span class='kw'>end</span></pre>
@@ -1013,7 +870,7 @@ TODO: Refactor.</p>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns/entities/stack.rb', line 66</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_insert_after_each'>insert_after_each</span><span class='lparen'>(</span><span class='id identifier rubyid_concern'>concern</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_stack'>stack</span><span class='period'>.</span><span class='id identifier rubyid_insert_after_each'>insert_after_each</span> <span class='id identifier rubyid_cast'>cast</span><span class='lparen'>(</span><span class='id identifier rubyid_concern'>concern</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_plain_stack'>plain_stack</span><span class='period'>.</span><span class='id identifier rubyid_insert_after_each'>insert_after_each</span> <span class='id identifier rubyid_cast'>cast</span><span class='lparen'>(</span><span class='id identifier rubyid_concern'>concern</span><span class='rparen'>)</span>
 
   <span class='kw'>self</span>
 <span class='kw'>end</span></pre>
@@ -1095,7 +952,7 @@ TODO: Refactor.</p>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns/entities/stack.rb', line 35</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_insert_before'>insert_before</span><span class='lparen'>(</span><span class='id identifier rubyid_index_or_concern'>index_or_concern</span><span class='comma'>,</span> <span class='id identifier rubyid_concern'>concern</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_stack'>stack</span><span class='period'>.</span><span class='id identifier rubyid_insert_before'>insert_before</span> <span class='id identifier rubyid_cast'>cast</span><span class='lparen'>(</span><span class='id identifier rubyid_index_or_concern'>index_or_concern</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='id identifier rubyid_cast'>cast</span><span class='lparen'>(</span><span class='id identifier rubyid_concern'>concern</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_plain_stack'>plain_stack</span><span class='period'>.</span><span class='id identifier rubyid_insert_before'>insert_before</span> <span class='id identifier rubyid_cast'>cast</span><span class='lparen'>(</span><span class='id identifier rubyid_index_or_concern'>index_or_concern</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='id identifier rubyid_cast'>cast</span><span class='lparen'>(</span><span class='id identifier rubyid_concern'>concern</span><span class='rparen'>)</span>
 
   <span class='kw'>self</span>
 <span class='kw'>end</span></pre>
@@ -1166,7 +1023,7 @@ TODO: Refactor.</p>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns/entities/stack.rb', line 56</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_insert_before_each'>insert_before_each</span><span class='lparen'>(</span><span class='id identifier rubyid_concern'>concern</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_stack'>stack</span><span class='period'>.</span><span class='id identifier rubyid_insert_before_each'>insert_before_each</span> <span class='id identifier rubyid_cast'>cast</span><span class='lparen'>(</span><span class='id identifier rubyid_concern'>concern</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_plain_stack'>plain_stack</span><span class='period'>.</span><span class='id identifier rubyid_insert_before_each'>insert_before_each</span> <span class='id identifier rubyid_cast'>cast</span><span class='lparen'>(</span><span class='id identifier rubyid_concern'>concern</span><span class='rparen'>)</span>
 
   <span class='kw'>self</span>
 <span class='kw'>end</span></pre>
@@ -1248,7 +1105,7 @@ TODO: Refactor.</p>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns/entities/stack.rb', line 77</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_replace'>replace</span><span class='lparen'>(</span><span class='id identifier rubyid_index_or_concern'>index_or_concern</span><span class='comma'>,</span> <span class='id identifier rubyid_concern'>concern</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_stack'>stack</span><span class='period'>.</span><span class='id identifier rubyid_replace'>replace</span> <span class='id identifier rubyid_cast'>cast</span><span class='lparen'>(</span><span class='id identifier rubyid_index_or_concern'>index_or_concern</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='id identifier rubyid_cast'>cast</span><span class='lparen'>(</span><span class='id identifier rubyid_concern'>concern</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_plain_stack'>plain_stack</span><span class='period'>.</span><span class='id identifier rubyid_replace'>replace</span> <span class='id identifier rubyid_cast'>cast</span><span class='lparen'>(</span><span class='id identifier rubyid_index_or_concern'>index_or_concern</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='id identifier rubyid_cast'>cast</span><span class='lparen'>(</span><span class='id identifier rubyid_concern'>concern</span><span class='rparen'>)</span>
 
   <span class='kw'>self</span>
 <span class='kw'>end</span></pre>
@@ -1260,7 +1117,7 @@ TODO: Refactor.</p>
       <div class="method_details ">
   <h3 class="signature " id="to_a-instance_method">
   
-    #<strong>to_a</strong>  &#x21d2; <tt>Object</tt> 
+    #<strong>to_a</strong>  &#x21d2; <tt>Array</tt> 
   
 
   
@@ -1268,13 +1125,25 @@ TODO: Refactor.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>NOTE: This method is a subject to change.</p>
-
+    
 
   </div>
 </div>
 <div class="tags">
   
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
 
 </div><table class="source_code">
   <tr>
@@ -1282,15 +1151,15 @@ TODO: Refactor.</p>
       <pre class="lines">
 
 
+113
 114
-115
-116</pre>
+115</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns/entities/stack.rb', line 114</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns/entities/stack.rb', line 113</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_a'>to_a</span>
-  <span class='id identifier rubyid_stack'>stack</span><span class='period'>.</span><span class='id identifier rubyid_to_a'>to_a</span>
+  <span class='id identifier rubyid_plain_stack'>plain_stack</span><span class='period'>.</span><span class='id identifier rubyid_to_a'>to_a</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1359,7 +1228,7 @@ TODO: Refactor.</p>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns/entities/stack.rb', line 97</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_use'>use</span><span class='lparen'>(</span><span class='id identifier rubyid_concern'>concern</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_stack'>stack</span><span class='period'>.</span><span class='id identifier rubyid_use'>use</span> <span class='id identifier rubyid_cast'>cast</span><span class='lparen'>(</span><span class='id identifier rubyid_concern'>concern</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_plain_stack'>plain_stack</span><span class='period'>.</span><span class='id identifier rubyid_use'>use</span> <span class='id identifier rubyid_cast'>cast</span><span class='lparen'>(</span><span class='id identifier rubyid_concern'>concern</span><span class='rparen'>)</span>
 
   <span class='kw'>self</span>
 <span class='kw'>end</span></pre>
@@ -1373,7 +1242,7 @@ TODO: Refactor.</p>
 </div>
 
       <div id="footer">
-  Generated on Fri Oct 21 21:32:01 2022 by
+  Generated on Fri Oct 21 23:54:44 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>

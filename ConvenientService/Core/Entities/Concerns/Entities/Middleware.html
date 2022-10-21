@@ -103,39 +103,6 @@
 
 
 
-  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
-  <ul class="summary">
-    
-      <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#stack-instance_method" title="#stack (instance method)">#<strong>stack</strong>  &#x21d2; Object </a>
-    
-
-    
-  </span>
-  
-  
-  
-    
-      <span class="note title readonly">readonly</span>
-    
-    
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'><p>Returns the value of attribute stack.</p>
-</div></span>
-  
-</li>
-
-    
-  </ul>
-
 
 
 
@@ -172,7 +139,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(stack)  &#x21d2; Middleware </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(stack)  &#x21d2; void </a>
     
 
     
@@ -188,8 +155,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>A new instance of Middleware.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'></div></span>
   
 </li>
 
@@ -203,7 +169,7 @@
     <div class="method_details first">
   <h3 class="signature first" id="initialize-instance_method">
   
-    #<strong>initialize</strong>(stack)  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::Core::Entities::Concerns::Entities::Middleware (class)">Middleware</a></span></tt> 
+    #<strong>initialize</strong>(stack)  &#x21d2; <tt>void</tt> 
   
 
   
@@ -211,13 +177,27 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a new instance of Middleware.</p>
-
+    
 
   </div>
 </div>
 <div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
   
+    <li>
+      
+        <span class='name'>stack</span>
+      
+      
+        <span class='type'>(<tt>#<span class='object_link'><a href="#call-instance_method" title="ConvenientService::Core::Entities::Concerns::Entities::Middleware#call (method)">call</a></span>&lt;Hash&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
 
 </div><table class="source_code">
   <tr>
@@ -225,12 +205,12 @@
       <pre class="lines">
 
 
-11
-12
-13</pre>
+13
+14
+15</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns/entities/middleware.rb', line 11</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns/entities/middleware.rb', line 13</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_stack'>stack</span><span class='rparen'>)</span>
   <span class='ivar'>@stack</span> <span class='op'>=</span> <span class='id identifier rubyid_stack'>stack</span>
@@ -241,53 +221,6 @@
 </div>
   
 </div>
-
-  <div id="instance_attr_details" class="attr_details">
-    <h2>Instance Attribute Details</h2>
-    
-      
-      <span id=""></span>
-      <div class="method_details first">
-  <h3 class="signature first" id="stack-instance_method">
-  
-    #<strong>stack</strong>  &#x21d2; <tt>Object</tt>  <span class="extras">(readonly)</span>
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    <p>Returns the value of attribute stack.</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-9
-10
-11</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns/entities/middleware.rb', line 9</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_stack'>stack</span>
-  <span class='ivar'>@stack</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-  </div>
 
 
   <div id="instance_method_details" class="method_details_list">
@@ -351,19 +284,19 @@
       <pre class="lines">
 
 
-21
-22
 23
 24
-25</pre>
+25
+26
+27</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns/entities/middleware.rb', line 21</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns/entities/middleware.rb', line 23</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_env'>env</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_env'>env</span><span class='lbracket'>[</span><span class='symbol'>:entity</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_include'>include</span> <span class='id identifier rubyid_concern'>concern</span>
 
-  <span class='id identifier rubyid_stack'>stack</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_env'>env</span><span class='rparen'>)</span>
+  <span class='ivar'>@stack</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_env'>env</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -375,7 +308,7 @@
 </div>
 
       <div id="footer">
-  Generated on Fri Oct 21 21:32:02 2022 by
+  Generated on Fri Oct 21 23:54:45 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>
