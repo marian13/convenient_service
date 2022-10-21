@@ -27,7 +27,7 @@ RSpec.describe ConvenientService::Core::Entities::MethodMiddlewares::Entities::C
     describe "define_method_middlewares_caller!" do
       before do
         ##
-        # NOTE: Returns `true` when called for the first time, `false` for all the sebsequent calls.
+        # NOTE: Returns `true` when called for the first time, `false` for all the subsequent calls.
         # NOTE: Used for `and_return_its_value`.
         # https://github.com/marian13/convenient_service/blob/c5b3adc4a0edc2d631dd1f44f914c28eeafefe1d/lib/convenient_service/rspec/matchers/custom/delegate_to.rb#L105
         #

@@ -37,9 +37,6 @@ module ConvenientService
         # @param configuration_block [Proc]
         # @return [ConvenientService::Core::Entities::MethodMiddlewares]
         #
-        # @internal
-        #   TODO: Util to check if block has one required positional argument.
-        #
         def configure(&configuration_block)
           Utils::Proc.exec_config(configuration_block, stack)
 
@@ -56,16 +53,17 @@ module ConvenientService
         end
 
         ##
-        # TODO: Simplify.
-        #
+        # @param env [Hash]
+        # @param original_method [Proc]
         # @return [Object]
         #
         # @internal
-        #   Stack backend will be rewritten in Core v3 in order to optimize performance of `stack.dup`.
+        #   NOTE: Stack is copied in order to be thread-safe.
+        #   NOTE: Stack backend will be rewritten in Core v3 in order to optimize performance of `stack.dup`.
         #   TODO: Measure before any rewrite.
         #
-        def call(env, original)
-          stack.dup.use(original).call(env.merge(method: method))
+        def call(env, original_method)
+          stack.dup.use(original_method).call(env.merge(method: method))
         end
 
         ##
