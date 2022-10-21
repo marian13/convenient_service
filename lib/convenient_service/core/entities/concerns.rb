@@ -8,10 +8,11 @@ module ConvenientService
     module Entities
       class Concerns
         ##
+        # @param entity [Class]
         # @return [void]
         #
         def initialize(entity:)
-          @stack = Entities::Stack.new(entity: entity)
+          @entity = entity
         end
 
         ##
@@ -69,10 +70,7 @@ module ConvenientService
 
         ##
         # @param configuration_block [Proc]
-        # @return [ConvenientService::Core::Entities::MethodMiddlewares]
-        #
-        # @internal
-        #   TODO: Util to check if block has one required positional argument.
+        # @return [ConvenientService::Core::Entities::Concerns]
         #
         def configure(&configuration_block)
           Utils::Proc.exec_config(configuration_block, stack)
@@ -91,7 +89,7 @@ module ConvenientService
         def include!
           return false if included?
 
-          stack.dup.insert_before(0, Entities::DefaultConcern).call(entity: stack.entity)
+          stack.dup.insert_before(0, Entities::DefaultConcern).call(entity: entity)
 
           true
         end
@@ -105,7 +103,7 @@ module ConvenientService
         #   IMPORTANT: `included?` should be thread-safe.
         #
         def included?
-          stack.entity.include?(Entities::DefaultConcern)
+          entity.include?(Entities::DefaultConcern)
         end
 
         ##
@@ -115,6 +113,7 @@ module ConvenientService
         def ==(other)
           return unless other.instance_of?(self.class)
 
+          return false if entity != other.entity
           return false if stack != other.stack
 
           true
@@ -130,10 +129,17 @@ module ConvenientService
         protected
 
         ##
-        # @!attribute [r] stack
-        #   @return [ConvenientService::Core::Entities::Concerns::Entities::Stack]
+        # @!attribute [r] entity
+        #   @return [Class]
         #
-        attr_reader :stack
+        attr_reader :entity
+
+        ##
+        # @return [ConvenientService::Core::Entities::Concerns::Entities::Stack]
+        #
+        def stack
+          @stack ||= Entities::Stack.new(name: stack_name)
+        end
 
         private
 
@@ -204,6 +210,13 @@ module ConvenientService
         #
         def class_methods_modules
           plain_concerns.filter_map { |concern| Utils::Module.get_own_const(concern, :ClassMethods) }
+        end
+
+        ##
+        # @return [String]
+        #
+        def stack_name
+          "Concerns::#{entity}"
         end
       end
     end

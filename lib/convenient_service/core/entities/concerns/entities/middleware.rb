@@ -6,8 +6,10 @@ module ConvenientService
       class Concerns
         module Entities
           class Middleware
-            attr_reader :stack
-
+            ##
+            # @param stack [#call<Hash>]
+            # @return [void]
+            #
             def initialize(stack)
               @stack = stack
             end
@@ -21,15 +23,16 @@ module ConvenientService
             def call(env)
               env[:entity].include concern
 
-              stack.call(env)
+              @stack.call(env)
             end
 
             private
 
             ##
-            # NOTE: `self.class.concern` is overridden by descendants. Descendants are created dynamically. See `Concerns::MiddlewareStack#cast`.
+            # @internal
+            #   NOTE: `self.class.concern` is overridden by descendants. Descendants are created dynamically. See `Concerns::MiddlewareStack#cast`.
             #
-            # IMPORTANT: Must be kept in sync with `cast` in `ConvenientService::Core::Entities::Concerns::MiddlewareStack`.
+            #   IMPORTANT: Must be kept in sync with `cast` in `ConvenientService::Core::Entities::Concerns::MiddlewareStack`.
             #
             def concern
               self.class.concern

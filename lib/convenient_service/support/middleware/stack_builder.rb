@@ -34,6 +34,7 @@ module ConvenientService
         def ==(other)
           return unless other.instance_of?(self.class)
 
+          return false if name != other.name
           return false if stack != other.stack
 
           true

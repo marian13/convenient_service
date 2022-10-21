@@ -6,11 +6,12 @@ module ConvenientService
       class Concerns
         module Entities
           class Stack
-            attr_reader :stack, :entity
-
-            def initialize(entity:)
-              @stack = Support::Middleware::StackBuilder.new(name: "Concerns::#{entity}")
-              @entity = entity
+            ##
+            # @param name [String]
+            # @return [void]
+            #
+            def initialize(name:)
+              @plain_stack = Support::Middleware::StackBuilder.new(name: name)
             end
 
             ##
@@ -20,11 +21,10 @@ module ConvenientService
             # @see https://github.com/marian13/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L132
             #
             # @param env [Hash]
-            #
             # @return Value of the last middleware invocation in the stack.
             #
             def call(env)
-              stack.call(env)
+              plain_stack.call(env)
             end
 
             ##
@@ -33,7 +33,7 @@ module ConvenientService
             # @return [ConvenientService::Core::Entities::Concerns::Entities::Stack]
             #
             def insert_before(index_or_concern, concern)
-              stack.insert_before cast(index_or_concern), cast(concern)
+              plain_stack.insert_before cast(index_or_concern), cast(concern)
 
               self
             end
@@ -44,7 +44,7 @@ module ConvenientService
             # @return [ConvenientService::Core::Entities::Concerns::Entities::Stack]
             #
             def insert_after(index_or_concern, concern)
-              stack.insert_after cast(index_or_concern), cast(concern)
+              plain_stack.insert_after cast(index_or_concern), cast(concern)
 
               self
             end
@@ -54,7 +54,7 @@ module ConvenientService
             # @return [ConvenientService::Core::Entities::Concerns::Entities::Stack]
             #
             def insert_before_each(concern)
-              stack.insert_before_each cast(concern)
+              plain_stack.insert_before_each cast(concern)
 
               self
             end
@@ -64,7 +64,7 @@ module ConvenientService
             # @return [ConvenientService::Core::Entities::Concerns::Entities::Stack]
             #
             def insert_after_each(concern)
-              stack.insert_after_each cast(concern)
+              plain_stack.insert_after_each cast(concern)
 
               self
             end
@@ -75,7 +75,7 @@ module ConvenientService
             # @return [ConvenientService::Core::Entities::Concerns::Entities::Stack]
             #
             def replace(index_or_concern, concern)
-              stack.replace cast(index_or_concern), cast(concern)
+              plain_stack.replace cast(index_or_concern), cast(concern)
 
               self
             end
@@ -85,7 +85,7 @@ module ConvenientService
             # @return [ConvenientService::Core::Entities::Concerns::Entities::Stack]
             #
             def delete(index_or_concern)
-              stack.delete cast(index_or_concern)
+              plain_stack.delete cast(index_or_concern)
 
               self
             end
@@ -95,24 +95,23 @@ module ConvenientService
             # @return [ConvenientService::Core::Entities::Concerns::Entities::Stack]
             #
             def use(concern)
-              stack.use cast(concern)
+              plain_stack.use cast(concern)
 
               self
             end
 
             ##
-            # NOTE: This method is a subject to change.
-            # TODO: Refactor.
+            # @return [Boolean]
             #
             def empty?
               to_a.empty?
             end
 
             ##
-            # NOTE: This method is a subject to change.
+            # @return [Array]
             #
             def to_a
-              stack.to_a
+              plain_stack.to_a
             end
 
             ##
@@ -122,13 +121,25 @@ module ConvenientService
             def ==(other)
               return unless other.instance_of?(self.class)
 
-              return false if stack != other.stack
+              return false if plain_stack != other.plain_stack
 
               true
             end
 
+            protected
+
+            ##
+            # @!attribute [r] stack
+            #   @return [ConvenientService::Support::Middleware::StackBuilder]
+            #
+            attr_reader :plain_stack
+
             private
 
+            ##
+            # @param value [Integer, Module]
+            # @return [Class]
+            #
             def cast(value)
               ##
               # TODO: Command.
