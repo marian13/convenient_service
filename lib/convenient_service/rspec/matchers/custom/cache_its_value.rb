@@ -30,8 +30,19 @@ module ConvenientService
             "expected #{printable_block} NOT to cache its value"
           end
 
+          ##
+          # NOTE: An example of how RSpec extracts block source, but they marked it as private.
+          # https://github.com/rspec/rspec-expectations/blob/311aaf245f2c5493572bf683b8c441cb5f7e44c8/lib/rspec/matchers/built_in/change.rb#L437
+          #
+          # TODO: `printable_block` when `method_source` is available.
+          # https://github.com/banister/method_source
+          #
+          # def printable_block
+          #   @printable_block ||= block_expectation.source
+          # end
+          #
           def printable_block
-            @printable_block ||= block_expectation.source
+            @printable_block ||= "{ ... }"
           end
 
           private

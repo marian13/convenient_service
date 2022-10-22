@@ -185,20 +185,8 @@ module ConvenientService
           end
 
           ##
-          # NOTE: `failure_message` is only called when `mathces?` returns `false`.
-          # https://rubydoc.info/github/rspec/rspec-expectations/RSpec/Matchers/MatcherProtocol#failure_message-instance_method
+          # IMPORTANT: `failure_message`, `failure_message_when_negated` are NOT implemented, since they are never called (since `matches?` always returns `true`).
           #
-          def failure_message
-            "expected #{printable_block} to delegate to `#{printable_method}`"
-          end
-
-          ##
-          # NOTE: `failure_message_when_negated` is only called when `mathces?` returns `false`.
-          # https://rubydoc.info/github/rspec/rspec-expectations/RSpec/Matchers/MatcherProtocol#failure_message-instance_method
-          #
-          def failure_message_when_negated
-            "expected #{printable_block} NOT to delegate to `#{printable_method}`"
-          end
 
           def with_arguments(*args, **kwargs, &block)
             chain[:with_arguments] = {args: args, kwargs: kwargs, block: block}
@@ -220,10 +208,6 @@ module ConvenientService
               when "instance"
                 "#{object.class}##{method}"
               end
-          end
-
-          def printable_block
-            @printable_block ||= block_expectation.source
           end
 
           private

@@ -88,7 +88,6 @@ module ConvenientService
         require "rspec/matchers"
         require "rspec/mocks"
 
-        require "method_source"
         require "tempfile"
 
         require_relative "rspec"

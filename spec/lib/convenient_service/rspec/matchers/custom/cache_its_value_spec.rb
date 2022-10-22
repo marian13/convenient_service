@@ -21,7 +21,16 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::CacheItsValue do
 
   let(:block_expectation) { proc { instance.foo } }
 
-  let(:printable_block) { block_expectation.source }
+  ##
+  # NOTE: An example of how RSpec extracts block source, but they marked it as private.
+  # https://github.com/rspec/rspec-expectations/blob/311aaf245f2c5493572bf683b8c441cb5f7e44c8/lib/rspec/matchers/built_in/change.rb#L437
+  #
+  # TODO: `printable_block` when `method_source` is available.
+  # https://github.com/banister/method_source
+  #
+  # let(:printable_block) { block_expectation.source }
+  #
+  let(:printable_block) { "{ ... }" }
 
   describe "#matches?" do
     context "when block expectation does NOT cache its value (does NOT return same object when called multiple times)" do

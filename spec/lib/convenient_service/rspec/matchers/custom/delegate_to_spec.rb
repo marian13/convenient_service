@@ -144,29 +144,9 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo do
     end
   end
 
-  describe "#printable_block" do
-    it "returns block_expectation source code" do
-      matcher_result
-
-      expect(matcher.printable_block).to eq(block_expectation.source)
-    end
-  end
-
-  describe "#failure_message" do
-    it "returns message" do
-      matcher_result
-
-      expect(matcher.failure_message).to eq("expected #{printable_block} to delegate to `#{printable_method}`")
-    end
-  end
-
-  describe "#failure_message_when_negated" do
-    it "returns message" do
-      matcher_result
-
-      expect(matcher.failure_message_when_negated).to eq("expected #{printable_block} NOT to delegate to `#{printable_method}`")
-    end
-  end
+  ##
+  # IMPORTANT: `failure_message`, `failure_message_when_negated` are NOT implemented, since they are never called (since `matches?` always returns `true`).
+  #
 
   describe "#with_arguments" do
     it "returns matcher" do
