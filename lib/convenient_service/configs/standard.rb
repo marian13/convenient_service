@@ -4,7 +4,6 @@ module ConvenientService
   module Configs
     module Standard
       include Support::Concern
-
       ##
       # IMPORTANT: Order of plugins matters.
       #
@@ -30,6 +29,8 @@ module ConvenientService
 
           use Plugins::Common::HasCallbacks::Concern
           use Plugins::Common::HasAroundCallbacks::Concern
+
+
 
           ##
           # NOTE: Optional plugins.
@@ -64,18 +65,24 @@ module ConvenientService
           use Plugins::Common::NormalizesEnv::Middleware
 
           use Plugins::Service::HasResultShortSyntax::Success::Middleware
+
+          use Plugins::Service::PrintsOutResult::Middleware
         end
 
         middlewares :failure do
           use Plugins::Common::NormalizesEnv::Middleware
 
           use Plugins::Service::HasResultShortSyntax::Failure::Middleware
+
+          use Plugins::Service::PrintsOutResult::Middleware
         end
 
         middlewares :error do
           use Plugins::Common::NormalizesEnv::Middleware
 
           use Plugins::Service::HasResultShortSyntax::Error::Middleware
+
+          use Plugins::Service::PrintsOutResult::Middleware
         end
 
         middlewares :step, scope: :class do
