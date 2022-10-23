@@ -21,9 +21,9 @@ module ConvenientService
 
           def print_out_result(result)
             if result.success?
-              puts ::Paint["#{result.data.value}", :green, :bold]
+              puts ::Paint[result.data.value.to_s, :green, :bold]
             else
-              puts ::Paint["#{result.message}", :red, :bold]
+              puts ::Paint[result.message.to_s, :red, :bold]
             end
           end
         end

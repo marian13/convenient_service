@@ -67,7 +67,7 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::FormatD
     end
 
     context "when @print_out value is false" do
-      let(:default_options) { { date_string: date_string, print_out: false } }
+      let(:default_options) { {date_string: date_string, print_out: false} }
 
       context "and date_string is nil" do
         let(:date_string) { nil }

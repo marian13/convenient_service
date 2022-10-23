@@ -4,6 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
+# rubocop:disable RSpec/MultipleMemoizedHelpers
 # rubocop:disable RSpec/NestedGroups
 # rubocop:disable RSpec/MultipleExpectations
 # rubocop:disable RSpec/ContextWording
@@ -86,7 +87,7 @@ RSpec.describe ConvenientService::Service::Plugins::PrintsOutResult::Middleware 
                 end
 
                 def result
-                  return error(message: "I am an error") if true
+                  return error(message: "I am an error") if @print_out
 
                   success
                 end
@@ -155,3 +156,4 @@ end
 # rubocop:enable RSpec/ContextWording
 # rubocop:enable RSpec/MultipleExpectations
 # rubocop:enable RSpec/NestedGroups
+# rubocop:enable RSpec/MultipleMemoizedHelpers
