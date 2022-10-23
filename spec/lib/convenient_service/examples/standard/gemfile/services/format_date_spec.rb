@@ -7,6 +7,7 @@ require "convenient_service"
 # rubocop:disable RSpec/NestedGroups
 # rubocop:disable RSpec/MultipleMemoizedHelpers
 # rubocop:disable RSpec/MultipleExpectations
+# rubocop:disable RSpec/ContextWording
 RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::FormatDate do
   include ConvenientService::RSpec::Matchers::Results
   include ConvenientService::RSpec::Matchers::HaveAttrReader
@@ -100,6 +101,7 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::FormatD
     end
   end
 end
+# rubocop:enable RSpec/ContextWording
 # rubocop:enable RSpec/MultipleExpectations
 # rubocop:enable RSpec/MultipleMemoizedHelpers
 # rubocop:enable RSpec/NestedGroups

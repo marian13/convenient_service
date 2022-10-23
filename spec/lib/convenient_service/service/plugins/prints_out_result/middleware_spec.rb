@@ -5,6 +5,8 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
+# rubocop:disable RSpec/MultipleExpectations
+# rubocop:disable RSpec/ContextWording
 RSpec.describe ConvenientService::Service::Plugins::PrintsOutResult::Middleware do
   example_group "inheritance" do
     include ConvenientService::RSpec::Matchers::BeDescendantOf
@@ -150,4 +152,6 @@ RSpec.describe ConvenientService::Service::Plugins::PrintsOutResult::Middleware 
     end
   end
 end
+# rubocop:enable RSpec/ContextWording
+# rubocop:enable RSpec/MultipleExpectations
 # rubocop:enable RSpec/NestedGroups
