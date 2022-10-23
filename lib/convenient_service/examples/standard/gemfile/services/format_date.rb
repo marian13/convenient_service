@@ -22,16 +22,16 @@ module ConvenientService
             end
 
             def result
-              return failure(data: { date_string: 'Date string can NOT be nil' }) if date_string.nil?
-              return failure(data: { date_string: 'Date string can NOT be empty' }) if date_string.empty?
+              return failure(data: {date_string: "Date string can NOT be nil"}) if date_string.nil?
+              return failure(data: {date_string: "Date string can NOT be empty"}) if date_string.empty?
 
-              success(data: { formatted_date: format_date })
+              success(data: {formatted_date: format_date})
             end
 
             private
 
             def format_date
-              parse_date.strftime('%d-%m-%Y')
+              parse_date.strftime("%d-%m-%Y")
             end
 
             def parse_date
