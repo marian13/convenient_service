@@ -55,6 +55,24 @@ RSpec.describe ConvenientService::Core::Entities::MethodMiddlewares do
       end
     end
 
+    describe "#defined?" do
+      context "when methods middlewares callers does NOT contain own instance method" do
+        it "returns `false`" do
+          expect(method_middlewares.defined?).to eq(false)
+        end
+      end
+
+      context "when methods middlewares callers contains own instance method" do
+        before do
+          method_middlewares.define!
+        end
+
+        it "returns `true`" do
+          expect(method_middlewares.defined?).to eq(true)
+        end
+      end
+    end
+
     describe "#configure" do
       context "when `configuration_block` does NOT have one argument" do
         ##
