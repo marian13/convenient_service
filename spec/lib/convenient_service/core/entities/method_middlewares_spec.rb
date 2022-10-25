@@ -56,19 +56,85 @@ RSpec.describe ConvenientService::Core::Entities::MethodMiddlewares do
     end
 
     describe "#defined?" do
-      context "when methods middlewares callers does NOT contain own instance method" do
+      context "when methods middlewares callers do NOT contain own instance method" do
         it "returns `false`" do
           expect(method_middlewares.defined?).to eq(false)
         end
       end
 
-      context "when methods middlewares callers contains own instance method" do
+      context "when methods middlewares callers contain own instance method" do
         before do
           method_middlewares.define!
         end
 
         it "returns `true`" do
           expect(method_middlewares.defined?).to eq(true)
+        end
+      end
+    end
+
+    describe "#super_method_defined?" do
+      context "when methods middlewares are NOT defined" do
+        context "when super method is NOT defined" do
+          let(:service_class) do
+            Class.new do
+              include ConvenientService::Core
+            end
+          end
+
+          it "returns `false`" do
+            expect(method_middlewares.super_method_defined?).to eq(false)
+          end
+        end
+
+        context "when super method is defined" do
+          let(:service_class) do
+            Class.new do
+              include ConvenientService::Core
+
+              def result
+                :original_method_value
+              end
+            end
+          end
+
+          it "returns `true`" do
+            expect(method_middlewares.super_method_defined?).to eq(false)
+          end
+        end
+      end
+
+      context "when methods middlewares are defined" do
+        before do
+          method_middlewares.define!
+        end
+
+        context "when super method is NOT defined" do
+          let(:service_class) do
+            Class.new do
+              include ConvenientService::Core
+            end
+          end
+
+          it "returns `false`" do
+            expect(method_middlewares.super_method_defined?).to eq(false)
+          end
+        end
+
+        context "when super method is defined" do
+          let(:service_class) do
+            Class.new do
+              include ConvenientService::Core
+
+              def result
+                :original_method_value
+              end
+            end
+          end
+
+          it "returns `true`" do
+            expect(method_middlewares.super_method_defined?).to eq(true)
+          end
         end
       end
     end
