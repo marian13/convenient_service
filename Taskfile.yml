@@ -28,6 +28,10 @@ tasks:
       - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
         msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
 
+  deps:
+    cmds:
+      - task: deps:install
+
   deps:install:
     cmds:
       - bundle install
