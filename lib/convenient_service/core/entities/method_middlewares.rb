@@ -22,6 +22,13 @@ module ConvenientService
         end
 
         ##
+        # @return [String]
+        #
+        def no_super_method_exception_message
+          "super: no superclass method `foo' for #{klass}"
+        end
+
+        ##
         # @return [Boolean]
         #
         def defined?

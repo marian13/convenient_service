@@ -284,7 +284,7 @@ RSpec.describe ConvenientService::Core::ClassMethods do
     end
   end
 
-  describe "#commit_config" do
+  describe "#commit_config!" do
     let(:service_class) do
       Class.new do
         include ConvenientService::Core
@@ -332,11 +332,11 @@ RSpec.describe ConvenientService::Core::ClassMethods do
     let(:kwargs) { {foo: :bar} }
     let(:block) { proc { :foo } }
 
-    it "includes concerns" do
+    it "commits config" do
       ##
       # NOTE: Intentionally calling missed method. But later it is added by `concerns.include!`.
       #
-      expect { service_class.foo }.to delegate_to(service_class.concerns, :include!)
+      expect { service_class.foo }.to delegate_to(service_class, :commit_config!)
     end
 
     ##
@@ -351,11 +351,34 @@ RSpec.describe ConvenientService::Core::ClassMethods do
     end
 
     context "when concerns are included more than once (since they do not contain required class method)" do
+      let(:service_class) do
+        Class.new do
+          include ConvenientService::Core
+        end
+      end
+
       it "raises `NoMethodError`" do
         ##
-        # NOTE: Intentionally calling missed method that won't be included even by concern.
+        # NOTE: Intentionally calling missed method that won't be included (no concerns with it).
         #
-        expect { service_class.bar }.to raise_error(NoMethodError)
+        expect { service_class.foo }.to raise_error(NoMethodError).with_message("undefined method `foo' for #{service_class}")
+      end
+    end
+
+    context "when middleware caller defined without super method" do
+      let(:service_class) do
+        Class.new do
+          include ConvenientService::Core
+
+          middlewares(:foo, scope: :class) {}
+        end
+      end
+
+      it "raises `NoMethodError`" do
+        ##
+        # NOTE: Intentionally calling missed method that won't be included (no concerns with it), but has middlewares.
+        #
+        expect { service_class.foo }.to raise_error(NoMethodError).with_message("super: no superclass method `foo' for #{service_class}")
       end
     end
   end

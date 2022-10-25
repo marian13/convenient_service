@@ -95,12 +95,14 @@ module ConvenientService
                         scope = :#{scope}
 
                         env = {args: args, kwargs: kwargs, block: block, entity: self}
+                        method_middlewares = middlewares(method, scope: scope)
+                        super_method = method_middlewares.resolve_super_method(self)
 
-                        super_method = middlewares(method, scope: scope).resolve_super_method(self)
+                        raise ::NoMethodError, method_middlewares.no_super_method_exception_message unless super_method
 
                         original_method = proc { |env| super_method.call(*env[:args], **env[:kwargs], &env[:block]) }
 
-                        middlewares(method, scope: scope).call(env, original_method)
+                        method_middlewares.call(env, original_method)
                       end
                     RUBY
                   end
