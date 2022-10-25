@@ -56,7 +56,7 @@ module ConvenientService
                 # @return [Symbol]
                 #
                 def module_name
-                  @module_name ||= "MethodsMiddlewaresCallers".to_sym
+                  @module_name ||= :MethodsMiddlewaresCallers
                 end
               end
             end
