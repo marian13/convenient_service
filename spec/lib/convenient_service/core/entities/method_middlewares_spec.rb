@@ -139,6 +139,48 @@ RSpec.describe ConvenientService::Core::Entities::MethodMiddlewares do
       end
     end
 
+    describe "#defined_without_super_method?" do
+      context "when method middlewares are NOT defined" do
+        it "returns `false`" do
+          expect(method_middlewares.defined_without_super_method?).to eq(false)
+        end
+      end
+
+      context "when method middlewares are defined" do
+        before do
+          method_middlewares.define!
+        end
+
+        context "when super method is NOT defined" do
+          let(:service_class) do
+            Class.new do
+              include ConvenientService::Core
+            end
+          end
+
+          it "returns `true`" do
+            expect(method_middlewares.defined_without_super_method?).to eq(true)
+          end
+        end
+
+        context "when super method is defined" do
+          let(:service_class) do
+            Class.new do
+              include ConvenientService::Core
+
+              def result
+                :original_method_value
+              end
+            end
+          end
+
+          it "returns `false`" do
+            expect(method_middlewares.defined_without_super_method?).to eq(false)
+          end
+        end
+      end
+    end
+
     describe "#configure" do
       context "when `configuration_block` does NOT have one argument" do
         ##
