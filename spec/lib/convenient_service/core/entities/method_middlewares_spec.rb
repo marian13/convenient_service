@@ -375,6 +375,11 @@ RSpec.describe ConvenientService::Core::Entities::MethodMiddlewares do
           end
         end
 
+        specify do
+          expect { method_middlewares.resolve_super_method(entity) }
+            .to delegate_to(service_class, :commit_config!)
+        end
+
         it "returns `nil`" do
           expect(method_middlewares.resolve_super_method(entity)).to eq(nil)
         end
@@ -393,6 +398,11 @@ RSpec.describe ConvenientService::Core::Entities::MethodMiddlewares do
         end
 
         let(:super_method) { ConvenientService::Utils::Module.get_own_instance_method(service_class, method, private: true).bind(service_instance) }
+
+        specify do
+          expect { method_middlewares.resolve_super_method(entity) }
+            .to delegate_to(service_class, :commit_config!)
+        end
 
         it "returns super method" do
           expect(method_middlewares.resolve_super_method(entity)).to eq(super_method)
