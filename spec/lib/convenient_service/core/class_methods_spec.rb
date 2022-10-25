@@ -46,22 +46,19 @@ RSpec.describe ConvenientService::Core::ClassMethods do
       let(:concerns) { ConvenientService::Core::Entities::Concerns.new(entity: service_class).configure(&configuration_block) }
       let(:configuration_block) { proc { |stack| stack.use concern } }
 
-      specify do
+      before do
         ##
         # NOTE: Configures `concerns` in order to cache them.
         #
         service_class.concerns {}
+      end
 
+      specify do
         expect { service_class.concerns(&configuration_block) }
           .to delegate_to(service_class.concerns, :assert_not_included!)
       end
 
       specify do
-        ##
-        # NOTE: Configures `concerns` in order to cache them.
-        #
-        service_class.concerns {}
-
         expect { service_class.concerns(&configuration_block) }
           .to delegate_to(service_class.concerns, :configure)
           .with_arguments(&configuration_block)
@@ -90,34 +87,64 @@ RSpec.describe ConvenientService::Core::ClassMethods do
       let(:instance_method_middlewares) { ConvenientService::Core::Entities::MethodMiddlewares.new(scope: :instance, method: method, klass: service_class) }
       let(:class_method_middlewares) { ConvenientService::Core::Entities::MethodMiddlewares.new(scope: :class, method: method, klass: service_class) }
 
-      context "when `scope` is NOT passed" do
-        let(:result) { service_class.middlewares(method) }
-
-        specify { expect { result }.to cache_its_value }
-
-        it "returns instance middlewares for `method`" do
-          expect(result).to eq(instance_method_middlewares)
-        end
-      end
-
-      context "when `scope` is passed" do
-        let(:result) { service_class.middlewares(method, scope: :instance) }
-
-        context "when `scope` is `:instance`" do
-          specify { expect { result }.to cache_its_value }
+      context "when middlewares are NOT configured" do
+        context "when `scope` is NOT passed" do
+          specify { expect { service_class.middlewares(method) }.not_to cache_its_value }
 
           it "returns instance middlewares for `method`" do
-            expect(result).to eq(instance_method_middlewares)
+            expect(service_class.middlewares(method)).to eq(instance_method_middlewares)
           end
         end
 
-        context "when `scope` is `:class`" do
-          let(:result) { service_class.middlewares(method, scope: :class) }
+        context "when `scope` is passed" do
+          context "when `scope` is `:instance`" do
+            specify { expect { service_class.middlewares(method, scope: :instance) }.not_to cache_its_value }
 
-          specify { expect { result }.to cache_its_value }
+            it "returns instance middlewares for `method`" do
+              expect(service_class.middlewares(method, scope: :instance)).to eq(instance_method_middlewares)
+            end
+          end
 
-          it "returns class middlewares for `method`" do
-            expect(result).to eq(class_method_middlewares)
+          context "when `scope` is `:class`" do
+            specify { expect { service_class.middlewares(method, scope: :class) }.not_to cache_its_value }
+
+            it "returns class middlewares for `method`" do
+              expect(service_class.middlewares(method, scope: :class)).to eq(class_method_middlewares)
+            end
+          end
+        end
+      end
+
+      context "when middlewares are configured at least once" do
+        context "when `scope` is NOT passed" do
+          before { service_class.middlewares(method) {} }
+
+          specify { expect { service_class.middlewares(method) }.to cache_its_value }
+
+          it "returns instance middlewares for `method`" do
+            expect(service_class.middlewares(method)).to eq(instance_method_middlewares)
+          end
+        end
+
+        context "when `scope` is passed" do
+          context "when `scope` is `:instance`" do
+            before { service_class.middlewares(method, scope: :instance) {} }
+
+            specify { expect { service_class.middlewares(method, scope: :instance) }.to cache_its_value }
+
+            it "returns instance middlewares for `method`" do
+              expect(service_class.middlewares(method, scope: :instance)).to eq(instance_method_middlewares)
+            end
+          end
+
+          context "when `scope` is `:class`" do
+            before { service_class.middlewares(method, scope: :class) {} }
+
+            specify { expect { service_class.middlewares(method, scope: :class) }.to cache_its_value }
+
+            it "returns class middlewares for `method`" do
+              expect(service_class.middlewares(method, scope: :class)).to eq(class_method_middlewares)
+            end
           end
         end
       end
@@ -156,61 +183,101 @@ RSpec.describe ConvenientService::Core::ClassMethods do
       end
 
       context "when `scope` is NOT passed" do
-        let(:result) { service_class.middlewares(method, &instance_method_configuration_block) }
+        let(:configuration_block) { instance_method_configuration_block }
+        let(:method_middlewares) { instance_method_middlewares }
 
-        specify do
-          expect { result }
-            .to delegate_to(service_class.middlewares(method), :configure)
-            .with_arguments(&instance_method_configuration_block)
+        before do
+          ##
+          # NOTE: Configures `middlewares` in order to cache them.
+          #
+          service_class.middlewares(method) {}
         end
 
-        specify { expect { result }.to delegate_to(service_class.middlewares(method), :define!) }
+        specify do
+          expect { service_class.middlewares(method, &configuration_block) }
+            .to delegate_to(service_class.middlewares(method), :configure)
+            .with_arguments(&configuration_block)
+        end
 
-        specify { expect { result }.to cache_its_value }
+        specify do
+          expect { service_class.middlewares(method, &configuration_block) }
+            .to delegate_to(service_class.middlewares(method), :define!)
+        end
+
+        specify do
+          expect { service_class.middlewares(method, &configuration_block) }
+            .to cache_its_value
+        end
 
         it "returns instance middlewares for `method`" do
-          expect(result).to eq(instance_method_middlewares)
+          expect(service_class.middlewares(method, &configuration_block)).to eq(method_middlewares)
         end
       end
 
       context "when `scope` is passed" do
-        let(:result) { service_class.middlewares(method, scope: :instance, &instance_method_configuration_block) }
-
         context "when `scope` is `:instance`" do
           let(:scope) { :instance }
+          let(:configuration_block) { instance_method_configuration_block }
+          let(:method_middlewares) { instance_method_middlewares }
 
-          specify do
-            expect { result }
-              .to delegate_to(service_class.middlewares(method, scope: scope), :configure)
-              .with_arguments(&instance_method_configuration_block)
+          before do
+            ##
+            # NOTE: Configures `middlewares` in order to cache them.
+            #
+            service_class.middlewares(method, scope: scope) {}
           end
 
-          specify { expect { result }.to delegate_to(service_class.middlewares(method, scope: scope), :define!) }
+          specify do
+            expect { service_class.middlewares(method, scope: scope, &configuration_block) }
+              .to delegate_to(service_class.middlewares(method, scope: scope), :configure)
+              .with_arguments(&configuration_block)
+          end
 
-          specify { expect { result }.to cache_its_value }
+          specify do
+            expect { service_class.middlewares(method, scope: scope, &configuration_block) }
+              .to delegate_to(service_class.middlewares(method, scope: scope), :define!)
+          end
+
+          specify do
+            expect { service_class.middlewares(method, scope: scope, &configuration_block) }
+              .to cache_its_value
+          end
 
           it "returns instance middlewares for `method`" do
-            expect(result).to eq(instance_method_middlewares)
+            expect(service_class.middlewares(method, scope: scope, &configuration_block)).to eq(method_middlewares)
           end
         end
 
         context "when `scope` is `:class`" do
-          let(:result) { service_class.middlewares(method, scope: :class, &class_method_configuration_block) }
-
           let(:scope) { :class }
+          let(:configuration_block) { class_method_configuration_block }
+          let(:method_middlewares) { class_method_middlewares }
 
-          specify do
-            expect { result }
-              .to delegate_to(service_class.middlewares(method, scope: scope), :configure)
-              .with_arguments(&class_method_configuration_block)
+          before do
+            ##
+            # NOTE: Configures `middlewares` in order to cache them.
+            #
+            service_class.middlewares(method, scope: scope) {}
           end
 
-          specify { expect { result }.to delegate_to(service_class.middlewares(method, scope: scope), :define!) }
+          specify do
+            expect { service_class.middlewares(method, scope: scope, &configuration_block) }
+              .to delegate_to(service_class.middlewares(method, scope: scope), :configure)
+              .with_arguments(&configuration_block)
+          end
 
-          specify { expect { result }.to cache_its_value }
+          specify do
+            expect { service_class.middlewares(method, scope: scope, &configuration_block) }
+              .to delegate_to(service_class.middlewares(method, scope: scope), :define!)
+          end
+
+          specify do
+            expect { service_class.middlewares(method, scope: scope, &configuration_block) }
+              .to cache_its_value
+          end
 
           it "returns class middlewares for `method`" do
-            expect(result).to eq(class_method_middlewares)
+            expect(service_class.middlewares(method, scope: scope, &configuration_block)).to eq(method_middlewares)
           end
         end
       end
