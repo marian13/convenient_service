@@ -284,6 +284,25 @@ RSpec.describe ConvenientService::Core::ClassMethods do
     end
   end
 
+  describe "#commit_config" do
+    let(:service_class) do
+      Class.new do
+        include ConvenientService::Core
+      end
+    end
+
+    before do
+      ##
+      # NOTE: Configures `concerns` in order to cache them.
+      #
+      service_class.concerns {}
+    end
+
+    specify do
+      expect { service_class.commit_config! }.to delegate_to(service_class.concerns, :include!)
+    end
+  end
+
   describe "#method_missing" do
     let(:service_class) do
       Class.new do
