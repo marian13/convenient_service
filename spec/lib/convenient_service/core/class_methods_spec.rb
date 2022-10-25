@@ -17,45 +17,60 @@ RSpec.describe ConvenientService::Core::ClassMethods do
     end
 
     context "when `configuration_block` is NOT passed" do
-      let(:result) { service_class.concerns }
-
       let(:concerns) { ConvenientService::Core::Entities::Concerns.new(entity: service_class) }
 
-      specify { expect { result }.to cache_its_value }
+      context "when concerns are NOT configured" do
+        specify { expect { service_class.concerns }.not_to cache_its_value }
 
-      it "returns concerns" do
-        expect(result).to eq(concerns)
+        it "returns concerns" do
+          expect(service_class.concerns).to eq(concerns)
+        end
+      end
+
+      context "when concerns are configured at least once" do
+        before { service_class.concerns {} }
+
+        specify { expect { service_class.concerns }.to cache_its_value }
+
+        it "returns concerns" do
+          expect(service_class.concerns).to eq(concerns)
+        end
       end
     end
 
     context "when `configuration_block` is passed" do
-      let(:result) { service_class.concerns(&configuration_block) }
-
       ##
       # NOTE: Simplest concern is just a module.
       #
       let(:concern) { Module.new }
-
-      let(:concerns) do
-        ConvenientService::Core::Entities::Concerns
-          .new(entity: service_class)
-          .configure(&configuration_block)
-      end
-
+      let(:concerns) { ConvenientService::Core::Entities::Concerns.new(entity: service_class).configure(&configuration_block) }
       let(:configuration_block) { proc { |stack| stack.use concern } }
 
-      specify { expect { result }.to delegate_to(service_class.concerns, :assert_not_included!) }
+      specify do
+        ##
+        # NOTE: Configures `concerns` in order to cache them.
+        #
+        service_class.concerns {}
+
+        expect { service_class.concerns(&configuration_block) }
+          .to delegate_to(service_class.concerns, :assert_not_included!)
+      end
 
       specify do
-        expect { result }
+        ##
+        # NOTE: Configures `concerns` in order to cache them.
+        #
+        service_class.concerns {}
+
+        expect { service_class.concerns(&configuration_block) }
           .to delegate_to(service_class.concerns, :configure)
           .with_arguments(&configuration_block)
       end
 
-      specify { expect { result }.to cache_its_value }
+      specify { expect { service_class.concerns(&configuration_block) }.to cache_its_value }
 
       it "returns concerns" do
-        expect(result).to eq(concerns)
+        expect(service_class.concerns(&configuration_block)).to eq(concerns)
       end
     end
   end
