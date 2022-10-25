@@ -8,11 +8,12 @@ require "convenient_service"
 RSpec.describe ConvenientService::Core::Entities::MethodMiddlewares do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
-  let(:method_middlewares) { described_class.new(scope: scope, method: method, container: service_class) }
+  let(:method_middlewares) { described_class.new(scope: scope, method: method, klass: klass) }
 
   let(:scope) { :instance }
   let(:method) { :result }
-  let(:container) { ConvenientService::Core::Entities::MethodMiddlewares::Entities::Container.new(service_class: service_class) }
+  let(:klass) { service_class }
+  let(:container) { ConvenientService::Core::Entities::MethodMiddlewares::Entities::Container.new(klass: klass) }
 
   let(:service_class) do
     Class.new do
@@ -43,49 +44,6 @@ RSpec.describe ConvenientService::Core::Entities::MethodMiddlewares do
     Class.new(ConvenientService::Core::MethodChainMiddleware) do
       def next(...)
         :original_method_value
-      end
-    end
-  end
-
-  example_group "class methods" do
-    describe ".resolve_super_method" do
-      specify do
-        expect { described_class.resolve_super_method(entity, scope, method) }
-          .to delegate_to(ConvenientService::Core::Entities::MethodMiddlewares::Commands::CastCaller, :call)
-          .with_arguments(other: {entity: entity, scope: scope})
-      end
-
-      context "when `service_class` does NOT have `method` (own or inherited)" do
-        let(:service_class) do
-          Class.new do
-            include ConvenientService::Core
-
-            middlewares(:result) {}
-          end
-        end
-
-        it "returns `nil`" do
-          expect(described_class.resolve_super_method(entity, scope, method)).to eq(nil)
-        end
-      end
-
-      context "when `service_class` has `method` (own or inherited)" do
-        let(:service_class) do
-          Class.new do
-            include ConvenientService::Core
-
-            middlewares(:result) {}
-
-            def result
-            end
-          end
-        end
-
-        let(:super_method) { ConvenientService::Utils::Module.get_own_instance_method(service_class, method, private: true).bind(service_instance) }
-
-        it "returns super method" do
-          expect(described_class.resolve_super_method(entity, scope, method)).to eq(super_method)
-        end
       end
     end
   end
@@ -275,6 +233,41 @@ RSpec.describe ConvenientService::Core::Entities::MethodMiddlewares do
       end
     end
 
+    describe "#resolve_super_method" do
+      context "when `service_class` does NOT have `method` (own or inherited)" do
+        let(:service_class) do
+          Class.new do
+            include ConvenientService::Core
+
+            middlewares(:result) {}
+          end
+        end
+
+        it "returns `nil`" do
+          expect(method_middlewares.resolve_super_method(entity)).to eq(nil)
+        end
+      end
+
+      context "when `service_class` has `method` (own or inherited)" do
+        let(:service_class) do
+          Class.new do
+            include ConvenientService::Core
+
+            middlewares(:result) {}
+
+            def result
+            end
+          end
+        end
+
+        let(:super_method) { ConvenientService::Utils::Module.get_own_instance_method(service_class, method, private: true).bind(service_instance) }
+
+        it "returns super method" do
+          expect(method_middlewares.resolve_super_method(entity)).to eq(super_method)
+        end
+      end
+    end
+
     describe "#to_a" do
       context "when stack is NOT empty" do
         it "returns middleware classes" do
@@ -296,7 +289,7 @@ RSpec.describe ConvenientService::Core::Entities::MethodMiddlewares do
 
     example_group "comparison" do
       describe "#==" do
-        let(:method_middlewares) { described_class.new(scope: scope, method: method, container: service_class) }
+        let(:method_middlewares) { described_class.new(scope: scope, method: method, klass: klass) }
 
         context "when `other` has different class" do
           let(:other) { 42 }
@@ -307,7 +300,7 @@ RSpec.describe ConvenientService::Core::Entities::MethodMiddlewares do
         end
 
         context "when `other` has different `scope`" do
-          let(:other) { described_class.new(scope: :class, method: method, container: service_class) }
+          let(:other) { described_class.new(scope: :class, method: method, klass: klass) }
 
           it "returns `false`" do
             expect(method_middlewares == other).to eq(false)
@@ -315,15 +308,15 @@ RSpec.describe ConvenientService::Core::Entities::MethodMiddlewares do
         end
 
         context "when `other` has different `method`" do
-          let(:other) { described_class.new(scope: scope, method: :step, container: service_class) }
+          let(:other) { described_class.new(scope: scope, method: :step, klass: klass) }
 
           it "returns `false`" do
             expect(method_middlewares == other).to eq(false)
           end
         end
 
-        context "when `other` has different `container`" do
-          let(:other) { described_class.new(scope: scope, method: method, container: Class.new) }
+        context "when `other` has different `klass`" do
+          let(:other) { described_class.new(scope: scope, method: method, klass: Class.new) }
 
           it "returns `false`" do
             expect(method_middlewares == other).to eq(false)
@@ -331,7 +324,7 @@ RSpec.describe ConvenientService::Core::Entities::MethodMiddlewares do
         end
 
         context "when `other` has different `stack`" do
-          let(:other) { described_class.new(scope: scope, method: method, container: service_class).configure { |stack| stack.use middleware } }
+          let(:other) { described_class.new(scope: scope, method: method, klass: klass).configure { |stack| stack.use middleware } }
 
           it "returns `false`" do
             expect(method_middlewares == other).to eq(false)
@@ -339,7 +332,7 @@ RSpec.describe ConvenientService::Core::Entities::MethodMiddlewares do
         end
 
         context "when `other` has same attributes" do
-          let(:other) { described_class.new(scope: scope, method: method, container: service_class) }
+          let(:other) { described_class.new(scope: scope, method: method, klass: klass) }
 
           it "returns `true`" do
             expect(method_middlewares == other).to eq(true)

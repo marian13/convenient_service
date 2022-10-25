@@ -8,8 +8,9 @@ require "convenient_service"
 RSpec.describe ConvenientService::Core::Entities::MethodMiddlewares::Entities::Container do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
-  let(:container) { described_class.new(service_class: service_class) }
+  let(:container) { described_class.new(klass: klass) }
 
+  let(:klass) { service_class }
   let(:service_class) { Class.new }
 
   example_group "attributes" do
@@ -17,7 +18,7 @@ RSpec.describe ConvenientService::Core::Entities::MethodMiddlewares::Entities::C
 
     subject { container }
 
-    it { is_expected.to have_attr_reader(:service_class) }
+    it { is_expected.to have_attr_reader(:klass) }
   end
 
   example_group "instance_methods" do
@@ -42,11 +43,11 @@ RSpec.describe ConvenientService::Core::Entities::MethodMiddlewares::Entities::C
       end
     end
 
-    describe "resolve_methods_middlewares_callers" do
+    describe "#methods_middlewares_callers" do
       specify do
-        expect { container.resolve_methods_middlewares_callers(scope) }
+        expect { container.methods_middlewares_callers }
           .to delegate_to(ConvenientService::Core::Entities::MethodMiddlewares::Entities::Container::Commands::ResolveMethodsMiddlewaresCallers, :call)
-          .with_arguments(scope: scope, container: container)
+          .with_arguments(container: container)
           .and_return_its_value
       end
     end
@@ -61,8 +62,8 @@ RSpec.describe ConvenientService::Core::Entities::MethodMiddlewares::Entities::C
           end
         end
 
-        context "when `other` has different `service_class`" do
-          let(:other) { described_class.new(service_class: Class.new) }
+        context "when `other` has different `klass`" do
+          let(:other) { described_class.new(klass: Class.new) }
 
           it "returns `false`" do
             expect(container == other).to eq(false)
@@ -70,7 +71,7 @@ RSpec.describe ConvenientService::Core::Entities::MethodMiddlewares::Entities::C
         end
 
         context "when `other` has same attributes" do
-          let(:other) { described_class.new(service_class: service_class) }
+          let(:other) { described_class.new(klass: klass) }
 
           it "returns `true`" do
             expect(container == other).to eq(true)

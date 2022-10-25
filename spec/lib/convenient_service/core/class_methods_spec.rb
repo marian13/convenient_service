@@ -72,8 +72,8 @@ RSpec.describe ConvenientService::Core::ClassMethods do
     context "when `configuration_block` is NOT passed" do
       let(:result) { service_class.middlewares(method, **kwargs) }
 
-      let(:instance_method_middlewares) { ConvenientService::Core::Entities::MethodMiddlewares.new(scope: :instance, method: method, container: service_class) }
-      let(:class_method_middlewares) { ConvenientService::Core::Entities::MethodMiddlewares.new(scope: :class, method: method, container: service_class) }
+      let(:instance_method_middlewares) { ConvenientService::Core::Entities::MethodMiddlewares.new(scope: :instance, method: method, klass: service_class) }
+      let(:class_method_middlewares) { ConvenientService::Core::Entities::MethodMiddlewares.new(scope: :class, method: method, klass: service_class) }
 
       context "when `scope` is NOT passed" do
         let(:result) { service_class.middlewares(method) }
@@ -130,13 +130,13 @@ RSpec.describe ConvenientService::Core::ClassMethods do
 
       let(:instance_method_middlewares) do
         ConvenientService::Core::Entities::MethodMiddlewares
-          .new(scope: :instance, method: method, container: service_class)
+          .new(scope: :instance, method: method, klass: service_class)
           .configure(&instance_method_configuration_block)
       end
 
       let(:class_method_middlewares) do
         ConvenientService::Core::Entities::MethodMiddlewares
-          .new(scope: :class, method: method, container: service_class)
+          .new(scope: :class, method: method, klass: service_class)
           .configure(&class_method_configuration_block)
       end
 

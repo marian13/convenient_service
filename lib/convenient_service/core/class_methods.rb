@@ -23,14 +23,13 @@ module ConvenientService
       #   concerns(&configuration_block)
       #
       def concerns(&configuration_block)
-        @concerns ||= Entities::Concerns.new(entity: self)
-
         if configuration_block
+          @concerns ||= Entities::Concerns.new(entity: self)
           @concerns.assert_not_included!
           @concerns.configure(&configuration_block)
         end
 
-        @concerns
+        @concerns || Entities::Concerns.new(entity: self)
       end
 
       ##
@@ -75,14 +74,14 @@ module ConvenientService
       def middlewares(method, scope: :instance, &configuration_block)
         @middlewares ||= {}
         @middlewares[scope] ||= {}
-        @middlewares[scope][method] ||= Entities::MethodMiddlewares.new(scope: scope, method: method, container: self)
 
         if configuration_block
+          @middlewares[scope][method] ||= Entities::MethodMiddlewares.new(scope: scope, method: method, klass: self)
           @middlewares[scope][method].configure(&configuration_block)
           @middlewares[scope][method].define!
         end
 
-        @middlewares[scope][method]
+        @middlewares[scope][method] || Entities::MethodMiddlewares.new(scope: scope, method: method, klass: self)
       end
 
       ##
@@ -130,9 +129,11 @@ module ConvenientService
       #   IMPORTANT: `method_missing` should be thread-safe.
       #
       def method_missing(method, *args, **kwargs, &block)
-        concerns.include!
+        commit_config!
 
-        return super unless Utils::Method.defined?(method, singleton_class, private: true)
+        return super unless Utils::Module.class_method_defined?(self, method, private: true)
+
+        return super if middlewares(method, scope: :class).defined_without_super_method?
 
         ConvenientService.logger.debug { "[Core] Included concerns into `#{self}` | Triggered by `method_missing` | Method: `.#{method}`" }
 

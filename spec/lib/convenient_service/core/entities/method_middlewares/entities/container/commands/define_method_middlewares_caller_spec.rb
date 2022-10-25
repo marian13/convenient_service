@@ -11,7 +11,9 @@ RSpec.describe ConvenientService::Core::Entities::MethodMiddlewares::Entities::C
 
   let(:scope) { :instance }
   let(:method) { :result }
-  let(:container) { ConvenientService::Core::Entities::MethodMiddlewares::Entities::Container.new(service_class: service_class) }
+  let(:container) { ConvenientService::Core::Entities::MethodMiddlewares::Entities::Container.new(klass: klass) }
+  let(:methods_middlewares_callers) { container.methods_middlewares_callers }
+  let(:klass) { service_class }
   let(:service_class) { Class.new }
 
   example_group "attributes" do
@@ -28,16 +30,15 @@ RSpec.describe ConvenientService::Core::Entities::MethodMiddlewares::Entities::C
     describe ".call" do
       include ConvenientService::RSpec::Matchers::PrependModule
 
-      let(:methods_middlewares_callers) { container.resolve_methods_middlewares_callers(scope) }
-
       context "when `scope` is `:instance`" do
         let(:scope) { :instance }
+        let(:container) { ConvenientService::Core::Entities::MethodMiddlewares::Entities::Container.new(klass: klass) }
 
         context "when `method` is NOT defined in methods middlewares callers" do
           it "prepend methods middlewares callers to container" do
             command_result
 
-            expect(container.service_class).to prepend_module(methods_middlewares_callers)
+            expect(container.klass).to prepend_module(methods_middlewares_callers)
           end
 
           it "defines `method` middlewares caller" do
@@ -62,12 +63,13 @@ RSpec.describe ConvenientService::Core::Entities::MethodMiddlewares::Entities::C
 
       context "when `scope` is `:class`" do
         let(:scope) { :class }
+        let(:container) { ConvenientService::Core::Entities::MethodMiddlewares::Entities::Container.new(klass: klass.singleton_class) }
 
         context "when `method` is NOT defined in methods middlewares callers" do
           it "prepend methods middlewares callers to container" do
             command_result
 
-            expect(container.service_class.singleton_class).to prepend_module(methods_middlewares_callers)
+            expect(container.klass).to prepend_module(methods_middlewares_callers)
           end
 
           it "defines `method` middlewares caller" do

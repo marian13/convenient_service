@@ -47,7 +47,7 @@ module ConvenientService
             # @return [String]
             #
             def formatted_container
-              container.service_class
+              container.klass
             end
 
             ##

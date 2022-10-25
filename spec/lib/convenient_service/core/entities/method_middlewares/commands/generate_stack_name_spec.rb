@@ -14,7 +14,8 @@ RSpec.describe ConvenientService::Core::Entities::MethodMiddlewares::Commands::G
 
       let(:scope) { :instance }
       let(:method) { :result }
-      let(:container) { ConvenientService::Core::Entities::MethodMiddlewares::Entities::Container.new(service_class: service_class) }
+      let(:container) { ConvenientService::Core::Entities::MethodMiddlewares::Entities::Container.new(klass: klass) }
+      let(:klass) { service_class }
       let(:service_class) { Class.new }
 
       context "when `method` does NOT have suffix" do

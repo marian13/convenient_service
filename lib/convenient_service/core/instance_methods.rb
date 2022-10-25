@@ -55,9 +55,11 @@ module ConvenientService
       #   IMPORTANT: `method_missing` should be thread-safe.
       #
       def method_missing(method, *args, **kwargs, &block)
-        concerns.include!
+        self.class.commit_config!
 
-        return super unless Utils::Method.defined?(method, self.class, private: true)
+        return super unless Utils::Module.instance_method_defined?(self.class, method, private: true)
+
+        return super if middlewares(method, scope: :instance).defined_without_super_method?
 
         ConvenientService.logger.debug { "[Core] Included concerns into `#{self.class}` | Triggered by `method_missing` | Method: `##{method}`" }
 
