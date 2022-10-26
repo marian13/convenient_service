@@ -45,7 +45,6 @@ module ConvenientService
           use Plugins::Common::SetsDisplayValue::Middleware
 
           use Plugins::Common::CachesConstructorParams::Middleware
-
         end
 
         middlewares :result do

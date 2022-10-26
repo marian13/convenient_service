@@ -43,6 +43,7 @@ RSpec.describe ConvenientService::Configs::Standard do
         let(:initialize_middlewares) do
           [
             ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
+            ConvenientService::Common::Plugins::SetsDisplayValue::Middleware,
             ConvenientService::Common::Plugins::CachesConstructorParams::Middleware
           ]
         end
@@ -62,21 +63,24 @@ RSpec.describe ConvenientService::Configs::Standard do
         let(:success_middlewares) do
           [
             ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-            ConvenientService::Service::Plugins::HasResultShortSyntax::Success::Middleware
+            ConvenientService::Service::Plugins::HasResultShortSyntax::Success::Middleware,
+            ConvenientService::Service::Plugins::DisplayResult::Success::Middleware
           ]
         end
 
         let(:failure_middlewares) do
           [
             ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-            ConvenientService::Service::Plugins::HasResultShortSyntax::Failure::Middleware
+            ConvenientService::Service::Plugins::HasResultShortSyntax::Failure::Middleware,
+            ConvenientService::Service::Plugins::DisplayResult::Failure::Middleware
           ]
         end
 
         let(:error_middlewares) do
           [
             ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-            ConvenientService::Service::Plugins::HasResultShortSyntax::Error::Middleware
+            ConvenientService::Service::Plugins::HasResultShortSyntax::Error::Middleware,
+            ConvenientService::Service::Plugins::DisplayResult::Error::Middleware
           ]
         end
 
