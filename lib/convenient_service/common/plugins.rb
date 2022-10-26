@@ -13,5 +13,6 @@ require_relative "plugins/has_callbacks"
 require_relative "plugins/has_config"
 require_relative "plugins/has_constructor"
 require_relative "plugins/has_internals"
+require_relative "plugins/sets_display_value"
 
 require_relative "plugins/aliases"
