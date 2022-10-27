@@ -7,30 +7,47 @@ module ConvenientService
   module Core
     module Entities
       class MethodMiddlewares
+        include Support::Delegate
+
         ##
         # @param scope [:instance, :class]
         # @param method [Symbol, String]
-        # @param container [Class]
+        # @param klass [Class]
         # @return [void]
         #
-        def initialize(scope:, method:, container:)
+        def initialize(scope:, method:, klass:)
           @scope = scope
           @method = method
-          @container = Entities::Container.new(service_class: container)
+          @klass = klass
         end
 
         ##
         # @param entity [Object, Class]
-        # @param scope [:instance, :class]
-        # @param method [Symbol, String]
-        # @return [Method, nil]
+        # @return [String]
         #
-        def self.resolve_super_method(entity, scope, method)
-          caller = Commands::CastCaller.call(other: {entity: entity, scope: scope})
+        def no_super_method_exception_message_for(entity)
+          "super: no superclass method `#{method}' for #{entity}"
+        end
 
-          return unless caller
+        ##
+        # @return [Boolean]
+        #
+        def defined?
+          Utils::Module.has_own_instance_method?(methods_middlewares_callers, method)
+        end
 
-          caller.resolve_super_method(method)
+        ##
+        # @return [Boolean]
+        #
+        def super_method_defined?
+          caller.super_method_defined?(method)
+        end
+
+        ##
+        # @return [Boolean]
+        #
+        def defined_without_super_method?
+          self.defined? && !super_method_defined?
         end
 
         ##
@@ -67,6 +84,19 @@ module ConvenientService
         end
 
         ##
+        # @param entity [Object, Class]
+        # @return [Method, nil]
+        #
+        # @internal
+        #   NOTE: Consider to remove when support for Ruby 2.7 is dropped.
+        #
+        def resolve_super_method(entity)
+          klass.commit_config!
+
+          caller.resolve_super_method(method, entity)
+        end
+
+        ##
         # @param other [ConvenientService::Core::Entities::MethodMiddlewares, Object]
         # @return [Boolean, nil]
         #
@@ -75,7 +105,7 @@ module ConvenientService
 
           return false if scope != other.scope
           return false if method != other.method
-          return false if container != other.container
+          return false if klass != other.klass
           return false if stack != other.stack
 
           true
@@ -103,10 +133,10 @@ module ConvenientService
         attr_reader :method
 
         ##
-        # @!attribute [r] container
-        #   @return [ConvenientService::Core::Entities::MethodMiddlewares::Entities::Container]
+        # @!attribute [r] klass
+        #   @return [Symbol, String]
         #
-        attr_reader :container
+        attr_reader :klass
 
         ##
         # @return [ConvenientService::Core::Entities::MethodMiddlewares::Entities::Stack]
@@ -116,6 +146,25 @@ module ConvenientService
         end
 
         private
+
+        ##
+        # @return [Module]
+        #
+        delegate :methods_middlewares_callers, to: :container
+
+        ##
+        # @return [ConvenientService::Core::Entities::MethodMiddlewares::Entities::Caller]
+        #
+        def caller
+          @caller ||= Entities::Caller.new(container: container)
+        end
+
+        ##
+        # @return [ConvenientService::Core::Entities::MethodMiddlewares::Entities::Container]
+        #
+        def container
+          @container ||= Entities::Container.cast!({scope: scope, klass: klass})
+        end
 
         ##
         # @return [String]

@@ -6,11 +6,11 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Core::Entities::MethodMiddlewares::Entities::Container::Commands::ResolveMethodsMiddlewaresCallers do
-  let(:command_result) { described_class.call(scope: scope, container: container) }
-  let(:command_instance) { described_class.new(scope: scope, container: container) }
+  let(:command_result) { described_class.call(container: container) }
+  let(:command_instance) { described_class.new(container: container) }
 
-  let(:scope) { :instance }
-  let(:container) { ConvenientService::Core::Entities::MethodMiddlewares::Entities::Container.new(service_class: service_class) }
+  let(:container) { ConvenientService::Core::Entities::MethodMiddlewares::Entities::Container.new(klass: klass) }
+  let(:klass) { service_class }
   let(:service_class) { Class.new }
 
   example_group "modules" do
@@ -26,7 +26,6 @@ RSpec.describe ConvenientService::Core::Entities::MethodMiddlewares::Entities::C
 
     subject { command_instance }
 
-    it { is_expected.to have_attr_reader(:scope) }
     it { is_expected.to have_attr_reader(:container) }
   end
 
@@ -43,45 +42,19 @@ RSpec.describe ConvenientService::Core::Entities::MethodMiddlewares::Entities::C
 
   example_group "class methods" do
     describe ".call" do
-      include ConvenientService::RSpec::Matchers::PrependModule
-
-      context "when `scope` is `:instance`" do
-        let(:scope) { :instance }
-
-        context "when own module `InstanceMethodsMiddlewaresCallers` is NOT defined" do
-          it "defines own module `InstanceMethodsMiddlewaresCallers`" do
-            expect { command_result }.to change { ConvenientService::Utils::Module.get_own_const(service_class, :InstanceMethodsMiddlewaresCallers) }
-          end
-
-          it "returns own module `InstanceMethodsMiddlewaresCallers`" do
-            expect(command_result).to eq(service_class::InstanceMethodsMiddlewaresCallers)
-          end
+      context "when own module `MethodsMiddlewaresCallers` is NOT defined" do
+        it "defines own module `MethodsMiddlewaresCallers`" do
+          expect { command_result }.to change { ConvenientService::Utils::Module.get_own_const(service_class, :MethodsMiddlewaresCallers) }
         end
 
-        context "when own module `InstanceMethodsMiddlewaresCallers` is defined" do
-          it "returns own module `InstanceMethodsMiddlewaresCallers`" do
-            expect(command_result).to eq(service_class::InstanceMethodsMiddlewaresCallers)
-          end
+        it "returns own module `MethodsMiddlewaresCallers`" do
+          expect(command_result).to eq(service_class::MethodsMiddlewaresCallers)
         end
       end
 
-      context "when `scope` is `:class`" do
-        let(:scope) { :class }
-
-        context "when own module `ClassMethodsMiddlewaresCallers` is NOT defined" do
-          it "defines own module `ClassMethodsMiddlewaresCallers`" do
-            expect { command_result }.to change { ConvenientService::Utils::Module.get_own_const(service_class, :ClassMethodsMiddlewaresCallers) }
-          end
-
-          it "returns own module `ClassMethodsMiddlewaresCallers`" do
-            expect(command_result).to eq(service_class::ClassMethodsMiddlewaresCallers)
-          end
-        end
-
-        context "when own module `ClassMethodsMiddlewaresCallers` is defined" do
-          it "returns own module `ClassMethodsMiddlewaresCallers`" do
-            expect(command_result).to eq(service_class::ClassMethodsMiddlewaresCallers)
-          end
+      context "when own module `MethodsMiddlewaresCallers` is defined" do
+        it "returns own module `MethodsMiddlewaresCallers`" do
+          expect(command_result).to eq(service_class::MethodsMiddlewaresCallers)
         end
       end
     end

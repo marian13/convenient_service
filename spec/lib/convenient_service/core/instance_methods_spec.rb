@@ -82,11 +82,11 @@ RSpec.describe ConvenientService::Core::InstanceMethods do
     let(:kwargs) { {foo: :bar} }
     let(:block) { proc { :foo } }
 
-    it "includes concerns" do
+    it "commits config" do
       ##
       # NOTE: Intentionally calling missed method. But later it is added by `concerns.include!`.
       #
-      expect { service_instance.foo }.to delegate_to(service_instance.concerns, :include!)
+      expect { service_instance.foo }.to delegate_to(service_class, :commit_config!)
     end
 
     ##
@@ -101,11 +101,34 @@ RSpec.describe ConvenientService::Core::InstanceMethods do
     end
 
     context "when concerns are included more than once (since they do not contain required instance method)" do
+      let(:service_class) do
+        Class.new do
+          include ConvenientService::Core
+        end
+      end
+
       it "raises `NoMethodError`" do
         ##
-        # NOTE: Intentionally calling missed method that won't be included even by concern.
+        # NOTE: Intentionally calling missed method that won't be included (no concerns with it).
         #
-        expect { service_instance.bar }.to raise_error(NoMethodError)
+        expect { service_instance.foo }.to raise_error(NoMethodError).with_message("undefined method `foo' for #{service_instance}")
+      end
+    end
+
+    context "when middleware caller defined without super method" do
+      let(:service_class) do
+        Class.new do
+          include ConvenientService::Core
+
+          middlewares(:foo, scope: :instance) {}
+        end
+      end
+
+      it "raises `NoMethodError`" do
+        ##
+        # NOTE: Intentionally calling missed method that won't be included (no concerns with it), but has middlewares.
+        #
+        expect { service_instance.foo }.to raise_error(NoMethodError).with_message("super: no superclass method `foo' for #{service_instance}")
       end
     end
   end

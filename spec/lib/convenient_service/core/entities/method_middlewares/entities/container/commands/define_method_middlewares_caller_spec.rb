@@ -11,7 +11,9 @@ RSpec.describe ConvenientService::Core::Entities::MethodMiddlewares::Entities::C
 
   let(:scope) { :instance }
   let(:method) { :result }
-  let(:container) { ConvenientService::Core::Entities::MethodMiddlewares::Entities::Container.new(service_class: service_class) }
+  let(:container) { ConvenientService::Core::Entities::MethodMiddlewares::Entities::Container.new(klass: klass) }
+  let(:methods_middlewares_callers) { container.methods_middlewares_callers }
+  let(:klass) { service_class }
   let(:service_class) { Class.new }
 
   example_group "attributes" do
@@ -28,16 +30,15 @@ RSpec.describe ConvenientService::Core::Entities::MethodMiddlewares::Entities::C
     describe ".call" do
       include ConvenientService::RSpec::Matchers::PrependModule
 
-      let(:methods_middlewares_callers) { container.resolve_methods_middlewares_callers(scope) }
-
       context "when `scope` is `:instance`" do
         let(:scope) { :instance }
+        let(:container) { ConvenientService::Core::Entities::MethodMiddlewares::Entities::Container.new(klass: klass) }
 
         context "when `method` is NOT defined in methods middlewares callers" do
           it "prepend methods middlewares callers to container" do
             command_result
 
-            expect(container.service_class).to prepend_module(methods_middlewares_callers)
+            expect(container.klass).to prepend_module(methods_middlewares_callers)
           end
 
           it "defines `method` middlewares caller" do
@@ -56,18 +57,71 @@ RSpec.describe ConvenientService::Core::Entities::MethodMiddlewares::Entities::C
 
           it "returns `false`" do
             expect(command_result).to eq(false)
+          end
+        end
+
+        example_group "generated method" do
+          let(:service_instance) { service_class.new }
+
+          context "when super is NOT defined" do
+            let(:service_class) do
+              Class.new do
+                include ConvenientService::Core
+
+                middlewares(:result, scope: :instance) do
+                  middleware = Class.new(ConvenientService::Core::Entities::MethodMiddlewares::Entities::Middleware) do
+                    def next(...)
+                      [:middleware_value, *chain.next(...)]
+                    end
+                  end
+
+                  use middleware
+                end
+              end
+            end
+
+            it "raises `NoMethodError`" do
+              expect { service_instance.result }.to raise_error(NoMethodError).with_message("super: no superclass method `result' for #{service_instance}")
+            end
+          end
+
+          context "when super is defined" do
+            let(:service_class) do
+              Class.new do
+                include ConvenientService::Core
+
+                middlewares(:result, scope: :instance) do
+                  middleware = Class.new(ConvenientService::Core::Entities::MethodMiddlewares::Entities::Middleware) do
+                    def next(...)
+                      [:middleware_value, *chain.next(...)]
+                    end
+                  end
+
+                  use middleware
+                end
+
+                def result
+                  :original_value
+                end
+              end
+            end
+
+            it "calls middlewares and super" do
+              expect(service_instance.result).to eq([:middleware_value, :original_value])
+            end
           end
         end
       end
 
       context "when `scope` is `:class`" do
         let(:scope) { :class }
+        let(:container) { ConvenientService::Core::Entities::MethodMiddlewares::Entities::Container.new(klass: klass.singleton_class) }
 
         context "when `method` is NOT defined in methods middlewares callers" do
           it "prepend methods middlewares callers to container" do
             command_result
 
-            expect(container.service_class.singleton_class).to prepend_module(methods_middlewares_callers)
+            expect(container.klass).to prepend_module(methods_middlewares_callers)
           end
 
           it "defines `method` middlewares caller" do
@@ -86,6 +140,58 @@ RSpec.describe ConvenientService::Core::Entities::MethodMiddlewares::Entities::C
 
           it "returns `false`" do
             expect(command_result).to eq(false)
+          end
+        end
+
+        example_group "generated method" do
+          context "when super is NOT defined" do
+            let(:service_class) do
+              Class.new do
+                include ConvenientService::Core
+
+                middlewares(:result, scope: :class) do
+                  middleware = Class.new(ConvenientService::Core::Entities::MethodMiddlewares::Entities::Middleware) do
+                    def next(...)
+                      [:middleware_value, *chain.next(...)]
+                    end
+                  end
+
+                  use middleware
+                end
+              end
+            end
+
+            it "raises `NoMethodError`" do
+              expect { service_class.result }.to raise_error(NoMethodError).with_message("super: no superclass method `result' for #{service_class}")
+            end
+          end
+
+          context "when super is defined" do
+            let(:service_class) do
+              Class.new do
+                include ConvenientService::Core
+
+                middlewares(:result, scope: :class) do
+                  middleware = Class.new(ConvenientService::Core::Entities::MethodMiddlewares::Entities::Middleware) do
+                    def next(...)
+                      [:middleware_value, *chain.next(...)]
+                    end
+                  end
+
+                  use middleware
+                end
+
+                class << self
+                  def result
+                    :original_value
+                  end
+                end
+              end
+            end
+
+            it "calls middlewares and super" do
+              expect(service_class.result).to eq([:middleware_value, :original_value])
+            end
           end
         end
       end

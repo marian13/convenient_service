@@ -15,7 +15,7 @@
 | Low | 🚧 | GitHub Wiki/Gists for Support | |
 | Low | 🚧 | Contribute to Shoulda Matchers | |
 | High | ✅ | `respond_to_missing?` | [ConvenientService::Core::ClassMethods#respond_to_missing?](https://github.com/marian13/convenient_service/blob/main/lib/convenient_service/core/class_methods.rb#L105), [ConvenientService::Core::InstanceMethods#respond_to_missing?](https://github.com/marian13/convenient_service/blob/main/lib/convenient_service/core/instance_methods.rb#L30) |
-| Medium | ⏳ | Custom matcher to track `ConvenientService::Logger` messages | |
+| High | ⏳ | Custom matcher to track `ConvenientService::Logger` messages | |
 | Medium | 🚧 | Remove `respond_to?` from `Copyable` | Investigate before making any decision |
 | High | 🚧 | Unified `inspect` | |
 | High | ✅ | Remove race condition for `method_missing` | https://github.com/marian13/convenient_service/pull/5 |
@@ -33,3 +33,4 @@
 | High | 🚧 | Optimize `stack.dup` in `MethodMiddlewares#call` | Core v3 |
 | Medium | 🚧 | Make a decision of what to do with `printable_block` in custom RSpec matchers | |
 | Medium | 🚧 | User-friendly exception messages | |
+| High | 🚧 | Factories for POROs | |

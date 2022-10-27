@@ -11,12 +11,6 @@ module ConvenientService
                 include Support::Delegate
 
                 ##
-                # @!attribute [r] scope
-                #   @return [:instance, :class]
-                #
-                attr_reader :scope
-
-                ##
                 # @!attribute [r] container
                 #   @return [ConvenientService::Core::Entities::MethodMiddlewares::Entities::Container]
                 #
@@ -25,15 +19,13 @@ module ConvenientService
                 ##
                 # @return [Class]
                 #
-                delegate :service_class, to: :container
+                delegate :klass, to: :container
 
                 ##
-                # @param scope [:instance, :scope]
                 # @param container [ConvenientService::Core::Entities::MethodMiddlewares::Entities::Container]
                 # @return [void]
                 #
-                def initialize(scope:, container:)
-                  @scope = scope
+                def initialize(container:)
                   @container = container
                 end
 
@@ -50,21 +42,21 @@ module ConvenientService
                 # @return [Module, nil]
                 #
                 def get_methods_middlewares_callers
-                  Utils::Module.get_own_const(service_class, module_name)
+                  Utils::Module.get_own_const(klass, module_name)
                 end
 
                 ##
                 # @return [Module]
                 #
                 def set_methods_middlewares_callers
-                  service_class.const_set(module_name, ::Module.new)
+                  klass.const_set(module_name, ::Module.new)
                 end
 
                 ##
                 # @return [Symbol]
                 #
                 def module_name
-                  @module_name ||= "#{scope.capitalize}MethodsMiddlewaresCallers".to_sym
+                  @module_name ||= :MethodsMiddlewaresCallers
                 end
               end
             end
