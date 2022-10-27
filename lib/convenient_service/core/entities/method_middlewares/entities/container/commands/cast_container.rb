@@ -39,11 +39,13 @@ module ConvenientService
                 private
 
                 ##
+                # @param hash [Hash]
                 # @return [ConvenientService::Core::Entities::MethodMiddlewares::Entities::Container, nil]
                 #
                 def cast_hash(hash)
                   return unless hash[:scope]
                   return unless hash[:klass]
+                  return unless hash[:klass].is_a?(Class)
 
                   case hash[:scope]
                   when :instance
@@ -54,6 +56,7 @@ module ConvenientService
                 end
 
                 ##
+                # @param container [ConvenientService::Core::Entities::MethodMiddlewares::Entities::Container]
                 # @return [ConvenientService::Core::Entities::MethodMiddlewares::Entities::Container]
                 #
                 def cast_container(container)
