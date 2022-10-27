@@ -85,6 +85,8 @@ module ConvenientService
             #   ancestors_greater_than_methods_middlewares_callers # For the entity defined above.
             #   # [#<Class:Service>, ConvenientService::Core::ClassMethods, #<Class:Object>, #<Class:BasicObject>, Class, Module, Object, Kernel, BasicObject]# [Service::ClassMethodsMiddlewaresCallers, #<Class:Service>, ConvenientService::Core::ClassMethods, #<Class:Object>, #<Class:BasicObject>, Class, Module, Object, Kernel, BasicObject]
             #
+            # @note Returns empty array when `methods_middlewares_callers` are NOT prepended.
+            #
             # @internal
             #   NOTE: greater than -> futher in the inheritance chain than
             #   https://ruby-doc.org/core-2.7.0/Module.html#method-i-3E
@@ -100,6 +102,8 @@ module ConvenientService
             # @param method_name [Symbol, String]
             # @return [UnboundMethod, nil]
             #
+            # @note Returns `nil` when `methods_middlewares_callers` are NOT prepended.
+            #
             def resolve_unbound_super_method(method_name)
               Utils::Array.find_yield(ancestors_greater_than_methods_middlewares_callers) { |ancestor| Utils::Module.get_own_instance_method(ancestor, method_name, private: true) }
             end
@@ -108,6 +112,8 @@ module ConvenientService
             # @param method_name [Symbol, String]
             # @param entity [Class, Object]
             # @return [Method, nil]
+            #
+            # @note Returns `nil` when `methods_middlewares_callers` are NOT prepended.
             #
             def resolve_super_method(method_name, entity)
               unbound_super_method = resolve_unbound_super_method(method_name)
