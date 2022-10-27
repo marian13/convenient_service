@@ -141,34 +141,6 @@
 </li>
 
     
-      <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#scope-instance_method" title="#scope (instance method)">#<strong>scope</strong>  &#x21d2; Object </a>
-    
-
-    
-  </span>
-  
-  
-  
-    
-      <span class="note title readonly">readonly</span>
-    
-    
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'><p>Returns the value of attribute scope.</p>
-</div></span>
-  
-</li>
-
-    
   </ul>
 
 
@@ -207,7 +179,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(scope:, container:)  &#x21d2; void </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(container:)  &#x21d2; void </a>
     
 
     
@@ -231,7 +203,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#service_class-instance_method" title="#service_class (instance method)">#<strong>service_class</strong>  &#x21d2; Class </a>
+      <a href="#klass-instance_method" title="#klass (instance method)">#<strong>klass</strong>  &#x21d2; Class </a>
     
 
     
@@ -287,7 +259,7 @@
     <div class="method_details first">
   <h3 class="signature first" id="initialize-instance_method">
   
-    #<strong>initialize</strong>(scope:, container:)  &#x21d2; <tt>void</tt> 
+    #<strong>initialize</strong>(container:)  &#x21d2; <tt>void</tt> 
   
 
   
@@ -302,17 +274,6 @@
 <div class="tags">
   <p class="tag_title">Parameters:</p>
 <ul class="param">
-  
-    <li>
-      
-        <span class='name'>scope</span>
-      
-      
-        <span class='type'>(<tt>:instance</tt>, <tt>:scope</tt>)</span>
-      
-      
-      
-    </li>
   
     <li>
       
@@ -334,16 +295,14 @@
       <pre class="lines">
 
 
-35
-36
-37
-38</pre>
+28
+29
+30</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/entities/container/commands/resolve_methods_middlewares_callers.rb', line 35</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/entities/container/commands/resolve_methods_middlewares_callers.rb', line 28</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>scope:</span><span class='comma'>,</span> <span class='label'>container:</span><span class='rparen'>)</span>
-  <span class='ivar'>@scope</span> <span class='op'>=</span> <span class='id identifier rubyid_scope'>scope</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>container:</span><span class='rparen'>)</span>
   <span class='ivar'>@container</span> <span class='op'>=</span> <span class='id identifier rubyid_container'>container</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -383,48 +342,6 @@
       <pre class="lines">
 
 
-23
-24
-25</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/entities/container/commands/resolve_methods_middlewares_callers.rb', line 23</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_container'>container</span>
-  <span class='ivar'>@container</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      
-      <span id=""></span>
-      <div class="method_details ">
-  <h3 class="signature " id="scope-instance_method">
-  
-    #<strong>scope</strong>  &#x21d2; <tt>Object</tt>  <span class="extras">(readonly)</span>
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    <p>Returns the value of attribute scope.</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
 17
 18
 19</pre>
@@ -432,8 +349,8 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/entities/container/commands/resolve_methods_middlewares_callers.rb', line 17</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_scope'>scope</span>
-  <span class='ivar'>@scope</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_container'>container</span>
+  <span class='ivar'>@container</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -484,12 +401,12 @@
       <pre class="lines">
 
 
-43
-44
-45</pre>
+35
+36
+37</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/entities/container/commands/resolve_methods_middlewares_callers.rb', line 43</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/entities/container/commands/resolve_methods_middlewares_callers.rb', line 35</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span>
   <span class='id identifier rubyid_get_methods_middlewares_callers'>get_methods_middlewares_callers</span> <span class='op'>||</span> <span class='id identifier rubyid_set_methods_middlewares_callers'>set_methods_middlewares_callers</span>
@@ -500,9 +417,9 @@
 </div>
     
       <div class="method_details ">
-  <h3 class="signature " id="service_class-instance_method">
+  <h3 class="signature " id="klass-instance_method">
   
-    #<strong>service_class</strong>  &#x21d2; <tt>Class</tt> 
+    #<strong>klass</strong>  &#x21d2; <tt>Class</tt> 
   
 
   
@@ -536,12 +453,12 @@
       <pre class="lines">
 
 
-28</pre>
+22</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/entities/container/commands/resolve_methods_middlewares_callers.rb', line 28</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/entities/container/commands/resolve_methods_middlewares_callers.rb', line 22</span>
 
-<span class='id identifier rubyid_delegate'>delegate</span> <span class='symbol'>:service_class</span><span class='comma'>,</span> <span class='label'>to:</span> <span class='symbol'>:container</span></pre>
+<span class='id identifier rubyid_delegate'>delegate</span> <span class='symbol'>:klass</span><span class='comma'>,</span> <span class='label'>to:</span> <span class='symbol'>:container</span></pre>
     </td>
   </tr>
 </table>
@@ -552,7 +469,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Oct 24 18:08:18 2022 by
+  Generated on Thu Oct 27 23:14:03 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>

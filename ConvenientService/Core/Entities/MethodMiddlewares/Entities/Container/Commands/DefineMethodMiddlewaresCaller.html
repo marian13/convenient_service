@@ -89,6 +89,11 @@
   
   
   
+  <dl>
+      <dt>Includes:</dt>
+      <dd><span class='object_link'><a href="../../../../../../Support/Delegate.html" title="ConvenientService::Support::Delegate (module)">Support::Delegate</a></span></dd>
+  </dl>
+  
   
 
   
@@ -252,9 +257,70 @@
 </li>
 
       
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#methods_middlewares_callers-instance_method" title="#methods_middlewares_callers (instance method)">#<strong>methods_middlewares_callers</strong>  &#x21d2; Module </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#prepend_methods_middlewares_callers_to_container-instance_method" title="#prepend_methods_middlewares_callers_to_container (instance method)">#<strong>prepend_methods_middlewares_callers_to_container</strong>  &#x21d2; void </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
     </ul>
   
 
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="../../../../../../Support/Concern.html" title="ConvenientService::Support::Concern (module)">Support::Concern</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../../../../../../Support/Concern.html#included-class_method" title="ConvenientService::Support::Concern.included (method)">included</a></span></p>
 
   
   
@@ -290,17 +356,6 @@
   
     <li>
       
-        <span class='name'>scope</span>
-      
-      
-        <span class='type'>(<tt>:instance</tt>, <tt>:class</tt>)</span>
-      
-      
-      
-    </li>
-  
-    <li>
-      
         <span class='name'>method</span>
       
       
@@ -330,14 +385,14 @@
       <pre class="lines">
 
 
-35
-36
-37
-38
-39</pre>
+46
+47
+48
+49
+50</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/entities/container/commands/define_method_middlewares_caller.rb', line 35</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/entities/container/commands/define_method_middlewares_caller.rb', line 46</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>scope:</span><span class='comma'>,</span> <span class='label'>method:</span><span class='comma'>,</span> <span class='label'>container:</span><span class='rparen'>)</span>
   <span class='ivar'>@scope</span> <span class='op'>=</span> <span class='id identifier rubyid_scope'>scope</span>
@@ -381,12 +436,12 @@
       <pre class="lines">
 
 
-27
-28
-29</pre>
+29
+30
+31</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/entities/container/commands/define_method_middlewares_caller.rb', line 27</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/entities/container/commands/define_method_middlewares_caller.rb', line 29</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_container'>container</span>
   <span class='ivar'>@container</span>
@@ -423,12 +478,12 @@
       <pre class="lines">
 
 
-21
-22
-23</pre>
+23
+24
+25</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/entities/container/commands/define_method_middlewares_caller.rb', line 21</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/entities/container/commands/define_method_middlewares_caller.rb', line 23</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_method'>method</span>
   <span class='ivar'>@method</span>
@@ -465,12 +520,12 @@
       <pre class="lines">
 
 
-15
-16
-17</pre>
+17
+18
+19</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/entities/container/commands/define_method_middlewares_caller.rb', line 15</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/entities/container/commands/define_method_middlewares_caller.rb', line 17</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_scope'>scope</span>
   <span class='ivar'>@scope</span>
@@ -529,18 +584,18 @@
       <pre class="lines">
 
 
-44
-45
-46
-47
-48
-49
-50
-51
-52</pre>
+55
+56
+57
+58
+59
+60
+61
+62
+63</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/entities/container/commands/define_method_middlewares_caller.rb', line 44</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/entities/container/commands/define_method_middlewares_caller.rb', line 55</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span>
   <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='const'><span class='object_link'><a href="../../../../../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../Utils/Method.html" title="ConvenientService::Utils::Method (module)">Method</a></span></span><span class='period'>.</span><span class='id identifier rubyid_defined?'><span class='object_link'><a href="../../../../../../Utils/Method.html#defined%3F-class_method" title="ConvenientService::Utils::Method.defined? (method)">defined?</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='id identifier rubyid_methods_middlewares_callers'>methods_middlewares_callers</span><span class='comma'>,</span> <span class='label'>private:</span> <span class='kw'>true</span><span class='rparen'>)</span>
@@ -556,12 +611,95 @@
 </table>
 </div>
     
+      <div class="method_details ">
+  <h3 class="signature " id="methods_middlewares_callers-instance_method">
+  
+    #<strong>methods_middlewares_callers</strong>  &#x21d2; <tt>Module</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Module</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+39</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/entities/container/commands/define_method_middlewares_caller.rb', line 39</span>
+
+<span class='id identifier rubyid_delegate'>delegate</span> <span class='symbol'>:methods_middlewares_callers</span><span class='comma'>,</span> <span class='label'>to:</span> <span class='symbol'>:container</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="prepend_methods_middlewares_callers_to_container-instance_method">
+  
+    #<strong>prepend_methods_middlewares_callers_to_container</strong>  &#x21d2; <tt>void</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p class="note returns_void">This method returns an undefined value.</p>
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+34</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/method_middlewares/entities/container/commands/define_method_middlewares_caller.rb', line 34</span>
+
+<span class='id identifier rubyid_delegate'>delegate</span> <span class='symbol'>:prepend_methods_middlewares_callers_to_container</span><span class='comma'>,</span> <span class='label'>to:</span> <span class='symbol'>:container</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
   </div>
 
 </div>
 
       <div id="footer">
-  Generated on Mon Oct 24 18:08:18 2022 by
+  Generated on Thu Oct 27 23:14:03 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>
