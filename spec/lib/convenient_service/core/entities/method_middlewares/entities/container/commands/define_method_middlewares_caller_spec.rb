@@ -59,6 +59,58 @@ RSpec.describe ConvenientService::Core::Entities::MethodMiddlewares::Entities::C
             expect(command_result).to eq(false)
           end
         end
+
+        example_group "generated method" do
+          let(:service_instance) { service_class.new }
+
+          context "when super is NOT defined" do
+            let(:service_class) do
+              Class.new do
+                include ConvenientService::Core
+
+                middlewares(:result, scope: :instance) do
+                  middleware = Class.new(ConvenientService::Core::Entities::MethodMiddlewares::Entities::Middleware) do
+                    def next(...)
+                      [:middleware_value, *chain.next(...)]
+                    end
+                  end
+
+                  use middleware
+                end
+              end
+            end
+
+            it "raises `NoMethodError`" do
+              expect { service_instance.result }.to raise_error(NoMethodError).with_message("super: no superclass method `result' for #{service_instance}")
+            end
+          end
+
+          context "when super is defined" do
+            let(:service_class) do
+              Class.new do
+                include ConvenientService::Core
+
+                middlewares(:result, scope: :instance) do
+                  middleware = Class.new(ConvenientService::Core::Entities::MethodMiddlewares::Entities::Middleware) do
+                    def next(...)
+                      [:middleware_value, *chain.next(...)]
+                    end
+                  end
+
+                  use middleware
+                end
+
+                def result
+                  :original_value
+                end
+              end
+            end
+
+            it "calls middlewares and super" do
+              expect(service_instance.result).to eq([:middleware_value, :original_value])
+            end
+          end
+        end
       end
 
       context "when `scope` is `:class`" do
@@ -88,6 +140,58 @@ RSpec.describe ConvenientService::Core::Entities::MethodMiddlewares::Entities::C
 
           it "returns `false`" do
             expect(command_result).to eq(false)
+          end
+        end
+
+        example_group "generated method" do
+          context "when super is NOT defined" do
+            let(:service_class) do
+              Class.new do
+                include ConvenientService::Core
+
+                middlewares(:result, scope: :class) do
+                  middleware = Class.new(ConvenientService::Core::Entities::MethodMiddlewares::Entities::Middleware) do
+                    def next(...)
+                      [:middleware_value, *chain.next(...)]
+                    end
+                  end
+
+                  use middleware
+                end
+              end
+            end
+
+            it "raises `NoMethodError`" do
+              expect { service_class.result }.to raise_error(NoMethodError).with_message("super: no superclass method `result' for #{service_class}")
+            end
+          end
+
+          context "when super is defined" do
+            let(:service_class) do
+              Class.new do
+                include ConvenientService::Core
+
+                middlewares(:result, scope: :class) do
+                  middleware = Class.new(ConvenientService::Core::Entities::MethodMiddlewares::Entities::Middleware) do
+                    def next(...)
+                      [:middleware_value, *chain.next(...)]
+                    end
+                  end
+
+                  use middleware
+                end
+
+                class << self
+                  def result
+                    :original_value
+                  end
+                end
+              end
+            end
+
+            it "calls middlewares and super" do
+              expect(service_class.result).to eq([:middleware_value, :original_value])
+            end
           end
         end
       end

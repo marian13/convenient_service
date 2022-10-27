@@ -25,7 +25,7 @@ module ConvenientService
         # @return [String]
         #
         def no_super_method_exception_message_for(entity)
-          "super: no superclass method `foo' for #{entity}"
+          "super: no superclass method `#{method}' for #{entity}"
         end
 
         ##

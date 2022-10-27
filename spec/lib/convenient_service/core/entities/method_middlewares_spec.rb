@@ -51,7 +51,7 @@ RSpec.describe ConvenientService::Core::Entities::MethodMiddlewares do
   example_group "instance methods" do
     describe "#no_super_method_exception_message_for" do
       it "returns message" do
-        expect(method_middlewares.no_super_method_exception_message_for(entity)).to eq("super: no superclass method `foo' for #{entity}")
+        expect(method_middlewares.no_super_method_exception_message_for(entity)).to eq("super: no superclass method `#{method}' for #{entity}")
       end
     end
 
