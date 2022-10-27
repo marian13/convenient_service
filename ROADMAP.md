@@ -33,3 +33,4 @@
 | High | 🚧 | Optimize `stack.dup` in `MethodMiddlewares#call` | Core v3 |
 | Medium | 🚧 | Make a decision of what to do with `printable_block` in custom RSpec matchers | |
 | Medium | 🚧 | User-friendly exception messages | |
+| High | 🚧 | Factories for POROs | |
