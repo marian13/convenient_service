@@ -88,13 +88,46 @@ RSpec.describe ConvenientService::Core::Entities::MethodMiddlewares::Entities::C
   # end
 
   example_group "instance methods" do
-    ##
-    # TODO: Specs.
-    #
-    # describe "#super_method_defined?" do
-    #   # ...
-    # end
-    #
+    describe "#super_method_defined?" do
+      context "unbound super method can NOT be resolved" do
+        let(:service_class) do
+          Class.new.tap do |klass|
+            klass.class_exec(concern) do |concern|
+              include ConvenientService::Core
+            end
+          end
+        end
+
+        it "returns `false`" do
+          expect(caller.super_method_defined?(method_name)).to eq(false)
+        end
+      end
+
+      context "unbound super method can be resolved" do
+        let(:service_class) do
+          Class.new.tap do |klass|
+            klass.class_exec(concern) do |concern|
+              include ConvenientService::Core
+
+              concerns do |stack|
+                stack.use concern
+              end
+
+              middlewares(:result) {}
+            end
+          end
+        end
+
+        before do
+          service_class.commit_config!
+        end
+
+        it "returns `true`" do
+          expect(caller.super_method_defined?(method_name)).to eq(true)
+        end
+      end
+    end
+
     describe "#ancestors_greater_than_methods_middlewares_callers" do
       context "when `service_class` does NOT have `methods_middlewares_callers`" do
         let(:service_class) do

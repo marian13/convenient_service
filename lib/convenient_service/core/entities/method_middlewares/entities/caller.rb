@@ -86,6 +86,7 @@ module ConvenientService
             #   # [#<Class:Service>, ConvenientService::Core::ClassMethods, #<Class:Object>, #<Class:BasicObject>, Class, Module, Object, Kernel, BasicObject]# [Service::ClassMethodsMiddlewaresCallers, #<Class:Service>, ConvenientService::Core::ClassMethods, #<Class:Object>, #<Class:BasicObject>, Class, Module, Object, Kernel, BasicObject]
             #
             # @note Returns empty array when `methods_middlewares_callers` are NOT prepended.
+            # @note If you expect to receive not empty array, make sure the config is committed.
             #
             # @internal
             #   NOTE: greater than -> futher in the inheritance chain than
@@ -103,6 +104,7 @@ module ConvenientService
             # @return [UnboundMethod, nil]
             #
             # @note Returns `nil` when `methods_middlewares_callers` are NOT prepended.
+            # @note If you expect to receive not `nil`, make sure the config is committed.
             #
             def resolve_unbound_super_method(method_name)
               Utils::Array.find_yield(ancestors_greater_than_methods_middlewares_callers) { |ancestor| Utils::Module.get_own_instance_method(ancestor, method_name, private: true) }
@@ -114,6 +116,7 @@ module ConvenientService
             # @return [Method, nil]
             #
             # @note Returns `nil` when `methods_middlewares_callers` are NOT prepended.
+            # @note If you expect to receive not `nil`, make sure the config is committed.
             #
             def resolve_super_method(method_name, entity)
               unbound_super_method = resolve_unbound_super_method(method_name)
