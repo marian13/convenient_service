@@ -22,6 +22,7 @@ module ConvenientService
         end
 
         ##
+        # @param entity [Object, Class]
         # @return [String]
         #
         def no_super_method_exception_message_for(entity)

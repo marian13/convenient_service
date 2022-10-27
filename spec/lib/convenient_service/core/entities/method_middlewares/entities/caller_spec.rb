@@ -11,7 +11,7 @@ RSpec.describe ConvenientService::Core::Entities::MethodMiddlewares::Entities::C
   let(:caller) { caller_class.new(container: container) }
   let(:caller_class) { described_class }
 
-  let(:entity) { double }
+  let(:entity) { service_instance }
   let(:method_name) { :result }
 
   let(:container) { ConvenientService::Core::Entities::MethodMiddlewares::Entities::Container.new(klass: klass) }
@@ -89,7 +89,7 @@ RSpec.describe ConvenientService::Core::Entities::MethodMiddlewares::Entities::C
 
   example_group "instance methods" do
     describe "#super_method_defined?" do
-      context "unbound super method can NOT be resolved" do
+      context "when unbound super method can NOT be resolved" do
         let(:service_class) do
           Class.new.tap do |klass|
             klass.class_exec(concern) do |concern|
@@ -103,7 +103,7 @@ RSpec.describe ConvenientService::Core::Entities::MethodMiddlewares::Entities::C
         end
       end
 
-      context "unbound super method can be resolved" do
+      context "when unbound super method can be resolved" do
         let(:service_class) do
           Class.new.tap do |klass|
             klass.class_exec(concern) do |concern|
@@ -283,13 +283,46 @@ RSpec.describe ConvenientService::Core::Entities::MethodMiddlewares::Entities::C
       end
     end
 
-    ##
-    # TODO: Specs.
-    #
-    # describe "#resolve_super_method" do
-    #   # ...
-    # end
-    #
+    describe "#resolve_super_method" do
+      context "when unbound super method can NOT be resolved" do
+        let(:service_class) do
+          Class.new.tap do |klass|
+            klass.class_exec(concern) do |concern|
+              include ConvenientService::Core
+            end
+          end
+        end
+
+        it "returns `nil`" do
+          expect(caller.resolve_super_method(method_name, entity)).to eq(nil)
+        end
+      end
+
+      context "when unbound super method can be resolved" do
+        let(:service_class) do
+          Class.new.tap do |klass|
+            klass.class_exec(concern) do |concern|
+              include ConvenientService::Core
+
+              concerns do |stack|
+                stack.use concern
+              end
+
+              middlewares(:result) {}
+            end
+          end
+        end
+
+        before do
+          service_class.commit_config!
+        end
+
+        it "returns super method bound to entity" do
+          expect(caller.resolve_super_method(method_name, entity)).to eq(concern::InstanceMethods.instance_method(method_name).bind(entity))
+        end
+      end
+    end
+
     describe "#to_kwargs" do
       let(:kwargs) { {container: container} }
 
