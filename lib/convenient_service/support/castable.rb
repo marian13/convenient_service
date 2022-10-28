@@ -23,6 +23,10 @@ module ConvenientService
       end
 
       class_methods do
+        ##
+        # @internal
+        #   TODO: `include Support::Castable` also extends `Support::AbstractMethod`. Is there a way to avoid such behavior?
+        #
         include Support::AbstractMethod
 
         abstract_method :cast
