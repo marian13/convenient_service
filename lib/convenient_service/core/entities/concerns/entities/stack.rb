@@ -137,28 +137,13 @@ module ConvenientService
             private
 
             ##
-            # @param value [Integer, Module]
+            # @param value [Integer, ConvenientService::Support::Concern, Module]
             # @return [Class]
             #
             def cast(value)
-              ##
-              # TODO: Command.
-              #
               return value if value.is_a?(::Integer)
 
-              ##
-              # NOTE: `ruby-middleware` expects a `Class` or object that responds to `call`.
-              # https://github.com/Ibsciss/ruby-middleware/blob/v0.4.2/lib/middleware/runner.rb#L52
-              # https://github.com/Ibsciss/ruby-middleware#middleware-lambdas
-              #
-              # IMPORTANT: Must be kept in sync with `def concern` in `ConvenientService::Core::Entities::Concerns::Middleware`.
-              #
-              ::Class.new(Entities::Middleware).tap do |klass|
-                klass.class_exec(value) do |concern|
-                  define_singleton_method(:concern) { concern }
-                  define_singleton_method(:==) { |other| self.concern == other.concern if other.instance_of?(self.class) }
-                end
-              end
+              Entities::Middleware.cast!(value)
             end
           end
         end

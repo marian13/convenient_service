@@ -55,7 +55,7 @@ RSpec.describe ConvenientService::Core::Entities::MethodMiddlewares::Entities::M
       end
     end
 
-    describe "#env" do
+    describe "#entity" do
       context "when middleware is NOT called" do
         it "returns `nil`" do
           expect(middleware_instance.entity).to eq(nil)

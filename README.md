@@ -40,14 +40,15 @@ This library is under heavy development. Public API may be subject to change. Th
 <!-- features:end -->
 <!-- warning:end -->
 
-<!-- usage:start -->
-## Getting Started
+<!-- documentation:start -->
+## Documentation
 
 - Check out [Convenient Service Official User Docs](https://marian13.github.io/convenient_service_docs/) for installation, requirements, and usage guides.
 
 - Have a look at [Convenient Service Development Wiki](https://github.com/marian13/convenient_service/wiki) if you consider making a contribution.
 
 ---
+<!-- documentation:end -->
 
 <!-- author:start -->
 Copyright (c) 2022 [Marian Kostyk](http://mariankostyk.com).

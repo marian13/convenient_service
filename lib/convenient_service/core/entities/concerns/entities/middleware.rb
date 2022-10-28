@@ -1,17 +1,42 @@
 # frozen_string_literal: true
 
+require_relative "middleware/commands"
+
 module ConvenientService
   module Core
     module Entities
       class Concerns
         module Entities
           class Middleware
+            include Support::Castable
+
             ##
             # @param stack [#call<Hash>]
             # @return [void]
             #
             def initialize(stack)
               @stack = stack
+            end
+
+            class << self
+              ##
+              # @internal
+              #   TODO: Why regular `include Support::AbstractMethod` does NOT work?.
+              #
+              extend Support::AbstractMethod::ClassMethods
+
+              ##
+              # @return [ConvenientService::Support::Concern, Module]
+              #
+              abstract_method :concern
+
+              ##
+              # @param other [ConvenientService::Support::Concern, Module]
+              # @return [ConvenientService::Core::Entities::Concerns::Entities::Middleware, nil]
+              #
+              def cast(other)
+                Commands::CastMiddleware.call(other: other)
+              end
             end
 
             ##
