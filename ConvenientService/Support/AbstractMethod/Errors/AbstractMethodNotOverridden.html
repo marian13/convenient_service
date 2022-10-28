@@ -96,7 +96,7 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/convenient_service/support/abstract_method.rb</dd>
+    <dd>lib/convenient_service/support/abstract_method/errors.rb</dd>
   </dl>
   
 </div>
@@ -173,19 +173,19 @@
       <pre class="lines">
 
 
+8
+9
+10
+11
+12
+13
 14
 15
 16
-17
-18
-19
-20
-21
-22
-23</pre>
+17</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/abstract_method.rb', line 14</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/abstract_method/errors.rb', line 8</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>instance:</span><span class='comma'>,</span> <span class='label'>method:</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_klass'>klass</span> <span class='op'>=</span> <span class='id identifier rubyid_instance'>instance</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='op'>::</span><span class='const'>Class</span><span class='rparen'>)</span> <span class='op'>?</span> <span class='id identifier rubyid_instance'>instance</span> <span class='op'>:</span> <span class='id identifier rubyid_instance'>instance</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span>
@@ -208,7 +208,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Oct 27 23:44:36 2022 by
+  Generated on Fri Oct 28 22:14:30 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>
