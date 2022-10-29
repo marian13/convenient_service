@@ -182,28 +182,14 @@ RSpec.describe ConvenientService::Core::Entities::MethodMiddlewares::Entities::S
         stack.use other_middleware
       end
 
-      context "when index passed" do
-        specify do
-          expect { stack.insert_before_each(index, middleware, *args, &block) }
-            .to delegate_to(plain_stack, :insert_before_each)
-            .with_arguments(index, middleware, *args, &block)
-        end
-
-        it "returns stack" do
-          expect(stack.insert_before_each(index, middleware, *args, &block)).to eq(stack)
-        end
+      specify do
+        expect { stack.insert_before_each(middleware, *args, &block) }
+          .to delegate_to(plain_stack, :insert_before_each)
+          .with_arguments(middleware, *args, &block)
       end
 
-      context "when middleware passed" do
-        specify do
-          expect { stack.insert_before_each(other_middleware, middleware, *args, &block) }
-            .to delegate_to(plain_stack, :insert_before_each)
-            .with_arguments(other_middleware, middleware, *args, &block)
-        end
-
-        it "returns stack" do
-          expect(stack.insert_before_each(index, middleware, *args, &block)).to eq(stack)
-        end
+      it "returns stack" do
+        expect(stack.insert_before_each(middleware, *args, &block)).to eq(stack)
       end
     end
 
@@ -212,28 +198,14 @@ RSpec.describe ConvenientService::Core::Entities::MethodMiddlewares::Entities::S
         stack.use other_middleware
       end
 
-      context "when index passed" do
-        specify do
-          expect { stack.insert_after_each(index, middleware, *args, &block) }
-            .to delegate_to(plain_stack, :insert_after_each)
-            .with_arguments(index, middleware, *args, &block)
-        end
-
-        it "returns stack" do
-          expect(stack.insert_after_each(index, middleware, *args, &block)).to eq(stack)
-        end
+      specify do
+        expect { stack.insert_after_each(middleware, *args, &block) }
+          .to delegate_to(plain_stack, :insert_after_each)
+          .with_arguments(middleware, *args, &block)
       end
 
-      context "when middleware passed" do
-        specify do
-          expect { stack.insert_after_each(other_middleware, middleware, *args, &block) }
-            .to delegate_to(plain_stack, :insert_after_each)
-            .with_arguments(other_middleware, middleware, *args, &block)
-        end
-
-        it "returns stack" do
-          expect(stack.insert_after_each(index, middleware, *args, &block)).to eq(stack)
-        end
+      it "returns stack" do
+        expect(stack.insert_after_each(middleware, *args, &block)).to eq(stack)
       end
     end
 
