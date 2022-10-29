@@ -37,6 +37,33 @@ module ConvenientService
               def cast(other)
                 Commands::CastMiddleware.call(other: other)
               end
+
+              ##
+              # @return [Boolean]
+              #
+              # @internal
+              #   NOTE: `@param other [Module, ConvenientService::Support::Concern, ConvenientService::Core::Entities::Concerns::Entities::Middleware]`
+              #   TODO: How to document `alias_method`?
+              #
+              #   https://ruby-doc.org/core-2.7.0/Module.html#method-i-3C
+              #
+              alias_method :original_two_equals, :==
+
+              ##
+              # @param other [Module, ConvenientService::Support::Concern, ConvenientService::Core::Entities::Concerns::Entities::Middleware]
+              # @return [Boolean]
+              #
+              # @internal
+              #   https://ruby-doc.org/core-2.7.0/Module.html#method-i-3C
+              #
+              def ==(other)
+                return true if Entities::Middleware.original_two_equals(other)
+
+                return unless other.instance_of?(Class)
+                return unless other < Entities::Middleware
+
+                concern == other.concern
+              end
             end
 
             ##

@@ -10,12 +10,12 @@ module ConvenientService
               class CastMiddleware < Support::Command
                 ##
                 # @!attribute [r] other
-                #   @return [ConvenientService::Support::Concern, Module]
+                #   @return [Module, ConvenientService::Support::Concern]
                 #
                 attr_reader :other
 
                 ##
-                # @param other [ConvenientService::Support::Concern, Module]
+                # @param other [Module, ConvenientService::Support::Concern, ConvenientService::Core::Entities::Concerns::Entities::Middleware]
                 # @return [void]
                 #
                 def initialize(other:)
@@ -26,8 +26,9 @@ module ConvenientService
                 # @return [ConvenientService::Core::Entities::Concerns::Entities::Middleware, nil]
                 #
                 def call
-                  case other
-                  when ::Module
+                  if other.instance_of?(Class) && other < Entities::Middleware
+                    cast_middleware(other)
+                  elsif other.instance_of?(Module)
                     cast_module(other)
                   end
                 end
@@ -43,19 +44,18 @@ module ConvenientService
                 #   IMPORTANT: Must be kept in sync with `def concern` in `ConvenientService::Core::Entities::Concerns::Middleware`.
                 #
                 def cast_module(mod)
-                  ::Class.new(Entities::Middleware).tap do |klass|
-                    klass.class_exec(mod) do |mod|
-                      ##
-                      # @return [ConvenientService::Support::Concern, Module]
-                      #
-                      define_singleton_method(:concern) { mod }
+                  middleware = ::Class.new(Entities::Middleware)
 
-                      ##
-                      # @return [Boolean]
-                      #
-                      define_singleton_method(:==) { |other| concern == other.concern if other.instance_of?(self.class) }
-                    end
-                  end
+                  ##
+                  # @return [Module, ConvenientService::Support::Concern]
+                  #
+                  middleware.define_singleton_method(:concern) { mod }
+
+                  middleware
+                end
+
+                def cast_middleware(middleware)
+                  middleware.dup
                 end
               end
             end
