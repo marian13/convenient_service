@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require_relative "concerns/entities"
-require_relative "concerns/errors"
 
 module ConvenientService
   module Core
@@ -53,21 +52,6 @@ module ConvenientService
             #
             def private_class_method_defined?(method_name)
               private_class_method_defined_in_class_methods_modules?(method_name)
-            end
-
-            ##
-            # @note: Concerns are included either by `commit_config` or `method_missing` from `ConvenientService::Core`.
-            #
-            # @return [void]
-            #
-            # @internal
-            #   NOTE: Concerns must be included only once since Ruby does NOT allow to modify the order of modules in the inheritance chain.
-            #   TODO: Redesign core to have an ability to change order of included/extended modules in v3? Does it really worth it?
-            #
-            def assert_not_included!
-              return unless included?
-
-              raise Errors::ConcernsAreIncluded.new(concerns: concerns)
             end
 
             ##

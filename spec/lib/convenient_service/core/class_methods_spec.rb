@@ -24,10 +24,10 @@ RSpec.describe ConvenientService::Core::ClassMethods do
       specify do
         allow(ConvenientService::Core::Entities::Config).to receive(:new).with(klass: service_class).and_return(config)
 
-        expect { service_class.concerns(&configuration_block) }
-          .to delegate_to(config, :concerns)
-          .with_arguments(&configuration_block)
-          .and_return_its_value
+        ##
+        # NOTE: `delegate_to` is NOT used since `concerns` is called twice under the hood.
+        #
+        expect(service_class.concerns(&configuration_block)).to eq(config.concerns)
       end
 
       ##

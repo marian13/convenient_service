@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "config/entities"
+require_relative "config/errors"
 
 module ConvenientService
   module Core
@@ -41,8 +42,9 @@ module ConvenientService
         #
         def concerns(&configuration_block)
           if configuration_block
+            assert_not_committed!
+
             @concerns ||= Entities::Concerns.new(klass: klass)
-            @concerns.assert_not_included!
             @concerns.configure(&configuration_block)
           end
 
@@ -93,6 +95,8 @@ module ConvenientService
           @middlewares[scope] ||= {}
 
           if configuration_block
+            assert_not_committed!
+
             @middlewares[scope][method] ||= Entities::MethodMiddlewares.new(scope: scope, method: method, klass: klass)
             @middlewares[scope][method].configure(&configuration_block)
             @middlewares[scope][method].define!
@@ -102,10 +106,40 @@ module ConvenientService
         end
 
         ##
-        # @return [void]
+        # @return [Boolean]
+        #
+        def committed?
+          concerns.included?
+        end
+
+        ##
+        # Commits config when called for the first time.
+        # Does nothing for the subsequent calls.
+        #
+        # @return [Boolean] true if called for the first time, false otherwise (similarly as Kernel#require).
+        #
+        # @see https://ruby-doc.org/core-3.1.2/Kernel.html#method-i-require
         #
         def commit!
           concerns.include!
+        end
+
+        private
+
+        ##
+        # @note: Config is committed either by `commit_config` or `method_missing` from `ConvenientService::Core::ClassMethods`.
+        #
+        # @return [void]
+        # @raise [ConvenientService::Core::Entities::Config::Errors::ConfigIsCommitted]
+        #
+        # @internal
+        #   NOTE: Concerns must be included only once since Ruby does NOT allow to modify the order of modules in the inheritance chain.
+        #   TODO: Redesign core to have an ability to change order of included/extended modules in v3? Does it really worth it?
+        #
+        def assert_not_committed!
+          return unless committed?
+
+          raise Errors::ConfigIsCommitted.new(config: self)
         end
       end
     end
