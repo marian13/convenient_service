@@ -73,7 +73,7 @@
   
   <dl>
       <dt>Includes:</dt>
-      <dd><span class='object_link'><a href="../../../../../../../../Support/Copyable.html" title="ConvenientService::Support::Copyable (module)">Support::Copyable</a></span></dd>
+      <dd><span class='object_link'><a href="../../../../../../../../Support/Copyable.html" title="ConvenientService::Support::Copyable (module)">Support::Copyable</a></span>, <span class='object_link'><a href="../../../../../../../../Support/Delegate.html" title="ConvenientService::Support::Delegate (module)">Support::Delegate</a></span></dd>
   </dl>
   
   
@@ -161,7 +161,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#define_method_middlewares_caller!-instance_method" title="#define_method_middlewares_caller! (instance method)">#<strong>define_method_middlewares_caller!</strong>(scope, method)  &#x21d2; Boolean </a>
+      <a href="#ancestors-instance_method" title="#ancestors (instance method)">#<strong>ancestors</strong>  &#x21d2; Array&lt;Class, Module&gt; </a>
     
 
     
@@ -176,6 +176,29 @@
 
   
     <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ancestors_greater_than_methods_middlewares_callers-instance_method" title="#ancestors_greater_than_methods_middlewares_callers (instance method)">#<strong>ancestors_greater_than_methods_middlewares_callers</strong>  &#x21d2; Array&lt;Class, Module&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns ancestors before the <code>methods_middlewares_callers</code> module.</p>
+</div></span>
   
 </li>
 
@@ -249,6 +272,72 @@
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#resolve_super_method-instance_method" title="#resolve_super_method (instance method)">#<strong>resolve_super_method</strong>(method_name, entity)  &#x21d2; Method<sup>?</sup> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#resolve_unbound_super_method-instance_method" title="#resolve_unbound_super_method (instance method)">#<strong>resolve_unbound_super_method</strong>(method_name)  &#x21d2; UnboundMethod<sup>?</sup> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#super_method_defined%3F-instance_method" title="#super_method_defined? (instance method)">#<strong>super_method_defined?</strong>(method_name)  &#x21d2; UnboundMethod<sup>?</sup> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#to_kwargs-instance_method" title="#to_kwargs (instance method)">#<strong>to_kwargs</strong>  &#x21d2; Hash </a>
     
 
@@ -271,6 +360,23 @@
     </ul>
   
 
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="../../../../../../../../Support/Concern.html" title="ConvenientService::Support::Concern (module)">Support::Concern</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../../../../../../../../Support/Concern.html#included-class_method" title="ConvenientService::Support::Concern.included (method)">included</a></span></p>
 
   
   
@@ -313,12 +419,12 @@
       <pre class="lines">
 
 
-19
 20
-21</pre>
+21
+22</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/container/concern/instance_methods.rb', line 19</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/container/concern/instance_methods.rb', line 20</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_klass'>klass</span>
   <span class='ivar'>@klass</span>
@@ -387,16 +493,16 @@
       <pre class="lines">
 
 
-56
-57
-58
-59
-60
-61
-62</pre>
+142
+143
+144
+145
+146
+147
+148</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/container/concern/instance_methods.rb', line 56</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/container/concern/instance_methods.rb', line 142</span>
 
 <span class='kw'>def</span> <span class='op'>==</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='rparen'>)</span>
@@ -411,9 +517,9 @@
 </div>
     
       <div class="method_details ">
-  <h3 class="signature " id="define_method_middlewares_caller!-instance_method">
+  <h3 class="signature " id="ancestors-instance_method">
   
-    #<strong>define_method_middlewares_caller!</strong>(scope, method)  &#x21d2; <tt>Boolean</tt> 
+    #<strong>ancestors</strong>  &#x21d2; <tt>Array&lt;Class, Module&gt;</tt> 
   
 
   
@@ -426,40 +532,14 @@
   </div>
 </div>
 <div class="tags">
-  <p class="tag_title">Parameters:</p>
-<ul class="param">
   
-    <li>
-      
-        <span class='name'>scope</span>
-      
-      
-        <span class='type'>(<tt>:instance</tt>, <tt>:class</tt>)</span>
-      
-      
-      
-    </li>
-  
-    <li>
-      
-        <span class='name'>method</span>
-      
-      
-        <span class='type'>(<tt>Symbol</tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
-
 <p class="tag_title">Returns:</p>
 <ul class="return">
   
     <li>
       
       
-        <span class='type'>(<tt>Boolean</tt>)</span>
+        <span class='type'>(<tt>Array&lt;Class, Module&gt;</tt>)</span>
       
       
       
@@ -473,15 +553,123 @@
       <pre class="lines">
 
 
-41
-42
-43</pre>
+25</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/container/concern/instance_methods.rb', line 41</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/container/concern/instance_methods.rb', line 25</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_define_method_middlewares_caller!'>define_method_middlewares_caller!</span><span class='lparen'>(</span><span class='id identifier rubyid_scope'>scope</span><span class='comma'>,</span> <span class='id identifier rubyid_method'>method</span><span class='rparen'>)</span>
-  <span class='const'><span class='object_link'><a href="../Commands.html" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Container::Commands (module)">Commands</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Commands/DefineMethodMiddlewaresCaller.html" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Container::Commands::DefineMethodMiddlewaresCaller (class)">DefineMethodMiddlewaresCaller</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="../Commands/DefineMethodMiddlewaresCaller.html#call-instance_method" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Container::Commands::DefineMethodMiddlewaresCaller#call (method)">call</a></span></span><span class='lparen'>(</span><span class='label'>scope:</span> <span class='id identifier rubyid_scope'>scope</span><span class='comma'>,</span> <span class='label'>method:</span> <span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='label'>container:</span> <span class='kw'>self</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_delegate'>delegate</span> <span class='symbol'>:ancestors</span><span class='comma'>,</span> <span class='label'>to:</span> <span class='symbol'>:klass</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="ancestors_greater_than_methods_middlewares_callers-instance_method">
+  
+    #<strong>ancestors_greater_than_methods_middlewares_callers</strong>  &#x21d2; <tt>Array&lt;Class, Module&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p>Returns empty array when <code>methods_middlewares_callers</code> are NOT prepended.</p>
+</div>
+  </div>
+
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p>If you expect to receive not empty array, make sure the config is committed.</p>
+</div>
+  </div>
+
+<p>Returns ancestors before the <code>methods_middlewares_callers</code> module. See the example below.
+When ancestors do NOT contain <code>methods_middlewares_callers</code>, returns an empty array.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>The entity is an object.</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='kw'>class</span> <span class='const'><span class='object_link'><a href="../../../../../../../../Service.html" title="ConvenientService::Service (module)">Service</a></span></span>
+  <span class='id identifier rubyid_include'>include</span> <span class='const'><span class='object_link'><a href="../../../../../../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../../Core.html" title="ConvenientService::Core (module)">Core</a></span></span>
+
+  <span class='id identifier rubyid_middlewares'>middlewares</span> <span class='symbol'>:result</span> <span class='kw'>do</span>
+    <span class='id identifier rubyid_use'>use</span> <span class='const'><span class='object_link'><a href="../../../../../../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../../Plugins.html" title="ConvenientService::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../../Plugins.html#Common-constant" title="ConvenientService::Plugins::Common (constant)">Common</a></span></span><span class='op'>::</span><span class='const'>NormalizesEnv</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span>
+
+<span class='id identifier rubyid_entity'>entity</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../../../../Service.html" title="ConvenientService::Service (module)">Service</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+
+<span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_ancestors'>ancestors</span>
+<span class='comment'># [Service::InstanceMethodsMiddlewaresCallers, Service, ConvenientService::Core::InstanceMethods, ConvenientService::Core, ConvenientService::Support::Concern, Object, Kernel, BasicObject]
+</span>
+<span class='id identifier rubyid_ancestors_greater_than_methods_middlewares_callers'>ancestors_greater_than_methods_middlewares_callers</span> <span class='comment'># For the entity defined above.
+</span><span class='comment'># [Service, ConvenientService::Core::InstanceMethods, ConvenientService::Core, ConvenientService::Support::Concern, Object, Kernel, BasicObject]</span></code></pre>
+    
+      
+        <p class="example_title"><div class='inline'><p>The entity is class.</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='kw'>class</span> <span class='const'><span class='object_link'><a href="../../../../../../../../Service.html" title="ConvenientService::Service (module)">Service</a></span></span>
+  <span class='id identifier rubyid_include'>include</span> <span class='const'><span class='object_link'><a href="../../../../../../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../../Core.html" title="ConvenientService::Core (module)">Core</a></span></span>
+
+  <span class='id identifier rubyid_middlewares'>middlewares</span> <span class='symbol'>:result</span><span class='comma'>,</span> <span class='label'>scope:</span> <span class='symbol'>:class</span> <span class='kw'>do</span>
+    <span class='id identifier rubyid_use'>use</span> <span class='const'><span class='object_link'><a href="../../../../../../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../../Plugins.html" title="ConvenientService::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../../Plugins.html#Common-constant" title="ConvenientService::Plugins::Common (constant)">Common</a></span></span><span class='op'>::</span><span class='const'>NormalizesEnv</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span>
+
+<span class='id identifier rubyid_entity'>entity</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../../../../Service.html" title="ConvenientService::Service (module)">Service</a></span></span>
+
+<span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_singleton_class'>singleton_class</span><span class='period'>.</span><span class='id identifier rubyid_ancestors'>ancestors</span>
+<span class='comment'># [Service::ClassMethodsMiddlewaresCallers, #&lt;Class:Service&gt;, ConvenientService::Core::ClassMethods, #&lt;Class:Object&gt;, #&lt;Class:BasicObject&gt;, Class, Module, Object, Kernel, BasicObject]
+</span>
+<span class='id identifier rubyid_ancestors_greater_than_methods_middlewares_callers'>ancestors_greater_than_methods_middlewares_callers</span> <span class='comment'># For the entity defined above.
+</span><span class='comment'># [#&lt;Class:Service&gt;, ConvenientService::Core::ClassMethods, #&lt;Class:Object&gt;, #&lt;Class:BasicObject&gt;, Class, Module, Object, Kernel, BasicObject]# [Service::ClassMethodsMiddlewaresCallers, #&lt;Class:Service&gt;, ConvenientService::Core::ClassMethods, #&lt;Class:Object&gt;, #&lt;Class:BasicObject&gt;, Class, Module, Object, Kernel, BasicObject]</span></code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;Class, Module&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+93
+94
+95</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/container/concern/instance_methods.rb', line 93</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_ancestors_greater_than_methods_middlewares_callers'>ancestors_greater_than_methods_middlewares_callers</span>
+  <span class='const'><span class='object_link'><a href="../../../../../../../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../../Utils/Array.html" title="ConvenientService::Utils::Array (module)">Array</a></span></span><span class='period'>.</span><span class='id identifier rubyid_keep_after'><span class='object_link'><a href="../../../../../../../../Utils/Array.html#keep_after-class_method" title="ConvenientService::Utils::Array.keep_after (method)">keep_after</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_ancestors'>ancestors</span><span class='comma'>,</span> <span class='id identifier rubyid_methods_middlewares_callers'>methods_middlewares_callers</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -527,12 +715,12 @@
       <pre class="lines">
 
 
-25
-26
-27</pre>
+31
+32
+33</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/container/concern/instance_methods.rb', line 25</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/container/concern/instance_methods.rb', line 31</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>klass:</span><span class='rparen'>)</span>
   <span class='ivar'>@klass</span> <span class='op'>=</span> <span class='id identifier rubyid_klass'>klass</span>
@@ -579,12 +767,12 @@
       <pre class="lines">
 
 
-32
-33
-34</pre>
+100
+101
+102</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/container/concern/instance_methods.rb', line 32</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/container/concern/instance_methods.rb', line 100</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_methods_middlewares_callers'>methods_middlewares_callers</span>
   <span class='ivar'>@methods_middlewares_callers</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="../Commands.html" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Container::Commands (module)">Commands</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Commands/ResolveMethodsMiddlewaresCallers.html" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Container::Commands::ResolveMethodsMiddlewaresCallers (class)">ResolveMethodsMiddlewaresCallers</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="../Commands/ResolveMethodsMiddlewaresCallers.html#call-instance_method" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Container::Commands::ResolveMethodsMiddlewaresCallers#call (method)">call</a></span></span><span class='lparen'>(</span><span class='label'>container:</span> <span class='kw'>self</span><span class='rparen'>)</span>
@@ -618,15 +806,261 @@
       <pre class="lines">
 
 
-48
-49
-50</pre>
+107
+108
+109</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/container/concern/instance_methods.rb', line 48</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/container/concern/instance_methods.rb', line 107</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_prepend_methods_middlewares_callers_to_container'>prepend_methods_middlewares_callers_to_container</span>
   <span class='id identifier rubyid_klass'>klass</span><span class='period'>.</span><span class='id identifier rubyid_prepend'>prepend</span><span class='lparen'>(</span><span class='id identifier rubyid_methods_middlewares_callers'>methods_middlewares_callers</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="resolve_super_method-instance_method">
+  
+    #<strong>resolve_super_method</strong>(method_name, entity)  &#x21d2; <tt>Method</tt><sup>?</sup> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p>Returns <code>nil</code> when <code>methods_middlewares_callers</code> are NOT prepended.</p>
+</div>
+  </div>
+
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p>If you expect to receive not <code>nil</code>, make sure the config is committed.</p>
+</div>
+  </div>
+
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>method_name</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>, <tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>entity</span>
+      
+      
+        <span class='type'>(<tt>Class</tt>, <tt>Object</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Method</tt>, <tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+130
+131
+132
+133
+134
+135
+136</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/container/concern/instance_methods.rb', line 130</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_resolve_super_method'>resolve_super_method</span><span class='lparen'>(</span><span class='id identifier rubyid_method_name'>method_name</span><span class='comma'>,</span> <span class='id identifier rubyid_entity'>entity</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_unbound_super_method'>unbound_super_method</span> <span class='op'>=</span> <span class='id identifier rubyid_resolve_unbound_super_method'>resolve_unbound_super_method</span><span class='lparen'>(</span><span class='id identifier rubyid_method_name'>method_name</span><span class='rparen'>)</span>
+
+  <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_unbound_super_method'>unbound_super_method</span>
+
+  <span class='id identifier rubyid_unbound_super_method'>unbound_super_method</span><span class='period'>.</span><span class='id identifier rubyid_bind'>bind</span><span class='lparen'>(</span><span class='id identifier rubyid_entity'>entity</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="resolve_unbound_super_method-instance_method">
+  
+    #<strong>resolve_unbound_super_method</strong>(method_name)  &#x21d2; <tt>UnboundMethod</tt><sup>?</sup> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p>Returns <code>nil</code> when <code>methods_middlewares_callers</code> are NOT prepended.</p>
+</div>
+  </div>
+
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p>If you expect to receive not <code>nil</code>, make sure the config is committed.</p>
+</div>
+  </div>
+
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>method_name</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>, <tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>UnboundMethod</tt>, <tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+118
+119
+120</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/container/concern/instance_methods.rb', line 118</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_resolve_unbound_super_method'>resolve_unbound_super_method</span><span class='lparen'>(</span><span class='id identifier rubyid_method_name'>method_name</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="../../../../../../../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../../Utils/Array.html" title="ConvenientService::Utils::Array (module)">Array</a></span></span><span class='period'>.</span><span class='id identifier rubyid_find_yield'><span class='object_link'><a href="../../../../../../../../Utils/Array.html#find_yield-class_method" title="ConvenientService::Utils::Array.find_yield (method)">find_yield</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_ancestors_greater_than_methods_middlewares_callers'>ancestors_greater_than_methods_middlewares_callers</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_ancestor'>ancestor</span><span class='op'>|</span> <span class='const'><span class='object_link'><a href="../../../../../../../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../../Utils/Module.html" title="ConvenientService::Utils::Module (module)">Module</a></span></span><span class='period'>.</span><span class='id identifier rubyid_get_own_instance_method'><span class='object_link'><a href="../../../../../../../../Utils/Module.html#get_own_instance_method-class_method" title="ConvenientService::Utils::Module.get_own_instance_method (method)">get_own_instance_method</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_ancestor'>ancestor</span><span class='comma'>,</span> <span class='id identifier rubyid_method_name'>method_name</span><span class='comma'>,</span> <span class='label'>private:</span> <span class='kw'>true</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="super_method_defined?-instance_method">
+  
+    #<strong>super_method_defined?</strong>(method_name)  &#x21d2; <tt>UnboundMethod</tt><sup>?</sup> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>method_name</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>, <tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>UnboundMethod</tt>, <tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+39
+40
+41</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/container/concern/instance_methods.rb', line 39</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_super_method_defined?'>super_method_defined?</span><span class='lparen'>(</span><span class='id identifier rubyid_method_name'>method_name</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="../../../../../../../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../../Utils/Bool.html" title="ConvenientService::Utils::Bool (module)">Bool</a></span></span><span class='period'>.</span><span class='id identifier rubyid_to_bool'><span class='object_link'><a href="../../../../../../../../Utils/Bool.html#to_bool-class_method" title="ConvenientService::Utils::Bool.to_bool (method)">to_bool</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_resolve_unbound_super_method'>resolve_unbound_super_method</span><span class='lparen'>(</span><span class='id identifier rubyid_method_name'>method_name</span><span class='rparen'>)</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -670,12 +1104,12 @@
       <pre class="lines">
 
 
-67
-68
-69</pre>
+153
+154
+155</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/container/concern/instance_methods.rb', line 67</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/container/concern/instance_methods.rb', line 153</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_kwargs'>to_kwargs</span>
   <span class='lbrace'>{</span><span class='label'>klass:</span> <span class='id identifier rubyid_klass'>klass</span><span class='rbrace'>}</span>
@@ -690,7 +1124,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Oct 30 15:40:07 2022 by
+  Generated on Sun Oct 30 21:26:26 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>
