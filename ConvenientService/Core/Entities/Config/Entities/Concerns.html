@@ -95,7 +95,7 @@
   <dl>
     <dt>Defined in:</dt>
     <dd>lib/convenient_service/core/entities/config/entities/concerns.rb<span class="defines">,<br />
-  lib/convenient_service/core/entities/config/entities/concerns/errors.rb,<br /> lib/convenient_service/core/entities/config/entities/concerns/entities/stack.rb,<br /> lib/convenient_service/core/entities/config/entities/concerns/entities/middleware.rb,<br /> lib/convenient_service/core/entities/config/entities/concerns/entities/default_concern.rb,<br /> lib/convenient_service/core/entities/config/entities/concerns/entities/middleware/commands/cast_middleware.rb</span>
+  lib/convenient_service/core/entities/config/entities/concerns/entities/stack.rb,<br /> lib/convenient_service/core/entities/config/entities/concerns/entities/middleware.rb,<br /> lib/convenient_service/core/entities/config/entities/concerns/entities/default_concern.rb,<br /> lib/convenient_service/core/entities/config/entities/concerns/entities/middleware/commands/cast_middleware.rb</span>
 </dd>
   </dl>
   
@@ -105,7 +105,7 @@
 <p class="children">
   
     
-      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Concerns/Entities.html" title="ConvenientService::Core::Entities::Config::Entities::Concerns::Entities (module)">Entities</a></span>, <span class='object_link'><a href="Concerns/Errors.html" title="ConvenientService::Core::Entities::Config::Entities::Concerns::Errors (module)">Errors</a></span>
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Concerns/Entities.html" title="ConvenientService::Core::Entities::Config::Entities::Concerns::Entities (module)">Entities</a></span>
     
   
     
@@ -144,29 +144,6 @@
 
   
     <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#assert_not_included!-instance_method" title="#assert_not_included! (instance method)">#<strong>assert_not_included!</strong>  &#x21d2; void </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'><p>@note: Concerns are included either by <code>commit_config</code> or <code>method_missing</code> from <code>ConvenientService::Core</code>.</p>
-</div></span>
   
 </li>
 
@@ -419,12 +396,12 @@
       <pre class="lines">
 
 
+15
 16
-17
-18</pre>
+17</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/concerns.rb', line 16</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/concerns.rb', line 15</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>klass:</span><span class='rparen'>)</span>
   <span class='ivar'>@klass</span> <span class='op'>=</span> <span class='id identifier rubyid_klass'>klass</span>
@@ -493,17 +470,17 @@
       <pre class="lines">
 
 
-115
-116
-117
-118
-119
-120
-121
-122</pre>
+99
+100
+101
+102
+103
+104
+105
+106</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/concerns.rb', line 115</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/concerns.rb', line 99</span>
 
 <span class='kw'>def</span> <span class='op'>==</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='rparen'>)</span>
@@ -512,63 +489,6 @@
   <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='id identifier rubyid_stack'>stack</span> <span class='op'>!=</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_stack'>stack</span>
 
   <span class='kw'>true</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="assert_not_included!-instance_method">
-  
-    #<strong>assert_not_included!</strong>  &#x21d2; <tt>void</tt> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    <p class="note returns_void">This method returns an undefined value.</p><p>@note: Concerns are included either by <code>commit_config</code> or <code>method_missing</code> from <code>ConvenientService::Core</code>.</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-<p class="tag_title">Raises:</p>
-<ul class="raise">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt><span class='object_link'><a href="Concerns/Errors/ConcernsAreIncluded.html" title="ConvenientService::Core::Entities::Config::Entities::Concerns::Errors::ConcernsAreIncluded (class)">Errors::ConcernsAreIncluded</a></span></tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-67
-68
-69
-70
-71</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/concerns.rb', line 67</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_assert_not_included!'>assert_not_included!</span>
-  <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_included?'>included?</span>
-
-  <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="Concerns/Errors.html" title="ConvenientService::Core::Entities::Config::Entities::Concerns::Errors (module)">Errors</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Concerns/Errors/ConcernsAreIncluded.html" title="ConvenientService::Core::Entities::Config::Entities::Concerns::Errors::ConcernsAreIncluded (class)">ConcernsAreIncluded</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Concerns/Errors/ConcernsAreIncluded.html#initialize-instance_method" title="ConvenientService::Core::Entities::Config::Entities::Concerns::Errors::ConcernsAreIncluded#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>concerns:</span> <span class='id identifier rubyid_concerns'>concerns</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -627,12 +547,12 @@
       <pre class="lines">
 
 
+45
 46
-47
-48</pre>
+47</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/concerns.rb', line 46</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/concerns.rb', line 45</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_class_method_defined?'>class_method_defined?</span><span class='lparen'>(</span><span class='id identifier rubyid_method_name'>method_name</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_class_method_defined_in_class_methods_modules?'>class_method_defined_in_class_methods_modules?</span><span class='lparen'>(</span><span class='id identifier rubyid_method_name'>method_name</span><span class='rparen'>)</span>
@@ -694,14 +614,14 @@
       <pre class="lines">
 
 
-77
-78
-79
-80
-81</pre>
+61
+62
+63
+64
+65</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/concerns.rb', line 77</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/concerns.rb', line 61</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_configure'>configure</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_configuration_block'>configuration_block</span><span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="../../../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Utils/Proc.html" title="ConvenientService::Utils::Proc (module)">Proc</a></span></span><span class='period'>.</span><span class='id identifier rubyid_exec_config'><span class='object_link'><a href="../../../../Utils/Proc.html#exec_config-class_method" title="ConvenientService::Utils::Proc.exec_config (method)">exec_config</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_configuration_block'>configuration_block</span><span class='comma'>,</span> <span class='id identifier rubyid_stack'>stack</span><span class='rparen'>)</span>
@@ -763,16 +683,16 @@ Does nothing for the subsequent calls.</p>
       <pre class="lines">
 
 
-91
-92
-93
-94
-95
-96
-97</pre>
+75
+76
+77
+78
+79
+80
+81</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/concerns.rb', line 91</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/concerns.rb', line 75</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_include!'>include!</span>
   <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='id identifier rubyid_included?'>included?</span>
@@ -824,12 +744,12 @@ Does nothing for the subsequent calls.</p>
       <pre class="lines">
 
 
-107
-108
-109</pre>
+91
+92
+93</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/concerns.rb', line 107</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/concerns.rb', line 91</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_included?'>included?</span>
   <span class='id identifier rubyid_klass'>klass</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="Concerns/Entities.html" title="ConvenientService::Core::Entities::Config::Entities::Concerns::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Concerns/Entities/DefaultConcern.html" title="ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::DefaultConcern (module)">DefaultConcern</a></span></span><span class='rparen'>)</span>
@@ -891,15 +811,15 @@ Does nothing for the subsequent calls.</p>
       <pre class="lines">
 
 
+23
 24
 25
 26
 27
-28
-29</pre>
+28</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/concerns.rb', line 24</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/concerns.rb', line 23</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_instance_method_defined?'>instance_method_defined?</span><span class='lparen'>(</span><span class='id identifier rubyid_method_name'>method_name</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>true</span> <span class='kw'>if</span> <span class='id identifier rubyid_instance_method_defined_in_instance_methods_modules?'>instance_method_defined_in_instance_methods_modules?</span><span class='lparen'>(</span><span class='id identifier rubyid_method_name'>method_name</span><span class='rparen'>)</span>
@@ -964,12 +884,12 @@ Does nothing for the subsequent calls.</p>
       <pre class="lines">
 
 
+53
 54
-55
-56</pre>
+55</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/concerns.rb', line 54</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/concerns.rb', line 53</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_private_class_method_defined?'>private_class_method_defined?</span><span class='lparen'>(</span><span class='id identifier rubyid_method_name'>method_name</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_private_class_method_defined_in_class_methods_modules?'>private_class_method_defined_in_class_methods_modules?</span><span class='lparen'>(</span><span class='id identifier rubyid_method_name'>method_name</span><span class='rparen'>)</span>
@@ -1031,15 +951,15 @@ Does nothing for the subsequent calls.</p>
       <pre class="lines">
 
 
+34
 35
 36
 37
 38
-39
-40</pre>
+39</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/concerns.rb', line 35</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/concerns.rb', line 34</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_private_instance_method_defined?'>private_instance_method_defined?</span><span class='lparen'>(</span><span class='id identifier rubyid_method_name'>method_name</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>true</span> <span class='kw'>if</span> <span class='id identifier rubyid_private_instance_method_defined_in_instance_methods_modules?'>private_instance_method_defined_in_instance_methods_modules?</span><span class='lparen'>(</span><span class='id identifier rubyid_method_name'>method_name</span><span class='rparen'>)</span>
@@ -1094,12 +1014,12 @@ Does nothing for the subsequent calls.</p>
       <pre class="lines">
 
 
-127
-128
-129</pre>
+111
+112
+113</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/concerns.rb', line 127</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/concerns.rb', line 111</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_a'>to_a</span>
   <span class='id identifier rubyid_plain_concerns'>plain_concerns</span>
@@ -1114,7 +1034,7 @@ Does nothing for the subsequent calls.</p>
 </div>
 
       <div id="footer">
-  Generated on Sun Oct 30 21:44:08 2022 by
+  Generated on Sun Oct 30 22:51:07 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>

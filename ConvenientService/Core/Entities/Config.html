@@ -95,7 +95,7 @@
   <dl>
     <dt>Defined in:</dt>
     <dd>lib/convenient_service/core/entities/config.rb<span class="defines">,<br />
-  lib/convenient_service/core/entities/config/entities/concerns.rb,<br /> lib/convenient_service/core/entities/config/entities/concerns/errors.rb,<br /> lib/convenient_service/core/entities/config/entities/method_middlewares.rb,<br /> lib/convenient_service/core/entities/config/entities/concerns/entities/stack.rb,<br /> lib/convenient_service/core/entities/config/entities/concerns/entities/middleware.rb,<br /> lib/convenient_service/core/entities/config/entities/concerns/entities/default_concern.rb,<br /> lib/convenient_service/core/entities/config/entities/method_middlewares/entities/chain.rb,<br /> lib/convenient_service/core/entities/config/entities/method_middlewares/entities/stack.rb,<br /> lib/convenient_service/core/entities/config/entities/method_middlewares/entities/caller.rb,<br /> lib/convenient_service/core/entities/config/entities/method_middlewares/entities/container.rb,<br /> lib/convenient_service/core/entities/config/entities/method_middlewares/entities/middleware.rb,<br /> lib/convenient_service/core/entities/config/entities/method_middlewares/entities/caller/concern.rb,<br /> lib/convenient_service/core/entities/config/entities/method_middlewares/entities/container/concern.rb,<br /> lib/convenient_service/core/entities/config/entities/method_middlewares/commands/generate_stack_name.rb,<br /> lib/convenient_service/core/entities/config/entities/concerns/entities/middleware/commands/cast_middleware.rb,<br /> lib/convenient_service/core/entities/config/entities/method_middlewares/entities/caller/commands/cast_caller.rb,<br /> lib/convenient_service/core/entities/config/entities/method_middlewares/entities/caller/concern/class_methods.rb,<br /> lib/convenient_service/core/entities/config/entities/method_middlewares/entities/caller/concern/instance_methods.rb,<br /> lib/convenient_service/core/entities/config/entities/method_middlewares/entities/container/concern/class_methods.rb,<br /> lib/convenient_service/core/entities/config/entities/method_middlewares/entities/container/commands/cast_container.rb,<br /> lib/convenient_service/core/entities/config/entities/method_middlewares/entities/container/concern/instance_methods.rb,<br /> lib/convenient_service/core/entities/config/entities/method_middlewares/entities/caller/commands/define_method_middlewares_caller.rb,<br /> lib/convenient_service/core/entities/config/entities/method_middlewares/entities/container/commands/resolve_methods_middlewares_callers.rb</span>
+  lib/convenient_service/core/entities/config/errors.rb,<br /> lib/convenient_service/core/entities/config/entities/concerns.rb,<br /> lib/convenient_service/core/entities/config/entities/method_middlewares.rb,<br /> lib/convenient_service/core/entities/config/entities/concerns/entities/stack.rb,<br /> lib/convenient_service/core/entities/config/entities/concerns/entities/middleware.rb,<br /> lib/convenient_service/core/entities/config/entities/concerns/entities/default_concern.rb,<br /> lib/convenient_service/core/entities/config/entities/method_middlewares/entities/chain.rb,<br /> lib/convenient_service/core/entities/config/entities/method_middlewares/entities/stack.rb,<br /> lib/convenient_service/core/entities/config/entities/method_middlewares/entities/caller.rb,<br /> lib/convenient_service/core/entities/config/entities/method_middlewares/entities/container.rb,<br /> lib/convenient_service/core/entities/config/entities/method_middlewares/entities/middleware.rb,<br /> lib/convenient_service/core/entities/config/entities/method_middlewares/entities/caller/concern.rb,<br /> lib/convenient_service/core/entities/config/entities/method_middlewares/entities/container/concern.rb,<br /> lib/convenient_service/core/entities/config/entities/method_middlewares/commands/generate_stack_name.rb,<br /> lib/convenient_service/core/entities/config/entities/concerns/entities/middleware/commands/cast_middleware.rb,<br /> lib/convenient_service/core/entities/config/entities/method_middlewares/entities/caller/commands/cast_caller.rb,<br /> lib/convenient_service/core/entities/config/entities/method_middlewares/entities/caller/concern/class_methods.rb,<br /> lib/convenient_service/core/entities/config/entities/method_middlewares/entities/caller/concern/instance_methods.rb,<br /> lib/convenient_service/core/entities/config/entities/method_middlewares/entities/container/concern/class_methods.rb,<br /> lib/convenient_service/core/entities/config/entities/method_middlewares/entities/container/commands/cast_container.rb,<br /> lib/convenient_service/core/entities/config/entities/method_middlewares/entities/container/concern/instance_methods.rb,<br /> lib/convenient_service/core/entities/config/entities/method_middlewares/entities/caller/commands/define_method_middlewares_caller.rb,<br /> lib/convenient_service/core/entities/config/entities/method_middlewares/entities/container/commands/resolve_methods_middlewares_callers.rb</span>
 </dd>
   </dl>
   
@@ -105,7 +105,7 @@
 <p class="children">
   
     
-      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Config/Entities.html" title="ConvenientService::Core::Entities::Config::Entities (module)">Entities</a></span>
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Config/Entities.html" title="ConvenientService::Core::Entities::Config::Entities (module)">Entities</a></span>, <span class='object_link'><a href="Config/Errors.html" title="ConvenientService::Core::Entities::Config::Errors (module)">Errors</a></span>
     
   
     
@@ -162,7 +162,30 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#commit!-instance_method" title="#commit! (instance method)">#<strong>commit!</strong>  &#x21d2; void </a>
+      <a href="#commit!-instance_method" title="#commit! (instance method)">#<strong>commit!</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Commits config when called for the first time.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#committed%3F-instance_method" title="#committed? (instance method)">#<strong>committed?</strong>  &#x21d2; Boolean </a>
     
 
     
@@ -296,12 +319,12 @@
       <pre class="lines">
 
 
-19
 20
-21</pre>
+21
+22</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config.rb', line 19</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config.rb', line 20</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>klass:</span><span class='rparen'>)</span>
   <span class='ivar'>@klass</span> <span class='op'>=</span> <span class='id identifier rubyid_klass'>klass</span>
@@ -343,12 +366,12 @@
       <pre class="lines">
 
 
-13
 14
-15</pre>
+15
+16</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config.rb', line 13</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config.rb', line 14</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_klass'>klass</span>
   <span class='ivar'>@klass</span>
@@ -368,7 +391,7 @@
       <div class="method_details first">
   <h3 class="signature first" id="commit!-instance_method">
   
-    #<strong>commit!</strong>  &#x21d2; <tt>void</tt> 
+    #<strong>commit!</strong>  &#x21d2; <tt>Boolean</tt> 
   
 
   
@@ -376,12 +399,38 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p class="note returns_void">This method returns an undefined value.</p>
+    <p>Commits config when called for the first time.
+Does nothing for the subsequent calls.</p>
+
 
   </div>
 </div>
 <div class="tags">
   
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if called for the first time, false otherwise (similarly as Kernel#require).</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://ruby-doc.org/core-3.1.2/Kernel.html#method-i-require" target="_parent" title="https://ruby-doc.org/core-3.1.2/Kernel.html#method-i-require">https://ruby-doc.org/core-3.1.2/Kernel.html#method-i-require</a></li>
+    
+  </ul>
 
 </div><table class="source_code">
   <tr>
@@ -389,15 +438,67 @@
       <pre class="lines">
 
 
-107
-108
-109</pre>
+123
+124
+125</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config.rb', line 107</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config.rb', line 123</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_commit!'>commit!</span>
   <span class='id identifier rubyid_concerns'>concerns</span><span class='period'>.</span><span class='id identifier rubyid_include!'>include!</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="committed?-instance_method">
+  
+    #<strong>committed?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+111
+112
+113</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config.rb', line 111</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_committed?'>committed?</span>
+  <span class='id identifier rubyid_concerns'>concerns</span><span class='period'>.</span><span class='id identifier rubyid_included?'>included?</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -539,7 +640,6 @@
       <pre class="lines">
 
 
-42
 43
 44
 45
@@ -547,15 +647,18 @@
 47
 48
 49
-50</pre>
+50
+51
+52</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config.rb', line 42</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config.rb', line 43</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_concerns'>concerns</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_configuration_block'>configuration_block</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_configuration_block'>configuration_block</span>
+    <span class='id identifier rubyid_assert_not_committed!'>assert_not_committed!</span>
+
     <span class='ivar'>@concerns</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="Config/Entities.html" title="ConvenientService::Core::Entities::Config::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Config/Entities/Concerns.html" title="ConvenientService::Core::Entities::Config::Entities::Concerns (class)">Concerns</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Config/Entities/Concerns.html#initialize-instance_method" title="ConvenientService::Core::Entities::Config::Entities::Concerns#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>klass:</span> <span class='id identifier rubyid_klass'>klass</span><span class='rparen'>)</span>
-    <span class='ivar'>@concerns</span><span class='period'>.</span><span class='id identifier rubyid_assert_not_included!'>assert_not_included!</span>
     <span class='ivar'>@concerns</span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_configuration_block'>configuration_block</span><span class='rparen'>)</span>
   <span class='kw'>end</span>
 
@@ -887,8 +990,6 @@
       <pre class="lines">
 
 
-91
-92
 93
 94
 95
@@ -898,16 +999,22 @@
 99
 100
 101
-102</pre>
+102
+103
+104
+105
+106</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config.rb', line 91</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config.rb', line 93</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_middlewares'>middlewares</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='label'>scope:</span> <span class='symbol'>:instance</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_configuration_block'>configuration_block</span><span class='rparen'>)</span>
   <span class='ivar'>@middlewares</span> <span class='op'>||=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
   <span class='ivar'>@middlewares</span><span class='lbracket'>[</span><span class='id identifier rubyid_scope'>scope</span><span class='rbracket'>]</span> <span class='op'>||=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 
   <span class='kw'>if</span> <span class='id identifier rubyid_configuration_block'>configuration_block</span>
+    <span class='id identifier rubyid_assert_not_committed!'>assert_not_committed!</span>
+
     <span class='ivar'>@middlewares</span><span class='lbracket'>[</span><span class='id identifier rubyid_scope'>scope</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='id identifier rubyid_method'>method</span><span class='rbracket'>]</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="Config/Entities.html" title="ConvenientService::Core::Entities::Config::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Config/Entities/MethodMiddlewares.html" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares (class)">MethodMiddlewares</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Config/Entities/MethodMiddlewares.html#initialize-instance_method" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>scope:</span> <span class='id identifier rubyid_scope'>scope</span><span class='comma'>,</span> <span class='label'>method:</span> <span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='label'>klass:</span> <span class='id identifier rubyid_klass'>klass</span><span class='rparen'>)</span>
     <span class='ivar'>@middlewares</span><span class='lbracket'>[</span><span class='id identifier rubyid_scope'>scope</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='id identifier rubyid_method'>method</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_configuration_block'>configuration_block</span><span class='rparen'>)</span>
     <span class='ivar'>@middlewares</span><span class='lbracket'>[</span><span class='id identifier rubyid_scope'>scope</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='id identifier rubyid_method'>method</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_define!'>define!</span>
@@ -925,7 +1032,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Oct 30 21:44:07 2022 by
+  Generated on Sun Oct 30 22:51:06 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>
