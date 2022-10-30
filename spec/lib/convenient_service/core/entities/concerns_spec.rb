@@ -577,12 +577,72 @@ RSpec.describe ConvenientService::Core::Entities::Concerns do
       end
     end
 
+    describe "#private_class_method_defined?" do
+      context "when concerns do NOT have concern with private class method" do
+        before do
+          concerns.configure {}
+        end
+
+        it "returns `false`" do
+          expect(concerns.private_class_method_defined?(:result)).to eq(false)
+        end
+      end
+
+      context "when concerns has one concern with private class method" do
+        before do
+          concerns.configure do |stack|
+            stack.use concern_with_private_class_method
+          end
+        end
+
+        it "returns `true`" do
+          expect(concerns.private_class_method_defined?(:result)).to eq(true)
+        end
+      end
+
+      context "when concerns has multiple concerns" do
+        context "when none one of those concerns has private class method" do
+          before do
+            concerns.configure do |stack|
+              stack.use concern_without_private_class_method
+              stack.use other_concern_without_private_class_method
+            end
+          end
+
+          it "returns `false`" do
+            expect(concerns.private_class_method_defined?(:result)).to eq(false)
+          end
+        end
+
+        context "when at least one of those concerns has private class method" do
+          before do
+            concerns.configure do |stack|
+              stack.use concern_with_private_class_method
+              stack.use other_concern_without_private_class_method
+            end
+          end
+
+          it "returns `true`" do
+            expect(concerns.private_class_method_defined?(:result)).to eq(true)
+          end
+        end
+      end
+
+      context "when concerns has concern with class method" do
+        before do
+          concerns.configure do |stack|
+            stack.use concern_with_class_method
+          end
+        end
+
+        it "returns `false`" do
+          expect(concerns.private_class_method_defined?(:result)).to eq(false)
+        end
+      end
+    end
+
     ##
     # TODO: Specs.
-    #
-    #
-    # describe "#private_class_method_defined?" do
-    # end
     #
     # describe "#assert_not_included!" do
     # end
