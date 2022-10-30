@@ -5,7 +5,7 @@ module ConvenientService
     module InstanceMethods
       ##
       # @param (see ConvenientService::Core::ClassMethods#concerns)
-      # @return [ConvenientService::Core::Entities::Concerns]
+      # @return [ConvenientService::Core::Entities::Config::Entities::Concerns]
       #
       def concerns(&configuration_block)
         self.class.concerns(&configuration_block)
@@ -13,7 +13,7 @@ module ConvenientService
 
       ##
       # @param (see ConvenientService::Core::ClassMethods#middlewares)
-      # @return [ConvenientService::Core::Entities::MethodMiddlewares]
+      # @return [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares]
       #
       def middlewares(...)
         self.class.middlewares(...)

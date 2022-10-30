@@ -17,7 +17,7 @@ RSpec.describe ConvenientService::Core::ClassMethods do
     end
 
     context "when `configuration_block` is NOT passed" do
-      let(:concerns) { ConvenientService::Core::Entities::Concerns.new(entity: service_class) }
+      let(:concerns) { ConvenientService::Core::Entities::Config::Entities::Concerns.new(entity: service_class) }
 
       context "when concerns are NOT configured" do
         specify { expect { service_class.concerns }.not_to cache_its_value }
@@ -43,7 +43,7 @@ RSpec.describe ConvenientService::Core::ClassMethods do
       # NOTE: Simplest concern is just a module.
       #
       let(:concern) { Module.new }
-      let(:concerns) { ConvenientService::Core::Entities::Concerns.new(entity: service_class).configure(&configuration_block) }
+      let(:concerns) { ConvenientService::Core::Entities::Config::Entities::Concerns.new(entity: service_class).configure(&configuration_block) }
       let(:configuration_block) { proc { |stack| stack.use concern } }
 
       before do
@@ -84,8 +84,8 @@ RSpec.describe ConvenientService::Core::ClassMethods do
     context "when `configuration_block` is NOT passed" do
       let(:result) { service_class.middlewares(method, **kwargs) }
 
-      let(:instance_method_middlewares) { ConvenientService::Core::Entities::MethodMiddlewares.new(scope: :instance, method: method, klass: service_class) }
-      let(:class_method_middlewares) { ConvenientService::Core::Entities::MethodMiddlewares.new(scope: :class, method: method, klass: service_class) }
+      let(:instance_method_middlewares) { ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares.new(scope: :instance, method: method, klass: service_class) }
+      let(:class_method_middlewares) { ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares.new(scope: :class, method: method, klass: service_class) }
 
       context "when middlewares are NOT configured" do
         context "when `scope` is NOT passed" do
@@ -171,13 +171,13 @@ RSpec.describe ConvenientService::Core::ClassMethods do
       let(:class_method_configuration_block) { proc { |stack| stack.use class_method_middleware } }
 
       let(:instance_method_middlewares) do
-        ConvenientService::Core::Entities::MethodMiddlewares
+        ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares
           .new(scope: :instance, method: method, klass: service_class)
           .configure(&instance_method_configuration_block)
       end
 
       let(:class_method_middlewares) do
-        ConvenientService::Core::Entities::MethodMiddlewares
+        ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares
           .new(scope: :class, method: method, klass: service_class)
           .configure(&class_method_configuration_block)
       end

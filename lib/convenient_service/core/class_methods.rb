@@ -4,91 +4,24 @@ module ConvenientService
   module Core
     module ClassMethods
       ##
-      # Sets or gets concerns for a service class.
+      # @see ConvenientService::Core::Entities::Config#concerns
       #
-      # @overload concerns
-      #   Returns all concerns.
-      #   @return [ConvenientService::Core::Entities::Concerns]
-      #
-      # @overload concerns(&configuration_block)
-      #   Configures concerns.
-      #   @param configuration_block [Proc] Block that configures middlewares.
-      #   @see https://github.com/marian13/ruby-middleware#a-basic-example
-      #   @return [ConvenientService::Core::Entities::Concerns]
-      #
-      # @example Getter
-      #   concerns
-      #
-      # @example Setter
-      #   concerns(&configuration_block)
-      #
-      def concerns(&configuration_block)
-        if configuration_block
-          @concerns ||= Entities::Concerns.new(entity: self)
-          @concerns.assert_not_included!
-          @concerns.configure(&configuration_block)
-        end
-
-        @concerns || Entities::Concerns.new(entity: self)
+      def concerns(...)
+        (@config ||= Entities::Config.new(klass: self)).concerns(...)
       end
 
       ##
-      # Sets or gets middlewares for a service class.
+      # @see ConvenientService::Core::Entities::Config#middlewares
       #
-      # @overload middlewares(method)
-      #   Returns all instance middlewares for particular method.
-      #   @param method [Symbol] Method name.
-      #   @return [Hash<Symbol, Hash<Symbol, ConvenientService::Core::Entities::MethodMiddlewares>>]
-      #
-      # @overload middlewares(method, scope:)
-      #   Returns all scoped middlewares for particular method.
-      #   @param method [Symbol] Method name.
-      #   @param scope [:instance, :class]
-      #   @return [Hash<Symbol, Hash<Symbol, ConvenientService::Core::Entities::MethodMiddlewares>>]
-      #
-      # @overload middlewares(method, &configuration_block)
-      #   Configures instance middlewares for particular method.
-      #   @param method [Symbol] Method name.
-      #   @param configuration_block [Proc] Block that configures middlewares.
-      #   @see https://github.com/marian13/ruby-middleware#a-basic-example
-      #   @return [ConvenientService::Core::Entities::MethodMiddlewares]
-      #
-      # @overload middlewares(method, scope:, &configuration_block)
-      #   Configures scoped middlewares for particular method.
-      #   @param method [Symbol] Method name.
-      #   @param scope [:instance, :class]
-      #   @param configuration_block [Proc] Block that configures middlewares.
-      #   @see https://github.com/marian13/ruby-middleware#a-basic-example
-      #   @return [ConvenientService::Core::Entities::MethodMiddlewares]
-      #
-      # @example Getters
-      #   middlewares(:result)
-      #   middlewares(:result, scope: :instance)
-      #   middlewares(:result, scope: :class)
-      #
-      # @example Setters
-      #   middlewares(:result, &configuration_block)
-      #   middlewares(:result, scope: :instance, &configuration_block)
-      #   middlewares(:result, scope: :class, &configuration_block)
-      #
-      def middlewares(method, scope: :instance, &configuration_block)
-        @middlewares ||= {}
-        @middlewares[scope] ||= {}
-
-        if configuration_block
-          @middlewares[scope][method] ||= Entities::MethodMiddlewares.new(scope: scope, method: method, klass: self)
-          @middlewares[scope][method].configure(&configuration_block)
-          @middlewares[scope][method].define!
-        end
-
-        @middlewares[scope][method] || Entities::MethodMiddlewares.new(scope: scope, method: method, klass: self)
+      def middlewares(...)
+        (@config ||= Entities::Config.new(klass: self)).middlewares(...)
       end
 
       ##
       # @return [void]
       #
       def commit_config!
-        concerns.include!
+        (@config ||= Entities::Config.new(klass: self)).commit!
 
         ConvenientService.logger.debug { "[Core] Included concerns into `#{self}` | Triggered by `.commit_config!`" }
       end
