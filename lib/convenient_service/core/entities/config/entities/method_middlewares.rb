@@ -77,7 +77,7 @@ module ConvenientService
             # @return [Object]
             #
             # @internal
-            #   NOTE: Stack is copied in order to be thread-safe.
+            #   NOTE: Stack is copied in order to be thread-safe (`stack.dup`).
             #   NOTE: Stack backend will be rewritten in Core v3 in order to optimize performance of `stack.dup`.
             #   TODO: Measure before any rewrite.
             #

@@ -24,6 +24,8 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns do
 
   let(:klass) { service_class }
 
+  let(:default_concern) { ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::DefaultConcern }
+
   let(:concern) do
     Module.new do
       include ConvenientService::Support::Concern
@@ -648,9 +650,9 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns do
         end
       end
 
-      context "when default concern is included into `klass`" do
+      context "when default concern is included into `klass` (it is included by `include!`)" do
         before do
-          concerns.include!
+          service_class.include default_concern
         end
 
         it "returns `true`" do
@@ -739,12 +741,71 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns do
       end
     end
 
-    ##
-    # TODO: Specs.
-    #
-    # describe "#include!" do
-    # end
-    #
+    describe "#include!" do
+      context "when concerns are included" do
+        before do
+          concerns.include!
+        end
+
+        it "returns `false`" do
+          expect(concerns.include!).to eq(false)
+        end
+      end
+
+      context "when concerns are NOT included" do
+        context "when stack is NOT empty" do
+          context "when stack has one concern" do
+            before do
+              concerns.configure do |stack|
+                stack.use concern
+              end
+            end
+
+            it "calls default concern + that one concern" do
+              concerns.include!
+
+              expect(service_class.included_modules).to include(default_concern, concern)
+            end
+
+            it "returns `true`" do
+              expect(concerns.include!).to eq(true)
+            end
+          end
+
+          context "when stack has multiple concerns" do
+            before do
+              concerns.configure do |stack|
+                stack.use concern
+                stack.use other_concern
+              end
+            end
+
+            it "calls default concern + those multiple concerns" do
+              concerns.include!
+
+              expect(service_class.included_modules).to include(default_concern, concern, other_concern)
+            end
+
+            it "returns `true`" do
+              expect(concerns.include!).to eq(true)
+            end
+          end
+        end
+
+        context "when stack is empty" do
+          it "calls default concern" do
+            concerns.include!
+
+            expect(service_class.included_modules).to include(default_concern)
+          end
+
+          it "returns `true`" do
+            expect(concerns.include!).to eq(true)
+          end
+        end
+      end
+    end
+
     describe "#to_a" do
       context "when stack is NOT empty" do
         it "returns concerns" do

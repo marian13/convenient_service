@@ -84,6 +84,10 @@ module ConvenientService
             #
             # @see https://ruby-doc.org/core-3.1.2/Kernel.html#method-i-require
             #
+            # @internal
+            #   NOTE: Modification of instance variable is NOT thread-safe, that is why `Entities::DefaultConcern` is added.
+            #   NOTE: `dup` is used for thread-safety as well.
+            #
             def include!
               return false if included?
 
