@@ -57,6 +57,20 @@ RSpec.describe ConvenientService::Core::Entities::Concerns::Entities::Middleware
           expect(described_class.original_two_equals(other)).to eq(true)
         end
       end
+
+      context "when other is `ConvenientService::Core::Entities::Concerns::Entities::Middleware` descendant" do
+        let(:other) do
+          ::Class.new(described_class).tap do |klass|
+            klass.class_exec(Module.new) do |mod|
+              define_singleton_method(:concern) { mod }
+            end
+          end
+        end
+
+        it "returns `false`" do
+          expect(described_class.original_two_equals(other)).to eq(false)
+        end
+      end
     end
 
     describe ".==" do

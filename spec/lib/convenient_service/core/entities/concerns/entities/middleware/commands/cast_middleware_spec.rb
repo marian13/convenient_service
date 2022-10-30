@@ -69,6 +69,48 @@ RSpec.describe ConvenientService::Core::Entities::Concerns::Entities::Middleware
           end
         end
 
+        describe ".original_two_equals" do
+          context "when other is NOT `ConvenientService::Core::Entities::Concerns::Entities::Middleware`" do
+            let(:other) { 42 }
+
+            it "returns `false`" do
+              expect(generated_middleware.original_two_equals(other)).to eq(false)
+            end
+          end
+
+          context "when other is `ConvenientService::Core::Entities::Concerns::Entities::Middleware`" do
+            let(:other) { ConvenientService::Core::Entities::Concerns::Entities::Middleware }
+
+            it "returns `false`" do
+              expect(generated_middleware.original_two_equals(other)).to eq(false)
+            end
+          end
+
+          context "when other is `ConvenientService::Core::Entities::Concerns::Entities::Middleware` descendant" do
+            context "when that descendant is NOT same instance" do
+              let(:other) do
+                ::Class.new(generated_middleware).tap do |klass|
+                  klass.class_exec(concern) do |mod|
+                    define_singleton_method(:concern) { mod }
+                  end
+                end
+              end
+
+              it "returns `false`" do
+                expect(generated_middleware.original_two_equals(other)).to eq(false)
+              end
+            end
+
+            context "when that descendant is same instance" do
+              let(:other) { generated_middleware }
+
+              it "returns `true`" do
+                expect(generated_middleware.original_two_equals(other)).to eq(true)
+              end
+            end
+          end
+        end
+
         describe ".==" do
           context "when other is NOT `ConvenientService::Core::Entities::Concerns::Entities::Middleware`" do
             context "when other is NOT instance of Class" do
