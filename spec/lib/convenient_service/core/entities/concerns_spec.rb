@@ -109,6 +109,30 @@ RSpec.describe ConvenientService::Core::Entities::Concerns do
       end
     end
 
+    let(:concern_with_class_method) do
+      Module.new do
+        include ConvenientService::Support::Concern
+
+        class_methods do
+          def result
+          end
+        end
+      end
+    end
+
+    let(:concern_with_private_class_method) do
+      Module.new do
+        include ConvenientService::Support::Concern
+
+        class_methods do
+          private
+
+          def result
+          end
+        end
+      end
+    end
+
     let(:other_concern_with_instance_method) do
       Module.new do
         include ConvenientService::Support::Concern
@@ -133,6 +157,30 @@ RSpec.describe ConvenientService::Core::Entities::Concerns do
       end
     end
 
+    let(:other_concern_with_class_method) do
+      Module.new do
+        include ConvenientService::Support::Concern
+
+        class_methods do
+          def result
+          end
+        end
+      end
+    end
+
+    let(:other_concern_with_private_class_method) do
+      Module.new do
+        include ConvenientService::Support::Concern
+
+        class_methods do
+          private
+
+          def result
+          end
+        end
+      end
+    end
+
     let(:module_without_instance_method) { Module.new }
     let(:module_without_private_instance_method) { Module.new }
 
@@ -142,8 +190,14 @@ RSpec.describe ConvenientService::Core::Entities::Concerns do
     let(:concern_without_instance_method) { Module.new { include ConvenientService::Support::Concern } }
     let(:concern_without_private_instance_method) { Module.new { include ConvenientService::Support::Concern } }
 
+    let(:concern_without_class_method) { Module.new { include ConvenientService::Support::Concern } }
+    let(:concern_without_private_class_method) { Module.new { include ConvenientService::Support::Concern } }
+
     let(:other_concern_without_instance_method) { Module.new { include ConvenientService::Support::Concern } }
     let(:other_concern_without_private_instance_method) { Module.new { include ConvenientService::Support::Concern } }
+
+    let(:other_concern_without_class_method) { Module.new { include ConvenientService::Support::Concern } }
+    let(:other_concern_without_private_class_method) { Module.new { include ConvenientService::Support::Concern } }
 
     describe "#instance_method_defined?" do
       context "when concerns do NOT have any module or concern with instance method" do
@@ -274,6 +328,30 @@ RSpec.describe ConvenientService::Core::Entities::Concerns do
           it "returns `true`" do
             expect(concerns.instance_method_defined?(:result)).to eq(true)
           end
+        end
+      end
+
+      context "when concerns has module with private instance method" do
+        before do
+          concerns.configure do |stack|
+            stack.use module_with_private_instance_method
+          end
+        end
+
+        it "returns `false`" do
+          expect(concerns.instance_method_defined?(:result)).to eq(false)
+        end
+      end
+
+      context "when concerns has concern with private instance method" do
+        before do
+          concerns.configure do |stack|
+            stack.use concern_with_private_instance_method
+          end
+        end
+
+        it "returns `false`" do
+          expect(concerns.instance_method_defined?(:result)).to eq(false)
         end
       end
     end
@@ -435,14 +513,73 @@ RSpec.describe ConvenientService::Core::Entities::Concerns do
       end
     end
 
+    describe "#class_method_defined?" do
+      context "when concerns do NOT have concern with class method" do
+        before do
+          concerns.configure {}
+        end
+
+        it "returns `false`" do
+          expect(concerns.class_method_defined?(:result)).to eq(false)
+        end
+      end
+
+      context "when concerns has one concern with class method" do
+        before do
+          concerns.configure do |stack|
+            stack.use concern_with_class_method
+          end
+        end
+
+        it "returns `true`" do
+          expect(concerns.class_method_defined?(:result)).to eq(true)
+        end
+      end
+
+      context "when concerns has multiple concerns" do
+        context "when none one of those concerns has class method" do
+          before do
+            concerns.configure do |stack|
+              stack.use concern_without_class_method
+              stack.use other_concern_without_class_method
+            end
+          end
+
+          it "returns `false`" do
+            expect(concerns.class_method_defined?(:result)).to eq(false)
+          end
+        end
+
+        context "when at least one of those concerns has class method" do
+          before do
+            concerns.configure do |stack|
+              stack.use concern_with_class_method
+              stack.use other_concern_without_class_method
+            end
+          end
+
+          it "returns `true`" do
+            expect(concerns.class_method_defined?(:result)).to eq(true)
+          end
+        end
+      end
+
+      context "when concerns has concern with private class method" do
+        before do
+          concerns.configure do |stack|
+            stack.use concern_with_private_class_method
+          end
+        end
+
+        it "returns `false`" do
+          expect(concerns.class_method_defined?(:result)).to eq(false)
+        end
+      end
+    end
+
     ##
     # TODO: Specs.
     #
-    # describe "#private_instance_method_defined?" do
-    # end
-    #
-    # describe "#class_method_defined?" do
-    # end
     #
     # describe "#private_class_method_defined?" do
     # end
