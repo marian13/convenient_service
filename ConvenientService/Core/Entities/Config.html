@@ -554,12 +554,12 @@
 
 <span class='kw'>def</span> <span class='id identifier rubyid_concerns'>concerns</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_configuration_block'>configuration_block</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_configuration_block'>configuration_block</span>
-    <span class='ivar'>@concerns</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="Config/Entities.html" title="ConvenientService::Core::Entities::Config::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Config/Entities/Concerns.html" title="ConvenientService::Core::Entities::Config::Entities::Concerns (class)">Concerns</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Config/Entities/Concerns.html#initialize-instance_method" title="ConvenientService::Core::Entities::Config::Entities::Concerns#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>entity:</span> <span class='id identifier rubyid_klass'>klass</span><span class='rparen'>)</span>
+    <span class='ivar'>@concerns</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="Config/Entities.html" title="ConvenientService::Core::Entities::Config::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Config/Entities/Concerns.html" title="ConvenientService::Core::Entities::Config::Entities::Concerns (class)">Concerns</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Config/Entities/Concerns.html#initialize-instance_method" title="ConvenientService::Core::Entities::Config::Entities::Concerns#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>klass:</span> <span class='id identifier rubyid_klass'>klass</span><span class='rparen'>)</span>
     <span class='ivar'>@concerns</span><span class='period'>.</span><span class='id identifier rubyid_assert_not_included!'>assert_not_included!</span>
     <span class='ivar'>@concerns</span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_configuration_block'>configuration_block</span><span class='rparen'>)</span>
   <span class='kw'>end</span>
 
-  <span class='ivar'>@concerns</span> <span class='op'>||</span> <span class='const'><span class='object_link'><a href="Config/Entities.html" title="ConvenientService::Core::Entities::Config::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Config/Entities/Concerns.html" title="ConvenientService::Core::Entities::Config::Entities::Concerns (class)">Concerns</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Config/Entities/Concerns.html#initialize-instance_method" title="ConvenientService::Core::Entities::Config::Entities::Concerns#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>entity:</span> <span class='id identifier rubyid_klass'>klass</span><span class='rparen'>)</span>
+  <span class='ivar'>@concerns</span> <span class='op'>||</span> <span class='const'><span class='object_link'><a href="Config/Entities.html" title="ConvenientService::Core::Entities::Config::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Config/Entities/Concerns.html" title="ConvenientService::Core::Entities::Config::Entities::Concerns (class)">Concerns</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Config/Entities/Concerns.html#initialize-instance_method" title="ConvenientService::Core::Entities::Config::Entities::Concerns#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>klass:</span> <span class='id identifier rubyid_klass'>klass</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -925,7 +925,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Oct 30 14:47:50 2022 by
+  Generated on Sun Oct 30 14:57:40 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>

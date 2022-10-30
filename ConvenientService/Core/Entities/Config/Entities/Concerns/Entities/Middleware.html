@@ -649,7 +649,7 @@
     <ul class="option">
       
         <li>
-          <span class="name">:entity</span>
+          <span class="name">:klass</span>
           <span class="type">(<tt>Class</tt>)</span>
           <span class="default">
             
@@ -677,7 +677,7 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/concerns/entities/middleware.rb', line 77</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_env'>env</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_env'>env</span><span class='lbracket'>[</span><span class='symbol'>:entity</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_include'>include</span> <span class='id identifier rubyid_concern'>concern</span>
+  <span class='id identifier rubyid_env'>env</span><span class='lbracket'>[</span><span class='symbol'>:klass</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_include'>include</span> <span class='id identifier rubyid_concern'>concern</span>
 
   <span class='ivar'>@stack</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_env'>env</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
@@ -691,7 +691,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Oct 30 14:47:52 2022 by
+  Generated on Sun Oct 30 14:57:43 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>
