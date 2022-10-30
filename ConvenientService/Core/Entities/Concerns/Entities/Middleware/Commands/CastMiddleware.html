@@ -236,7 +236,7 @@
         <span class='name'>other</span>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="../../../../../../Support/Concern.html" title="ConvenientService::Support::Concern (module)">ConvenientService::Support::Concern</a></span></tt>, <tt>Module</tt>)</span>
+        <span class='type'>(<tt>Module</tt>, <tt><span class='object_link'><a href="../../../../../../Support/Concern.html" title="ConvenientService::Support::Concern (module)">ConvenientService::Support::Concern</a></span></tt>, <tt><span class='object_link'><a href="../../Middleware.html" title="ConvenientService::Core::Entities::Concerns::Entities::Middleware (class)">ConvenientService::Core::Entities::Concerns::Entities::Middleware</a></span></tt>)</span>
       
       
       
@@ -362,14 +362,16 @@
 30
 31
 32
-33</pre>
+33
+34</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/concerns/entities/middleware/commands/cast_middleware.rb', line 28</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span>
-  <span class='kw'>case</span> <span class='id identifier rubyid_other'>other</span>
-  <span class='kw'>when</span> <span class='op'>::</span><span class='const'>Module</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='const'>Class</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_other'>other</span> <span class='op'>&lt;</span> <span class='const'><span class='object_link'><a href="../../../Entities.html" title="ConvenientService::Core::Entities::Concerns::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Middleware.html" title="ConvenientService::Core::Entities::Concerns::Entities::Middleware (class)">Middleware</a></span></span>
+    <span class='id identifier rubyid_cast_middleware'>cast_middleware</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
+  <span class='kw'>elsif</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='const'>Module</span><span class='rparen'>)</span>
     <span class='id identifier rubyid_cast_module'>cast_module</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -383,7 +385,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Oct 29 21:30:46 2022 by
+  Generated on Sun Oct 30 00:00:38 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>
