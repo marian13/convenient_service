@@ -55,6 +55,18 @@ module ConvenientService
             end
 
             ##
+            # Checks whether concerns are included into klass (include! was called at least once).
+            #
+            # @return [Boolean]
+            #
+            # @internal
+            #   IMPORTANT: `included?` should be thread-safe.
+            #
+            def included?
+              klass.include?(Entities::DefaultConcern)
+            end
+
+            ##
             # @param configuration_block [Proc]
             # @return [ConvenientService::Core::Entities::Config::Entities::Concerns]
             #
@@ -78,18 +90,6 @@ module ConvenientService
               stack.dup.insert_before(0, Entities::DefaultConcern).call(klass: klass)
 
               true
-            end
-
-            ##
-            # Checks whether concerns are included into klass (include! was called at least once).
-            #
-            # @return [Boolean]
-            #
-            # @internal
-            #   IMPORTANT: `included?` should be thread-safe.
-            #
-            def included?
-              klass.include?(Entities::DefaultConcern)
             end
 
             ##

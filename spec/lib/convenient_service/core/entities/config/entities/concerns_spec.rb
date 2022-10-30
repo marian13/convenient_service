@@ -641,6 +641,24 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns do
       end
     end
 
+    describe "#included?" do
+      context "when default concern is NOT included into `klass`" do
+        it "returns `false`" do
+          expect(concerns.included?).to eq(false)
+        end
+      end
+
+      context "when default concern is included into `klass`" do
+        before do
+          concerns.include!
+        end
+
+        it "returns `true`" do
+          expect(concerns.included?).to eq(true)
+        end
+      end
+    end
+
     describe "#configure" do
       context "when `configuration_block` does NOT have one argument" do
         ##
@@ -725,9 +743,6 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns do
     # TODO: Specs.
     #
     # describe "#include!" do
-    # end
-    #
-    # describe "#included?" do
     # end
     #
     describe "#to_a" do
