@@ -29,6 +29,13 @@ module ConvenientService
                 end
 
                 ##
+                # @return [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Stack]
+                #
+                def dup
+                  self.class.new(plain_stack: plain_stack.dup)
+                end
+
+                ##
                 # Calls stack. In other words, invokes all its middlewares.
                 #
                 # Wraps `RubyMiddleware::Middleware::Builder#call`.

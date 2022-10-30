@@ -72,6 +72,31 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns::En
       end
     end
 
+    describe "#dup" do
+      ##
+      # NOTE: Unfreezes string since it is NOT possible to set spy on frozen objects.
+      #
+      let(:name) { +"stack name" }
+
+      before do
+        ##
+        # NOTE: Create stack, before setting spies on `stack_class.new`, `name.dup`.
+        #
+        stack
+      end
+
+      specify do
+        expect { stack.dup }
+          .to delegate_to(described_class, :new)
+          .with_arguments(plain_stack: plain_stack)
+          .and_return_its_value
+      end
+
+      specify { expect { stack.dup }.to delegate_to(name, :dup) }
+
+      specify { expect { stack.dup }.to delegate_to(plain_stack, :dup) }
+    end
+
     describe "#call" do
       specify do
         expect { stack.call(env) }

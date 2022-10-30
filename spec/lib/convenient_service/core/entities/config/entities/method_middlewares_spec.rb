@@ -313,6 +313,10 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
             it "calls that proxy middleware" do
               expect(method_middlewares.call(env, original_method)).to eq([:proxy_middleware_value])
             end
+
+            it "copies stack to be thread-safe" do
+              expect { method_middlewares.call(env, original_method) }.not_to change { method_middlewares.to_a.size }
+            end
           end
 
           context "when that middleware is decorator" do
@@ -324,6 +328,10 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
 
             it "calls that decorator middleware + original method" do
               expect(method_middlewares.call(env, original_method)).to eq([:decorator_middleware_value, :original_method_value])
+            end
+
+            it "copies stack to be thread-safe" do
+              expect { method_middlewares.call(env, original_method) }.not_to change { method_middlewares.to_a.size }
             end
           end
         end
@@ -345,6 +353,10 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
             it "calls those multiple middlewares + that last proxy middleware" do
               expect(method_middlewares.call(env, original_method)).to eq([:decorator_middleware_value, :proxy_middleware_value])
             end
+
+            it "copies stack to be thread-safe" do
+              expect { method_middlewares.call(env, original_method) }.not_to change { method_middlewares.to_a.size }
+            end
           end
 
           context "when last middleware from those middlewares is decorator" do
@@ -357,6 +369,10 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
             it "calls those multiple middlewares + that last decorator middleware + original method" do
               expect(method_middlewares.call(env, original_method)).to eq([:decorator_middleware_value, :decorator_middleware_value, :original_method_value])
             end
+
+            it "copies stack to be thread-safe" do
+              expect { method_middlewares.call(env, original_method) }.not_to change { method_middlewares.to_a.size }
+            end
           end
         end
       end
@@ -364,6 +380,10 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
       context "when stack is empty" do
         it "calls original method" do
           expect(method_middlewares.call(env, original_method)).to eq([:original_method_value])
+        end
+
+        it "copies stack to be thread-safe" do
+          expect { method_middlewares.call(env, original_method) }.not_to change { method_middlewares.to_a.size }
         end
       end
     end

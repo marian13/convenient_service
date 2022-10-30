@@ -770,6 +770,10 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns do
             it "returns `true`" do
               expect(concerns.include!).to eq(true)
             end
+
+            it "copies stack to be thread-safe" do
+              expect { concerns.include! }.not_to change { concerns.to_a.size }
+            end
           end
 
           context "when stack has multiple concerns" do
@@ -801,6 +805,10 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns do
 
           it "returns `true`" do
             expect(concerns.include!).to eq(true)
+          end
+
+          it "copies stack to be thread-safe" do
+            expect { concerns.include! }.not_to change { concerns.to_a.size }
           end
         end
       end
