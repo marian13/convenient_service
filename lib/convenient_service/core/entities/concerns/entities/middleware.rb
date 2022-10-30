@@ -45,7 +45,7 @@ module ConvenientService
               #   NOTE: `@param other [Module, ConvenientService::Support::Concern, ConvenientService::Core::Entities::Concerns::Entities::Middleware]`
               #   TODO: How to document `alias_method`?
               #
-              #   https://ruby-doc.org/core-2.7.0/Module.html#method-i-3C
+              #   https://ruby-doc.org/core-2.7.0/Module.html#method-i-3D-3D
               #
               alias_method :original_two_equals, :==
 
@@ -57,7 +57,7 @@ module ConvenientService
               #   https://ruby-doc.org/core-2.7.0/Module.html#method-i-3C
               #
               def ==(other)
-                return true if Entities::Middleware.original_two_equals(other)
+                return true if original_two_equals(other)
 
                 return unless other.instance_of?(Class)
                 return unless other < Entities::Middleware
