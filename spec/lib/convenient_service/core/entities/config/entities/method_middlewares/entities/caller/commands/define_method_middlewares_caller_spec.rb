@@ -5,16 +5,20 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Container::Commands::DefineMethodMiddlewaresCaller do
-  let(:command_result) { described_class.call(scope: scope, method: method, container: container) }
-  let(:command_instance) { described_class.new(scope: scope, method: method, container: container) }
+RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Caller::Commands::DefineMethodMiddlewaresCaller do
+  let(:command_result) { command_instance.call }
+  let(:command_instance) { described_class.new(scope: scope, method: method, container: container, caller: caller) }
 
   let(:scope) { :instance }
   let(:method) { :result }
+
   let(:container) { ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Container.new(klass: klass) }
   let(:methods_middlewares_callers) { container.methods_middlewares_callers }
   let(:klass) { service_class }
   let(:service_class) { Class.new }
+
+  let(:caller) { ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Caller.new(prefix: prefix) }
+  let(:prefix) { ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Caller::INSTANCE_PREFIX }
 
   example_group "attributes" do
     include ConvenientService::RSpec::Matchers::HaveAttrReader

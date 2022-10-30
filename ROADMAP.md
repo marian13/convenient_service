@@ -36,3 +36,4 @@
 | High | 🚧 | Factories for POROs ❗❗❗ | |
 | High | 🚧 | Resolve warning during specs | |
 | Low | 🚧 | Consider to change `delegate` backend | |
+| Middle | 🚧 | Same order of attr macros, delegators, initialize, class methods, attr methods, queries, actions, to_*, comparison, inspect | |

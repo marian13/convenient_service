@@ -42,7 +42,7 @@ module ConvenientService
             # @return [Boolean]
             #
             def super_method_defined?
-              caller.super_method_defined?(method)
+              container.super_method_defined?(method)
             end
 
             ##
@@ -68,7 +68,7 @@ module ConvenientService
             # @return [Boolean]
             #
             def define!
-              container.define_method_middlewares_caller!(scope, method)
+              caller.define_method_middlewares_caller!(scope, method, container)
             end
 
             ##
@@ -95,7 +95,7 @@ module ConvenientService
             def resolve_super_method(entity)
               klass.commit_config!
 
-              caller.resolve_super_method(method, entity)
+              container.resolve_super_method(method, entity)
             end
 
             ##
@@ -158,7 +158,7 @@ module ConvenientService
             # @return [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Caller]
             #
             def caller
-              @caller ||= Entities::Caller.new(container: container)
+              @caller ||= Entities::Caller.cast!({scope: scope})
             end
 
             ##

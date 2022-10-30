@@ -15,6 +15,9 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
   let(:klass) { service_class }
   let(:container) { ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Container.new(klass: klass) }
 
+  let(:prefix) { ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Caller::INSTANCE_PREFIX }
+  let(:caller) { ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Caller.new(prefix: prefix) }
+
   let(:service_class) do
     Class.new do
       include ConvenientService::Core
@@ -261,8 +264,8 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
 
       specify do
         expect { method_middlewares.define! }
-          .to delegate_to(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Container::Commands::DefineMethodMiddlewaresCaller, :call)
-          .with_arguments(scope: scope, method: method, container: container)
+          .to delegate_to(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Caller::Commands::DefineMethodMiddlewaresCaller, :call)
+          .with_arguments(scope: scope, method: method, container: container, caller: caller)
           .and_return_its_value
       end
     end
