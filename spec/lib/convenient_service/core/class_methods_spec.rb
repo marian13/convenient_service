@@ -4,530 +4,232 @@ require "spec_helper"
 
 require "convenient_service"
 
-# rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
+# rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Core::ClassMethods do
   include ConvenientService::RSpec::Matchers::DelegateTo
   include ConvenientService::RSpec::Matchers::CacheItsValue
 
-  describe "#concerns" do
-    let(:service_class) do
-      Class.new do
-        include ConvenientService::Core
-      end
+  let(:service_class) do
+    Class.new do
+      include ConvenientService::Core
     end
+  end
 
-    context "when `configuration_block` is NOT passed" do
-      let(:concerns) { ConvenientService::Core::Entities::Config::Entities::Concerns.new(klass: service_class) }
+  let(:config) { ConvenientService::Core::Entities::Config.new(klass: service_class) }
 
-      context "when concerns are NOT configured" do
-        specify { expect { service_class.concerns }.not_to cache_its_value }
-
-        it "returns concerns" do
-          expect(service_class.concerns).to eq(concerns)
-        end
-      end
-
-      context "when concerns are configured at least once" do
-        before { service_class.concerns {} }
-
-        specify { expect { service_class.concerns }.to cache_its_value }
-
-        it "returns concerns" do
-          expect(service_class.concerns).to eq(concerns)
-        end
-      end
-    end
-
-    context "when `configuration_block` is passed" do
-      ##
-      # NOTE: Simplest concern is just a module.
-      #
-      let(:concern) { Module.new }
-      let(:concerns) { ConvenientService::Core::Entities::Config::Entities::Concerns.new(klass: service_class).configure(&configuration_block) }
-      let(:configuration_block) { proc { |stack| stack.use concern } }
-
-      before do
-        ##
-        # NOTE: Configures `concerns` in order to cache them.
-        #
-        service_class.concerns {}
-      end
+  example_group "#instance methods" do
+    describe "#concerns" do
+      let(:configuration_block) { proc {} }
 
       specify do
-        expect { service_class.concerns(&configuration_block) }
-          .to delegate_to(service_class.concerns, :assert_not_included!)
-      end
+        allow(ConvenientService::Core::Entities::Config).to receive(:new).with(klass: service_class).and_return(config)
 
-      specify do
         expect { service_class.concerns(&configuration_block) }
-          .to delegate_to(service_class.concerns, :configure)
+          .to delegate_to(config, :concerns)
           .with_arguments(&configuration_block)
+          .and_return_its_value
       end
 
-      specify { expect { service_class.concerns(&configuration_block) }.to cache_its_value }
-
-      it "returns concerns" do
-        expect(service_class.concerns(&configuration_block)).to eq(concerns)
-      end
-    end
-  end
-
-  describe "#middlewares" do
-    let(:method) { :result }
-
-    let(:service_class) do
-      Class.new do
-        include ConvenientService::Core
-      end
-    end
-
-    context "when `configuration_block` is NOT passed" do
-      let(:result) { service_class.middlewares(method, **kwargs) }
-
-      let(:instance_method_middlewares) { ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares.new(scope: :instance, method: method, klass: service_class) }
-      let(:class_method_middlewares) { ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares.new(scope: :class, method: method, klass: service_class) }
-
-      context "when middlewares are NOT configured" do
-        context "when `scope` is NOT passed" do
-          specify { expect { service_class.middlewares(method) }.not_to cache_its_value }
-
-          it "returns instance middlewares for `method`" do
-            expect(service_class.middlewares(method)).to eq(instance_method_middlewares)
-          end
-        end
-
-        context "when `scope` is passed" do
-          context "when `scope` is `:instance`" do
-            specify { expect { service_class.middlewares(method, scope: :instance) }.not_to cache_its_value }
-
-            it "returns instance middlewares for `method`" do
-              expect(service_class.middlewares(method, scope: :instance)).to eq(instance_method_middlewares)
-            end
-          end
-
-          context "when `scope` is `:class`" do
-            specify { expect { service_class.middlewares(method, scope: :class) }.not_to cache_its_value }
-
-            it "returns class middlewares for `method`" do
-              expect(service_class.middlewares(method, scope: :class)).to eq(class_method_middlewares)
-            end
-          end
-        end
-      end
-
-      context "when middlewares are configured at least once" do
-        context "when `scope` is NOT passed" do
-          before { service_class.middlewares(method) {} }
-
-          specify { expect { service_class.middlewares(method) }.to cache_its_value }
-
-          it "returns instance middlewares for `method`" do
-            expect(service_class.middlewares(method)).to eq(instance_method_middlewares)
-          end
-        end
-
-        context "when `scope` is passed" do
-          context "when `scope` is `:instance`" do
-            before { service_class.middlewares(method, scope: :instance) {} }
-
-            specify { expect { service_class.middlewares(method, scope: :instance) }.to cache_its_value }
-
-            it "returns instance middlewares for `method`" do
-              expect(service_class.middlewares(method, scope: :instance)).to eq(instance_method_middlewares)
-            end
-          end
-
-          context "when `scope` is `:class`" do
-            before { service_class.middlewares(method, scope: :class) {} }
-
-            specify { expect { service_class.middlewares(method, scope: :class) }.to cache_its_value }
-
-            it "returns class middlewares for `method`" do
-              expect(service_class.middlewares(method, scope: :class)).to eq(class_method_middlewares)
-            end
-          end
-        end
-      end
-    end
-
-    context "when `configuration_block` is passed" do
-      let(:instance_method_middleware) do
-        Class.new(ConvenientService::Core::MethodChainMiddleware) do
-          def next(...)
-            chain.next(...)
-          end
-        end
-      end
-
-      let(:class_method_middleware) do
-        Class.new(ConvenientService::Core::MethodChainMiddleware) do
-          def next(...)
-            chain.next(...)
-          end
-        end
-      end
-
-      let(:instance_method_configuration_block) { proc { |stack| stack.use instance_method_middleware } }
-      let(:class_method_configuration_block) { proc { |stack| stack.use class_method_middleware } }
-
-      let(:instance_method_middlewares) do
-        ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares
-          .new(scope: :instance, method: method, klass: service_class)
-          .configure(&instance_method_configuration_block)
-      end
-
-      let(:class_method_middlewares) do
-        ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares
-          .new(scope: :class, method: method, klass: service_class)
-          .configure(&class_method_configuration_block)
-      end
-
-      context "when `scope` is NOT passed" do
-        let(:configuration_block) { instance_method_configuration_block }
-        let(:method_middlewares) { instance_method_middlewares }
-
-        before do
-          ##
-          # NOTE: Configures `middlewares` in order to cache them.
-          #
-          service_class.middlewares(method) {}
-        end
-
-        specify do
-          expect { service_class.middlewares(method, &configuration_block) }
-            .to delegate_to(service_class.middlewares(method), :configure)
-            .with_arguments(&configuration_block)
-        end
-
-        specify do
-          expect { service_class.middlewares(method, &configuration_block) }
-            .to delegate_to(service_class.middlewares(method), :define!)
-        end
-
-        specify do
-          expect { service_class.middlewares(method, &configuration_block) }
-            .to cache_its_value
-        end
-
-        it "returns instance middlewares for `method`" do
-          expect(service_class.middlewares(method, &configuration_block)).to eq(method_middlewares)
-        end
-      end
-
-      context "when `scope` is passed" do
-        context "when `scope` is `:instance`" do
-          let(:scope) { :instance }
-          let(:configuration_block) { instance_method_configuration_block }
-          let(:method_middlewares) { instance_method_middlewares }
-
-          before do
-            ##
-            # NOTE: Configures `middlewares` in order to cache them.
-            #
-            service_class.middlewares(method, scope: scope) {}
-          end
-
-          specify do
-            expect { service_class.middlewares(method, scope: scope, &configuration_block) }
-              .to delegate_to(service_class.middlewares(method, scope: scope), :configure)
-              .with_arguments(&configuration_block)
-          end
-
-          specify do
-            expect { service_class.middlewares(method, scope: scope, &configuration_block) }
-              .to delegate_to(service_class.middlewares(method, scope: scope), :define!)
-          end
-
-          specify do
-            expect { service_class.middlewares(method, scope: scope, &configuration_block) }
-              .to cache_its_value
-          end
-
-          it "returns instance middlewares for `method`" do
-            expect(service_class.middlewares(method, scope: scope, &configuration_block)).to eq(method_middlewares)
-          end
-        end
-
-        context "when `scope` is `:class`" do
-          let(:scope) { :class }
-          let(:configuration_block) { class_method_configuration_block }
-          let(:method_middlewares) { class_method_middlewares }
-
-          before do
-            ##
-            # NOTE: Configures `middlewares` in order to cache them.
-            #
-            service_class.middlewares(method, scope: scope) {}
-          end
-
-          specify do
-            expect { service_class.middlewares(method, scope: scope, &configuration_block) }
-              .to delegate_to(service_class.middlewares(method, scope: scope), :configure)
-              .with_arguments(&configuration_block)
-          end
-
-          specify do
-            expect { service_class.middlewares(method, scope: scope, &configuration_block) }
-              .to delegate_to(service_class.middlewares(method, scope: scope), :define!)
-          end
-
-          specify do
-            expect { service_class.middlewares(method, scope: scope, &configuration_block) }
-              .to cache_its_value
-          end
-
-          it "returns class middlewares for `method`" do
-            expect(service_class.middlewares(method, scope: scope, &configuration_block)).to eq(method_middlewares)
-          end
-        end
-      end
-    end
-  end
-
-  describe "#commit_config!" do
-    let(:service_class) do
-      Class.new do
-        include ConvenientService::Core
-      end
-    end
-
-    before do
       ##
-      # NOTE: Configures `concerns` in order to cache them.
+      # NOTE: Indirect test for `||=` in `@config ||= Entities::Config.new(klass: self)`.
       #
-      service_class.concerns {}
-    end
-
-    specify do
-      expect { service_class.commit_config! }.to delegate_to(service_class.concerns, :include!)
-    end
-  end
-
-  describe "#method_missing" do
-    let(:service_class) do
-      Class.new do
-        include ConvenientService::Core
-
-        concerns do
-          ##
-          # NOTE: Defines `foo` that is later extended by service class by `concerns.include!`.
-          #
-          concern =
-            Module.new do
-              include ConvenientService::Support::Concern
-
-              class_methods do
-                def foo(*args, **kwargs, &block)
-                  [:foo, args, kwargs, block&.source_location]
-                end
-              end
-            end
-
-          use concern
-        end
+      specify do
+        expect { service_class.concerns(&configuration_block) }.to cache_its_value
       end
     end
 
-    let(:args) { [:foo] }
-    let(:kwargs) { {foo: :bar} }
-    let(:block) { proc { :foo } }
+    describe "#middlewares" do
+      let(:method) { :result }
+      let(:scope) { :instance }
+      let(:configuration_block) { proc {} }
 
-    it "commits config" do
-      ##
-      # NOTE: Intentionally calling missed method. But later it is added by `concerns.include!`.
-      #
-      expect { service_class.foo }.to delegate_to(service_class, :commit_config!)
-    end
+      specify do
+        allow(ConvenientService::Core::Entities::Config).to receive(:new).with(klass: service_class).and_return(config)
 
-    ##
-    # TODO: `it "logs debug message"`.
-    #
-
-    it "calls super" do
-      ##
-      # NOTE: If `[:foo, args, kwargs, block&.source_location]` is returned, then `super` was called. See concern above.
-      #
-      expect(service_class.foo(*args, **kwargs, &block)).to eq([:foo, args, kwargs, block&.source_location])
-    end
-
-    context "when concerns are included more than once (since they do not contain required class method)" do
-      let(:service_class) do
-        Class.new do
-          include ConvenientService::Core
-        end
+        expect { service_class.middlewares(method, scope: scope, &configuration_block) }
+          .to delegate_to(config, :middlewares)
+          .with_arguments(method, scope: scope, &configuration_block)
+          .and_return_its_value
       end
 
-      it "raises `NoMethodError`" do
+      ##
+      # NOTE: Indirect test for `||=` in `@config ||= Entities::Config.new(klass: self)`.
+      #
+      specify do
+        expect { service_class.middlewares(method, scope: scope, &configuration_block) }.to cache_its_value
+      end
+    end
+
+    describe "#commit_config!" do
+      specify do
+        allow(ConvenientService::Core::Entities::Config).to receive(:new).with(klass: service_class).and_return(config)
+
+        expect { service_class.commit_config! }.to delegate_to(config, :commit!)
+      end
+
+      ##
+      # NOTE: Indirect test for `||=` in `@config ||= Entities::Config.new(klass: self)`.
+      #
+      specify do
         ##
-        # NOTE: Intentionally calling missed method that won't be included (no concerns with it).
+        # NOTE: Returns `true` for the first time, `false` - for the subsequent calls.
         #
-        expect { service_class.foo }.to raise_error(NoMethodError).with_message("undefined method `foo' for #{service_class}")
+        service_class.commit_config!
+
+        ##
+        # NOTE: If returns `true`, then `config` was NOT cached.
+        #
+        expect(service_class.commit_config!).to eq(false)
       end
     end
 
-    context "when middleware caller defined without super method" do
+    describe "#method_missing" do
       let(:service_class) do
         Class.new do
           include ConvenientService::Core
 
-          middlewares(:foo, scope: :class) {}
+          concerns do
+            ##
+            # NOTE: Defines `foo` that is later extended by service class by `concerns.include!`.
+            #
+            concern =
+              Module.new do
+                include ConvenientService::Support::Concern
+
+                class_methods do
+                  def foo(*args, **kwargs, &block)
+                    [:foo, args, kwargs, block&.source_location]
+                  end
+                end
+              end
+
+            use concern
+          end
         end
       end
 
-      it "raises `NoMethodError`" do
+      let(:args) { [:foo] }
+      let(:kwargs) { {foo: :bar} }
+      let(:block) { proc { :foo } }
+
+      it "commits config" do
         ##
-        # NOTE: Intentionally calling missed method that won't be included (no concerns with it), but has middlewares.
+        # NOTE: Intentionally calling missed method. But later it is added by `concerns.include!`.
         #
-        expect { service_class.foo }.to raise_error(NoMethodError).with_message("super: no superclass method `foo' for #{service_class}")
+        expect { service_class.foo }.to delegate_to(service_class, :commit_config!)
       end
-    end
-  end
 
-  describe "#respond_to_missing?" do
-    let(:method_name) { :foo }
-    let(:result) { service_class.respond_to_missing?(method_name, include_private) }
+      ##
+      # TODO: `it "logs debug message"`.
+      #
 
-    context "when `include_private` is `false`" do
-      let(:include_private) { false }
+      it "calls super" do
+        ##
+        # NOTE: If `[:foo, args, kwargs, block&.source_location]` is returned, then `super` was called. See concern above.
+        #
+        expect(service_class.foo(*args, **kwargs, &block)).to eq([:foo, args, kwargs, block&.source_location])
+      end
 
-      context "when service class does NOT have public class method" do
-        context "when concerns do NOT have public class method" do
-          let(:service_class) do
-            Class.new do
-              include ConvenientService::Core
-            end
-          end
-
-          it "returns `false`" do
-            expect(result).to eq(false)
-          end
-
-          context "when service class has private class method" do
-            let(:service_class) do
-              Class.new do
-                include ConvenientService::Core
-
-                class << self
-                  private
-
-                  def foo
-                  end
-                end
-              end
-            end
-
-            it "returns `false`" do
-              expect(result).to eq(false)
-            end
-          end
-
-          context "when concerns have private class method" do
-            let(:service_class) do
-              Class.new do
-                include ConvenientService::Core
-
-                concerns do
-                  concern = Module.new do
-                    include ConvenientService::Support::Concern
-
-                    class_methods do
-                      private
-
-                      def foo
-                      end
-                    end
-                  end
-
-                  use concern
-                end
-              end
-            end
-
-            it "returns `false`" do
-              expect(result).to eq(false)
-            end
+      context "when concerns are included more than once (since they do not contain required class method)" do
+        let(:service_class) do
+          Class.new do
+            include ConvenientService::Core
           end
         end
 
-        context "when concerns have public class method" do
-          let(:service_class) do
-            Class.new do
-              include ConvenientService::Core
-
-              concerns do
-                concern = Module.new do
-                  include ConvenientService::Support::Concern
-
-                  class_methods do
-                    def foo
-                    end
-                  end
-                end
-
-                use concern
-              end
-            end
-          end
-
-          it "returns `true`" do
-            expect(result).to eq(true)
-          end
+        it "raises `NoMethodError`" do
+          ##
+          # NOTE: Intentionally calling missed method that won't be included (no concerns with it).
+          #
+          expect { service_class.foo }.to raise_error(NoMethodError).with_message("undefined method `foo' for #{service_class}")
         end
       end
 
-      context "when service class has public instance method" do
+      context "when middleware caller defined without super method" do
         let(:service_class) do
           Class.new do
             include ConvenientService::Core
 
-            class << self
-              def foo
-              end
-            end
+            middlewares(:foo, scope: :class) {}
           end
         end
 
-        it "returns `true`" do
-          expect(result).to eq(true)
+        it "raises `NoMethodError`" do
+          ##
+          # NOTE: Intentionally calling missed method that won't be included (no concerns with it), but has middlewares.
+          #
+          expect { service_class.foo }.to raise_error(NoMethodError).with_message("super: no superclass method `foo' for #{service_class}")
         end
       end
     end
 
-    context "when `include_private` is `true`" do
-      let(:include_private) { true }
+    describe "#respond_to_missing?" do
+      let(:method_name) { :foo }
+      let(:result) { service_class.respond_to_missing?(method_name, include_private) }
 
-      context "when service class does NOT have public class method" do
-        context "when concerns do NOT have public class method" do
-          let(:service_class) do
-            Class.new do
-              include ConvenientService::Core
-            end
-          end
+      context "when `include_private` is `false`" do
+        let(:include_private) { false }
 
-          it "returns `false`" do
-            expect(result).to eq(false)
-          end
-
-          context "when service class has private class method" do
+        context "when service class does NOT have public class method" do
+          context "when concerns do NOT have public class method" do
             let(:service_class) do
               Class.new do
                 include ConvenientService::Core
-
-                class << self
-                  private
-
-                  def foo
-                  end
-                end
               end
             end
 
-            it "returns `true`" do
-              expect(result).to eq(true)
+            it "returns `false`" do
+              expect(result).to eq(false)
+            end
+
+            context "when service class has private class method" do
+              let(:service_class) do
+                Class.new do
+                  include ConvenientService::Core
+
+                  class << self
+                    private
+
+                    def foo
+                    end
+                  end
+                end
+              end
+
+              it "returns `false`" do
+                expect(result).to eq(false)
+              end
+            end
+
+            context "when concerns have private class method" do
+              let(:service_class) do
+                Class.new do
+                  include ConvenientService::Core
+
+                  concerns do
+                    concern = Module.new do
+                      include ConvenientService::Support::Concern
+
+                      class_methods do
+                        private
+
+                        def foo
+                        end
+                      end
+                    end
+
+                    use concern
+                  end
+                end
+              end
+
+              it "returns `false`" do
+                expect(result).to eq(false)
+              end
             end
           end
 
-          context "when concerns have private class method" do
+          context "when concerns have public class method" do
             let(:service_class) do
               Class.new do
                 include ConvenientService::Core
@@ -537,8 +239,6 @@ RSpec.describe ConvenientService::Core::ClassMethods do
                     include ConvenientService::Support::Concern
 
                     class_methods do
-                      private
-
                       def foo
                       end
                     end
@@ -555,22 +255,14 @@ RSpec.describe ConvenientService::Core::ClassMethods do
           end
         end
 
-        context "when concerns have public class method" do
+        context "when service class has public instance method" do
           let(:service_class) do
             Class.new do
               include ConvenientService::Core
 
-              concerns do
-                concern = Module.new do
-                  include ConvenientService::Support::Concern
-
-                  class_methods do
-                    def foo
-                    end
-                  end
+              class << self
+                def foo
                 end
-
-                use concern
               end
             end
           end
@@ -581,47 +273,136 @@ RSpec.describe ConvenientService::Core::ClassMethods do
         end
       end
 
-      context "when service class has public instance method" do
+      context "when `include_private` is `true`" do
+        let(:include_private) { true }
+
+        context "when service class does NOT have public class method" do
+          context "when concerns do NOT have public class method" do
+            let(:service_class) do
+              Class.new do
+                include ConvenientService::Core
+              end
+            end
+
+            it "returns `false`" do
+              expect(result).to eq(false)
+            end
+
+            context "when service class has private class method" do
+              let(:service_class) do
+                Class.new do
+                  include ConvenientService::Core
+
+                  class << self
+                    private
+
+                    def foo
+                    end
+                  end
+                end
+              end
+
+              it "returns `true`" do
+                expect(result).to eq(true)
+              end
+            end
+
+            context "when concerns have private class method" do
+              let(:service_class) do
+                Class.new do
+                  include ConvenientService::Core
+
+                  concerns do
+                    concern = Module.new do
+                      include ConvenientService::Support::Concern
+
+                      class_methods do
+                        private
+
+                        def foo
+                        end
+                      end
+                    end
+
+                    use concern
+                  end
+                end
+              end
+
+              it "returns `true`" do
+                expect(result).to eq(true)
+              end
+            end
+          end
+
+          context "when concerns have public class method" do
+            let(:service_class) do
+              Class.new do
+                include ConvenientService::Core
+
+                concerns do
+                  concern = Module.new do
+                    include ConvenientService::Support::Concern
+
+                    class_methods do
+                      def foo
+                      end
+                    end
+                  end
+
+                  use concern
+                end
+              end
+            end
+
+            it "returns `true`" do
+              expect(result).to eq(true)
+            end
+          end
+        end
+
+        context "when service class has public instance method" do
+          let(:service_class) do
+            Class.new do
+              include ConvenientService::Core
+
+              class << self
+                def foo
+                end
+              end
+            end
+          end
+
+          it "returns `true`" do
+            expect(result).to eq(true)
+          end
+        end
+      end
+
+      context "when `include_private` is NOT passed" do
+        let(:result) { service_class.respond_to_missing?(method_name) }
+
         let(:service_class) do
           Class.new do
             include ConvenientService::Core
 
             class << self
+              private
+
               def foo
               end
             end
           end
         end
 
-        it "returns `true`" do
-          expect(result).to eq(true)
+        it "defaults to `false`" do
+          ##
+          # NOTE: private methods are ignored when `include_private` is `false`.
+          #
+          expect(result).to eq(false)
         end
-      end
-    end
-
-    context "when `include_private` is NOT passed" do
-      let(:result) { service_class.respond_to_missing?(method_name) }
-
-      let(:service_class) do
-        Class.new do
-          include ConvenientService::Core
-
-          class << self
-            private
-
-            def foo
-            end
-          end
-        end
-      end
-
-      it "defaults to `false`" do
-        ##
-        # NOTE: private methods are ignored when `include_private` is `false`.
-        #
-        expect(result).to eq(false)
       end
     end
   end
 end
-# rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
+# rubocop:enable RSpec/NestedGroups

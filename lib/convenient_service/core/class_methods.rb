@@ -18,12 +18,16 @@ module ConvenientService
       end
 
       ##
-      # @return [void]
+      # Commits config when called for the first time.
+      # Does nothing for the subsequent calls.
+      #
+      # @return [Boolean] true if called for the first time, false otherwise (similarly as Kernel#require).
+      #
+      # @see https://ruby-doc.org/core-3.1.2/Kernel.html#method-i-require
       #
       def commit_config!
         (@config ||= Entities::Config.new(klass: self)).commit!
-
-        ConvenientService.logger.debug { "[Core] Included concerns into `#{self}` | Triggered by `.commit_config!`" }
+          .tap { ConvenientService.logger.debug { "[Core] Committed config for `#{self}` | Triggered by `.commit_config!`" } }
       end
 
       ##
@@ -68,7 +72,7 @@ module ConvenientService
 
         return super if middlewares(method, scope: :class).defined_without_super_method?
 
-        ConvenientService.logger.debug { "[Core] Included concerns into `#{self}` | Triggered by `method_missing` | Method: `.#{method}`" }
+        ConvenientService.logger.debug { "[Core] Committed config for `#{self}` | Triggered by `method_missing` | Method: `.#{method}`" }
 
         __send__(method, *args, **kwargs, &block)
       end

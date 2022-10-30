@@ -61,7 +61,7 @@ module ConvenientService
 
         return super if middlewares(method, scope: :instance).defined_without_super_method?
 
-        ConvenientService.logger.debug { "[Core] Included concerns into `#{self.class}` | Triggered by `method_missing` | Method: `##{method}`" }
+        ConvenientService.logger.debug { "[Core] Committed config for `#{self.class}` | Triggered by `method_missing` | Method: `##{method}`" }
 
         __send__(method, *args, **kwargs, &block)
       end
