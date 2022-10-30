@@ -28,7 +28,19 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
     it { is_expected.to have_attr_reader(:scope) }
     it { is_expected.to have_attr_reader(:method) }
     it { is_expected.to have_attr_reader(:container) }
+    it { is_expected.to have_attr_reader(:caller) }
   end
+
+  ##
+  # NOTE: Waits for `should-matchers` full support.
+  #
+  # example_group "delegators" do
+  #   include Shoulda::Matchers::Independent
+  #
+  #   subject { command_instance }
+  #
+  #   it { is_expected.to delegate_method(:prefix).to(:caller) }
+  # end
 
   example_group "class methods" do
     describe ".call" do
