@@ -41,12 +41,12 @@ module ConvenientService
         #
         def concerns(&configuration_block)
           if configuration_block
-            @concerns ||= Entities::Concerns.new(entity: klass)
+            @concerns ||= Entities::Concerns.new(klass: klass)
             @concerns.assert_not_included!
             @concerns.configure(&configuration_block)
           end
 
-          @concerns || Entities::Concerns.new(entity: klass)
+          @concerns || Entities::Concerns.new(klass: klass)
         end
 
         ##

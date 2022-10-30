@@ -15,9 +15,9 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns::En
   let(:mod) { Module.new }
 
   let(:stack) { ConvenientService::Support::Middleware::StackBuilder.new }
-  let(:env) { {entity: entity, method: :result, args: args, kwargs: kwargs, block: block} }
+  let(:env) { {klass: klass, method: :result, args: args, kwargs: kwargs, block: block} }
 
-  let(:entity) { Class.new }
+  let(:klass) { Class.new }
   let(:args) { [:foo] }
   let(:kwargs) { {foo: :bar} }
   let(:block) { proc { :foo } }
@@ -130,8 +130,8 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns::En
     include ConvenientService::RSpec::Matchers::DelegateTo
 
     describe "#call" do
-      it "includes `mod` to `env[:entity]`" do
-        expect { middleware_result }.to change { entity.include?(mod) }.from(false).to(true)
+      it "includes `mod` to `env[:klass]`" do
+        expect { middleware_result }.to change { klass.include?(mod) }.from(false).to(true)
       end
 
       specify do

@@ -17,7 +17,7 @@ RSpec.describe ConvenientService::Core::ClassMethods do
     end
 
     context "when `configuration_block` is NOT passed" do
-      let(:concerns) { ConvenientService::Core::Entities::Config::Entities::Concerns.new(entity: service_class) }
+      let(:concerns) { ConvenientService::Core::Entities::Config::Entities::Concerns.new(klass: service_class) }
 
       context "when concerns are NOT configured" do
         specify { expect { service_class.concerns }.not_to cache_its_value }
@@ -43,7 +43,7 @@ RSpec.describe ConvenientService::Core::ClassMethods do
       # NOTE: Simplest concern is just a module.
       #
       let(:concern) { Module.new }
-      let(:concerns) { ConvenientService::Core::Entities::Config::Entities::Concerns.new(entity: service_class).configure(&configuration_block) }
+      let(:concerns) { ConvenientService::Core::Entities::Config::Entities::Concerns.new(klass: service_class).configure(&configuration_block) }
       let(:configuration_block) { proc { |stack| stack.use concern } }
 
       before do

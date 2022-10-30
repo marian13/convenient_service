@@ -70,12 +70,12 @@ module ConvenientService
 
                 ##
                 # @param env [Hash]
-                # @option env [Class] :entity
+                # @option env [Class] :klass
                 #
                 # @return [void]
                 #
                 def call(env)
-                  env[:entity].include concern
+                  env[:klass].include concern
 
                   @stack.call(env)
                 end

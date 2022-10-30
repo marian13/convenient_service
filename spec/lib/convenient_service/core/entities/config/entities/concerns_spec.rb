@@ -8,7 +8,7 @@ require "convenient_service"
 RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
-  let(:concerns) { described_class.new(entity: entity) }
+  let(:concerns) { described_class.new(klass: klass) }
 
   let(:args) { [:foo] }
   let(:kwargs) { {foo: :bar} }
@@ -22,7 +22,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns do
 
   let(:service_instance) { service_class.new }
 
-  let(:entity) { service_class }
+  let(:klass) { service_class }
 
   let(:concern) do
     Module.new do
@@ -751,7 +751,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns do
 
     example_group "comparison" do
       describe "#==" do
-        let(:concerns) { described_class.new(entity: entity) }
+        let(:concerns) { described_class.new(klass: klass) }
 
         context "when `other` has different class" do
           let(:other) { 42 }
@@ -761,8 +761,8 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns do
           end
         end
 
-        context "when `other` has different `entity`" do
-          let(:other) { described_class.new(entity: Class.new) }
+        context "when `other` has different `klass`" do
+          let(:other) { described_class.new(klass: Class.new) }
 
           it "returns `false`" do
             expect(concerns == other).to eq(false)
@@ -770,7 +770,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns do
         end
 
         context "when `other` has different `stack`" do
-          let(:other) { described_class.new(entity: entity).configure { |stack| stack.use concern } }
+          let(:other) { described_class.new(klass: klass).configure { |stack| stack.use concern } }
 
           it "returns `false`" do
             expect(concerns == other).to eq(false)
@@ -778,7 +778,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns do
         end
 
         context "when `other` has same attributes" do
-          let(:other) { described_class.new(entity: entity) }
+          let(:other) { described_class.new(klass: klass) }
 
           it "returns `true`" do
             expect(concerns == other).to eq(true)

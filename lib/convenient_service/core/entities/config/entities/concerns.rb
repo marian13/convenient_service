@@ -10,11 +10,11 @@ module ConvenientService
         module Entities
           class Concerns
             ##
-            # @param entity [Class]
+            # @param klass [Class]
             # @return [void]
             #
-            def initialize(entity:)
-              @entity = entity
+            def initialize(klass:)
+              @klass = klass
             end
 
             ##
@@ -81,7 +81,7 @@ module ConvenientService
             end
 
             ##
-            # Includes concerns into entity when called for the first time.
+            # Includes concerns into klass when called for the first time.
             # Does nothing for the subsequent calls.
             #
             # @return [Boolean] true if called for the first time, false otherwise (similarly as Kernel#require).
@@ -91,13 +91,13 @@ module ConvenientService
             def include!
               return false if included?
 
-              stack.dup.insert_before(0, Entities::DefaultConcern).call(entity: entity)
+              stack.dup.insert_before(0, Entities::DefaultConcern).call(klass: klass)
 
               true
             end
 
             ##
-            # Checks whether concerns are included into entity (include! was called at least once).
+            # Checks whether concerns are included into klass (include! was called at least once).
             #
             # @return [Boolean]
             #
@@ -105,7 +105,7 @@ module ConvenientService
             #   IMPORTANT: `included?` should be thread-safe.
             #
             def included?
-              entity.include?(Entities::DefaultConcern)
+              klass.include?(Entities::DefaultConcern)
             end
 
             ##
@@ -115,7 +115,7 @@ module ConvenientService
             def ==(other)
               return unless other.instance_of?(self.class)
 
-              return false if entity != other.entity
+              return false if klass != other.klass
               return false if stack != other.stack
 
               true
@@ -131,10 +131,10 @@ module ConvenientService
             protected
 
             ##
-            # @!attribute [r] entity
+            # @!attribute [r] klass
             #   @return [Class]
             #
-            attr_reader :entity
+            attr_reader :klass
 
             ##
             # @return [ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack]
@@ -218,7 +218,7 @@ module ConvenientService
             # @return [String]
             #
             def stack_name
-              "Concerns::#{entity}"
+              "Concerns::#{klass}"
             end
           end
         end
