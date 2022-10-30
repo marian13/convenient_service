@@ -4,8 +4,8 @@ module ConvenientService
   module RSpec
     module Matchers
       module HaveAliasMethod
-        def have_alias_method(*args)
-          Custom::HaveAliasMethod.new(*args)
+        def have_alias_method(...)
+          Custom::HaveAliasMethod.new(...)
         end
       end
     end

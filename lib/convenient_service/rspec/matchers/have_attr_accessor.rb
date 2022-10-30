@@ -4,8 +4,8 @@ module ConvenientService
   module RSpec
     module Matchers
       module HaveAttrAccessor
-        def have_attr_accessor(*args)
-          Custom::HaveAttrAccessor.new(*args)
+        def have_attr_accessor(...)
+          Custom::HaveAttrAccessor.new(...)
         end
       end
     end

@@ -4,8 +4,8 @@ module ConvenientService
   module RSpec
     module Helpers
       module StubService
-        def stub_service(*args)
-          Custom::StubService.call(*args)
+        def stub_service(...)
+          Custom::StubService.call(...)
         end
 
         def return_result(status)

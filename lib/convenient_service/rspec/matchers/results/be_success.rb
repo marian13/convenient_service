@@ -5,8 +5,8 @@ module ConvenientService
     module Matchers
       module Results
         module BeSuccess
-          def be_success
-            Custom::Results::BeSuccess.new
+          def be_success(...)
+            Custom::Results::BeSuccess.new(...)
           end
         end
       end

@@ -4,8 +4,8 @@ module ConvenientService
   module RSpec
     module Matchers
       module HaveAttrWriter
-        def have_attr_writer(*args)
-          Custom::HaveAttrWriter.new(*args)
+        def have_attr_writer(...)
+          Custom::HaveAttrWriter.new(...)
         end
       end
     end

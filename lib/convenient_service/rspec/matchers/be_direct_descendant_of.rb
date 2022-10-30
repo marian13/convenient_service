@@ -4,8 +4,8 @@ module ConvenientService
   module RSpec
     module Matchers
       module BeDirectDescendantOf
-        def be_direct_descendant_of(*args)
-          Custom::BeDirectDescendantOf.new(*args)
+        def be_direct_descendant_of(...)
+          Custom::BeDirectDescendantOf.new(...)
         end
       end
     end

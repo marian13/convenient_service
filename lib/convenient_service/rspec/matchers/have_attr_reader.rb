@@ -4,8 +4,8 @@ module ConvenientService
   module RSpec
     module Matchers
       module HaveAttrReader
-        def have_attr_reader(*args)
-          Custom::HaveAttrReader.new(*args)
+        def have_attr_reader(...)
+          Custom::HaveAttrReader.new(...)
         end
       end
     end
