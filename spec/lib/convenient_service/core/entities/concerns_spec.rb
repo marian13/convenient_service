@@ -53,11 +53,183 @@ RSpec.describe ConvenientService::Core::Entities::Concerns do
   let(:bar_value) { [:bar, args, kwargs, block&.source_location] }
 
   example_group "instance methods" do
+    describe "#instance_method_defined?" do
+      let(:module_with_instance_method) do
+        Module.new do
+          def result
+          end
+        end
+      end
+
+      let(:other_module_with_instance_method) do
+        Module.new do
+          def result
+          end
+        end
+      end
+
+      let(:module_without_instance_method) { Module.new }
+      let(:other_module_without_instance_method) { Module.new }
+
+      let(:concern_with_instance_method) do
+        Module.new do
+          include ConvenientService::Support::Concern
+
+          instance_methods do
+            def result
+            end
+          end
+        end
+      end
+
+      let(:other_concern_with_instance_method) do
+        Module.new do
+          include ConvenientService::Support::Concern
+
+          instance_methods do
+            def result
+            end
+          end
+        end
+      end
+
+      let(:concern_without_instance_method) { Module.new { include ConvenientService::Support::Concern } }
+      let(:other_concern_without_instance_method) { Module.new { include ConvenientService::Support::Concern } }
+
+      context "when concerns do NOT have any module or concern with instance method" do
+        before do
+          concerns.configure {}
+        end
+
+        it "returns `false`" do
+          expect(concerns.instance_method_defined?(:result)).to eq(false)
+        end
+      end
+
+      context "when concerns has one module with instance method" do
+        before do
+          concerns.configure do |stack|
+            stack.use module_with_instance_method
+          end
+        end
+
+        it "returns `true`" do
+          expect(concerns.instance_method_defined?(:result)).to eq(true)
+        end
+      end
+
+      context "when concerns has one concern with instance method" do
+        before do
+          concerns.configure do |stack|
+            stack.use concern_with_instance_method
+          end
+        end
+
+        it "returns `true`" do
+          expect(concerns.instance_method_defined?(:result)).to eq(true)
+        end
+      end
+
+      context "when concerns has multiple modules" do
+        context "when none one of those modules has instance method" do
+          before do
+            concerns.configure do |stack|
+              stack.use module_without_instance_method
+              stack.use other_module_without_instance_method
+            end
+          end
+
+          it "returns `false`" do
+            expect(concerns.instance_method_defined?(:result)).to eq(false)
+          end
+        end
+
+        context "when at least one of those modules has instance method" do
+          before do
+            concerns.configure do |stack|
+              stack.use module_with_instance_method
+              stack.use other_module_without_instance_method
+            end
+          end
+
+          it "returns `true`" do
+            expect(concerns.instance_method_defined?(:result)).to eq(true)
+          end
+        end
+      end
+
+      context "when concerns has multiple concerns" do
+        context "when none one of those concerns has instance method" do
+          before do
+            concerns.configure do |stack|
+              stack.use concern_without_instance_method
+              stack.use other_concern_without_instance_method
+            end
+          end
+
+          it "returns `false`" do
+            expect(concerns.instance_method_defined?(:result)).to eq(false)
+          end
+        end
+
+        context "when at least one of those concerns has instance method" do
+          before do
+            concerns.configure do |stack|
+              stack.use concern_with_instance_method
+              stack.use other_concern_without_instance_method
+            end
+          end
+
+          it "returns `true`" do
+            expect(concerns.instance_method_defined?(:result)).to eq(true)
+          end
+        end
+      end
+
+      context "when concerns has both modules and concerns" do
+        context "when none one of those modules and concerns has instance method" do
+          before do
+            concerns.configure do |stack|
+              stack.use module_without_instance_method
+              stack.use concern_without_instance_method
+            end
+          end
+
+          it "returns `false`" do
+            expect(concerns.instance_method_defined?(:result)).to eq(false)
+          end
+        end
+
+        context "when at least one of those modules has instance method" do
+          before do
+            concerns.configure do |stack|
+              stack.use module_with_instance_method
+              stack.use concern_without_instance_method
+            end
+          end
+
+          it "returns `true`" do
+            expect(concerns.instance_method_defined?(:result)).to eq(true)
+          end
+        end
+
+        context "when at least one of those concerns has instance method" do
+          before do
+            concerns.configure do |stack|
+              stack.use module_without_instance_method
+              stack.use concern_with_instance_method
+            end
+          end
+
+          it "returns `true`" do
+            expect(concerns.instance_method_defined?(:result)).to eq(true)
+          end
+        end
+      end
+    end
+
     ##
     # TODO: Specs.
-    #
-    # describe "#instance_method_defined?" do
-    # end
     #
     # describe "#private_instance_method_defined?" do
     # end

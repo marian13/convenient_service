@@ -34,5 +34,5 @@
 | Medium | 🚧 | Make a decision of what to do with `printable_block` in custom RSpec matchers | |
 | Medium | 🚧 | User-friendly exception messages | |
 | High | 🚧 | Factories for POROs | |
-| Medium | 🚧 | Resolve warning during specs | |
+| High | 🚧 | Resolve warning during specs | |
 | Low | 🚧 | Consider to change `delegate` backend | |
