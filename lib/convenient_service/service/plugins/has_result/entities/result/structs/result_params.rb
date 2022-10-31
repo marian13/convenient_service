@@ -7,7 +7,7 @@ module ConvenientService
         module Entities
           class Result
             module Structs
-              ResultParams = Support::Struct.new(:service, :status, :data, :message, :code, keyword_init: true)
+              ResultParams = ::Struct.new(:service, :status, :data, :message, :code, keyword_init: true)
             end
           end
         end
