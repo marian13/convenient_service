@@ -7,14 +7,14 @@ module ConvenientService
       # @see ConvenientService::Core::Entities::Config#concerns
       #
       def concerns(...)
-        (@config ||= Entities::Config.new(klass: self)).concerns(...)
+        (@__config__ ||= Entities::Config.new(klass: self)).concerns(...)
       end
 
       ##
       # @see ConvenientService::Core::Entities::Config#middlewares
       #
       def middlewares(...)
-        (@config ||= Entities::Config.new(klass: self)).middlewares(...)
+        (@__config__ ||= Entities::Config.new(klass: self)).middlewares(...)
       end
 
       ##
@@ -26,7 +26,7 @@ module ConvenientService
       # @see https://ruby-doc.org/core-3.1.2/Kernel.html#method-i-require
       #
       def commit_config!
-        (@config ||= Entities::Config.new(klass: self)).commit!
+        (@__config__ ||= Entities::Config.new(klass: self)).commit!
           .tap { ConvenientService.logger.debug { "[Core] Committed config for `#{self}` | Triggered by `.commit_config!`" } }
       end
 
