@@ -2,7 +2,7 @@
 
 | Priority | Status | Goal | Notes |
 | - | - | - | - |
-| High | ⏳ | 100% coverage of `Core` | |
+| High | ✅ | 100% coverage of `Core` | |
 | Medium | 🚧 | Type signatures for the whole codebase ([Yard @param, @overload, @return](https://rubydoc.info/gems/yard/file/docs/Tags.md#taglist)) | |
 | Medium | 🚧 | `Service.success?` shortcut for `Service.result.success?` | |
 | Medium | 🚧 | Release `v0.1.0` with a warning that lib is still under heavy development | |
@@ -20,9 +20,9 @@
 | High | 🚧 | Unified `inspect` | |
 | High | ✅ | Remove race condition for `method_missing` | https://github.com/marian13/convenient_service/pull/5 |
 | High | ✅ | Remove incompatiility of [Module#include](https://gist.github.com/marian13/9c25041f835564e945d978839097d419) | https://github.com/marian13/convenient_service/pull/3 |
-| Medium | 🚧 | Split `Utils` specs into separate files | [convenient_service/spec/lib/convenient_service/utils](https://github.com/marian13/convenient_service/tree/main/spec/lib/convenient_service/utils) |
+| Medium | ✅ | Split `Utils` specs into separate files | [convenient_service/spec/lib/convenient_service/utils](https://github.com/marian13/convenient_service/tree/main/spec/lib/convenient_service/utils) |
 | Medium | 🚧 | How to test thread-safety? | |
-| Medium | 🚧 | Rename `Utils::Module.find_own_const` to `Utils::Module.get_own_const` | [ConvenientService::Utils::Module::GetOwnConst](https://github.com/marian13/convenient_service/blob/main/lib/convenient_service/utils/module/get_own_const.rb) |
+| Medium | ✅ | Rename `Utils::Module.find_own_const` to `Utils::Module.get_own_const` | [ConvenientService::Utils::Module::GetOwnConst](https://github.com/marian13/convenient_service/blob/main/lib/convenient_service/utils/module/get_own_const.rb) |
 | Medium | 🚧 | Mark `@api private` methods, classes | [YARD Tags](https://www.rubydoc.info/gems/yard/file/docs/Tags.md) |
 | Medium | ✅ | A way to check if block has one required positional argument | [#proc_has_one_positional_argument?](https://github.com/marian13/convenient_service/blob/main/lib/convenient_service/utils/proc/exec_config.rb#L96) |
 | Medium | 🚧 | Factories for POROs in specs | |
@@ -35,5 +35,7 @@
 | Medium | 🚧 | User-friendly exception messages | |
 | High | 🚧 | Factories for POROs ❗❗❗ | |
 | High | 🚧 | Resolve warning during specs | |
-| Low | 🚧 | Consider to change `delegate` backend | |
-| Middle | 🚧 | Same order of attr macros, delegators, initialize, class methods, attr methods, queries, actions, to_*, comparison, inspect | |
+| Medium | 🚧 | Consider to change/rewrite `delegate` backend to minify its interface | |
+| Medium | 🚧 | Same order of attr macros, delegators, initialize, class methods, attr methods, queries, actions, to_*, comparison, inspect | |
+| Medium | 🚧 | Move `Cache` to `Support` | |
+| Medium | 🚧 | Statically specify plugin dependencies | |
