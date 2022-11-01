@@ -60,7 +60,7 @@ module ConvenientService
                     end
 
                     ##
-                    # @return middleware [ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Middleware]
+                    # @param middleware [ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Middleware]
                     # @return [ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Middleware]
                     #
                     def cast_middleware(middleware)

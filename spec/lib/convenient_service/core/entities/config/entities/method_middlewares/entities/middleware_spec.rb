@@ -40,7 +40,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
 
     describe "#call" do
       it "sets middleware @env instance variable to `env`" do
-        expect { middleware_result }.to change { middleware_instance.instance_variable_get(:@env) }.from({}).to(env)
+        expect { middleware_result }.to change { middleware_instance.instance_variable_get(:@__env__) }.from({}).to(env)
       end
 
       it "sets middleware chain @env instance variable to `env`" do

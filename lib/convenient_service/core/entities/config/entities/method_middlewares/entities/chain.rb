@@ -32,7 +32,7 @@ module ConvenientService
                 #   TODO: Enforce to always pass args, kwargs, block.
                 #
                 def next(*args, **kwargs, &block)
-                  @stack.call(@env.merge(args: args, kwargs: kwargs, block: block))
+                  stack.call(env.merge(args: args, kwargs: kwargs, block: block))
                 end
 
                 ##

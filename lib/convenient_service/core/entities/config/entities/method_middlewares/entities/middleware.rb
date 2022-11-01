@@ -48,8 +48,8 @@ module ConvenientService
                 # @return [void]
                 #
                 def initialize(stack, env: {})
-                  @stack = stack
-                  @env = env
+                  @__stack__ = stack
+                  @__env__ = env
                 end
 
                 ##
@@ -57,7 +57,7 @@ module ConvenientService
                 # @return [Object] Can be any type.
                 #
                 def call(env)
-                  @env = env
+                  @__env__ = env
 
                   ##
                   # IMPORTANT: This is a library code. Do NOT do things like this in your application code.
@@ -77,10 +77,10 @@ module ConvenientService
                 # @return [Class, Object]
                 #
                 # @internal
-                #   NOTE: `@env` is set inside `call`.
+                #   NOTE: `@__env__` is set inside `call`.
                 #
                 def entity
-                  @env[:entity]
+                  @__env__[:entity]
                 end
 
                 ##
@@ -89,20 +89,20 @@ module ConvenientService
                 # @note Try to avoid `if` conditions based on `method` value when possible, prefer to create separate middlewares instead.
                 #
                 # @internal
-                #   NOTE: `@env` is set inside `call`.
+                #   NOTE: `@__env__` is set inside `call`.
                 #
                 def method
-                  @env[:method]
+                  @__env__[:method]
                 end
 
                 ##
                 # @return [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Chain]
                 #
                 # @internal
-                #   NOTE: `@env` is set inside `call`.
+                #   NOTE: `@__env__` is set inside `call`.
                 #
                 def chain
-                  @chain ||= Entities::Chain.new(stack: @stack)
+                  @__chain__ ||= Entities::Chain.new(stack: @__stack__)
                 end
               end
             end
