@@ -340,8 +340,8 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/middleware.rb', line 50</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_stack'>stack</span><span class='comma'>,</span> <span class='label'>env:</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
-  <span class='ivar'>@stack</span> <span class='op'>=</span> <span class='id identifier rubyid_stack'>stack</span>
-  <span class='ivar'>@env</span> <span class='op'>=</span> <span class='id identifier rubyid_env'>env</span>
+  <span class='ivar'>@__stack__</span> <span class='op'>=</span> <span class='id identifier rubyid_stack'>stack</span>
+  <span class='ivar'>@__env__</span> <span class='op'>=</span> <span class='id identifier rubyid_env'>env</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -433,7 +433,7 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/middleware.rb', line 59</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_env'>env</span><span class='rparen'>)</span>
-  <span class='ivar'>@env</span> <span class='op'>=</span> <span class='id identifier rubyid_env'>env</span>
+  <span class='ivar'>@__env__</span> <span class='op'>=</span> <span class='id identifier rubyid_env'>env</span>
 
   <span class='comment'>##
 </span>  <span class='comment'># IMPORTANT: This is a library code. Do NOT do things like this in your application code.
@@ -498,7 +498,7 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/middleware.rb', line 104</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_chain'>chain</span>
-  <span class='ivar'>@chain</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="../Entities.html" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Chain.html" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Chain (class)">Chain</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Chain.html#initialize-instance_method" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Chain#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>stack:</span> <span class='ivar'>@stack</span><span class='rparen'>)</span>
+  <span class='ivar'>@__chain__</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="../Entities.html" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Chain.html" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Chain (class)">Chain</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Chain.html#initialize-instance_method" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Chain#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>stack:</span> <span class='ivar'>@__stack__</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -550,7 +550,7 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/middleware.rb', line 82</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_entity'>entity</span>
-  <span class='ivar'>@env</span><span class='lbracket'>[</span><span class='symbol'>:entity</span><span class='rbracket'>]</span>
+  <span class='ivar'>@__env__</span><span class='lbracket'>[</span><span class='symbol'>:entity</span><span class='rbracket'>]</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -609,7 +609,7 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/middleware.rb', line 94</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_method'>method</span>
-  <span class='ivar'>@env</span><span class='lbracket'>[</span><span class='symbol'>:method</span><span class='rbracket'>]</span>
+  <span class='ivar'>@__env__</span><span class='lbracket'>[</span><span class='symbol'>:method</span><span class='rbracket'>]</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -729,7 +729,7 @@ This way middleware stack is stopped in the &quot;middle&quot; and its &quot;mid
 </div>
 
       <div id="footer">
-  Generated on Tue Nov  1 16:14:51 2022 by
+  Generated on Tue Nov  1 16:42:28 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>
