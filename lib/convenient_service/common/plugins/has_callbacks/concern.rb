@@ -18,7 +18,7 @@ module ConvenientService
             # @api private
             #
             def callbacks
-              @callbacks ||= Entities::CallbackCollection.new
+              @__callbacks__ ||= Entities::CallbackCollection.new
             end
 
             def before(type, &block)
