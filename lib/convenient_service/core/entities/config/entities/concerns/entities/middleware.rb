@@ -83,6 +83,8 @@ module ConvenientService
                 private
 
                 ##
+                # @return [Module, ConvenientService::Support::Concern]
+                #
                 # @internal
                 #   NOTE: `self.class.concern` is overridden by descendants. Descendants are created dynamically. See `Concerns::MiddlewareStack#cast`.
                 #

@@ -38,6 +38,9 @@ module ConvenientService
                     private
 
                     ##
+                    # @param mod [Module, ConvenientService::Support::Concern]
+                    # @return [ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Middleware]
+                    #
                     # @internal
                     #   NOTE: `ruby-middleware` expects a `Class` or object that responds to `call`.
                     #   https://github.com/Ibsciss/ruby-middleware/blob/v0.4.2/lib/middleware/runner.rb#L52
@@ -56,6 +59,10 @@ module ConvenientService
                       middleware
                     end
 
+                    ##
+                    # @return middleware [ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Middleware]
+                    # @return [ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Middleware]
+                    #
                     def cast_middleware(middleware)
                       middleware.dup
                     end

@@ -63,7 +63,7 @@ module ConvenientService
             end
 
             ##
-            # NOTE: Works in a similar way as `Kernel.require`.
+            # @note: Works in a similar way as `Kernel.require`.
             #
             # @return [Boolean]
             #

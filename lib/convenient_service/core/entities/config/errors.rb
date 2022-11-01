@@ -6,6 +6,10 @@ module ConvenientService
       class Config
         module Errors
           class ConfigIsCommitted < ConvenientService::Error
+            ##
+            # @param config [ConvenientService::Core::Entities::Config]
+            # @return [void]
+            #
             def initialize(config:)
               message = <<~TEXT
                 Config for `#{config.klass}` is already committed. Only uncommitted configs can be modified.

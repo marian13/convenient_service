@@ -171,7 +171,7 @@ module ConvenientService
                 end
 
                 ##
-                # @return [Array]
+                # @return [Array<ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Middleware>]
                 #
                 def to_a
                   plain_stack.to_a
