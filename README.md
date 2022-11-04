@@ -47,7 +47,6 @@ This library is under heavy development. Public API may be subject to change. Th
 
 - Have a look at [Convenient Service Development Wiki](https://github.com/marian13/convenient_service/wiki) if you consider making a contribution.
 
----
 <!-- documentation:end -->
 
 ## Links
@@ -55,6 +54,8 @@ This library is under heavy development. Public API may be subject to change. Th
 <!-- links:start -->
 - [RubyGems](https://rubygems.org/gems/convenient_service).
 <!-- links:end -->
+
+---
 
 <!-- author:start -->
 Copyright (c) 2022 [Marian Kostyk](http://mariankostyk.com).
