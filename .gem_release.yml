@@ -1,0 +1,23 @@
+quiet: false
+
+##
+# NOTE: `bump` options.
+# https://github.com/svenfuchs/gem-release#gem-bump
+#
+bump:
+  file: ./lib/convenient_service/version.rb
+  message: 🎉 🎉 🎉 Release %{version} 🎉 🎉 🎉
+  recurse: false
+  release: true
+  sign: true
+  tag: true
+
+##
+# NOTE: `release` options.
+# https://github.com/svenfuchs/gem-release#gem-release
+#
+release:
+  color: true
+  host: https://rubygems.org
+  recurse: false
+  key: convenient_service

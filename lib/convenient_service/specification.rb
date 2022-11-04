@@ -11,11 +11,11 @@ module ConvenientService
     HOMEPAGE = "https://github.com/marian13/convenient_service"
 
     SUMMARY = <<~TEXT
-      Service object pattern implementation.
+      Service object pattern implementation in Ruby.
     TEXT
 
     DESCRIPTION = <<~TEXT
-      Yet another approach of revisiting the service object pattern, but this time focusing on the unique, opinionated features.
+      Yet another approach to revisit the service object pattern in Ruby, but this time focusing on the unique, opinionated, moderately obtrusive, but not mandatory features.
     TEXT
   end
 end
