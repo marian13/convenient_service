@@ -28,6 +28,10 @@ tasks:
       - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
         msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
 
+  deps:
+    cmds:
+      - task: deps:install
+
   deps:install:
     cmds:
       - bundle install
@@ -189,6 +193,18 @@ tasks:
     cmds:
       - bundle exec rake playground
     interactive: true
+
+  release:major:
+    cmds:
+      - gem bump convenient_service --version major
+
+  release:minor:
+    cmds:
+      - gem bump convenient_service --version minor
+
+  release:patch:
+    cmds:
+      - gem bump convenient_service --version patch
 
   rspec:
     cmds:

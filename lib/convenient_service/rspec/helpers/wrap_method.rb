@@ -4,8 +4,8 @@ module ConvenientService
   module RSpec
     module Helpers
       module WrapMethod
-        def wrap_method(*args, **kwargs)
-          Custom::WrapMethod.call(*args, **kwargs)
+        def wrap_method(...)
+          Custom::WrapMethod.call(...)
         end
       end
     end

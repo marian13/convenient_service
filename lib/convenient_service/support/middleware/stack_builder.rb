@@ -8,7 +8,7 @@ module ConvenientService
       #   TODO: Contribute.
       #
       #   NOTE: Minimal `ibsciss-middleware` version - `0.4.2`.
-      #   https://github.com/Ibsciss/ruby-middleware/tree/v0.4.2
+      #   https://github.com/marian13/ruby-middleware/tree/v0.4.2
       #
       class StackBuilder < Dependencies::Extractions::RubyMiddleware::Middleware::Builder
         ##
@@ -16,13 +16,13 @@ module ConvenientService
         # @param block [Proc]
         # @return [void]
         #
-        # @see https://github.com/Ibsciss/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L43
+        # @see https://github.com/marian13/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L43
         #
         def initialize(opts = {}, &block)
           super
 
           ##
-          # https://github.com/Ibsciss/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L174
+          # https://github.com/marian13/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L174
           #
           self.stack = opts[:stack] if opts.has_key?(:stack)
         end
@@ -45,7 +45,7 @@ module ConvenientService
         #
         # @internal
         #   NOTE: `use` can accept additional arguments and block, that is why `stack` contains tuples like [middleware, args, block].
-        #   https://github.com/Ibsciss/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L76
+        #   https://github.com/marian13/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L76
         #
         #   TODO: better name than just `to_a`.
         #
@@ -59,15 +59,15 @@ module ConvenientService
         def dup
           self.class.new(
             ##
-            # https://github.com/Ibsciss/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L45
+            # https://github.com/marian13/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L45
             #
             runner_class: @runner_class,
             ##
-            # https://github.com/Ibsciss/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L46
+            # https://github.com/marian13/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L46
             #
             name: @middleware_name.dup,
             ##
-            # https://github.com/Ibsciss/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L167
+            # https://github.com/marian13/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L167
             #
             stack: stack.dup
           )

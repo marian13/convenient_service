@@ -36,7 +36,7 @@ module ConvenientService
 
         ##
         # @return [Array]
-        # @raise [ConvenientService::Utils::Array]
+        # @raise [ConvenientService::Utils::Array::Errors::NonIntegerIndex]
         #
         def call
           ensure_valid_overrides!
@@ -48,7 +48,7 @@ module ConvenientService
 
         ##
         # @return [void]
-        # @raise [ConvenientService::Utils::Array]
+        # @raise [ConvenientService::Utils::Array::Errors::NonIntegerIndex]
         #
         def ensure_valid_overrides!
           return integer_key_overrides unless raise_on_non_integer_index

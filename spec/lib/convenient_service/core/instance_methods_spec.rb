@@ -10,52 +10,6 @@ RSpec.describe ConvenientService::Core::InstanceMethods do
 
   let(:service_instance) { service_class.new }
 
-  describe "#concerns" do
-    let(:service_class) do
-      Class.new.tap do |klass|
-        klass.class_exec(described_class, concerns_result) do |mod, concerns_result|
-          include mod
-
-          define_singleton_method(:concerns) { |&block| concerns_result }
-        end
-      end
-    end
-
-    let(:service_instance) { service_class.new }
-    let(:concerns_result) { double }
-    let(:configuration_block) { proc {} }
-
-    specify {
-      expect { service_instance.concerns(&configuration_block) }
-        .to delegate_to(service_class, :concerns)
-        .with_arguments(&configuration_block)
-        .and_return_its_value
-    }
-  end
-
-  describe "#middlewares" do
-    let(:service_class) do
-      Class.new.tap do |klass|
-        klass.class_exec(described_class, middlewares_result) do |mod, middlewares_result|
-          include mod
-
-          define_singleton_method(:middlewares) { |**kwargs, &block| middlewares_result }
-        end
-      end
-    end
-
-    let(:middlewares_result) { double }
-    let(:kwargs) { {foo: :bar} }
-    let(:configuration_block) { proc {} }
-
-    specify {
-      expect { service_instance.middlewares(**kwargs, &configuration_block) }
-        .to delegate_to(service_class, :middlewares)
-        .with_arguments(**kwargs, &configuration_block)
-        .and_return_its_value
-    }
-  end
-
   describe "#method_missing" do
     let(:service_class) do
       Class.new do
@@ -82,11 +36,11 @@ RSpec.describe ConvenientService::Core::InstanceMethods do
     let(:kwargs) { {foo: :bar} }
     let(:block) { proc { :foo } }
 
-    it "includes concerns" do
+    it "commits config" do
       ##
       # NOTE: Intentionally calling missed method. But later it is added by `concerns.include!`.
       #
-      expect { service_instance.foo }.to delegate_to(service_instance.concerns, :include!)
+      expect { service_instance.foo }.to delegate_to(service_class, :commit_config!)
     end
 
     ##
@@ -101,11 +55,34 @@ RSpec.describe ConvenientService::Core::InstanceMethods do
     end
 
     context "when concerns are included more than once (since they do not contain required instance method)" do
+      let(:service_class) do
+        Class.new do
+          include ConvenientService::Core
+        end
+      end
+
       it "raises `NoMethodError`" do
         ##
-        # NOTE: Intentionally calling missed method that won't be included even by concern.
+        # NOTE: Intentionally calling missed method that won't be included (no concerns with it).
         #
-        expect { service_instance.bar }.to raise_error(NoMethodError)
+        expect { service_instance.foo }.to raise_error(NoMethodError).with_message("undefined method `foo' for #{service_instance}")
+      end
+    end
+
+    context "when middleware caller defined without super method" do
+      let(:service_class) do
+        Class.new do
+          include ConvenientService::Core
+
+          middlewares(:foo, scope: :instance) {}
+        end
+      end
+
+      it "raises `NoMethodError`" do
+        ##
+        # NOTE: Intentionally calling missed method that won't be included (no concerns with it), but has middlewares.
+        #
+        expect { service_instance.foo }.to raise_error(NoMethodError).with_message("super: no superclass method `foo' for #{service_instance}")
       end
     end
   end

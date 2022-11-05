@@ -3,7 +3,7 @@
 module ConvenientService
   module Support
     module FiniteLoop
-      MAX_ITERATION_COUNT = 100
+      MAX_ITERATION_COUNT = 1_000
 
       module Errors
         class MaxIterationCountExceeded < ::StandardError

@@ -33,7 +33,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo do
     context "when used without chaining" do
       let(:matcher) { described_class.new(object, method) }
 
-      it "works" do
+      it "tries to match" do
         ##
         # NOTE: `expect { object.foo }.to delegate_to(object, :bar)`
         #
@@ -44,7 +44,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo do
     context "when used with `and_return_its_value`" do
       let(:matcher) { described_class.new(object, method).and_return_its_value }
 
-      it "works" do
+      it "tries to match" do
         ##
         # NOTE: `expect { object.foo }.to delegate_to(object, :bar).and_return_its_value`
         #
@@ -73,7 +73,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo do
       let(:kwargs) { {foo: :bar} }
       let(:block) { proc { :foo } }
 
-      it "works" do
+      it "tries to match" do
         ##
         # NOTE: `expect { object.foo }.to delegate_to(object, :bar).with_arguments(*args, **kwargs, &block)`
         #

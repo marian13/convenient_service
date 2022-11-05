@@ -8,8 +8,8 @@ require "convenient_service"
 RSpec.describe ConvenientService::Support::FiniteLoop do
   example_group "constants" do
     describe "::MAX_ITERATION_COUNT" do
-      it "is equal to 100" do
-        expect(described_class::MAX_ITERATION_COUNT).to eq(100)
+      it "is equal to 1000" do
+        expect(described_class::MAX_ITERATION_COUNT).to eq(1_000)
       end
     end
   end

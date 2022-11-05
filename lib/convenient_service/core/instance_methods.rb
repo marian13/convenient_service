@@ -4,22 +4,6 @@ module ConvenientService
   module Core
     module InstanceMethods
       ##
-      # @param (see ConvenientService::Core::ClassMethods#concerns)
-      # @return [ConvenientService::Core::Entities::Concerns]
-      #
-      def concerns(&configuration_block)
-        self.class.concerns(&configuration_block)
-      end
-
-      ##
-      # @param (see ConvenientService::Core::ClassMethods#middlewares)
-      # @return [ConvenientService::Core::Entities::MethodMiddlewares]
-      #
-      def middlewares(...)
-        self.class.middlewares(...)
-      end
-
-      ##
       # @see https://thoughtbot.com/blog/always-define-respond-to-missing-when-overriding
       # @see https://stackoverflow.com/a/3304683/12201472
       #
@@ -29,11 +13,11 @@ module ConvenientService
       #
       def respond_to_missing?(method_name, include_private = false)
         return true if self.class.method_defined?(method_name)
-        return true if concerns.instance_method_defined?(method_name)
+        return true if self.class.concerns.instance_method_defined?(method_name)
 
         if include_private
           return true if self.class.private_method_defined?(method_name)
-          return true if concerns.private_instance_method_defined?(method_name)
+          return true if self.class.concerns.private_instance_method_defined?(method_name)
         end
 
         false
@@ -55,11 +39,13 @@ module ConvenientService
       #   IMPORTANT: `method_missing` should be thread-safe.
       #
       def method_missing(method, *args, **kwargs, &block)
-        concerns.include!
+        self.class.commit_config!
 
-        return super unless Utils::Method.defined?(method, self.class, private: true)
+        return super unless Utils::Module.instance_method_defined?(self.class, method, private: true)
 
-        ConvenientService.logger.debug { "[Core] Included concerns into `#{self.class}` | Triggered by `method_missing` | Method: `##{method}`" }
+        return super if self.class.middlewares(method, scope: :instance).defined_without_super_method?
+
+        ConvenientService.logger.debug { "[Core] Committed config for `#{self.class}` | Triggered by `method_missing` | Method: `##{method}`" }
 
         __send__(method, *args, **kwargs, &block)
       end

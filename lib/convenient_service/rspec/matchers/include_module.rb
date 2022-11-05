@@ -4,8 +4,8 @@ module ConvenientService
   module RSpec
     module Matchers
       module IncludeModule
-        def include_module(*args)
-          Custom::IncludeModule.new(*args)
+        def include_module(...)
+          Custom::IncludeModule.new(...)
         end
       end
     end

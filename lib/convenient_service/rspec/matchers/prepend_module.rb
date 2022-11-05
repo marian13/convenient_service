@@ -4,8 +4,8 @@ module ConvenientService
   module RSpec
     module Matchers
       module PrependModule
-        def prepend_module(*args)
-          Custom::PrependModule.new(*args)
+        def prepend_module(...)
+          Custom::PrependModule.new(...)
         end
       end
     end

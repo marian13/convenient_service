@@ -3,7 +3,7 @@
 module ConvenientService
   module Core
     ClassicMiddleware = ::ConvenientService::Core::Entities::ClassicMiddleware
-    ConcernMiddleware = ::ConvenientService::Core::Entities::Concerns::Entities::Middleware
-    MethodChainMiddleware = ::ConvenientService::Core::Entities::MethodMiddlewares::Entities::Middleware
+    ConcernMiddleware = ::ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Middleware
+    MethodChainMiddleware = ::ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middleware
   end
 end

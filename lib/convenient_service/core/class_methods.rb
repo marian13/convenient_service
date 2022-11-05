@@ -4,94 +4,30 @@ module ConvenientService
   module Core
     module ClassMethods
       ##
-      # Sets or gets concerns for a service class.
+      # @see ConvenientService::Core::Entities::Config#concerns
       #
-      # @overload concerns
-      #   Returns all concerns.
-      #   @return [ConvenientService::Core::Entities::Concerns]
-      #
-      # @overload concerns(&configuration_block)
-      #   Configures concerns.
-      #   @param configuration_block [Proc] Block that configures middlewares.
-      #   @see https://github.com/marian13/ruby-middleware#a-basic-example
-      #   @return [ConvenientService::Core::Entities::Concerns]
-      #
-      # @example Getter
-      #   concerns
-      #
-      # @example Setter
-      #   concerns(&configuration_block)
-      #
-      def concerns(&configuration_block)
-        @concerns ||= Entities::Concerns.new(entity: self)
-
-        if configuration_block
-          @concerns.assert_not_included!
-          @concerns.configure(&configuration_block)
-        end
-
-        @concerns
+      def concerns(...)
+        (@__config__ ||= Entities::Config.new(klass: self)).concerns(...)
       end
 
       ##
-      # Sets or gets middlewares for a service class.
+      # @see ConvenientService::Core::Entities::Config#middlewares
       #
-      # @overload middlewares(method)
-      #   Returns all instance middlewares for particular method.
-      #   @param method [Symbol] Method name.
-      #   @return [Hash<Symbol, Hash<Symbol, ConvenientService::Core::Entities::MethodMiddlewares>>]
-      #
-      # @overload middlewares(method, scope:)
-      #   Returns all scoped middlewares for particular method.
-      #   @param method [Symbol] Method name.
-      #   @param scope [:instance, :class]
-      #   @return [Hash<Symbol, Hash<Symbol, ConvenientService::Core::Entities::MethodMiddlewares>>]
-      #
-      # @overload middlewares(method, &configuration_block)
-      #   Configures instance middlewares for particular method.
-      #   @param method [Symbol] Method name.
-      #   @param configuration_block [Proc] Block that configures middlewares.
-      #   @see https://github.com/marian13/ruby-middleware#a-basic-example
-      #   @return [ConvenientService::Core::Entities::MethodMiddlewares]
-      #
-      # @overload middlewares(method, scope:, &configuration_block)
-      #   Configures scoped middlewares for particular method.
-      #   @param method [Symbol] Method name.
-      #   @param scope [:instance, :class]
-      #   @param configuration_block [Proc] Block that configures middlewares.
-      #   @see https://github.com/marian13/ruby-middleware#a-basic-example
-      #   @return [ConvenientService::Core::Entities::MethodMiddlewares]
-      #
-      # @example Getters
-      #   middlewares(:result)
-      #   middlewares(:result, scope: :instance)
-      #   middlewares(:result, scope: :class)
-      #
-      # @example Setters
-      #   middlewares(:result, &configuration_block)
-      #   middlewares(:result, scope: :instance, &configuration_block)
-      #   middlewares(:result, scope: :class, &configuration_block)
-      #
-      def middlewares(method, scope: :instance, &configuration_block)
-        @middlewares ||= {}
-        @middlewares[scope] ||= {}
-        @middlewares[scope][method] ||= Entities::MethodMiddlewares.new(scope: scope, method: method, container: self)
-
-        if configuration_block
-          @middlewares[scope][method].configure(&configuration_block)
-          @middlewares[scope][method].define!
-        end
-
-        @middlewares[scope][method]
+      def middlewares(...)
+        (@__config__ ||= Entities::Config.new(klass: self)).middlewares(...)
       end
 
       ##
-      # @return [void]
+      # Commits config when called for the first time.
+      # Does nothing for the subsequent calls.
+      #
+      # @return [Boolean] true if called for the first time, false otherwise (similarly as Kernel#require).
+      #
+      # @see https://ruby-doc.org/core-3.1.2/Kernel.html#method-i-require
       #
       def commit_config!
-        concerns.include!
-
-        ConvenientService.logger.debug { "[Core] Included concerns into `#{self}` | Triggered by `.commit_config!`" }
+        (@__config__ ||= Entities::Config.new(klass: self)).commit!
+          .tap { ConvenientService.logger.debug { "[Core] Committed config for `#{self}` | Triggered by `.commit_config!`" } }
       end
 
       ##
@@ -130,11 +66,13 @@ module ConvenientService
       #   IMPORTANT: `method_missing` should be thread-safe.
       #
       def method_missing(method, *args, **kwargs, &block)
-        concerns.include!
+        commit_config!
 
-        return super unless Utils::Method.defined?(method, singleton_class, private: true)
+        return super unless Utils::Module.class_method_defined?(self, method, private: true)
 
-        ConvenientService.logger.debug { "[Core] Included concerns into `#{self}` | Triggered by `method_missing` | Method: `.#{method}`" }
+        return super if middlewares(method, scope: :class).defined_without_super_method?
+
+        ConvenientService.logger.debug { "[Core] Committed config for `#{self}` | Triggered by `method_missing` | Method: `.#{method}`" }
 
         __send__(method, *args, **kwargs, &block)
       end

@@ -5,8 +5,8 @@ module ConvenientService
     module Matchers
       module Results
         module BeError
-          def be_error
-            Custom::Results::BeError.new
+          def be_error(...)
+            Custom::Results::BeError.new(...)
           end
         end
       end
