@@ -10,11 +10,18 @@ module ConvenientService
         class WrapMethod < Support::Command
           module Entities
             ##
-            # NOTE: Do NOT pollute the interface of this class until really needed. Avoid even pollution of private methods.
+            # @internal
+            #   NOTE: Do NOT pollute the interface of this class until really needed. Avoid even pollution of private methods.
             #
             class WrappedMethod
               ##
-              # NOTE: `middlewares` are `MethodChainMiddleware` classes.
+              # @param entity [Object, Class]
+              # @param method [String]
+              # @param middlewares [Array<ConvenientService::Core::MethodChainMiddleware>]
+              # @return [void]
+              #
+              # @internal
+              #   NOTE: `middlewares` are `MethodChainMiddleware` classes.
               #
               def initialize(entity:, method:, middlewares:)
                 @entity = entity
@@ -29,9 +36,6 @@ module ConvenientService
                   #
                   stack.use(
                     proc do |env|
-                      ##
-                      # TODO: Enforce to always pass args, kwargs, block.
-                      #
                       entity.__send__(method, *env[:args], **env[:kwargs], &env[:block])
                         .tap { |value| @chain_value = value }
                         .tap { @chain_arguments = {args: env[:args], kwargs: env[:kwargs], block: env[:block]} }
@@ -40,32 +44,60 @@ module ConvenientService
                 end
               end
 
+              ##
+              # @param args [Array]
+              # @param kwargs [Hash]
+              # @param block [Proc]
+              # @return [Object] Can be any type.
+              #
               def call(*args, **kwargs, &block)
                 @stack.call(entity: @entity, method: @method, args: args, kwargs: kwargs, block: block)
               end
 
+              ##
+              # @return [void]
+              #
+              def reset!
+                remove_instance_variable(:@chain_value) if defined? @chain_value
+              end
+
+              ##
+              # @return [Boolean]
+              #
               def chain_called?
                 Utils::Bool.to_bool(defined? @chain_value)
               end
 
+              ##
+              # @return [Object] Can be any type.
+              #
               def chain_value
                 raise Errors::ChainAttributePreliminaryAccess.new(attribute: :value) unless chain_called?
 
                 @chain_value
               end
 
+              ##
+              # @return [Array]
+              #
               def chain_args
                 raise Errors::ChainAttributePreliminaryAccess.new(attribute: :args) unless chain_called?
 
                 @chain_arguments[:args]
               end
 
+              ##
+              # @return [Hash]
+              #
               def chain_kwargs
                 raise Errors::ChainAttributePreliminaryAccess.new(attribute: :kwargs) unless chain_called?
 
                 @chain_arguments[:kwargs]
               end
 
+              ##
+              # @return [Proc, nil]
+              #
               def chain_block
                 raise Errors::ChainAttributePreliminaryAccess.new(attribute: :block) unless chain_called?
 
