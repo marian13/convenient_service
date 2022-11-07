@@ -79,7 +79,7 @@ RSpec.describe ConvenientService::Common::Plugins::SetsDisplayValue::Middleware 
       end
 
       context "when there is NOT display argument" do
-        let(:kwargs) { {something: nil}}
+        let(:kwargs) { {something: nil} }
 
         it "does NOT set display value in entity" do
           method_value
