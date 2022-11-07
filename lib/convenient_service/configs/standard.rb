@@ -67,7 +67,7 @@ module ConvenientService
 
           use Plugins::Service::HasResultShortSyntax::Success::Middleware
 
-          use Plugins::Service::DisplayResult::Success::Middleware
+          use Plugins::Service::DisplaysResult::Success::Middleware
         end
 
         middlewares :failure do
@@ -75,7 +75,7 @@ module ConvenientService
 
           use Plugins::Service::HasResultShortSyntax::Failure::Middleware
 
-          use Plugins::Service::DisplayResult::Failure::Middleware
+          use Plugins::Service::DisplaysResult::Failure::Middleware
         end
 
         middlewares :error do
@@ -83,7 +83,7 @@ module ConvenientService
 
           use Plugins::Service::HasResultShortSyntax::Error::Middleware
 
-          use Plugins::Service::DisplayResult::Error::Middleware
+          use Plugins::Service::DisplaysResult::Error::Middleware
         end
 
         middlewares :step, scope: :class do

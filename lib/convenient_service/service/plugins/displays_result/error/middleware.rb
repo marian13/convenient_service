@@ -3,11 +3,11 @@
 module ConvenientService
   module Service
     module Plugins
-      module DisplayResult
-        module Failure
+      module DisplaysResult
+        module Error
           class Middleware < Core::MethodChainMiddleware
             def next(**kwargs)
-              puts ::Paint[kwargs[:data].to_s, :magenta, :bold] if display?(entity)
+              puts ::Paint[kwargs[:message].to_s, :red, :bold] if display?(entity)
 
               chain.next(**kwargs)
             end

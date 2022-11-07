@@ -64,7 +64,7 @@ RSpec.describe ConvenientService::Configs::Standard do
           [
             ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
             ConvenientService::Service::Plugins::HasResultShortSyntax::Success::Middleware,
-            ConvenientService::Service::Plugins::DisplayResult::Success::Middleware
+            ConvenientService::Service::Plugins::DisplaysResult::Success::Middleware
           ]
         end
 
@@ -72,7 +72,7 @@ RSpec.describe ConvenientService::Configs::Standard do
           [
             ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
             ConvenientService::Service::Plugins::HasResultShortSyntax::Failure::Middleware,
-            ConvenientService::Service::Plugins::DisplayResult::Failure::Middleware
+            ConvenientService::Service::Plugins::DisplaysResult::Failure::Middleware
           ]
         end
 
@@ -80,7 +80,7 @@ RSpec.describe ConvenientService::Configs::Standard do
           [
             ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
             ConvenientService::Service::Plugins::HasResultShortSyntax::Error::Middleware,
-            ConvenientService::Service::Plugins::DisplayResult::Error::Middleware
+            ConvenientService::Service::Plugins::DisplaysResult::Error::Middleware
           ]
         end
 
