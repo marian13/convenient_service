@@ -24,7 +24,7 @@ module ConvenientService
           use Plugins::Common::CachesConstructorParams::Concern
           use Plugins::Common::CanBeCopied::Concern
           use Plugins::Service::HasResult::Concern
-          use Plugins::Service::CanAdjustForeignResult::Concern
+          use Plugins::Service::CanAdjustForeignResults::Concern
           use Plugins::Service::HasResultShortSyntax::Concern
           use Plugins::Service::HasResultSteps::Concern
           use Plugins::Service::CanRecalculateResult::Concern

@@ -32,7 +32,7 @@ RSpec.describe ConvenientService::Configs::Standard do
             ConvenientService::Common::Plugins::CachesConstructorParams::Concern,
             ConvenientService::Common::Plugins::CanBeCopied::Concern,
             ConvenientService::Service::Plugins::HasResult::Concern,
-            ConvenientService::Service::Plugins::CanAdjustForeignResult::Concern,
+            ConvenientService::Service::Plugins::CanAdjustForeignResults::Concern,
             ConvenientService::Service::Plugins::HasResultShortSyntax::Concern,
             ConvenientService::Service::Plugins::HasResultSteps::Concern,
             ConvenientService::Service::Plugins::CanRecalculateResult::Concern,

@@ -3,7 +3,7 @@
 module ConvenientService
   module Service
     module Plugins
-      module CanAdjustForeignResult
+      module CanAdjustForeignResults
         module Concern
           include Support::Concern
 
