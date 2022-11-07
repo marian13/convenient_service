@@ -19,8 +19,9 @@ module ConvenientService
       end
 
       ##
-      # `ClassMethods` is loaded faster than `included` by `Concern`.
-      # Since `Forwardable` has it own `delegate` - a different name is used.
+      # @internal
+      #   `ClassMethods` is loaded faster than `included` by `Concern`.
+      #   Since `Forwardable` has it own `delegate` - a different name is used.
       #
       module ClassMethodsForForwardable
         def delegate(*methods, to:)
