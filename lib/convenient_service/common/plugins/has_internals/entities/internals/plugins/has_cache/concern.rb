@@ -16,7 +16,7 @@ module ConvenientService
 
                   instance_methods do
                     def cache
-                      @cache ||= Entities::Cache.new
+                      @cache ||= Support::Cache.new
                     end
                   end
                 end
