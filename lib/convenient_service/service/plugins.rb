@@ -3,6 +3,7 @@
 ##
 # NOTE: Order matters.
 #
+require_relative "plugins/caches_repeated_results"
 require_relative "plugins/can_recalculate_result"
 require_relative "plugins/can_adjust_foreign_results"
 require_relative "plugins/has_result"
