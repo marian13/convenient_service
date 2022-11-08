@@ -55,6 +55,8 @@ This library is under heavy development. Public API may be subject to change. Th
 
 <!-- links:start -->
 - [RubyGems](https://rubygems.org/gems/convenient_service).
+
+- [Official User Docs Source](https://github.com/marian13/convenient_service_docs).
 <!-- links:end -->
 
 ---

@@ -5,16 +5,18 @@ module ConvenientService
     module Helpers
       module Custom
         class WrapMethod < Support::Command
-          class WrappedMethod
-            module Errors
-              class ChainAttributePreliminaryAccess < ::StandardError
-                def initialize(attribute:)
-                  message <<~TEXT
-                    Chain attribute `#{attribute}` is accessed before the chain is called.
-                  TEXT
+          module Errors
+            class ChainAttributePreliminaryAccess < ConvenientService::Error
+              ##
+              # @param attribute [Symbol]
+              # @return [void]
+              #
+              def initialize(attribute:)
+                message = <<~TEXT
+                  Chain attribute `#{attribute}` is accessed before the chain is called.
+                TEXT
 
-                  super(message)
-                end
+                super(message)
               end
             end
           end

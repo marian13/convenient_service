@@ -84,6 +84,8 @@ module ConvenientService
           end
 
           def on(method)
+            method.reset!
+
             chain[:method] = method
 
             self

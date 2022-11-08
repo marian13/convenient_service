@@ -5,24 +5,11 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::Common::Plugins::CachesReturnValue::Entities::Key do
-  let(:params) { {method: method, args: args, kwargs: kwargs, block: block} }
-  let(:method) { :result }
+RSpec.describe ConvenientService::Support::Cache::Key do
   let(:args) { [:foo] }
   let(:kwargs) { {foo: :bar} }
   let(:block) { proc { :foo } }
-  let(:key) { described_class.new(**params) }
-
-  example_group "attributes" do
-    include ConvenientService::RSpec::Matchers::HaveAttrReader
-
-    subject { key }
-
-    it { is_expected.to have_attr_reader(:method) }
-    it { is_expected.to have_attr_reader(:args) }
-    it { is_expected.to have_attr_reader(:kwargs) }
-    it { is_expected.to have_attr_reader(:block) }
-  end
+  let(:key) { described_class.new(*args, **kwargs, &block) }
 
   example_group "instance methods" do
     describe "#==" do
@@ -34,16 +21,8 @@ RSpec.describe ConvenientService::Common::Plugins::CachesReturnValue::Entities::
         end
       end
 
-      context "when `other` has different `method`" do
-        let(:other) { described_class.new(**params.merge(method: [:step])) }
-
-        it "returns `false`" do
-          expect(key == other).to eq(false)
-        end
-      end
-
       context "when `other` has different `args`" do
-        let(:other) { described_class.new(**params.merge(args: [:baz])) }
+        let(:other) { described_class.new(:baz, **kwargs, &block) }
 
         it "returns `false`" do
           expect(key == other).to eq(false)
@@ -51,7 +30,7 @@ RSpec.describe ConvenientService::Common::Plugins::CachesReturnValue::Entities::
       end
 
       context "when `other` has different `kwargs`" do
-        let(:other) { described_class.new(**params.merge(kwargs: {baz: :qux})) }
+        let(:other) { described_class.new(*args, baz: :qux, &block) }
 
         it "returns `false`" do
           expect(key == other).to eq(false)
@@ -59,7 +38,7 @@ RSpec.describe ConvenientService::Common::Plugins::CachesReturnValue::Entities::
       end
 
       context "when `other` has different `block`" do
-        let(:other) { described_class.new(**params.merge(block: other_block)) }
+        let(:other) { described_class.new(*args, **kwargs, &other_block) }
         let(:other_block) { proc { :baz } }
 
         it "returns `false`" do
@@ -74,7 +53,7 @@ RSpec.describe ConvenientService::Common::Plugins::CachesReturnValue::Entities::
           constructor_params_source_location = double
           other_block_source_location = double
 
-          allow(params[:block]).to receive(:source_location).and_return(constructor_params_source_location)
+          allow(block).to receive(:source_location).and_return(constructor_params_source_location)
           allow(other_block).to receive(:source_location).and_return(other_block_source_location)
           allow(constructor_params_source_location).to receive(:==).with(other_block_source_location)
 
@@ -86,7 +65,7 @@ RSpec.describe ConvenientService::Common::Plugins::CachesReturnValue::Entities::
       end
 
       context "when `other` has same attributes" do
-        let(:other) { described_class.new(**params) }
+        let(:other) { described_class.new(*args, **kwargs, &block) }
 
         it "returns `true`" do
           expect(key == other).to eq(true)
@@ -104,7 +83,7 @@ RSpec.describe ConvenientService::Common::Plugins::CachesReturnValue::Entities::
       end
 
       context "when keys have different hashes" do
-        let(:other) { described_class.new(**params.merge(method: [:step])) }
+        let(:other) { described_class.new(:step, **kwargs, &block) }
 
         it "returns `false`" do
           expect(key == other).to eq(false)
@@ -112,7 +91,7 @@ RSpec.describe ConvenientService::Common::Plugins::CachesReturnValue::Entities::
       end
 
       context "when keys have same hashes" do
-        let(:other) { described_class.new(**params) }
+        let(:other) { described_class.new(*args, **kwargs, &block) }
 
         it "returns `true`" do
           expect(key == other).to eq(true)
@@ -121,15 +100,15 @@ RSpec.describe ConvenientService::Common::Plugins::CachesReturnValue::Entities::
     end
 
     describe "#hash" do
-      it "returns hash based on `method`, `args`, `kwargs`, and `block` source location" do
-        expect(key.hash).to eq([method, args, kwargs, block.source_location].hash)
+      it "returns hash based on `args`, `kwargs`, and `block` source location" do
+        expect(key.hash).to eq([args, kwargs, block.source_location].hash)
       end
 
       context "when `block` in `nil`" do
         let(:block) { nil }
 
         it "uses `nil` hash for `block`" do
-          expect(key.hash).to eq([method, args, kwargs, nil].hash)
+          expect(key.hash).to eq([args, kwargs, nil].hash)
         end
       end
     end
