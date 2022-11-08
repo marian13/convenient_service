@@ -59,9 +59,9 @@ jobs:
     steps:
       - uses: google-github-actions/release-please-action@v3
         with:
-          changelog-path: ./CHANGELOG.md
+          changelog-path: CHANGELOG.md
           default-branch: main
           include-v-in-tag: true
           package-name: convenient_service
           release-type: ruby
-          version-file: ./lib/convenient_service/version.rb
+          version-file: lib/convenient_service/version.rb
