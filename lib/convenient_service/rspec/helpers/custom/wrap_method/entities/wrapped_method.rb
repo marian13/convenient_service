@@ -11,6 +11,8 @@ module ConvenientService
           module Entities
             ##
             # @internal
+            #   TODO: A better name.
+            #
             #   NOTE: Do NOT pollute the interface of this class until really needed. Avoid even pollution of private methods.
             #
             class WrappedMethod
@@ -59,6 +61,7 @@ module ConvenientService
               #
               def reset!
                 remove_instance_variable(:@chain_value) if defined? @chain_value
+                remove_instance_variable(:@chain_arguments) if defined? @chain_arguments
               end
 
               ##
