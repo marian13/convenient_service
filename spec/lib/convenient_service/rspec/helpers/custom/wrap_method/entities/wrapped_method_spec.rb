@@ -24,6 +24,8 @@ RSpec.describe ConvenientService::RSpec::Helpers::Custom::WrapMethod::Entities::
   let(:method_name) { :result }
   let(:middlewares) { [] }
 
+  let(:args) { [:foo] }
+
   example_group "instance methods" do
     describe "#chain_called?" do
       context "when chain is NOT called" do
@@ -65,6 +67,40 @@ RSpec.describe ConvenientService::RSpec::Helpers::Custom::WrapMethod::Entities::
 
         it "returns `true`" do
           expect(method.chain_value).to eq(:original_result_value)
+        end
+      end
+    end
+
+    describe "#chain_value" do
+      let(:service_class) do
+        Class.new do
+          def result(*args)
+            :original_result_value
+          end
+        end
+      end
+
+      context "when chain is NOT called" do
+        let(:error_message) do
+          <<~TEXT
+            Chain attribute `args` is accessed before the chain is called.
+          TEXT
+        end
+
+        it "raises `ConvenientService::RSpec::Helpers::Custom::WrapMethod::Errors::ChainAttributePreliminaryAccess`" do
+          expect { method.chain_args }
+            .to raise_error(ConvenientService::RSpec::Helpers::Custom::WrapMethod::Errors::ChainAttributePreliminaryAccess)
+            .with_message(error_message)
+        end
+      end
+
+      context "when chain is called" do
+        before do
+          method.call(*args)
+        end
+
+        it "returns `true`" do
+          expect(method.chain_args).to eq(args)
         end
       end
     end
