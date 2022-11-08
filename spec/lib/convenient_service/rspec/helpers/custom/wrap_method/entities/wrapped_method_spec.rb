@@ -8,6 +8,8 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::RSpec::Helpers::Custom::WrapMethod::Entities::WrappedMethod do
+  include ConvenientService::RSpec::Matchers::CacheItsValue
+
   subject(:method) { described_class.new(entity: entity, method: method_name, middlewares: middlewares) }
 
   let(:service_class) do
@@ -26,8 +28,13 @@ RSpec.describe ConvenientService::RSpec::Helpers::Custom::WrapMethod::Entities::
 
   let(:args) { [:foo] }
   let(:kwargs) { {foo: :bar} }
+  let(:block) { proc { :foo } }
 
   example_group "instance methods" do
+    ##
+    # TODO: Specs.
+    #
+
     describe "#chain_called?" do
       context "when chain is NOT called" do
         it "returns `false`" do
@@ -66,8 +73,12 @@ RSpec.describe ConvenientService::RSpec::Helpers::Custom::WrapMethod::Entities::
           method.call
         end
 
-        it "returns `true`" do
+        it "returns chain value" do
           expect(method.chain_value).to eq(:original_result_value)
+        end
+
+        specify do
+          expect { method.chain_value }.to cache_its_value
         end
       end
     end
@@ -100,8 +111,12 @@ RSpec.describe ConvenientService::RSpec::Helpers::Custom::WrapMethod::Entities::
           method.call(*args)
         end
 
-        it "returns `true`" do
+        it "returns chain args" do
           expect(method.chain_args).to eq(args)
+        end
+
+        specify do
+          expect { method.chain_args }.to cache_its_value
         end
       end
     end
@@ -134,15 +149,53 @@ RSpec.describe ConvenientService::RSpec::Helpers::Custom::WrapMethod::Entities::
           method.call(**kwargs)
         end
 
-        it "returns `true`" do
+        it "returns chain kwargs" do
           expect(method.chain_kwargs).to eq(kwargs)
+        end
+
+        specify do
+          expect { method.chain_block }.to cache_its_value
         end
       end
     end
 
-    ##
-    # TODO: Specs.
-    #
+    describe "#chain_block" do
+      let(:service_class) do
+        Class.new do
+          def result(&block)
+            :original_result_value
+          end
+        end
+      end
+
+      context "when chain is NOT called" do
+        let(:error_message) do
+          <<~TEXT
+            Chain attribute `block` is accessed before the chain is called.
+          TEXT
+        end
+
+        it "raises `ConvenientService::RSpec::Helpers::Custom::WrapMethod::Errors::ChainAttributePreliminaryAccess`" do
+          expect { method.chain_block }
+            .to raise_error(ConvenientService::RSpec::Helpers::Custom::WrapMethod::Errors::ChainAttributePreliminaryAccess)
+            .with_message(error_message)
+        end
+      end
+
+      context "when chain is called" do
+        before do
+          method.call(&block)
+        end
+
+        it "returns chain block" do
+          expect(method.chain_block).to eq(block)
+        end
+
+        specify do
+          expect { method.chain_block }.to cache_its_value
+        end
+      end
+    end
   end
 end
 # rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
