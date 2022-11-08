@@ -4,9 +4,6 @@ module ConvenientService
   module RSpec
     module Helpers
       module Custom
-        ##
-        # TODO: Specs.
-        #
         class WrapMethod < Support::Command
           module Entities
             ##
@@ -73,6 +70,7 @@ module ConvenientService
 
               ##
               # @return [Object] Can be any type.
+              # @raise [ConvenientService::RSpec::Helpers::Custom::WrapMethod::Errors::ChainAttributePreliminaryAccess]
               #
               def chain_value
                 raise Errors::ChainAttributePreliminaryAccess.new(attribute: :value) unless chain_called?
@@ -82,6 +80,7 @@ module ConvenientService
 
               ##
               # @return [Array]
+              # @raise [ConvenientService::RSpec::Helpers::Custom::WrapMethod::Errors::ChainAttributePreliminaryAccess]
               #
               def chain_args
                 raise Errors::ChainAttributePreliminaryAccess.new(attribute: :args) unless chain_called?
@@ -91,6 +90,7 @@ module ConvenientService
 
               ##
               # @return [Hash]
+              # @raise [ConvenientService::RSpec::Helpers::Custom::WrapMethod::Errors::ChainAttributePreliminaryAccess]
               #
               def chain_kwargs
                 raise Errors::ChainAttributePreliminaryAccess.new(attribute: :kwargs) unless chain_called?
@@ -100,6 +100,7 @@ module ConvenientService
 
               ##
               # @return [Proc, nil]
+              # @raise [ConvenientService::RSpec::Helpers::Custom::WrapMethod::Errors::ChainAttributePreliminaryAccess]
               #
               def chain_block
                 raise Errors::ChainAttributePreliminaryAccess.new(attribute: :block) unless chain_called?

@@ -6,7 +6,7 @@ require "convenient_service"
 
 # frozen_string_literal: true
 
-# rubocop:disable RSpec/NestedGroups
+# rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::RSpec::Helpers::Custom::WrapMethod::Entities::WrappedMethod do
   subject(:method) { described_class.new(entity: entity, method: method_name, middlewares: middlewares) }
 
@@ -43,9 +43,35 @@ RSpec.describe ConvenientService::RSpec::Helpers::Custom::WrapMethod::Entities::
       end
     end
 
+    describe "#chain_value" do
+      context "when chain is NOT called" do
+        let(:error_message) do
+          <<~TEXT
+            Chain attribute `value` is accessed before the chain is called.
+          TEXT
+        end
+
+        it "raises `ConvenientService::RSpec::Helpers::Custom::WrapMethod::Errors::ChainAttributePreliminaryAccess`" do
+          expect { method.chain_value }
+            .to raise_error(ConvenientService::RSpec::Helpers::Custom::WrapMethod::Errors::ChainAttributePreliminaryAccess)
+            .with_message(error_message)
+        end
+      end
+
+      context "when chain is called" do
+        before do
+          method.call
+        end
+
+        it "returns `true`" do
+          expect(method.chain_value).to eq(:original_result_value)
+        end
+      end
+    end
+
     ##
     # TODO: Specs.
     #
   end
 end
-# rubocop:enable RSpec/NestedGroups
+# rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
