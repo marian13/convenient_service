@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-# rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
+# rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Service::Plugins::DisplaysResult::Error::Middleware do
   example_group "inheritance" do
     include ConvenientService::RSpec::Matchers::BeDescendantOf
@@ -20,6 +20,7 @@ RSpec.describe ConvenientService::Service::Plugins::DisplaysResult::Error::Middl
       include ConvenientService::RSpec::Matchers::CallChainNext
 
       subject(:method_value) { method.call(**kwargs) }
+
       let(:kwargs) { {message: "An error message"} }
 
       let(:method) { wrap_method(service_instance, :error, middlewares: described_class) }
@@ -80,4 +81,4 @@ RSpec.describe ConvenientService::Service::Plugins::DisplaysResult::Error::Middl
     end
   end
 end
-# rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
+# rubocop:enable RSpec/NestedGroups
