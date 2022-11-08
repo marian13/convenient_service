@@ -120,8 +120,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>NOTE: Inline logic instead of private methods is used intentionally in order to NOT pollute the public interface.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'></div></span>
   
 </li>
 
@@ -146,9 +145,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>NOTE: Inline logic instead of private methods is used intentionally in order to NOT pollute the public interface.
-NOTE: This method is NOT likely to be ever changed, that is why inline logic is preferred over command classes in this particular case.</p>
-
+    
 
   </div>
 </div>
@@ -177,7 +174,6 @@ NOTE: This method is NOT likely to be ever changed, that is why inline logic is 
       <pre class="lines">
 
 
-21
 22
 23
 24
@@ -209,10 +205,11 @@ NOTE: This method is NOT likely to be ever changed, that is why inline logic is 
 50
 51
 52
-53</pre>
+53
+54</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/copyable.rb', line 21</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/copyable.rb', line 22</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_copy'>copy</span><span class='lparen'>(</span><span class='label'>overrides:</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_overrides'>overrides</span><span class='lbracket'>[</span><span class='symbol'>:args</span><span class='rbracket'>]</span> <span class='op'>||=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
@@ -257,7 +254,7 @@ NOTE: This method is NOT likely to be ever changed, that is why inline logic is 
 </div>
 
       <div id="footer">
-  Generated on Mon Nov  7 23:39:48 2022 by
+  Generated on Tue Nov  8 17:01:39 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>
