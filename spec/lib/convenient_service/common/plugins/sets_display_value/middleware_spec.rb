@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-# rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
+# rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers, RSpec/MessageSpies
 RSpec.describe ConvenientService::Common::Plugins::SetsDisplayValue::Middleware do
   example_group "inheritance" do
     include ConvenientService::RSpec::Matchers::BeDescendantOf
@@ -99,4 +99,4 @@ RSpec.describe ConvenientService::Common::Plugins::SetsDisplayValue::Middleware 
     end
   end
 end
-# rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
+# rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers, RSpec/MessageSpies
