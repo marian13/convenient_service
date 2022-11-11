@@ -46,33 +46,33 @@ RSpec.describe ConvenientService::Common::Plugins::SetsDisplayValue::Middleware 
           let(:kwargs) { {**modified_kwargs, display: true} }
 
           it "sets display instance variable in entity" do
-            method_value
+            expect(service_instance).to receive(:instance_variable_set).with(:@display, true)
 
-            expect(service_instance.instance_variable_get(:@display)).to eq(true)
+            method_value
           end
 
-          specify { expect { method_value }.to call_chain_next.on(method).with_arguments(*args, **modified_kwargs, &block) }
-        end
-
-        context "when its value is false" do
-          let(:kwargs) { {**modified_kwargs, display: false} }
-
-          it "does NOT set display instance variable in entity" do
+          it "deletes display from kwargs" do
             method_value
 
-            expect(service_instance.instance_variable_get(:@display)).to be_nil
+            expect(method.chain_kwargs).to eq(modified_kwargs)
           end
 
           specify { expect { method_value }.to call_chain_next.on(method).with_arguments(*args, **modified_kwargs, &block) }
         end
 
         context "when its value is any but NOT true" do
-          let(:kwargs) { {**modified_kwargs, display: ""} }
+          let(:kwargs) { {**modified_kwargs, display: false} }
 
           it "does NOT set display instance variable in entity" do
+            expect(service_instance).not_to receive(:instance_variable_set).with(:@display, true)
+
+            method_value
+          end
+
+          it "deletes display from kwargs" do
             method_value
 
-            expect(service_instance.instance_variable_get(:@display)).to be_nil
+            expect(method.chain_kwargs).to eq(modified_kwargs)
           end
 
           specify { expect { method_value }.to call_chain_next.on(method).with_arguments(*args, **modified_kwargs, &block) }
@@ -80,12 +80,18 @@ RSpec.describe ConvenientService::Common::Plugins::SetsDisplayValue::Middleware 
       end
 
       context "when there is NOT display argument" do
-        let(:kwargs) { {something: nil} }
+        let(:kwargs) { {foo: nil} }
 
-        it "does NOT set display value in entity" do
+        it "does NOT set display instance variable in entity" do
+          expect(service_instance).not_to receive(:instance_variable_set).with(:@display, true)
+
+          method_value
+        end
+
+        it "does NOT modify kwargs" do
           method_value
 
-          expect(service_instance.instance_variable_get(:@display)).to be_nil
+          expect(method.chain_kwargs).to eq(kwargs)
         end
 
         specify { expect { method_value }.to call_chain_next.on(method).with_arguments(*args, **kwargs, &block) }
