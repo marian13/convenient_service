@@ -5,10 +5,15 @@ module ConvenientService
     module Plugins
       module CachesReturnValue
         class Middleware < Core::MethodChainMiddleware
+          ##
+          # @param args [Array]
+          # @param kwargs [Hash]
+          # @param block [Proc]
+          # @return [Object] Can be any type.
+          #
           def next(*args, **kwargs, &block)
-            key = Entities::Key.new(method: method, args: args, kwargs: kwargs, block: block)
-
-            entity.internals.cache.fetch(key) { chain.next(*args, **kwargs, &block) }
+            (entity.internals.cache[:return_values] ||= Support::Cache.new)
+              .fetch(Support::Cache.key(method, *args, **kwargs, &block)) { chain.next(*args, **kwargs, &block) }
           end
         end
       end

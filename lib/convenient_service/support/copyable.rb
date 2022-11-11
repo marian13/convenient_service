@@ -15,8 +15,9 @@ module ConvenientService
       #   copy = person.copy(overrides: {kwargs: {age: 18}})
       #   copy = person.copy(overrides: {block: proc { |p| print p }})
       #
-      # NOTE: Inline logic instead of private methods is used intentionally in order to NOT pollute the public interface.
-      # NOTE: This method is NOT likely to be ever changed, that is why inline logic is preferred over command classes in this particular case.
+      # @internal
+      #   NOTE: Inline logic instead of private methods is used intentionally in order to NOT pollute the public interface.
+      #   NOTE: This method is NOT likely to be ever changed, that is why inline logic is preferred over command classes in this particular case.
       #
       def copy(overrides: {})
         overrides[:args] ||= {}

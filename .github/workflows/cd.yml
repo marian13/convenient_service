@@ -22,9 +22,9 @@ on:
       - main
 
 jobs:
-  deploy:
+  deploy_api_docs:
     runs-on: ubuntu-20.04
-    name: Deploy
+    name: Deploy API Docs
     steps:
       - uses: actions/checkout@v2
       - name: Set up Ruby
@@ -52,3 +52,16 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./docs
+
+  create_github_release:
+    runs-on: ubuntu-20.04
+    name: Create GitHub Release PR
+    steps:
+      - uses: google-github-actions/release-please-action@v3
+        with:
+          changelog-path: CHANGELOG.md
+          default-branch: main
+          include-v-in-tag: true
+          package-name: convenient_service
+          release-type: ruby
+          version-file: lib/convenient_service/version.rb

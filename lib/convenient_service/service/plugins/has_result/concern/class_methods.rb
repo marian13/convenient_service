@@ -7,22 +7,33 @@ module ConvenientService
         module Concern
           module ClassMethods
             ##
-            #
+            # @api public
+            # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
             #
             def result(...)
               new(...).result
             end
 
             ##
-            # https://ruby-doc.org/core-2.5.0/Class.html#method-i-allocate
-            # https://frontdeveloper.pl/2018/11/ruby-allocate-method/
+            # @api private
+            #
+            # @internal
+            #   - https://ruby-doc.org/core-2.5.0/Class.html#method-i-allocate
+            #   - https://frontdeveloper.pl/2018/11/ruby-allocate-method/
+            #
+            #   TODO: Custom YARD type for service instance, service class as return values.
+            #   TODO: Extract into separate plugin.
             #
             def new_without_initialize
               allocate
             end
 
             ##
-            # NOTE: This method is internally used by custom RSpec helper `stub_service`. It should NOT be used in the client code.
+            # @api private
+            # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+            #
+            # @internal
+            #   NOTE: This method is internally used by custom RSpec helper `stub_service`. It should NOT be used in the client code.
             #
             def success(
               service: Constants::DEFAULT_SERVICE_INSTANCE,
@@ -38,7 +49,11 @@ module ConvenientService
             end
 
             ##
-            # NOTE: This method is internally used by custom RSpec helper `stub_service`. It should NOT be used in the client code.
+            # @api private
+            # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+            #
+            # @internal
+            #   NOTE: This method is internally used by custom RSpec helper `stub_service`. It should NOT be used in the client code.
             #
             def failure(
               service: Constants::DEFAULT_SERVICE_INSTANCE,
@@ -55,7 +70,11 @@ module ConvenientService
             end
 
             ##
-            # NOTE: This method is internally used by custom RSpec helper `stub_service`. It should NOT be used in the client code.
+            # @api private
+            # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+            #
+            # @internal
+            #   NOTE: This method is internally used by custom RSpec helper `stub_service`. It should NOT be used in the client code.
             #
             def error(
               service: Constants::DEFAULT_SERVICE_INSTANCE,
@@ -71,6 +90,10 @@ module ConvenientService
               )
             end
 
+            ##
+            # @api private
+            # @return [Class]
+            #
             def result_class
               @result_class ||= Commands::CreateResultClass.call(service_class: self)
             end

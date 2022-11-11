@@ -47,12 +47,16 @@ This library is under heavy development. Public API may be subject to change. Th
 
 - Have a look at [Convenient Service Development Wiki](https://github.com/marian13/convenient_service/wiki) if you consider making a contribution.
 
+- [API docs](https://marian13.github.io/convenient_service/).
+
 <!-- documentation:end -->
 
 ## Links
 
 <!-- links:start -->
 - [RubyGems](https://rubygems.org/gems/convenient_service).
+
+- [Official User Docs Source](https://github.com/marian13/convenient_service_docs).
 <!-- links:end -->
 
 ---
