@@ -35,7 +35,7 @@
 | High | 🚧 | Factories for POROs in specs ❗❗❗ | |
 | High | 🚧 | Resolve warning during specs | |
 | Medium | 🚧 | Consider to change/rewrite `delegate` backend to minify its interface | |
-| Medium | 🚧 | Same order of attr macros, delegators, initialize, class methods, attr methods, queries, actions, to_*, comparison, inspect | |
+| Medium | 🚧 | Same order of attr macros, delegators, initialize, class methods, attr methods, queries, actions, `to_*`, comparison, inspect | |
 | Medium | ✅ | Move `Cache` to `Support` | |
 | Medium | 🚧 | Statically specify plugin dependencies | |
 | Medium | 🚧 | Statically specify plugin entity types | |
@@ -43,5 +43,6 @@
 | Medium | 🚧 | Consider to use `Struct` as key in `Support::Cache` | To hide overriden [eql?](https://github.com/marian13/convenient_service/blob/v0.1.0/lib/convenient_service/common/plugins/caches_return_value/entities/key.rb#L60) |
 | High | 🚧 | `included_once` for `Support::Concern` |
 | Medium | 🚧 | Custom YARD type for service instance, service class as return values |
+| Medium | 🚧 | Heredoc for error messages |
 
 Search for `TODO`s in the codebase for more tasks.
