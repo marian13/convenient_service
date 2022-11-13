@@ -17,7 +17,7 @@ module ConvenientService
 
             kwargs[:in] = Utils::Array.wrap(kwargs[:in]) + [{method_name: raw(args.first)}, {organizer: :itself}]
 
-            args[0] = args.first == :result ? Services::RunOwnMethodInOrganizer : Services::RunMethodInOrganizer
+            args[0] = (args.first == :result) ? Services::RunOwnMethodInOrganizer : Services::RunMethodInOrganizer
 
             chain.next(*args, **kwargs, &block)
           end
