@@ -8,6 +8,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultStatusCheckShortSyn
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
     include ConvenientService::RSpec::Matchers::ExtendModule
+    include ConvenientService::RSpec::Matchers::DelegateTo
 
     subject { described_class }
 
@@ -16,27 +17,60 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultStatusCheckShortSyn
     context "when included" do
       subject { service_class }
 
+      before do
+        allow(service_class).to receive(:result).and_return(result)
+      end
+
+      let(:result) { service_class.result }
+
       let(:service_class) do
         Class.new.tap do |klass|
           klass.class_exec(described_class) do |mod|
+            include ConvenientService::Service::Plugins::HasResult::Concern
             include mod
+
+            def result
+              success
+            end
           end
         end
       end
 
-      it { is_expected.to extend_module(described_class::ClassMethods) }
+      specify {
+        expect { subject.success? }
+          .to delegate_to(result, :success?)
+          .and_return_its_value
+      }
 
-      it { is_expected.to respond_to(:success?) }
+      specify {
+        expect { subject.error? }
+          .to delegate_to(result, :error?)
+          .and_return_its_value
+      }
 
-      it { is_expected.to respond_to(:error?) }
+      specify {
+        expect { subject.failure? }
+          .to delegate_to(result, :failure?)
+          .and_return_its_value
+      }
 
-      it { is_expected.to respond_to(:failure?) }
+      specify {
+        expect { subject.not_success? }
+          .to delegate_to(result, :not_success?)
+          .and_return_its_value
+      }
 
-      it { is_expected.to respond_to(:not_success?) }
+      specify {
+        expect { subject.not_error? }
+          .to delegate_to(result, :not_error?)
+          .and_return_its_value
+      }
 
-      it { is_expected.to respond_to(:not_error?) }
-
-      it { is_expected.to respond_to(:not_failure?) }
+      specify {
+        expect { subject.not_failure? }
+          .to delegate_to(result, :not_failure?)
+          .and_return_its_value
+      }
     end
   end
 end
