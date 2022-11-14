@@ -37,37 +37,37 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultStatusCheckShortSyn
       end
 
       specify {
-        expect { subject.success? }
+        expect { service_class.success? }
           .to delegate_to(result, :success?)
           .and_return_its_value
       }
 
       specify {
-        expect { subject.error? }
+        expect { service_class.error? }
           .to delegate_to(result, :error?)
           .and_return_its_value
       }
 
       specify {
-        expect { subject.failure? }
+        expect { service_class.failure? }
           .to delegate_to(result, :failure?)
           .and_return_its_value
       }
 
       specify {
-        expect { subject.not_success? }
+        expect { service_class.not_success? }
           .to delegate_to(result, :not_success?)
           .and_return_its_value
       }
 
       specify {
-        expect { subject.not_error? }
+        expect { service_class.not_error? }
           .to delegate_to(result, :not_error?)
           .and_return_its_value
       }
 
       specify {
-        expect { subject.not_failure? }
+        expect { service_class.not_failure? }
           .to delegate_to(result, :not_failure?)
           .and_return_its_value
       }
