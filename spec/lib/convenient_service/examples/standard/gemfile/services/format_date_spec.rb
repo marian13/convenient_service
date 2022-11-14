@@ -87,7 +87,7 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::FormatD
       end
     end
 
-    context 'when there is no display argument' do
+    context "when there is no display argument" do
       context "when date_string is nil" do
         let(:date_string) { nil }
 
