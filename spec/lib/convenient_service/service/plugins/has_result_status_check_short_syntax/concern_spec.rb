@@ -7,7 +7,6 @@ require "convenient_service"
 RSpec.describe ConvenientService::Service::Plugins::HasResultStatusCheckShortSyntax::Concern do
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
-    include ConvenientService::RSpec::Matchers::ExtendModule
     include ConvenientService::RSpec::Matchers::DelegateTo
 
     subject { described_class }
