@@ -7,8 +7,8 @@ require_relative "gemfile/services"
 # @internal
 #   Usage example:
 #
-#   result = ConvenientService::Examples::Rails::Gemfile.format(path: "Gemfile")
-#   result = ConvenientService::Examples::Rails::Gemfile.format(path: "spec/cli/gemfile/format/fixtures/Gemfile")
+#   result = ConvenientService::Examples::Rails::Gemfile.format("Gemfile")
+#   result = ConvenientService::Examples::Rails::Gemfile.format("spec/cli/gemfile/format/fixtures/Gemfile")
 #
 module ConvenientService
   module Examples
