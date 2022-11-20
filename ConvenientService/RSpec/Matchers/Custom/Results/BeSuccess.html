@@ -247,6 +247,28 @@
 </li>
 
       
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#without_data-instance_method" title="#without_data (instance method)">#<strong>without_data</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
     </ul>
   
 
@@ -271,12 +293,6 @@
       <pre class="lines">
 
 
-36
-37
-38
-39
-40
-41
 42
 43
 44
@@ -286,10 +302,16 @@
 48
 49
 50
-51</pre>
+51
+52
+53
+54
+55
+56
+57</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/results/be_success.rb', line 36</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/results/be_success.rb', line 42</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_description'>description</span>
   <span class='comment'>##
@@ -327,12 +349,6 @@
       <pre class="lines">
 
 
-53
-54
-55
-56
-57
-58
 59
 60
 61
@@ -342,10 +358,16 @@
 65
 66
 67
-68</pre>
+68
+69
+70
+71
+72
+73
+74</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/results/be_success.rb', line 53</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/results/be_success.rb', line 59</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_failure_message'>failure_message</span>
   <span class='comment'>##
@@ -393,12 +415,6 @@
       <pre class="lines">
 
 
-73
-74
-75
-76
-77
-78
 79
 80
 81
@@ -408,10 +424,16 @@
 85
 86
 87
-88</pre>
+88
+89
+90
+91
+92
+93
+94</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/results/be_success.rb', line 73</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/results/be_success.rb', line 79</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_failure_message_when_negated'>failure_message_when_negated</span>
   <span class='comment'>##
@@ -523,14 +545,14 @@
       <pre class="lines">
 
 
-30
-31
-32
-33
-34</pre>
+36
+37
+38
+39
+40</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/results/be_success.rb', line 30</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/results/be_success.rb', line 36</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_of'>of</span><span class='lparen'>(</span><span class='id identifier rubyid_service_class'>service_class</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_chain'>chain</span><span class='lbracket'>[</span><span class='symbol'>:service_class</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_service_class'>service_class</span>
@@ -576,12 +598,46 @@
 </table>
 </div>
     
+      <div class="method_details ">
+  <h3 class="signature " id="without_data-instance_method">
+  
+    #<strong>without_data</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+30
+31
+32
+33
+34</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/results/be_success.rb', line 30</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_without_data'>without_data</span>
+  <span class='id identifier rubyid_chain'>chain</span><span class='lbracket'>[</span><span class='symbol'>:data</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+
+  <span class='kw'>self</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
   </div>
 
 </div>
 
       <div id="footer">
-  Generated on Sun Nov 20 14:33:09 2022 by
+  Generated on Sun Nov 20 20:01:09 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>
