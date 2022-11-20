@@ -27,6 +27,12 @@ module ConvenientService
               self
             end
 
+            def without_data
+              chain[:data] = {}
+
+              self
+            end
+
             def of(service_class)
               chain[:service_class] = service_class
 

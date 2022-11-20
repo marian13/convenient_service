@@ -29,8 +29,6 @@
 
 <!-- general_description:start -->
 Yet another approach to revisit the service object pattern, but this time focusing on the unique, opinionated features.
-
-\* Logo is downloaded from [CuteWallpaper.org](https://cutewallpaper.org/24/cartoon-diamond-png/2703010921.html). It will be replaced later.
 <!-- general_description:end -->
 
 <!-- warning:start -->
