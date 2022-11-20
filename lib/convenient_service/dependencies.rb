@@ -102,6 +102,7 @@ module ConvenientService
       def require_standard_examples
         require "progressbar"
 
+        require_relative "examples/standard/cowsay"
         require_relative "examples/standard/gemfile"
       end
 
