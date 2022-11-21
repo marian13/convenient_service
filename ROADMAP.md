@@ -44,5 +44,6 @@
 | High | 🚧 | `included_once` for `Support::Concern` |
 | Medium | 🚧 | Custom YARD type for service instance, service class as return values |
 | Medium | 🚧 | Heredoc for error messages |
+| Medium | 🚧 | Specs for be_success, be_error, be_failure matchers | | 
 
 Search for `TODO`s in the codebase for more tasks.
