@@ -29,6 +29,12 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Middleware d
             include ConvenientService::Service::Plugins::HasResult::Concern
             include ConvenientService::Service::Plugins::HasResultSteps::Concern
 
+            # rubocop:disable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
+            class self::Result
+              include ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Concern
+            end
+            # rubocop:enable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
+
             def result
               success
             end
@@ -48,6 +54,12 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Middleware d
           Class.new do
             include ConvenientService::Service::Plugins::HasResult::Concern
 
+            # rubocop:disable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
+            class self::Result
+              include ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Concern
+            end
+            # rubocop:enable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
+
             def result
               error(message: "some error message")
             end
@@ -57,6 +69,12 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Middleware d
         let(:second_step) do
           Class.new do
             include ConvenientService::Service::Plugins::HasResult::Concern
+
+            # rubocop:disable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
+            class self::Result
+              include ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Concern
+            end
+            # rubocop:enable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
 
             def result
               success(data: {baz: :qux})
@@ -69,6 +87,12 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Middleware d
             klass.class_exec(first_step, second_step) do |first_step, second_step|
               include ConvenientService::Service::Plugins::HasResult::Concern
               include ConvenientService::Service::Plugins::HasResultSteps::Concern
+
+              # rubocop:disable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
+              class self::Result
+                include ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Concern
+              end
+              # rubocop:enable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
 
               step first_step
               step second_step
@@ -94,6 +118,12 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Middleware d
           Class.new do
             include ConvenientService::Service::Plugins::HasResult::Concern
 
+            # rubocop:disable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
+            class self::Result
+              include ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Concern
+            end
+            # rubocop:enable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
+
             def result
               success(data: {foo: :bar})
             end
@@ -103,6 +133,12 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Middleware d
         let(:second_step) do
           Class.new do
             include ConvenientService::Service::Plugins::HasResult::Concern
+
+            # rubocop:disable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
+            class self::Result
+              include ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Concern
+            end
+            # rubocop:enable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
 
             def result
               success(data: {baz: :qux})
@@ -115,6 +151,12 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Middleware d
             klass.class_exec(first_step, second_step) do |first_step, second_step|
               include ConvenientService::Service::Plugins::HasResult::Concern
               include ConvenientService::Service::Plugins::HasResultSteps::Concern
+
+              # rubocop:disable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
+              class self::Result
+                include ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Concern
+              end
+              # rubocop:enable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
 
               step first_step
               step second_step

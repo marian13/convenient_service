@@ -27,6 +27,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
       let(:result_class) do
         Class.new do
           include ConvenientService::Service::Plugins::HasResult::Entities::Result::Concern
+          include ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Concern
           include ConvenientService::Common::Plugins::HasInternals::Concern
 
           class self::Internals

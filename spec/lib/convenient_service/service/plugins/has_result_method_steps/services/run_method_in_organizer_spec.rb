@@ -31,6 +31,12 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultMethodSteps::Servic
       let(:organizer_service_class) do
         Class.new(organizer_base_service_class).tap do |klass|
           klass.class_exec(method_name, method_return_value) do |method_name, method_return_value|
+            # rubocop:disable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
+            class self::Result
+              include ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Concern
+            end
+            # rubocop:enable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
+
             define_method(method_name) { success(data: {value: method_return_value}) }
           end
         end
@@ -50,6 +56,12 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultMethodSteps::Servic
         let(:organizer_service_class) do
           Class.new(organizer_base_service_class).tap do |klass|
             klass.class_exec(method_name) do |method_name|
+              # rubocop:disable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
+              class self::Result
+                include ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Concern
+              end
+              # rubocop:enable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
+
               define_method(method_name) { |**kwargs| success(data: {kwargs: kwargs}) }
             end
           end

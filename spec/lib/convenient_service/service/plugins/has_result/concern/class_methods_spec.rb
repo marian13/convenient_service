@@ -11,6 +11,12 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern::ClassMet
       klass.class_exec(described_class) do |mod|
         extend mod
 
+        # rubocop:disable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
+        class self::Result
+          include ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Concern
+        end
+        # rubocop:enable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
+
         def initialize(*args, **kwargs, &block)
         end
 

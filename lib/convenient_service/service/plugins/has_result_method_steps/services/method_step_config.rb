@@ -8,19 +8,29 @@ module ConvenientService
           module MethodStepConfig
             include Support::Concern
 
+            # rubocop:disable Lint/ConstantDefinitionInBlock
             included do
-              include Core
+              include ConvenientService::Core
 
               concerns do
-                use Service::Plugins::HasResult::Concern
+                use ConvenientService::Service::Plugins::HasResult::Concern
               end
 
               middlewares :result do
-                use Common::Plugins::NormalizesEnv::Middleware
+                use ConvenientService::Common::Plugins::NormalizesEnv::Middleware
 
-                use Service::Plugins::HasResult::Middleware
+                use ConvenientService::Service::Plugins::HasResult::Middleware
+              end
+
+              class self::Result
+                include ConvenientService::Core
+
+                concerns do
+                  use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Concern
+                end
               end
             end
+            # rubocop:enable Lint/ConstantDefinitionInBlock
           end
         end
       end

@@ -29,6 +29,12 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultShortSyntax::Error:
       let(:service_class) do
         Class.new do
           include ConvenientService::Service::Plugins::HasResult::Concern
+
+          # rubocop:disable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
+          class self::Result
+            include ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Concern
+          end
+          # rubocop:enable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
         end
       end
 

@@ -17,7 +17,7 @@ module ConvenientService
 
               ##
               # class Result < ConvenientService::Service::Plugins::HasResult::Entities::Result # or just `class Result` if service class defines its own.
-              #   include ConvenientService::Service::Plugins::HasResult::Entities::Result::Concern
+              #   include ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Concern
               #
               #   class << self
               #     def service_class

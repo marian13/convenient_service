@@ -98,6 +98,8 @@ module ConvenientService
           concerns do
             use Plugins::Common::HasInternals::Concern
 
+            use Plugins::Result::HasJsendStatusAndAttributes::Concern
+
             use Plugins::Result::HasResultShortSyntax::Concern
             use Plugins::Result::CanRecalculateResult::Concern
           end

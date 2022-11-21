@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative "concern/instance_methods"
-
 module ConvenientService
   module Service
     module Plugins
@@ -9,7 +7,6 @@ module ConvenientService
         module Entities
           class Result
             module Concern
-              include Support::Concern
             end
           end
         end

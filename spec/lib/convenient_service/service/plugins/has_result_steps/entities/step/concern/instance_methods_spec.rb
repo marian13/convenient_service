@@ -13,6 +13,12 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::St
     Class.new do
       include ConvenientService::Service::Plugins::HasResult::Concern
 
+      # rubocop:disable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
+      class self::Result
+        include ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Concern
+      end
+      # rubocop:enable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
+
       def initialize(foo:)
         @foo = foo
       end
@@ -26,6 +32,12 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::St
   let(:organizer_service_klass) do
     Class.new do
       include ConvenientService::Service::Plugins::HasResult::Concern
+
+      # rubocop:disable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
+      class self::Result
+        include ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Concern
+      end
+      # rubocop:enable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
 
       def result
         success

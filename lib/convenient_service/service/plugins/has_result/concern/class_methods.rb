@@ -39,7 +39,7 @@ module ConvenientService
               service: Constants::DEFAULT_SERVICE_INSTANCE,
               data: Constants::DEFAULT_SUCCESS_DATA
             )
-              result_class.new(
+              result_class.create(
                 service: service,
                 status: Constants::SUCCESS_STATUS,
                 data: data,
@@ -60,7 +60,7 @@ module ConvenientService
               data: Constants::DEFAULT_FAILURE_DATA,
               message: data.any? ? data.first.join(" ") : Constants::DEFAULT_FAILURE_MESSAGE
             )
-              result_class.new(
+              result_class.create(
                 service: service,
                 status: Constants::FAILURE_STATUS,
                 data: data,
@@ -81,7 +81,7 @@ module ConvenientService
               message: Constants::DEFAULT_ERROR_MESSAGE,
               code: Constants::DEFAULT_ERROR_CODE
             )
-              result_class.new(
+              result_class.create(
                 service: service,
                 status: Constants::ERROR_STATUS,
                 data: Constants::ERROR_DATA,

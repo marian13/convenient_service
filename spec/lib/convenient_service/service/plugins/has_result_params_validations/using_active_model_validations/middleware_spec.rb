@@ -34,6 +34,10 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultParamsValidations::
           include ConvenientService::Common::Plugins::CachesConstructorParams::Concern
           include ConvenientService::Service::Plugins::HasResultParamsValidations::UsingActiveModelValidations::Concern
 
+          class self::Result
+            include ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Concern
+          end
+
           class self::Internals
             include ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Plugins::HasCache::Concern
           end

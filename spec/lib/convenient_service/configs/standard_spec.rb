@@ -131,6 +131,7 @@ RSpec.describe ConvenientService::Configs::Standard do
           let(:concerns) do
             [
               ConvenientService::Plugins::Common::HasInternals::Concern,
+              ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Concern,
               ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasResultShortSyntax::Concern,
               ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanRecalculateResult::Concern
             ]

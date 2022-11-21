@@ -24,6 +24,12 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
       include ConvenientService::Common::Plugins::HasConstructor::Concern
       include ConvenientService::Service::Plugins::HasResult::Concern
 
+      # rubocop:disable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
+      class self::Result
+        include ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Concern
+      end
+      # rubocop:enable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
+
       def result
         success(data: {bar: "bar"})
       end
