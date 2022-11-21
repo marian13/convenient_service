@@ -8,7 +8,6 @@ module ConvenientService
           include Support::Concern
 
           class_methods do
-
             ##
             # @return [Boolean]
             # @since 0.2.0
