@@ -11,7 +11,7 @@ module ConvenientService
 
               rules = []
 
-              rules << ->(result) { result.class.include?(ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Concern) }
+              rules << ->(result) { result.class.include?(ConvenientService::Service::Plugins::HasResult::Entities::Result::Concern) }
               rules << ->(result) { result.failure? }
               rules << ->(result) { result.service.instance_of?(service_class) } if used_of?
               rules << ->(result) { result.data == data } if used_data?
