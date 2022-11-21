@@ -42,6 +42,8 @@ module ConvenientService
         middlewares :initialize do
           use Plugins::Common::NormalizesEnv::Middleware
 
+          use Plugins::Common::SetsDisplayValue::Middleware
+
           use Plugins::Common::CachesConstructorParams::Middleware
         end
 
@@ -64,18 +66,24 @@ module ConvenientService
           use Plugins::Common::NormalizesEnv::Middleware
 
           use Plugins::Service::HasResultShortSyntax::Success::Middleware
+
+          use Plugins::Service::DisplaysResult::Success::Middleware
         end
 
         middlewares :failure do
           use Plugins::Common::NormalizesEnv::Middleware
 
           use Plugins::Service::HasResultShortSyntax::Failure::Middleware
+
+          use Plugins::Service::DisplaysResult::Failure::Middleware
         end
 
         middlewares :error do
           use Plugins::Common::NormalizesEnv::Middleware
 
           use Plugins::Service::HasResultShortSyntax::Error::Middleware
+
+          use Plugins::Service::DisplaysResult::Error::Middleware
         end
 
         middlewares :step, scope: :class do
