@@ -8,16 +8,23 @@ module ConvenientService
           class CreateResultClass < Support::Command
             attr_reader :service_class
 
+            ##
+            # @param service_class [Class]
+            # @return [void]
+            #
             def initialize(service_class:)
               @service_class = service_class
             end
 
+            ##
+            # @return [void]
+            #
             def call
               result_class.include Entities::Result::Concern
 
               ##
               # class Result < ConvenientService::Service::Plugins::HasResult::Entities::Result # or just `class Result` if service class defines its own.
-              #   include ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Concern
+              #   include ConvenientService::Service::Plugins::HasResult::Entities::Result::Concern
               #
               #   class << self
               #     def service_class
@@ -45,6 +52,9 @@ module ConvenientService
 
             private
 
+            ##
+            # @return [Class]
+            #
             def result_class
               @result_class ||= Utils::Module.get_own_const(service_class, :Result) || ::Class.new(Entities::Result)
             end
