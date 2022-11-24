@@ -8,7 +8,19 @@ module ConvenientService
           include Support::Concern
 
           instance_methods do
+            ##
+            # @return [void]
+            #
             def initialize(...)
+            end
+          end
+
+          class_methods do
+            ##
+            # @return [Object]
+            #
+            def create(...)
+              new(...)
             end
           end
         end
