@@ -8,14 +8,11 @@ module ConvenientService
           class Result
             module Plugins
               module HasJsendStatusAndAttributes
-                module Concern
-                  module ClassMethods
-                    ##
-                    # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
-                    #
-                    def create(...)
-                      new(...)
-                    end
+                class Middleware < Core::MethodChainMiddleware
+                  def next(*args, **kwargs, &block)
+                    entity.internals.cache[:jsend_attributes] = Commands::CastResultParams.call(params: kwargs)
+
+                    chain.next(*args, **kwargs, &block)
                   end
                 end
               end

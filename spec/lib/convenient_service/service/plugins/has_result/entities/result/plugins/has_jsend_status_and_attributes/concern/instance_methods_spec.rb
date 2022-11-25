@@ -8,13 +8,33 @@ require "convenient_service"
 RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Concern::InstanceMethods do
   let(:result) { result_class.new(**params) }
 
+  # rubocop:disable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
   let(:result_class) do
-    Class.new.tap do |klass|
-      klass.class_exec(described_class) do |mod|
-        include mod
+    Class.new do
+      include ConvenientService::Core
+
+      concerns do
+        use ConvenientService::Common::Plugins::HasInternals::Concern
+        use ConvenientService::Common::Plugins::HasConstructor::Concern
+        use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Concern
+      end
+
+      middlewares :initialize do
+        use ConvenientService::Common::Plugins::NormalizesEnv::Middleware
+
+        use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Middleware
+      end
+
+      class self::Internals
+        include ConvenientService::Core
+
+        concerns do
+          use ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Plugins::HasCache::Concern
+        end
       end
     end
   end
+  # rubocop:enable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
 
   let(:params) do
     {

@@ -17,14 +17,6 @@ module ConvenientService
                     include Support::Copyable
 
                     delegate \
-                      :service,
-                      :status,
-                      :data,
-                      :message,
-                      :code,
-                      to: :params
-
-                    delegate \
                       :success?,
                       :failure?,
                       :error?,
@@ -33,8 +25,24 @@ module ConvenientService
                       :not_error?,
                       to: :status
 
-                    def initialize(**params)
-                      @params = Commands::CastResultParams.call(params: params)
+                    def service
+                      internals.cache[:jsend_attributes].service
+                    end
+
+                    def status
+                      internals.cache[:jsend_attributes].status
+                    end
+
+                    def data
+                      internals.cache[:jsend_attributes].data
+                    end
+
+                    def message
+                      internals.cache[:jsend_attributes].message
+                    end
+
+                    def code
+                      internals.cache[:jsend_attributes].code
                     end
 
                     def ==(other)

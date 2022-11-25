@@ -26,12 +26,26 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
       # rubocop:disable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
       let(:result_class) do
         Class.new do
-          include ConvenientService::Service::Plugins::HasResult::Entities::Result::Concern
-          include ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Concern
-          include ConvenientService::Common::Plugins::HasInternals::Concern
+          include ConvenientService::Core
+
+          concerns do
+            use ConvenientService::Common::Plugins::HasInternals::Concern
+            use ConvenientService::Common::Plugins::HasConstructor::Concern
+            use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Concern
+          end
+
+          middlewares :initialize do
+            use ConvenientService::Common::Plugins::NormalizesEnv::Middleware
+
+            use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Middleware
+          end
 
           class self::Internals
-            include ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Plugins::HasCache::Concern
+            include ConvenientService::Core
+
+            concerns do
+              use ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Plugins::HasCache::Concern
+            end
           end
         end
       end

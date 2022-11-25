@@ -31,7 +31,27 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultShortSyntax::Succes
 
           # rubocop:disable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
           class self::Result
-            include ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Concern
+            include ConvenientService::Core
+
+            concerns do
+              use ConvenientService::Common::Plugins::HasInternals::Concern
+              use ConvenientService::Common::Plugins::HasConstructor::Concern
+              use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Concern
+            end
+
+            middlewares :initialize do
+              use ConvenientService::Common::Plugins::NormalizesEnv::Middleware
+
+              use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Middleware
+            end
+
+            class self::Internals
+              include ConvenientService::Core
+
+              concerns do
+                use ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Plugins::HasCache::Concern
+              end
+            end
           end
           # rubocop:enable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
         end

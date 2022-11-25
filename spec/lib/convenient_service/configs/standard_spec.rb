@@ -132,10 +132,18 @@ RSpec.describe ConvenientService::Configs::Standard do
         example_group "service result" do
           let(:concerns) do
             [
-              ConvenientService::Plugins::Common::HasInternals::Concern,
+              ConvenientService::Common::Plugins::HasInternals::Concern,
+              ConvenientService::Common::Plugins::HasConstructor::Concern,
               ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Concern,
               ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasResultShortSyntax::Concern,
               ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanRecalculateResult::Concern
+            ]
+          end
+
+          let(:initialize_middlewares) do
+            [
+              ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
+              ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Middleware
             ]
           end
 
@@ -204,6 +212,10 @@ RSpec.describe ConvenientService::Configs::Standard do
 
           it "sets service result concerns" do
             expect(service_class::Result.concerns.to_a).to eq(concerns)
+          end
+
+          it "sets service result middlewares for `initialize`" do
+            expect(service_class::Result.middlewares(:initialize).to_a).to eq(initialize_middlewares)
           end
 
           it "sets service result middlewares for `success?`" do
