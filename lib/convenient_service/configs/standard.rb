@@ -27,6 +27,7 @@ module ConvenientService
           use Plugins::Service::HasResultShortSyntax::Concern
           use Plugins::Service::HasResultSteps::Concern
           use Plugins::Service::CanRecalculateResult::Concern
+          use Plugins::Service::HasResultStatusCheckShortSyntax::Concern
 
           use Plugins::Common::HasCallbacks::Concern
           use Plugins::Common::HasAroundCallbacks::Concern

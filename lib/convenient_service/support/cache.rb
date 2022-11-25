@@ -16,7 +16,7 @@ module ConvenientService
         ##
         # @return [ConvenientService::Support::Cache::Key]
         #
-        def key(...)
+        def keygen(...)
           Cache::Key.new(...)
         end
       end
@@ -98,6 +98,13 @@ module ConvenientService
         return read(key) unless block
 
         exist?(key) ? read(key) : write(key, block.call)
+      end
+
+      ##
+      # @return [ConvenientService::Support::Cache::Key]
+      #
+      def keygen(...)
+        Cache.keygen(...)
       end
 
       ##

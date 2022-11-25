@@ -44,5 +44,8 @@
 | High | 🚧 | `included_once` for `Support::Concern` |
 | Medium | 🚧 | Custom YARD type for service instance, service class as return values |
 | Medium | 🚧 | Heredoc for error messages |
+| Medium | 🚧 | Specs for `be_success`, `be_error`, `be_failure` matchers | | 
+| Low | 🚧 | [Receive Counts](https://relishapp.com/rspec/rspec-mocks/docs/setting-constraints/receive-counts) for `delegate_to` | | 
+| Low | 🚧 | Prefer versioning instead of modification plugin | |
 
 Search for `TODO`s in the codebase for more tasks.
