@@ -34,38 +34,21 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern::ClassMet
 
   example_group "class methods" do
     include ConvenientService::RSpec::Matchers::BeDescendantOf
+    include ConvenientService::RSpec::Matchers::DelegateTo
 
     describe ".result" do
-      # rubocop:disable RSpec/ExampleLength, RSpec/MultipleExpectations
-      it "delegates to `service_class.new`" do
-        ##
-        # TODO: Maybe a custom matcher?
-        #
-        allow(service_class)
-          .to receive(:new) { |*received_args, **received_kwargs, &received_block|
-            expect(received_args).to eq(args)
-            expect(received_kwargs).to eq(kwargs)
-            expect(received_block).to eq(block)
-          }
-          .and_call_original
-
-        service_class.result
-
-        expect(service_class).to have_received(:new)
+      specify do
+        expect { service_class.result(*args, **kwargs, &block) }
+          .to delegate_to(service_class, :new)
+          .with_arguments(*args, **kwargs, &block)
       end
-      # rubocop:enable RSpec/ExampleLength, RSpec/MultipleExpectations
 
-      it "delegates to `service_instance.result`" do
+      specify do
         allow(service_class).to receive(:new).and_return(service_instance)
-        allow(service_instance).to receive(:result).and_call_original
 
-        service_class.result
-
-        expect(service_instance).to have_received(:result)
-      end
-
-      it "returns to `service_instance.result`" do
-        expect(service_class.result).to eq(service_instance.result)
+        expect { service_class.result(*args, **kwargs, &block) }
+          .to delegate_to(service_instance, :result)
+          .and_return_its_value
       end
     end
 
