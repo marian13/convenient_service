@@ -12,8 +12,18 @@ module ConvenientService
           # @return [Object] Can be any type.
           #
           def next(*args, **kwargs, &block)
-            (entity.internals.cache[:return_values] ||= Support::Cache.new)
-              .fetch(Support::Cache.key(method, *args, **kwargs, &block)) { chain.next(*args, **kwargs, &block) }
+            key = cache.keygen(:return_values, method, *args, **kwargs, &block)
+
+            cache.fetch(key) { chain.next(*args, **kwargs, &block) }
+          end
+
+          private
+
+          ##
+          # @return [ConvenientService::Support::Cache]
+          #
+          def cache
+            @cache ||= entity.internals.cache
           end
         end
       end
