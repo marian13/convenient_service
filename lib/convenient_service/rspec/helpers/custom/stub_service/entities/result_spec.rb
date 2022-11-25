@@ -5,7 +5,8 @@ module ConvenientService
     module Helpers
       module Custom
         ##
-        # TODO: Specs.
+        # @internal
+        #   TODO: Specs.
         #
         class StubService < Support::Command
           module Entities
@@ -101,29 +102,29 @@ module ConvenientService
               ##
               # @return [Object]
               #
+              # @internal
+              #    TODO: Assert.
+              #
               def calculate_value
-                ##
-                # TODO: Assert.
-                #
                 service_class.__send__(status, **kwargs)
               end
 
               private
 
               ##
-              # @!attribute [r]
+              # @!attribute [r] status
               #   @return [Symbol]
               #
               attr_reader :status
 
               ##
-              # @!attribute [r]
+              # @!attribute [r] service_class
               #   @return [Class]
               #
               attr_reader :service_class
 
               ##
-              # @!attribute [r]
+              # @!attribute [r] chain
               #   @return [Hash]
               #
               attr_reader :chain
