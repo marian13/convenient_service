@@ -38,7 +38,8 @@ RSpec.describe ConvenientService::Configs::Standard do
             ConvenientService::Service::Plugins::CanRecalculateResult::Concern,
             ConvenientService::Service::Plugins::HasResultStatusCheckShortSyntax::Concern,
             ConvenientService::Common::Plugins::HasCallbacks::Concern,
-            ConvenientService::Common::Plugins::HasAroundCallbacks::Concern
+            ConvenientService::Common::Plugins::HasAroundCallbacks::Concern,
+            ConvenientService::Service::Plugins::HasInspect::Concern
           ]
         end
 
@@ -136,7 +137,8 @@ RSpec.describe ConvenientService::Configs::Standard do
               ConvenientService::Common::Plugins::HasConstructor::Concern,
               ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Concern,
               ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasResultShortSyntax::Concern,
-              ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanRecalculateResult::Concern
+              ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanRecalculateResult::Concern,
+              ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasInspect::Concern
             ]
           end
 

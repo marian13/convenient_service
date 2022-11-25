@@ -33,6 +33,7 @@ module ConvenientService
           use Plugins::Common::HasCallbacks::Concern
           use Plugins::Common::HasAroundCallbacks::Concern
 
+          use Plugins::Service::HasInspect::Concern
           ##
           # NOTE: Optional plugins.
           # TODO: Specs.
@@ -105,6 +106,8 @@ module ConvenientService
 
             use Plugins::Result::HasResultShortSyntax::Concern
             use Plugins::Result::CanRecalculateResult::Concern
+
+            use Plugins::Result::HasInspect::Concern
           end
 
           middlewares :initialize do
