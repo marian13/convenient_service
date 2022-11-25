@@ -4,7 +4,7 @@
 | - | - | - | - |
 | High | ✅ | 100% coverage of `Core` | |
 | Medium | 🚧 | Type signatures for the whole codebase ([Yard @param, @overload, @return](https://rubydoc.info/gems/yard/file/docs/Tags.md#taglist)) | |
-| Medium | 🚧 | `Service.success?` shortcut for `Service.result.success?` | |
+| Medium | ✅ | `Service.success?` shortcut for `Service.result.success?` | |
 | Medium | ✅ | Release `v0.1.0` with a warning that lib is still under heavy development | |
 | Medium | 🚧 | [Active Record transaction](https://api.rubyonrails.org/classes/ActiveRecord/Transactions/ClassMethods.html) examples | |
 | Medium | 🚧 | [Rails Current Attributes integration](https://api.rubyonrails.org/classes/ActiveSupport/CurrentAttributes.html) to cache repeated results | |
