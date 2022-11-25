@@ -29,6 +29,7 @@ RSpec.describe ConvenientService::Configs::Standard do
           [
             ConvenientService::Common::Plugins::HasInternals::Concern,
             ConvenientService::Common::Plugins::HasConstructor::Concern,
+            ConvenientService::Plugins::Common::HasConstructorWithoutInitialize::Concern,
             ConvenientService::Common::Plugins::CachesConstructorParams::Concern,
             ConvenientService::Common::Plugins::CanBeCopied::Concern,
             ConvenientService::Service::Plugins::HasResult::Concern,

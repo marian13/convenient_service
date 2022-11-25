@@ -20,6 +20,7 @@ module ConvenientService
         concerns do
           use Plugins::Common::HasInternals::Concern
           use Plugins::Common::HasConstructor::Concern
+          use Plugins::Common::HasConstructorWithoutInitialize::Concern
 
           use Plugins::Common::CachesConstructorParams::Concern
           use Plugins::Common::CanBeCopied::Concern
