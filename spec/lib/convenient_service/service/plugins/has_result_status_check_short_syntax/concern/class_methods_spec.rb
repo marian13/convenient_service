@@ -8,10 +8,6 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultStatusCheckShortSyn
   example_group "instance methods" do
     include ConvenientService::RSpec::Matchers::DelegateTo
 
-    before do
-      allow(service_class).to receive(:result).and_return(result)
-    end
-
     let(:service_class) do
       Class.new.tap do |klass|
         klass.class_exec(described_class) do |mod|
@@ -19,60 +15,71 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultStatusCheckShortSyn
 
           extend mod
 
+          # rubocop:disable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
+          class self::Result
+            include ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Concern
+          end
+          # rubocop:enable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
+
           def result
             success
           end
         end
       end
     end
+
     let(:result) { service_class.result }
 
+    before do
+      allow(service_class).to receive(:result).and_return(result)
+    end
+
     describe ".success?" do
-      specify {
+      specify do
         expect { service_class.success? }
           .to delegate_to(result, :success?)
           .and_return_its_value
-      }
+      end
     end
 
     describe ".error?" do
-      specify {
+      specify do
         expect { service_class.error? }
           .to delegate_to(result, :error?)
           .and_return_its_value
-      }
+      end
     end
 
     describe ".fail?" do
-      specify {
+      specify do
         expect { service_class.failure? }
           .to delegate_to(result, :failure?)
           .and_return_its_value
-      }
+      end
     end
 
     describe ".not_success?" do
-      specify {
+      specify do
         expect { service_class.not_success? }
           .to delegate_to(result, :not_success?)
           .and_return_its_value
-      }
+      end
     end
 
     describe ".not_error?" do
-      specify {
+      specify do
         expect { service_class.not_error? }
           .to delegate_to(result, :not_error?)
           .and_return_its_value
-      }
+      end
     end
 
     describe ".not_fail?" do
-      specify {
+      specify do
         expect { service_class.not_failure? }
           .to delegate_to(result, :not_failure?)
           .and_return_its_value
-      }
+      end
     end
   end
 end
