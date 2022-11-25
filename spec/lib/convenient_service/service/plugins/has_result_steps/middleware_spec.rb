@@ -26,6 +26,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Middleware d
       context "when service has no steps" do
         let(:service_class) do
           Class.new do
+            include ConvenientService::Common::Plugins::HasInternals::Concern
             include ConvenientService::Service::Plugins::HasResult::Concern
             include ConvenientService::Service::Plugins::HasResultSteps::Concern
 
@@ -52,6 +53,10 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Middleware d
                   use ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Plugins::HasCache::Concern
                 end
               end
+            end
+
+            class self::Internals
+              include ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Plugins::HasCache::Concern
             end
             # rubocop:enable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
 
@@ -97,6 +102,10 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Middleware d
                   use ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Plugins::HasCache::Concern
                 end
               end
+            end
+
+            class self::Internals
+              include ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Plugins::HasCache::Concern
             end
             # rubocop:enable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
 
@@ -145,6 +154,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Middleware d
         let(:service_class) do
           Class.new.tap do |klass|
             klass.class_exec(first_step, second_step) do |first_step, second_step|
+              include ConvenientService::Common::Plugins::HasInternals::Concern
               include ConvenientService::Service::Plugins::HasResult::Concern
               include ConvenientService::Service::Plugins::HasResultSteps::Concern
 
@@ -171,6 +181,10 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Middleware d
                     use ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Plugins::HasCache::Concern
                   end
                 end
+              end
+
+              class self::Internals
+                include ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Plugins::HasCache::Concern
               end
               # rubocop:enable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
 
@@ -269,6 +283,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Middleware d
         let(:service_class) do
           Class.new.tap do |klass|
             klass.class_exec(first_step, second_step) do |first_step, second_step|
+              include ConvenientService::Common::Plugins::HasInternals::Concern
               include ConvenientService::Service::Plugins::HasResult::Concern
               include ConvenientService::Service::Plugins::HasResultSteps::Concern
 
@@ -295,6 +310,10 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Middleware d
                     use ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Plugins::HasCache::Concern
                   end
                 end
+              end
+
+              class self::Internals
+                include ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Plugins::HasCache::Concern
               end
               # rubocop:enable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
 

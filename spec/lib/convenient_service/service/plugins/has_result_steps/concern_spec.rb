@@ -9,9 +9,16 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Concern do
   include ConvenientService::RSpec::Matchers::CacheItsValue
   include ConvenientService::RSpec::Matchers::DelegateTo
 
+  # rubocop:disable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
   let(:service_class) do
     Class.new.tap do |klass|
       klass.class_exec(described_class) do |mod|
+        include ConvenientService::Common::Plugins::HasInternals::Concern
+
+        class self::Internals
+          include ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Plugins::HasCache::Concern
+        end
+
         include mod
 
         def foo
@@ -19,6 +26,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Concern do
       end
     end
   end
+  # rubocop:enable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
 
   let(:service_instance) { service_class.new }
 

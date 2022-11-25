@@ -9,11 +9,12 @@ module ConvenientService
 
           instance_methods do
             def steps
-              @steps ||=
+              internals.cache.fetch(:steps) do
                 self.class
                   .steps
                   .tap(&:commit!)
                   .map { |step| step.copy(overrides: {kwargs: {organizer: self}}) }
+              end
             end
 
             ##
