@@ -14,6 +14,7 @@ module ConvenientService
                   instance_methods do
                     ##
                     # @return [String]
+                    # @since 0.2.0
                     #
                     def inspect
                       "<#{container.klass.name}::Step service: #{service.klass.name}>"
