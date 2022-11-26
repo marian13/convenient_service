@@ -47,5 +47,6 @@
 | Medium | 🚧 | Specs for `be_success`, `be_error`, `be_failure` matchers | | 
 | Low | 🚧 | [Receive Counts](https://relishapp.com/rspec/rspec-mocks/docs/setting-constraints/receive-counts) for `delegate_to` | | 
 | Low | 🚧 | Prefer versioning instead of modification plugin | |
+| Low | 🚧 | Consider to move `__steps__` and `__callbacks__` to `internals_class` | Benefit? |
 
 Search for `TODO`s in the codebase for more tasks.
