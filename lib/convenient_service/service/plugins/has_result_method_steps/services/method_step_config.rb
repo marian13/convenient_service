@@ -33,6 +33,7 @@ module ConvenientService
 
                 middlewares :initialize do
                   use ConvenientService::Common::Plugins::NormalizesEnv::Middleware
+
                   use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Middleware
                 end
 
