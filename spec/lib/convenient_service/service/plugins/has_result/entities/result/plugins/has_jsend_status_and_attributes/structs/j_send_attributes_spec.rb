@@ -5,20 +5,20 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
-RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Structs::ResultParams do
+RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Structs::JSendAttributes do
   example_group "instance methods" do
     describe "#==" do
       let(:service_class) { Class.new }
       let(:service_instance) { service_class.new }
 
-      let(:result_params) { described_class.new(**params) }
+      let(:jsend_attributes) { described_class.new(**params) }
       let(:params) { {service: service_instance, status: :foo, data: {foo: :bar}, message: "foo", code: :foo} }
 
       context "when `other` has different `service`" do
         let(:other) { described_class.new(**params.merge(service: Object.new)) }
 
         it "returns `false`" do
-          expect(result_params == other).to eq(false)
+          expect(jsend_attributes == other).to eq(false)
         end
       end
 
@@ -26,7 +26,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
         let(:other) { described_class.new(**params.merge(status: :bar)) }
 
         it "returns `false`" do
-          expect(result_params == other).to eq(false)
+          expect(jsend_attributes == other).to eq(false)
         end
       end
 
@@ -34,7 +34,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
         let(:other) { described_class.new(**params.merge(data: {baz: :qux})) }
 
         it "returns `false`" do
-          expect(result_params == other).to eq(false)
+          expect(jsend_attributes == other).to eq(false)
         end
       end
 
@@ -42,7 +42,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
         let(:other) { described_class.new(**params.merge(message: "bar")) }
 
         it "returns `false`" do
-          expect(result_params == other).to eq(false)
+          expect(jsend_attributes == other).to eq(false)
         end
       end
 
@@ -50,7 +50,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
         let(:other) { described_class.new(**params.merge(code: :bar)) }
 
         it "returns `false`" do
-          expect(result_params == other).to eq(false)
+          expect(jsend_attributes == other).to eq(false)
         end
       end
 
@@ -58,7 +58,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
         let(:other) { described_class.new(**params) }
 
         it "returns `true`" do
-          expect(result_params == other).to eq(true)
+          expect(jsend_attributes == other).to eq(true)
         end
       end
     end

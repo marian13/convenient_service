@@ -10,7 +10,7 @@ module ConvenientService
               module HasJsendStatusAndAttributes
                 class Middleware < Core::MethodChainMiddleware
                   def next(*args, **kwargs, &block)
-                    entity.internals.cache[:jsend_attributes] = Commands::CastResultParams.call(params: kwargs)
+                    entity.internals.cache[:jsend_attributes] = Commands::CastJSendAttributes.call(params: kwargs)
 
                     chain.next(*args, **kwargs, &block)
                   end

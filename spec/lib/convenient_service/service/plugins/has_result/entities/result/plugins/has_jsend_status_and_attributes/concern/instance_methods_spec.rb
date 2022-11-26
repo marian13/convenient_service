@@ -83,12 +83,12 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
 
   example_group "class methods" do
     describe ".new" do
-      it "delegates to `ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Commands::CastResultParams`" do
-        allow(ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Commands::CastResultParams).to receive(:call).with(hash_including(params: params)).and_call_original
+      it "delegates to `ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Commands::CastJSendAttributes`" do
+        allow(ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Commands::CastJSendAttributes).to receive(:call).with(hash_including(params: params)).and_call_original
 
         result
 
-        expect(ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Commands::CastResultParams).to have_received(:call)
+        expect(ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Commands::CastJSendAttributes).to have_received(:call)
       end
     end
   end

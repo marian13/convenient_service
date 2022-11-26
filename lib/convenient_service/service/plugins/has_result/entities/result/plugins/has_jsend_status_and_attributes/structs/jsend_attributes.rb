@@ -9,7 +9,7 @@ module ConvenientService
             module Plugins
               module HasJsendStatusAndAttributes
                 module Structs
-                  ResultParams = ::Struct.new(:service, :status, :data, :message, :code, keyword_init: true)
+                  JSendAttributes = ::Struct.new(:service, :status, :data, :message, :code, keyword_init: true)
                 end
               end
             end

@@ -1,3 +1,3 @@
 # frozen_string_literal: true
 
-require_relative "structs/result_params"
+require_relative "structs/jsend_attributes"
