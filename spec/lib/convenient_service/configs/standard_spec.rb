@@ -270,11 +270,22 @@ RSpec.describe ConvenientService::Configs::Standard do
         end
 
         example_group "service step" do
+          let(:concerns) do
+            [
+              ConvenientService::Common::Plugins::HasInternals::Concern,
+              ConvenientService::Service::Plugins::HasResultSteps::Entities::Step::Plugins::HasInspect::Concern
+            ]
+          end
+
           let(:result_middlewares) do
             [
               ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
               ConvenientService::Common::Plugins::CachesReturnValue::Middleware
             ]
+          end
+
+          it "sets service step concerns" do
+            expect(service_class::Step.concerns.to_a).to eq(concerns)
           end
 
           it "sets service step middlewares for `result`" do
