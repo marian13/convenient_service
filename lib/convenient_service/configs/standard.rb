@@ -20,6 +20,7 @@ module ConvenientService
         concerns do
           use Plugins::Common::HasInternals::Concern
           use Plugins::Common::HasConstructor::Concern
+          use Plugins::Common::HasConstructorWithoutInitialize::Concern
 
           use Plugins::Common::CachesConstructorParams::Concern
           use Plugins::Common::CanBeCopied::Concern
@@ -32,6 +33,7 @@ module ConvenientService
           use Plugins::Common::HasCallbacks::Concern
           use Plugins::Common::HasAroundCallbacks::Concern
 
+          use Plugins::Service::HasInspect::Concern
           ##
           # NOTE: Optional plugins.
           # TODO: Specs.
@@ -98,9 +100,20 @@ module ConvenientService
 
           concerns do
             use Plugins::Common::HasInternals::Concern
+            use Plugins::Common::HasConstructor::Concern
+
+            use Plugins::Result::HasJsendStatusAndAttributes::Concern
 
             use Plugins::Result::HasResultShortSyntax::Concern
             use Plugins::Result::CanRecalculateResult::Concern
+
+            use Plugins::Result::HasInspect::Concern
+          end
+
+          middlewares :initialize do
+            use Plugins::Common::NormalizesEnv::Middleware
+
+            use Plugins::Result::HasJsendStatusAndAttributes::Middleware
           end
 
           middlewares :success? do
@@ -171,6 +184,8 @@ module ConvenientService
 
           concerns do
             use Plugins::Common::HasInternals::Concern
+
+            use Plugins::Step::HasInspect::Concern
           end
 
           middlewares :result do

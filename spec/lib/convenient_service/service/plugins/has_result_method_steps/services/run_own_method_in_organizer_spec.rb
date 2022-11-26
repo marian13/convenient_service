@@ -67,6 +67,32 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultMethodSteps::Servic
         let(:organizer_service_class) do
           Class.new(organizer_base_service_class).tap do |klass|
             klass.class_exec(method_name) do |method_name|
+              # rubocop:disable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
+              class self::Result
+                include ConvenientService::Core
+
+                concerns do
+                  use ConvenientService::Common::Plugins::HasInternals::Concern
+                  use ConvenientService::Common::Plugins::HasConstructor::Concern
+                  use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Concern
+                end
+
+                middlewares :initialize do
+                  use ConvenientService::Common::Plugins::NormalizesEnv::Middleware
+
+                  use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Middleware
+                end
+
+                class self::Internals
+                  include ConvenientService::Core
+
+                  concerns do
+                    use ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Plugins::HasCache::Concern
+                  end
+                end
+              end
+              # rubocop:enable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
+
               define_method(method_name) { success }
             end
           end
@@ -81,13 +107,41 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultMethodSteps::Servic
         end
 
         context "when `kwargs` are passed" do
+          # rubocop:disable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
           let(:organizer_service_class) do
             Class.new(organizer_base_service_class).tap do |klass|
               klass.class_exec(method_name) do |method_name|
+                # rubocop:disable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
+                class self::Result
+                  include ConvenientService::Core
+
+                  concerns do
+                    use ConvenientService::Common::Plugins::HasInternals::Concern
+                    use ConvenientService::Common::Plugins::HasConstructor::Concern
+                    use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Concern
+                  end
+
+                  middlewares :initialize do
+                    use ConvenientService::Common::Plugins::NormalizesEnv::Middleware
+
+                    use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Middleware
+                  end
+
+                  class self::Internals
+                    include ConvenientService::Core
+
+                    concerns do
+                      use ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Plugins::HasCache::Concern
+                    end
+                  end
+                end
+                # rubocop:enable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
+
                 define_method(method_name) { |**kwargs| success(data: {kwargs: kwargs}) }
               end
             end
           end
+          # rubocop:enable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
 
           let(:kwargs) { {foo: :bar} }
 

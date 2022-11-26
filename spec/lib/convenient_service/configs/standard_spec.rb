@@ -29,6 +29,7 @@ RSpec.describe ConvenientService::Configs::Standard do
           [
             ConvenientService::Common::Plugins::HasInternals::Concern,
             ConvenientService::Common::Plugins::HasConstructor::Concern,
+            ConvenientService::Plugins::Common::HasConstructorWithoutInitialize::Concern,
             ConvenientService::Common::Plugins::CachesConstructorParams::Concern,
             ConvenientService::Common::Plugins::CanBeCopied::Concern,
             ConvenientService::Service::Plugins::HasResult::Concern,
@@ -37,7 +38,8 @@ RSpec.describe ConvenientService::Configs::Standard do
             ConvenientService::Service::Plugins::CanRecalculateResult::Concern,
             ConvenientService::Service::Plugins::HasResultStatusCheckShortSyntax::Concern,
             ConvenientService::Common::Plugins::HasCallbacks::Concern,
-            ConvenientService::Common::Plugins::HasAroundCallbacks::Concern
+            ConvenientService::Common::Plugins::HasAroundCallbacks::Concern,
+            ConvenientService::Service::Plugins::HasInspect::Concern
           ]
         end
 
@@ -131,9 +133,19 @@ RSpec.describe ConvenientService::Configs::Standard do
         example_group "service result" do
           let(:concerns) do
             [
-              ConvenientService::Plugins::Common::HasInternals::Concern,
+              ConvenientService::Common::Plugins::HasInternals::Concern,
+              ConvenientService::Common::Plugins::HasConstructor::Concern,
+              ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Concern,
               ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasResultShortSyntax::Concern,
-              ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanRecalculateResult::Concern
+              ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanRecalculateResult::Concern,
+              ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasInspect::Concern
+            ]
+          end
+
+          let(:initialize_middlewares) do
+            [
+              ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
+              ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Middleware
             ]
           end
 
@@ -204,6 +216,10 @@ RSpec.describe ConvenientService::Configs::Standard do
             expect(service_class::Result.concerns.to_a).to eq(concerns)
           end
 
+          it "sets service result middlewares for `initialize`" do
+            expect(service_class::Result.middlewares(:initialize).to_a).to eq(initialize_middlewares)
+          end
+
           it "sets service result middlewares for `success?`" do
             expect(service_class::Result.middlewares(:success?).to_a).to eq(is_success_middlewares)
           end
@@ -254,11 +270,22 @@ RSpec.describe ConvenientService::Configs::Standard do
         end
 
         example_group "service step" do
+          let(:concerns) do
+            [
+              ConvenientService::Common::Plugins::HasInternals::Concern,
+              ConvenientService::Service::Plugins::HasResultSteps::Entities::Step::Plugins::HasInspect::Concern
+            ]
+          end
+
           let(:result_middlewares) do
             [
               ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
               ConvenientService::Common::Plugins::CachesReturnValue::Middleware
             ]
+          end
+
+          it "sets service step concerns" do
+            expect(service_class::Step.concerns.to_a).to eq(concerns)
           end
 
           it "sets service step middlewares for `result`" do
