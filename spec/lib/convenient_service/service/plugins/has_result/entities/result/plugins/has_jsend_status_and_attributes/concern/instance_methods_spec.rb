@@ -67,12 +67,6 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
   #
   #   subject { result }
   #
-  #   it { is_expected.to delegate_method(:service).to(:params) }
-  #   it { is_expected.to delegate_method(:status).to(:params) }
-  #   it { is_expected.to delegate_method(:data).to(:params) }
-  #   it { is_expected.to delegate_method(:message).to(:params) }
-  #   it { is_expected.to delegate_method(:code).to(:params) }
-  #
   #   it { is_expected.to delegate_method(:success?).to(:status) }
   #   it { is_expected.to delegate_method(:failure?).to(:status) }
   #   it { is_expected.to delegate_method(:error?).to(:status) }
