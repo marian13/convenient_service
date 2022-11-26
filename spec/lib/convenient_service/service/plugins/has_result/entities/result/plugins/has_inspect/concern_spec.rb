@@ -76,11 +76,11 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
 
     let(:result_instance) do
       result_class.new(
-        status: :success,
-        data: {},
-        message: "",
-        code: :default_success,
-        service: service_instance
+        service: service_instance,
+        status: :foo,
+        data: {foo: :bar},
+        message: "foo",
+        code: :foo
       )
     end
 

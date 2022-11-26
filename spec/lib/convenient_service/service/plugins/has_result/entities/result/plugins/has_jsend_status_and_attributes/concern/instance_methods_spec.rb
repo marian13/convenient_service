@@ -81,18 +81,6 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
   #   it { is_expected.to delegate_method(:not_error?).to(:status) }
   # end
 
-  example_group "class methods" do
-    describe ".new" do
-      it "delegates to `ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Commands::CastJSendAttributes`" do
-        allow(ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Commands::CastJSendAttributes).to receive(:call).with(hash_including(params: params)).and_call_original
-
-        result
-
-        expect(ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Commands::CastJSendAttributes).to have_received(:call)
-      end
-    end
-  end
-
   example_group "instance methods" do
     describe "#service" do
       it "returns `service`" do

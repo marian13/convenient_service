@@ -11,19 +11,19 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
       let(:service_class) { Class.new }
       let(:service_instance) { service_class.new }
 
-      let(:command_result) { described_class.call(params: params) }
-      let(:params) { {service: service_instance, status: :foo, data: {foo: :bar}, message: "foo", code: :foo} }
+      let(:command_result) { described_class.call(attributes: attributes) }
+      let(:attributes) { {service: service_instance, status: :foo, data: {foo: :bar}, message: "foo", code: :foo} }
 
-      it "returns `struct` with `params[:service]` as `service`" do
-        expect(command_result.service).to eq(params[:service])
+      it "returns `struct` with `attributes[:service]` as `service`" do
+        expect(command_result.service).to eq(attributes[:service])
       end
 
-      it "returns `struct` with `params[:status]` casted to `ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Entities::Status` as `status`" do
-        expect(command_result.status).to eq(ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Entities::Status.cast(params[:status]))
+      it "returns `struct` with `attributes[:status]` casted to `ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Entities::Status` as `status`" do
+        expect(command_result.status).to eq(ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Entities::Status.cast(attributes[:status]))
       end
 
-      context "when `params[:status]` is NOT castable" do
-        let(:command_result) { described_class.call(params: params.merge(status: 42)) }
+      context "when `attributes[:status]` is NOT castable" do
+        let(:command_result) { described_class.call(attributes: attributes.merge(status: 42)) }
 
         let(:error_message) do
           <<~TEXT
@@ -38,12 +38,12 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
         end
       end
 
-      it "returns `struct` with `params[:data]` casted to `ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Entities::Data` as `data`" do
-        expect(command_result.data).to eq(ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Entities::Data.cast(params[:data]))
+      it "returns `struct` with `attributes[:data]` casted to `ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Entities::Data` as `data`" do
+        expect(command_result.data).to eq(ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Entities::Data.cast(attributes[:data]))
       end
 
-      context "when `params[:data]` is NOT castable" do
-        let(:command_result) { described_class.call(params: params.merge(data: 42)) }
+      context "when `attributes[:data]` is NOT castable" do
+        let(:command_result) { described_class.call(attributes: attributes.merge(data: 42)) }
 
         let(:error_message) do
           <<~TEXT
@@ -58,12 +58,12 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
         end
       end
 
-      it "returns `struct` with `params[:message]` casted to `ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Entities::Message` as `message`" do
-        expect(command_result.message).to eq(ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Entities::Message.cast(params[:message]))
+      it "returns `struct` with `attributes[:message]` casted to `ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Entities::Message` as `message`" do
+        expect(command_result.message).to eq(ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Entities::Message.cast(attributes[:message]))
       end
 
-      context "when `params[:message]` is NOT castable" do
-        let(:command_result) { described_class.call(params: params.merge(message: 42)) }
+      context "when `attributes[:message]` is NOT castable" do
+        let(:command_result) { described_class.call(attributes: attributes.merge(message: 42)) }
 
         let(:error_message) do
           <<~TEXT
@@ -78,12 +78,12 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
         end
       end
 
-      it "returns `struct` with `params[:code]` casted to `ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Entities::Code` as `code`" do
-        expect(command_result.code).to eq(ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Entities::Code.cast(params[:code]))
+      it "returns `struct` with `attributes[:code]` casted to `ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Entities::Code` as `code`" do
+        expect(command_result.code).to eq(ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Entities::Code.cast(attributes[:code]))
       end
 
-      context "when `params[:code]` is NOT castable" do
-        let(:command_result) { described_class.call(params: params.merge(code: 42)) }
+      context "when `attributes[:code]` is NOT castable" do
+        let(:command_result) { described_class.call(attributes: attributes.merge(code: 42)) }
 
         let(:error_message) do
           <<~TEXT
