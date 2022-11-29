@@ -194,17 +194,9 @@ tasks:
       - bundle exec rake playground
     interactive: true
 
-  release:major:
+  release:
     cmds:
-      - gem bump convenient_service --version major
-
-  release:minor:
-    cmds:
-      - gem bump convenient_service --version minor
-
-  release:patch:
-    cmds:
-      - gem bump convenient_service --version patch
+      - gem release
 
   rspec:
     cmds:
