@@ -39,6 +39,10 @@ module ConvenientService
               Entities::Method::Entities::Values::Raw.wrap(value)
             end
 
+            def reassign(method_name)
+              Entities::Method::Entities::Values::Reassignment.new(method_name)
+            end
+
             def steps
               @steps ||= Entities::StepCollection.new
             end

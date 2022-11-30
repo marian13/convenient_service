@@ -27,6 +27,10 @@ module ConvenientService
                     @object = object
                   end
 
+                  def reassignment?(name:, method:)
+                    false
+                  end
+
                   def ==(other)
                     return unless other.instance_of?(self.class)
 

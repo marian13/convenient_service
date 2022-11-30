@@ -26,6 +26,7 @@ module ConvenientService
                   when ::Symbol then cast_symbol
                   when ::String then cast_string
                   when ::Hash then cast_hash
+                  when Entities::Values::Reassignment then cast_reassignment
                   when Method then cast_method
                   end
                 end
@@ -38,6 +39,10 @@ module ConvenientService
 
                 def cast_string
                   Entities::Name.new(other)
+                end
+
+                def cast_reassignment
+                  Entities::Name.new(other.method_name)
                 end
 
                 def cast_hash
