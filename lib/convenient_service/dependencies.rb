@@ -103,6 +103,7 @@ module ConvenientService
         require "progressbar"
 
         require_relative "examples/standard/cowsay"
+        require_relative "examples/standard/response_params"
         require_relative "examples/standard/gemfile"
       end
 
