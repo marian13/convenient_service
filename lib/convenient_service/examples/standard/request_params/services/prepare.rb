@@ -64,6 +64,10 @@ module ConvenientService
             step Services::AuditParams, \
               in: :params
 
+            step :result, \
+              in: :params,
+              out: reassign(:params)
+
             def initialize(request:, role: Constants::Roles::GUEST)
               @request = request
             end

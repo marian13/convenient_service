@@ -29,9 +29,9 @@ require_relative "request_params/services"
 #     ConvenientService::Examples::Standard::RequestParams.prepare(request, role: :guest)
 #     ConvenientService::Examples::Standard::RequestParams.prepare(request, role: :admin)
 #
-# - https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types
-# - https://www.whatismybrowser.com/guides/the-latest-user-agent/chrome
-# - https://www.tutorialspoint.com/http/http_requests.htm
+#   - https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types
+#   - https://www.whatismybrowser.com/guides/the-latest-user-agent/chrome
+#   - https://www.tutorialspoint.com/http/http_requests.htm
 #
 module ConvenientService
   module Examples
