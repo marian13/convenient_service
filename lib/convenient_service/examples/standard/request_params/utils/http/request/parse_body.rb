@@ -15,6 +15,8 @@ module ConvenientService
                 end
 
                 ##
+                # IMPORTANT: Make sure length is set in `http_string`.
+                #
                 # - https://stackoverflow.com/a/17599778/12201472
                 # - https://github.com/ruby/webrick/blob/v1.7.0/lib/webrick/httprequest.rb
                 #

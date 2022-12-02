@@ -17,7 +17,7 @@ module ConvenientService
             class SafeParse < Support::Command
               attr_reader :json_string, :default_value
 
-              def initialize(json_string, default_value: nil)
+              def initialize(json_string:, default_value: nil)
                 @json_string = json_string
                 @default_value = default_value
               end
