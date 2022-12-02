@@ -3,15 +3,16 @@
 module ConvenientService
   module Examples
     module Standard
-      module ResponseParams
+      module RequestParams
         module Services
-          class SanitizeParams
+          class MergeParams
             include ConvenientService::Standard::Config
 
-            attr_reader :params
+            attr_reader :params_from_headers, :params_from_body
 
-            def initialize(params:)
-              @params = params
+            def initialize(params_from_headers:, params_from_body:)
+              @params_from_headers = params_from_headers
+              @params_from_body = params_from_body
             end
 
             def result

@@ -3,15 +3,16 @@
 module ConvenientService
   module Examples
     module Standard
-      module ResponseParams
+      module RequestParams
         module Services
-          class CastParams
+          class RemoveUnauthorizedParams
             include ConvenientService::Standard::Config
 
-            attr_reader :params
+            attr_reader :params, :role
 
-            def initialize(params:)
+            def initialize(params:, role:)
               @params = params
+              @role = role
             end
 
             def result

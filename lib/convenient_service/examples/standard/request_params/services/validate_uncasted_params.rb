@@ -3,9 +3,9 @@
 module ConvenientService
   module Examples
     module Standard
-      module ResponseParams
+      module RequestParams
         module Services
-          class ApplyDefaultParamValues
+          class ValidateUncastedParams
             include ConvenientService::Standard::Config
 
             attr_reader :params
@@ -15,7 +15,7 @@ module ConvenientService
             end
 
             def result
-              success(params: {})
+              success
             end
           end
         end

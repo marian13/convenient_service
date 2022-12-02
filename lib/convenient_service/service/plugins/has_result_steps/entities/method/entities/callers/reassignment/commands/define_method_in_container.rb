@@ -24,12 +24,14 @@ module ConvenientService
                       end
 
                       def call
+                        return if Utils::Module.instance_method_defined?(container.klass, "__original_#{name}__", private: true)
+
                         <<~RUBY.tap { |code| container.klass.class_eval(code, __FILE__, __LINE__ + 1) }
                           alias_method :__original_#{name}__, :#{name}
 
                           def #{name}
                             step =
-                              steps.slice(0..index)
+                              steps.slice(0..#{index})
                                 .select(&:completed?)
                                 .reverse
                                 .find { |step| step.outputs.any? { |output| output.reassignment?(:#{name}) } }

@@ -3,19 +3,19 @@
 module ConvenientService
   module Examples
     module Standard
-      module ResponseParams
+      module RequestParams
         module Services
           class Prepare
             include ConvenientService::Standard::Config
 
-            attr_reader :response, :role
+            attr_reader :request, :role
 
             step Services::ExtractParamsFromHeaders, \
-              in: :response,
+              in: :request,
               out: {params: :params_from_headers}
 
             step Services::ExtractParamsFromBody, \
-              in: :response,
+              in: :request,
               out: {params: :params_from_body}
 
             step Services::MergeParams, \
@@ -64,8 +64,8 @@ module ConvenientService
             step Services::AuditParams, \
               in: :params
 
-            def initialize(response:)
-              @response = response
+            def initialize(request:, role: Constants::Roles::GUEST)
+              @request = request
             end
 
             def result

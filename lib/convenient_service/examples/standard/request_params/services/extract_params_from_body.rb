@@ -3,15 +3,15 @@
 module ConvenientService
   module Examples
     module Standard
-      module ResponseParams
+      module RequestParams
         module Services
-          class ExtractParamsFromHeaders
+          class ExtractParamsFromBody
             include ConvenientService::Standard::Config
 
-            attr_reader :response
+            attr_reader :request
 
-            def initialize(response:)
-              @response = response
+            def initialize(request:)
+              @request = request
             end
 
             def result

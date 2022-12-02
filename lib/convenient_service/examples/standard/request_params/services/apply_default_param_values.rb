@@ -3,9 +3,9 @@
 module ConvenientService
   module Examples
     module Standard
-      module ResponseParams
+      module RequestParams
         module Services
-          class FilterOutUnpermittedParams
+          class ApplyDefaultParamValues
             include ConvenientService::Standard::Config
 
             attr_reader :params

@@ -3,7 +3,7 @@
 module ConvenientService
   module Examples
     module Standard
-      module ResponseParams
+      module RequestParams
         module Services
           class ApplyPolicyScopesToParams
             include ConvenientService::Standard::Config

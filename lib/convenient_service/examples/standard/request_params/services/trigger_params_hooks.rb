@@ -3,20 +3,19 @@
 module ConvenientService
   module Examples
     module Standard
-      module ResponseParams
+      module RequestParams
         module Services
-          class RemoveUnauthorizedParams
+          class TriggerParamsHooks
             include ConvenientService::Standard::Config
 
-            attr_reader :params, :role
+            attr_reader :params
 
-            def initialize(params:, role:)
+            def initialize(params:)
               @params = params
-              @role = role
             end
 
             def result
-              success(params: {})
+              success
             end
           end
         end

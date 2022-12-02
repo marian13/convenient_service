@@ -3,16 +3,15 @@
 module ConvenientService
   module Examples
     module Standard
-      module ResponseParams
+      module RequestParams
         module Services
-          class LogParams
+          class AuditParams
             include ConvenientService::Standard::Config
 
-            attr_reader :params, :tag
+            attr_reader :params
 
-            def initialize(params:, tag: "")
+            def initialize(params:)
               @params = params
-              @tag = tag
             end
 
             def result
