@@ -25,7 +25,7 @@ module ConvenientService
 
                   webrick_request.path
                 rescue ::WEBrick::HTTPStatus::BadRequest
-                  ""
+                  nil
                 end
               end
             end
