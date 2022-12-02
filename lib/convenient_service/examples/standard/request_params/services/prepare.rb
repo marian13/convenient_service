@@ -10,8 +10,8 @@ module ConvenientService
 
             attr_reader :request, :role
 
-            step Services::ExtractParamsFromHeaders, \
-              in: :request,
+            step Services::ExtractParamsFromPath, \
+              in: [:request, {pattern: -> { /^\/rules\/(?<id>\d+)\.(?<format>\w+)$/ }}],
               out: {params: :params_from_headers}
 
             step Services::ExtractParamsFromBody, \

@@ -4,6 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
+# rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Examples::Standard::RequestParams do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
@@ -46,3 +47,4 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams do
     end
   end
 end
+# rubocop:enable RSpec/NestedGroups

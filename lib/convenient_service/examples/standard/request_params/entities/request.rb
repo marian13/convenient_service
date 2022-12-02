@@ -11,6 +11,10 @@ module ConvenientService
             def initialize(http_string)
               @http_string = http_string
             end
+
+            def to_s
+              http_string
+            end
           end
         end
       end
