@@ -1,5 +1,18 @@
 # frozen_string_literal: true
 
+##
+# IMPORTANT: This matcher has a dedicated end-user doc. Do NOT forget to update it when needed.
+# https://github.com/marian13/convenient_service_docs/blob/main/docs/api/tests/rspec/matchers/delegate_to.mdx
+#
+# TODO: Refactor into composition:
+#   - Ability to compose when `delegate_to` is used `without_arguments`.
+#   - Ability to compose when `delegate_to` is used `with_arguments`.
+#   - Ability to compose when `delegate_to` is used `and_return_its_value`.
+#
+# TODO: Refactor to NOT use `expect` inside this matcher.
+# This way the matcher will return true or false, but never raise exceptions (descendant of Exception, not StandardError).
+# Then it will be easier to developer a fully comprehensive spec suite for `delegate_to`.
+#
 module ConvenientService
   module RSpec
     module Matchers
@@ -81,15 +94,7 @@ module ConvenientService
               # https://relishapp.com/rspec/rspec-mocks/docs/configuring-responses/wrapping-the-original-implementation
               #
               allow(object).to receive(method).and_wrap_original do |original, *actual_args, **actual_kwargs, &actual_block|
-                ##
-                # TODO: Provide customized error messages?
-                # https://relishapp.com/rspec/rspec-expectations/docs/customized-message
-                #
-                # NOTE: `delegate_to` expects that delegation is executed only once during `block_expectation`.
-                #
-                expect(actual_args).to eq(expected_args)
-                expect(actual_kwargs).to eq(expected_kwargs)
-                expect(actual_block).to eq(expected_block)
+                actual_arguments_collection << [actual_args, actual_kwargs, actual_block]
 
                 ##
                 # NOTE: Imitates `and_call_original`.
@@ -108,7 +113,7 @@ module ConvenientService
             ##
             # NOTE: If this expectation fails, it means `delegate_to` is NOT met.
             #
-            expect(object).to have_received(method)
+            expect(object).to have_received(method).at_least(1) unless used_with_arguments?
 
             ##
             # IMPORTANT: `and_return_its_value` works only when `delegate_to` checks a pure function.
@@ -166,7 +171,13 @@ module ConvenientService
             # NOTE: RSpec raises exception when any `expect` is NOT satisfied.
             # So, this `true` is returned only when all `expect` are successful.
             #
-            true
+            if used_with_arguments?
+              actual_arguments_collection.any? do |(actual_args, actual_kwargs, actual_block)|
+                actual_args == expected_args && actual_kwargs == expected_kwargs && actual_block == expected_block
+              end
+            else
+              true
+            end
           end
 
           ##
@@ -184,8 +195,16 @@ module ConvenientService
             "delegate to `#{printable_method}`"
           end
 
+          def failure_message
+            if used_with_arguments?
+              "expected `#{printable_block_expectation}` to delegate to `#{printable_method}` with expected arguments at least once, but it didn't."
+            else
+              "expected `#{printable_block_expectation}` to delegate to `#{printable_method}` at least once, but it didn't."
+            end
+          end
+
           ##
-          # IMPORTANT: `failure_message`, `failure_message_when_negated` are NOT implemented, since they are never called (since `matches?` always returns `true`).
+          # IMPORTANT: `failure_message_when_negated` is NOT supported yet.
           #
 
           def with_arguments(*args, **kwargs, &block)
@@ -248,6 +267,25 @@ module ConvenientService
           end
 
           alias_method :expected_block, :block
+
+          def actual_arguments_collection
+            @actual_arguments_collection ||= []
+          end
+
+          ##
+          # NOTE: An example of how RSpec extracts block source, but they marked it as private.
+          # https://github.com/rspec/rspec-expectations/blob/311aaf245f2c5493572bf683b8c441cb5f7e44c8/lib/rspec/matchers/built_in/change.rb#L437
+          #
+          # TODO: `printable_block_expectation` when `method_source` is available.
+          # https://github.com/banister/method_source
+          #
+          # def printable_block_expectation
+          #   @printable_block_expectation ||= block_expectation.source
+          # end
+          #
+          def printable_block_expectation
+            @printable_block_expectation ||= "{ ... }"
+          end
         end
       end
     end

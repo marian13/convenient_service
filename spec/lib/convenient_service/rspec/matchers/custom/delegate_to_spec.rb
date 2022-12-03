@@ -4,6 +4,10 @@ require "spec_helper"
 
 require "convenient_service"
 
+##
+# TODO: Refactor `delegate_to` to NOT use `expect` internally. Then rewrite this spec file completely.
+# IMPORTANT: Make sure you have specs when `block_expectation` does NOT delegate at all, delegates once, delegates multiple times.
+#
 # rubocop:disable RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo do
   subject(:matcher_result) { matcher.matches?(block_expectation) }
@@ -27,7 +31,17 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo do
 
   let(:block_expectation) { proc { object.foo } }
   let(:printable_method) { "#{klass}##{method}" }
-  let(:printable_block) { block_expectation.source }
+
+  ##
+  # NOTE: An example of how RSpec extracts block source, but they marked it as private.
+  # https://github.com/rspec/rspec-expectations/blob/311aaf245f2c5493572bf683b8c441cb5f7e44c8/lib/rspec/matchers/built_in/change.rb#L437
+  #
+  # TODO: `printable_block_expectation` when `method_source` is available.
+  # https://github.com/banister/method_source
+  #
+  # let(:printable_block_expectation) { block_expectation.source }
+  #
+  let(:printable_block_expectation) { "{ ... }" }
 
   describe "#matches?" do
     context "when used without chaining" do
@@ -144,8 +158,30 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo do
     end
   end
 
+  describe "#failure_message" do
+    context "when used without chaining" do
+      let(:matcher) { described_class.new(object, method) }
+
+      it "returns failure message for without chaining" do
+        expect(matcher.failure_message).to eq("expected `#{printable_block_expectation}` to delegate to `#{printable_method}` at least once, but it didn't.")
+      end
+    end
+
+    context "when used with `with_arguments(*args, **kwargs, &block)`" do
+      let(:matcher) { described_class.new(object, method).with_arguments(*args, **kwargs, &block) }
+
+      let(:args) { [:foo] }
+      let(:kwargs) { {foo: :bar} }
+      let(:block) { proc { :foo } }
+
+      it "returns failure message for `with_arguments(*args, **kwargs, &block)`" do
+        expect(matcher.failure_message).to eq("expected `#{printable_block_expectation}` to delegate to `#{printable_method}` with expected arguments at least once, but it didn't.")
+      end
+    end
+  end
+
   ##
-  # IMPORTANT: `failure_message`, `failure_message_when_negated` are NOT implemented, since they are never called (since `matches?` always returns `true`).
+  # IMPORTANT: `failure_message_when_negated` is NOT supported yet.
   #
 
   describe "#with_arguments" do
