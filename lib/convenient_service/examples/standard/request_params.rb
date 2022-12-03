@@ -17,12 +17,12 @@ require_relative "request_params/utils"
 #         User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36
 #         Host: code-review.com
 #         Content-Type: application/json; charset=utf-8
-#         Content-Length: length
+#         Content-Length: 47
 #         Accept-Language: en-us
 #         Accept-Encoding: gzip, deflate
 #         Connection: Keep-Alive
 #
-#         {title:"",description:"",tags:["","",""]}
+#         {"title":"","description":"","tags":["","",""]}
 #       TEXT
 #
 #     request = ConvenientService::Examples::Standard::RequestParams::Entities::Request.new(http_string)

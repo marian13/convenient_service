@@ -12,21 +12,21 @@ module ConvenientService
 
             step Services::ExtractParamsFromPath, \
               in: [:request, {pattern: raw(/^\/rules\/(?<id>\d+)\.(?<format>\w+)$/)}],
-              out: {params: :params_from_headers}
+              out: {params: :params_from_path}
 
             step Services::ExtractParamsFromBody, \
               in: :request,
               out: {params: :params_from_body}
 
             step Services::MergeParams, \
-              in: [:params_from_headers, :params_from_body],
+              in: [:params_from_path, :params_from_body],
               out: :params
 
             step Services::LogRequestParams, \
               in: [:request, :params, tag: raw("Uncasted")]
 
             step Services::FilterOutUnpermittedParams, \
-              in: :params,
+              in: [:params, {permitted_keys: raw([:id, :title, :description, :tags])}],
               out: reassign(:params)
 
             step Services::ApplyDefaultParamValues, \

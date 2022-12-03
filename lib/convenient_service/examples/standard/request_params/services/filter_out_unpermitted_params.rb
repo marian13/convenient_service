@@ -8,14 +8,15 @@ module ConvenientService
           class FilterOutUnpermittedParams
             include ConvenientService::Standard::Config
 
-            attr_reader :params
+            attr_reader :params, :permitted_keys
 
-            def initialize(params:)
+            def initialize(params:, permitted_keys:)
               @params = params
+              @permitted_keys = permitted_keys
             end
 
             def result
-              success(params: {})
+              success(params: params.slice(*permitted_keys))
             end
           end
         end

@@ -80,59 +80,78 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::P
         allow(ConvenientService::Examples::Standard::RequestParams::Entities::Logger).to receive(:log).with(anything)
       end
 
-      context "when \"unhappy path\"" do
-        context "when fails to extract params from path" do
-          ##
-          # Contains invalid path.
-          # https://www.w3.org/TR/2011/WD-html5-20110525/urls.html
-          #
-          let(:path) { "/ru*les/1.json" }
-          let(:pattern) { /^\/rules\/(?<id>\d+)\.(?<format>\w+)$/ }
+      context "when request is NOT valid to extract params from path" do
+        ##
+        # Contains invalid path.
+        # https://www.w3.org/TR/2011/WD-html5-20110525/urls.html
+        #
+        let(:path) { "/ru*les/1.json" }
+        let(:pattern) { /^\/rules\/(?<id>\d+)\.(?<format>\w+)$/ }
 
-          let(:message) { "Path `#{path}` does NOT match pattern `#{pattern}`." }
+        let(:message) { "Path `#{path}` does NOT match pattern `#{pattern}`." }
 
-          it "returns intermediate error" do
-            expect(result)
-              .to be_error
-              .of(ConvenientService::Examples::Standard::RequestParams::Services::ExtractParamsFromPath)
-              .with_message(message)
-          end
+        it "fails to extract params from path" do
+          expect(result)
+            .to be_error
+            .of(ConvenientService::Examples::Standard::RequestParams::Services::ExtractParamsFromPath)
+            .with_message(message)
+        end
+      end
+
+      context "when request is NOT valid to extract params from body" do
+        ##
+        # Contains unparsable JSON body.
+        #
+        let(:body) { "abc" }
+
+        let(:message) do
+          <<~MESSAGE
+            Request body contains invalid json.
+
+            Request:
+            ---
+            #{request}
+            ---
+          MESSAGE
         end
 
-        context "when fails to extract params from body" do
+        it "fails to extract params from body" do
+          expect(result)
+            .to be_error
+            .of(ConvenientService::Examples::Standard::RequestParams::Services::ExtractParamsFromBody)
+            .with_message(message)
+        end
+      end
+
+      context "when request is valid to extract params from both path and body" do
+        it "merges params extracted from path and body" do
           ##
-          # Contains unparsable JSON body.
+          # TODO: Introduce `delegate_to_service` to hide `commit_config!`.
           #
-          let(:body) { "abc" }
+          ConvenientService::Examples::Standard::RequestParams::Services::MergeParams.commit_config!
 
-          let(:message) do
-            <<~MESSAGE
-              Request body contains invalid json.
+          expect { result }
+            .to delegate_to(ConvenientService::Examples::Standard::RequestParams::Services::MergeParams, :result)
+            .with_arguments(params_from_path: path_params, params_from_body: body_params)
+        end
 
-              Request:
-              ---
-              #{request}
-              ---
-            MESSAGE
-          end
+        it "logs merged params from path and body with \"Uncasted\" tag" do
+          ##
+          # TODO: Introduce `delegate_to_service` to hide `commit_config!`.
+          #
+          ConvenientService::Examples::Standard::RequestParams::Services::LogRequestParams.commit_config!
 
-          it "returns intermediate error" do
-            expect(result)
-              .to be_error
-              .of(ConvenientService::Examples::Standard::RequestParams::Services::ExtractParamsFromBody)
-              .with_message(message)
-          end
+          ##
+          # TODO: Change default `delegate_to` behaviour from `exactly_once` to `at_least_once`.
+          #
+          expect { result }
+            .to delegate_to(ConvenientService::Examples::Standard::RequestParams::Services::LogRequestParams, :result)
+            .with_arguments(request: request, params: path_params.merge(body_params), tag: "Uncasted")
         end
       end
 
       context "when \"happy path\"" do
         let(:prepared_params) { path_params.merge(body_params) }
-
-        it "logs uncasted params" do
-          result
-
-          expect(ConvenientService::Examples::Standard::RequestParams::Entities::Logger).to have_received(:log).with(uncasted_params_log_message)
-        end
 
         it "returns success with prepared params" do
           expect(result).to be_success.with_data(params: prepared_params)

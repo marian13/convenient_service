@@ -8,15 +8,15 @@ module ConvenientService
           class MergeParams
             include ConvenientService::Standard::Config
 
-            attr_reader :params_from_headers, :params_from_body
+            attr_reader :params_from_path, :params_from_body
 
-            def initialize(params_from_headers:, params_from_body:)
-              @params_from_headers = params_from_headers
+            def initialize(params_from_path:, params_from_body:)
+              @params_from_path = params_from_path
               @params_from_body = params_from_body
             end
 
             def result
-              success(params: params_from_headers.merge(params_from_body))
+              success(params: params_from_path.merge(params_from_body))
             end
           end
         end
