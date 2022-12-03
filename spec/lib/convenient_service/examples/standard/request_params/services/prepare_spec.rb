@@ -65,6 +65,21 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::P
 
       let(:body_params) { json_body.transform_keys(&:to_sym) }
 
+      let(:uncasted_params) { path_params.merge(body_params) }
+
+      let(:uncasted_params_log_message) do
+        <<~MESSAGE
+          [Thread##{Thread.current.object_id}][Request##{request.object_id}][Params][Uncasted]:
+          {
+          #{uncasted_params.map { |key, value| "  #{key}: #{value.inspect}" }.join("  \n")}
+          }
+        MESSAGE
+      end
+
+      before do
+        allow(ConvenientService::Examples::Standard::RequestParams::Entities::Logger).to receive(:log).with(anything)
+      end
+
       context "when \"unhappy path\"" do
         context "when fails to extract params from path" do
           ##
@@ -112,6 +127,12 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::P
 
       context "when \"happy path\"" do
         let(:prepared_params) { path_params.merge(body_params) }
+
+        it "logs uncasted params" do
+          result
+
+          expect(ConvenientService::Examples::Standard::RequestParams::Entities::Logger).to have_received(:log).with(uncasted_params_log_message)
+        end
 
         it "returns success with prepared params" do
           expect(result).to be_success.with_data(params: prepared_params)

@@ -11,7 +11,7 @@ module ConvenientService
             attr_reader :request, :role
 
             step Services::ExtractParamsFromPath, \
-              in: [:request, {pattern: -> { /^\/rules\/(?<id>\d+)\.(?<format>\w+)$/ }}],
+              in: [:request, {pattern: raw(/^\/rules\/(?<id>\d+)\.(?<format>\w+)$/)}],
               out: {params: :params_from_headers}
 
             step Services::ExtractParamsFromBody, \
@@ -22,8 +22,8 @@ module ConvenientService
               in: [:params_from_headers, :params_from_body],
               out: :params
 
-            step Services::LogParams, \
-              in: [:params, tag: -> { :raw }]
+            step Services::LogRequestParams, \
+              in: [:request, :params, tag: raw("Uncasted")]
 
             step Services::FilterOutUnpermittedParams, \
               in: :params,
@@ -40,8 +40,8 @@ module ConvenientService
               in: :params,
               out: reassign(:params)
 
-            step Services::LogParams, \
-              in: [:params, tag: -> { :casted }]
+            step Services::LogRequestParams, \
+              in: [:request, :params, tag: raw("Casted")]
 
             step Services::ValidateCastedParams, \
               in: :params

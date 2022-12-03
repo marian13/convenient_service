@@ -4,15 +4,13 @@ module ConvenientService
   module Examples
     module Standard
       module RequestParams
-        module Constants
-          module Roles
-            ADMIN = :admin_role
-
-            GUEST = :guest_role
-          end
-
-          module Tags
-            EMPTY = ""
+        module Entities
+          class Logger
+            class << self
+              def log(message)
+                puts message
+              end
+            end
           end
         end
       end
