@@ -16,7 +16,7 @@ module ConvenientService
             end
 
             def result
-              success(params: {})
+              success(params: params_from_headers.merge(params_from_body))
             end
           end
         end

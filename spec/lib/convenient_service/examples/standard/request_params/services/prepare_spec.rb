@@ -49,8 +49,21 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::P
         TEXT
       end
 
-      let(:body) { "{\"title\":\"\",\"description\":\"\",\"tags\":[\"\",\"\",\"\"]}" }
-      let(:path) { "/rules/1.json" }
+      let(:path) { "/rules/%{id}.%{format}" % path_params }
+
+      let(:path_params) { {id: "1", format: "json"} }
+
+      let(:body) { JSON.generate(json_body) }
+
+      let(:json_body) do
+        {
+          title: "",
+          description: "",
+          tags: ["", "", ""]
+        }
+      end
+
+      let(:body_params) { json_body.transform_keys(&:to_sym) }
 
       context "when \"unhappy path\"" do
         context "when fails to extract params from path" do
@@ -98,7 +111,7 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::P
       end
 
       context "when \"happy path\"" do
-        let(:prepared_params) { {} }
+        let(:prepared_params) { path_params.merge(body_params) }
 
         it "returns success with prepared params" do
           expect(result).to be_success.with_data(params: prepared_params)

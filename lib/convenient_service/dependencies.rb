@@ -100,6 +100,7 @@ module ConvenientService
       # @api private
       #
       def require_standard_examples
+        require "json"
         require "progressbar"
         require "webrick"
 
@@ -115,6 +116,7 @@ module ConvenientService
       # @api private
       #
       def require_rails_examples
+        require "json"
         require "progressbar"
         require "webrick"
 
@@ -128,6 +130,7 @@ module ConvenientService
       # @api private
       #
       def require_dry_examples
+        require "json"
         require "progressbar"
         require "webrick"
 
