@@ -8,7 +8,7 @@ require "convenient_service"
 # TODO: Refactor `delegate_to` to NOT use `expect` internally. Then rewrite this spec file completely.
 # IMPORTANT: Make sure you have specs when `block_expectation` does NOT delegate at all, delegates once, delegates multiple times.
 #
-# rubocop:disable RSpec/MultipleMemoizedHelpers
+# rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo do
   subject(:matcher_result) { matcher.matches?(block_expectation) }
 
@@ -389,4 +389,4 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo do
     end
   end
 end
-# rubocop:enable RSpec/MultipleMemoizedHelpers
+# rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers

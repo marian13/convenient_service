@@ -4,8 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-##
-# rubocop:disable RSpec/MultipleMemoizedHelpers
+# rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher do
   let(:matcher) { described_class.new(object: object, method: method) }
 
@@ -76,4 +75,4 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
     end
   end
 end
-# rubocop:enable RSpec/MultipleMemoizedHelpers
+# rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers

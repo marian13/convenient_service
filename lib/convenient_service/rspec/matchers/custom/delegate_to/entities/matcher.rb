@@ -80,6 +80,8 @@ module ConvenientService
               # @return [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Arguments]
               #
               def expected_arguments=(arguments)
+                raise Errors::InvalidExpectedArguments.new unless arguments.instance_of?(Entities::Arguments)
+
                 @expected_arguments = arguments
               end
 

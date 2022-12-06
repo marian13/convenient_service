@@ -60,7 +60,7 @@ module ConvenientService
                 end
 
                 ##
-                # @param value [Object]
+                # @param block_expectation_value [Object]
                 # @return [Boolean]
                 #
                 def matches?(block_expectation_value)
@@ -128,9 +128,11 @@ module ConvenientService
                 # @return [String]
                 #
                 def failure_message
-                  "expected `#{printable_block_expectation}` to delegate to `#{printable_method}` and return its value, but it didn't."
+                  <<~MESSAGE
+                    expected `#{printable_block_expectation}` to delegate to `#{printable_method}` and return its value, but it didn't.
 
-                  "`#{printable_block_expectation}` returns `#{value}`, but delegation returns `#{delegation_value}`"
+                    `#{printable_block_expectation}` returns `#{value}`, but delegation returns `#{delegation_value}`.
+                  MESSAGE
                 end
 
                 private
