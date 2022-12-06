@@ -30,6 +30,10 @@ module ConvenientService
                           alias_method :__original_#{name}__, :#{name}
 
                           def #{name}
+                            # index, name = #{index}
+
+                            # byebug
+
                             step =
                               steps.slice(0..#{index})
                                 .select(&:completed?)

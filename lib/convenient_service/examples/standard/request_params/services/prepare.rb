@@ -26,11 +26,11 @@ module ConvenientService
               in: [:request, :params, tag: raw("Uncasted")]
 
             step Services::FilterOutUnpermittedParams, \
-              in: [:params, {permitted_keys: raw([:id, :title, :description, :tags])}],
+              in: [:params, {permitted_keys: raw([:id, :format, :title, :description, :tags, :sources])}],
               out: reassign(:params)
 
             step Services::ApplyDefaultParamValues, \
-              in: :params,
+              in: [:params, defaults: raw({tags: [], sources: []})],
               out: reassign(:params)
 
             step Services::ValidateUncastedParams, \

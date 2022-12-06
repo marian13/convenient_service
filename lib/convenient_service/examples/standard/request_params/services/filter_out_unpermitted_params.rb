@@ -16,6 +16,8 @@ module ConvenientService
             end
 
             def result
+              # byebug
+
               success(params: params.slice(*permitted_keys))
             end
           end

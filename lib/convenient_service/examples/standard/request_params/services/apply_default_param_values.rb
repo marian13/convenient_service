@@ -8,14 +8,15 @@ module ConvenientService
           class ApplyDefaultParamValues
             include ConvenientService::Standard::Config
 
-            attr_reader :params
+            attr_reader :params, :defaults
 
-            def initialize(params:)
+            def initialize(params:, defaults:)
               @params = params
+              @defaults = defaults
             end
 
             def result
-              success(params: {})
+              success(params: defaults.merge(params))
             end
           end
         end

@@ -59,22 +59,17 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::P
         {
           title: "",
           description: "",
-          tags: ["", "", ""]
+          tags: ["", "", ""],
+          sources: [],
+          verified: true
         }
       end
 
       let(:body_params) { json_body.transform_keys(&:to_sym) }
 
-      let(:uncasted_params) { path_params.merge(body_params) }
+      let(:merged_params) { path_params.merge(body_params) }
 
-      let(:uncasted_params_log_message) do
-        <<~MESSAGE
-          [Thread##{Thread.current.object_id}][Request##{request.object_id}][Params][Uncasted]:
-          {
-          #{uncasted_params.map { |key, value| "  #{key}: #{value.inspect}" }.join("  \n")}
-          }
-        MESSAGE
-      end
+      let(:permitted_params) { merged_params.slice(*(merged_params.keys - [:verified])) }
 
       before do
         allow(ConvenientService::Examples::Standard::RequestParams::Entities::Logger).to receive(:log).with(anything)
@@ -141,12 +136,23 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::P
           #
           ConvenientService::Examples::Standard::RequestParams::Services::LogRequestParams.commit_config!
 
-          ##
-          # TODO: Change default `delegate_to` behaviour from `exactly_once` to `at_least_once`.
-          #
           expect { result }
             .to delegate_to(ConvenientService::Examples::Standard::RequestParams::Services::LogRequestParams, :result)
-            .with_arguments(request: request, params: path_params.merge(body_params), tag: "Uncasted")
+            .with_arguments(request: request, params: merged_params, tag: "Uncasted")
+        end
+
+        it "filters out unpermitted keys" do
+          expect { result }
+            .to delegate_to(ConvenientService::Examples::Standard::RequestParams::Services::FilterOutUnpermittedParams, :result)
+            .with_arguments(params: merged_params, permitted_keys: [:id, :format, :title, :description, :tags, :sources])
+        end
+
+        it "applies default value" do
+          # byebug
+
+          expect { result }
+            .to delegate_to(ConvenientService::Examples::Standard::RequestParams::Services::ApplyDefaultParamValues, :result)
+            .with_arguments(params: permitted_params, defaults: {tags: [], sources: []})
         end
       end
 
