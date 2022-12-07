@@ -68,6 +68,9 @@ module ConvenientService
         ##
         # @return [Object] Value of own const. Can be any type.
         #
+        # @internal
+        #   TODO: Wrap by mutex?
+        #
         def call
           ##
           # NOTE: > If `inherit` is `false`, the lookup only checks the constants in the receiver:
