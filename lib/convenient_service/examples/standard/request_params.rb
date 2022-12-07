@@ -25,7 +25,7 @@ require_relative "request_params/utils"
 #         {"title":"","description":"","tags":["","",""]}
 #       TEXT
 #
-#     request = ConvenientService::Examples::Standard::RequestParams::Entities::Request.new(http_string)
+#     request = ConvenientService::Examples::Standard::RequestParams::Entities::Request.new(http_string:)
 #
 #     ConvenientService::Examples::Standard::RequestParams.prepare(request, role: :guest)
 #     ConvenientService::Examples::Standard::RequestParams.prepare(request, role: :admin)

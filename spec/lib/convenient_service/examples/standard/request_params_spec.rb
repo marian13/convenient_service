@@ -25,7 +25,7 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams do
         TEXT
       end
 
-      let(:request) { described_class::Entities::Request.new(http_string) }
+      let(:request) { described_class::Entities::Request.new(http_string: http_string) }
 
       let(:role) { described_class::Constants::Roles::ADMIN }
 

@@ -36,9 +36,9 @@ module ConvenientService
             def prefix
               text = "[Thread##{Thread.current.object_id}]"
 
-              text += "[Request##{request.object_id}]"
-              text += "[Params]"
-              text += "[#{tag}]" unless tag.empty?
+              text += " [Request##{request.object_id}]"
+              text += " [Params]"
+              text += " [#{tag}]" unless tag.empty?
 
               text
             end

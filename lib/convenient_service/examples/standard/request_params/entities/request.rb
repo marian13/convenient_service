@@ -8,7 +8,7 @@ module ConvenientService
           class Request
             attr_reader :http_string
 
-            def initialize(http_string)
+            def initialize(http_string:)
               @http_string = http_string
             end
 

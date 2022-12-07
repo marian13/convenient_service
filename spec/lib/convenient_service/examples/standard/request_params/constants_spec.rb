@@ -14,7 +14,7 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Constants d
 
     describe "Roles::GUEST" do
       it "returns `:guest`" do
-        expect(described_class::Roles::ADMIN).to eq(:guest)
+        expect(described_class::Roles::GUEST).to eq(:guest)
       end
     end
 

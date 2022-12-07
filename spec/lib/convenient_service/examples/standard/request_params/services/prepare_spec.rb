@@ -13,7 +13,7 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::P
 
       subject(:result) { described_class.result(request: request, role: role) }
 
-      let(:request) { ConvenientService::Examples::Standard::RequestParams::Entities::Request.new(http_string) }
+      let(:request) { ConvenientService::Examples::Standard::RequestParams::Entities::Request.new(http_string: http_string) }
       let(:role) { ConvenientService::Examples::Standard::RequestParams::Constants::Roles::ADMIN }
 
       ##
@@ -142,13 +142,15 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::P
         end
 
         it "filters out unpermitted keys" do
+          ConvenientService::Examples::Standard::RequestParams::Services::FilterOutUnpermittedParams.commit_config!
+
           expect { result }
             .to delegate_to(ConvenientService::Examples::Standard::RequestParams::Services::FilterOutUnpermittedParams, :result)
             .with_arguments(params: merged_params, permitted_keys: [:id, :format, :title, :description, :tags, :sources])
         end
 
         it "applies default value" do
-          # byebug
+          ConvenientService::Examples::Standard::RequestParams::Services::ApplyDefaultParamValues.commit_config!
 
           expect { result }
             .to delegate_to(ConvenientService::Examples::Standard::RequestParams::Services::ApplyDefaultParamValues, :result)
