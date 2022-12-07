@@ -12,7 +12,7 @@ module ConvenientService
               module Callers
                 class Reassignment < Callers::Base
                   def reassignment?(name:, method:)
-                    method.name == name
+                    method.name.value == name
                   end
 
                   def calculate_value(method)

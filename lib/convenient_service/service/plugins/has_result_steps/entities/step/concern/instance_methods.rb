@@ -50,6 +50,10 @@ module ConvenientService
                   Utils::Bool.to_bool(organizer)
                 end
 
+                def has_reassignment?(name)
+                  outputs.any? { |output| output.reassignment?(name) }
+                end
+
                 def completed?
                   Utils::Bool.to_bool(@completed)
                 end
@@ -103,14 +107,17 @@ module ConvenientService
                 end
 
                 ##
-                # IMPORTANT: `service.result(**input_values)` is the reason, why services should have only kwargs as arguments.
+                # @internal
+                #   IMPORTANT: `service.result(**input_values)` is the reason, why services should have only kwargs as arguments.
                 #
                 def calculate_result
                   assert_has_organizer!
 
+                  result = service.result(**input_values)
+
                   mark_as_completed!
 
-                  service.result(**input_values)
+                  result
                 end
 
                 def resolve_params

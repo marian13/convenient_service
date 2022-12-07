@@ -23,28 +23,37 @@ module ConvenientService
                         @index = index
                       end
 
+                      ##
+                      # @return [Boolean]
+                      #
                       def call
-                        return if Utils::Module.instance_method_defined?(container.klass, "__original_#{name}__", private: true)
+                        ##
+                        # NOTE: `prepend` is thread-safe.
+                        #
+                        container.klass.prepend reassigned_methods
 
-                        <<~RUBY.tap { |code| container.klass.class_eval(code, __FILE__, __LINE__ + 1) }
-                          alias_method :__original_#{name}__, :#{name}
+                        return false if Utils::Module.instance_method_defined?(reassigned_methods, method, private: true)
 
+                        <<~RUBY.tap { |code| reassigned_methods.module_eval(code, __FILE__, __LINE__ + 1) }
                           def #{name}
-                            # index, name = #{index}
-
-                            # byebug
-
-                            step =
-                              steps.slice(0..#{index})
-                                .select(&:completed?)
-                                .reverse
-                                .find { |step| step.outputs.any? { |output| output.reassignment?(:#{name}) } }
-
-                            step ? step.result.data[:#{name}] : __send__(:__original_#{name}__)
+                            steps
+                              .select { |step| step.has_reassignment?(__method__) }
+                              .select(&:completed?)
+                              .last
+                              .then { |step| step ? step.result.data[__method__] : super }
                           end
                         RUBY
 
                         true
+                      end
+
+                      private
+
+                      ##
+                      # @return [Module]
+                      #
+                      def reassigned_methods
+                        @reassigned_methods ||= Utils::Module.fetch_own_const(container.klass, :ReassignedMethods) { ::Module.new }
                       end
                     end
                   end
