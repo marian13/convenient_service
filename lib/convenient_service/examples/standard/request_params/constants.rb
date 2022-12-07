@@ -6,9 +6,9 @@ module ConvenientService
       module RequestParams
         module Constants
           module Roles
-            ADMIN = :admin_role
+            ADMIN = :admin
 
-            GUEST = :guest_role
+            GUEST = :guest
           end
 
           module Tags
