@@ -7,8 +7,10 @@ module ConvenientService
         module Entities
           class Logger
             class << self
-              def log(message)
-                puts message
+              def log(message, out: $stdout)
+                out.puts message
+
+                message
               end
             end
           end
