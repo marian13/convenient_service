@@ -183,6 +183,12 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::P
             .to delegate_to(ConvenientService::Examples::Standard::RequestParams::Services::CastParams, :result)
             .with_arguments(params: params_with_defaults)
         end
+
+        it "logs merged params from path and body with \"Uncasted\" tag" do
+          expect { result }
+            .to delegate_to(ConvenientService::Examples::Standard::RequestParams::Services::LogRequestParams, :result)
+            .with_arguments(request: request, params: casted_params, tag: "Casted")
+        end
       end
 
       context "when \"happy path\"" do
