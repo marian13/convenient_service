@@ -51,13 +51,13 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::P
 
       let(:path) { "/rules/%{id}.%{format}" % path_params }
 
-      let(:path_params) { {id: "1", format: "json"} }
+      let(:path_params) { {id: "1", format: "html"} }
 
       let(:body) { JSON.generate(json_body) }
 
       let(:json_body) do
         {
-          title: "",
+          title: "Avoid error shadowing",
           description: "",
           tags: ["", "", ""],
           sources: [],
@@ -70,6 +70,11 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::P
       let(:merged_params) { path_params.merge(body_params) }
 
       let(:permitted_params) { merged_params.slice(*(merged_params.keys - [:verified])) }
+
+      let(:params_with_defaults) { defaults.merge(permitted_params) }
+
+      let(:permitted_keys) { [:id, :format, :title, :description, :tags, :sources] }
+      let(:defaults) { {format: "html", tags: [], sources: []} }
 
       before do
         allow(ConvenientService::Examples::Standard::RequestParams::Entities::Logger).to receive(:log).with(anything)
@@ -146,7 +151,7 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::P
 
           expect { result }
             .to delegate_to(ConvenientService::Examples::Standard::RequestParams::Services::FilterOutUnpermittedParams, :result)
-            .with_arguments(params: merged_params, permitted_keys: [:id, :format, :title, :description, :tags, :sources])
+            .with_arguments(params: merged_params, permitted_keys: permitted_keys)
         end
 
         it "applies default value" do
@@ -154,7 +159,13 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::P
 
           expect { result }
             .to delegate_to(ConvenientService::Examples::Standard::RequestParams::Services::ApplyDefaultParamValues, :result)
-            .with_arguments(params: permitted_params, defaults: {tags: [], sources: []})
+            .with_arguments(params: permitted_params, defaults: defaults)
+        end
+
+        it "validates uncasted params" do
+          expect { result }
+            .to delegate_to(ConvenientService::Examples::Standard::RequestParams::Services::ValidateUncastedParams, :result)
+            .with_arguments(params: params_with_defaults)
         end
       end
 

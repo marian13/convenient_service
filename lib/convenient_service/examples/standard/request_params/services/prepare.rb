@@ -30,7 +30,7 @@ module ConvenientService
               out: reassign(:params)
 
             step Services::ApplyDefaultParamValues, \
-              in: [:params, defaults: raw({tags: [], sources: []})],
+              in: [:params, defaults: raw({format: "html", tags: [], sources: []})],
               out: reassign(:params)
 
             step Services::ValidateUncastedParams, \
