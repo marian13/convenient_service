@@ -15,7 +15,19 @@ module ConvenientService
             end
 
             def result
-              success(params: {})
+              success(params: casted_params)
+            end
+
+            private
+
+            def casted_params
+              {
+                id: Entities::ID.cast(params[:id]),
+                title: Entities::Title.cast(params[:title]),
+                description: Entities::Description.cast(params[:description]),
+                tags: params[:tags].map { |tag| Entities::Tag.cast(tag) },
+                sources: params[:sources].map { |source| Entities::Source.cast(source) }
+              }
             end
           end
         end

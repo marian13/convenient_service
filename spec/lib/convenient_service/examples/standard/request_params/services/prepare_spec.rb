@@ -73,6 +73,16 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::P
 
       let(:params_with_defaults) { defaults.merge(permitted_params) }
 
+      let(:casted_params) do
+        {
+          id: ConvenientService::Examples::Standard::RequestParams::Entities::ID.cast(params_with_defaults[:id]),
+          title: ConvenientService::Examples::Standard::RequestParams::Entities::Title.cast(params_with_defaults[:title]),
+          description: ConvenientService::Examples::Standard::RequestParams::Entities::Description.cast(params_with_defaults[:description]),
+          tags: params_with_defaults[:tags].map { |tag| ConvenientService::Examples::Standard::RequestParams::Entities::Tag.cast(tag) },
+          sources: params_with_defaults[:sources].map { |source| ConvenientService::Examples::Standard::RequestParams::Entities::Source.cast(source) }
+        }
+      end
+
       let(:permitted_keys) { [:id, :format, :title, :description, :tags, :sources] }
       let(:defaults) { {format: "html", tags: [], sources: []} }
 
@@ -165,6 +175,12 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::P
         it "validates uncasted params" do
           expect { result }
             .to delegate_to(ConvenientService::Examples::Standard::RequestParams::Services::ValidateUncastedParams, :result)
+            .with_arguments(params: params_with_defaults)
+        end
+
+        it "casts params" do
+          expect { result }
+            .to delegate_to(ConvenientService::Examples::Standard::RequestParams::Services::CastParams, :result)
             .with_arguments(params: params_with_defaults)
         end
       end

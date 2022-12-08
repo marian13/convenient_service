@@ -81,6 +81,9 @@ module ConvenientService
                   # https://relishapp.com/rspec/rspec-mocks/docs/configuring-responses/wrapping-the-original-implementation
                   #
                   allow(object).to receive(method).and_wrap_original do |original, *actual_args, **actual_kwargs, &actual_block|
+                    ##
+                    # TODO: Add backtrace for easier reason tracing.
+                    #
                     delegations << Entities::Delegation.new(args: actual_args, kwargs: actual_kwargs, block: actual_block)
 
                     ##
@@ -118,6 +121,13 @@ module ConvenientService
                 #
                 def failure_message
                   "expected `#{printable_block_expectation}` to delegate to `#{printable_method}` with any arguments at least once, but it didn't."
+                end
+
+                ##
+                # @return [String]
+                #
+                def failure_message_when_negated
+                  "expected `#{printable_block_expectation}` NOT to delegate to `#{printable_method}` with any arguments at least once, but it did."
                 end
               end
             end

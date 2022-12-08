@@ -86,6 +86,9 @@ module ConvenientService
                   # https://relishapp.com/rspec/rspec-mocks/docs/configuring-responses/wrapping-the-original-implementation
                   #
                   allow(object).to receive(method).and_wrap_original do |original, *actual_args, **actual_kwargs, &actual_block|
+                    ##
+                    # TODO: Add backtrace for easier reason tracing.
+                    #
                     delegations << Entities::Delegation.new(args: actual_args, kwargs: actual_kwargs, block: actual_block)
 
                     ##
@@ -131,6 +134,24 @@ module ConvenientService
                   MESSAGE
                 end
 
+                ##
+                # @return [String]
+                #
+                def failure_message
+                  <<~MESSAGE
+                    #{failure_message_expected_part}
+
+                    #{failure_message_got_part}
+                  MESSAGE
+                end
+
+                ##
+                # @return [String]
+                #
+                def failure_message_when_negated
+                  "expected `#{printable_block_expectation}` NOT to delegate to `#{printable_method}` with `#{printable_expected_arguments}` at least once, but it did."
+                end
+
                 private
 
                 def failure_message_expected_part
@@ -144,6 +165,7 @@ module ConvenientService
                     "got delegated with #{printable_actual_arguments}"
                   end
                 end
+
 
                 def printable_expected_arguments
                   Commands::GeneratePrintableArguments.call(arguments: expected_arguments)

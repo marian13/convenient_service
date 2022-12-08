@@ -135,6 +135,15 @@ module ConvenientService
                   MESSAGE
                 end
 
+                ##
+                # @return [String]
+                #
+                def failure_message_when_negated
+                  <<~MESSAGE
+                    expected `#{printable_block_expectation}` NOT to delegate to `#{printable_method}` and return its value, but it did.
+                  MESSAGE
+                end
+
                 private
 
                 def delegation_value
