@@ -49,6 +49,7 @@
 | Low | 🚧 | Prefer versioning instead of modification plugin | |
 | Low | 🚧 | Consider to move `__steps__` and `__callbacks__` to `internals_class` | Benefit? |
 | Medium | 🚧 | User friendly `raise` that removes lib backtrace from caller | Should have a `debug` mode. Should work well with examples |
-| High | 🚧 | A plugin that catches `StandardError` and returns `failure` | Shoule be the lowest in the stack |
+| High | 🚧 | A plugin that catches `StandardError` and returns `failure` | Should be the lowest in the stack |
+| High | 🚧 | `Support::Command` alias | Should be visible to the end user |
 
 Search for `TODO`s in the codebase for more tasks.
