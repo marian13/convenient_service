@@ -48,7 +48,7 @@
 | Low | 🚧 | [Receive Counts](https://relishapp.com/rspec/rspec-mocks/docs/setting-constraints/receive-counts) for `delegate_to` | | 
 | Low | 🚧 | Prefer versioning instead of modification plugin | |
 | Low | 🚧 | Consider to move `__steps__` and `__callbacks__` to `internals_class` | Benefit? |
-| Medium | 🚧 | User friendly `raise` that removes lib backtrace from caller | Should have a `debug` mode |
-| High | 🚧 | A plugin that catches `StandardError` and return `failure` | Shoule be the lowest in the stack |
+| Medium | 🚧 | User friendly `raise` that removes lib backtrace from caller | Should have a `debug` mode. Should work well with examples |
+| High | 🚧 | A plugin that catches `StandardError` and returns `failure` | Shoule be the lowest in the stack |
 
 Search for `TODO`s in the codebase for more tasks.
