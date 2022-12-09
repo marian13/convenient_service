@@ -36,11 +36,17 @@ module ConvenientService
 
                         <<~RUBY.tap { |code| reassigned_methods.module_eval(code, __FILE__, __LINE__ + 1) }
                           def #{name}
-                            steps
-                              .select { |step| step.has_reassignment?(__method__) }
-                              .select(&:completed?)
-                              .last
-                              .then { |step| step ? step.result.data[__method__] : super }
+                            step =
+                              steps
+                                .select { |step| step.has_reassignment?(__method__) }
+                                .select(&:completed?)
+                                .last
+
+                            return super unless step
+
+                            key = step.reassignment(__method__).key.to_sym
+
+                            step.result.data[key]
                           end
                         RUBY
 

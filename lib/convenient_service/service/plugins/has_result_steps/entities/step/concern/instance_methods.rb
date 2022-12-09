@@ -58,6 +58,10 @@ module ConvenientService
                   Utils::Bool.to_bool(@completed)
                 end
 
+                def reassignment(name)
+                  outputs.find { |output| output.reassignment?(name) }
+                end
+
                 def params
                   @params ||= resolve_params
                 end

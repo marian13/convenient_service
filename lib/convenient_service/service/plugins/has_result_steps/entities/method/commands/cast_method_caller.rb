@@ -56,6 +56,8 @@ module ConvenientService
                     Entities::Callers::Proc.new(value)
                   when Entities::Values::Raw
                     Entities::Callers::Raw.new(value)
+                  when Entities::Values::Reassignment
+                    Entities::Callers::Reassignment.new(value)
                   end
                 end
 

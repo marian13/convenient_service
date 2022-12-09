@@ -12,16 +12,23 @@ module ConvenientService
                 # TODO: Specs.
                 #
                 class Reassignment
-                  attr_reader :method_name
+                  include Support::Delegate
 
-                  def initialize(method_name)
-                    @method_name = method_name
+                  attr_reader :value
+
+                  delegate :to_s, :to_sym, to: :value
+
+                  ##
+                  # @param value [String, Symbole] Method name to reassign.
+                  #
+                  def initialize(value)
+                    @value = value
                   end
 
                   def ==(other)
                     return unless other.instance_of?(self.class)
 
-                    method_name == other.method_name
+                    value == other.value
                   end
                 end
               end

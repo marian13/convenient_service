@@ -58,7 +58,7 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::P
       let(:json_body) do
         {
           title: "Avoid error shadowing",
-          description: "",
+          description: "Check the official User Docs",
           tags: ["", "", ""],
           sources: [],
           verified: true
@@ -73,9 +73,12 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::P
 
       let(:params_with_defaults) { defaults.merge(permitted_params) }
 
+      let(:original_params) { params_with_defaults }
+
       let(:casted_params) do
         {
           id: ConvenientService::Examples::Standard::RequestParams::Entities::ID.cast(params_with_defaults[:id]),
+          format: ConvenientService::Examples::Standard::RequestParams::Entities::Format.cast(params_with_defaults[:format]),
           title: ConvenientService::Examples::Standard::RequestParams::Entities::Title.cast(params_with_defaults[:title]),
           description: ConvenientService::Examples::Standard::RequestParams::Entities::Description.cast(params_with_defaults[:description]),
           tags: params_with_defaults[:tags].map { |tag| ConvenientService::Examples::Standard::RequestParams::Entities::Tag.cast(tag) },
@@ -184,10 +187,16 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::P
             .with_arguments(params: params_with_defaults)
         end
 
-        it "logs merged params from path and body with \"Uncasted\" tag" do
+        it "logs casted params with \"Casted\" tag" do
           expect { result }
             .to delegate_to(ConvenientService::Examples::Standard::RequestParams::Services::LogRequestParams, :result)
             .with_arguments(request: request, params: casted_params, tag: "Casted")
+        end
+
+        it "validates casted params" do
+          expect { result }
+            .to delegate_to(ConvenientService::Examples::Standard::RequestParams::Services::ValidateCastedParams, :result)
+            .with_arguments(original_params: original_params, casted_params: casted_params)
         end
       end
 

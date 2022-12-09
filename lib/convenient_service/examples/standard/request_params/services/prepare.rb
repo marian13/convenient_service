@@ -38,13 +38,13 @@ module ConvenientService
 
             step Services::CastParams, \
               in: :params,
-              out: reassign(:params)
+              out: [:original_params, {casted_params: reassign(:params)}]
 
             step Services::LogRequestParams, \
               in: [:request, :params, tag: raw("Casted")]
 
             step Services::ValidateCastedParams, \
-              in: :params
+              in: [:original_params, {casted_params: :params}]
 
             step Services::SanitizeParams, \
               in: :params,

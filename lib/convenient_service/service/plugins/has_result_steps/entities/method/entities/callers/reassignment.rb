@@ -12,7 +12,10 @@ module ConvenientService
               module Callers
                 class Reassignment < Callers::Base
                   def reassignment?(name:, method:)
-                    method.name.value == name
+                    ##
+                    # TODO: A better name for `object`. Wrapped object, `target`?
+                    #
+                    object.to_sym == name.to_sym
                   end
 
                   def calculate_value(method)

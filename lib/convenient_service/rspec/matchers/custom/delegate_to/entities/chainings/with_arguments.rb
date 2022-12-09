@@ -137,17 +137,6 @@ module ConvenientService
                 ##
                 # @return [String]
                 #
-                def failure_message
-                  <<~MESSAGE
-                    #{failure_message_expected_part}
-
-                    #{failure_message_got_part}
-                  MESSAGE
-                end
-
-                ##
-                # @return [String]
-                #
                 def failure_message_when_negated
                   "expected `#{printable_block_expectation}` NOT to delegate to `#{printable_method}` with `#{printable_expected_arguments}` at least once, but it did."
                 end
@@ -158,6 +147,12 @@ module ConvenientService
                   "expected `#{printable_block_expectation}` to delegate to `#{printable_method}` with `#{printable_expected_arguments}` at least once, but it didn't."
                 end
 
+                ##
+                # @return [String]
+                #
+                # @internal
+                #   TODO: String diff.
+                #
                 def failure_message_got_part
                   if delegations.empty?
                     "got not delegated at all"
@@ -165,7 +160,6 @@ module ConvenientService
                     "got delegated with #{printable_actual_arguments}"
                   end
                 end
-
 
                 def printable_expected_arguments
                   Commands::GeneratePrintableArguments.call(arguments: expected_arguments)

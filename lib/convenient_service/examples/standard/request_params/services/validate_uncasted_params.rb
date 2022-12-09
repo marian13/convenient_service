@@ -8,7 +8,7 @@ module ConvenientService
           class ValidateUncastedParams
             include ConvenientService::Standard::Config
 
-            attr_reader :id, :format, :title, :description
+            attr_reader :id, :format, :title, :description, :tags, :sources
 
             step :validate_id, in: :id
             step :validate_format, in: :format
@@ -20,12 +20,15 @@ module ConvenientService
               @format = params[:format]
               @title = params[:title]
               @description = params[:description]
+              @tags = params[:tags]
+              @sources = params[:sources]
             end
 
             private
 
             def validate_id
-              return error("ID is not a valid integer") unless Integer(id, exception: false)
+              return error("ID is NOT present") if Utils::Object.present?(description)
+              return error("ID is NOT a valid integer") unless Utils::Integer.safe_parse(id)
 
               success
             end
@@ -37,15 +40,22 @@ module ConvenientService
             end
 
             def validate_title
-              return error("Title is `nil`") if title.nil?
-              return error("Title is empty") if title.empty?
+              return error("Title is NOT present") if Utils::Object.present?(title)
 
               success
             end
 
             def validate_description
-              return error("Description is `nil`") if description.nil?
+              return error("Description is NOT present") if Utils::Object.present?(description)
 
+              success
+            end
+
+            def validate_tags
+              success
+            end
+
+            def validate_sources
               success
             end
           end

@@ -42,7 +42,7 @@ module ConvenientService
                 end
 
                 def cast_reassignment
-                  Entities::Key.new(other.method_name)
+                  Entities::Key.new(other.to_sym)
                 end
 
                 def cast_hash
@@ -59,6 +59,8 @@ module ConvenientService
                   when ::Proc
                     Entities::Key.new(key)
                   when Entities::Values::Raw
+                    Entities::Key.new(key)
+                  when Entities::Values::Reassignment
                     Entities::Key.new(key)
                   end
                 end
