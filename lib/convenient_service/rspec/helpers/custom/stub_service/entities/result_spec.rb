@@ -109,6 +109,20 @@ module ConvenientService
                 service_class.__send__(status, **kwargs)
               end
 
+              ##
+              # @param other [Object] Can be any type.
+              # @return [Boolean, nil]
+              #
+              def ==(other)
+                return unless other.instance_of?(self.class)
+
+                return false if status != other.status
+                return false if service_class != other.service_class
+                return false if chain != other.chain
+
+                true
+              end
+
               private
 
               ##

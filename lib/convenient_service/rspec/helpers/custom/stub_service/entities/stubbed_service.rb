@@ -6,9 +6,6 @@ module ConvenientService
       module Custom
         class StubService < Support::Command
           module Entities
-            ##
-            # TODO: Specs.
-            #
             class StubbedService < Support::Command
               ##
               # @param service_class [Class]
