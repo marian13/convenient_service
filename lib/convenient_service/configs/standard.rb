@@ -81,6 +81,10 @@ module ConvenientService
           use Plugins::Service::HasResultShortSyntax::Error::Middleware
         end
 
+        middlewares :result, scope: :class do
+          use Plugins::Common::NormalizesEnv::Middleware
+        end
+
         middlewares :step, scope: :class do
           use Plugins::Common::NormalizesEnv::Middleware
 
@@ -202,8 +206,30 @@ module ConvenientService
             end
           end
         end
+
+        if defined? ::RSpec
+          concerns do
+            insert_before 0, Plugins::Service::CanHaveStubbedResult::Concern
+          end
+
+          middlewares :result, scope: :class do
+            insert_after Plugins::Common::NormalizesEnv::Middleware, Plugins::Service::CanHaveStubbedResult::Middleware
+          end
+        end
       end
       # rubocop:enable Lint/ConstantDefinitionInBlock
+    end
+  end
+end
+
+if defined? RSpec
+  RSpec.configure do |config|
+    config.around(:example) do |example|
+      Thread.current[:__convenient_service_stubbed_results__] = ConvenientService::Support::Cache.new
+
+      example.run
+
+      Thread.current[:__convenient_service_stubbed_results__] = nil
     end
   end
 end

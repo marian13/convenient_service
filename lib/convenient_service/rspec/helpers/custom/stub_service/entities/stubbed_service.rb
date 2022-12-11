@@ -11,85 +11,73 @@ module ConvenientService
             #
             class StubbedService < Support::Command
               ##
-              # NOTE: `include ::RSpec::Matchers`.
-              # - https://github.com/rspec/rspec-expectations/blob/v3.11.0/lib/rspec/matchers.rb
-              # - https://github.com/rspec/rspec-expectations/blob/main/lib/rspec/matchers.rb
+              # @param service_class [Class]
+              # @return [void]
               #
-              include ::RSpec::Matchers
-
-              ##
-              # NOTE: `include ::RSpec::Mocks::ExampleMethods`.
-              # - https://github.com/rspec/rspec-mocks/blob/v3.11.1/lib/rspec/mocks/example_methods.rb
-              # - https://github.com/rspec/rspec-mocks/blob/main/lib/rspec/mocks/example_methods.rb
-              #
-              include ::RSpec::Mocks::ExampleMethods
-
               def initialize(service_class:)
                 @service_class = service_class
+                @arguments = {args: [], kwargs: {}, block: nil}
               end
 
+              ##
+              # @param args [Array]
+              # @param kwargs [Hash]
+              # @param block [Block]
+              # @return [ConvenientService::RSpec::Helpers::Custom::StubService::Entities::StubService]
+              #
               def with_arguments(*args, **kwargs, &block)
-                chain[:with_arguments] = {args: args, kwargs: kwargs, block: block}
+                @arguments = {args: args, kwargs: kwargs, block: block}
 
                 self
               end
 
+              ##
+              # @param result_spec [ConvenientService::RSpec::Helpers::Custom::StubService::Entities::ResultSpec]
+              # @return [ConvenientService::RSpec::Helpers::Custom::StubService::Entities::StubService]
+              #
               def to(result_spec)
                 @result_spec = result_spec
 
                 service_class.commit_config!
 
-                if used_with_arguments?
-                  allow(service_class).to receive(:result).and_wrap_original do |original, *actual_args, **actual_kwargs, &actual_block|
-                    expect(actual_args).to eq(expected_args)
-                    expect(actual_kwargs).to eq(expected_kwargs)
-                    expect(actual_block).to eq(expected_block)
+                service_class.stubbed_results[key] = result_value
 
-                    result_value
-                  end
-                else
-                  allow(service_class).to receive(:result).and_return(result_value)
-                end
+                self
               end
 
               private
 
-              attr_reader :service_class, :result_spec
+              ##
+              # @!attribute [r] service_class
+              #   @return [Class]
+              #
+              attr_reader :service_class
 
+              ##
+              # @!attribute [r] arguments
+              #   @return [Hash]
+              #
+              attr_reader :arguments
+
+              ##
+              # @!attribute [r] result_spec
+              #   @return [ConvenientService::RSpec::Helpers::Custom::StubService::Entities::ResultSpec]
+              #
+              attr_reader :result_spec
+
+              ##
+              # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+              #
               def result_value
                 @result_value ||= result_spec.for(service_class).calculate_value
               end
 
-              def used_with_arguments?
-                chain.key?(:with_arguments)
-              end
-
-              def chain
-                @chain ||= {}
-              end
-
-              def args
-                @args ||= chain.dig(:with_arguments, :args) || []
-              end
-
-              alias_method :expected_args, :args
-
-              def kwargs
-                @kwargs ||= chain.dig(:with_arguments, :kwargs) || {}
-              end
-
-              alias_method :expected_kwargs, :kwargs
-
               ##
-              # NOTE: `if defined?` is used in order to cache `nil` if needed.
+              # @return [ConvenientService::Support::Cache::Key]
               #
-              def block
-                return @block if defined? @block
-
-                @block = chain.dig(:with_arguments, :block)
+              def key
+                @key ||= service_class.stubbed_results.keygen(*arguments[:args], **arguments[:kwargs], &arguments[:block])
               end
-
-              alias_method :expected_block, :block
             end
           end
         end

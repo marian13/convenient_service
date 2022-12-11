@@ -4,6 +4,7 @@
 # NOTE: Order matters.
 #
 require_relative "plugins/can_recalculate_result"
+require_relative "plugins/can_have_stubbed_result"
 require_relative "plugins/has_inspect"
 require_relative "plugins/has_result"
 require_relative "plugins/has_result_method_steps"

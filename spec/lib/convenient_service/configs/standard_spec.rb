@@ -27,6 +27,7 @@ RSpec.describe ConvenientService::Configs::Standard do
       example_group "service" do
         let(:concerns) do
           [
+            ConvenientService::Service::Plugins::CanHaveStubbedResult::Concern,
             ConvenientService::Common::Plugins::HasInternals::Concern,
             ConvenientService::Common::Plugins::HasConstructor::Concern,
             ConvenientService::Plugins::Common::HasConstructorWithoutInitialize::Concern,
@@ -83,10 +84,17 @@ RSpec.describe ConvenientService::Configs::Standard do
           ]
         end
 
-        let(:step_class_middlewares) do
+        let(:class_steps_middlewares) do
           [
             ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
             ConvenientService::Service::Plugins::HasResultMethodSteps::Middleware
+          ]
+        end
+
+        let(:class_result_middlewares) do
+          [
+            ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
+            ConvenientService::Service::Plugins::CanHaveStubbedResult::Middleware
           ]
         end
 
@@ -115,7 +123,11 @@ RSpec.describe ConvenientService::Configs::Standard do
         end
 
         it "sets service middlewares for class `step`" do
-          expect(service_class.middlewares(:step, scope: :class).to_a).to eq(step_class_middlewares)
+          expect(service_class.middlewares(:step, scope: :class).to_a).to eq(class_steps_middlewares)
+        end
+
+        it "sets service middlewares for class `result`" do
+          expect(service_class.middlewares(:result, scope: :class).to_a).to eq(class_result_middlewares)
         end
 
         example_group "service internals" do

@@ -101,6 +101,22 @@ module ConvenientService
       end
 
       ##
+      # @return [ConvenientService::Support::Cache]
+      #
+      def clear
+        hash.clear
+
+        self
+      end
+
+      ##
+      # @return [ConvenientService::Support::Cache]
+      #
+      def scope(key)
+        fetch(key) { Support::Cache.new }
+      end
+
+      ##
       # @return [ConvenientService::Support::Cache::Key]
       #
       def keygen(...)
