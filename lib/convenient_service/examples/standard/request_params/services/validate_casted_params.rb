@@ -50,25 +50,26 @@ module ConvenientService
             private
 
             def validate_id
-              return error("Failed to cast #{original_id.inspect}") unless casted_id
+              return error("Failed to cast `#{original_id.inspect}` into `ID`") unless casted_id
+              return error("ID `#{casted_id}` does NOT exist") unless casted_id.exist?
 
               success
             end
 
             def validate_format
-              return error("Failed to cast #{original_format.inspect}") unless casted_format
+              return error("Failed to cast `#{original_format.inspect}` into `Format`") unless casted_format
 
               success
             end
 
             def validate_title
-              return error("Failed to cast #{original_title.inspect}") unless casted_title
+              return error("Failed to cast `#{original_title.inspect}` into `Title`") unless casted_title
 
               success
             end
 
             def validate_description
-              return error("Failed to cast #{original_description.inspect}") unless casted_description
+              return error("Failed to cast `#{original_description.inspect}` into `Description`") unless casted_description
 
               success
             end

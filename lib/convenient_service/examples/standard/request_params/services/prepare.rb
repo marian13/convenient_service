@@ -46,24 +46,6 @@ module ConvenientService
             step Services::ValidateCastedParams, \
               in: [:original_params, {casted_params: :params}]
 
-            step Services::SanitizeParams, \
-              in: :params,
-              out: reassign(:params)
-
-            step Services::RemoveUnauthorizedParams, \
-              in: [:params, :role],
-              out: reassign(:params)
-
-            step Services::ApplyPolicyScopesToParams, \
-              in: [:params, :role],
-              out: reassign(:params)
-
-            step Services::TriggerParamsHooks, \
-              in: :params
-
-            step Services::AuditParams, \
-              in: :params
-
             step :result, \
               in: :params,
               out: reassign(:params)

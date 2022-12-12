@@ -16,10 +16,18 @@ module ConvenientService
               end
             end
 
+            def exist?
+              to_i % 2 == 0
+            end
+
             def ==(other)
               return unless other.instance_of?(self.class)
 
               value == other.value
+            end
+
+            def to_i
+              value.to_i
             end
 
             def to_s

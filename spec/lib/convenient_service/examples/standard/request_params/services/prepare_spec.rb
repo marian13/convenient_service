@@ -51,7 +51,7 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::P
 
       let(:path) { "/rules/%{id}.%{format}" % path_params }
 
-      let(:path_params) { {id: "1", format: "html"} }
+      let(:path_params) { {id: "1000000", format: "html"} }
 
       let(:body) { JSON.generate(json_body) }
 
@@ -167,44 +167,58 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::P
             .with_arguments(params: merged_params, permitted_keys: permitted_keys)
         end
 
-        it "applies default value" do
+        it "applies default values" do
           ConvenientService::Examples::Standard::RequestParams::Services::ApplyDefaultParamValues.commit_config!
 
           expect { result }
             .to delegate_to(ConvenientService::Examples::Standard::RequestParams::Services::ApplyDefaultParamValues, :result)
             .with_arguments(params: permitted_params, defaults: defaults)
         end
+      end
 
-        it "validates uncasted params" do
-          expect { result }
-            .to delegate_to(ConvenientService::Examples::Standard::RequestParams::Services::ValidateUncastedParams, :result)
-            .with_arguments(params: params_with_defaults)
+      context "when uncasted params are NOT valid" do
+        ##
+        # Contains unsupported format, only HTML is available.
+        #
+        let(:path) { "/rules/1.json" }
+
+        let(:message) { "Only HTML format is supported" }
+
+        it "fails to validate uncasted params" do
+          expect(result)
+            .to be_error
+            .of(ConvenientService::Examples::Standard::RequestParams::Services::ValidateUncastedParams)
+            .with_message(message)
         end
+      end
 
-        it "casts params" do
-          expect { result }
-            .to delegate_to(ConvenientService::Examples::Standard::RequestParams::Services::CastParams, :result)
-            .with_arguments(params: params_with_defaults)
-        end
-
+      context "when uncasted params are valid" do
         it "logs casted params with \"Casted\" tag" do
           expect { result }
             .to delegate_to(ConvenientService::Examples::Standard::RequestParams::Services::LogRequestParams, :result)
             .with_arguments(request: request, params: casted_params, tag: "Casted")
         end
+      end
 
-        it "validates casted params" do
-          expect { result }
-            .to delegate_to(ConvenientService::Examples::Standard::RequestParams::Services::ValidateCastedParams, :result)
-            .with_arguments(original_params: original_params, casted_params: casted_params)
+      context "when casted params are NOT valid" do
+        ##
+        # Contains NOT existing ID.
+        #
+        let(:path) { "/rules/999999.html" }
+
+        let(:message) { "ID `999999` does NOT exist" }
+
+        it "fails to validate casted params" do
+          expect(result)
+            .to be_error
+            .of(ConvenientService::Examples::Standard::RequestParams::Services::ValidateCastedParams)
+            .with_message(message)
         end
       end
 
-      context "when \"happy path\"" do
-        let(:prepared_params) { path_params.merge(body_params) }
-
-        it "returns success with prepared params" do
-          expect(result).to be_success.with_data(params: prepared_params)
+      context "when casted params are valid" do
+        it "returns success with casted params" do
+          expect(result).to be_success.with_data(params: casted_params)
         end
       end
     end
