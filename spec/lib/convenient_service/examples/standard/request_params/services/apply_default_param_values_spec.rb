@@ -12,18 +12,18 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::A
 
       subject(:result) { described_class.result(params: params, defaults: defaults) }
 
-      let(:params) { {id: "", title: ""} }
+      let(:params) { {id: "1000000", title: "Check the official User Docs"} }
       let(:defaults) { {tags: [], sources: []} }
 
-      it "return success merged params" do
-        expect(result).to be_success.with_data(params: {id: "", title: "", tags: [], sources: []})
+      it "returns success with params and defaults" do
+        expect(result).to be_success.with_data(params: {id: "1000000", title: "Check the official User Docs", tags: [], sources: []})
       end
 
-      context "when both `params` and `defaults` have the same key" do
-        let(:params) { {id: "", title: "", tags: [:important]} }
+      context "when `params` and `defaults` have same keys" do
+        let(:params) { {id: "1000000", title: "Check the official User Docs", tags: ["ruby"]} }
 
         it "takes value from `params`" do
-          expect(result).to be_success.with_data(params: {id: "", title: "", tags: [:important], sources: []})
+          expect(result).to be_success.with_data(params: {id: "1000000", title: "Check the official User Docs", tags: ["ruby"], sources: []})
         end
       end
     end
