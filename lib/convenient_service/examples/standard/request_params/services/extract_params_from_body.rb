@@ -28,7 +28,7 @@ module ConvenientService
 
               error(
                 <<~MESSAGE
-                  Request has invalid body.
+                  Failed to resolve body since request is NOT HTTP parsable.
 
                   Request:
                   ---

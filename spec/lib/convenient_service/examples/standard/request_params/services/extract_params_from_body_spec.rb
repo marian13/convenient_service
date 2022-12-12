@@ -31,7 +31,7 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::E
 
         let(:error_message) do
           <<~MESSAGE
-            Request has invalid body.
+            Failed to resolve body since request is NOT HTTP parsable.
 
             Request:
             ---

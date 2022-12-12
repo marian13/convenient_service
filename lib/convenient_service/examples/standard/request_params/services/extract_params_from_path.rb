@@ -28,7 +28,7 @@ module ConvenientService
 
               error(
                 <<~MESSAGE
-                  Request has invalid path.
+                  Failed to resolve path since request is NOT HTTP parsable.
 
                   Request:
                   ---
