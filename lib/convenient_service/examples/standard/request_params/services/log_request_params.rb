@@ -44,7 +44,7 @@ module ConvenientService
             end
 
             def content
-              params.map { |key, value| "  #{key}: #{value.inspect}" }.join("  \n")
+              params.map { |key, value| "  #{key}: #{value.inspect}" }.join(",\n")
             end
           end
         end
