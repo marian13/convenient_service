@@ -13,6 +13,7 @@ module ConvenientService
             step :parse_body, in: :request, out: :body
             step :parse_json, in: :body, out: :json
             step :extract_params, in: :json, out: :params
+            step :symbolize_keys, in: :params, out: reassign(:params)
 
             def initialize(request:)
               @request = request
@@ -55,7 +56,11 @@ module ConvenientService
             end
 
             def extract_params
-              success(params: json.transform_keys(&:to_sym))
+              success(params: json)
+            end
+
+            def symbolize_keys
+              success(params: params.transform_keys(&:to_sym))
             end
           end
         end
