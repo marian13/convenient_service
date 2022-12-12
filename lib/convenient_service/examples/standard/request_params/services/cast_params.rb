@@ -26,8 +26,8 @@ module ConvenientService
                 format: Entities::Format.cast(params[:format]),
                 title: Entities::Title.cast(params[:title]),
                 description: Entities::Description.cast(params[:description]),
-                tags: params[:tags].map { |tag| Entities::Tag.cast(tag) },
-                sources: params[:sources].map { |source| Entities::Source.cast(source) }
+                tags: Utils::Array.wrap(params[:tags]).map { |tag| Entities::Tag.cast(tag) },
+                sources: Utils::Array.wrap(params[:sources]).map { |source| Entities::Source.cast(source) }
               }
             end
           end

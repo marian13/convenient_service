@@ -37,7 +37,7 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Entities::I
         let(:value) { "1" }
 
         it "returns `true`" do
-          expect(id).to eq(false)
+          expect(id.exist?).to eq(false)
         end
       end
 
@@ -45,7 +45,7 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Entities::I
         let(:value) { "1000000" }
 
         it "returns `true`" do
-          expect(id).to eq(true)
+          expect(id.exist?).to eq(true)
         end
       end
     end
