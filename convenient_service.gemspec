@@ -35,6 +35,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "commonmarker"
   spec.add_development_dependency "gem-release"
   spec.add_development_dependency "inch"
+  spec.add_development_dependency "json"
   spec.add_development_dependency "paint"
   spec.add_development_dependency "progressbar"
   spec.add_development_dependency "rake", "~> 12.0"
