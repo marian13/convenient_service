@@ -21,16 +21,16 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::P
       #
       #   let(:http_string) do
       #     <<~TEXT
-      #       POST /rules/1.json HTTP/1.1
+      #       POST /rules/1000000.json HTTP/1.1
       #       User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36
       #       Host: code-review.com
       #       Content-Type: application/json; charset=utf-8
-      #       Content-Length: 47
+      #       Content-Length: 134
       #       Accept-Language: en-us
       #       Accept-Encoding: gzip, deflate
       #       Connection: Keep-Alive
       #
-      #       {"title":"","description":"","tags":["","",""]}
+      #       {"title":"Avoid error shadowing","description":"Check the official User Docs","tags":["error-shadowing"]}
       #     TEXT
       #   end
       #
@@ -59,7 +59,7 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::P
         {
           title: "Avoid error shadowing",
           description: "Check the official User Docs",
-          tags: ["", "", ""],
+          tags: ["error-shadowing"],
           sources: [],
           verified: true
         }
