@@ -12,7 +12,10 @@ module ConvenientService
 
             class << self
               def cast(value)
-                new(value: value.to_s)
+                case value
+                when ::String
+                  new(value: value.to_s)
+                end
               end
             end
 
