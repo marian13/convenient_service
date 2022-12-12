@@ -37,6 +37,32 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Entities::I
         expect(id.to_s).to eq(value)
       end
     end
+
+    describe "#==" do
+      context "when `other` has different class" do
+        let(:other) { 42 }
+
+        it "returns false" do
+          expect(id == other).to be_nil
+        end
+      end
+
+      context "when `other` has different values" do
+        let(:other) { described_class.cast("1") }
+
+        it "returns true" do
+          expect(id == other).to eq(false)
+        end
+      end
+
+      context "when `other` has same value" do
+        let(:other) { described_class.cast(value) }
+
+        it "returns true" do
+          expect(id == other).to eq(true)
+        end
+      end
+    end
   end
 end
 # rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers

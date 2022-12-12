@@ -37,6 +37,32 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Entities::T
         expect(tag.to_s).to eq(value)
       end
     end
+
+    describe "#==" do
+      context "when `other` has different class" do
+        let(:other) { 42 }
+
+        it "returns false" do
+          expect(tag == other).to be_nil
+        end
+      end
+
+      context "when `other` has different values" do
+        let(:other) { described_class.cast("javascript") }
+
+        it "returns true" do
+          expect(tag == other).to eq(false)
+        end
+      end
+
+      context "when `other` has same value" do
+        let(:other) { described_class.cast(value) }
+
+        it "returns true" do
+          expect(tag == other).to eq(true)
+        end
+      end
+    end
   end
 end
 # rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers

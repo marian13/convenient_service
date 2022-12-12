@@ -37,6 +37,32 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Entities::S
         expect(source.to_s).to eq(value)
       end
     end
+
+    describe "#==" do
+      context "when `other` has different class" do
+        let(:other) { 42 }
+
+        it "returns false" do
+          expect(source == other).to be_nil
+        end
+      end
+
+      context "when `other` has different values" do
+        let(:other) { described_class.cast("https://www.rubyguides.com/2019/07/ruby-instance-variables/") }
+
+        it "returns true" do
+          expect(source == other).to eq(false)
+        end
+      end
+
+      context "when `other` has same value" do
+        let(:other) { described_class.cast(value) }
+
+        it "returns true" do
+          expect(source == other).to eq(true)
+        end
+      end
+    end
   end
 end
 # rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
