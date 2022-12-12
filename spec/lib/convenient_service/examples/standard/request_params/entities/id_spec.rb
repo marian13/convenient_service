@@ -32,6 +32,30 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Entities::I
     let(:value) { "100000" }
     let(:id) { described_class.cast(value) }
 
+    describe "#exist?" do
+      context "when `to_i % 2 != 0`" do
+        let(:value) { "1" }
+
+        it "returns `true`" do
+          expect(id).to eq(false)
+        end
+      end
+
+      context "when `to_i % 2 == 0`" do
+        let(:value) { "1000000" }
+
+        it "returns `true`" do
+          expect(id).to eq(true)
+        end
+      end
+    end
+
+    describe "#to_i" do
+      it "returns `value.to_i`" do
+        expect(id.to_i).to eq(value.to_i)
+      end
+    end
+
     describe "#to_s" do
       it "returns value" do
         expect(id.to_s).to eq(value)
