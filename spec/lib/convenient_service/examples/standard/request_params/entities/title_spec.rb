@@ -27,5 +27,16 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Entities::T
       end
     end
   end
+
+  example_group "instance methods" do
+    let(:value) { "Avoid error shadowing" }
+    let(:title) { described_class.cast(value) }
+
+    describe "#to_s" do
+      it "returns value" do
+        expect(title.to_s).to eq(value)
+      end
+    end
+  end
 end
 # rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers

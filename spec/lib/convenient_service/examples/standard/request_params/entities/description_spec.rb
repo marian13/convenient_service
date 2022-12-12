@@ -27,5 +27,16 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Entities::D
       end
     end
   end
+
+  example_group "instance methods" do
+    let(:value) { "Check the official User Docs" }
+    let(:description) { described_class.cast(value) }
+
+    describe "#to_s" do
+      it "returns value" do
+        expect(description.to_s).to eq(value)
+      end
+    end
+  end
 end
 # rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers

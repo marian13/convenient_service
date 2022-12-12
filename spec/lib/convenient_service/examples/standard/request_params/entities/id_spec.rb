@@ -27,5 +27,16 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Entities::I
       end
     end
   end
+
+  example_group "instance methods" do
+    let(:value) { "100000" }
+    let(:id) { described_class.cast(value) }
+
+    describe "#to_s" do
+      it "returns value" do
+        expect(id.to_s).to eq(value)
+      end
+    end
+  end
 end
 # rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers

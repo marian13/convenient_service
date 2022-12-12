@@ -27,5 +27,16 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Entities::F
       end
     end
   end
+
+  example_group "instance methods" do
+    let(:value) { "html" }
+    let(:format) { described_class.cast(value) }
+
+    describe "#to_s" do
+      it "returns value" do
+        expect(format.to_s).to eq(value)
+      end
+    end
+  end
 end
 # rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
