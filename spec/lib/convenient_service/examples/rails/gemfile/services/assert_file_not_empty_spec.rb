@@ -50,6 +50,14 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::AssertFile
 
     let(:path) { tempfile.path }
 
+    context "when path is NOT present?" do
+      let(:path) { "" }
+
+      it "returns failure with data" do
+        expect(result).to be_failure.with_data(path: "can't be blank")
+      end
+    end
+
     context "when file is NOT empty" do
       ##
       # NOTE: Tempfile uses its own let in order to prevent its premature garbage collection.
