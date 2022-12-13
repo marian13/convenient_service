@@ -65,10 +65,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::AssertFile
       let(:tempfile) { Tempfile.new.tap { |file| file.write("content") }.tap(&:close) }
 
       it "returns success" do
-        ##
-        # TODO: Matcher.
-        #
-        expect(result).to be_success
+        expect(result).to be_success.without_data
       end
     end
 
