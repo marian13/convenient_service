@@ -125,16 +125,18 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
     end
 
     describe "#jsend_attributes" do
-      it "returns casted JSend attributes" do
-        expect(result.jsend_attributes).to eq(
-          ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Structs::JSendAttributes.new(
-            service: params[:service],
-            status: ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Entities::Status.cast(params[:status]),
-            data: ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Entities::Data.cast(params[:data]),
-            message: ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Entities::Message.cast(params[:message]),
-            code: ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Entities::Code.cast(params[:code])
-          )
+      let(:jsend_attributes) do
+        ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Structs::JSendAttributes.new(
+          service: params[:service],
+          status: ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Entities::Status.cast(params[:status]),
+          data: ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Entities::Data.cast(params[:data]),
+          message: ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Entities::Message.cast(params[:message]),
+          code: ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Entities::Code.cast(params[:code])
         )
+      end
+
+      it "returns casted JSend attributes" do
+        expect(result.jsend_attributes).to eq(jsend_attributes)
       end
     end
 

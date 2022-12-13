@@ -195,11 +195,11 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Middleware d
         end
 
         it "returns result of intermediate step" do
-          expect(method_value).to eq(service_instance.steps.select(&:completed?).last.result)
+          expect(method_value).to eq(ConvenientService::Utils::Array.find_last(service_instance.steps, &:completed?).result)
         end
 
         it "copies result of intermediate step" do
-          expect(method_value.object_id).not_to eq(service_instance.steps.select(&:completed?).last.result.object_id)
+          expect(method_value.object_id).not_to eq(ConvenientService::Utils::Array.find_last(service_instance.steps, &:completed?).result.object_id)
         end
 
         it "does NOT evaluate results of following steps" do
