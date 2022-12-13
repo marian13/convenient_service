@@ -8,7 +8,7 @@ module ConvenientService
           def next(...)
             return chain.next(...) if entity.steps.none?
 
-            last_step.result
+            last_step.result.copy
           end
 
           private

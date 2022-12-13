@@ -94,15 +94,49 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
       end
     end
 
+    describe "#unsafe_data" do
+      it "returns casted `data`" do
+        expect(result.unsafe_data).to eq(ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Entities::Data.cast(params[:data]))
+      end
+    end
+
     describe "#message" do
       it "returns casted `message`" do
         expect(result.message).to eq(ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Entities::Message.cast(params[:message]))
       end
     end
 
+    describe "#unsafe_message" do
+      it "returns casted `message`" do
+        expect(result.unsafe_message).to eq(ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Entities::Message.cast(params[:message]))
+      end
+    end
+
     describe "#code" do
       it "returns casted `code`" do
         expect(result.code).to eq(ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Entities::Code.cast(params[:code]))
+      end
+    end
+
+    describe "#unsafe_code" do
+      it "returns casted `code`" do
+        expect(result.unsafe_code).to eq(ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Entities::Code.cast(params[:code]))
+      end
+    end
+
+    describe "#jsend_attributes" do
+      let(:jsend_attributes) do
+        ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Structs::JSendAttributes.new(
+          service: params[:service],
+          status: ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Entities::Status.cast(params[:status]),
+          data: ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Entities::Data.cast(params[:data]),
+          message: ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Entities::Message.cast(params[:message]),
+          code: ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Entities::Code.cast(params[:code])
+        )
+      end
+
+      it "returns casted JSend attributes" do
+        expect(result.jsend_attributes).to eq(jsend_attributes)
       end
     end
 
