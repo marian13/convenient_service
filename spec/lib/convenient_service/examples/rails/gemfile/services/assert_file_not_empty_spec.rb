@@ -50,7 +50,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::AssertFile
 
     let(:path) { tempfile.path }
 
-    context "when path is NOT present?" do
+    context "when path is NOT present" do
       let(:path) { "" }
 
       it "returns failure with data" do

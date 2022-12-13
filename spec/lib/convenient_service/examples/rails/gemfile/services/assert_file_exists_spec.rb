@@ -48,7 +48,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::AssertFile
   describe "#result" do
     subject(:result) { service.result }
 
-    context "when path is NOT present?" do
+    context "when path is NOT present" do
       let(:path) { "" }
 
       it "returns failure with data" do

@@ -43,7 +43,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::AssertNpmP
     subject(:result) { service.result }
 
     context "when name is NOT valid" do
-      context "when name is NOT present?" do
+      context "when name is NOT present" do
         let(:name) { "" }
 
         it "returns failure with data" do
