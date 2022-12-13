@@ -142,6 +142,8 @@
     
 
     
+      (also: #unsafe_code)
+    
   </span>
   
   
@@ -163,6 +165,8 @@
       <a href="#data-instance_method" title="#data (instance method)">#<strong>data</strong>  &#x21d2; ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Entities::Data </a>
     
 
+    
+      (also: #unsafe_data)
     
   </span>
   
@@ -226,9 +230,33 @@
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#jsend_attributes-instance_method" title="#jsend_attributes (instance method)">#<strong>jsend_attributes</strong>  &#x21d2; ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Structs::JSendAttributes </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#message-instance_method" title="#message (instance method)">#<strong>message</strong>  &#x21d2; ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Entities::Message </a>
     
 
+    
+      (also: #unsafe_message)
     
   </span>
   
@@ -488,29 +516,29 @@
       <pre class="lines">
 
 
-88
-89
-90
-91
-92
-93
-94
-95
-96
-97
-98</pre>
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_result/entities/result/plugins/has_jsend_status_and_attributes/concern/instance_methods.rb', line 88</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_result/entities/result/plugins/has_jsend_status_and_attributes/concern/instance_methods.rb', line 100</span>
 
 <span class='kw'>def</span> <span class='op'>==</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='rparen'>)</span>
 
   <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span> <span class='op'>!=</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span>
   <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='id identifier rubyid_status'>status</span> <span class='op'>!=</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_status'>status</span>
-  <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='id identifier rubyid_data'>data</span> <span class='op'>!=</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_data'>data</span>
-  <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='id identifier rubyid_message'>message</span> <span class='op'>!=</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_message'>message</span>
-  <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='id identifier rubyid_code'>code</span> <span class='op'>!=</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_code'>code</span>
+  <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='id identifier rubyid_unsafe_data'>unsafe_data</span> <span class='op'>!=</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_unsafe_data'>unsafe_data</span>
+  <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='id identifier rubyid_unsafe_message'>unsafe_message</span> <span class='op'>!=</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_unsafe_message'>unsafe_message</span>
+  <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='id identifier rubyid_unsafe_code'>unsafe_code</span> <span class='op'>!=</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_unsafe_code'>unsafe_code</span>
 
   <span class='kw'>true</span>
 <span class='kw'>end</span></pre>
@@ -525,6 +553,10 @@
     #<strong>code</strong>  &#x21d2; <tt><span class='object_link'><a href="../Entities/Code.html" title="ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Entities::Code (class)">ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Entities::Code</a></span></tt> 
   
 
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='unsafe_code-instance_method'>unsafe_code</span></span>
+    </span>
   
 
   
@@ -556,16 +588,12 @@
       <pre class="lines">
 
 
-80
-81
 82</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_result/entities/result/plugins/has_jsend_status_and_attributes/concern/instance_methods.rb', line 80</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_result/entities/result/plugins/has_jsend_status_and_attributes/concern/instance_methods.rb', line 82</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_code'>code</span>
-  <span class='id identifier rubyid_internals'>internals</span><span class='period'>.</span><span class='id identifier rubyid_cache'>cache</span><span class='lbracket'>[</span><span class='symbol'>:jsend_attributes</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_code'>code</span>
-<span class='kw'>end</span></pre>
+<span class='id identifier rubyid_delegate'>delegate</span> <span class='symbol'>:code</span><span class='comma'>,</span> <span class='label'>to:</span> <span class='symbol'>:jsend_attributes</span></pre>
     </td>
   </tr>
 </table>
@@ -577,6 +605,10 @@
     #<strong>data</strong>  &#x21d2; <tt><span class='object_link'><a href="../Entities/Data.html" title="ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Entities::Data (class)">ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Entities::Data</a></span></tt> 
   
 
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='unsafe_data-instance_method'>unsafe_data</span></span>
+    </span>
   
 
   
@@ -608,16 +640,12 @@
       <pre class="lines">
 
 
-66
-67
-68</pre>
+62</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_result/entities/result/plugins/has_jsend_status_and_attributes/concern/instance_methods.rb', line 66</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_result/entities/result/plugins/has_jsend_status_and_attributes/concern/instance_methods.rb', line 62</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_data'>data</span>
-  <span class='id identifier rubyid_internals'>internals</span><span class='period'>.</span><span class='id identifier rubyid_cache'>cache</span><span class='lbracket'>[</span><span class='symbol'>:jsend_attributes</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_data'>data</span>
-<span class='kw'>end</span></pre>
+<span class='id identifier rubyid_delegate'>delegate</span> <span class='symbol'>:data</span><span class='comma'>,</span> <span class='label'>to:</span> <span class='symbol'>:jsend_attributes</span></pre>
     </td>
   </tr>
 </table>
@@ -720,11 +748,67 @@
 </div>
     
       <div class="method_details ">
+  <h3 class="signature " id="jsend_attributes-instance_method">
+  
+    #<strong>jsend_attributes</strong>  &#x21d2; <tt><span class='object_link'><a href="../Structs/JSendAttributes.html" title="ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Structs::JSendAttributes (class)">ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Structs::JSendAttributes</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Structs/JSendAttributes.html" title="ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Structs::JSendAttributes (class)">ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Structs::JSendAttributes</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+92
+93
+94</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_result/entities/result/plugins/has_jsend_status_and_attributes/concern/instance_methods.rb', line 92</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_jsend_attributes'>jsend_attributes</span>
+  <span class='id identifier rubyid_internals'>internals</span><span class='period'>.</span><span class='id identifier rubyid_cache'>cache</span><span class='lbracket'>[</span><span class='symbol'>:jsend_attributes</span><span class='rbracket'>]</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
   <h3 class="signature " id="message-instance_method">
   
     #<strong>message</strong>  &#x21d2; <tt><span class='object_link'><a href="../Entities/Message.html" title="ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Entities::Message (class)">ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Entities::Message</a></span></tt> 
   
 
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='unsafe_message-instance_method'>unsafe_message</span></span>
+    </span>
   
 
   
@@ -756,16 +840,12 @@
       <pre class="lines">
 
 
-73
-74
-75</pre>
+72</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_result/entities/result/plugins/has_jsend_status_and_attributes/concern/instance_methods.rb', line 73</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_result/entities/result/plugins/has_jsend_status_and_attributes/concern/instance_methods.rb', line 72</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_message'>message</span>
-  <span class='id identifier rubyid_internals'>internals</span><span class='period'>.</span><span class='id identifier rubyid_cache'>cache</span><span class='lbracket'>[</span><span class='symbol'>:jsend_attributes</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_message'>message</span>
-<span class='kw'>end</span></pre>
+<span class='id identifier rubyid_delegate'>delegate</span> <span class='symbol'>:message</span><span class='comma'>,</span> <span class='label'>to:</span> <span class='symbol'>:jsend_attributes</span></pre>
     </td>
   </tr>
 </table>
@@ -952,16 +1032,12 @@
       <pre class="lines">
 
 
-52
-53
-54</pre>
+52</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_result/entities/result/plugins/has_jsend_status_and_attributes/concern/instance_methods.rb', line 52</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_service'>service</span>
-  <span class='id identifier rubyid_internals'>internals</span><span class='period'>.</span><span class='id identifier rubyid_cache'>cache</span><span class='lbracket'>[</span><span class='symbol'>:jsend_attributes</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_service'>service</span>
-<span class='kw'>end</span></pre>
+<span class='id identifier rubyid_delegate'>delegate</span> <span class='symbol'>:service</span><span class='comma'>,</span> <span class='label'>to:</span> <span class='symbol'>:jsend_attributes</span></pre>
     </td>
   </tr>
 </table>
@@ -1004,16 +1080,12 @@
       <pre class="lines">
 
 
-59
-60
-61</pre>
+57</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_result/entities/result/plugins/has_jsend_status_and_attributes/concern/instance_methods.rb', line 59</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_result/entities/result/plugins/has_jsend_status_and_attributes/concern/instance_methods.rb', line 57</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_status'>status</span>
-  <span class='id identifier rubyid_internals'>internals</span><span class='period'>.</span><span class='id identifier rubyid_cache'>cache</span><span class='lbracket'>[</span><span class='symbol'>:jsend_attributes</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_status'>status</span>
-<span class='kw'>end</span></pre>
+<span class='id identifier rubyid_delegate'>delegate</span> <span class='symbol'>:status</span><span class='comma'>,</span> <span class='label'>to:</span> <span class='symbol'>:jsend_attributes</span></pre>
     </td>
   </tr>
 </table>
@@ -1104,12 +1176,12 @@
       <pre class="lines">
 
 
-103
-104
-105</pre>
+115
+116
+117</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_result/entities/result/plugins/has_jsend_status_and_attributes/concern/instance_methods.rb', line 103</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_result/entities/result/plugins/has_jsend_status_and_attributes/concern/instance_methods.rb', line 115</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_kwargs'>to_kwargs</span>
   <span class='lbrace'>{</span><span class='label'>service:</span> <span class='id identifier rubyid_service'>service</span><span class='comma'>,</span> <span class='label'>status:</span> <span class='id identifier rubyid_status'>status</span><span class='comma'>,</span> <span class='label'>data:</span> <span class='id identifier rubyid_data'>data</span><span class='comma'>,</span> <span class='label'>message:</span> <span class='id identifier rubyid_message'>message</span><span class='comma'>,</span> <span class='label'>code:</span> <span class='id identifier rubyid_code'>code</span><span class='rbrace'>}</span>
@@ -1124,7 +1196,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Dec 10 18:40:10 2022 by
+  Generated on Tue Dec 13 19:56:01 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.3).
 </div>
