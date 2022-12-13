@@ -49,36 +49,53 @@ module ConvenientService
                     ##
                     # @return [Class]
                     #
-                    def service
-                      internals.cache[:jsend_attributes].service
-                    end
+                    delegate :service, to: :jsend_attributes
 
                     ##
                     # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Entities::Status]
                     #
-                    def status
-                      internals.cache[:jsend_attributes].status
-                    end
+                    delegate :status, to: :jsend_attributes
+
+                    ##
+                    # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Entities::Status]
+                    #
+                    alias_method :unsafe_status, :status
 
                     ##
                     # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Entities::Data]
                     #
-                    def data
-                      internals.cache[:jsend_attributes].data
-                    end
+                    delegate :data, to: :jsend_attributes
+
+                    ##
+                    # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Entities::Data]
+                    #
+                    alias_method :unsafe_data, :data
 
                     ##
                     # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Entities::Message]
                     #
-                    def message
-                      internals.cache[:jsend_attributes].message
-                    end
+                    delegate :message, to: :jsend_attributes
+
+                    ##
+                    # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Entities::Message]
+                    #
+                    alias_method :unsafe_message, :message
 
                     ##
                     # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Entities::Code]
                     #
-                    def code
-                      internals.cache[:jsend_attributes].code
+                    delegate :code, to: :jsend_attributes
+
+                    ##
+                    # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Entities::Code]
+                    #
+                    alias_method :unsafe_code, :code
+
+                    ##
+                    # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Structs::JSendAttributes]
+                    #
+                    def jsend_attributes
+                      internals.cache[:jsend_attributes]
                     end
 
                     ##
@@ -89,10 +106,10 @@ module ConvenientService
                       return unless other.instance_of?(self.class)
 
                       return false if service.class != other.service.class
-                      return false if status != other.status
-                      return false if data != other.data
-                      return false if message != other.message
-                      return false if code != other.code
+                      return false if unsafe_status != other.unsafe_status
+                      return false if unsafe_data != other.unsafe_data
+                      return false if unsafe_message != other.unsafe_message
+                      return false if unsafe_code != other.unsafe_code
 
                       true
                     end

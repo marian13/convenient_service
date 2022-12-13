@@ -195,7 +195,11 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Middleware d
         end
 
         it "returns result of intermediate step" do
-          expect(method_value.message).to eq("some error message")
+          expect(method_value).to eq(service_instance.steps.select(&:completed?).last.result)
+        end
+
+        it "copies result of intermediate step" do
+          expect(method_value.object_id).not_to eq(service_instance.steps.select(&:completed?).last.result.object_id)
         end
 
         it "does NOT evaluate results of following steps" do
@@ -324,7 +328,11 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Middleware d
         end
 
         it "returns result of last step" do
-          expect(method_value.data).to eq({baz: :qux})
+          expect(method_value).to eq(service_instance.steps.last.result)
+        end
+
+        it "copies result of last step" do
+          expect(method_value.object_id).not_to eq(service_instance.steps.last.result.object_id)
         end
       end
     end
