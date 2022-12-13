@@ -57,11 +57,6 @@ module ConvenientService
                     delegate :status, to: :jsend_attributes
 
                     ##
-                    # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Entities::Status]
-                    #
-                    alias_method :unsafe_status, :status
-
-                    ##
                     # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Entities::Data]
                     #
                     delegate :data, to: :jsend_attributes
@@ -106,7 +101,7 @@ module ConvenientService
                       return unless other.instance_of?(self.class)
 
                       return false if service.class != other.service.class
-                      return false if unsafe_status != other.unsafe_status
+                      return false if status != other.status
                       return false if unsafe_data != other.unsafe_data
                       return false if unsafe_message != other.unsafe_message
                       return false if unsafe_code != other.unsafe_code
