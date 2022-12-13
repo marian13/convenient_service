@@ -48,6 +48,14 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::AssertFile
   describe "#result" do
     subject(:result) { service.result }
 
+    context "when file is NOT present?" do
+      let(:path) { "" }
+
+      it "returns error with message" do
+        expect(result).to be_failure.with_data(path: "can't be blank")
+      end
+    end
+
     context "when file with path does NOT exist" do
       let(:path) { "non_existing_path" }
 
