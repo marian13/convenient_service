@@ -48,6 +48,13 @@ module ConvenientService
               end
 
               ##
+              # @return [Boolean]
+              #
+              def should_call_original?
+                chainings[:call_original].should_call_original?
+              end
+
+              ##
               # @return [String]
               #
               def description
@@ -80,7 +87,7 @@ module ConvenientService
               # @return [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Arguments]
               #
               def expected_arguments=(arguments)
-                raise Errors::InvalidExpectedArguments.new unless arguments.instance_of?(Entities::Arguments)
+                raise Errors::FailedToSetExpectedArguments.new(arguments: arguments) unless arguments.instance_of?(Entities::Arguments)
 
                 @expected_arguments = arguments
               end
@@ -90,6 +97,13 @@ module ConvenientService
               #
               def has_arguments_chaining?
                 chainings.has_key?(:arguments)
+              end
+
+              ##
+              # @return [Boolean]
+              #
+              def has_call_original_chaining?
+                chainings.has_key?(:call_original)
               end
 
               ##
@@ -110,6 +124,16 @@ module ConvenientService
                 raise Errors::ReturnItsValueChainingIsAlreadySet.new if chainings.has_key?(:return_its_value)
 
                 chainings[:return_its_value] = chaining.new(matcher: self)
+              end
+
+              ##
+              # @param chaining [Class]
+              # @raise [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Errors::ReturnItsValueChainingIsAlreadySet]
+              #
+              def add_call_original_chaining(chaining)
+                raise Errors::CallOriginalChainingIsAlreadySet.new if chainings.has_key?(:call_original)
+
+                chainings[:call_original] = chaining.new(matcher: self)
               end
 
               ##

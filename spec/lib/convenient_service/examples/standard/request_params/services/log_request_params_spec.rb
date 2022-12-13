@@ -55,10 +55,15 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::L
         MESSAGE
       end
 
+      before do
+        allow(ConvenientService::Examples::Standard::RequestParams::Entities::Logger).to receive(:log)
+      end
+
       it "logs message" do
         expect { result }
           .to delegate_to(ConvenientService::Examples::Standard::RequestParams::Entities::Logger, :log)
           .with_arguments(message)
+          .without_calling_original
       end
 
       it "returns success" do
@@ -88,6 +93,7 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::L
           expect { result }
             .to delegate_to(ConvenientService::Examples::Standard::RequestParams::Entities::Logger, :log)
             .with_arguments(message)
+            .without_calling_original
         end
       end
     end

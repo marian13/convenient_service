@@ -29,6 +29,11 @@ module ConvenientService
                 attr_reader :block_expectation_value
 
                 ##
+                # @return [Boolean]
+                #
+                delegate :should_call_original?, to: :matcher
+
+                ##
                 # @return [Object]
                 #
                 delegate :object, to: :matcher
@@ -94,7 +99,7 @@ module ConvenientService
                     ##
                     # NOTE: Imitates `and_call_original`.
                     #
-                    original.call(*actual_args, **actual_kwargs, &actual_block)
+                    original.call(*actual_args, **actual_kwargs, &actual_block) if should_call_original?
                   end
                 end
 

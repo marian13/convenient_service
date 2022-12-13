@@ -2,6 +2,7 @@
 
 require_relative "delegate_to/commands"
 require_relative "delegate_to/entities"
+require_relative "delegate_to/errors"
 
 ##
 # @internal
@@ -63,9 +64,8 @@ module ConvenientService
           # @return [Boolean]
           #
           def matches?(block_expectation)
-            # byebug
-
             matcher.add_arguments_chaining(Entities::Chainings::WithoutArguments) unless matcher.has_arguments_chaining?
+            matcher.add_call_original_chaining(Entities::Chainings::WithCallingOriginal) unless matcher.has_call_original_chaining?
 
             matcher.matches?(block_expectation)
           end
@@ -131,6 +131,15 @@ module ConvenientService
           #
           def and_return_its_value
             matcher.add_return_its_value_chaining(Entities::Chainings::ReturnItsValue)
+
+            self
+          end
+
+          ##
+          # @return [ConvenientService::RSpec::Matchers::Custom::DelegateTo]
+          #
+          def without_calling_original
+            matcher.add_call_original_chaining(Entities::Chainings::WithoutCallingOriginal)
 
             self
           end
