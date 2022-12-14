@@ -44,7 +44,7 @@ module ConvenientService
 
             contract do
               schema do
-                required(:content).value(:string)
+                required(:content).filled(:string)
               end
             end
 
