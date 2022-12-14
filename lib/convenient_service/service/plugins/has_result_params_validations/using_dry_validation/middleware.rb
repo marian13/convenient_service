@@ -34,7 +34,6 @@ module ConvenientService
 
             def resolve_errors
               return {} unless contract.schema
-              return {} unless constructor_kwargs.any?
 
               contract.new
                 .call(constructor_kwargs)
