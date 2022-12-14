@@ -171,7 +171,9 @@
 34
 35
 36
-37</pre>
+37
+38
+39</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/examples/dry/gemfile/dry_service/config.rb', line 15</span>
@@ -195,7 +197,9 @@
     <span class='kw'>end</span>
 
     <span class='id identifier rubyid_middlewares'>middlewares</span> <span class='symbol'>:result</span> <span class='kw'>do</span>
-      <span class='id identifier rubyid_use'>use</span> <span class='const'><span class='object_link'><a href="../../../../Plugins.html" title="ConvenientService::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Plugins.html#Service-constant" title="ConvenientService::Plugins::Service (constant)">Service</a></span></span><span class='op'>::</span><span class='const'>HasResultParamsValidations</span><span class='op'>::</span><span class='const'>UsingDryValidation</span><span class='op'>::</span><span class='const'>Middleware</span>
+      <span class='id identifier rubyid_insert_before'>insert_before</span> \
+        <span class='const'><span class='object_link'><a href="../../../../Plugins.html" title="ConvenientService::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Plugins.html#Service-constant" title="ConvenientService::Plugins::Service (constant)">Service</a></span></span><span class='op'>::</span><span class='const'>HasResultSteps</span><span class='op'>::</span><span class='const'>Middleware</span><span class='comma'>,</span>
+        <span class='const'><span class='object_link'><a href="../../../../Plugins.html" title="ConvenientService::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Plugins.html#Service-constant" title="ConvenientService::Plugins::Service (constant)">Service</a></span></span><span class='op'>::</span><span class='const'>HasResultParamsValidations</span><span class='op'>::</span><span class='const'>UsingDryValidation</span><span class='op'>::</span><span class='const'>Middleware</span>
     <span class='kw'>end</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -209,7 +213,7 @@
 </div>
 
       <div id="footer">
-  Generated on Tue Dec 13 19:56:00 2022 by
+  Generated on Wed Dec 14 15:59:16 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.3).
 </div>
