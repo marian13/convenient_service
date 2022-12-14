@@ -20,7 +20,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::AssertNpmP
   let(:service) { described_class.new(**default_options) }
 
   let(:default_options) { {name: name} }
-  let(:name) { double }
+  let(:name) { "strip-comments" }
 
   example_group "modules" do
     subject { described_class }

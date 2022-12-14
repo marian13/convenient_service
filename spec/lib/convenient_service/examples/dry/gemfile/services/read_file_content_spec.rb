@@ -15,7 +15,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::ReadFileCont
   let(:service) { described_class.new(**default_options) }
 
   let(:default_options) { {path: path} }
-  let(:path) { double }
+  let(:path) { "Gemfile" }
 
   example_group "modules" do
     subject { described_class }
@@ -25,6 +25,14 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::ReadFileCont
 
   describe "#result" do
     subject(:result) { service.result }
+
+    context "when path is NOT present" do
+      let(:path) { "" }
+
+      it "returns failure with data" do
+        expect(result).to be_failure.with_data(path: "must be filled")
+      end
+    end
 
     context "when file does NOT exist" do
       before do

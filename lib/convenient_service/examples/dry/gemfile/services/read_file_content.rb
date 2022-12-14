@@ -12,7 +12,7 @@ module ConvenientService
 
             contract do
               schema do
-                required(:path).value(:string)
+                required(:path).filled(:string)
               end
             end
 
