@@ -47,6 +47,14 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::RunShell d
   describe "#result" do
     subject(:result) { service.result }
 
+    context "when command is NOT present" do
+      let(:command) { "" }
+
+      it "returns failure with data" do
+        expect(result).to be_failure.with_data(command: "can't be blank")
+      end
+    end
+
     context "when shell command has non-zero code" do
       before do
         ##

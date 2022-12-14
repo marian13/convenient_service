@@ -21,15 +21,25 @@ module ConvenientService
             # TODO: Return one or all errors?
             #
             def errors
-              @errors ||=
-                entity
-                  .class
-                  .contract
-                  .new
-                  .call(**entity.constructor_params.kwargs)
-                  .errors
-                  .to_h
-                  .transform_values(&:first)
+              @errors ||= resolve_errors
+            end
+
+            def constructor_kwargs
+              @constructor_kwargs ||= entity.constructor_params.kwargs
+            end
+
+            def contract
+              @contract ||= entity.class.contract
+            end
+
+            def resolve_errors
+              return {} unless contract.schema
+
+              contract.new
+                .call(constructor_kwargs)
+                .errors
+                .to_h
+                .transform_values(&:first)
             end
           end
         end

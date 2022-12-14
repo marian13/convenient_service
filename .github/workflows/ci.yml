@@ -128,14 +128,14 @@ jobs:
         run: task rspec:standard
       - name: Install dependencies for appraisals
         run: task deps:install
-      - name: Run RSpec with Rails 5.2
-        run: task rspec:rails_5.2
-      - name: Run RSpec with Rails 6.0
-        run: task rspec:rails_6.0
-      - name: Run RSpec with Rails 6.1
-        run: task rspec:rails_6.1
       - name: Run RSpec with Rails 7.0
         run: task rspec:rails_7.0
+      - name: Run RSpec with Rails 6.1
+        run: task rspec:rails_6.1
+      - name: Run RSpec with Rails 6.0
+        run: task rspec:rails_6.0
+      - name: Run RSpec with Rails 5.2
+        run: task rspec:rails_5.2
       - name: Run RSpec with Dry
         run: task rspec:dry
       ##

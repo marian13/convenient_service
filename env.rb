@@ -12,8 +12,12 @@
 #
 ENV["APPRAISAL_NAME"] ||= ENV["BUNDLE_GEMFILE"].to_s.then(&File.method(:basename)).then { |name| name.end_with?(".gemfile") ? name.delete_suffix(".gemfile") : "" }
 
+puts "ENV[\"APPRAISAL_NAME\"] -> `#{ENV["APPRAISAL_NAME"]}`"
+
 ##
 # NOTE: Ruby version may be set by docker.
 # https://github.com/docker-library/ruby/blob/master/3.1/alpine3.16/Dockerfile#L30
 #
 ENV["RUBY_VERSION"] ||= ::RUBY_VERSION
+
+puts "ENV[\"RUBY_VERSION\"] -> `#{ENV["RUBY_VERSION"]}`"

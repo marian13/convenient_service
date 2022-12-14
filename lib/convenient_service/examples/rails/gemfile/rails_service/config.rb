@@ -42,7 +42,9 @@ module ConvenientService
                 end
 
                 middlewares :result do
-                  use Plugins::Service::HasResultParamsValidations::UsingActiveModelValidations::Middleware
+                  insert_before \
+                    Plugins::Service::HasResultSteps::Middleware,
+                    Plugins::Service::HasResultParamsValidations::UsingActiveModelValidations::Middleware
                 end
               end
             end

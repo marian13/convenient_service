@@ -27,6 +27,14 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::PrintShellCo
 
     let(:out_content) { out.tap(&:rewind).read }
 
+    context "when text is NOT present" do
+      let(:text) { "" }
+
+      it "returns failure with data" do
+        expect(result).to be_failure.with_data(text: "must be filled")
+      end
+    end
+
     it "prints text" do
       result
 

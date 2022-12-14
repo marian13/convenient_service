@@ -54,6 +54,14 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::StripComment
       RUBY
     end
 
+    context "when content is NOT present" do
+      let(:content) { "" }
+
+      it "returns failure with data" do
+        expect(result).to be_failure.with_data(content: "must be filled")
+      end
+    end
+
     context "when `strip-comments` npm package is not available" do
       before do
         stub_service(ConvenientService::Examples::Dry::Gemfile::Services::AssertNpmPackageAvailable)
