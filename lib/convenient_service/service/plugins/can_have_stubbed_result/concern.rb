@@ -17,6 +17,8 @@ module ConvenientService
             #   - https://github.com/rspec/rspec-core/blob/v3.12.0/lib/rspec/core.rb#L122
             #   - https://relishapp.com/rspec/rspec-core/docs/metadata/current-example
             #
+            #   TODO: Mutex for thread-safety when parallel steps will be supported.
+            #
             def stubbed_results
               cache = Utils::Object.instance_variable_fetch(::RSpec.current_example, :@__convenient_service_stubbed_results__) { Support::Cache.new }
 
