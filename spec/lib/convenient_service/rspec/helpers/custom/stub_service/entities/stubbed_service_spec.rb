@@ -9,6 +9,8 @@ require "convenient_service"
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::RSpec::Helpers::Custom::StubService::Entities::StubbedService do
   include ConvenientService::RSpec::Matchers::DelegateTo
+  include ConvenientService::RSpec::Helpers::StubService
+  include ConvenientService::RSpec::Matchers::Results
 
   subject(:helper) { described_class.new(service_class: service_class) }
 
@@ -83,6 +85,44 @@ RSpec.describe ConvenientService::RSpec::Helpers::Custom::StubService::Entities:
     describe "#with_arguments" do
       it "returns self" do
         expect(helper.with_arguments(*args, **kwargs, &block)).to eq(helper)
+      end
+
+      context "when method is NOT called with arguments" do
+        it "does NOT modify method to return stub" do
+          stub_service(service_class).with_arguments(*args, **kwargs, &block).to return_error.with_code(:with_arguments)
+
+          expect(service_class.result).to be_success
+        end
+      end
+
+      context "when method is called with arguments" do
+        it "modifies method to return stub" do
+          stub_service(service_class).with_arguments(*args, **kwargs, &block).to return_error.with_code(:with_arguments)
+
+          expect(service_class.result(*args, **kwargs, &block)).to be_error.with_code(:with_arguments)
+        end
+      end
+    end
+
+    describe "#without_arguments" do
+      it "returns self" do
+        expect(helper.without_arguments).to eq(helper)
+      end
+
+      context "when method is NOT called without arguments" do
+        it "modifies method to return stub" do
+          stub_service(service_class).without_arguments.to return_error.with_code(:with_arguments)
+
+          expect(service_class.result(*args, **kwargs, &block)).to be_error.with_code(:with_arguments)
+        end
+      end
+
+      context "when method is called without arguments" do
+        it "modifies method to return stub" do
+          stub_service(service_class).without_arguments.to return_error.with_code(:with_arguments)
+
+          expect(service_class.result).to be_error.with_code(:with_arguments)
+        end
       end
     end
 
