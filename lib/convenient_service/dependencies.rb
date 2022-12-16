@@ -129,6 +129,14 @@ module ConvenientService
 
         require_relative "examples/dry/gemfile"
       end
+
+      ##
+      # @internal
+      #   TODO: Support::Version, Support::RSpec
+      #
+      def rspec
+        OpenStruct.new(loaded?: defined? ::RSpec)
+      end
     end
   end
 end
