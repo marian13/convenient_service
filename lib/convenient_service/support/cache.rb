@@ -25,6 +25,16 @@ module ConvenientService
       # @return [Boolean]
       #
       # @internal
+      #   https://ruby-doc.org/core-2.7.0/Hash.html#method-i-empty-3F
+      #
+      def empty?
+        hash.empty?
+      end
+
+      ##
+      # @return [Boolean]
+      #
+      # @internal
       #   https://api.rubyonrails.org/classes/ActiveSupport/Cache/Store.html#method-i-exist-3F
       #
       def exist?(key)
