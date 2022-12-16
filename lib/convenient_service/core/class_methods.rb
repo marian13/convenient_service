@@ -25,8 +25,8 @@ module ConvenientService
       #
       # @see https://ruby-doc.org/core-3.1.2/Kernel.html#method-i-require
       #
-      def commit_config!
-        (@__config__ ||= Entities::Config.new(klass: self)).commit!
+      def commit_config!(trigger: Constants::Triggers::USER)
+        (@__config__ ||= Entities::Config.new(klass: self)).commit!(trigger: trigger)
           .tap { ConvenientService.logger.debug { "[Core] Committed config for `#{self}` | Triggered by `.commit_config!`" } }
       end
 
@@ -66,7 +66,7 @@ module ConvenientService
       #   IMPORTANT: `method_missing` should be thread-safe.
       #
       def method_missing(method, *args, **kwargs, &block)
-        commit_config!
+        commit_config!(trigger: Constants::Triggers::CLASS_METHOD_MISSING)
 
         return super unless Utils::Module.class_method_defined?(self, method, private: true)
 

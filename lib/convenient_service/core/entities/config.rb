@@ -117,14 +117,37 @@ module ConvenientService
         # Does nothing for the subsequent calls.
         #
         # @return [Boolean] true if called for the first time, false otherwise (similarly as Kernel#require).
+        # @raise [ConvenientService::Core::Errors::TooManyCommitsFromMethodMissing]
         #
         # @see https://ruby-doc.org/core-3.1.2/Kernel.html#method-i-require
         #
-        def commit!
+        def commit!(trigger: Constants::Triggers::USER)
+          increment_method_missing_counter!(trigger)
+
           concerns.include!
         end
 
         private
+
+        ##
+        # @return [ConvenientService::Support::ThreadSafeCounter]
+        #
+        def method_missing_counter
+          @method_missing_counter ||= Support::ThreadSafeCounter.new(max_value: 10)
+        end
+
+        ##
+        # @return [void]
+        # @raise [ConvenientService::Core::Errors::TooManyCommitsFromMethodMissing]
+        #
+        def increment_method_missing_counter!(trigger)
+          case trigger
+          when Constants::Triggers::INSTANCE_METHOD_MISSING, Constants::Triggers::CLASS_METHOD_MISSING
+            method_missing_counter.increment!
+          end
+        rescue Support::ThreadSafeCounter::Errors::MaxValueExceeded
+          raise Errors::TooManyCommitsFromMethodMissing.new(config: self)
+        end
 
         ##
         # @note: Config is committed either by `commit_config` or `method_missing` from `ConvenientService::Core::ClassMethods`.

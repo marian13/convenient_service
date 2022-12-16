@@ -39,7 +39,7 @@ module ConvenientService
       #   IMPORTANT: `method_missing` should be thread-safe.
       #
       def method_missing(method, *args, **kwargs, &block)
-        self.class.commit_config!
+        self.class.commit_config!(trigger: Constants::Triggers::INSTANCE_METHOD_MISSING)
 
         return super unless Utils::Module.instance_method_defined?(self.class, method, private: true)
 
