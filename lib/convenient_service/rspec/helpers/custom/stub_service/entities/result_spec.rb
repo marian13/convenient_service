@@ -123,7 +123,7 @@ module ConvenientService
                 true
               end
 
-              private
+              protected
 
               ##
               # @!attribute [r] status
@@ -142,6 +142,8 @@ module ConvenientService
               #   @return [Hash]
               #
               attr_reader :chain
+
+              private
 
               ##
               # @return [Hash]
