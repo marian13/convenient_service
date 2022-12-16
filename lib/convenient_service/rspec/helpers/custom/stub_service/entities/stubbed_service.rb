@@ -29,6 +29,15 @@ module ConvenientService
               end
 
               ##
+              # @return [ConvenientService::RSpec::Helpers::Custom::StubService::Entities::StubService]
+              #
+              def without_arguments
+                @arguments = {args: [], kwargs: {}, block: nil}
+
+                self
+              end
+
+              ##
               # @param result_spec [ConvenientService::RSpec::Helpers::Custom::StubService::Entities::ResultSpec]
               # @return [ConvenientService::RSpec::Helpers::Custom::StubService::Entities::StubService]
               #
