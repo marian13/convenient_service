@@ -152,6 +152,14 @@ module ConvenientService
       end
 
       ##
+      # @return [ConvenientService::Support::RSpec]
+      # @api private
+      #
+      def rspec
+        Support::Gems::RSpec
+      end
+
+      ##
       # @return [ConvenientService::Support::Gems::ActiveModel]
       # @api private
       #

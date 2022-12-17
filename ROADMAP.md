@@ -51,5 +51,6 @@
 | Medium | 🚧 | User friendly `raise` that removes lib backtrace from caller | Should have a `debug` mode. Should work well with examples. Check RSpec `CallerFilter.first_non_rspec_line` |
 | High | 🚧 | A plugin that catches `StandardError` and returns `failure` | Should be the lowest in the stack |
 | High | 🚧 | `Support::Command` alias | Should be visible to the end user |
+| Low | 🚧 | Parallel steps | A killer feature |
 
 Search for `TODO`s in the codebase for more tasks.
