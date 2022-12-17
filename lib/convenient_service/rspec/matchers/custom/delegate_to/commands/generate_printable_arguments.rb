@@ -37,6 +37,9 @@ module ConvenientService
                 @arguments = arguments
               end
 
+              ##
+              # @return [String]
+              #
               def call
                 text =
                   if args.any? && kwargs.any?
@@ -54,14 +57,26 @@ module ConvenientService
                 text
               end
 
+              ##
+              # @return [String]
+              #
               def printable_args
                 args.map(&:inspect).join(", ")
               end
 
+              ##
+              # @return [String]
+              #
               def printable_kwargs
                 kwargs.map { |key, value| "#{key}: #{value.inspect}" }.join(", ")
               end
 
+              ##
+              # @return [String]
+              #
+              # @internal
+              #   TODO: Generic util to print blocks.
+              #
               def printable_block
                 block ? "{ ... }" : ""
               end
