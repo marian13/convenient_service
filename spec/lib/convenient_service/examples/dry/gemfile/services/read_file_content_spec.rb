@@ -65,7 +65,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::ReadFileCont
             .to return_success
         end
 
-        it "return success with content" do
+        it "returns success with content" do
           expect(result).to be_success.with_data({content: content})
         end
       end

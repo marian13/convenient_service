@@ -171,11 +171,13 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::ParseConte
       end
     end
 
-    context "when content is NOT present" do
-      let(:content) { "" }
+    if ConvenientService::Dependencies.support_has_result_params_validations_using_active_model_validations?
+      context "when content is NOT present" do
+        let(:content) { "" }
 
-      it "returns failure with data" do
-        expect(result).to be_failure.with_data(content: "can't be blank")
+        it "returns failure with data" do
+          expect(result).to be_failure.with_data(content: "can't be blank")
+        end
       end
     end
 

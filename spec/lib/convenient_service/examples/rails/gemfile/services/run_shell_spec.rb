@@ -47,11 +47,13 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::RunShell d
   describe "#result" do
     subject(:result) { service.result }
 
-    context "when command is NOT present" do
-      let(:command) { "" }
+    if ConvenientService::Dependencies.support_has_result_params_validations_using_active_model_validations?
+      context "when command is NOT present" do
+        let(:command) { "" }
 
-      it "returns failure with data" do
-        expect(result).to be_failure.with_data(command: "can't be blank")
+        it "returns failure with data" do
+          expect(result).to be_failure.with_data(command: "can't be blank")
+        end
       end
     end
 

@@ -16,7 +16,7 @@ module ConvenientService
             attribute :text, :string
             attribute :out, default: $stdout
 
-            validates :text, presence: true
+            validates :text, presence: true if ConvenientService::Dependencies.support_has_result_params_validations_using_active_model_validations?
 
             def result
               out.puts

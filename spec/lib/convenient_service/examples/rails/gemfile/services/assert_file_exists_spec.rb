@@ -48,11 +48,13 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::AssertFile
   describe "#result" do
     subject(:result) { service.result }
 
-    context "when path is NOT present" do
-      let(:path) { "" }
+    if ConvenientService::Dependencies.support_has_result_params_validations_using_active_model_validations?
+      context "when path is NOT present" do
+        let(:path) { "" }
 
-      it "returns failure with data" do
-        expect(result).to be_failure.with_data(path: "can't be blank")
+        it "returns failure with data" do
+          expect(result).to be_failure.with_data(path: "can't be blank")
+        end
       end
     end
 
