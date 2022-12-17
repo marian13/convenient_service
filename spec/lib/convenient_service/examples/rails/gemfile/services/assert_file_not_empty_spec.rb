@@ -50,6 +50,16 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::AssertFile
 
     let(:path) { tempfile.path }
 
+    if ConvenientService::Dependencies.support_has_result_params_validations_using_active_model_validations?
+      context "when path is NOT present" do
+        let(:path) { "" }
+
+        it "returns failure with data" do
+          expect(result).to be_failure.with_data(path: "can't be blank")
+        end
+      end
+    end
+
     context "when file is NOT empty" do
       ##
       # NOTE: Tempfile uses its own let in order to prevent its premature garbage collection.
@@ -57,10 +67,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::AssertFile
       let(:tempfile) { Tempfile.new.tap { |file| file.write("content") }.tap(&:close) }
 
       it "returns success" do
-        ##
-        # TODO: Matcher.
-        #
-        expect(result).to be_success
+        expect(result).to be_success.without_data
       end
     end
 

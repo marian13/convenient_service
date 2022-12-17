@@ -18,7 +18,7 @@ module ConvenientService
 
             contract do
               schema do
-                required(:text).value(:string)
+                required(:text).filled(:string)
               end
             end
 

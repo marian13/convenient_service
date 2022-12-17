@@ -11,7 +11,7 @@ module ConvenientService
             attribute :command, :string
             attribute :debug, :boolean, default: false
 
-            validates :command, presence: true
+            validates :command, presence: true if ConvenientService::Dependencies.support_has_result_params_validations_using_active_model_validations?
 
             def result
               Services::PrintShellCommand.result(text: command) if debug

@@ -30,6 +30,14 @@ require "ostruct"
 
 ##
 # @internal
+#   - https://ruby-doc.org/stdlib-2.7.0/libdoc/rubygems/rdoc/Gem/Version.html
+#   - https://github.com/rubygems/rubygems
+#   - https://github.com/rubygems/rubygems/blob/master/lib/rubygems/version.rb
+#
+require "rubygems"
+
+##
+# @internal
 #   - https://ruby-doc.org/stdlib-2.7.0/libdoc/singleton/rdoc/Singleton.html
 #   - https://github.com/ruby/singleton
 #
