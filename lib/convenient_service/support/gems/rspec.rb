@@ -9,7 +9,7 @@ module ConvenientService
           # @return [Boolean]
           #
           def loaded?
-            (defined? ::RSpec) ? true : false
+            defined? ::RSpec ? true : false
           end
 
           ##

@@ -9,7 +9,7 @@ module ConvenientService
           # @return [Boolean]
           #
           def loaded?
-            (defined? ::ActiveModel) ? true : false
+            defined? ::ActiveModel ? true : false
           end
 
           ##
