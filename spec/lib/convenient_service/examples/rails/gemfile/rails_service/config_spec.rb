@@ -27,6 +27,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::RailsService::Config
       example_group "service" do
         let(:concerns) do
           [
+            ConvenientService::Service::Plugins::CanHaveStubbedResult::Concern,
             ConvenientService::Common::Plugins::HasInternals::Concern,
             ConvenientService::Common::Plugins::HasConstructor::Concern,
             ConvenientService::Plugins::Common::HasConstructorWithoutInitialize::Concern,
