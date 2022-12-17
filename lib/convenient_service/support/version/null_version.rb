@@ -3,6 +3,13 @@
 module ConvenientService
   module Support
     class Version
+      ##
+      # @api private
+      #
+      # @internal
+      #   - https://thoughtbot.com/blog/rails-refactoring-example-introduce-null-object
+      #   - https://avdi.codes/null-objects-and-falsiness/
+      #
       class NullVersion
         ##
         # @return [nil]

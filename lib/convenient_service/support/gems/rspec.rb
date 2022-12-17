@@ -3,13 +3,16 @@
 module ConvenientService
   module Support
     module Gems
+      ##
+      # @api private
+      #
       class RSpec
         class << self
           ##
           # @return [Boolean]
           #
           # @internal
-          #   `Style/TernaryParentheses` is disable since `defined?` has too low priority without parentheses.
+          #   `Style/TernaryParentheses` is disabled since `defined?` has too low priority without parentheses.
           #
           # rubocop:disable Style/TernaryParentheses
           def loaded?

@@ -44,6 +44,7 @@ module ConvenientService
 
       ##
       # @return [Boolean]
+      # @api private
       #
       def support_has_result_params_validations_using_active_model_validations?
         return false unless Support::Gems::ActiveModel.loaded?

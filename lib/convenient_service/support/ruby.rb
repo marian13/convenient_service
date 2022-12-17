@@ -2,6 +2,9 @@
 
 module ConvenientService
   module Support
+    ##
+    # @api private
+    #
     class Ruby
       class << self
         ##
