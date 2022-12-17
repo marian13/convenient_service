@@ -42,9 +42,12 @@ module ConvenientService
         require_relative "common/plugins/has_attributes/using_active_model_attributes"
       end
 
-      def support_active_model_validations?
-        return false unless Support::Rails.loaded?
-        return false if Support::Ruby.version > 3 && Support::Rails.version < 6
+      ##
+      # @return [Boolean]
+      #
+      def support_has_result_params_validations_using_active_model_validations?
+        return false unless Support::Gems::ActiveModel.loaded?
+        return false if Support::Ruby.version >= 3.0 && Support::Gems::ActiveModel.version < 6.0
 
         true
       end
