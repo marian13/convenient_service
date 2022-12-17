@@ -32,7 +32,7 @@ module ConvenientService
       # @return [Gem::Version, nil]
       #
       def gem_version
-        cast_gem_version(value.to_s)
+        cast_gem_version(value)
       end
 
       ##

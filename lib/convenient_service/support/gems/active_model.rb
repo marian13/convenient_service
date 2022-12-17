@@ -23,6 +23,9 @@ module ConvenientService
           ##
           # @return [ConvenientService::Support::Version]
           #
+          # @internal
+          #   https://github.com/rails/rails/blob/main/activemodel/lib/active_model/version.rb
+          #
           def version
             loaded? ? Support::Version.new(::ActiveModel.version) : Support::Version.null_version
           end

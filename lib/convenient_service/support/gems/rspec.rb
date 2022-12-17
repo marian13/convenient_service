@@ -23,6 +23,9 @@ module ConvenientService
           ##
           # @return [ConvenientService::Support::Version]
           #
+          # @internal
+          #   https://github.com/rspec/rspec-core/blob/main/lib/rspec/core/version.rb
+          #
           def version
             loaded? ? Support::Version.new(::RSpec::Core::Version::STRING) : Support::Version.null_version
           end
