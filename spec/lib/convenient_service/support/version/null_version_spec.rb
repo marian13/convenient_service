@@ -65,7 +65,7 @@ RSpec.describe ConvenientService::Support::Version::NullVersion do
     end
 
     describe "#to_s" do
-      it "return empty string" do
+      it "returns empty string" do
         expect(version.to_s).to eq("")
       end
     end

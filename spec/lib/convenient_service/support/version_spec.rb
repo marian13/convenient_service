@@ -41,14 +41,14 @@ RSpec.describe ConvenientService::Support::Version do
     describe "#gem_version" do
       let(:value) { "0.2.1" }
 
-      it "return `Gem::Version`" do
+      it "returns `Gem::Version`" do
         expect(version.gem_version).to eq(Gem::Version.new(value.to_s))
       end
 
       context "when value is castable" do
         let(:value) { "abc" }
 
-        it "return `nil`" do
+        it "returns `nil`" do
           expect(version.gem_version).to eq(nil)
         end
       end

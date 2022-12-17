@@ -8,7 +8,7 @@ require "convenient_service"
 RSpec.describe ConvenientService::Support::Ruby do
   example_group "class methods" do
     describe "version" do
-      it "return version" do
+      it "returns version" do
         expect(described_class.version).to eq(ConvenientService::Support::Version.new(RUBY_VERSION))
       end
     end

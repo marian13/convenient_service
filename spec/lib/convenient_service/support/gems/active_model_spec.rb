@@ -9,7 +9,7 @@ RSpec.describe ConvenientService::Support::Gems::ActiveModel do
   example_group "class methods" do
     if described_class.loaded?
       describe "version" do
-        it "return version" do
+        it "returns version" do
           expect(described_class.version).to eq(ConvenientService::Support::Version.new(::ActiveModel.version))
         end
       end
@@ -20,7 +20,7 @@ RSpec.describe ConvenientService::Support::Gems::ActiveModel do
         allow(described_class).to receive(:loaded?).and_return(false)
       end
 
-      it "return null version" do
+      it "returns null version" do
         expect(described_class.version).to be_instance_of(ConvenientService::Support::Version::NullVersion)
       end
     end
