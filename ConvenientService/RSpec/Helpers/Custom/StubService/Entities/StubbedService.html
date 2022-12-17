@@ -89,11 +89,6 @@
   
   
   
-  <dl>
-      <dt>Includes:</dt>
-      <dd>RSpec::Matchers, RSpec::Mocks::ExampleMethods</dd>
-  </dl>
-  
   
 
   
@@ -106,17 +101,7 @@
   
 </div>
 
-<h2>Overview</h2><div class="docstring">
-  <div class="discussion">
-    <p>TODO: Specs.</p>
 
-
-  </div>
-</div>
-<div class="tags">
-  
-
-</div>
 
 
 
@@ -134,7 +119,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(service_class:)  &#x21d2; StubbedService </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(service_class:)  &#x21d2; void </a>
     
 
     
@@ -150,8 +135,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>A new instance of StubbedService.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'></div></span>
   
 </li>
 
@@ -159,7 +143,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#to-instance_method" title="#to (instance method)">#<strong>to</strong>(result_spec)  &#x21d2; Object </a>
+      <a href="#to-instance_method" title="#to (instance method)">#<strong>to</strong>(result_spec)  &#x21d2; ConvenientService::RSpec::Helpers::Custom::StubService::Entities::StubService </a>
     
 
     
@@ -181,7 +165,29 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#with_arguments-instance_method" title="#with_arguments (instance method)">#<strong>with_arguments</strong>(*args, **kwargs, &amp;block)  &#x21d2; Object </a>
+      <a href="#with_arguments-instance_method" title="#with_arguments (instance method)">#<strong>with_arguments</strong>(*args, **kwargs, &amp;block)  &#x21d2; ConvenientService::RSpec::Helpers::Custom::StubService::Entities::StubService </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#without_arguments-instance_method" title="#without_arguments (instance method)">#<strong>without_arguments</strong>  &#x21d2; ConvenientService::RSpec::Helpers::Custom::StubService::Entities::StubService </a>
     
 
     
@@ -212,8 +218,6 @@
   
   
   
-  
-  
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="../../../../../Support/Command.html" title="ConvenientService::Support::Command (class)">Support::Command</a></span></h3>
   <p class="inherited"><span class='object_link'><a href="../../../../../Support/Command.html#call-class_method" title="ConvenientService::Support::Command.call (method)">call</a></span>, <span class='object_link'><a href="../../../../../Support/Command.html#call-instance_method" title="ConvenientService::Support::Command#call (method)">#call</a></span></p>
 <div id="constructor_details" class="method_details_list">
@@ -222,7 +226,7 @@
     <div class="method_details first">
   <h3 class="signature first" id="initialize-instance_method">
   
-    #<strong>initialize</strong>(service_class:)  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::RSpec::Helpers::Custom::StubService::Entities::StubbedService (class)">StubbedService</a></span></tt> 
+    #<strong>initialize</strong>(service_class:)  &#x21d2; <tt>void</tt> 
   
 
   
@@ -230,13 +234,27 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a new instance of StubbedService.</p>
-
+    
 
   </div>
 </div>
 <div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
   
+    <li>
+      
+        <span class='name'>service_class</span>
+      
+      
+        <span class='type'>(<tt>Class</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
 
 </div><table class="source_code">
   <tr>
@@ -244,15 +262,17 @@
       <pre class="lines">
 
 
-27
-28
-29</pre>
+14
+15
+16
+17</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/custom/stub_service/entities/stubbed_service.rb', line 27</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/custom/stub_service/entities/stubbed_service.rb', line 14</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>service_class:</span><span class='rparen'>)</span>
   <span class='ivar'>@service_class</span> <span class='op'>=</span> <span class='id identifier rubyid_service_class'>service_class</span>
+  <span class='ivar'>@arguments</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='label'>args:</span> <span class='lbracket'>[</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='label'>kwargs:</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='label'>block:</span> <span class='kw'>nil</span><span class='rbrace'>}</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -269,25 +289,55 @@
       <div class="method_details first">
   <h3 class="signature first" id="to-instance_method">
   
-    #<strong>to</strong>(result_spec)  &#x21d2; <tt>Object</tt> 
+    #<strong>to</strong>(result_spec)  &#x21d2; <tt>ConvenientService::RSpec::Helpers::Custom::StubService::Entities::StubService</tt> 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>result_spec</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ResultSpec.html" title="ConvenientService::RSpec::Helpers::Custom::StubService::Entities::ResultSpec (class)">ConvenientService::RSpec::Helpers::Custom::StubService::Entities::ResultSpec</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>ConvenientService::RSpec::Helpers::Custom::StubService::Entities::StubService</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-37
-38
-39
-40
-41
-42
-43
 44
 45
 46
@@ -296,28 +346,19 @@
 49
 50
 51
-52
-53</pre>
+52</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/custom/stub_service/entities/stubbed_service.rb', line 37</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/custom/stub_service/entities/stubbed_service.rb', line 44</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to'>to</span><span class='lparen'>(</span><span class='id identifier rubyid_result_spec'>result_spec</span><span class='rparen'>)</span>
   <span class='ivar'>@result_spec</span> <span class='op'>=</span> <span class='id identifier rubyid_result_spec'>result_spec</span>
 
   <span class='id identifier rubyid_service_class'>service_class</span><span class='period'>.</span><span class='id identifier rubyid_commit_config!'>commit_config!</span>
 
-  <span class='kw'>if</span> <span class='id identifier rubyid_used_with_arguments?'>used_with_arguments?</span>
-    <span class='id identifier rubyid_allow'>allow</span><span class='lparen'>(</span><span class='id identifier rubyid_service_class'>service_class</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to'>to</span> <span class='id identifier rubyid_receive'>receive</span><span class='lparen'>(</span><span class='symbol'>:result</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_and_wrap_original'>and_wrap_original</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_original'>original</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_actual_args'>actual_args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_actual_kwargs'>actual_kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_actual_block'>actual_block</span><span class='op'>|</span>
-      <span class='id identifier rubyid_expect'>expect</span><span class='lparen'>(</span><span class='id identifier rubyid_actual_args'>actual_args</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to'>to</span> <span class='id identifier rubyid_eq'>eq</span><span class='lparen'>(</span><span class='id identifier rubyid_expected_args'>expected_args</span><span class='rparen'>)</span>
-      <span class='id identifier rubyid_expect'>expect</span><span class='lparen'>(</span><span class='id identifier rubyid_actual_kwargs'>actual_kwargs</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to'>to</span> <span class='id identifier rubyid_eq'>eq</span><span class='lparen'>(</span><span class='id identifier rubyid_expected_kwargs'>expected_kwargs</span><span class='rparen'>)</span>
-      <span class='id identifier rubyid_expect'>expect</span><span class='lparen'>(</span><span class='id identifier rubyid_actual_block'>actual_block</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to'>to</span> <span class='id identifier rubyid_eq'>eq</span><span class='lparen'>(</span><span class='id identifier rubyid_expected_block'>expected_block</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_service_class'>service_class</span><span class='period'>.</span><span class='id identifier rubyid_stubbed_results'>stubbed_results</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_result_value'>result_value</span>
 
-      <span class='id identifier rubyid_result_value'>result_value</span>
-    <span class='kw'>end</span>
-  <span class='kw'>else</span>
-    <span class='id identifier rubyid_allow'>allow</span><span class='lparen'>(</span><span class='id identifier rubyid_service_class'>service_class</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to'>to</span> <span class='id identifier rubyid_receive'>receive</span><span class='lparen'>(</span><span class='symbol'>:result</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_and_return'>and_return</span><span class='lparen'>(</span><span class='id identifier rubyid_result_value'>result_value</span><span class='rparen'>)</span>
-  <span class='kw'>end</span>
+  <span class='kw'>self</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -327,29 +368,144 @@
       <div class="method_details ">
   <h3 class="signature " id="with_arguments-instance_method">
   
-    #<strong>with_arguments</strong>(*args, **kwargs, &amp;block)  &#x21d2; <tt>Object</tt> 
+    #<strong>with_arguments</strong>(*args, **kwargs, &amp;block)  &#x21d2; <tt>ConvenientService::RSpec::Helpers::Custom::StubService::Entities::StubService</tt> 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>args</span>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>kwargs</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>block</span>
+      
+      
+        <span class='type'>(<tt>Block</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>ConvenientService::RSpec::Helpers::Custom::StubService::Entities::StubService</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-31
-32
-33
-34
-35</pre>
+25
+26
+27
+28
+29</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/custom/stub_service/entities/stubbed_service.rb', line 31</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/custom/stub_service/entities/stubbed_service.rb', line 25</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_with_arguments'>with_arguments</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_chain'>chain</span><span class='lbracket'>[</span><span class='symbol'>:with_arguments</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='label'>args:</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='label'>kwargs:</span> <span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='label'>block:</span> <span class='id identifier rubyid_block'>block</span><span class='rbrace'>}</span>
+  <span class='ivar'>@arguments</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='label'>args:</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='label'>kwargs:</span> <span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='label'>block:</span> <span class='id identifier rubyid_block'>block</span><span class='rbrace'>}</span>
+
+  <span class='kw'>self</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="without_arguments-instance_method">
+  
+    #<strong>without_arguments</strong>  &#x21d2; <tt>ConvenientService::RSpec::Helpers::Custom::StubService::Entities::StubService</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>ConvenientService::RSpec::Helpers::Custom::StubService::Entities::StubService</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+34
+35
+36
+37
+38</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/custom/stub_service/entities/stubbed_service.rb', line 34</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_without_arguments'>without_arguments</span>
+  <span class='ivar'>@arguments</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='label'>args:</span> <span class='lbracket'>[</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='label'>kwargs:</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='label'>block:</span> <span class='kw'>nil</span><span class='rbrace'>}</span>
 
   <span class='kw'>self</span>
 <span class='kw'>end</span></pre>
@@ -363,7 +519,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Dec 17 18:29:34 2022 by
+  Generated on Sat Dec 17 18:43:50 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.3).
 </div>
