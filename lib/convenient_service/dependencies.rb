@@ -44,7 +44,20 @@ module ConvenientService
 
       ##
       # @return [Boolean]
+      # @api private
+      #
+      def support_has_result_params_validations_using_active_model_validations?
+        return false unless active_model.loaded?
+        return false if ruby.version >= 3.0 && active_model.version < 6.0
+
+        true
+      end
+
+      ##
+      # @return [Boolean]
       # @note Expected to be called from app entry points like `initializers` in Rails.
+      #
+      # @see https://marian13.github.io/convenient_service_docs/troubleshooting/i18n_translate_wrong_number_of_arguments
       #
       def require_has_result_params_validations_using_active_model_validations
         require "active_model"
@@ -135,6 +148,30 @@ module ConvenientService
         require "webrick"
 
         require_relative "examples/dry/gemfile"
+      end
+
+      ##
+      # @return [ConvenientService::Support::Ruby]
+      # @api private
+      #
+      def ruby
+        Support::Ruby
+      end
+
+      ##
+      # @return [ConvenientService::Support::RSpec]
+      # @api private
+      #
+      def rspec
+        Support::Gems::RSpec
+      end
+
+      ##
+      # @return [ConvenientService::Support::Gems::ActiveModel]
+      # @api private
+      #
+      def active_model
+        Support::Gems::ActiveModel
       end
     end
   end

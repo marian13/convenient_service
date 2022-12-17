@@ -31,7 +31,9 @@ module ConvenientService
                 end
 
                 middlewares :result do
-                  use Plugins::Service::HasResultParamsValidations::UsingDryValidation::Middleware
+                  insert_before \
+                    Plugins::Service::HasResultSteps::Middleware,
+                    Plugins::Service::HasResultParamsValidations::UsingDryValidation::Middleware
                 end
               end
             end

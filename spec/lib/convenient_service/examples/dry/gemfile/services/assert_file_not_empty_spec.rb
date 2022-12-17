@@ -26,6 +26,14 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::AssertFileNo
 
     let(:path) { tempfile.path }
 
+    context "when path is NOT present" do
+      let(:path) { "" }
+
+      it "returns failure with data" do
+        expect(result).to be_failure.with_data(path: "must be filled")
+      end
+    end
+
     context "when file is NOT empty" do
       ##
       # NOTE: Tempfile uses its own let in order to prevent its premature garbage collection.
@@ -33,10 +41,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::AssertFileNo
       let(:tempfile) { Tempfile.new.tap { |file| file.write("content") }.tap(&:close) }
 
       it "returns success" do
-        ##
-        # TODO: Matcher.
-        #
-        expect(result).to be_success
+        expect(result).to be_success.without_data
       end
     end
 

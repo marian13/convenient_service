@@ -50,6 +50,16 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::ReadFileCo
   describe "#result" do
     subject(:result) { service.result }
 
+    if ConvenientService::Dependencies.support_has_result_params_validations_using_active_model_validations?
+      context "when path is NOT present" do
+        let(:path) { "" }
+
+        it "returns failure with data" do
+          expect(result).to be_failure.with_data(path: "can't be blank")
+        end
+      end
+    end
+
     context "when file does NOT exist" do
       before do
         stub_service(ConvenientService::Examples::Rails::Gemfile::Services::AssertFileExists)
@@ -81,7 +91,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::ReadFileCo
             .to return_success
         end
 
-        it "return success with content" do
+        it "returns success with content" do
           expect(result).to be_success.with_data({content: content})
         end
       end

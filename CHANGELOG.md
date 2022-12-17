@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.3.0](https://github.com/marian13/convenient_service/compare/v0.2.1...v0.3.0) (2022-12-17)
+
+
+### Features
+
+* **stub_service:** stub_service supports stubbing with different arguments ([766eb5a](https://github.com/marian13/convenient_service/commit/766eb5a25cfbd49b699ca5c0c0ffa5524dc46548))
+
+## [0.2.1](https://github.com/marian13/convenient_service/compare/v0.2.0...v0.2.1) (2022-12-14)
+
+
+### Bug Fixes
+
+* **has_result_steps:** return step copy to have fresh state ([55cc368](https://github.com/marian13/convenient_service/commit/55cc368484641040c0c76ecb38872cc9a268397c), [fc7cebb](https://github.com/marian13/convenient_service/commit/fc7cebb4e159af7b35eac3cf8c25c7009e14c9d1))
+* **standard:** place UsingActiveModelValidations before HasResultSteps ([4c43205](https://github.com/marian13/convenient_service/commit/4c43205382da2e7ae395fea6639c2bcc43d1eec2))
+* **standard:** place UsingDryValidation before HasResultSteps ([63c31c0](https://github.com/marian13/convenient_service/commit/63c31c04ac7c2581defd3557aad13db3188806ba))
+
 ## [0.2.0](https://github.com/marian13/convenient_service/compare/v0.1.0...v0.2.0) (2022-11-26)
 
 

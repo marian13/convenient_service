@@ -201,10 +201,10 @@ tasks:
   rspec:
     cmds:
       - task: rspec:standard
-      - task: rspec:rails_5.2
-      - task: rspec:rails_6.0
-      - task: rspec:rails_6.1
       - task: rspec:rails_7.0
+      - task: rspec:rails_6.1
+      - task: rspec:rails_6.0
+      - task: rspec:rails_5.2
       - task: rspec:dry
 
   ##
