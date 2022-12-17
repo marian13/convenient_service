@@ -47,8 +47,8 @@ module ConvenientService
       # @api private
       #
       def support_has_result_params_validations_using_active_model_validations?
-        return false unless Support::Gems::ActiveModel.loaded?
-        return false if Support::Ruby.version >= 3.0 && Support::Gems::ActiveModel.version < 6.0
+        return false unless active_model.loaded?
+        return false if ruby.version >= 3.0 && active_model.version < 6.0
 
         true
       end
