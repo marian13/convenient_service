@@ -15,7 +15,7 @@ module ConvenientService
 
             attribute :content, :string
 
-            validates :content, presence: true
+            validates :content, presence: true if ConvenientService::Dependencies.support_has_result_params_validations_using_active_model_validations?
 
             alias_method :content_with_comments, :content
 
