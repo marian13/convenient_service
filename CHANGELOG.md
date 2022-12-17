@@ -3,24 +3,9 @@
 ## [0.3.0](https://github.com/marian13/convenient_service/compare/v0.2.1...v0.3.0) (2022-12-17)
 
 
-### ⚠ BREAKING CHANGES
-
-* **deps:** support_has_result_params_validations_using_active_model_validations?
-
 ### Features
 
-* **deps:** support_has_result_params_validations_using_active_model_validations? ([aad93b7](https://github.com/marian13/convenient_service/commit/aad93b78398c60aeaf8c5d8e3f251c5cbd2c7042))
-
-
-### Bug Fixes
-
-* **example:** fix dry_service/config_spec.rb ([3f872c8](https://github.com/marian13/convenient_service/commit/3f872c8756490a6176dc4e313e122e478dce9ead))
-* **example:** fix rails_service/config_spec.rb ([d0ca4c8](https://github.com/marian13/convenient_service/commit/d0ca4c80b4c0d69f8658dcc567ea7ccd04ffb16a))
-
-
-### Miscellaneous Chores
-
-* release 0.3.0 ([ff20928](https://github.com/marian13/convenient_service/commit/ff20928ec0fa51781738fe43bd89ff7c7f4709c0))
+* **stub_service:** stub_service supports stubbing with different arguments ([766eb5a](https://github.com/marian13/convenient_service/commit/766eb5a25cfbd49b699ca5c0c0ffa5524dc46548))
 
 ## [0.2.1](https://github.com/marian13/convenient_service/compare/v0.2.0...v0.2.1) (2022-12-14)
 
