@@ -52,5 +52,6 @@
 | High | 🚧 | A plugin that catches `StandardError` and returns `failure` | Should be the lowest in the stack |
 | High | 🚧 | `Support::Command` alias | Should be visible to the end user |
 | Low | 🚧 | Parallel steps | A killer feature |
+| Medium | 🚧 | Add Ruby 3.2 support to Docker and CI |  |
 
 Search for `TODO`s in the codebase for more tasks.
