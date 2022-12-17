@@ -42,9 +42,18 @@ module ConvenientService
         require_relative "common/plugins/has_attributes/using_active_model_attributes"
       end
 
+      def support_active_model_validations?
+        return false unless Support::Rails.loaded?
+        return false if Support::Ruby.version > 3 && Support::Rails.version < 6
+
+        true
+      end
+
       ##
       # @return [Boolean]
       # @note Expected to be called from app entry points like `initializers` in Rails.
+      #
+      # @see https://marian13.github.io/convenient_service_docs/troubleshooting/i18n_translate_wrong_number_of_arguments
       #
       def require_has_result_params_validations_using_active_model_validations
         require "active_model"
@@ -128,6 +137,22 @@ module ConvenientService
         require "progressbar"
 
         require_relative "examples/dry/gemfile"
+      end
+
+      ##
+      # @return [ConvenientService::Support::Ruby]
+      # @api private
+      #
+      def ruby
+        Support::Ruby
+      end
+
+      ##
+      # @return [ConvenientService::Support::Gems::ActiveModel]
+      # @api private
+      #
+      def active_model
+        Support::Gems::ActiveModel
       end
     end
   end
