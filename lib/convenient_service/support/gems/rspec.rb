@@ -42,7 +42,7 @@ module ConvenientService
           #   - https://relishapp.com/rspec/rspec-core/docs/metadata/current-example
           #
           def current_example
-            ::RSpec.current_example
+            ::RSpec.current_example if loaded?
           end
         end
       end
