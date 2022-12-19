@@ -20,7 +20,7 @@ module ConvenientService
             #   TODO: Mutex for thread-safety when parallel steps will be supported.
             #
             def stubbed_results
-              return unless ::RSpec.current_example
+              return Support::Cache.new unless Support::Gems::RSpec.current_example
 
               cache = Utils::Object.instance_variable_fetch(::RSpec.current_example, :@__convenient_service_stubbed_results__) { Support::Cache.new }
 

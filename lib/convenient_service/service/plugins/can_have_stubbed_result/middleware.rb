@@ -12,8 +12,6 @@ module ConvenientService
           # @return [Object] Can be any type.
           #
           def next(*args, **kwargs, &block)
-            return chain.next(*args, **kwargs, &block) unless cache
-
             key_with_arguments = cache.keygen(*args, **kwargs, &block)
             key_without_arguments = cache.keygen
 

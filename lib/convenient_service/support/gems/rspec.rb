@@ -29,6 +29,21 @@ module ConvenientService
           def version
             loaded? ? Support::Version.new(::RSpec::Core::Version::STRING) : Support::Version.null_version
           end
+
+          ##
+          # @return [RSpec::Core::Example, nil]
+          #
+          # @internal
+          #   NOTE: Returns `nil` in a non-test environment
+          #
+          #   `::RSpec.current_example` docs:
+          #   - https://www.rubydoc.info/github/rspec/rspec-core/RSpec.current_example
+          #   - https://github.com/rspec/rspec-core/blob/v3.12.0/lib/rspec/core.rb#L122
+          #   - https://relishapp.com/rspec/rspec-core/docs/metadata/current-example
+          #
+          def current_example
+            ::RSpec.current_example
+          end
         end
       end
     end
