@@ -33,7 +33,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStubbedResult::Concer
 
   example_group "class methods" do
     describe ".stubbed_results" do
-      context "when `Rspec.current_example` is nil" do
+      context "when RSpec current example is NOT set" do
         before do
           allow(ConvenientService::Support::Gems::RSpec).to receive(:current_example).and_return(nil)
         end
@@ -43,7 +43,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStubbedResult::Concer
         end
       end
 
-      context "when `Rspec.current_example` is present" do
+      context "when RSpec is loaded and current example is set" do
         it "returns cache scoped by self" do
           expect(service_class.stubbed_results).to eq(ConvenientService::Support::Cache.new.scope(service_class))
         end
