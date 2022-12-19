@@ -32,11 +32,23 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStubbedResult::Concer
 
   example_group "class methods" do
     describe ".stubbed_results" do
-      it "returns cache scoped by self" do
-        expect(service_class.stubbed_results).to eq(ConvenientService::Support::Cache.new.scope(service_class))
+      context "when `Rspec.current_example` is nil" do
+        before do
+          allow(ConvenientService::Support::Gems::RSpec).to receive(:current_example).and_return(nil)
+        end
+
+        it "returns empty cache" do
+          expect(service_class.stubbed_results).to eq(ConvenientService::Support::Cache.new)
+        end
       end
 
-      specify { expect { service_class.stubbed_results }.to cache_its_value }
+      context "when `Rspec.current_example` is present" do
+        it "returns cache scoped by self" do
+          expect(service_class.stubbed_results).to eq(ConvenientService::Support::Cache.new.scope(service_class))
+        end
+
+        specify { expect { service_class.stubbed_results }.to cache_its_value }
+      end
     end
   end
 end
