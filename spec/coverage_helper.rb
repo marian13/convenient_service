@@ -75,5 +75,12 @@ SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
 ])
 
 SimpleCov.start do
+  ##
+  # NOTE: Enables branch coverage (requires Ruby 2.5+).
+  # https://github.com/simplecov-ruby/simplecov#branch-coverage-ruby--25
+  # https://github.com/simplecov-ruby/simplecov#primary-coverage
+  #
+  enable_coverage :branch
+
   add_filter "/spec/"
 end
