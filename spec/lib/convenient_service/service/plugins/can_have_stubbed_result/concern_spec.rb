@@ -3,7 +3,7 @@
 require "spec_helper"
 
 require "convenient_service"
-
+# rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Service::Plugins::CanHaveStubbedResult::Concern do
   include ConvenientService::RSpec::Matchers::CacheItsValue
 
@@ -52,3 +52,4 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStubbedResult::Concer
     end
   end
 end
+# rubocop:enable RSpec/NestedGroups
