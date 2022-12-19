@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.1](https://github.com/marian13/convenient_service/compare/v0.3.0...v0.3.1) (2022-12-19)
+
+
+### Bug Fixes
+
+* **can_have_stubbed_result:** create a wrapper for ([b105a5c](https://github.com/marian13/convenient_service/commit/b105a5cc18cf26aafa2460a62f1398a9384f3b74))
+* **can_have_stubbed_result:** fix stubbed_result when it's called in non-test env ([e25178e](https://github.com/marian13/convenient_service/commit/e25178ef502e198d498703172b25e1fb94e702a4))
+
 ## [0.3.0](https://github.com/marian13/convenient_service/compare/v0.2.1...v0.3.0) (2022-12-17)
 
 
