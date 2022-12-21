@@ -8,7 +8,7 @@ module ConvenientService
           class Prepare
             include ConvenientService::Standard::Config
 
-            attr_reader :request, :role
+            attr_reader :request
 
             step Services::ExtractParamsFromPath, \
               in: [:request, {pattern: raw(/^\/rules\/(?<id>\d+)\.(?<format>\w+)$/)}],
@@ -30,7 +30,7 @@ module ConvenientService
               out: reassign(:params)
 
             step Services::ApplyDefaultParamValues, \
-              in: [:params, defaults: raw({format: "html", tags: [], sources: []})],
+              in: [:params, defaults: raw({format: "json", tags: [], sources: []})],
               out: reassign(:params)
 
             step Services::ValidateUncastedParams, \
@@ -50,7 +50,7 @@ module ConvenientService
               in: :params,
               out: reassign(:params)
 
-            def initialize(request:, role: Constants::Roles::GUEST)
+            def initialize(request:)
               @request = request
             end
 

@@ -27,22 +27,11 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams do
 
       let(:request) { described_class::Entities::Request.new(http_string: http_string) }
 
-      let(:role) { described_class::Constants::Roles::ADMIN }
-
       specify do
-        expect { described_class.prepare(request, role: role) }
+        expect { described_class.prepare(request) }
           .to delegate_to(described_class::Services::Prepare, :result)
-          .with_arguments(request: request, role: role)
+          .with_arguments(request: request)
           .and_return_its_value
-      end
-
-      context "when `role` is NOT passed" do
-        it "defaults to `ConvenientService::Examples::Standard::RequestParams::Constants::Roles::GUEST`" do
-          expect { described_class.prepare(request) }
-            .to delegate_to(described_class::Services::Prepare, :result)
-            .with_arguments(request: request, role: described_class::Constants::Roles::GUEST)
-            .and_return_its_value
-        end
       end
     end
   end

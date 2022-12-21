@@ -11,10 +11,9 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::P
       include ConvenientService::RSpec::Matchers::DelegateTo
       include ConvenientService::RSpec::Matchers::Results
 
-      subject(:result) { described_class.result(request: request, role: role) }
+      subject(:result) { described_class.result(request: request) }
 
       let(:request) { ConvenientService::Examples::Standard::RequestParams::Entities::Request.new(http_string: http_string) }
-      let(:role) { ConvenientService::Examples::Standard::RequestParams::Constants::Roles::ADMIN }
 
       ##
       # NOTE: Example for generated `http_string`.
@@ -51,7 +50,7 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::P
 
       let(:path) { "/rules/%{id}.%{format}" % path_params }
 
-      let(:path_params) { {id: "1000000", format: "html"} }
+      let(:path_params) { {id: "1000000", format: "json"} }
 
       let(:body) { JSON.generate(json_body) }
 
@@ -87,7 +86,7 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::P
       end
 
       let(:permitted_keys) { [:id, :format, :title, :description, :tags, :sources] }
-      let(:defaults) { {format: "html", tags: [], sources: []} }
+      let(:defaults) { {format: "json", tags: [], sources: []} }
 
       before do
         allow(ConvenientService::Examples::Standard::RequestParams::Entities::Logger).to receive(:log).with(anything)
@@ -101,13 +100,8 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::P
         let(:path) { "/ru*les/1.json" }
         let(:pattern) { /^\/rules\/(?<id>\d+)\.(?<format>\w+)$/ }
 
-        let(:message) { "Path `#{path}` does NOT match pattern `#{pattern}`." }
-
         it "fails to extract params from path" do
-          expect(result)
-            .to be_error
-            .of(ConvenientService::Examples::Standard::RequestParams::Services::ExtractParamsFromPath)
-            .with_message(message)
+          expect(result).to be_error.of(ConvenientService::Examples::Standard::RequestParams::Services::ExtractParamsFromPath)
         end
       end
 
@@ -117,22 +111,8 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::P
         #
         let(:body) { "abc" }
 
-        let(:message) do
-          <<~MESSAGE
-            Request body contains invalid json.
-
-            Request:
-            ---
-            #{request}
-            ---
-          MESSAGE
-        end
-
         it "fails to extract params from body" do
-          expect(result)
-            .to be_error
-            .of(ConvenientService::Examples::Standard::RequestParams::Services::ExtractParamsFromBody)
-            .with_message(message)
+          expect(result).to be_error.of(ConvenientService::Examples::Standard::RequestParams::Services::ExtractParamsFromBody)
         end
       end
 
@@ -178,17 +158,12 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::P
 
       context "when uncasted params are NOT valid" do
         ##
-        # Contains unsupported format, only HTML is available.
+        # Contains unsupported format, only JSON is available.
         #
-        let(:path) { "/rules/1.json" }
-
-        let(:message) { "Only HTML format is supported" }
+        let(:path) { "/rules/1.html" }
 
         it "fails to validate uncasted params" do
-          expect(result)
-            .to be_error
-            .of(ConvenientService::Examples::Standard::RequestParams::Services::ValidateUncastedParams)
-            .with_message(message)
+          expect(result).to be_error.of(ConvenientService::Examples::Standard::RequestParams::Services::ValidateUncastedParams)
         end
       end
 
@@ -204,15 +179,10 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::P
         ##
         # Contains NOT existing ID.
         #
-        let(:path) { "/rules/999999.html" }
-
-        let(:message) { "ID `999999` does NOT exist" }
+        let(:path) { "/rules/999999.json" }
 
         it "fails to validate casted params" do
-          expect(result)
-            .to be_error
-            .of(ConvenientService::Examples::Standard::RequestParams::Services::ValidateCastedParams)
-            .with_message(message)
+          expect(result).to be_error.of(ConvenientService::Examples::Standard::RequestParams::Services::ValidateCastedParams)
         end
       end
 

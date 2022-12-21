@@ -27,14 +27,14 @@ module ConvenientService
             private
 
             def validate_id
-              return error("ID is NOT present") if Utils::Object.present?(description)
-              return error("ID is NOT a valid integer") unless Utils::Integer.safe_parse(id)
+              return error("ID is NOT present") if Utils::Object.present?(id)
+              return error("ID `#{id}` is NOT a valid integer") unless Utils::Integer.safe_parse(id)
 
               success
             end
 
             def validate_format
-              return error("Only HTML format is supported") if format != "html"
+              return error("Format `#{format}` is NOT supported, only JSON is allowed") if format != "json"
 
               success
             end

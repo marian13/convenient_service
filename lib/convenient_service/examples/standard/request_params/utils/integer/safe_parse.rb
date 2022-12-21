@@ -10,16 +10,14 @@ module ConvenientService
         module Utils
           module Integer
             class SafeParse < Support::Command
-              attr_reader :string
+              attr_reader :object
 
-              def initialize(string)
-                @string = string
+              def initialize(object)
+                @object = object
               end
 
               def call
-                return unless string.instance_of?(::String)
-
-                ::Kernel.Integer(string, exception: false)
+                ::Kernel.Integer(object, exception: false)
               end
             end
           end

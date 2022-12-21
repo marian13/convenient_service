@@ -27,8 +27,7 @@ require_relative "request_params/utils"
 #
 #     request = ConvenientService::Examples::Standard::RequestParams::Entities::Request.new(http_string:)
 #
-#     ConvenientService::Examples::Standard::RequestParams.prepare(request, role: :guest)
-#     ConvenientService::Examples::Standard::RequestParams.prepare(request, role: :admin)
+#     ConvenientService::Examples::Standard::RequestParams.prepare(request)
 #
 #   - https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types
 #   - https://www.whatismybrowser.com/guides/the-latest-user-agent/chrome
@@ -39,8 +38,8 @@ module ConvenientService
     module Standard
       module RequestParams
         class << self
-          def prepare(request, role: Constants::Roles::GUEST)
-            Services::Prepare[request: request, role: role]
+          def prepare(request)
+            Services::Prepare[request: request]
           end
         end
       end
