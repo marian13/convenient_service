@@ -50,7 +50,11 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::P
 
       let(:path) { "/rules/%{id}.%{format}" % path_params }
 
-      let(:path_params) { {id: "1000000", format: "json"} }
+      let(:path_params) { {id: id, format: format} }
+
+      let(:id) { "1000000" }
+
+      let(:format) { "json" }
 
       let(:body) { JSON.generate(json_body) }
 
@@ -176,10 +180,9 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::P
       end
 
       context "when casted params are NOT valid" do
-        ##
-        # Contains NOT existing ID.
-        #
-        let(:path) { "/rules/999999.json" }
+        before do
+          allow(ConvenientService::Examples::Standard::RequestParams::Entities::ID).to receive(:cast).and_return(nil)
+        end
 
         it "fails to validate casted params" do
           expect(result).to be_error.of(ConvenientService::Examples::Standard::RequestParams::Services::ValidateCastedParams)

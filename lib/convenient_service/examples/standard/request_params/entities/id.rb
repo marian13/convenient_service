@@ -5,6 +5,9 @@ module ConvenientService
     module Standard
       module RequestParams
         module Entities
+          ##
+          # TODO: https://ruby-doc.org/3.1.3/stdlibs/yaml/YAML/DBM.html
+          #
           class ID
             def initialize(value:)
               @value = value
@@ -13,14 +16,10 @@ module ConvenientService
             class << self
               def cast(value)
                 case value
-                when ::String
+                when ::String, ::Integer
                   new(value: value.to_s)
                 end
               end
-            end
-
-            def exist?
-              to_i % 2 == 0
             end
 
             def ==(other)

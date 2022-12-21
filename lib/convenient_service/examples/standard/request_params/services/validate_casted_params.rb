@@ -51,7 +51,6 @@ module ConvenientService
 
             def validate_id
               return error("Failed to cast `#{original_id.inspect}` into `ID`") unless casted_id
-              return error("ID `#{casted_id}` does NOT exist") unless casted_id.exist?
 
               success
             end
@@ -74,10 +73,16 @@ module ConvenientService
               success
             end
 
+            ##
+            # TODO:
+            #
             def validate_tags
               success
             end
 
+            ##
+            # TODO:
+            #
             def validate_sources
               success
             end

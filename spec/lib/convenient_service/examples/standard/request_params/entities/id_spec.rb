@@ -11,14 +11,22 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Entities::I
       let(:casted) { described_class.cast(other) }
 
       context "when `other` is NOT castable" do
-        let(:other) { 42 }
+        let(:other) { :foo }
 
         it "returns `nil`" do
           expect(casted).to be_nil
         end
       end
 
-      context "when `other` is castable" do
+      context "when `other` is integer" do
+        let(:other) { 100_000 }
+
+        it "returns other casted to caller" do
+          expect(casted).to eq(described_class.new(value: other.to_s))
+        end
+      end
+
+      context "when `other` is string" do
         let(:other) { "100000" }
 
         it "returns other casted to caller" do
@@ -31,24 +39,6 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Entities::I
   example_group "instance methods" do
     let(:value) { "100000" }
     let(:id) { described_class.cast(value) }
-
-    describe "#exist?" do
-      context "when `to_i % 2 != 0`" do
-        let(:value) { "1" }
-
-        it "returns `true`" do
-          expect(id.exist?).to eq(false)
-        end
-      end
-
-      context "when `to_i % 2 == 0`" do
-        let(:value) { "1000000" }
-
-        it "returns `true`" do
-          expect(id.exist?).to eq(true)
-        end
-      end
-    end
 
     describe "#to_i" do
       it "returns `value.to_i`" do
