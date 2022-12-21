@@ -9,6 +9,9 @@ module ConvenientService
       module RequestParams
         module Utils
           module Object
+            ##
+            # TODO: Specs.
+            #
             class Present < Support::Command
               attr_reader :object
 

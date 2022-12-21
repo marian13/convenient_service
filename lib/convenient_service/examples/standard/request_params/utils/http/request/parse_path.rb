@@ -7,6 +7,9 @@ module ConvenientService
         module Utils
           module HTTP
             module Request
+              ##
+              # TODO: Specs.
+              #
               class ParsePath < Support::Command
                 attr_reader :http_string
 

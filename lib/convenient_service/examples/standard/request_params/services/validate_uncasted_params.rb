@@ -51,10 +51,16 @@ module ConvenientService
               success
             end
 
+            ##
+            # TODO:
+            #
             def validate_tags
               success
             end
 
+            ##
+            # TODO:
+            #
             def validate_sources
               success
             end

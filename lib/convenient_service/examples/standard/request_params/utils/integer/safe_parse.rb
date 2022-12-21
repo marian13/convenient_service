@@ -9,6 +9,9 @@ module ConvenientService
       module RequestParams
         module Utils
           module Integer
+            ##
+            # TODO: Specs.
+            #
             class SafeParse < Support::Command
               attr_reader :object
 
