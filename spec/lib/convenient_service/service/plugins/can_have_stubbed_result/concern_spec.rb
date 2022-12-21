@@ -4,6 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
+# rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Service::Plugins::CanHaveStubbedResult::Concern do
   include ConvenientService::RSpec::Matchers::CacheItsValue
 
@@ -32,11 +33,24 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStubbedResult::Concer
 
   example_group "class methods" do
     describe ".stubbed_results" do
-      it "returns cache scoped by self" do
-        expect(service_class.stubbed_results).to eq(ConvenientService::Support::Cache.new.scope(service_class))
+      context "when RSpec current example is NOT set" do
+        before do
+          allow(ConvenientService::Support::Gems::RSpec).to receive(:current_example).and_return(nil)
+        end
+
+        it "returns empty cache" do
+          expect(service_class.stubbed_results).to eq(ConvenientService::Support::Cache.new)
+        end
       end
 
-      specify { expect { service_class.stubbed_results }.to cache_its_value }
+      context "when RSpec is loaded and current example is set" do
+        it "returns cache scoped by self" do
+          expect(service_class.stubbed_results).to eq(ConvenientService::Support::Cache.new.scope(service_class))
+        end
+
+        specify { expect { service_class.stubbed_results }.to cache_its_value }
+      end
     end
   end
 end
+# rubocop:enable RSpec/NestedGroups

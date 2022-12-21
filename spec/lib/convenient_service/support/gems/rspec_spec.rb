@@ -22,6 +22,22 @@ RSpec.describe ConvenientService::Support::Gems::RSpec do
         end
       end
     end
+
+    describe "current_example" do
+      it "returns current_example" do |example|
+        expect(described_class.current_example).to eq(example)
+      end
+
+      context "when `RSpec` is NOT loaded" do
+        before do
+          allow(described_class).to receive(:loaded?).and_return(false)
+        end
+
+        it "returns nil" do
+          expect(described_class.current_example).to be_nil
+        end
+      end
+    end
   end
 end
 # rubocop:enable RSpec/NestedGroups
