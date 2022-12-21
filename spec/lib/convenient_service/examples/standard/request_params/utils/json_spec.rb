@@ -16,7 +16,7 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Utils::JSON
       specify do
         expect { described_class.safe_parse(json_string, default_value: default_value) }
           .to delegate_to(described_class::SafeParse, :call)
-          .with_arguments(json_string: json_string, default_value: default_value)
+          .with_arguments(json_string, default_value: default_value)
           .and_return_its_value
       end
 
@@ -24,7 +24,7 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Utils::JSON
         it "defaults to `nil`" do
           expect { described_class.safe_parse(json_string) }
             .to delegate_to(described_class::SafeParse, :call)
-            .with_arguments(json_string: json_string, default_value: nil)
+            .with_arguments(json_string, default_value: nil)
             .and_return_its_value
         end
       end

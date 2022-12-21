@@ -10,7 +10,7 @@ module ConvenientService
           module JSON
             class << self
               def safe_parse(json_string, default_value: nil)
-                SafeParse.call(json_string: json_string, default_value: default_value)
+                SafeParse.call(json_string, default_value: default_value)
               end
             end
           end
