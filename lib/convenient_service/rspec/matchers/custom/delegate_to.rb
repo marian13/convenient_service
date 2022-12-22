@@ -9,95 +9,62 @@ require_relative "delegate_to/errors"
 #   IMPORTANT: This matcher has a dedicated end-user doc. Do NOT forget to update it when needed.
 #   https://github.com/marian13/convenient_service_docs/blob/main/docs/api/tests/rspec/matchers/delegate_to.mdx
 #
-#   TODO: Refactor into composition:
-#     - Ability to compose when `delegate_to` is used `without_arguments`.
-#     - Ability to compose when `delegate_to` is used `with_arguments`.
-#     - Ability to compose when `delegate_to` is used `and_return_its_value`.
-#
-#   TODO: Refactor to NOT use `expect` inside this matcher.
-#   This way the matcher will return true or false, but never raise exceptions (descendant of Exception, not StandardError).
-#   Then it will be easier to developer a fully comprehensive spec suite for `delegate_to`.
-#
 module ConvenientService
   module RSpec
     module Matchers
       module Custom
         ##
         # @internal
-        #   specify {
-        #     expect { method_class.cast(other, **options) }
-        #       .to delegate_to(ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Commands::CastMethod, :call)
-        #       .with_arguments(other: other, options: options)
-        #       .and_return_its_value
-        #   }
-        #
-        #   { method_class.cast(other, **options) }
-        #   # => block_expectation
-        #
-        #   ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Commands::CastMethod
-        #   # => object
-        #
-        #   :call
-        #   #=> method
-        #
-        #   (other: other, options: options)
-        #   # => chain[:with]
-        #
-        #   and_return_its_value
-        #   # => chain[:and_return_its_value]
-        #
-        #   NOTE: A similar (with different behaviour) matcher exists in `saharspec`.
-        #   https://github.com/zverok/saharspec#send_messageobject-method-matcher
+        #   NOTE: This is a Facade class.
+        #   https://refactoring.guru/design-patterns/facade
         #
         class DelegateTo
-          ##
-          # @param object [Object]
-          # @param method [String, Symbol]
-          # @return [void]
-          #
-          def initialize(object, method)
-            @matcher = Entities::Matcher.new(object: object, method: method)
-          end
+          include Support::Delegate
 
           ##
           # @param block_expectation [Proc]
           # @return [Boolean]
           #
-          def matches?(block_expectation)
-            matcher.add_arguments_chaining(Entities::Chainings::WithoutArguments) unless matcher.has_arguments_chaining?
-            matcher.add_call_original_chaining(Entities::Chainings::WithCallingOriginal) unless matcher.has_call_original_chaining?
-
-            matcher.matches?(block_expectation)
-          end
+          delegate :matches?, to: :matcher
 
           ##
           # @internal
           #   NOTE: Required by RSpec.
           #   https://relishapp.com/rspec/rspec-expectations/v/3-8/docs/custom-matchers/define-a-matcher-supporting-block-expectations
           #
-          def supports_block_expectations?
-            true
-          end
+          delegate :supports_block_expectations?, to: :matcher
 
           ##
           # @return [String]
           #
-          def description
-            matcher.description
-          end
+          delegate :description, to: :matcher
 
           ##
           # @return [String]
           #
-          def failure_message
-            matcher.failure_message
-          end
+          delegate :failure_message, to: :matcher
 
           ##
           # @return [String]
           #
-          def failure_message_when_negated
-            matcher.failure_message_when_negated
+          delegate :failure_message_when_negated, to: :matcher
+
+          ##
+          # @overload initialize(object, method)
+          #   @param object [Object]
+          #   @param method [String, Symbol]
+          #   @return [void]
+          #
+          # @overload initialize(matcher)
+          #   @param matcher [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher]
+          #   @return [void]
+          #   @api private
+          #
+          # @internal
+          #   TODO: `overload do`?
+          #
+          def initialize(object = nil, method = nil, matcher: nil)
+            @matcher = matcher || Entities::Matcher.new(object, method)
           end
 
           ##
@@ -108,9 +75,7 @@ module ConvenientService
           # @raise [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Errors::ArgumentsChainingIsAlreadySet]
           #
           def with_arguments(*expected_args, **expected_kwargs, &expected_block)
-            matcher.expected_arguments = Entities::Arguments.new(args: expected_args, kwargs: expected_kwargs, block: expected_block)
-
-            matcher.add_arguments_chaining(Entities::Chainings::WithArguments)
+            matcher.with_arguments(*expected_args, **expected_kwargs, &expected_block)
 
             self
           end
@@ -120,7 +85,7 @@ module ConvenientService
           # @raise [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Errors::ArgumentsChainingIsAlreadySet]
           #
           def without_arguments
-            matcher.add_arguments_chaining(Entities::Chainings::WithoutArguments)
+            matcher.without_arguments
 
             self
           end
@@ -130,7 +95,7 @@ module ConvenientService
           # @raise [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Errors::ReturnItsValueChainingIsAlreadySet]
           #
           def and_return_its_value
-            matcher.add_return_its_value_chaining(Entities::Chainings::ReturnItsValue)
+            matcher.and_return_its_value
 
             self
           end
@@ -139,7 +104,7 @@ module ConvenientService
           # @return [ConvenientService::RSpec::Matchers::Custom::DelegateTo]
           #
           def without_calling_original
-            matcher.add_call_original_chaining(Entities::Chainings::WithoutCallingOriginal)
+            matcher.without_calling_original
 
             self
           end
@@ -147,7 +112,8 @@ module ConvenientService
           private
 
           ##
-          # @return [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher]
+          # @!attribute [r] matcher
+          #   @return [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher]
           #
           attr_reader :matcher
         end
