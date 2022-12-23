@@ -30,7 +30,9 @@ module ConvenientService
               def ==(other)
                 return unless other.instance_of?(self.class)
 
-                arguments == other.arguments
+                return false if arguments != other.arguments
+
+                true
               end
             end
           end

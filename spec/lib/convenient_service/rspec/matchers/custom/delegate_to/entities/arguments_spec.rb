@@ -59,7 +59,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
       context "when `other` has different class" do
         let(:other) { 42 }
 
-        it "returns false" do
+        it "returns `false`" do
           expect(arguments == other).to be_nil
         end
       end
@@ -67,7 +67,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
       context "when `other` has different `args`" do
         let(:other) { described_class.new(**params.merge(args: [:baz])) }
 
-        it "returns false" do
+        it "returns `false`" do
           expect(arguments == other).to eq(false)
         end
       end
@@ -75,7 +75,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
       context "when `other` has different `kwargs`" do
         let(:other) { described_class.new(**params.merge(kwargs: {baz: :qux})) }
 
-        it "returns false" do
+        it "returns `false`" do
           expect(arguments == other).to eq(false)
         end
       end
@@ -84,7 +84,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
         let(:other) { described_class.new(**params.merge(block: other_block)) }
         let(:other_block) { proc { :baz } }
 
-        it "returns false" do
+        it "returns `false`" do
           expect(arguments == other).to eq(false)
         end
       end
@@ -92,7 +92,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
       context "when `other` has same attributes" do
         let(:other) { described_class.new(**params) }
 
-        it "returns true" do
+        it "returns `true`" do
           expect(arguments == other).to eq(true)
         end
       end

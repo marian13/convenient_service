@@ -55,5 +55,6 @@
 | Medium | 🚧 | Add Ruby 3.2 support to Docker and CI |  |
 | Low | 🚧  | `overload do` | |
 | Low | 🚧  | Same spec example group organization | |
+| Medium | 🚧  | `Support::Arguments` | |
 
 Search for `TODO`s in the codebase for more tasks.
