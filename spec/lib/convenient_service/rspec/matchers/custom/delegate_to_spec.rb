@@ -111,18 +111,18 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo do
       let(:block) { -> { :foo } }
 
       it "delegates to `matcher#with_arguments`" do
-        ##
-        # NOTE: You can NOT `delegate_to` via `delegate_to`.
-        #
-        allow(matcher)
-          .to receive(:with_arguments) { |*actual_args, **actual_kwargs, &actual_block|
-            expect([actual_args, actual_kwargs, actual_block]).to eq([args, kwargs, block])
-          }
-          .and_call_original
+        allow(matcher).to receive(:with_arguments).and_call_original
 
         facade.with_arguments(*args, **kwargs, &block)
+      end
 
-        expect(matcher).to have_received(:with_arguments)
+      ##
+      # NOTE: You can NOT use `delegate_to` to test `delegate_to`.
+      #
+      it "passes `args`, `kwargs`, `block` to `matcher#with_arguments`" do
+        allow(matcher).to receive(:with_arguments) { |*actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([args, kwargs, block]) }
+
+        facade.with_arguments(*args, **kwargs, &block)
       end
 
       it "returns facade" do

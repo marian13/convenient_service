@@ -5,10 +5,10 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Commands::GeneratePrintableArguments do
+RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Presenter::Commands::GeneratePrintableArguments do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
-  example_group "class methhods" do
+  example_group "class methods" do
     describe ".call" do
       let(:command_result) { described_class.call(arguments: arguments) }
       let(:arguments) { ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Arguments.new(args: args, kwargs: kwargs, block: block) }

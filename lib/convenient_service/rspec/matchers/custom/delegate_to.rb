@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require_relative "delegate_to/commands"
 require_relative "delegate_to/entities"
 require_relative "delegate_to/errors"
 
@@ -22,7 +21,6 @@ module ConvenientService
           include Support::Delegate
 
           ##
-          # @param block_expectation [Proc]
           # @return [Boolean]
           #
           delegate :matches?, to: :matcher
@@ -68,14 +66,11 @@ module ConvenientService
           end
 
           ##
-          # @param expected_args [Array]
-          # @param expected_kwargs [Hash]
-          # @param expected_block [Proc]
           # @return [ConvenientService::RSpec::Matchers::Custom::DelegateTo]
           # @raise [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Errors::ArgumentsChainingIsAlreadySet]
           #
-          def with_arguments(*expected_args, **expected_kwargs, &expected_block)
-            matcher.with_arguments(*expected_args, **expected_kwargs, &expected_block)
+          def with_arguments(...)
+            matcher.with_arguments(...)
 
             self
           end
