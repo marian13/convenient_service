@@ -49,6 +49,9 @@ module ConvenientService
               ##
               # @return [String]
               #
+              # @internal
+              #   TODO: Looks like this class is NOT a correct place for this method.
+              #
               def generate_printable_arguments(arguments)
                 Commands::GeneratePrintableArguments.call(arguments: arguments)
               end

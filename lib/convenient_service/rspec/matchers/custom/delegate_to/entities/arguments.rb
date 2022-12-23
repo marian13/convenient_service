@@ -6,6 +6,10 @@ module ConvenientService
       module Custom
         class DelegateTo
           module Entities
+            ##
+            # @internal
+            #   TODO: Generic `Support::Arguments` class.
+            #
             class Arguments
               ##
               # @!attribute [r] args
