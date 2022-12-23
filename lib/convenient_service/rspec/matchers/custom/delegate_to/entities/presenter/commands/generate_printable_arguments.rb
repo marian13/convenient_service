@@ -76,11 +76,8 @@ module ConvenientService
                   ##
                   # @return [String]
                   #
-                  # @internal
-                  #   TODO: Generic util to print blocks.
-                  #
                   def printable_block
-                    block ? "{ ... }" : ""
+                    block ? Utils::Proc.display(block) : ""
                   end
                 end
               end

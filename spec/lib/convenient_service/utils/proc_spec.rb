@@ -18,6 +18,17 @@ RSpec.describe ConvenientService::Utils::Proc do
     end
   end
 
+  describe ".display" do
+    let(:proc) { -> { :foo } }
+
+    specify do
+      expect { described_class.display(proc) }
+        .to delegate_to(ConvenientService::Utils::Proc::Display, :call)
+        .with_arguments(proc)
+        .and_return_its_value
+    end
+  end
+
   describe ".exec_config" do
     let(:proc) { ->(object) { object.reverse } }
     let(:object) { "abc" }
