@@ -11,7 +11,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
   example_group "class methods" do
     describe ".call" do
       let(:command_result) { described_class.call(arguments: arguments) }
-      let(:arguments) { ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Arguments.new(args: args, kwargs: kwargs, block: block) }
+      let(:arguments) { ConvenientService::Support::Arguments.new(*args, **kwargs, &block) }
 
       let(:args) { [] }
       let(:kwargs) { {} }

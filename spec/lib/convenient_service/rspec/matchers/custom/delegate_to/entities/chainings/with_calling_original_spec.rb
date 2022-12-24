@@ -24,7 +24,8 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
 
   let(:object) { klass.new }
   let(:method) { :bar }
-  let(:block_expectation_value) { Object.new }
+  let(:block_expectation) { proc { object.foo } }
+  let(:block_expectation_value) { block_expectation.call }
 
   example_group "inheritance" do
     include ConvenientService::RSpec::Matchers::BeDescendantOf

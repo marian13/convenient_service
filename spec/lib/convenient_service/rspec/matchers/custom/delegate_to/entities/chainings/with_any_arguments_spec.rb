@@ -51,12 +51,12 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
 
   example_group "instance methods" do
     describe "#apply_stubs!" do
-      it "delegates to `ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Chainings::Commands::ApplyStubToTrackDelegations`" do
-        allow(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Chainings::Commands::ApplyStubToTrackDelegations).to receive(:call).with(matcher: matcher).and_call_original
+      it "delegates to `ConvenientService::RSpec::Matchers::Custom::DelegateTo::Commands::ApplyStubToTrackDelegations`" do
+        allow(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Commands::ApplyStubToTrackDelegations).to receive(:call).with(matcher: matcher).and_call_original
 
         chaining.apply_stubs!
 
-        expect(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Chainings::Commands::ApplyStubToTrackDelegations).to have_received(:call).with(matcher: matcher)
+        expect(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Commands::ApplyStubToTrackDelegations).to have_received(:call).with(matcher: matcher)
       end
     end
 

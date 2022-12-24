@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require_relative "delegate_to/commands"
 require_relative "delegate_to/entities"
 require_relative "delegate_to/errors"
 
