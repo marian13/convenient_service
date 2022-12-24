@@ -52,6 +52,24 @@ module ConvenientService
       end
 
       ##
+      # @return [Booleam]
+      #
+      def any?
+        return true if args.any?
+        return true if kwargs.any?
+        return true if block
+
+        false
+      end
+
+      ##
+      # @return [Booleam]
+      #
+      def none?
+        !any?
+      end
+
+      ##
       # @param other [Object]
       # @return [Boolean]
       #

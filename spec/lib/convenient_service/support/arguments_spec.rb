@@ -57,6 +57,74 @@ RSpec.describe ConvenientService::Support::Arguments do
       end
     end
 
+    describe "#any?" do
+      context "when arguments have at least one arg" do
+        let(:arguments) { described_class.new(*args) }
+
+        it "returns `true`" do
+          expect(arguments.any?).to eq(true)
+        end
+      end
+
+      context "when arguments have at least one kwarg" do
+        let(:arguments) { described_class.new(**kwargs) }
+
+        it "returns `true`" do
+          expect(arguments.any?).to eq(true)
+        end
+      end
+
+      context "when arguments have at block" do
+        let(:arguments) { described_class.new(&block) }
+
+        it "returns `true`" do
+          expect(arguments.any?).to eq(true)
+        end
+      end
+
+      context "when arguments do NOT have args, kwargs and block" do
+        let(:arguments) { described_class.new }
+
+        it "returns `false`" do
+          expect(arguments.any?).to eq(false)
+        end
+      end
+    end
+
+    describe "#none?" do
+      context "when arguments have at least one arg" do
+        let(:arguments) { described_class.new(*args) }
+
+        it "returns `false`" do
+          expect(arguments.none?).to eq(false)
+        end
+      end
+
+      context "when arguments have at least one kwarg" do
+        let(:arguments) { described_class.new(**kwargs) }
+
+        it "returns `false`" do
+          expect(arguments.none?).to eq(false)
+        end
+      end
+
+      context "when arguments have at block" do
+        let(:arguments) { described_class.new(&block) }
+
+        it "returns `false`" do
+          expect(arguments.none?).to eq(false)
+        end
+      end
+
+      context "when arguments do NOT have args, kwargs and block" do
+        let(:arguments) { described_class.new }
+
+        it "returns `true`" do
+          expect(arguments.none?).to eq(true)
+        end
+      end
+    end
+
     describe "#==" do
       subject(:arguments) { described_class.new(*args, **kwargs, &block) }
 
