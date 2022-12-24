@@ -37,7 +37,7 @@ module ConvenientService
                 ##
                 # @return [void]
                 #
-                def apply_mocks!
+                def apply_stubs!
                 end
 
                 ##

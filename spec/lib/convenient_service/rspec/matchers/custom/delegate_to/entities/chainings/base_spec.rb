@@ -46,9 +46,9 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
   end
 
   example_group "instance methods" do
-    describe "#apply_mocks!" do
+    describe "#apply_stubs!" do
       it "returns `nil`" do
-        expect(chaining.apply_mocks!).to be_nil
+        expect(chaining.apply_stubs!).to be_nil
       end
     end
 
