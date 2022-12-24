@@ -5,8 +5,8 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Arguments do
-  let(:arguments) { described_class.new(args: args, kwargs: kwargs, block: block) }
+RSpec.describe ConvenientService::Support::Arguments do
+  let(:arguments) { described_class.new(*args, **kwargs, &block) }
 
   let(:args) { [:foo] }
   let(:kwargs) { {foo: :bar} }
@@ -25,7 +25,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
   example_group "class methods" do
     describe "#new" do
       context "when args are NOT passed" do
-        let(:arguments) { described_class.new(kwargs: kwargs, block: block) }
+        let(:arguments) { described_class.new(**kwargs, &block) }
 
         it "defaults to empty array" do
           expect(arguments.args).to eq([])
@@ -33,7 +33,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
       end
 
       context "when kwargs are NOT passed" do
-        let(:arguments) { described_class.new(args: args, block: block) }
+        let(:arguments) { described_class.new(*args, &block) }
 
         it "defaults to empty hash" do
           expect(arguments.kwargs).to eq({})
@@ -41,7 +41,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
       end
 
       context "when block are NOT passed" do
-        let(:arguments) { described_class.new(args: args, kwargs: kwargs) }
+        let(:arguments) { described_class.new(*args, **kwargs) }
 
         it "defaults to `nil`" do
           expect(arguments.block).to be_nil
@@ -51,10 +51,14 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
   end
 
   example_group "instance methods" do
-    describe "#==" do
-      subject(:arguments) { described_class.new(**params) }
+    describe "#null_arguments?" do
+      it "returns `false`" do
+        expect(arguments.null_arguments?).to eq(false)
+      end
+    end
 
-      let(:params) { {args: [:foo], kwargs: {foo: :bar}, block: proc { :foo }} }
+    describe "#==" do
+      subject(:arguments) { described_class.new(*args, **kwargs, &block) }
 
       context "when `other` has different class" do
         let(:other) { 42 }
@@ -65,7 +69,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
       end
 
       context "when `other` has different `args`" do
-        let(:other) { described_class.new(**params.merge(args: [:baz])) }
+        let(:other) { described_class.new(:bar, **kwargs, &block) }
 
         it "returns `false`" do
           expect(arguments == other).to eq(false)
@@ -73,7 +77,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
       end
 
       context "when `other` has different `kwargs`" do
-        let(:other) { described_class.new(**params.merge(kwargs: {baz: :qux})) }
+        let(:other) { described_class.new(*args, {bar: :baz}, &block) }
 
         it "returns `false`" do
           expect(arguments == other).to eq(false)
@@ -81,8 +85,8 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
       end
 
       context "when `other` has different `block`" do
-        let(:other) { described_class.new(**params.merge(block: other_block)) }
-        let(:other_block) { proc { :baz } }
+        let(:other) { described_class.new(*args, **kwargs, &other_block) }
+        let(:other_block) { proc { :bar } }
 
         it "returns `false`" do
           expect(arguments == other).to eq(false)
@@ -90,7 +94,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
       end
 
       context "when `other` has same attributes" do
-        let(:other) { described_class.new(**params) }
+        let(:other) { described_class.new(*args, **kwargs, &block) }
 
         it "returns `true`" do
           expect(arguments == other).to eq(true)

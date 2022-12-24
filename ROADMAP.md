@@ -44,8 +44,8 @@
 | High | 🚧 | `included_once` for `Support::Concern` |
 | Medium | 🚧 | Custom YARD type for service instance, service class as return values |
 | Medium | 🚧 | Heredoc for error messages |
-| Medium | 🚧 | Specs for `be_success`, `be_error`, `be_failure` matchers | | 
-| Low | 🚧 | [Receive Counts](https://relishapp.com/rspec/rspec-mocks/docs/setting-constraints/receive-counts) for `delegate_to` | | 
+| Medium | 🚧 | Specs for `be_success`, `be_error`, `be_failure` matchers | |
+| Low | 🚧 | [Receive Counts](https://relishapp.com/rspec/rspec-mocks/docs/setting-constraints/receive-counts) for `delegate_to` | |
 | Low | 🚧 | Prefer versioning instead of modification plugin | |
 | Low | 🚧 | Consider to move `__steps__` and `__callbacks__` to `internals_class` | Benefit? |
 | Medium | 🚧 | User friendly `raise` that removes lib backtrace from caller | Should have a `debug` mode. Should work well with examples. Check RSpec `CallerFilter.first_non_rspec_line` |
@@ -56,5 +56,6 @@
 | Low | 🚧  | `overload do` | |
 | Low | 🚧  | Same spec example group organization | |
 | Medium | 🚧  | `Support::Arguments` | |
+| Low | 🚧  | Null object to Nil object | |
 
 Search for `TODO`s in the codebase for more tasks.
