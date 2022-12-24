@@ -7,7 +7,7 @@ module ConvenientService
         class DelegateTo
           module Entities
             module Chainings
-              class WithArguments < Chainings::Base
+              class WithConcreteArguments < Chainings::Base
                 ##
                 # @return [void]
                 #
