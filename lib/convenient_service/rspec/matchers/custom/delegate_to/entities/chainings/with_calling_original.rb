@@ -7,75 +7,22 @@ module ConvenientService
         class DelegateTo
           module Entities
             module Chainings
-              class WithCallingOriginal
-                include Support::Delegate
-
+              class WithCallingOriginal < Chainings::Base
                 ##
-                # @return [ConvenientService::RSpec::Matchers::Custom::DelegateTo]
+                # @param block_expectation_value [Object]
+                # @return [Boolean]
                 #
-                attr_reader :matcher
+                def matches?(block_expectation_value)
+                  super
 
-                ##
-                # @return [Object]
-                #
-                attr_reader :block_expectation_value
-
-                ##
-                # @return [Object]
-                #
-                delegate :object, to: :matcher
-
-                ##
-                # @param matcher [ConvenientService::RSpec::Matchers::Custom::DelegateTo]
-                # @return [void]
-                #
-                def initialize(matcher:)
-                  @matcher = matcher
+                  true
                 end
 
                 ##
-                # @return [true]
+                # @return [Boolean]
                 #
                 def should_call_original?
                   true
-                end
-
-                ##
-                # @return [void]
-                #
-                def apply_mocks!
-                end
-
-                ##
-                # @param block_expectation_value [Object]
-                # @return [true]
-                #
-                def matches?(block_expectation_value)
-                  @block_expectation_value = block_expectation_value
-
-                  true
-                end
-
-                ##
-                # @param value [Object]
-                # @return [Boolean]
-                #
-                def does_not_match?(value)
-                  !matches?(value)
-                end
-
-                ##
-                # @return [String]
-                #
-                def failure_message
-                  ""
-                end
-
-                ##
-                # @return [String]
-                #
-                def failure_message_when_negated
-                  ""
                 end
               end
             end
