@@ -40,6 +40,20 @@ module ConvenientService
               end
 
               ##
+              # @return [Booleam]
+              #
+              def with_arguments?
+                arguments.any?
+              end
+
+              ##
+              # @return [Boolean]
+              #
+              def without_arguments?
+                !with_arguments?
+              end
+
+              ##
               # @param other [Object]
               # @return [Boolean]
               #

@@ -48,6 +48,74 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
   end
 
   example_group "instance methods" do
+    describe "#with_arguments?" do
+      context "when delegation has at least one arg" do
+        let(:delegation) { described_class.new(object: object, method: method, args: args, kwargs: {}, block: nil) }
+
+        it "returns `true`" do
+          expect(delegation.with_arguments?).to eq(true)
+        end
+      end
+
+      context "when delegation has at least one kwarg" do
+        let(:delegation) { described_class.new(object: object, method: method, args: [], kwargs: kwargs, block: nil) }
+
+        it "returns `true`" do
+          expect(delegation.with_arguments?).to eq(true)
+        end
+      end
+
+      context "when delegation has at block" do
+        let(:delegation) { described_class.new(object: object, method: method, args: [], kwargs: {}, block: block) }
+
+        it "returns `true`" do
+          expect(delegation.with_arguments?).to eq(true)
+        end
+      end
+
+      context "when delegation does NOT have args, kwargs and block" do
+        let(:delegation) { described_class.new(object: object, method: method, args: [], kwargs: {}, block: nil) }
+
+        it "returns `false`" do
+          expect(delegation.with_arguments?).to eq(false)
+        end
+      end
+    end
+
+    describe "#without_arguments?" do
+      context "when delegation has at least one arg" do
+        let(:delegation) { described_class.new(object: object, method: method, args: args, kwargs: {}, block: nil) }
+
+        it "returns `false`" do
+          expect(delegation.without_arguments?).to eq(false)
+        end
+      end
+
+      context "when delegation has at least one kwarg" do
+        let(:delegation) { described_class.new(object: object, method: method, args: [], kwargs: kwargs, block: nil) }
+
+        it "returns `false`" do
+          expect(delegation.without_arguments?).to eq(false)
+        end
+      end
+
+      context "when delegation has at block" do
+        let(:delegation) { described_class.new(object: object, method: method, args: [], kwargs: {}, block: block) }
+
+        it "returns `false`" do
+          expect(delegation.without_arguments?).to eq(false)
+        end
+      end
+
+      context "when delegation does NOT have args, kwargs and block" do
+        let(:delegation) { described_class.new(object: object, method: method, args: [], kwargs: {}, block: nil) }
+
+        it "returns `true`" do
+          expect(delegation.without_arguments?).to eq(true)
+        end
+      end
+    end
+
     describe "#==" do
       subject(:delegation) { described_class.new(object: object, method: method, args: args, kwargs: kwargs, block: block) }
 
