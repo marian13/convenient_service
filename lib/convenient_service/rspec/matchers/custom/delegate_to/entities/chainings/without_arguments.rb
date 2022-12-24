@@ -22,7 +22,7 @@ module ConvenientService
                 def matches?(block_expectation_value)
                   super
 
-                  matcher.delegations.any?
+                  matcher.delegations.any? { |delegation| delegation.without_arguments? }
                 end
 
                 ##

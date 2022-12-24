@@ -27,13 +27,25 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
   let(:block_expectation) { proc { object.foo } }
   let(:block_expectation_value) { block_expectation.call }
 
-  let(:delegation) do
+  let(:without_arguments) { ConvenientService::Support::Arguments.new }
+
+  let(:delegation_with_arguments) do
     ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Delegation.new(
       object: object,
       method: method,
       args: args,
       kwargs: kwargs,
       block: block
+    )
+  end
+
+  let(:delegation_without_arguments) do
+    ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Delegation.new(
+      object: object,
+      method: method,
+      args: [],
+      kwargs: {},
+      block: nil
     )
   end
 
@@ -61,18 +73,14 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
     end
 
     describe "#matches?" do
-      ##
-      # NOTE: If it calls `super` then block_expectation_value is set.
-      #
-      it "calls `super`" do
-        chaining.matches?(block_expectation_value)
+      context "when matcher expected arguments are NOT set" do
+        ##
+        # NOTE: If it calls `super` then block_expectation_value is set.
+        #
+        it "calls `super`" do
+          chaining.matches?(block_expectation_value)
 
-        expect(chaining.block_expectation_value).to eq(block_expectation_value)
-      end
-
-      context "when matcher has NO delegations" do
-        before do
-          matcher.delegations.clear
+          expect(chaining.block_expectation_value).to eq(block_expectation_value)
         end
 
         it "returns `false`" do
@@ -80,23 +88,74 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
         end
       end
 
-      context "when matcher has one delegation" do
+      context "when matcher expected arguments are set" do
         before do
-          matcher.delegations << delegation
+          matcher.expected_arguments = without_arguments
         end
 
-        it "returns `true`" do
-          expect(chaining.matches?(block_expectation_value)).to eq(true)
-        end
-      end
+        ##
+        # NOTE: If it calls `super` then block_expectation_value is set.
+        #
+        it "calls `super`" do
+          chaining.matches?(block_expectation_value)
 
-      context "when matcher has multiple delegations" do
-        before do
-          2.times { matcher.delegations << delegation }
+          expect(chaining.block_expectation_value).to eq(block_expectation_value)
         end
 
-        it "returns `true`" do
-          expect(chaining.matches?(block_expectation_value)).to eq(true)
+        context "when matcher has NO delegations" do
+          before do
+            matcher.delegations.clear
+          end
+
+          it "returns `false`" do
+            expect(chaining.matches?(block_expectation_value)).to eq(false)
+          end
+        end
+
+        context "when matcher has one delegation" do
+          context "when that one delegation without arguments" do
+            before do
+              matcher.delegations << delegation_without_arguments
+            end
+
+            it "returns `true`" do
+              expect(chaining.matches?(block_expectation_value)).to eq(true)
+            end
+          end
+
+          context "when that one delegation with arguments" do
+            before do
+              matcher.delegations << delegation_with_arguments
+            end
+
+            it "returns `false`" do
+              expect(chaining.matches?(block_expectation_value)).to eq(false)
+            end
+          end
+        end
+
+        context "when matcher has multiple delegations" do
+          context "when any of those multiple delegations without arguments" do
+            before do
+              matcher.delegations << delegation_with_arguments
+
+              matcher.delegations << delegation_without_arguments
+            end
+
+            it "returns `true`" do
+              expect(chaining.matches?(block_expectation_value)).to eq(true)
+            end
+          end
+
+          context "when all those multiple delegations have arguments" do
+            before do
+              2.times { matcher.delegations << delegation_with_arguments }
+            end
+
+            it "returns `false`" do
+              expect(chaining.matches?(block_expectation_value)).to eq(false)
+            end
+          end
         end
       end
     end
