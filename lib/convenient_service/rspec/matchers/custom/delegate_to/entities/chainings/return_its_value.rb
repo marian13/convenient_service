@@ -7,64 +7,13 @@ module ConvenientService
         class DelegateTo
           module Entities
             module Chainings
-              class ReturnItsValue
-                include Support::Delegate
-
-                ##
-                # @return [ConvenientService::RSpec::Matchers::Custom::DelegateTo]
-                #
-                attr_reader :matcher
-
-                ##
-                # @return [Object]
-                #
-                attr_reader :block_expectation_value
-
-                ##
-                # @return [Object]
-                #
-                delegate :object, to: :matcher
-
-                ##
-                # @return [String]
-                #
-                delegate :method, to: :matcher
-
-                ##
-                # @return [Array]
-                #
-                delegate :expected_arguments, to: :matcher
-
-                ##
-                # @return [String]
-                #
-                delegate :printable_block_expectation, to: :matcher
-
-                ##
-                # @return [String]
-                #
-                delegate :printable_method, to: :matcher
-
-                ##
-                # @param matcher [ConvenientService::RSpec::Matchers::Custom::DelegateTo]
-                # @return [void]
-                #
-                def initialize(matcher:)
-                  @matcher = matcher
-                end
-
-                ##
-                # @return [void]
-                #
-                def apply_mocks!
-                end
-
+              class ReturnItsValue < Chainings::Base
                 ##
                 # @param block_expectation_value [Object]
                 # @return [Boolean]
                 #
                 def matches?(block_expectation_value)
-                  @block_expectation_value = block_expectation_value
+                  super
 
                   ##
                   # IMPORTANT: `and_return_its_value` works only when `delegate_to` checks a pure function.
@@ -111,43 +60,56 @@ module ConvenientService
                   #       .and_return_its_value
                   #   end
                   #
-                  # NOTE: If this expectation fails, it means `and_return_its_value` is NOT met.
-                  #
-                  block_expectation_value == delegation_value
-                end
-
-                ##
-                # @param value [Object]
-                # @return [Boolean]
-                #
-                def does_not_match?(value)
-                  !matches?(value)
+                  block_expectation_value == matcher.delegation_value
                 end
 
                 ##
                 # @return [String]
                 #
                 def failure_message
-                  <<~MESSAGE
-                    expected `#{printable_block_expectation}` to delegate to `#{printable_method}` and return its value, but it didn't.
-
-                    `#{printable_block_expectation}` returns `#{value}`, but delegation returns `#{delegation_value}`.
-                  MESSAGE
+                  [failure_message_permanent_part, same_visual_output_note].reject(&:empty?).join("\n\n")
                 end
 
                 ##
                 # @return [String]
                 #
                 def failure_message_when_negated
-                  <<~MESSAGE
-                    expected `#{printable_block_expectation}` NOT to delegate to `#{printable_method}` and return its value, but it did.
-                  MESSAGE
+                  "expected `#{matcher.printable_block_expectation}` NOT to delegate to `#{matcher.printable_method}` and return its value, but it did."
                 end
 
                 private
 
-                def delegation_value
-                  object.__send__(method, *expected_arguments.args, **expected_arguments.kwargs, &expected_arguments.block)
+                def failure_message_permanent_part
+                  <<~MESSAGE.chomp
+                    expected `#{matcher.printable_block_expectation}` to delegate to `#{matcher.printable_method}` and return its value, but it didn't.
+
+                    `#{matcher.printable_block_expectation}` returns `#{block_expectation_value.inspect}`, but delegation returns `#{matcher.delegation_value.inspect}`.
+                  MESSAGE
+                end
+
+                ##
+                # @internal
+                #   NOTE: Early return is harder to understand in this particular case, that is why a casual if is used.
+                #
+                #   def note
+                #     return "" if block_expectation_value.inspect != matcher.delegation_value.inspect
+                #     return "" if block_expectation_value == matcher.delegation_value
+                #
+                #     # ...
+                #   end
+                #
+                def same_visual_output_note
+                  if block_expectation_value.inspect == matcher.delegation_value.inspect && block_expectation_value != matcher.delegation_value
+                    <<~MESSAGE.chomp
+                      NOTE: `#{block_expectation_value.inspect}` and `#{matcher.delegation_value.inspect}` have the same visual output, but they are different objects in terms of `#==`.
+
+                      If it is expected behavior, ignore this note.
+
+                      Otherwise, define a meaningful `#==` for `#{block_expectation_value.class}` or adjust its `#inspect` to generate different output.
+                    MESSAGE
+                  else
+                    ""
+                  end
                 end
               end
             end
