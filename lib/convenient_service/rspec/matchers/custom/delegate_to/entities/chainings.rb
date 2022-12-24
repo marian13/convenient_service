@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
-require_relative "chainings/base"
+require_relative "chainings/commands"
 
+require_relative "chainings/base"
 require_relative "chainings/with_any_arguments"
 require_relative "chainings/with_concrete_arguments"
 require_relative "chainings/without_arguments"
