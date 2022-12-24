@@ -6,7 +6,22 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Delegation do
-  let(:delegation) { described_class.new(args: args, kwargs: kwargs, block: block) }
+  let(:delegation) { described_class.new(object: object, method: method, args: args, kwargs: kwargs, block: block) }
+
+  let(:klass) do
+    Class.new do
+      def foo
+        bar
+      end
+
+      def bar
+        "bar value"
+      end
+    end
+  end
+
+  let(:object) { klass.new }
+  let(:method) { :bar }
 
   let(:args) { [:foo] }
   let(:kwargs) { {foo: :bar} }
@@ -17,22 +32,24 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
 
     subject { delegation }
 
+    it { is_expected.to have_attr_reader(:object) }
+    it { is_expected.to have_attr_reader(:method) }
     it { is_expected.to have_attr_reader(:arguments) }
   end
 
   example_group "class methods" do
     describe "#new" do
-      let(:delegation) { described_class.new(args: args, kwargs: kwargs, block: block) }
+      let(:delegation) { described_class.new(object: object, method: method, args: args, kwargs: kwargs, block: block) }
 
       it "assigns arguments" do
-        expect(delegation.arguments).to eq(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Arguments.new(args: args, kwargs: kwargs, block: block))
+        expect(delegation.arguments).to eq(ConvenientService::Support::Arguments.new(*args, **kwargs, &block))
       end
     end
   end
 
   example_group "instance methods" do
     describe "#==" do
-      subject(:delegation) { described_class.new(args: args, kwargs: kwargs, block: block) }
+      subject(:delegation) { described_class.new(object: object, method: method, args: args, kwargs: kwargs, block: block) }
 
       context "when `other` has different class" do
         let(:other) { 42 }
@@ -42,8 +59,40 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
         end
       end
 
-      context "when `other` has different `attributes`" do
-        let(:other) { described_class.new(args: [], kwargs: kwargs, block: block) }
+      context "when `other` has different `object`" do
+        let(:other) { described_class.new(object: Object.new, method: method, args: args, kwargs: kwargs, block: block) }
+
+        it "returns `false`" do
+          expect(delegation == other).to eq(false)
+        end
+      end
+
+      context "when `other` has different `method`" do
+        let(:other) { described_class.new(object: object, method: :qux, args: args, kwargs: kwargs, block: block) }
+
+        it "returns `false`" do
+          expect(delegation == other).to eq(false)
+        end
+      end
+
+      context "when `other` has different `args`" do
+        let(:other) { described_class.new(object: object, method: method, args: [], kwargs: kwargs, block: block) }
+
+        it "returns `false`" do
+          expect(delegation == other).to eq(false)
+        end
+      end
+
+      context "when `other` has different `kwargs`" do
+        let(:other) { described_class.new(object: object, method: method, args: args, kwargs: {}, block: block) }
+
+        it "returns `false`" do
+          expect(delegation == other).to eq(false)
+        end
+      end
+
+      context "when `other` has different `block`" do
+        let(:other) { described_class.new(object: object, method: method, args: args, kwargs: kwargs, block: nil) }
 
         it "returns `false`" do
           expect(delegation == other).to eq(false)
@@ -51,7 +100,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
       end
 
       context "when `other` has same attributes" do
-        let(:other) { described_class.new(args: args, kwargs: kwargs, block: block) }
+        let(:other) { described_class.new(object: object, method: method, args: args, kwargs: kwargs, block: block) }
 
         it "returns `true`" do
           expect(delegation == other).to eq(true)

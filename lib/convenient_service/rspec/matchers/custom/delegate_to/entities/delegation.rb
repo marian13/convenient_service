@@ -8,19 +8,35 @@ module ConvenientService
           module Entities
             class Delegation
               ##
+              # @!attribute [r] object
+              #   @return [Object] Can be any type.
+              #
+              attr_reader :object
+
+              ##
+              # @!attribute [r] method
+              #   @return [Symbol]
+              #
+              attr_reader :method
+
+              ##
               # @!attribute [r] arguments
               #   @return [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Delegation]
               #
               attr_reader :arguments
 
               ##
+              # @param object [Object] Can be any type.
+              # @param method [Symbol]
               # @param args [Array]
               # @param kwargs [Hash]
               # @param block [Proc]
               # @return [void]
               #
-              def initialize(args:, kwargs:, block:)
-                @arguments = Entities::Arguments.new(args: args, kwargs: kwargs, block: block)
+              def initialize(object:, method:, args:, kwargs:, block:)
+                @object = object
+                @method = method
+                @arguments = Support::Arguments.new(*args, **kwargs, &block)
               end
 
               ##
@@ -30,6 +46,8 @@ module ConvenientService
               def ==(other)
                 return unless other.instance_of?(self.class)
 
+                return false if object != other.object
+                return false if method != other.method
                 return false if arguments != other.arguments
 
                 true
