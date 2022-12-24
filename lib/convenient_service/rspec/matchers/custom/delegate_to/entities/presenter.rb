@@ -49,11 +49,10 @@ module ConvenientService
               ##
               # @return [String]
               #
-              # @internal
-              #   TODO: Looks like this class is NOT a correct place for this method.
-              #
-              def generate_printable_arguments(arguments)
-                Commands::GeneratePrintableArguments.call(arguments: arguments)
+              def printable_expected_arguments
+                return "" if matcher.expected_arguments.null_arguments?
+
+                Commands::GeneratePrintableArguments.call(arguments: matcher.expected_arguments)
               end
 
               ##

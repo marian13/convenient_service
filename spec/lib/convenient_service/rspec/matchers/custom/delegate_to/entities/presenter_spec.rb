@@ -25,6 +25,22 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
   let(:method) { :bar }
   let(:block_expectation) { proc { object.foo } }
 
+  let(:delegation) do
+    ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Delegation.new(
+      object: object,
+      method: method,
+      args: args,
+      kwargs: kwargs,
+      block: block
+    )
+  end
+
+  let(:arguments) { ConvenientService::Support::Arguments.new(*args, **kwargs, &block) }
+
+  let(:args) { [:foo] }
+  let(:kwargs) { {foo: :bar} }
+  let(:block) { proc { :foo } }
+
   example_group "instance methods" do
     describe "#printable_method" do
       it "delegates to `ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Presenter::Commands::GeneratePrintableMethod`" do
@@ -75,7 +91,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
         let(:printable_arguments) { ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Presenter::Commands::GeneratePrintableArguments.call(arguments: matcher.delegations.first.arguments) }
 
         before do
-          matcher.delegations << ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Delegation.new(args: [:foo], kwargs: {foo: :bar}, block: proc { :foo })
+          matcher.delegations << delegation
         end
 
         it "returns printable arguments for that delegation" do
@@ -91,7 +107,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
         end
 
         before do
-          2.times { matcher.delegations << ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Delegation.new(args: [:foo], kwargs: {foo: :bar}, block: proc { :foo }) }
+          2.times { matcher.delegations << delegation }
         end
 
         it "returns printable arguments concatted by command for those delegations" do
@@ -100,19 +116,29 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
       end
     end
 
-    describe "#generate_printable_arguments" do
-      let(:arguments) { ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Arguments.new(args: [:foo], kwargs: {foo: :bar}, block: proc { :foo }) }
-
-      it "delegates to `ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Presenter::Commands::GeneratePrintableArguments`" do
-        allow(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Presenter::Commands::GeneratePrintableArguments).to receive(:call).with(arguments: arguments).and_call_original
-
-        presenter.generate_printable_arguments(arguments)
-
-        expect(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Presenter::Commands::GeneratePrintableArguments).to have_received(:call).with(arguments: arguments)
+    describe "#printable_expected_arguments" do
+      context "when matcher expected arguments are NOT set" do
+        it "returns empty string" do
+          expect(presenter.printable_expected_arguments).to eq("")
+        end
       end
 
-      it "returns `ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Presenter::Commands::GeneratePrintableArguments` value" do
-        expect(presenter.generate_printable_arguments(arguments)).to eq(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Presenter::Commands::GeneratePrintableArguments.call(arguments: arguments))
+      context "when matcher expected arguments are set" do
+        before do
+          matcher.expected_arguments = arguments
+        end
+
+        it "delegates to `ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Presenter::Commands::GeneratePrintableArguments`" do
+          allow(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Presenter::Commands::GeneratePrintableArguments).to receive(:call).with(arguments: arguments).and_call_original
+
+          presenter.printable_expected_arguments
+
+          expect(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Presenter::Commands::GeneratePrintableArguments).to have_received(:call).with(arguments: arguments)
+        end
+
+        it "returns `ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Presenter::Commands::GeneratePrintableArguments` value" do
+          expect(presenter.printable_expected_arguments).to eq(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Presenter::Commands::GeneratePrintableArguments.call(arguments: arguments))
+        end
       end
     end
 
