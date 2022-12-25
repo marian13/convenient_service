@@ -1,15 +1,53 @@
 # frozen_string_literal: true
 
+require_relative "matcher/commands"
+require_relative "matcher/entities"
+require_relative "matcher/errors"
+
+##
+# @internal
+#   IMPORTANT: This matcher has a dedicated end-user doc. Do NOT forget to update it when needed.
+#   https://github.com/marian13/convenient_service_docs/blob/main/docs/api/tests/rspec/matchers/delegate_to.mdx
+#
 module ConvenientService
   module RSpec
     module Matchers
       module Custom
+        ##
+        # @internal
+        #   specify {
+        #     expect { method_class.cast(other, **options) }
+        #       .to delegate_to(ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Commands::CastMethod, :call)
+        #       .with_arguments(other: other, options: options)
+        #       .and_return_its_value
+        #   }
+        #
+        #   { method_class.cast(other, **options) }
+        #   # => block_expectation
+        #
+        #   ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Commands::CastMethod
+        #   # => object
+        #
+        #   :call
+        #   #=> method
+        #
+        #   (other: other, options: options)
+        #   # => expected_arguments
+        #
+        #   and_return_its_value
+        #   # => return_its_value_chaining
+        #
+        #   NOTE: A similar (with different behaviour) matcher exists in `saharspec`.
+        #   https://github.com/zverok/saharspec#send_messageobject-method-matcher
+        #
         class DelegateTo
           module Entities
             class Matcher
+              include Support::Delegate
+
               ##
               # @!attribute [r] object
-              #   @return [Object]
+              #   @return [Object] Can be any type.
               #
               attr_reader :object
 
@@ -20,19 +58,49 @@ module ConvenientService
               attr_reader :method
 
               ##
-              # @!attribute [r] value
-              #   @return [Object]
+              # @!attribute [r] block_expectation
+              #   @return [Proc]
               #
-              attr_reader :value
+              attr_reader :block_expectation
+
+              ##
+              # @return [Boolean]
+              #
+              delegate :should_call_original?, to: :chainings
+
+              ##
+              # @return [String]
+              #
+              delegate :printable_block_expectation, to: :presenter
+
+              ##
+              # @return [String]
+              #
+              delegate :printable_method, to: :presenter
+
+              ##
+              # @return [String]
+              #
+              delegate :printable_actual_arguments, to: :presenter
+
+              ##
+              # @return [String]
+              #
+              delegate :printable_expected_arguments, to: :presenter
 
               ##
               # @param object [Object]
               # @param method [String, Symbol]
+              # @param block_expectation [Proc]
               # @return [void]
               #
-              def initialize(object:, method:)
+              def initialize(object, method, block_expectation = nil)
+                ##
+                # TODO: raise unless object.respond_to?(method)
+                #
                 @object = object
                 @method = method
+                @block_expectation = block_expectation
               end
 
               ##
@@ -40,18 +108,21 @@ module ConvenientService
               # @return [Boolean]
               #
               def matches?(block_expectation)
-                chainings.values.each(&:apply_mocks!)
+                @block_expectation = block_expectation
 
-                @value = block_expectation.call
+                chainings.add_arguments_chaining(Entities::Chainings::WithAnyArguments) unless chainings.has_arguments_chaining?
+                chainings.add_call_original_chaining(Entities::Chainings::WithCallingOriginal) unless chainings.has_call_original_chaining?
 
-                chainings.values.all? { |chaining| chaining.matches?(@value) }
+                chainings.matches?(block_expectation)
               end
 
               ##
-              # @return [Boolean]
+              # @internal
+              #   NOTE: Required by RSpec.
+              #   https://relishapp.com/rspec/rspec-expectations/v/3-8/docs/custom-matchers/define-a-matcher-supporting-block-expectations
               #
-              def should_call_original?
-                chainings[:call_original].should_call_original?
+              def supports_block_expectations?
+                true
               end
 
               ##
@@ -65,123 +136,141 @@ module ConvenientService
               # @return [String]
               #
               def failure_message
-                chainings.values.find { |chaining| chaining.does_not_match?(value) }&.failure_message || ""
+                chainings.failure_message
               end
 
               ##
               # @return [String]
               #
               def failure_message_when_negated
-                chainings.values.find { |chaining| chaining.matches?(value) }&.failure_message_when_negated || ""
+                chainings.failure_message_when_negated
               end
 
               ##
-              # @return [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Arguments]
+              # @return [ConvenientService::RSpec::Matchers::Custom::DelegateTo]
+              # @raise [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Errors::ArgumentsChainingIsAlreadySet]
+              #
+              def with_arguments(...)
+                self.expected_arguments = Support::Arguments.new(...)
+
+                chainings.add_arguments_chaining(Entities::Chainings::WithConcreteArguments)
+
+                self
+              end
+
+              ##
+              # @return [ConvenientService::RSpec::Matchers::Custom::DelegateTo]
+              # @raise [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Errors::ArgumentsChainingIsAlreadySet]
+              #
+              def without_arguments
+                chainings.add_arguments_chaining(Entities::Chainings::WithoutArguments)
+
+                self
+              end
+
+              ##
+              # @return [ConvenientService::RSpec::Matchers::Custom::DelegateTo]
+              # @raise [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Errors::ReturnItsValueChainingIsAlreadySet]
+              #
+              def and_return_its_value
+                chainings.add_return_its_value_chaining(Entities::Chainings::ReturnItsValue)
+
+                self
+              end
+
+              ##
+              # @return [ConvenientService::RSpec::Matchers::Custom::DelegateTo]
+              #
+              def with_calling_original
+                chainings.add_call_original_chaining(Entities::Chainings::WithCallingOriginal)
+
+                self
+              end
+
+              ##
+              # @return [ConvenientService::RSpec::Matchers::Custom::DelegateTo]
+              #
+              def without_calling_original
+                chainings.add_call_original_chaining(Entities::Chainings::WithoutCallingOriginal)
+
+                self
+              end
+
+              ##
+              # @return [ConvenientService::Support::Arguments]
               #
               def expected_arguments
-                @expected_arguments ||= Entities::Arguments.new
+                @expected_arguments ||= Support::Arguments.null_arguments
               end
 
               ##
-              # @param arguments [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Arguments]
-              # @return [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Arguments]
+              # @param arguments [ConvenientService::Support::Arguments]
+              # @return [ConvenientService::Support::Arguments]
               #
               def expected_arguments=(arguments)
-                raise Errors::FailedToSetExpectedArguments.new(arguments: arguments) unless arguments.instance_of?(Entities::Arguments)
+                raise Errors::FailedToSetExpectedArguments.new(arguments: arguments) unless arguments.instance_of?(Support::Arguments)
+
+                Utils::Object.instance_variable_delete(self, :@delegation_value)
 
                 @expected_arguments = arguments
               end
 
               ##
-              # @return [Boolean]
+              # @return [Object] Can be any type.
               #
-              def has_arguments_chaining?
-                chainings.has_key?(:arguments)
+              # @internal
+              #   Must be refreshed when
+              #
+              def delegation_value
+                Utils::Object.instance_variable_fetch(self, :@delegation_value) do
+                  object.__send__(
+                    method,
+                    *expected_arguments.args,
+                    **expected_arguments.kwargs,
+                    &expected_arguments.block
+                  )
+                end
               end
 
               ##
-              # @return [Boolean]
-              #
-              def has_call_original_chaining?
-                chainings.has_key?(:call_original)
-              end
-
-              ##
-              # @param chaining [Class]
-              # @raise [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Errors::ArgumentsChainingIsAlreadySet]
-              #
-              def add_arguments_chaining(chaining)
-                raise Errors::ArgumentsChainingIsAlreadySet.new if chainings.has_key?(:arguments)
-
-                chainings[:arguments] = chaining.new(matcher: self)
-              end
-
-              ##
-              # @param chaining [Class]
-              # @raise [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Errors::ReturnItsValueChainingIsAlreadySet]
-              #
-              def add_return_its_value_chaining(chaining)
-                raise Errors::ReturnItsValueChainingIsAlreadySet.new if chainings.has_key?(:return_its_value)
-
-                chainings[:return_its_value] = chaining.new(matcher: self)
-              end
-
-              ##
-              # @param chaining [Class]
-              # @raise [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Errors::ReturnItsValueChainingIsAlreadySet]
-              #
-              def add_call_original_chaining(chaining)
-                raise Errors::CallOriginalChainingIsAlreadySet.new if chainings.has_key?(:call_original)
-
-                chainings[:call_original] = chaining.new(matcher: self)
-              end
-
-              ##
-              # @return [Array]
+              # @return [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings]
+              # @api private
               #
               def chainings
-                @chainings ||= {}
+                @chainings ||= Entities::ChainingsCollection.new(matcher: self)
               end
 
               ##
               # @return [Array]
+              # @api private
               #
               def delegations
                 @delegations ||= []
               end
 
               ##
-              # @return [String]
+              # @return [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Presenter]
+              # @api private
               #
-              def printable_method
-                @printable_method ||= Commands::GeneratePrintableMethod.call(matcher: self)
+              def presenter
+                @presenter ||= Entities::Presenter.new(matcher: self)
               end
 
               ##
-              # @return [String]
+              # @param other [Object] Can be any type.
+              # @return [Boolean, nil]
               #
               # @internal
-              #   NOTE: An example of how RSpec extracts block source, but they marked it as private.
-              #   https://github.com/rspec/rspec-expectations/blob/311aaf245f2c5493572bf683b8c441cb5f7e44c8/lib/rspec/matchers/built_in/change.rb#L437
+              #   TODO: Unify ==(other) YARD tags.
               #
-              #   TODO: `printable_block_expectation` when `method_source` is available.
-              #   https://github.com/banister/method_source
-              #
-              #   def printable_block_expectation
-              #     @printable_block_expectation ||= block_expectation.source
-              #   end
-              #
-              def printable_block_expectation
-                @printable_block_expectation ||= "{ ... }"
-              end
+              def ==(other)
+                return unless other.instance_of?(self.class)
 
-              ##
-              # @return [String]
-              #
-              def printable_actual_arguments
-                delegations
-                  .map { |delegation| Commands::GeneratePrintableArguments.call(arguments: delegation.arguments) }
-                  .join(", ")
+                return false if object != other.object
+                return false if method != other.method
+                return false if block_expectation != other.block_expectation
+
+                true
               end
             end
           end
