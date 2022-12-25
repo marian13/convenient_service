@@ -86,7 +86,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
         context "when step is NOT completed" do
           let(:error_message) do
             <<~TEXT
-              `out` method `#{method}` is called before its corresponding step `#{step.service}` is completed.
+              `out` method `#{method}` is called before its corresponding step `#{step.printable_service}` is completed.
 
               Maybe it makes sense to change the steps order?
             TEXT
@@ -113,11 +113,11 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
 
             let(:error_message) do
               <<~TEXT
-                Step `#{step.service}` result does NOT return `#{key}` data attribute.
+                Step `#{step.printable_service}` result does NOT return `#{key}` data attribute.
 
                 Maybe there is a typo in `out` definition?
 
-                Or `success` of `#{step.service}` accepts a wrong key?
+                Or `success` of `#{step.printable_service}` accepts a wrong key?
               TEXT
             end
 
