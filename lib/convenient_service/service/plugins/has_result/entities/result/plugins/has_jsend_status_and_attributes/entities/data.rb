@@ -22,6 +22,14 @@ module ConvenientService
                       @value = value
                     end
 
+                    ##
+                    # @param key [String, Symbol]
+                    # @return [Boolean]
+                    #
+                    def has_attribute?(key)
+                      value.has_key?(key.to_sym)
+                    end
+
                     def ==(other)
                       casted = cast(other)
 

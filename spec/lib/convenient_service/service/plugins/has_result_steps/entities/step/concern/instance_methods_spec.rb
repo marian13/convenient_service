@@ -347,6 +347,12 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::St
       end
     end
 
+    describe "#printable_service" do
+      it "returns printable service as string" do
+        expect(step.printable_service).to eq(step.service.klass.to_s)
+      end
+    end
+
     describe "#to_args" do
       let(:args_representation) { [step.service] }
 

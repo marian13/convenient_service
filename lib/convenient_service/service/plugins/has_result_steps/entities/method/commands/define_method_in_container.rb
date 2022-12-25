@@ -26,11 +26,13 @@ module ConvenientService
                   #
                   <<~RUBY.tap { |code| container.klass.class_eval(code, __FILE__, __LINE__ + 1) }
                     def #{name}
-                      step, key, name, error = steps[#{index}], :#{key}, :#{name}, #{error}
+                      step, key, method_name = steps[#{index}], :#{key}, :#{name}
 
-                      return step.result.data[key] if step.completed?
+                      raise #{not_completed_step_error}.new(step: step, method_name: method_name) unless step.completed?
 
-                      raise ::#{error}.new(step: step, method_name: name)
+                      raise #{not_existing_step_result_data_attribute_error}.new(step: step, key: key) unless step.result.data.has_attribute?(key)
+
+                      step.result.data[key]
                     end
                   RUBY
 
@@ -39,11 +41,16 @@ module ConvenientService
 
                 private
 
-                def error
-                  @error ||=
-                    <<~RUBY.chomp
-                      ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Errors::NotCompletedStep
-                    RUBY
+                def not_completed_step_error
+                  <<~RUBY.chomp
+                    ::ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Errors::NotCompletedStep
+                  RUBY
+                end
+
+                def not_existing_step_result_data_attribute_error
+                  <<~RUBY.chomp
+                    ::ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Errors::NotExistingStepResultDataAttribute
+                  RUBY
                 end
               end
             end
