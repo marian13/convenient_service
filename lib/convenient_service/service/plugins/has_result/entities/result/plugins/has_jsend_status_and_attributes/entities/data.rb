@@ -22,6 +22,10 @@ module ConvenientService
                       @value = value
                     end
 
+                    def has_key?(key)
+                      value.has_key?(key.to_sym)
+                    end
+
                     def ==(other)
                       casted = cast(other)
 

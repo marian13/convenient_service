@@ -118,6 +118,20 @@ module ConvenientService
                   super(message)
                 end
               end
+
+              class NotExistingStepResultDataAttribute < ConvenientService::Error
+                def initialize(key:, step:)
+                  message = <<~TEXT
+                    Step `#{step.service}` result does NOT return `#{key}` data attribute.
+
+                    Maybe there is a typo in `out` definition?
+
+                    Or `success` of `#{step.service}` accepts a wrong key?
+                  TEXT
+
+                  super(message)
+                end
+              end
             end
           end
         end
