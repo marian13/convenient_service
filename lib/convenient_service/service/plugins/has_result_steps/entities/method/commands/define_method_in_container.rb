@@ -30,7 +30,7 @@ module ConvenientService
 
                       raise #{not_completed_step_error}.new(step: step, method_name: method_name) unless step.completed?
 
-                      raise #{not_existing_step_result_data_attribute_error}.new(step: step, key: key) unless step.result.data.has_key?(key)
+                      raise #{not_existing_step_result_data_attribute_error}.new(step: step, key: key) unless step.result.data.has_attribute?(key)
 
                       step.result.data[key]
                     end

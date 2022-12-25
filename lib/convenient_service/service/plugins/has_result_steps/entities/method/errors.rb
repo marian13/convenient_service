@@ -120,6 +120,10 @@ module ConvenientService
               end
 
               class NotExistingStepResultDataAttribute < ConvenientService::Error
+                ##
+                # @internal
+                #   TODO: `step.printable_service`.
+                #
                 def initialize(key:, step:)
                   message = <<~TEXT
                     Step `#{step.service}` result does NOT return `#{key}` data attribute.
