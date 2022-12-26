@@ -57,7 +57,7 @@
 | Low | 🚧 | Same spec example group organization | |
 | Medium | 🚧 | `Support::Arguments` | |
 | Low | 🚧 | Null object to Nil object | |
-| High | 🚧 | Do not use Testing Toolkit in the Primitives layer | [Components Diagram](https://marian13.github.io/static_content/convenient_service/diagrams/components_graph.html) |
+| High | 🚧 | Do not use Testing Toolkit in the Primitives layer | See [Components Diagram](https://marian13.github.io/static_content/convenient_service/diagrams/components_graph.html) + it should take the minimal amount of efforts to extract and reuse `Utils`, `Suppport` in the different projects |
 | Medium | 🚧 | Perfromance testing | [rspec-benchmark](https://github.com/piotrmurach/rspec-benchmark), [Testing object allocations](https://www.honeybadger.io/blog/testing-object-allocations/), [allocation_stats](https://github.com/srawlins/allocation_stats) |
 | Medium | | Mutant testing | [mutant](https://github.com/mbj/mutant) |
 

@@ -10,11 +10,20 @@ RSpec.describe ConvenientService::Utils::Bool do
   describe ".to_bool" do
     let(:object) { :foo }
 
-    specify do
-      expect { described_class.to_bool(object) }
-        .to delegate_to(ConvenientService::Utils::Bool::ToBool, :call)
-        .with_arguments(object)
-        .and_return_its_value
+    ##
+    # TODO: Create simplified lower-level `delegate_to` for Primitives.
+    # https://github.com/marian13/convenient_service/wiki/Docs:-Components
+    #
+    it "delegates to `ConvenientService::Utils::Bool::ToBool.call`" do
+      allow(ConvenientService::Utils::Bool::ToBool).to receive(:call).with(object).and_call_original
+
+      described_class.to_bool(object)
+
+      expect(ConvenientService::Utils::Bool::ToBool).to have_received(:call).with(object)
+    end
+
+    it "returns `ConvenientService::Utils::Bool::ToBool.call` value" do
+      expect(described_class.to_bool(object)).to eq(ConvenientService::Utils::Bool::ToBool.call(object))
     end
   end
 end

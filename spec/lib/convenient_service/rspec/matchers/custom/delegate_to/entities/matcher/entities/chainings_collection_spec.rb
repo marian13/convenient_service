@@ -133,6 +133,36 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
         end
       end
     end
+
+    describe "#should_call_original?" do
+      context "when chaining collection does NOT have call original chaining" do
+        it "returns `false`" do
+          expect(chainings_collection.should_call_original?).to eq(false)
+        end
+      end
+
+      context "when chaining collection has call original chaining" do
+        context "when that call original chaining tells NOT to call original" do
+          before do
+            chainings_collection.call_original = ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::WithoutCallingOriginal.new(matcher: matcher)
+          end
+
+          it "returns `false`" do
+            expect(chainings_collection.should_call_original?).to eq(false)
+          end
+        end
+
+        context "when that call original chaining tells to call original" do
+          before do
+            chainings_collection.call_original = ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::WithCallingOriginal.new(matcher: matcher)
+          end
+
+          it "returns `true`" do
+            expect(chainings_collection.should_call_original?).to eq(true)
+          end
+        end
+      end
+    end
   end
 end
 # rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
