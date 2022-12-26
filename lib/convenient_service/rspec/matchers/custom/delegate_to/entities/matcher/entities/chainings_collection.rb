@@ -24,6 +24,21 @@ module ConvenientService
                   attr_reader :block_expectation_value
 
                   ##
+                  # @!attribute [r] call_original
+                  #   @return [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Chainings::Base, nil]
+                  attr_reader :call_original
+
+                  ##
+                  # @!attribute [r] arguments
+                  #   @return [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Chainings::Base, nil]
+                  attr_reader :arguments
+
+                  ##
+                  # @!attribute [r] return_its_value
+                  #   @return [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Chainings::Base, nil]
+                  attr_reader :return_its_value
+
+                  ##
                   # @param matcher [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings]
                   # @return [void]
                   #
@@ -36,79 +51,83 @@ module ConvenientService
                   # @return [Boolean]
                   #
                   def matches?(block_expectation)
-                    chainings.values.each(&:apply_stubs!)
+                    chainings.each(&:apply_stubs!)
 
                     @block_expectation_value = block_expectation.call
 
-                    chainings.values.all? { |chaining| chaining.matches?(@block_expectation_value) }
+                    chainings.all? { |chaining| chaining.matches?(@block_expectation_value) }
                   end
 
                   ##
                   # @return [Boolean]
                   #
                   def should_call_original?
-                    return false unless chainings.has_key?(:call_original)
-                    return false unless chainings[:call_original].should_call_original?
-
-                    true
+                    Utils::Bool.to_bool(call_original&.should_call_original?)
                   end
 
                   ##
                   # @return [String]
                   #
                   def failure_message
-                    chainings.values.find { |chaining| chaining.does_not_match?(block_expectation_value) }&.failure_message || ""
+                    chainings.find { |chaining| chaining.does_not_match?(block_expectation_value) }&.failure_message || ""
                   end
 
                   ##
                   # @return [String]
                   #
                   def failure_message_when_negated
-                    chainings.values.find { |chaining| chaining.matches?(block_expectation_value) }&.failure_message_when_negated || ""
+                    chainings.find { |chaining| chaining.matches?(block_expectation_value) }&.failure_message_when_negated || ""
                   end
 
                   ##
                   # @return [Boolean]
                   #
-                  def has_arguments_chaining?
-                    chainings.has_key?(:arguments)
+                  def has_call_original?
+                    Utils::Bool.to_bool(call_original)
                   end
 
                   ##
                   # @return [Boolean]
                   #
-                  def has_call_original_chaining?
-                    chainings.has_key?(:call_original)
+                  def has_arguments?
+                    Utils::Bool.to_bool(arguments)
+                  end
+
+                  ##
+                  # @return [Boolean]
+                  #
+                  def has_return_its_value?
+                    Utils::Bool.to_bool(return_its_value)
+                  end
+
+                  ##
+                  # @param chaining [Class]
+                  # @raise [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Errors::ReturnItsValueChainingIsAlreadySet]
+                  #
+                  def call_original=(chaining)
+                    raise Errors::CallOriginalChainingIsAlreadySet.new if @call_original
+
+                    @call_original = chaining
                   end
 
                   ##
                   # @param chaining [Class]
                   # @raise [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Errors::ArgumentsChainingIsAlreadySet]
                   #
-                  def add_arguments_chaining(chaining)
-                    raise Errors::ArgumentsChainingIsAlreadySet.new if chainings.has_key?(:arguments)
+                  def arguments=(chaining)
+                    raise Errors::ArgumentsChainingIsAlreadySet.new if @arguments
 
-                    chainings[:arguments] = chaining.new(matcher: matcher)
+                    @arguments = chaining
                   end
 
                   ##
                   # @param chaining [Class]
                   # @raise [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Errors::ReturnItsValueChainingIsAlreadySet]
                   #
-                  def add_return_its_value_chaining(chaining)
-                    raise Errors::ReturnItsValueChainingIsAlreadySet.new if chainings.has_key?(:return_its_value)
+                  def return_its_value=(chaining)
+                    raise Errors::ReturnItsValueChainingIsAlreadySet.new if @return_its_value
 
-                    chainings[:return_its_value] = chaining.new(matcher: matcher)
-                  end
-
-                  ##
-                  # @param chaining [Class]
-                  # @raise [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Errors::ReturnItsValueChainingIsAlreadySet]
-                  #
-                  def add_call_original_chaining(chaining)
-                    raise Errors::CallOriginalChainingIsAlreadySet.new if chainings.has_key?(:call_original)
-
-                    chainings[:call_original] = chaining.new(matcher: matcher)
+                    @return_its_value = chaining
                   end
 
                   private
@@ -116,8 +135,11 @@ module ConvenientService
                   ##
                   # @return [Array]
                   #
+                  # @internal
+                  #   IMPORTANT: Order of chainings matters.
+                  #
                   def chainings
-                    @chainings ||= {}
+                    [call_original, arguments, return_its_value].compact
                   end
                 end
               end

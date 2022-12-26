@@ -37,7 +37,7 @@ module ConvenientService
 
       class << self
         ##
-        # @return [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::NullArguments]
+        # @return [ConvenientService::Support::Arguments::NullArguments]
         #
         def null_arguments
           @null_arguments ||= Support::Arguments::NullArguments.new
