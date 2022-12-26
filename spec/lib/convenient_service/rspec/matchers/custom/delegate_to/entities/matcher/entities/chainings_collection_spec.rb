@@ -401,6 +401,24 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
         end
       end
     end
+
+    describe "#has_arguments?" do
+      context "when arguments chaining is NOT used" do
+        it "returns `false`" do
+          expect(chainings_collection.has_arguments?).to eq(false)
+        end
+      end
+
+      context "when arguments chaining is used" do
+        before do
+          chainings_collection.arguments = ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::WithAnyArguments.new(matcher: matcher)
+        end
+
+        it "returns `true`" do
+          expect(chainings_collection.has_arguments?).to eq(true)
+        end
+      end
+    end
   end
 end
 # rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
