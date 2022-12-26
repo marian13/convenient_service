@@ -355,6 +355,34 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
         end
       end
     end
+
+    describe "#ordered_chainings" do
+      context "when any type of chainings is missed" do
+        before do
+          chainings_collection.call_original = ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::WithCallingOriginal.new(matcher: matcher)
+
+          chainings_collection.return_its_value = ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::ReturnItsValue.new(matcher: matcher)
+        end
+
+        it "returns ordered chainings skipping that missed chaining" do
+          expect(chainings_collection.ordered_chainings).to eq([chainings_collection.call_original, chainings_collection.return_its_value])
+        end
+      end
+
+      context "when all types of chainings are used" do
+        before do
+          chainings_collection.arguments = ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::WithAnyArguments.new(matcher: matcher)
+
+          chainings_collection.call_original = ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::WithCallingOriginal.new(matcher: matcher)
+
+          chainings_collection.return_its_value = ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::ReturnItsValue.new(matcher: matcher)
+        end
+
+        it "returns ordered chainings" do
+          expect(chainings_collection.ordered_chainings).to eq([chainings_collection.call_original, chainings_collection.arguments, chainings_collection.return_its_value])
+        end
+      end
+    end
   end
 end
 # rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
