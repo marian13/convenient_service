@@ -52,14 +52,15 @@
 | High | 🚧 | A plugin that catches `StandardError` and returns `failure` | Should be the lowest in the stack |
 | High | 🚧 | `Support::Command` alias | Should be visible to the end user |
 | Low | 🚧 | Parallel steps | A killer feature |
-| Medium | 🚧 | Add Ruby 3.2 support to Docker and CI |  |
+| Medium | 🚧 | Add `Ruby 3.2` support to `Docker` and `CI` |  |
 | Low | 🚧 | `overload do` | |
 | Low | 🚧 | Same spec example group organization | |
 | Medium | 🚧 | `Support::Arguments` | |
-| Low | 🚧 | Null object to Nil object | |
+| Low | 🚧 | Null object to Nil object? | |
 | High | 🚧 | Do not use Testing Toolkit in the Primitives layer | See [Components Diagram](https://marian13.github.io/static_content/convenient_service/diagrams/components_graph.html) + it should take the minimal amount of efforts to extract and reuse `Utils`, `Suppport` in the different projects |
 | Medium | 🚧 | Perfromance testing | [rspec-benchmark](https://github.com/piotrmurach/rspec-benchmark), [Testing object allocations](https://www.honeybadger.io/blog/testing-object-allocations/), [allocation_stats](https://github.com/srawlins/allocation_stats) |
 | Medium | 🚧 | Mutant testing | [mutant](https://github.com/mbj/mutant) |
-| Low | 🚧 | Add JRuby support | [jruby](https://www.jruby.org/) |
+| Low | 🚧 | Add `JRuby` support | [jruby](https://www.jruby.org/) |
+| Medium | | Add `shoulda-context` to test conditionals when `RSpec` is not loaded | [shoulda-context](https://github.com/thoughtbot/shoulda-context) |
 
 Search for `TODO`s in the codebase for more tasks.

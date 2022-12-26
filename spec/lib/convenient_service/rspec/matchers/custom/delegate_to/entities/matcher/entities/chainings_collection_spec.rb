@@ -419,6 +419,24 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
         end
       end
     end
+
+    describe "#has_return_its_value?" do
+      context "when return its value chaining is NOT used" do
+        it "returns `false`" do
+          expect(chainings_collection.has_return_its_value?).to eq(false)
+        end
+      end
+
+      context "when return its value chaining is used" do
+        before do
+          chainings_collection.return_its_value = ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::ReturnItsValue.new(matcher: matcher)
+        end
+
+        it "returns `true`" do
+          expect(chainings_collection.has_return_its_value?).to eq(true)
+        end
+      end
+    end
   end
 end
 # rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
