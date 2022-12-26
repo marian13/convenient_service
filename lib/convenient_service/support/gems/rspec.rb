@@ -34,7 +34,7 @@ module ConvenientService
           # @return [RSpec::Core::Example, nil]
           #
           # @internal
-          #   NOTE: Returns `nil` in a non-test environment
+          #   NOTE: Returns `nil` in environments where RSpec is NOT fully loaded, e.g: irb, rails console, etc.
           #
           #   `::RSpec.current_example` docs:
           #   - https://www.rubydoc.info/github/rspec/rspec-core/RSpec.current_example
@@ -42,7 +42,14 @@ module ConvenientService
           #   - https://relishapp.com/rspec/rspec-core/docs/metadata/current-example
           #
           def current_example
-            ::RSpec.current_example if loaded?
+            return unless loaded?
+
+            ##
+            # NOTE: This happens in Ruby-only projects where RSpec is loaded by `Bundler.require`, not by `bundle exec rspec`.
+            #
+            return unless ::RSpec.respond_to?(:current_example)
+
+            ::RSpec.current_example
           end
         end
       end
