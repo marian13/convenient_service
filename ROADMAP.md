@@ -53,9 +53,12 @@
 | High | 🚧 | `Support::Command` alias | Should be visible to the end user |
 | Low | 🚧 | Parallel steps | A killer feature |
 | Medium | 🚧 | Add Ruby 3.2 support to Docker and CI |  |
-| Low | 🚧  | `overload do` | |
-| Low | 🚧  | Same spec example group organization | |
-| Medium | 🚧  | `Support::Arguments` | |
-| Low | 🚧  | Null object to Nil object | |
+| Low | 🚧 | `overload do` | |
+| Low | 🚧 | Same spec example group organization | |
+| Medium | 🚧 | `Support::Arguments` | |
+| Low | 🚧 | Null object to Nil object | |
+| High | 🚧 | Do not use Testing Toolkit in the Primitives layer | [Components Diagram](https://marian13.github.io/static_content/convenient_service/diagrams/components_graph.html) |
+| Medium | 🚧 | Perfromance testing | [rspec-benchmark](https://github.com/piotrmurach/rspec-benchmark), [Testing object allocations](https://www.honeybadger.io/blog/testing-object-allocations/), [allocation_stats](https://github.com/srawlins/allocation_stats) |
+| Medium | | Mutant testing | [mutant](https://github.com/mbj/mutant) |
 
 Search for `TODO`s in the codebase for more tasks.
