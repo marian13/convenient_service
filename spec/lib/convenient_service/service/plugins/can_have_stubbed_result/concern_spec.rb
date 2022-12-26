@@ -43,7 +43,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStubbedResult::Concer
         end
       end
 
-      context "when RSpec is loaded and current example is set" do
+      context "when RSpec current example is set" do
         it "returns cache scoped by self" do
           expect(service_class.stubbed_results).to eq(ConvenientService::Support::Cache.new.scope(service_class))
         end
