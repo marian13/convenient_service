@@ -163,6 +163,102 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
         end
       end
     end
+
+    describe "#failure_message" do
+      context "when NO chaining is used" do
+        it "returns empty string" do
+          expect(chainings_collection.failure_message).to eq("")
+        end
+      end
+
+      context "when arguments chaining is used" do
+        before do
+          chainings_collection.arguments = ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::WithAnyArguments.new(matcher: matcher)
+
+          chainings_collection.matches?(block_expectation)
+        end
+
+        context "when arguments chaining does NOT match" do
+          let(:block_expectation) { proc { object } }
+
+          it "returns arguments chaining failure message" do
+            expect(chainings_collection.failure_message).to eq(chainings_collection.arguments.failure_message)
+          end
+        end
+
+        context "when arguments chaining matches" do
+          let(:block_expectation) { proc { object.foo } }
+
+          it "returns empty string" do
+            expect(chainings_collection.failure_message).to eq("")
+          end
+        end
+      end
+
+      context "when call original chaining is used" do
+        before do
+          chainings_collection.call_original = ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::WithCallingOriginal.new(matcher: matcher)
+
+          chainings_collection.matches?(block_expectation)
+        end
+
+        it "returns empty string" do
+          expect(chainings_collection.failure_message).to eq("")
+        end
+      end
+
+      context "when return its value chaining is used" do
+        before do
+          chainings_collection.return_its_value = ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::ReturnItsValue.new(matcher: matcher)
+
+          chainings_collection.matches?(block_expectation)
+        end
+
+        context "when return its value chaining does NOT match" do
+          let(:block_expectation) { proc { object } }
+
+          it "returns return its value chaining failure message" do
+            expect(chainings_collection.failure_message).to eq(chainings_collection.return_its_value.failure_message)
+          end
+        end
+
+        context "when return its value chaining matches" do
+          let(:block_expectation) { proc { object.foo } }
+
+          it "returns empty string" do
+            expect(chainings_collection.failure_message).to eq("")
+          end
+        end
+      end
+
+      context "when multiple chainings is used" do
+        before do
+          chainings_collection.arguments = ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::WithAnyArguments.new(matcher: matcher)
+
+          chainings_collection.call_original = ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::WithCallingOriginal.new(matcher: matcher)
+
+          chainings_collection.return_its_value = ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::ReturnItsValue.new(matcher: matcher)
+
+          chainings_collection.matches?(block_expectation)
+        end
+
+        context "when any of those chainigns does NOT match" do
+          let(:block_expectation) { proc { object } }
+
+          it "returns failure message of the first NOT matched chaining" do
+            expect(chainings_collection.failure_message).to eq(chainings_collection.ordered_chainings.find { |chaining| chaining.does_not_match?(block_expectation) }.failure_message)
+          end
+        end
+
+        context "when all of those chainigns match" do
+          let(:block_expectation) { proc { object.foo } }
+
+          it "returns empty string" do
+            expect(chainings_collection.failure_message).to eq("")
+          end
+        end
+      end
+    end
   end
 end
 # rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers

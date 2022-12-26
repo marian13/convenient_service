@@ -26,16 +26,19 @@ module ConvenientService
                   ##
                   # @!attribute [r] call_original
                   #   @return [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Chainings::Base, nil]
+                  #
                   attr_reader :call_original
 
                   ##
                   # @!attribute [r] arguments
                   #   @return [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Chainings::Base, nil]
+                  #
                   attr_reader :arguments
 
                   ##
                   # @!attribute [r] return_its_value
                   #   @return [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Chainings::Base, nil]
+                  #
                   attr_reader :return_its_value
 
                   ##
@@ -51,11 +54,35 @@ module ConvenientService
                   # @return [Boolean]
                   #
                   def matches?(block_expectation)
-                    chainings.each(&:apply_stubs!)
+                    ordered_chainings.each(&:apply_stubs!)
 
                     @block_expectation_value = block_expectation.call
 
-                    chainings.all? { |chaining| chaining.matches?(@block_expectation_value) }
+                    ordered_chainings.all? { |chaining| chaining.matches?(@block_expectation_value) }
+                  end
+
+                  ##
+                  # @return [String]
+                  #
+                  def failure_message
+                    ordered_chainings.find { |chaining| chaining.does_not_match?(block_expectation_value) }&.failure_message || ""
+                  end
+
+                  ##
+                  # @return [String]
+                  #
+                  def failure_message_when_negated
+                    ordered_chainings.find { |chaining| chaining.matches?(block_expectation_value) }&.failure_message_when_negated || ""
+                  end
+
+                  ##
+                  # @return [Array]
+                  #
+                  # @internal
+                  #   IMPORTANT: Order of chainings matters.
+                  #
+                  def ordered_chainings
+                    [call_original, arguments, return_its_value].compact
                   end
 
                   ##
@@ -63,20 +90,6 @@ module ConvenientService
                   #
                   def should_call_original?
                     Utils::Bool.to_bool(call_original&.should_call_original?)
-                  end
-
-                  ##
-                  # @return [String]
-                  #
-                  def failure_message
-                    chainings.find { |chaining| chaining.does_not_match?(block_expectation_value) }&.failure_message || ""
-                  end
-
-                  ##
-                  # @return [String]
-                  #
-                  def failure_message_when_negated
-                    chainings.find { |chaining| chaining.matches?(block_expectation_value) }&.failure_message_when_negated || ""
                   end
 
                   ##
@@ -128,18 +141,6 @@ module ConvenientService
                     raise Errors::ReturnItsValueChainingIsAlreadySet.new if @return_its_value
 
                     @return_its_value = chaining
-                  end
-
-                  private
-
-                  ##
-                  # @return [Array]
-                  #
-                  # @internal
-                  #   IMPORTANT: Order of chainings matters.
-                  #
-                  def chainings
-                    [call_original, arguments, return_its_value].compact
                   end
                 end
               end
