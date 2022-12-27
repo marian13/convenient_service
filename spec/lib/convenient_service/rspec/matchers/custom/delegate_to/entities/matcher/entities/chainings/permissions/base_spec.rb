@@ -42,7 +42,9 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
 
     describe "#does_not_allow?" do
       it "returns opposite of `#allows?`" do
-        expect(chaining.does_not_allow?).to eq(!chaining.allows?)
+        allow(chaining).to receive(:allows?).and_return(true, false, true, false)
+
+        expect([chaining.does_not_allow?, !chaining.does_not_allow?]).to eq([!chaining.allows?, chaining.allows?])
       end
     end
   end

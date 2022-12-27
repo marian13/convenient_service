@@ -35,9 +35,7 @@ module ConvenientService
                       # @return [Boolean]
                       #
                       def does_not_allow?
-                        return true unless allows?
-
-                        false
+                        !allows?
                       end
                     end
                   end

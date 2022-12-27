@@ -58,9 +58,7 @@ module ConvenientService
                       # @return [Boolean]
                       #
                       def does_not_match?(block_expectation_value)
-                        return true unless matches?(block_expectation_value)
-
-                        false
+                        !matches?(block_expectation_value)
                       end
 
                       ##

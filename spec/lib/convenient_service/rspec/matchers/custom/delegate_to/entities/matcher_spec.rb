@@ -5,10 +5,10 @@ require "spec_helper"
 require "convenient_service"
 
 ##
-# TODO: Refactor `delegate_to` to NOT use `expect` internally. Then rewrite this spec file completely.
-# IMPORTANT: Make sure you have specs when `block_expectation` does NOT delegate at all, delegates once, delegates multiple times.
+# NOTE: This class is tested in behavior style, imagining having no knowledge about implementation.
+# NOTE: Do not forget to check coverage when modifying source.
 #
-# rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
+# rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers, Style/Semicolon
 RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher do
   subject(:matcher_result) { matcher.matches?(block_expectation) }
 
@@ -16,11 +16,11 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
 
   let(:klass) do
     Class.new do
-      def foo
-        bar
+      def foo(...)
+        bar(...)
       end
 
-      def bar
+      def bar(...)
         "bar value"
       end
     end
@@ -31,6 +31,10 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
 
   let(:block_expectation) { proc { object.foo } }
   let(:printable_method) { "#{klass}##{method}" }
+
+  let(:args) { [:foo] }
+  let(:kwargs) { {foo: :bar} }
+  let(:block) { proc { :foo } }
 
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
@@ -63,11 +67,11 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
   example_group "instance methods" do
     describe "#matches?" do
       context "when NO chaining is used" do
-        ##
-        # NOTE: `expect { object.foo }.to delegate_to(object, :bar)`
-        #
         let(:matcher) { described_class.new(object, method) }
 
+        ##
+        # NOTE: `expect {}.to delegate_to(object, :bar)`
+        #
         context "when `block_expectation` does NOT delegate" do
           let(:block_expectation) { proc {} }
 
@@ -77,28 +81,71 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
         end
 
         context "when `block_expectation` delegates once" do
-          let(:block_expectation) { proc { object.foo } }
+          ##
+          # NOTE: `expect { object.foo }.to delegate_to(object, :bar)`
+          #
+          context "when `block_expectation` delegates once without arguments" do
+            let(:block_expectation) { proc { object.foo } }
 
-          it "returns `true`" do
-            expect(matcher_result).to eq(true)
+            it "returns `true`" do
+              expect(matcher_result).to eq(true)
+            end
+          end
+
+          ##
+          # NOTE: `expect { object.foo(*args) }.to delegate_to(object, :bar)`
+          #
+          context "when `block_expectation` delegates once with any arguments" do
+            let(:block_expectation) { proc { object.foo(*args) } }
+
+            it "returns `true`" do
+              expect(matcher_result).to eq(true)
+            end
           end
         end
 
         context "when `block_expectation` delegates multiple times" do
-          let(:block_expectation) { proc { 3.times { object.foo } } }
+          ##
+          # NOTE: `expect { 3.times { object.foo } }.to delegate_to(object, :bar)`
+          #
+          context "when `block_expectation` delegates all times without arguments" do
+            let(:block_expectation) { proc { 3.times { object.foo } } }
 
-          it "returns `true`" do
-            expect(matcher_result).to eq(true)
+            it "returns `true`" do
+              expect(matcher_result).to eq(true)
+            end
+          end
+
+          ##
+          # NOTE: `expect { object.foo; object.foo(*kwargs); object.foo(&block) } }.to delegate_to(object, :bar)`
+          #
+          context "when `block_expectation` delegates some times with arguments" do
+            let(:block_expectation) { proc { object.foo; object.foo(*kwargs); object.foo(&block) } }
+
+            it "returns `true`" do
+              expect(matcher_result).to eq(true)
+            end
+          end
+
+          ##
+          # NOTE: `expect { 3.times { object.foo(*args, **kwargs, &block) } }.to delegate_to(object, :bar)`
+          #
+          context "when `block_expectation` delegates all times with arguments" do
+            let(:block_expectation) { proc { 3.times { object.foo(*args, **kwargs, &block) } } }
+
+            it "returns `true`" do
+              expect(matcher_result).to eq(true)
+            end
           end
         end
       end
 
-      context "when used with `and_return_its_value`" do
-        ##
-        # NOTE: `expect { object.foo }.to delegate_to(object, :bar).and_return_its_value`
-        #
-        let(:matcher) { described_class.new(object, method).and_return_its_value }
+      context "when used with `without_arguments`" do
+        let(:matcher) { described_class.new(object, method).without_arguments }
 
+        ##
+        # NOTE: `expect {}.to delegate_to(object, :bar).without_arguments`
+        #
         context "when `block_expectation` does NOT delegate" do
           let(:block_expectation) { proc {} }
 
@@ -108,20 +155,275 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
         end
 
         context "when `block_expectation` delegates once" do
-          context "when `block_expectation` does NOT return delegation value" do
-            let(:block_expectation) do
-              proc do
-                object.foo
+          ##
+          # NOTE: `expect { object.foo }.to delegate_to(object, :bar).without_arguments`
+          #
+          context "when `block_expectation` delegates once without arguments" do
+            let(:block_expectation) { proc { object.foo } }
 
-                42
-              end
+            it "returns `true`" do
+              expect(matcher_result).to eq(true)
             end
+          end
+
+          ##
+          # NOTE: `expect { object.foo(*args) }.to delegate_to(object, :bar).without_arguments`
+          #
+          context "when `block_expectation` delegates once with any arguments" do
+            let(:block_expectation) { proc { object.foo(*args) } }
+
+            it "returns `false`" do
+              expect(matcher_result).to eq(false)
+            end
+          end
+        end
+
+        context "when `block_expectation` delegates multiple times" do
+          ##
+          # NOTE: `expect { 3.times { object.foo } }.to delegate_to(object, :bar).without_arguments`
+          #
+          context "when `block_expectation` delegates all times without arguments" do
+            let(:block_expectation) { proc { 3.times { object.foo } } }
+
+            it "returns `true`" do
+              expect(matcher_result).to eq(true)
+            end
+          end
+
+          ##
+          # NOTE: `expect { object.foo; object.foo(*kwargs); object.foo(&block) } }.to delegate_to(object, :bar).without_arguments`
+          #
+          context "when `block_expectation` delegates some times with arguments" do
+            let(:block_expectation) { proc { object.foo; object.foo(*kwargs); object.foo(&block) } }
+
+            it "returns `true`" do
+              expect(matcher_result).to eq(true)
+            end
+          end
+
+          ##
+          # NOTE: `expect { 3.times { object.foo(*args, **kwargs, &block) } }.to delegate_to(object, :bar).without_arguments`
+          #
+          context "when `block_expectation` delegates all times with arguments" do
+            let(:block_expectation) { proc { 3.times { object.foo(*args, **kwargs, &block) } } }
+
+            it "returns `false`" do
+              expect(matcher_result).to eq(false)
+            end
+          end
+        end
+      end
+
+      context "when used with `with_any_arguments`" do
+        let(:matcher) { described_class.new(object, method).with_any_arguments }
+
+        ##
+        # NOTE: `expect {}.to delegate_to(object, :bar).with_any_arguments`
+        #
+        context "when `block_expectation` does NOT delegate" do
+          let(:block_expectation) { proc {} }
+
+          it "returns `false`" do
+            expect(matcher_result).to eq(false)
+          end
+        end
+
+        context "when `block_expectation` delegates once" do
+          ##
+          # NOTE: `expect { object.foo }.to delegate_to(object, :bar).with_any_arguments`
+          #
+          context "when `block_expectation` delegates once without arguments" do
+            let(:block_expectation) { proc { object.foo } }
+
+            it "returns `true`" do
+              expect(matcher_result).to eq(true)
+            end
+          end
+
+          ##
+          # NOTE: `expect { object.foo(*args) }.to delegate_to(object, :bar).with_any_arguments`
+          #
+          context "when `block_expectation` delegates once with any arguments" do
+            let(:block_expectation) { proc { object.foo(*args) } }
+
+            it "returns `true`" do
+              expect(matcher_result).to eq(true)
+            end
+          end
+        end
+
+        context "when `block_expectation` delegates multiple times" do
+          ##
+          # NOTE: `expect { 3.times { object.foo } }.to delegate_to(object, :bar).with_any_arguments`
+          #
+          context "when `block_expectation` delegates all times without arguments" do
+            let(:block_expectation) { proc { 3.times { object.foo } } }
+
+            it "returns `true`" do
+              expect(matcher_result).to eq(true)
+            end
+          end
+
+          ##
+          # NOTE: `expect { object.foo; object.foo(*kwargs); object.foo(&block) } }.to delegate_to(object, :bar).with_any_arguments`
+          #
+          context "when `block_expectation` delegates some times with arguments" do
+            let(:block_expectation) { proc { object.foo; object.foo(*kwargs); object.foo(&block) } }
+
+            it "returns `true`" do
+              expect(matcher_result).to eq(true)
+            end
+          end
+
+          ##
+          # NOTE: `expect { 3.times { object.foo(*args, **kwargs, &block) } }.to delegate_to(object, :bar).with_any_arguments`
+          #
+          context "when `block_expectation` delegates all times with arguments" do
+            let(:block_expectation) { proc { 3.times { object.foo(*args, **kwargs, &block) } } }
+
+            it "returns `true`" do
+              expect(matcher_result).to eq(true)
+            end
+          end
+        end
+      end
+
+      context "when used with `with_arguments(*args, **kwargs, &block)` (concrete arguments)" do
+        let(:matcher) { described_class.new(object, method).with_arguments(*args, **kwargs, &block) }
+
+        ##
+        # NOTE: `expect {}.to delegate_to(object, :bar).with_arguments(*args, **kwargs, &block)`
+        #
+        context "when `block_expectation` does NOT delegate" do
+          let(:block_expectation) { proc {} }
+
+          it "returns `false`" do
+            expect(matcher_result).to eq(false)
+          end
+        end
+
+        context "when `block_expectation` delegates once" do
+          ##
+          # NOTE: `expect { object.foo }.to delegate_to(object, :bar).with_arguments(*args, **kwargs, &block)`
+          #
+          context "when `block_expectation` delegates once without arguments" do
+            let(:block_expectation) { proc { object.foo } }
 
             it "returns `false`" do
               expect(matcher_result).to eq(false)
             end
           end
 
+          ##
+          # NOTE: `expect { object.foo(*args) }.to delegate_to(object, :bar).with_arguments(*args, **kwargs, &block)`
+          #
+          context "when `block_expectation` delegates once with any arguments" do
+            let(:block_expectation) { proc { object.foo(*args) } }
+
+            it "returns `false`" do
+              expect(matcher_result).to eq(false)
+            end
+          end
+
+          ##
+          # NOTE: `expect { object.foo(*args, **kwargs, &block) }.to delegate_to(object, :bar).with_arguments(*args, **kwargs, &block)`
+          #
+          context "when `block_expectation` delegates once with concrete arguments" do
+            let(:block_expectation) { proc { object.foo(*args, **kwargs, &block) } }
+
+            it "returns `true`" do
+              expect(matcher_result).to eq(true)
+            end
+          end
+        end
+
+        context "when `block_expectation` delegates multiple times" do
+          ##
+          # NOTE: `expect { 3.times { object.foo } }.to delegate_to(object, :bar).with_arguments(*args, **kwargs, &block)`
+          #
+          context "when `block_expectation` delegates all times without arguments" do
+            let(:block_expectation) { proc { 3.times { object.foo } } }
+
+            it "returns `false`" do
+              expect(matcher_result).to eq(false)
+            end
+          end
+
+          ##
+          # NOTE: `expect { object.foo; object.foo(*kwargs); object.foo(&block) } }.to delegate_to(object, :bar).with_arguments(*args, **kwargs, &block)`
+          #
+          context "when `block_expectation` delegates some times with any arguments" do
+            let(:block_expectation) { proc { object.foo; object.foo(*kwargs); object.foo(&block) } }
+
+            it "returns `false`" do
+              expect(matcher_result).to eq(false)
+            end
+          end
+
+          ##
+          # NOTE: `expect { object.foo; object.foo(*args, **kwargs, &block); object.foo(&block) } }.to delegate_to(object, :bar).with_arguments(*args, **kwargs, &block)`
+          #
+          context "when `block_expectation` delegates some times with concrete arguments" do
+            let(:block_expectation) { proc { object.foo; object.foo(*args, **kwargs, &block); object.foo(&block) } }
+
+            it "returns `true`" do
+              expect(matcher_result).to eq(true)
+            end
+          end
+
+          ##
+          # NOTE: `expect { 3.times { object.foo(*args, **kwargs) } }.to delegate_to(object, :bar).with_arguments(*args, **kwargs, &block)`
+          #
+          context "when `block_expectation` delegates all times with any arguments" do
+            let(:block_expectation) { proc { 3.times { object.foo(*args, **kwargs) } } }
+
+            it "returns `false`" do
+              expect(matcher_result).to eq(false)
+            end
+          end
+
+          ##
+          # NOTE: `expect { 3.times { object.foo(*args, **kwargs, &block) } }.to delegate_to(object, :bar).with_arguments(*args, **kwargs, &block)`
+          #
+          context "when `block_expectation` delegates all times with concrete arguments" do
+            let(:block_expectation) { proc { 3.times { object.foo(*args, **kwargs, &block) } } }
+
+            it "returns `true`" do
+              expect(matcher_result).to eq(true)
+            end
+          end
+        end
+      end
+
+      context "when used with `and_return_its_value`" do
+        let(:matcher) { described_class.new(object, method).and_return_its_value }
+
+        ##
+        # NOTE: `expect { object.foo }.to delegate_to(object, :bar).and_return_its_value`
+        #
+        context "when `block_expectation` does NOT delegate" do
+          let(:block_expectation) { proc {} }
+
+          it "returns `false`" do
+            expect(matcher_result).to eq(false)
+          end
+        end
+
+        context "when `block_expectation` delegates once" do
+          ##
+          # NOTE: `expect { object.foo; 42 }.to delegate_to(object, :bar).and_return_its_value`
+          #
+          context "when `block_expectation` does NOT return delegation value" do
+            let(:block_expectation) { proc { object.foo; 42 } }
+
+            it "returns `false`" do
+              expect(matcher_result).to eq(false)
+            end
+          end
+
+          ##
+          # NOTE: `expect { object.foo }.to delegate_to(object, :bar).and_return_its_value`
+          #
           context "when `block_expectation` returns delegation value" do
             let(:block_expectation) { proc { object.foo } }
 
@@ -132,194 +434,22 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
         end
 
         context "when `block_expectation` delegates multiple times" do
+          ##
+          # NOTE: `expect { object.foo; object.foo; 42 }.to delegate_to(object, :bar).and_return_its_value`
+          #
           context "when `block_expectation` does NOT return delegation value" do
-            let(:block_expectation) do
-              proc do
-                object.foo
-
-                object.foo
-
-                42
-              end
-            end
+            let(:block_expectation) { proc { object.foo; object.foo; 42 } }
 
             it "returns `false`" do
               expect(matcher_result).to eq(false)
             end
           end
 
+          ##
+          # NOTE: `expect { object.foo; object.foo; object.foo }.to delegate_to(object, :bar).and_return_its_value`
+          #
           context "when `block_expectation` returns delegation value" do
-            let(:block_expectation) do
-              proc do
-                object.foo
-
-                object.foo
-
-                object.foo
-              end
-            end
-
-            it "returns `true`" do
-              expect(matcher_result).to eq(true)
-            end
-          end
-        end
-      end
-
-      context "when used with `without_arguments`" do
-        ##
-        # NOTE: `expect { object.foo }.to delegate_to(object, :bar)`
-        #
-        let(:matcher) { described_class.new(object, method).without_arguments }
-
-        context "when `block_expectation` does NOT delegate" do
-          let(:block_expectation) { proc {} }
-
-          it "returns `false`" do
-            expect(matcher_result).to eq(false)
-          end
-        end
-
-        context "when `block_expectation` delegates once" do
-          let(:block_expectation) { proc { object.foo } }
-
-          it "returns `true`" do
-            expect(matcher_result).to eq(true)
-          end
-        end
-
-        context "when `block_expectation` delegates multiple times" do
-          let(:block_expectation) { proc { 3.times { object.foo } } }
-
-          it "returns `true`" do
-            expect(matcher_result).to eq(true)
-          end
-        end
-      end
-
-      context "when used with `with_arguments(*args, **kwargs, &block)`" do
-        ##
-        # NOTE: `expect { object.foo }.to delegate_to(object, :bar).with_arguments(*args, **kwargs, &block)`
-        #
-        let(:matcher) { described_class.new(object, method).with_arguments(*args, **kwargs, &block) }
-
-        let(:block_expectation) { proc { object.foo(*args, **kwargs, &block) } }
-
-        let(:klass) do
-          Class.new do
-            def foo(...)
-              bar(...)
-            end
-
-            def bar(*args, **kwargs, &block)
-              [args, kwargs, block]
-            end
-          end
-        end
-
-        let(:args) { [:foo] }
-        let(:kwargs) { {foo: :bar} }
-        let(:block) { proc { :foo } }
-
-        context "when `block_expectation` does NOT delegate" do
-          let(:block_expectation) { proc {} }
-
-          it "returns `false`" do
-            expect(matcher_result).to eq(false)
-          end
-        end
-
-        context "when `block_expectation` delegates once" do
-          context "when `block_expectation` does NOT delegate with specified args" do
-            let(:block_expectation) { proc { object.foo(:bar, **kwargs, &block) } }
-
-            it "returns `false`" do
-              expect(matcher_result).to eq(false)
-            end
-          end
-
-          context "when `block_expectation` does NOT delegate with specified kwargs" do
-            let(:block_expectation) { proc { object.foo(*args, {bar: :foo}, &block) } }
-
-            it "returns `false`" do
-              expect(matcher_result).to eq(false)
-            end
-          end
-
-          context "when `block_expectation` does NOT delegate with specified block" do
-            let(:block_expectation) { proc { object.foo(*args, **kwargs, &proc { :bar }) } }
-
-            it "returns `false`" do
-              expect(matcher_result).to eq(false)
-            end
-          end
-
-          context "when `block_expectation` delegates with specified args, kwargs and block" do
-            let(:block_expectation) { proc { object.foo(*args, **kwargs, &block) } }
-
-            it "returns `true`" do
-              expect(matcher_result).to eq(true)
-            end
-          end
-        end
-
-        context "when `block_expectation` delegates multiple times" do
-          context "when `block_expectation` does NOT delegate with specified args" do
-            let(:block_expectation) { proc { object.foo(:bar, **kwargs, &block) } }
-
-            it "returns `false`" do
-              expect(matcher_result).to eq(false)
-            end
-          end
-
-          context "when `block_expectation` does NOT delegate with specified kwargs" do
-            let(:block_expectation) { proc { object.foo(*args, {bar: :foo}, &block) } }
-
-            it "returns `false`" do
-              expect(matcher_result).to eq(false)
-            end
-          end
-
-          context "when `block_expectation` does NOT delegate with specified block" do
-            let(:block_expectation) { proc { object.foo(*args, **kwargs, &proc { :bar }) } }
-
-            it "returns `false`" do
-              expect(matcher_result).to eq(false)
-            end
-          end
-
-          context "when `block_expectation` delegates with specified args, kwargs and block once" do
-            let(:block_expectation) do
-              proc do
-                object.foo
-
-                object.foo(*args)
-
-                ##
-                # NOTE: Comment this line and spec MUST fail.
-                #
-                object.foo(*args, **kwargs, &block)
-              end
-            end
-
-            it "returns `true`" do
-              expect(matcher_result).to eq(true)
-            end
-          end
-
-          context "when `block_expectation` delegates with specified args, kwargs and block multiple times" do
-            let(:block_expectation) do
-              proc do
-                ##
-                # NOTE: Older `delegate_to` implementation were failing with multiple delegations.
-                #
-                object.foo(*args, **kwargs, &block)
-
-                object.foo(*args, **kwargs, &block)
-
-                object.foo(*args, **kwargs, &block)
-              end
-            end
+            let(:block_expectation) { proc { object.foo; object.foo; object.foo } }
 
             it "returns `true`" do
               expect(matcher_result).to eq(true)
@@ -343,19 +473,17 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
       end
     end
 
-    ##
-    # TODO: Specs.
-    #
-    # describe "#failure_message" do
-    #
-    # end
+    describe "#failure_message" do
+      it "returns chainings failure message" do
+        expect(matcher.failure_message).to eq(matcher.chainings.failure_message)
+      end
+    end
 
-    ##
-    # TODO: Specs.
-    #
-    # describe "#failure_message_when_negated" do
-    #
-    # end
+    describe "#failure_message_when_negated" do
+      it "returns chainings failure message when negated" do
+        expect(matcher.failure_message_when_negated).to eq(matcher.chainings.failure_message_when_negated)
+      end
+    end
 
     describe "#with_arguments" do
       it "returns matcher" do
@@ -363,9 +491,27 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
       end
     end
 
+    describe "#with_any_arguments" do
+      it "returns matcher" do
+        expect(matcher.with_any_arguments).to eq(matcher)
+      end
+    end
+
+    describe "#without_arguments" do
+      it "returns matcher" do
+        expect(matcher.without_arguments).to eq(matcher)
+      end
+    end
+
     describe "#and_return_its_value" do
       it "returns matcher" do
         expect(matcher.and_return_its_value).to eq(matcher)
+      end
+    end
+
+    describe "#with_calling_original" do
+      it "returns matcher" do
+        expect(matcher.with_calling_original).to eq(matcher)
       end
     end
 
@@ -376,4 +522,4 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
     end
   end
 end
-# rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
+# rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers, Style/Semicolon

@@ -72,7 +72,9 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
       end
 
       it "returns opposite of `#matches?`" do
-        expect(chaining.does_not_match?(block_expectation_value)).to eq(!chaining.matches?(block_expectation_value))
+        allow(chaining).to receive(:maches?).and_return(true, false, true, false)
+
+        expect([chaining.does_not_match?(block_expectation_value), !chaining.does_not_match?(block_expectation_value)]).to eq([!chaining.matches?(block_expectation_value), chaining.matches?(block_expectation_value)])
       end
     end
 
