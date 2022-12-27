@@ -521,6 +521,28 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
       end
     end
 
+    describe "#expected_arguments=" do
+      let(:arguments) { Support::Arguments.new }
+
+      it "sets expected arguments" do
+        matcher.expected_arguments = arguments
+
+        expect(matcher.expected_arguments).to eq(arguments)
+      end
+
+      it "returns expected arguments" do
+        expect(matcher.expected_arguments = arguments).to eq(arguments)
+      end
+
+      it "delegates to `ConvenientService::Utils::Object`" do
+        allow(ConvenientService::Utils::Object).to receive(:instance_variable_delete).with(matcher, :@delegation_value).and_call_original
+
+        matcher.expected_arguments = arguments
+
+        expect(ConvenientService::Utils::Object).to have_received(:instance_variable_delete).with(matcher, :@delegation_value)
+      end
+    end
+
     example_group "comparison" do
       describe "#==" do
         let(:matcher) { described_class.new(object, method, block_expectation) }

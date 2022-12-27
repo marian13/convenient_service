@@ -2,7 +2,6 @@
 
 require_relative "matcher/commands"
 require_relative "matcher/entities"
-require_relative "matcher/errors"
 
 ##
 # @internal
@@ -219,8 +218,6 @@ module ConvenientService
               # @return [ConvenientService::Support::Arguments]
               #
               def expected_arguments=(arguments)
-                raise Errors::FailedToSetExpectedArguments.new(arguments: arguments) unless arguments.instance_of?(Support::Arguments)
-
                 Utils::Object.instance_variable_delete(self, :@delegation_value)
 
                 @expected_arguments = arguments
@@ -230,7 +227,7 @@ module ConvenientService
               # @return [Object] Can be any type.
               #
               # @internal
-              #   Must be refreshed when
+              #   Must be refreshed when `expected_arguments` are reset.
               #
               def delegation_value
                 Utils::Object.instance_variable_fetch(self, :@delegation_value) do
