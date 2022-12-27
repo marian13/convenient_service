@@ -520,6 +520,52 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
         expect(matcher.without_calling_original).to eq(matcher)
       end
     end
+
+    example_group "comparison" do
+      describe "#==" do
+        let(:matcher) { described_class.new(object, method, block_expectation) }
+
+        context "when `other` has different class" do
+          let(:other) { 42 }
+
+          it "returns `false`" do
+            expect(matcher == other).to be_nil
+          end
+        end
+
+        context "when `other` has different `object`" do
+          let(:other) { described_class.new(Object.new, method, block_expectation) }
+
+          it "returns `false`" do
+            expect(matcher == other).to eq(false)
+          end
+        end
+
+        context "when `other` has different `method`" do
+          let(:other) { described_class.new(object, :qux, block_expectation) }
+
+          it "returns `false`" do
+            expect(matcher == other).to eq(false)
+          end
+        end
+
+        context "when `other` has different `block_expectation`" do
+          let(:other) { described_class.new(object, method, proc { :qux }) }
+
+          it "returns `false`" do
+            expect(matcher == other).to eq(false)
+          end
+        end
+
+        context "when `other` has same attributes" do
+          let(:other) { described_class.new(object, method, block_expectation) }
+
+          it "returns `true`" do
+            expect(matcher == other).to eq(true)
+          end
+        end
+      end
+    end
   end
 end
 # rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers, Style/Semicolon
