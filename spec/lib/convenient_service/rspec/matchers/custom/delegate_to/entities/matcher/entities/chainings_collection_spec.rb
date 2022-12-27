@@ -445,15 +445,49 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
       end
     end
 
+    describe "#arguments=" do
+      context "when arguments chaining is NOT used yet" do
+        it "set arguments chaining" do
+          chainings_collection.arguments = arguments_chaining
+
+          expect(chainings_collection.arguments).to eq(arguments_chaining)
+        end
+
+        it "returns set arguments chaining" do
+          expect(chainings_collection.arguments = arguments_chaining).to eq(arguments_chaining)
+        end
+      end
+
+      context "when arguments chaining is already used" do
+        let(:error_message) do
+          <<~TEXT
+            Arguments chaining is already set.
+
+            Did you use `with_arguments` or `without_arguments` multiple times? Or a combination of them?
+          TEXT
+        end
+
+        before do
+          chainings_collection.arguments = arguments_chaining
+        end
+
+        it "raises error `ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::ChainingsCollection::Errors::ArgumentsChainingIsAlreadySet`" do
+          expect { chainings_collection.arguments = arguments_chaining }
+            .to raise_error(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::ChainingsCollection::Errors::ArgumentsChainingIsAlreadySet)
+            .with_message(error_message)
+        end
+      end
+    end
+
     describe "#return_its_value=" do
       context "when return its value chaining is NOT used yet" do
-        it "set returns its value chaining" do
+        it "set return its value chaining" do
           chainings_collection.return_its_value = return_its_value_chaining
 
           expect(chainings_collection.return_its_value).to eq(return_its_value_chaining)
         end
 
-        it "returns set returns its value chaining" do
+        it "returns set return its value chaining" do
           expect(chainings_collection.return_its_value = return_its_value_chaining).to eq(return_its_value_chaining)
         end
       end
@@ -471,7 +505,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
           chainings_collection.return_its_value = return_its_value_chaining
         end
 
-        it "raises error" do
+        it "raises error `ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::ChainingsCollection::Errors::ReturnItsValueChainingIsAlreadySet`" do
           expect { chainings_collection.return_its_value = return_its_value_chaining }
             .to raise_error(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::ChainingsCollection::Errors::ReturnItsValueChainingIsAlreadySet)
             .with_message(error_message)
