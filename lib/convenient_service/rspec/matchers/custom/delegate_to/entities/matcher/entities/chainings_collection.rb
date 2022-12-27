@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "chainings_collection/errors"
+
 module ConvenientService
   module RSpec
     module Matchers

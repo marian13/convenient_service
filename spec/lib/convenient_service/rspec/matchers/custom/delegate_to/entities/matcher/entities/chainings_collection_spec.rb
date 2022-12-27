@@ -26,6 +26,10 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
   let(:block_expectation) { proc { object.foo } }
   let(:block_expectation_value) { block_expectation.call }
 
+  let(:call_original_chaining) { ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::WithCallingOriginal.new(matcher: matcher) }
+  let(:arguments_chaining) { ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::WithAnyArguments.new(matcher: matcher) }
+  let(:return_its_value_chaining) { ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::ReturnItsValue.new(matcher: matcher) }
+
   example_group "attributes" do
     include ConvenientService::RSpec::Matchers::HaveAttrReader
 
@@ -33,6 +37,9 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
 
     it { is_expected.to have_attr_reader(:matcher) }
     it { is_expected.to have_attr_reader(:block_expectation_value) }
+    it { is_expected.to have_attr_reader(:call_original) }
+    it { is_expected.to have_attr_reader(:arguments) }
+    it { is_expected.to have_attr_reader(:return_its_value) }
   end
 
   example_group "instance methods" do
@@ -51,7 +58,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
 
       context "when arguments chaining is used" do
         before do
-          chainings_collection.arguments = ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::WithAnyArguments.new(matcher: matcher)
+          chainings_collection.arguments = arguments_chaining
         end
 
         it "applies arguments chaining stubs" do
@@ -73,7 +80,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
 
       context "when call original chaining is used" do
         before do
-          chainings_collection.call_original = ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::WithCallingOriginal.new(matcher: matcher)
+          chainings_collection.call_original = call_original_chaining
         end
 
         it "applies call original chaining stubs" do
@@ -87,7 +94,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
 
       context "when return its value chaining is used" do
         before do
-          chainings_collection.return_its_value = ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::ReturnItsValue.new(matcher: matcher)
+          chainings_collection.return_its_value = return_its_value_chaining
         end
 
         it "applies return its value chaining stubs" do
@@ -109,11 +116,11 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
 
       context "when multiple chainings is used" do
         before do
-          chainings_collection.arguments = ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::WithAnyArguments.new(matcher: matcher)
+          chainings_collection.arguments = arguments_chaining
 
-          chainings_collection.call_original = ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::WithCallingOriginal.new(matcher: matcher)
+          chainings_collection.call_original = call_original_chaining
 
-          chainings_collection.return_its_value = ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::ReturnItsValue.new(matcher: matcher)
+          chainings_collection.return_its_value = return_its_value_chaining
         end
 
         context "when any of those chainigns does NOT match" do
@@ -154,7 +161,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
 
         context "when that call original chaining tells to call original" do
           before do
-            chainings_collection.call_original = ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::WithCallingOriginal.new(matcher: matcher)
+            chainings_collection.call_original = call_original_chaining
           end
 
           it "returns `true`" do
@@ -173,7 +180,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
 
       context "when arguments chaining is used" do
         before do
-          chainings_collection.arguments = ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::WithAnyArguments.new(matcher: matcher)
+          chainings_collection.arguments = arguments_chaining
 
           chainings_collection.matches?(block_expectation)
         end
@@ -197,7 +204,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
 
       context "when call original chaining is used" do
         before do
-          chainings_collection.call_original = ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::WithCallingOriginal.new(matcher: matcher)
+          chainings_collection.call_original = call_original_chaining
 
           chainings_collection.matches?(block_expectation)
         end
@@ -209,7 +216,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
 
       context "when return its value chaining is used" do
         before do
-          chainings_collection.return_its_value = ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::ReturnItsValue.new(matcher: matcher)
+          chainings_collection.return_its_value = return_its_value_chaining
 
           chainings_collection.matches?(block_expectation)
         end
@@ -233,11 +240,11 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
 
       context "when multiple chainings is used" do
         before do
-          chainings_collection.arguments = ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::WithAnyArguments.new(matcher: matcher)
+          chainings_collection.arguments = arguments_chaining
 
-          chainings_collection.call_original = ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::WithCallingOriginal.new(matcher: matcher)
+          chainings_collection.call_original = call_original_chaining
 
-          chainings_collection.return_its_value = ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::ReturnItsValue.new(matcher: matcher)
+          chainings_collection.return_its_value = return_its_value_chaining
 
           chainings_collection.matches?(block_expectation)
         end
@@ -269,7 +276,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
 
       context "when arguments chaining is used" do
         before do
-          chainings_collection.arguments = ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::WithAnyArguments.new(matcher: matcher)
+          chainings_collection.arguments = arguments_chaining
 
           chainings_collection.matches?(block_expectation)
         end
@@ -293,7 +300,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
 
       context "when call original chaining is used" do
         before do
-          chainings_collection.call_original = ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::WithCallingOriginal.new(matcher: matcher)
+          chainings_collection.call_original = call_original_chaining
 
           chainings_collection.matches?(block_expectation)
         end
@@ -305,7 +312,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
 
       context "when return its value chaining is used" do
         before do
-          chainings_collection.return_its_value = ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::ReturnItsValue.new(matcher: matcher)
+          chainings_collection.return_its_value = return_its_value_chaining
 
           chainings_collection.matches?(block_expectation)
         end
@@ -329,11 +336,11 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
 
       context "when multiple chainings is used" do
         before do
-          chainings_collection.arguments = ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::WithAnyArguments.new(matcher: matcher)
+          chainings_collection.arguments = arguments_chaining
 
-          chainings_collection.call_original = ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::WithCallingOriginal.new(matcher: matcher)
+          chainings_collection.call_original = call_original_chaining
 
-          chainings_collection.return_its_value = ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::ReturnItsValue.new(matcher: matcher)
+          chainings_collection.return_its_value = return_its_value_chaining
 
           chainings_collection.matches?(block_expectation)
         end
@@ -359,9 +366,9 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
     describe "#ordered_chainings" do
       context "when any type of chainings is missed" do
         before do
-          chainings_collection.call_original = ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::WithCallingOriginal.new(matcher: matcher)
+          chainings_collection.call_original = call_original_chaining
 
-          chainings_collection.return_its_value = ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::ReturnItsValue.new(matcher: matcher)
+          chainings_collection.return_its_value = return_its_value_chaining
         end
 
         it "returns ordered chainings skipping that missed chaining" do
@@ -371,11 +378,11 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
 
       context "when all types of chainings are used" do
         before do
-          chainings_collection.arguments = ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::WithAnyArguments.new(matcher: matcher)
+          chainings_collection.arguments = arguments_chaining
 
-          chainings_collection.call_original = ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::WithCallingOriginal.new(matcher: matcher)
+          chainings_collection.call_original = call_original_chaining
 
-          chainings_collection.return_its_value = ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::ReturnItsValue.new(matcher: matcher)
+          chainings_collection.return_its_value = return_its_value_chaining
         end
 
         it "returns ordered chainings" do
@@ -393,7 +400,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
 
       context "when call original chaining is used" do
         before do
-          chainings_collection.call_original = ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::WithCallingOriginal.new(matcher: matcher)
+          chainings_collection.call_original = call_original_chaining
         end
 
         it "returns `true`" do
@@ -411,7 +418,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
 
       context "when arguments chaining is used" do
         before do
-          chainings_collection.arguments = ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::WithAnyArguments.new(matcher: matcher)
+          chainings_collection.arguments = arguments_chaining
         end
 
         it "returns `true`" do
@@ -429,11 +436,45 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
 
       context "when return its value chaining is used" do
         before do
-          chainings_collection.return_its_value = ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::ReturnItsValue.new(matcher: matcher)
+          chainings_collection.return_its_value = return_its_value_chaining
         end
 
         it "returns `true`" do
           expect(chainings_collection.has_return_its_value?).to eq(true)
+        end
+      end
+    end
+
+    describe "#return_its_value=" do
+      context "when return its value chaining is NOT used yet" do
+        it "set returns its value chaining" do
+          chainings_collection.return_its_value = return_its_value_chaining
+
+          expect(chainings_collection.return_its_value).to eq(return_its_value_chaining)
+        end
+
+        it "returns set returns its value chaining" do
+          expect(chainings_collection.return_its_value = return_its_value_chaining).to eq(return_its_value_chaining)
+        end
+      end
+
+      context "when return its value chaining is already used" do
+        let(:error_message) do
+          <<~TEXT
+            Returns its value chaining is already set.
+
+            Did you use `and_returns_its_value` multiple times?
+          TEXT
+        end
+
+        before do
+          chainings_collection.return_its_value = return_its_value_chaining
+        end
+
+        it "raises error" do
+          expect { chainings_collection.return_its_value = return_its_value_chaining }
+            .to raise_error(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::ChainingsCollection::Errors::ReturnItsValueChainingIsAlreadySet)
+            .with_message(error_message)
         end
       end
     end
