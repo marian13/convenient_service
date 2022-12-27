@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Base do
+RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Matchers::Base do
   let(:chaining) { described_class.new(matcher: matcher) }
 
   let(:matcher) { ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher.new(object, method) }
@@ -73,12 +73,6 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
 
       it "returns opposite of `#matches?`" do
         expect(chaining.does_not_match?(block_expectation_value)).to eq(!chaining.matches?(block_expectation_value))
-      end
-    end
-
-    describe "#should_call_original?" do
-      it "returns `false`" do
-        expect(chaining.should_call_original?).to eq(false)
       end
     end
 

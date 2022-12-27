@@ -26,9 +26,12 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
   let(:block_expectation) { proc { object.foo } }
   let(:block_expectation_value) { block_expectation.call }
 
-  let(:call_original_chaining) { ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::WithCallingOriginal.new(matcher: matcher) }
-  let(:arguments_chaining) { ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::WithAnyArguments.new(matcher: matcher) }
-  let(:return_its_value_chaining) { ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::ReturnItsValue.new(matcher: matcher) }
+  let(:arguments_chaining) { ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Matchers::WithAnyArguments.new(matcher: matcher) }
+  let(:return_its_value_chaining) { ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Matchers::ReturnItsValue.new(matcher: matcher) }
+
+  let(:without_calling_original_chaining) { ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Permissions::WithoutCallingOriginal.new(matcher: matcher) }
+  let(:with_calling_original_chaining) { ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Permissions::WithCallingOriginal.new(matcher: matcher) }
+  let(:call_original_chaining) { with_calling_original_chaining }
 
   example_group "attributes" do
     include ConvenientService::RSpec::Matchers::HaveAttrReader
@@ -75,20 +78,6 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
           it "returns `false`" do
             expect(chainings_collection.matches?(block_expectation)).to eq(false)
           end
-        end
-      end
-
-      context "when call original chaining is used" do
-        before do
-          chainings_collection.call_original = call_original_chaining
-        end
-
-        it "applies call original chaining stubs" do
-          allow(chainings_collection.call_original).to receive(:apply_stubs!).and_call_original
-
-          chainings_collection.matches?(block_expectation)
-
-          expect(chainings_collection.call_original).to have_received(:apply_stubs!)
         end
       end
 
@@ -151,7 +140,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
       context "when chaining collection has call original chaining" do
         context "when that call original chaining tells NOT to call original" do
           before do
-            chainings_collection.call_original = ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::WithoutCallingOriginal.new(matcher: matcher)
+            chainings_collection.call_original = without_calling_original_chaining
           end
 
           it "returns `false`" do
@@ -161,7 +150,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
 
         context "when that call original chaining tells to call original" do
           before do
-            chainings_collection.call_original = call_original_chaining
+            chainings_collection.call_original = with_calling_original_chaining
           end
 
           it "returns `true`" do
@@ -251,9 +240,10 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
 
         context "when any of those chainigns does NOT match" do
           let(:block_expectation) { proc { object } }
+          let(:first_not_matched_chaining) { chainings_collection.sub_matchers.find { |chaining| chaining.does_not_match?(block_expectation_value) } }
 
           it "returns failure message of the first NOT matched chaining" do
-            expect(chainings_collection.failure_message).to eq(chainings_collection.ordered_chainings.find { |chaining| chaining.does_not_match?(block_expectation) }.failure_message)
+            expect(chainings_collection.failure_message).to eq(first_not_matched_chaining.failure_message)
           end
         end
 
@@ -345,7 +335,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
           chainings_collection.matches?(block_expectation)
         end
 
-        context "when any of those chainigns does NOT match" do
+        context "when all of those chainigns do NOT match" do
           let(:block_expectation) { proc { object } }
 
           it "returns empty string" do
@@ -353,40 +343,55 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
           end
         end
 
-        context "when all of those chainigns match" do
+        context "when any of those chainigns match" do
           let(:block_expectation) { proc { object.foo } }
+          let(:last_matched_chaining) { chainings_collection.sub_matchers.reverse.find { |chaining| chaining.matches?(block_expectation_value) } }
 
-          it "returns failure message when negated of the first NOT matched chaining" do
-            expect(chainings_collection.failure_message_when_negated).to eq(chainings_collection.ordered_chainings.find { |chaining| chaining.matches?(block_expectation) }.failure_message_when_negated)
+          it "returns failure message when negated of the last matched chaining" do
+            expect(chainings_collection.failure_message_when_negated).to eq(last_matched_chaining.failure_message_when_negated)
           end
         end
       end
     end
 
-    describe "#ordered_chainings" do
-      context "when any type of chainings is missed" do
-        before do
-          chainings_collection.call_original = call_original_chaining
-
-          chainings_collection.return_its_value = return_its_value_chaining
-        end
-
-        it "returns ordered chainings skipping that missed chaining" do
-          expect(chainings_collection.ordered_chainings).to eq([chainings_collection.call_original, chainings_collection.return_its_value])
+    describe "#permissions" do
+      context "when any type of permission chainings is missed" do
+        it "returns ordered permission chainings skipping that missed permission chaining" do
+          expect(chainings_collection.permissions).to eq([])
         end
       end
 
-      context "when all types of chainings are used" do
+      context "when all types of permission chainings are used" do
+        before do
+          chainings_collection.call_original = call_original_chaining
+        end
+
+        it "returns ordered permission chainings" do
+          expect(chainings_collection.permissions).to eq([chainings_collection.call_original])
+        end
+      end
+    end
+
+    describe "#sub_matchers" do
+      context "when any type of matcher chainings is missed" do
+        before do
+          chainings_collection.return_its_value = return_its_value_chaining
+        end
+
+        it "returns ordered matcher chainings skipping that missed matcher chaining" do
+          expect(chainings_collection.sub_matchers).to eq([chainings_collection.return_its_value])
+        end
+      end
+
+      context "when all types of matcher chainings are used" do
         before do
           chainings_collection.arguments = arguments_chaining
-
-          chainings_collection.call_original = call_original_chaining
 
           chainings_collection.return_its_value = return_its_value_chaining
         end
 
-        it "returns ordered chainings" do
-          expect(chainings_collection.ordered_chainings).to eq([chainings_collection.call_original, chainings_collection.arguments, chainings_collection.return_its_value])
+        it "returns ordered matcher chainings" do
+          expect(chainings_collection.sub_matchers).to eq([chainings_collection.arguments, chainings_collection.return_its_value])
         end
       end
     end

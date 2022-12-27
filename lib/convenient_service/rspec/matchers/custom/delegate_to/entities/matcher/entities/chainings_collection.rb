@@ -27,24 +27,24 @@ module ConvenientService
 
                   ##
                   # @!attribute [r] call_original
-                  #   @return [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Chainings::Base, nil]
+                  #   @return [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Chainings::Permissions:Base, nil]
                   #
                   attr_reader :call_original
 
                   ##
                   # @!attribute [r] arguments
-                  #   @return [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Chainings::Base, nil]
+                  #   @return [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Chainings::Matchers::Base, nil]
                   #
                   attr_reader :arguments
 
                   ##
                   # @!attribute [r] return_its_value
-                  #   @return [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Chainings::Base, nil]
+                  #   @return [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Chainings::Matchers::Base, nil]
                   #
                   attr_reader :return_its_value
 
                   ##
-                  # @param matcher [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings]
+                  # @param matcher [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher]
                   # @return [void]
                   #
                   def initialize(matcher:)
@@ -56,42 +56,58 @@ module ConvenientService
                   # @return [Boolean]
                   #
                   def matches?(block_expectation)
-                    ordered_chainings.each(&:apply_stubs!)
+                    sub_matchers.each(&:apply_stubs!)
 
                     @block_expectation_value = block_expectation.call
 
-                    ordered_chainings.all? { |chaining| chaining.matches?(@block_expectation_value) }
+                    sub_matchers.all? { |sub_matcher| sub_matcher.matches?(@block_expectation_value) }
                   end
 
                   ##
                   # @return [String]
                   #
                   def failure_message
-                    ordered_chainings.find { |chaining| chaining.does_not_match?(block_expectation_value) }&.failure_message || ""
+                    sub_matchers
+                      .lazy
+                      .reject { |sub_matcher| sub_matcher.matches?(block_expectation_value) }
+                      .first
+                      &.failure_message
+                      .to_s
                   end
 
                   ##
                   # @return [String]
                   #
                   def failure_message_when_negated
-                    ordered_chainings.find { |chaining| chaining.matches?(block_expectation_value) }&.failure_message_when_negated || ""
+                    sub_matchers
+                      .reject { |sub_matcher| sub_matcher.does_not_match?(block_expectation_value) }
+                      .last
+                      &.failure_message_when_negated
+                      .to_s
+                  end
+
+                  ##
+                  # @return [Array]
+                  #
+                  def permissions
+                    [call_original].compact
                   end
 
                   ##
                   # @return [Array]
                   #
                   # @internal
-                  #   IMPORTANT: Order of chainings matters.
+                  #   IMPORTANT: Order of sub matcher chainings matters.
                   #
-                  def ordered_chainings
-                    [call_original, arguments, return_its_value].compact
+                  def sub_matchers
+                    [arguments, return_its_value].compact
                   end
 
                   ##
                   # @return [Boolean]
                   #
                   def should_call_original?
-                    Utils::Bool.to_bool(call_original&.should_call_original?)
+                    Utils::Bool.to_bool(call_original&.allows?)
                   end
 
                   ##
@@ -116,7 +132,7 @@ module ConvenientService
                   end
 
                   ##
-                  # @param chaining [Class]
+                  # @param chaining [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Chainings::Permissions::Base]
                   # @raise [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Errors::ReturnItsValueChainingIsAlreadySet]
                   #
                   def call_original=(chaining)
@@ -126,7 +142,7 @@ module ConvenientService
                   end
 
                   ##
-                  # @param chaining [Class]
+                  # @param chaining [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Chainings::Matchers::Base]
                   # @raise [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Errors::ArgumentsChainingIsAlreadySet]
                   #
                   def arguments=(chaining)
@@ -136,7 +152,7 @@ module ConvenientService
                   end
 
                   ##
-                  # @param chaining [Class]
+                  # @param chaining [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Chainings::Matchers::Base]
                   # @raise [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Errors::ReturnItsValueChainingIsAlreadySet]
                   #
                   def return_its_value=(chaining)
