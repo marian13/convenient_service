@@ -27,19 +27,19 @@ module ConvenientService
 
                   ##
                   # @!attribute [r] call_original
-                  #   @return [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Chainings::Permissions:Base, nil]
+                  #   @return [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Permissions:Base, nil]
                   #
                   attr_reader :call_original
 
                   ##
                   # @!attribute [r] arguments
-                  #   @return [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Chainings::Matchers::Base, nil]
+                  #   @return [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Matchers::Base, nil]
                   #
                   attr_reader :arguments
 
                   ##
                   # @!attribute [r] return_its_value
-                  #   @return [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Chainings::Matchers::Base, nil]
+                  #   @return [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Matchers::Base, nil]
                   #
                   attr_reader :return_its_value
 
@@ -132,7 +132,7 @@ module ConvenientService
                   end
 
                   ##
-                  # @param chaining [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Chainings::Permissions::Base]
+                  # @param chaining [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Permissions::Base]
                   # @raise [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Errors::ReturnItsValueChainingIsAlreadySet]
                   #
                   def call_original=(chaining)
@@ -142,7 +142,7 @@ module ConvenientService
                   end
 
                   ##
-                  # @param chaining [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Chainings::Matchers::Base]
+                  # @param chaining [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Matchers::Base]
                   # @raise [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Errors::ArgumentsChainingIsAlreadySet]
                   #
                   def arguments=(chaining)
@@ -152,7 +152,7 @@ module ConvenientService
                   end
 
                   ##
-                  # @param chaining [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Chainings::Matchers::Base]
+                  # @param chaining [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Matchers::Base]
                   # @raise [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Errors::ReturnItsValueChainingIsAlreadySet]
                   #
                   def return_its_value=(chaining)

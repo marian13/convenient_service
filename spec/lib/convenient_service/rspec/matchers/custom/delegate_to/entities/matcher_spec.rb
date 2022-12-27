@@ -486,36 +486,72 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
     end
 
     describe "#with_arguments" do
+      it "sets `ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Matchers::WithConcreteArguments` instance as argument chaining" do
+        matcher.with_arguments
+
+        expect(matcher.chainings.arguments).to be_instance_of(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Matchers::WithConcreteArguments)
+      end
+
       it "returns matcher" do
         expect(matcher.with_arguments).to eq(matcher)
       end
     end
 
     describe "#with_any_arguments" do
+      it "sets `ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Matchers::WithAnyArguments` instance as argument chaining" do
+        matcher.with_any_arguments
+
+        expect(matcher.chainings.arguments).to be_instance_of(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Matchers::WithAnyArguments)
+      end
+
       it "returns matcher" do
         expect(matcher.with_any_arguments).to eq(matcher)
       end
     end
 
     describe "#without_arguments" do
+      it "sets `ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Matchers::WithoutArguments` instance as argument chaining" do
+        matcher.without_arguments
+
+        expect(matcher.chainings.arguments).to be_instance_of(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Matchers::WithoutArguments)
+      end
+
       it "returns matcher" do
         expect(matcher.without_arguments).to eq(matcher)
       end
     end
 
     describe "#and_return_its_value" do
+      it "sets `ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Matchers::ReturnItsValue` instance as argument chaining" do
+        matcher.and_return_its_value
+
+        expect(matcher.chainings.return_its_value).to be_instance_of(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Matchers::ReturnItsValue)
+      end
+
       it "returns matcher" do
         expect(matcher.and_return_its_value).to eq(matcher)
       end
     end
 
     describe "#with_calling_original" do
+      it "sets `ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Permissions::WithCallingOriginal` instance as call original chaining" do
+        matcher.with_calling_original
+
+        expect(matcher.chainings.call_original).to be_instance_of(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Permissions::WithCallingOriginal)
+      end
+
       it "returns matcher" do
         expect(matcher.with_calling_original).to eq(matcher)
       end
     end
 
     describe "#without_calling_original" do
+      it "sets `ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Permissions::WithoutCallingOriginal` instance as call original chaining" do
+        matcher.without_calling_original
+
+        expect(matcher.chainings.call_original).to be_instance_of(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Permissions::WithoutCallingOriginal)
+      end
+
       it "returns matcher" do
         expect(matcher.without_calling_original).to eq(matcher)
       end
@@ -528,6 +564,10 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
         matcher.delegation_value
 
         expect(ConvenientService::Utils::Object).to have_received(:instance_variable_fetch).with(matcher, :@delegation_value)
+      end
+
+      it "returns to `object.send`" do
+        expect(matcher.delegation_value).to eq(object.__send__(matcher.method, *matcher.expected_arguments.args, **matcher.expected_arguments.kwargs, &matcher.expected_arguments.block))
       end
     end
 
