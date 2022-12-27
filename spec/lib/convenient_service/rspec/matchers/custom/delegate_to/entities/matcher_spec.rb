@@ -521,8 +521,18 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
       end
     end
 
+    describe "#delegation_value" do
+      it "delegates to `ConvenientService::Utils::Object`" do
+        allow(ConvenientService::Utils::Object).to receive(:instance_variable_fetch).with(matcher, :@delegation_value).and_call_original
+
+        matcher.delegation_value
+
+        expect(ConvenientService::Utils::Object).to have_received(:instance_variable_fetch).with(matcher, :@delegation_value)
+      end
+    end
+
     describe "#expected_arguments=" do
-      let(:arguments) { Support::Arguments.new }
+      let(:arguments) { ConvenientService::Support::Arguments.new }
 
       it "sets expected arguments" do
         matcher.expected_arguments = arguments

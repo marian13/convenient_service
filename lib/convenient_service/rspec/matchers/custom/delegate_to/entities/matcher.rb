@@ -227,7 +227,7 @@ module ConvenientService
               # @return [Object] Can be any type.
               #
               # @internal
-              #   Must be refreshed when `expected_arguments` are reset.
+              #   IMPORTANT: Must be refreshed when `expected_arguments` are reset.
               #
               def delegation_value
                 Utils::Object.instance_variable_fetch(self, :@delegation_value) do
