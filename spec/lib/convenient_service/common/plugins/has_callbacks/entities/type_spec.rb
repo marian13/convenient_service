@@ -36,7 +36,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Entities::Type 
   #   it { is_expected.to delegate_method(:hash).to(:value) }
   # end
 
-  example_group "instance_methods" do
+  example_group "instance methods" do
     let(:type) { described_class.new(value: value) }
     let(:value) { :before }
 

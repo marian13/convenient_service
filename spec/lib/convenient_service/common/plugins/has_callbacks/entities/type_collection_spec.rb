@@ -14,7 +14,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Entities::TypeC
     it { is_expected.to have_attr_reader(:types) }
   end
 
-  example_group "class_methods" do
+  example_group "class methods" do
     describe ".new" do
       subject(:type_collection) { described_class.new(types: types) }
 
@@ -27,7 +27,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Entities::TypeC
     end
   end
 
-  example_group "instance_methods" do
+  example_group "instance methods" do
     subject(:type_collection) { described_class.new(types: types) }
 
     let(:types) { [:before, :result] }

@@ -66,7 +66,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Concern do
     end
   end
 
-  example_group "class_methods" do
+  example_group "class methods" do
     describe ".step" do
       it "returns `step`" do
         expect(service_class.step(*args, **kwargs)).to eq(step)

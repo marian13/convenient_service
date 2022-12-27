@@ -8,7 +8,7 @@ require "convenient_service"
 RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Commands::GenerateStackName do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
-  example_group "class methhods" do
+  example_group "class methods" do
     describe ".call" do
       let(:result) { described_class.call(scope: scope, method: method, container: container) }
 

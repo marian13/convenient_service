@@ -6,7 +6,7 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Commands::CastMethodName do
-  example_group "class methhods" do
+  example_group "class methods" do
     describe ".call" do
       let(:options) { double }
       let(:casted) { described_class.call(other: other, options: options) }

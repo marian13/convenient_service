@@ -14,7 +14,7 @@ RSpec.describe ConvenientService::Support::FiniteLoop do
     end
   end
 
-  example_group "instance_methods" do
+  example_group "instance methods" do
     describe "finite_loop" do
       let(:base_klass) do
         Class.new do
