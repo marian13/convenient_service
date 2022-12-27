@@ -445,6 +445,40 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
       end
     end
 
+    describe "#call_original=" do
+      context "when call original chaining is NOT used yet" do
+        it "set call_original chaining" do
+          chainings_collection.call_original = call_original_chaining
+
+          expect(chainings_collection.call_original).to eq(call_original_chaining)
+        end
+
+        it "returns set call original chaining" do
+          expect(chainings_collection.call_original = call_original_chaining).to eq(call_original_chaining)
+        end
+      end
+
+      context "when call original chaining is already used" do
+        let(:error_message) do
+          <<~TEXT
+            Call original chaining is already set.
+
+            Did you use `with_calling_original` or `without_calling_original` multiple times? Or a combination of them?
+          TEXT
+        end
+
+        before do
+          chainings_collection.call_original = call_original_chaining
+        end
+
+        it "raises error `ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::ChainingsCollection::Errors::CallOriginalChainingIsAlreadySet`" do
+          expect { chainings_collection.call_original = call_original_chaining }
+            .to raise_error(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::ChainingsCollection::Errors::CallOriginalChainingIsAlreadySet)
+            .with_message(error_message)
+        end
+      end
+    end
+
     describe "#arguments=" do
       context "when arguments chaining is NOT used yet" do
         it "set arguments chaining" do
