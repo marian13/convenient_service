@@ -33,13 +33,6 @@ module ConvenientService
                       ##
                       # @return [String]
                       #
-                      def failure_message_when_negated
-                        "expected `#{matcher.printable_block_expectation}` NOT to delegate to `#{matcher.printable_method}` #{printable_expected_arguments} at least once, but it did."
-                      end
-
-                      ##
-                      # @return [String]
-                      #
                       # @internal
                       #   TODO: Prettier message.
                       #

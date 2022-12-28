@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require_relative "matcher/commands"
 require_relative "matcher/entities"
 
 ##

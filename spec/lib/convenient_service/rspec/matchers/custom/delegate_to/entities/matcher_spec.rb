@@ -597,17 +597,17 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
       it "delegates to `ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Commands::GeneratePrintableMethod`" do
         allow(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Commands::GeneratePrintableMethod).to receive(:call).with(object: matcher.object, method: matcher.method).and_call_original
 
-        presenter.printable_method
+        matcher.printable_method
 
         expect(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Commands::GeneratePrintableMethod).to have_received(:call).with(object: matcher.object, method: matcher.method)
       end
 
       it "returns `ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Commands::GeneratePrintableMethod` value" do
-        expect(presenter.printable_method).to eq(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Commands::GeneratePrintableMethod.call(object: matcher.object, method: matcher.method))
+        expect(matcher.printable_method).to eq(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Commands::GeneratePrintableMethod.call(object: matcher.object, method: matcher.method))
       end
 
       it "caches its value" do
-        expect(presenter.printable_method.object_id).to eq(presenter.printable_method.object_id)
+        expect(matcher.printable_method.object_id).to eq(matcher.printable_method.object_id)
       end
     end
 
@@ -615,17 +615,17 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
       it "delegates to `ConvenientService::Utils::Proc.display`" do
         allow(ConvenientService::Utils::Proc).to receive(:display).with(matcher.block_expectation).and_call_original
 
-        presenter.printable_block_expectation
+        matcher.printable_block_expectation
 
         expect(ConvenientService::Utils::Proc).to have_received(:display).with(matcher.block_expectation)
       end
 
       it "returns `ConvenientService::Utils::Proc` value" do
-        expect(presenter.printable_block_expectation).to eq(ConvenientService::Utils::Proc.display(matcher.block_expectation))
+        expect(matcher.printable_block_expectation).to eq(ConvenientService::Utils::Proc.display(matcher.block_expectation))
       end
 
       it "caches its value" do
-        expect(presenter.printable_block_expectation.object_id).to eq(presenter.printable_block_expectation.object_id)
+        expect(matcher.printable_block_expectation.object_id).to eq(matcher.printable_block_expectation.object_id)
       end
     end
 

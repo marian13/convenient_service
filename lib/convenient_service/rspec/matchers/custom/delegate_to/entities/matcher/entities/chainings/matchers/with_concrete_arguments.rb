@@ -15,14 +15,14 @@ module ConvenientService
                       # @return [Boolean]
                       #
                       def matches_arguments?(arguments)
-                        arguments == matcher.expected_arguments
+                        Utils::Bool.to_bool(arguments == matcher.expected_arguments)
                       end
 
                       ##
                       # @return [String]
                       #
                       def printable_expected_arguments
-                        "with `#{Commands::GeneratePrintableArguments.call(arguments: matcher.expected_arguments)}`"
+                        "with `#{WithArguments::Commands::GeneratePrintableArguments.call(arguments: matcher.expected_arguments)}`"
                       end
                     end
                   end
