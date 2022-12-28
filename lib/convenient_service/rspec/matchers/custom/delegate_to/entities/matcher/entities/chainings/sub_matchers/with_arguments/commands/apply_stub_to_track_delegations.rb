@@ -9,8 +9,8 @@ module ConvenientService
             class Matcher
               module Entities
                 module Chainings
-                  module Matchers
-                    class WithArguments < Chainings::Matchers::Base
+                  module SubMatchers
+                    class WithArguments < Chainings::SubMatchers::Base
                       module Commands
                         class ApplyStubToTrackDelegations < Support::Command
                           ##

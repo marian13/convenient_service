@@ -33,13 +33,13 @@ module ConvenientService
 
                   ##
                   # @!attribute [r] arguments
-                  #   @return [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Matchers::Base, nil]
+                  #   @return [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::Base, nil]
                   #
                   attr_reader :arguments
 
                   ##
                   # @!attribute [r] return_its_value
-                  #   @return [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Matchers::Base, nil]
+                  #   @return [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::Base, nil]
                   #
                   attr_reader :return_its_value
 
@@ -55,7 +55,7 @@ module ConvenientService
                   # @param block_expectation [Proc]
                   # @return [Boolean]
                   #
-                  def matches?(block_expectation)
+                  def sub_matchers_match?(block_expectation)
                     sub_matchers.each(&:apply_stubs!)
 
                     @block_expectation_value = block_expectation.call
@@ -142,7 +142,7 @@ module ConvenientService
                   end
 
                   ##
-                  # @param chaining [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Matchers::Base]
+                  # @param chaining [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::Base]
                   # @raise [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Errors::ArgumentsChainingIsAlreadySet]
                   #
                   def arguments=(chaining)
@@ -152,7 +152,7 @@ module ConvenientService
                   end
 
                   ##
-                  # @param chaining [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Matchers::Base]
+                  # @param chaining [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::Base]
                   # @raise [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Errors::ReturnItsValueChainingIsAlreadySet]
                   #
                   def return_its_value=(chaining)

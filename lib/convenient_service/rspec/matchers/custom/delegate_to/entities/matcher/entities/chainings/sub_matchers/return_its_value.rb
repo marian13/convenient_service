@@ -9,8 +9,8 @@ module ConvenientService
             class Matcher
               module Entities
                 module Chainings
-                  module Matchers
-                    class ReturnItsValue < Chainings::Matchers::Base
+                  module SubMatchers
+                    class ReturnItsValue < Chainings::SubMatchers::Base
                       ##
                       # @param block_expectation_value [Object]
                       # @return [Boolean]

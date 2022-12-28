@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Matchers::WithConcreteArguments do
+RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::WithoutArguments do
   let(:chaining) { described_class.new(matcher: matcher) }
 
   let(:matcher) { ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher.new(object, method) }
@@ -27,9 +27,9 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
   let(:block_expectation) { proc { object.foo } }
   let(:block_expectation_value) { block_expectation.call }
 
-  let(:expected_arguments) { ConvenientService::Support::Arguments.new(*args, **kwargs, &block) }
+  let(:without_arguments) { ConvenientService::Support::Arguments.new }
 
-  let(:delegation_with_expected_arguments) do
+  let(:delegation_with_arguments) do
     ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Delegation.new(
       object: object,
       method: method,
@@ -39,13 +39,13 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
     )
   end
 
-  let(:delegation_with_not_expected_arguments) do
+  let(:delegation_without_arguments) do
     ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Delegation.new(
       object: object,
       method: method,
-      args: [:bar],
-      kwargs: {bar: :baz},
-      block: proc { :bar }
+      args: [],
+      kwargs: {},
+      block: nil
     )
   end
 
@@ -58,10 +58,13 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
 
     subject { described_class }
 
-    it { is_expected.to be_descendant_of(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Matchers::Base) }
+    it { is_expected.to be_descendant_of(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::WithArguments) }
   end
 
   example_group "instance methods" do
+    ##
+    # NOTE: Tests `matches_arguments?`.
+    #
     describe "#matches?" do
       context "when matcher expected arguments are NOT set" do
         ##
@@ -80,7 +83,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
 
       context "when matcher expected arguments are set" do
         before do
-          matcher.expected_arguments = expected_arguments
+          matcher.expected_arguments = without_arguments
         end
 
         ##
@@ -103,47 +106,47 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
         end
 
         context "when matcher has one delegation" do
-          context "when that one delegation has NOT expected arguments" do
+          context "when that one delegation without arguments" do
             before do
-              matcher.delegations << delegation_with_not_expected_arguments
-            end
-
-            it "returns `false`" do
-              expect(chaining.matches?(block_expectation_value)).to eq(false)
-            end
-          end
-
-          context "when that one delegation has expected arguments" do
-            before do
-              matcher.delegations << delegation_with_expected_arguments
+              matcher.delegations << delegation_without_arguments
             end
 
             it "returns `true`" do
               expect(chaining.matches?(block_expectation_value)).to eq(true)
+            end
+          end
+
+          context "when that one delegation rguments" do
+            before do
+              matcher.delegations << delegation_with_arguments
+            end
+
+            it "returns `false`" do
+              expect(chaining.matches?(block_expectation_value)).to eq(false)
             end
           end
         end
 
         context "when matcher has multiple delegations" do
-          context "when all those multiple delegations have NOT expected arguments" do
+          context "when any of those multiple delegations without arguments" do
             before do
-              2.times { matcher.delegations << delegation_with_not_expected_arguments }
-            end
+              matcher.delegations << delegation_with_arguments
 
-            it "returns `false`" do
-              expect(chaining.matches?(block_expectation_value)).to eq(false)
-            end
-          end
-
-          context "when any of those multiple delegations has expected arguments" do
-            before do
-              matcher.delegations << delegation_with_not_expected_arguments
-
-              matcher.delegations << delegation_with_expected_arguments
+              matcher.delegations << delegation_without_arguments
             end
 
             it "returns `true`" do
               expect(chaining.matches?(block_expectation_value)).to eq(true)
+            end
+          end
+
+          context "when all those multiple delegations have arguments" do
+            before do
+              2.times { matcher.delegations << delegation_with_arguments }
+            end
+
+            it "returns `false`" do
+              expect(chaining.matches?(block_expectation_value)).to eq(false)
             end
           end
         end
@@ -151,7 +154,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
     end
 
     describe "#printable_expected_arguments?" do
-      let(:printable_expected_arguments) { "with `#{ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Matchers::WithArguments::Commands::GeneratePrintableArguments.call(arguments: matcher.expected_arguments)}`" }
+      let(:printable_expected_arguments) { "without arguments" }
 
       it "returns `true`" do
         expect(chaining.printable_expected_arguments).to eq(printable_expected_arguments)

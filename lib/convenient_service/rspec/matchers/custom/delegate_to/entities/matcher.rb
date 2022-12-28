@@ -90,10 +90,10 @@ module ConvenientService
               def matches?(block_expectation)
                 @block_expectation = block_expectation
 
-                chainings.arguments = Entities::Chainings::Matchers::WithAnyArguments.new(matcher: self) unless chainings.has_arguments?
+                chainings.arguments = Entities::Chainings::SubMatchers::WithAnyArguments.new(matcher: self) unless chainings.has_arguments?
                 chainings.call_original = Entities::Chainings::Permissions::WithCallingOriginal.new(matcher: self) unless chainings.has_call_original?
 
-                chainings.matches?(block_expectation)
+                chainings.sub_matchers_match?(block_expectation)
               end
 
               ##
@@ -133,7 +133,7 @@ module ConvenientService
               def with_arguments(...)
                 self.expected_arguments = Support::Arguments.new(...)
 
-                chainings.arguments = Entities::Chainings::Matchers::WithConcreteArguments.new(matcher: self)
+                chainings.arguments = Entities::Chainings::SubMatchers::WithConcreteArguments.new(matcher: self)
 
                 self
               end
@@ -143,7 +143,7 @@ module ConvenientService
               # @raise [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Errors::ArgumentsChainingIsAlreadySet]
               #
               def with_any_arguments
-                chainings.arguments = Entities::Chainings::Matchers::WithAnyArguments.new(matcher: self)
+                chainings.arguments = Entities::Chainings::SubMatchers::WithAnyArguments.new(matcher: self)
 
                 self
               end
@@ -153,7 +153,7 @@ module ConvenientService
               # @raise [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Errors::ArgumentsChainingIsAlreadySet]
               #
               def without_arguments
-                chainings.arguments = Entities::Chainings::Matchers::WithoutArguments.new(matcher: self)
+                chainings.arguments = Entities::Chainings::SubMatchers::WithoutArguments.new(matcher: self)
 
                 self
               end
@@ -163,7 +163,7 @@ module ConvenientService
               # @raise [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Errors::ReturnItsValueChainingIsAlreadySet]
               #
               def and_return_its_value
-                chainings.return_its_value = Entities::Chainings::Matchers::ReturnItsValue.new(matcher: self)
+                chainings.return_its_value = Entities::Chainings::SubMatchers::ReturnItsValue.new(matcher: self)
 
                 self
               end

@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Matchers::WithArguments do
+RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::WithArguments do
   let(:chaining_class) do
     Class.new(described_class) do
       def printable_expected_arguments
@@ -54,17 +54,17 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
 
     subject { described_class }
 
-    it { is_expected.to be_descendant_of(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Matchers::Base) }
+    it { is_expected.to be_descendant_of(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::Base) }
   end
 
   example_group "instance methods" do
     describe "#apply_stubs!" do
-      it "delegates to `ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Matchers::WithArguments::Commands::ApplyStubToTrackDelegations`" do
-        allow(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Matchers::WithArguments::Commands::ApplyStubToTrackDelegations).to receive(:call).with(matcher: matcher).and_call_original
+      it "delegates to `ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::WithArguments::Commands::ApplyStubToTrackDelegations`" do
+        allow(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::WithArguments::Commands::ApplyStubToTrackDelegations).to receive(:call).with(matcher: matcher).and_call_original
 
         chaining.apply_stubs!
 
-        expect(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Matchers::WithArguments::Commands::ApplyStubToTrackDelegations).to have_received(:call).with(matcher: matcher)
+        expect(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::WithArguments::Commands::ApplyStubToTrackDelegations).to have_received(:call).with(matcher: matcher)
       end
     end
 
@@ -128,7 +128,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
       end
 
       context "when matcher has one delegation" do
-        let(:printable_arguments) { ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Matchers::WithArguments::Commands::GeneratePrintableArguments.call(arguments: matcher.delegations.first.arguments).prepend("with ") }
+        let(:printable_arguments) { ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::WithArguments::Commands::GeneratePrintableArguments.call(arguments: matcher.delegations.first.arguments).prepend("with ") }
 
         before do
           matcher.delegations << delegation
@@ -142,7 +142,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
       context "when matcher has multiple delegations" do
         let(:printable_arguments) do
           matcher.delegations
-            .map { |delegation| ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Matchers::WithArguments::Commands::GeneratePrintableArguments.call(arguments: delegation.arguments) }
+            .map { |delegation| ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::WithArguments::Commands::GeneratePrintableArguments.call(arguments: delegation.arguments) }
             .join(", ")
             .prepend("with ")
         end

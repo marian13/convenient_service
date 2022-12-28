@@ -486,10 +486,10 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
     end
 
     describe "#with_arguments" do
-      it "sets `ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Matchers::WithConcreteArguments` instance as argument chaining" do
+      it "sets `ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::WithConcreteArguments` instance as argument chaining" do
         matcher.with_arguments
 
-        expect(matcher.chainings.arguments).to be_instance_of(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Matchers::WithConcreteArguments)
+        expect(matcher.chainings.arguments).to be_instance_of(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::WithConcreteArguments)
       end
 
       it "returns matcher" do
@@ -498,10 +498,10 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
     end
 
     describe "#with_any_arguments" do
-      it "sets `ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Matchers::WithAnyArguments` instance as argument chaining" do
+      it "sets `ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::WithAnyArguments` instance as argument chaining" do
         matcher.with_any_arguments
 
-        expect(matcher.chainings.arguments).to be_instance_of(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Matchers::WithAnyArguments)
+        expect(matcher.chainings.arguments).to be_instance_of(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::WithAnyArguments)
       end
 
       it "returns matcher" do
@@ -510,10 +510,10 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
     end
 
     describe "#without_arguments" do
-      it "sets `ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Matchers::WithoutArguments` instance as argument chaining" do
+      it "sets `ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::WithoutArguments` instance as argument chaining" do
         matcher.without_arguments
 
-        expect(matcher.chainings.arguments).to be_instance_of(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Matchers::WithoutArguments)
+        expect(matcher.chainings.arguments).to be_instance_of(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::WithoutArguments)
       end
 
       it "returns matcher" do
@@ -522,10 +522,10 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
     end
 
     describe "#and_return_its_value" do
-      it "sets `ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Matchers::ReturnItsValue` instance as argument chaining" do
+      it "sets `ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::ReturnItsValue` instance as argument chaining" do
         matcher.and_return_its_value
 
-        expect(matcher.chainings.return_its_value).to be_instance_of(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Matchers::ReturnItsValue)
+        expect(matcher.chainings.return_its_value).to be_instance_of(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::ReturnItsValue)
       end
 
       it "returns matcher" do

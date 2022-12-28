@@ -9,7 +9,7 @@ module ConvenientService
             class Matcher
               module Entities
                 module Chainings
-                  module Matchers
+                  module SubMatchers
                     class Base
                       ##
                       # @return [ConvenientService::RSpec::Matchers::Custom::DelegateTo]

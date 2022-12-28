@@ -26,8 +26,8 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
   let(:block_expectation) { proc { object.foo } }
   let(:block_expectation_value) { block_expectation.call }
 
-  let(:arguments_chaining) { ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Matchers::WithAnyArguments.new(matcher: matcher) }
-  let(:return_its_value_chaining) { ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Matchers::ReturnItsValue.new(matcher: matcher) }
+  let(:arguments_chaining) { ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::WithAnyArguments.new(matcher: matcher) }
+  let(:return_its_value_chaining) { ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::ReturnItsValue.new(matcher: matcher) }
 
   let(:without_calling_original_chaining) { ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Permissions::WithoutCallingOriginal.new(matcher: matcher) }
   let(:with_calling_original_chaining) { ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Permissions::WithCallingOriginal.new(matcher: matcher) }
@@ -46,16 +46,16 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
   end
 
   example_group "instance methods" do
-    describe "#matches?" do
+    describe "#sub_matchers_match?" do
       it "sets block expectation value" do
-        chainings_collection.matches?(block_expectation)
+        chainings_collection.sub_matchers_match?(block_expectation)
 
         expect(block_expectation_value).to eq(block_expectation.call)
       end
 
       context "when NO chaining is used" do
         it "returns `true`" do
-          expect(chainings_collection.matches?(block_expectation)).to eq(true)
+          expect(chainings_collection.sub_matchers_match?(block_expectation)).to eq(true)
         end
       end
 
@@ -67,7 +67,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
         it "applies arguments chaining stubs" do
           allow(chainings_collection.arguments).to receive(:apply_stubs!).and_call_original
 
-          chainings_collection.matches?(block_expectation)
+          chainings_collection.sub_matchers_match?(block_expectation)
 
           expect(chainings_collection.arguments).to have_received(:apply_stubs!)
         end
@@ -76,7 +76,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
           let(:block_expectation) { proc { object } }
 
           it "returns `false`" do
-            expect(chainings_collection.matches?(block_expectation)).to eq(false)
+            expect(chainings_collection.sub_matchers_match?(block_expectation)).to eq(false)
           end
         end
       end
@@ -89,7 +89,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
         it "applies return its value chaining stubs" do
           allow(chainings_collection.return_its_value).to receive(:apply_stubs!).and_call_original
 
-          chainings_collection.matches?(block_expectation)
+          chainings_collection.sub_matchers_match?(block_expectation)
 
           expect(chainings_collection.return_its_value).to have_received(:apply_stubs!)
         end
@@ -98,7 +98,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
           let(:block_expectation) { proc { object } }
 
           it "returns `false`" do
-            expect(chainings_collection.matches?(block_expectation)).to eq(false)
+            expect(chainings_collection.sub_matchers_match?(block_expectation)).to eq(false)
           end
         end
       end
@@ -116,7 +116,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
           let(:block_expectation) { proc { object } }
 
           it "returns `false`" do
-            expect(chainings_collection.matches?(block_expectation)).to eq(false)
+            expect(chainings_collection.sub_matchers_match?(block_expectation)).to eq(false)
           end
         end
 
@@ -124,7 +124,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
           let(:block_expectation) { proc { object.foo } }
 
           it "returns `true`" do
-            expect(chainings_collection.matches?(block_expectation)).to eq(true)
+            expect(chainings_collection.sub_matchers_match?(block_expectation)).to eq(true)
           end
         end
       end
@@ -171,7 +171,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
         before do
           chainings_collection.arguments = arguments_chaining
 
-          chainings_collection.matches?(block_expectation)
+          chainings_collection.sub_matchers_match?(block_expectation)
         end
 
         context "when arguments chaining does NOT match" do
@@ -195,7 +195,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
         before do
           chainings_collection.call_original = call_original_chaining
 
-          chainings_collection.matches?(block_expectation)
+          chainings_collection.sub_matchers_match?(block_expectation)
         end
 
         it "returns empty string" do
@@ -207,7 +207,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
         before do
           chainings_collection.return_its_value = return_its_value_chaining
 
-          chainings_collection.matches?(block_expectation)
+          chainings_collection.sub_matchers_match?(block_expectation)
         end
 
         context "when return its value chaining does NOT match" do
@@ -235,12 +235,12 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
 
           chainings_collection.return_its_value = return_its_value_chaining
 
-          chainings_collection.matches?(block_expectation)
+          chainings_collection.sub_matchers_match?(block_expectation)
         end
 
         context "when any of those chainigns does NOT match" do
           let(:block_expectation) { proc { object } }
-          let(:first_not_matched_chaining) { chainings_collection.sub_matchers.find { |chaining| chaining.does_not_match?(block_expectation_value) } }
+          let(:first_not_matched_chaining) { chainings_collection.sub_matchers.find { |sub_matcher| sub_matcher.does_not_match?(block_expectation_value) } }
 
           it "returns failure message of the first NOT matched chaining" do
             expect(chainings_collection.failure_message).to eq(first_not_matched_chaining.failure_message)
@@ -268,7 +268,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
         before do
           chainings_collection.arguments = arguments_chaining
 
-          chainings_collection.matches?(block_expectation)
+          chainings_collection.sub_matchers_match?(block_expectation)
         end
 
         context "when arguments chaining does NOT match" do
@@ -292,7 +292,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
         before do
           chainings_collection.call_original = call_original_chaining
 
-          chainings_collection.matches?(block_expectation)
+          chainings_collection.sub_matchers_match?(block_expectation)
         end
 
         it "returns empty string" do
@@ -304,7 +304,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
         before do
           chainings_collection.return_its_value = return_its_value_chaining
 
-          chainings_collection.matches?(block_expectation)
+          chainings_collection.sub_matchers_match?(block_expectation)
         end
 
         context "when return its value chaining does NOT match" do
@@ -332,7 +332,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
 
           chainings_collection.return_its_value = return_its_value_chaining
 
-          chainings_collection.matches?(block_expectation)
+          chainings_collection.sub_matchers_match?(block_expectation)
         end
 
         context "when all of those chainigns do NOT match" do
@@ -345,7 +345,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
 
         context "when any of those chainigns match" do
           let(:block_expectation) { proc { object.foo } }
-          let(:last_matched_chaining) { chainings_collection.sub_matchers.reverse.find { |chaining| chaining.matches?(block_expectation_value) } }
+          let(:last_matched_chaining) { chainings_collection.sub_matchers.reverse.find { |sub_matcher| sub_matcher.matches?(block_expectation_value) } }
 
           it "returns failure message when negated of the last matched chaining" do
             expect(chainings_collection.failure_message_when_negated).to eq(last_matched_chaining.failure_message_when_negated)

@@ -9,20 +9,20 @@ module ConvenientService
             class Matcher
               module Entities
                 module Chainings
-                  module Matchers
-                    class WithConcreteArguments < Chainings::Matchers::WithArguments
+                  module SubMatchers
+                    class WithAnyArguments < Chainings::SubMatchers::WithArguments
                       ##
                       # @return [Boolean]
                       #
                       def matches_arguments?(arguments)
-                        Utils::Bool.to_bool(arguments == matcher.expected_arguments)
+                        true
                       end
 
                       ##
                       # @return [String]
                       #
                       def printable_expected_arguments
-                        "with `#{WithArguments::Commands::GeneratePrintableArguments.call(arguments: matcher.expected_arguments)}`"
+                        "with any arguments (no arguments is also valid)"
                       end
                     end
                   end
