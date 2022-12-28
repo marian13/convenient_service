@@ -534,10 +534,10 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
     end
 
     describe "#with_calling_original" do
-      it "sets `ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Permissions::WithCallingOriginal` instance as call original chaining" do
+      it "sets `ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Values::WithCallingOriginal` instance as call original chaining" do
         matcher.with_calling_original
 
-        expect(matcher.chainings.call_original).to be_instance_of(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Permissions::WithCallingOriginal)
+        expect(matcher.chainings.call_original).to be_instance_of(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Values::WithCallingOriginal)
       end
 
       it "returns matcher" do
@@ -546,10 +546,10 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
     end
 
     describe "#without_calling_original" do
-      it "sets `ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Permissions::WithoutCallingOriginal` instance as call original chaining" do
+      it "sets `ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Values::WithoutCallingOriginal` instance as call original chaining" do
         matcher.without_calling_original
 
-        expect(matcher.chainings.call_original).to be_instance_of(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Permissions::WithoutCallingOriginal)
+        expect(matcher.chainings.call_original).to be_instance_of(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Values::WithoutCallingOriginal)
       end
 
       it "returns matcher" do

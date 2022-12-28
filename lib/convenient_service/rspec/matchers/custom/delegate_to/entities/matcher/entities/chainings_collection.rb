@@ -89,13 +89,6 @@ module ConvenientService
                   ##
                   # @return [Array]
                   #
-                  def permissions
-                    [call_original].compact
-                  end
-
-                  ##
-                  # @return [Array]
-                  #
                   # @internal
                   #   IMPORTANT: Order of sub matcher chainings matters.
                   #
@@ -104,10 +97,17 @@ module ConvenientService
                   end
 
                   ##
+                  # @return [Array]
+                  #
+                  def values
+                    [call_original].compact
+                  end
+
+                  ##
                   # @return [Boolean]
                   #
                   def should_call_original?
-                    Utils::Bool.to_bool(call_original&.allows?)
+                    Utils::Bool.to_bool(call_original&.value)
                   end
 
                   ##
@@ -132,7 +132,7 @@ module ConvenientService
                   end
 
                   ##
-                  # @param chaining [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Permissions::Base]
+                  # @param chaining [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Values::Base]
                   # @raise [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Errors::ReturnItsValueChainingIsAlreadySet]
                   #
                   def call_original=(chaining)

@@ -91,7 +91,7 @@ module ConvenientService
                 @block_expectation = block_expectation
 
                 chainings.arguments = Entities::Chainings::SubMatchers::WithAnyArguments.new(matcher: self) unless chainings.has_arguments?
-                chainings.call_original = Entities::Chainings::Permissions::WithCallingOriginal.new(matcher: self) unless chainings.has_call_original?
+                chainings.call_original = Entities::Chainings::Values::WithCallingOriginal.new(matcher: self) unless chainings.has_call_original?
 
                 chainings.sub_matchers_match?(block_expectation)
               end
@@ -172,7 +172,7 @@ module ConvenientService
               # @return [ConvenientService::RSpec::Matchers::Custom::DelegateTo]
               #
               def with_calling_original
-                chainings.call_original = Entities::Chainings::Permissions::WithCallingOriginal.new(matcher: self)
+                chainings.call_original = Entities::Chainings::Values::WithCallingOriginal.new(matcher: self)
 
                 self
               end
@@ -181,7 +181,7 @@ module ConvenientService
               # @return [ConvenientService::RSpec::Matchers::Custom::DelegateTo]
               #
               def without_calling_original
-                chainings.call_original = Entities::Chainings::Permissions::WithoutCallingOriginal.new(matcher: self)
+                chainings.call_original = Entities::Chainings::Values::WithoutCallingOriginal.new(matcher: self)
 
                 self
               end

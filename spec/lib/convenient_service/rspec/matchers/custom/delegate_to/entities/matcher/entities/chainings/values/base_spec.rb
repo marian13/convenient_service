@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Permissions::WithCallingOriginal do
+RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Values::Base do
   let(:chaining) { described_class.new(matcher: matcher) }
 
   let(:matcher) { ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher.new(object, method) }
@@ -25,18 +25,19 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
   let(:object) { klass.new }
   let(:method) { :bar }
 
-  example_group "inheritance" do
-    include ConvenientService::RSpec::Matchers::BeDescendantOf
+  example_group "attributes" do
+    include ConvenientService::RSpec::Matchers::HaveAttrReader
 
-    subject { described_class }
+    subject { chaining }
 
-    it { is_expected.to be_descendant_of(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Permissions::Base) }
+    it { is_expected.to have_attr_reader(:matcher) }
+    it { is_expected.to have_attr_reader(:value) }
   end
 
   example_group "instance methods" do
-    describe "#allows?" do
-      it "returns `true`" do
-        expect(chaining.allows?).to eq(true)
+    describe "#value" do
+      it "returns `nil`" do
+        expect(chaining.value).to be_nil
       end
     end
   end

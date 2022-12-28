@@ -9,12 +9,12 @@ module ConvenientService
             class Matcher
               module Entities
                 module Chainings
-                  module Permissions
-                    class WithCallingOriginal < Chainings::Permissions::Base
+                  module Values
+                    class WithCallingOriginal < Chainings::Values::Base
                       ##
                       # @return [Boolean]
                       #
-                      def allows?
+                      def value
                         true
                       end
                     end

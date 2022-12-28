@@ -29,8 +29,8 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
   let(:arguments_chaining) { ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::WithAnyArguments.new(matcher: matcher) }
   let(:return_its_value_chaining) { ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::ReturnItsValue.new(matcher: matcher) }
 
-  let(:without_calling_original_chaining) { ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Permissions::WithoutCallingOriginal.new(matcher: matcher) }
-  let(:with_calling_original_chaining) { ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Permissions::WithCallingOriginal.new(matcher: matcher) }
+  let(:without_calling_original_chaining) { ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Values::WithoutCallingOriginal.new(matcher: matcher) }
+  let(:with_calling_original_chaining) { ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Values::WithCallingOriginal.new(matcher: matcher) }
   let(:call_original_chaining) { with_calling_original_chaining }
 
   example_group "attributes" do
@@ -354,24 +354,6 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
       end
     end
 
-    describe "#permissions" do
-      context "when any type of permission chainings is missed" do
-        it "returns ordered permission chainings skipping that missed permission chaining" do
-          expect(chainings_collection.permissions).to eq([])
-        end
-      end
-
-      context "when all types of permission chainings are used" do
-        before do
-          chainings_collection.call_original = call_original_chaining
-        end
-
-        it "returns ordered permission chainings" do
-          expect(chainings_collection.permissions).to eq([chainings_collection.call_original])
-        end
-      end
-    end
-
     describe "#sub_matchers" do
       context "when any type of matcher chainings is missed" do
         before do
@@ -392,6 +374,24 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
 
         it "returns ordered matcher chainings" do
           expect(chainings_collection.sub_matchers).to eq([chainings_collection.arguments, chainings_collection.return_its_value])
+        end
+      end
+    end
+
+    describe "#values" do
+      context "when any type of value chainings is missed" do
+        it "returns ordered value chainings skipping that missed value chaining" do
+          expect(chainings_collection.values).to eq([])
+        end
+      end
+
+      context "when all types of value chainings are used" do
+        before do
+          chainings_collection.call_original = call_original_chaining
+        end
+
+        it "returns ordered value chainings" do
+          expect(chainings_collection.values).to eq([chainings_collection.call_original])
         end
       end
     end

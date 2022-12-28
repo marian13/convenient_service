@@ -9,7 +9,7 @@ module ConvenientService
             class Matcher
               module Entities
                 module Chainings
-                  module Permissions
+                  module Values
                     class Base
                       ##
                       # @return [ConvenientService::RSpec::Matchers::Custom::DelegateTo]
@@ -17,25 +17,16 @@ module ConvenientService
                       attr_reader :matcher
 
                       ##
+                      # @return [Object] Can be any type.
+                      #
+                      attr_reader :value
+
+                      ##
                       # @param matcher [ConvenientService::RSpec::Matchers::Custom::DelegateTo]
                       # @return [void]
                       #
                       def initialize(matcher:)
                         @matcher = matcher
-                      end
-
-                      ##
-                      # @return [Boolean]
-                      #
-                      def allows?
-                        false
-                      end
-
-                      ##
-                      # @return [Boolean]
-                      #
-                      def does_not_allow?
-                        !allows?
                       end
                     end
                   end
