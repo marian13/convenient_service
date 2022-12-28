@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-# rubocop:disable RSpec/NestedGroups
+# rubocop:disable RSpec/NestedGroups, Spec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Entities::Callers::Reassignment do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
@@ -64,6 +64,17 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
         expect(caller.validate_as_input_for_container!(container, method: method)).to eq(false)
       end
     end
+
+    describe "#validate_as_output_for_container!" do
+      let(:direction) { :output }
+
+      ##
+      # TODO: Raise when container has two reassignments with same name.
+      #
+      it "returns `true`" do
+        expect(caller.validate_as_output_for_container!(container, method: method)).to eq(true)
+      end
+    end
   end
 end
-# rubocop:enable RSpec/NestedGroups
+# rubocop:enable RSpec/NestedGroups, Spec/MultipleMemoizedHelpers
