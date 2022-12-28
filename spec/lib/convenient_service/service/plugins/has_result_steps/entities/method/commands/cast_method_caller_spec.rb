@@ -86,6 +86,15 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
               expect(casted).to eq(ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Entities::Callers::Raw.new(raw_value))
             end
           end
+
+          context "when value by that key is reassignment" do
+            let(:reassignment) { ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Entities::Values::Reassignment.new(:bar) }
+            let(:other) { {foo: reassignment} }
+
+            it "returns raw value casted to method caller" do
+              expect(casted).to eq(ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Entities::Callers::Reassignment.new(reassignment))
+            end
+          end
         end
 
         context "when that hash has multiple keys" do
