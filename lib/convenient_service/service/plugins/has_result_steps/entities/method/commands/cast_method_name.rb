@@ -7,8 +7,8 @@ module ConvenientService
         module Entities
           class Method
             module Commands
-              ##
-              # TODO: Replace `CastMethodKey`, `CastMethodName`, `CastMethodCaller` by declarative caster?
+              #
+              # TODO: Abstract factory.
               #
               class CastMethodName < Support::Command
                 attr_reader :other, :options
