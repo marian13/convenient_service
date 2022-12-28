@@ -19,7 +19,7 @@ module ConvenientService
                   delegate :to_s, :to_sym, to: :value
 
                   ##
-                  # @param value [String, Symbole] Method name to reassign.
+                  # @param value [String, Symbol] Method name to reassign.
                   #
                   def initialize(value)
                     @value = value
@@ -28,7 +28,9 @@ module ConvenientService
                   def ==(other)
                     return unless other.instance_of?(self.class)
 
-                    value == other.value
+                    return false if value != other.value
+
+                    true
                   end
                 end
               end
