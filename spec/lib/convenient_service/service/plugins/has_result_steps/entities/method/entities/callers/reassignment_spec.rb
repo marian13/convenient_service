@@ -75,6 +75,24 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
         expect(caller.validate_as_output_for_container!(container, method: method)).to eq(true)
       end
     end
+
+    describe "#define_output_in_container!" do
+      let(:index) { 0 }
+
+      before do
+        ##
+        # NOTE: Warmup.
+        #
+        caller.define_output_in_container!(container, index: index, method: method)
+      end
+
+      specify {
+        expect { caller.define_output_in_container!(container, index: index, method: method) }
+          .to delegate_to(ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Entities::Callers::Reassignment::Commands::DefineMethodInContainer, :call)
+          .with_arguments(method: method, container: container, index: index)
+          .and_return_its_value
+      }
+    end
   end
 end
 # rubocop:enable RSpec/NestedGroups, Spec/MultipleMemoizedHelpers

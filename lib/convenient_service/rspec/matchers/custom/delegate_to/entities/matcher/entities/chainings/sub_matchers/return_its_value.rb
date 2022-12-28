@@ -19,6 +19,8 @@ module ConvenientService
                         super
 
                         ##
+                        # TODO: `with_warmup`.
+                        #
                         # IMPORTANT: `and_return_its_value` works only when `delegate_to` checks a pure function.
                         #
                         # For example (1):

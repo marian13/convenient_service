@@ -19,6 +19,9 @@ module ConvenientService
                     object.to_sym == name.to_sym
                   end
 
+                  ##
+                  # TODO: Separate `in` and `out` methods?
+                  #
                   def calculate_value(method)
                     raise Errors::CallerCanNotCalculateReassignment.new(method: method)
                   end
@@ -29,7 +32,7 @@ module ConvenientService
 
                   def validate_as_output_for_container!(container, method:)
                     ##
-                    # TODO:
+                    # TODO: Raise when container has two reassignments with same name.
                     #
                     true
                   end

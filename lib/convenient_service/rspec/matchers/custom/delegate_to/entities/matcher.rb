@@ -77,6 +77,7 @@ module ConvenientService
                 ##
                 # TODO: `raise unless object.respond_to?(method)`.
                 # TODO: `any_block`.
+                # TODO: `with_warmup`.
                 #
                 @object = object
                 @method = method
