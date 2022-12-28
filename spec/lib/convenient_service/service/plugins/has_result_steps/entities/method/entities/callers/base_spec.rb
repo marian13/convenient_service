@@ -9,8 +9,6 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
   let(:caller) { described_class.new(value) }
   let(:value) { :foo }
 
-  let(:method) { ConvenientService::Service::Plugins::HasResultSteps::Entities::Method.cast(:foo, direction: :input) }
-
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
 
@@ -42,7 +40,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
 
     describe "#reassignment?" do
       it "returns `false`" do
-        expect(caller.reassignment?(:foo, method: method)).to eq(false)
+        expect(caller.reassignment?(:foo)).to eq(false)
       end
     end
 

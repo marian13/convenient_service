@@ -39,7 +39,7 @@ module ConvenientService
                 end
 
                 def reassignment?(name)
-                  caller.reassignment?(name, method: self)
+                  caller.reassignment?(name)
                 end
 
                 def validate_as_input_for_container!(container)

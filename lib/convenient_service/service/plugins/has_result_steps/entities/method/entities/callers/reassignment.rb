@@ -11,7 +11,7 @@ module ConvenientService
             module Entities
               module Callers
                 class Reassignment < Callers::Base
-                  def reassignment?(name, method:)
+                  def reassignment?(name)
                     ##
                     # TODO: A better name for `object`. Wrapped object, `target`?
                     #

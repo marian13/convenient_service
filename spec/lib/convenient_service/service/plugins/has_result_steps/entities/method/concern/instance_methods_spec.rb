@@ -158,7 +158,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
       specify {
         expect { method.reassignment?(name) }
           .to delegate_to(caller, :reassignment?)
-          .with_arguments(name, method: method)
+          .with_arguments(name)
           .and_return_its_value
       }
     end
