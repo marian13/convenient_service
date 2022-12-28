@@ -63,12 +63,12 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
 
   example_group "instance methods" do
     describe "#apply_stubs!" do
-      it "delegates to `ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Commands::ApplyStubToTrackDelegations`" do
-        allow(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Commands::ApplyStubToTrackDelegations).to receive(:call).with(matcher: matcher).and_call_original
+      it "delegates to `ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Matchers::WithArguments::Commands::ApplyStubToTrackDelegations`" do
+        allow(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Matchers::WithArguments::Commands::ApplyStubToTrackDelegations).to receive(:call).with(matcher: matcher).and_call_original
 
         chaining.apply_stubs!
 
-        expect(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Commands::ApplyStubToTrackDelegations).to have_received(:call).with(matcher: matcher)
+        expect(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Matchers::WithArguments::Commands::ApplyStubToTrackDelegations).to have_received(:call).with(matcher: matcher)
       end
     end
 
@@ -164,7 +164,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
       context "when matcher has NO delegations" do
         let(:message) do
           <<~MESSAGE.chomp
-            expected `#{matcher.printable_block_expectation}` to delegate to `#{matcher.printable_method}` with `#{matcher.printable_expected_arguments}` at least once, but it didn't.
+            expected `#{matcher.printable_block_expectation}` to delegate to `#{matcher.printable_method}` #{chaining.printable_expected_arguments} at least once, but it didn't.
 
             got not delegated at all
           MESSAGE
@@ -182,9 +182,9 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
       context "when matcher has delegations" do
         let(:message) do
           <<~MESSAGE.chomp
-            expected `#{matcher.printable_block_expectation}` to delegate to `#{matcher.printable_method}` with `#{matcher.printable_expected_arguments}` at least once, but it didn't.
+            expected `#{matcher.printable_block_expectation}` to delegate to `#{matcher.printable_method}` #{chaining.printable_expected_arguments} at least once, but it didn't.
 
-            got delegated with #{matcher.printable_actual_arguments}
+            got delegated #{chaining.printable_actual_arguments}
           MESSAGE
         end
 
@@ -200,7 +200,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
 
     describe "#failure_message_when_negated" do
       it "returns message" do
-        expect(chaining.failure_message_when_negated).to eq("expected `#{matcher.printable_block_expectation}` NOT to delegate to `#{matcher.printable_method}` with `#{matcher.printable_expected_arguments}` at least once, but it did.")
+        expect(chaining.failure_message_when_negated).to eq("expected `#{matcher.printable_block_expectation}` NOT to delegate to `#{matcher.printable_method}` #{chaining.printable_expected_arguments} at least once, but it did.")
       end
     end
   end

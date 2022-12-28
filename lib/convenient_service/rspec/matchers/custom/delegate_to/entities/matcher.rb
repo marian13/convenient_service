@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require_relative "matcher/commands"
 require_relative "matcher/entities"
 
 ##
@@ -76,16 +75,6 @@ module ConvenientService
               # @return [String]
               #
               delegate :printable_method, to: :presenter
-
-              ##
-              # @return [String]
-              #
-              delegate :printable_actual_arguments, to: :presenter
-
-              ##
-              # @return [String]
-              #
-              delegate :printable_expected_arguments, to: :presenter
 
               ##
               # @param object [Object]

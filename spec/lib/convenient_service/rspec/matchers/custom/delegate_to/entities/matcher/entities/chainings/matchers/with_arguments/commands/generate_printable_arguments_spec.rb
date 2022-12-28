@@ -5,12 +5,13 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Presenter::Commands::GeneratePrintableArguments do
+RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Matchers::WithArguments::Commands::GeneratePrintableArguments do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   example_group "class methods" do
     describe ".call" do
       let(:command_result) { described_class.call(arguments: arguments) }
+
       let(:arguments) { ConvenientService::Support::Arguments.new(*args, **kwargs, &block) }
 
       let(:args) { [] }
@@ -128,6 +129,14 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
 
         it "uses `inspect` to print them" do
           expect(command_result).to eq("(foo: #{object.inspect})")
+        end
+      end
+
+      context "when arguments are null arguments" do
+        let(:arguments) { ConvenientService::Support::Arguments.null_arguments }
+
+        it "returns empty string" do
+          expect(command_result).to eq("")
         end
       end
     end

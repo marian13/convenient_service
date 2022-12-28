@@ -10,36 +10,19 @@ module ConvenientService
               module Entities
                 module Chainings
                   module Matchers
-                    class WithoutArguments < Chainings::Matchers::Base
+                    class WithoutArguments < Chainings::Matchers::WithArguments
                       ##
-                      # @return [void]
-                      #
-                      def apply_stubs!
-                        Commands::ApplyStubToTrackDelegations.call(matcher: matcher)
-                      end
-
-                      ##
-                      # @param block_expectation_value [Object]
                       # @return [Boolean]
                       #
-                      def matches?(block_expectation_value)
-                        super
-
-                        matcher.delegations.any? { |delegation| delegation.without_arguments? }
+                      def matches_arguments?(arguments)
+                        arguments.none?
                       end
 
                       ##
                       # @return [String]
                       #
-                      def failure_message
-                        "expected `#{matcher.printable_block_expectation}` to delegate to `#{matcher.printable_method}` without arguments at least once, but it didn't."
-                      end
-
-                      ##
-                      # @return [String]
-                      #
-                      def failure_message_when_negated
-                        "expected `#{matcher.printable_block_expectation}` NOT to delegate to `#{matcher.printable_method}` without arguments at least once, but it did."
+                      def printable_expected_arguments
+                        "without arguments"
                       end
                     end
                   end

@@ -63,12 +63,12 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
 
   example_group "instance methods" do
     describe "#apply_stubs!" do
-      it "delegates to `ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Commands::ApplyStubToTrackDelegations`" do
-        allow(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Commands::ApplyStubToTrackDelegations).to receive(:call).with(matcher: matcher).and_call_original
+      it "delegates to `ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Matchers::WithArguments::Commands::ApplyStubToTrackDelegations`" do
+        allow(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Matchers::WithArguments::Commands::ApplyStubToTrackDelegations).to receive(:call).with(matcher: matcher).and_call_original
 
         chaining.apply_stubs!
 
-        expect(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Commands::ApplyStubToTrackDelegations).to have_received(:call).with(matcher: matcher)
+        expect(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Matchers::WithArguments::Commands::ApplyStubToTrackDelegations).to have_received(:call).with(matcher: matcher)
       end
     end
 
@@ -123,7 +123,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
             end
           end
 
-          context "when that one delegation with arguments" do
+          context "when that one delegation rguments" do
             before do
               matcher.delegations << delegation_with_arguments
             end
@@ -161,14 +161,46 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
     end
 
     describe "#failure_message" do
-      it "returns message" do
-        expect(chaining.failure_message).to eq("expected `#{matcher.printable_block_expectation}` to delegate to `#{matcher.printable_method}` without arguments at least once, but it didn't.")
+      context "when matcher has NO delegations" do
+        let(:message) do
+          <<~MESSAGE.chomp
+            expected `#{matcher.printable_block_expectation}` to delegate to `#{matcher.printable_method}` #{chaining.printable_expected_arguments} at least once, but it didn't.
+
+            got not delegated at all
+          MESSAGE
+        end
+
+        before do
+          matcher.delegations.clear
+        end
+
+        it "returns message" do
+          expect(chaining.failure_message).to eq(message)
+        end
+      end
+
+      context "when matcher has delegations" do
+        let(:message) do
+          <<~MESSAGE.chomp
+            expected `#{matcher.printable_block_expectation}` to delegate to `#{matcher.printable_method}` #{chaining.printable_expected_arguments} at least once, but it didn't.
+
+            got delegated #{chaining.printable_actual_arguments}
+          MESSAGE
+        end
+
+        before do
+          matcher.delegations << delegation_with_arguments
+        end
+
+        it "returns message" do
+          expect(chaining.failure_message).to eq(message)
+        end
       end
     end
 
     describe "#failure_message_when_negated" do
       it "returns message" do
-        expect(chaining.failure_message_when_negated).to eq("expected `#{matcher.printable_block_expectation}` NOT to delegate to `#{matcher.printable_method}` without arguments at least once, but it did.")
+        expect(chaining.failure_message_when_negated).to eq("expected `#{matcher.printable_block_expectation}` NOT to delegate to `#{matcher.printable_method}` #{chaining.printable_expected_arguments} at least once, but it did.")
       end
     end
   end

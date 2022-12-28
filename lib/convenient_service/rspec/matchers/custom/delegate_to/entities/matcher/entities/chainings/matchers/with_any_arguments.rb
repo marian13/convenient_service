@@ -10,36 +10,19 @@ module ConvenientService
               module Entities
                 module Chainings
                   module Matchers
-                    class WithAnyArguments < Chainings::Matchers::Base
+                    class WithAnyArguments < Chainings::Matchers::WithArguments
                       ##
-                      # @return [void]
-                      #
-                      def apply_stubs!
-                        Commands::ApplyStubToTrackDelegations.call(matcher: matcher)
-                      end
-
-                      ##
-                      # @param block_expectation_value [Object]
                       # @return [Boolean]
                       #
-                      def matches?(block_expectation_value)
-                        super
-
-                        matcher.delegations.any?
+                      def matches_arguments?(arguments)
+                        true
                       end
 
                       ##
                       # @return [String]
                       #
-                      def failure_message
-                        "expected `#{matcher.printable_block_expectation}` to delegate to `#{matcher.printable_method}` with any arguments at least once (no arguments is also valid), but it didn't."
-                      end
-
-                      ##
-                      # @return [String]
-                      #
-                      def failure_message_when_negated
-                        "expected `#{matcher.printable_block_expectation}` NOT to delegate to `#{matcher.printable_method}` with any arguments at least once (no arguments is also valid), but it did."
+                      def printable_expected_arguments
+                        "with any arguments (no arguments is also valid)"
                       end
                     end
                   end

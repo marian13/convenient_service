@@ -40,24 +40,6 @@ module ConvenientService
                   end
 
                   ##
-                  # @return [String]
-                  #
-                  def printable_actual_arguments
-                    matcher.delegations
-                      .map { |delegation| Commands::GeneratePrintableArguments.call(arguments: delegation.arguments) }
-                      .join(", ")
-                  end
-
-                  ##
-                  # @return [String]
-                  #
-                  def printable_expected_arguments
-                    return "" if matcher.expected_arguments.null_arguments?
-
-                    Commands::GeneratePrintableArguments.call(arguments: matcher.expected_arguments)
-                  end
-
-                  ##
                   # @param other [Object] Can be any type.
                   # @return [Boolean]
                   #
