@@ -134,7 +134,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
       end
     end
 
-    describe "#has_orgnizer" do
+    describe "#has_orgnizer?" do
       context "when `method` does NOT have `organizer`" do
         let(:method_instance) { method_class.new(**ConvenientService::Utils::Hash.except(method_kwargs, [:organizer])) }
 
@@ -150,6 +150,17 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
           expect(method.has_organizer?).to eq(true)
         end
       end
+    end
+
+    describe "#reassignment?" do
+      let(:name) { :foo }
+
+      specify {
+        expect { method.reassignment?(name) }
+          .to delegate_to(caller, :reassignment?)
+          .with_arguments(name, method: method)
+          .and_return_its_value
+      }
     end
 
     describe "#validate_as_input_for_container!" do

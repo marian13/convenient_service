@@ -61,6 +61,7 @@
 | Medium | 🚧 | Perfromance testing | [rspec-benchmark](https://github.com/piotrmurach/rspec-benchmark), [Testing object allocations](https://www.honeybadger.io/blog/testing-object-allocations/), [allocation_stats](https://github.com/srawlins/allocation_stats) |
 | Medium | 🚧 | Mutant testing | [mutant](https://github.com/mbj/mutant) |
 | Low | 🚧 | Add `JRuby` support | [jruby](https://www.jruby.org/) |
-| Medium | | Add `shoulda-context` to test conditionals when `RSpec` is not loaded | [shoulda-context](https://github.com/thoughtbot/shoulda-context) |
+| Medium | 🚧 | Add `shoulda-context` to test conditionals when `RSpec` is not loaded | [shoulda-context](https://github.com/thoughtbot/shoulda-context) |
+| High | 🚧 | Abstract factory for `CastMethod` | |
 
 Search for `TODO`s in the codebase for more tasks.
