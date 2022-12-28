@@ -58,7 +58,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
 
     subject { described_class }
 
-    it { is_expected.to be_descendant_of(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::WithArguments) }
+    it { is_expected.to be_descendant_of(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::Arguments) }
   end
 
   example_group "instance methods" do
@@ -154,7 +154,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
     end
 
     describe "#printable_expected_arguments?" do
-      let(:printable_expected_arguments) { "with `#{ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::WithArguments::Commands::GeneratePrintableArguments.call(arguments: matcher.expected_arguments)}`" }
+      let(:printable_expected_arguments) { "with `#{ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::Arguments::Commands::GeneratePrintableArguments.call(arguments: matcher.expected_arguments)}`" }
 
       it "returns `true`" do
         expect(chaining.printable_expected_arguments).to eq(printable_expected_arguments)

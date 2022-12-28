@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::WithArguments::Commands::ApplyStubToTrackDelegations do
+RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::Arguments::Commands::ApplyStubToTrackDelegations do
   subject(:command_result) { described_class.call(matcher: matcher) }
 
   let(:matcher) { ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher.new(object, method).with_calling_original }

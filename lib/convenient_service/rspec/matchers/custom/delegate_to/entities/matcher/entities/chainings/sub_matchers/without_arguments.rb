@@ -10,7 +10,7 @@ module ConvenientService
               module Entities
                 module Chainings
                   module SubMatchers
-                    class WithoutArguments < Chainings::SubMatchers::WithArguments
+                    class WithoutArguments < Chainings::SubMatchers::Arguments
                       ##
                       # @return [Boolean]
                       #

@@ -10,7 +10,7 @@ module ConvenientService
               module Entities
                 module Chainings
                   module SubMatchers
-                    class WithConcreteArguments < Chainings::SubMatchers::WithArguments
+                    class WithConcreteArguments < Chainings::SubMatchers::Arguments
                       ##
                       # @return [Boolean]
                       #
@@ -22,7 +22,7 @@ module ConvenientService
                       # @return [String]
                       #
                       def printable_expected_arguments
-                        "with `#{WithArguments::Commands::GeneratePrintableArguments.call(arguments: matcher.expected_arguments)}`"
+                        "with `#{Arguments::Commands::GeneratePrintableArguments.call(arguments: matcher.expected_arguments)}`"
                       end
                     end
                   end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "with_arguments/commands"
+require_relative "arguments/commands"
 
 module ConvenientService
   module RSpec
@@ -12,7 +12,7 @@ module ConvenientService
               module Entities
                 module Chainings
                   module SubMatchers
-                    class WithArguments < Chainings::SubMatchers::Base
+                    class Arguments < Chainings::SubMatchers::Base
                       ##
                       # @return [void]
                       #

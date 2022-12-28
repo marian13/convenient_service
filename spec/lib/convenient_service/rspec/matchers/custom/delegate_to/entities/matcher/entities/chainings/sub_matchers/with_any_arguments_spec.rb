@@ -49,7 +49,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
 
     subject { described_class }
 
-    it { is_expected.to be_descendant_of(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::Base) }
+    it { is_expected.to be_descendant_of(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::Arguments) }
   end
 
   example_group "instance methods" do
