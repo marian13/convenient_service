@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "reassignment/commands"
+require_relative "reassignment/errors"
 
 module ConvenientService
   module Service
@@ -19,7 +20,7 @@ module ConvenientService
                   end
 
                   def calculate_value(method)
-                    raise
+                    raise Errors::CallerCanNotCalculateReassignment.new(method: method)
                   end
 
                   def validate_as_input_for_container!(container, method:)
