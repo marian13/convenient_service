@@ -67,16 +67,6 @@ module ConvenientService
               delegate :should_call_original?, to: :chainings
 
               ##
-              # @return [String]
-              #
-              delegate :printable_block_expectation, to: :presenter
-
-              ##
-              # @return [String]
-              #
-              delegate :printable_method, to: :presenter
-
-              ##
               # @param object [Object]
               # @param method [String, Symbol]
               # @param block_expectation [Proc]
@@ -246,11 +236,17 @@ module ConvenientService
               end
 
               ##
-              # @return [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Presenter]
-              # @api private
+              # @return [String]
               #
-              def presenter
-                @presenter ||= Entities::Presenter.new(matcher: self)
+              def printable_method
+                @printable_method ||= Commands::GeneratePrintableMethod.call(object: object, method: method)
+              end
+
+              ##
+              # @return [String]
+              #
+              def printable_block_expectation
+                @printable_block_expectation ||= Utils::Proc.display(block_expectation)
               end
 
               ##
