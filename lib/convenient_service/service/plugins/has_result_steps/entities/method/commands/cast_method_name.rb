@@ -65,9 +65,6 @@ module ConvenientService
                   end
                 end
 
-                ##
-                # TODO: Specs.
-                #
                 def cast_method
                   other.name.copy
                 end

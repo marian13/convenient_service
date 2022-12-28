@@ -84,6 +84,14 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
               expect(casted).to eq(ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Entities::Name.new(:foo))
             end
           end
+
+          context "when value by that key is reassignemnt" do
+            let(:other) { {foo: ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Entities::Values::Reassignment.new("bar")} }
+
+            it "returns reassignemnt casted to method name" do
+              expect(casted).to eq(ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Entities::Name.new(:bar))
+            end
+          end
         end
 
         context "when that hash has multiple keys" do
@@ -92,6 +100,14 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
           it "returns `nil`" do
             expect(casted).to be_nil
           end
+        end
+      end
+
+      context "when `other` is reassignemnt" do
+        let(:other) { ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Entities::Values::Reassignment.new(:foo) }
+
+        it "returns reassignemnt casted to method name" do
+          expect(casted).to eq(ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Entities::Name.new(:foo))
         end
       end
 
