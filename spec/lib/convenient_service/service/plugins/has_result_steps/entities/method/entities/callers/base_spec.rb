@@ -9,6 +9,8 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
   let(:caller) { described_class.new(value) }
   let(:value) { :foo }
 
+  let(:method) { ConvenientService::Service::Plugins::HasResultSteps::Entities::Method.cast(:foo, direction: :input) }
+
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
 
@@ -36,6 +38,12 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
       it { is_expected.to have_abstract_method(:validate_as_input_for_container!) }
       it { is_expected.to have_abstract_method(:validate_as_output_for_container!) }
       it { is_expected.to have_abstract_method(:define_output_in_container!) }
+    end
+
+    describe "#reassignment?" do
+      it "returns `false`" do
+        expect(caller.reassignment?(:foo, method: method)).to eq(false)
+      end
     end
 
     example_group "comparison" do

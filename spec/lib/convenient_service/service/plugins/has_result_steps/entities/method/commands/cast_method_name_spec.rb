@@ -104,7 +104,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
       end
 
       context "when `other` is reassignemnt" do
-        let(:other) { ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Entities::Values::Reassignment.new(:foo) }
+        let(:other) { ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Entities::Values::Reassignment.new("foo") }
 
         it "returns reassignemnt casted to method name" do
           expect(casted).to eq(ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Entities::Name.new(:foo))

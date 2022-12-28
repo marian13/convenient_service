@@ -27,7 +27,7 @@ module ConvenientService
                     @object = object
                   end
 
-                  def reassignment?(name:, method:)
+                  def reassignment?(name, method:)
                     false
                   end
 
