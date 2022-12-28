@@ -11,7 +11,11 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
   let(:caller) { described_class.new(reassignemnt) }
   let(:reassignemnt) { ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Entities::Values::Reassignment.new("foo") }
 
-  let(:method) { ConvenientService::Service::Plugins::HasResultSteps::Entities::Method.cast(reassignemnt, direction: :output) }
+  let(:direction) { :output }
+  let(:method) { ConvenientService::Service::Plugins::HasResultSteps::Entities::Method.cast(reassignemnt, direction: direction) }
+
+  let(:service_class) { Class.new }
+  let(:container) { ConvenientService::Service::Plugins::HasResultSteps::Entities::Service.cast(service_class) }
 
   example_group "instance methods" do
     describe "#reassignment?" do
@@ -50,6 +54,14 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
         expect { caller.calculate_value(method) }
           .to raise_error(ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Entities::Callers::Reassignment::Errors::CallerCanNotCalculateReassignment)
           .with_message(error_message)
+      end
+    end
+
+    describe "#validate_as_input_for_container!" do
+      let(:direction) { :input }
+
+      it "returns `false`" do
+        expect(caller.validate_as_input_for_container!(container, method: method)).to eq(false)
       end
     end
   end
