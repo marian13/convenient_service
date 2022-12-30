@@ -82,7 +82,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Concern do
 
       specify do
         expect { service_class.raw(value) }
-          .to delegate_to(ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Entities::Values::Raw, :wrap)
+          .to delegate_to(ConvenientService::Support::RawValue, :wrap)
           .with_arguments(value)
           .and_return_its_value
       end

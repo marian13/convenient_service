@@ -53,7 +53,7 @@ module ConvenientService
                     Entities::Key.new(key)
                   when ::Proc
                     Entities::Key.new(key)
-                  when Entities::Values::Raw
+                  when Support::RawValue
                     Entities::Key.new(key)
                   end
                 end

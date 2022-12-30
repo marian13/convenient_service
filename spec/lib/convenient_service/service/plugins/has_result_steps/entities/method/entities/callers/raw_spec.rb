@@ -7,7 +7,7 @@ require "convenient_service"
 # rubocop:disable RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Entities::Callers::Raw do
   let(:caller) { described_class.new(raw_value) }
-  let(:raw_value) { ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Entities::Values::Raw.wrap(:foo) }
+  let(:raw_value) { ConvenientService::Support::RawValue.wrap(:foo) }
   let(:direction) { :input }
 
   example_group "inheritance" do

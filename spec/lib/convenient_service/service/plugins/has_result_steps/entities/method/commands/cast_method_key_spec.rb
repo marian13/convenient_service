@@ -78,7 +78,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
           end
 
           context "when value by that key is raw value" do
-            let(:other) { {foo: ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Entities::Values::Raw.wrap(:bar)} }
+            let(:other) { {foo: ConvenientService::Support::RawValue.wrap(:bar)} }
 
             it "returns raw value casted to method key" do
               expect(casted).to eq(ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Entities::Key.new(:foo))

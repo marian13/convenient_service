@@ -33,10 +33,16 @@ module ConvenientService
             end
 
             ##
-            # NOTE: Allows to pass a value to `in` method without processing it.
+            # Allows to pass a value to `in` method without its intermediate processing.
+            # @see https://marian13.github.io/convenient_service_docs/basics/step_to_result_translation_table
+            #
+            # @example `:chat_v2` is passed to `AssertFeatureEnabled` as it is.
+            #   step AssertFeatureEnabled, in: {name: raw(:chat_v2)}
+            #   # that is converted to the following service invocation:
+            #   AssertFeatureEnabled.result(name: :chat_v2)
             #
             def raw(value)
-              Entities::Method::Entities::Values::Raw.wrap(value)
+              Support::RawValue.wrap(value)
             end
 
             def steps

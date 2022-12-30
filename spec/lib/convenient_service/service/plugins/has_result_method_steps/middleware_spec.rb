@@ -53,7 +53,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultMethodSteps::Middle
             service_class.step_class.new(
               ConvenientService::Service::Plugins::HasResultMethodSteps::Services::RunMethodInOrganizer,
               in: [
-                {method_name: ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Entities::Values::Raw.wrap(method_name)},
+                {method_name: ConvenientService::Support::RawValue.wrap(method_name)},
                 {organizer: :itself}
               ],
               container: container,
@@ -85,7 +85,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultMethodSteps::Middle
             service_class.step_class.new(
               ConvenientService::Service::Plugins::HasResultMethodSteps::Services::RunOwnMethodInOrganizer,
               in: [
-                {method_name: ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Entities::Values::Raw.wrap(method_name)},
+                {method_name: ConvenientService::Support::RawValue.wrap(method_name)},
                 {organizer: :itself}
               ],
               container: container,

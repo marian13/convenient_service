@@ -49,7 +49,7 @@ module ConvenientService
                     Entities::Callers::Alias.new(value)
                   when ::Proc
                     Entities::Callers::Proc.new(value)
-                  when Entities::Values::Raw
+                  when Support::RawValue
                     Entities::Callers::Raw.new(value)
                   end
                 end
