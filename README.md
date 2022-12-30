@@ -38,23 +38,23 @@ This library is under heavy development. Public API may be subject to change. Th
 <!-- features:end -->
 <!-- warning:end -->
 
-<!-- documentation:start -->
-## Documentation
+<!-- links:start -->
+## Quick Links
 
 - Check out [Convenient Service Official User Docs](https://marian13.github.io/convenient_service_docs/) for installation, requirements, and usage guides.
 
-- Have a look at [Convenient Service Development Wiki](https://github.com/marian13/convenient_service/wiki) if you consider making a contribution.
+- Read [the API docs](https://marian13.github.io/convenient_service) to get familiar with the newest functionality that are not documented yet.
 
-- [API docs](https://marian13.github.io/convenient_service/).
+- Create [an issue](https://github.com/marian13/convenient_service/issues) if you are going to report a bug.
 
-<!-- documentation:end -->
+- Start [a discussion](https://github.com/marian13/convenient_service/discussions) when you would like to request a new feature.
 
-## Links
+- Open a PR to [convenient_service_docs](https://github.com/marian13/convenient_service_docs) to add/update user docs.
 
-<!-- links:start -->
 - [RubyGems](https://rubygems.org/gems/convenient_service).
 
-- [Official User Docs Source](https://github.com/marian13/convenient_service_docs).
+- Have a look at [Convenient Service Development Wiki](https://github.com/marian13/convenient_service/wiki) for the contribution tutorials.
+
 <!-- links:end -->
 
 ---
