@@ -235,7 +235,7 @@ module ConvenientService
             # @return [String]
             #
             def printable_statuses
-              statuses.join("or ")
+              statuses.join(" or ")
             end
           end
         end

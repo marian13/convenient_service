@@ -5,7 +5,7 @@ module ConvenientService
     module Plugins
       module HasResult
         module Constants
-          DEFAULT_SERVICE_CLASS = ::Class.new
+          DEFAULT_SERVICE_CLASS = ::Class.new { include ::ConvenientService::Service::Plugins::HasResult::Concern }
           DEFAULT_SERVICE_INSTANCE = DEFAULT_SERVICE_CLASS.new
 
           SUCCESS_STATUS = :success

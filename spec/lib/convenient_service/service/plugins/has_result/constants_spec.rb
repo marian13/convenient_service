@@ -7,8 +7,10 @@ require "convenient_service"
 RSpec.describe ConvenientService::Service::Plugins::HasResult::Constants do
   example_group "constants" do
     describe "::DEFAULT_SERVICE_CLASS" do
-      it "returns class" do
-        expect(described_class::DEFAULT_SERVICE_CLASS).to be_instance_of(Class)
+      include ConvenientService::RSpec::Matchers::IncludeModule
+
+      it "returns class that includes `ConvenientService::Service::Plugins::HasResult::Concern`" do
+        expect(described_class::DEFAULT_SERVICE_CLASS).to include_module(ConvenientService::Service::Plugins::HasResult::Concern)
       end
     end
 
