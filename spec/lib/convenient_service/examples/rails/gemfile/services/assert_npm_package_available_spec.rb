@@ -60,8 +60,8 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::AssertNpmP
       end
 
       context "when node is NOT available" do
-        it "returns intermediate error" do
-          expect(result).to be_error.of(ConvenientService::Examples::Rails::Gemfile::Services::AssertNodeAvailable)
+        it "returns intermediate step result" do
+          expect(result).to be_not_success.of(ConvenientService::Examples::Rails::Gemfile::Services::AssertNodeAvailable)
         end
       end
 
@@ -79,8 +79,8 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::AssertNpmP
               .to return_error
           end
 
-          it "returns intermediate error" do
-            expect(result).to be_error.of(ConvenientService::Examples::Rails::Gemfile::Services::RunShell)
+          it "returns intermediate step result" do
+            expect(result).to be_not_success.of(ConvenientService::Examples::Rails::Gemfile::Services::RunShell)
           end
         end
 

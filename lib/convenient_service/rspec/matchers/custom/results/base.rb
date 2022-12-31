@@ -151,7 +151,7 @@ module ConvenientService
             def default_text
               parts = []
 
-              parts << "be `#{printable_statuses}`"
+              parts << "be #{printable_statuses}"
               parts << "of `#{service_class}`" if used_of?
               parts << "with data `#{data}`" if used_data?
               parts << "with message `#{message}`" if used_message?
@@ -235,7 +235,7 @@ module ConvenientService
             # @return [String]
             #
             def printable_statuses
-              statuses.join(" or ")
+              statuses.map { |status| "`#{status}`" }.join(" or ")
             end
           end
         end

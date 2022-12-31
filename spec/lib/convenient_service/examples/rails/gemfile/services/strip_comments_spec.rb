@@ -95,8 +95,8 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::StripComme
           .to return_error
       end
 
-      it "returns intermediate error" do
-        expect(result).to be_error.of(ConvenientService::Examples::Rails::Gemfile::Services::AssertNpmPackageAvailable)
+      it "returns intermediate step result" do
+        expect(result).to be_not_success.of(ConvenientService::Examples::Rails::Gemfile::Services::AssertNpmPackageAvailable)
       end
     end
 
