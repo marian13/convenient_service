@@ -7,6 +7,9 @@ module ConvenientService
         module Entities
           class Method
             module Commands
+              ##
+              # TODO: Abstract factory.
+              #
               class CastMethod < Support::Command
                 attr_reader :other, :options
 

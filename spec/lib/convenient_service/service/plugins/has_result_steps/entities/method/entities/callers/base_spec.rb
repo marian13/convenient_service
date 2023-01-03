@@ -38,6 +38,12 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
       it { is_expected.to have_abstract_method(:define_output_in_container!) }
     end
 
+    describe "#reassignment?" do
+      it "returns `false`" do
+        expect(caller.reassignment?(:foo)).to eq(false)
+      end
+    end
+
     example_group "comparison" do
       describe "#==" do
         context "when `other` has different class" do

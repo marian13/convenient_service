@@ -230,6 +230,26 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::St
       end
     end
 
+    describe "#has_reassignment?" do
+      let(:name) { :bar }
+
+      context "when `step` has NO reassignemnt output" do
+        let(:outputs) { [:bar] }
+
+        it "returns `false`" do
+          expect(step.has_reassignment?(name)).to eq(false)
+        end
+      end
+
+      context "when `step` has reassignemnt output" do
+        let(:outputs) { [ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Entities::Values::Reassignment.new(:bar)] }
+
+        it "returns `true`" do
+          expect(step.has_reassignment?(name)).to eq(true)
+        end
+      end
+    end
+
     describe "#completed?" do
       context "when `step` is NOT completed" do
         it "returns `false`" do
@@ -242,6 +262,27 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::St
           step.result
 
           expect(step.completed?).to eq(true)
+        end
+      end
+    end
+
+    describe "#reassignment" do
+      let(:name) { :bar }
+
+      context "when `step` has NO reassignemnt output" do
+        let(:outputs) { [:bar] }
+
+        it "returns `nil`" do
+          expect(step.reassignment(name)).to be_nil
+        end
+      end
+
+      context "when `step` has reassignemnt output" do
+        let(:reassignemnt) { ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Entities::Values::Reassignment.new(:bar) }
+        let(:outputs) { [reassignemnt] }
+
+        it "returns that reassignemnt" do
+          expect(step.reassignment(name)).to eq(ConvenientService::Service::Plugins::HasResultSteps::Entities::Method.cast(reassignemnt, direction: :output))
         end
       end
     end

@@ -24,8 +24,15 @@ module ConvenientService
         # @return [ConvenientService::Support::Version::NullVersion]
         #
         def null_version
-          @null_version ||= NullVersion.new
+          @null_version ||= Support::Version::NullVersion.new
         end
+      end
+
+      ##
+      # @return [Boolean]
+      #
+      def null_version?
+        false
       end
 
       ##
@@ -52,6 +59,9 @@ module ConvenientService
 
       private
 
+      ##
+      # @return [String]
+      #
       attr_reader :value
 
       ##

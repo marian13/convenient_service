@@ -38,6 +38,10 @@ module ConvenientService
                   Utils::Bool.to_bool(organizer)
                 end
 
+                def reassignment?(name)
+                  caller.reassignment?(name)
+                end
+
                 def validate_as_input_for_container!(container)
                   direction.validate_as_input_for_container!(container, method: self)
 

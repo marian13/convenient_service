@@ -22,6 +22,12 @@ RSpec.describe ConvenientService::Support::Version::NullVersion do
       end
     end
 
+    describe "#null_version?" do
+      it "returns `true`" do
+        expect(version.null_version?).to eq(true)
+      end
+    end
+
     describe "#gem_version" do
       it "returns `nil`" do
         expect(version.gem_version).to eq(nil)

@@ -6,6 +6,10 @@
 module ConvenientService
   module Utils
     module Object
+      ##
+      # Can be used instead of `return @ivar if defined? @ivar`.
+      # @see https://www.justinweiss.com/articles/4-simple-memoization-patterns-in-ruby-and-one-gem/
+      #
       class InstanceVariableFetch < Support::Command
         ##
         # @!attribute [r] object

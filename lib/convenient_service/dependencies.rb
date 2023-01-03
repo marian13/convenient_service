@@ -113,9 +113,12 @@ module ConvenientService
       # @api private
       #
       def require_standard_examples
+        require "json"
         require "progressbar"
+        require "webrick"
 
         require_relative "examples/standard/cowsay"
+        require_relative "examples/standard/request_params"
         require_relative "examples/standard/gemfile"
       end
 
@@ -126,7 +129,9 @@ module ConvenientService
       # @api private
       #
       def require_rails_examples
+        require "json"
         require "progressbar"
+        require "webrick"
 
         require_relative "examples/rails/gemfile"
       end
@@ -138,7 +143,9 @@ module ConvenientService
       # @api private
       #
       def require_dry_examples
+        require "json"
         require "progressbar"
+        require "webrick"
 
         require_relative "examples/dry/gemfile"
       end

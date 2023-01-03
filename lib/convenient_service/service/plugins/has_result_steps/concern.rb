@@ -8,6 +8,9 @@ module ConvenientService
           include Support::Concern
 
           instance_methods do
+            ##
+            # @return [Array]
+            #
             def steps
               internals.cache.fetch(:steps) do
                 self.class
@@ -27,6 +30,11 @@ module ConvenientService
           end
 
           class_methods do
+            ##
+            # @params args [Array]
+            # @params kwargs [Hash]
+            # @return [ConvenientService::Service::Plugins::HasResultSteps::Entities::Step]
+            #
             def step(*args, **kwargs)
               step_class.new(*args, **kwargs.merge(container: self))
                 .tap { |step_instance| steps << step_instance }
@@ -41,14 +49,31 @@ module ConvenientService
             #   # that is converted to the following service invocation:
             #   AssertFeatureEnabled.result(name: :chat_v2)
             #
+            # @param value [Object] Can be any type.
+            # @return [ConvenientService::Support::RawValue]
+            #
             def raw(value)
               Support::RawValue.wrap(value)
             end
 
+            ##
+            # @param method_name [String, Symbol]
+            # @return [ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Entities::Values::Reassignment]
+            #
+            def reassign(method_name)
+              Entities::Method::Entities::Values::Reassignment.new(method_name)
+            end
+
+            ##
+            # @return [ConvenientService::Service::Plugins::HasResultSteps::Entities::StepCollection]
+            #
             def steps
               @steps ||= Entities::StepCollection.new
             end
 
+            ##
+            # @return [ConvenientService::Service::Plugins::HasResultSteps::Entities::Step]
+            #
             def step_class
               @step_class ||= Commands::CreateStepClass.call(service_class: self)
             end

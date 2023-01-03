@@ -94,7 +94,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
         end
 
         context "when `other` has same attributes" do
-          let(:other) { caller_class.new(prefix: prefix) }
+          let(:other) { caller_class.new(prefix: ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Caller::INSTANCE_PREFIX) }
 
           it "returns true" do
             expect(caller == other).to eq(true)
