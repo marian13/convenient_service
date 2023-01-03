@@ -1,0 +1,17 @@
+name: convenient_service
+root: .
+
+on_project_start:
+  - task editor:open
+  - task docker:start
+  - task github:open
+
+windows:
+  - main:
+      layout: even-vertical
+      root: .
+      panes:
+        - task docker:bash:ruby_2.7
+        - task docker:bash:ruby_3.0
+        - task docker:bash:ruby_3.1
+        - git status

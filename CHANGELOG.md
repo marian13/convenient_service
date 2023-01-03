@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.4.0](https://github.com/marian13/convenient_service/compare/v0.3.1...v0.4.0) (2023-01-03)
+
+
+### Features
+
+* **has_jsend_status_and_attributes:** introduce data.has_attribute? ([04e4583](https://github.com/marian13/convenient_service/commit/04e45830fcb4aabc7d6473394e7d4b99e31a11d6))
+* **has_result_steps:** add more contextual error message when step result data has no attribute ([5844d94](https://github.com/marian13/convenient_service/commit/5844d942a9bca4b9d4f65403c6c432e9e2b810ad))
+* **results_matchers:** introduce be_not_success, be_not_failure, be_not_error ([9bb4454](https://github.com/marian13/convenient_service/commit/9bb4454fa6025bba8200a9280c25ec20cafb4c03))
+
+
+### Bug Fixes
+
+* **has_result_steps:** print step actual service, not internal wrapper ([c0761be](https://github.com/marian13/convenient_service/commit/c0761be89b8a6dacb318460ed5c55b15fdd2de0b))
+* **rspec:** return nil for current example in partially loaded rspec envs ([ea10cc0](https://github.com/marian13/convenient_service/commit/ea10cc0e06dd22022f816f6760af926fb119bdf5))
+
 ## [0.3.1](https://github.com/marian13/convenient_service/compare/v0.3.0...v0.3.1) (2022-12-19)
 
 

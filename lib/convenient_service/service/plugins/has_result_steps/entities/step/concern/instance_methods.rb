@@ -78,6 +78,16 @@ module ConvenientService
                   @result ||= calculate_result
                 end
 
+                ##
+                # @return [String]
+                #
+                # @internal
+                #   TODO: printable service for methods steps.
+                #
+                def printable_service
+                  service.klass.to_s
+                end
+
                 def validate!
                   inputs.each { |input| input.validate_as_input_for_container!(container) }
 

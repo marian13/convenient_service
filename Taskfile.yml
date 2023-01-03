@@ -98,6 +98,21 @@ tasks:
         msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
 
   ##
+  # NOTE: Dev only command.
+  # NOTE: macOS specific command.
+  #
+  docker:start:
+    cmds:
+      - open -a Docker
+
+  ##
+  # NOTE: Dev only command.
+  #
+  editor:open:
+    cmds:
+      - code .
+
+  ##
   # NOTE: `sdoc` (wrapper for `rdoc`) is replaced by `yard`, since you have a feeling like every time is a first time with `rdoc`.
   # - https://kapeli.com/cheat_sheets/Yard.docset/Contents/Resources/Documents/index
   # - https://rubydoc.info/gems/yard/file/README.md
@@ -148,6 +163,14 @@ tasks:
   git:staged:specs:
     cmds:
       - git diff --cached --name-only --diff-filter=d "spec/**"
+
+  ##
+  # NOTE: Dev only command.
+  # NOTE: macOS specific command.
+  #
+  github:open:
+    cmds:
+      - open -na "Google Chrome" --args --new-window --incognito "https://github.com/marian13/convenient_service"
 
   lint:
     cmds:
@@ -306,3 +329,10 @@ tasks:
   rubocop:format:
     cmds:
       - bundle exec rubocop --config .rubocop.yml -A {{.CLI_ARGS}}
+
+  ##
+  # NOTE: Dev only command.
+  #
+  tmuxinator:start:
+    cmds:
+      - tmuxinator start convenient_service --project-config=.dev/.tmuxinator.yml

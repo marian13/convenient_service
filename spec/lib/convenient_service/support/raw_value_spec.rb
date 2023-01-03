@@ -5,12 +5,12 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
-RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Entities::Values::Raw do
+RSpec.describe ConvenientService::Support::RawValue do
   let(:object) { 42 }
 
   example_group "class methods" do
     describe ".wrap" do
-      it "returns ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Entities::Values::Raw instance" do
+      it "returns `ConvenientService::Support::RawValue` instance" do
         expect(described_class.wrap(object)).to be_instance_of(described_class)
       end
     end
@@ -28,7 +28,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
         let(:object) { :foo }
         let(:raw_value) { described_class.wrap(object) }
 
-        context "when results have different classes" do
+        context "when `other` has different class" do
           let(:other) { "string" }
 
           it "returns `nil`" do
@@ -36,7 +36,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
           end
         end
 
-        context "when other has different object" do
+        context "when `other` has different object" do
           let(:other) { described_class.wrap(:bar) }
 
           it "returns `false`" do
@@ -44,7 +44,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
           end
         end
 
-        context "when other has same object" do
+        context "when `other` has same object" do
           let(:other) { described_class.wrap(:foo) }
 
           it "returns `true`" do

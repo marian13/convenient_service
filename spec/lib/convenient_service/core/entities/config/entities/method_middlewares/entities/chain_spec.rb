@@ -19,7 +19,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
   let(:kwargs) { {foo: :bar} }
   let(:block) { proc { :foo } }
 
-  example_group "instance_methods" do
+  example_group "instance methods" do
     include ConvenientService::RSpec::Matchers::DelegateTo
 
     describe "#next" do

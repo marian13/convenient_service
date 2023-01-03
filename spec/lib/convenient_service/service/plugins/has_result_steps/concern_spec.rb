@@ -66,7 +66,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Concern do
     end
   end
 
-  example_group "class_methods" do
+  example_group "class methods" do
     describe ".step" do
       it "returns `step`" do
         expect(service_class.step(*args, **kwargs)).to eq(step)
@@ -82,7 +82,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Concern do
 
       specify do
         expect { service_class.raw(value) }
-          .to delegate_to(ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Entities::Values::Raw, :wrap)
+          .to delegate_to(ConvenientService::Support::RawValue, :wrap)
           .with_arguments(value)
           .and_return_its_value
       end

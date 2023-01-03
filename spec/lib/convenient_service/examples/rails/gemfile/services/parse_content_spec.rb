@@ -188,8 +188,8 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::ParseConte
           .to return_error
       end
 
-      it "returns intermediate error" do
-        expect(result).to be_error.of(ConvenientService::Examples::Rails::Gemfile::Services::AssertValidRubySyntax)
+      it "returns intermediate step result" do
+        expect(result).to be_not_success.of(ConvenientService::Examples::Rails::Gemfile::Services::AssertValidRubySyntax)
       end
     end
 

@@ -6,7 +6,7 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Commands::CastMethodCaller do
-  example_group "class methhods" do
+  example_group "class methods" do
     describe ".call" do
       let(:options) { double }
       let(:casted) { described_class.call(other: other, options: options) }
@@ -79,7 +79,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
           end
 
           context "when value by that key is raw value" do
-            let(:raw_value) { ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Entities::Values::Raw.wrap(:bar) }
+            let(:raw_value) { ConvenientService::Support::RawValue.wrap(:bar) }
             let(:other) { {foo: raw_value} }
 
             it "returns raw value casted to method caller" do

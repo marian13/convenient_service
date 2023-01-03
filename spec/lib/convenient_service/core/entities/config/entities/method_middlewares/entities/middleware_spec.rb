@@ -34,7 +34,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
     it { is_expected.to have_abstract_method(:next) }
   end
 
-  example_group "instance_methods" do
+  example_group "instance methods" do
     include ConvenientService::RSpec::Matchers::DelegateTo
     include ConvenientService::RSpec::Matchers::CacheItsValue
 

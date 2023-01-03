@@ -54,6 +54,10 @@ module ConvenientService
                       !error?
                     end
 
+                    def in?(statuses)
+                      statuses.any? { |status| self == status }
+                    end
+
                     def to_s
                       @to_s ||= value.to_s
                     end

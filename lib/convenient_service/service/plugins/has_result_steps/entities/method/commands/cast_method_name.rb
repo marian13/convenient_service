@@ -58,7 +58,7 @@ module ConvenientService
                     Entities::Name.new(value)
                   when ::Proc
                     Entities::Name.new(key)
-                  when Entities::Values::Raw
+                  when Support::RawValue
                     Entities::Name.new(key)
                   when Entities::Values::Reassignment
                     Entities::Name.new(value.to_sym)

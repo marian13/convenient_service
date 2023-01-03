@@ -88,7 +88,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
   #   it { is_expected.to delegate_method(:ancestors).to(:class) }
   # end
 
-  example_group "instance_methods" do
+  example_group "instance methods" do
     describe "#super_method_defined?" do
       context "when unbound super method can NOT be resolved" do
         let(:service_class) do

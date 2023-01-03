@@ -24,7 +24,7 @@ RSpec.describe ConvenientService::Support::Gems::RSpec do
     end
 
     describe "current_example" do
-      it "returns current_example" do |example|
+      it "returns `current_example`" do |example|
         expect(described_class.current_example).to eq(example)
       end
 
@@ -33,7 +33,17 @@ RSpec.describe ConvenientService::Support::Gems::RSpec do
           allow(described_class).to receive(:loaded?).and_return(false)
         end
 
-        it "returns nil" do
+        it "returns `nil`" do
+          expect(described_class.current_example).to be_nil
+        end
+      end
+
+      context "when `RSpec` does NOT respond to `current_example`" do
+        before do
+          allow(RSpec).to receive(:respond_to?).with(:current_example).and_return(false)
+        end
+
+        it "returns `nil`" do
           expect(described_class.current_example).to be_nil
         end
       end

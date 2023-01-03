@@ -35,7 +35,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Entities::Callb
   #   it { is_expected.to delegate_method(:<<).to(:callbacks) }
   # end
 
-  example_group "instance_methods" do
+  example_group "instance methods" do
     subject(:callback_collection) { described_class.new }
 
     let(:callback) { ConvenientService::Common::Plugins::HasCallbacks::Entities::Callback.new(types: types, block: proc { :foo }) }

@@ -28,6 +28,36 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
   end
 
   example_group "instance methods" do
+    describe "#has_attribute?" do
+      context "when `data` has NO attribute by key" do
+        let(:value) { {} }
+
+        it "returns `false`" do
+          expect(data.has_attribute?(:foo)).to eq(false)
+        end
+
+        context "when key is string" do
+          it "converts that key to symbol" do
+            expect(data.has_attribute?("foo")).to eq(false)
+          end
+        end
+      end
+
+      context "when `data` has attribute by key" do
+        let(:value) { {foo: :bar} }
+
+        it "returns `true`" do
+          expect(data.has_attribute?(:foo)).to eq(true)
+        end
+
+        context "when key is string" do
+          it "converts that key to symbol" do
+            expect(data.has_attribute?("foo")).to eq(true)
+          end
+        end
+      end
+    end
+
     describe "#[]" do
       it "returns `data` attribute by string key" do
         expect(data["foo"]).to eq(:bar)

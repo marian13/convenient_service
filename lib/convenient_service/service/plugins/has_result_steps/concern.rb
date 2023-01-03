@@ -41,14 +41,19 @@ module ConvenientService
             end
 
             ##
-            # @param value [Object] Can be any type.
-            # @return [ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Entities::Values::Raw]
+            # Allows to pass a value to `in` method without its intermediate processing.
+            # @see https://marian13.github.io/convenient_service_docs/basics/step_to_result_translation_table
             #
-            # @internal
-            #   NOTE: Allows to pass a value to `in` method without processing it.
+            # @example `:chat_v2` is passed to `AssertFeatureEnabled` as it is.
+            #   step AssertFeatureEnabled, in: {name: raw(:chat_v2)}
+            #   # that is converted to the following service invocation:
+            #   AssertFeatureEnabled.result(name: :chat_v2)
+            #
+            # @param value [Object] Can be any type.
+            # @return [ConvenientService::Support::RawValue]
             #
             def raw(value)
-              Entities::Method::Entities::Values::Raw.wrap(value)
+              Support::RawValue.wrap(value)
             end
 
             ##
