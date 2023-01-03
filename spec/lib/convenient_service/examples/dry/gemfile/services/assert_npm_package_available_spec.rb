@@ -42,8 +42,8 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::AssertNpmPac
       end
 
       context "when node is NOT available" do
-        it "returns intermediate error" do
-          expect(result).to be_error.of(ConvenientService::Examples::Dry::Gemfile::Services::AssertNodeAvailable)
+        it "returns intermediate step result" do
+          expect(result).to be_not_success.of(ConvenientService::Examples::Dry::Gemfile::Services::AssertNodeAvailable)
         end
       end
 
@@ -61,8 +61,8 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::AssertNpmPac
               .to return_error
           end
 
-          it "returns intermediate error" do
-            expect(result).to be_error.of(ConvenientService::Examples::Dry::Gemfile::Services::RunShell)
+          it "returns intermediate step result" do
+            expect(result).to be_not_success.of(ConvenientService::Examples::Dry::Gemfile::Services::RunShell)
           end
         end
 

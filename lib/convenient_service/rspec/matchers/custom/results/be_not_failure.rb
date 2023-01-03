@@ -5,9 +5,12 @@ module ConvenientService
     module Matchers
       module Custom
         module Results
-          class BeFailure < Results::Base
+          class BeNotFailure < Results::Base
             def statuses
-              [Service::Plugins::HasResult::Constants::FAILURE_STATUS]
+              [
+                Service::Plugins::HasResult::Constants::ERROR_STATUS,
+                Service::Plugins::HasResult::Constants::SUCCESS_STATUS
+              ]
             end
           end
         end
