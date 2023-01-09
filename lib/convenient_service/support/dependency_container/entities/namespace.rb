@@ -12,7 +12,7 @@ module ConvenientService
           attr_reader :name
 
           ##
-          # @param full_name [String, Symbol]
+          # @param name [String, Symbol]
           # @return [void]
           #
           def initialize(name:)

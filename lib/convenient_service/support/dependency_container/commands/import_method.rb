@@ -51,7 +51,6 @@ module ConvenientService
           end
 
           ##
-          # @param mod [ConvenientService::Support::DependencyContainer::Method]
           # @return [ConvenientService::Support::DependencyContainer::Method]
           #
           def call
