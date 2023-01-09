@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
 require_relative "module/class_method_defined"
+require_relative "module/fetch_own_const"
 require_relative "module/get_own_instance_method"
 require_relative "module/get_own_const"
 require_relative "module/has_own_instance_method"
+require_relative "module/include_module"
 require_relative "module/instance_method_defined"
 
 module ConvenientService
@@ -19,6 +21,10 @@ module ConvenientService
           ClassMethodDefined.call(...)
         end
 
+        def fetch_own_const(...)
+          FetchOwnConst.call(...)
+        end
+
         def get_own_instance_method(...)
           GetOwnInstanceMethod.call(...)
         end
@@ -29,6 +35,10 @@ module ConvenientService
 
         def has_own_instance_method?(...)
           HasOwnInstanceMethod.call(...)
+        end
+
+        def include_module?(...)
+          IncludeModule.call(...)
         end
 
         def instance_method_defined?(...)
