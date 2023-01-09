@@ -42,6 +42,18 @@ RSpec.describe ConvenientService::Utils::Module do
     end
   end
 
+  describe ".include_module?" do
+    let(:mod) { Class.new }
+    let(:other_mod) { Module.new }
+
+    specify do
+      expect { described_class.include_module?(mod, other_mod) }
+        .to delegate_to(ConvenientService::Utils::Module::IncludeModule, :call)
+        .with_arguments(mod, other_mod)
+        .and_return_its_value
+    end
+  end
+
   describe ".has_own_instance_method?" do
     let(:mod) { Class.new }
     let(:method_name) { :foo }
