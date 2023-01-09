@@ -5,6 +5,19 @@ require "convenient_service"
 RSpec.describe ConvenientService::Utils::Module do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
+  describe ".fetch_own_const" do
+    let(:mod) { Class.new }
+    let(:const_name) { :NotExistingConst }
+    let(:fallback_block) { proc { 42 } }
+
+    specify do
+      expect { described_class.fetch_own_const(mod, const_name, &fallback_block) }
+        .to delegate_to(ConvenientService::Utils::Module::FetchOwnConst, :call)
+        .with_arguments(mod, const_name, &fallback_block)
+        .and_return_its_value
+    end
+  end
+
   describe ".get_own_const" do
     let(:mod) { Class.new }
     let(:const_name) { :NotExistingConst }
