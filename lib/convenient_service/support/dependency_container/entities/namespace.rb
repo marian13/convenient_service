@@ -27,6 +27,13 @@ module ConvenientService
           end
 
           ##
+          # @return [Array<ConvenientService::Support::DependencyContainer::Entities::Namespace>]
+          #
+          def namespaces
+            @namespaces ||= []
+          end
+
+          ##
           # @param name [String, Symbol]
           # @param body [Proc]
           # @return [Symbol]
@@ -50,7 +57,7 @@ module ConvenientService
           private
 
           ##
-          # @return [ConvenientService::Support::DependencyContainer::Entities::Method]
+          # @return [ConvenientService::Support::DependencyContainer::Entities::Namespace]
           #
           def namespace
             self

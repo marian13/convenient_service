@@ -43,7 +43,7 @@ module ConvenientService
           end
 
           ##
-          # @return [Array<String>]
+          # @return [Array<ConvenientService::Support::DependencyContainer::Entities::Namespace>]
           #
           def namespaces
             @namespaces ||= full_name_parts.slice(0..-2).map { |part| Entities::Namespace.new(name: part) }
@@ -54,20 +54,35 @@ module ConvenientService
           # @return [ConvenientService::Support::DependencyContainer::Entities::Method]
           #
           def define_in_module!(mod)
-            namespaces_and_method.reduce(mod) do |namespace, method|
-              namespace.define_method(method.name) { |*args, **kwargs, &block| method.body.call(*args, **kwargs, &block) }
+            ##
+            # NOTE: `innermost_namespace` is just `mod`, when `namespaces` are empty.
+            #
+            innermost_namespace =
+              namespaces.reduce(mod) do |namespace, method|
+                already_defined_namespace = namespace.namespaces.find { |namespace| namespace == method }
 
-              method
-            end
+                ##
+                # NOTE:
+                #   - Reuses already defined namespace from previous "imports".
+                #   - In contrast, same methods are always redefined.
+                #
+                next already_defined_namespace if already_defined_namespace
+
+                namespace.namespaces << method
+
+                namespace.define_method(method.name) { method.body.call }
+
+                method
+              end
+
+            ##
+            # NOTE:
+            #   - Same methods are redefined.
+            #   - In contrast, same namespaces are always reused.
+            #
+            innermost_namespace.define_method(method.name, &method.body)
 
             method
-          end
-
-          ##
-          # @return [Array<ConvenientService::Support::DependencyContainer::Entities::Namespace, ConvenientService::Support::DependencyContainer::Entities::Method>]
-          #
-          def namespaces_and_method
-            @namespaces_and_method ||= namespaces + [method]
           end
 
           ##
