@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require_relative "support/concern"
 require_relative "support/not_passed"
+require_relative "support/concern"
 
 require_relative "support/abstract_method"
 require_relative "support/cache"
