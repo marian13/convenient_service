@@ -116,10 +116,10 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Import do
       context "when `scope` is NOT passed" do
         let(:kwargs) { ConvenientService::Utils::Hash.except(default_kwargs, [:scope]) }
 
-        it "defaults to `:instance`" do
+        it "defaults to `ConvenientService::Support::DependencyContainer::Constants::DEFAULT_SCOPE`" do
           expect { import }
             .to delegate_to(ConvenientService::Support::DependencyContainer::Commands::ImportMethod, :call)
-            .with_arguments(importing_module: user, exporting_module: container, method: method, scope: :instance, prepend: prepend)
+            .with_arguments(importing_module: user, exporting_module: container, method: method, scope: ConvenientService::Support::DependencyContainer::Constants::DEFAULT_SCOPE, prepend: prepend)
             .and_return_its_value
         end
       end
@@ -127,10 +127,10 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Import do
       context "when `prepend` is NOT passed" do
         let(:kwargs) { ConvenientService::Utils::Hash.except(default_kwargs, [:prepend]) }
 
-        it "defaults to `false`" do
+        it "defaults to `ConvenientService::Support::DependencyContainer::Constants::DEFAULT_PREPEND`" do
           expect { import }
             .to delegate_to(ConvenientService::Support::DependencyContainer::Commands::ImportMethod, :call)
-            .with_arguments(importing_module: user, exporting_module: container, method: method, scope: scope, prepend: false)
+            .with_arguments(importing_module: user, exporting_module: container, method: method, scope: scope, prepend: ConvenientService::Support::DependencyContainer::Constants::DEFAULT_PREPEND)
             .and_return_its_value
         end
       end

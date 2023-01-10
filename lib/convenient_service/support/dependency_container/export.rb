@@ -14,7 +14,7 @@ module ConvenientService
           # @return [ConvenientService::Support::DependencyContainer::Entities::Method]
           #
           def export(full_name, scope: Constants::DEFAULT_SCOPE, &body)
-            exported_methods << Entities::Method.new(full_name: full_name, scope: scope, body: body)
+            Entities::Method.new(full_name: full_name, scope: scope, body: body).tap { |method| exported_methods << method }
           end
 
           ##

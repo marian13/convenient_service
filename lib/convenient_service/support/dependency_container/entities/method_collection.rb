@@ -29,8 +29,20 @@ module ConvenientService
             methods.find(&condition)
           end
 
+          ##
+          # @param method [ConvenientService::Support::DependencyContainer::Entities::Method]
+          # @return [ConvenientService::Support::DependencyContainer::Entities::MethodCollection]
+          #
           def <<(method)
             methods << method
+          end
+
+          ##
+          # @param method [ConvenientService::Support::DependencyContainer::Entities::Method]
+          # @return [Boolean]
+          #
+          def include?(method)
+            methods.include?(method)
           end
 
           ##
@@ -40,7 +52,7 @@ module ConvenientService
           def ==(other)
             return unless other.instance_of?(self.class)
 
-            return false if methods != methods.name
+            return false if methods != other.methods
 
             true
           end
