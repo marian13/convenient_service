@@ -14,13 +14,15 @@ module ConvenientService
           end
 
           ##
+          # @param name [String, Symbol]
           # @param full_name [String, Symbol]
           # @param scope [:instance, :class]
           # @return [ConvenientService::Support::DependencyContainer::Entities::Method, nil]
           #
-          def find_by(full_name: Support::NOT_PASSED, scope: Support::NOT_PASSED)
+          def find_by(name: Support::NOT_PASSED, full_name: Support::NOT_PASSED, scope: Support::NOT_PASSED)
             rules = []
 
+            rules << ->(method) { method.name.to_s == name.to_s } if name != Support::NOT_PASSED
             rules << ->(method) { method.full_name.to_s == full_name.to_s } if full_name != Support::NOT_PASSED
             rules << ->(method) { method.scope == scope } if scope != Support::NOT_PASSED
 
@@ -35,6 +37,15 @@ module ConvenientService
           #
           def <<(method)
             methods << method
+
+            self
+          end
+
+          ##
+          # @return [Boolean]
+          #
+          def empty?
+            methods.empty?
           end
 
           ##
@@ -43,6 +54,22 @@ module ConvenientService
           #
           def include?(method)
             methods.include?(method)
+          end
+
+          ##
+          # @return [ConvenientService::Support::DependencyContainer::Entities::MethodCollection]
+          #
+          def clear
+            methods.clear
+
+            self
+          end
+
+          ##
+          # @return [Array]
+          #
+          def to_a
+            methods.to_a
           end
 
           ##
