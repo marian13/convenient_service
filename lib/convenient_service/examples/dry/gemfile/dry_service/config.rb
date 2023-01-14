@@ -12,7 +12,9 @@ module ConvenientService
       module Gemfile
         class DryService
           module Config
-            def self.included(service_class)
+            include Support::Concern
+
+            included do |service_class|
               service_class.class_exec do
                 include Configs::Standard
 
