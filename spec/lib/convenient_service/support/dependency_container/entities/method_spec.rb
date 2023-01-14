@@ -23,6 +23,34 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Method
   end
 
   example_group "instance methods" do
+    describe "#name" do
+      context "when `full_name` has NO namespaces" do
+        let(:full_name) { :foo }
+
+        it "returns `full_name`" do
+          expect(method.name).to eq(method.full_name)
+        end
+      end
+
+      context "when `full_name` has namespaces" do
+        context "when `full_name` has namespaces separated by dot" do
+          let(:full_name) { :"foo.bar.baz.qux" }
+
+          it "returns last part of `full_name` split by dot" do
+            expect(method.name).to eq(:qux)
+          end
+        end
+
+        context "when `full_name` has namespaces separated by scope resolution operator" do
+          let(:full_name) { :"foo::bar::baz::qux" }
+
+          it "returns last part of `full_name` split by scope resolution operator" do
+            expect(method.name).to eq(:qux)
+          end
+        end
+      end
+    end
+
     example_group "comparison" do
       describe "#==" do
         let(:method) { described_class.new(full_name: full_name, scope: scope, body: body) }

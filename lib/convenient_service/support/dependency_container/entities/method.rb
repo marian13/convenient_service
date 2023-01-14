@@ -112,7 +112,7 @@ module ConvenientService
           # @return [Array<String>]
           #
           def full_name_parts
-            @full_name_parts ||= full_name.to_s.split(".")
+            @full_name_parts ||= Utils::String.split(full_name, ".", "::").map(&:to_sym)
           end
         end
       end
