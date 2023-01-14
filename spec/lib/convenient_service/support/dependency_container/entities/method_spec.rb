@@ -33,11 +33,13 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Method
       end
 
       context "when `full_name` has namespaces" do
+        let(:name) { :qux }
+
         context "when `full_name` has namespaces separated by dot" do
           let(:full_name) { :"foo.bar.baz.qux" }
 
           it "returns last part of `full_name` split by dot" do
-            expect(method.name).to eq(:qux)
+            expect(method.name).to eq(name)
           end
         end
 
@@ -45,7 +47,43 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Method
           let(:full_name) { :"foo::bar::baz::qux" }
 
           it "returns last part of `full_name` split by scope resolution operator" do
-            expect(method.name).to eq(:qux)
+            expect(method.name).to eq(name)
+          end
+        end
+      end
+    end
+
+    describe "#namespace" do
+      context "when `full_name` has NO namespaces" do
+        let(:full_name) { :foo }
+
+        it "returns empty array" do
+          expect(method.namespaces).to eq([])
+        end
+      end
+
+      context "when `full_name` has namespaces" do
+        let(:namespaces) do
+          [
+            ConvenientService::Support::DependencyContainer::Entities::Namespace.new(name: :foo),
+            ConvenientService::Support::DependencyContainer::Entities::Namespace.new(name: :bar),
+            ConvenientService::Support::DependencyContainer::Entities::Namespace.new(name: :baz)
+          ]
+        end
+
+        context "when `full_name` has namespaces separated by dot" do
+          let(:full_name) { :"foo.bar.baz.qux" }
+
+          it "returns parts of `full_name` split by dot except last part" do
+            expect(method.namespaces).to eq(namespaces)
+          end
+        end
+
+        context "when `full_name` has namespaces separated by scope resolution operator" do
+          let(:full_name) { :"foo::bar::baz::qux" }
+
+          it "returns parts of `full_name` split by scope resolution operator except last part" do
+            expect(method.namespaces).to eq(namespaces)
           end
         end
       end
