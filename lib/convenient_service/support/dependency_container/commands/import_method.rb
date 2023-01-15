@@ -67,18 +67,7 @@ module ConvenientService
           # @return [Module]
           #
           def imported_scoped_methods
-            @imported_scoped_methods ||= Utils::Module.fetch_own_const(importing_module, :"Imported#{imported_prefix}#{scoped_prefix}Methods") do
-              ::Module.new do
-                class << self
-                  ##
-                  # @return namespaces [Array<ConvenientService::Support::DependencyContainer::Entities::Namespace>]
-                  #
-                  def namespaces
-                    @namespaces ||= []
-                  end
-                end
-              end
-            end
+            @imported_scoped_methods ||= Utils::Module.fetch_own_const(importing_module, :"Imported#{imported_prefix}#{scoped_prefix}Methods") { Commands::CreateMethodsModule.call }
           end
 
           ##

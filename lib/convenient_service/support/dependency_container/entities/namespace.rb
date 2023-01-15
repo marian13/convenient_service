@@ -27,10 +27,10 @@ module ConvenientService
           end
 
           ##
-          # @return [Array<ConvenientService::Support::DependencyContainer::Entities::Namespace>]
+          # @return [ConvenientService::Support::DependencyContainer::Entities::NamespaceCollection]
           #
           def namespaces
-            @namespaces ||= []
+            @namespaces ||= Entities::NamespaceCollection.new
           end
 
           ##

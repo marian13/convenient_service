@@ -46,8 +46,8 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Namesp
     end
 
     describe "#namespaces" do
-      it "returns empty array" do
-        expect(namespace.namespaces).to eq([])
+      it "returns empty namespace collection" do
+        expect(namespace.namespaces).to eq(ConvenientService::Support::DependencyContainer::Entities::NamespaceCollection.new)
       end
     end
 

@@ -9,8 +9,12 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Method
   let(:method) { described_class.new(full_name: full_name, scope: scope, body: body) }
 
   let(:full_name) { :"foo.bar.baz.qux" }
-  let(:scope) { :class }
-  let(:body) { proc { "foo.bar.baz.qux" } }
+  let(:scope) { :instance }
+  let(:body) { proc { :"foo.bar.baz.qux" } }
+
+  let(:args) { [:foo] }
+  let(:kwargs) { {foo: :bar} }
+  let(:block) { proc { :foo } }
 
   example_group "attributes" do
     include ConvenientService::RSpec::Matchers::HaveAttrReader
@@ -89,6 +93,79 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Method
       end
     end
 
+    describe "#define_in_module!" do
+      let(:body) { proc { |*args, **kwargs, &block| [args, kwargs, block] } }
+      let(:method_return_value) { body.call(*args, **kwargs, &block) }
+
+      let(:user_class) do
+        Class.new.tap do |klass|
+          klass.class_exec(mod) do |mod|
+            include mod
+          end
+        end
+      end
+
+      let(:user_instance) { user_class.new }
+
+      context "when `full_name` has NO namespaces" do
+        let(:full_name) { :foo }
+
+        let(:mod) { ConvenientService::Support::DependencyContainer::Commands::CreateMethodsModule.call }
+
+        it "defines `method` in `mod`" do
+          method.define_in_module!(mod)
+
+          expect(user_instance.foo(*args, **kwargs, &block)).to eq(method_return_value)
+        end
+
+        it "returns `method`" do
+          expect(method.define_in_module!(mod)).to eq(method)
+        end
+      end
+
+      context "when `full_name` has one namespace" do
+        let(:full_name) { :"foo.bar" }
+
+        let(:mod) { ConvenientService::Support::DependencyContainer::Commands::CreateMethodsModule.call }
+
+        it "defines `namespace` in `mod`" do
+          method.define_in_module!(mod)
+
+          expect(user_instance.foo).to eq(mod.namespaces.find_by(name: :foo))
+        end
+
+        it "defines new `namespace` in `mod`" do
+          method.define_in_module!(mod)
+
+          expect(user_instance.foo.singleton_methods(false)).to eq([:bar])
+        end
+
+        it "defines `method` in `namespace`" do
+          method.define_in_module!(mod)
+
+          expect(user_instance.foo.bar(*args, **kwargs, &block)).to eq(method_return_value)
+        end
+
+        it "returns `method`" do
+          expect(method.define_in_module!(mod)).to eq(method)
+        end
+
+        context "when `mod` already has namespace" do
+          let(:second_method) { described_class.new(full_name: :"foo.baz", scope: scope, body: body) }
+
+          before do
+            second_method.define_in_module!(mod)
+          end
+
+          it "reuses that namespace" do
+            method.define_in_module!(mod)
+
+            expect(user_instance.foo.singleton_methods(false)).to contain_exactly(:bar, :baz)
+          end
+        end
+      end
+    end
+
     example_group "comparison" do
       describe "#==" do
         let(:method) { described_class.new(full_name: full_name, scope: scope, body: body) }
@@ -110,7 +187,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Method
         end
 
         context "when `other` has different `scope`" do
-          let(:other) { described_class.new(full_name: full_name, scope: :instance, body: body) }
+          let(:other) { described_class.new(full_name: full_name, scope: :class, body: body) }
 
           it "returns `false`" do
             expect(method == other).to eq(false)
@@ -118,7 +195,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Method
         end
 
         context "when `other` has different `body`" do
-          let(:other) { described_class.new(full_name: full_name, scope: :instance, body: proc { :bar }) }
+          let(:other) { described_class.new(full_name: full_name, scope: scope, body: proc { :bar }) }
 
           it "returns `false`" do
             expect(method == other).to eq(false)

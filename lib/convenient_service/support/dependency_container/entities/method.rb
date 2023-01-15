@@ -58,21 +58,21 @@ module ConvenientService
             # NOTE: `innermost_namespace` is just `mod`, when `namespaces` are empty.
             #
             innermost_namespace =
-              namespaces.reduce(mod) do |namespace, method|
-                already_defined_namespace = namespace.namespaces.find { |namespace| namespace == method }
+              namespaces.reduce(mod) do |namespace, sub_namespace|
+                already_defined_sub_namespace = namespace.namespaces.find_by(name: sub_namespace.name)
 
                 ##
                 # NOTE:
                 #   - Reuses already defined namespace from previous "imports".
                 #   - In contrast, same methods are always redefined.
                 #
-                next already_defined_namespace if already_defined_namespace
+                next already_defined_sub_namespace if already_defined_sub_namespace
 
-                namespace.namespaces << method
+                namespace.namespaces << sub_namespace
 
-                namespace.define_method(method.name) { method.body.call }
+                namespace.define_method(sub_namespace.name) { sub_namespace.body.call }
 
-                method
+                sub_namespace
               end
 
             ##
