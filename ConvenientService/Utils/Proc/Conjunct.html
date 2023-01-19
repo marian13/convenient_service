@@ -372,7 +372,7 @@ h(x) = f(x) &amp;&amp; g(x)</p>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/proc/conjunct.rb', line 31</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span>
-  <span class='kw'>return</span> <span class='tlambda'>-&gt;</span><span class='lparen'>(</span><span class='id identifier rubyid_item'>item</span><span class='rparen'>)</span> <span class='tlambeg'>{</span> <span class='kw'>true</span> <span class='rbrace'>}</span> <span class='kw'>if</span> <span class='id identifier rubyid_procs'>procs</span><span class='period'>.</span><span class='id identifier rubyid_none?'>none?</span>
+  <span class='kw'>return</span> <span class='tlambda'>-&gt;</span><span class='lparen'>(</span><span class='id identifier rubyid_item'>item</span><span class='rparen'>)</span> <span class='tlambeg'>{</span><span class='rbrace'>}</span> <span class='kw'>if</span> <span class='id identifier rubyid_procs'>procs</span><span class='period'>.</span><span class='id identifier rubyid_none?'>none?</span>
 
   <span class='kw'>return</span> <span class='id identifier rubyid_procs'>procs</span><span class='period'>.</span><span class='id identifier rubyid_first'>first</span> <span class='kw'>if</span> <span class='id identifier rubyid_procs'>procs</span><span class='period'>.</span><span class='id identifier rubyid_one?'>one?</span>
 
@@ -395,7 +395,7 @@ h(x) = f(x) &amp;&amp; g(x)</p>
 </div>
 
       <div id="footer">
-  Generated on Tue Jan  3 02:59:46 2023 by
+  Generated on Thu Jan 19 15:15:29 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.3).
 </div>

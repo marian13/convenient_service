@@ -79,7 +79,7 @@
   <dl>
     <dt>Defined in:</dt>
     <dd>lib/convenient_service/utils/module.rb<span class="defines">,<br />
-  lib/convenient_service/utils/module/get_own_const.rb,<br /> lib/convenient_service/utils/module/class_method_defined.rb,<br /> lib/convenient_service/utils/module/get_own_instance_method.rb,<br /> lib/convenient_service/utils/module/has_own_instance_method.rb,<br /> lib/convenient_service/utils/module/instance_method_defined.rb</span>
+  lib/convenient_service/utils/module/get_own_const.rb,<br /> lib/convenient_service/utils/module/include_module.rb,<br /> lib/convenient_service/utils/module/fetch_own_const.rb,<br /> lib/convenient_service/utils/module/class_method_defined.rb,<br /> lib/convenient_service/utils/module/get_own_instance_method.rb,<br /> lib/convenient_service/utils/module/has_own_instance_method.rb,<br /> lib/convenient_service/utils/module/instance_method_defined.rb</span>
 </dd>
   </dl>
   
@@ -91,7 +91,7 @@
     
   
     
-      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Module/ClassMethodDefined.html" title="ConvenientService::Utils::Module::ClassMethodDefined (class)">ClassMethodDefined</a></span>, <span class='object_link'><a href="Module/GetOwnConst.html" title="ConvenientService::Utils::Module::GetOwnConst (class)">GetOwnConst</a></span>, <span class='object_link'><a href="Module/GetOwnInstanceMethod.html" title="ConvenientService::Utils::Module::GetOwnInstanceMethod (class)">GetOwnInstanceMethod</a></span>, <span class='object_link'><a href="Module/HasOwnInstanceMethod.html" title="ConvenientService::Utils::Module::HasOwnInstanceMethod (class)">HasOwnInstanceMethod</a></span>, <span class='object_link'><a href="Module/InstanceMethodDefined.html" title="ConvenientService::Utils::Module::InstanceMethodDefined (class)">InstanceMethodDefined</a></span>
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Module/ClassMethodDefined.html" title="ConvenientService::Utils::Module::ClassMethodDefined (class)">ClassMethodDefined</a></span>, <span class='object_link'><a href="Module/FetchOwnConst.html" title="ConvenientService::Utils::Module::FetchOwnConst (class)">FetchOwnConst</a></span>, <span class='object_link'><a href="Module/GetOwnConst.html" title="ConvenientService::Utils::Module::GetOwnConst (class)">GetOwnConst</a></span>, <span class='object_link'><a href="Module/GetOwnInstanceMethod.html" title="ConvenientService::Utils::Module::GetOwnInstanceMethod (class)">GetOwnInstanceMethod</a></span>, <span class='object_link'><a href="Module/HasOwnInstanceMethod.html" title="ConvenientService::Utils::Module::HasOwnInstanceMethod (class)">HasOwnInstanceMethod</a></span>, <span class='object_link'><a href="Module/IncludeModule.html" title="ConvenientService::Utils::Module::IncludeModule (class)">IncludeModule</a></span>, <span class='object_link'><a href="Module/InstanceMethodDefined.html" title="ConvenientService::Utils::Module::InstanceMethodDefined (class)">InstanceMethodDefined</a></span>
     
   
 </p>
@@ -114,6 +114,28 @@
   <span class="summary_signature">
     
       <a href="#class_method_defined%3F-class_method" title="class_method_defined? (class method)">.<strong>class_method_defined?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#fetch_own_const-class_method" title="fetch_own_const (class method)">.<strong>fetch_own_const</strong>  &#x21d2; Object </a>
     
 
     
@@ -201,6 +223,28 @@
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#include_module%3F-class_method" title="include_module? (class method)">.<strong>include_module?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#instance_method_defined%3F-class_method" title="instance_method_defined? (class method)">.<strong>instance_method_defined?</strong>  &#x21d2; Boolean </a>
     
 
@@ -266,15 +310,45 @@
       <pre class="lines">
 
 
-18
-19
-20</pre>
+20
+21
+22</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/module.rb', line 18</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/module.rb', line 20</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_class_method_defined?'>class_method_defined?</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="Module/ClassMethodDefined.html" title="ConvenientService::Utils::Module::ClassMethodDefined (class)">ClassMethodDefined</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="Module/ClassMethodDefined.html#call-instance_method" title="ConvenientService::Utils::Module::ClassMethodDefined#call (method)">call</a></span></span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="fetch_own_const-class_method">
+  
+    .<strong>fetch_own_const</strong>  &#x21d2; <tt><span class='object_link'><a href="Object.html" title="ConvenientService::Utils::Object (module)">Object</a></span></tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+24
+25
+26</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/module.rb', line 24</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_fetch_own_const'>fetch_own_const</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="Module/FetchOwnConst.html" title="ConvenientService::Utils::Module::FetchOwnConst (class)">FetchOwnConst</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="Module/FetchOwnConst.html#call-instance_method" title="ConvenientService::Utils::Module::FetchOwnConst#call (method)">call</a></span></span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -296,12 +370,12 @@
       <pre class="lines">
 
 
-26
-27
-28</pre>
+32
+33
+34</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/module.rb', line 26</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/module.rb', line 32</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_own_const'>get_own_const</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="Module/GetOwnConst.html" title="ConvenientService::Utils::Module::GetOwnConst (class)">GetOwnConst</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="Module/GetOwnConst.html#call-instance_method" title="ConvenientService::Utils::Module::GetOwnConst#call (method)">call</a></span></span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
@@ -326,12 +400,12 @@
       <pre class="lines">
 
 
-22
-23
-24</pre>
+28
+29
+30</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/module.rb', line 22</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/module.rb', line 28</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_own_instance_method'>get_own_instance_method</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="Module/GetOwnInstanceMethod.html" title="ConvenientService::Utils::Module::GetOwnInstanceMethod (class)">GetOwnInstanceMethod</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="Module/GetOwnInstanceMethod.html#call-instance_method" title="ConvenientService::Utils::Module::GetOwnInstanceMethod#call (method)">call</a></span></span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
@@ -378,15 +452,67 @@
       <pre class="lines">
 
 
-30
-31
-32</pre>
+36
+37
+38</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/module.rb', line 30</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/module.rb', line 36</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_has_own_instance_method?'>has_own_instance_method?</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="Module/HasOwnInstanceMethod.html" title="ConvenientService::Utils::Module::HasOwnInstanceMethod (class)">HasOwnInstanceMethod</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="Module/HasOwnInstanceMethod.html#call-instance_method" title="ConvenientService::Utils::Module::HasOwnInstanceMethod#call (method)">call</a></span></span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="include_module?-class_method">
+  
+    .<strong>include_module?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+40
+41
+42</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/module.rb', line 40</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_include_module?'>include_module?</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="Module/IncludeModule.html" title="ConvenientService::Utils::Module::IncludeModule (class)">IncludeModule</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="Module/IncludeModule.html#call-instance_method" title="ConvenientService::Utils::Module::IncludeModule#call (method)">call</a></span></span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -430,12 +556,12 @@
       <pre class="lines">
 
 
-34
-35
-36</pre>
+44
+45
+46</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/module.rb', line 34</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/module.rb', line 44</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_instance_method_defined?'>instance_method_defined?</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="Module/InstanceMethodDefined.html" title="ConvenientService::Utils::Module::InstanceMethodDefined (class)">InstanceMethodDefined</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="Module/InstanceMethodDefined.html#call-instance_method" title="ConvenientService::Utils::Module::InstanceMethodDefined#call (method)">call</a></span></span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
@@ -450,7 +576,7 @@
 </div>
 
       <div id="footer">
-  Generated on Tue Jan  3 02:59:44 2023 by
+  Generated on Thu Jan 19 15:15:27 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.3).
 </div>
