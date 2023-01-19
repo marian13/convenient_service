@@ -29,7 +29,7 @@ module ConvenientService
         # - https://en.wikipedia.org/wiki/Logical_conjunction
         #
         def call
-          return ->(item) { true } if procs.none?
+          return ->(item) {} if procs.none?
 
           return procs.first if procs.one?
 
