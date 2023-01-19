@@ -164,6 +164,68 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Method
           end
         end
       end
+
+      context "when `full_name` has multiple namespaces" do
+        let(:full_name) { :"foo.bar.baz" }
+
+        let(:mod) { ConvenientService::Support::DependencyContainer::Commands::CreateMethodsModule.call }
+
+        it "defines outer `namespace` in `mod`" do
+          method.define_in_module!(mod)
+
+          expect(user_instance.foo).to eq(mod.namespaces.find_by(name: :foo))
+        end
+
+        it "defines new outer `namespace` in `mod`" do
+          method.define_in_module!(mod)
+
+          expect(user_instance.foo.singleton_methods(false)).to eq([:bar])
+        end
+
+        it "defines inner `namespace` in outer `namespace`" do
+          method.define_in_module!(mod)
+
+          expect(user_instance.foo.bar).to eq(mod.namespaces.find_by(name: :foo).namespaces.find_by(name: :bar))
+        end
+
+        it "defines `method` in inner `namespace`" do
+          method.define_in_module!(mod)
+
+          expect(user_instance.foo.bar.baz(*args, **kwargs, &block)).to eq(method_return_value)
+        end
+
+        it "returns `method`" do
+          expect(method.define_in_module!(mod)).to eq(method)
+        end
+
+        context "when `mod` already has outer namespace" do
+          let(:second_method) { described_class.new(full_name: :"foo.baz", scope: scope, body: body) }
+
+          before do
+            second_method.define_in_module!(mod)
+          end
+
+          it "reuses that outer namespace" do
+            method.define_in_module!(mod)
+
+            expect(user_instance.foo.singleton_methods(false)).to contain_exactly(:bar, :baz)
+          end
+
+          context "when outer namespace already has inner namespace" do
+            let(:second_method) { described_class.new(full_name: :"foo.bar.qux", scope: scope, body: body) }
+
+            before do
+              second_method.define_in_module!(mod)
+            end
+
+            it "reuses that inner namespace" do
+              method.define_in_module!(mod)
+
+              expect(user_instance.foo.bar.singleton_methods(false)).to contain_exactly(:baz, :qux)
+            end
+          end
+        end
+      end
     end
 
     example_group "comparison" do
