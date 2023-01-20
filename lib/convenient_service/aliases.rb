@@ -2,4 +2,5 @@
 
 module ConvenientService
   Concern = ::ConvenientService::Support::Concern
+  DependencyContainer = ::ConvenientService::Support::DependencyContainer
 end

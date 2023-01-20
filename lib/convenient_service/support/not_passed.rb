@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
 module ConvenientService
-  VERSION = "0.5.0"
+  module Support
+    NOT_PASSED = ::Object.new
+  end
 end
