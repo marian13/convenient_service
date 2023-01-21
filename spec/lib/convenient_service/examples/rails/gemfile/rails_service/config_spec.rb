@@ -13,6 +13,8 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::RailsService::Config
 
     subject { described_class }
 
+    specify { expect(described_class).to include_module(ConvenientService::Support::Concern) }
+
     context "when included" do
       let(:service_class) do
         Class.new.tap do |klass|
