@@ -53,5 +53,6 @@
 | High | 🚧 | `Support::Command` alias | Should be visible to the end user |
 | Low | 🚧 | Parallel steps | A killer feature |
 | Medium | 🚧 | Add Ruby 3.2 support to Docker and CI |  |
+| Medium | 🚧 | `delegate_to` - option to specify of how to compare blocks | |
 
 Search for `TODO`s in the codebase for more tasks.
