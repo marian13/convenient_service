@@ -360,6 +360,26 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::RailsService::Config
         end
       end
     end
+
+    context "when included multiple times" do
+      let(:service_class) do
+        Class.new.tap do |klass|
+          klass.class_exec(described_class) do |mod|
+            include mod
+
+            include mod
+          end
+        end
+      end
+
+      ##
+      # NOTE: Check the following discussion for details:
+      # https://github.com/marian13/convenient_service/discussions/43
+      #
+      it "applies its `included` block only once" do
+        expect(service_class.middlewares(:result).to_a.size).to eq(8)
+      end
+    end
   end
 end
 # rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
