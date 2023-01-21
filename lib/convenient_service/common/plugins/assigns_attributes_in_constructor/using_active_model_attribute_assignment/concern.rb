@@ -9,8 +9,6 @@ module ConvenientService
             include Support::Concern
 
             included do |service_class|
-              require "active_model"
-
               service_class.include ::ActiveModel::AttributeAssignment
             end
           end
