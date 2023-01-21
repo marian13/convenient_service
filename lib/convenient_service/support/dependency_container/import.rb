@@ -21,7 +21,7 @@ module ConvenientService
 
             raise Errors::NotExportedMethod.new(method_name: full_name, method_scope: scope, mod: from) unless method
 
-            Commands::ImportMethod.call(importing_module: self, exporting_module: from, method: method, scope: scope, prepend: prepend)
+            Commands::ImportMethod.call(importing_module: self, exported_method: method, prepend: prepend)
           end
         end
       end

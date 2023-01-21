@@ -107,7 +107,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Import do
           specify do
             expect { import }
               .to delegate_to(ConvenientService::Support::DependencyContainer::Commands::ImportMethod, :call)
-              .with_arguments(importing_module: user, exporting_module: container, method: method, scope: scope, prepend: prepend)
+              .with_arguments(importing_module: user, exported_method: method, prepend: prepend)
               .and_return_its_value
           end
         end
@@ -119,7 +119,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Import do
         it "defaults to `ConvenientService::Support::DependencyContainer::Constants::DEFAULT_SCOPE`" do
           expect { import }
             .to delegate_to(ConvenientService::Support::DependencyContainer::Commands::ImportMethod, :call)
-            .with_arguments(importing_module: user, exporting_module: container, method: method, scope: ConvenientService::Support::DependencyContainer::Constants::DEFAULT_SCOPE, prepend: prepend)
+            .with_arguments(importing_module: user, exported_method: method, prepend: prepend)
             .and_return_its_value
         end
       end
@@ -130,7 +130,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Import do
         it "defaults to `ConvenientService::Support::DependencyContainer::Constants::DEFAULT_PREPEND`" do
           expect { import }
             .to delegate_to(ConvenientService::Support::DependencyContainer::Commands::ImportMethod, :call)
-            .with_arguments(importing_module: user, exporting_module: container, method: method, scope: scope, prepend: ConvenientService::Support::DependencyContainer::Constants::DEFAULT_PREPEND)
+            .with_arguments(importing_module: user, exported_method: method, prepend: ConvenientService::Support::DependencyContainer::Constants::DEFAULT_PREPEND)
             .and_return_its_value
         end
       end

@@ -5,29 +5,7 @@ module ConvenientService
     module DependencyContainer
       module Commands
         class ImportMethod < Support::Command
-          ##
-          # @!attribute [r] importing_module
-          #   @return [Module]
-          #
-          attr_reader :importing_module
-
-          ##
-          # @!attribute [r] exporting_module
-          #   @return [Module]
-          #
-          attr_reader :exporting_module
-
-          ##
-          # @!attribute [r] method
-          #   @return [ConvenientService::Support::DependencyContainer::Method]
-          #
-          attr_reader :method
-
-          ##
-          # @!attribute [r] scope
-          #   @return [Symbol]
-          #
-          attr_reader :scope
+          include Support::Delegate
 
           ##
           # @!attribute [r] prepend
@@ -36,17 +14,31 @@ module ConvenientService
           attr_reader :prepend
 
           ##
+          # @!attribute [r] importing_module
+          #   @return [Module]
+          #
+          attr_reader :importing_module
+
+          ##
+          # @!attribute [r] exported_method
+          #   @return [ConvenientService::Support::DependencyContainer::Method]
+          #
+          attr_reader :exported_method
+
+          ##
+          # @!attribute [r] scope
+          #   @return [Symbol]
+          #
+          delegate :scope, to: :exported_method
+
+          ##
           # @param importing_module [Module]
-          # @param exporting_module [Module]
-          # @param method [ConvenientService::Support::DependencyContainer::Method]
-          # @param scope [:instance, :class]
+          # @param exported_method [ConvenientService::Support::DependencyContainer::Method]
           # @param prepend [Boolean]
           #
-          def initialize(importing_module:, exporting_module:, method:, scope:, prepend:)
+          def initialize(importing_module:, exported_method:, prepend:)
             @importing_module = importing_module
-            @exporting_module = exporting_module
-            @method = method
-            @scope = scope
+            @exported_method = exported_method
             @prepend = prepend
           end
 
@@ -56,9 +48,9 @@ module ConvenientService
           def call
             import imported_scoped_methods
 
-            method.define_in_module!(imported_scoped_methods)
+            exported_method.define_in_module!(imported_scoped_methods)
 
-            method
+            exported_method
           end
 
           private

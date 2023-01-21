@@ -13,6 +13,12 @@ module ConvenientService
           # @param body [Proc]
           # @return [ConvenientService::Support::DependencyContainer::Entities::Method]
           #
+          # @internal
+          #   NOTE: `export` does NOT accept `prepend` kwarg intentionally.
+          #   It is done to follow "the Ruby way".
+          #   You won't ever see a module in Ruby that contains methods for `include` and `prepend` at the same time.
+          #   So why `export` should allow to do it?
+          #
           def export(full_name, scope: Constants::DEFAULT_SCOPE, &body)
             Entities::Method.new(full_name: full_name, scope: scope, body: body).tap { |method| exported_methods << method }
           end
