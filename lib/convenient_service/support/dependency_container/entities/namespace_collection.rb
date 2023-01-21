@@ -14,15 +14,6 @@ module ConvenientService
           end
 
           ##
-          #
-          #
-          def define_namespace(namespace)
-            namespaces << namespace
-
-            define_singleton_method(namespace.name) { namespace.body.call }
-          end
-
-          ##
           # @param name [String, Symbol]
           # @return [ConvenientService::Support::DependencyContainer::Entities::Namespace, nil]
           #
