@@ -8,12 +8,6 @@ module ConvenientService
           include Support::Delegate
 
           ##
-          # @!attribute [r] prepend
-          #   @return [Boolean]
-          #
-          attr_reader :prepend
-
-          ##
           # @!attribute [r] importing_module
           #   @return [Module]
           #
@@ -24,6 +18,12 @@ module ConvenientService
           #   @return [ConvenientService::Support::DependencyContainer::Method]
           #
           attr_reader :exported_method
+
+          ##
+          # @!attribute [r] prepend
+          #   @return [Boolean]
+          #
+          attr_reader :prepend
 
           ##
           # @!attribute [r] scope
@@ -49,8 +49,6 @@ module ConvenientService
             import imported_scoped_methods
 
             exported_method.define_in_module!(imported_scoped_methods)
-
-            exported_method
           end
 
           private
