@@ -80,9 +80,9 @@ module ConvenientService
             #   - Same methods are redefined.
             #   - In contrast, same namespaces are always reused.
             #
-            innermost_namespace.define_method(method.name, &method.body)
+            innermost_namespace.define_method(name, &body)
 
-            method
+            self
           end
 
           ##
@@ -100,13 +100,6 @@ module ConvenientService
           end
 
           private
-
-          ##
-          # @return [ConvenientService::Support::DependencyContainer::Entities::Method]
-          #
-          def method
-            self
-          end
 
           ##
           # @return [Array<String>]

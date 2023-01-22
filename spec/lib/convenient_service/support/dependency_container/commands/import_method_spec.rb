@@ -37,9 +37,9 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::Import
 
           specify do
             ##
-            # NOTE: `command_result` is called to define `importing_module::ImportedIncludedInstanceMethods` before it is used by `delegate_to`.
+            # NOTE: `described_class...` is called to define `importing_module::ImportedIncludedInstanceMethods` before it is used by `delegate_to`.
             #
-            command_result
+            described_class.call(importing_module: importing_module, exported_method: exported_method, prepend: prepend)
 
             expect { command_result }
               .to delegate_to(exported_method, :define_in_module!)
@@ -67,9 +67,9 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::Import
 
           specify do
             ##
-            # NOTE: `command_result` is called to define `importing_module::ImportedPrependedInstanceMethods` before it is used by `delegate_to`.
+            # NOTE: `described_class...` is called to define `importing_module::ImportedIncludedInstanceMethods` before it is used by `delegate_to`.
             #
-            command_result
+            described_class.call(importing_module: importing_module, exported_method: exported_method, prepend: prepend)
 
             expect { command_result }
               .to delegate_to(exported_method, :define_in_module!)
@@ -104,9 +104,9 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::Import
 
           specify do
             ##
-            # NOTE: `command_result` is called to define `importing_module::ImportedIncludedClassMethods` before it is used by `delegate_to`.
+            # NOTE: `described_class...` is called to define `importing_module::ImportedIncludedInstanceMethods` before it is used by `delegate_to`.
             #
-            command_result
+            described_class.call(importing_module: importing_module, exported_method: exported_method, prepend: prepend)
 
             expect { command_result }
               .to delegate_to(exported_method, :define_in_module!)
@@ -134,9 +134,9 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::Import
 
           specify do
             ##
-            # NOTE: `command_result` is called to define `importing_module::ImportedPrependedClassMethods` before it is used by `delegate_to`.
+            # NOTE: `described_class...` is called to define `importing_module::ImportedIncludedInstanceMethods` before it is used by `delegate_to`.
             #
-            command_result
+            described_class.call(importing_module: importing_module, exported_method: exported_method, prepend: prepend)
 
             expect { command_result }
               .to delegate_to(exported_method, :define_in_module!)
