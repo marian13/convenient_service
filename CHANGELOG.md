@@ -7,6 +7,7 @@
 
 * **dependency_container:** assert valid scope ([5d75f59](https://github.com/marian13/convenient_service/commit/5d75f593c01baa695e75fe49af6b4c6b80d7d9b1))
 * **singleton_prepend_module:** introduce singleton_prepend_module custom RSpec matcher ([6636b8d](https://github.com/marian13/convenient_service/commit/6636b8d030329e4a6216a934748a70ef4bae6ff3))
+* **has_result_steps:** introduce reassign ([75855be](https://github.com/marian13/convenient_service/commit/75855be7fd9115d01d5cfad99d35319486332bd2))
 
 ## [0.5.0](https://github.com/marian13/convenient_service/compare/v0.4.0...v0.5.0) (2023-01-19)
 
