@@ -6,7 +6,7 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Utils::Proc::Conjunct do
-  describe ".conjunct" do
+  describe ".call" do
     subject(:conjuction) { described_class.call(procs) }
 
     let(:item) { double }

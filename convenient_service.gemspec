@@ -35,6 +35,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "commonmarker"
   spec.add_development_dependency "gem-release"
   spec.add_development_dependency "inch"
+  spec.add_development_dependency "json"
   spec.add_development_dependency "paint"
   spec.add_development_dependency "progressbar"
   spec.add_development_dependency "rake", "~> 12.0"
@@ -47,6 +48,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "standard"
   spec.add_development_dependency "simplecov"
   spec.add_development_dependency "simplecov-lcov"
+  spec.add_development_dependency "webrick"
   spec.add_development_dependency "yard"
   spec.add_development_dependency "yard-junk"
 end

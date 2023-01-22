@@ -4,6 +4,7 @@ require_relative "support/not_passed"
 require_relative "support/concern"
 
 require_relative "support/abstract_method"
+require_relative "support/arguments"
 require_relative "support/cache"
 require_relative "support/castable"
 require_relative "support/command"

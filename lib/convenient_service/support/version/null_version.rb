@@ -12,6 +12,13 @@ module ConvenientService
       #
       class NullVersion
         ##
+        # @return [Boolean]
+        #
+        def null_version?
+          true
+        end
+
+        ##
         # @return [nil]
         #
         def gem_version

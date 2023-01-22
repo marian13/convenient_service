@@ -38,6 +38,12 @@ RSpec.describe ConvenientService::Support::Version do
       end
     end
 
+    describe "#null_version?" do
+      it "returns `false`" do
+        expect(version.null_version?).to eq(false)
+      end
+    end
+
     describe "#gem_version" do
       let(:value) { "0.2.1" }
 

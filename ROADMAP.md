@@ -44,15 +44,25 @@
 | High | 🚧 | `included_once` for `Support::Concern` |
 | Medium | 🚧 | Custom YARD type for service instance, service class as return values |
 | Medium | 🚧 | Heredoc for error messages |
-| Medium | 🚧 | Specs for `be_success`, `be_error`, `be_failure` matchers | | 
-| Low | 🚧 | [Receive Counts](https://relishapp.com/rspec/rspec-mocks/docs/setting-constraints/receive-counts) for `delegate_to` | | 
+| Medium | 🚧 | Specs for `be_success`, `be_error`, `be_failure` matchers | |
+| Low | 🚧 | [Receive Counts](https://relishapp.com/rspec/rspec-mocks/docs/setting-constraints/receive-counts) for `delegate_to` | |
 | Low | 🚧 | Prefer versioning instead of modification plugin | |
 | Low | 🚧 | Consider to move `__steps__` and `__callbacks__` to `internals_class` | Benefit? |
 | Medium | 🚧 | User friendly `raise` that removes lib backtrace from caller | Should have a `debug` mode. Should work well with examples. Check RSpec `CallerFilter.first_non_rspec_line` |
 | High | 🚧 | A plugin that catches `StandardError` and returns `failure` | Should be the lowest in the stack |
 | High | 🚧 | `Support::Command` alias | Should be visible to the end user |
 | Low | 🚧 | Parallel steps | A killer feature |
-| Medium | 🚧 | Add Ruby 3.2 support to Docker and CI |  |
+| Medium | 🚧 | Add `Ruby 3.2` support to `Docker` and `CI` |  |
+| Low | 🚧 | `overload do` | |
+| Low | 🚧 | Same spec example group organization | |
+| Medium | 🚧 | `Support::Arguments` | |
+| Low | 🚧 | Null object to Nil object? | |
+| High | 🚧 | Do not use Testing Toolkit in the Primitives layer | See [Components Diagram](https://marian13.github.io/static_content/convenient_service/diagrams/components_graph.html) + it should take the minimal amount of efforts to extract and reuse `Utils`, `Suppport` in the different projects |
+| Medium | 🚧 | Perfromance testing | [rspec-benchmark](https://github.com/piotrmurach/rspec-benchmark), [Testing object allocations](https://www.honeybadger.io/blog/testing-object-allocations/), [allocation_stats](https://github.com/srawlins/allocation_stats) |
+| Medium | 🚧 | Mutant testing | [mutant](https://github.com/mbj/mutant) |
+| Low | 🚧 | Add `JRuby` support | [jruby](https://www.jruby.org/) |
+| Medium | 🚧 | Add `shoulda-context` to test conditionals when `RSpec` is not loaded | [shoulda-context](https://github.com/thoughtbot/shoulda-context) |
+| High | 🚧 | Abstract factory for `CastMethod` | |
 | Medium | 🚧 | `delegate_to` - option to specify of how to compare blocks | |
 
 Search for `TODO`s in the codebase for more tasks.
