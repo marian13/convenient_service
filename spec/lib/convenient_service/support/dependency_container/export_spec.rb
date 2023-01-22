@@ -36,6 +36,12 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Export do
 
   example_group "class methods" do
     describe "#export" do
+      specify do
+        expect { export }
+          .to delegate_to(ConvenientService::Support::DependencyContainer::Commands::AssertValidScope, :call)
+          .with_arguments(scope: scope)
+      end
+
       it "returns method" do
         expect(export).to eq(method)
       end

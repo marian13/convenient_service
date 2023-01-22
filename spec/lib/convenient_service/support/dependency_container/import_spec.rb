@@ -46,6 +46,12 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Import do
 
   example_group "class methods" do
     describe "#import" do
+      specify do
+        expect { import }
+          .to delegate_to(ConvenientService::Support::DependencyContainer::Commands::AssertValidScope, :call)
+          .with_arguments(scope: scope)
+      end
+
       context "when `mod` does NOT include `ConvenientService::Support::DependencyContainer::Export`" do
         let(:container) { Module.new }
 

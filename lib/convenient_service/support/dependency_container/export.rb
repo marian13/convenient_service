@@ -20,6 +20,8 @@ module ConvenientService
           #   So why `export` should allow to do it?
           #
           def export(full_name, scope: Constants::DEFAULT_SCOPE, &body)
+            Commands::AssertValidScope.call(scope: scope)
+
             Entities::Method.new(full_name: full_name, scope: scope, body: body).tap { |method| exported_methods << method }
           end
 

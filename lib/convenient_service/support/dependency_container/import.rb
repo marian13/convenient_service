@@ -15,6 +15,8 @@ module ConvenientService
           # @return [ConvenientService::Support::DependencyContainer::Entities::Method]
           #
           def import(full_name, from:, scope: Constants::DEFAULT_SCOPE, prepend: Constants::DEFAULT_PREPEND)
+            Commands::AssertValidScope.call(scope: scope)
+
             raise Errors::NotExportableModule.new(mod: from) unless Utils::Module.include_module?(from, DependencyContainer::Export)
 
             method = from.exported_methods.find_by(full_name: full_name, scope: scope)

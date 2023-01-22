@@ -4,6 +4,31 @@ module ConvenientService
   module Support
     module DependencyContainer
       module Errors
+        class InvalidScope < ConvenientService::Error
+          ##
+          # @param scope [Object]
+          # @return [void]
+          #
+          def initialize(scope:)
+            message = <<~TEXT
+              Scope `#{scope.inspect}` is NOT valid.
+
+              Valid options are #{printable_valid_scopes}.
+            TEXT
+
+            super(message)
+          end
+
+          private
+
+          ##
+          # @return [String]
+          #
+          def printable_valid_scopes
+            Constants::SCOPES.map { |scope| "`:#{scope}`" }.join(", ")
+          end
+        end
+
         class NotExportableModule < ConvenientService::Error
           ##
           # @param mod [Module]
