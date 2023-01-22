@@ -50,9 +50,9 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
         TEXT
       end
 
-      it "raises `ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Entities::Callers::Reassignment::Errors::CallerCanNotCalculateReassignment`" do
+      it "raises `ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Errors::CallerCanNotCalculateReassignment`" do
         expect { caller.calculate_value(method) }
-          .to raise_error(ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Entities::Callers::Reassignment::Errors::CallerCanNotCalculateReassignment)
+          .to raise_error(ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Errors::CallerCanNotCalculateReassignment)
           .with_message(error_message)
       end
     end
@@ -60,8 +60,16 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
     describe "#validate_as_input_for_container!" do
       let(:direction) { :input }
 
-      it "returns `false`" do
-        expect(caller.validate_as_input_for_container!(container, method: method)).to eq(false)
+      let(:error_message) do
+        <<~TEXT
+          Reassignments are not allowed for `in` methods.
+        TEXT
+      end
+
+      it "raises `ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Errors::InputMethodReassignment`" do
+        expect { caller.validate_as_input_for_container!(container, method: method) }
+          .to raise_error(ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Errors::InputMethodReassignment)
+          .with_message(error_message)
       end
     end
 

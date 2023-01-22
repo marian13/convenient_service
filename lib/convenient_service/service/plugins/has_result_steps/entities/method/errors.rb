@@ -87,6 +87,28 @@ module ConvenientService
                 end
               end
 
+              class CallerCanNotCalculateReassignment < ::ConvenientService::Error
+                def initialize(method:)
+                  message = <<~TEXT
+                    Method caller failed to calculate reassignment for `#{method.name}`.
+
+                    Method callers can calculate only `in` methods, while reassignments are always `out` methods.
+                  TEXT
+
+                  super(message)
+                end
+              end
+
+              class InputMethodReassignment < ConvenientService::Error
+                def initialize(method:, container:)
+                  message = <<~TEXT
+                    Reassignments are not allowed for `in` methods.
+                  TEXT
+
+                  super(message)
+                end
+              end
+
               class MethodIsNotInputMethod < ConvenientService::Error
                 def initialize(method:, container:)
                   message = <<~TEXT

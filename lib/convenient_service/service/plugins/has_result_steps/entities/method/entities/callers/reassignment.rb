@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require_relative "reassignment/commands"
-require_relative "reassignment/errors"
 
 module ConvenientService
   module Service
@@ -27,7 +26,7 @@ module ConvenientService
                   end
 
                   def validate_as_input_for_container!(container, method:)
-                    false
+                    raise Errors::InputMethodReassignment.new(method: method, container: container)
                   end
 
                   def validate_as_output_for_container!(container, method:)
