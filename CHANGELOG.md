@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/marian13/convenient_service/compare/v0.4.0...v0.5.0) (2023-01-19)
+
+
+### Features
+
+* **dependency_container:** introduce dependency containers ([7e2dd90](https://github.com/marian13/convenient_service/commit/7e2dd9072a4b8815ac74755b4fa2c3b66a093115), [aef8ac0](https://github.com/marian13/convenient_service/commit/aef8ac0ba7fdfdd968fae6e115bb9540bca28ec4))
+
 ## [0.4.0](https://github.com/marian13/convenient_service/compare/v0.3.1...v0.4.0) (2023-01-03)
 
 

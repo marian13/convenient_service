@@ -63,5 +63,6 @@
 | Low | 🚧 | Add `JRuby` support | [jruby](https://www.jruby.org/) |
 | Medium | 🚧 | Add `shoulda-context` to test conditionals when `RSpec` is not loaded | [shoulda-context](https://github.com/thoughtbot/shoulda-context) |
 | High | 🚧 | Abstract factory for `CastMethod` | |
+| Medium | 🚧 | `delegate_to` - option to specify of how to compare blocks | |
 
 Search for `TODO`s in the codebase for more tasks.

@@ -16,6 +16,7 @@ require_relative "matchers/have_attr_writer"
 require_relative "matchers/include_module"
 require_relative "matchers/prepend_module"
 require_relative "matchers/results"
+require_relative "matchers/singleton_prepend_module"
 
 module ConvenientService
   module RSpec
@@ -37,6 +38,7 @@ module ConvenientService
         include Matchers::IncludeModule
         include Matchers::PrependModule
         include Matchers::Results
+        include Matchers::SingletonPrependModule
       end
     end
   end

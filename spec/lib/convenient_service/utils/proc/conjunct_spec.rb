@@ -14,8 +14,30 @@ RSpec.describe ConvenientService::Utils::Proc::Conjunct do
     context "when procs array is empty" do
       let(:procs) { [] }
 
-      it "returns proc that always evaluates to true" do
-        expect(conjuction[item]).to eq(true)
+      it "returns proc that always evaluates to nil" do
+        expect(conjuction[item]).to eq(nil)
+      end
+
+      example_group "returned proc" do
+        context "when used with Enumerable#all?" do
+          context "when enumerable is empty" do
+            let(:enumerable) { [] }
+
+            it "is evaluated as truthy" do
+              expect(enumerable.all?(&conjuction)).to eq(true)
+            end
+          end
+        end
+
+        context "when used with Enumerable#find" do
+          context "when enumerable is empty" do
+            let(:enumerable) { [] }
+
+            it "is evaluated as falsey" do
+              expect(enumerable.find(&conjuction)).to be_nil
+            end
+          end
+        end
       end
     end
 

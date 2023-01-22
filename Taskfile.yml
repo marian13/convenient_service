@@ -78,6 +78,16 @@ tasks:
 
   docker:build:ruby_2.7:
     cmds:
+      ##
+      # NOTE: Meaning of `|| 2> /dev/null`.
+      # https://stackoverflow.com/a/10250395/12201472
+      #
+      # NOTE: Meaning of `|| true`.
+      # https://superuser.com/a/887349/1180656
+      #
+      - rm Gemfile.2.7 2> /dev/null || true
+      - rm Gemfile.2.7.lock 2> /dev/null || true
+      - cp Gemfile Gemfile.2.7
       - docker build . -f docker/2.7/Dockerfile -t convenient_service:2.7
     preconditions:
       - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
@@ -85,6 +95,16 @@ tasks:
 
   docker:build:ruby_3.0:
     cmds:
+      ##
+      # NOTE: Meaning of `|| 2> /dev/null`.
+      # https://stackoverflow.com/a/10250395/12201472
+      #
+      # NOTE: Meaning of `|| true`.
+      # https://superuser.com/a/887349/1180656
+      #
+      - rm Gemfile.3.0 2> /dev/null || true
+      - rm Gemfile.3.0.lock 2> /dev/null || true
+      - cp Gemfile Gemfile.3.0
       - docker build . -f docker/3.0/Dockerfile -t convenient_service:3.0
     preconditions:
       - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
@@ -92,6 +112,16 @@ tasks:
 
   docker:build:ruby_3.1:
     cmds:
+      ##
+      # NOTE: Meaning of `|| 2> /dev/null`.
+      # https://stackoverflow.com/a/10250395/12201472
+      #
+      # NOTE: Meaning of `|| true`.
+      # https://superuser.com/a/887349/1180656
+      #
+      - rm Gemfile.3.1 2> /dev/null || true
+      - rm Gemfile.3.1.lock 2> /dev/null || true
+      - cp Gemfile Gemfile.3.1
       - docker build . -f docker/3.1/Dockerfile -t convenient_service:3.1
     preconditions:
       - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'

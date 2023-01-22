@@ -9,8 +9,6 @@ module ConvenientService
             include Support::Concern
 
             included do |service_class|
-              require "dry-initializer"
-
               service_class.extend ::Dry::Initializer
             end
           end
