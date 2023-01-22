@@ -339,6 +339,28 @@
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#reassignment%3F-instance_method" title="#reassignment? (instance method)">#<strong>reassignment?</strong>(name)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#to_kwargs-instance_method" title="#to_kwargs (instance method)">#<strong>to_kwargs</strong>  &#x21d2; Object </a>
     
 
@@ -726,16 +748,16 @@
       <pre class="lines">
 
 
-57
-58
-59
-60
 61
 62
-63</pre>
+63
+64
+65
+66
+67</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_result_steps/entities/method/concern/instance_methods.rb', line 57</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_result_steps/entities/method/concern/instance_methods.rb', line 61</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_define_output_in_container!'>define_output_in_container!</span><span class='lparen'>(</span><span class='id identifier rubyid_container'>container</span><span class='comma'>,</span> <span class='label'>index:</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_direction'>direction</span><span class='period'>.</span><span class='id identifier rubyid_define_output_in_container!'>define_output_in_container!</span><span class='lparen'>(</span><span class='id identifier rubyid_container'>container</span><span class='comma'>,</span> <span class='label'>index:</span> <span class='id identifier rubyid_index'>index</span><span class='comma'>,</span> <span class='label'>method:</span> <span class='kw'>self</span><span class='rparen'>)</span>
@@ -840,6 +862,58 @@
 </div>
     
       <div class="method_details ">
+  <h3 class="signature " id="reassignment?-instance_method">
+  
+    #<strong>reassignment?</strong>(name)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+41
+42
+43</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_result_steps/entities/method/concern/instance_methods.rb', line 41</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_reassignment?'>reassignment?</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_caller'>caller</span><span class='period'>.</span><span class='id identifier rubyid_reassignment?'>reassignment?</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
   <h3 class="signature " id="to_kwargs-instance_method">
   
     #<strong>to_kwargs</strong>  &#x21d2; <tt>Object</tt> 
@@ -854,12 +928,12 @@
       <pre class="lines">
 
 
-69
-70
-71</pre>
+73
+74
+75</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_result_steps/entities/method/concern/instance_methods.rb', line 69</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_result_steps/entities/method/concern/instance_methods.rb', line 73</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_kwargs'>to_kwargs</span>
   <span class='lbrace'>{</span><span class='label'>key:</span> <span class='id identifier rubyid_key'>key</span><span class='comma'>,</span> <span class='label'>name:</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='label'>caller:</span> <span class='id identifier rubyid_caller'>caller</span><span class='comma'>,</span> <span class='label'>direction:</span> <span class='id identifier rubyid_direction'>direction</span><span class='comma'>,</span> <span class='label'>organizer:</span> <span class='id identifier rubyid_organizer'>organizer</span><span class='rbrace'>}</span>
@@ -884,16 +958,16 @@
       <pre class="lines">
 
 
-41
-42
-43
-44
 45
 46
-47</pre>
+47
+48
+49
+50
+51</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_result_steps/entities/method/concern/instance_methods.rb', line 41</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_result_steps/entities/method/concern/instance_methods.rb', line 45</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_validate_as_input_for_container!'>validate_as_input_for_container!</span><span class='lparen'>(</span><span class='id identifier rubyid_container'>container</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_direction'>direction</span><span class='period'>.</span><span class='id identifier rubyid_validate_as_input_for_container!'>validate_as_input_for_container!</span><span class='lparen'>(</span><span class='id identifier rubyid_container'>container</span><span class='comma'>,</span> <span class='label'>method:</span> <span class='kw'>self</span><span class='rparen'>)</span>
@@ -922,16 +996,16 @@
       <pre class="lines">
 
 
-49
-50
-51
-52
 53
 54
-55</pre>
+55
+56
+57
+58
+59</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_result_steps/entities/method/concern/instance_methods.rb', line 49</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_result_steps/entities/method/concern/instance_methods.rb', line 53</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_validate_as_output_for_container!'>validate_as_output_for_container!</span><span class='lparen'>(</span><span class='id identifier rubyid_container'>container</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_direction'>direction</span><span class='period'>.</span><span class='id identifier rubyid_validate_as_output_for_container!'>validate_as_output_for_container!</span><span class='lparen'>(</span><span class='id identifier rubyid_container'>container</span><span class='comma'>,</span> <span class='label'>method:</span> <span class='kw'>self</span><span class='rparen'>)</span>
@@ -960,12 +1034,12 @@
       <pre class="lines">
 
 
-65
-66
-67</pre>
+69
+70
+71</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_result_steps/entities/method/concern/instance_methods.rb', line 65</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_result_steps/entities/method/concern/instance_methods.rb', line 69</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_value'>value</span>
   <span class='ivar'>@value</span> <span class='op'>||=</span> <span class='id identifier rubyid_calculate_value'>calculate_value</span>
@@ -980,7 +1054,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Jan 22 00:06:42 2023 by
+  Generated on Sun Jan 22 18:51:58 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.3).
 </div>
