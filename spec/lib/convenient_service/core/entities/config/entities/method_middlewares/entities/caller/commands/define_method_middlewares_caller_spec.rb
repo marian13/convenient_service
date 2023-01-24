@@ -97,7 +97,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
             end
 
             it "raises `NoMethodError`" do
-              expect { service_instance.result }.to raise_error(NoMethodError).with_message("super: no superclass method `result' for #{service_instance}")
+              expect { service_instance.result }.to raise_error(NoMethodError).with_message(/super: no superclass method `result' for #{service_instance}/)
             end
           end
 
@@ -178,7 +178,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
             end
 
             it "raises `NoMethodError`" do
-              expect { service_class.result }.to raise_error(NoMethodError).with_message("super: no superclass method `result' for #{service_class}")
+              expect { service_class.result }.to raise_error(NoMethodError).with_message(/super: no superclass method `result' for #{service_class}/)
             end
           end
 

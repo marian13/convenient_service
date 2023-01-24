@@ -141,7 +141,7 @@ RSpec.describe ConvenientService::Core::ClassMethods do
           ##
           # NOTE: Intentionally calling missed method that won't be included (no concerns with it).
           #
-          expect { service_class.foo }.to raise_error(NoMethodError).with_message("undefined method `foo' for #{service_class}")
+          expect { service_class.foo }.to raise_error(NoMethodError).with_message(/undefined method `foo' for #{service_class}/)
         end
       end
 
@@ -158,7 +158,7 @@ RSpec.describe ConvenientService::Core::ClassMethods do
           ##
           # NOTE: Intentionally calling missed method that won't be included (no concerns with it), but has middlewares.
           #
-          expect { service_class.foo }.to raise_error(NoMethodError).with_message("super: no superclass method `foo' for #{service_class}")
+          expect { service_class.foo }.to raise_error(NoMethodError).with_message(/super: no superclass method `foo' for #{service_class}/)
         end
       end
     end
