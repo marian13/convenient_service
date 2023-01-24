@@ -26,11 +26,9 @@ module ConvenientService
         # @return [Object] Can be any type.
         #
         def call
-          begin
-            value = block.call
-          rescue => exception
-            raise exception.class, exception.message, filter_backtrace(exception), cause: nil
-          end
+          block.call
+        rescue => exception
+          raise exception.class, exception.message, filter_backtrace(exception), cause: nil
         end
 
         private
