@@ -3,6 +3,8 @@
 require_relative "core/instance_methods"
 require_relative "core/class_methods"
 
+require_relative "core/commands"
+
 require_relative "core/entities"
 
 require_relative "core/aliases"

@@ -68,9 +68,9 @@ module ConvenientService
       def method_missing(method, *args, **kwargs, &block)
         commit_config!
 
-        return super unless Utils::Module.class_method_defined?(self, method, private: true)
+        return Commands::WithFilteringMethodMissingFromBacktrace.call { super } unless Utils::Module.class_method_defined?(self, method, private: true)
 
-        return super if middlewares(method, scope: :class).defined_without_super_method?
+        return Commands::WithFilteringMethodMissingFromBacktrace.call { super } if middlewares(method, scope: :class).defined_without_super_method?
 
         ConvenientService.logger.debug { "[Core] Committed config for `#{self}` | Triggered by `method_missing` | Method: `.#{method}`" }
 
