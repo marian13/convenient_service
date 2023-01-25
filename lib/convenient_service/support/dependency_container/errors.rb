@@ -56,7 +56,7 @@ module ConvenientService
             message = <<~TEXT
               Module `#{mod}` does NOT export method `#{method_name}` with `#{method_scope}` scope.
 
-              Did you forget to export if from `#{mod}`? For example:
+              Did you forget to export it from `#{mod}`? For example:
 
               module #{mod}
                 export #{method_name}, scope: :#{method_scope} do |*args, **kwargs, &block|
