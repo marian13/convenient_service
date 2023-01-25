@@ -82,7 +82,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Import do
             <<~TEXT
               Module `#{container}` does NOT export method `#{full_name}` with `#{scope}` scope.
 
-              Did you forget to export if from `#{container}`? For example:
+              Did you forget to export it from `#{container}`? For example:
 
               module #{container}
                 export #{full_name}, scope: :#{scope} do |*args, **kwargs, &block|
