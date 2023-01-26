@@ -26,7 +26,7 @@ module ConvenientService
               @progressbar = ::ProgressBar.create(title: "Formatting", total: steps.count)
             end
 
-            after :step do |step_result|
+            after :step do |step|
               @progressbar.increment
             end
 
