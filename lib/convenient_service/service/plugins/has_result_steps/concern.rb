@@ -27,6 +27,9 @@ module ConvenientService
             # @param index [Integer]
             # @return [ConvenientService::Service::Plugins::HasResultSteps::Entities::Step]
             #
+            # @note This method was initially designed as a hook (callback trigger).
+            # @see ConvenientService::Service::Plugins::HasResultSteps::Middleware#next
+            #
             def step(index)
               steps[index]
             end
