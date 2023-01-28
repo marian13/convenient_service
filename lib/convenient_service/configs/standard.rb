@@ -67,6 +67,7 @@ module ConvenientService
           use Plugins::Common::NormalizesEnv::Middleware
 
           use Plugins::Common::HasCallbacks::Middleware
+          use Plugins::Common::HasAroundCallbacks::Middleware
         end
 
         middlewares :success do
