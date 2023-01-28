@@ -166,18 +166,18 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::DryService::Config do
           end
         end
 
-        # example_group ".result middlewares" do
-        #   let(:class_result_middlewares) do
-        #     [
-        #       ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-        #       ConvenientService::Service::Plugins::CanHaveStubbedResult::Middleware
-        #     ]
-        #   end
+        example_group ".result middlewares" do
+          let(:class_result_middlewares) do
+            [
+              ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
+              ConvenientService::Service::Plugins::CanHaveStubbedResult::Middleware
+            ]
+          end
 
-        #   it "sets service middlewares for `.result`" do
-        #     expect(service_class.middlewares(:result, scope: :class).to_a).to eq(class_result_middlewares)
-        #   end
-        # end
+          it "sets service middlewares for `.result`" do
+            expect(service_class.middlewares(:result, scope: :class).to_a).to eq(class_result_middlewares)
+          end
+        end
 
         example_group "service result" do
           example_group "concerns" do
