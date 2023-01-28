@@ -86,6 +86,20 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::DryService::Config do
           end
         end
 
+        example_group "#step middlewares" do
+          let(:step_middlewares) do
+            [
+              ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
+              ConvenientService::Common::Plugins::HasCallbacks::Middleware,
+              ConvenientService::Common::Plugins::HasAroundCallbacks::Middleware
+            ]
+          end
+
+          it "sets service middlewares for `#step`" do
+            expect(service_class.middlewares(:step).to_a).to eq(step_middlewares)
+          end
+        end
+
         example_group "#success middlewares" do
           let(:success_middlewares) do
             [
@@ -151,6 +165,19 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::DryService::Config do
             end
           end
         end
+
+        # example_group ".result middlewares" do
+        #   let(:class_result_middlewares) do
+        #     [
+        #       ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
+        #       ConvenientService::Service::Plugins::CanHaveStubbedResult::Middleware
+        #     ]
+        #   end
+
+        #   it "sets service middlewares for `.result`" do
+        #     expect(service_class.middlewares(:result, scope: :class).to_a).to eq(class_result_middlewares)
+        #   end
+        # end
 
         example_group "service result" do
           example_group "concerns" do
