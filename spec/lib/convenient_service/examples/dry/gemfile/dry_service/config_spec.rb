@@ -72,10 +72,10 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::DryService::Config do
             [
               ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
               ConvenientService::Service::Plugins::HasResult::Middleware,
-              ConvenientService::Service::Plugins::HasResultParamsValidations::UsingDryValidation::Middleware,
-              ConvenientService::Service::Plugins::HasResultSteps::Middleware,
               ConvenientService::Common::Plugins::HasCallbacks::Middleware,
               ConvenientService::Common::Plugins::HasAroundCallbacks::Middleware,
+              ConvenientService::Service::Plugins::HasResultParamsValidations::UsingDryValidation::Middleware,
+              ConvenientService::Service::Plugins::HasResultSteps::Middleware,
               ConvenientService::Service::Plugins::RaisesOnDoubleResult::Middleware,
               ConvenientService::Common::Plugins::CachesReturnValue::Middleware
             ]
