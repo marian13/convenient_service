@@ -73,10 +73,10 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::RailsService::Config
           let(:result_middlewares) do
             [
               ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-              ConvenientService::Service::Plugins::HasResult::Middleware,
               ConvenientService::Common::Plugins::HasCallbacks::Middleware,
               ConvenientService::Common::Plugins::HasAroundCallbacks::Middleware,
               ConvenientService::Service::Plugins::HasResultParamsValidations::UsingActiveModelValidations::Middleware,
+              ConvenientService::Service::Plugins::HasResult::Middleware,
               ConvenientService::Service::Plugins::HasResultSteps::Middleware,
               ConvenientService::Service::Plugins::RaisesOnDoubleResult::Middleware,
               ConvenientService::Common::Plugins::CachesReturnValue::Middleware

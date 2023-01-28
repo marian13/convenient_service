@@ -51,11 +51,10 @@ module ConvenientService
         middlewares :result do
           use Plugins::Common::NormalizesEnv::Middleware
 
-          use Plugins::Service::HasResult::Middleware
-
           use Plugins::Common::HasCallbacks::Middleware
           use Plugins::Common::HasAroundCallbacks::Middleware
 
+          use Plugins::Service::HasResult::Middleware
           use Plugins::Service::HasResultSteps::Middleware
 
           use Plugins::Service::RaisesOnDoubleResult::Middleware
