@@ -79,7 +79,7 @@ module ConvenientService
             end
 
             ##
-            # @return [ConvenientService::RSpec::Matchers::Custom::Base]
+            # @return [ConvenientService::RSpec::Matchers::Custom::Results::Base]
             #
             def without_data
               chain[:data] = {}
