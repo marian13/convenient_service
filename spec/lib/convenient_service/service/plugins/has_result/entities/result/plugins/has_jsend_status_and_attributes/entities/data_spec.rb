@@ -6,6 +6,8 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Entities::Data do
+  include ConvenientService::RSpec::Matchers::DelegateTo
+
   let(:data) { described_class.new(value: value) }
   let(:value) { {foo: :bar} }
 
@@ -133,6 +135,18 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
 
       it "caches its result" do
         expect(data.to_h.object_id).to eq(data.to_h.object_id)
+      end
+    end
+
+    describe "#to_s" do
+      it "returns string representation of `data`" do
+        expect { data.to_s }
+          .to delegate_to(data.to_h, :to_s)
+          .and_return_its_value
+      end
+
+      it "caches its result" do
+        expect(data.to_s.object_id).to eq(data.to_s.object_id)
       end
     end
   end
