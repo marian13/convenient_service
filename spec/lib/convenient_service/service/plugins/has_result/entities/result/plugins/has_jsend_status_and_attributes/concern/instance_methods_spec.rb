@@ -214,6 +214,10 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
       it "returns kwargs representation of result" do
         expect(result.to_kwargs).to eq(kwargs)
       end
+
+      specify { expect { result.to_kwargs }.to delegate_to(result, :unsafe_data) }
+      specify { expect { result.to_kwargs }.to delegate_to(result, :unsafe_message) }
+      specify { expect { result.to_kwargs }.to delegate_to(result, :unsafe_code) }
     end
   end
 end
