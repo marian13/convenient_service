@@ -5,13 +5,13 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::Service::Plugins::HasResultMethodSteps::Services::RunOwnMethodInOrganizer do
+RSpec.describe ConvenientService::Services::RunOwnMethodInOrganizer do
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
 
     subject { described_class }
 
-    it { is_expected.to include_module(ConvenientService::Service::Plugins::HasResultMethodSteps::Services::MethodStepConfig) }
+    it { is_expected.to include_module(ConvenientService::Standard::Config) }
   end
 
   example_group "class methods" do
@@ -56,9 +56,9 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultMethodSteps::Servic
           TEXT
         end
 
-        it "raises `ConvenientService::Service::Plugins::HasResultMethodSteps::Errors::MethodForStepIsNotDefined`" do
+        it "raises `ConvenientService::Services::RunOwnMethodInOrganizer::Errors::MethodForStepIsNotDefined`" do
           expect { service_result }
-            .to raise_error(ConvenientService::Service::Plugins::HasResultMethodSteps::Errors::MethodForStepIsNotDefined)
+            .to raise_error(ConvenientService::Services::RunOwnMethodInOrganizer::Errors::MethodForStepIsNotDefined)
             .with_message(error_message)
         end
       end
