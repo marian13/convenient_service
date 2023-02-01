@@ -49,6 +49,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "simplecov"
   spec.add_development_dependency "simplecov-lcov"
   spec.add_development_dependency "webrick"
-  spec.add_development_dependency "yard"
+  spec.add_development_dependency "yard", "~> 0.9.28"
   spec.add_development_dependency "yard-junk"
 end
