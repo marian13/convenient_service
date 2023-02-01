@@ -188,9 +188,9 @@ module ConvenientService
               parts << "got `#{result.status}`"
               parts << "of service `#{result.service.class}`" if used_of_service?
               parts << "of step `#{result.step.service.klass}`" if used_of_step?
-              parts << "with data `#{result.data}`" if used_data?
-              parts << "with message `#{result.message}`" if used_message?
-              parts << "with code `#{result.code}`" if used_code?
+              parts << "with data `#{result.unsafe_data}`" if used_data?
+              parts << "with message `#{result.unsafe_message}`" if used_message?
+              parts << "with code `#{result.unsafe_code.to_s}`" if used_code?
 
               parts.join(" ")
             end

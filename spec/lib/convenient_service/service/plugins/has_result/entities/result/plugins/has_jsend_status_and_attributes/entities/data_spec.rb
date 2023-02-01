@@ -142,6 +142,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
       it "returns string representation of `data`" do
         expect { data.to_s }
           .to delegate_to(data.to_h, :to_s)
+          .without_arguments
           .and_return_its_value
       end
 
