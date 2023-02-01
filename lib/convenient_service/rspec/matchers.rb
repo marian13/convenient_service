@@ -13,6 +13,7 @@ require_relative "matchers/have_alias_method"
 require_relative "matchers/have_attr_accessor"
 require_relative "matchers/have_attr_reader"
 require_relative "matchers/have_attr_writer"
+require_relative "matchers/import"
 require_relative "matchers/include_module"
 require_relative "matchers/prepend_module"
 require_relative "matchers/results"
@@ -35,6 +36,7 @@ module ConvenientService
         include Matchers::HaveAttrAccessor
         include Matchers::HaveAttrReader
         include Matchers::HaveAttrWriter
+        include Matchers::Import
         include Matchers::IncludeModule
         include Matchers::PrependModule
         include Matchers::Results
