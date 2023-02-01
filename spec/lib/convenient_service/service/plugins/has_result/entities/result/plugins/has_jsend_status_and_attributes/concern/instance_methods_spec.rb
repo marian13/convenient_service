@@ -6,6 +6,8 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Concern::InstanceMethods do
+  include ConvenientService::RSpec::Matchers::DelegateTo
+
   let(:result) { result_class.new(**params) }
 
   # rubocop:disable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock

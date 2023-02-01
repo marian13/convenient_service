@@ -70,7 +70,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::StripComment
       end
 
       it "returns intermediate step result" do
-        expect(result).to be_not_success.of(ConvenientService::Examples::Dry::Gemfile::Services::AssertNpmPackageAvailable)
+        expect(result).to be_not_success.of_step(ConvenientService::Examples::Dry::Gemfile::Services::AssertNpmPackageAvailable)
       end
     end
 

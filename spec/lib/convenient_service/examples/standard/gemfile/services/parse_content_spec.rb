@@ -164,7 +164,7 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::ParseCo
       end
 
       it "returns intermediate step result" do
-        expect(result).to be_not_success.of(ConvenientService::Examples::Standard::Gemfile::Services::AssertValidRubySyntax)
+        expect(result).to be_not_success.of_step(ConvenientService::Examples::Standard::Gemfile::Services::AssertValidRubySyntax)
       end
     end
 

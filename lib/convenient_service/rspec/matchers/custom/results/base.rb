@@ -24,7 +24,8 @@ module ConvenientService
 
               rules << ->(result) { result.class.include?(Service::Plugins::HasResult::Entities::Result::Concern) }
               rules << ->(result) { result.status.in?(statuses) }
-              rules << ->(result) { result.service.instance_of?(service_class) } if used_of?
+              rules << ->(result) { result.service.instance_of?(service_class) } if used_of_service?
+              rules << ->(result) { result.step.service.klass == step_class } if used_of_step?
               rules << ->(result) { result.unsafe_data == data } if used_data?
               rules << ->(result) { result.unsafe_message == message } if used_message?
               rules << ->(result) { result.unsafe_code == code } if used_code?
@@ -45,7 +46,7 @@ module ConvenientService
             # @return [String]
             #
             def failure_message
-              "expected that `#{result}` would #{default_text}"
+              "expected that `#{result.class}` would #{default_text}"
             end
 
             ##
@@ -55,7 +56,7 @@ module ConvenientService
             #   https://relishapp.com/rspec/rspec-expectations/v/3-11/docs/custom-matchers/define-a-custom-matcher#overriding-the-failure-message-when-negated
             #
             def failure_message_when_negated
-              "expected that #{result} would NOT #{default_text}"
+              "expected that #{result.class} would NOT #{default_text}"
             end
 
             ##
@@ -131,8 +132,18 @@ module ConvenientService
             # @param service_class [Class]
             # @return [ConvenientService::RSpec::Matchers::Custom::Results::Base]
             #
-            def of(service_class)
+            def of_service(service_class)
               chain[:service_class] = service_class
+
+              self
+            end
+
+            ##
+            # @param step_class [Class, Symbol]
+            # @return [ConvenientService::RSpec::Matchers::Custom::Results::Base]
+            #
+            def of_step(step_class)
+              chain[:step_class] = step_class
 
               self
             end
@@ -149,18 +160,34 @@ module ConvenientService
             # @return [String]
             #
             def default_text
+              expected_parts << "\n\n" << got_parts
+            end
+
+            ##
+            # @return [String]
+            #
+            def expected_parts
               parts = []
 
               parts << "be #{printable_statuses}"
-              parts << "of `#{service_class}`" if used_of?
+              parts << "of service `#{service_class}`" if used_of_service?
+              parts << "of step `#{step_class}`" if used_of_step?
               parts << "with data `#{data}`" if used_data?
               parts << "with message `#{message}`" if used_message?
               parts << "with code `#{code}`" if used_code?
 
-              parts << "\n\n"
+              parts.join(" ")
+            end
+
+            ##
+            # @return [String]
+            #
+            def got_parts
+              parts = []
 
               parts << "got `#{result.status}`"
-              parts << "of `#{result.service.class}`" if used_of?
+              parts << "of service `#{result.service.class}`" if used_of_service?
+              parts << "of step `#{result.step.service.klass}`" if used_of_step?
               parts << "with data `#{result.data}`" if used_data?
               parts << "with message `#{result.message}`" if used_message?
               parts << "with code `#{result.code}`" if used_code?
@@ -192,8 +219,15 @@ module ConvenientService
             ##
             # @return [Boolean]
             #
-            def used_of?
+            def used_of_service?
               chain.key?(:service_class)
+            end
+
+            ##
+            # @return [Boolean]
+            #
+            def used_of_step?
+              chain.key?(:step_class)
             end
 
             ##
@@ -222,6 +256,13 @@ module ConvenientService
             #
             def service_class
               Utils::Object.instance_variable_fetch(self, :@service_class) { chain[:service_class] }
+            end
+
+            ##
+            # @return [Class]
+            #
+            def step_class
+              Utils::Object.instance_variable_fetch(self, :@step_class) { chain[:step_class] }
             end
 
             ##
