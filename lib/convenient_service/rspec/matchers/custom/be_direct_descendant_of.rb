@@ -30,7 +30,7 @@ module ConvenientService
           end
 
           ##
-          # NOTE: `failure_message` is only called when `mathces?` returns `false`.
+          # NOTE: `failure_message` is only called when `matches?` returns `false`.
           # https://rubydoc.info/github/rspec/rspec-expectations/RSpec/Matchers/MatcherProtocol#failure_message-instance_method
           #
           def failure_message
@@ -38,7 +38,7 @@ module ConvenientService
           end
 
           ##
-          # NOTE: `failure_message_when_negated` is only called when `mathces?` returns `false`.
+          # NOTE: `failure_message_when_negated` is only called when `matches?` returns `false`.
           # https://rubydoc.info/github/rspec/rspec-expectations/RSpec/Matchers/MatcherProtocol#failure_message-instance_method
           #
           def failure_message_when_negated
