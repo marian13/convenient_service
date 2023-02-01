@@ -74,6 +74,10 @@ module ConvenientService
                   @input_values ||= calculate_input_values
                 end
 
+                def original_result
+                  @original_result ||= calculate_original_result
+                end
+
                 def result
                   @result ||= calculate_result
                 end
@@ -114,6 +118,10 @@ module ConvenientService
 
                 attr_reader :args, :kwargs
 
+                ##
+                # @internal
+                #   TODO: Commands instead of private methods.
+                #
                 def calculate_input_values
                   assert_has_organizer!
 
@@ -124,7 +132,7 @@ module ConvenientService
                 # @internal
                 #   IMPORTANT: `service.result(**input_values)` is the reason, why services should have only kwargs as arguments.
                 #
-                def calculate_result
+                def calculate_original_result
                   assert_has_organizer!
 
                   result = service.result(**input_values)
@@ -132,6 +140,10 @@ module ConvenientService
                   mark_as_completed!
 
                   result
+                end
+
+                def calculate_result
+                  original_result.copy(overrides: {kwargs: {step: self, service: organizer}})
                 end
 
                 def resolve_params

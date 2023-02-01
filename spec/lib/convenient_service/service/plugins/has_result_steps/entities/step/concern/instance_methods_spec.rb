@@ -355,6 +355,39 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::St
       end
     end
 
+    describe "#original_result" do
+      context "when `organizer` is NOT set" do
+        let(:organizer) { nil }
+
+        let(:message) do
+          <<~TEXT
+            Step `#{step.service}` has not assigned organizer.
+
+            Did you forget to set it?
+          TEXT
+        end
+
+        it "raises `ConvenientService::Service::Plugins::HasResultSteps::Errors::StepHasNoOrganizer`" do
+          expect { step.original_result }
+            .to raise_error(ConvenientService::Service::Plugins::HasResultSteps::Errors::StepHasNoOrganizer)
+            .with_message(message)
+        end
+      end
+
+      context "when `organizer` is set" do
+        specify {
+          expect { step.original_result }
+            .to delegate_to(service, :result)
+            .with_arguments(**step.input_values)
+            .and_return_its_value
+        }
+
+        it "marks `step` as complete" do
+          expect { step.original_result }.to change(step, :completed?).from(false).to(true)
+        end
+      end
+    end
+
     describe "#result" do
       context "when `organizer` is NOT set" do
         let(:organizer) { nil }
@@ -377,8 +410,8 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::St
       context "when `organizer` is set" do
         specify {
           expect { step.result }
-            .to delegate_to(service, :result)
-            .with_arguments(**step.input_values)
+            .to delegate_to(step.original_result, :copy)
+            .with_arguments(overrides: {kwargs: {step: step, service: organizer}})
             .and_return_its_value
         }
 

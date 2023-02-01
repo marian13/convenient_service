@@ -95,6 +95,15 @@ module ConvenientService
           end
 
           ##
+          # TODO: `and_return`.
+          #
+          # def and_return(...)
+          #   matcher.and_return(...)
+          #
+          #   self
+          # end
+
+          ##
           # @return [ConvenientService::RSpec::Matchers::Custom::DelegateTo]
           #
           def without_calling_original
