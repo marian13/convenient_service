@@ -87,6 +87,28 @@ module ConvenientService
                 end
               end
 
+              class CallerCanNotCalculateReassignment < ::ConvenientService::Error
+                def initialize(method:)
+                  message = <<~TEXT
+                    Method caller failed to calculate reassignment for `#{method.name}`.
+
+                    Method callers can calculate only `in` methods, while reassignments are always `out` methods.
+                  TEXT
+
+                  super(message)
+                end
+              end
+
+              class InputMethodReassignment < ConvenientService::Error
+                def initialize(method:, container:)
+                  message = <<~TEXT
+                    Reassignments are not allowed for `in` methods.
+                  TEXT
+
+                  super(message)
+                end
+              end
+
               class MethodIsNotInputMethod < ConvenientService::Error
                 def initialize(method:, container:)
                   message = <<~TEXT
@@ -110,9 +132,23 @@ module ConvenientService
               class NotCompletedStep < ConvenientService::Error
                 def initialize(method_name:, step:)
                   message = <<~TEXT
-                    `out` method `#{method_name}` is called before its corresponding step `#{step.service}` is completed.
+                    `out` method `#{method_name}` is called before its corresponding step `#{step.printable_service}` is completed.
 
                     Maybe it makes sense to change the steps order?
+                  TEXT
+
+                  super(message)
+                end
+              end
+
+              class NotExistingStepResultDataAttribute < ConvenientService::Error
+                def initialize(key:, step:)
+                  message = <<~TEXT
+                    Step `#{step.printable_service}` result does NOT return `#{key}` data attribute.
+
+                    Maybe there is a typo in `out` definition?
+
+                    Or `success` of `#{step.printable_service}` accepts a wrong key?
                   TEXT
 
                   super(message)

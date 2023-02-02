@@ -13,6 +13,32 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::St
     Class.new do
       include ConvenientService::Service::Plugins::HasResult::Concern
 
+      # rubocop:disable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
+      class self::Result
+        include ConvenientService::Core
+
+        concerns do
+          use ConvenientService::Common::Plugins::HasInternals::Concern
+          use ConvenientService::Common::Plugins::HasConstructor::Concern
+          use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Concern
+        end
+
+        middlewares :initialize do
+          use ConvenientService::Common::Plugins::NormalizesEnv::Middleware
+
+          use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Middleware
+        end
+
+        class self::Internals
+          include ConvenientService::Core
+
+          concerns do
+            use ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Plugins::HasCache::Concern
+          end
+        end
+      end
+      # rubocop:enable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
+
       def initialize(foo:)
         @foo = foo
       end
@@ -26,6 +52,32 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::St
   let(:organizer_service_klass) do
     Class.new do
       include ConvenientService::Service::Plugins::HasResult::Concern
+
+      # rubocop:disable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
+      class self::Result
+        include ConvenientService::Core
+
+        concerns do
+          use ConvenientService::Common::Plugins::HasInternals::Concern
+          use ConvenientService::Common::Plugins::HasConstructor::Concern
+          use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Concern
+        end
+
+        middlewares :initialize do
+          use ConvenientService::Common::Plugins::NormalizesEnv::Middleware
+
+          use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Middleware
+        end
+
+        class self::Internals
+          include ConvenientService::Core
+
+          concerns do
+            use ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Plugins::HasCache::Concern
+          end
+        end
+      end
+      # rubocop:enable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
 
       def result
         success
@@ -178,6 +230,26 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::St
       end
     end
 
+    describe "#has_reassignment?" do
+      let(:name) { :bar }
+
+      context "when `step` has NO reassignemnt output" do
+        let(:outputs) { [:bar] }
+
+        it "returns `false`" do
+          expect(step.has_reassignment?(name)).to eq(false)
+        end
+      end
+
+      context "when `step` has reassignemnt output" do
+        let(:outputs) { [ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Entities::Values::Reassignment.new(:bar)] }
+
+        it "returns `true`" do
+          expect(step.has_reassignment?(name)).to eq(true)
+        end
+      end
+    end
+
     describe "#completed?" do
       context "when `step` is NOT completed" do
         it "returns `false`" do
@@ -190,6 +262,27 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::St
           step.result
 
           expect(step.completed?).to eq(true)
+        end
+      end
+    end
+
+    describe "#reassignment" do
+      let(:name) { :bar }
+
+      context "when `step` has NO reassignemnt output" do
+        let(:outputs) { [:bar] }
+
+        it "returns `nil`" do
+          expect(step.reassignment(name)).to be_nil
+        end
+      end
+
+      context "when `step` has reassignemnt output" do
+        let(:reassignemnt) { ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Entities::Values::Reassignment.new(:bar) }
+        let(:outputs) { [reassignemnt] }
+
+        it "returns that reassignemnt" do
+          expect(step.reassignment(name)).to eq(ConvenientService::Service::Plugins::HasResultSteps::Entities::Method.cast(reassignemnt, direction: :output))
         end
       end
     end
@@ -292,6 +385,12 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::St
         it "marks `step` as complete" do
           expect { step.result }.to change(step, :completed?).from(false).to(true)
         end
+      end
+    end
+
+    describe "#printable_service" do
+      it "returns printable service as string" do
+        expect(step.printable_service).to eq(step.service.klass.to_s)
       end
     end
 

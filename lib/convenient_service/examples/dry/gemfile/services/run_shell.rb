@@ -13,7 +13,7 @@ module ConvenientService
 
             contract do
               schema do
-                required(:command).value(:string)
+                required(:command).filled(:string)
                 optional(:debug).value(:bool)
               end
             end

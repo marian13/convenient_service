@@ -15,7 +15,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::ReadFileCont
   let(:service) { described_class.new(**default_options) }
 
   let(:default_options) { {path: path} }
-  let(:path) { double }
+  let(:path) { "Gemfile" }
 
   example_group "modules" do
     subject { described_class }
@@ -26,6 +26,14 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::ReadFileCont
   describe "#result" do
     subject(:result) { service.result }
 
+    context "when path is NOT present" do
+      let(:path) { "" }
+
+      it "returns failure with data" do
+        expect(result).to be_failure.with_data(path: "must be filled")
+      end
+    end
+
     context "when file does NOT exist" do
       before do
         stub_service(ConvenientService::Examples::Dry::Gemfile::Services::AssertFileExists)
@@ -33,8 +41,8 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::ReadFileCont
           .to return_error
       end
 
-      it "returns intermediate error" do
-        expect(result).to be_error.of(ConvenientService::Examples::Dry::Gemfile::Services::AssertFileExists)
+      it "returns intermediate step result" do
+        expect(result).to be_not_success.of(ConvenientService::Examples::Dry::Gemfile::Services::AssertFileExists)
       end
     end
 
@@ -57,7 +65,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::ReadFileCont
             .to return_success
         end
 
-        it "return success with content" do
+        it "returns success with content" do
           expect(result).to be_success.with_data({content: content})
         end
       end
@@ -71,8 +79,8 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::ReadFileCont
             .to return_error
         end
 
-        it "returns intermediate error" do
-          expect(result).to be_error.of(ConvenientService::Examples::Dry::Gemfile::Services::AssertFileNotEmpty)
+        it "returns intermediate step result" do
+          expect(result).to be_not_success.of(ConvenientService::Examples::Dry::Gemfile::Services::AssertFileNotEmpty)
         end
       end
     end

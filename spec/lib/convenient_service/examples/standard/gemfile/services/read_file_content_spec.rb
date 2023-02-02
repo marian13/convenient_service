@@ -38,8 +38,8 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::ReadFil
           .to return_error
       end
 
-      it "returns intermediate error" do
-        expect(result).to be_error.of(ConvenientService::Examples::Standard::Gemfile::Services::AssertFileExists)
+      it "returns intermediate step result" do
+        expect(result).to be_not_success.of(ConvenientService::Examples::Standard::Gemfile::Services::AssertFileExists)
       end
     end
 
@@ -62,7 +62,7 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::ReadFil
             .to return_success
         end
 
-        it "return success with content" do
+        it "returns success with content" do
           expect(result).to be_success.with_data({content: content})
         end
       end
@@ -76,8 +76,8 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::ReadFil
             .to return_error
         end
 
-        it "returns intermediate error" do
-          expect(result).to be_error.of(ConvenientService::Examples::Standard::Gemfile::Services::AssertFileNotEmpty)
+        it "returns intermediate step result" do
+          expect(result).to be_not_success.of(ConvenientService::Examples::Standard::Gemfile::Services::AssertFileNotEmpty)
         end
       end
     end

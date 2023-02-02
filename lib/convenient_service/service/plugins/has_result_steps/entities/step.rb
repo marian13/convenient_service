@@ -3,6 +3,7 @@
 require_relative "step/commands"
 require_relative "step/concern"
 require_relative "step/errors"
+require_relative "step/plugins"
 require_relative "step/structs"
 
 module ConvenientService

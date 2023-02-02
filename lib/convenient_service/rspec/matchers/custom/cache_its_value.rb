@@ -23,26 +23,26 @@ module ConvenientService
           end
 
           def failure_message
-            "expected #{printable_block} to cache its value"
+            "expected #{printable_block_expectation} to cache its value"
           end
 
           def failure_message_when_negated
-            "expected #{printable_block} NOT to cache its value"
+            "expected #{printable_block_expectation} NOT to cache its value"
           end
 
           ##
           # NOTE: An example of how RSpec extracts block source, but they marked it as private.
           # https://github.com/rspec/rspec-expectations/blob/311aaf245f2c5493572bf683b8c441cb5f7e44c8/lib/rspec/matchers/built_in/change.rb#L437
           #
-          # TODO: `printable_block` when `method_source` is available.
+          # TODO: `printable_block_expectation` when `method_source` is available.
           # https://github.com/banister/method_source
           #
-          # def printable_block
-          #   @printable_block ||= block_expectation.source
+          # def printable_block_expectation
+          #   @printable_block_expectation ||= block_expectation.source
           # end
           #
-          def printable_block
-            @printable_block ||= "{ ... }"
+          def printable_block_expectation
+            @printable_block_expectation ||= "{ ... }"
           end
 
           private

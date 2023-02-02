@@ -6,7 +6,7 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Commands::CastMethodName do
-  example_group "class methhods" do
+  example_group "class methods" do
     describe ".call" do
       let(:options) { double }
       let(:casted) { described_class.call(other: other, options: options) }
@@ -78,10 +78,18 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
           end
 
           context "when value by that key is raw value" do
-            let(:other) { {foo: ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Entities::Values::Raw.wrap(:bar)} }
+            let(:other) { {foo: ConvenientService::Support::RawValue.wrap(:bar)} }
 
             it "returns raw value casted to method name" do
               expect(casted).to eq(ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Entities::Name.new(:foo))
+            end
+          end
+
+          context "when value by that key is reassignemnt" do
+            let(:other) { {foo: ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Entities::Values::Reassignment.new("bar")} }
+
+            it "returns reassignemnt casted to method name" do
+              expect(casted).to eq(ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Entities::Name.new(:bar))
             end
           end
         end
@@ -92,6 +100,14 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
           it "returns `nil`" do
             expect(casted).to be_nil
           end
+        end
+      end
+
+      context "when `other` is reassignemnt" do
+        let(:other) { ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Entities::Values::Reassignment.new("foo") }
+
+        it "returns reassignemnt casted to method name" do
+          expect(casted).to eq(ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Entities::Name.new(:foo))
         end
       end
 

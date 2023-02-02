@@ -6,7 +6,7 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Commands::CastMethodDirection do
-  example_group "class methhods" do
+  example_group "class methods" do
     describe ".call" do
       let(:other) { double }
       let(:options) { {direction: :input} }

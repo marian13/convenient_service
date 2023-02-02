@@ -8,7 +8,7 @@ module ConvenientService
           class Method
             module Commands
               ##
-              # TODO: Replace `CastMethodKey`, `CastMethodName`, `CastMethodCaller` by declarative caster?
+              # TODO: Abstract factory.
               #
               class CastMethodCaller < Support::Command
                 attr_reader :other, :options
@@ -23,6 +23,7 @@ module ConvenientService
                   when ::Symbol then cast_symbol
                   when ::String then cast_string
                   when ::Hash then cast_hash
+                  when Entities::Values::Reassignment then cast_reassignment
                   when Method then cast_method
                   end
                 end
@@ -37,6 +38,10 @@ module ConvenientService
                   Entities::Callers::Usual.new(other)
                 end
 
+                def cast_reassignment
+                  Entities::Callers::Reassignment.new(other)
+                end
+
                 def cast_hash
                   return unless other.keys.one?
 
@@ -49,8 +54,10 @@ module ConvenientService
                     Entities::Callers::Alias.new(value)
                   when ::Proc
                     Entities::Callers::Proc.new(value)
-                  when Entities::Values::Raw
+                  when Support::RawValue
                     Entities::Callers::Raw.new(value)
+                  when Entities::Values::Reassignment
+                    Entities::Callers::Reassignment.new(value)
                   end
                 end
 

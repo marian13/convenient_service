@@ -42,40 +42,28 @@ RSpec.describe ConvenientService::Common::Plugins::CachesReturnValue::Middleware
 
       let(:service_instance) { service_class.new }
       let(:service_result_value) { "service result value" }
-      let(:key) { ConvenientService::Support::Cache.key(method_name) }
-      let(:cache) { ConvenientService::Support::Cache.new }
-
-      context "when method is called first time" do
-        let(:cache) { ConvenientService::Support::Cache.new.tap { |cache| cache[key] = service_result_value } }
-
-        it "initaliazes `cache[:return_values]`" do
-          method_value
-
-          expect(service_instance.internals.cache[:return_values]).to eq(cache)
-        end
-      end
+      let(:key) { ConvenientService::Support::Cache.keygen(:return_values, method_name) }
 
       context "when method call is NOT cached" do
         specify { expect { method_value }.to call_chain_next.on(method) }
 
-        it "writes `chain.next` to `cache[:return_values]` with key" do
-          allow(service_instance.internals.cache).to receive(:[]).with(:return_values).and_return(cache)
-          allow(cache).to receive(:write).with(key, service_result_value).and_call_original
+        it "writes `chain.next` to `cache` with key" do
+          allow(service_instance.internals.cache).to receive(:write).with(key, service_result_value).and_call_original
 
           method_value
 
-          expect(cache).to have_received(:write)
+          expect(service_instance.internals.cache).to have_received(:write)
         end
 
         it "returns cached value by key" do
-          expect(method_value).to eq(service_instance.internals.cache[:return_values].read(key))
+          expect(method_value).to eq(service_instance.internals.cache.read(key))
         end
       end
 
       context "when method call is cached" do
         before do
           ##
-          # NOTE: Calls method in order to initialize `service_instance.internals.cache[:return_values]`.
+          # NOTE: Calls method in order to initialize `service_instance.internals.cache`.
           #
           method_value
         end
@@ -83,7 +71,7 @@ RSpec.describe ConvenientService::Common::Plugins::CachesReturnValue::Middleware
         specify { expect { method_value }.not_to call_chain_next.on(method) }
 
         it "returns cached value by key" do
-          expect(method_value).to eq(service_instance.internals.cache[:return_values].read(key))
+          expect(method_value).to eq(service_instance.internals.cache.read(key))
         end
       end
     end

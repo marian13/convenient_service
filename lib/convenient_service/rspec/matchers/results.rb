@@ -4,6 +4,10 @@ require_relative "results/be_error"
 require_relative "results/be_failure"
 require_relative "results/be_success"
 
+require_relative "results/be_not_error"
+require_relative "results/be_not_failure"
+require_relative "results/be_not_success"
+
 module ConvenientService
   module RSpec
     module Matchers
@@ -14,6 +18,10 @@ module ConvenientService
           include Results::BeError
           include Results::BeFailure
           include Results::BeSuccess
+
+          include Results::BeNotError
+          include Results::BeNotFailure
+          include Results::BeNotSuccess
         end
       end
     end

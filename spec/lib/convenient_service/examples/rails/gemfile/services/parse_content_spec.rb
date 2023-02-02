@@ -171,6 +171,16 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::ParseConte
       end
     end
 
+    if ConvenientService::Dependencies.support_has_result_params_validations_using_active_model_validations?
+      context "when content is NOT present" do
+        let(:content) { "" }
+
+        it "returns failure with data" do
+          expect(result).to be_failure.with_data(content: "can't be blank")
+        end
+      end
+    end
+
     context "when content has invalid Ruby syntax" do
       before do
         stub_service(ConvenientService::Examples::Rails::Gemfile::Services::AssertValidRubySyntax)
@@ -178,8 +188,8 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::ParseConte
           .to return_error
       end
 
-      it "returns intermediate error" do
-        expect(result).to be_error.of(ConvenientService::Examples::Rails::Gemfile::Services::AssertValidRubySyntax)
+      it "returns intermediate step result" do
+        expect(result).to be_not_success.of(ConvenientService::Examples::Rails::Gemfile::Services::AssertValidRubySyntax)
       end
     end
 

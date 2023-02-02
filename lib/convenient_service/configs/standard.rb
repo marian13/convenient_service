@@ -20,6 +20,7 @@ module ConvenientService
         concerns do
           use Plugins::Common::HasInternals::Concern
           use Plugins::Common::HasConstructor::Concern
+          use Plugins::Common::HasConstructorWithoutInitialize::Concern
 
           use Plugins::Common::CachesConstructorParams::Concern
           use Plugins::Common::CanBeCopied::Concern
@@ -27,10 +28,12 @@ module ConvenientService
           use Plugins::Service::HasResultShortSyntax::Concern
           use Plugins::Service::HasResultSteps::Concern
           use Plugins::Service::CanRecalculateResult::Concern
+          use Plugins::Service::HasResultStatusCheckShortSyntax::Concern
 
           use Plugins::Common::HasCallbacks::Concern
           use Plugins::Common::HasAroundCallbacks::Concern
 
+          use Plugins::Service::HasInspect::Concern
           ##
           # NOTE: Optional plugins.
           # TODO: Specs.
@@ -86,6 +89,10 @@ module ConvenientService
           use Plugins::Service::DisplaysResult::Error::Middleware
         end
 
+        middlewares :result, scope: :class do
+          use Plugins::Common::NormalizesEnv::Middleware
+        end
+
         middlewares :step, scope: :class do
           use Plugins::Common::NormalizesEnv::Middleware
 
@@ -105,9 +112,20 @@ module ConvenientService
 
           concerns do
             use Plugins::Common::HasInternals::Concern
+            use Plugins::Common::HasConstructor::Concern
+
+            use Plugins::Result::HasJsendStatusAndAttributes::Concern
 
             use Plugins::Result::HasResultShortSyntax::Concern
             use Plugins::Result::CanRecalculateResult::Concern
+
+            use Plugins::Result::HasInspect::Concern
+          end
+
+          middlewares :initialize do
+            use Plugins::Common::NormalizesEnv::Middleware
+
+            use Plugins::Result::HasJsendStatusAndAttributes::Middleware
           end
 
           middlewares :success? do
@@ -178,6 +196,8 @@ module ConvenientService
 
           concerns do
             use Plugins::Common::HasInternals::Concern
+
+            use Plugins::Step::HasInspect::Concern
           end
 
           middlewares :result do
@@ -192,6 +212,18 @@ module ConvenientService
             concerns do
               use Plugins::Internals::HasCache::Concern
             end
+          end
+        end
+
+        if Dependencies.rspec.loaded?
+          concerns do
+            insert_before 0, Plugins::Service::CanHaveStubbedResult::Concern
+          end
+
+          middlewares :result, scope: :class do
+            insert_after \
+              Plugins::Common::NormalizesEnv::Middleware,
+              Plugins::Service::CanHaveStubbedResult::Middleware
           end
         end
       end

@@ -151,6 +151,14 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::ParseContent
       end
     end
 
+    context "when content is NOT present" do
+      let(:content) { "" }
+
+      it "returns failure with data" do
+        expect(result).to be_failure.with_data(content: "must be filled")
+      end
+    end
+
     context "when content has invalid Ruby syntax" do
       before do
         stub_service(ConvenientService::Examples::Dry::Gemfile::Services::AssertValidRubySyntax)
@@ -158,8 +166,8 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::ParseContent
           .to return_error
       end
 
-      it "returns intermediate error" do
-        expect(result).to be_error.of(ConvenientService::Examples::Dry::Gemfile::Services::AssertValidRubySyntax)
+      it "returns intermediate step result" do
+        expect(result).to be_not_success.of(ConvenientService::Examples::Dry::Gemfile::Services::AssertValidRubySyntax)
       end
     end
 

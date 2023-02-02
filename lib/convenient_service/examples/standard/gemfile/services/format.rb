@@ -14,6 +14,8 @@ module ConvenientService
           class Format
             include ConvenientService::Standard::Config
 
+            attr_reader :path
+
             step Services::ReadFileContent, in: :path, out: :content
             step Services::StripComments, in: :content, out: :content_without_comments
             step Services::ParseContent, in: {content: :content_without_comments}, out: :parsed_content

@@ -6,7 +6,7 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Commands::CastMethodCaller do
-  example_group "class methhods" do
+  example_group "class methods" do
     describe ".call" do
       let(:options) { double }
       let(:casted) { described_class.call(other: other, options: options) }
@@ -79,11 +79,20 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
           end
 
           context "when value by that key is raw value" do
-            let(:raw_value) { ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Entities::Values::Raw.wrap(:bar) }
+            let(:raw_value) { ConvenientService::Support::RawValue.wrap(:bar) }
             let(:other) { {foo: raw_value} }
 
             it "returns raw value casted to method caller" do
               expect(casted).to eq(ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Entities::Callers::Raw.new(raw_value))
+            end
+          end
+
+          context "when value by that key is reassignment" do
+            let(:reassignment) { ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Entities::Values::Reassignment.new(:bar) }
+            let(:other) { {foo: reassignment} }
+
+            it "returns raw value casted to method caller" do
+              expect(casted).to eq(ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Entities::Callers::Reassignment.new(reassignment))
             end
           end
         end
@@ -94,6 +103,15 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
           it "returns `nil`" do
             expect(casted).to be_nil
           end
+        end
+      end
+
+      context "when `other` is reassignment" do
+        let(:reassignment) { ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Entities::Values::Reassignment.new("foo") }
+        let(:other) { reassignment }
+
+        it "returns reassignment casted to method caller" do
+          expect(casted).to eq(ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Entities::Callers::Reassignment.new(reassignment))
         end
       end
 

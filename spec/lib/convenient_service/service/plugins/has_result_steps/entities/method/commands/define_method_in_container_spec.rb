@@ -24,17 +24,43 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
       include ConvenientService::Common::Plugins::HasConstructor::Concern
       include ConvenientService::Service::Plugins::HasResult::Concern
 
+      # rubocop:disable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
+      class self::Result
+        include ConvenientService::Core
+
+        concerns do
+          use ConvenientService::Common::Plugins::HasInternals::Concern
+          use ConvenientService::Common::Plugins::HasConstructor::Concern
+          use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Concern
+        end
+
+        middlewares :initialize do
+          use ConvenientService::Common::Plugins::NormalizesEnv::Middleware
+
+          use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Middleware
+        end
+
+        class self::Internals
+          include ConvenientService::Core
+
+          concerns do
+            use ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Plugins::HasCache::Concern
+          end
+        end
+      end
+      # rubocop:enable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
+
       def result
         success(data: {bar: "bar"})
       end
     end
   end
 
-  let(:step) { ConvenientService::Service::Plugins::HasResultSteps::Entities::Step.new(step_service_class, in: :foo, out: :bar, container: organizer_service_class, organizer: organizer_service_instance) }
-
+  let(:step) { ConvenientService::Service::Plugins::HasResultSteps::Entities::Step.new(step_service_class, in: :foo, out: out, container: organizer_service_class, organizer: organizer_service_instance) }
   let(:container) { ConvenientService::Service::Plugins::HasResultSteps::Entities::Service.cast(organizer_service_class) }
-  let(:method) { ConvenientService::Service::Plugins::HasResultSteps::Entities::Method.cast(:bar, direction: :output) }
+  let(:method) { ConvenientService::Service::Plugins::HasResultSteps::Entities::Method.cast(out, direction: :output) }
   let(:index) { 0 }
+  let(:out) { :bar }
 
   example_group "class methods" do
     describe ".call" do
@@ -60,7 +86,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
         context "when step is NOT completed" do
           let(:error_message) do
             <<~TEXT
-              `out` method `#{method}` is called before its corresponding step `#{step.service}` is completed.
+              `out` method `#{method}` is called before its corresponding step `#{step.printable_service}` is completed.
 
               Maybe it makes sense to change the steps order?
             TEXT
@@ -76,13 +102,36 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
         context "when step is completed" do
           before do
             ##
-            # NOTE: Completed the step.
+            # NOTE: Completes the step.
             #
             step.result
           end
 
-          it "returns step service result data by key" do
-            expect(organizer_service_instance.bar).to eq(step.result.data[method.key])
+          context "when step service result data has NO data attribute by key" do
+            let(:out) { {key => :bar} }
+            let(:key) { :baz }
+
+            let(:error_message) do
+              <<~TEXT
+                Step `#{step.printable_service}` result does NOT return `#{key}` data attribute.
+
+                Maybe there is a typo in `out` definition?
+
+                Or `success` of `#{step.printable_service}` accepts a wrong key?
+              TEXT
+            end
+
+            it "returns step service result data attribute by key" do
+              expect { organizer_service_instance.bar }
+                .to raise_error(ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Errors::NotExistingStepResultDataAttribute)
+                .with_message(error_message)
+            end
+          end
+
+          context "when step service result data has data attribute by key" do
+            it "returns step service result data attribute by key" do
+              expect(organizer_service_instance.bar).to eq(step.result.data[method.key])
+            end
           end
         end
       end

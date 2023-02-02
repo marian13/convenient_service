@@ -78,6 +78,16 @@ tasks:
 
   docker:build:ruby_2.7:
     cmds:
+      ##
+      # NOTE: Meaning of `|| 2> /dev/null`.
+      # https://stackoverflow.com/a/10250395/12201472
+      #
+      # NOTE: Meaning of `|| true`.
+      # https://superuser.com/a/887349/1180656
+      #
+      - rm Gemfile.2.7 2> /dev/null || true
+      - rm Gemfile.2.7.lock 2> /dev/null || true
+      - cp Gemfile Gemfile.2.7
       - docker build . -f docker/2.7/Dockerfile -t convenient_service:2.7
     preconditions:
       - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
@@ -85,6 +95,16 @@ tasks:
 
   docker:build:ruby_3.0:
     cmds:
+      ##
+      # NOTE: Meaning of `|| 2> /dev/null`.
+      # https://stackoverflow.com/a/10250395/12201472
+      #
+      # NOTE: Meaning of `|| true`.
+      # https://superuser.com/a/887349/1180656
+      #
+      - rm Gemfile.3.0 2> /dev/null || true
+      - rm Gemfile.3.0.lock 2> /dev/null || true
+      - cp Gemfile Gemfile.3.0
       - docker build . -f docker/3.0/Dockerfile -t convenient_service:3.0
     preconditions:
       - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
@@ -92,10 +112,35 @@ tasks:
 
   docker:build:ruby_3.1:
     cmds:
+      ##
+      # NOTE: Meaning of `|| 2> /dev/null`.
+      # https://stackoverflow.com/a/10250395/12201472
+      #
+      # NOTE: Meaning of `|| true`.
+      # https://superuser.com/a/887349/1180656
+      #
+      - rm Gemfile.3.1 2> /dev/null || true
+      - rm Gemfile.3.1.lock 2> /dev/null || true
+      - cp Gemfile Gemfile.3.1
       - docker build . -f docker/3.1/Dockerfile -t convenient_service:3.1
     preconditions:
       - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
         msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
+
+  ##
+  # NOTE: Dev only command.
+  # NOTE: macOS specific command.
+  #
+  docker:start:
+    cmds:
+      - open -a Docker
+
+  ##
+  # NOTE: Dev only command.
+  #
+  editor:open:
+    cmds:
+      - code .
 
   ##
   # NOTE: `sdoc` (wrapper for `rdoc`) is replaced by `yard`, since you have a feeling like every time is a first time with `rdoc`.
@@ -149,6 +194,14 @@ tasks:
     cmds:
       - git diff --cached --name-only --diff-filter=d "spec/**"
 
+  ##
+  # NOTE: Dev only command.
+  # NOTE: macOS specific command.
+  #
+  github:open:
+    cmds:
+      - open -na "Google Chrome" --args --new-window --incognito "https://github.com/marian13/convenient_service"
+
   lint:
     cmds:
       - task: rubocop
@@ -194,25 +247,17 @@ tasks:
       - bundle exec rake playground
     interactive: true
 
-  release:major:
+  release:
     cmds:
-      - gem bump convenient_service --version major
-
-  release:minor:
-    cmds:
-      - gem bump convenient_service --version minor
-
-  release:patch:
-    cmds:
-      - gem bump convenient_service --version patch
+      - gem release
 
   rspec:
     cmds:
       - task: rspec:standard
-      - task: rspec:rails_5.2
-      - task: rspec:rails_6.0
-      - task: rspec:rails_6.1
       - task: rspec:rails_7.0
+      - task: rspec:rails_6.1
+      - task: rspec:rails_6.0
+      - task: rspec:rails_5.2
       - task: rspec:dry
 
   ##
@@ -314,3 +359,10 @@ tasks:
   rubocop:format:
     cmds:
       - bundle exec rubocop --config .rubocop.yml -A {{.CLI_ARGS}}
+
+  ##
+  # NOTE: Dev only command.
+  #
+  tmuxinator:start:
+    cmds:
+      - tmuxinator start convenient_service --project-config=.dev/.tmuxinator.yml

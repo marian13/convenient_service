@@ -5,6 +5,19 @@ require "convenient_service"
 RSpec.describe ConvenientService::Utils::Module do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
+  describe ".fetch_own_const" do
+    let(:mod) { Class.new }
+    let(:const_name) { :NotExistingConst }
+    let(:fallback_block) { proc { 42 } }
+
+    specify do
+      expect { described_class.fetch_own_const(mod, const_name, &fallback_block) }
+        .to delegate_to(ConvenientService::Utils::Module::FetchOwnConst, :call)
+        .with_arguments(mod, const_name, &fallback_block)
+        .and_return_its_value
+    end
+  end
+
   describe ".get_own_const" do
     let(:mod) { Class.new }
     let(:const_name) { :NotExistingConst }
@@ -25,6 +38,18 @@ RSpec.describe ConvenientService::Utils::Module do
       expect { described_class.get_own_instance_method(mod, method_name) }
         .to delegate_to(ConvenientService::Utils::Module::GetOwnInstanceMethod, :call)
         .with_arguments(mod, method_name)
+        .and_return_its_value
+    end
+  end
+
+  describe ".include_module?" do
+    let(:mod) { Class.new }
+    let(:other_mod) { Module.new }
+
+    specify do
+      expect { described_class.include_module?(mod, other_mod) }
+        .to delegate_to(ConvenientService::Utils::Module::IncludeModule, :call)
+        .with_arguments(mod, other_mod)
         .and_return_its_value
     end
   end

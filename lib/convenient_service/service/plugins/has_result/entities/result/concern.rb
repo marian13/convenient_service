@@ -1,15 +1,16 @@
 # frozen_string_literal: true
 
-require_relative "concern/instance_methods"
-
 module ConvenientService
   module Service
     module Plugins
       module HasResult
         module Entities
           class Result
+            ##
+            # @internal
+            #   This concern is needed for `CastResultClass` and `be_success`, `be_error`, `be_failure` matchers.
+            #
             module Concern
-              include Support::Concern
             end
           end
         end

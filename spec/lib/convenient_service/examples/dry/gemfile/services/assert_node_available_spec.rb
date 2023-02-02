@@ -33,8 +33,8 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::AssertNodeAv
     context "when node is NOT available" do
       let(:node_available_status) { :error }
 
-      it "returns intermediate error" do
-        expect(result).to be_error.of(ConvenientService::Examples::Dry::Gemfile::Services::RunShell)
+      it "returns intermediate step result" do
+        expect(result).to be_not_success.of(ConvenientService::Examples::Dry::Gemfile::Services::RunShell)
       end
     end
 

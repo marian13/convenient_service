@@ -16,9 +16,19 @@ module ConvenientService
         ##
         # @return [ConvenientService::Support::Cache::Key]
         #
-        def key(...)
+        def keygen(...)
           Cache::Key.new(...)
         end
+      end
+
+      ##
+      # @return [Boolean]
+      #
+      # @internal
+      #   https://ruby-doc.org/core-2.7.0/Hash.html#method-i-empty-3F
+      #
+      def empty?
+        hash.empty?
       end
 
       ##
@@ -98,6 +108,29 @@ module ConvenientService
         return read(key) unless block
 
         exist?(key) ? read(key) : write(key, block.call)
+      end
+
+      ##
+      # @return [ConvenientService::Support::Cache]
+      #
+      def clear
+        hash.clear
+
+        self
+      end
+
+      ##
+      # @return [ConvenientService::Support::Cache]
+      #
+      def scope(key)
+        fetch(key) { Support::Cache.new }
+      end
+
+      ##
+      # @return [ConvenientService::Support::Cache::Key]
+      #
+      def keygen(...)
+        Cache.keygen(...)
       end
 
       ##

@@ -7,6 +7,31 @@ require "convenient_service"
 RSpec.describe ConvenientService::Utils::Object do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
+  describe ".instance_variable_delete" do
+    let(:object) { Object.new }
+    let(:ivar_name) { :@foo }
+
+    specify do
+      expect { described_class.instance_variable_delete(object, ivar_name) }
+        .to delegate_to(ConvenientService::Utils::Object::InstanceVariableDelete, :call)
+        .with_arguments(object, ivar_name)
+        .and_return_its_value
+    end
+  end
+
+  describe ".instance_variable_fetch" do
+    let(:object) { Object.new }
+    let(:ivar_name) { :@foo }
+    let(:fallback_block) { proc { :bar } }
+
+    specify do
+      expect { described_class.instance_variable_fetch(object, ivar_name, &fallback_block) }
+        .to delegate_to(ConvenientService::Utils::Object::InstanceVariableFetch, :call)
+        .with_arguments(object, ivar_name, &fallback_block)
+        .and_return_its_value
+    end
+  end
+
   describe ".resolve_type" do
     let(:object) { Kernel }
 

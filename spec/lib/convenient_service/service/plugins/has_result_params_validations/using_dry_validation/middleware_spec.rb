@@ -35,6 +35,30 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultParamsValidations::
           include ConvenientService::Service::Plugins::HasResult::Concern
           include ConvenientService::Service::Plugins::HasResultParamsValidations::UsingDryValidation::Concern
 
+          class self::Result
+            include ConvenientService::Core
+
+            concerns do
+              use ConvenientService::Common::Plugins::HasInternals::Concern
+              use ConvenientService::Common::Plugins::HasConstructor::Concern
+              use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Concern
+            end
+
+            middlewares :initialize do
+              use ConvenientService::Common::Plugins::NormalizesEnv::Middleware
+
+              use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Middleware
+            end
+
+            class self::Internals
+              include ConvenientService::Core
+
+              concerns do
+                use ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Plugins::HasCache::Concern
+              end
+            end
+          end
+
           class self::Internals
             include ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Plugins::HasCache::Concern
           end
@@ -54,16 +78,74 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultParamsValidations::
 
       let(:service_instance) { service_class.new }
 
+      context "when contact does NOT have schema" do
+        ##
+        # TODO: Factories. Highest priority.
+        #
+        # rubocop:disable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
+        let(:service_class) do
+          Class.new do
+            include ConvenientService::Common::Plugins::HasInternals::Concern
+            include ConvenientService::Common::Plugins::CachesConstructorParams::Concern
+            include ConvenientService::Service::Plugins::HasResult::Concern
+            include ConvenientService::Service::Plugins::HasResultParamsValidations::UsingDryValidation::Concern
+
+            class self::Result
+              include ConvenientService::Core
+
+              concerns do
+                use ConvenientService::Common::Plugins::HasInternals::Concern
+                use ConvenientService::Common::Plugins::HasConstructor::Concern
+                use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Concern
+              end
+
+              middlewares :initialize do
+                use ConvenientService::Common::Plugins::NormalizesEnv::Middleware
+
+                use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Middleware
+              end
+
+              class self::Internals
+                include ConvenientService::Core
+
+                concerns do
+                  use ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Plugins::HasCache::Concern
+                end
+              end
+            end
+
+            class self::Internals
+              include ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Plugins::HasCache::Concern
+            end
+
+            def result
+              success
+            end
+          end
+        end
+        # rubocop:enable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
+
+        before do
+          service_instance.internals.cache.write(:constructor_params, ConvenientService::Common::Plugins::CachesConstructorParams::Entities::ConstructorParams.new(kwargs: {foo: "x"}))
+        end
+
+        specify do
+          expect { method_value }
+            .to call_chain_next.on(method)
+            .and_return_its_value
+        end
+      end
+
       context "when validation does NOT have any errors" do
         before do
           service_instance.internals.cache.write(:constructor_params, ConvenientService::Common::Plugins::CachesConstructorParams::Entities::ConstructorParams.new(kwargs: {foo: "x"}))
         end
 
-        specify {
+        specify do
           expect { method_value }
             .to call_chain_next.on(method)
             .and_return_its_value
-        }
+        end
       end
 
       context "when validation has any error" do
