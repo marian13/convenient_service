@@ -28,7 +28,7 @@ module ConvenientService
             end
 
             def result
-              success(merged_sections: [header, body].join)
+              success(merged_sections: "#{header}\n#{body}")
             end
 
             def validate_header

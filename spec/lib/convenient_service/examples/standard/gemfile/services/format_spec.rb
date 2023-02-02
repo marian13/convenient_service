@@ -1,0 +1,243 @@
+# frozen_string_literal: true
+
+require "spec_helper"
+
+require "convenient_service"
+
+RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::Format do
+  include ConvenientService::RSpec::Helpers::StubService
+
+  include ConvenientService::RSpec::Matchers::DelegateTo
+  include ConvenientService::RSpec::Matchers::IncludeModule
+  include ConvenientService::RSpec::Matchers::HaveAttrReader
+  include ConvenientService::RSpec::Matchers::Results
+
+  let(:service) { described_class.new(path: path) }
+
+  let(:path) { file.path }
+
+  let(:file) { Tempfile.new.tap { |file| file.write(initial_content) }.tap(&:close) }
+
+  let(:initial_content) do
+    <<~'RUBY'
+      # frozen_string_literal: true
+
+      gem "bootsnap", ">= 1.4.4", require: false
+      gem "pg"
+      gem "rails", "~> 6.1.3", ">= 6.1.3.2"
+      gem "webpacker", "~> 5.0"
+
+      group :development do
+        gem "listen", "~> 3.3"
+        gem "web-console", ">= 4.1.0"
+      end
+
+      group :development, :test do
+        gem "rspec-rails"
+      end
+
+      group :test do
+        gem "simplecov", require: false
+      end
+
+      gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+      ruby "3.0.1"
+
+      source "https://rubygems.org"
+
+      git_source(:github) { |repo| "https://github.com/#{repo}.git" }
+    RUBY
+  end
+
+  let(:formatted_content) do
+    <<~'RUBY'
+      # frozen_string_literal: true
+
+      source "https://rubygems.org"
+
+      git_source(:github) { |repo| "https://github.com/#{repo}.git" }
+
+      ruby "3.0.1"
+
+      gem "bootsnap", ">= 1.4.4", require: false
+      gem "pg"
+      gem "rails", "~> 6.1.3", ">= 6.1.3.2"
+      gem "webpacker", "~> 5.0"
+      gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+      group :development do
+        gem "listen", "~> 3.3"
+        gem "web-console", ">= 4.1.0"
+      end
+
+      group :development, :test do
+        gem "rspec-rails"
+      end
+
+      group :test do
+        gem "simplecov", require: false
+      end
+    RUBY
+  end
+
+  let(:parsed_content) do
+    {
+      ruby: [
+        %(ruby "3.0.1")
+      ],
+      source: [
+        %(source "https://rubygems.org")
+      ],
+      git_source: [
+        %(git_source(:github) { |repo| "https://github.com/\#{repo}.git" })
+      ],
+      gems: [
+        {
+          envs: [],
+          line: %(gem "bootsnap", ">= 1.4.4", require: false)
+        },
+        {
+          envs: [],
+          line: %(gem "pg")
+        },
+        {
+          envs: [],
+          line: %(gem "rails", "~> 6.1.3", ">= 6.1.3.2")
+        },
+        {
+          envs: [],
+          line: %(gem "webpacker", "~> 5.0")
+        },
+        {
+          envs: [:development],
+          line: %(gem "listen", "~> 3.3")
+        },
+        {
+          envs: [:development],
+          line: %(gem "web-console", ">= 4.1.0")
+        },
+        {
+          envs: [:development, :test],
+          line: %(gem "rspec-rails")
+        },
+        {
+          envs: [:test],
+          line: %(gem "simplecov", require: false)
+        },
+        {
+          envs: [],
+          line: %(gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby])
+        }
+      ],
+      rest: [
+        "# frozen_string_literal: true",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    }
+  end
+
+  example_group "modules" do
+    subject { described_class }
+
+    it { is_expected.to include_module(ConvenientService::Standard::Config) }
+  end
+
+  example_group "attributes" do
+    subject { service }
+
+    it { is_expected.to have_attr_reader(:path) }
+  end
+
+  example_group "instance methods" do
+    describe "#result" do
+      subject(:result) { described_class.result(path: path) }
+
+      before do
+        stub_service(ConvenientService::Examples::Standard::Gemfile::Services::StripComments)
+          .with_arguments(content: initial_content)
+          .to return_success
+          .with_data(content_without_comments: initial_content)
+      end
+
+      context "when formatting is NOT successful" do
+        context "when reading of file content is NOT successful" do
+          let(:path) { "non_existing_path" }
+
+          it "returns intermediate step result" do
+            expect(result).to be_not_success.of_step(ConvenientService::Examples::Standard::Gemfile::Services::ReadFileContent)
+          end
+        end
+
+        context "when stripping of comments is NOT successful" do
+          before do
+            stub_service(ConvenientService::Examples::Standard::Gemfile::Services::StripComments)
+              .with_arguments(content: initial_content)
+              .to return_error
+          end
+
+          it "returns intermediate step result" do
+            expect(result).to be_not_success.of_step(ConvenientService::Examples::Standard::Gemfile::Services::StripComments)
+          end
+        end
+
+        context "when parsing of content is NOT successful" do
+          ##
+          # NOTE: Contains no valid Ruby syntax.
+          #
+          let(:initial_content) do
+            <<~'RUBY'
+              gem\\
+            RUBY
+          end
+
+          it "returns intermediate step result" do
+            expect(result).to be_not_success.of_step(ConvenientService::Examples::Standard::Gemfile::Services::ParseContent)
+          end
+        end
+
+        context "when merging of sections is NOT successful" do
+          let(:initial_content) { "ruby \"3.0.1\"" }
+
+          it "returns intermediate step result" do
+            expect(result).to be_not_success.of_step(ConvenientService::Examples::Standard::Gemfile::Services::MergeSections)
+          end
+        end
+      end
+
+      context "when formatting is successful" do
+        specify do
+          ##
+          # TODO: `delegate_to_service`?
+          #
+          expect { result }
+            .to delegate_to(ConvenientService::Examples::Standard::Gemfile::Services::FormatHeader, :result)
+            .with_arguments(parsed_content: parsed_content)
+        end
+
+        specify do
+          expect { result }
+            .to delegate_to(ConvenientService::Examples::Standard::Gemfile::Services::FormatBody, :result)
+            .with_arguments(parsed_content: parsed_content)
+        end
+
+        specify do
+          expect { result }
+            .to delegate_to(ConvenientService::Examples::Standard::Gemfile::Services::ReplaceFileContent, :result)
+            .with_arguments(path: path, content: formatted_content)
+        end
+
+        it "returns success" do
+          expect(result).to be_success.of_service(ConvenientService::Examples::Standard::Gemfile::Services::Format)
+        end
+      end
+    end
+  end
+end

@@ -96,7 +96,7 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::MergeSe
 
     context "when merging of sections is successful" do
       it "returns success with contated header and body" do
-        expect(result).to be_success.with_data(merged_sections: [header, body].join).of_service(described_class)
+        expect(result).to be_success.with_data(merged_sections: "#{header}\n#{body}").of_service(described_class)
       end
     end
   end
