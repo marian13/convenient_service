@@ -12,7 +12,7 @@ module ConvenientService
           # @param prepend [Boolean]
           # @return [void]
           #
-          def initialize(method_name, scope: :instance, from:, prepend: false)
+          def initialize(method_name, from:, scope: :instance, prepend: false)
             @method_name = method_name
             @scope = scope
             @from = from
@@ -33,7 +33,7 @@ module ConvenientService
             actual_method = method_name_parts.reduce(main_namespace) do |namespace, name|
               next namespace unless namespace
 
-              namespace = namespace.namespaces.find_by(name: name) || find_method_in(namespace, name)
+              namespace.namespaces.find_by(name: name) || find_method_in(namespace, name)
             end
 
             actual_method == expected_method
