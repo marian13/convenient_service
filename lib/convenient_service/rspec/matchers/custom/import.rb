@@ -8,53 +8,106 @@ module ConvenientService
           ##
           # @param method_name [Symbol, String]
           # @param scope [Symbol]
+          # @param from [Class, Module]
+          # @param prepend [Boolean]
           # @return [void]
           #
-          def initialize(method_name, scope: :instance, from:)
+          def initialize(method_name, scope: :instance, from:, prepend: false)
             @method_name = method_name
             @scope = scope
             @from = from
+            @prepend = prepend
           end
 
           ##
-          # @param container [Class, Module]
+          # @param klass [Class, Module]
           # @return [Boolean]
           #
           def matches?(klass)
-            main_namespace = Utils::Module.fetch_own_const(klass, :ImportedIncludedClassMethods)
+            @klass = klass
+
+            main_namespace = Utils::Module.fetch_own_const(klass, :"Imported#{imported_prefix}#{scoped_prefix}Methods")
 
             return false unless main_namespace
 
-            res = method_name_parts.reduce(main_namespace) do |namespace, name|
-              namespace = namespace.namespaces.find_by(name: name) || namespace.methods.select { |el| el == name }.last || namespace.instance_methods.select { |el| el == name }.last
+            actual_method = method_name_parts.reduce(main_namespace) do |namespace, name|
+              next namespace unless namespace
+
+              namespace = namespace.namespaces.find_by(name: name) || find_method_in(namespace, name)
             end
 
-            res == method_name_parts.last
+            actual_method == expected_method
           end
 
           ##
           # @return [String]
           #
           def description
-            "import"
+            "import #{method_name} with scope #{scope} from #{from}"
           end
 
           ##
           # @return [String]
           #
           def failure_message
-            "import"
+            "expected `#{klass.class}` to have imported `#{method_name}` with scope `#{scope}` from `#{from}`, but it's NOT"
           end
 
           ##
           # @return [String]
           #
           def failure_message_when_negated
-            "import"
+            "expected `#{klass.class}` NOT to have imported `#{method_name}` with scope `#{scope}` from `#{from}`"
           end
 
           private
 
+          ##
+          # @param namespace [Object, Class, Module]
+          # @param method [Symbol]
+          # @return [Symbol]
+          #
+          def find_method_in(namespace, method)
+            corresponding_methods_for(namespace).find { |method_name| method_name == method }
+          end
+
+          ##
+          # @param obj [Object, Class, Module]
+          # @return [Array]
+          #
+          def corresponding_methods_for(obj)
+            return obj.instance_methods if obj.respond_to? :instance_methods
+
+            obj.singleton_methods
+          end
+
+          ##
+          # @return [Symbol]
+          #
+          def expected_method
+            @expected_method ||= method_name_parts.last
+          end
+
+          ##
+          # @return [String]
+          #
+          def scoped_prefix
+            case scope
+            when :instance then "Instance"
+            when :class then "Class"
+            end
+          end
+
+          ##
+          # @return [String]
+          #
+          def imported_prefix
+            prepend ? "Prepended" : "Included"
+          end
+
+          ##
+          # @return [Array]
+          #
           def method_name_parts
             @method_name_parts ||= Utils::String.split(method_name, ".", "::").map(&:to_sym)
           end
@@ -62,6 +115,8 @@ module ConvenientService
           attr_reader :method_name
           attr_reader :scope
           attr_reader :from
+          attr_reader :prepend
+          attr_reader :klass
         end
       end
     end
