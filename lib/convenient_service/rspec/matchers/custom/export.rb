@@ -36,14 +36,14 @@ module ConvenientService
           # @return [String]
           #
           def failure_message
-            "expected `#{container.class}` to have export `#{method_name}` with scope `#{scope}`"
+            "expected `#{container.class}` to have exported `#{method_name}` with scope `#{scope}`"
           end
 
           ##
           # @return [String]
           #
           def failure_message_when_negated
-            "expected `#{container.class}` NOT to have export `#{method_name}` with scope `#{scope}`"
+            "expected `#{container.class}` NOT to have exported `#{method_name}` with scope `#{scope}`"
           end
 
           private

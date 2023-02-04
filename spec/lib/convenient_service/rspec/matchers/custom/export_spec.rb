@@ -120,7 +120,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Export do
     it "returns message" do
       matcher_result
 
-      expect(matcher.failure_message).to eq("expected `#{container.class}` to have export `#{method_name}` with scope `#{scope}`")
+      expect(matcher.failure_message).to eq("expected `#{container.class}` to have exported `#{method_name}` with scope `#{scope}`")
     end
   end
 
@@ -128,7 +128,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Export do
     it "returns message" do
       matcher_result
 
-      expect(matcher.failure_message_when_negated).to eq("expected `#{container.class}` NOT to have export `#{method_name}` with scope `#{scope}`")
+      expect(matcher.failure_message_when_negated).to eq("expected `#{container.class}` NOT to have exported `#{method_name}` with scope `#{scope}`")
     end
   end
 end
