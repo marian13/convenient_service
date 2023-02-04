@@ -68,5 +68,6 @@
 | High | 🚧 | Example for dependency containers | |
 | Low |  🚧 | `delegate_to.and_return_value` | |
 | Medium | 🚧 | Support two Cache implementations, array-based and hash-based | |
+| Low |  🚧 | `delegate_to_service` | |
 
 Search for `TODO`s in the codebase for more tasks.
