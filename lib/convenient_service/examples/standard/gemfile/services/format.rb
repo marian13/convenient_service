@@ -52,9 +52,6 @@ module ConvenientService
                 {content: :merged_sections}
               ]
 
-            ##
-            # TODO: `progressbar` specs.
-            #
             before :result do
               @progressbar = ::ProgressBar.create(title: "Formatting", total: steps.count)
             end

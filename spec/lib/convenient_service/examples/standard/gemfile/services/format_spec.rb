@@ -4,6 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
+# rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::Format do
   include ConvenientService::RSpec::Helpers::StubService
 
@@ -144,6 +145,12 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::Format 
     }
   end
 
+  ##
+  # - https://relishapp.com/rspec/rspec-mocks/docs/verifying-doubles
+  # - https://github.com/jfelchner/ruby-progressbar/blob/master/lib/progressbar.rb#L20
+  #
+  let(:progressbar) { instance_double(ProgressBar::Base, increment: true) }
+
   example_group "modules" do
     subject { described_class }
 
@@ -165,6 +172,8 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::Format 
           .with_arguments(content: initial_content)
           .to return_success
           .with_data(content_without_comments: initial_content)
+
+        allow(ProgressBar).to receive(:create).with(title: "Formatting", total: service.steps.count).and_return(progressbar)
       end
 
       context "when formatting is NOT successful" do
@@ -235,9 +244,16 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::Format 
         end
 
         it "returns success" do
-          expect(result).to be_success.of_service(ConvenientService::Examples::Standard::Gemfile::Services::Format)
+          expect(result).to be_success.of_service(described_class)
+        end
+
+        it "prints progress bar after each step" do
+          result
+
+          expect(progressbar).to have_received(:increment).exactly(service.steps.count).times
         end
       end
     end
   end
 end
+# rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
