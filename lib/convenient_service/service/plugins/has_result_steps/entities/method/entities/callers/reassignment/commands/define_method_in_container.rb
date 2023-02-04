@@ -46,7 +46,7 @@ module ConvenientService
 
                             key = step.reassignment(__method__).key.to_sym
 
-                            step.result.data[key]
+                            step.result.unsafe_data[key]
                           end
                         RUBY
 
