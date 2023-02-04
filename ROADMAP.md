@@ -32,7 +32,7 @@
 | High | 🚧 | Optimize `stack.dup` in `MethodMiddlewares#call` | Core v3 |
 | Medium | 🚧 | Make a decision of what to do with `printable_block` in custom RSpec matchers | |
 | Medium | 🚧 | User-friendly exception messages | |
-| High | 🚧 | Factories for POROs in specs ❗❗❗ | Start with `result_class`, `class self::Result`, `service_class`, `step_class`, `organizer_class` |
+| High | 🚧 | Factory for POROs in specs ❗❗❗ | Start with `result_class`, `class self::Result`, `service_class`, `step_class`, `organizer_class` |
 | High | 🚧 | Resolve warning during specs | |
 | Medium | 🚧 | Consider to change/rewrite `delegate` backend to minify its interface | |
 | Medium | 🚧 | Same order of attr macros, delegators, initialize, class methods, attr methods, queries, actions, `to_*`, comparison, inspect | |
@@ -69,5 +69,6 @@
 | Low |  🚧 | `delegate_to.and_return_value` | |
 | Medium | 🚧 | Support two Cache implementations, array-based and hash-based | |
 | Low |  🚧 | `delegate_to_service` | |
+| High |  🚧 | Intentionally disable plugins to document dependencies | |
 
 Search for `TODO`s in the codebase for more tasks.
