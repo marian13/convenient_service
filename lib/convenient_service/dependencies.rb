@@ -107,6 +107,18 @@ module ConvenientService
       end
 
       ##
+      # Loads test factory.
+      #
+      # @return [Boolean]
+      # @note Expected to be called from `spec_helper.rb`.
+      #
+      def require_factory
+        require "faker"
+
+        require_relative "factory"
+      end
+
+      ##
       # Loads standard config examples.
       #
       # @return [Boolean]
