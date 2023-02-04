@@ -18,7 +18,30 @@ module ConvenientService
                 end
 
                 def call
-                  result.step&.service&.klass == step
+                  return false if result.step.nil?
+
+                  case step
+                  when ::Class
+                    match_result_service_step
+                  when ::Symbol
+                    match_method_step
+                  else
+                    raise Errors::InvalidStep.new(step: step)
+                  end
+                end
+
+                private
+
+                def match_result_service_step
+                  result.step.service.klass == step
+                end
+
+                def match_method_step
+                  input = result.step.inputs.find { |input| input.key.to_sym == :method_name }
+
+                  return false unless input
+
+                  input.value == step
                 end
               end
             end
