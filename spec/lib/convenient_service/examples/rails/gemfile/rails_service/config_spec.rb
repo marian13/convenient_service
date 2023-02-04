@@ -190,6 +190,8 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::RailsService::Config
                 ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Concern,
                 ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasResultShortSyntax::Concern,
                 ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanRecalculateResult::Concern,
+                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasStep::Concern,
+                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanHaveParentResult::Concern,
                 ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasInspect::Concern
               ]
             end
@@ -203,7 +205,9 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::RailsService::Config
             let(:initialize_middlewares) do
               [
                 ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Middleware
+                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Middleware,
+                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasStep::Initialize::Middleware,
+                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanHaveParentResult::Initialize::Middleware
               ]
             end
 
@@ -329,6 +333,20 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::RailsService::Config
             end
           end
 
+          example_group "#to_kwargs middlewares" do
+            let(:to_kwargs_middlewares) do
+              [
+                ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
+                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasStep::ToKwargs::Middleware,
+                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanHaveParentResult::ToKwargs::Middleware
+              ]
+            end
+
+            it "sets service result middlewares for `#to_kwargs`" do
+              expect(service_class::Result.middlewares(:to_kwargs).to_a).to eq(to_kwargs_middlewares)
+            end
+          end
+
           example_group "service result internals" do
             example_group "concerns" do
               let(:concerns) do
@@ -362,6 +380,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::RailsService::Config
             let(:result_middlewares) do
               [
                 ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
+                ConvenientService::Service::Plugins::HasResultSteps::Entities::Step::Plugins::CanHaveParentResult::Middleware,
                 ConvenientService::Common::Plugins::CachesReturnValue::Middleware
               ]
             end
