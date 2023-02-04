@@ -76,7 +76,7 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::MergeSe
       end
 
       context "when body is NOT valid" do
-        context "when header is `nil`" do
+        context "when body is `nil`" do
           let(:body) { nil }
 
           it "returns failure with data" do
