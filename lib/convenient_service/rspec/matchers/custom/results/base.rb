@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "base/commands"
+require_relative "base/errors"
 
 module ConvenientService
   module RSpec
@@ -146,6 +147,15 @@ module ConvenientService
             #
             def of_step(step)
               chain[:step] = step
+
+              self
+            end
+
+            ##
+            # @return [ConvenientService::RSpec::Matchers::Custom::Results::Base]
+            #
+            def without_step
+              chain[:step] = nil
 
               self
             end
