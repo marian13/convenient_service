@@ -142,7 +142,7 @@ module ConvenientService
             # @return [Object] Can be any type.
             #
             def call_callback_in_context(context, *args)
-              context.instance_exec(*args, &self.block).tap { mark_as_called }
+              context.instance_exec(*args, &block).tap { mark_as_called }
             end
           end
         end

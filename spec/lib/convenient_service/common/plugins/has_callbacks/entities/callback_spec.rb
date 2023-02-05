@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-# rubocop:disable RSpec/NestedGroups
+# rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Entities::Callback do
   example_group "attributes" do
     include ConvenientService::RSpec::Matchers::HaveAttrReader
@@ -210,4 +210,4 @@ RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Entities::Callb
     end
   end
 end
-# rubocop:enable RSpec/NestedGroups
+# rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
