@@ -374,17 +374,16 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::DryService::Config do
             end
           end
 
-          example_group "#result middlewares" do
-            let(:result_middlewares) do
+          example_group "#calculate_result middlewares" do
+            let(:calculate_result_middlewares) do
               [
                 ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-                ConvenientService::Service::Plugins::HasResultSteps::Entities::Step::Plugins::CanHaveParentResult::Middleware,
-                ConvenientService::Common::Plugins::CachesReturnValue::Middleware
+                ConvenientService::Service::Plugins::HasResultSteps::Entities::Step::Plugins::CanHaveParentResult::Middleware
               ]
             end
 
-            it "sets service step middlewares for `#result`" do
-              expect(service_class::Step.middlewares(:result).to_a).to eq(result_middlewares)
+            it "sets service step middlewares for `#calculate_result`" do
+              expect(service_class::Step.middlewares(:calculate_result).to_a).to eq(calculate_result_middlewares)
             end
           end
 

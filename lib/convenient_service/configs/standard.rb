@@ -205,12 +205,10 @@ module ConvenientService
             use Plugins::Step::HasInspect::Concern
           end
 
-          middlewares :result do
+          middlewares :calculate_result do
             use Plugins::Common::NormalizesEnv::Middleware
 
             use Plugins::Step::CanHaveParentResult::Middleware
-
-            use Plugins::Common::CachesReturnValue::Middleware
           end
 
           class self::Internals

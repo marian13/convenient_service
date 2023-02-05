@@ -18,6 +18,12 @@ module ConvenientService
                   :not_success?,
                   :not_failure?,
                   :not_error?,
+                  :data,
+                  :message,
+                  :code,
+                  :unsafe_data,
+                  :unsafe_message,
+                  :unnsafe_code,
                   to: :result
 
                 delegate \

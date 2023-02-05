@@ -58,7 +58,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Middleware d
           expect(second_step).not_to have_received(:new)
         end
 
-        it "calls step for NOT successful intermediate step" do
+        it "calls `step` method for NOT successful intermediate step" do
           expect { method_value }
             .to delegate_to(service_instance, :step)
             .with_arguments(0)
@@ -70,12 +70,17 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Middleware d
             .with_arguments(1)
         end
 
-        ##
-        # TODO:
-        #
-        # it "calls step after checking status" do
-        #
-        # end
+        it "calls `step` method for intermediate step after checking status" do
+          method_value
+
+          expect { service_instance.steps[0].data }.not_to raise_error(ConvenientService::Error)
+        end
+
+        it "does NOT call `step` method for last step after checking status" do
+          method_value
+
+          expect { service_instance.steps[1].data }.to raise_error(ConvenientService::Error)
+        end
       end
 
       context "when all steps are successful" do
@@ -92,16 +97,28 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Middleware d
           expect(method_value.object_id).not_to eq(service_instance.steps.last.result.object_id)
         end
 
-        it "calls step for intermediate step" do
+        it "calls `step` method for intermediate step" do
           expect { method_value }
             .to delegate_to(service_instance, :step)
             .with_arguments(0)
         end
 
-        it "calls step for last step" do
+        it "calls `step` method for last step" do
           expect { method_value }
             .to delegate_to(service_instance, :step)
             .with_arguments(1)
+        end
+
+        it "calls `step` method for intermediate step after checking status" do
+          method_value
+
+          expect { service_instance.steps[0].data }.not_to raise_error(ConvenientService::Error)
+        end
+
+        it "calls `step` method for last step after checking status" do
+          method_value
+
+          expect { service_instance.steps[1].data }.not_to raise_error(ConvenientService::Error)
         end
       end
     end
