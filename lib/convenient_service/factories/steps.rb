@@ -4,6 +4,8 @@ module ConvenientService
   module Factories
     module Steps
       ##
+      # @return [Class]
+      #
       # @example Default.
       #
       #   class Step
@@ -22,6 +24,8 @@ module ConvenientService
       end
 
       ##
+      # @return [Integer]
+      #
       # @example Default.
       #
       #   class Service
@@ -36,6 +40,8 @@ module ConvenientService
       end
 
       ##
+      # @return [Class]
+      #
       # @example Default.
       #
       #   class Step
@@ -54,6 +60,8 @@ module ConvenientService
       end
 
       ##
+      # @return [Symbol]
+      #
       # @example Default.
       #
       #   class Step
@@ -72,6 +80,8 @@ module ConvenientService
       end
 
       ##
+      # @return [Symbol]
+      #
       # @example Default.
       #
       #   class Step
@@ -90,6 +100,8 @@ module ConvenientService
       end
 
       ##
+      # @return [Class]
+      #
       # @example Default.
       #
       #   class Step

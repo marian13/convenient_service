@@ -23,7 +23,7 @@ module ConvenientService
           #   `entity.step(index)` is used as a hook (or in other words to trigger callbacks).
           #
           def last_step
-            @last_step ||= entity.steps.find.with_index { |_, index| entity.step(index).not_success? } || entity.steps.last
+            @last_step ||= entity.steps.find.with_index { |step, index| step.not_success?.tap { entity.step(index) } } || entity.steps.last
           end
         end
       end

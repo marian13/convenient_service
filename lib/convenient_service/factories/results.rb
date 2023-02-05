@@ -4,6 +4,8 @@ module ConvenientService
   module Factories
     module Results
       ##
+      # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+      #
       # @example Default.
       #
       #   class Service
@@ -21,6 +23,8 @@ module ConvenientService
       end
 
       ##
+      # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+      #
       # @example Default.
       #
       #   class Service
@@ -38,6 +42,8 @@ module ConvenientService
       end
 
       ##
+      # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+      #
       # @example Default.
       #
       #   class Service
@@ -51,6 +57,9 @@ module ConvenientService
       end
 
       ##
+      # @param service_step [Class]
+      # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+      #
       # @example Default.
       #
       #   class Service
@@ -76,6 +85,9 @@ module ConvenientService
       end
 
       ##
+      # @param method_step [Symbol]
+      # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+      #
       # @example Default.
       #
       #   class Service
@@ -101,6 +113,8 @@ module ConvenientService
       end
 
       ##
+      # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+      #
       # @example Default.
       #
       #   class Service
