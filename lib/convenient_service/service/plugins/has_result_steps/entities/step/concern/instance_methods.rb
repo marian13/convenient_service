@@ -23,7 +23,7 @@ module ConvenientService
                   :code,
                   :unsafe_data,
                   :unsafe_message,
-                  :unnsafe_code,
+                  :unsafe_code,
                   to: :result
 
                 delegate \

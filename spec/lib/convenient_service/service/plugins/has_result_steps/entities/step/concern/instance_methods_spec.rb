@@ -119,30 +119,161 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::St
     it { is_expected.to include_module(ConvenientService::Support::Delegate) }
   end
 
-  ##
-  # NOTE: Waits for `should-matchers` full support.
-  #
-  # example_group "delegators" do
-  #   include Shoulda::Matchers::Independent
-  #
-  #   subject { step }
-  #
-  #   it { is_expected.to delegate_method(:success?).to(:result) }
-  #   it { is_expected.to delegate_method(:failure?).to(:result) }
-  #   it { is_expected.to delegate_method(:error?).to(:result) }
-  #   it { is_expected.to delegate_method(:not_success?).to(:result) }
-  #   it { is_expected.to delegate_method(:not_failure?).to(:result) }
-  #   it { is_expected.to delegate_method(:not_error?).to(:result) }
-  #
-  #   it { is_expected.to delegate_method(:service).to(:params) }
-  #   it { is_expected.to delegate_method(:outputs).to(:params) }
-  #   it { is_expected.to delegate_method(:index).to(:params) }
-  #   it { is_expected.to delegate_method(:container).to(:params) }
-  #   it { is_expected.to delegate_method(:organizer).to(:params) }
-  # end
-
   example_group "instance methods" do
     include ConvenientService::RSpec::Matchers::DelegateTo
+
+    describe "#success?" do
+      specify do
+        expect { step.success? }
+          .to delegate_to(step.result, :success?)
+          .without_arguments
+          .and_return_its_value
+      end
+    end
+
+    describe "#failure?" do
+      specify do
+        expect { step.failure? }
+          .to delegate_to(step.result, :failure?)
+          .without_arguments
+          .and_return_its_value
+      end
+    end
+
+    describe "#error?" do
+      specify do
+        expect { step.error? }
+          .to delegate_to(step.result, :error?)
+          .without_arguments
+          .and_return_its_value
+      end
+    end
+
+    describe "#not_success?" do
+      specify do
+        expect { step.not_success? }
+          .to delegate_to(step.result, :not_success?)
+          .without_arguments
+          .and_return_its_value
+      end
+    end
+
+    describe "#not_failure?" do
+      specify do
+        expect { step.not_failure? }
+          .to delegate_to(step.result, :not_failure?)
+          .without_arguments
+          .and_return_its_value
+      end
+    end
+
+    describe "#not_error?" do
+      specify do
+        expect { step.not_error? }
+          .to delegate_to(step.result, :not_error?)
+          .without_arguments
+          .and_return_its_value
+      end
+    end
+
+    describe "#data" do
+      specify do
+        expect { step.data }
+          .to delegate_to(step.result, :data)
+          .without_arguments
+          .and_return_its_value
+      end
+    end
+
+    describe "#message" do
+      specify do
+        expect { step.message }
+          .to delegate_to(step.result, :message)
+          .without_arguments
+          .and_return_its_value
+      end
+    end
+
+    describe "#code" do
+      specify do
+        expect { step.code }
+          .to delegate_to(step.result, :code)
+          .without_arguments
+          .and_return_its_value
+      end
+    end
+
+    describe "#unsafe_data" do
+      specify do
+        expect { step.unsafe_data }
+          .to delegate_to(step.result, :unsafe_data)
+          .without_arguments
+          .and_return_its_value
+      end
+    end
+
+    describe "#unsafe_message" do
+      specify do
+        expect { step.unsafe_message }
+          .to delegate_to(step.result, :unsafe_message)
+          .without_arguments
+          .and_return_its_value
+      end
+    end
+
+    describe "#unsafe_code" do
+      specify do
+        expect { step.unsafe_code }
+          .to delegate_to(step.result, :unsafe_code)
+          .without_arguments
+          .and_return_its_value
+      end
+    end
+
+    describe "#service" do
+      specify do
+        expect { step.service }
+          .to delegate_to(step.params, :service)
+          .without_arguments
+          .and_return_its_value
+      end
+    end
+
+    describe "#outputs" do
+      specify do
+        expect { step.outputs }
+          .to delegate_to(step.params, :outputs)
+          .without_arguments
+          .and_return_its_value
+      end
+    end
+
+    describe "#index" do
+      specify do
+        expect { step.index }
+          .to delegate_to(step.params, :index)
+          .without_arguments
+          .and_return_its_value
+      end
+    end
+
+    describe "#container" do
+      specify do
+        expect { step.container }
+          .to delegate_to(step.params, :container)
+          .without_arguments
+          .and_return_its_value
+      end
+    end
+
+    describe "#organizer" do
+      specify do
+        expect { step.organizer }
+          .to delegate_to(step.params, :organizer)
+          .without_arguments
+          .and_return_its_value
+      end
+    end
 
     example_group "comparison" do
       describe "#==" do
