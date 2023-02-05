@@ -54,7 +54,7 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::Replace
           let(:path) { nil }
 
           it "returns failure with data" do
-            expect(result).to be_failure.with_data(path: "Path is `nil`").of_service(described_class)
+            expect(result).to be_failure.with_data(path: "Path is `nil`").of_service(described_class).of_step(:validate_path)
           end
         end
 
@@ -62,7 +62,7 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::Replace
           let(:path) { "" }
 
           it "returns failure with data" do
-            expect(result).to be_failure.with_data(path: "Path is empty").of_service(described_class)
+            expect(result).to be_failure.with_data(path: "Path is empty").of_service(described_class).of_step(:validate_path)
           end
         end
       end
@@ -72,7 +72,7 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::Replace
           let(:content) { nil }
 
           it "returns failure with data" do
-            expect(result).to be_failure.with_data(content: "Content is `nil`").of_service(described_class)
+            expect(result).to be_failure.with_data(content: "Content is `nil`").of_service(described_class).of_step(:validate_content)
           end
         end
       end
@@ -80,7 +80,7 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::Replace
 
     context "when replacing of file content is successful" do
       it "returns success with contated header and body" do
-        expect(result).to be_success.without_data.of_service(described_class)
+        expect(result).to be_success.without_data.of_service(described_class).of_step(:result)
       end
     end
   end

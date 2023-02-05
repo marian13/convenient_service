@@ -62,7 +62,7 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::MergeSe
           let(:header) { nil }
 
           it "returns failure with data" do
-            expect(result).to be_failure.with_data(header: "Header is `nil`").of_service(described_class)
+            expect(result).to be_failure.with_data(header: "Header is `nil`").of_service(described_class).of_step(:validate_header)
           end
         end
 
@@ -70,7 +70,7 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::MergeSe
           let(:header) { "" }
 
           it "returns failure with data" do
-            expect(result).to be_failure.with_data(header: "Header is empty").of_service(described_class)
+            expect(result).to be_failure.with_data(header: "Header is empty").of_service(described_class).of_step(:validate_header)
           end
         end
       end
@@ -80,7 +80,7 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::MergeSe
           let(:body) { nil }
 
           it "returns failure with data" do
-            expect(result).to be_failure.with_data(body: "Body is `nil`").of_service(described_class)
+            expect(result).to be_failure.with_data(body: "Body is `nil`").of_service(described_class).of_step(:validate_body)
           end
         end
 
@@ -88,7 +88,7 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::MergeSe
           let(:body) { "" }
 
           it "returns failure with data" do
-            expect(result).to be_failure.with_data(body: "Body is empty").of_service(described_class)
+            expect(result).to be_failure.with_data(body: "Body is empty").of_service(described_class).of_step(:validate_body)
           end
         end
       end
@@ -96,7 +96,7 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::MergeSe
 
     context "when merging of sections is successful" do
       it "returns success with contated header and body" do
-        expect(result).to be_success.with_data(merged_sections: "#{header}\n#{body}").of_service(described_class)
+        expect(result).to be_success.with_data(merged_sections: "#{header}\n#{body}").of_service(described_class).of_step(:result)
       end
     end
   end
