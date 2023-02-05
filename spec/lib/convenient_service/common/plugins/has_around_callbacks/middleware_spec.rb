@@ -322,6 +322,41 @@ RSpec.describe ConvenientService::Common::Plugins::HasAroundCallbacks::Middlewar
           end
         end
       end
+
+      example_group "method arguments" do
+        subject(:method_value) { method.call(*args, **kwargs, &block) }
+
+        let(:args) { [:foo] }
+        let(:kwargs) { {foo: :bar} }
+        let(:block) { proc { :foo } }
+
+        let(:service_class) do
+          Class.new.tap do |klass|
+            klass.class_exec(result_original_value, out) do |result_original_value, out|
+              include ConvenientService::Common::Plugins::HasCallbacks::Concern
+              include ConvenientService::Common::Plugins::HasAroundCallbacks::Concern
+
+              define_method(:result) { |*args, **kwargs, &block| result_original_value }
+            end
+          end
+        end
+
+        example_group "before callbacks method arguments" do
+          before do
+            service_class.around(:result) do |chain, arguments|
+              raise if arguments.args != [:foo]
+              raise if arguments.kwargs != {foo: :bar}
+              raise if arguments.block.call != :foo
+
+              chain.yield
+            end
+          end
+
+          it "passes chain and args, kwargs, block as arguments object" do
+            expect { method_value }.not_to raise_error
+          end
+        end
+      end
     end
   end
 end
