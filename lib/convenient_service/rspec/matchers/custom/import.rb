@@ -50,7 +50,7 @@ module ConvenientService
           # @return [String]
           #
           def failure_message
-            "expected `#{klass.class}` to have imported `#{method_name}` with scope `#{scope}` from `#{from}`, but it's NOT"
+            "expected `#{klass.class}` to have imported `#{method_name}` with scope `#{scope}` from `#{from}`"
           end
 
           ##
@@ -112,10 +112,34 @@ module ConvenientService
             @method_name_parts ||= Utils::String.split(method_name, ".", "::").map(&:to_sym)
           end
 
+          ##
+          # @!attribute [r] method_name
+          #   @return [Symbol, String]
+          #
           attr_reader :method_name
+
+          ##
+          # @!attribute [r] scope
+          #   @return [Symbol]
+          #
           attr_reader :scope
+
+          ##
+          # @!attribute [r] from
+          #   @return [Class, Module]
+          #
           attr_reader :from
+
+          ##
+          # @!attribute [r] prepend
+          #   @return [Boolean]
+          #
           attr_reader :prepend
+
+          ##
+          # @!attribute [r] klass
+          #   @return [Class, Module]
+          #
           attr_reader :klass
         end
       end
