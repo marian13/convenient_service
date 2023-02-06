@@ -12,7 +12,7 @@ module ConvenientService
           # @param prepend [Boolean]
           # @return [void]
           #
-          def initialize(method_name, from:, scope: :instance, prepend: false)
+          def initialize(method_name, from: , scope: :instance, prepend: false)
             @method_name = method_name
             @scope = scope
             @from = from
@@ -43,21 +43,21 @@ module ConvenientService
           # @return [String]
           #
           def description
-            "import #{method_name} with scope #{scope} from #{from}"
+            "import `#{method_name}` with scope `#{scope}` from `#{from.class}` prepend: `#{prepend}`"
           end
 
           ##
           # @return [String]
           #
           def failure_message
-            "expected `#{klass.class}` to have imported `#{method_name}` with scope `#{scope}` from `#{from}`"
+            "expected `#{klass.class}` to have imported `#{method_name}` with scope `#{scope}` from `#{from.class}` prepend: `#{prepend}`"
           end
 
           ##
           # @return [String]
           #
           def failure_message_when_negated
-            "expected `#{klass.class}` NOT to have imported `#{method_name}` with scope `#{scope}` from `#{from}`"
+            "expected `#{klass.class}` NOT to have imported `#{method_name}` with scope `#{scope}` from `#{from.class}` prepend: `#{prepend}`"
           end
 
           private
