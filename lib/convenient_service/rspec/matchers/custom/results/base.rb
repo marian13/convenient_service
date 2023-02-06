@@ -180,13 +180,14 @@ module ConvenientService
             #
             # @internal
             #   TODO: Align for easier visual comparison.
+            #   TODO: New line for each attribute.
             #
             def expected_parts
               parts = []
 
               parts << "be #{printable_statuses}"
               parts << "of service `#{service_class}`" if used_of_service?
-              parts << "of step `#{step}`" if used_of_step?
+              parts << Commands::GenerateExpectedStepPart.call(step: step) if used_of_step?
               parts << "with data `#{data}`" if used_data?
               parts << "with message `#{message}`" if used_message?
               parts << "with code `#{code}`" if used_code?
@@ -199,13 +200,14 @@ module ConvenientService
             #
             # @internal
             #   TODO: Align for easier visual comparison.
+            #   TODO: New line for each attribute.
             #
             def got_parts
               parts = []
 
               parts << "got `#{result.status}`"
               parts << "of service `#{result.service.class}`" if used_of_service?
-              parts << "of step `#{result.step.service.klass}`" if used_of_step?
+              parts << Commands::GenerateGotStepPart.call(result: result) if used_of_step?
               parts << "with data `#{result.unsafe_data}`" if used_data?
               parts << "with message `#{result.unsafe_message}`" if used_message?
               parts << "with code `#{result.unsafe_code}`" if used_code?
