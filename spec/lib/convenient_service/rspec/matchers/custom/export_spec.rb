@@ -7,100 +7,49 @@ require "convenient_service"
 RSpec.describe ConvenientService::RSpec::Matchers::Custom::Export do
   subject(:matcher_result) { matcher.matches?(container) }
 
-  let(:matcher) { described_class.new(method_name, scope: scope) }
+  let(:matcher) { described_class.new(method_name, **kwargs) }
 
-  let(:mod) { ConvenientService::Support::DependencyContainer::Export }
   let(:method_name) { :bar }
   let(:scope) { :class }
+  let(:kwargs) { default_kwargs }
+  let(:default_kwargs) { {scope: scope} }
 
   let(:container) do
-    Class.new.tap do |klass|
-      klass.class_exec(mod) do |mod|
-        include mod
+    Class.new do
+      include ConvenientService::Support::DependencyContainer::Export
 
-        export :bar, scope: :class do
-          ":bar with scope: :class"
-        end
+      export :bar, scope: :class do
+        ":bar with scope: :class"
+      end
+
+      export :foo do
+        ":foo with scope: :instance"
       end
     end
   end
 
   describe "#matches?" do
-    context "when `container` does NOT export method" do
-      let(:method_name) { :bar }
+    context "when method is NOT exported" do
+      let(:method_name) { :non_existent }
       let(:scope) { :class }
-
-      let(:container) do
-        Class.new.tap do |klass|
-          klass.class_exec(mod) do |mod|
-            include mod
-          end
-        end
-      end
 
       it "returns false" do
         expect(matcher_result).to eq(false)
       end
     end
 
-    context "when `container` exports method but with `instance` scope" do
+    context "when scope is NOT passed" do
       let(:method_name) { :foo }
-      let(:scope) { :class }
-
-      let(:container) do
-        Class.new.tap do |klass|
-          klass.class_exec(mod) do |mod|
-            include mod
-
-            export :foo do
-              ":foo with scope: :instance"
-            end
-          end
-        end
-      end
-
-      it "returns false" do
-        expect(matcher_result).to eq(false)
-      end
-    end
-
-    context "when `container` exports method without given scope" do
-      let(:matcher) { described_class.new(method_name) }
-
-      let(:method_name) { :foo }
-
-      let(:container) do
-        Class.new.tap do |klass|
-          klass.class_exec(mod) do |mod|
-            include mod
-
-            export :foo do
-              ":foo with scope: :instance"
-            end
-          end
-        end
-      end
+      let(:kwargs) { ConvenientService::Utils::Hash.except(default_kwargs, [:scope]) }
 
       it "returns true" do
         expect(matcher_result).to eq(true)
       end
     end
 
-    context "when `container` exports method" do
-      let(:method_name) { :foo }
+    context "when method is exported" do
+      let(:method_name) { :bar }
       let(:scope) { :class }
-
-      let(:container) do
-        Class.new.tap do |klass|
-          klass.class_exec(mod) do |mod|
-            include mod
-
-            export :foo, scope: :class do
-              ":foo with scope: :class"
-            end
-          end
-        end
-      end
 
       it "returns true" do
         expect(matcher_result).to eq(true)
