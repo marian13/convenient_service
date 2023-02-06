@@ -12,7 +12,7 @@ module ConvenientService
           # @param prepend [Boolean]
           # @return [void]
           #
-          def initialize(method_name, from: , scope: :instance, prepend: false)
+          def initialize(method_name, from:, scope: :instance, prepend: false)
             @method_name = method_name
             @scope = scope
             @from = from

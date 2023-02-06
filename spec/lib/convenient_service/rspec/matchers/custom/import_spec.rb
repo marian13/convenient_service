@@ -4,6 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
+# rubocop:disable RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::RSpec::Matchers::Custom::Import do
   subject(:matcher_result) { matcher.matches?(klass) }
 
@@ -13,7 +14,6 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Import do
   let(:scope) { :class }
   let(:prepend) { false }
 
-  let!(:import) { klass.import(imported_method_name, **kwargs) }
   let(:imported_method_name) { :"foo::bar::baz" }
   let(:kwargs) { default_kwargs }
   let(:default_kwargs) { {from: container, scope: scope, prepend: prepend} }
@@ -39,6 +39,10 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Import do
   end
 
   describe "#matches?" do
+    before do
+      klass.import(imported_method_name, **kwargs)
+    end
+
     context "when method is NOT imported" do
       let(:method_name) { :non_existent }
 
@@ -95,3 +99,4 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Import do
     end
   end
 end
+# rubocop:enable RSpec/MultipleMemoizedHelpers
