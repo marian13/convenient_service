@@ -3,7 +3,7 @@
 require "spec_helper"
 
 require "convenient_service"
-
+# rubocop:disable RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::RSpec::Matchers::Custom::Export do
   subject(:matcher_result) { matcher.matches?(container) }
 
@@ -81,3 +81,4 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Export do
     end
   end
 end
+# rubocop:enable RSpec/MultipleMemoizedHelpers
