@@ -4,8 +4,10 @@ require "spec_helper"
 
 require "convenient_service"
 
+return unless defined? ConvenientService::Examples::Rails
+
 # rubocop:disable RSpec/NestedGroups
-RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::ReplaceFileContent do
+RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::ReplaceFileContent do
   include ConvenientService::RSpec::Matchers::Results
   include ConvenientService::RSpec::Matchers::HaveAttrReader
   include ConvenientService::RSpec::Matchers::IncludeModule
@@ -38,50 +40,33 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::Replace
     it { is_expected.to include_module(ConvenientService::Standard::Config) }
   end
 
-  example_group "attributes" do
-    subject { service }
-
-    it { is_expected.to have_attr_reader(:path) }
-    it { is_expected.to have_attr_reader(:content) }
-  end
-
   describe "#result" do
     subject(:result) { service.result }
 
-    context "when replacing of file content is NOT successful" do
-      context "when path is NOT valid" do
-        context "when path is `nil`" do
+    if ConvenientService::Dependencies.support_has_result_params_validations_using_active_model_validations?
+      context "when replacing of file content is NOT successful" do
+        context "when path is NOT present" do
           let(:path) { nil }
 
           it "returns failure with data" do
-            expect(result).to be_failure.with_data(path: "Path is `nil`").of_service(described_class).of_step(:validate_path)
+            expect(result).to be_failure.with_data(path: "can't be blank").of_service(described_class).without_step
           end
         end
 
-        context "when path is empty string" do
-          let(:path) { "" }
-
-          it "returns failure with data" do
-            expect(result).to be_failure.with_data(path: "Path is empty").of_service(described_class).of_step(:validate_path)
-          end
-        end
-      end
-
-      context "when content is NOT valid" do
         context "when content is `nil`" do
           let(:content) { nil }
 
           it "returns failure with data" do
-            expect(result).to be_failure.with_data(content: "Content is `nil`").of_service(described_class).of_step(:validate_content)
+            expect(result).to be_failure.with_data(content: "can't be nil").of_service(described_class).without_step
           end
         end
-      end
 
-      context "when assertion that file exist is NOT successful" do
-        let(:path) { "not_exisiting_file" }
+        context "when assertion that file exist is NOT successful" do
+          let(:path) { "not_exisiting_file" }
 
-        it "returns intermediate step result" do
-          expect(result).to be_not_success.of_service(described_class).of_step(ConvenientService::Examples::Standard::Gemfile::Services::AssertFileExists)
+          it "returns intermediate step result" do
+            expect(result).to be_not_success.of_service(described_class).of_step(ConvenientService::Examples::Rails::Gemfile::Services::AssertFileExists)
+          end
         end
       end
     end
