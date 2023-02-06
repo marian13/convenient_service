@@ -147,7 +147,12 @@ RSpec.describe ConvenientService::Support::Copyable do
         it "does NOT mutate `overrides`" do
           overrides.freeze
 
-          expect { instance.copy(overrides: overrides) }.not_to raise_error(FrozenError)
+          ##
+          # NOTE: Using specific error in `not_to raise_error` may lead to false positives.
+          # - https://stackoverflow.com/questions/44515447/best-practices-for-rspec-expect-raise-error
+          # - https://github.com/rspec/rspec-expectations/issues/231
+          #
+          expect { instance.copy(overrides: overrides) }.not_to raise_error
         end
       end
 

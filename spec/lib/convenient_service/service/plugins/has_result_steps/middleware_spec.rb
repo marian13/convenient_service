@@ -73,7 +73,12 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Middleware d
         it "calls `step` method for intermediate step after checking status" do
           method_value
 
-          expect { service_instance.steps[0].data }.not_to raise_error(ConvenientService::Error)
+          ##
+          # NOTE: Using specific error in `not_to raise_error` may lead to false positives.
+          # - https://stackoverflow.com/questions/44515447/best-practices-for-rspec-expect-raise-error
+          # - https://github.com/rspec/rspec-expectations/issues/231
+          #
+          expect { service_instance.steps[0].data }.not_to raise_error
         end
 
         it "does NOT call `step` method for last step after checking status" do
@@ -112,13 +117,23 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Middleware d
         it "calls `step` method for intermediate step after checking status" do
           method_value
 
-          expect { service_instance.steps[0].data }.not_to raise_error(ConvenientService::Error)
+          ##
+          # NOTE: Using specific error in `not_to raise_error` may lead to false positives.
+          # - https://stackoverflow.com/questions/44515447/best-practices-for-rspec-expect-raise-error
+          # - https://github.com/rspec/rspec-expectations/issues/231
+          #
+          expect { service_instance.steps[0].data }.not_to raise_error
         end
 
         it "calls `step` method for last step after checking status" do
           method_value
 
-          expect { service_instance.steps[1].data }.not_to raise_error(ConvenientService::Error)
+          ##
+          # NOTE: Using specific error in `not_to raise_error` may lead to false positives.
+          # - https://stackoverflow.com/questions/44515447/best-practices-for-rspec-expect-raise-error
+          # - https://github.com/rspec/rspec-expectations/issues/231
+          #
+          expect { service_instance.steps[1].data }.not_to raise_error
         end
       end
     end
