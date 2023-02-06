@@ -43,8 +43,8 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::ReplaceFil
   describe "#result" do
     subject(:result) { service.result }
 
-    if ConvenientService::Dependencies.support_has_result_params_validations_using_active_model_validations?
-      context "when replacing of file content is NOT successful" do
+    context "when replacing of file content is NOT successful" do
+      if ConvenientService::Dependencies.support_has_result_params_validations_using_active_model_validations?
         context "when path is NOT present" do
           let(:path) { nil }
 
@@ -60,13 +60,13 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::ReplaceFil
             expect(result).to be_failure.with_data(content: "can't be nil").of_service(described_class).without_step
           end
         end
+      end
 
-        context "when assertion that file exist is NOT successful" do
-          let(:path) { "not_exisiting_file" }
+      context "when assertion that file exist is NOT successful" do
+        let(:path) { "not_exisiting_file" }
 
-          it "returns intermediate step result" do
-            expect(result).to be_not_success.of_service(described_class).of_step(ConvenientService::Examples::Rails::Gemfile::Services::AssertFileExists)
-          end
+        it "returns intermediate step result" do
+          expect(result).to be_not_success.of_service(described_class).of_step(ConvenientService::Examples::Rails::Gemfile::Services::AssertFileExists)
         end
       end
     end

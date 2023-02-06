@@ -38,8 +38,7 @@ module ConvenientService
             #
             # TODO: Implement custom types.
             #
-            attr_accessor :parsed_content
-
+            attribute :parsed_content
             attribute :skip_frozen_string_literal, :boolean, default: false
 
             def result

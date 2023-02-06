@@ -8,9 +8,6 @@
 #
 module ConvenientService
   module Examples
-    ##
-    # TODO: `Rails` and `Dry` examples.
-    #
     module Standard
       module Gemfile
         module Services
@@ -18,6 +15,9 @@ module ConvenientService
             include ConvenientService::Standard::Config
 
             attr_reader :path
+
+            step :validate_path,
+              in: :path
 
             step Services::ReadFileContent,
               in: :path,
@@ -62,6 +62,15 @@ module ConvenientService
 
             def initialize(path:)
               @path = path
+            end
+
+            private
+
+            def validate_path
+              return failure(path: "Path is `nil`") if path.nil?
+              return failure(path: "Path is empty") if path.empty?
+
+              success
             end
           end
         end

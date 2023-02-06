@@ -4,8 +4,10 @@ require "spec_helper"
 
 require "convenient_service"
 
+return unless defined? ConvenientService::Examples::Rails
+
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::Format do
+RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::Format do
   include ConvenientService::RSpec::Helpers::StubService
 
   include ConvenientService::RSpec::Matchers::DelegateTo
@@ -154,13 +156,7 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::Format 
   example_group "modules" do
     subject { described_class }
 
-    it { is_expected.to include_module(ConvenientService::Standard::Config) }
-  end
-
-  example_group "attributes" do
-    subject { service }
-
-    it { is_expected.to have_attr_reader(:path) }
+    it { is_expected.to include_module(ConvenientService::Examples::Rails::Gemfile::RailsService::Config) }
   end
 
   example_group "instance methods" do
@@ -168,7 +164,7 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::Format 
       subject(:result) { described_class.result(path: path) }
 
       before do
-        stub_service(ConvenientService::Examples::Standard::Gemfile::Services::StripComments)
+        stub_service(ConvenientService::Examples::Rails::Gemfile::Services::StripComments)
           .with_arguments(content: initial_content)
           .to return_success
           .with_data(content_without_comments: initial_content)
@@ -177,20 +173,12 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::Format 
       end
 
       context "when formatting is NOT successful" do
-        context "when path is NOT valid" do
-          context "when path is `nil`" do
+        if ConvenientService::Dependencies.support_has_result_params_validations_using_active_model_validations?
+          context "when path is NOT present" do
             let(:path) { nil }
 
             it "returns failure with data" do
-              expect(result).to be_failure.with_data(path: "Path is `nil`").of_service(described_class).of_step(:validate_path)
-            end
-          end
-
-          context "when path is empty string" do
-            let(:path) { "" }
-
-            it "returns failure with data" do
-              expect(result).to be_failure.with_data(path: "Path is empty").of_service(described_class).of_step(:validate_path)
+              expect(result).to be_failure.with_data(path: "can't be blank").of_service(described_class).without_step
             end
           end
         end
@@ -199,19 +187,19 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::Format 
           let(:path) { "non_existing_path" }
 
           it "returns intermediate step result" do
-            expect(result).to be_not_success.of_step(ConvenientService::Examples::Standard::Gemfile::Services::ReadFileContent)
+            expect(result).to be_not_success.of_step(ConvenientService::Examples::Rails::Gemfile::Services::ReadFileContent)
           end
         end
 
         context "when stripping of comments is NOT successful" do
           before do
-            stub_service(ConvenientService::Examples::Standard::Gemfile::Services::StripComments)
+            stub_service(ConvenientService::Examples::Rails::Gemfile::Services::StripComments)
               .with_arguments(content: initial_content)
               .to return_error
           end
 
           it "returns intermediate step result" do
-            expect(result).to be_not_success.of_step(ConvenientService::Examples::Standard::Gemfile::Services::StripComments)
+            expect(result).to be_not_success.of_step(ConvenientService::Examples::Rails::Gemfile::Services::StripComments)
           end
         end
 
@@ -226,15 +214,17 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::Format 
           end
 
           it "returns intermediate step result" do
-            expect(result).to be_not_success.of_step(ConvenientService::Examples::Standard::Gemfile::Services::ParseContent)
+            expect(result).to be_not_success.of_step(ConvenientService::Examples::Rails::Gemfile::Services::ParseContent)
           end
         end
 
-        context "when merging of sections is NOT successful" do
-          let(:initial_content) { "ruby \"3.0.1\"" }
+        if ConvenientService::Dependencies.support_has_result_params_validations_using_active_model_validations?
+          context "when merging of sections is NOT successful" do
+            let(:initial_content) { "ruby \"3.0.1\"" }
 
-          it "returns intermediate step result" do
-            expect(result).to be_not_success.of_step(ConvenientService::Examples::Standard::Gemfile::Services::MergeSections)
+            it "returns intermediate step result" do
+              expect(result).to be_not_success.of_step(ConvenientService::Examples::Rails::Gemfile::Services::MergeSections)
+            end
           end
         end
       end
@@ -245,19 +235,19 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::Format 
           # TODO: `delegate_to_service`?
           #
           expect { result }
-            .to delegate_to(ConvenientService::Examples::Standard::Gemfile::Services::FormatHeader, :result)
+            .to delegate_to(ConvenientService::Examples::Rails::Gemfile::Services::FormatHeader, :result)
             .with_arguments(parsed_content: parsed_content)
         end
 
         specify do
           expect { result }
-            .to delegate_to(ConvenientService::Examples::Standard::Gemfile::Services::FormatBody, :result)
+            .to delegate_to(ConvenientService::Examples::Rails::Gemfile::Services::FormatBody, :result)
             .with_arguments(parsed_content: parsed_content)
         end
 
         specify do
           expect { result }
-            .to delegate_to(ConvenientService::Examples::Standard::Gemfile::Services::ReplaceFileContent, :result)
+            .to delegate_to(ConvenientService::Examples::Rails::Gemfile::Services::ReplaceFileContent, :result)
             .with_arguments(path: path, content: formatted_content)
         end
 

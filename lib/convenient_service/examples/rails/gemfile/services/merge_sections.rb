@@ -11,8 +11,8 @@ module ConvenientService
             attribute :header, :string
             attribute :body, :string
 
-            validates :header, presence: true
-            validates :body, presence: true
+            validates :header, presence: true if ConvenientService::Dependencies.support_has_result_params_validations_using_active_model_validations?
+            validates :body, presence: true if ConvenientService::Dependencies.support_has_result_params_validations_using_active_model_validations?
 
             def result
               success(merged_sections: "#{header}\n#{body}")

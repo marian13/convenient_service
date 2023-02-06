@@ -11,9 +11,9 @@ module ConvenientService
             attribute :path, :string
             attribute :content, :string
 
-            validates :path, presence: true
+            validates :path, presence: true if ConvenientService::Dependencies.support_has_result_params_validations_using_active_model_validations?
 
-            validate :content_not_nil
+            validate :content_not_nil if ConvenientService::Dependencies.support_has_result_params_validations_using_active_model_validations?
 
             step Services::AssertFileExists, in: :path
             step :result, in: :path
