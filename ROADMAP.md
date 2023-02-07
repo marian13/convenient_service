@@ -67,5 +67,7 @@
 | High | 🚧 | Add specs for [Reassignment::Commands::DefineMethodInContainer](https://github.com/marian13/convenient_service/blob/v0.6.0/lib/convenient_service/service/plugins/has_result_steps/entities/method/entities/callers/reassignment/commands/define_method_in_container.rb#L13) | |
 | High | 🚧 | Example for dependency containers | |
 | Medium | 🚧 | Support two Cache implementations, array-based and hash-based | |
+| Low | 🚧 | `ConvenientService::Config.delegate_to_diff_argorithm = :diffy` | |
+
 
 Search for `TODO`s in the codebase for more tasks.
