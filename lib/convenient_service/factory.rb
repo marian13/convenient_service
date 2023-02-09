@@ -2,6 +2,9 @@
 
 require_relative "factories"
 
+##
+# WIP: Factory API is NOT well-thought yet. It will be revisited and completely refactored at any time.
+#
 module ConvenientService
   module Factory
     class << self

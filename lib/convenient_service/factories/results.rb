@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+##
+# WIP: Factory API is NOT well-thought yet. It will be revisited and completely refactored at any time.
+#
 module ConvenientService
   module Factories
     module Results
@@ -166,6 +169,28 @@ module ConvenientService
         result_attributes = create_result_attributes
 
         result_attributes.merge(parent: parent)
+      end
+
+      ##
+      # @return [Hash]
+      #
+      # @example Default.
+      #
+      #   {
+      #     service: result.service,
+      #     status: :success,
+      #     data: {foo: :bar},
+      #     message: "",
+      #     code: :default_success,
+      #     step: result.step
+      #   }
+      #
+      def create_result_attributes_with_step(step: Support::NOT_PASSED)
+        step = (step == Support::NOT_PASSED) ? create_result_step : step
+
+        result_attributes = create_result_attributes
+
+        result_attributes.merge(step: step)
       end
 
       ##
