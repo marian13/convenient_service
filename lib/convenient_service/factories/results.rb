@@ -128,6 +128,62 @@ module ConvenientService
 
         service_class.result
       end
+
+      ##
+      # @return [Hash]
+      #
+      # @example Default.
+      #
+      #   {
+      #     service: result.service,
+      #     status: :success,
+      #     data: {foo: :bar},
+      #     message: "",
+      #     code: :default_success
+      #   }
+      #
+      def create_result_attributes
+        create_result.jsend_attributes.to_h
+      end
+
+      ##
+      # @return [Hash]
+      #
+      # @example Default.
+      #
+      #   {
+      #     service: result.service,
+      #     status: :success,
+      #     data: {foo: :bar},
+      #     message: "",
+      #     code: :default_success,
+      #     parent: result.parent
+      #   }
+      #
+      def create_result_attributes_with_parent(parent: Support::NOT_PASSED)
+        parent = (parent == Support::NOT_PASSED) ? create_result_parent : parent
+
+        result_attributes = create_result_attributes
+
+        result_attributes.merge(parent: parent)
+      end
+
+      ##
+      # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+      #
+      # @example Default.
+      #
+      #   class Service
+      #     include ConvenientService::Standard::Config
+      #
+      #     def result
+      #       success # `result_parent` is return value
+      #     end
+      #   end
+      #
+      def create_result_parent
+        create_result
+      end
     end
   end
 end

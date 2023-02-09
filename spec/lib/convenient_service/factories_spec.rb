@@ -10,6 +10,7 @@ RSpec.describe ConvenientService::Factories do
 
     subject { described_class }
 
+    it { is_expected.to extend_module(ConvenientService::Factories::Arguments) }
     it { is_expected.to extend_module(ConvenientService::Factories::Services) }
     it { is_expected.to extend_module(ConvenientService::Factories::Results) }
     it { is_expected.to extend_module(ConvenientService::Factories::Steps) }
