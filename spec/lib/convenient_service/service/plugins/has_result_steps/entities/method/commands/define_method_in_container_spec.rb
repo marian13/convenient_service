@@ -6,6 +6,9 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Commands::DefineMethodInContainer do
+  include ConvenientService::RSpec::Helpers::IgnoringError
+  include ConvenientService::RSpec::Matchers::DelegateTo
+
   ##
   # TODO: Helper/factory to create method.
   #
@@ -126,11 +129,25 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::Me
                 .to raise_error(ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Errors::NotExistingStepResultDataAttribute)
                 .with_message(error_message)
             end
+
+            specify do
+              ignoring_error(ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Errors::NotExistingStepResultDataAttribute) do
+                expect { organizer_service_instance.bar }
+                  .to delegate_to(step.result.unsafe_data, :has_attribute?)
+                  .with_arguments(method.key.to_sym)
+              end
+            end
           end
 
           context "when step service result data has data attribute by key" do
             it "returns step service result data attribute by key" do
-              expect(organizer_service_instance.bar).to eq(step.result.data[method.key])
+              expect(organizer_service_instance.bar).to eq(step.result.unsafe_data[method.key])
+            end
+
+            specify do
+              expect { organizer_service_instance.bar }
+                .to delegate_to(step.result.unsafe_data, :[])
+                .with_arguments(method.key.to_sym)
             end
           end
         end
