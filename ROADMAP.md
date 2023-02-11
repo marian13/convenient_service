@@ -68,6 +68,10 @@
 | High | 🚧 | Example for dependency containers | |
 | Medium | 🚧 | Support two Cache implementations, array-based and hash-based | |
 | Low | 🚧 | `ConvenientService::Config.delegate_to_diff_argorithm = :diffy` | |
+| Low | 🚧 | Rubocop cop that complains when a service name does NOT start with a verb | |
+| Low | 🚧 | Generator to create a spec default structure | |
+| Low | 🚧 | Rubocop cop that complains when a service does NOT have its own suite of specs | |
+
 
 
 Search for `TODO`s in the codebase for more tasks.
