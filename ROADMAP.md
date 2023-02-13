@@ -71,5 +71,9 @@
 | Low | 🚧 | `delegate_to_service` | |
 | High | 🚧 | Intentionally disable plugins to document dependencies | |
 | Low | 🚧 | `.and_return_value_should be_instance_of(expected)` | |
+| Low | 🚧 | `ConvenientService::Config.delegate_to_diff_argorithm = :diffy` | |
+| Low | 🚧 | Rubocop cop that complains when a service name does NOT start with a verb | |
+| Low | 🚧 | Generator to create a spec default structure | |
+| Low | 🚧 | Rubocop cop that complains when a service does NOT have its own suite of specs | |
 
 Search for `TODO`s in the codebase for more tasks.
