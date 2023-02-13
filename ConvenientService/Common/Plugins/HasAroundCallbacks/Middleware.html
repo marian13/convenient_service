@@ -87,6 +87,11 @@
   
   
   
+  <dl>
+      <dt>Includes:</dt>
+      <dd><span class='object_link'><a href="../../../Support/DependencyContainer/Import.html" title="ConvenientService::Support::DependencyContainer::Import (module)">Support::DependencyContainer::Import</a></span></dd>
+  </dl>
+  
   
 
   
@@ -117,7 +122,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#next-instance_method" title="#next (instance method)">#<strong>next</strong>  &#x21d2; Object </a>
+      <a href="#next-instance_method" title="#next (instance method)">#<strong>next</strong>(*args, **kwargs, &amp;block)  &#x21d2; Object </a>
     
 
     
@@ -140,6 +145,23 @@
   
 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="../../../Support/Concern.html" title="ConvenientService::Support::Concern (module)">Support::Concern</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../../../Support/Concern.html#included-class_method" title="ConvenientService::Support::Concern.included (method)">included</a></span></p>
+
 
   <div id="instance_method_details" class="method_details_list">
     <h2>Instance Method Details</h2>
@@ -148,7 +170,7 @@
       <div class="method_details first">
   <h3 class="signature first" id="next-instance_method">
   
-    #<strong>next</strong>  &#x21d2; <tt>Object</tt> 
+    #<strong>next</strong>(*args, **kwargs, &amp;block)  &#x21d2; <tt>Object</tt> 
   
 
   
@@ -182,10 +204,6 @@
       <pre class="lines">
 
 
-8
-9
-10
-11
 12
 13
 14
@@ -282,12 +300,32 @@
 105
 106
 107
-108</pre>
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/has_around_callbacks/middleware.rb', line 8</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/has_around_callbacks/middleware.rb', line 12</span>
 
-<span class='kw'>def</span> <span class='kw'>next</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='kw'>next</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='comment'>##
 </span>  <span class='comment'># A variable that stores return value of middleware `chain.next` aka `original_value`.
 </span>  <span class='comment'># It is reassigned later by the `initial_around_callback`.
@@ -297,14 +335,30 @@
   <span class='comment'>##
 </span>  <span class='comment'># A list of around callbacks.
 </span>  <span class='comment'>#
+</span>  <span class='comment'># class Service
+</span>  <span class='comment'>#   around do |chain|
+</span>  <span class='comment'>#     # part before `chain.yield`
+</span>  <span class='comment'>#     original_value = chain.yield
+</span>  <span class='comment'>#     # part after `chain.yield`
+</span>  <span class='comment'>#   end
+</span>  <span class='comment'># end
+</span>  <span class='comment'>#
+</span>  <span class='comment'># class Service
+</span>  <span class='comment'>#   around do |chain, arguments|
+</span>  <span class='comment'>#     # part before `chain.yield`
+</span>  <span class='comment'>#     original_value = chain.yield
+</span>  <span class='comment'>#     # part after `chain.yield`
+</span>  <span class='comment'>#   end
+</span>  <span class='comment'># end
+</span>  <span class='comment'>#
 </span>  <span class='id identifier rubyid_around_callbacks'>around_callbacks</span> <span class='op'>=</span> <span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_callbacks'>callbacks</span><span class='period'>.</span><span class='id identifier rubyid_for'>for</span><span class='lparen'>(</span><span class='lbracket'>[</span><span class='symbol'>:around</span><span class='comma'>,</span> <span class='id identifier rubyid_method'>method</span><span class='rbracket'>]</span><span class='rparen'>)</span>
 
   <span class='comment'>##
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#
-</span>  <span class='id identifier rubyid_initial_around_callback'>initial_around_callback</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Plugins.html" title="ConvenientService::Common::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../HasCallbacks.html" title="ConvenientService::Common::Plugins::HasCallbacks (module)">HasCallbacks</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../HasCallbacks/Entities.html" title="ConvenientService::Common::Plugins::HasCallbacks::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../HasCallbacks/Entities/Callback.html" title="ConvenientService::Common::Plugins::HasCallbacks::Entities::Callback (class)">Callback</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../HasCallbacks/Entities/Callback.html#initialize-instance_method" title="ConvenientService::Common::Plugins::HasCallbacks::Entities::Callback#initialize (method)">new</a></span></span><span class='lparen'>(</span>
+</span>  <span class='id identifier rubyid_initial_around_callback'>initial_around_callback</span> <span class='op'>=</span> <span class='id identifier rubyid_entities'>entities</span><span class='period'>.</span><span class='const'>Callback</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
     <span class='label'>types:</span> <span class='lbracket'>[</span><span class='symbol'>:around</span><span class='comma'>,</span> <span class='id identifier rubyid_method'>method</span><span class='rbracket'>]</span><span class='comma'>,</span>
-    <span class='label'>block:</span> <span class='id identifier rubyid_proc'>proc</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_original_value'>original_value</span> <span class='op'>=</span> <span class='id identifier rubyid_chain'>chain</span><span class='period'>.</span><span class='id identifier rubyid_next'>next</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
+    <span class='label'>block:</span> <span class='id identifier rubyid_proc'>proc</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_original_value'>original_value</span> <span class='op'>=</span> <span class='id identifier rubyid_chain'>chain</span><span class='period'>.</span><span class='id identifier rubyid_next'>next</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
   <span class='rparen'>)</span>
 
   <span class='comment'>##
@@ -358,7 +412,7 @@
 </span>  <span class='comment'># rubocop:disable Style/Semicolon
 </span>  <span class='id identifier rubyid_composed'>composed</span> <span class='op'>=</span>
     <span class='id identifier rubyid_around_callbacks'>around_callbacks</span><span class='period'>.</span><span class='id identifier rubyid_reverse'>reverse</span><span class='period'>.</span><span class='id identifier rubyid_reduce'>reduce</span><span class='lparen'>(</span><span class='id identifier rubyid_initial_around_callback'>initial_around_callback</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_composed'>composed</span><span class='comma'>,</span> <span class='id identifier rubyid_callback'>callback</span><span class='op'>|</span>
-      <span class='id identifier rubyid_proc'>proc</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_callback'>callback</span><span class='period'>.</span><span class='id identifier rubyid_call_in_context'>call_in_context</span><span class='lparen'>(</span><span class='id identifier rubyid_entity'>entity</span><span class='comma'>,</span> <span class='id identifier rubyid_composed'>composed</span><span class='rparen'>)</span><span class='semicolon'>;</span> <span class='id identifier rubyid_original_value'>original_value</span> <span class='rbrace'>}</span>
+      <span class='id identifier rubyid_proc'>proc</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_callback'>callback</span><span class='period'>.</span><span class='id identifier rubyid_call_in_context_with_value_and_arguments'>call_in_context_with_value_and_arguments</span><span class='lparen'>(</span><span class='id identifier rubyid_entity'>entity</span><span class='comma'>,</span> <span class='id identifier rubyid_composed'>composed</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span><span class='semicolon'>;</span> <span class='id identifier rubyid_original_value'>original_value</span> <span class='rbrace'>}</span>
     <span class='kw'>end</span>
   <span class='comment'># rubocop:enable Style/Semicolon
 </span>
@@ -398,7 +452,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Feb 11 16:30:17 2023 by
+  Generated on Mon Feb 13 18:51:19 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.3).
 </div>

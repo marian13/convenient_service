@@ -199,6 +199,29 @@
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#[]-instance_method" title="#[] (instance method)">#<strong>[]</strong>(index)  &#x21d2; ConvenientService::Service::Plugins::HasResultSteps::Entities::Step </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns step by index.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#commit!-instance_method" title="#commit! (instance method)">#<strong>commit!</strong>  &#x21d2; Object </a>
     
 
@@ -405,12 +428,12 @@
       <pre class="lines">
 
 
-39
-40
-41</pre>
+52
+53
+54</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_result_steps/entities/step_collection.rb', line 39</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_result_steps/entities/step_collection.rb', line 52</span>
 
 <span class='kw'>def</span> <span class='op'>&lt;&lt;</span><span class='lparen'>(</span><span class='id identifier rubyid_step'>step</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_steps'>steps</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_step'>step</span><span class='period'>.</span><span class='id identifier rubyid_copy'>copy</span><span class='lparen'>(</span><span class='label'>overrides:</span> <span class='lbrace'>{</span><span class='label'>kwargs:</span> <span class='lbrace'>{</span><span class='label'>index:</span> <span class='id identifier rubyid_next_available_index'>next_available_index</span><span class='rbrace'>}</span><span class='rbrace'>}</span><span class='rparen'>)</span>
@@ -435,16 +458,16 @@
       <pre class="lines">
 
 
-43
-44
-45
-46
-47
-48
-49</pre>
+56
+57
+58
+59
+60
+61
+62</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_result_steps/entities/step_collection.rb', line 43</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_result_steps/entities/step_collection.rb', line 56</span>
 
 <span class='kw'>def</span> <span class='op'>==</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='rparen'>)</span>
@@ -452,6 +475,88 @@
   <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='id identifier rubyid_steps'>steps</span> <span class='op'>!=</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_steps'>steps</span>
 
   <span class='kw'>true</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="[]-instance_method">
+  
+    #<strong>[]</strong>(index)  &#x21d2; <tt><span class='object_link'><a href="Step.html" title="ConvenientService::Service::Plugins::HasResultSteps::Entities::Step (class)">ConvenientService::Service::Plugins::HasResultSteps::Entities::Step</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p>Works in a similar way as <code>Array#[]</code>.</p>
+</div>
+  </div>
+
+<p>Returns step by index.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>index</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Step.html" title="ConvenientService::Service::Plugins::HasResultSteps::Entities::Step (class)">ConvenientService::Service::Plugins::HasResultSteps::Entities::Step</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://ruby-doc.org/core-2.7.0/Array.html#method-i-5B-5D" target="_parent" title="https://ruby-doc.org/core-2.7.0/Array.html#method-i-5B-5D">https://ruby-doc.org/core-2.7.0/Array.html#method-i-5B-5D</a></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+48
+49
+50</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_result_steps/entities/step_collection.rb', line 48</span>
+
+<span class='kw'>def</span> <span class='op'>[]</span><span class='lparen'>(</span><span class='id identifier rubyid_index'>index</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_steps'>steps</span><span class='lbracket'>[</span><span class='id identifier rubyid_index'>index</span><span class='rbracket'>]</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -594,7 +699,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Feb 11 16:30:19 2023 by
+  Generated on Mon Feb 13 18:51:20 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.3).
 </div>
