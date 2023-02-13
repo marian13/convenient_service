@@ -6,6 +6,8 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Concern::InstanceMethods do
+  include ConvenientService::RSpec::Matchers::DelegateTo
+
   let(:result) { result_class.new(**params) }
 
   # rubocop:disable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
@@ -214,6 +216,10 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
       it "returns kwargs representation of result" do
         expect(result.to_kwargs).to eq(kwargs)
       end
+
+      specify { expect { result.to_kwargs }.to delegate_to(result, :unsafe_data) }
+      specify { expect { result.to_kwargs }.to delegate_to(result, :unsafe_message) }
+      specify { expect { result.to_kwargs }.to delegate_to(result, :unsafe_code) }
     end
   end
 end

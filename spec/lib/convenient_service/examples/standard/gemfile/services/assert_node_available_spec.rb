@@ -32,7 +32,7 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::AssertN
       let(:node_available_status) { :error }
 
       it "returns intermediate step result" do
-        expect(result).to be_not_success.of(ConvenientService::Examples::Standard::Gemfile::Services::RunShell)
+        expect(result).to be_not_success.of_step(ConvenientService::Examples::Standard::Gemfile::Services::RunShell)
       end
     end
 
@@ -40,7 +40,7 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::AssertN
       let(:node_available_status) { :success }
 
       it "returns success" do
-        expect(result).to be_success.of(ConvenientService::Examples::Standard::Gemfile::Services::RunShell)
+        expect(result).to be_success.of_step(ConvenientService::Examples::Standard::Gemfile::Services::RunShell)
       end
     end
   end

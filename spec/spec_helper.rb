@@ -18,6 +18,7 @@ RSpec.configure do |config|
 end
 
 require_relative "support/convenient_service"
+require_relative "support/faker"
 
 ##
 # NOTE: Waits for `should-matchers` full support.

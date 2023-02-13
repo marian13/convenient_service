@@ -73,11 +73,11 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::RailsService::Config
           let(:result_middlewares) do
             [
               ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-              ConvenientService::Service::Plugins::HasResult::Middleware,
-              ConvenientService::Service::Plugins::HasResultParamsValidations::UsingActiveModelValidations::Middleware,
-              ConvenientService::Service::Plugins::HasResultSteps::Middleware,
               ConvenientService::Common::Plugins::HasCallbacks::Middleware,
               ConvenientService::Common::Plugins::HasAroundCallbacks::Middleware,
+              ConvenientService::Service::Plugins::HasResultParamsValidations::UsingActiveModelValidations::Middleware,
+              ConvenientService::Service::Plugins::HasResult::Middleware,
+              ConvenientService::Service::Plugins::HasResultSteps::Middleware,
               ConvenientService::Service::Plugins::RaisesOnDoubleResult::Middleware,
               ConvenientService::Common::Plugins::CachesReturnValue::Middleware
             ]
@@ -85,6 +85,20 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::RailsService::Config
 
           it "sets service middlewares for `#result`" do
             expect(service_class.middlewares(:result).to_a).to eq(result_middlewares)
+          end
+        end
+
+        example_group "#step middlewares" do
+          let(:step_middlewares) do
+            [
+              ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
+              ConvenientService::Common::Plugins::HasCallbacks::Middleware,
+              ConvenientService::Common::Plugins::HasAroundCallbacks::Middleware
+            ]
+          end
+
+          it "sets service middlewares for `#step`" do
+            expect(service_class.middlewares(:step).to_a).to eq(step_middlewares)
           end
         end
 
@@ -140,6 +154,19 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::RailsService::Config
           end
         end
 
+        example_group ".result middlewares" do
+          let(:class_result_middlewares) do
+            [
+              ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
+              ConvenientService::Service::Plugins::CanHaveStubbedResult::Middleware
+            ]
+          end
+
+          it "sets service middlewares for `.result`" do
+            expect(service_class.middlewares(:result, scope: :class).to_a).to eq(class_result_middlewares)
+          end
+        end
+
         example_group "service internals" do
           example_group "concerns" do
             let(:concerns) do
@@ -163,6 +190,8 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::RailsService::Config
                 ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Concern,
                 ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasResultShortSyntax::Concern,
                 ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanRecalculateResult::Concern,
+                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasStep::Concern,
+                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanHaveParentResult::Concern,
                 ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasInspect::Concern
               ]
             end
@@ -176,7 +205,9 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::RailsService::Config
             let(:initialize_middlewares) do
               [
                 ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Middleware
+                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Middleware,
+                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasStep::Initialize::Middleware,
+                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanHaveParentResult::Initialize::Middleware
               ]
             end
 
@@ -302,6 +333,20 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::RailsService::Config
             end
           end
 
+          example_group "#to_kwargs middlewares" do
+            let(:to_kwargs_middlewares) do
+              [
+                ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
+                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasStep::ToKwargs::Middleware,
+                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanHaveParentResult::ToKwargs::Middleware
+              ]
+            end
+
+            it "sets service result middlewares for `#to_kwargs`" do
+              expect(service_class::Result.middlewares(:to_kwargs).to_a).to eq(to_kwargs_middlewares)
+            end
+          end
+
           example_group "service result internals" do
             example_group "concerns" do
               let(:concerns) do
@@ -331,16 +376,16 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::RailsService::Config
             end
           end
 
-          example_group "#result middlewares" do
-            let(:result_middlewares) do
+          example_group "#calculate_result middlewares" do
+            let(:calculate_result_middlewares) do
               [
                 ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-                ConvenientService::Common::Plugins::CachesReturnValue::Middleware
+                ConvenientService::Service::Plugins::HasResultSteps::Entities::Step::Plugins::CanHaveParentResult::Middleware
               ]
             end
 
-            it "sets service step middlewares for `#result`" do
-              expect(service_class::Step.middlewares(:result).to_a).to eq(result_middlewares)
+            it "sets service step middlewares for `#calculate_result`" do
+              expect(service_class::Step.middlewares(:calculate_result).to_a).to eq(calculate_result_middlewares)
             end
           end
 

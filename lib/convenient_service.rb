@@ -32,6 +32,12 @@ require_relative "convenient_service/configs"
 
 ##
 # @internal
+#   Convenient Service Predefined Services.
+#
+require_relative "convenient_service/services"
+
+##
+# @internal
 #   Convenient Service Aliases.
 #
 require_relative "convenient_service/aliases"

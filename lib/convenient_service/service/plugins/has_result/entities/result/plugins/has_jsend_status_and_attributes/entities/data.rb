@@ -45,6 +45,10 @@ module ConvenientService
                     def to_h
                       @to_h ||= value.to_h
                     end
+
+                    def to_s
+                      @to_s ||= to_h.to_s
+                    end
                   end
                 end
               end
