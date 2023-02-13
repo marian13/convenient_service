@@ -1,5 +1,45 @@
 # Changelog
 
+## [0.7.0](https://github.com/marian13/convenient_service/compare/v0.6.0...v0.7.0) (2023-02-13)
+
+
+### ⚠ BREAKING CHANGES
+
+* **be_result:** introduce #of_step, #of_service, remove #of
+* **has_result:** use callbacks before result
+
+### Features
+
+* **be_result:** introduce #of_step, #of_service, remove #of ([0d9ba16](https://github.com/marian13/convenient_service/commit/0d9ba16f035ef50268fdf484b0fd83c58dbb328a))
+* **be_result:** of_step supports method steps ([9127301](https://github.com/marian13/convenient_service/commit/9127301f41549fbb8c48b718e410ebd7c100e2e9))
+* **can_have_parent_Result:** introduce CanHaveParentResult plugin ([55f0b0f](https://github.com/marian13/convenient_service/commit/55f0b0f558e2edb8b0fdc56a2d8b52bc44995a2f))
+* **command:** expose command ([6abcb1a](https://github.com/marian13/convenient_service/commit/6abcb1ad481cad66eba2d4d409e3ce16b0f6591d))
+* **configs:** add around callbacks for steps ([cb9d342](https://github.com/marian13/convenient_service/commit/cb9d34204d63a96e89ebebe2991e8ab77b2624f0))
+* **has_around_callbacks:** pass arguments to around callbacks ([f682f9a](https://github.com/marian13/convenient_service/commit/f682f9a6fb3ef6e8ab50ccf0f7f3ba375a63092e))
+* **has_callbacks:** pass arguments to callbacks ([2d7f720](https://github.com/marian13/convenient_service/commit/2d7f720e37a15874ec89167e46fb67a0631ec923))
+* **has_jsend_status_and_attributes:** introduce Data#to_s ([c1e20c0](https://github.com/marian13/convenient_service/commit/c1e20c093ec4575a939645a2d951fe4e035154b8))
+* **has_result_steps:** add callback trigger for step ([475d46a](https://github.com/marian13/convenient_service/commit/475d46a5abaf6fa85260cef90d78db60146b86d9))
+* **has_result_steps:** introduce Step#original_result ([8891247](https://github.com/marian13/convenient_service/commit/8891247e5f0339d9e96e733d05b29e45a2e87e71))
+* **has_step:** introduce HasStep plugin ([e6eee96](https://github.com/marian13/convenient_service/commit/e6eee965c8707b7378173f228b9b212834be434b))
+* **not_passed:** add better #inspect ([d7ce5d9](https://github.com/marian13/convenient_service/commit/d7ce5d93a3aa5f139f6b7ee578975c1da52488c0))
+
+
+### Bug Fixes
+
+* **be_descendant_of:** fix typo ([58e0f73](https://github.com/marian13/convenient_service/commit/58e0f73f74685614d24e0ee3c8208a5626f7ef42))
+* **be_direct_descendant_of:** fix typo ([bda7d06](https://github.com/marian13/convenient_service/commit/bda7d063d1801309a58b5e4d43d738ebab5fef59))
+* **ci:** change the version of yard ([185c23c](https://github.com/marian13/convenient_service/commit/185c23c40dacf997e29d0b7defd10020c22dc196))
+* **copyable:** do not mutate input params ([0809592](https://github.com/marian13/convenient_service/commit/08095927ea03c60a00eb3b0d0323458b482827b0))
+* **dependency_container:** fix typo ([b1cf420](https://github.com/marian13/convenient_service/commit/b1cf420a2e69cc51e928a8a1ad885a65ad7fb4fe))
+* **has_result_steps:** use unsafe attributes in to_kwargs ([6c2b1d3](https://github.com/marian13/convenient_service/commit/6c2b1d3912106f6848b875d06a4d7ce1d79c4edb))
+* **has_result_steps:** use unsafe_data ([e00c346](https://github.com/marian13/convenient_service/commit/e00c3468f5761e20678c7019f0d13f2569778b19))
+* **has_result:** use callbacks before result ([eb46444](https://github.com/marian13/convenient_service/commit/eb46444536a7cf4aab869aa009c1a7c896c00c11))
+
+
+### Miscellaneous Chores
+
+* release 0.7.0 ([6433f5a](https://github.com/marian13/convenient_service/commit/6433f5a67c3f21c620d500186e0308fb7b098efc))
+
 ## [0.6.0](https://github.com/marian13/convenient_service/compare/v0.5.0...v0.6.0) (2023-01-22)
 
 
