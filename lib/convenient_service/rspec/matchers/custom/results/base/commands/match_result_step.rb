@@ -36,14 +36,11 @@ module ConvenientService
                 #
                 def call
                   case step
-                  when ::Class
-                    match_result_service_step
-                  when ::Symbol
-                    match_method_step
-                  when nil
-                    match_without_step
-                  else
-                    raise Errors::InvalidStep.new(step: step)
+                  when ::Class then match_service_step?
+                  when :result then match_result_method_step?
+                  when ::Symbol then match_method_step?
+                  when nil then match_without_step?
+                  else raise Errors::InvalidStep.new(step: step)
                   end
                 end
 
@@ -52,32 +49,34 @@ module ConvenientService
                 ##
                 # @return [Boolean]
                 #
-                def match_result_service_step
-                  return false if result.step.nil?
+                def match_service_step?
+                  service_step = Commands::FindResultServiceStep.call(result: result, service_class: step)
 
-                  result.step.service.klass == step
+                  Utils::Bool.to_bool(service_step)
                 end
 
                 ##
                 # @return [Boolean]
                 #
-                def match_method_step
-                  return false if result.step.nil?
+                def match_result_method_step?
+                  result_method_step = Commands::FindResultResultMethodStep.call(result: result)
 
-                  ##
-                  # TODO: Move to step.
-                  #
-                  input = result.step.inputs.find { |input| input.key.to_sym == :method_name }
-
-                  return false unless input
-
-                  input.value == step
+                  Utils::Bool.to_bool(result_method_step)
                 end
 
                 ##
                 # @return [Boolean]
                 #
-                def match_without_step
+                def match_method_step?
+                  method_step = Commands::FindResultMethodStep.call(result: result, method_name: step)
+
+                  Utils::Bool.to_bool(method_step)
+                end
+
+                ##
+                # @return [Boolean]
+                #
+                def match_without_step?
                   result.step.nil?
                 end
               end

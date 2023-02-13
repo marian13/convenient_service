@@ -98,6 +98,13 @@ module ConvenientService
                   service.klass.to_s
                 end
 
+                ##
+                # @return [Class]
+                #
+                def service_class
+                  service.klass
+                end
+
                 def validate!
                   inputs.each { |input| input.validate_as_input_for_container!(container) }
 
