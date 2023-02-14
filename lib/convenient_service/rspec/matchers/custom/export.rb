@@ -1,16 +1,24 @@
 # frozen_string_literal: true
 
+require_relative "export/container"
+
 module ConvenientService
   module RSpec
     module Matchers
       module Custom
         class Export
+          include ConvenientService::DependencyContainer::Import
+
+          import :"DependencyContainer::Constants", scope: :class, from: Container
+
+          include DependencyContainer::Constants
+
           ##
           # @param full_name [Symbol, String]
           # @param scope [Symbol]
           # @return [void]
           #
-          def initialize(full_name, scope: :instance)
+          def initialize(full_name, scope: DEFAULT_SCOPE)
             @full_name = full_name
             @scope = scope
           end
