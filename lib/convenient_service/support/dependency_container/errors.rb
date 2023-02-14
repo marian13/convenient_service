@@ -68,6 +68,18 @@ module ConvenientService
             super(message)
           end
         end
+
+        class NotModule < ConvenientService::Error
+          ##
+          # @param klass [Class]
+          # @return [void]
+          #
+          def initialize(klass:)
+            message = "#{klass} is NOT a Module."
+
+            super(message)
+          end
+        end
       end
     end
   end

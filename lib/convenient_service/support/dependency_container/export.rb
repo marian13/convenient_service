@@ -6,6 +6,14 @@ module ConvenientService
       module Export
         include Support::Concern
 
+        ##
+        # @param klass [Class, Module]
+        # @return [Module]
+        #
+        included do |klass|
+          raise Errors::NotModule.new(klass: klass) unless klass.instance_of?(Module)
+        end
+
         class_methods do
           ##
           # @param full_name [String, Symbol]
