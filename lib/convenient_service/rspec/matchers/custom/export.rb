@@ -10,6 +10,7 @@ module ConvenientService
           include ConvenientService::DependencyContainer::Import
 
           import :"DependencyContainer::Constants", scope: :class, from: Container
+          import :"DependencyContainer::Errors", from: Container
 
           include DependencyContainer::Constants
 
@@ -29,6 +30,10 @@ module ConvenientService
           #
           def matches?(container)
             @container = container
+
+            raise DependencyContainer::Errors::NotExportableModule.new(mod: container) unless Utils::Module.include_module?(container, DependencyContainer::Export)
+
+            raise DependencyContainer::Errors::InvalidScope.new(scope: scope) unless SCOPES.include?(scope)
 
             Utils::Bool.to_bool(container.exported_methods.find_by(full_name: full_name, scope: scope))
           end

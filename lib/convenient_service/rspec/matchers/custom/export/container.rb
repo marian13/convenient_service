@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "convenient_service/support/dependency_container/constants"
-
 module ConvenientService
   module RSpec
     module Matchers
@@ -12,6 +10,10 @@ module ConvenientService
 
             export :"DependencyContainer::Constants", scope: :class do
               ConvenientService::Support::DependencyContainer::Constants
+            end
+
+            export :"DependencyContainer::Errors" do
+              ConvenientService::Support::DependencyContainer::Errors
             end
           end
         end
