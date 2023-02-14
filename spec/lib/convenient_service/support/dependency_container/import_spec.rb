@@ -59,7 +59,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Import do
           <<~TEXT
             Module `#{container}` can NOT export methods.
 
-            Did you forget to include `ConvenientService::Container.export` into it?
+            Did you forget to include `ConvenientService::DependencyContainer::Export` into it?
           TEXT
         end
 
