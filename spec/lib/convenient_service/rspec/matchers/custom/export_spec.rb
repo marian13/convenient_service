@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-# rubocop:disable RSpec/MultipleMemoizedHelpers
+# rubocop:disable RSpec/MultipleMemoizedHelpers, RSpec/NestedGroups
 RSpec.describe ConvenientService::RSpec::Matchers::Custom::Export do
   subject(:matcher_result) { matcher.matches?(container) }
 
@@ -40,7 +40,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Export do
 
   example_group "instance methods" do
     describe "#matches?" do
-      context "container" do
+      context "when container" do
         context "when container can NOT export methods" do
           let(:container) { Module.new }
 
@@ -67,7 +67,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Export do
         end
       end
 
-      context "scope" do
+      context "when scope" do
         context "when scope is NOT passed" do
           let(:full_name) { :foo }
           let(:kwargs) { ConvenientService::Utils::Hash.except(default_kwargs, [:scope]) }
@@ -107,7 +107,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Export do
         end
       end
 
-      context "method" do
+      context "when method" do
         context "when method is NOT exported" do
           let(:full_name) { :non_existent }
           let(:scope) { :class }
@@ -153,4 +153,4 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Export do
     end
   end
 end
-# rubocop:enable RSpec/MultipleMemoizedHelpers
+# rubocop:enable RSpec/MultipleMemoizedHelpers, RSpec/NestedGroups
