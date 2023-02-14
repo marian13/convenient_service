@@ -64,6 +64,40 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Concern do
 
       specify { expect { service_instance.steps }.to cache_its_value }
     end
+
+    describe "#step" do
+      let(:index) { 0 }
+
+      context "when steps have NO step by index" do
+        it "returns `nil`" do
+          expect(service_instance.step(index)).to be_nil
+        end
+
+        specify do
+          expect { service_instance.step(index) }
+            .to delegate_to(service_instance.steps, :[])
+            .with_arguments(index)
+            .and_return_its_value
+        end
+      end
+
+      context "when steps have step by index" do
+        before do
+          service_class.step Class.new, in: :foo, out: :bar
+        end
+
+        it "returns step by index" do
+          expect(service_instance.step(index)).to eq(service_instance.steps[index])
+        end
+
+        specify do
+          expect { service_instance.step(index) }
+            .to delegate_to(service_instance.steps, :[])
+            .with_arguments(index)
+            .and_return_its_value
+        end
+      end
+    end
   end
 
   example_group "class methods" do

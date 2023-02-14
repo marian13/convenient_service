@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-# rubocop:disable RSpec/NestedGroups
+# rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Entities::Callback do
   example_group "attributes" do
     include ConvenientService::RSpec::Matchers::HaveAttrReader
@@ -39,11 +39,17 @@ RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Entities::Callb
   end
 
   example_group "instance methods" do
-    subject(:callback) { described_class.new(types: types, block: block) }
+    subject(:callback) { described_class.new(types: types, block: callback_block) }
 
-    let(:params) { {types: types, block: block} }
+    let(:params) { {types: types, block: callback_block} }
     let(:types) { [:before, :result] }
-    let(:block) { proc { :foo } }
+    let(:callback_block) { proc { :callback } }
+
+    let(:arguments_args) { [:foo, :bar] }
+    let(:arguments_kwargs) { {foo: :bar} }
+    let(:arguments_block) { proc { :foo } }
+
+    let(:arguments) { ConvenientService::Support::Arguments.new(*arguments_args, **arguments_kwargs, &arguments_block) }
 
     describe "#called?" do
       context "when callback is NOT called" do
@@ -80,39 +86,15 @@ RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Entities::Callb
     describe "#call" do
       include ConvenientService::RSpec::Matchers::DelegateTo
 
-      it "calls block" do
-        allow(block).to receive(:call).and_call_original
-
-        callback.call
-
-        expect(block).to have_received(:call)
-      end
-
-      it "returns result of block calling" do
-        expect(callback.call).to eq(block.call)
-      end
-
-      it "passes all its args to block" do
-        args = [:foo, :bar]
-
-        expect { callback.call(*args) }
-          .to delegate_to(block, :call)
-          .with_arguments(*args)
+      specify do
+        expect { callback.call(*arguments_args, arguments_kwargs, arguments_block) }
+          .to delegate_to(callback_block, :call)
+          .with_arguments(*arguments_args, arguments_kwargs, arguments_block)
           .and_return_its_value
       end
 
-      it "passes all its kwargs to block" do
-        kwargs = {foo: :bar}
-
-        allow(block).to receive(:call).with(**kwargs).and_call_original
-
-        callback.call(**kwargs)
-
-        expect(block).to have_received(:call)
-      end
-
       it "marks callback as called" do
-        expect { callback.call }.to change(callback, :called?).from(false).to(true)
+        expect { callback.call(*arguments_args, arguments_kwargs, arguments_block) }.to change(callback, :called?).from(false).to(true)
       end
     end
 
@@ -121,39 +103,50 @@ RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Entities::Callb
 
       let(:context) { Object.new }
 
-      it "calls instance exec of context" do
-        allow(context).to receive(:instance_exec).and_call_original
-
-        callback.call_in_context(context)
-
-        expect(context).to have_received(:instance_exec)
-      end
-
-      it "returns result of block calling inside instance exec of context" do
-        expect(callback.call_in_context(context)).to eq(context.instance_exec(&block))
-      end
-
-      it "passes all its args to instance exec of context" do
-        args = [:foo, :bar]
-
-        expect { callback.call_in_context(context, *args) }
+      specify do
+        expect { callback.call_in_context(context) }
           .to delegate_to(context, :instance_exec)
-          .with_arguments(*args, &block)
+          .with_arguments(&callback_block)
           .and_return_its_value
-      end
-
-      it "passes all its kwargs to instance exec of context" do
-        kwargs = {foo: :bar}
-
-        allow(context).to receive(:instance_exec).with(**kwargs).and_call_original
-
-        callback.call_in_context(context, **kwargs)
-
-        expect(context).to have_received(:instance_exec)
       end
 
       it "marks callback as called" do
         expect { callback.call_in_context(context) }.to change(callback, :called?).from(false).to(true)
+      end
+    end
+
+    describe "#call_in_context_with_arguments" do
+      include ConvenientService::RSpec::Matchers::DelegateTo
+
+      let(:context) { Object.new }
+
+      specify do
+        expect { callback.call_in_context_with_arguments(context, *arguments_args, **arguments_kwargs, &arguments_block) }
+          .to delegate_to(context, :instance_exec)
+          .with_arguments(arguments, &callback_block)
+          .and_return_its_value
+      end
+
+      it "marks callback as called" do
+        expect { callback.call_in_context_with_arguments(context, *arguments_args, **arguments_kwargs, &arguments_block) }.to change(callback, :called?).from(false).to(true)
+      end
+    end
+
+    describe "#call_in_context_with_value_and_arguments" do
+      include ConvenientService::RSpec::Matchers::DelegateTo
+
+      let(:context) { Object.new }
+      let(:value) { :foo }
+
+      specify do
+        expect { callback.call_in_context_with_value_and_arguments(context, value, *arguments_args, **arguments_kwargs, &arguments_block) }
+          .to delegate_to(context, :instance_exec)
+          .with_arguments(value, arguments, &callback_block)
+          .and_return_its_value
+      end
+
+      it "marks callback as called" do
+        expect { callback.call_in_context_with_value_and_arguments(context, value, *arguments_args, **arguments_kwargs, &arguments_block) }.to change(callback, :called?).from(false).to(true)
       end
     end
 
@@ -175,8 +168,8 @@ RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Entities::Callb
       end
 
       context "when `other` has different `block`" do
-        let(:other) { described_class.new(**params.merge(block: other_block)) }
-        let(:other_block) { proc { :baz } }
+        let(:other) { described_class.new(**params.merge(block: other_callback_block)) }
+        let(:other_callback_block) { proc { :baz } }
 
         it "returns false" do
           expect(callback == other).to eq(false)
@@ -188,11 +181,11 @@ RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Entities::Callb
         # rubocop:disable Lint/Void, RSpec/ExampleLength
         it "uses `source_location` to compare blocks" do
           callback_block_source_location = double
-          other_block_source_location = double
+          other_callback_block_source_location = double
 
           allow(params[:block]).to receive(:source_location).and_return(callback_block_source_location)
-          allow(other_block).to receive(:source_location).and_return(other_block_source_location)
-          allow(callback_block_source_location).to receive(:==).with(other_block_source_location)
+          allow(other_callback_block).to receive(:source_location).and_return(other_callback_block_source_location)
+          allow(callback_block_source_location).to receive(:==).with(other_callback_block_source_location)
 
           callback == other
 
@@ -212,9 +205,9 @@ RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Entities::Callb
 
     describe "#to_proc" do
       it "returns block" do
-        expect(callback.to_proc).to eq(block)
+        expect(callback.to_proc).to eq(callback_block)
       end
     end
   end
 end
-# rubocop:enable RSpec/NestedGroups
+# rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers

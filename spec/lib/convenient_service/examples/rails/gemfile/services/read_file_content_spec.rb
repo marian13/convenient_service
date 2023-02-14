@@ -68,7 +68,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::ReadFileCo
       end
 
       it "returns intermediate step result" do
-        expect(result).to be_not_success.of(ConvenientService::Examples::Rails::Gemfile::Services::AssertFileExists)
+        expect(result).to be_not_success.of_step(ConvenientService::Examples::Rails::Gemfile::Services::AssertFileExists)
       end
     end
 
@@ -106,7 +106,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::ReadFileCo
         end
 
         it "returns intermediate step result" do
-          expect(result).to be_not_success.of(ConvenientService::Examples::Rails::Gemfile::Services::AssertFileNotEmpty)
+          expect(result).to be_not_success.of_step(ConvenientService::Examples::Rails::Gemfile::Services::AssertFileNotEmpty)
         end
       end
     end

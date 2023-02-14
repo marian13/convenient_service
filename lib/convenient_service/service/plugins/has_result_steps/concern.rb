@@ -9,7 +9,7 @@ module ConvenientService
 
           instance_methods do
             ##
-            # @return [Array]
+            # @return [Array<ConvenientService::Service::Plugins::HasResultSteps::Entities::Step>]
             #
             def steps
               internals.cache.fetch(:steps) do
@@ -21,18 +21,26 @@ module ConvenientService
             end
 
             ##
-            # TODO: Create for callbacks.
+            # Returns step by index.
+            # Returns `nil` when index is out of range.
             #
-            #   def step(step_result)
-            #     step_result
-            #   end
+            # @param index [Integer]
+            # @return [ConvenientService::Service::Plugins::HasResultSteps::Entities::Step]
             #
+            # @note This method was initially designed as a hook (callback trigger).
+            # @see ConvenientService::Service::Plugins::HasResultSteps::Middleware#next
+            #
+            def step(index)
+              steps[index]
+            end
           end
 
           class_methods do
             ##
-            # @params args [Array]
-            # @params kwargs [Hash]
+            # Registers a step (step definition).
+            #
+            # @param args [Array]
+            # @param kwargs [Hash]
             # @return [ConvenientService::Service::Plugins::HasResultSteps::Entities::Step]
             #
             def step(*args, **kwargs)
@@ -41,6 +49,9 @@ module ConvenientService
             end
 
             ##
+            # @param value [Object] Can be any type.
+            # @return [ConvenientService::Support::RawValue]
+            #
             # Allows to pass a value to `in` method without its intermediate processing.
             # @see https://marian13.github.io/convenient_service_docs/basics/step_to_result_translation_table
             #

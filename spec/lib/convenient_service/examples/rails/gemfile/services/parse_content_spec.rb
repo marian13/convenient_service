@@ -189,7 +189,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::ParseConte
       end
 
       it "returns intermediate step result" do
-        expect(result).to be_not_success.of(ConvenientService::Examples::Rails::Gemfile::Services::AssertValidRubySyntax)
+        expect(result).to be_not_success.of_step(ConvenientService::Examples::Rails::Gemfile::Services::AssertValidRubySyntax)
       end
     end
 

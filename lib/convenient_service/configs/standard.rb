@@ -34,12 +34,6 @@ module ConvenientService
           use Plugins::Common::HasAroundCallbacks::Concern
 
           use Plugins::Service::HasInspect::Concern
-          ##
-          # NOTE: Optional plugins.
-          # TODO: Specs.
-          #
-          #   use Plugins::Common::HasConfig::Concern
-          #
         end
 
         middlewares :initialize do
@@ -51,16 +45,22 @@ module ConvenientService
         middlewares :result do
           use Plugins::Common::NormalizesEnv::Middleware
 
-          use Plugins::Service::HasResult::Middleware
-
-          use Plugins::Service::HasResultSteps::Middleware
-
           use Plugins::Common::HasCallbacks::Middleware
           use Plugins::Common::HasAroundCallbacks::Middleware
+
+          use Plugins::Service::HasResult::Middleware
+          use Plugins::Service::HasResultSteps::Middleware
 
           use Plugins::Service::RaisesOnDoubleResult::Middleware
 
           use Plugins::Common::CachesReturnValue::Middleware
+        end
+
+        middlewares :step do
+          use Plugins::Common::NormalizesEnv::Middleware
+
+          use Plugins::Common::HasCallbacks::Middleware
+          use Plugins::Common::HasAroundCallbacks::Middleware
         end
 
         middlewares :success do
@@ -111,6 +111,9 @@ module ConvenientService
             use Plugins::Result::HasResultShortSyntax::Concern
             use Plugins::Result::CanRecalculateResult::Concern
 
+            use Plugins::Result::HasStep::Concern
+            use Plugins::Result::CanHaveParentResult::Concern
+
             use Plugins::Result::HasInspect::Concern
           end
 
@@ -118,6 +121,9 @@ module ConvenientService
             use Plugins::Common::NormalizesEnv::Middleware
 
             use Plugins::Result::HasJsendStatusAndAttributes::Middleware
+
+            use Plugins::Result::HasStep::Initialize::Middleware
+            use Plugins::Result::CanHaveParentResult::Initialize::Middleware
           end
 
           middlewares :success? do
@@ -174,6 +180,13 @@ module ConvenientService
             use Plugins::Result::RaisesOnNotCheckedResultStatus::Middleware
           end
 
+          middlewares :to_kwargs do
+            use Plugins::Common::NormalizesEnv::Middleware
+
+            use Plugins::Result::HasStep::ToKwargs::Middleware
+            use Plugins::Result::CanHaveParentResult::ToKwargs::Middleware
+          end
+
           class self::Internals
             include Core
 
@@ -192,10 +205,10 @@ module ConvenientService
             use Plugins::Step::HasInspect::Concern
           end
 
-          middlewares :result do
+          middlewares :calculate_result do
             use Plugins::Common::NormalizesEnv::Middleware
 
-            use Plugins::Common::CachesReturnValue::Middleware
+            use Plugins::Step::CanHaveParentResult::Middleware
           end
 
           class self::Internals

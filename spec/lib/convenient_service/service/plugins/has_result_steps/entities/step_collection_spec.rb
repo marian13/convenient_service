@@ -48,6 +48,40 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultSteps::Entities::St
       end
     end
 
+    describe "#[]" do
+      let(:index) { 0 }
+
+      context "when step collection has NO step by index" do
+        it "returns `nil`" do
+          expect(step_collection[index]).to be_nil
+        end
+
+        specify do
+          expect { step_collection[index] }
+            .to delegate_to(step_collection.steps, :[])
+            .with_arguments(index)
+            .and_return_its_value
+        end
+      end
+
+      context "when step collection has step by index" do
+        before do
+          step_collection << step
+        end
+
+        it "returns step by index" do
+          expect(step_collection[index]).to eq(step_collection.steps[index])
+        end
+
+        specify do
+          expect { step_collection[index] }
+            .to delegate_to(step_collection.steps, :[])
+            .with_arguments(index)
+            .and_return_its_value
+        end
+      end
+    end
+
     describe "#each" do
       let(:block) { proc { |step| } }
 

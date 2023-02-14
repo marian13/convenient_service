@@ -51,7 +51,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultMethodSteps::Middle
 
           let(:customized_step) do
             service_class.step_class.new(
-              ConvenientService::Service::Plugins::HasResultMethodSteps::Services::RunMethodInOrganizer,
+              ConvenientService::Services::RunMethodInOrganizer,
               in: [
                 {method_name: ConvenientService::Support::RawValue.wrap(method_name)},
                 {organizer: :itself}
@@ -65,8 +65,8 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultMethodSteps::Middle
             expect(method_value).to eq(customized_step)
           end
 
-          it "sets step service to `ConvenientService::Service::Plugins::HasResultMethodSteps::Services::RunMethodInOrganizer`" do
-            expect(method_value.service.klass).to eq(ConvenientService::Service::Plugins::HasResultMethodSteps::Services::RunMethodInOrganizer)
+          it "sets step service to `ConvenientService::Services::RunMethodInOrganizer`" do
+            expect(method_value.service.klass).to eq(ConvenientService::Services::RunMethodInOrganizer)
           end
 
           it "concats method name to step inputs" do
@@ -83,7 +83,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultMethodSteps::Middle
 
           let(:customized_step) do
             service_class.step_class.new(
-              ConvenientService::Service::Plugins::HasResultMethodSteps::Services::RunOwnMethodInOrganizer,
+              ConvenientService::Services::RunOwnMethodInOrganizer,
               in: [
                 {method_name: ConvenientService::Support::RawValue.wrap(method_name)},
                 {organizer: :itself}
@@ -97,8 +97,8 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultMethodSteps::Middle
             expect(method_value).to eq(customized_step)
           end
 
-          it "sets step service to `ConvenientService::Service::Plugins::HasResultMethodSteps::Services::RunOwnMethodInOrganizer`" do
-            expect(method_value.service.klass).to eq(ConvenientService::Service::Plugins::HasResultMethodSteps::Services::RunOwnMethodInOrganizer)
+          it "sets step service to `ConvenientService::Services::RunOwnMethodInOrganizer`" do
+            expect(method_value.service.klass).to eq(ConvenientService::Services::RunOwnMethodInOrganizer)
           end
 
           it "concats method name to step inputs" do

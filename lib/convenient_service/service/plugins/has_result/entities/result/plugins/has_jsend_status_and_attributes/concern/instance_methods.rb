@@ -113,7 +113,13 @@ module ConvenientService
                     # @return [Hash]
                     #
                     def to_kwargs
-                      {service: service, status: status, data: data, message: message, code: code}
+                      {
+                        service: service,
+                        status: status,
+                        data: unsafe_data,
+                        message: unsafe_message,
+                        code: unsafe_code
+                      }
                     end
                   end
                 end

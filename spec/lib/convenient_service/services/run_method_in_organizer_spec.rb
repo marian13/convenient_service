@@ -5,13 +5,13 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::Service::Plugins::HasResultMethodSteps::Services::RunMethodInOrganizer do
+RSpec.describe ConvenientService::Services::RunMethodInOrganizer do
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
 
     subject { described_class }
 
-    it { is_expected.to include_module(ConvenientService::Service::Plugins::HasResultMethodSteps::Services::MethodStepConfig) }
+    it { is_expected.to include_module(ConvenientService::Standard::Config) }
   end
 
   example_group "class methods" do

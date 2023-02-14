@@ -36,6 +36,19 @@ module ConvenientService
               steps.each(&block)
             end
 
+            ##
+            # Returns step by index.
+            #
+            # @param index [Integer]
+            # @return [ConvenientService::Service::Plugins::HasResultSteps::Entities::Step]
+            #
+            # @note Works in a similar way as `Array#[]`.
+            # @see https://ruby-doc.org/core-2.7.0/Array.html#method-i-5B-5D
+            #
+            def [](index)
+              steps[index]
+            end
+
             def <<(step)
               steps << step.copy(overrides: {kwargs: {index: next_available_index}})
             end

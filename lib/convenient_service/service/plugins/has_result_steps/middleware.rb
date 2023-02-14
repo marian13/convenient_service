@@ -5,6 +5,9 @@ module ConvenientService
     module Plugins
       module HasResultSteps
         class Middleware < Core::MethodChainMiddleware
+          ##
+          # @return [ConvenientService::Service::Plugins::HasResultSteps::Entities::Step]
+          #
           def next(...)
             return chain.next(...) if entity.steps.none?
 
@@ -13,11 +16,22 @@ module ConvenientService
 
           private
 
+          ##
+          # @return [ConvenientService::Service::Plugins::HasResultSteps::Entities::Step]
+          #
           def last_step
-            ##
-            # TODO: Use `entity.steps.find { |step| step.result.tap { |result| entity.step(result) }.not_success? }` for callbacks.
-            #
-            @last_step ||= entity.steps.find(&:not_success?) || entity.steps.last
+            @last_step ||= entity.steps.find.with_index { |step, index| not_success?(step, index) } || entity.steps.last
+          end
+
+          ##
+          # @return [ConvenientService::Service::Plugins::HasResultSteps::Entities::Step]
+          #
+          # @internal
+          #   NOTE: `entity.step(index)` is used as a hook (callbacks trigger).
+          #   IMPORTANT: `step` status MUST be checked before triggering callbacks.
+          #
+          def not_success?(step, index)
+            step.not_success?.tap { entity.step(index) }
           end
         end
       end
