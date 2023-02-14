@@ -6,53 +6,53 @@ module ConvenientService
       module Custom
         class Export
           ##
-          # @param method_name [Symbol, String]
+          # @param full_name [Symbol, String]
           # @param scope [Symbol]
           # @return [void]
           #
-          def initialize(method_name, scope: :instance)
-            @method_name = method_name
+          def initialize(full_name, scope: :instance)
+            @full_name = full_name
             @scope = scope
           end
 
           ##
-          # @param container [Class, Module]
+          # @param container [Module]
           # @return [Boolean]
           #
           def matches?(container)
             @container = container
 
-            Utils::Bool.to_bool(container.exported_methods.find_by(full_name: method_name, scope: scope))
+            Utils::Bool.to_bool(container.exported_methods.find_by(full_name: full_name, scope: scope))
           end
 
           ##
           # @return [String]
           #
           def description
-            "export `#{method_name}` with scope `#{scope}`"
+            "export `#{full_name}` with scope `#{scope}`"
           end
 
           ##
           # @return [String]
           #
           def failure_message
-            "expected `#{container.class}` to have exported `#{method_name}` with scope `#{scope}`"
+            "expected `#{container.class}` to export `#{full_name}` with scope `#{scope}`"
           end
 
           ##
           # @return [String]
           #
           def failure_message_when_negated
-            "expected `#{container.class}` NOT to have exported `#{method_name}` with scope `#{scope}`"
+            "expected `#{container.class}` NOT to export `#{full_name}` with scope `#{scope}`"
           end
 
           private
 
           ##
-          # @!attribute [r] method_name
+          # @!attribute [r] full_name
           #   @return [Symbol, String]
           #
-          attr_reader :method_name
+          attr_reader :full_name
 
           ##
           # @!attribute [r] scope
@@ -62,7 +62,7 @@ module ConvenientService
 
           ##
           # @!attribute [r] container
-          #   @return [Class, Module]
+          #   @return [Module]
           #
           attr_reader :container
         end

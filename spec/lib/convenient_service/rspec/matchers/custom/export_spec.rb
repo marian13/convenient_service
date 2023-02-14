@@ -3,13 +3,14 @@
 require "spec_helper"
 
 require "convenient_service"
+
 # rubocop:disable RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::RSpec::Matchers::Custom::Export do
   subject(:matcher_result) { matcher.matches?(container) }
 
-  let(:matcher) { described_class.new(method_name, **kwargs) }
+  let(:matcher) { described_class.new(full_name, **kwargs) }
 
-  let(:method_name) { :bar }
+  let(:full_name) { :bar }
   let(:scope) { :class }
   let(:kwargs) { default_kwargs }
   let(:default_kwargs) { {scope: scope} }
@@ -30,7 +31,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Export do
 
   describe "#matches?" do
     context "when method is NOT exported" do
-      let(:method_name) { :non_existent }
+      let(:full_name) { :non_existent }
       let(:scope) { :class }
 
       it "returns false" do
@@ -38,18 +39,18 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Export do
       end
     end
 
-    context "when scope is NOT passed" do
-      let(:method_name) { :foo }
-      let(:kwargs) { ConvenientService::Utils::Hash.except(default_kwargs, [:scope]) }
+    context "when method is exported" do
+      let(:full_name) { :bar }
+      let(:scope) { :class }
 
       it "returns true" do
         expect(matcher_result).to eq(true)
       end
     end
 
-    context "when method is exported" do
-      let(:method_name) { :bar }
-      let(:scope) { :class }
+    context "when scope is NOT passed" do
+      let(:full_name) { :foo }
+      let(:kwargs) { ConvenientService::Utils::Hash.except(default_kwargs, [:scope]) }
 
       it "returns true" do
         expect(matcher_result).to eq(true)
@@ -61,7 +62,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Export do
     it "returns message" do
       matcher_result
 
-      expect(matcher.description).to eq("export `#{method_name}` with scope `#{scope}`")
+      expect(matcher.description).to eq("export `#{full_name}` with scope `#{scope}`")
     end
   end
 
@@ -69,7 +70,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Export do
     it "returns message" do
       matcher_result
 
-      expect(matcher.failure_message).to eq("expected `#{container.class}` to have exported `#{method_name}` with scope `#{scope}`")
+      expect(matcher.failure_message).to eq("expected `#{container.class}` to export `#{full_name}` with scope `#{scope}`")
     end
   end
 
@@ -77,7 +78,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Export do
     it "returns message" do
       matcher_result
 
-      expect(matcher.failure_message_when_negated).to eq("expected `#{container.class}` NOT to have exported `#{method_name}` with scope `#{scope}`")
+      expect(matcher.failure_message_when_negated).to eq("expected `#{container.class}` NOT to export `#{full_name}` with scope `#{scope}`")
     end
   end
 end
