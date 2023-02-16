@@ -26,7 +26,12 @@ module ConvenientService
               rules = []
 
               rules << ->(result) { result.class.include?(Service::Plugins::HasResult::Entities::Result::Concern) }
+
+              ##
+              # IMPORTANT: Result status is NOT marked as checked intentionally, since it is a mutable operation.
+              #
               rules << ->(result) { result.status.in?(statuses) }
+
               rules << ->(result) { result.service.instance_of?(service_class) } if used_of_service?
               rules << ->(result) { Commands::MatchResultStep.call(result: result, step: step) } if used_of_step?
               rules << ->(result) { result.unsafe_data == data } if used_data?
