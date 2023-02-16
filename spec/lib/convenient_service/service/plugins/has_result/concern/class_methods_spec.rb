@@ -11,6 +11,8 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern::ClassMet
       klass.class_exec(described_class) do |mod|
         extend mod
 
+        include ConvenientService::Common::Plugins::HasConstructorWithoutInitialize::Concern
+
         # rubocop:disable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
         class self::Result
           include ConvenientService::Core
@@ -119,9 +121,14 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern::ClassMet
 
       context "when `service` is NOT passed" do
         let(:result) { service_class.success(**ConvenientService::Utils::Hash.except(params, [:service])) }
+        let(:not_initialized_service_instance) { double }
 
-        it "defaults `service` to `ConvenientService::Service::Plugins::HasResult::Constants::DEFAULT_SERVICE_INSTANCE`" do
-          expect(result.service).to eq(ConvenientService::Service::Plugins::HasResult::Constants::DEFAULT_SERVICE_INSTANCE)
+        before do
+          allow(service_class).to receive(:create_without_initialize).and_return(not_initialized_service_instance)
+        end
+
+        it "defaults `service` to `service_class.create_without_initialize`" do
+          expect(result.service).to eq(not_initialized_service_instance)
         end
       end
 
@@ -183,9 +190,14 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern::ClassMet
 
       context "when `service` is NOT passed" do
         let(:result) { service_class.failure(**ConvenientService::Utils::Hash.except(params, [:service])) }
+        let(:not_initialized_service_instance) { double }
 
-        it "defaults `service` to `ConvenientService::Service::Plugins::HasResult::Constants::DEFAULT_SERVICE_INSTANCE`" do
-          expect(result.service).to eq(ConvenientService::Service::Plugins::HasResult::Constants::DEFAULT_SERVICE_INSTANCE)
+        before do
+          allow(service_class).to receive(:create_without_initialize).and_return(not_initialized_service_instance)
+        end
+
+        it "defaults `service` to `service_class.create_without_initialize`" do
+          expect(result.service).to eq(not_initialized_service_instance)
         end
       end
 
@@ -258,9 +270,14 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern::ClassMet
 
       context "when `service` is NOT passed" do
         let(:result) { service_class.error(**ConvenientService::Utils::Hash.except(params, [:service])) }
+        let(:not_initialized_service_instance) { double }
 
-        it "defaults service to `ConvenientService::Service::Plugins::HasResult::Constants::DEFAULT_SERVICE_INSTANCE`" do
-          expect(result.service).to eq(ConvenientService::Service::Plugins::HasResult::Constants::DEFAULT_SERVICE_INSTANCE)
+        before do
+          allow(service_class).to receive(:create_without_initialize).and_return(not_initialized_service_instance)
+        end
+
+        it "defaults `service` to `service_class.create_without_initialize`" do
+          expect(result.service).to eq(not_initialized_service_instance)
         end
       end
 
