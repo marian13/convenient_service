@@ -230,6 +230,28 @@
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#chain_exception-instance_method" title="#chain_exception (instance method)">#<strong>chain_exception</strong>  &#x21d2; StandardError<sup>?</sup> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#chain_kwargs-instance_method" title="#chain_kwargs (instance method)">#<strong>chain_kwargs</strong>  &#x21d2; Hash </a>
     
 
@@ -430,7 +452,9 @@
 52
 53
 54
-55</pre>
+55
+56
+57</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/custom/wrap_method/entities/wrapped_method.rb', line 25</span>
@@ -459,6 +483,8 @@
 
         <span class='kw'>begin</span>
           <span class='ivar'>@chain_value</span> <span class='op'>=</span> <span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid___send__'>__send__</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_env'>env</span><span class='lbracket'>[</span><span class='symbol'>:args</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_env'>env</span><span class='lbracket'>[</span><span class='symbol'>:kwargs</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_env'>env</span><span class='lbracket'>[</span><span class='symbol'>:block</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+        <span class='kw'>rescue</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_exception'>exception</span>
+          <span class='ivar'>@chain_exception</span> <span class='op'>=</span> <span class='id identifier rubyid_exception'>exception</span>
         <span class='kw'>ensure</span>
           <span class='ivar'>@chain_value</span>
         <span class='kw'>end</span>
@@ -572,12 +598,12 @@
       <pre class="lines">
 
 
-63
-64
-65</pre>
+65
+66
+67</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/custom/wrap_method/entities/wrapped_method.rb', line 63</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/custom/wrap_method/entities/wrapped_method.rb', line 65</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='ivar'>@stack</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='label'>entity:</span> <span class='ivar'>@entity</span><span class='comma'>,</span> <span class='label'>method:</span> <span class='ivar'>@method</span><span class='comma'>,</span> <span class='label'>args:</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='label'>kwargs:</span> <span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='label'>block:</span> <span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
@@ -652,14 +678,14 @@
       <pre class="lines">
 
 
-96
-97
 98
 99
-100</pre>
+100
+101
+102</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/custom/wrap_method/entities/wrapped_method.rb', line 96</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/custom/wrap_method/entities/wrapped_method.rb', line 98</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_chain_args'>chain_args</span>
   <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="../Errors.html" title="ConvenientService::RSpec::Helpers::Custom::WrapMethod::Errors (module)">Errors</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Errors/ChainAttributePreliminaryAccess.html" title="ConvenientService::RSpec::Helpers::Custom::WrapMethod::Errors::ChainAttributePreliminaryAccess (class)">ChainAttributePreliminaryAccess</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Errors/ChainAttributePreliminaryAccess.html#initialize-instance_method" title="ConvenientService::RSpec::Helpers::Custom::WrapMethod::Errors::ChainAttributePreliminaryAccess#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>attribute:</span> <span class='symbol'>:args</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_chain_called?'>chain_called?</span>
@@ -736,14 +762,14 @@
       <pre class="lines">
 
 
-116
-117
 118
 119
-120</pre>
+120
+121
+122</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/custom/wrap_method/entities/wrapped_method.rb', line 116</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/custom/wrap_method/entities/wrapped_method.rb', line 118</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_chain_block'>chain_block</span>
   <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="../Errors.html" title="ConvenientService::RSpec::Helpers::Custom::WrapMethod::Errors (module)">Errors</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Errors/ChainAttributePreliminaryAccess.html" title="ConvenientService::RSpec::Helpers::Custom::WrapMethod::Errors::ChainAttributePreliminaryAccess (class)">ChainAttributePreliminaryAccess</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Errors/ChainAttributePreliminaryAccess.html#initialize-instance_method" title="ConvenientService::RSpec::Helpers::Custom::WrapMethod::Errors::ChainAttributePreliminaryAccess#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>attribute:</span> <span class='symbol'>:block</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_chain_called?'>chain_called?</span>
@@ -807,15 +833,99 @@
       <pre class="lines">
 
 
-78
-79
-80</pre>
+80
+81
+82</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/custom/wrap_method/entities/wrapped_method.rb', line 78</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/custom/wrap_method/entities/wrapped_method.rb', line 80</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_chain_called?'>chain_called?</span>
   <span class='const'><span class='object_link'><a href="../../../../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../Utils/Bool.html" title="ConvenientService::Utils::Bool (module)">Bool</a></span></span><span class='period'>.</span><span class='id identifier rubyid_to_bool'><span class='object_link'><a href="../../../../../Utils/Bool.html#to_bool-class_method" title="ConvenientService::Utils::Bool.to_bool (method)">to_bool</a></span></span><span class='lparen'>(</span><span class='kw'>defined?</span> <span class='ivar'>@chain_value</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="chain_exception-instance_method">
+  
+    #<strong>chain_exception</strong>  &#x21d2; <tt>StandardError</tt><sup>?</sup> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>StandardError</tt>, <tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Errors/ChainAttributePreliminaryAccess.html" title="ConvenientService::RSpec::Helpers::Custom::WrapMethod::Errors::ChainAttributePreliminaryAccess (class)">ConvenientService::RSpec::Helpers::Custom::WrapMethod::Errors::ChainAttributePreliminaryAccess</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Since:</p>
+<ul class="since">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'><p>0.3.0</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+128
+129
+130
+131
+132</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/custom/wrap_method/entities/wrapped_method.rb', line 128</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_chain_exception'>chain_exception</span>
+  <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="../Errors.html" title="ConvenientService::RSpec::Helpers::Custom::WrapMethod::Errors (module)">Errors</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Errors/ChainAttributePreliminaryAccess.html" title="ConvenientService::RSpec::Helpers::Custom::WrapMethod::Errors::ChainAttributePreliminaryAccess (class)">ChainAttributePreliminaryAccess</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Errors/ChainAttributePreliminaryAccess.html#initialize-instance_method" title="ConvenientService::RSpec::Helpers::Custom::WrapMethod::Errors::ChainAttributePreliminaryAccess#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>attribute:</span> <span class='symbol'>:exception</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_chain_called?'>chain_called?</span>
+
+  <span class='ivar'>@chain_exception</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -887,14 +997,14 @@
       <pre class="lines">
 
 
-106
-107
 108
 109
-110</pre>
+110
+111
+112</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/custom/wrap_method/entities/wrapped_method.rb', line 106</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/custom/wrap_method/entities/wrapped_method.rb', line 108</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_chain_kwargs'>chain_kwargs</span>
   <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="../Errors.html" title="ConvenientService::RSpec::Helpers::Custom::WrapMethod::Errors (module)">Errors</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Errors/ChainAttributePreliminaryAccess.html" title="ConvenientService::RSpec::Helpers::Custom::WrapMethod::Errors::ChainAttributePreliminaryAccess (class)">ChainAttributePreliminaryAccess</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Errors/ChainAttributePreliminaryAccess.html#initialize-instance_method" title="ConvenientService::RSpec::Helpers::Custom::WrapMethod::Errors::ChainAttributePreliminaryAccess#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>attribute:</span> <span class='symbol'>:kwargs</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_chain_called?'>chain_called?</span>
@@ -976,14 +1086,14 @@
       <pre class="lines">
 
 
-86
-87
 88
 89
-90</pre>
+90
+91
+92</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/custom/wrap_method/entities/wrapped_method.rb', line 86</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/custom/wrap_method/entities/wrapped_method.rb', line 88</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_chain_value'>chain_value</span>
   <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="../Errors.html" title="ConvenientService::RSpec::Helpers::Custom::WrapMethod::Errors (module)">Errors</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Errors/ChainAttributePreliminaryAccess.html" title="ConvenientService::RSpec::Helpers::Custom::WrapMethod::Errors::ChainAttributePreliminaryAccess (class)">ChainAttributePreliminaryAccess</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Errors/ChainAttributePreliminaryAccess.html#initialize-instance_method" title="ConvenientService::RSpec::Helpers::Custom::WrapMethod::Errors::ChainAttributePreliminaryAccess#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>attribute:</span> <span class='symbol'>:value</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_chain_called?'>chain_called?</span>
@@ -1034,13 +1144,13 @@
       <pre class="lines">
 
 
-70
-71
 72
-73</pre>
+73
+74
+75</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/custom/wrap_method/entities/wrapped_method.rb', line 70</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/custom/wrap_method/entities/wrapped_method.rb', line 72</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_reset!'>reset!</span>
   <span class='id identifier rubyid_remove_instance_variable'>remove_instance_variable</span><span class='lparen'>(</span><span class='symbol'>:@chain_value</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='kw'>defined?</span> <span class='ivar'>@chain_value</span>
@@ -1056,7 +1166,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Feb 19 18:35:39 2023 by
+  Generated on Sun Feb 19 19:06:37 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.3).
 </div>
