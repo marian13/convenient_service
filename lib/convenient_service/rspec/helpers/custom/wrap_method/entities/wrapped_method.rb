@@ -35,9 +35,20 @@ module ConvenientService
                   #
                   stack.use(
                     proc do |env|
-                      entity.__send__(method, *env[:args], **env[:kwargs], &env[:block])
-                        .tap { |value| @chain_value = value }
-                        .tap { @chain_arguments = {args: env[:args], kwargs: env[:kwargs], block: env[:block]} }
+                      @chain_arguments = {args: env[:args], kwargs: env[:kwargs], block: env[:block]}
+
+                      ##
+                      # IMPORTANT: Forces Ruby to define `@chain_value` instance variable.
+                      #
+                      # NOTE: If `@chain_value` is still set to `Support::UNDEFINED` after running the begin block - an exception was raised by `chain.next`. See `chain_called?` for more info.
+                      #
+                      @chain_value = Support::UNDEFINED
+
+                      begin
+                        @chain_value = entity.__send__(method, *env[:args], **env[:kwargs], &env[:block])
+                      ensure
+                        @chain_value
+                      end
                     end
                   )
                 end
