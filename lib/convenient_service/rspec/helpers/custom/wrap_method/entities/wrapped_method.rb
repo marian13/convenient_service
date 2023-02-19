@@ -48,7 +48,7 @@ module ConvenientService
                         @chain_value = entity.__send__(method, *env[:args], **env[:kwargs], &env[:block])
                       rescue => exception
                         @chain_exception = exception
-                      ensure
+
                         @chain_value
                       end
                     end

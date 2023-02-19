@@ -206,7 +206,11 @@ RSpec.describe ConvenientService::RSpec::Helpers::Custom::WrapMethod::Entities::
         end
       end
 
-      let(:exception) { service_class.new.result }
+      let(:exception) do
+        service_instance.result
+      rescue => error
+        error
+      end
 
       context "when chain is NOT called" do
         let(:error_message) do
@@ -224,11 +228,11 @@ RSpec.describe ConvenientService::RSpec::Helpers::Custom::WrapMethod::Entities::
 
       context "when chain is called" do
         before do
-          ignoring_error(exception.class) { method.call }
+          method.call
         end
 
         it "returns chain exception" do
-          expect(method.chain_exception).to eq(exception)
+          expect([method.chain_exception.class, method.chain_exception.message]).to eq([exception.class, exception.message])
         end
 
         specify do
