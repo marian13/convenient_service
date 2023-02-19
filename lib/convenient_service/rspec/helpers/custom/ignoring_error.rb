@@ -20,6 +20,9 @@ module ConvenientService
           rescue *errors
             nil
           else
+            ##
+            # TODO: Raise self-explanatory exception.
+            #
             raise
           end
         end
