@@ -79,7 +79,7 @@
   <dl>
     <dt>Defined in:</dt>
     <dd>lib/convenient_service/support/ruby.rb<span class="defines">,<br />
-  lib/convenient_service/support/cache.rb,<br /> lib/convenient_service/support/command.rb,<br /> lib/convenient_service/support/concern.rb,<br /> lib/convenient_service/support/version.rb,<br /> lib/convenient_service/support/castable.rb,<br /> lib/convenient_service/support/copyable.rb,<br /> lib/convenient_service/support/delegate.rb,<br /> lib/convenient_service/support/arguments.rb,<br /> lib/convenient_service/support/cache/key.rb,<br /> lib/convenient_service/support/raw_value.rb,<br /> lib/convenient_service/support/gems/rspec.rb,<br /> lib/convenient_service/support/not_passed.rb,<br /> lib/convenient_service/support/finite_loop.rb,<br /> lib/convenient_service/support/abstract_method.rb,<br /> lib/convenient_service/support/castable/errors.rb,<br /> lib/convenient_service/support/gems/active_model.rb,<br /> lib/convenient_service/support/version/null_version.rb,<br /> lib/convenient_service/support/abstract_method/errors.rb,<br /> lib/convenient_service/support/arguments/null_arguments.rb,<br /> lib/convenient_service/support/middleware/stack_builder.rb,<br /> lib/convenient_service/support/dependency_container/errors.rb,<br /> lib/convenient_service/support/dependency_container/export.rb,<br /> lib/convenient_service/support/dependency_container/import.rb,<br /> lib/convenient_service/support/dependency_container/constants.rb,<br /> lib/convenient_service/support/dependency_container/entities/method.rb,<br /> lib/convenient_service/support/dependency_container/entities/namespace.rb,<br /> lib/convenient_service/support/dependency_container/commands/import_method.rb,<br /> lib/convenient_service/support/dependency_container/entities/method_collection.rb,<br /> lib/convenient_service/support/dependency_container/commands/assert_valid_scope.rb,<br /> lib/convenient_service/support/dependency_container/entities/namespace_collection.rb,<br /> lib/convenient_service/support/dependency_container/commands/create_methods_module.rb</span>
+  lib/convenient_service/support/cache.rb,<br /> lib/convenient_service/support/command.rb,<br /> lib/convenient_service/support/concern.rb,<br /> lib/convenient_service/support/version.rb,<br /> lib/convenient_service/support/castable.rb,<br /> lib/convenient_service/support/copyable.rb,<br /> lib/convenient_service/support/delegate.rb,<br /> lib/convenient_service/support/arguments.rb,<br /> lib/convenient_service/support/cache/key.rb,<br /> lib/convenient_service/support/raw_value.rb,<br /> lib/convenient_service/support/undefined.rb,<br /> lib/convenient_service/support/gems/rspec.rb,<br /> lib/convenient_service/support/not_passed.rb,<br /> lib/convenient_service/support/finite_loop.rb,<br /> lib/convenient_service/support/abstract_method.rb,<br /> lib/convenient_service/support/castable/errors.rb,<br /> lib/convenient_service/support/gems/active_model.rb,<br /> lib/convenient_service/support/version/null_version.rb,<br /> lib/convenient_service/support/abstract_method/errors.rb,<br /> lib/convenient_service/support/arguments/null_arguments.rb,<br /> lib/convenient_service/support/middleware/stack_builder.rb,<br /> lib/convenient_service/support/dependency_container/errors.rb,<br /> lib/convenient_service/support/dependency_container/export.rb,<br /> lib/convenient_service/support/dependency_container/import.rb,<br /> lib/convenient_service/support/dependency_container/constants.rb,<br /> lib/convenient_service/support/dependency_container/entities/method.rb,<br /> lib/convenient_service/support/dependency_container/entities/namespace.rb,<br /> lib/convenient_service/support/dependency_container/commands/import_method.rb,<br /> lib/convenient_service/support/dependency_container/entities/method_collection.rb,<br /> lib/convenient_service/support/dependency_container/commands/assert_valid_scope.rb,<br /> lib/convenient_service/support/dependency_container/entities/namespace_collection.rb,<br /> lib/convenient_service/support/dependency_container/commands/create_methods_module.rb</span>
 </dd>
   </dl>
   
@@ -130,6 +130,13 @@
 
     <dl class="constants">
       
+        <dt id="UNDEFINED-constant" class="">UNDEFINED =
+          
+        </dt>
+        <dd><pre class="code"><span class='op'>::</span><span class='const'>Object</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='period'>.</span><span class='id identifier rubyid_tap'>tap</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_object'>object</span><span class='op'>|</span>
+  <span class='id identifier rubyid_object'>object</span><span class='period'>.</span><span class='id identifier rubyid_define_singleton_method'>define_singleton_method</span><span class='lparen'>(</span><span class='symbol'>:inspect</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>undefined</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span>
+<span class='kw'>end</span></pre></dd>
+      
         <dt id="NOT_PASSED-constant" class="">NOT_PASSED =
           
         </dt>
@@ -151,7 +158,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Feb 19 15:07:15 2023 by
+  Generated on Sun Feb 19 18:28:02 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.3).
 </div>
