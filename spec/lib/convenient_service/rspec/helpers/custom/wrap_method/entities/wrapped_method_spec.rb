@@ -196,6 +196,46 @@ RSpec.describe ConvenientService::RSpec::Helpers::Custom::WrapMethod::Entities::
         end
       end
     end
+
+    describe "#chain_exception" do
+      let(:service_class) do
+        Class.new do
+          def result
+            raise StandardError, "exception message"
+          end
+        end
+      end
+
+      let(:exception) { service_class.new.result }
+
+      context "when chain is NOT called" do
+        let(:error_message) do
+          <<~TEXT
+            Chain attribute `exception` is accessed before the chain is called.
+          TEXT
+        end
+
+        it "raises `ConvenientService::RSpec::Helpers::Custom::WrapMethod::Errors::ChainAttributePreliminaryAccess`" do
+          expect { method.chain_exception }
+            .to raise_error(ConvenientService::RSpec::Helpers::Custom::WrapMethod::Errors::ChainAttributePreliminaryAccess)
+            .with_message(error_message)
+        end
+      end
+
+      context "when chain is called" do
+        before do
+          ignoring_error(exception.class) { method.call }
+        end
+
+        it "returns chain exception" do
+          expect(method.chain_exception).to eq(exception)
+        end
+
+        specify do
+          expect { method.chain_exception }.to cache_its_value
+        end
+      end
+    end
   end
 end
 # rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers

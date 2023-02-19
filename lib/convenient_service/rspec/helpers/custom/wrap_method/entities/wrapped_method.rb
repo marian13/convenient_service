@@ -46,6 +46,8 @@ module ConvenientService
 
                       begin
                         @chain_value = entity.__send__(method, *env[:args], **env[:kwargs], &env[:block])
+                      rescue => exception
+                        @chain_exception = exception
                       ensure
                         @chain_value
                       end
@@ -117,6 +119,16 @@ module ConvenientService
                 raise Errors::ChainAttributePreliminaryAccess.new(attribute: :block) unless chain_called?
 
                 @chain_arguments[:block]
+              end
+
+              ##
+              # @return [StandardError, nil]
+              # @raise [ConvenientService::RSpec::Helpers::Custom::WrapMethod::Errors::ChainAttributePreliminaryAccess]
+              #
+              def chain_exception
+                raise Errors::ChainAttributePreliminaryAccess.new(attribute: :exception) unless chain_called?
+
+                @chain_exception
               end
             end
           end
