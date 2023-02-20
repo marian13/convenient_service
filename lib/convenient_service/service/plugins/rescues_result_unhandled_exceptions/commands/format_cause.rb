@@ -41,7 +41,7 @@ module ConvenientService
                 --- Caused by: ---
                 #{cause.class}:
                   #{cause.message}
-                #{formatted_first_line}
+                #{formatted_cause_first_line}
               MESSAGE
             end
 
@@ -55,7 +55,7 @@ module ConvenientService
             #   - https://blog.kalina.tech/2019/04/exception-without-backtrace-in-ruby.html
             #   - https://github.com/jruby/jruby/issues/4467
             #
-            def first_line
+            def cause_first_line
               return "" unless cause
               return "" unless cause.backtrace
 
@@ -65,10 +65,10 @@ module ConvenientService
             ##
             # @return [String, nil]
             #
-            def formatted_first_line
-              return "" unless first_line
+            def formatted_cause_first_line
+              return "" unless cause_first_line
 
-              Commands::FormatLine.call(line: first_line)
+              Commands::FormatLine.call(line: cause_first_line)
             end
           end
         end
