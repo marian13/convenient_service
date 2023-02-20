@@ -8,6 +8,8 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::RSpec::Helpers::Custom::WrapMethod::Entities::WrappedMethod do
+  include ConvenientService::RSpec::Helpers::IgnoringError
+
   include ConvenientService::RSpec::Matchers::CacheItsValue
 
   subject(:method) { described_class.new(entity: entity, method: method_name, middlewares: middlewares) }
@@ -228,7 +230,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::Custom::WrapMethod::Entities::
 
       context "when chain is called" do
         before do
-          method.call
+          ignoring_error(exception.class) { method.call }
         end
 
         it "returns chain exception" do

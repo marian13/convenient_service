@@ -49,7 +49,10 @@ module ConvenientService
                       rescue => exception
                         @chain_exception = exception
 
-                        @chain_value
+                        ##
+                        # NOTE: `raise` with no args inside `rescue` reraises rescued exception.
+                        #
+                        raise
                       end
                     end
                   )
