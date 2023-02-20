@@ -87,7 +87,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
         end
 
         it "returns failure with formatted exception" do
-          expect(method_value).to be_failure.with_data(exception: formatted_exception)
+          expect(method_value).to be_failure.with_data(exception: exception).and_message(formatted_exception)
         end
       end
     end

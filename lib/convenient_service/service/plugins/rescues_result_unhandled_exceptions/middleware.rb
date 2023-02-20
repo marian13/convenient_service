@@ -35,7 +35,10 @@ module ConvenientService
           # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
           #
           def failure_result_from(exception, *args, **kwargs, &block)
-            entity.failure(data: {exception: format_exception(exception, *args, **kwargs, &block)})
+            entity.failure(
+              data: {exception: exception},
+              message: format_exception(exception, *args, **kwargs, &block)
+            )
           end
 
           ##
