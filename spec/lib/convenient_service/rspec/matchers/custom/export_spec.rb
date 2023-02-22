@@ -42,13 +42,13 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Export do
   example_group "instance methods" do
     describe "#matches?" do
       specify do
-        expect { subject }
+        expect { matcher_result }
           .to delegate_to(ConvenientService::Support::DependencyContainer::Commands::AssertValidContainer, :call)
           .with_arguments(from: container)
       end
 
       specify do
-        expect { subject }
+        expect { matcher_result }
           .to delegate_to(ConvenientService::Support::DependencyContainer::Commands::AssertValidScope, :call)
           .with_arguments(scope: scope)
       end
