@@ -17,11 +17,11 @@ module ConvenientService
           def import(full_name, from:, scope: Constants::DEFAULT_SCOPE, prepend: Constants::DEFAULT_PREPEND)
             Commands::AssertValidScope.call(scope: scope)
 
-            raise Errors::NotExportableModule.new(mod: from) unless Utils::Module.include_module?(from, DependencyContainer::Export)
+            Commands::AssertValidContainer.call(from: from)
 
             method = from.exported_methods.find_by(full_name: full_name, scope: scope)
 
-            raise Errors::NotExportedMethod.new(method_name: full_name, method_scope: scope, mod: from) unless method
+            Commands::AssertValidMethod.call(method: method, full_name: full_name, scope: scope, from: from)
 
             Commands::ImportMethod.call(importing_module: self, exported_method: method, prepend: prepend)
           end

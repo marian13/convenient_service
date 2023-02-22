@@ -20,7 +20,8 @@ module ConvenientService
           end
 
           ##
-          # @return [Module]
+          # @return [void]
+          # @raise [ConvenientService::Support::DependencyContainer::Errors::InvalidScope]
           #
           def call
             raise Errors::InvalidScope.new(scope: scope) unless Constants::SCOPES.include?(scope)
