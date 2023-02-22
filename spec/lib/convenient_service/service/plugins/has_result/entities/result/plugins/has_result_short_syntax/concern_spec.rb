@@ -26,4 +26,65 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
       it { is_expected.to include_module(described_class::InstanceMethods) }
     end
   end
+
+  example_group "instance methods" do
+    include ConvenientService::RSpec::Matchers::DelegateTo
+
+    let(:service) do
+      Class.new do
+        include ConvenientService::Configs::Minimal
+
+        # rubocop:disable Lint/ConstantDefinitionInBlock, RSpec/LeakyConstantDeclaration
+        class self::Result
+          concerns do
+            use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasResultShortSyntax::Concern
+          end
+        end
+        # rubocop:enable Lint/ConstantDefinitionInBlock, RSpec/LeakyConstantDeclaration
+
+        def result
+          success(data: {foo: :bar})
+        end
+      end
+    end
+
+    let(:result) { service.result }
+    let(:key) { :foo }
+
+    describe "#[]" do
+      specify do
+        expect { result[key] }
+          .to delegate_to(result.data, :[])
+          .with_arguments(key)
+          .and_return_its_value
+      end
+    end
+
+    describe "#ud" do
+      specify do
+        expect { result.ud }
+          .to delegate_to(result, :unsafe_data)
+          .without_arguments
+          .and_return_its_value
+      end
+    end
+
+    describe "#um" do
+      specify do
+        expect { result.um }
+          .to delegate_to(result, :unsafe_message)
+          .without_arguments
+          .and_return_its_value
+      end
+    end
+
+    describe "#uc" do
+      specify do
+        expect { result.uc }
+          .to delegate_to(result, :unsafe_code)
+          .without_arguments
+          .and_return_its_value
+      end
+    end
+  end
 end
