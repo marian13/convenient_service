@@ -43,14 +43,14 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Export do
     describe "#matches?" do
       specify do
         expect { subject }
-          .to delegate_to(ConvenientService::Support::DependencyContainer::Commands::AssertValidScope, :call)
-          .with_arguments(scope: scope)
+          .to delegate_to(ConvenientService::Support::DependencyContainer::Commands::AssertValidContainer, :call)
+          .with_arguments(from: container)
       end
 
       specify do
         expect { subject }
-          .to delegate_to(ConvenientService::Support::DependencyContainer::Commands::AssertValidContainer, :call)
-          .with_arguments(from: container)
+          .to delegate_to(ConvenientService::Support::DependencyContainer::Commands::AssertValidScope, :call)
+          .with_arguments(scope: scope)
       end
 
       context "when scope is NOT passed" do

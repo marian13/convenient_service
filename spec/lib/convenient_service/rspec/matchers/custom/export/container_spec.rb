@@ -16,8 +16,10 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Export::Container do
   example_group "exported methods" do
     include ConvenientService::RSpec::Matchers::Export
 
-    it { is_expected.to export(:"DependencyContainer::Constants", scope: :class) }
+    it { is_expected.to export(:"DependencyContainer::Constants::DEFAULT_SCOPE") }
 
-    it { is_expected.to export(:"DependencyContainer::Errors") }
+    it { is_expected.to export(:"DependencyContainer::Commands::AssertValidContainer") }
+
+    it { is_expected.to export(:"DependencyContainer::Commands::AssertValidScope") }
   end
 end
