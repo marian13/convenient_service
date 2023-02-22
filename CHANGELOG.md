@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.8.0](https://github.com/marian13/convenient_service/compare/v0.7.0...v0.8.0) (2023-02-20)
+
+
+### Features
+
+* **aliases:** expose middlewares ([aacb6fd](https://github.com/marian13/convenient_service/commit/aacb6fda4c63e1d82e33c523885bd61397cfb583))
+* **configs:** introduce Minimal config ([70b0ca8](https://github.com/marian13/convenient_service/commit/70b0ca82679fc89099aee733d91807e371bbed39))
+* **rescues_result_unhandled_exceptions:** introduce rescues_result_unhandled_exceptions ([fd0b444](https://github.com/marian13/convenient_service/commit/fd0b4447e5abf81d971cd93a8333a89b363ef1ff))
+* **rescues_result_unhandled_exceptions:** return original exception in data + formatted exception as message ([45bc55e](https://github.com/marian13/convenient_service/commit/45bc55ec245df1b95769be761337a3cb2558a878))
+* **undefined:** introduce undefined ([2f93bdc](https://github.com/marian13/convenient_service/commit/2f93bdc86d81c9a819bbc1c4a76a0ef291a59b17))
+* **wrap_method:** introduce WrappedMethod#chain_exception ([1db33af](https://github.com/marian13/convenient_service/commit/1db33afc3a0e0713700b0bf5385900085af0a2df))
+
+
+### Bug Fixes
+
+* **wrapped_method:** define chain value even if chain.next raises an exception ([8c4cf95](https://github.com/marian13/convenient_service/commit/8c4cf9534a07e9614fdc73f0d0c019f9c3f0ea54))
+* **wrapped_method:** reraise rescued exception ([31f7ab6](https://github.com/marian13/convenient_service/commit/31f7ab6df0b34980656942992d3ecf7a67461d06))
+
 ## [0.7.0](https://github.com/marian13/convenient_service/compare/v0.6.0...v0.7.0) (2023-02-13)
 
 

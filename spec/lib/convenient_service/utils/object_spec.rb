@@ -32,6 +32,19 @@ RSpec.describe ConvenientService::Utils::Object do
     end
   end
 
+  describe ".memoize_including_falsy_values" do
+    let(:object) { Object.new }
+    let(:ivar_name) { :@foo }
+    let(:value_block) { proc { false } }
+
+    specify do
+      expect { described_class.memoize_including_falsy_values(object, ivar_name, &value_block) }
+        .to delegate_to(ConvenientService::Utils::Object::MemoizeIncludingFalsyValues, :call)
+        .with_arguments(object, ivar_name, &value_block)
+        .and_return_its_value
+    end
+  end
+
   describe ".resolve_type" do
     let(:object) { Kernel }
 

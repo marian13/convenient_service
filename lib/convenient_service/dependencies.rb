@@ -77,6 +77,14 @@ module ConvenientService
 
       ##
       # @return [Boolean]
+      # @note Expected to be called from app entry points like `initializers` in Rails.
+      #
+      def require_rescues_result_unhandled_exceptions
+        require_relative "service/plugins/rescues_result_unhandled_exceptions"
+      end
+
+      ##
+      # @return [Boolean]
       # @note Expected to be called from `irb`, `pry`, `spec_helper.rb`, etc.
       #
       def require_development_tools

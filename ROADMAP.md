@@ -75,5 +75,7 @@
 | Low | 🚧 | Rubocop cop that complains when a service name does NOT start with a verb | |
 | Low | 🚧 | Generator to create a spec default structure | |
 | Low | 🚧 | Rubocop cop that complains when a service does NOT have its own suite of specs | |
+| High | 🚧 | Add specs for `WrappedMethod#call` | |
+| High | 🚧 | Check whether ignoring error was used properly | |
 
 Search for `TODO`s in the codebase for more tasks.

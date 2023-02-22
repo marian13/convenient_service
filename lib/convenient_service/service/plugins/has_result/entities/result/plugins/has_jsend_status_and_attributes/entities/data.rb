@@ -18,6 +18,19 @@ module ConvenientService
 
                     attr_reader :value
 
+                    ##
+                    # @internal
+                    #   NOTE: Ruby hashes enumerate their values in the order that the corresponding keys were inserted.
+                    #   That is why the end-user can be 100% sure that the failure message is always generated from the first key/value pair.
+                    #   - https://ruby-doc.org/core-2.7.0/Hash.html
+                    #
+                    #   TODO: A test that crashes when such behaviour is broken.
+                    #
+                    #   NOTE: As a result, there is NO need to use any custom `OrderedHash` implementations.
+                    #   - https://api.rubyonrails.org/v5.1/classes/ActiveSupport/OrderedHash.html
+                    #   - https://github.com/rails/rails/issues/22681
+                    #   - https://api.rubyonrails.org/classes/ActiveSupport/OrderedOptions.html
+                    #
                     def initialize(value:)
                       @value = value
                     end

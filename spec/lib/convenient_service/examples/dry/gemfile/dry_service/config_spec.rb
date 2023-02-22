@@ -32,18 +32,18 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::DryService::Config do
             [
               ConvenientService::Service::Plugins::CanHaveStubbedResult::Concern,
               ConvenientService::Common::Plugins::HasInternals::Concern,
+              ConvenientService::Service::Plugins::HasInspect::Concern,
               ConvenientService::Common::Plugins::HasConstructor::Concern,
               ConvenientService::Plugins::Common::HasConstructorWithoutInitialize::Concern,
+              ConvenientService::Service::Plugins::HasResult::Concern,
+              ConvenientService::Service::Plugins::HasResultSteps::Concern,
               ConvenientService::Common::Plugins::CachesConstructorParams::Concern,
               ConvenientService::Common::Plugins::CanBeCopied::Concern,
-              ConvenientService::Service::Plugins::HasResult::Concern,
-              ConvenientService::Service::Plugins::HasResultShortSyntax::Concern,
-              ConvenientService::Service::Plugins::HasResultSteps::Concern,
               ConvenientService::Service::Plugins::CanRecalculateResult::Concern,
+              ConvenientService::Service::Plugins::HasResultShortSyntax::Concern,
               ConvenientService::Service::Plugins::HasResultStatusCheckShortSyntax::Concern,
               ConvenientService::Common::Plugins::HasCallbacks::Concern,
               ConvenientService::Common::Plugins::HasAroundCallbacks::Concern,
-              ConvenientService::Service::Plugins::HasInspect::Concern,
               ConvenientService::Common::Plugins::AssignsAttributesInConstructor::UsingDryInitializer::Concern,
               ConvenientService::Service::Plugins::HasResultParamsValidations::UsingDryValidation::Concern
             ]
@@ -184,13 +184,13 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::DryService::Config do
             let(:concerns) do
               [
                 ConvenientService::Common::Plugins::HasInternals::Concern,
+                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasInspect::Concern,
                 ConvenientService::Common::Plugins::HasConstructor::Concern,
                 ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Concern,
                 ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasResultShortSyntax::Concern,
                 ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanRecalculateResult::Concern,
                 ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasStep::Concern,
-                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanHaveParentResult::Concern,
-                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasInspect::Concern
+                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanHaveParentResult::Concern
               ]
             end
 
