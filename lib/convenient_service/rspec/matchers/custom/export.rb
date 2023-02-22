@@ -9,17 +9,16 @@ module ConvenientService
         class Export
           include ConvenientService::DependencyContainer::Import
 
-          import :"DependencyContainer::Constants", scope: :class, from: Container
-          import :"DependencyContainer::Errors", from: Container
-
-          include DependencyContainer::Constants
+          import :"DependencyContainer::Constants::DEFAULT_SCOPE", from: Container
+          import :"DependencyContainer::Commands::AssertValidContainer", from: Container
+          import :"DependencyContainer::Commands::AssertValidScope", from: Container
 
           ##
           # @param full_name [Symbol, String]
           # @param scope [Symbol]
           # @return [void]
           #
-          def initialize(full_name, scope: DEFAULT_SCOPE)
+          def initialize(full_name, scope: DependencyContainer::Constants::DEFAULT_SCOPE)
             @full_name = full_name
             @scope = scope
           end
@@ -31,9 +30,9 @@ module ConvenientService
           def matches?(container)
             @container = container
 
-            raise DependencyContainer::Errors::NotExportableModule.new(mod: container) unless Utils::Module.include_module?(container, DependencyContainer::Export)
+            DependencyContainer::Commands::AssertValidContainer.call(from: container)
 
-            raise DependencyContainer::Errors::InvalidScope.new(scope: scope) unless SCOPES.include?(scope)
+            DependencyContainer::Commands::AssertValidScope.call(scope: scope)
 
             Utils::Bool.to_bool(container.exported_methods.find_by(full_name: full_name, scope: scope))
           end

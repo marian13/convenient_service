@@ -6,6 +6,8 @@ require "convenient_service"
 
 # rubocop:disable RSpec/MultipleMemoizedHelpers, RSpec/NestedGroups
 RSpec.describe ConvenientService::RSpec::Matchers::Custom::Export do
+  include ConvenientService::RSpec::Matchers::DelegateTo
+
   subject(:matcher_result) { matcher.matches?(container) }
 
   let(:matcher) { described_class.new(full_name, **kwargs) }
@@ -35,34 +37,20 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Export do
     subject { described_class }
 
     it { is_expected.to include_module(ConvenientService::DependencyContainer::Import) }
-    it { is_expected.to include_module(ConvenientService::Support::DependencyContainer::Constants) }
   end
 
   example_group "instance methods" do
     describe "#matches?" do
-      context "when container can NOT export methods" do
-        let(:container) { Module.new }
-
-        let(:error_message) do
-          <<~TEXT
-            Module `#{container}` can NOT export methods.
-
-            Did you forget to include `ConvenientService::DependencyContainer::Export` into it?
-          TEXT
-        end
-
-        it "raises `ConvenientService::Support::DependencyContainer::Errors::NotExportableModule`" do
-          expect { matcher_result }
-            .to raise_error(ConvenientService::Support::DependencyContainer::Errors::NotExportableModule)
-            .with_message(error_message)
-        end
+      specify do
+        expect { subject }
+          .to delegate_to(ConvenientService::Support::DependencyContainer::Commands::AssertValidScope, :call)
+          .with_arguments(scope: scope)
       end
 
-      context "when container can export methods" do
-        it "does NOT raise" do
-          expect { matcher_result }
-            .not_to raise_error(ConvenientService::Support::DependencyContainer::Errors::NotExportableModule)
-        end
+      specify do
+        expect { subject }
+          .to delegate_to(ConvenientService::Support::DependencyContainer::Commands::AssertValidContainer, :call)
+          .with_arguments(from: container)
       end
 
       context "when scope is NOT passed" do
@@ -71,35 +59,6 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Export do
 
         it "defaults scope to :instance" do
           expect(matcher_result).to eq(true)
-        end
-      end
-
-      context "when scope is passed, but NOT valid" do
-        let(:full_name) { :foo }
-        let(:scope) { :non_existent_scope }
-
-        let(:error_message) do
-          <<~TEXT
-            Scope `#{scope.inspect}` is NOT valid.
-
-            Valid options are `:instance`, `:class`.
-          TEXT
-        end
-
-        it "raises `DependencyContainer::Errors::NotExportableModule`" do
-          expect { matcher_result }
-            .to raise_error(ConvenientService::Support::DependencyContainer::Errors::InvalidScope)
-            .with_message(error_message)
-        end
-      end
-
-      context "when scope is passed and valid" do
-        let(:full_name) { :bar }
-        let(:scope) { :class }
-
-        it "does NOT raise" do
-          expect { matcher_result }
-            .not_to raise_error(ConvenientService::Support::DependencyContainer::Errors::InvalidScope)
         end
       end
 

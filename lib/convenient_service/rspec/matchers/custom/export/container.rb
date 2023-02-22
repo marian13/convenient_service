@@ -8,12 +8,16 @@ module ConvenientService
           module Container
             include ConvenientService::DependencyContainer::Export
 
-            export :"DependencyContainer::Constants", scope: :class do
-              ConvenientService::Support::DependencyContainer::Constants
+            export :"DependencyContainer::Constants::DEFAULT_SCOPE" do
+              ConvenientService::Support::DependencyContainer::Constants::DEFAULT_SCOPE
             end
 
-            export :"DependencyContainer::Errors" do
-              ConvenientService::Support::DependencyContainer::Errors
+            export :"DependencyContainer::Commands::AssertValidContainer" do
+              ConvenientService::Support::DependencyContainer::Commands::AssertValidContainer
+            end
+
+            export :"DependencyContainer::Commands::AssertValidScope" do
+              ConvenientService::Support::DependencyContainer::Commands::AssertValidScope
             end
           end
         end
