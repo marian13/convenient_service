@@ -8,6 +8,8 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::RSpec::Helpers::Custom::WrapMethod::Entities::WrappedMethod do
+  include ConvenientService::RSpec::Helpers::IgnoringError
+
   include ConvenientService::RSpec::Matchers::CacheItsValue
 
   subject(:method) { described_class.new(entity: entity, method: method_name, middlewares: middlewares) }
@@ -193,6 +195,50 @@ RSpec.describe ConvenientService::RSpec::Helpers::Custom::WrapMethod::Entities::
 
         specify do
           expect { method.chain_block }.to cache_its_value
+        end
+      end
+    end
+
+    describe "#chain_exception" do
+      let(:service_class) do
+        Class.new do
+          def result
+            raise StandardError, "exception message"
+          end
+        end
+      end
+
+      let(:exception) do
+        service_instance.result
+      rescue => error
+        error
+      end
+
+      context "when chain is NOT called" do
+        let(:error_message) do
+          <<~TEXT
+            Chain attribute `exception` is accessed before the chain is called.
+          TEXT
+        end
+
+        it "raises `ConvenientService::RSpec::Helpers::Custom::WrapMethod::Errors::ChainAttributePreliminaryAccess`" do
+          expect { method.chain_exception }
+            .to raise_error(ConvenientService::RSpec::Helpers::Custom::WrapMethod::Errors::ChainAttributePreliminaryAccess)
+            .with_message(error_message)
+        end
+      end
+
+      context "when chain is called" do
+        before do
+          ignoring_error(exception.class) { method.call }
+        end
+
+        it "returns chain exception" do
+          expect([method.chain_exception.class, method.chain_exception.message]).to eq([exception.class, exception.message])
+        end
+
+        specify do
+          expect { method.chain_exception }.to cache_its_value
         end
       end
     end
