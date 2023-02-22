@@ -75,7 +75,9 @@ module ConvenientService
           # @return [void]
           #
           def initialize(klass:)
-            message = "#{klass} is NOT a Module."
+            message = <<~TEXT
+              `#{klass.inspect}` is NOT a Module.
+            TEXT
 
             super(message)
           end

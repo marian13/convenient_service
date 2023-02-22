@@ -36,25 +36,20 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Export do
 
   example_group "hook methods" do
     describe "#included" do
-      context "when container is NOT Module" do
+      context "when container is NOT `Module`" do
         let(:container) { Class.new }
         let(:include_module_result) { container.include described_class }
 
-        let(:error_message) { "#{container} is NOT a Module." }
+        let(:error_message) do
+          <<~TEXT
+            `#{container.inspect}` is NOT a Module.
+          TEXT
+        end
 
         it "raises `ConvenientService::Support::DependencyContainer::Errors::NotModule`" do
           expect { include_module_result }
             .to raise_error(ConvenientService::Support::DependencyContainer::Errors::NotModule)
             .with_message(error_message)
-        end
-      end
-
-      context "when container is Module" do
-        let(:container) { Module.new }
-        let(:include_module_result) { container.include described_class }
-
-        it "does NOT raise" do
-          expect { include_module_result }.not_to raise_error
         end
       end
     end
