@@ -3,10 +3,20 @@
 ## [0.9.0](https://github.com/marian13/convenient_service/compare/v0.8.0...v0.9.0) (2023-02-22)
 
 
+### ⚠ BREAKING CHANGES
+
+* **export:** add a logic that forbids to use export in classes ([ca81536a](https://github.com/marian13/convenient_service/commit/ca81536a3080661cb762d549f4ef3ce1456bc566))
+
+
 ### Features
 
 * **has_result_short_syntax:** introduce Result#ud, Result#um, Result#uc ([95856c9](https://github.com/marian13/convenient_service/commit/95856c921c14888a3253f1c3d12453dbfd97a14b))
 * **utils:** introduce Object#memoize_including_falsy_values ([22b2430](https://github.com/marian13/convenient_service/commit/22b2430f2a57dbded706754261defc53ec140e4f))
+
+
+### Bug Fixes
+
+* **export:** add a logic that forbids to use export in classes ([ca81536a](https://github.com/marian13/convenient_service/commit/ca81536a3080661cb762d549f4ef3ce1456bc566))
 
 ## [0.8.0](https://github.com/marian13/convenient_service/compare/v0.7.0...v0.8.0) (2023-02-20)
 
