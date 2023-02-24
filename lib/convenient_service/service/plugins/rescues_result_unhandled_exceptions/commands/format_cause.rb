@@ -39,13 +39,20 @@ module ConvenientService
               <<~MESSAGE.chomp
                 ------------------
                 --- Caused by: ---
-                #{cause.class}:
-                  #{cause.message}
+                #{formatted_cause_class}
+                #{formatted_cause_message}
                 #{formatted_cause_first_line}
               MESSAGE
             end
 
             private
+
+            ##
+            # @return [String]
+            #
+            def formatted_cause_class
+              Commands::FormatClass.call(klass: cause.class)
+            end
 
             ##
             # @return [String]

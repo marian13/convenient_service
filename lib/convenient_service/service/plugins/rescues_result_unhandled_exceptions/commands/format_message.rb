@@ -8,12 +8,12 @@ module ConvenientService
           class FormatMessage < Support::Command
             ##
             # @!attribute [r] message
-            #   @return [StandardError]
+            #   @return [String, nil]
             #
             attr_reader :message
 
             ##
-            # @param message [StandardError]
+            # @param message [String, nil]
             # @return [void]
             #
             def initialize(message:)
