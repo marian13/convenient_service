@@ -101,6 +101,34 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
         end
       end
 
+      context "when exception has NO message" do
+        let(:service_class) do
+          Class.new do
+            include ConvenientService::Configs::Minimal
+
+            def result
+              raise StandardError, nil, caller
+            end
+          end
+        end
+
+        let(:formatted_exception) do
+          <<~MESSAGE.chomp
+            #{exception.class}:
+              #{exception.class}
+            #{exception.backtrace.take(10).map { |line| "# #{line}" }.join("\n")}
+            # ...
+          MESSAGE
+        end
+
+        ##
+        # NOTE: It is the default Ruby behavior to return the exception class as a message when the message is `nil`.
+        #
+        it "returns formatted exception with exception class as message" do
+          expect(command_result).to eq(formatted_exception)
+        end
+      end
+
       context "when exception has multiline message" do
         let(:service_class) do
           Class.new do
