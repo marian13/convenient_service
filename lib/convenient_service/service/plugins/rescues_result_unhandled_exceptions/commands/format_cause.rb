@@ -48,6 +48,13 @@ module ConvenientService
             private
 
             ##
+            # @return [String]
+            #
+            def formatted_cause_message
+              Commands::FormatMessage.call(message: cause.message)
+            end
+
+            ##
             # @return [String, nil]
             #
             # @internal

@@ -101,6 +101,37 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
         end
       end
 
+      context "when exception has multiline message" do
+        let(:service_class) do
+          Class.new do
+            include ConvenientService::Configs::Minimal
+
+            def result
+              message <<~TEXT
+                exception message first line
+                exception message second line
+                exception message second line
+              TEXT
+
+              raise StandardError, message, caller
+            end
+          end
+        end
+
+        let(:formatted_exception) do
+          <<~MESSAGE.chomp
+            #{exception.class}:
+            #{exception.message.split("\n").map { |line| "  #{line}" }.join("\n")}
+            #{exception.backtrace.take(10).map { |line| "# #{line}" }.join("\n")}
+            # ...
+          MESSAGE
+        end
+
+        it "returns formatted exception with indentation for all message lines" do
+          expect(command_result).to eq(formatted_exception)
+        end
+      end
+
       context "when exception has cause" do
         let(:service_class) do
           Class.new do
