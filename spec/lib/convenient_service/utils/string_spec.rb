@@ -17,4 +17,15 @@ RSpec.describe ConvenientService::Utils::String do
         .and_return_its_value
     end
   end
+
+  describe ".demodulize" do
+    let(:string) { "Inflections" }
+
+    specify do
+      expect { described_class.demodulize(string) }
+        .to delegate_to(ConvenientService::Utils::String::Demodulize, :call)
+        .with_arguments(string)
+        .and_return_its_value
+    end
+  end
 end
