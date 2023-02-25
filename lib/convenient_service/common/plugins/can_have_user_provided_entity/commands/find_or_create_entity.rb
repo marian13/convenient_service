@@ -70,6 +70,11 @@ module ConvenientService
               entity.class_exec(proto_entity) do |proto_entity|
                 define_singleton_method(:proto_entity) { proto_entity }
                 define_singleton_method(:==) { |other| self.proto_entity == other.proto_entity if other.respond_to?(:proto_entity) }
+
+                ##
+                # TODO: `inspect`.
+                #
+                # define_singleton_method(:inspect) { "#{entity}(Prototyped by #{proto_entity})" }
               end
 
               entity
@@ -81,14 +86,21 @@ module ConvenientService
             # @return [Class]
             #
             def entity
-              @entity ||= Utils::Module.get_own_const(namespace, proto_entity_name) || ::Class.new(proto_entity)
+              @entity ||= Utils::Module.get_own_const(namespace, proto_entity_demodulized_name) || ::Class.new(proto_entity)
+            end
+
+            ##
+            # @return [String, nil]
+            #
+            def proto_entity_name
+              Utils::Object.memoize_including_falsy_values(self, :@proto_entity_name) { proto_entity.name }
             end
 
             ##
             # @return [String]
             #
-            def proto_entity_name
-              Utils::Object.memoize_including_falsy_values(self, :@proto_entity_name) { proto_entity.name }
+            def proto_entity_demodulized_name
+              @proto_entity_demodulized_name ||= Utils::String.demodulize(proto_entity_name)
             end
 
             ##
