@@ -79,7 +79,7 @@
   <dl>
     <dt>Defined in:</dt>
     <dd>lib/convenient_service/utils/string.rb<span class="defines">,<br />
-  lib/convenient_service/utils/string/split.rb,<br /> lib/convenient_service/utils/string/camelize.rb</span>
+  lib/convenient_service/utils/string/split.rb,<br /> lib/convenient_service/utils/string/camelize.rb,<br /> lib/convenient_service/utils/string/demodulize.rb</span>
 </dd>
   </dl>
   
@@ -91,7 +91,7 @@
     
   
     
-      <strong class="classes">Classes:</strong> <span class='object_link'><a href="String/Camelize.html" title="ConvenientService::Utils::String::Camelize (class)">Camelize</a></span>, <span class='object_link'><a href="String/Split.html" title="ConvenientService::Utils::String::Split (class)">Split</a></span>
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="String/Camelize.html" title="ConvenientService::Utils::String::Camelize (class)">Camelize</a></span>, <span class='object_link'><a href="String/Demodulize.html" title="ConvenientService::Utils::String::Demodulize (class)">Demodulize</a></span>, <span class='object_link'><a href="String/Split.html" title="ConvenientService::Utils::String::Split (class)">Split</a></span>
     
   
 </p>
@@ -114,6 +114,28 @@
   <span class="summary_signature">
     
       <a href="#camelize-class_method" title="camelize (class method)">.<strong>camelize</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#demodulize-class_method" title="demodulize (class method)">.<strong>demodulize</strong>  &#x21d2; Object </a>
     
 
     
@@ -178,15 +200,45 @@
       <pre class="lines">
 
 
-10
 11
-12</pre>
+12
+13</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/string.rb', line 10</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/string.rb', line 11</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_camelize'>camelize</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="String/Camelize.html" title="ConvenientService::Utils::String::Camelize (class)">Camelize</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="String/Camelize.html#call-instance_method" title="ConvenientService::Utils::String::Camelize#call (method)">call</a></span></span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="demodulize-class_method">
+  
+    .<strong>demodulize</strong>  &#x21d2; <tt><span class='object_link'><a href="Object.html" title="ConvenientService::Utils::Object (module)">Object</a></span></tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+15
+16
+17</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/string.rb', line 15</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_demodulize'>demodulize</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="String/Demodulize.html" title="ConvenientService::Utils::String::Demodulize (class)">Demodulize</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="String/Demodulize.html#call-instance_method" title="ConvenientService::Utils::String::Demodulize#call (method)">call</a></span></span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -208,12 +260,12 @@
       <pre class="lines">
 
 
-14
-15
-16</pre>
+19
+20
+21</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/string.rb', line 14</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/string.rb', line 19</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="String/Split.html" title="ConvenientService::Utils::String::Split (class)">Split</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="String/Split.html#call-instance_method" title="ConvenientService::Utils::String::Split#call (method)">call</a></span></span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
@@ -228,7 +280,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Feb 25 14:51:59 2023 by
+  Generated on Sat Feb 25 18:02:36 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.3).
 </div>
