@@ -173,6 +173,9 @@ module ConvenientService
             ##
             # @return [String]
             #
+            # @note `exception.cause` may be `$!`.
+            # @see https://ruby-doc.org/core-2.7.0/Exception.html#method-i-cause
+            #
             def formatted_exception_cause
               Commands::FormatCause.call(cause: exception.cause)
             end
