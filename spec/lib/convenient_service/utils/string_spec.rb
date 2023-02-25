@@ -28,4 +28,16 @@ RSpec.describe ConvenientService::Utils::String do
         .and_return_its_value
     end
   end
+
+  describe ".split" do
+    let(:string) { "foo.bar" }
+    let(:delimiters) { "." }
+
+    specify do
+      expect { described_class.split(string, *delimiters) }
+        .to delegate_to(ConvenientService::Utils::String::Split, :call)
+        .with_arguments(string, *delimiters)
+        .and_return_its_value
+    end
+  end
 end
