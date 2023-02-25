@@ -6,6 +6,8 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExceptions::Commands::FormatException do
+  include ConvenientService::RSpec::Matchers::DelegateTo
+
   example_group "class methods" do
     describe ".call" do
       subject(:command_result) { described_class.call(exception: exception, args: args, kwargs: kwargs, block: block) }
@@ -19,6 +21,40 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
       let(:args) { [:foo] }
       let(:kwargs) { {foo: :bar} }
       let(:block) { proc { :foo } }
+
+      let(:service_class) do
+        Class.new do
+          include ConvenientService::Configs::Minimal
+
+          def result
+            raise StandardError, "exception message"
+          end
+        end
+      end
+
+      specify do
+        expect { command_result }
+          .to delegate_to(ConvenientService::Service::Plugins::RescuesResultUnhandledExceptions::Commands::FormatClass, :call)
+          .with_arguments(klass: exception.class)
+      end
+
+      specify do
+        expect { command_result }
+          .to delegate_to(ConvenientService::Service::Plugins::RescuesResultUnhandledExceptions::Commands::FormatMessage, :call)
+          .with_arguments(message: exception.message)
+      end
+
+      specify do
+        expect { command_result }
+          .to delegate_to(ConvenientService::Service::Plugins::RescuesResultUnhandledExceptions::Commands::FormatBacktrace, :call)
+          .with_arguments(backtrace: exception.backtrace, max_size: ConvenientService::Service::Plugins::RescuesResultUnhandledExceptions::Constants::DEFAULT_MAX_BACKTRACE_SIZE)
+      end
+
+      specify do
+        expect { command_result }
+          .to delegate_to(ConvenientService::Service::Plugins::RescuesResultUnhandledExceptions::Commands::FormatCause, :call)
+          .with_arguments(cause: exception.cause)
+      end
 
       context "when exception has NO backtrace" do
         let(:service_class) do
@@ -47,7 +83,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
           MESSAGE
         end
 
-        it "returns formatted exception with full backtrace" do
+        it "returns formatted exception with no backtrace" do
           expect(command_result).to eq(formatted_exception)
         end
       end
