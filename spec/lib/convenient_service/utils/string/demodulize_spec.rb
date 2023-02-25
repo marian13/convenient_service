@@ -40,7 +40,7 @@ RSpec.describe ConvenientService::Utils::String::Demodulize do
       end
     end
 
-    context "when `string` start with scope resolution operator" do
+    context "when `string` starts with scope resolution operator" do
       let(:string) { "::Inflections" }
 
       it "removes it from `string`" do
