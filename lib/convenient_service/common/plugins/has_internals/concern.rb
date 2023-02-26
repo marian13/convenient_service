@@ -15,10 +15,7 @@ module ConvenientService
 
           class_methods do
             def internals_class
-              ##
-              # TODO: Generic `CreateInternalsClass`.
-              #
-              @internals_class ||= Commands::CreateInternalsClass.call(service_class: self)
+              @internals_class ||= Commands::CreateInternalsClass.call(entity_class: self)
             end
           end
         end
