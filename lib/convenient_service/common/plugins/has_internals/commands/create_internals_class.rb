@@ -6,47 +6,32 @@ module ConvenientService
       module HasInternals
         module Commands
           class CreateInternalsClass < Support::Command
-            attr_reader :service_class
+            include Support::DependencyContainer::Import
 
-            def initialize(service_class:)
-              @service_class = service_class
+            ##
+            # @!attribute [r] entity_class
+            #   @return Class
+            #
+            attr_reader :entity_class
+
+            ##
+            # @return Class
+            #
+            import :"commands.FindOrCreateEntity", from: Common::Plugins::CanHaveUserProvidedEntity::Container
+
+            ##
+            # @param entity_class [Class]
+            # @return [void]
+            #
+            def initialize(entity_class:)
+              @entity_class = entity_class
             end
 
+            ##
+            # @return [Class]
+            #
             def call
-              internals_class.include Entities::Internals::Concern
-
-              ##
-              # class Internals < ConvenientService::Common::Plugins::HasInternals::Entities::Internals # or just `class Internals` if service class defines its own.
-              #   include ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Concern
-              #
-              #   class << self
-              #     def service_class
-              #       ##
-              #       # NOTE: Returns `service_class` passed to `CreateInternalsClass`.
-              #       #
-              #       service_class
-              #     end
-              #
-              #     def ==(other)
-              #       return unless other.instance_of?(self.class)
-              #
-              #       self.service_class == other.service_class
-              #     end
-              #   end
-              # end
-              #
-              internals_class.class_exec(service_class) do |service_class|
-                define_singleton_method(:service_class) { service_class }
-                define_singleton_method(:==) { |other| self.service_class == other.service_class if other.instance_of?(self.class) }
-              end
-
-              internals_class
-            end
-
-            private
-
-            def internals_class
-              @internals_class ||= Utils::Module.get_own_const(service_class, :Internals) || ::Class.new(Entities::Internals)
+              commands.FindOrCreateEntity.call(namespace: entity_class, proto_entity: Entities::Internals)
             end
           end
         end
