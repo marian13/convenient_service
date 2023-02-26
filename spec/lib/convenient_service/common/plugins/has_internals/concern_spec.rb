@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 RSpec.describe ConvenientService::Common::Plugins::HasInternals::Concern do
-  let(:service_class) do
+  let(:entity_class) do
     Class.new.tap do |klass|
       klass.class_exec(described_class) do |mod|
         include mod
@@ -13,7 +13,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasInternals::Concern do
     end
   end
 
-  let(:service_instance) { service_class.new }
+  let(:entity_instance) { entity_class.new }
 
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
@@ -27,14 +27,14 @@ RSpec.describe ConvenientService::Common::Plugins::HasInternals::Concern do
     include ConvenientService::RSpec::Matchers::DelegateTo
 
     describe "#internals" do
-      specify {
-        expect { service_instance.internals }
-          .to delegate_to(service_class.internals_class, :new)
+      specify do
+        expect { entity_instance.internals }
+          .to delegate_to(entity_class.internals_class, :new)
           .and_return_its_value
-      }
+      end
 
       it "caches its result" do
-        expect(service_instance.internals.object_id).to eq(service_instance.internals.object_id)
+        expect(entity_instance.internals.object_id).to eq(entity_instance.internals.object_id)
       end
     end
   end
@@ -43,15 +43,15 @@ RSpec.describe ConvenientService::Common::Plugins::HasInternals::Concern do
     include ConvenientService::RSpec::Matchers::DelegateTo
 
     describe ".internals_class" do
-      specify {
-        expect { service_class.internals_class }
+      specify do
+        expect { entity_class.internals_class }
           .to delegate_to(ConvenientService::Common::Plugins::HasInternals::Commands::CreateInternalsClass, :call)
-          .with_arguments(service_class: service_class)
+          .with_arguments(entity_class: entity_class)
           .and_return_its_value
-      }
+      end
 
       it "caches its result" do
-        expect(service_class.internals_class.object_id).to eq(service_class.internals_class.object_id)
+        expect(entity_class.internals_class.object_id).to eq(entity_class.internals_class.object_id)
       end
     end
   end
