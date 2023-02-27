@@ -62,6 +62,14 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultStatusCheckShortSyn
       end
     end
 
+    describe ".ok?" do
+      specify do
+        expect { service_class.ok? }
+          .to delegate_to(result, :success?)
+          .and_return_its_value
+      end
+    end
+
     describe ".error?" do
       specify do
         expect { service_class.error? }
@@ -74,6 +82,14 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultStatusCheckShortSyn
       specify do
         expect { service_class.failure? }
           .to delegate_to(result, :failure?)
+          .and_return_its_value
+      end
+    end
+
+    describe ".not_ok?" do
+      specify do
+        expect { service_class.not_ok? }
+          .to delegate_to(result, :not_success?)
           .and_return_its_value
       end
     end
