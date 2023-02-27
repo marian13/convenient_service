@@ -7,70 +7,38 @@ require "convenient_service"
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Support::Cache do
   example_group "instance methods" do
-    let(:cache) { described_class.new }
+    let(:cache) { described_class }
 
-    describe "#empty?" do
-      context "when cache has NO keys" do
-        before do
-          cache.clear
-        end
+    describe ".create" do
+      context "when type is NOT supported" do
+        let(:bad_type) { :bad_type }
+        let(:error_message) { "Invalid cache type: #{bad_type}." }
 
-        it "returns `true`" do
-          expect(cache.empty?).to eq(true)
-        end
-      end
-
-      context "when cache has at least one key" do
-        before do
-          cache[:foo] = :bar
-        end
-
-        it "returns `false`" do
-          expect(cache.empty?).to eq(false)
-        end
-      end
-    end
-
-    describe "#clear" do
-      context "when cache has NO keys" do
-        it "returns cache" do
-          expect(cache.clear).to eq(cache)
+        it "raises ConvenientService::Support::Cache::Errors::NotSupportedType" do
+          expect { described_class.create(type: bad_type) }
+            .to raise_error(ConvenientService::Support::Cache::Errors::NotSupportedType)
+            .with_message(error_message)
         end
       end
 
-      context "when cache has any keys" do
-        before do
-          cache[:foo] = :bar
+      context "when type is supported" do
+        context "when cache hash-based" do
+          it "creates a hash-based cache by default" do
+            cache = described_class.create
+            expect(cache).to be_a ConvenientService::Support::Cache::Hash
+          end
+
+          it "creates a hash-based cache when type is a `:hash`" do
+            cache = described_class.create(type: :hash)
+            expect(cache).to be_a ConvenientService::Support::Cache::Hash
+          end
         end
 
-        it "returns cache" do
-          expect(cache.clear).to eq(cache)
-        end
-
-        it "remove those keys from cache" do
-          expect { cache.clear }.to change(cache, :empty?).from(false).to(true)
-        end
-      end
-    end
-
-    describe "#scope" do
-      include ConvenientService::RSpec::Matchers::CacheItsValue
-
-      it "returns sub cache" do
-        expect(cache.scope(:foo)).to eq(described_class.new)
-      end
-
-      specify do
-        expect { cache.scope(:foo) }.to cache_its_value
-      end
-
-      context "when nested" do
-        it "returns sub cache" do
-          expect(cache.scope(:foo).scope(:bar)).to eq(described_class.new)
-        end
-
-        specify do
-          expect { cache.scope(:foo).scope(:bar) }.to cache_its_value
+        context "when cache array-based" do
+          it "creates an array-based cache when type is a `:array`" do
+            cache = described_class.create(type: :array)
+            expect(cache).to be_a ConvenientService::Support::Cache::Array
+          end
         end
       end
     end

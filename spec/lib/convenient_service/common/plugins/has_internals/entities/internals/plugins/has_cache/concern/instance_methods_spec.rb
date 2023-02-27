@@ -23,7 +23,8 @@ RSpec.describe ConvenientService::Common::Plugins::HasInternals::Entities::Inter
       let(:internals) { internals_instance }
 
       specify do
-        expect { internals.cache }.to delegate_to(ConvenientService::Support::Cache, :new).and_return_its_value
+        expect { internals.cache }.to delegate_to(ConvenientService::Support::Cache, :create)
+        .and_return_its_value
       end
 
       specify do
