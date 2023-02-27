@@ -5,6 +5,9 @@ require "spec_helper"
 require "convenient_service"
 
 RSpec.describe ConvenientService::Common::Plugins::HasInternals::Concern do
+  include ConvenientService::RSpec::Matchers::DelegateTo
+  include ConvenientService::RSpec::Matchers::CacheItsValue
+
   let(:entity_class) do
     Class.new.tap do |klass|
       klass.class_exec(described_class) do |mod|
@@ -24,8 +27,6 @@ RSpec.describe ConvenientService::Common::Plugins::HasInternals::Concern do
   end
 
   example_group "instance methods" do
-    include ConvenientService::RSpec::Matchers::DelegateTo
-
     describe "#internals" do
       specify do
         expect { entity_instance.internals }
@@ -33,15 +34,13 @@ RSpec.describe ConvenientService::Common::Plugins::HasInternals::Concern do
           .and_return_its_value
       end
 
-      it "caches its result" do
-        expect(entity_instance.internals.object_id).to eq(entity_instance.internals.object_id)
+      specify do
+        expect { entity_instance.internals }.to cache_its_value
       end
     end
   end
 
   example_group "class methods" do
-    include ConvenientService::RSpec::Matchers::DelegateTo
-
     describe ".internals_class" do
       specify do
         expect { entity_class.internals_class }
@@ -50,8 +49,8 @@ RSpec.describe ConvenientService::Common::Plugins::HasInternals::Concern do
           .and_return_its_value
       end
 
-      it "caches its result" do
-        expect(entity_class.internals_class.object_id).to eq(entity_class.internals_class.object_id)
+      specify do
+        expect { entity_class.internals_class }.to cache_its_value
       end
     end
   end
