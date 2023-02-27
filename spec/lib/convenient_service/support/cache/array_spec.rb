@@ -1,0 +1,83 @@
+# frozen_string_literal: true
+
+require "spec_helper"
+
+require "convenient_service"
+
+# rubocop:disable RSpec/NestedGroups
+RSpec.describe ConvenientService::Support::Cache do
+  example_group "instance methods" do
+    before do
+      described_class.set_default_class(true)
+    end
+
+    let(:cache) { described_class.default_class.new }
+
+    describe "#empty?" do
+      context "when cache has NO keys" do
+        before do
+          cache.clear
+        end
+
+        it "returns `true`" do
+          expect(cache.empty?).to eq(true)
+        end
+      end
+
+      context "when cache has at least one key" do
+        before do
+          cache[:foo] = :bar
+        end
+
+        it "returns `false`" do
+          expect(cache.empty?).to eq(false)
+        end
+      end
+    end
+
+    describe "#clear" do
+      context "when cache has NO keys" do
+        it "returns cache" do
+          expect(cache.clear).to eq(cache)
+        end
+      end
+
+      context "when cache has any keys" do
+        before do
+          cache[:foo] = :bar
+        end
+
+        it "returns cache" do
+          expect(cache.clear).to eq(cache)
+        end
+
+        it "remove those keys from cache" do
+          expect { cache.clear }.to change(cache, :empty?).from(false).to(true)
+        end
+      end
+    end
+
+    describe "#scope" do
+      include ConvenientService::RSpec::Matchers::CacheItsValue
+
+      it "returns sub cache" do
+        expect(cache.scope(:foo)).to eq(ConvenientService::Support::Cache::Array.new)
+      end
+
+      specify do
+        expect { cache.scope(:foo) }.to cache_its_value
+      end
+
+      context "when nested" do
+        it "returns sub cache" do
+          expect(cache.scope(:foo).scope(:bar)).to eq(ConvenientService::Support::Cache::Array.new)
+        end
+
+        specify do
+          expect { cache.scope(:foo).scope(:bar) }.to cache_its_value
+        end
+      end
+    end
+  end
+end
+# rubocop:enable RSpec/NestedGroups

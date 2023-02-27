@@ -9,7 +9,7 @@ module ConvenientService
 
           class_methods do
             ##
-            # @return [ConvenientService::Support::Cache]
+            # @return [ConvenientService::Support::Cache::Array]
             #
             # @internal
             #   `::RSpec.current_example` docs:
@@ -20,9 +20,11 @@ module ConvenientService
             #   TODO: Mutex for thread-safety when parallel steps will be supported.
             #
             def stubbed_results
-              return Support::Cache.new unless Support::Gems::RSpec.current_example
+              Support::Cache.set_default_class(true)
 
-              cache = Utils::Object.instance_variable_fetch(::RSpec.current_example, :@__convenient_service_stubbed_results__) { Support::Cache.new }
+              return Support::Cache::default_class.new unless Support::Gems::RSpec.current_example
+
+              cache = Utils::Object.instance_variable_fetch(::RSpec.current_example, :@__convenient_service_stubbed_results__) { Support::Cache::default_class.new }
 
               cache.scope(self)
             end

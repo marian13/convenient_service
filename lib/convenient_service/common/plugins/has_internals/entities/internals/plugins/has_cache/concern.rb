@@ -17,10 +17,12 @@ module ConvenientService
 
                   instance_methods do
                     ##
-                    # @return [ConvenientService::Support::Cache]
+                    # @return [ConvenientService::Support::Cache::Hash]
                     #
                     def cache
-                      @cache ||= Support::Cache.new
+                      Support::Cache.set_default_class(false)
+
+                      @cache ||= Support::Cache.default_class.new
                     end
                   end
                 end

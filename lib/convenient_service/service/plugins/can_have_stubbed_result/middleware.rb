@@ -24,7 +24,7 @@ module ConvenientService
           private
 
           ##
-          # @return [ConvenientService::Support::Cache]
+          # @return [ConvenientService::Support::Cache::Array]
           #
           def cache
             entity.stubbed_results

@@ -20,7 +20,7 @@ module ConvenientService
           private
 
           ##
-          # @return [ConvenientService::Support::Cache]
+          # @return [ConvenientService::Support::Cache::Hash]
           #
           def cache
             @cache ||= entity.internals.cache
