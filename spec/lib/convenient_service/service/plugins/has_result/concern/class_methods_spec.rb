@@ -6,6 +6,9 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern::ClassMethods do
+  include ConvenientService::RSpec::Matchers::DelegateTo
+  include ConvenientService::RSpec::Matchers::CacheItsValue
+
   let(:service_class) do
     Class.new.tap do |klass|
       klass.class_exec(described_class) do |mod|
@@ -299,16 +302,15 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern::ClassMet
     end
 
     describe ".result_class" do
-      it "delegates to `ConvenientService::Service::Plugins::HasResult::Commands::CreateResultClass`" do
-        allow(ConvenientService::Service::Plugins::HasResult::Commands::CreateResultClass).to receive(:call).with(hash_including(service_class: service_class)).and_call_original
-
-        service_class.result_class
-
-        expect(ConvenientService::Service::Plugins::HasResult::Commands::CreateResultClass).to have_received(:call)
+      specify do
+        expect { service_class.result_class }
+          .to delegate_to(ConvenientService::Service::Plugins::HasResult::Commands::CreateResultClass, :call)
+          .with_arguments(service_class: service_class)
+          .and_return_its_value
       end
 
-      it "returns `ConvenientService::Service::Plugins::HasResult::Commands::CreateResultClass` result" do
-        expect(service_class.result_class).to eq(ConvenientService::Service::Plugins::HasResult::Commands::CreateResultClass.call(service_class: service_class))
+      specify do
+        expect { service_class.result_class }.to cache_its_value
       end
     end
   end

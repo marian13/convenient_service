@@ -80,6 +80,10 @@ module ConvenientService
             # @api private
             # @return [Class]
             #
+            # @internal
+            #   NOTE: A command instead of `import` is used in order to NOT pollute the public interface.
+            #   TODO: Specs that prevent public interface accidental pollution.
+            #
             def result_class
               @result_class ||= Commands::CreateResultClass.call(service_class: self)
             end

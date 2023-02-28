@@ -6,6 +6,8 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExceptions::Commands::FormatException do
+  include ConvenientService::RSpec::Matchers::DelegateTo
+
   example_group "class methods" do
     describe ".call" do
       subject(:command_result) { described_class.call(exception: exception, args: args, kwargs: kwargs, block: block) }
@@ -19,6 +21,40 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
       let(:args) { [:foo] }
       let(:kwargs) { {foo: :bar} }
       let(:block) { proc { :foo } }
+
+      let(:service_class) do
+        Class.new do
+          include ConvenientService::Configs::Minimal
+
+          def result
+            raise StandardError, "exception message"
+          end
+        end
+      end
+
+      specify do
+        expect { command_result }
+          .to delegate_to(ConvenientService::Service::Plugins::RescuesResultUnhandledExceptions::Commands::FormatClass, :call)
+          .with_arguments(klass: exception.class)
+      end
+
+      specify do
+        expect { command_result }
+          .to delegate_to(ConvenientService::Service::Plugins::RescuesResultUnhandledExceptions::Commands::FormatMessage, :call)
+          .with_arguments(message: exception.message)
+      end
+
+      specify do
+        expect { command_result }
+          .to delegate_to(ConvenientService::Service::Plugins::RescuesResultUnhandledExceptions::Commands::FormatBacktrace, :call)
+          .with_arguments(backtrace: exception.backtrace, max_size: ConvenientService::Service::Plugins::RescuesResultUnhandledExceptions::Constants::DEFAULT_MAX_BACKTRACE_SIZE)
+      end
+
+      specify do
+        expect { command_result }
+          .to delegate_to(ConvenientService::Service::Plugins::RescuesResultUnhandledExceptions::Commands::FormatCause, :call)
+          .with_arguments(cause: exception.cause)
+      end
 
       context "when exception has NO backtrace" do
         let(:service_class) do
@@ -47,7 +83,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
           MESSAGE
         end
 
-        it "returns formatted exception with full backtrace" do
+        it "returns formatted exception with no backtrace" do
           expect(command_result).to eq(formatted_exception)
         end
       end
@@ -97,6 +133,65 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
         end
 
         it "returns formatted exception with trimmed backtrace" do
+          expect(command_result).to eq(formatted_exception)
+        end
+      end
+
+      context "when exception has NO message" do
+        let(:service_class) do
+          Class.new do
+            include ConvenientService::Configs::Minimal
+
+            def result
+              raise StandardError, nil, caller
+            end
+          end
+        end
+
+        let(:formatted_exception) do
+          <<~MESSAGE.chomp
+            #{exception.class}:
+              #{exception.class}
+            #{exception.backtrace.take(10).map { |line| "# #{line}" }.join("\n")}
+            # ...
+          MESSAGE
+        end
+
+        ##
+        # NOTE: It is the default Ruby behavior to return the exception class as a message when the message is `nil`.
+        #
+        it "returns formatted exception with exception class as message" do
+          expect(command_result).to eq(formatted_exception)
+        end
+      end
+
+      context "when exception has multiline message" do
+        let(:service_class) do
+          Class.new do
+            include ConvenientService::Configs::Minimal
+
+            def result
+              message <<~TEXT
+                exception message first line
+                exception message second line
+                exception message second line
+              TEXT
+
+              raise StandardError, message, caller
+            end
+          end
+        end
+
+        let(:formatted_exception) do
+          <<~MESSAGE.chomp
+            #{exception.class}:
+            #{exception.message.split("\n").map { |line| "  #{line}" }.join("\n")}
+            #{exception.backtrace.take(10).map { |line| "# #{line}" }.join("\n")}
+            # ...
+          MESSAGE
+        end
+
+        it "returns formatted exception with indentation for all message lines" do
           expect(command_result).to eq(formatted_exception)
         end
       end

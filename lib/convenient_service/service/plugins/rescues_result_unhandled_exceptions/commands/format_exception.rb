@@ -64,6 +64,23 @@ module ConvenientService
             #   # /gem/lib/convenient_service/core/entities/config/entities/method_middlewares/entities/middleware.rb:73:in `call'
             #   # /gem/lib/convenient_service/core/entities/config/entities/method_middlewares/entities/chain.rb:35:in `next'
             #
+            # @example Exception with multiline message.
+            #
+            #   StandardError:
+            #     exception message first line
+            #     exception message second line
+            #     exception message third line
+            #   # /gem/lib/convenient_service/factories/services.rb:120:in `result'
+            #   # /gem/lib/convenient_service/core/entities/config/entities/method_middlewares/entities/caller/commands/define_method_middlewares_caller.rb:116:in `call'
+            #   # /gem/lib/convenient_service/core/entities/config/entities/method_middlewares/entities/caller/commands/define_method_middlewares_caller.rb:116:in `block in result'
+            #   # /gem/lib/convenient_service/dependencies/extractions/ruby_middleware/middleware/runner.rb:67:in `block (2 levels) in build_call_chain'
+            #   # /gem/lib/convenient_service/core/entities/config/entities/method_middlewares/entities/chain.rb:35:in `next'
+            #   # /gem/lib/convenient_service/common/plugins/caches_return_value/middleware.rb:17:in `block in next'
+            #   # /gem/lib/convenient_service/support/cache.rb:110:in `fetch'
+            #   # /gem/lib/convenient_service/common/plugins/caches_return_value/middleware.rb:17:in `next'
+            #   # /gem/lib/convenient_service/core/entities/config/entities/method_middlewares/entities/middleware.rb:73:in `call'
+            #   # /gem/lib/convenient_service/core/entities/config/entities/method_middlewares/entities/chain.rb:35:in `next'
+            #
             # @example Exception with backtrace with more than 10 lines.
             #
             #   StandardError:
@@ -107,7 +124,8 @@ module ConvenientService
             #
             def call
               <<~MESSAGE.rstrip
-                #{formatted_exception}
+                #{formatted_exception_class}
+                #{formatted_exception_message}
                 #{formatted_exception_backtrace}
                 #{formatted_exception_cause}
               MESSAGE
@@ -118,11 +136,15 @@ module ConvenientService
             ##
             # @return [String]
             #
-            def formatted_exception
-              <<~MESSAGE.chomp
-                #{exception.class}:
-                  #{exception.message}
-              MESSAGE
+            def formatted_exception_class
+              Commands::FormatClass.call(klass: exception.class)
+            end
+
+            ##
+            # @return [String]
+            #
+            def formatted_exception_message
+              Commands::FormatMessage.call(message: exception.message)
             end
 
             ##
@@ -150,6 +172,9 @@ module ConvenientService
 
             ##
             # @return [String]
+            #
+            # @note `exception.cause` may be `$!`.
+            # @see https://ruby-doc.org/core-2.7.0/Exception.html#method-i-cause
             #
             def formatted_exception_cause
               Commands::FormatCause.call(cause: exception.cause)

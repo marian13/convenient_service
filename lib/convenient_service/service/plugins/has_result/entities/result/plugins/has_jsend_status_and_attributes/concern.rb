@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require_relative "concern/class_methods"
 require_relative "concern/instance_methods"
 
 module ConvenientService
@@ -15,6 +16,8 @@ module ConvenientService
 
                   included do |result_class|
                     result_class.include InstanceMethods
+
+                    result_class.extend ClassMethods
                   end
                 end
               end

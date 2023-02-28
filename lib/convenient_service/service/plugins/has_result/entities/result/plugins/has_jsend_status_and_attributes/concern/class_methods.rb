@@ -7,15 +7,9 @@ module ConvenientService
         module Entities
           class Result
             module Plugins
-              module HasResultShortSyntax
+              module HasJsendStatusAndAttributes
                 module Concern
-                  module InstanceMethods
-                    ##
-                    # NOTE: `Support::Delegate` is NOT used intentionally in order to NOT pollute the public interface.
-                    #
-                    def [](key)
-                      data[key]
-                    end
+                  module ClassMethods
                   end
                 end
               end
