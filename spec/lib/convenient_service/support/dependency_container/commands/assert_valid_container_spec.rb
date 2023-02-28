@@ -4,9 +4,10 @@ require "spec_helper"
 
 require "convenient_service"
 
+# rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Support::DependencyContainer::Commands::AssertValidContainer do
   example_group "class methods" do
-    describe "call" do
+    describe ".call" do
       subject(:command_result) { described_class.call(from: container) }
 
       context "when `container` is NOT valid" do
@@ -41,3 +42,4 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::Assert
     end
   end
 end
+# rubocop:enable RSpec/NestedGroups
