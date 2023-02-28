@@ -6,7 +6,7 @@ require "convenient_service"
 
 RSpec.describe ConvenientService::Support::DependencyContainer::Commands::AssertValidContainer do
   example_group "class methods" do
-    describe ".call" do
+    describe "call" do
       subject(:command_result) { described_class.call(from: container) }
 
       context "when `container` is NOT valid" do
