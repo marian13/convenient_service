@@ -12,17 +12,20 @@ module ConvenientService
 
             def initialize
               @steps = []
+              @lock = ::Mutex.new
             end
 
             ##
             # TODO: Specs.
             #
             def commit!
-              return false if committed?
+              lock.synchronize do
+                return false if committed?
 
-              steps.each { |step| step.validate! && step.define! }.freeze
+                steps.each { |step| step.validate! && step.define! }.freeze
 
-              true
+                true
+              end
             end
 
             ##
@@ -62,6 +65,8 @@ module ConvenientService
             end
 
             private
+
+            attr_reader :lock
 
             def next_available_index
               steps.size
