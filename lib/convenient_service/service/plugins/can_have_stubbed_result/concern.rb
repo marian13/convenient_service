@@ -22,7 +22,24 @@ module ConvenientService
             def stubbed_results
               return Support::Cache.new unless Support::Gems::RSpec.current_example
 
-              cache = Utils::Object.instance_variable_fetch(::RSpec.current_example, :@__convenient_service_stubbed_results__) { Support::Cache.new }
+              ##
+              # IMPORTANT: ivar name with class and current thread enforces thread safety since there is no resource to share.
+              #
+              # TODO: Thread safety specs.
+              #
+              # NOTE: `self` is a service class in the current context. For example:
+              #
+              #   before do
+              #     stub_service(ConvenientService::Examples::Standard::Gemfile::Services::RunShell)
+              #       .with_arguments(command: node_available_command)
+              #       .to return_result(node_available_status)
+              #   end
+              #
+              #   # Then `self` is `ConvenientService::Examples::Standard::Gemfile::Services::RunShell`.
+              #
+              ivar_name = "@__convenient_service_stubbed_results__#{object_id}__#{Thread.current.object_id}__"
+
+              cache = Utils::Object.instance_variable_fetch(::RSpec.current_example, ivar_name) { Support::Cache.new }
 
               cache.scope(self)
             end
