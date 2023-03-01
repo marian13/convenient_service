@@ -20,7 +20,10 @@ module ConvenientService
             def commit!
               return false if committed?
 
-              steps.each { |step| step.validate! && step.define! }.freeze
+              ##
+              # IMPORTANT: Temporarily removed `step.validate!` since it is neither thread-safe nor idempotent.
+              #
+              steps.each { |step| step.define! }.freeze
 
               true
             end
