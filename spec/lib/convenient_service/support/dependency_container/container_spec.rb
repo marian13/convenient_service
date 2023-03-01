@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-RSpec.describe ConvenientService::RSpec::Matchers::Custom::Export::Container do
+RSpec.describe ConvenientService::Support::DependencyContainer::Container do
   subject { described_class }
 
   example_group "modules" do
@@ -16,10 +16,10 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Export::Container do
   example_group "exported methods" do
     include ConvenientService::RSpec::Matchers::Export
 
-    it { is_expected.to export(:"DependencyContainer::Constants::DEFAULT_SCOPE") }
+    it { is_expected.to export(:"constants.DEFAULT_SCOPE") }
 
-    it { is_expected.to export(:"DependencyContainer::Commands::AssertValidContainer") }
+    it { is_expected.to export(:"commands.AssertValidContainer") }
 
-    it { is_expected.to export(:"DependencyContainer::Commands::AssertValidScope") }
+    it { is_expected.to export(:"commands.AssertValidScope") }
   end
 end

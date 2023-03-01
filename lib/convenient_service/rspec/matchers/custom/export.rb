@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative "export/container"
-
 module ConvenientService
   module RSpec
     module Matchers
@@ -9,16 +7,16 @@ module ConvenientService
         class Export
           include ConvenientService::DependencyContainer::Import
 
-          import :"DependencyContainer::Constants::DEFAULT_SCOPE", from: Container
-          import :"DependencyContainer::Commands::AssertValidContainer", from: Container
-          import :"DependencyContainer::Commands::AssertValidScope", from: Container
+          import :"constants.DEFAULT_SCOPE", from: ConvenientService::Support::DependencyContainer::Container
+          import :"commands.AssertValidContainer", from: ConvenientService::Support::DependencyContainer::Container
+          import :"commands.AssertValidScope", from: ConvenientService::Support::DependencyContainer::Container
 
           ##
           # @param full_name [Symbol, String]
           # @param scope [Symbol]
           # @return [void]
           #
-          def initialize(full_name, scope: DependencyContainer::Constants::DEFAULT_SCOPE)
+          def initialize(full_name, scope: constants.DEFAULT_SCOPE)
             @full_name = full_name
             @scope = scope
           end
@@ -30,9 +28,9 @@ module ConvenientService
           def matches?(container)
             @container = container
 
-            DependencyContainer::Commands::AssertValidContainer.call(from: container)
+            commands.AssertValidContainer.call(from: container)
 
-            DependencyContainer::Commands::AssertValidScope.call(scope: scope)
+            commands.AssertValidScope.call(scope: scope)
 
             Utils::Bool.to_bool(container.exported_methods.find_by(full_name: full_name, scope: scope))
           end
