@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.10.0](https://github.com/marian13/convenient_service/compare/v0.9.0...v0.10.0) (2023-03-01)
+
+
+### Features
+
+* **utils:** introduce Utils::String.demodulize ([87a145a](https://github.com/marian13/convenient_service/commit/87a145a7742e1fce04fa40917dae6ee61e811c71))
+
+
+### Bug Fixes
+
+* **be_result:** commit config manually ([658e314](https://github.com/marian13/convenient_service/commit/658e3147cad50cb7226c8530227e704bb4c30945))
+* **can_have_user_provided_entity:** use demodulized proto entity name ([f25e63c](https://github.com/marian13/convenient_service/commit/f25e63c23a9407ec8cc513311de506781e3cb5ca))
+* **has_result_steps:** no validate ([6c14a57](https://github.com/marian13/convenient_service/commit/6c14a572b8fa2dfcb3afef26e64859bb67ac9729))
+* **rescues_result_unhandled_exceptions:** add indentation for all message lines ([6458103](https://github.com/marian13/convenient_service/commit/6458103c362c66da42587b1a0bec4935b42606ac))
+* **rescues_result_unhandled_exceptions:** use formatted message and class for cause ([c75c389](https://github.com/marian13/convenient_service/commit/c75c3891158ea58d28d8de3718a6296565a1cd84))
+
 ## [0.9.0](https://github.com/marian13/convenient_service/compare/v0.8.0...v0.9.0) (2023-02-22)
 
 
