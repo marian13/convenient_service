@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.10.1](https://github.com/marian13/convenient_service/compare/v0.10.0...v0.10.1) (2023-03-02)
+
+
+### Bug Fixes
+
+* **can_have_stubbed_result:** add thread-safety ([1962dcc](https://github.com/marian13/convenient_service/commit/1962dccdea29fb36c1b581e312329f41bb23c179))
+
 ## [0.10.0](https://github.com/marian13/convenient_service/compare/v0.9.0...v0.10.0) (2023-03-01)
 
 
