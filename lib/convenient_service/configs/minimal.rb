@@ -70,6 +70,9 @@ module ConvenientService
 
         middlewares :step, scope: :class do
           use Plugins::Common::NormalizesEnv::Middleware
+
+          use Plugins::Service::CanHaveMethodSteps::Middleware
+          use Plugins::Service::CanHaveResultStep::Middleware
         end
 
         class self::Internals

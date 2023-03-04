@@ -3,7 +3,7 @@
 module ConvenientService
   module Service
     module Plugins
-      module CanHaveMethodSteps
+      module CanHaveResultStep
         class Middleware < Core::MethodChainMiddleware
           ##
           # @param args [Array]
@@ -18,12 +18,11 @@ module ConvenientService
           #   https://github.com/ruby/spec/blob/c7ed8478a031d0df346d222495f4b4bbb298523b/language/keyword_arguments_spec.rb#L100
           #
           def next(*args, **kwargs, &block)
-            return chain.next(*args, **kwargs, &block) unless args.first.instance_of?(::Symbol)
-            return chain.next(*args, **kwargs, &block) if args.first == :result
+            return chain.next(*args, **kwargs, &block) if args.first != :result
 
-            kwargs[:in] = Utils::Array.wrap(kwargs[:in]) + [{method_name: raw(args.first)}, {organizer: :itself}]
+            kwargs[:in] = Utils::Array.wrap(kwargs[:in]) + [{method_name: raw(:result)}, {organizer: :itself}]
 
-            args[0] = Services::RunMethodInOrganizer
+            args[0] = Services::RunOwnMethodInOrganizer
 
             chain.next(*args, **kwargs, &block)
           end

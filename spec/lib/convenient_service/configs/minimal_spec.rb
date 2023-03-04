@@ -119,7 +119,9 @@ RSpec.describe ConvenientService::Configs::Minimal do
         example_group ".step middlewares" do
           let(:class_step_middlewares) do
             [
-              ConvenientService::Common::Plugins::NormalizesEnv::Middleware
+              ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
+              ConvenientService::Service::Plugins::CanHaveMethodSteps::Middleware,
+              ConvenientService::Service::Plugins::CanHaveResultStep::Middleware
             ]
           end
 

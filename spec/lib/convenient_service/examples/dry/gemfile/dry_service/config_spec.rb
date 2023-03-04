@@ -143,7 +143,8 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::DryService::Config do
           let(:step_class_middlewares) do
             [
               ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-              ConvenientService::Service::Plugins::CanHaveMethodSteps::Middleware
+              ConvenientService::Service::Plugins::CanHaveMethodSteps::Middleware,
+              ConvenientService::Service::Plugins::CanHaveResultStep::Middleware
             ]
           end
 

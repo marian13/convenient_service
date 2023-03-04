@@ -145,7 +145,8 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::RailsService::Config
           let(:step_class_middlewares) do
             [
               ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-              ConvenientService::Service::Plugins::CanHaveMethodSteps::Middleware
+              ConvenientService::Service::Plugins::CanHaveMethodSteps::Middleware,
+              ConvenientService::Service::Plugins::CanHaveResultStep::Middleware
             ]
           end
 
