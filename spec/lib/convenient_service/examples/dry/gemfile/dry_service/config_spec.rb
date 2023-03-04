@@ -36,7 +36,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::DryService::Config do
               ConvenientService::Common::Plugins::HasConstructor::Concern,
               ConvenientService::Plugins::Common::HasConstructorWithoutInitialize::Concern,
               ConvenientService::Service::Plugins::HasResult::Concern,
-              ConvenientService::Service::Plugins::HasResultSteps::Concern,
+              ConvenientService::Service::Plugins::CanHaveSteps::Concern,
               ConvenientService::Common::Plugins::CachesConstructorParams::Concern,
               ConvenientService::Common::Plugins::CanBeCopied::Concern,
               ConvenientService::Service::Plugins::CanRecalculateResult::Concern,
@@ -75,7 +75,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::DryService::Config do
               ConvenientService::Common::Plugins::HasAroundCallbacks::Middleware,
               ConvenientService::Service::Plugins::HasResultParamsValidations::UsingDryValidation::Middleware,
               ConvenientService::Service::Plugins::HasResult::Middleware,
-              ConvenientService::Service::Plugins::HasResultSteps::Middleware,
+              ConvenientService::Service::Plugins::CanHaveSteps::Middleware,
               ConvenientService::Service::Plugins::RaisesOnDoubleResult::Middleware,
               ConvenientService::Common::Plugins::CachesReturnValue::Middleware
             ]
@@ -365,7 +365,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::DryService::Config do
             let(:concerns) do
               [
                 ConvenientService::Common::Plugins::HasInternals::Concern,
-                ConvenientService::Service::Plugins::HasResultSteps::Entities::Step::Plugins::HasInspect::Concern
+                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::HasInspect::Concern
               ]
             end
 
@@ -378,7 +378,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::DryService::Config do
             let(:calculate_result_middlewares) do
               [
                 ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-                ConvenientService::Service::Plugins::HasResultSteps::Entities::Step::Plugins::CanHaveParentResult::Middleware
+                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveParentResult::Middleware
               ]
             end
 

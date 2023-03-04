@@ -27,7 +27,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultMethodSteps::Middle
 
       let(:service_class) do
         Class.new do
-          include ConvenientService::Service::Plugins::HasResultSteps::Concern
+          include ConvenientService::Service::Plugins::CanHaveSteps::Concern
         end
       end
 

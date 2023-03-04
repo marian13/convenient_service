@@ -33,7 +33,7 @@ RSpec.describe ConvenientService::Configs::Minimal do
               ConvenientService::Common::Plugins::HasConstructor::Concern,
               ConvenientService::Plugins::Common::HasConstructorWithoutInitialize::Concern,
               ConvenientService::Service::Plugins::HasResult::Concern,
-              ConvenientService::Service::Plugins::HasResultSteps::Concern
+              ConvenientService::Service::Plugins::CanHaveSteps::Concern
             ]
           end
 
@@ -59,7 +59,7 @@ RSpec.describe ConvenientService::Configs::Minimal do
             [
               ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
               ConvenientService::Service::Plugins::HasResult::Middleware,
-              ConvenientService::Service::Plugins::HasResultSteps::Middleware
+              ConvenientService::Service::Plugins::CanHaveSteps::Middleware
             ]
           end
 
@@ -323,7 +323,7 @@ RSpec.describe ConvenientService::Configs::Minimal do
             let(:concerns) do
               [
                 ConvenientService::Common::Plugins::HasInternals::Concern,
-                ConvenientService::Service::Plugins::HasResultSteps::Entities::Step::Plugins::HasInspect::Concern
+                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::HasInspect::Concern
               ]
             end
 

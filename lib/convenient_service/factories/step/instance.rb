@@ -8,7 +8,7 @@ module ConvenientService
     module Step
       module Instance
         ##
-        # @return [ConvenientService::Service::Plugins::HasResultSteps::Entities::Step]
+        # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step]
         #
         def create_step_instance
           service_class =
