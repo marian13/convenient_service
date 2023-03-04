@@ -3,7 +3,7 @@
 module ConvenientService
   module Service
     module Plugins
-      module HasResultMethodSteps
+      module CanHaveMethodSteps
         class Middleware < Core::MethodChainMiddleware
           ##
           # @internal

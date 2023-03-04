@@ -138,7 +138,7 @@ RSpec.describe ConvenientService::Configs::Standard do
           let(:class_step_middlewares) do
             [
               ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-              ConvenientService::Service::Plugins::HasResultMethodSteps::Middleware
+              ConvenientService::Service::Plugins::CanHaveMethodSteps::Middleware
             ]
           end
 

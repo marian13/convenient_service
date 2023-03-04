@@ -67,7 +67,7 @@ module ConvenientService
         end
 
         middlewares :step, scope: :class do
-          use Plugins::Service::HasResultMethodSteps::Middleware
+          use Plugins::Service::CanHaveMethodSteps::Middleware
         end
 
         class self::Result
