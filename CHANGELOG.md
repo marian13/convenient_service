@@ -1,5 +1,28 @@
 # Changelog
 
+## [0.11.0](https://github.com/marian13/convenient_service/compare/v0.10.1...v0.11.0) (2023-03-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* **can_have_method_steps:** rename has_result_method_steps to can_have_method_steps
+* **can_have_steps:** rename has_result_steps to can_have_steps
+
+### Bug Fixes
+
+* **can_have_method_steps:** disable CanHaveMethodSteps in Standard config ([af0b039](https://github.com/marian13/convenient_service/commit/af0b039c827769441bb5adc150d0e0ff2a43e220))
+
+
+### Code Refactoring
+
+* **can_have_method_steps:** rename has_result_method_steps to can_have_method_steps ([39901a3](https://github.com/marian13/convenient_service/commit/39901a31e37536ae81c6961b45a8c35e505aaefa))
+* **can_have_steps:** rename has_result_steps to can_have_steps ([691d8e1](https://github.com/marian13/convenient_service/commit/691d8e128fc4ff8d1dfa76e365501b0d2028a5aa))
+
+
+### Miscellaneous Chores
+
+* release 0.11.0 ([dc6282a](https://github.com/marian13/convenient_service/commit/dc6282a7a09e5194c395b2399bd418a0e4d15de9))
+
 ## [0.10.1](https://github.com/marian13/convenient_service/compare/v0.10.0...v0.10.1) (2023-03-02)
 
 
