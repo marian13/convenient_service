@@ -22,6 +22,16 @@ module ConvenientService
         ::Class.new do
           include ::ConvenientService::Configs::Standard
 
+          ##
+          # IMPORTANT:
+          #   - `CanHaveMethodSteps` is disabled in the Standard config since it causes race conditions in combination with `CanHaveStubbedResult`.
+          #   - It will be reenabled after the introduction of thread-safety specs.
+          #   - Do not use it in production yet.
+          #
+          middlewares :step, scope: :class do
+            use ConvenientService::Plugins::Service::CanHaveMethodSteps::Middleware
+          end
+
           def result
             success
           end
@@ -60,6 +70,16 @@ module ConvenientService
         ::Class.new do
           include ::ConvenientService::Configs::Standard
 
+          ##
+          # IMPORTANT:
+          #   - `CanHaveMethodSteps` is disabled in the Standard config since it causes race conditions in combination with `CanHaveStubbedResult`.
+          #   - It will be reenabled after the introduction of thread-safety specs.
+          #   - Do not use it in production yet.
+          #
+          middlewares :step, scope: :class do
+            use ConvenientService::Plugins::Service::CanHaveMethodSteps::Middleware
+          end
+
           def result
             failure(data)
           end
@@ -87,6 +107,16 @@ module ConvenientService
       def create_service_with_error_result
         ::Class.new do
           include ::ConvenientService::Configs::Standard
+
+          ##
+          # IMPORTANT:
+          #   - `CanHaveMethodSteps` is disabled in the Standard config since it causes race conditions in combination with `CanHaveStubbedResult`.
+          #   - It will be reenabled after the introduction of thread-safety specs.
+          #   - Do not use it in production yet.
+          #
+          middlewares :step, scope: :class do
+            use ConvenientService::Plugins::Service::CanHaveMethodSteps::Middleware
+          end
 
           def result
             error(message)
@@ -164,6 +194,16 @@ module ConvenientService
         ::Class.new.tap do |klass|
           klass.class_exec(steps: steps) do
             include ::ConvenientService::Configs::Standard
+
+            ##
+            # IMPORTANT:
+            #   - `CanHaveMethodSteps` is disabled in the Standard config since it causes race conditions in combination with `CanHaveStubbedResult`.
+            #   - It will be reenabled after the introduction of thread-safety specs.
+            #   - Do not use it in production yet.
+            #
+            middlewares :step, scope: :class do
+              use ConvenientService::Plugins::Service::CanHaveMethodSteps::Middleware
+            end
 
             steps.each do |step_name|
               case step_name
