@@ -7,6 +7,19 @@ module ConvenientService
         module Concern
           include Support::Concern
 
+          included do |service_class|
+            service_class.extend ClassMethods
+
+            ##
+            # IMPORTANT:
+            #   - Initializes `stubbed_results` during the `include Concern` process.
+            #   - Tries to enforce thread-safety in such a way.
+            #   - https://github.com/ruby/spec/blob/master/core/module/include_spec.rb
+            #   - https://github.com/ruby/ruby/blob/master/class.c
+            #
+            service_class.stubbed_results
+          end
+
           class_methods do
             ##
             # @return [ConvenientService::Support::Cache]
@@ -17,16 +30,8 @@ module ConvenientService
             #   - https://github.com/rspec/rspec-core/blob/v3.12.0/lib/rspec/core.rb#L122
             #   - https://relishapp.com/rspec/rspec-core/docs/metadata/current-example
             #
-            #   TODO: Mutex for thread-safety when parallel steps will be supported.
-            #
             def stubbed_results
-              return Support::Cache.new unless Support::Gems::RSpec.current_example
-
               ##
-              # IMPORTANT: ivar name with class and current thread enforces thread safety since there is no resource to share.
-              #
-              # TODO: Thread safety specs.
-              #
               # NOTE: `self` is a service class in the current context. For example:
               #
               #   before do
@@ -37,9 +42,12 @@ module ConvenientService
               #
               #   # Then `self` is `ConvenientService::Examples::Standard::Gemfile::Services::RunShell`.
               #
-              ivar_name = "@__convenient_service_stubbed_results__#{object_id}__#{Thread.current.object_id}__"
-
-              cache = Utils::Object.instance_variable_fetch(::RSpec.current_example, ivar_name) { Support::Cache.new }
+              cache =
+                if Support::Gems::RSpec.current_example
+                  Utils::Object.instance_variable_fetch(Support::Gems::RSpec.current_example, :@__convenient_service_stubbed_results__) { Support::Cache.new }
+                else
+                  Support::Cache.new
+                end
 
               cache.scope(self)
             end
