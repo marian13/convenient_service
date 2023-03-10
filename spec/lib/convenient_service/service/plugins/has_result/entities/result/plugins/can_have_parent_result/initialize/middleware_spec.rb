@@ -27,10 +27,20 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
       #
       let(:method) { wrap_method(result, :initialize, middlewares: described_class) }
 
-      let(:result) { ConvenientService::Factory.create(:result) }
+      let(:service) do
+        Class.new do
+          include ConvenientService::Configs::Minimal
+
+          def result
+            success
+          end
+        end
+      end
+
+      let(:result) { service.result }
 
       context "when `parent` is NOT passed" do
-        let(:attributes) { ConvenientService::Factory.create(:result_attributes) }
+        let(:attributes) { result.jsend_attributes.to_h }
 
         specify do
           expect { method_value }
@@ -47,8 +57,8 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
       end
 
       context "when `parent` is passed" do
-        let(:attributes) { ConvenientService::Factory.create(:result_attributes_with_parent, parent: parent) }
-        let(:parent) { ConvenientService::Factory.create(:result_parent) }
+        let(:attributes) { result.jsend_attributes.to_h.merge(parent: parent) }
+        let(:parent) { double }
 
         specify do
           expect { method_value }

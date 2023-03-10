@@ -22,11 +22,22 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Middleware do
 
       subject(:method_value) { method.call }
 
+      ##
+      # TODO: Do not duplicate middleware.
+      #
       let(:method) { wrap_method(service_instance, :result, middlewares: described_class) }
       let(:service_instance) { service_class.new }
 
       context "when service has no steps" do
-        let(:service_class) { ConvenientService::Factory.create(:service_with_success_result) }
+        let(:service_class) do
+          Class.new do
+            include ConvenientService::Configs::Standard
+
+            def result
+              success
+            end
+          end
+        end
 
         it "calls super" do
           ##
@@ -37,10 +48,41 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Middleware do
       end
 
       context "when intermediate step is NOT successful" do
-        let(:first_step) { ConvenientService::Factory.create(:service_with_not_success_result) }
-        let(:second_step) { ConvenientService::Factory.create(:service_with_success_result) }
+        let(:first_step) do
+          Class.new do
+            include ConvenientService::Configs::Standard
 
-        let(:service_class) { ConvenientService::Factory.create(:service, steps: [first_step, second_step]) }
+            def result
+              error
+            end
+          end
+        end
+
+        let(:second_step) do
+          Class.new do
+            include ConvenientService::Configs::Standard
+
+            def result
+              success
+            end
+          end
+        end
+
+        let(:service_class) do
+          Class.new.tap do |klass|
+            klass.class_exec(first_step, second_step) do |first_step, second_step|
+              include ConvenientService::Configs::Standard
+
+              step first_step
+
+              step second_step
+
+              def result
+                success
+              end
+            end
+          end
+        end
 
         it "returns result of intermediate step" do
           expect(method_value).to eq(ConvenientService::Utils::Array.find_last(service_instance.steps, &:completed?).result)
@@ -89,10 +131,41 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Middleware do
       end
 
       context "when all steps are successful" do
-        let(:first_step) { ConvenientService::Factory.create(:service_with_success_result) }
-        let(:second_step) { ConvenientService::Factory.create(:service_with_success_result) }
+        let(:first_step) do
+          Class.new do
+            include ConvenientService::Configs::Standard
 
-        let(:service_class) { ConvenientService::Factory.create(:service, steps: [first_step, second_step]) }
+            def result
+              success
+            end
+          end
+        end
+
+        let(:second_step) do
+          Class.new do
+            include ConvenientService::Configs::Standard
+
+            def result
+              success
+            end
+          end
+        end
+
+        let(:service_class) do
+          Class.new.tap do |klass|
+            klass.class_exec(first_step, second_step) do |first_step, second_step|
+              include ConvenientService::Configs::Standard
+
+              step first_step
+
+              step second_step
+
+              def result
+                success
+              end
+            end
+          end
+        end
 
         it "returns result of last step" do
           expect(method_value).to eq(service_instance.steps.last.result)

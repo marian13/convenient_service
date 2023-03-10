@@ -99,6 +99,14 @@ module ConvenientService
       end
 
       ##
+      # @return [Boolean]
+      # @note Expected to be called from `spec_helper.rb`.
+      #
+      def require_test_tools
+        require "faker"
+      end
+
+      ##
       # Loads RSpec extensions like `be_success` matcher, `stub_service` helper, etc.
       #
       # @return [Boolean]
@@ -112,18 +120,6 @@ module ConvenientService
         require "tempfile"
 
         require_relative "rspec"
-      end
-
-      ##
-      # Loads test factory.
-      #
-      # @return [Boolean]
-      # @note Expected to be called from `spec_helper.rb`.
-      #
-      def require_factory
-        require "faker"
-
-        require_relative "factory"
       end
 
       ##
