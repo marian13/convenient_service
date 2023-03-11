@@ -6,15 +6,23 @@ module ConvenientService
       ##
       # @see ConvenientService::Core::Entities::Config#concerns
       #
+      # @internal
+      #   NOTE: The instance variable is named `@__convenient_service_config__` intentionally in order to decrease the possibility of accidental redefinition by the end-user.
+      #   NOTE: An `attr_reader` for `@__convenient_service_config__` is NOT created intentionally in order to NOT pollute the end-user class interface.
+      #
       def concerns(...)
-        (@__config__ ||= Entities::Config.new(klass: self)).concerns(...)
+        (@__convenient_service_config__ ||= Entities::Config.new(klass: self)).concerns(...)
       end
 
       ##
       # @see ConvenientService::Core::Entities::Config#middlewares
       #
+      # @internal
+      #   NOTE: The instance variable is named `@__convenient_service_config__` intentionally in order to decrease the possibility of accidental redefinition by the end-user.
+      #   NOTE: An `attr_reader` for `@__convenient_service_config__` is NOT created intentionally in order to NOT pollute the end-user class interface.
+      #
       def middlewares(...)
-        (@__config__ ||= Entities::Config.new(klass: self)).middlewares(...)
+        (@__convenient_service_config__ ||= Entities::Config.new(klass: self)).middlewares(...)
       end
 
       ##
@@ -25,8 +33,12 @@ module ConvenientService
       #
       # @see https://ruby-doc.org/core-3.1.2/Kernel.html#method-i-require
       #
+      # @internal
+      #   NOTE: The instance variable is named `@__convenient_service_config__` intentionally in order to decrease the possibility of accidental redefinition by the end-user.
+      #   NOTE: An `attr_reader` for `@__convenient_service_config__` is NOT created intentionally in order to NOT pollute the end-user class interface.
+      #
       def commit_config!
-        (@__config__ ||= Entities::Config.new(klass: self)).commit!
+        (@__convenient_service_config__ ||= Entities::Config.new(klass: self)).commit!
           .tap { ConvenientService.logger.debug { "[Core] Committed config for `#{self}` | Triggered by `.commit_config!`" } }
       end
 
