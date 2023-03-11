@@ -47,9 +47,9 @@ RSpec.describe ConvenientService::Core::InstanceMethods do
     # TODO: `it "logs debug message"`.
     #
 
-    it "calls super" do
+    it "calls `send`" do
       ##
-      # NOTE: If `[:foo, args, kwargs, block&.source_location]` is returned, then `super` was called. See concern above.
+      # NOTE: If `[:foo, args, kwargs, block&.source_location]` is returned, then `send` was called. See concern above.
       #
       expect(service_instance.foo(*args, **kwargs, &block)).to eq([:foo, args, kwargs, block&.source_location])
     end
