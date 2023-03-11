@@ -143,15 +143,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::DryService::Config do
           let(:step_class_middlewares) do
             [
               ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-
-              ##
-              # IMPORTANT:
-              #   - `CanHaveMethodSteps` is disabled in the Standard config since it causes race conditions in combination with `CanHaveStubbedResult`.
-              #   - It will be reenabled after the introduction of thread-safety specs.
-              #   - Do not use it in production yet.
-              #
-              # ConvenientService::Service::Plugins::CanHaveMethodSteps::Middleware,
-
+              ConvenientService::Service::Plugins::CanHaveMethodSteps::Middleware,
               ConvenientService::Service::Plugins::CanHaveResultStep::Middleware
             ]
           end

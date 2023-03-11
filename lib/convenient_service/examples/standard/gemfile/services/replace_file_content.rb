@@ -8,16 +8,6 @@ module ConvenientService
           class ReplaceFileContent
             include ConvenientService::Standard::Config
 
-            ##
-            # IMPORTANT:
-            #   - `CanHaveMethodSteps` is disabled in the Standard config since it causes race conditions in combination with `CanHaveStubbedResult`.
-            #   - It will be reenabled after the introduction of thread-safety specs.
-            #   - Do not use it in production yet.
-            #
-            middlewares :step, scope: :class do
-              use ConvenientService::Plugins::Service::CanHaveMethodSteps::Middleware
-            end
-
             attr_reader :path, :content
 
             step :validate_path, in: :path
