@@ -54,6 +54,7 @@ module ConvenientService
           #   - https://ruby-doc.org/core-2.7.0/Thread.html#method-i-value
           #
           #   TODO: Thread pool? Why?
+          #   - https://github.com/toy/in_threads/blob/master/lib/in_threads.rb
           #
           def call
             threads = []
