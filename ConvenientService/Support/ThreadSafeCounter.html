@@ -244,6 +244,52 @@
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#bdecrement-instance_method" title="#bdecrement (instance method)">#<strong>bdecrement</strong>(n = 1)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p><code>bdecrement</code> means boolean decrement.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#bincrement-instance_method" title="#bincrement (instance method)">#<strong>bincrement</strong>(n = 1)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p><code>bincrement</code> means boolean increment.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#decrement-instance_method" title="#decrement (instance method)">#<strong>decrement</strong>(n = 1)  &#x21d2; Integer </a>
     
 
@@ -665,7 +711,173 @@
 
     
       <div class="method_details first">
-  <h3 class="signature first" id="decrement-instance_method">
+  <h3 class="signature first" id="bdecrement-instance_method">
+  
+    #<strong>bdecrement</strong>(n = 1)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p><code>bdecrement</code> means boolean decrement. Works exactly in the same way as <code>decrement</code> except returns a boolean value.
+If decremented successfully then returns <code>true</code>, otherwise - returns <code>false</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>n</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>1</tt>)</em>
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+186
+187
+188
+189
+190
+191
+192
+193
+194</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/thread_safe_counter.rb', line 186</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_bdecrement'>bdecrement</span><span class='lparen'>(</span><span class='id identifier rubyid_n'>n</span> <span class='op'>=</span> <span class='int'>1</span><span class='rparen'>)</span>
+  <span class='ivar'>@lock</span><span class='period'>.</span><span class='id identifier rubyid_synchronize'>synchronize</span> <span class='kw'>do</span>
+    <span class='kw'>break</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='ivar'>@current_value</span> <span class='op'>-</span> <span class='id identifier rubyid_n'>n</span> <span class='op'>&lt;</span> <span class='ivar'>@min_value</span>
+
+    <span class='ivar'>@current_value</span> <span class='op'>-=</span> <span class='id identifier rubyid_n'>n</span>
+
+    <span class='kw'>true</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="bincrement-instance_method">
+  
+    #<strong>bincrement</strong>(n = 1)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p><code>bincrement</code> means boolean increment. Works exactly in the same way as <code>increment</code> except returns a boolean value.
+If incremented successfully then returns <code>true</code>, otherwise - returns <code>false</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>n</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>1</tt>)</em>
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+135
+136
+137
+138
+139
+140
+141
+142
+143</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/thread_safe_counter.rb', line 135</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_bincrement'>bincrement</span><span class='lparen'>(</span><span class='id identifier rubyid_n'>n</span> <span class='op'>=</span> <span class='int'>1</span><span class='rparen'>)</span>
+  <span class='ivar'>@lock</span><span class='period'>.</span><span class='id identifier rubyid_synchronize'>synchronize</span> <span class='kw'>do</span>
+    <span class='kw'>break</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='ivar'>@current_value</span> <span class='op'>+</span> <span class='id identifier rubyid_n'>n</span> <span class='op'>&gt;</span> <span class='ivar'>@max_value</span>
+
+    <span class='ivar'>@current_value</span> <span class='op'>+=</span> <span class='id identifier rubyid_n'>n</span>
+
+    <span class='kw'>true</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="decrement-instance_method">
   
     #<strong>decrement</strong>(n = 1)  &#x21d2; <tt>Integer</tt> 
   
@@ -718,16 +930,16 @@
       <pre class="lines">
 
 
-132
-133
-134
-135
-136
-137
-138</pre>
+152
+153
+154
+155
+156
+157
+158</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/thread_safe_counter.rb', line 132</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/thread_safe_counter.rb', line 152</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_decrement'>decrement</span><span class='lparen'>(</span><span class='id identifier rubyid_n'>n</span> <span class='op'>=</span> <span class='int'>1</span><span class='rparen'>)</span>
   <span class='ivar'>@lock</span><span class='period'>.</span><span class='id identifier rubyid_synchronize'>synchronize</span> <span class='kw'>do</span>
@@ -808,16 +1020,16 @@
       <pre class="lines">
 
 
-148
-149
-150
-151
-152
-153
-154</pre>
+168
+169
+170
+171
+172
+173
+174</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/thread_safe_counter.rb', line 148</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/thread_safe_counter.rb', line 168</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_decrement!'>decrement!</span><span class='lparen'>(</span><span class='id identifier rubyid_n'>n</span> <span class='op'>=</span> <span class='int'>1</span><span class='rparen'>)</span>
   <span class='ivar'>@lock</span><span class='period'>.</span><span class='id identifier rubyid_synchronize'>synchronize</span> <span class='kw'>do</span>
@@ -1013,12 +1225,12 @@
       <pre class="lines">
 
 
-160
-161
-162</pre>
+200
+201
+202</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/thread_safe_counter.rb', line 160</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/thread_safe_counter.rb', line 200</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_reset'>reset</span>
   <span class='ivar'>@lock</span><span class='period'>.</span><span class='id identifier rubyid_synchronize'>synchronize</span> <span class='lbrace'>{</span> <span class='ivar'>@current_value</span> <span class='op'>=</span> <span class='ivar'>@initial_value</span> <span class='rbrace'>}</span>
@@ -1033,7 +1245,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Mar 12 13:47:18 2023 by
+  Generated on Sun Mar 12 14:08:19 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.3).
 </div>
