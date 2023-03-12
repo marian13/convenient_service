@@ -3,7 +3,7 @@
 #
 # NOTE: Linted by hadolint.
 #
-#   docker run --rm -i ghcr.io/hadolint/hadolint < docker/3.0/Dockerfile
+#   docker run --rm -i ghcr.io/hadolint/hadolint < docker/2.7/Dockerfile
 #
 # NOTE: A command to build image.
 #
