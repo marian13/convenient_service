@@ -93,25 +93,47 @@ module ConvenientService
 
       ##
       # @param n [Integer]
-      # @param exception []
+      # @return [Integer]
+      #
+      # @internal
+      #   NOTE: Instance variables are accessed directly to release the lock faster.
+      #
+      def increment(n = 1)
+        @lock.synchronize do
+          break @current_value if @current_value + n > @max_value
+
+          @current_value += n
+        end
+      end
+
+      ##
+      # @param n [Integer]
       # @return [Integer]
       # @raise [ConvenientService::Support::ThreadSafeCounter::Errors::ValueAfterIncrementIsGreaterThanMaxValue]
       #
       # @internal
       #   NOTE: Instance variables are accessed directly to release the lock faster.
       #
-      #   NOTE: `exception` option is inspired by `Kernel#Integer`.
-      #   - https://ruby-doc.org/core-2.7.0/Kernel.html#method-i-Integer
-      #
-      def increment!(n = 1, exception: true)
+      def increment!(n = 1)
         @lock.synchronize do
-          if @current_value + n > @max_value
-            break unless exception
-
-            raise Errors::ValueAfterIncrementIsGreaterThanMaxValue.new(n: n, current_value: @current_value, max_value: @max_value)
-          end
+          raise Errors::ValueAfterIncrementIsGreaterThanMaxValue.new(n: n, current_value: @current_value, max_value: @max_value) if @current_value + n > @max_value
 
           @current_value += n
+        end
+      end
+
+      ##
+      # @param n [Integer]
+      # @return [Integer]
+      #
+      # @internal
+      #   NOTE: Instance variables are accessed directly to release the lock faster.
+      #
+      def decrement(n = 1)
+        @lock.synchronize do
+          break @current_value if @current_value - n < @min_value
+
+          @current_value -= n
         end
       end
 
@@ -123,16 +145,9 @@ module ConvenientService
       # @internal
       #   NOTE: Instance variables are accessed directly to release the lock faster.
       #
-      #   NOTE: `exception` option is inspired by `Kernel#Integer`.
-      #   - https://ruby-doc.org/core-2.7.0/Kernel.html#method-i-Integer
-      #
-      def decrement!(n = 1, exception: true)
+      def decrement!(n = 1)
         @lock.synchronize do
-          if @current_value - n < @min_value
-            break unless exception
-
-            raise Errors::ValueAfterDecrementIsLowerThanMinValue.new(n: n, current_value: @current_value, min_value: @min_value)
-          end
+          raise Errors::ValueAfterDecrementIsLowerThanMinValue.new(n: n, current_value: @current_value, min_value: @min_value) if @current_value - n < @min_value
 
           @current_value -= n
         end
@@ -142,7 +157,7 @@ module ConvenientService
       # @internal
       #   NOTE: Instance variables are accessed directly to release the lock faster.
       #
-      def reset!
+      def reset
         @lock.synchronize { @current_value = @initial_value }
       end
     end
