@@ -244,7 +244,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#decrement!-instance_method" title="#decrement! (instance method)">#<strong>decrement!</strong>(n = 1, exception: true)  &#x21d2; Integer </a>
+      <a href="#decrement-instance_method" title="#decrement (instance method)">#<strong>decrement</strong>(n = 1)  &#x21d2; Integer </a>
     
 
     
@@ -266,7 +266,51 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#increment!-instance_method" title="#increment! (instance method)">#<strong>increment!</strong>(n = 1, exception: true)  &#x21d2; Integer </a>
+      <a href="#decrement!-instance_method" title="#decrement! (instance method)">#<strong>decrement!</strong>(n = 1)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#increment-instance_method" title="#increment (instance method)">#<strong>increment</strong>(n = 1)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#increment!-instance_method" title="#increment! (instance method)">#<strong>increment!</strong>(n = 1)  &#x21d2; Integer </a>
     
 
     
@@ -312,7 +356,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#reset!-instance_method" title="#reset! (instance method)">#<strong>reset!</strong>  &#x21d2; Object </a>
+      <a href="#reset-instance_method" title="#reset (instance method)">#<strong>reset</strong>  &#x21d2; Object </a>
     
 
     
@@ -621,9 +665,86 @@
 
     
       <div class="method_details first">
-  <h3 class="signature first" id="decrement!-instance_method">
+  <h3 class="signature first" id="decrement-instance_method">
   
-    #<strong>decrement!</strong>(n = 1, exception: true)  &#x21d2; <tt>Integer</tt> 
+    #<strong>decrement</strong>(n = 1)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>n</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>1</tt>)</em>
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+132
+133
+134
+135
+136
+137
+138</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/thread_safe_counter.rb', line 132</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_decrement'>decrement</span><span class='lparen'>(</span><span class='id identifier rubyid_n'>n</span> <span class='op'>=</span> <span class='int'>1</span><span class='rparen'>)</span>
+  <span class='ivar'>@lock</span><span class='period'>.</span><span class='id identifier rubyid_synchronize'>synchronize</span> <span class='kw'>do</span>
+    <span class='kw'>break</span> <span class='ivar'>@current_value</span> <span class='kw'>if</span> <span class='ivar'>@current_value</span> <span class='op'>-</span> <span class='id identifier rubyid_n'>n</span> <span class='op'>&lt;</span> <span class='ivar'>@min_value</span>
+
+    <span class='ivar'>@current_value</span> <span class='op'>-=</span> <span class='id identifier rubyid_n'>n</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="decrement!-instance_method">
+  
+    #<strong>decrement!</strong>(n = 1)  &#x21d2; <tt>Integer</tt> 
   
 
   
@@ -687,28 +808,20 @@
       <pre class="lines">
 
 
-129
-130
-131
-132
-133
-134
-135
-136
-137
-138
-139</pre>
+148
+149
+150
+151
+152
+153
+154</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/thread_safe_counter.rb', line 129</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/thread_safe_counter.rb', line 148</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_decrement!'>decrement!</span><span class='lparen'>(</span><span class='id identifier rubyid_n'>n</span> <span class='op'>=</span> <span class='int'>1</span><span class='comma'>,</span> <span class='label'>exception:</span> <span class='kw'>true</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_decrement!'>decrement!</span><span class='lparen'>(</span><span class='id identifier rubyid_n'>n</span> <span class='op'>=</span> <span class='int'>1</span><span class='rparen'>)</span>
   <span class='ivar'>@lock</span><span class='period'>.</span><span class='id identifier rubyid_synchronize'>synchronize</span> <span class='kw'>do</span>
-    <span class='kw'>if</span> <span class='ivar'>@current_value</span> <span class='op'>-</span> <span class='id identifier rubyid_n'>n</span> <span class='op'>&lt;</span> <span class='ivar'>@min_value</span>
-      <span class='kw'>break</span> <span class='kw'>unless</span> <span class='id identifier rubyid_exception'>exception</span>
-
-      <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="ThreadSafeCounter/Errors.html" title="ConvenientService::Support::ThreadSafeCounter::Errors (module)">Errors</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="ThreadSafeCounter/Errors/ValueAfterDecrementIsLowerThanMinValue.html" title="ConvenientService::Support::ThreadSafeCounter::Errors::ValueAfterDecrementIsLowerThanMinValue (class)">ValueAfterDecrementIsLowerThanMinValue</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="ThreadSafeCounter/Errors/ValueAfterDecrementIsLowerThanMinValue.html#initialize-instance_method" title="ConvenientService::Support::ThreadSafeCounter::Errors::ValueAfterDecrementIsLowerThanMinValue#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>n:</span> <span class='id identifier rubyid_n'>n</span><span class='comma'>,</span> <span class='label'>current_value:</span> <span class='ivar'>@current_value</span><span class='comma'>,</span> <span class='label'>min_value:</span> <span class='ivar'>@min_value</span><span class='rparen'>)</span>
-    <span class='kw'>end</span>
+    <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="ThreadSafeCounter/Errors.html" title="ConvenientService::Support::ThreadSafeCounter::Errors (module)">Errors</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="ThreadSafeCounter/Errors/ValueAfterDecrementIsLowerThanMinValue.html" title="ConvenientService::Support::ThreadSafeCounter::Errors::ValueAfterDecrementIsLowerThanMinValue (class)">ValueAfterDecrementIsLowerThanMinValue</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="ThreadSafeCounter/Errors/ValueAfterDecrementIsLowerThanMinValue.html#initialize-instance_method" title="ConvenientService::Support::ThreadSafeCounter::Errors::ValueAfterDecrementIsLowerThanMinValue#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>n:</span> <span class='id identifier rubyid_n'>n</span><span class='comma'>,</span> <span class='label'>current_value:</span> <span class='ivar'>@current_value</span><span class='comma'>,</span> <span class='label'>min_value:</span> <span class='ivar'>@min_value</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='ivar'>@current_value</span> <span class='op'>-</span> <span class='id identifier rubyid_n'>n</span> <span class='op'>&lt;</span> <span class='ivar'>@min_value</span>
 
     <span class='ivar'>@current_value</span> <span class='op'>-=</span> <span class='id identifier rubyid_n'>n</span>
   <span class='kw'>end</span>
@@ -719,9 +832,9 @@
 </div>
     
       <div class="method_details ">
-  <h3 class="signature " id="increment!-instance_method">
+  <h3 class="signature " id="increment-instance_method">
   
-    #<strong>increment!</strong>(n = 1, exception: true)  &#x21d2; <tt>Integer</tt> 
+    #<strong>increment</strong>(n = 1)  &#x21d2; <tt>Integer</tt> 
   
 
   
@@ -750,20 +863,80 @@
       
     </li>
   
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
     <li>
       
-        <span class='name'>exception</span>
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
       
       
-        <span class='type'></span>
       
-      
-        <em class="default">(defaults to: <tt>true</tt>)</em>
-      
-      
-        &mdash;
-        <div class='inline'><p>[]</p>
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+101
+102
+103
+104
+105
+106
+107</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/thread_safe_counter.rb', line 101</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_increment'>increment</span><span class='lparen'>(</span><span class='id identifier rubyid_n'>n</span> <span class='op'>=</span> <span class='int'>1</span><span class='rparen'>)</span>
+  <span class='ivar'>@lock</span><span class='period'>.</span><span class='id identifier rubyid_synchronize'>synchronize</span> <span class='kw'>do</span>
+    <span class='kw'>break</span> <span class='ivar'>@current_value</span> <span class='kw'>if</span> <span class='ivar'>@current_value</span> <span class='op'>+</span> <span class='id identifier rubyid_n'>n</span> <span class='op'>&gt;</span> <span class='ivar'>@max_value</span>
+
+    <span class='ivar'>@current_value</span> <span class='op'>+=</span> <span class='id identifier rubyid_n'>n</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
 </div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="increment!-instance_method">
+  
+    #<strong>increment!</strong>(n = 1)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>n</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>1</tt>)</em>
+      
       
     </li>
   
@@ -802,28 +975,20 @@
       <pre class="lines">
 
 
-106
-107
-108
-109
-110
-111
-112
-113
-114
-115
-116</pre>
+117
+118
+119
+120
+121
+122
+123</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/thread_safe_counter.rb', line 106</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/thread_safe_counter.rb', line 117</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_increment!'>increment!</span><span class='lparen'>(</span><span class='id identifier rubyid_n'>n</span> <span class='op'>=</span> <span class='int'>1</span><span class='comma'>,</span> <span class='label'>exception:</span> <span class='kw'>true</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_increment!'>increment!</span><span class='lparen'>(</span><span class='id identifier rubyid_n'>n</span> <span class='op'>=</span> <span class='int'>1</span><span class='rparen'>)</span>
   <span class='ivar'>@lock</span><span class='period'>.</span><span class='id identifier rubyid_synchronize'>synchronize</span> <span class='kw'>do</span>
-    <span class='kw'>if</span> <span class='ivar'>@current_value</span> <span class='op'>+</span> <span class='id identifier rubyid_n'>n</span> <span class='op'>&gt;</span> <span class='ivar'>@max_value</span>
-      <span class='kw'>break</span> <span class='kw'>unless</span> <span class='id identifier rubyid_exception'>exception</span>
-
-      <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="ThreadSafeCounter/Errors.html" title="ConvenientService::Support::ThreadSafeCounter::Errors (module)">Errors</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="ThreadSafeCounter/Errors/ValueAfterIncrementIsGreaterThanMaxValue.html" title="ConvenientService::Support::ThreadSafeCounter::Errors::ValueAfterIncrementIsGreaterThanMaxValue (class)">ValueAfterIncrementIsGreaterThanMaxValue</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="ThreadSafeCounter/Errors/ValueAfterIncrementIsGreaterThanMaxValue.html#initialize-instance_method" title="ConvenientService::Support::ThreadSafeCounter::Errors::ValueAfterIncrementIsGreaterThanMaxValue#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>n:</span> <span class='id identifier rubyid_n'>n</span><span class='comma'>,</span> <span class='label'>current_value:</span> <span class='ivar'>@current_value</span><span class='comma'>,</span> <span class='label'>max_value:</span> <span class='ivar'>@max_value</span><span class='rparen'>)</span>
-    <span class='kw'>end</span>
+    <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="ThreadSafeCounter/Errors.html" title="ConvenientService::Support::ThreadSafeCounter::Errors (module)">Errors</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="ThreadSafeCounter/Errors/ValueAfterIncrementIsGreaterThanMaxValue.html" title="ConvenientService::Support::ThreadSafeCounter::Errors::ValueAfterIncrementIsGreaterThanMaxValue (class)">ValueAfterIncrementIsGreaterThanMaxValue</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="ThreadSafeCounter/Errors/ValueAfterIncrementIsGreaterThanMaxValue.html#initialize-instance_method" title="ConvenientService::Support::ThreadSafeCounter::Errors::ValueAfterIncrementIsGreaterThanMaxValue#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>n:</span> <span class='id identifier rubyid_n'>n</span><span class='comma'>,</span> <span class='label'>current_value:</span> <span class='ivar'>@current_value</span><span class='comma'>,</span> <span class='label'>max_value:</span> <span class='ivar'>@max_value</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='ivar'>@current_value</span> <span class='op'>+</span> <span class='id identifier rubyid_n'>n</span> <span class='op'>&gt;</span> <span class='ivar'>@max_value</span>
 
     <span class='ivar'>@current_value</span> <span class='op'>+=</span> <span class='id identifier rubyid_n'>n</span>
   <span class='kw'>end</span>
@@ -834,9 +999,9 @@
 </div>
     
       <div class="method_details ">
-  <h3 class="signature " id="reset!-instance_method">
+  <h3 class="signature " id="reset-instance_method">
   
-    #<strong>reset!</strong>  &#x21d2; <tt>Object</tt> 
+    #<strong>reset</strong>  &#x21d2; <tt>Object</tt> 
   
 
   
@@ -848,14 +1013,14 @@
       <pre class="lines">
 
 
-145
-146
-147</pre>
+160
+161
+162</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/thread_safe_counter.rb', line 145</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/thread_safe_counter.rb', line 160</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_reset!'>reset!</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_reset'>reset</span>
   <span class='ivar'>@lock</span><span class='period'>.</span><span class='id identifier rubyid_synchronize'>synchronize</span> <span class='lbrace'>{</span> <span class='ivar'>@current_value</span> <span class='op'>=</span> <span class='ivar'>@initial_value</span> <span class='rbrace'>}</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -868,7 +1033,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Mar 11 22:54:20 2023 by
+  Generated on Sun Mar 12 13:47:18 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.3).
 </div>
