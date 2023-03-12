@@ -123,6 +123,26 @@ module ConvenientService
       end
 
       ##
+      # `bincrement` means boolean increment. Works exactly in the same way as `increment` except returns a boolean value.
+      # If incremented successfully then returns `true`, otherwise - returns `false`.
+      #
+      # @param n [Integer]
+      # @return [Boolean]
+      #
+      # @internal
+      #   NOTE: Instance variables are accessed directly to release the lock faster.
+      #
+      def bincrement(n = 1)
+        @lock.synchronize do
+          break false if @current_value + n > @max_value
+
+          @current_value += n
+
+          true
+        end
+      end
+
+      ##
       # @param n [Integer]
       # @return [Integer]
       #
@@ -150,6 +170,26 @@ module ConvenientService
           raise Errors::ValueAfterDecrementIsLowerThanMinValue.new(n: n, current_value: @current_value, min_value: @min_value) if @current_value - n < @min_value
 
           @current_value -= n
+        end
+      end
+
+      ##
+      # `bdecrement` means boolean decrement. Works exactly in the same way as `decrement` except returns a boolean value.
+      # If decremented successfully then returns `true`, otherwise - returns `false`.
+      #
+      # @param n [Integer]
+      # @return [Boolean]
+      #
+      # @internal
+      #   NOTE: Instance variables are accessed directly to release the lock faster.
+      #
+      def bdecrement(n = 1)
+        @lock.synchronize do
+          break false if @current_value - n < @min_value
+
+          @current_value -= n
+
+          true
         end
       end
 
