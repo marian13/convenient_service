@@ -98,9 +98,22 @@ module ConvenientService
       # @internal
       #   NOTE: Instance variables are accessed directly to release the lock faster.
       #
+      #   NOTE: `return` exits from the enclosing method. `break` from the iterator method. `next` from the block.
+      #   - https://github.com/ruby/spec/blob/master/language/return_spec.rb
+      #   - https://github.com/ruby/spec/blob/master/language/break_spec.rb
+      #   - https://github.com/ruby/spec/blob/master/language/next_spec.rb
+      #   - https://stackoverflow.com/a/1402764/12201472
+      #
+      #   IMPORTANT: The lock is always properly released since it uses ensure under the hood.
+      #   - https://github.com/ruby/ruby/blob/v2_7_0/thread_sync.c#L525
+      #
+      #   NOTE: The name is inspired by Redis and Concurrent Ruby.
+      #   - https://redis.io/commands/incr/
+      #   - https://ruby-concurrency.github.io/concurrent-ruby/master/Concurrent/AtomicFixnum.html#increment-instance_method
+      #
       def increment(n = 1)
         @lock.synchronize do
-          break @current_value if @current_value + n > @max_value
+          next @current_value if @current_value + n > @max_value
 
           @current_value += n
         end
@@ -113,6 +126,13 @@ module ConvenientService
       #
       # @internal
       #   NOTE: Instance variables are accessed directly to release the lock faster.
+      #
+      #   IMPORTANT: The lock is always properly released since it uses ensure under the hood.
+      #   - https://github.com/ruby/ruby/blob/v2_7_0/thread_sync.c#L525
+      #
+      #   NOTE: The name is inspired by Rails.
+      #   - https://api.rubyonrails.org/classes/ActiveRecord/Persistence.html#method-i-save
+      #   - https://api.rubyonrails.org/classes/ActiveRecord/Persistence.html#method-i-save-21
       #
       def increment!(n = 1)
         @lock.synchronize do
@@ -132,9 +152,18 @@ module ConvenientService
       # @internal
       #   NOTE: Instance variables are accessed directly to release the lock faster.
       #
+      #   NOTE: `return` exits from the enclosing method. `break` from the iterator method. `next` from the block.
+      #   - https://github.com/ruby/spec/blob/master/language/return_spec.rb
+      #   - https://github.com/ruby/spec/blob/master/language/break_spec.rb
+      #   - https://github.com/ruby/spec/blob/master/language/next_spec.rb
+      #   - https://stackoverflow.com/a/1402764/12201472
+      #
+      #   IMPORTANT: The lock is always properly released since it uses ensure under the hood.
+      #   - https://github.com/ruby/ruby/blob/v2_7_0/thread_sync.c#L525
+      #
       def bincrement(n = 1)
         @lock.synchronize do
-          break false if @current_value + n > @max_value
+          next false if @current_value + n > @max_value
 
           @current_value += n
 
@@ -149,9 +178,22 @@ module ConvenientService
       # @internal
       #   NOTE: Instance variables are accessed directly to release the lock faster.
       #
+      #   NOTE: `return` exits from the enclosing method. `break` from the iterator method. `next` from the block.
+      #   - https://github.com/ruby/spec/blob/master/language/return_spec.rb
+      #   - https://github.com/ruby/spec/blob/master/language/break_spec.rb
+      #   - https://github.com/ruby/spec/blob/master/language/next_spec.rb
+      #   - https://stackoverflow.com/a/1402764/12201472
+      #
+      #   IMPORTANT: The lock is always properly released since it uses ensure under the hood.
+      #   - https://github.com/ruby/ruby/blob/v2_7_0/thread_sync.c#L525
+      #
+      #   NOTE: The name is inspired by Redis and Concurrent Ruby.
+      #   - https://redis.io/commands/decr/
+      #   - https://ruby-concurrency.github.io/concurrent-ruby/master/Concurrent/AtomicFixnum.html#decrement-instance_method
+      #
       def decrement(n = 1)
         @lock.synchronize do
-          break @current_value if @current_value - n < @min_value
+          next @current_value if @current_value - n < @min_value
 
           @current_value -= n
         end
@@ -164,6 +206,13 @@ module ConvenientService
       #
       # @internal
       #   NOTE: Instance variables are accessed directly to release the lock faster.
+      #
+      #   IMPORTANT: The lock is always properly released since it uses ensure under the hood.
+      #   - https://github.com/ruby/ruby/blob/v2_7_0/thread_sync.c#L525
+      #
+      #   NOTE: The name is inspired by Rails.
+      #   - https://api.rubyonrails.org/classes/ActiveRecord/Persistence.html#method-i-save
+      #   - https://api.rubyonrails.org/classes/ActiveRecord/Persistence.html#method-i-save-21
       #
       def decrement!(n = 1)
         @lock.synchronize do
@@ -183,9 +232,18 @@ module ConvenientService
       # @internal
       #   NOTE: Instance variables are accessed directly to release the lock faster.
       #
+      #   NOTE: `return` exits from the enclosing method. `break` from the iterator method. `next` from the block.
+      #   - https://github.com/ruby/spec/blob/master/language/return_spec.rb
+      #   - https://github.com/ruby/spec/blob/master/language/break_spec.rb
+      #   - https://github.com/ruby/spec/blob/master/language/next_spec.rb
+      #   - https://stackoverflow.com/a/1402764/12201472
+      #
+      #   IMPORTANT: The lock is always properly released since it uses ensure under the hood.
+      #   - https://github.com/ruby/ruby/blob/v2_7_0/thread_sync.c#L525
+      #
       def bdecrement(n = 1)
         @lock.synchronize do
-          break false if @current_value - n < @min_value
+          next false if @current_value - n < @min_value
 
           @current_value -= n
 
