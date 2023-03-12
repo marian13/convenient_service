@@ -59,6 +59,10 @@ module ConvenientService
           def call
             threads = []
 
+            ##
+            # NOTE: CRuby has GIL, so the specs are almost always successful for simple cases.
+            # NOTE: JRuby or TruffleRuby use real threads, so NOT thread-safe code starts to fail even for the simplest cases.
+            #
             n.times { threads << ::Thread.new(*args, &block) }
 
             threads.map(&:value)
