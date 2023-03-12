@@ -29,10 +29,10 @@ module ConvenientService
       #
       # rubocop:disable Style/GlobalStdStream
       def new
-        super(STDOUT).tap do |logger|
-          logger.level = ENV["CONVENIENT_SERVICE_LOGGER_LEVEL"] || "INFO"
+        super(::STDOUT).tap do |logger|
+          logger.level = ::ENV["CONVENIENT_SERVICE_LOGGER_LEVEL"] || "INFO"
 
-          logger.formatter = colored_formatter if ENV["CONVENIENT_SERVICE_LOGGER_ENABLE_COLORS"] == "true"
+          logger.formatter = colored_formatter if ::ENV["CONVENIENT_SERVICE_LOGGER_ENABLE_COLORS"] == "true"
         end
       end
       # rubocop:enable Style/GlobalStdStream
