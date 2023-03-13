@@ -67,7 +67,7 @@ module ConvenientService
                 end
               end
 
-              class OutputMethodProc < ConvenientService::Error
+              class OutputMethodProc < ::ConvenientService::Error
                 def initialize(method:, container:)
                   message = <<~TEXT
                     Procs are not allowed for `out` methods.
@@ -77,7 +77,7 @@ module ConvenientService
                 end
               end
 
-              class OutputMethodRawValue < ConvenientService::Error
+              class OutputMethodRawValue < ::ConvenientService::Error
                 def initialize(method:, container:)
                   message = <<~TEXT
                     Raw values are not allowed for `out` methods.
@@ -99,7 +99,7 @@ module ConvenientService
                 end
               end
 
-              class InputMethodReassignment < ConvenientService::Error
+              class InputMethodReassignment < ::ConvenientService::Error
                 def initialize(method:, container:)
                   message = <<~TEXT
                     Reassignments are not allowed for `in` methods.
@@ -109,7 +109,7 @@ module ConvenientService
                 end
               end
 
-              class MethodIsNotInputMethod < ConvenientService::Error
+              class MethodIsNotInputMethod < ::ConvenientService::Error
                 def initialize(method:, container:)
                   message = <<~TEXT
                     Method `#{method.name}` is NOT an `in` method.
@@ -119,7 +119,7 @@ module ConvenientService
                 end
               end
 
-              class MethodIsNotOutputMethod < ConvenientService::Error
+              class MethodIsNotOutputMethod < ::ConvenientService::Error
                 def initialize(method:, container:)
                   message = <<~TEXT
                     Method `#{method.name}` is NOT an `out` method.
@@ -129,7 +129,7 @@ module ConvenientService
                 end
               end
 
-              class NotCompletedStep < ConvenientService::Error
+              class NotCompletedStep < ::ConvenientService::Error
                 def initialize(method_name:, step:)
                   message = <<~TEXT
                     `out` method `#{method_name}` is called before its corresponding step `#{step.printable_service}` is completed.
@@ -141,7 +141,7 @@ module ConvenientService
                 end
               end
 
-              class NotExistingStepResultDataAttribute < ConvenientService::Error
+              class NotExistingStepResultDataAttribute < ::ConvenientService::Error
                 def initialize(key:, step:)
                   message = <<~TEXT
                     Step `#{step.printable_service}` result does NOT return `#{key}` data attribute.

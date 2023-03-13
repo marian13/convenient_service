@@ -5,7 +5,7 @@ module ConvenientService
     module Entities
       class Config
         module Errors
-          class ConfigIsCommitted < ConvenientService::Error
+          class ConfigIsCommitted < ::ConvenientService::Error
             ##
             # @param config [ConvenientService::Core::Entities::Config]
             # @return [void]
