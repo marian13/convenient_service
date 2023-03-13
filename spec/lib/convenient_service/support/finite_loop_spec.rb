@@ -14,6 +14,13 @@ RSpec.describe ConvenientService::Support::FiniteLoop do
     end
   end
 
+  example_group "errors" do
+    include ConvenientService::RSpec::Matchers::BeDescendantOf
+
+    specify { expect(described_class::Errors::MaxIterationCountExceeded).to be_descendant_of(ConvenientService::Error) }
+    specify { expect(described_class::Errors::NoBlockGiven).to be_descendant_of(ConvenientService::Error) }
+  end
+
   example_group "instance methods" do
     describe "#finite_loop" do
       let(:base_klass) do
