@@ -11,13 +11,13 @@ RSpec.describe "convenient_service/support/undefined" do
       it "returns `Object` instance" do
         expect(ConvenientService::Support::UNDEFINED).to be_instance_of(Object)
       end
+    end
+  end
 
-      example_group "instance_methods" do
-        describe "#inspect" do
-          it "returns inspect representation" do
-            expect(ConvenientService::Support::UNDEFINED.inspect).to eq("undefined")
-          end
-        end
+  example_group "instance_methods" do
+    describe "#inspect" do
+      it "returns inspect representation" do
+        expect(ConvenientService::Support::UNDEFINED.inspect).to eq("undefined")
       end
     end
   end

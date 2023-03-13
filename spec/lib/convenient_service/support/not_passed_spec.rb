@@ -11,13 +11,13 @@ RSpec.describe "convenient_service/support/not_passed" do
       it "returns `Object` instance" do
         expect(ConvenientService::Support::NOT_PASSED).to be_instance_of(Object)
       end
+    end
+  end
 
-      example_group "instance_methods" do
-        describe "#inspect" do
-          it "returns inspect representation" do
-            expect(ConvenientService::Support::NOT_PASSED.inspect).to eq("not_passed")
-          end
-        end
+  example_group "instance_methods" do
+    describe "#inspect" do
+      it "returns inspect representation" do
+        expect(ConvenientService::Support::NOT_PASSED.inspect).to eq("not_passed")
       end
     end
   end
