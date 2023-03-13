@@ -4,16 +4,20 @@ module ConvenientService
   module Service
     module Plugins
       module CanHaveSteps
-        module Errors
-          class StepHasNoOrganizer < ConvenientService::Error
-            def initialize(step:)
-              message = <<~TEXT
-                Step `#{step.service}` has not assigned organizer.
+        module Entities
+          class Step
+            module Errors
+              class StepHasNoOrganizer < ConvenientService::Error
+                def initialize(step:)
+                  message = <<~TEXT
+                    Step `#{step.service}` has not assigned organizer.
 
-                Did you forget to set it?
-              TEXT
+                    Did you forget to set it?
+                  TEXT
 
-              super(message)
+                  super(message)
+                end
+              end
             end
           end
         end

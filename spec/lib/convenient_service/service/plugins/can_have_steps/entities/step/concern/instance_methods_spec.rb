@@ -470,9 +470,9 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           TEXT
         end
 
-        it "raises `ConvenientService::Service::Plugins::CanHaveSteps::Errors::StepHasNoOrganizer`" do
+        it "raises `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Errors::StepHasNoOrganizer`" do
           expect { step.input_values }
-            .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Errors::StepHasNoOrganizer)
+            .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Errors::StepHasNoOrganizer)
             .with_message(message)
         end
       end
@@ -498,9 +498,9 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           TEXT
         end
 
-        it "raises `ConvenientService::Service::Plugins::CanHaveSteps::Errors::StepHasNoOrganizer`" do
+        it "raises `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Errors::StepHasNoOrganizer`" do
           expect { step.original_result }
-            .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Errors::StepHasNoOrganizer)
+            .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Errors::StepHasNoOrganizer)
             .with_message(message)
         end
       end
@@ -531,9 +531,9 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           TEXT
         end
 
-        it "raises `ConvenientService::Service::Plugins::CanHaveSteps::Errors::StepHasNoOrganizer`" do
+        it "raises `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Errors::StepHasNoOrganizer`" do
           expect { step.result }
-            .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Errors::StepHasNoOrganizer)
+            .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Errors::StepHasNoOrganizer)
             .with_message(message)
         end
       end
