@@ -15,6 +15,13 @@ RSpec.describe ConvenientService::Support::ThreadSafeCounter do
   let(:max_value) { 1_000_000 }
   let(:n) { 1_000 }
 
+  example_group "errors" do
+    include ConvenientService::RSpec::Matchers::BeDescendantOf
+
+    specify { expect(described_class::Errors::ValueAfterIncrementIsGreaterThanMaxValue).to be_descendant_of(ConvenientService::Error) }
+    specify { expect(described_class::Errors::ValueAfterDecrementIsLowerThanMinValue).to be_descendant_of(ConvenientService::Error) }
+  end
+
   example_group "attributes" do
     include ConvenientService::RSpec::Matchers::HaveAttrReader
 

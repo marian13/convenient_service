@@ -4,7 +4,7 @@ module ConvenientService
   module Support
     class ThreadSafeCounter
       module Errors
-        class ValueAfterIncrementIsGreaterThanMaxValue < ::StandardError
+        class ValueAfterIncrementIsGreaterThanMaxValue < ::ConvenientService::Error
           ##
           # @param n [Integer]
           # @param current_value [Integer]
@@ -24,7 +24,7 @@ module ConvenientService
           end
         end
 
-        class ValueAfterDecrementIsLowerThanMinValue < ::StandardError
+        class ValueAfterDecrementIsLowerThanMinValue < ::ConvenientService::Error
           ##
           # @param n [Integer]
           # @param current_value [Integer]
