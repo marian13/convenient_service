@@ -40,7 +40,9 @@ RSpec.describe ConvenientService::Core::InstanceMethods do
       ##
       # NOTE: Intentionally calling missed method. But later it is added by `concerns.include!`.
       #
-      expect { service_instance.foo }.to delegate_to(service_class, :commit_config!)
+      expect { service_instance.foo }
+        .to delegate_to(service_class, :commit_config!)
+        .with_arguments(trigger: ConvenientService::Core::Constants::Triggers::INSTANCE_METHOD_MISSING)
     end
 
     ##
