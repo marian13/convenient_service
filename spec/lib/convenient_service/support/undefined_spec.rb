@@ -8,7 +8,7 @@ require "convenient_service"
 RSpec.describe "convenient_service/support/undefined" do
   example_group "constants" do
     describe "::UNDEFINED" do
-      it "returns `Support::UniqueValue` instance" do
+      it "returns `ConvenientService::Support::UniqueValue` instance" do
         expect(ConvenientService::Support::UNDEFINED).to be_instance_of(ConvenientService::Support::UniqueValue)
       end
     end

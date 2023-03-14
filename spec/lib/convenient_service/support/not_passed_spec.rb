@@ -8,8 +8,8 @@ require "convenient_service"
 RSpec.describe "convenient_service/support/not_passed" do
   example_group "constants" do
     describe "::NOT_PASSED" do
-      it "returns `Object` instance" do
-        expect(ConvenientService::Support::NOT_PASSED).to be_instance_of(Object)
+      it "returns `ConvenientService::Support::UniqueValue` instance" do
+        expect(ConvenientService::Support::NOT_PASSED).to be_instance_of(ConvenientService::Support::UniqueValue)
       end
     end
   end
