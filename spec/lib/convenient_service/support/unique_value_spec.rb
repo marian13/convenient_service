@@ -56,6 +56,68 @@ RSpec.describe ConvenientService::Support::UniqueValue do
         end
       end
     end
+
+    example_group "comparison" do
+      describe "#==" do
+        let(:unique_value) { described_class.new(:foo) }
+
+        context "when `other` has different `object_id`" do
+          let(:other) { described_class.new(:bar) }
+
+          it "returns `false`" do
+            expect(unique_value == other).to eq(false)
+          end
+        end
+
+        context "when `other` has same `object_id`" do
+          let(:other) { unique_value }
+
+          it "returns `true`" do
+            expect(unique_value == other).to eq(true)
+          end
+        end
+      end
+
+      describe "#===" do
+        let(:unique_value) { described_class.new(:foo) }
+
+        context "when `other` has different `object_id`" do
+          let(:other) { described_class.new(:bar) }
+
+          it "returns `false`" do
+            expect(unique_value === other).to eq(false)
+          end
+        end
+
+        context "when `other` has same `object_id`" do
+          let(:other) { unique_value }
+
+          it "returns `true`" do
+            expect(unique_value === other).to eq(true)
+          end
+        end
+      end
+
+      describe ".eql?" do
+        let(:unique_value) { described_class.new(:foo) }
+
+        context "when `other` has different `object_id`" do
+          let(:other) { described_class.new(:bar) }
+
+          it "returns `false`" do
+            expect(unique_value.eql?(other)).to eq(false)
+          end
+        end
+
+        context "when `other` has same `object_id`" do
+          let(:other) { unique_value }
+
+          it "returns `true`" do
+            expect(unique_value.eql?(other)).to eq(true)
+          end
+        end
+      end
+    end
   end
 end
 # rubocop:enable RSpec/NestedGroups

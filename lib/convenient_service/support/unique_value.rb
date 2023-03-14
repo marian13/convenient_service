@@ -18,6 +18,34 @@ module ConvenientService
       end
 
       ##
+      # @param other [Object] Can be any type.
+      # @return [Boolean]
+      #
+      # @internal
+      #   NOTE: Every single Ruby object responds to `object_id`.
+      #   NOTE: NO `return unless other.instance_of?(self.class)` for performance.
+      #
+      def ==(other)
+        object_id == other.object_id
+      end
+
+      ##
+      # @param other [Object] Can be any type.
+      # @return [Boolean]
+      #
+      def ===(other)
+        self == other
+      end
+
+      ##
+      # @param other [Object] Can be any type.
+      # @return [Boolean]
+      #
+      def eql?(other)
+        self == other
+      end
+
+      ##
       # @return [String]
       #
       def inspect

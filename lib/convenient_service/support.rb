@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require_relative "support/unique_value"
 require_relative "support/not_passed"
 require_relative "support/undefined"
 
@@ -20,4 +21,3 @@ require_relative "support/raw_value"
 require_relative "support/ruby"
 require_relative "support/thread_safe_counter"
 require_relative "support/version"
-require_relative "support/unique_value"
