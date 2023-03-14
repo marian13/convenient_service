@@ -2,8 +2,9 @@
 
 module ConvenientService
   module Support
-    UNDEFINED = ::Object.new.tap do |object|
-      object.define_singleton_method(:inspect) { "undefined" }
-    end
+    ##
+    # @return [ConvenientService::Support::UniqueValue]
+    #
+    UNDEFINED = Support::UniqueValue.new("undefined")
   end
 end
