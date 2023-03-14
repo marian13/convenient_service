@@ -23,9 +23,10 @@ module ConvenientService
       #
       # @internal
       #   NOTE: Every single Ruby object responds to `object_id`.
-      #   NOTE: NO `return unless other.instance_of?(self.class)` for performance.
       #
       def ==(other)
+        return unless other.instance_of?(self.class)
+
         object_id == other.object_id
       end
 

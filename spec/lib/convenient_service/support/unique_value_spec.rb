@@ -61,6 +61,14 @@ RSpec.describe ConvenientService::Support::UniqueValue do
       describe "#==" do
         let(:unique_value) { described_class.new(:foo) }
 
+        context "when `other` has different class" do
+          let(:other) { 42 }
+
+          it "returns `false`" do
+            expect(unique_value == other).to be_nil
+          end
+        end
+
         context "when `other` has different `object_id`" do
           let(:other) { described_class.new(:bar) }
 
@@ -81,6 +89,14 @@ RSpec.describe ConvenientService::Support::UniqueValue do
       describe "#===" do
         let(:unique_value) { described_class.new(:foo) }
 
+        context "when `other` has different class" do
+          let(:other) { 42 }
+
+          it "returns `false`" do
+            expect(unique_value === other).to be_nil
+          end
+        end
+
         context "when `other` has different `object_id`" do
           let(:other) { described_class.new(:bar) }
 
@@ -100,6 +116,14 @@ RSpec.describe ConvenientService::Support::UniqueValue do
 
       describe ".eql?" do
         let(:unique_value) { described_class.new(:foo) }
+
+        context "when `other` has different class" do
+          let(:other) { 42 }
+
+          it "returns `false`" do
+            expect(unique_value.eql?(other)).to be_nil
+          end
+        end
 
         context "when `other` has different `object_id`" do
           let(:other) { described_class.new(:bar) }
