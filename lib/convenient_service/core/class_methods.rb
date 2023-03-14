@@ -29,6 +29,7 @@ module ConvenientService
       # Commits config when called for the first time.
       # Does nothing for the subsequent calls.
       #
+      # @param trigger [ConvenientService::Support::UniqueValue]
       # @return [Boolean] true if called for the first time, false otherwise (similarly as Kernel#require).
       #
       # @see https://ruby-doc.org/core-3.1.2/Kernel.html#method-i-require
@@ -37,8 +38,8 @@ module ConvenientService
       #   NOTE: The instance variable is named `@__convenient_service_config__` intentionally in order to decrease the possibility of accidental redefinition by the end-user.
       #   NOTE: An `attr_reader` for `@__convenient_service_config__` is NOT created intentionally in order to NOT pollute the end-user class interface.
       #
-      def commit_config!
-        (@__convenient_service_config__ ||= Entities::Config.new(klass: self)).commit!
+      def commit_config!(trigger: ConvenientService::Core::Constants::Triggers::USER)
+        (@__convenient_service_config__ ||= Entities::Config.new(klass: self)).commit!(trigger: trigger)
           .tap { ConvenientService.logger.debug { "[Core] Committed config for `#{self}` | Triggered by `.commit_config!`" } }
       end
 
