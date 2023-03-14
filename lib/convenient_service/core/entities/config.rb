@@ -122,9 +122,8 @@ module ConvenientService
         # @see https://ruby-doc.org/core-3.1.2/Kernel.html#method-i-require
         #
         def commit!(trigger: Constants::Triggers::USER)
-          track_commit_trigger!(trigger)
-
           concerns.include!
+            .tap { track_commit_trigger!(trigger) }
         end
 
         private
