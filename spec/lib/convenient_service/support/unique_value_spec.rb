@@ -8,7 +8,7 @@ require "convenient_service"
 RSpec.describe ConvenientService::Support::UniqueValue do
   let(:unique_value) { described_class.new(label) }
   let(:label) { :foo }
-  let(:default_label) { unique_value.object_id.to_s }
+  let(:default_label) { "unique_value_#{unique_value.object_id}" }
 
   example_group "attributes" do
     include ConvenientService::RSpec::Matchers::HaveAttrReader
@@ -32,7 +32,7 @@ RSpec.describe ConvenientService::Support::UniqueValue do
 
   example_group "instance methods" do
     describe "#inspect" do
-      let(:inspect_representation) { "unique_value_#{label}" }
+      let(:inspect_representation) { label }
 
       it "returns inspect representation with label" do
         expect(unique_value.inspect).to eq(inspect_representation)
@@ -40,7 +40,7 @@ RSpec.describe ConvenientService::Support::UniqueValue do
 
       context "when `label` is `nil`" do
         let(:label) { nil }
-        let(:inspect_representation) { "unique_value_#{default_label}" }
+        let(:inspect_representation) { default_label }
 
         it "returns inspect representation with default label" do
           expect(unique_value.inspect).to eq(inspect_representation)
@@ -49,7 +49,7 @@ RSpec.describe ConvenientService::Support::UniqueValue do
 
       context "when `label` is empty" do
         let(:label) { "" }
-        let(:inspect_representation) { "unique_value_#{default_label}" }
+        let(:inspect_representation) { default_label }
 
         it "returns inspect representation with default label" do
           expect(unique_value.inspect).to eq(inspect_representation)

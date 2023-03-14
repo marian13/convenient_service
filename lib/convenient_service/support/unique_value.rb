@@ -21,10 +21,10 @@ module ConvenientService
       # @return [String]
       #
       def inspect
-        return "unique_value_#{default_label}" if label.nil?
-        return "unique_value_#{default_label}" if label.empty?
+        return default_label if label.nil?
+        return default_label if label.empty?
 
-        "unique_value_#{label}"
+        label
       end
 
       private
@@ -33,7 +33,7 @@ module ConvenientService
       # @return [String]
       #
       def default_label
-        object_id.to_s
+        "unique_value_#{object_id}"
       end
     end
   end
