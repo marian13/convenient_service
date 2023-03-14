@@ -401,6 +401,14 @@ RSpec.describe ConvenientService::Core::Entities::Config do
           .to delegate_to(config.concerns, :include!)
           .and_return_its_value
       end
+
+      context "when `trigger` is NOT passed" do
+        it "defaults `ConvenientService::Core::Constants::Triggers::USER`" do
+          expect { config.commit! }
+            .to delegate_to(config, :track_commit_trigger!)
+            .with_arguments(ConvenientService::Core::Constants::Triggers::USER)
+        end
+      end
     end
   end
 end
