@@ -368,6 +368,30 @@ RSpec.describe ConvenientService::Core::Entities::Config do
       end
     end
 
+    describe "#method_missing_commits_counter" do
+      it "returns `ConvenientService::Support::ThreadSafeCounter` instance" do
+        expect(config.method_missing_commits_counter).to be_instance_of(ConvenientService::Support::ThreadSafeCounter)
+      end
+
+      specify do
+        expect { config.method_missing_commits_counter }.to cache_its_value
+      end
+
+      example_group "`counter`" do
+        it "has initial value set to `0`" do
+          expect(config.method_missing_commits_counter.current_value).to eq(0)
+        end
+
+        it "has current value same as initial value" do
+          expect(config.method_missing_commits_counter.current_value).to eq(config.method_missing_commits_counter.initial_value)
+        end
+
+        it "has max value set to `ConvenientService::Core::Constants::Commits::METHOD_MISSING_MAX_TRIES`" do
+          expect(config.method_missing_commits_counter.max_value).to eq(ConvenientService::Core::Constants::Commits::METHOD_MISSING_MAX_TRIES)
+        end
+      end
+    end
+
     describe "#committed?" do
       before do
         ##

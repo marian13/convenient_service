@@ -106,6 +106,13 @@ module ConvenientService
         end
 
         ##
+        # @return [ConvenientService::Support::ThreadSafeCounter]
+        #
+        def method_missing_commits_counter
+          @method_missing_commits_counter ||= Support::ThreadSafeCounter.new(max_value: Constants::Commits::METHOD_MISSING_MAX_TRIES)
+        end
+
+        ##
         # @return [Boolean]
         #
         def committed?
