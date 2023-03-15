@@ -3,6 +3,13 @@
 module ConvenientService
   module Core
     module Constants
+      module Commits
+        ##
+        # @return [Integer]
+        #
+        METHOD_MISSING_MAX_TRIES = 10
+      end
+
       module Triggers
         ##
         # @return [ConvenientService::Support::UniqueValue]

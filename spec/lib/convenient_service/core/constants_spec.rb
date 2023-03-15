@@ -7,6 +7,12 @@ require "convenient_service"
 # rubocop:disable RSpec/NestedGroups, RSpec/DescribeClass
 RSpec.describe ConvenientService::Core::Constants do
   example_group "constants" do
+    describe "::Commits::METHOD_MISSING_MAX_TRIES" do
+      it "returns `10`" do
+        expect(described_class::Commits::METHOD_MISSING_MAX_TRIES).to eq(10)
+      end
+    end
+
     describe "::Triggers::INSTANCE_METHOD_MISSING" do
       it "returns `ConvenientService::Support::UniqueValue` instance" do
         expect(described_class::Triggers::INSTANCE_METHOD_MISSING).to be_instance_of(ConvenientService::Support::UniqueValue)
