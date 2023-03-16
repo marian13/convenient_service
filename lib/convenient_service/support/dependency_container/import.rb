@@ -14,7 +14,7 @@ module ConvenientService
           # @param prepend [Boolean]
           # @return [ConvenientService::Support::DependencyContainer::Entities::Method]
           #
-          def import(full_name, from:, scope: Constants::DEFAULT_SCOPE, prepend: Constants::DEFAULT_PREPEND)
+          def import(full_name, as: "", from:, scope: Constants::DEFAULT_SCOPE, prepend: Constants::DEFAULT_PREPEND)
             Commands::AssertValidScope.call(scope: scope)
 
             raise Errors::NotExportableModule.new(mod: from) unless Utils::Module.include_module?(from, DependencyContainer::Export)
@@ -23,7 +23,7 @@ module ConvenientService
 
             raise Errors::NotExportedMethod.new(method_name: full_name, method_scope: scope, mod: from) unless method
 
-            Commands::ImportMethod.call(importing_module: self, exported_method: method, prepend: prepend)
+            Commands::ImportMethod.call(importing_module: self, exported_method: method, as: as, prepend: prepend)
           end
         end
       end

@@ -26,6 +26,12 @@ module ConvenientService
           attr_reader :prepend
 
           ##
+          # @!attribute [r] prepend
+          #   @return [Boolean]
+          #
+          attr_reader :as
+
+          ##
           # @!attribute [r] scope
           #   @return [Symbol]
           #
@@ -36,10 +42,11 @@ module ConvenientService
           # @param exported_method [ConvenientService::Support::DependencyContainer::Method]
           # @param prepend [Boolean]
           #
-          def initialize(importing_module:, exported_method:, prepend:)
+          def initialize(importing_module:, exported_method:, as:, prepend:)
             @importing_module = importing_module
             @exported_method = exported_method
             @prepend = prepend
+            @as = as
           end
 
           ##
@@ -47,6 +54,8 @@ module ConvenientService
           #
           def call
             import imported_scoped_methods
+
+            exported_method.create_alias(as) unless as.empty?
 
             exported_method.define_in_module!(imported_scoped_methods)
           end

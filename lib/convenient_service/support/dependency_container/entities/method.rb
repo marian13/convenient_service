@@ -29,10 +29,11 @@ module ConvenientService
           # @param body [Proc]
           # @return [void]
           #
-          def initialize(full_name:, scope:, body:)
+          def initialize(full_name:, scope:, body:, as: "")
             @full_name = full_name
             @scope = scope
             @body = body
+            @as = as
           end
 
           ##
@@ -47,6 +48,13 @@ module ConvenientService
           #
           def namespaces
             @namespaces ||= full_name_parts.slice(0..-2).map { |part| Entities::Namespace.new(name: part) }
+          end
+
+          ##
+          # @return [String]
+          #
+          def create_alias(name)
+            @as = name
           end
 
           ##
@@ -105,8 +113,21 @@ module ConvenientService
           # @return [Array<String>]
           #
           def full_name_parts
-            @full_name_parts ||= Utils::String.split(full_name, ".", "::").map(&:to_sym)
+            @full_name_parts ||= Utils::String.split(name_to_split, ".", "::").map(&:to_sym)
           end
+
+          ##
+          # @return [String]
+          #
+          def name_to_split
+            @name_to_split ||= as.empty? ? full_name : as
+          end
+
+          ##
+          # @!attribute [r] as
+          #   @return [Proc]
+          #
+          attr_accessor :as
         end
       end
     end
