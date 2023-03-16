@@ -10,7 +10,7 @@ require "convenient_service"
 ConvenientService::Dependencies.require_rescues_result_unhandled_exceptions
 
 ConvenientService::Dependencies.require_rspec_extentions
-ConvenientService::Dependencies.require_factory
+ConvenientService::Dependencies.require_test_tools
 ConvenientService::Dependencies.require_development_tools
 
 ConvenientService::Dependencies.require_standard_examples

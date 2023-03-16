@@ -27,10 +27,20 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
       #
       let(:method) { wrap_method(result, :initialize, middlewares: described_class) }
 
-      let(:result) { ConvenientService::Factory.create(:result) }
+      let(:result) { service.result }
 
       context "when `step` is NOT passed" do
-        let(:attributes) { ConvenientService::Factory.create(:result_attributes) }
+        let(:service) do
+          Class.new do
+            include ConvenientService::Configs::Minimal
+
+            def result
+              success
+            end
+          end
+        end
+
+        let(:attributes) { result.jsend_attributes.to_h }
 
         specify do
           expect { method_value }
@@ -47,8 +57,20 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
       end
 
       context "when `step` is passed" do
-        let(:attributes) { ConvenientService::Factory.create(:result_attributes_with_step, step: step) }
-        let(:step) { ConvenientService::Factory.create(:step_instance) }
+        let(:service) do
+          Class.new do
+            include ConvenientService::Configs::Minimal
+
+            step :result
+
+            def result
+              success
+            end
+          end
+        end
+
+        let(:attributes) { result.jsend_attributes.to_h.merge(step: step) }
+        let(:step) { service.steps.first }
 
         specify do
           expect { method_value }

@@ -106,6 +106,13 @@ module ConvenientService
         end
 
         ##
+        # @return [ConvenientService::Support::ThreadSafeCounter]
+        #
+        def method_missing_commits_counter
+          @method_missing_commits_counter ||= Support::ThreadSafeCounter.new(max_value: Constants::Commits::METHOD_MISSING_MAX_TRIES)
+        end
+
+        ##
         # @return [Boolean]
         #
         def committed?
@@ -116,18 +123,20 @@ module ConvenientService
         # Commits config when called for the first time.
         # Does nothing for the subsequent calls.
         #
+        # @param trigger [ConvenientService::Support::UniqueValue]
         # @return [Boolean] true if called for the first time, false otherwise (similarly as Kernel#require).
         #
         # @see https://ruby-doc.org/core-3.1.2/Kernel.html#method-i-require
         #
-        def commit!
+        def commit!(trigger: Constants::Triggers::USER)
           concerns.include!
+            .tap { track_commit_trigger!(trigger) }
         end
 
         private
 
         ##
-        # @note: Config is committed either by `commit_config` or `method_missing` from `ConvenientService::Core::ClassMethods`.
+        # @note: Config is committed either by `commit_config` or `method_missing` from `ConvenientService::Core::InstanceMethods` and `ConvenientService::Core::ClassMethods`.
         #
         # @return [void]
         # @raise [ConvenientService::Core::Entities::Config::Errors::ConfigIsCommitted]
@@ -140,6 +149,12 @@ module ConvenientService
           return unless committed?
 
           raise Errors::ConfigIsCommitted.new(config: self)
+        end
+
+        ##
+        # @return [void]
+        #
+        def track_commit_trigger!(trigger)
         end
       end
     end

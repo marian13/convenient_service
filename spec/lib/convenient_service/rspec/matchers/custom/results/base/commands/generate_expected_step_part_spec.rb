@@ -11,7 +11,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Comman
       subject(:command_result) { described_class.call(step: step) }
 
       context "when step is NOT `nil`" do
-        let(:step) { ConvenientService::Factory.create(:step) }
+        let(:step) { :result }
 
         it "returns expected step part" do
           expect(command_result).to eq("of step `#{step}`")

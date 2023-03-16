@@ -25,6 +25,11 @@ module ConvenientService
 
               rules = []
 
+              ##
+              # IMPORTANT: Makes `result.class.include?` from the following line idempotent.
+              #
+              result.commit_config! if result.respond_to?(:commit_config!)
+
               rules << ->(result) { result.class.include?(Service::Plugins::HasResult::Entities::Result::Concern) }
 
               ##

@@ -8,6 +8,6 @@ require "convenient_service"
 RSpec.describe "convenient_service/service/plugins/aliases" do
   specify { expect(ConvenientService::Plugins::Result).to eq(ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins) }
   specify { expect(ConvenientService::Plugins::Service).to eq(ConvenientService::Service::Plugins) }
-  specify { expect(ConvenientService::Plugins::Step).to eq(ConvenientService::Service::Plugins::HasResultSteps::Entities::Step::Plugins) }
+  specify { expect(ConvenientService::Plugins::Step).to eq(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins) }
 end
 # rubocop:enable RSpec/DescribeClass

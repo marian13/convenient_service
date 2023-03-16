@@ -2,8 +2,9 @@
 
 module ConvenientService
   module Support
-    NOT_PASSED = ::Object.new.tap do |object|
-      object.define_singleton_method(:inspect) { "not_passed" }
-    end
+    ##
+    # @return [ConvenientService::Support::UniqueValue]
+    #
+    NOT_PASSED = Support::UniqueValue.new("not_passed")
   end
 end

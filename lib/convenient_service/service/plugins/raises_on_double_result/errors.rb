@@ -5,7 +5,7 @@ module ConvenientService
     module Plugins
       module RaisesOnDoubleResult
         module Errors
-          class DoubleResult < ConvenientService::Error
+          class DoubleResult < ::ConvenientService::Error
             def initialize(service:)
               message = <<~TEXT
                 `#{service.class}` service has a double result.

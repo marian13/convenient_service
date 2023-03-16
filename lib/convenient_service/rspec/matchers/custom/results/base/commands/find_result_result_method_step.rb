@@ -23,7 +23,7 @@ module ConvenientService
                 end
 
                 ##
-                # @return [ConvenientService::Service::Plugins::HasResultSteps::Entities::Method]
+                # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method]
                 #
                 def call
                   return nil unless result.step
@@ -34,7 +34,7 @@ module ConvenientService
                 private
 
                 ##
-                # @param input [ConvenientService::Service::Plugins::HasResultSteps::Entities::Method]
+                # @param input [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method]
                 # @return [Boolean]
                 #
                 def match_service_class?(input)
@@ -42,7 +42,7 @@ module ConvenientService
                 end
 
                 ##
-                # @param input [ConvenientService::Service::Plugins::HasResultSteps::Entities::Method]
+                # @param input [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method]
                 # @return [Boolean]
                 #
                 def match_key?(input)
@@ -50,7 +50,7 @@ module ConvenientService
                 end
 
                 ##
-                # @param input [ConvenientService::Service::Plugins::HasResultSteps::Entities::Method]
+                # @param input [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method]
                 # @return [Boolean]
                 #
                 def match_value?(input)

@@ -81,6 +81,28 @@ RSpec.describe ConvenientService::Core::ClassMethods do
         #
         expect(service_class.commit_config!).to eq(false)
       end
+
+      example_group "`trigger` option" do
+        before do
+          allow(ConvenientService::Core::Entities::Config).to receive(:new).with(klass: service_class).and_return(config)
+        end
+
+        context "when `trigger` is NOT passed" do
+          it "defaults `ConvenientService::Core::Constants::Triggers::USER`" do
+            expect { service_class.commit_config! }
+              .to delegate_to(config, :commit!)
+              .with_arguments(trigger: ConvenientService::Core::Constants::Triggers::USER)
+          end
+        end
+
+        context "when `trigger` is passed" do
+          specify do
+            expect { service_class.commit_config!(trigger: ConvenientService::Core::Constants::Triggers::CLASS_METHOD_MISSING) }
+              .to delegate_to(config, :commit!)
+              .with_arguments(trigger: ConvenientService::Core::Constants::Triggers::CLASS_METHOD_MISSING)
+          end
+        end
+      end
     end
 
     describe "#method_missing" do
@@ -116,16 +138,18 @@ RSpec.describe ConvenientService::Core::ClassMethods do
         ##
         # NOTE: Intentionally calling missed method. But later it is added by `concerns.include!`.
         #
-        expect { service_class.foo }.to delegate_to(service_class, :commit_config!)
+        expect { service_class.foo }
+          .to delegate_to(service_class, :commit_config!)
+          .with_arguments(trigger: ConvenientService::Core::Constants::Triggers::CLASS_METHOD_MISSING)
       end
 
       ##
       # TODO: `it "logs debug message"`.
       #
 
-      it "calls super" do
+      it "calls `send`" do
         ##
-        # NOTE: If `[:foo, args, kwargs, block&.source_location]` is returned, then `super` was called. See concern above.
+        # NOTE: If `[:foo, args, kwargs, block&.source_location]` is returned, then `send` was called. See concern above.
         #
         expect(service_class.foo(*args, **kwargs, &block)).to eq([:foo, args, kwargs, block&.source_location])
       end

@@ -5,7 +5,7 @@ module ConvenientService
     module Plugins
       module HasAroundCallbacks
         module Errors
-          class AroundCallbackChainIsNotContinued < ConvenientService::Error
+          class AroundCallbackChainIsNotContinued < ::ConvenientService::Error
             def initialize(callback:)
               message = <<~TEXT
                 Around callback chain is NOT continued from `#{callback.block.source_location}`.
