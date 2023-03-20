@@ -88,6 +88,9 @@ jobs:
     # That is why the well-known Ubuntu is used.
     # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#choosing-github-hosted-runners
     #
+    # NOTE: List of all possible Ruby, JRuby versions.
+    # https://github.com/ruby/setup-ruby/blob/master/ruby-builder-versions.json
+    #
     runs-on: ubuntu-20.04
     strategy:
       matrix:
@@ -102,15 +105,10 @@ jobs:
           - "3.0"
           - 3.1
           - 3.2
-        jruby:
-          ##
-          # NOTE: List of all possible JRuby versions.
-          # https://github.com/ruby/setup-ruby/blob/master/ruby-builder-versions.json
-          #
           # NOTE: JRuby 9.4 is CRuby 3.1 compatible.
           # - https://www.jruby.org/download
           #
-          - 9.4
+          - "jruby-9.4"
     env:
       BUNDLE_GEMFILE: ${{ matrix.gemfile }}
 
