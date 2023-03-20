@@ -130,6 +130,29 @@
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#jruby%3F-class_method" title="jruby? (class method)">.<strong>jruby?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  <span class="private note title">private</span>
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns <code>true</code> when JRuby, <code>false</code> otherwise.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#version-class_method" title="version (class method)">.<strong>version</strong>  &#x21d2; ConvenientService::Support::Version </a>
     
 
@@ -159,7 +182,71 @@
 
     
       <div class="method_details first">
-  <h3 class="signature first" id="version-class_method">
+  <h3 class="signature first" id="jruby?-class_method">
+  
+    .<strong>jruby?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p class="note private">
+  <strong>This method is part of a private API.</strong>
+  You should avoid using this method if possible, as it may be removed or be changed in the future.
+</p>
+<p>Returns <code>true</code> when JRuby, <code>false</code> otherwise.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://github.com/rdp/os" target="_parent" title="https://github.com/rdp/os">https://github.com/rdp/os</a></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+33
+34
+35</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/ruby.rb', line 33</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_jruby?'>jruby?</span>
+  <span class='const'>RUBY_PLATFORM</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='period'>.</span><span class='id identifier rubyid_match?'>match?</span><span class='lparen'>(</span><span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>java</span><span class='regexp_end'>/</span></span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="version-class_method">
   
     .<strong>version</strong>  &#x21d2; <tt><span class='object_link'><a href="Version.html" title="ConvenientService::Support::Version (class)">ConvenientService::Support::Version</a></span></tt> 
   
@@ -219,7 +306,7 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Mar 15 22:29:53 2023 by
+  Generated on Mon Mar 20 18:39:26 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.3).
 </div>
