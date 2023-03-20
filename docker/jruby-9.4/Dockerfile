@@ -23,7 +23,7 @@
 # In a general case, you simply won't have enough time to resolve all the "quirks" of more specific distributions if you are an application developer.
 # `jruby:9.4` uses Ubuntu under the hood.s
 # - https://hub.docker.com/_/jruby/tags
-# - https://github.com/jruby/docker-jruby/blob/4cd6f9e7d6b5a1ede66beb818a8b343e1eb14631/9.4/jre8/Dockerfile#L1
+# - https://github.com/jruby/docker-jruby/blob/master/9.4/jre8/Dockerfile
 # - https://github.com/adoptium/containers/blob/main/19/jdk/ubuntu/jammy/Dockerfile.releases.full#L20
 #
 # NOTE: Gallium means Node.js 16.x.
