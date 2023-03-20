@@ -33,6 +33,20 @@ module ConvenientService
         def jruby?
           ::RUBY_PLATFORM.to_s.match?(/java/)
         end
+
+        ##
+        # Returns `true` when TruffleRuby, `false` otherwise.
+        #
+        # @return [Boolean]
+        #
+        # @internal
+        #   NOTE: Taken from irb testing. May NOT be stable.
+        #
+        #   TODO: Find a confirmation of stability.
+        #
+        def truffleruby?
+          ::RUBY_ENGINE.to_s.match?(/truffleruby/)
+        end
       end
     end
   end

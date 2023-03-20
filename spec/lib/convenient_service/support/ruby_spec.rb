@@ -58,6 +58,52 @@ RSpec.describe ConvenientService::Support::Ruby do
         end
       end
     end
+
+    describe ".truffleruby?" do
+      context "when `::RUBY_ENGINE` is NOT valid" do
+        context "when `::RUBY_ENGINE` is `nil`" do
+          before do
+            stub_const("RUBY_ENGINE", nil)
+          end
+
+          it "returns `false`" do
+            expect(described_class.truffleruby?).to eq(false)
+          end
+        end
+
+        context "when `::RUBY_ENGINE` is empty string" do
+          before do
+            stub_const("RUBY_ENGINE", "")
+          end
+
+          it "returns `false`" do
+            expect(described_class.truffleruby?).to eq(false)
+          end
+        end
+      end
+
+      context "when `::RUBY_ENGINE` is valid" do
+        context "when `::RUBY_ENGINE` does NOT match `/truffleruby/`" do
+          before do
+            stub_const("RUBY_ENGINE", "jruby")
+          end
+
+          it "returns `false`" do
+            expect(described_class.truffleruby?).to eq(false)
+          end
+        end
+
+        context "when `::RUBY_ENGINE` matches `/truffleruby/`" do
+          before do
+            stub_const("RUBY_ENGINE", "truffleruby")
+          end
+
+          it "returns `true`" do
+            expect(described_class.truffleruby?).to eq(true)
+          end
+        end
+      end
+    end
   end
 end
 # rubocop:enable RSpec/NestedGroups
