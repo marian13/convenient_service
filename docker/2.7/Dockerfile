@@ -21,12 +21,12 @@
 # NOTE: If there are no memory, performance, or cost constraints, prefer to use as standard Linux distribution as it is possible.
 # In a general case, you simply won't have enough time to resolve all the "quirks" of more specific distributions if you are an application developer.
 # That is why a `slim` version is used instead of `alpine`.
-# Also `slim` is more similar to Ubuntu used in CI.
+# Also `slim` is more similar to Ubuntu.
 # - https://github.com/timbru31/docker-ruby-node/tree/master/2.7/16
 # - https://medium.com/swlh/alpine-slim-stretch-buster-jessie-bullseye-bookworm-what-are-the-differences-in-docker-62171ed4531d
 # - https://hub.docker.com/r/timbru31/ruby-node/tags
 #
-# NOTE: Gallium means Node.js 16.x
+# NOTE: Gallium means Node.js 16.x.
 # https://github.com/nodejs/Release
 #
 FROM timbru31/ruby-node:2.7-slim-gallium
