@@ -28,7 +28,7 @@ module ConvenientService
         #   NOTE: Gratefully copied from the `os` gem. Version `1.1.4`.
         #   - https://github.com/rdp/os/blob/v1.1.4/lib/os.rb#L101
         #
-        #   NOTE: Modified original implementation in order to return boolean.
+        #   NOTE: Modified original implementation in order to return a boolean.
         #
         def jruby?
           RUBY_PLATFORM.to_s.match?(/java/)
