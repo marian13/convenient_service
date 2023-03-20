@@ -31,7 +31,7 @@ module ConvenientService
         #   NOTE: Modified original implementation in order to return a boolean.
         #
         def jruby?
-          RUBY_PLATFORM.to_s.match?(/java/)
+          ::RUBY_PLATFORM.to_s.match?(/java/)
         end
       end
     end
