@@ -107,6 +107,26 @@ module ConvenientService
       #   IMPORTANT: The lock is always properly released since it uses ensure under the hood.
       #   - https://github.com/ruby/ruby/blob/v2_7_0/thread_sync.c#L525
       #
+      def current_value=(n)
+        @lock.synchronize { @current_value = n }
+      end
+
+      ##
+      # @param n [Integer]
+      # @return [Integer]
+      #
+      # @internal
+      #   NOTE: Instance variables are accessed directly to release the lock faster.
+      #
+      #   NOTE: `return` exits from the enclosing method. `break` from the iterator method. `next` from the block.
+      #   - https://github.com/ruby/spec/blob/master/language/return_spec.rb
+      #   - https://github.com/ruby/spec/blob/master/language/break_spec.rb
+      #   - https://github.com/ruby/spec/blob/master/language/next_spec.rb
+      #   - https://stackoverflow.com/a/1402764/12201472
+      #
+      #   IMPORTANT: The lock is always properly released since it uses ensure under the hood.
+      #   - https://github.com/ruby/ruby/blob/v2_7_0/thread_sync.c#L525
+      #
       #   NOTE: The name is inspired by Redis and Concurrent Ruby.
       #   - https://redis.io/commands/incr/
       #   - https://ruby-concurrency.github.io/concurrent-ruby/master/Concurrent/AtomicFixnum.html#increment-instance_method

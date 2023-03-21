@@ -66,6 +66,26 @@ RSpec.describe ConvenientService::Support::ThreadSafeCounter do
   end
 
   example_group "instance methods" do
+    describe "#current_value=" do
+      it "sets current value to `n`" do
+        counter.current_value = n
+
+        expect(counter.current_value).to eq(n)
+      end
+
+      it "returns `n`" do
+        expect(counter.current_value = n).to eq(n)
+      end
+
+      example_group "thread-safety" do
+        let(:values) { in_threads(10, counter, -> { rand(100) }) { |counter, random| counter.current_value = random.call }.sort }
+
+        it "is thread-safe" do
+          expect(values.each_cons(2).all? { |prev_value, next_value| prev_value <= next_value }).to eq(true)
+        end
+      end
+    end
+
     describe "#increment" do
       it "increments value by `n`" do
         expect { counter.increment(n) }.to change(counter, :current_value).from(initial_value).to(initial_value + n)
@@ -73,10 +93,6 @@ RSpec.describe ConvenientService::Support::ThreadSafeCounter do
 
       it "returns current value" do
         expect(counter.increment(n)).to eq(counter.current_value)
-      end
-
-      it "is thread-safe" do
-        expect(in_threads(10, counter) { |counter| counter.increment }.sort).to eq([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
       end
 
       context "when `n` is NOT passed" do
