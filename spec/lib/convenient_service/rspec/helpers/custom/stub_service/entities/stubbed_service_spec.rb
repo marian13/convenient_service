@@ -134,7 +134,9 @@ RSpec.describe ConvenientService::RSpec::Helpers::Custom::StubService::Entities:
       end
 
       it "commits `service_class` config" do
-        expect { helper.to(result_spec) }.to delegate_to(service_class, :commit_config!)
+        expect { helper.to(result_spec) }
+          .to delegate_to(service_class, :commit_config!)
+          .with_arguments(trigger: ConvenientService::RSpec::Helpers::Custom::StubService::Constants::Triggers::STUB_SERVICE)
       end
 
       it "writes `result_spec` to `stubbed_results` cache" do
