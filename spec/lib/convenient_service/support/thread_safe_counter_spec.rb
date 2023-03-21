@@ -77,13 +77,9 @@ RSpec.describe ConvenientService::Support::ThreadSafeCounter do
         expect(counter.current_value = n).to eq(n)
       end
 
-      example_group "thread-safety" do
-        let(:values) { in_threads(10, counter, -> { rand(100) }) { |counter, random| counter.current_value = random.call }.sort }
-
-        it "is thread-safe" do
-          expect(values.each_cons(2).all? { |prev_value, next_value| prev_value <= next_value }).to eq(true)
-        end
-      end
+      ##
+      # TODO: `@current_value = n` always returns `n` in Ruby. How to test thread-safety?
+      #
     end
 
     describe "#increment" do
