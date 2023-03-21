@@ -40,7 +40,7 @@ module ConvenientService
       #
       def commit_config!(trigger: ConvenientService::Core::Constants::Triggers::USER)
         (@__convenient_service_config__ ||= Entities::Config.new(klass: self)).commit!(trigger: trigger)
-          .tap { ConvenientService.logger.debug { "[Core] Committed config for `#{self}` | Triggered by `.commit_config!`" } }
+          .tap { ConvenientService.logger.debug { "[Core] Committed config for `#{self}` | Triggered by `.commit_config!(trigger: #{trigger.inspect})` " } }
       end
 
       ##
