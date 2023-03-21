@@ -128,8 +128,6 @@
   
   
     
-      <span class="note title readonly">readonly</span>
-    
     
   
   
@@ -536,11 +534,11 @@
     <h2>Instance Attribute Details</h2>
     
       
-      <span id=""></span>
+      <span id="current_value=-instance_method"></span>
       <div class="method_details first">
   <h3 class="signature first" id="current_value-instance_method">
   
-    #<strong>current_value</strong>  &#x21d2; <tt>Object</tt>  <span class="extras">(readonly)</span>
+    #<strong>current_value</strong>  &#x21d2; <tt>Object</tt> 
   
 
   
@@ -766,18 +764,18 @@ If decremented successfully then returns <code>true</code>, otherwise - returns 
       <pre class="lines">
 
 
-244
-245
-246
-247
-248
-249
-250
-251
-252</pre>
+264
+265
+266
+267
+268
+269
+270
+271
+272</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/thread_safe_counter.rb', line 244</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/thread_safe_counter.rb', line 264</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_bdecrement'>bdecrement</span><span class='lparen'>(</span><span class='id identifier rubyid_n'>n</span> <span class='op'>=</span> <span class='int'>1</span><span class='rparen'>)</span>
   <span class='ivar'>@lock</span><span class='period'>.</span><span class='id identifier rubyid_synchronize'>synchronize</span> <span class='kw'>do</span>
@@ -849,18 +847,18 @@ If incremented successfully then returns <code>true</code>, otherwise - returns 
       <pre class="lines">
 
 
-164
-165
-166
-167
-168
-169
-170
-171
-172</pre>
+184
+185
+186
+187
+188
+189
+190
+191
+192</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/thread_safe_counter.rb', line 164</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/thread_safe_counter.rb', line 184</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_bincrement'>bincrement</span><span class='lparen'>(</span><span class='id identifier rubyid_n'>n</span> <span class='op'>=</span> <span class='int'>1</span><span class='rparen'>)</span>
   <span class='ivar'>@lock</span><span class='period'>.</span><span class='id identifier rubyid_synchronize'>synchronize</span> <span class='kw'>do</span>
@@ -930,16 +928,16 @@ If incremented successfully then returns <code>true</code>, otherwise - returns 
       <pre class="lines">
 
 
-194
-195
-196
-197
-198
-199
-200</pre>
+214
+215
+216
+217
+218
+219
+220</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/thread_safe_counter.rb', line 194</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/thread_safe_counter.rb', line 214</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_decrement'>decrement</span><span class='lparen'>(</span><span class='id identifier rubyid_n'>n</span> <span class='op'>=</span> <span class='int'>1</span><span class='rparen'>)</span>
   <span class='ivar'>@lock</span><span class='period'>.</span><span class='id identifier rubyid_synchronize'>synchronize</span> <span class='kw'>do</span>
@@ -1020,16 +1018,16 @@ If incremented successfully then returns <code>true</code>, otherwise - returns 
       <pre class="lines">
 
 
-217
-218
-219
-220
-221
-222
-223</pre>
+237
+238
+239
+240
+241
+242
+243</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/thread_safe_counter.rb', line 217</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/thread_safe_counter.rb', line 237</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_decrement!'>decrement!</span><span class='lparen'>(</span><span class='id identifier rubyid_n'>n</span> <span class='op'>=</span> <span class='int'>1</span><span class='rparen'>)</span>
   <span class='ivar'>@lock</span><span class='period'>.</span><span class='id identifier rubyid_synchronize'>synchronize</span> <span class='kw'>do</span>
@@ -1097,16 +1095,16 @@ If incremented successfully then returns <code>true</code>, otherwise - returns 
       <pre class="lines">
 
 
-114
-115
-116
-117
-118
-119
-120</pre>
+134
+135
+136
+137
+138
+139
+140</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/thread_safe_counter.rb', line 114</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/thread_safe_counter.rb', line 134</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_increment'>increment</span><span class='lparen'>(</span><span class='id identifier rubyid_n'>n</span> <span class='op'>=</span> <span class='int'>1</span><span class='rparen'>)</span>
   <span class='ivar'>@lock</span><span class='period'>.</span><span class='id identifier rubyid_synchronize'>synchronize</span> <span class='kw'>do</span>
@@ -1187,16 +1185,16 @@ If incremented successfully then returns <code>true</code>, otherwise - returns 
       <pre class="lines">
 
 
-137
-138
-139
-140
-141
-142
-143</pre>
+157
+158
+159
+160
+161
+162
+163</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/thread_safe_counter.rb', line 137</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/thread_safe_counter.rb', line 157</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_increment!'>increment!</span><span class='lparen'>(</span><span class='id identifier rubyid_n'>n</span> <span class='op'>=</span> <span class='int'>1</span><span class='rparen'>)</span>
   <span class='ivar'>@lock</span><span class='period'>.</span><span class='id identifier rubyid_synchronize'>synchronize</span> <span class='kw'>do</span>
@@ -1225,12 +1223,12 @@ If incremented successfully then returns <code>true</code>, otherwise - returns 
       <pre class="lines">
 
 
-258
-259
-260</pre>
+278
+279
+280</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/thread_safe_counter.rb', line 258</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/thread_safe_counter.rb', line 278</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_reset'>reset</span>
   <span class='ivar'>@lock</span><span class='period'>.</span><span class='id identifier rubyid_synchronize'>synchronize</span> <span class='lbrace'>{</span> <span class='ivar'>@current_value</span> <span class='op'>=</span> <span class='ivar'>@initial_value</span> <span class='rbrace'>}</span>
@@ -1245,7 +1243,7 @@ If incremented successfully then returns <code>true</code>, otherwise - returns 
 </div>
 
       <div id="footer">
-  Generated on Mon Mar 20 21:48:52 2023 by
+  Generated on Tue Mar 21 22:21:54 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.3).
 </div>
