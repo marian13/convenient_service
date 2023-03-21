@@ -69,12 +69,10 @@
   <dl>
     <dt>Inherits:</dt>
     <dd>
-      <span class="inheritName"><span class='object_link'><a href="../../../../../Support/Command.html" title="ConvenientService::Support::Command (class)">Support::Command</a></span></span>
+      <span class="inheritName">Object</span>
       
         <ul class="fullTree">
           <li>Object</li>
-          
-            <li class="next"><span class='object_link'><a href="../../../../../Support/Command.html" title="ConvenientService::Support::Command (class)">Support::Command</a></span></li>
           
             <li class="next">ConvenientService::RSpec::Helpers::Custom::StubService::Entities::StubbedService</li>
           
@@ -233,17 +231,6 @@
     </ul>
   
 
-
-  
-  
-  
-  
-  
-  
-  
-  
-  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="../../../../../Support/Command.html" title="ConvenientService::Support::Command (class)">Support::Command</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="../../../../../Support/Command.html#call-class_method" title="ConvenientService::Support::Command.call (method)">call</a></span>, <span class='object_link'><a href="../../../../../Support/Command.html#call-instance_method" title="ConvenientService::Support::Command#call (method)">#call</a></span></p>
 <div id="constructor_details" class="method_details_list">
   <h2>Constructor Details</h2>
   
@@ -408,7 +395,7 @@
 <span class='kw'>def</span> <span class='id identifier rubyid_to'>to</span><span class='lparen'>(</span><span class='id identifier rubyid_result_spec'>result_spec</span><span class='rparen'>)</span>
   <span class='ivar'>@result_spec</span> <span class='op'>=</span> <span class='id identifier rubyid_result_spec'>result_spec</span>
 
-  <span class='id identifier rubyid_service_class'>service_class</span><span class='period'>.</span><span class='id identifier rubyid_commit_config!'>commit_config!</span>
+  <span class='id identifier rubyid_service_class'>service_class</span><span class='period'>.</span><span class='id identifier rubyid_commit_config!'>commit_config!</span><span class='lparen'>(</span><span class='label'>trigger:</span> <span class='const'><span class='object_link'><a href="../Constants.html" title="ConvenientService::RSpec::Helpers::Custom::StubService::Constants (module)">Constants</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Constants/Triggers.html" title="ConvenientService::RSpec::Helpers::Custom::StubService::Constants::Triggers (module)">Triggers</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Constants/Triggers.html#STUB_SERVICE-constant" title="ConvenientService::RSpec::Helpers::Custom::StubService::Constants::Triggers::STUB_SERVICE (constant)">STUB_SERVICE</a></span></span><span class='rparen'>)</span>
 
   <span class='id identifier rubyid_service_class'>service_class</span><span class='period'>.</span><span class='id identifier rubyid_stubbed_results'>stubbed_results</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_result_value'>result_value</span>
 
@@ -603,7 +590,7 @@
 </div>
 
       <div id="footer">
-  Generated on Tue Mar 21 23:38:49 2023 by
+  Generated on Tue Mar 21 23:59:16 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.3).
 </div>
