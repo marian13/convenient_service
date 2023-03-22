@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "base/commands"
+require_relative "base/constants"
 require_relative "base/errors"
 
 module ConvenientService
@@ -28,7 +29,7 @@ module ConvenientService
               ##
               # IMPORTANT: Makes `result.class.include?` from the following line idempotent.
               #
-              result.commit_config! if result.respond_to?(:commit_config!)
+              result.commit_config!(trigger: Constants::Triggers::BE_RESULT) if result.respond_to?(:commit_config!)
 
               rules << ->(result) { result.class.include?(Service::Plugins::HasResult::Entities::Result::Concern) }
 
