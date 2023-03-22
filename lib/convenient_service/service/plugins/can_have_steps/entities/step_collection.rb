@@ -8,10 +8,18 @@ module ConvenientService
           class StepCollection
             include ::Enumerable
 
+            ##
+            # @!attribute [r] steps
+            #   @return [Array<ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step>]
+            #
             attr_reader :steps
 
-            def initialize
-              @steps = []
+            ##
+            # @param steps [Array<ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step>]
+            # @return [void]
+            #
+            def initialize(steps: [])
+              @steps = steps
             end
 
             ##
