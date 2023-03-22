@@ -41,7 +41,7 @@ module ConvenientService
             end
 
             ##
-            # TODO: Specs.
+            # @return [Boolean]
             #
             def committed?
               steps.frozen?

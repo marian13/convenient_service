@@ -83,6 +83,27 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       end
     end
 
+    describe "#committed?" do
+      let(:step_collection) { described_class.new(steps: steps) }
+      let(:steps) { [step] }
+
+      context "when `steps` are NOT frozen" do
+        it "returns `false`" do
+          expect(step_collection.committed?).to eq(false)
+        end
+      end
+
+      context "when `steps` are frozen" do
+        before do
+          steps.freeze
+        end
+
+        it "returns `true`" do
+          expect(step_collection.committed?).to eq(true)
+        end
+      end
+    end
+
     describe "#[]" do
       let(:index) { 0 }
 
