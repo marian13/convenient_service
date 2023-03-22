@@ -33,6 +33,56 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
     let(:step) { ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step.new(Class.new, in: :foo, out: :bar, container: Class.new) }
 
+    describe "#commit!" do
+      let(:step_collection) { described_class.new(steps: steps) }
+      let(:steps) { [step] }
+
+      context "when step collection is NOT committed" do
+        it "returns `true`" do
+          expect(step_collection.commit!).to eq(true)
+        end
+
+        it "freezes step collection `steps`" do
+          expect { step_collection.commit! }.to delegate_to(steps, :freeze)
+        end
+
+        specify do
+          expect { step_collection.commit! }.to delegate_to(steps.first, :define!)
+        end
+
+        context "when step collection has multiple steps" do
+          let(:steps) { [step] }
+          let(:other_step) { ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step.new(Class.new, in: :baz, out: :qux, container: Class.new) }
+
+          it "returns `true`" do
+            expect(step_collection.commit!).to eq(true)
+          end
+
+          it "freezes step collection `steps`" do
+            expect { step_collection.commit! }.to delegate_to(steps, :freeze)
+          end
+
+          specify do
+            expect { step_collection.commit! }.to delegate_to(steps.first, :define!)
+          end
+
+          specify do
+            expect { step_collection.commit! }.to delegate_to(steps.last, :define!)
+          end
+        end
+      end
+
+      context "when step collection is committed" do
+        before do
+          step_collection.commit!
+        end
+
+        it "returns `false`" do
+          expect(step_collection.commit!).to eq(false)
+        end
+      end
+    end
+
     describe "#[]" do
       let(:index) { 0 }
 

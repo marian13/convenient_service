@@ -23,15 +23,19 @@ module ConvenientService
             end
 
             ##
-            # TODO: Specs.
+            # @return [Boolean] true if called for the first time, false otherwise (similarly as Kernel#require).
+            #
+            # @see https://ruby-doc.org/core-3.1.2/Kernel.html#method-i-require
+            #
+            # @internal
+            #   IMPORTANT: `step.validate!` is intentionally removed from `steps.each { |step| step.validate! && step.define! }.freeze` since it is NOT idempotent.
+            #
+            #   NOTE: `step.validate!` is still useful as a `doctor` command.
             #
             def commit!
               return false if committed?
 
-              ##
-              # IMPORTANT: Temporarily removed `step.validate!` since it is neither thread-safe nor idempotent.
-              #
-              steps.each { |step| step.define! }.freeze
+              steps.each(&:define!).freeze
 
               true
             end
