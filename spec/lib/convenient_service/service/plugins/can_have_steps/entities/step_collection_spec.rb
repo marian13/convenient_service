@@ -42,8 +42,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           expect(step_collection.commit!).to eq(true)
         end
 
+        ##
+        # NOTE: Stubs on `freeze` generate warnings.
+        #
         it "freezes step collection `steps`" do
-          expect { step_collection.commit! }.to delegate_to(steps, :freeze)
+          expect { step_collection.commit! }.to change(steps, :frozen?).from(false).to(true)
         end
 
         specify do
@@ -58,8 +61,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
             expect(step_collection.commit!).to eq(true)
           end
 
+          ##
+          # NOTE: Stubs on `freeze` generate warnings.
+          #
           it "freezes step collection `steps`" do
-            expect { step_collection.commit! }.to delegate_to(steps, :freeze)
+            expect { step_collection.commit! }.to change(steps, :frozen?).from(false).to(true)
           end
 
           specify do
@@ -170,8 +176,8 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         expect(step_collection.steps.map(&:index)).to eq([0, 1, 2])
       end
 
-      it "returns `steps`" do
-        expect(step_collection << step_without_index).to eq([step_with_index])
+      it "returns step collection" do
+        expect(step_collection << step_without_index).to eq(step_collection)
       end
     end
 

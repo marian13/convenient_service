@@ -47,6 +47,10 @@ module ConvenientService
               steps.frozen?
             end
 
+            ##
+            # @param block [Proc, nil]
+            # @return [Array<ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step>, Enumerator]
+            #
             def each(&block)
               steps.each(&block)
             end
@@ -64,10 +68,20 @@ module ConvenientService
               steps[index]
             end
 
+            ##
+            # @param step [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step]
+            # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::StepCollection]
+            #
             def <<(step)
               steps << step.copy(overrides: {kwargs: {index: next_available_index}})
+
+              self
             end
 
+            ##
+            # @param other [Object] Can be any type.
+            # @return [Boolean, nil]
+            #
             def ==(other)
               return unless other.instance_of?(self.class)
 
@@ -78,6 +92,9 @@ module ConvenientService
 
             private
 
+            ##
+            # @return [Integer]
+            #
             def next_available_index
               steps.size
             end
