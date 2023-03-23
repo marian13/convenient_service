@@ -390,7 +390,7 @@ RSpec.describe ConvenientService::Configs::Standard do
               end
 
               it "sets service result internals concerns" do
-                expect(service_class::Internals.concerns.to_a).to eq(concerns)
+                expect(service_class::Result::Internals.concerns.to_a).to eq(concerns)
               end
             end
           end

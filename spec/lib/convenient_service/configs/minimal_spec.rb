@@ -354,7 +354,7 @@ RSpec.describe ConvenientService::Configs::Minimal do
               end
 
               it "sets service result internals concerns" do
-                expect(service_class::Internals.concerns.to_a).to eq(concerns)
+                expect(service_class::Result::Internals.concerns.to_a).to eq(concerns)
               end
             end
           end

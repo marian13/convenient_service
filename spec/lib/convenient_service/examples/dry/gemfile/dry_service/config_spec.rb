@@ -154,7 +154,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::DryService::Config do
         end
 
         example_group "service internals" do
-          example_group "concenrs" do
+          example_group "concerns" do
             let(:concerns) do
               [
                 ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Plugins::HasCache::Concern
@@ -395,7 +395,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::DryService::Config do
               end
 
               it "sets service result internals concerns" do
-                expect(service_class::Internals.concerns.to_a).to eq(concerns)
+                expect(service_class::Result::Internals.concerns.to_a).to eq(concerns)
               end
             end
           end

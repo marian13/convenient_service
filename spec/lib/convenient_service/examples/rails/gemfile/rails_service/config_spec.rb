@@ -397,7 +397,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::RailsService::Config
               end
 
               it "sets service result internals concerns" do
-                expect(service_class::Internals.concerns.to_a).to eq(concerns)
+                expect(service_class::Result::Internals.concerns.to_a).to eq(concerns)
               end
             end
           end
