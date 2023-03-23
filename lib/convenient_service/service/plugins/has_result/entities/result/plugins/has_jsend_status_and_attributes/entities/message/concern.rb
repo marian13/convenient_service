@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+require_relative "concern/class_methods"
+require_relative "concern/instance_methods"
+
 module ConvenientService
   module Service
     module Plugins
@@ -10,16 +13,15 @@ module ConvenientService
               module HasJsendStatusAndAttributes
                 module Entities
                   class Message
-                    module ClassMethods
-                      def cast(other)
-                        case other
-                        when ::String
-                          new(value: other)
-                        when ::Symbol
-                          new(value: other.to_s)
-                        when Message
-                          new(value: other.value)
-                        end
+                    module Concern
+                      include Support::Concern
+
+                      included do |code_class|
+                        code_class.include Support::Castable
+
+                        code_class.include InstanceMethods
+
+                        code_class.extend ClassMethods
                       end
                     end
                   end

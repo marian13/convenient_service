@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "message/class_methods"
+require_relative "message/concern"
 
 module ConvenientService
   module Service
@@ -12,27 +12,7 @@ module ConvenientService
               module HasJsendStatusAndAttributes
                 module Entities
                   class Message
-                    include Support::Castable
-
-                    extend ClassMethods
-
-                    attr_reader :value
-
-                    def initialize(value:)
-                      @value = value
-                    end
-
-                    def ==(other)
-                      casted = cast(other)
-
-                      return unless casted
-
-                      value == casted.value
-                    end
-
-                    def to_s
-                      @to_s ||= value.to_s
-                    end
+                    include Concern
                   end
                 end
               end
