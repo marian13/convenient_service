@@ -114,6 +114,62 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
       end
     end
 
+    describe "#in?" do
+      context "when `statuses` are NOT empty" do
+        context "when all `statuses` are NOT castable" do
+          let(:statuses) { [42, Class.new] }
+
+          it "returns `false`" do
+            expect(status.in?(statuses)).to eq(false)
+          end
+        end
+
+        context "when any of `statuses` is castable" do
+          context "when `status` is NOT equal to that castable status in `==` terms" do
+            let(:statuses) { [42, :bar] }
+
+            it "returns `false`" do
+              expect(status.in?(statuses)).to eq(false)
+            end
+          end
+
+          context "when `status` is equal to that castable status in `==` terms" do
+            let(:statuses) { [42, :foo] }
+
+            it "returns `true`" do
+              expect(status.in?(statuses)).to eq(true)
+            end
+          end
+        end
+
+        context "when all `statuses` are castable" do
+          context "when `status` is NOT equal to any of those castable statuses in `==` terms" do
+            let(:statuses) { [:bar, :baz] }
+
+            it "returns `false`" do
+              expect(status.in?(statuses)).to eq(false)
+            end
+          end
+
+          context "when `status` is equal to any of those castable statuses in `==` terms" do
+            let(:statuses) { [:bar, :foo] }
+
+            it "returns `true`" do
+              expect(status.in?(statuses)).to eq(true)
+            end
+          end
+        end
+      end
+
+      context "when `statuses` are empty" do
+        let(:statuses) { [] }
+
+        it "returns `false`" do
+          expect(status.in?(statuses)).to eq(false)
+        end
+      end
+    end
+
     example_group "comparisons" do
       describe "#==" do
         context "when `other` is NOT castable" do
