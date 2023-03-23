@@ -28,7 +28,7 @@ module ConvenientService
 
                         ##
                         # @param other [Object] Can be any type.
-                        # @return [Boolean]
+                        # @return [Boolean, nil]
                         #
                         def ==(other)
                           casted = cast(other)
