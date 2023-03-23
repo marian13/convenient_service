@@ -10,6 +10,10 @@ module ConvenientService
               module HasJsendStatusAndAttributes
                 module Errors
                   class NotExistingAttribute < ::ConvenientService::Error
+                    ##
+                    # @param attribute [Symbol]
+                    # @return [void]
+                    #
                     def initialize(attribute:)
                       message = <<~TEXT
                         Data attribute `#{attribute}` does NOT exist. Make sure the corresponding result returns it.
