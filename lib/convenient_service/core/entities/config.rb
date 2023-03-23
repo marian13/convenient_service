@@ -58,13 +58,13 @@ module ConvenientService
         # @overload middlewares(method)
         #   Returns all instance middlewares for particular method.
         #   @param method [Symbol] Method name.
-        #   @return [Hash<Symbol, Hash<Symbol, ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares>>]
+        #   @return [Hash{Symbol => Hash{Symbol => ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares}}]
         #
         # @overload middlewares(method, scope:)
         #   Returns all scoped middlewares for particular method.
         #   @param method [Symbol] Method name.
         #   @param scope [:instance, :class]
-        #   @return [Hash<Symbol, Hash<Symbol, ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares>>]
+        #   @return [Hash{Symbol => Hash{Symbol => ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares}}]
         #
         # @overload middlewares(method, &configuration_block)
         #   Configures instance middlewares for particular method.
