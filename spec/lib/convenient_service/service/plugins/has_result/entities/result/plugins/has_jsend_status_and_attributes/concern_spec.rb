@@ -27,6 +27,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
       end
 
       it { is_expected.to include_module(described_class::InstanceMethods) }
+      it { is_expected.to extend_module(described_class::ClassMethods) }
     end
   end
 end
