@@ -58,13 +58,19 @@ module ConvenientService
 
             ##
             # @return [Boolean]
+            # @since 0.12.0
             #
-            alias ok? success?
+            def ok?(...)
+              result(...).success?
+            end
 
             ##
             # @return [Boolean]
+            # @since 0.12.0
             #
-            alias not_ok? not_success?
+            def not_ok?(...)
+              result(...).not_success?
+            end
           end
         end
       end
