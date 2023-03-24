@@ -7,45 +7,80 @@ module ConvenientService
         module Entities
           class Method
             module Commands
-              ##
-              # TODO: Abstract factory.
-              #
               class CastMethod < Support::Command
-                attr_reader :other, :options
+                ##
+                # @!attribute [r] options
+                #   @return [Object] Can be any type.
+                #
+                attr_reader :other
 
+                ##
+                # @!attribute [r] options
+                #   @return [Hash]
+                #
+                attr_reader :options
+
+                ##
+                # @param other [Object] Can be any type.
+                # @param options [Hash]
+                #
                 def initialize(other:, options:)
                   @other = other
                   @options = options
                 end
 
+                ##
+                # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method, nil]
+                #
+                # @internal
+                #   NOTE: Read more about Composition over Inheritance.
+                #   - https://en.wikipedia.org/wiki/Composition_over_inheritance
+                #
                 def call
+                  return unless factory
                   return unless key
                   return unless name
                   return unless caller
                   return unless direction
 
-                  ##
-                  # https://en.wikipedia.org/wiki/Composition_over_inheritance
-                  #
                   Method.new(key: key, name: name, caller: caller, direction: direction)
                 end
 
                 private
 
+                ##
+                # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Factories::Base]
+                #
+                def factory
+                  Utils::Object.memoize_including_falsy_values(self, :@factory) { Commands::CastMethodFactory.call(other: other) }
+                end
+
+                ##
+                # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Key]
+                #
                 def key
-                  @key ||= Commands::CastMethodKey.call(other: other, options: options)
+                  Utils::Object.memoize_including_falsy_values(self, :@key) { factory&.create_key }
                 end
 
+                ##
+                # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Name]
+                #
                 def name
-                  @name ||= Commands::CastMethodName.call(other: other, options: options)
+                  Utils::Object.memoize_including_falsy_values(self, :@name) { factory&.create_name }
                 end
 
+                ##
+                # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Callers::Base]
+                #
                 def caller
-                  @caller ||= Commands::CastMethodCaller.call(other: other, options: options)
+                  Utils::Object.memoize_including_falsy_values(self, :@caller) { factory&.create_caller }
                 end
 
+                ##
+                # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Direction::Base]
+                #
                 def direction
-                  @direction ||= Commands::CastMethodDirection.call(other: other, options: options)
+                  Utils::Object.memoize_including_falsy_values(self, :@direction) { Commands::CastMethodDirection.call(other: other, options: options) }
                 end
               end
             end

@@ -5,11 +5,10 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
-RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Commands::CastMethodCaller do
+RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Commands::CastMethodFactory do
   example_group "class methods" do
     describe ".call" do
-      let(:options) { double }
-      let(:casted) { described_class.call(other: other, options: options) }
+      let(:casted) { described_class.call(other: other) }
 
       context "when `other` is NOT castable" do
         let(:other) { 42 }
@@ -22,16 +21,16 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
       context "when `other` is symbol" do
         let(:other) { :foo }
 
-        it "returns symbol casted to method caller" do
-          expect(casted).to eq(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Callers::Usual.new(:foo))
+        it "returns symbol factory" do
+          expect(casted).to eq(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Factories::Symbol.new(other: other))
         end
       end
 
       context "when `other` is string" do
         let(:other) { "foo" }
 
-        it "returns string casted to method caller" do
-          expect(casted).to eq(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Callers::Usual.new("foo"))
+        it "returns string factory" do
+          expect(casted).to eq(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Factories::String.new(other: other))
         end
       end
 
@@ -56,16 +55,16 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
           context "when value by that key is symbol" do
             let(:other) { {foo: :bar} }
 
-            it "returns proc casted to method caller" do
-              expect(casted).to eq(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Callers::Alias.new(:bar))
+            it "returns hash with symbol value factory" do
+              expect(casted).to eq(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Factories::Hash::SymbolValue.new(other: other))
             end
           end
 
           context "when value by that key is string" do
             let(:other) { {foo: "bar"} }
 
-            it "returns proc casted to method caller" do
-              expect(casted).to eq(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Callers::Alias.new("bar"))
+            it "returns hash with string value factory" do
+              expect(casted).to eq(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Factories::Hash::StringValue.new(other: other))
             end
           end
 
@@ -73,8 +72,8 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
             let(:proc) { -> { :bar } }
             let(:other) { {foo: proc} }
 
-            it "returns proc casted to method caller" do
-              expect(casted).to eq(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Callers::Proc.new(proc))
+            it "returns hash with proc value factory" do
+              expect(casted).to eq(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Factories::Hash::ProcValue.new(other: other))
             end
           end
 
@@ -82,8 +81,8 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
             let(:raw_value) { ConvenientService::Support::RawValue.wrap(:bar) }
             let(:other) { {foo: raw_value} }
 
-            it "returns raw value casted to method caller" do
-              expect(casted).to eq(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Callers::Raw.new(raw_value))
+            it "returns hash with raw value factory" do
+              expect(casted).to eq(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Factories::Hash::RawValue.new(other: other))
             end
           end
 
@@ -91,8 +90,8 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
             let(:reassignment) { ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Values::Reassignment.new(:bar) }
             let(:other) { {foo: reassignment} }
 
-            it "returns raw value casted to method caller" do
-              expect(casted).to eq(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Callers::Reassignment.new(reassignment))
+            it "returns hash with reassignment value factory" do
+              expect(casted).to eq(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Factories::Hash::ReassignmentValue.new(other: other))
             end
           end
         end
@@ -110,16 +109,16 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
         let(:reassignment) { ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Values::Reassignment.new("foo") }
         let(:other) { reassignment }
 
-        it "returns reassignment casted to method caller" do
-          expect(casted).to eq(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Callers::Reassignment.new(reassignment))
+        it "returns hash with reassignment value factory" do
+          expect(casted).to eq(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Factories::Reassignment.new(other: other))
         end
       end
 
       context "when `other` is method" do
         let(:other) { ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method.cast(:foo, direction: :input) }
 
-        it "returns its caller copy" do
-          expect(casted).to eq(other.caller.copy)
+        it "returns hash with reassignment value factory" do
+          expect(casted).to eq(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Factories::Method.new(other: other))
         end
       end
     end
