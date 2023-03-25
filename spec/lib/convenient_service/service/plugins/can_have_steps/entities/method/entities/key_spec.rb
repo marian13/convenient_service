@@ -44,7 +44,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
         context "when `other` has different class" do
           let(:other) { 42 }
 
-          it "returns `false`" do
+          it "returns `nil`" do
             expect(key == other).to be_nil
           end
         end
