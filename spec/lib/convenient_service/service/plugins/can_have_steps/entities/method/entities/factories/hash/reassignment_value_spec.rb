@@ -5,12 +5,12 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
-RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Factories::Hash::RawValue do
+RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Factories::Hash::ReassignmentValue do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   let(:factory) { described_class.new(other: hash) }
-  let(:hash) { {foo: ConvenientService::Support::RawValue.wrap(value)} }
-  let(:value) { 42 }
+  let(:hash) { {foo: ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Values::Reassignment.new(value)} }
+  let(:value) { :bar }
 
   example_group "inheritance" do
     include ConvenientService::RSpec::Matchers::BeDescendantOf
@@ -34,7 +34,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
       specify do
         expect { factory.create_name }
           .to delegate_to(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Name, :new)
-          .with_arguments(factory.key)
+          .with_arguments(factory.value.to_sym)
           .and_return_its_value
       end
     end
@@ -42,7 +42,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
     describe "#create_caller" do
       specify do
         expect { factory.create_caller }
-          .to delegate_to(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Callers::Raw, :new)
+          .to delegate_to(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Callers::Reassignment, :new)
           .with_arguments(factory.value)
           .and_return_its_value
       end
