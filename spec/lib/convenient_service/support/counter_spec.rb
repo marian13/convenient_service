@@ -5,9 +5,8 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::Support::ThreadSafeCounter do
+RSpec.describe ConvenientService::Support::Counter do
   include ConvenientService::RSpec::Helpers::IgnoringError
-  include ConvenientService::RSpec::Helpers::InThreads
 
   let(:counter) { described_class.new(initial_value: initial_value, min_value: min_value, max_value: max_value) }
   let(:initial_value) { 0 }
@@ -76,10 +75,6 @@ RSpec.describe ConvenientService::Support::ThreadSafeCounter do
       it "returns `n`" do
         expect(counter.current_value = n).to eq(n)
       end
-
-      ##
-      # TODO: `@current_value = n` always returns `n` in Ruby. How to test thread-safety?
-      #
     end
 
     describe "#increment" do
@@ -106,12 +101,6 @@ RSpec.describe ConvenientService::Support::ThreadSafeCounter do
 
         it "does NOT changes current value" do
           expect { counter.increment(n) }.not_to change(counter, :current_value)
-        end
-      end
-
-      example_group "thread-safety" do
-        it "is thread-safe" do
-          expect(in_threads(10, counter) { |counter| counter.increment }.sort).to eq([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
         end
       end
     end
@@ -144,20 +133,14 @@ RSpec.describe ConvenientService::Support::ThreadSafeCounter do
           TEXT
         end
 
-        it "raises `ConvenientService::Support::ThreadSafeCounter::Errors::ValueAfterIncrementIsGreaterThanMaxValue`" do
+        it "raises `ConvenientService::Support::Counter::Errors::ValueAfterIncrementIsGreaterThanMaxValue`" do
           expect { counter.increment!(n) }
-            .to raise_error(ConvenientService::Support::ThreadSafeCounter::Errors::ValueAfterIncrementIsGreaterThanMaxValue)
+            .to raise_error(ConvenientService::Support::Counter::Errors::ValueAfterIncrementIsGreaterThanMaxValue)
             .with_message(error_message)
         end
 
         it "does NOT changes current value" do
-          expect { ignoring_error(ConvenientService::Support::ThreadSafeCounter::Errors::ValueAfterIncrementIsGreaterThanMaxValue) { counter.increment!(n) } }.not_to change(counter, :current_value)
-        end
-      end
-
-      example_group "thread-safety" do
-        it "is thread-safe" do
-          expect(in_threads(10, counter) { |counter| counter.increment! }.sort).to eq([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+          expect { ignoring_error(ConvenientService::Support::Counter::Errors::ValueAfterIncrementIsGreaterThanMaxValue) { counter.increment!(n) } }.not_to change(counter, :current_value)
         end
       end
     end
@@ -188,15 +171,6 @@ RSpec.describe ConvenientService::Support::ThreadSafeCounter do
           expect { counter.bincrement(n) }.not_to change(counter, :current_value)
         end
       end
-
-      example_group "thread-safety" do
-        let(:initial_value) { 5 }
-        let(:max_value) { 10 }
-
-        it "is thread-safe" do
-          expect(in_threads(10, counter) { |counter| counter.bincrement }.tally).to eq({true => 5, false => 5})
-        end
-      end
     end
 
     describe "#decrement" do
@@ -223,12 +197,6 @@ RSpec.describe ConvenientService::Support::ThreadSafeCounter do
 
         it "does NOT changes current value" do
           expect { counter.decrement(n) }.not_to change(counter, :current_value)
-        end
-      end
-
-      example_group "thread-safety" do
-        it "is thread-safe" do
-          expect(in_threads(10, counter) { |counter| counter.decrement }.sort).to eq([-10, -9, -8, -7, -6, -5, -4, -3, -2, -1])
         end
       end
     end
@@ -261,20 +229,14 @@ RSpec.describe ConvenientService::Support::ThreadSafeCounter do
           TEXT
         end
 
-        it "raises `ConvenientService::Support::ThreadSafeCounter::Errors::ValueAfterDecrementIsLowerThanMinValue`" do
+        it "raises `ConvenientService::Support::Counter::Errors::ValueAfterDecrementIsLowerThanMinValue`" do
           expect { counter.decrement!(n) }
-            .to raise_error(ConvenientService::Support::ThreadSafeCounter::Errors::ValueAfterDecrementIsLowerThanMinValue)
+            .to raise_error(ConvenientService::Support::Counter::Errors::ValueAfterDecrementIsLowerThanMinValue)
             .with_message(error_message)
         end
 
         it "does NOT changes current value" do
-          expect { ignoring_error(ConvenientService::Support::ThreadSafeCounter::Errors::ValueAfterDecrementIsLowerThanMinValue) { counter.decrement!(n) } }.not_to change(counter, :current_value)
-        end
-      end
-
-      example_group "thread-safety" do
-        it "is thread-safe" do
-          expect(in_threads(10, counter) { |counter| counter.decrement! }.sort).to eq([-10, -9, -8, -7, -6, -5, -4, -3, -2, -1])
+          expect { ignoring_error(ConvenientService::Support::Counter::Errors::ValueAfterDecrementIsLowerThanMinValue) { counter.decrement!(n) } }.not_to change(counter, :current_value)
         end
       end
     end
@@ -305,15 +267,6 @@ RSpec.describe ConvenientService::Support::ThreadSafeCounter do
           expect { counter.bdecrement(n) }.not_to change(counter, :current_value)
         end
       end
-
-      example_group "thread-safety" do
-        let(:initial_value) { -5 }
-        let(:min_value) { -10 }
-
-        it "is thread-safe" do
-          expect(in_threads(10, counter) { |counter| counter.bdecrement }.tally).to eq({true => 5, false => 5})
-        end
-      end
     end
 
     describe "#reset" do
@@ -327,12 +280,6 @@ RSpec.describe ConvenientService::Support::ThreadSafeCounter do
 
       it "returns current value" do
         expect(counter.reset).to eq(counter.current_value)
-      end
-
-      example_group "thread-safety" do
-        it "is thread-safe" do
-          expect(in_threads(10, counter) { |counter| counter.increment && counter.reset }.uniq).to eq([0])
-        end
       end
     end
   end
