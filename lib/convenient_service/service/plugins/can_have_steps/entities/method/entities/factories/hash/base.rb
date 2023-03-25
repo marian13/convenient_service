@@ -21,7 +21,7 @@ module ConvenientService
                     # @return [Object] Can be any object.
                     #
                     def value
-                      @value ||= other.values.first
+                      Utils::Object.memoize_including_falsy_values(self, :@value) { other.values.first }
                     end
                   end
                 end
