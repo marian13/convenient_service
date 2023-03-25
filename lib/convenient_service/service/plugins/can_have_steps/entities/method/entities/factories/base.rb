@@ -28,7 +28,7 @@ module ConvenientService
                   abstract_method :create_name
 
                   ##
-                  # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Caller]
+                  # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Callers::Base]
                   #
                   abstract_method :create_caller
 

@@ -25,7 +25,7 @@ module ConvenientService
                     end
 
                     ##
-                    # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Caller]
+                    # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Callers::Base]
                     #
                     def create_caller
                       Entities::Callers::Reassignment.new(value)
