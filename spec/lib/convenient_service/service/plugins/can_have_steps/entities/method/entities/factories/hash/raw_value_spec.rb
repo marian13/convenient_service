@@ -9,8 +9,8 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   let(:factory) { described_class.new(other: hash) }
-  let(:hash) { {foo: ConvenientService::Support::RawValue.wrap(value)} }
-  let(:value) { 42 }
+  let(:hash) { {foo: value} }
+  let(:value) { ConvenientService::Support::RawValue.wrap(42) }
 
   example_group "inheritance" do
     include ConvenientService::RSpec::Matchers::BeDescendantOf
