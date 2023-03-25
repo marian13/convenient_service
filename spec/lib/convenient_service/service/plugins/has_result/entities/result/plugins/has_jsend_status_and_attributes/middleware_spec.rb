@@ -52,7 +52,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
 
       specify do
         expect { method_value }
-          .to delegate_to(ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Commands::CastJSendAttributes, :call)
+          .to delegate_to(ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Commands::CastJsendAttributes, :call)
           .with_arguments(attributes: attributes)
       end
 

@@ -8,8 +8,8 @@ require "convenient_service"
 RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Factories::Symbol do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
-  let(:factory) { described_class.new(other: string) }
-  let(:string) { :foo }
+  let(:factory) { described_class.new(other: symbol) }
+  let(:symbol) { :foo }
 
   example_group "inheritance" do
     include ConvenientService::RSpec::Matchers::BeDescendantOf
