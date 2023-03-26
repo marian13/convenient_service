@@ -40,7 +40,7 @@ module ConvenientService
       #
       def commit_config!(trigger: ConvenientService::Core::Constants::Triggers::USER)
         (@__convenient_service_config__ ||= Entities::Config.new(klass: self)).commit!(trigger: trigger)
-          .tap { ConvenientService.logger.debug { "[Core] Committed config for `#{self}` | Triggered by `.commit_config!`" } }
+          .tap { ConvenientService.logger.debug { "[Core] Committed config for `#{self}` | Triggered by `.commit_config!(trigger: #{trigger.inspect})` " } }
       end
 
       ##
@@ -71,12 +71,14 @@ module ConvenientService
       #
       # @param method [Symbol]
       # @param args [Array<Object>]
-      # @param kwargs [Hash<Symbol, Object>]
+      # @param kwargs [Hash{Symbol => Object}]
       # @param block [Proc]
       # @return [void]
       #
       # @internal
-      #   IMPORTANT: `method_missing` should be thread-safe.
+      #   IMPORTANT: `method_missing` MUST be thread-safe.
+      #
+      #   NOTE: `__send__` is used instead of `Support::SafeMethod` intentionally, since checking whether a method is defined is performed earlier by `Utils::Module.class_method_defined?`.
       #
       def method_missing(method, *args, **kwargs, &block)
         commit_config!(trigger: Constants::Triggers::CLASS_METHOD_MISSING)

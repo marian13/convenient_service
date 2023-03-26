@@ -31,10 +31,10 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
   let(:method_options) { {direction: :input} }
   let(:method_return_value) { "method return value" }
 
-  let(:key) { ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Commands::CastMethodName.call(other: method_other, options: method_options) }
-  let(:name) { ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Commands::CastMethodName.call(other: method_other, options: method_options) }
-  let(:caller) { ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Commands::CastMethodCaller.call(other: method_other, options: method_options) }
-  let(:direction) { ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Commands::CastMethodDirection.call(other: method_other, options: method_options) }
+  let(:key) { ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Commands::CastMethod.call(other: method_other, options: method_options).name }
+  let(:name) { ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Commands::CastMethod.call(other: method_other, options: method_options).name }
+  let(:caller) { ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Commands::CastMethod.call(other: method_other, options: method_options).caller }
+  let(:direction) { ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Commands::CastMethod.call(other: method_other, options: method_options).direction }
 
   let(:container) { ConvenientService::Service::Plugins::CanHaveSteps::Entities::Service.cast(service_class) }
   let(:organizer) { service_instance }
@@ -85,7 +85,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
         end
 
         context "when `other` has different `key`" do
-          let(:other) { method_class.new(**method_kwargs.merge(key: ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Commands::CastMethodKey.call(other: :bar, options: method_options))) }
+          let(:other) { method_class.new(**method_kwargs.merge(key: ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Commands::CastMethod.call(other: :bar, options: method_options).key)) }
 
           it "returns `false`" do
             expect(method == other).to eq(false)
@@ -93,7 +93,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
         end
 
         context "when `other` has different `name`" do
-          let(:other) { method_class.new(**method_kwargs.merge(name: ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Commands::CastMethodName.call(other: :bar, options: method_options))) }
+          let(:other) { method_class.new(**method_kwargs.merge(name: ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Commands::CastMethod.call(other: :bar, options: method_options).name)) }
 
           it "returns `false`" do
             expect(method == other).to eq(false)
@@ -101,7 +101,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
         end
 
         context "when `other` has different `caller`" do
-          let(:other) { method_class.new(**method_kwargs.merge(caller: ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Commands::CastMethodCaller.call(other: :bar, options: method_options))) }
+          let(:other) { method_class.new(**method_kwargs.merge(caller: ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Commands::CastMethod.call(other: :bar, options: method_options).caller)) }
 
           it "returns `false`" do
             expect(method == other).to eq(false)
@@ -109,7 +109,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
         end
 
         context "when `other` has different `direction`" do
-          let(:other) { method_class.new(**method_kwargs.merge(direction: ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Commands::CastMethodCaller.call(other: method_other, options: {direction: :output}))) }
+          let(:other) { method_class.new(**method_kwargs.merge(direction: ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Commands::CastMethod.call(other: method_other, options: {direction: :output}).caller)) }
 
           it "returns `false`" do
             expect(method == other).to eq(false)

@@ -9,7 +9,7 @@ module ConvenientService
             module Plugins
               module HasJsendStatusAndAttributes
                 module Commands
-                  class CastJSendAttributes < Support::Command
+                  class CastJsendAttributes < Support::Command
                     attr_reader :attributes
 
                     def initialize(attributes:)
@@ -17,7 +17,7 @@ module ConvenientService
                     end
 
                     def call
-                      Structs::JSendAttributes.new(
+                      Structs::JsendAttributes.new(
                         service: attributes[:service],
                         status: Entities::Status.cast!(attributes[:status]),
                         data: Entities::Data.cast!(attributes[:data]),

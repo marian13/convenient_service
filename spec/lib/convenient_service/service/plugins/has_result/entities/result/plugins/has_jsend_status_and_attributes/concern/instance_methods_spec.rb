@@ -128,7 +128,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
 
     describe "#jsend_attributes" do
       let(:jsend_attributes) do
-        ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Structs::JSendAttributes.new(
+        ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Structs::JsendAttributes.new(
           service: params[:service],
           status: ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Entities::Status.cast(params[:status]),
           data: ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Entities::Data.cast(params[:data]),

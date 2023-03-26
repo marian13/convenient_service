@@ -8,16 +8,34 @@ module ConvenientService
           class Method
             module Commands
               ##
-              # TODO: Abstract factory.
+              # @internal
+              #   TODO: Separate in and out methods?
               #
               class CastMethodDirection < Support::Command
-                attr_reader :other, :options
+                ##
+                # @!attribute [r] options
+                #   @return [Object] Can be any type.
+                #
+                attr_reader :other
 
+                ##
+                # @!attribute [r] options
+                #   @return [Hash]
+                #
+                attr_reader :options
+
+                ##
+                # @param other [Object] Can be any type.
+                # @param options [Hash]
+                #
                 def initialize(other:, options:)
                   @other = other
                   @options = options
                 end
 
+                ##
+                # @return [Entities::Directions::Base, nil]
+                #
                 def call
                   casted =
                     case options[:direction]
@@ -37,6 +55,9 @@ module ConvenientService
 
                 private
 
+                ##
+                # @return [Entities::Directions::Base, nil]
+                #
                 def cast_symbol
                   case options[:direction]
                   when :input
@@ -46,6 +67,9 @@ module ConvenientService
                   end
                 end
 
+                ##
+                # @return [Entities::Directions::Base, nil]
+                #
                 def cast_string
                   case options[:direction]
                   when "input"
@@ -55,6 +79,9 @@ module ConvenientService
                   end
                 end
 
+                ##
+                # @return [Entities::Directions::Base, nil]
+                #
                 def cast_method
                   other.direction.copy
                 end

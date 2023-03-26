@@ -6,6 +6,8 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::StepCollection do
+  let(:step_collection) { described_class.new }
+
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
 
@@ -14,36 +16,96 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
     it { is_expected.to include_module(::Enumerable) }
   end
 
+  example_group "class methods" do
+    describe ".new" do
+      context "when `steps` are NOT passed" do
+        let(:step_collection) { described_class.new }
+
+        it "sets steps to empty array" do
+          expect(step_collection.steps).to eq([])
+        end
+      end
+    end
+  end
+
   example_group "instance methods" do
     include ConvenientService::RSpec::Matchers::DelegateTo
 
-    let(:step_collection) { described_class.new }
     let(:step) { ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step.new(Class.new, in: :foo, out: :bar, container: Class.new) }
 
-    example_group "comparison" do
-      describe "#==" do
-        context "when `other` has different class" do
-          let(:other) { 42 }
+    describe "#commit!" do
+      let(:step_collection) { described_class.new(steps: steps) }
+      let(:steps) { [step] }
 
-          it "returns `false`" do
-            expect(step_collection == other).to be_nil
-          end
+      context "when step collection is NOT committed" do
+        it "returns `true`" do
+          expect(step_collection.commit!).to eq(true)
         end
 
-        context "when `other` has different `steps`" do
-          let(:other) { described_class.new.tap { |collection| collection << step } }
-
-          it "returns `false`" do
-            expect(step_collection == other).to eq(false)
-          end
+        ##
+        # NOTE: Stubs on `freeze` generate warnings.
+        #
+        it "freezes step collection `steps`" do
+          expect { step_collection.commit! }.to change(steps, :frozen?).from(false).to(true)
         end
 
-        context "when `other` has same attributes" do
-          let(:other) { described_class.new }
+        specify do
+          expect { step_collection.commit! }.to delegate_to(steps.first, :define!)
+        end
+
+        context "when step collection has multiple steps" do
+          let(:steps) { [step] }
+          let(:other_step) { ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step.new(Class.new, in: :baz, out: :qux, container: Class.new) }
 
           it "returns `true`" do
-            expect(step_collection == other).to eq(true)
+            expect(step_collection.commit!).to eq(true)
           end
+
+          ##
+          # NOTE: Stubs on `freeze` generate warnings.
+          #
+          it "freezes step collection `steps`" do
+            expect { step_collection.commit! }.to change(steps, :frozen?).from(false).to(true)
+          end
+
+          specify do
+            expect { step_collection.commit! }.to delegate_to(steps.first, :define!)
+          end
+
+          specify do
+            expect { step_collection.commit! }.to delegate_to(steps.last, :define!)
+          end
+        end
+      end
+
+      context "when step collection is committed" do
+        before do
+          step_collection.commit!
+        end
+
+        it "returns `false`" do
+          expect(step_collection.commit!).to eq(false)
+        end
+      end
+    end
+
+    describe "#committed?" do
+      let(:step_collection) { described_class.new(steps: steps) }
+      let(:steps) { [step] }
+
+      context "when `steps` are NOT frozen" do
+        it "returns `false`" do
+          expect(step_collection.committed?).to eq(false)
+        end
+      end
+
+      context "when `steps` are frozen" do
+        before do
+          steps.freeze
+        end
+
+        it "returns `true`" do
+          expect(step_collection.committed?).to eq(true)
         end
       end
     end
@@ -114,8 +176,36 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         expect(step_collection.steps.map(&:index)).to eq([0, 1, 2])
       end
 
-      it "returns `steps`" do
-        expect(step_collection << step_without_index).to eq([step_with_index])
+      it "returns step collection" do
+        expect(step_collection << step_without_index).to eq(step_collection)
+      end
+    end
+
+    example_group "comparison" do
+      describe "#==" do
+        context "when `other` has different class" do
+          let(:other) { 42 }
+
+          it "returns `nil`" do
+            expect(step_collection == other).to be_nil
+          end
+        end
+
+        context "when `other` has different `steps`" do
+          let(:other) { described_class.new.tap { |collection| collection << step } }
+
+          it "returns `false`" do
+            expect(step_collection == other).to eq(false)
+          end
+        end
+
+        context "when `other` has same attributes" do
+          let(:other) { described_class.new }
+
+          it "returns `true`" do
+            expect(step_collection == other).to eq(true)
+          end
+        end
       end
     end
   end

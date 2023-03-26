@@ -13,7 +13,7 @@ module ConvenientService
                     module Concern
                       module InstanceMethods
                         ##
-                        # @!attribute value [r]
+                        # @!attribute [r] value
                         #   @return [Symbol]
                         #
                         attr_reader :value
@@ -28,7 +28,7 @@ module ConvenientService
 
                         ##
                         # @param other [Object] Can be any type.
-                        # @return [Boolean]
+                        # @return [Boolean, nil]
                         #
                         def ==(other)
                           casted = cast(other)

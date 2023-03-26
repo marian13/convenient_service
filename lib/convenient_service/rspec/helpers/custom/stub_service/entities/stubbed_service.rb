@@ -6,7 +6,7 @@ module ConvenientService
       module Custom
         class StubService < Support::Command
           module Entities
-            class StubbedService < Support::Command
+            class StubbedService
               ##
               # @param service_class [Class]
               # @return [void]
@@ -44,7 +44,7 @@ module ConvenientService
               def to(result_spec)
                 @result_spec = result_spec
 
-                service_class.commit_config!
+                service_class.commit_config!(trigger: Constants::Triggers::STUB_SERVICE)
 
                 service_class.stubbed_results[key] = result_value
 
