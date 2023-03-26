@@ -75,7 +75,7 @@ module ConvenientService
             ##
             # @param context [Object] Can be any type.
             # @param args [Array<Object>]
-            # @param kwargs [Hash]
+            # @param kwargs [Hash{Symbol => Object}]
             # @param block [Proc]
             # @return [ConvenientService::Common::Plugins::HasCallbacks::Entities::Callback]
             #
@@ -87,7 +87,7 @@ module ConvenientService
             # @param context [Object] Can be any type.
             # @param value [Object] Can be any type.
             # @param args [Array<Object>]
-            # @param kwargs [Hash]
+            # @param kwargs [Hash{Symbol => Object}]
             # @param block [Proc]
             # @return [ConvenientService::Common::Plugins::HasCallbacks::Entities::Callback]
             #

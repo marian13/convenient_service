@@ -18,7 +18,7 @@ module ConvenientService
 
               ##
               # @param args [Array<Object>]
-              # @param kwargs [Hash]
+              # @param kwargs [Hash{Symbol => Object}]
               # @param block [Block]
               # @return [ConvenientService::RSpec::Helpers::Custom::StubService::Entities::StubService]
               #

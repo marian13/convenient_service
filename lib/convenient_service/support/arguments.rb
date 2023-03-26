@@ -25,7 +25,7 @@ module ConvenientService
 
       ##
       # @param args [Array<Object>]
-      # @param kwargs [Hash]
+      # @param kwargs [Hash{Symbol => Object}]
       # @param block [Proc]
       # @return [void]
       #

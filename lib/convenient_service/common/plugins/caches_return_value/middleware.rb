@@ -7,7 +7,7 @@ module ConvenientService
         class Middleware < Core::MethodChainMiddleware
           ##
           # @param args [Array<Object>]
-          # @param kwargs [Hash]
+          # @param kwargs [Hash{Symbol => Object}]
           # @param block [Proc]
           # @return [Object] Can be any type.
           #
