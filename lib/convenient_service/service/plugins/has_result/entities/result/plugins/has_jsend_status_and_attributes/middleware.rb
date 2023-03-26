@@ -16,7 +16,7 @@ module ConvenientService
                   # @return [void]
                   #
                   def next(*args, **kwargs, &block)
-                    entity.internals.cache[:jsend_attributes] = Commands::CastJSendAttributes.call(attributes: kwargs)
+                    entity.internals.cache[:jsend_attributes] = Commands::CastJsendAttributes.call(attributes: kwargs)
 
                     chain.next(*args, **kwargs, &block)
                   end

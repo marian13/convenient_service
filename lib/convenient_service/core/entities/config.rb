@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require_relative "config/commands"
 require_relative "config/entities"
 require_relative "config/errors"
 
@@ -57,13 +58,13 @@ module ConvenientService
         # @overload middlewares(method)
         #   Returns all instance middlewares for particular method.
         #   @param method [Symbol] Method name.
-        #   @return [Hash<Symbol, Hash<Symbol, ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares>>]
+        #   @return [Hash{Symbol => Hash{Symbol => ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares}}]
         #
         # @overload middlewares(method, scope:)
         #   Returns all scoped middlewares for particular method.
         #   @param method [Symbol] Method name.
         #   @param scope [:instance, :class]
-        #   @return [Hash<Symbol, Hash<Symbol, ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares>>]
+        #   @return [Hash{Symbol => Hash{Symbol => ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares}}]
         #
         # @overload middlewares(method, &configuration_block)
         #   Configures instance middlewares for particular method.
@@ -130,7 +131,7 @@ module ConvenientService
         #
         def commit!(trigger: Constants::Triggers::USER)
           concerns.include!
-            .tap { track_commit_trigger!(trigger) }
+            .tap { Commands::TrackMethodMissingCommitTrigger.call(config: self, trigger: trigger) }
         end
 
         private
@@ -149,12 +150,6 @@ module ConvenientService
           return unless committed?
 
           raise Errors::ConfigIsCommitted.new(config: self)
-        end
-
-        ##
-        # @return [void]
-        #
-        def track_commit_trigger!(trigger)
         end
       end
     end

@@ -13,9 +13,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
 
       let(:casted) { described_class.call(other: other, options: options) }
 
-      context "when `key` is NOT castable" do
+      let(:factory) { ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Commands::CastMethodFactory.call(other: other) }
+
+      context "when `factory` is NOT castable" do
         before do
-          allow(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Commands::CastMethodKey).to receive(:call).and_return(nil)
+          allow(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Commands::CastMethodFactory).to receive(:call).and_return(nil)
         end
 
         it "returns `nil`" do
@@ -23,10 +25,14 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
         end
       end
 
-      context "when `key` is castable" do
-        context "when `name` is NOT castable" do
+      context "when `factory` is castable" do
+        before do
+          allow(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Commands::CastMethodFactory).to receive(:call).and_return(factory)
+        end
+
+        context "when `key` is NOT castable" do
           before do
-            allow(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Commands::CastMethodName).to receive(:call).and_return(nil)
+            allow(factory).to receive(:create_key).and_return(nil)
           end
 
           it "returns `nil`" do
@@ -34,10 +40,10 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
           end
         end
 
-        context "when `name` is castable" do
-          context "when `caller` is NOT castable" do
+        context "when `key` is castable" do
+          context "when `name` is NOT castable" do
             before do
-              allow(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Commands::CastMethodCaller).to receive(:call).and_return(nil)
+              allow(factory).to receive(:create_name).and_return(nil)
             end
 
             it "returns `nil`" do
@@ -45,10 +51,10 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
             end
           end
 
-          context "when `caller` is castable" do
-            context "when `direction` is NOT castable" do
+          context "when `name` is castable" do
+            context "when `caller` is NOT castable" do
               before do
-                allow(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Commands::CastMethodDirection).to receive(:call).and_return(nil)
+                allow(factory).to receive(:create_caller).and_return(nil)
               end
 
               it "returns `nil`" do
@@ -56,18 +62,30 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
               end
             end
 
-            context "when `direction` is castable" do
-              let(:method) do
-                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method.new(
-                  key: ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Commands::CastMethodKey.call(other: other, options: options),
-                  name: ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Commands::CastMethodName.call(other: other, options: options),
-                  caller: ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Commands::CastMethodCaller.call(other: other, options: options),
-                  direction: ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Commands::CastMethodDirection.call(other: other, options: options)
-                )
+            context "when `caller` is castable" do
+              context "when `direction` is NOT castable" do
+                before do
+                  allow(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Commands::CastMethodDirection).to receive(:call).and_return(nil)
+                end
+
+                it "returns `nil`" do
+                  expect(casted).to be_nil
+                end
               end
 
-              it "returns method" do
-                expect(casted).to eq(method)
+              context "when `direction` is castable" do
+                let(:method) do
+                  ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method.new(
+                    key: factory.create_key,
+                    name: factory.create_name,
+                    caller: factory.create_caller,
+                    direction: ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Commands::CastMethodDirection.call(other: other, options: options)
+                  )
+                end
+
+                it "returns method" do
+                  expect(casted).to eq(method)
+                end
               end
             end
           end

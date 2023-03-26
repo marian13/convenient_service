@@ -341,6 +341,46 @@ RSpec.describe ConvenientService::Configs::Standard do
             end
           end
 
+          example_group "service result data" do
+            example_group "concerns" do
+              let(:concerns) { [] }
+
+              it "sets service result data concerns" do
+                expect(service_class::Result::Data.concerns.to_a).to eq(concerns)
+              end
+            end
+          end
+
+          example_group "service result message" do
+            example_group "concerns" do
+              let(:concerns) { [] }
+
+              it "sets service result message concerns" do
+                expect(service_class::Result::Message.concerns.to_a).to eq(concerns)
+              end
+            end
+          end
+
+          example_group "service result code" do
+            example_group "concerns" do
+              let(:concerns) { [] }
+
+              it "sets service result code concerns" do
+                expect(service_class::Result::Code.concerns.to_a).to eq(concerns)
+              end
+            end
+          end
+
+          example_group "service result status" do
+            example_group "concerns" do
+              let(:concerns) { [] }
+
+              it "sets service result status concerns" do
+                expect(service_class::Result::Status.concerns.to_a).to eq(concerns)
+              end
+            end
+          end
+
           example_group "service result internals" do
             example_group "concerns" do
               let(:concerns) do
@@ -350,7 +390,7 @@ RSpec.describe ConvenientService::Configs::Standard do
               end
 
               it "sets service result internals concerns" do
-                expect(service_class::Internals.concerns.to_a).to eq(concerns)
+                expect(service_class::Result::Internals.concerns.to_a).to eq(concerns)
               end
             end
           end

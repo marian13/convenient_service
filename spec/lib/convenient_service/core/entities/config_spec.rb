@@ -428,24 +428,24 @@ RSpec.describe ConvenientService::Core::Entities::Config do
 
       specify do
         expect { config.commit! }
-          .to delegate_to(config, :track_commit_trigger!)
-          .with_arguments(ConvenientService::Core::Constants::Triggers::USER)
+          .to delegate_to(ConvenientService::Core::Entities::Config::Commands::TrackMethodMissingCommitTrigger, :call)
+          .with_arguments(config: config, trigger: ConvenientService::Core::Constants::Triggers::USER)
       end
 
       example_group "`trigger` option" do
         context "when `trigger` is NOT passed" do
           it "defaults `ConvenientService::Core::Constants::Triggers::USER`" do
             expect { config.commit! }
-              .to delegate_to(config, :track_commit_trigger!)
-              .with_arguments(ConvenientService::Core::Constants::Triggers::USER)
+              .to delegate_to(ConvenientService::Core::Entities::Config::Commands::TrackMethodMissingCommitTrigger, :call)
+              .with_arguments(config: config, trigger: ConvenientService::Core::Constants::Triggers::USER)
           end
         end
 
         context "when `trigger` is passed" do
           specify do
             expect { config.commit!(trigger: ConvenientService::Core::Constants::Triggers::INSTANCE_METHOD_MISSING) }
-              .to delegate_to(config, :track_commit_trigger!)
-              .with_arguments(ConvenientService::Core::Constants::Triggers::INSTANCE_METHOD_MISSING)
+              .to delegate_to(ConvenientService::Core::Entities::Config::Commands::TrackMethodMissingCommitTrigger, :call)
+              .with_arguments(config: config, trigger: ConvenientService::Core::Constants::Triggers::INSTANCE_METHOD_MISSING)
           end
         end
       end

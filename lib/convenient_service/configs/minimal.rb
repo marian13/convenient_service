@@ -142,6 +142,22 @@ module ConvenientService
             use Plugins::Common::NormalizesEnv::Middleware
           end
 
+          class self::Data
+            include Core
+          end
+
+          class self::Message
+            include Core
+          end
+
+          class self::Code
+            include Core
+          end
+
+          class self::Status
+            include Core
+          end
+
           class self::Internals
             include Core
 

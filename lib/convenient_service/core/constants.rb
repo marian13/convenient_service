@@ -24,6 +24,11 @@ module ConvenientService
         ##
         # @return [ConvenientService::Support::UniqueValue]
         #
+        RESOLVE_METHOD_MIDDLEWARES_SUPER_METHOD = Support::UniqueValue.new("RESOLVE_METHOD_MIDDLEWARES_SUPER_METHOD")
+
+        ##
+        # @return [ConvenientService::Support::UniqueValue]
+        #
         USER = Support::UniqueValue.new("USER")
       end
     end

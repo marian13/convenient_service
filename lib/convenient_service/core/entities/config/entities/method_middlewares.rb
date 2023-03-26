@@ -93,7 +93,7 @@ module ConvenientService
             #   NOTE: Consider to remove when support for Ruby 2.7 is dropped.
             #
             def resolve_super_method(entity)
-              klass.commit_config!
+              klass.commit_config!(trigger: Constants::Triggers::RESOLVE_METHOD_MIDDLEWARES_SUPER_METHOD)
 
               container.resolve_super_method(method, entity)
             end

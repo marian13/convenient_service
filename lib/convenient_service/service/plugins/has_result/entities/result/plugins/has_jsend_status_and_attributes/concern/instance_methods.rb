@@ -87,7 +87,7 @@ module ConvenientService
                     alias_method :unsafe_code, :code
 
                     ##
-                    # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Structs::JSendAttributes]
+                    # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Structs::JsendAttributes]
                     #
                     def jsend_attributes
                       internals.cache[:jsend_attributes]

@@ -61,6 +61,24 @@ RSpec.describe ConvenientService::Core::Constants do
       example_group "instance methods" do
         describe "#inspect" do
           it "returns inspect representation" do
+            expect(described_class::Triggers::RESOLVE_METHOD_MIDDLEWARES_SUPER_METHOD.inspect).to eq("RESOLVE_METHOD_MIDDLEWARES_SUPER_METHOD")
+          end
+        end
+      end
+    end
+
+    describe "::Triggers::RESOLVE_METHOD_MIDDLEWARES_SUPER_METHOD" do
+      it "returns `ConvenientService::Support::UniqueValue` instance" do
+        expect(described_class::Triggers::RESOLVE_METHOD_MIDDLEWARES_SUPER_METHOD).to be_instance_of(ConvenientService::Support::UniqueValue)
+      end
+
+      ##
+      # NOTE: This example group is for instance methods of constant, that is why it is nested.
+      # TODO: Custom matcher.
+      #
+      example_group "instance methods" do
+        describe "#inspect" do
+          it "returns inspect representation" do
             expect(described_class::Triggers::USER.inspect).to eq("USER")
           end
         end
