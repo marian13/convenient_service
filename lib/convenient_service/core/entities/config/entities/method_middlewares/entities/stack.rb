@@ -48,7 +48,7 @@ module ConvenientService
                 ##
                 # @param index_or_middleware [Integer, ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middleware]
                 # @param middleware [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middleware]
-                # @param args [Array]
+                # @param args [Array<Object>]
                 # @param block [Proc]
                 # @return [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Stack]
                 #
@@ -69,7 +69,7 @@ module ConvenientService
                 ##
                 # @param index_or_middleware [Integer, ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middleware]
                 # @param middleware [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middleware]
-                # @param args [Array]
+                # @param args [Array<Object>]
                 # @param block [Proc]
                 # @return [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Stack]
                 #
@@ -83,7 +83,7 @@ module ConvenientService
 
                 ##
                 # @param middleware [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middleware]
-                # @param args [Array]
+                # @param args [Array<Object>]
                 # @param block [Proc]
                 # @return [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Stack]
                 #
@@ -97,7 +97,7 @@ module ConvenientService
 
                 ##
                 # @param middleware [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middleware]
-                # @param args [Array]
+                # @param args [Array<Object>]
                 # @param block [Proc]
                 # @return [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Stack]
                 #
@@ -112,7 +112,7 @@ module ConvenientService
                 ##
                 # @param index_or_middleware [Integer, ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middleware]
                 # @param middleware [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middleware]
-                # @param args [Array]
+                # @param args [Array<Object>]
                 # @param block [Proc]
                 # @return [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Stack]
                 #
@@ -138,7 +138,7 @@ module ConvenientService
 
                 ##
                 # @param middleware [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middleware]
-                # @param args [Array]
+                # @param args [Array<Object>]
                 # @param block [Proc]
                 # @return [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Stack]
                 #

@@ -23,7 +23,7 @@ module ConvenientService
                 end
 
                 ##
-                # @param args [Array]
+                # @param args [Array<Object>]
                 # @param kwargs [Hash]
                 # @param block [Proc]
                 # @return [Object] Can be any type.

@@ -10,7 +10,7 @@ module ConvenientService
               module HasJSendStatusAndAttributes
                 class Middleware < Core::MethodChainMiddleware
                   ##
-                  # @param args [Array]
+                  # @param args [Array<Object>]
                   # @param kwargs [Hash]
                   # @param block [Proc]
                   # @return [void]

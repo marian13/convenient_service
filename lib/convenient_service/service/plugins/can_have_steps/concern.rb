@@ -39,7 +39,7 @@ module ConvenientService
             ##
             # Registers a step (step definition).
             #
-            # @param args [Array]
+            # @param args [Array<Object>]
             # @param kwargs [Hash]
             # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step]
             #

@@ -51,7 +51,7 @@ module ConvenientService
                 ##
                 # @param index_or_concern [Integer, ConvenientService::Support::Concern, Module]
                 # @param concern [ConvenientService::Support::Concern, Module]
-                # @param args [Array]
+                # @param args [Array<Object>]
                 # @param block [Proc]
                 # @return [ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack]
                 #
@@ -72,7 +72,7 @@ module ConvenientService
                 ##
                 # @param index_or_concern [Integer, ConvenientService::Support::Concern, Module]
                 # @param concern [ConvenientService::Support::Concern, Module]
-                # @param args [Array]
+                # @param args [Array<Object>]
                 # @param block [Proc]
                 # @return [ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack]
                 #
@@ -86,7 +86,7 @@ module ConvenientService
 
                 ##
                 # @param concern [ConvenientService::Support::Concern, Module]
-                # @param args [Array]
+                # @param args [Array<Object>]
                 # @param block [Proc]
                 # @return [ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack]
                 #
@@ -113,7 +113,7 @@ module ConvenientService
                 ##
                 # @param index_or_concern [Integer, ConvenientService::Support::Concern, Module]
                 # @param concern [ConvenientService::Support::Concern, Module]
-                # @param args [Array]
+                # @param args [Array<Object>]
                 # @param block [Proc]
                 # @return [ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack]
                 #
@@ -139,7 +139,7 @@ module ConvenientService
 
                 ##
                 # @param concern [ConvenientService::Support::Concern, Module]
-                # @param args [Array]
+                # @param args [Array<Object>]
                 # @param block [Proc]
                 # @return [ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack]
                 #

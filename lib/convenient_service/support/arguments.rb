@@ -24,7 +24,7 @@ module ConvenientService
       attr_reader :block
 
       ##
-      # @param args [Array]
+      # @param args [Array<Object>]
       # @param kwargs [Hash]
       # @param block [Proc]
       # @return [void]

@@ -30,7 +30,7 @@ module ConvenientService
                   ##
                   # @param object [Object] Can be any type.
                   # @param method [Symbol]
-                  # @param args [Array]
+                  # @param args [Array<Object>]
                   # @param kwargs [Hash]
                   # @param block [Proc]
                   # @return [void]

@@ -6,7 +6,7 @@ module ConvenientService
       module RescuesResultUnhandledExceptions
         class Middleware < Core::MethodChainMiddleware
           ##
-          # @param args [Array]
+          # @param args [Array<Object>]
           # @param kwargs [Hash]
           # @param block [Proc, nil]
           # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
@@ -29,7 +29,7 @@ module ConvenientService
 
           ##
           # @param exception [StandardError]
-          # @param args [Array]
+          # @param args [Array<Object>]
           # @param kwargs [Hash]
           # @param block [Proc, nil]
           # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
@@ -43,7 +43,7 @@ module ConvenientService
 
           ##
           # @param exception [StandardError]
-          # @param args [Array]
+          # @param args [Array<Object>]
           # @param kwargs [Hash]
           # @param block [Proc, nil]
           # @return [String]

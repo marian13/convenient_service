@@ -32,7 +32,7 @@ module ConvenientService
 
             ##
             # @param exception [StandardError]
-            # @param args [Array]
+            # @param args [Array<Object>]
             # @param kwargs [Hash]
             # @param block [Proc, nil]
             # @return [void]
