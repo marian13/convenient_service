@@ -93,13 +93,13 @@ module ConvenientService
 
             use Plugins::Common::HasConstructor::Concern
 
-            use Plugins::Result::HasJsendStatusAndAttributes::Concern
+            use Plugins::Result::HasJSendStatusAndAttributes::Concern
           end
 
           middlewares :initialize do
             use Plugins::Common::NormalizesEnv::Middleware
 
-            use Plugins::Result::HasJsendStatusAndAttributes::Middleware
+            use Plugins::Result::HasJSendStatusAndAttributes::Middleware
           end
 
           middlewares :success? do
