@@ -25,7 +25,7 @@ module ConvenientService
                 ##
                 # @param args [Array<Object>]
                 # @param kwargs [Hash{Symbol => Object}]
-                # @param block [Proc]
+                # @param block [Proc, nil]
                 # @return [Object] Can be any type.
                 #
                 # @internal

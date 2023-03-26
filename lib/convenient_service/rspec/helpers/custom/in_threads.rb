@@ -37,7 +37,7 @@ module ConvenientService
           ##
           # @param n [Integer] Amount of threads.
           # @param args [Array<Object>] Args passed to `Thread.new`.
-          # @param block [Proc] Block passed to `Thread.new`.
+          # @param block [Proc, nil] Block passed to `Thread.new`.
           # @return [void]
           #
           def initialize(n, *args, &block)

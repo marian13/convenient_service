@@ -49,7 +49,7 @@ module ConvenientService
                 # @param index_or_middleware [Integer, ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middleware]
                 # @param middleware [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middleware]
                 # @param args [Array<Object>]
-                # @param block [Proc]
+                # @param block [Proc, nil]
                 # @return [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Stack]
                 #
                 # @see https://github.com/marian13/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L88
@@ -70,7 +70,7 @@ module ConvenientService
                 # @param index_or_middleware [Integer, ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middleware]
                 # @param middleware [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middleware]
                 # @param args [Array<Object>]
-                # @param block [Proc]
+                # @param block [Proc, nil]
                 # @return [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Stack]
                 #
                 # @see https://github.com/marian13/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L97
@@ -84,7 +84,7 @@ module ConvenientService
                 ##
                 # @param middleware [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middleware]
                 # @param args [Array<Object>]
-                # @param block [Proc]
+                # @param block [Proc, nil]
                 # @return [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Stack]
                 #
                 # @see https://github.com/marian13/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L104
@@ -98,7 +98,7 @@ module ConvenientService
                 ##
                 # @param middleware [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middleware]
                 # @param args [Array<Object>]
-                # @param block [Proc]
+                # @param block [Proc, nil]
                 # @return [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Stack]
                 #
                 # @see https://github.com/marian13/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L111
@@ -113,7 +113,7 @@ module ConvenientService
                 # @param index_or_middleware [Integer, ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middleware]
                 # @param middleware [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middleware]
                 # @param args [Array<Object>]
-                # @param block [Proc]
+                # @param block [Proc, nil]
                 # @return [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Stack]
                 #
                 # @see https://github.com/marian13/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L118
@@ -139,7 +139,7 @@ module ConvenientService
                 ##
                 # @param middleware [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middleware]
                 # @param args [Array<Object>]
-                # @param block [Proc]
+                # @param block [Proc, nil]
                 # @return [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Stack]
                 #
                 # @see https://github.com/marian13/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L76

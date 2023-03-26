@@ -72,7 +72,7 @@ module ConvenientService
       # @param method [Symbol]
       # @param args [Array<Object>]
       # @param kwargs [Hash{Symbol => Object}]
-      # @param block [Proc]
+      # @param block [Proc, nil]
       # @return [void]
       #
       # @internal

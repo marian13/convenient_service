@@ -26,7 +26,7 @@ module ConvenientService
       ##
       # @param args [Array<Object>]
       # @param kwargs [Hash{Symbol => Object}]
-      # @param block [Proc]
+      # @param block [Proc, nil]
       # @return [void]
       #
       def initialize(*args, **kwargs, &block)
