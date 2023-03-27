@@ -34,6 +34,26 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
     it { is_expected.to have_abstract_method(:next) }
   end
 
+  example_group "class methods" do
+    describe ".new" do
+      context "when `env` is NOT passed" do
+        let(:middleware_instance) { middleware_class.new(stack) }
+
+        it "defaults to empty hash" do
+          expect(middleware_instance.instance_variable_get(:@__env__)).to eq({})
+        end
+      end
+
+      context "when `arguments` is NOT passed" do
+        let(:middleware_instance) { middleware_class.new(stack) }
+
+        it "defaults to `ConvenientService::Support::Arguments.null_arguments`" do
+          expect(middleware_instance.instance_variable_get(:@__arguments__)).to eq(ConvenientService::Support::Arguments.null_arguments)
+        end
+      end
+    end
+  end
+
   example_group "instance methods" do
     include ConvenientService::RSpec::Matchers::DelegateTo
     include ConvenientService::RSpec::Matchers::CacheItsValue
@@ -93,6 +113,15 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
       end
 
       specify { expect { middleware_instance.chain }.to cache_its_value }
+    end
+
+    describe "#arguments" do
+      let(:middleware_instance) { middleware_class.new(stack, arguments: arguments) }
+      let(:arguments) { ConvenientService::Support::Arguments.new(:foo, foo: :bar) { :foo } }
+
+      it "returns arguments" do
+        expect(middleware_instance.arguments).to eq(arguments)
+      end
     end
   end
 end
