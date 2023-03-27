@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-# rubocop:disable RSpec/NestedGroups
+# rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::MiddlewareCreator do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
@@ -22,6 +22,28 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
   end
 
   example_group "instance methods" do
+    describe "#new" do
+      let(:stack) { ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Stack.new }
+      let(:env) { {foo: :bar} }
+      let(:other_arguments) { ConvenientService::Support::Arguments.new(:foo) }
+
+      it "returns instance of `middleware`" do
+        expect(middleware_creator.new(stack, env: env, arguments: other_arguments)).to be_instance_of(middleware)
+      end
+
+      context "when `env` is NOT passed" do
+        it "defaults to empty hash" do
+          expect(middleware_creator.new(stack, arguments: other_arguments).instance_variable_get(:@__env__)).to eq({})
+        end
+      end
+
+      context "when `arguments` are NOT passed" do
+        it "defaults to `self.arguments`" do
+          expect(middleware_creator.new(stack, env: env).instance_variable_get(:@__arguments__)).to eq(arguments)
+        end
+      end
+    end
+
     example_group "comparison" do
       describe "#==" do
         context "when `other` has different class" do
@@ -59,4 +81,4 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
     end
   end
 end
-# rubocop:enable RSpec/NestedGroups
+# rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers

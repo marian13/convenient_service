@@ -42,6 +42,16 @@ module ConvenientService
 
                   true
                 end
+
+                ##
+                # @param stack [#call<Hash>]
+                # @param env [Hash]
+                # @param arguments [ConvenientService::Support::Arguments]
+                # @return [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middleware]
+                #
+                def new(stack, env: {}, arguments: self.arguments)
+                  middleware.new(stack, env: env, arguments: arguments)
+                end
               end
             end
           end
