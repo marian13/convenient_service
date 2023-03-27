@@ -24,11 +24,13 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
 
       subject(:method_value) { method.call(*args, **kwargs, &block) }
 
-      let(:method) { wrap_method(service_class, :result, middlewares: described_class) }
+      let(:method) { wrap_method(service_class, :result, middlewares: described_class.with(max_backtrace_size: max_backtrace_size)) }
 
       let(:args) { [:foo] }
       let(:kwargs) { {foo: :bar} }
       let(:block) { proc { :foo } }
+
+      let(:max_backtrace_size) { 5 }
 
       context "when service result does NOT raise exceptions" do
         let(:service_class) do
@@ -55,7 +57,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
             include ConvenientService::Configs::Minimal
 
             def result
-              raise StandardError, "exception message", caller.take(10)
+              raise StandardError, "exception message", caller.take(5)
             end
           end
         end
@@ -70,11 +72,9 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
           <<~MESSAGE.chomp
             #{exception.class}:
               #{exception.message}
-            #{exception.backtrace.map { |line| "# #{line}" }.join("\n")}
+            #{exception.backtrace.take(max_backtrace_size).map { |line| "# #{line}" }.join("\n")}
           MESSAGE
         end
-
-        let(:max_backtrace_size) { ConvenientService::Service::Plugins::RescuesResultUnhandledExceptions::Constants::DEFAULT_MAX_BACKTRACE_SIZE }
 
         specify do
           expect { method_value }
@@ -90,6 +90,17 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
 
         it "returns failure with formatted exception" do
           expect(method_value).to be_failure.with_data(exception: exception).and_message(formatted_exception)
+        end
+
+        context "when `max_backtrace_size` is NOT passed" do
+          let(:method) { wrap_method(service_class, :result, middlewares: described_class) }
+          let(:max_backtrace_size) { ConvenientService::Service::Plugins::RescuesResultUnhandledExceptions::Constants::DEFAULT_MAX_BACKTRACE_SIZE }
+
+          it "defaults to `ConvenientService::Service::Plugins::RescuesResultUnhandledExceptions::Constants::DEFAULT_MAX_BACKTRACE_SIZE`" do
+            expect { method_value }
+              .to delegate_to(ConvenientService::Service::Plugins::RescuesResultUnhandledExceptions::Commands::FormatException, :call)
+              .with_arguments(exception: exception, args: args, kwargs: kwargs, block: block, max_backtrace_size: max_backtrace_size)
+          end
         end
       end
     end
