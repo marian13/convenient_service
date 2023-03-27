@@ -74,6 +74,8 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
           MESSAGE
         end
 
+        let(:max_backtrace_size) { ConvenientService::Service::Plugins::RescuesResultUnhandledExceptions::Constants::DEFAULT_MAX_BACKTRACE_SIZE }
+
         specify do
           expect { method_value }
             .to call_chain_next.on(method)
@@ -83,7 +85,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
         specify do
           expect { method_value }
             .to delegate_to(ConvenientService::Service::Plugins::RescuesResultUnhandledExceptions::Commands::FormatException, :call)
-            .with_arguments(exception: exception, args: args, kwargs: kwargs, block: block)
+            .with_arguments(exception: exception, args: args, kwargs: kwargs, block: block, max_backtrace_size: max_backtrace_size)
         end
 
         it "returns failure with formatted exception" do
