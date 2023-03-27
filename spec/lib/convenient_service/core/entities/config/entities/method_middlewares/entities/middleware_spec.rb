@@ -52,6 +52,22 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
         end
       end
     end
+
+    describe ".with" do
+      it "returns instance of `ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::MiddlewareCreator`" do
+        expect(middleware_class.with(*args, **kwargs, &block)).to be_instance_of(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::MiddlewareCreator)
+      end
+
+      example_group "`middleware_creator`" do
+        it "has middleware set to `middleware`" do
+          expect(middleware_class.with(*args, **kwargs, &block).middleware).to eq(middleware_class)
+        end
+
+        it "has arguments set to `arguments`" do
+          expect(middleware_class.with(*args, **kwargs, &block).arguments).to eq(ConvenientService::Support::Arguments.new(*args, **kwargs, &block))
+        end
+      end
+    end
   end
 
   example_group "instance methods" do
@@ -117,7 +133,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
 
     describe "#arguments" do
       let(:middleware_instance) { middleware_class.new(stack, arguments: arguments) }
-      let(:arguments) { ConvenientService::Support::Arguments.new(:foo, foo: :bar) { :foo } }
+      let(:arguments) { ConvenientService::Support::Arguments.new(*args, **kwargs, &block) }
 
       it "returns arguments" do
         expect(middleware_instance.arguments).to eq(arguments)

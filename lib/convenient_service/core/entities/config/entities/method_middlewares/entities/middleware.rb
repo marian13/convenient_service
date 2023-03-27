@@ -43,6 +43,15 @@ module ConvenientService
                 #
                 abstract_method :next
 
+                class << self
+                  ##
+                  # @return [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::MiddlewareCreator]
+                  #
+                  def with(...)
+                    Entities::MiddlewareCreator.new(middleware: self, arguments: Support::Arguments.new(...))
+                  end
+                end
+
                 ##
                 # @param stack [#call<Hash>]
                 # @return [void]
