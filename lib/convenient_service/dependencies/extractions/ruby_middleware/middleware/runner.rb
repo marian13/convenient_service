@@ -7,7 +7,8 @@ module ConvenientService
         #   NOTE:
         #     Copied from `Ibsciss/ruby-middleware` without any logic modification.
         #     Version: v0.4.2.
-        #     Just wrapped in a namespace `ConvenientService::Dependencies::Extractions::RubyMiddleware`.
+        #     - Wrapped in a namespace `ConvenientService::Dependencies::Extractions::RubyMiddleware`.
+        #     - Added support of middleware creators.
         #
         #   - https://github.com/marian13/ruby-middleware/blob/v0.4.2/lib/middleware/runner.rb
         #
@@ -65,6 +66,13 @@ module ConvenientService
                 if klass.is_a?(Class)
                   # If the klass actually is a class, then instantiate it with
                   # the app and any other arguments given.
+                  klass.new(next_middleware, *args, &block)
+                ##
+                # IMPORTANT: Customization compared to the original `Runner` implementation.
+                #
+                # NOTE: Added support of middleware creators.
+                #
+                elsif klass.respond_to?(:new)
                   klass.new(next_middleware, *args, &block)
                 elsif klass.respond_to?(:call)
                   # Make it a lambda which calls the item then forwards up
