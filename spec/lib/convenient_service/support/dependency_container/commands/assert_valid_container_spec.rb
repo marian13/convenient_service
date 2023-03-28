@@ -10,7 +10,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::Assert
     describe ".call" do
       subject(:command_result) { described_class.call(container: container) }
 
-      context "when `container` is NOT valid" do
+      context "when `container` does NOT include `ConvenientService::DependencyContainer::Export`" do
         let(:container) { Module.new }
 
         let(:error_message) do
@@ -28,7 +28,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::Assert
         end
       end
 
-      context "when `container` is valid" do
+      context "when `container` includes `ConvenientService::DependencyContainer::Export`" do
         let(:container) do
           Module.new do
             include ConvenientService::DependencyContainer::Export
