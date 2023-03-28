@@ -6,6 +6,7 @@ require "convenient_service"
 
 return unless defined? ConvenientService::Examples::Dry
 
+# rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::AssertNodeAvailable do
   include ConvenientService::RSpec::Helpers::StubService
   include ConvenientService::RSpec::Matchers::Results
@@ -51,3 +52,4 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::AssertNodeAv
     end
   end
 end
+# rubocop:enable RSpec/NestedGroups
