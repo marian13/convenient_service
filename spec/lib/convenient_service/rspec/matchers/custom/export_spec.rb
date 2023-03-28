@@ -57,7 +57,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Export do
         let(:full_name) { :non_existent }
         let(:scope) { :class }
 
-        it "returns false" do
+        it "returns `false`" do
           expect(matcher_result).to eq(false)
         end
       end
@@ -66,7 +66,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Export do
         let(:full_name) { :bar }
         let(:scope) { :class }
 
-        it "returns true" do
+        it "returns `true`" do
           expect(matcher_result).to eq(true)
         end
       end
@@ -75,7 +75,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Export do
         let(:full_name) { :foo }
         let(:kwargs) { ConvenientService::Utils::Hash.except(default_kwargs, [:scope]) }
 
-        it "defaults scope to :instance" do
+        it "defaults scope to `:instance`" do
           expect(matcher_result).to eq(true)
         end
       end
