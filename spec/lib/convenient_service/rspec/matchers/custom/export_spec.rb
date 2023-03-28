@@ -53,15 +53,6 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Export do
           .with_arguments(scope: scope)
       end
 
-      context "when scope is NOT passed" do
-        let(:full_name) { :foo }
-        let(:kwargs) { ConvenientService::Utils::Hash.except(default_kwargs, [:scope]) }
-
-        it "defaults scope to :instance" do
-          expect(matcher_result).to eq(true)
-        end
-      end
-
       context "when method is NOT exported" do
         let(:full_name) { :non_existent }
         let(:scope) { :class }
@@ -76,6 +67,15 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Export do
         let(:scope) { :class }
 
         it "returns true" do
+          expect(matcher_result).to eq(true)
+        end
+      end
+
+      context "when scope is NOT passed" do
+        let(:full_name) { :foo }
+        let(:kwargs) { ConvenientService::Utils::Hash.except(default_kwargs, [:scope]) }
+
+        it "defaults scope to :instance" do
           expect(matcher_result).to eq(true)
         end
       end
