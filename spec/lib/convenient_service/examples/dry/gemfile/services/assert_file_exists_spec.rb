@@ -11,7 +11,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::AssertFileEx
   include ConvenientService::RSpec::Matchers::Results
   include ConvenientService::RSpec::Matchers::IncludeModule
 
-  let(:service) { described_class.new(path: path) }
+  let(:result) { described_class.result(path: path) }
   let(:path) { double }
 
   example_group "modules" do
@@ -22,8 +22,6 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::AssertFileEx
 
   example_group "class methods" do
     describe ".result" do
-      subject(:result) { service.result }
-
       context "when assertion that file exists is NOT successful" do
         context "when `path` is NOT present" do
           let(:path) { "" }
