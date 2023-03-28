@@ -45,6 +45,9 @@ module ConvenientService
 
           private
 
+          ##
+          # @return [ConvenientService::Support::DependencyContainer::Entities::Method]
+          #
           def method
             container.exported_methods.find_by(full_name: full_name, scope: scope)
           end
