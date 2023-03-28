@@ -9,7 +9,7 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::AssertN
   include ConvenientService::RSpec::Matchers::Results
   include ConvenientService::RSpec::Matchers::IncludeModule
 
-  let(:service) { described_class.new }
+  let(:result) { described_class.result }
 
   example_group "modules" do
     subject { described_class }
@@ -17,30 +17,34 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::AssertN
     it { is_expected.to include_module(ConvenientService::Standard::Config) }
   end
 
-  describe "#result" do
-    subject(:result) { service.result }
+  example_group "class methods" do
+    describe ".result" do
+      let(:node_available_command) { "which node > /dev/null 2>&1" }
 
-    let(:node_available_command) { "which node > /dev/null 2>&1" }
+      context "when assertion that node is available is NOT successful" do
+        context "when node is NOT available" do
+          before do
+            stub_service(ConvenientService::Examples::Standard::Gemfile::Services::RunShell)
+              .with_arguments(command: node_available_command)
+              .to return_error
+          end
 
-    before do
-      stub_service(ConvenientService::Examples::Standard::Gemfile::Services::RunShell)
-        .with_arguments(command: node_available_command)
-        .to return_result(node_available_status)
-    end
-
-    context "when node is NOT available" do
-      let(:node_available_status) { :error }
-
-      it "returns intermediate step result" do
-        expect(result).to be_not_success.of_step(ConvenientService::Examples::Standard::Gemfile::Services::RunShell)
+          it "returns intermediate step result" do
+            expect(result).to be_not_success.of_service(described_class).of_step(ConvenientService::Examples::Standard::Gemfile::Services::RunShell)
+          end
+        end
       end
-    end
 
-    context "when node is available" do
-      let(:node_available_status) { :success }
+      context "when assertion that node is available is successful" do
+        before do
+          stub_service(ConvenientService::Examples::Standard::Gemfile::Services::RunShell)
+            .with_arguments(command: node_available_command)
+            .to return_success
+        end
 
-      it "returns success" do
-        expect(result).to be_success.of_step(ConvenientService::Examples::Standard::Gemfile::Services::RunShell)
+        it "returns `success`" do
+          expect(result).to be_success.of_service(described_class).of_step(ConvenientService::Examples::Standard::Gemfile::Services::RunShell)
+        end
       end
     end
   end
