@@ -19,9 +19,9 @@ module ConvenientService
 
             Commands::AssertValidContainer.call(container: from)
 
-            method = from.exported_methods.find_by(full_name: full_name, scope: scope)
-
             Commands::AssertValidMethod.call(full_name: full_name, scope: scope, container: from)
+
+            method = from.exported_methods.find_by(full_name: full_name, scope: scope)
 
             Commands::ImportMethod.call(importing_module: self, exported_method: method, prepend: prepend)
           end
