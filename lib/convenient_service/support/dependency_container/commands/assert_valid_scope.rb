@@ -7,12 +7,12 @@ module ConvenientService
         class AssertValidScope < Support::Command
           ##
           # @!attribute [r] scope
-          #   @return [Object]
+          #   @return [Symbol]
           #
           attr_reader :scope
 
           ##
-          # @param scope [Object]
+          # @param scope [Symbol]
           # @return [void]
           #
           def initialize(scope:)

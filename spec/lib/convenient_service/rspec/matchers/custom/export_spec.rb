@@ -21,12 +21,12 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Export do
     Module.new do
       include ConvenientService::DependencyContainer::Export
 
-      export :bar, scope: :class do
-        ":bar with scope: :class"
-      end
-
       export :foo do
         ":foo with scope: :instance"
+      end
+
+      export :bar, scope: :class do
+        ":bar with scope: :class"
       end
     end
   end
@@ -44,7 +44,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Export do
       specify do
         expect { matcher_result }
           .to delegate_to(ConvenientService::Support::DependencyContainer::Commands::AssertValidContainer, :call)
-          .with_arguments(from: container)
+          .with_arguments(container: container)
       end
 
       specify do
@@ -93,7 +93,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Export do
       it "returns message" do
         matcher_result
 
-        expect(matcher.failure_message).to eq("expected `#{container.class}` to export `#{full_name}` with scope `#{scope}`")
+        expect(matcher.failure_message).to eq("expected `#{container}` to export `#{full_name}` with scope `#{scope}`")
       end
     end
 
@@ -101,7 +101,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Export do
       it "returns message" do
         matcher_result
 
-        expect(matcher.failure_message_when_negated).to eq("expected `#{container.class}` NOT to export `#{full_name}` with scope `#{scope}`")
+        expect(matcher.failure_message_when_negated).to eq("expected `#{container}` NOT to export `#{full_name}` with scope `#{scope}`")
       end
     end
   end

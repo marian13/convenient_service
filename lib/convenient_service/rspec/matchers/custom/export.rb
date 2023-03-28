@@ -28,7 +28,7 @@ module ConvenientService
           def matches?(container)
             @container = container
 
-            commands.AssertValidContainer.call(from: container)
+            commands.AssertValidContainer.call(container: container)
 
             commands.AssertValidScope.call(scope: scope)
 
@@ -46,14 +46,14 @@ module ConvenientService
           # @return [String]
           #
           def failure_message
-            "expected `#{container.class}` to export `#{full_name}` with scope `#{scope}`"
+            "expected `#{container}` to export `#{full_name}` with scope `#{scope}`"
           end
 
           ##
           # @return [String]
           #
           def failure_message_when_negated
-            "expected `#{container.class}` NOT to export `#{full_name}` with scope `#{scope}`"
+            "expected `#{container}` NOT to export `#{full_name}` with scope `#{scope}`"
           end
 
           private

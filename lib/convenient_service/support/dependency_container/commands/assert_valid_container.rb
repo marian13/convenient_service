@@ -6,17 +6,17 @@ module ConvenientService
       module Commands
         class AssertValidContainer < Support::Command
           ##
-          # @!attribute [r] from
-          #   @return [Object]
+          # @!attribute [r] container
+          #   @return [Module]
           #
-          attr_reader :from
+          attr_reader :container
 
           ##
-          # @param from [Object]
+          # @param container [Module]
           # @return [void]
           #
-          def initialize(from:)
-            @from = from
+          def initialize(container:)
+            @container = container
           end
 
           ##
@@ -24,7 +24,7 @@ module ConvenientService
           # @raise [ConvenientService::Support::DependencyContainer::Errors::NotExportableModule]
           #
           def call
-            raise Errors::NotExportableModule.new(mod: from) unless Utils::Module.include_module?(from, DependencyContainer::Export)
+            raise Errors::NotExportableModule.new(mod: container) unless Utils::Module.include_module?(container, DependencyContainer::Export)
           end
         end
       end

@@ -17,11 +17,11 @@ module ConvenientService
           def import(full_name, from:, scope: Constants::DEFAULT_SCOPE, prepend: Constants::DEFAULT_PREPEND)
             Commands::AssertValidScope.call(scope: scope)
 
-            Commands::AssertValidContainer.call(from: from)
+            Commands::AssertValidContainer.call(container: from)
 
             method = from.exported_methods.find_by(full_name: full_name, scope: scope)
 
-            Commands::AssertValidMethod.call(method: method, full_name: full_name, scope: scope, from: from)
+            Commands::AssertValidMethod.call(full_name: full_name, scope: scope, container: from)
 
             Commands::ImportMethod.call(importing_module: self, exported_method: method, prepend: prepend)
           end

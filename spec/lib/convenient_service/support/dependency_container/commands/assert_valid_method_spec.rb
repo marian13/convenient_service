@@ -8,14 +8,17 @@ require "convenient_service"
 RSpec.describe ConvenientService::Support::DependencyContainer::Commands::AssertValidMethod do
   example_group "class methods" do
     describe ".call" do
-      subject(:command_result) { described_class.call(full_name: :foo, scope: :class, from: container, method: method) }
+      subject(:command_result) { described_class.call(full_name: full_name, scope: scope, container: container) }
 
       let(:full_name) { :foo }
       let(:scope) { :class }
-      let(:container) { Module.new }
 
-      context "when `method` is NOT valid" do
-        let(:method) { nil }
+      context "when `method` is NOT exported" do
+        let(:container) do
+          Module.new do
+            include ConvenientService::DependencyContainer::Export
+          end
+        end
 
         let(:error_message) do
           <<~TEXT
@@ -38,9 +41,16 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::Assert
         end
       end
 
-      context "when `method` is valid" do
-        let(:method) { ConvenientService::Support::DependencyContainer::Entities::Method.new(full_name: full_name, scope: scope, body: body) }
-        let(:body) { proc { :bar } }
+      context "when `method` is exported" do
+        let(:container) do
+          Module.new do
+            include ConvenientService::DependencyContainer::Export
+
+            export :foo, scope: :class do
+              ":foo with scope: :class"
+            end
+          end
+        end
 
         it "does NOT raise" do
           expect { command_result }.not_to raise_error

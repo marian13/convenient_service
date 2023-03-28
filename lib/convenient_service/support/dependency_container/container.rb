@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative "export"
-
 module ConvenientService
   module Support
     module DependencyContainer

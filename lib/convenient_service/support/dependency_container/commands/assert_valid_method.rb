@@ -6,38 +6,33 @@ module ConvenientService
       module Commands
         class AssertValidMethod < Support::Command
           ##
-          # @!attribute [r] from
-          #   @return [Object]
-          #
-          attr_reader :method
-
-          ##
-          # @!attribute [r] from
-          #   @return [Object]
+          # @!attribute [r] full_name
+          #   @return [String, Symbol]
           #
           attr_reader :full_name
 
           ##
-          # @!attribute [r] from
-          #   @return [Object]
+          # @!attribute [r] scope
+          #   @return [Symbol]
           #
           attr_reader :scope
 
           ##
-          # @!attribute [r] from
-          #   @return [Object]
+          # @!attribute [r] container
+          #   @return [Module]
           #
-          attr_reader :from
+          attr_reader :container
 
           ##
-          # @param from [Object]
+          # @param full_name [String, Symbol]
+          # @param scope [Symbol]
+          # @param container[Module]
           # @return [void]
           #
-          def initialize(method:, full_name:, scope:, from:)
-            @method = method
+          def initialize(full_name:, scope:, container:)
             @full_name = full_name
             @scope = scope
-            @from = from
+            @container = container
           end
 
           ##
@@ -45,7 +40,13 @@ module ConvenientService
           # @raise [ConvenientService::Support::DependencyContainer::Errors::NotExportedMethod]
           #
           def call
-            raise Errors::NotExportedMethod.new(method_name: full_name, method_scope: scope, mod: from) unless method
+            raise Errors::NotExportedMethod.new(method_name: full_name, method_scope: scope, mod: container) unless method
+          end
+
+          private
+
+          def method
+            container.exported_methods.find_by(full_name: full_name, scope: scope)
           end
         end
       end

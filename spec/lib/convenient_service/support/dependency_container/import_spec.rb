@@ -55,34 +55,20 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Import do
       specify do
         expect { import }
           .to delegate_to(ConvenientService::Support::DependencyContainer::Commands::AssertValidContainer, :call)
-          .with_arguments(from: container)
+          .with_arguments(container: container)
       end
 
       specify do
         expect { import }
           .to delegate_to(ConvenientService::Support::DependencyContainer::Commands::AssertValidMethod, :call)
-          .with_arguments(method: method, full_name: full_name, scope: scope, from: container)
+          .with_arguments(full_name: full_name, scope: scope, container: container)
       end
 
-      context "when `mod` includes `ConvenientService::Support::DependencyContainer::Export`" do
-        context "when `method` is exported" do
-          let(:container) do
-            Module.new do
-              include ConvenientService::Support::DependencyContainer::Export
-
-              export :foo do
-                "foo"
-              end
-            end
-          end
-
-          specify do
-            expect { import }
-              .to delegate_to(ConvenientService::Support::DependencyContainer::Commands::ImportMethod, :call)
-              .with_arguments(importing_module: user, exported_method: method, prepend: prepend)
-              .and_return_its_value
-          end
-        end
+      specify do
+        expect { import }
+          .to delegate_to(ConvenientService::Support::DependencyContainer::Commands::ImportMethod, :call)
+          .with_arguments(importing_module: user, exported_method: method, prepend: prepend)
+          .and_return_its_value
       end
 
       context "when `scope` is NOT passed" do
