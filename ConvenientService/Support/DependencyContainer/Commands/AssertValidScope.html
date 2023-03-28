@@ -175,7 +175,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#call-instance_method" title="#call (instance method)">#<strong>call</strong>  &#x21d2; Module </a>
+      <a href="#call-instance_method" title="#call (instance method)">#<strong>call</strong>  &#x21d2; void </a>
     
 
     
@@ -259,7 +259,7 @@
         <span class='name'>scope</span>
       
       
-        <span class='type'>(<tt>Object</tt>)</span>
+        <span class='type'>(<tt>Symbol</tt>)</span>
       
       
       
@@ -375,7 +375,7 @@
       <div class="method_details first">
   <h3 class="signature first" id="call-instance_method">
   
-    #<strong>call</strong>  &#x21d2; <tt>Module</tt> 
+    #<strong>call</strong>  &#x21d2; <tt>void</tt> 
   
 
   
@@ -383,32 +383,19 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
+    <p class="note returns_void">This method returns an undefined value.</p>
 
   </div>
 </div>
 <div class="tags">
   
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>Module</tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
 <p class="tag_title">Raises:</p>
 <ul class="raise">
   
     <li>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="../Errors/InvalidScope.html" title="ConvenientService::Support::DependencyContainer::Errors::InvalidScope (class)">Errors::InvalidScope</a></span></tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="../Errors/InvalidScope.html" title="ConvenientService::Support::DependencyContainer::Errors::InvalidScope (class)">ConvenientService::Support::DependencyContainer::Errors::InvalidScope</a></span></tt>)</span>
       
       
       
@@ -437,12 +424,12 @@
       <pre class="lines">
 
 
-25
 26
-27</pre>
+27
+28</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/dependency_container/commands/assert_valid_scope.rb', line 25</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/dependency_container/commands/assert_valid_scope.rb', line 26</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span>
   <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="../Errors.html" title="ConvenientService::Support::DependencyContainer::Errors (module)">Errors</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Errors/InvalidScope.html" title="ConvenientService::Support::DependencyContainer::Errors::InvalidScope (class)">InvalidScope</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Errors/InvalidScope.html#initialize-instance_method" title="ConvenientService::Support::DependencyContainer::Errors::InvalidScope#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>scope:</span> <span class='id identifier rubyid_scope'>scope</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='const'><span class='object_link'><a href="../Constants.html" title="ConvenientService::Support::DependencyContainer::Constants (module)">Constants</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Constants.html#SCOPES-constant" title="ConvenientService::Support::DependencyContainer::Constants::SCOPES (constant)">SCOPES</a></span></span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='id identifier rubyid_scope'>scope</span><span class='rparen'>)</span>
@@ -457,7 +444,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Mar 27 17:51:10 2023 by
+  Generated on Tue Mar 28 18:30:02 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.3).
 </div>
