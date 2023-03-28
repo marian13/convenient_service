@@ -7,3 +7,5 @@ require_relative "dependency_container/errors"
 
 require_relative "dependency_container/export"
 require_relative "dependency_container/import"
+
+require_relative "dependency_container/container"
