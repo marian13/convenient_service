@@ -32,7 +32,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::AssertNpmPac
               let(:name) { "" }
 
               it "returns `failure` with `data`" do
-                expect(result).to be_failure.with_data(name: "can't be blank").of_service(described_class).of_step(:validate_name)
+                expect(result).to be_failure.with_data(name: "can't be blank").of_service(described_class).without_step
               end
             end
           end
