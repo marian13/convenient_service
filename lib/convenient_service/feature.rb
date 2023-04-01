@@ -2,7 +2,11 @@
 
 module ConvenientService
   module Feature
-    include Support::DependencyContainer::Entry
-    include Support::DependencyContainer::Export
+    include Support::Concern
+
+    included do
+      include Support::DependencyContainer::Entry
+      include Support::DependencyContainer::Export
+    end
   end
 end
