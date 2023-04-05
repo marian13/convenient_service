@@ -20,7 +20,7 @@ module ConvenientService
 
             ##
             # @param types [ConvenientService::Common::Plugins::HasCallbacks::Entities::TypeCollection]
-            # @param block [Proc]
+            # @param block [Proc, nil]
             # @return [void]
             #
             def initialize(types:, block:)
@@ -74,9 +74,9 @@ module ConvenientService
 
             ##
             # @param context [Object] Can be any type.
-            # @param args [Array]
-            # @param kwargs [Hash]
-            # @param block [Proc]
+            # @param args [Array<Object>]
+            # @param kwargs [Hash{Symbol => Object}]
+            # @param block [Proc, nil]
             # @return [ConvenientService::Common::Plugins::HasCallbacks::Entities::Callback]
             #
             def call_in_context_with_arguments(context, *args, **kwargs, &block)
@@ -86,9 +86,9 @@ module ConvenientService
             ##
             # @param context [Object] Can be any type.
             # @param value [Object] Can be any type.
-            # @param args [Array]
-            # @param kwargs [Hash]
-            # @param block [Proc]
+            # @param args [Array<Object>]
+            # @param kwargs [Hash{Symbol => Object}]
+            # @param block [Proc, nil]
             # @return [ConvenientService::Common::Plugins::HasCallbacks::Entities::Callback]
             #
             def call_in_context_with_value_and_arguments(context, value, *args, **kwargs, &block)

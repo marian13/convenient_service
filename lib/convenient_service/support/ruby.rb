@@ -16,6 +16,37 @@ module ConvenientService
         def version
           @version ||= Support::Version.new(::RUBY_VERSION)
         end
+
+        ##
+        # Returns `true` when JRuby, `false` otherwise.
+        #
+        # @return [Boolean]
+        #
+        # @see https://github.com/rdp/os
+        #
+        # @internal
+        #   NOTE: Gratefully copied from the `os` gem. Version `1.1.4`.
+        #   - https://github.com/rdp/os/blob/v1.1.4/lib/os.rb#L101
+        #
+        #   NOTE: Modified original implementation in order to return a boolean.
+        #
+        def jruby?
+          ::RUBY_PLATFORM.to_s.match?(/java/)
+        end
+
+        ##
+        # Returns `true` when TruffleRuby, `false` otherwise.
+        #
+        # @return [Boolean]
+        #
+        # @internal
+        #   NOTE: Taken from irb testing. May NOT be stable.
+        #
+        #   TODO: Find a confirmation of stability.
+        #
+        def truffleruby?
+          ::RUBY_ENGINE.to_s.match?(/truffleruby/)
+        end
       end
     end
   end

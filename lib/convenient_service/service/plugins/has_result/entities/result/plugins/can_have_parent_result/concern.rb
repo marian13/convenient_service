@@ -16,11 +16,12 @@ module ConvenientService
                     # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result, nil]
                     #
                     def parent
-                      @parent ||= internals.cache[:parent]
+                      Utils::Object.memoize_including_falsy_values(self, :@parent) { internals.cache[:parent] }
                     end
 
                     ##
                     # @param include_self [Boolean]
+                    # @param limit [Integer]
                     # @return [Array<ConvenientService::Service::Plugins::HasResult::Entities::Result>]
                     #
                     # @internal
@@ -46,17 +47,18 @@ module ConvenientService
                     #     parents
                     #   end
                     #
-                    def parents(include_self: false)
-                      parents_enum(include_self: include_self).to_a
+                    def parents(include_self: false, limit: Constants::PARENTS_LIMIT)
+                      parents_enum(include_self: include_self, limit: limit).to_a
                     end
 
                     ##
                     # @param include_self [Boolean]
+                    # @param limit [Integer]
                     # @return [Enumerator<ConvenientService::Service::Plugins::HasResult::Entities::Result>]
                     #
                     # @see https://ruby-doc.org/core-2.7.0/Enumerator.html
                     #
-                    def parents_enum(include_self: false)
+                    def parents_enum(include_self: false, limit: Constants::PARENTS_LIMIT)
                       ::Enumerator.new do |yielder|
                         yielder.yield(self) if include_self
 
@@ -66,7 +68,12 @@ module ConvenientService
                         #
                         parent = parent()
 
-                        while parent
+                        ##
+                        # NOTE: `finite_loop` is used to avoid even a theoretical infinite loop.
+                        #
+                        Support::FiniteLoop.finite_loop(max_iteration_count: limit, raise_on_exceedance: false) do
+                          break unless parent
+
                           yielder.yield(parent)
 
                           parent = parent.parent

@@ -13,4 +13,8 @@
 #   - https://github.com/rails/rails/blob/v7.0.3.1/activesupport/lib/active_support/concern.rb
 #   - https://github.com/rails/rails
 #
+#   NOTE: It is ok that `MultipleIncludedBlocks` and `MultiplePrependBlocks` inherit from `StandardError` since dependencies are on the lower layer.
+#   TODO: Move `Concern` to support? Rescue and reraise errors?
+#   - https://github.com/marian13/convenient_service/wiki/Design:-Communication-Graph
+#
 require_relative "active_support_concern/concern"

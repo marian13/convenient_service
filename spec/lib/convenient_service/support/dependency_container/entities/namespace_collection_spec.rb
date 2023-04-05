@@ -11,7 +11,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Namesp
   let(:namespace) { ConvenientService::Support::DependencyContainer::Entities::Namespace.new(name: :foo) }
   let(:body) { proc { :foo } }
 
-  example_group "class namespaces" do
+  example_group "class methods" do
     describe ".new" do
       context "when `namespaces` are NOT passed" do
         let(:namespace_collection) { described_class.new }
@@ -23,7 +23,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Namesp
     end
   end
 
-  example_group "instance namespaces" do
+  example_group "instance methods" do
     describe "#empty?" do
       context "when namespace collection has NO namespaces" do
         before do

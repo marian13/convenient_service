@@ -31,7 +31,7 @@ module ConvenientService
                 end
 
                 ##
-                # @return [ConvenientService::Service::Plugins::HasResultSteps::Entities::Method]
+                # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method]
                 #
                 def call
                   return nil unless result.step

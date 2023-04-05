@@ -34,13 +34,13 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Middleware do
             concerns do
               use ConvenientService::Common::Plugins::HasInternals::Concern
               use ConvenientService::Common::Plugins::HasConstructor::Concern
-              use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Concern
+              use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Concern
             end
 
             middlewares :initialize do
               use ConvenientService::Common::Plugins::NormalizesEnv::Middleware
 
-              use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Middleware
+              use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Middleware
             end
 
             class self::Internals
@@ -63,7 +63,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Middleware do
 
       specify { expect { method_value }.to call_chain_next.on(method) }
 
-      context "when `result` class does NOT include `ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Concern`" do
+      context "when `result` class does NOT include `ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Concern`" do
         let(:service_class) do
           Class.new do
             include ConvenientService::Service::Plugins::HasResult::Concern
@@ -75,13 +75,13 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Middleware do
               concerns do
                 use ConvenientService::Common::Plugins::HasInternals::Concern
                 use ConvenientService::Common::Plugins::HasConstructor::Concern
-                use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Concern
+                use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Concern
               end
 
               middlewares :initialize do
                 use ConvenientService::Common::Plugins::NormalizesEnv::Middleware
 
-                use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Middleware
+                use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Middleware
               end
 
               class self::Internals
@@ -116,7 +116,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Middleware do
         end
       end
 
-      context "when `result` class includes `ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Concern`" do
+      context "when `result` class includes `ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Concern`" do
         let(:service_class) do
           Class.new do
             include ConvenientService::Service::Plugins::HasResult::Concern
@@ -128,13 +128,13 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Middleware do
               concerns do
                 use ConvenientService::Common::Plugins::HasInternals::Concern
                 use ConvenientService::Common::Plugins::HasConstructor::Concern
-                use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Concern
+                use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Concern
               end
 
               middlewares :initialize do
                 use ConvenientService::Common::Plugins::NormalizesEnv::Middleware
 
-                use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Middleware
+                use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Middleware
               end
 
               class self::Internals

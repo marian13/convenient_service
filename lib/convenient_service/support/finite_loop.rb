@@ -3,10 +3,17 @@
 module ConvenientService
   module Support
     module FiniteLoop
+      ##
+      # @return [Integer]
+      #
       MAX_ITERATION_COUNT = 1_000
 
       module Errors
-        class MaxIterationCountExceeded < ::StandardError
+        class MaxIterationCountExceeded < ::ConvenientService::Error
+          ##
+          # @param limit [Integer]
+          # @return [void]
+          #
           def initialize(limit:)
             message = <<~TEXT
               Max iteration count is exceeded. Current limit is #{limit}.
@@ -18,7 +25,10 @@ module ConvenientService
           end
         end
 
-        class NoBlockGiven < ::StandardError
+        class NoBlockGiven < ::ConvenientService::Error
+          ##
+          # @return [void]
+          #
           def initialize
             message = <<~TEXT
               `finite_loop` always expects a block to be given.
@@ -31,6 +41,31 @@ module ConvenientService
 
       private
 
+      ##
+      # @example Provides `self.finite_loop` in order to have a way to use `finite_loop` without including `ConvenientService::Support::FiniteLoop`.
+      #   ConvenientService::Support::FiniteLoop.finite_loop do |index|
+      #     break if index > 3
+      #   end
+      #
+      module_function
+
+      ##
+      # @param max_iteration_count [Integer]
+      # @param raise_on_exceedance [Boolean]
+      # @param block [Proc, nil]
+      # @return [Object] Can be any type.
+      #
+      # @example
+      #   class Person
+      #     include ConvenientService::Support::FiniteLoop
+      #
+      #     def foo
+      #       finite_loop do |index|
+      #         break if index > 3
+      #       end
+      #     end
+      #   end
+      #
       def finite_loop(max_iteration_count: MAX_ITERATION_COUNT, raise_on_exceedance: true, &block)
         raise Errors::NoBlockGiven.new unless block
 

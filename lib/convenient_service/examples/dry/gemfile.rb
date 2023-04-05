@@ -14,10 +14,10 @@ module ConvenientService
   module Examples
     module Dry
       module Gemfile
-        class << self
-          def format(path)
-            Services::Format[path: path]
-          end
+        include ConvenientService::Feature
+
+        entry :format do |path|
+          Services::Format[path: path]
         end
       end
     end

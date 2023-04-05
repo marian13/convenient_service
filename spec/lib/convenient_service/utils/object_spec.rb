@@ -45,6 +45,17 @@ RSpec.describe ConvenientService::Utils::Object do
     end
   end
 
+  describe ".resolve_class" do
+    let(:object) { :foo }
+
+    specify do
+      expect { described_class.resolve_class(object) }
+        .to delegate_to(ConvenientService::Utils::Object::ResolveClass, :call)
+        .with_arguments(object)
+        .and_return_its_value
+    end
+  end
+
   describe ".resolve_type" do
     let(:object) { Kernel }
 

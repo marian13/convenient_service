@@ -401,6 +401,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
         specify do
           expect { method_middlewares.resolve_super_method(entity) }
             .to delegate_to(service_class, :commit_config!)
+            .with_arguments(trigger: ConvenientService::Core::Constants::Triggers::RESOLVE_METHOD_MIDDLEWARES_SUPER_METHOD)
         end
 
         it "returns `nil`" do
@@ -425,6 +426,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
         specify do
           expect { method_middlewares.resolve_super_method(entity) }
             .to delegate_to(service_class, :commit_config!)
+            .with_arguments(trigger: ConvenientService::Core::Constants::Triggers::RESOLVE_METHOD_MIDDLEWARES_SUPER_METHOD)
         end
 
         it "returns super method" do

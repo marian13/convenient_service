@@ -52,71 +52,23 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Import do
           .with_arguments(scope: scope)
       end
 
-      context "when `mod` does NOT include `ConvenientService::Support::DependencyContainer::Export`" do
-        let(:container) { Module.new }
-
-        let(:error_message) do
-          <<~TEXT
-            Module `#{container}` can NOT export methods.
-
-            Did you forget to include `ConvenientService::Container.export` into it?
-          TEXT
-        end
-
-        it "raises `ConvenientService::Support::DependencyContainer::Errors::NotExportableModule`" do
-          expect { import }
-            .to raise_error(ConvenientService::Support::DependencyContainer::Errors::NotExportableModule)
-            .with_message(error_message)
-        end
+      specify do
+        expect { import }
+          .to delegate_to(ConvenientService::Support::DependencyContainer::Commands::AssertValidContainer, :call)
+          .with_arguments(container: container)
       end
 
-      context "when `mod` includes `ConvenientService::Support::DependencyContainer::Export`" do
-        context "when `method` is NOT exported" do
-          let(:container) do
-            Module.new do
-              include ConvenientService::Support::DependencyContainer::Export
-            end
-          end
+      specify do
+        expect { import }
+          .to delegate_to(ConvenientService::Support::DependencyContainer::Commands::AssertValidMethod, :call)
+          .with_arguments(full_name: full_name, scope: scope, container: container)
+      end
 
-          let(:error_message) do
-            <<~TEXT
-              Module `#{container}` does NOT export method `#{full_name}` with `#{scope}` scope.
-
-              Did you forget to export it from `#{container}`? For example:
-
-              module #{container}
-                export #{full_name}, scope: :#{scope} do |*args, **kwargs, &block|
-                  # ...
-                end
-              end
-            TEXT
-          end
-
-          it "raises `ConvenientService::Support::DependencyContainer::Errors::NotExportedMethod`" do
-            expect { import }
-              .to raise_error(ConvenientService::Support::DependencyContainer::Errors::NotExportedMethod)
-              .with_message(error_message)
-          end
-        end
-
-        context "when `method` is exported" do
-          let(:container) do
-            Module.new do
-              include ConvenientService::Support::DependencyContainer::Export
-
-              export :foo do
-                "foo"
-              end
-            end
-          end
-
-          specify do
-            expect { import }
-              .to delegate_to(ConvenientService::Support::DependencyContainer::Commands::ImportMethod, :call)
-              .with_arguments(importing_module: user, exported_method: method, prepend: prepend)
-              .and_return_its_value
-          end
-        end
+      specify do
+        expect { import }
+          .to delegate_to(ConvenientService::Support::DependencyContainer::Commands::ImportMethod, :call)
+          .with_arguments(importing_module: user, exported_method: method, prepend: prepend)
+          .and_return_its_value
       end
 
       context "when `scope` is NOT passed" do

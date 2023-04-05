@@ -66,10 +66,6 @@ module ConvenientService
           use Plugins::Service::HasResultShortSyntax::Error::Middleware
         end
 
-        middlewares :step, scope: :class do
-          use Plugins::Service::HasResultMethodSteps::Middleware
-        end
-
         class self::Result
           concerns do
             use Plugins::Result::HasResultShortSyntax::Concern

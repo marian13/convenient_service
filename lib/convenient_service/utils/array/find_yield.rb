@@ -66,7 +66,7 @@ module ConvenientService
 
         ##
         # @param array [Array]
-        # @param block [Proc]
+        # @param block [Proc, nil]
         # @return [void]
         #
         def initialize(array, &block)

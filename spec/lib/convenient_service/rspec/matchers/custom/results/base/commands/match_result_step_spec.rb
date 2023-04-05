@@ -10,9 +10,20 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Comman
     describe ".call" do
       subject(:command_result) { described_class.call(result: result, step: step) }
 
+      let(:service) do
+        Class.new do
+          include ConvenientService::Configs::Standard
+
+          def result
+            success
+          end
+        end
+      end
+
+      let(:result) { service.result }
+
       context "when step is NOT valid" do
-        let(:result) { ConvenientService::Factory.create(:result) }
-        let(:step) { ConvenientService::Factory.create(:invalid_step) }
+        let(:step) { 42 }
 
         let(:error_message) do
           <<~TEXT
@@ -38,11 +49,29 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Comman
       end
 
       context "when step is valid" do
+        let(:first_step) do
+          Class.new do
+            include ConvenientService::Configs::Standard
+
+            def result
+              success
+            end
+          end
+        end
+
         context "when step is service" do
-          let(:step) { ConvenientService::Factory.create(:service_step) }
+          let(:step) { first_step }
 
           context "when result has NO step" do
-            let(:result) { ConvenientService::Factory.create(:result_without_step) }
+            let(:service) do
+              Class.new do
+                include ConvenientService::Configs::Standard
+
+                def result
+                  success
+                end
+              end
+            end
 
             it "returns `false`" do
               expect(command_result).to eq(false)
@@ -51,7 +80,17 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Comman
 
           context "when result has step" do
             context "when result step is NOT same as service" do
-              let(:result) { ConvenientService::Factory.create(:result_with_service_step) }
+              let(:service) do
+                Class.new do
+                  include ConvenientService::Configs::Standard
+
+                  step :result
+
+                  def result
+                    success
+                  end
+                end
+              end
 
               it "returns `false`" do
                 expect(command_result).to eq(false)
@@ -59,7 +98,15 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Comman
             end
 
             context "when result step is same as service" do
-              let(:result) { ConvenientService::Factory.create(:result_with_service_step, service_step: step) }
+              let(:service) do
+                Class.new.tap do |service_class|
+                  service_class.class_exec(first_step) do |first_step|
+                    include ConvenientService::Configs::Standard
+
+                    step first_step
+                  end
+                end
+              end
 
               it "returns `true`" do
                 expect(command_result).to eq(true)
@@ -70,10 +117,18 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Comman
 
         context "when step is method" do
           context "when step is NOT `:result` method" do
-            let(:step) { ConvenientService::Factory.create(:method_step) }
+            let(:step) { :foo }
 
             context "when result has NO step" do
-              let(:result) { ConvenientService::Factory.create(:result_without_step) }
+              let(:service) do
+                Class.new do
+                  include ConvenientService::Configs::Standard
+
+                  def result
+                    success
+                  end
+                end
+              end
 
               it "returns `false`" do
                 expect(command_result).to eq(false)
@@ -82,7 +137,17 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Comman
 
             context "when result has step" do
               context "when result step is NOT same as method" do
-                let(:result) { ConvenientService::Factory.create(:result_with_method_step) }
+                let(:service) do
+                  Class.new do
+                    include ConvenientService::Configs::Standard
+
+                    step :bar
+
+                    def bar
+                      success
+                    end
+                  end
+                end
 
                 it "returns `false`" do
                   expect(command_result).to eq(false)
@@ -90,7 +155,17 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Comman
               end
 
               context "when result step is same as method" do
-                let(:result) { ConvenientService::Factory.create(:result_with_method_step, method_step: step) }
+                let(:service) do
+                  Class.new do
+                    include ConvenientService::Configs::Standard
+
+                    step :foo
+
+                    def foo
+                      success
+                    end
+                  end
+                end
 
                 it "returns `true`" do
                   expect(command_result).to eq(true)
@@ -100,10 +175,18 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Comman
           end
 
           context "when step is `:result` method" do
-            let(:step) { ConvenientService::Factory.create(:result_method_step) }
+            let(:step) { :result }
 
             context "when result has NO step" do
-              let(:result) { ConvenientService::Factory.create(:result_without_step) }
+              let(:service) do
+                Class.new do
+                  include ConvenientService::Configs::Standard
+
+                  def result
+                    success
+                  end
+                end
+              end
 
               it "returns `false`" do
                 expect(command_result).to eq(false)
@@ -112,7 +195,17 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Comman
 
             context "when result has step" do
               context "when result step is NOT `:result` method" do
-                let(:result) { ConvenientService::Factory.create(:result_with_method_step) }
+                let(:service) do
+                  Class.new do
+                    include ConvenientService::Configs::Standard
+
+                    step :foo
+
+                    def foo
+                      success
+                    end
+                  end
+                end
 
                 it "returns `false`" do
                   expect(command_result).to eq(false)
@@ -120,7 +213,17 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Comman
               end
 
               context "when result step is `:result` method" do
-                let(:result) { ConvenientService::Factory.create(:result_with_result_method_step) }
+                let(:service) do
+                  Class.new do
+                    include ConvenientService::Configs::Standard
+
+                    step :result
+
+                    def result
+                      success
+                    end
+                  end
+                end
 
                 it "returns `true`" do
                   expect(command_result).to eq(true)
@@ -134,7 +237,15 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Comman
           let(:step) { nil }
 
           context "when result has NO step" do
-            let(:result) { ConvenientService::Factory.create(:result_without_step) }
+            let(:service) do
+              Class.new do
+                include ConvenientService::Configs::Standard
+
+                def result
+                  success
+                end
+              end
+            end
 
             it "returns `true`" do
               expect(command_result).to eq(true)
@@ -142,7 +253,17 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Comman
           end
 
           context "when result has step" do
-            let(:result) { ConvenientService::Factory.create(:result_with_step) }
+            let(:service) do
+              Class.new do
+                include ConvenientService::Configs::Standard
+
+                step :result
+
+                def result
+                  success
+                end
+              end
+            end
 
             it "returns `false`" do
               expect(command_result).to eq(false)

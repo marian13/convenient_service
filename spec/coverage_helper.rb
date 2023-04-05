@@ -1,6 +1,24 @@
 # frozen_string_literal: true
 
 ##
+# NOTE:
+#   - Use `ConvenientService::Support::Ruby.truffleruby?` directly only in the files that do not require to load all dependencies.
+#   - Prefer `ConvenientService::Dependencies.ruby.truffleruby?` for the rest of the files.
+#
+require_relative "../lib/convenient_service/support/ruby"
+
+##
+# NOTE: TruffleRuby 22.3 does NOT implement `running?`, but it is in master.
+# - https://github.com/oracle/truffleruby/commit/2e838f15552ae7e16cf7eab8b74265fae80e8202
+# - https://ruby-doc.org/stdlib-2.7.0/libdoc/coverage/rdoc/Coverage.html#method-c-start
+# - https://github.com/simplecov-ruby/simplecov/blob/v0.22.0/lib/simplecov.rb#L345
+# - https://github.com/simplecov-ruby/simplecov/blob/v0.22.0/lib/simplecov/configuration.rb#L432
+#
+# NOTE: Fixing `running?` causes the domino effect, that is why coverage for TruffeRuby 22.3 is disabled.
+#
+return if ConvenientService::Support::Ruby.truffleruby?
+
+##
 # Coverage using SimpleCov.
 #
 # NOTE: What is SimpleCov?

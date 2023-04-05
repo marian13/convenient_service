@@ -16,7 +16,7 @@ module ConvenientService
 
             ##
             # @api public
-            # @param kwargs [Hash]
+            # @param kwargs [Hash{Symbol => Object}]
             # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
             #
             def success(**kwargs)
@@ -25,7 +25,7 @@ module ConvenientService
 
             ##
             # @api public
-            # @param kwargs [Hash]
+            # @param kwargs [Hash{Symbol => Object}]
             # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
             #
             def failure(**kwargs)
@@ -34,7 +34,7 @@ module ConvenientService
 
             ##
             # @api public
-            # @param kwargs [Hash]
+            # @param kwargs [Hash{Symbol => Object}]
             # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
             #
             def error(**kwargs)

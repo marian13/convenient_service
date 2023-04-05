@@ -28,7 +28,7 @@ module ConvenientService
             #   - https://blog.kalina.tech/2019/04/exception-without-backtrace-in-ruby.html
             #   - https://github.com/jruby/jruby/issues/4467
             #
-            def initialize(backtrace:, max_size:)
+            def initialize(backtrace:, max_size: Constants::DEFAULT_MAX_BACKTRACE_SIZE)
               @backtrace = backtrace.to_a
               @max_size = max_size
             end

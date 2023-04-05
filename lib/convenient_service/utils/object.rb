@@ -3,6 +3,7 @@
 require_relative "object/instance_variable_delete"
 require_relative "object/instance_variable_fetch"
 require_relative "object/memoize_including_falsy_values"
+require_relative "object/resolve_class"
 require_relative "object/resolve_type"
 
 module ConvenientService
@@ -33,6 +34,14 @@ module ConvenientService
         #
         def memoize_including_falsy_values(...)
           MemoizeIncludingFalsyValues.call(...)
+        end
+
+        ##
+        # @example
+        #   ConvenientService::Utils::Object.resolve_class("foo")
+        #
+        def resolve_class(...)
+          ResolveClass.call(...)
         end
 
         ##

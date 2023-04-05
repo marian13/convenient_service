@@ -4,7 +4,7 @@ module ConvenientService
   module Support
     module Castable
       module Errors
-        class CastIsNotOverridden < ::StandardError
+        class CastIsNotOverridden < ::ConvenientService::Error
           def initialize(klass:)
             message = <<~TEXT
               Cast method (.cast) of `#{klass}` is NOT overridden.
@@ -14,7 +14,7 @@ module ConvenientService
           end
         end
 
-        class FailedToCast < ::StandardError
+        class FailedToCast < ::ConvenientService::Error
           def initialize(other:, klass:)
             message = <<~TEXT
               Failed to cast `#{other.inspect}` into `#{klass}`.

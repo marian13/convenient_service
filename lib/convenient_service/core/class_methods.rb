@@ -6,28 +6,41 @@ module ConvenientService
       ##
       # @see ConvenientService::Core::Entities::Config#concerns
       #
+      # @internal
+      #   NOTE: The instance variable is named `@__convenient_service_config__` intentionally in order to decrease the possibility of accidental redefinition by the end-user.
+      #   NOTE: An `attr_reader` for `@__convenient_service_config__` is NOT created intentionally in order to NOT pollute the end-user class interface.
+      #
       def concerns(...)
-        (@__config__ ||= Entities::Config.new(klass: self)).concerns(...)
+        (@__convenient_service_config__ ||= Entities::Config.new(klass: self)).concerns(...)
       end
 
       ##
       # @see ConvenientService::Core::Entities::Config#middlewares
       #
+      # @internal
+      #   NOTE: The instance variable is named `@__convenient_service_config__` intentionally in order to decrease the possibility of accidental redefinition by the end-user.
+      #   NOTE: An `attr_reader` for `@__convenient_service_config__` is NOT created intentionally in order to NOT pollute the end-user class interface.
+      #
       def middlewares(...)
-        (@__config__ ||= Entities::Config.new(klass: self)).middlewares(...)
+        (@__convenient_service_config__ ||= Entities::Config.new(klass: self)).middlewares(...)
       end
 
       ##
       # Commits config when called for the first time.
       # Does nothing for the subsequent calls.
       #
+      # @param trigger [ConvenientService::Support::UniqueValue]
       # @return [Boolean] true if called for the first time, false otherwise (similarly as Kernel#require).
       #
       # @see https://ruby-doc.org/core-3.1.2/Kernel.html#method-i-require
       #
-      def commit_config!
-        (@__config__ ||= Entities::Config.new(klass: self)).commit!
-          .tap { ConvenientService.logger.debug { "[Core] Committed config for `#{self}` | Triggered by `.commit_config!`" } }
+      # @internal
+      #   NOTE: The instance variable is named `@__convenient_service_config__` intentionally in order to decrease the possibility of accidental redefinition by the end-user.
+      #   NOTE: An `attr_reader` for `@__convenient_service_config__` is NOT created intentionally in order to NOT pollute the end-user class interface.
+      #
+      def commit_config!(trigger: ConvenientService::Core::Constants::Triggers::USER)
+        (@__convenient_service_config__ ||= Entities::Config.new(klass: self)).commit!(trigger: trigger)
+          .tap { ConvenientService.logger.debug { "[Core] Committed config for `#{self}` | Triggered by `.commit_config!(trigger: #{trigger.inspect})` " } }
       end
 
       ##
@@ -58,15 +71,17 @@ module ConvenientService
       #
       # @param method [Symbol]
       # @param args [Array<Object>]
-      # @param kwargs [Hash<Symbol, Object>]
-      # @param block [Proc]
+      # @param kwargs [Hash{Symbol => Object}]
+      # @param block [Proc, nil]
       # @return [void]
       #
       # @internal
-      #   IMPORTANT: `method_missing` should be thread-safe.
+      #   IMPORTANT: `method_missing` MUST be thread-safe.
+      #
+      #   NOTE: `__send__` is used instead of `Support::SafeMethod` intentionally, since checking whether a method is defined is performed earlier by `Utils::Module.class_method_defined?`.
       #
       def method_missing(method, *args, **kwargs, &block)
-        commit_config!
+        commit_config!(trigger: Constants::Triggers::CLASS_METHOD_MISSING)
 
         return super unless Utils::Module.class_method_defined?(self, method, private: true)
 

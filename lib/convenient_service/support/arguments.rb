@@ -24,9 +24,9 @@ module ConvenientService
       attr_reader :block
 
       ##
-      # @param args [Array]
-      # @param kwargs [Hash]
-      # @param block [Proc]
+      # @param args [Array<Object>]
+      # @param kwargs [Hash{Symbol => Object}]
+      # @param block [Proc, nil]
       # @return [void]
       #
       def initialize(*args, **kwargs, &block)

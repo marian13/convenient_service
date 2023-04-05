@@ -51,8 +51,8 @@ module ConvenientService
                 ##
                 # @param index_or_concern [Integer, ConvenientService::Support::Concern, Module]
                 # @param concern [ConvenientService::Support::Concern, Module]
-                # @param args [Array]
-                # @param block [Proc]
+                # @param args [Array<Object>]
+                # @param block [Proc, nil]
                 # @return [ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack]
                 #
                 # @see https://github.com/marian13/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L88
@@ -72,8 +72,8 @@ module ConvenientService
                 ##
                 # @param index_or_concern [Integer, ConvenientService::Support::Concern, Module]
                 # @param concern [ConvenientService::Support::Concern, Module]
-                # @param args [Array]
-                # @param block [Proc]
+                # @param args [Array<Object>]
+                # @param block [Proc, nil]
                 # @return [ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack]
                 #
                 # @see https://github.com/marian13/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L97
@@ -86,8 +86,8 @@ module ConvenientService
 
                 ##
                 # @param concern [ConvenientService::Support::Concern, Module]
-                # @param args [Array]
-                # @param block [Proc]
+                # @param args [Array<Object>]
+                # @param block [Proc, nil]
                 # @return [ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack]
                 #
                 # @see https://github.com/marian13/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L104
@@ -113,8 +113,8 @@ module ConvenientService
                 ##
                 # @param index_or_concern [Integer, ConvenientService::Support::Concern, Module]
                 # @param concern [ConvenientService::Support::Concern, Module]
-                # @param args [Array]
-                # @param block [Proc]
+                # @param args [Array<Object>]
+                # @param block [Proc, nil]
                 # @return [ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack]
                 #
                 # @see https://github.com/marian13/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L118
@@ -139,8 +139,8 @@ module ConvenientService
 
                 ##
                 # @param concern [ConvenientService::Support::Concern, Module]
-                # @param args [Array]
-                # @param block [Proc]
+                # @param args [Array<Object>]
+                # @param block [Proc, nil]
                 # @return [ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack]
                 #
                 # @see https://github.com/marian13/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L76

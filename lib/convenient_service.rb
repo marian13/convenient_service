@@ -38,6 +38,12 @@ require_relative "convenient_service/services"
 
 ##
 # @internal
+#   Convenient Service Feature.
+#
+require_relative "convenient_service/feature"
+
+##
+# @internal
 #   Convenient Service Aliases.
 #
 require_relative "convenient_service/aliases"
