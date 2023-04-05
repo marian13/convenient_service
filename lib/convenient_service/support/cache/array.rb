@@ -49,7 +49,7 @@ module ConvenientService
         # @return [Object] Can be any type.
         #
         def write(key, value)
-          pair = array.find { |arr_key, _value| arr_key == key }
+          pair = array.find { |pair| pair.key == key }
 
           if pair
             pair.value = value

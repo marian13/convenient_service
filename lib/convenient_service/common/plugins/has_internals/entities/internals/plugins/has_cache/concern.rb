@@ -20,7 +20,7 @@ module ConvenientService
                     # @return [ConvenientService::Support::Cache]
                     #
                     def cache
-                      @cache ||= Support::Cache.create(type: :array)
+                      @cache ||= Support::Cache.create
                     end
                   end
                 end

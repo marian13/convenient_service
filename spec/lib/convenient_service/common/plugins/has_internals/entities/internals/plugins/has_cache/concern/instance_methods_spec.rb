@@ -24,7 +24,6 @@ RSpec.describe ConvenientService::Common::Plugins::HasInternals::Entities::Inter
 
       specify do
         expect { internals.cache }.to delegate_to(ConvenientService::Support::Cache, :create)
-        .with_arguments(type: :array)
         .and_return_its_value
       end
 
