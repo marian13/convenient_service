@@ -13,10 +13,10 @@ module ConvenientService
   module Examples
     module Standard
       module Cowsay
-        class << self
-          def print(text = "Hello World!", out: $stdout)
-            Services::Print[text: text, out: out]
-          end
+        include ConvenientService::Feature
+
+        entry :print do |text = "Hello World!", out: $stdout|
+          Services::Print[text: text, out: out]
         end
       end
     end

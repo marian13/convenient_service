@@ -8,12 +8,9 @@ require "convenient_service"
 RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::AssertNpmPackageAvailable do
   include ConvenientService::RSpec::Helpers::StubService
   include ConvenientService::RSpec::Matchers::Results
-  include ConvenientService::RSpec::Matchers::HaveAttrReader
   include ConvenientService::RSpec::Matchers::IncludeModule
 
-  let(:service) { described_class.new(**default_options) }
-
-  let(:default_options) { {name: name} }
+  let(:result) { described_class.result(name: name) }
   let(:name) { "strip-comments" }
 
   example_group "modules" do
@@ -22,75 +19,64 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::AssertN
     it { is_expected.to include_module(ConvenientService::Standard::Config) }
   end
 
-  example_group "attributes" do
-    subject { service }
+  example_group "class methods" do
+    describe ".result" do
+      let(:npm_package_available_command) { "npm list #{name} --depth=0 > /dev/null 2>&1" }
 
-    it { is_expected.to have_attr_reader(:name) }
-  end
+      context "when assertion that npm package is available is NOT successful" do
+        context "when `name` is NOT valid" do
+          context "when `name` is `nil`" do
+            let(:name) { nil }
 
-  describe "#result" do
-    subject(:result) { service.result }
+            it "returns `failure` with `data`" do
+              expect(result).to be_failure.with_data(name: "Name is `nil`").of_service(described_class).of_step(:validate_name)
+            end
+          end
 
-    context "when name is NOT valid" do
-      context "when name is `nil`" do
-        let(:name) { nil }
+          context "when `name` is empty" do
+            let(:name) { "" }
 
-        it "returns failure with data" do
-          expect(result).to be_failure.with_data(name: "Name is `nil`")
+            it "returns `failure` with `data`" do
+              expect(result).to be_failure.with_data(name: "Name is empty").of_service(described_class).of_step(:validate_name)
+            end
+          end
         end
-      end
 
-      context "when name is empty" do
-        let(:name) { "" }
+        context "when node is NOT available" do
+          before do
+            stub_service(ConvenientService::Examples::Standard::Gemfile::Services::AssertNodeAvailable).to return_error
+          end
 
-        it "returns failure with data" do
-          expect(result).to be_failure.with_data(name: "Name is empty")
-        end
-      end
-    end
-
-    context "when name is valid" do
-      let(:name) { "strip-comments" }
-
-      before do
-        stub_service(ConvenientService::Examples::Standard::Gemfile::Services::AssertNodeAvailable).to return_error
-      end
-
-      context "when node is NOT available" do
-        it "returns intermediate step result" do
-          expect(result).to be_not_success.of_step(ConvenientService::Examples::Standard::Gemfile::Services::AssertNodeAvailable)
-        end
-      end
-
-      context "when node is available" do
-        let(:npm_package_available_command) { "npm list #{name} --depth=0 > /dev/null 2>&1" }
-
-        before do
-          stub_service(ConvenientService::Examples::Standard::Gemfile::Services::AssertNodeAvailable).to return_success
+          it "returns intermediate step result" do
+            expect(result).to be_not_success.of_service(described_class).of_step(ConvenientService::Examples::Standard::Gemfile::Services::AssertNodeAvailable)
+          end
         end
 
         context "when npm package is NOT available" do
           before do
+            stub_service(ConvenientService::Examples::Standard::Gemfile::Services::AssertNodeAvailable)
+              .to return_success
+
             stub_service(ConvenientService::Examples::Standard::Gemfile::Services::RunShell)
               .with_arguments(command: npm_package_available_command)
               .to return_error
           end
 
           it "returns intermediate step result" do
-            expect(result).to be_not_success.of_step(ConvenientService::Examples::Standard::Gemfile::Services::RunShell)
+            expect(result).to be_not_success.of_service(described_class).of_step(ConvenientService::Examples::Standard::Gemfile::Services::RunShell)
           end
         end
+      end
 
-        context "when npm package is available" do
-          before do
-            stub_service(ConvenientService::Examples::Standard::Gemfile::Services::RunShell)
-              .with_arguments(command: npm_package_available_command)
-              .to return_success
-          end
+      context "when assertion that npm package is available is successful" do
+        before do
+          stub_service(ConvenientService::Examples::Standard::Gemfile::Services::RunShell)
+            .with_arguments(command: npm_package_available_command)
+            .to return_success
+        end
 
-          it "returns success" do
-            expect(result).to be_success.of_step(ConvenientService::Examples::Standard::Gemfile::Services::RunShell)
-          end
+        it "returns `success`" do
+          expect(result).to be_success.of_service(described_class).of_step(ConvenientService::Examples::Standard::Gemfile::Services::RunShell)
         end
       end
     end

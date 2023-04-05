@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "plugins/can_recalculate_result"
-require_relative "plugins/has_jsend_status_and_attributes"
+require_relative "plugins/has_j_send_status_and_attributes"
 require_relative "plugins/has_inspect"
 require_relative "plugins/has_step"
 require_relative "plugins/can_have_parent_result"

@@ -52,7 +52,7 @@ module ConvenientService
       ##
       # @param max_iteration_count [Integer]
       # @param raise_on_exceedance [Boolean]
-      # @param block [Proc]
+      # @param block [Proc, nil]
       # @return [Object] Can be any type.
       #
       # @example

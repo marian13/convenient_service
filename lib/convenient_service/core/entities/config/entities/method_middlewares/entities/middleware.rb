@@ -43,13 +43,23 @@ module ConvenientService
                 #
                 abstract_method :next
 
+                class << self
+                  ##
+                  # @return [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::MiddlewareCreator]
+                  #
+                  def with(...)
+                    Entities::MiddlewareCreator.new(middleware: self, arguments: Support::Arguments.new(...))
+                  end
+                end
+
                 ##
                 # @param stack [#call<Hash>]
                 # @return [void]
                 #
-                def initialize(stack, env: {})
+                def initialize(stack, env: {}, arguments: Support::Arguments.null_arguments)
                   @__stack__ = stack
                   @__env__ = env
+                  @__arguments__ = arguments
                 end
 
                 ##
@@ -103,6 +113,13 @@ module ConvenientService
                 #
                 def chain
                   @__chain__ ||= Entities::Chain.new(stack: @__stack__)
+                end
+
+                ##
+                # @return [ConvenientService::Support::Arguments]
+                #
+                def arguments
+                  @__arguments__
                 end
               end
             end

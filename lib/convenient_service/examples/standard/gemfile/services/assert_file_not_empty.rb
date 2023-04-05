@@ -8,7 +8,7 @@ module ConvenientService
           class AssertFileNotEmpty
             include ConvenientService::Standard::Config
 
-            attr_accessor :path
+            attr_reader :path
 
             def initialize(path:)
               @path = path

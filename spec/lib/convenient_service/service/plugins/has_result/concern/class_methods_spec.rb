@@ -23,13 +23,13 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern::ClassMet
           concerns do
             use ConvenientService::Common::Plugins::HasInternals::Concern
             use ConvenientService::Common::Plugins::HasConstructor::Concern
-            use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Concern
+            use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Concern
           end
 
           middlewares :initialize do
             use ConvenientService::Common::Plugins::NormalizesEnv::Middleware
 
-            use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Middleware
+            use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Middleware
           end
 
           class self::Internals

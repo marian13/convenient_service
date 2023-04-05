@@ -6,8 +6,8 @@ module ConvenientService
       module CanHaveMethodSteps
         class Middleware < Core::MethodChainMiddleware
           ##
-          # @param args [Array]
-          # @param kwargs [Hash]
+          # @param args [Array<Object>]
+          # @param kwargs [Hash{Symbol => Object}]
           # @param block [Proc, nil]
           # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
           #

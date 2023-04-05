@@ -6,7 +6,13 @@ module ConvenientService
     module Extractions
       module RubyMiddleware
         ##
-        # https://github.com/marian13/ruby-middleware/blob/v0.4.2/lib/middleware/logger.rb
+        # @internal
+        #   NOTE:
+        #     Copied from `Ibsciss/ruby-middleware` without any logic modification.
+        #     Version: v0.4.2.
+        #     - Wrapped in a namespace `ConvenientService::Dependencies::Extractions::RubyMiddleware`.
+        #
+        #   - https://github.com/marian13/ruby-middleware/blob/v0.4.2/lib/middleware/logger.rb
         #
         module Middleware
 

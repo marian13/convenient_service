@@ -13,6 +13,12 @@ module ConvenientService
             attr_reader :exception
 
             ##
+            # @!attribute [r] max_backtrace_size
+            #   @return [Integer]
+            #
+            attr_reader :max_backtrace_size
+
+            ##
             # @!attribute [r] args
             #   @return [StandardError]
             #
@@ -32,16 +38,18 @@ module ConvenientService
 
             ##
             # @param exception [StandardError]
-            # @param args [Array]
-            # @param kwargs [Hash]
+            # @param args [Array<Object>]
+            # @param kwargs [Hash{Symbol => Object}]
             # @param block [Proc, nil]
+            # @param max_backtrace_size [Integer]
             # @return [void]
             #
-            def initialize(exception:, args:, kwargs:, block:)
+            def initialize(exception:, args:, kwargs:, block:, max_backtrace_size: Constants::DEFAULT_MAX_BACKTRACE_SIZE)
               @exception = exception
               @args = args
               @kwargs = kwargs
               @block = block
+              @max_backtrace_size = max_backtrace_size
             end
 
             ##
@@ -178,13 +186,6 @@ module ConvenientService
             #
             def formatted_exception_cause
               Commands::FormatCause.call(cause: exception.cause)
-            end
-
-            ##
-            # @return [Integer]
-            #
-            def max_backtrace_size
-              Constants::DEFAULT_MAX_BACKTRACE_SIZE
             end
           end
         end
