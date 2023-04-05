@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-require 'byebug'
+
 module ConvenientService
   module Support
     class Cache
@@ -39,7 +39,7 @@ module ConvenientService
         #
         def read(key)
           pair = array.find { |pair| pair.key == key } || Support::Cache::Array::Pair.null_pair
-  
+
           pair.value
         end
 
@@ -50,13 +50,13 @@ module ConvenientService
         #
         def write(key, value)
           pair = array.find { |arr_key, _value| arr_key == key }
-          
-          if pair  
+
+          if pair
             pair.value = value
           else
             array << Support::Cache::Array::Pair.new(key: key, value: value)
           end
-          
+
           value
         end
 
