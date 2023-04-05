@@ -30,7 +30,7 @@ module ConvenientService
           def export(full_name, scope: Constants::DEFAULT_SCOPE, &body)
             Commands::AssertValidScope.call(scope: scope)
 
-            Entities::Method.new(full_name: full_name, scope: scope, body: body).tap { |method| exported_methods << method }
+            Entities::Method.new(slug: full_name, scope: scope, body: body).tap { |method| exported_methods << method }
           end
 
           ##

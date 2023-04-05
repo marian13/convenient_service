@@ -6,10 +6,10 @@ module ConvenientService
       module Entities
         class Method
           ##
-          # @!attribute [r] full_name
+          # @!attribute [r] slug
           #   @return [String, Symbol]
           #
-          attr_reader :full_name
+          attr_reader :slug
 
           ##
           # @!attribute [r] scope
@@ -24,37 +24,44 @@ module ConvenientService
           attr_reader :body
 
           ##
-          # @param full_name [String, Symbol]
+          # @!attribute [r] alias_slug
+          #   @return [String, Symbol]
+          #
+          attr_reader :alias_slug
+
+          ##
+          # @param slug [String, Symbol]
           # @param scope [:instance, :class]
           # @param body [Proc]
+          # @param alias_slug [String, Symbol]
           # @return [void]
           #
-          def initialize(full_name:, scope:, body:, as: "")
-            @full_name = full_name
+          def initialize(slug:, scope:, body:, alias_slug: nil)
+            @slug = slug
             @scope = scope
             @body = body
-            @as = as
+            @alias_slug = alias_slug
           end
 
           ##
           # @return [String]
           #
           def name
-            @name ||= full_name_parts.last
+            @name ||= alias_slug_parts.last || slug_parts.last
+          end
+
+          ##
+          # @return [Array<String>]
+          #
+          def alias_or_slug_parts
+            @alias_or_slug_parts ||= alias_slug_parts.empty? ? slug_parts : alias_slug_parts
           end
 
           ##
           # @return [Array<ConvenientService::Support::DependencyContainer::Entities::Namespace>]
           #
           def namespaces
-            @namespaces ||= full_name_parts.slice(0..-2).map { |part| Entities::Namespace.new(name: part) }
-          end
-
-          ##
-          # @return [String]
-          #
-          def create_alias(name)
-            @as = name
+            @namespaces ||= alias_or_slug_parts.slice(0..-2).map { |part| Entities::Namespace.new(name: part) }
           end
 
           ##
@@ -112,22 +119,16 @@ module ConvenientService
           ##
           # @return [Array<String>]
           #
-          def full_name_parts
-            @full_name_parts ||= Utils::String.split(name_to_split, ".", "::").map(&:to_sym)
+          def slug_parts
+            @slug_parts ||= Utils::String.split(slug, ".", "::").map(&:to_sym)
           end
 
           ##
-          # @return [String]
+          # @return [Array<String>]
           #
-          def name_to_split
-            @name_to_split ||= as.empty? ? full_name : as
+          def alias_slug_parts
+            @alias_slug_parts ||= Utils::String.split(alias_slug, ".", "::").map(&:to_sym)
           end
-
-          ##
-          # @!attribute [r] as
-          #   @return [Proc]
-          #
-          attr_accessor :as
         end
       end
     end

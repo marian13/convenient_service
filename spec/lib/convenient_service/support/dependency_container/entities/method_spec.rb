@@ -6,7 +6,7 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Method do
-  let(:method) { described_class.new(full_name: full_name, scope: scope, body: body) }
+  let(:method) { described_class.new(slug: full_name, scope: scope, body: body) }
 
   let(:full_name) { :"foo.bar.baz.qux" }
   let(:scope) { :instance }
@@ -21,7 +21,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Method
 
     subject { method }
 
-    it { is_expected.to have_attr_reader(:full_name) }
+    it { is_expected.to have_attr_reader(:slug) }
     it { is_expected.to have_attr_reader(:scope) }
     it { is_expected.to have_attr_reader(:body) }
   end

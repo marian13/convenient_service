@@ -19,7 +19,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Export do
   let(:full_name) { :foo }
   let(:scope) { :instance }
 
-  let(:method) { ConvenientService::Support::DependencyContainer::Entities::Method.new(full_name: full_name, scope: scope, body: body) }
+  let(:method) { ConvenientService::Support::DependencyContainer::Entities::Method.new(slug: full_name, scope: scope, body: body) }
 
   let(:export) { container.export(full_name, **kwargs, &body) }
   let(:kwargs) { default_kwargs }

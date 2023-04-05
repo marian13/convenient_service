@@ -23,7 +23,7 @@ module ConvenientService
             rules = []
 
             rules << ->(method) { method.name.to_s == name.to_s } if name != Support::NOT_PASSED
-            rules << ->(method) { method.full_name.to_s == full_name.to_s } if full_name != Support::NOT_PASSED
+            rules << ->(method) { method.slug.to_s == full_name.to_s } if full_name != Support::NOT_PASSED
             rules << ->(method) { method.scope == scope } if scope != Support::NOT_PASSED
 
             condition = Utils::Proc.conjunct(rules)
