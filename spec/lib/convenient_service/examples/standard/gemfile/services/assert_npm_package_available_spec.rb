@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require "spec_helper"
-
+require 'byebug'
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
@@ -77,6 +77,7 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::AssertN
           end
 
           it "returns intermediate step result" do
+            # byebug
             expect(result).to be_not_success.of_step(ConvenientService::Examples::Standard::Gemfile::Services::RunShell)
           end
         end

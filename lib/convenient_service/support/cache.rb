@@ -3,20 +3,24 @@
 require_relative "cache/array"
 require_relative "cache/hash"
 require_relative "cache/key"
+require_relative "cache/array/pair"
 
 module ConvenientService
   module Support
     class Cache
-      def self.set_default_class(use_array)
-        if use_array
-          @default_class = Array
-        else
-          @default_class = Hash
-        end
-      end
 
-      def self.default_class
-        @default_class ||= Hash
+      ##
+      # @return [ConvenientService::Support::Cache]
+      #
+      def self.create(type: :hash)
+        case type
+        when :array
+          Cache::Array.new
+        when :hash
+          Cache::Hash.new
+        else
+          raise Errors::NotSupportedType, "Invalid cache type: #{type}"
+        end
       end
 
       ##

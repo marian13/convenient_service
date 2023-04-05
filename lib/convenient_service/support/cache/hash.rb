@@ -100,9 +100,7 @@ module ConvenientService
         # @return [ConvenientService::Support::Cache::Hash]
         #
         def scope(key)
-          Support::Cache.set_default_class(false)
-
-          fetch(key) { Support::Cache.default_class.new }
+          fetch(key) { Support::Cache.create(type: :hash) }
         end
 
         ##

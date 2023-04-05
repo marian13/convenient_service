@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-
+require 'byebug'
 ##
 # Usage example:
 #
@@ -20,6 +20,7 @@ module ConvenientService
             #
             # TODO: Troubleshooting guide.
             #
+            # byebug
             commit_config!
 
             ##

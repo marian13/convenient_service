@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-
+require 'byebug'
 module ConvenientService
   module Examples
     module Standard
@@ -16,6 +16,7 @@ module ConvenientService
             end
 
             def result
+              byebug
               Services::PrintShellCommand[text: command] if debug
 
               ##

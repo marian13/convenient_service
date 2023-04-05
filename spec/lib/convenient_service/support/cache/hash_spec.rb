@@ -7,11 +7,7 @@ require "convenient_service"
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Support::Cache do
   example_group "instance methods" do
-    before do
-      described_class.set_default_class(false)
-    end
-
-    let(:cache) { described_class.default_class.new }
+    let(:cache) { described_class.create(type: :hash) }
 
     describe "#empty?" do
       context "when cache has NO keys" do

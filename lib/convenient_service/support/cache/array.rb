@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-
+require 'byebug'
 module ConvenientService
   module Support
     class Cache
@@ -31,16 +31,16 @@ module ConvenientService
         # @return [Boolean]
         #
         def exist?(key)
-          array.any? { |arr_key, _value| arr_key == key }
+          array.any? { |pair| pair.key == key }
         end
 
         ##
         # @return [Object] Can be any type.
         #
         def read(key)
-          pair = array.find { |arr_key, _value| arr_key == key }
-
-          pair ? pair[1] : nil
+          pair = array.find { |pair| pair.key == key } || Support::Cache::Array::Pair.null_pair
+  
+          pair.value
         end
 
         ##
@@ -52,9 +52,9 @@ module ConvenientService
           pair = array.find { |arr_key, _value| arr_key == key }
           
           if pair  
-            pair[1] = value
+            pair.value = value
           else
-            array << [key, value]
+            array << Support::Cache::Array::Pair.new(key: key, value: value)
           end
           
           value
@@ -68,8 +68,6 @@ module ConvenientService
           pair = array.find { |arr_key, _value| arr_key == key }
 
           array.delete(pair) if pair
-
-          pair ? pair[1] : nil
         end
 
         ##
@@ -96,9 +94,7 @@ module ConvenientService
         # @return [ConvenientService::Support::Cache::Array]
         #
         def scope(key)
-          Support::Cache.set_default_class(true)
-
-          fetch(key) { Support::Cache.default_class.new }
+          fetch(key) { Support::Cache.create(type: :array) }
         end
 
         ##
