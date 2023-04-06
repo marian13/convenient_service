@@ -75,7 +75,7 @@ module ConvenientService
 
         ##
         # @param key [Object] Can be any type.
-        # @param block [Proc]
+        # @param block [Proc, nil]
         # @return [Object] Can be any type.
         #
         # @internal

@@ -5,9 +5,9 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
-RSpec.describe ConvenientService::Support::Cache do
+RSpec.describe ConvenientService::Support::Cache::Hash do
   example_group "instance methods" do
-    let(:cache) { described_class.create(type: :hash) }
+    let(:cache) { described_class.new }
 
     describe "#empty?" do
       context "when cache has NO keys" do
@@ -57,7 +57,7 @@ RSpec.describe ConvenientService::Support::Cache do
       include ConvenientService::RSpec::Matchers::CacheItsValue
 
       it "returns sub cache" do
-        expect(cache.scope(:foo)).to eq(ConvenientService::Support::Cache::Hash.new)
+        expect(cache.scope(:foo)).to eq(described_class.new)
       end
 
       specify do
@@ -66,7 +66,7 @@ RSpec.describe ConvenientService::Support::Cache do
 
       context "when nested" do
         it "returns sub cache" do
-          expect(cache.scope(:foo).scope(:bar)).to eq(ConvenientService::Support::Cache::Hash.new)
+          expect(cache.scope(:foo).scope(:bar)).to eq(described_class.new)
         end
 
         specify do
