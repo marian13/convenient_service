@@ -11,9 +11,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::FormatHeader
   include ConvenientService::RSpec::Matchers::Results
   include ConvenientService::RSpec::Matchers::IncludeModule
 
-  let(:service) { described_class.new(**default_options) }
-
-  let(:default_options) { {parsed_content: parsed_content, skip_frozen_string_literal: skip_frozen_string_literal} }
+  let(:result) { described_class.result(parsed_content: parsed_content, skip_frozen_string_literal: skip_frozen_string_literal) }
   let(:parsed_content) { {} }
   let(:skip_frozen_string_literal) { false }
 
@@ -23,279 +21,233 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::FormatHeader
     it { is_expected.to include_module(ConvenientService::Examples::Dry::Gemfile::DryService::Config) }
   end
 
-  example_group "validations" do
-    example_group "`parsed_content`" do
-      subject(:result) { service.result }
+  example_group "class methods" do
+    describe ".result" do
+      context "when formatting of header is NOT successful" do
+        context "when `parsed_content` is NOT hash" do
+          let(:parsed_content) { [] }
 
-      context "when `parsed_content` is NOT hash" do
-        let(:parsed_content) { [] }
+          it "returns `failure`" do
+            expect(result).to be_failure.with_data(parsed_content: "must be a hash").of_service(described_class).without_step
+          end
+        end
 
-        it "returns failure" do
-          expect(result).to be_failure
+        context "when `parsed_content` is hash" do
+          context "when `parsed_content` has `ruby` key" do
+            context "when value for `ruby` is NOT array" do
+              let(:parsed_content) { {ruby: {}} }
+
+              it "returns `failure`" do
+                expect(result).to be_failure.with_data(parsed_content: [:ruby, ["must be an array"]]).of_service(described_class).without_step
+              end
+            end
+
+            context "when value for `ruby` is array" do
+              context "when any item from that array is NOT string" do
+                let(:parsed_content) { {ruby: [42]} }
+
+                it "returns `failure`" do
+                  expect(result).to be_failure.with_data(parsed_content: [:ruby, {0 => ["must be a string"]}]).of_service(described_class).without_step
+                end
+              end
+            end
+          end
+
+          context "when `parsed_content` has `source` key" do
+            context "when value for `source` is NOT array" do
+              let(:parsed_content) { {source: {}} }
+
+              it "returns `failure`" do
+                expect(result).to be_failure.with_data(parsed_content: [:source, ["must be an array"]]).of_service(described_class).without_step
+              end
+            end
+
+            context "when value for `source` is array" do
+              context "when any item from that array is NOT string" do
+                let(:parsed_content) { {source: [42]} }
+
+                it "returns `failure`" do
+                  expect(result).to be_failure.with_data(parsed_content: [:source, {0 => ["must be a string"]}]).of_service(described_class).without_step
+                end
+              end
+            end
+          end
+
+          context "when `parsed_content` has `git_source` key" do
+            context "when value for `git_source` is NOT array" do
+              let(:parsed_content) { {git_source: {}} }
+
+              it "returns `failure`" do
+                expect(result).to be_failure.with_data(parsed_content: [:git_source, ["must be an array"]]).of_service(described_class).without_step
+              end
+            end
+
+            context "when value for `git_source` is array" do
+              context "when any item from that array is NOT string" do
+                let(:parsed_content) { {git_source: [42]} }
+
+                it "returns `failure`" do
+                  expect(result).to be_failure.with_data(parsed_content: [:git_source, {0 => ["must be a string"]}]).of_service(described_class).without_step
+                end
+              end
+            end
+          end
+        end
+
+        context "when `skip_frozen_string_literal` is NOT boolean" do
+          let(:skip_frozen_string_literal) { 42 }
+
+          it "returns `failure`" do
+            expect(result).to be_failure.with_data(skip_frozen_string_literal: "must be boolean").of_service(described_class).without_step
+          end
         end
       end
 
-      context "when `parsed_content` is hash" do
-        context "when that hash is empty" do
-          let(:parsed_content) { {} }
-
-          it "does NOT return failure" do
-            expect(result).not_to be_failure
-          end
-        end
-
-        context "when `parsed_content` has `ruby` key" do
-          context "when value for `ruby` is NOT array" do
-            let(:parsed_content) { {ruby: {}} }
-
-            it "returns failure" do
-              expect(result).to be_failure
-            end
-          end
-
-          context "when value for `ruby` is array" do
-            context "when any item from that array is NOT string" do
-              let(:parsed_content) { {ruby: [42]} }
-
-              it "returns failure" do
-                expect(result).to be_failure
-              end
-            end
-
-            context "when all items from that array are strings" do
-              let(:parsed_content) { {ruby: [%(ruby "3.0.1")]} }
-
-              it "does NOT return failure" do
-                expect(result).not_to be_failure
-              end
-            end
-          end
-        end
-
-        context "when `parsed_content` has `source` key" do
-          context "when value for `source` is NOT array" do
-            let(:parsed_content) { {source: {}} }
-
-            it "returns failure" do
-              expect(result).to be_failure
-            end
-          end
-
-          context "when value for `source` is array" do
-            context "when any item from that array is NOT string" do
-              let(:parsed_content) { {source: [42]} }
-
-              it "returns failure" do
-                expect(result).to be_failure
-              end
-            end
-
-            context "when all items from that array are strings" do
-              let(:parsed_content) { {source: [%(source "https://rubygems.org")]} }
-
-              it "does NOT return failure" do
-                expect(result).not_to be_failure
-              end
-            end
-          end
-        end
-
-        context "when `parsed_content` has `git_source` key" do
-          context "when value for `git_source` is NOT array" do
-            let(:parsed_content) { {git_source: {}} }
-
-            it "returns failure" do
-              expect(result).to be_failure
-            end
-          end
-
-          context "when value for `git_source` is array" do
-            context "when any item from that array is NOT string" do
-              let(:parsed_content) { {git_source: [42]} }
-
-              it "returns failure" do
-                expect(result).to be_failure
-              end
-            end
-
-            context "when all items from that array are strings" do
-              let(:parsed_content) { {git_source: [%(git_source(:github) { |repo| "https://github.com/\#{repo}.git" })]} }
-
-              it "does NOT return failure" do
-                expect(result).not_to be_failure
-              end
-            end
-          end
-        end
-      end
-    end
-
-    example_group "`skip_frozen_string_literal`" do
-      subject(:result) { described_class.result(parsed_content: parsed_content, skip_frozen_string_literal: skip_frozen_string_literal) }
-
-      context "when `skip_frozen_string_literal` is NOT boolean" do
-        let(:skip_frozen_string_literal) { 42 }
-
-        it "returns failure" do
-          expect(result).to be_failure
-        end
-      end
-
-      context "when `skip_frozen_string_literal` is boolean" do
+      context "when formatting of header is successful" do
         let(:skip_frozen_string_literal) { false }
 
-        it "does NOT return failure" do
-          expect(result).not_to be_failure
+        let(:parsed_content) do
+          {
+            ruby: [
+              %(ruby "3.0.1")
+            ],
+            source: [
+              %(source "https://rubygems.org")
+            ],
+            git_source: [
+              %(git_source(:github) { |repo| "https://github.com/\#{repo}.git" })
+            ]
+          }
         end
-      end
-    end
-  end
 
-  describe "#result" do
-    subject(:result) { described_class.result(parsed_content: parsed_content, skip_frozen_string_literal: skip_frozen_string_literal) }
+        let(:formatted_content) do
+          <<~'RUBY'
+            # frozen_string_literal: true
 
-    let(:skip_frozen_string_literal) { false }
+            source "https://rubygems.org"
 
-    let(:parsed_content) do
-      {
-        ruby: [
-          %(ruby "3.0.1")
-        ],
-        source: [
-          %(source "https://rubygems.org")
-        ],
-        git_source: [
-          %(git_source(:github) { |repo| "https://github.com/\#{repo}.git" })
-        ]
-      }
-    end
+            git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-    let(:formatted_content) do
-      <<~'RUBY'
-        # frozen_string_literal: true
+            ruby "3.0.1"
+          RUBY
+        end
 
-        source "https://rubygems.org"
+        it "returns `success` with formatted content" do
+          expect(result).to be_success.with_data(formatted_content: formatted_content).of_service(described_class).without_step
+        end
 
-        git_source(:github) { |repo| "https://github.com/#{repo}.git" }
+        context "when `parsed_content` does NOT contains `ruby`" do
+          let(:parsed_content) do
+            {
+              source: [
+                %(source "https://rubygems.org")
+              ],
+              git_source: [
+                %(git_source(:github) { |repo| "https://github.com/\#{repo}.git" })
+              ]
+            }
+          end
 
-        ruby "3.0.1"
-      RUBY
-    end
+          let(:formatted_content) do
+            <<~'RUBY'
+              # frozen_string_literal: true
 
-    it "returns success with formatted content" do
-      expect(result).to be_success.with_data(formatted_content: formatted_content)
-    end
+              source "https://rubygems.org"
 
-    context "when `parsed_content` does NOT contains `ruby`" do
-      let(:parsed_content) do
-        {
-          source: [
-            %(source "https://rubygems.org")
-          ],
-          git_source: [
-            %(git_source(:github) { |repo| "https://github.com/\#{repo}.git" })
-          ]
-        }
-      end
+              git_source(:github) { |repo| "https://github.com/#{repo}.git" }
+            RUBY
+          end
 
-      let(:formatted_content) do
-        <<~'RUBY'
-          # frozen_string_literal: true
+          it "returns `success` with formatted content without `ruby`" do
+            expect(result).to be_success.with_data(formatted_content: formatted_content).of_service(described_class).without_step
+          end
+        end
 
-          source "https://rubygems.org"
+        context "when `parsed_content` does NOT contains `source`" do
+          let(:parsed_content) do
+            {
+              ruby: [
+                %(ruby "3.0.1")
+              ],
+              git_source: [
+                %(git_source(:github) { |repo| "https://github.com/\#{repo}.git" })
+              ]
+            }
+          end
 
-          git_source(:github) { |repo| "https://github.com/#{repo}.git" }
-        RUBY
-      end
+          let(:formatted_content) do
+            <<~'RUBY'
+              # frozen_string_literal: true
 
-      it "returns success with formatted content without `ruby`" do
-        expect(result).to be_success.with_data(formatted_content: formatted_content)
-      end
-    end
+              git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-    context "when `parsed_content` does NOT contains `source`" do
-      let(:parsed_content) do
-        {
-          ruby: [
-            %(ruby "3.0.1")
-          ],
-          git_source: [
-            %(git_source(:github) { |repo| "https://github.com/\#{repo}.git" })
-          ]
-        }
-      end
+              ruby "3.0.1"
+            RUBY
+          end
 
-      let(:formatted_content) do
-        <<~'RUBY'
-          # frozen_string_literal: true
+          it "returns `success` with formatted content without `source`" do
+            expect(result).to be_success.with_data(formatted_content: formatted_content).of_service(described_class).without_step
+          end
+        end
 
-          git_source(:github) { |repo| "https://github.com/#{repo}.git" }
+        context "when `parsed_content` does NOT contains `git_source`" do
+          let(:parsed_content) do
+            {
+              ruby: [
+                %(ruby "3.0.1")
+              ],
+              source: [
+                %(source "https://rubygems.org")
+              ]
+            }
+          end
 
-          ruby "3.0.1"
-        RUBY
-      end
+          let(:formatted_content) do
+            <<~'RUBY'
+              # frozen_string_literal: true
 
-      it "returns success with formatted content without `source`" do
-        expect(result).to be_success.with_data(formatted_content: formatted_content)
-      end
-    end
+              source "https://rubygems.org"
 
-    context "when `parsed_content` does NOT contains `git_source`" do
-      let(:parsed_content) do
-        {
-          ruby: [
-            %(ruby "3.0.1")
-          ],
-          source: [
-            %(source "https://rubygems.org")
-          ]
-        }
-      end
+              ruby "3.0.1"
+            RUBY
+          end
 
-      let(:formatted_content) do
-        <<~'RUBY'
-          # frozen_string_literal: true
+          it "returns `success` with formatted content without `git_source`" do
+            expect(result).to be_success.with_data(formatted_content: formatted_content).of_service(described_class).without_step
+          end
+        end
 
-          source "https://rubygems.org"
+        context "when `skip_frozen_string_literal` is set to `true`" do
+          let(:skip_frozen_string_literal) { true }
 
-          ruby "3.0.1"
-        RUBY
-      end
+          let(:parsed_content) do
+            {
+              ruby: [
+                %(ruby "3.0.1")
+              ],
+              source: [
+                %(source "https://rubygems.org")
+              ],
+              git_source: [
+                %(git_source(:github) { |repo| "https://github.com/\#{repo}.git" })
+              ]
+            }
+          end
 
-      it "returns success with formatted content without `git_source`" do
-        expect(result).to be_success.with_data(formatted_content: formatted_content)
-      end
-    end
+          let(:formatted_content) do
+            <<~'RUBY'
+              source "https://rubygems.org"
 
-    context "when `skip_frozen_string_literal` is set to `true`" do
-      let(:skip_frozen_string_literal) { true }
+              git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-      let(:parsed_content) do
-        {
-          ruby: [
-            %(ruby "3.0.1")
-          ],
-          source: [
-            %(source "https://rubygems.org")
-          ],
-          git_source: [
-            %(git_source(:github) { |repo| "https://github.com/\#{repo}.git" })
-          ]
-        }
-      end
+              ruby "3.0.1"
+            RUBY
+          end
 
-      let(:formatted_content) do
-        <<~'RUBY'
-          source "https://rubygems.org"
-
-          git_source(:github) { |repo| "https://github.com/#{repo}.git" }
-
-          ruby "3.0.1"
-        RUBY
-      end
-
-      it "returns success with formatted content without `git_source`" do
-        expect(result).to be_success.with_data(formatted_content: formatted_content)
+          it "returns `success` with formatted content without `git_source`" do
+            expect(result).to be_success.with_data(formatted_content: formatted_content).of_service(described_class).without_step
+          end
+        end
       end
     end
   end

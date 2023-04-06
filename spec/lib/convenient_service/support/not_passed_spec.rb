@@ -8,11 +8,15 @@ require "convenient_service"
 RSpec.describe "convenient_service/support/not_passed" do
   example_group "constants" do
     describe "::NOT_PASSED" do
-      it "returns `Object` instance" do
-        expect(ConvenientService::Support::NOT_PASSED).to be_instance_of(Object)
+      it "returns `ConvenientService::Support::UniqueValue` instance" do
+        expect(ConvenientService::Support::NOT_PASSED).to be_instance_of(ConvenientService::Support::UniqueValue)
       end
 
-      example_group "instance_methods" do
+      ##
+      # NOTE: This example group is for instance methods of constant, that is why it is nested.
+      # TODO: Custom matcher.
+      #
+      example_group "instance methods" do
         describe "#inspect" do
           it "returns inspect representation" do
             expect(ConvenientService::Support::NOT_PASSED.inspect).to eq("not_passed")

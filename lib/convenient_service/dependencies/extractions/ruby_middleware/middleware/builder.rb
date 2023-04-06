@@ -5,7 +5,13 @@ module ConvenientService
     module Extractions
       module RubyMiddleware
         ##
-        # https://github.com/marian13/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb
+        # @internal
+        #   NOTE:
+        #     Copied from `Ibsciss/ruby-middleware` without any logic modification.
+        #     Version: v0.4.2.
+        #     - Wrapped in a namespace `ConvenientService::Dependencies::Extractions::RubyMiddleware`.
+        #
+        #   - https://github.com/marian13/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb
         #
         module Middleware
           # This provides a DSL for building up a stack of middlewares.

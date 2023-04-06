@@ -5,7 +5,7 @@ module ConvenientService
     module Plugins
       module CanHaveUserProvidedEntity
         module Errors
-          class ProtoEntityHasNoName < ConvenientService::Error
+          class ProtoEntityHasNoName < ::ConvenientService::Error
             def initialize(proto_entity:)
               message = <<~TEXT
                 Proto entity `#{proto_entity}` has no name.
@@ -22,7 +22,7 @@ module ConvenientService
             end
           end
 
-          class ProtoEntityHasNoConcern < ConvenientService::Error
+          class ProtoEntityHasNoConcern < ::ConvenientService::Error
             def initialize(proto_entity:)
               message = <<~TEXT
                 Proto entity `#{proto_entity}` has no concern.

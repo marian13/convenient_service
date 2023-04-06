@@ -5,9 +5,17 @@ require "spec_helper"
 require "convenient_service"
 
 RSpec.describe ConvenientService::Examples::Standard::Gemfile do
-  include ConvenientService::RSpec::Matchers::DelegateTo
+  example_group "modules" do
+    include ConvenientService::RSpec::Matchers::IncludeModule
+
+    subject { described_class }
+
+    it { is_expected.to include_module(ConvenientService::Feature) }
+  end
 
   example_group "class methods" do
+    include ConvenientService::RSpec::Matchers::DelegateTo
+
     describe ".format" do
       let(:file) { Tempfile.new }
       let(:path) { file.path }

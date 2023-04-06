@@ -34,7 +34,7 @@ RSpec.describe ConvenientService::Configs::Standard do
               ConvenientService::Common::Plugins::HasConstructor::Concern,
               ConvenientService::Plugins::Common::HasConstructorWithoutInitialize::Concern,
               ConvenientService::Service::Plugins::HasResult::Concern,
-              ConvenientService::Service::Plugins::HasResultSteps::Concern,
+              ConvenientService::Service::Plugins::CanHaveSteps::Concern,
               ConvenientService::Common::Plugins::CachesConstructorParams::Concern,
               ConvenientService::Common::Plugins::CanBeCopied::Concern,
               ConvenientService::Service::Plugins::CanRecalculateResult::Concern,
@@ -70,7 +70,7 @@ RSpec.describe ConvenientService::Configs::Standard do
               ConvenientService::Common::Plugins::HasCallbacks::Middleware,
               ConvenientService::Common::Plugins::HasAroundCallbacks::Middleware,
               ConvenientService::Service::Plugins::HasResult::Middleware,
-              ConvenientService::Service::Plugins::HasResultSteps::Middleware,
+              ConvenientService::Service::Plugins::CanHaveSteps::Middleware,
               ConvenientService::Service::Plugins::RaisesOnDoubleResult::Middleware,
               ConvenientService::Common::Plugins::CachesReturnValue::Middleware
             ]
@@ -138,7 +138,8 @@ RSpec.describe ConvenientService::Configs::Standard do
           let(:class_step_middlewares) do
             [
               ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-              ConvenientService::Service::Plugins::HasResultMethodSteps::Middleware
+              ConvenientService::Service::Plugins::CanHaveMethodSteps::Middleware,
+              ConvenientService::Service::Plugins::CanHaveResultStep::Middleware
             ]
           end
 
@@ -181,7 +182,7 @@ RSpec.describe ConvenientService::Configs::Standard do
                 ConvenientService::Common::Plugins::HasInternals::Concern,
                 ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasInspect::Concern,
                 ConvenientService::Common::Plugins::HasConstructor::Concern,
-                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Concern,
+                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Concern,
                 ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasResultShortSyntax::Concern,
                 ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanRecalculateResult::Concern,
                 ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasStep::Concern,
@@ -198,7 +199,7 @@ RSpec.describe ConvenientService::Configs::Standard do
             let(:initialize_middlewares) do
               [
                 ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Middleware,
+                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Middleware,
                 ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasStep::Initialize::Middleware,
                 ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanHaveParentResult::Initialize::Middleware
               ]
@@ -340,6 +341,46 @@ RSpec.describe ConvenientService::Configs::Standard do
             end
           end
 
+          example_group "service result data" do
+            example_group "concerns" do
+              let(:concerns) { [] }
+
+              it "sets service result data concerns" do
+                expect(service_class::Result::Data.concerns.to_a).to eq(concerns)
+              end
+            end
+          end
+
+          example_group "service result message" do
+            example_group "concerns" do
+              let(:concerns) { [] }
+
+              it "sets service result message concerns" do
+                expect(service_class::Result::Message.concerns.to_a).to eq(concerns)
+              end
+            end
+          end
+
+          example_group "service result code" do
+            example_group "concerns" do
+              let(:concerns) { [] }
+
+              it "sets service result code concerns" do
+                expect(service_class::Result::Code.concerns.to_a).to eq(concerns)
+              end
+            end
+          end
+
+          example_group "service result status" do
+            example_group "concerns" do
+              let(:concerns) { [] }
+
+              it "sets service result status concerns" do
+                expect(service_class::Result::Status.concerns.to_a).to eq(concerns)
+              end
+            end
+          end
+
           example_group "service result internals" do
             example_group "concerns" do
               let(:concerns) do
@@ -349,7 +390,7 @@ RSpec.describe ConvenientService::Configs::Standard do
               end
 
               it "sets service result internals concerns" do
-                expect(service_class::Internals.concerns.to_a).to eq(concerns)
+                expect(service_class::Result::Internals.concerns.to_a).to eq(concerns)
               end
             end
           end
@@ -360,7 +401,7 @@ RSpec.describe ConvenientService::Configs::Standard do
             let(:concerns) do
               [
                 ConvenientService::Common::Plugins::HasInternals::Concern,
-                ConvenientService::Service::Plugins::HasResultSteps::Entities::Step::Plugins::HasInspect::Concern
+                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::HasInspect::Concern
               ]
             end
 
@@ -373,7 +414,7 @@ RSpec.describe ConvenientService::Configs::Standard do
             let(:calculate_result_middlewares) do
               [
                 ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-                ConvenientService::Service::Plugins::HasResultSteps::Entities::Step::Plugins::CanHaveParentResult::Middleware
+                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveParentResult::Middleware
               ]
             end
 

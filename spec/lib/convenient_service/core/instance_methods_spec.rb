@@ -40,16 +40,18 @@ RSpec.describe ConvenientService::Core::InstanceMethods do
       ##
       # NOTE: Intentionally calling missed method. But later it is added by `concerns.include!`.
       #
-      expect { service_instance.foo }.to delegate_to(service_class, :commit_config!)
+      expect { service_instance.foo }
+        .to delegate_to(service_class, :commit_config!)
+        .with_arguments(trigger: ConvenientService::Core::Constants::Triggers::INSTANCE_METHOD_MISSING)
     end
 
     ##
     # TODO: `it "logs debug message"`.
     #
 
-    it "calls super" do
+    it "calls `send`" do
       ##
-      # NOTE: If `[:foo, args, kwargs, block&.source_location]` is returned, then `super` was called. See concern above.
+      # NOTE: If `[:foo, args, kwargs, block&.source_location]` is returned, then `send` was called. See concern above.
       #
       expect(service_instance.foo(*args, **kwargs, &block)).to eq([:foo, args, kwargs, block&.source_location])
     end

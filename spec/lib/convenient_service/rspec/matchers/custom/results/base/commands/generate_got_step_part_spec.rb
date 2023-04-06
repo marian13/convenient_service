@@ -10,8 +10,18 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Comman
     describe ".call" do
       subject(:command_result) { described_class.call(result: result) }
 
+      let(:result) { service.result }
+
       context "when result has NO step" do
-        let(:result) { ConvenientService::Factory.create(:result_without_step) }
+        let(:service) do
+          Class.new do
+            include ConvenientService::Configs::Standard
+
+            def result
+              success
+            end
+          end
+        end
 
         it "returns got step part" do
           expect(command_result).to eq("without step")
@@ -19,7 +29,17 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Comman
       end
 
       context "when step is `nil`" do
-        let(:result) { ConvenientService::Factory.create(:result_with_step) }
+        let(:service) do
+          Class.new do
+            include ConvenientService::Configs::Standard
+
+            step :result
+
+            def result
+              success
+            end
+          end
+        end
 
         it "returns got step part" do
           expect(command_result).to eq("of step `#{result.step.service.klass}`")

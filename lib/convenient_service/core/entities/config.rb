@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require_relative "config/commands"
 require_relative "config/entities"
 require_relative "config/errors"
 
@@ -57,13 +58,13 @@ module ConvenientService
         # @overload middlewares(method)
         #   Returns all instance middlewares for particular method.
         #   @param method [Symbol] Method name.
-        #   @return [Hash<Symbol, Hash<Symbol, ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares>>]
+        #   @return [Hash{Symbol => Hash{Symbol => ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares}}]
         #
         # @overload middlewares(method, scope:)
         #   Returns all scoped middlewares for particular method.
         #   @param method [Symbol] Method name.
         #   @param scope [:instance, :class]
-        #   @return [Hash<Symbol, Hash<Symbol, ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares>>]
+        #   @return [Hash{Symbol => Hash{Symbol => ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares}}]
         #
         # @overload middlewares(method, &configuration_block)
         #   Configures instance middlewares for particular method.
@@ -106,6 +107,13 @@ module ConvenientService
         end
 
         ##
+        # @return [ConvenientService::Support::ThreadSafeCounter]
+        #
+        def method_missing_commits_counter
+          @method_missing_commits_counter ||= Support::ThreadSafeCounter.new(max_value: Constants::Commits::METHOD_MISSING_MAX_TRIES)
+        end
+
+        ##
         # @return [Boolean]
         #
         def committed?
@@ -116,18 +124,20 @@ module ConvenientService
         # Commits config when called for the first time.
         # Does nothing for the subsequent calls.
         #
+        # @param trigger [ConvenientService::Support::UniqueValue]
         # @return [Boolean] true if called for the first time, false otherwise (similarly as Kernel#require).
         #
         # @see https://ruby-doc.org/core-3.1.2/Kernel.html#method-i-require
         #
-        def commit!
+        def commit!(trigger: Constants::Triggers::USER)
           concerns.include!
+            .tap { Commands::TrackMethodMissingCommitTrigger.call(config: self, trigger: trigger) }
         end
 
         private
 
         ##
-        # @note: Config is committed either by `commit_config` or `method_missing` from `ConvenientService::Core::ClassMethods`.
+        # @note: Config is committed either by `commit_config` or `method_missing` from `ConvenientService::Core::InstanceMethods` and `ConvenientService::Core::ClassMethods`.
         #
         # @return [void]
         # @raise [ConvenientService::Core::Entities::Config::Errors::ConfigIsCommitted]

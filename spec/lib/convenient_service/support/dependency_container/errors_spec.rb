@@ -1,0 +1,14 @@
+# frozen_string_literal: true
+
+require "spec_helper"
+
+require "convenient_service"
+
+RSpec.describe ConvenientService::Support::DependencyContainer::Errors do
+  include ConvenientService::RSpec::Matchers::BeDescendantOf
+
+  specify { expect(described_class::InvalidScope).to be_descendant_of(ConvenientService::Error) }
+  specify { expect(described_class::NotExportableModule).to be_descendant_of(ConvenientService::Error) }
+  specify { expect(described_class::NotExportedMethod).to be_descendant_of(ConvenientService::Error) }
+  specify { expect(described_class::NotModule).to be_descendant_of(ConvenientService::Error) }
+end

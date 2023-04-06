@@ -34,7 +34,7 @@ module ConvenientService
           use Plugins::Common::HasConstructorWithoutInitialize::Concern
 
           use Plugins::Service::HasResult::Concern
-          use Plugins::Service::HasResultSteps::Concern
+          use Plugins::Service::CanHaveSteps::Concern
         end
 
         middlewares :initialize do
@@ -45,7 +45,7 @@ module ConvenientService
           use Plugins::Common::NormalizesEnv::Middleware
 
           use Plugins::Service::HasResult::Middleware
-          use Plugins::Service::HasResultSteps::Middleware
+          use Plugins::Service::CanHaveSteps::Middleware
         end
 
         middlewares :step do
@@ -70,6 +70,9 @@ module ConvenientService
 
         middlewares :step, scope: :class do
           use Plugins::Common::NormalizesEnv::Middleware
+
+          use Plugins::Service::CanHaveMethodSteps::Middleware
+          use Plugins::Service::CanHaveResultStep::Middleware
         end
 
         class self::Internals
@@ -90,13 +93,13 @@ module ConvenientService
 
             use Plugins::Common::HasConstructor::Concern
 
-            use Plugins::Result::HasJsendStatusAndAttributes::Concern
+            use Plugins::Result::HasJSendStatusAndAttributes::Concern
           end
 
           middlewares :initialize do
             use Plugins::Common::NormalizesEnv::Middleware
 
-            use Plugins::Result::HasJsendStatusAndAttributes::Middleware
+            use Plugins::Result::HasJSendStatusAndAttributes::Middleware
           end
 
           middlewares :success? do
@@ -137,6 +140,22 @@ module ConvenientService
 
           middlewares :to_kwargs do
             use Plugins::Common::NormalizesEnv::Middleware
+          end
+
+          class self::Data
+            include Core
+          end
+
+          class self::Message
+            include Core
+          end
+
+          class self::Code
+            include Core
+          end
+
+          class self::Status
+            include Core
           end
 
           class self::Internals

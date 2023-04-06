@@ -10,7 +10,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
 
   example_group "class methods" do
     describe ".call" do
-      subject(:command_result) { described_class.call(exception: exception, args: args, kwargs: kwargs, block: block) }
+      subject(:command_result) { described_class.call(exception: exception, args: args, kwargs: kwargs, block: block, max_backtrace_size: max_backtrace_size) }
 
       let(:exception) do
         service_class.result(*args, **kwargs, &block)
@@ -21,6 +21,8 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
       let(:args) { [:foo] }
       let(:kwargs) { {foo: :bar} }
       let(:block) { proc { :foo } }
+
+      let(:max_backtrace_size) { 5 }
 
       let(:service_class) do
         Class.new do
@@ -47,7 +49,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
       specify do
         expect { command_result }
           .to delegate_to(ConvenientService::Service::Plugins::RescuesResultUnhandledExceptions::Commands::FormatBacktrace, :call)
-          .with_arguments(backtrace: exception.backtrace, max_size: ConvenientService::Service::Plugins::RescuesResultUnhandledExceptions::Constants::DEFAULT_MAX_BACKTRACE_SIZE)
+          .with_arguments(backtrace: exception.backtrace, max_size: max_backtrace_size)
       end
 
       specify do
@@ -94,7 +96,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
             include ConvenientService::Configs::Minimal
 
             def result
-              raise StandardError, "exception message", caller.take(10)
+              raise StandardError, "exception message", caller.take(5)
             end
           end
         end
@@ -118,7 +120,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
             include ConvenientService::Configs::Minimal
 
             def result
-              raise StandardError, "exception message", caller + ["# /line.rb:1:in `foo'"] * 10
+              raise StandardError, "exception message", caller + ["# /line.rb:1:in `foo'"] * 5
             end
           end
         end
@@ -127,7 +129,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
           <<~MESSAGE.chomp
             #{exception.class}:
               #{exception.message}
-            #{exception.backtrace.take(10).map { |line| "# #{line}" }.join("\n")}
+            #{exception.backtrace.take(5).map { |line| "# #{line}" }.join("\n")}
             # ...
           MESSAGE
         end
@@ -152,7 +154,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
           <<~MESSAGE.chomp
             #{exception.class}:
               #{exception.class}
-            #{exception.backtrace.take(10).map { |line| "# #{line}" }.join("\n")}
+            #{exception.backtrace.take(5).map { |line| "# #{line}" }.join("\n")}
             # ...
           MESSAGE
         end
@@ -186,7 +188,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
           <<~MESSAGE.chomp
             #{exception.class}:
             #{exception.message.split("\n").map { |line| "  #{line}" }.join("\n")}
-            #{exception.backtrace.take(10).map { |line| "# #{line}" }.join("\n")}
+            #{exception.backtrace.take(5).map { |line| "# #{line}" }.join("\n")}
             # ...
           MESSAGE
         end
@@ -213,7 +215,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
           <<~MESSAGE.chomp
             #{exception.class}:
               #{exception.message}
-            #{exception.backtrace.take(10).map { |line| "# #{line}" }.join("\n")}
+            #{exception.backtrace.take(5).map { |line| "# #{line}" }.join("\n")}
             # ...
             ------------------
             --- Caused by: ---
@@ -224,6 +226,33 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
         end
 
         it "returns formatted exception with cause" do
+          expect(command_result).to eq(formatted_exception)
+        end
+      end
+
+      context "when `max_backtrace_size` is NOT passed" do
+        subject(:command_result) { described_class.call(exception: exception, args: args, kwargs: kwargs, block: block) }
+
+        let(:service_class) do
+          Class.new do
+            include ConvenientService::Configs::Minimal
+
+            def result
+              raise StandardError, "exception message", caller + ["# /line.rb:1:in `foo'"] * 10
+            end
+          end
+        end
+
+        let(:formatted_exception) do
+          <<~MESSAGE.chomp
+            #{exception.class}:
+              #{exception.message}
+            #{exception.backtrace.take(10).map { |line| "# #{line}" }.join("\n")}
+            # ...
+          MESSAGE
+        end
+
+        it "defaults to `ConvenientService::Service::Plugins::RescuesResultUnhandledExceptions::DEFAULT_MAX_BACKTRACE_SIZE`" do
           expect(command_result).to eq(formatted_exception)
         end
       end

@@ -7,12 +7,12 @@ module ConvenientService
         class AssertValidScope < Support::Command
           ##
           # @!attribute [r] scope
-          #   @return [Object]
+          #   @return [Symbol]
           #
           attr_reader :scope
 
           ##
-          # @param scope [Object]
+          # @param scope [Symbol]
           # @return [void]
           #
           def initialize(scope:)
@@ -20,7 +20,8 @@ module ConvenientService
           end
 
           ##
-          # @return [Module]
+          # @return [void]
+          # @raise [ConvenientService::Support::DependencyContainer::Errors::InvalidScope]
           #
           def call
             raise Errors::InvalidScope.new(scope: scope) unless Constants::SCOPES.include?(scope)

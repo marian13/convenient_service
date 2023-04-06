@@ -6,9 +6,17 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Examples::Standard::Cowsay do
-  include ConvenientService::RSpec::Matchers::DelegateTo
+  example_group "modules" do
+    include ConvenientService::RSpec::Matchers::IncludeModule
+
+    subject { described_class }
+
+    it { is_expected.to include_module(ConvenientService::Feature) }
+  end
 
   example_group "class methods" do
+    include ConvenientService::RSpec::Matchers::DelegateTo
+
     describe ".print" do
       let(:text) { "foo" }
       let(:out) { Tempfile.new }

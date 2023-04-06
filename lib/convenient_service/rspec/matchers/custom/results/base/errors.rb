@@ -7,7 +7,7 @@ module ConvenientService
         module Results
           class Base
             module Errors
-              class InvalidStep < ConvenientService::Error
+              class InvalidStep < ::ConvenientService::Error
                 def initialize(step:)
                   message = <<~TEXT
                     Step `#{step}` is NOT valid.

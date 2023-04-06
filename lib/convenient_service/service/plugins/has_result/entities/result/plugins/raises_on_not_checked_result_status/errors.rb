@@ -9,7 +9,7 @@ module ConvenientService
             module Plugins
               module RaisesOnNotCheckedResultStatus
                 module Errors
-                  class StatusIsNotChecked < ConvenientService::Error
+                  class StatusIsNotChecked < ::ConvenientService::Error
                     def initialize(attribute:)
                       message = <<~TEXT
                         Attribute `#{attribute}` is accessed before result status is checked.

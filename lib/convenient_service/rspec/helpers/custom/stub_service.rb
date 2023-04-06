@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require_relative "stub_service/constants"
 require_relative "stub_service/entities"
 
 module ConvenientService

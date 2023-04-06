@@ -60,9 +60,9 @@ module ConvenientService
               end
 
               ##
-              # @param args [Array]
-              # @param kwargs [Hash]
-              # @param block [Proc]
+              # @param args [Array<Object>]
+              # @param kwargs [Hash{Symbol => Object}]
+              # @param block [Proc, nil]
               # @return [Object] Can be any type.
               #
               def call(*args, **kwargs, &block)

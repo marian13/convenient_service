@@ -30,9 +30,9 @@ module ConvenientService
                   ##
                   # @param object [Object] Can be any type.
                   # @param method [Symbol]
-                  # @param args [Array]
-                  # @param kwargs [Hash]
-                  # @param block [Proc]
+                  # @param args [Array<Object>]
+                  # @param kwargs [Hash{Symbol => Object}]
+                  # @param block [Proc, nil]
                   # @return [void]
                   #
                   def initialize(object:, method:, args:, kwargs:, block:)
