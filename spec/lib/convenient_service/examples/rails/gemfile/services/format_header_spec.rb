@@ -123,7 +123,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::FormatHead
           end
 
           let(:formatted_content) do
-            <<~'RUBY'
+            <<~RUBY
               # frozen_string_literal: true
 
               source "https://rubygems.org"

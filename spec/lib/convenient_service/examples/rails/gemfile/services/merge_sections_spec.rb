@@ -29,7 +29,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::MergeSecti
   end
 
   let(:body) do
-    <<~'RUBY'
+    <<~RUBY
       gem "bootsnap", ">= 1.4.4", require: false
 
       group :development do

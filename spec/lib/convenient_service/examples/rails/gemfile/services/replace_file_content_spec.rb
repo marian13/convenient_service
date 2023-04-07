@@ -21,7 +21,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::ReplaceFil
   let(:path) { file.path }
 
   let(:content) do
-    <<~'RUBY'
+    <<~RUBY
       gem "bootsnap", ">= 1.4.4", require: false
 
       group :development do
