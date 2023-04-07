@@ -3,7 +3,7 @@
 require "spec_helper"
 
 require "convenient_service"
-require "byebug"
+
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Common::Plugins::CachesReturnValue::Middleware do
   example_group "inheritance" do
