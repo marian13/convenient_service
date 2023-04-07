@@ -73,13 +73,25 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "rspec", "~> 3.11.0"
 
-  spec.add_development_dependency "rubocop", "~> 1.40.0"
+  ##
+  # Used for linting Ruby files.
+  # https://github.com/rubocop/rubocop
+  #
+  spec.add_development_dependency "rubocop", "~> 1.48.0"
 
-  spec.add_development_dependency "rubocop-rspec"
+  ##
+  # Used as a set of rules for rubocop for linting RSpec files.
+  # https://github.com/rubocop/rubocop-rspec
+  #
+  spec.add_development_dependency "rubocop-rspec", "~> 2.19.0"
 
   spec.add_development_dependency "tty-prompt"
 
-  spec.add_development_dependency "standard"
+  ##
+  # Used as a set of rules for robocop for linting source files.
+  # https://github.com/testdouble/standard
+  #
+  spec.add_development_dependency "standard", "~> 1.25.0"
 
   spec.add_development_dependency "simplecov"
 
