@@ -12,7 +12,7 @@ module ConvenientService
             ##
             # TODO: Specs.
             #
-            class Blank < Support::Command
+            class Blank < ConvenientService::Command
               attr_reader :object
 
               def initialize(object)

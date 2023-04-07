@@ -12,7 +12,7 @@ module ConvenientService
             ##
             # TODO: Specs.
             #
-            class SafeParse < Support::Command
+            class SafeParse < ConvenientService::Command
               attr_reader :object
 
               def initialize(object)
