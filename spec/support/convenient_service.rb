@@ -8,6 +8,7 @@ require_relative "../../lib/convenient_service/dependencies/extractions/b"
 require "convenient_service"
 
 ConvenientService::Dependencies.require_rescues_result_unhandled_exceptions
+ConvenientService::Dependencies.require_cleans_exception_backtrace
 
 ConvenientService::Dependencies.require_rspec_extentions
 ConvenientService::Dependencies.require_test_tools
