@@ -4,10 +4,29 @@ require "spec_helper"
 
 require "convenient_service"
 
+##
+# NOTE: This file checks only half of `ConvenientService::Support::Gems::RSpec` functionality.
+# The rest is verified by `test/lib/convenient_service/support/gems/rspec_test.rb`.
+#
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Support::Gems::RSpec do
   example_group "class methods" do
-    describe "version" do
+    describe ".loaded?" do
+      it "returns `true`" do
+        expect(described_class.loaded?).to eq(true)
+      end
+
+      ##
+      # NOTE: It tested by `test/lib/convenient_service/support/gems/rspec_test.rb`.
+      #
+      # context "when `RSpec` is NOT loaded" do
+      #   it "returns `true`" do
+      #     expect(described_class.loaded?).to eq(true)
+      #   end
+      # end
+    end
+
+    describe ".version" do
       it "returns version" do
         expect(described_class.version).to eq(ConvenientService::Support::Version.new(RSpec::Core::Version::STRING))
       end
@@ -23,7 +42,7 @@ RSpec.describe ConvenientService::Support::Gems::RSpec do
       end
     end
 
-    describe "current_example" do
+    describe ".current_example" do
       it "returns `current_example`" do |example|
         expect(described_class.current_example).to eq(example)
       end

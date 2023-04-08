@@ -61,6 +61,14 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "json"
 
+  ##
+  # Used for testing Ruby code outside RSpec.
+  # - https://github.com/minitest/minitest
+  # - https://semaphoreci.com/community/tutorials/getting-started-with-minitest
+  # - https://cloudbees.com/blog/getting-started-with-minitest
+  #
+  spec.add_development_dependency "minitest", "~> 5.18.0"
+
   spec.add_development_dependency "paint"
 
   spec.add_development_dependency "progressbar"
@@ -106,6 +114,12 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "simplecov"
 
   spec.add_development_dependency "simplecov-lcov"
+
+  ##
+  # Used to have a simplified public API of minitest.
+  # - https://github.com/thoughtbot/shoulda-context
+  #
+  spec.add_development_dependency "shoulda-context", "~> 2.0.0"
 
   spec.add_development_dependency "webrick"
 
