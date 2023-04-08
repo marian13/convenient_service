@@ -71,7 +71,17 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "rouge"
 
+  ##
+  # Used for testing Ruby code.
+  # https://rspec.info
+  #
   spec.add_development_dependency "rspec", "~> 3.11.0"
+
+  ##
+  # Used for performance testing with RSpec.
+  # https://github.com/piotrmurach
+  #
+  spec.add_development_dependency "rspec-benchmark", "~> 0.6.0"
 
   ##
   # Used for linting Ruby files.
