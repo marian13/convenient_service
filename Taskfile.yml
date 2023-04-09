@@ -15,7 +15,7 @@ version: '3'
 tasks:
   default:
     cmds:
-      - task: rspec
+      - task: test
 
   coverage:lcov:merge:
     cmds:
@@ -460,6 +460,11 @@ tasks:
   rubocop:format:
     cmds:
       - bundle exec rubocop --config .rubocop.yml -A {{.CLI_ARGS}}
+
+  test:
+    cmds:
+      - task: rspec
+      - task: minimal
 
   ##
   # NOTE: Dev only command.
