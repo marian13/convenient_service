@@ -158,6 +158,8 @@ jobs:
         run: task rspec:rails_5.2
       - name: Run RSpec with Dry
         run: task rspec:dry
+      - name: Run Minitest
+        run: task minitest
       ##
       # NOTE: `lcov-result-merger` is written in JS.
       #
