@@ -58,9 +58,9 @@ SimpleCov::Formatter::LcovFormatter.config do |config|
   ruby_version = escape[ENV["RUBY_VERSION"].to_s]
 
   ##
-  # NOTE: There is also `minitest`.
+  # NOTE: There is also `rspec`.
   #
-  test_framework = "rspec"
+  test_framework = "minitest"
 
   ##
   # https://github.com/fortissimo1997/simplecov-lcov#output-report-as-single-file
@@ -86,5 +86,5 @@ SimpleCov.start do
   #
   enable_coverage :branch
 
-  add_filter "/spec/"
+  add_filter "/test/"
 end
