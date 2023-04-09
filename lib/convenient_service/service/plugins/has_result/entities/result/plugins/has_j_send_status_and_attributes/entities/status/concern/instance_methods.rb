@@ -45,6 +45,10 @@ module ConvenientService
                           value == :success
                         end
 
+                        # def ok?
+                        #   value == :success
+                        # end
+
                         ##
                         # @return [Boolean]
                         #
@@ -101,6 +105,9 @@ module ConvenientService
                         def to_sym
                           @to_sym ||= value.to_sym
                         end
+
+                        alias_method :ok?, :success?
+                        alias_method :not_ok?, :not_success?
                       end
                     end
                   end

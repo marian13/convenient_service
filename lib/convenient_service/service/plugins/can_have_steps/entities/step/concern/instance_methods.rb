@@ -13,11 +13,13 @@ module ConvenientService
 
                 delegate \
                   :success?,
+                  :ok?,
                   :failure?,
                   :error?,
                   :not_success?,
                   :not_failure?,
                   :not_error?,
+                  :not_ok?,
                   :data,
                   :message,
                   :code,
