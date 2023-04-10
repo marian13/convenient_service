@@ -1,12 +1,8 @@
 # frozen_string_literal: true
 
 require_relative "cache/constants"
+require_relative "cache/entities"
 require_relative "cache/errors"
-
-require_relative "cache/key"
-
-require_relative "cache/array"
-require_relative "cache/hash"
 
 module ConvenientService
   module Support
@@ -14,14 +10,14 @@ module ConvenientService
       class << self
         ##
         # @param backend [Symbol]
-        # @return [ConvenientService::Support::Cache]
+        # @return [ConvenientService::Support::Cache::Entities::Caches::Base]
         #
         def create(backend: Constants::Backends::HASH)
           case backend
           when :array
-            Cache::Array.new
+            Cache::Entities::Caches::Array.new
           when :hash
-            Cache::Hash.new
+            Cache::Entities::Caches::Hash.new
           else
             raise Errors::NotSupportedBackend.new(backend: backend)
           end

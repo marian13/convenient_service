@@ -16,7 +16,7 @@ RSpec.describe ConvenientService::Support::Cache do
         let(:cache) { described_class.create }
 
         it "defaults `backend` to `:hash`" do
-          expect(cache).to be_instance_of(ConvenientService::Support::Cache::Hash)
+          expect(cache).to be_instance_of(ConvenientService::Support::Cache::Entities::Caches::Hash)
         end
       end
 
@@ -25,7 +25,7 @@ RSpec.describe ConvenientService::Support::Cache do
           let(:backend) { :not_supported_backend }
 
           let(:error_message) do
-            message = <<~TEXT
+            <<~TEXT
               Backend `#{backend}` is NOT supported.
 
               Supported backends are `:array`, `:hash`.
@@ -44,7 +44,7 @@ RSpec.describe ConvenientService::Support::Cache do
             let(:backend) { ConvenientService::Support::Cache::Constants::Backends::HASH }
 
             it "creates hash-based cache" do
-              expect(cache).to be_instance_of(ConvenientService::Support::Cache::Hash)
+              expect(cache).to be_instance_of(ConvenientService::Support::Cache::Entities::Caches::Hash)
             end
           end
 
@@ -52,7 +52,7 @@ RSpec.describe ConvenientService::Support::Cache do
             let(:backend) { ConvenientService::Support::Cache::Constants::Backends::ARRAY }
 
             it "creates array-based cache" do
-              expect(cache).to be_instance_of(ConvenientService::Support::Cache::Array)
+              expect(cache).to be_instance_of(ConvenientService::Support::Cache::Entities::Caches::Array)
             end
           end
         end

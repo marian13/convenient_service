@@ -42,7 +42,7 @@ RSpec.describe ConvenientService::Common::Plugins::CachesReturnValue::Middleware
 
       let(:service_instance) { service_class.new }
       let(:service_result_value) { "service result value" }
-      let(:key) { ConvenientService::Support::Cache::Hash.keygen(:return_values, method_name) }
+      let(:key) { ConvenientService::Support::Cache::Entities::Caches::Hash.keygen(:return_values, method_name) }
 
       context "when method call is NOT cached" do
         specify { expect { method_value }.to call_chain_next.on(method) }

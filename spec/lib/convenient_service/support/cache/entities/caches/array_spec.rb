@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
-RSpec.describe ConvenientService::Support::Cache::Hash do
+RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Array do
   example_group "instance methods" do
     let(:cache) { described_class.new }
 
