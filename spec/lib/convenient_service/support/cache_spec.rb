@@ -28,7 +28,7 @@ RSpec.describe ConvenientService::Support::Cache do
             <<~TEXT
               Backend `#{backend}` is NOT supported.
 
-              Supported backends are `:array`, `:hash`.
+              Supported backends are `:array`, `:hash`, `:thread_safe_array`.
             TEXT
           end
 
@@ -53,6 +53,14 @@ RSpec.describe ConvenientService::Support::Cache do
 
             it "creates array-based cache" do
               expect(cache).to be_instance_of(ConvenientService::Support::Cache::Entities::Caches::Array)
+            end
+          end
+
+          context "when `backend` is `:thread_safe_array`" do
+            let(:backend) { ConvenientService::Support::Cache::Constants::Backends::THREAD_SAFE_ARRAY }
+
+            it "creates thread safe array-based cache" do
+              expect(cache).to be_instance_of(ConvenientService::Support::Cache::Entities::Caches::ThreadSafeArray)
             end
           end
         end

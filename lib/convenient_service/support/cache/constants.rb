@@ -16,9 +16,14 @@ module ConvenientService
           HASH = :hash
 
           ##
+          # @return [Symbol]
+          #
+          THREAD_SAFE_ARRAY = :thread_safe_array
+
+          ##
           # @return [Array<Symbol>]
           #
-          ALL = [ARRAY, HASH]
+          ALL = [ARRAY, HASH, THREAD_SAFE_ARRAY]
 
           ##
           # @return [Symbol]

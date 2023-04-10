@@ -19,6 +19,12 @@ RSpec.describe ConvenientService::Support::Cache::Constants do
       end
     end
 
+    describe "::Backends::THREAD_SAFE_ARRAY" do
+      it "returns `:thread_safe_array`" do
+        expect(described_class::Backends::THREAD_SAFE_ARRAY).to eq(:thread_safe_array)
+      end
+    end
+
     describe "::Backends::DEFAULT" do
       it "returns `:hash`" do
         expect(described_class::Backends::DEFAULT).to eq(described_class::Backends::HASH)
@@ -26,8 +32,8 @@ RSpec.describe ConvenientService::Support::Cache::Constants do
     end
 
     describe "::Backends::ALL" do
-      it "returns `[:array, :hash]`" do
-        expect(described_class::Backends::ALL).to eq([described_class::Backends::ARRAY, described_class::Backends::HASH])
+      it "returns `[:array, :hash, :thread_safe_array]`" do
+        expect(described_class::Backends::ALL).to eq([described_class::Backends::ARRAY, described_class::Backends::HASH, described_class::Backends::THREAD_SAFE_ARRAY])
       end
     end
   end
