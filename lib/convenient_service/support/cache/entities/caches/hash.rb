@@ -42,7 +42,7 @@ module ConvenientService
             end
 
             ##
-            # @param key [Object] Can be any type.s
+            # @param key [Object] Can be any type.
             # @return [Object] Can be any type.
             #
             # @internal
