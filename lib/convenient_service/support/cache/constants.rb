@@ -16,7 +16,7 @@ module ConvenientService
           HASH = :hash
 
           ##
-          # @return [Symbol]
+          # @return [Array<Symbol>]
           #
           ALL = [ARRAY, HASH]
 

@@ -22,10 +22,10 @@ module ConvenientService
 
                 class << self
                   ##
-                  # @return [ConvenientService::Support::Cache::Entities::Caches::Array::Entities::Pair]
+                  # @return [ConvenientService::Support::Cache::Entities::Caches::Array::Entities::NullPair]
                   #
                   def null_pair
-                    @null_pair ||= new(key: nil, value: nil)
+                    @null_pair ||= Entities::NullPair.new
                   end
                 end
 
