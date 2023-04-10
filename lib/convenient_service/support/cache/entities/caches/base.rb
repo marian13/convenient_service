@@ -18,6 +18,11 @@ module ConvenientService
             end
 
             ##
+            # @return [Object] Can be any type.
+            #
+            abstract_method :empty?
+
+            ##
             # @return [Boolean]
             #
             abstract_method :empty?
@@ -64,7 +69,7 @@ module ConvenientService
             end
 
             ##
-            # @param key [Object] Can be any type.
+            # @param key [ConvenientService::Support::Cache::Entities::Key]
             # @param block [Proc, nil]
             # @return [Object] Can be any type.
             #
@@ -85,6 +90,7 @@ module ConvenientService
             end
 
             ##
+            # @param key [ConvenientService::Support::Cache::Entities::Key]
             # @return [Object] Can be any type.
             #
             # @internal
@@ -95,7 +101,7 @@ module ConvenientService
             end
 
             ##
-            # @param key [Object] Can be any type.
+            # @param key [ConvenientService::Support::Cache::Entities::Key]
             # @param value [Object] Can be any type.
             # @return [Object] Can be any type.
             #
@@ -104,6 +110,16 @@ module ConvenientService
             #
             def []=(key, value)
               write(key, value)
+            end
+
+            ##
+            # @param key [ConvenientService::Support::Cache::Entities::Key]
+            # @return [ConvenientService::Support::Cache::Entities::Caches::Base]
+            #
+            def scope(key)
+              # byebug/
+
+              fetch(key) { self.class.new }
             end
           end
         end

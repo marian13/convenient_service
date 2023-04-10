@@ -14,6 +14,13 @@ module ConvenientService
             end
 
             ##
+            # @return [Hash{ConvenientService::Support::Cache::Entities::Key => Object}]
+            #
+            def store
+              hash
+            end
+
+            ##
             # @return [Boolean]
             #
             # @internal
@@ -24,6 +31,7 @@ module ConvenientService
             end
 
             ##
+            # @param key [ConvenientService::Support::Cache::Entities::Key]
             # @return [Boolean]
             #
             # @internal
@@ -34,6 +42,7 @@ module ConvenientService
             end
 
             ##
+            # @param key [ConvenientService::Support::Cache::Entities::Key]s
             # @return [Object] Can be any type.
             #
             # @internal
@@ -44,7 +53,7 @@ module ConvenientService
             end
 
             ##
-            # @param key [Object] Can be any type.
+            # @param key [ConvenientService::Support::Cache::Entities::Key]
             # @param value [Object] Can be any type.
             # @return [Object] Can be any type.
             #
@@ -56,7 +65,7 @@ module ConvenientService
             end
 
             ##
-            # @param key [Object] Can be any type.
+            # @param key [ConvenientService::Support::Cache::Entities::Key]
             # @return [Object] Can be any type.
             #
             # @internal
@@ -73,13 +82,6 @@ module ConvenientService
               hash.clear
 
               self
-            end
-
-            ##
-            # @return [ConvenientService::Support::Cache::Entities::Caches::Hash]
-            #
-            def scope(key)
-              fetch(key) { Caches::Hash.new }
             end
 
             ##

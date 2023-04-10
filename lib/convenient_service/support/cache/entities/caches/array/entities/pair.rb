@@ -38,6 +38,20 @@ module ConvenientService
                   @key = key
                   @value = value
                 end
+
+                ##
+                # @return [Boolean]
+                #
+                def null_pair?
+                  false
+                end
+
+                ##
+                # @return [Boolean]
+                #
+                def not_null_pair?
+                  !null_pair?
+                end
               end
             end
           end

@@ -16,6 +16,13 @@ module ConvenientService
             end
 
             ##
+            # @return [Array<ConvenientService::Support::Cache::Entities::Caches::Array::Entities::Pair>]
+            #
+            def store
+              array
+            end
+
+            ##
             # @return [Boolean]
             #
             def empty?
@@ -23,57 +30,46 @@ module ConvenientService
             end
 
             ##
+            # @param key [ConvenientService::Support::Cache::Entities::Key]
             # @return [Boolean]
             #
             def exist?(key)
-              array.any? { |pair| pair.key == key }
+              index = index(key)
+
+              index ? true : false
             end
 
             ##
+            # @param key [ConvenientService::Support::Cache::Entities::Key]
             # @return [Object] Can be any type.
             #
             def read(key)
-              pair = array.find { |pair| pair.key == key } || Entities::Pair.null_pair
+              index = index(key)
 
-              pair.value
+              array[index].value if index
             end
 
             ##
-            # @param key [Object] Can be any type.
+            # @param key [ConvenientService::Support::Cache::Entities::Key]
             # @param value [Object] Can be any type.
             # @return [Object] Can be any type.
             #
             def write(key, value)
-              pair = array.find { |pair| pair.key == key }
+              index = index(key) || array.size
 
-              if pair
-                pair.value = value
-              else
-                array << Entities::Pair.new(key: key, value: value)
-              end
+              array[index] = pair(key, value)
 
               value
             end
 
             ##
-            # @param key [Object] Can be any type.
+            # @param key [ConvenientService::Support::Cache::Entities::Key]
             # @return [Object] Can be any type.
             #
             def delete(key)
-              pair = array.find { |pair| pair.key == key }
+              index = index(key)
 
-              array.delete(pair) if pair
-            end
-
-            ##
-            # @param key [Object] Can be any type.
-            # @param block [Proc]
-            # @return [Object] Can be any type.
-            #
-            def fetch(key, &block)
-              return read(key) unless block
-
-              exist?(key) ? read(key) : write(key, block.call)
+              array.delete_at(index).value if index
             end
 
             ##
@@ -83,13 +79,6 @@ module ConvenientService
               array.clear
 
               self
-            end
-
-            ##
-            # @return [ConvenientService::Support::Cache::Entities::Caches::Array]
-            #
-            def scope(key)
-              fetch(key) { Caches::Array.new }
             end
 
             ##
@@ -111,6 +100,25 @@ module ConvenientService
             #   @return [Array]
             #
             attr_reader :array
+
+            private
+
+            ##
+            # @param key [ConvenientService::Support::Cache::Entities::Key]
+            # @return [Integer, nil]
+            #
+            def index(key)
+              array.find_index { |pair| pair.key == key }
+            end
+
+            ##
+            # @param key [ConvenientService::Support::Cache::Entities::Key]
+            # @param value [Object] Can be any type.
+            # @return [ConvenientService::Support::Cache::Entities::Caches::Array::Pair]
+            #
+            def pair(key, value)
+              Entities::Pair.new(key: key, value: value)
+            end
           end
         end
       end

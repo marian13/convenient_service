@@ -23,6 +23,13 @@ module ConvenientService
                 def value=(other_value)
                   other_value
                 end
+
+                ##
+                # @return [Boolean]
+                #
+                def null_pair?
+                  true
+                end
               end
             end
           end
