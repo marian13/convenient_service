@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
+require_relative "cache/key"
+
 require_relative "cache/array"
 require_relative "cache/hash"
-require_relative "cache/key"
-require_relative "cache/array/pair"
 
 module ConvenientService
   module Support

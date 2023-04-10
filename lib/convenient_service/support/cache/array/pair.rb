@@ -3,7 +3,7 @@
 module ConvenientService
   module Support
     class Cache
-      class Array
+      class Array < Cache
         class Pair
           attr_accessor :key, :value
 
