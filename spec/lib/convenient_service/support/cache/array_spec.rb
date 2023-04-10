@@ -47,7 +47,7 @@ RSpec.describe ConvenientService::Support::Cache::Array do
           expect(cache.clear).to eq(cache)
         end
 
-        it "remove those keys from cache" do
+        it "removes those keys from cache" do
           expect { cache.clear }.to change(cache, :empty?).from(false).to(true)
         end
       end

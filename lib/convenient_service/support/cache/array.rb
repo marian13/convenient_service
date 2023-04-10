@@ -40,7 +40,7 @@ module ConvenientService
         # @return [Object] Can be any type.
         #
         def read(key)
-          pair = array.find { |pair| pair.key == key } || Support::Cache::Array::Pair.null_pair
+          pair = array.find { |pair| pair.key == key } || null_pair
 
           pair.value
         end
@@ -56,7 +56,7 @@ module ConvenientService
           if pair
             pair.value = value
           else
-            array << Support::Cache::Array::Pair.new(key: key, value: value)
+            array << create_pair(key, value)
           end
 
           value
@@ -67,7 +67,7 @@ module ConvenientService
         # @return [Object] Can be any type.
         #
         def delete(key)
-          pair = array.find { |arr_key, _value| arr_key == key }
+          pair = array.find { |pair| pair.key == key }
 
           array.delete(pair) if pair
         end
@@ -147,6 +147,22 @@ module ConvenientService
         #   @return [Array]
         #
         attr_reader :array
+
+        ##
+        # @return [ConvenientService::Support::Cache::Array]
+        #
+        def null_pair
+          Support::Cache::Array::Pair.null_pair
+        end
+
+        ##
+        # @param key [ConvenientService::Support::Cache::Key]
+        # @param value [Object] Can be any type.
+        # @return [ConvenientService::Support::Cache::Array::Pair]
+        #
+        def create_pair(key, value)
+          Support::Cache::Array::Pair.new(key: key, value: value)
+        end
       end
     end
   end
