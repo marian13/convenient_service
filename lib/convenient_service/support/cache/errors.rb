@@ -25,7 +25,7 @@ module ConvenientService
           # @return [String]
           #
           def printable_backends
-            Constants::BACKENDS.map { |backend| "`#{backend}`" }.join(", ")
+            Constants::Backends::ALL.map { |backend| "`:#{backend}`" }.join(", ")
           end
         end
       end

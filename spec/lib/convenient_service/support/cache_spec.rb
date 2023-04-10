@@ -6,10 +6,12 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Support::Cache do
-  example_group "instance methods" do
-    let(:cache) { described_class }
-
+  example_group "class methods" do
     describe ".create" do
+      let(:cache) { described_class.create(backend: backend) }
+
+      let(:backend) { ConvenientService::Support::Cache::Constants::Backends::HASH }
+
       context "when `backend` is NOT passed" do
         let(:cache) { described_class.create }
 
@@ -31,7 +33,7 @@ RSpec.describe ConvenientService::Support::Cache do
           end
 
           it "raises `ConvenientService::Support::Cache::Errors::NotSupportedBackend`" do
-            expect { described_class.create(backend: backend) }
+            expect { cache }
               .to raise_error(ConvenientService::Support::Cache::Errors::NotSupportedBackend)
               .with_message(error_message)
           end
@@ -39,7 +41,7 @@ RSpec.describe ConvenientService::Support::Cache do
 
         context "when `backend` is supported" do
           context "when `backend` is `:hash`" do
-            let(:cache) { described_class.create(backend: :hash) }
+            let(:backend) { ConvenientService::Support::Cache::Constants::Backends::HASH }
 
             it "creates hash-based cache" do
               expect(cache).to be_instance_of(ConvenientService::Support::Cache::Hash)
@@ -47,7 +49,7 @@ RSpec.describe ConvenientService::Support::Cache do
           end
 
           context "when `backend` is `:array`" do
-            let(:cache) { described_class.create(backend: :array) }
+            let(:backend) { ConvenientService::Support::Cache::Constants::Backends::ARRAY }
 
             it "creates array-based cache" do
               expect(cache).to be_instance_of(ConvenientService::Support::Cache::Array)

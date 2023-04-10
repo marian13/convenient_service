@@ -11,44 +11,20 @@ require_relative "cache/hash"
 module ConvenientService
   module Support
     class Cache
-      module Errors
-        class NotSupportedBackend < ::ConvenientService::Error
-          ##
-          # @param backend [Symbol]
-          # @return [void]
-          #
-          def initialize(backend:)
-            message = <<~TEXT
-              Backend `#{backend}` is NOT supported.
-
-              Supported backends are #{printable_backends}.
-            TEXT
-
-            super(message)
+      class << self
+        ##
+        # @param backend [Symbol]
+        # @return [ConvenientService::Support::Cache]
+        #
+        def create(backend: Constants::Backends::HASH)
+          case backend
+          when :array
+            Cache::Array.new
+          when :hash
+            Cache::Hash.new
+          else
+            raise Errors::NotSupportedBackend.new(backend: backend)
           end
-
-          private
-
-          ##
-          # @return [String]
-          #
-          def printable_backends
-            Constants::BACKENDS.map { |backend| "`:#{backend}`" }.join(", ")
-          end
-        end
-      end
-
-      ##
-      # @return [ConvenientService::Support::Cache]
-      #
-      def self.create(backend: :hash)
-        case backend
-        when :array
-          Cache::Array.new
-        when :hash
-          Cache::Hash.new
-        else
-          raise Errors::NotSupportedBackend.new(backend: backend)
         end
       end
     end
