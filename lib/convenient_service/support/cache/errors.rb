@@ -1,13 +1,5 @@
 # frozen_string_literal: true
 
-require_relative "cache/constants"
-require_relative "cache/errors"
-
-require_relative "cache/key"
-
-require_relative "cache/array"
-require_relative "cache/hash"
-
 module ConvenientService
   module Support
     class Cache
@@ -33,22 +25,8 @@ module ConvenientService
           # @return [String]
           #
           def printable_backends
-            Constants::BACKENDS.map { |backend| "`:#{backend}`" }.join(", ")
+            Constants::BACKENDS.map { |backend| "`#{backend}`" }.join(", ")
           end
-        end
-      end
-
-      ##
-      # @return [ConvenientService::Support::Cache]
-      #
-      def self.create(backend: :hash)
-        case backend
-        when :array
-          Cache::Array.new
-        when :hash
-          Cache::Hash.new
-        else
-          raise Errors::NotSupportedBackend.new(backend: backend)
         end
       end
     end

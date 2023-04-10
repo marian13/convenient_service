@@ -10,34 +10,48 @@ RSpec.describe ConvenientService::Support::Cache do
     let(:cache) { described_class }
 
     describe ".create" do
-      context "when type is NOT supported" do
-        let(:bad_type) { :bad_type }
-        let(:error_message) { "Invalid cache type: #{bad_type}." }
+      context "when `backend` is NOT passed" do
+        let(:cache) { described_class.create }
 
-        it "raises ConvenientService::Support::Cache::Errors::NotSupportedType" do
-          expect { described_class.create(type: bad_type) }
-            .to raise_error(ConvenientService::Support::Cache::Errors::NotSupportedType)
-            .with_message(error_message)
+        it "defaults `backend` to `:hash`" do
+          expect(cache).to be_instance_of(ConvenientService::Support::Cache::Hash)
         end
       end
 
-      context "when type is supported" do
-        context "when cache hash-based" do
-          it "creates a hash-based cache by default" do
-            cache = described_class.create
-            expect(cache).to be_a ConvenientService::Support::Cache::Hash
+      context "when `backend` is passed" do
+        context "when `backend` is NOT supported" do
+          let(:backend) { :not_supported_backend }
+
+          let(:error_message) do
+            message = <<~TEXT
+              Backend `#{backend}` is NOT supported.
+
+              Supported backends are `:array`, `:hash`.
+            TEXT
           end
 
-          it "creates a hash-based cache when type is a `:hash`" do
-            cache = described_class.create(type: :hash)
-            expect(cache).to be_a ConvenientService::Support::Cache::Hash
+          it "raises `ConvenientService::Support::Cache::Errors::NotSupportedBackend`" do
+            expect { described_class.create(backend: backend) }
+              .to raise_error(ConvenientService::Support::Cache::Errors::NotSupportedBackend)
+              .with_message(error_message)
           end
         end
 
-        context "when cache array-based" do
-          it "creates an array-based cache when type is a `:array`" do
-            cache = described_class.create(type: :array)
-            expect(cache).to be_a ConvenientService::Support::Cache::Array
+        context "when `backend` is supported" do
+          context "when `backend` is `:hash`" do
+            let(:cache) { described_class.create(backend: :hash) }
+
+            it "creates hash-based cache" do
+              expect(cache).to be_instance_of(ConvenientService::Support::Cache::Hash)
+            end
+          end
+
+          context "when `backend` is `:array`" do
+            let(:cache) { described_class.create(backend: :array) }
+
+            it "creates array-based cache" do
+              expect(cache).to be_instance_of(ConvenientService::Support::Cache::Array)
+            end
           end
         end
       end

@@ -96,7 +96,7 @@ module ConvenientService
         # @return [ConvenientService::Support::Cache::Array]
         #
         def scope(key)
-          fetch(key) { Support::Cache.create(type: :array) }
+          fetch(key) { Support::Cache::Array.new }
         end
 
         ##

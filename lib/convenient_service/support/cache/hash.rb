@@ -100,7 +100,7 @@ module ConvenientService
         # @return [ConvenientService::Support::Cache::Hash]
         #
         def scope(key)
-          fetch(key) { Support::Cache.create(type: :hash) }
+          fetch(key) { Support::Cache::Hash.new }
         end
 
         ##
