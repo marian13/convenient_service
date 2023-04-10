@@ -89,7 +89,7 @@ module ConvenientService
             # @return [ConvenientService::Support::Cache::Entities::Caches::Array]
             #
             def scope(key)
-              fetch(key) { Array.new }
+              fetch(key) { Caches::Array.new }
             end
 
             ##
