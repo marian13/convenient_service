@@ -117,9 +117,19 @@ module ConvenientService
             # @return [ConvenientService::Support::Cache::Entities::Caches::Base]
             #
             def scope(key)
-              # byebug/
-
               fetch(key) { self.class.new }
+            end
+
+            ##
+            # @param other [Object] Can be any type.
+            # @return [Boolean, nil]
+            #
+            def ==(other)
+              return unless other.instance_of?(self.class)
+
+              return false if store != other.store
+
+              true
             end
           end
         end

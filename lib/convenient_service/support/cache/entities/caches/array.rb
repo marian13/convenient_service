@@ -81,27 +81,13 @@ module ConvenientService
               self
             end
 
-            ##
-            # @param other [Object] Can be any type.
-            # @return [Boolean]
-            #
-            def ==(other)
-              return unless other.instance_of?(self.class)
-
-              return false if array != other.array
-
-              true
-            end
-
-            protected
+            private
 
             ##
             # @!attribute [r] array
             #   @return [Array]
             #
             attr_reader :array
-
-            private
 
             ##
             # @param key [Object] Can be any type.

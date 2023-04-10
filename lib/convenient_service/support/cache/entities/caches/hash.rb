@@ -14,7 +14,7 @@ module ConvenientService
             end
 
             ##
-            # @return [Hash{ConvenientService::Support::Cache::Entities::Key => Object}]
+            # @return [Hash{Object => Object}]
             #
             def store
               hash
@@ -84,19 +84,7 @@ module ConvenientService
               self
             end
 
-            ##
-            # @param other [Object] Can be any type.
-            # @return [Boolean]
-            #
-            def ==(other)
-              return unless other.instance_of?(self.class)
-
-              return false if hash != other.hash
-
-              true
-            end
-
-            protected
+            private
 
             ##
             # @!attribute [r] hash
