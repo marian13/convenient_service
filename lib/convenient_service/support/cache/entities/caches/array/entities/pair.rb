@@ -29,6 +29,19 @@ module ConvenientService
                   @key = key
                   @value = value
                 end
+
+                ##
+                # @param other [Object] Can be any type.
+                # @return [void]
+                #
+                def ==(other)
+                  return unless instance_of?(self.class)
+
+                  return false if key != other.key
+                  return false if value != other.value
+
+                  true
+                end
               end
             end
           end
