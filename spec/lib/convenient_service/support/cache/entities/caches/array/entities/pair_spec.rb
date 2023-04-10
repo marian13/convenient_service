@@ -27,7 +27,7 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Array::Entit
         let(:other) { 42 }
 
         it "returns `nil`" do
-          expect(pair == other).to eq(nil)
+          expect(pair == other).to be_nil
         end
       end
 

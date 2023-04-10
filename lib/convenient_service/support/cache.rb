@@ -14,10 +14,12 @@ module ConvenientService
         #
         def create(backend: Constants::Backends::HASH)
           case backend
-          when :array
-            Cache::Entities::Caches::Array.new
-          when :hash
-            Cache::Entities::Caches::Hash.new
+          when Constants::Backends::ARRAY
+            Entities::Caches::Array.new
+          when Constants::Backends::HASH
+            Entities::Caches::Hash.new
+          when Constants::Backends::THREAD_SAFE_ARRAY
+            Entities::Caches::ThreadSafeArray.new
           else
             raise Errors::NotSupportedBackend.new(backend: backend)
           end
