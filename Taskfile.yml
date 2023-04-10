@@ -15,7 +15,7 @@ version: '3'
 tasks:
   default:
     cmds:
-      - task: rspec
+      - task: test
 
   coverage:lcov:merge:
     cmds:
@@ -42,6 +42,18 @@ tasks:
       - "bundle exec rake confirm \"This task removes Gemfile*.lock and gemfiles/**/*. Are you sure?\""
       - rm Gemfile*.lock
       - rm -rf gemfiles
+
+  ##
+  # NOTE: JRuby 9.4 aims CRuby 3.1 compatibility.
+  # - https://www.jruby.org/download
+  #
+  docker:bash:jruby_9.4:
+    cmds:
+      - docker run --rm -it -v $(pwd):/gem convenient_service:jruby-9.4 bash
+    interactive: true
+    preconditions:
+      - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
+        msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
 
   docker:bash:ruby_2.7:
     cmds:
@@ -76,18 +88,6 @@ tasks:
         msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
 
   ##
-  # NOTE: JRuby 9.4 aims CRuby 3.1 compatibility.
-  # - https://www.jruby.org/download
-  #
-  docker:bash:jruby_9.4:
-    cmds:
-      - docker run --rm -it -v $(pwd):/gem convenient_service:jruby-9.4 bash
-    interactive: true
-    preconditions:
-      - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
-        msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
-
-  ##
   # NOTE: TruffleRuby 22.3 aims CRuby 3.1 compatibility.
   # - https://github.com/oracle/truffleruby/blob/master/doc/user/compatibility.md
   #
@@ -107,6 +107,27 @@ tasks:
       - task: docker:build:ruby_3.2
       - task: docker:build:jruby_9.4
       - task: docker:build:truffleruby_22.3
+    preconditions:
+      - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
+        msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
+
+  ##
+  # NOTE: JRuby 9.4 aims CRuby 3.1 compatibility.
+  # - https://www.jruby.org/download
+  #
+  docker:build:jruby_9.4:
+    cmds:
+      ##
+      # NOTE: Meaning of `|| 2> /dev/null`.
+      # https://stackoverflow.com/a/10250395/12201472
+      #
+      # NOTE: Meaning of `|| true`.
+      # https://superuser.com/a/887349/1180656
+      #
+      - rm Gemfile.jruby-9.4 2> /dev/null || true
+      - rm Gemfile.jruby-9.4.lock 2> /dev/null || true
+      - cp Gemfile Gemfile.jruby-9.4
+      - docker build . -f docker/jruby-9.4/Dockerfile -t convenient_service:jruby-9.4
     preconditions:
       - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
         msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
@@ -180,27 +201,6 @@ tasks:
         msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
 
   ##
-  # NOTE: JRuby 9.4 aims CRuby 3.1 compatibility.
-  # - https://www.jruby.org/download
-  #
-  docker:build:jruby_9.4:
-    cmds:
-      ##
-      # NOTE: Meaning of `|| 2> /dev/null`.
-      # https://stackoverflow.com/a/10250395/12201472
-      #
-      # NOTE: Meaning of `|| true`.
-      # https://superuser.com/a/887349/1180656
-      #
-      - rm Gemfile.jruby-9.4 2> /dev/null || true
-      - rm Gemfile.jruby-9.4.lock 2> /dev/null || true
-      - cp Gemfile Gemfile.jruby-9.4
-      - docker build . -f docker/jruby-9.4/Dockerfile -t convenient_service:jruby-9.4
-    preconditions:
-      - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
-        msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
-
-  ##
   # NOTE: TruffleRuby 22.3 aims CRuby 3.1 compatibility.
   # - https://github.com/oracle/truffleruby/blob/master/doc/user/compatibility.md
   #
@@ -230,13 +230,6 @@ tasks:
       - open -a Docker
 
   ##
-  # NOTE: Dev only command.
-  #
-  editor:open:
-    cmds:
-      - code .
-
-  ##
   # NOTE: `sdoc` (wrapper for `rdoc`) is replaced by `yard`, since you have a feeling like every time is a first time with `rdoc`.
   # - https://kapeli.com/cheat_sheets/Yard.docset/Contents/Resources/Documents/index
   # - https://rubydoc.info/gems/yard/file/README.md
@@ -263,8 +256,7 @@ tasks:
 
   docs:lint:
     cmds:
-      - mkdir -p docs
-      - bundle exec yard-junk --text --html docs/junk-yard.html
+      - task: yard_junk
 
   docs:missed:
     cmds:
@@ -279,6 +271,13 @@ tasks:
     preconditions:
       - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
         msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
+
+  ##
+  # NOTE: Dev only command.
+  #
+  editor:open:
+    cmds:
+      - code .
 
   ##
   # NOTE: A trailing "/**" matches everything inside.
@@ -300,6 +299,13 @@ tasks:
     cmds:
       - task: rubocop
       - task: docs:lint
+
+  ##
+  # TODO: Add to CI.
+  #
+  minitest:
+    cmds:
+      - bundle exec ruby minitest.rb
 
   playground:
     cmds:
@@ -454,9 +460,19 @@ tasks:
     cmds:
       - bundle exec rubocop --config .rubocop.yml -A {{.CLI_ARGS}}
 
+  test:
+    cmds:
+      - task: rspec
+      - task: minitest
+
   ##
   # NOTE: Dev only command.
   #
   tmuxinator:start:
     cmds:
       - tmuxinator start convenient_service --project-config=.dev/.tmuxinator.yml
+
+  yard_junk:
+    cmds:
+      - mkdir -p docs
+      - bundle exec yard-junk --text --html docs/junk-yard.html

@@ -41,7 +41,7 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::FormatG
         end
 
         let(:formatted_content) do
-          <<~'RUBY'
+          <<~RUBY
             group :development do
               gem "listen", "~> 3.3"
             end

@@ -85,6 +85,14 @@ module ConvenientService
 
       ##
       # @return [Boolean]
+      # @note Expected to be called from app entry points like `initializers` in Rails.
+      #
+      def require_cleans_exception_backtrace
+        require_relative "dependencies/extractions/active_support_backtrace_cleaner"
+      end
+
+      ##
+      # @return [Boolean]
       # @note Expected to be called from `irb`, `pry`, `spec_helper.rb`, etc.
       #
       # @internal
@@ -139,8 +147,9 @@ module ConvenientService
         require "webrick"
 
         require_relative "examples/standard/cowsay"
-        require_relative "examples/standard/request_params"
+        require_relative "examples/standard/factorial"
         require_relative "examples/standard/gemfile"
+        require_relative "examples/standard/request_params"
       end
 
       ##
