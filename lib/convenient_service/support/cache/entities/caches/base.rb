@@ -69,7 +69,7 @@ module ConvenientService
             end
 
             ##
-            # @param key [ConvenientService::Support::Cache::Entities::Key]
+            # @param key [Object] Can be any type.
             # @param block [Proc, nil]
             # @return [Object] Can be any type.
             #
@@ -90,7 +90,7 @@ module ConvenientService
             end
 
             ##
-            # @param key [ConvenientService::Support::Cache::Entities::Key]
+            # @param key [Object] Can be any type.
             # @return [Object] Can be any type.
             #
             # @internal
@@ -101,7 +101,7 @@ module ConvenientService
             end
 
             ##
-            # @param key [ConvenientService::Support::Cache::Entities::Key]
+            # @param key [Object] Can be any type.
             # @param value [Object] Can be any type.
             # @return [Object] Can be any type.
             #
@@ -113,7 +113,7 @@ module ConvenientService
             end
 
             ##
-            # @param key [ConvenientService::Support::Cache::Entities::Key]
+            # @param key [Object] Can be any type.
             # @return [ConvenientService::Support::Cache::Entities::Caches::Base]
             #
             def scope(key)

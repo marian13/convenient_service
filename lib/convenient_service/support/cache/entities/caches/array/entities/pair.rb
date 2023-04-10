@@ -21,7 +21,7 @@ module ConvenientService
                 attr_accessor :value
 
                 ##
-                # @param key [ConvenientService::Support::Cache::Entities::Key]
+                # @param key [Object] Can be any type.
                 # @param value [Object] Can be any type.
                 # @return [void]
                 #

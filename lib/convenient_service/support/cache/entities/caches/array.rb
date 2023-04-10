@@ -30,7 +30,7 @@ module ConvenientService
             end
 
             ##
-            # @param key [ConvenientService::Support::Cache::Entities::Key]
+            # @param key [Object] Can be any type.
             # @return [Boolean]
             #
             def exist?(key)
@@ -40,7 +40,7 @@ module ConvenientService
             end
 
             ##
-            # @param key [ConvenientService::Support::Cache::Entities::Key]
+            # @param key [Object] Can be any type.
             # @return [Object] Can be any type.
             #
             def read(key)
@@ -50,7 +50,7 @@ module ConvenientService
             end
 
             ##
-            # @param key [ConvenientService::Support::Cache::Entities::Key]
+            # @param key [Object] Can be any type.
             # @param value [Object] Can be any type.
             # @return [Object] Can be any type.
             #
@@ -63,7 +63,7 @@ module ConvenientService
             end
 
             ##
-            # @param key [ConvenientService::Support::Cache::Entities::Key]
+            # @param key [Object] Can be any type.
             # @return [Object] Can be any type.
             #
             def delete(key)
@@ -104,7 +104,7 @@ module ConvenientService
             private
 
             ##
-            # @param key [ConvenientService::Support::Cache::Entities::Key]
+            # @param key [Object] Can be any type.
             # @return [Integer, nil]
             #
             def index(key)
@@ -112,7 +112,7 @@ module ConvenientService
             end
 
             ##
-            # @param key [ConvenientService::Support::Cache::Entities::Key]
+            # @param key [Object] Can be any type.
             # @param value [Object] Can be any type.
             # @return [ConvenientService::Support::Cache::Entities::Caches::Array::Pair]
             #

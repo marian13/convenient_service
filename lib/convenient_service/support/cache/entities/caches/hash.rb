@@ -31,7 +31,7 @@ module ConvenientService
             end
 
             ##
-            # @param key [ConvenientService::Support::Cache::Entities::Key]
+            # @param key [Object] Can be any type.
             # @return [Boolean]
             #
             # @internal
@@ -42,7 +42,7 @@ module ConvenientService
             end
 
             ##
-            # @param key [ConvenientService::Support::Cache::Entities::Key]s
+            # @param key [Object] Can be any type.s
             # @return [Object] Can be any type.
             #
             # @internal
@@ -53,7 +53,7 @@ module ConvenientService
             end
 
             ##
-            # @param key [ConvenientService::Support::Cache::Entities::Key]
+            # @param key [Object] Can be any type.
             # @param value [Object] Can be any type.
             # @return [Object] Can be any type.
             #
@@ -65,7 +65,7 @@ module ConvenientService
             end
 
             ##
-            # @param key [ConvenientService::Support::Cache::Entities::Key]
+            # @param key [Object] Can be any type.
             # @return [Object] Can be any type.
             #
             # @internal
