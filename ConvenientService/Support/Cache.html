@@ -95,19 +95,45 @@
   <dl>
     <dt>Defined in:</dt>
     <dd>lib/convenient_service/support/cache.rb<span class="defines">,<br />
-  lib/convenient_service/support/cache/key.rb</span>
+  lib/convenient_service/support/cache/errors.rb,<br /> lib/convenient_service/support/cache/constants.rb,<br /> lib/convenient_service/support/cache/entities/key.rb,<br /> lib/convenient_service/support/cache/entities/caches/base.rb,<br /> lib/convenient_service/support/cache/entities/caches/hash.rb,<br /> lib/convenient_service/support/cache/entities/caches/array.rb,<br /> lib/convenient_service/support/cache/entities/caches/thread_safe_array.rb,<br /> lib/convenient_service/support/cache/entities/caches/array/entities/pair.rb</span>
 </dd>
   </dl>
   
 </div>
 
-<h2>Defined Under Namespace</h2>
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Since:</p>
+<ul class="since">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'><p>0.3.0</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><h2>Defined Under Namespace</h2>
 <p class="children">
   
     
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Cache/Entities.html" title="ConvenientService::Support::Cache::Entities (module)">Entities</a></span>, <span class='object_link'><a href="Cache/Errors.html" title="ConvenientService::Support::Cache::Errors (module)">Errors</a></span>
+    
   
     
-      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Cache/Key.html" title="ConvenientService::Support::Cache::Key (class)">Key</a></span>
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Cache/Constants.html" title="ConvenientService::Support::Cache::Constants (class)">Constants</a></span>
     
   
 </p>
@@ -129,7 +155,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#keygen-class_method" title="keygen (class method)">.<strong>keygen</strong>  &#x21d2; ConvenientService::Support::Cache::Key </a>
+      <a href="#create-class_method" title="create (class method)">.<strong>create</strong>(backend: Constants::Backends::HASH)  &#x21d2; ConvenientService::Support::Cache::Entities::Caches::Base </a>
     
 
     
@@ -150,353 +176,7 @@
       
     </ul>
   
-    <h2>
-      Instance Method Summary
-      <small><a href="#" class="summary_toggle">collapse</a></small>
-    </h2>
 
-    <ul class="summary">
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#==-instance_method" title="#== (instance method)">#<strong>==</strong>(other)  &#x21d2; Boolean </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#[]-instance_method" title="#[] (instance method)">#<strong>[]</strong>(key)  &#x21d2; Object </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'><p>Can be any type.</p>
-</div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#[]=-instance_method" title="#[]= (instance method)">#<strong>[]=</strong>(key, value)  &#x21d2; Object </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'><p>Can be any type.</p>
-</div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#clear-instance_method" title="#clear (instance method)">#<strong>clear</strong>  &#x21d2; ConvenientService::Support::Cache </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#delete-instance_method" title="#delete (instance method)">#<strong>delete</strong>(key)  &#x21d2; Object </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'><p>Can be any type.</p>
-</div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#empty%3F-instance_method" title="#empty? (instance method)">#<strong>empty?</strong>  &#x21d2; Boolean </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#exist%3F-instance_method" title="#exist? (instance method)">#<strong>exist?</strong>(key)  &#x21d2; Boolean </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#fetch-instance_method" title="#fetch (instance method)">#<strong>fetch</strong>(key, &amp;block)  &#x21d2; Object </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'><p>Can be any type.</p>
-</div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(hash = {})  &#x21d2; void </a>
-    
-
-    
-  </span>
-  
-  
-    <span class="note title constructor">constructor</span>
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#keygen-instance_method" title="#keygen (instance method)">#<strong>keygen</strong>  &#x21d2; ConvenientService::Support::Cache::Key </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#read-instance_method" title="#read (instance method)">#<strong>read</strong>(key)  &#x21d2; Object </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'><p>Can be any type.</p>
-</div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#scope-instance_method" title="#scope (instance method)">#<strong>scope</strong>(key)  &#x21d2; ConvenientService::Support::Cache </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#write-instance_method" title="#write (instance method)">#<strong>write</strong>(key, value)  &#x21d2; Object </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'><p>Can be any type.</p>
-</div></span>
-  
-</li>
-
-      
-    </ul>
-  
-
-<div id="constructor_details" class="method_details_list">
-  <h2>Constructor Details</h2>
-  
-    <div class="method_details first">
-  <h3 class="signature first" id="initialize-instance_method">
-  
-    #<strong>initialize</strong>(hash = {})  &#x21d2; <tt>void</tt> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    
-
-  </div>
-</div>
-<div class="tags">
-  
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-11
-12
-13</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/cache.rb', line 11</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_hash'>hash</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
-  <span class='ivar'>@hash</span> <span class='op'>=</span> <span class='id identifier rubyid_hash'>hash</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-  
-</div>
 
 
   <div id="class_method_details" class="method_details_list">
@@ -504,9 +184,9 @@
 
     
       <div class="method_details first">
-  <h3 class="signature first" id="keygen-class_method">
+  <h3 class="signature first" id="create-class_method">
   
-    .<strong>keygen</strong>  &#x21d2; <tt><span class='object_link'><a href="Cache/Key.html" title="ConvenientService::Support::Cache::Key (class)">ConvenientService::Support::Cache::Key</a></span></tt> 
+    .<strong>create</strong>(backend: Constants::Backends::HASH)  &#x21d2; <tt><span class='object_link'><a href="Cache/Entities/Caches/Base.html" title="ConvenientService::Support::Cache::Entities::Caches::Base (class)">ConvenientService::Support::Cache::Entities::Caches::Base</a></span></tt> 
   
 
   
@@ -519,14 +199,31 @@
   </div>
 </div>
 <div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
   
+    <li>
+      
+        <span class='name'>backend</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>Constants::Backends::HASH</tt>)</em>
+      
+      
+    </li>
+  
+</ul>
+
 <p class="tag_title">Returns:</p>
 <ul class="return">
   
     <li>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="Cache/Key.html" title="ConvenientService::Support::Cache::Key (class)">ConvenientService::Support::Cache::Key</a></span></tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="Cache/Entities/Caches/Base.html" title="ConvenientService::Support::Cache::Entities::Caches::Base (class)">ConvenientService::Support::Cache::Entities::Caches::Base</a></span></tt>)</span>
       
       
       
@@ -540,827 +237,33 @@
       <pre class="lines">
 
 
+15
+16
+17
+18
 19
 20
-21</pre>
+21
+22
+23
+24
+25
+26</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/cache.rb', line 19</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_keygen'>keygen</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
-  <span class='const'><span class='object_link'><a href="" title="ConvenientService::Support::Cache (class)">Cache</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Cache/Key.html" title="ConvenientService::Support::Cache::Key (class)">Key</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Cache/Key.html#initialize-instance_method" title="ConvenientService::Support::Cache::Key#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-  </div>
-
-  <div id="instance_method_details" class="method_details_list">
-    <h2>Instance Method Details</h2>
-
-    
-      <div class="method_details first">
-  <h3 class="signature first" id="==-instance_method">
-  
-    #<strong>==</strong>(other)  &#x21d2; <tt>Boolean</tt> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    
-
-  </div>
-</div>
-<div class="tags">
-  <p class="tag_title">Parameters:</p>
-<ul class="param">
-  
-    <li>
-      
-        <span class='name'>other</span>
-      
-      
-        <span class='type'>(<tt>Object</tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'><p>Can be any type.</p>
-</div>
-      
-    </li>
-  
-</ul>
-
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>Boolean</tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-140
-141
-142
-143
-144
-145
-146</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/cache.rb', line 140</span>
-
-<span class='kw'>def</span> <span class='op'>==</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
-  <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='rparen'>)</span>
-
-  <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='id identifier rubyid_hash'>hash</span> <span class='op'>!=</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_hash'>hash</span>
-
-  <span class='kw'>true</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="[]-instance_method">
-  
-    #<strong>[]</strong>(key)  &#x21d2; <tt>Object</tt> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    <p>Returns Can be any type.</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>Object</tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'><p>Can be any type.</p>
-</div>
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-60
-61
-62</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/cache.rb', line 60</span>
-
-<span class='kw'>def</span> <span class='op'>[]</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_read'>read</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='rparen'>)</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="[]=-instance_method">
-  
-    #<strong>[]=</strong>(key, value)  &#x21d2; <tt>Object</tt> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    <p>Returns Can be any type.</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  <p class="tag_title">Parameters:</p>
-<ul class="param">
-  
-    <li>
-      
-        <span class='name'>key</span>
-      
-      
-        <span class='type'>(<tt>Object</tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'><p>Can be any type.</p>
-</div>
-      
-    </li>
-  
-    <li>
-      
-        <span class='name'>value</span>
-      
-      
-        <span class='type'>(<tt>Object</tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'><p>Can be any type.</p>
-</div>
-      
-    </li>
-  
-</ul>
-
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>Object</tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'><p>Can be any type.</p>
-</div>
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-84
-85
-86</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/cache.rb', line 84</span>
-
-<span class='kw'>def</span> <span class='op'>[]=</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='comma'>,</span> <span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_write'>write</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='comma'>,</span> <span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="clear-instance_method">
-  
-    #<strong>clear</strong>  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::Support::Cache (class)">ConvenientService::Support::Cache</a></span></tt> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    
-
-  </div>
-</div>
-<div class="tags">
-  
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt><span class='object_link'><a href="" title="ConvenientService::Support::Cache (class)">ConvenientService::Support::Cache</a></span></tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-116
-117
-118
-119
-120</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/cache.rb', line 116</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_clear'>clear</span>
-  <span class='id identifier rubyid_hash'>hash</span><span class='period'>.</span><span class='id identifier rubyid_clear'>clear</span>
-
-  <span class='kw'>self</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="delete-instance_method">
-  
-    #<strong>delete</strong>(key)  &#x21d2; <tt>Object</tt> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    <p>Returns Can be any type.</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  <p class="tag_title">Parameters:</p>
-<ul class="param">
-  
-    <li>
-      
-        <span class='name'>key</span>
-      
-      
-        <span class='type'>(<tt>Object</tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'><p>Can be any type.</p>
-</div>
-      
-    </li>
-  
-</ul>
-
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>Object</tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'><p>Can be any type.</p>
-</div>
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-95
-96
-97</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/cache.rb', line 95</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_hash'>hash</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='rparen'>)</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="empty?-instance_method">
-  
-    #<strong>empty?</strong>  &#x21d2; <tt>Boolean</tt> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    
-
-  </div>
-</div>
-<div class="tags">
-  
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>Boolean</tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-30
-31
-32</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/cache.rb', line 30</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_empty?'>empty?</span>
-  <span class='id identifier rubyid_hash'>hash</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="exist?-instance_method">
-  
-    #<strong>exist?</strong>(key)  &#x21d2; <tt>Boolean</tt> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    
-
-  </div>
-</div>
-<div class="tags">
-  
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>Boolean</tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-40
-41
-42</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/cache.rb', line 40</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_exist?'>exist?</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_hash'>hash</span><span class='period'>.</span><span class='id identifier rubyid_has_key?'>has_key?</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='rparen'>)</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="fetch-instance_method">
-  
-    #<strong>fetch</strong>(key, &amp;block)  &#x21d2; <tt>Object</tt> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    <p>Returns Can be any type.</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  <p class="tag_title">Parameters:</p>
-<ul class="param">
-  
-    <li>
-      
-        <span class='name'>key</span>
-      
-      
-        <span class='type'>(<tt>Object</tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'><p>Can be any type.</p>
-</div>
-      
-    </li>
-  
-    <li>
-      
-        <span class='name'>block</span>
-      
-      
-        <span class='type'>(<tt>Proc</tt>, <tt>nil</tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
-
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>Object</tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'><p>Can be any type.</p>
-</div>
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-107
-108
-109
-110
-111</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/cache.rb', line 107</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-  <span class='kw'>return</span> <span class='id identifier rubyid_read'>read</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_block'>block</span>
-
-  <span class='id identifier rubyid_exist?'>exist?</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='rparen'>)</span> <span class='op'>?</span> <span class='id identifier rubyid_read'>read</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='rparen'>)</span> <span class='op'>:</span> <span class='id identifier rubyid_write'>write</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='comma'>,</span> <span class='id identifier rubyid_block'>block</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='rparen'>)</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="keygen-instance_method">
-  
-    #<strong>keygen</strong>  &#x21d2; <tt><span class='object_link'><a href="Cache/Key.html" title="ConvenientService::Support::Cache::Key (class)">ConvenientService::Support::Cache::Key</a></span></tt> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    
-
-  </div>
-</div>
-<div class="tags">
-  
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt><span class='object_link'><a href="Cache/Key.html" title="ConvenientService::Support::Cache::Key (class)">ConvenientService::Support::Cache::Key</a></span></tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-132
-133
-134</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/cache.rb', line 132</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_keygen'>keygen</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
-  <span class='const'><span class='object_link'><a href="" title="ConvenientService::Support::Cache (class)">Cache</a></span></span><span class='period'>.</span><span class='id identifier rubyid_keygen'><span class='object_link'><a href="#keygen-class_method" title="ConvenientService::Support::Cache.keygen (method)">keygen</a></span></span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="read-instance_method">
-  
-    #<strong>read</strong>(key)  &#x21d2; <tt>Object</tt> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    <p>Returns Can be any type.</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>Object</tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'><p>Can be any type.</p>
-</div>
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-50
-51
-52</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/cache.rb', line 50</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_read'>read</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_hash'>hash</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="scope-instance_method">
-  
-    #<strong>scope</strong>(key)  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::Support::Cache (class)">ConvenientService::Support::Cache</a></span></tt> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    
-
-  </div>
-</div>
-<div class="tags">
-  
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt><span class='object_link'><a href="" title="ConvenientService::Support::Cache (class)">ConvenientService::Support::Cache</a></span></tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-125
-126
-127</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/cache.rb', line 125</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_scope'>scope</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='const'><span class='object_link'><a href="../Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="ConvenientService::Support::Cache (class)">Cache</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="ConvenientService::Support::Cache#initialize (method)">new</a></span></span> <span class='rbrace'>}</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="write-instance_method">
-  
-    #<strong>write</strong>(key, value)  &#x21d2; <tt>Object</tt> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    <p>Returns Can be any type.</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  <p class="tag_title">Parameters:</p>
-<ul class="param">
-  
-    <li>
-      
-        <span class='name'>key</span>
-      
-      
-        <span class='type'>(<tt>Object</tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'><p>Can be any type.</p>
-</div>
-      
-    </li>
-  
-    <li>
-      
-        <span class='name'>value</span>
-      
-      
-        <span class='type'>(<tt>Object</tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'><p>Can be any type.</p>
-</div>
-      
-    </li>
-  
-</ul>
-
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>Object</tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'><p>Can be any type.</p>
-</div>
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-72
-73
-74</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/cache.rb', line 72</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_write'>write</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='comma'>,</span> <span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_hash'>hash</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_value'>value</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/cache.rb', line 15</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_create'>create</span><span class='lparen'>(</span><span class='label'>backend:</span> <span class='const'><span class='object_link'><a href="Cache/Constants.html" title="ConvenientService::Support::Cache::Constants (class)">Constants</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Cache/Constants/Backends.html" title="ConvenientService::Support::Cache::Constants::Backends (module)">Backends</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Cache/Constants/Backends.html#HASH-constant" title="ConvenientService::Support::Cache::Constants::Backends::HASH (constant)">HASH</a></span></span><span class='rparen'>)</span>
+  <span class='kw'>case</span> <span class='id identifier rubyid_backend'>backend</span>
+  <span class='kw'>when</span> <span class='const'><span class='object_link'><a href="Cache/Constants.html" title="ConvenientService::Support::Cache::Constants (class)">Constants</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Cache/Constants/Backends.html" title="ConvenientService::Support::Cache::Constants::Backends (module)">Backends</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Cache/Constants/Backends.html#ARRAY-constant" title="ConvenientService::Support::Cache::Constants::Backends::ARRAY (constant)">ARRAY</a></span></span>
+    <span class='const'><span class='object_link'><a href="Cache/Entities.html" title="ConvenientService::Support::Cache::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Cache/Entities/Caches.html" title="ConvenientService::Support::Cache::Entities::Caches (module)">Caches</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Cache/Entities/Caches/Array.html" title="ConvenientService::Support::Cache::Entities::Caches::Array (class)">Array</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Cache/Entities/Caches/Array.html#initialize-instance_method" title="ConvenientService::Support::Cache::Entities::Caches::Array#initialize (method)">new</a></span></span>
+  <span class='kw'>when</span> <span class='const'><span class='object_link'><a href="Cache/Constants.html" title="ConvenientService::Support::Cache::Constants (class)">Constants</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Cache/Constants/Backends.html" title="ConvenientService::Support::Cache::Constants::Backends (module)">Backends</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Cache/Constants/Backends.html#HASH-constant" title="ConvenientService::Support::Cache::Constants::Backends::HASH (constant)">HASH</a></span></span>
+    <span class='const'><span class='object_link'><a href="Cache/Entities.html" title="ConvenientService::Support::Cache::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Cache/Entities/Caches.html" title="ConvenientService::Support::Cache::Entities::Caches (module)">Caches</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Cache/Entities/Caches/Hash.html" title="ConvenientService::Support::Cache::Entities::Caches::Hash (class)">Hash</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Cache/Entities/Caches/Hash.html#initialize-instance_method" title="ConvenientService::Support::Cache::Entities::Caches::Hash#initialize (method)">new</a></span></span>
+  <span class='kw'>when</span> <span class='const'><span class='object_link'><a href="Cache/Constants.html" title="ConvenientService::Support::Cache::Constants (class)">Constants</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Cache/Constants/Backends.html" title="ConvenientService::Support::Cache::Constants::Backends (module)">Backends</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Cache/Constants/Backends.html#THREAD_SAFE_ARRAY-constant" title="ConvenientService::Support::Cache::Constants::Backends::THREAD_SAFE_ARRAY (constant)">THREAD_SAFE_ARRAY</a></span></span>
+    <span class='const'><span class='object_link'><a href="Cache/Entities.html" title="ConvenientService::Support::Cache::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Cache/Entities/Caches.html" title="ConvenientService::Support::Cache::Entities::Caches (module)">Caches</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Cache/Entities/Caches/ThreadSafeArray.html" title="ConvenientService::Support::Cache::Entities::Caches::ThreadSafeArray (class)">ThreadSafeArray</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Cache/Entities/Caches/ThreadSafeArray.html#initialize-instance_method" title="ConvenientService::Support::Cache::Entities::Caches::ThreadSafeArray#initialize (method)">new</a></span></span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="Cache/Errors.html" title="ConvenientService::Support::Cache::Errors (module)">Errors</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Cache/Errors/NotSupportedBackend.html" title="ConvenientService::Support::Cache::Errors::NotSupportedBackend (class)">NotSupportedBackend</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Cache/Errors/NotSupportedBackend.html#initialize-instance_method" title="ConvenientService::Support::Cache::Errors::NotSupportedBackend#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>backend:</span> <span class='id identifier rubyid_backend'>backend</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1372,7 +275,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Apr 10 12:40:23 2023 by
+  Generated on Tue Apr 11 23:36:14 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.32 (ruby-3.1.4).
 </div>
