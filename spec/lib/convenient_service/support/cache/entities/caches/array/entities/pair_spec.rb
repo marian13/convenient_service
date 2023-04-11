@@ -13,12 +13,11 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Array::Entit
 
   example_group "attributes" do
     include ConvenientService::RSpec::Matchers::HaveAttrReader
-    include ConvenientService::RSpec::Matchers::HaveAttrAccessor
 
     subject { pair }
 
     it { is_expected.to have_attr_reader(:key) }
-    it { is_expected.to have_attr_accessor(:value) }
+    it { is_expected.to have_attr_reader(:value) }
   end
 
   example_group "comparison" do

@@ -18,7 +18,7 @@ module ConvenientService
                 # @!attribute [rw] value
                 #   @return [Object] Can be any type.
                 #
-                attr_accessor :value
+                attr_reader :value
 
                 ##
                 # @param key [Object] Can be any type.

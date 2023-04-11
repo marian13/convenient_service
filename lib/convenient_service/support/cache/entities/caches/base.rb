@@ -18,11 +18,6 @@ module ConvenientService
             end
 
             ##
-            # @return [Object] Can be any type.
-            #
-            abstract_method :empty?
-
-            ##
             # @return [Boolean]
             #
             abstract_method :empty?
@@ -56,11 +51,6 @@ module ConvenientService
             # @return [ConvenientService::Support::Cache::Enitities::Caches::Base]
             #
             abstract_method :scope
-
-            ##
-            # @return [Boolean]
-            #
-            abstract_method :==
 
             ##
             # @return [void]
