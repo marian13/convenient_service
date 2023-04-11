@@ -29,7 +29,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasInternals::Entities::Inter
       let(:internals) { internals_instance }
 
       describe "#==" do
-        context "when results have different classes" do
+        context "when `other` have different class" do
           let(:other) { 42 }
 
           it "returns `nil`" do
@@ -37,7 +37,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasInternals::Entities::Inter
           end
         end
 
-        context "when dependency collections have same attributes" do
+        context "when `other` has same class" do
           let(:other) { internals_class.new }
 
           it "returns `true`" do

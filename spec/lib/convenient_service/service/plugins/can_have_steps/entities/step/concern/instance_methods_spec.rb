@@ -277,7 +277,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
     example_group "comparison" do
       describe "#==" do
-        context "when steps have different classes" do
+        context "when `other` has different class" do
           let(:other) { "string" }
 
           it "returns `nil`" do
@@ -285,7 +285,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           end
         end
 
-        context "when steps have different services" do
+        context "when `other` has different service" do
           let(:other) { step_class.new(Class.new, **kwargs) }
 
           it "returns `false`" do
@@ -293,7 +293,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           end
         end
 
-        context "when steps have different inputs" do
+        context "when `other` has different inputs" do
           let(:other) { step_class.new(*args, **kwargs.merge(in: [])) }
 
           it "returns `false`" do
@@ -301,7 +301,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           end
         end
 
-        context "when steps have different outputs" do
+        context "when `other` has different outputs" do
           let(:other) { step_class.new(*args, **kwargs.merge(out: [])) }
 
           it "returns `false`" do
@@ -309,7 +309,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           end
         end
 
-        context "when steps have different indices" do
+        context "when `other` has different index" do
           let(:other) { step_class.new(*args, **kwargs.merge(index: 1)) }
 
           it "returns `false`" do
@@ -317,7 +317,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           end
         end
 
-        context "when steps have different containers" do
+        context "when `other` has different container" do
           let(:other) { step_class.new(*args, **kwargs.merge(container: Class.new)) }
 
           it "returns `false`" do
@@ -325,7 +325,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           end
         end
 
-        context "when steps have different organizers" do
+        context "when `other` has different organizer" do
           let(:other) { step_class.new(*args, **kwargs.merge(organizer: nil)) }
 
           it "returns `false`" do
@@ -333,7 +333,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           end
         end
 
-        context "when steps have same attributes" do
+        context "when `other` has same attributes" do
           let(:other) { step_class.new(*args, **kwargs) }
 
           it "returns `true`" do

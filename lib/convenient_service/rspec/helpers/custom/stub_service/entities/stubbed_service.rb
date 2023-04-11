@@ -79,7 +79,7 @@ module ConvenientService
               end
 
               ##
-              # @return [ConvenientService::Support::Cache::Key]
+              # @return [ConvenientService::Support::Cache::Entities::Key]
               #
               def key
                 @key ||= service_class.stubbed_results.keygen(*arguments[:args], **arguments[:kwargs], &arguments[:block])
