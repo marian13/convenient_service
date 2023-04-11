@@ -6,6 +6,14 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Hash do
+  example_group "inheritance" do
+    include ConvenientService::RSpec::Matchers::BeDescendantOf
+
+    subject { described_class }
+
+    it { is_expected.to be_descendant_of(ConvenientService::Support::Cache::Entities::Caches::Base) }
+  end
+
   example_group "class methods" do
     describe ".new" do
       context "when `hash` is NOT passed" do
