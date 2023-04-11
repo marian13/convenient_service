@@ -48,11 +48,6 @@ module ConvenientService
             abstract_method :clear
 
             ##
-            # @return [ConvenientService::Support::Cache::Enitities::Caches::Base]
-            #
-            abstract_method :scope
-
-            ##
             # @return [void]
             #
             def initialize(store = nil)

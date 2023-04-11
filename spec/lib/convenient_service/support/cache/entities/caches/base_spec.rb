@@ -28,8 +28,11 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Base do
       it { is_expected.to have_abstract_method(:write) }
       it { is_expected.to have_abstract_method(:delete) }
       it { is_expected.to have_abstract_method(:clear) }
-      it { is_expected.to have_abstract_method(:scope) }
     end
+
+    ##
+    # TODO:
+    #
   end
 end
 # rubocop:enable RSpec/NestedGroups
