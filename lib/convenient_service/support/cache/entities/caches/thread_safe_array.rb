@@ -65,6 +65,15 @@ module ConvenientService
             def clear(...)
               @lock.synchronize { super }
             end
+
+            ##
+            # @internal
+            #   `scope` method from parent delegates to thread-safe `fetch`, that is why child `scope` method does NOT require additional synchronization.
+            #
+            # def scope(...)
+            #   # ...
+            # end
+            ##
           end
         end
       end

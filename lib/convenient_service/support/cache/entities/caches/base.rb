@@ -55,7 +55,7 @@ module ConvenientService
             ##
             # @return [void]
             #
-            def initialize(store = nil)
+            def initialize
             end
 
             ##

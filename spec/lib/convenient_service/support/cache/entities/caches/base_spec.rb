@@ -72,6 +72,20 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Base do
     #
     # describe "#[]=" do
     # end
+
+    ##
+    # NOTE: Tested by descendants.
+    #
+    # describe "#scope" do
+    # end
+
+    ##
+    # NOTE: Tested by descendants.
+    #
+    # example_group "comparison" do
+    #   describe "#==" do
+    #   end
+    # end
   end
 end
 # rubocop:enable RSpec/NestedGroups
