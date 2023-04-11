@@ -47,6 +47,19 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Base do
       it { is_expected.to have_abstract_method(:delete) }
       it { is_expected.to have_abstract_method(:clear) }
     end
+
+    describe "#keygen" do
+      let(:args) { :foo }
+      let(:kwargs) { {foo: :bar} }
+      let(:block) { proc { :foo } }
+
+      specify do
+        expect { cache.keygen(*args, **kwargs, &block) }
+          .to delegate_to(cache.class, :keygen)
+          .with_arguments(*args, **kwargs, &block)
+          .and_return_its_value
+      end
+    end
   end
 end
 # rubocop:enable RSpec/NestedGroups
