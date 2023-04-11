@@ -64,6 +64,28 @@ module ConvenientService
 
             ##
             # @param key [Object] Can be any type.
+            # @param block [Proc, nil]
+            # @return [Object] Can be any type.
+            #
+            # @internal
+            #   https://api.rubyonrails.org/classes/ActiveSupport/Cache/Store.html#method-i-fetch
+            #
+            def fetch(key, &block)
+              index = index(key)
+
+              return array[index].value if index
+
+              return unless block
+
+              value = block.call
+
+              array << pair(key, value)
+
+              value
+            end
+
+            ##
+            # @param key [Object] Can be any type.
             # @return [Object] Can be any type.
             #
             def delete(key)

@@ -48,6 +48,13 @@ module ConvenientService
             ##
             # @return [Object] Can be any type.
             #
+            def fetch(...)
+              @lock.synchronize { super }
+            end
+
+            ##
+            # @return [Object] Can be any type.
+            #
             def delete(...)
               @lock.synchronize { super }
             end

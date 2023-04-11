@@ -38,6 +38,11 @@ module ConvenientService
             abstract_method :write
 
             ##
+            # @return [Object] Can be any type.
+            #
+            abstract_method :fetch
+
+            ##
             # @return [Object, nil] Can be any type.
             #
             abstract_method :delete
@@ -51,20 +56,6 @@ module ConvenientService
             # @return [void]
             #
             def initialize(store = nil)
-            end
-
-            ##
-            # @param key [Object] Can be any type.
-            # @param block [Proc, nil]
-            # @return [Object] Can be any type.
-            #
-            # @internal
-            #   https://api.rubyonrails.org/classes/ActiveSupport/Cache/Store.html#method-i-fetch
-            #
-            def fetch(key, &block)
-              return read(key) unless block
-
-              exist?(key) ? read(key) : write(key, block.call)
             end
 
             ##

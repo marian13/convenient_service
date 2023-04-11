@@ -43,6 +43,7 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Base do
       it { is_expected.to have_abstract_method(:exist?) }
       it { is_expected.to have_abstract_method(:read) }
       it { is_expected.to have_abstract_method(:write) }
+      it { is_expected.to have_abstract_method(:fetch) }
       it { is_expected.to have_abstract_method(:delete) }
       it { is_expected.to have_abstract_method(:clear) }
     end

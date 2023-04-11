@@ -147,6 +147,69 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Hash do
       end
     end
 
+    describe "#fetch" do
+      let(:key) { :foo }
+      let(:value) { :bar }
+
+      context "when `block` is NOT passed" do
+        context "when cache does NOT have `key`" do
+          before do
+            cache.clear
+          end
+
+          it "returns `nil`" do
+            expect(cache.fetch(key)).to be_nil
+          end
+        end
+
+        context "when cache has `key`" do
+          before do
+            cache[key] = value
+          end
+
+          it "returns `value`" do
+            expect(cache.fetch(key)).to eq(value)
+          end
+        end
+      end
+
+      context "when `block` is passed" do
+        let(:block) { proc { value } }
+
+        context "when cache does NOT have `key`" do
+          before do
+            cache.clear
+          end
+
+          it "returns `value`" do
+            expect(cache.fetch(key, &block)).to eq(value)
+          end
+
+          it "stores `value` by `key`" do
+            cache.fetch(key, &block)
+
+            expect(cache.read(key)).to eq(value)
+          end
+        end
+
+        context "when cache has `key`" do
+          before do
+            cache[key] = value
+          end
+
+          it "returns `value` by that `key`" do
+            expect(cache.fetch(key, &block)).to eq(value)
+          end
+
+          it "does NOT update `value` by `key`" do
+            cache.fetch(key) { :baz }
+
+            expect(cache.read(key)).to eq(value)
+          end
+        end
+      end
+    end
+
     describe "#delete" do
       let(:key) { :foo }
       let(:value) { :foo }
