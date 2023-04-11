@@ -60,6 +60,18 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Base do
           .and_return_its_value
       end
     end
+
+    ##
+    # NOTE: Tested by descendants.
+    #
+    # describe "#[]" do
+    # end
+
+    ##
+    # NOTE: Tested by descendants.
+    #
+    # describe "#[]=" do
+    # end
   end
 end
 # rubocop:enable RSpec/NestedGroups

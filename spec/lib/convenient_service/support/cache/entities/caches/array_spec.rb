@@ -6,6 +6,8 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Array do
+  include ConvenientService::RSpec::Matchers::DelegateTo
+
   example_group "inheritance" do
     include ConvenientService::RSpec::Matchers::BeDescendantOf
 
@@ -260,6 +262,29 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Array do
         it "removes those keys from cache" do
           expect { cache.clear }.to change(cache, :empty?).from(false).to(true)
         end
+      end
+    end
+
+    describe "#[]" do
+      let(:key) { :foo }
+
+      specify do
+        expect { cache[key] }
+          .to delegate_to(cache, :read)
+          .with_arguments(key)
+          .and_return_its_value
+      end
+    end
+
+    describe "#[]=" do
+      let(:key) { :foo }
+      let(:value) { :foo }
+
+      specify do
+        expect { cache[key] = value }
+          .to delegate_to(cache, :write)
+          .with_arguments(key, value)
+          .and_return_its_value
       end
     end
 
