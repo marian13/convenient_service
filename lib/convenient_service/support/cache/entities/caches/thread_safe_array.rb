@@ -74,6 +74,13 @@ module ConvenientService
             #   # ...
             # end
             ##
+
+            ##
+            # @note NOT thread-safe.
+            #
+            # def ==(other)
+            #   # ...
+            # end
           end
         end
       end
