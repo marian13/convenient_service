@@ -6,6 +6,8 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Base do
+  include ConvenientService::RSpec::Matchers::DelegateTo
+
   let(:cache) { described_class.new }
 
   example_group "modules" do
@@ -14,6 +16,21 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Base do
     subject { described_class }
 
     it { is_expected.to include_module(ConvenientService::Support::AbstractMethod) }
+  end
+
+  example_group "class methods" do
+    describe ".keygen" do
+      let(:args) { :foo }
+      let(:kwargs) { {foo: :bar} }
+      let(:block) { proc { :foo } }
+
+      specify do
+        expect { described_class.keygen(*args, **kwargs, &block) }
+          .to delegate_to(ConvenientService::Support::Cache::Entities::Key, :new)
+          .with_arguments(*args, **kwargs, &block)
+          .and_return_its_value
+      end
+    end
   end
 
   example_group "instance methods" do
@@ -29,10 +46,6 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Base do
       it { is_expected.to have_abstract_method(:delete) }
       it { is_expected.to have_abstract_method(:clear) }
     end
-
-    ##
-    # TODO:
-    #
   end
 end
 # rubocop:enable RSpec/NestedGroups
