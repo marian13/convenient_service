@@ -26,6 +26,11 @@
 /Gemfile*
 
 ##
+# NOTE: Ignores all auto generated files inside gemfiles/ dir
+#
+/gemfiles/*
+
+##
 # NOTE: Ignores `.DS_Store` in any nesting.
 #
 .DS_Store
