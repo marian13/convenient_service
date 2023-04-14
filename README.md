@@ -13,6 +13,10 @@
 </h1>
 <!-- header:end -->
 
+<!-- badges_docs:start -->
+<!-- NOTE: Docs for badges can be found here - https://shields.io -->
+<!-- badges_docs:end -->
+
 <!-- badges:start -->
 [![Ruby](https://img.shields.io/badge/ruby-%23CC342D.svg?style=for-the-badge&logo=ruby&logoColor=white)](https://www.ruby-lang.org/en/)
 
