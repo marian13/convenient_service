@@ -5,6 +5,27 @@ require "spec_helper"
 require "convenient_service"
 
 RSpec.describe ConvenientService::Service::Plugins::CanHaveTryResult::Concern do
+  include ConvenientService::RSpec::Matchers::DelegateTo
+
+  let(:service_class) do
+    Class.new do
+      include ConvenientService::Configs::Standard
+
+      ##
+      # TODO: Remove once `CanHaveTryResult` becomes included into `Standard` config.
+      #
+      concerns do
+        use ConvenientService::Service::Plugins::CanHaveTryResult::Concern
+      end
+    end
+  end
+
+  let(:service_instance) { service_class.new }
+
+  let(:args) { [:foo] }
+  let(:kwargs) { {foo: :bar} }
+  let(:block) { proc { :foo } }
+
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
 
@@ -28,33 +49,38 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveTryResult::Concern do
   end
 
   example_group "instance methods" do
-    let(:service_class) do
-      Class.new do
-        include ConvenientService::Configs::Standard
+    describe "#try_result" do
+      let(:error_message) do
+        <<~TEXT
+          Try result method (#try_result) of `#{service_class}` is NOT overridden.
 
-        ##
-        # TODO: Remove once `CanHaveTryResult` becomes included into `Standard` config.
-        #
-        concerns do
-          use ConvenientService::Service::Plugins::CanHaveTryResult::Concern
-        end
+          NOTE: Make sure overridden `try_result` returns `success` with reasonable "null" data.
+        TEXT
+      end
+
+      it "raises `ConvenientService::Service::Plugins::CanHaveTryResult::Errors::TryResultIsNotOverridden`" do
+        expect { service_instance.try_result }
+          .to raise_error(ConvenientService::Service::Plugins::CanHaveTryResult::Errors::TryResultIsNotOverridden)
+          .with_message(error_message)
       end
     end
+  end
 
-    let(:service_instance) { service_class.new }
+  example_group "class methods" do
+    describe ".try_result" do
+      specify do
+        expect { ignoring_error(ConvenientService::Service::Plugins::CanHaveTryResult::Errors::TryResultIsNotOverridden) { service_class.try_result(*args, **kwargs, &block) } }
+          .to delegate_to(service_class, :new)
+          .with_arguments(*args, **kwargs, &block)
+      end
 
-    let(:error_message) do
-      <<~TEXT
-        Try result method (#try_result) of `#{service_class}` is NOT overridden.
+      specify do
+        allow(service_class).to receive(:new).and_return(service_instance)
 
-        NOTE: Make sure overridden `try_result` returns `success` with reasonable "null" data.
-      TEXT
-    end
-
-    it "raises `ConvenientService::Service::Plugins::CanHaveTryResult::Errors::TryResultIsNotOverridden`" do
-      expect { service_instance.try_result }
-        .to raise_error(ConvenientService::Service::Plugins::CanHaveTryResult::Errors::TryResultIsNotOverridden)
-        .with_message(error_message)
+        expect { ignoring_error(ConvenientService::Service::Plugins::CanHaveTryResult::Errors::TryResultIsNotOverridden) { service_class.try_result(*args, **kwargs, &block) } }
+          .to delegate_to(service_instance, :try_result)
+          .and_return_its_value
+      end
     end
   end
 end

@@ -9,6 +9,25 @@ module ConvenientService
 
           instance_methods do
             ##
+            # Returns `ConvenientService::Service::Plugins::HasResult::Entities::Result` when overridden.
+            #
+            # @raise [ConvenientService::Service::Plugins::CanHaveTryResult::Errors::TryResultIsNotOverridden]
+            #
+            # @internal
+            #   NOTE: name is inspired by Ruby's `try_convert` methods.
+            #   - https://blog.saeloun.com/2021/08/03/ruby-adds-integer-try-convert
+            #
+            #   TODO: A plugin that checks that a `success` is returned from `try_result`.
+            #
+            def try_result
+              raise Errors::TryResultIsNotOverridden.new(service: self)
+            end
+          end
+
+          class_methods do
+            ##
+            # Returns `ConvenientService::Service::Plugins::HasResult::Entities::Result` when `#try_result` is overridden.
+            #
             # @raise [ConvenientService::Service::Plugins::CanHaveTryResult::Errors::TryResultIsNotOverridden]
             #
             # @example `try_result` method MUST always return `success` with reasonable "null" data.
@@ -60,14 +79,8 @@ module ConvenientService
             # @see https://thoughtbot.com/blog/rails-refactoring-example-introduce-null-object
             # @see https://en.wikipedia.org/wiki/Null_object_pattern
             #
-            # @internal
-            #   NOTE: name is inspired by Ruby's `try_convert` methods.
-            #   - https://blog.saeloun.com/2021/08/03/ruby-adds-integer-try-convert
-            #
-            #   TODO: A plugin that checks that a `success` is returned from `try_result`.
-            #
-            def try_result
-              raise Errors::TryResultIsNotOverridden.new(service: self)
+            def try_result(...)
+              new(...).try_result
             end
           end
         end
