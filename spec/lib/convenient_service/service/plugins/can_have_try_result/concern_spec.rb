@@ -11,13 +11,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveTryResult::Concern do
   let(:service_class) do
     Class.new do
       include ConvenientService::Configs::Standard
-
-      ##
-      # TODO: Remove once `CanHaveTryResult` becomes included into `Standard` config.
-      #
-      concerns do
-        use ConvenientService::Service::Plugins::CanHaveTryResult::Concern
-      end
     end
   end
 
@@ -72,13 +65,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveTryResult::Concern do
       let(:service_class) do
         Class.new do
           include ConvenientService::Configs::Standard
-
-          ##
-          # TODO: Remove once `CanHaveTryResult` becomes included into `Standard` config.
-          #
-          concerns do
-            use ConvenientService::Service::Plugins::CanHaveTryResult::Concern
-          end
 
           def try_result
             success

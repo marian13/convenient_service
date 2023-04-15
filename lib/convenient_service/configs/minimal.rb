@@ -48,6 +48,10 @@ module ConvenientService
           use Plugins::Service::CanHaveSteps::Middleware
         end
 
+        middlewares :try_result do
+          use Plugins::Common::NormalizesEnv::Middleware
+        end
+
         middlewares :step do
           use Plugins::Common::NormalizesEnv::Middleware
         end

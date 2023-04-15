@@ -68,6 +68,18 @@ RSpec.describe ConvenientService::Configs::Minimal do
           end
         end
 
+        example_group "#try_result middlewares" do
+          let(:try_result_middlewares) do
+            [
+              ConvenientService::Common::Plugins::NormalizesEnv::Middleware
+            ]
+          end
+
+          it "sets service middlewares for `#try_result`" do
+            expect(service_class.middlewares(:try_result).to_a).to eq(try_result_middlewares)
+          end
+        end
+
         example_group "#step middlewares" do
           let(:step_middlewares) do
             [

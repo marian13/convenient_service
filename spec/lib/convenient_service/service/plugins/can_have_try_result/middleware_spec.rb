@@ -30,17 +30,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveTryResult::Middleware
         Class.new do
           include ConvenientService::Configs::Standard
 
-          ##
-          # TODO: Remove once `CanHaveTryResult` becomes included into `Standard` config.
-          #
-          concerns do
-            use ConvenientService::Service::Plugins::CanHaveTryResult::Concern
-          end
-
-          middlewares :try_result do
-            use ConvenientService::Service::Plugins::CanHaveTryResult::Middleware
-          end
-
           def try_result
             success
           end
@@ -64,17 +53,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveTryResult::Middleware
         let(:service_class) do
           Class.new do
             include ConvenientService::Configs::Standard
-
-            ##
-            # TODO: Remove once `CanHaveTryResult` becomes included into `Standard` config.
-            #
-            concerns do
-              use ConvenientService::Service::Plugins::CanHaveTryResult::Concern
-            end
-
-            middlewares :try_result do
-              use ConvenientService::Service::Plugins::CanHaveTryResult::Middleware
-            end
 
             def try_result
               "string value"
@@ -104,17 +82,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveTryResult::Middleware
             Class.new do
               include ConvenientService::Configs::Standard
 
-              ##
-              # TODO: Remove once `CanHaveTryResult` becomes included into `Standard` config.
-              #
-              concerns do
-                use ConvenientService::Service::Plugins::CanHaveTryResult::Concern
-              end
-
-              middlewares :try_result do
-                use ConvenientService::Service::Plugins::CanHaveTryResult::Middleware
-              end
-
               def try_result
                 error
               end
@@ -141,17 +108,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveTryResult::Middleware
           let(:service_class) do
             Class.new do
               include ConvenientService::Configs::Standard
-
-              ##
-              # TODO: Remove once `CanHaveTryResult` becomes included into `Standard` config.
-              #
-              concerns do
-                use ConvenientService::Service::Plugins::CanHaveTryResult::Concern
-              end
-
-              middlewares :try_result do
-                use ConvenientService::Service::Plugins::CanHaveTryResult::Middleware
-              end
 
               def try_result
                 success
