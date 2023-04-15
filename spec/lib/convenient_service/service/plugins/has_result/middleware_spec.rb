@@ -60,7 +60,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Middleware do
         let(:error_message) do
           <<~TEXT
             Return value of service `#{service_class}` is NOT a `Result`.
-            It is a `String`.
+            It is `String`.
 
             Did you forget to call `success`, `failure`, or `error` from the `result` method?
           TEXT

@@ -2,3 +2,4 @@
 
 require_relative "can_have_try_result/concern"
 require_relative "can_have_try_result/errors"
+require_relative "can_have_try_result/middleware"

@@ -16,6 +16,32 @@ module ConvenientService
               super(message)
             end
           end
+
+          class ServiceTryReturnValueNotKindOfResult < ::ConvenientService::Error
+            def initialize(service:, result:)
+              message = <<~TEXT
+                Return value of service `#{service.class}` try is NOT a `Result`.
+                It is `#{result.class}`.
+
+                Did you forget to call `success` from the `try_result` method?
+              TEXT
+
+              super(message)
+            end
+          end
+
+          class ServiceTryReturnValueNotSuccess < ::ConvenientService::Error
+            def initialize(service:, result:)
+              message = <<~TEXT
+                Return value of service `#{service.class}` try is NOT a `success`.
+                It is `#{result.status}`.
+
+                Did you accidentally call `failure` or `error` instead of `success` from the `try_result` method?
+              TEXT
+
+              super(message)
+            end
+          end
         end
       end
     end
