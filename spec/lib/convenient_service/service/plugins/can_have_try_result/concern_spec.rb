@@ -4,6 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
+# rubocop:disable RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Service::Plugins::CanHaveTryResult::Concern do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
@@ -68,8 +69,25 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveTryResult::Concern do
 
   example_group "class methods" do
     describe ".try_result" do
+      let(:service_class) do
+        Class.new do
+          include ConvenientService::Configs::Standard
+
+          ##
+          # TODO: Remove once `CanHaveTryResult` becomes included into `Standard` config.
+          #
+          concerns do
+            use ConvenientService::Service::Plugins::CanHaveTryResult::Concern
+          end
+
+          def try_result
+            success
+          end
+        end
+      end
+
       specify do
-        expect { ignoring_error(ConvenientService::Service::Plugins::CanHaveTryResult::Errors::TryResultIsNotOverridden) { service_class.try_result(*args, **kwargs, &block) } }
+        expect { service_class.try_result(*args, **kwargs, &block) }
           .to delegate_to(service_class, :new)
           .with_arguments(*args, **kwargs, &block)
       end
@@ -77,10 +95,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveTryResult::Concern do
       specify do
         allow(service_class).to receive(:new).and_return(service_instance)
 
-        expect { ignoring_error(ConvenientService::Service::Plugins::CanHaveTryResult::Errors::TryResultIsNotOverridden) { service_class.try_result(*args, **kwargs, &block) } }
+        expect { service_class.try_result(*args, **kwargs, &block) }
           .to delegate_to(service_instance, :try_result)
           .and_return_its_value
       end
     end
   end
 end
+# rubocop:enable RSpec/MultipleMemoizedHelpers
