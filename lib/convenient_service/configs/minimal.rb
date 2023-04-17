@@ -177,6 +177,8 @@ module ConvenientService
           concerns do
             use Plugins::Common::HasInternals::Concern
 
+            use Plugins::Step::CanBeCompleted::Concern
+
             use Plugins::Step::HasInspect::Concern
           end
 

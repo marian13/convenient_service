@@ -14,6 +14,8 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
   #
   let(:organizer_service_class) do
     Class.new do
+      include ConvenientService::Configs::Minimal
+
       def foo
         "foo"
       end
@@ -24,34 +26,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
 
   let(:step_service_class) do
     Class.new do
-      include ConvenientService::Common::Plugins::HasConstructor::Concern
-      include ConvenientService::Service::Plugins::HasResult::Concern
-
-      # rubocop:disable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
-      class self::Result
-        include ConvenientService::Core
-
-        concerns do
-          use ConvenientService::Common::Plugins::HasInternals::Concern
-          use ConvenientService::Common::Plugins::HasConstructor::Concern
-          use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Concern
-        end
-
-        middlewares :initialize do
-          use ConvenientService::Common::Plugins::NormalizesEnv::Middleware
-
-          use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Middleware
-        end
-
-        class self::Internals
-          include ConvenientService::Core
-
-          concerns do
-            use ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Plugins::HasCache::Concern
-          end
-        end
-      end
-      # rubocop:enable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
+      include ConvenientService::Configs::Minimal
 
       def result
         success(data: {bar: "bar"})
@@ -59,7 +34,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
     end
   end
 
-  let(:step) { ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step.new(step_service_class, in: :foo, out: out, container: organizer_service_class, organizer: organizer_service_instance) }
+  let(:step) { organizer_service_class.step_class.new(step_service_class, in: :foo, out: out, container: organizer_service_class, organizer: organizer_service_instance) }
   let(:container) { ConvenientService::Service::Plugins::CanHaveSteps::Entities::Service.cast(organizer_service_class) }
   let(:method) { ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method.cast(out, direction: :output) }
   let(:index) { 0 }

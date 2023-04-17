@@ -60,10 +60,6 @@ module ConvenientService
                   outputs.any? { |output| output.reassignment?(name) }
                 end
 
-                def completed?
-                  Utils::Bool.to_bool(@completed)
-                end
-
                 def reassignment(name)
                   outputs.find { |output| output.reassignment?(name) }
                 end
@@ -169,10 +165,6 @@ module ConvenientService
                   return if has_organizer?
 
                   raise Errors::StepHasNoOrganizer.new(step: self)
-                end
-
-                def mark_as_completed!
-                  @completed = true
                 end
               end
             end

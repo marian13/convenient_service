@@ -377,6 +377,7 @@ RSpec.describe ConvenientService::Configs::Minimal do
             let(:concerns) do
               [
                 ConvenientService::Common::Plugins::HasInternals::Concern,
+                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeCompleted::Concern,
                 ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::HasInspect::Concern
               ]
             end

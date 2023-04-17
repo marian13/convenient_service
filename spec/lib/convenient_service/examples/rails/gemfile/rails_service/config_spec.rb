@@ -422,6 +422,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::RailsService::Config
             let(:concerns) do
               [
                 ConvenientService::Common::Plugins::HasInternals::Concern,
+                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeCompleted::Concern,
                 ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::HasInspect::Concern
               ]
             end
