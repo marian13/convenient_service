@@ -438,10 +438,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
             .with_arguments(**step.input_values)
             .and_return_its_value
         end
-
-        it "marks `step` as complete" do
-          expect { step.original_result }.to change(step, :completed?).from(false).to(true)
-        end
       end
     end
 
@@ -470,10 +466,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
             .to delegate_to(step.original_result, :copy)
             .with_arguments(overrides: {kwargs: {step: step, service: organizer}})
             .and_return_its_value
-        end
-
-        it "marks `step` as complete" do
-          expect { step.result }.to change(step, :completed?).from(false).to(true)
         end
       end
     end

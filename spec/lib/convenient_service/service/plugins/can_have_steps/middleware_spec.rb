@@ -92,6 +92,10 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Middleware do
           expect(method_value.object_id).not_to eq(ConvenientService::Utils::Array.find_last(service_instance.steps, &:completed?).result.object_id)
         end
 
+        it "marks all steps up to intermediate step as completed" do
+          expect { method_value }.to change { service_instance.steps.any?(&:not_completed?) && service_instance.steps.any?(&:completed?) }.from(false).to(true)
+        end
+
         it "does NOT evaluate results of following steps" do
           allow(second_step).to receive(:new).and_call_original
 
@@ -173,6 +177,10 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Middleware do
 
         it "copies result of last step" do
           expect(method_value.object_id).not_to eq(service_instance.steps.last.result.object_id)
+        end
+
+        it "marks all steps up to last step as completed" do
+          expect { method_value }.to change { service_instance.steps.all?(&:completed?) }.from(false).to(true)
         end
 
         it "calls `step` method for intermediate step" do

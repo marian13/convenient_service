@@ -82,7 +82,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
             ##
             # NOTE: Completes the step.
             #
-            step.result
+            step.mark_as_completed!
           end
 
           context "when step service result data has NO data attribute by key" do

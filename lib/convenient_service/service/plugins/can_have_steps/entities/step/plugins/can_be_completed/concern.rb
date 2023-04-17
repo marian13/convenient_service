@@ -20,6 +20,13 @@ module ConvenientService
                     end
 
                     ##
+                    # @return [Bool]
+                    #
+                    def not_completed?
+                      !completed?
+                    end
+
+                    ##
                     # @return [void]
                     #
                     def mark_as_completed!

@@ -84,6 +84,38 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       end
     end
 
+    describe "#not_completed?" do
+      specify do
+        expect { step_instance.not_completed? }
+          .to delegate_to(step_instance.internals.cache, :read)
+          .with_arguments(:completed)
+      end
+
+      ##
+      # TODO: Create copies for all utils used inside matchers.
+      #
+      # specify do
+      #   expect { step_instance.not_completed? }
+      #     .to delegate_to(ConvenientService::Utils::Bool, :to_bool)
+      #     .with_arguments(step_instance.internals.cache[:completed])
+      #     .and_return_its_value
+      # end
+
+      context "when `step` is NOT completed" do
+        it "returns `true`" do
+          expect(step_instance.not_completed?).to eq(true)
+        end
+      end
+
+      context "when `step` is completed" do
+        it "returns `false`" do
+          step_instance.mark_as_completed!
+
+          expect(step_instance.not_completed?).to eq(false)
+        end
+      end
+    end
+
     describe "#mark_as_completed" do
       specify do
         expect { step_instance.mark_as_completed! }

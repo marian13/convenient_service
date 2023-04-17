@@ -101,6 +101,13 @@ module ConvenientService
                   service.klass
                 end
 
+                ##
+                # @return [void]
+                #
+                def trigger_callback
+                  organizer.step(index)
+                end
+
                 def validate!
                   inputs.each { |input| input.validate_as_input_for_container!(container) }
 
@@ -144,11 +151,7 @@ module ConvenientService
                 def calculate_original_result
                   assert_has_organizer!
 
-                  result = service.result(**input_values)
-
-                  mark_as_completed!
-
-                  result
+                  service.result(**input_values)
                 end
 
                 def calculate_result
