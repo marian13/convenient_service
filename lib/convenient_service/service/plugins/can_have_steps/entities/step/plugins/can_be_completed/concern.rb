@@ -16,14 +16,14 @@ module ConvenientService
                     # @return [Bool]
                     #
                     def completed?
-                      Utils::Bool.to_bool(@completed)
+                      Utils::Bool.to_bool(internals.cache[:completed])
                     end
 
                     ##
                     # @return [void]
                     #
                     def mark_as_completed!
-                      @completed = true
+                      internals.cache[:completed] = true
                     end
                   end
                 end

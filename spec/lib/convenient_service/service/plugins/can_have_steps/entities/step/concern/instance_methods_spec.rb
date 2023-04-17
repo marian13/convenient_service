@@ -323,22 +323,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       end
     end
 
-    describe "#completed?" do
-      context "when `step` is NOT completed" do
-        it "returns `false`" do
-          expect(step.completed?).to eq(false)
-        end
-      end
-
-      context "when `step` is completed" do
-        it "returns `true`" do
-          step.result
-
-          expect(step.completed?).to eq(true)
-        end
-      end
-    end
-
     describe "#reassignment" do
       let(:name) { :bar }
 
