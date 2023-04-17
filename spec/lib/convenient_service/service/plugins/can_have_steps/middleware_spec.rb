@@ -4,8 +4,10 @@ require "spec_helper"
 
 require "convenient_service"
 
-# rubocop:disable RSpec/NestedGroups
+# rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Middleware do
+  include ConvenientService::RSpec::Helpers::IgnoringError
+
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   example_group "inheritance" do
@@ -92,45 +94,46 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Middleware do
           expect(method_value.object_id).not_to eq(ConvenientService::Utils::Array.find_last(service_instance.steps, &:completed?).result.object_id)
         end
 
-        it "marks all steps up to intermediate step as completed" do
-          expect { method_value }.to change { service_instance.steps.any?(&:not_completed?) && service_instance.steps.any?(&:completed?) }.from(false).to(true)
-        end
-
         it "does NOT evaluate results of following steps" do
-          allow(second_step).to receive(:new).and_call_original
-
-          method_value
-
-          expect(second_step).not_to have_received(:new)
+          expect { method_value }.not_to delegate_to(second_step, :new)
         end
 
-        it "calls `step` method for NOT successful intermediate step" do
+        it "marks intermediate step as completed" do
+          expect { method_value }.to change(service_instance.steps[0], :completed?).from(false).to(true)
+        end
+
+        it "triggers callback for intermediate step" do
           expect { method_value }
-            .to delegate_to(service_instance, :step)
-            .with_arguments(0)
+            .to delegate_to(service_instance.steps[0], :trigger_callback)
+            .without_arguments
         end
 
-        it "does NOT call step for following steps" do
+        it "does NOT mark following steps as completed" do
+          expect { method_value }.not_to change(service_instance.steps[1], :completed?).from(false)
+        end
+
+        it "does NOT trigger callback for following steps" do
           expect { method_value }
-            .not_to delegate_to(service_instance, :step)
-            .with_arguments(1)
+            .not_to delegate_to(service_instance.steps[1], :trigger_callback)
+            .without_arguments
         end
 
-        it "calls `step` method for intermediate step after checking status" do
-          method_value
+        example_group "order of side effects" do
+          let(:exception) { Class.new(StandardError) }
 
-          ##
-          # NOTE: Using specific error in `not_to raise_error` may lead to false positives.
-          # - https://stackoverflow.com/questions/44515447/best-practices-for-rspec-expect-raise-error
-          # - https://github.com/rspec/rspec-expectations/issues/231
-          #
-          expect { service_instance.steps[0].data }.not_to raise_error
-        end
+          before do
+            allow(service_instance.steps[0]).to receive(:not_success?).and_raise(exception)
+          end
 
-        it "does NOT call `step` method for last step after checking status" do
-          method_value
+          it "does NOT mark intermediate step as completed before checking status" do
+            expect { ignoring_error(exception) { method_value } }.not_to change(service_instance.steps[0], :completed?).from(false)
+          end
 
-          expect { service_instance.steps[1].data }.to raise_error(ConvenientService::Error)
+          it "does NOT trigger callback for intermediate step before checking status" do
+            expect { ignoring_error(exception) { method_value } }
+              .not_to delegate_to(service_instance.steps[0], :trigger_callback)
+              .without_arguments
+          end
         end
       end
 
@@ -179,45 +182,56 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Middleware do
           expect(method_value.object_id).not_to eq(service_instance.steps.last.result.object_id)
         end
 
-        it "marks all steps up to last step as completed" do
-          expect { method_value }.to change { service_instance.steps.all?(&:completed?) }.from(false).to(true)
+        it "marks intermediate step as completed" do
+          expect { method_value }.to change(service_instance.steps[0], :completed?).from(false).to(true)
         end
 
-        it "calls `step` method for intermediate step" do
+        it "triggers callback for intermediate step" do
           expect { method_value }
-            .to delegate_to(service_instance, :step)
-            .with_arguments(0)
+            .to delegate_to(service_instance.steps[0], :trigger_callback)
+            .without_arguments
         end
 
-        it "calls `step` method for last step" do
+        it "marks last step as completed" do
+          expect { method_value }.to change(service_instance.steps[1], :completed?).from(false).to(true)
+        end
+
+        it "triggers callback for last step" do
           expect { method_value }
-            .to delegate_to(service_instance, :step)
-            .with_arguments(1)
+            .to delegate_to(service_instance.steps[1], :trigger_callback)
+            .without_arguments
         end
 
-        it "calls `step` method for intermediate step after checking status" do
-          method_value
+        example_group "order of side effects" do
+          let(:exception) { Class.new(StandardError) }
 
-          ##
-          # NOTE: Using specific error in `not_to raise_error` may lead to false positives.
-          # - https://stackoverflow.com/questions/44515447/best-practices-for-rspec-expect-raise-error
-          # - https://github.com/rspec/rspec-expectations/issues/231
-          #
-          expect { service_instance.steps[0].data }.not_to raise_error
-        end
+          before do
+            allow(service_instance.steps[0]).to receive(:not_success?).and_raise(exception)
+            allow(service_instance.steps[1]).to receive(:not_success?).and_raise(exception)
+          end
 
-        it "calls `step` method for last step after checking status" do
-          method_value
+          it "does NOT mark intermediate step as completed before checking status" do
+            expect { ignoring_error(exception) { method_value } }.not_to change(service_instance.steps[0], :completed?).from(false)
+          end
 
-          ##
-          # NOTE: Using specific error in `not_to raise_error` may lead to false positives.
-          # - https://stackoverflow.com/questions/44515447/best-practices-for-rspec-expect-raise-error
-          # - https://github.com/rspec/rspec-expectations/issues/231
-          #
-          expect { service_instance.steps[1].data }.not_to raise_error
+          it "does NOT trigger callback for intermediate step before checking status" do
+            expect { ignoring_error(exception) { method_value } }
+              .not_to delegate_to(service_instance.steps[0], :trigger_callback)
+              .without_arguments
+          end
+
+          it "does NOT mark last step as completed before checking status" do
+            expect { ignoring_error(exception) { method_value } }.not_to change(service_instance.steps[1], :completed?).from(false)
+          end
+
+          it "does NOT trigger callback for last step before checking status" do
+            expect { ignoring_error(exception) { method_value } }
+              .not_to delegate_to(service_instance.steps[1], :trigger_callback)
+              .without_arguments
+          end
         end
       end
     end
   end
 end
-# rubocop:enable RSpec/NestedGroups
+# rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers

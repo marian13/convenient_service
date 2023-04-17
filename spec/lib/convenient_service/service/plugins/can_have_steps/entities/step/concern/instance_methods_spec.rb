@@ -44,12 +44,14 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
   let(:organizer) { organizer_service_klass.new }
 
   let(:args) { [service] }
-  let(:kwargs) { {in: inputs, out: outputs, index: 0, container: container, organizer: organizer} }
+  let(:kwargs) { {in: inputs, out: outputs, index: index, container: container, organizer: organizer} }
 
   let(:step_class) { organizer_service_klass.step_class }
 
   let(:step_instance) { step_class.new(*args, **kwargs) }
   let(:step) { step_instance }
+
+  let(:index) { 0 }
 
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
@@ -352,6 +354,14 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       end
     end
 
+    describe "#trigger_callback" do
+      specify do
+        expect { step.trigger_callback }
+          .to delegate_to(step.organizer, :step)
+          .with_arguments(index)
+      end
+    end
+
     describe "#validate!" do
       specify do
         expect { step.validate! }
@@ -371,8 +381,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
     end
 
     describe "#define!" do
-      let(:index) { 0 }
-
       specify do
         expect { step.define! }
           .to delegate_to(step.outputs.first, :define_output_in_container!)
