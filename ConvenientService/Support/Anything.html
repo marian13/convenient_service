@@ -4,7 +4,7 @@
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>
-  Class: ConvenientService::Support::UniqueValue
+  Class: ConvenientService::Support::Anything
   
     &mdash; Documentation by YARD 0.9.34
   
@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="../../css/common.css" type="text/css" />
 
 <script type="text/javascript">
-  pathId = "ConvenientService::Support::UniqueValue";
+  pathId = "ConvenientService::Support::Anything";
   relpath = '../../';
 </script>
 
@@ -36,10 +36,10 @@
       <div id="header">
         <div id="menu">
   
-    <a href="../../_index.html">Index (U)</a> &raquo;
+    <a href="../../_index.html">Index (A)</a> &raquo;
     <span class='title'><span class='object_link'><a href="../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Support.html" title="ConvenientService::Support (module)">Support</a></span></span>
      &raquo; 
-    <span class="title">UniqueValue</span>
+    <span class="title">Anything</span>
   
 </div>
 
@@ -59,7 +59,7 @@
         <div class="clear"></div>
       </div>
 
-      <div id="content"><h1>Class: ConvenientService::Support::UniqueValue
+      <div id="content"><h1>Class: ConvenientService::Support::Anything
   
   
   
@@ -74,7 +74,7 @@
         <ul class="fullTree">
           <li>Object</li>
           
-            <li class="next">ConvenientService::Support::UniqueValue</li>
+            <li class="next">ConvenientService::Support::Anything</li>
           
         </ul>
         <a href="#" class="inheritanceTree">show all</a>
@@ -94,7 +94,7 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/convenient_service/support/unique_value.rb</dd>
+    <dd>lib/convenient_service/support/anything.rb</dd>
   </dl>
   
 </div>
@@ -311,7 +311,7 @@
 18</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/unique_value.rb', line 16</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/anything.rb', line 16</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_label'>label</span> <span class='op'>=</span> <span class='id identifier rubyid_default_label'>default_label</span><span class='rparen'>)</span>
   <span class='ivar'>@label</span> <span class='op'>=</span> <span class='id identifier rubyid_label'>label</span>
@@ -358,7 +358,7 @@
 12</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/unique_value.rb', line 10</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/anything.rb', line 10</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_label'>label</span>
   <span class='ivar'>@label</span>
@@ -431,19 +431,15 @@
       <pre class="lines">
 
 
-27
-28
-29
-30
-31</pre>
+24
+25
+26</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/unique_value.rb', line 27</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/anything.rb', line 24</span>
 
 <span class='kw'>def</span> <span class='op'>==</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
-  <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='rparen'>)</span>
-
-  <span class='id identifier rubyid_object_id'>object_id</span> <span class='op'>==</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_object_id'>object_id</span>
+  <span class='kw'>true</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -506,12 +502,12 @@
       <pre class="lines">
 
 
-37
-38
-39</pre>
+32
+33
+34</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/unique_value.rb', line 37</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/anything.rb', line 32</span>
 
 <span class='kw'>def</span> <span class='op'>===</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
   <span class='kw'>self</span> <span class='op'>==</span> <span class='id identifier rubyid_other'>other</span>
@@ -577,12 +573,12 @@
       <pre class="lines">
 
 
-45
-46
-47</pre>
+40
+41
+42</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/unique_value.rb', line 45</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/anything.rb', line 40</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_eql?'>eql?</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
   <span class='kw'>self</span> <span class='op'>==</span> <span class='id identifier rubyid_other'>other</span>
@@ -629,15 +625,15 @@
       <pre class="lines">
 
 
-52
-53
-54
-55
-56
-57</pre>
+47
+48
+49
+50
+51
+52</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/unique_value.rb', line 52</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/anything.rb', line 47</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_inspect'>inspect</span>
   <span class='kw'>return</span> <span class='id identifier rubyid_default_label'>default_label</span> <span class='kw'>if</span> <span class='id identifier rubyid_label'>label</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
@@ -655,7 +651,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Apr 17 22:02:40 2023 by
+  Generated on Mon Apr 17 22:02:39 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>
