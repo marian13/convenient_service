@@ -106,11 +106,9 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
             end
 
             specify do
-              ignoring_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Errors::NotExistingStepResultDataAttribute) do
-                expect { organizer_service_instance.bar }
-                  .to delegate_to(step.result.unsafe_data, :has_attribute?)
-                  .with_arguments(method.key.to_sym)
-              end
+              expect { ignoring_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Errors::NotExistingStepResultDataAttribute) { organizer_service_instance.bar } }
+                .to delegate_to(step.result.unsafe_data, :has_attribute?)
+                .with_arguments(method.key.to_sym)
             end
           end
 
