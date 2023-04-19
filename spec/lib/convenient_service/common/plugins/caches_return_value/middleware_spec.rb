@@ -14,6 +14,20 @@ RSpec.describe ConvenientService::Common::Plugins::CachesReturnValue::Middleware
     it { is_expected.to be_descendant_of(ConvenientService::MethodChainMiddleware) }
   end
 
+  example_group "class methods" do
+    describe ".intended_methods" do
+      let(:spec) do
+        Class.new(ConvenientService::MethodChainMiddleware) do
+          intended_for any_method, scope: any_scope
+        end
+      end
+
+      it "returns intended methods" do
+        expect(described_class.intended_methods).to eq(spec.intended_methods)
+      end
+    end
+  end
+
   example_group "instance methods" do
     describe "#call" do
       include ConvenientService::RSpec::Helpers::WrapMethod
