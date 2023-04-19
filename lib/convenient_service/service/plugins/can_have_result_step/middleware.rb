@@ -5,7 +5,7 @@ module ConvenientService
     module Plugins
       module CanHaveResultStep
         class Middleware < MethodChainMiddleware
-          intented_for :step, scope: :class
+          intended_for :step, scope: :class
 
           ##
           # @param args [Array<Object>]
