@@ -2,7 +2,7 @@
 
 module ConvenientService
   module Support
-    class Middleware
+    module Middleware
       ##
       # @internal
       #   TODO: Contribute.
