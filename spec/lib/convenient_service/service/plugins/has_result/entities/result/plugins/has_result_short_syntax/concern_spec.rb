@@ -86,5 +86,23 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
           .and_return_its_value
       end
     end
+
+    describe "#ok?" do
+      specify do
+        expect { result.ok? }
+          .to delegate_to(result, :success?)
+          .without_arguments
+          .and_return_its_value
+      end
+    end
+
+    describe "#not_ok?" do
+      specify do
+        expect { result.not_ok? }
+          .to delegate_to(result, :not_success?)
+          .without_arguments
+          .and_return_its_value
+      end
+    end
   end
 end

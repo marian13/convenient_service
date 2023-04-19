@@ -50,6 +50,20 @@ module ConvenientService
                     def uc
                       unsafe_code
                     end
+
+                    ##
+                    # @return [Boolean]
+                    #
+                    def ok?
+                      success?
+                    end
+
+                    ##
+                    # @return [Boolean]
+                    #
+                    def not_ok?
+                      not_success?
+                    end
                   end
                 end
               end
