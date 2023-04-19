@@ -75,8 +75,6 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
   #   it { is_expected.to delegate_method(:not_success?).to(:status) }
   #   it { is_expected.to delegate_method(:not_failure?).to(:status) }
   #   it { is_expected.to delegate_method(:not_error?).to(:status) }
-  #   it { is_expected.to delegate_method(:ok?).to(:status) }
-  #   it { is_expected.to delegate_method(:not_ok?).to(:status) }
   # end
 
   example_group "instance methods" do

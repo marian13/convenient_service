@@ -110,10 +110,6 @@ module ConvenientService
             use Plugins::Common::NormalizesEnv::Middleware
           end
 
-          middlewares :ok? do
-            use Plugins::Common::NormalizesEnv::Middleware
-          end
-
           middlewares :failure? do
             use Plugins::Common::NormalizesEnv::Middleware
           end
@@ -123,10 +119,6 @@ module ConvenientService
           end
 
           middlewares :not_success? do
-            use Plugins::Common::NormalizesEnv::Middleware
-          end
-
-          middlewares :not_ok? do
             use Plugins::Common::NormalizesEnv::Middleware
           end
 

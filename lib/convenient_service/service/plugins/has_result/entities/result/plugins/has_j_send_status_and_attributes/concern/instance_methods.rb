@@ -21,8 +21,6 @@ module ConvenientService
                     #
                     delegate :success?, to: :status
 
-                    delegate :ok?, to: :status
-
                     ##
                     # @return [Boolean]
                     #
@@ -37,8 +35,6 @@ module ConvenientService
                     # @return [Boolean]
                     #
                     delegate :not_success?, to: :status
-
-                    delegate :not_ok?, to: :status
 
                     ##
                     # @return [Boolean]

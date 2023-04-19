@@ -90,10 +90,6 @@ module ConvenientService
             use Plugins::Result::MarksResultStatusAsChecked::Middleware
           end
 
-          middlewares :ok? do
-            use Plugins::Result::MarksResultStatusAsChecked::Middleware
-          end
-
           middlewares :failure? do
             use Plugins::Result::MarksResultStatusAsChecked::Middleware
           end
@@ -103,10 +99,6 @@ module ConvenientService
           end
 
           middlewares :not_success? do
-            use Plugins::Result::MarksResultStatusAsChecked::Middleware
-          end
-
-          middlewares :not_ok? do
             use Plugins::Result::MarksResultStatusAsChecked::Middleware
           end
 

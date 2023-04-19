@@ -75,15 +75,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       end
     end
 
-    describe "#ok?" do
-      specify do
-        expect { step.ok? }
-          .to delegate_to(step.result, :ok?)
-          .without_arguments
-          .and_return_its_value
-      end
-    end
-
     describe "#failure?" do
       specify do
         expect { step.failure? }
@@ -106,15 +97,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       specify do
         expect { step.not_success? }
           .to delegate_to(step.result, :not_success?)
-          .without_arguments
-          .and_return_its_value
-      end
-    end
-
-    describe "#not_ok?" do
-      specify do
-        expect { step.not_ok? }
-          .to delegate_to(step.result, :not_ok?)
           .without_arguments
           .and_return_its_value
       end

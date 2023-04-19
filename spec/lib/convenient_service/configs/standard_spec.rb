@@ -237,19 +237,6 @@ RSpec.describe ConvenientService::Configs::Standard do
             end
           end
 
-          example_group "#ok? middlewares" do
-            let(:is_ok_middlewares) do
-              [
-                ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::MarksResultStatusAsChecked::Middleware
-              ]
-            end
-
-            it "sets service result middlewares for `#ok?`" do
-              expect(service_class::Result.middlewares(:ok?).to_a).to eq(is_ok_middlewares)
-            end
-          end
-
           example_group "#failure? middlewares" do
             let(:is_failure_middlewares) do
               [
@@ -286,19 +273,6 @@ RSpec.describe ConvenientService::Configs::Standard do
 
             it "sets service result middlewares for `#not_success?`" do
               expect(service_class::Result.middlewares(:not_success?).to_a).to eq(is_not_success_middlewares)
-            end
-          end
-
-          example_group "#not_ok? middlewares" do
-            let(:is_not_ok_middlewares) do
-              [
-                ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::MarksResultStatusAsChecked::Middleware
-              ]
-            end
-
-            it "sets service result middlewares for `#not_ok?`" do
-              expect(service_class::Result.middlewares(:not_ok?).to_a).to eq(is_not_ok_middlewares)
             end
           end
 
