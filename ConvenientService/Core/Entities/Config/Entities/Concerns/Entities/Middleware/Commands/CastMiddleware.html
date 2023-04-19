@@ -369,9 +369,9 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/concerns/entities/middleware/commands/cast_middleware.rb', line 30</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span>
-  <span class='kw'>if</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='const'>Class</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_other'>other</span> <span class='op'>&lt;</span> <span class='const'><span class='object_link'><a href="../../../Entities.html" title="ConvenientService::Core::Entities::Config::Entities::Concerns::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Middleware.html" title="ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Middleware (class)">Middleware</a></span></span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='op'>::</span><span class='const'>Class</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_other'>other</span> <span class='op'>&lt;</span> <span class='const'><span class='object_link'><a href="../../../Entities.html" title="ConvenientService::Core::Entities::Config::Entities::Concerns::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Middleware.html" title="ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Middleware (class)">Middleware</a></span></span>
     <span class='id identifier rubyid_cast_middleware'>cast_middleware</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
-  <span class='kw'>elsif</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='const'>Module</span><span class='rparen'>)</span>
+  <span class='kw'>elsif</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='op'>::</span><span class='const'>Module</span><span class='rparen'>)</span>
     <span class='id identifier rubyid_cast_module'>cast_module</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -385,7 +385,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Apr 17 22:05:20 2023 by
+  Generated on Wed Apr 19 16:47:08 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>
