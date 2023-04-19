@@ -19,7 +19,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
   let(:index) { 0 }
 
   let(:middleware) do
-    Class.new(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middleware) do
+    Class.new(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Chain) do
       def next(...)
         chain.next(...)
       end
@@ -27,7 +27,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
   end
 
   let(:other_middleware) do
-    Class.new(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middleware) do
+    Class.new(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Chain) do
       def next(...)
         chain.next(...)
       end

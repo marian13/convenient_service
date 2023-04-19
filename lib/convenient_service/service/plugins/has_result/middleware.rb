@@ -4,7 +4,7 @@ module ConvenientService
   module Service
     module Plugins
       module HasResult
-        class Middleware < Core::MethodChainMiddleware
+        class Middleware < MethodChainMiddleware
           def next(...)
             original_result = chain.next(...)
 

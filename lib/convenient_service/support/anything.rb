@@ -10,11 +10,18 @@ module ConvenientService
       attr_reader :label
 
       ##
+      # @!attribute [r] comparator
+      #   @return [Proc]
+      #
+      attr_reader :comparator
+
+      ##
       # @param label [String]
       # @return [void]
       #
-      def initialize(label = default_label)
+      def initialize(label = default_label, &comparator)
         @label = label
+        @comparator = comparator || match_everything
       end
 
       ##
@@ -22,7 +29,7 @@ module ConvenientService
       # @return [Boolean]
       #
       def ==(other)
-        true
+        comparator.call(other) || object_id == other.object_id
       end
 
       ##
@@ -58,6 +65,10 @@ module ConvenientService
       #
       def default_label
         "anything_#{object_id}"
+      end
+
+      def match_everything
+        proc { |_other| true }
       end
     end
   end

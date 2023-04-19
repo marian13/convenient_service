@@ -4,7 +4,7 @@ module ConvenientService
   module Common
     module Plugins
       module CachesReturnValue
-        class Middleware < Core::MethodChainMiddleware
+        class Middleware < MethodChainMiddleware
           ##
           # @param args [Array<Object>]
           # @param kwargs [Hash{Symbol => Object}]

@@ -15,7 +15,15 @@ RSpec.describe ConvenientService::Common::Plugins::AssignsAttributesInConstructo
 
     subject { described_class }
 
-    it { is_expected.to be_descendant_of(ConvenientService::Core::MethodChainMiddleware) }
+    it { is_expected.to be_descendant_of(ConvenientService::MethodChainMiddleware) }
+  end
+
+  example_group "class methods" do
+    describe ".intended_methods" do
+      it "returns intended methods" do
+        expect(described_class.intended_methods.map(&:to_h)).to eq([{method: :initialize, scope: :instance}])
+      end
+    end
   end
 
   example_group "instance methods" do

@@ -4,11 +4,19 @@ require "spec_helper"
 
 require "convenient_service"
 
-RSpec.describe ConvenientService::Core::Entities::ClassicMiddleware do
+RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Classic do
   let(:middleware) { described_class.new(stack) }
 
   let(:stack) { ConvenientService::Support::Middleware::StackBuilder.new }
   let(:env) { {foo: :bar} }
+
+  example_group "inheritance" do
+    include ConvenientService::RSpec::Matchers::BeDescendantOf
+
+    subject { described_class }
+
+    it { is_expected.to be_descendant_of(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Base) }
+  end
 
   example_group "instance methods" do
     describe "#call" do

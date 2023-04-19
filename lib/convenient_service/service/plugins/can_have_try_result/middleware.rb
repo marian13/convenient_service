@@ -4,7 +4,7 @@ module ConvenientService
   module Service
     module Plugins
       module CanHaveTryResult
-        class Middleware < Core::MethodChainMiddleware
+        class Middleware < MethodChainMiddleware
           include Support::DependencyContainer::Import
 
           import "commands.is_result?", from: Service::Plugins::HasResult::Container

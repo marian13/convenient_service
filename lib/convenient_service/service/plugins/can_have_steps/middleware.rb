@@ -4,7 +4,7 @@ module ConvenientService
   module Service
     module Plugins
       module CanHaveSteps
-        class Middleware < Core::MethodChainMiddleware
+        class Middleware < MethodChainMiddleware
           ##
           # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step]
           #

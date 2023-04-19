@@ -4,7 +4,7 @@ module ConvenientService
   module Common
     module Plugins
       module HasAroundCallbacks
-        class Middleware < Core::MethodChainMiddleware
+        class Middleware < MethodChainMiddleware
           include Support::DependencyContainer::Import
 
           import :"entities.Callback", from: Common::Plugins::HasCallbacks::Container

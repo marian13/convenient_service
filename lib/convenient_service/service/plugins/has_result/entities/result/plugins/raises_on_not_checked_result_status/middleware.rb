@@ -8,7 +8,7 @@ module ConvenientService
           class Result
             module Plugins
               module RaisesOnNotCheckedResultStatus
-                class Middleware < Core::MethodChainMiddleware
+                class Middleware < MethodChainMiddleware
                   def next(...)
                     assert_has_checked_status!
 

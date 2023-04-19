@@ -85,7 +85,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
                 include ConvenientService::Core
 
                 middlewares(:result, scope: :instance) do
-                  middleware = Class.new(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middleware) do
+                  middleware = Class.new(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Chain) do
                     def next(...)
                       [:middleware_value, *chain.next(...)]
                     end
@@ -107,7 +107,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
                 include ConvenientService::Core
 
                 middlewares(:result, scope: :instance) do
-                  middleware = Class.new(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middleware) do
+                  middleware = Class.new(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Chain) do
                     def next(...)
                       [:middleware_value, *chain.next(...)]
                     end
@@ -166,7 +166,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
                 include ConvenientService::Core
 
                 middlewares(:result, scope: :class) do
-                  middleware = Class.new(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middleware) do
+                  middleware = Class.new(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Chain) do
                     def next(...)
                       [:middleware_value, *chain.next(...)]
                     end
@@ -188,7 +188,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
                 include ConvenientService::Core
 
                 middlewares(:result, scope: :class) do
-                  middleware = Class.new(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middleware) do
+                  middleware = Class.new(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Chain) do
                     def next(...)
                       [:middleware_value, *chain.next(...)]
                     end

@@ -5,7 +5,7 @@ module ConvenientService
     module Plugins
       module HasResultShortSyntax
         module Success
-          class Middleware < Core::MethodChainMiddleware
+          class Middleware < MethodChainMiddleware
             def next(**kwargs)
               Commands::RefuteKwargsContainDataAndExtraKeys.call(kwargs: kwargs)
 

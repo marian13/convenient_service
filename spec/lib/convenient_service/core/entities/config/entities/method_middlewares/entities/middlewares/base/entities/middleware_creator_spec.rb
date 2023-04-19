@@ -5,11 +5,11 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::MiddlewareCreator do
+RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Base::Entities::MiddlewareCreator do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   let(:middleware_creator) { described_class.new(middleware: middleware, arguments: arguments) }
-  let(:middleware) { Class.new(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middleware) }
+  let(:middleware) { Class.new(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Chain) }
   let(:arguments) { ConvenientService::Support::Arguments.new(:foo, foo: :bar) { :foo } }
 
   example_group "attributes" do
@@ -55,7 +55,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
         end
 
         context "when `other` has different `middleware`" do
-          let(:other) { described_class.new(middleware: Class.new(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middleware), arguments: arguments) }
+          let(:other) { described_class.new(middleware: Class.new(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Chain), arguments: arguments) }
 
           it "returns `false`" do
             expect(middleware_creator == other).to eq(false)

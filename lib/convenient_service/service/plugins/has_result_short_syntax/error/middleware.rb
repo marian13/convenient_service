@@ -5,7 +5,7 @@ module ConvenientService
     module Plugins
       module HasResultShortSyntax
         module Error
-          class Middleware < Core::MethodChainMiddleware
+          class Middleware < MethodChainMiddleware
             def next(*args, **kwargs)
               Commands::AssertEitherArgsOrKwargsArePassed.call(args: args, kwargs: kwargs)
 

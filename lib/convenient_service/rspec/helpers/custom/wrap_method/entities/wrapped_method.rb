@@ -16,7 +16,7 @@ module ConvenientService
               ##
               # @param entity [Object, Class]
               # @param method [String]
-              # @param middlewares [Array<ConvenientService::Core::MethodChainMiddleware>]
+              # @param middlewares [Array<ConvenientService::MethodChainMiddleware>]
               # @return [void]
               #
               # @internal

@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middleware do
+RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Chain do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   let(:middleware_result) { middleware_instance.call(env) }
@@ -25,6 +25,14 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
   let(:args) { [:foo] }
   let(:kwargs) { {foo: :bar} }
   let(:block) { proc { :foo } }
+
+  example_group "inheritance" do
+    include ConvenientService::RSpec::Matchers::BeDescendantOf
+
+    subject { described_class }
+
+    it { is_expected.to be_descendant_of(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Base) }
+  end
 
   example_group "abstract methods" do
     include ConvenientService::RSpec::Matchers::HaveAbstractMethod
@@ -54,8 +62,8 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
     end
 
     describe ".with" do
-      it "returns instance of `ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::MiddlewareCreator`" do
-        expect(middleware_class.with(*args, **kwargs, &block)).to be_instance_of(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::MiddlewareCreator)
+      it "returns instance of `ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Base::Entities::MiddlewareCreator`" do
+        expect(middleware_class.with(*args, **kwargs, &block)).to be_instance_of(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Base::Entities::MiddlewareCreator)
       end
 
       example_group "`middleware_creator`" do
@@ -125,7 +133,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
 
     describe "#chain" do
       it "returns chain" do
-        expect(middleware_instance.chain).to eq(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Chain.new(stack: stack))
+        expect(middleware_instance.chain).to eq(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Chain::Entities::MethodChain.new(stack: stack))
       end
 
       specify { expect { middleware_instance.chain }.to cache_its_value }

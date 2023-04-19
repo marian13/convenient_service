@@ -11,7 +11,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultShortSyntax::Failur
 
     subject { described_class }
 
-    it { is_expected.to be_descendant_of(ConvenientService::Core::MethodChainMiddleware) }
+    it { is_expected.to be_descendant_of(ConvenientService::MethodChainMiddleware) }
   end
 
   example_group "instance methods" do

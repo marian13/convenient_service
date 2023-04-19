@@ -179,7 +179,7 @@ RSpec.describe ConvenientService::Core::Entities::Config do
 
       context "when `configuration_block` is passed" do
         let(:instance_method_middleware) do
-          Class.new(ConvenientService::Core::MethodChainMiddleware) do
+          Class.new(ConvenientService::MethodChainMiddleware) do
             def next(...)
               chain.next(...)
             end
@@ -187,7 +187,7 @@ RSpec.describe ConvenientService::Core::Entities::Config do
         end
 
         let(:class_method_middleware) do
-          Class.new(ConvenientService::Core::MethodChainMiddleware) do
+          Class.new(ConvenientService::MethodChainMiddleware) do
             def next(...)
               chain.next(...)
             end

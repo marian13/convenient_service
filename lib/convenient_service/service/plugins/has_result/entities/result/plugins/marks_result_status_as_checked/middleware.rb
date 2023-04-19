@@ -8,7 +8,7 @@ module ConvenientService
           class Result
             module Plugins
               module MarksResultStatusAsChecked
-                class Middleware < Core::MethodChainMiddleware
+                class Middleware < MethodChainMiddleware
                   def next(...)
                     entity.internals.cache[:has_checked_status] = true
 

@@ -8,7 +8,7 @@ module ConvenientService
           class Step
             module Plugins
               module CanHaveParentResult
-                class Middleware < Core::MethodChainMiddleware
+                class Middleware < MethodChainMiddleware
                   def next(...)
                     chain.next(...).copy(overrides: {kwargs: {parent: entity.original_result}})
                   end

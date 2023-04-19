@@ -36,7 +36,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
   let(:original_method) { proc { |env| service_instance.result(*env[:args], **env[:kwargs], &env[:block]) } }
 
   let(:middleware) do
-    Class.new(ConvenientService::Core::MethodChainMiddleware) do
+    Class.new(ConvenientService::MethodChainMiddleware) do
       def next(...)
         :middleware_value
       end
@@ -44,7 +44,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
   end
 
   let(:other_middleware) do
-    Class.new(ConvenientService::Core::MethodChainMiddleware) do
+    Class.new(ConvenientService::MethodChainMiddleware) do
       def next(...)
         :original_method_value
       end
@@ -191,7 +191,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
         #
         let(:configuration_block) do
           proc do
-            middleware = Class.new(ConvenientService::Core::MethodChainMiddleware) do
+            middleware = Class.new(ConvenientService::MethodChainMiddleware) do
               def next(...)
                 :middleware_value
               end
@@ -221,7 +221,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
 
       context "when `configuration_block` has one argument" do
         let(:middleware) do
-          Class.new(ConvenientService::Core::MethodChainMiddleware) do
+          Class.new(ConvenientService::MethodChainMiddleware) do
             def next(...)
               :middleware_value
             end
@@ -286,7 +286,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
       end
 
       let(:proxy_middleware) do
-        Class.new(ConvenientService::Core::MethodChainMiddleware) do
+        Class.new(ConvenientService::MethodChainMiddleware) do
           def next(...)
             [:proxy_middleware_value]
           end
@@ -294,7 +294,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
       end
 
       let(:decorator_middleware) do
-        Class.new(ConvenientService::Core::MethodChainMiddleware) do
+        Class.new(ConvenientService::MethodChainMiddleware) do
           def next(...)
             [:decorator_middleware_value, *chain.next(...)]
           end

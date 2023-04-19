@@ -4,7 +4,7 @@ module ConvenientService
   module Common
     module Plugins
       module HasCallbacks
-        class Middleware < Core::MethodChainMiddleware
+        class Middleware < MethodChainMiddleware
           def next(*args, **kwargs, &block)
             ##
             # class Service

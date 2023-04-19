@@ -4,7 +4,7 @@ module ConvenientService
   module Service
     module Plugins
       module RaisesOnDoubleResult
-        class Middleware < Core::MethodChainMiddleware
+        class Middleware < MethodChainMiddleware
           ##
           # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
           #

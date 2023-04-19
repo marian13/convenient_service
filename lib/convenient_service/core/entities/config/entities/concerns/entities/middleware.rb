@@ -24,6 +24,7 @@ module ConvenientService
                   ##
                   # @internal
                   #   TODO: Why regular `include Support::AbstractMethod` does NOT work?.
+                  #   NOTE: That is probably happening since the `included` block is evaluated once per hierarchy.
                   #
                   extend Support::AbstractMethod::ClassMethods
 
