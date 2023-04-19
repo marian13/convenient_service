@@ -5,6 +5,8 @@ module ConvenientService
     module DependencyContainer
       module Entities
         class Method
+          include Support::Copyable
+
           ##
           # @!attribute [r] slug
           #   @return [String, Symbol]
@@ -103,8 +105,18 @@ module ConvenientService
             return false if slug != other.slug
             return false if scope != other.scope
             return false if body != other.body
+            return false if alias_slug != other.alias_slug
 
             true
+          end
+
+          def to_kwargs
+            {
+              slug: slug,
+              scope: scope,
+              body: body,
+              alias_slug: alias_slug
+            }
           end
 
           private

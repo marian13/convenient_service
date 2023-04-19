@@ -9,7 +9,7 @@ module ConvenientService
         class_methods do
           ##
           # @param full_name [String, Symbol]
-          # @param as [String, Symbol]
+          # @param as [String, Symbol, nil]
           # @param from [Module]
           # @param scope [:instance, :class]
           # @param prepend [Boolean]
