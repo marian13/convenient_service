@@ -6,6 +6,8 @@ module ConvenientService
       module HasResultShortSyntax
         module Error
           class Middleware < MethodChainMiddleware
+            intended_for :error
+
             def next(*args, **kwargs)
               Commands::AssertEitherArgsOrKwargsArePassed.call(args: args, kwargs: kwargs)
 
