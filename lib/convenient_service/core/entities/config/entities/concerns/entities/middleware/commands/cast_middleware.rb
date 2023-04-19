@@ -28,9 +28,9 @@ module ConvenientService
                     # @return [ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Middleware, nil]
                     #
                     def call
-                      if other.instance_of?(Class) && other < Entities::Middleware
+                      if other.instance_of?(::Class) && other < Entities::Middleware
                         cast_middleware(other)
-                      elsif other.instance_of?(Module)
+                      elsif other.instance_of?(::Module)
                         cast_module(other)
                       end
                     end

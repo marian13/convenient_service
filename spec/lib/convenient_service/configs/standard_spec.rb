@@ -41,7 +41,8 @@ RSpec.describe ConvenientService::Configs::Standard do
               ConvenientService::Service::Plugins::HasResultShortSyntax::Concern,
               ConvenientService::Service::Plugins::HasResultStatusCheckShortSyntax::Concern,
               ConvenientService::Common::Plugins::HasCallbacks::Concern,
-              ConvenientService::Common::Plugins::HasAroundCallbacks::Concern
+              ConvenientService::Common::Plugins::HasAroundCallbacks::Concern,
+              ConvenientService::Service::Plugins::CanHaveTryResult::Concern
             ]
           end
 
@@ -78,6 +79,19 @@ RSpec.describe ConvenientService::Configs::Standard do
 
           it "sets service middlewares for `#result`" do
             expect(service_class.middlewares(:result).to_a).to eq(result_middlewares)
+          end
+        end
+
+        example_group "#try_result middlewares" do
+          let(:try_result_middlewares) do
+            [
+              ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
+              ConvenientService::Service::Plugins::CanHaveTryResult::Middleware
+            ]
+          end
+
+          it "sets service middlewares for `#try_result`" do
+            expect(service_class.middlewares(:try_result).to_a).to eq(try_result_middlewares)
           end
         end
 
@@ -427,6 +441,7 @@ RSpec.describe ConvenientService::Configs::Standard do
             let(:concerns) do
               [
                 ConvenientService::Common::Plugins::HasInternals::Concern,
+                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeCompleted::Concern,
                 ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::HasInspect::Concern
               ]
             end

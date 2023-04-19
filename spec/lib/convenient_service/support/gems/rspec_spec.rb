@@ -20,8 +20,8 @@ RSpec.describe ConvenientService::Support::Gems::RSpec do
       # NOTE: It tested by `test/lib/convenient_service/support/gems/rspec_test.rb`.
       #
       # context "when `RSpec` is NOT loaded" do
-      #   it "returns `true`" do
-      #     expect(described_class.loaded?).to eq(true)
+      #   it "returns `false`" do
+      #     expect(described_class.loaded?).to eq(false)
       #   end
       # end
     end

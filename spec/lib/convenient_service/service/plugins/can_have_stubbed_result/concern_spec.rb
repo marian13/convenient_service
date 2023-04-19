@@ -39,13 +39,13 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStubbedResult::Concer
         end
 
         it "returns empty cache" do
-          expect(service_class.stubbed_results).to eq(ConvenientService::Support::Cache.new)
+          expect(service_class.stubbed_results).to eq(ConvenientService::Support::Cache.create(backend: :thread_safe_array))
         end
       end
 
       context "when RSpec current example is set" do
         it "returns cache scoped by self" do
-          expect(service_class.stubbed_results).to eq(ConvenientService::Support::Cache.new.scope(service_class))
+          expect(service_class.stubbed_results).to eq(ConvenientService::Support::Cache.create(backend: :thread_safe_array).scope(service_class))
         end
 
         specify { expect { service_class.stubbed_results }.to cache_its_value }

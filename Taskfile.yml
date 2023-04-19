@@ -300,6 +300,10 @@ tasks:
       - task: rubocop
       - task: docs:lint
 
+  lint:autocorrect:
+    cmds:
+      - task: rubocop:autocorrect
+
   ##
   # TODO: Add to CI.
   #
@@ -456,7 +460,7 @@ tasks:
     cmds:
       - bundle exec rubocop --config .rubocop.yml {{.CLI_ARGS}}
 
-  rubocop:format:
+  rubocop:autocorrect:
     cmds:
       - bundle exec rubocop --config .rubocop.yml -A {{.CLI_ARGS}}
 

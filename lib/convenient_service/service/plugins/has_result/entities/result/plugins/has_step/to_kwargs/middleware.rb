@@ -9,7 +9,9 @@ module ConvenientService
             module Plugins
               module HasStep
                 module ToKwargs
-                  class Middleware < Core::MethodChainMiddleware
+                  class Middleware < MethodChainMiddleware
+                    intended_for :to_kwargs
+
                     def next(...)
                       chain.next(...).merge(step: entity.step)
                     end

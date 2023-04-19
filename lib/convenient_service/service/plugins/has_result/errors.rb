@@ -19,7 +19,7 @@ module ConvenientService
             def initialize(service:, result:)
               message = <<~TEXT
                 Return value of service `#{service.class}` is NOT a `Result`.
-                It is a `#{result.class}`.
+                It is `#{result.class}`.
 
                 Did you forget to call `success`, `failure`, or `error` from the `result` method?
               TEXT

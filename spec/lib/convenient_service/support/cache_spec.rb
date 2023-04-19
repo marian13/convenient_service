@@ -6,71 +6,63 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Support::Cache do
-  example_group "instance methods" do
-    let(:cache) { described_class.new }
+  example_group "class methods" do
+    describe ".create" do
+      let(:cache) { described_class.create(backend: backend) }
 
-    describe "#empty?" do
-      context "when cache has NO keys" do
-        before do
-          cache.clear
-        end
+      let(:backend) { ConvenientService::Support::Cache::Constants::Backends::HASH }
 
-        it "returns `true`" do
-          expect(cache.empty?).to eq(true)
-        end
-      end
+      context "when `backend` is NOT passed" do
+        let(:cache) { described_class.create }
 
-      context "when cache has at least one key" do
-        before do
-          cache[:foo] = :bar
-        end
-
-        it "returns `false`" do
-          expect(cache.empty?).to eq(false)
-        end
-      end
-    end
-
-    describe "#clear" do
-      context "when cache has NO keys" do
-        it "returns cache" do
-          expect(cache.clear).to eq(cache)
+        it "defaults `backend` to `:hash`" do
+          expect(cache).to be_instance_of(ConvenientService::Support::Cache::Entities::Caches::Hash)
         end
       end
 
-      context "when cache has any keys" do
-        before do
-          cache[:foo] = :bar
+      context "when `backend` is passed" do
+        context "when `backend` is NOT supported" do
+          let(:backend) { :not_supported_backend }
+
+          let(:error_message) do
+            <<~TEXT
+              Backend `#{backend}` is NOT supported.
+
+              Supported backends are `:array`, `:hash`, `:thread_safe_array`.
+            TEXT
+          end
+
+          it "raises `ConvenientService::Support::Cache::Errors::NotSupportedBackend`" do
+            expect { cache }
+              .to raise_error(ConvenientService::Support::Cache::Errors::NotSupportedBackend)
+              .with_message(error_message)
+          end
         end
 
-        it "returns cache" do
-          expect(cache.clear).to eq(cache)
-        end
+        context "when `backend` is supported" do
+          context "when `backend` is `:hash`" do
+            let(:backend) { ConvenientService::Support::Cache::Constants::Backends::HASH }
 
-        it "remove those keys from cache" do
-          expect { cache.clear }.to change(cache, :empty?).from(false).to(true)
-        end
-      end
-    end
+            it "creates hash-based cache" do
+              expect(cache).to be_instance_of(ConvenientService::Support::Cache::Entities::Caches::Hash)
+            end
+          end
 
-    describe "#scope" do
-      include ConvenientService::RSpec::Matchers::CacheItsValue
+          context "when `backend` is `:array`" do
+            let(:backend) { ConvenientService::Support::Cache::Constants::Backends::ARRAY }
 
-      it "returns sub cache" do
-        expect(cache.scope(:foo)).to eq(described_class.new)
-      end
+            it "creates array-based cache" do
+              expect(cache).to be_instance_of(ConvenientService::Support::Cache::Entities::Caches::Array)
+            end
+          end
 
-      specify do
-        expect { cache.scope(:foo) }.to cache_its_value
-      end
+          context "when `backend` is `:thread_safe_array`" do
+            let(:backend) { ConvenientService::Support::Cache::Constants::Backends::THREAD_SAFE_ARRAY }
 
-      context "when nested" do
-        it "returns sub cache" do
-          expect(cache.scope(:foo).scope(:bar)).to eq(described_class.new)
-        end
-
-        specify do
-          expect { cache.scope(:foo).scope(:bar) }.to cache_its_value
+            it "creates thread safe array-based cache" do
+              expect(cache).to be_instance_of(ConvenientService::Support::Cache::Entities::Caches::ThreadSafeArray)
+            end
+          end
         end
       end
     end

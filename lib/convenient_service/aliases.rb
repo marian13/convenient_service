@@ -9,8 +9,4 @@ module ConvenientService
   Command = ::ConvenientService::Support::Command
   Concern = ::ConvenientService::Support::Concern
   DependencyContainer = ::ConvenientService::Support::DependencyContainer
-
-  ClassicMiddleware = ::ConvenientService::Core::Entities::ClassicMiddleware
-  ConcernMiddleware = ::ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Middleware
-  MethodChainMiddleware = ::ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middleware
 end

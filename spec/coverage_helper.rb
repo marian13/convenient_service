@@ -34,26 +34,7 @@ return if ConvenientService::Support::Ruby.truffleruby?
 #
 # IMPORTANT: Why `convenient_service/version.rb` is ignored? See:
 # https://github.com/simplecov-ruby/simplecov/issues/557
-#
-
 ##
-# HACK: Fixes the following error for older Ruby versions.
-#
-#   Formatter SimpleCov::Formatter::LcovFormatter failed with NoMethodError: undefined method `branch_coverage?` for SimpleCov:Module
-#
-# https://github.com/fortissimo1997/simplecov-lcov/pull/25/files
-#
-# TODO: Remove when support for Rubies lower than 2.5 will be dropped.
-#
-if Gem::Version.new(RUBY_VERSION) < Gem::Version.new("2.5")
-  module SimpleCov
-    class << self
-      def branch_coverage?
-        false
-      end
-    end
-  end
-end
 
 require "simplecov"
 require "simplecov-lcov"
@@ -72,9 +53,14 @@ SimpleCov::Formatter::LcovFormatter.config do |config|
   appraisal_name = escape[ENV["APPRAISAL_NAME"].to_s.empty? ? "without_appraisal" : ENV["APPRAISAL_NAME"].to_s]
 
   ##
-  # NOTE: `ENV["RUBY_VERSION"]` is set in `env.rb`
+  # NOTE: `ENV["RUBY_VERSION"]` is set in `env.rb`.
   #
   ruby_version = escape[ENV["RUBY_VERSION"].to_s]
+
+  ##
+  # NOTE: There is also `minitest`.
+  #
+  test_framework = "rspec"
 
   ##
   # https://github.com/fortissimo1997/simplecov-lcov#output-report-as-single-file
@@ -84,7 +70,7 @@ SimpleCov::Formatter::LcovFormatter.config do |config|
   ##
   # https://github.com/fortissimo1997/simplecov-lcov#output-report-as-single-file
   #
-  config.single_report_path = File.join("coverage", ruby_version, appraisal_name, "lcov.info")
+  config.single_report_path = File.join("coverage", test_framework, ruby_version, appraisal_name, "lcov.info")
 end
 
 SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([

@@ -12,7 +12,7 @@ class ConvenientService::Support::Gems::RSpecTest < Minitest::Test
   context "class methods" do
     describe ".loaded?" do
       context "when `RSpec` is NOT loaded" do
-        should "returns `true`" do
+        should "returns `false`" do
           assert_equal(false, ConvenientService::Support::Gems::RSpec.loaded?)
         end
       end

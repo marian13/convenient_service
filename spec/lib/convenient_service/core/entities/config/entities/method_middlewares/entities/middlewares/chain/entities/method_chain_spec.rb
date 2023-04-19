@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Chain do
+RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Chain::Entities::MethodChain do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   let(:chain_result) { chain_instance.next(*args, **kwargs, &block) }

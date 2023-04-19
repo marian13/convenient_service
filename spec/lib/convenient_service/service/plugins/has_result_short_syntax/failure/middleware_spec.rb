@@ -11,7 +11,21 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultShortSyntax::Failur
 
     subject { described_class }
 
-    it { is_expected.to be_descendant_of(ConvenientService::Core::MethodChainMiddleware) }
+    it { is_expected.to be_descendant_of(ConvenientService::MethodChainMiddleware) }
+  end
+
+  example_group "class methods" do
+    describe ".intended_methods" do
+      let(:spec) do
+        Class.new(ConvenientService::MethodChainMiddleware) do
+          intended_for :failure
+        end
+      end
+
+      it "returns intended methods" do
+        expect(described_class.intended_methods).to eq(spec.intended_methods)
+      end
+    end
   end
 
   example_group "instance methods" do
