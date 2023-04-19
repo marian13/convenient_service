@@ -32,6 +32,7 @@ module ConvenientService
                       #
                       # @internal
                       #   TODO: Wrap with `WeakRef` to reduce memory consumption.
+                      #   TODO: Direct specs.
                       #
                       def intended_methods
                         @intended_methods ||= []
@@ -44,6 +45,9 @@ module ConvenientService
                       # @param scope [Symbol]
                       # @return [Array<ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Structs::IntendedMethod>]
                       #
+                      # @internal
+                      #   TODO: Direct specs.
+                      #
                       def intended_for(method, scope: :instance)
                         intended_methods << Structs::IntendedMethod.new(method, scope)
                       end
@@ -51,12 +55,18 @@ module ConvenientService
                       ##
                       # @return [ConvenientService::Support::Anything]
                       #
+                      # @internal
+                      #   TODO: Direct specs.
+                      #
                       def any_method
                         Constants::ANY_METHOD
                       end
 
                       ##
                       # @return [ConvenientService::Support::Anything]
+                      #
+                      # @internal
+                      #   TODO: Direct specs.
                       #
                       def any_scope
                         Constants::ANY_SCOPE
