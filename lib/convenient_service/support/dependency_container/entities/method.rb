@@ -47,21 +47,14 @@ module ConvenientService
           # @return [String]
           #
           def name
-            @name ||= alias_slug_parts.last || slug_parts.last
-          end
-
-          ##
-          # @return [Array<String>]
-          #
-          def alias_or_slug_parts
-            @alias_or_slug_parts ||= alias_slug_parts.empty? ? slug_parts : alias_slug_parts
+            @name ||= slug_parts.last
           end
 
           ##
           # @return [Array<ConvenientService::Support::DependencyContainer::Entities::Namespace>]
           #
           def namespaces
-            @namespaces ||= alias_or_slug_parts.slice(0..-2).map { |part| Entities::Namespace.new(name: part) }
+            @namespaces ||= slug_parts.slice(0..-2).map { |part| Entities::Namespace.new(name: part) }
           end
 
           ##
@@ -107,7 +100,7 @@ module ConvenientService
           def ==(other)
             return unless other.instance_of?(self.class)
 
-            return false if full_name != other.full_name
+            return false if slug != other.slug
             return false if scope != other.scope
             return false if body != other.body
 
@@ -120,14 +113,14 @@ module ConvenientService
           # @return [Array<String>]
           #
           def slug_parts
-            @slug_parts ||= Utils::String.split(slug, ".", "::").map(&:to_sym)
+            @slug_parts ||= Utils::String.split(slug_to_split, ".", "::").map(&:to_sym)
           end
 
           ##
-          # @return [Array<String>]
+          # @return [String, Symbol]
           #
-          def alias_slug_parts
-            @alias_slug_parts ||= Utils::String.split(alias_slug, ".", "::").map(&:to_sym)
+          def slug_to_split
+            alias_slug || slug
           end
         end
       end
