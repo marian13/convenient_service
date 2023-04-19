@@ -27,50 +27,6 @@ module ConvenientService
                       #
                       abstract_method :call
 
-                      class << self
-                        ##
-                        # @return [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::MiddlewareCreator]
-                        #
-                        def with(...)
-                          Entities::MiddlewareCreator.new(middleware: self, arguments: Support::Arguments.new(...))
-                        end
-
-                        private
-
-                        ##
-                        # @param method [Symbol]
-                        # @param scope [Symbol]
-                        # @return [Array<ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Structs::IntendedMethod>]
-                        #
-                        def intended_for(method, scope: :instance)
-                          intended_methods << Structs::IntendedMethod.new(method, scope)
-                        end
-
-                        ##
-                        # @return [Array<ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Structs::IntendedMethod>]
-                        #
-                        # @internal
-                        #   TODO: Wrap with `WeakRef` to reduce memory consumption.
-                        #
-                        def intended_methods
-                          @intended_methods ||= []
-                        end
-
-                        ##
-                        # @return [ConvenientService::Support::Anything]
-                        #
-                        def any_method
-                          Constants::ANY_METHOD
-                        end
-
-                        ##
-                        # @return [ConvenientService::Support::Anything]
-                        #
-                        def any_scope
-                          Constants::ANY_SCOPE
-                        end
-                      end
-
                       ##
                       # @param stack [#call<Hash>]
                       # @return [void]

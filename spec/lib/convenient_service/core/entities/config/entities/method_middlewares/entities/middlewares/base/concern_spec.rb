@@ -26,7 +26,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
       end
 
       it { is_expected.to include_module(described_class::InstanceMethods) }
-      it { is_expected.to include_module(described_class::ClassMethods) }
+      it { is_expected.to extend_module(described_class::ClassMethods) }
     end
   end
 end
