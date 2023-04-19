@@ -6,7 +6,8 @@ module ConvenientService
       module HasAroundCallbacks
         class Middleware < MethodChainMiddleware
           ##
-          # TODO: Move to command.
+          # @internal
+          #   TODO: Move to command.
           #
           include Support::DependencyContainer::Import
 
