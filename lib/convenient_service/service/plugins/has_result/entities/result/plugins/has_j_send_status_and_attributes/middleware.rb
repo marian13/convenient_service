@@ -9,6 +9,8 @@ module ConvenientService
             module Plugins
               module HasJSendStatusAndAttributes
                 class Middleware < MethodChainMiddleware
+                  intended_for :initialize
+
                   ##
                   # @param args [Array<Object>]
                   # @param kwargs [Hash{Symbol => Object}]
