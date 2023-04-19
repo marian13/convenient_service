@@ -27,7 +27,7 @@ RSpec.describe ConvenientService::Common::Plugins::AssignsAttributesInConstructo
       end
 
       it "returns intended methods" do
-        expect(described_class.intended_methods).to eq(spec.indended_methods)
+        expect(described_class.intended_methods).to eq(spec.intended_methods)
       end
     end
   end
