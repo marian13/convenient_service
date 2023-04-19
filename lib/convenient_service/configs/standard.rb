@@ -74,7 +74,7 @@ module ConvenientService
 
         class self::Result
           concerns do
-            use Plugins::Common::HasResultShortSyntax::Concern
+            use Plugins::Common::HasResultDuckShortSyntax::Concern
             use Plugins::Result::CanRecalculateResult::Concern
 
             use Plugins::Result::HasStep::Concern
@@ -130,7 +130,7 @@ module ConvenientService
 
         class self::Step
           concerns do
-            use Plugins::Common::HasResultShortSyntax::Concern
+            use Plugins::Common::HasResultDuckShortSyntax::Concern
           end
 
           middlewares :calculate_result do

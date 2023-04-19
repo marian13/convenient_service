@@ -3,7 +3,7 @@
 module ConvenientService
   module Common
     module Plugins
-      module HasResultShortSyntax
+      module HasResultDuckShortSyntax
         module Concern
           include Support::Concern
 
