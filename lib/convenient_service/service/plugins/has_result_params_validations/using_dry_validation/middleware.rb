@@ -6,6 +6,8 @@ module ConvenientService
       module HasResultParamsValidations
         module UsingDryValidation
           class Middleware < MethodChainMiddleware
+            intended_for :result
+
             def next(...)
               return entity.failure(data: errors) if errors.any?
 
