@@ -9,6 +9,10 @@ module ConvenientService
             module Plugins
               module RaisesOnNotCheckedResultStatus
                 class Middleware < MethodChainMiddleware
+                  intended_for :data
+                  intended_for :message
+                  intended_for :code
+
                   def next(...)
                     assert_has_checked_status!
 
