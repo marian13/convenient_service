@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require_relative "support/anything"
 require_relative "support/unique_value"
 
 require_relative "support/not_passed"
