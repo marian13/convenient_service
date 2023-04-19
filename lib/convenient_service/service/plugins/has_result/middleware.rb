@@ -5,6 +5,8 @@ module ConvenientService
     module Plugins
       module HasResult
         class Middleware < MethodChainMiddleware
+          intended_for :result
+
           def next(...)
             original_result = chain.next(...)
 
