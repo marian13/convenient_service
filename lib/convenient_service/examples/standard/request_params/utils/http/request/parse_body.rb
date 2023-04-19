@@ -10,7 +10,7 @@ module ConvenientService
               ##
               # TODO: Specs.
               #
-              class ParseBody < Support::Command
+              class ParseBody < ConvenientService::Command
                 attr_reader :http_string
 
                 def initialize(http_string:)

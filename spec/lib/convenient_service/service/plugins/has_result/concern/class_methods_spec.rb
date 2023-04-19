@@ -53,6 +53,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern::ClassMet
   end
 
   let(:service_instance) { service_class.new(*args, **kwargs, &block) }
+
   let(:args) { [:foo] }
   let(:kwargs) { {foo: :bar} }
   let(:block) { proc { :foo } }

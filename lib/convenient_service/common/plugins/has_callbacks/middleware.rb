@@ -4,7 +4,13 @@ module ConvenientService
   module Common
     module Plugins
       module HasCallbacks
-        class Middleware < Core::MethodChainMiddleware
+        class Middleware < MethodChainMiddleware
+          intended_for any_method, scope: any_scope
+
+          ##
+          # @internal
+          #   TODO: Move to command.
+          #
           def next(*args, **kwargs, &block)
             ##
             # class Service

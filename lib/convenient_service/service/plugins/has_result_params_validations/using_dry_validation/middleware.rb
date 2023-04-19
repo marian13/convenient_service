@@ -5,7 +5,7 @@ module ConvenientService
     module Plugins
       module HasResultParamsValidations
         module UsingDryValidation
-          class Middleware < Core::MethodChainMiddleware
+          class Middleware < MethodChainMiddleware
             def next(...)
               return entity.failure(data: errors) if errors.any?
 

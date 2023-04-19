@@ -29,6 +29,8 @@ module ConvenientService
 
           use Plugins::Common::HasCallbacks::Concern
           use Plugins::Common::HasAroundCallbacks::Concern
+
+          use Plugins::Service::CanHaveTryResult::Concern
         end
 
         middlewares :initialize do
@@ -47,6 +49,10 @@ module ConvenientService
           use Plugins::Service::RaisesOnDoubleResult::Middleware
 
           use Plugins::Common::CachesReturnValue::Middleware
+        end
+
+        middlewares :try_result do
+          use Plugins::Service::CanHaveTryResult::Middleware
         end
 
         middlewares :step do

@@ -42,7 +42,7 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::FormatB
         end
 
         let(:formatted_content) do
-          <<~'RUBY'
+          <<~RUBY
             gem "bootsnap", ">= 1.4.4", require: false
 
             group :development do

@@ -60,10 +60,6 @@ module ConvenientService
                   outputs.any? { |output| output.reassignment?(name) }
                 end
 
-                def completed?
-                  Utils::Bool.to_bool(@completed)
-                end
-
                 def reassignment(name)
                   outputs.find { |output| output.reassignment?(name) }
                 end
@@ -103,6 +99,13 @@ module ConvenientService
                 #
                 def service_class
                   service.klass
+                end
+
+                ##
+                # @return [void]
+                #
+                def trigger_callback
+                  organizer.step(index)
                 end
 
                 def validate!
@@ -148,11 +151,7 @@ module ConvenientService
                 def calculate_original_result
                   assert_has_organizer!
 
-                  result = service.result(**input_values)
-
-                  mark_as_completed!
-
-                  result
+                  service.result(**input_values)
                 end
 
                 def calculate_result
@@ -169,10 +168,6 @@ module ConvenientService
                   return if has_organizer?
 
                   raise Errors::StepHasNoOrganizer.new(step: self)
-                end
-
-                def mark_as_completed!
-                  @completed = true
                 end
               end
             end

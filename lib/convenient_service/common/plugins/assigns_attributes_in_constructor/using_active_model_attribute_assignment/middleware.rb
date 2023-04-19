@@ -5,7 +5,9 @@ module ConvenientService
     module Plugins
       module AssignsAttributesInConstructor
         module UsingActiveModelAttributeAssignment
-          class Middleware < Core::MethodChainMiddleware
+          class Middleware < MethodChainMiddleware
+            intended_for :initialize
+
             ##
             # @param args [Array<Object>]
             # @param kwargs [Hash{Symbol => Object}]

@@ -64,7 +64,7 @@ RSpec.describe ConvenientService::Support::UniqueValue do
         context "when `other` has different class" do
           let(:other) { 42 }
 
-          it "returns `false`" do
+          it "returns `nil`" do
             expect(unique_value == other).to be_nil
           end
         end
@@ -92,7 +92,7 @@ RSpec.describe ConvenientService::Support::UniqueValue do
         context "when `other` has different class" do
           let(:other) { 42 }
 
-          it "returns `false`" do
+          it "returns `nil`" do
             expect(unique_value === other).to be_nil
           end
         end
@@ -120,7 +120,7 @@ RSpec.describe ConvenientService::Support::UniqueValue do
         context "when `other` has different class" do
           let(:other) { 42 }
 
-          it "returns `false`" do
+          it "returns `nil`" do
             expect(unique_value.eql?(other)).to be_nil
           end
         end

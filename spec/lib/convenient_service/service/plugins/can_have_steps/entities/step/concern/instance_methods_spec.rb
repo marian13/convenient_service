@@ -11,33 +11,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
   #
   let(:step_service_klass) do
     Class.new do
-      include ConvenientService::Service::Plugins::HasResult::Concern
-
-      # rubocop:disable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
-      class self::Result
-        include ConvenientService::Core
-
-        concerns do
-          use ConvenientService::Common::Plugins::HasInternals::Concern
-          use ConvenientService::Common::Plugins::HasConstructor::Concern
-          use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Concern
-        end
-
-        middlewares :initialize do
-          use ConvenientService::Common::Plugins::NormalizesEnv::Middleware
-
-          use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Middleware
-        end
-
-        class self::Internals
-          include ConvenientService::Core
-
-          concerns do
-            use ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Plugins::HasCache::Concern
-          end
-        end
-      end
-      # rubocop:enable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
+      include ConvenientService::Configs::Minimal
 
       def initialize(foo:)
         @foo = foo
@@ -51,33 +25,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
   let(:organizer_service_klass) do
     Class.new do
-      include ConvenientService::Service::Plugins::HasResult::Concern
-
-      # rubocop:disable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
-      class self::Result
-        include ConvenientService::Core
-
-        concerns do
-          use ConvenientService::Common::Plugins::HasInternals::Concern
-          use ConvenientService::Common::Plugins::HasConstructor::Concern
-          use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Concern
-        end
-
-        middlewares :initialize do
-          use ConvenientService::Common::Plugins::NormalizesEnv::Middleware
-
-          use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Middleware
-        end
-
-        class self::Internals
-          include ConvenientService::Core
-
-          concerns do
-            use ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Plugins::HasCache::Concern
-          end
-        end
-      end
-      # rubocop:enable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
+      include ConvenientService::Configs::Minimal
 
       def result
         success
@@ -96,18 +44,14 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
   let(:organizer) { organizer_service_klass.new }
 
   let(:args) { [service] }
-  let(:kwargs) { {in: inputs, out: outputs, index: 0, container: container, organizer: organizer} }
+  let(:kwargs) { {in: inputs, out: outputs, index: index, container: container, organizer: organizer} }
 
-  let(:step_class) do
-    Class.new.tap do |klass|
-      klass.class_exec(described_class) do |mod|
-        include mod
-      end
-    end
-  end
+  let(:step_class) { organizer_service_klass.step_class }
 
   let(:step_instance) { step_class.new(*args, **kwargs) }
   let(:step) { step_instance }
+
+  let(:index) { 0 }
 
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
@@ -277,7 +221,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
     example_group "comparison" do
       describe "#==" do
-        context "when steps have different classes" do
+        context "when `other` has different class" do
           let(:other) { "string" }
 
           it "returns `nil`" do
@@ -285,7 +229,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           end
         end
 
-        context "when steps have different services" do
+        context "when `other` has different service" do
           let(:other) { step_class.new(Class.new, **kwargs) }
 
           it "returns `false`" do
@@ -293,7 +237,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           end
         end
 
-        context "when steps have different inputs" do
+        context "when `other` has different inputs" do
           let(:other) { step_class.new(*args, **kwargs.merge(in: [])) }
 
           it "returns `false`" do
@@ -301,7 +245,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           end
         end
 
-        context "when steps have different outputs" do
+        context "when `other` has different outputs" do
           let(:other) { step_class.new(*args, **kwargs.merge(out: [])) }
 
           it "returns `false`" do
@@ -309,7 +253,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           end
         end
 
-        context "when steps have different indices" do
+        context "when `other` has different index" do
           let(:other) { step_class.new(*args, **kwargs.merge(index: 1)) }
 
           it "returns `false`" do
@@ -317,7 +261,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           end
         end
 
-        context "when steps have different containers" do
+        context "when `other` has different container" do
           let(:other) { step_class.new(*args, **kwargs.merge(container: Class.new)) }
 
           it "returns `false`" do
@@ -325,7 +269,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           end
         end
 
-        context "when steps have different organizers" do
+        context "when `other` has different organizer" do
           let(:other) { step_class.new(*args, **kwargs.merge(organizer: nil)) }
 
           it "returns `false`" do
@@ -333,7 +277,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           end
         end
 
-        context "when steps have same attributes" do
+        context "when `other` has same attributes" do
           let(:other) { step_class.new(*args, **kwargs) }
 
           it "returns `true`" do
@@ -381,22 +325,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       end
     end
 
-    describe "#completed?" do
-      context "when `step` is NOT completed" do
-        it "returns `false`" do
-          expect(step.completed?).to eq(false)
-        end
-      end
-
-      context "when `step` is completed" do
-        it "returns `true`" do
-          step.result
-
-          expect(step.completed?).to eq(true)
-        end
-      end
-    end
-
     describe "#reassignment" do
       let(:name) { :bar }
 
@@ -426,18 +354,26 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       end
     end
 
+    describe "#trigger_callback" do
+      specify do
+        expect { step.trigger_callback }
+          .to delegate_to(step.organizer, :step)
+          .with_arguments(index)
+      end
+    end
+
     describe "#validate!" do
-      specify {
+      specify do
         expect { step.validate! }
           .to delegate_to(step.inputs.first, :validate_as_input_for_container!)
           .with_arguments(step.container)
-      }
+      end
 
-      specify {
+      specify do
         expect { step.validate! }
           .to delegate_to(step.outputs.first, :validate_as_output_for_container!)
           .with_arguments(step.container)
-      }
+      end
 
       it "returns `true`" do
         expect(step.validate!).to eq(true)
@@ -445,13 +381,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
     end
 
     describe "#define!" do
-      let(:index) { 0 }
-
-      specify {
+      specify do
         expect { step.define! }
           .to delegate_to(step.outputs.first, :define_output_in_container!)
           .with_arguments(step.container, index: index)
-      }
+      end
 
       it "returns `true`" do
         expect(step.define!).to eq(true)
@@ -506,15 +440,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       end
 
       context "when `organizer` is set" do
-        specify {
+        specify do
           expect { step.original_result }
             .to delegate_to(service, :result)
             .with_arguments(**step.input_values)
             .and_return_its_value
-        }
-
-        it "marks `step` as complete" do
-          expect { step.original_result }.to change(step, :completed?).from(false).to(true)
         end
       end
     end
@@ -539,15 +469,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       end
 
       context "when `organizer` is set" do
-        specify {
+        specify do
           expect { step.result }
             .to delegate_to(step.original_result, :copy)
             .with_arguments(overrides: {kwargs: {step: step, service: organizer}})
             .and_return_its_value
-        }
-
-        it "marks `step` as complete" do
-          expect { step.result }.to change(step, :completed?).from(false).to(true)
         end
       end
     end

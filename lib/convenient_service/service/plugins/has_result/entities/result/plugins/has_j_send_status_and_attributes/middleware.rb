@@ -8,7 +8,7 @@ module ConvenientService
           class Result
             module Plugins
               module HasJSendStatusAndAttributes
-                class Middleware < Core::MethodChainMiddleware
+                class Middleware < MethodChainMiddleware
                   ##
                   # @param args [Array<Object>]
                   # @param kwargs [Hash{Symbol => Object}]

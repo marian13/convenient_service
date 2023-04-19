@@ -44,9 +44,9 @@ module ConvenientService
               #
               cache =
                 if Support::Gems::RSpec.current_example
-                  Utils::Object.instance_variable_fetch(Support::Gems::RSpec.current_example, :@__convenient_service_stubbed_results__) { Support::Cache.new }
+                  Utils::Object.instance_variable_fetch(Support::Gems::RSpec.current_example, :@__convenient_service_stubbed_results__) { Support::Cache.create(backend: :thread_safe_array) }
                 else
-                  Support::Cache.new
+                  Support::Cache.create(backend: :thread_safe_array)
                 end
 
               cache.scope(self)

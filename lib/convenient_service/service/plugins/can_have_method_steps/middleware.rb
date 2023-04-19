@@ -4,7 +4,7 @@ module ConvenientService
   module Service
     module Plugins
       module CanHaveMethodSteps
-        class Middleware < Core::MethodChainMiddleware
+        class Middleware < MethodChainMiddleware
           ##
           # @param args [Array<Object>]
           # @param kwargs [Hash{Symbol => Object}]

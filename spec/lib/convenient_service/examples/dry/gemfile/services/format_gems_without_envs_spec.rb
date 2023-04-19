@@ -117,7 +117,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::FormatGemsWi
         end
 
         let(:formatted_content) do
-          <<~'RUBY'
+          <<~RUBY
             gem "bootsnap", ">= 1.4.4", require: false
             gem "pg"
             gem "rails", "~> 6.1.3", ">= 6.1.3.2"

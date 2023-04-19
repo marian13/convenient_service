@@ -44,6 +44,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::RailsService::Config
               ConvenientService::Service::Plugins::HasResultStatusCheckShortSyntax::Concern,
               ConvenientService::Common::Plugins::HasCallbacks::Concern,
               ConvenientService::Common::Plugins::HasAroundCallbacks::Concern,
+              ConvenientService::Service::Plugins::CanHaveTryResult::Concern,
               ConvenientService::Common::Plugins::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment::Concern,
               ConvenientService::Common::Plugins::HasAttributes::UsingActiveModelAttributes::Concern,
               ConvenientService::Service::Plugins::HasResultParamsValidations::UsingActiveModelValidations::Concern
@@ -85,6 +86,19 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::RailsService::Config
 
           it "sets service middlewares for `#result`" do
             expect(service_class.middlewares(:result).to_a).to eq(result_middlewares)
+          end
+        end
+
+        example_group "#try_result middlewares" do
+          let(:try_result_middlewares) do
+            [
+              ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
+              ConvenientService::Service::Plugins::CanHaveTryResult::Middleware
+            ]
+          end
+
+          it "sets service middlewares for `#try_result`" do
+            expect(service_class.middlewares(:try_result).to_a).to eq(try_result_middlewares)
           end
         end
 
@@ -408,6 +422,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::RailsService::Config
             let(:concerns) do
               [
                 ConvenientService::Common::Plugins::HasInternals::Concern,
+                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeCompleted::Concern,
                 ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::HasInspect::Concern
               ]
             end

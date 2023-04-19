@@ -227,7 +227,7 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::ParseCo
       context "when same group is used multiple times" do
         let(:content) do
           add(
-            <<~'RUBY',
+            <<~RUBY,
               group :development, :test do
                 gem "byebug", "~> 11.1.3"
               end

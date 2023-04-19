@@ -6,7 +6,7 @@ module ConvenientService
       module RequestParams
         module Utils
           module Array
-            class Wrap < Support::Command
+            class Wrap < ConvenientService::Command
               ##
               # @!attribute [r] pad
               #   @return [Object] Can be any type.

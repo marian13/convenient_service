@@ -9,7 +9,7 @@ module ConvenientService
             module Plugins
               module CanHaveParentResult
                 module ToKwargs
-                  class Middleware < Core::MethodChainMiddleware
+                  class Middleware < MethodChainMiddleware
                     def next(...)
                       chain.next(...).merge(parent: entity.parent)
                     end

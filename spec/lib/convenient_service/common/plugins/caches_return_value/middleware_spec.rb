@@ -11,7 +11,21 @@ RSpec.describe ConvenientService::Common::Plugins::CachesReturnValue::Middleware
 
     subject { described_class }
 
-    it { is_expected.to be_descendant_of(ConvenientService::Core::MethodChainMiddleware) }
+    it { is_expected.to be_descendant_of(ConvenientService::MethodChainMiddleware) }
+  end
+
+  example_group "class methods" do
+    describe ".intended_methods" do
+      let(:spec) do
+        Class.new(ConvenientService::MethodChainMiddleware) do
+          intended_for any_method, scope: any_scope
+        end
+      end
+
+      it "returns intended methods" do
+        expect(described_class.intended_methods).to eq(spec.intended_methods)
+      end
+    end
   end
 
   example_group "instance methods" do
@@ -42,17 +56,13 @@ RSpec.describe ConvenientService::Common::Plugins::CachesReturnValue::Middleware
 
       let(:service_instance) { service_class.new }
       let(:service_result_value) { "service result value" }
-      let(:key) { ConvenientService::Support::Cache.keygen(:return_values, method_name) }
+      let(:key) { ConvenientService::Support::Cache::Entities::Caches::Hash.keygen(:return_values, method_name) }
 
       context "when method call is NOT cached" do
         specify { expect { method_value }.to call_chain_next.on(method) }
 
         it "writes `chain.next` to `cache` with key" do
-          allow(service_instance.internals.cache).to receive(:write).with(key, service_result_value).and_call_original
-
-          method_value
-
-          expect(service_instance.internals.cache).to have_received(:write)
+          expect { method_value }.to change { service_instance.internals.cache.read(key) }.from(nil).to(service_result_value)
         end
 
         it "returns cached value by key" do
