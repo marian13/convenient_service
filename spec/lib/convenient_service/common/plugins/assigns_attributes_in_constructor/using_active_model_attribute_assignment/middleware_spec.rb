@@ -20,8 +20,14 @@ RSpec.describe ConvenientService::Common::Plugins::AssignsAttributesInConstructo
 
   example_group "class methods" do
     describe ".intended_methods" do
+      let(:spec) do
+        Class.new(ConvenientService::MethodChainMiddleware) do
+          intended_for :initialize
+        end
+      end
+
       it "returns intended methods" do
-        expect(described_class.intended_methods.map(&:to_h)).to eq([{method: :initialize, scope: :instance}])
+        expect(described_class.intended_methods).to eq(spec.indended_methods)
       end
     end
   end
