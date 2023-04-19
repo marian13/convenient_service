@@ -5,9 +5,14 @@ module ConvenientService
     module Plugins
       module HasAroundCallbacks
         class Middleware < MethodChainMiddleware
+          ##
+          # TODO: Move to command.
+          #
           include Support::DependencyContainer::Import
 
           import :"entities.Callback", from: Common::Plugins::HasCallbacks::Container
+
+          intended_for any_method, scope: any_scope
 
           def next(*args, **kwargs, &block)
             ##
