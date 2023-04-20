@@ -117,6 +117,9 @@ module ConvenientService
             alias_slug || slug
           end
 
+          ##
+          # @return [Hash]
+          #
           def to_kwargs
             {
               slug: slug,
