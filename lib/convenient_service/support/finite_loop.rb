@@ -66,12 +66,12 @@ module ConvenientService
       #     end
       #   end
       #
-      def finite_loop(max_iteration_count: MAX_ITERATION_COUNT, raise_on_exceedance: true, &block)
+      def finite_loop(default: nil, max_iteration_count: MAX_ITERATION_COUNT, raise_on_exceedance: true, &block)
         raise Errors::NoBlockGiven.new unless block
 
         loop.with_index do |_, index|
           if index >= max_iteration_count
-            break unless raise_on_exceedance
+            break default unless raise_on_exceedance
 
             raise Errors::MaxIterationCountExceeded.new(limit: max_iteration_count)
           end
