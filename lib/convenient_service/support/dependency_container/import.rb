@@ -15,7 +15,7 @@ module ConvenientService
           # @param prepend [Boolean]
           # @return [ConvenientService::Support::DependencyContainer::Entities::Method]
           #
-          def import(full_name, as: nil, from:, scope: Constants::DEFAULT_SCOPE, prepend: Constants::DEFAULT_PREPEND)
+          def import(full_name, from:, as: nil, scope: Constants::DEFAULT_SCOPE, prepend: Constants::DEFAULT_PREPEND)
             Commands::AssertValidScope.call(scope: scope)
 
             Commands::AssertValidContainer.call(container: from)
