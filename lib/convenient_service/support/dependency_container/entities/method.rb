@@ -110,6 +110,13 @@ module ConvenientService
             true
           end
 
+          ##
+          # @return [String, Symbol]
+          #
+          def import_name
+            alias_slug || slug
+          end
+
           def to_kwargs
             {
               slug: slug,
@@ -125,14 +132,7 @@ module ConvenientService
           # @return [Array<String>]
           #
           def slug_parts
-            @slug_parts ||= Utils::String.split(slug_to_split, ".", "::").map(&:to_sym)
-          end
-
-          ##
-          # @return [String, Symbol]
-          #
-          def slug_to_split
-            alias_slug || slug
+            @slug_parts ||= Utils::String.split(import_name, ".", "::").map(&:to_sym)
           end
         end
       end
