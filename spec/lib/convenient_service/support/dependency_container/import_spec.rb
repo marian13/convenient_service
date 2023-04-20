@@ -71,6 +71,19 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Import do
           .and_return_its_value
       end
 
+      context "when `as` is passed" do
+        let(:kwargs) { default_kwargs.merge({as: alias_slug}) }
+        let(:alias_slug) { :bar }
+        let(:method_copy) { method.copy(overrides: {kwargs: {alias_slug: alias_slug}}) }
+
+        it "imports method copy" do
+          expect { import }
+            .to delegate_to(ConvenientService::Support::DependencyContainer::Commands::ImportMethod, :call)
+            .with_arguments(importing_module: user, exported_method: method_copy, prepend: prepend)
+            .and_return_its_value
+        end
+      end
+
       context "when `scope` is NOT passed" do
         let(:kwargs) { ConvenientService::Utils::Hash.except(default_kwargs, [:scope]) }
 
