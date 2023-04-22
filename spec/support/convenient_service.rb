@@ -7,6 +7,7 @@ require_relative "../../lib/convenient_service/dependencies/extractions/b"
 
 require "convenient_service"
 
+ConvenientService::Dependencies.require_can_utilize_finite_loop
 ConvenientService::Dependencies.require_rescues_result_unhandled_exceptions
 ConvenientService::Dependencies.require_cleans_exception_backtrace
 
