@@ -817,12 +817,12 @@
       <pre class="lines">
 
 
-83
-84
-85</pre>
+87
+88
+89</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/method/defined.rb', line 83</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/method/defined.rb', line 87</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_method_defined?'>method_defined?</span><span class='lparen'>(</span><span class='id identifier rubyid_visibility'>visibility</span><span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="#METHOD_DEFINED_CHECKERS-constant" title="ConvenientService::Utils::Method::Defined::METHOD_DEFINED_CHECKERS (constant)">METHOD_DEFINED_CHECKERS</a></span></span><span class='lbracket'>[</span><span class='id identifier rubyid_visibility'>visibility</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_klass'>klass</span><span class='comma'>,</span> <span class='id identifier rubyid_method'>method</span><span class='rparen'>)</span>
@@ -869,15 +869,15 @@
       <pre class="lines">
 
 
-75
-76
-77</pre>
+79
+80
+81</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/method/defined.rb', line 75</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/method/defined.rb', line 79</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_selected_visibilities'>selected_visibilities</span>
-  <span class='lbrace'>{</span><span class='label'>public:</span> <span class='id identifier rubyid_public'>public</span><span class='comma'>,</span> <span class='label'>protected:</span> <span class='id identifier rubyid_protected'>protected</span><span class='comma'>,</span> <span class='label'>private:</span> <span class='id identifier rubyid_private'>private</span><span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_keep_if'>keep_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_should_be_checked'>should_be_checked</span><span class='op'>|</span> <span class='id identifier rubyid_should_be_checked'>should_be_checked</span> <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_keys'>keys</span>
+  <span class='ivar'>@selected_visibilities</span> <span class='op'>||=</span> <span class='lbrace'>{</span><span class='label'>public:</span> <span class='id identifier rubyid_public'>public</span><span class='comma'>,</span> <span class='label'>protected:</span> <span class='id identifier rubyid_protected'>protected</span><span class='comma'>,</span> <span class='label'>private:</span> <span class='id identifier rubyid_private'>private</span><span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_keep_if'>keep_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_should_be_checked'>should_be_checked</span><span class='op'>|</span> <span class='id identifier rubyid_should_be_checked'>should_be_checked</span> <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_keys'>keys</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -889,7 +889,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Apr 23 17:20:37 2023 by
+  Generated on Sun Apr 23 20:16:50 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>
