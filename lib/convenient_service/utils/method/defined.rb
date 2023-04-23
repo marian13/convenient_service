@@ -72,8 +72,12 @@ module ConvenientService
         ##
         # @return [Array<Symbol>]
         #
+        # @internal
+        #   NOTE: `keep_if` seems more readable than `select` (just a personal feeling).
+        #   It is safe to use `keep_if` since a new hash is created. Prefer `select` in a general case, since it is NOT mutable.
+        #
         def selected_visibilities
-          {public: public, protected: protected, private: private}.keep_if { |_, should_be_checked| should_be_checked }.keys
+          @selected_visibilities ||= {public: public, protected: protected, private: private}.keep_if { |_, should_be_checked| should_be_checked }.keys
         end
 
         ##
