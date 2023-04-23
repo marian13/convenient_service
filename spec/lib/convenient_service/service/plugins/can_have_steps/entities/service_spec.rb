@@ -6,7 +6,13 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Service do
-  let(:klass) { Class.new }
+  include ConvenientService::RSpec::Matchers::DelegateTo
+
+  let(:klass) do
+    Class.new do
+      include ConvenientService::Configs::Standard
+    end
+  end
 
   let(:service) { described_class.new(klass) }
 
@@ -36,7 +42,12 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Serv
   example_group "instance methods" do
     example_group "comparison" do
       describe "#==" do
-        let(:klass) { Class.new }
+        let(:klass) do
+          Class.new do
+            include ConvenientService::Configs::Standard
+          end
+        end
+
         let(:service) { described_class.new(klass) }
 
         context "when `other` is NOT castable" do
@@ -80,61 +91,21 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Serv
     end
 
     describe "#has_defined_method?" do
+      let(:klass) do
+        Class.new do
+          include ConvenientService::Configs::Standard
+        end
+      end
+
       let(:method_name) { :foo }
-      let(:klass) { Class.new }
       let(:service) { described_class.new(klass) }
       let(:method) { ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method.cast(method_name, direction: :input) }
 
-      it "converts `method` to string" do
-        allow(method).to receive(:to_s).and_call_original
-
-        service.has_defined_method?(method)
-
-        expect(method).to have_received(:to_s)
-      end
-
-      it "delegates to `Module#method_defined?`" do
-        allow(klass).to receive(:method_defined?).with(method_name.to_s).and_call_original
-
-        service.has_defined_method?(method)
-
-        expect(klass).to have_received(:method_defined?)
-      end
-
-      context "when `method` is NOT defined" do
-        let(:klass) { Class.new }
-
-        it "returns `false`" do
-          expect(service.has_defined_method?(method)).to eq(false)
-        end
-      end
-
-      context "when public `method` is defined" do
-        let(:klass) do
-          Class.new do
-            def foo
-            end
-          end
-        end
-
-        it "returns `true`" do
-          expect(service.has_defined_method?(method)).to eq(true)
-        end
-      end
-
-      context "when private `method` is defined" do
-        let(:klass) do
-          Class.new do
-            private
-
-            def foo
-            end
-          end
-        end
-
-        it "returns `true`" do
-          expect(service.has_defined_method?(method)).to eq(true)
-        end
+      specify do
+        expect { service.has_defined_method?(method) }
+          .to delegate_to(ConvenientService::Utils::Method, :defined?)
+          .with_arguments(method, klass, private: true)
+          .and_return_its_value
       end
     end
   end

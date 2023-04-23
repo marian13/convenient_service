@@ -37,7 +37,8 @@ module ConvenientService
         # @return [void]
         #
         def call
-          return true if klass.method_defined?(method)
+          return true if klass.public_method_defined?(method)
+          return true if klass.protected_method_defined?(method)
 
           return klass.private_method_defined?(method) if private
 
