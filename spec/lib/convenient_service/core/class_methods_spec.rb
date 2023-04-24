@@ -154,6 +154,12 @@ RSpec.describe ConvenientService::Core::ClassMethods do
         expect(service_class.foo(*args, **kwargs, &block)).to eq([:foo, args, kwargs, block&.source_location])
       end
 
+      specify do
+        expect { service_class.foo }
+          .to delegate_to(ConvenientService::Utils::Module, :class_method_defined?)
+          .with_arguments(service_class, :foo, public: true, protected: false, private: false)
+      end
+
       context "when concerns are included more than once (since they do not contain required class method)" do
         let(:service_class) do
           Class.new do
@@ -189,7 +195,32 @@ RSpec.describe ConvenientService::Core::ClassMethods do
 
     describe "#respond_to_missing?" do
       let(:method_name) { :foo }
-      let(:result) { service_class.respond_to_missing?(method_name, include_private) }
+      let(:include_private) { false }
+
+      let(:result) { service_class.respond_to_missing_public?(method_name, include_private) }
+
+      let(:service_class) do
+        Class.new do
+          include ConvenientService::Core
+
+          class << self
+            ##
+            # IMPORTANT: `respond_to_missing?` is always private, which is enforced by Ruby. That is why this wrapper is used.
+            # - https://ruby-doc.org/core-2.7.0/Object.html#method-i-respond_to_missing-3F
+            # - https://github.com/ruby/spec/blob/master/language/def_spec.rb#L65
+            #
+            def respond_to_missing_public?(...)
+              respond_to_missing?(...)
+            end
+          end
+        end
+      end
+
+      it "is private" do
+        expect { service_class.respond_to_missing?(method_name, include_private) }
+          .to raise_error(NoMethodError)
+          .with_message("private method `respond_to_missing?' called for #{service_class}")
+      end
 
       context "when `include_private` is `false`" do
         let(:include_private) { false }
@@ -199,6 +230,17 @@ RSpec.describe ConvenientService::Core::ClassMethods do
             let(:service_class) do
               Class.new do
                 include ConvenientService::Core
+
+                class << self
+                  ##
+                  # IMPORTANT: `respond_to_missing?` is always private, which is enforced by Ruby. That is why this wrapper is used.
+                  # - https://ruby-doc.org/core-2.7.0/Object.html#method-i-respond_to_missing-3F
+                  # - https://github.com/ruby/spec/blob/master/language/def_spec.rb#L65
+                  #
+                  def respond_to_missing_public?(...)
+                    respond_to_missing?(...)
+                  end
+                end
               end
             end
 
@@ -212,6 +254,15 @@ RSpec.describe ConvenientService::Core::ClassMethods do
                   include ConvenientService::Core
 
                   class << self
+                    ##
+                    # IMPORTANT: `respond_to_missing?` is always private, which is enforced by Ruby. That is why this wrapper is used.
+                    # - https://ruby-doc.org/core-2.7.0/Object.html#method-i-respond_to_missing-3F
+                    # - https://github.com/ruby/spec/blob/master/language/def_spec.rb#L65
+                    #
+                    def respond_to_missing_public?(...)
+                      respond_to_missing?(...)
+                    end
+
                     private
 
                     def foo
@@ -244,6 +295,17 @@ RSpec.describe ConvenientService::Core::ClassMethods do
 
                     use concern
                   end
+
+                  class << self
+                    ##
+                    # IMPORTANT: `respond_to_missing?` is always private, which is enforced by Ruby. That is why this wrapper is used.
+                    # - https://ruby-doc.org/core-2.7.0/Object.html#method-i-respond_to_missing-3F
+                    # - https://github.com/ruby/spec/blob/master/language/def_spec.rb#L65
+                    #
+                    def respond_to_missing_public?(...)
+                      respond_to_missing?(...)
+                    end
+                  end
                 end
               end
 
@@ -270,6 +332,17 @@ RSpec.describe ConvenientService::Core::ClassMethods do
 
                   use concern
                 end
+
+                class << self
+                  ##
+                  # IMPORTANT: `respond_to_missing?` is always private, which is enforced by Ruby. That is why this wrapper is used.
+                  # - https://ruby-doc.org/core-2.7.0/Object.html#method-i-respond_to_missing-3F
+                  # - https://github.com/ruby/spec/blob/master/language/def_spec.rb#L65
+                  #
+                  def respond_to_missing_public?(...)
+                    respond_to_missing?(...)
+                  end
+                end
               end
             end
 
@@ -286,6 +359,15 @@ RSpec.describe ConvenientService::Core::ClassMethods do
 
               class << self
                 def foo
+                end
+
+                ##
+                # IMPORTANT: `respond_to_missing?` is always private, which is enforced by Ruby. That is why this wrapper is used.
+                # - https://ruby-doc.org/core-2.7.0/Object.html#method-i-respond_to_missing-3F
+                # - https://github.com/ruby/spec/blob/master/language/def_spec.rb#L65
+                #
+                def respond_to_missing_public?(...)
+                  respond_to_missing?(...)
                 end
               end
             end
@@ -305,6 +387,17 @@ RSpec.describe ConvenientService::Core::ClassMethods do
             let(:service_class) do
               Class.new do
                 include ConvenientService::Core
+
+                class << self
+                  ##
+                  # IMPORTANT: `respond_to_missing?` is always private, which is enforced by Ruby. That is why this wrapper is used.
+                  # - https://ruby-doc.org/core-2.7.0/Object.html#method-i-respond_to_missing-3F
+                  # - https://github.com/ruby/spec/blob/master/language/def_spec.rb#L65
+                  #
+                  def respond_to_missing_public?(...)
+                    respond_to_missing?(...)
+                  end
+                end
               end
             end
 
@@ -318,6 +411,15 @@ RSpec.describe ConvenientService::Core::ClassMethods do
                   include ConvenientService::Core
 
                   class << self
+                    ##
+                    # IMPORTANT: `respond_to_missing?` is always private, which is enforced by Ruby. That is why this wrapper is used.
+                    # - https://ruby-doc.org/core-2.7.0/Object.html#method-i-respond_to_missing-3F
+                    # - https://github.com/ruby/spec/blob/master/language/def_spec.rb#L65
+                    #
+                    def respond_to_missing_public?(...)
+                      respond_to_missing?(...)
+                    end
+
                     private
 
                     def foo
@@ -350,6 +452,17 @@ RSpec.describe ConvenientService::Core::ClassMethods do
 
                     use concern
                   end
+
+                  class << self
+                    ##
+                    # IMPORTANT: `respond_to_missing?` is always private, which is enforced by Ruby. That is why this wrapper is used.
+                    # - https://ruby-doc.org/core-2.7.0/Object.html#method-i-respond_to_missing-3F
+                    # - https://github.com/ruby/spec/blob/master/language/def_spec.rb#L65
+                    #
+                    def respond_to_missing_public?(...)
+                      respond_to_missing?(...)
+                    end
+                  end
                 end
               end
 
@@ -376,6 +489,17 @@ RSpec.describe ConvenientService::Core::ClassMethods do
 
                   use concern
                 end
+
+                class << self
+                  ##
+                  # IMPORTANT: `respond_to_missing?` is always private, which is enforced by Ruby. That is why this wrapper is used.
+                  # - https://ruby-doc.org/core-2.7.0/Object.html#method-i-respond_to_missing-3F
+                  # - https://github.com/ruby/spec/blob/master/language/def_spec.rb#L65
+                  #
+                  def respond_to_missing_public?(...)
+                    respond_to_missing?(...)
+                  end
+                end
               end
             end
 
@@ -393,6 +517,15 @@ RSpec.describe ConvenientService::Core::ClassMethods do
               class << self
                 def foo
                 end
+
+                ##
+                # IMPORTANT: `respond_to_missing?` is always private, which is enforced by Ruby. That is why this wrapper is used.
+                # - https://ruby-doc.org/core-2.7.0/Object.html#method-i-respond_to_missing-3F
+                # - https://github.com/ruby/spec/blob/master/language/def_spec.rb#L65
+                #
+                def respond_to_missing_public?(...)
+                  respond_to_missing?(...)
+                end
               end
             end
           end
@@ -404,13 +537,22 @@ RSpec.describe ConvenientService::Core::ClassMethods do
       end
 
       context "when `include_private` is NOT passed" do
-        let(:result) { service_class.respond_to_missing?(method_name) }
+        let(:result) { service_class.respond_to_missing_public?(method_name) }
 
         let(:service_class) do
           Class.new do
             include ConvenientService::Core
 
             class << self
+              ##
+              # IMPORTANT: `respond_to_missing?` is always private, which is enforced by Ruby. That is why this wrapper is used.
+              # - https://ruby-doc.org/core-2.7.0/Object.html#method-i-respond_to_missing-3F
+              # - https://github.com/ruby/spec/blob/master/language/def_spec.rb#L65
+              #
+              def respond_to_missing_public?(...)
+                respond_to_missing?(...)
+              end
+
               private
 
               def foo
