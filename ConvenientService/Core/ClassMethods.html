@@ -165,28 +165,6 @@
 </li>
 
       
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#respond_to_missing%3F-instance_method" title="#respond_to_missing? (instance method)">#<strong>respond_to_missing?</strong>(method_name, include_private = false)  &#x21d2; Boolean </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
     </ul>
   
 
@@ -271,25 +249,25 @@ If <code>method</code> is still NOT defined, raises <code>NoMethodError</code>, 
       <pre class="lines">
 
 
-83
-84
-85
-86
-87
 88
 89
 90
 91
 92
-93</pre>
+93
+94
+95
+96
+97
+98</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/class_methods.rb', line 83</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/class_methods.rb', line 88</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_method_missing'>method_missing</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_commit_config!'>commit_config!</span><span class='lparen'>(</span><span class='label'>trigger:</span> <span class='const'><span class='object_link'><a href="Constants.html" title="ConvenientService::Core::Constants (module)">Constants</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Constants/Triggers.html" title="ConvenientService::Core::Constants::Triggers (module)">Triggers</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Constants/Triggers.html#CLASS_METHOD_MISSING-constant" title="ConvenientService::Core::Constants::Triggers::CLASS_METHOD_MISSING (constant)">CLASS_METHOD_MISSING</a></span></span><span class='rparen'>)</span>
 
-  <span class='kw'>return</span> <span class='kw'>super</span> <span class='kw'>unless</span> <span class='const'><span class='object_link'><a href="../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Utils/Module.html" title="ConvenientService::Utils::Module (module)">Module</a></span></span><span class='period'>.</span><span class='id identifier rubyid_class_method_defined?'><span class='object_link'><a href="../Utils/Module.html#class_method_defined%3F-class_method" title="ConvenientService::Utils::Module.class_method_defined? (method)">class_method_defined?</a></span></span><span class='lparen'>(</span><span class='kw'>self</span><span class='comma'>,</span> <span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='label'>private:</span> <span class='kw'>true</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='kw'>super</span> <span class='kw'>unless</span> <span class='const'><span class='object_link'><a href="../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Utils/Module.html" title="ConvenientService::Utils::Module (module)">Module</a></span></span><span class='period'>.</span><span class='id identifier rubyid_class_method_defined?'><span class='object_link'><a href="../Utils/Module.html#class_method_defined%3F-class_method" title="ConvenientService::Utils::Module.class_method_defined? (method)">class_method_defined?</a></span></span><span class='lparen'>(</span><span class='kw'>self</span><span class='comma'>,</span> <span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='label'>public:</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='label'>protected:</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='label'>private:</span> <span class='kw'>false</span><span class='rparen'>)</span>
 
   <span class='kw'>return</span> <span class='kw'>super</span> <span class='kw'>if</span> <span class='id identifier rubyid_middlewares'>middlewares</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='label'>scope:</span> <span class='symbol'>:class</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_defined_without_super_method?'>defined_without_super_method?</span>
 
@@ -485,117 +463,12 @@ Does nothing for the subsequent calls.</p>
 </table>
 </div>
     
-      <div class="method_details ">
-  <h3 class="signature " id="respond_to_missing?-instance_method">
-  
-    #<strong>respond_to_missing?</strong>(method_name, include_private = false)  &#x21d2; <tt>Boolean</tt> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    
-
-  </div>
-</div>
-<div class="tags">
-  <p class="tag_title">Parameters:</p>
-<ul class="param">
-  
-    <li>
-      
-        <span class='name'>method_name</span>
-      
-      
-        <span class='type'>(<tt>Symbol</tt>, <tt>String</tt>)</span>
-      
-      
-      
-    </li>
-  
-    <li>
-      
-        <span class='name'>include_private</span>
-      
-      
-        <span class='type'>(<tt>Boolean</tt>)</span>
-      
-      
-        <em class="default">(defaults to: <tt>false</tt>)</em>
-      
-      
-    </li>
-  
-</ul>
-
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>Boolean</tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
-
-  <p class="tag_title">See Also:</p>
-  <ul class="see">
-    
-      <li><a href="https://thoughtbot.com/blog/always-define-respond-to-missing-when-overriding" target="_parent" title="https://thoughtbot.com/blog/always-define-respond-to-missing-when-overriding">https://thoughtbot.com/blog/always-define-respond-to-missing-when-overriding</a></li>
-    
-      <li><a href="https://stackoverflow.com/a/3304683/12201472" target="_parent" title="https://stackoverflow.com/a/3304683/12201472">https://stackoverflow.com/a/3304683/12201472</a></li>
-    
-  </ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-54
-55
-56
-57
-58
-59
-60
-61
-62
-63
-64</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/class_methods.rb', line 54</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_respond_to_missing?'>respond_to_missing?</span><span class='lparen'>(</span><span class='id identifier rubyid_method_name'>method_name</span><span class='comma'>,</span> <span class='id identifier rubyid_include_private'>include_private</span> <span class='op'>=</span> <span class='kw'>false</span><span class='rparen'>)</span>
-  <span class='kw'>return</span> <span class='kw'>true</span> <span class='kw'>if</span> <span class='id identifier rubyid_singleton_class'>singleton_class</span><span class='period'>.</span><span class='id identifier rubyid_method_defined?'>method_defined?</span><span class='lparen'>(</span><span class='id identifier rubyid_method_name'>method_name</span><span class='rparen'>)</span>
-  <span class='kw'>return</span> <span class='kw'>true</span> <span class='kw'>if</span> <span class='id identifier rubyid_concerns'>concerns</span><span class='period'>.</span><span class='id identifier rubyid_class_method_defined?'>class_method_defined?</span><span class='lparen'>(</span><span class='id identifier rubyid_method_name'>method_name</span><span class='rparen'>)</span>
-
-  <span class='kw'>if</span> <span class='id identifier rubyid_include_private'>include_private</span>
-    <span class='kw'>return</span> <span class='kw'>true</span> <span class='kw'>if</span> <span class='id identifier rubyid_singleton_class'>singleton_class</span><span class='period'>.</span><span class='id identifier rubyid_private_method_defined?'>private_method_defined?</span><span class='lparen'>(</span><span class='id identifier rubyid_method_name'>method_name</span><span class='rparen'>)</span>
-    <span class='kw'>return</span> <span class='kw'>true</span> <span class='kw'>if</span> <span class='id identifier rubyid_concerns'>concerns</span><span class='period'>.</span><span class='id identifier rubyid_private_class_method_defined?'>private_class_method_defined?</span><span class='lparen'>(</span><span class='id identifier rubyid_method_name'>method_name</span><span class='rparen'>)</span>
-  <span class='kw'>end</span>
-
-  <span class='kw'>false</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
   </div>
 
 </div>
 
       <div id="footer">
-  Generated on Mon Apr 24 16:41:54 2023 by
+  Generated on Mon Apr 24 17:34:20 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>
