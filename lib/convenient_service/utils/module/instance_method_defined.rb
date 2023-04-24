@@ -42,6 +42,10 @@ module ConvenientService
         # @param private [Boolean]
         # @return [void]
         #
+        # @internal
+        #   NOTE: `protected` is set to `true` by default to keep the same semantics as `Module#method_defined?`.
+        #   - https://ruby-doc.org/core-3.1.0/Module.html#method-i-method_defined-3F
+        #
         def initialize(mod, method_name, public: true, protected: true, private: false)
           @mod = mod
           @method_name = method_name
