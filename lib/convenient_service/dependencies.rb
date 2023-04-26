@@ -36,6 +36,14 @@ module ConvenientService
       # @return [Boolean]
       # @note Expected to be called from app entry points like `initializers` in Rails.
       #
+      def require_can_utilize_finite_loop
+        require_relative "common/plugins/can_utilize_finite_loop"
+      end
+
+      ##
+      # @return [Boolean]
+      # @note Expected to be called from app entry points like `initializers` in Rails.
+      #
       def require_has_attributes_using_active_model_attributes
         require "active_model"
 

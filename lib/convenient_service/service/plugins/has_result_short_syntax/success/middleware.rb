@@ -6,6 +6,8 @@ module ConvenientService
       module HasResultShortSyntax
         module Success
           class Middleware < MethodChainMiddleware
+            intended_for :success
+
             def next(**kwargs)
               Commands::RefuteKwargsContainDataAndExtraKeys.call(kwargs: kwargs)
 

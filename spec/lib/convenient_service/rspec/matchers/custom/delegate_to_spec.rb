@@ -130,6 +130,20 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo do
       end
     end
 
+    describe "#with_any_arguments" do
+      it "delegates to `matcher#with_any_arguments`" do
+        allow(matcher).to receive(:with_any_arguments).and_call_original
+
+        facade.with_any_arguments
+
+        expect(matcher).to have_received(:with_any_arguments)
+      end
+
+      it "returns facade" do
+        expect(facade.with_any_arguments).to eq(facade)
+      end
+    end
+
     describe "#without_arguments" do
       it "delegates to `matcher#without_arguments`" do
         allow(matcher).to receive(:without_arguments).and_call_original

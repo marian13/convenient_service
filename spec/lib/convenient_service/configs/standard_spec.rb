@@ -197,7 +197,7 @@ RSpec.describe ConvenientService::Configs::Standard do
                 ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasInspect::Concern,
                 ConvenientService::Common::Plugins::HasConstructor::Concern,
                 ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Concern,
-                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasResultShortSyntax::Concern,
+                ConvenientService::Common::Plugins::HasResultDuckShortSyntax::Concern,
                 ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanRecalculateResult::Concern,
                 ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasStep::Concern,
                 ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanHaveParentResult::Concern
@@ -416,7 +416,8 @@ RSpec.describe ConvenientService::Configs::Standard do
               [
                 ConvenientService::Common::Plugins::HasInternals::Concern,
                 ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeCompleted::Concern,
-                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::HasInspect::Concern
+                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::HasInspect::Concern,
+                ConvenientService::Common::Plugins::HasResultDuckShortSyntax::Concern
               ]
             end
 

@@ -43,6 +43,8 @@ module ConvenientService
           .tap { ConvenientService.logger.debug { "[Core] Committed config for `#{self}` | Triggered by `.commit_config!(trigger: #{trigger.inspect})` " } }
       end
 
+      private
+
       ##
       # @see https://thoughtbot.com/blog/always-define-respond-to-missing-when-overriding
       # @see https://stackoverflow.com/a/3304683/12201472
@@ -50,6 +52,11 @@ module ConvenientService
       # @param method_name [Symbol, String]
       # @param include_private [Boolean]
       # @return [Boolean]
+      #
+      # @internal
+      #   IMPORTANT: `respond_to_missing?` is like `initialize`. It is always `private`.
+      #   - https://ruby-doc.org/core-2.7.0/Object.html#method-i-respond_to_missing-3F
+      #   - https://github.com/ruby/spec/blob/master/language/def_spec.rb#L65
       #
       def respond_to_missing?(method_name, include_private = false)
         return true if singleton_class.method_defined?(method_name)
@@ -62,8 +69,6 @@ module ConvenientService
 
         false
       end
-
-      private
 
       ##
       # Includes `concerns` into the mixing class.
@@ -83,7 +88,7 @@ module ConvenientService
       def method_missing(method, *args, **kwargs, &block)
         commit_config!(trigger: Constants::Triggers::CLASS_METHOD_MISSING)
 
-        return super unless Utils::Module.class_method_defined?(self, method, private: true)
+        return super unless Utils::Module.class_method_defined?(self, method, public: true, protected: false, private: false)
 
         return super if middlewares(method, scope: :class).defined_without_super_method?
 

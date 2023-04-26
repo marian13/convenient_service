@@ -10,6 +10,8 @@ module ConvenientService
               module CanHaveParentResult
                 module Initialize
                   class Middleware < MethodChainMiddleware
+                    intended_for :initialize
+
                     def next(*args, **kwargs, &block)
                       entity.internals.cache[:parent] = kwargs[:parent]
 

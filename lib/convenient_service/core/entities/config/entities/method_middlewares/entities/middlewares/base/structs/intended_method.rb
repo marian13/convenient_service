@@ -10,6 +10,9 @@ module ConvenientService
               module Middlewares
                 class Base
                   module Structs
+                    ##
+                    # TODO: IntendedMethod = ::Struct.new(:method, :scope, :entity)
+                    #
                     IntendedMethod = ::Struct.new(:method, :scope)
                   end
                 end

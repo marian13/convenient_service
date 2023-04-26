@@ -133,21 +133,42 @@ RSpec.describe ConvenientService::Support::FiniteLoop do
         end
 
         context "when `raise_on_exceedance` is set to `false`" do
-          let(:klass) do
-            Class.new(base_klass) do
-              ##
-              # NOTE: finite_loop is intentionally private. That's why this wrapper is used.
-              #
-              def foo
-                finite_loop(raise_on_exceedance: false) do |index|
-                  # NOTE: No `break` to exceed max iteration count.
+          context "when `default` is NOT passed" do
+            let(:klass) do
+              Class.new(base_klass) do
+                ##
+                # NOTE: finite_loop is intentionally private. That's why this wrapper is used.
+                #
+                def foo
+                  finite_loop(raise_on_exceedance: false) do |index|
+                    # NOTE: No `break` to exceed max iteration count.
+                  end
                 end
               end
             end
+
+            it "returns `nil`" do
+              expect(instance.foo).to be_nil
+            end
           end
 
-          it "returns `nil`" do
-            expect(instance.foo).to be_nil
+          context "when `default` is passed" do
+            let(:klass) do
+              Class.new(base_klass) do
+                ##
+                # NOTE: finite_loop is intentionally private. That's why this wrapper is used.
+                #
+                def foo
+                  finite_loop(raise_on_exceedance: false, default: 42) do |index|
+                    # NOTE: No `break` to exceed max iteration count.
+                  end
+                end
+              end
+            end
+
+            it "returns `default`" do
+              expect(instance.foo).to eq(42)
+            end
           end
         end
 
@@ -278,14 +299,28 @@ RSpec.describe ConvenientService::Support::FiniteLoop do
         end
 
         context "when `raise_on_exceedance` is set to `false`" do
-          let(:loop_result) do
-            described_class.finite_loop(raise_on_exceedance: false) do |index|
-              # NOTE: No `break` to exceed max iteration count.
+          context "when `default` is NOT passed" do
+            let(:loop_result) do
+              described_class.finite_loop(raise_on_exceedance: false) do |index|
+                # NOTE: No `break` to exceed max iteration count.
+              end
+            end
+
+            it "returns `nil`" do
+              expect(loop_result).to be_nil
             end
           end
 
-          it "returns `nil`" do
-            expect(loop_result).to be_nil
+          context "when `default` is passed" do
+            let(:loop_result) do
+              described_class.finite_loop(raise_on_exceedance: false, default: 42) do |index|
+                # NOTE: No `break` to exceed max iteration count.
+              end
+            end
+
+            it "returns `default`" do
+              expect(loop_result).to eq(42)
+            end
           end
         end
 
@@ -307,7 +342,7 @@ RSpec.describe ConvenientService::Support::FiniteLoop do
       context "when `max_iteration_count` is NOT passed" do
         let(:loop_result) do
           described_class.finite_loop do |index|
-            break index if index >= 3
+            break if index >= 3
 
             puts "foo"
           end

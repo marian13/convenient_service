@@ -9,6 +9,8 @@ module ConvenientService
 
           import "commands.is_result?", from: Service::Plugins::HasResult::Container
 
+          intended_for :try_result
+
           def next(...)
             original_try_result = chain.next(...)
 

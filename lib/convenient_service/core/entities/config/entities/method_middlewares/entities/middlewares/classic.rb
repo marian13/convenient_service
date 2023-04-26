@@ -25,8 +25,6 @@ module ConvenientService
                     stack.call(env)
                   end
 
-                  private
-
                   ##
                   # @return [#call<Hash>]
                   #

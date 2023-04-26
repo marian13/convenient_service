@@ -78,6 +78,16 @@ module ConvenientService
           # @return [ConvenientService::RSpec::Matchers::Custom::DelegateTo]
           # @raise [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Errors::ArgumentsChainingIsAlreadySet]
           #
+          def with_any_arguments
+            matcher.with_any_arguments
+
+            self
+          end
+
+          ##
+          # @return [ConvenientService::RSpec::Matchers::Custom::DelegateTo]
+          # @raise [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Errors::ArgumentsChainingIsAlreadySet]
+          #
           def without_arguments
             matcher.without_arguments
 
