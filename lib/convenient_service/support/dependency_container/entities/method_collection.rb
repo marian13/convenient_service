@@ -15,15 +15,15 @@ module ConvenientService
 
           ##
           # @param name [String, Symbol]
-          # @param full_name [String, Symbol]
+          # @param slug [String, Symbol]
           # @param scope [:instance, :class]
           # @return [ConvenientService::Support::DependencyContainer::Entities::Method, nil]
           #
-          def find_by(name: Support::NOT_PASSED, full_name: Support::NOT_PASSED, scope: Support::NOT_PASSED)
+          def find_by(name: Support::NOT_PASSED, slug: Support::NOT_PASSED, scope: Support::NOT_PASSED)
             rules = []
 
             rules << ->(method) { method.name.to_s == name.to_s } if name != Support::NOT_PASSED
-            rules << ->(method) { method.slug.to_s == full_name.to_s } if full_name != Support::NOT_PASSED
+            rules << ->(method) { method.slug.to_s == slug.to_s } if slug != Support::NOT_PASSED
             rules << ->(method) { method.scope == scope } if scope != Support::NOT_PASSED
 
             condition = Utils::Proc.conjunct(rules)
