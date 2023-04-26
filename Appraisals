@@ -30,7 +30,7 @@
 ##
 
 ##
-# This wrapper appends ruby engine and version to the `appraisal_name`.
+# This wrapper appends Ruby engine and version to the `appraisal_name`.
 # This way every Appraisal has a dedicated Gemfile for any combination of Ruby and particular `appraisal_name`.
 # For example: `ruby_2.7_rails_5.2`, `ruby_3.0_rails_6.0`, `jruby_9.4_rails_7.0`, etc.
 #
@@ -42,6 +42,9 @@
 # @param appraisal_name [String]
 # @param block [Proc]
 # @return [void]
+#
+# @internal
+#   Taskfile uses a combination of Ruby engine, Ruby version and `appraisal_name` as `{{.APPRAISAL_NAME}}`.
 #
 def appraise(appraisal_name, &block)
   super([::RUBY_ENGINE, ::RUBY_VERSION, appraisal_name].join("_"), &block)

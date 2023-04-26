@@ -25,36 +25,82 @@ tasks:
       - bundle exec rake playground
     interactive: true
 
+  ##
+  # NOTE: `task console:all` is also aliased as `task playground:all`.
+  # NOTE: `APPRAISAL_NAME` should be kept in sync with `Appraisals` file.
+  #
   console:all:
     cmds:
-      - bundle exec appraisal all rake playground
+      - bundle exec appraisal {{.APPRAISAL_NAME}} rake playground
+    vars:
+      APPRAISAL_NAME:
+        sh: ruby -e 'print [::RUBY_ENGINE, ::RUBY_VERSION, "all"].join("_")'
     interactive: true
 
+  ##
+  # NOTE: `task console:dry` is also aliased as `task playground:dry`.
+  # NOTE: `APPRAISAL_NAME` should be kept in sync with `Appraisals` file.
+  #
   console:dry:
     cmds:
-      - bundle exec appraisal dry rake playground
+      - bundle exec appraisal {{.APPRAISAL_NAME}} rake playground
+    vars:
+      APPRAISAL_NAME:
+        sh: ruby -e 'print [::RUBY_ENGINE, ::RUBY_VERSION, "dry"].join("_")'
     interactive: true
 
+  ##
+  # NOTE: `task console:rails_5.2` is also aliased as `task playground:rails_5.2`.
+  # NOTE: `APPRAISAL_NAME` should be kept in sync with `Appraisals` file.
+  #
   console:rails_5.2:
     cmds:
-      - bundle exec appraisal rails_5.2 rake playground
+      - bundle exec appraisal {{.APPRAISAL_NAME}} rake playground
+    vars:
+      APPRAISAL_NAME:
+        sh: ruby -e 'print [::RUBY_ENGINE, ::RUBY_VERSION, "rails_5.2"].join("_")'
     interactive: true
 
+  ##
+  # NOTE: `task console:rails_6.0` is also aliased as `task playground:rails_6.0`.
+  # NOTE: `APPRAISAL_NAME` should be kept in sync with `Appraisals` file.
+  #
   console:rails_6.0:
     cmds:
-      - bundle exec appraisal rails_6.0 rake playground
+      - bundle exec appraisal {{.APPRAISAL_NAME}} rake playground
+    vars:
+      APPRAISAL_NAME:
+        sh: ruby -e 'print [::RUBY_ENGINE, ::RUBY_VERSION, "rails_6.0"].join("_")'
     interactive: true
 
+  ##
+  # NOTE: `task console:rails_6.1` is also aliased as `task playground:rails_6.1`.
+  # NOTE: `APPRAISAL_NAME` should be kept in sync with `Appraisals` file.
+  #
   console:rails_6.1:
     cmds:
-      - bundle exec appraisal rails_6.1 rake playground
+      - bundle exec appraisal {{.APPRAISAL_NAME}} rake playground
+    vars:
+      APPRAISAL_NAME:
+        sh: ruby -e 'print [::RUBY_ENGINE, ::RUBY_VERSION, "rails_6.1"].join("_")'
     interactive: true
 
+  ##
+  # NOTE: `task console:rails_7.0` is also aliased as `task playground:rails_7.0`.
+  # NOTE: `APPRAISAL_NAME` should be kept in sync with `Appraisals` file.
+  #
   console:rails_7.0:
     cmds:
-      - bundle exec appraisal rails_7.0 rake playground
+      - bundle exec appraisal {{.APPRAISAL_NAME}} rake playground
+    vars:
+      APPRAISAL_NAME:
+        sh: ruby -e 'print [::RUBY_ENGINE, ::RUBY_VERSION, "rails_7.0"].join("_")'
     interactive: true
 
+  ##
+  # NOTE: `task console:standard` is also aliased as `task playground:standard`.
+  # NOTE: `APPRAISAL_NAME` should be kept in sync with `Appraisals` file.
+  #
   console:standard:
     cmds:
       - bundle exec rake playground
@@ -354,41 +400,82 @@ tasks:
     cmds:
       - bundle exec ruby minitest.rb
 
-  playground:
-    cmds:
-      - bundle exec rake playground
-    interactive: true
-
+  ##
+  # NOTE: `task playground:all` is also aliased as `task console:all`.
+  # NOTE: `APPRAISAL_NAME` should be kept in sync with `Appraisals` file.
+  #
   playground:all:
     cmds:
-      - bundle exec appraisal all rake playground
+      - bundle exec appraisal {{.APPRAISAL_NAME}} rake playground
+    vars:
+      APPRAISAL_NAME:
+        sh: ruby -e 'print [::RUBY_ENGINE, ::RUBY_VERSION, "all"].join("_")'
     interactive: true
 
+  ##
+  # NOTE: `task playground:dry` is also aliased as `task console:dry`.
+  # NOTE: `APPRAISAL_NAME` should be kept in sync with `Appraisals` file.
+  #
   playground:dry:
     cmds:
-      - bundle exec appraisal dry rake playground
+      - bundle exec appraisal {{.APPRAISAL_NAME}} rake playground
+    vars:
+      APPRAISAL_NAME:
+        sh: ruby -e 'print [::RUBY_ENGINE, ::RUBY_VERSION, "dry"].join("_")'
     interactive: true
 
+  ##
+  # NOTE: `task playground:rails_5.2` is also aliased as `task console:rails_5.2`.
+  # NOTE: `APPRAISAL_NAME` should be kept in sync with `Appraisals` file.
+  #
   playground:rails_5.2:
     cmds:
-      - bundle exec appraisal rails_5.2 rake playground
+      - bundle exec appraisal {{.APPRAISAL_NAME}} rake playground
+    vars:
+      APPRAISAL_NAME:
+        sh: ruby -e 'print [::RUBY_ENGINE, ::RUBY_VERSION, "rails_5.2"].join("_")'
     interactive: true
 
+  ##
+  # NOTE: `task playground:rails_6.0` is also aliased as `task console:rails_6.0`.
+  # NOTE: `APPRAISAL_NAME` should be kept in sync with `Appraisals` file.
+  #
   playground:rails_6.0:
     cmds:
-      - bundle exec appraisal rails_6.0 rake playground
+      - bundle exec appraisal {{.APPRAISAL_NAME}} rake playground
+    vars:
+      APPRAISAL_NAME:
+        sh: ruby -e 'print [::RUBY_ENGINE, ::RUBY_VERSION, "rails_6.0"].join("_")'
     interactive: true
 
+  ##
+  # NOTE: `task playground:rails_6.1` is also aliased as `task console:rails_6.1`.
+  # NOTE: `APPRAISAL_NAME` should be kept in sync with `Appraisals` file.
+  #
   playground:rails_6.1:
     cmds:
-      - bundle exec appraisal rails_6.1 rake playground
+      - bundle exec appraisal {{.APPRAISAL_NAME}} rake playground
+    vars:
+      APPRAISAL_NAME:
+        sh: ruby -e 'print [::RUBY_ENGINE, ::RUBY_VERSION, "rails_6.1"].join("_")'
     interactive: true
 
+  ##
+  # NOTE: `task playground:rails_7.0` is also aliased as `task console:rails_7.0`.
+  # NOTE: `APPRAISAL_NAME` should be kept in sync with `Appraisals` file.
+  #
   playground:rails_7.0:
     cmds:
-      - bundle exec appraisal rails_7.0 rake playground
+      - bundle exec appraisal {{.APPRAISAL_NAME}} rake playground
+    vars:
+      APPRAISAL_NAME:
+        sh: ruby -e 'print [::RUBY_ENGINE, ::RUBY_VERSION, "rails_7.0"].join("_")'
     interactive: true
 
+  ##
+  # NOTE: `task playground:standard` is also aliased as `task console:standard`.
+  # NOTE: `APPRAISAL_NAME` should be kept in sync with `Appraisals` file.
+  #
   playground:standard:
     cmds:
       - bundle exec rake playground
@@ -420,9 +507,15 @@ tasks:
       - task: rspec:rails_7.0:staged
       - task: rspec:dry:staged
 
+  ##
+  # NOTE: `APPRAISAL_NAME` should be kept in sync with `Appraisals` file.
+  #
   rspec:dry:
     cmds:
-      - bundle exec appraisal dry rspec --format progress --require dry_helper {{.GIT_STAGED_SPEC_FILES}} {{.CLI_ARGS}}
+      - bundle exec appraisal {{.APPRAISAL_NAME}} rspec --format progress --require dry_helper {{.GIT_STAGED_SPEC_FILES}} {{.CLI_ARGS}}
+    vars:
+      APPRAISAL_NAME:
+        sh: ruby -e 'print [::RUBY_ENGINE, ::RUBY_VERSION, "dry"].join("_")'
 
   rspec:dry:staged:
     - task: rspec:dry
@@ -433,9 +526,15 @@ tasks:
           #
           sh: task git:staged:specs --silent
 
+  ##
+  # NOTE: `APPRAISAL_NAME` should be kept in sync with `Appraisals` file.
+  #
   rspec:rails_5.2:
     cmds:
-      - bundle exec appraisal rails_5.2 rspec --format progress --require rails_helper {{.GIT_STAGED_SPEC_FILES}} {{.CLI_ARGS}}
+      - bundle exec appraisal {{.APPRAISAL_NAME}} rspec --format progress --require rails_helper {{.GIT_STAGED_SPEC_FILES}} {{.CLI_ARGS}}
+    vars:
+      APPRAISAL_NAME:
+        sh: ruby -e 'print [::RUBY_ENGINE, ::RUBY_VERSION, "rails_5.2"].join("_")'
 
   rspec:rails_5.2:staged:
     - task: rspec:rails_5.2
@@ -446,9 +545,15 @@ tasks:
           #
           sh: task git:staged:specs --silent
 
+  ##
+  # NOTE: `APPRAISAL_NAME` should be kept in sync with `Appraisals` file.
+  #
   rspec:rails_6.0:
     cmds:
-      - bundle exec appraisal rails_6.0 rspec --format progress --require rails_helper {{.GIT_STAGED_SPEC_FILES}} {{.CLI_ARGS}}
+      - bundle exec appraisal {{.APPRAISAL_NAME}} rspec --format progress --require rails_helper {{.GIT_STAGED_SPEC_FILES}} {{.CLI_ARGS}}
+    vars:
+      APPRAISAL_NAME:
+        sh: ruby -e 'print [::RUBY_ENGINE, ::RUBY_VERSION, "rails_6.0"].join("_")'
 
   rspec:rails_6.0:staged:
     - task: rspec:rails_6.0
@@ -459,9 +564,15 @@ tasks:
           #
           sh: task git:staged:specs --silent
 
+  ##
+  # NOTE: `APPRAISAL_NAME` should be kept in sync with `Appraisals` file.
+  #
   rspec:rails_6.1:
     cmds:
-      - bundle exec appraisal rails_6.1 rspec --format progress --require rails_helper {{.GIT_STAGED_SPEC_FILES}} {{.CLI_ARGS}}
+      - bundle exec appraisal {{.APPRAISAL_NAME}} rspec --format progress --require rails_helper {{.GIT_STAGED_SPEC_FILES}} {{.CLI_ARGS}}
+    vars:
+      APPRAISAL_NAME:
+        sh: ruby -e 'print [::RUBY_ENGINE, ::RUBY_VERSION, "rails_6.1"].join("_")'
 
   rspec:rails_6.1:staged:
     - task: rspec:rails_6.1
@@ -472,9 +583,15 @@ tasks:
           #
           sh: task git:staged:specs --silent
 
+  ##
+  # NOTE: `APPRAISAL_NAME` should be kept in sync with `Appraisals` file.
+  #
   rspec:rails_7.0:
     cmds:
-      - bundle exec appraisal rails_7.0 rspec --format progress --require rails_helper {{.GIT_STAGED_SPEC_FILES}} {{.CLI_ARGS}}
+      - bundle exec appraisal {{.APPRAISAL_NAME}} rspec --format progress --require rails_helper {{.GIT_STAGED_SPEC_FILES}} {{.CLI_ARGS}}
+    vars:
+      APPRAISAL_NAME:
+        sh: ruby -e 'print [::RUBY_ENGINE, ::RUBY_VERSION, "rails_7.0"].join("_")'
 
   rspec:rails_7.0:staged:
     - task: rspec:rails_7.0
