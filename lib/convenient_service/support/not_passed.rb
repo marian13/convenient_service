@@ -2,6 +2,9 @@
 
 module ConvenientService
   module Support
-    NOT_PASSED = ::Object.new
+    ##
+    # @return [ConvenientService::Support::UniqueValue]
+    #
+    NOT_PASSED = Support::UniqueValue.new("not_passed")
   end
 end

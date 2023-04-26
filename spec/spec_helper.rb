@@ -1,8 +1,18 @@
 # frozen_string_literal: true
 
+##
+# Makes sure that internal `ENV` variables are available.
+#
 require_relative "../env"
+
+##
+# Configures coverage tracking.
+#
 require_relative "coverage_helper"
 
+##
+# Allows to require gems listed in `Gemfile` and `gemspec`.
+#
 require "bundler/setup"
 
 RSpec.configure do |config|
@@ -18,6 +28,7 @@ RSpec.configure do |config|
 end
 
 require_relative "support/convenient_service"
+require_relative "support/faker"
 
 ##
 # NOTE: Waits for `should-matchers` full support.

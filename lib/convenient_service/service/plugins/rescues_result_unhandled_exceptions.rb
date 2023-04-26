@@ -1,0 +1,5 @@
+# frozen_string_literal: true
+
+require_relative "rescues_result_unhandled_exceptions/commands"
+require_relative "rescues_result_unhandled_exceptions/constants"
+require_relative "rescues_result_unhandled_exceptions/middleware"

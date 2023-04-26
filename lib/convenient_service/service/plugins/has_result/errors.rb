@@ -5,7 +5,7 @@ module ConvenientService
     module Plugins
       module HasResult
         module Errors
-          class ResultIsNotOverridden < ConvenientService::Error
+          class ResultIsNotOverridden < ::ConvenientService::Error
             def initialize(service:)
               message = <<~TEXT
                 Result method (#result) of `#{service.class}` is NOT overridden.
@@ -15,11 +15,11 @@ module ConvenientService
             end
           end
 
-          class ServiceReturnValueNotKindOfResult < ConvenientService::Error
+          class ServiceReturnValueNotKindOfResult < ::ConvenientService::Error
             def initialize(service:, result:)
               message = <<~TEXT
                 Return value of service `#{service.class}` is NOT a `Result`.
-                It is a `#{result.class}`.
+                It is `#{result.class}`.
 
                 Did you forget to call `success`, `failure`, or `error` from the `result` method?
               TEXT

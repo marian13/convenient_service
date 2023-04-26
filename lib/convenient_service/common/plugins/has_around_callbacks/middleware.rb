@@ -4,8 +4,18 @@ module ConvenientService
   module Common
     module Plugins
       module HasAroundCallbacks
-        class Middleware < Core::MethodChainMiddleware
-          def next(...)
+        class Middleware < MethodChainMiddleware
+          ##
+          # @internal
+          #   TODO: Move to command.
+          #
+          include Support::DependencyContainer::Import
+
+          import :"entities.Callback", from: Common::Plugins::HasCallbacks::Container
+
+          intended_for any_method, scope: any_scope
+
+          def next(*args, **kwargs, &block)
             ##
             # A variable that stores return value of middleware `chain.next` aka `original_value`.
             # It is reassigned later by the `initial_around_callback`.
@@ -15,14 +25,30 @@ module ConvenientService
             ##
             # A list of around callbacks.
             #
+            # class Service
+            #   around do |chain|
+            #     # part before `chain.yield`
+            #     original_value = chain.yield
+            #     # part after `chain.yield`
+            #   end
+            # end
+            #
+            # class Service
+            #   around do |chain, arguments|
+            #     # part before `chain.yield`
+            #     original_value = chain.yield
+            #     # part after `chain.yield`
+            #   end
+            # end
+            #
             around_callbacks = entity.callbacks.for([:around, method])
 
             ##
             #
             #
-            initial_around_callback = Plugins::HasCallbacks::Entities::Callback.new(
+            initial_around_callback = entities.Callback.new(
               types: [:around, method],
-              block: proc { original_value = chain.next(...) }
+              block: proc { original_value = chain.next(*args, **kwargs, &block) }
             )
 
             ##
@@ -76,7 +102,7 @@ module ConvenientService
             # rubocop:disable Style/Semicolon
             composed =
               around_callbacks.reverse.reduce(initial_around_callback) do |composed, callback|
-                proc { callback.call_in_context(entity, composed); original_value }
+                proc { callback.call_in_context_with_value_and_arguments(entity, composed, *args, **kwargs, &block); original_value }
               end
             # rubocop:enable Style/Semicolon
 

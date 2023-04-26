@@ -15,7 +15,9 @@ module ConvenientService
         # Check the following link for more details:
         # - https://bugs.ruby-lang.org/issues/8507
         #
-        class Middleware < Core::ClassicMiddleware
+        class Middleware < MethodClassicMiddleware
+          intended_for any_method, scope: any_scope
+
           def call(env = nil)
             env = env.to_h
             env = env.merge(args: env[:args].to_a, kwargs: env[:kwargs].to_h, block: env[:block])

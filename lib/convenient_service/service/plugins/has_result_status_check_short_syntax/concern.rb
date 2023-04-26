@@ -55,6 +55,22 @@ module ConvenientService
             def not_failure?(...)
               result(...).not_failure?
             end
+
+            ##
+            # @return [Boolean]
+            # @since 0.12.0
+            #
+            def ok?(...)
+              result(...).success?
+            end
+
+            ##
+            # @return [Boolean]
+            # @since 0.12.0
+            #
+            def not_ok?(...)
+              result(...).not_success?
+            end
           end
         end
       end

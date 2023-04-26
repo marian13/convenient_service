@@ -105,7 +105,7 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::P
         let(:pattern) { /^\/rules\/(?<id>\d+)\.(?<format>\w+)$/ }
 
         it "fails to extract params from path" do
-          expect(result).to be_error.of(ConvenientService::Examples::Standard::RequestParams::Services::ExtractParamsFromPath)
+          expect(result).to be_error.of_step(ConvenientService::Examples::Standard::RequestParams::Services::ExtractParamsFromPath)
         end
       end
 
@@ -116,7 +116,7 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::P
         let(:body) { "abc" }
 
         it "fails to extract params from body" do
-          expect(result).to be_error.of(ConvenientService::Examples::Standard::RequestParams::Services::ExtractParamsFromBody)
+          expect(result).to be_error.of_step(ConvenientService::Examples::Standard::RequestParams::Services::ExtractParamsFromBody)
         end
       end
 
@@ -167,7 +167,7 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::P
         let(:path) { "/rules/1.html" }
 
         it "fails to validate uncasted params" do
-          expect(result).to be_error.of(ConvenientService::Examples::Standard::RequestParams::Services::ValidateUncastedParams)
+          expect(result).to be_error.of_step(ConvenientService::Examples::Standard::RequestParams::Services::ValidateUncastedParams)
         end
       end
 
@@ -185,7 +185,7 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::P
         end
 
         it "fails to validate casted params" do
-          expect(result).to be_error.of(ConvenientService::Examples::Standard::RequestParams::Services::ValidateCastedParams)
+          expect(result).to be_error.of_step(ConvenientService::Examples::Standard::RequestParams::Services::ValidateCastedParams)
         end
       end
 

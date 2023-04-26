@@ -83,6 +83,14 @@ RSpec.describe ConvenientService::Support::Copyable do
         expect(instance).to have_received(:to_block)
       end
 
+      context "when `overrides[:args]` is NOT passed" do
+        let(:overrides) { {} }
+
+        it "defaults to empty hash`" do
+          expect(instance.copy(overrides: overrides).args).to eq(constructor_params[:args])
+        end
+      end
+
       context "when `overrides[:args]` is passed" do
         context "when `overrides[:args]` is array" do
           let(:overrides) { {args: [:baz, :qux]} }
@@ -109,6 +117,14 @@ RSpec.describe ConvenientService::Support::Copyable do
         end
       end
 
+      context "when `overrides[:kwargs]` is NOT passed" do
+        let(:overrides) { {} }
+
+        it "defaults to empty hash`" do
+          expect(instance.copy(overrides: overrides).kwargs).to eq(constructor_params[:kwargs])
+        end
+      end
+
       context "when `overrides[:kwargs]` is passed" do
         let(:overrides) { {kwargs: {foo: 3, bar: 4}} }
 
@@ -122,6 +138,21 @@ RSpec.describe ConvenientService::Support::Copyable do
 
         it "merges `to_block` with `overrides[:block]`" do
           expect(instance.copy(overrides: overrides).block).to eq(overrides[:block])
+        end
+      end
+
+      context "when `overrides` is passed" do
+        let(:overrides) { {block: proc { :bar }} }
+
+        it "does NOT mutate `overrides`" do
+          overrides.freeze
+
+          ##
+          # NOTE: Using specific error in `not_to raise_error` may lead to false positives.
+          # - https://stackoverflow.com/questions/44515447/best-practices-for-rspec-expect-raise-error
+          # - https://github.com/rspec/rspec-expectations/issues/231
+          #
+          expect { instance.copy(overrides: overrides) }.not_to raise_error
         end
       end
 

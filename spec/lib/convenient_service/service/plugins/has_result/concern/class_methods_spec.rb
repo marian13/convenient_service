@@ -6,10 +6,15 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern::ClassMethods do
+  include ConvenientService::RSpec::Matchers::DelegateTo
+  include ConvenientService::RSpec::Matchers::CacheItsValue
+
   let(:service_class) do
     Class.new.tap do |klass|
       klass.class_exec(described_class) do |mod|
         extend mod
+
+        include ConvenientService::Common::Plugins::HasConstructorWithoutInitialize::Concern
 
         # rubocop:disable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
         class self::Result
@@ -18,13 +23,13 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern::ClassMet
           concerns do
             use ConvenientService::Common::Plugins::HasInternals::Concern
             use ConvenientService::Common::Plugins::HasConstructor::Concern
-            use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Concern
+            use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Concern
           end
 
           middlewares :initialize do
             use ConvenientService::Common::Plugins::NormalizesEnv::Middleware
 
-            use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Middleware
+            use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Middleware
           end
 
           class self::Internals
@@ -48,6 +53,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern::ClassMet
   end
 
   let(:service_instance) { service_class.new(*args, **kwargs, &block) }
+
   let(:args) { [:foo] }
   let(:kwargs) { {foo: :bar} }
   let(:block) { proc { :foo } }
@@ -119,9 +125,14 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern::ClassMet
 
       context "when `service` is NOT passed" do
         let(:result) { service_class.success(**ConvenientService::Utils::Hash.except(params, [:service])) }
+        let(:not_initialized_service_instance) { double }
 
-        it "defaults `service` to `ConvenientService::Service::Plugins::HasResult::Constants::DEFAULT_SERVICE_INSTANCE`" do
-          expect(result.service).to eq(ConvenientService::Service::Plugins::HasResult::Constants::DEFAULT_SERVICE_INSTANCE)
+        before do
+          allow(service_class).to receive(:create_without_initialize).and_return(not_initialized_service_instance)
+        end
+
+        it "defaults `service` to `service_class.create_without_initialize`" do
+          expect(result.service).to eq(not_initialized_service_instance)
         end
       end
 
@@ -183,9 +194,14 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern::ClassMet
 
       context "when `service` is NOT passed" do
         let(:result) { service_class.failure(**ConvenientService::Utils::Hash.except(params, [:service])) }
+        let(:not_initialized_service_instance) { double }
 
-        it "defaults `service` to `ConvenientService::Service::Plugins::HasResult::Constants::DEFAULT_SERVICE_INSTANCE`" do
-          expect(result.service).to eq(ConvenientService::Service::Plugins::HasResult::Constants::DEFAULT_SERVICE_INSTANCE)
+        before do
+          allow(service_class).to receive(:create_without_initialize).and_return(not_initialized_service_instance)
+        end
+
+        it "defaults `service` to `service_class.create_without_initialize`" do
+          expect(result.service).to eq(not_initialized_service_instance)
         end
       end
 
@@ -258,9 +274,14 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern::ClassMet
 
       context "when `service` is NOT passed" do
         let(:result) { service_class.error(**ConvenientService::Utils::Hash.except(params, [:service])) }
+        let(:not_initialized_service_instance) { double }
 
-        it "defaults service to `ConvenientService::Service::Plugins::HasResult::Constants::DEFAULT_SERVICE_INSTANCE`" do
-          expect(result.service).to eq(ConvenientService::Service::Plugins::HasResult::Constants::DEFAULT_SERVICE_INSTANCE)
+        before do
+          allow(service_class).to receive(:create_without_initialize).and_return(not_initialized_service_instance)
+        end
+
+        it "defaults `service` to `service_class.create_without_initialize`" do
+          expect(result.service).to eq(not_initialized_service_instance)
         end
       end
 
@@ -282,16 +303,15 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern::ClassMet
     end
 
     describe ".result_class" do
-      it "delegates to `ConvenientService::Service::Plugins::HasResult::Commands::CreateResultClass`" do
-        allow(ConvenientService::Service::Plugins::HasResult::Commands::CreateResultClass).to receive(:call).with(hash_including(service_class: service_class)).and_call_original
-
-        service_class.result_class
-
-        expect(ConvenientService::Service::Plugins::HasResult::Commands::CreateResultClass).to have_received(:call)
+      specify do
+        expect { service_class.result_class }
+          .to delegate_to(ConvenientService::Service::Plugins::HasResult::Commands::CreateResultClass, :call)
+          .with_arguments(service_class: service_class)
+          .and_return_its_value
       end
 
-      it "returns `ConvenientService::Service::Plugins::HasResult::Commands::CreateResultClass` result" do
-        expect(service_class.result_class).to eq(ConvenientService::Service::Plugins::HasResult::Commands::CreateResultClass.call(service_class: service_class))
+      specify do
+        expect { service_class.result_class }.to cache_its_value
       end
     end
   end

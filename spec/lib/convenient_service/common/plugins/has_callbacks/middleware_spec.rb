@@ -11,7 +11,21 @@ RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Middleware do
 
     subject { described_class }
 
-    it { is_expected.to be_descendant_of(ConvenientService::Core::MethodChainMiddleware) }
+    it { is_expected.to be_descendant_of(ConvenientService::MethodChainMiddleware) }
+  end
+
+  example_group "class methods" do
+    describe ".intended_methods" do
+      let(:spec) do
+        Class.new(ConvenientService::MethodChainMiddleware) do
+          intended_for any_method, scope: any_scope
+        end
+      end
+
+      it "returns intended methods" do
+        expect(described_class.intended_methods).to eq(spec.intended_methods)
+      end
+    end
   end
 
   example_group "instance methods" do
@@ -212,6 +226,53 @@ RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Middleware do
           end
 
           it "executes after callbacks in instance context" do
+            expect { method_value }.not_to raise_error
+          end
+        end
+      end
+
+      example_group "method arguments" do
+        subject(:method_value) { method.call(*args, **kwargs, &block) }
+
+        let(:args) { [:foo] }
+        let(:kwargs) { {foo: :bar} }
+        let(:block) { proc { :foo } }
+
+        let(:service_class) do
+          Class.new.tap do |klass|
+            klass.class_exec(result_original_value, out) do |result_original_value, out|
+              include ConvenientService::Common::Plugins::HasCallbacks::Concern
+
+              define_method(:result) { |*args, **kwargs, &block| result_original_value }
+            end
+          end
+        end
+
+        example_group "before callbacks method arguments" do
+          before do
+            service_class.before(:result) do |arguments|
+              raise if arguments.args != [:foo]
+              raise if arguments.kwargs != {foo: :bar}
+              raise if arguments.block.call != :foo
+            end
+          end
+
+          it "passes args, kwargs, block as arguments object" do
+            expect { method_value }.not_to raise_error
+          end
+        end
+
+        example_group "after callbacks method arguments" do
+          before do
+            service_class.after(:result) do |original_value, arguments|
+              raise if original_value != "result original value"
+              raise if arguments.args != [:foo]
+              raise if arguments.kwargs != {foo: :bar}
+              raise if arguments.block.call != :foo
+            end
+          end
+
+          it "passes original value and args, kwargs, block as arguments object" do
             expect { method_value }.not_to raise_error
           end
         end

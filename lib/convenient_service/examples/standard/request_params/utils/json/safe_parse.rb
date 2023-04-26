@@ -14,7 +14,7 @@ module ConvenientService
       module RequestParams
         module Utils
           module JSON
-            class SafeParse < Support::Command
+            class SafeParse < ConvenientService::Command
               attr_reader :json_string, :default_value
 
               def initialize(json_string, default_value: nil)

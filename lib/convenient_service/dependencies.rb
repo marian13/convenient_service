@@ -36,6 +36,14 @@ module ConvenientService
       # @return [Boolean]
       # @note Expected to be called from app entry points like `initializers` in Rails.
       #
+      def require_can_utilize_finite_loop
+        require_relative "common/plugins/can_utilize_finite_loop"
+      end
+
+      ##
+      # @return [Boolean]
+      # @note Expected to be called from app entry points like `initializers` in Rails.
+      #
       def require_has_attributes_using_active_model_attributes
         require "active_model"
 
@@ -77,17 +85,46 @@ module ConvenientService
 
       ##
       # @return [Boolean]
+      # @note Expected to be called from app entry points like `initializers` in Rails.
+      #
+      def require_rescues_result_unhandled_exceptions
+        require_relative "service/plugins/rescues_result_unhandled_exceptions"
+      end
+
+      ##
+      # @return [Boolean]
+      # @note Expected to be called from app entry points like `initializers` in Rails.
+      #
+      def require_cleans_exception_backtrace
+        require_relative "dependencies/extractions/active_support_backtrace_cleaner"
+      end
+
+      ##
+      # @return [Boolean]
       # @note Expected to be called from `irb`, `pry`, `spec_helper.rb`, etc.
+      #
+      # @internal
+      #   NOTE: `byebug` has C extensions, that is why it is NOT supported in JRuby.
+      #   - https://github.com/deivid-rodriguez/byebug/tree/master/ext/byebug
+      #   - https://github.com/deivid-rodriguez/byebug/issues/179#issuecomment-152727003
       #
       def require_development_tools
         require "awesome_print"
-        require "byebug"
+        require "byebug" unless ruby.jruby?
         require "paint"
         require "rouge"
         require "tempfile"
 
-        require_relative "dependencies/extractions/byebug_syntax_highlighting"
-        require_relative "dependencies/extractions/b"
+        require_relative "dependencies/extractions/byebug_syntax_highlighting" unless ruby.jruby?
+        require_relative "dependencies/extractions/b" unless ruby.jruby?
+      end
+
+      ##
+      # @return [Boolean]
+      # @note Expected to be called from `spec_helper.rb`.
+      #
+      def require_test_tools
+        require "faker"
       end
 
       ##
@@ -118,8 +155,9 @@ module ConvenientService
         require "webrick"
 
         require_relative "examples/standard/cowsay"
-        require_relative "examples/standard/request_params"
+        require_relative "examples/standard/factorial"
         require_relative "examples/standard/gemfile"
+        require_relative "examples/standard/request_params"
       end
 
       ##

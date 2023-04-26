@@ -8,7 +8,7 @@ require "convenient_service"
 RSpec.describe ConvenientService::Support::DependencyContainer::Entities::MethodCollection do
   let(:method_collection) { described_class.new(methods: methods) }
   let(:methods) { [method] }
-  let(:method) { ConvenientService::Support::DependencyContainer::Entities::Method.new(full_name: :foo, scope: :instance, body: body) }
+  let(:method) { ConvenientService::Support::DependencyContainer::Entities::Method.new(slug: :foo, scope: :instance, body: body) }
   let(:body) { proc { :foo } }
 
   example_group "class methods" do
@@ -54,7 +54,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Method
       end
 
       example_group "`name` filter" do
-        let(:method) { ConvenientService::Support::DependencyContainer::Entities::Method.new(full_name: name, scope: :instance, body: body) }
+        let(:method) { ConvenientService::Support::DependencyContainer::Entities::Method.new(slug: name, scope: :instance, body: body) }
         let(:name) { :foo }
 
         context "when `name` is NOT passed" do
@@ -102,12 +102,12 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Method
         end
       end
 
-      example_group "`full_name` filter" do
-        let(:method) { ConvenientService::Support::DependencyContainer::Entities::Method.new(full_name: full_name, scope: :instance, body: body) }
-        let(:full_name) { :"foo.bar.baz.qux" }
+      example_group "`slug` filter" do
+        let(:method) { ConvenientService::Support::DependencyContainer::Entities::Method.new(slug: slug, scope: :instance, body: body) }
+        let(:slug) { :"foo.bar.baz.qux" }
 
-        context "when `full_name` is NOT passed" do
-          context "when method collection does NOT have method with `full_name`" do
+        context "when `slug` is NOT passed" do
+          context "when method collection does NOT have method with `slug`" do
             before do
               method_collection.clear
             end
@@ -117,7 +117,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Method
             end
           end
 
-          context "when method collection has method with `full_name`" do
+          context "when method collection has method with `slug`" do
             before do
               method_collection << method
             end
@@ -128,31 +128,31 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Method
           end
         end
 
-        context "when `full_name` is passed" do
-          context "when method collection does NOT have method with `full_name`" do
+        context "when `slug` is passed" do
+          context "when method collection does NOT have method with `slug`" do
             before do
               method_collection.clear
             end
 
             it "returns `nil`" do
-              expect(method_collection.find_by(full_name: full_name)).to be_nil
+              expect(method_collection.find_by(slug: slug)).to be_nil
             end
           end
 
-          context "when method collection has method with `full_name`" do
+          context "when method collection has method with `slug`" do
             before do
               method_collection << method
             end
 
-            it "returns that method with `full_name`" do
-              expect(method_collection.find_by(full_name: full_name)).to eq(method)
+            it "returns that method with `slug`" do
+              expect(method_collection.find_by(slug: slug)).to eq(method)
             end
           end
         end
       end
 
       example_group "`scope` filter" do
-        let(:method) { ConvenientService::Support::DependencyContainer::Entities::Method.new(full_name: :foo, scope: scope, body: body) }
+        let(:method) { ConvenientService::Support::DependencyContainer::Entities::Method.new(slug: :foo, scope: scope, body: body) }
         let(:scope) { :class }
 
         context "when `scope` is NOT passed" do
@@ -202,8 +202,8 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Method
 
       context "when multiple filters are passed" do
         context "when method collection does NOT have method that matches those multiple filters" do
-          let(:first_method) { ConvenientService::Support::DependencyContainer::Entities::Method.new(full_name: :foo, scope: :instance, body: body) }
-          let(:second_method) { ConvenientService::Support::DependencyContainer::Entities::Method.new(full_name: :bar, scope: :instance, body: body) }
+          let(:first_method) { ConvenientService::Support::DependencyContainer::Entities::Method.new(slug: :foo, scope: :instance, body: body) }
+          let(:second_method) { ConvenientService::Support::DependencyContainer::Entities::Method.new(slug: :bar, scope: :instance, body: body) }
 
           before do
             method_collection << first_method << second_method
@@ -215,8 +215,8 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Method
         end
 
         context "when method collection has method that matches those multiple filters" do
-          let(:first_method) { ConvenientService::Support::DependencyContainer::Entities::Method.new(full_name: :foo, scope: :instance, body: body) }
-          let(:second_method) { ConvenientService::Support::DependencyContainer::Entities::Method.new(full_name: :foo, scope: :class, body: body) }
+          let(:first_method) { ConvenientService::Support::DependencyContainer::Entities::Method.new(slug: :foo, scope: :instance, body: body) }
+          let(:second_method) { ConvenientService::Support::DependencyContainer::Entities::Method.new(slug: :foo, scope: :class, body: body) }
 
           before do
             method_collection << first_method << second_method
@@ -229,8 +229,8 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Method
       end
 
       context "when multiple methods matches filter" do
-        let(:first_method) { ConvenientService::Support::DependencyContainer::Entities::Method.new(full_name: :foo, scope: :instance, body: body) }
-        let(:second_method) { ConvenientService::Support::DependencyContainer::Entities::Method.new(full_name: :foo, scope: :instance, body: body) }
+        let(:first_method) { ConvenientService::Support::DependencyContainer::Entities::Method.new(slug: :foo, scope: :instance, body: body) }
+        let(:second_method) { ConvenientService::Support::DependencyContainer::Entities::Method.new(slug: :foo, scope: :instance, body: body) }
 
         before do
           method_collection << first_method << second_method

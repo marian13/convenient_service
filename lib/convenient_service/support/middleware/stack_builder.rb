@@ -13,7 +13,7 @@ module ConvenientService
       class StackBuilder < Dependencies::Extractions::RubyMiddleware::Middleware::Builder
         ##
         # @param opts [Hash]
-        # @param block [Proc]
+        # @param block [Proc, nil]
         # @return [void]
         #
         # @see https://github.com/marian13/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L43

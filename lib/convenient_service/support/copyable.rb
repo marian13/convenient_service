@@ -20,8 +20,12 @@ module ConvenientService
       #   NOTE: This method is NOT likely to be ever changed, that is why inline logic is preferred over command classes in this particular case.
       #
       def copy(overrides: {})
-        overrides[:args] ||= {}
-        overrides[:kwargs] ||= {}
+        defaults = {args: {}, kwargs: {}}
+
+        ##
+        # IMPORTANT: Do not mutate `overrides`.
+        #
+        overrides = defaults.merge(overrides)
 
         ##
         # TODO: Refactor runtime `respond_to?`. Investigate before refactoring.

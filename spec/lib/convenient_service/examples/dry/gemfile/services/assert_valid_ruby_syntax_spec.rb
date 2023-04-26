@@ -6,13 +6,12 @@ require "convenient_service"
 
 return unless defined? ConvenientService::Examples::Dry
 
+# rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::AssertValidRubySyntax do
   include ConvenientService::RSpec::Matchers::Results
   include ConvenientService::RSpec::Matchers::IncludeModule
 
-  let(:service) { described_class.new(**default_options) }
-
-  let(:default_options) { {content: content} }
+  let(:result) { described_class.result(content: content) }
   let(:content) { double }
 
   example_group "modules" do
@@ -21,23 +20,26 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::AssertValidR
     it { is_expected.to include_module(ConvenientService::Examples::Dry::Gemfile::DryService::Config) }
   end
 
-  describe "#result" do
-    subject(:result) { described_class.result(**default_options) }
+  example_group "class methods" do
+    describe ".result" do
+      context "when assertion that ruby syntax is valid is NOT successful" do
+        context "when `content` does NOT contain valid Ruby syntax" do
+          let(:content) { "2 */ 2" }
 
-    context "when content does NOT contain valid Ruby syntax" do
-      let(:content) { "2 */ 2" }
-
-      it "returns error with message" do
-        expect(result).to be_error.with_message("`#{content}` contains invalid Ruby syntax")
+          it "returns `error` with `message`" do
+            expect(result).to be_error.with_message("`#{content}` contains invalid Ruby syntax").of_service(described_class).without_step
+          end
+        end
       end
-    end
 
-    context "when content contains valid Ruby syntax" do
-      let(:content) { "2 + 2" }
+      context "when assertion that ruby syntax is valid is successful" do
+        let(:content) { "2 + 2" }
 
-      it "returns success" do
-        expect(result).to be_success
+        it "returns `success`" do
+          expect(result).to be_success.without_data.of_service(described_class).without_step
+        end
       end
     end
   end
 end
+# rubocop:enable RSpec/NestedGroups

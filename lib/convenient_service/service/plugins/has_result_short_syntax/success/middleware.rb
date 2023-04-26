@@ -5,7 +5,9 @@ module ConvenientService
     module Plugins
       module HasResultShortSyntax
         module Success
-          class Middleware < Core::MethodChainMiddleware
+          class Middleware < MethodChainMiddleware
+            intended_for :success
+
             def next(**kwargs)
               Commands::RefuteKwargsContainDataAndExtraKeys.call(kwargs: kwargs)
 

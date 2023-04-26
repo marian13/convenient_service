@@ -179,7 +179,7 @@ RSpec.describe ConvenientService::Core::Entities::Config do
 
       context "when `configuration_block` is passed" do
         let(:instance_method_middleware) do
-          Class.new(ConvenientService::Core::MethodChainMiddleware) do
+          Class.new(ConvenientService::MethodChainMiddleware) do
             def next(...)
               chain.next(...)
             end
@@ -187,7 +187,7 @@ RSpec.describe ConvenientService::Core::Entities::Config do
         end
 
         let(:class_method_middleware) do
-          Class.new(ConvenientService::Core::MethodChainMiddleware) do
+          Class.new(ConvenientService::MethodChainMiddleware) do
             def next(...)
               chain.next(...)
             end
@@ -368,6 +368,30 @@ RSpec.describe ConvenientService::Core::Entities::Config do
       end
     end
 
+    describe "#method_missing_commits_counter" do
+      it "returns `ConvenientService::Support::ThreadSafeCounter` instance" do
+        expect(config.method_missing_commits_counter).to be_instance_of(ConvenientService::Support::ThreadSafeCounter)
+      end
+
+      specify do
+        expect { config.method_missing_commits_counter }.to cache_its_value
+      end
+
+      example_group "`counter`" do
+        it "has initial value set to `0`" do
+          expect(config.method_missing_commits_counter.current_value).to eq(0)
+        end
+
+        it "has current value same as initial value" do
+          expect(config.method_missing_commits_counter.current_value).to eq(config.method_missing_commits_counter.initial_value)
+        end
+
+        it "has max value set to `ConvenientService::Core::Constants::Commits::METHOD_MISSING_MAX_TRIES`" do
+          expect(config.method_missing_commits_counter.max_value).to eq(ConvenientService::Core::Constants::Commits::METHOD_MISSING_MAX_TRIES)
+        end
+      end
+    end
+
     describe "#committed?" do
       before do
         ##
@@ -400,6 +424,30 @@ RSpec.describe ConvenientService::Core::Entities::Config do
         expect { config.commit! }
           .to delegate_to(config.concerns, :include!)
           .and_return_its_value
+      end
+
+      specify do
+        expect { config.commit! }
+          .to delegate_to(ConvenientService::Core::Entities::Config::Commands::TrackMethodMissingCommitTrigger, :call)
+          .with_arguments(config: config, trigger: ConvenientService::Core::Constants::Triggers::USER)
+      end
+
+      example_group "`trigger` option" do
+        context "when `trigger` is NOT passed" do
+          it "defaults `ConvenientService::Core::Constants::Triggers::USER`" do
+            expect { config.commit! }
+              .to delegate_to(ConvenientService::Core::Entities::Config::Commands::TrackMethodMissingCommitTrigger, :call)
+              .with_arguments(config: config, trigger: ConvenientService::Core::Constants::Triggers::USER)
+          end
+        end
+
+        context "when `trigger` is passed" do
+          specify do
+            expect { config.commit!(trigger: ConvenientService::Core::Constants::Triggers::INSTANCE_METHOD_MISSING) }
+              .to delegate_to(ConvenientService::Core::Entities::Config::Commands::TrackMethodMissingCommitTrigger, :call)
+              .with_arguments(config: config, trigger: ConvenientService::Core::Constants::Triggers::INSTANCE_METHOD_MISSING)
+          end
+        end
       end
     end
   end

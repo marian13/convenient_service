@@ -22,7 +22,7 @@ module ConvenientService
             #   NOTE: This method is internally used by custom RSpec helper `stub_service`. It should NOT be used in the client code.
             #
             def success(
-              service: Constants::DEFAULT_SERVICE_INSTANCE,
+              service: create_without_initialize,
               data: Constants::DEFAULT_SUCCESS_DATA
             )
               result_class.create(
@@ -42,7 +42,7 @@ module ConvenientService
             #   NOTE: This method is internally used by custom RSpec helper `stub_service`. It should NOT be used in the client code.
             #
             def failure(
-              service: Constants::DEFAULT_SERVICE_INSTANCE,
+              service: create_without_initialize,
               data: Constants::DEFAULT_FAILURE_DATA,
               message: data.any? ? data.first.join(" ") : Constants::DEFAULT_FAILURE_MESSAGE
             )
@@ -63,7 +63,7 @@ module ConvenientService
             #   NOTE: This method is internally used by custom RSpec helper `stub_service`. It should NOT be used in the client code.
             #
             def error(
-              service: Constants::DEFAULT_SERVICE_INSTANCE,
+              service: create_without_initialize,
               message: Constants::DEFAULT_ERROR_MESSAGE,
               code: Constants::DEFAULT_ERROR_CODE
             )
@@ -79,6 +79,10 @@ module ConvenientService
             ##
             # @api private
             # @return [Class]
+            #
+            # @internal
+            #   NOTE: A command instead of `import` is used in order to NOT pollute the public interface.
+            #   TODO: Specs that prevent public interface accidental pollution.
             #
             def result_class
               @result_class ||= Commands::CreateResultClass.call(service_class: self)

@@ -44,11 +44,7 @@ module ConvenientService
         # @return [Boolean]
         #
         def call
-          first_array_counts = first_array.each_with_object(::Hash.new { |h, k| h[k] = 0 }) { |item, counts| counts[item] += 1 }
-
-          second_array_counts = second_array.each_with_object(::Hash.new { |h, k| h[k] = 0 }) { |item, counts| counts[item] += 1 }
-
-          first_array_counts == second_array_counts
+          first_array.tally == second_array.tally
         end
       end
     end

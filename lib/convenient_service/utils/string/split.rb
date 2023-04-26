@@ -6,7 +6,7 @@ module ConvenientService
       class Split < Support::Command
         ##
         # @!attribute [r] string
-        #   @return [#to_s]
+        #   @return [String]
         #
         attr_reader :string
 
@@ -17,12 +17,12 @@ module ConvenientService
         attr_reader :delimiters
 
         ##
-        # @param string [Symbol, String]
+        # @param string [#to_s]
         # @param delimiters [Array<String>]
         # @return [void]
         #
         def initialize(string, *delimiters)
-          @string = string
+          @string = string.to_s
           @delimiters = delimiters
         end
 
@@ -33,7 +33,7 @@ module ConvenientService
         #   https://stackoverflow.com/a/51380514/12201472
         #
         def call
-          string.to_s.split(::Regexp.union(delimiters))
+          string.split(::Regexp.union(delimiters))
         end
       end
     end

@@ -5,11 +5,13 @@ module ConvenientService
     module DependencyContainer
       module Entities
         class Method
+          include Support::Copyable
+
           ##
-          # @!attribute [r] full_name
+          # @!attribute [r] slug
           #   @return [String, Symbol]
           #
-          attr_reader :full_name
+          attr_reader :slug
 
           ##
           # @!attribute [r] scope
@@ -24,29 +26,37 @@ module ConvenientService
           attr_reader :body
 
           ##
-          # @param full_name [String, Symbol]
+          # @!attribute [r] alias_slug
+          #   @return [String, Symbol]
+          #
+          attr_reader :alias_slug
+
+          ##
+          # @param slug [String, Symbol]
           # @param scope [:instance, :class]
           # @param body [Proc]
+          # @param alias_slug [String, Symbol]
           # @return [void]
           #
-          def initialize(full_name:, scope:, body:)
-            @full_name = full_name
+          def initialize(slug:, scope:, body:, alias_slug: "")
+            @slug = slug
             @scope = scope
             @body = body
+            @alias_slug = alias_slug
           end
 
           ##
-          # @return [String]
+          # @return [Symbol]
           #
           def name
-            @name ||= full_name_parts.last
+            @name ||= alias_slug_parts.last || slug_parts.last
           end
 
           ##
           # @return [Array<ConvenientService::Support::DependencyContainer::Entities::Namespace>]
           #
           def namespaces
-            @namespaces ||= full_name_parts.slice(0..-2).map { |part| Entities::Namespace.new(name: part) }
+            @namespaces ||= (alias_slug_parts.any? ? alias_slug_parts : slug_parts).slice(0..-2).map { |part| Entities::Namespace.new(name: part) }
           end
 
           ##
@@ -92,20 +102,40 @@ module ConvenientService
           def ==(other)
             return unless other.instance_of?(self.class)
 
-            return false if full_name != other.full_name
+            return false if slug != other.slug
             return false if scope != other.scope
             return false if body != other.body
+            return false if alias_slug != other.alias_slug
 
             true
+          end
+
+          ##
+          # @return [Hash]
+          #
+          def to_kwargs
+            {
+              slug: slug,
+              scope: scope,
+              body: body,
+              alias_slug: alias_slug
+            }
           end
 
           private
 
           ##
-          # @return [Array<String>]
+          # @return [Array<Symbol>]
           #
-          def full_name_parts
-            @full_name_parts ||= Utils::String.split(full_name, ".", "::").map(&:to_sym)
+          def slug_parts
+            @slug_parts ||= Utils::String.split(slug, ".", "::").map(&:to_sym)
+          end
+
+          ##
+          # @return [Array<Symbol>]
+          #
+          def alias_slug_parts
+            @alias_slug_parts ||= Utils::String.split(alias_slug, ".", "::").map(&:to_sym)
           end
         end
       end

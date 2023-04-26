@@ -50,6 +50,9 @@ module ConvenientService
         def call
           method = mod.instance_method(method_name) if has_own_instance_method?
 
+          ##
+          # TODO: Warn if exceeded.
+          #
           finite_loop do
             break if method.nil?
             break if method.owner == mod

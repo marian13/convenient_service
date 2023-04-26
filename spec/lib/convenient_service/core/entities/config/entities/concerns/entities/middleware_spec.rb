@@ -22,6 +22,14 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns::En
   let(:kwargs) { {foo: :bar} }
   let(:block) { proc { :foo } }
 
+  example_group "inheritance" do
+    include ConvenientService::RSpec::Matchers::BeDescendantOf
+
+    subject { described_class }
+
+    it { is_expected.to be_descendant_of(Object) }
+  end
+
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
     include ConvenientService::RSpec::Matchers::ExtendModule

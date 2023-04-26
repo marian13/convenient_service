@@ -6,20 +6,6 @@ require "convenient_service"
 
 RSpec.describe ConvenientService::Service::Plugins::HasResult::Constants do
   example_group "constants" do
-    describe "::DEFAULT_SERVICE_CLASS" do
-      include ConvenientService::RSpec::Matchers::IncludeModule
-
-      it "returns class that includes `ConvenientService::Service::Plugins::HasResult::Concern`" do
-        expect(described_class::DEFAULT_SERVICE_CLASS).to include_module(ConvenientService::Service::Plugins::HasResult::Concern)
-      end
-    end
-
-    describe "::DEFAULT_SERVICE_INSTANCE" do
-      it "returns `ConvenientService::Service::Plugins::HasResult::Constants::DEFAULT_SERVICE_CLASS` instance" do
-        expect(described_class::DEFAULT_SERVICE_INSTANCE).to be_instance_of(ConvenientService::Service::Plugins::HasResult::Constants::DEFAULT_SERVICE_CLASS)
-      end
-    end
-
     describe "::SUCCESS_STATUS" do
       it "returns `:success`" do
         expect(described_class::SUCCESS_STATUS).to eq(:success)

@@ -9,19 +9,19 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Export do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   let(:container) do
-    Class.new.tap do |klass|
-      klass.class_exec(described_class) do |mod|
-        include mod
+    Module.new.tap do |mod|
+      mod.module_exec(described_class) do |described_mod|
+        include described_mod
       end
     end
   end
 
-  let(:full_name) { :foo }
+  let(:slug) { :foo }
   let(:scope) { :instance }
 
-  let(:method) { ConvenientService::Support::DependencyContainer::Entities::Method.new(full_name: full_name, scope: scope, body: body) }
+  let(:method) { ConvenientService::Support::DependencyContainer::Entities::Method.new(slug: slug, scope: scope, body: body) }
 
-  let(:export) { container.export(full_name, **kwargs, &body) }
+  let(:export) { container.export(slug, **kwargs, &body) }
   let(:kwargs) { default_kwargs }
   let(:default_kwargs) { {scope: scope} }
   let(:body) { proc { :bar } }
@@ -32,6 +32,27 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Export do
     subject { described_class }
 
     it { is_expected.to include_module(ConvenientService::Support::Concern) }
+  end
+
+  example_group "hook methods" do
+    describe "#included" do
+      context "when container is NOT `Module`" do
+        let(:container) { Class.new }
+        let(:include_module_result) { container.include described_class }
+
+        let(:error_message) do
+          <<~TEXT
+            `#{container.inspect}` is NOT a Module.
+          TEXT
+        end
+
+        it "raises `ConvenientService::Support::DependencyContainer::Errors::NotModule`" do
+          expect { include_module_result }
+            .to raise_error(ConvenientService::Support::DependencyContainer::Errors::NotModule)
+            .with_message(error_message)
+        end
+      end
+    end
   end
 
   example_group "class methods" do

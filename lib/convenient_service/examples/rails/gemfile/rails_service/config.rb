@@ -16,37 +16,37 @@ module ConvenientService
 
             included do |service_class|
               service_class.class_exec do
-                include Configs::Standard
+                include ConvenientService::Standard::Config
 
                 ##
                 # NOTE: `AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment` plugin.
                 #
                 concerns do
-                  use Plugins::Common::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment::Concern
+                  use ConvenientService::Plugins::Common::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment::Concern
                 end
 
                 middlewares :initialize do
-                  use Plugins::Common::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment::Middleware
+                  use ConvenientService::Plugins::Common::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment::Middleware
                 end
 
                 ##
                 # NOTE: `HasAttributes::UsingActiveModelAttributes` plugin.
                 #
                 concerns do
-                  use Plugins::Common::HasAttributes::UsingActiveModelAttributes::Concern
+                  use ConvenientService::Plugins::Common::HasAttributes::UsingActiveModelAttributes::Concern
                 end
 
                 ##
                 # NOTE: `HasResultParamsValidations::UsingActiveModelValidations` plugin.
                 #
                 concerns do
-                  use Plugins::Service::HasResultParamsValidations::UsingActiveModelValidations::Concern
+                  use ConvenientService::Plugins::Service::HasResultParamsValidations::UsingActiveModelValidations::Concern
                 end
 
                 middlewares :result do
                   insert_before \
-                    Plugins::Service::HasResultSteps::Middleware,
-                    Plugins::Service::HasResultParamsValidations::UsingActiveModelValidations::Middleware
+                    ConvenientService::Plugins::Service::HasResult::Middleware,
+                    ConvenientService::Plugins::Service::HasResultParamsValidations::UsingActiveModelValidations::Middleware
                 end
               end
             end

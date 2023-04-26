@@ -22,13 +22,13 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultStatusCheckShortSyn
             concerns do
               use ConvenientService::Common::Plugins::HasInternals::Concern
               use ConvenientService::Common::Plugins::HasConstructor::Concern
-              use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Concern
+              use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Concern
             end
 
             middlewares :initialize do
               use ConvenientService::Common::Plugins::NormalizesEnv::Middleware
 
-              use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Middleware
+              use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Middleware
             end
 
             class self::Internals
@@ -62,6 +62,14 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultStatusCheckShortSyn
       end
     end
 
+    describe ".ok?" do
+      specify do
+        expect { service_class.ok? }
+          .to delegate_to(result, :success?)
+          .and_return_its_value
+      end
+    end
+
     describe ".error?" do
       specify do
         expect { service_class.error? }
@@ -74,6 +82,14 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultStatusCheckShortSyn
       specify do
         expect { service_class.failure? }
           .to delegate_to(result, :failure?)
+          .and_return_its_value
+      end
+    end
+
+    describe ".not_ok?" do
+      specify do
+        expect { service_class.not_ok? }
+          .to delegate_to(result, :not_success?)
           .and_return_its_value
       end
     end

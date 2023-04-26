@@ -4,11 +4,13 @@ module ConvenientService
   module Service
     module Plugins
       module CanHaveStubbedResult
-        class Middleware < Core::MethodChainMiddleware
+        class Middleware < MethodChainMiddleware
+          intended_for :result, scope: :class
+
           ##
-          # @param args [Array]
-          # @param kwargs [Hash]
-          # @param block [Proc]
+          # @param args [Array<Object>]
+          # @param kwargs [Hash{Symbol => Object}]
+          # @param block [Proc, nil]
           # @return [Object] Can be any type.
           #
           def next(*args, **kwargs, &block)

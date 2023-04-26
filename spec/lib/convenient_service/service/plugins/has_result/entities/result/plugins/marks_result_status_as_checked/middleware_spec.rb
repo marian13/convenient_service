@@ -10,7 +10,26 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
 
     subject { described_class }
 
-    it { is_expected.to be_descendant_of(ConvenientService::Core::MethodChainMiddleware) }
+    it { is_expected.to be_descendant_of(ConvenientService::MethodChainMiddleware) }
+  end
+
+  example_group "class methods" do
+    describe ".intended_methods" do
+      let(:spec) do
+        Class.new(ConvenientService::MethodChainMiddleware) do
+          intended_for :success?
+          intended_for :failure?
+          intended_for :error?
+          intended_for :not_success?
+          intended_for :not_failure?
+          intended_for :not_error?
+        end
+      end
+
+      it "returns intended methods" do
+        expect(described_class.intended_methods).to eq(spec.intended_methods)
+      end
+    end
   end
 
   example_group "instance methods" do
@@ -30,13 +49,13 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
           concerns do
             use ConvenientService::Common::Plugins::HasInternals::Concern
             use ConvenientService::Common::Plugins::HasConstructor::Concern
-            use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Concern
+            use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Concern
           end
 
           middlewares :initialize do
             use ConvenientService::Common::Plugins::NormalizesEnv::Middleware
 
-            use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJsendStatusAndAttributes::Middleware
+            use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Middleware
           end
 
           class self::Internals

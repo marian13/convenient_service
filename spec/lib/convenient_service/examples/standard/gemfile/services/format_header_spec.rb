@@ -4,14 +4,12 @@ require "spec_helper"
 
 require "convenient_service"
 
+# rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::FormatHeader do
   include ConvenientService::RSpec::Matchers::Results
-  include ConvenientService::RSpec::Matchers::HaveAttrReader
   include ConvenientService::RSpec::Matchers::IncludeModule
 
-  let(:service) { described_class.new(**default_options) }
-
-  let(:default_options) { {parsed_content: parsed_content, skip_frozen_string_literal: skip_frozen_string_literal} }
+  let(:result) { described_class.result(parsed_content: parsed_content, skip_frozen_string_literal: skip_frozen_string_literal) }
   let(:parsed_content) { {} }
   let(:skip_frozen_string_literal) { false }
 
@@ -21,159 +19,155 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::FormatH
     it { is_expected.to include_module(ConvenientService::Standard::Config) }
   end
 
-  example_group "attributes" do
-    subject { service }
+  example_group "class methods" do
+    describe ".result" do
+      context "when formatting of header is successful" do
+        let(:skip_frozen_string_literal) { false }
 
-    it { is_expected.to have_attr_reader(:parsed_content) }
-    it { is_expected.to have_attr_reader(:skip_frozen_string_literal) }
-  end
+        let(:parsed_content) do
+          {
+            ruby: [
+              %(ruby "3.0.1")
+            ],
+            source: [
+              %(source "https://rubygems.org")
+            ],
+            git_source: [
+              %(git_source(:github) { |repo| "https://github.com/\#{repo}.git" })
+            ]
+          }
+        end
 
-  describe "#result" do
-    subject(:result) { described_class.result(parsed_content: parsed_content, skip_frozen_string_literal: skip_frozen_string_literal) }
+        let(:formatted_content) do
+          <<~'RUBY'
+            # frozen_string_literal: true
 
-    let(:skip_frozen_string_literal) { false }
+            source "https://rubygems.org"
 
-    let(:parsed_content) do
-      {
-        ruby: [
-          %(ruby "3.0.1")
-        ],
-        source: [
-          %(source "https://rubygems.org")
-        ],
-        git_source: [
-          %(git_source(:github) { |repo| "https://github.com/\#{repo}.git" })
-        ]
-      }
-    end
+            git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-    let(:formatted_content) do
-      <<~'RUBY'
-        # frozen_string_literal: true
+            ruby "3.0.1"
+          RUBY
+        end
 
-        source "https://rubygems.org"
+        it "returns `success` with formatted content" do
+          expect(result).to be_success.with_data(formatted_content: formatted_content).of_service(described_class).without_step
+        end
 
-        git_source(:github) { |repo| "https://github.com/#{repo}.git" }
+        context "when `parsed_content` does NOT contains `ruby`" do
+          let(:parsed_content) do
+            {
+              source: [
+                %(source "https://rubygems.org")
+              ],
+              git_source: [
+                %(git_source(:github) { |repo| "https://github.com/\#{repo}.git" })
+              ]
+            }
+          end
 
-        ruby "3.0.1"
-      RUBY
-    end
+          let(:formatted_content) do
+            <<~'RUBY'
+              # frozen_string_literal: true
 
-    it "returns success with formatted content" do
-      expect(result).to be_success.with_data(formatted_content: formatted_content)
-    end
+              source "https://rubygems.org"
 
-    context "when `parsed_content` does NOT contains `ruby`" do
-      let(:parsed_content) do
-        {
-          source: [
-            %(source "https://rubygems.org")
-          ],
-          git_source: [
-            %(git_source(:github) { |repo| "https://github.com/\#{repo}.git" })
-          ]
-        }
-      end
+              git_source(:github) { |repo| "https://github.com/#{repo}.git" }
+            RUBY
+          end
 
-      let(:formatted_content) do
-        <<~'RUBY'
-          # frozen_string_literal: true
+          it "returns `success` with formatted content without `ruby`" do
+            expect(result).to be_success.with_data(formatted_content: formatted_content).of_service(described_class).without_step
+          end
+        end
 
-          source "https://rubygems.org"
+        context "when `parsed_content` does NOT contains `source`" do
+          let(:parsed_content) do
+            {
+              ruby: [
+                %(ruby "3.0.1")
+              ],
+              git_source: [
+                %(git_source(:github) { |repo| "https://github.com/\#{repo}.git" })
+              ]
+            }
+          end
 
-          git_source(:github) { |repo| "https://github.com/#{repo}.git" }
-        RUBY
-      end
+          let(:formatted_content) do
+            <<~'RUBY'
+              # frozen_string_literal: true
 
-      it "returns success with formatted content without `ruby`" do
-        expect(result).to be_success.with_data(formatted_content: formatted_content)
-      end
-    end
+              git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-    context "when `parsed_content` does NOT contains `source`" do
-      let(:parsed_content) do
-        {
-          ruby: [
-            %(ruby "3.0.1")
-          ],
-          git_source: [
-            %(git_source(:github) { |repo| "https://github.com/\#{repo}.git" })
-          ]
-        }
-      end
+              ruby "3.0.1"
+            RUBY
+          end
 
-      let(:formatted_content) do
-        <<~'RUBY'
-          # frozen_string_literal: true
+          it "returns `success` with formatted content without `source`" do
+            expect(result).to be_success.with_data(formatted_content: formatted_content).of_service(described_class).without_step
+          end
+        end
 
-          git_source(:github) { |repo| "https://github.com/#{repo}.git" }
+        context "when `parsed_content` does NOT contains `git_source`" do
+          let(:parsed_content) do
+            {
+              ruby: [
+                %(ruby "3.0.1")
+              ],
+              source: [
+                %(source "https://rubygems.org")
+              ]
+            }
+          end
 
-          ruby "3.0.1"
-        RUBY
-      end
+          let(:formatted_content) do
+            <<~RUBY
+              # frozen_string_literal: true
 
-      it "returns success with formatted content without `source`" do
-        expect(result).to be_success.with_data(formatted_content: formatted_content)
-      end
-    end
+              source "https://rubygems.org"
 
-    context "when `parsed_content` does NOT contains `git_source`" do
-      let(:parsed_content) do
-        {
-          ruby: [
-            %(ruby "3.0.1")
-          ],
-          source: [
-            %(source "https://rubygems.org")
-          ]
-        }
-      end
+              ruby "3.0.1"
+            RUBY
+          end
 
-      let(:formatted_content) do
-        <<~'RUBY'
-          # frozen_string_literal: true
+          it "returns `success` with formatted content without `git_source`" do
+            expect(result).to be_success.with_data(formatted_content: formatted_content).of_service(described_class).without_step
+          end
+        end
 
-          source "https://rubygems.org"
+        context "when `skip_frozen_string_literal` is set to `true`" do
+          let(:skip_frozen_string_literal) { true }
 
-          ruby "3.0.1"
-        RUBY
-      end
+          let(:parsed_content) do
+            {
+              ruby: [
+                %(ruby "3.0.1")
+              ],
+              source: [
+                %(source "https://rubygems.org")
+              ],
+              git_source: [
+                %(git_source(:github) { |repo| "https://github.com/\#{repo}.git" })
+              ]
+            }
+          end
 
-      it "returns success with formatted content without `git_source`" do
-        expect(result).to be_success.with_data(formatted_content: formatted_content)
-      end
-    end
+          let(:formatted_content) do
+            <<~'RUBY'
+              source "https://rubygems.org"
 
-    context "when `skip_frozen_string_literal` is set to `true`" do
-      let(:skip_frozen_string_literal) { true }
+              git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-      let(:parsed_content) do
-        {
-          ruby: [
-            %(ruby "3.0.1")
-          ],
-          source: [
-            %(source "https://rubygems.org")
-          ],
-          git_source: [
-            %(git_source(:github) { |repo| "https://github.com/\#{repo}.git" })
-          ]
-        }
-      end
+              ruby "3.0.1"
+            RUBY
+          end
 
-      let(:formatted_content) do
-        <<~'RUBY'
-          source "https://rubygems.org"
-
-          git_source(:github) { |repo| "https://github.com/#{repo}.git" }
-
-          ruby "3.0.1"
-        RUBY
-      end
-
-      it "returns success with formatted content without `git_source`" do
-        expect(result).to be_success.with_data(formatted_content: formatted_content)
+          it "returns `success` with formatted content without `git_source`" do
+            expect(result).to be_success.with_data(formatted_content: formatted_content).of_service(described_class).without_step
+          end
+        end
       end
     end
   end
 end
+# rubocop:enable RSpec/NestedGroups

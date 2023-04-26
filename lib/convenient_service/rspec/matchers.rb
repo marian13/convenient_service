@@ -7,6 +7,7 @@ require_relative "matchers/be_direct_descendant_of"
 require_relative "matchers/cache_its_value"
 require_relative "matchers/call_chain_next"
 require_relative "matchers/delegate_to"
+require_relative "matchers/export"
 require_relative "matchers/extend_module"
 require_relative "matchers/have_abstract_method"
 require_relative "matchers/have_alias_method"
@@ -30,6 +31,7 @@ module ConvenientService
         include Matchers::CacheItsValue
         include Matchers::CallChainNext
         include Matchers::DelegateTo
+        include Matchers::Export
         include Matchers::ExtendModule
         include Matchers::HaveAbstractMethod
         include Matchers::HaveAliasMethod

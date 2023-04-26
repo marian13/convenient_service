@@ -13,7 +13,7 @@ module ConvenientService
       class Camelize < Support::Command
         ##
         # @!attribute [r] string
-        #   @return [#to_s]
+        #   @return [String]
         #
         attr_reader :string
 
@@ -24,7 +24,7 @@ module ConvenientService
         attr_reader :capitalize_first_letter
 
         ##
-        # @param string [Symbol, String]
+        # @param string [#to_s]
         # @return [void]
         #
         def initialize(string, capitalize_first_letter: true)
@@ -45,6 +45,10 @@ module ConvenientService
 
         private
 
+        ##
+        # @param part [String]
+        # @return [String]
+        #
         def upcase_first_char(part)
           return part if part.empty?
 

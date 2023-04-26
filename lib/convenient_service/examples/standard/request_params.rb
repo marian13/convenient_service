@@ -37,10 +37,10 @@ module ConvenientService
   module Examples
     module Standard
       module RequestParams
-        class << self
-          def prepare(request)
-            Services::Prepare[request: request]
-          end
+        include ConvenientService::Feature
+
+        entry :prepare do |request|
+          Services::Prepare[request: request]
         end
       end
     end

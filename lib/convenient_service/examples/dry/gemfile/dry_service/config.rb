@@ -16,26 +16,26 @@ module ConvenientService
 
             included do |service_class|
               service_class.class_exec do
-                include Configs::Standard
+                include ConvenientService::Standard::Config
 
                 ##
                 # NOTE: `AssignsAttributesInConstructor::UsingDryInitializer` plugin.
                 #
                 concerns do
-                  use Plugins::Common::AssignsAttributesInConstructor::UsingDryInitializer::Concern
+                  use ConvenientService::Plugins::Common::AssignsAttributesInConstructor::UsingDryInitializer::Concern
                 end
 
                 ##
                 # NOTE: `HasResultParamsValidations::UsingDryValidation` plugin.
                 #
                 concerns do
-                  use Plugins::Service::HasResultParamsValidations::UsingDryValidation::Concern
+                  use ConvenientService::Plugins::Service::HasResultParamsValidations::UsingDryValidation::Concern
                 end
 
                 middlewares :result do
                   insert_before \
-                    Plugins::Service::HasResultSteps::Middleware,
-                    Plugins::Service::HasResultParamsValidations::UsingDryValidation::Middleware
+                    ConvenientService::Plugins::Service::HasResult::Middleware,
+                    ConvenientService::Plugins::Service::HasResultParamsValidations::UsingDryValidation::Middleware
                 end
               end
             end

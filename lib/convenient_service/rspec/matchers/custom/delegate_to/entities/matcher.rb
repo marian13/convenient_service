@@ -16,7 +16,7 @@ module ConvenientService
         # @internal
         #   specify {
         #     expect { method_class.cast(other, **options) }
-        #       .to delegate_to(ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Commands::CastMethod, :call)
+        #       .to delegate_to(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Commands::CastMethod, :call)
         #       .with_arguments(other: other, options: options)
         #       .and_return_its_value
         #   }
@@ -24,7 +24,7 @@ module ConvenientService
         #   { method_class.cast(other, **options) }
         #   # => block_expectation
         #
-        #   ConvenientService::Service::Plugins::HasResultSteps::Entities::Method::Commands::CastMethod
+        #   ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Commands::CastMethod
         #   # => object
         #
         #   :call

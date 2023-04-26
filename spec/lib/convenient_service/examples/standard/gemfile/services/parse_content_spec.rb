@@ -164,7 +164,7 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::ParseCo
       end
 
       it "returns intermediate step result" do
-        expect(result).to be_not_success.of(ConvenientService::Examples::Standard::Gemfile::Services::AssertValidRubySyntax)
+        expect(result).to be_not_success.of_step(ConvenientService::Examples::Standard::Gemfile::Services::AssertValidRubySyntax)
       end
     end
 
@@ -227,7 +227,7 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::ParseCo
       context "when same group is used multiple times" do
         let(:content) do
           add(
-            <<~'RUBY',
+            <<~RUBY,
               group :development, :test do
                 gem "byebug", "~> 11.1.3"
               end
