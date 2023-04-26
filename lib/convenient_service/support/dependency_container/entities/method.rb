@@ -38,7 +38,7 @@ module ConvenientService
           # @param alias_slug [String, Symbol]
           # @return [void]
           #
-          def initialize(slug:, scope:, body:, alias_slug: nil)
+          def initialize(slug:, scope:, body:, alias_slug: "")
             @slug = slug
             @scope = scope
             @body = body
@@ -46,17 +46,17 @@ module ConvenientService
           end
 
           ##
-          # @return [String]
+          # @return [Symbol]
           #
           def name
-            @name ||= slug_parts.last
+            @name ||= alias_slug_parts.last || slug_parts.last
           end
 
           ##
           # @return [Array<ConvenientService::Support::DependencyContainer::Entities::Namespace>]
           #
           def namespaces
-            @namespaces ||= slug_parts.slice(0..-2).map { |part| Entities::Namespace.new(name: part) }
+            @namespaces ||= (alias_slug_parts.any? ? alias_slug_parts : slug_parts).slice(0..-2).map { |part| Entities::Namespace.new(name: part) }
           end
 
           ##
@@ -111,13 +111,6 @@ module ConvenientService
           end
 
           ##
-          # @return [String, Symbol]
-          #
-          def import_name
-            alias_slug || slug
-          end
-
-          ##
           # @return [Hash]
           #
           def to_kwargs
@@ -132,10 +125,17 @@ module ConvenientService
           private
 
           ##
-          # @return [Array<String>]
+          # @return [Array<Symbol>]
           #
           def slug_parts
-            @slug_parts ||= Utils::String.split(import_name, ".", "::").map(&:to_sym)
+            @slug_parts ||= Utils::String.split(slug, ".", "::").map(&:to_sym)
+          end
+
+          ##
+          # @return [Array<Symbol>]
+          #
+          def alias_slug_parts
+            @alias_slug_parts ||= Utils::String.split(alias_slug, ".", "::").map(&:to_sym)
           end
         end
       end
