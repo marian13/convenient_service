@@ -26,13 +26,13 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Import do
     end
   end
 
-  let(:full_name) { :foo }
+  let(:slug) { :foo }
   let(:scope) { :instance }
   let(:prepend) { false }
 
-  let(:method) { container.exported_methods.find_by(full_name: full_name, scope: scope) }
+  let(:method) { container.exported_methods.find_by(slug: slug, scope: scope) }
 
-  let(:import) { user.import(full_name, **kwargs) }
+  let(:import) { user.import(slug, **kwargs) }
   let(:kwargs) { default_kwargs }
   let(:default_kwargs) { {from: container, scope: scope, prepend: prepend} }
 
@@ -61,7 +61,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Import do
       specify do
         expect { import }
           .to delegate_to(ConvenientService::Support::DependencyContainer::Commands::AssertValidMethod, :call)
-          .with_arguments(full_name: full_name, scope: scope, container: container)
+          .with_arguments(slug: slug, scope: scope, container: container)
       end
 
       specify do
@@ -69,6 +69,19 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Import do
           .to delegate_to(ConvenientService::Support::DependencyContainer::Commands::ImportMethod, :call)
           .with_arguments(importing_module: user, exported_method: method, prepend: prepend)
           .and_return_its_value
+      end
+
+      context "when `as` is passed" do
+        let(:kwargs) { default_kwargs.merge({as: alias_slug}) }
+        let(:alias_slug) { :bar }
+        let(:method_copy) { method.copy(overrides: {kwargs: {alias_slug: alias_slug}}) }
+
+        it "imports method copy" do
+          expect { import }
+            .to delegate_to(ConvenientService::Support::DependencyContainer::Commands::ImportMethod, :call)
+            .with_arguments(importing_module: user, exported_method: method_copy, prepend: prepend)
+            .and_return_its_value
+        end
       end
 
       context "when `scope` is NOT passed" do

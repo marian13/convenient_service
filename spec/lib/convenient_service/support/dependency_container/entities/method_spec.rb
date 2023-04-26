@@ -6,88 +6,168 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Method do
-  let(:method) { described_class.new(full_name: full_name, scope: scope, body: body) }
+  let(:method) { described_class.new(slug: slug, scope: scope, body: body, alias_slug: alias_slug) }
 
-  let(:full_name) { :"foo.bar.baz.qux" }
+  let(:slug) { :"foo.bar.baz.qux" }
   let(:scope) { :instance }
   let(:body) { proc { :"foo.bar.baz.qux" } }
+  let(:alias_slug) { "" }
 
   let(:args) { [:foo] }
   let(:kwargs) { {foo: :bar} }
   let(:block) { proc { :foo } }
+
+  example_group "modules" do
+    include ConvenientService::RSpec::Matchers::IncludeModule
+
+    subject { described_class }
+
+    it { is_expected.to include_module(ConvenientService::Support::Copyable) }
+  end
 
   example_group "attributes" do
     include ConvenientService::RSpec::Matchers::HaveAttrReader
 
     subject { method }
 
-    it { is_expected.to have_attr_reader(:full_name) }
+    it { is_expected.to have_attr_reader(:slug) }
     it { is_expected.to have_attr_reader(:scope) }
     it { is_expected.to have_attr_reader(:body) }
+    it { is_expected.to have_attr_reader(:alias_slug) }
   end
 
   example_group "instance methods" do
     describe "#name" do
-      context "when `full_name` has NO namespaces" do
-        let(:full_name) { :foo }
+      context "when method does NOT have `alias_slug`" do
+        context "when `slug` has NO namespaces" do
+          let(:slug) { :foo }
 
-        it "returns `full_name`" do
-          expect(method.name).to eq(method.full_name)
-        end
-      end
-
-      context "when `full_name` has namespaces" do
-        let(:name) { :qux }
-
-        context "when `full_name` has namespaces separated by dot" do
-          let(:full_name) { :"foo.bar.baz.qux" }
-
-          it "returns last part of `full_name` split by dot" do
-            expect(method.name).to eq(name)
+          it "returns `slug`" do
+            expect(method.name).to eq(method.slug)
           end
         end
 
-        context "when `full_name` has namespaces separated by scope resolution operator" do
-          let(:full_name) { :"foo::bar::baz::qux" }
+        context "when `slug` has namespaces" do
+          let(:name) { :qux }
 
-          it "returns last part of `full_name` split by scope resolution operator" do
-            expect(method.name).to eq(name)
+          context "when `slug` has namespaces separated by dot" do
+            let(:slug) { :"foo.bar.baz.qux" }
+
+            it "returns last part of `slug` split by dot" do
+              expect(method.name).to eq(name)
+            end
+          end
+
+          context "when `slug` has namespaces separated by scope resolution operator" do
+            let(:slug) { :"foo::bar::baz::qux" }
+
+            it "returns last part of `slug` split by scope resolution operator" do
+              expect(method.name).to eq(name)
+            end
+          end
+        end
+      end
+
+      context "when method has `alias_slug`" do
+        context "when `alias_slug` has NO namespaces" do
+          let(:alias_slug) { :foo }
+
+          it "returns `alias_slug`" do
+            expect(method.name).to eq(method.alias_slug)
+          end
+        end
+
+        context "when `alias_slug` has namespaces" do
+          let(:name) { :qux }
+
+          context "when `alias_slug` has namespaces separated by dot" do
+            let(:alias_slug) { :"foo.bar.baz.qux" }
+
+            it "returns last part of `alias_slug` split by dot" do
+              expect(method.name).to eq(name)
+            end
+          end
+
+          context "when `alias_slug` has namespaces separated by scope resolution operator" do
+            let(:alias_slug) { :"foo::bar::baz::qux" }
+
+            it "returns last part of `alias_slug` split by scope resolution operator" do
+              expect(method.name).to eq(name)
+            end
           end
         end
       end
     end
 
-    describe "#namespace" do
-      context "when `full_name` has NO namespaces" do
-        let(:full_name) { :foo }
+    describe "#namespaces" do
+      context "when method does NOT have `alias_slug`" do
+        context "when `slug` has NO namespaces" do
+          let(:slug) { :foo }
 
-        it "returns empty array" do
-          expect(method.namespaces).to eq([])
-        end
-      end
-
-      context "when `full_name` has namespaces" do
-        let(:namespaces) do
-          [
-            ConvenientService::Support::DependencyContainer::Entities::Namespace.new(name: :foo),
-            ConvenientService::Support::DependencyContainer::Entities::Namespace.new(name: :bar),
-            ConvenientService::Support::DependencyContainer::Entities::Namespace.new(name: :baz)
-          ]
-        end
-
-        context "when `full_name` has namespaces separated by dot" do
-          let(:full_name) { :"foo.bar.baz.qux" }
-
-          it "returns parts of `full_name` split by dot except last part" do
-            expect(method.namespaces).to eq(namespaces)
+          it "returns empty array" do
+            expect(method.namespaces).to eq([])
           end
         end
 
-        context "when `full_name` has namespaces separated by scope resolution operator" do
-          let(:full_name) { :"foo::bar::baz::qux" }
+        context "when `slug` has namespaces" do
+          let(:namespaces) do
+            [
+              ConvenientService::Support::DependencyContainer::Entities::Namespace.new(name: :foo),
+              ConvenientService::Support::DependencyContainer::Entities::Namespace.new(name: :bar),
+              ConvenientService::Support::DependencyContainer::Entities::Namespace.new(name: :baz)
+            ]
+          end
 
-          it "returns parts of `full_name` split by scope resolution operator except last part" do
-            expect(method.namespaces).to eq(namespaces)
+          context "when `slug` has namespaces separated by dot" do
+            let(:slug) { :"foo.bar.baz.qux" }
+
+            it "returns parts of `slug` split by dot except last part" do
+              expect(method.namespaces).to eq(namespaces)
+            end
+          end
+
+          context "when `slug` has namespaces separated by scope resolution operator" do
+            let(:slug) { :"foo::bar::baz::qux" }
+
+            it "returns parts of `slug` split by scope resolution operator except last part" do
+              expect(method.namespaces).to eq(namespaces)
+            end
+          end
+        end
+      end
+
+      context "when method has `alias_slug`" do
+        context "when `alias_slug` has NO namespaces" do
+          let(:alias_slug) { :foo }
+
+          it "returns empty array" do
+            expect(method.namespaces).to eq([])
+          end
+        end
+
+        context "when `alias_slug` has namespaces" do
+          let(:namespaces) do
+            [
+              ConvenientService::Support::DependencyContainer::Entities::Namespace.new(name: :foo),
+              ConvenientService::Support::DependencyContainer::Entities::Namespace.new(name: :bar),
+              ConvenientService::Support::DependencyContainer::Entities::Namespace.new(name: :baz)
+            ]
+          end
+
+          context "when `alias_slug` has namespaces separated by dot" do
+            let(:alias_slug) { :"foo.bar.baz.qux" }
+
+            it "returns parts of `alias_slug` split by dot except last part" do
+              expect(method.namespaces).to eq(namespaces)
+            end
+          end
+
+          context "when `alias_slug` has namespaces separated by scope resolution operator" do
+            let(:alias_slug) { :"foo::bar::baz::qux" }
+
+            it "returns parts of `alias_slug` split by scope resolution operator except last part" do
+              expect(method.namespaces).to eq(namespaces)
+            end
           end
         end
       end
@@ -107,8 +187,8 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Method
 
       let(:user_instance) { user_class.new }
 
-      context "when `full_name` has NO namespaces" do
-        let(:full_name) { :foo }
+      context "when `slug` has NO namespaces" do
+        let(:slug) { :foo }
 
         let(:mod) { ConvenientService::Support::DependencyContainer::Commands::CreateMethodsModule.call }
 
@@ -123,8 +203,8 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Method
         end
       end
 
-      context "when `full_name` has one namespace" do
-        let(:full_name) { :"foo.bar" }
+      context "when `slug` has one namespace" do
+        let(:slug) { :"foo.bar" }
 
         let(:mod) { ConvenientService::Support::DependencyContainer::Commands::CreateMethodsModule.call }
 
@@ -151,7 +231,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Method
         end
 
         context "when `mod` already has namespace" do
-          let(:second_method) { described_class.new(full_name: :"foo.baz", scope: scope, body: body) }
+          let(:second_method) { described_class.new(slug: :"foo.baz", scope: scope, body: body) }
 
           before do
             second_method.define_in_module!(mod)
@@ -165,8 +245,8 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Method
         end
       end
 
-      context "when `full_name` has multiple namespaces" do
-        let(:full_name) { :"foo.bar.baz" }
+      context "when `slug` has multiple namespaces" do
+        let(:slug) { :"foo.bar.baz" }
 
         let(:mod) { ConvenientService::Support::DependencyContainer::Commands::CreateMethodsModule.call }
 
@@ -199,7 +279,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Method
         end
 
         context "when `mod` already has outer namespace" do
-          let(:second_method) { described_class.new(full_name: :"foo.baz", scope: scope, body: body) }
+          let(:second_method) { described_class.new(slug: :"foo.baz", scope: scope, body: body) }
 
           before do
             second_method.define_in_module!(mod)
@@ -212,7 +292,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Method
           end
 
           context "when outer namespace already has inner namespace" do
-            let(:second_method) { described_class.new(full_name: :"foo.bar.qux", scope: scope, body: body) }
+            let(:second_method) { described_class.new(slug: :"foo.bar.qux", scope: scope, body: body) }
 
             before do
               second_method.define_in_module!(mod)
@@ -226,11 +306,26 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Method
           end
         end
       end
+
+      describe "#to_kwargs" do
+        let(:kwargs_representation) do
+          {
+            slug: slug,
+            scope: scope,
+            body: body,
+            alias_slug: alias_slug
+          }
+        end
+
+        it "returns kwargs representation of attributes" do
+          expect(method.to_kwargs).to eq(kwargs_representation)
+        end
+      end
     end
 
     example_group "comparison" do
       describe "#==" do
-        let(:method) { described_class.new(full_name: full_name, scope: scope, body: body) }
+        let(:method) { described_class.new(slug: slug, scope: scope, body: body) }
 
         context "when `other` has different class" do
           let(:other) { 42 }
@@ -240,8 +335,8 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Method
           end
         end
 
-        context "when `other` has different `full_name`" do
-          let(:other) { described_class.new(full_name: "bar", scope: scope, body: body) }
+        context "when `other` has different `slug`" do
+          let(:other) { described_class.new(slug: "bar", scope: scope, body: body) }
 
           it "returns `false`" do
             expect(method == other).to eq(false)
@@ -249,7 +344,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Method
         end
 
         context "when `other` has different `scope`" do
-          let(:other) { described_class.new(full_name: full_name, scope: :class, body: body) }
+          let(:other) { described_class.new(slug: slug, scope: :class, body: body) }
 
           it "returns `false`" do
             expect(method == other).to eq(false)
@@ -257,7 +352,15 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Method
         end
 
         context "when `other` has different `body`" do
-          let(:other) { described_class.new(full_name: full_name, scope: scope, body: proc { :bar }) }
+          let(:other) { described_class.new(slug: slug, scope: scope, body: proc { :bar }) }
+
+          it "returns `false`" do
+            expect(method == other).to eq(false)
+          end
+        end
+
+        context "when `other` has different `alias_slug`" do
+          let(:other) { described_class.new(slug: slug, scope: scope, body: proc { :bar }, alias_slug: :bar) }
 
           it "returns `false`" do
             expect(method == other).to eq(false)
@@ -265,7 +368,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Method
         end
 
         context "when `other` has same attributes" do
-          let(:other) { described_class.new(full_name: full_name, scope: scope, body: body) }
+          let(:other) { described_class.new(slug: slug, scope: scope, body: body) }
 
           it "returns `true`" do
             expect(method == other).to eq(true)

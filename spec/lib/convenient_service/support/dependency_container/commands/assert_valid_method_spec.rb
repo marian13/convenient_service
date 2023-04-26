@@ -8,9 +8,9 @@ require "convenient_service"
 RSpec.describe ConvenientService::Support::DependencyContainer::Commands::AssertValidMethod do
   example_group "class methods" do
     describe ".call" do
-      subject(:command_result) { described_class.call(full_name: full_name, scope: scope, container: container) }
+      subject(:command_result) { described_class.call(slug: slug, scope: scope, container: container) }
 
-      let(:full_name) { :foo }
+      let(:slug) { :foo }
       let(:scope) { :class }
 
       context "when `method` is NOT exported" do
@@ -22,12 +22,12 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::Assert
 
         let(:error_message) do
           <<~TEXT
-            Module `#{container}` does NOT export method `#{full_name}` with `#{scope}` scope.
+            Module `#{container}` does NOT export method `#{slug}` with `#{scope}` scope.
 
             Did you forget to export it from `#{container}`? For example:
 
             module #{container}
-              export #{full_name}, scope: :#{scope} do |*args, **kwargs, &block|
+              export #{slug}, scope: :#{scope} do |*args, **kwargs, &block|
                 # ...
               end
             end

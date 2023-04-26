@@ -16,7 +16,7 @@ module ConvenientService
 
         class_methods do
           ##
-          # @param full_name [String, Symbol]
+          # @param slug [String, Symbol]
           # @param scope [:instance, :class]
           # @param body [Proc]
           # @return [ConvenientService::Support::DependencyContainer::Entities::Method]
@@ -27,10 +27,10 @@ module ConvenientService
           #   You won't ever see a module in Ruby that contains methods for `include` and `prepend` at the same time.
           #   So why `export` should allow to do it?
           #
-          def export(full_name, scope: Constants::DEFAULT_SCOPE, &body)
+          def export(slug, scope: Constants::DEFAULT_SCOPE, &body)
             Commands::AssertValidScope.call(scope: scope)
 
-            Entities::Method.new(full_name: full_name, scope: scope, body: body).tap { |method| exported_methods << method }
+            Entities::Method.new(slug: slug, scope: scope, body: body).tap { |method| exported_methods << method }
           end
 
           ##

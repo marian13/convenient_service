@@ -6,10 +6,10 @@ module ConvenientService
       module Commands
         class AssertValidMethod < Support::Command
           ##
-          # @!attribute [r] full_name
+          # @!attribute [r] slug
           #   @return [String, Symbol]
           #
-          attr_reader :full_name
+          attr_reader :slug
 
           ##
           # @!attribute [r] scope
@@ -24,13 +24,13 @@ module ConvenientService
           attr_reader :container
 
           ##
-          # @param full_name [String, Symbol]
+          # @param slug [String, Symbol]
           # @param scope [Symbol]
           # @param container[Module]
           # @return [void]
           #
-          def initialize(full_name:, scope:, container:)
-            @full_name = full_name
+          def initialize(slug:, scope:, container:)
+            @slug = slug
             @scope = scope
             @container = container
           end
@@ -40,7 +40,7 @@ module ConvenientService
           # @raise [ConvenientService::Support::DependencyContainer::Errors::NotExportedMethod]
           #
           def call
-            raise Errors::NotExportedMethod.new(method_name: full_name, method_scope: scope, mod: container) unless method
+            raise Errors::NotExportedMethod.new(method_name: slug, method_scope: scope, mod: container) unless method
           end
 
           private
@@ -49,7 +49,7 @@ module ConvenientService
           # @return [ConvenientService::Support::DependencyContainer::Entities::Method, nil]
           #
           def method
-            container.exported_methods.find_by(full_name: full_name, scope: scope)
+            container.exported_methods.find_by(slug: slug, scope: scope)
           end
         end
       end

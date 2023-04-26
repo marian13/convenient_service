@@ -12,12 +12,12 @@ module ConvenientService
           import :"commands.AssertValidScope", from: ConvenientService::Support::DependencyContainer::Container
 
           ##
-          # @param full_name [Symbol, String]
+          # @param slug [Symbol, String]
           # @param scope [Symbol]
           # @return [void]
           #
-          def initialize(full_name, scope: constants.DEFAULT_SCOPE)
-            @full_name = full_name
+          def initialize(slug, scope: constants.DEFAULT_SCOPE)
+            @slug = slug
             @scope = scope
           end
 
@@ -32,37 +32,37 @@ module ConvenientService
 
             commands.AssertValidScope.call(scope: scope)
 
-            Utils::Bool.to_bool(container.exported_methods.find_by(full_name: full_name, scope: scope))
+            Utils::Bool.to_bool(container.exported_methods.find_by(slug: slug, scope: scope))
           end
 
           ##
           # @return [String]
           #
           def description
-            "export `#{full_name}` with scope `#{scope}`"
+            "export `#{slug}` with scope `#{scope}`"
           end
 
           ##
           # @return [String]
           #
           def failure_message
-            "expected `#{container}` to export `#{full_name}` with scope `#{scope}`"
+            "expected `#{container}` to export `#{slug}` with scope `#{scope}`"
           end
 
           ##
           # @return [String]
           #
           def failure_message_when_negated
-            "expected `#{container}` NOT to export `#{full_name}` with scope `#{scope}`"
+            "expected `#{container}` NOT to export `#{slug}` with scope `#{scope}`"
           end
 
           private
 
           ##
-          # @!attribute [r] full_name
+          # @!attribute [r] slug
           #   @return [Symbol, String]
           #
-          attr_reader :full_name
+          attr_reader :slug
 
           ##
           # @!attribute [r] scope
