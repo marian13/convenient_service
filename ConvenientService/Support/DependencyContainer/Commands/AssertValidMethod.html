@@ -162,7 +162,7 @@
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#full_name-instance_method" title="#full_name (instance method)">#<strong>full_name</strong>  &#x21d2; Object </a>
+      <a href="#scope-instance_method" title="#scope (instance method)">#<strong>scope</strong>  &#x21d2; Object </a>
     
 
     
@@ -189,7 +189,7 @@
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#scope-instance_method" title="#scope (instance method)">#<strong>scope</strong>  &#x21d2; Object </a>
+      <a href="#slug-instance_method" title="#slug (instance method)">#<strong>slug</strong>  &#x21d2; Object </a>
     
 
     
@@ -251,7 +251,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(full_name:, scope:, container:)  &#x21d2; void </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(slug:, scope:, container:)  &#x21d2; void </a>
     
 
     
@@ -292,7 +292,7 @@
     <div class="method_details first">
   <h3 class="signature first" id="initialize-instance_method">
   
-    #<strong>initialize</strong>(full_name:, scope:, container:)  &#x21d2; <tt>void</tt> 
+    #<strong>initialize</strong>(slug:, scope:, container:)  &#x21d2; <tt>void</tt> 
   
 
   
@@ -310,7 +310,7 @@
   
     <li>
       
-        <span class='name'>full_name</span>
+        <span class='name'>slug</span>
       
       
         <span class='type'>(<tt>String</tt>, <tt>Symbol</tt>)</span>
@@ -374,8 +374,8 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/support/dependency_container/commands/assert_valid_method.rb', line 32</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>full_name:</span><span class='comma'>,</span> <span class='label'>scope:</span><span class='comma'>,</span> <span class='label'>container:</span><span class='rparen'>)</span>
-  <span class='ivar'>@full_name</span> <span class='op'>=</span> <span class='id identifier rubyid_full_name'>full_name</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>slug:</span><span class='comma'>,</span> <span class='label'>scope:</span><span class='comma'>,</span> <span class='label'>container:</span><span class='rparen'>)</span>
+  <span class='ivar'>@slug</span> <span class='op'>=</span> <span class='id identifier rubyid_slug'>slug</span>
   <span class='ivar'>@scope</span> <span class='op'>=</span> <span class='id identifier rubyid_scope'>scope</span>
   <span class='ivar'>@container</span> <span class='op'>=</span> <span class='id identifier rubyid_container'>container</span>
 <span class='kw'>end</span></pre>
@@ -448,62 +448,6 @@
       
       <span id=""></span>
       <div class="method_details ">
-  <h3 class="signature " id="full_name-instance_method">
-  
-    #<strong>full_name</strong>  &#x21d2; <tt>Object</tt>  <span class="extras">(readonly)</span>
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    
-
-  </div>
-</div>
-<div class="tags">
-  
-<p class="tag_title">Since:</p>
-<ul class="since">
-  
-    <li>
-      
-      
-      
-      
-        
-        <div class='inline'><p>0.3.0</p>
-</div>
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-12
-13
-14</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/dependency_container/commands/assert_valid_method.rb', line 12</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_full_name'>full_name</span>
-  <span class='ivar'>@full_name</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      
-      <span id=""></span>
-      <div class="method_details ">
   <h3 class="signature " id="scope-instance_method">
   
     #<strong>scope</strong>  &#x21d2; <tt>Object</tt>  <span class="extras">(readonly)</span>
@@ -551,6 +495,62 @@
 
 <span class='kw'>def</span> <span class='id identifier rubyid_scope'>scope</span>
   <span class='ivar'>@scope</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="slug-instance_method">
+  
+    #<strong>slug</strong>  &#x21d2; <tt>Object</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Since:</p>
+<ul class="since">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'><p>0.3.0</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+12
+13
+14</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/dependency_container/commands/assert_valid_method.rb', line 12</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_slug'>slug</span>
+  <span class='ivar'>@slug</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -624,7 +624,7 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/support/dependency_container/commands/assert_valid_method.rb', line 42</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span>
-  <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="../Errors.html" title="ConvenientService::Support::DependencyContainer::Errors (module)">Errors</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Errors/NotExportedMethod.html" title="ConvenientService::Support::DependencyContainer::Errors::NotExportedMethod (class)">NotExportedMethod</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Errors/NotExportedMethod.html#initialize-instance_method" title="ConvenientService::Support::DependencyContainer::Errors::NotExportedMethod#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>method_name:</span> <span class='id identifier rubyid_full_name'>full_name</span><span class='comma'>,</span> <span class='label'>method_scope:</span> <span class='id identifier rubyid_scope'>scope</span><span class='comma'>,</span> <span class='label'>mod:</span> <span class='id identifier rubyid_container'>container</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_method'>method</span>
+  <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="../Errors.html" title="ConvenientService::Support::DependencyContainer::Errors (module)">Errors</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Errors/NotExportedMethod.html" title="ConvenientService::Support::DependencyContainer::Errors::NotExportedMethod (class)">NotExportedMethod</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Errors/NotExportedMethod.html#initialize-instance_method" title="ConvenientService::Support::DependencyContainer::Errors::NotExportedMethod#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>method_name:</span> <span class='id identifier rubyid_slug'>slug</span><span class='comma'>,</span> <span class='label'>method_scope:</span> <span class='id identifier rubyid_scope'>scope</span><span class='comma'>,</span> <span class='label'>mod:</span> <span class='id identifier rubyid_container'>container</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_method'>method</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -636,7 +636,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Apr 24 18:57:38 2023 by
+  Generated on Wed Apr 26 10:38:17 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>

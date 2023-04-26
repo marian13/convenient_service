@@ -188,7 +188,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(full_name, scope: constants.DEFAULT_SCOPE)  &#x21d2; void </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(slug, scope: constants.DEFAULT_SCOPE)  &#x21d2; void </a>
     
 
     
@@ -257,7 +257,7 @@
     <div class="method_details first">
   <h3 class="signature first" id="initialize-instance_method">
   
-    #<strong>initialize</strong>(full_name, scope: constants.DEFAULT_SCOPE)  &#x21d2; <tt>void</tt> 
+    #<strong>initialize</strong>(slug, scope: constants.DEFAULT_SCOPE)  &#x21d2; <tt>void</tt> 
   
 
   
@@ -275,7 +275,7 @@
   
     <li>
       
-        <span class='name'>full_name</span>
+        <span class='name'>slug</span>
       
       
         <span class='type'>(<tt>Symbol</tt>, <tt>String</tt>)</span>
@@ -314,8 +314,8 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/export.rb', line 19</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_full_name'>full_name</span><span class='comma'>,</span> <span class='label'>scope:</span> <span class='id identifier rubyid_constants'>constants</span><span class='period'>.</span><span class='const'>DEFAULT_SCOPE</span><span class='rparen'>)</span>
-  <span class='ivar'>@full_name</span> <span class='op'>=</span> <span class='id identifier rubyid_full_name'>full_name</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_slug'>slug</span><span class='comma'>,</span> <span class='label'>scope:</span> <span class='id identifier rubyid_constants'>constants</span><span class='period'>.</span><span class='const'>DEFAULT_SCOPE</span><span class='rparen'>)</span>
+  <span class='ivar'>@slug</span> <span class='op'>=</span> <span class='id identifier rubyid_slug'>slug</span>
   <span class='ivar'>@scope</span> <span class='op'>=</span> <span class='id identifier rubyid_scope'>scope</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -375,7 +375,7 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/export.rb', line 41</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_description'>description</span>
-  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>export `</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_full_name'>full_name</span><span class='embexpr_end'>}</span><span class='tstring_content'>` with scope `</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_scope'>scope</span><span class='embexpr_end'>}</span><span class='tstring_content'>`</span><span class='tstring_end'>&quot;</span></span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>export `</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_slug'>slug</span><span class='embexpr_end'>}</span><span class='tstring_content'>` with scope `</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_scope'>scope</span><span class='embexpr_end'>}</span><span class='tstring_content'>`</span><span class='tstring_end'>&quot;</span></span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -427,7 +427,7 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/export.rb', line 48</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_failure_message'>failure_message</span>
-  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>expected `</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_container'>container</span><span class='embexpr_end'>}</span><span class='tstring_content'>` to export `</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_full_name'>full_name</span><span class='embexpr_end'>}</span><span class='tstring_content'>` with scope `</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_scope'>scope</span><span class='embexpr_end'>}</span><span class='tstring_content'>`</span><span class='tstring_end'>&quot;</span></span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>expected `</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_container'>container</span><span class='embexpr_end'>}</span><span class='tstring_content'>` to export `</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_slug'>slug</span><span class='embexpr_end'>}</span><span class='tstring_content'>` with scope `</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_scope'>scope</span><span class='embexpr_end'>}</span><span class='tstring_content'>`</span><span class='tstring_end'>&quot;</span></span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -479,7 +479,7 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/export.rb', line 55</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_failure_message_when_negated'>failure_message_when_negated</span>
-  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>expected `</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_container'>container</span><span class='embexpr_end'>}</span><span class='tstring_content'>` NOT to export `</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_full_name'>full_name</span><span class='embexpr_end'>}</span><span class='tstring_content'>` with scope `</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_scope'>scope</span><span class='embexpr_end'>}</span><span class='tstring_content'>`</span><span class='tstring_end'>&quot;</span></span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>expected `</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_container'>container</span><span class='embexpr_end'>}</span><span class='tstring_content'>` NOT to export `</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_slug'>slug</span><span class='embexpr_end'>}</span><span class='tstring_content'>` with scope `</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_scope'>scope</span><span class='embexpr_end'>}</span><span class='tstring_content'>`</span><span class='tstring_end'>&quot;</span></span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -558,7 +558,7 @@
 
   <span class='id identifier rubyid_commands'>commands</span><span class='period'>.</span><span class='const'>AssertValidScope</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='label'>scope:</span> <span class='id identifier rubyid_scope'>scope</span><span class='rparen'>)</span>
 
-  <span class='const'><span class='object_link'><a href="../../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Utils/Bool.html" title="ConvenientService::Utils::Bool (module)">Bool</a></span></span><span class='period'>.</span><span class='id identifier rubyid_to_bool'><span class='object_link'><a href="../../../Utils/Bool.html#to_bool-class_method" title="ConvenientService::Utils::Bool.to_bool (method)">to_bool</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_container'>container</span><span class='period'>.</span><span class='id identifier rubyid_exported_methods'>exported_methods</span><span class='period'>.</span><span class='id identifier rubyid_find_by'>find_by</span><span class='lparen'>(</span><span class='label'>full_name:</span> <span class='id identifier rubyid_full_name'>full_name</span><span class='comma'>,</span> <span class='label'>scope:</span> <span class='id identifier rubyid_scope'>scope</span><span class='rparen'>)</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="../../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Utils/Bool.html" title="ConvenientService::Utils::Bool (module)">Bool</a></span></span><span class='period'>.</span><span class='id identifier rubyid_to_bool'><span class='object_link'><a href="../../../Utils/Bool.html#to_bool-class_method" title="ConvenientService::Utils::Bool.to_bool (method)">to_bool</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_container'>container</span><span class='period'>.</span><span class='id identifier rubyid_exported_methods'>exported_methods</span><span class='period'>.</span><span class='id identifier rubyid_find_by'>find_by</span><span class='lparen'>(</span><span class='label'>slug:</span> <span class='id identifier rubyid_slug'>slug</span><span class='comma'>,</span> <span class='label'>scope:</span> <span class='id identifier rubyid_scope'>scope</span><span class='rparen'>)</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -570,7 +570,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Apr 24 18:57:35 2023 by
+  Generated on Wed Apr 26 10:38:12 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>
