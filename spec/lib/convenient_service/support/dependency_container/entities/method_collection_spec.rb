@@ -102,12 +102,12 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Method
         end
       end
 
-      example_group "`full_name` filter" do
-        let(:method) { ConvenientService::Support::DependencyContainer::Entities::Method.new(slug: full_name, scope: :instance, body: body) }
-        let(:full_name) { :"foo.bar.baz.qux" }
+      example_group "`slug` filter" do
+        let(:method) { ConvenientService::Support::DependencyContainer::Entities::Method.new(slug: slug, scope: :instance, body: body) }
+        let(:slug) { :"foo.bar.baz.qux" }
 
-        context "when `full_name` is NOT passed" do
-          context "when method collection does NOT have method with `full_name`" do
+        context "when `slug` is NOT passed" do
+          context "when method collection does NOT have method with `slug`" do
             before do
               method_collection.clear
             end
@@ -117,7 +117,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Method
             end
           end
 
-          context "when method collection has method with `full_name`" do
+          context "when method collection has method with `slug`" do
             before do
               method_collection << method
             end
@@ -128,24 +128,24 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Method
           end
         end
 
-        context "when `full_name` is passed" do
+        context "when `slug` is passed" do
           context "when method collection does NOT have method with `slug`" do
             before do
               method_collection.clear
             end
 
             it "returns `nil`" do
-              expect(method_collection.find_by(full_name: full_name)).to be_nil
+              expect(method_collection.find_by(slug: slug)).to be_nil
             end
           end
 
-          context "when method collection has method with `full_name`" do
+          context "when method collection has method with `slug`" do
             before do
               method_collection << method
             end
 
-            it "returns that method with `full_name`" do
-              expect(method_collection.find_by(full_name: full_name)).to eq(method)
+            it "returns that method with `slug`" do
+              expect(method_collection.find_by(slug: slug)).to eq(method)
             end
           end
         end

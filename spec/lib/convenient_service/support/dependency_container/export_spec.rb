@@ -16,12 +16,12 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Export do
     end
   end
 
-  let(:full_name) { :foo }
+  let(:slug) { :foo }
   let(:scope) { :instance }
 
-  let(:method) { ConvenientService::Support::DependencyContainer::Entities::Method.new(slug: full_name, scope: scope, body: body) }
+  let(:method) { ConvenientService::Support::DependencyContainer::Entities::Method.new(slug: slug, scope: scope, body: body) }
 
-  let(:export) { container.export(full_name, **kwargs, &body) }
+  let(:export) { container.export(slug, **kwargs, &body) }
   let(:kwargs) { default_kwargs }
   let(:default_kwargs) { {scope: scope} }
   let(:body) { proc { :bar } }
