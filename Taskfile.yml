@@ -17,6 +17,49 @@ tasks:
     cmds:
       - task: test
 
+  ##
+  # NOTE: `task console` is also aliased as `task playground`.
+  #
+  console:
+    cmds:
+      - bundle exec rake playground
+    interactive: true
+
+  console:all:
+    cmds:
+      - bundle exec appraisal all rake playground
+    interactive: true
+
+  console:dry:
+    cmds:
+      - bundle exec appraisal dry rake playground
+    interactive: true
+
+  console:rails_5.2:
+    cmds:
+      - bundle exec appraisal rails_5.2 rake playground
+    interactive: true
+
+  console:rails_6.0:
+    cmds:
+      - bundle exec appraisal rails_6.0 rake playground
+    interactive: true
+
+  console:rails_6.1:
+    cmds:
+      - bundle exec appraisal rails_6.1 rake playground
+    interactive: true
+
+  console:rails_7.0:
+    cmds:
+      - bundle exec appraisal rails_7.0 rake playground
+    interactive: true
+
+  console:standard:
+    cmds:
+      - bundle exec rake playground
+    interactive: true
+
   coverage:lcov:merge:
     cmds:
       - npx --yes lcov-result-merger 'coverage/**/lcov.info' coverage/lcov.info
