@@ -4,8 +4,8 @@
 # TODO: GitHub wiki for `shouda-matchers`.
 #
 # IMPORTANT: `shoulda-matchers` loads active support core extensions.
-# https://guides.rubyonrails.org/active_support_core_extensions.html
-# https://apidock.com/rails/v6.1.3.1/Hash/symbolize_keys
+# - https://guides.rubyonrails.org/active_support_core_extensions.html
+# - https://apidock.com/rails/v6.1.3.1/Hash/symbolize_keys
 #
 # This can lead to the false positive tests. For example:
 #
@@ -27,7 +27,26 @@
 #
 #     super
 #   end
+##
+
+##
+# This wrapper appends ruby engine and version to the `appraisal_name`.
+# This way every Appraisal has a dedicated Gemfile for any combination of Ruby and particular `appraisal_name`.
+# For example: `ruby_2.7_rails_5.2`, `ruby_3.0_rails_6.0`, `jruby_9.4_rails_7.0`, etc.
 #
+# @note Check `gemfiles` directory.
+#
+# @see https://github.com/thoughtbot/appraisal
+# @see https://github.com/thoughtbot/appraisal/blob/v2.4.1/lib/appraisal/appraisal_file.rb#L30
+#
+# @param appraisal_name [String]
+# @param block [Proc]
+# @return [void]
+#
+def appraise(appraisal_name, &block)
+  super([::RUBY_ENGINE, ::RUBY_VERSION, appraisal_name].join("_"), &block)
+end
+
 appraise "rails_5.2" do
   gem "activemodel", "~> 5.2.0"
 
