@@ -85,6 +85,8 @@ module ConvenientService
       #
       #   NOTE: `__send__` is used instead of `Support::SafeMethod` intentionally, since checking whether a method is defined is performed earlier by `Utils::Module.class_method_defined?`.
       #
+      #   TODO: Include `method` into trigger metadata.
+      #
       def method_missing(method, *args, **kwargs, &block)
         commit_config!(trigger: Constants::Triggers::CLASS_METHOD_MISSING)
 

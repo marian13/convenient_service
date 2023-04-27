@@ -5,7 +5,9 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
-RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Service::ClassMethods do
+RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Service::Concern::ClassMethods do
+  include ConvenientService::RSpec::Matchers::CacheItsValue
+
   let(:service_class) { ConvenientService::Service::Plugins::CanHaveSteps::Entities::Service }
 
   example_group "class methods" do
@@ -36,7 +38,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Serv
         end
 
         it "returns new service instance" do
-          expect(service_class.cast(other).object_id).not_to eq(other.object_id)
+          expect { service_class.cast(other) }.not_to cache_its_value
         end
       end
     end
