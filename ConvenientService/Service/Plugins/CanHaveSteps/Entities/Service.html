@@ -85,16 +85,11 @@
 
   
   
-  <dl>
-      <dt>Extended by:</dt>
-      <dd><span class='object_link'><a href="Service/ClassMethods.html" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities::Service::ClassMethods (module)">ClassMethods</a></span></dd>
-  </dl>
-  
   
   
   <dl>
       <dt>Includes:</dt>
-      <dd><span class='object_link'><a href="../../../../Support/Castable.html" title="ConvenientService::Support::Castable (module)">ConvenientService::Support::Castable</a></span>, <span class='object_link'><a href="../../../../Support/Delegate.html" title="ConvenientService::Support::Delegate (module)">ConvenientService::Support::Delegate</a></span></dd>
+      <dd><span class='object_link'><a href="Service/Concern.html" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities::Service::Concern (module)">Concern</a></span></dd>
   </dl>
   
   
@@ -105,29 +100,17 @@
   <dl>
     <dt>Defined in:</dt>
     <dd>lib/convenient_service/service/plugins/can_have_steps/entities/service.rb<span class="defines">,<br />
-  lib/convenient_service/service/plugins/can_have_steps/entities/service/class_methods.rb</span>
+  lib/convenient_service/service/plugins/can_have_steps/entities/service/concern.rb,<br /> lib/convenient_service/service/plugins/can_have_steps/entities/service/concern/class_methods.rb,<br /> lib/convenient_service/service/plugins/can_have_steps/entities/service/concern/instance_methods.rb</span>
 </dd>
   </dl>
   
 </div>
 
-<h2>Overview</h2><div class="docstring">
-  <div class="discussion">
-    <p>NOTE: Service is a wrapper for a service class (klass). For example:</p>
-<p>step SomeService, in: :foo, out: :bar</p>
-<h1>klass is <code>SomeService</code> in this particular case.</h1>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-
-</div><h2>Defined Under Namespace</h2>
+<h2>Defined Under Namespace</h2>
 <p class="children">
   
     
-      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Service/ClassMethods.html" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities::Service::ClassMethods (module)">ClassMethods</a></span>
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Service/Concern.html" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities::Service::Concern (module)">Concern</a></span>
     
   
     
@@ -137,134 +120,11 @@
 
 
 
-  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
-  <ul class="summary">
-    
-      <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#klass-instance_method" title="#klass (instance method)">#<strong>klass</strong>  &#x21d2; Object </a>
-    
-
-    
-  </span>
-  
-  
-  
-    
-      <span class="note title readonly">readonly</span>
-    
-    
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'><p>Returns the value of attribute klass.</p>
-</div></span>
-  
-</li>
-
-    
-  </ul>
 
 
 
 
   
-    <h2>
-      Instance Method Summary
-      <small><a href="#" class="summary_toggle">collapse</a></small>
-    </h2>
-
-    <ul class="summary">
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#==-instance_method" title="#== (instance method)">#<strong>==</strong>(other)  &#x21d2; Object </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#has_defined_method%3F-instance_method" title="#has_defined_method? (instance method)">#<strong>has_defined_method?</strong>(method)  &#x21d2; Boolean </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(klass)  &#x21d2; Service </a>
-    
-
-    
-  </span>
-  
-  
-    <span class="note title constructor">constructor</span>
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'><p>A new instance of Service.</p>
-</div></span>
-  
-</li>
-
-      
-    </ul>
-  
-
-
-  
-  
-  
-  
-  
-  
-  
-  
-  <h3 class="inherited">Methods included from <span class='object_link'><a href="Service/ClassMethods.html" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities::Service::ClassMethods (module)">ClassMethods</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="Service/ClassMethods.html#cast-instance_method" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities::Service::ClassMethods#cast (method)">cast</a></span></p>
-
   
   
   
@@ -276,214 +136,16 @@
   
   
   
-  
-  
+  <h2>Method Summary</h2>
   
   <h3 class="inherited">Methods included from <span class='object_link'><a href="../../../../Support/Concern.html" title="ConvenientService::Support::Concern (module)">ConvenientService::Support::Concern</a></span></h3>
   <p class="inherited"><span class='object_link'><a href="../../../../Support/Concern.html#included-class_method" title="ConvenientService::Support::Concern.included (method)">included</a></span></p>
 
-  
-  
-  
-  
-  
-  <div id="constructor_details" class="method_details_list">
-  <h2>Constructor Details</h2>
-  
-    <div class="method_details first">
-  <h3 class="signature first" id="initialize-instance_method">
-  
-    #<strong>initialize</strong>(klass)  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities::Service (class)">Service</a></span></tt> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    <p>Returns a new instance of Service.</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-26
-27
-28</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/service.rb', line 26</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_klass'>klass</span><span class='rparen'>)</span>
-  <span class='ivar'>@klass</span> <span class='op'>=</span> <span class='id identifier rubyid_klass'>klass</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-  
-</div>
-
-  <div id="instance_attr_details" class="attr_details">
-    <h2>Instance Attribute Details</h2>
-    
-      
-      <span id=""></span>
-      <div class="method_details first">
-  <h3 class="signature first" id="klass-instance_method">
-  
-    #<strong>klass</strong>  &#x21d2; <tt>Object</tt>  <span class="extras">(readonly)</span>
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    <p>Returns the value of attribute klass.</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-24
-25
-26</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/service.rb', line 24</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_klass'>klass</span>
-  <span class='ivar'>@klass</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-  </div>
-
-
-  <div id="instance_method_details" class="method_details_list">
-    <h2>Instance Method Details</h2>
-
-    
-      <div class="method_details first">
-  <h3 class="signature first" id="==-instance_method">
-  
-    #<strong>==</strong>(other)  &#x21d2; <tt>Object</tt> 
-  
-
-  
-
-  
-</h3><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-34
-35
-36
-37
-38
-39
-40
-41
-42</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/service.rb', line 34</span>
-
-<span class='kw'>def</span> <span class='op'>==</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_casted'>casted</span> <span class='op'>=</span> <span class='id identifier rubyid_cast'>cast</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
-
-  <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_casted'>casted</span>
-
-  <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='id identifier rubyid_klass'>klass</span> <span class='op'>!=</span> <span class='id identifier rubyid_casted'>casted</span><span class='period'>.</span><span class='id identifier rubyid_klass'>klass</span>
-
-  <span class='kw'>true</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="has_defined_method?-instance_method">
-  
-    #<strong>has_defined_method?</strong>(method)  &#x21d2; <tt>Boolean</tt> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    
-
-  </div>
-</div>
-<div class="tags">
-  
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>Boolean</tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-30
-31
-32</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/service.rb', line 30</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_has_defined_method?'>has_defined_method?</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='rparen'>)</span>
-  <span class='const'><span class='object_link'><a href="../../../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Utils/Method.html" title="ConvenientService::Utils::Method (module)">Method</a></span></span><span class='period'>.</span><span class='id identifier rubyid_defined?'><span class='object_link'><a href="../../../../Utils/Method.html#defined%3F-class_method" title="ConvenientService::Utils::Method.defined? (method)">defined?</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='id identifier rubyid_klass'>klass</span><span class='comma'>,</span> <span class='label'>private:</span> <span class='kw'>true</span><span class='rparen'>)</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-  </div>
 
 </div>
 
       <div id="footer">
-  Generated on Thu Apr 27 21:27:51 2023 by
+  Generated on Thu Apr 27 22:04:13 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>
