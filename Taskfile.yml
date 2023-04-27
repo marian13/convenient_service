@@ -121,6 +121,9 @@ tasks:
     cmds:
       - task: deps:install
 
+  ##
+  # NOTE: `task deps:install` is also aliased as `task install`.
+  #
   deps:install:
     cmds:
       - bundle install
@@ -383,6 +386,13 @@ tasks:
   github:open:
     cmds:
       - open -na "Google Chrome" --args --new-window --incognito "https://github.com/marian13/convenient_service"
+
+  ##
+  # NOTE: `task install` is also aliased as `task deps:install`.
+  #
+  install:
+    cmds:
+      - task: deps:install
 
   lint:
     cmds:
