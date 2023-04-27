@@ -3,6 +3,11 @@
 module ConvenientService
   module Core
     module InstanceMethods
+      ##
+      # @internal
+      #   TODO: Trigger config commitment from `inspect`.
+      ##
+
       private
 
       ##

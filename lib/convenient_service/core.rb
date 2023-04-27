@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 
+##
+# @internal
+#   TODO: Extract concern.
+#
 require_relative "core/instance_methods"
 require_relative "core/class_methods"
 

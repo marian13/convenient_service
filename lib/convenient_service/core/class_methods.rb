@@ -4,6 +4,11 @@ module ConvenientService
   module Core
     module ClassMethods
       ##
+      # @internal
+      #   TODO: Trigger config commitment from `new`.
+      ##
+
+      ##
       # @see ConvenientService::Core::Entities::Config#concerns
       #
       # @internal
