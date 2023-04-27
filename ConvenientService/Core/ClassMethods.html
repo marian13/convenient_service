@@ -249,20 +249,20 @@ If <code>method</code> is still NOT defined, raises <code>NoMethodError</code>, 
       <pre class="lines">
 
 
-90
-91
-92
-93
-94
 95
 96
 97
 98
 99
-100</pre>
+100
+101
+102
+103
+104
+105</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/class_methods.rb', line 90</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/class_methods.rb', line 95</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_method_missing'>method_missing</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_commit_config!'>commit_config!</span><span class='lparen'>(</span><span class='label'>trigger:</span> <span class='const'><span class='object_link'><a href="Constants.html" title="ConvenientService::Core::Constants (module)">Constants</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Constants/Triggers.html" title="ConvenientService::Core::Constants::Triggers (module)">Triggers</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Constants/Triggers.html#CLASS_METHOD_MISSING-constant" title="ConvenientService::Core::Constants::Triggers::CLASS_METHOD_MISSING (constant)">CLASS_METHOD_MISSING</a></span></span><span class='rparen'>)</span>
@@ -354,13 +354,13 @@ Does nothing for the subsequent calls.</p>
       <pre class="lines">
 
 
-41
-42
-43
-44</pre>
+46
+47
+48
+49</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/class_methods.rb', line 41</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/class_methods.rb', line 46</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_commit_config!'>commit_config!</span><span class='lparen'>(</span><span class='label'>trigger:</span> <span class='const'><span class='object_link'><a href="../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Core.html" title="ConvenientService::Core (module)">Core</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Constants.html" title="ConvenientService::Core::Constants (module)">Constants</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Constants/Triggers.html" title="ConvenientService::Core::Constants::Triggers (module)">Triggers</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Constants/Triggers.html#USER-constant" title="ConvenientService::Core::Constants::Triggers::USER (constant)">USER</a></span></span><span class='rparen'>)</span>
   <span class='lparen'>(</span><span class='ivar'>@__convenient_service_config__</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="Entities.html" title="ConvenientService::Core::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Config.html" title="ConvenientService::Core::Entities::Config (class)">Config</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Entities/Config.html#initialize-instance_method" title="ConvenientService::Core::Entities::Config#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>klass:</span> <span class='kw'>self</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_commit!'>commit!</span><span class='lparen'>(</span><span class='label'>trigger:</span> <span class='id identifier rubyid_trigger'>trigger</span><span class='rparen'>)</span>
@@ -402,12 +402,12 @@ Does nothing for the subsequent calls.</p>
       <pre class="lines">
 
 
-13
-14
-15</pre>
+18
+19
+20</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/class_methods.rb', line 13</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/class_methods.rb', line 18</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_concerns'>concerns</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
   <span class='lparen'>(</span><span class='ivar'>@__convenient_service_config__</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="Entities.html" title="ConvenientService::Core::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Config.html" title="ConvenientService::Core::Entities::Config (class)">Config</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Entities/Config.html#initialize-instance_method" title="ConvenientService::Core::Entities::Config#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>klass:</span> <span class='kw'>self</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_concerns'>concerns</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
@@ -448,12 +448,12 @@ Does nothing for the subsequent calls.</p>
       <pre class="lines">
 
 
-24
-25
-26</pre>
+29
+30
+31</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/class_methods.rb', line 24</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/class_methods.rb', line 29</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_middlewares'>middlewares</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
   <span class='lparen'>(</span><span class='ivar'>@__convenient_service_config__</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="Entities.html" title="ConvenientService::Core::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Config.html" title="ConvenientService::Core::Entities::Config (class)">Config</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Entities/Config.html#initialize-instance_method" title="ConvenientService::Core::Entities::Config#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>klass:</span> <span class='kw'>self</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_middlewares'>middlewares</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
@@ -468,7 +468,7 @@ Does nothing for the subsequent calls.</p>
 </div>
 
       <div id="footer">
-  Generated on Thu Apr 27 22:04:07 2023 by
+  Generated on Thu Apr 27 22:55:14 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>

@@ -171,20 +171,20 @@ If <code>method</code> is still NOT defined, raises <code>NoMethodError</code>, 
       <pre class="lines">
 
 
-50
-51
-52
-53
-54
 55
 56
 57
 58
 59
-60</pre>
+60
+61
+62
+63
+64
+65</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/instance_methods.rb', line 50</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/instance_methods.rb', line 55</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_method_missing'>method_missing</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_commit_config!'>commit_config!</span><span class='lparen'>(</span><span class='label'>trigger:</span> <span class='const'><span class='object_link'><a href="Constants.html" title="ConvenientService::Core::Constants (module)">Constants</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Constants/Triggers.html" title="ConvenientService::Core::Constants::Triggers (module)">Triggers</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Constants/Triggers.html#INSTANCE_METHOD_MISSING-constant" title="ConvenientService::Core::Constants::Triggers::INSTANCE_METHOD_MISSING (constant)">INSTANCE_METHOD_MISSING</a></span></span><span class='rparen'>)</span>
@@ -208,7 +208,7 @@ If <code>method</code> is still NOT defined, raises <code>NoMethodError</code>, 
 </div>
 
       <div id="footer">
-  Generated on Thu Apr 27 22:04:07 2023 by
+  Generated on Thu Apr 27 22:55:14 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>
