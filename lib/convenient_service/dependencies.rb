@@ -52,6 +52,18 @@ module ConvenientService
 
       ##
       # @return [Boolean]
+      # @note Expected to be called from app entry points like `initializers` in Rails.
+      #
+      def require_has_awesome_print_inspect
+        require "awesome_print"
+
+        require_relative "service/plugins/can_have_steps/entities/step/plugins/has_awesome_print_inspect"
+        require_relative "configs/awesome_print"
+        require_relative "configs/awesome_print/aliases"
+      end
+
+      ##
+      # @return [Boolean]
       # @api private
       #
       def support_has_result_params_validations_using_active_model_validations?
