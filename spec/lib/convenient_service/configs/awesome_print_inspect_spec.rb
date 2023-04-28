@@ -28,16 +28,16 @@ RSpec.describe ConvenientService::Configs::AwesomePrintInspect do
       # TODO: Complete.
       #
       example_group "service" do
-        # example_group "concerns" do
-        #   it "removes `ConvenientService::Service::Plugins::HasInspect::Concern` from service concerns" do
-        #     expect(service_class.concerns.to_a).not_to include(ConvenientService::Service::Plugins::HasInspect::Concern)
-        #   end
-        #
-        #   it "adds `ConvenientService::Service::Plugins::HasAwesomeInspect::Concern` from service concerns" do
-        #     expect(service_class.concerns.to_a).to include(ConvenientService::Service::Plugins::HasAwesomeInspect::Concern)
-        #   end
-        # end
-        #
+        example_group "concerns" do
+          it "removes `ConvenientService::Service::Plugins::HasInspect::Concern` from service concerns" do
+            expect(service_class.concerns.to_a).not_to include(ConvenientService::Service::Plugins::HasInspect::Concern)
+          end
+
+          it "adds `ConvenientService::Service::Plugins::HasAwesomePrintInspect::Concern` from service concerns" do
+            expect(service_class.concerns.to_a).to include(ConvenientService::Service::Plugins::HasAwesomePrintInspect::Concern)
+          end
+        end
+
         # example_group "service result" do
         #   example_group "concerns" do
         #     it "removes `HasInspect::Concern` from service concerns" do

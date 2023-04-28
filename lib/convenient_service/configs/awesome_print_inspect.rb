@@ -12,10 +12,13 @@ module ConvenientService
       included do
         include Configs::Minimal
 
-        # concerns do
-        #   replace Plugins::Service::HasInspect::Concern, Plugins::Service::HasAwesomePrintInspect::Concern
-        # end
-        #
+        concerns do
+          ##
+          # TODO: Safe replace.
+          #
+          replace Plugins::Service::HasInspect::Concern, Plugins::Service::HasAwesomePrintInspect::Concern
+        end
+
         # class self::Result
         #   concerns do
         #     replace Plugins::Result::HasInspect::Concern, Plugins::Result::HasAwesomePrintInspect::Concern
