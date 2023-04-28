@@ -6,46 +6,6 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::HasInspect::Concern do
-  include ConvenientService::RSpec::Matchers::DelegateTo
-
-  let(:step_class) do
-    Class.new.tap do |klass|
-      klass.class_exec(described_class) do |mod|
-        include ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Concern
-
-        include mod
-
-        def self.name
-          "Step"
-        end
-      end
-    end
-  end
-
-  let(:step_instance) { step_class.new(service, container: container) }
-
-  let(:service) { step_service_klass }
-
-  let(:step_service_klass) do
-    Class.new do
-      def self.name
-        "Service"
-      end
-    end
-  end
-
-  let(:organizer_service_klass) do
-    Class.new do
-      def self.name
-        "Organizer"
-      end
-    end
-  end
-
-  let(:container) { organizer_service_klass }
-
-  let(:args) { [service] }
-
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
 
@@ -62,8 +22,34 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
   example_group "instance methods" do
     describe "#inspect" do
+      let(:container) do
+        Class.new.tap do |klass|
+          klass.class_exec(service) do |service|
+            include ConvenientService::Configs::Minimal
+
+            step service
+
+            def self.name
+              "ContainerService"
+            end
+          end
+        end
+      end
+
+      let(:service) do
+        Class.new do
+          include ConvenientService::Configs::Minimal
+
+          def self.name
+            "StepService"
+          end
+        end
+      end
+
+      let(:step) { container.steps.first }
+
       it "returns `inspect` representation of step" do
-        expect(step_instance.inspect).to eq("<#{step_instance.container.klass.name}::Step service: #{step_instance.service.klass.name}>")
+        expect(step_instance.inspect).to eq("<#{step.container.klass.name}::Step service: #{step.service.klass.name}>")
       end
     end
   end

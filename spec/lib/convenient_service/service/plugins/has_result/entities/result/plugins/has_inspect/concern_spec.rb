@@ -29,23 +29,23 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
   end
 
   example_group "instance methods" do
-    let(:service) do
-      Class.new do
-        include ConvenientService::Configs::Minimal
+    describe "#inspect" do
+      let(:service) do
+        Class.new do
+          include ConvenientService::Configs::Minimal
 
-        def self.name
-          "Service"
-        end
+          def self.name
+            "Service"
+          end
 
-        def result
-          success
+          def result
+            success
+          end
         end
       end
-    end
 
-    let(:result) { service.result }
+      let(:result) { service.result }
 
-    describe "#inspect" do
       it "returns `inspect` representation of result" do
         expect(result.inspect).to eq("<#{result.service.class.name}::Result status: :#{result.status}>")
       end

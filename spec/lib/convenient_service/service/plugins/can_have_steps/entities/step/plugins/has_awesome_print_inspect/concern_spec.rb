@@ -6,36 +6,6 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::HasAwesomePrintInspect::Concern do
-  include ConvenientService::RSpec::Matchers::DelegateTo
-
-  let(:container) do
-    Class.new.tap do |klass|
-      klass.class_exec(service) do |service|
-        include ConvenientService::Configs::Standard
-
-        include ConvenientService::Configs::AwesomePrintInspect
-
-        step service
-
-        def self.name
-          "ContainerService"
-        end
-      end
-    end
-  end
-
-  let(:service) do
-    Class.new do
-      include ConvenientService::Configs::Standard
-
-      def self.name
-        "StepService"
-      end
-    end
-  end
-
-  let(:step) { container.steps.first }
-
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
 
@@ -60,6 +30,34 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
   example_group "instance methods" do
     describe "#inspect" do
+      let(:container) do
+        Class.new.tap do |klass|
+          klass.class_exec(service) do |service|
+            include ConvenientService::Configs::Minimal
+
+            include ConvenientService::Configs::AwesomePrintInspect
+
+            step service
+
+            def self.name
+              "ContainerService"
+            end
+          end
+        end
+      end
+
+      let(:service) do
+        Class.new do
+          include ConvenientService::Configs::Minimal
+
+          def self.name
+            "StepService"
+          end
+        end
+      end
+
+      let(:step) { container.steps.first }
+
       let(:keywords) { ["ConvenientService", "entity", "Step", "container", "ContainerService", "service", "StepService"] }
 
       before do

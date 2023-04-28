@@ -49,53 +49,53 @@ RSpec.describe ConvenientService::Configs::AwesomePrintInspect do
             end
           end
 
-        #   example_group "service result data" do
-        #     example_group "concerns" do
-        #       it "removes `HasInspect::Concern` from service concerns" do
-        #         expect(service_class::Result::Data.concerns.to_a).not_to include(HasInspect::Concern)
-        #       end
-        #
-        #       it "adds `HasAwesomeInspect::Concern` from service concerns" do
-        #         expect(service_class::Result::Data.concerns.to_a).to include(HasAwesomeInspect::Concern)
-        #       end
-        #     end
-        #   end
-        #
-        #   example_group "service result message" do
-        #     example_group "concerns" do
-        #       it "removes `HasInspect::Concern` from service concerns" do
-        #         expect(service_class::Result::Message.concerns.to_a).not_to include(HasInspect::Concern)
-        #       end
-        #
-        #       it "adds `HasAwesomeInspect::Concern` from service concerns" do
-        #         expect(service_class::Result::Message.concerns.to_a).to include(HasAwesomeInspect::Concern)
-        #       end
-        #     end
-        #   end
-        #
-        #   example_group "service result code" do
-        #     example_group "concerns" do
-        #       it "removes `HasInspect::Concern` from service concerns" do
-        #         expect(service_class.::Result::Code.concerns.to_a).not_to include(HasInspect::Concern)
-        #       end
-        #
-        #       it "adds `HasAwesomeInspect::Concern` from service concerns" do
-        #         expect(service_class.::Result::Code.concerns.to_a).to include(HasAwesomeInspect::Concern)
-        #       end
-        #     end
-        #   end
-        #
-        #   example_group "service result status" do
-        #     example_group "concerns" do
-        #       it "removes `HasInspect::Concern` from service concerns" do
-        #         expect(service_class::Result::Status.concerns.to_a).not_to include(HasInspect::Concern)
-        #       end
-        #
-        #       it "adds `HasAwesomeInspect::Concern` from service concerns" do
-        #         expect(service_class::Result::Status.concerns.to_a).to include(HasAwesomeInspect::Concern)
-        #       end
-        #     end
-        #   end
+          # example_group "service result data" do
+          #   example_group "concerns" do
+          #     it "removes `HasInspect::Concern` from service concerns" do
+          #       expect(service_class::Result::Data.concerns.to_a).not_to include(HasInspect::Concern)
+          #     end
+          #
+          #     it "adds `HasAwesomeInspect::Concern` from service concerns" do
+          #       expect(service_class::Result::Data.concerns.to_a).to include(HasAwesomeInspect::Concern)
+          #     end
+          #   end
+          # end
+          #
+          # example_group "service result message" do
+          #   example_group "concerns" do
+          #     it "removes `HasInspect::Concern` from service concerns" do
+          #       expect(service_class::Result::Message.concerns.to_a).not_to include(HasInspect::Concern)
+          #     end
+          #
+          #     it "adds `HasAwesomeInspect::Concern` from service concerns" do
+          #       expect(service_class::Result::Message.concerns.to_a).to include(HasAwesomeInspect::Concern)
+          #     end
+          #   end
+          # end
+          #
+          # example_group "service result code" do
+          #   example_group "concerns" do
+          #     it "removes `HasInspect::Concern` from service concerns" do
+          #       expect(service_class.::Result::Code.concerns.to_a).not_to include(HasInspect::Concern)
+          #     end
+          #
+          #     it "adds `HasAwesomeInspect::Concern` from service concerns" do
+          #       expect(service_class.::Result::Code.concerns.to_a).to include(HasAwesomeInspect::Concern)
+          #     end
+          #   end
+          # end
+          #
+          # example_group "service result status" do
+          #   example_group "concerns" do
+          #     it "removes `HasInspect::Concern` from service concerns" do
+          #       expect(service_class::Result::Status.concerns.to_a).not_to include(HasInspect::Concern)
+          #     end
+          #
+          #     it "adds `HasAwesomeInspect::Concern` from service concerns" do
+          #       expect(service_class::Result::Status.concerns.to_a).to include(HasAwesomeInspect::Concern)
+          #     end
+          #   end
+          # end
         end
 
         example_group "service step" do

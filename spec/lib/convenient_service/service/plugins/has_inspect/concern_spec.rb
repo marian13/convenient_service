@@ -6,22 +6,6 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Service::Plugins::HasInspect::Concern do
-  include ConvenientService::RSpec::Matchers::DelegateTo
-
-  let(:service_class) do
-    Class.new.tap do |klass|
-      klass.class_exec(described_class) do |mod|
-        include mod
-
-        def self.name
-          "Service"
-        end
-      end
-    end
-  end
-
-  let(:service_instance) { service_class.new }
-
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
 
@@ -32,12 +16,32 @@ RSpec.describe ConvenientService::Service::Plugins::HasInspect::Concern do
     context "when included" do
       subject { service_class }
 
+      let(:service_class) do
+        Class.new.tap do |klass|
+          klass.class_exec(described_class) do |mod|
+            include mod
+          end
+        end
+      end
+
       it { is_expected.to include_module(described_class::InstanceMethods) }
     end
   end
 
   example_group "instance methods" do
     describe "#inspect" do
+      let(:service_class) do
+        Class.new.tap do |klass|
+          include ConvenientService::Configs::Minimal
+
+          def self.name
+            "ImportantService"
+          end
+        end
+      end
+
+      let(:service_instance) { service_class.new }
+
       it "returns `inspect` representation of service" do
         expect(service_instance.inspect).to eq("<#{service_class.name}>")
       end

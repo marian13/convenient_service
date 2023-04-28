@@ -6,24 +6,6 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasAwesomePrintInspect::Concern do
-  let(:service) do
-    Class.new do
-      include ConvenientService::Configs::Standard
-
-      include ConvenientService::Configs::AwesomePrintInspect
-
-      def result
-        success
-      end
-
-      def self.name
-        "ImportantService"
-      end
-    end
-  end
-
-  let(:result) { service.result }
-
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
 
@@ -48,6 +30,24 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
 
   example_group "instance methods" do
     describe "#inspect" do
+      let(:service) do
+        Class.new do
+          include ConvenientService::Configs::Minimal
+
+          include ConvenientService::Configs::AwesomePrintInspect
+
+          def self.name
+            "Service"
+          end
+
+          def result
+            success
+          end
+        end
+      end
+
+      let(:result) { service.result }
+
       let(:keywords) { ["ConvenientService", "entity", "Result", "status", "success", "service", "ImportantService"] }
 
       it "returns `inspect` representation of result" do
