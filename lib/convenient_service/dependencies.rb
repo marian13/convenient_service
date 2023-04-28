@@ -54,12 +54,12 @@ module ConvenientService
       # @return [Boolean]
       # @note Expected to be called from app entry points like `initializers` in Rails.
       #
-      def require_has_awesome_print_inspect
+      def require_awesome_print_inspect
         require "awesome_print"
 
         require_relative "service/plugins/can_have_steps/entities/step/plugins/has_awesome_print_inspect"
-        require_relative "configs/awesome_print"
-        require_relative "configs/awesome_print/aliases"
+        require_relative "configs/awesome_print_inspect"
+        require_relative "configs/awesome_print_inspect/aliases"
       end
 
       ##

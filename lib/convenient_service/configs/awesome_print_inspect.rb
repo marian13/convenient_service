@@ -5,7 +5,7 @@ module ConvenientService
     ##
     # TODO: Complete.
     #
-    module AwesomePrint
+    module AwesomePrintInspect
       include Support::Concern
 
       # rubocop:disable Lint/ConstantDefinitionInBlock

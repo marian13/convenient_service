@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::Configs::AwesomePrint do
+RSpec.describe ConvenientService::Configs::AwesomePrintInspect do
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
 

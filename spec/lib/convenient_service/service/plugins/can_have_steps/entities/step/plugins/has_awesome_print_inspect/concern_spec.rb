@@ -13,7 +13,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       klass.class_exec(service) do |service|
         include ConvenientService::Configs::Standard
 
-        include ConvenientService::Configs::AwesomePrint
+        include ConvenientService::Configs::AwesomePrintInspect
 
         step service
 
