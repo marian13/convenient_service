@@ -31,7 +31,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasInspect::Concern do
   example_group "instance methods" do
     describe "#inspect" do
       let(:service_class) do
-        Class.new.tap do |klass|
+        Class.new do
           include ConvenientService::Configs::Minimal
 
           def self.name
@@ -41,6 +41,13 @@ RSpec.describe ConvenientService::Service::Plugins::HasInspect::Concern do
       end
 
       let(:service_instance) { service_class.new }
+
+      before do
+        ##
+        # TODO: Remove when Core implements auto committing from `inspect`.
+        #
+        service_class.commit_config!
+      end
 
       it "returns `inspect` representation of service" do
         expect(service_instance.inspect).to eq("<#{service_class.name}>")

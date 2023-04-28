@@ -19,7 +19,7 @@ module ConvenientService
                       metadata = {
                         ConvenientService: {
                           entity: "Result",
-                          status: status.to_s,
+                          status: ":#{status}",
                           service: service.class.name
                         }
                       }

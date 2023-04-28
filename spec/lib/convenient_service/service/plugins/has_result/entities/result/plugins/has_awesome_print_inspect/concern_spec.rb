@@ -37,7 +37,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
           include ConvenientService::Configs::AwesomePrintInspect
 
           def self.name
-            "Service"
+            "ImportantService"
           end
 
           def result
@@ -48,7 +48,14 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
 
       let(:result) { service.result }
 
-      let(:keywords) { ["ConvenientService", "entity", "Result", "status", "success", "service", "ImportantService"] }
+      let(:keywords) { ["ConvenientService", "entity", "Result", "status", ":success", "service", "ImportantService"] }
+
+      before do
+        ##
+        # TODO: Remove when Core implements auto committing from `inspect`.
+        #
+        service.commit_config!
+      end
 
       it "returns `inspect` representation of result" do
         expect(result.inspect).to include(*keywords)

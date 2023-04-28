@@ -46,6 +46,13 @@ RSpec.describe ConvenientService::Service::Plugins::HasAwesomePrintInspect::Conc
 
       let(:keywords) { ["ConvenientService", "entity", "Service", "name", "ImportantService"] }
 
+      before do
+        ##
+        # TODO: Remove when Core implements auto committing from `inspect`.
+        #
+        service_class.commit_config!
+      end
+
       it "returns `inspect` representation of service" do
         expect(service_instance.inspect).to include(*keywords)
       end

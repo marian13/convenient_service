@@ -148,6 +148,10 @@ module ConvenientService
 
           class self::Data
             include Core
+
+            concerns do
+              use Plugins::Data::HasInspect::Concern
+            end
           end
 
           class self::Message

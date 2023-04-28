@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "data/concern"
+require_relative "data/plugins"
 
 module ConvenientService
   module Service

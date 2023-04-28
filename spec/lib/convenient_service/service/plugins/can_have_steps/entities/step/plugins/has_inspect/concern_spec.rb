@@ -16,6 +16,14 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
     context "when included" do
       subject { step_class }
 
+      let(:step_class) do
+        Class.new.tap do |klass|
+          klass.class_exec(described_class) do |mod|
+            include mod
+          end
+        end
+      end
+
       it { is_expected.to include_module(described_class::InstanceMethods) }
     end
   end
@@ -48,8 +56,15 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
       let(:step) { container.steps.first }
 
+      before do
+        ##
+        # TODO: Remove when Core implements auto committing from `inspect`.
+        #
+        step.class.commit_config!
+      end
+
       it "returns `inspect` representation of step" do
-        expect(step_instance.inspect).to eq("<#{step.container.klass.name}::Step service: #{step.service.klass.name}>")
+        expect(step.inspect).to eq("<#{step.container.klass.name}::Step service: #{step.service.klass.name}>")
       end
     end
   end
