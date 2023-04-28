@@ -19,35 +19,35 @@ module ConvenientService
           replace Plugins::Service::HasInspect::Concern, Plugins::Service::HasAwesomePrintInspect::Concern
         end
 
-        # class self::Result
-        #   concerns do
-        #     replace Plugins::Result::HasInspect::Concern, Plugins::Result::HasAwesomePrintInspect::Concern
-        #   end
-        #
-        #   class self::Data
-        #     concerns do
-        #       replace HasInspect::Concern, HasAwesomePrintInspect::Concern
-        #     end
-        #   end
-        #
-        #   class self::Message
-        #     concerns do
-        #       replace HasInspect::Concern, HasAwesomePrintInspect::Concern
-        #     end
-        #   end
-        #
-        #   class self::Code
-        #     concerns do
-        #       replace HasInspect::Concern, HasAwesomePrintInspect::Concern
-        #     end
-        #   end
-        #
-        #   class self::Status
-        #     concerns do
-        #       replace HasInspect::Concern, HasAwesomePrintInspect::Concern
-        #     end
-        #   end
-        # end
+        class self::Result
+          concerns do
+            replace Plugins::Result::HasInspect::Concern, Plugins::Result::HasAwesomePrintInspect::Concern
+          end
+
+          # class self::Data
+          #   concerns do
+          #     replace HasInspect::Concern, HasAwesomePrintInspect::Concern
+          #   end
+          # end
+          #
+          # class self::Message
+          #   concerns do
+          #     replace HasInspect::Concern, HasAwesomePrintInspect::Concern
+          #   end
+          # end
+          #
+          # class self::Code
+          #   concerns do
+          #     replace HasInspect::Concern, HasAwesomePrintInspect::Concern
+          #   end
+          # end
+          #
+          # class self::Status
+          #   concerns do
+          #     replace HasInspect::Concern, HasAwesomePrintInspect::Concern
+          #   end
+          # end
+        end
 
         class self::Step
           concerns do

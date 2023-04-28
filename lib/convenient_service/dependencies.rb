@@ -58,6 +58,7 @@ module ConvenientService
         require "awesome_print"
 
         require_relative "service/plugins/has_awesome_print_inspect"
+        require_relative "service/plugins/has_result/entities/result/plugins/has_awesome_print_inspect"
         require_relative "service/plugins/can_have_steps/entities/step/plugins/has_awesome_print_inspect"
         require_relative "configs/awesome_print_inspect"
         require_relative "configs/awesome_print_inspect/aliases"
