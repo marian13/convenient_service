@@ -179,6 +179,28 @@
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#require_awesome_print_inspect-class_method" title="require_awesome_print_inspect (class method)">.<strong>require_awesome_print_inspect</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#require_can_utilize_finite_loop-class_method" title="require_can_utilize_finite_loop (class method)">.<strong>require_can_utilize_finite_loop</strong>  &#x21d2; Boolean </a>
     
 
@@ -269,28 +291,6 @@
   <span class="summary_signature">
     
       <a href="#require_has_attributes_using_active_model_attributes-class_method" title="require_has_attributes_using_active_model_attributes (class method)">.<strong>require_has_attributes_using_active_model_attributes</strong>  &#x21d2; Boolean </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#require_has_awesome_print_inspect-class_method" title="require_has_awesome_print_inspect (class method)">.<strong>require_has_awesome_print_inspect</strong>  &#x21d2; Boolean </a>
     
 
     
@@ -724,6 +724,73 @@
 </div>
     
       <div class="method_details ">
+  <h3 class="signature " id="require_awesome_print_inspect-class_method">
+  
+    .<strong>require_awesome_print_inspect</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p>Expected to be called from app entry points like <code>initializers</code> in Rails.</p>
+</div>
+  </div>
+
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+57
+58
+59
+60
+61
+62
+63</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies.rb', line 57</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_require_awesome_print_inspect'>require_awesome_print_inspect</span>
+  <span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>awesome_print</span><span class='tstring_end'>&quot;</span></span>
+
+  <span class='id identifier rubyid_require_relative'>require_relative</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>service/plugins/can_have_steps/entities/step/plugins/has_awesome_print_inspect</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_require_relative'>require_relative</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>configs/awesome_print_inspect</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_require_relative'>require_relative</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>configs/awesome_print_inspect/aliases</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
   <h3 class="signature " id="require_can_utilize_finite_loop-class_method">
   
     .<strong>require_can_utilize_finite_loop</strong>  &#x21d2; <tt>Boolean</tt> 
@@ -1036,73 +1103,6 @@
   <span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_model</span><span class='tstring_end'>&quot;</span></span>
 
   <span class='id identifier rubyid_require_relative'>require_relative</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>common/plugins/has_attributes/using_active_model_attributes</span><span class='tstring_end'>&quot;</span></span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="require_has_awesome_print_inspect-class_method">
-  
-    .<strong>require_has_awesome_print_inspect</strong>  &#x21d2; <tt>Boolean</tt> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    
-  <div class="note notetag">
-    <strong>Note:</strong>
-    <div class='inline'><p>Expected to be called from app entry points like <code>initializers</code> in Rails.</p>
-</div>
-  </div>
-
-
-
-  </div>
-</div>
-<div class="tags">
-  
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>Boolean</tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-57
-58
-59
-60
-61
-62
-63</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies.rb', line 57</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_require_has_awesome_print_inspect'>require_has_awesome_print_inspect</span>
-  <span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>awesome_print</span><span class='tstring_end'>&quot;</span></span>
-
-  <span class='id identifier rubyid_require_relative'>require_relative</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>service/plugins/can_have_steps/entities/step/plugins/has_awesome_print_inspect</span><span class='tstring_end'>&quot;</span></span>
-  <span class='id identifier rubyid_require_relative'>require_relative</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>configs/awesome_print</span><span class='tstring_end'>&quot;</span></span>
-  <span class='id identifier rubyid_require_relative'>require_relative</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>configs/awesome_print/aliases</span><span class='tstring_end'>&quot;</span></span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1747,7 +1747,7 @@
 </div>
 
       <div id="footer">
-  Generated on Fri Apr 28 10:25:18 2023 by
+  Generated on Fri Apr 28 10:30:27 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>
