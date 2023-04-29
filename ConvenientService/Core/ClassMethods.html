@@ -146,6 +146,29 @@
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#has_committed_config%3F-instance_method" title="#has_committed_config? (instance method)">#<strong>has_committed_config?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns <code>true</code> when config is committed, otherwise - <code>false</code>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#middlewares-instance_method" title="#middlewares (instance method)">#<strong>middlewares</strong>  &#x21d2; Object </a>
     
 
@@ -249,20 +272,20 @@ If <code>method</code> is still NOT defined, raises <code>NoMethodError</code>, 
       <pre class="lines">
 
 
-95
-96
-97
-98
-99
-100
-101
-102
-103
-104
-105</pre>
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/class_methods.rb', line 95</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/class_methods.rb', line 107</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_method_missing'>method_missing</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_commit_config!'>commit_config!</span><span class='lparen'>(</span><span class='label'>trigger:</span> <span class='const'><span class='object_link'><a href="Constants.html" title="ConvenientService::Core::Constants (module)">Constants</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Constants/Triggers.html" title="ConvenientService::Core::Constants::Triggers (module)">Triggers</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Constants/Triggers.html#CLASS_METHOD_MISSING-constant" title="ConvenientService::Core::Constants::Triggers::CLASS_METHOD_MISSING (constant)">CLASS_METHOD_MISSING</a></span></span><span class='rparen'>)</span>
@@ -334,7 +357,7 @@ Does nothing for the subsequent calls.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if called for the first time, false otherwise (similarly as Kernel#require).</p>
+        <div class='inline'><p><code>true</code> if called for the first time, <code>false</code> otherwise (similarly as <code>Kernel#require</code>).</p>
 </div>
       
     </li>
@@ -354,13 +377,13 @@ Does nothing for the subsequent calls.</p>
       <pre class="lines">
 
 
-46
-47
-48
-49</pre>
+53
+54
+55
+56</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/class_methods.rb', line 46</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/class_methods.rb', line 53</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_commit_config!'>commit_config!</span><span class='lparen'>(</span><span class='label'>trigger:</span> <span class='const'><span class='object_link'><a href="../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Core.html" title="ConvenientService::Core (module)">Core</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Constants.html" title="ConvenientService::Core::Constants (module)">Constants</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Constants/Triggers.html" title="ConvenientService::Core::Constants::Triggers (module)">Triggers</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Constants/Triggers.html#USER-constant" title="ConvenientService::Core::Constants::Triggers::USER (constant)">USER</a></span></span><span class='rparen'>)</span>
   <span class='lparen'>(</span><span class='ivar'>@__convenient_service_config__</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="Entities.html" title="ConvenientService::Core::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Config.html" title="ConvenientService::Core::Entities::Config (class)">Config</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Entities/Config.html#initialize-instance_method" title="ConvenientService::Core::Entities::Config#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>klass:</span> <span class='kw'>self</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_commit!'>commit!</span><span class='lparen'>(</span><span class='label'>trigger:</span> <span class='id identifier rubyid_trigger'>trigger</span><span class='rparen'>)</span>
@@ -418,6 +441,63 @@ Does nothing for the subsequent calls.</p>
 </div>
     
       <div class="method_details ">
+  <h3 class="signature " id="has_committed_config?-instance_method">
+  
+    #<strong>has_committed_config?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns <code>true</code> when config is committed, otherwise - <code>false</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Returns <code>true</code> when config is committed, otherwise - <code>false</code>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+36
+37
+38</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/class_methods.rb', line 36</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_has_committed_config?'>has_committed_config?</span>
+  <span class='lparen'>(</span><span class='ivar'>@__convenient_service_config__</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="Entities.html" title="ConvenientService::Core::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Config.html" title="ConvenientService::Core::Entities::Config (class)">Config</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Entities/Config.html#initialize-instance_method" title="ConvenientService::Core::Entities::Config#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>klass:</span> <span class='kw'>self</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_committed?'>committed?</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
   <h3 class="signature " id="middlewares-instance_method">
   
     #<strong>middlewares</strong>  &#x21d2; <tt>Object</tt> 
@@ -468,7 +548,7 @@ Does nothing for the subsequent calls.</p>
 </div>
 
       <div id="footer">
-  Generated on Fri Apr 28 16:47:46 2023 by
+  Generated on Sat Apr 29 11:04:19 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>
