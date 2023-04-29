@@ -35,6 +35,8 @@ module ConvenientService
               raise Errors::ProtoEntityHasNoName.new(proto_entity: proto_entity) unless proto_entity_name
               raise Errors::ProtoEntityHasNoConcern.new(proto_entity: proto_entity) unless proto_entity_concern
 
+              entity.include Core
+
               entity.include proto_entity_concern
 
               ##

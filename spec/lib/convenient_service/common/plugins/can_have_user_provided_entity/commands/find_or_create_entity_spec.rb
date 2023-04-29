@@ -99,6 +99,10 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveUserProvidedEntity::Co
           expect(command_result).to be_descendant_of(proto_entity)
         end
 
+        it "includes `ConvenientService::Core`" do
+          expect(command_result).to include_module(proto_entity::Concern)
+        end
+
         it "includes `proto_entity::Concern`" do
           expect(command_result).to include_module(proto_entity::Concern)
         end
@@ -117,6 +121,10 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveUserProvidedEntity::Co
 
         it "returns that own `entity`" do
           expect(command_result).to eq(namespace::Result)
+        end
+
+        it "includes `ConvenientService::Core`" do
+          expect(command_result).to include_module(ConvenientService::Core)
         end
 
         it "includes `proto_entity::Concern`" do
