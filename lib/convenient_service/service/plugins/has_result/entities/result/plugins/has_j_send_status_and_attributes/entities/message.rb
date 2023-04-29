@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require_relative "message/commands"
 require_relative "message/concern"
 
 module ConvenientService
