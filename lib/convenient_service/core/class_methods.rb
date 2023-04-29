@@ -31,11 +31,18 @@ module ConvenientService
       end
 
       ##
+      # @return [Boolean] Returns `true` when config is committed, otherwise - `false`.
+      #
+      def has_committed_config?
+        (@__convenient_service_config__ ||= Entities::Config.new(klass: self)).committed?
+      end
+
+      ##
       # Commits config when called for the first time.
       # Does nothing for the subsequent calls.
       #
       # @param trigger [ConvenientService::Support::UniqueValue]
-      # @return [Boolean] true if called for the first time, false otherwise (similarly as Kernel#require).
+      # @return [Boolean] `true` if called for the first time, `false` otherwise (similarly as `Kernel#require`).
       #
       # @see https://ruby-doc.org/core-3.1.2/Kernel.html#method-i-require
       #
@@ -47,6 +54,11 @@ module ConvenientService
         (@__convenient_service_config__ ||= Entities::Config.new(klass: self)).commit!(trigger: trigger)
           .tap { ConvenientService.logger.debug { "[Core] Committed config for `#{self}` | Triggered by `.commit_config!(trigger: #{trigger.inspect})` " } }
       end
+
+      ##
+      # @internal
+      #   TODO: Create `def uncommit_config` that raises an explanatory exception why the "uncommitment" is NOT possible (because Ruby can NOT "uninclude" modules).
+      ##
 
       private
 

@@ -60,6 +60,35 @@ RSpec.describe ConvenientService::Core::ClassMethods do
       end
     end
 
+    describe "#has_committed_config?" do
+      before do
+        allow(ConvenientService::Core::Entities::Config).to receive(:new).with(klass: service_class).and_return(config)
+      end
+
+      specify do
+        expect { service_class.has_committed_config? }
+          .to delegate_to(config, :committed?)
+          .without_arguments
+          .and_return_its_value
+      end
+
+      context "when config is NOT committed" do
+        it "returns `false`" do
+          expect(service_class.has_committed_config?).to eq(false)
+        end
+      end
+
+      context "when config is committed" do
+        before do
+          service_class.commit_config!
+        end
+
+        it "returns `true`" do
+          expect(service_class.has_committed_config?).to eq(true)
+        end
+      end
+    end
+
     describe "#commit_config!" do
       specify do
         allow(ConvenientService::Core::Entities::Config).to receive(:new).with(klass: service_class).and_return(config)
