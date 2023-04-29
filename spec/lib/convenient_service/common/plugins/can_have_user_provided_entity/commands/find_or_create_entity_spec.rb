@@ -100,7 +100,7 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveUserProvidedEntity::Co
         end
 
         it "includes `ConvenientService::Core`" do
-          expect(command_result).to include_module(proto_entity::Concern)
+          expect(command_result).to include_module(ConvenientService::Core)
         end
 
         it "includes `proto_entity::Concern`" do
