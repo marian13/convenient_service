@@ -11,6 +11,9 @@ module ConvenientService
                 module Entities
                   class Status
                     module Commands
+                      ##
+                      # Check whether `status` can be considered as `Status` instance.
+                      #
                       class IsStatus < Support::Command
                         ##
                         # @!attribute [r] status

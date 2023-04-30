@@ -6,6 +6,8 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status::Concern::ClassMethods do
+  include ConvenientService::RSpec::Matchers::DelegateTo
+
   example_group "class methods" do
     describe ".cast" do
       let(:casted) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status.cast(other) }
@@ -42,6 +44,64 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
 
         it "returns copy of `other`" do
           expect(casted).to eq(status)
+        end
+      end
+    end
+
+    describe ".===" do
+      let(:status_class) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status }
+
+      let(:other) { 42 }
+
+      specify do
+        expect { status_class === other }
+          .to delegate_to(ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status::Commands::IsStatus, :call)
+          .with_arguments(status: other)
+      end
+
+      it "returns `false`" do
+        expect(status_class === other).to eq(false)
+      end
+
+      context "when `other` is status instance in terms of `ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status::Commands::IsStatus`" do
+        let(:service) do
+          Class.new do
+            include ConvenientService::Configs::Minimal
+
+            def result
+              success(status: {foo: :bar})
+            end
+          end
+        end
+
+        let(:other) { service.result.status }
+
+        specify do
+          expect { status_class === other }
+            .to delegate_to(ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status::Commands::IsStatus, :call)
+            .with_arguments(status: other)
+        end
+
+        it "returns `true`" do
+          expect(status_class === other).to eq(true)
+        end
+      end
+
+      context "when `other` is `ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status` instance" do
+        let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status.cast({foo: :bar}) }
+
+        it "returns `true`" do
+          expect(status_class === other).to eq(true)
+        end
+      end
+
+      context "when `other` is `ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status` descendant instance" do
+        let(:descendant_class) { Class.new(status_class) }
+
+        let(:other) { descendant_class.cast({foo: :bar}) }
+
+        it "returns `true`" do
+          expect(status_class === other).to eq(true)
         end
       end
     end
