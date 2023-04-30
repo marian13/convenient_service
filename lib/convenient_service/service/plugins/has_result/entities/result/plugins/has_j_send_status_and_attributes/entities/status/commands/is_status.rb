@@ -30,7 +30,7 @@ module ConvenientService
                         end
 
                         ##
-                        # @return [void]
+                        # @return [Boolean]
                         #
                         def call
                           status.class.include?(Entities::Status::Concern)

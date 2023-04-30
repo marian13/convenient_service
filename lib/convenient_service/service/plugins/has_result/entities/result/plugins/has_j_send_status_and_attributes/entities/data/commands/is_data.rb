@@ -30,7 +30,7 @@ module ConvenientService
                         end
 
                         ##
-                        # @return [void]
+                        # @return [Boolean]
                         #
                         def call
                           data.class.include?(Entities::Data::Concern)
