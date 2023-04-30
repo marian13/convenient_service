@@ -6,6 +6,8 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data::Concern::ClassMethods do
+  include ConvenientService::RSpec::Matchers::DelegateTo
+
   example_group "class methods" do
     describe ".cast" do
       let(:casted) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data.cast(other) }
@@ -42,6 +44,64 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
 
         it "returns copy of `other`" do
           expect(casted).to eq(data)
+        end
+      end
+    end
+
+    describe ".===" do
+      let(:data_class) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data }
+
+      let(:other) { 42 }
+
+      specify do
+        expect { data_class === other }
+          .to delegate_to(ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data::Commands::IsData, :call)
+          .with_arguments(data: other)
+      end
+
+      it "returns `false`" do
+        expect(data_class === other).to eq(false)
+      end
+
+      context "when `other` is data instance in terms of `ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data::Commands::IsData`" do
+        let(:service) do
+          Class.new do
+            include ConvenientService::Configs::Minimal
+
+            def result
+              success
+            end
+          end
+        end
+
+        let(:other) { service.result.data }
+
+        specify do
+          expect { data_class === other }
+            .to delegate_to(ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data::Commands::IsData, :call)
+            .with_arguments(data: other)
+        end
+
+        it "returns `true`" do
+          expect(data_class === other).to eq(true)
+        end
+      end
+
+      context "when `other` is `ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data` instance" do
+        let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data.cast(:success) }
+
+        it "returns `true`" do
+          expect(data_class === other).to eq(true)
+        end
+      end
+
+      context "when `other` is `ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data` descendant instance" do
+        let(:descendant_class) { Class.new(data_class) }
+
+        let(:other) { descendant_class.cast(:success) }
+
+        it "returns `true`" do
+          expect(data_class === other).to eq(true)
         end
       end
     end

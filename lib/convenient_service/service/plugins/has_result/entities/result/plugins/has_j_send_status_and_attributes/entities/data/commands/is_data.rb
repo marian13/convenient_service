@@ -11,6 +11,9 @@ module ConvenientService
                 module Entities
                   class Data
                     module Commands
+                      ##
+                      # Check whether `data` can be considered as `Data` instance.
+                      #
                       class IsData < Support::Command
                         ##
                         # @!attribute [r] data
