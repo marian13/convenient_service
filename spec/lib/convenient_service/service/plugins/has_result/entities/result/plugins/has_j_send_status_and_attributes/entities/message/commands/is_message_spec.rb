@@ -24,7 +24,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
             include ConvenientService::Configs::Minimal
 
             def result
-              success
+              error(message: "foo")
             end
           end
         end

@@ -69,7 +69,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
             include ConvenientService::Configs::Minimal
 
             def result
-              success
+              success(data: {foo: :bar})
             end
           end
         end
@@ -88,7 +88,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
       end
 
       context "when `other` is `ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data` instance" do
-        let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data.cast(:success) }
+        let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data.cast({foo: :bar}) }
 
         it "returns `true`" do
           expect(data_class === other).to eq(true)
@@ -98,7 +98,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
       context "when `other` is `ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data` descendant instance" do
         let(:descendant_class) { Class.new(data_class) }
 
-        let(:other) { descendant_class.cast(:success) }
+        let(:other) { descendant_class.cast({foo: :bar}) }
 
         it "returns `true`" do
           expect(data_class === other).to eq(true)

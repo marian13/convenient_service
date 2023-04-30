@@ -11,6 +11,9 @@ module ConvenientService
                 module Entities
                   class Message
                     module Commands
+                      ##
+                      # Check whether `message` can be considered as `Message` instance.
+                      #
                       class IsMessage < Support::Command
                         ##
                         # @!attribute [r] message

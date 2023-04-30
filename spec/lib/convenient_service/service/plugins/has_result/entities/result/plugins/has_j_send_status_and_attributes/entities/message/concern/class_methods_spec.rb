@@ -6,6 +6,8 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message::Concern::ClassMethods do
+  include ConvenientService::RSpec::Matchers::DelegateTo
+
   example_group "class methods" do
     describe ".cast" do
       let(:casted) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message.cast(other) }
@@ -42,6 +44,64 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
 
         it "returns copy of `other`" do
           expect(casted).to eq(message)
+        end
+      end
+    end
+
+    describe ".===" do
+      let(:message_class) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message }
+
+      let(:other) { 42 }
+
+      specify do
+        expect { message_class === other }
+          .to delegate_to(ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message::Commands::IsMessage, :call)
+          .with_arguments(message: other)
+      end
+
+      it "returns `false`" do
+        expect(message_class === other).to eq(false)
+      end
+
+      context "when `other` is message instance in terms of `ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message::Commands::IsMessage`" do
+        let(:service) do
+          Class.new do
+            include ConvenientService::Configs::Minimal
+
+            def result
+              success
+            end
+          end
+        end
+
+        let(:other) { service.result.message }
+
+        specify do
+          expect { message_class === other }
+            .to delegate_to(ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message::Commands::IsMessage, :call)
+            .with_arguments(message: other)
+        end
+
+        it "returns `true`" do
+          expect(message_class === other).to eq(true)
+        end
+      end
+
+      context "when `other` is `ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message` instance" do
+        let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message.cast("foo") }
+
+        it "returns `true`" do
+          expect(message_class === other).to eq(true)
+        end
+      end
+
+      context "when `other` is `ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message` descendant instance" do
+        let(:descendant_class) { Class.new(message_class) }
+
+        let(:other) { descendant_class.cast("foo") }
+
+        it "returns `true`" do
+          expect(message_class === other).to eq(true)
         end
       end
     end
