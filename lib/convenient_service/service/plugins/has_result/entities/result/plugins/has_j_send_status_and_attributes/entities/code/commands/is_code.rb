@@ -17,12 +17,12 @@ module ConvenientService
                       class IsCode < Support::Command
                         ##
                         # @!attribute [r] code
-                        #   @return [Object] Can any type.
+                        #   @return [Object] Can be any type.
                         #
                         attr_reader :code
 
                         ##
-                        # @param code [Object] Can any type.
+                        # @param code [Object] Can be any type.
                         # @return [void]
                         #
                         def initialize(code:)

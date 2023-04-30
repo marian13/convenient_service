@@ -17,12 +17,12 @@ module ConvenientService
                       class IsData < Support::Command
                         ##
                         # @!attribute [r] data
-                        #   @return [Object] Can any type.
+                        #   @return [Object] Can be any type.
                         #
                         attr_reader :data
 
                         ##
-                        # @param data [Object] Can any type.
+                        # @param data [Object] Can be any type.
                         # @return [void]
                         #
                         def initialize(data:)

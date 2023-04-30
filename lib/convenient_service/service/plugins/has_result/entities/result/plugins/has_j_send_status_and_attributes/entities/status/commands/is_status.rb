@@ -17,12 +17,12 @@ module ConvenientService
                       class IsStatus < Support::Command
                         ##
                         # @!attribute [r] status
-                        #   @return [Object] Can any type.
+                        #   @return [Object] Can be any type.
                         #
                         attr_reader :status
 
                         ##
-                        # @param status [Object] Can any type.
+                        # @param status [Object] Can be any type.
                         # @return [void]
                         #
                         def initialize(status:)

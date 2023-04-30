@@ -17,12 +17,12 @@ module ConvenientService
                       class IsMessage < Support::Command
                         ##
                         # @!attribute [r] message
-                        #   @return [Object] Can any type.
+                        #   @return [Object] Can be any type.
                         #
                         attr_reader :message
 
                         ##
-                        # @param message [Object] Can any type.
+                        # @param message [Object] Can be any type.
                         # @return [void]
                         #
                         def initialize(message:)

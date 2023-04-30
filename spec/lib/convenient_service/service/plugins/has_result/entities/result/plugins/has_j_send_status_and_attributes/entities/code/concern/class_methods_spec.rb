@@ -88,7 +88,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
       end
 
       context "when `other` is `ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code` instance" do
-        let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code.cast(:success) }
+        let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code.cast(:foo) }
 
         it "returns `true`" do
           expect(code_class === other).to eq(true)
@@ -98,7 +98,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
       context "when `other` is `ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code` descendant instance" do
         let(:descendant_class) { Class.new(code_class) }
 
-        let(:other) { descendant_class.cast(:success) }
+        let(:other) { descendant_class.cast(:foo) }
 
         it "returns `true`" do
           expect(code_class === other).to eq(true)
