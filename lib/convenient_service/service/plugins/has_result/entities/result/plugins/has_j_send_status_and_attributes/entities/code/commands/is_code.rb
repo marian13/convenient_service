@@ -11,6 +11,9 @@ module ConvenientService
                 module Entities
                   class Code
                     module Commands
+                      ##
+                      # Check whether `code` can be considered as `Code` instance.
+                      #
                       class IsCode < Support::Command
                         ##
                         # @!attribute [r] code
@@ -27,7 +30,7 @@ module ConvenientService
                         end
 
                         ##
-                        # @return [void]
+                        # @return [Boolean]
                         #
                         def call
                           code.class.include?(Entities::Code::Concern)
