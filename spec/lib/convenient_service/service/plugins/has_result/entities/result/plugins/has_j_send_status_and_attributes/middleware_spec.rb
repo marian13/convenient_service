@@ -34,11 +34,11 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
       include ConvenientService::RSpec::Matchers::CallChainNext
       include ConvenientService::RSpec::Matchers::DelegateTo
 
-      subject(:method_value) { method.call(**attributes) }
+      subject(:method_value) { method.call(**kwargs) }
 
-      let(:method) { wrap_method(result_instance, :initialize, middlewares: described_class) }
+      let(:method) { wrap_method(result, :initialize, middlewares: described_class) }
 
-      let(:attributes) do
+      let(:kwargs) do
         {
           service: double,
           status: :foo,
@@ -48,26 +48,22 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
         }
       end
 
-      # rubocop:disable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
-      let(:result_class) do
+      let(:service) do
         Class.new do
-          include ConvenientService::Common::Plugins::HasInternals::Concern
-          include ConvenientService::Common::Plugins::HasConstructor::Concern
-          include ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Concern
+          include ConvenientService::Configs::Minimal
 
-          class self::Internals
-            include ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Plugins::HasCache::Concern
+          def result
+            success
           end
         end
       end
-      # rubocop:enable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
 
-      let(:result_instance) { result_class.allocate }
+      let(:result) { service.result }
 
       specify do
         expect { method_value }
           .to delegate_to(ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Commands::CastJSendAttributes, :call)
-          .with_arguments(attributes: attributes)
+          .with_arguments(result: result, kwargs: kwargs)
       end
 
       specify do

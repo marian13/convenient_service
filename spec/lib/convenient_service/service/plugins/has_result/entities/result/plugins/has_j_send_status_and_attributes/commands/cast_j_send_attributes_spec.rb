@@ -4,30 +4,40 @@ require "spec_helper"
 
 require "convenient_service"
 
-# rubocop:disable RSpec/NestedGroups
+# rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Commands::CastJSendAttributes do
   example_group "class methods" do
     describe ".call" do
-      let(:service_class) { Class.new }
+      let(:service_class) do
+        Class.new do
+          include ConvenientService::Configs::Minimal
+
+          def result
+            success
+          end
+        end
+      end
+
       let(:service_instance) { service_class.new }
+      let(:result) { service_instance.result }
 
-      let(:command_result) { described_class.call(attributes: attributes) }
-      let(:attributes) { {service: service_instance, status: :foo, data: {foo: :bar}, message: "foo", code: :foo} }
+      let(:command_result) { described_class.call(result: result, kwargs: kwargs) }
+      let(:kwargs) { {service: service_instance, status: :foo, data: {foo: :bar}, message: "foo", code: :foo} }
 
-      it "returns `struct` with `attributes[:service]` as `service`" do
-        expect(command_result.service).to eq(attributes[:service])
+      it "returns `struct` with `kwargs[:service]` as `service`" do
+        expect(command_result.service).to eq(kwargs[:service])
       end
 
-      it "returns `struct` with `attributes[:status]` casted to `ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status` as `status`" do
-        expect(command_result.status).to eq(ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status.cast(attributes[:status]))
+      it "returns `struct` with `kwargs[:status]` casted to `result.class.status_class` as `status`" do
+        expect(command_result.status).to eq(result.class.status_class.cast(kwargs[:status]))
       end
 
-      context "when `attributes[:status]` is NOT castable" do
-        let(:command_result) { described_class.call(attributes: attributes.merge(status: 42)) }
+      context "when `kwargs[:status]` is NOT castable" do
+        let(:command_result) { described_class.call(result: result, kwargs: kwargs.merge(status: 42)) }
 
         let(:error_message) do
           <<~TEXT
-            Failed to cast `42` into `#{ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status}`.
+            Failed to cast `42` into `#{result.class.status_class}`.
           TEXT
         end
 
@@ -38,16 +48,16 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
         end
       end
 
-      it "returns `struct` with `attributes[:data]` casted to `ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data` as `data`" do
-        expect(command_result.data).to eq(ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data.cast(attributes[:data]))
+      it "returns `struct` with `kwargs[:data]` casted to `result.class.data_class` as `data`" do
+        expect(command_result.data).to eq(result.class.data_class.cast(kwargs[:data]))
       end
 
-      context "when `attributes[:data]` is NOT castable" do
-        let(:command_result) { described_class.call(attributes: attributes.merge(data: 42)) }
+      context "when `kwargs[:data]` is NOT castable" do
+        let(:command_result) { described_class.call(result: result, kwargs: kwargs.merge(data: 42)) }
 
         let(:error_message) do
           <<~TEXT
-            Failed to cast `42` into `#{ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data}`.
+            Failed to cast `42` into `#{result.class.data_class}`.
           TEXT
         end
 
@@ -58,16 +68,16 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
         end
       end
 
-      it "returns `struct` with `attributes[:message]` casted to `ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message` as `message`" do
-        expect(command_result.message).to eq(ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message.cast(attributes[:message]))
+      it "returns `struct` with `kwargs[:message]` casted to `result.class.message_class` as `message`" do
+        expect(command_result.message).to eq(result.class.message_class.cast(kwargs[:message]))
       end
 
-      context "when `attributes[:message]` is NOT castable" do
-        let(:command_result) { described_class.call(attributes: attributes.merge(message: 42)) }
+      context "when `kwargs[:message]` is NOT castable" do
+        let(:command_result) { described_class.call(result: result, kwargs: kwargs.merge(message: 42)) }
 
         let(:error_message) do
           <<~TEXT
-            Failed to cast `42` into `#{ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message}`.
+            Failed to cast `42` into `#{result.class.message_class}`.
           TEXT
         end
 
@@ -78,16 +88,16 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
         end
       end
 
-      it "returns `struct` with `attributes[:code]` casted to `ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code` as `code`" do
-        expect(command_result.code).to eq(ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code.cast(attributes[:code]))
+      it "returns `struct` with `kwargs[:code]` casted to `result.class.code_class` as `code`" do
+        expect(command_result.code).to eq(result.class.code_class.cast(kwargs[:code]))
       end
 
-      context "when `attributes[:code]` is NOT castable" do
-        let(:command_result) { described_class.call(attributes: attributes.merge(code: 42)) }
+      context "when `kwargs[:code]` is NOT castable" do
+        let(:command_result) { described_class.call(result: result, kwargs: kwargs.merge(code: 42)) }
 
         let(:error_message) do
           <<~TEXT
-            Failed to cast `42` into `#{ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code}`.
+            Failed to cast `42` into `#{result.class.code_class}`.
           TEXT
         end
 
@@ -100,4 +110,4 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
     end
   end
 end
-# rubocop:enable RSpec/NestedGroups
+# rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
