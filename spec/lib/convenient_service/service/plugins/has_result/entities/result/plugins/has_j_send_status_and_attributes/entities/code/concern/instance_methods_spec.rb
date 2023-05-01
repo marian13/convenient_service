@@ -8,22 +8,22 @@ require "convenient_service"
 RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code::Concern::InstanceMethods do
   include ConvenientService::RSpec::Matchers::CacheItsValue
 
-  let(:code) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code.cast(value) }
+  let(:code) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code.new(value: value, result: result) }
   let(:value) { :foo }
+  let(:result) { double }
 
-  example_group "attributes" do
-    include ConvenientService::RSpec::Matchers::HaveAttrReader
+  example_group "modules" do
+    include ConvenientService::RSpec::Matchers::IncludeModule
 
-    subject { code }
+    subject { described_class }
 
-    it { is_expected.to have_attr_reader(:value) }
-    it { is_expected.to have_attr_reader(:result) }
+    it { is_expected.to include_module(ConvenientService::Support::Copyable) }
   end
 
   example_group "class methods" do
     describe ".new" do
       context "when `result` is NOT passed" do
-        let(:code) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code.new(value: :bar) }
+        let(:code) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code.new(value: :foo) }
 
         it "defaults to `nil`" do
           expect(code.result).to be_nil
@@ -33,9 +33,18 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
   end
 
   example_group "instance methods" do
+    example_group "attributes" do
+      include ConvenientService::RSpec::Matchers::HaveAttrReader
+
+      subject { code }
+
+      it { is_expected.to have_attr_reader(:value) }
+      it { is_expected.to have_attr_reader(:result) }
+    end
+
     example_group "comparisons" do
       describe "#==" do
-        context "when `other` is NOT castable" do
+        context "when `other` has different class" do
           let(:other) { 42 }
 
           it "returns `nil`" do
@@ -43,21 +52,27 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
           end
         end
 
-        context "when `other` is castable" do
-          context "when `other` has different `value`" do
-            let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code.cast(:bar) }
+        context "when `other` has different `value`" do
+          let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code.new(value: :bar, result: result) }
 
-            it "returns `false`" do
-              expect(code == other).to eq(false)
-            end
+          it "returns `false`" do
+            expect(code == other).to eq(false)
           end
+        end
 
-          context "when `other` has same `value`" do
-            let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code.cast(:foo) }
+        context "when `other` has different `result.class`" do
+          let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code.new(value: value, result: Object.new) }
 
-            it "returns `true`" do
-              expect(code == other).to eq(true)
-            end
+          it "returns `false`" do
+            expect(code == other).to eq(false)
+          end
+        end
+
+        context "when `other` has same attributes" do
+          let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code.new(value: value, result: result) }
+
+          it "returns `true`" do
+            expect(code == other).to eq(true)
           end
         end
       end
@@ -65,7 +80,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
 
     example_group "conversions" do
       describe "#to_kwargs" do
-        let(:kwargs) { {value: :foo, result: nil} }
+        let(:kwargs) { {value: value, result: result} }
 
         it "returns kwargs representation of `code`" do
           expect(code.to_kwargs).to eq(kwargs)
