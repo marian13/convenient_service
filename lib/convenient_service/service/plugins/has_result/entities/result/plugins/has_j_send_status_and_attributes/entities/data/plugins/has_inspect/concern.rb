@@ -20,7 +20,7 @@ module ConvenientService
                             # @return [String]
                             #
                             def inspect
-                              "<#{result.service.class.name}::Result::Data>"
+                              "<#{result.class.name}::Data>"
                             end
                           end
                         end

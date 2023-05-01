@@ -55,7 +55,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
       end
 
       it "returns `inspect` representation of data" do
-        expect(data.inspect).to eq("<#{data.result.service.class.name}::Result::Data>")
+        expect(data.inspect).to eq("<#{data.result.class.name}::Data>")
       end
     end
   end
