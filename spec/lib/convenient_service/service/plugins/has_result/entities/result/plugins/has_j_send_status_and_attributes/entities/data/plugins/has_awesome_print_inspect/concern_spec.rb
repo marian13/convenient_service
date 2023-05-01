@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data::Plugins::HasInspect::Concern do
+RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data::Plugins::HasAwesomePrintInspect::Concern do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   example_group "modules" do
@@ -36,13 +36,17 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
         Class.new do
           include ConvenientService::Configs::Minimal
 
+          include ConvenientService::Configs::AwesomePrintInspect
+
           def result
-            success(data: {foo: :bar})
+            success(data: {foo: +"bar"})
           end
         end
       end
 
       let(:data) { service.result.data }
+
+      let(:keywords) { ["ConvenientService", "entity", "Data", "result", data.result.class.name, "values", ":foo", "bar"] }
 
       before do
         ##
@@ -51,12 +55,42 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
         data.class.commit_config!
       end
 
+      it "returns `inspect` representation of data" do
+        expect(data.inspect).to include(*keywords)
+      end
+
       specify do
         expect { data.inspect }
-          .to delegate_to(ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data::Plugins::HasInspect::Commands::GenerateInspectOutput, :call)
-          .with_arguments(data: data)
-          .and_return_its_value
+          .to delegate_to(data[:foo], :inspect)
+          .without_arguments
       end
+
+      context "when `data` has no values" do
+        let(:service) do
+          Class.new do
+            include ConvenientService::Configs::Minimal
+
+            include ConvenientService::Configs::AwesomePrintInspect
+
+            def result
+              success
+            end
+          end
+        end
+
+        let(:keywords) { ["ConvenientService", "entity", "Data", "result", data.result.class.name, "values", "{}"] }
+
+        it "returns `inspect` representation of data" do
+          expect(data.inspect).to include(*keywords)
+        end
+      end
+
+      ##
+      # TODO: Specs.
+      #
+      # context "when `data` has value with long inspect respresentation" do
+      #
+      # end
     end
   end
 end

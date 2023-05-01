@@ -48,7 +48,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
 
       let(:result) { service.result }
 
-      let(:keywords) { ["ConvenientService", "entity", "Result", "status", ":success", "service", "ImportantService"] }
+      let(:keywords) { ["ConvenientService", "entity", "Result", "service", "ImportantService", "status", ":success"] }
 
       before do
         ##

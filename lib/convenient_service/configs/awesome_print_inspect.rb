@@ -24,11 +24,11 @@ module ConvenientService
             replace Plugins::Result::HasInspect::Concern, Plugins::Result::HasAwesomePrintInspect::Concern
           end
 
-          # class self::Data
-          #   concerns do
-          #     replace HasInspect::Concern, HasAwesomePrintInspect::Concern
-          #   end
-          # end
+          class self::Data
+            concerns do
+              replace Plugins::Data::HasInspect::Concern, Plugins::Data::HasAwesomePrintInspect::Concern
+            end
+          end
           #
           # class self::Message
           #   concerns do

@@ -38,7 +38,7 @@ RSpec.describe ConvenientService::Utils::String::Truncate do
 
     context "when `string` is NOT string" do
       it "converts it to string" do
-        expect(described_class.call(1000, 4, omission: omission)).to eq("1...")
+        expect(described_class.call(10000, 4, omission: omission)).to eq("1...")
       end
     end
   end
