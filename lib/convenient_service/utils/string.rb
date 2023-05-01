@@ -3,6 +3,7 @@
 require_relative "string/camelize"
 require_relative "string/demodulize"
 require_relative "string/split"
+require_relative "string/truncate"
 
 module ConvenientService
   module Utils
@@ -18,6 +19,10 @@ module ConvenientService
 
         def split(...)
           Split.call(...)
+        end
+
+        def truncate(...)
+          Truncate.call(...)
         end
       end
     end
