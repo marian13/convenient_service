@@ -79,7 +79,10 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::RailsService::Config
               ConvenientService::Service::Plugins::HasResultParamsValidations::UsingActiveModelValidations::Middleware,
               ConvenientService::Service::Plugins::HasResult::Middleware,
               ConvenientService::Service::Plugins::CanHaveSteps::Middleware,
-              ConvenientService::Service::Plugins::RaisesOnDoubleResult::Middleware,
+              ##
+              # TODO: Rewrite. This plugin does NOT do what it states. Probably I was NOT with a clear mind while writing it (facepalm).
+              #
+              # ConvenientService::Service::Plugins::RaisesOnDoubleResult::Middleware,
               ConvenientService::Common::Plugins::CachesReturnValue::Middleware
             ]
           end
@@ -483,7 +486,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::RailsService::Config
       # https://github.com/marian13/convenient_service/discussions/43
       #
       it "applies its `included` block only once" do
-        expect(service_class.middlewares(:result).to_a.size).to eq(8)
+        expect(service_class.middlewares(:result).to_a.size).to eq(7)
       end
     end
   end
