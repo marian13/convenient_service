@@ -40,6 +40,8 @@ module ConvenientService
                       Structs::JSendAttributes.new(service: service, status: status, data: data, message: message, code: code)
                     end
 
+                    private
+
                     ##
                     # @return [Object]
                     #
@@ -52,7 +54,7 @@ module ConvenientService
                     # @raise [ConvenientService::Support::Castable::Errors::FailedToCast]
                     #
                     def status
-                      @status ||= result.class.status_class.cast!(kwargs[:status])
+                      @status ||= result.class.status(value: kwargs[:status], result: result)
                     end
 
                     ##
@@ -60,7 +62,7 @@ module ConvenientService
                     # @raise [ConvenientService::Support::Castable::Errors::FailedToCast]
                     #
                     def data
-                      @data ||= result.class.data_class.cast!(kwargs[:data])
+                      @data ||= result.class.data(value: kwargs[:data], result: result)
                     end
 
                     ##
@@ -68,7 +70,7 @@ module ConvenientService
                     # @raise [ConvenientService::Support::Castable::Errors::FailedToCast]
                     #
                     def message
-                      @message ||= result.class.message_class.cast!(kwargs[:message])
+                      @message ||= result.class.message(value: kwargs[:message], result: result)
                     end
 
                     ##
@@ -76,7 +78,7 @@ module ConvenientService
                     # @raise [ConvenientService::Support::Castable::Errors::FailedToCast]
                     #
                     def code
-                      @code ||= result.class.code_class.cast!(kwargs[:code])
+                      @code ||= result.class.code(value: kwargs[:code], result: result)
                     end
                   end
                 end

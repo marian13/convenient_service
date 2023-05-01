@@ -18,6 +18,19 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
     subject { message }
 
     it { is_expected.to have_attr_reader(:value) }
+    it { is_expected.to have_attr_reader(:result) }
+  end
+
+  example_group "class methods" do
+    describe ".new" do
+      context "when `result` is NOT passed" do
+        let(:code) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code.new(value: :bar) }
+
+        it "defaults to `nil`" do
+          expect(code.result).to be_nil
+        end
+      end
+    end
   end
 
   example_group "instance methods" do
@@ -64,6 +77,18 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
     end
 
     example_group "conversions" do
+      describe "#to_kwargs" do
+        let(:kwargs) { {value: "foo", result: nil} }
+
+        it "returns kwargs representation of `message`" do
+          expect(message.to_kwargs).to eq(kwargs)
+        end
+
+        specify do
+          expect { message.to_kwargs }.to cache_its_value
+        end
+      end
+
       describe "#to_s" do
         it "returns string representation of `message`" do
           expect(message.to_s).to eq("foo")

@@ -96,6 +96,7 @@ module ConvenientService
             use Plugins::Result::HasInspect::Concern
 
             use Plugins::Common::HasConstructor::Concern
+            use Plugins::Common::HasConstructorWithoutInitialize::Concern
 
             use Plugins::Result::HasJSendStatusAndAttributes::Concern
           end

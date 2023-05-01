@@ -12,6 +12,8 @@ module ConvenientService
                   class Data
                     module Concern
                       module InstanceMethods
+                        include Support::Copyable
+
                         ##
                         # @!attribute [r] value
                         #   @return [Hash]
@@ -19,7 +21,14 @@ module ConvenientService
                         attr_reader :value
 
                         ##
+                        # @!attribute [r] result
+                        #   @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+                        #
+                        attr_reader :result
+
+                        ##
                         # @param value [Hash]
+                        # @param result [ConvenientService::Service::Plugins::HasResult::Entities::Result]
                         # @return [void]
                         #
                         # @internal
@@ -34,8 +43,9 @@ module ConvenientService
                         #   - https://github.com/rails/rails/issues/22681
                         #   - https://api.rubyonrails.org/classes/ActiveSupport/OrderedOptions.html
                         #
-                        def initialize(value:)
+                        def initialize(value:, result: nil)
                           @value = value
+                          @result = result
                         end
 
                         ##
@@ -51,11 +61,12 @@ module ConvenientService
                         # @return [Boolean, nil]
                         #
                         def ==(other)
-                          casted = cast(other)
+                          return unless other.instance_of?(self.class)
 
-                          return unless casted
+                          return false if result.class != other.result.class
+                          return false if value != other.value
 
-                          value == casted.value
+                          true
                         end
 
                         ##
@@ -65,6 +76,13 @@ module ConvenientService
                         #
                         def [](key)
                           value.fetch(key.to_sym) { raise Errors::NotExistingAttribute.new(attribute: key) }
+                        end
+
+                        ##
+                        # @return [Hash]
+                        #
+                        def to_kwargs
+                          @to_kwargs ||= {value: value, result: result}
                         end
 
                         ##

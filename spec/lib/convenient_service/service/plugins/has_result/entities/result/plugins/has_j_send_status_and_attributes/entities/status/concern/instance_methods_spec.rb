@@ -6,6 +6,8 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status::Concern::InstanceMethods do
+  include ConvenientService::RSpec::Matchers::CacheItsValue
+
   let(:status) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status.cast(value) }
   let(:value) { :foo }
 
@@ -15,6 +17,19 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
     subject { status }
 
     it { is_expected.to have_attr_reader(:value) }
+    it { is_expected.to have_attr_reader(:result) }
+  end
+
+  example_group "class methods" do
+    describe ".new" do
+      context "when `result` is NOT passed" do
+        let(:code) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code.new(value: :bar) }
+
+        it "defaults to `nil`" do
+          expect(code.result).to be_nil
+        end
+      end
+    end
   end
 
   example_group "instance methods" do
@@ -116,47 +131,29 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
 
     describe "#in?" do
       context "when `statuses` are NOT empty" do
-        context "when all `statuses` are NOT castable" do
-          let(:statuses) { [42, Class.new] }
+        context "when `status` is NOT equal to any of those statuses" do
+          let(:statuses) do
+            [
+              ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status.cast(:bar),
+              ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status.cast(:baz)
+            ]
+          end
 
           it "returns `false`" do
             expect(status.in?(statuses)).to eq(false)
           end
         end
 
-        context "when any of `statuses` is castable" do
-          context "when `status` is NOT equal to that castable status in `==` terms" do
-            let(:statuses) { [42, :bar] }
-
-            it "returns `false`" do
-              expect(status.in?(statuses)).to eq(false)
-            end
+        context "when `status` is equal to any of those statuses" do
+          let(:statuses) do
+            [
+              ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status.cast(:bar),
+              ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status.cast(:foo)
+            ]
           end
 
-          context "when `status` is equal to that castable status in `==` terms" do
-            let(:statuses) { [42, :foo] }
-
-            it "returns `true`" do
-              expect(status.in?(statuses)).to eq(true)
-            end
-          end
-        end
-
-        context "when all `statuses` are castable" do
-          context "when `status` is NOT equal to any of those castable statuses in `==` terms" do
-            let(:statuses) { [:bar, :baz] }
-
-            it "returns `false`" do
-              expect(status.in?(statuses)).to eq(false)
-            end
-          end
-
-          context "when `status` is equal to any of those castable statuses in `==` terms" do
-            let(:statuses) { [:bar, :foo] }
-
-            it "returns `true`" do
-              expect(status.in?(statuses)).to eq(true)
-            end
+          it "returns `true`" do
+            expect(status.in?(statuses)).to eq(true)
           end
         end
       end
@@ -213,13 +210,25 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
     end
 
     example_group "conversions" do
+      describe "#to_kwargs" do
+        let(:kwargs) { {value: :foo, result: nil} }
+
+        it "returns kwargs representation of `status`" do
+          expect(status.to_kwargs).to eq(kwargs)
+        end
+
+        specify do
+          expect { status.to_kwargs }.to cache_its_value
+        end
+      end
+
       describe "#to_s" do
         it "returns string representation of `status`" do
           expect(status.to_s).to eq("foo")
         end
 
-        it "caches its result" do
-          expect(status.to_s.object_id).to eq(status.to_s.object_id)
+        specify do
+          expect { status.to_s }.to cache_its_value
         end
       end
 
@@ -228,8 +237,8 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
           expect(status.to_sym).to eq(:foo)
         end
 
-        it "caches its result" do
-          expect(status.to_sym.object_id).to eq(status.to_sym.object_id)
+        specify do
+          expect { status.to_sym }.to cache_its_value
         end
       end
     end

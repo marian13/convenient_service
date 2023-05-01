@@ -11,6 +11,46 @@ module ConvenientService
                 module Concern
                   module ClassMethods
                     ##
+                    # @param value [Object] Can be any type.
+                    # @param result [ConvenientService::Service::Plugins::HasResult::Entities::Result].
+                    # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code]
+                    # @raise [ConvenientService::Support::Castable::Errors::FailedToCast]
+                    #
+                    def code(value:, result: create_without_initialize)
+                      code_class.cast!(value).copy(overrides: {kwargs: {result: result}})
+                    end
+
+                    ##
+                    # @param value [Object] Can be any type.
+                    # @param result [ConvenientService::Service::Plugins::HasResult::Entities::Result].
+                    # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data]
+                    # @raise [ConvenientService::Support::Castable::Errors::FailedToCast]
+                    #
+                    def data(value:, result: create_without_initialize)
+                      data_class.cast!(value).copy(overrides: {kwargs: {result: result}})
+                    end
+
+                    ##
+                    # @param value [Object] Can be any type.
+                    # @param result [ConvenientService::Service::Plugins::HasResult::Entities::Result].
+                    # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message]
+                    # @raise [ConvenientService::Support::Castable::Errors::FailedToCast]
+                    #
+                    def message(value:, result: create_without_initialize)
+                      message_class.cast!(value).copy(overrides: {kwargs: {result: result}})
+                    end
+
+                    ##
+                    # @param value [Object] Can be any type.
+                    # @param result [ConvenientService::Service::Plugins::HasResult::Entities::Result].
+                    # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status]
+                    # @raise [ConvenientService::Support::Castable::Errors::FailedToCast]
+                    #
+                    def status(value:, result: create_without_initialize)
+                      status_class.cast!(value).copy(overrides: {kwargs: {result: result}})
+                    end
+
+                    ##
                     # @api private
                     # @return [Class]
                     #

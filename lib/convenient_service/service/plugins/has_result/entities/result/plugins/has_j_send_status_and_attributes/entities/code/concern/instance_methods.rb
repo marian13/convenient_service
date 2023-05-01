@@ -12,6 +12,8 @@ module ConvenientService
                   class Code
                     module Concern
                       module InstanceMethods
+                        include Support::Copyable
+
                         ##
                         # @!attribute [r] value
                         #   @return [Symbol]
@@ -19,11 +21,19 @@ module ConvenientService
                         attr_reader :value
 
                         ##
+                        # @!attribute [r] result
+                        #   @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+                        #
+                        attr_reader :result
+
+                        ##
                         # @param value [Symbol]
+                        # @param result [ConvenientService::Service::Plugins::HasResult::Entities::Result]
                         # @return [void]
                         #
-                        def initialize(value:)
+                        def initialize(value:, result: nil)
                           @value = value
+                          @result = result
                         end
 
                         ##
@@ -31,11 +41,19 @@ module ConvenientService
                         # @return [Boolean, nil]
                         #
                         def ==(other)
-                          casted = cast(other)
+                          return unless other.instance_of?(self.class)
 
-                          return unless casted
+                          return false if result.class != other.result.class
+                          return false if value != other.value
 
-                          value == casted.value
+                          true
+                        end
+
+                        ##
+                        # @return [Hash]
+                        #
+                        def to_kwargs
+                          @to_kwargs ||= {value: value, result: result}
                         end
 
                         ##

@@ -8,35 +8,17 @@ require "convenient_service"
 RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Concern::InstanceMethods do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
-  let(:result) { result_class.new(**params) }
-
-  # rubocop:disable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
-  let(:result_class) do
+  let(:service_class) do
     Class.new do
-      include ConvenientService::Core
-
-      concerns do
-        use ConvenientService::Common::Plugins::HasInternals::Concern
-        use ConvenientService::Common::Plugins::HasConstructor::Concern
-        use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Concern
-      end
-
-      middlewares :initialize do
-        use ConvenientService::Common::Plugins::NormalizesEnv::Middleware
-
-        use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Middleware
-      end
-
-      class self::Internals
-        include ConvenientService::Core
-
-        concerns do
-          use ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Plugins::HasCache::Concern
-        end
-      end
+      include ConvenientService::Configs::Minimal
     end
   end
-  # rubocop:enable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
+
+  let(:service_instance) { service_class.new }
+
+  let(:result_class) { service_class.result_class }
+
+  let(:result_instance) { result_class.new(**params) }
 
   let(:params) do
     {
@@ -48,14 +30,11 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
     }
   end
 
-  let(:service_class) { Class.new }
-  let(:service_instance) { service_class.new }
-
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
     include ConvenientService::RSpec::Matchers::ExtendModule
 
-    subject { result.class }
+    subject { described_class }
 
     it { is_expected.to include_module(ConvenientService::Support::Delegate) }
     it { is_expected.to include_module(ConvenientService::Support::Copyable) }
@@ -80,49 +59,61 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
   example_group "instance methods" do
     describe "#service" do
       it "returns `service`" do
-        expect(result.service).to eq(params[:service])
+        expect(result_instance.service).to eq(params[:service])
       end
     end
 
     describe "#status" do
       it "returns casted `status`" do
-        expect(result.status).to eq(ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status.cast(params[:status]))
+        expect(result_instance.status).to eq(result_class.status(value: params[:status]))
       end
     end
 
     describe "#data" do
+      before do
+        result_instance.success?
+      end
+
       it "returns casted `data`" do
-        expect(result.data).to eq(ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data.cast(params[:data]))
+        expect(result_instance.data).to eq(result_class.data(value: params[:data]))
       end
     end
 
     describe "#unsafe_data" do
       it "returns casted `data`" do
-        expect(result.unsafe_data).to eq(ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data.cast(params[:data]))
+        expect(result_instance.unsafe_data).to eq(result_class.data(value: params[:data]))
       end
     end
 
     describe "#message" do
+      before do
+        result_instance.success?
+      end
+
       it "returns casted `message`" do
-        expect(result.message).to eq(ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message.cast(params[:message]))
+        expect(result_instance.message).to eq(result_class.message(value: params[:message]))
       end
     end
 
     describe "#unsafe_message" do
       it "returns casted `message`" do
-        expect(result.unsafe_message).to eq(ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message.cast(params[:message]))
+        expect(result_instance.unsafe_message).to eq(result_class.message(value: params[:message]))
       end
     end
 
     describe "#code" do
+      before do
+        result_instance.success?
+      end
+
       it "returns casted `code`" do
-        expect(result.code).to eq(ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code.cast(params[:code]))
+        expect(result_instance.code).to eq(result_class.code(value: params[:code]))
       end
     end
 
     describe "#unsafe_code" do
       it "returns casted `code`" do
-        expect(result.unsafe_code).to eq(ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code.cast(params[:code]))
+        expect(result_instance.unsafe_code).to eq(result_class.code(value: params[:code]))
       end
     end
 
@@ -130,19 +121,21 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
       let(:jsend_attributes) do
         ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Structs::JSendAttributes.new(
           service: params[:service],
-          status: ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status.cast(params[:status]),
-          data: ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data.cast(params[:data]),
-          message: ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message.cast(params[:message]),
-          code: ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code.cast(params[:code])
+          status: result_class.status(value: params[:status]),
+          data: result_class.data(value: params[:data]),
+          message: result_class.message(value: params[:message]),
+          code: result_class.code(value: params[:code])
         )
       end
 
       it "returns casted JSend attributes" do
-        expect(result.jsend_attributes).to eq(jsend_attributes)
+        expect(result_instance.jsend_attributes).to eq(jsend_attributes)
       end
     end
 
     describe "#==" do
+      let(:result) { result_class.new(**params) }
+
       context "when results have different classes" do
         let(:other) { "string" }
 
@@ -211,15 +204,23 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
     end
 
     describe "#to_kwargs" do
-      let(:kwargs) { params }
-
-      it "returns kwargs representation of result" do
-        expect(result.to_kwargs).to eq(kwargs)
+      let(:kwargs) do
+        {
+          service: service_instance,
+          status: result_class.status(value: :foo),
+          data: result_class.data(value: {foo: :bar}),
+          message: result_class.message(value: "foo"),
+          code: result_class.code(value: :foo)
+        }
       end
 
-      specify { expect { result.to_kwargs }.to delegate_to(result, :unsafe_data) }
-      specify { expect { result.to_kwargs }.to delegate_to(result, :unsafe_message) }
-      specify { expect { result.to_kwargs }.to delegate_to(result, :unsafe_code) }
+      it "returns kwargs representation of result" do
+        expect(result_instance.to_kwargs).to eq(kwargs)
+      end
+
+      specify { expect { result_instance.to_kwargs }.to delegate_to(result_instance, :unsafe_data) }
+      specify { expect { result_instance.to_kwargs }.to delegate_to(result_instance, :unsafe_message) }
+      specify { expect { result_instance.to_kwargs }.to delegate_to(result_instance, :unsafe_code) }
     end
   end
 end
