@@ -6,6 +6,8 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data::Plugins::HasInspect::Concern do
+  include ConvenientService::RSpec::Matchers::DelegateTo
+
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
 
@@ -54,8 +56,11 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
         data.class.commit_config!
       end
 
-      it "returns `inspect` representation of data" do
-        expect(data.inspect).to eq("<#{data.result.class.name}::Data>")
+      specify do
+        expect { data.inspect }
+          .to delegate_to(ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data::Plugins::HasInspect::Commands::GenerateInspectOutput, :call)
+          .with_arguments(data: data)
+          .and_return_its_value
       end
     end
   end

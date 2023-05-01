@@ -20,7 +20,7 @@ module ConvenientService
                             # @return [String]
                             #
                             def inspect
-                              "<#{result.class.name}::Data>"
+                              Commands::GenerateInspectOutput.call(data: self)
                             end
                           end
                         end
