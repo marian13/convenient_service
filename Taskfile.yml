@@ -411,6 +411,14 @@ tasks:
       - bundle exec ruby minitest.rb
 
   ##
+  # NOTE: `task playground` is also aliased as `task console`.
+  #
+  playground:
+    cmds:
+      - bundle exec rake playground
+    interactive: true
+
+  ##
   # NOTE: `task playground:all` is also aliased as `task console:all`.
   # NOTE: `APPRAISAL_NAME` should be kept in sync with `Appraisals` file.
   #
