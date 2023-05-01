@@ -35,7 +35,7 @@ module ConvenientService
 
         ##
         # @!attribute [r] omission
-        #   @return [Integer]
+        #   @return [String]
         #
         attr_reader :omission
 
