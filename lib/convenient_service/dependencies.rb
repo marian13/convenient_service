@@ -16,6 +16,14 @@ module ConvenientService
       # @return [Boolean]
       # @note Expected to be called from app entry points like `initializers` in Rails.
       #
+      def require_alias
+        require_relative "alias"
+      end
+
+      ##
+      # @return [Boolean]
+      # @note Expected to be called from app entry points like `initializers` in Rails.
+      #
       def require_assigns_attributes_in_constructor_using_active_model_attribute_assignment
         require "active_model"
 
