@@ -45,6 +45,19 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
           .with_arguments(overrides: {kwargs: {result: result_instance}})
           .and_return_its_value
       end
+
+      context "when `result` is NOT passed" do
+        let(:code) { result_class.code(value: value) }
+        let(:not_initialized_result_instance) { double }
+
+        before do
+          allow(result_class).to receive(:create_without_initialize).and_return(not_initialized_result_instance)
+        end
+
+        it "defaults `result` to `result_class.create_without_initialize`" do
+          expect(code.result).to eq(not_initialized_result_instance)
+        end
+      end
     end
 
     describe ".data" do
@@ -63,6 +76,19 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
           .to delegate_to(data, :copy)
           .with_arguments(overrides: {kwargs: {result: result_instance}})
           .and_return_its_value
+      end
+
+      context "when `result` is NOT passed" do
+        let(:data) { result_class.data(value: value) }
+        let(:not_initialized_result_instance) { double }
+
+        before do
+          allow(result_class).to receive(:create_without_initialize).and_return(not_initialized_result_instance)
+        end
+
+        it "defaults `result` to `result_class.create_without_initialize`" do
+          expect(data.result).to eq(not_initialized_result_instance)
+        end
       end
     end
 
@@ -83,6 +109,19 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
           .with_arguments(overrides: {kwargs: {result: result_instance}})
           .and_return_its_value
       end
+
+      context "when `result` is NOT passed" do
+        let(:message) { result_class.message(value: value) }
+        let(:not_initialized_result_instance) { double }
+
+        before do
+          allow(result_class).to receive(:create_without_initialize).and_return(not_initialized_result_instance)
+        end
+
+        it "defaults `result` to `result_class.create_without_initialize`" do
+          expect(message.result).to eq(not_initialized_result_instance)
+        end
+      end
     end
 
     describe ".status" do
@@ -101,6 +140,19 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
           .to delegate_to(status, :copy)
           .with_arguments(overrides: {kwargs: {result: result_instance}})
           .and_return_its_value
+      end
+
+      context "when `result` is NOT passed" do
+        let(:status) { result_class.status(value: value) }
+        let(:not_initialized_result_instance) { double }
+
+        before do
+          allow(result_class).to receive(:create_without_initialize).and_return(not_initialized_result_instance)
+        end
+
+        it "defaults `result` to `result_class.create_without_initialize`" do
+          expect(status.result).to eq(not_initialized_result_instance)
+        end
       end
     end
 
