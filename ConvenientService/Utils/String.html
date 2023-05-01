@@ -79,7 +79,7 @@
   <dl>
     <dt>Defined in:</dt>
     <dd>lib/convenient_service/utils/string.rb<span class="defines">,<br />
-  lib/convenient_service/utils/string/split.rb,<br /> lib/convenient_service/utils/string/camelize.rb,<br /> lib/convenient_service/utils/string/demodulize.rb</span>
+  lib/convenient_service/utils/string/split.rb,<br /> lib/convenient_service/utils/string/camelize.rb,<br /> lib/convenient_service/utils/string/truncate.rb,<br /> lib/convenient_service/utils/string/demodulize.rb</span>
 </dd>
   </dl>
   
@@ -91,7 +91,7 @@
     
   
     
-      <strong class="classes">Classes:</strong> <span class='object_link'><a href="String/Camelize.html" title="ConvenientService::Utils::String::Camelize (class)">Camelize</a></span>, <span class='object_link'><a href="String/Demodulize.html" title="ConvenientService::Utils::String::Demodulize (class)">Demodulize</a></span>, <span class='object_link'><a href="String/Split.html" title="ConvenientService::Utils::String::Split (class)">Split</a></span>
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="String/Camelize.html" title="ConvenientService::Utils::String::Camelize (class)">Camelize</a></span>, <span class='object_link'><a href="String/Demodulize.html" title="ConvenientService::Utils::String::Demodulize (class)">Demodulize</a></span>, <span class='object_link'><a href="String/Split.html" title="ConvenientService::Utils::String::Split (class)">Split</a></span>, <span class='object_link'><a href="String/Truncate.html" title="ConvenientService::Utils::String::Truncate (class)">Truncate</a></span>
     
   
 </p>
@@ -176,6 +176,28 @@
 </li>
 
       
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#truncate-class_method" title="truncate (class method)">.<strong>truncate</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
     </ul>
   
 
@@ -200,12 +222,12 @@
       <pre class="lines">
 
 
-11
 12
-13</pre>
+13
+14</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/string.rb', line 11</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/string.rb', line 12</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_camelize'>camelize</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="String/Camelize.html" title="ConvenientService::Utils::String::Camelize (class)">Camelize</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="String/Camelize.html#call-instance_method" title="ConvenientService::Utils::String::Camelize#call (method)">call</a></span></span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
@@ -230,12 +252,12 @@
       <pre class="lines">
 
 
-15
 16
-17</pre>
+17
+18</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/string.rb', line 15</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/string.rb', line 16</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_demodulize'>demodulize</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="String/Demodulize.html" title="ConvenientService::Utils::String::Demodulize (class)">Demodulize</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="String/Demodulize.html#call-instance_method" title="ConvenientService::Utils::String::Demodulize#call (method)">call</a></span></span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
@@ -260,15 +282,45 @@
       <pre class="lines">
 
 
-19
 20
-21</pre>
+21
+22</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/string.rb', line 19</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/string.rb', line 20</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="String/Split.html" title="ConvenientService::Utils::String::Split (class)">Split</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="String/Split.html#call-instance_method" title="ConvenientService::Utils::String::Split#call (method)">call</a></span></span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="truncate-class_method">
+  
+    .<strong>truncate</strong>  &#x21d2; <tt><span class='object_link'><a href="Object.html" title="ConvenientService::Utils::Object (module)">Object</a></span></tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+24
+25
+26</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/string.rb', line 24</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_truncate'>truncate</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="String/Truncate.html" title="ConvenientService::Utils::String::Truncate (class)">Truncate</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="String/Truncate.html#call-instance_method" title="ConvenientService::Utils::String::Truncate#call (method)">call</a></span></span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -280,7 +332,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon May  1 20:47:11 2023 by
+  Generated on Mon May  1 21:14:16 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>
