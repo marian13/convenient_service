@@ -19,12 +19,9 @@ module ConvenientService
                             ##
                             # @return [String]
                             #
-                            # @internal
-                            #   TODO: Implement
-                            #
-                            # def inspect
-                            #   "<#{service.class.name}::Result::Data>"
-                            # end
+                            def inspect
+                              "<#{result.service.class.name}::Result::Data>"
+                            end
                           end
                         end
                       end

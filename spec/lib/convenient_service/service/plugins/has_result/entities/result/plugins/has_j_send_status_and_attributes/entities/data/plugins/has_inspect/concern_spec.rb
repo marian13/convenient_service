@@ -28,39 +28,36 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
     end
   end
 
-  ##
-  # TODO: Implement.
-  #
-  # example_group "instance methods" do
-  #   describe "#inspect" do
-  #     let(:service) do
-  #       Class.new do
-  #         include ConvenientService::Configs::Minimal
-  #
-  #         def self.name
-  #           "StepService"
-  #         end
-  #
-  #         def result
-  #           success(data: {foo: :bar})
-  #         end
-  #       end
-  #     end
-  #
-  #     let(:result) { service.result }
-  #     let(:data) { result.data }
-  #
-  #     before do
-  #       ##
-  #       # TODO: Remove when Core implements auto committing from `inspect`.
-  #       #
-  #       data.class.commit_config!
-  #     end
-  #
-  #     it "returns `inspect` representation of data" do
-  #       expect(data.inspect).to eq("<#{service.class.name}::Result::Data>")
-  #     end
-  #   end
-  # end
+  example_group "instance methods" do
+    describe "#inspect" do
+      let(:service) do
+        Class.new do
+          include ConvenientService::Configs::Minimal
+
+          def self.name
+            "StepService"
+          end
+
+          def result
+            success(data: {foo: :bar})
+          end
+        end
+      end
+
+      let(:result) { service.result }
+      let(:data) { result.data }
+
+      before do
+        ##
+        # TODO: Remove when Core implements auto committing from `inspect`.
+        #
+        data.class.commit_config!
+      end
+
+      it "returns `inspect` representation of data" do
+        expect(data.inspect).to eq("<#{data.result.service.class.name}::Result::Data>")
+      end
+    end
+  end
 end
 # rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
