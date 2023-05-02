@@ -400,7 +400,11 @@ RSpec.describe ConvenientService::Configs::Standard do
 
           example_group "service result status" do
             example_group "concerns" do
-              let(:concerns) { [] }
+              let(:concerns) do
+                [
+                  ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status::Plugins::HasInspect::Concern
+                ]
+              end
 
               it "sets service result status concerns" do
                 expect(service_class::Result::Status.concerns.to_a).to eq(concerns)

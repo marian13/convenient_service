@@ -169,6 +169,10 @@ module ConvenientService
 
           class self::Status
             include Core
+
+            concerns do
+              use Plugins::Status::HasInspect::Concern
+            end
           end
 
           class self::Internals
