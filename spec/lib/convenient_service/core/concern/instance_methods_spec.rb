@@ -4,11 +4,30 @@ require "spec_helper"
 
 require "convenient_service"
 
-# rubocop:disable RSpec/NestedGroups
+# rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Core::Concern::InstanceMethods do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
-  let(:service_instance) { service_class.new }
+  let(:service_class) do
+    Class.new do
+      include ConvenientService::Core
+    end
+  end
+
+  ##
+  # NOTE: `allocate` since `new` triggers config commitment.
+  #
+  let(:service_instance) { service_class.allocate }
+
+  let(:args) { [:foo] }
+  let(:kwargs) { {foo: :bar} }
+  let(:block) { proc { :foo } }
+
+  describe "#initialize" do
+    it "accepts (*args, **kwargs, &block)" do
+      expect { service_instance.__send__(:initialize, *args, **kwargs, &block) }.not_to raise_error
+    end
+  end
 
   describe "#method_missing" do
     let(:service_class) do
@@ -31,10 +50,6 @@ RSpec.describe ConvenientService::Core::Concern::InstanceMethods do
         end
       end
     end
-
-    let(:args) { [:foo] }
-    let(:kwargs) { {foo: :bar} }
-    let(:block) { proc { :foo } }
 
     it "commits config" do
       ##
@@ -432,4 +447,4 @@ RSpec.describe ConvenientService::Core::Concern::InstanceMethods do
     end
   end
 end
-# rubocop:enable RSpec/NestedGroups
+# rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers

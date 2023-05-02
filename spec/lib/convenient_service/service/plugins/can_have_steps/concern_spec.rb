@@ -11,19 +11,8 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Concern do
 
   # rubocop:disable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
   let(:service_class) do
-    Class.new.tap do |klass|
-      klass.class_exec(described_class) do |mod|
-        include ConvenientService::Common::Plugins::HasInternals::Concern
-
-        class self::Internals
-          include ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Plugins::HasCache::Concern
-        end
-
-        include mod
-
-        def foo
-        end
-      end
+    Class.new do
+      include ConvenientService::Configs::Minimal
     end
   end
   # rubocop:enable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
@@ -44,6 +33,14 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Concern do
 
     context "when included" do
       subject { service_class }
+
+      let(:service_class) do
+        Class.new.tap do |klass|
+          klass.class_exec(described_class) do |mod|
+            include mod
+          end
+        end
+      end
 
       it { is_expected.to include_module(described_class::InstanceMethods) }
       it { is_expected.to extend_module(described_class::ClassMethods) }

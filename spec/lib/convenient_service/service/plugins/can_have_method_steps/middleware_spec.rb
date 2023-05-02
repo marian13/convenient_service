@@ -41,7 +41,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveMethodSteps::Middlewa
 
       let(:service_class) do
         Class.new do
-          include ConvenientService::Service::Plugins::CanHaveSteps::Concern
+          include ConvenientService::Configs::Minimal
+
+          middlewares :step, scope: :class do
+            delete ConvenientService::Service::Plugins::CanHaveResultStep::Middleware
+          end
         end
       end
 

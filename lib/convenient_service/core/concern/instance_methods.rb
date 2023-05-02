@@ -5,9 +5,13 @@ module ConvenientService
     module Concern
       module InstanceMethods
         ##
-        # @internal
-        #   TODO: Trigger config commitment from `inspect`.
-        ##
+        # @param args [Array<Object>]
+        # @param kwargs [Hash{Symbol => Object}]
+        # @param block [Proc, nil]
+        # @return [void]
+        #
+        def initialize(*args, **kwargs, &block)
+        end
 
         private
 
@@ -37,7 +41,7 @@ module ConvenientService
         end
 
         ##
-        # Includes `concerns` into the mixing class.
+        # Commits config. In other words, includes `concerns` into the mixing class.
         # If `method` is still NOT defined, raises `NoMethodError`, otherwise - retries to call the `method`.
         #
         # @param method [Symbol]
@@ -45,6 +49,8 @@ module ConvenientService
         # @param kwargs [Hash{Symbol => Object}]
         # @param block [Proc, nil]
         # @return [void]
+        #
+        # @note Config commitment via a missing instance method is very rare. It is only possible when an instance is created without calling `.new` on a class.
         #
         # @internal
         #   IMPORTANT: `method_missing` MUST be thread-safe.

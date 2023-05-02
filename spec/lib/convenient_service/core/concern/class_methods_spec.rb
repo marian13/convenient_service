@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-# rubocop:disable RSpec/NestedGroups
+# rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Core::Concern::ClassMethods do
   include ConvenientService::RSpec::Matchers::DelegateTo
   include ConvenientService::RSpec::Matchers::CacheItsValue
@@ -17,8 +17,12 @@ RSpec.describe ConvenientService::Core::Concern::ClassMethods do
 
   let(:config) { ConvenientService::Core::Entities::Config.new(klass: service_class) }
 
-  example_group "#instance methods" do
-    describe "#concerns" do
+  let(:args) { [:foo] }
+  let(:kwargs) { {foo: :bar} }
+  let(:block) { proc { :foo } }
+
+  example_group "class methods" do
+    describe ".concerns" do
       let(:configuration_block) { proc {} }
 
       specify do
@@ -38,7 +42,7 @@ RSpec.describe ConvenientService::Core::Concern::ClassMethods do
       end
     end
 
-    describe "#middlewares" do
+    describe ".middlewares" do
       let(:method) { :result }
       let(:scope) { :instance }
       let(:configuration_block) { proc {} }
@@ -60,7 +64,7 @@ RSpec.describe ConvenientService::Core::Concern::ClassMethods do
       end
     end
 
-    describe "#has_committed_config?" do
+    describe ".has_committed_config?" do
       before do
         allow(ConvenientService::Core::Entities::Config).to receive(:new).with(klass: service_class).and_return(config)
       end
@@ -89,7 +93,7 @@ RSpec.describe ConvenientService::Core::Concern::ClassMethods do
       end
     end
 
-    describe "#commit_config!" do
+    describe ".commit_config!" do
       specify do
         allow(ConvenientService::Core::Entities::Config).to receive(:new).with(klass: service_class).and_return(config)
 
@@ -134,7 +138,37 @@ RSpec.describe ConvenientService::Core::Concern::ClassMethods do
       end
     end
 
-    describe "#method_missing" do
+    describe ".new" do
+      context "when config is NOT committed" do
+        specify do
+          expect { service_class.new(*args, **kwargs, &block) }
+            .to delegate_to(service_class, :method_missing)
+            .with_arguments(:new, *args, **kwargs, &block)
+        end
+
+        it "returns new instance" do
+          expect(service_class.new(*args, **kwargs, &block)).to be_instance_of(service_class)
+        end
+      end
+
+      context "when config is committed" do
+        before do
+          service_class.commit_config!
+        end
+
+        specify do
+          expect { service_class.new(*args, **kwargs, &block) }
+            .not_to delegate_to(service_class, :method_missing)
+            .with_arguments(:new, *args, **kwargs, &block)
+        end
+
+        it "returns new instance" do
+          expect(service_class.new(*args, **kwargs, &block)).to be_instance_of(service_class)
+        end
+      end
+    end
+
+    describe ".method_missing" do
       let(:service_class) do
         Class.new do
           include ConvenientService::Core
@@ -158,10 +192,6 @@ RSpec.describe ConvenientService::Core::Concern::ClassMethods do
           end
         end
       end
-
-      let(:args) { [:foo] }
-      let(:kwargs) { {foo: :bar} }
-      let(:block) { proc { :foo } }
 
       it "commits config" do
         ##
@@ -222,7 +252,7 @@ RSpec.describe ConvenientService::Core::Concern::ClassMethods do
       end
     end
 
-    describe "#respond_to_missing?" do
+    describe ".respond_to_missing?" do
       let(:method_name) { :foo }
       let(:include_private) { false }
 
@@ -600,4 +630,4 @@ RSpec.describe ConvenientService::Core::Concern::ClassMethods do
     end
   end
 end
-# rubocop:enable RSpec/NestedGroups
+# rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
