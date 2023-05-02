@@ -24,15 +24,8 @@ RSpec.describe ConvenientService::Configs::AwesomePrintInspect do
 
       specify { expect(service_class).to include_module(ConvenientService::Configs::Minimal) }
 
-      ##
-      # TODO: Complete.
-      #
       example_group "service" do
         example_group "concerns" do
-          it "removes `ConvenientService::Service::Plugins::HasInspect::Concern` from service concerns" do
-            expect(service_class.concerns.to_a).not_to include(ConvenientService::Service::Plugins::HasInspect::Concern)
-          end
-
           it "adds `ConvenientService::Service::Plugins::HasAwesomePrintInspect::Concern` from service concerns" do
             expect(service_class.concerns.to_a).to include(ConvenientService::Service::Plugins::HasAwesomePrintInspect::Concern)
           end
@@ -40,10 +33,6 @@ RSpec.describe ConvenientService::Configs::AwesomePrintInspect do
 
         example_group "service result" do
           example_group "concerns" do
-            it "removes `ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasInspect::Concern` from service concerns" do
-              expect(service_class::Result.concerns.to_a).not_to include(ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasInspect::Concern)
-            end
-
             it "adds `ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasAwesomePrintInspect::Concern` from service concerns" do
               expect(service_class::Result.concerns.to_a).to include(ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasAwesomePrintInspect::Concern)
             end
@@ -51,10 +40,6 @@ RSpec.describe ConvenientService::Configs::AwesomePrintInspect do
 
           example_group "service result data" do
             example_group "concerns" do
-              it "removes `ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data::Plugins::HasInspect::Concern` from service concerns" do
-                expect(service_class::Result::Data.concerns.to_a).not_to include(ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data::Plugins::HasInspect::Concern)
-              end
-
               it "adds `ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data::Plugins::HasAwesomePrintInspect::Concern` from service concerns" do
                 expect(service_class::Result::Data.concerns.to_a).to include(ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data::Plugins::HasAwesomePrintInspect::Concern)
               end
@@ -63,10 +48,6 @@ RSpec.describe ConvenientService::Configs::AwesomePrintInspect do
 
           example_group "service result message" do
             example_group "concerns" do
-              it "removes `ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message::Plugins::HasInspect::Concern` from service concerns" do
-                expect(service_class::Result::Message.concerns.to_a).not_to include(ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message::Plugins::HasInspect::Concern)
-              end
-
               it "adds `ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message::Plugins::HasAwesomePrintInspect::Concern` from service concerns" do
                 expect(service_class::Result::Message.concerns.to_a).to include(ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message::Plugins::HasAwesomePrintInspect::Concern)
               end
@@ -75,10 +56,6 @@ RSpec.describe ConvenientService::Configs::AwesomePrintInspect do
 
           example_group "service result code" do
             example_group "concerns" do
-              it "removes `ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code::Plugins::HasInspect::Concern` from service concerns" do
-                expect(service_class::Result::Code.concerns.to_a).not_to include(ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code::Plugins::HasInspect::Concern)
-              end
-
               it "adds `ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code::Plugins::HasAwesomePrintInspect::Concern` from service concerns" do
                 expect(service_class::Result::Code.concerns.to_a).to include(ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code::Plugins::HasAwesomePrintInspect::Concern)
               end
@@ -87,10 +64,6 @@ RSpec.describe ConvenientService::Configs::AwesomePrintInspect do
 
           example_group "service result status" do
             example_group "concerns" do
-              it "removes `ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status::Plugins::HasInspect::Concern` from service concerns" do
-                expect(service_class::Result::Status.concerns.to_a).not_to include(ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status::Plugins::HasInspect::Concern)
-              end
-
               it "adds `ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status::Plugins::HasAwesomePrintInspect::Concern` from service concerns" do
                 expect(service_class::Result::Status.concerns.to_a).to include(ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status::Plugins::HasAwesomePrintInspect::Concern)
               end
@@ -100,10 +73,6 @@ RSpec.describe ConvenientService::Configs::AwesomePrintInspect do
 
         example_group "service step" do
           example_group "concerns" do
-            it "removes `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::HasInspect::Concern` from service concerns" do
-              expect(service_class::Step.concerns.to_a).not_to include(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::HasInspect::Concern)
-            end
-
             it "adds `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::HasAwesomePrintInspect::Concern` from service concerns" do
               expect(service_class::Step.concerns.to_a).to include(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::HasAwesomePrintInspect::Concern)
             end
@@ -128,7 +97,7 @@ RSpec.describe ConvenientService::Configs::AwesomePrintInspect do
       # https://github.com/marian13/convenient_service/discussions/43
       #
       it "applies its `included` block only once" do
-        expect(service_class.concerns.to_a.size).to eq(6)
+        expect(service_class.concerns.to_a.size).to eq(7)
       end
     end
   end

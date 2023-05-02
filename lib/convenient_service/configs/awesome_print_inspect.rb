@@ -9,46 +9,47 @@ module ConvenientService
       included do
         include Configs::Minimal
 
+        ##
+        # @internal
+        #   TODO: Plugin groups for autoreplacement of plugins with same purpose.
+        #
         concerns do
-          ##
-          # TODO: Safe replace.
-          #
-          replace Plugins::Service::HasInspect::Concern, Plugins::Service::HasAwesomePrintInspect::Concern
+          use Plugins::Service::HasAwesomePrintInspect::Concern
         end
 
         class self::Result
           concerns do
-            replace Plugins::Result::HasInspect::Concern, Plugins::Result::HasAwesomePrintInspect::Concern
+            use Plugins::Result::HasAwesomePrintInspect::Concern
           end
 
           class self::Data
             concerns do
-              replace Plugins::Data::HasInspect::Concern, Plugins::Data::HasAwesomePrintInspect::Concern
+              use Plugins::Data::HasAwesomePrintInspect::Concern
             end
           end
 
           class self::Message
             concerns do
-              replace Plugins::Message::HasInspect::Concern, Plugins::Message::HasAwesomePrintInspect::Concern
+              use Plugins::Message::HasAwesomePrintInspect::Concern
             end
           end
 
           class self::Code
             concerns do
-              replace Plugins::Code::HasInspect::Concern, Plugins::Code::HasAwesomePrintInspect::Concern
+              use Plugins::Code::HasAwesomePrintInspect::Concern
             end
           end
 
           class self::Status
             concerns do
-              replace Plugins::Status::HasInspect::Concern, Plugins::Status::HasAwesomePrintInspect::Concern
+              use Plugins::Status::HasAwesomePrintInspect::Concern
             end
           end
         end
 
         class self::Step
           concerns do
-            replace Plugins::Step::HasInspect::Concern, Plugins::Step::HasAwesomePrintInspect::Concern
+            use Plugins::Step::HasAwesomePrintInspect::Concern
           end
         end
       end
