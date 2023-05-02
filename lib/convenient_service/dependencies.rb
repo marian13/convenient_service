@@ -70,6 +70,7 @@ module ConvenientService
         require_relative "service/plugins/has_result/entities/result/plugins/has_j_send_status_and_attributes/entities/data/plugins/has_awesome_print_inspect"
         require_relative "service/plugins/has_result/entities/result/plugins/has_j_send_status_and_attributes/entities/message/plugins/has_awesome_print_inspect"
         require_relative "service/plugins/has_result/entities/result/plugins/has_j_send_status_and_attributes/entities/status/plugins/has_awesome_print_inspect"
+        require_relative "service/plugins/has_result/entities/result/plugins/has_j_send_status_and_attributes/entities/code/plugins/has_awesome_print_inspect"
         require_relative "service/plugins/can_have_steps/entities/step/plugins/has_awesome_print_inspect"
         require_relative "configs/awesome_print_inspect"
         require_relative "configs/awesome_print_inspect/aliases"

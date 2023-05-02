@@ -396,7 +396,11 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::RailsService::Config
 
           example_group "service result code" do
             example_group "concerns" do
-              let(:concerns) { [] }
+              let(:concerns) do
+                [
+                  ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code::Plugins::HasInspect::Concern
+                ]
+              end
 
               it "sets service result code concerns" do
                 expect(service_class::Result::Code.concerns.to_a).to eq(concerns)

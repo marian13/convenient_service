@@ -2,9 +2,6 @@
 
 module ConvenientService
   module Configs
-    ##
-    # TODO: Complete.
-    #
     module AwesomePrintInspect
       include Support::Concern
 
@@ -36,12 +33,12 @@ module ConvenientService
             end
           end
 
-          # class self::Code
-          #   concerns do
-          #     replace HasInspect::Concern, HasAwesomePrintInspect::Concern
-          #   end
-          # end
-          #
+          class self::Code
+            concerns do
+              replace Plugins::Code::HasInspect::Concern, Plugins::Code::HasAwesomePrintInspect::Concern
+            end
+          end
+
           class self::Status
             concerns do
               replace Plugins::Status::HasInspect::Concern, Plugins::Status::HasAwesomePrintInspect::Concern

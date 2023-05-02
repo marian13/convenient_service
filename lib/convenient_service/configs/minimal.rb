@@ -165,6 +165,10 @@ module ConvenientService
 
           class self::Code
             include Core
+
+            concerns do
+              use Plugins::Code::HasInspect::Concern
+            end
           end
 
           class self::Status
