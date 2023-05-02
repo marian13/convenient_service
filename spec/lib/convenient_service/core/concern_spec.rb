@@ -9,6 +9,11 @@ RSpec.describe ConvenientService::Core::Concern do
     include ConvenientService::RSpec::Matchers::IncludeModule
     include ConvenientService::RSpec::Matchers::ExtendModule
 
+    ##
+    # TODO: Uncomment.
+    #
+    # include ConvenientService::RSpec::Matchers::HaveAliasMethod
+
     subject { described_class }
 
     it { is_expected.to include_module(ConvenientService::Support::Concern) }
@@ -26,6 +31,11 @@ RSpec.describe ConvenientService::Core::Concern do
 
       it { is_expected.to include_module(described_class::InstanceMethods) }
       it { is_expected.to extend_module(described_class::ClassMethods) }
+
+      ##
+      # TODO: Uncomment.
+      #
+      # specify { expect(entity_class.singleton_class).to have_alias_method(:new_without_commit_config, :new) }
     end
   end
 end
