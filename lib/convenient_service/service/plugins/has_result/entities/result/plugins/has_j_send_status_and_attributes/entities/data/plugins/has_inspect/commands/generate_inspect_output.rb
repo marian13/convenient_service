@@ -50,7 +50,7 @@ module ConvenientService
                             def printable_values
                               data
                                 .to_h
-                                .map { |key, value| "#{key}: `#{truncate(value.inspect)}`" }
+                                .map { |key, value| "#{key}: #{truncate(value.inspect)}" }
                                 .join(" ")
                             end
 
