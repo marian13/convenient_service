@@ -360,12 +360,12 @@
       <pre class="lines">
 
 
-26
-27
-28</pre>
+29
+30
+31</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/have_alias_method.rb', line 26</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/have_alias_method.rb', line 29</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_description'>description</span>
   <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>have alias method `</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_alias_name'>alias_name</span><span class='embexpr_end'>}</span><span class='tstring_content'>` for `</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_original_name'>original_name</span><span class='embexpr_end'>}</span><span class='tstring_content'>`</span><span class='tstring_end'>&quot;</span></span>
@@ -414,12 +414,12 @@
       <pre class="lines">
 
 
-30
-31
-32</pre>
+33
+34
+35</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/have_alias_method.rb', line 30</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/have_alias_method.rb', line 33</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_failure_message'>failure_message</span>
   <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>expected `</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_object'>object</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='embexpr_end'>}</span><span class='tstring_content'>` to have alias method `</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_alias_name'>alias_name</span><span class='embexpr_end'>}</span><span class='tstring_content'>` for `</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_original_name'>original_name</span><span class='embexpr_end'>}</span><span class='tstring_content'>`</span><span class='tstring_end'>&quot;</span></span>
@@ -468,12 +468,12 @@
       <pre class="lines">
 
 
-34
-35
-36</pre>
+37
+38
+39</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/have_alias_method.rb', line 34</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/have_alias_method.rb', line 37</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_failure_message_when_negated'>failure_message_when_negated</span>
   <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>expected `</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_object'>object</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='embexpr_end'>}</span><span class='tstring_content'>` NOT to have alias method `</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_alias_name'>alias_name</span><span class='embexpr_end'>}</span><span class='tstring_content'>` for `</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_original_name'>original_name</span><span class='embexpr_end'>}</span><span class='tstring_content'>`</span><span class='tstring_end'>&quot;</span></span>
@@ -546,7 +546,10 @@
 21
 22
 23
-24</pre>
+24
+25
+26
+27</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/have_alias_method.rb', line 13</span>
@@ -554,7 +557,10 @@
 <span class='kw'>def</span> <span class='id identifier rubyid_matches?'>matches?</span><span class='lparen'>(</span><span class='id identifier rubyid_object'>object</span><span class='rparen'>)</span>
   <span class='ivar'>@object</span> <span class='op'>=</span> <span class='id identifier rubyid_object'>object</span>
 
-  <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>unless</span> <span class='const'><span class='object_link'><a href="../../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Utils/Method.html" title="ConvenientService::Utils::Method (module)">Method</a></span></span><span class='period'>.</span><span class='id identifier rubyid_defined?'><span class='object_link'><a href="../../../Utils/Method.html#defined%3F-class_method" title="ConvenientService::Utils::Method.defined? (method)">defined?</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_original_name'>original_name</span><span class='comma'>,</span> <span class='id identifier rubyid_object'>object</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='comma'>,</span> <span class='label'>private:</span> <span class='kw'>true</span><span class='rparen'>)</span>
+  <span class='comment'>##
+</span>  <span class='comment'># TODO: Use `Utils::Object.resolve_class` to support `have_alias_method` for classes.
+</span>  <span class='comment'>#
+</span>  <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>unless</span> <span class='const'><span class='object_link'><a href="../../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Utils/Method.html" title="ConvenientService::Utils::Method (module)">Method</a></span></span><span class='period'>.</span><span class='id identifier rubyid_defined?'><span class='object_link'><a href="../../../Utils/Method.html#defined%3F-class_method" title="ConvenientService::Utils::Method.defined? (method)">defined?</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_original_name'>original_name</span><span class='comma'>,</span> <span class='id identifier rubyid_object'>object</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='comma'>,</span> <span class='label'>private:</span> <span class='kw'>true</span><span class='rparen'>)</span>
 
   <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>unless</span> <span class='const'><span class='object_link'><a href="../../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Utils/Method.html" title="ConvenientService::Utils::Method (module)">Method</a></span></span><span class='period'>.</span><span class='id identifier rubyid_defined?'><span class='object_link'><a href="../../../Utils/Method.html#defined%3F-class_method" title="ConvenientService::Utils::Method.defined? (method)">defined?</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_alias_name'>alias_name</span><span class='comma'>,</span> <span class='id identifier rubyid_object'>object</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='comma'>,</span> <span class='label'>private:</span> <span class='kw'>true</span><span class='rparen'>)</span>
 
@@ -573,7 +579,7 @@
 </div>
 
       <div id="footer">
-  Generated on Tue May  2 23:25:23 2023 by
+  Generated on Tue May  2 23:42:31 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>
