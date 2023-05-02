@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern do
+RSpec.describe ConvenientService::Core::Concern do
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
     include ConvenientService::RSpec::Matchers::ExtendModule
@@ -14,9 +14,9 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern do
     it { is_expected.to include_module(ConvenientService::Support::Concern) }
 
     context "when included" do
-      subject { service_class }
+      subject { entity_class }
 
-      let(:service_class) do
+      let(:entity_class) do
         Class.new.tap do |klass|
           klass.class_exec(described_class) do |mod|
             include mod

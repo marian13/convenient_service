@@ -7,16 +7,15 @@ require "convenient_service"
 RSpec.describe ConvenientService::Core do
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
-    include ConvenientService::RSpec::Matchers::ExtendModule
 
     subject { described_class }
 
     it { is_expected.to include_module(ConvenientService::Support::Concern) }
 
     context "when included" do
-      subject { service_class }
+      subject { entity_class }
 
-      let(:service_class) do
+      let(:entity_class) do
         Class.new.tap do |klass|
           klass.class_exec(described_class) do |mod|
             include mod
@@ -24,8 +23,7 @@ RSpec.describe ConvenientService::Core do
         end
       end
 
-      it { is_expected.to include_module(ConvenientService::Core::InstanceMethods) }
-      it { is_expected.to extend_module(ConvenientService::Core::ClassMethods) }
+      it { is_expected.to include_module(described_class::Concern) }
     end
   end
 end
