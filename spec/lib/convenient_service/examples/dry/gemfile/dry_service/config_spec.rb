@@ -380,7 +380,11 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::DryService::Config do
 
           example_group "service result message" do
             example_group "concerns" do
-              let(:concerns) { [] }
+              let(:concerns) do
+                [
+                  ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message::Plugins::HasInspect::Concern
+                ]
+              end
 
               it "sets service result message concerns" do
                 expect(service_class::Result::Message.concerns.to_a).to eq(concerns)

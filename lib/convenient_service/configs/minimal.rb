@@ -157,6 +157,10 @@ module ConvenientService
 
           class self::Message
             include Core
+
+            concerns do
+              use Plugins::Message::HasInspect::Concern
+            end
           end
 
           class self::Code
