@@ -51,10 +51,10 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
         let(:not_initialized_result_instance) { double }
 
         before do
-          allow(result_class).to receive(:create_without_initialize).and_return(not_initialized_result_instance)
+          allow(result_class).to receive(:new_without_initialize).and_return(not_initialized_result_instance)
         end
 
-        it "defaults `result` to `result_class.create_without_initialize`" do
+        it "defaults `result` to `result_class.new_without_initialize`" do
           expect(code.result).to eq(not_initialized_result_instance)
         end
       end
@@ -83,10 +83,10 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
         let(:not_initialized_result_instance) { double }
 
         before do
-          allow(result_class).to receive(:create_without_initialize).and_return(not_initialized_result_instance)
+          allow(result_class).to receive(:new_without_initialize).and_return(not_initialized_result_instance)
         end
 
-        it "defaults `result` to `result_class.create_without_initialize`" do
+        it "defaults `result` to `result_class.new_without_initialize`" do
           expect(data.result).to eq(not_initialized_result_instance)
         end
       end
@@ -115,10 +115,10 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
         let(:not_initialized_result_instance) { double }
 
         before do
-          allow(result_class).to receive(:create_without_initialize).and_return(not_initialized_result_instance)
+          allow(result_class).to receive(:new_without_initialize).and_return(not_initialized_result_instance)
         end
 
-        it "defaults `result` to `result_class.create_without_initialize`" do
+        it "defaults `result` to `result_class.new_without_initialize`" do
           expect(message.result).to eq(not_initialized_result_instance)
         end
       end
@@ -147,10 +147,10 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
         let(:not_initialized_result_instance) { double }
 
         before do
-          allow(result_class).to receive(:create_without_initialize).and_return(not_initialized_result_instance)
+          allow(result_class).to receive(:new_without_initialize).and_return(not_initialized_result_instance)
         end
 
-        it "defaults `result` to `result_class.create_without_initialize`" do
+        it "defaults `result` to `result_class.new_without_initialize`" do
           expect(status.result).to eq(not_initialized_result_instance)
         end
       end

@@ -20,7 +20,7 @@ module ConvenientService
                     # @internal
                     #   IMPORTANT: Skipping `result` is allowed only for tests.
                     #
-                    def code(value:, result: create_without_initialize)
+                    def code(value:, result: new_without_initialize)
                       code_class.cast!(value).copy(overrides: {kwargs: {result: result}})
                     end
 
@@ -34,7 +34,7 @@ module ConvenientService
                     # @internal
                     #   IMPORTANT: Skipping `result` is allowed only for tests.
                     #
-                    def data(value:, result: create_without_initialize)
+                    def data(value:, result: new_without_initialize)
                       data_class.cast!(value).copy(overrides: {kwargs: {result: result}})
                     end
 
@@ -48,7 +48,7 @@ module ConvenientService
                     # @internal
                     #   IMPORTANT: Skipping `result` is allowed only for tests.
                     #
-                    def message(value:, result: create_without_initialize)
+                    def message(value:, result: new_without_initialize)
                       message_class.cast!(value).copy(overrides: {kwargs: {result: result}})
                     end
 
@@ -62,7 +62,7 @@ module ConvenientService
                     # @internal
                     #   IMPORTANT: Skipping `result` is allowed only for tests.
                     #
-                    def status(value:, result: create_without_initialize)
+                    def status(value:, result: new_without_initialize)
                       status_class.cast!(value).copy(overrides: {kwargs: {result: result}})
                     end
 

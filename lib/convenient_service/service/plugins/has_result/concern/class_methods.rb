@@ -22,10 +22,10 @@ module ConvenientService
             #   NOTE: This method is internally used by custom RSpec helper `stub_service`. It should NOT be used in the client code.
             #
             def success(
-              service: create_without_initialize,
+              service: new_without_initialize,
               data: Constants::DEFAULT_SUCCESS_DATA
             )
-              result_class.create(
+              result_class.new(
                 service: service,
                 status: Constants::SUCCESS_STATUS,
                 data: data,
@@ -42,11 +42,11 @@ module ConvenientService
             #   NOTE: This method is internally used by custom RSpec helper `stub_service`. It should NOT be used in the client code.
             #
             def failure(
-              service: create_without_initialize,
+              service: new_without_initialize,
               data: Constants::DEFAULT_FAILURE_DATA,
               message: data.any? ? data.first.join(" ") : Constants::DEFAULT_FAILURE_MESSAGE
             )
-              result_class.create(
+              result_class.new(
                 service: service,
                 status: Constants::FAILURE_STATUS,
                 data: data,
@@ -63,11 +63,11 @@ module ConvenientService
             #   NOTE: This method is internally used by custom RSpec helper `stub_service`. It should NOT be used in the client code.
             #
             def error(
-              service: create_without_initialize,
+              service: new_without_initialize,
               message: Constants::DEFAULT_ERROR_MESSAGE,
               code: Constants::DEFAULT_ERROR_CODE
             )
-              result_class.create(
+              result_class.new(
                 service: service,
                 status: Constants::ERROR_STATUS,
                 data: Constants::ERROR_DATA,

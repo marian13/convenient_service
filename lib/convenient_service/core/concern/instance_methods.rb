@@ -5,12 +5,12 @@ module ConvenientService
     module Concern
       module InstanceMethods
         ##
-        # @param args [Array<Object>]
-        # @param kwargs [Hash{Symbol => Object}]
-        # @param block [Proc, nil]
         # @return [void]
         #
-        def initialize(*args, **kwargs, &block)
+        # @internal
+        #   NOTE: required by `.new` in `ClassMethods`.
+        #
+        def initialize(...)
         end
 
         private

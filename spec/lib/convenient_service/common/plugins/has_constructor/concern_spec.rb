@@ -5,14 +5,6 @@ require "spec_helper"
 require "convenient_service"
 
 RSpec.describe ConvenientService::Common::Plugins::HasConstructor::Concern do
-  let(:klass) do
-    Class.new.tap do |klass|
-      klass.class_exec(described_class) do |mod|
-        include mod
-      end
-    end
-  end
-
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
     include ConvenientService::RSpec::Matchers::ExtendModule
@@ -24,6 +16,14 @@ RSpec.describe ConvenientService::Common::Plugins::HasConstructor::Concern do
     context "when included" do
       subject { klass }
 
+      let(:klass) do
+        Class.new.tap do |klass|
+          klass.class_exec(described_class) do |mod|
+            include mod
+          end
+        end
+      end
+
       it { is_expected.to include_module(described_class::InstanceMethods) }
       it { is_expected.to extend_module(described_class::ClassMethods) }
     end
@@ -34,26 +34,24 @@ RSpec.describe ConvenientService::Common::Plugins::HasConstructor::Concern do
 
     describe "#create" do
       let(:klass) do
-        Class.new.tap do |klass|
-          klass.class_exec(described_class) do |mod|
-            include mod
+        Class.new do
+          include ConvenientService::Configs::Minimal
 
-            attr_reader :args, :kwargs, :block
+          attr_reader :args, :kwargs, :block
 
-            def initialize(*args, **kwargs, &block)
-              @args = args
-              @kwargs = kwargs
-              @block = block
-            end
+          def initialize(*args, **kwargs, &block)
+            @args = args
+            @kwargs = kwargs
+            @block = block
+          end
 
-            ##
-            # Needed for `delegate_to`.
-            #
-            def ==(other)
-              return unless other.instance_of?(self.class)
+          ##
+          # Needed for `delegate_to`.
+          #
+          def ==(other)
+            return unless other.instance_of?(self.class)
 
-              args == other.args && kwargs == other.kwargs && block == other.block
-            end
+            args == other.args && kwargs == other.kwargs && block == other.block
           end
         end
       end
@@ -63,8 +61,8 @@ RSpec.describe ConvenientService::Common::Plugins::HasConstructor::Concern do
       let(:block) { proc { :foo } }
 
       specify do
-        expect { klass.create(*args, **kwargs, &block) }
-          .to delegate_to(klass, :new)
+        expect { klass.new(*args, **kwargs, &block) }
+          .to delegate_to(klass, :new_without_commit_config)
           .with_arguments(*args, **kwargs, &block)
           .and_return_its_value
       end
