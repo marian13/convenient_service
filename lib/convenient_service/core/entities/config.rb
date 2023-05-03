@@ -116,8 +116,13 @@ module ConvenientService
         ##
         # @return [Boolean]
         #
+        # @internal
+        #   IMPORTANT: Memoization of only `true` is intentional. It is done for performance purposes. See `benchmark/has_committed_config/ips.rb`.
+        #
+        #   IMPORTANT: `committed?` MUST be thread safe.
+        #
         def committed?
-          concerns.included?
+          @committed ||= concerns.included?
         end
 
         ##

@@ -65,7 +65,7 @@ RSpec.describe ConvenientService::Core::Entities::Config do
         let(:concerns) { ConvenientService::Core::Entities::Config::Entities::Concerns.new(klass: service_class).configure(&configuration_block) }
         let(:configuration_block) { proc { |stack| stack.use concern } }
 
-        context "when config is NOT commited" do
+        context "when config is NOT committed" do
           before do
             ##
             # NOTE: Configures `concerns` in order to cache them.
@@ -91,7 +91,7 @@ RSpec.describe ConvenientService::Core::Entities::Config do
           end
         end
 
-        context "when config is commited" do
+        context "when config is committed" do
           before do
             config.commit!
           end
@@ -247,7 +247,7 @@ RSpec.describe ConvenientService::Core::Entities::Config do
             end
           end
 
-          context "when config is commited" do
+          context "when config is committed" do
             before do
               config.commit!
             end
@@ -300,7 +300,7 @@ RSpec.describe ConvenientService::Core::Entities::Config do
               end
             end
 
-            context "when config is commited" do
+            context "when config is committed" do
               before do
                 config.commit!
               end
@@ -352,7 +352,7 @@ RSpec.describe ConvenientService::Core::Entities::Config do
               end
             end
 
-            context "when config is commited" do
+            context "when config is committed" do
               before do
                 config.commit!
               end
@@ -400,10 +400,56 @@ RSpec.describe ConvenientService::Core::Entities::Config do
         config.concerns {}
       end
 
-      specify do
-        expect { config.committed? }
-          .to delegate_to(config.concerns, :included?)
-          .and_return_its_value
+      context "when config is NOT committed" do
+        specify do
+          expect { config.committed? }
+            .to delegate_to(config.concerns, :included?)
+            .and_return_its_value
+        end
+
+        it "returns `false`" do
+          expect(config.committed?).to eq(false)
+        end
+
+        context "when called multiple times" do
+          before do
+            config.committed?
+          end
+
+          specify do
+            expect { config.committed? }
+              .to delegate_to(config.concerns, :included?)
+              .and_return_its_value
+          end
+        end
+      end
+
+      context "when config is committed" do
+        before do
+          config.commit!
+        end
+
+        specify do
+          expect { config.committed? }
+            .to delegate_to(config.concerns, :included?)
+            .and_return_its_value
+        end
+
+        it "returns `true`" do
+          expect(config.committed?).to eq(true)
+        end
+
+        context "when called multiple times" do
+          before do
+            config.committed?
+          end
+
+          specify do
+            expect { config.committed? }
+              .not_to delegate_to(config.concerns, :included?)
+              .and_return_its_value
+          end
+        end
       end
     end
 
