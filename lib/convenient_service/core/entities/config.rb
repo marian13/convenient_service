@@ -117,7 +117,12 @@ module ConvenientService
         # @return [Boolean]
         #
         # @internal
-        #   IMPORTANT: Memoization of only `true` is intentional. It is done for performance purposes. See `benchmark/has_committed_config/ips.rb`.
+        #   IMPORTANT:
+        #     - Memoization of only `true` is intentional.
+        #     - It is done for performance purposes.
+        #     - It is OK to memoize only `true` since "uncommitment" of config is even theoretically NOT possible.
+        #     - It is NOT possible to uninclude Ruby modules.
+        #     - See `benchmark/has_committed_config/ips.rb`.
         #
         #   IMPORTANT: `committed?` MUST be thread safe.
         #
