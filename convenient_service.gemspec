@@ -41,6 +41,13 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "awesome_print"
 
   ##
+  # Used for benchmarking (iteration per second). See `benchmark` directory.
+  # - https://github.com/evanphx/benchmark-ips
+  # - https://www.johnnunemaker.com/how-to-benchmark-your-ruby-gem
+  #
+  spec.add_development_dependency "benchmark-ips", "~> 2.12.0"
+
+  ##
   # NOTE: `byebug` has C extensions, that is why it is NOT supported in JRuby.
   # - https://github.com/deivid-rodriguez/byebug/tree/master/ext/byebug
   # - https://github.com/deivid-rodriguez/byebug/issues/179#issuecomment-152727003
@@ -120,6 +127,13 @@ Gem::Specification.new do |spec|
   # - https://github.com/thoughtbot/shoulda-context
   #
   spec.add_development_dependency "shoulda-context", "~> 2.0.0"
+
+  ##
+  # Used for benchmarking (call-stack profiler). See `benchmark` directory.
+  # - https://github.com/tmm1/stackprof
+  # - https://www.johnnunemaker.com/how-to-benchmark-your-ruby-gem
+  #
+  spec.add_development_dependency "stackprof", "~> 0.2.25" unless ConvenientService::Support::Ruby.jruby?
 
   spec.add_development_dependency "webrick"
 
