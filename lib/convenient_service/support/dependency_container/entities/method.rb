@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-
+require "byebug"
 module ConvenientService
   module Support
     module DependencyContainer
@@ -93,6 +93,25 @@ module ConvenientService
             innermost_namespace.define_method(name, &body)
 
             self
+          end
+
+          def namespaces_enum(namespace)
+            ::Enumerator.new do |yielder|
+              yielder.yield(namespace)
+
+              namespaces.each do |sub_namespace|
+                already_defined_sub_namespace = namespace.namespaces.find_by(name: sub_namespace.name)
+
+                unless already_defined_sub_namespace
+                  namespace.namespaces << sub_namespace
+                  namespace.define_method(sub_namespace.name) { sub_namespace.body.call }
+                end
+
+                namespace = sub_namespace
+
+                yielder.yield(namespace)
+              end
+            end
           end
 
           ##
