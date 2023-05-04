@@ -477,16 +477,16 @@ Does nothing for the subsequent calls.</p>
       <pre class="lines">
 
 
-142
-143
-144
-145</pre>
+145
+146
+147
+148</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config.rb', line 142</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config.rb', line 145</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_commit!'>commit!</span><span class='lparen'>(</span><span class='label'>trigger:</span> <span class='const'><span class='object_link'><a href="../Constants.html" title="ConvenientService::Core::Constants (module)">Constants</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Constants/Triggers.html" title="ConvenientService::Core::Constants::Triggers (module)">Triggers</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Constants/Triggers.html#USER-constant" title="ConvenientService::Core::Constants::Triggers::USER (constant)">USER</a></span></span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_concerns'>concerns</span><span class='period'>.</span><span class='id identifier rubyid_include!'>include!</span>
+  <span class='lparen'>(</span><span class='id identifier rubyid_committed?'>committed?</span> <span class='op'>?</span> <span class='kw'>false</span> <span class='op'>:</span> <span class='id identifier rubyid_concerns'>concerns</span><span class='period'>.</span><span class='id identifier rubyid_include!'>include!</span><span class='rparen'>)</span>
     <span class='period'>.</span><span class='id identifier rubyid_tap'>tap</span> <span class='lbrace'>{</span> <span class='const'><span class='object_link'><a href="Config/Commands.html" title="ConvenientService::Core::Entities::Config::Commands (module)">Commands</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Config/Commands/TrackMethodMissingCommitTrigger.html" title="ConvenientService::Core::Entities::Config::Commands::TrackMethodMissingCommitTrigger (class)">TrackMethodMissingCommitTrigger</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="Config/Commands/TrackMethodMissingCommitTrigger.html#call-instance_method" title="ConvenientService::Core::Entities::Config::Commands::TrackMethodMissingCommitTrigger#call (method)">call</a></span></span><span class='lparen'>(</span><span class='label'>config:</span> <span class='kw'>self</span><span class='comma'>,</span> <span class='label'>trigger:</span> <span class='id identifier rubyid_trigger'>trigger</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -1125,7 +1125,7 @@ Does nothing for the subsequent calls.</p>
 </div>
 
       <div id="footer">
-  Generated on Wed May  3 22:14:26 2023 by
+  Generated on Thu May  4 15:48:49 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>
