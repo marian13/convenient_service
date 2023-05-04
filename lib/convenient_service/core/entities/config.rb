@@ -139,8 +139,11 @@ module ConvenientService
         #
         # @see https://ruby-doc.org/core-3.1.2/Kernel.html#method-i-require
         #
+        # @internal
+        #   IMPORTANT: `commit!` MUST be thread safe.
+        #
         def commit!(trigger: Constants::Triggers::USER)
-          concerns.include!
+          (committed? ? false : concerns.include!)
             .tap { Commands::TrackMethodMissingCommitTrigger.call(config: self, trigger: trigger) }
         end
 

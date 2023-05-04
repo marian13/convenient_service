@@ -445,9 +445,7 @@ RSpec.describe ConvenientService::Core::Entities::Config do
           end
 
           specify do
-            expect { config.committed? }
-              .not_to delegate_to(config.concerns, :included?)
-              .and_return_its_value
+            expect { config.committed? }.not_to delegate_to(config.concerns, :included?)
           end
         end
       end
@@ -459,23 +457,85 @@ RSpec.describe ConvenientService::Core::Entities::Config do
         # NOTE: Configures `concerns` in order to cache them.
         #
         config.concerns {}
-
-        ##
-        # NOTE: `include!` returns `true` for the first time, `false` for the subsequent calls.
-        #
-        config.concerns.include!
       end
 
-      specify do
-        expect { config.commit! }
-          .to delegate_to(config.concerns, :include!)
-          .and_return_its_value
+      context "when concerns are NOT included" do
+        specify do
+          expect { config.commit! }.to delegate_to(config.concerns, :include!)
+        end
+
+        specify do
+          expect { config.commit! }
+            .to delegate_to(ConvenientService::Core::Entities::Config::Commands::TrackMethodMissingCommitTrigger, :call)
+            .with_arguments(config: config, trigger: ConvenientService::Core::Constants::Triggers::USER)
+        end
+
+        it "returns `true`" do
+          expect(config.commit!).to eq(true)
+        end
+
+        context "when called multiple times" do
+          before do
+            config.commit!
+          end
+
+          specify do
+            expect { config.commit! }.not_to delegate_to(config.concerns, :include!)
+          end
+
+          specify do
+            expect { config.commit! }
+              .to delegate_to(ConvenientService::Core::Entities::Config::Commands::TrackMethodMissingCommitTrigger, :call)
+              .with_arguments(config: config, trigger: ConvenientService::Core::Constants::Triggers::USER)
+          end
+
+          it "returns `false`" do
+            expect(config.commit!).to eq(false)
+          end
+        end
       end
 
-      specify do
-        expect { config.commit! }
-          .to delegate_to(ConvenientService::Core::Entities::Config::Commands::TrackMethodMissingCommitTrigger, :call)
-          .with_arguments(config: config, trigger: ConvenientService::Core::Constants::Triggers::USER)
+      context "when concerns are included" do
+        before do
+          ##
+          # NOTE: `include!` returns `true` for the first time, `false` for the subsequent calls.
+          #
+          config.concerns.include!
+        end
+
+        specify do
+          expect { config.commit! }.not_to delegate_to(config.concerns, :include!)
+        end
+
+        specify do
+          expect { config.commit! }
+            .to delegate_to(ConvenientService::Core::Entities::Config::Commands::TrackMethodMissingCommitTrigger, :call)
+            .with_arguments(config: config, trigger: ConvenientService::Core::Constants::Triggers::USER)
+        end
+
+        it "returns `false`" do
+          expect(config.commit!).to eq(false)
+        end
+
+        context "when called multiple times" do
+          before do
+            config.commit!
+          end
+
+          specify do
+            expect { config.commit! }.not_to delegate_to(config.concerns, :include!)
+          end
+
+          specify do
+            expect { config.commit! }
+              .to delegate_to(ConvenientService::Core::Entities::Config::Commands::TrackMethodMissingCommitTrigger, :call)
+              .with_arguments(config: config, trigger: ConvenientService::Core::Constants::Triggers::USER)
+          end
+
+          it "returns `false`" do
+            expect(config.commit!).to eq(false)
+          end
+        end
       end
 
       example_group "`trigger` option" do
