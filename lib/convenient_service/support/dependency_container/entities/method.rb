@@ -100,9 +100,7 @@ module ConvenientService
               yielder.yield(namespace)
 
               namespaces.each do |sub_namespace|
-                already_defined_sub_namespace = namespace.namespaces.find_by(name: sub_namespace.name)
-
-                unless already_defined_sub_namespace
+                unless namespace.namespaces.find_by(name: sub_namespace.name)
                   namespace.namespaces << sub_namespace
                   namespace.define_method(sub_namespace.name) { sub_namespace.body.call }
                 end
