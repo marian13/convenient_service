@@ -35,6 +35,7 @@ RSpec.describe ConvenientService::RSpec::Matchers do
       it { is_expected.to include_module(ConvenientService::RSpec::Matchers::HaveAttrAccessor) }
       it { is_expected.to include_module(ConvenientService::RSpec::Matchers::HaveAttrReader) }
       it { is_expected.to include_module(ConvenientService::RSpec::Matchers::HaveAttrWriter) }
+      it { is_expected.to include_module(ConvenientService::RSpec::Matchers::Import) }
       it { is_expected.to include_module(ConvenientService::RSpec::Matchers::IncludeModule) }
       it { is_expected.to include_module(ConvenientService::RSpec::Matchers::PrependModule) }
       it { is_expected.to include_module(ConvenientService::RSpec::Matchers::Results) }
