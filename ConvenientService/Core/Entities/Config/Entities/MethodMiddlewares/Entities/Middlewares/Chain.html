@@ -87,12 +87,12 @@
 
   
   
+  
+  
   <dl>
-      <dt>Extended by:</dt>
-      <dd>Support::AbstractMethod::ClassMethods</dd>
+      <dt>Includes:</dt>
+      <dd><span class='object_link'><a href="Chain/Concern.html" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Chain::Concern (module)">Concern</a></span></dd>
   </dl>
-  
-  
   
   
 
@@ -102,7 +102,7 @@
   <dl>
     <dt>Defined in:</dt>
     <dd>lib/convenient_service/core/entities/config/entities/method_middlewares/entities/middlewares/chain.rb<span class="defines">,<br />
-  lib/convenient_service/core/entities/config/entities/method_middlewares/entities/middlewares/chain/entities/method_chain.rb</span>
+  lib/convenient_service/core/entities/config/entities/method_middlewares/entities/middlewares/chain/concern.rb,<br /> lib/convenient_service/core/entities/config/entities/method_middlewares/entities/middlewares/chain/concern/class_methods.rb,<br /> lib/convenient_service/core/entities/config/entities/method_middlewares/entities/middlewares/chain/entities/method_chain.rb,<br /> lib/convenient_service/core/entities/config/entities/method_middlewares/entities/middlewares/chain/concern/instance_methods.rb</span>
 </dd>
   </dl>
   
@@ -126,7 +126,7 @@
 <p class="children">
   
     
-      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Chain/Entities.html" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Chain::Entities (module)">Entities</a></span>
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Chain/Concern.html" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Chain::Concern (module)">Concern</a></span>, <span class='object_link'><a href="Chain/Entities.html" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Chain::Entities (module)">Entities</a></span>
     
   
     
@@ -139,129 +139,6 @@
 
 
 
-  
-    <h2>
-      Instance Method Summary
-      <small><a href="#" class="summary_toggle">collapse</a></small>
-    </h2>
-
-    <ul class="summary">
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#call-instance_method" title="#call (instance method)">#<strong>call</strong>(env)  &#x21d2; Object </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'><p>Can be any type.</p>
-</div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#chain-instance_method" title="#chain (instance method)">#<strong>chain</strong>  &#x21d2; ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Chain </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#entity-instance_method" title="#entity (instance method)">#<strong>entity</strong>  &#x21d2; Class, Object </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#method-instance_method" title="#method (instance method)">#<strong>method</strong>  &#x21d2; Symbol </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#next-instance_method" title="#next (instance method)">#<strong>next</strong>  &#x21d2; Object </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'><p>Can be any type.</p>
-</div></span>
-  
-</li>
-
-      
-    </ul>
-  
-
 
   
   
@@ -275,398 +152,28 @@
   
   
   
-  
-  
-  
-  
-  
-  
-  
-  
+  <h2>Method Summary</h2>
   
   <h3 class="inherited">Methods included from <span class='object_link'><a href="../../../../../../../Support/Concern.html" title="ConvenientService::Support::Concern (module)">Support::Concern</a></span></h3>
   <p class="inherited"><span class='object_link'><a href="../../../../../../../Support/Concern.html#included-class_method" title="ConvenientService::Support::Concern.included (method)">included</a></span></p>
 
-
-  <div id="instance_method_details" class="method_details_list">
-    <h2>Instance Method Details</h2>
-
-    
-      <div class="method_details first">
-  <h3 class="signature first" id="call-instance_method">
   
-    #<strong>call</strong>(env)  &#x21d2; <tt>Object</tt> 
   
-
   
-
   
-</h3><div class="docstring">
-  <div class="discussion">
-    <p>Returns Can be any type.</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  <p class="tag_title">Parameters:</p>
-<ul class="param">
   
-    <li>
-      
-        <span class='name'>env</span>
-      
-      
-        <span class='type'>(<tt>Hash</tt>)</span>
-      
-      
-      
-    </li>
   
-</ul>
-
-<p class="tag_title">Returns:</p>
-<ul class="return">
   
-    <li>
-      
-      
-        <span class='type'>(<tt>Object</tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'><p>Can be any type.</p>
-</div>
-      
-    </li>
   
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-58
-59
-60
-61
-62
-63
-64
-65
-66
-67
-68
-69
-70
-71
-72
-73</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/middlewares/chain.rb', line 58</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_env'>env</span><span class='rparen'>)</span>
-  <span class='ivar'>@__env__</span> <span class='op'>=</span> <span class='id identifier rubyid_env'>env</span>
-
-  <span class='comment'>##
-</span>  <span class='comment'># IMPORTANT: This is a library code. Do NOT do things like this in your application code.
-</span>  <span class='comment'>#
-</span>  <span class='id identifier rubyid_chain'>chain</span><span class='period'>.</span><span class='id identifier rubyid_instance_variable_set'>instance_variable_set</span><span class='lparen'>(</span><span class='symbol'>:@env</span><span class='comma'>,</span> <span class='id identifier rubyid_env'>env</span><span class='rparen'>)</span>
-
-  <span class='comment'>##
-</span>  <span class='comment'># NOTE: `__send__` is used since `next` is ruby keyword.
-</span>  <span class='comment'># https://ruby-doc.org/core-2.7.0/doc/keywords_rdoc.html
-</span>  <span class='comment'>#
-</span>  <span class='comment'># TODO: Enforce to always pass args, kwargs, block.
-</span>  <span class='comment'>#
-</span>  <span class='id identifier rubyid___send__'>__send__</span><span class='lparen'>(</span><span class='symbol'>:next</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_env'>env</span><span class='lbracket'>[</span><span class='symbol'>:args</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_env'>env</span><span class='lbracket'>[</span><span class='symbol'>:kwargs</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_env'>env</span><span class='lbracket'>[</span><span class='symbol'>:block</span><span class='rbracket'>]</span><span class='rparen'>)</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="chain-instance_method">
   
-    #<strong>chain</strong>  &#x21d2; <tt>ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Chain</tt> 
   
-
   
-
   
-</h3><div class="docstring">
-  <div class="discussion">
-    
-
-  </div>
-</div>
-<div class="tags">
-  
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Chain</tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-103
-104
-105</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/middlewares/chain.rb', line 103</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_chain'>chain</span>
-  <span class='ivar'>@__chain__</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="Chain/Entities.html" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Chain::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Chain/Entities/MethodChain.html" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Chain::Entities::MethodChain (class)">MethodChain</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Chain/Entities/MethodChain.html#initialize-instance_method" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Chain::Entities::MethodChain#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>stack:</span> <span class='ivar'>@__stack__</span><span class='rparen'>)</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="entity-instance_method">
-  
-    #<strong>entity</strong>  &#x21d2; <tt>Class</tt>, <tt>Object</tt> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    
-
-  </div>
-</div>
-<div class="tags">
-  
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>Class</tt>, <tt>Object</tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-81
-82
-83</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/middlewares/chain.rb', line 81</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_entity'>entity</span>
-  <span class='ivar'>@__env__</span><span class='lbracket'>[</span><span class='symbol'>:entity</span><span class='rbracket'>]</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="method-instance_method">
-  
-    #<strong>method</strong>  &#x21d2; <tt>Symbol</tt> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    
-  <div class="note notetag">
-    <strong>Note:</strong>
-    <div class='inline'><p>Try to avoid <code>if</code> conditions based on <code>method</code> value when possible, prefer to create separate middlewares instead.</p>
-</div>
-  </div>
-
-
-
-  </div>
-</div>
-<div class="tags">
-  
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>Symbol</tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-93
-94
-95</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/middlewares/chain.rb', line 93</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_method'>method</span>
-  <span class='ivar'>@__env__</span><span class='lbracket'>[</span><span class='symbol'>:method</span><span class='rbracket'>]</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="next-instance_method">
-  
-    #<strong>next</strong>  &#x21d2; <tt>Object</tt> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    
-  <div class="note notetag">
-    <strong>Note:</strong>
-    <div class='inline'><p>But it completely OK, to omit <code>chain.next(*args, **kwargs, &amp;block)</code> completely.
-This way middleware stack is stopped in the &quot;middle&quot; and its &quot;middle&quot; value is returned.</p>
-</div>
-  </div>
-
-<p>Returns Can be any type.</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-  <div class="examples">
-    <p class="tag_title">Examples:</p>
-    
-      
-        <p class="example_title"><div class='inline'><p>Subclass should call <code>value = chain.next(*args, **kwargs, &amp;block)</code> to trigger next middleware in a stack.</p>
-</div></p>
-      
-      <pre class="example code"><code><span class='kw'>def</span> <span class='kw'>next</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-  <span class='comment'># pre processing...
-</span>
-  <span class='id identifier rubyid_value'>value</span> <span class='op'>=</span> <span class='id identifier rubyid_chain'>chain</span><span class='period'>.</span><span class='id identifier rubyid_next'>next</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-
-  <span class='comment'># post processing...
-</span>
-  <span class='id identifier rubyid_post_processed_value'>post_processed_value</span>
-<span class='kw'>end</span></code></pre>
-    
-  </div>
-
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>Object</tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'><p>Can be any type.</p>
-</div>
-      
-    </li>
-  
-</ul>
-<p class="tag_title">Raises:</p>
-<ul class="raise">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt><span class='object_link'><a href="../../../../../../../Support/AbstractMethod/Errors/AbstractMethodNotOverridden.html" title="ConvenientService::Support::AbstractMethod::Errors::AbstractMethodNotOverridden (class)">ConvenientService::Support::AbstractMethod::Errors::AbstractMethodNotOverridden</a></span></tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'><p>if NOT overridden in descendant.</p>
-</div>
-      
-    </li>
-  
-</ul>
-
-  <p class="tag_title">See Also:</p>
-  <ul class="see">
-    
-      <li><a href="https://refactoring.guru/design-patterns/decorator" target="_parent" title="https://refactoring.guru/design-patterns/decorator">https://refactoring.guru/design-patterns/decorator</a></li>
-    
-      <li><a href="https://refactoring.guru/design-patterns/proxy" target="_parent" title="https://refactoring.guru/design-patterns/proxy">https://refactoring.guru/design-patterns/proxy</a></li>
-    
-      <li><a href="https://refactoring.guru/design-patterns/chain-of-responsibility" target="_parent" title="https://refactoring.guru/design-patterns/chain-of-responsibility">https://refactoring.guru/design-patterns/chain-of-responsibility</a></li>
-    
-  </ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-52</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/middlewares/chain.rb', line 52</span>
-
-<span class='id identifier rubyid_abstract_method'>abstract_method</span> <span class='symbol'>:next</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-  </div>
 
 </div>
 
       <div id="footer">
-  Generated on Thu May  4 15:48:55 2023 by
+  Generated on Sat May  6 18:23:49 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>
