@@ -384,7 +384,7 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/middlewares/chain/concern/instance_methods.rb', line 89</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_chain'>chain</span>
-  <span class='ivar'>@__chain__</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="../Entities.html" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Chain::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Entities/MethodChain.html" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Chain::Entities::MethodChain (class)">MethodChain</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Entities/MethodChain.html#initialize-instance_method" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Chain::Entities::MethodChain#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>stack:</span> <span class='ivar'>@__stack__</span><span class='rparen'>)</span>
+  <span class='ivar'>@__chain__</span> <span class='op'>||=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_chain_class'>chain_class</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='label'>stack:</span> <span class='ivar'>@__stack__</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -615,7 +615,7 @@ This way middleware stack is stopped in the &quot;middle&quot; and its &quot;mid
 </div>
 
       <div id="footer">
-  Generated on Sat May  6 18:23:41 2023 by
+  Generated on Sat May  6 19:02:20 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>
