@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
-require_relative "caller/commands"
-require_relative "caller/concern"
-require_relative "caller/constants"
+require_relative "concern/instance_methods"
+require_relative "concern/class_methods"
 
 module ConvenientService
   module Core
@@ -12,7 +11,11 @@ module ConvenientService
           class MethodMiddlewares
             module Entities
               class Caller
-                include Concern
+                module Constants
+                  INSTANCE_PREFIX = "self.class."
+
+                  CLASS_PREFIX = ""
+                end
               end
             end
           end

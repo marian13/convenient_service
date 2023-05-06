@@ -47,9 +47,9 @@ module ConvenientService
 
                       case hash[:scope]
                       when :instance
-                        Caller.new(prefix: Caller::INSTANCE_PREFIX)
+                        Caller.new(prefix: Constants::INSTANCE_PREFIX)
                       when :class
-                        Caller.new(prefix: Caller::CLASS_PREFIX)
+                        Caller.new(prefix: Constants::CLASS_PREFIX)
                       end
                     end
 

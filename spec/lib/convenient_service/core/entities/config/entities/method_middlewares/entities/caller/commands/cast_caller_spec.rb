@@ -40,7 +40,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
 
           context "when value by `:scope` key is `:instance`" do
             let(:other) { {scope: :instance} }
-            let(:prefix) { ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Caller::INSTANCE_PREFIX }
+            let(:prefix) { ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Caller::Constants::INSTANCE_PREFIX }
 
             it "returns other casted to caller" do
               expect(casted).to eq(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Caller.new(prefix: prefix))
@@ -49,7 +49,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
 
           context "when value by `:scope` key is `:class`" do
             let(:other) { {scope: :class} }
-            let(:prefix) { ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Caller::CLASS_PREFIX }
+            let(:prefix) { ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Caller::Constants::CLASS_PREFIX }
 
             it "returns other casted to caller" do
               expect(casted).to eq(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Caller.new(prefix: prefix))
