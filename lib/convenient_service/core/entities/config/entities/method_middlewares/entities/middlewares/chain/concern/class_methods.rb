@@ -11,6 +11,12 @@ module ConvenientService
                 class Chain < Middlewares::Base
                   module Concern
                     module ClassMethods
+                      ##
+                      # @return [Class]
+                      #
+                      def chain_class
+                        Entities::MethodChain
+                      end
                     end
                   end
                 end

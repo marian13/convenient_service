@@ -87,7 +87,7 @@ module ConvenientService
                       #   NOTE: `@__env__` is set inside `call`.
                       #
                       def chain
-                        @__chain__ ||= Entities::MethodChain.new(stack: @__stack__)
+                        @__chain__ ||= self.class.chain_class.new(stack: @__stack__)
                       end
                     end
                   end

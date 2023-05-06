@@ -90,6 +90,12 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
         expect(middleware_instance.chain).to eq(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Chain::Entities::MethodChain.new(stack: stack))
       end
 
+      specify do
+        expect { middleware_instance.chain }
+          .to delegate_to(middleware_class, :chain_class)
+          .without_arguments
+      end
+
       specify { expect { middleware_instance.chain }.to cache_its_value }
     end
   end
