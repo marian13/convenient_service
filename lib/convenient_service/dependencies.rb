@@ -25,6 +25,11 @@ module ConvenientService
       # @note Expected to be called from app entry points like `initializers` in Rails.
       #
       def require_assigns_attributes_in_constructor_using_active_model_attribute_assignment
+        ##
+        # - https://edgeguides.rubyonrails.org/active_model_basics.html
+        # - https://api.rubyonrails.org/classes/ActiveModel.html
+        # - https://github.com/rails/rails/tree/main/activemodel
+        #
         require "active_model"
 
         require_relative "common/plugins/assigns_attributes_in_constructor/using_active_model_attribute_assignment"
@@ -35,6 +40,10 @@ module ConvenientService
       # @note Expected to be called from app entry points like `initializers` in Rails.
       #
       def require_assigns_attributes_in_constructor_using_dry_initializer
+        ##
+        # - https://dry-rb.org/gems/dry-initializer/main
+        # - https://github.com/dry-rb/dry-initializer
+        #
         require "dry-initializer"
 
         require_relative "common/plugins/assigns_attributes_in_constructor/using_dry_initializer"
@@ -53,6 +62,11 @@ module ConvenientService
       # @note Expected to be called from app entry points like `initializers` in Rails.
       #
       def require_has_attributes_using_active_model_attributes
+        ##
+        # - https://edgeguides.rubyonrails.org/active_model_basics.html
+        # - https://api.rubyonrails.org/classes/ActiveModel.html
+        # - https://github.com/rails/rails/tree/main/activemodel
+        #
         require "active_model"
 
         require_relative "common/plugins/has_attributes/using_active_model_attributes"
@@ -63,6 +77,9 @@ module ConvenientService
       # @note Expected to be called from app entry points like `initializers` in Rails.
       #
       def require_awesome_print_inspect
+        ##
+        # - https://github.com/awesome-print/awesome_print
+        #
         require "awesome_print"
 
         require_relative "service/plugins/has_awesome_print_inspect"
@@ -94,6 +111,11 @@ module ConvenientService
       # @see https://marian13.github.io/convenient_service_docs/troubleshooting/i18n_translate_wrong_number_of_arguments
       #
       def require_has_result_params_validations_using_active_model_validations
+        ##
+        # - https://edgeguides.rubyonrails.org/active_model_basics.html
+        # - https://api.rubyonrails.org/classes/ActiveModel.html
+        # - https://github.com/rails/rails/tree/main/activemodel
+        #
         require "active_model"
 
         require_relative "service/plugins/has_result_params_validations/using_active_model_validations"
@@ -104,6 +126,10 @@ module ConvenientService
       # @note Expected to be called from app entry points like `initializers` in Rails.
       #
       def require_has_result_params_validations_using_dry_validation
+        ##
+        # - https://dry-rb.org/gems/dry-validation/main/
+        # - https://github.com/dry-rb/dry-validation
+        #
         require "dry-validation"
 
         require_relative "service/plugins/has_result_params_validations/using_dry_validation"
@@ -135,14 +161,43 @@ module ConvenientService
       #   - https://github.com/deivid-rodriguez/byebug/issues/179#issuecomment-152727003
       #
       def require_development_tools
+        ##
+        # - https://github.com/awesome-print/awesome_print
+        #
         require "awesome_print"
+
+        ##
+        # - https://github.com/deivid-rodriguez/byebug
+        #
         require "byebug" unless ruby.jruby?
+
+        ##
+        # - https://ruby-doc.org/stdlib-2.7.0/libdoc/ostruct/rdoc/OpenStruct.html
+        # - https://github.com/ruby/ostruct
+        #
         require "ostruct"
+
+        ##
+        # - https://github.com/janlelis/paint
+        #
         require "paint"
+
+        ##
+        # - https://github.com/rouge-ruby/rouge
+        #
         require "rouge"
+
+        ##
+        # - https://ruby-doc.org/stdlib-2.7.0/libdoc/tempfile/rdoc/Tempfile.html
+        # - https://github.com/ruby/tempfile
+        #
         require "tempfile"
 
+        ##
+        # - https://gist.github.com/marian13/5dade20a431d7254db30e543167058ce
+        #
         require_relative "dependencies/extractions/byebug_syntax_highlighting" unless ruby.jruby?
+
         require_relative "dependencies/extractions/b" unless ruby.jruby?
       end
 
@@ -151,8 +206,21 @@ module ConvenientService
       # @note Expected to be called from `spec_helper.rb`.
       #
       def require_test_tools
+        ##
+        # - https://github.com/faker-ruby/faker
+        #
         require "faker"
+
+        ##
+        # - https://ruby-doc.org/stdlib-2.7.0/libdoc/ostruct/rdoc/OpenStruct.html
+        # - https://github.com/ruby/ostruct
+        #
         require "ostruct"
+
+        ##
+        # - https://ruby-doc.org/stdlib-2.7.0/libdoc/tempfile/rdoc/Tempfile.html
+        # - https://github.com/ruby/tempfile
+        #
         require "tempfile"
       end
 
@@ -177,8 +245,21 @@ module ConvenientService
       # @api private
       #
       def require_standard_examples
+        ##
+        # - https://ruby-doc.org/stdlib-2.7.0/libdoc/json/rdoc/JSON.html
+        # - https://github.com/flori/json
+        #
         require "json"
+
+        ##
+        # - https://github.com/jfelchner/ruby-progressbar
+        #
         require "progressbar"
+
+        ##
+        # - https://ruby-doc.org/stdlib-2.7.0/libdoc/webrick/rdoc/WEBrick.html
+        # - https://github.com/ruby/webrick
+        #
         require "webrick"
 
         require_relative "examples/standard/cowsay"
@@ -194,8 +275,21 @@ module ConvenientService
       # @api private
       #
       def require_rails_examples
+        ##
+        # - https://ruby-doc.org/stdlib-2.7.0/libdoc/json/rdoc/JSON.html
+        # - https://github.com/flori/json
+        #
         require "json"
+
+        ##
+        # - https://github.com/jfelchner/ruby-progressbar
+        #
         require "progressbar"
+
+        ##
+        # - https://ruby-doc.org/stdlib-2.7.0/libdoc/webrick/rdoc/WEBrick.html
+        # - https://github.com/ruby/webrick
+        #
         require "webrick"
 
         require_relative "examples/rails/gemfile"
@@ -208,8 +302,21 @@ module ConvenientService
       # @api private
       #
       def require_dry_examples
+        ##
+        # - https://ruby-doc.org/stdlib-2.7.0/libdoc/json/rdoc/JSON.html
+        # - https://github.com/flori/json
+        #
         require "json"
+
+        ##
+        # - https://github.com/jfelchner/ruby-progressbar
+        #
         require "progressbar"
+
+        ##
+        # - https://ruby-doc.org/stdlib-2.7.0/libdoc/webrick/rdoc/WEBrick.html
+        # - https://github.com/ruby/webrick
+        #
         require "webrick"
 
         require_relative "examples/dry/gemfile"
