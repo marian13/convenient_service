@@ -6,10 +6,12 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Service::Plugins::CanHaveTryResult::Middleware do
+  let(:middleware) { described_class }
+
   example_group "inheritance" do
     include ConvenientService::RSpec::Matchers::BeDescendantOf
 
-    subject { described_class }
+    subject { middleware }
 
     it { is_expected.to be_descendant_of(ConvenientService::MethodChainMiddleware) }
   end
@@ -23,7 +25,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveTryResult::Middleware
       end
 
       it "returns intended methods" do
-        expect(described_class.intended_methods).to eq(spec.intended_methods)
+        expect(middleware.intended_methods).to eq(spec.intended_methods)
       end
     end
   end
@@ -38,14 +40,20 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveTryResult::Middleware
 
       subject(:method_value) { method.call }
 
-      let(:method) { wrap_method(service_instance, :try_result, middlewares: described_class) }
+      let(:method) { wrap_method(service_instance, :try_result, middleware: middleware) }
 
       let(:service_class) do
-        Class.new do
-          include ConvenientService::Configs::Standard
+        Class.new.tap do |klass|
+          klass.class_exec(middleware) do |middleware|
+            include ConvenientService::Configs::Standard
 
-          def try_result
-            success
+            middlewares :try_result do
+              observe middleware
+            end
+
+            def try_result
+              success
+            end
           end
         end
       end
@@ -65,11 +73,17 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveTryResult::Middleware
 
       context "when `result` is NOT result" do
         let(:service_class) do
-          Class.new do
-            include ConvenientService::Configs::Standard
+          Class.new.tap do |klass|
+            klass.class_exec(middleware) do |middleware|
+              include ConvenientService::Configs::Standard
 
-            def try_result
-              "string value"
+              middlewares :try_result do
+                observe middleware
+              end
+
+              def try_result
+                "string value"
+              end
             end
           end
         end
@@ -93,11 +107,17 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveTryResult::Middleware
       context "when `result` is result" do
         context "when `result` is NOT success" do
           let(:service_class) do
-            Class.new do
-              include ConvenientService::Configs::Standard
+            Class.new.tap do |klass|
+              klass.class_exec(middleware) do |middleware|
+                include ConvenientService::Configs::Standard
 
-              def try_result
-                error
+                middlewares :try_result do
+                  observe middleware
+                end
+
+                def try_result
+                  error
+                end
               end
             end
           end
@@ -120,11 +140,17 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveTryResult::Middleware
 
         context "when `result` is success" do
           let(:service_class) do
-            Class.new do
-              include ConvenientService::Configs::Standard
+            Class.new.tap do |klass|
+              klass.class_exec(middleware) do |middleware|
+                include ConvenientService::Configs::Standard
 
-              def try_result
-                success
+                middlewares :try_result do
+                  observe middleware
+                end
+
+                def try_result
+                  success
+                end
               end
             end
           end
