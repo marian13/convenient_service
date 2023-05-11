@@ -1,17 +1,19 @@
 # frozen_string_literal: true
 
 ##
-# TODO: Gemfile with Rails.
+# TODO: Gemfile with Rails and SQL database.
 #
 # require "spec_helper"
 #
 # require "convenient_service"
 #
 # RSpec.describe ConvenientService::Service::Plugins::WrapsResultInDbTransaction::Middleware do
+#   let(:middleware) { described_class }
+#
 #   example_group "inheritance" do
 #     include ConvenientService::RSpec::Matchers::BeDescendantOf
 #
-#     subject { described_class }
+#     subject { middleware }
 #
 #     it { is_expected.to be_descendant_of(ConvenientService::MethodChainMiddleware) }
 #   end
@@ -25,7 +27,7 @@
 #       end
 #
 #       it "returns intended methods" do
-#         expect(described_class.intended_methods).to eq(spec.intended_methods)
+#         expect(middleware.intended_methods).to eq(spec.intended_methods)
 #       end
 #     end
 #   end
@@ -37,12 +39,22 @@
 #
 #       subject(:method_value) { method.call }
 #
-#       let(:method) { wrap_method(service_instance, :result, middlewares: described_class) }
+#       let(:method) { wrap_method(service_instance, :result, middleware: middleware) }
 #
 #       let(:service_class) do
-#         Class.new do
-#           def result
-#             "result value"
+#         Class.new.tap do |klass|
+#           klass.class_exec(middleware) do |middleware|
+#             include ConvenientService::Configs::Standard
+#
+#             middlewares :result do
+#               delete ConvenientService::Service::Plugins::HasResult::Middleware
+#
+#               use_and_observe middleware
+#             end
+#
+#             def result
+#               "result value"
+#             end
 #           end
 #         end
 #       end
@@ -64,11 +76,11 @@
 #         expect(method_value).to eq("transaction value")
 #       end
 #
-#       specify {
+#       specify do
 #         expect { method_value }
 #           .to call_chain_next.on(method)
 #           .and_return_its_value
-#       }
+#       end
 #     end
 #   end
 # end
