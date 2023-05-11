@@ -8,12 +8,15 @@ return unless defined? ConvenientService::Common::Plugins::AssignsAttributesInCo
 
 # rubocop:disable RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Common::Plugins::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment::Middleware do
+  include ConvenientService::RSpec::Matchers::DelegateTo
+
   let(:concern) { ConvenientService::Common::Plugins::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment::Concern }
+  let(:middleware) { described_class }
 
   example_group "inheritance" do
     include ConvenientService::RSpec::Matchers::BeDescendantOf
 
-    subject { described_class }
+    subject { middleware }
 
     it { is_expected.to be_descendant_of(ConvenientService::MethodChainMiddleware) }
   end
@@ -27,7 +30,7 @@ RSpec.describe ConvenientService::Common::Plugins::AssignsAttributesInConstructo
       end
 
       it "returns intended methods" do
-        expect(described_class.intended_methods).to eq(spec.intended_methods)
+        expect(middleware.intended_methods).to eq(spec.intended_methods)
       end
     end
   end
@@ -39,17 +42,22 @@ RSpec.describe ConvenientService::Common::Plugins::AssignsAttributesInConstructo
 
       subject(:method_value) { method.call(*args, **kwargs, &block) }
 
-      let(:method) { wrap_method(service_instance, :initialize, middlewares: described_class) }
+      let(:method) { wrap_method(service_instance, :initialize, middleware: middleware) }
 
       let(:service_class) do
         Class.new.tap do |service_class|
-          service_class.class_exec(concern) do |concern|
-            include concern
+          service_class.class_exec(concern, middleware) do |concern, middleware|
+            include ConvenientService::Configs::Standard
+
+            concerns do
+              use concern
+            end
+
+            middlewares :initialize do
+              use_and_observe middleware
+            end
 
             attr_accessor :foo
-
-            def initialize(*args, **kwargs, &block)
-            end
           end
         end
       end
@@ -60,26 +68,17 @@ RSpec.describe ConvenientService::Common::Plugins::AssignsAttributesInConstructo
       let(:kwargs) { {foo: :bar} }
       let(:block) { proc { :foo } }
 
-      specify {
+      specify do
         expect { method_value }
           .to call_chain_next.on(method)
           .with_arguments(*args, **kwargs, &block)
-      }
-
-      ##
-      # NOTE: disabled `RSpec/AnyInstance` in order to check method call in `initialize`.
-      #
-      # rubocop:disable RSpec/AnyInstance
-      it "calls `assign_attributes` with `kwargs` (from `ActiveModel::AttributeAssignment`)" do
-        ##
-        # https://relishapp.com/rspec/rspec-mocks/v/3-10/docs/working-with-legacy-code/any-instance
-        # https://stackoverflow.com/questions/40025889/rspec-how-to-test-if-object-sends-messages-to-self-in-initialize
-        #
-        expect_any_instance_of(service_class).to receive(:assign_attributes).with(kwargs).and_call_original
-
-        method_value
       end
-      # rubocop:enable RSpec/AnyInstance
+
+      specify do
+        expect { method_value }
+          .to delegate_to(service_instance, :assign_attributes)
+          .with_arguments(kwargs)
+      end
     end
   end
 end
