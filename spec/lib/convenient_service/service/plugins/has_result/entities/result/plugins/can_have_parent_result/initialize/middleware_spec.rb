@@ -6,10 +6,12 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanHaveParentResult::Initialize::Middleware do
+  let(:middleware) { described_class }
+
   example_group "inheritance" do
     include ConvenientService::RSpec::Matchers::BeDescendantOf
 
-    subject { described_class }
+    subject { middleware }
 
     it { is_expected.to be_descendant_of(ConvenientService::MethodChainMiddleware) }
   end
@@ -23,7 +25,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
       end
 
       it "returns intended methods" do
-        expect(described_class.intended_methods).to eq(spec.intended_methods)
+        expect(middleware.intended_methods).to eq(spec.intended_methods)
       end
     end
   end
@@ -36,17 +38,22 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
 
       subject(:method_value) { method.call(**attributes) }
 
-      ##
-      # TODO: Factory for result without middlewares.
-      #
-      let(:method) { wrap_method(result, :initialize, middlewares: described_class) }
+      let(:method) { wrap_method(result, :initialize, middleware: middleware) }
 
       let(:service) do
-        Class.new do
-          include ConvenientService::Configs::Minimal
+        Class.new.tap do |klass|
+          klass.class_exec(middleware) do |middleware|
+            include ConvenientService::Configs::Standard
 
-          def result
-            success
+            self::Result.class_exec(middleware) do |middleware|
+              middlewares :initialize do
+                observe middleware
+              end
+            end
+
+            def result
+              success
+            end
           end
         end
       end
