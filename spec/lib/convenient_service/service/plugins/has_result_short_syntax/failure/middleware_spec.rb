@@ -6,10 +6,14 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Service::Plugins::HasResultShortSyntax::Failure::Middleware do
+  include ConvenientService::RSpec::Matchers::DelegateTo
+
+  let(:middleware) { described_class }
+
   example_group "inheritance" do
     include ConvenientService::RSpec::Matchers::BeDescendantOf
 
-    subject { described_class }
+    subject { middleware }
 
     it { is_expected.to be_descendant_of(ConvenientService::MethodChainMiddleware) }
   end
@@ -23,7 +27,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultShortSyntax::Failur
       end
 
       it "returns intended methods" do
-        expect(described_class.intended_methods).to eq(spec.intended_methods)
+        expect(middleware.intended_methods).to eq(spec.intended_methods)
       end
     end
   end
@@ -35,48 +39,26 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultShortSyntax::Failur
 
       subject(:method_value) { method.call }
 
-      let(:method) { wrap_method(service_instance, :failure, middlewares: described_class) }
+      let(:method) { wrap_method(service_instance, :failure, middleware: middleware) }
 
       let(:service_instance) { service_class.new }
 
       let(:service_class) do
-        Class.new do
-          include ConvenientService::Service::Plugins::HasResult::Concern
+        Class.new.tap do |klass|
+          klass.class_exec(middleware) do |middleware|
+            include ConvenientService::Configs::Standard
 
-          # rubocop:disable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
-          class self::Result
-            include ConvenientService::Core
-
-            concerns do
-              use ConvenientService::Common::Plugins::HasInternals::Concern
-              use ConvenientService::Common::Plugins::HasConstructor::Concern
-              use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Concern
-            end
-
-            middlewares :initialize do
-              use ConvenientService::Common::Plugins::NormalizesEnv::Middleware
-
-              use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Middleware
-            end
-
-            class self::Internals
-              include ConvenientService::Core
-
-              concerns do
-                use ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Plugins::HasCache::Concern
-              end
+            middlewares :failure do
+              observe middleware
             end
           end
-          # rubocop:enable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
         end
       end
 
-      it "delegates to `ConvenientService::Service::Plugins::HasResultShortSyntax::Failure::Commands::RefuteKwargsContainDataAndExtraKeys`" do
-        allow(ConvenientService::Service::Plugins::HasResultShortSyntax::Failure::Commands::RefuteKwargsContainDataAndExtraKeys).to receive(:call).with(hash_including(kwargs: {})).and_call_original
-
-        method_value
-
-        expect(ConvenientService::Service::Plugins::HasResultShortSyntax::Failure::Commands::RefuteKwargsContainDataAndExtraKeys).to have_received(:call)
+      specify do
+        expect { method_value }
+          .to delegate_to(ConvenientService::Service::Plugins::HasResultShortSyntax::Failure::Commands::RefuteKwargsContainDataAndExtraKeys, :call)
+          .with_arguments(kwargs: {})
       end
 
       context "when `kwargs` do NOT passed" do
