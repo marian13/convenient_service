@@ -5,7 +5,7 @@
 #
 # @internal
 #   https://github.com/marian13/convenient_service/wiki/Docs:-Dependencies
-#
+##
 
 ##
 # @internal
@@ -23,8 +23,17 @@ require "logger"
 
 ##
 # @internal
+#   - https://ruby-doc.org/stdlib-2.7.0/libdoc/observer/rdoc/Observable.html
+#   - https://github.com/ruby/observer
+#
+require "observer"
+
+##
+# @internal
 #   - https://ruby-doc.org/stdlib-2.7.0/libdoc/ostruct/rdoc/OpenStruct.html
 #   - https://github.com/ruby/ostruct
+#
+#   TODO: Move `ostruct` to test dependencies.
 #
 require "ostruct"
 
