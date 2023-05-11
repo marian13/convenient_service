@@ -6,10 +6,12 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Service::Plugins::CanHaveMethodSteps::Middleware do
+  let(:middleware) { described_class }
+
   example_group "inheritance" do
     include ConvenientService::RSpec::Matchers::BeDescendantOf
 
-    subject { described_class }
+    subject { middleware }
 
     it { is_expected.to be_descendant_of(ConvenientService::MethodChainMiddleware) }
   end
@@ -23,7 +25,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveMethodSteps::Middlewa
       end
 
       it "returns intended methods" do
-        expect(described_class.intended_methods).to eq(spec.intended_methods)
+        expect(middleware.intended_methods).to eq(spec.intended_methods)
       end
     end
   end
@@ -34,17 +36,21 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveMethodSteps::Middlewa
 
       subject(:method_value) { method.call(*args, **kwargs) }
 
-      let(:method) { wrap_method(service_class, :step, middlewares: described_class) }
+      let(:method) { wrap_method(service_class, :step, middleware: middleware) }
 
       let(:args) { [step_service] }
       let(:kwargs) { {container: container, organizer: organizer} }
 
       let(:service_class) do
-        Class.new do
-          include ConvenientService::Configs::Minimal
+        Class.new.tap do |klass|
+          klass.class_exec(middleware) do |middleware|
+            include ConvenientService::Configs::Minimal
 
-          middlewares :step, scope: :class do
-            delete ConvenientService::Service::Plugins::CanHaveResultStep::Middleware
+            middlewares :step, scope: :class do
+              delete ConvenientService::Service::Plugins::CanHaveResultStep::Middleware
+
+              observe middleware
+            end
           end
         end
       end
