@@ -6,10 +6,14 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Service::Plugins::RaisesOnDoubleResult::Middleware do
+  include ConvenientService::RSpec::Matchers::DelegateTo
+
+  let(:middleware) { described_class }
+
   example_group "inheritance" do
     include ConvenientService::RSpec::Matchers::BeDescendantOf
 
-    subject { described_class }
+    subject { middleware }
 
     it { is_expected.to be_descendant_of(ConvenientService::MethodChainMiddleware) }
   end
@@ -23,7 +27,7 @@ RSpec.describe ConvenientService::Service::Plugins::RaisesOnDoubleResult::Middle
       end
 
       it "returns intended methods" do
-        expect(described_class.intended_methods).to eq(spec.intended_methods)
+        expect(middleware.intended_methods).to eq(spec.intended_methods)
       end
     end
   end
@@ -35,27 +39,25 @@ RSpec.describe ConvenientService::Service::Plugins::RaisesOnDoubleResult::Middle
 
       subject(:method_value) { method.call }
 
-      let(:method) { wrap_method(service_instance, method_name, middlewares: described_class) }
+      let(:method) { wrap_method(service_instance, method_name, middleware: middleware) }
 
-      # rubocop:disable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
       let(:service_class) do
         Class.new.tap do |klass|
-          klass.class_exec(result_original_value) do |result_original_value|
-            include ConvenientService::Common::Plugins::HasInternals::Concern
-            include ConvenientService::Service::Plugins::HasResult::Concern
+          klass.class_exec(middleware) do |middleware|
+            include ConvenientService::Configs::Standard
 
-            class self::Internals
-              include ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Plugins::HasCache::Concern
+            middlewares :result do
+              use_and_observe middleware
             end
 
-            define_method(:result) { result_original_value }
+            def result
+              success
+            end
           end
         end
       end
-      # rubocop:enable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
 
       let(:service_instance) { service_class.new }
-      let(:result_original_value) { "result original value" }
 
       let(:method_name) { :result }
       let(:key) { ConvenientService::Service::Plugins::RaisesOnDoubleResult::Entities::Key.new(method: method_name, args: [], kwargs: {}, block: nil) }
@@ -65,19 +67,17 @@ RSpec.describe ConvenientService::Service::Plugins::RaisesOnDoubleResult::Middle
           service_instance.internals.cache.delete(:has_result)
         end
 
-        it "writes `true` to cache with `has_result` key" do
-          allow(service_instance.internals.cache).to receive(:write).with(:has_result, true).and_call_original
-
-          method_value
-
-          expect(service_instance.internals.cache).to have_received(:write)
+        specify do
+          expect { method_value }
+            .to delegate_to(service_instance.internals.cache, :write)
+            .with_arguments(:has_result, true)
         end
 
-        specify {
+        specify do
           expect { method_value }
             .to call_chain_next.on(method)
             .and_return_its_value
-        }
+        end
       end
 
       context "when service has result" do
@@ -116,10 +116,10 @@ RSpec.describe ConvenientService::Service::Plugins::RaisesOnDoubleResult::Middle
         # NOTE: Error is NOT the purpose of this spec. That is why it is caught.
         # But if it is NOT caught, the spec should fail.
         #
-        specify {
+        specify do
           expect { ignoring_error(ConvenientService::Service::Plugins::RaisesOnDoubleResult::Errors::DoubleResult) { method_value } }
             .not_to call_chain_next.on(method)
-        }
+        end
       end
     end
   end
