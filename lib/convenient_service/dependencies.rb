@@ -137,6 +137,7 @@ module ConvenientService
       def require_development_tools
         require "awesome_print"
         require "byebug" unless ruby.jruby?
+        require "ostruct"
         require "paint"
         require "rouge"
         require "tempfile"
@@ -151,6 +152,8 @@ module ConvenientService
       #
       def require_test_tools
         require "faker"
+        require "ostruct"
+        require "tempfile"
       end
 
       ##
@@ -163,8 +166,6 @@ module ConvenientService
         require "rspec/expectations"
         require "rspec/matchers"
         require "rspec/mocks"
-
-        require "tempfile"
 
         require_relative "rspec"
       end
