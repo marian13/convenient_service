@@ -8,10 +8,12 @@ return unless defined? ConvenientService::Service::Plugins::HasResultParamsValid
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Service::Plugins::HasResultParamsValidations::UsingDryValidation::Middleware do
+  let(:middleware) { described_class }
+
   example_group "inheritance" do
     include ConvenientService::RSpec::Matchers::BeDescendantOf
 
-    subject { described_class }
+    subject { middleware }
 
     it { is_expected.to be_descendant_of(ConvenientService::MethodChainMiddleware) }
   end
@@ -25,7 +27,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultParamsValidations::
       end
 
       it "returns intended methods" do
-        expect(described_class.intended_methods).to eq(spec.intended_methods)
+        expect(middleware.intended_methods).to eq(spec.intended_methods)
       end
     end
   end
@@ -38,98 +40,26 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultParamsValidations::
 
       subject(:method_value) { method.call }
 
-      let(:method) { wrap_method(service_instance, method_name, middlewares: described_class) }
+      let(:method) { wrap_method(service_instance, method_name, middleware: middleware) }
       let(:method_name) { :result }
 
-      # rubocop:disable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
       let(:service_class) do
-        Class.new do
-          include ConvenientService::Common::Plugins::HasInternals::Concern
-          include ConvenientService::Common::Plugins::CachesConstructorParams::Concern
-          include ConvenientService::Service::Plugins::HasResult::Concern
-          include ConvenientService::Service::Plugins::HasResultParamsValidations::UsingDryValidation::Concern
-
-          class self::Result
-            include ConvenientService::Core
+        Class.new.tap do |klass|
+          klass.class_exec(middleware) do |middleware|
+            include ConvenientService::Standard::Config
 
             concerns do
-              use ConvenientService::Common::Plugins::HasInternals::Concern
-              use ConvenientService::Common::Plugins::HasConstructor::Concern
-              use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Concern
+              use ConvenientService::Service::Plugins::HasResultParamsValidations::UsingDryValidation::Concern
             end
 
-            middlewares :initialize do
-              use ConvenientService::Common::Plugins::NormalizesEnv::Middleware
-
-              use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Middleware
+            middlewares :result do
+              use_and_observe middleware
             end
 
-            class self::Internals
-              include ConvenientService::Core
-
-              concerns do
-                use ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Plugins::HasCache::Concern
+            contract do
+              params do
+                required(:foo).value(:string, max_size?: 2)
               end
-            end
-          end
-
-          class self::Internals
-            include ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Plugins::HasCache::Concern
-          end
-
-          contract do
-            params do
-              required(:foo).value(:string, max_size?: 2)
-            end
-          end
-
-          def result
-            success
-          end
-        end
-      end
-      # rubocop:enable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
-
-      let(:service_instance) { service_class.new }
-
-      context "when contact does NOT have schema" do
-        ##
-        # TODO: Factories. Highest priority.
-        #
-        # rubocop:disable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
-        let(:service_class) do
-          Class.new do
-            include ConvenientService::Common::Plugins::HasInternals::Concern
-            include ConvenientService::Common::Plugins::CachesConstructorParams::Concern
-            include ConvenientService::Service::Plugins::HasResult::Concern
-            include ConvenientService::Service::Plugins::HasResultParamsValidations::UsingDryValidation::Concern
-
-            class self::Result
-              include ConvenientService::Core
-
-              concerns do
-                use ConvenientService::Common::Plugins::HasInternals::Concern
-                use ConvenientService::Common::Plugins::HasConstructor::Concern
-                use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Concern
-              end
-
-              middlewares :initialize do
-                use ConvenientService::Common::Plugins::NormalizesEnv::Middleware
-
-                use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Middleware
-              end
-
-              class self::Internals
-                include ConvenientService::Core
-
-                concerns do
-                  use ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Plugins::HasCache::Concern
-                end
-              end
-            end
-
-            class self::Internals
-              include ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Plugins::HasCache::Concern
             end
 
             def result
@@ -137,7 +67,36 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultParamsValidations::
             end
           end
         end
-        # rubocop:enable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
+      end
+
+      let(:service_instance) { service_class.new }
+
+      context "when contact does NOT have schema" do
+        let(:service_class) do
+          Class.new.tap do |klass|
+            klass.class_exec(middleware) do |middleware|
+              include ConvenientService::Standard::Config
+
+              concerns do
+                use ConvenientService::Service::Plugins::HasResultParamsValidations::UsingDryValidation::Concern
+              end
+
+              middlewares :result do
+                use_and_observe middleware
+              end
+
+              contract do
+                params do
+                  required(:foo).value(:string, max_size?: 2)
+                end
+              end
+
+              def result
+                success
+              end
+            end
+          end
+        end
 
         before do
           service_instance.internals.cache.write(:constructor_params, ConvenientService::Common::Plugins::CachesConstructorParams::Entities::ConstructorParams.new(kwargs: {foo: "x"}))
