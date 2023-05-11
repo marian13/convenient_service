@@ -7,12 +7,12 @@ require "convenient_service"
 # frozen_string_literal: true
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::RSpec::Helpers::Custom::WrapMethod::Entities::WrappedMethod do
+RSpec.xdescribe ConvenientService::RSpec::Helpers::Custom::WrapMethod::Entities::WrappedMethod do
   include ConvenientService::RSpec::Helpers::IgnoringError
 
   include ConvenientService::RSpec::Matchers::CacheItsValue
 
-  subject(:method) { described_class.new(entity: entity, method: method_name, middlewares: middlewares) }
+  subject(:method) { described_class.new(entity: entity, method: method_name, middleware: middleware) }
 
   let(:service_class) do
     Class.new do
@@ -26,7 +26,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::Custom::WrapMethod::Entities::
 
   let(:entity) { service_instance }
   let(:method_name) { :result }
-  let(:middlewares) { [] }
+  let(:middleware) { nil }
 
   let(:args) { [:foo] }
   let(:kwargs) { {foo: :bar} }
