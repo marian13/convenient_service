@@ -14,7 +14,7 @@ module ConvenientService
             @object = object
 
             ##
-            # TODO: Use `Utils::Object.resolve_class` to support `have_alias_method` for classes.
+            # TODO: Use `Utils::Object.duck_class` to support `have_alias_method` for classes.
             #
             return false unless Utils::Method.defined?(original_name, object.class, private: true)
 

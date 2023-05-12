@@ -58,7 +58,7 @@ module ConvenientService
       # @return [Class]
       #
       def klass
-        @klass ||= Utils::Object.resolve_class(object)
+        @klass ||= Utils::Object.duck_class(object)
       end
     end
   end
