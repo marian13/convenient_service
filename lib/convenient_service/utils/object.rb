@@ -53,8 +53,6 @@ module ConvenientService
           MemoizeIncludingFalsyValues.call(...)
         end
 
-
-
         ##
         # @example
         #   ConvenientService::Utils::Object.resolve_type("foo")
