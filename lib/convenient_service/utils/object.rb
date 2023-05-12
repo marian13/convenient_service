@@ -1,15 +1,32 @@
 # frozen_string_literal: true
 
+require_relative "object/clamp_class"
+require_relative "object/duck_class"
 require_relative "object/instance_variable_delete"
 require_relative "object/instance_variable_fetch"
 require_relative "object/memoize_including_falsy_values"
-require_relative "object/duck_class"
 require_relative "object/resolve_type"
 
 module ConvenientService
   module Utils
     module Object
       class << self
+        ##
+        # @example
+        #   ConvenientService::Utils::Object.clamp_class("foo")
+        #
+        def clamp_class(...)
+          ClampClass.call(...)
+        end
+
+        ##
+        # @example
+        #   ConvenientService::Utils::Object.duck_class("foo")
+        #
+        def duck_class(...)
+          DuckClass.call(...)
+        end
+
         ##
         # @example
         #   ConvenientService::Utils::Object.instance_variable_delete("abc", :@foo)
@@ -36,13 +53,7 @@ module ConvenientService
           MemoizeIncludingFalsyValues.call(...)
         end
 
-        ##
-        # @example
-        #   ConvenientService::Utils::Object.duck_class("foo")
-        #
-        def duck_class(...)
-          DuckClass.call(...)
-        end
+
 
         ##
         # @example

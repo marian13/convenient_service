@@ -7,6 +7,28 @@ require "convenient_service"
 RSpec.describe ConvenientService::Utils::Object do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
+  describe ".clamp_class" do
+    let(:object) { :foo }
+
+    specify do
+      expect { described_class.clamp_class(object) }
+        .to delegate_to(ConvenientService::Utils::Object::ClampClass, :call)
+        .with_arguments(object)
+        .and_return_its_value
+    end
+  end
+
+  describe ".duck_class" do
+    let(:object) { :foo }
+
+    specify do
+      expect { described_class.duck_class(object) }
+        .to delegate_to(ConvenientService::Utils::Object::DuckClass, :call)
+        .with_arguments(object)
+        .and_return_its_value
+    end
+  end
+
   describe ".instance_variable_delete" do
     let(:object) { Object.new }
     let(:ivar_name) { :@foo }
@@ -41,17 +63,6 @@ RSpec.describe ConvenientService::Utils::Object do
       expect { described_class.memoize_including_falsy_values(object, ivar_name, &value_block) }
         .to delegate_to(ConvenientService::Utils::Object::MemoizeIncludingFalsyValues, :call)
         .with_arguments(object, ivar_name, &value_block)
-        .and_return_its_value
-    end
-  end
-
-  describe ".duck_class" do
-    let(:object) { :foo }
-
-    specify do
-      expect { described_class.duck_class(object) }
-        .to delegate_to(ConvenientService::Utils::Object::DuckClass, :call)
-        .with_arguments(object)
         .and_return_its_value
     end
   end
