@@ -9,8 +9,16 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   let(:middleware_creator) { described_class.new(middleware: middleware, arguments: arguments) }
-  let(:middleware) { Class.new(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Chain) }
+  let(:middleware) { Class.new(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Base) }
   let(:arguments) { ConvenientService::Support::Arguments.new(:foo, foo: :bar) { :foo } }
+
+  example_group "inheritance" do
+    include ConvenientService::RSpec::Matchers::BeDescendantOf
+
+    subject { described_class }
+
+    it { is_expected.to be_descendant_of(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::MiddlewareCreators::Base) }
+  end
 
   example_group "class methods" do
     describe ".new" do
@@ -33,14 +41,8 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
       it { is_expected.to have_attr_reader(:arguments) }
     end
 
-    describe "#decorated_middleware" do
-      it "returns middleware" do
-        expect(middleware_creator.decorated_middleware).to eq(middleware)
-      end
-    end
-
     describe "#extra_kwargs" do
-      it "returns empty hash" do
+      it "returns extra kwargs" do
         expect(middleware_creator.extra_kwargs).to eq({arguments: middleware_creator.arguments})
       end
     end
