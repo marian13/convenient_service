@@ -21,21 +21,41 @@ module ConvenientService
                   module Concern
                     module ClassMethods
                       ##
-                      # @return [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::MiddlewareCreator]
+                      # @return [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::MiddlewareCreators::With]
                       #
                       def with(...)
-                        Entities::MiddlewareCreator.new(middleware: self, arguments: Support::Arguments.new(...))
+                        Entities::MiddlewareCreators::With.new(middleware: self, arguments: Support::Arguments.new(...))
+                      end
+
+                      ##
+                      # @return [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::MiddlewareCreators::Observable]
+                      #
+                      def observable
+                        Entities::MiddlewareCreators::Observable.new(middleware: self)
+                      end
+
+                      ##
+                      # @return [Hash{Symbol => Object}]
+                      #
+                      def extra_kwargs
+                        {}
                       end
 
                       ##
                       # @return [Array<ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Structs::IntendedMethod>]
                       #
                       # @internal
-                      #   TODO: Wrap with `WeakRef` to reduce memory consumption.
-                      #   TODO: Direct specs.
+                      #   TODO: Consider to wrap with `WeakRef` to reduce memory consumption.
                       #
                       def intended_methods
                         @intended_methods ||= []
+                      end
+
+                      ##
+                      # @return [Class]
+                      #
+                      def to_observable_middleware
+                        Commands::CreateObservableMiddleware.call(middleware: self)
                       end
 
                       private
