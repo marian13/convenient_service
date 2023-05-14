@@ -36,7 +36,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveResultStep::Middlewar
 
       subject(:method_value) { method.call(*args, **kwargs) }
 
-      let(:method) { wrap_method(service_class, :step, middleware: middleware) }
+      let(:method) { wrap_method(service_class, :step, observe_middleware: middleware) }
 
       let(:args) { [step_service] }
       let(:kwargs) { {container: container, organizer: organizer} }

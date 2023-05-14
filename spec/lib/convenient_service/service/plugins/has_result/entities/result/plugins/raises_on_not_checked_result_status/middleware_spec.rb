@@ -39,7 +39,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
 
       subject(:method_value) { method.call }
 
-      let(:method) { wrap_method(result, method_name, middleware: middleware) }
+      let(:method) { wrap_method(result, method_name, observe_middleware: middleware) }
 
       let(:service) do
         Class.new.tap do |klass|

@@ -38,7 +38,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
 
       subject(:method_value) { method.call(**kwargs) }
 
-      let(:method) { wrap_method(result, :initialize, middleware: middleware) }
+      let(:method) { wrap_method(result, :initialize, observe_middleware: middleware) }
 
       let(:kwargs) do
         {

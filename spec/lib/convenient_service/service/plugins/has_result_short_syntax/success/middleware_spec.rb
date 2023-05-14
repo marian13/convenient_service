@@ -39,7 +39,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultShortSyntax::Succes
 
       subject(:method_value) { method.call }
 
-      let(:method) { wrap_method(service_instance, :success, middleware: middleware) }
+      let(:method) { wrap_method(service_instance, :success, observe_middleware: middleware) }
 
       let(:service_instance) { service_class.new }
 

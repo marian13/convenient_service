@@ -42,7 +42,7 @@ RSpec.describe ConvenientService::Common::Plugins::AssignsAttributesInConstructo
 
       subject(:method_value) { method.call(*args, **kwargs, &block) }
 
-      let(:method) { wrap_method(service_instance, :initialize, middleware: middleware) }
+      let(:method) { wrap_method(service_instance, :initialize, observe_middleware: middleware) }
 
       let(:service_class) do
         Class.new.tap do |service_class|

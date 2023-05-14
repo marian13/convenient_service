@@ -7,18 +7,42 @@ module ConvenientService
   module RSpec
     module Helpers
       module Custom
-        ##
-        # TODO: Specs.
-        #
         class WrapMethod < Support::Command
-          def initialize(entity, method, middlewares:)
+          ##
+          # @!attribute [r] entity
+          #   @return [Object] Can be any type.
+          #
+          attr_reader :entity
+
+          ##
+          # @!attribute [r] method
+          #   @return [Symbol, String]
+          #
+          attr_reader :method
+
+          ##
+          # @!attribute [r] observe_middleware
+          #   @return [Class]
+          #
+          attr_reader :observe_middleware
+
+          ##
+          # @param entity [Object] Can be any type.
+          # @param method [Symbol, String]
+          # @param observe_middleware [Class]
+          # @return [void]
+          #
+          def initialize(entity, method, observe_middleware:)
             @entity = entity
             @method = method
-            @middlewares = Utils::Array.wrap(middlewares)
+            @observe_middleware = observe_middleware
           end
 
+          ##
+          # @return [ConvenientService::RSpec::Helpers::Custom::Entities::WrappedMethod]
+          #
           def call
-            Entities::WrappedMethod.new(entity: @entity, method: @method, middlewares: @middlewares)
+            Entities::WrappedMethod.new(entity: entity, method: method, observe_middleware: observe_middleware)
           end
         end
       end

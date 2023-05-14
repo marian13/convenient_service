@@ -39,7 +39,7 @@ RSpec.describe ConvenientService::Service::Plugins::RaisesOnDoubleResult::Middle
 
       subject(:method_value) { method.call }
 
-      let(:method) { wrap_method(service_instance, method_name, middleware: middleware) }
+      let(:method) { wrap_method(service_instance, method_name, observe_middleware: middleware) }
 
       let(:service_class) do
         Class.new.tap do |klass|

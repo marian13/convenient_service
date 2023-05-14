@@ -12,7 +12,7 @@ RSpec.xdescribe ConvenientService::RSpec::Helpers::Custom::WrapMethod::Entities:
 
   include ConvenientService::RSpec::Matchers::CacheItsValue
 
-  subject(:method) { described_class.new(entity: entity, method: method_name, middleware: middleware) }
+  subject(:method) { described_class.new(entity: entity, method: method_name, observe_middleware: middleware) }
 
   let(:service_class) do
     Class.new do

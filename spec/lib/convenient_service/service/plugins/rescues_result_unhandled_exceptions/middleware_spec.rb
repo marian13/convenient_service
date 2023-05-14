@@ -40,7 +40,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
 
       subject(:method_value) { method.call(*args, **kwargs, &block) }
 
-      let(:method) { wrap_method(service_class, :result, middleware: middleware.with(max_backtrace_size: max_backtrace_size)) }
+      let(:method) { wrap_method(service_class, :result, observe_middleware: middleware.with(max_backtrace_size: max_backtrace_size)) }
 
       let(:args) { [:foo] }
       let(:kwargs) { {foo: :bar} }
@@ -133,7 +133,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
             end
           end
 
-          let(:method) { wrap_method(service_class, :result, middleware: middleware) }
+          let(:method) { wrap_method(service_class, :result, observe_middleware: middleware) }
           let(:max_backtrace_size) { ConvenientService::Service::Plugins::RescuesResultUnhandledExceptions::Constants::DEFAULT_MAX_BACKTRACE_SIZE }
 
           it "defaults to `ConvenientService::Service::Plugins::RescuesResultUnhandledExceptions::Constants::DEFAULT_MAX_BACKTRACE_SIZE`" do

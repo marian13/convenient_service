@@ -40,7 +40,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultParamsValidations::
 
       subject(:method_value) { method.call }
 
-      let(:method) { wrap_method(service_instance, method_name, middleware: middleware) }
+      let(:method) { wrap_method(service_instance, method_name, observe_middleware: middleware) }
       let(:method_name) { :result }
 
       let(:service_class) do

@@ -40,7 +40,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStubbedResult::Middle
 
       subject(:method_value) { method.call(*args, **kwargs, &block) }
 
-      let(:method) { wrap_method(service_class, :result, middleware: middleware) }
+      let(:method) { wrap_method(service_class, :result, observe_middleware: middleware) }
 
       let(:args) { [:foo] }
       let(:kwargs) { {foo: :bar} }

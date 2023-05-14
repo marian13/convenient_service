@@ -37,7 +37,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasAroundCallbacks::Middlewar
 
       subject(:method_value) { method.call }
 
-      let(:method) { wrap_method(service_instance, :result, middleware: middleware) }
+      let(:method) { wrap_method(service_instance, :result, observe_middleware: middleware) }
 
       let(:out) { Tempfile.new }
       let(:output) { out.tap(&:rewind).read }

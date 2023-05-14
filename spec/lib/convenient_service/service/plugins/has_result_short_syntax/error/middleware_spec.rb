@@ -39,7 +39,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultShortSyntax::Error:
 
       subject(:method_value) { method.call(*args, **kwargs) }
 
-      let(:method) { wrap_method(service_instance, :error, middleware: middleware) }
+      let(:method) { wrap_method(service_instance, :error, observe_middleware: middleware) }
       let(:service_instance) { service_class.new }
       let(:args) { [] }
       let(:kwargs) { {} }
