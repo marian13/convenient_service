@@ -105,8 +105,7 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>TODO: Specs.</p>
-
+    
 
   </div>
 </div>
@@ -142,6 +141,92 @@
 
 
 
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#entity-instance_method" title="#entity (instance method)">#<strong>entity</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#method-instance_method" title="#method (instance method)">#<strong>method</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#observe_middleware-instance_method" title="#observe_middleware (instance method)">#<strong>observe_middleware</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+    
+  </ul>
+
 
 
 
@@ -156,7 +241,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#call-instance_method" title="#call (instance method)">#<strong>call</strong>  &#x21d2; Object </a>
+      <a href="#call-instance_method" title="#call (instance method)">#<strong>call</strong>  &#x21d2; ConvenientService::RSpec::Helpers::Custom::Entities::WrappedMethod </a>
     
 
     
@@ -178,7 +263,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(entity, method, middlewares:)  &#x21d2; WrapMethod </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(entity, method, observe_middleware:)  &#x21d2; void </a>
     
 
     
@@ -194,8 +279,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>A new instance of WrapMethod.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'></div></span>
   
 </li>
 
@@ -220,7 +304,7 @@
     <div class="method_details first">
   <h3 class="signature first" id="initialize-instance_method">
   
-    #<strong>initialize</strong>(entity, method, middlewares:)  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::RSpec::Helpers::Custom::WrapMethod (class)">WrapMethod</a></span></tt> 
+    #<strong>initialize</strong>(entity, method, observe_middleware:)  &#x21d2; <tt>void</tt> 
   
 
   
@@ -228,8 +312,113 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a new instance of WrapMethod.</p>
+    
 
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>entity</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Can be any type.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>method</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>, <tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>observe_middleware</span>
+      
+      
+        <span class='type'>(<tt>Class</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Since:</p>
+<ul class="since">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'><p>0.3.0</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+35
+36
+37
+38
+39</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/custom/wrap_method.rb', line 35</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_entity'>entity</span><span class='comma'>,</span> <span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='label'>observe_middleware:</span><span class='rparen'>)</span>
+  <span class='ivar'>@entity</span> <span class='op'>=</span> <span class='id identifier rubyid_entity'>entity</span>
+  <span class='ivar'>@method</span> <span class='op'>=</span> <span class='id identifier rubyid_method'>method</span>
+  <span class='ivar'>@observe_middleware</span> <span class='op'>=</span> <span class='id identifier rubyid_observe_middleware'>observe_middleware</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id=""></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="entity-instance_method">
+  
+    #<strong>entity</strong>  &#x21d2; <tt>Object</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
 
   </div>
 </div>
@@ -257,26 +446,134 @@
       <pre class="lines">
 
 
-14
 15
 16
-17
-18</pre>
+17</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/custom/wrap_method.rb', line 14</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/custom/wrap_method.rb', line 15</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_entity'>entity</span><span class='comma'>,</span> <span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='label'>middlewares:</span><span class='rparen'>)</span>
-  <span class='ivar'>@entity</span> <span class='op'>=</span> <span class='id identifier rubyid_entity'>entity</span>
-  <span class='ivar'>@method</span> <span class='op'>=</span> <span class='id identifier rubyid_method'>method</span>
-  <span class='ivar'>@middlewares</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Utils/Array.html" title="ConvenientService::Utils::Array (module)">Array</a></span></span><span class='period'>.</span><span class='id identifier rubyid_wrap'><span class='object_link'><a href="../../../Utils/Array.html#wrap-class_method" title="ConvenientService::Utils::Array.wrap (method)">wrap</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_middlewares'>middlewares</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_entity'>entity</span>
+  <span class='ivar'>@entity</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
 </div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="method-instance_method">
   
+    #<strong>method</strong>  &#x21d2; <tt>Object</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
 </div>
+<div class="tags">
+  
+<p class="tag_title">Since:</p>
+<ul class="since">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'><p>0.3.0</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+21
+22
+23</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/custom/wrap_method.rb', line 21</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_method'>method</span>
+  <span class='ivar'>@method</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="observe_middleware-instance_method">
+  
+    #<strong>observe_middleware</strong>  &#x21d2; <tt>Object</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Since:</p>
+<ul class="since">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'><p>0.3.0</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+27
+28
+29</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/custom/wrap_method.rb', line 27</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_observe_middleware'>observe_middleware</span>
+  <span class='ivar'>@observe_middleware</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
 
 
   <div id="instance_method_details" class="method_details_list">
@@ -286,7 +583,7 @@
       <div class="method_details first">
   <h3 class="signature first" id="call-instance_method">
   
-    #<strong>call</strong>  &#x21d2; <tt>Object</tt> 
+    #<strong>call</strong>  &#x21d2; <tt>ConvenientService::RSpec::Helpers::Custom::Entities::WrappedMethod</tt> 
   
 
   
@@ -300,6 +597,19 @@
 </div>
 <div class="tags">
   
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>ConvenientService::RSpec::Helpers::Custom::Entities::WrappedMethod</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
 <p class="tag_title">Since:</p>
 <ul class="since">
   
@@ -322,15 +632,15 @@
       <pre class="lines">
 
 
-20
-21
-22</pre>
+44
+45
+46</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/custom/wrap_method.rb', line 20</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/custom/wrap_method.rb', line 44</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span>
-  <span class='const'><span class='object_link'><a href="WrapMethod/Entities.html" title="ConvenientService::RSpec::Helpers::Custom::WrapMethod::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="WrapMethod/Entities/WrappedMethod.html" title="ConvenientService::RSpec::Helpers::Custom::WrapMethod::Entities::WrappedMethod (class)">WrappedMethod</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="WrapMethod/Entities/WrappedMethod.html#initialize-instance_method" title="ConvenientService::RSpec::Helpers::Custom::WrapMethod::Entities::WrappedMethod#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>entity:</span> <span class='ivar'>@entity</span><span class='comma'>,</span> <span class='label'>method:</span> <span class='ivar'>@method</span><span class='comma'>,</span> <span class='label'>middlewares:</span> <span class='ivar'>@middlewares</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="WrapMethod/Entities.html" title="ConvenientService::RSpec::Helpers::Custom::WrapMethod::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="WrapMethod/Entities/WrappedMethod.html" title="ConvenientService::RSpec::Helpers::Custom::WrapMethod::Entities::WrappedMethod (class)">WrappedMethod</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="WrapMethod/Entities/WrappedMethod.html#initialize-instance_method" title="ConvenientService::RSpec::Helpers::Custom::WrapMethod::Entities::WrappedMethod#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>entity:</span> <span class='id identifier rubyid_entity'>entity</span><span class='comma'>,</span> <span class='label'>method:</span> <span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='label'>observe_middleware:</span> <span class='id identifier rubyid_observe_middleware'>observe_middleware</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -342,7 +652,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat May  6 19:57:03 2023 by
+  Generated on Sun May 14 21:31:37 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>

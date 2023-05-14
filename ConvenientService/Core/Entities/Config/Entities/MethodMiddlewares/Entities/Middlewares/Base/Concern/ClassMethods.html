@@ -101,6 +101,28 @@
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#extra_kwargs-instance_method" title="#extra_kwargs (instance method)">#<strong>extra_kwargs</strong>  &#x21d2; Hash{Symbol =&gt; Object} </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#intended_methods-instance_method" title="#intended_methods (instance method)">#<strong>intended_methods</strong>  &#x21d2; Array&lt;ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Structs::IntendedMethod&gt; </a>
     
 
@@ -123,7 +145,51 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#with-instance_method" title="#with (instance method)">#<strong>with</strong>  &#x21d2; ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::MiddlewareCreator </a>
+      <a href="#observable-instance_method" title="#observable (instance method)">#<strong>observable</strong>  &#x21d2; ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::MiddlewareCreators::Observable </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_observable_middleware-instance_method" title="#to_observable_middleware (instance method)">#<strong>to_observable_middleware</strong>  &#x21d2; Class </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#with-instance_method" title="#with (instance method)">#<strong>with</strong>  &#x21d2; ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::MiddlewareCreators::With </a>
     
 
     
@@ -152,7 +218,59 @@
 
     
       <div class="method_details first">
-  <h3 class="signature first" id="intended_methods-instance_method">
+  <h3 class="signature first" id="extra_kwargs-instance_method">
+  
+    #<strong>extra_kwargs</strong>  &#x21d2; <tt>Hash{Symbol =&gt; Object}</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash{Symbol =&gt; Object}</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+40
+41
+42</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/middlewares/base/concern/class_methods.rb', line 40</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_extra_kwargs'>extra_kwargs</span>
+  <span class='lbrace'>{</span><span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="intended_methods-instance_method">
   
     #<strong>intended_methods</strong>  &#x21d2; <tt>Array&lt;ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Structs::IntendedMethod&gt;</tt> 
   
@@ -188,12 +306,12 @@
       <pre class="lines">
 
 
-37
-38
-39</pre>
+50
+51
+52</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/middlewares/base/concern/class_methods.rb', line 37</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/middlewares/base/concern/class_methods.rb', line 50</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_intended_methods'>intended_methods</span>
   <span class='ivar'>@intended_methods</span> <span class='op'>||=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
@@ -204,9 +322,9 @@
 </div>
     
       <div class="method_details ">
-  <h3 class="signature " id="with-instance_method">
+  <h3 class="signature " id="observable-instance_method">
   
-    #<strong>with</strong>  &#x21d2; <tt>ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::MiddlewareCreator</tt> 
+    #<strong>observable</strong>  &#x21d2; <tt><span class='object_link'><a href="../../../MiddlewareCreators/Observable.html" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::MiddlewareCreators::Observable (class)">ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::MiddlewareCreators::Observable</a></span></tt> 
   
 
   
@@ -226,7 +344,111 @@
     <li>
       
       
-        <span class='type'>(<tt>ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::MiddlewareCreator</tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="../../../MiddlewareCreators/Observable.html" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::MiddlewareCreators::Observable (class)">ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::MiddlewareCreators::Observable</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+33
+34
+35</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/middlewares/base/concern/class_methods.rb', line 33</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_observable'>observable</span>
+  <span class='const'><span class='object_link'><a href="../../../../Entities.html" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../MiddlewareCreators.html" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::MiddlewareCreators (module)">MiddlewareCreators</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../MiddlewareCreators/Observable.html" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::MiddlewareCreators::Observable (class)">Observable</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../../MiddlewareCreators/Base.html#new-instance_method" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::MiddlewareCreators::Base#new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>middleware:</span> <span class='kw'>self</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="to_observable_middleware-instance_method">
+  
+    #<strong>to_observable_middleware</strong>  &#x21d2; <tt>Class</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Class</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+57
+58
+59</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/middlewares/base/concern/class_methods.rb', line 57</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_to_observable_middleware'>to_observable_middleware</span>
+  <span class='const'><span class='object_link'><a href="../Commands.html" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Base::Commands (module)">Commands</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Commands/CreateObservableMiddleware.html" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Base::Commands::CreateObservableMiddleware (class)">CreateObservableMiddleware</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="../Commands/CreateObservableMiddleware.html#call-instance_method" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Base::Commands::CreateObservableMiddleware#call (method)">call</a></span></span><span class='lparen'>(</span><span class='label'>middleware:</span> <span class='kw'>self</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="with-instance_method">
+  
+    #<strong>with</strong>  &#x21d2; <tt><span class='object_link'><a href="../../../MiddlewareCreators/With.html" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::MiddlewareCreators::With (class)">ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::MiddlewareCreators::With</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../MiddlewareCreators/With.html" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::MiddlewareCreators::With (class)">ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::MiddlewareCreators::With</a></span></tt>)</span>
       
       
       
@@ -248,7 +470,7 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/middlewares/base/concern/class_methods.rb', line 26</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_with'>with</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
-  <span class='const'><span class='object_link'><a href="../Entities.html" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Base::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Entities/MiddlewareCreator.html" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Base::Entities::MiddlewareCreator (class)">MiddlewareCreator</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Entities/MiddlewareCreator.html#new-instance_method" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Base::Entities::MiddlewareCreator#new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>middleware:</span> <span class='kw'>self</span><span class='comma'>,</span> <span class='label'>arguments:</span> <span class='const'><span class='object_link'><a href="../../../../../../../../../Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../../../Support/Arguments.html" title="ConvenientService::Support::Arguments (class)">Arguments</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../../../../../../../../Support/Arguments.html#initialize-instance_method" title="ConvenientService::Support::Arguments#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="../../../../Entities.html" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../MiddlewareCreators.html" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::MiddlewareCreators (module)">MiddlewareCreators</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../MiddlewareCreators/With.html" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::MiddlewareCreators::With (class)">With</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../../MiddlewareCreators/Base.html#new-instance_method" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::MiddlewareCreators::Base#new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>middleware:</span> <span class='kw'>self</span><span class='comma'>,</span> <span class='label'>arguments:</span> <span class='const'><span class='object_link'><a href="../../../../../../../../../Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../../../Support/Arguments.html" title="ConvenientService::Support::Arguments (class)">Arguments</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../../../../../../../../Support/Arguments.html#initialize-instance_method" title="ConvenientService::Support::Arguments#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -260,7 +482,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat May  6 19:57:01 2023 by
+  Generated on Sun May 14 21:31:35 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>
