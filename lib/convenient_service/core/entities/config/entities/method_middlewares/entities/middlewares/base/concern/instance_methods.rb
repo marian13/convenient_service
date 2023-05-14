@@ -31,10 +31,10 @@ module ConvenientService
                       # @param stack [#call<Hash>]
                       # @return [void]
                       #
-                      def initialize(stack, env: {}, arguments: Support::Arguments.null_arguments)
+                      def initialize(stack, **kwargs)
                         @__stack__ = stack
-                        @__env__ = env
-                        @__arguments__ = arguments
+                        @__env__ = kwargs.fetch(:env) { {} }
+                        @__arguments__ = kwargs.fetch(:arguments) { Support::Arguments.null_arguments }
                       end
 
                       ##

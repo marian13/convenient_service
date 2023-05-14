@@ -120,10 +120,6 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
       context "when middleware has extra kwargs" do
         let(:middleware) do
           Class.new(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Chain) do
-            def initialize(stack, foo:, **kwargs)
-              super(**kwargs)
-            end
-
             def self.extra_kwargs
               {foo: :bar}
             end
@@ -149,10 +145,6 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
 
         let(:middleware) do
           Class.new(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Chain) do
-            def initialize(stack, foo:, **kwargs)
-              super(**kwargs)
-            end
-
             def self.extra_kwargs
               {foo: :baz}
             end
