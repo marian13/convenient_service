@@ -27,12 +27,28 @@ module ConvenientService
                         @type = type
                       end
 
+                      ##
+                      # @return [String]
+                      #
+                      def default_handler_name
+                        "handle_#{type}"
+                      end
+
+                      ##
+                      # @param observer [Object] Can be any type.
+                      # @return [void]
+                      #
+                      # @see https://ruby-doc.org/stdlib-2.7.0/libdoc/observer/rdoc/Observable.html#method-i-add_observer
+                      #
                       def add_observer(observer, func = default_handler_name)
                         super
                       end
 
                       ##
+                      # @return [void]
                       #
+                      # @see https://ruby-doc.org/stdlib-2.7.0/libdoc/observer/rdoc/Observable.html#method-i-changed
+                      # @see https://ruby-doc.org/stdlib-2.7.0/libdoc/observer/rdoc/Observable.html#method-i-notify_observers
                       #
                       def notify_observers(...)
                         changed
@@ -40,13 +56,31 @@ module ConvenientService
                         super
                       end
 
-                      private
+                      ##
+                      # @param other [Object] Can be any type.
+                      # @return [Boolean, nil]
+                      #
+                      def ==(other)
+                        return unless other.instance_of?(self.class)
+
+                        return false if type != other.type
+                        return false if observer_peers != other.observer_peers
+
+                        true
+                      end
+
+                      protected
 
                       ##
-                      # @return [String]
+                      # @return [Hash]
                       #
-                      def default_handler_name
-                        "handle_#{type}"
+                      # @see https://ruby-doc.org/stdlib-2.7.0/libdoc/observer/rdoc/Observable.html#method-i-count_observers
+                      #
+                      # @internal
+                      #   IMPORTANT: This method is using inherited private instance varaible. Ruby may change its name without any warning.
+                      #
+                      def observer_peers
+                        @observer_peers if defined? @observer_peers
                       end
                     end
                   end
