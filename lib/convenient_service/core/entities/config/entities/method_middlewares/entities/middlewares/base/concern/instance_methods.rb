@@ -43,6 +43,20 @@ module ConvenientService
                       def arguments
                         @__arguments__
                       end
+
+                      ##
+                      # @param other [Object] Can be any type.
+                      # @return [Boolean, nil]
+                      #
+                      def ==(other)
+                        return unless other.instance_of?(self.class)
+
+                        return false if @__stack__ != other.instance_variable_get(:@__stack__)
+                        return false if @__env__ != other.instance_variable_get(:@__env__)
+                        return false if @__arguments__ != other.instance_variable_get(:@__arguments__)
+
+                        true
+                      end
                     end
                   end
                 end
