@@ -281,6 +281,34 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
       end
     end
 
+    describe "#observe" do
+      before do
+        stack.use(middleware, *args, &block)
+      end
+
+      specify do
+        expect { stack.observe(middleware, *args, &block) }
+          .to delegate_to(plain_stack, :replace)
+          .with_arguments(middleware, middleware.observable, *args, &block)
+      end
+
+      it "returns stack" do
+        expect(stack.observe(middleware, *args, &block)).to eq(stack)
+      end
+    end
+
+    describe "#use_and_observe" do
+      specify do
+        expect { stack.use_and_observe(middleware, *args, &block) }
+          .to delegate_to(plain_stack, :use)
+          .with_arguments(middleware.observable, *args, &block)
+      end
+
+      it "returns stack" do
+        expect(stack.use_and_observe(middleware, *args, &block)).to eq(stack)
+      end
+    end
+
     describe "#empty?" do
       specify do
         expect { stack.empty? }
