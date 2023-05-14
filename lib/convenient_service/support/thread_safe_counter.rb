@@ -9,6 +9,15 @@ module ConvenientService
     #
     class ThreadSafeCounter < Support::Counter
       ##
+      # @return [void]
+      #
+      def initialize(...)
+        super
+
+        @lock = ::Mutex.new
+      end
+
+      ##
       # @see ConvenientService::Support::Counter#current_value=
       #
       # @internal
