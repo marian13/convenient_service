@@ -14,49 +14,83 @@ module ConvenientService
             #
             class WrappedMethod
               ##
-              # @param entity [Object, Class]
+              # @!attribute [r] entity
+              #   @return [Object] Can be any type.
+              #
+              attr_reader :entity
+
+              ##
+              # @!attribute [r] method
+              #   @return [Symbol, String]
+              #
+              attr_reader :method
+
+              ##
+              # @!attribute [r] observe_middleware
+              #   @return [Class]
+              #
+              attr_reader :observe_middleware
+
+              ##
+              # @param entity [Object] Can be any type.
               # @param method [String]
-              # @param middlewares [Array<ConvenientService::MethodChainMiddleware>]
+              # @param observe_middleware [Class]
               # @return [void]
               #
-              # @internal
-              #   NOTE: `middlewares` are `MethodChainMiddleware` classes.
-              #
-              def initialize(entity:, method:, middlewares:)
+              def initialize(entity:, method:, observe_middleware:)
                 @entity = entity
                 @method = method
-                @middlewares = middlewares
+                @observe_middleware = observe_middleware
 
-                @stack = Support::Middleware::StackBuilder.new do |stack|
-                  middlewares.each { |middleware| stack.use middleware }
+                ##
+                # TODO: When middleware is NOT used yet.
+                #
+                observable_middleware.events[:before_chain_next].add_observer(self)
+                observable_middleware.events[:after_chain_next].add_observer(self)
 
-                  ##
-                  # NOTE: The following proc middleware is triggered only when `chain.next` is called from method chain middleware.
-                  #
-                  stack.use(
-                    proc do |env|
-                      @chain_arguments = {args: env[:args], kwargs: env[:kwargs], block: env[:block]}
+                ##
+                # TODO: Consider `ObjectSpace.define_finalizer`? Is it really needed?
+                #
+                # observable_middleware.events[:before_chain_next].delete_observer(self)
+                # observable_middleware.events[:after_chain_next].delete_observer(self)
+              end
 
-                      ##
-                      # IMPORTANT: Forces Ruby to define `@chain_value` instance variable.
-                      #
-                      # NOTE: If `@chain_value` is still set to `Support::UNDEFINED` after running the begin block - an exception was raised by `chain.next`. See `chain_called?` for more info.
-                      #
-                      @chain_value = Support::UNDEFINED
+              ##
+              # @internal
+              #   NOTE: The following handler is triggered only when `chain.next` is called from method chain middleware.
+              #
+              def handle_before_chain_next(arguments)
+                @chain_called = true
+                @chain_arguments = arguments
+              end
 
-                      begin
-                        @chain_value = entity.__send__(method, *env[:args], **env[:kwargs], &env[:block])
-                      rescue => exception
-                        @chain_exception = exception
+              ##
+              # @internal
+              #   NOTE: The following handler is triggered only when `chain.next` is called from method chain middleware.
+              #
+              def handle_after_chain_next(value, _arguments)
+                @chain_value = value
+              end
 
-                        ##
-                        # NOTE: `raise` with no args inside `rescue` reraises rescued exception.
-                        #
-                        raise
-                      end
-                    end
-                  )
-                end
+              ##
+              # @return [String]
+              #
+              def scope
+                @scope ||= Utils::Object.resolve_type(entity).to_sym
+              end
+
+              ##
+              # @return [Class]
+              #
+              def klass
+                @klass ||= Utils::Object.clamp_class(entity)
+              end
+
+              ##
+              # @return [Class]
+              #
+              def observable_middleware
+                @observable_middleware ||= klass.middlewares(method, scope: scope).to_a.find { |other| other == observe_middleware.observable }
               end
 
               ##
@@ -66,22 +100,31 @@ module ConvenientService
               # @return [Object] Can be any type.
               #
               def call(*args, **kwargs, &block)
-                @stack.call(entity: @entity, method: @method, args: args, kwargs: kwargs, block: block)
+                entity.__send__(method, *args, **kwargs, &block)
+              rescue => exception
+                @chain_exception = exception
+
+                ##
+                # NOTE: `raise` with no args inside `rescue` reraises rescued exception.
+                #
+                raise
               end
 
               ##
               # @return [void]
               #
               def reset!
+                remove_instance_variable(:@chain_called) if defined? @chain_called
                 remove_instance_variable(:@chain_value) if defined? @chain_value
                 remove_instance_variable(:@chain_arguments) if defined? @chain_arguments
+                remove_instance_variable(:@chain_exception) if defined? @chain_exception
               end
 
               ##
               # @return [Boolean]
               #
               def chain_called?
-                Utils::Bool.to_bool(defined? @chain_value)
+                Utils::Bool.to_bool(defined? @chain_called)
               end
 
               ##
@@ -101,7 +144,7 @@ module ConvenientService
               def chain_args
                 raise Errors::ChainAttributePreliminaryAccess.new(attribute: :args) unless chain_called?
 
-                @chain_arguments[:args]
+                @chain_arguments.args
               end
 
               ##
@@ -111,7 +154,7 @@ module ConvenientService
               def chain_kwargs
                 raise Errors::ChainAttributePreliminaryAccess.new(attribute: :kwargs) unless chain_called?
 
-                @chain_arguments[:kwargs]
+                @chain_arguments.kwargs
               end
 
               ##
@@ -121,7 +164,7 @@ module ConvenientService
               def chain_block
                 raise Errors::ChainAttributePreliminaryAccess.new(attribute: :block) unless chain_called?
 
-                @chain_arguments[:block]
+                @chain_arguments.block
               end
 
               ##
@@ -132,6 +175,20 @@ module ConvenientService
                 raise Errors::ChainAttributePreliminaryAccess.new(attribute: :exception) unless chain_called?
 
                 @chain_exception
+              end
+
+              ##
+              # @param other [Object] Can be any type.
+              # @return [Boolean, nil]
+              #
+              def ==(other)
+                return unless other.instance_of?(self.class)
+
+                return false if entity != other.entity
+                return false if method != other.method
+                return false if observe_middleware != other.observe_middleware
+
+                true
               end
             end
           end

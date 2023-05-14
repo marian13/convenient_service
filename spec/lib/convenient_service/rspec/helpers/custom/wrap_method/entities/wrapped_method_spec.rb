@@ -6,6 +6,9 @@ require "convenient_service"
 
 # frozen_string_literal: true
 
+##
+# TODO: Update direct specs.
+#
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.xdescribe ConvenientService::RSpec::Helpers::Custom::WrapMethod::Entities::WrappedMethod do
   include ConvenientService::RSpec::Helpers::IgnoringError
