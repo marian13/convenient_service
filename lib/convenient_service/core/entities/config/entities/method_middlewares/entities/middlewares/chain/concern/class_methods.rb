@@ -17,6 +17,13 @@ module ConvenientService
                       def chain_class
                         Entities::MethodChain
                       end
+
+                      ##
+                      # @return [Class]
+                      #
+                      def to_observable_middleware
+                        Commands::CreateObservableMiddleware.call(middleware: super)
+                      end
                     end
                   end
                 end
