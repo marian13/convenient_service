@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require "byebug"
 
 module ConvenientService
   module Support
@@ -85,6 +86,8 @@ module ConvenientService
                 sub_namespace
               end
 
+              namespaces_enum(mod)
+
             ##
             # NOTE:
             #   - Same methods are redefined.
@@ -100,7 +103,7 @@ module ConvenientService
               yielder.yield(namespace)
 
               namespaces.each do |sub_namespace|
-                unless namespace.namespaces.find_by(name: sub_namespace.name)
+                if namespace.namespaces.find_by(name: sub_namespace.name).nil?
                   namespace.namespaces << sub_namespace
                   namespace.define_method(sub_namespace.name) { sub_namespace.body.call }
                 end
