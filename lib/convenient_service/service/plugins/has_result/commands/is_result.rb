@@ -8,12 +8,12 @@ module ConvenientService
           class IsResult < Support::Command
             ##
             # @!attribute [r] result
-            #   @return [Object] Can any type.
+            #   @return [Object] Can be any type.
             #
             attr_reader :result
 
             ##
-            # @param result [Object] Can any type.
+            # @param result [Object] Can be any type.
             # @return [void]
             #
             def initialize(result:)

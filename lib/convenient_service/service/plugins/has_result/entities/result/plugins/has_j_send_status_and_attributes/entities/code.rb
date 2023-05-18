@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
+require_relative "code/commands"
 require_relative "code/concern"
+require_relative "code/plugins"
 
 module ConvenientService
   module Service

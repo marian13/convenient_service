@@ -6,18 +6,42 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status::Concern::InstanceMethods do
-  let(:status) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status.cast(value) }
+  include ConvenientService::RSpec::Matchers::CacheItsValue
+
+  let(:status) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status.new(value: value, result: result) }
   let(:value) { :foo }
+  let(:result) { double }
 
-  example_group "attributes" do
-    include ConvenientService::RSpec::Matchers::HaveAttrReader
+  example_group "modules" do
+    include ConvenientService::RSpec::Matchers::IncludeModule
 
-    subject { status }
+    subject { described_class }
 
-    it { is_expected.to have_attr_reader(:value) }
+    it { is_expected.to include_module(ConvenientService::Support::Copyable) }
+  end
+
+  example_group "class methods" do
+    describe ".new" do
+      context "when `result` is NOT passed" do
+        let(:status) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status.new(value: :foo) }
+
+        it "defaults to `nil`" do
+          expect(status.result).to be_nil
+        end
+      end
+    end
   end
 
   example_group "instance methods" do
+    example_group "attributes" do
+      include ConvenientService::RSpec::Matchers::HaveAttrReader
+
+      subject { status }
+
+      it { is_expected.to have_attr_reader(:value) }
+      it { is_expected.to have_attr_reader(:result) }
+    end
+
     describe "#success?" do
       context "when `value` is NOT `:success`" do
         it "returns `false`" do
@@ -116,47 +140,29 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
 
     describe "#in?" do
       context "when `statuses` are NOT empty" do
-        context "when all `statuses` are NOT castable" do
-          let(:statuses) { [42, Class.new] }
+        context "when `status` is NOT equal to any of those statuses" do
+          let(:statuses) do
+            [
+              ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status.new(value: :bar, result: result),
+              ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status.new(value: :baz, result: result)
+            ]
+          end
 
           it "returns `false`" do
             expect(status.in?(statuses)).to eq(false)
           end
         end
 
-        context "when any of `statuses` is castable" do
-          context "when `status` is NOT equal to that castable status in `==` terms" do
-            let(:statuses) { [42, :bar] }
-
-            it "returns `false`" do
-              expect(status.in?(statuses)).to eq(false)
-            end
+        context "when `status` is equal to any of those statuses" do
+          let(:statuses) do
+            [
+              ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status.new(value: :bar, result: result),
+              ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status.new(value: :foo, result: result)
+            ]
           end
 
-          context "when `status` is equal to that castable status in `==` terms" do
-            let(:statuses) { [42, :foo] }
-
-            it "returns `true`" do
-              expect(status.in?(statuses)).to eq(true)
-            end
-          end
-        end
-
-        context "when all `statuses` are castable" do
-          context "when `status` is NOT equal to any of those castable statuses in `==` terms" do
-            let(:statuses) { [:bar, :baz] }
-
-            it "returns `false`" do
-              expect(status.in?(statuses)).to eq(false)
-            end
-          end
-
-          context "when `status` is equal to any of those castable statuses in `==` terms" do
-            let(:statuses) { [:bar, :foo] }
-
-            it "returns `true`" do
-              expect(status.in?(statuses)).to eq(true)
-            end
+          it "returns `true`" do
+            expect(status.in?(statuses)).to eq(true)
           end
         end
       end
@@ -172,54 +178,60 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
 
     example_group "comparisons" do
       describe "#==" do
-        context "when `other` is NOT castable" do
+        context "when `other` has different class" do
           let(:other) { 42 }
-
-          before do
-            allow(status).to receive(:cast).and_return(nil)
-          end
 
           it "returns `nil`" do
             expect(status == other).to be_nil
           end
         end
 
-        context "when `other` is castable" do
-          context "when `other` has different `value`" do
-            let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status.cast(:bar) }
+        context "when `other` has different `value`" do
+          let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status.new(value: :bar, result: result) }
 
-            before do
-              allow(status).to receive(:cast).and_return(other)
-            end
-
-            it "returns `false`" do
-              expect(status == other).to eq(false)
-            end
+          it "returns `false`" do
+            expect(status == other).to eq(false)
           end
+        end
 
-          context "when `other` has same `value`" do
-            let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status.cast(:foo) }
+        context "when `other` has different `result.class`" do
+          let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status.new(value: value, result: Object.new) }
 
-            before do
-              allow(status).to receive(:cast).and_return(other)
-            end
+          it "returns `false`" do
+            expect(status == other).to eq(false)
+          end
+        end
 
-            it "returns `true`" do
-              expect(status == other).to eq(true)
-            end
+        context "when `other` has same attributes" do
+          let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status.new(value: value, result: result) }
+
+          it "returns `true`" do
+            expect(status == other).to eq(true)
           end
         end
       end
     end
 
     example_group "conversions" do
+      describe "#to_kwargs" do
+        let(:kwargs) { {value: value, result: result} }
+
+        it "returns kwargs representation of `status`" do
+          expect(status.to_kwargs).to eq(kwargs)
+        end
+
+        specify do
+          expect { status.to_kwargs }.to cache_its_value
+        end
+      end
+
       describe "#to_s" do
         it "returns string representation of `status`" do
           expect(status.to_s).to eq("foo")
         end
 
-        it "caches its result" do
-          expect(status.to_s.object_id).to eq(status.to_s.object_id)
+        specify do
+          expect { status.to_s }.to cache_its_value
         end
       end
 
@@ -228,8 +240,8 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
           expect(status.to_sym).to eq(:foo)
         end
 
-        it "caches its result" do
-          expect(status.to_sym.object_id).to eq(status.to_sym.object_id)
+        specify do
+          expect { status.to_sym }.to cache_its_value
         end
       end
     end

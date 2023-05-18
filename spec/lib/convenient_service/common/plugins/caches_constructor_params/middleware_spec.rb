@@ -6,10 +6,12 @@ require "convenient_service"
 
 # rubocop:disable RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Common::Plugins::CachesConstructorParams::Middleware do
+  let(:middleware) { described_class }
+
   example_group "inheritance" do
     include ConvenientService::RSpec::Matchers::BeDescendantOf
 
-    subject { described_class }
+    subject { middleware }
 
     it { is_expected.to be_descendant_of(ConvenientService::MethodChainMiddleware) }
   end
@@ -23,7 +25,7 @@ RSpec.describe ConvenientService::Common::Plugins::CachesConstructorParams::Midd
       end
 
       it "returns intended methods" do
-        expect(described_class.intended_methods).to eq(spec.intended_methods)
+        expect(middleware.intended_methods).to eq(spec.intended_methods)
       end
     end
   end
@@ -36,23 +38,22 @@ RSpec.describe ConvenientService::Common::Plugins::CachesConstructorParams::Midd
 
       subject(:method_value) { method.call(*args, **kwargs, &block) }
 
-      let(:method) { wrap_method(service_instance, :initialize, middlewares: described_class) }
+      let(:method) { wrap_method(service_instance, :initialize, observe_middleware: middleware) }
 
-      # rubocop:disable Lint/ConstantDefinitionInBlock, RSpec/LeakyConstantDeclaration
       let(:service_class) do
-        Class.new do
-          include ConvenientService::Common::Plugins::HasInternals::Concern
-          include ConvenientService::Common::Plugins::CachesConstructorParams::Concern
+        Class.new.tap do |klass|
+          klass.class_exec(middleware) do |middleware|
+            include ConvenientService::Configs::Standard
 
-          class self::Internals
-            include ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Plugins::HasCache::Concern
-          end
+            middlewares :initialize do
+              observe middleware
+            end
 
-          def initialize(*args, **kwargs, &block)
+            def initialize(*args, **kwargs, &block)
+            end
           end
         end
       end
-      # rubocop:enable Lint/ConstantDefinitionInBlock, RSpec/LeakyConstantDeclaration
 
       let(:service_instance) { service_class.new }
 

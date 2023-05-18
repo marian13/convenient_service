@@ -2,5 +2,6 @@
 
 require_relative "entities/caller"
 require_relative "entities/container"
+require_relative "entities/middleware_creators"
 require_relative "entities/middlewares"
 require_relative "entities/stack"

@@ -6,10 +6,12 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExceptions::Middleware do
+  let(:middleware) { described_class }
+
   example_group "inheritance" do
     include ConvenientService::RSpec::Matchers::BeDescendantOf
 
-    subject { described_class }
+    subject { middleware }
 
     it { is_expected.to be_descendant_of(ConvenientService::MethodChainMiddleware) }
   end
@@ -23,7 +25,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
       end
 
       it "returns intended methods" do
-        expect(described_class.intended_methods).to eq(spec.intended_methods)
+        expect(middleware.intended_methods).to eq(spec.intended_methods)
       end
     end
   end
@@ -38,7 +40,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
 
       subject(:method_value) { method.call(*args, **kwargs, &block) }
 
-      let(:method) { wrap_method(service_class, :result, middlewares: described_class.with(max_backtrace_size: max_backtrace_size)) }
+      let(:method) { wrap_method(service_class, :result, observe_middleware: middleware.with(max_backtrace_size: max_backtrace_size)) }
 
       let(:args) { [:foo] }
       let(:kwargs) { {foo: :bar} }
@@ -48,11 +50,17 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
 
       context "when service result does NOT raise exceptions" do
         let(:service_class) do
-          Class.new do
-            include ConvenientService::Configs::Minimal
+          Class.new.tap do |klass|
+            klass.class_exec(middleware, max_backtrace_size) do |middleware, max_backtrace_size|
+              include ConvenientService::Configs::Minimal
 
-            def result
-              success
+              middlewares :result, scope: :class do
+                use_and_observe middleware.with(max_backtrace_size: max_backtrace_size)
+              end
+
+              def result
+                success
+              end
             end
           end
         end
@@ -67,20 +75,22 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
 
       context "when service result raises exceptions" do
         let(:service_class) do
-          Class.new do
-            include ConvenientService::Configs::Minimal
+          Class.new.tap do |klass|
+            klass.class_exec(middleware, max_backtrace_size) do |middleware, max_backtrace_size|
+              include ConvenientService::Configs::Minimal
 
-            def result
-              raise StandardError, "exception message", caller.take(5)
+              middlewares :result, scope: :class do
+                use_and_observe middleware.with(max_backtrace_size: max_backtrace_size)
+              end
+
+              def result
+                raise StandardError, "exception message", caller.take(5)
+              end
             end
           end
         end
 
-        let(:exception) do
-          service_class.result(*args, **kwargs, &block)
-        rescue => error
-          error
-        end
+        let(:exception) { service_class.result(*args, **kwargs, &block).unsafe_data[:exception] }
 
         let(:formatted_exception) do
           <<~MESSAGE.chomp
@@ -107,7 +117,23 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
         end
 
         context "when `max_backtrace_size` is NOT passed" do
-          let(:method) { wrap_method(service_class, :result, middlewares: described_class) }
+          let(:service_class) do
+            Class.new.tap do |klass|
+              klass.class_exec(middleware) do |middleware|
+                include ConvenientService::Configs::Minimal
+
+                middlewares :result, scope: :class do
+                  use_and_observe middleware
+                end
+
+                def result
+                  raise StandardError, "exception message", caller.take(5)
+                end
+              end
+            end
+          end
+
+          let(:method) { wrap_method(service_class, :result, observe_middleware: middleware) }
           let(:max_backtrace_size) { ConvenientService::Service::Plugins::RescuesResultUnhandledExceptions::Constants::DEFAULT_MAX_BACKTRACE_SIZE }
 
           it "defaults to `ConvenientService::Service::Plugins::RescuesResultUnhandledExceptions::Constants::DEFAULT_MAX_BACKTRACE_SIZE`" do

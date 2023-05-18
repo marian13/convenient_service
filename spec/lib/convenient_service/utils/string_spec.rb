@@ -40,4 +40,17 @@ RSpec.describe ConvenientService::Utils::String do
         .and_return_its_value
     end
   end
+
+  describe ".truncate" do
+    let(:string) { "hello" }
+    let(:truncate_at) { 4 }
+    let(:omission) { "..." }
+
+    specify do
+      expect { described_class.truncate(string, truncate_at, omission: omission) }
+        .to delegate_to(ConvenientService::Utils::String::Truncate, :call)
+        .with_arguments(string, truncate_at, omission: omission)
+        .and_return_its_value
+    end
+  end
 end

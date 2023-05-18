@@ -7,6 +7,10 @@ module ConvenientService
         module Entities
           class MethodMiddlewares
             module Entities
+              ##
+              # @internal
+              #   TODO: Better error explanations.
+              #
               class Stack
                 ##
                 # @overload initialize(name:)
@@ -46,8 +50,8 @@ module ConvenientService
                 end
 
                 ##
-                # @param index_or_middleware [Integer, ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middleware]
-                # @param middleware [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middleware]
+                # @param index_or_middleware [Integer, ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Base]
+                # @param middleware [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Base]
                 # @param args [Array<Object>]
                 # @param block [Proc, nil]
                 # @return [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Stack]
@@ -67,8 +71,8 @@ module ConvenientService
                 alias_method :insert_before, :insert
 
                 ##
-                # @param index_or_middleware [Integer, ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middleware]
-                # @param middleware [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middleware]
+                # @param index_or_middleware [Integer, ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Base]
+                # @param middleware [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Base]
                 # @param args [Array<Object>]
                 # @param block [Proc, nil]
                 # @return [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Stack]
@@ -82,7 +86,7 @@ module ConvenientService
                 end
 
                 ##
-                # @param middleware [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middleware]
+                # @param middleware [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Base]
                 # @param args [Array<Object>]
                 # @param block [Proc, nil]
                 # @return [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Stack]
@@ -96,7 +100,7 @@ module ConvenientService
                 end
 
                 ##
-                # @param middleware [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middleware]
+                # @param middleware [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Base]
                 # @param args [Array<Object>]
                 # @param block [Proc, nil]
                 # @return [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Stack]
@@ -110,8 +114,8 @@ module ConvenientService
                 end
 
                 ##
-                # @param index_or_middleware [Integer, ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middleware]
-                # @param middleware [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middleware]
+                # @param index_or_middleware [Integer, ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Base]
+                # @param middleware [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Base]
                 # @param args [Array<Object>]
                 # @param block [Proc, nil]
                 # @return [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Stack]
@@ -125,7 +129,7 @@ module ConvenientService
                 end
 
                 ##
-                # @param index_or_middleware [Integer, ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middleware]
+                # @param index_or_middleware [Integer, ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Base]
                 # @return [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Stack]
                 #
                 # @see https://github.com/marian13/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L126
@@ -137,7 +141,7 @@ module ConvenientService
                 end
 
                 ##
-                # @param middleware [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middleware]
+                # @param middleware [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Base]
                 # @param args [Array<Object>]
                 # @param block [Proc, nil]
                 # @return [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Stack]
@@ -146,6 +150,37 @@ module ConvenientService
                 #
                 def use(middleware, *args, &block)
                   plain_stack.use(middleware, *args, &block)
+
+                  self
+                end
+
+                ##
+                # @param middleware [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Base]
+                # @param args [Array<Object>]
+                # @param block [Proc, nil]
+                # @return [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Stack]
+                #
+                # @note `observe` exists only for testing purposes. Do NOT use it in production code.
+                #
+                # @internal
+                #   TODO: Raise if middleware is NOT used yet.
+                #
+                def observe(middleware, *args, &block)
+                  plain_stack.replace(middleware, middleware.observable, *args, &block)
+
+                  self
+                end
+
+                ##
+                # @param middleware [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Base]
+                # @param args [Array<Object>]
+                # @param block [Proc, nil]
+                # @return [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Stack]
+                #
+                # @note `use_and_observe` exists only for testing purposes. Do NOT use it in production code.
+                #
+                def use_and_observe(middleware, *args, &block)
+                  plain_stack.use(middleware.observable, *args, &block)
 
                   self
                 end
@@ -170,7 +205,7 @@ module ConvenientService
                 end
 
                 ##
-                # @return [Array<ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middleware>]
+                # @return [Array<ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Base>]
                 #
                 def to_a
                   plain_stack.to_a

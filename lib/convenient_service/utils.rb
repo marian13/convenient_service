@@ -8,3 +8,16 @@ require_relative "utils/module"
 require_relative "utils/proc"
 require_relative "utils/string"
 require_relative "utils/object"
+
+module ConvenientService
+  module Utils
+    class << self
+      ##
+      # @return [Boolean]
+      #
+      def to_bool(...)
+        Bool::ToBool.call(...)
+      end
+    end
+  end
+end

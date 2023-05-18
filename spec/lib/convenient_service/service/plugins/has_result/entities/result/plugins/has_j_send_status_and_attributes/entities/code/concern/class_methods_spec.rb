@@ -6,6 +6,8 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code::Concern::ClassMethods do
+  include ConvenientService::RSpec::Matchers::DelegateTo
+
   example_group "class methods" do
     describe ".cast" do
       let(:casted) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code.cast(other) }
@@ -42,6 +44,64 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
 
         it "returns copy of `other`" do
           expect(casted).to eq(code)
+        end
+      end
+    end
+
+    describe ".===" do
+      let(:code_class) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code }
+
+      let(:other) { 42 }
+
+      specify do
+        expect { code_class === other }
+          .to delegate_to(ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code::Commands::IsCode, :call)
+          .with_arguments(code: other)
+      end
+
+      it "returns `false`" do
+        expect(code_class === other).to eq(false)
+      end
+
+      context "when `other` is code instance in terms of `ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code::Commands::IsCode`" do
+        let(:service) do
+          Class.new do
+            include ConvenientService::Configs::Minimal
+
+            def result
+              success
+            end
+          end
+        end
+
+        let(:other) { service.result.code }
+
+        specify do
+          expect { code_class === other }
+            .to delegate_to(ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code::Commands::IsCode, :call)
+            .with_arguments(code: other)
+        end
+
+        it "returns `true`" do
+          expect(code_class === other).to eq(true)
+        end
+      end
+
+      context "when `other` is `ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code` instance" do
+        let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code.cast(:foo) }
+
+        it "returns `true`" do
+          expect(code_class === other).to eq(true)
+        end
+      end
+
+      context "when `other` is `ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code` descendant instance" do
+        let(:descendant_class) { Class.new(code_class) }
+
+        let(:other) { descendant_class.cast(:foo) }
+
+        it "returns `true`" do
+          expect(code_class === other).to eq(true)
         end
       end
     end

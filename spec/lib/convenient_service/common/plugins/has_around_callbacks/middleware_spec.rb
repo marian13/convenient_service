@@ -6,10 +6,12 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Common::Plugins::HasAroundCallbacks::Middleware do
+  let(:middleware) { described_class }
+
   example_group "inheritance" do
     include ConvenientService::RSpec::Matchers::BeDescendantOf
 
-    subject { described_class }
+    subject { middleware }
 
     it { is_expected.to be_descendant_of(ConvenientService::MethodChainMiddleware) }
   end
@@ -23,7 +25,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasAroundCallbacks::Middlewar
       end
 
       it "returns intended methods" do
-        expect(described_class.intended_methods).to eq(spec.intended_methods)
+        expect(middleware.intended_methods).to eq(spec.intended_methods)
       end
     end
   end
@@ -35,7 +37,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasAroundCallbacks::Middlewar
 
       subject(:method_value) { method.call }
 
-      let(:method) { wrap_method(service_instance, :result, middlewares: described_class) }
+      let(:method) { wrap_method(service_instance, :result, observe_middleware: middleware) }
 
       let(:out) { Tempfile.new }
       let(:output) { out.tap(&:rewind).read }
@@ -43,24 +45,27 @@ RSpec.describe ConvenientService::Common::Plugins::HasAroundCallbacks::Middlewar
 
       let(:service_class) do
         Class.new.tap do |klass|
-          klass.class_exec(result_original_value, out) do |result_original_value, out|
-            include ConvenientService::Common::Plugins::HasCallbacks::Concern
-            include ConvenientService::Common::Plugins::HasAroundCallbacks::Concern
+          klass.class_exec(result_original_value, out, middleware) do |result_original_value, out, middleware|
+            include ConvenientService::Configs::Standard
+
+            middlewares :result do
+              observe middleware
+            end
 
             define_method(:out) { out }
 
-            define_method(:result) { result_original_value.tap { out.puts "original result" } }
+            define_method(:result) { success(value: result_original_value).tap { out.puts "original result" } }
           end
         end
       end
 
       let(:service_instance) { service_class.new }
 
-      specify {
+      specify do
         expect { method_value }
           .to call_chain_next.on(method)
           .and_return_its_value
-      }
+      end
 
       context "when service class has no callbacks" do
         let(:text) do
@@ -140,7 +145,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasAroundCallbacks::Middlewar
 
       example_group "after callbacks first argument" do
         before do
-          service_class.after(:result) { |result| result.success? }
+          service_class.after(:result) { |result| raise if result.unsafe_data[:value] != "result original value" }
         end
 
         it "passes middleware `chain.next` to all after callbacks as first argument" do
@@ -159,7 +164,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasAroundCallbacks::Middlewar
             # NOTE: `result_original_value` is NOT available inside service instance context.
             # That is why "result original value" literal is used.
             #
-            raise if result != "result original value"
+            raise if result.unsafe_data[:value] != "result original value"
 
             out.puts "first around after result"
           end
@@ -173,7 +178,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasAroundCallbacks::Middlewar
             # NOTE: `result_original_value` is NOT available inside service instance context.
             # That is why "result original value" literal is used.
             #
-            raise if result != "result original value"
+            raise if result.unsafe_data[:value] != "result original value"
 
             out.puts "second around after result"
           end
@@ -310,14 +315,20 @@ RSpec.describe ConvenientService::Common::Plugins::HasAroundCallbacks::Middlewar
 
       example_group "context" do
         let(:service_class) do
-          Class.new do
-            include ConvenientService::Common::Plugins::HasCallbacks::Concern
-            include ConvenientService::Common::Plugins::HasAroundCallbacks::Concern
+          Class.new.tap do |klass|
+            klass.class_exec(middleware) do |middleware|
+              include ConvenientService::Configs::Standard
 
-            def some_instance_method
-            end
+              middlewares :result do
+                observe middleware
+              end
 
-            def result
+              def some_instance_method
+              end
+
+              def result
+                success
+              end
             end
           end
         end
@@ -346,11 +357,14 @@ RSpec.describe ConvenientService::Common::Plugins::HasAroundCallbacks::Middlewar
 
         let(:service_class) do
           Class.new.tap do |klass|
-            klass.class_exec(result_original_value, out) do |result_original_value, out|
-              include ConvenientService::Common::Plugins::HasCallbacks::Concern
-              include ConvenientService::Common::Plugins::HasAroundCallbacks::Concern
+            klass.class_exec(result_original_value, out, middleware) do |result_original_value, out, middleware|
+              include ConvenientService::Configs::Standard
 
-              define_method(:result) { |*args, **kwargs, &block| result_original_value }
+              middlewares :result do
+                observe middleware
+              end
+
+              define_method(:result) { |*args, **kwargs, &block| success(value: result_original_value) }
             end
           end
         end

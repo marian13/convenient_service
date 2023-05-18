@@ -91,7 +91,6 @@ module ConvenientService
         @current_value = initial_value
         @min_value = min_value
         @max_value = max_value
-        @lock = ::Mutex.new
       end
 
       ##

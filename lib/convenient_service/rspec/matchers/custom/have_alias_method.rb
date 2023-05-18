@@ -13,6 +13,9 @@ module ConvenientService
           def matches?(object)
             @object = object
 
+            ##
+            # TODO: Use `Utils::Object.duck_class` to support `have_alias_method` for classes.
+            #
             return false unless Utils::Method.defined?(original_name, object.class, private: true)
 
             return false unless Utils::Method.defined?(alias_name, object.class, private: true)

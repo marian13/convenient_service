@@ -5,10 +5,14 @@ require "spec_helper"
 require "convenient_service"
 
 RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::MarksResultStatusAsChecked::Middleware do
+  include ConvenientService::RSpec::Matchers::DelegateTo
+
+  let(:middleware) { described_class }
+
   example_group "inheritance" do
     include ConvenientService::RSpec::Matchers::BeDescendantOf
 
-    subject { described_class }
+    subject { middleware }
 
     it { is_expected.to be_descendant_of(ConvenientService::MethodChainMiddleware) }
   end
@@ -27,7 +31,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
       end
 
       it "returns intended methods" do
-        expect(described_class.intended_methods).to eq(spec.intended_methods)
+        expect(middleware.intended_methods).to eq(spec.intended_methods)
       end
     end
   end
@@ -39,64 +43,39 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
 
       subject(:method_value) { method.call }
 
-      let(:method) { wrap_method(result_instance, :success?, middlewares: described_class) }
+      let(:method) { wrap_method(result, :success?, observe_middleware: middleware) }
 
-      # rubocop:disable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
-      let(:result_class) do
-        Class.new do
-          include ConvenientService::Core
+      let(:service) do
+        Class.new.tap do |klass|
+          klass.class_exec(middleware) do |middleware|
+            include ConvenientService::Configs::Standard
 
-          concerns do
-            use ConvenientService::Common::Plugins::HasInternals::Concern
-            use ConvenientService::Common::Plugins::HasConstructor::Concern
-            use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Concern
-          end
+            self::Result.class_exec(middleware) do |middleware|
+              middlewares :success? do
+                observe middleware
+              end
+            end
 
-          middlewares :initialize do
-            use ConvenientService::Common::Plugins::NormalizesEnv::Middleware
-
-            use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Middleware
-          end
-
-          class self::Internals
-            include ConvenientService::Core
-
-            concerns do
-              use ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Plugins::HasCache::Concern
+            def result
+              success
             end
           end
         end
       end
-      # rubocop:enable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
 
-      let(:result_instance) { result_class.new(**params) }
+      let(:result) { service.result }
 
-      ##
-      # TODO: Result factory.
-      #
-      let(:params) do
-        {
-          service: double,
-          status: :foo,
-          data: {foo: :bar},
-          message: "foo",
-          code: :foo
-        }
+      specify do
+        expect { method_value }
+          .to delegate_to(result.internals.cache, :write)
+          .with_arguments(:has_checked_status, true)
       end
 
-      it "writes `true` to cache with `has_checked_status` key" do
-        allow(result_instance.internals.cache).to receive(:write).with(:has_checked_status, true).and_call_original
-
-        method_value
-
-        expect(result_instance.internals.cache).to have_received(:write)
-      end
-
-      specify {
+      specify do
         expect { method_value }
           .to call_chain_next.on(method)
           .and_return_its_value
-      }
+      end
     end
   end
 end

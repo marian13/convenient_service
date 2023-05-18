@@ -840,7 +840,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns do
         context "when `other` has different class" do
           let(:other) { 42 }
 
-          it "returns `false`" do
+          it "returns `nil`" do
             expect(concerns == other).to be_nil
           end
         end

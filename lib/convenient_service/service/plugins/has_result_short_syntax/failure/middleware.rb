@@ -8,7 +8,7 @@ module ConvenientService
           class Middleware < MethodChainMiddleware
             intended_for :failure
 
-            def next(**kwargs)
+            def next(*args, **kwargs, &block)
               Commands::RefuteKwargsContainDataAndExtraKeys.call(kwargs: kwargs)
 
               kwargs.has_key?(:data) ? chain.next(**kwargs) : chain.next(data: kwargs)

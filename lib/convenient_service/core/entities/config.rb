@@ -116,8 +116,18 @@ module ConvenientService
         ##
         # @return [Boolean]
         #
+        # @internal
+        #   IMPORTANT:
+        #     - Memoization of only `true` is intentional.
+        #     - It is done for performance purposes.
+        #     - It is OK to memoize only `true` since "uncommitment" of config is even theoretically NOT possible.
+        #     - It is NOT possible to uninclude Ruby modules.
+        #     - See `benchmark/has_committed_config/ips.rb`.
+        #
+        #   IMPORTANT: `committed?` MUST be thread safe.
+        #
         def committed?
-          concerns.included?
+          @committed ||= concerns.included?
         end
 
         ##
@@ -129,8 +139,11 @@ module ConvenientService
         #
         # @see https://ruby-doc.org/core-3.1.2/Kernel.html#method-i-require
         #
+        # @internal
+        #   IMPORTANT: `commit!` MUST be thread safe.
+        #
         def commit!(trigger: Constants::Triggers::USER)
-          concerns.include!
+          (committed? ? false : concerns.include!)
             .tap { Commands::TrackMethodMissingCommitTrigger.call(config: self, trigger: trigger) }
         end
 

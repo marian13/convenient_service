@@ -2,6 +2,7 @@
 
 require_relative "caller/commands"
 require_relative "caller/concern"
+require_relative "caller/constants"
 
 module ConvenientService
   module Core
@@ -11,9 +12,6 @@ module ConvenientService
           class MethodMiddlewares
             module Entities
               class Caller
-                INSTANCE_PREFIX = "self.class."
-                CLASS_PREFIX = ""
-
                 include Concern
               end
             end

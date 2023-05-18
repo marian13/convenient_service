@@ -77,7 +77,10 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::DryService::Config do
               ConvenientService::Service::Plugins::HasResultParamsValidations::UsingDryValidation::Middleware,
               ConvenientService::Service::Plugins::HasResult::Middleware,
               ConvenientService::Service::Plugins::CanHaveSteps::Middleware,
-              ConvenientService::Service::Plugins::RaisesOnDoubleResult::Middleware,
+              ##
+              # TODO: Rewrite. This plugin does NOT do what it states. Probably I was NOT with a clear mind while writing it (facepalm).
+              #
+              # ConvenientService::Service::Plugins::RaisesOnDoubleResult::Middleware,
               ConvenientService::Common::Plugins::CachesReturnValue::Middleware
             ]
           end
@@ -201,6 +204,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::DryService::Config do
                 ConvenientService::Common::Plugins::HasInternals::Concern,
                 ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasInspect::Concern,
                 ConvenientService::Common::Plugins::HasConstructor::Concern,
+                ConvenientService::Common::Plugins::HasConstructorWithoutInitialize::Concern,
                 ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Concern,
                 ConvenientService::Common::Plugins::HasResultDuckShortSyntax::Concern,
                 ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanRecalculateResult::Concern,
@@ -362,7 +366,11 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::DryService::Config do
 
           example_group "service result data" do
             example_group "concerns" do
-              let(:concerns) { [] }
+              let(:concerns) do
+                [
+                  ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data::Plugins::HasInspect::Concern
+                ]
+              end
 
               it "sets service result data concerns" do
                 expect(service_class::Result::Data.concerns.to_a).to eq(concerns)
@@ -372,7 +380,11 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::DryService::Config do
 
           example_group "service result message" do
             example_group "concerns" do
-              let(:concerns) { [] }
+              let(:concerns) do
+                [
+                  ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message::Plugins::HasInspect::Concern
+                ]
+              end
 
               it "sets service result message concerns" do
                 expect(service_class::Result::Message.concerns.to_a).to eq(concerns)
@@ -382,7 +394,11 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::DryService::Config do
 
           example_group "service result code" do
             example_group "concerns" do
-              let(:concerns) { [] }
+              let(:concerns) do
+                [
+                  ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code::Plugins::HasInspect::Concern
+                ]
+              end
 
               it "sets service result code concerns" do
                 expect(service_class::Result::Code.concerns.to_a).to eq(concerns)
@@ -392,7 +408,11 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::DryService::Config do
 
           example_group "service result status" do
             example_group "concerns" do
-              let(:concerns) { [] }
+              let(:concerns) do
+                [
+                  ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status::Plugins::HasInspect::Concern
+                ]
+              end
 
               it "sets service result status concerns" do
                 expect(service_class::Result::Status.concerns.to_a).to eq(concerns)
@@ -477,7 +497,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::DryService::Config do
       # https://github.com/marian13/convenient_service/discussions/43
       #
       it "applies its `included` block only once" do
-        expect(service_class.middlewares(:result).to_a.size).to eq(8)
+        expect(service_class.middlewares(:result).to_a.size).to eq(7)
       end
     end
   end

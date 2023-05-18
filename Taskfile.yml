@@ -121,6 +121,9 @@ tasks:
     cmds:
       - task: deps:install
 
+  ##
+  # NOTE: `task deps:install` is also aliased as `task install`.
+  #
   deps:install:
     cmds:
       - bundle install
@@ -384,6 +387,13 @@ tasks:
     cmds:
       - open -na "Google Chrome" --args --new-window --incognito "https://github.com/marian13/convenient_service"
 
+  ##
+  # NOTE: `task install` is also aliased as `task deps:install`.
+  #
+  install:
+    cmds:
+      - task: deps:install
+
   lint:
     cmds:
       - task: rubocop
@@ -399,6 +409,14 @@ tasks:
   minitest:
     cmds:
       - bundle exec ruby minitest.rb
+
+  ##
+  # NOTE: `task playground` is also aliased as `task console`.
+  #
+  playground:
+    cmds:
+      - bundle exec rake playground
+    interactive: true
 
   ##
   # NOTE: `task playground:all` is also aliased as `task console:all`.

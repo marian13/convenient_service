@@ -9,18 +9,40 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
   include ConvenientService::RSpec::Matchers::CacheItsValue
   include ConvenientService::RSpec::Matchers::DelegateTo
 
-  let(:data) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data.cast(value) }
+  let(:data) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data.new(value: value, result: result) }
   let(:value) { {foo: :bar} }
+  let(:result) { double }
 
-  example_group "attributes" do
-    include ConvenientService::RSpec::Matchers::HaveAttrReader
+  example_group "modules" do
+    include ConvenientService::RSpec::Matchers::IncludeModule
 
-    subject { data }
+    subject { described_class }
 
-    it { is_expected.to have_attr_reader(:value) }
+    it { is_expected.to include_module(ConvenientService::Support::Copyable) }
+  end
+
+  example_group "class methods" do
+    describe ".new" do
+      context "when `result` is NOT passed" do
+        let(:data) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data.new(value: {foo: :bar}) }
+
+        it "defaults to `nil`" do
+          expect(data.result).to be_nil
+        end
+      end
+    end
   end
 
   example_group "instance methods" do
+    example_group "attributes" do
+      include ConvenientService::RSpec::Matchers::HaveAttrReader
+
+      subject { data }
+
+      it { is_expected.to have_attr_reader(:value) }
+      it { is_expected.to have_attr_reader(:result) }
+    end
+
     describe "#has_attribute?" do
       context "when `data` has NO attribute by key" do
         let(:value) { {} }
@@ -77,41 +99,35 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
 
     example_group "comparisons" do
       describe "#==" do
-        context "when `other` is NOT castable" do
+        context "when `other` has different class" do
           let(:other) { 42 }
-
-          before do
-            allow(data).to receive(:cast).and_return(nil)
-          end
 
           it "returns `nil`" do
             expect(data == other).to be_nil
           end
         end
 
-        context "when `other` is castable" do
-          context "when `other` has different `value`" do
-            let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data.cast({baz: :qux}) }
+        context "when `other` has different `value`" do
+          let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data.new(value: {foo: :baz}, result: result) }
 
-            before do
-              allow(data).to receive(:cast).and_return(other)
-            end
-
-            it "returns `false`" do
-              expect(data == other).to eq(false)
-            end
+          it "returns `false`" do
+            expect(data == other).to eq(false)
           end
+        end
 
-          context "when `other` has same `value`" do
-            let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data.cast({foo: :bar}) }
+        context "when `other` has different `result.class`" do
+          let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data.new(value: value, result: Object.new) }
 
-            before do
-              allow(data).to receive(:cast).and_return(other)
-            end
+          it "returns `false`" do
+            expect(data == other).to eq(false)
+          end
+        end
 
-            it "returns `true`" do
-              expect(data == other).to eq(true)
-            end
+        context "when `other` has same attributes" do
+          let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data.new(value: value, result: result) }
+
+          it "returns `true`" do
+            expect(data == other).to eq(true)
           end
         end
       end
@@ -125,6 +141,18 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
 
         specify do
           expect { data.to_h }.to cache_its_value
+        end
+      end
+
+      describe "#to_kwargs" do
+        let(:kwargs) { {value: value, result: result} }
+
+        it "returns kwargs representation of `data`" do
+          expect(data.to_kwargs).to eq(kwargs)
+        end
+
+        specify do
+          expect { data.to_kwargs }.to cache_its_value
         end
       end
 

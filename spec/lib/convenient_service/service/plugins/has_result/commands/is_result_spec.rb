@@ -15,7 +15,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Commands::IsResul
       context "when result does NOT include `ConvenientService::Service::Plugins::HasResult::Entities::Result::Concern`" do
         let(:service) do
           Class.new do
-            include ConvenientService::Configs::Standard
+            include ConvenientService::Configs::Minimal
 
             middlewares :result do
               delete ConvenientService::Service::Plugins::HasResult::Middleware
@@ -35,7 +35,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Commands::IsResul
       context "when result includes `ConvenientService::Service::Plugins::HasResult::Entities::Result::Concern`" do
         let(:service) do
           Class.new do
-            include ConvenientService::Configs::Standard
+            include ConvenientService::Configs::Minimal
 
             def result
               success

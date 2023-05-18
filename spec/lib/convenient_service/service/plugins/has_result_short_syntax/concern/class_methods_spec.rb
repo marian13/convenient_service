@@ -10,16 +10,11 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultShortSyntax::Concer
       include ConvenientService::RSpec::Matchers::DelegateTo
 
       let(:service_class) do
-        Class.new.tap do |klass|
-          klass.class_exec(described_class) do |mod|
-            include ConvenientService::Common::Plugins::HasConstructor::Concern
-            include ConvenientService::Service::Plugins::HasResult::Concern
+        Class.new do
+          include ConvenientService::Configs::Standard
 
-            extend mod
-
-            def result(*args, **kwargs, &block)
-              :result_value
-            end
+          def result
+            success
           end
         end
       end

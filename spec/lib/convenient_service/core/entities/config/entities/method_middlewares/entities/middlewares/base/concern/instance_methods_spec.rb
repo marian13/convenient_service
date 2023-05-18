@@ -8,8 +8,8 @@ require "convenient_service"
 RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Base::Concern::InstanceMethods do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
-  let(:middleware_instance) { middleware_class.new(stack) }
   let(:middleware_class) { Class.new(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Base) }
+  let(:middleware) { middleware_class.new(stack) }
 
   let(:stack) { ConvenientService::Support::Middleware::StackBuilder.new }
   let(:env) { {entity: double, method: :result, args: args, kwargs: kwargs, block: block} }
@@ -31,11 +31,55 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
     end
 
     describe "#arguments" do
-      let(:middleware_instance) { middleware_class.new(stack, arguments: arguments) }
+      let(:middleware) { middleware_class.new(stack, arguments: arguments) }
       let(:arguments) { ConvenientService::Support::Arguments.new(*args, **kwargs, &block) }
 
       it "returns arguments" do
-        expect(middleware_instance.arguments).to eq(arguments)
+        expect(middleware.arguments).to eq(arguments)
+      end
+    end
+
+    example_group "comparison" do
+      describe "#==" do
+        context "when `other` has different class" do
+          let(:other) { 42 }
+
+          it "returns `nil`" do
+            expect(middleware == other).to be_nil
+          end
+        end
+
+        context "when `other` has different `stack`" do
+          let(:other) { middleware_class.new(ConvenientService::Support::Middleware::StackBuilder.new.use(proc { :foo })) }
+
+          it "returns `false`" do
+            expect(middleware == other).to eq(false)
+          end
+        end
+
+        context "when `other` has different `env`" do
+          let(:other) { middleware_class.new(stack, env: {foo: :bar}) }
+
+          it "returns `false`" do
+            expect(middleware == other).to eq(false)
+          end
+        end
+
+        context "when `other` has different `arguments`" do
+          let(:other) { middleware_class.new(stack, arguments: ConvenientService::Support::Arguments.new(:foo)) }
+
+          it "returns `false`" do
+            expect(middleware == other).to eq(false)
+          end
+        end
+
+        context "when `other` has same attributes" do
+          let(:other) { middleware_class.new(stack) }
+
+          it "returns `true`" do
+            expect(middleware == other).to eq(true)
+          end
+        end
       end
     end
   end

@@ -46,7 +46,10 @@ module ConvenientService
             Plugins::Common::HasCallbacks::Middleware,
             Plugins::Common::HasAroundCallbacks::Middleware
 
-          use Plugins::Service::RaisesOnDoubleResult::Middleware
+          ##
+          # TODO: Rewrite. This plugin does NOT do what it states. Probably I was NOT with a clear mind while writing it (facepalm).
+          #
+          # use Plugins::Service::RaisesOnDoubleResult::Middleware
 
           use Plugins::Common::CachesReturnValue::Middleware
         end

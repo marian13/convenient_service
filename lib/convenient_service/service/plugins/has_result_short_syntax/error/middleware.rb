@@ -8,7 +8,7 @@ module ConvenientService
           class Middleware < MethodChainMiddleware
             intended_for :error
 
-            def next(*args, **kwargs)
+            def next(*args, **kwargs, &block)
               Commands::AssertEitherArgsOrKwargsArePassed.call(args: args, kwargs: kwargs)
 
               return chain.next(**kwargs) if kwargs.any?

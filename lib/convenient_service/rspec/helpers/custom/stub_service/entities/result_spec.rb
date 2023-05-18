@@ -213,7 +213,7 @@ module ConvenientService
               # @return [Object]
               #
               def service_instance
-                @service_instance ||= service_class.create_without_initialize
+                @service_instance ||= service_class.new_without_initialize
               end
             end
           end

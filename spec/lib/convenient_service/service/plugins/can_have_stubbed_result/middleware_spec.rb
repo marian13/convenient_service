@@ -4,12 +4,14 @@ require "spec_helper"
 
 require "convenient_service"
 
-# rubocop:disable RSpec/NestedGroups
+# rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Service::Plugins::CanHaveStubbedResult::Middleware do
+  let(:middleware) { described_class }
+
   example_group "inheritance" do
     include ConvenientService::RSpec::Matchers::BeDescendantOf
 
-    subject { described_class }
+    subject { middleware }
 
     it { is_expected.to be_descendant_of(ConvenientService::MethodChainMiddleware) }
   end
@@ -23,7 +25,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStubbedResult::Middle
       end
 
       it "returns intended methods" do
-        expect(described_class.intended_methods).to eq(spec.intended_methods)
+        expect(middleware.intended_methods).to eq(spec.intended_methods)
       end
     end
   end
@@ -38,60 +40,24 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStubbedResult::Middle
 
       subject(:method_value) { method.call(*args, **kwargs, &block) }
 
-      let(:method) { wrap_method(service_class, :result, middlewares: described_class) }
+      let(:method) { wrap_method(service_class, :result, observe_middleware: middleware) }
 
       let(:args) { [:foo] }
       let(:kwargs) { {foo: :bar} }
       let(:block) { proc { :foo } }
 
-      ##
-      # TODO: Service class factory!
-      #
       let(:service_class) do
-        Class.new do
-          include ConvenientService::Core
+        Class.new.tap do |klass|
+          klass.class_exec(middleware) do |middleware|
+            include ConvenientService::Configs::Standard
 
-          concerns do
-            use ConvenientService::Common::Plugins::HasConstructor::Concern
-            use ConvenientService::Common::Plugins::HasConstructorWithoutInitialize::Concern
-            use ConvenientService::Service::Plugins::HasResult::Concern
-            use ConvenientService::Service::Plugins::CanHaveStubbedResult::Concern
-          end
-
-          middlewares :result, scope: :class do
-            use ConvenientService::Common::Plugins::NormalizesEnv::Middleware
-
-            use ConvenientService::Service::Plugins::CanHaveStubbedResult::Middleware
-          end
-
-          # rubocop:disable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
-          class self::Result
-            include ConvenientService::Core
-
-            concerns do
-              use ConvenientService::Common::Plugins::HasInternals::Concern
-              use ConvenientService::Common::Plugins::HasConstructor::Concern
-              use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Concern
+            middlewares :result, scope: :class do
+              observe middleware
             end
 
-            middlewares :initialize do
-              use ConvenientService::Common::Plugins::NormalizesEnv::Middleware
-
-              use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Middleware
+            def result
+              success
             end
-
-            class self::Internals
-              include ConvenientService::Core
-
-              concerns do
-                use ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Plugins::HasCache::Concern
-              end
-            end
-          end
-          # rubocop:enable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
-
-          def result
-            success
           end
         end
       end
@@ -223,4 +189,4 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStubbedResult::Middle
     end
   end
 end
-# rubocop:enable RSpec/NestedGroups
+# rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers

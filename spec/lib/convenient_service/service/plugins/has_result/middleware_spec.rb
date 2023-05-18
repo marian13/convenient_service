@@ -6,10 +6,12 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Service::Plugins::HasResult::Middleware do
+  let(:middleware) { described_class }
+
   example_group "inheritance" do
     include ConvenientService::RSpec::Matchers::BeDescendantOf
 
-    subject { described_class }
+    subject { middleware }
 
     it { is_expected.to be_descendant_of(ConvenientService::MethodChainMiddleware) }
   end
@@ -23,7 +25,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Middleware do
       end
 
       it "returns intended methods" do
-        expect(described_class.intended_methods).to eq(spec.intended_methods)
+        expect(middleware.intended_methods).to eq(spec.intended_methods)
       end
     end
   end
@@ -38,14 +40,20 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Middleware do
 
       subject(:method_value) { method.call }
 
-      let(:method) { wrap_method(service_instance, :result, middlewares: described_class) }
+      let(:method) { wrap_method(service_instance, :result, observe_middleware: middleware) }
 
       let(:service_class) do
-        Class.new do
-          include ConvenientService::Configs::Standard
+        Class.new.tap do |klass|
+          klass.class_exec(middleware) do |middleware|
+            include ConvenientService::Configs::Standard
 
-          def result
-            success
+            middlewares :result do
+              observe middleware
+            end
+
+            def result
+              success
+            end
           end
         end
       end
@@ -62,11 +70,17 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Middleware do
 
       context "when `result` is NOT result" do
         let(:service_class) do
-          Class.new do
-            include ConvenientService::Configs::Standard
+          Class.new.tap do |klass|
+            klass.class_exec(middleware) do |middleware|
+              include ConvenientService::Configs::Standard
 
-            def result
-              "string value"
+              middlewares :result do
+                observe middleware
+              end
+
+              def result
+                "string value"
+              end
             end
           end
         end
@@ -89,11 +103,17 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Middleware do
 
       context "when `result` is result" do
         let(:service_class) do
-          Class.new do
-            include ConvenientService::Configs::Standard
+          Class.new.tap do |klass|
+            klass.class_exec(middleware) do |middleware|
+              include ConvenientService::Configs::Standard
 
-            def result
-              success
+              middlewares :result do
+                observe middleware
+              end
+
+              def result
+                success
+              end
             end
           end
         end

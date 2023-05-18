@@ -17,11 +17,10 @@ module ConvenientService
 
           class_methods do
             ##
-            # @return [Object]
-            # @since 0.2.0
+            # @return [Object] Can be any type.
             #
-            def create(...)
-              new(...)
+            def new(...)
+              new_without_commit_config(...)
             end
           end
         end

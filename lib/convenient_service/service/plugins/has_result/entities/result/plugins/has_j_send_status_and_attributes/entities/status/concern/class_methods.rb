@@ -26,6 +26,18 @@ module ConvenientService
                             new(value: other.value)
                           end
                         end
+
+                        ##
+                        # @param other [Object] Can be any type.
+                        # @return [Boolean, nil]
+                        #
+                        # @internal
+                        #   NOTE: Check `Module.===` in order to get an idea of how `super` works.
+                        #   - https://ruby-doc.org/core-2.7.0/Module.html#method-i-3D-3D-3D
+                        #
+                        def ===(other)
+                          Commands::IsStatus.call(status: other) || super
+                        end
                       end
                     end
                   end

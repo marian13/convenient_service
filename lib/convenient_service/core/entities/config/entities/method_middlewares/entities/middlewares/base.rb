@@ -2,7 +2,7 @@
 
 require_relative "base/concern"
 require_relative "base/constants"
-require_relative "base/entities"
+require_relative "base/commands"
 require_relative "base/structs"
 
 module ConvenientService
