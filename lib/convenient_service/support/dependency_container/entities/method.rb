@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-require "byebug"
 
 module ConvenientService
   module Support
@@ -148,14 +147,14 @@ module ConvenientService
           # @return [Array<Symbol>]
           #
           def slug_parts
-            @slug_parts ||= Utils::String.split(slug, ".", "::").map(&:to_sym)
+            @slug_parts ||= Commands::GetSlugParts.call(slug: slug)
           end
 
           ##
           # @return [Array<Symbol>]
           #
           def alias_slug_parts
-            @alias_slug_parts ||= Utils::String.split(alias_slug, ".", "::").map(&:to_sym)
+            @alias_slug_parts ||= Commands::GetSlugParts.call(slug: alias_slug)
           end
         end
       end
