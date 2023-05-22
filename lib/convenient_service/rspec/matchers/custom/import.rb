@@ -5,6 +5,12 @@ module ConvenientService
     module Matchers
       module Custom
         class Import
+          include ConvenientService::DependencyContainer::Import
+
+          import :"constants.DEFAULT_SCOPE", from: ConvenientService::Support::DependencyContainer::Container
+          import :"constants.DEFAULT_PREPEND", from: ConvenientService::Support::DependencyContainer::Container
+          import :"commands.GetSlugParts", from: ConvenientService::Support::DependencyContainer::Container
+
           ##
           # @param slug [Symbol, String]
           # @param scope [Symbol]
@@ -13,12 +19,12 @@ module ConvenientService
           # @param as [Symbol, String]
           # @return [void]
           #
-          def initialize(slug, from:, as: nil, scope: :instance, prepend: false)
+          def initialize(slug, from:, as: nil, scope: constants.DEFAULT_SCOPE, prepend: constants.DEFAULT_PREPEND)
             @slug = slug
             @scope = scope
             @from = from
             @prepend = prepend
-            @as = as
+            @alias_slug = as
           end
 
           ##
@@ -26,31 +32,64 @@ module ConvenientService
           # @return [Boolean]
           #
           def matches?(klass)
-            # To Do
+            @klass = klass
+
+            main_namespace = Utils::Module.fetch_own_const(klass, :"Imported#{imported_prefix}#{scoped_prefix}Methods")
+
+            return false unless main_namespace
+
+            actual_method = method_name_parts.reduce(main_namespace) do |namespace, name|
+              next namespace unless namespace
+
+              namespace.namespaces.find_by(name: name) || find_method_in(namespace, name)
+            end
+
+            actual_method == expected_method
           end
 
           ##
           # @return [String]
           #
           def description
-            "import `#{slug}` with scope `#{scope}` from `#{from}` prepend: `#{prepend}`"
+            "import `#{slug}` as: `#{alias_slug}` with scope: `#{scope}` from: `#{from}` with  prepend: `#{prepend}`"
           end
 
           ##
           # @return [String]
           #
           def failure_message
-            "expected `#{klass}` to have imported `#{slug}` with scope `#{scope}` from `#{from}` prepend: `#{prepend}`"
+            "expected `#{klass}` to import `#{slug}` as: `#{alias_slug}` with scope: `#{scope}` from: `#{from}` with  prepend: `#{prepend}`"
           end
 
           ##
           # @return [String]
           #
           def failure_message_when_negated
-            "expected `#{klass}` NOT to have imported `#{slug}` with scope `#{scope}` from `#{from}` prepend: `#{prepend}`"
+            "expected `#{klass}` NOT to import `#{slug}` as: `#{alias_slug}` with scope: `#{scope}` from: `#{from}` with  prepend: `#{prepend}`"
           end
 
           private
+
+          ##
+          # @return [Symbol]
+          #
+          def name
+            @name ||= alias_slug_parts.last || slug_parts.last
+          end
+
+          ##
+          # @return [Array]
+          #
+          def slug_parts
+            @slug_parts ||= commands.GetSlugParts.call(slug: slug)
+          end
+
+          ##
+          # @return [Array]
+          #
+          def alias_slug_parts
+            @alias_slug_parts ||= commands.GetSlugParts.call(slug: alias_slug)
+          end
 
           ##
           # @!attribute [r] slug
@@ -81,6 +120,12 @@ module ConvenientService
           #   @return [Class, Module]
           #
           attr_reader :klass
+
+          ##
+          # @!attribute [r] alias_slug
+          #   @return [String, Symbol]
+          #
+          attr_reader :alias_slug
         end
       end
     end
