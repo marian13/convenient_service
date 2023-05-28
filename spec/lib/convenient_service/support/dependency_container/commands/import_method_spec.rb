@@ -18,9 +18,9 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::Import
 
       let(:importing_module) { ConvenientService::Support::DependencyContainer::Commands::CreateMethodsModule.call }
 
-      let(:exported_method) { ConvenientService::Support::DependencyContainer::Entities::Method.new(slug: full_name, scope: scope, body: body) }
+      let(:exported_method) { ConvenientService::Support::DependencyContainer::Entities::Method.new(slug: slug, scope: scope, body: body) }
 
-      let(:full_name) { :"foo.bar.baz.qux" }
+      let(:slug) { :"foo.bar.baz.qux" }
       let(:body) { proc { :"foo.bar.baz.qux" } }
 
       context "when `scope` is instance" do

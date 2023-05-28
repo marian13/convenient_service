@@ -89,8 +89,6 @@ module ConvenientService
                 sub_namespace
               end
 
-              namespaces_enum(mod)
-
             ##
             # NOTE:
             #   - Same methods are redefined.
