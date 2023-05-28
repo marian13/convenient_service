@@ -101,7 +101,7 @@ module ConvenientService
             self
           end
 
-          def defined_in_module?(mod:)
+          def defined_in_module?(mod)
             actual_method = method_name_parts.reduce(mod) do |namespace, name|
               next namespace unless namespace
 

@@ -22,10 +22,10 @@ module ConvenientService
           #
           def initialize(slug, from:, as: nil, scope: constants.DEFAULT_SCOPE, prepend: constants.DEFAULT_PREPEND)
             @slug = slug
-            @scope = scope
             @from = from
-            @prepend = prepend
             @alias_slug = as
+            @scope = scope
+            @prepend = prepend
           end
 
           ##
