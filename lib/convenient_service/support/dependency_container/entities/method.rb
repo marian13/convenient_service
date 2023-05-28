@@ -38,7 +38,7 @@ module ConvenientService
           # @param alias_slug [String, Symbol]
           # @return [void]
           #
-          def initialize(slug:, scope:, body:, alias_slug: "")
+          def initialize(slug:, scope:, body: nil, alias_slug: "")
             @slug = slug
             @scope = scope
             @body = body
@@ -99,6 +99,16 @@ module ConvenientService
             innermost_namespace.define_method(name, &body)
 
             self
+          end
+
+          def defined_in_module?(mod:, expected_method:)
+            actual_method = method_name_parts.reduce(mod) do |namespace, name|
+              next namespace unless namespace
+
+              namespace.namespaces.find_by(name: name) || find_method_in(namespace, name)
+            end
+
+            actual_method == expected_method
           end
 
           ##

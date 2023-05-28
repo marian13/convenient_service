@@ -10,6 +10,7 @@ module ConvenientService
           import :"constants.DEFAULT_SCOPE", from: ConvenientService::Support::DependencyContainer::Container
           import :"constants.DEFAULT_PREPEND", from: ConvenientService::Support::DependencyContainer::Container
           import :"commands.FetchImportedScopedMethods", from: ConvenientService::Support::DependencyContainer::Container
+          import :"entities.Method", from: ConvenientService::Support::DependencyContainer::Container
 
           ##
           # @param slug [Symbol, String]
@@ -34,17 +35,13 @@ module ConvenientService
           def matches?(klass)
             @klass = klass
 
+            method = entities.Method.new(slug: slug, scope: scope, alias_slug: alias_slug)
+
             namespace = commands.FetchImportedScopedMethods.call(importing_module: klass, scope: scope, prepend: prepend)
 
             return false unless namespace
 
-            actual_method = method_name_parts.reduce(main_namespace) do |namespace, name|
-              next namespace unless namespace
-
-              namespace.namespaces.find_by(name: name) || find_method_in(namespace, name)
-            end
-
-            actual_method == expected_method
+            method.defined_in_module?(mod: namespace, expected_method: expected_method)
           end
 
           ##

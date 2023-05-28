@@ -25,6 +25,10 @@ module ConvenientService
         export :"commands.FetchImportedScopedMethods" do
           Commands::FetchImportedScopedMethods
         end
+
+        export :"entities.Method" do
+          Entities::Method
+        end
       end
     end
   end
