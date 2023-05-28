@@ -10,17 +10,19 @@ module ConvenientService
           import :"constants.DEFAULT_SCOPE", from: ConvenientService::Support::DependencyContainer::Container
           import :"constants.DEFAULT_PREPEND", from: ConvenientService::Support::DependencyContainer::Container
           import :"commands.FetchImportedScopedMethods", from: ConvenientService::Support::DependencyContainer::Container
+          import :"commands.AssertValidContainer", from: ConvenientService::Support::DependencyContainer::Container
+          import :"commands.AssertValidScope", from: ConvenientService::Support::DependencyContainer::Container
           import :"entities.Method", from: ConvenientService::Support::DependencyContainer::Container
 
           ##
           # @param slug [Symbol, String]
-          # @param scope [Symbol]
-          # @param from [Class, Module]
-          # @param prepend [Boolean]
+          # @param scope [Symbol, Constants::DEFAULT_SCOPE]
+          # @param from [Module]
+          # @param prepend [Boolean, Constants::DEFAULT_PREPEND]
           # @param as [Symbol, String]
           # @return [void]
           #
-          def initialize(slug, from:, as: nil, scope: constants.DEFAULT_SCOPE, prepend: constants.DEFAULT_PREPEND)
+          def initialize(slug, from:, as: "", scope: constants.DEFAULT_SCOPE, prepend: constants.DEFAULT_PREPEND)
             @slug = slug
             @from = from
             @alias_slug = as
@@ -33,6 +35,10 @@ module ConvenientService
           # @return [Boolean]
           #
           def matches?(klass)
+            commands.AssertValidContainer.call(container: from)
+
+            commands.AssertValidScope.call(scope: scope)
+
             @klass = klass
 
             method = entities.Method.new(slug: slug, scope: scope, alias_slug: alias_slug)
@@ -41,7 +47,7 @@ module ConvenientService
 
             return false unless namespace
 
-            method.defined_in_module?(mod: namespace)
+            method.defined_in_module?(namespace)
           end
 
           ##
@@ -81,7 +87,7 @@ module ConvenientService
 
           ##
           # @!attribute [r] from
-          #   @return [Class, Module]
+          #   @return [Module]
           #
           attr_reader :from
 

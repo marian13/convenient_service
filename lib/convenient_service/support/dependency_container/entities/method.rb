@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require "byebug"
 
 module ConvenientService
   module Support
@@ -21,7 +22,7 @@ module ConvenientService
 
           ##
           # @!attribute [r] body
-          #   @return [Proc]
+          #   @return [Proc, nil]
           #
           attr_reader :body
 
@@ -56,7 +57,14 @@ module ConvenientService
           # @return [Array<ConvenientService::Support::DependencyContainer::Entities::Namespace>]
           #
           def namespaces
-            @namespaces ||= (alias_slug_parts.any? ? alias_slug_parts : slug_parts).slice(0..-2).map { |part| Entities::Namespace.new(name: part) }
+            @namespaces ||= processed_method_slug_parts.slice(0..-2).map { |part| Entities::Namespace.new(name: part) }
+          end
+
+          ##
+          # @return [Array<Symbol>]
+          #
+          def processed_method_slug_parts
+            @processed_method_slug_parts ||= alias_slug_parts.any? ? alias_slug_parts : slug_parts
           end
 
           ##
@@ -100,13 +108,13 @@ module ConvenientService
           end
 
           def defined_in_module?(mod)
-            actual_method = method_name_parts.reduce(mod) do |namespace, name|
+            actual_method = processed_method_slug_parts.reduce(mod) do |namespace, name|
               next namespace unless namespace
 
-              namespace.namespaces.find_by(name: name) || find_method_in(namespace, name)
+              namespace.namespaces.find_by(name: name)
             end
 
-            actual_method
+            actual_method == name
           end
 
           ##
@@ -150,6 +158,13 @@ module ConvenientService
           #
           def alias_slug_parts
             @alias_slug_parts ||= Commands::GetSlugParts.call(slug: alias_slug)
+          end
+
+          def find_method_depending_on_scope(namespace, method)
+            case scope
+            when Constants::CLASS_SCOPE then namespace.singleton_methods(false).find { |singleton_method| singleton_method == method }
+            when Constants::INSTANCE_SCOPE then namespace.instance_methods(false).find { |instance_method| instance_method == method }
+            end
           end
         end
       end

@@ -9,10 +9,10 @@ module ConvenientService
         class_methods do
           ##
           # @param slug [String, Symbol]
-          # @param as [String, Symbol, nil]
+          # @param as [String, Symbol, Support::NOT_PASSED]
           # @param from [Module]
-          # @param scope [:instance, :class]
-          # @param prepend [Boolean]
+          # @param scope [Symbol, Constants::DEFAULT_SCOPE]
+          # @param prepend [Boolean, Constants::DEFAULT_PREPEND]
           # @return [ConvenientService::Support::DependencyContainer::Entities::Method]
           #
           def import(slug, from:, as: Support::NOT_PASSED, scope: Constants::DEFAULT_SCOPE, prepend: Constants::DEFAULT_PREPEND)

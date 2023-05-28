@@ -19,7 +19,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Import do
   let(:default_kwargs) { {from: container, scope: scope, prepend: prepend} }
 
   let(:container) do
-    Class.new do
+    Module.new do
       include ConvenientService::Support::DependencyContainer::Export
 
       export :"foo::bar::baz", scope: :class do
