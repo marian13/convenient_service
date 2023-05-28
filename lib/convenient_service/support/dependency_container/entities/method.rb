@@ -67,6 +67,10 @@ module ConvenientService
             ##
             # NOTE: `innermost_namespace` is just `mod`, when `namespaces` are empty.
             #
+            # @internal
+            #   NOTE: Unfortunately, the Iterator pattern does NOT suit here :(
+            #   @marian13, @Olha-30 you can try later, but there are no promises it will be a successful attempt.
+            #
             innermost_namespace =
               namespaces.reduce(mod) do |namespace, sub_namespace|
                 already_defined_sub_namespace = namespace.namespaces.find_by(name: sub_namespace.name)
@@ -95,23 +99,6 @@ module ConvenientService
             innermost_namespace.define_method(name, &body)
 
             self
-          end
-
-          def namespaces_enum(namespace)
-            ::Enumerator.new do |yielder|
-              yielder.yield(namespace)
-
-              namespaces.each do |sub_namespace|
-                if namespace.namespaces.find_by(name: sub_namespace.name).nil?
-                  namespace.namespaces << sub_namespace
-                  namespace.define_method(sub_namespace.name) { sub_namespace.body.call }
-                end
-
-                namespace = sub_namespace
-
-                yielder.yield(namespace)
-              end
-            end
           end
 
           ##
