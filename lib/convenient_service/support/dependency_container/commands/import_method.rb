@@ -57,24 +57,7 @@ module ConvenientService
           # @return [Module]
           #
           def imported_scoped_methods
-            @imported_scoped_methods ||= Utils::Module.fetch_own_const(importing_module, :"Imported#{imported_prefix}#{scoped_prefix}Methods") { Commands::CreateMethodsModule.call }
-          end
-
-          ##
-          # @return [String]
-          #
-          def imported_prefix
-            prepend ? "Prepended" : "Included"
-          end
-
-          ##
-          # @return [String]
-          #
-          def scoped_prefix
-            case scope
-            when Constants::INSTANCE_SCOPE then "Instance"
-            when Constants::CLASS_SCOPE then "Class"
-            end
+            @imported_scoped_methods ||= Commands::FetchImportedScopedMethods.call(importing_module: importing_module, scope: scope, prepend: prepend)
           end
 
           ##

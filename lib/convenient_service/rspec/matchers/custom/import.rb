@@ -9,7 +9,7 @@ module ConvenientService
 
           import :"constants.DEFAULT_SCOPE", from: ConvenientService::Support::DependencyContainer::Container
           import :"constants.DEFAULT_PREPEND", from: ConvenientService::Support::DependencyContainer::Container
-          import :"commands.GetSlugParts", from: ConvenientService::Support::DependencyContainer::Container
+          import :"commands.FetchImportedScopedMethods", from: ConvenientService::Support::DependencyContainer::Container
 
           ##
           # @param slug [Symbol, String]
@@ -34,9 +34,9 @@ module ConvenientService
           def matches?(klass)
             @klass = klass
 
-            main_namespace = Utils::Module.fetch_own_const(klass, :"Imported#{imported_prefix}#{scoped_prefix}Methods")
+            namespace = commands.FetchImportedScopedMethods.call(importing_module: klass, scope: scope, prepend: prepend)
 
-            return false unless main_namespace
+            return false unless namespace
 
             actual_method = method_name_parts.reduce(main_namespace) do |namespace, name|
               next namespace unless namespace
@@ -69,27 +69,6 @@ module ConvenientService
           end
 
           private
-
-          ##
-          # @return [Symbol]
-          #
-          def name
-            @name ||= alias_slug_parts.last || slug_parts.last
-          end
-
-          ##
-          # @return [Array]
-          #
-          def slug_parts
-            @slug_parts ||= commands.GetSlugParts.call(slug: slug)
-          end
-
-          ##
-          # @return [Array]
-          #
-          def alias_slug_parts
-            @alias_slug_parts ||= commands.GetSlugParts.call(slug: alias_slug)
-          end
 
           ##
           # @!attribute [r] slug

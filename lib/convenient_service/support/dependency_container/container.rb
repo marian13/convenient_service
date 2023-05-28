@@ -22,8 +22,8 @@ module ConvenientService
           Commands::AssertValidScope
         end
 
-        export :"commands.GetSlugParts" do
-          Commands::GetSlugParts
+        export :"commands.FetchImportedScopedMethods" do
+          Commands::FetchImportedScopedMethods
         end
       end
     end
