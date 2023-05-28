@@ -18,8 +18,14 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Container do
 
     it { is_expected.to export(:"constants.DEFAULT_SCOPE") }
 
+    it { is_expected.to export(:"constants.DEFAULT_PREPEND") }
+
     it { is_expected.to export(:"commands.AssertValidContainer") }
 
     it { is_expected.to export(:"commands.AssertValidScope") }
+
+    it { is_expected.to export(:"commands.FetchImportedScopedMethods") }
+
+    it { is_expected.to export(:"entities.Method") }
   end
 end
