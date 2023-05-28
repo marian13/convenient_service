@@ -101,14 +101,14 @@ module ConvenientService
             self
           end
 
-          def defined_in_module?(mod:, expected_method:)
+          def defined_in_module?(mod:)
             actual_method = method_name_parts.reduce(mod) do |namespace, name|
               next namespace unless namespace
 
               namespace.namespaces.find_by(name: name) || find_method_in(namespace, name)
             end
 
-            actual_method == expected_method
+            actual_method
           end
 
           ##

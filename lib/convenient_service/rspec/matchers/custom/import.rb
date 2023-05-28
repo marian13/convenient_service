@@ -41,7 +41,7 @@ module ConvenientService
 
             return false unless namespace
 
-            method.defined_in_module?(mod: namespace, expected_method: expected_method)
+            method.defined_in_module?(mod: namespace)
           end
 
           ##
