@@ -44,7 +44,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::AssertFile
 
       context "when assertion that file exists is successful" do
         ##
-        # NOTE: Tempfile uses its own let in order to prevent its premature garbage collection.
+        # NOTE: Tempfile uses its own `let` in order to prevent its premature garbage collection.
         #
         let(:tempfile) { Tempfile.new }
         let(:path) { tempfile.path }

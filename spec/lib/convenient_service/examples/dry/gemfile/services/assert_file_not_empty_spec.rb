@@ -33,7 +33,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::AssertFileNo
 
         context "when file is empty" do
           ##
-          # NOTE: Tempfile uses its own let in order to prevent its premature garbage collection.
+          # NOTE: Tempfile uses its own `let` in order to prevent its premature garbage collection.
           #
           let(:tempfile) { Tempfile.new }
           let(:path) { tempfile.path }
@@ -46,7 +46,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::AssertFileNo
 
       context "when assertion that file is NOT empty is successful" do
         ##
-        # NOTE: Tempfile uses its own let in order to prevent its premature garbage collection.
+        # NOTE: Tempfile uses its own `let` in order to prevent its premature garbage collection.
         #
         let(:tempfile) { Tempfile.new.tap { |file| file.write("content") }.tap(&:close) }
         let(:path) { tempfile.path }

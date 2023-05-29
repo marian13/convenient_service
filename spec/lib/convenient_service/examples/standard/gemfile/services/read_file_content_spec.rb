@@ -8,13 +8,9 @@ require "convenient_service"
 RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::ReadFileContent do
   include ConvenientService::RSpec::Helpers::StubService
   include ConvenientService::RSpec::Matchers::Results
-  include ConvenientService::RSpec::Matchers::HaveAttrReader
   include ConvenientService::RSpec::Matchers::IncludeModule
 
-  let(:service) { described_class.new(**default_options) }
-
-  let(:default_options) { {path: path} }
-  let(:path) { "some path" }
+  let(:result) { described_class.result(path: path) }
 
   example_group "modules" do
     subject { described_class }
@@ -22,62 +18,52 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::ReadFil
     it { is_expected.to include_module(ConvenientService::Standard::Config) }
   end
 
-  example_group "attributes" do
-    subject { service }
+  example_group "class methods" do
+    describe ".result" do
+      context "when reading file content is NOT successfull" do
+        context "when `path` is NOT valid" do
+          context "when `path` is `nil`" do
+            let(:path) { nil }
 
-    it { is_expected.to have_attr_reader(:path) }
-  end
+            it "returns `failure` with `data`" do
+              expect(result).to be_failure.with_data(path: "Path is `nil`").of_service(described_class).of_step(:validate_path)
+            end
+          end
 
-  describe "#result" do
-    subject(:result) { service.result }
+          context "when `path` is empty" do
+            let(:path) { "" }
 
-    context "when file does NOT exist" do
-      before do
-        stub_service(ConvenientService::Examples::Standard::Gemfile::Services::AssertFileExists)
-          .with_arguments(path: path)
-          .to return_error
+            it "returns `failure` with `data`" do
+              expect(result).to be_failure.with_data(path: "Path is empty").of_service(described_class).of_step(:validate_path)
+            end
+          end
+        end
+
+        context "when assertion that file exists is NOT successfull" do
+          let(:path) { "not_existing_path" }
+
+          it "returns intermediate step result" do
+            expect(result).to be_not_success.of_service(described_class).of_step(ConvenientService::Examples::Standard::Gemfile::Services::AssertFileExists)
+          end
+        end
+
+        context "when assertion that file is NOT empty is NOT successfull" do
+          let(:temfile) { Tempfile.new }
+          let(:path) { temfile.path }
+
+          it "returns intermediate step result" do
+            expect(result).to be_not_success.of_service(described_class).of_step(ConvenientService::Examples::Standard::Gemfile::Services::AssertFileNotEmpty)
+          end
+        end
       end
 
-      it "returns intermediate step result" do
-        expect(result).to be_not_success.of_step(ConvenientService::Examples::Standard::Gemfile::Services::AssertFileExists)
-      end
-    end
-
-    context "when file exists" do
-      let(:path) { temfile.path }
-
-      before do
-        stub_service(ConvenientService::Examples::Standard::Gemfile::Services::AssertFileExists)
-          .with_arguments(path: path)
-          .to return_success
-      end
-
-      context "when file is NOT empty" do
+      context "when reading file content is successfull" do
         let(:temfile) { Tempfile.new.tap { |tempfile| tempfile.write(content) }.tap(&:close) }
+        let(:path) { temfile.path }
         let(:content) { "some content" }
 
-        before do
-          stub_service(ConvenientService::Examples::Standard::Gemfile::Services::AssertFileNotEmpty)
-            .with_arguments(path: path)
-            .to return_success
-        end
-
         it "returns success with content" do
-          expect(result).to be_success.with_data({content: content})
-        end
-      end
-
-      context "when file is empty" do
-        let(:temfile) { Tempfile.new }
-
-        before do
-          stub_service(ConvenientService::Examples::Standard::Gemfile::Services::AssertFileNotEmpty)
-            .with_arguments(path: path)
-            .to return_error
-        end
-
-        it "returns intermediate step result" do
-          expect(result).to be_not_success.of_step(ConvenientService::Examples::Standard::Gemfile::Services::AssertFileNotEmpty)
+          expect(result).to be_success.with_data({content: content}).of_service(described_class).of_step(:result)
         end
       end
     end

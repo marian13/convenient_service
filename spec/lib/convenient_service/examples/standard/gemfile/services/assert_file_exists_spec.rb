@@ -10,7 +10,6 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::AssertF
   include ConvenientService::RSpec::Matchers::IncludeModule
 
   let(:result) { described_class.result(path: path) }
-  let(:path) { double }
 
   example_group "modules" do
     subject { described_class }
@@ -50,7 +49,7 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::AssertF
 
       context "when assertion that file exists is successful" do
         ##
-        # NOTE: Tempfile uses its own let in order to prevent its premature garbage collection.
+        # NOTE: Tempfile uses its own `let` in order to prevent its premature garbage collection.
         #
         let(:tempfile) { Tempfile.new }
         let(:path) { tempfile.path }
