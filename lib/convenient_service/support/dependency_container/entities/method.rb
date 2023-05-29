@@ -108,13 +108,13 @@ module ConvenientService
           end
 
           def defined_in_module?(mod)
-            actual_method = processed_method_slug_parts.reduce(mod) do |namespace, name|
+            method = processed_method_slug_parts.reduce(mod) do |namespace, name|
               next namespace unless namespace
 
-              namespace.namespaces.find_by(name: name)
+              namespace.namespaces.find_by(name: name) || find_method(namespace, name)
             end
 
-            actual_method == name
+            method == name
           end
 
           ##
@@ -160,11 +160,20 @@ module ConvenientService
             @alias_slug_parts ||= Commands::GetSlugParts.call(slug: alias_slug)
           end
 
-          def find_method_depending_on_scope(namespace, method)
-            case scope
-            when Constants::CLASS_SCOPE then namespace.singleton_methods(false).find { |singleton_method| singleton_method == method }
-            when Constants::INSTANCE_SCOPE then namespace.instance_methods(false).find { |instance_method| instance_method == method }
-            end
+          ##
+          # @return [Symbol, nil]
+          #
+          def find_method(namespace, name)
+            methods_depending_on_namespace_class(namespace).find { |method| method == name }
+          end
+
+          ##
+          # @return [Array]
+          #
+          def methods_depending_on_namespace_class(namespace)
+            return namespace.instance_methods(false) if namespace.instance_of?(::Module)
+
+            namespace.singleton_methods(false)
           end
         end
       end
