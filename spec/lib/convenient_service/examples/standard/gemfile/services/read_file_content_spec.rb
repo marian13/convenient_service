@@ -6,7 +6,6 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::ReadFileContent do
-  include ConvenientService::RSpec::Helpers::StubService
   include ConvenientService::RSpec::Matchers::Results
   include ConvenientService::RSpec::Matchers::IncludeModule
 
@@ -20,7 +19,7 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::ReadFil
 
   example_group "class methods" do
     describe ".result" do
-      context "when reading file content is NOT successfull" do
+      context "when reading file content is NOT successful" do
         context "when `path` is NOT valid" do
           context "when `path` is `nil`" do
             let(:path) { nil }
@@ -39,7 +38,7 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::ReadFil
           end
         end
 
-        context "when assertion that file exists is NOT successfull" do
+        context "when assertion that file exists is NOT successful" do
           let(:path) { "not_existing_path" }
 
           it "returns intermediate step result" do
@@ -47,7 +46,7 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::ReadFil
           end
         end
 
-        context "when assertion that file is NOT empty is NOT successfull" do
+        context "when assertion that file is NOT empty is NOT successful" do
           let(:temfile) { Tempfile.new }
           let(:path) { temfile.path }
 
@@ -57,7 +56,7 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::ReadFil
         end
       end
 
-      context "when reading file content is successfull" do
+      context "when reading file content is successful" do
         let(:temfile) { Tempfile.new.tap { |tempfile| tempfile.write(content) }.tap(&:close) }
         let(:path) { temfile.path }
         let(:content) { "some content" }
