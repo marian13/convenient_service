@@ -48,6 +48,19 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "benchmark-ips", "~> 2.12.0"
 
   ##
+  # Used for debugging any Ruby code (CRuby, JRuby, etc), since it written in plain Ruby.
+  # Has minimalistic interface.
+  # Does NOT support frame filtering.
+  # - https://github.com/gsamokovarov/break
+  #
+  spec.add_development_dependency "break"
+
+  ##
+  # Used for debugging CRuby code.
+  # Check `debug` if you need frame filtering.
+  # Check `break` if you need to debug JRuby.
+  # - https://github.com/deivid-rodriguez/byebug
+  #
   # NOTE: `byebug` has C extensions, that is why it is NOT supported in JRuby.
   # - https://github.com/deivid-rodriguez/byebug/tree/master/ext/byebug
   # - https://github.com/deivid-rodriguez/byebug/issues/179#issuecomment-152727003
@@ -59,6 +72,21 @@ Gem::Specification.new do |spec|
   # - https://github.com/gjtorikian/commonmarker/tree/main/ext/commonmarker
   #
   spec.add_development_dependency "commonmarker" unless ConvenientService::Support::Ruby.jruby?
+
+  ##
+  # Used for debugging CRuby code.
+  # Has almost the same public API as `byebug`, but supports frame filtering.
+  # Check `break` if you need to debug JRuby.
+  # - https://github.com/ruby/debug
+  # - https://st0012.dev/from-byebug-to-ruby-debug
+  # - https://st0012.dev/from-byebug-to-ruby-debug#heading-configuration
+  # - https://github.com/ruby/debug#configuration
+  # - ENV["RUBY_DEBUG_SKIP_PATH"]
+  #
+  # NOTE: `debug` has C extensions, that is why it is NOT supported in JRuby.
+  # - https://github.com/ruby/debug/tree/master/ext/debug
+  #
+  spec.add_development_dependency "debug" unless ConvenientService::Support::Ruby.jruby?
 
   spec.add_development_dependency "faker"
 

@@ -167,9 +167,19 @@ module ConvenientService
         require "awesome_print"
 
         ##
+        # - https://github.com/gsamokovarov/break
+        #
+        require "break"
+
+        ##
         # - https://github.com/deivid-rodriguez/byebug
         #
         require "byebug" unless ruby.jruby?
+
+        ##
+        # - https://github.com/ruby/debug
+        #
+        require "debug" unless ruby.jruby?
 
         ##
         # - https://ruby-doc.org/stdlib-2.7.0/libdoc/ostruct/rdoc/OpenStruct.html
