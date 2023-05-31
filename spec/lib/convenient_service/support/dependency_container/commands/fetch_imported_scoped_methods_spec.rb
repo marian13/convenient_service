@@ -153,7 +153,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::FetchI
           it "does NOT set own const" do
             command_result
 
-            expect(importing_module.constants.include?(:ImportedIncludedClassMethods)).to be_falsey
+            expect(importing_module.constants).not_to include(:ImportedIncludedClassMethods)
           end
         end
       end
