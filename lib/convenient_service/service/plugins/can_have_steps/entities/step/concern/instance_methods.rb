@@ -5,6 +5,10 @@ module ConvenientService
     module Plugins
       module CanHaveSteps
         module Entities
+          ##
+          # @internal
+          #   TODO: Extract `StepDefinition`. This way `has_organizer?` check can be avoided completely.
+          #
           class Step
             module Concern
               module InstanceMethods
@@ -76,10 +80,16 @@ module ConvenientService
                   @input_values ||= calculate_input_values
                 end
 
+                ##
+                # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+                #
                 def original_result
                   @original_result ||= calculate_original_result
                 end
 
+                ##
+                # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+                #
                 def result
                   @result ||= calculate_result
                 end
@@ -127,7 +137,7 @@ module ConvenientService
                 end
 
                 def to_kwargs
-                  {in: inputs, out: outputs, index: index, container: container, organizer: organizer}
+                  kwargs.merge(in: inputs, out: outputs, index: index, container: container, organizer: organizer)
                 end
 
                 private
@@ -145,6 +155,8 @@ module ConvenientService
                 end
 
                 ##
+                # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+                #
                 # @internal
                 #   IMPORTANT: `service.result(**input_values)` is the reason, why services should have only kwargs as arguments.
                 #
@@ -154,8 +166,24 @@ module ConvenientService
                   service.result(**input_values)
                 end
 
+                ##
+                # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+                #
+                # @internal
+                #   NOTE: `calculate_result` has middlewares.
+                #
                 def calculate_result
-                  original_result.copy(overrides: {kwargs: {step: self, service: organizer}})
+                  copy_result(original_result)
+                end
+
+                ##
+                # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+                #
+                # @internal
+                #   TODO: Better name for `copy_result`.
+                #
+                def copy_result(result)
+                  result.copy(overrides: {kwargs: {step: self, service: organizer}})
                 end
 
                 def resolve_params

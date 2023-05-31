@@ -134,10 +134,16 @@ module ConvenientService
         class self::Step
           concerns do
             use Plugins::Common::HasResultDuckShortSyntax::Concern
+            use Plugins::Step::CanBeTried::Concern
+          end
+
+          middlewares :initialize do
+            use Plugins::Step::CanBeTried::Initialize::Middleware
           end
 
           middlewares :calculate_result do
             use Plugins::Step::CanHaveParentResult::Middleware
+            use Plugins::Step::CanBeTried::CalculateResult::Middleware
           end
         end
 

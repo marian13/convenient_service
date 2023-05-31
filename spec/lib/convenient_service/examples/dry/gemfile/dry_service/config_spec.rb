@@ -442,7 +442,8 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::DryService::Config do
                 ConvenientService::Common::Plugins::HasInternals::Concern,
                 ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeCompleted::Concern,
                 ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::HasInspect::Concern,
-                ConvenientService::Common::Plugins::HasResultDuckShortSyntax::Concern
+                ConvenientService::Common::Plugins::HasResultDuckShortSyntax::Concern,
+                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeTried::Concern
               ]
             end
 
@@ -451,11 +452,25 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::DryService::Config do
             end
           end
 
+          example_group "#initialize middlewares" do
+            let(:initialize_middlewares) do
+              [
+                ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
+                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeTried::Initialize::Middleware
+              ]
+            end
+
+            it "sets service step middlewares for `#initialize`" do
+              expect(service_class::Step.middlewares(:initialize).to_a).to eq(initialize_middlewares)
+            end
+          end
+
           example_group "#calculate_result middlewares" do
             let(:calculate_result_middlewares) do
               [
                 ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveParentResult::Middleware
+                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveParentResult::Middleware,
+                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeTried::CalculateResult::Middleware
               ]
             end
 

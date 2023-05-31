@@ -19,7 +19,7 @@ module ConvenientService
               Services::PrintShellCommand[text: command] if debug
 
               ##
-              # NOTE: When the command exit code is 0, `system` return true, and false otherwise.
+              # NOTE: When the command exit code is 0, `system` return `true`, and `false` otherwise.
               # - https://ruby-doc.org/core-3.1.2/Kernel.html#method-i-system
               # - https://stackoverflow.com/a/37329716/12201472
               #
