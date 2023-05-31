@@ -11,13 +11,19 @@ module ConvenientService
 
           intended_for :try_result
 
+          ##
+          # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+          #
+          # @internal
+          #   NOTE: Copy is returned to have a fresh status.
+          #
           def next(...)
-            original_try_result = chain.next(...)
+            try_result = chain.next(...)
 
-            raise Errors::ServiceTryReturnValueNotKindOfResult.new(service: entity, result: original_try_result) unless commands.is_result?(original_try_result)
-            raise Errors::ServiceTryReturnValueNotSuccess.new(service: entity, result: original_try_result) unless original_try_result.success?
+            raise Errors::ServiceTryReturnValueNotKindOfResult.new(service: entity, result: try_result) unless commands.is_result?(try_result)
+            raise Errors::ServiceTryReturnValueNotSuccess.new(service: entity, result: try_result) unless try_result.success?
 
-            original_try_result
+            try_result.copy
           end
         end
       end

@@ -155,8 +155,21 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveTryResult::Middleware
             end
           end
 
-          it "returns original method value" do
-            expect(method_value).to be_success.without_data
+          let(:try_result) { service_instance.success }
+
+          before do
+            allow(service_instance).to receive(:success).and_return(try_result)
+          end
+
+          it "returns `try_result`" do
+            expect(method_value).to eq(try_result)
+          end
+
+          specify do
+            expect { method_value }
+              .to delegate_to(try_result, :copy)
+              .without_arguments
+              .and_return_its_value
           end
         end
       end
