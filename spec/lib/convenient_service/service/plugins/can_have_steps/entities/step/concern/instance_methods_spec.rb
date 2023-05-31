@@ -6,9 +6,6 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Concern::InstanceMethods do
-  ##
-  # TODO: Context with `service`.
-  #
   let(:step_service_klass) do
     Class.new do
       include ConvenientService::Configs::Minimal
@@ -505,6 +502,34 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
       it "returns kwargs representation of step" do
         expect(step.to_kwargs).to eq(kwargs_representation)
+      end
+
+      context "when constructor kwargs have extra values" do
+        let(:kwargs) { {try: true, in: inputs, out: outputs, index: index, container: container, organizer: organizer} }
+
+        let(:kwargs_representation) do
+          {
+            in: step.inputs,
+            out: step.outputs,
+            index: step.index,
+            container: step.container,
+            organizer: step.organizer,
+            try: true
+          }
+        end
+
+        it "includes them into kwargs representation of step" do
+          expect(step.to_kwargs).to eq(kwargs_representation)
+        end
+
+        context "when constructor kwargs extra value has same key as value from kwargs representation" do
+          let(:step_instance) { step_class.new(*args, **kwargs.merge(in: [:bar])) }
+          let(:value) { [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method.cast(:bar, direction: :input).copy(overrides: {kwargs: {organizer: organizer}})] }
+
+          it "takes value from kwargs representation" do
+            expect(step.to_kwargs[:in]).to eq(value)
+          end
+        end
       end
     end
   end
