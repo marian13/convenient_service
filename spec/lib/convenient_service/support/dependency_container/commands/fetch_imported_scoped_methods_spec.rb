@@ -99,7 +99,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::FetchI
           end
 
           let(:method) { :foo }
-          let(:scope) { :instance}
+          let(:scope) { :instance }
 
           context "when prepend is false" do
             it "returns valid constant" do

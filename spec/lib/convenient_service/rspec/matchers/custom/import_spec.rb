@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-# rubocop:disable RSpec/MultipleMemoizedHelpers
+# rubocop:disable RSpec/MultipleMemoizedHelpers, RSpec/NestedGroups
 RSpec.describe ConvenientService::RSpec::Matchers::Custom::Import do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
@@ -29,7 +29,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Import do
         ":foo::bar::baz with scope: :class"
       end
 
-      export :"que", scope: :class do
+      export :que, scope: :class do
         ":que as: :xyzzy with scope: :class"
       end
 
@@ -145,8 +145,8 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Import do
 
       let(:kwargs_with_as_modified) { {from: container, as: as, scope: scope, prepend: prepend} }
 
-      let(:imported_slug) { :"que" }
-      let(:as) { :"xyzzy" }
+      let(:imported_slug) { :que }
+      let(:as) { :xyzzy }
 
       context "when `as` is passed" do
         it "returns true" do
@@ -210,4 +210,4 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Import do
     end
   end
 end
-# rubocop:enable RSpec/MultipleMemoizedHelpers
+# rubocop:enable RSpec/MultipleMemoizedHelpers, RSpec/NestedGroups
