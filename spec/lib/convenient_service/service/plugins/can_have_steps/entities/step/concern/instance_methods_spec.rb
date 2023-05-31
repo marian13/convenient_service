@@ -395,7 +395,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
         let(:message) do
           <<~TEXT
-            Step `#{step.service}` has not assigned organizer.
+            Step `#{step.printable_service}` has not assigned organizer.
 
             Did you forget to set it?
           TEXT
@@ -423,7 +423,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
         let(:message) do
           <<~TEXT
-            Step `#{step.service}` has not assigned organizer.
+            Step `#{step.printable_service}` has not assigned organizer.
 
             Did you forget to set it?
           TEXT
@@ -452,7 +452,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
         let(:message) do
           <<~TEXT
-            Step `#{step.service}` has not assigned organizer.
+            Step `#{step.printable_service}` has not assigned organizer.
 
             Did you forget to set it?
           TEXT

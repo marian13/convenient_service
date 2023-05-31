@@ -10,7 +10,7 @@ module ConvenientService
               class StepHasNoOrganizer < ::ConvenientService::Error
                 def initialize(step:)
                   message = <<~TEXT
-                    Step `#{step.service}` has not assigned organizer.
+                    Step `#{step.printable_service}` has not assigned organizer.
 
                     Did you forget to set it?
                   TEXT

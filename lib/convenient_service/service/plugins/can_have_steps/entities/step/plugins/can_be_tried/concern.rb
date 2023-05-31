@@ -59,10 +59,11 @@ module ConvenientService
                     # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
                     #
                     # @internal
-                    #   TODO: Better name for `copy_result`.
+                    #   NOTE: `copy` logic is used in `calculate_result` as well.
+                    #   TODO: Extract `copy` logic into separate method with a proper naming.
                     #
                     def calculate_try_result
-                      copy_result(original_try_result)
+                      original_try_result.copy(overrides: {kwargs: {step: self, service: organizer}})
                     end
                   end
                 end

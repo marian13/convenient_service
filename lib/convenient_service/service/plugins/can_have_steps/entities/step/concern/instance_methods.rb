@@ -221,19 +221,11 @@ module ConvenientService
                 #
                 # @internal
                 #   NOTE: `calculate_result` has middlewares.
+                #   NOTE: `copy` logic is used in `calculate_result` as well.
+                #   TODO: Extract `copy` logic into separate method with a proper naming.
                 #
                 def calculate_result
-                  copy_result(original_result)
-                end
-
-                ##
-                # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
-                #
-                # @internal
-                #   TODO: Better name for `copy_result`.
-                #
-                def copy_result(result)
-                  result.copy(overrides: {kwargs: {step: self, service: organizer}})
+                  original_result.copy(overrides: {kwargs: {step: self, service: organizer}})
                 end
 
                 ##
