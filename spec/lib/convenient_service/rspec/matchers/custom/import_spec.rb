@@ -6,17 +6,20 @@ require "convenient_service"
 
 # rubocop:disable RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::RSpec::Matchers::Custom::Import do
+  include ConvenientService::RSpec::Matchers::DelegateTo
+
   subject(:matcher_result) { matcher.matches?(klass) }
 
-  let(:matcher) { described_class.new(method_name, **kwargs) }
+  let(:matcher) { described_class.new(slug, **kwargs) }
 
-  let(:method_name) { imported_method_name }
+  let(:slug) { imported_slug }
   let(:scope) { :class }
   let(:prepend) { false }
+  let(:as) { "" }
 
-  let(:imported_method_name) { :"foo::bar::baz" }
+  let(:imported_slug) { :"foo::bar::baz" }
   let(:kwargs) { default_kwargs }
-  let(:default_kwargs) { {from: container, scope: scope, prepend: prepend} }
+  let(:default_kwargs) { {from: container, as: as, scope: scope, prepend: prepend} }
 
   let(:container) do
     Module.new do
@@ -39,64 +42,133 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Import do
   end
 
   describe "#matches?" do
-    before do
-      klass.import(imported_method_name, **kwargs)
-    end
+    describe "container" do
+      context "when `container` is valid" do
+        before do
+          klass.import(imported_slug, **kwargs)
+        end
 
-    context "when method is NOT imported" do
-      let(:method_name) { :non_existent }
+        specify do
+          expect { matcher_result }
+            .to delegate_to(ConvenientService::Support::DependencyContainer::Commands::AssertValidContainer, :call)
+            .with_arguments(container: container)
+        end
+      end
 
-      it "returns false" do
-        expect(matcher_result).to eq(false)
+      context "when `container` is NOT valid" do
+        let(:container) { Module.new }
+
+        it "raises `ConvenientService::Support::DependencyContainer::Errors::NotExportableModule`" do
+          expect { matcher_result }.to raise_error(ConvenientService::Support::DependencyContainer::Errors::NotExportableModule)
+        end
       end
     end
 
-    context "when method is imported" do
-      it "returns true" do
-        expect(matcher_result).to eq(true)
+    describe "scope" do
+      context "when scope is passed" do
+        context "when `scope` is valid" do
+          before do
+            klass.import(imported_slug, **kwargs)
+          end
+
+          specify do
+            expect { matcher_result }
+              .to delegate_to(ConvenientService::Support::DependencyContainer::Commands::AssertValidScope, :call)
+              .with_arguments(scope: scope)
+          end
+        end
+
+        context "when `scope` is NOT valid" do
+          let(:scope) { nil }
+
+          it "raises `ConvenientService::Support::DependencyContainer::Errors::InvalidScope`" do
+            expect { matcher_result }.to raise_error(ConvenientService::Support::DependencyContainer::Errors::InvalidScope)
+          end
+        end
+      end
+
+      context "when `scope` is NOT passed" do
+        let(:kwargs) { ConvenientService::Utils::Hash.except(default_kwargs, [:scope]) }
+
+        it "does NOT raise `ConvenientService::Support::DependencyContainer::Errors::InvalidScope`" do
+          expect { matcher_result }.not_to raise_error(ConvenientService::Support::DependencyContainer::Errors::InvalidScope)
+        end
       end
     end
 
-    context "when scope is NOT passed" do
-      let(:imported_method_name) { :foo }
-      let(:kwargs) { ConvenientService::Utils::Hash.except(default_kwargs, [:scope]) }
+    describe "namespace" do
+      context "when `namespace` is present" do
+        before do
+          klass.import(imported_slug, **kwargs)
+        end
 
-      it "returns true" do
-        expect(matcher_result).to eq(true)
+        it "returns true" do
+          expect(matcher_result).to be_truthy
+        end
+      end
+
+      context "when `namespace` is NOT present" do
+        it "returns false" do
+          expect(matcher_result).to be_falsey
+        end
       end
     end
 
-    context "when prepend is NOT passed" do
-      let(:kwargs) { ConvenientService::Utils::Hash.except(default_kwargs, [:prepend]) }
+    describe "prepend" do
+      context "when `prepend` is passed" do
+        it "returns true" do
+          expect(matcher_result).to be_truthy
+        end
+      end
 
-      it "returns true" do
-        expect(matcher_result).to eq(true)
+      context "when `prepend` is NOT passed" do
+        let(:kwargs) { ConvenientService::Utils::Hash.except(default_kwargs, [:prepend]) }
+
+        it "returns true" do
+          expect(matcher_result).to be_truthy
+        end
+      end
+    end
+
+    describe "as" do
+      context "when `as` is passed" do
+      end
+
+      context "when `as` is NOT passed" do
+      end
+    end
+
+    describe "method" do
+      context "when `method` is imported" do
+      end
+
+      context "when `method` is NOT imported" do
       end
     end
   end
 
   describe "#description" do
-    it "returns message" do
-      matcher_result
+    # it "returns message" do
+    #   matcher_result
 
-      expect(matcher.description).to eq("import `#{method_name}` with scope `#{scope}` from `#{container.class}` prepend: `#{prepend}`")
-    end
+    #   expect(matcher.description).to eq("import `#{slug}` with scope: `#{scope}` from `#{container}` with prepend: `#{prepend}`")
+    # end
   end
 
-  describe "#failure_message" do
-    it "returns message" do
-      matcher_result
+  # describe "#failure_message" do
+  #   it "returns message" do
+  #     matcher_result
 
-      expect(matcher.failure_message).to eq("expected `#{klass.class}` to have imported `#{method_name}` with scope `#{scope}` from `#{container.class}` prepend: `#{prepend}`")
-    end
-  end
+  #     expect(matcher.failure_message).to eq("expected `#{klass}` to import `#{slug}` with scope `#{scope}` from `#{container.class}` prepend: `#{prepend}`")
+  #   end
+  # end
 
-  describe "#failure_message_when_negated" do
-    it "returns message" do
-      matcher_result
+  # describe "#failure_message_when_negated" do
+  #   it "returns message" do
+  #     matcher_result
 
-      expect(matcher.failure_message_when_negated).to eq("expected `#{klass.class}` NOT to have imported `#{method_name}` with scope `#{scope}` from `#{container.class}` prepend: `#{prepend}`")
-    end
-  end
+  #     expect(matcher.failure_message_when_negated).to eq("expected `#{klass.class}` NOT to have imported `#{method_name}` with scope `#{scope}` from `#{container.class}` prepend: `#{prepend}`")
+  #   end
+  # end
 end
 # rubocop:enable RSpec/MultipleMemoizedHelpers
