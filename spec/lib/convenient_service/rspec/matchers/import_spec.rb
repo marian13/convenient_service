@@ -17,10 +17,19 @@ RSpec.describe ConvenientService::RSpec::Matchers::Import do
 
   let(:klass_instance) { klass.new }
   let(:method) { :foo }
+  let(:container) do
+    Module.new do
+      include ConvenientService::Support::DependencyContainer::Export
+
+      export :foo do
+        ":foo with scope: :instance"
+      end
+    end
+  end
 
   specify do
-    expect { klass_instance.import(method) }
+    expect { klass_instance.import(method, from: container) }
       .to delegate_to(ConvenientService::RSpec::Matchers::Custom::Import, :new)
-      .with_arguments(method)
+      .with_arguments(method, from: container)
   end
 end
