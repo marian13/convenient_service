@@ -29,6 +29,10 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Import do
         ":foo::bar::baz with scope: :class"
       end
 
+      export :"que", scope: :class do
+        ":que as: :xyzzy with scope: :class"
+      end
+
       export :foo do
         ":foo with scope: :instance"
       end
@@ -115,6 +119,10 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Import do
     end
 
     describe "prepend" do
+      before do
+        klass.import(imported_slug, **kwargs)
+      end
+
       context "when `prepend` is passed" do
         it "returns true" do
           expect(matcher_result).to be_truthy
@@ -131,44 +139,75 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Import do
     end
 
     describe "as" do
+      before do
+        klass.import(imported_slug, **kwargs_with_as_modified)
+      end
+
+      let(:kwargs_with_as_modified) { {from: container, as: as, scope: scope, prepend: prepend} }
+
+      let(:imported_slug) { :"que" }
+      let(:as) { :"xyzzy" }
+
       context "when `as` is passed" do
+        it "returns true" do
+          expect(matcher_result).to be_truthy
+        end
       end
 
       context "when `as` is NOT passed" do
+        let(:kwargs) { ConvenientService::Utils::Hash.except(default_kwargs, [:as]) }
+
+        it "returns false" do
+          expect(matcher_result).to be_falsey
+        end
       end
     end
 
     describe "method" do
+      before do
+        klass.import(imported_slug, **kwargs)
+      end
+
+      let(:imported_slug) { :"foo::bar::baz" }
+
       context "when `method` is imported" do
+        it "returns true" do
+          expect(matcher_result).to be_truthy
+        end
       end
 
       context "when `method` is NOT imported" do
+        let(:slug) { :"non.existent.method" }
+
+        it "returns false" do
+          expect(matcher_result).to be_falsey
+        end
       end
     end
   end
 
   describe "#description" do
-    # it "returns message" do
-    #   matcher_result
+    it "returns message" do
+      matcher_result
 
-    #   expect(matcher.description).to eq("import `#{slug}` with scope: `#{scope}` from `#{container}` with prepend: `#{prepend}`")
-    # end
+      expect(matcher.description).to eq("import `#{slug}` as: `#{as}` with scope: `#{scope}` from: `#{container}` with  prepend: `#{prepend}`")
+    end
   end
 
-  # describe "#failure_message" do
-  #   it "returns message" do
-  #     matcher_result
+  describe "#failure_message" do
+    it "returns message" do
+      matcher_result
 
-  #     expect(matcher.failure_message).to eq("expected `#{klass}` to import `#{slug}` with scope `#{scope}` from `#{container.class}` prepend: `#{prepend}`")
-  #   end
-  # end
+      expect(matcher.failure_message).to eq("expected `#{klass}` to import `#{slug}` as: `#{as}` with scope: `#{scope}` from: `#{container}` with  prepend: `#{prepend}`")
+    end
+  end
 
-  # describe "#failure_message_when_negated" do
-  #   it "returns message" do
-  #     matcher_result
+  describe "#failure_message_when_negated" do
+    it "returns message" do
+      matcher_result
 
-  #     expect(matcher.failure_message_when_negated).to eq("expected `#{klass.class}` NOT to have imported `#{method_name}` with scope `#{scope}` from `#{container.class}` prepend: `#{prepend}`")
-  #   end
-  # end
+      expect(matcher.failure_message_when_negated).to eq("expected `#{klass}` NOT to import `#{slug}` as: `#{as}` with scope: `#{scope}` from: `#{container}` with  prepend: `#{prepend}`")
+    end
+  end
 end
 # rubocop:enable RSpec/MultipleMemoizedHelpers
