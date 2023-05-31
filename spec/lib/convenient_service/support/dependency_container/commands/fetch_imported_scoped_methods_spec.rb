@@ -34,7 +34,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::FetchI
         end
       end
 
-      example_group "importing module" do
+      describe "importing module" do
         context "when importing module imports method" do
           before do
             importing_module.import(method, from: container, scope: scope)
@@ -54,7 +54,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::FetchI
         end
       end
 
-      example_group "scope" do
+      describe "scope" do
         context "when scope is valid" do
           before do
             importing_module.import(method, from: container, scope: scope)
@@ -92,7 +92,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::FetchI
         end
       end
 
-      example_group "prepend" do
+      describe "prepend" do
         context "when prepend is valid" do
           before do
             importing_module.import(method, from: container, scope: scope, prepend: prepend)
@@ -130,7 +130,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::FetchI
         end
       end
 
-      example_group "block" do
+      describe "block" do
         context "when block is passed" do
           let(:block) { proc { 42 } }
 
