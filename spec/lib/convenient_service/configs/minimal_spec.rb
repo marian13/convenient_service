@@ -69,19 +69,6 @@ RSpec.describe ConvenientService::Configs::Minimal do
           end
         end
 
-        example_group "#try_result middlewares" do
-          let(:try_result_middlewares) do
-            [
-              ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-              ConvenientService::Common::Plugins::CachesReturnValue::Middleware
-            ]
-          end
-
-          it "sets service middlewares for `#try_result`" do
-            expect(service_class.middlewares(:try_result).to_a).to eq(try_result_middlewares)
-          end
-        end
-
         example_group "#step middlewares" do
           let(:step_middlewares) do
             [
@@ -441,32 +428,6 @@ RSpec.describe ConvenientService::Configs::Minimal do
 
             it "sets service step middlewares for `#result`" do
               expect(service_class::Step.middlewares(:result).to_a).to eq(result_middlewares)
-            end
-          end
-
-          example_group "#original_try_result middlewares" do
-            let(:original_try_result_middlewares) do
-              [
-                ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-                ConvenientService::Common::Plugins::CachesReturnValue::Middleware
-              ]
-            end
-
-            it "sets service middlewares for `#original_try_result`" do
-              expect(service_class::Step.middlewares(:original_try_result).to_a).to eq(original_try_result_middlewares)
-            end
-          end
-
-          example_group "#try_result middlewares" do
-            let(:try_result_middlewares) do
-              [
-                ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-                ConvenientService::Common::Plugins::CachesReturnValue::Middleware
-              ]
-            end
-
-            it "sets service middlewares for `#try_result`" do
-              expect(service_class::Step.middlewares(:try_result).to_a).to eq(try_result_middlewares)
             end
           end
 

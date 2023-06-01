@@ -52,7 +52,14 @@ module ConvenientService
           # use Plugins::Service::RaisesOnDoubleResult::Middleware
         end
 
+        ##
+        # @internal
+        #   NOTE: Check `Minimal` docs to understand why `use Plugins::Common::NormalizesEnv::Middleware` for `:try_result` is used in `Standard`, not in `Minimal` config.
+        #
         middlewares :try_result do
+          use Plugins::Common::NormalizesEnv::Middleware
+          use Plugins::Common::CachesReturnValue::Middleware
+
           use Plugins::Service::CanHaveTryResult::Middleware
         end
 
@@ -142,6 +149,16 @@ module ConvenientService
           middlewares :result do
             use Plugins::Step::CanBeTried::Result::Middleware
             use Plugins::Step::CanHaveParentResult::Middleware
+          end
+
+          middlewares :original_try_result do
+            use Plugins::Common::NormalizesEnv::Middleware
+            use Plugins::Common::CachesReturnValue::Middleware
+          end
+
+          middlewares :try_result do
+            use Plugins::Common::NormalizesEnv::Middleware
+            use Plugins::Common::CachesReturnValue::Middleware
           end
         end
 

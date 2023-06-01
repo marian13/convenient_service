@@ -7,8 +7,28 @@ module ConvenientService
     #
     # @note: This config is NOT intented for the end-user usage. Use `Standard` instead.
     #
+    # @note:
+    #   `use Plugins::Common::NormalizesEnv::Middleware` should be used in a config that has the first `concern` that introduces a method.
+    #   For example, `:result` is added by `use Plugins::Service::HasResult::Concern` in `Minimal`.
+    #   That is why the following code is written in the `Minimal` config.
+    #
+    #     middlewares :result do
+    #       use Plugins::Common::NormalizesEnv::Middleware
+    #
+    #       # ...
+    #     end
+    #
+    #   In turn, `:try_result` is added by `use Plugins::Service::CanHaveTryResult::Concern` in `Standard`.
+    #   That is why it is the responsibility of the `Standard` config, to define:
+    #
+    #     middlewares :try_result do
+    #       use Plugins::Common::NormalizesEnv::Middleware
+    #
+    #       # ...
+    #     end
+    #
     # @internal
-    #   Heavily used in specs to test concerns and middlewares in isolation.
+    #   NOTE: Heavily used in specs to test concerns and middlewares in isolation.
     #
     module Minimal
       include Support::Concern
@@ -47,11 +67,6 @@ module ConvenientService
 
           use Plugins::Service::HasResult::Middleware
           use Plugins::Service::CanHaveSteps::Middleware
-        end
-
-        middlewares :try_result do
-          use Plugins::Common::NormalizesEnv::Middleware
-          use Plugins::Common::CachesReturnValue::Middleware
         end
 
         middlewares :step do
@@ -211,16 +226,6 @@ module ConvenientService
           end
 
           middlewares :result do
-            use Plugins::Common::NormalizesEnv::Middleware
-            use Plugins::Common::CachesReturnValue::Middleware
-          end
-
-          middlewares :original_try_result do
-            use Plugins::Common::NormalizesEnv::Middleware
-            use Plugins::Common::CachesReturnValue::Middleware
-          end
-
-          middlewares :try_result do
             use Plugins::Common::NormalizesEnv::Middleware
             use Plugins::Common::CachesReturnValue::Middleware
           end
