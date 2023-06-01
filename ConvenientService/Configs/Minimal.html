@@ -92,6 +92,24 @@
   <div class="discussion">
     <p>Defines minimal configuration that adds a constructor, JSend-inspired result, steps, basic inspects, and internals to services.</p>
 <p>@note: This config is NOT intented for the end-user usage. Use <code>Standard</code> instead.</p>
+<p>@note:
+<code>use Plugins::Common::NormalizesEnv::Middleware</code> should be used in a config that has the first <code>concern</code> that introduces a method.
+For example, <code>:result</code> is added by <code>use Plugins::Service::HasResult::Concern</code> in <code>Minimal</code>.
+That is why the following code is written in the <code>Minimal</code> config.</p>
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_middlewares'>middlewares</span> <span class='symbol'>:result</span> <span class='kw'>do</span>
+  <span class='id identifier rubyid_use'>use</span> <span class='const'><span class='object_link'><a href="../Plugins.html" title="ConvenientService::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Plugins.html#Common-constant" title="ConvenientService::Plugins::Common (constant)">Common</a></span></span><span class='op'>::</span><span class='const'>NormalizesEnv</span><span class='op'>::</span><span class='const'>Middleware</span>
+
+  <span class='comment'># ...
+</span><span class='kw'>end</span>
+</code></pre>
+<p>In turn, <code>:try_result</code> is added by <code>use Plugins::Service::CanHaveTryResult::Concern</code> in <code>Standard</code>.
+That is why it is the responsibility of the <code>Standard</code> config, to define:</p>
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_middlewares'>middlewares</span> <span class='symbol'>:try_result</span> <span class='kw'>do</span>
+  <span class='id identifier rubyid_use'>use</span> <span class='const'><span class='object_link'><a href="../Plugins.html" title="ConvenientService::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Plugins.html#Common-constant" title="ConvenientService::Plugins::Common (constant)">Common</a></span></span><span class='op'>::</span><span class='const'>NormalizesEnv</span><span class='op'>::</span><span class='const'>Middleware</span>
+
+  <span class='comment'># ...
+</span><span class='kw'>end</span>
+</code></pre>
 
 
   </div>
@@ -122,7 +140,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Jun  1 21:41:02 2023 by
+  Generated on Thu Jun  1 22:13:42 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>
