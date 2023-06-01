@@ -50,8 +50,6 @@ module ConvenientService
           # TODO: Rewrite. This plugin does NOT do what it states. Probably I was NOT with a clear mind while writing it (facepalm).
           #
           # use Plugins::Service::RaisesOnDoubleResult::Middleware
-
-          use Plugins::Common::CachesReturnValue::Middleware
         end
 
         middlewares :try_result do
@@ -141,9 +139,9 @@ module ConvenientService
             use Plugins::Step::CanBeTried::Initialize::Middleware
           end
 
-          middlewares :calculate_result do
+          middlewares :result do
+            use Plugins::Step::CanBeTried::Result::Middleware
             use Plugins::Step::CanHaveParentResult::Middleware
-            use Plugins::Step::CanBeTried::CalculateResult::Middleware
           end
         end
 

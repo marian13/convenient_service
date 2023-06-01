@@ -74,16 +74,16 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::RailsService::Config
           let(:result_middlewares) do
             [
               ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
+              ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
               ConvenientService::Common::Plugins::HasCallbacks::Middleware,
               ConvenientService::Common::Plugins::HasAroundCallbacks::Middleware,
               ConvenientService::Service::Plugins::HasResultParamsValidations::UsingActiveModelValidations::Middleware,
               ConvenientService::Service::Plugins::HasResult::Middleware,
-              ConvenientService::Service::Plugins::CanHaveSteps::Middleware,
+              ConvenientService::Service::Plugins::CanHaveSteps::Middleware
               ##
               # TODO: Rewrite. This plugin does NOT do what it states. Probably I was NOT with a clear mind while writing it (facepalm).
               #
               # ConvenientService::Service::Plugins::RaisesOnDoubleResult::Middleware,
-              ConvenientService::Common::Plugins::CachesReturnValue::Middleware
             ]
           end
 
@@ -96,6 +96,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::RailsService::Config
           let(:try_result_middlewares) do
             [
               ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
+              ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
               ConvenientService::Service::Plugins::CanHaveTryResult::Middleware
             ]
           end
@@ -467,17 +468,57 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::RailsService::Config
             end
           end
 
-          example_group "#calculate_result middlewares" do
-            let(:calculate_result_middlewares) do
+          example_group "#original_result middlewares" do
+            let(:original_result_middlewares) do
               [
                 ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveParentResult::Middleware,
-                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeTried::CalculateResult::Middleware
+                ConvenientService::Common::Plugins::CachesReturnValue::Middleware
               ]
             end
 
-            it "sets service step middlewares for `#calculate_result`" do
-              expect(service_class::Step.middlewares(:calculate_result).to_a).to eq(calculate_result_middlewares)
+            it "sets service step middlewares for `#original_result`" do
+              expect(service_class::Step.middlewares(:original_result).to_a).to eq(original_result_middlewares)
+            end
+          end
+
+          example_group "#result middlewares" do
+            let(:result_middlewares) do
+              [
+                ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
+                ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
+                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeTried::Result::Middleware,
+                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveParentResult::Middleware
+              ]
+            end
+
+            it "sets service step middlewares for `#result`" do
+              expect(service_class::Step.middlewares(:result).to_a).to eq(result_middlewares)
+            end
+          end
+
+          example_group "#original_try_result middlewares" do
+            let(:original_try_result_middlewares) do
+              [
+                ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
+                ConvenientService::Common::Plugins::CachesReturnValue::Middleware
+              ]
+            end
+
+            it "sets service middlewares for `#original_try_result`" do
+              expect(service_class::Step.middlewares(:original_try_result).to_a).to eq(original_try_result_middlewares)
+            end
+          end
+
+          example_group "#try_result middlewares" do
+            let(:try_result_middlewares) do
+              [
+                ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
+                ConvenientService::Common::Plugins::CachesReturnValue::Middleware
+              ]
+            end
+
+            it "sets service middlewares for `#try_result`" do
+              expect(service_class::Step.middlewares(:try_result).to_a).to eq(try_result_middlewares)
             end
           end
 

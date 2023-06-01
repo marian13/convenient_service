@@ -58,6 +58,7 @@ RSpec.describe ConvenientService::Configs::Minimal do
           let(:result_middlewares) do
             [
               ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
+              ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
               ConvenientService::Service::Plugins::HasResult::Middleware,
               ConvenientService::Service::Plugins::CanHaveSteps::Middleware
             ]
@@ -71,7 +72,8 @@ RSpec.describe ConvenientService::Configs::Minimal do
         example_group "#try_result middlewares" do
           let(:try_result_middlewares) do
             [
-              ConvenientService::Common::Plugins::NormalizesEnv::Middleware
+              ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
+              ConvenientService::Common::Plugins::CachesReturnValue::Middleware
             ]
           end
 
@@ -416,15 +418,55 @@ RSpec.describe ConvenientService::Configs::Minimal do
             end
           end
 
-          example_group "#calculate_result middlewares" do
-            let(:calculate_result_middlewares) do
+          example_group "#original_result middlewares" do
+            let(:original_result_middlewares) do
               [
-                ConvenientService::Common::Plugins::NormalizesEnv::Middleware
+                ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
+                ConvenientService::Common::Plugins::CachesReturnValue::Middleware
               ]
             end
 
-            it "sets service step middlewares for `#calculate_result`" do
-              expect(service_class::Step.middlewares(:calculate_result).to_a).to eq(calculate_result_middlewares)
+            it "sets service step middlewares for `#original_result`" do
+              expect(service_class::Step.middlewares(:original_result).to_a).to eq(original_result_middlewares)
+            end
+          end
+
+          example_group "#result middlewares" do
+            let(:result_middlewares) do
+              [
+                ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
+                ConvenientService::Common::Plugins::CachesReturnValue::Middleware
+              ]
+            end
+
+            it "sets service step middlewares for `#result`" do
+              expect(service_class::Step.middlewares(:result).to_a).to eq(result_middlewares)
+            end
+          end
+
+          example_group "#original_try_result middlewares" do
+            let(:original_try_result_middlewares) do
+              [
+                ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
+                ConvenientService::Common::Plugins::CachesReturnValue::Middleware
+              ]
+            end
+
+            it "sets service middlewares for `#original_try_result`" do
+              expect(service_class::Step.middlewares(:original_try_result).to_a).to eq(original_try_result_middlewares)
+            end
+          end
+
+          example_group "#try_result middlewares" do
+            let(:try_result_middlewares) do
+              [
+                ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
+                ConvenientService::Common::Plugins::CachesReturnValue::Middleware
+              ]
+            end
+
+            it "sets service middlewares for `#try_result`" do
+              expect(service_class::Step.middlewares(:try_result).to_a).to eq(try_result_middlewares)
             end
           end
 
@@ -461,7 +503,7 @@ RSpec.describe ConvenientService::Configs::Minimal do
       # https://github.com/marian13/convenient_service/discussions/43
       #
       it "applies its `included` block only once" do
-        expect(service_class.middlewares(:result).to_a.size).to eq(3)
+        expect(service_class.middlewares(:result).to_a.size).to eq(4)
       end
     end
   end

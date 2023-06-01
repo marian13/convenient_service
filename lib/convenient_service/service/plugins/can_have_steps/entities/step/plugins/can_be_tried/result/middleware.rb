@@ -8,9 +8,9 @@ module ConvenientService
           class Step
             module Plugins
               module CanBeTried
-                module CalculateResult
+                module Result
                   class Middleware < MethodChainMiddleware
-                    intended_for :calculate_result
+                    intended_for :result
 
                     ##
                     # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]

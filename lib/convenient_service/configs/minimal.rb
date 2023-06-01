@@ -43,6 +43,7 @@ module ConvenientService
 
         middlewares :result do
           use Plugins::Common::NormalizesEnv::Middleware
+          use Plugins::Common::CachesReturnValue::Middleware
 
           use Plugins::Service::HasResult::Middleware
           use Plugins::Service::CanHaveSteps::Middleware
@@ -50,6 +51,7 @@ module ConvenientService
 
         middlewares :try_result do
           use Plugins::Common::NormalizesEnv::Middleware
+          use Plugins::Common::CachesReturnValue::Middleware
         end
 
         middlewares :step do
@@ -203,8 +205,24 @@ module ConvenientService
             use Plugins::Common::NormalizesEnv::Middleware
           end
 
-          middlewares :calculate_result do
+          middlewares :original_result do
             use Plugins::Common::NormalizesEnv::Middleware
+            use Plugins::Common::CachesReturnValue::Middleware
+          end
+
+          middlewares :result do
+            use Plugins::Common::NormalizesEnv::Middleware
+            use Plugins::Common::CachesReturnValue::Middleware
+          end
+
+          middlewares :original_try_result do
+            use Plugins::Common::NormalizesEnv::Middleware
+            use Plugins::Common::CachesReturnValue::Middleware
+          end
+
+          middlewares :try_result do
+            use Plugins::Common::NormalizesEnv::Middleware
+            use Plugins::Common::CachesReturnValue::Middleware
           end
 
           class self::Internals

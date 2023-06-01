@@ -110,15 +110,25 @@ module ConvenientService
                 ##
                 # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
                 #
+                # @internal
+                #   IMPORTANT: `service.result(**input_values)` is the reason, why services should have only kwargs as arguments.
+                #
                 def original_result
-                  @original_result ||= calculate_original_result
+                  assert_has_organizer!
+
+                  service.result(**input_values)
                 end
 
                 ##
                 # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
                 #
+                # @internal
+                #   NOTE: `calculate_result` has middlewares.
+                #   NOTE: `copy` logic is used in `calculate_try_result` as well.
+                #   TODO: Extract `copy` logic into separate method with a proper naming.
+                #
                 def result
-                  @result ||= calculate_result
+                  original_result.copy(overrides: {kwargs: {step: self, service: organizer}})
                 end
 
                 ##
@@ -202,30 +212,6 @@ module ConvenientService
                   assert_has_organizer!
 
                   inputs.reduce({}) { |values, input| values.merge(input.key.to_sym => input.value) }
-                end
-
-                ##
-                # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
-                #
-                # @internal
-                #   IMPORTANT: `service.result(**input_values)` is the reason, why services should have only kwargs as arguments.
-                #
-                def calculate_original_result
-                  assert_has_organizer!
-
-                  service.result(**input_values)
-                end
-
-                ##
-                # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
-                #
-                # @internal
-                #   NOTE: `calculate_result` has middlewares.
-                #   NOTE: `copy` logic is used in `calculate_result` as well.
-                #   TODO: Extract `copy` logic into separate method with a proper naming.
-                #
-                def calculate_result
-                  original_result.copy(overrides: {kwargs: {step: self, service: organizer}})
                 end
 
                 ##

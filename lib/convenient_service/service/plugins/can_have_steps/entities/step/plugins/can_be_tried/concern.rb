@@ -29,27 +29,11 @@ module ConvenientService
                     ##
                     # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
                     #
-                    def original_try_result
-                      @original_try_result ||= calculate_original_try_result
-                    end
-
-                    ##
-                    # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
-                    #
-                    def try_result
-                      @try_result ||= calculate_try_result
-                    end
-
-                    private
-
-                    ##
-                    # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
-                    #
                     # @internal
-                    #   IMPORTANT: `service.try_result(**input_values)` is the reason, why services should have only kwargs as arguments.
+                    #   IMPORTANT: `service.klass.try_result(**input_values)` is the reason, why services should have only kwargs as arguments.
                     #   TODO: Extract `StepDefinition`. This way `has_organizer?` check can be avoided completely.
                     #
-                    def calculate_original_try_result
+                    def original_try_result
                       assert_has_organizer!
 
                       service.klass.try_result(**input_values)
@@ -59,10 +43,10 @@ module ConvenientService
                     # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
                     #
                     # @internal
-                    #   NOTE: `copy` logic is used in `calculate_result` as well.
+                    #   NOTE: `copy` logic is used in `result` as well.
                     #   TODO: Extract `copy` logic into separate method with a proper naming.
                     #
-                    def calculate_try_result
+                    def try_result
                       original_try_result.copy(overrides: {kwargs: {step: self, service: organizer}})
                     end
                   end
