@@ -35,7 +35,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::FetchI
       end
 
       describe "importing module" do
-        context "when importing module imports method" do
+        context "when `importing module` imports method" do
           before do
             importing_module.import(method, from: container, scope: scope)
           end
@@ -47,7 +47,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::FetchI
           end
         end
 
-        context "when importing module does NOT import any method" do
+        context "when `importing module` does NOT import any method" do
           it "returns nil" do
             expect(command_result).to be_nil
           end
@@ -55,7 +55,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::FetchI
       end
 
       describe "scope" do
-        context "when scope is valid" do
+        context "when `scope` is valid" do
           before do
             importing_module.import(method, from: container, scope: scope)
           end
@@ -78,7 +78,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::FetchI
           end
         end
 
-        context "when scope is NOT valid" do
+        context "when `scope` is NOT valid" do
           before do
             importing_module.import(method, from: container, scope: :instance)
           end
@@ -93,7 +93,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::FetchI
       end
 
       describe "prepend" do
-        context "when prepend is valid" do
+        context "when `prepend` is valid" do
           before do
             importing_module.import(method, from: container, scope: scope, prepend: prepend)
           end
@@ -101,13 +101,13 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::FetchI
           let(:method) { :foo }
           let(:scope) { :instance }
 
-          context "when prepend is false" do
+          context "when `prepend` is false" do
             it "returns valid constant" do
               expect(command_result).to eq(importing_module::ImportedIncludedInstanceMethods)
             end
           end
 
-          context "when prepend is true" do
+          context "when `prepend` is true" do
             let(:prepend) { true }
 
             it "returns valid constant" do
@@ -116,7 +116,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::FetchI
           end
         end
 
-        context "when prepend is NOT valid" do
+        context "when `prepend` is NOT valid" do
           before do
             importing_module.import(method, from: container, scope: scope, prepend: true)
           end
@@ -131,7 +131,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::FetchI
       end
 
       describe "block" do
-        context "when block is passed" do
+        context "when `block` is passed" do
           let(:block) { proc { 42 } }
 
           it "returns `block` value" do
@@ -145,7 +145,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::FetchI
           end
         end
 
-        context "when block is NOT passed" do
+        context "when `block` is NOT passed" do
           it "returns nil" do
             expect(command_result).to be_nil
           end

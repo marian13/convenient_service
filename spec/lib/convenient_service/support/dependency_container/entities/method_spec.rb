@@ -307,6 +307,70 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Method
         end
       end
 
+      describe "#defined_in_module?" do
+        let(:mod) { ConvenientService::Support::DependencyContainer::Commands::CreateMethodsModule.call }
+
+        context "when method defined in module" do
+          before do
+            method.define_in_module!(mod)
+          end
+
+          context "when `slug` has NO namespaces" do
+            let(:slug) { :foo }
+
+            it "returns true" do
+              expect(method.defined_in_module?(mod)).to be_truthy
+            end
+          end
+
+          context "when `slug` has one namespace" do
+            let(:slug) { :"foo::bar" }
+
+            it "returns true" do
+              expect(method.defined_in_module?(mod)).to be_truthy
+            end
+          end
+
+          context "when `slug` has multiple namespaces" do
+            let(:slug) { :"foo::bar::baz::qux::quux" }
+
+            it "returns true" do
+              expect(method.defined_in_module?(mod)).to be_truthy
+            end
+          end
+
+          context "when there is `alias_slug`" do
+            let(:alias_slug) { :"xyzzy::thud" }
+
+            it "returns true" do
+              expect(method.defined_in_module?(mod)).to be_truthy
+            end
+          end
+        end
+
+        context "when `method` is NOT defined in module" do
+          it "returns false" do
+            expect(method.defined_in_module?(mod)).to be_falsey
+          end
+        end
+      end
+
+      describe "#processed_method_slug_parts" do
+        context "when `alias_slug` is present" do
+          let(:alias_slug) { :"que::quux" }
+
+          it "returns `alias_slug` parts" do
+            expect(method.processed_method_slug_parts).to eq([:que, :quux])
+          end
+        end
+
+        context "when `alias_slug` is NOT present" do
+          it "returns `slug` parts" do
+            expect(method.processed_method_slug_parts).to eq([:foo, :bar, :baz, :qux])
+          end
+        end
+      end
+
       describe "#to_kwargs" do
         let(:kwargs_representation) do
           {

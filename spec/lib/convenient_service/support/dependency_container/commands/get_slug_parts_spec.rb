@@ -10,33 +10,33 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::GetSlu
     describe ".call" do
       subject(:command_result) { described_class.call(slug: slug) }
 
-      context "when slug is valid" do
-        context "when divided by `.`" do
+      context "when `slug` is valid" do
+        context "when `slug` has namespaces separated by dot" do
           let(:slug) { "foo.bar.baz" }
 
-          it "returns array of slug parts" do
+          it "returns array of `slug` parts" do
             expect(command_result).to eq([:foo, :bar, :baz])
           end
         end
 
-        context "when divided by `::`" do
+        context "when `slug` has namespaces separated by scope resolution operator" do
           let(:slug) { "qux::quux" }
 
-          it "returns array of slug parts" do
+          it "returns array of `slug` parts" do
             expect(command_result).to eq([:qux, :quux])
           end
         end
 
-        context "when is NOT divided" do
+        context "when `slug` is NOT separated" do
           let(:slug) { "xyzzy" }
 
-          it "returns array of slug parts" do
+          it "returns array of `slug` parts" do
             expect(command_result).to eq([:xyzzy])
           end
         end
       end
 
-      context "when slug is NOT valid" do
+      context "when `slug` is NOT valid" do
         let(:slug) { nil }
 
         it "returns empty array" do

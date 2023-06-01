@@ -45,6 +45,14 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Import do
     end
   end
 
+  example_group "modules" do
+    include ConvenientService::RSpec::Matchers::IncludeModule
+
+    subject { described_class }
+
+    it { is_expected.to include_module(ConvenientService::DependencyContainer::Import) }
+  end
+
   describe "#matches?" do
     describe "container" do
       context "when `container` is valid" do
