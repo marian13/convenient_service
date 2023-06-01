@@ -195,26 +195,62 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Import do
   end
 
   describe "#description" do
-    it "returns message" do
-      matcher_result
+    context "when `alias_slug` is present" do
+      let(:as) { :"qux::quux" }
 
-      expect(matcher.description).to eq("import `#{slug}` as: `#{as}` with scope: `#{scope}` from: `#{container}` with  prepend: `#{prepend}`")
+      it "returns message with `alias_slug`" do
+        matcher_result
+
+        expect(matcher.description).to eq("import `#{slug}` as: `#{as}` with scope: `#{scope}` from: `#{container}` with  prepend: `#{prepend}`")
+      end
+    end
+
+    context "when `alias_slug` is NOT present" do
+      it "returns message without `alias_slug`" do
+        matcher_result
+
+        expect(matcher.description).to eq("import `#{slug}` with scope: `#{scope}` from: `#{container}` with  prepend: `#{prepend}`")
+      end
     end
   end
 
   describe "#failure_message" do
-    it "returns message" do
-      matcher_result
+    context "when `alias_slug` is present" do
+      let(:as) { :"qux::quux" }
 
-      expect(matcher.failure_message).to eq("expected `#{klass}` to import `#{slug}` as: `#{as}` with scope: `#{scope}` from: `#{container}` with  prepend: `#{prepend}`")
+      it "returns message with `alias_slug`" do
+        matcher_result
+
+        expect(matcher.failure_message).to eq("expected `#{klass}` to import `#{slug}` as: `#{as}` with scope: `#{scope}` from: `#{container}` with  prepend: `#{prepend}`")
+      end
+    end
+
+    context "when `alias_slug` is NOT present" do
+      it "returns message without `alias_slug`" do
+        matcher_result
+
+        expect(matcher.failure_message).to eq("expected `#{klass}` to import `#{slug}` with scope: `#{scope}` from: `#{container}` with  prepend: `#{prepend}`")
+      end
     end
   end
 
   describe "#failure_message_when_negated" do
-    it "returns message" do
-      matcher_result
+    context "when `alias_slug` is present" do
+      let(:as) { :"qux::quux" }
 
-      expect(matcher.failure_message_when_negated).to eq("expected `#{klass}` NOT to import `#{slug}` as: `#{as}` with scope: `#{scope}` from: `#{container}` with  prepend: `#{prepend}`")
+      it "returns message with `alias_slug`" do
+        matcher_result
+
+        expect(matcher.failure_message_when_negated).to eq("expected `#{klass}` NOT to import `#{slug}` as: `#{as}` with scope: `#{scope}` from: `#{container}` with  prepend: `#{prepend}`")
+      end
+    end
+
+    context "when `alias_slug` is NOT present" do
+      it "returns message without `alias_slug`" do
+        matcher_result
+
+        expect(matcher.failure_message_when_negated).to eq("expected `#{klass}` NOT to import `#{slug}` with scope: `#{scope}` from: `#{container}` with  prepend: `#{prepend}`")
+      end
     end
   end
 end

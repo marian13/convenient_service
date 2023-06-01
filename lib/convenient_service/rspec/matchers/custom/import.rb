@@ -54,24 +54,31 @@ module ConvenientService
           # @return [String]
           #
           def description
-            "import `#{slug}` as: `#{alias_slug}` with scope: `#{scope}` from: `#{from}` with  prepend: `#{prepend}`"
+            "import `#{slug}`#{string_to_print_depending_on_slug} with scope: `#{scope}` from: `#{from}` with  prepend: `#{prepend}`"
           end
 
           ##
           # @return [String]
           #
           def failure_message
-            "expected `#{klass}` to import `#{slug}` as: `#{alias_slug}` with scope: `#{scope}` from: `#{from}` with  prepend: `#{prepend}`"
+            "expected `#{klass}` to import `#{slug}`#{string_to_print_depending_on_slug} with scope: `#{scope}` from: `#{from}` with  prepend: `#{prepend}`"
           end
 
           ##
           # @return [String]
           #
           def failure_message_when_negated
-            "expected `#{klass}` NOT to import `#{slug}` as: `#{alias_slug}` with scope: `#{scope}` from: `#{from}` with  prepend: `#{prepend}`"
+            "expected `#{klass}` NOT to import `#{slug}`#{string_to_print_depending_on_slug} with scope: `#{scope}` from: `#{from}` with  prepend: `#{prepend}`"
           end
 
           private
+
+          ##
+          # @return [String]
+          #
+          def string_to_print_depending_on_slug
+            alias_slug.to_s.empty? ? "" : " as: `#{alias_slug}`"
+          end
 
           ##
           # @!attribute [r] slug

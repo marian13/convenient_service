@@ -39,6 +39,16 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Export do
     it { is_expected.to include_module(ConvenientService::DependencyContainer::Import) }
   end
 
+  example_group "imports" do
+    include ConvenientService::RSpec::Matchers::Import
+
+    subject { described_class }
+
+    it { is_expected.to import(:"constants.DEFAULT_SCOPE", from: ConvenientService::Support::DependencyContainer::Container) }
+    it { is_expected.to import(:"commands.AssertValidContainer", from: ConvenientService::Support::DependencyContainer::Container) }
+    it { is_expected.to import(:"commands.AssertValidScope", from: ConvenientService::Support::DependencyContainer::Container) }
+  end
+
   example_group "instance methods" do
     describe "#matches?" do
       specify do
