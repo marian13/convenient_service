@@ -20,7 +20,7 @@ module ConvenientService
           end
 
           ##
-          # @return [Array]
+          # @return [Array<Symbol>]
           #
           def call
             Utils::String.split(slug, ".", "::").map(&:to_sym)

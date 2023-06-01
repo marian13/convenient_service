@@ -319,7 +319,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Method
             let(:slug) { :foo }
 
             it "returns true" do
-              expect(method.defined_in_module?(mod)).to be_truthy
+              expect(method).to be_defined_in_module(mod)
             end
           end
 
@@ -327,7 +327,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Method
             let(:slug) { :"foo::bar" }
 
             it "returns true" do
-              expect(method.defined_in_module?(mod)).to be_truthy
+              expect(method).to be_defined_in_module(mod)
             end
           end
 
@@ -335,7 +335,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Method
             let(:slug) { :"foo::bar::baz::qux::quux" }
 
             it "returns true" do
-              expect(method.defined_in_module?(mod)).to be_truthy
+              expect(method).to be_defined_in_module(mod)
             end
           end
 
@@ -343,14 +343,14 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Method
             let(:alias_slug) { :"xyzzy::thud" }
 
             it "returns true" do
-              expect(method.defined_in_module?(mod)).to be_truthy
+              expect(method).to be_defined_in_module(mod)
             end
           end
         end
 
         context "when `method` is NOT defined in module" do
           it "returns false" do
-            expect(method.defined_in_module?(mod)).to be_falsey
+            expect(method).not_to be_defined_in_module(mod)
           end
         end
       end
