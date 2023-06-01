@@ -16,7 +16,7 @@ module ConvenientService
         # - https://bugs.ruby-lang.org/issues/8507
         #
         class Middleware < MethodClassicMiddleware
-          intended_for any_method, scope: any_scope
+          intended_for any_method, scope: any_scope, entity: any_entity
 
           def call(env = nil)
             env = env.to_h

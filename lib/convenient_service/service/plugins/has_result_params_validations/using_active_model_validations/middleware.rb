@@ -6,7 +6,7 @@ module ConvenientService
       module HasResultParamsValidations
         module UsingActiveModelValidations
           class Middleware < MethodChainMiddleware
-            intended_for :result
+            intended_for :result, entity: :service
 
             def next(...)
               return entity.failure(data: errors) if errors.any?

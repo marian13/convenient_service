@@ -8,11 +8,11 @@ require "convenient_service"
 RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Base::Structs::IntendedMethod do
   example_group "instance methods" do
     describe "#==" do
-      let(:kwargs) { {method: :result, scope: :instance} }
+      let(:kwargs) { {method: :result, scope: :instance, entity: :service} }
 
       let(:intented_method) { described_class.new(**kwargs) }
 
-      context "when other has different `method`" do
+      context "when `other` has different `method`" do
         let(:other) { described_class.new(**kwargs.merge(method: :initialize)) }
 
         it "returns `false`" do
@@ -20,7 +20,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
         end
       end
 
-      context "when other has different `scope`" do
+      context "when `other` has different `scope`" do
         let(:other) { described_class.new(**kwargs.merge(scope: :class)) }
 
         it "returns `false`" do
@@ -28,7 +28,15 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
         end
       end
 
-      context "when other has same attributes" do
+      context "when `other` has different `entity`" do
+        let(:other) { described_class.new(**kwargs.merge(entity: :result)) }
+
+        it "returns `false`" do
+          expect(intented_method == other).to eq(false)
+        end
+      end
+
+      context "when `other` has same attributes" do
         let(:other) { described_class.new(**kwargs) }
 
         it "returns `true`" do

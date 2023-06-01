@@ -17,7 +17,7 @@ RSpec.describe ConvenientService::Common::Plugins::NormalizesEnv::Middleware do
     describe ".intended_methods" do
       let(:spec) do
         Class.new(ConvenientService::MethodClassicMiddleware) do
-          intended_for any_method, scope: any_scope
+          intended_for any_method, scope: any_scope, entity: any_entity
         end
       end
 

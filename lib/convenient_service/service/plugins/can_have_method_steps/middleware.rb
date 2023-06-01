@@ -5,7 +5,7 @@ module ConvenientService
     module Plugins
       module CanHaveMethodSteps
         class Middleware < MethodChainMiddleware
-          intended_for :step, scope: :class
+          intended_for :step, scope: :class, entity: :service
 
           ##
           # @param args [Array<Object>]

@@ -9,7 +9,7 @@ module ConvenientService
             module Plugins
               module HasJSendStatusAndAttributes
                 class Middleware < MethodChainMiddleware
-                  intended_for :initialize
+                  intended_for :initialize, entity: :result
 
                   ##
                   # @param args [Array<Object>]

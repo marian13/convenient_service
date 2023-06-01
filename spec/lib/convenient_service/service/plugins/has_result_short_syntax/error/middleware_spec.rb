@@ -22,7 +22,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultShortSyntax::Error:
     describe ".intended_methods" do
       let(:spec) do
         Class.new(ConvenientService::MethodChainMiddleware) do
-          intended_for :error
+          intended_for :error, entity: :service
         end
       end
 

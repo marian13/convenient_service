@@ -6,7 +6,7 @@ module ConvenientService
       module HasResultShortSyntax
         module Failure
           class Middleware < MethodChainMiddleware
-            intended_for :failure
+            intended_for :failure, entity: :service
 
             def next(*args, **kwargs, &block)
               Commands::RefuteKwargsContainDataAndExtraKeys.call(kwargs: kwargs)

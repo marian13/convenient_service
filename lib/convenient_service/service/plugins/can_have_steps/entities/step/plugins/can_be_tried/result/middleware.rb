@@ -10,7 +10,7 @@ module ConvenientService
               module CanBeTried
                 module Result
                   class Middleware < MethodChainMiddleware
-                    intended_for :result
+                    intended_for :result, entity: :step
 
                     ##
                     # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]

@@ -9,9 +9,11 @@ module ConvenientService
             module Plugins
               module RaisesOnNotCheckedResultStatus
                 class Middleware < MethodChainMiddleware
-                  intended_for :data
-                  intended_for :message
-                  intended_for :code
+                  intended_for [
+                    :data,
+                    :message,
+                    :code
+                  ], entity: :result
 
                   def next(...)
                     assert_has_checked_status!

@@ -20,7 +20,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveMethodSteps::Middlewa
     describe ".intended_methods" do
       let(:spec) do
         Class.new(ConvenientService::MethodChainMiddleware) do
-          intended_for :step, scope: :class
+          intended_for :step, scope: :class, entity: :service
         end
       end
 

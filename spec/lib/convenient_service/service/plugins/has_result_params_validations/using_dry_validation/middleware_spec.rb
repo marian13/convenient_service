@@ -22,7 +22,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultParamsValidations::
     describe ".intended_methods" do
       let(:spec) do
         Class.new(ConvenientService::MethodChainMiddleware) do
-          intended_for :result
+          intended_for :result, entity: :service
         end
       end
 

@@ -10,7 +10,7 @@ module ConvenientService
               module CanBeTried
                 module Initialize
                   class Middleware < MethodChainMiddleware
-                    intended_for :initialize
+                    intended_for :initialize, entity: :step
 
                     ##
                     # @param args [Array<Object>]

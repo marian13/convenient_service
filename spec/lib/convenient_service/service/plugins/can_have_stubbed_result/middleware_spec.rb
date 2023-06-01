@@ -20,7 +20,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStubbedResult::Middle
     describe ".intended_methods" do
       let(:spec) do
         Class.new(ConvenientService::MethodChainMiddleware) do
-          intended_for :result, scope: :class
+          intended_for :result, scope: :class, entity: :service
         end
       end
 

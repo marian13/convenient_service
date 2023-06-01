@@ -20,7 +20,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasAroundCallbacks::Middlewar
     describe ".intended_methods" do
       let(:spec) do
         Class.new(ConvenientService::MethodChainMiddleware) do
-          intended_for any_method, scope: any_scope
+          intended_for any_method, scope: any_scope, entity: any_entity
         end
       end
 

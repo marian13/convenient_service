@@ -62,18 +62,19 @@ module ConvenientService
 
                       ##
                       # @param method [Symbol]
-                      # @param scope [Symbol]
+                      # @param scope [Symbol, ConvenientService::Support::UniqueValue]
+                      # @param entity [Symbol, ConvenientService::Support::UniqueValue]
                       # @return [Array<ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Structs::IntendedMethod>]
                       #
                       # @internal
                       #   TODO: Direct specs.
                       #
-                      def intended_for(method, scope: :instance)
-                        intended_methods << Structs::IntendedMethod.new(method, scope)
+                      def intended_for(method, entity:, scope: :instance)
+                        intended_methods << Structs::IntendedMethod.new(method, scope, entity)
                       end
 
                       ##
-                      # @return [ConvenientService::Support::Anything]
+                      # @return [ConvenientService::Support::UniqueValue]
                       #
                       # @internal
                       #   TODO: Direct specs.
@@ -83,13 +84,23 @@ module ConvenientService
                       end
 
                       ##
-                      # @return [ConvenientService::Support::Anything]
+                      # @return [ConvenientService::Support::UniqueValue]
                       #
                       # @internal
                       #   TODO: Direct specs.
                       #
                       def any_scope
                         Constants::ANY_SCOPE
+                      end
+
+                      ##
+                      # @return [ConvenientService::Support::UniqueValue]
+                      #
+                      # @internal
+                      #   TODO: Direct specs.
+                      #
+                      def any_entity
+                        Constants::ANY_ENTITY
                       end
                     end
                   end

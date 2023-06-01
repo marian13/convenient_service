@@ -5,7 +5,7 @@ module ConvenientService
     module Plugins
       module CachesReturnValue
         class Middleware < MethodChainMiddleware
-          intended_for any_method, scope: any_scope
+          intended_for any_method, scope: any_scope, entity: any_entity
 
           ##
           # @param args [Array<Object>]

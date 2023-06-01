@@ -19,6 +19,11 @@ module ConvenientService
                     # @return [ConvenientService::Support::UniqueValue]
                     #
                     ANY_SCOPE = Support::UniqueValue.new("any_scope")
+
+                    ##
+                    # @return [ConvenientService::Support::UniqueValue]
+                    #
+                    ANY_ENTITY = Support::UniqueValue.new("any_entity")
                   end
                 end
               end

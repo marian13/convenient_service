@@ -5,7 +5,7 @@ module ConvenientService
     module Plugins
       module CachesConstructorParams
         class Middleware < MethodChainMiddleware
-          intended_for :initialize
+          intended_for :initialize, entity: any_entity
 
           def next(*args, **kwargs, &block)
             entity.internals.cache[:constructor_params] = Entities::ConstructorParams.new(args: args, kwargs: kwargs, block: block)

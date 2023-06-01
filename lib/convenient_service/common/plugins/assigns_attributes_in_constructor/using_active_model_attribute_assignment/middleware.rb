@@ -6,7 +6,7 @@ module ConvenientService
       module AssignsAttributesInConstructor
         module UsingActiveModelAttributeAssignment
           class Middleware < MethodChainMiddleware
-            intended_for :initialize
+            intended_for :initialize, entity: any_entity
 
             ##
             # @param args [Array<Object>]

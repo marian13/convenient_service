@@ -10,7 +10,7 @@ module ConvenientService
               module HasStep
                 module Initialize
                   class Middleware < MethodChainMiddleware
-                    intended_for :initialize
+                    intended_for :initialize, entity: :result
 
                     def next(*args, **kwargs, &block)
                       entity.internals.cache[:step] = kwargs[:step]

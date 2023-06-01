@@ -9,7 +9,7 @@ module ConvenientService
 
           import "commands.is_result?", from: Service::Plugins::HasResult::Container
 
-          intended_for :try_result
+          intended_for :try_result, entity: :service
 
           ##
           # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]

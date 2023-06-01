@@ -20,7 +20,7 @@ RSpec.describe ConvenientService::Common::Plugins::CachesConstructorParams::Midd
     describe ".intended_methods" do
       let(:spec) do
         Class.new(ConvenientService::MethodChainMiddleware) do
-          intended_for :initialize
+          intended_for :initialize, entity: any_entity
         end
       end
 

@@ -5,7 +5,7 @@ module ConvenientService
     module Plugins
       module HasResult
         class Middleware < MethodChainMiddleware
-          intended_for :result
+          intended_for :result, entity: :service
 
           def next(...)
             original_result = chain.next(...)

@@ -5,7 +5,7 @@ module ConvenientService
     module Plugins
       module CanHaveSteps
         class Middleware < MethodChainMiddleware
-          intended_for :result
+          intended_for :result, entity: :service
 
           ##
           # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step]

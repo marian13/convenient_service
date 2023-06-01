@@ -18,7 +18,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
     describe ".intended_methods" do
       let(:spec) do
         Class.new(ConvenientService::MethodChainMiddleware) do
-          intended_for :to_kwargs
+          intended_for :to_kwargs, entity: :result
         end
       end
 

@@ -13,7 +13,7 @@ module ConvenientService
 
           import :"entities.Callback", from: Common::Plugins::HasCallbacks::Container
 
-          intended_for any_method, scope: any_scope
+          intended_for any_method, scope: any_scope, entity: any_entity
 
           def next(*args, **kwargs, &block)
             ##

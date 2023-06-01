@@ -20,7 +20,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveTryResult::Middleware
     describe ".intended_methods" do
       let(:spec) do
         Class.new(ConvenientService::MethodChainMiddleware) do
-          intended_for :try_result
+          intended_for :try_result, entity: :service
         end
       end
 

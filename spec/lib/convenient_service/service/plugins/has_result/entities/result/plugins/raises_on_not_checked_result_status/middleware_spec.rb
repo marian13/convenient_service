@@ -20,9 +20,12 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
     describe ".intended_methods" do
       let(:spec) do
         Class.new(ConvenientService::MethodChainMiddleware) do
-          intended_for :data
-          intended_for :message
-          intended_for :code
+          intended_for [
+            :data,
+            :message,
+            :code
+          ],
+            entity: :result
         end
       end
 
