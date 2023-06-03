@@ -14,6 +14,7 @@ module ConvenientService
             include DryService::Config
 
             option :text
+            option :skip, default: -> { false }
             option :out, default: -> { $stdout }
 
             contract do
@@ -23,10 +24,16 @@ module ConvenientService
             end
 
             def result
+              return error("Printing of shell command `#{text}` is skipped") if skip
+
               out.puts
 
               out.puts ::Paint["$ #{text}", :blue, :bold]
 
+              success
+            end
+
+            def try_result
               success
             end
           end

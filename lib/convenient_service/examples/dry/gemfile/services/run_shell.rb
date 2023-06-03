@@ -18,11 +18,16 @@ module ConvenientService
               end
             end
 
-            def result
-              Services::PrintShellCommand.result(text: command) if debug
+            step Services::PrintShellCommand,
+              in: [{text: :command}, {skip: -> { !debug }}],
+              try: true
 
+            step :result,
+              in: :command
+
+            def result
               ##
-              # NOTE: When the command exit code is 0, `system` return true, and false otherwise.
+              # NOTE: When the command exit code is 0, `system` return `true`, and `false` otherwise.
               # - https://ruby-doc.org/core-3.1.2/Kernel.html#method-i-system
               # - https://stackoverflow.com/a/37329716/12201472
               #

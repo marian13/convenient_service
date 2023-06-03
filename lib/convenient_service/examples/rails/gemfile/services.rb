@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require_relative "services/print_shell_command"
 require_relative "services/run_shell"
 
 require_relative "services/assert_file_exists"
@@ -13,7 +14,6 @@ require_relative "services/format_gems_with_envs"
 require_relative "services/format_body"
 require_relative "services/merge_sections"
 require_relative "services/parse_content"
-require_relative "services/print_shell_command"
 require_relative "services/read_file_content"
 require_relative "services/replace_file_content"
 require_relative "services/strip_comments"

@@ -10,6 +10,9 @@ module ConvenientService
 
             attr_reader :command, :debug
 
+            step :validate_command,
+              in: :command
+
             step Services::PrintShellCommand,
               in: [{text: :command}, {skip: -> { !debug }}],
               try: true
@@ -33,6 +36,15 @@ module ConvenientService
               else
                 error(message: "#{command} returned non-zero exit code")
               end
+            end
+
+            private
+
+            def validate_command
+              return failure(command: "Command is `nil`") if command.nil?
+              return failure(command: "Command is empty") if command.empty?
+
+              success
             end
           end
         end

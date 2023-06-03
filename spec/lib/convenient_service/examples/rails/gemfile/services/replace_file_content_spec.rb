@@ -37,7 +37,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::ReplaceFil
   example_group "modules" do
     subject { described_class }
 
-    it { is_expected.to include_module(ConvenientService::Standard::Config) }
+    it { is_expected.to include_module(ConvenientService::Examples::Rails::Gemfile::RailsService::Config) }
   end
 
   describe "#result" do

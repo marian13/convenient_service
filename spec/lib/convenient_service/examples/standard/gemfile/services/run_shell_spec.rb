@@ -31,8 +31,26 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::RunShel
           .to return_success
       end
 
-      context "when running of shell is NOT successful" do
-        context "when shell command has non-zero code" do
+      context "when running of shell command is NOT successful" do
+        context "when `command` is NOT valid" do
+          context "when `command` is `nil`" do
+            let(:command) { nil }
+
+            it "returns `failure` with `data`" do
+              expect(result).to be_failure.with_data(command: "Command is `nil`").of_service(described_class).of_step(:validate_command)
+            end
+          end
+
+          context "when `command` is empty" do
+            let(:command) { "" }
+
+            it "returns `failure` with `data`" do
+              expect(result).to be_failure.with_data(command: "Command is empty").of_service(described_class).of_step(:validate_command)
+            end
+          end
+        end
+
+        context "when command has non-zero code" do
           before do
             ##
             # Stubs private method Kernel#system.
@@ -50,7 +68,7 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::RunShel
         end
       end
 
-      context "when running of shell is successful" do
+      context "when running of shell command is successful" do
         before do
           ##
           # Stubs private method Kernel#system.
