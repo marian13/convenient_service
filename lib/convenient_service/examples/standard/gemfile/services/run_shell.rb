@@ -10,14 +10,19 @@ module ConvenientService
 
             attr_reader :command, :debug
 
+            step Services::PrintShellCommand,
+              in: [{text: :command}, {skip: -> { !debug }}],
+              try: true
+
+            step :result,
+              in: :command
+
             def initialize(command:, debug: false)
               @command = command
               @debug = debug
             end
 
             def result
-              Services::PrintShellCommand[text: command] if debug
-
               ##
               # NOTE: When the command exit code is 0, `system` return `true`, and `false` otherwise.
               # - https://ruby-doc.org/core-3.1.2/Kernel.html#method-i-system

@@ -13,10 +13,11 @@ module ConvenientService
           class PrintShellCommand
             include ConvenientService::Standard::Config
 
-            attr_reader :text, :out
+            attr_reader :text, :skip, :out
 
-            def initialize(text:, out: $stdout)
+            def initialize(text:, skip: false, out: $stdout)
               @text = text
+              @skip = skip
               @out = out
             end
 
@@ -24,10 +25,16 @@ module ConvenientService
               return failure(text: "Text is `nil`") if text.nil?
               return failure(text: "Text is empty?") if text.empty?
 
+              return error("Printing of shell command `#{text}` is skipped") if skip
+
               out.puts
 
               out.puts ::Paint["$ #{text}", :blue, :bold]
 
+              success
+            end
+
+            def try_result
               success
             end
           end
