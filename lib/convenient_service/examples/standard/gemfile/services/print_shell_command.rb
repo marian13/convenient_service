@@ -3,7 +3,7 @@
 ##
 # Usage example:
 #
-#   ConvenientService::Examples::Standard::Gemfile::Services::PrintShellCommand.result(text: "ls -a")
+#   ConvenientService::Examples::Standard::Gemfile::Services::PrintShellCommand.result(command: "ls -a")
 #
 module ConvenientService
   module Examples
@@ -13,23 +13,23 @@ module ConvenientService
           class PrintShellCommand
             include ConvenientService::Standard::Config
 
-            attr_reader :text, :skip, :out
+            attr_reader :command, :skip, :out
 
-            def initialize(text:, skip: false, out: $stdout)
-              @text = text
+            def initialize(command:, skip: false, out: $stdout)
+              @command = command
               @skip = skip
               @out = out
             end
 
             def result
-              return failure(text: "Text is `nil`") if text.nil?
-              return failure(text: "Text is empty?") if text.empty?
+              return failure(command: "Command is `nil`") if command.nil?
+              return failure(command: "Command is empty?") if command.empty?
 
-              return error("Printing of shell command `#{text}` is skipped") if skip
+              return error("Printing of shell command `#{command}` is skipped") if skip
 
               out.puts
 
-              out.puts ::Paint["$ #{text}", :blue, :bold]
+              out.puts ::Paint["$ #{command}", :blue, :bold]
 
               success
             end

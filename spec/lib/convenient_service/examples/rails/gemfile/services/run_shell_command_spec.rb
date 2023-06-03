@@ -29,7 +29,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::RunShellCo
     describe ".result" do
       before do
         stub_service(ConvenientService::Examples::Rails::Gemfile::Services::PrintShellCommand)
-          .with_arguments(text: command, skip: debug)
+          .with_arguments(command: command, skip: debug)
           .to return_success
       end
 
@@ -77,7 +77,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::RunShellCo
         it "prints shell command" do
           expect { result }
             .to delegate_to(ConvenientService::Examples::Rails::Gemfile::Services::PrintShellCommand, :result)
-            .with_arguments(text: command, skip: !debug)
+            .with_arguments(command: command, skip: !debug)
         end
 
         it "returns success" do

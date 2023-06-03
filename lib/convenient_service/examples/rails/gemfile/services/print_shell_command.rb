@@ -13,18 +13,18 @@ module ConvenientService
           class PrintShellCommand
             include RailsService::Config
 
-            attribute :text, :string
+            attribute :command, :string
             attribute :skip, :boolean, default: false
             attribute :out, default: $stdout
 
-            validates :text, presence: true if ConvenientService::Dependencies.support_has_result_params_validations_using_active_model_validations?
+            validates :command, presence: true if ConvenientService::Dependencies.support_has_result_params_validations_using_active_model_validations?
 
             def result
-              return error("Printing of shell command `#{text}` is skipped") if skip
+              return error("Printing of shell command `#{command}` is skipped") if skip
 
               out.puts
 
-              out.puts ::Paint["$ #{text}", :blue, :bold]
+              out.puts ::Paint["$ #{command}", :blue, :bold]
 
               success
             end

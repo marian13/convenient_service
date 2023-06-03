@@ -13,22 +13,22 @@ module ConvenientService
           class PrintShellCommand
             include DryService::Config
 
-            option :text
+            option :command
             option :skip, default: -> { false }
             option :out, default: -> { $stdout }
 
             contract do
               schema do
-                required(:text).filled(:string)
+                required(:command).filled(:string)
               end
             end
 
             def result
-              return error("Printing of shell command `#{text}` is skipped") if skip
+              return error("Printing of shell command `#{command}` is skipped") if skip
 
               out.puts
 
-              out.puts ::Paint["$ #{text}", :blue, :bold]
+              out.puts ::Paint["$ #{command}", :blue, :bold]
 
               success
             end

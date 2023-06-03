@@ -4,15 +4,15 @@ require "spec_helper"
 
 require "convenient_service"
 
+# rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::PrintShellCommand do
   include ConvenientService::RSpec::Matchers::Results
-  include ConvenientService::RSpec::Matchers::HaveAttrReader
   include ConvenientService::RSpec::Matchers::IncludeModule
+  include ConvenientService::RSpec::Matchers::DelegateTo
 
-  let(:service) { described_class.new(**default_options) }
-
-  let(:default_options) { {text: text, out: out} }
-  let(:text) { "ls -a" }
+  let(:result) { described_class.result(command: command, skip: skip, out: out) }
+  let(:command) { "ls -a" }
+  let(:skip) { false }
   let(:out) { Tempfile.new }
 
   example_group "modules" do
@@ -21,30 +21,38 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::PrintSh
     it { is_expected.to include_module(ConvenientService::Standard::Config) }
   end
 
-  example_group "attributes" do
-    subject { service }
+  example_group "class methods" do
+    describe ".result" do
+      context "when printing of shell command is NOT successful" do
+        context "when skipping" do
+          let(:skip) { true }
 
-    it { is_expected.to have_attr_reader(:text) }
-    it { is_expected.to have_attr_reader(:out) }
-  end
+          it "returns error with message" do
+            expect(result).to be_error.with_message("Printing of shell command `#{command}` is skipped").of_service(described_class).without_step
+          end
+        end
+      end
 
-  describe "#result" do
-    subject(:result) { service.result }
+      context "when printing of shell command is successful" do
+        let(:out_content) { out.tap(&:rewind).read }
 
-    let(:out_content) { out.tap(&:rewind).read }
+        it "prints command" do
+          result
 
-    it "prints text" do
-      result
+          expect(out_content).to match(/\$ #{command}/)
+        end
 
-      expect(out_content).to match(/\$ #{text}/)
-    end
+        specify do
+          expect { result }
+            .to delegate_to(Paint, :[])
+            .with_arguments("$ #{command}", :blue, :bold)
+        end
 
-    it "delegates to Paint#[]" do
-      allow(Paint).to receive(:[]).with("$ #{text}", :blue, :bold).and_call_original
-
-      result
-
-      expect(Paint).to have_received(:[])
+        it "returns success" do
+          expect(result).to be_success.without_data.of_service(described_class).without_step
+        end
+      end
     end
   end
 end
+# rubocop:enable RSpec/NestedGroups

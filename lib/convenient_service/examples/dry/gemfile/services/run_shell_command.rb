@@ -19,7 +19,7 @@ module ConvenientService
             end
 
             step Services::PrintShellCommand,
-              in: [{text: :command}, {skip: -> { !debug }}],
+              in: [:command, {skip: -> { !debug }}],
               try: true
 
             step :result,
