@@ -16,6 +16,9 @@ module ConvenientService
                     # @return [String]
                     # @since 0.2.0
                     #
+                    # @internal
+                    #   TODO: What if result is created from method step?
+                    #
                     def inspect
                       "<#{container.klass.name}::Step service: #{service.klass.name}>"
                     end

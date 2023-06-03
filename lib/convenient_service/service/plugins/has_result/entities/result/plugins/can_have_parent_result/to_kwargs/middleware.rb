@@ -12,6 +12,10 @@ module ConvenientService
                   class Middleware < MethodChainMiddleware
                     intended_for :to_kwargs, entity: :result
 
+                    ##
+                    # @internal
+                    #   TODO: What if result is created from method step? Who is its parent?
+                    #
                     def next(...)
                       chain.next(...).merge(parent: entity.parent)
                     end
