@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "services/print_shell_command"
-require_relative "services/run_shell"
+require_relative "services/run_shell_command"
 
 require_relative "services/assert_file_exists"
 require_relative "services/assert_file_not_empty"

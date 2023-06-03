@@ -84,7 +84,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::StripComment
         # NOTE: Stub for environments where Node.js is not available.
         # TODO: Node.js independent examples.
         #
-        stub_service(ConvenientService::Examples::Dry::Gemfile::Services::RunShell).to return_success
+        stub_service(ConvenientService::Examples::Dry::Gemfile::Services::RunShellCommand).to return_success
       end
 
       ##

@@ -110,7 +110,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::StripComme
         # NOTE: Stub for environments where Node.js is not available.
         # TODO: Node.js independent examples.
         #
-        stub_service(ConvenientService::Examples::Rails::Gemfile::Services::RunShell).to return_success
+        stub_service(ConvenientService::Examples::Rails::Gemfile::Services::RunShellCommand).to return_success
       end
 
       ##

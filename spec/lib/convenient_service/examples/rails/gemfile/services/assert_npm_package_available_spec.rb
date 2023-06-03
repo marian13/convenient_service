@@ -53,26 +53,26 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::AssertNpmP
             stub_service(ConvenientService::Examples::Rails::Gemfile::Services::AssertNodeAvailable)
               .to return_success
 
-            stub_service(ConvenientService::Examples::Rails::Gemfile::Services::RunShell)
+            stub_service(ConvenientService::Examples::Rails::Gemfile::Services::RunShellCommand)
               .with_arguments(command: npm_package_available_command)
               .to return_error
           end
 
           it "returns intermediate step result" do
-            expect(result).to be_not_success.of_service(described_class).of_step(ConvenientService::Examples::Rails::Gemfile::Services::RunShell)
+            expect(result).to be_not_success.of_service(described_class).of_step(ConvenientService::Examples::Rails::Gemfile::Services::RunShellCommand)
           end
         end
       end
 
       context "when assertion that npm package is available is successful" do
         before do
-          stub_service(ConvenientService::Examples::Rails::Gemfile::Services::RunShell)
+          stub_service(ConvenientService::Examples::Rails::Gemfile::Services::RunShellCommand)
             .with_arguments(command: npm_package_available_command)
             .to return_success
         end
 
         it "returns `success`" do
-          expect(result).to be_success.of_service(described_class).of_step(ConvenientService::Examples::Rails::Gemfile::Services::RunShell)
+          expect(result).to be_success.of_service(described_class).of_step(ConvenientService::Examples::Rails::Gemfile::Services::RunShellCommand)
         end
       end
     end

@@ -26,7 +26,7 @@ module ConvenientService
             # NOTE: For `npm list` and its options docs, see
             # https://docs.npmjs.com/cli/v7/commands/npm-ls
             #
-            step Services::RunShell, in: {command: -> { "npm list #{name} --depth=0 > /dev/null 2>&1" }}
+            step Services::RunShellCommand, in: {command: -> { "npm list #{name} --depth=0 > /dev/null 2>&1" }}
           end
         end
       end

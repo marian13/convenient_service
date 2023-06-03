@@ -35,12 +35,12 @@ module ConvenientService
               # NOTE: `self` is a service class in the current context. For example:
               #
               #   before do
-              #     stub_service(ConvenientService::Examples::Standard::Gemfile::Services::RunShell)
+              #     stub_service(ConvenientService::Examples::Standard::Gemfile::Services::RunShellCommand)
               #       .with_arguments(command: node_available_command)
               #       .to return_result(node_available_status)
               #   end
               #
-              #   # Then `self` is `ConvenientService::Examples::Standard::Gemfile::Services::RunShell`.
+              #   # Then `self` is `ConvenientService::Examples::Standard::Gemfile::Services::RunShellCommand`.
               #
               cache =
                 if Support::Gems::RSpec.current_example

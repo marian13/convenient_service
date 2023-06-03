@@ -24,7 +24,7 @@ module ConvenientService
             alias_method :content_with_comments, :content
 
             step Services::AssertNpmPackageAvailable, in: {name: -> { "strip-comments" }}
-            step Services::RunShell, in: {command: -> { "node -e '#{js_script}' #{file_with_comments.path} #{file_without_comments.path}" }}
+            step Services::RunShellCommand, in: {command: -> { "node -e '#{js_script}' #{file_with_comments.path} #{file_without_comments.path}" }}
             step :result, in: :file_without_comments, out: :content_without_comments
 
             def result

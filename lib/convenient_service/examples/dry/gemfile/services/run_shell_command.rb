@@ -2,16 +2,21 @@
 
 module ConvenientService
   module Examples
-    module Rails
+    module Dry
       module Gemfile
         module Services
-          class RunShell
-            include RailsService::Config
+          class RunShellCommand
+            include DryService::Config
 
-            attribute :command, :string
-            attribute :debug, :boolean, default: false
+            option :command
+            option :debug, default: -> { false }
 
-            validates :command, presence: true if ConvenientService::Dependencies.support_has_result_params_validations_using_active_model_validations?
+            contract do
+              schema do
+                required(:command).filled(:string)
+                optional(:debug).value(:bool)
+              end
+            end
 
             step Services::PrintShellCommand,
               in: [{text: :command}, {skip: -> { !debug }}],

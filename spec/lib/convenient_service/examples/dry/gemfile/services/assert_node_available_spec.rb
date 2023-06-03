@@ -27,26 +27,26 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::AssertNodeAv
       context "when assertion that node is available is NOT successful" do
         context "when node is NOT available" do
           before do
-            stub_service(ConvenientService::Examples::Dry::Gemfile::Services::RunShell)
+            stub_service(ConvenientService::Examples::Dry::Gemfile::Services::RunShellCommand)
               .with_arguments(command: node_available_command)
               .to return_error
           end
 
           it "returns intermediate step result" do
-            expect(result).to be_not_success.of_service(described_class).of_step(ConvenientService::Examples::Dry::Gemfile::Services::RunShell)
+            expect(result).to be_not_success.of_service(described_class).of_step(ConvenientService::Examples::Dry::Gemfile::Services::RunShellCommand)
           end
         end
       end
 
       context "when assertion that node is available is successful" do
         before do
-          stub_service(ConvenientService::Examples::Dry::Gemfile::Services::RunShell)
+          stub_service(ConvenientService::Examples::Dry::Gemfile::Services::RunShellCommand)
             .with_arguments(command: node_available_command)
             .to return_success
         end
 
         it "returns `success`" do
-          expect(result).to be_success.of_service(described_class).of_step(ConvenientService::Examples::Dry::Gemfile::Services::RunShell)
+          expect(result).to be_success.of_service(described_class).of_step(ConvenientService::Examples::Dry::Gemfile::Services::RunShellCommand)
         end
       end
     end

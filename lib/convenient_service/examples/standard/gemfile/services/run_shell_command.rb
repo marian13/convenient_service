@@ -2,21 +2,16 @@
 
 module ConvenientService
   module Examples
-    module Dry
+    module Standard
       module Gemfile
         module Services
-          class RunShell
-            include DryService::Config
+          class RunShellCommand
+            include ConvenientService::Standard::Config
 
-            option :command
-            option :debug, default: -> { false }
+            attr_reader :command, :debug
 
-            contract do
-              schema do
-                required(:command).filled(:string)
-                optional(:debug).value(:bool)
-              end
-            end
+            step :validate_command,
+              in: :command
 
             step Services::PrintShellCommand,
               in: [{text: :command}, {skip: -> { !debug }}],
@@ -24,6 +19,11 @@ module ConvenientService
 
             step :result,
               in: :command
+
+            def initialize(command:, debug: false)
+              @command = command
+              @debug = debug
+            end
 
             def result
               ##
@@ -36,6 +36,15 @@ module ConvenientService
               else
                 error(message: "#{command} returned non-zero exit code")
               end
+            end
+
+            private
+
+            def validate_command
+              return failure(command: "Command is `nil`") if command.nil?
+              return failure(command: "Command is empty") if command.empty?
+
+              success
             end
           end
         end

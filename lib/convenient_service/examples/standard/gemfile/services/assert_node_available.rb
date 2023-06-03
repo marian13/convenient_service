@@ -17,7 +17,7 @@ module ConvenientService
             # NOTE: `> /dev/null 2>&1` is used to hide output.
             # https://unix.stackexchange.com/a/119650/394253
             #
-            step Services::RunShell, in: {command: -> { "which node > /dev/null 2>&1" }}
+            step Services::RunShellCommand, in: {command: -> { "which node > /dev/null 2>&1" }}
           end
         end
       end

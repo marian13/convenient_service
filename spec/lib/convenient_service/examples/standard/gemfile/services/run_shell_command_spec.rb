@@ -4,10 +4,8 @@ require "spec_helper"
 
 require "convenient_service"
 
-return unless defined? ConvenientService::Examples::Dry
-
 # rubocop:disable RSpec/NestedGroups
-RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::RunShell do
+RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::RunShellCommand do
   include ConvenientService::RSpec::Helpers::StubService
 
   include ConvenientService::RSpec::Matchers::DelegateTo
@@ -22,23 +20,33 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::RunShell do
   example_group "modules" do
     subject { described_class }
 
-    it { is_expected.to include_module(ConvenientService::Examples::Dry::Gemfile::DryService::Config) }
+    it { is_expected.to include_module(ConvenientService::Standard::Config) }
   end
 
   example_group "class methods" do
     describe ".result" do
       before do
-        stub_service(ConvenientService::Examples::Dry::Gemfile::Services::PrintShellCommand)
+        stub_service(ConvenientService::Examples::Standard::Gemfile::Services::PrintShellCommand)
           .with_arguments(text: command, skip: debug)
           .to return_success
       end
 
       context "when running of shell command is NOT successful" do
-        context "when command is NOT present" do
-          let(:command) { "" }
+        context "when `command` is NOT valid" do
+          context "when `command` is `nil`" do
+            let(:command) { nil }
 
-          it "returns failure with data" do
-            expect(result).to be_failure.with_data(command: "must be filled").of_service(described_class).without_step
+            it "returns `failure` with `data`" do
+              expect(result).to be_failure.with_data(command: "Command is `nil`").of_service(described_class).of_step(:validate_command)
+            end
+          end
+
+          context "when `command` is empty" do
+            let(:command) { "" }
+
+            it "returns `failure` with `data`" do
+              expect(result).to be_failure.with_data(command: "Command is empty").of_service(described_class).of_step(:validate_command)
+            end
           end
         end
 
@@ -74,7 +82,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::RunShell do
 
         it "prints shell command" do
           expect { result }
-            .to delegate_to(ConvenientService::Examples::Dry::Gemfile::Services::PrintShellCommand, :result)
+            .to delegate_to(ConvenientService::Examples::Standard::Gemfile::Services::PrintShellCommand, :result)
             .with_arguments(text: command, skip: !debug)
         end
 
