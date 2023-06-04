@@ -55,6 +55,13 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
         context "when `other` has different `value`" do
           let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code.new(value: :bar, result: result) }
 
+          ##
+          # NOTE: This spec is skipped since it is NOT possible to stub immediate values like symbols.
+          #
+          # specify do
+          #   expect { code == other }.to delegate_to(code.value, :==).with_arguments(other.value)
+          # end
+
           it "returns `false`" do
             expect(code == other).to eq(false)
           end
@@ -62,7 +69,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
           context "when value is described by RSpec argument matcher" do
             let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code.new(value: instance_of(Symbol), result: result) }
 
-            it "returns `false`" do
+            it "does NOT respect that RSpec argument matcher" do
               expect(code == other).to eq(false)
             end
           end
@@ -70,6 +77,13 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
 
         context "when `other` has different `result.class`" do
           let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code.new(value: value, result: Object.new) }
+
+          ##
+          # NOTE: This spec is skipped since it is NOT possible to stub immediate values like symbols.
+          #
+          # specify do
+          #   expect { code == other }.to delegate_to(code.result.class, :==).with_arguments(other.result.class)
+          # end
 
           it "returns `false`" do
             expect(code == other).to eq(false)
@@ -97,6 +111,13 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
         context "when `other` has different `value`" do
           let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code.new(value: :bar, result: result) }
 
+          ##
+          # NOTE: This spec is skipped since it is NOT possible to stub immediate values like symbols.
+          #
+          # specify do
+          #   expect { code === other }.to delegate_to(other.value, :===).with_arguments(code.value)
+          # end
+
           it "returns `false`" do
             expect(code === other).to eq(false)
           end
@@ -104,14 +125,21 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
           context "when value is described by RSpec argument matcher" do
             let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code.new(value: instance_of(Symbol), result: result) }
 
-            it "returns `true`" do
-              expect(code === other).to eq(false)
+            it "respects that RSpec argument matcher" do
+              expect(code === other).to eq(true)
             end
           end
         end
 
         context "when `other` has different `result.class`" do
           let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code.new(value: value, result: Object.new) }
+
+          ##
+          # NOTE: This spec is skipped since it is NOT possible to stub immediate values like symbols.
+          #
+          # specify do
+          #   expect { code === other }.to delegate_to(code.result.class, :==).with_arguments(other.result.class)
+          # end
 
           it "returns `false`" do
             expect(code === other).to eq(false)

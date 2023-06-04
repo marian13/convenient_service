@@ -68,6 +68,14 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
           it "returns `false`" do
             expect(message == other).to eq(false)
           end
+
+          context "when value is described by RSpec argument matcher" do
+            let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message.new(value: instance_of(String), result: result) }
+
+            it "does NOT respect that RSpec argument matcher" do
+              expect(message == other).to eq(false)
+            end
+          end
         end
 
         context "when `other` has different `result.class`" do
@@ -106,14 +114,25 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
         end
 
         context "when `other` has different `value`" do
-          let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message.new(value: "bar", result: result) }
+          ##
+          # NOTE: Unfreezes `value` in order to have an ability to use `delegate_to` on it.
+          #
+          let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message.new(value: +"bar", result: result) }
 
           specify do
-            expect { message === other }.to delegate_to(message.value, :===).with_arguments(other.value)
+            expect { message === other }.to delegate_to(other.value, :===).with_arguments(message.value)
           end
 
           it "returns `false`" do
             expect(message === other).to eq(false)
+          end
+
+          context "when value is described by RSpec argument matcher" do
+            let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message.new(value: instance_of(String), result: result) }
+
+            it "respects that RSpec argument matcher" do
+              expect(message === other).to eq(true)
+            end
           end
         end
 

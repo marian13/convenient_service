@@ -81,7 +81,7 @@ module ConvenientService
                           return unless other.instance_of?(self.class)
 
                           return false if result.class != other.result.class
-                          return false unless value === other.value
+                          return false unless other.value === value
 
                           true
                         end
