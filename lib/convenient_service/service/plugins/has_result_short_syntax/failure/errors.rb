@@ -6,15 +6,16 @@ module ConvenientService
       module HasResultShortSyntax
         module Failure
           module Errors
-            class KwargsContainDataAndExtraKeys < ::ConvenientService::Error
-              def initialize
+            class KwargsContainNonJSendKey < ::ConvenientService::Error
+              def initialize(key:)
                 message = <<~TEXT
-                  `kwargs` passed to `failure` method contain `data` and extra keys. That's NOT allowed.
+                  When `kwargs` with `data` key are passed to `failure` method, they can NOT contain non JSend keys like `#{key.inspect}`.
 
                   Please, consider something like:
 
-                  failure(foo: :bar)
-                  failure(data: {foo: :bar})
+                  failure(foo: :bar) # short version does NOT support custom message
+                  failure(data: {foo: :bar}) # long version
+                  failure(data: {foo: :bar}, message: "foo") # long version with custom message
                 TEXT
 
                 super(message)

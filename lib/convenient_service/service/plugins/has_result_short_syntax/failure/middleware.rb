@@ -9,9 +9,11 @@ module ConvenientService
             intended_for :failure, entity: :service
 
             def next(*args, **kwargs, &block)
-              Commands::RefuteKwargsContainDataAndExtraKeys.call(kwargs: kwargs)
+              return chain.next(*args, data: kwargs, &block) unless kwargs.has_key?(:data)
 
-              kwargs.has_key?(:data) ? chain.next(**kwargs) : chain.next(data: kwargs)
+              Commands::AssertKwargsContainOnlyJSendKeys.call(kwargs: kwargs)
+
+              chain.next(*args, **kwargs, &block)
             end
           end
         end

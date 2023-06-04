@@ -6,6 +6,8 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Service::Plugins::HasResultShortSyntax::Failure::Middleware do
+  include ConvenientService::RSpec::Helpers::IgnoringError
+
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   let(:middleware) { described_class }
@@ -55,17 +57,15 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultShortSyntax::Failur
         end
       end
 
-      specify do
-        expect { method_value }
-          .to delegate_to(ConvenientService::Service::Plugins::HasResultShortSyntax::Failure::Commands::RefuteKwargsContainDataAndExtraKeys, :call)
-          .with_arguments(kwargs: {})
-      end
-
       context "when `kwargs` do NOT passed" do
         subject(:method_value) { method.call }
 
         it "returns failure with default data" do
           expect(method_value).to be_failure.with_data({})
+        end
+
+        it "returns failure with default message" do
+          expect(method_value).to be_failure.with_message("")
         end
       end
 
@@ -76,33 +76,58 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultShortSyntax::Failur
           it "returns failure with data" do
             expect(method_value).to be_failure.with_data(foo: :bar)
           end
+
+          it "returns failure with message" do
+            expect(method_value).to be_failure.with_message("foo bar")
+          end
         end
 
         context "when `kwargs` contain `:data` key" do
           subject(:method_value) { method.call(data: {foo: :bar}) }
 
+          specify do
+            expect { method_value }
+              .to delegate_to(ConvenientService::Service::Plugins::HasResultShortSyntax::Failure::Commands::AssertKwargsContainOnlyJSendKeys, :call)
+              .with_arguments(kwargs: {data: {foo: :bar}})
+          end
+
           it "returns failure with data" do
             expect(method_value).to be_failure.with_data(foo: :bar)
           end
+
+          context "when `kwargs` contain `:message` key" do
+            subject(:method_value) { method.call(data: {foo: :bar}, message: "foo") }
+
+            it "returns failure with data" do
+              expect(method_value).to be_failure.with_data(foo: :bar).and_message("foo")
+            end
+          end
         end
 
-        context "when `kwargs` contain extra keys" do
-          subject(:method_value) { method.call(data: {foo: :bar}, extra_key: "anything") }
+        context "when `kwargs` contain non JSend key" do
+          subject(:method_value) { method.call(data: {foo: :bar}, non_jsend_key: "anything") }
 
           let(:error_message) do
             <<~TEXT
-              `kwargs` passed to `failure` method contain `data` and extra keys. That's NOT allowed.
+              When `kwargs` with `data` key are passed to `failure` method, they can NOT contain non JSend keys like `:non_jsend_key`.
 
               Please, consider something like:
 
-              failure(foo: :bar)
-              failure(data: {foo: :bar})
+              failure(foo: :bar) # short version does NOT support custom message
+              failure(data: {foo: :bar}) # long version
+              failure(data: {foo: :bar}, message: "foo") # long version with custom message
             TEXT
           end
 
-          it "raises `ConvenientService::Service::Plugins::HasResultShortSyntax::Failure::Errors::KwargsContainDataAndExtraKeys`" do
+          specify do
+            expect { ignoring_error(ConvenientService::Service::Plugins::HasResultShortSyntax::Failure::Errors::KwargsContainNonJSendKey) { method_value } }
+              .to delegate_to(ConvenientService::Service::Plugins::HasResultShortSyntax::Failure::Commands::AssertKwargsContainOnlyJSendKeys, :call)
+              .with_arguments(kwargs: {data: {foo: :bar}, non_jsend_key: "anything"})
+          end
+
+          it "raises `ConvenientService::Service::Plugins::HasResultShortSyntax::Failure::Errors::KwargsContainNonJSendKey`" do
             expect { method_value }
-              .to raise_error(ConvenientService::Service::Plugins::HasResultShortSyntax::Failure::Errors::KwargsContainDataAndExtraKeys)
+              .to raise_error(ConvenientService::Service::Plugins::HasResultShortSyntax::Failure::Errors::KwargsContainNonJSendKey)
               .with_message(error_message)
           end
         end
