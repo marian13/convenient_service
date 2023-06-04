@@ -40,9 +40,9 @@ module ConvenientService
 
               rules << ->(result) { result.service.instance_of?(service_class) } if used_of_service?
               rules << ->(result) { Commands::MatchResultStep.call(result: result, step: step) } if used_of_step?
-              rules << ->(result) { result.unsafe_data == result.class.data(value: data, result: result) } if used_data?
-              rules << ->(result) { result.unsafe_message == result.class.message(value: message, result: result) } if used_message?
-              rules << ->(result) { result.unsafe_code == result.class.code(value: code, result: result) } if used_code?
+              rules << ->(result) { result.unsafe_data.public_send(comparison_method, result.class.data(value: data, result: result)) } if used_data?
+              rules << ->(result) { result.unsafe_message.public_send(comparison_method, result.class.message(value: message, result: result)) } if used_message?
+              rules << ->(result) { result.unsafe_code.public_send(comparison_method, result.class.code(value: code, result: result)) } if used_code?
 
               condition = Utils::Proc.conjunct(rules)
 
@@ -171,6 +171,16 @@ module ConvenientService
               self
             end
 
+            ##
+            # @param comparison_method [Symbol]
+            # @return [ConvenientService::RSpec::Matchers::Custom::Results::Base]
+            #
+            def comparing_by(comparison_method)
+              chain[:comparison_method] = comparison_method
+
+              self
+            end
+
             private
 
             ##
@@ -280,6 +290,13 @@ module ConvenientService
             #
             def code
               @code ||= chain[:code] || ""
+            end
+
+            ##
+            # @return [Symbol]
+            #
+            def comparison_method
+              @comparison_method ||= chain[:comparison_method] || :==
             end
 
             ##
