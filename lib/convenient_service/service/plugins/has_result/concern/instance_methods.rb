@@ -19,6 +19,9 @@ module ConvenientService
             # @param kwargs [Hash{Symbol => Object}]
             # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
             #
+            # @internal
+            #   NOTE: Extract to `HasJSendResults`.
+            #
             def success(**kwargs)
               self.class.success(**kwargs.merge(service: self))
             end
@@ -28,6 +31,9 @@ module ConvenientService
             # @param kwargs [Hash{Symbol => Object}]
             # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
             #
+            # @internal
+            #   NOTE: Extract to `HasJSendResults`.
+            #
             def failure(**kwargs)
               self.class.failure(**kwargs.merge(service: self))
             end
@@ -36,6 +42,9 @@ module ConvenientService
             # @api public
             # @param kwargs [Hash{Symbol => Object}]
             # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+            #
+            # @internal
+            #   NOTE: Extract to `HasJSendResults`.
             #
             def error(**kwargs)
               self.class.error(**kwargs.merge(service: self))

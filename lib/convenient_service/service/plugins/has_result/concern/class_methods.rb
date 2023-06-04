@@ -21,6 +21,9 @@ module ConvenientService
             # @internal
             #   NOTE: This method is internally used by custom RSpec helper `stub_service`. It should NOT be used in the client code.
             #
+            #   TODO: Is it OK to pass custom `message`, `code` to `success`? Why?
+            #   NOTE: Extract to `HasJSendResults`.
+            #
             def success(
               service: new_without_initialize,
               data: Constants::DEFAULT_SUCCESS_DATA
@@ -40,6 +43,9 @@ module ConvenientService
             #
             # @internal
             #   NOTE: This method is internally used by custom RSpec helper `stub_service`. It should NOT be used in the client code.
+            #
+            #   TODO: Is it OK to pass custom `code` to `failure`? Why?
+            #   NOTE: Extract to `HasJSendResults`.
             #
             def failure(
               service: new_without_initialize,
@@ -61,6 +67,9 @@ module ConvenientService
             #
             # @internal
             #   NOTE: This method is internally used by custom RSpec helper `stub_service`. It should NOT be used in the client code.
+            #
+            #   TODO: Is it OK to pass custom `data` to `error`? Why?
+            #   NOTE: Extract to `HasJSendResults`.
             #
             def error(
               service: new_without_initialize,
