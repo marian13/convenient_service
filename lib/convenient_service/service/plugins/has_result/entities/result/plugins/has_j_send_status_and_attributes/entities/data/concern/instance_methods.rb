@@ -77,11 +77,29 @@ module ConvenientService
                         #   IMPORTANT: Must be kept in sync with `#==`.
                         #   NOTE: Ruby does NOT have `!==` operator.
                         #
+                        #   NOTE:
+                        #   - `Hash` and `Array` do NOT implement `#===`.
+                        #   - They inherit it from `Object`.
+                        #   - `Object#===` is "alias" for `Object#==`.
+                        #   - That is why the following method is using a custom comparison logic.
+                        #   - https://ruby-doc.org/core-2.7.0/Object.html#method-i-3D-3D-3D
+                        #   - https://ruby-doc.org/core-2.7.0/Hash.html#method-i-3D-3D
+                        #   - https://ruby-doc.org/core-2.7.0/Array.html#method-i-3D-3D
+                        #
+                        #   IMPORTANT: @marian13 `Data#===` MUST NOT care about nested arrays and hashes inside `Data#value` hash.
+                        #
                         def ===(other)
                           return unless other.instance_of?(self.class)
 
                           return false if result.class != other.result.class
-                          return false unless other.value === value
+
+                          ##
+                          # TODO: @marian13 Refactor tomorrow. Create value wrapper.
+                          #
+                          return false unless other.value.instance_of?(value.class)
+                          return false if other.value.size != value.size
+                          return false if other.value.keys.sort != value.keys.sort
+                          return false unless other.value.all? { |key, other_value| other_value === value[key] }
 
                           true
                         end

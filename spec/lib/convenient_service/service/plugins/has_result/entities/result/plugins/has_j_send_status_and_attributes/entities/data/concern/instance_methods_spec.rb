@@ -160,16 +160,27 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
         context "when `other` has different `value`" do
           let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data.new(value: {foo: :baz}, result: result) }
 
-          specify do
-            expect { data === other }.to delegate_to(other.value, :===).with_arguments(data.value)
-          end
+          ##
+          # TODO: @marian13 Manually compare all values by `===` tomorrow.
+          #
+          # specify do
+          #   expect { data === other }.to delegate_to(other.value.values.first, :===).with_arguments(data.value.values.first)
+          # end
 
           it "returns `false`" do
             expect(data === other).to eq(false)
           end
 
           context "when value is described by RSpec argument matcher" do
-            let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data.new(value: instance_of(Hash), result: result) }
+            let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data.new(value: {foo: instance_of(Symbol)}, result: result) }
+
+            it "respects that RSpec argument matcher" do
+              expect(data === other).to eq(true)
+            end
+          end
+
+          context "when value is described by RSpec argument matcher" do
+            let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data.new(value: {foo: instance_of(Symbol)}, result: result) }
 
             it "respects that RSpec argument matcher" do
               expect(data === other).to eq(true)
