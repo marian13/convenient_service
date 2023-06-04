@@ -256,6 +256,13 @@ module ConvenientService
       #
       def require_standard_examples
         ##
+        # - https://ruby-doc.org/stdlib-2.7.0/libdoc/date/rdoc/Date.html
+        # - https://ruby-doc.org/stdlib-2.7.0/libdoc/date/rdoc/DateTime.html
+        # - https://github.com/ruby/date
+        #
+        require "date"
+
+        ##
         # - https://ruby-doc.org/stdlib-2.7.0/libdoc/json/rdoc/JSON.html
         # - https://github.com/flori/json
         #
@@ -273,6 +280,7 @@ module ConvenientService
         require "webrick"
 
         require_relative "examples/standard/cowsay"
+        require_relative "examples/standard/date_time"
         require_relative "examples/standard/factorial"
         require_relative "examples/standard/gemfile"
         require_relative "examples/standard/request_params"
