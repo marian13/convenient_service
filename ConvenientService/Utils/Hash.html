@@ -79,7 +79,7 @@
   <dl>
     <dt>Defined in:</dt>
     <dd>lib/convenient_service/utils/hash.rb<span class="defines">,<br />
-  lib/convenient_service/utils/hash/except.rb</span>
+  lib/convenient_service/utils/hash/except.rb,<br /> lib/convenient_service/utils/hash/assert_valid_keys.rb</span>
 </dd>
   </dl>
   
@@ -91,7 +91,7 @@
     
   
     
-      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Hash/Except.html" title="ConvenientService::Utils::Hash::Except (class)">Except</a></span>
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Hash/AssertValidKeys.html" title="ConvenientService::Utils::Hash::AssertValidKeys (class)">AssertValidKeys</a></span>, <span class='object_link'><a href="Hash/Except.html" title="ConvenientService::Utils::Hash::Except (class)">Except</a></span>
     
   
 </p>
@@ -109,6 +109,28 @@
     </h2>
 
     <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#assert_valid_keys-class_method" title="assert_valid_keys (class method)">.<strong>assert_valid_keys</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
       
         <li class="public ">
   <span class="summary_signature">
@@ -142,7 +164,37 @@
 
     
       <div class="method_details first">
-  <h3 class="signature first" id="except-class_method">
+  <h3 class="signature first" id="assert_valid_keys-class_method">
+  
+    .<strong>assert_valid_keys</strong>  &#x21d2; <tt><span class='object_link'><a href="Object.html" title="ConvenientService::Utils::Object (module)">Object</a></span></tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+10
+11
+12</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/hash.rb', line 10</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_assert_valid_keys'>assert_valid_keys</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="Hash/AssertValidKeys.html" title="ConvenientService::Utils::Hash::AssertValidKeys (class)">AssertValidKeys</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="Hash/AssertValidKeys.html#call-instance_method" title="ConvenientService::Utils::Hash::AssertValidKeys#call (method)">call</a></span></span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="except-class_method">
   
     .<strong>except</strong>  &#x21d2; <tt><span class='object_link'><a href="Object.html" title="ConvenientService::Utils::Object (module)">Object</a></span></tt> 
   
@@ -156,12 +208,12 @@
       <pre class="lines">
 
 
-9
-10
-11</pre>
+14
+15
+16</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/hash.rb', line 9</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/hash.rb', line 14</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_except'>except</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="Hash/Except.html" title="ConvenientService::Utils::Hash::Except (class)">Except</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="Hash/Except.html#call-instance_method" title="ConvenientService::Utils::Hash::Except#call (method)">call</a></span></span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
@@ -176,7 +228,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Jun  4 00:02:08 2023 by
+  Generated on Sun Jun  4 12:49:12 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>
