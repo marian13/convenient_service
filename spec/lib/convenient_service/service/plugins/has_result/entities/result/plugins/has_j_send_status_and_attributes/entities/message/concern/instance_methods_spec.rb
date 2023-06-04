@@ -45,6 +45,11 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
 
     example_group "comparisons" do
       describe "#==" do
+        ##
+        # NOTE: Unfreezes `value` in order to have an ability to use `delegate_to` on it.
+        #
+        let(:value) { +"foo" }
+
         context "when `other` has different class" do
           let(:other) { 42 }
 
@@ -56,6 +61,10 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
         context "when `other` has different `value`" do
           let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message.new(value: "bar", result: result) }
 
+          specify do
+            expect { message == other }.to delegate_to(message.value, :==).with_arguments(other.value)
+          end
+
           it "returns `false`" do
             expect(message == other).to eq(false)
           end
@@ -63,6 +72,10 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
 
         context "when `other` has different `result.class`" do
           let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message.new(value: value, result: Object.new) }
+
+          specify do
+            expect { message == other }.to delegate_to(message.result.class, :==).with_arguments(other.result.class)
+          end
 
           it "returns `false`" do
             expect(message == other).to eq(false)
@@ -74,6 +87,53 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
 
           it "returns `true`" do
             expect(message == other).to eq(true)
+          end
+        end
+      end
+
+      describe "#===" do
+        ##
+        # NOTE: Unfreezes `value` in order to have an ability to use `delegate_to` on it.
+        #
+        let(:value) { +"foo" }
+
+        context "when `other` has different class" do
+          let(:other) { 42 }
+
+          it "returns `nil`" do
+            expect(message === other).to be_nil
+          end
+        end
+
+        context "when `other` has different `value`" do
+          let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message.new(value: "bar", result: result) }
+
+          specify do
+            expect { message === other }.to delegate_to(message.value, :===).with_arguments(other.value)
+          end
+
+          it "returns `false`" do
+            expect(message === other).to eq(false)
+          end
+        end
+
+        context "when `other` has different `result.class`" do
+          let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message.new(value: value, result: Object.new) }
+
+          specify do
+            expect { message === other }.to delegate_to(message.result.class, :==).with_arguments(other.result.class)
+          end
+
+          it "returns `false`" do
+            expect(message === other).to eq(false)
+          end
+        end
+
+        context "when `other` has same attributes" do
+          let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message.new(value: value, result: result) }
+
+          it "returns `true`" do
+            expect(message === other).to eq(true)
           end
         end
       end

@@ -50,6 +50,23 @@ module ConvenientService
                         end
 
                         ##
+                        # @param other [Object] Can be any type.
+                        # @return [Boolean, nil]
+                        #
+                        # @internal
+                        #   IMPORTANT: Must be kept in sync with `#==`.
+                        #   NOTE: Ruby does NOT have `!==` operator.
+                        #
+                        def ===(other)
+                          return unless other.instance_of?(self.class)
+
+                          return false if result.class != other.result.class
+                          return false unless value === other.value
+
+                          true
+                        end
+
+                        ##
                         # @return [Hash]
                         #
                         def to_kwargs
