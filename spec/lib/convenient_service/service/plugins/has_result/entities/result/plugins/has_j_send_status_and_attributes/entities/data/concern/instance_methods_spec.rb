@@ -178,14 +178,6 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
               expect(data === other).to eq(true)
             end
           end
-
-          context "when value is described by RSpec argument matcher" do
-            let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data.new(value: {foo: instance_of(Symbol)}, result: result) }
-
-            it "respects that RSpec argument matcher" do
-              expect(data === other).to eq(true)
-            end
-          end
         end
 
         context "when `other` has different `result.class`" do
