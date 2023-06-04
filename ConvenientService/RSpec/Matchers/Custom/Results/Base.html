@@ -228,6 +228,28 @@
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#comparing_by-instance_method" title="#comparing_by (instance method)">#<strong>comparing_by</strong>(comparison_method)  &#x21d2; ConvenientService::RSpec::Matchers::Custom::Results::Base </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#description-instance_method" title="#description (instance method)">#<strong>description</strong>  &#x21d2; String </a>
     
 
@@ -768,6 +790,92 @@
 </div>
     
       <div class="method_details ">
+  <h3 class="signature " id="comparing_by-instance_method">
+  
+    #<strong>comparing_by</strong>(comparison_method)  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::RSpec::Matchers::Custom::Results::Base (class)">ConvenientService::RSpec::Matchers::Custom::Results::Base</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>comparison_method</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="ConvenientService::RSpec::Matchers::Custom::Results::Base (class)">ConvenientService::RSpec::Matchers::Custom::Results::Base</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Since:</p>
+<ul class="since">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'><p>0.3.0</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+178
+179
+180
+181
+182</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/results/base.rb', line 178</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_comparing_by'>comparing_by</span><span class='lparen'>(</span><span class='id identifier rubyid_comparison_method'>comparison_method</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_chain'>chain</span><span class='lbracket'>[</span><span class='symbol'>:comparison_method</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_comparison_method'>comparison_method</span>
+
+  <span class='kw'>self</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
   <h3 class="signature " id="description-instance_method">
   
     #<strong>description</strong>  &#x21d2; <tt>String</tt> 
@@ -1085,9 +1193,9 @@
 
   <span class='id identifier rubyid_rules'>rules</span> <span class='op'>&lt;&lt;</span> <span class='tlambda'>-&gt;</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span> <span class='tlambeg'>{</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='id identifier rubyid_service_class'>service_class</span><span class='rparen'>)</span> <span class='rbrace'>}</span> <span class='kw'>if</span> <span class='id identifier rubyid_used_of_service?'>used_of_service?</span>
   <span class='id identifier rubyid_rules'>rules</span> <span class='op'>&lt;&lt;</span> <span class='tlambda'>-&gt;</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span> <span class='tlambeg'>{</span> <span class='const'><span class='object_link'><a href="Base/Commands.html" title="ConvenientService::RSpec::Matchers::Custom::Results::Base::Commands (module)">Commands</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Base/Commands/MatchResultStep.html" title="ConvenientService::RSpec::Matchers::Custom::Results::Base::Commands::MatchResultStep (class)">MatchResultStep</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="Base/Commands/MatchResultStep.html#call-instance_method" title="ConvenientService::RSpec::Matchers::Custom::Results::Base::Commands::MatchResultStep#call (method)">call</a></span></span><span class='lparen'>(</span><span class='label'>result:</span> <span class='id identifier rubyid_result'>result</span><span class='comma'>,</span> <span class='label'>step:</span> <span class='id identifier rubyid_step'>step</span><span class='rparen'>)</span> <span class='rbrace'>}</span> <span class='kw'>if</span> <span class='id identifier rubyid_used_of_step?'>used_of_step?</span>
-  <span class='id identifier rubyid_rules'>rules</span> <span class='op'>&lt;&lt;</span> <span class='tlambda'>-&gt;</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span> <span class='tlambeg'>{</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_unsafe_data'>unsafe_data</span> <span class='op'>==</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_data'>data</span><span class='lparen'>(</span><span class='label'>value:</span> <span class='id identifier rubyid_data'>data</span><span class='comma'>,</span> <span class='label'>result:</span> <span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span> <span class='rbrace'>}</span> <span class='kw'>if</span> <span class='id identifier rubyid_used_data?'>used_data?</span>
-  <span class='id identifier rubyid_rules'>rules</span> <span class='op'>&lt;&lt;</span> <span class='tlambda'>-&gt;</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span> <span class='tlambeg'>{</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_unsafe_message'>unsafe_message</span> <span class='op'>==</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_message'>message</span><span class='lparen'>(</span><span class='label'>value:</span> <span class='id identifier rubyid_message'>message</span><span class='comma'>,</span> <span class='label'>result:</span> <span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span> <span class='rbrace'>}</span> <span class='kw'>if</span> <span class='id identifier rubyid_used_message?'>used_message?</span>
-  <span class='id identifier rubyid_rules'>rules</span> <span class='op'>&lt;&lt;</span> <span class='tlambda'>-&gt;</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span> <span class='tlambeg'>{</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_unsafe_code'>unsafe_code</span> <span class='op'>==</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_code'>code</span><span class='lparen'>(</span><span class='label'>value:</span> <span class='id identifier rubyid_code'>code</span><span class='comma'>,</span> <span class='label'>result:</span> <span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span> <span class='rbrace'>}</span> <span class='kw'>if</span> <span class='id identifier rubyid_used_code?'>used_code?</span>
+  <span class='id identifier rubyid_rules'>rules</span> <span class='op'>&lt;&lt;</span> <span class='tlambda'>-&gt;</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span> <span class='tlambeg'>{</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_unsafe_data'>unsafe_data</span><span class='period'>.</span><span class='id identifier rubyid_public_send'>public_send</span><span class='lparen'>(</span><span class='id identifier rubyid_comparison_method'>comparison_method</span><span class='comma'>,</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_data'>data</span><span class='lparen'>(</span><span class='label'>value:</span> <span class='id identifier rubyid_data'>data</span><span class='comma'>,</span> <span class='label'>result:</span> <span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span><span class='rparen'>)</span> <span class='rbrace'>}</span> <span class='kw'>if</span> <span class='id identifier rubyid_used_data?'>used_data?</span>
+  <span class='id identifier rubyid_rules'>rules</span> <span class='op'>&lt;&lt;</span> <span class='tlambda'>-&gt;</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span> <span class='tlambeg'>{</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_unsafe_message'>unsafe_message</span><span class='period'>.</span><span class='id identifier rubyid_public_send'>public_send</span><span class='lparen'>(</span><span class='id identifier rubyid_comparison_method'>comparison_method</span><span class='comma'>,</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_message'>message</span><span class='lparen'>(</span><span class='label'>value:</span> <span class='id identifier rubyid_message'>message</span><span class='comma'>,</span> <span class='label'>result:</span> <span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span><span class='rparen'>)</span> <span class='rbrace'>}</span> <span class='kw'>if</span> <span class='id identifier rubyid_used_message?'>used_message?</span>
+  <span class='id identifier rubyid_rules'>rules</span> <span class='op'>&lt;&lt;</span> <span class='tlambda'>-&gt;</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span> <span class='tlambeg'>{</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_unsafe_code'>unsafe_code</span><span class='period'>.</span><span class='id identifier rubyid_public_send'>public_send</span><span class='lparen'>(</span><span class='id identifier rubyid_comparison_method'>comparison_method</span><span class='comma'>,</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_code'>code</span><span class='lparen'>(</span><span class='label'>value:</span> <span class='id identifier rubyid_code'>code</span><span class='comma'>,</span> <span class='label'>result:</span> <span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span><span class='rparen'>)</span> <span class='rbrace'>}</span> <span class='kw'>if</span> <span class='id identifier rubyid_used_code?'>used_code?</span>
 
   <span class='id identifier rubyid_condition'>condition</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Utils/Proc.html" title="ConvenientService::Utils::Proc (module)">Proc</a></span></span><span class='period'>.</span><span class='id identifier rubyid_conjunct'><span class='object_link'><a href="../../../../Utils/Proc.html#conjunct-class_method" title="ConvenientService::Utils::Proc.conjunct (method)">conjunct</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_rules'>rules</span><span class='rparen'>)</span>
 
@@ -1732,7 +1840,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Jun  4 22:31:19 2023 by
+  Generated on Sun Jun  4 23:53:01 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>

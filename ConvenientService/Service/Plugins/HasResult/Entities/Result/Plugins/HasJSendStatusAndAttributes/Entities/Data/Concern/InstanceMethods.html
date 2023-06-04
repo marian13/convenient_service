@@ -587,23 +587,37 @@
       <pre class="lines">
 
 
-80
-81
-82
-83
-84
-85
-86
-87</pre>
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_result/entities/result/plugins/has_j_send_status_and_attributes/entities/data/concern/instance_methods.rb', line 80</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_result/entities/result/plugins/has_j_send_status_and_attributes/entities/data/concern/instance_methods.rb', line 91</span>
 
 <span class='kw'>def</span> <span class='op'>===</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='rparen'>)</span>
 
   <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span> <span class='op'>!=</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span>
-  <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>unless</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_value'>value</span> <span class='op'>===</span> <span class='id identifier rubyid_value'>value</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># TODO: @marian13 Refactor tomorrow. Create value wrapper.
+</span>  <span class='comment'>#
+</span>  <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>unless</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_value'>value</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_value'>value</span><span class='period'>.</span><span class='id identifier rubyid_size'>size</span> <span class='op'>!=</span> <span class='id identifier rubyid_value'>value</span><span class='period'>.</span><span class='id identifier rubyid_size'>size</span>
+  <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_value'>value</span><span class='period'>.</span><span class='id identifier rubyid_keys'>keys</span><span class='period'>.</span><span class='id identifier rubyid_sort'>sort</span> <span class='op'>!=</span> <span class='id identifier rubyid_value'>value</span><span class='period'>.</span><span class='id identifier rubyid_keys'>keys</span><span class='period'>.</span><span class='id identifier rubyid_sort'>sort</span>
+  <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>unless</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_value'>value</span><span class='period'>.</span><span class='id identifier rubyid_all?'>all?</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_key'>key</span><span class='comma'>,</span> <span class='id identifier rubyid_other_value'>other_value</span><span class='op'>|</span> <span class='id identifier rubyid_other_value'>other_value</span> <span class='op'>===</span> <span class='id identifier rubyid_value'>value</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span> <span class='rbrace'>}</span>
 
   <span class='kw'>true</span>
 <span class='kw'>end</span></pre>
@@ -682,12 +696,12 @@
       <pre class="lines">
 
 
-94
-95
-96</pre>
+112
+113
+114</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_result/entities/result/plugins/has_j_send_status_and_attributes/entities/data/concern/instance_methods.rb', line 94</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_result/entities/result/plugins/has_j_send_status_and_attributes/entities/data/concern/instance_methods.rb', line 112</span>
 
 <span class='kw'>def</span> <span class='op'>[]</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_value'>value</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="../../../Errors.html" title="ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Errors (module)">Errors</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Errors/NotExistingAttribute.html" title="ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Errors::NotExistingAttribute (class)">NotExistingAttribute</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../../Errors/NotExistingAttribute.html#initialize-instance_method" title="ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Errors::NotExistingAttribute#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>attribute:</span> <span class='id identifier rubyid_key'>key</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
@@ -870,12 +884,12 @@
       <pre class="lines">
 
 
-108
-109
-110</pre>
+126
+127
+128</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_result/entities/result/plugins/has_j_send_status_and_attributes/entities/data/concern/instance_methods.rb', line 108</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_result/entities/result/plugins/has_j_send_status_and_attributes/entities/data/concern/instance_methods.rb', line 126</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_h'>to_h</span>
   <span class='ivar'>@to_h</span> <span class='op'>||=</span> <span class='id identifier rubyid_value'>value</span><span class='period'>.</span><span class='id identifier rubyid_to_h'>to_h</span>
@@ -922,12 +936,12 @@
       <pre class="lines">
 
 
-101
-102
-103</pre>
+119
+120
+121</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_result/entities/result/plugins/has_j_send_status_and_attributes/entities/data/concern/instance_methods.rb', line 101</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_result/entities/result/plugins/has_j_send_status_and_attributes/entities/data/concern/instance_methods.rb', line 119</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_kwargs'>to_kwargs</span>
   <span class='ivar'>@to_kwargs</span> <span class='op'>||=</span> <span class='lbrace'>{</span><span class='label'>value:</span> <span class='id identifier rubyid_value'>value</span><span class='comma'>,</span> <span class='label'>result:</span> <span class='id identifier rubyid_result'>result</span><span class='rbrace'>}</span>
@@ -974,12 +988,12 @@
       <pre class="lines">
 
 
-115
-116
-117</pre>
+133
+134
+135</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_result/entities/result/plugins/has_j_send_status_and_attributes/entities/data/concern/instance_methods.rb', line 115</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_result/entities/result/plugins/has_j_send_status_and_attributes/entities/data/concern/instance_methods.rb', line 133</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_s'>to_s</span>
   <span class='ivar'>@to_s</span> <span class='op'>||=</span> <span class='id identifier rubyid_to_h'>to_h</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
@@ -994,7 +1008,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Jun  4 22:31:17 2023 by
+  Generated on Sun Jun  4 23:52:59 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>
