@@ -58,6 +58,14 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
           it "returns `false`" do
             expect(code == other).to eq(false)
           end
+
+          context "when value is described by RSpec argument matcher" do
+            let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code.new(value: instance_of(Symbol), result: result) }
+
+            it "returns `false`" do
+              expect(code == other).to eq(false)
+            end
+          end
         end
 
         context "when `other` has different `result.class`" do
@@ -73,6 +81,48 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
 
           it "returns `true`" do
             expect(code == other).to eq(true)
+          end
+        end
+      end
+
+      describe "#===" do
+        context "when `other` has different class" do
+          let(:other) { 42 }
+
+          it "returns `nil`" do
+            expect(code === other).to be_nil
+          end
+        end
+
+        context "when `other` has different `value`" do
+          let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code.new(value: :bar, result: result) }
+
+          it "returns `false`" do
+            expect(code === other).to eq(false)
+          end
+
+          context "when value is described by RSpec argument matcher" do
+            let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code.new(value: instance_of(Symbol), result: result) }
+
+            it "returns `true`" do
+              expect(code === other).to eq(false)
+            end
+          end
+        end
+
+        context "when `other` has different `result.class`" do
+          let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code.new(value: value, result: Object.new) }
+
+          it "returns `false`" do
+            expect(code === other).to eq(false)
+          end
+        end
+
+        context "when `other` has same attributes" do
+          let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code.new(value: value, result: result) }
+
+          it "returns `true`" do
+            expect(code === other).to eq(true)
           end
         end
       end
