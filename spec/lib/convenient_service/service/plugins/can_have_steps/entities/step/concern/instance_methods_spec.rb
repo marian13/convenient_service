@@ -417,7 +417,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       end
     end
 
-    describe "#original_result" do
+    describe "#service_result" do
       context "when `organizer` is NOT set" do
         let(:organizer) { nil }
 
@@ -430,7 +430,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         end
 
         it "raises `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Errors::StepHasNoOrganizer`" do
-          expect { step.original_result }
+          expect { step.service_result }
             .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Errors::StepHasNoOrganizer)
             .with_message(message)
         end
@@ -438,7 +438,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
       context "when `organizer` is set" do
         specify do
-          expect { step.original_result }
+          expect { step.service_result }
             .to delegate_to(service, :result)
             .with_arguments(**step.input_values)
             .and_return_its_value
@@ -468,37 +468,8 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       context "when `organizer` is set" do
         specify do
           expect { step.result }
-            .to delegate_to(step.original_result, :copy)
+            .to delegate_to(step.service_result, :copy)
             .with_arguments(overrides: {kwargs: {step: step, service: organizer}})
-            .and_return_its_value
-        end
-      end
-    end
-
-    describe "#resolved_result" do
-      context "when `organizer` is NOT set" do
-        let(:organizer) { nil }
-
-        let(:message) do
-          <<~TEXT
-            Step `#{step.printable_service}` has not assigned organizer.
-
-            Did you forget to set it?
-          TEXT
-        end
-
-        it "raises `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Errors::StepHasNoOrganizer`" do
-          expect { step.resolved_result }
-            .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Errors::StepHasNoOrganizer)
-            .with_message(message)
-        end
-      end
-
-      context "when `organizer` is set" do
-        specify do
-          expect { step.resolved_result }
-            .to delegate_to(step, :result)
-            .without_arguments
             .and_return_its_value
         end
       end

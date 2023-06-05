@@ -468,16 +468,16 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::RailsService::Config
             end
           end
 
-          example_group "#original_result middlewares" do
-            let(:original_result_middlewares) do
+          example_group "#service_result middlewares" do
+            let(:service_result_middlewares) do
               [
                 ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
                 ConvenientService::Common::Plugins::CachesReturnValue::Middleware
               ]
             end
 
-            it "sets service step middlewares for `#original_result`" do
-              expect(service_class::Step.middlewares(:original_result).to_a).to eq(original_result_middlewares)
+            it "sets service step middlewares for `#service_result`" do
+              expect(service_class::Step.middlewares(:service_result).to_a).to eq(service_result_middlewares)
             end
           end
 

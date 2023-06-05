@@ -113,7 +113,7 @@ module ConvenientService
                 # @internal
                 #   IMPORTANT: `service.result(**input_values)` is the reason, why services should have only kwargs as arguments.
                 #
-                def original_result
+                def service_result
                   assert_has_organizer!
 
                   service.result(**input_values)
@@ -128,14 +128,7 @@ module ConvenientService
                 #   TODO: Extract `copy` logic into separate method with a proper naming.
                 #
                 def result
-                  original_result.copy(overrides: {kwargs: {step: self, service: organizer}})
-                end
-
-                ##
-                # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
-                #
-                def resolved_result
-                  result
+                  service_result.copy(overrides: {kwargs: {step: self, service: organizer}})
                 end
 
                 ##

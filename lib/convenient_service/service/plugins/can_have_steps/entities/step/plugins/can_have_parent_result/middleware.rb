@@ -12,7 +12,7 @@ module ConvenientService
                   intended_for :result, entity: :step
 
                   def next(...)
-                    chain.next(...).copy(overrides: {kwargs: {parent: entity.original_result}})
+                    chain.next(...).copy(overrides: {kwargs: {parent: entity.service_result}})
                   end
                 end
               end

@@ -220,7 +220,7 @@ module ConvenientService
             use Plugins::Common::NormalizesEnv::Middleware
           end
 
-          middlewares :original_result do
+          middlewares :service_result do
             use Plugins::Common::NormalizesEnv::Middleware
             use Plugins::Common::CachesReturnValue::Middleware
           end
