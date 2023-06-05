@@ -28,12 +28,13 @@ module ConvenientService
 
                     ##
                     # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+                    # @note `service_try_result` has middlewares.
                     #
                     # @internal
                     #   IMPORTANT: `service.klass.try_result(**input_values)` is the reason, why services should have only kwargs as arguments.
                     #   TODO: Extract `StepDefinition`. This way `has_organizer?` check can be avoided completely.
                     #
-                    def original_try_result
+                    def service_try_result
                       assert_has_organizer!
 
                       service.klass.try_result(**input_values)
@@ -41,13 +42,14 @@ module ConvenientService
 
                     ##
                     # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+                    # @note `try_result` has middlewares.
                     #
                     # @internal
                     #   NOTE: `copy` logic is used in `result` as well.
                     #   TODO: Extract `copy` logic into separate method with a proper naming.
                     #
                     def try_result
-                      original_try_result.copy(overrides: {kwargs: {step: self, service: organizer}})
+                      service_try_result.copy(overrides: {kwargs: {step: self, service: organizer}})
                     end
                   end
                 end

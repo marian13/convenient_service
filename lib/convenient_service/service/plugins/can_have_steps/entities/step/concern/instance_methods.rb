@@ -109,22 +109,24 @@ module ConvenientService
 
                 ##
                 # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+                # @note `service_result` has middlewares.
                 #
                 # @internal
                 #   IMPORTANT: `service.result(**input_values)` is the reason, why services should have only kwargs as arguments.
+                #   NOTE: `service_result` has middlewares.
                 #
                 def service_result
                   assert_has_organizer!
 
-                  service.result(**input_values)
+                  service.klass.result(**input_values)
                 end
 
                 ##
                 # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+                # @note `result` has middlewares.
                 #
                 # @internal
-                #   NOTE: `calculate_result` has middlewares.
-                #   NOTE: `copy` logic is used in `calculate_try_result` as well.
+                #   NOTE: `copy` logic is used in `try_result` as well.
                 #   TODO: Extract `copy` logic into separate method with a proper naming.
                 #
                 def result

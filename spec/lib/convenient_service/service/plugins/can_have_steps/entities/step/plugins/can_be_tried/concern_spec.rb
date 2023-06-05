@@ -203,7 +203,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       end
     end
 
-    describe "#original_try_result" do
+    describe "#service_try_result" do
       context "when `organizer` is NOT set" do
         let(:message) do
           <<~TEXT
@@ -214,7 +214,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         end
 
         it "raises `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Errors::StepHasNoOrganizer`" do
-          expect { step.copy(overrides: {kwargs: {organizer: nil}}).original_try_result }
+          expect { step.copy(overrides: {kwargs: {organizer: nil}}).service_try_result }
             .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Errors::StepHasNoOrganizer)
             .with_message(message)
         end
@@ -224,8 +224,8 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         specify do
           service.commit_config!
 
-          expect { step.original_try_result }
-            .to delegate_to(service, :try_result)
+          expect { step.service_try_result }
+            .to delegate_to(step.service.klass, :try_result)
             .with_arguments(**step.input_values)
             .and_return_its_value
         end
@@ -252,7 +252,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       context "when `organizer` is set" do
         specify do
           expect { step.try_result }
-            .to delegate_to(step.original_try_result, :copy)
+            .to delegate_to(step.service_try_result, :copy)
             .with_arguments(overrides: {kwargs: {step: step, service: organizer}})
             .and_return_its_value
         end

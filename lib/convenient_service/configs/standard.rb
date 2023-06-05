@@ -151,7 +151,7 @@ module ConvenientService
             use Plugins::Step::CanHaveParentResult::Middleware
           end
 
-          middlewares :original_try_result do
+          middlewares :service_try_result do
             use Plugins::Common::NormalizesEnv::Middleware
             use Plugins::Common::CachesReturnValue::Middleware
           end

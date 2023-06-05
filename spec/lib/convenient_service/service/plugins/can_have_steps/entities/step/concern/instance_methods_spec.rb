@@ -439,7 +439,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       context "when `organizer` is set" do
         specify do
           expect { step.service_result }
-            .to delegate_to(service, :result)
+            .to delegate_to(step.service.klass, :result)
             .with_arguments(**step.input_values)
             .and_return_its_value
         end
