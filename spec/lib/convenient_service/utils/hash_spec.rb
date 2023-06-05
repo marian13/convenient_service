@@ -30,4 +30,16 @@ RSpec.describe ConvenientService::Utils::Hash do
         .and_return_its_value
     end
   end
+
+  describe ".triple_equality_compare" do
+    let(:hash) { {foo: (1..10), bar: /bar/} }
+    let(:other_hash) { {foo: 5, bar: "bar"} }
+
+    specify do
+      expect { described_class.triple_equality_compare(hash, other_hash) }
+        .to delegate_to(ConvenientService::Utils::Hash::TripleEqualityCompare, :call)
+        .with_arguments(hash, other_hash)
+        .and_return_its_value
+    end
+  end
 end
