@@ -118,10 +118,18 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
             expect(data == other).to eq(false)
           end
 
-          context "when value is described by RSpec argument matcher" do
+          context "when value is described by RSpec mocks arguments matcher" do
             let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data.new(value: instance_of(Hash), result: result) }
 
-            it "does NOT respect that RSpec argument matcher" do
+            it "does NOT respect that RSpec mocks arguments matcher" do
+              expect(data == other).to eq(false)
+            end
+          end
+
+          context "when value is described by RSpec expectations matcher" do
+            let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data.new(value: respond_to(:keys), result: result) }
+
+            it "does NOT respect that RSpec expectations matcher" do
               expect(data == other).to eq(false)
             end
           end
@@ -158,24 +166,83 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
         end
 
         context "when `other` has different `value`" do
-          let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data.new(value: {foo: :baz}, result: result) }
+          context "when `other` value is hash" do
+            let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data.new(value: {foo: :baz}, result: result) }
 
-          ##
-          # TODO: @marian13 Manually compare all values by `===` tomorrow.
-          #
-          # specify do
-          #   expect { data === other }.to delegate_to(other.value.values.first, :===).with_arguments(data.value.values.first)
-          # end
+            specify do
+              expect { data === other }.to delegate_to(ConvenientService::Utils::Hash, :triple_equality_compare).with_arguments(other.value, data.value)
+            end
 
-          it "returns `false`" do
-            expect(data === other).to eq(false)
+            it "returns `false`" do
+              expect(data === other).to eq(false)
+            end
+
+            context "when that hash value is described by RSpec mocks arguments matcher" do
+              let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data.new(value: {foo: instance_of(Symbol)}, result: result) }
+
+              it "respects that RSpec mocks arguments matcher" do
+                expect(data === other).to eq(true)
+              end
+            end
+
+            context "when that hash value is described by RSpec expectations matcher" do
+              let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data.new(value: {foo: match(/bar/)}, result: result) }
+
+              it "respects that RSpec expectations matcher" do
+                expect(data === other).to eq(true)
+              end
+            end
           end
 
-          context "when value is described by RSpec argument matcher" do
-            let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data.new(value: {foo: instance_of(Symbol)}, result: result) }
+          context "when `other` value is NOT hash" do
+            let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data.new(value: [], result: result) }
 
-            it "respects that RSpec argument matcher" do
-              expect(data === other).to eq(true)
+            specify do
+              expect { data === other }.to delegate_to(other.value, :===).with_arguments(data.value)
+            end
+
+            it "returns `false`" do
+              expect(data === other).to eq(false)
+            end
+
+            context "when value is described by RSpec mocks arguments matcher" do
+              let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data.new(value: hash_including(:foo), result: result) }
+
+              it "respects that RSpec mocks arguments matcher" do
+                expect(data === other).to eq(true)
+              end
+            end
+
+            context "when value is described by RSpec expectations matcher" do
+              let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data.new(value: respond_to(:keys), result: result) }
+
+              it "respects that RSpec expectations matcher" do
+                expect(data === other).to eq(true)
+              end
+            end
+
+            context "when value is described by RSpec mocks arguments matcher with any value" do
+              let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data.new(value: hash_including(foo: :bar), result: result) }
+
+              it "respects that RSpec mocks arguments matcher" do
+                expect(data === other).to eq(true)
+              end
+            end
+
+            context "when value is described by RSpec mocks arguments matcher with nested RSpec mocks arguments matcher" do
+              let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data.new(value: hash_including(foo: instance_of(Symbol)), result: result) }
+
+              it "respects that RSpec mocks arguments matcher" do
+                expect(data === other).to eq(true)
+              end
+            end
+
+            context "when value is described by RSpec mocks arguments matcher with nested RSpec expectations matcher" do
+              let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data.new(value: hash_including(foo: match(/bar/)), result: result) }
+
+              it "respects that RSpec mocks arguments matcher" do
+                expect(data === other).to eq(true)
+              end
             end
           end
         end

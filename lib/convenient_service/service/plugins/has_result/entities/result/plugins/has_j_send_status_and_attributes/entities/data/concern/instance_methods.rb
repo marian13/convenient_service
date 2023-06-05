@@ -73,6 +73,25 @@ module ConvenientService
                         # @param other [Object] Can be any type.
                         # @return [Boolean, nil]
                         #
+                        # @note: `Data#===` allows to use RSpec expectation matchers and RSpec mocks arguments matchers for comparison.
+                        #
+                        # @example: RSpec expectation matchers.
+                        #   expect(result).to be_success.with_data(foo: match(/bar/))
+                        #
+                        # @see https://rspec.info/features/3-12/rspec-mocks/setting-constraints/matching-arguments
+                        # @see https://rspec.info/documentation/3.12/rspec-mocks/RSpec/Mocks/ArgumentMatchers.html
+                        # @see https://github.com/rspec/rspec-mocks/blob/v3.12.3/lib/rspec/mocks/argument_matchers.rb#L282
+                        #
+                        # @example: RSpec mocks arguments matchers.
+                        #   expect(result).to be_success.with_data(hash_including(:foo))
+                        #
+                        # @see https://rspec.info/features/3-12/rspec-expectations/built-in-matchers
+                        # @see https://rspec.info/documentation/3.12/rspec-expectations/RSpec/Matchers/BuiltIn.html
+                        # @see https://github.com/rspec/rspec-expectations/blob/v3.12.3/lib/rspec/matchers/composable.rb#L45
+                        #
+                        # @example: Combo of RSpec expectation matchers and RSpec mocks arguments.
+                        #   expect(result).to be_success.with_data(hash_including(foo: match(/bar/)))
+                        #
                         # @internal
                         #   IMPORTANT: Must be kept in sync with `#==`.
                         #   NOTE: Ruby does NOT have `!==` operator.
@@ -93,13 +112,12 @@ module ConvenientService
 
                           return false if result.class != other.result.class
 
-                          ##
-                          # TODO: @marian13 Refactor tomorrow. Create value wrapper.
-                          #
-                          return false unless other.value.instance_of?(value.class)
-                          return false if other.value.size != value.size
-                          return false if other.value.keys.sort != value.keys.sort
-                          return false unless other.value.all? { |key, other_value| other_value === value[key] }
+                          case other.value
+                          when ::Hash
+                            return false unless Utils::Hash.triple_equality_compare(other.value, value)
+                          else
+                            return false unless other.value === value
+                          end
 
                           true
                         end
