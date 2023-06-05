@@ -5,9 +5,9 @@ module ConvenientService
     ##
     # Defines minimal configuration that adds a constructor, JSend-inspired result, steps, basic inspects, and internals to services.
     #
-    # @note: This config is NOT intented for the end-user usage. Use `Standard` instead.
+    # @note This config is NOT intented for the end-user usage. Use `Standard` instead.
     #
-    # @note:
+    # @note
     #   `use Plugins::Common::NormalizesEnv::Middleware` should be used in a config that has the first `concern` that introduces a method.
     #   For example, `:result` is added by `use Plugins::Service::HasResult::Concern` in `Minimal`.
     #   That is why the following code is written in the `Minimal` config.

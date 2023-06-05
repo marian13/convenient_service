@@ -53,16 +53,16 @@ module ConvenientService
                         # @param other [Object] Can be any type.
                         # @return [Boolean, nil]
                         #
-                        # @note: `Message#===` allows to use RSpec expectation matchers and RSpec mocks arguments matchers for comparison.
+                        # @note `Message#===` allows to use RSpec expectation matchers and RSpec mocks arguments matchers for comparison.
                         #
-                        # @example: RSpec expectation matchers.
+                        # @example RSpec expectation matchers.
                         #   expect(result).to be_failure.with_message(match(/foo/))
                         #
                         # @see https://rspec.info/features/3-12/rspec-mocks/setting-constraints/matching-arguments
                         # @see https://rspec.info/documentation/3.12/rspec-mocks/RSpec/Mocks/ArgumentMatchers.html
                         # @see https://github.com/rspec/rspec-mocks/blob/v3.12.3/lib/rspec/mocks/argument_matchers.rb#L282
                         #
-                        # @example: RSpec mocks arguments matchers.
+                        # @example RSpec mocks arguments matchers.
                         #   expect(result).to be_failure.with_message(instance_of(String))
                         #
                         # @see https://rspec.info/features/3-12/rspec-expectations/built-in-matchers

@@ -150,7 +150,7 @@ module ConvenientService
         private
 
         ##
-        # @note: Config is committed either by `commit_config` or `method_missing` from `ConvenientService::Core::InstanceMethods` and `ConvenientService::Core::ClassMethods`.
+        # @note Config is committed either by `commit_config` or `method_missing` from `ConvenientService::Core::InstanceMethods` and `ConvenientService::Core::ClassMethods`.
         #
         # @return [void]
         # @raise [ConvenientService::Core::Entities::Config::Errors::ConfigIsCommitted]

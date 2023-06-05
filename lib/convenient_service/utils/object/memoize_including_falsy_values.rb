@@ -10,7 +10,7 @@ module ConvenientService
       # Can be used instead of `return @ivar if defined? @ivar`.
       # @see https://www.justinweiss.com/articles/4-simple-memoization-patterns-in-ruby-and-one-gem/
       #
-      # @note: `false` and `nil` are the only values that are considered `falsy` in Ruby.
+      # @note `false` and `nil` are the only values that are considered `falsy` in Ruby.
       # @see https://riptutorial.com/ruby/example/2092/truthy-and-falsy-values
       # @see https://www.ruby-lang.org/en/documentation/faq/6/
       #

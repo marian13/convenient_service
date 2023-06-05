@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 ##
-# @example:
+# @example
 #   ConvenientService::Utils::Hash::AssertValidKeys.call({foo: "foo", bar: "bar"}, [:foo, :bar])
 #
 module ConvenientService

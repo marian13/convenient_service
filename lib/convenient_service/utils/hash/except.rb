@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 ##
-# @example:
+# @example
 #   ConvenientService::Utils::Hash::Except.call({foo: :bar, baz: :qux}, [:foo])
 #
 module ConvenientService
