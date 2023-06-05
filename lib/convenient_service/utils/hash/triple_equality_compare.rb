@@ -1,5 +1,13 @@
 # frozen_string_literal: true
 
+##
+# @example
+#   {foo: (1..10), bar: /abc/} == {foo: 5, bar: :abc}
+#   # => false, since values are compared by `#==` under the hood.
+#
+#   ConvenientService::Utils::Hash::TripleEqualityCompare.call({foo: (1..10), bar: /abc/}, {foo: 5, bar: :abc})
+#   # => true, since values are compared by `#===` under the hood.
+#
 module ConvenientService
   module Utils
     module Hash
@@ -30,6 +38,7 @@ module ConvenientService
         # @return [Boolean]
         #
         def call
+          return false if hash.size != other_hash.size
           return false if hash.keys.difference(other_hash.keys).any?
 
           return false unless hash.all? { |key, value| value === other_hash[key] }
