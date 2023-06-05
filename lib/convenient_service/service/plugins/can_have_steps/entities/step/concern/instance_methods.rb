@@ -132,6 +132,13 @@ module ConvenientService
                 end
 
                 ##
+                # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+                #
+                def resolved_result
+                  result
+                end
+
+                ##
                 # @return [String]
                 #
                 # @internal
