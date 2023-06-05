@@ -44,12 +44,8 @@ module ConvenientService
                     # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
                     # @note `try_result` has middlewares.
                     #
-                    # @internal
-                    #   NOTE: `copy` logic is used in `result` as well.
-                    #   TODO: Extract `copy` logic into separate method with a proper naming.
-                    #
                     def try_result
-                      service_try_result.copy(overrides: {kwargs: {step: self, service: organizer}})
+                      convert_to_step_result(service_try_result)
                     end
                   end
                 end
