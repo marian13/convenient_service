@@ -203,7 +203,8 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'><p>@note: <code>Message#===</code> allows to use RSpec expectation matchers and RSpec mocks arguments matchers for comparison.</p>
+</div></span>
   
 </li>
 
@@ -475,7 +476,12 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
+    <p>@note: <code>Message#===</code> allows to use RSpec expectation matchers and RSpec mocks arguments matchers for comparison.</p>
+<p>@example: RSpec expectation matchers.
+expect(result).to be_failure.with_message(match(/foo/))</p>
+<p>@example: RSpec mocks arguments matchers.
+expect(result).to be_failure.with_message(instance_of(String))</p>
+
 
   </div>
 </div>
@@ -514,23 +520,40 @@
   
 </ul>
 
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://rspec.info/features/3-12/rspec-mocks/setting-constraints/matching-arguments" target="_parent" title="https://rspec.info/features/3-12/rspec-mocks/setting-constraints/matching-arguments">https://rspec.info/features/3-12/rspec-mocks/setting-constraints/matching-arguments</a></li>
+    
+      <li><a href="https://rspec.info/documentation/3.12/rspec-mocks/RSpec/Mocks/ArgumentMatchers.html" target="_parent" title="https://rspec.info/documentation/3.12/rspec-mocks/RSpec/Mocks/ArgumentMatchers.html">https://rspec.info/documentation/3.12/rspec-mocks/RSpec/Mocks/ArgumentMatchers.html</a></li>
+    
+      <li><a href="https://github.com/rspec/rspec-mocks/blob/v3.12.3/lib/rspec/mocks/argument_matchers.rb#L282" target="_parent" title="https://github.com/rspec/rspec-mocks/blob/v3.12.3/lib/rspec/mocks/argument_matchers.rb#L282">https://github.com/rspec/rspec-mocks/blob/v3.12.3/lib/rspec/mocks/argument_matchers.rb#L282</a></li>
+    
+      <li><a href="https://rspec.info/features/3-12/rspec-expectations/built-in-matchers" target="_parent" title="https://rspec.info/features/3-12/rspec-expectations/built-in-matchers">https://rspec.info/features/3-12/rspec-expectations/built-in-matchers</a></li>
+    
+      <li><a href="https://rspec.info/documentation/3.12/rspec-expectations/RSpec/Matchers/BuiltIn.html" target="_parent" title="https://rspec.info/documentation/3.12/rspec-expectations/RSpec/Matchers/BuiltIn.html">https://rspec.info/documentation/3.12/rspec-expectations/RSpec/Matchers/BuiltIn.html</a></li>
+    
+      <li><a href="https://github.com/rspec/rspec-expectations/blob/v3.12.3/lib/rspec/matchers/composable.rb#L45" target="_parent" title="https://github.com/rspec/rspec-expectations/blob/v3.12.3/lib/rspec/matchers/composable.rb#L45">https://github.com/rspec/rspec-expectations/blob/v3.12.3/lib/rspec/matchers/composable.rb#L45</a></li>
+    
+  </ul>
+
 </div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-60
-61
-62
-63
-64
-65
-66
-67</pre>
+76
+77
+78
+79
+80
+81
+82
+83</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_result/entities/result/plugins/has_j_send_status_and_attributes/entities/message/concern/instance_methods.rb', line 60</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_result/entities/result/plugins/has_j_send_status_and_attributes/entities/message/concern/instance_methods.rb', line 76</span>
 
 <span class='kw'>def</span> <span class='op'>===</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='rparen'>)</span>
@@ -651,12 +674,12 @@
       <pre class="lines">
 
 
-72
-73
-74</pre>
+88
+89
+90</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_result/entities/result/plugins/has_j_send_status_and_attributes/entities/message/concern/instance_methods.rb', line 72</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_result/entities/result/plugins/has_j_send_status_and_attributes/entities/message/concern/instance_methods.rb', line 88</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_kwargs'>to_kwargs</span>
   <span class='ivar'>@to_kwargs</span> <span class='op'>||=</span> <span class='lbrace'>{</span><span class='label'>value:</span> <span class='id identifier rubyid_value'>value</span><span class='comma'>,</span> <span class='label'>result:</span> <span class='id identifier rubyid_result'>result</span><span class='rbrace'>}</span>
@@ -703,12 +726,12 @@
       <pre class="lines">
 
 
-79
-80
-81</pre>
+95
+96
+97</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_result/entities/result/plugins/has_j_send_status_and_attributes/entities/message/concern/instance_methods.rb', line 79</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_result/entities/result/plugins/has_j_send_status_and_attributes/entities/message/concern/instance_methods.rb', line 95</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_s'>to_s</span>
   <span class='ivar'>@to_s</span> <span class='op'>||=</span> <span class='id identifier rubyid_value'>value</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
@@ -723,7 +746,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Jun  5 14:29:17 2023 by
+  Generated on Mon Jun  5 14:57:33 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>
