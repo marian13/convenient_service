@@ -25,14 +25,7 @@ RSpec.describe ConvenientService::Examples::Standard::DateTime::Services::SafePa
         context "when `string` has invalid format" do
           let(:string) { "foo" }
 
-          let(:data) do
-            {
-              exception: instance_of(Date::Error),
-              string: string,
-              format: format
-            }
-          end
-
+          let(:data) { {exception: instance_of(Date::Error)} }
           let(:message) { "Failed to parse `DateTime` object from `#{string}` with `#{format}`" }
 
           it "returns `failure` with `data` and `message`" do

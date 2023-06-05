@@ -19,7 +19,7 @@ module ConvenientService
               success(date_time: ::DateTime.strptime(string, format))
             rescue ::Date::Error => exception
               failure(
-                data: {exception: exception, string: string, format: format},
+                data: {exception: exception},
                 message: "Failed to parse `DateTime` object from `#{string}` with `#{format}`"
               )
             end
