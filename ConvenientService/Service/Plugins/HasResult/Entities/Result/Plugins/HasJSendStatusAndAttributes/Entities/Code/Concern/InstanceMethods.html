@@ -203,8 +203,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>@note: <code>Code#===</code> allows to use RSpec expectation matchers and RSpec mocks arguments matchers for comparison.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'></div></span>
   
 </li>
 
@@ -498,17 +497,36 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>@note: <code>Code#===</code> allows to use RSpec expectation matchers and RSpec mocks arguments matchers for comparison.</p>
-<p>@example: RSpec expectation matchers.
-expect(result).to be_error.with_code(match(/bar/))</p>
-<p>@example: RSpec mocks arguments matchers.
-expect(result).to be_success.with_code(instance_of(Symbol))</p>
+    
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p><code>Code#===</code> allows to use RSpec expectation matchers and RSpec mocks arguments matchers for comparison.</p>
+</div>
+  </div>
+
 
 
   </div>
 </div>
 <div class="tags">
-  <p class="tag_title">Parameters:</p>
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>RSpec expectation matchers.</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_expect'>expect</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to'>to</span> <span class='id identifier rubyid_be_error'>be_error</span><span class='period'>.</span><span class='id identifier rubyid_with_code'>with_code</span><span class='lparen'>(</span><span class='id identifier rubyid_match'>match</span><span class='lparen'>(</span><span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>bar</span><span class='regexp_end'>/</span></span><span class='rparen'>)</span><span class='rparen'>)</span></code></pre>
+    
+      
+        <p class="example_title"><div class='inline'><p>RSpec mocks arguments matchers.</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_expect'>expect</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to'>to</span> <span class='id identifier rubyid_be_success'>be_success</span><span class='period'>.</span><span class='id identifier rubyid_with_code'>with_code</span><span class='lparen'>(</span><span class='id identifier rubyid_instance_of'>instance_of</span><span class='lparen'>(</span><span class='const'>Symbol</span><span class='rparen'>)</span><span class='rparen'>)</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
 <ul class="param">
   
     <li>
@@ -820,7 +838,7 @@ expect(result).to be_success.with_code(instance_of(Symbol))</p>
 </div>
 
       <div id="footer">
-  Generated on Mon Jun  5 20:28:07 2023 by
+  Generated on Mon Jun  5 20:31:10 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>

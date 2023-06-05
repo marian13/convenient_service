@@ -203,8 +203,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>@note: <code>Data#===</code> allows to use RSpec expectation matchers and RSpec mocks arguments matchers for comparison.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'></div></span>
   
 </li>
 
@@ -543,19 +542,42 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>@note: <code>Data#===</code> allows to use RSpec expectation matchers and RSpec mocks arguments matchers for comparison.</p>
-<p>@example: RSpec expectation matchers.
-expect(result).to be_success.with_data(foo: match(/bar/))</p>
-<p>@example: RSpec mocks arguments matchers.
-expect(result).to be_success.with_data(hash_including(:foo))</p>
-<p>@example: Combo of RSpec expectation matchers and RSpec mocks arguments.
-expect(result).to be_success.with_data(hash_including(foo: match(/bar/)))</p>
+    
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p><code>Data#===</code> allows to use RSpec expectation matchers and RSpec mocks arguments matchers for comparison.</p>
+</div>
+  </div>
+
 
 
   </div>
 </div>
 <div class="tags">
-  <p class="tag_title">Parameters:</p>
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>RSpec expectation matchers.</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_expect'>expect</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to'>to</span> <span class='id identifier rubyid_be_success'>be_success</span><span class='period'>.</span><span class='id identifier rubyid_with_data'>with_data</span><span class='lparen'>(</span><span class='label'>foo:</span> <span class='id identifier rubyid_match'>match</span><span class='lparen'>(</span><span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>bar</span><span class='regexp_end'>/</span></span><span class='rparen'>)</span><span class='rparen'>)</span></code></pre>
+    
+      
+        <p class="example_title"><div class='inline'><p>RSpec mocks arguments matchers.</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_expect'>expect</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to'>to</span> <span class='id identifier rubyid_be_success'>be_success</span><span class='period'>.</span><span class='id identifier rubyid_with_data'>with_data</span><span class='lparen'>(</span><span class='id identifier rubyid_hash_including'>hash_including</span><span class='lparen'>(</span><span class='symbol'>:foo</span><span class='rparen'>)</span><span class='rparen'>)</span></code></pre>
+    
+      
+        <p class="example_title"><div class='inline'><p>Combo of RSpec expectation matchers and RSpec mocks arguments.</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_expect'>expect</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to'>to</span> <span class='id identifier rubyid_be_success'>be_success</span><span class='period'>.</span><span class='id identifier rubyid_with_data'>with_data</span><span class='lparen'>(</span><span class='id identifier rubyid_hash_including'>hash_including</span><span class='lparen'>(</span><span class='label'>foo:</span> <span class='id identifier rubyid_match'>match</span><span class='lparen'>(</span><span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>bar</span><span class='regexp_end'>/</span></span><span class='rparen'>)</span><span class='rparen'>)</span><span class='rparen'>)</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
 <ul class="param">
   
     <li>
@@ -1031,7 +1053,7 @@ expect(result).to be_success.with_data(hash_including(foo: match(/bar/)))</p>
 </div>
 
       <div id="footer">
-  Generated on Mon Jun  5 20:28:07 2023 by
+  Generated on Mon Jun  5 20:31:10 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>
