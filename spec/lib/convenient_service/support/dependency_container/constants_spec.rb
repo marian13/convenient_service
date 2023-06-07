@@ -35,5 +35,11 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Constants do
         expect(described_class::DEFAULT_PREPEND).to eq(false)
       end
     end
+
+    describe "::DEFAULT_ALIAS_SLUG" do
+      it "returns empty string" do
+        expect(described_class::DEFAULT_ALIAS_SLUG).to be_empty
+      end
+    end
   end
 end

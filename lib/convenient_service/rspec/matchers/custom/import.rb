@@ -7,6 +7,7 @@ module ConvenientService
         class Import
           include ConvenientService::DependencyContainer::Import
 
+          import :"constants.DEFAULT_ALIAS_SLUG", from: ConvenientService::Support::DependencyContainer::Container
           import :"constants.DEFAULT_SCOPE", from: ConvenientService::Support::DependencyContainer::Container
           import :"constants.DEFAULT_PREPEND", from: ConvenientService::Support::DependencyContainer::Container
           import :"commands.FetchImportedScopedMethods", from: ConvenientService::Support::DependencyContainer::Container
@@ -22,7 +23,7 @@ module ConvenientService
           # @param as [Symbol, String]
           # @return [void]
           #
-          def initialize(slug, from:, as: "", scope: constants.DEFAULT_SCOPE, prepend: constants.DEFAULT_PREPEND)
+          def initialize(slug, from:, as: constants.DEFAULT_ALIAS_SLUG, scope: constants.DEFAULT_SCOPE, prepend: constants.DEFAULT_PREPEND)
             @slug = slug
             @from = from
             @alias_slug = as

@@ -16,6 +16,8 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Container do
   example_group "exported methods" do
     include ConvenientService::RSpec::Matchers::Export
 
+    it { is_expected.to export(:"constants.DEFAULT_ALIAS_SLUG") }
+
     it { is_expected.to export(:"constants.DEFAULT_SCOPE") }
 
     it { is_expected.to export(:"constants.DEFAULT_PREPEND") }

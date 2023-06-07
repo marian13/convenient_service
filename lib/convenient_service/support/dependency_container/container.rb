@@ -6,12 +6,16 @@ module ConvenientService
       module Container
         include Export
 
-        export :"constants.DEFAULT_SCOPE" do
-          Constants::DEFAULT_SCOPE
+        export :"constants.DEFAULT_ALIAS_SLUG" do
+          Constants::DEFAULT_ALIAS_SLUG
         end
 
         export :"constants.DEFAULT_PREPEND" do
           Constants::DEFAULT_PREPEND
+        end
+
+        export :"constants.DEFAULT_SCOPE" do
+          Constants::DEFAULT_SCOPE
         end
 
         export :"commands.AssertValidContainer" do
