@@ -10,9 +10,10 @@ module ConvenientService
           import :"constants.DEFAULT_ALIAS_SLUG", from: ConvenientService::Support::DependencyContainer::Container
           import :"constants.DEFAULT_SCOPE", from: ConvenientService::Support::DependencyContainer::Container
           import :"constants.DEFAULT_PREPEND", from: ConvenientService::Support::DependencyContainer::Container
-          import :"commands.FetchImportedScopedMethods", from: ConvenientService::Support::DependencyContainer::Container
+          import :"commands.FetchNamespace", from: ConvenientService::Support::DependencyContainer::Container
           import :"commands.AssertValidContainer", from: ConvenientService::Support::DependencyContainer::Container
           import :"commands.AssertValidScope", from: ConvenientService::Support::DependencyContainer::Container
+          import :"commands.AssertValidMethod", from: ConvenientService::Support::DependencyContainer::Container
           import :"entities.Method", from: ConvenientService::Support::DependencyContainer::Container
 
           ##
@@ -37,14 +38,14 @@ module ConvenientService
           #
           def matches?(klass)
             commands.AssertValidContainer.call(container: from)
-
+            commands.AssertValidMethod.call(slug: slug, scope: scope, container: from)
             commands.AssertValidScope.call(scope: scope)
 
             @klass = klass
 
             method = entities.Method.new(slug: slug, scope: scope, alias_slug: alias_slug)
 
-            namespace = commands.FetchImportedScopedMethods.call(importing_module: klass, scope: scope, prepend: prepend)
+            namespace = commands.FetchNamespace.call(importing_module: klass, scope: scope, prepend: prepend)
 
             return false unless namespace
 
@@ -55,21 +56,21 @@ module ConvenientService
           # @return [String]
           #
           def description
-            "import `#{slug}`#{string_to_print_depending_on_slug} with scope: `#{scope}` from: `#{from}` with  prepend: `#{prepend}`"
+            "import `#{slug}`#{printable_alias_slug} with scope: `#{scope}` from: `#{from}` with  prepend: `#{prepend}`"
           end
 
           ##
           # @return [String]
           #
           def failure_message
-            "expected `#{klass}` to import `#{slug}`#{string_to_print_depending_on_slug} with scope: `#{scope}` from: `#{from}` with  prepend: `#{prepend}`"
+            "expected `#{klass}` to import `#{slug}`#{printable_alias_slug} with scope: `#{scope}` from: `#{from}` with  prepend: `#{prepend}`"
           end
 
           ##
           # @return [String]
           #
           def failure_message_when_negated
-            "expected `#{klass}` NOT to import `#{slug}`#{string_to_print_depending_on_slug} with scope: `#{scope}` from: `#{from}` with  prepend: `#{prepend}`"
+            "expected `#{klass}` NOT to import `#{slug}`#{printable_alias_slug} with scope: `#{scope}` from: `#{from}` with  prepend: `#{prepend}`"
           end
 
           private
@@ -77,8 +78,9 @@ module ConvenientService
           ##
           # @return [String]
           #
-          def string_to_print_depending_on_slug
-            alias_slug.to_s.empty? ? "" : " as: `#{alias_slug}`"
+          def printable_alias_slug
+            @printable_alias_slug ||=
+              alias_slug == constants.DEFAULT_ALIAS_SLUG ? constants.DEFAULT_ALIAS_SLUG : " as: `#{alias_slug}`"
           end
 
           ##

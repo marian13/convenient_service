@@ -12,6 +12,7 @@ module ConvenientService
         DEFAULT_SCOPE = Constants::INSTANCE_SCOPE
         DEFAULT_PREPEND = false
         DEFAULT_ALIAS_SLUG = ""
+        DEFAULT_BODY = proc {}
       end
     end
   end

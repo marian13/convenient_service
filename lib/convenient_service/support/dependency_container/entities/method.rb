@@ -34,11 +34,11 @@ module ConvenientService
           ##
           # @param slug [String, Symbol]
           # @param scope [:instance, :class]
-          # @param body [Proc]
-          # @param alias_slug [String, Symbol]
+          # @param body [Proc, ConvenientService::Support::DependencyContainer::Constants::DEFAULT_BODY]
+          # @param alias_slug [String, Symbol, ConvenientService::Support::DependencyContainer::Constants::DEFAULT_ALIAS_SLUG]
           # @return [void]
           #
-          def initialize(slug:, scope:, body: nil, alias_slug: "")
+          def initialize(slug:, scope:, body: Constants::DEFAULT_BODY, alias_slug: Constants::DEFAULT_ALIAS_SLUG)
             @slug = slug
             @scope = scope
             @body = body

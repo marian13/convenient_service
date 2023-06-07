@@ -94,7 +94,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Import do
           let(:scope) { nil }
 
           it "raises `ConvenientService::Support::DependencyContainer::Errors::InvalidScope`" do
-            expect { matcher_result }.to raise_error(ConvenientService::Support::DependencyContainer::Errors::InvalidScope)
+            expect { matcher_result }.to raise_error(ConvenientService::Support::DependencyContainer::Errors::NotExportedMethod)
           end
         end
       end
@@ -188,7 +188,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Import do
         let(:slug) { :"non.existent.method" }
 
         it "returns false" do
-          expect(matcher_result).to be_falsey
+          expect { matcher_result }.to raise_error(ConvenientService::Support::DependencyContainer::Errors::NotExportedMethod)
         end
       end
     end

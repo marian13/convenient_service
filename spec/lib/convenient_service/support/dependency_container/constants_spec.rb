@@ -41,5 +41,11 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Constants do
         expect(described_class::DEFAULT_ALIAS_SLUG).to be_empty
       end
     end
+
+    describe "::DEFAULT_BODY" do
+      it "returns `nil`" do
+        expect(described_class::DEFAULT_BODY.call).to be_nil
+      end
+    end
   end
 end
