@@ -3,7 +3,7 @@
 module ConvenientService
   module Service
     module Plugins
-      module CanHaveTryResult
+      module CanBeTried
         class Middleware < MethodChainMiddleware
           include Support::DependencyContainer::Import
 

@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
-RSpec.describe ConvenientService::Service::Plugins::CanHaveTryResult::Middleware do
+RSpec.describe ConvenientService::Service::Plugins::CanBeTried::Middleware do
   let(:middleware) { described_class }
 
   example_group "inheritance" do
@@ -97,9 +97,9 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveTryResult::Middleware
           TEXT
         end
 
-        it "raises `ConvenientService::Service::Plugins::CanHaveTryResult::Errors::ServiceTryReturnValueNotKindOfResult`" do
+        it "raises `ConvenientService::Service::Plugins::CanBeTried::Errors::ServiceTryReturnValueNotKindOfResult`" do
           expect { method_value }
-            .to raise_error(ConvenientService::Service::Plugins::CanHaveTryResult::Errors::ServiceTryReturnValueNotKindOfResult)
+            .to raise_error(ConvenientService::Service::Plugins::CanBeTried::Errors::ServiceTryReturnValueNotKindOfResult)
             .with_message(error_message)
         end
       end
@@ -131,9 +131,9 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveTryResult::Middleware
             TEXT
           end
 
-          it "raises `ConvenientService::Service::Plugins::CanHaveTryResult::Errors::ServiceTryReturnValueNotSuccess`" do
+          it "raises `ConvenientService::Service::Plugins::CanBeTried::Errors::ServiceTryReturnValueNotSuccess`" do
             expect { method_value }
-              .to raise_error(ConvenientService::Service::Plugins::CanHaveTryResult::Errors::ServiceTryReturnValueNotSuccess)
+              .to raise_error(ConvenientService::Service::Plugins::CanBeTried::Errors::ServiceTryReturnValueNotSuccess)
               .with_message(error_message)
           end
         end

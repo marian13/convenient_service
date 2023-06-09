@@ -18,7 +18,7 @@ module ConvenientService
     #       # ...
     #     end
     #
-    #   In turn, `:try_result` is added by `use Plugins::Service::CanHaveTryResult::Concern` in `Standard`.
+    #   In turn, `:try_result` is added by `use Plugins::Service::CanBeTried::Concern` in `Standard`.
     #   That is why it is the responsibility of the `Standard` config, to define:
     #
     #     middlewares :try_result do

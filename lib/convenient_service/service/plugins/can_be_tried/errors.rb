@@ -3,7 +3,7 @@
 module ConvenientService
   module Service
     module Plugins
-      module CanHaveTryResult
+      module CanBeTried
         module Errors
           class TryResultIsNotOverridden < ::ConvenientService::Error
             def initialize(service:)

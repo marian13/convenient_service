@@ -30,7 +30,7 @@ module ConvenientService
           use Plugins::Common::HasCallbacks::Concern
           use Plugins::Common::HasAroundCallbacks::Concern
 
-          use Plugins::Service::CanHaveTryResult::Concern
+          use Plugins::Service::CanBeTried::Concern
         end
 
         middlewares :initialize do
@@ -60,7 +60,7 @@ module ConvenientService
           use Plugins::Common::NormalizesEnv::Middleware
           use Plugins::Common::CachesReturnValue::Middleware
 
-          use Plugins::Service::CanHaveTryResult::Middleware
+          use Plugins::Service::CanBeTried::Middleware
         end
 
         middlewares :step do

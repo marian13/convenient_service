@@ -3,7 +3,7 @@
 module ConvenientService
   module Service
     module Plugins
-      module CanHaveTryResult
+      module CanBeTried
         module Concern
           include Support::Concern
 
@@ -11,7 +11,7 @@ module ConvenientService
             ##
             # Returns `ConvenientService::Service::Plugins::HasResult::Entities::Result` when overridden.
             #
-            # @raise [ConvenientService::Service::Plugins::CanHaveTryResult::Errors::TryResultIsNotOverridden]
+            # @raise [ConvenientService::Service::Plugins::CanBeTried::Errors::TryResultIsNotOverridden]
             #
             # @internal
             #   NOTE: name is inspired by Ruby's `try_convert` methods.
@@ -28,7 +28,7 @@ module ConvenientService
             ##
             # Returns `ConvenientService::Service::Plugins::HasResult::Entities::Result` when `#try_result` is overridden.
             #
-            # @raise [ConvenientService::Service::Plugins::CanHaveTryResult::Errors::TryResultIsNotOverridden]
+            # @raise [ConvenientService::Service::Plugins::CanBeTried::Errors::TryResultIsNotOverridden]
             #
             # @example `try_result` method MUST always return `success` with reasonable "null" data.
             #

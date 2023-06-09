@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::Service::Plugins::CanHaveTryResult::Concern do
+RSpec.describe ConvenientService::Service::Plugins::CanBeTried::Concern do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   let(:service_class) do
@@ -52,9 +52,9 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveTryResult::Concern do
         TEXT
       end
 
-      it "raises `ConvenientService::Service::Plugins::CanHaveTryResult::Errors::TryResultIsNotOverridden`" do
+      it "raises `ConvenientService::Service::Plugins::CanBeTried::Errors::TryResultIsNotOverridden`" do
         expect { service_instance.try_result }
-          .to raise_error(ConvenientService::Service::Plugins::CanHaveTryResult::Errors::TryResultIsNotOverridden)
+          .to raise_error(ConvenientService::Service::Plugins::CanBeTried::Errors::TryResultIsNotOverridden)
           .with_message(error_message)
       end
     end

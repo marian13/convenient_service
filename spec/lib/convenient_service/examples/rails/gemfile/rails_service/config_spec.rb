@@ -44,7 +44,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::RailsService::Config
               ConvenientService::Service::Plugins::HasResultStatusCheckShortSyntax::Concern,
               ConvenientService::Common::Plugins::HasCallbacks::Concern,
               ConvenientService::Common::Plugins::HasAroundCallbacks::Concern,
-              ConvenientService::Service::Plugins::CanHaveTryResult::Concern,
+              ConvenientService::Service::Plugins::CanBeTried::Concern,
               ConvenientService::Common::Plugins::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment::Concern,
               ConvenientService::Common::Plugins::HasAttributes::UsingActiveModelAttributes::Concern,
               ConvenientService::Service::Plugins::HasResultParamsValidations::UsingActiveModelValidations::Concern
@@ -97,7 +97,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::RailsService::Config
             [
               ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
               ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
-              ConvenientService::Service::Plugins::CanHaveTryResult::Middleware
+              ConvenientService::Service::Plugins::CanBeTried::Middleware
             ]
           end
 

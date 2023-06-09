@@ -42,7 +42,7 @@ RSpec.describe ConvenientService::Configs::Standard do
               ConvenientService::Service::Plugins::HasResultStatusCheckShortSyntax::Concern,
               ConvenientService::Common::Plugins::HasCallbacks::Concern,
               ConvenientService::Common::Plugins::HasAroundCallbacks::Concern,
-              ConvenientService::Service::Plugins::CanHaveTryResult::Concern
+              ConvenientService::Service::Plugins::CanBeTried::Concern
             ]
           end
 
@@ -91,7 +91,7 @@ RSpec.describe ConvenientService::Configs::Standard do
             [
               ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
               ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
-              ConvenientService::Service::Plugins::CanHaveTryResult::Middleware
+              ConvenientService::Service::Plugins::CanBeTried::Middleware
             ]
           end
 
