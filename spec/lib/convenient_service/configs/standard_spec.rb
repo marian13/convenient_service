@@ -206,6 +206,7 @@ RSpec.describe ConvenientService::Configs::Standard do
                 ConvenientService::Common::Plugins::HasResultDuckShortSyntax::Concern,
                 ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanRecalculateResult::Concern,
                 ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasStep::Concern,
+                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanBeTried::Concern,
                 ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanHaveParentResult::Concern
               ]
             end
@@ -221,6 +222,7 @@ RSpec.describe ConvenientService::Configs::Standard do
                 ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
                 ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Middleware,
                 ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasStep::Initialize::Middleware,
+                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanBeTried::Initialize::Middleware,
                 ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanHaveParentResult::Initialize::Middleware
               ]
             end
@@ -352,6 +354,7 @@ RSpec.describe ConvenientService::Configs::Standard do
               [
                 ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
                 ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasStep::ToKwargs::Middleware,
+                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanBeTried::ToKwargs::Middleware,
                 ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanHaveParentResult::ToKwargs::Middleware
               ]
             end

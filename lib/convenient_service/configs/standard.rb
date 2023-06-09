@@ -86,11 +86,13 @@ module ConvenientService
             use Plugins::Result::CanRecalculateResult::Concern
 
             use Plugins::Result::HasStep::Concern
+            use Plugins::Result::CanBeTried::Concern
             use Plugins::Result::CanHaveParentResult::Concern
           end
 
           middlewares :initialize do
             use Plugins::Result::HasStep::Initialize::Middleware
+            use Plugins::Result::CanBeTried::Initialize::Middleware
             use Plugins::Result::CanHaveParentResult::Initialize::Middleware
           end
 
@@ -132,6 +134,7 @@ module ConvenientService
 
           middlewares :to_kwargs do
             use Plugins::Result::HasStep::ToKwargs::Middleware
+            use Plugins::Result::CanBeTried::ToKwargs::Middleware
             use Plugins::Result::CanHaveParentResult::ToKwargs::Middleware
           end
         end

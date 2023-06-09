@@ -168,7 +168,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveTryResult::Middleware
           specify do
             expect { method_value }
               .to delegate_to(try_result, :copy)
-              .without_arguments
+              .with_arguments(overrides: {kwargs: {try_result: true}})
               .and_return_its_value
           end
         end

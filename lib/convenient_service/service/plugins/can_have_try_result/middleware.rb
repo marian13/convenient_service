@@ -23,7 +23,7 @@ module ConvenientService
             raise Errors::ServiceTryReturnValueNotKindOfResult.new(service: entity, result: try_result) unless commands.is_result?(try_result)
             raise Errors::ServiceTryReturnValueNotSuccess.new(service: entity, result: try_result) unless try_result.success?
 
-            try_result.copy
+            try_result.copy(overrides: {kwargs: {try_result: true}})
           end
         end
       end
