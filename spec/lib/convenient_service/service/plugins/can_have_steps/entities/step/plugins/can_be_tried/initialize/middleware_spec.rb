@@ -74,7 +74,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       specify do
         expect { method_value }
           .to delegate_to(step.internals.cache, :write)
-          .with_arguments(:try, true)
+          .with_arguments(:try_step, true)
       end
     end
   end

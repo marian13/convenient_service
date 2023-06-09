@@ -18,7 +18,7 @@ module ConvenientService
                     def next(...)
                       result = chain.next(...)
 
-                      return result unless entity.try?
+                      return result unless entity.try_step?
 
                       return result.copy if result.success?
 

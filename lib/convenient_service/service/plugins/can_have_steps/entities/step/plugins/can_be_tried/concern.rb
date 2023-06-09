@@ -15,15 +15,8 @@ module ConvenientService
                     ##
                     # @return [Bool]
                     #
-                    def try?
-                      Utils::Bool.to_bool(internals.cache[:try])
-                    end
-
-                    ##
-                    # @return [Bool]
-                    #
-                    def not_try?
-                      !try?
+                    def try_step?
+                      Utils.to_bool(internals.cache[:try_step])
                     end
 
                     ##

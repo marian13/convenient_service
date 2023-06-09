@@ -71,20 +71,20 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
   end
 
   example_group "instance methods" do
-    describe "#try?" do
+    describe "#try_step?" do
       specify do
-        expect { step.try? }
+        expect { step.try_step? }
           .to delegate_to(step.internals.cache, :read)
-          .with_arguments(:try)
+          .with_arguments(:try_step)
       end
 
       ##
       # TODO: Create copies for all utils used inside matchers.
       #
       # specify do
-      #   expect { step.try? }
+      #   expect { step.try_step? }
       #     .to delegate_to(ConvenientService::Utils::Bool, :to_bool)
-      #     .with_arguments(step.internals.cache[:try])
+      #     .with_arguments(step.internals.cache[:try_step])
       #     .and_return_its_value
       # end
 
@@ -100,7 +100,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         end
 
         it "defaults to `false`" do
-          expect(step.try?).to eq(false)
+          expect(step.try_step?).to eq(false)
         end
       end
 
@@ -116,7 +116,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         end
 
         it "returns `false`" do
-          expect(step.try?).to eq(false)
+          expect(step.try_step?).to eq(false)
         end
       end
 
@@ -132,73 +132,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         end
 
         it "returns `true`" do
-          expect(step.try?).to eq(true)
-        end
-      end
-    end
-
-    describe "#not_try?" do
-      specify do
-        expect { step.not_try? }
-          .to delegate_to(step.internals.cache, :read)
-          .with_arguments(:try)
-      end
-
-      ##
-      # TODO: Create copies for all utils used inside matchers.
-      #
-      # specify do
-      #   expect { step.not_try? }
-      #     .to delegate_to(ConvenientService::Utils::Bool, :to_bool)
-      #     .with_arguments(step.internals.cache[:try])
-      #     .and_return_its_value
-      # end
-
-      context "when `try` option is NOT passed" do
-        let(:organizer_service_class) do
-          Class.new.tap do |klass|
-            klass.class_exec(step_service_class) do |step_service_class|
-              include ConvenientService::Configs::Standard
-
-              step step_service_class
-            end
-          end
-        end
-
-        it "defaults to `true`" do
-          expect(step.not_try?).to eq(true)
-        end
-      end
-
-      context "when `try` option is `false`" do
-        let(:organizer_service_class) do
-          Class.new.tap do |klass|
-            klass.class_exec(step_service_class) do |step_service_class|
-              include ConvenientService::Configs::Standard
-
-              step step_service_class, try: false
-            end
-          end
-        end
-
-        it "returns `true`" do
-          expect(step.not_try?).to eq(true)
-        end
-      end
-
-      context "when `try` option is `true`" do
-        let(:organizer_service_class) do
-          Class.new.tap do |klass|
-            klass.class_exec(step_service_class) do |step_service_class|
-              include ConvenientService::Configs::Standard
-
-              step step_service_class, try: true
-            end
-          end
-        end
-
-        it "returns `false`" do
-          expect(step.not_try?).to eq(false)
+          expect(step.try_step?).to eq(true)
         end
       end
     end

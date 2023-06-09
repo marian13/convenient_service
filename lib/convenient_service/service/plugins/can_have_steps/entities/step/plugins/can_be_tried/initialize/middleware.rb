@@ -19,7 +19,7 @@ module ConvenientService
                     # @return [void]
                     #
                     def next(*args, **kwargs, &block)
-                      entity.internals.cache[:try] = kwargs[:try]
+                      entity.internals.cache[:try_step] = kwargs[:try]
 
                       chain.next(*args, **kwargs, &block)
                     end
