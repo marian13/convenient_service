@@ -12,7 +12,6 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::AssertFile
   include ConvenientService::RSpec::Matchers::IncludeModule
 
   let(:result) { described_class.result(path: path) }
-  let(:path) { double }
 
   example_group "modules" do
     subject { described_class }

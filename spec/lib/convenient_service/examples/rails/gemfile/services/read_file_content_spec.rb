@@ -57,7 +57,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::ReadFileCo
       let(:content) { "some content" }
 
       it "returns success with content" do
-        expect(result).to be_success.with_data({content: content}).of_service(described_class).of_step(:result)
+        expect(result).to be_success.with_data(content: content).of_service(described_class).of_step(:result)
       end
     end
   end
