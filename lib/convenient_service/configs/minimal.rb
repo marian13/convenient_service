@@ -213,6 +213,9 @@ module ConvenientService
 
             use Plugins::Step::CanBeCompleted::Concern
 
+            use Plugins::Step::CanBeMethodStep::Concern
+            use Plugins::Step::CanBeResultStep::Concern
+
             use Plugins::Step::HasInspect::Concern
           end
 

@@ -34,7 +34,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         Class.new.tap do |klass|
           klass.class_exec(service) do |service|
             include ConvenientService::Configs::Minimal
-
             include ConvenientService::Configs::AwesomePrintInspect
 
             step service
@@ -56,19 +55,37 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         end
       end
 
-      let(:step) { container.steps.first }
+      let(:step) { container.new.steps.first }
 
       let(:keywords) { ["ConvenientService", "entity", "Step", "container", "ContainerService", "service", "StepService"] }
 
-      before do
-        ##
-        # TODO: Remove when Core implements auto committing from `inspect`.
-        #
-        step.class.commit_config!
-      end
-
       it "returns `inspect` representation of step" do
         expect(step.inspect).to include(*keywords)
+      end
+
+      context "when step is method step" do
+        let(:container) do
+          Class.new do
+            include ConvenientService::Configs::Minimal
+            include ConvenientService::Configs::AwesomePrintInspect
+
+            step :result
+
+            def result
+              success
+            end
+
+            def self.name
+              "ContainerService"
+            end
+          end
+        end
+
+        let(:keywords) { ["ConvenientService", "entity", "Step", "container", "ContainerService", "method", ":result"] }
+
+        it "returns `inspect` representation of step" do
+          expect(step.inspect).to include(*keywords)
+        end
       end
     end
   end

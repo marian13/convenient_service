@@ -7,18 +7,23 @@ module ConvenientService
         module Entities
           class Step
             module Plugins
-              module HasInspect
+              module CanBeMethodStep
                 module Concern
                   include Support::Concern
 
                   instance_methods do
                     ##
-                    # @return [String]
+                    # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method, nil]
                     #
-                    def inspect
-                      return "<#{container.klass.name}::Step method: :#{method.value}>" if method_step?
+                    def method
+                      Commands::FindMethod.call(step: self)
+                    end
 
-                      "<#{container.klass.name}::Step service: #{service.klass.name}>"
+                    ##
+                    # @return [Boolean]
+                    #
+                    def method_step?
+                      Utils.to_bool(method)
                     end
                   end
                 end

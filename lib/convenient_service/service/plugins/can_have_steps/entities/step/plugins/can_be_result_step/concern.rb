@@ -7,18 +7,16 @@ module ConvenientService
         module Entities
           class Step
             module Plugins
-              module HasInspect
+              module CanBeResultStep
                 module Concern
                   include Support::Concern
 
                   instance_methods do
                     ##
-                    # @return [String]
+                    # @return [Boolean]
                     #
-                    def inspect
-                      return "<#{container.klass.name}::Step method: :#{method.value}>" if method_step?
-
-                      "<#{container.klass.name}::Step service: #{service.klass.name}>"
+                    def result_step?
+                      method_step? && method.value.to_sym == :result
                     end
                   end
                 end

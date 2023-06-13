@@ -25,7 +25,7 @@ module ConvenientService
                         ConvenientService: {
                           entity: "Step",
                           container: container.klass.name,
-                          service: service.klass.name
+                          **(method_step? ? {method: method.value.to_sym} : {service: service.klass.name})
                         }
                       }
 

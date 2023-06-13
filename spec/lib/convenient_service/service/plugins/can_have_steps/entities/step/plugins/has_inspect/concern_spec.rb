@@ -54,17 +54,32 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         end
       end
 
-      let(:step) { container.steps.first }
-
-      before do
-        ##
-        # TODO: Remove when Core implements auto committing from `inspect`.
-        #
-        step.class.commit_config!
-      end
+      let(:step) { container.new.steps.first }
 
       it "returns `inspect` representation of step" do
         expect(step.inspect).to eq("<#{step.container.klass.name}::Step service: #{step.service.klass.name}>")
+      end
+
+      context "when step is method step" do
+        let(:container) do
+          Class.new do
+            include ConvenientService::Configs::Minimal
+
+            step :result
+
+            def result
+              success
+            end
+
+            def self.name
+              "ContainerService"
+            end
+          end
+        end
+
+        it "returns `inspect` representation of step" do
+          expect(step.inspect).to eq("<#{step.container.klass.name}::Step method: :result>")
+        end
       end
     end
   end
