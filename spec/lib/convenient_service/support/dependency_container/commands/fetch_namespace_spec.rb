@@ -4,6 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
+# rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Support::DependencyContainer::Commands::FetchNamespace do
   example_group "class methods" do
     describe ".call" do
@@ -54,3 +55,4 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::FetchN
     end
   end
 end
+# rubocop:enable RSpec/NestedGroups

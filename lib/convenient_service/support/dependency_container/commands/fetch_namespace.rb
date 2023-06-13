@@ -48,7 +48,7 @@ module ConvenientService
           # @return [Symbol]
           #
           def namespace_name
-            Commands::BuildNamespaceName.call(scope: scope, prepend: prepend)
+            @namespace_name ||= Commands::BuildNamespaceName.call(scope: scope, prepend: prepend)
           end
         end
       end

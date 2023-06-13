@@ -4,6 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
+# rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Support::DependencyContainer::Commands::BuildNamespaceName do
   example_group "class methods" do
     describe ".call" do
@@ -16,7 +17,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::BuildN
         context "when `scope` is valid" do
           context "when `scope` is `:class`" do
             it "returns valid namespace name" do
-              expect(command_result).to eq(:"ImportedIncludedClassMethods")
+              expect(command_result).to eq(:ImportedIncludedClassMethods)
             end
           end
 
@@ -24,7 +25,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::BuildN
             let(:scope) { :instance }
 
             it "returns valid namespace name" do
-              expect(command_result).to eq(:"ImportedIncludedInstanceMethods")
+              expect(command_result).to eq(:ImportedIncludedInstanceMethods)
             end
           end
         end
@@ -33,7 +34,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::BuildN
           let(:scope) { nil }
 
           it "returns namespace name without `scope` value" do
-            expect(command_result).to eq(:"ImportedIncludedMethods")
+            expect(command_result).to eq(:ImportedIncludedMethods)
           end
         end
       end
@@ -42,7 +43,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::BuildN
         context "when `prepend` is valid" do
           context "when `prepend` is `false`" do
             it "returns valid namespace name" do
-              expect(command_result).to eq(:"ImportedIncludedClassMethods")
+              expect(command_result).to eq(:ImportedIncludedClassMethods)
             end
           end
 
@@ -50,7 +51,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::BuildN
             let(:prepend) { true }
 
             it "returns valid namespace name" do
-              expect(command_result).to eq(:"ImportedPrependedClassMethods")
+              expect(command_result).to eq(:ImportedPrependedClassMethods)
             end
           end
         end
@@ -59,10 +60,11 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::BuildN
           let(:prepend) { nil }
 
           it "behaves like `include`" do
-            expect(command_result).to eq(:"ImportedIncludedClassMethods")
+            expect(command_result).to eq(:ImportedIncludedClassMethods)
           end
         end
       end
     end
   end
 end
+# rubocop:enable RSpec/NestedGroups
