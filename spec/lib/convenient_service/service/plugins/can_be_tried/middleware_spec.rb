@@ -71,7 +71,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanBeTried::Middleware do
       #   expect { method_value }.to delegate_to(method.spy_middleware.commands, :is_result?)
       # end
 
-      context "when `result` is NOT result" do
+      context "when `result` is NOT success" do
         let(:service_class) do
           Class.new.tap do |klass|
             klass.class_exec(middleware) do |middleware|
@@ -82,7 +82,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanBeTried::Middleware do
               end
 
               def try_result
-                "string value"
+                error
               end
             end
           end
@@ -90,87 +90,52 @@ RSpec.describe ConvenientService::Service::Plugins::CanBeTried::Middleware do
 
         let(:error_message) do
           <<~TEXT
-            Return value of service `#{service_class}` try is NOT a `Result`.
-            It is `String`.
+            Return value of service `#{service_class}` try is NOT a `success`.
+            It is `error`.
 
-            Did you forget to call `success` from the `try_result` method?
+            Did you accidentally call `failure` or `error` instead of `success` from the `try_result` method?
           TEXT
         end
 
-        it "raises `ConvenientService::Service::Plugins::CanBeTried::Errors::ServiceTryReturnValueNotKindOfResult`" do
+        it "raises `ConvenientService::Service::Plugins::CanBeTried::Errors::ServiceTryReturnValueNotSuccess`" do
           expect { method_value }
-            .to raise_error(ConvenientService::Service::Plugins::CanBeTried::Errors::ServiceTryReturnValueNotKindOfResult)
+            .to raise_error(ConvenientService::Service::Plugins::CanBeTried::Errors::ServiceTryReturnValueNotSuccess)
             .with_message(error_message)
         end
       end
 
-      context "when `result` is result" do
-        context "when `result` is NOT success" do
-          let(:service_class) do
-            Class.new.tap do |klass|
-              klass.class_exec(middleware) do |middleware|
-                include ConvenientService::Configs::Standard
+      context "when `result` is success" do
+        let(:service_class) do
+          Class.new.tap do |klass|
+            klass.class_exec(middleware) do |middleware|
+              include ConvenientService::Configs::Standard
 
-                middlewares :try_result do
-                  observe middleware
-                end
+              middlewares :try_result do
+                observe middleware
+              end
 
-                def try_result
-                  error
-                end
+              def try_result
+                success
               end
             end
-          end
-
-          let(:error_message) do
-            <<~TEXT
-              Return value of service `#{service_class}` try is NOT a `success`.
-              It is `error`.
-
-              Did you accidentally call `failure` or `error` instead of `success` from the `try_result` method?
-            TEXT
-          end
-
-          it "raises `ConvenientService::Service::Plugins::CanBeTried::Errors::ServiceTryReturnValueNotSuccess`" do
-            expect { method_value }
-              .to raise_error(ConvenientService::Service::Plugins::CanBeTried::Errors::ServiceTryReturnValueNotSuccess)
-              .with_message(error_message)
           end
         end
 
-        context "when `result` is success" do
-          let(:service_class) do
-            Class.new.tap do |klass|
-              klass.class_exec(middleware) do |middleware|
-                include ConvenientService::Configs::Standard
+        let(:try_result) { service_instance.success }
 
-                middlewares :try_result do
-                  observe middleware
-                end
+        before do
+          allow(service_instance).to receive(:success).and_return(try_result)
+        end
 
-                def try_result
-                  success
-                end
-              end
-            end
-          end
+        it "returns `try_result`" do
+          expect(method_value).to eq(try_result)
+        end
 
-          let(:try_result) { service_instance.success }
-
-          before do
-            allow(service_instance).to receive(:success).and_return(try_result)
-          end
-
-          it "returns `try_result`" do
-            expect(method_value).to eq(try_result)
-          end
-
-          specify do
-            expect { method_value }
-              .to delegate_to(try_result, :copy)
-              .with_arguments(overrides: {kwargs: {try_result: true}})
-              .and_return_its_value
-          end
+        specify do
+          expect { method_value }
+            .to delegate_to(try_result, :copy)
+            .with_arguments(overrides: {kwargs: {try_result: true}})
+            .and_return_its_value
         end
       end
     end

@@ -14,19 +14,6 @@ module ConvenientService
               super(message)
             end
           end
-
-          class ServiceReturnValueNotKindOfResult < ::ConvenientService::Error
-            def initialize(service:, result:)
-              message = <<~TEXT
-                Return value of service `#{service.class}` is NOT a `Result`.
-                It is `#{result.class}`.
-
-                Did you forget to call `success`, `failure`, or `error` from the `result` method?
-              TEXT
-
-              super(message)
-            end
-          end
         end
       end
     end

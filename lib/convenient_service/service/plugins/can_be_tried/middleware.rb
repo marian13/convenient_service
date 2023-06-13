@@ -5,10 +5,6 @@ module ConvenientService
     module Plugins
       module CanBeTried
         class Middleware < MethodChainMiddleware
-          include Support::DependencyContainer::Import
-
-          import "commands.is_result?", from: Service::Plugins::HasResult::Container
-
           intended_for :try_result, entity: :service
 
           ##
@@ -20,7 +16,6 @@ module ConvenientService
           def next(...)
             try_result = chain.next(...)
 
-            raise Errors::ServiceTryReturnValueNotKindOfResult.new(service: entity, result: try_result) unless commands.is_result?(try_result)
             raise Errors::ServiceTryReturnValueNotSuccess.new(service: entity, result: try_result) unless try_result.success?
 
             try_result.copy(overrides: {kwargs: {try_result: true}})

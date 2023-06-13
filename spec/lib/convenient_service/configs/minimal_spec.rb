@@ -59,7 +59,7 @@ RSpec.describe ConvenientService::Configs::Minimal do
             [
               ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
               ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
-              ConvenientService::Service::Plugins::HasResult::Middleware,
+              ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Middleware,
               ConvenientService::Service::Plugins::CanHaveSteps::Middleware
             ]
           end

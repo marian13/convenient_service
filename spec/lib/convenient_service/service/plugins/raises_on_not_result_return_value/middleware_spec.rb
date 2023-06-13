@@ -4,8 +4,8 @@ require "spec_helper"
 
 require "convenient_service"
 
-# rubocop:disable RSpec/NestedGroups
-RSpec.describe ConvenientService::Service::Plugins::HasResult::Middleware do
+# rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
+RSpec.describe ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Middleware do
   let(:middleware) { described_class }
 
   example_group "inheritance" do
@@ -20,7 +20,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Middleware do
     describe ".intended_methods" do
       let(:spec) do
         Class.new(ConvenientService::MethodChainMiddleware) do
-          intended_for :result, entity: :service
+          intended_for any_method, entity: :service
         end
       end
 
@@ -40,7 +40,8 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Middleware do
 
       subject(:method_value) { method.call }
 
-      let(:method) { wrap_method(service_instance, :result, observe_middleware: middleware) }
+      let(:method) { wrap_method(service_instance, method_name, observe_middleware: middleware) }
+      let(:method_name) { :result }
 
       let(:service_class) do
         Class.new.tap do |klass|
@@ -90,13 +91,13 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Middleware do
             Return value of service `#{service_class}` is NOT a `Result`.
             It is `String`.
 
-            Did you forget to call `success`, `failure`, or `error` from the `result` method?
+            Did you forget to call `success`, `failure`, or `error` from the `:#{method_name}` method?
           TEXT
         end
 
-        it "raises `ConvenientService::Service::Plugins::HasResult::Errors::ServiceReturnValueNotKindOfResult`" do
+        it "raises `ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Errors::ReturnValueNotKindOfResult`" do
           expect { method_value }
-            .to raise_error(ConvenientService::Service::Plugins::HasResult::Errors::ServiceReturnValueNotKindOfResult)
+            .to raise_error(ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Errors::ReturnValueNotKindOfResult)
             .with_message(error_message)
         end
       end
@@ -125,4 +126,4 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Middleware do
     end
   end
 end
-# rubocop:enable RSpec/NestedGroups
+# rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers

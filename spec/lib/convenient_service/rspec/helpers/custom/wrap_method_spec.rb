@@ -17,7 +17,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::Custom::WrapMethod do
           include ConvenientService::Configs::Standard
 
           middlewares :result do
-            observe ConvenientService::Service::Plugins::HasResult::Middleware
+            observe ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Middleware
           end
         end
       end
@@ -26,7 +26,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::Custom::WrapMethod do
 
       let(:entity) { service_instance }
       let(:method) { :result }
-      let(:middleware) { ConvenientService::Service::Plugins::HasResult::Middleware }
+      let(:middleware) { ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Middleware }
 
       specify do
         expect { command_result }

@@ -39,7 +39,7 @@ module ConvenientService
 
         middlewares :result do
           insert_before \
-            Plugins::Service::HasResult::Middleware,
+            Plugins::Service::RaisesOnNotResultReturnValue::Middleware,
             Plugins::Common::HasCallbacks::Middleware
 
           insert_after \
@@ -59,6 +59,8 @@ module ConvenientService
         middlewares :try_result do
           use Plugins::Common::NormalizesEnv::Middleware
           use Plugins::Common::CachesReturnValue::Middleware
+
+          use Plugins::Service::RaisesOnNotResultReturnValue::Middleware
 
           use Plugins::Service::CanBeTried::Middleware
         end

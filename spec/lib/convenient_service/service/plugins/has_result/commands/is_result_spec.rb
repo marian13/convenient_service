@@ -18,7 +18,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Commands::IsResul
             include ConvenientService::Configs::Minimal
 
             middlewares :result do
-              delete ConvenientService::Service::Plugins::HasResult::Middleware
+              delete ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Middleware
             end
 
             def result

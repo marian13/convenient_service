@@ -65,7 +65,8 @@ module ConvenientService
           use Plugins::Common::NormalizesEnv::Middleware
           use Plugins::Common::CachesReturnValue::Middleware
 
-          use Plugins::Service::HasResult::Middleware
+          use Plugins::Service::RaisesOnNotResultReturnValue::Middleware
+
           use Plugins::Service::CanHaveSteps::Middleware
         end
 

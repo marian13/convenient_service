@@ -76,7 +76,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::DryService::Config do
               ConvenientService::Common::Plugins::HasCallbacks::Middleware,
               ConvenientService::Common::Plugins::HasAroundCallbacks::Middleware,
               ConvenientService::Service::Plugins::HasResultParamsValidations::UsingDryValidation::Middleware,
-              ConvenientService::Service::Plugins::HasResult::Middleware,
+              ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Middleware,
               ConvenientService::Service::Plugins::CanHaveSteps::Middleware
               ##
               # TODO: Rewrite. This plugin does NOT do what it states. Probably I was NOT with a clear mind while writing it (facepalm).
@@ -95,6 +95,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::DryService::Config do
             [
               ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
               ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
+              ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Middleware,
               ConvenientService::Service::Plugins::CanBeTried::Middleware
             ]
           end

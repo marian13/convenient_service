@@ -34,7 +34,7 @@ module ConvenientService
 
                 middlewares :result do
                   insert_before \
-                    ConvenientService::Plugins::Service::HasResult::Middleware,
+                    ConvenientService::Plugins::Service::RaisesOnNotResultReturnValue::Middleware,
                     ConvenientService::Plugins::Service::HasResultParamsValidations::UsingDryValidation::Middleware
                 end
               end

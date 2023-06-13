@@ -71,7 +71,7 @@ RSpec.describe ConvenientService::Configs::Standard do
               ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
               ConvenientService::Common::Plugins::HasCallbacks::Middleware,
               ConvenientService::Common::Plugins::HasAroundCallbacks::Middleware,
-              ConvenientService::Service::Plugins::HasResult::Middleware,
+              ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Middleware,
               ConvenientService::Service::Plugins::CanHaveSteps::Middleware
 
               ##
@@ -91,6 +91,7 @@ RSpec.describe ConvenientService::Configs::Standard do
             [
               ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
               ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
+              ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Middleware,
               ConvenientService::Service::Plugins::CanBeTried::Middleware
             ]
           end
