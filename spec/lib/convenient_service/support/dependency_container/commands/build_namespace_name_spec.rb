@@ -11,7 +11,6 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::BuildN
 
       let(:scope) { :class }
       let(:prepend) { false }
-      let(:namespace_name) { :"Imported#{imported_prefix}#{scope}Methods" }
 
       describe "scope" do
         context "when `scope` is valid" do
