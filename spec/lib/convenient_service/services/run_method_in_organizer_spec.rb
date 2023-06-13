@@ -20,42 +20,10 @@ RSpec.describe ConvenientService::Services::RunMethodInOrganizer do
 
       subject(:service_result) { described_class.result(method_name: method_name, organizer: organizer, **kwargs) }
 
-      let(:organizer_base_service_class) do
+      let(:organizer_service_class) do
         Class.new.tap do |klass|
           klass.class_exec(method_name, method_return_value) do |method_name, method_return_value|
-            include ConvenientService::Service::Plugins::HasResult::Concern
-          end
-        end
-      end
-
-      let(:organizer_service_class) do
-        Class.new(organizer_base_service_class).tap do |klass|
-          klass.class_exec(method_name, method_return_value) do |method_name, method_return_value|
-            # rubocop:disable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
-            class self::Result
-              include ConvenientService::Core
-
-              concerns do
-                use ConvenientService::Common::Plugins::HasInternals::Concern
-                use ConvenientService::Common::Plugins::HasConstructor::Concern
-                use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Concern
-              end
-
-              middlewares :initialize do
-                use ConvenientService::Common::Plugins::NormalizesEnv::Middleware
-
-                use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Middleware
-              end
-
-              class self::Internals
-                include ConvenientService::Core
-
-                concerns do
-                  use ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Plugins::HasCache::Concern
-                end
-              end
-            end
-            # rubocop:enable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
+            include ConvenientService::Configs::Minimal
 
             define_method(method_name) { success(data: {value: method_return_value}) }
           end
@@ -74,33 +42,9 @@ RSpec.describe ConvenientService::Services::RunMethodInOrganizer do
 
       context "when `kwargs` are passed" do
         let(:organizer_service_class) do
-          Class.new(organizer_base_service_class).tap do |klass|
+          Class.new.tap do |klass|
             klass.class_exec(method_name) do |method_name|
-              # rubocop:disable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
-              class self::Result
-                include ConvenientService::Core
-
-                concerns do
-                  use ConvenientService::Common::Plugins::HasInternals::Concern
-                  use ConvenientService::Common::Plugins::HasConstructor::Concern
-                  use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Concern
-                end
-
-                middlewares :initialize do
-                  use ConvenientService::Common::Plugins::NormalizesEnv::Middleware
-
-                  use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Middleware
-                end
-
-                class self::Internals
-                  include ConvenientService::Core
-
-                  concerns do
-                    use ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Plugins::HasCache::Concern
-                  end
-                end
-              end
-              # rubocop:enable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
+              include ConvenientService::Configs::Minimal
 
               define_method(method_name) { |**kwargs| success(data: {kwargs: kwargs}) }
             end
@@ -112,6 +56,28 @@ RSpec.describe ConvenientService::Services::RunMethodInOrganizer do
         it "ignores them" do
           expect(service_result).to be_success.with_data(kwargs: {})
         end
+      end
+    end
+  end
+
+  example_group "instance methods" do
+    describe "#inspect_values" do
+      let(:organizer_service_class) do
+        Class.new do
+          include ConvenientService::Configs::Minimal
+
+          def self.name
+            "Service"
+          end
+        end
+      end
+
+      let(:organizer_service_instance) { organizer_service_class.new }
+      let(:service) { described_class.new(method_name: :foo, organizer: organizer_service_instance) }
+      let(:inspect_values) { {name: "Service::RunMethod(:foo)"} }
+
+      it "returns inspect values" do
+        expect(service.inspect_values).to eq(inspect_values)
       end
     end
   end

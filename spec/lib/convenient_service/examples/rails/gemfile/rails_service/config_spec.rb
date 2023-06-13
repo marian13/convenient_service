@@ -60,6 +60,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::RailsService::Config
           let(:initialize_middlewares) do
             [
               ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
+              ConvenientService::Service::Plugins::CollectsServicesInException::Middleware,
               ConvenientService::Common::Plugins::CachesConstructorParams::Middleware,
               ConvenientService::Common::Plugins::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment::Middleware
             ]
@@ -74,6 +75,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::RailsService::Config
           let(:result_middlewares) do
             [
               ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
+              ConvenientService::Service::Plugins::CollectsServicesInException::Middleware,
               ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
               ConvenientService::Common::Plugins::HasCallbacks::Middleware,
               ConvenientService::Common::Plugins::HasAroundCallbacks::Middleware,
@@ -96,6 +98,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::RailsService::Config
           let(:try_result_middlewares) do
             [
               ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
+              ConvenientService::Service::Plugins::CollectsServicesInException::Middleware,
               ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
               ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Middleware,
               ConvenientService::Service::Plugins::CanBeTried::Middleware
@@ -561,7 +564,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::RailsService::Config
       # https://github.com/marian13/convenient_service/discussions/43
       #
       it "applies its `included` block only once" do
-        expect(service_class.middlewares(:result).to_a.size).to eq(7)
+        expect(service_class.middlewares(:result).to_a.size).to eq(8)
       end
     end
   end

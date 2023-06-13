@@ -6,6 +6,8 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Service::Plugins::HasInspect::Concern do
+  include ConvenientService::RSpec::Matchers::DelegateTo
+
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
 
@@ -29,28 +31,36 @@ RSpec.describe ConvenientService::Service::Plugins::HasInspect::Concern do
   end
 
   example_group "instance methods" do
-    describe "#inspect" do
-      let(:service_class) do
-        Class.new do
-          include ConvenientService::Configs::Minimal
+    let(:service_class) do
+      Class.new do
+        include ConvenientService::Configs::Minimal
 
-          def self.name
-            "ImportantService"
-          end
+        def self.name
+          "ImportantService"
         end
       end
+    end
 
-      let(:service_instance) { service_class.new }
+    let(:service_instance) { service_class.new }
+    let(:inspect_values) { {name: service_class.name} }
 
-      before do
-        ##
-        # TODO: Remove when Core implements auto committing from `inspect`.
-        #
-        service_class.commit_config!
-      end
-
+    describe "#inspect" do
       it "returns `inspect` representation of service" do
         expect(service_instance.inspect).to eq("<#{service_class.name}>")
+      end
+
+      specify do
+        allow(service_instance).to receive(:inspect_values).and_return(inspect_values)
+
+        expect { service_instance.inspect }
+          .to delegate_to(service_instance.inspect_values, :[])
+          .with_arguments(:name)
+      end
+    end
+
+    describe "#inspect_values" do
+      it "returns `inspect` values" do
+        expect(service_instance.inspect_values).to eq(inspect_values)
       end
     end
   end

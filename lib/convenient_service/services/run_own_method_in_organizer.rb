@@ -5,9 +5,14 @@ module ConvenientService
     class RunOwnMethodInOrganizer
       module Errors
         class MethodForStepIsNotDefined < ::ConvenientService::Error
+          ##
+          # @param service_class [Class]
+          # @param method_name [Symbol]
+          # @return [void]
+          #
           def initialize(service_class:, method_name:)
             message = <<~TEXT
-              Service #{service_class} tries to use `#{method_name}` method in a step, but it NOT defined.
+              Service `#{service_class}` tries to use `#{method_name}` method in a step, but it is NOT defined.
 
               Did you forget to define it?
             TEXT
@@ -23,21 +28,53 @@ module ConvenientService
       #
       include Configs::Standard
 
-      attr_reader :method_name, :organizer, :kwargs
+      ##
+      # @!attribute [r] method_name
+      #   @return [Symbol]
+      #
+      attr_reader :method_name
 
+      ##
+      # @!attribute [r] organizer
+      #   @return [Service]
+      #
+      attr_reader :organizer
+
+      ##
+      # @!attribute [r] kwargs
+      #   @return [Hash{Symbol => Object}]
+      #
+      attr_reader :kwargs
+
+      ##
+      # @param method_name [Symbol]
+      # @param organizer [Service]
+      # @param kwargs [Hash{Symbol => Object}]
+      # @return [void]
+      #
       def initialize(method_name:, organizer:, **kwargs)
         @method_name = method_name
         @organizer = organizer
         @kwargs = kwargs
       end
 
+      ##
+      # @return [Result]
+      #
+      # @internal
+      #   NOTE: `kwargs` are intentionally NOT passed to `own_method.call`, since all the corresponding methods are available inside `own_method` body.
+      #
       def result
         raise Errors::MethodForStepIsNotDefined.new(service_class: organizer.class, method_name: method_name) unless own_method
 
-        ##
-        # NOTE: `kwargs` are intentionally NOT passed, since all the corresponding methods are available inside `own_method` body.
-        #
         own_method.call
+      end
+
+      ##
+      # @return [Hash{Symbol => Object}]
+      #
+      def inspect_values
+        {name: "#{organizer.class.name}::RunMethod(:#{method_name})"}
       end
 
       private

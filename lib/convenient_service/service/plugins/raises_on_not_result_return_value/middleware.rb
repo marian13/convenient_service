@@ -7,7 +7,7 @@ module ConvenientService
         class Middleware < MethodChainMiddleware
           include Support::DependencyContainer::Import
 
-          import "commands.is_result?", from: Service::Plugins::HasResult::Container
+          import :"commands.is_result?", from: Service::Plugins::HasResult::Container
 
           intended_for any_method, entity: :service
 

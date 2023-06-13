@@ -15,11 +15,18 @@ module ConvenientService
               metadata = {
                 ConvenientService: {
                   entity: "Service",
-                  name: self.class.name
+                  name: inspect_values[:name]
                 }
               }
 
               metadata.ai
+            end
+
+            ##
+            # @return [Hash{Symbol => Object}]
+            #
+            def inspect_values
+              {name: self.class.name}
             end
           end
         end

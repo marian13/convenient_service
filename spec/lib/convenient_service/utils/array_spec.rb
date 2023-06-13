@@ -68,6 +68,19 @@ RSpec.describe ConvenientService::Utils::Array do
     end
   end
 
+  describe ".limited_push" do
+    let(:array) { [:foo, :bar] }
+    let(:object) { :baz }
+    let(:limit) { 10 }
+
+    specify do
+      expect { described_class.limited_push(array, object, limit: limit) }
+        .to delegate_to(ConvenientService::Utils::Array::LimitedPush, :call)
+        .with_arguments(array, object, limit: limit)
+        .and_return_its_value
+    end
+  end
+
   describe ".merge" do
     let(:array) { [:a, :b, :c] }
     let(:overrides) { {0 => :foo} }

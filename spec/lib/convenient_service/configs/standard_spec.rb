@@ -55,6 +55,7 @@ RSpec.describe ConvenientService::Configs::Standard do
           let(:initialize_middlewares) do
             [
               ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
+              ConvenientService::Service::Plugins::CollectsServicesInException::Middleware,
               ConvenientService::Common::Plugins::CachesConstructorParams::Middleware
             ]
           end
@@ -68,6 +69,7 @@ RSpec.describe ConvenientService::Configs::Standard do
           let(:result_middlewares) do
             [
               ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
+              ConvenientService::Service::Plugins::CollectsServicesInException::Middleware,
               ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
               ConvenientService::Common::Plugins::HasCallbacks::Middleware,
               ConvenientService::Common::Plugins::HasAroundCallbacks::Middleware,
@@ -90,6 +92,7 @@ RSpec.describe ConvenientService::Configs::Standard do
           let(:try_result_middlewares) do
             [
               ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
+              ConvenientService::Service::Plugins::CollectsServicesInException::Middleware,
               ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
               ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Middleware,
               ConvenientService::Service::Plugins::CanBeTried::Middleware
@@ -555,7 +558,7 @@ RSpec.describe ConvenientService::Configs::Standard do
       # https://github.com/marian13/convenient_service/discussions/43
       #
       it "applies its `included` block only once" do
-        expect(service_class.middlewares(:result).to_a.size).to eq(6)
+        expect(service_class.middlewares(:result).to_a.size).to eq(7)
       end
     end
   end

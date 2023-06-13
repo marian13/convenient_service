@@ -64,13 +64,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanBeTried::Middleware do
         expect { method_value }.to call_chain_next.on(method)
       end
 
-      ##
-      # TODO: `method.spy_middleware`.
-      #
-      # specify do
-      #   expect { method_value }.to delegate_to(method.spy_middleware.commands, :is_result?)
-      # end
-
       context "when `result` is NOT success" do
         let(:service_class) do
           Class.new.tap do |klass|

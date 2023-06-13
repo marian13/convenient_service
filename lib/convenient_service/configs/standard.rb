@@ -34,10 +34,15 @@ module ConvenientService
         end
 
         middlewares :initialize do
+          use Plugins::Service::CollectsServicesInException::Middleware
           use Plugins::Common::CachesConstructorParams::Middleware
         end
 
         middlewares :result do
+          insert_after \
+            Plugins::Common::NormalizesEnv::Middleware,
+            Plugins::Service::CollectsServicesInException::Middleware
+
           insert_before \
             Plugins::Service::RaisesOnNotResultReturnValue::Middleware,
             Plugins::Common::HasCallbacks::Middleware
@@ -58,10 +63,10 @@ module ConvenientService
         #
         middlewares :try_result do
           use Plugins::Common::NormalizesEnv::Middleware
+          use Plugins::Service::CollectsServicesInException::Middleware
           use Plugins::Common::CachesReturnValue::Middleware
 
           use Plugins::Service::RaisesOnNotResultReturnValue::Middleware
-
           use Plugins::Service::CanBeTried::Middleware
         end
 

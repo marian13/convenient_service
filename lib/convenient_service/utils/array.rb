@@ -7,6 +7,7 @@ require_relative "array/drop_while"
 require_relative "array/find_last"
 require_relative "array/find_yield"
 require_relative "array/keep_after"
+require_relative "array/limited_push"
 require_relative "array/merge"
 require_relative "array/rjust"
 require_relative "array/wrap"
@@ -33,6 +34,10 @@ module ConvenientService
 
         def keep_after(...)
           KeepAfter.call(...)
+        end
+
+        def limited_push(...)
+          LimitedPush.call(...)
         end
 
         def merge(...)
