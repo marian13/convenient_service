@@ -4,13 +4,7 @@ module ConvenientService
   module Support
     module DependencyContainer
       module Commands
-        class FetchImportedScopedMethods < Support::Command
-          ##
-          # @!attribute [r] importing_module
-          #   @return [Module]
-          #
-          attr_reader :importing_module
-
+        class BuildNamespaceName < Support::Command
           ##
           # @!attribute [r] scope
           #   @return [Symbol]
@@ -24,30 +18,20 @@ module ConvenientService
           attr_reader :prepend
 
           ##
-          # @!attribute [r] block
-          #   @return [Proc, nil]
-          #
-          attr_reader :block
-
-          ##
-          # @param importing_module [Module]
           # @param scope [Symbol]
           # @param prepend [Boolean]
-          # @param block [Proc]
           # @return [void]
           #
-          def initialize(importing_module:, scope:, prepend:, &block)
-            @importing_module = importing_module
+          def initialize(scope:, prepend:)
             @scope = scope
             @prepend = prepend
-            @block = block
           end
 
           ##
-          # @return [Module]
+          # @return [Symbol]
           #
           def call
-            Utils::Module.fetch_own_const(importing_module, :"Imported#{imported_prefix}#{scoped_prefix}Methods", &block)
+            :"Imported#{imported_prefix}#{scoped_prefix}Methods"
           end
 
           private

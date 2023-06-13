@@ -30,12 +30,8 @@ module ConvenientService
           Commands::AssertValidMethod
         end
 
-        export :"commands.FetchImportedScopedMethods" do
-          Commands::FetchImportedScopedMethods
-        end
-
-        export :"commands.FetchNamespace" do
-          Commands::FetchNamespace
+        export :"commands.GetNamespace" do
+          Commands::GetNamespace
         end
 
         export :"entities.Method" do

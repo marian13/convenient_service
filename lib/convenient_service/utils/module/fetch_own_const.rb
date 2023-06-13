@@ -79,8 +79,6 @@ module ConvenientService
           return mod.const_get(const_name, false) if mod.const_defined?(const_name, false)
 
           return mod.const_set(const_name, fallback_block.call) if fallback_block
-
-          nil
         end
       end
     end

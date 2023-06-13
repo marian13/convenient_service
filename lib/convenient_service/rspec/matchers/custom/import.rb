@@ -10,7 +10,7 @@ module ConvenientService
           import :"constants.DEFAULT_ALIAS_SLUG", from: ConvenientService::Support::DependencyContainer::Container
           import :"constants.DEFAULT_SCOPE", from: ConvenientService::Support::DependencyContainer::Container
           import :"constants.DEFAULT_PREPEND", from: ConvenientService::Support::DependencyContainer::Container
-          import :"commands.FetchNamespace", from: ConvenientService::Support::DependencyContainer::Container
+          import :"commands.GetNamespace", from: ConvenientService::Support::DependencyContainer::Container
           import :"commands.AssertValidContainer", from: ConvenientService::Support::DependencyContainer::Container
           import :"commands.AssertValidScope", from: ConvenientService::Support::DependencyContainer::Container
           import :"commands.AssertValidMethod", from: ConvenientService::Support::DependencyContainer::Container
@@ -45,7 +45,7 @@ module ConvenientService
 
             method = entities.Method.new(slug: slug, scope: scope, alias_slug: alias_slug)
 
-            namespace = commands.FetchNamespace.call(importing_module: klass, scope: scope, prepend: prepend)
+            namespace = commands.GetNamespace.call(importing_module: klass, scope: scope, prepend: prepend)
 
             return false unless namespace
 
@@ -80,7 +80,7 @@ module ConvenientService
           #
           def printable_alias_slug
             @printable_alias_slug ||=
-              alias_slug == constants.DEFAULT_ALIAS_SLUG ? constants.DEFAULT_ALIAS_SLUG : " as: `#{alias_slug}`"
+              (alias_slug == constants.DEFAULT_ALIAS_SLUG) ? constants.DEFAULT_ALIAS_SLUG : " as: `#{alias_slug}`"
           end
 
           ##

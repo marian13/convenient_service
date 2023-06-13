@@ -57,7 +57,7 @@ module ConvenientService
           # @return [Module]
           #
           def imported_scoped_methods
-            @imported_scoped_methods ||= Commands::FetchImportedScopedMethods.call(importing_module: importing_module, scope: scope, prepend: prepend) { Commands::CreateMethodsModule.call }
+            @imported_scoped_methods ||= Commands::FetchNamespace.call(importing_module: importing_module, scope: scope, prepend: prepend)
           end
 
           ##

@@ -4,7 +4,7 @@ module ConvenientService
   module Support
     module DependencyContainer
       module Commands
-        class FetchNamespace < Support::Command
+        class GetNamespace < Support::Command
           ##
           # @!attribute [r] importing_module
           #   @return [Module]
@@ -39,7 +39,7 @@ module ConvenientService
           # @return [Module]
           #
           def call
-            Utils::Module.fetch_own_const(importing_module, namespace_name) { Commands::CreateMethodsModule.call }
+            Utils::Module.get_own_const(importing_module, namespace_name)
           end
 
           private

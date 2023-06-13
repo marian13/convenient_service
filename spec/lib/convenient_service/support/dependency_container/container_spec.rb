@@ -26,7 +26,9 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Container do
 
     it { is_expected.to export(:"commands.AssertValidScope") }
 
-    it { is_expected.to export(:"commands.FetchImportedScopedMethods") }
+    it { is_expected.to export(:"commands.AssertValidMethod") }
+
+    it { is_expected.to export(:"commands.GetNamespace") }
 
     it { is_expected.to export(:"entities.Method") }
   end
