@@ -541,17 +541,17 @@
   <p class="tag_title">See Also:</p>
   <ul class="see">
     
-      <li><a href="https://rspec.info/features/3-12/rspec-mocks/setting-constraints/matching-arguments" target="_parent" title="https://rspec.info/features/3-12/rspec-mocks/setting-constraints/matching-arguments">https://rspec.info/features/3-12/rspec-mocks/setting-constraints/matching-arguments</a></li>
-    
-      <li><a href="https://rspec.info/documentation/3.12/rspec-mocks/RSpec/Mocks/ArgumentMatchers.html" target="_parent" title="https://rspec.info/documentation/3.12/rspec-mocks/RSpec/Mocks/ArgumentMatchers.html">https://rspec.info/documentation/3.12/rspec-mocks/RSpec/Mocks/ArgumentMatchers.html</a></li>
-    
-      <li><a href="https://github.com/rspec/rspec-mocks/blob/v3.12.3/lib/rspec/mocks/argument_matchers.rb#L282" target="_parent" title="https://github.com/rspec/rspec-mocks/blob/v3.12.3/lib/rspec/mocks/argument_matchers.rb#L282">https://github.com/rspec/rspec-mocks/blob/v3.12.3/lib/rspec/mocks/argument_matchers.rb#L282</a></li>
-    
       <li><a href="https://rspec.info/features/3-12/rspec-expectations/built-in-matchers" target="_parent" title="https://rspec.info/features/3-12/rspec-expectations/built-in-matchers">https://rspec.info/features/3-12/rspec-expectations/built-in-matchers</a></li>
     
       <li><a href="https://rspec.info/documentation/3.12/rspec-expectations/RSpec/Matchers/BuiltIn.html" target="_parent" title="https://rspec.info/documentation/3.12/rspec-expectations/RSpec/Matchers/BuiltIn.html">https://rspec.info/documentation/3.12/rspec-expectations/RSpec/Matchers/BuiltIn.html</a></li>
     
       <li><a href="https://github.com/rspec/rspec-expectations/blob/v3.12.3/lib/rspec/matchers/composable.rb#L45" target="_parent" title="https://github.com/rspec/rspec-expectations/blob/v3.12.3/lib/rspec/matchers/composable.rb#L45">https://github.com/rspec/rspec-expectations/blob/v3.12.3/lib/rspec/matchers/composable.rb#L45</a></li>
+    
+      <li><a href="https://rspec.info/features/3-12/rspec-mocks/setting-constraints/matching-arguments" target="_parent" title="https://rspec.info/features/3-12/rspec-mocks/setting-constraints/matching-arguments">https://rspec.info/features/3-12/rspec-mocks/setting-constraints/matching-arguments</a></li>
+    
+      <li><a href="https://rspec.info/documentation/3.12/rspec-mocks/RSpec/Mocks/ArgumentMatchers.html" target="_parent" title="https://rspec.info/documentation/3.12/rspec-mocks/RSpec/Mocks/ArgumentMatchers.html">https://rspec.info/documentation/3.12/rspec-mocks/RSpec/Mocks/ArgumentMatchers.html</a></li>
+    
+      <li><a href="https://github.com/rspec/rspec-mocks/blob/v3.12.3/lib/rspec/mocks/argument_matchers.rb#L282" target="_parent" title="https://github.com/rspec/rspec-mocks/blob/v3.12.3/lib/rspec/mocks/argument_matchers.rb#L282">https://github.com/rspec/rspec-mocks/blob/v3.12.3/lib/rspec/mocks/argument_matchers.rb#L282</a></li>
     
   </ul>
 
@@ -577,7 +577,7 @@
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='rparen'>)</span>
 
   <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span> <span class='op'>!=</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span>
-  <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>unless</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_value'>value</span> <span class='op'>===</span> <span class='id identifier rubyid_value'>value</span>
+  <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>unless</span> <span class='id identifier rubyid_value'>value</span> <span class='op'>===</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_value'>value</span>
 
   <span class='kw'>true</span>
 <span class='kw'>end</span></pre>
@@ -764,7 +764,7 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Jun 14 00:38:19 2023 by
+  Generated on Thu Jun 15 00:18:30 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>
