@@ -78,16 +78,16 @@ module ConvenientService
                         # @example RSpec expectation matchers.
                         #   expect(result).to be_success.with_data(foo: match(/bar/))
                         #
-                        # @see https://rspec.info/features/3-12/rspec-mocks/setting-constraints/matching-arguments
-                        # @see https://rspec.info/documentation/3.12/rspec-mocks/RSpec/Mocks/ArgumentMatchers.html
-                        # @see https://github.com/rspec/rspec-mocks/blob/v3.12.3/lib/rspec/mocks/argument_matchers.rb#L282
+                        # @see https://rspec.info/features/3-12/rspec-expectations/built-in-matchers
+                        # @see https://rspec.info/documentation/3.12/rspec-expectations/RSpec/Matchers/BuiltIn.html
+                        # @see https://github.com/rspec/rspec-expectations/blob/v3.12.3/lib/rspec/matchers/composable.rb#L45
                         #
                         # @example RSpec mocks arguments matchers.
                         #   expect(result).to be_success.with_data(hash_including(:foo))
                         #
-                        # @see https://rspec.info/features/3-12/rspec-expectations/built-in-matchers
-                        # @see https://rspec.info/documentation/3.12/rspec-expectations/RSpec/Matchers/BuiltIn.html
-                        # @see https://github.com/rspec/rspec-expectations/blob/v3.12.3/lib/rspec/matchers/composable.rb#L45
+                        # @see https://rspec.info/features/3-12/rspec-mocks/setting-constraints/matching-arguments
+                        # @see https://rspec.info/documentation/3.12/rspec-mocks/RSpec/Mocks/ArgumentMatchers.html
+                        # @see https://github.com/rspec/rspec-mocks/blob/v3.12.3/lib/rspec/mocks/argument_matchers.rb#L282
                         #
                         # @example Combo of RSpec expectation matchers and RSpec mocks arguments.
                         #   expect(result).to be_success.with_data(hash_including(foo: match(/bar/)))
@@ -112,11 +112,11 @@ module ConvenientService
 
                           return false if result.class != other.result.class
 
-                          case other.value
-                          when ::Hash
-                            return false unless Utils::Hash.triple_equality_compare(other.value, value)
+                          case [value, other.value]
+                          in [::Hash, ::Hash]
+                            return false unless Utils::Hash.triple_equality_compare(value, other.value)
                           else
-                            return false unless other.value === value
+                            return false unless value === other.value
                           end
 
                           true

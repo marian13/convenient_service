@@ -58,16 +58,16 @@ module ConvenientService
                         # @example RSpec expectation matchers.
                         #   expect(result).to be_error.with_code(match(/bar/))
                         #
-                        # @see https://rspec.info/features/3-12/rspec-mocks/setting-constraints/matching-arguments
-                        # @see https://rspec.info/documentation/3.12/rspec-mocks/RSpec/Mocks/ArgumentMatchers.html
-                        # @see https://github.com/rspec/rspec-mocks/blob/v3.12.3/lib/rspec/mocks/argument_matchers.rb#L282
+                        # @see https://rspec.info/features/3-12/rspec-expectations/built-in-matchers
+                        # @see https://rspec.info/documentation/3.12/rspec-expectations/RSpec/Matchers/BuiltIn.html
+                        # @see https://github.com/rspec/rspec-expectations/blob/v3.12.3/lib/rspec/matchers/composable.rb#L45
                         #
                         # @example RSpec mocks arguments matchers.
                         #   expect(result).to be_success.with_code(instance_of(Symbol))
                         #
-                        # @see https://rspec.info/features/3-12/rspec-expectations/built-in-matchers
-                        # @see https://rspec.info/documentation/3.12/rspec-expectations/RSpec/Matchers/BuiltIn.html
-                        # @see https://github.com/rspec/rspec-expectations/blob/v3.12.3/lib/rspec/matchers/composable.rb#L45
+                        # @see https://rspec.info/features/3-12/rspec-mocks/setting-constraints/matching-arguments
+                        # @see https://rspec.info/documentation/3.12/rspec-mocks/RSpec/Mocks/ArgumentMatchers.html
+                        # @see https://github.com/rspec/rspec-mocks/blob/v3.12.3/lib/rspec/mocks/argument_matchers.rb#L282
                         #
                         # @internal
                         #   IMPORTANT: Must be kept in sync with `#==`.
@@ -77,7 +77,7 @@ module ConvenientService
                           return unless other.instance_of?(self.class)
 
                           return false if result.class != other.result.class
-                          return false unless other.value === value
+                          return false unless value === other.value
 
                           true
                         end

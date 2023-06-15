@@ -66,19 +66,43 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
             expect(code == other).to eq(false)
           end
 
-          context "when value is described by RSpec mocks arguments matcher" do
-            let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code.new(value: instance_of(Symbol), result: result) }
+          context "when value is described by RSpec expectations matcher" do
+            context "when value is described by RSpec expectations matcher in `code`" do
+              let(:code) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code.new(value: match(/foo/), result: result) }
+              let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code.new(value: value, result: result) }
 
-            it "does NOT respect that RSpec mocks arguments matcher" do
-              expect(code == other).to eq(false)
+              it "does NOT respect that RSpec expectations matcher" do
+                expect(code == other).to eq(false)
+              end
+            end
+
+            context "when value is described by RSpec expectations matcher in `other`" do
+              let(:code) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code.new(value: value, result: result) }
+              let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code.new(value: match(/foo/), result: result) }
+
+              it "does NOT respect that RSpec expectations matcher" do
+                expect(code == other).to eq(false)
+              end
             end
           end
 
-          context "when value is described by RSpec expectations matcher" do
-            let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code.new(value: match(/foo/), result: result) }
+          context "when value is described by RSpec mocks arguments matcher" do
+            context "when value is described by RSpec mocks arguments matcher in `code`" do
+              let(:code) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code.new(value: instance_of(Symbol), result: result) }
+              let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code.new(value: value, result: result) }
 
-            it "does NOT respect that RSpec expectations matcher" do
-              expect(code == other).to eq(false)
+              it "does NOT respect that RSpec mocks arguments matcher" do
+                expect(code == other).to eq(false)
+              end
+            end
+
+            context "when value is described by RSpec mocks arguments matcher in `other`" do
+              let(:code) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code.new(value: value, result: result) }
+              let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code.new(value: instance_of(Symbol), result: result) }
+
+              it "does NOT respect that RSpec mocks arguments matcher" do
+                expect(code == other).to eq(false)
+              end
             end
           end
         end
@@ -123,26 +147,50 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
           # NOTE: This spec is skipped since it is NOT possible to stub immediate values like symbols.
           #
           # specify do
-          #   expect { code === other }.to delegate_to(other.value, :===).with_arguments(code.value)
+          #   expect { code === other }.to delegate_to(code.value, :===).with_arguments(other.value)
           # end
 
           it "returns `false`" do
             expect(code === other).to eq(false)
           end
 
-          context "when value is described by RSpec mocks arguments matcher" do
-            let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code.new(value: instance_of(Symbol), result: result) }
+          context "when value is described by RSpec expectations matcher" do
+            context "when value is described by RSpec expectations matcher in `code`" do
+              let(:code) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code.new(value: match(/foo/), result: result) }
+              let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code.new(value: value, result: result) }
 
-            it "respects that RSpec mocks arguments matcher" do
-              expect(code === other).to eq(true)
+              it "respects that RSpec expectations matcher" do
+                expect(code === other).to eq(true)
+              end
+            end
+
+            context "when value is described by RSpec expectations matcher in `other`" do
+              let(:code) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code.new(value: value, result: result) }
+              let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code.new(value: match(/foo/), result: result) }
+
+              it "does NOT respect that RSpec expectations matcher" do
+                expect(code === other).to eq(false)
+              end
             end
           end
 
-          context "when value is described by RSpec expectations matcher" do
-            let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code.new(value: match(/foo/), result: result) }
+          context "when value is described by RSpec mocks arguments matcher" do
+            context "when value is described by RSpec mocks arguments matcher in `code`" do
+              let(:code) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code.new(value: instance_of(Symbol), result: result) }
+              let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code.new(value: value, result: result) }
 
-            it "respects that RSpec expectations matcher" do
-              expect(code === other).to eq(true)
+              it "respects that RSpec mocks arguments matcher" do
+                expect(code === other).to eq(true)
+              end
+            end
+
+            context "when value is described by RSpec mocks arguments matcher in `other`" do
+              let(:code) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code.new(value: value, result: result) }
+              let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code.new(value: instance_of(Symbol), result: result) }
+
+              it "does NOT respect that RSpec mocks arguments matcher" do
+                expect(code === other).to eq(false)
+              end
             end
           end
         end
@@ -154,7 +202,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
           # NOTE: This spec is skipped since it is NOT possible to stub immediate values like symbols.
           #
           # specify do
-          #   expect { code === other }.to delegate_to(code.result.class, :==).with_arguments(other.result.class)
+          #   expect { code === other }.to delegate_to(code.result.class).with_arguments(other.result.class, :===)
           # end
 
           it "returns `false`" do

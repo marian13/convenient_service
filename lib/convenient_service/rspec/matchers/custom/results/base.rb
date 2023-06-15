@@ -40,9 +40,9 @@ module ConvenientService
 
               rules << ->(result) { result.service.instance_of?(service_class) } if used_of_service?
               rules << ->(result) { Commands::MatchResultStep.call(result: result, step: step) } if used_of_step?
-              rules << ->(result) { result.unsafe_data.public_send(comparison_method, result.class.data(value: data, result: result)) } if used_data?
-              rules << ->(result) { result.unsafe_message.public_send(comparison_method, result.class.message(value: message, result: result)) } if used_message?
-              rules << ->(result) { result.unsafe_code.public_send(comparison_method, result.class.code(value: code, result: result)) } if used_code?
+              rules << ->(result) { result.class.data(value: data, result: result).public_send(comparison_method, result.unsafe_data) } if used_data?
+              rules << ->(result) { result.class.message(value: message, result: result).public_send(comparison_method, result.unsafe_message) } if used_message?
+              rules << ->(result) { result.class.code(value: code, result: result).public_send(comparison_method, result.unsafe_code) } if used_code?
 
               condition = Utils::Proc.conjunct(rules)
 

@@ -69,19 +69,43 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
             expect(message == other).to eq(false)
           end
 
-          context "when value is described by RSpec mocks arguments matcher" do
-            let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message.new(value: instance_of(String), result: result) }
+          context "when value is described by RSpec expectations matcher" do
+            context "when value is described by RSpec expectations matcher in `message`" do
+              let(:message) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message.new(value: match(/foo/), result: result) }
+              let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message.new(value: value, result: result) }
 
-            it "does NOT respect that RSpec mocks arguments matcher" do
-              expect(message == other).to eq(false)
+              it "does NOT respect that RSpec expectations matcher" do
+                expect(message == other).to eq(false)
+              end
+            end
+
+            context "when value is described by RSpec expectations matcher in `other`" do
+              let(:message) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message.new(value: value, result: result) }
+              let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message.new(value: match(/foo/), result: result) }
+
+              it "does NOT respect that RSpec expectations matcher" do
+                expect(message == other).to eq(false)
+              end
             end
           end
 
-          context "when value is described by RSpec expectations matcher" do
-            let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message.new(value: match(/foo/), result: result) }
+          context "when value is described by RSpec mocks arguments matcher" do
+            context "when value is described by RSpec mocks arguments matcher in `message`" do
+              let(:message) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message.new(value: instance_of(String), result: result) }
+              let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message.new(value: value, result: result) }
 
-            it "does NOT respect that RSpec expectations matcher" do
-              expect(message == other).to eq(false)
+              it "does NOT respect that RSpec mocks arguments matcher" do
+                expect(message == other).to eq(false)
+              end
+            end
+
+            context "when value is described by RSpec mocks arguments matcher in `other`" do
+              let(:message) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message.new(value: value, result: result) }
+              let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message.new(value: instance_of(String), result: result) }
+
+              it "does NOT respect that RSpec mocks arguments matcher" do
+                expect(message == other).to eq(false)
+              end
             end
           end
         end
@@ -128,26 +152,50 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
           let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message.new(value: +"bar", result: result) }
 
           specify do
-            expect { message === other }.to delegate_to(other.value, :===).with_arguments(message.value)
+            expect { message === other }.to delegate_to(message.value, :===).with_arguments(other.value)
           end
 
           it "returns `false`" do
             expect(message === other).to eq(false)
           end
 
-          context "when value is described by RSpec mocks arguments matcher" do
-            let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message.new(value: instance_of(String), result: result) }
+          context "when value is described by RSpec expectations matcher" do
+            context "when value is described by RSpec expectations matcher in `message`" do
+              let(:message) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message.new(value: match(/foo/), result: result) }
+              let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message.new(value: value, result: result) }
 
-            it "respects that RSpec mocks arguments matcher" do
-              expect(message === other).to eq(true)
+              it "respects that RSpec expectations matcher" do
+                expect(message === other).to eq(true)
+              end
+            end
+
+            context "when value is described by RSpec expectations matcher in `other`" do
+              let(:message) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message.new(value: value, result: result) }
+              let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message.new(value: match(/foo/), result: result) }
+
+              it "does NOT respect that RSpec expectations matcher" do
+                expect(message === other).to eq(false)
+              end
             end
           end
 
-          context "when value is described by RSpec expectations matcher" do
-            let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message.new(value: match(/foo/), result: result) }
+          context "when value is described by RSpec mocks arguments matcher" do
+            context "when value is described by RSpec mocks arguments matcher in `message`" do
+              let(:message) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message.new(value: instance_of(String), result: result) }
+              let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message.new(value: value, result: result) }
 
-            it "respects that RSpec expectations matcher" do
-              expect(message === other).to eq(true)
+              it "respects that RSpec mocks arguments matcher" do
+                expect(message === other).to eq(true)
+              end
+            end
+
+            context "when value is described by RSpec mocks arguments matcher in `other`" do
+              let(:message) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message.new(value: value, result: result) }
+              let(:other) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message.new(value: instance_of(String), result: result) }
+
+              it "does NOT respect that RSpec mocks arguments matcher" do
+                expect(message === other).to eq(false)
+              end
             end
           end
         end
