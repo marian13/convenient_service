@@ -15,7 +15,7 @@ module ConvenientService
                       # @return [Boolean]
                       #
                       def matches_arguments?(arguments)
-                        Utils::Bool.to_bool(arguments == matcher.expected_arguments)
+                        Utils.to_bool(arguments == matcher.expected_arguments)
                       end
 
                       ##

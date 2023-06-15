@@ -22,7 +22,7 @@ module ConvenientService
           def matches?(klass)
             @klass = klass
 
-            Utils::Bool.to_bool(klass < base_klass)
+            Utils.to_bool(klass < base_klass)
           end
 
           def description

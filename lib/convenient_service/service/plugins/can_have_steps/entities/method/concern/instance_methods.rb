@@ -35,7 +35,7 @@ module ConvenientService
                 end
 
                 def has_organizer?
-                  Utils::Bool.to_bool(organizer)
+                  Utils.to_bool(organizer)
                 end
 
                 def reassignment?(name)

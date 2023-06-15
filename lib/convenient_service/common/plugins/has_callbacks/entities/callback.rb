@@ -32,7 +32,7 @@ module ConvenientService
             # @return [Boolean]
             #
             def called?
-              Utils::Bool.to_bool(@called)
+              Utils.to_bool(@called)
             end
 
             ##

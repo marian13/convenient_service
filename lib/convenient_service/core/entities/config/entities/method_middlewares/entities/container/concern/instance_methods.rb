@@ -37,7 +37,7 @@ module ConvenientService
                     # @return [UnboundMethod, nil]
                     #
                     def super_method_defined?(method_name)
-                      Utils::Bool.to_bool(resolve_unbound_super_method(method_name))
+                      Utils.to_bool(resolve_unbound_super_method(method_name))
                     end
 
                     ##

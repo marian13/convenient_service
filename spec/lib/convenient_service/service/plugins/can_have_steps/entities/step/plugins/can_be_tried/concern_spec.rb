@@ -83,7 +83,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       #
       # specify do
       #   expect { step.try_step? }
-      #     .to delegate_to(ConvenientService::Utils::Bool, :to_bool)
+      #     .to delegate_to(ConvenientService::Utils, :to_bool)
       #     .with_arguments(step.internals.cache[:try_step])
       #     .and_return_its_value
       # end

@@ -16,7 +16,7 @@ module ConvenientService
                     # @return [Bool]
                     #
                     def completed?
-                      Utils::Bool.to_bool(internals.cache[:completed])
+                      Utils.to_bool(internals.cache[:completed])
                     end
 
                     ##

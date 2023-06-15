@@ -32,7 +32,7 @@ module ConvenientService
 
             commands.AssertValidScope.call(scope: scope)
 
-            Utils::Bool.to_bool(container.exported_methods.find_by(slug: slug, scope: scope))
+            Utils.to_bool(container.exported_methods.find_by(slug: slug, scope: scope))
           end
 
           ##

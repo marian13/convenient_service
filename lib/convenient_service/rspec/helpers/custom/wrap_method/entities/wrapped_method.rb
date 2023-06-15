@@ -124,7 +124,7 @@ module ConvenientService
               # @return [Boolean]
               #
               def chain_called?
-                Utils::Bool.to_bool(defined? @chain_called)
+                Utils.to_bool(defined? @chain_called)
               end
 
               ##

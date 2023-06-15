@@ -63,7 +63,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       #
       # specify do
       #   expect { step_instance.completed? }
-      #     .to delegate_to(ConvenientService::Utils::Bool, :to_bool)
+      #     .to delegate_to(ConvenientService::Utils, :to_bool)
       #     .with_arguments(step_instance.internals.cache[:completed])
       #     .and_return_its_value
       # end
@@ -95,7 +95,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       #
       # specify do
       #   expect { step_instance.not_completed? }
-      #     .to delegate_to(ConvenientService::Utils::Bool, :to_bool)
+      #     .to delegate_to(ConvenientService::Utils, :to_bool)
       #     .with_arguments(step_instance.internals.cache[:completed])
       #     .and_return_its_value
       # end

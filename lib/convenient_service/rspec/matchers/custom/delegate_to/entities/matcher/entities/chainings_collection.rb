@@ -107,28 +107,28 @@ module ConvenientService
                   # @return [Boolean]
                   #
                   def should_call_original?
-                    Utils::Bool.to_bool(call_original&.value)
+                    Utils.to_bool(call_original&.value)
                   end
 
                   ##
                   # @return [Boolean]
                   #
                   def has_call_original?
-                    Utils::Bool.to_bool(call_original)
+                    Utils.to_bool(call_original)
                   end
 
                   ##
                   # @return [Boolean]
                   #
                   def has_arguments?
-                    Utils::Bool.to_bool(arguments)
+                    Utils.to_bool(arguments)
                   end
 
                   ##
                   # @return [Boolean]
                   #
                   def has_return_its_value?
-                    Utils::Bool.to_bool(return_its_value)
+                    Utils.to_bool(return_its_value)
                   end
 
                   ##

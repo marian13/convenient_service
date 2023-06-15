@@ -52,7 +52,7 @@ module ConvenientService
                 def match_service_step?
                   service_step = Commands::FindResultServiceStep.call(result: result, service_class: step)
 
-                  Utils::Bool.to_bool(service_step)
+                  Utils.to_bool(service_step)
                 end
 
                 ##
@@ -61,7 +61,7 @@ module ConvenientService
                 def match_result_method_step?
                   result_method_step = Commands::FindResultResultMethodStep.call(result: result)
 
-                  Utils::Bool.to_bool(result_method_step)
+                  Utils.to_bool(result_method_step)
                 end
 
                 ##
@@ -70,7 +70,7 @@ module ConvenientService
                 def match_method_step?
                   method_step = Commands::FindResultMethodStep.call(result: result, method_name: step)
 
-                  Utils::Bool.to_bool(method_step)
+                  Utils.to_bool(method_step)
                 end
 
                 ##
