@@ -6,12 +6,15 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Commands::ExtractParams do
+  include ConvenientService::RSpec::Matchers::DelegateTo
+
   example_group "class methods" do
     describe ".call" do
       let(:args) { [Class.new] }
-      let(:default_kwargs) { {in: [:foo], out: [:bar], index: index, organizer: organizer} }
+      let(:default_kwargs) { {in: [:foo], out: [:bar], index: index, container: container, organizer: organizer} }
       let(:kwargs) { default_kwargs }
       let(:index) { 0 }
+      let(:container) { Object }
       let(:organizer) { Object.new }
       let(:command_result) { described_class.call(args: args, kwargs: kwargs) }
 
@@ -71,9 +74,29 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         end
       end
 
+      example_group "`container`" do
+        it "returns `kwargs[:container]` as `container`" do
+          expect(command_result.container).to eq(container)
+        end
+      end
+
       example_group "`organizer`" do
         it "returns `kwargs[:organizer]` as `organizer`" do
           expect(command_result.organizer).to eq(organizer)
+        end
+      end
+
+      example_group "`extra_kwargs`" do
+        let(:default_kwargs) { {in: [:foo], out: [:bar], index: index, organizer: organizer, try: false} }
+
+        specify do
+          expect { command_result }
+            .to delegate_to(ConvenientService::Utils::Hash, :except)
+            .with_arguments(default_kwargs, [:in, :out, :index, :container, :organizer])
+        end
+
+        it "returns `kwargs` without `[:in, :out, :index, :container, :organizer]` keys as `extra_kwargs`" do
+          expect(command_result.extra_kwargs).to eq({try: false})
         end
       end
     end

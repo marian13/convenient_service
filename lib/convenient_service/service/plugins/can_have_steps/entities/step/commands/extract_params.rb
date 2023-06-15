@@ -21,11 +21,9 @@ module ConvenientService
                     inputs: Utils::Array.wrap(kwargs[:in]),
                     outputs: Utils::Array.wrap(kwargs[:out]),
                     index: kwargs[:index],
-                    ##
-                    # TODO: Specs.
-                    #
                     container: kwargs[:container],
-                    organizer: kwargs[:organizer]
+                    organizer: kwargs[:organizer],
+                    extra_kwargs: Utils::Hash.except(kwargs, [:in, :out, :index, :container, :organizer])
                   )
                 end
               end
