@@ -220,10 +220,6 @@ module ConvenientService
             use Plugins::Step::HasInspect::Concern
           end
 
-          middlewares :initialize do
-            use Plugins::Common::NormalizesEnv::Middleware
-          end
-
           middlewares :service_result do
             use Plugins::Common::NormalizesEnv::Middleware
             use Plugins::Common::CachesReturnValue::Middleware

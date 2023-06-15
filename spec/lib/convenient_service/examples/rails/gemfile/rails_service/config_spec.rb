@@ -464,19 +464,6 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::RailsService::Config
             end
           end
 
-          example_group "#initialize middlewares" do
-            let(:initialize_middlewares) do
-              [
-                ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeTried::Initialize::Middleware
-              ]
-            end
-
-            it "sets service step middlewares for `#initialize`" do
-              expect(service_class::Step.middlewares(:initialize).to_a).to eq(initialize_middlewares)
-            end
-          end
-
           example_group "#service_result middlewares" do
             let(:service_result_middlewares) do
               [

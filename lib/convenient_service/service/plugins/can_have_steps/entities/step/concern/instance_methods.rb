@@ -36,6 +36,7 @@ module ConvenientService
                   :index,
                   :container,
                   :organizer,
+                  :extra_kwargs,
                   to: :params
 
                 ##

@@ -74,8 +74,8 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
     describe "#try_step?" do
       specify do
         expect { step.try_step? }
-          .to delegate_to(step.internals.cache, :read)
-          .with_arguments(:try_step)
+          .to delegate_to(step.params.extra_kwargs, :[])
+          .with_arguments(:try)
       end
 
       ##
@@ -84,7 +84,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       # specify do
       #   expect { step.try_step? }
       #     .to delegate_to(ConvenientService::Utils, :to_bool)
-      #     .with_arguments(step.internals.cache[:try_step])
+      #     .with_arguments(step.params.extra_kwargs[:try])
       #     .and_return_its_value
       # end
 

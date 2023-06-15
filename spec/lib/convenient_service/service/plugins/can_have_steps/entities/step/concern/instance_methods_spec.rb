@@ -216,6 +216,15 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       end
     end
 
+    describe "#extra_kwargs" do
+      specify do
+        expect { step.extra_kwargs }
+          .to delegate_to(step.params, :extra_kwargs)
+          .without_arguments
+          .and_return_its_value
+      end
+    end
+
     example_group "comparison" do
       describe "#==" do
         context "when `other` has different class" do

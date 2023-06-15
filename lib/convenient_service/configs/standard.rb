@@ -152,10 +152,6 @@ module ConvenientService
             use Plugins::Step::CanBeTried::Concern
           end
 
-          middlewares :initialize do
-            use Plugins::Step::CanBeTried::Initialize::Middleware
-          end
-
           middlewares :result do
             use Plugins::Step::CanBeTried::Result::Middleware
             use Plugins::Step::CanHaveParentResult::Middleware

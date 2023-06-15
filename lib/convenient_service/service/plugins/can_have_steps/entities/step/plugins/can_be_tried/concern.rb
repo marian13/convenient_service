@@ -16,7 +16,7 @@ module ConvenientService
                     # @return [Bool]
                     #
                     def try_step?
-                      Utils.to_bool(internals.cache[:try_step])
+                      Utils.to_bool(params.extra_kwargs[:try])
                     end
 
                     ##
