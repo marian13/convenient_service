@@ -49,6 +49,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
   end
 
   example_group "instance methods" do
+    include ConvenientService::RSpec::Matchers::CacheItsValue
     include ConvenientService::RSpec::Matchers::DelegateTo
 
     example_group "attributes" do
@@ -237,6 +238,64 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
           .to delegate_to(caller, :define_output_in_container!)
           .with_arguments(container, index: index, method: method)
           .and_return_its_value
+      end
+    end
+
+    describe "#organizer" do
+      context "when `method` does NOT have `organizer`" do
+        let(:method_instance) { method_class.new(**ConvenientService::Utils::Hash.except(method_kwargs, [:organizer])) }
+
+        context "when `raise_when_missing` is NOT passed" do
+          let(:message) do
+            <<~TEXT
+              Organizer for method `:#{method.name}` is NOT assigned yet.
+
+              Did you forget to set it?
+            TEXT
+          end
+
+          it "defaults to `true`" do
+            expect { method.organizer }
+              .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Errors::MethodHasNoOrganizer)
+              .with_message(message)
+          end
+        end
+
+        context "when `raise_when_missing` is `false`" do
+          it "returns `nil`" do
+            expect(method.organizer(raise_when_missing: false)).to be_nil
+          end
+        end
+
+        context "when `raise_when_missing` is `true`" do
+          let(:method_instance) { method_class.new(**ConvenientService::Utils::Hash.except(method_kwargs, [:organizer])) }
+
+          let(:message) do
+            <<~TEXT
+              Organizer for method `:#{method.name}` is NOT assigned yet.
+
+              Did you forget to set it?
+            TEXT
+          end
+
+          it "returns `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Errors::MethodHasNoOrganizer`" do
+            expect { method.organizer(raise_when_missing: true) }
+              .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Errors::MethodHasNoOrganizer)
+              .with_message(message)
+          end
+        end
+      end
+
+      context "when `method` has `organizer`" do
+        let(:method_instance) { method_class.new(**method_kwargs.merge(organizer: organizer)) }
+
+        it "returns that organizer" do
+          expect(method.organizer).to eq(organizer)
+        end
+
+        specify do
+          expect { method.organizer }.to cache_its_value
+        end
       end
     end
 

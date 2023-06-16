@@ -61,6 +61,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
   end
 
   example_group "instance methods" do
+    include ConvenientService::RSpec::Matchers::CacheItsValue
     include ConvenientService::RSpec::Matchers::DelegateTo
 
     describe "#success?" do
@@ -207,15 +208,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       end
     end
 
-    describe "#organizer" do
-      specify do
-        expect { step.organizer }
-          .to delegate_to(step.params, :organizer)
-          .without_arguments
-          .and_return_its_value
-      end
-    end
-
     describe "#extra_kwargs" do
       specify do
         expect { step.extra_kwargs }
@@ -348,6 +340,67 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
         it "returns that reassignemnt" do
           expect(step.reassignment(name)).to eq(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method.cast(reassignemnt, direction: :output))
+        end
+      end
+    end
+
+    describe "#organizer" do
+      specify do
+        expect { step.organizer(raise_when_missing: false) }
+          .to delegate_to(step.params, :organizer)
+          .without_arguments
+          .and_return_its_value
+      end
+
+      context "when `step` does NOT have `organizer`" do
+        let(:organizer) { nil }
+
+        context "when `raise_when_missing` is NOT passed" do
+          let(:message) do
+            <<~TEXT
+              Step `#{step.printable_service}` has not assigned organizer.
+
+              Did you forget to set it?
+            TEXT
+          end
+
+          it "defaults to `true`" do
+            expect { step.organizer }
+              .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Errors::StepHasNoOrganizer)
+              .with_message(message)
+          end
+        end
+
+        context "when `raise_when_missing` is `false`" do
+          it "returns `nil`" do
+            expect(step.organizer(raise_when_missing: false)).to be_nil
+          end
+        end
+
+        context "when `raise_when_missing` is `true`" do
+          let(:message) do
+            <<~TEXT
+              Step `#{step.printable_service}` has not assigned organizer.
+
+              Did you forget to set it?
+            TEXT
+          end
+
+          it "returns `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Errors::StepHasNoOrganizer`" do
+            expect { step.organizer(raise_when_missing: true) }
+              .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Errors::StepHasNoOrganizer)
+              .with_message(message)
+          end
+        end
+      end
+
+      context "when `step` has `organizer`" do
+        it "returns that organizer" do
+          expect(step.organizer).to eq(organizer)
+        end
+
+        specify do
+          expect { step.organizer }.to cache_its_value
         end
       end
     end

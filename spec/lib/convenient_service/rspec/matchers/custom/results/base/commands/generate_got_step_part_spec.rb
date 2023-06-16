@@ -28,7 +28,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Comman
         end
       end
 
-      context "when step is `nil`" do
+      context "when result has step" do
         let(:service) do
           Class.new do
             include ConvenientService::Configs::Standard
@@ -42,7 +42,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Comman
         end
 
         it "returns got step part" do
-          expect(command_result).to eq("of step `#{result.step.service.klass}`")
+          expect(command_result).to eq("of step `#{result.step.printable_service}`")
         end
       end
     end

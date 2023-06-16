@@ -18,7 +18,7 @@ module ConvenientService
                     def next(...)
                       return chain.next(...) unless entity.method_step?
 
-                      ":#{entity.method.key}"
+                      ":#{entity.method}"
                     end
                   end
                 end

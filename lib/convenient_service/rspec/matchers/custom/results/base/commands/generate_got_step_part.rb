@@ -29,7 +29,7 @@ module ConvenientService
                   if result.step.nil?
                     "without step"
                   else
-                    "of step `#{result.step.service.klass}`"
+                    "of step `#{result.step.printable_service}`"
                   end
                 end
               end

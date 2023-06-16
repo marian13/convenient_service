@@ -173,11 +173,11 @@ module ConvenientService
                 #   - https://boringrails.com/tips/activerecord-where-missing-associations
                 #
                 def organizer(raise_when_missing: true)
-                  if raise_when_missing
-                    raise Errors::StepHasNoOrganizer.new(step: self) unless params.organizer
-                  end
+                  @organizer ||= params.organizer
 
-                  params.organizer
+                  raise Errors::StepHasNoOrganizer.new(step: self) if @organizer.nil? && raise_when_missing
+
+                  @organizer
                 end
 
                 ##
