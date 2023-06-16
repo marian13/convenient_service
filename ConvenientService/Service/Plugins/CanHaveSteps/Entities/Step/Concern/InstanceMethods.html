@@ -1933,11 +1933,11 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 175</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_organizer'>organizer</span><span class='lparen'>(</span><span class='label'>raise_when_missing:</span> <span class='kw'>true</span><span class='rparen'>)</span>
-  <span class='kw'>if</span> <span class='id identifier rubyid_raise_when_missing'>raise_when_missing</span>
-    <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="../Errors.html" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Errors (module)">Errors</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Errors/StepHasNoOrganizer.html" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Errors::StepHasNoOrganizer (class)">StepHasNoOrganizer</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Errors/StepHasNoOrganizer.html#initialize-instance_method" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Errors::StepHasNoOrganizer#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>step:</span> <span class='kw'>self</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_organizer'>organizer</span>
-  <span class='kw'>end</span>
+  <span class='ivar'>@organizer</span> <span class='op'>||=</span> <span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_organizer'>organizer</span>
 
-  <span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_organizer'>organizer</span>
+  <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="../Errors.html" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Errors (module)">Errors</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Errors/StepHasNoOrganizer.html" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Errors::StepHasNoOrganizer (class)">StepHasNoOrganizer</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Errors/StepHasNoOrganizer.html#initialize-instance_method" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Errors::StepHasNoOrganizer#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>step:</span> <span class='kw'>self</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='ivar'>@organizer</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_raise_when_missing'>raise_when_missing</span>
+
+  <span class='ivar'>@organizer</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -2818,7 +2818,7 @@
 </div>
 
       <div id="footer">
-  Generated on Fri Jun 16 01:23:43 2023 by
+  Generated on Fri Jun 16 02:10:26 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>
