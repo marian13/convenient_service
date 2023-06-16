@@ -17,7 +17,7 @@ module ConvenientService
                     # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeResultStep::CanBeExecuted::Errors::MethodForStepIsNotDefined]
                     #
                     # @internal
-                    #   NOTE: `kwargs` are intentionally NOT passed to `object.__send__(method)`, since all the corresponding methods are available inside `object.__send__(method)` body.
+                    #   NOTE: `kwargs` are intentionally NOT passed to `object.__send__(method)`, since all the corresponding methods are available inside `entity.organizer.__send__(entity.method)` body.
                     #
                     def next(...)
                       return chain.next(...) unless entity.method_step?
