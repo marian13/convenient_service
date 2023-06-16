@@ -187,7 +187,7 @@ module ConvenientService
 
               class NotCompletedStep < ::ConvenientService::Error
                 ##
-                # @param method_name [Symbol, String]
+                # @param method_name [Symbol]
                 # @param step [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step]
                 # @return [void]
                 #

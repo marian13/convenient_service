@@ -14,6 +14,9 @@ module ConvenientService
                   ##
                   # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
                   #
+                  # @internal
+                  #   NOTE: `result.copy` is used to return a fresh result, with unchecked status.
+                  #
                   def next(...)
                     result = chain.next(...)
 

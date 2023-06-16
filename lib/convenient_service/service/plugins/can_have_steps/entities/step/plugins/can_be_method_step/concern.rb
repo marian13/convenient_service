@@ -13,7 +13,7 @@ module ConvenientService
 
                   instance_methods do
                     ##
-                    # @return [Symbol, String, nil]
+                    # @return [Symbol, nil]
                     #
                     def method
                       extra_kwargs[:method]

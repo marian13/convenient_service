@@ -55,7 +55,7 @@ module ConvenientService
                     end
 
                     ##
-                    # @return [Symbol, String]
+                    # @return [Symbol]
                     #
                     def method_name
                       @method_name ||= entity.method

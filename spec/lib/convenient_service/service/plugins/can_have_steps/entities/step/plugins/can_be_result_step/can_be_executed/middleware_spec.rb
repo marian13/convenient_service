@@ -11,7 +11,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
   example_group "inheritance" do
     include ConvenientService::RSpec::Matchers::BeDescendantOf
 
-    subject { described_class }
+    subject { middleware }
 
     it { is_expected.to be_descendant_of(ConvenientService::MethodChainMiddleware) }
   end
@@ -25,7 +25,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       end
 
       it "returns intended methods" do
-        expect(described_class.intended_methods).to eq(spec.intended_methods)
+        expect(middleware.intended_methods).to eq(spec.intended_methods)
       end
     end
   end
