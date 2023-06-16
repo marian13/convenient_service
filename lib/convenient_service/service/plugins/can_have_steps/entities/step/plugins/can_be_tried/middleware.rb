@@ -14,15 +14,12 @@ module ConvenientService
                   ##
                   # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
                   #
-                  # @internal
-                  #   NOTE: `result.copy` is used to return a fresh result, with unchecked status.
-                  #
                   def next(...)
                     result = chain.next(...)
 
                     return result unless entity.try_step?
 
-                    return result.copy if result.success?
+                    return result if result.success?(mark_status_as_checked: false)
 
                     entity.try_result(...)
                   end

@@ -114,8 +114,8 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Middleware do
           expect(method_value).to eq(ConvenientService::Utils::Array.find_last(service_instance.steps, &:completed?).result)
         end
 
-        it "copies result of intermediate step" do
-          expect(method_value.object_id).not_to eq(ConvenientService::Utils::Array.find_last(service_instance.steps, &:completed?).result.object_id)
+        it "returns result with unchecked status" do
+          expect(method_value.has_checked_status?).to eq(false)
         end
 
         it "does NOT evaluate results of following steps" do
@@ -206,8 +206,8 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Middleware do
           expect(method_value).to eq(service_instance.steps.last.result)
         end
 
-        it "copies result of last step" do
-          expect(method_value.object_id).not_to eq(service_instance.steps.last.result.object_id)
+        it "returns result with unchecked status" do
+          expect(method_value.has_checked_status?).to eq(false)
         end
 
         it "marks intermediate step as completed" do

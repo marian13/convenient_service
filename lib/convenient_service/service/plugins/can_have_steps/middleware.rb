@@ -13,7 +13,7 @@ module ConvenientService
           def next(...)
             return chain.next(...) if entity.steps.none?
 
-            last_completed_step.result.copy
+            last_completed_step.result
           end
 
           private
@@ -50,7 +50,7 @@ module ConvenientService
           #
           def find_first_not_successful_step_with_side_effects_during_lookup
             entity.steps.find do |step|
-              step.not_success?
+              step.not_success?(mark_status_as_checked: false)
                 .tap { step.mark_as_completed! }
                 .tap { step.trigger_callback }
             end

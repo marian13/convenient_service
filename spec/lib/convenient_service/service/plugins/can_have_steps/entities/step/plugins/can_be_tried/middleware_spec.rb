@@ -151,6 +151,10 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           it "returns result" do
             expect(method_value).to be_success.with_data(from: :result).of_step(first_step)
           end
+
+          it "returns result with unchecked status" do
+            expect(method_value.has_checked_status?).to eq(false)
+          end
         end
       end
     end

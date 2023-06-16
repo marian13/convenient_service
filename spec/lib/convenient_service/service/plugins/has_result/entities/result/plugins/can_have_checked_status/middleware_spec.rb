@@ -81,6 +81,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
         specify do
           expect { method_value }
             .to call_chain_next.on(method)
+            .without_arguments
             .and_return_its_value
         end
       end
@@ -97,6 +98,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
         specify do
           expect { method_value }
             .to call_chain_next.on(method)
+            .without_arguments
             .and_return_its_value
         end
       end
@@ -113,6 +115,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
         specify do
           expect { method_value }
             .to call_chain_next.on(method)
+            .without_arguments
             .and_return_its_value
         end
       end
