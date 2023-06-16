@@ -210,7 +210,8 @@ RSpec.describe ConvenientService::Configs::Standard do
                 ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanRecalculateResult::Concern,
                 ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasStep::Concern,
                 ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanBeTried::Concern,
-                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanHaveParentResult::Concern
+                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanHaveParentResult::Concern,
+                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanHaveCheckedStatus::Concern
               ]
             end
 
@@ -239,7 +240,7 @@ RSpec.describe ConvenientService::Configs::Standard do
             let(:is_success_middlewares) do
               [
                 ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::MarksResultStatusAsChecked::Middleware
+                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanHaveCheckedStatus::Middleware
               ]
             end
 
@@ -252,7 +253,7 @@ RSpec.describe ConvenientService::Configs::Standard do
             let(:is_failure_middlewares) do
               [
                 ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::MarksResultStatusAsChecked::Middleware
+                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanHaveCheckedStatus::Middleware
               ]
             end
 
@@ -265,7 +266,7 @@ RSpec.describe ConvenientService::Configs::Standard do
             let(:is_error_middlewares) do
               [
                 ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::MarksResultStatusAsChecked::Middleware
+                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanHaveCheckedStatus::Middleware
               ]
             end
 
@@ -278,7 +279,7 @@ RSpec.describe ConvenientService::Configs::Standard do
             let(:is_not_success_middlewares) do
               [
                 ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::MarksResultStatusAsChecked::Middleware
+                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanHaveCheckedStatus::Middleware
               ]
             end
 
@@ -291,7 +292,7 @@ RSpec.describe ConvenientService::Configs::Standard do
             let(:is_not_failure_middlewares) do
               [
                 ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::MarksResultStatusAsChecked::Middleware
+                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanHaveCheckedStatus::Middleware
               ]
             end
 
@@ -304,7 +305,7 @@ RSpec.describe ConvenientService::Configs::Standard do
             let(:is_not_error_middlewares) do
               [
                 ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::MarksResultStatusAsChecked::Middleware
+                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanHaveCheckedStatus::Middleware
               ]
             end
 

@@ -92,7 +92,7 @@ module ConvenientService
                         end
 
                         ##
-                        # @param statuses [Array<Symbol, String, ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status>]
+                        # @param statuses [Array<ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status>]
                         # @return [Boolean]
                         #
                         def in?(statuses)

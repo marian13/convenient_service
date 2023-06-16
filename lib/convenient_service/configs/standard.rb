@@ -95,6 +95,7 @@ module ConvenientService
             use Plugins::Result::HasStep::Concern
             use Plugins::Result::CanBeTried::Concern
             use Plugins::Result::CanHaveParentResult::Concern
+            use Plugins::Result::CanHaveCheckedStatus::Concern
           end
 
           middlewares :initialize do
@@ -104,27 +105,27 @@ module ConvenientService
           end
 
           middlewares :success? do
-            use Plugins::Result::MarksResultStatusAsChecked::Middleware
+            use Plugins::Result::CanHaveCheckedStatus::Middleware
           end
 
           middlewares :failure? do
-            use Plugins::Result::MarksResultStatusAsChecked::Middleware
+            use Plugins::Result::CanHaveCheckedStatus::Middleware
           end
 
           middlewares :error? do
-            use Plugins::Result::MarksResultStatusAsChecked::Middleware
+            use Plugins::Result::CanHaveCheckedStatus::Middleware
           end
 
           middlewares :not_success? do
-            use Plugins::Result::MarksResultStatusAsChecked::Middleware
+            use Plugins::Result::CanHaveCheckedStatus::Middleware
           end
 
           middlewares :not_failure? do
-            use Plugins::Result::MarksResultStatusAsChecked::Middleware
+            use Plugins::Result::CanHaveCheckedStatus::Middleware
           end
 
           middlewares :not_error? do
-            use Plugins::Result::MarksResultStatusAsChecked::Middleware
+            use Plugins::Result::CanHaveCheckedStatus::Middleware
           end
 
           middlewares :data do

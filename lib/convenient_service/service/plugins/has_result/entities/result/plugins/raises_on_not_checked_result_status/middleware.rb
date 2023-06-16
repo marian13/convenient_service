@@ -15,6 +15,10 @@ module ConvenientService
                     :code
                   ], entity: :result
 
+                  ##
+                  # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+                  # @raise [ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::RaisesOnNotCheckedResultStatus::Errors::StatusIsNotChecked]
+                  #
                   def next(...)
                     assert_has_checked_status!
 
@@ -23,6 +27,10 @@ module ConvenientService
 
                   private
 
+                  ##
+                  # @return [void]
+                  # @raise [ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::RaisesOnNotCheckedResultStatus::Errors::StatusIsNotChecked]
+                  #
                   def assert_has_checked_status!
                     return if entity.internals.cache.exist?(:has_checked_status)
 

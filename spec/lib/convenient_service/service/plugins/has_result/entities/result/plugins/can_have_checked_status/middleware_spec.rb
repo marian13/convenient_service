@@ -4,7 +4,8 @@ require "spec_helper"
 
 require "convenient_service"
 
-RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::MarksResultStatusAsChecked::Middleware do
+# rubocop:disable RSpec/NestedGroups
+RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanHaveCheckedStatus::Middleware do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   let(:middleware) { described_class }
@@ -44,7 +45,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
       include ConvenientService::RSpec::Helpers::WrapMethod
       include ConvenientService::RSpec::Matchers::CallChainNext
 
-      subject(:method_value) { method.call }
+      subject(:method_value) { method.call(**kwargs) }
 
       let(:method) { wrap_method(result, :success?, observe_middleware: middleware) }
 
@@ -68,17 +69,54 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
 
       let(:result) { service.result }
 
-      specify do
-        expect { method_value }
-          .to delegate_to(result.internals.cache, :write)
-          .with_arguments(:has_checked_status, true)
+      context "when `mark_status_as_checked` option is NOT passed" do
+        let(:kwargs) { {} }
+
+        specify do
+          expect { method_value }
+            .to delegate_to(result.internals.cache, :write)
+            .with_arguments(:has_checked_status, true)
+        end
+
+        specify do
+          expect { method_value }
+            .to call_chain_next.on(method)
+            .and_return_its_value
+        end
       end
 
-      specify do
-        expect { method_value }
-          .to call_chain_next.on(method)
-          .and_return_its_value
+      context "when `mark_status_as_checked` option is `false`" do
+        let(:kwargs) { {mark_status_as_checked: false} }
+
+        specify do
+          expect { method_value }
+            .not_to delegate_to(result.internals.cache, :write)
+            .with_any_arguments
+        end
+
+        specify do
+          expect { method_value }
+            .to call_chain_next.on(method)
+            .and_return_its_value
+        end
+      end
+
+      context "when `mark_status_as_checked` option is `true`" do
+        let(:kwargs) { {mark_status_as_checked: true} }
+
+        specify do
+          expect { method_value }
+            .to delegate_to(result.internals.cache, :write)
+            .with_arguments(:has_checked_status, true)
+        end
+
+        specify do
+          expect { method_value }
+            .to call_chain_next.on(method)
+            .and_return_its_value
+        end
       end
     end
   end
 end
+# rubocop:enable RSpec/NestedGroups
