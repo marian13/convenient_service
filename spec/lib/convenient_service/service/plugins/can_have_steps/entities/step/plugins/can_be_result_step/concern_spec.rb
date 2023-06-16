@@ -52,7 +52,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         end
 
         before do
-          step.inputs.delete_if { |input| input.key.to_sym == :method_name }
+          step.extra_kwargs.delete(:method)
         end
 
         it "returns `false`" do

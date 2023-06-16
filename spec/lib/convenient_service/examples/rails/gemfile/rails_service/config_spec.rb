@@ -167,8 +167,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::RailsService::Config
           let(:step_class_middlewares) do
             [
               ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-              ConvenientService::Service::Plugins::CanHaveMethodSteps::Middleware,
-              ConvenientService::Service::Plugins::CanHaveResultStep::Middleware
+              ConvenientService::Service::Plugins::CanHaveMethodSteps::Middleware
             ]
           end
 
@@ -468,7 +467,9 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::RailsService::Config
             let(:service_result_middlewares) do
               [
                 ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-                ConvenientService::Common::Plugins::CachesReturnValue::Middleware
+                ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
+                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeResultStep::CanBeExecuted::Middleware,
+                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeMethodStep::CanBeExecuted::Middleware
               ]
             end
 
@@ -482,7 +483,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::RailsService::Config
               [
                 ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
                 ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
-                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeTried::Result::Middleware,
+                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeTried::Middleware,
                 ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveParentResult::Middleware
               ]
             end

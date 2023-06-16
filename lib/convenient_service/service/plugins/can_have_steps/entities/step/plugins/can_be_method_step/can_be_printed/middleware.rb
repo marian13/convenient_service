@@ -7,22 +7,18 @@ module ConvenientService
         module Entities
           class Step
             module Plugins
-              module CanBeTried
-                module Result
+              module CanBeMethodStep
+                module CanBePrinted
                   class Middleware < MethodChainMiddleware
-                    intended_for :result, entity: :step
+                    intended_for :printable_service, entity: :step
 
                     ##
-                    # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+                    # @return [String]
                     #
                     def next(...)
-                      result = chain.next(...)
+                      return chain.next(...) unless entity.method_step?
 
-                      return result unless entity.try_step?
-
-                      return result.copy if result.success?
-
-                      entity.try_result(...)
+                      ":#{entity.method.key}"
                     end
                   end
                 end

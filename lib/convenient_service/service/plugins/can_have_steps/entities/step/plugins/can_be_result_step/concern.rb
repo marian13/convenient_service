@@ -16,7 +16,7 @@ module ConvenientService
                     # @return [Boolean]
                     #
                     def result_step?
-                      method_step? && method.value.to_sym == :result
+                      method_step? && method == :result
                     end
                   end
                 end

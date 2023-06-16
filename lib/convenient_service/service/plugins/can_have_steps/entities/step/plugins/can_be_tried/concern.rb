@@ -21,6 +21,8 @@ module ConvenientService
 
                     ##
                     # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+                    # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Errors::StepHasNoOrganizer]
+                    #
                     # @note `service_try_result` has middlewares.
                     #
                     # @internal
@@ -28,13 +30,12 @@ module ConvenientService
                     #   TODO: Extract `StepDefinition`. This way `has_organizer?` check can be avoided completely.
                     #
                     def service_try_result
-                      assert_has_organizer!
-
                       service.klass.try_result(**input_values)
                     end
 
                     ##
                     # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+                    # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Errors::StepHasNoOrganizer]
                     # @note `try_result` has middlewares.
                     #
                     def try_result

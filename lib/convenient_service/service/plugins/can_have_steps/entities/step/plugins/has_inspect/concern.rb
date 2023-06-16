@@ -16,7 +16,7 @@ module ConvenientService
                     # @return [String]
                     #
                     def inspect
-                      return "<#{container.klass.name}::Step method: :#{method.value}>" if method_step?
+                      return "<#{container.klass.name}::Step method: :#{method}>" if method_step?
 
                       "<#{container.klass.name}::Step service: #{service.klass.name}>"
                     end

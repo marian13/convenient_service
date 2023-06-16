@@ -13,10 +13,15 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       include ConvenientService::Configs::Standard
 
       ##
-      # NOTE: Used by "raises `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Errors::StepHasNoOrganizer`" specs.
+      # @internal
+      #   NOTE: Used by "raises `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Errors::StepHasNoOrganizer`" specs.
       #
       def self.name
         "StepService"
+      end
+
+      def initialize(foo:)
+        @foo = foo
       end
 
       def result
@@ -34,7 +39,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       klass.class_exec(step_service_class) do |step_service_class|
         include ConvenientService::Configs::Standard
 
-        step step_service_class
+        step step_service_class, in: :foo
+
+        def foo
+          success
+        end
       end
     end
   end
@@ -141,15 +150,15 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       context "when `organizer` is NOT set" do
         let(:message) do
           <<~TEXT
-            Step `#{step.printable_service}` has not assigned organizer.
+            Organizer for method `:foo` is NOT assigned yet.
 
             Did you forget to set it?
           TEXT
         end
 
-        it "raises `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Errors::StepHasNoOrganizer`" do
+        it "returns `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Errors::MethodHasNoOrganizer`" do
           expect { step.copy(overrides: {kwargs: {organizer: nil}}).service_try_result }
-            .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Errors::StepHasNoOrganizer)
+            .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Errors::MethodHasNoOrganizer)
             .with_message(message)
         end
       end
@@ -170,15 +179,15 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       context "when `organizer` is NOT set" do
         let(:message) do
           <<~TEXT
-            Step `#{step.printable_service}` has not assigned organizer.
+            Organizer for method `:foo` is NOT assigned yet.
 
             Did you forget to set it?
           TEXT
         end
 
-        it "raises `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Errors::StepHasNoOrganizer`" do
+        it "returns `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Errors::MethodHasNoOrganizer`" do
           expect { step.copy(overrides: {kwargs: {organizer: nil}}).try_result }
-            .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Errors::StepHasNoOrganizer)
+            .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Errors::MethodHasNoOrganizer)
             .with_message(message)
         end
       end

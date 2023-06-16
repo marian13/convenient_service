@@ -155,12 +155,12 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
     describe "#reassignment?" do
       let(:name) { :foo }
 
-      specify {
+      specify do
         expect { method.reassignment?(name) }
           .to delegate_to(caller, :reassignment?)
           .with_arguments(name)
           .and_return_its_value
-      }
+      end
     end
 
     describe "#validate_as_input_for_container!" do
@@ -178,19 +178,19 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
         expect(method.validate_as_input_for_container!(container)).to eq(true)
       end
 
-      specify {
+      specify do
         expect { method.validate_as_input_for_container!(container) }
           .to delegate_to(direction, :validate_as_input_for_container!)
           .with_arguments(container, method: method)
           .and_return_its_value
-      }
+      end
 
-      specify {
+      specify do
         expect { method.validate_as_input_for_container!(container) }
           .to delegate_to(caller, :validate_as_input_for_container!)
           .with_arguments(container, method: method)
           .and_return_its_value
-      }
+      end
     end
 
     describe "#validate_as_output_for_container!" do
@@ -201,19 +201,19 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
         expect(method.validate_as_output_for_container!(container)).to eq(true)
       end
 
-      specify {
+      specify do
         expect { method.validate_as_output_for_container!(container) }
           .to delegate_to(direction, :validate_as_output_for_container!)
           .with_arguments(container, method: method)
           .and_return_its_value
-      }
+      end
 
-      specify {
+      specify do
         expect { method.validate_as_output_for_container!(container) }
           .to delegate_to(caller, :validate_as_output_for_container!)
           .with_arguments(container, method: method)
           .and_return_its_value
-      }
+      end
     end
 
     describe "#define_output_in_container!" do
@@ -225,19 +225,19 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
         expect(method.define_output_in_container!(container, index: index)).to eq(true)
       end
 
-      specify {
+      specify do
         expect { method.define_output_in_container!(container, index: index) }
           .to delegate_to(direction, :define_output_in_container!)
           .with_arguments(container, index: index, method: method)
           .and_return_its_value
-      }
+      end
 
-      specify {
+      specify do
         expect { method.define_output_in_container!(container, index: index) }
           .to delegate_to(caller, :define_output_in_container!)
           .with_arguments(container, index: index, method: method)
           .and_return_its_value
-      }
+      end
     end
 
     describe "#value" do
@@ -246,7 +246,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
 
         let(:error_message) do
           <<~TEXT
-            Organizer for method `#{method.name}` is NOT assigned yet.
+            Organizer for method `:#{method.name}` is NOT assigned yet.
 
             Did you forget to set it?
           TEXT

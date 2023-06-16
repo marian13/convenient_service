@@ -153,7 +153,7 @@ module ConvenientService
           end
 
           middlewares :result do
-            use Plugins::Step::CanBeTried::Result::Middleware
+            use Plugins::Step::CanBeTried::Middleware
             use Plugins::Step::CanHaveParentResult::Middleware
           end
 

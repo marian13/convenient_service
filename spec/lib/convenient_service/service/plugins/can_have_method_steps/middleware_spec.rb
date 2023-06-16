@@ -33,89 +33,56 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveMethodSteps::Middlewa
   example_group "instance methods" do
     describe "#call" do
       include ConvenientService::RSpec::Helpers::WrapMethod
+      include ConvenientService::RSpec::Matchers::CallChainNext
 
-      subject(:method_value) { method.call(*args, **kwargs) }
+      subject(:method_value) { method.call(service, **kwargs) }
 
-      let(:method) { wrap_method(service_class, :step, observe_middleware: middleware) }
+      let(:method) { wrap_method(container, :step, observe_middleware: middleware) }
 
-      let(:args) { [step_service] }
-      let(:kwargs) { {container: container, organizer: organizer} }
-
-      let(:service_class) do
+      let(:container) do
         Class.new.tap do |klass|
           klass.class_exec(middleware) do |middleware|
             include ConvenientService::Configs::Minimal
 
             middlewares :step, scope: :class do
-              delete ConvenientService::Service::Plugins::CanHaveResultStep::Middleware
-
               observe middleware
             end
           end
         end
       end
 
-      let(:service_instance) { service_class.new }
-      let(:container) { service_class }
-      let(:organizer) { service_instance }
+      let(:kwargs) { {in: :foo, out: :bar, index: 0} }
 
       context "when step service is NOT symbol" do
-        let(:step_service) { Class.new }
+        let(:service) { Class.new }
+
+        specify do
+          expect { method_value }
+            .to call_chain_next.on(method)
+            .with_arguments(service, **kwargs)
+        end
 
         it "returns original step" do
-          expect(method_value).to eq(service_class.step_class.new(*args, **kwargs))
+          method_value
+
+          expect(container.steps.first).to eq(container.step(service, **kwargs))
         end
       end
 
       context "when step service is symbol" do
-        let(:step_service) { method_name }
+        let(:service) { method_name }
+        let(:method_name) { :foo }
 
-        context "when step service is NOT `:result`" do
-          let(:method_name) { :foo }
-
-          let(:customized_step) do
-            service_class.step_class.new(
-              ConvenientService::Services::RunMethodInOrganizer,
-              in: [
-                {method_name: ConvenientService::Support::RawValue.wrap(method_name)},
-                {organizer: :itself}
-              ],
-              container: container,
-              organizer: organizer
-            )
-          end
-
-          it "returns customized step" do
-            expect(method_value).to eq(customized_step)
-          end
-
-          it "sets step service to `ConvenientService::Services::RunMethodInOrganizer`" do
-            expect(method_value.service.klass).to eq(ConvenientService::Services::RunMethodInOrganizer)
-          end
-
-          it "concats method name to step inputs" do
-            expect(method_value.inputs.find { |input| input.key.to_sym == :method_name }.value).to eq(method_name)
-          end
-
-          it "concats organizer to step inputs" do
-            expect(method_value.inputs.find { |input| input.key.to_sym == :organizer }.value).to eq(organizer)
-          end
+        specify do
+          expect { method_value }
+            .to call_chain_next.on(method)
+            .with_arguments(container, **kwargs.merge(method: method_name))
         end
 
-        context "when step service is `:result`" do
-          let(:method_name) { :result }
+        it "returns customized step" do
+          method_value
 
-          let(:error_message) do
-            <<~TEXT
-              Failed to cast `:result` into `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Service`.
-            TEXT
-          end
-
-          it "raises `ConvenientService::Support::Castable::Errors::FailedToCast`" do
-            expect { method_value }
-              .to raise_error(ConvenientService::Support::Castable::Errors::FailedToCast)
-              .with_message(error_message)
-          end
+          expect(container.steps.first).to eq(container.step(container, **kwargs.merge(method: method_name)))
         end
       end
     end

@@ -53,8 +53,8 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
     describe "#method" do
       specify do
         expect { step.method }
-          .to delegate_to(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeMethodStep::Commands::FindMethod, :call)
-          .with_arguments(step: step)
+          .to delegate_to(step.extra_kwargs, :[])
+          .with_arguments(:method)
           .and_return_its_value
       end
     end
@@ -62,7 +62,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
     describe "#method_step?" do
       context "when `step` does NOT have method" do
         before do
-          step.inputs.delete_if { |input| input.key.to_sym == :method_name }
+          step.extra_kwargs.delete(:method)
         end
 
         it "returns `false`" do

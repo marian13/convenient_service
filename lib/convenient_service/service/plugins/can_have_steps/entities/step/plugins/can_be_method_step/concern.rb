@@ -13,10 +13,10 @@ module ConvenientService
 
                   instance_methods do
                     ##
-                    # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method, nil]
+                    # @return [Symbol, String, nil]
                     #
                     def method
-                      Commands::FindMethod.call(step: self)
+                      extra_kwargs[:method]
                     end
 
                     ##

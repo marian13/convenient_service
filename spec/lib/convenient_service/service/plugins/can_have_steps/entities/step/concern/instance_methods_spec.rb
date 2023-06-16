@@ -404,15 +404,15 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
         let(:message) do
           <<~TEXT
-            Step `#{step.printable_service}` has not assigned organizer.
+            Organizer for method `:#{inputs.first}` is NOT assigned yet.
 
             Did you forget to set it?
           TEXT
         end
 
-        it "raises `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Errors::StepHasNoOrganizer`" do
+        it "returns `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Errors::MethodHasNoOrganizer`" do
           expect { step.input_values }
-            .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Errors::StepHasNoOrganizer)
+            .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Errors::MethodHasNoOrganizer)
             .with_message(message)
         end
       end
@@ -432,15 +432,15 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
         let(:message) do
           <<~TEXT
-            Step `#{step.printable_service}` has not assigned organizer.
+            Organizer for method `:#{inputs.first}` is NOT assigned yet.
 
             Did you forget to set it?
           TEXT
         end
 
-        it "raises `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Errors::StepHasNoOrganizer`" do
+        it "returns `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Errors::MethodHasNoOrganizer`" do
           expect { step.service_result }
-            .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Errors::StepHasNoOrganizer)
+            .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Errors::MethodHasNoOrganizer)
             .with_message(message)
         end
       end
@@ -461,15 +461,15 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
         let(:message) do
           <<~TEXT
-            Step `#{step.printable_service}` has not assigned organizer.
+            Organizer for method `:#{inputs.first}` is NOT assigned yet.
 
             Did you forget to set it?
           TEXT
         end
 
-        it "raises `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Errors::StepHasNoOrganizer`" do
+        it "returns `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Errors::MethodHasNoOrganizer`" do
           expect { step.result }
-            .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Errors::StepHasNoOrganizer)
+            .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Errors::MethodHasNoOrganizer)
             .with_message(message)
         end
       end

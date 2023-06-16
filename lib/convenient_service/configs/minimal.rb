@@ -94,7 +94,6 @@ module ConvenientService
           use Plugins::Common::NormalizesEnv::Middleware
 
           use Plugins::Service::CanHaveMethodSteps::Middleware
-          use Plugins::Service::CanHaveResultStep::Middleware
         end
 
         class self::Internals
@@ -223,11 +222,23 @@ module ConvenientService
           middlewares :service_result do
             use Plugins::Common::NormalizesEnv::Middleware
             use Plugins::Common::CachesReturnValue::Middleware
+
+            use Plugins::Step::CanBeResultStep::CanBeExecuted::Middleware
+            use Plugins::Step::CanBeMethodStep::CanBeExecuted::Middleware
           end
 
           middlewares :result do
             use Plugins::Common::NormalizesEnv::Middleware
             use Plugins::Common::CachesReturnValue::Middleware
+          end
+
+          ##
+          # TODO: Rename.
+          #
+          middlewares :printable_service do
+            use Plugins::Common::NormalizesEnv::Middleware
+
+            use Plugins::Step::CanBeMethodStep::CanBePrinted::Middleware
           end
 
           class self::Internals

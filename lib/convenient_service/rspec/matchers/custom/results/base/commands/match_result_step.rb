@@ -50,27 +50,27 @@ module ConvenientService
                 # @return [Boolean]
                 #
                 def match_service_step?
-                  service_step = Commands::FindResultServiceStep.call(result: result, service_class: step)
+                  return false unless result.step
 
-                  Utils.to_bool(service_step)
+                  result.step.service_class == step
                 end
 
                 ##
                 # @return [Boolean]
                 #
                 def match_result_method_step?
-                  result_method_step = Commands::FindResultResultMethodStep.call(result: result)
+                  return false unless result.step
 
-                  Utils.to_bool(result_method_step)
+                  result.step.result_step?
                 end
 
                 ##
                 # @return [Boolean]
                 #
                 def match_method_step?
-                  method_step = Commands::FindResultMethodStep.call(result: result, method_name: step)
+                  return false unless result.step&.method_step?
 
-                  Utils.to_bool(method_step)
+                  result.step.method.to_sym == step
                 end
 
                 ##

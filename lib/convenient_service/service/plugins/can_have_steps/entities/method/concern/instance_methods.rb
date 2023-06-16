@@ -10,10 +10,43 @@ module ConvenientService
               module InstanceMethods
                 include Support::Delegate
 
-                attr_reader :key, :name, :caller, :direction, :organizer
+                ##
+                # @!attribute key [r]
+                #   @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Key]
+                #
+                attr_reader :key
 
+                ##
+                # @!attribute key [r]
+                #   @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Name]
+                #
+                attr_reader :name
+
+                ##
+                # @!attribute key [r]
+                #   @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Callers::Base]
+                #
+                attr_reader :caller
+
+                ##
+                # @!attribute key [r]
+                #   @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Directions::Base]
+                #
+                attr_reader :direction
+
+                ##
+                # @return [String]
+                #
                 delegate :to_s, to: :name
 
+                ##
+                # @param key [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Key]
+                # @param name [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Name]
+                # @param caller [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Callers::Base]
+                # @param direction [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Directions::Base]
+                # @param organizer [ConvenientService::Service, nil]
+                # @return [void]
+                #
                 def initialize(key:, name:, caller:, direction:, organizer: nil)
                   @key = key
                   @name = name
@@ -22,26 +55,45 @@ module ConvenientService
                   @organizer = organizer
                 end
 
-                def ==(other)
-                  return unless other.instance_of?(self.class)
+                ##
+                # @param raise_when_missing [Boolean]
+                # @return [ConvenientService::Service, nil]
+                # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Errors::MethodHasNoOrganizer]
+                #
+                def organizer(raise_when_missing: true)
+                  if raise_when_missing
+                    raise Errors::MethodHasNoOrganizer.new(method: self) unless @organizer
+                  end
 
-                  return false if key != other.key
-                  return false if name != other.name
-                  return false if caller != other.caller
-                  return false if direction != other.direction
-                  return false if organizer != other.organizer
-
-                  true
+                  @organizer
                 end
 
+                ##
+                # @return [Object] Can be any type.
+                #
+                def value
+                  @value ||= caller.calculate_value(self)
+                end
+
+                ##
+                # @return [Boolean]
+                #
                 def has_organizer?
-                  Utils.to_bool(organizer)
+                  Utils.to_bool(organizer(raise_when_missing: false))
                 end
 
+                ##
+                # @param name [Symbol, String]
+                # @return [Boolean]
+                #
                 def reassignment?(name)
                   caller.reassignment?(name)
                 end
 
+                ##
+                # @param container [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Service]
+                # @return [void]
+                #
                 def validate_as_input_for_container!(container)
                   direction.validate_as_input_for_container!(container, method: self)
 
@@ -50,6 +102,10 @@ module ConvenientService
                   true
                 end
 
+                ##
+                # @param container [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Service]
+                # @return [void]
+                #
                 def validate_as_output_for_container!(container)
                   direction.validate_as_output_for_container!(container, method: self)
 
@@ -58,6 +114,11 @@ module ConvenientService
                   true
                 end
 
+                ##
+                # @param container [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Service]
+                # @param index [Integer]
+                # @return [void]
+                #
                 def define_output_in_container!(container, index:)
                   direction.define_output_in_container!(container, index: index, method: self)
 
@@ -66,29 +127,27 @@ module ConvenientService
                   true
                 end
 
-                def value
-                  @value ||= calculate_value
-                end
+                ##
+                # @param other [Object] Can be any object.
+                # @return [Boolean, nil]
+                #
+                def ==(other)
+                  return unless other.instance_of?(self.class)
 
-                def to_kwargs
-                  {key: key, name: name, caller: caller, direction: direction, organizer: organizer}
-                end
+                  return false if key != other.key
+                  return false if name != other.name
+                  return false if caller != other.caller
+                  return false if direction != other.direction
+                  return false if organizer(raise_when_missing: false) != other.organizer(raise_when_missing: false)
 
-                private
-
-                def calculate_value
-                  assert_has_organizer!
-
-                  caller.calculate_value(self)
+                  true
                 end
 
                 ##
-                # TODO: Return `true` for valid assertions.
+                # @return [Hash{Symbol => Object}]
                 #
-                def assert_has_organizer!
-                  return if has_organizer?
-
-                  raise Errors::MethodHasNoOrganizer.new(method: self)
+                def to_kwargs
+                  {key: key, name: name, caller: caller, direction: direction, organizer: organizer(raise_when_missing: false)}
                 end
               end
             end
