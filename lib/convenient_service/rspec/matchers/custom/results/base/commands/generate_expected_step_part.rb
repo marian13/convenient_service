@@ -9,7 +9,7 @@ module ConvenientService
             module Commands
               class GenerateExpectedStepPart < Support::Command
                 ##
-                # @!attribute step [r]
+                # @!attribute [r] step
                 #   @return [Class, Symbol]
                 #
                 attr_reader :step

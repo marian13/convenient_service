@@ -9,7 +9,7 @@ module ConvenientService
             module Commands
               class CastParams < Support::Command
                 ##
-                # @!attribute original_params [r]
+                # @!attribute [r] original_params
                 #   @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Structs::Params]
                 #
                 attr_reader :original_params

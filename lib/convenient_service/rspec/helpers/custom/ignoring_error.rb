@@ -1,29 +1,48 @@
 # frozen_string_literal: true
 
+require_relative "ignoring_error/errors"
+
 module ConvenientService
   module RSpec
     module Helpers
       module Custom
-        ##
-        # TODO: Specs.
-        #
         class IgnoringError < Support::Command
-          attr_reader :errors, :block
+          ##
+          # @!attribute [r] error
+          #   @return [StandardError]
+          #
+          attr_reader :error
 
-          def initialize(*errors, &block)
-            @errors = errors
+          ##
+          # @!attribute [r] block
+          #   @return [Proc]
+          #
+          attr_reader :block
+
+          ##
+          # @param error [StandardError]
+          # @param block [Proc]
+          #
+          def initialize(error, &block)
+            @error = error
             @block = block
           end
 
+          ##
+          # @return [ConvenientService::Support::UniqueValue]
+          # @raise [ConvenientService::RSpec::Helpers::Custom::IgnoringError::Errors::IgnoredErrorIsNotRaised]
+          #
+          # @note Rescue `StandardError`, NOT `Exception`.
+          # @see https://thoughtbot.com/blog/rescue-standarderror-not-exception
+          # @see https://ruby-doc.org/core-2.7.0/StandardError.html
+          # @see https://ruby-doc.org/core-2.7.0/Exception.html
+          #
           def call
             block.call
-          rescue *errors
-            nil
+          rescue *error
+            Support::UNDEFINED
           else
-            ##
-            # TODO: Raise self-explanatory exception.
-            #
-            raise
+            raise Errors::IgnoredErrorIsNotRaised.new(error: error)
           end
         end
       end

@@ -164,7 +164,7 @@ module ConvenientService
           private
 
           ##
-          # @!attribute block_expectation [r]
+          # @!attribute [r] block_expectation
           #   @return [Proc, nil]
           #
           attr_reader :block_expectation

@@ -9,13 +9,13 @@ module ConvenientService
             module Commands
               class MatchResultStep < Support::Command
                 ##
-                # @!attribute result [r]
+                # @!attribute [r] result
                 #   @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
                 #
                 attr_reader :result
 
                 ##
-                # @!attribute step [r]
+                # @!attribute [r] step
                 #   @return [Class, Symbol]
                 #
                 attr_reader :step

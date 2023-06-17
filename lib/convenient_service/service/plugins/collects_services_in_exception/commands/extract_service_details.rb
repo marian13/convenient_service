@@ -7,13 +7,13 @@ module ConvenientService
         module Commands
           class ExtractServiceDetails < Support::Command
             ##
-            # @!attribute service [r]
+            # @!attribute [r] service
             #   @return [ConvenientService::Service]
             #
             attr_reader :service
 
             ##
-            # @!attribute method [r]
+            # @!attribute [r] method
             #   @return [Symbol]
             #
             attr_reader :method

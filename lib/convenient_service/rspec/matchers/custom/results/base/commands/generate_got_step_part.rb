@@ -9,7 +9,7 @@ module ConvenientService
             module Commands
               class GenerateGotStepPart < Support::Command
                 ##
-                # @!attribute result [r]
+                # @!attribute [r] result
                 #   @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
                 #
                 attr_reader :result

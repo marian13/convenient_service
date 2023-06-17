@@ -11,25 +11,25 @@ module ConvenientService
                 include Support::Delegate
 
                 ##
-                # @!attribute key [r]
+                # @!attribute [r] key
                 #   @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Key]
                 #
                 attr_reader :key
 
                 ##
-                # @!attribute key [r]
+                # @!attribute [r] name
                 #   @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Name]
                 #
                 attr_reader :name
 
                 ##
-                # @!attribute key [r]
+                # @!attribute [r] caller
                 #   @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Callers::Base]
                 #
                 attr_reader :caller
 
                 ##
-                # @!attribute key [r]
+                # @!attribute [r] direction
                 #   @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Directions::Base]
                 #
                 attr_reader :direction
