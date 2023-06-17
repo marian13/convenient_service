@@ -34,20 +34,24 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::FetchN
       end
 
       describe "importing module" do
-        context "when `importing module` imports method" do
+        context "when `importing module` already has `namespace`" do
           before do
             importing_module.import(method, from: container, scope: scope)
           end
 
           let(:method) { :bar }
 
-          it "returns valid constant" do
+          it "returns namespace" do
             expect(command_result).to eq(importing_module::ImportedIncludedClassMethods)
           end
         end
 
-        context "when `importing module` does NOT import any method" do
-          it "returns valid constant" do
+        context "when `importing module` does NOT have `namespace`" do
+          before do
+            allow(ConvenientService::Support::DependencyContainer::Commands::CreateMethodsModule).to receive(:call)
+          end
+
+          it "defines namespace" do
             expect(command_result).to eq(importing_module::ImportedIncludedClassMethods)
           end
         end
