@@ -50,16 +50,16 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Key do
         #
         # rubocop:disable Lint/Void, RSpec/ExampleLength
         it "uses `source_location` to compare blocks" do
-          constructor_params_source_location = double
+          constructor_arguments_source_location = double
           other_block_source_location = double
 
-          allow(block).to receive(:source_location).and_return(constructor_params_source_location)
+          allow(block).to receive(:source_location).and_return(constructor_arguments_source_location)
           allow(other_block).to receive(:source_location).and_return(other_block_source_location)
-          allow(constructor_params_source_location).to receive(:==).with(other_block_source_location)
+          allow(constructor_arguments_source_location).to receive(:==).with(other_block_source_location)
 
           key == other
 
-          expect(constructor_params_source_location).to have_received(:==)
+          expect(constructor_arguments_source_location).to have_received(:==)
         end
         # rubocop:enable Lint/Void, RSpec/ExampleLength
       end

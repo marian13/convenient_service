@@ -27,7 +27,7 @@ module ConvenientService
             end
 
             def constructor_kwargs
-              @constructor_kwargs ||= entity.constructor_params.kwargs
+              @constructor_kwargs ||= entity.constructor_arguments.kwargs
             end
 
             def contract

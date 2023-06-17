@@ -37,7 +37,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::DryService::Config do
               ConvenientService::Plugins::Common::HasConstructorWithoutInitialize::Concern,
               ConvenientService::Service::Plugins::HasResult::Concern,
               ConvenientService::Service::Plugins::CanHaveSteps::Concern,
-              ConvenientService::Common::Plugins::CachesConstructorParams::Concern,
+              ConvenientService::Common::Plugins::CachesConstructorArguments::Concern,
               ConvenientService::Common::Plugins::CanBeCopied::Concern,
               ConvenientService::Service::Plugins::CanRecalculateResult::Concern,
               ConvenientService::Service::Plugins::HasResultShortSyntax::Concern,
@@ -60,7 +60,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::DryService::Config do
             [
               ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
               ConvenientService::Service::Plugins::CollectsServicesInException::Middleware,
-              ConvenientService::Common::Plugins::CachesConstructorParams::Middleware
+              ConvenientService::Common::Plugins::CachesConstructorArguments::Middleware
             ]
           end
 

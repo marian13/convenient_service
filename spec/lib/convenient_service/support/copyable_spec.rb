@@ -45,9 +45,9 @@ RSpec.describe ConvenientService::Support::Copyable do
       end
 
       let(:klass) { Class.new(base_class) }
-      let(:instance) { klass.new(*constructor_params[:args], **constructor_params[:kwargs], &constructor_params[:block]) }
+      let(:instance) { klass.new(*constructor_arguments[:args], **constructor_arguments[:kwargs], &constructor_arguments[:block]) }
 
-      let(:constructor_params) do
+      let(:constructor_arguments) do
         {
           args: [:foo, :bar],
           kwargs: {foo: 0, bar: 1},
@@ -87,7 +87,7 @@ RSpec.describe ConvenientService::Support::Copyable do
         let(:overrides) { {} }
 
         it "defaults to empty hash`" do
-          expect(instance.copy(overrides: overrides).args).to eq(constructor_params[:args])
+          expect(instance.copy(overrides: overrides).args).to eq(constructor_arguments[:args])
         end
       end
 
@@ -121,7 +121,7 @@ RSpec.describe ConvenientService::Support::Copyable do
         let(:overrides) { {} }
 
         it "defaults to empty hash`" do
-          expect(instance.copy(overrides: overrides).kwargs).to eq(constructor_params[:kwargs])
+          expect(instance.copy(overrides: overrides).kwargs).to eq(constructor_arguments[:kwargs])
         end
       end
 

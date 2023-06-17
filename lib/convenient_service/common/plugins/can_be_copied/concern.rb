@@ -8,22 +8,22 @@ module ConvenientService
           include Support::Concern
 
           ##
-          # NOTE: `CanBeCopied` plugin expects that `CachesConstructorParams` plugin is already used.
-          # That is why `constructor_params` method is available.
+          # NOTE: `CanBeCopied` plugin expects that `CachesConstructorArguments` plugin is already used.
+          # That is why `constructor_arguments` method is available.
           #
           instance_methods do
             include Support::Copyable
 
             def to_args
-              constructor_params.args
+              constructor_arguments.args
             end
 
             def to_kwargs
-              constructor_params.kwargs
+              constructor_arguments.kwargs
             end
 
             def to_block
-              constructor_params.block
+              constructor_arguments.block
             end
           end
         end

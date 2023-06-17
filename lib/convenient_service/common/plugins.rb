@@ -5,7 +5,7 @@
 #
 require_relative "plugins/normalizes_env"
 
-require_relative "plugins/caches_constructor_params"
+require_relative "plugins/caches_constructor_arguments"
 require_relative "plugins/caches_return_value"
 require_relative "plugins/can_be_copied"
 require_relative "plugins/can_have_user_provided_entity"

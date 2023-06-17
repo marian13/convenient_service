@@ -21,7 +21,7 @@ module ConvenientService
         include Configs::Minimal
 
         concerns do
-          use Plugins::Common::CachesConstructorParams::Concern
+          use Plugins::Common::CachesConstructorArguments::Concern
           use Plugins::Common::CanBeCopied::Concern
           use Plugins::Service::CanRecalculateResult::Concern
           use Plugins::Service::HasResultShortSyntax::Concern
@@ -35,7 +35,7 @@ module ConvenientService
 
         middlewares :initialize do
           use Plugins::Service::CollectsServicesInException::Middleware
-          use Plugins::Common::CachesConstructorParams::Middleware
+          use Plugins::Common::CachesConstructorArguments::Middleware
         end
 
         middlewares :result do

@@ -99,7 +99,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultParamsValidations::
         end
 
         before do
-          service_instance.internals.cache.write(:constructor_params, ConvenientService::Common::Plugins::CachesConstructorParams::Entities::ConstructorParams.new(kwargs: {foo: "x"}))
+          service_instance.internals.cache.write(:constructor_arguments, ConvenientService::Support::Arguments.new(foo: "x"))
         end
 
         specify do
@@ -111,7 +111,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultParamsValidations::
 
       context "when validation does NOT have any errors" do
         before do
-          service_instance.internals.cache.write(:constructor_params, ConvenientService::Common::Plugins::CachesConstructorParams::Entities::ConstructorParams.new(kwargs: {foo: "x"}))
+          service_instance.internals.cache.write(:constructor_arguments, ConvenientService::Support::Arguments.new(foo: "x"))
         end
 
         specify do
@@ -123,10 +123,10 @@ RSpec.describe ConvenientService::Service::Plugins::HasResultParamsValidations::
 
       context "when validation has any error" do
         before do
-          service_instance.internals.cache.write(:constructor_params, ConvenientService::Common::Plugins::CachesConstructorParams::Entities::ConstructorParams.new(kwargs: {foo: "bar"}))
+          service_instance.internals.cache.write(:constructor_arguments, ConvenientService::Support::Arguments.new(foo: "bar"))
         end
 
-        let(:errors) { service_class.contract.new.call(**service_instance.constructor_params.kwargs).errors.to_h.transform_values(&:first) }
+        let(:errors) { service_class.contract.new.call(**service_instance.constructor_arguments.kwargs).errors.to_h.transform_values(&:first) }
 
         it "returns failure with first error message for each invalid attribute as data" do
           expect(method_value).to be_failure.with_data(errors)

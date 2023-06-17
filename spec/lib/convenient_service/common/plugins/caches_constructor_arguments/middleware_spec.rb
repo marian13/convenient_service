@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::Common::Plugins::CachesConstructorParams::Middleware do
+RSpec.describe ConvenientService::Common::Plugins::CachesConstructorArguments::Middleware do
   let(:middleware) { described_class }
 
   example_group "inheritance" do
@@ -63,10 +63,10 @@ RSpec.describe ConvenientService::Common::Plugins::CachesConstructorParams::Midd
 
       specify { expect { method_value }.to call_chain_next.on(method).with_arguments(*args, **kwargs, &block) }
 
-      it "writes `ConvenientService::Common::Plugins::CachesConstructorParams::Entities::ConstructorParams` instance to cache with `constructor_params` as key" do
+      it "writes `ConvenientService::Support::Arguments` instance to cache with `constructor_arguments` as key" do
         expect { method_value }
           .to delegate_to(service_instance.internals.cache, :write)
-          .with_arguments(:constructor_params, ConvenientService::Common::Plugins::CachesConstructorParams::Entities::ConstructorParams.new(args: args, kwargs: kwargs, block: block))
+          .with_arguments(:constructor_arguments, ConvenientService::Support::Arguments.new(*args, **kwargs, &block))
       end
     end
   end
