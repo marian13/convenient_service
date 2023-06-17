@@ -59,7 +59,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::BuildN
         context "when `prepend` is NOT valid" do
           let(:prepend) { nil }
 
-          it "behaves like `include`" do
+          it "behaves like `prepend: false`" do
             expect(command_result).to eq(:ImportedIncludedClassMethods)
           end
         end
