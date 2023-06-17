@@ -56,13 +56,13 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
     end
 
     describe ".extra_kwargs" do
-      it "return empty hash" do
+      it "returns empty hash" do
         expect(middleware_class.extra_kwargs).to eq({})
       end
     end
 
     describe ".intended_methods" do
-      it "return empty array" do
+      it "returns empty array" do
         expect(middleware_class.intended_methods).to eq([])
       end
     end

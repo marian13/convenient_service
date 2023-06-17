@@ -98,6 +98,7 @@ RSpec.describe ConvenientService::Service::Plugins::CollectsServicesInException:
         let(:exception) { exception_class.new(exception_message) }
         let(:exception_class) { Class.new(StandardError) }
         let(:exception_message) { "exception message" }
+        let(:service_details) { {instance: service_instance, trigger: {method: ":result"}} }
 
         context "when exception does NOT respond to `:services`" do
           let(:exception) { exception_class.new(exception_message) }
@@ -118,14 +119,22 @@ RSpec.describe ConvenientService::Service::Plugins::CollectsServicesInException:
 
             expect { ignoring_error(exception_class) { method.call } }
               .to delegate_to(ConvenientService::Utils::Array, :limited_push)
-              .with_arguments(exception.services, service_instance, limit: ConvenientService::Service::Plugins::CollectsServicesInException::Constants::DEFAULT_MAX_SERVICES_SIZE)
+              .with_arguments(exception.services, service_details, limit: ConvenientService::Service::Plugins::CollectsServicesInException::Constants::DEFAULT_MAX_SERVICES_SIZE)
+          end
+
+          specify do
+            allow(service_instance).to receive(:exception).and_return(exception)
+
+            expect { ignoring_error(exception_class) { method_value } }
+              .to delegate_to(ConvenientService::Service::Plugins::CollectsServicesInException::Commands::ExtractServiceDetails, :call)
+              .with_arguments(service: service_instance, method: :result)
           end
 
           example_group "defined `:services` method" do
             it "returns services" do
               ignoring_error(exception_class) { method_value }
 
-              expect(exception.services).to eq([service_instance])
+              expect(exception.services).to eq([service_details])
             end
           end
 
@@ -148,7 +157,15 @@ RSpec.describe ConvenientService::Service::Plugins::CollectsServicesInException:
 
             ignoring_error(exception_class) { method_value }
 
-            expect(exception.services).to eq([:original_service, service_instance])
+            expect(exception.services).to eq([:original_service, service_details])
+          end
+
+          specify do
+            allow(service_instance).to receive(:exception).and_return(exception)
+
+            expect { ignoring_error(exception_class) { method_value } }
+              .to delegate_to(ConvenientService::Service::Plugins::CollectsServicesInException::Commands::ExtractServiceDetails, :call)
+              .with_arguments(service: service_instance, method: :result)
           end
 
           specify do
@@ -156,7 +173,7 @@ RSpec.describe ConvenientService::Service::Plugins::CollectsServicesInException:
 
             expect { ignoring_error(exception_class) { method_value } }
               .to delegate_to(ConvenientService::Utils::Array, :limited_push)
-              .with_arguments(exception.services, service_instance, limit: ConvenientService::Service::Plugins::CollectsServicesInException::Constants::DEFAULT_MAX_SERVICES_SIZE)
+              .with_arguments(exception.services, service_details, limit: ConvenientService::Service::Plugins::CollectsServicesInException::Constants::DEFAULT_MAX_SERVICES_SIZE)
           end
 
           it "reraises exception" do
@@ -201,7 +218,7 @@ RSpec.describe ConvenientService::Service::Plugins::CollectsServicesInException:
 
             expect { ignoring_error(exception_class) { method.call } }
               .to delegate_to(ConvenientService::Utils::Array, :limited_push)
-              .with_arguments(exception.services, service_instance, limit: max_services_size)
+              .with_arguments(exception.services, service_details, limit: max_services_size)
           end
         end
       end

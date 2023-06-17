@@ -11,6 +11,9 @@ module ConvenientService
             ##
             # @return [Array<ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step>]
             #
+            # @internal
+            #   IMPORTANT: `map` result is NOT wrapped by `StepCollection` in order to NOT expose too much internals to the end-user.
+            #
             def steps
               internals.cache.fetch(:steps) do
                 self.class

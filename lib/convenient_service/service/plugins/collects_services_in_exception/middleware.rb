@@ -23,12 +23,19 @@ module ConvenientService
           rescue => exception
             exception.instance_exec(entity) { |entity| define_singleton_method(:services) { @services ||= [] } } unless exception.respond_to?(:services)
 
-            Utils::Array.limited_push(exception.services, entity, limit: max_services_size)
+            Utils::Array.limited_push(exception.services, service_details, limit: max_services_size)
 
             raise
           end
 
           private
+
+          ##
+          # @return [Hash{Symbol => Object}]
+          #
+          def service_details
+            Commands::ExtractServiceDetails.call(service: entity, method: method)
+          end
 
           ##
           # @return [Integer]

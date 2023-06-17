@@ -362,7 +362,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
         end
       end
 
-      it "return instance of `Enumerator`" do
+      it "returns instance of `Enumerator`" do
         expect(result.parents_enum).to be_instance_of(Enumerator)
       end
 
