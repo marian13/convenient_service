@@ -76,6 +76,28 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Import do
       end
     end
 
+    describe "slug" do
+      context "when `slug` is valid" do
+        before do
+          klass.import(imported_slug, **kwargs)
+        end
+
+        specify do
+          expect { matcher_result }
+            .to delegate_to(ConvenientService::Support::DependencyContainer::Commands::AssertValidMethod, :call)
+            .with_arguments(slug: slug, scope: scope, container: container)
+        end
+      end
+
+      context "when `slug` is NOT valid" do
+        let(:slug) { :bar }
+
+        it "raises `ConvenientService::Support::DependencyContainer::Errors::NotExportedMethod`" do
+          expect { matcher_result }.to raise_error(ConvenientService::Support::DependencyContainer::Errors::NotExportedMethod)
+        end
+      end
+    end
+
     describe "scope" do
       context "when scope is passed" do
         context "when `scope` is valid" do
@@ -109,6 +131,12 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Import do
     end
 
     describe "namespace" do
+      specify do
+        expect { matcher_result }
+          .to delegate_to(ConvenientService::Support::DependencyContainer::Commands::GetNamespace, :call)
+          .with_arguments(importing_module: klass, scope: scope, prepend: prepend)
+      end
+
       context "when `namespace` is present" do
         before do
           klass.import(imported_slug, **kwargs)
@@ -148,10 +176,10 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Import do
 
     describe "as" do
       before do
-        klass.import(imported_slug, **kwargs_with_as_modified)
+        klass.import(imported_slug, **kwargs_with_modified_as)
       end
 
-      let(:kwargs_with_as_modified) { {from: container, as: as, scope: scope, prepend: prepend} }
+      let(:kwargs_with_modified_as) { {from: container, as: as, scope: scope, prepend: prepend} }
 
       let(:imported_slug) { :que }
       let(:as) { :xyzzy }
@@ -185,10 +213,11 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Import do
       end
 
       context "when `method` is NOT imported" do
-        let(:slug) { :"non.existent.method" }
+        let(:slug) { :que }
+        let(:scope) { :class }
 
         it "returns false" do
-          expect { matcher_result }.to raise_error(ConvenientService::Support::DependencyContainer::Errors::NotExportedMethod)
+          expect(matcher_result).to be_falsey
         end
       end
     end
