@@ -13,6 +13,13 @@ module ConvenientService
   module Utils
     class << self
       ##
+      # @return [Object] Can be any type.
+      #
+      def memoize_including_falsy_values(...)
+        Object::MemoizeIncludingFalsyValues.call(...)
+      end
+
+      ##
       # @return [Boolean]
       #
       def to_bool(...)

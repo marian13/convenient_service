@@ -95,7 +95,7 @@ module ConvenientService
             # @return [String, nil]
             #
             def proto_entity_name
-              Utils::Object.memoize_including_falsy_values(self, :@proto_entity_name) { proto_entity.name }
+              Utils.memoize_including_falsy_values(self, :@proto_entity_name) { proto_entity.name }
             end
 
             ##
@@ -109,7 +109,7 @@ module ConvenientService
             # @return [Module]
             #
             def proto_entity_concern
-              Utils::Object.memoize_including_falsy_values(self, :@proto_entity_concern) { Utils::Module.get_own_const(proto_entity, :Concern) }
+              Utils.memoize_including_falsy_values(self, :@proto_entity_concern) { Utils::Module.get_own_const(proto_entity, :Concern) }
             end
           end
         end

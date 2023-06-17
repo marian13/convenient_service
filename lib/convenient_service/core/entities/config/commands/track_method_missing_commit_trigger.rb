@@ -49,7 +49,7 @@ module ConvenientService
             # @return [Boolean]
             #
             def method_missing_commits_counter_incremented?
-              Utils::Object.memoize_including_falsy_values(self, :@method_missing_commits_counter_incremented) { config.method_missing_commits_counter.bincrement }
+              Utils.memoize_including_falsy_values(self, :@method_missing_commits_counter_incremented) { config.method_missing_commits_counter.bincrement }
             end
 
             ##

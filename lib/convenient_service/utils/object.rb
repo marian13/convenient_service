@@ -47,7 +47,7 @@ module ConvenientService
         # @example
         #   object = Object.new.tap { |object| object.instance_eval { self.class.attr_reader :foo } }
         #
-        #   ConvenientService::Utils::Object.memoize_including_falsy_values(object, :@foo) { false }
+        #   ConvenientService::Utils.memoize_including_falsy_values(object, :@foo) { false }
         #
         def memoize_including_falsy_values(...)
           MemoizeIncludingFalsyValues.call(...)

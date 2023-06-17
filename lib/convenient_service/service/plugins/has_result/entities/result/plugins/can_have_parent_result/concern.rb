@@ -16,7 +16,7 @@ module ConvenientService
                     # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result, nil]
                     #
                     def parent
-                      Utils::Object.memoize_including_falsy_values(self, :@parent) { internals.cache[:parent] }
+                      Utils.memoize_including_falsy_values(self, :@parent) { internals.cache[:parent] }
                     end
 
                     ##

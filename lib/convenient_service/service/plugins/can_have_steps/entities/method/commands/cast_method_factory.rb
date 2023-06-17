@@ -36,7 +36,7 @@ module ConvenientService
                 # @return [Class, nil]
                 #
                 def factory_class
-                  Utils::Object.memoize_including_falsy_values(self, :@factory_class) do
+                  Utils.memoize_including_falsy_values(self, :@factory_class) do
                     case other
                     when ::Symbol then cast_symbol
                     when ::String then cast_string

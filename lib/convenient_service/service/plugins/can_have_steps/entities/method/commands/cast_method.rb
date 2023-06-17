@@ -52,35 +52,35 @@ module ConvenientService
                 # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Factories::Base]
                 #
                 def factory
-                  Utils::Object.memoize_including_falsy_values(self, :@factory) { Commands::CastMethodFactory.call(other: other) }
+                  Utils.memoize_including_falsy_values(self, :@factory) { Commands::CastMethodFactory.call(other: other) }
                 end
 
                 ##
                 # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Key]
                 #
                 def key
-                  Utils::Object.memoize_including_falsy_values(self, :@key) { factory&.create_key }
+                  Utils.memoize_including_falsy_values(self, :@key) { factory&.create_key }
                 end
 
                 ##
                 # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Name]
                 #
                 def name
-                  Utils::Object.memoize_including_falsy_values(self, :@name) { factory&.create_name }
+                  Utils.memoize_including_falsy_values(self, :@name) { factory&.create_name }
                 end
 
                 ##
                 # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Callers::Base]
                 #
                 def caller
-                  Utils::Object.memoize_including_falsy_values(self, :@caller) { factory&.create_caller }
+                  Utils.memoize_including_falsy_values(self, :@caller) { factory&.create_caller }
                 end
 
                 ##
                 # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Direction::Base]
                 #
                 def direction
-                  Utils::Object.memoize_including_falsy_values(self, :@direction) { Commands::CastMethodDirection.call(other: other, options: options) }
+                  Utils.memoize_including_falsy_values(self, :@direction) { Commands::CastMethodDirection.call(other: other, options: options) }
                 end
               end
             end
