@@ -175,4 +175,22 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "yard", "~> 0.9.28"
 
   spec.add_development_dependency "yard-junk"
+
+  ##
+  # The following gems are Convenient Service alternatives.
+  # Used for performance comparisons.
+  # See `benchmark/empty_service`.
+  # - https://github.com/sunny/actor
+  # - https://github.com/collectiveidea/interactor
+  # - https://github.com/trailblazer/trailblazer-operation
+  # - https://github.com/AaronLasseigne/active_interaction
+  # - https://github.com/adomokos/light-service
+  # - https://github.com/cypriss/mutations
+  #
+  spec.add_development_dependency "service_actor", "~> 3.7.0"
+  spec.add_development_dependency "interactor", "~> 3.1.2"
+  spec.add_development_dependency "trailblazer-operation", "~> 0.10.1"
+  spec.add_development_dependency "active_interaction", "~> 5.3.0"
+  spec.add_development_dependency "light-service", "~> 0.18.0"
+  spec.add_development_dependency "mutations", "~> 0.9.1"
 end
