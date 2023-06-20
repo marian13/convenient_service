@@ -47,9 +47,11 @@ This library is under heavy development. Public API may be subject to change. Th
 <!-- links:start -->
 ## Quick Links
 
-- Check out [Convenient Service Official User Docs](https://marian13.github.io/convenient_service_docs/) for installation, requirements, and usage guides.
+- Visit the [All-in-One Presentation](https://marian13.github.io/static_content/convenient_service/presentations/all_in_one) to get a quick overview.
 
-- Read [the API docs](https://marian13.github.io/convenient_service) to get familiar with the newest functionality that are not documented yet.
+- Check out [Convenient Service Official User Docs](https://marian13.github.io/convenient_service_docs) for installation, requirements, and usage guides.
+
+- Read [the API docs](https://marian13.github.io/convenient_service) to get familiar with the newest functionality that is not documented yet.
 
 - Create [an issue](https://github.com/marian13/convenient_service/issues) if you are going to report a bug.
 
