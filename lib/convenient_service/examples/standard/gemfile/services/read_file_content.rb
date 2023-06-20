@@ -10,7 +10,7 @@ module ConvenientService
 
             attr_reader :path
 
-            step :validate_path
+            step :validate_path, in: :path
             step Services::AssertFileExists, in: :path
             step Services::AssertFileNotEmpty, in: :path
             step :result, in: :path, out: :content
