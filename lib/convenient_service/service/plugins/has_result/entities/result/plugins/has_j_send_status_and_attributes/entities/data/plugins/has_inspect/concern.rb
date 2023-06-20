@@ -19,6 +19,9 @@ module ConvenientService
                             ##
                             # @return [String]
                             #
+                            # @internal
+                            #   TODO: Specs.
+                            #
                             def inspect
                               Commands::GenerateInspectOutput.call(data: self)
                             end

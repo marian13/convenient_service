@@ -196,6 +196,17 @@ module ConvenientService
                 end
 
                 ##
+                # @return [Hash{Symbol => Object}]
+                # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Errors::StepHasNoOrganizer]
+                #
+                # @internal
+                #   TODO: Specs.
+                #
+                def output_values
+                  @output_values ||= result.unsafe_data.to_h.slice(*outputs.map(&:key).map(&:to_sym))
+                end
+
+                ##
                 # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
                 # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Errors::StepHasNoOrganizer]
                 #

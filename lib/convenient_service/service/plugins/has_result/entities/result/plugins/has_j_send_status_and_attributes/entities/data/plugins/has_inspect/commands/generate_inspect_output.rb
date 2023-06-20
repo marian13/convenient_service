@@ -32,7 +32,7 @@ module ConvenientService
                             # @return [String]
                             #
                             def call
-                              "<#{printable_class} #{printable_values}>"
+                              "<#{[printable_class, printable_values].reject(&:empty?).join(" ")}>"
                             end
 
                             private
