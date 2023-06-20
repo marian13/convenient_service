@@ -157,11 +157,62 @@
 </h3><div class="docstring">
   <div class="discussion">
     
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p>This middleware can be used for both instance and class <code>:result</code> methods.</p>
+</div>
+  </div>
+
+
 
   </div>
 </div>
 <div class="tags">
-  <p class="tag_title">Parameters:</p>
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>Usage for instance <code>:result</code>.</p>
+</div></p>
+      
+      <pre class="example code"><code>
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="../../../Service.html" title="ConvenientService::Service (module)">Service</a></span></span>
+  <span class='id identifier rubyid_include'>include</span> <span class='const'><span class='object_link'><a href="../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Standard.html" title="ConvenientService::Standard (module)">Standard</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Standard.html#Config-constant" title="ConvenientService::Standard::Config (constant)">Config</a></span></span>
+
+  <span class='id identifier rubyid_middlewares'>middlewares</span> <span class='symbol'>:result</span> <span class='kw'>do</span>
+    <span class='id identifier rubyid_use'>use</span> <span class='const'><span class='object_link'><a href="../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Plugins.html" title="ConvenientService::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Plugins.html#Service-constant" title="ConvenientService::Plugins::Service (constant)">Service</a></span></span><span class='op'>::</span><span class='const'>RescuesResultUnhandledExceptions</span><span class='op'>::</span><span class='const'>Middleware</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></code></pre>
+    
+      
+        <p class="example_title"><div class='inline'><p>Usage for class <code>:result</code>.</p>
+</div></p>
+      
+      <pre class="example code"><code>
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="../../../Service.html" title="ConvenientService::Service (module)">Service</a></span></span>
+  <span class='id identifier rubyid_include'>include</span> <span class='const'><span class='object_link'><a href="../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Standard.html" title="ConvenientService::Standard (module)">Standard</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Standard.html#Config-constant" title="ConvenientService::Standard::Config (constant)">Config</a></span></span>
+
+  <span class='id identifier rubyid_middlewares'>middlewares</span> <span class='symbol'>:result</span><span class='comma'>,</span> <span class='label'>scope:</span> <span class='symbol'>:class</span> <span class='kw'>do</span>
+    <span class='id identifier rubyid_use'>use</span> <span class='const'><span class='object_link'><a href="../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Plugins.html" title="ConvenientService::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Plugins.html#Service-constant" title="ConvenientService::Plugins::Service (constant)">Service</a></span></span><span class='op'>::</span><span class='const'>RescuesResultUnhandledExceptions</span><span class='op'>::</span><span class='const'>Middleware</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></code></pre>
+    
+      
+        <p class="example_title"><div class='inline'><p>Max backtrace size can be configured.</p>
+</div></p>
+      
+      <pre class="example code"><code>
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="../../../Service.html" title="ConvenientService::Service (module)">Service</a></span></span>
+  <span class='id identifier rubyid_include'>include</span> <span class='const'><span class='object_link'><a href="../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Standard.html" title="ConvenientService::Standard (module)">Standard</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Standard.html#Config-constant" title="ConvenientService::Standard::Config (constant)">Config</a></span></span>
+
+  <span class='id identifier rubyid_middlewares'>middlewares</span> <span class='symbol'>:result</span> <span class='kw'>do</span>
+    <span class='id identifier rubyid_use'>use</span> <span class='const'><span class='object_link'><a href="../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Plugins.html" title="ConvenientService::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Plugins.html#Service-constant" title="ConvenientService::Plugins::Service (constant)">Service</a></span></span><span class='op'>::</span><span class='const'>RescuesResultUnhandledExceptions</span><span class='op'>::</span><span class='const'>Middleware</span><span class='period'>.</span><span class='id identifier rubyid_with'>with</span><span class='lparen'>(</span><span class='label'>max_backtrace_size:</span> <span class='int'>1_000</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
 <ul class="param">
   
     <li>
@@ -219,14 +270,14 @@
       <pre class="lines">
 
 
-24
-25
-26
-27
-28</pre>
+56
+57
+58
+59
+60</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/rescues_result_unhandled_exceptions/middleware.rb', line 24</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/rescues_result_unhandled_exceptions/middleware.rb', line 56</span>
 
 <span class='kw'>def</span> <span class='kw'>next</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_chain'>chain</span><span class='period'>.</span><span class='id identifier rubyid_next'>next</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
@@ -243,7 +294,7 @@
 </div>
 
       <div id="footer">
-  Generated on Tue Jun 20 18:08:22 2023 by
+  Generated on Tue Jun 20 19:37:15 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>
