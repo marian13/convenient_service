@@ -5,13 +5,45 @@ module ConvenientService
     module Plugins
       module RescuesResultUnhandledExceptions
         class Middleware < MethodChainMiddleware
-          intended_for :result, scope: :class, entity: :service
+          intended_for :result, scope: any_scope, entity: :service
 
           ##
           # @param args [Array<Object>]
           # @param kwargs [Hash{Symbol => Object}]
           # @param block [Proc, nil]
           # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+          #
+          # @note This middleware can be used for both instance and class `:result` methods.
+          #
+          # @example Usage for instance `:result`.
+          #
+          #   class Service
+          #     include ConvenientService::Standard::Config
+          #
+          #     middlewares :result do
+          #       use ConvenientService::Plugins::Service::RescuesResultUnhandledExceptions::Middleware
+          #     end
+          #   end
+          #
+          # @example Usage for class `:result`.
+          #
+          #   class Service
+          #     include ConvenientService::Standard::Config
+          #
+          #     middlewares :result, scope: :class do
+          #       use ConvenientService::Plugins::Service::RescuesResultUnhandledExceptions::Middleware
+          #     end
+          #   end
+          #
+          # @example Max backtrace size can be configured.
+          #
+          #   class Service
+          #     include ConvenientService::Standard::Config
+          #
+          #     middlewares :result do
+          #       use ConvenientService::Plugins::Service::RescuesResultUnhandledExceptions::Middleware.with(max_backtrace_size: 1_000)
+          #     end
+          #   end
           #
           # @internal
           #   NOTE: `rescue => exception` is the same as `rescue ::StandardError => exception`.
