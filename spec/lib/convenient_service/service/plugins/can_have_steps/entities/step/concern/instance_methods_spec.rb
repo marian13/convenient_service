@@ -15,7 +15,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       end
 
       def result
-        success
+        success(data: {bar: :step_service_bar})
       end
     end
   end
@@ -476,6 +476,34 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         end
 
         specify { expect { step.input_values }.to delegate_to(step.inputs.first.key, :to_sym) }
+      end
+    end
+
+    describe "#output_values" do
+      context "when `organizer` is NOT set" do
+        let(:organizer) { nil }
+
+        let(:message) do
+          <<~TEXT
+            Organizer for method `:#{inputs.first}` is NOT assigned yet.
+
+            Did you forget to set it?
+          TEXT
+        end
+
+        it "returns `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Errors::MethodHasNoOrganizer`" do
+          expect { step.output_values }
+            .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Errors::MethodHasNoOrganizer)
+            .with_message(message)
+        end
+      end
+
+      context "when `organizer` is set" do
+        it "returns output values" do
+          expect(step.output_values).to eq({bar: :step_service_bar})
+        end
+
+        specify { expect { step.output_values }.to delegate_to(step.outputs.first.key, :to_sym) }
       end
     end
 
