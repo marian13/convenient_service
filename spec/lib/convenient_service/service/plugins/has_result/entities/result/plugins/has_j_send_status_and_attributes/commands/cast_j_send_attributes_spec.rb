@@ -8,6 +8,8 @@ require "convenient_service"
 RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Commands::CastJSendAttributes do
   example_group "class methods" do
     describe ".call" do
+      include ConvenientService::RSpec::Matchers::DelegateTo
+
       let(:service_class) do
         Class.new do
           include ConvenientService::Configs::Minimal
@@ -22,7 +24,8 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
       let(:result) { service_instance.result }
 
       let(:command_result) { described_class.call(result: result, kwargs: kwargs) }
-      let(:kwargs) { {service: service_instance, status: :foo, data: {foo: :bar}, message: "foo", code: :foo} }
+      let(:kwargs) { {service: service_instance, status: :foo, data: {foo: :bar}, message: "foo", code: :foo, **extra_kwargs} }
+      let(:extra_kwargs) { {} }
 
       it "returns `struct` with `kwargs[:service]` as `service`" do
         expect(command_result.service).to eq(kwargs[:service])
@@ -105,6 +108,20 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
           expect { command_result }
             .to raise_error(ConvenientService::Support::Castable::Errors::FailedToCast)
             .with_message(error_message)
+        end
+      end
+
+      context "when `kwargs` have extra kwargs" do
+        let(:extra_kwargs) { {parent: nil} }
+
+        specify do
+          expect { command_result }
+            .to delegate_to(ConvenientService::Utils::Hash, :except)
+            .with_arguments(kwargs, [:service, :status, :data, :message, :code])
+        end
+
+        it "returns `kwargs` without `[:service, :status, :data, :message, :code]` keys as `extra_kwargs`" do
+          expect(command_result.extra_kwargs).to eq({parent: nil})
         end
       end
     end

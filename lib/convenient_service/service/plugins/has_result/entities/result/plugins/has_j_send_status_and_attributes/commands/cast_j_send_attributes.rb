@@ -37,7 +37,7 @@ module ConvenientService
                     # @raise [ConvenientService::Support::Castable::Errors::FailedToCast]
                     #
                     def call
-                      Structs::JSendAttributes.new(service: service, status: status, data: data, message: message, code: code)
+                      Structs::JSendAttributes.new(service: service, status: status, data: data, message: message, code: code, extra_kwargs: extra_kwargs)
                     end
 
                     private
@@ -79,6 +79,13 @@ module ConvenientService
                     #
                     def code
                       @code ||= result.class.code(value: kwargs[:code], result: result)
+                    end
+
+                    ##
+                    # @return [Hash{Symbol => Object}]
+                    #
+                    def extra_kwargs
+                      @extra_kwargs ||= Utils::Hash.except(kwargs, [:service, :status, :data, :message, :code])
                     end
                   end
                 end

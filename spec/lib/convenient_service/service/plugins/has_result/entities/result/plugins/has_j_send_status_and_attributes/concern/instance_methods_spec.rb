@@ -118,15 +118,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
     end
 
     describe "#jsend_attributes" do
-      let(:jsend_attributes) do
-        ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Structs::JSendAttributes.new(
-          service: params[:service],
-          status: result_class.status(value: params[:status]),
-          data: result_class.data(value: params[:data]),
-          message: result_class.message(value: params[:message]),
-          code: result_class.code(value: params[:code])
-        )
-      end
+      let(:jsend_attributes) { ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Commands::CastJSendAttributes.call(result: result_instance, kwargs: params) }
 
       it "returns casted JSend attributes" do
         expect(result_instance.jsend_attributes).to eq(jsend_attributes)
