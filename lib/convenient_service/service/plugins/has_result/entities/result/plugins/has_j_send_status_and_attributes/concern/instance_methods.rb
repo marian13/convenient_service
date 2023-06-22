@@ -94,6 +94,34 @@ module ConvenientService
                     end
 
                     ##
+                    # @return [Symbol]
+                    #
+                    def create_status(status)
+                      self.class.status(value: status, result: self)
+                    end
+
+                    ##
+                    # @return [Hash{Symbol => Object}]
+                    #
+                    def create_data(data)
+                      self.class.data(value: data, result: self)
+                    end
+
+                    ##
+                    # @return [String]
+                    #
+                    def create_message(message)
+                      self.class.message(value: message, result: self)
+                    end
+
+                    ##
+                    # @return [Symbol]
+                    #
+                    def create_code(code)
+                      self.class.code(value: code, result: self)
+                    end
+
+                    ##
                     # @param other [ConvenientService::Service::Plugins::HasResult::Entities::Result]
                     # @return [Boolean, nil]
                     #

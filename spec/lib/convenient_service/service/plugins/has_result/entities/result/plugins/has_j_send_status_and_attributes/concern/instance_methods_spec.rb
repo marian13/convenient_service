@@ -125,6 +125,42 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
       end
     end
 
+    describe "#create_status" do
+      specify do
+        expect { result_instance.create_status(params[:status])}
+          .to delegate_to(result_class, :status)
+          .with_arguments(value: params[:status], result: result_instance)
+          .and_return_its_value
+      end
+    end
+
+    describe "#create_data" do
+      specify do
+        expect { result_instance.create_data(params[:data])}
+          .to delegate_to(result_class, :data)
+          .with_arguments(value: params[:data], result: result_instance)
+          .and_return_its_value
+      end
+    end
+
+    describe "#create_message" do
+      specify do
+        expect { result_instance.create_message(params[:message])}
+          .to delegate_to(result_class, :message)
+          .with_arguments(value: params[:message], result: result_instance)
+          .and_return_its_value
+      end
+    end
+
+    describe "#create_code" do
+      specify do
+        expect { result_instance.create_code(params[:code])}
+          .to delegate_to(result_class, :code)
+          .with_arguments(value: params[:code], result: result_instance)
+          .and_return_its_value
+      end
+    end
+
     describe "#==" do
       let(:result) { result_class.new(**params) }
 
