@@ -24,6 +24,12 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Consta
         end
       end
     end
+
+    describe "::DEFAULT_COMPARISON_METHOD" do
+      it "returns `:==`" do
+        expect(described_class::DEFAULT_COMPARISON_METHOD).to eq(:==)
+      end
+    end
   end
 end
 # rubocop:enable RSpec/NestedGroups, RSpec/DescribeClass

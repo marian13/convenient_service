@@ -16,13 +16,13 @@ module ConvenientService
 
                 ##
                 # @!attribute [r] step
-                #   @return [Class, Symbol]
+                #   @return [ConvenientService::Service, Symbol]
                 #
                 attr_reader :step
 
                 ##
                 # @param result [ConvenientService::Service::Plugins::HasResult::Entities::Result]
-                # @param step [Class, Symbol]
+                # @param step [ConvenientService::Service, Symbol]
                 # @return [void]
                 #
                 def initialize(result:, step:)
@@ -33,6 +33,9 @@ module ConvenientService
                 ##
                 # @return [Boolean]
                 # @raise [ConvenientService::RSpec::Matchers::Custom::Results::Base::Errors::InvalidStep]
+                #
+                # @internal
+                #   TODO: Import via commands.
                 #
                 def call
                   case step

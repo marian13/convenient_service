@@ -6,6 +6,9 @@ module ConvenientService
       module Custom
         module Results
           class BeSuccess < Results::Base
+            ##
+            # @return [Array<Symbol>]
+            #
             def statuses
               [Service::Plugins::HasResult::Constants::SUCCESS_STATUS]
             end

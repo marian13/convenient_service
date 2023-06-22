@@ -24,29 +24,7 @@ module ConvenientService
             def matches?(result)
               @result = result
 
-              rules = []
-
-              ##
-              # IMPORTANT: Makes `result.class.include?` from the following line idempotent.
-              #
-              result.commit_config!(trigger: Constants::Triggers::BE_RESULT) if result.respond_to?(:commit_config!)
-
-              rules << ->(result) { result.class.include?(Service::Plugins::HasResult::Entities::Result::Concern) }
-
-              ##
-              # IMPORTANT: Result status is NOT marked as checked intentionally, since it is a mutable operation.
-              #
-              rules << ->(result) { result.status.in?(statuses.map { |status| result.class.status(value: status, result: result) }) }
-
-              rules << ->(result) { result.service.instance_of?(service_class) } if used_of_service?
-              rules << ->(result) { Commands::MatchResultStep.call(result: result, step: step) } if used_of_step?
-              rules << ->(result) { result.class.data(value: data, result: result).public_send(comparison_method, result.unsafe_data) } if used_data?
-              rules << ->(result) { result.class.message(value: message, result: result).public_send(comparison_method, result.unsafe_message) } if used_message?
-              rules << ->(result) { result.class.code(value: code, result: result).public_send(comparison_method, result.unsafe_code) } if used_code?
-
-              condition = Utils::Proc.conjunct(rules)
-
-              condition.call(result)
+              Commands::MatchResult.call(matcher: self, result: result)
             end
 
             ##
@@ -181,8 +159,6 @@ module ConvenientService
               self
             end
 
-            private
-
             ##
             # @!attribute [r] result
             #   @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
@@ -296,7 +272,7 @@ module ConvenientService
             # @return [Symbol]
             #
             def comparison_method
-              @comparison_method ||= chain[:comparison_method] || :==
+              @comparison_method ||= chain[:comparison_method] || Constants::DEFAULT_COMPARISON_METHOD
             end
 
             ##
@@ -312,6 +288,8 @@ module ConvenientService
             def step
               Utils::Object.memoize_including_falsy_values(self, :@step) { chain[:step] }
             end
+
+            private
 
             ##
             # @return [Hash]

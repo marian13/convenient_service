@@ -13,6 +13,11 @@ module ConvenientService
                 #
                 BE_RESULT = Support::UniqueValue.new("BE_RESULT")
               end
+
+              ##
+              # @return [Symbol]
+              #
+              DEFAULT_COMPARISON_METHOD = :==
             end
           end
         end
