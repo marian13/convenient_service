@@ -294,18 +294,6 @@ RSpec.describe ConvenientService::Configs::Minimal do
             end
           end
 
-          example_group "#to_kwargs middlewares" do
-            let(:to_kwargs_middlewares) do
-              [
-                ConvenientService::Common::Plugins::NormalizesEnv::Middleware
-              ]
-            end
-
-            it "sets service result middlewares for `#to_kwargs`" do
-              expect(service_class::Result.middlewares(:to_kwargs).to_a).to eq(to_kwargs_middlewares)
-            end
-          end
-
           example_group "service result data" do
             example_group "concerns" do
               let(:concerns) do

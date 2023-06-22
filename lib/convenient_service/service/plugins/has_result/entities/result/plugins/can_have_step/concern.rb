@@ -12,8 +12,11 @@ module ConvenientService
                   include Support::Concern
 
                   instance_methods do
+                    ##
+                    # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step, nil]
+                    #
                     def step
-                      @step ||= internals.cache[:step]
+                      Utils.memoize_including_falsy_values(self, :@step) { extra_kwargs[:step] }
                     end
                   end
                 end

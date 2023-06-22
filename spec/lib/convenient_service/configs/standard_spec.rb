@@ -224,8 +224,7 @@ RSpec.describe ConvenientService::Configs::Standard do
             let(:initialize_middlewares) do
               [
                 ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Middleware,
-                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanHaveStep::Initialize::Middleware
+                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Middleware
               ]
             end
 
@@ -348,19 +347,6 @@ RSpec.describe ConvenientService::Configs::Standard do
 
             it "sets service result middlewares for `#code`" do
               expect(service_class::Result.middlewares(:code).to_a).to eq(code_middlewares)
-            end
-          end
-
-          example_group "#to_kwargs middlewares" do
-            let(:to_kwargs_middlewares) do
-              [
-                ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanHaveStep::ToKwargs::Middleware
-              ]
-            end
-
-            it "sets service result middlewares for `#to_kwargs`" do
-              expect(service_class::Result.middlewares(:to_kwargs).to_a).to eq(to_kwargs_middlewares)
             end
           end
 

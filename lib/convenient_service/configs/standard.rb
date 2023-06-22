@@ -98,10 +98,6 @@ module ConvenientService
             use Plugins::Result::CanHaveCheckedStatus::Concern
           end
 
-          middlewares :initialize do
-            use Plugins::Result::CanHaveStep::Initialize::Middleware
-          end
-
           middlewares :success? do
             use Plugins::Result::CanHaveCheckedStatus::Middleware
           end
@@ -136,10 +132,6 @@ module ConvenientService
 
           middlewares :code do
             use Plugins::Result::RaisesOnNotCheckedResultStatus::Middleware
-          end
-
-          middlewares :to_kwargs do
-            use Plugins::Result::CanHaveStep::ToKwargs::Middleware
           end
         end
 
