@@ -16,7 +16,7 @@ module ConvenientService
                     # @return [Boolean]
                     #
                     def try_result?
-                      Utils.to_bool(internals.cache[:try_result])
+                      Utils.to_bool(extra_kwargs[:try_result])
                     end
                   end
                 end
