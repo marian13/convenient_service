@@ -21,7 +21,7 @@ module ConvenientService
           def next(...)
             chain.next(...)
           rescue => exception
-            exception.instance_exec(entity) { |entity| define_singleton_method(:services) { @services ||= [] } } unless exception.respond_to?(:services)
+            exception.instance_exec { define_singleton_method(:services) { @services ||= [] } } unless exception.respond_to?(:services)
 
             Utils::Array.limited_push(exception.services, service_details, limit: max_services_size)
 
