@@ -120,6 +120,9 @@ module ConvenientService
                 # @param other [Object] Can be any type.
                 # @return [Boolean, nil]
                 #
+                # @internal
+                #   TODO: Currently `==` does NOT compare `extra_kwargs`. Is it OK?
+                #
                 def ==(other)
                   return unless other.instance_of?(self.class)
 

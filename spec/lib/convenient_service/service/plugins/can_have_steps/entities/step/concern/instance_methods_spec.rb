@@ -275,6 +275,14 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           end
         end
 
+        context "when `other` has different extra kwargs" do
+          let(:other) { step_class.new(*args, **kwargs.merge(try: false)) }
+
+          it "ignores them" do
+            expect(step == other).to eq(true)
+          end
+        end
+
         context "when `other` has same attributes" do
           let(:other) { step_class.new(*args, **kwargs) }
 
