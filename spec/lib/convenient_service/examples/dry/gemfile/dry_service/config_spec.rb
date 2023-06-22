@@ -212,7 +212,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::DryService::Config do
                 ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Concern,
                 ConvenientService::Common::Plugins::HasResultDuckShortSyntax::Concern,
                 ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanRecalculateResult::Concern,
-                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasStep::Concern,
+                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanHaveStep::Concern,
                 ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanBeTried::Concern,
                 ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanHaveParentResult::Concern,
                 ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanHaveCheckedStatus::Concern
@@ -229,7 +229,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::DryService::Config do
               [
                 ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
                 ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Middleware,
-                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasStep::Initialize::Middleware,
+                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanHaveStep::Initialize::Middleware,
                 ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanBeTried::Initialize::Middleware,
                 ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanHaveParentResult::Initialize::Middleware
               ]
@@ -361,7 +361,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::DryService::Config do
             let(:to_kwargs_middlewares) do
               [
                 ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasStep::ToKwargs::Middleware,
+                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanHaveStep::ToKwargs::Middleware,
                 ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanBeTried::ToKwargs::Middleware,
                 ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanHaveParentResult::ToKwargs::Middleware
               ]

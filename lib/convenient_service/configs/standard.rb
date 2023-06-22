@@ -92,14 +92,14 @@ module ConvenientService
             use Plugins::Common::HasResultDuckShortSyntax::Concern
             use Plugins::Result::CanRecalculateResult::Concern
 
-            use Plugins::Result::HasStep::Concern
+            use Plugins::Result::CanHaveStep::Concern
             use Plugins::Result::CanBeTried::Concern
             use Plugins::Result::CanHaveParentResult::Concern
             use Plugins::Result::CanHaveCheckedStatus::Concern
           end
 
           middlewares :initialize do
-            use Plugins::Result::HasStep::Initialize::Middleware
+            use Plugins::Result::CanHaveStep::Initialize::Middleware
             use Plugins::Result::CanBeTried::Initialize::Middleware
             use Plugins::Result::CanHaveParentResult::Initialize::Middleware
           end
@@ -141,7 +141,7 @@ module ConvenientService
           end
 
           middlewares :to_kwargs do
-            use Plugins::Result::HasStep::ToKwargs::Middleware
+            use Plugins::Result::CanHaveStep::ToKwargs::Middleware
             use Plugins::Result::CanBeTried::ToKwargs::Middleware
             use Plugins::Result::CanHaveParentResult::ToKwargs::Middleware
           end

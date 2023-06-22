@@ -7,7 +7,7 @@ module ConvenientService
         module Entities
           class Result
             module Plugins
-              module HasStep
+              module CanHaveStep
                 module ToKwargs
                   class Middleware < MethodChainMiddleware
                     intended_for :to_kwargs, entity: :result

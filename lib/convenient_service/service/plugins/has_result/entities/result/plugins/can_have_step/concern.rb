@@ -7,7 +7,7 @@ module ConvenientService
         module Entities
           class Result
             module Plugins
-              module HasStep
+              module CanHaveStep
                 module Concern
                   include Support::Concern
 
