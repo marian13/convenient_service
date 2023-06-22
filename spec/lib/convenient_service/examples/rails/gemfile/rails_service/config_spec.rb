@@ -231,8 +231,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::RailsService::Config
               [
                 ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
                 ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Middleware,
-                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanHaveStep::Initialize::Middleware,
-                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanHaveParentResult::Initialize::Middleware
+                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanHaveStep::Initialize::Middleware
               ]
             end
 
@@ -362,8 +361,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::RailsService::Config
             let(:to_kwargs_middlewares) do
               [
                 ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanHaveStep::ToKwargs::Middleware,
-                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanHaveParentResult::ToKwargs::Middleware
+                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanHaveStep::ToKwargs::Middleware
               ]
             end
 

@@ -100,7 +100,6 @@ module ConvenientService
 
           middlewares :initialize do
             use Plugins::Result::CanHaveStep::Initialize::Middleware
-            use Plugins::Result::CanHaveParentResult::Initialize::Middleware
           end
 
           middlewares :success? do
@@ -141,7 +140,6 @@ module ConvenientService
 
           middlewares :to_kwargs do
             use Plugins::Result::CanHaveStep::ToKwargs::Middleware
-            use Plugins::Result::CanHaveParentResult::ToKwargs::Middleware
           end
         end
 

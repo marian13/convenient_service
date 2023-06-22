@@ -15,8 +15,11 @@ module ConvenientService
                     ##
                     # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result, nil]
                     #
+                    # @internal
+                    #   TODO: What if result is created from method step? Who is its parent?
+                    #
                     def parent
-                      Utils.memoize_including_falsy_values(self, :@parent) { internals.cache[:parent] }
+                      Utils.memoize_including_falsy_values(self, :@parent) { extra_kwargs[:parent] }
                     end
 
                     ##
