@@ -87,6 +87,11 @@ module ConvenientService
                     alias_method :unsafe_code, :code
 
                     ##
+                    # @return [Hash{Object => Symbol}]
+                    #
+                    delegate :extra_kwargs, to: :jsend_attributes
+
+                    ##
                     # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Structs::JSendAttributes]
                     #
                     def jsend_attributes
@@ -125,6 +130,9 @@ module ConvenientService
                     # @param other [ConvenientService::Service::Plugins::HasResult::Entities::Result]
                     # @return [Boolean, nil]
                     #
+                    # @internal
+                    #   TODO: Currently `==` does NOT compare `extra_kwargs`. Is it OK?
+                    #
                     def ==(other)
                       return unless other.instance_of?(self.class)
 
@@ -146,7 +154,8 @@ module ConvenientService
                         status: status,
                         data: unsafe_data,
                         message: unsafe_message,
-                        code: unsafe_code
+                        code: unsafe_code,
+                        **extra_kwargs
                       }
                     end
                   end

@@ -26,9 +26,12 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
       status: :foo,
       data: {foo: :bar},
       message: "foo",
-      code: :foo
+      code: :foo,
+      **extra_kwargs
     }
   end
+
+  let(:extra_kwargs) { {} }
 
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
@@ -114,6 +117,14 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
     describe "#unsafe_code" do
       it "returns casted `code`" do
         expect(result_instance.unsafe_code).to eq(result_class.code(value: params[:code]))
+      end
+    end
+
+    describe "#extra_kwargs" do
+      let(:extra_kwargs) { {parent: nil} }
+
+      it "returns casted JSend attributes" do
+        expect(result_instance.extra_kwargs).to eq(extra_kwargs)
       end
     end
 
@@ -222,6 +233,14 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
         end
       end
 
+      context "when results have different extra kwargs" do
+        let(:other) { result_class.new(**params.merge(parent: nil)) }
+
+        it "ignores them" do
+          expect(result == other).to eq(true)
+        end
+      end
+
       context "when results have same attributes" do
         let(:other) { result_class.new(**params) }
 
@@ -235,10 +254,10 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
       let(:kwargs) do
         {
           service: service_instance,
-          status: result_class.status(value: :foo),
-          data: result_class.data(value: {foo: :bar}),
-          message: result_class.message(value: "foo"),
-          code: result_class.code(value: :foo)
+          status: result_instance.create_status(:foo),
+          data: result_instance.create_data({foo: :bar}),
+          message: result_instance.create_message("foo"),
+          code: result_instance.create_code(:foo)
         }
       end
 
@@ -249,6 +268,16 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
       specify { expect { result_instance.to_kwargs }.to delegate_to(result_instance, :unsafe_data) }
       specify { expect { result_instance.to_kwargs }.to delegate_to(result_instance, :unsafe_message) }
       specify { expect { result_instance.to_kwargs }.to delegate_to(result_instance, :unsafe_code) }
+
+      context "when `result` has extra kwargs" do
+        let(:extra_kwargs) { {parent: nil} }
+
+        it "includes them into kwargs representation of result" do
+          expect(result_instance.to_kwargs).to eq(kwargs.merge(extra_kwargs))
+        end
+
+        specify { expect { result_instance.to_kwargs }.to delegate_to(result_instance, :extra_kwargs) }
+      end
     end
   end
 end
