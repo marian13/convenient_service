@@ -44,7 +44,7 @@ module ConvenientService
               #
               cache =
                 if Support::Gems::RSpec.current_example
-                  Utils::Object.instance_variable_fetch(Support::Gems::RSpec.current_example, :@__convenient_service_stubbed_results__) { Support::Cache.create(backend: :thread_safe_array) }
+                  Utils::Object.memoize_including_falsy_values(Support::Gems::RSpec.current_example, :@__convenient_service_stubbed_results__) { Support::Cache.create(backend: :thread_safe_array) }
                 else
                   Support::Cache.create(backend: :thread_safe_array)
                 end

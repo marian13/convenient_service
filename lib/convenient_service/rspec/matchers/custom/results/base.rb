@@ -303,14 +303,14 @@ module ConvenientService
             # @return [Class]
             #
             def service_class
-              Utils::Object.instance_variable_fetch(self, :@service_class) { chain[:service_class] }
+              Utils::Object.memoize_including_falsy_values(self, :@service_class) { chain[:service_class] }
             end
 
             ##
             # @return [Class]
             #
             def step
-              Utils::Object.instance_variable_fetch(self, :@step) { chain[:step] }
+              Utils::Object.memoize_including_falsy_values(self, :@step) { chain[:step] }
             end
 
             ##

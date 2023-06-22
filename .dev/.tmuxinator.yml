@@ -1,3 +1,7 @@
+##
+# NOTE: Tmuxinator config options.
+# - https://github.com/tmuxinator/tmuxinator#create-a-project
+#
 name: convenient_service
 root: .
 

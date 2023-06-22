@@ -211,7 +211,7 @@ module ConvenientService
               #   IMPORTANT: Must be refreshed when `expected_arguments` are reset.
               #
               def delegation_value
-                Utils::Object.instance_variable_fetch(self, :@delegation_value) do
+                Utils::Object.memoize_including_falsy_values(self, :@delegation_value) do
                   object.__send__(
                     method,
                     *expected_arguments.args,
