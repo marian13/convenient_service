@@ -61,6 +61,8 @@ This library is under heavy development. Public API may be subject to change. Th
 
 - [RubyGems](https://rubygems.org/gems/convenient_service).
 
+- [Static Content](https://github.com/marian13/static_content/tree/main/convenient_service) repo.
+
 - Have a look at [Convenient Service Development Wiki](https://github.com/marian13/convenient_service/wiki) for the contribution tutorials.
 
 <!-- links:end -->
