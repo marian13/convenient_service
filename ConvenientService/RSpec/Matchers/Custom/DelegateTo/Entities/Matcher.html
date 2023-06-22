@@ -1341,7 +1341,7 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/delegate_to/entities/matcher.rb', line 213</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delegation_value'>delegation_value</span>
-  <span class='const'><span class='object_link'><a href="../../../../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../Utils/Object.html" title="ConvenientService::Utils::Object (module)">Object</a></span></span><span class='period'>.</span><span class='id identifier rubyid_instance_variable_fetch'><span class='object_link'><a href="../../../../../Utils/Object.html#instance_variable_fetch-class_method" title="ConvenientService::Utils::Object.instance_variable_fetch (method)">instance_variable_fetch</a></span></span><span class='lparen'>(</span><span class='kw'>self</span><span class='comma'>,</span> <span class='symbol'>:@delegation_value</span><span class='rparen'>)</span> <span class='kw'>do</span>
+  <span class='const'><span class='object_link'><a href="../../../../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../Utils/Object.html" title="ConvenientService::Utils::Object (module)">Object</a></span></span><span class='period'>.</span><span class='id identifier rubyid_memoize_including_falsy_values'><span class='object_link'><a href="../../../../../Utils/Object.html#memoize_including_falsy_values-class_method" title="ConvenientService::Utils::Object.memoize_including_falsy_values (method)">memoize_including_falsy_values</a></span></span><span class='lparen'>(</span><span class='kw'>self</span><span class='comma'>,</span> <span class='symbol'>:@delegation_value</span><span class='rparen'>)</span> <span class='kw'>do</span>
     <span class='id identifier rubyid_object'>object</span><span class='period'>.</span><span class='id identifier rubyid___send__'>__send__</span><span class='lparen'>(</span>
       <span class='id identifier rubyid_method'>method</span><span class='comma'>,</span>
       <span class='op'>*</span><span class='id identifier rubyid_expected_arguments'>expected_arguments</span><span class='period'>.</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span>
@@ -2539,7 +2539,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Jun 22 00:50:42 2023 by
+  Generated on Thu Jun 22 19:40:40 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>
