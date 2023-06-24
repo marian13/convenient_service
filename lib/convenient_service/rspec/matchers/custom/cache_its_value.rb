@@ -5,6 +5,26 @@ module ConvenientService
     module Matchers
       module Custom
         class CacheItsValue
+          ##
+          # @note `cache_its_value` may lead to false positives.
+          # @note `cache_its_value` calls the `expect` block twice to check its return values object ids.
+          #
+          # @example False positive spec.
+          #
+          #   let(:command_result) { command.call }
+          #
+          #   specify do
+          #     # bad - `command_result` is already cached(memoized) by `let`. That is why `cache_its_value` is always satisfied.
+          #     expect { command_result }.to cache_its_value
+          #   end
+          #
+          # @example Correct spec.
+          #
+          #   specify do
+          #     # good - `command.call` is recalculated every time `expect` is invoked.
+          #     expect { command.call }.to cache_its_value
+          #   end
+          #
           def matches?(block_expectation)
             @block_expectation = block_expectation
 
