@@ -209,7 +209,7 @@
   
   
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="../../../../../Support/Command.html" title="ConvenientService::Support::Command (class)">ConvenientService::Support::Command</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="../../../../../Support/Command.html#[]-class_method" title="ConvenientService::Support::Command.[] (method)">[]</a></span>, <span class='object_link'><a href="../../../../../Support/Command.html#[]-instance_method" title="ConvenientService::Support::Command#[] (method)">#[]</a></span>, <span class='object_link'><a href="../../../../../Support/Command.html#call-class_method" title="ConvenientService::Support::Command.call (method)">call</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="../../../../../Support/Command.html#[]-class_method" title="ConvenientService::Support::Command.[] (method)">[]</a></span>, <span class='object_link'><a href="../../../../../Support/Command.html#call-class_method" title="ConvenientService::Support::Command.call (method)">call</a></span></p>
 <div id="constructor_details" class="method_details_list">
   <h2>Constructor Details</h2>
   
@@ -352,7 +352,7 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_result_short_syntax/error/commands/assert_args_count_lower_than_three.rb', line 16</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span>
-  <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="../Errors.html" title="ConvenientService::Service::Plugins::HasResultShortSyntax::Error::Errors (module)">Errors</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Errors/MoreThanTwoArgsArePassed.html" title="ConvenientService::Service::Plugins::HasResultShortSyntax::Error::Errors::MoreThanTwoArgsArePassed (class)">MoreThanTwoArgsArePassed</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Errors/MoreThanTwoArgsArePassed.html#initialize-instance_method" title="ConvenientService::Service::Plugins::HasResultShortSyntax::Error::Errors::MoreThanTwoArgsArePassed#initialize (method)">new</a></span></span> <span class='kw'>if</span> <span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_size'>size</span> <span class='op'>&gt;</span> <span class='int'>2</span>
+  <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="../../../../../Support/Command/Errors.html" title="ConvenientService::Support::Command::Errors (module)">Errors</a></span></span><span class='op'>::</span><span class='const'>MoreThanTwoArgsArePassed</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='kw'>if</span> <span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_size'>size</span> <span class='op'>&gt;</span> <span class='int'>2</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -364,7 +364,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Jun 26 18:18:40 2023 by
+  Generated on Mon Jun 26 19:29:53 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>

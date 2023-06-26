@@ -258,7 +258,7 @@
   
   
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="../../../../../../Support/Command.html" title="ConvenientService::Support::Command (class)">Support::Command</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="../../../../../../Support/Command.html#[]-class_method" title="ConvenientService::Support::Command.[] (method)">[]</a></span>, <span class='object_link'><a href="../../../../../../Support/Command.html#[]-instance_method" title="ConvenientService::Support::Command#[] (method)">#[]</a></span>, <span class='object_link'><a href="../../../../../../Support/Command.html#call-class_method" title="ConvenientService::Support::Command.call (method)">call</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="../../../../../../Support/Command.html#[]-class_method" title="ConvenientService::Support::Command.[] (method)">[]</a></span>, <span class='object_link'><a href="../../../../../../Support/Command.html#call-class_method" title="ConvenientService::Support::Command.call (method)">call</a></span></p>
 <div id="constructor_details" class="method_details_list">
   <h2>Constructor Details</h2>
   
@@ -552,7 +552,7 @@
   <span class='kw'>when</span> <span class='symbol'>:result</span> <span class='kw'>then</span> <span class='id identifier rubyid_match_result_method_step?'>match_result_method_step?</span>
   <span class='kw'>when</span> <span class='op'>::</span><span class='const'>Symbol</span> <span class='kw'>then</span> <span class='id identifier rubyid_match_method_step?'>match_method_step?</span>
   <span class='kw'>when</span> <span class='kw'>nil</span> <span class='kw'>then</span> <span class='id identifier rubyid_match_without_step?'>match_without_step?</span>
-  <span class='kw'>else</span> <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="../Errors.html" title="ConvenientService::RSpec::Matchers::Custom::Results::Base::Errors (module)">Errors</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Errors/InvalidStep.html" title="ConvenientService::RSpec::Matchers::Custom::Results::Base::Errors::InvalidStep (class)">InvalidStep</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Errors/InvalidStep.html#initialize-instance_method" title="ConvenientService::RSpec::Matchers::Custom::Results::Base::Errors::InvalidStep#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>step:</span> <span class='id identifier rubyid_step'>step</span><span class='rparen'>)</span>
+  <span class='kw'>else</span> <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="../../../../../../Support/Command/Errors.html" title="ConvenientService::Support::Command::Errors (module)">Errors</a></span></span><span class='op'>::</span><span class='const'>InvalidStep</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='label'>step:</span> <span class='id identifier rubyid_step'>step</span><span class='rparen'>)</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -565,7 +565,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Jun 26 18:18:38 2023 by
+  Generated on Mon Jun 26 19:29:50 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>

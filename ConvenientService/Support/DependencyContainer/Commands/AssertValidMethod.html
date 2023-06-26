@@ -285,7 +285,7 @@
   
   
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="../../Command.html" title="ConvenientService::Support::Command (class)">Command</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="../../Command.html#[]-class_method" title="ConvenientService::Support::Command.[] (method)">[]</a></span>, <span class='object_link'><a href="../../Command.html#[]-instance_method" title="ConvenientService::Support::Command#[] (method)">#[]</a></span>, <span class='object_link'><a href="../../Command.html#call-class_method" title="ConvenientService::Support::Command.call (method)">call</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="../../Command.html#[]-class_method" title="ConvenientService::Support::Command.[] (method)">[]</a></span>, <span class='object_link'><a href="../../Command.html#call-class_method" title="ConvenientService::Support::Command.call (method)">call</a></span></p>
 <div id="constructor_details" class="method_details_list">
   <h2>Constructor Details</h2>
   
@@ -624,7 +624,7 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/support/dependency_container/commands/assert_valid_method.rb', line 42</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span>
-  <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="../Errors.html" title="ConvenientService::Support::DependencyContainer::Errors (module)">Errors</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Errors/NotExportedMethod.html" title="ConvenientService::Support::DependencyContainer::Errors::NotExportedMethod (class)">NotExportedMethod</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Errors/NotExportedMethod.html#initialize-instance_method" title="ConvenientService::Support::DependencyContainer::Errors::NotExportedMethod#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>method_name:</span> <span class='id identifier rubyid_slug'>slug</span><span class='comma'>,</span> <span class='label'>method_scope:</span> <span class='id identifier rubyid_scope'>scope</span><span class='comma'>,</span> <span class='label'>mod:</span> <span class='id identifier rubyid_container'>container</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_method'>method</span>
+  <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="../../Command/Errors.html" title="ConvenientService::Support::Command::Errors (module)">Errors</a></span></span><span class='op'>::</span><span class='const'>NotExportedMethod</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='label'>method_name:</span> <span class='id identifier rubyid_slug'>slug</span><span class='comma'>,</span> <span class='label'>method_scope:</span> <span class='id identifier rubyid_scope'>scope</span><span class='comma'>,</span> <span class='label'>mod:</span> <span class='id identifier rubyid_container'>container</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_method'>method</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -636,7 +636,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Jun 26 18:18:37 2023 by
+  Generated on Mon Jun 26 19:29:50 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>

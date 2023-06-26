@@ -236,7 +236,7 @@
   
   
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="../../../../Support/Command.html" title="ConvenientService::Support::Command (class)">Support::Command</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="../../../../Support/Command.html#[]-class_method" title="ConvenientService::Support::Command.[] (method)">[]</a></span>, <span class='object_link'><a href="../../../../Support/Command.html#[]-instance_method" title="ConvenientService::Support::Command#[] (method)">#[]</a></span>, <span class='object_link'><a href="../../../../Support/Command.html#call-class_method" title="ConvenientService::Support::Command.call (method)">call</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="../../../../Support/Command.html#[]-class_method" title="ConvenientService::Support::Command.[] (method)">[]</a></span>, <span class='object_link'><a href="../../../../Support/Command.html#call-class_method" title="ConvenientService::Support::Command.call (method)">call</a></span></p>
 <div id="constructor_details" class="method_details_list">
   <h2>Constructor Details</h2>
   
@@ -495,8 +495,8 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/can_have_user_provided_entity/commands/find_or_create_entity.rb', line 34</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span>
-  <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="../Errors.html" title="ConvenientService::Common::Plugins::CanHaveUserProvidedEntity::Errors (module)">Errors</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Errors/ProtoEntityHasNoName.html" title="ConvenientService::Common::Plugins::CanHaveUserProvidedEntity::Errors::ProtoEntityHasNoName (class)">ProtoEntityHasNoName</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Errors/ProtoEntityHasNoName.html#initialize-instance_method" title="ConvenientService::Common::Plugins::CanHaveUserProvidedEntity::Errors::ProtoEntityHasNoName#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>proto_entity:</span> <span class='id identifier rubyid_proto_entity'>proto_entity</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_proto_entity_name'>proto_entity_name</span>
-  <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="../Errors.html" title="ConvenientService::Common::Plugins::CanHaveUserProvidedEntity::Errors (module)">Errors</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Errors/ProtoEntityHasNoConcern.html" title="ConvenientService::Common::Plugins::CanHaveUserProvidedEntity::Errors::ProtoEntityHasNoConcern (class)">ProtoEntityHasNoConcern</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Errors/ProtoEntityHasNoConcern.html#initialize-instance_method" title="ConvenientService::Common::Plugins::CanHaveUserProvidedEntity::Errors::ProtoEntityHasNoConcern#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>proto_entity:</span> <span class='id identifier rubyid_proto_entity'>proto_entity</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_proto_entity_concern'>proto_entity_concern</span>
+  <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="../../../../Support/Command/Errors.html" title="ConvenientService::Support::Command::Errors (module)">Errors</a></span></span><span class='op'>::</span><span class='const'>ProtoEntityHasNoName</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='label'>proto_entity:</span> <span class='id identifier rubyid_proto_entity'>proto_entity</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_proto_entity_name'>proto_entity_name</span>
+  <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="../../../../Support/Command/Errors.html" title="ConvenientService::Support::Command::Errors (module)">Errors</a></span></span><span class='op'>::</span><span class='const'>ProtoEntityHasNoConcern</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='label'>proto_entity:</span> <span class='id identifier rubyid_proto_entity'>proto_entity</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_proto_entity_concern'>proto_entity_concern</span>
 
   <span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_include'>include</span> <span class='const'><span class='object_link'><a href="../../../../Core.html" title="ConvenientService::Core (module)">Core</a></span></span>
 
@@ -554,7 +554,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Jun 26 18:18:39 2023 by
+  Generated on Mon Jun 26 19:29:52 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>
