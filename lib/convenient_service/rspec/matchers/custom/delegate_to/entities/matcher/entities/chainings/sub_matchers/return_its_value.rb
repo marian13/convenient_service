@@ -15,6 +15,9 @@ module ConvenientService
                       # @param block_expectation_value [Object]
                       # @return [Boolean]
                       #
+                      # @internal
+                      #   TODO: Proper explanatory message when `matcher.delegation_value` raises exception.
+                      #
                       def matches?(block_expectation_value)
                         super
 
