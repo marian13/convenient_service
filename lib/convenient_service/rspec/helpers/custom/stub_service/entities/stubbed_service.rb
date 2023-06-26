@@ -7,23 +7,34 @@ module ConvenientService
         class StubService < Support::Command
           module Entities
             class StubbedService
+              include Support::DependencyContainer::Import
+
+              ##
+              # @internal
+              #   TODO: Implement shorter form in the following way:
+              #
+              #   import \
+              #     command: :SetServiceStubbedResult,
+              #     from: ConvenientService::Service::Plugins::CanHaveStubbedResult
+              #
+              import \
+                :"commands.SetServiceStubbedResult",
+                from: ConvenientService::Service::Plugins::CanHaveStubbedResult::Container
+
               ##
               # @param service_class [Class]
               # @return [void]
               #
               def initialize(service_class:)
                 @service_class = service_class
-                @arguments = {args: [], kwargs: {}, block: nil}
+                @arguments = Support::Arguments.null_arguments
               end
 
               ##
-              # @param args [Array<Object>]
-              # @param kwargs [Hash{Symbol => Object}]
-              # @param block [Block]
               # @return [ConvenientService::RSpec::Helpers::Custom::StubService::Entities::StubService]
               #
-              def with_arguments(*args, **kwargs, &block)
-                @arguments = {args: args, kwargs: kwargs, block: block}
+              def with_arguments(...)
+                @arguments = Support::Arguments.new(...)
 
                 self
               end
@@ -32,7 +43,7 @@ module ConvenientService
               # @return [ConvenientService::RSpec::Helpers::Custom::StubService::Entities::StubService]
               #
               def without_arguments
-                @arguments = {args: [], kwargs: {}, block: nil}
+                @arguments = Support::Arguments.null_arguments
 
                 self
               end
@@ -46,7 +57,7 @@ module ConvenientService
 
                 service_class.commit_config!(trigger: Constants::Triggers::STUB_SERVICE)
 
-                service_class.stubbed_results[key] = result_value
+                commands.SetServiceStubbedResult[service: service_class, arguments: arguments, result: result_value]
 
                 self
               end
@@ -76,13 +87,6 @@ module ConvenientService
               #
               def result_value
                 @result_value ||= result_spec.for(service_class).calculate_value
-              end
-
-              ##
-              # @return [ConvenientService::Support::Cache::Entities::Key]
-              #
-              def key
-                @key ||= service_class.stubbed_results.keygen(*arguments[:args], **arguments[:kwargs], &arguments[:block])
               end
             end
           end

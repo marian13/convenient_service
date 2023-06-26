@@ -13,12 +13,20 @@ module ConvenientService
         def call(...)
           new(...).call
         end
+
+        def [](...)
+          call(...)
+        end
       end
 
       ##
       # TODO: Specs. Raise error if not overridden.
       #
       def call
+      end
+
+      def [](...)
+        call(...)
       end
     end
   end

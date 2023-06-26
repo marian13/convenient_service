@@ -21,7 +21,7 @@ module ConvenientService
           # @example Correct spec.
           #
           #   specify do
-          #     # good - `command.call` is recalculated every time `expect` is invoked.
+          #     # good - `command.call` is recalculated every time `expect` block is invoked.
           #     expect { command.call }.to cache_its_value
           #   end
           #

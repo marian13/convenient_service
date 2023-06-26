@@ -6,6 +6,7 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Service::Plugins::CanHaveStubbedResult::Concern do
+  include ConvenientService::RSpec::Matchers::DelegateTo
   include ConvenientService::RSpec::Matchers::CacheItsValue
 
   let(:service_class) do
@@ -33,22 +34,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStubbedResult::Concer
 
   example_group "class methods" do
     describe ".stubbed_results" do
-      context "when RSpec current example is NOT set" do
-        before do
-          allow(ConvenientService::Support::Gems::RSpec).to receive(:current_example).and_return(nil)
-        end
-
-        it "returns empty cache" do
-          expect(service_class.stubbed_results).to eq(ConvenientService::Support::Cache.create(backend: :thread_safe_array))
-        end
-      end
-
-      context "when RSpec current example is set" do
-        it "returns cache scoped by self" do
-          expect(service_class.stubbed_results).to eq(ConvenientService::Support::Cache.create(backend: :thread_safe_array).scope(service_class))
-        end
-
-        specify { expect { service_class.stubbed_results }.to cache_its_value }
+      specify do
+        expect { service_class.stubbed_results }
+          .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResult::Commands::FetchServiceStubbedResultsCache, :call)
+          .with_arguments(service: service_class)
+          .and_return_its_value
       end
     end
   end

@@ -15,65 +15,15 @@ RSpec.describe ConvenientService::RSpec::Helpers::Custom::StubService::Entities:
   let(:status) { :success }
   let(:chain) { {} }
 
-  ##
-  # TODO: Service class factory!
-  #
-  # rubocop:disable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
   let(:service_class) do
     Class.new do
-      include ConvenientService::Core
-
-      concerns do
-        use ConvenientService::Service::Plugins::CanHaveStubbedResult::Concern
-        use ConvenientService::Common::Plugins::HasConstructor::Concern
-        use ConvenientService::Common::Plugins::HasConstructorWithoutInitialize::Concern
-        use ConvenientService::Service::Plugins::HasResult::Concern
-      end
-
-      middlewares :result, scope: :class do
-        use ConvenientService::Common::Plugins::NormalizesEnv::Middleware
-
-        use ConvenientService::Service::Plugins::CanHaveStubbedResult::Middleware
-      end
-
-      class self::Result
-        include ConvenientService::Core
-
-        concerns do
-          use ConvenientService::Common::Plugins::HasInternals::Concern
-          use ConvenientService::Common::Plugins::HasConstructor::Concern
-          use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Concern
-        end
-
-        middlewares :initialize do
-          use ConvenientService::Common::Plugins::NormalizesEnv::Middleware
-
-          use ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Middleware
-        end
-
-        class self::Internals
-          include ConvenientService::Core
-
-          concerns do
-            use ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Plugins::HasCache::Concern
-          end
-        end
-      end
-
-      class self::Internals
-        include ConvenientService::Core
-
-        concerns do
-          use ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Plugins::HasCache::Concern
-        end
-      end
+      include ConvenientService::Configs::Standard
 
       def result
         success
       end
     end
   end
-  # rubocop:enable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
 
   example_group "class methods" do
     describe ".new" do
