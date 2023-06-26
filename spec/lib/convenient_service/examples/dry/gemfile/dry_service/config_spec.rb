@@ -215,7 +215,8 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::DryService::Config do
                 ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanHaveStep::Concern,
                 ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanBeTried::Concern,
                 ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanHaveParentResult::Concern,
-                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanHaveCheckedStatus::Concern
+                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanHaveCheckedStatus::Concern,
+                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanBeStubbed::Concern
               ]
             end
 

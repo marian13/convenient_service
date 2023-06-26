@@ -8,8 +8,9 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::RSpec::Helpers::Custom::StubService::Entities::StubbedService do
-  include ConvenientService::RSpec::Matchers::DelegateTo
   include ConvenientService::RSpec::Helpers::StubService
+
+  include ConvenientService::RSpec::Matchers::DelegateTo
   include ConvenientService::RSpec::Matchers::Results
 
   subject(:helper) { described_class.new(service_class: service_class) }

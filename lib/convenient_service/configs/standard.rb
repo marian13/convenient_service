@@ -167,6 +167,12 @@ module ConvenientService
               Plugins::Common::NormalizesEnv::Middleware,
               Plugins::Service::CanHaveStubbedResult::Middleware
           end
+
+          class self::Result
+            concerns do
+              use Plugins::Result::CanBeStubbed::Concern
+            end
+          end
         end
       end
       # rubocop:enable Lint/ConstantDefinitionInBlock

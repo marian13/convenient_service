@@ -58,6 +58,10 @@ RSpec.describe ConvenientService::RSpec::Helpers::Custom::StubService::Entities:
           expect(result_spec.calculate_value).to be_failure
         end
 
+        it "returns stubbed result" do
+          expect(result_spec.calculate_value.stubbed_result?).to eq(true)
+        end
+
         context "when result spec for failure with data" do
           let(:result_spec) { described_class.new(status: :failure, service_class: service_class).with_data(data) }
           let(:data) { {foo: :bar} }
@@ -73,6 +77,10 @@ RSpec.describe ConvenientService::RSpec::Helpers::Custom::StubService::Entities:
 
         it "returns error" do
           expect(result_spec.calculate_value).to be_error
+        end
+
+        it "returns stubbed result" do
+          expect(result_spec.calculate_value.stubbed_result?).to eq(true)
         end
 
         context "when result spec for error with message" do
@@ -117,6 +125,10 @@ RSpec.describe ConvenientService::RSpec::Helpers::Custom::StubService::Entities:
 
         it "returns success" do
           expect(result_spec.calculate_value).to be_success
+        end
+
+        it "returns stubbed result" do
+          expect(result_spec.calculate_value.stubbed_result?).to eq(true)
         end
 
         context "when result spec for success with data" do

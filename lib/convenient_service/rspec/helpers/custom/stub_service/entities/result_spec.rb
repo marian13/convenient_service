@@ -106,7 +106,7 @@ module ConvenientService
               #    TODO: Assert.
               #
               def calculate_value
-                service_class.__send__(status, **kwargs)
+                service_class.__send__(status, **kwargs).copy(overrides: {kwargs: {stubbed_result: true}})
               end
 
               ##
