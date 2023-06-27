@@ -7,7 +7,7 @@ module ConvenientService
         module Entities
           class Result
             module Plugins
-              module CanBeStubbed
+              module CanBeStubbedResult
                 module Concern
                   include Support::Concern
 

@@ -5,7 +5,8 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanBeStubbed::Concern do
+RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanBeStubbedResult::Concern,
+  ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasStubbedResultInvocationsCounter::Concern do
   include ConvenientService::RSpec::Helpers::StubService
 
   example_group "modules" do

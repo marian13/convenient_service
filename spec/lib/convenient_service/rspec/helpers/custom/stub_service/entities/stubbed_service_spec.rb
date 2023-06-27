@@ -92,7 +92,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::Custom::StubService::Entities:
 
       specify do
         expect { helper.to(result_spec) }
-          .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResult::Commands::SetServiceStubbedResult, :call)
+          .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResults::Commands::SetServiceStubbedResult, :call)
           .with_arguments(service: service_class, arguments: ConvenientService::Support::Arguments.null_arguments, result: result_value)
       end
 
@@ -101,7 +101,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::Custom::StubService::Entities:
 
         specify do
           expect { helper.with_arguments(*args, **kwargs, &block).to(result_spec) }
-            .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResult::Commands::SetServiceStubbedResult, :call)
+            .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResults::Commands::SetServiceStubbedResult, :call)
             .with_arguments(service: service_class, arguments: ConvenientService::Support::Arguments.new(*args, **kwargs, &block), result: result_value)
         end
       end
@@ -111,7 +111,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::Custom::StubService::Entities:
 
         specify do
           expect { helper.without_arguments.to(result_spec) }
-            .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResult::Commands::SetServiceStubbedResult, :call)
+            .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResults::Commands::SetServiceStubbedResult, :call)
             .with_arguments(service: service_class, arguments: ConvenientService::Support::Arguments.null_arguments, result: result_value)
         end
       end
