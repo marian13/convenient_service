@@ -15,11 +15,11 @@ module ConvenientService
               #
               #   import \
               #     command: :SetServiceStubbedResult,
-              #     from: ConvenientService::Service::Plugins::CanHaveStubbedResult
+              #     from: ConvenientService::Service::Plugins::CanHaveStubbedResults
               #
               import \
                 :"commands.SetServiceStubbedResult",
-                from: ConvenientService::Service::Plugins::CanHaveStubbedResult::Container
+                from: ConvenientService::Service::Plugins::CanHaveStubbedResults::Container
 
               ##
               # @param service_class [Class]

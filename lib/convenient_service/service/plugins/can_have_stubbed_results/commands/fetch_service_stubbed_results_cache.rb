@@ -3,7 +3,7 @@
 module ConvenientService
   module Service
     module Plugins
-      module CanHaveStubbedResult
+      module CanHaveStubbedResults
         module Commands
           class FetchServiceStubbedResultsCache < Support::Command
             ##

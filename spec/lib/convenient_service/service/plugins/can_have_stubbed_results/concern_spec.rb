@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
-RSpec.describe ConvenientService::Service::Plugins::CanHaveStubbedResult::Concern do
+RSpec.describe ConvenientService::Service::Plugins::CanHaveStubbedResults::Concern do
   include ConvenientService::RSpec::Matchers::DelegateTo
   include ConvenientService::RSpec::Matchers::CacheItsValue
 
@@ -36,7 +36,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStubbedResult::Concer
     describe ".stubbed_results" do
       specify do
         expect { service_class.stubbed_results }
-          .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResult::Commands::FetchServiceStubbedResultsCache, :call)
+          .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResults::Commands::FetchServiceStubbedResultsCache, :call)
           .with_arguments(service: service_class)
           .and_return_its_value
       end

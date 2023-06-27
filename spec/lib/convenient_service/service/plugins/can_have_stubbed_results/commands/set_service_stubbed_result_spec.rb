@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::Service::Plugins::CanHaveStubbedResult::Commands::SetServiceStubbedResult do
+RSpec.describe ConvenientService::Service::Plugins::CanHaveStubbedResults::Commands::SetServiceStubbedResult do
   include ConvenientService::RSpec::Matchers::DelegateTo
   include ConvenientService::RSpec::Matchers::CacheItsValue
 
@@ -32,12 +32,12 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStubbedResult::Comman
 
       specify do
         expect { command.call(service: service, arguments: arguments, result: result) }
-          .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResult::Commands::FetchServiceStubbedResultsCache, :call)
+          .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResults::Commands::FetchServiceStubbedResultsCache, :call)
           .with_arguments(service: service)
       end
 
       specify do
-        allow(ConvenientService::Service::Plugins::CanHaveStubbedResult::Commands::FetchServiceStubbedResultsCache).to receive(:call).with(service: service).and_return(cache)
+        allow(ConvenientService::Service::Plugins::CanHaveStubbedResults::Commands::FetchServiceStubbedResultsCache).to receive(:call).with(service: service).and_return(cache)
 
         expect { command.call(service: service, arguments: arguments, result: result) }
           .to delegate_to(cache, :write)

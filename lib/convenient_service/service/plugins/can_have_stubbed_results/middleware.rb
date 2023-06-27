@@ -3,24 +3,25 @@
 module ConvenientService
   module Service
     module Plugins
-      module CanHaveStubbedResult
+      module CanHaveStubbedResults
         class Middleware < MethodChainMiddleware
+          ##
+          # @internal
+          #   TODO: `scope: any_type`.
+          #
           intended_for :result, scope: :class, entity: :service
 
           ##
-          # @param args [Array<Object>]
-          # @param kwargs [Hash{Symbol => Object}]
-          # @param block [Proc, nil]
-          # @return [Object] Can be any type.
+          # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
           #
-          def next(*args, **kwargs, &block)
-            key_with_arguments = cache.keygen(*args, **kwargs, &block)
+          def next(...)
+            key_with_arguments = cache.keygen(...)
             key_without_arguments = cache.keygen
 
             return cache[key_with_arguments] if cache.exist?(key_with_arguments)
             return cache[key_without_arguments] if cache.exist?(key_without_arguments)
 
-            chain.next(*args, **kwargs, &block)
+            chain.next(...)
           end
 
           private

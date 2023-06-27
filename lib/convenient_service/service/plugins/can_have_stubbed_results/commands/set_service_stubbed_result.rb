@@ -3,9 +3,9 @@
 module ConvenientService
   module Service
     module Plugins
-      module CanHaveStubbedResult
+      module CanHaveStubbedResults
         module Commands
-          class GetServiceStubbedResult < Support::Command
+          class SetServiceStubbedResult < Support::Command
             ##
             # @!attribute [r] service
             #   @return [ConvenientService::Service]
@@ -19,20 +19,28 @@ module ConvenientService
             attr_reader :arguments
 
             ##
+            # @!attribute [r] result
+            #   @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+            #
+            attr_reader :result
+
+            ##
             # @param service [ConvenientService::Service]
             # @param arguments [ConvenientService::Support::Arguments]
+            # @param result [ConvenientService::Service::Plugins::HasResult::Entities::Result]
             # @return [void]
             #
-            def initialize(service:, arguments:)
+            def initialize(service:, arguments:, result:)
               @service = service
               @arguments = arguments
+              @result = result
             end
 
             ##
-            # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result, nil]
+            # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
             #
             def call
-              cache.read(key)
+              cache.write(key, result)
             end
 
             private
