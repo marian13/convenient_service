@@ -128,28 +128,6 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#arguments-instance_method" title="#arguments (instance method)">#<strong>arguments</strong>  &#x21d2; ConvenientService::Support::Arguments </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
       <a href="#call-instance_method" title="#call (instance method)">#<strong>call</strong>  &#x21d2; Object </a>
     
 
@@ -174,6 +152,28 @@
   <span class="summary_signature">
     
       <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(stack, **kwargs)  &#x21d2; void </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#middleware_arguments-instance_method" title="#middleware_arguments (instance method)">#<strong>middleware_arguments</strong>  &#x21d2; ConvenientService::Support::Arguments </a>
     
 
     
@@ -292,61 +292,9 @@
 
   <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='ivar'>@__stack__</span> <span class='op'>!=</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_instance_variable_get'>instance_variable_get</span><span class='lparen'>(</span><span class='symbol'>:@__stack__</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='ivar'>@__env__</span> <span class='op'>!=</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_instance_variable_get'>instance_variable_get</span><span class='lparen'>(</span><span class='symbol'>:@__env__</span><span class='rparen'>)</span>
-  <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='ivar'>@__arguments__</span> <span class='op'>!=</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_instance_variable_get'>instance_variable_get</span><span class='lparen'>(</span><span class='symbol'>:@__arguments__</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='ivar'>@__middleware_arguments__</span> <span class='op'>!=</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_instance_variable_get'>instance_variable_get</span><span class='lparen'>(</span><span class='symbol'>:@__middleware_arguments__</span><span class='rparen'>)</span>
 
   <span class='kw'>true</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="arguments-instance_method">
-  
-    #<strong>arguments</strong>  &#x21d2; <tt><span class='object_link'><a href="../../../../../../../../../Support/Arguments.html" title="ConvenientService::Support::Arguments (class)">ConvenientService::Support::Arguments</a></span></tt> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    
-
-  </div>
-</div>
-<div class="tags">
-  
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt><span class='object_link'><a href="../../../../../../../../../Support/Arguments.html" title="ConvenientService::Support::Arguments (class)">ConvenientService::Support::Arguments</a></span></tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-43
-44
-45</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/middlewares/base/concern/instance_methods.rb', line 43</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_arguments'>arguments</span>
-  <span class='ivar'>@__arguments__</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -457,7 +405,59 @@
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_stack'>stack</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
   <span class='ivar'>@__stack__</span> <span class='op'>=</span> <span class='id identifier rubyid_stack'>stack</span>
   <span class='ivar'>@__env__</span> <span class='op'>=</span> <span class='id identifier rubyid_kwargs'>kwargs</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='symbol'>:env</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='lbrace'>{</span><span class='rbrace'>}</span> <span class='rbrace'>}</span>
-  <span class='ivar'>@__arguments__</span> <span class='op'>=</span> <span class='id identifier rubyid_kwargs'>kwargs</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='symbol'>:arguments</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='const'><span class='object_link'><a href="../../../../../../../../../Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../../../Support/Arguments.html" title="ConvenientService::Support::Arguments (class)">Arguments</a></span></span><span class='period'>.</span><span class='id identifier rubyid_null_arguments'><span class='object_link'><a href="../../../../../../../../../Support/Arguments.html#null_arguments-class_method" title="ConvenientService::Support::Arguments.null_arguments (method)">null_arguments</a></span></span> <span class='rbrace'>}</span>
+  <span class='ivar'>@__middleware_arguments__</span> <span class='op'>=</span> <span class='id identifier rubyid_kwargs'>kwargs</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='symbol'>:middleware_arguments</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='const'><span class='object_link'><a href="../../../../../../../../../Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../../../Support/Arguments.html" title="ConvenientService::Support::Arguments (class)">Arguments</a></span></span><span class='period'>.</span><span class='id identifier rubyid_null_arguments'><span class='object_link'><a href="../../../../../../../../../Support/Arguments.html#null_arguments-class_method" title="ConvenientService::Support::Arguments.null_arguments (method)">null_arguments</a></span></span> <span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="middleware_arguments-instance_method">
+  
+    #<strong>middleware_arguments</strong>  &#x21d2; <tt><span class='object_link'><a href="../../../../../../../../../Support/Arguments.html" title="ConvenientService::Support::Arguments (class)">ConvenientService::Support::Arguments</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../../../../../../../Support/Arguments.html" title="ConvenientService::Support::Arguments (class)">ConvenientService::Support::Arguments</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+43
+44
+45</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/middlewares/base/concern/instance_methods.rb', line 43</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_middleware_arguments'>middleware_arguments</span>
+  <span class='ivar'>@__middleware_arguments__</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -469,7 +469,7 @@
 </div>
 
       <div id="footer">
-  Generated on Tue Jun 27 01:50:47 2023 by
+  Generated on Tue Jun 27 23:51:25 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>
