@@ -159,18 +159,29 @@ module ConvenientService
 
         if Dependencies.rspec.loaded?
           concerns do
-            insert_before 0, Plugins::Service::CanHaveStubbedResult::Concern
+            insert_before 0, Plugins::Service::CanHaveStubbedResults::Concern
           end
 
           middlewares :result, scope: :class do
             insert_after \
               Plugins::Common::NormalizesEnv::Middleware,
-              Plugins::Service::CanHaveStubbedResult::Middleware
+              Plugins::Service::CanHaveStubbedResults::Middleware
+
+            insert_before \
+              Plugins::Service::CanHaveStubbedResults::Middleware,
+              Plugins::Service::CountsStubbedResultsInvocations::Middleware
           end
 
           class self::Result
             concerns do
-              use Plugins::Result::CanBeStubbed::Concern
+              use Plugins::Result::CanBeStubbedResult::Concern
+              use Plugins::Result::HasStubbedResultInvocationsCounter::Concern
+            end
+
+            middlewares :initialize do
+              insert_before \
+                Plugins::Result::HasJSendStatusAndAttributes::Middleware,
+                Plugins::Result::HasStubbedResultInvocationsCounter::Middleware
             end
           end
         end

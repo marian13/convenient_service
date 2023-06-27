@@ -30,7 +30,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::RailsService::Config
         example_group "concerns" do
           let(:concerns) do
             [
-              ConvenientService::Service::Plugins::CanHaveStubbedResult::Concern,
+              ConvenientService::Service::Plugins::CanHaveStubbedResults::Concern,
               ConvenientService::Common::Plugins::HasInternals::Concern,
               ConvenientService::Service::Plugins::HasInspect::Concern,
               ConvenientService::Common::Plugins::HasConstructor::Concern,
@@ -180,7 +180,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::RailsService::Config
           let(:class_result_middlewares) do
             [
               ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-              ConvenientService::Service::Plugins::CanHaveStubbedResult::Middleware
+              ConvenientService::Service::Plugins::CountsStubbedResultsInvocations::Middleware, ConvenientService::Service::Plugins::CanHaveStubbedResults::Middleware
             ]
           end
 
@@ -218,7 +218,8 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::RailsService::Config
                 ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanBeTried::Concern,
                 ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanHaveParentResult::Concern,
                 ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanHaveCheckedStatus::Concern,
-                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanBeStubbed::Concern
+                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::CanBeStubbedResult::Concern,
+                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasStubbedResultInvocationsCounter::Concern
               ]
             end
 
@@ -231,7 +232,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::RailsService::Config
             let(:initialize_middlewares) do
               [
                 ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Middleware
+                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasStubbedResultInvocationsCounter::Middleware, ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Middleware
 
               ]
             end

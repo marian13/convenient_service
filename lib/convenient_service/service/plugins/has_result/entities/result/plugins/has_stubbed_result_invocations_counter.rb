@@ -1,0 +1,4 @@
+# frozen_string_literal: true
+
+require_relative "has_stubbed_result_invocations_counter/concern"
+require_relative "has_stubbed_result_invocations_counter/middleware"
