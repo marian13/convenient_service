@@ -4,7 +4,7 @@
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>
-  Class: ConvenientService::Service::Plugins::CanHaveStubbedResult::Middleware
+  Class: ConvenientService::Service::Plugins::CanHaveStubbedResults::Middleware
   
     &mdash; Documentation by YARD 0.9.34
   
@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="../../../../css/common.css" type="text/css" />
 
 <script type="text/javascript">
-  pathId = "ConvenientService::Service::Plugins::CanHaveStubbedResult::Middleware";
+  pathId = "ConvenientService::Service::Plugins::CanHaveStubbedResults::Middleware";
   relpath = '../../../../';
 </script>
 
@@ -37,7 +37,7 @@
         <div id="menu">
   
     <a href="../../../../_index.html">Index (M)</a> &raquo;
-    <span class='title'><span class='object_link'><a href="../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Service.html" title="ConvenientService::Service (module)">Service</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Plugins.html" title="ConvenientService::Service::Plugins (module)">Plugins</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../CanHaveStubbedResult.html" title="ConvenientService::Service::Plugins::CanHaveStubbedResult (module)">CanHaveStubbedResult</a></span></span>
+    <span class='title'><span class='object_link'><a href="../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Service.html" title="ConvenientService::Service (module)">Service</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Plugins.html" title="ConvenientService::Service::Plugins (module)">Plugins</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../CanHaveStubbedResults.html" title="ConvenientService::Service::Plugins::CanHaveStubbedResults (module)">CanHaveStubbedResults</a></span></span>
      &raquo; 
     <span class="title">Middleware</span>
   
@@ -59,7 +59,7 @@
         <div class="clear"></div>
       </div>
 
-      <div id="content"><h1>Class: ConvenientService::Service::Plugins::CanHaveStubbedResult::Middleware
+      <div id="content"><h1>Class: ConvenientService::Service::Plugins::CanHaveStubbedResults::Middleware
   
   
   
@@ -74,7 +74,7 @@
         <ul class="fullTree">
           <li>Object</li>
           
-            <li class="next">ConvenientService::Service::Plugins::CanHaveStubbedResult::Middleware</li>
+            <li class="next">ConvenientService::Service::Plugins::CanHaveStubbedResults::Middleware</li>
           
         </ul>
         <a href="#" class="inheritanceTree">show all</a>
@@ -94,7 +94,7 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/convenient_service/service/plugins/can_have_stubbed_result/middleware.rb</dd>
+    <dd>lib/convenient_service/service/plugins/can_have_stubbed_results/middleware.rb</dd>
   </dl>
   
 </div>
@@ -117,7 +117,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#next-instance_method" title="#next (instance method)">#<strong>next</strong>(*args, **kwargs, &amp;block)  &#x21d2; Object </a>
+      <a href="#next-instance_method" title="#next (instance method)">#<strong>next</strong>  &#x21d2; ConvenientService::Service::Plugins::HasResult::Entities::Result </a>
     
 
     
@@ -131,8 +131,29 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Can be any type.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#result-instance_method" title="#result (instance method)">#<strong>result</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
   
 </li>
 
@@ -149,7 +170,7 @@
       <div class="method_details first">
   <h3 class="signature first" id="next-instance_method">
   
-    #<strong>next</strong>(*args, **kwargs, &amp;block)  &#x21d2; <tt>Object</tt> 
+    #<strong>next</strong>  &#x21d2; <tt><span class='object_link'><a href="../HasResult/Entities/Result.html" title="ConvenientService::Service::Plugins::HasResult::Entities::Result (class)">ConvenientService::Service::Plugins::HasResult::Entities::Result</a></span></tt> 
   
 
   
@@ -157,63 +178,21 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Can be any type.</p>
-
+    
 
   </div>
 </div>
 <div class="tags">
-  <p class="tag_title">Parameters:</p>
-<ul class="param">
   
-    <li>
-      
-        <span class='name'>args</span>
-      
-      
-        <span class='type'>(<tt>Array&lt;Object&gt;</tt>)</span>
-      
-      
-      
-    </li>
-  
-    <li>
-      
-        <span class='name'>kwargs</span>
-      
-      
-        <span class='type'>(<tt>Hash{Symbol =&gt; Object}</tt>)</span>
-      
-      
-      
-    </li>
-  
-    <li>
-      
-        <span class='name'>block</span>
-      
-      
-        <span class='type'>(<tt>Proc</tt>, <tt>nil</tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
-
 <p class="tag_title">Returns:</p>
 <ul class="return">
   
     <li>
       
       
-        <span class='type'>(<tt>Object</tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="../HasResult/Entities/Result.html" title="ConvenientService::Service::Plugins::HasResult::Entities::Result (class)">ConvenientService::Service::Plugins::HasResult::Entities::Result</a></span></tt>)</span>
       
       
-      
-        &mdash;
-        <div class='inline'><p>Can be any type.</p>
-</div>
       
     </li>
   
@@ -225,7 +204,6 @@
       <pre class="lines">
 
 
-16
 17
 18
 19
@@ -233,20 +211,47 @@
 21
 22
 23
-24</pre>
+24
+25</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_stubbed_result/middleware.rb', line 16</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_stubbed_results/middleware.rb', line 17</span>
 
-<span class='kw'>def</span> <span class='kw'>next</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_key_with_arguments'>key_with_arguments</span> <span class='op'>=</span> <span class='id identifier rubyid_cache'>cache</span><span class='period'>.</span><span class='id identifier rubyid_keygen'>keygen</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='kw'>next</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_key_with_arguments'>key_with_arguments</span> <span class='op'>=</span> <span class='id identifier rubyid_cache'>cache</span><span class='period'>.</span><span class='id identifier rubyid_keygen'>keygen</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_key_without_arguments'>key_without_arguments</span> <span class='op'>=</span> <span class='id identifier rubyid_cache'>cache</span><span class='period'>.</span><span class='id identifier rubyid_keygen'>keygen</span>
 
   <span class='kw'>return</span> <span class='id identifier rubyid_cache'>cache</span><span class='lbracket'>[</span><span class='id identifier rubyid_key_with_arguments'>key_with_arguments</span><span class='rbracket'>]</span> <span class='kw'>if</span> <span class='id identifier rubyid_cache'>cache</span><span class='period'>.</span><span class='id identifier rubyid_exist?'>exist?</span><span class='lparen'>(</span><span class='id identifier rubyid_key_with_arguments'>key_with_arguments</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='id identifier rubyid_cache'>cache</span><span class='lbracket'>[</span><span class='id identifier rubyid_key_without_arguments'>key_without_arguments</span><span class='rbracket'>]</span> <span class='kw'>if</span> <span class='id identifier rubyid_cache'>cache</span><span class='period'>.</span><span class='id identifier rubyid_exist?'>exist?</span><span class='lparen'>(</span><span class='id identifier rubyid_key_without_arguments'>key_without_arguments</span><span class='rparen'>)</span>
 
-  <span class='id identifier rubyid_chain'>chain</span><span class='period'>.</span><span class='id identifier rubyid_next'>next</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_chain'>chain</span><span class='period'>.</span><span class='id identifier rubyid_next'>next</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="result-instance_method">
+  
+    #<strong>result</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+12</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_stubbed_results/middleware.rb', line 12</span>
+
+<span class='id identifier rubyid_intended_for'>intended_for</span> <span class='symbol'>:result</span><span class='comma'>,</span> <span class='label'>scope:</span> <span class='symbol'>:class</span><span class='comma'>,</span> <span class='label'>entity:</span> <span class='symbol'>:service</span></pre>
     </td>
   </tr>
 </table>
@@ -257,7 +262,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Jun 26 21:56:51 2023 by
+  Generated on Tue Jun 27 01:07:29 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>
