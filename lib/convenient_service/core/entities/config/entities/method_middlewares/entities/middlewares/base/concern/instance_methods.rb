@@ -34,14 +34,14 @@ module ConvenientService
                       def initialize(stack, **kwargs)
                         @__stack__ = stack
                         @__env__ = kwargs.fetch(:env) { {} }
-                        @__arguments__ = kwargs.fetch(:arguments) { Support::Arguments.null_arguments }
+                        @__middleware_arguments__ = kwargs.fetch(:middleware_arguments) { Support::Arguments.null_arguments }
                       end
 
                       ##
                       # @return [ConvenientService::Support::Arguments]
                       #
-                      def arguments
-                        @__arguments__
+                      def middleware_arguments
+                        @__middleware_arguments__
                       end
 
                       ##
@@ -53,7 +53,7 @@ module ConvenientService
 
                         return false if @__stack__ != other.instance_variable_get(:@__stack__)
                         return false if @__env__ != other.instance_variable_get(:@__env__)
-                        return false if @__arguments__ != other.instance_variable_get(:@__arguments__)
+                        return false if @__middleware_arguments__ != other.instance_variable_get(:@__middleware_arguments__)
 
                         true
                       end

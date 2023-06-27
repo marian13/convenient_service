@@ -90,7 +90,7 @@ module ConvenientService
           # @return [Integer]
           #
           def max_backtrace_size
-            arguments.kwargs.fetch(:max_backtrace_size) { Constants::DEFAULT_MAX_BACKTRACE_SIZE }
+            middleware_arguments.kwargs.fetch(:max_backtrace_size) { Constants::DEFAULT_MAX_BACKTRACE_SIZE }
           end
         end
       end

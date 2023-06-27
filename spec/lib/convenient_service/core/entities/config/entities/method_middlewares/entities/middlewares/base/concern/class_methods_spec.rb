@@ -32,7 +32,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
         let(:middleware) { middleware_class.new(stack) }
 
         it "defaults to `ConvenientService::Support::Arguments.null_arguments`" do
-          expect(middleware.arguments).to eq(ConvenientService::Support::Arguments.null_arguments)
+          expect(middleware.middleware_arguments).to eq(ConvenientService::Support::Arguments.null_arguments)
         end
       end
     end
@@ -41,7 +41,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
       specify do
         expect { middleware_class.with(*args, **kwargs, &block) }
           .to delegate_to(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::MiddlewareCreators::With, :new)
-          .with_arguments(middleware: middleware_class, arguments: ConvenientService::Support::Arguments.new(*args, **kwargs, &block))
+          .with_arguments(middleware: middleware_class, middleware_arguments: ConvenientService::Support::Arguments.new(*args, **kwargs, &block))
           .and_return_its_value
       end
     end

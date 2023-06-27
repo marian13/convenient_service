@@ -8,9 +8,9 @@ require "convenient_service"
 RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::MiddlewareCreators::With do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
-  let(:middleware_creator) { described_class.new(middleware: middleware, arguments: arguments) }
+  let(:middleware_creator) { described_class.new(middleware: middleware, middleware_arguments: middleware_arguments) }
   let(:middleware) { Class.new(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Base) }
-  let(:arguments) { ConvenientService::Support::Arguments.new(:foo, foo: :bar) { :foo } }
+  let(:middleware_arguments) { ConvenientService::Support::Arguments.new(:foo, foo: :bar) { :foo } }
 
   example_group "inheritance" do
     include ConvenientService::RSpec::Matchers::BeDescendantOf
@@ -22,11 +22,11 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
 
   example_group "class methods" do
     describe ".new" do
-      context "when `arguments` are NOT passed" do
+      context "when `middleware_arguments` are NOT passed" do
         let(:middleware_creator) { described_class.new(middleware: middleware) }
 
         it "defaults to null arguments" do
-          expect(middleware_creator.arguments).to eq(ConvenientService::Support::Arguments.null_arguments)
+          expect(middleware_creator.middleware_arguments).to eq(ConvenientService::Support::Arguments.null_arguments)
         end
       end
     end
@@ -38,12 +38,12 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
 
       subject { middleware_creator }
 
-      it { is_expected.to have_attr_reader(:arguments) }
+      it { is_expected.to have_attr_reader(:middleware_arguments) }
     end
 
     describe "#extra_kwargs" do
       it "returns extra kwargs" do
-        expect(middleware_creator.extra_kwargs).to eq({arguments: middleware_creator.arguments})
+        expect(middleware_creator.extra_kwargs).to eq({middleware_arguments: middleware_creator.middleware_arguments})
       end
     end
 
@@ -58,15 +58,15 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
         end
 
         context "when `other` has different `middleware`" do
-          let(:other) { described_class.new(middleware: Class.new(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Chain), arguments: arguments) }
+          let(:other) { described_class.new(middleware: Class.new(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Chain), middleware_arguments: middleware_arguments) }
 
           it "returns `false`" do
             expect(middleware_creator == other).to eq(false)
           end
         end
 
-        context "when `other` has different `arguments`" do
-          let(:other) { described_class.new(middleware: middleware, arguments: ConvenientService::Support::Arguments.null_arguments) }
+        context "when `other` has different `middleware_arguments`" do
+          let(:other) { described_class.new(middleware: middleware, middleware_arguments: ConvenientService::Support::Arguments.null_arguments) }
 
           it "returns `false`" do
             expect(middleware_creator == other).to eq(false)
@@ -74,7 +74,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
         end
 
         context "when `other` has same attributes" do
-          let(:other) { described_class.new(middleware: middleware, arguments: arguments) }
+          let(:other) { described_class.new(middleware: middleware, middleware_arguments: middleware_arguments) }
 
           it "returns `true`" do
             expect(middleware_creator == other).to eq(true)

@@ -30,12 +30,12 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
       it { is_expected.to have_abstract_method(:call) }
     end
 
-    describe "#arguments" do
-      let(:middleware) { middleware_class.new(stack, arguments: arguments) }
-      let(:arguments) { ConvenientService::Support::Arguments.new(*args, **kwargs, &block) }
+    describe "#middleware_arguments" do
+      let(:middleware) { middleware_class.new(stack, middleware_arguments: middleware_arguments) }
+      let(:middleware_arguments) { ConvenientService::Support::Arguments.new(*args, **kwargs, &block) }
 
-      it "returns arguments" do
-        expect(middleware.arguments).to eq(arguments)
+      it "returns middleware_arguments" do
+        expect(middleware.middleware_arguments).to eq(middleware_arguments)
       end
     end
 
@@ -65,8 +65,8 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
           end
         end
 
-        context "when `other` has different `arguments`" do
-          let(:other) { middleware_class.new(stack, arguments: ConvenientService::Support::Arguments.new(:foo)) }
+        context "when `other` has different `middleware_arguments`" do
+          let(:other) { middleware_class.new(stack, middleware_arguments: ConvenientService::Support::Arguments.new(:foo)) }
 
           it "returns `false`" do
             expect(middleware == other).to eq(false)

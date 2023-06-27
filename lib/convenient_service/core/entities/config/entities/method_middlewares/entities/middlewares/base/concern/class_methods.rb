@@ -24,7 +24,7 @@ module ConvenientService
                       # @return [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::MiddlewareCreators::With]
                       #
                       def with(...)
-                        Entities::MiddlewareCreators::With.new(middleware: self, arguments: Support::Arguments.new(...))
+                        Entities::MiddlewareCreators::With.new(middleware: self, middleware_arguments: Support::Arguments.new(...))
                       end
 
                       ##

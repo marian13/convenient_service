@@ -10,10 +10,10 @@ module ConvenientService
               module MiddlewareCreators
                 class With < MiddlewareCreators::Base
                   ##
-                  # @!attribute [r] arguments
+                  # @!attribute [r] middleware_arguments
                   #   @return [ConvenientService::Support::Arguments]
                   #
-                  attr_reader :arguments
+                  attr_reader :middleware_arguments
 
                   ##
                   # @param kwargs [Hash{Symbol => ConvenientService::Support::Arguments}]
@@ -22,14 +22,14 @@ module ConvenientService
                   def initialize(**kwargs)
                     super
 
-                    @arguments = kwargs.fetch(:arguments) { Support::Arguments.null_arguments }
+                    @middleware_arguments = kwargs.fetch(:middleware_arguments) { Support::Arguments.null_arguments }
                   end
 
                   ##
                   # @return [Hash{Symbol => ConvenientService::Support::Arguments}]
                   #
                   def extra_kwargs
-                    {arguments: arguments}
+                    {middleware_arguments: middleware_arguments}
                   end
 
                   ##
@@ -37,7 +37,7 @@ module ConvenientService
                   # @return [Boolean, nil]
                   #
                   def ==(other)
-                    super && Utils.to_bool(arguments == other.arguments)
+                    super && Utils.to_bool(middleware_arguments == other.middleware_arguments)
                   end
                 end
               end

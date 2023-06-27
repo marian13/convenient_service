@@ -41,7 +41,7 @@ module ConvenientService
           # @return [Integer]
           #
           def max_services_size
-            arguments.kwargs.fetch(:max_services_size) { Constants::DEFAULT_MAX_SERVICES_SIZE }
+            middleware_arguments.kwargs.fetch(:max_services_size) { Constants::DEFAULT_MAX_SERVICES_SIZE }
           end
         end
       end

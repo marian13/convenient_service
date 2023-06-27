@@ -59,7 +59,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
       specify do
         expect { middleware_creator.with(*args, **kwargs, &block) }
           .to delegate_to(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::MiddlewareCreators::With, :new)
-          .with_arguments(middleware: middleware_creator, arguments: ConvenientService::Support::Arguments.new(*args, **kwargs, &block))
+          .with_arguments(middleware: middleware_creator, middleware_arguments: ConvenientService::Support::Arguments.new(*args, **kwargs, &block))
           .and_return_its_value
       end
     end
@@ -94,9 +94,9 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
         end
       end
 
-      context "when `arguments` are NOT passed" do
+      context "when `middleware_arguments` are NOT passed" do
         it "defaults to null arguments" do
-          expect(middleware_creator.new(stack).arguments).to eq(ConvenientService::Support::Arguments.null_arguments)
+          expect(middleware_creator.new(stack).middleware_arguments).to eq(ConvenientService::Support::Arguments.null_arguments)
         end
       end
 
@@ -104,7 +104,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
         let(:middleware_creator_class) do
           Class.new(described_class) do
             def extra_kwargs
-              {arguments: ConvenientService::Support::Arguments.new}
+              {middleware_arguments: ConvenientService::Support::Arguments.new}
             end
           end
         end
@@ -112,7 +112,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
         it "merges them with kwargs" do
           expect { middleware_creator.new(stack, env: env) }
             .to delegate_to(middleware_creator.decorated_middleware, :new)
-            .with_arguments(stack, env: env, arguments: ConvenientService::Support::Arguments.new)
+            .with_arguments(stack, env: env, middleware_arguments: ConvenientService::Support::Arguments.new)
             .and_return_its_value
         end
       end
