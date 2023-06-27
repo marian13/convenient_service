@@ -5,6 +5,10 @@ module ConvenientService
     module Plugins
       module CountsStubbedResultsInvocations
         class Middleware < MethodChainMiddleware
+          ##
+          # @internal
+          #   TODO: `scope: any_scope`.
+          #
           intended_for :result, scope: :class, entity: :service
 
           ##
