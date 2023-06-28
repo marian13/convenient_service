@@ -20,7 +20,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStubbedResults::Middl
     describe ".intended_methods" do
       let(:spec) do
         Class.new(ConvenientService::MethodChainMiddleware) do
-          intended_for :result, scope: :class, entity: :service
+          intended_for :result, scope: any_scope, entity: :service
         end
       end
 
@@ -30,58 +30,45 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStubbedResults::Middl
     end
   end
 
-  example_group "instance methods" do
-    include ConvenientService::RSpec::Matchers::Results
-    include ConvenientService::RSpec::Helpers::StubService
+  shared_examples "verify middleware behavior" do
+    example_group "instance methods" do
+      describe "#call" do
+        include ConvenientService::RSpec::Helpers::StubService
+        include ConvenientService::RSpec::Helpers::WrapMethod
 
-    describe "#call" do
-      include ConvenientService::RSpec::Helpers::WrapMethod
-      include ConvenientService::RSpec::Matchers::CallChainNext
+        include ConvenientService::RSpec::Matchers::CallChainNext
+        include ConvenientService::RSpec::Matchers::Results
 
-      subject(:method_value) { method.call(*args, **kwargs, &block) }
+        subject(:method_value) { method.call(*result_arguments.args, **result_arguments.kwargs, &result_arguments.block) }
 
-      let(:method) { wrap_method(service_class, :result, observe_middleware: middleware) }
+        let(:method) { wrap_method(entity, :result, observe_middleware: middleware) }
 
-      let(:args) { [:foo] }
-      let(:kwargs) { {foo: :bar} }
-      let(:block) { proc { :foo } }
+        let(:args) { [:foo] }
+        let(:kwargs) { {foo: :bar} }
+        let(:block) { proc { :foo } }
 
-      let(:service_class) do
-        Class.new.tap do |klass|
-          klass.class_exec(middleware) do |middleware|
-            include ConvenientService::Configs::Standard
+        let(:service_class) do
+          Class.new.tap do |klass|
+            klass.class_exec(middleware, scope) do |middleware, scope|
+              include ConvenientService::Configs::Standard
 
-            middlewares :result, scope: :class do
-              observe middleware
-            end
+              middlewares :result, scope: scope do
+                observe middleware
+              end
 
-            def result
-              success
+              def result
+                success
+              end
             end
           end
         end
-      end
 
-      context "when cache does NOT contain any stubs" do
-        specify do
-          expect { method_value }
-            .to call_chain_next.on(method)
-            .with_arguments(*args, **kwargs, &block)
-            .and_return_its_value
-        end
-
-        it "returns original result" do
-          expect(method_value).to be_success
-        end
-      end
-
-      context "when cache contains one stub" do
-        context "when that one stub with different arguments" do
-          before do
-            stub_service(service_class)
-              .with_arguments(:bar, **kwargs, &block)
-              .to return_error
-              .with_code(:different_arguments)
+        context "when cache does NOT contain any stubs" do
+          specify do
+            expect { method_value }
+              .to call_chain_next.on(method)
+              .with_arguments(*result_arguments.args, **result_arguments.kwargs, &result_arguments.block)
+              .and_return_its_value
           end
 
           it "returns original result" do
@@ -89,103 +76,138 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStubbedResults::Middl
           end
         end
 
-        context "when that one stub with same arguments" do
-          before do
-            stub_service(service_class)
-              .with_arguments(*args, **kwargs, &block)
-              .to return_error
-              .with_code(:same_arguments)
+        context "when cache contains one stub" do
+          context "when that one stub with different arguments" do
+            before do
+              stub_service(service_class)
+                .with_arguments(:bar, **kwargs, &block)
+                .to return_error
+                .with_code(:different_arguments)
+            end
+
+            it "returns original result" do
+              expect(method_value).to be_success
+            end
           end
 
-          it "returns stub with same arguments" do
-            expect(method_value).to be_error.with_code(:same_arguments)
+          context "when that one stub with same arguments" do
+            before do
+              stub_service(service_class)
+                .with_arguments(*args, **kwargs, &block)
+                .to return_error
+                .with_code(:same_arguments)
+            end
+
+            it "returns stub with same arguments" do
+              expect(method_value).to be_error.with_code(:same_arguments)
+            end
+          end
+
+          context "when that one stub without arguments" do
+            before do
+              stub_service(service_class)
+                .to return_error
+                .with_code(:without_arguments)
+            end
+
+            it "returns stub without arguments" do
+              expect(method_value).to be_error.with_code(:without_arguments)
+            end
           end
         end
 
-        context "when that one stub without arguments" do
-          before do
-            stub_service(service_class)
-              .to return_error
-              .with_code(:without_arguments)
+        context "when cache contains multiple stubs" do
+          context "when all of them with different arguments" do
+            before do
+              stub_service(service_class)
+                .with_arguments(:bar, **kwargs, &block)
+                .to return_error
+                .with_code(:different_arguments)
+
+              stub_service(service_class)
+                .with_arguments(:baz, **kwargs, &block)
+                .to return_error
+                .with_code(:different_arguments)
+            end
+
+            it "returns original result" do
+              expect(method_value).to be_success
+            end
           end
 
-          it "returns stub without arguments" do
-            expect(method_value).to be_error.with_code(:without_arguments)
+          context "when one of them with different arguments and one with same arguments" do
+            before do
+              stub_service(service_class)
+                .with_arguments(:bar, **kwargs, &block)
+                .to return_error
+                .with_code(:different_arguments)
+
+              stub_service(service_class)
+                .with_arguments(*args, **kwargs, &block)
+                .to return_error
+                .with_code(:same_arguments)
+            end
+
+            it "returns stub with same arguments" do
+              expect(method_value).to be_error.with_code(:same_arguments)
+            end
+          end
+
+          context "when one of them with different arguments and one without arguments" do
+            before do
+              stub_service(service_class)
+                .with_arguments(:bar, **kwargs, &block)
+                .to return_error
+                .with_code(:different_arguments)
+
+              stub_service(service_class)
+                .to return_error
+                .with_code(:without_arguments)
+            end
+
+            it "returns stub without arguments" do
+              expect(method_value).to be_error.with_code(:without_arguments)
+            end
+          end
+
+          context "when one of them with same arguments and one without arguments" do
+            before do
+              stub_service(service_class)
+                .with_arguments(*args, **kwargs, &block)
+                .to return_error
+                .with_code(:same_arguments)
+
+              stub_service(service_class)
+                .to return_error
+                .with_code(:without_arguments)
+            end
+
+            it "returns stub same arguments" do
+              expect(method_value).to be_error.with_code(:same_arguments)
+            end
           end
         end
       end
+    end
+  end
 
-      context "when cache contains multiple stubs" do
-        context "when all of them with different arguments" do
-          before do
-            stub_service(service_class)
-              .with_arguments(:bar, **kwargs, &block)
-              .to return_error
-              .with_code(:different_arguments)
+  context "when entity is service class" do
+    include_examples "verify middleware behavior" do
+      let(:entity) { service_class }
+      let(:scope) { :class }
 
-            stub_service(service_class)
-              .with_arguments(:baz, **kwargs, &block)
-              .to return_error
-              .with_code(:different_arguments)
-          end
+      let(:result_arguments) { ConvenientService::Support::Arguments.new(*args, **kwargs, &block) }
+    end
+  end
 
-          it "returns original result" do
-            expect(method_value).to be_success
-          end
-        end
+  context "when entity is service instance" do
+    include_examples "verify middleware behavior" do
+      let(:entity) { service_instance }
+      let(:scope) { :instance }
 
-        context "when one of them with different arguments and one with same arguments" do
-          before do
-            stub_service(service_class)
-              .with_arguments(:bar, **kwargs, &block)
-              .to return_error
-              .with_code(:different_arguments)
+      let(:result_arguments) { ConvenientService::Support::Arguments.null_arguments }
 
-            stub_service(service_class)
-              .with_arguments(*args, **kwargs, &block)
-              .to return_error
-              .with_code(:same_arguments)
-          end
-
-          it "returns stub with same arguments" do
-            expect(method_value).to be_error.with_code(:same_arguments)
-          end
-        end
-
-        context "when one of them with different arguments and one without arguments" do
-          before do
-            stub_service(service_class)
-              .with_arguments(:bar, **kwargs, &block)
-              .to return_error
-              .with_code(:different_arguments)
-
-            stub_service(service_class)
-              .to return_error
-              .with_code(:without_arguments)
-          end
-
-          it "returns stub without arguments" do
-            expect(method_value).to be_error.with_code(:without_arguments)
-          end
-        end
-
-        context "when one of them with same arguments and one without arguments" do
-          before do
-            stub_service(service_class)
-              .with_arguments(*args, **kwargs, &block)
-              .to return_error
-              .with_code(:same_arguments)
-
-            stub_service(service_class)
-              .to return_error
-              .with_code(:without_arguments)
-          end
-
-          it "returns stub same arguments" do
-            expect(method_value).to be_error.with_code(:same_arguments)
-          end
-        end
-      end
+      let(:service_instance) { service_class.new(*args, **kwargs, &block) }
     end
   end
 end

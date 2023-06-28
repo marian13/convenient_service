@@ -162,6 +162,16 @@ module ConvenientService
             insert_before 0, Plugins::Service::CanHaveStubbedResults::Concern
           end
 
+          middlewares :result do
+            insert_after \
+              Plugins::Common::NormalizesEnv::Middleware,
+              Plugins::Service::CanHaveStubbedResults::Middleware
+
+            insert_before \
+              Plugins::Service::CanHaveStubbedResults::Middleware,
+              Plugins::Service::CountsStubbedResultsInvocations::Middleware
+          end
+
           middlewares :result, scope: :class do
             insert_after \
               Plugins::Common::NormalizesEnv::Middleware,

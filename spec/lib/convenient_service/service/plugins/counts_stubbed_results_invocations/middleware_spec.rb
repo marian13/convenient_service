@@ -22,7 +22,7 @@ RSpec.describe ConvenientService::Service::Plugins::CountsStubbedResultsInvocati
     describe ".intended_methods" do
       let(:spec) do
         Class.new(ConvenientService::MethodChainMiddleware) do
-          intended_for :result, scope: :class, entity: :service
+          intended_for :result, scope: any_scope, entity: :service
         end
       end
 
@@ -32,71 +32,93 @@ RSpec.describe ConvenientService::Service::Plugins::CountsStubbedResultsInvocati
     end
   end
 
-  example_group "instance methods" do
-    include ConvenientService::RSpec::Matchers::Results
-    include ConvenientService::RSpec::Helpers::StubService
+  shared_examples "verify middleware behavior" do
+    example_group "instance methods" do
+      describe "#call" do
+        include ConvenientService::RSpec::Helpers::StubService
+        include ConvenientService::RSpec::Helpers::WrapMethod
 
-    describe "#call" do
-      include ConvenientService::RSpec::Helpers::WrapMethod
-      include ConvenientService::RSpec::Matchers::CallChainNext
+        include ConvenientService::RSpec::Matchers::CallChainNext
+        include ConvenientService::RSpec::Matchers::Results
 
-      subject(:method_value) { method.call(*args, **kwargs, &block) }
+        subject(:method_value) { method.call(*result_arguments.args, **result_arguments.kwargs, &result_arguments.block) }
 
-      let(:method) { wrap_method(service_class, :result, observe_middleware: middleware) }
+        let(:method) { wrap_method(entity, :result, observe_middleware: middleware) }
 
-      let(:args) { [:foo] }
-      let(:kwargs) { {foo: :bar} }
-      let(:block) { proc { :foo } }
+        let(:args) { [:foo] }
+        let(:kwargs) { {foo: :bar} }
+        let(:block) { proc { :foo } }
 
-      let(:service_class) do
-        Class.new.tap do |klass|
-          klass.class_exec(middleware) do |middleware|
-            include ConvenientService::Configs::Standard
+        let(:service_class) do
+          Class.new.tap do |klass|
+            klass.class_exec(middleware, scope) do |middleware, scope|
+              include ConvenientService::Configs::Standard
 
-            middlewares :result, scope: :class do
-              observe middleware
-            end
+              middlewares :result, scope: scope do
+                observe middleware
+              end
 
-            def result
-              success
+              def result
+                success
+              end
             end
           end
         end
+
+        context "when result is NOT stubbed result" do
+          let(:result) { service_class.success }
+
+          specify do
+            expect { method_value }
+              .to call_chain_next.on(method)
+              .with_arguments(*result_arguments.args, **result_arguments.kwargs, &result_arguments.block)
+              .and_return_its_value
+          end
+
+          specify do
+            allow(entity).to receive(:result).and_return(result)
+
+            expect { method_value }.not_to delegate_to(result, :stubbed_result_invocations_counter)
+          end
+        end
+
+        context "when result is stubbed result" do
+          let(:result) { service_class.result }
+
+          specify do
+            expect { method_value }
+              .to call_chain_next.on(method)
+              .with_arguments(*result_arguments.args, **result_arguments.kwargs, &result_arguments.block)
+              .and_return_its_value
+          end
+
+          it "increments stubbed result invocations counter" do
+            stub_service(service_class).to return_error
+
+            expect { method_value }.to change { result.stubbed_result_invocations_counter.current_value }.by(1)
+          end
+        end
       end
+    end
+  end
 
-      context "when result is NOT stubbed result" do
-        let(:result) { service_class.success }
+  context "when entity is service class" do
+    include_examples "verify middleware behavior" do
+      let(:entity) { service_class }
+      let(:scope) { :class }
 
-        specify do
-          expect { method_value }
-            .to call_chain_next.on(method)
-            .with_arguments(*args, **kwargs, &block)
-            .and_return_its_value
-        end
+      let(:result_arguments) { ConvenientService::Support::Arguments.new(*args, **kwargs, &block) }
+    end
+  end
 
-        specify do
-          allow(service_class).to receive(:result).and_return(result)
+  context "when entity is service instance" do
+    include_examples "verify middleware behavior" do
+      let(:entity) { service_instance }
+      let(:scope) { :instance }
 
-          expect { method_value }.not_to delegate_to(result, :stubbed_result_invocations_counter)
-        end
-      end
+      let(:result_arguments) { ConvenientService::Support::Arguments.null_arguments }
 
-      context "when result is stubbed result" do
-        let(:result) { service_class.result }
-
-        specify do
-          expect { method_value }
-            .to call_chain_next.on(method)
-            .with_arguments(*args, **kwargs, &block)
-            .and_return_its_value
-        end
-
-        it "increments stubbed result invocations counter" do
-          stub_service(service_class).to return_error
-
-          expect { method_value }.to change { result.stubbed_result_invocations_counter.current_value }.by(1)
-        end
-      end
+      let(:service_instance) { service_class.new(*args, **kwargs, &block) }
     end
   end
 end
