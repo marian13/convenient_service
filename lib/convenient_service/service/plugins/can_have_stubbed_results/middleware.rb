@@ -15,9 +15,6 @@ module ConvenientService
           # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
           #
           def next(...)
-            key_with_arguments = cache.keygen(...)
-            key_without_arguments = cache.keygen
-
             return cache[key_with_arguments] if cache.exist?(key_with_arguments)
             return cache[key_without_arguments] if cache.exist?(key_without_arguments)
 
@@ -30,7 +27,21 @@ module ConvenientService
           # @return [ConvenientService::Support::Cache]
           #
           def cache
-            entity.stubbed_results
+            @cache ||= entity.stubbed_results
+          end
+
+          ##
+          # @return [ConvenientService::Support::Cache::Entities::Key]
+          #
+          def key_with_arguments
+            @key_with_arguments ||= cache.keygen(*next_arguments.args, **next_arguments.kwargs, &next_arguments.block)
+          end
+
+          ##
+          # @return [ConvenientService::Support::Cache::Entities::Key]
+          #
+          def key_without_arguments
+            @key_without_arguments ||= cache.keygen
           end
         end
       end

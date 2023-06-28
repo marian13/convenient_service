@@ -8,15 +8,10 @@ module ConvenientService
           intended_for any_method, scope: any_scope, entity: any_entity
 
           ##
-          # @param args [Array<Object>]
-          # @param kwargs [Hash{Symbol => Object}]
-          # @param block [Proc, nil]
           # @return [Object] Can be any type.
           #
-          def next(*args, **kwargs, &block)
-            key = cache.keygen(:return_values, method, *args, **kwargs, &block)
-
-            cache.fetch(key) { chain.next(*args, **kwargs, &block) }
+          def next(...)
+            cache.fetch(key) { chain.next(...) }
           end
 
           private
@@ -26,6 +21,13 @@ module ConvenientService
           #
           def cache
             @cache ||= entity.internals.cache
+          end
+
+          ##
+          # @return [ConvenientService::Support::Cache::Entities::Key]
+          #
+          def key
+            @key ||= cache.keygen(:return_values, method, *next_arguments.args, **next_arguments.kwargs, &next_arguments.block)
           end
         end
       end
