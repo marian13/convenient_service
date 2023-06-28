@@ -81,6 +81,19 @@ module ConvenientService
                       end
 
                       ##
+                      # @return [ConvenientService::Support::Arguments]
+                      #
+                      # @internal
+                      #   NOTE: `@__env__` is set inside `call`.
+                      #   NOTE: `@__env__[:args]` is set in `ConvenientService::Common::Plugins::NormalizesEnv::Middleware`.
+                      #
+                      def next_arguments
+                        return unless @__env__.has_key?(:args)
+
+                        @__next_arguments__ ||= Support::Arguments.new(*@__env__[:args], **@__env__[:kwargs], &@__env__[:block])
+                      end
+
+                      ##
                       # @return [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Chain]
                       #
                       # @internal

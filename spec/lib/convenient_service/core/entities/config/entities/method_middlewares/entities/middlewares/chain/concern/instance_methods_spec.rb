@@ -85,6 +85,22 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
       end
     end
 
+    describe "#next_arguments" do
+      context "when middleware is NOT called" do
+        it "returns `nil`" do
+          expect(middleware_instance.next_arguments).to be_nil
+        end
+      end
+
+      context "when middleware is called" do
+        it "returns `env` arguments" do
+          middleware_result
+
+          expect(middleware_instance.next_arguments).to eq(ConvenientService::Support::Arguments.new(*env[:args], **env[:kwargs], &env[:block]))
+        end
+      end
+    end
+
     describe "#chain" do
       it "returns chain" do
         expect(middleware_instance.chain).to eq(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Chain::Entities::MethodChain.new(stack: stack))
