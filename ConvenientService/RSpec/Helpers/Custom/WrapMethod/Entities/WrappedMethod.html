@@ -673,14 +673,14 @@
   <span class='comment'>##
 </span>  <span class='comment'># TODO: When middleware is NOT used yet.
 </span>  <span class='comment'>#
-</span>  <span class='id identifier rubyid_observable_middleware'>observable_middleware</span><span class='period'>.</span><span class='id identifier rubyid_events'>events</span><span class='lbracket'>[</span><span class='symbol'>:before_chain_next</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_add_observer'>add_observer</span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_observable_middleware'>observable_middleware</span><span class='period'>.</span><span class='id identifier rubyid_events'>events</span><span class='lbracket'>[</span><span class='symbol'>:after_chain_next</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_add_observer'>add_observer</span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span>
+</span>  <span class='id identifier rubyid_observable_middleware'>observable_middleware</span><span class='period'>.</span><span class='id identifier rubyid_middleware_events'>middleware_events</span><span class='lbracket'>[</span><span class='symbol'>:before_chain_next</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_add_observer'>add_observer</span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_observable_middleware'>observable_middleware</span><span class='period'>.</span><span class='id identifier rubyid_middleware_events'>middleware_events</span><span class='lbracket'>[</span><span class='symbol'>:after_chain_next</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_add_observer'>add_observer</span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span>
 
   <span class='comment'>##
 </span>  <span class='comment'># TODO: Consider `ObjectSpace.define_finalizer`? Is it really needed?
 </span>  <span class='comment'>#
-</span>  <span class='comment'># observable_middleware.events[:before_chain_next].delete_observer(self)
-</span>  <span class='comment'># observable_middleware.events[:after_chain_next].delete_observer(self)
+</span>  <span class='comment'># observable_middleware.middleware_events[:before_chain_next].delete_observer(self)
+</span>  <span class='comment'># observable_middleware.middleware_events[:after_chain_next].delete_observer(self)
 </span><span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1956,7 +1956,7 @@
 </div>
 
       <div id="footer">
-  Generated on Tue Jun 27 23:51:32 2023 by
+  Generated on Wed Jun 28 00:00:38 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>
