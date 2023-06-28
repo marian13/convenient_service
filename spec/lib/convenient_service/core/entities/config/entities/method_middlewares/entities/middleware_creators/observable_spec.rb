@@ -21,13 +21,13 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
   end
 
   example_group "instance methods" do
-    describe "#events" do
+    describe "#middleware_events" do
       it "returns empty hash" do
-        expect(middleware_creator.events).to eq({})
+        expect(middleware_creator.middleware_events).to eq({})
       end
 
       specify do
-        expect { middleware_creator.events }.to cache_its_value
+        expect { middleware_creator.middleware_events }.to cache_its_value
       end
 
       example_group "returned hash" do
@@ -35,15 +35,15 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
           let(:type) { :before_call }
 
           it "returns event" do
-            expect(middleware_creator.events[type]).to eq(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::MiddlewareCreators::Observable::Entities::Event.new(type: type))
+            expect(middleware_creator.middleware_events[type]).to eq(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::MiddlewareCreators::Observable::Entities::Event.new(type: type))
           end
 
           it "sets event" do
-            expect { middleware_creator.events[type] }.to change { middleware_creator.events.has_key?(type) }.from(false).to(true)
+            expect { middleware_creator.middleware_events[type] }.to change { middleware_creator.middleware_events.has_key?(type) }.from(false).to(true)
           end
 
           specify do
-            expect { middleware_creator.events[type] }.to cache_its_value
+            expect { middleware_creator.middleware_events[type] }.to cache_its_value
           end
         end
       end
@@ -60,7 +60,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
 
     describe "#extra_kwargs" do
       it "returns extra kwargs" do
-        expect(middleware_creator.extra_kwargs).to eq({events: middleware_creator.events})
+        expect(middleware_creator.extra_kwargs).to eq({middleware_events: middleware_creator.middleware_events})
       end
     end
   end

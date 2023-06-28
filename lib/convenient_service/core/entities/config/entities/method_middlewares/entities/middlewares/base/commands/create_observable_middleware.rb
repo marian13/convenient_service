@@ -64,15 +64,15 @@ module ConvenientService
                             # @return [void]
                             #
                             def initialize(stack, **kwargs)
-                              arguments = Support::Arguments.new(stack, **Utils::Hash.except(kwargs, [:events]))
+                              arguments = Support::Arguments.new(stack, **Utils::Hash.except(kwargs, [:middleware_events]))
 
-                              @__events__ = kwargs[:events]
+                              @__middleware_events__ = kwargs[:middleware_events]
 
-                              @__events__[:before_initialize].notify_observers(arguments)
+                              @__middleware_events__[:before_initialize].notify_observers(arguments)
 
                               super(stack, **arguments.kwargs)
 
-                              @__events__[:after_initialize].notify_observers(arguments)
+                              @__middleware_events__[:after_initialize].notify_observers(arguments)
                             end
 
                             ##
@@ -81,11 +81,11 @@ module ConvenientService
                             def call(...)
                               arguments = Support::Arguments.new(...)
 
-                              @__events__[:before_call].notify_observers(arguments)
+                              @__middleware_events__[:before_call].notify_observers(arguments)
 
                               value = super
 
-                              @__events__[:after_call].notify_observers(value, arguments)
+                              @__middleware_events__[:after_call].notify_observers(value, arguments)
 
                               value
                             end

@@ -45,14 +45,14 @@ module ConvenientService
                 ##
                 # TODO: When middleware is NOT used yet.
                 #
-                observable_middleware.events[:before_chain_next].add_observer(self)
-                observable_middleware.events[:after_chain_next].add_observer(self)
+                observable_middleware.middleware_events[:before_chain_next].add_observer(self)
+                observable_middleware.middleware_events[:after_chain_next].add_observer(self)
 
                 ##
                 # TODO: Consider `ObjectSpace.define_finalizer`? Is it really needed?
                 #
-                # observable_middleware.events[:before_chain_next].delete_observer(self)
-                # observable_middleware.events[:after_chain_next].delete_observer(self)
+                # observable_middleware.middleware_events[:before_chain_next].delete_observer(self)
+                # observable_middleware.middleware_events[:after_chain_next].delete_observer(self)
               end
 
               ##

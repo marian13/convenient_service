@@ -14,8 +14,8 @@ module ConvenientService
                   ##
                   # @return [Hash{Symbol => ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::MiddlewareCreators::Observable::Entities::Event}]
                   #
-                  def events
-                    @events ||= ::Hash.new { |hash, key| hash[key] = Entities::Event.new(type: key) }
+                  def middleware_events
+                    @middleware_events ||= ::Hash.new { |hash, key| hash[key] = Entities::Event.new(type: key) }
                   end
 
                   ##
@@ -29,7 +29,7 @@ module ConvenientService
                   # @return [Hash{Symbol => Hash{Symbol => ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::MiddlewareCreators::Observable::Entities::Event}}]
                   #
                   def extra_kwargs
-                    {events: events}
+                    {middleware_events: middleware_events}
                   end
                 end
               end

@@ -34,25 +34,25 @@ module ConvenientService
                             def chain_class
                               ::Class.new(super) do
                                 def initialize(**kwargs)
-                                  arguments = Support::Arguments.new(**Utils::Hash.except(kwargs, [:events]))
+                                  arguments = Support::Arguments.new(**Utils::Hash.except(kwargs, [:middleware_events]))
 
-                                  @__events__ = kwargs[:events]
+                                  @__middleware_events__ = kwargs[:middleware_events]
 
-                                  @__events__[:before_chain_initialize].notify_observers(arguments)
+                                  @__middleware_events__[:before_chain_initialize].notify_observers(arguments)
 
                                   super(**arguments.kwargs)
 
-                                  @__events__[:after_chain_initialize].notify_observers(arguments)
+                                  @__middleware_events__[:after_chain_initialize].notify_observers(arguments)
                                 end
 
                                 def next(...)
                                   arguments = Support::Arguments.new(...)
 
-                                  @__events__[:before_chain_next].notify_observers(arguments)
+                                  @__middleware_events__[:before_chain_next].notify_observers(arguments)
 
                                   value = super
 
-                                  @__events__[:after_chain_next].notify_observers(value, arguments)
+                                  @__middleware_events__[:after_chain_next].notify_observers(value, arguments)
 
                                   value
                                 end
@@ -63,17 +63,17 @@ module ConvenientService
                           def next(...)
                             arguments = Support::Arguments.new(...)
 
-                            @__events__[:before_next].notify_observers(arguments)
+                            @__middleware_events__[:before_next].notify_observers(arguments)
 
                             value = super
 
-                            @__events__[:after_next].notify_observers(value, arguments)
+                            @__middleware_events__[:after_next].notify_observers(value, arguments)
 
                             value
                           end
 
                           def chain
-                            @__chain__ ||= self.class.chain_class.new(stack: @__stack__, events: @__events__)
+                            @__chain__ ||= self.class.chain_class.new(stack: @__stack__, middleware_events: @__middleware_events__)
                           end
                         end
                       end
