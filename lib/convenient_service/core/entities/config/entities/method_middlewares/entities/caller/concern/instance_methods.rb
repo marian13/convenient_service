@@ -49,10 +49,17 @@ module ConvenientService
                     end
 
                     ##
-                    # @return [Hash]
+                    # @return [Hash{Symbol => Object}]
                     #
                     def to_kwargs
-                      {prefix: prefix}
+                      to_arguments.kwargs
+                    end
+
+                    ##
+                    # @return [ConvenientService::Support::Arguments]
+                    #
+                    def to_arguments
+                      Support::Arguments.new(prefix: prefix)
                     end
                   end
                 end

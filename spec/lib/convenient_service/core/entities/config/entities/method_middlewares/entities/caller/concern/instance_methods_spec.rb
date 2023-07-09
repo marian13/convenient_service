@@ -47,7 +47,9 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
   end
 
   example_group "instance methods" do
-    describe "define_method_middlewares_caller!" do
+    include ConvenientService::RSpec::Matchers::DelegateTo
+
+    describe "#define_method_middlewares_caller!" do
       before do
         ##
         # NOTE: Returns `true` when called for the first time, `false` for all the subsequent calls.
@@ -65,11 +67,25 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
       end
     end
 
-    describe "#to_kwargs" do
+    example_group "conversions" do
+      let(:arguments) { ConvenientService::Support::Arguments.new(**kwargs) }
       let(:kwargs) { {prefix: prefix} }
 
-      it "returns kwargs representation of caller" do
-        expect(caller.to_kwargs).to eq(kwargs)
+      describe "#to_kwargs" do
+        specify do
+          allow(caller).to receive(:to_arguments).and_return(arguments)
+
+          expect { caller.to_kwargs }
+            .to delegate_to(caller.to_arguments, :kwargs)
+            .without_arguments
+            .and_return_its_value
+        end
+      end
+
+      describe "#to_arguments" do
+        it "returns arguments representation of caller" do
+          expect(caller.to_arguments).to eq(arguments)
+        end
       end
     end
 
