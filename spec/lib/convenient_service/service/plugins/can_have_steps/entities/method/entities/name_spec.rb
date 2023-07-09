@@ -18,6 +18,8 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
   end
 
   example_group "instance methods" do
+    include ConvenientService::RSpec::Matchers::DelegateTo
+
     example_group "attributes" do
       include ConvenientService::RSpec::Matchers::HaveAttrReader
 

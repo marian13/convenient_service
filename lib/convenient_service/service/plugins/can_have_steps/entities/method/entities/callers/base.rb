@@ -13,24 +13,56 @@ module ConvenientService
                   include Support::Copyable
 
                   ##
-                  # TODO: A better name for `object`. Wrapped object, `target`?
+                  # @!attribute [r] object
+                  #   @return [Object] Can be any type.
+                  #
+                  # @internal
+                  #   TODO: A better name for `object`. Wrapped object, `target`?
                   #
                   attr_reader :object
 
-                  abstract_method \
-                    :calculate_value,
-                    :validate_as_input_for_container!,
-                    :validate_as_output_for_container!,
-                    :define_output_in_container!
+                  ##
+                  # @return [Object] Can be any type.
+                  #
+                  abstract_method :calculate_value
 
+                  ##
+                  # @return [Boolean]
+                  # @raise [ConvenientService::Error]
+                  #
+                  abstract_method :validate_as_input_for_container!
+
+                  ##
+                  # @return [Boolean]
+                  # @raise [ConvenientService::Error]
+                  #
+                  abstract_method :validate_as_output_for_container!
+
+                  ##
+                  # @return [Boolean]
+                  #
+                  abstract_method :define_output_in_container!
+
+                  ##
+                  # @param object [Object] Can be any type.
+                  # @return [void]
+                  #
                   def initialize(object)
                     @object = object
                   end
 
+                  ##
+                  # @param name [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Name]
+                  # @return [Boolean]
+                  #
                   def reassignment?(name)
                     false
                   end
 
+                  ##
+                  # @param other [Object] Can be any type.
+                  # @return [Boolean, nil]
+                  #
                   def ==(other)
                     return unless other.instance_of?(self.class)
 
@@ -39,8 +71,18 @@ module ConvenientService
                     true
                   end
 
+                  ##
+                  # @return [Array<Object>]
+                  #
                   def to_args
-                    [object]
+                    to_arguments.args
+                  end
+
+                  ##
+                  # @return [ConveninentService::Support::Arguments]
+                  #
+                  def to_arguments
+                    Support::Arguments.new(object)
                   end
                 end
               end

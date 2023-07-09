@@ -19,6 +19,8 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
   end
 
   example_group "instance methods" do
+    include ConvenientService::RSpec::Matchers::DelegateTo
+
     example_group "attributes" do
       include ConvenientService::RSpec::Matchers::HaveAttrReader
 
@@ -72,11 +74,25 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
       end
     end
 
-    describe "#to_args" do
-      let(:args_representation) { [value] }
+    example_group "conversions" do
+      let(:arguments) { ConvenientService::Support::Arguments.new(*args) }
+      let(:args) { [value] }
 
-      it "returns args representation of caller" do
-        expect(caller.to_args).to eq(args_representation)
+      describe "#to_args" do
+        specify do
+          allow(caller).to receive(:to_arguments).and_return(arguments)
+
+          expect { caller.to_args }
+            .to delegate_to(caller.to_arguments, :args)
+            .without_arguments
+            .and_return_its_value
+        end
+      end
+
+      describe "#to_arguments" do
+        it "returns arguments representation of caller" do
+          expect(caller.to_arguments).to eq(arguments)
+        end
       end
     end
   end
