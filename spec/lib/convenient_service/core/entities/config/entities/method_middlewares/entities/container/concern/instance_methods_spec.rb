@@ -342,11 +342,25 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
       end
     end
 
-    describe "#to_kwargs" do
-      let(:kwargs_representation) { {klass: container.klass} }
+    example_group "conversions" do
+      let(:arguments) { ConvenientService::Support::Arguments.new(**kwargs) }
+      let(:kwargs) { {klass: container.klass} }
 
-      it "returns kwargs representation of container" do
-        expect(container.to_kwargs).to eq(kwargs_representation)
+      describe "#to_kwargs" do
+        specify do
+          allow(container).to receive(:to_arguments).and_return(arguments)
+
+          expect { container.to_kwargs }
+            .to delegate_to(container.to_arguments, :kwargs)
+            .without_arguments
+            .and_return_its_value
+        end
+      end
+
+      describe "#to_arguments" do
+        it "returns arguments representation of container" do
+          expect(container.to_arguments).to eq(arguments)
+        end
       end
     end
 
