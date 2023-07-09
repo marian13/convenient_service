@@ -273,17 +273,24 @@ module ConvenientService
                 end
 
                 ##
-                # @return [Array]
+                # @return [Array<Object>]
                 #
                 def to_args
-                  [service]
+                  to_arguments.args
                 end
 
                 ##
-                # @return [Hash]
+                # @return [Hash{Symbol => Object}]
                 #
                 def to_kwargs
-                  kwargs.merge(in: inputs, out: outputs, index: index, container: container, organizer: organizer(raise_when_missing: false))
+                  to_arguments.kwargs
+                end
+
+                ##
+                # @return [ConveninentService::Support::Arguments]
+                #
+                def to_arguments
+                  Support::Arguments.new(service, **kwargs.merge(in: inputs, out: outputs, index: index, container: container, organizer: organizer(raise_when_missing: false)))
                 end
 
                 private

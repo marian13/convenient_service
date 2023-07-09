@@ -579,15 +579,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       end
     end
 
-    describe "#to_args" do
+    example_group "conversions" do
+      let(:arguments) { ConvenientService::Support::Arguments.new(*args_representation, **kwargs_representation) }
+
       let(:args_representation) { [step.service] }
 
-      it "returns args representation of step" do
-        expect(step.to_args).to eq(args_representation)
-      end
-    end
-
-    describe "#to_kwargs" do
       let(:kwargs_representation) do
         {
           in: step.inputs,
@@ -598,35 +594,59 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         }
       end
 
-      it "returns kwargs representation of step" do
-        expect(step.to_kwargs).to eq(kwargs_representation)
+      describe "#to_args" do
+        specify do
+          allow(step).to receive(:to_arguments).and_return(arguments)
+
+          expect { step.to_args }
+            .to delegate_to(step.to_arguments, :args)
+            .without_arguments
+            .and_return_its_value
+        end
       end
 
-      context "when constructor kwargs have extra values" do
-        let(:kwargs) { {try: true, in: inputs, out: outputs, index: index, container: container, organizer: organizer} }
+      describe "#to_kwargs" do
+        specify do
+          allow(step).to receive(:to_arguments).and_return(arguments)
 
-        let(:kwargs_representation) do
-          {
-            in: step.inputs,
-            out: step.outputs,
-            index: step.index,
-            container: step.container,
-            organizer: step.organizer,
-            try: true
-          }
+          expect { step.to_kwargs }
+            .to delegate_to(step.to_arguments, :kwargs)
+            .without_arguments
+            .and_return_its_value
         end
 
-        it "includes them into kwargs representation of step" do
-          expect(step.to_kwargs).to eq(kwargs_representation)
-        end
+        context "when constructor kwargs have extra values" do
+          let(:kwargs) { {try: true, in: inputs, out: outputs, index: index, container: container, organizer: organizer} }
 
-        context "when constructor kwargs extra value has same key as value from kwargs representation" do
-          let(:step_instance) { step_class.new(*args, **kwargs.merge(in: [:bar])) }
-          let(:value) { [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method.cast(:bar, direction: :input).copy(overrides: {kwargs: {organizer: organizer}})] }
-
-          it "takes value from kwargs representation" do
-            expect(step.to_kwargs[:in]).to eq(value)
+          let(:kwargs_representation) do
+            {
+              in: step.inputs,
+              out: step.outputs,
+              index: step.index,
+              container: step.container,
+              organizer: step.organizer,
+              try: true
+            }
           end
+
+          it "includes them into kwargs representation of step" do
+            expect(step.to_kwargs).to eq(kwargs_representation)
+          end
+
+          context "when constructor kwargs extra value has same key as value from kwargs representation" do
+            let(:step_instance) { step_class.new(*args, **kwargs.merge(in: [:bar])) }
+            let(:value) { [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method.cast(:bar, direction: :input).copy(overrides: {kwargs: {organizer: organizer}})] }
+
+            it "takes value from kwargs representation" do
+              expect(step.to_kwargs[:in]).to eq(value)
+            end
+          end
+        end
+      end
+
+      describe "#to_arguments" do
+        it "returns arguments representation of step" do
+          expect(step.to_arguments).to eq(arguments)
         end
       end
     end
