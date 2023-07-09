@@ -33,6 +33,8 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
   end
 
   example_group "instance methods" do
+    include ConvenientService::RSpec::Matchers::DelegateTo
+
     example_group "attributes" do
       include ConvenientService::RSpec::Matchers::HaveAttrReader
 

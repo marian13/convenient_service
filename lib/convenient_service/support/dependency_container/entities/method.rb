@@ -111,15 +111,22 @@ module ConvenientService
           end
 
           ##
-          # @return [Hash]
+          # @return [Hash{Symbol => Object}]
           #
           def to_kwargs
-            {
+            to_arguments.kwargs
+          end
+
+          ##
+          # @return [ConvenientService::Support::Arguments]
+          #
+          def to_arguments
+            Support::Arguments.new(
               slug: slug,
               scope: scope,
               body: body,
               alias_slug: alias_slug
-            }
+            )
           end
 
           private

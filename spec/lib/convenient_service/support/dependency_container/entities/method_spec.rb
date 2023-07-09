@@ -37,6 +37,8 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Method
   end
 
   example_group "instance methods" do
+    include ConvenientService::RSpec::Matchers::DelegateTo
+
     describe "#name" do
       context "when method does NOT have `alias_slug`" do
         context "when `slug` has NO namespaces" do
@@ -306,19 +308,26 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Method
           end
         end
       end
+    end
+
+    example_group "conversions" do
+      let(:arguments) { ConvenientService::Support::Arguments.new(**kwargs) }
+      let(:kwargs) { {slug: slug, scope: scope, body: body, alias_slug: alias_slug} }
 
       describe "#to_kwargs" do
-        let(:kwargs_representation) do
-          {
-            slug: slug,
-            scope: scope,
-            body: body,
-            alias_slug: alias_slug
-          }
-        end
+        specify do
+          allow(method).to receive(:to_arguments).and_return(arguments)
 
-        it "returns kwargs representation of attributes" do
-          expect(method.to_kwargs).to eq(kwargs_representation)
+          expect { method.to_kwargs }
+            .to delegate_to(method.to_arguments, :kwargs)
+            .without_arguments
+            .and_return_its_value
+        end
+      end
+
+      describe "#to_arguments" do
+        it "returns arguments representation of method" do
+          expect(method.to_arguments).to eq(arguments)
         end
       end
     end
