@@ -213,15 +213,31 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
     end
 
     example_group "conversions" do
-      describe "#to_kwargs" do
-        let(:kwargs) { {value: value, result: result} }
+      let(:arguments) { ConvenientService::Support::Arguments.new(**kwargs) }
+      let(:kwargs) { {value: value, result: result} }
 
-        it "returns kwargs representation of `status`" do
-          expect(status.to_kwargs).to eq(kwargs)
+      describe "#to_kwargs" do
+        specify do
+          allow(status).to receive(:to_arguments).and_return(arguments)
+
+          expect { status.to_kwargs }
+            .to delegate_to(status.to_arguments, :kwargs)
+            .without_arguments
+            .and_return_its_value
         end
 
         specify do
           expect { status.to_kwargs }.to cache_its_value
+        end
+      end
+
+      describe "#to_arguments" do
+        it "returns arguments representation of status" do
+          expect(status.to_arguments).to eq(arguments)
+        end
+
+        specify do
+          expect { status.to_arguments }.to cache_its_value
         end
       end
 
