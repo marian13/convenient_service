@@ -38,6 +38,13 @@ module ConvenientService
 
                     true
                   end
+
+                  ##
+                  # @return [ConvenientService::Support::Arguments]
+                  #
+                  def to_arguments
+                    Support::Arguments.new
+                  end
                 end
               end
             end

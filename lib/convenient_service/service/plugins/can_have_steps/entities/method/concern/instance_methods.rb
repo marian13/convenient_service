@@ -145,7 +145,20 @@ module ConvenientService
                 # @return [Hash{Symbol => Object}]
                 #
                 def to_kwargs
-                  {key: key, name: name, caller: caller, direction: direction, organizer: organizer(raise_when_missing: false)}
+                  to_arguments.kwargs
+                end
+
+                ##
+                # @return [ConvenientService::Support::Arguments]
+                #
+                def to_arguments
+                  Support::Arguments.new(
+                    key: key,
+                    name: name,
+                    caller: caller,
+                    direction: direction,
+                    organizer: organizer(raise_when_missing: false)
+                  )
                 end
               end
             end

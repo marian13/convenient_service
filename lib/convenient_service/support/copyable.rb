@@ -19,6 +19,8 @@ module ConvenientService
       #   NOTE: Inline logic instead of private methods is used intentionally in order to NOT pollute the public interface.
       #   NOTE: This method is NOT likely to be ever changed, that is why inline logic is preferred over command classes in this particular case.
       #
+      #   NOTE: The `respond_to` solution was slower by 16%. Check this file history to review the previous implementation. Use the `empty_service` benchmark to compare.
+      #
       def copy(overrides: {})
         defaults = {args: {}, kwargs: {}}
 
@@ -27,32 +29,14 @@ module ConvenientService
         #
         overrides = defaults.merge(overrides)
 
-        ##
-        # TODO: Refactor runtime `respond_to?`. Investigate before refactoring.
-        #
         args =
-          if respond_to?(:to_args)
-            case overrides[:args]
-            when ::Array
-              overrides[:args]
-            when ::Hash
-              Utils::Array.merge(to_args, overrides[:args])
-            end
-          else
-            []
+          case overrides[:args]
+          when ::Array then overrides[:args]
+          when ::Hash then Utils::Array.merge(to_arguments.args, overrides[:args])
           end
 
-        kwargs =
-          if respond_to?(:to_kwargs)
-            to_kwargs.merge(overrides[:kwargs])
-          else
-            {}
-          end
-
-        block =
-          if respond_to?(:to_block)
-            overrides[:block] || to_block
-          end
+        kwargs = to_arguments.kwargs.merge(overrides[:kwargs])
+        block = overrides[:block] || to_arguments.block
 
         self.class.new(*args, **kwargs, &block)
       end

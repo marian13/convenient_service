@@ -331,11 +331,25 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
       end
     end
 
-    describe "#to_kwargs" do
-      let(:kwargs_representation) { {key: key, name: name, caller: caller, direction: direction, organizer: organizer} }
+    example_group "conversions" do
+      let(:arguments) { ConvenientService::Support::Arguments.new(**kwargs) }
+      let(:kwargs) { {key: key, name: name, caller: caller, direction: direction, organizer: organizer} }
 
-      it "returns `kwargs` representation of `method`" do
-        expect(method.to_kwargs).to eq(kwargs_representation)
+      describe "#to_kwargs" do
+        specify do
+          allow(method).to receive(:to_arguments).and_return(arguments)
+
+          expect { method.to_kwargs }
+            .to delegate_to(method.to_arguments, :kwargs)
+            .without_arguments
+            .and_return_its_value
+        end
+      end
+
+      describe "#to_arguments" do
+        it "returns arguments representation of method" do
+          expect(method.to_arguments).to eq(arguments)
+        end
       end
     end
   end

@@ -28,6 +28,16 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
       it { is_expected.to have_abstract_method(:define_output_in_container!) }
     end
 
+    example_group "conversions" do
+      let(:arguments) { ConvenientService::Support::Arguments.new }
+
+      describe "#to_arguments" do
+        it "returns arguments representation of direction" do
+          expect(direction.to_arguments).to eq(arguments)
+        end
+      end
+    end
+
     example_group "comparison" do
       describe "#==" do
         context "when `other` has different class" do
