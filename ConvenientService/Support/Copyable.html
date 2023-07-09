@@ -174,8 +174,6 @@
       <pre class="lines">
 
 
-22
-23
 24
 25
 26
@@ -194,26 +192,10 @@
 39
 40
 41
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
-55
-56
-57
-58</pre>
+42</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/copyable.rb', line 22</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/copyable.rb', line 24</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_copy'>copy</span><span class='lparen'>(</span><span class='label'>overrides:</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_defaults'>defaults</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='label'>args:</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='label'>kwargs:</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rbrace'>}</span>
@@ -223,32 +205,14 @@
 </span>  <span class='comment'>#
 </span>  <span class='id identifier rubyid_overrides'>overrides</span> <span class='op'>=</span> <span class='id identifier rubyid_defaults'>defaults</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='id identifier rubyid_overrides'>overrides</span><span class='rparen'>)</span>
 
-  <span class='comment'>##
-</span>  <span class='comment'># TODO: Refactor runtime `respond_to?`. Investigate before refactoring.
-</span>  <span class='comment'>#
-</span>  <span class='id identifier rubyid_args'>args</span> <span class='op'>=</span>
-    <span class='kw'>if</span> <span class='id identifier rubyid_respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='symbol'>:to_args</span><span class='rparen'>)</span>
-      <span class='kw'>case</span> <span class='id identifier rubyid_overrides'>overrides</span><span class='lbracket'>[</span><span class='symbol'>:args</span><span class='rbracket'>]</span>
-      <span class='kw'>when</span> <span class='op'>::</span><span class='const'>Array</span>
-        <span class='id identifier rubyid_overrides'>overrides</span><span class='lbracket'>[</span><span class='symbol'>:args</span><span class='rbracket'>]</span>
-      <span class='kw'>when</span> <span class='op'>::</span><span class='const'>Hash</span>
-        <span class='const'><span class='object_link'><a href="../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Utils/Array.html" title="ConvenientService::Utils::Array (module)">Array</a></span></span><span class='period'>.</span><span class='id identifier rubyid_merge'><span class='object_link'><a href="../Utils/Array.html#merge-class_method" title="ConvenientService::Utils::Array.merge (method)">merge</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_to_args'>to_args</span><span class='comma'>,</span> <span class='id identifier rubyid_overrides'>overrides</span><span class='lbracket'>[</span><span class='symbol'>:args</span><span class='rbracket'>]</span><span class='rparen'>)</span>
-      <span class='kw'>end</span>
-    <span class='kw'>else</span>
-      <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_args'>args</span> <span class='op'>=</span>
+    <span class='kw'>case</span> <span class='id identifier rubyid_overrides'>overrides</span><span class='lbracket'>[</span><span class='symbol'>:args</span><span class='rbracket'>]</span>
+    <span class='kw'>when</span> <span class='op'>::</span><span class='const'>Array</span> <span class='kw'>then</span> <span class='id identifier rubyid_overrides'>overrides</span><span class='lbracket'>[</span><span class='symbol'>:args</span><span class='rbracket'>]</span>
+    <span class='kw'>when</span> <span class='op'>::</span><span class='const'>Hash</span> <span class='kw'>then</span> <span class='const'><span class='object_link'><a href="../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Utils/Array.html" title="ConvenientService::Utils::Array (module)">Array</a></span></span><span class='period'>.</span><span class='id identifier rubyid_merge'><span class='object_link'><a href="../Utils/Array.html#merge-class_method" title="ConvenientService::Utils::Array.merge (method)">merge</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_to_arguments'>to_arguments</span><span class='period'>.</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='id identifier rubyid_overrides'>overrides</span><span class='lbracket'>[</span><span class='symbol'>:args</span><span class='rbracket'>]</span><span class='rparen'>)</span>
     <span class='kw'>end</span>
 
-  <span class='id identifier rubyid_kwargs'>kwargs</span> <span class='op'>=</span>
-    <span class='kw'>if</span> <span class='id identifier rubyid_respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='symbol'>:to_kwargs</span><span class='rparen'>)</span>
-      <span class='id identifier rubyid_to_kwargs'>to_kwargs</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='id identifier rubyid_overrides'>overrides</span><span class='lbracket'>[</span><span class='symbol'>:kwargs</span><span class='rbracket'>]</span><span class='rparen'>)</span>
-    <span class='kw'>else</span>
-      <span class='lbrace'>{</span><span class='rbrace'>}</span>
-    <span class='kw'>end</span>
-
-  <span class='id identifier rubyid_block'>block</span> <span class='op'>=</span>
-    <span class='kw'>if</span> <span class='id identifier rubyid_respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='symbol'>:to_block</span><span class='rparen'>)</span>
-      <span class='id identifier rubyid_overrides'>overrides</span><span class='lbracket'>[</span><span class='symbol'>:block</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='id identifier rubyid_to_block'>to_block</span>
-    <span class='kw'>end</span>
+  <span class='id identifier rubyid_kwargs'>kwargs</span> <span class='op'>=</span> <span class='id identifier rubyid_to_arguments'>to_arguments</span><span class='period'>.</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='id identifier rubyid_overrides'>overrides</span><span class='lbracket'>[</span><span class='symbol'>:kwargs</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_block'>block</span> <span class='op'>=</span> <span class='id identifier rubyid_overrides'>overrides</span><span class='lbracket'>[</span><span class='symbol'>:block</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='id identifier rubyid_to_arguments'>to_arguments</span><span class='period'>.</span><span class='id identifier rubyid_block'>block</span>
 
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
@@ -262,7 +226,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Jul  9 15:44:50 2023 by
+  Generated on Sun Jul  9 18:27:37 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>
