@@ -250,7 +250,9 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
       end
     end
 
-    describe "#to_kwargs" do
+    example_group "conversions" do
+      let(:arguments) { ConvenientService::Support::Arguments.new(**kwargs) }
+
       let(:kwargs) do
         {
           service: service_instance,
@@ -261,22 +263,35 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
         }
       end
 
-      it "returns kwargs representation of result" do
-        expect(result_instance.to_kwargs).to eq(kwargs)
-      end
+      describe "#to_kwargs" do
+        specify do
+          allow(result_instance).to receive(:to_arguments).and_return(arguments)
 
-      specify { expect { result_instance.to_kwargs }.to delegate_to(result_instance, :unsafe_data) }
-      specify { expect { result_instance.to_kwargs }.to delegate_to(result_instance, :unsafe_message) }
-      specify { expect { result_instance.to_kwargs }.to delegate_to(result_instance, :unsafe_code) }
-
-      context "when `result` has extra kwargs" do
-        let(:extra_kwargs) { {parent: nil} }
-
-        it "includes them into kwargs representation of result" do
-          expect(result_instance.to_kwargs).to eq(kwargs.merge(extra_kwargs))
+          expect { result_instance.to_kwargs }
+            .to delegate_to(result_instance.to_arguments, :kwargs)
+            .without_arguments
+            .and_return_its_value
         end
 
-        specify { expect { result_instance.to_kwargs }.to delegate_to(result_instance, :extra_kwargs) }
+        specify { expect { result_instance.to_kwargs }.to delegate_to(result_instance, :unsafe_data) }
+        specify { expect { result_instance.to_kwargs }.to delegate_to(result_instance, :unsafe_message) }
+        specify { expect { result_instance.to_kwargs }.to delegate_to(result_instance, :unsafe_code) }
+
+        context "when `result` has extra kwargs" do
+          let(:extra_kwargs) { {parent: nil} }
+
+          it "includes them into kwargs representation of result" do
+            expect(result_instance.to_kwargs).to eq(kwargs.merge(extra_kwargs))
+          end
+
+          specify { expect { result_instance.to_kwargs }.to delegate_to(result_instance, :extra_kwargs) }
+        end
+      end
+
+      describe "#to_arguments" do
+        it "returns arguments representation of result" do
+          expect(result_instance.to_arguments).to eq(arguments)
+        end
       end
     end
   end

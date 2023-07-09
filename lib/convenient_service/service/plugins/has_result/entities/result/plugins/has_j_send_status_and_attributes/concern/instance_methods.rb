@@ -146,17 +146,24 @@ module ConvenientService
                     end
 
                     ##
-                    # @return [Hash]
+                    # @return [Hash{Symbol => Object}]
                     #
                     def to_kwargs
-                      {
+                      to_arguments.kwargs
+                    end
+
+                    ##
+                    # @return [ConveninentService::Support::Arguments]
+                    #
+                    def to_arguments
+                      Support::Arguments.new(
                         service: service,
                         status: status,
                         data: unsafe_data,
                         message: unsafe_message,
                         code: unsafe_code,
                         **extra_kwargs
-                      }
+                      )
                     end
                   end
                 end
