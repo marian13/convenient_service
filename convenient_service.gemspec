@@ -111,6 +111,16 @@ Gem::Specification.new do |spec|
   #
   spec.add_development_dependency "minitest", "~> 5.18.0"
 
+  ##
+  # Used for mutation testing of Ruby code.
+  # - https://github.com/mbj/mutant
+  # - https://github.com/mbj/mutant/blob/main/docs/nomenclature.md
+  # - https://github.com/mbj/mutant/blob/main/docs/mutant-rspec.md
+  # - https://github.com/mbj/mutant/blob/main/docs/incremental.md
+  #
+  spec.add_development_dependency "mutant", "~> 0.11.21"
+  spec.add_development_dependency "mutant-rspec", "~> 0.11.21"
+
   spec.add_development_dependency "paint"
 
   spec.add_development_dependency "progressbar"
@@ -137,13 +147,13 @@ Gem::Specification.new do |spec|
   # Used for linting Ruby files.
   # https://github.com/rubocop/rubocop
   #
-  spec.add_development_dependency "rubocop", "~> 1.48.0"
+  spec.add_development_dependency "rubocop", "~> 1.52.0"
 
   ##
   # Used as a set of rules for rubocop for linting RSpec files.
   # https://github.com/rubocop/rubocop-rspec
   #
-  spec.add_development_dependency "rubocop-rspec", "~> 2.19.0"
+  spec.add_development_dependency "rubocop-rspec", "~> 2.22.0"
 
   spec.add_development_dependency "tty-prompt"
 
@@ -151,7 +161,7 @@ Gem::Specification.new do |spec|
   # Used as a set of rules for robocop for linting source files.
   # https://github.com/testdouble/standard
   #
-  spec.add_development_dependency "standard", "~> 1.25.0"
+  spec.add_development_dependency "standard", "~> 1.30.1"
 
   spec.add_development_dependency "simplecov"
 

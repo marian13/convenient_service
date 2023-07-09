@@ -411,6 +411,13 @@ tasks:
       - bundle exec ruby minitest.rb
 
   ##
+  # - https://github.com/mbj/mutant/blob/main/docs/mutant-rspec.md#run-through-example
+  #
+  mutant:
+    cmds:
+      - bundle exec mutant run --include lib --require convenient_service --integration rspec -- 'ConvenientService*'
+
+  ##
   # NOTE: `task playground` is also aliased as `task console`.
   #
   playground:
