@@ -20,7 +20,7 @@ module ConvenientService
             # @return [Hash{Symbol => Object}]
             #
             def inspect_values
-              {name: self.class.name}
+              {name: self.class.name || "AnonymousService(##{self.class.object_id})"}
             end
           end
         end
