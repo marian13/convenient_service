@@ -93,6 +93,7 @@ module ConvenientService
             use Plugins::Result::CanRecalculateResult::Concern
 
             use Plugins::Result::CanHaveStep::Concern
+            use Plugins::Result::CanBeOwnResult::Concern
             use Plugins::Result::CanBeTried::Concern
             use Plugins::Result::CanHaveParentResult::Concern
             use Plugins::Result::CanHaveCheckedStatus::Concern
