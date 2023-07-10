@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-# rubocop:disable RSpec/NestedGroups, Spec/MultipleMemoizedHelpers
+# rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Callers::Reassignment do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
@@ -103,4 +103,4 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
     end
   end
 end
-# rubocop:enable RSpec/NestedGroups, Spec/MultipleMemoizedHelpers
+# rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers

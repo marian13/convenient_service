@@ -76,7 +76,7 @@ module ConvenientService
             raise Errors::MaxIterationCountExceeded.new(limit: max_iteration_count)
           end
 
-          block.call(index)
+          yield(index)
         end
       end
     end

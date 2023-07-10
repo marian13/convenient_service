@@ -77,7 +77,7 @@ module ConvenientService
 
               return unless block
 
-              value = block.call
+              value = yield
 
               array << pair(key, value)
 

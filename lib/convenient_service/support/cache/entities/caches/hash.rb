@@ -75,7 +75,7 @@ module ConvenientService
             def fetch(key, &block)
               return hash[key] unless block
 
-              hash.fetch(key) { hash[key] = block.call }
+              hash.fetch(key) { hash[key] = yield }
             end
 
             ##
