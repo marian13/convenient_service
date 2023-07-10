@@ -889,7 +889,7 @@
 
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_block'>block</span>
 
-  <span class='id identifier rubyid_value'>value</span> <span class='op'>=</span> <span class='id identifier rubyid_block'>block</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span>
+  <span class='id identifier rubyid_value'>value</span> <span class='op'>=</span> <span class='kw'>yield</span>
 
   <span class='id identifier rubyid_array'>array</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_pair'>pair</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='comma'>,</span> <span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
 
@@ -1181,7 +1181,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Jul  9 19:37:04 2023 by
+  Generated on Mon Jul 10 18:59:44 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>
