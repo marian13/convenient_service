@@ -29,6 +29,8 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
   end
 
   example_group "instance methods" do
+    include ConvenientService::RSpec::Helpers::StubService
+
     describe "#stubbed_result?" do
       let(:result) { service.result }
 
