@@ -146,6 +146,15 @@ module ConvenientService
           ##
           # @return [ConvenientService::RSpec::Matchers::Custom::CallChainNext]
           #
+          def with_any_arguments
+            chain.delete(:with_arguments)
+
+            self
+          end
+
+          ##
+          # @return [ConvenientService::RSpec::Matchers::Custom::CallChainNext]
+          #
           def without_arguments
             chain[:with_arguments] = {args: [], kwargs: {}, block: nil}
 
