@@ -19,7 +19,7 @@ module ConvenientService
                       metadata = {
                         ConvenientService: {
                           entity: "Result",
-                          service: service.class.name,
+                          service: service.inspect_values[:name],
                           status: status.to_sym
                         }
                       }

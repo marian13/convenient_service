@@ -29,6 +29,8 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
   end
 
   example_group "instance methods" do
+    include ConvenientService::RSpec::Matchers::DelegateTo
+
     describe "#inspect" do
       let(:service) do
         Class.new do
@@ -47,7 +49,15 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
       let(:result) { service.result }
 
       it "returns `inspect` representation of result" do
-        expect(result.inspect).to eq("<#{result.service.class.name}::Result status: :#{result.status}>")
+        expect(result.inspect).to eq("<#{result.service.inspect_values[:name]}::Result status: :#{result.status}>")
+      end
+
+      specify do
+        allow(result.service).to receive(:inspect_values).and_return({})
+
+        expect { result.inspect }
+          .to delegate_to(result.service.inspect_values, :[])
+          .with_arguments(:name)
       end
     end
   end

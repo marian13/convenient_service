@@ -65,6 +65,20 @@ RSpec.describe ConvenientService::Service::Plugins::HasAwesomePrintInspect::Conc
       it "returns `inspect` values" do
         expect(service_instance.inspect_values).to eq(inspect_values)
       end
+
+      context "when service class is anonymous" do
+        let(:service_class) do
+          Class.new do
+            include ConvenientService::Configs::Minimal
+
+            include ConvenientService::Configs::AwesomePrintInspect
+          end
+        end
+
+        it "uses custom class name" do
+          expect(service_instance.inspect_values[:name]).to eq("AnonymousService(##{service_class.object_id})")
+        end
+      end
     end
   end
 end

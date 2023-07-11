@@ -29,6 +29,8 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
   end
 
   example_group "instance methods" do
+    include ConvenientService::RSpec::Matchers::DelegateTo
+
     describe "#inspect" do
       let(:service) do
         Class.new do
@@ -50,15 +52,16 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Entities::Result:
 
       let(:keywords) { ["ConvenientService", "entity", "Result", "service", "ImportantService", "status", ":success"] }
 
-      before do
-        ##
-        # TODO: Remove when Core implements auto committing from `inspect`.
-        #
-        service.commit_config!
-      end
-
       it "returns `inspect` representation of result" do
         expect(result.inspect).to include(*keywords)
+      end
+
+      specify do
+        allow(result.service).to receive(:inspect_values).and_return({})
+
+        expect { result.inspect }
+          .to delegate_to(result.service.inspect_values, :[])
+          .with_arguments(:name)
       end
     end
   end
