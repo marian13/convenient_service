@@ -20,6 +20,8 @@ module ConvenientService
                     #   - https://github.com/awesome-print/awesome_print#usage
                     #   - https://github.com/awesome-print/awesome_print/blob/master/lib/awesome_print/core_ext/kernel.rb
                     #
+                    #   TODO: `inspect_values` for class. This way `service_class.name || ...` can be shared.
+                    #
                     def inspect
                       metadata = {
                         ConvenientService: {

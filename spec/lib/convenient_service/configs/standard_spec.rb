@@ -75,6 +75,7 @@ RSpec.describe ConvenientService::Configs::Standard do
               ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
               ConvenientService::Common::Plugins::HasCallbacks::Middleware,
               ConvenientService::Common::Plugins::HasAroundCallbacks::Middleware,
+              ConvenientService::Service::Plugins::SetsParentToForeignResult::Middleware,
               ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Middleware,
               ConvenientService::Service::Plugins::CanHaveSteps::Middleware
 
@@ -534,7 +535,7 @@ RSpec.describe ConvenientService::Configs::Standard do
       # https://github.com/marian13/convenient_service/discussions/43
       #
       it "applies its `included` block only once" do
-        expect(service_class.middlewares(:result).to_a.size).to eq(9)
+        expect(service_class.middlewares(:result).to_a.size).to eq(10)
       end
     end
   end

@@ -55,6 +55,10 @@ module ConvenientService
           # TODO: Rewrite. This plugin does NOT do what it states. Probably I was NOT with a clear mind while writing it (facepalm).
           #
           # use Plugins::Service::RaisesOnDoubleResult::Middleware
+
+          insert_before \
+            Plugins::Service::RaisesOnNotResultReturnValue::Middleware,
+            Plugins::Service::SetsParentToForeignResult::Middleware
         end
 
         ##
