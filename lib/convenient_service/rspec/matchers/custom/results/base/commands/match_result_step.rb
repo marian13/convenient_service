@@ -10,7 +10,7 @@ module ConvenientService
               class MatchResultStep < Support::Command
                 ##
                 # @!attribute [r] result
-                #   @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+                #   @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
                 #
                 attr_reader :result
 
@@ -21,7 +21,7 @@ module ConvenientService
                 attr_reader :step
 
                 ##
-                # @param result [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+                # @param result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
                 # @param step [ConvenientService::Service, Symbol]
                 # @return [void]
                 #

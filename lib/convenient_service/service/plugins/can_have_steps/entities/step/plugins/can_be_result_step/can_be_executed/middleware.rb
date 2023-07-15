@@ -13,7 +13,7 @@ module ConvenientService
                     intended_for :service_result, entity: :step
 
                     ##
-                    # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+                    # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
                     # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeResultStep::CanBeExecuted::Errors::MethodForStepIsNotDefined]
                     #
                     # @internal

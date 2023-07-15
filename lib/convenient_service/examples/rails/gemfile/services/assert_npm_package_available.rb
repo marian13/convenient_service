@@ -15,7 +15,7 @@ module ConvenientService
 
             attribute :name, :string
 
-            validates :name, presence: true if ConvenientService::Dependencies.support_has_result_params_validations_using_active_model_validations?
+            validates :name, presence: true if ConvenientService::Dependencies.support_has_j_send_result_params_validations_using_active_model_validations?
 
             step Services::AssertNodeAvailable
 

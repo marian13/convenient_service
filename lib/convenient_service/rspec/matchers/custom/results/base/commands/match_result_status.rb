@@ -10,7 +10,7 @@ module ConvenientService
               class MatchResultStatus < Support::Command
                 ##
                 # @!attribute [r] result
-                #   @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+                #   @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
                 #
                 attr_reader :result
 
@@ -21,7 +21,7 @@ module ConvenientService
                 attr_reader :statuses
 
                 ##
-                # @param result [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+                # @param result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
                 # @param statuses [Array<Symbol>]
                 # @return [void]
                 #
@@ -43,7 +43,7 @@ module ConvenientService
                 private
 
                 ##
-                # @return [Array<ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status>]
+                # @return [Array<ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status>]
                 #
                 def casted_statuses
                   statuses.map { |status| result.create_status(status) }

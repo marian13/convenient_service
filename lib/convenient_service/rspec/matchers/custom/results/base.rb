@@ -18,7 +18,7 @@ module ConvenientService
             abstract_method :statuses
 
             ##
-            # @param result [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+            # @param result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
             # @return [Boolean]
             #
             def matches?(result)
@@ -161,7 +161,7 @@ module ConvenientService
 
             ##
             # @!attribute [r] result
-            #   @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+            #   @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
             #
             attr_reader :result
 

@@ -20,14 +20,14 @@ module ConvenientService
 
             ##
             # @!attribute [r] result
-            #   @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+            #   @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
             #
             attr_reader :result
 
             ##
             # @param service [ConvenientService::Service]
             # @param arguments [ConvenientService::Support::Arguments]
-            # @param result [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+            # @param result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
             # @return [void]
             #
             def initialize(service:, arguments:, result:)
@@ -37,7 +37,7 @@ module ConvenientService
             end
 
             ##
-            # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+            # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
             #
             def call
               cache.write(key, result)

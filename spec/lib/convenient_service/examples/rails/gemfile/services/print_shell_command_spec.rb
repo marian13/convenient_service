@@ -26,7 +26,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::PrintShell
   example_group "class methods" do
     describe ".result" do
       context "when printing of shell command is NOT successful" do
-        if ConvenientService::Dependencies.support_has_result_params_validations_using_active_model_validations?
+        if ConvenientService::Dependencies.support_has_j_send_result_params_validations_using_active_model_validations?
           context "when command is NOT present" do
             let(:command) { "" }
 

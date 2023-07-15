@@ -83,11 +83,11 @@ module ConvenientService
         require "awesome_print"
 
         require_relative "service/plugins/has_awesome_print_inspect"
-        require_relative "service/plugins/has_result/entities/result/plugins/has_awesome_print_inspect"
-        require_relative "service/plugins/has_result/entities/result/plugins/has_j_send_status_and_attributes/entities/data/plugins/has_awesome_print_inspect"
-        require_relative "service/plugins/has_result/entities/result/plugins/has_j_send_status_and_attributes/entities/message/plugins/has_awesome_print_inspect"
-        require_relative "service/plugins/has_result/entities/result/plugins/has_j_send_status_and_attributes/entities/status/plugins/has_awesome_print_inspect"
-        require_relative "service/plugins/has_result/entities/result/plugins/has_j_send_status_and_attributes/entities/code/plugins/has_awesome_print_inspect"
+        require_relative "service/plugins/has_j_send_result/entities/result/plugins/has_awesome_print_inspect"
+        require_relative "service/plugins/has_j_send_result/entities/result/plugins/has_j_send_status_and_attributes/entities/data/plugins/has_awesome_print_inspect"
+        require_relative "service/plugins/has_j_send_result/entities/result/plugins/has_j_send_status_and_attributes/entities/message/plugins/has_awesome_print_inspect"
+        require_relative "service/plugins/has_j_send_result/entities/result/plugins/has_j_send_status_and_attributes/entities/status/plugins/has_awesome_print_inspect"
+        require_relative "service/plugins/has_j_send_result/entities/result/plugins/has_j_send_status_and_attributes/entities/code/plugins/has_awesome_print_inspect"
         require_relative "service/plugins/can_have_steps/entities/step/plugins/has_awesome_print_inspect"
         require_relative "configs/awesome_print_inspect"
         require_relative "configs/awesome_print_inspect/aliases"
@@ -97,7 +97,7 @@ module ConvenientService
       # @return [Boolean]
       # @api private
       #
-      def support_has_result_params_validations_using_active_model_validations?
+      def support_has_j_send_result_params_validations_using_active_model_validations?
         return false unless active_model.loaded?
         return false if ruby.version >= 3.0 && active_model.version < 6.0
 
@@ -110,7 +110,7 @@ module ConvenientService
       #
       # @see https://marian13.github.io/convenient_service_docs/troubleshooting/i18n_translate_wrong_number_of_arguments
       #
-      def require_has_result_params_validations_using_active_model_validations
+      def require_has_j_send_result_params_validations_using_active_model_validations
         ##
         # - https://edgeguides.rubyonrails.org/active_model_basics.html
         # - https://api.rubyonrails.org/classes/ActiveModel.html
@@ -118,21 +118,21 @@ module ConvenientService
         #
         require "active_model"
 
-        require_relative "service/plugins/has_result_params_validations/using_active_model_validations"
+        require_relative "service/plugins/has_j_send_result_params_validations/using_active_model_validations"
       end
 
       ##
       # @return [Boolean]
       # @note Expected to be called from app entry points like `initializers` in Rails.
       #
-      def require_has_result_params_validations_using_dry_validation
+      def require_has_j_send_result_params_validations_using_dry_validation
         ##
         # - https://dry-rb.org/gems/dry-validation/main/
         # - https://github.com/dry-rb/dry-validation
         #
         require "dry-validation"
 
-        require_relative "service/plugins/has_result_params_validations/using_dry_validation"
+        require_relative "service/plugins/has_j_send_result_params_validations/using_dry_validation"
       end
 
       ##

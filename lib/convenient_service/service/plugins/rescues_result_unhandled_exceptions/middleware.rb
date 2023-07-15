@@ -11,7 +11,7 @@ module ConvenientService
           # @param args [Array<Object>]
           # @param kwargs [Hash{Symbol => Object}]
           # @param block [Proc, nil]
-          # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+          # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
           #
           # @note This middleware can be used for both instance and class `:result` methods.
           #
@@ -66,7 +66,7 @@ module ConvenientService
           # @param args [Array<Object>]
           # @param kwargs [Hash{Symbol => Object}]
           # @param block [Proc, nil]
-          # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+          # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
           #
           def failure_result_from(exception, *args, **kwargs, &block)
             entity.failure(

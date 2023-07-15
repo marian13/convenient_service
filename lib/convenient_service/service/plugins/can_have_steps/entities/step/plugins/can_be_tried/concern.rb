@@ -20,7 +20,7 @@ module ConvenientService
                     end
 
                     ##
-                    # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+                    # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
                     # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Errors::StepHasNoOrganizer]
                     #
                     # @note `service_try_result` has middlewares.
@@ -34,7 +34,7 @@ module ConvenientService
                     end
 
                     ##
-                    # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+                    # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
                     # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Errors::StepHasNoOrganizer]
                     # @note `try_result` has middlewares.
                     #

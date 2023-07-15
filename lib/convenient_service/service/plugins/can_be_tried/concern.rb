@@ -9,7 +9,7 @@ module ConvenientService
 
           instance_methods do
             ##
-            # Returns `ConvenientService::Service::Plugins::HasResult::Entities::Result` when overridden.
+            # Returns `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result` when overridden.
             #
             # @raise [ConvenientService::Service::Plugins::CanBeTried::Errors::TryResultIsNotOverridden]
             #
@@ -26,7 +26,7 @@ module ConvenientService
 
           class_methods do
             ##
-            # Returns `ConvenientService::Service::Plugins::HasResult::Entities::Result` when `#try_result` is overridden.
+            # Returns `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result` when `#try_result` is overridden.
             #
             # @raise [ConvenientService::Service::Plugins::CanBeTried::Errors::TryResultIsNotOverridden]
             #

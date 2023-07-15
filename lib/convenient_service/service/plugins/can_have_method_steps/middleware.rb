@@ -11,7 +11,7 @@ module ConvenientService
           # @param args [Array<Object>]
           # @param kwargs [Hash{Symbol => Object}]
           # @param block [Proc, nil]
-          # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+          # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
           #
           def next(*args, **kwargs, &block)
             return chain.next(*args, **kwargs, &block) unless args.first.instance_of?(::Symbol)

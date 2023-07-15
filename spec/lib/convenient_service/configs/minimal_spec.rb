@@ -32,7 +32,7 @@ RSpec.describe ConvenientService::Configs::Minimal do
               ConvenientService::Service::Plugins::HasInspect::Concern,
               ConvenientService::Common::Plugins::HasConstructor::Concern,
               ConvenientService::Plugins::Common::HasConstructorWithoutInitialize::Concern,
-              ConvenientService::Service::Plugins::HasResult::Concern,
+              ConvenientService::Service::Plugins::HasJSendResult::Concern,
               ConvenientService::Service::Plugins::CanHaveSteps::Concern
             ]
           end
@@ -161,10 +161,10 @@ RSpec.describe ConvenientService::Configs::Minimal do
             let(:concerns) do
               [
                 ConvenientService::Common::Plugins::HasInternals::Concern,
-                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasInspect::Concern,
+                ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasInspect::Concern,
                 ConvenientService::Common::Plugins::HasConstructor::Concern,
                 ConvenientService::Common::Plugins::HasConstructorWithoutInitialize::Concern,
-                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Concern
+                ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Concern
               ]
             end
 
@@ -177,7 +177,7 @@ RSpec.describe ConvenientService::Configs::Minimal do
             let(:initialize_middlewares) do
               [
                 ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-                ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Middleware
+                ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Middleware
               ]
             end
 
@@ -298,7 +298,7 @@ RSpec.describe ConvenientService::Configs::Minimal do
             example_group "concerns" do
               let(:concerns) do
                 [
-                  ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data::Plugins::HasInspect::Concern
+                  ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data::Plugins::HasInspect::Concern
                 ]
               end
 
@@ -312,7 +312,7 @@ RSpec.describe ConvenientService::Configs::Minimal do
             example_group "concerns" do
               let(:concerns) do
                 [
-                  ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message::Plugins::HasInspect::Concern
+                  ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message::Plugins::HasInspect::Concern
                 ]
               end
 
@@ -326,7 +326,7 @@ RSpec.describe ConvenientService::Configs::Minimal do
             example_group "concerns" do
               let(:concerns) do
                 [
-                  ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code::Plugins::HasInspect::Concern
+                  ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code::Plugins::HasInspect::Concern
                 ]
               end
 
@@ -340,7 +340,7 @@ RSpec.describe ConvenientService::Configs::Minimal do
             example_group "concerns" do
               let(:concerns) do
                 [
-                  ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status::Plugins::HasInspect::Concern
+                  ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status::Plugins::HasInspect::Concern
                 ]
               end
 

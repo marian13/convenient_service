@@ -8,7 +8,7 @@ module ConvenientService
           intended_for :result, entity: :service
 
           ##
-          # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+          # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
           #
           # @internal
           #   TODO: Rewrite `RaisesOnDoubleResult` to make it thread-safe.
@@ -28,7 +28,7 @@ module ConvenientService
           #     10.times.reduce([]) { |threads| threads << Thread.new { service.result } }.join
           #
           def next(...)
-            refute_has_result! || mark_as_has_result!
+            refute_has_j_send_result! || mark_as_has_j_send_result!
 
             chain.next(...)
           end
@@ -45,8 +45,8 @@ module ConvenientService
           #
           #   NOTE: This method contains a trailing exclamation mark in its name since it is mutable.
           #
-          def refute_has_result!
-            return unless entity.internals.cache.exist?(:has_result)
+          def refute_has_j_send_result!
+            return unless entity.internals.cache.exist?(:has_j_send_result)
 
             raise Errors::DoubleResult.new(service: entity)
           end
@@ -60,8 +60,8 @@ module ConvenientService
           #
           #   NOTE: This method contains a trailing exclamation mark in its name since it is mutable.
           #
-          def mark_as_has_result!
-            entity.internals.cache.write(:has_result, true)
+          def mark_as_has_j_send_result!
+            entity.internals.cache.write(:has_j_send_result, true)
           end
         end
       end

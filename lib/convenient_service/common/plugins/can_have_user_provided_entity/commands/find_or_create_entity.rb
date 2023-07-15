@@ -44,14 +44,14 @@ module ConvenientService
               #
               #   klass = ConvenientService::Common::Plugins::CanHaveUserProvidedEntity::Commands::FindOrCreateEntity.call(
               #     namespace: SomeService,
-              #     proto_entity: ConvenientService::Service::Plugins::HasResult::Entities::Result
+              #     proto_entity: ConvenientService::Service::Plugins::HasJSendResult::Entities::Result
               #   )
               #
               #   ##
               #   # `klass` is something like:
               #   #
-              #   # class Result < ConvenientService::Service::Plugins::HasResult::Entities::Result # or just `class Result` if service (namespace) class defines its own.
-              #   #   include ConvenientService::Service::Plugins::HasResult::Entities::Result::Concern # (concern)
+              #   # class Result < ConvenientService::Service::Plugins::HasJSendResult::Entities::Result # or just `class Result` if service (namespace) class defines its own.
+              #   #   include ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Concern # (concern)
               #   #
               #   #   class << self
               #   #     def proto_entity

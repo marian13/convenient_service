@@ -24,8 +24,8 @@ module ConvenientService
           use Plugins::Common::CachesConstructorArguments::Concern
           use Plugins::Common::CanBeCopied::Concern
           use Plugins::Service::CanRecalculateResult::Concern
-          use Plugins::Service::HasResultShortSyntax::Concern
-          use Plugins::Service::HasResultStatusCheckShortSyntax::Concern
+          use Plugins::Service::HasJSendResultShortSyntax::Concern
+          use Plugins::Service::HasJSendResultStatusCheckShortSyntax::Concern
 
           use Plugins::Common::HasCallbacks::Concern
           use Plugins::Common::HasAroundCallbacks::Concern
@@ -80,20 +80,20 @@ module ConvenientService
         end
 
         middlewares :success do
-          use Plugins::Service::HasResultShortSyntax::Success::Middleware
+          use Plugins::Service::HasJSendResultShortSyntax::Success::Middleware
         end
 
         middlewares :failure do
-          use Plugins::Service::HasResultShortSyntax::Failure::Middleware
+          use Plugins::Service::HasJSendResultShortSyntax::Failure::Middleware
         end
 
         middlewares :error do
-          use Plugins::Service::HasResultShortSyntax::Error::Middleware
+          use Plugins::Service::HasJSendResultShortSyntax::Error::Middleware
         end
 
         class self::Result
           concerns do
-            use Plugins::Common::HasResultDuckShortSyntax::Concern
+            use Plugins::Common::HasJSendResultDuckShortSyntax::Concern
             use Plugins::Result::CanRecalculateResult::Concern
 
             use Plugins::Result::CanHaveStep::Concern
@@ -142,7 +142,7 @@ module ConvenientService
 
         class self::Step
           concerns do
-            use Plugins::Common::HasResultDuckShortSyntax::Concern
+            use Plugins::Common::HasJSendResultDuckShortSyntax::Concern
             use Plugins::Step::CanBeTried::Concern
           end
 

@@ -7,14 +7,14 @@ require "convenient_service"
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Dependencies do
   example_group "class methods" do
-    describe ".support_has_result_params_validations_using_active_model_validations?" do
+    describe ".support_has_j_send_result_params_validations_using_active_model_validations?" do
       context "when `ActiveModel` is NOT loaded" do
         before do
           allow(described_class.active_model).to receive(:loaded?).and_return(false)
         end
 
         it "returns `false`" do
-          expect(described_class.support_has_result_params_validations_using_active_model_validations?).to eq(false)
+          expect(described_class.support_has_j_send_result_params_validations_using_active_model_validations?).to eq(false)
         end
       end
 
@@ -29,7 +29,7 @@ RSpec.describe ConvenientService::Dependencies do
           end
 
           it "returns `true`" do
-            expect(described_class.support_has_result_params_validations_using_active_model_validations?).to eq(true)
+            expect(described_class.support_has_j_send_result_params_validations_using_active_model_validations?).to eq(true)
           end
         end
 
@@ -39,7 +39,7 @@ RSpec.describe ConvenientService::Dependencies do
           end
 
           it "returns `true`" do
-            expect(described_class.support_has_result_params_validations_using_active_model_validations?).to eq(true)
+            expect(described_class.support_has_j_send_result_params_validations_using_active_model_validations?).to eq(true)
           end
         end
 
@@ -50,7 +50,7 @@ RSpec.describe ConvenientService::Dependencies do
           end
 
           it "returns `false`" do
-            expect(described_class.support_has_result_params_validations_using_active_model_validations?).to eq(false)
+            expect(described_class.support_has_j_send_result_params_validations_using_active_model_validations?).to eq(false)
           end
         end
       end

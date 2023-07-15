@@ -10,7 +10,7 @@ module ConvenientService
               class MatchResultService < Support::Command
                 ##
                 # @!attribute [r] result
-                #   @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+                #   @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
                 #
                 attr_reader :result
 
@@ -21,7 +21,7 @@ module ConvenientService
                 attr_reader :service_class
 
                 ##
-                # @param result [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+                # @param result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
                 # @param service_class [ConvenientService::Service]
                 # @return [void]
                 #

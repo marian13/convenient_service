@@ -75,7 +75,7 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveUserProvidedEntity::Co
           <<~TEXT
             Proto entity `#{proto_entity}` has no concern.
 
-            Have a look at `ConvenientService::Service::Plugins::HasResult::Entities::Result`.
+            Have a look at `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result`.
 
             It is an example of a valid proto entity.
           TEXT

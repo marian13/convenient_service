@@ -8,7 +8,7 @@ module ConvenientService
           intended_for :result, scope: any_scope, entity: :service
 
           ##
-          # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+          # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
           #
           def next(...)
             return cache[key_with_arguments] if cache.exist?(key_with_arguments)

@@ -8,7 +8,7 @@ module ConvenientService
           intended_for :try_result, entity: :service
 
           ##
-          # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+          # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
           #
           # @internal
           #   NOTE: Copy is returned to have a fresh status.

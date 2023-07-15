@@ -9,7 +9,7 @@ module ConvenientService
     #
     # @note
     #   `use Plugins::Common::NormalizesEnv::Middleware` should be used in a config that has the first `concern` that introduces a method.
-    #   For example, `:result` is added by `use Plugins::Service::HasResult::Concern` in `Minimal`.
+    #   For example, `:result` is added by `use Plugins::Service::HasJSendResult::Concern` in `Minimal`.
     #   That is why the following code is written in the `Minimal` config.
     #
     #     middlewares :result do
@@ -53,7 +53,7 @@ module ConvenientService
           use Plugins::Common::HasConstructor::Concern
           use Plugins::Common::HasConstructorWithoutInitialize::Concern
 
-          use Plugins::Service::HasResult::Concern
+          use Plugins::Service::HasJSendResult::Concern
           use Plugins::Service::CanHaveSteps::Concern
         end
 

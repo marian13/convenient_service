@@ -11,7 +11,7 @@ module ConvenientService
           # NOTE: `CanRecalculateResult` plugin expects that `CanBeCopied` plugin is already included.
           # That is why `copy` method is available.
           #
-          # NOTE: `CanRecalculateResult` plugin expects that `HasResult` plugin is already included.
+          # NOTE: `CanRecalculateResult` plugin expects that `HasJSendResult` plugin is already included.
           # That is why `result` method is available.
           #
           instance_methods do

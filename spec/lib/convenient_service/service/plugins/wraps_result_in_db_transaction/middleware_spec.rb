@@ -47,7 +47,7 @@
 #             include ConvenientService::Configs::Standard
 #
 #             middlewares :result do
-#               delete ConvenientService::Service::Plugins::HasResult::Middleware
+#               delete ConvenientService::Service::Plugins::HasJSendResult::Middleware
 #
 #               use_and_observe middleware
 #             end

@@ -46,32 +46,32 @@ module ConvenientService
                 delegate :not_error?, to: :result
 
                 ##
-                # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data]
+                # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data]
                 #
                 delegate :data, to: :result
 
                 ##
-                # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message]
+                # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message]
                 #
                 delegate :message, to: :result
 
                 ##
-                # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code]
+                # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code]
                 #
                 delegate :code, to: :result
 
                 ##
-                # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data]
+                # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data]
                 #
                 delegate :unsafe_data, to: :result
 
                 ##
-                # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message]
+                # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message]
                 #
                 delegate :unsafe_message, to: :result
 
                 ##
-                # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code]
+                # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code]
                 #
                 delegate :unsafe_code, to: :result
 
@@ -207,7 +207,7 @@ module ConvenientService
                 end
 
                 ##
-                # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+                # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
                 # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Errors::StepHasNoOrganizer]
                 #
                 # @note `service_result` has middlewares.
@@ -222,7 +222,7 @@ module ConvenientService
                 end
 
                 ##
-                # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+                # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
                 # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Errors::StepHasNoOrganizer]
                 #
                 # @note `result` has middlewares.
@@ -324,8 +324,8 @@ module ConvenientService
                 end
 
                 ##
-                # @param result [ConvenientService::Service::Plugins::HasResult::Entities::Result]
-                # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+                # @param result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
+                # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
                 #
                 def convert_to_step_result(result)
                   result.copy(overrides: {kwargs: {step: self, service: organizer}})

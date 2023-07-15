@@ -8,7 +8,7 @@ module ConvenientService
           intended_for :result, entity: :service
 
           ##
-          # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+          # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
           #
           # @example Behavior when `SetsParentToForeignResult` middleware is NOT used.
           #

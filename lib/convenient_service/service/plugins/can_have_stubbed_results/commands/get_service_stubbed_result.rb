@@ -29,7 +29,7 @@ module ConvenientService
             end
 
             ##
-            # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result, nil]
+            # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result, nil]
             #
             def call
               cache.read(key)

@@ -12,14 +12,14 @@ module ConvenientService
 
                 ##
                 # @!attribute [r] result
-                #   @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+                #   @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
                 #
                 attr_reader :result
 
-                import :"commands.is_result?", from: Service::Plugins::HasResult::Container
+                import :"commands.is_result?", from: Service::Plugins::HasJSendResult::Container
 
                 ##
-                # @param result [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+                # @param result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
                 # @return [void]
                 #
                 def initialize(result:)

@@ -10,7 +10,7 @@ module ConvenientService
               class MatchResultMessage < Support::Command
                 ##
                 # @!attribute [r] result
-                #   @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+                #   @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
                 #
                 attr_reader :result
 
@@ -27,7 +27,7 @@ module ConvenientService
                 attr_reader :comparison_method
 
                 ##
-                # @param result [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+                # @param result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
                 # @param message [String]
                 # @param comparison_method [String, Symbol]
                 # @return [void]
@@ -48,7 +48,7 @@ module ConvenientService
                 private
 
                 ##
-                # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message]
+                # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message]
                 #
                 def casted_message
                   result.class.message(value: message, result: result)

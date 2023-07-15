@@ -8,7 +8,7 @@ module ConvenientService
           intended_for :result, scope: any_scope, entity: :service
 
           ##
-          # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+          # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
           #
           def next(...)
             result = chain.next(...)

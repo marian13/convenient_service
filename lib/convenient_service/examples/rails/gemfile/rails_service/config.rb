@@ -36,16 +36,16 @@ module ConvenientService
               end
 
               ##
-              # NOTE: `HasResultParamsValidations::UsingActiveModelValidations` plugin.
+              # NOTE: `HasJSendResultParamsValidations::UsingActiveModelValidations` plugin.
               #
               concerns do
-                use ConvenientService::Plugins::Service::HasResultParamsValidations::UsingActiveModelValidations::Concern
+                use ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingActiveModelValidations::Concern
               end
 
               middlewares :result do
                 insert_before \
                   ConvenientService::Plugins::Service::RaisesOnNotResultReturnValue::Middleware,
-                  ConvenientService::Plugins::Service::HasResultParamsValidations::UsingActiveModelValidations::Middleware
+                  ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingActiveModelValidations::Middleware
               end
             end
           end

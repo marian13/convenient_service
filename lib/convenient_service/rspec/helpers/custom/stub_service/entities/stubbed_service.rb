@@ -83,7 +83,7 @@ module ConvenientService
               attr_reader :result_spec
 
               ##
-              # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+              # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
               #
               def result_value
                 @result_value ||= result_spec.for(service_class).calculate_value

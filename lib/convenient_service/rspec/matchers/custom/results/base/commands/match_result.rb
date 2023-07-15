@@ -16,13 +16,13 @@ module ConvenientService
 
                 ##
                 # @!attribute [r] result
-                #   @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+                #   @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
                 #
                 attr_reader :result
 
                 ##
                 # @param matcher [ConvenientService::RSpec::Matchers::Custom::Results::Base]
-                # @param result [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+                # @param result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
                 # @return [void]
                 #
                 def initialize(matcher:, result:)

@@ -11,7 +11,7 @@ module ConvenientService
                 include Support::Delegate
 
                 ##
-                # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+                # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
                 #
                 delegate :result, to: :klass
 

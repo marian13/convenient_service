@@ -10,7 +10,7 @@ module ConvenientService
             # @return [Array<Symbol>]
             #
             def statuses
-              [Service::Plugins::HasResult::Constants::SUCCESS_STATUS]
+              [Service::Plugins::HasJSendResult::Constants::SUCCESS_STATUS]
             end
           end
         end

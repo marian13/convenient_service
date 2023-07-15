@@ -10,7 +10,7 @@ module ConvenientService
               class MatchResultData < Support::Command
                 ##
                 # @!attribute [r] result
-                #   @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+                #   @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
                 #
                 attr_reader :result
 
@@ -27,7 +27,7 @@ module ConvenientService
                 attr_reader :comparison_method
 
                 ##
-                # @param result [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+                # @param result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
                 # @param data [Hash{Symbol => Object}]
                 # @param comparison_method [String, Symbol]
                 # @return [void]
@@ -48,7 +48,7 @@ module ConvenientService
                 private
 
                 ##
-                # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data]
+                # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data]
                 #
                 def casted_data
                   result.class.data(value: data, result: result)

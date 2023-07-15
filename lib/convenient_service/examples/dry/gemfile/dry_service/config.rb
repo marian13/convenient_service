@@ -25,16 +25,16 @@ module ConvenientService
               end
 
               ##
-              # NOTE: `HasResultParamsValidations::UsingDryValidation` plugin.
+              # NOTE: `HasJSendResultParamsValidations::UsingDryValidation` plugin.
               #
               concerns do
-                use ConvenientService::Plugins::Service::HasResultParamsValidations::UsingDryValidation::Concern
+                use ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingDryValidation::Concern
               end
 
               middlewares :result do
                 insert_before \
                   ConvenientService::Plugins::Service::RaisesOnNotResultReturnValue::Middleware,
-                  ConvenientService::Plugins::Service::HasResultParamsValidations::UsingDryValidation::Middleware
+                  ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingDryValidation::Middleware
               end
             end
           end

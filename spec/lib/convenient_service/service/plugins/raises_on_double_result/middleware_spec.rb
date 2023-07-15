@@ -64,13 +64,13 @@ RSpec.describe ConvenientService::Service::Plugins::RaisesOnDoubleResult::Middle
 
       context "when service does NOT have result" do
         before do
-          service_instance.internals.cache.delete(:has_result)
+          service_instance.internals.cache.delete(:has_j_send_result)
         end
 
         specify do
           expect { method_value }
             .to delegate_to(service_instance.internals.cache, :write)
-            .with_arguments(:has_result, true)
+            .with_arguments(:has_j_send_result, true)
         end
 
         specify do
@@ -84,7 +84,7 @@ RSpec.describe ConvenientService::Service::Plugins::RaisesOnDoubleResult::Middle
         include ConvenientService::RSpec::Helpers::IgnoringError
 
         before do
-          service_instance.internals.cache.write(:has_result, true)
+          service_instance.internals.cache.write(:has_j_send_result, true)
         end
 
         let(:error_message) do

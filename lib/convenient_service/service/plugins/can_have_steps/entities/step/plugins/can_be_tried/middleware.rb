@@ -12,7 +12,7 @@ module ConvenientService
                   intended_for :result, entity: :step
 
                   ##
-                  # @return [ConvenientService::Service::Plugins::HasResult::Entities::Result]
+                  # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
                   #
                   def next(...)
                     result = chain.next(...)
