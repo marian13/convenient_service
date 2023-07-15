@@ -39,7 +39,8 @@ module ConvenientService
           # @internal
           #   TODO: Document order of plugins.
           #
-          #   NOTE: It is imposible to receive a foreign result from a step result, that is why `step: nil` is passed to `copy`.
+          #   NOTE: It is imposible to receive a foreign result from a step result, that is why `step: nil` is passed to `copy`. See `Step#result` for details.
+          #
           #
           def next(...)
             result = chain.next(...)

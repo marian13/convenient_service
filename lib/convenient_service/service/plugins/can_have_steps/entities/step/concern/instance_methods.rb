@@ -215,6 +215,8 @@ module ConvenientService
                 # @internal
                 #   IMPORTANT: `service.result(**input_values)` is the reason, why services should have only kwargs as arguments.
                 #
+                #   NOTE: `service_result` returns a foreign result that is later converted to own result by `convert_to_step_result` in `result`.
+                #
                 def service_result
                   service.klass.result(**input_values)
                 end
@@ -224,6 +226,9 @@ module ConvenientService
                 # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Errors::StepHasNoOrganizer]
                 #
                 # @note `result` has middlewares.
+                #
+                # @internal
+                #   NOTE: Convents a foreign result received from `service_result` to own result.
                 #
                 def result
                   convert_to_step_result(service_result)

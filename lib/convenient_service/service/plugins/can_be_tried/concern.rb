@@ -79,6 +79,9 @@ module ConvenientService
             # @see https://thoughtbot.com/blog/rails-refactoring-example-introduce-null-object
             # @see https://en.wikipedia.org/wiki/Null_object_pattern
             #
+            # @internal
+            #   TODO: Is it necessary to use `SetsParentToForeignResult` for `try_result`?
+            #
             def try_result(...)
               new(...).try_result
             end
