@@ -145,28 +145,6 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#result-instance_method" title="#result (instance method)">#<strong>result</strong>  &#x21d2; Object </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
       <a href="#success-instance_method" title="#success (instance method)">#<strong>success</strong>(**kwargs)  &#x21d2; ConvenientService::Service::Plugins::HasJSendResult::Entities::Result </a>
     
 
@@ -247,12 +225,12 @@
       <pre class="lines">
 
 
-49
-50
-51</pre>
+41
+42
+43</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/concern/instance_methods.rb', line 49</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/concern/instance_methods.rb', line 41</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_error'>error</span><span class='lparen'>(</span><span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_error'>error</span><span class='lparen'>(</span><span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='label'>service:</span> <span class='kw'>self</span><span class='rparen'>)</span><span class='rparen'>)</span>
@@ -314,67 +292,15 @@
       <pre class="lines">
 
 
-37
-38
-39</pre>
+29
+30
+31</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/concern/instance_methods.rb', line 37</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/concern/instance_methods.rb', line 29</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_failure'>failure</span><span class='lparen'>(</span><span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_failure'>failure</span><span class='lparen'>(</span><span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='label'>service:</span> <span class='kw'>self</span><span class='rparen'>)</span><span class='rparen'>)</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="result-instance_method">
-  
-    #<strong>result</strong>  &#x21d2; <tt>Object</tt> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    
-
-  </div>
-</div>
-<div class="tags">
-  
-<p class="tag_title">Raises:</p>
-<ul class="raise">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt><span class='object_link'><a href="../Errors/ResultIsNotOverridden.html" title="ConvenientService::Service::Plugins::HasJSendResult::Errors::ResultIsNotOverridden (class)">ConvenientService::Service::Plugins::HasJSendResult::Errors::ResultIsNotOverridden</a></span></tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-13
-14
-15</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/concern/instance_methods.rb', line 13</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_result'>result</span>
-  <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="../Errors.html" title="ConvenientService::Service::Plugins::HasJSendResult::Errors (module)">Errors</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Errors/ResultIsNotOverridden.html" title="ConvenientService::Service::Plugins::HasJSendResult::Errors::ResultIsNotOverridden (class)">ResultIsNotOverridden</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Errors/ResultIsNotOverridden.html#initialize-instance_method" title="ConvenientService::Service::Plugins::HasJSendResult::Errors::ResultIsNotOverridden#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>service:</span> <span class='kw'>self</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -433,12 +359,12 @@
       <pre class="lines">
 
 
-25
-26
-27</pre>
+17
+18
+19</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/concern/instance_methods.rb', line 25</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/concern/instance_methods.rb', line 17</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_success'>success</span><span class='lparen'>(</span><span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_success'>success</span><span class='lparen'>(</span><span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='label'>service:</span> <span class='kw'>self</span><span class='rparen'>)</span><span class='rparen'>)</span>
@@ -453,7 +379,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Jul 15 18:34:00 2023 by
+  Generated on Sun Jul 16 11:30:18 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>
