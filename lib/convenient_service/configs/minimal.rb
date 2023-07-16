@@ -53,6 +53,7 @@ module ConvenientService
           use Plugins::Common::HasConstructor::Concern
           use Plugins::Common::HasConstructorWithoutInitialize::Concern
 
+          use Plugins::Service::HasResult::Concern
           use Plugins::Service::HasJSendResult::Concern
           use Plugins::Service::CanHaveSteps::Concern
         end

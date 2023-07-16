@@ -7,14 +7,6 @@ module ConvenientService
         module Concern
           module ClassMethods
             ##
-            # @api public
-            # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
-            #
-            def result(...)
-              new(...).result
-            end
-
-            ##
             # @api private
             # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
             #

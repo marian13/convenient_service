@@ -8,14 +8,6 @@ module ConvenientService
           module InstanceMethods
             ##
             # @api public
-            # @raise [ConvenientService::Service::Plugins::HasJSendResult::Errors::ResultIsNotOverridden]
-            #
-            def result
-              raise Errors::ResultIsNotOverridden.new(service: self)
-            end
-
-            ##
-            # @api public
             # @param kwargs [Hash{Symbol => Object}]
             # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
             #

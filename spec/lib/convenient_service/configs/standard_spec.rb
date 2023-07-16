@@ -33,6 +33,7 @@ RSpec.describe ConvenientService::Configs::Standard do
               ConvenientService::Service::Plugins::HasInspect::Concern,
               ConvenientService::Common::Plugins::HasConstructor::Concern,
               ConvenientService::Plugins::Common::HasConstructorWithoutInitialize::Concern,
+              ConvenientService::Service::Plugins::HasResult::Concern,
               ConvenientService::Service::Plugins::HasJSendResult::Concern,
               ConvenientService::Service::Plugins::CanHaveSteps::Concern,
               ConvenientService::Common::Plugins::CachesConstructorArguments::Concern,

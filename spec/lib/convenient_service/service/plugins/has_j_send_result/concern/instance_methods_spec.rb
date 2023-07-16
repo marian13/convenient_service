@@ -32,24 +32,6 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Concern::Ins
   let(:result) { service_instance.result }
 
   example_group "instance methods" do
-    let(:service_class) { base_service_class }
-
-    describe "#result" do
-      let(:error_message) do
-        <<~TEXT
-          Result method (#result) of `#{service_class}` is NOT overridden.
-        TEXT
-      end
-
-      it "raises `ConvenientService::Service::Plugins::HasJSendResult::Errors::ResultIsNotOverridden`" do
-        expect { result }
-          .to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Errors::ResultIsNotOverridden)
-          .with_message(error_message)
-      end
-    end
-  end
-
-  example_group "private instance methods" do
     include ConvenientService::RSpec::Matchers::BeDescendantOf
 
     describe "#success" do

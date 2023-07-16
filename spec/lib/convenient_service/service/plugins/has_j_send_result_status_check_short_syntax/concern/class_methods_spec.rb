@@ -9,41 +9,11 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultStatusCheckSho
     include ConvenientService::RSpec::Matchers::DelegateTo
 
     let(:service_class) do
-      Class.new.tap do |klass|
-        klass.class_exec(described_class) do |mod|
-          include ConvenientService::Service::Plugins::HasJSendResult::Concern
+      Class.new do
+        include ConvenientService::Configs::Standard
 
-          extend mod
-
-          # rubocop:disable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
-          class self::Result
-            include ConvenientService::Core
-
-            concerns do
-              use ConvenientService::Common::Plugins::HasInternals::Concern
-              use ConvenientService::Common::Plugins::HasConstructor::Concern
-              use ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Concern
-            end
-
-            middlewares :initialize do
-              use ConvenientService::Common::Plugins::NormalizesEnv::Middleware
-
-              use ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Middleware
-            end
-
-            class self::Internals
-              include ConvenientService::Core
-
-              concerns do
-                use ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Plugins::HasCache::Concern
-              end
-            end
-          end
-          # rubocop:enable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
-
-          def result
-            success
-          end
+        def result
+          success
         end
       end
     end
@@ -78,7 +48,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultStatusCheckSho
       end
     end
 
-    describe ".fail?" do
+    describe ".failure?" do
       specify do
         expect { service_class.failure? }
           .to delegate_to(result, :failure?)

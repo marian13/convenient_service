@@ -31,22 +31,6 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Concern::Cla
     include ConvenientService::RSpec::Matchers::BeDescendantOf
     include ConvenientService::RSpec::Matchers::DelegateTo
 
-    describe ".result" do
-      specify do
-        expect { service_class.result(*args, **kwargs, &block) }
-          .to delegate_to(service_class, :new)
-          .with_arguments(*args, **kwargs, &block)
-      end
-
-      specify do
-        allow(service_class).to receive(:new).and_return(service_instance)
-
-        expect { service_class.result(*args, **kwargs, &block) }
-          .to delegate_to(service_instance, :result)
-          .and_return_its_value
-      end
-    end
-
     describe "#success" do
       let(:result) { service_class.success(**params) }
       let(:params) { {service: service_instance, data: data} }
