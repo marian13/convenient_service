@@ -36,7 +36,11 @@ Gem::Specification.new do |spec|
 
   spec.require_paths = ["lib"]
 
-  spec.add_development_dependency "appraisal"
+  ##
+  # Used to run specs with multiple versions of gems.
+  # - https://github.com/thoughtbot/appraisal
+  #
+  spec.add_development_dependency "appraisal", "~> 2.5.0"
 
   spec.add_development_dependency "awesome_print"
 
