@@ -91,7 +91,7 @@
   
   <dl>
       <dt>Includes:</dt>
-      <dd><span class='object_link'><a href="../../../../../../../../../Support/Delegate.html" title="ConvenientService::Support::Delegate (module)">Support::Delegate</a></span>, <span class='object_link'><a href="../../../../../../../../../Support/DependencyContainer/Import.html" title="ConvenientService::Support::DependencyContainer::Import (module)">Support::DependencyContainer::Import</a></span></dd>
+      <dd><span class='object_link'><a href="../../../../../../../../../Support/Delegate.html" title="ConvenientService::Support::Delegate (module)">Support::Delegate</a></span></dd>
   </dl>
   
   
@@ -101,9 +101,7 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/convenient_service/rspec/matchers/custom/results/base/entities/printers/error/commands/generate_got_jsend_attributes_part.rb<span class="defines">,<br />
-  lib/convenient_service/rspec/matchers/custom/results/base/entities/printers/failure/commands/generate_got_jsend_attributes_part.rb</span>
-</dd>
+    <dd>lib/convenient_service/rspec/matchers/custom/results/base/entities/printers/failure/commands/generate_got_jsend_attributes_part.rb</dd>
   </dl>
   
 </div>
@@ -276,12 +274,6 @@
   
   
   
-  
-  
-  
-  
-  
-  
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="../../../../../../../../../Support/Command.html" title="ConvenientService::Support::Command (class)">Support::Command</a></span></h3>
   <p class="inherited"><span class='object_link'><a href="../../../../../../../../../Support/Command.html#[]-class_method" title="ConvenientService::Support::Command.[] (method)">[]</a></span>, <span class='object_link'><a href="../../../../../../../../../Support/Command.html#call-class_method" title="ConvenientService::Support::Command.call (method)">call</a></span></p>
 <div id="constructor_details" class="method_details_list">
@@ -345,12 +337,12 @@
       <pre class="lines">
 
 
-45
-46
-47</pre>
+37
+38
+39</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/results/base/entities/printers/error/commands/generate_got_jsend_attributes_part.rb', line 45</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/results/base/entities/printers/failure/commands/generate_got_jsend_attributes_part.rb', line 37</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>printer:</span><span class='rparen'>)</span>
   <span class='ivar'>@printer</span> <span class='op'>=</span> <span class='id identifier rubyid_printer'>printer</span>
@@ -410,12 +402,12 @@
       <pre class="lines">
 
 
+22
 23
-24
-25</pre>
+24</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/results/base/entities/printers/error/commands/generate_got_jsend_attributes_part.rb', line 23</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/results/base/entities/printers/failure/commands/generate_got_jsend_attributes_part.rb', line 22</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_printer'>printer</span>
   <span class='ivar'>@printer</span>
@@ -488,15 +480,19 @@
       <pre class="lines">
 
 
-54
-55
-56</pre>
+46
+47
+48
+49
+50</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/results/base/entities/printers/error/commands/generate_got_jsend_attributes_part.rb', line 54</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/results/base/entities/printers/failure/commands/generate_got_jsend_attributes_part.rb', line 46</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span>
-  <span class='lbracket'>[</span><span class='id identifier rubyid_status_part'>status_part</span><span class='comma'>,</span> <span class='id identifier rubyid_message_part'>message_part</span><span class='comma'>,</span> <span class='id identifier rubyid_code_part'>code_part</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_reject'>reject</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:empty</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>unless</span> <span class='id identifier rubyid_result'>result</span>
+
+  <span class='lbracket'>[</span><span class='id identifier rubyid_status_part'>status_part</span><span class='comma'>,</span> <span class='id identifier rubyid_data_part'>data_part</span><span class='comma'>,</span> <span class='id identifier rubyid_message_part'>message_part</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_reject'>reject</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:empty</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -559,10 +555,10 @@
       <pre class="lines">
 
 
-30</pre>
+29</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/results/base/entities/printers/error/commands/generate_got_jsend_attributes_part.rb', line 30</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/results/base/entities/printers/failure/commands/generate_got_jsend_attributes_part.rb', line 29</span>
 
 <span class='id identifier rubyid_delegate'>delegate</span> <span class='symbol'>:result</span><span class='comma'>,</span> <span class='label'>to:</span> <span class='symbol'>:printer</span></pre>
     </td>
@@ -575,7 +571,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Jul 30 18:58:53 2023 by
+  Generated on Sun Jul 30 19:18:38 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>
