@@ -10,6 +10,10 @@ module ConvenientService
           class Base
             module Entities
               module Printers
+                ##
+                # @internal
+                #   IMPORTANT: Do NOT forget to update the `Null` printer every time when the public interface is changed.
+                #
                 class Failure < Printers::Base
                   ##
                   # @api private

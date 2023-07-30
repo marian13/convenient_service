@@ -44,6 +44,8 @@ module ConvenientService
                       # @return [String]
                       #
                       def call
+                        return "" unless result
+
                         [status_part, data_part].join("\n")
                       end
 

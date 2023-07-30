@@ -8,7 +8,7 @@ module ConvenientService
           class Base
             module Entities
               module Printers
-                class Failure < Printers::Base
+                class Error < Printers::Base
                   module Commands
                     class GenerateGotJsendAttributesPart < Support::Command
                       include Support::Delegate
@@ -52,6 +52,8 @@ module ConvenientService
                       # @return [String]
                       #
                       def call
+                        return "" unless result
+
                         [status_part, message_part, code_part].reject(&:empty).join("\n")
                       end
 
