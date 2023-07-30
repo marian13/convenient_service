@@ -12,6 +12,7 @@ module ConvenientService
               module Printers
                 class Base
                   include Support::Delegate
+                  include Support::AbstractMethod
 
                   ##
                   # @api private
@@ -20,6 +21,13 @@ module ConvenientService
                   #   @return [ConvenientService::RSpec::Matchers::Custom::Results::Base]
                   #
                   attr_reader :matcher
+
+                  ##
+                  # @api private
+                  #
+                  # @return [String]
+                  #
+                  abstract_method :got_jsend_attributes_part
 
                   ##
                   # @api private
@@ -50,6 +58,9 @@ module ConvenientService
                   #
                   # @return [String]
                   #
+                  # @internal
+                  #   TODO: Specs.
+                  #
                   def description
                     expected_parts
                   end
@@ -59,6 +70,9 @@ module ConvenientService
                   #
                   # @return [String]
                   #
+                  # @internal
+                  #   TODO: Specs.
+                  #
                   def failure_message
                     "expected that `#{result.service.class}` result would #{default_text}"
                   end
@@ -67,6 +81,9 @@ module ConvenientService
                   # @api private
                   #
                   # @return [String]
+                  #
+                  # @internal
+                  #   TODO: Specs.
                   #
                   def failure_message_when_negated
                     "expected that `#{result.service.class}` result would NOT #{default_text}"
