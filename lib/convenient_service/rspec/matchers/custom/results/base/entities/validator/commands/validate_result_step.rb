@@ -68,7 +68,7 @@ module ConvenientService
                     #   TODO: Import via commands.
                     #
                     def call
-                      return true unless chain.used_of_step?
+                      return true unless chain.used_step?
 
                       case step
                       when ::Class then match_service_step?

@@ -51,7 +51,7 @@ module ConvenientService
                       # @return [String]
                       #
                       def call
-                        return "" unless chain.used_of_step?
+                        return "" unless chain.used_step?
 
                         result.step.nil? ? "without step" : "of step `#{result.step.printable_service}`"
                       end

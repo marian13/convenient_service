@@ -51,7 +51,7 @@ module ConvenientService
                       # @return [String]
                       #
                       def call
-                        return "" unless chain.used_of_service?
+                        return "" unless chain.used_service?
 
                         "of service `#{result.service.class}`"
                       end

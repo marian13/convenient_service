@@ -64,7 +64,7 @@ module ConvenientService
                     # @return [Boolean]
                     #
                     def call
-                      return true unless chain.used_of_service?
+                      return true unless chain.used_service?
 
                       result.service.instance_of?(service)
                     end

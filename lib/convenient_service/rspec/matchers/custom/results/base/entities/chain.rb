@@ -49,7 +49,7 @@ module ConvenientService
                 #
                 # @return [Boolean]
                 #
-                def used_of_service?
+                def used_service?
                   hash.key?(:service)
                 end
 
@@ -58,7 +58,7 @@ module ConvenientService
                 #
                 # @return [Boolean]
                 #
-                def used_of_step?
+                def used_step?
                   hash.key?(:step)
                 end
 
@@ -68,7 +68,7 @@ module ConvenientService
                 # @return [Array<Symbol>]
                 #
                 def statuses
-                  hash[:statuses]
+                  hash[:statuses] || []
                 end
 
                 ##
@@ -95,7 +95,7 @@ module ConvenientService
                 # @return [String, Symbol]
                 #
                 def code
-                  hash[:code] || ""
+                  hash[:code]
                 end
 
                 ##
