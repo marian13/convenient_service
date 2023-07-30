@@ -7,6 +7,8 @@ module ConvenientService
         module Results
           class BeSuccess < Results::Base
             ##
+            # @api private
+            #
             # @return [Array<Symbol>]
             #
             def statuses

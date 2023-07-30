@@ -7,12 +7,14 @@ module ConvenientService
         module Results
           class BeNotError < Results::Base
             ##
+            # @api private
+            #
             # @return [Array<Symbol>]
             #
             def statuses
               [
-                Service::Plugins::HasJSendResult::Constants::FAILURE_STATUS,
-                Service::Plugins::HasJSendResult::Constants::SUCCESS_STATUS
+                Service::Plugins::HasJSendResult::Constants::SUCCESS_STATUS,
+                Service::Plugins::HasJSendResult::Constants::FAILURE_STATUS
               ]
             end
           end

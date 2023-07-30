@@ -9,12 +9,16 @@ module ConvenientService
             module Constants
               module Triggers
                 ##
+                # @api private
+                #
                 # @return [ConvenientService::Support::UniqueValue]
                 #
                 BE_RESULT = Support::UniqueValue.new("BE_RESULT")
               end
 
               ##
+              # @api private
+              #
               # @return [Symbol]
               #
               DEFAULT_COMPARISON_METHOD = :==

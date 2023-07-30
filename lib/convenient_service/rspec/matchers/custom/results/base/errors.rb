@@ -8,6 +8,12 @@ module ConvenientService
           class Base
             module Errors
               class InvalidStep < ::ConvenientService::Error
+                ##
+                # @api private
+                #
+                # @param step [ConvenientService::Service, Symbol]
+                # @return [void]
+                #
                 def initialize(step:)
                   message = <<~TEXT
                     Step `#{step}` is NOT valid.

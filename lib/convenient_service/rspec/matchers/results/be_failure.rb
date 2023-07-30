@@ -5,6 +5,9 @@ module ConvenientService
     module Matchers
       module Results
         module BeFailure
+          ##
+          # @api public
+          #
           def be_failure(...)
             Custom::Results::BeFailure.new(...)
           end

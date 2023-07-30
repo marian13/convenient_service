@@ -39,6 +39,8 @@ module ConvenientService
             #   TODO: Is it OK to pass custom `code` to `failure`? Why?
             #   NOTE: Extract to `HasJSendResults`.
             #
+            #   TODO: `data.first.join(" ")` is duplicated in `be_result` matcher.
+            #
             def failure(
               service: new_without_initialize,
               data: Constants::DEFAULT_FAILURE_DATA,

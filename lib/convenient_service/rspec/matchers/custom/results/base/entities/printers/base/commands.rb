@@ -1,0 +1,13 @@
+# frozen_string_literal: true
+
+require_relative "commands/generate_expected_code_part"
+require_relative "commands/generate_expected_data_part"
+require_relative "commands/generate_expected_message_part"
+require_relative "commands/generate_expected_parts"
+require_relative "commands/generate_expected_service_part"
+require_relative "commands/generate_expected_status_part"
+require_relative "commands/generate_expected_step_part"
+
+require_relative "commands/generate_got_parts"
+require_relative "commands/generate_got_step_part"
+require_relative "commands/generate_got_service_part"
