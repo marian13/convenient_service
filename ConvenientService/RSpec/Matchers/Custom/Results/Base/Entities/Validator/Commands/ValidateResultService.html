@@ -556,7 +556,7 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/results/base/entities/validator/commands/validate_result_service.rb', line 66</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span>
-  <span class='kw'>return</span> <span class='kw'>true</span> <span class='kw'>unless</span> <span class='id identifier rubyid_chain'>chain</span><span class='period'>.</span><span class='id identifier rubyid_used_of_service?'>used_of_service?</span>
+  <span class='kw'>return</span> <span class='kw'>true</span> <span class='kw'>unless</span> <span class='id identifier rubyid_chain'>chain</span><span class='period'>.</span><span class='id identifier rubyid_used_service?'>used_service?</span>
 
   <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='id identifier rubyid_service'>service</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
@@ -838,7 +838,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Jul 30 19:41:47 2023 by
+  Generated on Sun Jul 30 20:15:12 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>

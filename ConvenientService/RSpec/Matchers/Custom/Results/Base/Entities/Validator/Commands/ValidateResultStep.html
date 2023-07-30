@@ -575,7 +575,7 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/results/base/entities/validator/commands/validate_result_step.rb', line 70</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span>
-  <span class='kw'>return</span> <span class='kw'>true</span> <span class='kw'>unless</span> <span class='id identifier rubyid_chain'>chain</span><span class='period'>.</span><span class='id identifier rubyid_used_of_step?'>used_of_step?</span>
+  <span class='kw'>return</span> <span class='kw'>true</span> <span class='kw'>unless</span> <span class='id identifier rubyid_chain'>chain</span><span class='period'>.</span><span class='id identifier rubyid_used_step?'>used_step?</span>
 
   <span class='kw'>case</span> <span class='id identifier rubyid_step'>step</span>
   <span class='kw'>when</span> <span class='op'>::</span><span class='const'>Class</span> <span class='kw'>then</span> <span class='id identifier rubyid_match_service_step?'>match_service_step?</span>
@@ -863,7 +863,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Jul 30 19:41:47 2023 by
+  Generated on Sun Jul 30 20:15:12 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>
