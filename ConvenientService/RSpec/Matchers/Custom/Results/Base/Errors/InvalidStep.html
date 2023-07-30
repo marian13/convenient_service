@@ -145,7 +145,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(step:)  &#x21d2; InvalidStep </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(step:)  &#x21d2; void </a>
     
 
     
@@ -158,11 +158,10 @@
   
   
   
-  
+  <span class="private note title">private</span>
 
   
-    <span class="summary_desc"><div class='inline'><p>A new instance of InvalidStep.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'></div></span>
   
 </li>
 
@@ -183,7 +182,7 @@
     <div class="method_details first">
   <h3 class="signature first" id="initialize-instance_method">
   
-    #<strong>initialize</strong>(step:)  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::RSpec::Matchers::Custom::Results::Base::Errors::InvalidStep (class)">InvalidStep</a></span></tt> 
+    #<strong>initialize</strong>(step:)  &#x21d2; <tt>void</tt> 
   
 
   
@@ -191,13 +190,31 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a new instance of InvalidStep.</p>
+    <p class="note private">
+  <strong>This method is part of a private API.</strong>
+  You should avoid using this method if possible, as it may be removed or be changed in the future.
+</p>
 
 
   </div>
 </div>
 <div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
   
+    <li>
+      
+        <span class='name'>step</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../../../../Service.html" title="ConvenientService::Service (module)">ConvenientService::Service</a></span></tt>, <tt>Symbol</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
 <p class="tag_title">Since:</p>
 <ul class="since">
   
@@ -220,12 +237,6 @@
       <pre class="lines">
 
 
-11
-12
-13
-14
-15
-16
 17
 18
 19
@@ -236,10 +247,16 @@
 24
 25
 26
-27</pre>
+27
+28
+29
+30
+31
+32
+33</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/results/base/errors.rb', line 11</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/results/base/errors.rb', line 17</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>step:</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_message'>message</span> <span class='op'>=</span> <span class='heredoc_beg'>&lt;&lt;~TEXT</span>
@@ -269,7 +286,7 @@
 </div>
 
       <div id="footer">
-  Generated on Tue Jul 25 15:25:05 2023 by
+  Generated on Sun Jul 30 00:11:31 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>
