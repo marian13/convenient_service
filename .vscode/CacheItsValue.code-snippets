@@ -1,0 +1,15 @@
+{
+  ////
+  // NOTE: `.code-snippets` files support only C-style comments.
+  // NOTE: More information about VS Code Snippets can be found here:
+  // - https://code.visualstudio.com/docs/editor/userdefinedsnippets
+  //
+  "CacheItsValue RSpec module": {
+    "scope": "ruby",
+    "prefix": "CacheItsValue",
+    "body": [
+      "include ConvenientService::RSpec::Matchers::CacheItsValue",
+    ],
+    "description": "`CacheItsValue` - a module that allows to use custom RSpec matcher `cache_its_value` to verify caching"
+  }
+}

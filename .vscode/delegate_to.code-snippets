@@ -1,0 +1,20 @@
+{
+  ////
+  // NOTE: `.code-snippets` files support only C-style comments.
+  // NOTE: More information about VS Code Snippets can be found here:
+  // - https://code.visualstudio.com/docs/editor/userdefinedsnippets
+  //
+  "delegate_to RSpec matcher": {
+    "scope": "ruby",
+    "prefix": "delegate_to",
+    "body": [
+      "specify do",
+      "  expect { $1 }",
+      "    .to delegate_to($2, $3)",
+      "    .with_arguments(${4:*args, **kwargs, &block})",
+      "    .and_return_its_value",
+      "end"
+    ],
+    "description": "`delegate_to` - a custom RSpec matcher to verify delegations"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  ////
+  // NOTE: `.code-snippets` files support only C-style comments.
+  // NOTE: More information about VS Code Snippets can be found here:
+  // - https://code.visualstudio.com/docs/editor/userdefinedsnippets
+  //
+  "DelegateTo RSpec module": {
+    "scope": "ruby",
+    "prefix": "DelegateTo",
+    "body": [
+      "include ConvenientService::RSpec::Matchers::DelegateTo",
+    ],
+    "description": "`DelegateTo` - a module that allows to use custom RSpec matcher `delegate_to` to verify delegations"
+  }
+}

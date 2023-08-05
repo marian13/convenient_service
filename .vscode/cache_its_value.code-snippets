@@ -1,0 +1,17 @@
+{
+  ////
+  // NOTE: `.code-snippets` files support only C-style comments.
+  // NOTE: More information about VS Code Snippets can be found here:
+  // - https://code.visualstudio.com/docs/editor/userdefinedsnippets
+  //
+  "cache_its_value RSpec matcher": {
+    "scope": "ruby",
+    "prefix": "cache_its_value",
+    "body": [
+      "specify do",
+      "  expect { $1 }.to cache_its_value",
+      "end"
+    ],
+    "description": "`cache_its_value` - a custom RSpec matcher to verify caching"
+  }
+}

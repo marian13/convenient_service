@@ -1,0 +1,41 @@
+{
+  ////
+  // NOTE: `.code-snippets` files support only C-style comments.
+  // NOTE: More information about VS Code Snippets can be found here:
+  // - https://code.visualstudio.com/docs/editor/userdefinedsnippets
+  //
+  "comparison RSpec example group": {
+    "scope": "ruby",
+    "prefix": "comparison",
+    "body": [
+      "example_group \"comparison\" do",
+      "  describe \"#==\" do",
+      "    context \"when `other` have different class\" do",
+      "      let(:other) { 42 }",
+      "",
+      "      it \"returns `nil`\" do",
+      "        expect(${1:entity} == other).to be_nil",
+      "      end",
+      "    end",
+      "",
+      "    context \"when `other` have different ${2:attribute}\" do",
+      "      let(:other) { described_class.new(${2:attribute}: other_${2:attribute}) }",
+      "",
+      "      it \"returns `false`\" do",
+      "        expect(${1:entity} == other).to eq(false)",
+      "      end",
+      "    end",
+      "",
+      "    context \"when `other` has same attributes\" do",
+      "      let(:other) { described_class.new }",
+      "",
+      "      it \"returns `true`\" do",
+      "        expect(${1:entity} == other).to eq(true)",
+      "      end",
+      "    end",
+      "  end",
+      "end",
+    ],
+    "description": "`comparison` - an example group for RSpec to verify `#==`, `#===`, `#equal?`, `#eql?` methods"
+  }
+}
