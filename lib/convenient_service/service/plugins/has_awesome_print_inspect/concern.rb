@@ -29,7 +29,7 @@ module ConvenientService
             #   NOTE: It is a coincidence that `HasInspect#inspect_values` has exactly the same implementation. There is NO intention to keep them in sync.
             #
             def inspect_values
-              {name: self.class.name || "AnonymousService(##{self.class.object_id})"}
+              {name: Utils::Class.display_name(self.class)}
             end
           end
         end

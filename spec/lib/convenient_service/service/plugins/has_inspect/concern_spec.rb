@@ -71,7 +71,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasInspect::Concern do
         end
 
         it "uses custom class name" do
-          expect(service_instance.inspect_values[:name]).to eq("AnonymousService(##{service_class.object_id})")
+          expect(service_instance.inspect_values[:name]).to eq("AnonymousClass(##{service_class.object_id})")
         end
       end
     end

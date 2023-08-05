@@ -2,6 +2,7 @@
 
 require_relative "utils/array"
 require_relative "utils/bool"
+require_relative "utils/class"
 require_relative "utils/hash"
 require_relative "utils/method"
 require_relative "utils/module"
