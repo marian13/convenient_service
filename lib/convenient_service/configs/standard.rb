@@ -31,6 +31,7 @@ module ConvenientService
           use Plugins::Common::HasAroundCallbacks::Concern
 
           use Plugins::Service::CanBeTried::Concern
+          use Plugins::Service::HasMermaidFlowchart::Concern
         end
 
         middlewares :initialize do

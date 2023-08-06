@@ -16,6 +16,13 @@ require "forwardable"
 
 ##
 # @internal
+#   - https://ruby-doc.org/stdlib-2.7.0/libdoc/erb/rdoc/ERB.html
+#   - https://github.com/ruby/erb
+#
+require "erb"
+
+##
+# @internal
 #   - https://ruby-doc.org/stdlib-2.7.0/libdoc/logger/rdoc/Logger.html
 #   - https://github.com/ruby/logger
 #

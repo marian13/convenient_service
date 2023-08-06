@@ -46,6 +46,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::RailsService::Config
               ConvenientService::Common::Plugins::HasCallbacks::Concern,
               ConvenientService::Common::Plugins::HasAroundCallbacks::Concern,
               ConvenientService::Service::Plugins::CanBeTried::Concern,
+              ConvenientService::Service::Plugins::HasMermaidFlowchart::Concern,
               ConvenientService::Common::Plugins::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment::Concern,
               ConvenientService::Common::Plugins::HasAttributes::UsingActiveModelAttributes::Concern,
               ConvenientService::Service::Plugins::HasJSendResultParamsValidations::UsingActiveModelValidations::Concern

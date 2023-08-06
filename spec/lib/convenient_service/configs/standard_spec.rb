@@ -43,7 +43,8 @@ RSpec.describe ConvenientService::Configs::Standard do
               ConvenientService::Service::Plugins::HasJSendResultStatusCheckShortSyntax::Concern,
               ConvenientService::Common::Plugins::HasCallbacks::Concern,
               ConvenientService::Common::Plugins::HasAroundCallbacks::Concern,
-              ConvenientService::Service::Plugins::CanBeTried::Concern
+              ConvenientService::Service::Plugins::CanBeTried::Concern,
+              ConvenientService::Service::Plugins::HasMermaidFlowchart::Concern
             ]
           end
 
