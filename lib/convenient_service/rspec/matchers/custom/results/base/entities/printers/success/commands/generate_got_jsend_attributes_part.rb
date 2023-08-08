@@ -17,7 +17,7 @@ module ConvenientService
                       # @api private
                       #
                       # @!attribute printer [r]
-                      #   @return [ConvenientService::RSpec::Matchers::Custom::Results::Base::Entities::Printers::Base]
+                      #   @return [ConvenientService::RSpec::Matchers::Custom::Results::Base::Entities::Printers::Success]
                       #
                       attr_reader :printer
 
@@ -74,7 +74,7 @@ module ConvenientService
                       # @return [String]
                       #
                       def data_part
-                        data.empty? ? "without data" : "with data `#{data}`"
+                        data.empty? ? "with empty data" : "with data `#{data}`"
                       end
 
                       ##
@@ -82,13 +82,6 @@ module ConvenientService
                       #
                       def data
                         @data ||= result.unsafe_data.to_h
-                      end
-
-                      ##
-                      # @return [String]
-                      #
-                      def message
-                        @message ||= result.unsafe_message.to_s
                       end
                     end
                   end

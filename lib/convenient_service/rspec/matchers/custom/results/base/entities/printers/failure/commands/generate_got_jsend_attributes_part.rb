@@ -17,7 +17,7 @@ module ConvenientService
                       # @api private
                       #
                       # @!attribute printer [r]
-                      #   @return [ConvenientService::RSpec::Matchers::Custom::Results::Base::Entities::Printers::Base]
+                      #   @return [ConvenientService::RSpec::Matchers::Custom::Results::Base::Entities::Printers::Failure]
                       #
                       attr_reader :printer
 
@@ -50,9 +50,6 @@ module ConvenientService
                       #
                       # @return [String]
                       #
-                      # @internal
-                      #   TODO: Specs for `...].none?`.
-                      #
                       def call
                         return "" unless result
 
@@ -74,7 +71,7 @@ module ConvenientService
                       # @return [String]
                       #
                       def data_part
-                        data.empty? ? "without data" : "with data `#{data}`"
+                        data.empty? ? "with empty data" : "with data `#{data}`"
                       end
 
                       ##
@@ -83,7 +80,16 @@ module ConvenientService
                       # @internal
                       #   TODO: Duplicated in `HasJSendResult::ClassMethods`.
                       #
+                      #   NOTE: `message` and `data.first.to_a.join(" ")` are NOT equal only when:
+                      #   - Only `with_message` is used.
+                      #   - `with_data` and `with_message` are used together.
+                      #
+                      #   NOTE: This method is responsible for the `got` part, that is why it compares `message` and `data.first.to_a.join(" ")`.
+                      #
                       def message_part
+                        ##
+                        # TODO: `return "" if result.has_custom_message?`.
+                        #
                         return "" if message == data.first.to_a.join(" ")
 
                         message.empty? ? "with empty message" : "with message `#{message}`"

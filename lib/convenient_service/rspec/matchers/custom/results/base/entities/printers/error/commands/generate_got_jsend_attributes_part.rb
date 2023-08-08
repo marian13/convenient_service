@@ -18,7 +18,7 @@ module ConvenientService
                       # @api private
                       #
                       # @!attribute printer [r]
-                      #   @return [ConvenientService::RSpec::Matchers::Custom::Results::Base::Entities::Printers::Base]
+                      #   @return [ConvenientService::RSpec::Matchers::Custom::Results::Base::Entities::Printers::Error]
                       #
                       attr_reader :printer
 
@@ -58,15 +58,12 @@ module ConvenientService
                       #
                       # @return [String]
                       #
-                      # @internal
-                      #   TODO: Specs for `...].none?`.
-                      #
                       def call
                         return "" unless result
 
                         return status_part if [chain.used_data?, chain.used_message?, chain.used_code?].none?
 
-                        [status_part, message_part, code_part].reject(&:empty).join("\n")
+                        [status_part, message_part, code_part].reject(&:empty?).join("\n")
                       end
 
                       private
@@ -82,13 +79,16 @@ module ConvenientService
                       # @return [String]
                       #
                       def message_part
-                        message.empty? ? "without message" : "with message `#{message}`"
+                        message.empty? ? "with empty message" : "with message `#{message}`"
                       end
 
                       ##
                       # @return [String]
                       #
                       def code_part
+                        ##
+                        # NOTE: `return "" if result.has_custom_code?`.
+                        #
                         return "" if code == constants.DEFAULT_ERROR_CODE
 
                         "with code `#{code}`"
