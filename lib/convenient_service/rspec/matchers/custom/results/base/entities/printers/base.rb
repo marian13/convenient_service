@@ -78,7 +78,7 @@ module ConvenientService
                   #   TODO: Specs.
                   #
                   def failure_message
-                    "expected that `#{result.service.class}` result would #{default_text}"
+                    "expected result to be\n#{default_text}"
                   end
 
                   ##
@@ -90,7 +90,7 @@ module ConvenientService
                   #   TODO: Specs.
                   #
                   def failure_message_when_negated
-                    "expected that `#{result.service.class}` result would NOT #{default_text}"
+                    "expected result NOT to be\n#{default_text}"
                   end
 
                   ##

@@ -16,7 +16,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Entiti
         let(:matcher) { be_success }
 
         it "returns part with that one status" do
-          expect(command_result).to eq("with status `success`")
+          expect(command_result).to eq("with `success` status")
         end
       end
 
@@ -24,7 +24,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Entiti
         let(:matcher) { be_not_success }
 
         it "returns part with those multiple statuses" do
-          expect(command_result).to eq("with status `failure` or `error`")
+          expect(command_result).to eq("with `failure` or `error` status")
         end
       end
     end

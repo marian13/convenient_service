@@ -24,6 +24,13 @@ module ConvenientService
                       ##
                       # @api private
                       #
+                      # @return [ConvenientService::RSpec::Matchers::Custom::Results::Base::Entities::Chain]
+                      #
+                      delegate :chain, to: :printer
+
+                      ##
+                      # @api private
+                      #
                       # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
                       #
                       delegate :result, to: :printer
@@ -43,10 +50,15 @@ module ConvenientService
                       #
                       # @return [String]
                       #
+                      # @internal
+                      #   TODO: Specs for `...].none?`.
+                      #
                       def call
                         return "" unless result
 
-                        [status_part, data_part, message_part].reject(&:empty).join("\n")
+                        return status_part if [chain.used_data?, chain.used_message?, chain.used_code?].none?
+
+                        [status_part, data_part, message_part].reject(&:empty?).join("\n")
                       end
 
                       private
@@ -72,7 +84,7 @@ module ConvenientService
                       #   TODO: Duplicated in `HasJSendResult::ClassMethods`.
                       #
                       def message_part
-                        return "" if message == data.first.to_s.join(" ")
+                        return "" if message == data.first.to_a.join(" ")
 
                         message.empty? ? "with empty message" : "with message `#{message}`"
                       end

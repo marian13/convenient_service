@@ -69,7 +69,7 @@ module ConvenientService
                       #   TODO: New line for each attribute.
                       #
                       def call
-                        parts.reject(&:empty?).join(" ")
+                        parts.reject(&:empty?).join("\n")
                       end
 
                       private

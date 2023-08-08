@@ -187,7 +187,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::Format do
           let(:path) { "non_existing_path" }
 
           it "returns intermediate step result" do
-            expect(result).to be_not_success.of_step(ConvenientService::Examples::Rails::Gemfile::Services::ReadFileContent)
+            expect(result).to be_not_success.of_service(described_class).of_step(ConvenientService::Examples::Rails::Gemfile::Services::ReadFileContent)
           end
         end
 
@@ -199,7 +199,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::Format do
           end
 
           it "returns intermediate step result" do
-            expect(result).to be_not_success.of_step(ConvenientService::Examples::Rails::Gemfile::Services::StripComments)
+            expect(result).to be_not_success.of_service(described_class).of_step(ConvenientService::Examples::Rails::Gemfile::Services::StripComments)
           end
         end
 
@@ -214,7 +214,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::Format do
           end
 
           it "returns intermediate step result" do
-            expect(result).to be_not_success.of_step(ConvenientService::Examples::Rails::Gemfile::Services::ParseContent)
+            expect(result).to be_not_success.of_service(described_class).of_step(ConvenientService::Examples::Rails::Gemfile::Services::ParseContent)
           end
         end
 
@@ -223,7 +223,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::Format do
             let(:initial_content) { "ruby \"3.0.1\"" }
 
             it "returns intermediate step result" do
-              expect(result).to be_not_success.of_step(ConvenientService::Examples::Rails::Gemfile::Services::MergeSections)
+              expect(result).to be_not_success.of_service(described_class).of_step(ConvenientService::Examples::Rails::Gemfile::Services::MergeSections)
             end
           end
         end

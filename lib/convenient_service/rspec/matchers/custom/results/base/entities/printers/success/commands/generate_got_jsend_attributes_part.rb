@@ -24,6 +24,13 @@ module ConvenientService
                       ##
                       # @api private
                       #
+                      # @return [ConvenientService::RSpec::Matchers::Custom::Results::Base::Entities::Chain]
+                      #
+                      delegate :chain, to: :printer
+
+                      ##
+                      # @api private
+                      #
                       # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
                       #
                       delegate :result, to: :printer
@@ -43,8 +50,13 @@ module ConvenientService
                       #
                       # @return [String]
                       #
+                      # @internal
+                      #   TODO: Specs for `...].none?`.
+                      #
                       def call
                         return "" unless result
+
+                        return status_part if [chain.used_data?, chain.used_message?, chain.used_code?].none?
 
                         [status_part, data_part].join("\n")
                       end

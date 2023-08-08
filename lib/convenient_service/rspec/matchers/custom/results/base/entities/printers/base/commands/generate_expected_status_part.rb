@@ -44,7 +44,7 @@ module ConvenientService
                       # @return [String]
                       #
                       def call
-                        "with status #{printable_statuses}"
+                        "with #{printable_statuses} status"
                       end
 
                       private

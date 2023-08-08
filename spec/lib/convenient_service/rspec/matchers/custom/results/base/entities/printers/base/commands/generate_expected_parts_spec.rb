@@ -50,8 +50,8 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Entiti
           ]
         end
 
-        it "returns parts concated by spaces" do
-          expect(command_result).to eq(parts.join(" "))
+        it "returns parts concated by newlines" do
+          expect(command_result).to eq(parts.join("\n"))
         end
       end
 
@@ -69,7 +69,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Entiti
         end
 
         it "skips that chain part" do
-          expect(command_result).to eq(parts.join(" "))
+          expect(command_result).to eq(parts.join("\n"))
         end
       end
 
@@ -86,7 +86,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Entiti
         end
 
         it "skips those chains parts" do
-          expect(command_result).to eq(parts.join(" "))
+          expect(command_result).to eq(parts.join("\n"))
         end
       end
     end
