@@ -508,23 +508,23 @@
       <pre class="lines">
 
 
+61
+62
+63
 64
 65
 66
-67
-68
-69
-70</pre>
+67</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/results/base/entities/printers/error/commands/generate_got_jsend_attributes_part.rb', line 64</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/results/base/entities/printers/error/commands/generate_got_jsend_attributes_part.rb', line 61</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span>
   <span class='kw'>return</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>unless</span> <span class='id identifier rubyid_result'>result</span>
 
   <span class='kw'>return</span> <span class='id identifier rubyid_status_part'>status_part</span> <span class='kw'>if</span> <span class='lbracket'>[</span><span class='id identifier rubyid_chain'>chain</span><span class='period'>.</span><span class='id identifier rubyid_used_data?'>used_data?</span><span class='comma'>,</span> <span class='id identifier rubyid_chain'>chain</span><span class='period'>.</span><span class='id identifier rubyid_used_message?'>used_message?</span><span class='comma'>,</span> <span class='id identifier rubyid_chain'>chain</span><span class='period'>.</span><span class='id identifier rubyid_used_code?'>used_code?</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_none?'>none?</span>
 
-  <span class='lbracket'>[</span><span class='id identifier rubyid_status_part'>status_part</span><span class='comma'>,</span> <span class='id identifier rubyid_message_part'>message_part</span><span class='comma'>,</span> <span class='id identifier rubyid_code_part'>code_part</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_reject'>reject</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:empty</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='lbracket'>[</span><span class='id identifier rubyid_status_part'>status_part</span><span class='comma'>,</span> <span class='id identifier rubyid_message_part'>message_part</span><span class='comma'>,</span> <span class='id identifier rubyid_code_part'>code_part</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_reject'>reject</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:empty?</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -670,7 +670,7 @@
 </div>
 
       <div id="footer">
-  Generated on Tue Aug  8 00:09:28 2023 by
+  Generated on Tue Aug  8 23:48:52 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>
