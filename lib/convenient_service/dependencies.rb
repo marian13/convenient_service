@@ -279,6 +279,12 @@ module ConvenientService
         #
         require "webrick"
 
+        ##
+        # - https://ruby-doc.org/stdlib-2.7.0/libdoc/uri/rdoc/URI.html
+        # - https://github.com/ruby/uri
+        #
+        require "uri"
+
         require_relative "examples/standard/cowsay"
         require_relative "examples/standard/date_time"
         require_relative "examples/standard/factorial"
