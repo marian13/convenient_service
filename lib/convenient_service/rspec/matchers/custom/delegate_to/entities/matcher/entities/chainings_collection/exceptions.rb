@@ -10,7 +10,7 @@ module ConvenientService
               module Entities
                 class ChainingsCollection
                   module Errors
-                    class CallOriginalChainingIsAlreadySet < ::ConvenientService::Error
+                    class CallOriginalChainingIsAlreadySet < ::ConvenientService::Exception
                       def initialize
                         message = <<~TEXT
                           Call original chaining is already set.
@@ -22,7 +22,7 @@ module ConvenientService
                       end
                     end
 
-                    class ArgumentsChainingIsAlreadySet < ::ConvenientService::Error
+                    class ArgumentsChainingIsAlreadySet < ::ConvenientService::Exception
                       def initialize
                         message = <<~TEXT
                           Arguments chaining is already set.
@@ -34,7 +34,7 @@ module ConvenientService
                       end
                     end
 
-                    class ReturnItsValueChainingIsAlreadySet < ::ConvenientService::Error
+                    class ReturnItsValueChainingIsAlreadySet < ::ConvenientService::Exception
                       def initialize
                         message = <<~TEXT
                           Returns its value chaining is already set.

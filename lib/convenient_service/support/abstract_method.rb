@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "abstract_method/errors"
+require_relative "abstract_method/exceptions"
 
 module ConvenientService
   module Support

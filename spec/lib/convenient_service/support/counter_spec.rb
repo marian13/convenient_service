@@ -14,7 +14,7 @@ RSpec.describe ConvenientService::Support::Counter do
   let(:max_value) { 1_000_000 }
   let(:n) { 1_000 }
 
-  example_group "errors" do
+  example_group "exceptions" do
     include ConvenientService::RSpec::Matchers::BeDescendantOf
 
     specify { expect(described_class::Errors::ValueAfterIncrementIsGreaterThanMaxValue).to be_descendant_of(ConvenientService::Error) }

@@ -2,7 +2,7 @@
 
 require_relative "config/commands"
 require_relative "config/entities"
-require_relative "config/errors"
+require_relative "config/exceptions"
 
 module ConvenientService
   module Core

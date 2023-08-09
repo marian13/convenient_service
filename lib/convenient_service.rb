@@ -11,7 +11,7 @@ require_relative "convenient_service/dependencies"
 #   Convenient Service Inner Tools and Utilities.
 #
 require_relative "convenient_service/logger"
-require_relative "convenient_service/error"
+require_relative "convenient_service/exception"
 require_relative "convenient_service/support"
 require_relative "convenient_service/utils"
 require_relative "convenient_service/version"

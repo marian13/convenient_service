@@ -6,7 +6,7 @@ module ConvenientService
       module Custom
         class WrapMethod < Support::Command
           module Errors
-            class ChainAttributePreliminaryAccess < ::ConvenientService::Error
+            class ChainAttributePreliminaryAccess < ::ConvenientService::Exception
               ##
               # @param attribute [Symbol]
               # @return [void]

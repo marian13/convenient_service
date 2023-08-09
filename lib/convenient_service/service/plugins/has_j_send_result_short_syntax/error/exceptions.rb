@@ -6,7 +6,7 @@ module ConvenientService
       module HasJSendResultShortSyntax
         module Error
           module Errors
-            class BothArgsAndKwargsArePassed < ::ConvenientService::Error
+            class BothArgsAndKwargsArePassed < ::ConvenientService::Exception
               def initialize
                 message = <<~TEXT
                   Both `args` and `kwargs` are passed to the `error` method.
@@ -24,7 +24,7 @@ module ConvenientService
               end
             end
 
-            class MoreThanTwoArgsArePassed < ::ConvenientService::Error
+            class MoreThanTwoArgsArePassed < ::ConvenientService::Exception
               def initialize
                 message = <<~TEXT
                   More than two `args` are passed to the `error` method.

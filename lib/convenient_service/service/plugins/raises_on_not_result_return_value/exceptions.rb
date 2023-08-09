@@ -5,7 +5,7 @@ module ConvenientService
     module Plugins
       module RaisesOnNotResultReturnValue
         module Errors
-          class ReturnValueNotKindOfResult < ::ConvenientService::Error
+          class ReturnValueNotKindOfResult < ::ConvenientService::Exception
             def initialize(service:, result:, method:)
               message = <<~TEXT
                 Return value of service `#{service.class}` is NOT a `Result`.

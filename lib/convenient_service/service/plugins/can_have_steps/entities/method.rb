@@ -3,7 +3,7 @@
 require_relative "method/commands"
 require_relative "method/concern"
 require_relative "method/entities"
-require_relative "method/errors"
+require_relative "method/exceptions"
 
 module ConvenientService
   module Service

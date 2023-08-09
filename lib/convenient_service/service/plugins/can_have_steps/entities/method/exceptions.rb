@@ -7,7 +7,7 @@ module ConvenientService
         module Entities
           class Method
             module Errors
-              class MethodHasNoOrganizer < ::ConvenientService::Error
+              class MethodHasNoOrganizer < ::ConvenientService::Exception
                 ##
                 # @param method [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method]
                 # @return [void]
@@ -26,7 +26,7 @@ module ConvenientService
                 end
               end
 
-              class InputMethodIsNotDefinedInContainer < ::ConvenientService::Error
+              class InputMethodIsNotDefinedInContainer < ::ConvenientService::Exception
                 ##
                 # @param method [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method]
                 # @param container [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Service]
@@ -43,7 +43,7 @@ module ConvenientService
                 end
               end
 
-              class OutputMethodIsDefinedInContainer < ::ConvenientService::Error
+              class OutputMethodIsDefinedInContainer < ::ConvenientService::Exception
                 ##
                 # @param method [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method]
                 # @param container [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Service]
@@ -60,7 +60,7 @@ module ConvenientService
                 end
               end
 
-              class AliasInputMethodIsNotDefinedInContainer < ::ConvenientService::Error
+              class AliasInputMethodIsNotDefinedInContainer < ::ConvenientService::Exception
                 ##
                 # @param method [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method]
                 # @param container [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Service]
@@ -77,7 +77,7 @@ module ConvenientService
                 end
               end
 
-              class AliasOutputMethodIsDefinedInContainer < ::ConvenientService::Error
+              class AliasOutputMethodIsDefinedInContainer < ::ConvenientService::Exception
                 ##
                 # @param method [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method]
                 # @param container [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Service]
@@ -94,7 +94,7 @@ module ConvenientService
                 end
               end
 
-              class OutputMethodProc < ::ConvenientService::Error
+              class OutputMethodProc < ::ConvenientService::Exception
                 ##
                 # @param method [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method]
                 # @param container [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Service]
@@ -109,7 +109,7 @@ module ConvenientService
                 end
               end
 
-              class OutputMethodRawValue < ::ConvenientService::Error
+              class OutputMethodRawValue < ::ConvenientService::Exception
                 ##
                 # @param method [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method]
                 # @param container [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Service]
@@ -124,7 +124,7 @@ module ConvenientService
                 end
               end
 
-              class CallerCanNotCalculateReassignment < ::ConvenientService::Error
+              class CallerCanNotCalculateReassignment < ::ConvenientService::Exception
                 ##
                 # @param method [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method]
                 # @return [void]
@@ -140,7 +140,7 @@ module ConvenientService
                 end
               end
 
-              class InputMethodReassignment < ::ConvenientService::Error
+              class InputMethodReassignment < ::ConvenientService::Exception
                 ##
                 # @param method [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method]
                 # @param container [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Service]
@@ -155,7 +155,7 @@ module ConvenientService
                 end
               end
 
-              class MethodIsNotInputMethod < ::ConvenientService::Error
+              class MethodIsNotInputMethod < ::ConvenientService::Exception
                 ##
                 # @param method [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method]
                 # @param container [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Service]
@@ -170,7 +170,7 @@ module ConvenientService
                 end
               end
 
-              class MethodIsNotOutputMethod < ::ConvenientService::Error
+              class MethodIsNotOutputMethod < ::ConvenientService::Exception
                 ##
                 # @param method [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method]
                 # @param container [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Service]
@@ -185,7 +185,7 @@ module ConvenientService
                 end
               end
 
-              class NotCompletedStep < ::ConvenientService::Error
+              class NotCompletedStep < ::ConvenientService::Exception
                 ##
                 # @param method_name [Symbol]
                 # @param step [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step]
@@ -202,7 +202,7 @@ module ConvenientService
                 end
               end
 
-              class NotExistingStepResultDataAttribute < ::ConvenientService::Error
+              class NotExistingStepResultDataAttribute < ::ConvenientService::Exception
                 ##
                 # @param key [Symbol]
                 # @param step [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step]

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "chainings_collection/errors"
+require_relative "chainings_collection/exceptions"
 
 module ConvenientService
   module RSpec

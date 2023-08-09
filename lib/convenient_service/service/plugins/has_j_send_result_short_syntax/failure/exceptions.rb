@@ -6,7 +6,7 @@ module ConvenientService
       module HasJSendResultShortSyntax
         module Failure
           module Errors
-            class KwargsContainNonJSendKey < ::ConvenientService::Error
+            class KwargsContainNonJSendKey < ::ConvenientService::Exception
               def initialize(key:)
                 message = <<~TEXT
                   When `kwargs` with `data` key are passed to `failure` method, they can NOT contain non JSend keys like `#{key.inspect}`.

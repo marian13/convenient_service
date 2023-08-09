@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "ignoring_error/errors"
+require_relative "ignoring_error/exceptions"
 
 module ConvenientService
   module RSpec

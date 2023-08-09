@@ -9,7 +9,7 @@ module ConvenientService
             module Plugins
               module HasJSendStatusAndAttributes
                 module Errors
-                  class NotExistingAttribute < ::ConvenientService::Error
+                  class NotExistingAttribute < ::ConvenientService::Exception
                     ##
                     # @param attribute [Symbol]
                     # @return [void]

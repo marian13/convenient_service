@@ -2,7 +2,7 @@
 
 require_relative "base/constants"
 require_relative "base/entities"
-require_relative "base/errors"
+require_relative "base/exceptions"
 
 module ConvenientService
   module RSpec

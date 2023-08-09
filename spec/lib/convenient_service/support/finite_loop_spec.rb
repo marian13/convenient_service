@@ -14,7 +14,7 @@ RSpec.describe ConvenientService::Support::FiniteLoop do
     end
   end
 
-  example_group "errors" do
+  example_group "exceptions" do
     include ConvenientService::RSpec::Matchers::BeDescendantOf
 
     specify { expect(described_class::Errors::MaxIterationCountExceeded).to be_descendant_of(ConvenientService::Error) }

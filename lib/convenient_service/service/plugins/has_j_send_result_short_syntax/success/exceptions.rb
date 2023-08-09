@@ -6,7 +6,7 @@ module ConvenientService
       module HasJSendResultShortSyntax
         module Success
           module Errors
-            class KwargsContainDataAndExtraKeys < ::ConvenientService::Error
+            class KwargsContainDataAndExtraKeys < ::ConvenientService::Exception
               def initialize
                 message = <<~TEXT
                   `kwargs` passed to `success` method contain `data` and extra keys. That's NOT allowed.

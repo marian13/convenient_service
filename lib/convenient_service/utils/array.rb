@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "array/errors"
+require_relative "array/exceptions"
 
 require_relative "array/contain_exactly"
 require_relative "array/drop_while"

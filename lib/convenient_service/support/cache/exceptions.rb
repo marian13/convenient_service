@@ -4,7 +4,7 @@ module ConvenientService
   module Support
     class Cache
       module Errors
-        class NotSupportedBackend < ::ConvenientService::Error
+        class NotSupportedBackend < ::ConvenientService::Exception
           ##
           # @param backend [Symbol]
           # @return [void]

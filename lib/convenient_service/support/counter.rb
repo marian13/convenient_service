@@ -12,7 +12,7 @@ module ConvenientService
     #
     class Counter
       module Errors
-        class ValueAfterIncrementIsGreaterThanMaxValue < ::ConvenientService::Error
+        class ValueAfterIncrementIsGreaterThanMaxValue < ::ConvenientService::Exception
           ##
           # @param n [Integer]
           # @param current_value [Integer]
@@ -32,7 +32,7 @@ module ConvenientService
           end
         end
 
-        class ValueAfterDecrementIsLowerThanMinValue < ::ConvenientService::Error
+        class ValueAfterDecrementIsLowerThanMinValue < ::ConvenientService::Exception
           ##
           # @param n [Integer]
           # @param current_value [Integer]

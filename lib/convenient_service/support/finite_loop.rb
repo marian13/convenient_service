@@ -9,7 +9,7 @@ module ConvenientService
       MAX_ITERATION_COUNT = 1_000
 
       module Errors
-        class MaxIterationCountExceeded < ::ConvenientService::Error
+        class MaxIterationCountExceeded < ::ConvenientService::Exception
           ##
           # @param limit [Integer]
           # @return [void]
@@ -25,7 +25,7 @@ module ConvenientService
           end
         end
 
-        class NoBlockGiven < ::ConvenientService::Error
+        class NoBlockGiven < ::ConvenientService::Exception
           ##
           # @return [void]
           #

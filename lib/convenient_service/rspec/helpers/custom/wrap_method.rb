@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "wrap_method/entities"
-require_relative "wrap_method/errors"
+require_relative "wrap_method/exceptions"
 
 module ConvenientService
   module RSpec

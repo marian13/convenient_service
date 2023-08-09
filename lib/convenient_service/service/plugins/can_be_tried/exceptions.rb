@@ -5,7 +5,7 @@ module ConvenientService
     module Plugins
       module CanBeTried
         module Errors
-          class TryResultIsNotOverridden < ::ConvenientService::Error
+          class TryResultIsNotOverridden < ::ConvenientService::Exception
             def initialize(service:)
               message = <<~TEXT
                 Try result method (#try_result) of `#{service.class}` is NOT overridden.
@@ -17,7 +17,7 @@ module ConvenientService
             end
           end
 
-          class ServiceTryReturnValueNotSuccess < ::ConvenientService::Error
+          class ServiceTryReturnValueNotSuccess < ::ConvenientService::Exception
             def initialize(service:, result:)
               message = <<~TEXT
                 Return value of service `#{service.class}` try is NOT a `success`.

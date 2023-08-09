@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "castable/errors"
+require_relative "castable/exceptions"
 
 module ConvenientService
   module Support

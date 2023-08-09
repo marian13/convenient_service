@@ -2,7 +2,7 @@
 
 require_relative "cache/constants"
 require_relative "cache/entities"
-require_relative "cache/errors"
+require_relative "cache/exceptions"
 
 module ConvenientService
   module Support

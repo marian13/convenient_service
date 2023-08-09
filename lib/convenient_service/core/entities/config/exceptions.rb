@@ -5,7 +5,7 @@ module ConvenientService
     module Entities
       class Config
         module Errors
-          class ConfigIsCommitted < ::ConvenientService::Error
+          class ConfigIsCommitted < ::ConvenientService::Exception
             ##
             # @param config [ConvenientService::Core::Entities::Config]
             # @return [void]
@@ -21,7 +21,7 @@ module ConvenientService
             end
           end
 
-          class TooManyCommitsFromMethodMissing < ::ConvenientService::Error
+          class TooManyCommitsFromMethodMissing < ::ConvenientService::Exception
             ##
             # @param config [ConvenientService::Core::Entities::Config]
             # @return [void]

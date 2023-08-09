@@ -4,7 +4,7 @@ module ConvenientService
   module Utils
     module Array
       module Errors
-        class NonIntegerIndex < ::ConvenientService::Error
+        class NonIntegerIndex < ::ConvenientService::Exception
           def initialize(index:)
             message = <<~TEXT
               Index `#{index.inspect}` is NOT an integer.

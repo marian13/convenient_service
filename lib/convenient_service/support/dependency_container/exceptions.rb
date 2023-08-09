@@ -4,7 +4,7 @@ module ConvenientService
   module Support
     module DependencyContainer
       module Errors
-        class InvalidScope < ::ConvenientService::Error
+        class InvalidScope < ::ConvenientService::Exception
           ##
           # @param scope [Object]
           # @return [void]
@@ -29,7 +29,7 @@ module ConvenientService
           end
         end
 
-        class NotExportableModule < ::ConvenientService::Error
+        class NotExportableModule < ::ConvenientService::Exception
           ##
           # @param mod [Module]
           # @return [void]
@@ -45,7 +45,7 @@ module ConvenientService
           end
         end
 
-        class NotExportedMethod < ::ConvenientService::Error
+        class NotExportedMethod < ::ConvenientService::Exception
           ##
           # @param method_name [String]
           # @param method_scope [Symbol]
@@ -69,7 +69,7 @@ module ConvenientService
           end
         end
 
-        class NotModule < ::ConvenientService::Error
+        class NotModule < ::ConvenientService::Exception
           ##
           # @param klass [Class]
           # @return [void]

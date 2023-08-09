@@ -7,7 +7,7 @@ module ConvenientService
         module Entities
           class Step
             module Errors
-              class StepHasNoOrganizer < ::ConvenientService::Error
+              class StepHasNoOrganizer < ::ConvenientService::Exception
                 def initialize(step:)
                   message = <<~TEXT
                     Step `#{step.printable_service}` has not assigned organizer.

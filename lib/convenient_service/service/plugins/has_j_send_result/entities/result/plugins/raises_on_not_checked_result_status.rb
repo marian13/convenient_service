@@ -1,4 +1,4 @@
 # frozen_string_literal: true
 
-require_relative "raises_on_not_checked_result_status/errors"
+require_relative "raises_on_not_checked_result_status/exceptions"
 require_relative "raises_on_not_checked_result_status/middleware"

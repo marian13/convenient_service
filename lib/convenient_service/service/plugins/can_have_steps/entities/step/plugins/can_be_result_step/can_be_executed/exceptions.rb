@@ -10,7 +10,7 @@ module ConvenientService
               module CanBeResultStep
                 module CanBeExecuted
                   module Errors
-                    class MethodForStepIsNotDefined < ::ConvenientService::Error
+                    class MethodForStepIsNotDefined < ::ConvenientService::Exception
                       ##
                       # @param service_class [Class]
                       # @param method_name [Symbol]

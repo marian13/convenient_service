@@ -6,7 +6,7 @@ module ConvenientService
       module Custom
         class IgnoringError < Support::Command
           module Errors
-            class IgnoredErrorIsNotRaised < ::ConvenientService::Error
+            class IgnoredErrorIsNotRaised < ::ConvenientService::Exception
               ##
               # @param error [Exception]
               # @return [void]
