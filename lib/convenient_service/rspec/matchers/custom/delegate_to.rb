@@ -66,7 +66,7 @@ module ConvenientService
 
           ##
           # @return [ConvenientService::RSpec::Matchers::Custom::DelegateTo]
-          # @raise [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Errors::ArgumentsChainingIsAlreadySet]
+          # @raise [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Exceptions::ArgumentsChainingIsAlreadySet]
           #
           def with_arguments(...)
             matcher.with_arguments(...)
@@ -76,7 +76,7 @@ module ConvenientService
 
           ##
           # @return [ConvenientService::RSpec::Matchers::Custom::DelegateTo]
-          # @raise [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Errors::ArgumentsChainingIsAlreadySet]
+          # @raise [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Exceptions::ArgumentsChainingIsAlreadySet]
           #
           def with_any_arguments
             matcher.with_any_arguments
@@ -86,7 +86,7 @@ module ConvenientService
 
           ##
           # @return [ConvenientService::RSpec::Matchers::Custom::DelegateTo]
-          # @raise [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Errors::ArgumentsChainingIsAlreadySet]
+          # @raise [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Exceptions::ArgumentsChainingIsAlreadySet]
           #
           def without_arguments
             matcher.without_arguments
@@ -96,7 +96,7 @@ module ConvenientService
 
           ##
           # @return [ConvenientService::RSpec::Matchers::Custom::DelegateTo]
-          # @raise [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Errors::ReturnItsValueChainingIsAlreadySet]
+          # @raise [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Exceptions::ReturnItsValueChainingIsAlreadySet]
           #
           def and_return_its_value
             matcher.and_return_its_value

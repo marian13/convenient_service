@@ -34,9 +34,9 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::Assert
           TEXT
         end
 
-        it "raises `ConvenientService::Support::DependencyContainer::Errors::NotExportedMethod`" do
+        it "raises `ConvenientService::Support::DependencyContainer::Exceptions::NotExportedMethod`" do
           expect { command_result }
-            .to raise_error(ConvenientService::Support::DependencyContainer::Errors::NotExportedMethod)
+            .to raise_error(ConvenientService::Support::DependencyContainer::Exceptions::NotExportedMethod)
             .with_message(error_message)
         end
       end

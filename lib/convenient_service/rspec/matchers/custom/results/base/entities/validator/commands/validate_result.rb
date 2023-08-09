@@ -82,7 +82,7 @@ module ConvenientService
                     ##
                     # @api private
                     # @return [Boolean]
-                    # @raise [ConvenientService::RSpec::Matchers::Custom::Results::Base::Errors::InvalidStep]
+                    # @raise [ConvenientService::RSpec::Matchers::Custom::Results::Base::Exceptions::InvalidStep]
                     #
                     def call
                       validations.all?(true)

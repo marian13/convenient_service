@@ -3,7 +3,7 @@
 module ConvenientService
   module Support
     class Cache
-      module Errors
+      module Exceptions
         class NotSupportedBackend < ::ConvenientService::Exception
           ##
           # @param backend [Symbol]

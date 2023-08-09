@@ -18,7 +18,7 @@ module ConvenientService
 
                 return if kwargs.keys.one?
 
-                raise Errors::KwargsContainDataAndExtraKeys.new
+                raise Exceptions::KwargsContainDataAndExtraKeys.new
               end
             end
           end

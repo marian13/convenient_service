@@ -21,7 +21,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Commands::TrackMethodM
       context "when `method_missing` trigger is NOT valid" do
         let(:trigger) { ConvenientService::Core::Constants::Triggers::USER }
 
-        it "does NOT raise `ConvenientService::Core::Entities::Config::Errors::TooManyCommitsFromMethodMissing`" do
+        it "does NOT raise `ConvenientService::Core::Entities::Config::Exceptions::TooManyCommitsFromMethodMissing`" do
           expect { command_result }.not_to raise_error
         end
 
@@ -64,9 +64,9 @@ RSpec.describe ConvenientService::Core::Entities::Config::Commands::TrackMethodM
               TEXT
             end
 
-            it "raises `ConvenientService::Core::Entities::Config::Errors::TooManyCommitsFromMethodMissing`" do
+            it "raises `ConvenientService::Core::Entities::Config::Exceptions::TooManyCommitsFromMethodMissing`" do
               expect { command_result }
-                .to raise_error(ConvenientService::Core::Entities::Config::Errors::TooManyCommitsFromMethodMissing)
+                .to raise_error(ConvenientService::Core::Entities::Config::Exceptions::TooManyCommitsFromMethodMissing)
                 .with_message(error_message)
             end
           end
@@ -76,7 +76,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Commands::TrackMethodM
               config.method_missing_commits_counter.reset
             end
 
-            it "does NOT raise `ConvenientService::Core::Entities::Config::Errors::TooManyCommitsFromMethodMissing`" do
+            it "does NOT raise `ConvenientService::Core::Entities::Config::Exceptions::TooManyCommitsFromMethodMissing`" do
               expect { command_result }.not_to raise_error
             end
 
@@ -119,9 +119,9 @@ RSpec.describe ConvenientService::Core::Entities::Config::Commands::TrackMethodM
               TEXT
             end
 
-            it "raises `ConvenientService::Core::Entities::Config::Errors::TooManyCommitsFromMethodMissing`" do
+            it "raises `ConvenientService::Core::Entities::Config::Exceptions::TooManyCommitsFromMethodMissing`" do
               expect { command_result }
-                .to raise_error(ConvenientService::Core::Entities::Config::Errors::TooManyCommitsFromMethodMissing)
+                .to raise_error(ConvenientService::Core::Entities::Config::Exceptions::TooManyCommitsFromMethodMissing)
                 .with_message(error_message)
             end
           end
@@ -131,7 +131,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Commands::TrackMethodM
               config.method_missing_commits_counter.reset
             end
 
-            it "does NOT raise `ConvenientService::Core::Entities::Config::Errors::TooManyCommitsFromMethodMissing`" do
+            it "does NOT raise `ConvenientService::Core::Entities::Config::Exceptions::TooManyCommitsFromMethodMissing`" do
               expect { command_result }.not_to raise_error
             end
 

@@ -62,7 +62,7 @@ module ConvenientService
                     # @api private
                     #
                     # @return [Boolean]
-                    # @raise [ConvenientService::RSpec::Matchers::Custom::Results::Base::Errors::InvalidStep]
+                    # @raise [ConvenientService::RSpec::Matchers::Custom::Results::Base::Exceptions::InvalidStep]
                     #
                     # @internal
                     #   TODO: Import via commands.
@@ -75,7 +75,7 @@ module ConvenientService
                       when :result then match_result_method_step?
                       when ::Symbol then match_method_step?
                       when nil then match_without_step?
-                      else raise Errors::InvalidStep.new(step: step)
+                      else raise Exceptions::InvalidStep.new(step: step)
                       end
                     end
 

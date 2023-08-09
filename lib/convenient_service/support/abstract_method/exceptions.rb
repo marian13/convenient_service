@@ -3,7 +3,7 @@
 module ConvenientService
   module Support
     module AbstractMethod
-      module Errors
+      module Exceptions
         class AbstractMethodNotOverridden < ::ConvenientService::Exception
           def initialize(instance:, method:)
             klass = instance.is_a?(::Class) ? instance : instance.class

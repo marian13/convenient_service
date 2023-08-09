@@ -44,8 +44,8 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         context "when `service` is NOT castable" do
           let(:service) { 42 }
 
-          it "raises `ConvenientService::Support::Castable::Errors::FailedToCast`" do
-            expect { command_result }.to raise_error(ConvenientService::Support::Castable::Errors::FailedToCast)
+          it "raises `ConvenientService::Support::Castable::Exceptions::FailedToCast`" do
+            expect { command_result }.to raise_error(ConvenientService::Support::Castable::Exceptions::FailedToCast)
           end
         end
       end
@@ -62,8 +62,8 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         context "when any `input` is NOT castable" do
           let(:inputs) { [42] }
 
-          it "raises `ConvenientService::Support::Castable::Errors::FailedToCast`" do
-            expect { command_result }.to raise_error(ConvenientService::Support::Castable::Errors::FailedToCast)
+          it "raises `ConvenientService::Support::Castable::Exceptions::FailedToCast`" do
+            expect { command_result }.to raise_error(ConvenientService::Support::Castable::Exceptions::FailedToCast)
           end
         end
       end
@@ -80,8 +80,8 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         context "when any `output` is NOT castable" do
           let(:outputs) { [42] }
 
-          it "raises `ConvenientService::Support::Castable::Errors::FailedToCast`" do
-            expect { command_result }.to raise_error(ConvenientService::Support::Castable::Errors::FailedToCast)
+          it "raises `ConvenientService::Support::Castable::Exceptions::FailedToCast`" do
+            expect { command_result }.to raise_error(ConvenientService::Support::Castable::Exceptions::FailedToCast)
           end
         end
       end
@@ -109,8 +109,8 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           let(:container) { 42 }
           let(:organizer) { Object.new }
 
-          it "raises `ConvenientService::Support::Castable::Errors::FailedToCast`" do
-            expect { command_result }.to raise_error(ConvenientService::Support::Castable::Errors::FailedToCast)
+          it "raises `ConvenientService::Support::Castable::Exceptions::FailedToCast`" do
+            expect { command_result }.to raise_error(ConvenientService::Support::Castable::Exceptions::FailedToCast)
           end
         end
       end

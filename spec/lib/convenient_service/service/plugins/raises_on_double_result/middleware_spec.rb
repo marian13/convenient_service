@@ -106,9 +106,9 @@ RSpec.describe ConvenientService::Service::Plugins::RaisesOnDoubleResult::Middle
           TEXT
         end
 
-        it "raises `ConvenientService::Service::Plugins::RaisesOnDoubleResult::Errors::DoubleResult`" do
+        it "raises `ConvenientService::Service::Plugins::RaisesOnDoubleResult::Exceptions::DoubleResult`" do
           expect { method_value }
-            .to raise_error(ConvenientService::Service::Plugins::RaisesOnDoubleResult::Errors::DoubleResult)
+            .to raise_error(ConvenientService::Service::Plugins::RaisesOnDoubleResult::Exceptions::DoubleResult)
             .with_message(error_message)
         end
 
@@ -117,7 +117,7 @@ RSpec.describe ConvenientService::Service::Plugins::RaisesOnDoubleResult::Middle
         # But if it is NOT caught, the spec should fail.
         #
         specify do
-          expect { ignoring_error(ConvenientService::Service::Plugins::RaisesOnDoubleResult::Errors::DoubleResult) { method_value } }
+          expect { ignoring_error(ConvenientService::Service::Plugins::RaisesOnDoubleResult::Exceptions::DoubleResult) { method_value } }
             .not_to call_chain_next.on(method)
         end
       end

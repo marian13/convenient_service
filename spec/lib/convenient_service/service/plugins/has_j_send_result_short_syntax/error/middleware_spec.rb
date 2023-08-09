@@ -124,9 +124,9 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultShortSyntax::E
               TEXT
             end
 
-            it "raises `ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Error::Errors::MoreThanTwoArgsArePassed`" do
+            it "raises `ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Error::Exceptions::MoreThanTwoArgsArePassed`" do
               expect { method_value }
-                .to raise_error(ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Error::Errors::MoreThanTwoArgsArePassed)
+                .to raise_error(ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Error::Exceptions::MoreThanTwoArgsArePassed)
                 .with_message(error_message)
             end
           end
@@ -149,9 +149,9 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultShortSyntax::E
             TEXT
           end
 
-          it "raises `ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Error::Errors::BothArgsAndKwargsArePassed`" do
+          it "raises `ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Error::Exceptions::BothArgsAndKwargsArePassed`" do
             expect { method_value }
-              .to raise_error(ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Error::Errors::BothArgsAndKwargsArePassed)
+              .to raise_error(ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Error::Exceptions::BothArgsAndKwargsArePassed)
               .with_message(error_message)
           end
         end

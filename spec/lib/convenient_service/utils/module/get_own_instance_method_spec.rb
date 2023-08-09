@@ -114,9 +114,9 @@ RSpec.describe ConvenientService::Utils::Module::GetOwnInstanceMethod do
           stub_const("ConvenientService::Support::FiniteLoop::MAX_ITERATION_COUNT", max_iteration_count)
         end
 
-        it "raises `ConvenientService::Support::FiniteLoop::Errors::MaxIterationCountExceeded`" do
+        it "raises `ConvenientService::Support::FiniteLoop::Exceptions::MaxIterationCountExceeded`" do
           expect { described_class.call(klass, method_name) }
-            .to raise_error(ConvenientService::Support::FiniteLoop::Errors::MaxIterationCountExceeded)
+            .to raise_error(ConvenientService::Support::FiniteLoop::Exceptions::MaxIterationCountExceeded)
             .with_message(error_message)
         end
 

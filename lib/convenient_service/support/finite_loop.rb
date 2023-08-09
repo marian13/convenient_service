@@ -8,7 +8,7 @@ module ConvenientService
       #
       MAX_ITERATION_COUNT = 1_000
 
-      module Errors
+      module Exceptions
         class MaxIterationCountExceeded < ::ConvenientService::Exception
           ##
           # @param limit [Integer]
@@ -67,13 +67,13 @@ module ConvenientService
       #   end
       #
       def finite_loop(default: nil, max_iteration_count: MAX_ITERATION_COUNT, raise_on_exceedance: true, &block)
-        raise Errors::NoBlockGiven.new unless block
+        raise Exceptions::NoBlockGiven.new unless block
 
         loop.with_index do |_, index|
           if index >= max_iteration_count
             break default unless raise_on_exceedance
 
-            raise Errors::MaxIterationCountExceeded.new(limit: max_iteration_count)
+            raise Exceptions::MaxIterationCountExceeded.new(limit: max_iteration_count)
           end
 
           yield(index)

@@ -14,7 +14,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
       ##
       # @internal
-      #   NOTE: Used by "raises `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Errors::StepHasNoOrganizer`" specs.
+      #   NOTE: Used by "raises `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepHasNoOrganizer`" specs.
       #
       def self.name
         "StepService"
@@ -156,9 +156,9 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           TEXT
         end
 
-        it "returns `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Errors::MethodHasNoOrganizer`" do
+        it "returns `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::MethodHasNoOrganizer`" do
           expect { step.copy(overrides: {kwargs: {organizer: nil}}).service_try_result }
-            .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Errors::MethodHasNoOrganizer)
+            .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::MethodHasNoOrganizer)
             .with_message(message)
         end
       end
@@ -185,9 +185,9 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           TEXT
         end
 
-        it "returns `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Errors::MethodHasNoOrganizer`" do
+        it "returns `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::MethodHasNoOrganizer`" do
           expect { step.copy(overrides: {kwargs: {organizer: nil}}).try_result }
-            .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Errors::MethodHasNoOrganizer)
+            .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::MethodHasNoOrganizer)
             .with_message(message)
         end
       end

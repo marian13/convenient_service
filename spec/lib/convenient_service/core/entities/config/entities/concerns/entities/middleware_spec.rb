@@ -115,9 +115,9 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns::En
               TEXT
             end
 
-            it "raises `ConvenientService::Support::AbstractMethod::Errors::AbstractMethodNotOverridden`" do
+            it "raises `ConvenientService::Support::AbstractMethod::Exceptions::AbstractMethodNotOverridden`" do
               expect { described_class == other }
-                .to raise_error(ConvenientService::Support::AbstractMethod::Errors::AbstractMethodNotOverridden)
+                .to raise_error(ConvenientService::Support::AbstractMethod::Exceptions::AbstractMethodNotOverridden)
                 .with_message(error_message)
             end
           end

@@ -16,7 +16,7 @@ module ConvenientService
           def next(...)
             try_result = chain.next(...)
 
-            raise Errors::ServiceTryReturnValueNotSuccess.new(service: entity, result: try_result) unless try_result.success?
+            raise Exceptions::ServiceTryReturnValueNotSuccess.new(service: entity, result: try_result) unless try_result.success?
 
             try_result.copy(overrides: {kwargs: {try_result: true}})
           end

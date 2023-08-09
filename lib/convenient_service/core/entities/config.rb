@@ -153,7 +153,7 @@ module ConvenientService
         # @note Config is committed either by `commit_config` or `method_missing` from `ConvenientService::Core::InstanceMethods` and `ConvenientService::Core::ClassMethods`.
         #
         # @return [void]
-        # @raise [ConvenientService::Core::Entities::Config::Errors::ConfigIsCommitted]
+        # @raise [ConvenientService::Core::Entities::Config::Exceptions::ConfigIsCommitted]
         #
         # @internal
         #   NOTE: Concerns must be included only once since Ruby does NOT allow to modify the order of modules in the inheritance chain.
@@ -162,7 +162,7 @@ module ConvenientService
         def assert_not_committed!
           return unless committed?
 
-          raise Errors::ConfigIsCommitted.new(config: self)
+          raise Exceptions::ConfigIsCommitted.new(config: self)
         end
       end
     end

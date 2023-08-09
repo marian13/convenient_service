@@ -4,8 +4,8 @@ require "spec_helper"
 
 require "convenient_service"
 
-RSpec.describe ConvenientService::Utils::Array::Errors do
+RSpec.describe ConvenientService::Utils::Array::Exceptions do
   include ConvenientService::RSpec::Matchers::BeDescendantOf
 
-  specify { expect(described_class::NonIntegerIndex).to be_descendant_of(ConvenientService::Error) }
+  specify { expect(described_class::NonIntegerIndex).to be_descendant_of(ConvenientService::Exception) }
 end

@@ -34,7 +34,7 @@ module ConvenientService
 
                     ##
                     # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Structs::JSendAttributes]
-                    # @raise [ConvenientService::Support::Castable::Errors::FailedToCast]
+                    # @raise [ConvenientService::Support::Castable::Exceptions::FailedToCast]
                     #
                     def call
                       Structs::JSendAttributes.new(service: service, status: status, data: data, message: message, code: code, extra_kwargs: extra_kwargs)
@@ -51,7 +51,7 @@ module ConvenientService
 
                     ##
                     # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status]
-                    # @raise [ConvenientService::Support::Castable::Errors::FailedToCast]
+                    # @raise [ConvenientService::Support::Castable::Exceptions::FailedToCast]
                     #
                     def status
                       @status ||= result.class.status(value: kwargs[:status], result: result)
@@ -59,7 +59,7 @@ module ConvenientService
 
                     ##
                     # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data]
-                    # @raise [ConvenientService::Support::Castable::Errors::FailedToCast]
+                    # @raise [ConvenientService::Support::Castable::Exceptions::FailedToCast]
                     #
                     def data
                       @data ||= result.class.data(value: kwargs[:data], result: result)
@@ -67,7 +67,7 @@ module ConvenientService
 
                     ##
                     # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message]
-                    # @raise [ConvenientService::Support::Castable::Errors::FailedToCast]
+                    # @raise [ConvenientService::Support::Castable::Exceptions::FailedToCast]
                     #
                     def message
                       @message ||= result.class.message(value: kwargs[:message], result: result)
@@ -75,7 +75,7 @@ module ConvenientService
 
                     ##
                     # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code]
-                    # @raise [ConvenientService::Support::Castable::Errors::FailedToCast]
+                    # @raise [ConvenientService::Support::Castable::Exceptions::FailedToCast]
                     #
                     def code
                       @code ||= result.class.code(value: kwargs[:code], result: result)

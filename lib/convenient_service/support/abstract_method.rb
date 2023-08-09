@@ -11,7 +11,7 @@ module ConvenientService
         def abstract_method(*names)
           names.each do |name|
             define_method(name) do |*args, **kwargs, &block|
-              raise Errors::AbstractMethodNotOverridden.new(instance: self, method: name)
+              raise Exceptions::AbstractMethodNotOverridden.new(instance: self, method: name)
             end
           end
         end

@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-RSpec.describe ConvenientService::Error do
+RSpec.describe ConvenientService::Exception do
   include ConvenientService::RSpec::Matchers::BeDescendantOf
 
   it "is `StandardError` descendant" do

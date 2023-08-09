@@ -4,7 +4,7 @@ module ConvenientService
   module Service
     module Plugins
       module RaisesOnDoubleResult
-        module Errors
+        module Exceptions
           class DoubleResult < ::ConvenientService::Exception
             def initialize(service:)
               message = <<~TEXT

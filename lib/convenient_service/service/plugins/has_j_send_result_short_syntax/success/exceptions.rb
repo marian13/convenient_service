@@ -5,7 +5,7 @@ module ConvenientService
     module Plugins
       module HasJSendResultShortSyntax
         module Success
-          module Errors
+          module Exceptions
             class KwargsContainDataAndExtraKeys < ::ConvenientService::Exception
               def initialize
                 message = <<~TEXT

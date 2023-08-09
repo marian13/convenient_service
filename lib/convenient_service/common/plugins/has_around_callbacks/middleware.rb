@@ -123,12 +123,12 @@ module ConvenientService
             ##
             #
             #
-            raise Errors::AroundCallbackChainIsNotContinued.new(callback: Utils::Array.find_last(around_callbacks, &:called?)) if around_callbacks.any?(&:not_called?)
+            raise Exceptions::AroundCallbackChainIsNotContinued.new(callback: Utils::Array.find_last(around_callbacks, &:called?)) if around_callbacks.any?(&:not_called?)
 
             ##
             #
             #
-            raise Errors::AroundCallbackChainIsNotContinued.new(callback: around_callbacks.last) if initial_around_callback.not_called?
+            raise Exceptions::AroundCallbackChainIsNotContinued.new(callback: around_callbacks.last) if initial_around_callback.not_called?
 
             original_value
           end

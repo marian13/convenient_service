@@ -15,7 +15,7 @@ module ConvenientService
                     # @param value [Object] Can be any type.
                     # @param result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result].
                     # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code]
-                    # @raise [ConvenientService::Support::Castable::Errors::FailedToCast]
+                    # @raise [ConvenientService::Support::Castable::Exceptions::FailedToCast]
                     #
                     # @internal
                     #   IMPORTANT: Skipping `result` is allowed only for tests.
@@ -29,7 +29,7 @@ module ConvenientService
                     # @param value [Object] Can be any type.
                     # @param result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result].
                     # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data]
-                    # @raise [ConvenientService::Support::Castable::Errors::FailedToCast]
+                    # @raise [ConvenientService::Support::Castable::Exceptions::FailedToCast]
                     #
                     # @internal
                     #   IMPORTANT: Skipping `result` is allowed only for tests.
@@ -43,7 +43,7 @@ module ConvenientService
                     # @param value [Object] Can be any type.
                     # @param result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result].
                     # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message]
-                    # @raise [ConvenientService::Support::Castable::Errors::FailedToCast]
+                    # @raise [ConvenientService::Support::Castable::Exceptions::FailedToCast]
                     #
                     # @internal
                     #   IMPORTANT: Skipping `result` is allowed only for tests.
@@ -57,7 +57,7 @@ module ConvenientService
                     # @param value [Object] Can be any type.
                     # @param result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result].
                     # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status]
-                    # @raise [ConvenientService::Support::Castable::Errors::FailedToCast]
+                    # @raise [ConvenientService::Support::Castable::Exceptions::FailedToCast]
                     #
                     # @internal
                     #   IMPORTANT: Skipping `result` is allowed only for tests.

@@ -43,9 +43,9 @@ RSpec.describe ConvenientService::Support::Castable do
         TEXT
       end
 
-      it "raises `ConvenientService::Support::AbstractMethod::Errors::AbstractMethodNotOverridden`" do
+      it "raises `ConvenientService::Support::AbstractMethod::Exceptions::AbstractMethodNotOverridden`" do
         expect { klass.cast(other) }
-          .to raise_error(ConvenientService::Support::AbstractMethod::Errors::AbstractMethodNotOverridden)
+          .to raise_error(ConvenientService::Support::AbstractMethod::Exceptions::AbstractMethodNotOverridden)
           .with_message(error_message)
       end
     end
@@ -69,14 +69,14 @@ RSpec.describe ConvenientService::Support::Castable do
           # NOTE: Error is NOT the purpose of this spec. That is why it is caught.
           # But if it is NOT caught, the spec should fail.
           #
-          ignoring_error(ConvenientService::Support::Castable::Errors::FailedToCast) { klass.cast!(other) }
+          ignoring_error(ConvenientService::Support::Castable::Exceptions::FailedToCast) { klass.cast!(other) }
 
           expect(klass).to have_received(:cast).with(other)
         end
 
-        it "raises `ConvenientService::Support::Castable::Errors::FailedToCast`" do
+        it "raises `ConvenientService::Support::Castable::Exceptions::FailedToCast`" do
           expect { klass.cast!(other) }
-            .to raise_error(ConvenientService::Support::Castable::Errors::FailedToCast)
+            .to raise_error(ConvenientService::Support::Castable::Exceptions::FailedToCast)
             .with_message(message)
         end
       end

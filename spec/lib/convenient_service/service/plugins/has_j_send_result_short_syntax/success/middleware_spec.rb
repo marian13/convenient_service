@@ -100,9 +100,9 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultShortSyntax::S
             TEXT
           end
 
-          it "raises `ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Success::Errors::KwargsContainDataAndExtraKeys`" do
+          it "raises `ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Success::Exceptions::KwargsContainDataAndExtraKeys`" do
             expect { method_value }
-              .to raise_error(ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Success::Errors::KwargsContainDataAndExtraKeys)
+              .to raise_error(ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Success::Exceptions::KwargsContainDataAndExtraKeys)
               .with_message(error_message)
           end
         end

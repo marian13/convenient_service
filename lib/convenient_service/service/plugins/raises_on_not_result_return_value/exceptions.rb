@@ -4,7 +4,7 @@ module ConvenientService
   module Service
     module Plugins
       module RaisesOnNotResultReturnValue
-        module Errors
+        module Exceptions
           class ReturnValueNotKindOfResult < ::ConvenientService::Exception
             def initialize(service:, result:, method:)
               message = <<~TEXT

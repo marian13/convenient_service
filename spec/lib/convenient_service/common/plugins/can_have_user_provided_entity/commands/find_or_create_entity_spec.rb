@@ -55,9 +55,9 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveUserProvidedEntity::Co
           TEXT
         end
 
-        it "raises `ConvenientService::Common::Plugins::CanHaveUserProvidedEntity::Errors::ProtoEntityHasNoName`" do
+        it "raises `ConvenientService::Common::Plugins::CanHaveUserProvidedEntity::Exceptions::ProtoEntityHasNoName`" do
           expect { command_result }
-            .to raise_error(ConvenientService::Common::Plugins::CanHaveUserProvidedEntity::Errors::ProtoEntityHasNoName)
+            .to raise_error(ConvenientService::Common::Plugins::CanHaveUserProvidedEntity::Exceptions::ProtoEntityHasNoName)
             .with_message(error_message)
         end
       end
@@ -81,9 +81,9 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveUserProvidedEntity::Co
           TEXT
         end
 
-        it "raises `ConvenientService::Common::Plugins::CanHaveUserProvidedEntity::Errors::ProtoEntityHasNoConcern`" do
+        it "raises `ConvenientService::Common::Plugins::CanHaveUserProvidedEntity::Exceptions::ProtoEntityHasNoConcern`" do
           expect { command_result }
-            .to raise_error(ConvenientService::Common::Plugins::CanHaveUserProvidedEntity::Errors::ProtoEntityHasNoConcern)
+            .to raise_error(ConvenientService::Common::Plugins::CanHaveUserProvidedEntity::Exceptions::ProtoEntityHasNoConcern)
             .with_message(error_message)
         end
       end

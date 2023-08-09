@@ -132,10 +132,10 @@ module ConvenientService
                         ##
                         # @param key [String, Symbol]
                         # @return [Object] Can be any type.
-                        # @raise [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Errors::NotExistingAttribute]
+                        # @raise [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Exceptions::NotExistingAttribute]
                         #
                         def [](key)
-                          value.fetch(key.to_sym) { raise Errors::NotExistingAttribute.new(attribute: key) }
+                          value.fetch(key.to_sym) { raise Exceptions::NotExistingAttribute.new(attribute: key) }
                         end
 
                         ##

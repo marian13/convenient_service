@@ -21,10 +21,10 @@ module ConvenientService
 
           ##
           # @return [void]
-          # @raise [ConvenientService::Support::DependencyContainer::Errors::NotExportableModule]
+          # @raise [ConvenientService::Support::DependencyContainer::Exceptions::NotExportableModule]
           #
           def call
-            raise Errors::NotExportableModule.new(mod: container) unless Utils::Module.include_module?(container, DependencyContainer::Export)
+            raise Exceptions::NotExportableModule.new(mod: container) unless Utils::Module.include_module?(container, DependencyContainer::Export)
           end
         end
       end

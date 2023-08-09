@@ -23,10 +23,10 @@ module ConvenientService
 
               ##
               # @return [void]
-              # @raise [ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Failure::Errors::KwargsContainNonJSendKey]
+              # @raise [ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Failure::Exceptions::KwargsContainNonJSendKey]
               #
               def call
-                raise Errors::KwargsContainNonJSendKey.new(key: non_jsend_keys.first) if non_jsend_keys.any?
+                raise Exceptions::KwargsContainNonJSendKey.new(key: non_jsend_keys.first) if non_jsend_keys.any?
               end
 
               private

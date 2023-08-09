@@ -79,9 +79,9 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           TEXT
         end
 
-        it "raises `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::RaisesOnNotCheckedResultStatus::Errors::StatusIsNotChecked`" do
+        it "raises `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::RaisesOnNotCheckedResultStatus::Exceptions::StatusIsNotChecked`" do
           expect { method_value }
-            .to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::RaisesOnNotCheckedResultStatus::Errors::StatusIsNotChecked)
+            .to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::RaisesOnNotCheckedResultStatus::Exceptions::StatusIsNotChecked)
             .with_message(error_message)
         end
       end

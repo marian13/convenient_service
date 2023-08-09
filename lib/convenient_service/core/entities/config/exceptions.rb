@@ -4,7 +4,7 @@ module ConvenientService
   module Core
     module Entities
       class Config
-        module Errors
+        module Exceptions
           class ConfigIsCommitted < ::ConvenientService::Exception
             ##
             # @param config [ConvenientService::Core::Entities::Config]

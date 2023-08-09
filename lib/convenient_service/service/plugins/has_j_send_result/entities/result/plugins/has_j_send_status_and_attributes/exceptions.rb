@@ -8,7 +8,7 @@ module ConvenientService
           class Result
             module Plugins
               module HasJSendStatusAndAttributes
-                module Errors
+                module Exceptions
                   class NotExistingAttribute < ::ConvenientService::Exception
                     ##
                     # @param attribute [Symbol]

@@ -9,7 +9,7 @@ module ConvenientService
             module Plugins
               module CanBeResultStep
                 module CanBeExecuted
-                  module Errors
+                  module Exceptions
                     class MethodForStepIsNotDefined < ::ConvenientService::Exception
                       ##
                       # @param service_class [Class]

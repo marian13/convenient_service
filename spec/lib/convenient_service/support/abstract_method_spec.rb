@@ -84,9 +84,9 @@ RSpec.describe ConvenientService::Support::AbstractMethod do
             TEXT
           end
 
-          it "raises `ConvenientService::Support::AbstractMethod::Errors::AbstractMethodNotOverridden`" do
+          it "raises `ConvenientService::Support::AbstractMethod::Exceptions::AbstractMethodNotOverridden`" do
             expect { instance.foo }
-              .to raise_error(ConvenientService::Support::AbstractMethod::Errors::AbstractMethodNotOverridden)
+              .to raise_error(ConvenientService::Support::AbstractMethod::Exceptions::AbstractMethodNotOverridden)
               .with_message(error_message)
           end
         end
@@ -108,9 +108,9 @@ RSpec.describe ConvenientService::Support::AbstractMethod do
             TEXT
           end
 
-          it "raises `ConvenientService::Support::AbstractMethod::Errors::AbstractMethodNotOverridden`" do
+          it "raises `ConvenientService::Support::AbstractMethod::Exceptions::AbstractMethodNotOverridden`" do
             expect { klass.foo }
-              .to raise_error(ConvenientService::Support::AbstractMethod::Errors::AbstractMethodNotOverridden)
+              .to raise_error(ConvenientService::Support::AbstractMethod::Exceptions::AbstractMethodNotOverridden)
               .with_message(error_message)
           end
         end

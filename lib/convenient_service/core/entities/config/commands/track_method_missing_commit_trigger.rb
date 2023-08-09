@@ -35,7 +35,7 @@ module ConvenientService
               return unless method_missing_trigger_valid?
               return if method_missing_commits_counter_incremented?
 
-              raise Errors::TooManyCommitsFromMethodMissing.new(config: config)
+              raise Exceptions::TooManyCommitsFromMethodMissing.new(config: config)
             end
 
             ##

@@ -15,7 +15,7 @@ module ConvenientService
 
                       ##
                       # @return [Object] Can be any type.
-                      # @raise [ConvenientService::Support::AbstractMethod::Errors::AbstractMethodNotOverridden] if NOT overridden in descendant.
+                      # @raise [ConvenientService::Support::AbstractMethod::Exceptions::AbstractMethodNotOverridden] if NOT overridden in descendant.
                       #
                       # @example Subclass should call `value = chain.next(*args, **kwargs, &block)` to trigger next middleware in a stack.
                       #   def next(*args, **kwargs, &block)

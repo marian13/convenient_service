@@ -37,7 +37,7 @@ module ConvenientService
 
           ##
           # @return [Boolean]
-          # @raise [ConvenientService::Service::Plugins::RaisesOnDoubleResult::Errors::DoubleResult]
+          # @raise [ConvenientService::Service::Plugins::RaisesOnDoubleResult::Exceptions::DoubleResult]
           #
           # @internal
           #   NOTE: `refute` is `!assert`.
@@ -48,7 +48,7 @@ module ConvenientService
           def refute_has_j_send_result!
             return unless entity.internals.cache.exist?(:has_j_send_result)
 
-            raise Errors::DoubleResult.new(service: entity)
+            raise Exceptions::DoubleResult.new(service: entity)
           end
 
           ##

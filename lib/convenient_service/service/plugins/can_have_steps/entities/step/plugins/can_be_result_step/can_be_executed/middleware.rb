@@ -14,7 +14,7 @@ module ConvenientService
 
                     ##
                     # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
-                    # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeResultStep::CanBeExecuted::Errors::MethodForStepIsNotDefined]
+                    # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeResultStep::CanBeExecuted::Exceptions::MethodForStepIsNotDefined]
                     #
                     # @internal
                     #   NOTE: `kwargs` are intentionally NOT passed to `own_method.call`, since all the corresponding methods are available inside `own_method` body.
@@ -24,7 +24,7 @@ module ConvenientService
 
                       return own_method.call if own_method
 
-                      raise Errors::MethodForStepIsNotDefined.new(service_class: organizer.class, method_name: method_name)
+                      raise Exceptions::MethodForStepIsNotDefined.new(service_class: organizer.class, method_name: method_name)
                     end
 
                     private

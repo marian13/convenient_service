@@ -47,9 +47,9 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
         TEXT
       end
 
-      it "raises `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Errors::MethodIsNotOutputMethod`" do
+      it "raises `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::MethodIsNotOutputMethod`" do
         expect { direction.validate_as_output_for_container!(container, method: method) }
-          .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Errors::MethodIsNotOutputMethod)
+          .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::MethodIsNotOutputMethod)
           .with_message(error_message)
       end
     end
@@ -64,9 +64,9 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
         TEXT
       end
 
-      it "raises `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Errors::MethodIsNotOutputMethod`" do
+      it "raises `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::MethodIsNotOutputMethod`" do
         expect { direction.define_output_in_container!(container, index: index, method: method) }
-          .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Errors::MethodIsNotOutputMethod)
+          .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::MethodIsNotOutputMethod)
           .with_message(error_message)
       end
     end

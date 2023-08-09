@@ -14,7 +14,7 @@ module ConvenientService
               end
 
               def call
-                raise Errors::MoreThanTwoArgsArePassed.new if args.size > 2
+                raise Exceptions::MoreThanTwoArgsArePassed.new if args.size > 2
               end
             end
           end

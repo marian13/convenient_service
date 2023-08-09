@@ -4,7 +4,7 @@ module ConvenientService
   module Common
     module Plugins
       module CanHaveUserProvidedEntity
-        module Errors
+        module Exceptions
           class ProtoEntityHasNoName < ::ConvenientService::Exception
             def initialize(proto_entity:)
               message = <<~TEXT

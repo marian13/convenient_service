@@ -66,9 +66,9 @@ RSpec.xdescribe ConvenientService::RSpec::Helpers::Custom::WrapMethod::Entities:
           TEXT
         end
 
-        it "raises `ConvenientService::RSpec::Helpers::Custom::WrapMethod::Errors::ChainAttributePreliminaryAccess`" do
+        it "raises `ConvenientService::RSpec::Helpers::Custom::WrapMethod::Exceptions::ChainAttributePreliminaryAccess`" do
           expect { method.chain_value }
-            .to raise_error(ConvenientService::RSpec::Helpers::Custom::WrapMethod::Errors::ChainAttributePreliminaryAccess)
+            .to raise_error(ConvenientService::RSpec::Helpers::Custom::WrapMethod::Exceptions::ChainAttributePreliminaryAccess)
             .with_message(error_message)
         end
       end
@@ -104,9 +104,9 @@ RSpec.xdescribe ConvenientService::RSpec::Helpers::Custom::WrapMethod::Entities:
           TEXT
         end
 
-        it "raises `ConvenientService::RSpec::Helpers::Custom::WrapMethod::Errors::ChainAttributePreliminaryAccess`" do
+        it "raises `ConvenientService::RSpec::Helpers::Custom::WrapMethod::Exceptions::ChainAttributePreliminaryAccess`" do
           expect { method.chain_args }
-            .to raise_error(ConvenientService::RSpec::Helpers::Custom::WrapMethod::Errors::ChainAttributePreliminaryAccess)
+            .to raise_error(ConvenientService::RSpec::Helpers::Custom::WrapMethod::Exceptions::ChainAttributePreliminaryAccess)
             .with_message(error_message)
         end
       end
@@ -142,9 +142,9 @@ RSpec.xdescribe ConvenientService::RSpec::Helpers::Custom::WrapMethod::Entities:
           TEXT
         end
 
-        it "raises `ConvenientService::RSpec::Helpers::Custom::WrapMethod::Errors::ChainAttributePreliminaryAccess`" do
+        it "raises `ConvenientService::RSpec::Helpers::Custom::WrapMethod::Exceptions::ChainAttributePreliminaryAccess`" do
           expect { method.chain_kwargs }
-            .to raise_error(ConvenientService::RSpec::Helpers::Custom::WrapMethod::Errors::ChainAttributePreliminaryAccess)
+            .to raise_error(ConvenientService::RSpec::Helpers::Custom::WrapMethod::Exceptions::ChainAttributePreliminaryAccess)
             .with_message(error_message)
         end
       end
@@ -180,9 +180,9 @@ RSpec.xdescribe ConvenientService::RSpec::Helpers::Custom::WrapMethod::Entities:
           TEXT
         end
 
-        it "raises `ConvenientService::RSpec::Helpers::Custom::WrapMethod::Errors::ChainAttributePreliminaryAccess`" do
+        it "raises `ConvenientService::RSpec::Helpers::Custom::WrapMethod::Exceptions::ChainAttributePreliminaryAccess`" do
           expect { method.chain_block }
-            .to raise_error(ConvenientService::RSpec::Helpers::Custom::WrapMethod::Errors::ChainAttributePreliminaryAccess)
+            .to raise_error(ConvenientService::RSpec::Helpers::Custom::WrapMethod::Exceptions::ChainAttributePreliminaryAccess)
             .with_message(error_message)
         end
       end
@@ -224,9 +224,9 @@ RSpec.xdescribe ConvenientService::RSpec::Helpers::Custom::WrapMethod::Entities:
           TEXT
         end
 
-        it "raises `ConvenientService::RSpec::Helpers::Custom::WrapMethod::Errors::ChainAttributePreliminaryAccess`" do
+        it "raises `ConvenientService::RSpec::Helpers::Custom::WrapMethod::Exceptions::ChainAttributePreliminaryAccess`" do
           expect { method.chain_exception }
-            .to raise_error(ConvenientService::RSpec::Helpers::Custom::WrapMethod::Errors::ChainAttributePreliminaryAccess)
+            .to raise_error(ConvenientService::RSpec::Helpers::Custom::WrapMethod::Exceptions::ChainAttributePreliminaryAccess)
             .with_message(error_message)
         end
       end

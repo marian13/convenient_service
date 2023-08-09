@@ -129,50 +129,50 @@ module ConvenientService
 
               ##
               # @return [Object] Can be any type.
-              # @raise [ConvenientService::RSpec::Helpers::Custom::WrapMethod::Errors::ChainAttributePreliminaryAccess]
+              # @raise [ConvenientService::RSpec::Helpers::Custom::WrapMethod::Exceptions::ChainAttributePreliminaryAccess]
               #
               def chain_value
-                raise Errors::ChainAttributePreliminaryAccess.new(attribute: :value) unless chain_called?
+                raise Exceptions::ChainAttributePreliminaryAccess.new(attribute: :value) unless chain_called?
 
                 @chain_value
               end
 
               ##
               # @return [Array]
-              # @raise [ConvenientService::RSpec::Helpers::Custom::WrapMethod::Errors::ChainAttributePreliminaryAccess]
+              # @raise [ConvenientService::RSpec::Helpers::Custom::WrapMethod::Exceptions::ChainAttributePreliminaryAccess]
               #
               def chain_args
-                raise Errors::ChainAttributePreliminaryAccess.new(attribute: :args) unless chain_called?
+                raise Exceptions::ChainAttributePreliminaryAccess.new(attribute: :args) unless chain_called?
 
                 @chain_arguments.args
               end
 
               ##
               # @return [Hash]
-              # @raise [ConvenientService::RSpec::Helpers::Custom::WrapMethod::Errors::ChainAttributePreliminaryAccess]
+              # @raise [ConvenientService::RSpec::Helpers::Custom::WrapMethod::Exceptions::ChainAttributePreliminaryAccess]
               #
               def chain_kwargs
-                raise Errors::ChainAttributePreliminaryAccess.new(attribute: :kwargs) unless chain_called?
+                raise Exceptions::ChainAttributePreliminaryAccess.new(attribute: :kwargs) unless chain_called?
 
                 @chain_arguments.kwargs
               end
 
               ##
               # @return [Proc, nil]
-              # @raise [ConvenientService::RSpec::Helpers::Custom::WrapMethod::Errors::ChainAttributePreliminaryAccess]
+              # @raise [ConvenientService::RSpec::Helpers::Custom::WrapMethod::Exceptions::ChainAttributePreliminaryAccess]
               #
               def chain_block
-                raise Errors::ChainAttributePreliminaryAccess.new(attribute: :block) unless chain_called?
+                raise Exceptions::ChainAttributePreliminaryAccess.new(attribute: :block) unless chain_called?
 
                 @chain_arguments.block
               end
 
               ##
               # @return [StandardError, nil]
-              # @raise [ConvenientService::RSpec::Helpers::Custom::WrapMethod::Errors::ChainAttributePreliminaryAccess]
+              # @raise [ConvenientService::RSpec::Helpers::Custom::WrapMethod::Exceptions::ChainAttributePreliminaryAccess]
               #
               def chain_exception
-                raise Errors::ChainAttributePreliminaryAccess.new(attribute: :exception) unless chain_called?
+                raise Exceptions::ChainAttributePreliminaryAccess.new(attribute: :exception) unless chain_called?
 
                 @chain_exception
               end

@@ -21,9 +21,9 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::Assert
           TEXT
         end
 
-        it "raises `ConvenientService::Support::DependencyContainer::Errors::InvalidScope`" do
+        it "raises `ConvenientService::Support::DependencyContainer::Exceptions::InvalidScope`" do
           expect { command_result }
-            .to raise_error(ConvenientService::Support::DependencyContainer::Errors::InvalidScope)
+            .to raise_error(ConvenientService::Support::DependencyContainer::Exceptions::InvalidScope)
             .with_message(error_message)
         end
       end

@@ -3,7 +3,7 @@
 module ConvenientService
   module Utils
     module Array
-      module Errors
+      module Exceptions
         class NonIntegerIndex < ::ConvenientService::Exception
           def initialize(index:)
             message = <<~TEXT

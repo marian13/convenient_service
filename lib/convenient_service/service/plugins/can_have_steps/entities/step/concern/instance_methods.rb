@@ -145,7 +145,7 @@ module ConvenientService
 
                 ##
                 # @return [Boolean]
-                # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Errors::StepHasNoOrganizer]
+                # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepHasNoOrganizer]
                 #
                 def has_reassignment?(name)
                   outputs.any? { |output| output.reassignment?(name) }
@@ -153,7 +153,7 @@ module ConvenientService
 
                 ##
                 # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method, nil]
-                # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Errors::StepHasNoOrganizer]
+                # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepHasNoOrganizer]
                 #
                 def reassignment(name)
                   outputs.find { |output| output.reassignment?(name) }
@@ -168,7 +168,7 @@ module ConvenientService
 
                 ##
                 # @return [ConvenientService::Service]
-                # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Errors::StepHasNoOrganizer]
+                # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepHasNoOrganizer]
                 #
                 # @internal
                 #   NOTE: `raise_when_missing` option is inspired by `where.missing` in Rails.
@@ -178,7 +178,7 @@ module ConvenientService
                 def organizer(raise_when_missing: true)
                   @organizer ||= params.organizer
 
-                  raise Errors::StepHasNoOrganizer.new(step: self) if @organizer.nil? && raise_when_missing
+                  raise Exceptions::StepHasNoOrganizer.new(step: self) if @organizer.nil? && raise_when_missing
 
                   @organizer
                 end
@@ -192,7 +192,7 @@ module ConvenientService
 
                 ##
                 # @return [Hash{Symbol => Object}]
-                # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Errors::StepHasNoOrganizer]
+                # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepHasNoOrganizer]
                 #
                 def input_values
                   @input_values ||= calculate_input_values
@@ -200,7 +200,7 @@ module ConvenientService
 
                 ##
                 # @return [Hash{Symbol => Object}]
-                # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Errors::StepHasNoOrganizer]
+                # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepHasNoOrganizer]
                 #
                 def output_values
                   @output_values ||= result.unsafe_data.to_h.slice(*outputs.map(&:key).map(&:to_sym))
@@ -208,7 +208,7 @@ module ConvenientService
 
                 ##
                 # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
-                # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Errors::StepHasNoOrganizer]
+                # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepHasNoOrganizer]
                 #
                 # @note `service_result` has middlewares.
                 #
@@ -223,7 +223,7 @@ module ConvenientService
 
                 ##
                 # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
-                # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Errors::StepHasNoOrganizer]
+                # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepHasNoOrganizer]
                 #
                 # @note `result` has middlewares.
                 #
@@ -250,7 +250,7 @@ module ConvenientService
 
                 ##
                 # @return [void]
-                # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Errors::StepHasNoOrganizer]
+                # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepHasNoOrganizer]
                 #
                 def trigger_callback
                   organizer.step(index)
@@ -314,7 +314,7 @@ module ConvenientService
 
                 ##
                 # @return [Hash{Symbol => Object}]
-                # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Errors::StepHasNoOrganizer]
+                # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepHasNoOrganizer]
                 #
                 # @internal
                 #   TODO: Commands instead of private methods.

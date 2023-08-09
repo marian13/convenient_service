@@ -90,9 +90,9 @@ RSpec.describe ConvenientService::Service::Plugins::CanBeTried::Middleware do
           TEXT
         end
 
-        it "raises `ConvenientService::Service::Plugins::CanBeTried::Errors::ServiceTryReturnValueNotSuccess`" do
+        it "raises `ConvenientService::Service::Plugins::CanBeTried::Exceptions::ServiceTryReturnValueNotSuccess`" do
           expect { method_value }
-            .to raise_error(ConvenientService::Service::Plugins::CanBeTried::Errors::ServiceTryReturnValueNotSuccess)
+            .to raise_error(ConvenientService::Service::Plugins::CanBeTried::Exceptions::ServiceTryReturnValueNotSuccess)
             .with_message(error_message)
         end
       end

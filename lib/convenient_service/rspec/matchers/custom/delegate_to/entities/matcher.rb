@@ -129,7 +129,7 @@ module ConvenientService
 
               ##
               # @return [ConvenientService::RSpec::Matchers::Custom::DelegateTo]
-              # @raise [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Errors::ArgumentsChainingIsAlreadySet]
+              # @raise [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Exceptions::ArgumentsChainingIsAlreadySet]
               #
               def with_arguments(...)
                 self.expected_arguments = Support::Arguments.new(...)
@@ -141,7 +141,7 @@ module ConvenientService
 
               ##
               # @return [ConvenientService::RSpec::Matchers::Custom::DelegateTo]
-              # @raise [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Errors::ArgumentsChainingIsAlreadySet]
+              # @raise [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Exceptions::ArgumentsChainingIsAlreadySet]
               #
               def with_any_arguments
                 chainings.arguments = Entities::Chainings::SubMatchers::WithAnyArguments.new(matcher: self)
@@ -151,7 +151,7 @@ module ConvenientService
 
               ##
               # @return [ConvenientService::RSpec::Matchers::Custom::DelegateTo]
-              # @raise [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Errors::ArgumentsChainingIsAlreadySet]
+              # @raise [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Exceptions::ArgumentsChainingIsAlreadySet]
               #
               def without_arguments
                 chainings.arguments = Entities::Chainings::SubMatchers::WithoutArguments.new(matcher: self)
@@ -161,7 +161,7 @@ module ConvenientService
 
               ##
               # @return [ConvenientService::RSpec::Matchers::Custom::DelegateTo]
-              # @raise [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Errors::ReturnItsValueChainingIsAlreadySet]
+              # @raise [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Exceptions::ReturnItsValueChainingIsAlreadySet]
               #
               def and_return_its_value
                 chainings.return_its_value = Entities::Chainings::SubMatchers::ReturnItsValue.new(matcher: self)

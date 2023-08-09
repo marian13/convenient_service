@@ -89,9 +89,9 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           TEXT
         end
 
-        it "raises `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Errors::NotExistingAttribute`" do
+        it "raises `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Exceptions::NotExistingAttribute`" do
           expect { data[:abc] }
-            .to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Errors::NotExistingAttribute)
+            .to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Exceptions::NotExistingAttribute)
             .with_message(error_message)
         end
       end

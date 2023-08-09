@@ -22,9 +22,9 @@ RSpec.describe ConvenientService::Support::Command do
         TEXT
       end
 
-      it "raises `ConvenientService::Support::Command::Errors::CallIsNotOverridden`" do
+      it "raises `ConvenientService::Support::Command::Exceptions::CallIsNotOverridden`" do
         expect { command_instance.call }
-          .to raise_error(ConvenientService::Support::Command::Errors::CallIsNotOverridden)
+          .to raise_error(ConvenientService::Support::Command::Exceptions::CallIsNotOverridden)
           .with_message(error_message)
       end
     end

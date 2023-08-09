@@ -3,7 +3,7 @@
 module ConvenientService
   module Support
     module Castable
-      module Errors
+      module Exceptions
         class CastIsNotOverridden < ::ConvenientService::Exception
           def initialize(klass:)
             message = <<~TEXT

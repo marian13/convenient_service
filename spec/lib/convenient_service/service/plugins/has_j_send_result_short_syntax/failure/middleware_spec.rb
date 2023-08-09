@@ -120,14 +120,14 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultShortSyntax::F
           end
 
           specify do
-            expect { ignoring_error(ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Failure::Errors::KwargsContainNonJSendKey) { method_value } }
+            expect { ignoring_error(ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Failure::Exceptions::KwargsContainNonJSendKey) { method_value } }
               .to delegate_to(ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Failure::Commands::AssertKwargsContainOnlyJSendKeys, :call)
               .with_arguments(kwargs: {data: {foo: :bar}, non_jsend_key: "anything"})
           end
 
-          it "raises `ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Failure::Errors::KwargsContainNonJSendKey`" do
+          it "raises `ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Failure::Exceptions::KwargsContainNonJSendKey`" do
             expect { method_value }
-              .to raise_error(ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Failure::Errors::KwargsContainNonJSendKey)
+              .to raise_error(ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Failure::Exceptions::KwargsContainNonJSendKey)
               .with_message(error_message)
           end
         end

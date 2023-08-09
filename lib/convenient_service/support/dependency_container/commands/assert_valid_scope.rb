@@ -21,10 +21,10 @@ module ConvenientService
 
           ##
           # @return [void]
-          # @raise [ConvenientService::Support::DependencyContainer::Errors::InvalidScope]
+          # @raise [ConvenientService::Support::DependencyContainer::Exceptions::InvalidScope]
           #
           def call
-            raise Errors::InvalidScope.new(scope: scope) unless Constants::SCOPES.include?(scope)
+            raise Exceptions::InvalidScope.new(scope: scope) unless Constants::SCOPES.include?(scope)
           end
         end
       end

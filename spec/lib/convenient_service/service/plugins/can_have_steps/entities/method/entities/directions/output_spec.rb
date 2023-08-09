@@ -39,9 +39,9 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
         TEXT
       end
 
-      it "raises `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Errors::MethodIsNotInputMethod`" do
+      it "raises `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::MethodIsNotInputMethod`" do
         expect { direction.validate_as_input_for_container!(container, method: method) }
-          .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Errors::MethodIsNotInputMethod)
+          .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::MethodIsNotInputMethod)
           .with_message(error_message)
       end
     end

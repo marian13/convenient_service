@@ -11,7 +11,7 @@ module ConvenientService
             ##
             # Returns `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result` when overridden.
             #
-            # @raise [ConvenientService::Service::Plugins::CanBeTried::Errors::TryResultIsNotOverridden]
+            # @raise [ConvenientService::Service::Plugins::CanBeTried::Exceptions::TryResultIsNotOverridden]
             #
             # @internal
             #   NOTE: name is inspired by Ruby's `try_convert` methods.
@@ -20,7 +20,7 @@ module ConvenientService
             #   TODO: A plugin that checks that a `success` is returned from `try_result`.
             #
             def try_result
-              raise Errors::TryResultIsNotOverridden.new(service: self)
+              raise Exceptions::TryResultIsNotOverridden.new(service: self)
             end
           end
 
@@ -28,7 +28,7 @@ module ConvenientService
             ##
             # Returns `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result` when `#try_result` is overridden.
             #
-            # @raise [ConvenientService::Service::Plugins::CanBeTried::Errors::TryResultIsNotOverridden]
+            # @raise [ConvenientService::Service::Plugins::CanBeTried::Exceptions::TryResultIsNotOverridden]
             #
             # @example `try_result` method MUST always return `success` with reasonable "null" data.
             #

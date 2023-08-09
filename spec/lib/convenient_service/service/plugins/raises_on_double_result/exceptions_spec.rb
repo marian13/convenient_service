@@ -4,8 +4,8 @@ require "spec_helper"
 
 require "convenient_service"
 
-RSpec.describe ConvenientService::Service::Plugins::RaisesOnDoubleResult::Errors do
+RSpec.describe ConvenientService::Service::Plugins::RaisesOnDoubleResult::Exceptions do
   include ConvenientService::RSpec::Matchers::BeDescendantOf
 
-  specify { expect(described_class::DoubleResult).to be_descendant_of(ConvenientService::Error) }
+  specify { expect(described_class::DoubleResult).to be_descendant_of(ConvenientService::Exception) }
 end

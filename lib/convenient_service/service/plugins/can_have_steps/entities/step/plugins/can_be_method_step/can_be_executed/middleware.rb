@@ -14,7 +14,7 @@ module ConvenientService
 
                     ##
                     # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
-                    # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeResultStep::CanBeExecuted::Errors::MethodForStepIsNotDefined]
+                    # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeResultStep::CanBeExecuted::Exceptions::MethodForStepIsNotDefined]
                     #
                     # @internal
                     #   NOTE: `kwargs` are intentionally NOT passed to `object.__send__(method)`, since all the corresponding methods are available inside `entity.organizer.__send__(entity.method)` body.

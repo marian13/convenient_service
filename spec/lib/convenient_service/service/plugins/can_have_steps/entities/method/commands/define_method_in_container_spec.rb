@@ -70,9 +70,9 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
             TEXT
           end
 
-          it "raises `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Errors::NotCompletedStep`" do
+          it "raises `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::NotCompletedStep`" do
             expect { organizer_service_instance.bar }
-              .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Errors::NotCompletedStep)
+              .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::NotCompletedStep)
               .with_message(error_message)
           end
         end
@@ -101,12 +101,12 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
 
             it "returns step service result data attribute by key" do
               expect { organizer_service_instance.bar }
-                .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Errors::NotExistingStepResultDataAttribute)
+                .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::NotExistingStepResultDataAttribute)
                 .with_message(error_message)
             end
 
             specify do
-              expect { ignoring_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Errors::NotExistingStepResultDataAttribute) { organizer_service_instance.bar } }
+              expect { ignoring_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::NotExistingStepResultDataAttribute) { organizer_service_instance.bar } }
                 .to delegate_to(step.result.unsafe_data, :has_attribute?)
                 .with_arguments(method.key.to_sym)
             end

@@ -4,8 +4,8 @@ require "spec_helper"
 
 require "convenient_service"
 
-RSpec.describe ConvenientService::Support::Cache::Errors do
+RSpec.describe ConvenientService::Support::Cache::Exceptions do
   include ConvenientService::RSpec::Matchers::BeDescendantOf
 
-  specify { expect(described_class::NotSupportedBackend).to be_descendant_of(ConvenientService::Error) }
+  specify { expect(described_class::NotSupportedBackend).to be_descendant_of(ConvenientService::Exception) }
 end

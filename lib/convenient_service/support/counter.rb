@@ -11,7 +11,7 @@ module ConvenientService
     #   - https://stackoverflow.com/a/1402764/12201472
     #
     class Counter
-      module Errors
+      module Exceptions
         class ValueAfterIncrementIsGreaterThanMaxValue < ::ConvenientService::Exception
           ##
           # @param n [Integer]
@@ -113,7 +113,7 @@ module ConvenientService
       ##
       # @param n [Integer]
       # @return [Integer]
-      # @raise [ConvenientService::Support::ThreadSafeCounter::Errors::ValueAfterIncrementIsGreaterThanMaxValue]
+      # @raise [ConvenientService::Support::ThreadSafeCounter::Exceptions::ValueAfterIncrementIsGreaterThanMaxValue]
       #
       # @internal
       #   NOTE: Instance variables are accessed directly to release the lock faster.
@@ -123,7 +123,7 @@ module ConvenientService
       #   - https://api.rubyonrails.org/classes/ActiveRecord/Persistence.html#method-i-save-21
       #
       def increment!(n = 1)
-        raise Errors::ValueAfterIncrementIsGreaterThanMaxValue.new(n: n, current_value: @current_value, max_value: @max_value) if @current_value + n > @max_value
+        raise Exceptions::ValueAfterIncrementIsGreaterThanMaxValue.new(n: n, current_value: @current_value, max_value: @max_value) if @current_value + n > @max_value
 
         @current_value += n
       end
@@ -166,7 +166,7 @@ module ConvenientService
       ##
       # @param n [Integer]
       # @return [Integer]
-      # @raise [ConvenientService::Support::ThreadSafeCounter::Errors::ValueAfterDecrementIsLowerThanMinValue]
+      # @raise [ConvenientService::Support::ThreadSafeCounter::Exceptions::ValueAfterDecrementIsLowerThanMinValue]
       #
       # @internal
       #   NOTE: Instance variables are accessed directly to release the lock faster.
@@ -176,7 +176,7 @@ module ConvenientService
       #   - https://api.rubyonrails.org/classes/ActiveRecord/Persistence.html#method-i-save-21
       #
       def decrement!(n = 1)
-        raise Errors::ValueAfterDecrementIsLowerThanMinValue.new(n: n, current_value: @current_value, min_value: @min_value) if @current_value - n < @min_value
+        raise Exceptions::ValueAfterDecrementIsLowerThanMinValue.new(n: n, current_value: @current_value, min_value: @min_value) if @current_value - n < @min_value
 
         @current_value -= n
       end

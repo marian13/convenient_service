@@ -32,9 +32,9 @@ RSpec.describe ConvenientService::Support::Cache do
             TEXT
           end
 
-          it "raises `ConvenientService::Support::Cache::Errors::NotSupportedBackend`" do
+          it "raises `ConvenientService::Support::Cache::Exceptions::NotSupportedBackend`" do
             expect { cache }
-              .to raise_error(ConvenientService::Support::Cache::Errors::NotSupportedBackend)
+              .to raise_error(ConvenientService::Support::Cache::Exceptions::NotSupportedBackend)
               .with_message(error_message)
           end
         end

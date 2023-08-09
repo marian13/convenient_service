@@ -30,7 +30,7 @@ module ConvenientService
 
           ##
           # @return [ConvenientService::Support::UniqueValue]
-          # @raise [ConvenientService::RSpec::Helpers::Custom::IgnoringError::Errors::IgnoredErrorIsNotRaised]
+          # @raise [ConvenientService::RSpec::Helpers::Custom::IgnoringError::Exceptions::IgnoredErrorIsNotRaised]
           #
           # @note Rescue `StandardError`, NOT `Exception`.
           # @see https://thoughtbot.com/blog/rescue-standarderror-not-exception
@@ -42,7 +42,7 @@ module ConvenientService
           rescue *error
             Support::UNDEFINED
           else
-            raise Errors::IgnoredErrorIsNotRaised.new(error: error)
+            raise Exceptions::IgnoredErrorIsNotRaised.new(error: error)
           end
         end
       end

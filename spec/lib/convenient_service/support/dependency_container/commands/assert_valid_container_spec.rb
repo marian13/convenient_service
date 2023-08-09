@@ -21,9 +21,9 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::Assert
           TEXT
         end
 
-        it "raises `ConvenientService::Support::DependencyContainer::Errors::NotExportableModule`" do
+        it "raises `ConvenientService::Support::DependencyContainer::Exceptions::NotExportableModule`" do
           expect { command_result }
-            .to raise_error(ConvenientService::Support::DependencyContainer::Errors::NotExportableModule)
+            .to raise_error(ConvenientService::Support::DependencyContainer::Exceptions::NotExportableModule)
             .with_message(error_message)
         end
       end

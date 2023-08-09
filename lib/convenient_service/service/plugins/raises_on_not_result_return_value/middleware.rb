@@ -16,7 +16,7 @@ module ConvenientService
 
             return original_result if commands.is_result?(original_result)
 
-            raise Errors::ReturnValueNotKindOfResult.new(service: entity, result: original_result, method: method)
+            raise Exceptions::ReturnValueNotKindOfResult.new(service: entity, result: original_result, method: method)
           end
         end
       end

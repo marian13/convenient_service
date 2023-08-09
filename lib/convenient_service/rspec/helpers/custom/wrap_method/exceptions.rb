@@ -5,7 +5,7 @@ module ConvenientService
     module Helpers
       module Custom
         class WrapMethod < Support::Command
-          module Errors
+          module Exceptions
             class ChainAttributePreliminaryAccess < ::ConvenientService::Exception
               ##
               # @param attribute [Symbol]

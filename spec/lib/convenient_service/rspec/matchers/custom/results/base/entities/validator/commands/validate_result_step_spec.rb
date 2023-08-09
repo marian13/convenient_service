@@ -54,9 +54,9 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Entiti
             TEXT
           end
 
-          it "raises `ConvenientService::RSpec::Matchers::Custom::Results::Base::Errors::InvalidStep`" do
+          it "raises `ConvenientService::RSpec::Matchers::Custom::Results::Base::Exceptions::InvalidStep`" do
             expect { command_result }
-              .to raise_error(ConvenientService::RSpec::Matchers::Custom::Results::Base::Errors::InvalidStep)
+              .to raise_error(ConvenientService::RSpec::Matchers::Custom::Results::Base::Exceptions::InvalidStep)
               .with_message(error_message)
           end
         end

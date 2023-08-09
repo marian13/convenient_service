@@ -133,30 +133,30 @@ module ConvenientService
 
                   ##
                   # @param chaining [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::Values::Base]
-                  # @raise [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Errors::ReturnItsValueChainingIsAlreadySet]
+                  # @raise [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Exceptions::ReturnItsValueChainingIsAlreadySet]
                   #
                   def call_original=(chaining)
-                    raise Errors::CallOriginalChainingIsAlreadySet.new if @call_original
+                    raise Exceptions::CallOriginalChainingIsAlreadySet.new if @call_original
 
                     @call_original = chaining
                   end
 
                   ##
                   # @param chaining [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::Base]
-                  # @raise [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Errors::ArgumentsChainingIsAlreadySet]
+                  # @raise [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Exceptions::ArgumentsChainingIsAlreadySet]
                   #
                   def arguments=(chaining)
-                    raise Errors::ArgumentsChainingIsAlreadySet.new if @arguments
+                    raise Exceptions::ArgumentsChainingIsAlreadySet.new if @arguments
 
                     @arguments = chaining
                   end
 
                   ##
                   # @param chaining [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::Base]
-                  # @raise [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Errors::ReturnItsValueChainingIsAlreadySet]
+                  # @raise [ConvenientService::RSpec::Matchers::Custom::DelegateTo::Exceptions::ReturnItsValueChainingIsAlreadySet]
                   #
                   def return_its_value=(chaining)
-                    raise Errors::ReturnItsValueChainingIsAlreadySet.new if @return_its_value
+                    raise Exceptions::ReturnItsValueChainingIsAlreadySet.new if @return_its_value
 
                     @return_its_value = chaining
                   end

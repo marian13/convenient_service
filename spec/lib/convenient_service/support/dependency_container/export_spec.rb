@@ -46,9 +46,9 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Export do
           TEXT
         end
 
-        it "raises `ConvenientService::Support::DependencyContainer::Errors::NotModule`" do
+        it "raises `ConvenientService::Support::DependencyContainer::Exceptions::NotModule`" do
           expect { include_module_result }
-            .to raise_error(ConvenientService::Support::DependencyContainer::Errors::NotModule)
+            .to raise_error(ConvenientService::Support::DependencyContainer::Exceptions::NotModule)
             .with_message(error_message)
         end
       end

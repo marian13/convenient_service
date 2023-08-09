@@ -8,7 +8,7 @@ module ConvenientService
           class Result
             module Plugins
               module RaisesOnNotCheckedResultStatus
-                module Errors
+                module Exceptions
                   class StatusIsNotChecked < ::ConvenientService::Exception
                     def initialize(attribute:)
                       message = <<~TEXT

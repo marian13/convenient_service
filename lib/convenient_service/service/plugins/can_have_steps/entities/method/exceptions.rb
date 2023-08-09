@@ -6,7 +6,7 @@ module ConvenientService
       module CanHaveSteps
         module Entities
           class Method
-            module Errors
+            module Exceptions
               class MethodHasNoOrganizer < ::ConvenientService::Exception
                 ##
                 # @param method [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method]

@@ -4,7 +4,7 @@ module ConvenientService
   module Service
     module Plugins
       module HasJSendResult
-        module Errors
+        module Exceptions
           class ResultIsNotOverridden < ::ConvenientService::Exception
             def initialize(service:)
               message = <<~TEXT

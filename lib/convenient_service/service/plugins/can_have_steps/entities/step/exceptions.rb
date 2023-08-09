@@ -6,7 +6,7 @@ module ConvenientService
       module CanHaveSteps
         module Entities
           class Step
-            module Errors
+            module Exceptions
               class StepHasNoOrganizer < ::ConvenientService::Exception
                 def initialize(step:)
                   message = <<~TEXT

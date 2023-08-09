@@ -3,7 +3,7 @@
 module ConvenientService
   module Support
     module DependencyContainer
-      module Errors
+      module Exceptions
         class InvalidScope < ::ConvenientService::Exception
           ##
           # @param scope [Object]

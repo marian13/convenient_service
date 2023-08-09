@@ -22,9 +22,9 @@ RSpec.describe ConvenientService::RSpec::Helpers::Custom::IgnoringError do
           TEXT
         end
 
-        it "raises `ConvenientService::RSpec::Helpers::Custom::IgnoringError::Errors::IgnoredErrorIsNotRaised`" do
+        it "raises `ConvenientService::RSpec::Helpers::Custom::IgnoringError::Exceptions::IgnoredErrorIsNotRaised`" do
           expect { command_result }
-            .to raise_error(ConvenientService::RSpec::Helpers::Custom::IgnoringError::Errors::IgnoredErrorIsNotRaised)
+            .to raise_error(ConvenientService::RSpec::Helpers::Custom::IgnoringError::Exceptions::IgnoredErrorIsNotRaised)
             .with_message(error_message)
         end
       end

@@ -4,7 +4,7 @@ module ConvenientService
   module Service
     module Plugins
       module CanBeTried
-        module Errors
+        module Exceptions
           class TryResultIsNotOverridden < ::ConvenientService::Exception
             def initialize(service:)
               message = <<~TEXT

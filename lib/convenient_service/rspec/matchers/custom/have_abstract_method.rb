@@ -16,7 +16,7 @@ module ConvenientService
               object.__send__(method_name)
 
               false
-            rescue ConvenientService::Support::AbstractMethod::Errors::AbstractMethodNotOverridden
+            rescue ConvenientService::Support::AbstractMethod::Exceptions::AbstractMethodNotOverridden
               true
             rescue
               false

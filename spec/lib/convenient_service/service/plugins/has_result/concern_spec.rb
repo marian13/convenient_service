@@ -51,9 +51,9 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern do
         TEXT
       end
 
-      it "raises `ConvenientService::Service::Plugins::HasResult::Errors::ResultIsNotOverridden`" do
+      it "raises `ConvenientService::Service::Plugins::HasResult::Exceptions::ResultIsNotOverridden`" do
         expect { result }
-          .to raise_error(ConvenientService::Service::Plugins::HasResult::Errors::ResultIsNotOverridden)
+          .to raise_error(ConvenientService::Service::Plugins::HasResult::Exceptions::ResultIsNotOverridden)
           .with_message(error_message)
       end
     end

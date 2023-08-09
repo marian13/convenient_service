@@ -6,7 +6,7 @@ module ConvenientService
       module Custom
         module Results
           class Base
-            module Errors
+            module Exceptions
               class InvalidStep < ::ConvenientService::Exception
                 ##
                 # @api private

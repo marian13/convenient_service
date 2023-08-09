@@ -43,13 +43,13 @@ module ConvenientService
 
                 def not_completed_step_error
                   <<~RUBY.chomp
-                    ::ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Errors::NotCompletedStep
+                    ::ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::NotCompletedStep
                   RUBY
                 end
 
                 def not_existing_step_result_data_attribute_error
                   <<~RUBY.chomp
-                    ::ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Errors::NotExistingStepResultDataAttribute
+                    ::ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::NotExistingStepResultDataAttribute
                   RUBY
                 end
               end

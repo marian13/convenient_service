@@ -35,7 +35,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::HaveAbstractMethod do
     end
 
     context "when call of method raises" do
-      context "when call of method raises NOT `ConvenientService::Support::AbstractMethod::Errors::AbstractMethodNotOverridden`" do
+      context "when call of method raises NOT `ConvenientService::Support::AbstractMethod::Exceptions::AbstractMethodNotOverridden`" do
         let(:klass) do
           Class.new do
             include ConvenientService::Support::AbstractMethod
@@ -51,7 +51,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::HaveAbstractMethod do
         end
       end
 
-      context "when call of method raises `ConvenientService::Support::AbstractMethod::Errors::AbstractMethodNotOverridden`" do
+      context "when call of method raises `ConvenientService::Support::AbstractMethod::Exceptions::AbstractMethodNotOverridden`" do
         let(:klass) do
           Class.new do
             include ConvenientService::Support::AbstractMethod

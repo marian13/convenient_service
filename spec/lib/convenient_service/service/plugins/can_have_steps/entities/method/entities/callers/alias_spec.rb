@@ -69,9 +69,9 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
           TEXT
         end
 
-        it "raises `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Errors::AliasInputMethodIsNotDefinedInContainer`" do
+        it "raises `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::AliasInputMethodIsNotDefinedInContainer`" do
           expect { caller.validate_as_input_for_container!(container, method: method) }
-            .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Errors::AliasInputMethodIsNotDefinedInContainer)
+            .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::AliasInputMethodIsNotDefinedInContainer)
             .with_message(error_message)
         end
       end
@@ -103,9 +103,9 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
           TEXT
         end
 
-        it "raises `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Errors::AliasOutputMethodIsDefinedInContainer`" do
+        it "raises `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::AliasOutputMethodIsDefinedInContainer`" do
           expect { caller.validate_as_output_for_container!(container, method: method) }
-            .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Errors::AliasOutputMethodIsDefinedInContainer)
+            .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::AliasOutputMethodIsDefinedInContainer)
             .with_message(error_message)
         end
       end

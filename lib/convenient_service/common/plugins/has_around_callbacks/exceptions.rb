@@ -4,7 +4,7 @@ module ConvenientService
   module Common
     module Plugins
       module HasAroundCallbacks
-        module Errors
+        module Exceptions
           class AroundCallbackChainIsNotContinued < ::ConvenientService::Exception
             def initialize(callback:)
               message = <<~TEXT

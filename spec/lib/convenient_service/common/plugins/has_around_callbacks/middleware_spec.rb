@@ -221,9 +221,9 @@ RSpec.describe ConvenientService::Common::Plugins::HasAroundCallbacks::Middlewar
             TEXT
           end
 
-          it "raises `ConvenientService::Common::Plugins::HasAroundCallbacks::Errors::AroundCallbackChainIsNotContinued`" do
+          it "raises `ConvenientService::Common::Plugins::HasAroundCallbacks::Exceptions::AroundCallbackChainIsNotContinued`" do
             expect { method_value }
-              .to raise_error(ConvenientService::Common::Plugins::HasAroundCallbacks::Errors::AroundCallbackChainIsNotContinued)
+              .to raise_error(ConvenientService::Common::Plugins::HasAroundCallbacks::Exceptions::AroundCallbackChainIsNotContinued)
               .with_message(error_message)
           end
         end
@@ -267,9 +267,9 @@ RSpec.describe ConvenientService::Common::Plugins::HasAroundCallbacks::Middlewar
             TEXT
           end
 
-          it "raises `ConvenientService::Common::Plugins::HasAroundCallbacks::Errors::AroundCallbackChainIsNotContinued`" do
+          it "raises `ConvenientService::Common::Plugins::HasAroundCallbacks::Exceptions::AroundCallbackChainIsNotContinued`" do
             expect { method_value }
-              .to raise_error(ConvenientService::Common::Plugins::HasAroundCallbacks::Errors::AroundCallbackChainIsNotContinued)
+              .to raise_error(ConvenientService::Common::Plugins::HasAroundCallbacks::Exceptions::AroundCallbackChainIsNotContinued)
               .with_message(error_message)
           end
         end
@@ -305,9 +305,9 @@ RSpec.describe ConvenientService::Common::Plugins::HasAroundCallbacks::Middlewar
             TEXT
           end
 
-          it "raises `ConvenientService::Common::Plugins::HasAroundCallbacks::Errors::AroundCallbackChainIsNotContinued`" do
+          it "raises `ConvenientService::Common::Plugins::HasAroundCallbacks::Exceptions::AroundCallbackChainIsNotContinued`" do
             expect { method_value }
-              .to raise_error(ConvenientService::Common::Plugins::HasAroundCallbacks::Errors::AroundCallbackChainIsNotContinued)
+              .to raise_error(ConvenientService::Common::Plugins::HasAroundCallbacks::Exceptions::AroundCallbackChainIsNotContinued)
               .with_message(error_message)
           end
         end

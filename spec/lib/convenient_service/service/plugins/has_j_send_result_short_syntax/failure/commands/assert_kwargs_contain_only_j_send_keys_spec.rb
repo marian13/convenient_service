@@ -59,9 +59,9 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultShortSyntax::F
           TEXT
         end
 
-        it "raises `ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Failure::Errors::KwargsContainNonJSendKey`" do
+        it "raises `ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Failure::Exceptions::KwargsContainNonJSendKey`" do
           expect { command_result }
-            .to raise_error(ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Failure::Errors::KwargsContainNonJSendKey)
+            .to raise_error(ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Failure::Exceptions::KwargsContainNonJSendKey)
             .with_message(error_message)
         end
       end

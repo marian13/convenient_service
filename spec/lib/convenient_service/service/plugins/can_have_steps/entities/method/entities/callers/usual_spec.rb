@@ -70,9 +70,9 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
           TEXT
         end
 
-        it "raises `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Errors::InputMethodIsNotDefinedInContainer`" do
+        it "raises `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::InputMethodIsNotDefinedInContainer`" do
           expect { caller.validate_as_input_for_container!(container, method: method) }
-            .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Errors::InputMethodIsNotDefinedInContainer)
+            .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::InputMethodIsNotDefinedInContainer)
             .with_message(error_message)
         end
       end
@@ -104,9 +104,9 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
           TEXT
         end
 
-        it "raises `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Errors::OutputMethodIsDefinedInContainer`" do
+        it "raises `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::OutputMethodIsDefinedInContainer`" do
           expect { caller.validate_as_output_for_container!(container, method: method) }
-            .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Errors::OutputMethodIsDefinedInContainer)
+            .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::OutputMethodIsDefinedInContainer)
             .with_message(error_message)
         end
       end

@@ -10,7 +10,7 @@ module ConvenientService
           class_methods do
             ##
             # @api public
-            # @raise [ConvenientService::Service::Plugins::HasResult::Errors::ResultIsNotOverridden]
+            # @raise [ConvenientService::Service::Plugins::HasResult::Exceptions::ResultIsNotOverridden]
             #
             def result(...)
               new(...).result
@@ -20,10 +20,10 @@ module ConvenientService
           instance_methods do
             ##
             # @api public
-            # @raise [ConvenientService::Service::Plugins::HasResult::Errors::ResultIsNotOverridden]
+            # @raise [ConvenientService::Service::Plugins::HasResult::Exceptions::ResultIsNotOverridden]
             #
             def result
-              raise Errors::ResultIsNotOverridden.new(service: self)
+              raise Exceptions::ResultIsNotOverridden.new(service: self)
             end
           end
         end

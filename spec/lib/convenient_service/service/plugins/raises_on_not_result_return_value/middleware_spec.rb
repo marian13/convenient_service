@@ -95,9 +95,9 @@ RSpec.describe ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue
           TEXT
         end
 
-        it "raises `ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Errors::ReturnValueNotKindOfResult`" do
+        it "raises `ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Exceptions::ReturnValueNotKindOfResult`" do
           expect { method_value }
-            .to raise_error(ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Errors::ReturnValueNotKindOfResult)
+            .to raise_error(ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Exceptions::ReturnValueNotKindOfResult)
             .with_message(error_message)
         end
       end

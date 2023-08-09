@@ -476,9 +476,9 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
           chainings_collection.call_original = call_original_chaining
         end
 
-        it "raises error `ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::ChainingsCollection::Errors::CallOriginalChainingIsAlreadySet`" do
+        it "raises error `ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::ChainingsCollection::Exceptions::CallOriginalChainingIsAlreadySet`" do
           expect { chainings_collection.call_original = call_original_chaining }
-            .to raise_error(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::ChainingsCollection::Errors::CallOriginalChainingIsAlreadySet)
+            .to raise_error(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::ChainingsCollection::Exceptions::CallOriginalChainingIsAlreadySet)
             .with_message(error_message)
         end
       end
@@ -510,9 +510,9 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
           chainings_collection.arguments = arguments_chaining
         end
 
-        it "raises error `ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::ChainingsCollection::Errors::ArgumentsChainingIsAlreadySet`" do
+        it "raises error `ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::ChainingsCollection::Exceptions::ArgumentsChainingIsAlreadySet`" do
           expect { chainings_collection.arguments = arguments_chaining }
-            .to raise_error(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::ChainingsCollection::Errors::ArgumentsChainingIsAlreadySet)
+            .to raise_error(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::ChainingsCollection::Exceptions::ArgumentsChainingIsAlreadySet)
             .with_message(error_message)
         end
       end
@@ -544,9 +544,9 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
           chainings_collection.return_its_value = return_its_value_chaining
         end
 
-        it "raises error `ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::ChainingsCollection::Errors::ReturnItsValueChainingIsAlreadySet`" do
+        it "raises error `ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::ChainingsCollection::Exceptions::ReturnItsValueChainingIsAlreadySet`" do
           expect { chainings_collection.return_its_value = return_its_value_chaining }
-            .to raise_error(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::ChainingsCollection::Errors::ReturnItsValueChainingIsAlreadySet)
+            .to raise_error(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::ChainingsCollection::Exceptions::ReturnItsValueChainingIsAlreadySet)
             .with_message(error_message)
         end
       end

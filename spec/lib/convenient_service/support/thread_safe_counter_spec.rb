@@ -18,8 +18,8 @@ RSpec.describe ConvenientService::Support::ThreadSafeCounter do
   example_group "exceptions" do
     include ConvenientService::RSpec::Matchers::BeDescendantOf
 
-    specify { expect(described_class::Errors::ValueAfterIncrementIsGreaterThanMaxValue).to be_descendant_of(ConvenientService::Error) }
-    specify { expect(described_class::Errors::ValueAfterDecrementIsLowerThanMinValue).to be_descendant_of(ConvenientService::Error) }
+    specify { expect(described_class::Exceptions::ValueAfterIncrementIsGreaterThanMaxValue).to be_descendant_of(ConvenientService::Exception) }
+    specify { expect(described_class::Exceptions::ValueAfterDecrementIsLowerThanMinValue).to be_descendant_of(ConvenientService::Exception) }
   end
 
   example_group "attributes" do
@@ -144,14 +144,14 @@ RSpec.describe ConvenientService::Support::ThreadSafeCounter do
           TEXT
         end
 
-        it "raises `ConvenientService::Support::ThreadSafeCounter::Errors::ValueAfterIncrementIsGreaterThanMaxValue`" do
+        it "raises `ConvenientService::Support::ThreadSafeCounter::Exceptions::ValueAfterIncrementIsGreaterThanMaxValue`" do
           expect { counter.increment!(n) }
-            .to raise_error(ConvenientService::Support::ThreadSafeCounter::Errors::ValueAfterIncrementIsGreaterThanMaxValue)
+            .to raise_error(ConvenientService::Support::ThreadSafeCounter::Exceptions::ValueAfterIncrementIsGreaterThanMaxValue)
             .with_message(error_message)
         end
 
         it "does NOT changes current value" do
-          expect { ignoring_error(ConvenientService::Support::ThreadSafeCounter::Errors::ValueAfterIncrementIsGreaterThanMaxValue) { counter.increment!(n) } }.not_to change(counter, :current_value)
+          expect { ignoring_error(ConvenientService::Support::ThreadSafeCounter::Exceptions::ValueAfterIncrementIsGreaterThanMaxValue) { counter.increment!(n) } }.not_to change(counter, :current_value)
         end
       end
 
@@ -261,14 +261,14 @@ RSpec.describe ConvenientService::Support::ThreadSafeCounter do
           TEXT
         end
 
-        it "raises `ConvenientService::Support::ThreadSafeCounter::Errors::ValueAfterDecrementIsLowerThanMinValue`" do
+        it "raises `ConvenientService::Support::ThreadSafeCounter::Exceptions::ValueAfterDecrementIsLowerThanMinValue`" do
           expect { counter.decrement!(n) }
-            .to raise_error(ConvenientService::Support::ThreadSafeCounter::Errors::ValueAfterDecrementIsLowerThanMinValue)
+            .to raise_error(ConvenientService::Support::ThreadSafeCounter::Exceptions::ValueAfterDecrementIsLowerThanMinValue)
             .with_message(error_message)
         end
 
         it "does NOT changes current value" do
-          expect { ignoring_error(ConvenientService::Support::ThreadSafeCounter::Errors::ValueAfterDecrementIsLowerThanMinValue) { counter.decrement!(n) } }.not_to change(counter, :current_value)
+          expect { ignoring_error(ConvenientService::Support::ThreadSafeCounter::Exceptions::ValueAfterDecrementIsLowerThanMinValue) { counter.decrement!(n) } }.not_to change(counter, :current_value)
         end
       end
 

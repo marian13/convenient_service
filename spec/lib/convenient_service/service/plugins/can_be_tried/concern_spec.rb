@@ -52,9 +52,9 @@ RSpec.describe ConvenientService::Service::Plugins::CanBeTried::Concern do
         TEXT
       end
 
-      it "raises `ConvenientService::Service::Plugins::CanBeTried::Errors::TryResultIsNotOverridden`" do
+      it "raises `ConvenientService::Service::Plugins::CanBeTried::Exceptions::TryResultIsNotOverridden`" do
         expect { service_instance.try_result }
-          .to raise_error(ConvenientService::Service::Plugins::CanBeTried::Errors::TryResultIsNotOverridden)
+          .to raise_error(ConvenientService::Service::Plugins::CanBeTried::Exceptions::TryResultIsNotOverridden)
           .with_message(error_message)
       end
     end

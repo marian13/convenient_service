@@ -5,7 +5,7 @@ module ConvenientService
     module Plugins
       module HasJSendResultShortSyntax
         module Error
-          module Errors
+          module Exceptions
             class BothArgsAndKwargsArePassed < ::ConvenientService::Exception
               def initialize
                 message = <<~TEXT

@@ -57,9 +57,9 @@ RSpec.describe ConvenientService::Utils::Array::Merge do
         context "when `raise_on_non_integer_index` is `true`" do
           let(:raise_on_non_integer_index) { true }
 
-          it "raises `ConvenientService::Utils::Array::Errors::NonIntegerIndex`" do
+          it "raises `ConvenientService::Utils::Array::Exceptions::NonIntegerIndex`" do
             expect { result }
-              .to raise_error(ConvenientService::Utils::Array::Errors::NonIntegerIndex)
+              .to raise_error(ConvenientService::Utils::Array::Exceptions::NonIntegerIndex)
               .with_message(error_message)
           end
         end
@@ -67,9 +67,9 @@ RSpec.describe ConvenientService::Utils::Array::Merge do
         context "when `raise_on_non_integer_index` is NOT passed" do
           subject(:result) { described_class.call(array, overrides) }
 
-          it "raises `ConvenientService::Utils::Array::Errors::NonIntegerIndex`" do
+          it "raises `ConvenientService::Utils::Array::Exceptions::NonIntegerIndex`" do
             expect { result }
-              .to raise_error(ConvenientService::Utils::Array::Errors::NonIntegerIndex)
+              .to raise_error(ConvenientService::Utils::Array::Exceptions::NonIntegerIndex)
               .with_message(error_message)
           end
         end

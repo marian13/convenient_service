@@ -6,7 +6,7 @@ module ConvenientService
     # @abstract Subclass and override {#initialize} and {#call} to implement a `Command`.
     #
     class Command
-      module Errors
+      module Exceptions
         class CallIsNotOverridden < ::ConvenientService::Exception
           def initialize(command:)
             message = <<~TEXT
@@ -54,10 +54,10 @@ module ConvenientService
       ##
       # @abstract
       # @return [Object] Can be any type.
-      # @raise [ConvenientService::Support::Command::Errors::CallIsNotOverridden]
+      # @raise [ConvenientService::Support::Command::Exceptions::CallIsNotOverridden]
       #
       def call
-        raise Errors::CallIsNotOverridden.new(command: self)
+        raise Exceptions::CallIsNotOverridden.new(command: self)
       end
     end
   end

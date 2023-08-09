@@ -44,9 +44,9 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           TEXT
         end
 
-        it "raises `ConvenientService::Support::Castable::Errors::FailedToCast`" do
+        it "raises `ConvenientService::Support::Castable::Exceptions::FailedToCast`" do
           expect { command_result }
-            .to raise_error(ConvenientService::Support::Castable::Errors::FailedToCast)
+            .to raise_error(ConvenientService::Support::Castable::Exceptions::FailedToCast)
             .with_message(error_message)
         end
       end
@@ -64,9 +64,9 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           TEXT
         end
 
-        it "raises `ConvenientService::Support::Castable::Errors::FailedToCast`" do
+        it "raises `ConvenientService::Support::Castable::Exceptions::FailedToCast`" do
           expect { command_result }
-            .to raise_error(ConvenientService::Support::Castable::Errors::FailedToCast)
+            .to raise_error(ConvenientService::Support::Castable::Exceptions::FailedToCast)
             .with_message(error_message)
         end
       end
@@ -84,9 +84,9 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           TEXT
         end
 
-        it "raises `ConvenientService::Support::Castable::Errors::FailedToCast`" do
+        it "raises `ConvenientService::Support::Castable::Exceptions::FailedToCast`" do
           expect { command_result }
-            .to raise_error(ConvenientService::Support::Castable::Errors::FailedToCast)
+            .to raise_error(ConvenientService::Support::Castable::Exceptions::FailedToCast)
             .with_message(error_message)
         end
       end
@@ -104,9 +104,9 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           TEXT
         end
 
-        it "raises `ConvenientService::Support::Castable::Errors::FailedToCast`" do
+        it "raises `ConvenientService::Support::Castable::Exceptions::FailedToCast`" do
           expect { command_result }
-            .to raise_error(ConvenientService::Support::Castable::Errors::FailedToCast)
+            .to raise_error(ConvenientService::Support::Castable::Exceptions::FailedToCast)
             .with_message(error_message)
         end
       end

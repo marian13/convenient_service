@@ -21,7 +21,7 @@ module ConvenientService
                     ##
                     # TODO: Better error message.
                     #
-                    raise Errors::OutputMethodRawValue.new(container: container, method: method)
+                    raise Exceptions::OutputMethodRawValue.new(container: container, method: method)
                   end
 
                   def define_output_in_container!(container, index:, method:)

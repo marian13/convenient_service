@@ -96,9 +96,9 @@ RSpec.describe ConvenientService::Core::Entities::Config do
             config.commit!
           end
 
-          it "raises `ConvenientService::Core::Entities::Config::Errors::ConfigIsCommitted`" do
+          it "raises `ConvenientService::Core::Entities::Config::Exceptions::ConfigIsCommitted`" do
             expect { config.concerns(&configuration_block) }
-              .to raise_error(ConvenientService::Core::Entities::Config::Errors::ConfigIsCommitted)
+              .to raise_error(ConvenientService::Core::Entities::Config::Exceptions::ConfigIsCommitted)
               .with_message(committed_config_error_message)
           end
         end
@@ -252,9 +252,9 @@ RSpec.describe ConvenientService::Core::Entities::Config do
               config.commit!
             end
 
-            it "raises `ConvenientService::Core::Entities::Config::Errors::ConfigIsCommitted`" do
+            it "raises `ConvenientService::Core::Entities::Config::Exceptions::ConfigIsCommitted`" do
               expect { config.middlewares(method, &configuration_block) }
-                .to raise_error(ConvenientService::Core::Entities::Config::Errors::ConfigIsCommitted)
+                .to raise_error(ConvenientService::Core::Entities::Config::Exceptions::ConfigIsCommitted)
                 .with_message(committed_config_error_message)
             end
           end
@@ -305,9 +305,9 @@ RSpec.describe ConvenientService::Core::Entities::Config do
                 config.commit!
               end
 
-              it "raises `ConvenientService::Core::Entities::Config::Errors::ConfigIsCommitted`" do
+              it "raises `ConvenientService::Core::Entities::Config::Exceptions::ConfigIsCommitted`" do
                 expect { config.middlewares(method, scope: scope, &configuration_block) }
-                  .to raise_error(ConvenientService::Core::Entities::Config::Errors::ConfigIsCommitted)
+                  .to raise_error(ConvenientService::Core::Entities::Config::Exceptions::ConfigIsCommitted)
                   .with_message(committed_config_error_message)
               end
             end
@@ -357,9 +357,9 @@ RSpec.describe ConvenientService::Core::Entities::Config do
                 config.commit!
               end
 
-              it "raises `ConvenientService::Core::Entities::Config::Errors::ConfigIsCommitted`" do
+              it "raises `ConvenientService::Core::Entities::Config::Exceptions::ConfigIsCommitted`" do
                 expect { config.middlewares(method, scope: scope, &configuration_block) }
-                  .to raise_error(ConvenientService::Core::Entities::Config::Errors::ConfigIsCommitted)
+                  .to raise_error(ConvenientService::Core::Entities::Config::Exceptions::ConfigIsCommitted)
                   .with_message(committed_config_error_message)
               end
             end

@@ -9,7 +9,7 @@ module ConvenientService
             class Matcher
               module Entities
                 class ChainingsCollection
-                  module Errors
+                  module Exceptions
                     class CallOriginalChainingIsAlreadySet < ::ConvenientService::Exception
                       def initialize
                         message = <<~TEXT
