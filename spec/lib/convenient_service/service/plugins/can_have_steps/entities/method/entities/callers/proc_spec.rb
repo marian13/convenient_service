@@ -59,7 +59,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
     describe "#validate_as_output_for_container!" do
       let(:direction) { :output }
 
-      let(:error_message) do
+      let(:exception_message) do
         <<~TEXT
           Procs are not allowed for `out` methods.
         TEXT
@@ -68,7 +68,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
       it "raises `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::OutputMethodProc`" do
         expect { caller.validate_as_output_for_container!(container, method: method) }
           .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::OutputMethodProc)
-          .with_message(error_message)
+          .with_message(exception_message)
       end
     end
 

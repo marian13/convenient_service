@@ -32,7 +32,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultShortSyntax::S
         context "when kwargs contain extra keys" do
           let(:kwargs) { {data: {foo: :bar}, extra_key: anything} }
 
-          let(:error_message) do
+          let(:exception_message) do
             <<~TEXT
               `kwargs` passed to `success` method contain `data` and extra keys. That's NOT allowed.
 
@@ -46,7 +46,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultShortSyntax::S
           it "raises `ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Success::Exceptions::KwargsContainDataAndExtraKeys`" do
             expect { command_result }
               .to raise_error(ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Success::Exceptions::KwargsContainDataAndExtraKeys)
-              .with_message(error_message)
+              .with_message(exception_message)
           end
         end
       end

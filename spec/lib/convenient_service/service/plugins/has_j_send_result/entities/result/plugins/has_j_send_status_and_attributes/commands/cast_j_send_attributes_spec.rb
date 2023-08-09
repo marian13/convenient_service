@@ -38,7 +38,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       context "when `kwargs[:status]` is NOT castable" do
         let(:command_result) { described_class.call(result: result, kwargs: kwargs.merge(status: 42)) }
 
-        let(:error_message) do
+        let(:exception_message) do
           <<~TEXT
             Failed to cast `42` into `#{result.class.status_class}`.
           TEXT
@@ -47,7 +47,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         it "raises `ConvenientService::Support::Castable::Exceptions::FailedToCast`" do
           expect { command_result }
             .to raise_error(ConvenientService::Support::Castable::Exceptions::FailedToCast)
-            .with_message(error_message)
+            .with_message(exception_message)
         end
       end
 
@@ -58,7 +58,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       context "when `kwargs[:data]` is NOT castable" do
         let(:command_result) { described_class.call(result: result, kwargs: kwargs.merge(data: 42)) }
 
-        let(:error_message) do
+        let(:exception_message) do
           <<~TEXT
             Failed to cast `42` into `#{result.class.data_class}`.
           TEXT
@@ -67,7 +67,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         it "raises `ConvenientService::Support::Castable::Exceptions::FailedToCast`" do
           expect { command_result }
             .to raise_error(ConvenientService::Support::Castable::Exceptions::FailedToCast)
-            .with_message(error_message)
+            .with_message(exception_message)
         end
       end
 
@@ -78,7 +78,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       context "when `kwargs[:message]` is NOT castable" do
         let(:command_result) { described_class.call(result: result, kwargs: kwargs.merge(message: 42)) }
 
-        let(:error_message) do
+        let(:exception_message) do
           <<~TEXT
             Failed to cast `42` into `#{result.class.message_class}`.
           TEXT
@@ -87,7 +87,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         it "raises `ConvenientService::Support::Castable::Exceptions::FailedToCast`" do
           expect { command_result }
             .to raise_error(ConvenientService::Support::Castable::Exceptions::FailedToCast)
-            .with_message(error_message)
+            .with_message(exception_message)
         end
       end
 
@@ -98,7 +98,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       context "when `kwargs[:code]` is NOT castable" do
         let(:command_result) { described_class.call(result: result, kwargs: kwargs.merge(code: 42)) }
 
-        let(:error_message) do
+        let(:exception_message) do
           <<~TEXT
             Failed to cast `42` into `#{result.class.code_class}`.
           TEXT
@@ -107,7 +107,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         it "raises `ConvenientService::Support::Castable::Exceptions::FailedToCast`" do
           expect { command_result }
             .to raise_error(ConvenientService::Support::Castable::Exceptions::FailedToCast)
-            .with_message(error_message)
+            .with_message(exception_message)
         end
       end
 

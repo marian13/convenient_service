@@ -81,7 +81,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanBeTried::Middleware do
           end
         end
 
-        let(:error_message) do
+        let(:exception_message) do
           <<~TEXT
             Return value of service `#{service_class}` try is NOT a `success`.
             It is `error`.
@@ -93,7 +93,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanBeTried::Middleware do
         it "raises `ConvenientService::Service::Plugins::CanBeTried::Exceptions::ServiceTryReturnValueNotSuccess`" do
           expect { method_value }
             .to raise_error(ConvenientService::Service::Plugins::CanBeTried::Exceptions::ServiceTryReturnValueNotSuccess)
-            .with_message(error_message)
+            .with_message(exception_message)
         end
       end
 

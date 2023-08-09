@@ -13,7 +13,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::Assert
       context "when `scope` is NOT valid" do
         let(:scope) { :foo }
 
-        let(:error_message) do
+        let(:exception_message) do
           <<~TEXT
             Scope `#{scope.inspect}` is NOT valid.
 
@@ -24,7 +24,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::Assert
         it "raises `ConvenientService::Support::DependencyContainer::Exceptions::InvalidScope`" do
           expect { command_result }
             .to raise_error(ConvenientService::Support::DependencyContainer::Exceptions::InvalidScope)
-            .with_message(error_message)
+            .with_message(exception_message)
         end
       end
 

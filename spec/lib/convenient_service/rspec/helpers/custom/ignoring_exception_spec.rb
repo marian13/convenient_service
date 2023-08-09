@@ -10,27 +10,27 @@ RSpec.describe ConvenientService::RSpec::Helpers::Custom::IgnoringException do
 
   example_group "instance methods" do
     describe "#call" do
-      let(:command_result) { described_class.call(error, &block) }
-      let(:error) { Class.new(StandardError) }
+      let(:command_result) { described_class.call(exception, &block) }
+      let(:exception) { Class.new(StandardError) }
 
-      context "when `error` is NOT raised" do
+      context "when `exception` is NOT raised" do
         let(:block) { proc {} }
 
-        let(:error_message) do
+        let(:exception_message) do
           <<~TEXT
-            Error `#{error}` is NOT raised. That is why it is NOT ignored.
+            Exception `#{exception}` is NOT raised. That is why it is NOT ignored.
           TEXT
         end
 
-        it "raises `ConvenientService::RSpec::Helpers::Custom::IgnoringException::Exceptions::IgnoredErrorIsNotRaised`" do
+        it "raises `ConvenientService::RSpec::Helpers::Custom::IgnoringException::Exceptions::IgnoredExceptionIsNotRaised`" do
           expect { command_result }
-            .to raise_error(ConvenientService::RSpec::Helpers::Custom::IgnoringException::Exceptions::IgnoredErrorIsNotRaised)
-            .with_message(error_message)
+            .to raise_error(ConvenientService::RSpec::Helpers::Custom::IgnoringException::Exceptions::IgnoredExceptionIsNotRaised)
+            .with_message(exception_message)
         end
       end
 
-      context "when `error` is raised" do
-        let(:block) { proc { raise error } }
+      context "when `exception` is raised" do
+        let(:block) { proc { raise exception } }
 
         it "returns `ConvenientService::Support::UNDEFINED`" do
           expect(command_result).to eq(ConvenientService::Support::UNDEFINED)

@@ -42,7 +42,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
     end
 
     describe "#calculate_value" do
-      let(:error_message) do
+      let(:exception_message) do
         <<~TEXT
           Method caller failed to calculate reassignment for `#{method.name}`.
 
@@ -53,14 +53,14 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
       it "raises `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::CallerCanNotCalculateReassignment`" do
         expect { caller.calculate_value(method) }
           .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::CallerCanNotCalculateReassignment)
-          .with_message(error_message)
+          .with_message(exception_message)
       end
     end
 
     describe "#validate_as_input_for_container!" do
       let(:direction) { :input }
 
-      let(:error_message) do
+      let(:exception_message) do
         <<~TEXT
           Reassignments are not allowed for `in` methods.
         TEXT
@@ -69,7 +69,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
       it "raises `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::InputMethodReassignment`" do
         expect { caller.validate_as_input_for_container!(container, method: method) }
           .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::InputMethodReassignment)
-          .with_message(error_message)
+          .with_message(exception_message)
       end
     end
 

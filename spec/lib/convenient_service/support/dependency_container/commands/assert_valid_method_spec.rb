@@ -20,7 +20,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::Assert
           end
         end
 
-        let(:error_message) do
+        let(:exception_message) do
           <<~TEXT
             Module `#{container}` does NOT export method `#{slug}` with `#{scope}` scope.
 
@@ -37,7 +37,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::Assert
         it "raises `ConvenientService::Support::DependencyContainer::Exceptions::NotExportedMethod`" do
           expect { command_result }
             .to raise_error(ConvenientService::Support::DependencyContainer::Exceptions::NotExportedMethod)
-            .with_message(error_message)
+            .with_message(exception_message)
         end
       end
 

@@ -16,7 +16,7 @@ RSpec.describe ConvenientService::Support::Command do
 
   example_group "instance methods" do
     describe "#call" do
-      let(:error_message) do
+      let(:exception_message) do
         <<~TEXT
           Call method (#call) of `#{command_class}` is NOT overridden.
         TEXT
@@ -25,7 +25,7 @@ RSpec.describe ConvenientService::Support::Command do
       it "raises `ConvenientService::Support::Command::Exceptions::CallIsNotOverridden`" do
         expect { command_instance.call }
           .to raise_error(ConvenientService::Support::Command::Exceptions::CallIsNotOverridden)
-          .with_message(error_message)
+          .with_message(exception_message)
       end
     end
   end

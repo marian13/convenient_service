@@ -78,7 +78,7 @@ RSpec.describe ConvenientService::Support::AbstractMethod do
             end
           end
 
-          let(:error_message) do
+          let(:exception_message) do
             <<~TEXT
               `#{klass}` should implement abstract instance method `foo`.
             TEXT
@@ -87,7 +87,7 @@ RSpec.describe ConvenientService::Support::AbstractMethod do
           it "raises `ConvenientService::Support::AbstractMethod::Exceptions::AbstractMethodNotOverridden`" do
             expect { instance.foo }
               .to raise_error(ConvenientService::Support::AbstractMethod::Exceptions::AbstractMethodNotOverridden)
-              .with_message(error_message)
+              .with_message(exception_message)
           end
         end
 
@@ -102,7 +102,7 @@ RSpec.describe ConvenientService::Support::AbstractMethod do
             end
           end
 
-          let(:error_message) do
+          let(:exception_message) do
             <<~TEXT
               `#{klass}` should implement abstract class method `foo`.
             TEXT
@@ -111,7 +111,7 @@ RSpec.describe ConvenientService::Support::AbstractMethod do
           it "raises `ConvenientService::Support::AbstractMethod::Exceptions::AbstractMethodNotOverridden`" do
             expect { klass.foo }
               .to raise_error(ConvenientService::Support::AbstractMethod::Exceptions::AbstractMethodNotOverridden)
-              .with_message(error_message)
+              .with_message(exception_message)
           end
         end
       end

@@ -44,7 +44,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanBeTried::Concern do
 
   example_group "instance methods" do
     describe "#try_result" do
-      let(:error_message) do
+      let(:exception_message) do
         <<~TEXT
           Try result method (#try_result) of `#{service_class}` is NOT overridden.
 
@@ -55,7 +55,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanBeTried::Concern do
       it "raises `ConvenientService::Service::Plugins::CanBeTried::Exceptions::TryResultIsNotOverridden`" do
         expect { service_instance.try_result }
           .to raise_error(ConvenientService::Service::Plugins::CanBeTried::Exceptions::TryResultIsNotOverridden)
-          .with_message(error_message)
+          .with_message(exception_message)
       end
     end
   end

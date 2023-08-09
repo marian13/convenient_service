@@ -207,7 +207,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasAroundCallbacks::Middlewar
             end
           end
 
-          let(:error_message) do
+          let(:exception_message) do
             <<~TEXT
               Around callback chain is NOT continued from `#{service_instance.callbacks.for([:around, :result]).first.block.source_location}`.
 
@@ -224,7 +224,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasAroundCallbacks::Middlewar
           it "raises `ConvenientService::Common::Plugins::HasAroundCallbacks::Exceptions::AroundCallbackChainIsNotContinued`" do
             expect { method_value }
               .to raise_error(ConvenientService::Common::Plugins::HasAroundCallbacks::Exceptions::AroundCallbackChainIsNotContinued)
-              .with_message(error_message)
+              .with_message(exception_message)
           end
         end
 
@@ -253,7 +253,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasAroundCallbacks::Middlewar
             end
           end
 
-          let(:error_message) do
+          let(:exception_message) do
             <<~TEXT
               Around callback chain is NOT continued from `#{service_instance.callbacks.for([:around, :result])[1].block.source_location}`.
 
@@ -270,7 +270,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasAroundCallbacks::Middlewar
           it "raises `ConvenientService::Common::Plugins::HasAroundCallbacks::Exceptions::AroundCallbackChainIsNotContinued`" do
             expect { method_value }
               .to raise_error(ConvenientService::Common::Plugins::HasAroundCallbacks::Exceptions::AroundCallbackChainIsNotContinued)
-              .with_message(error_message)
+              .with_message(exception_message)
           end
         end
 
@@ -291,7 +291,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasAroundCallbacks::Middlewar
             end
           end
 
-          let(:error_message) do
+          let(:exception_message) do
             <<~TEXT
               Around callback chain is NOT continued from `#{service_instance.callbacks.for([:around, :result]).last.block.source_location}`.
 
@@ -308,7 +308,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasAroundCallbacks::Middlewar
           it "raises `ConvenientService::Common::Plugins::HasAroundCallbacks::Exceptions::AroundCallbackChainIsNotContinued`" do
             expect { method_value }
               .to raise_error(ConvenientService::Common::Plugins::HasAroundCallbacks::Exceptions::AroundCallbackChainIsNotContinued)
-              .with_message(error_message)
+              .with_message(exception_message)
           end
         end
       end

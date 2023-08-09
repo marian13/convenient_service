@@ -45,7 +45,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern do
 
   example_group "instance methods" do
     describe "#result" do
-      let(:error_message) do
+      let(:exception_message) do
         <<~TEXT
           Result method (#result) of `#{service_class}` is NOT overridden.
         TEXT
@@ -54,7 +54,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern do
       it "raises `ConvenientService::Service::Plugins::HasResult::Exceptions::ResultIsNotOverridden`" do
         expect { result }
           .to raise_error(ConvenientService::Service::Plugins::HasResult::Exceptions::ResultIsNotOverridden)
-          .with_message(error_message)
+          .with_message(exception_message)
       end
     end
   end

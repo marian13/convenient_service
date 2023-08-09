@@ -41,7 +41,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
     describe "#validate_as_output_for_container!" do
       let(:options) { {direction: :output} }
 
-      let(:error_message) do
+      let(:exception_message) do
         <<~TEXT
           Method `#{method.name}` is NOT an `out` method.
         TEXT
@@ -50,7 +50,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
       it "raises `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::MethodIsNotOutputMethod`" do
         expect { direction.validate_as_output_for_container!(container, method: method) }
           .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::MethodIsNotOutputMethod)
-          .with_message(error_message)
+          .with_message(exception_message)
       end
     end
 
@@ -58,7 +58,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
       let(:options) { {direction: :output} }
       let(:index) { 0 }
 
-      let(:error_message) do
+      let(:exception_message) do
         <<~TEXT
           Method `#{method.name}` is NOT an `out` method.
         TEXT
@@ -67,7 +67,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
       it "raises `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::MethodIsNotOutputMethod`" do
         expect { direction.define_output_in_container!(container, index: index, method: method) }
           .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::MethodIsNotOutputMethod)
-          .with_message(error_message)
+          .with_message(exception_message)
       end
     end
   end

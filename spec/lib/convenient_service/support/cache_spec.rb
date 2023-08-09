@@ -24,7 +24,7 @@ RSpec.describe ConvenientService::Support::Cache do
         context "when `backend` is NOT supported" do
           let(:backend) { :not_supported_backend }
 
-          let(:error_message) do
+          let(:exception_message) do
             <<~TEXT
               Backend `#{backend}` is NOT supported.
 
@@ -35,7 +35,7 @@ RSpec.describe ConvenientService::Support::Cache do
           it "raises `ConvenientService::Support::Cache::Exceptions::NotSupportedBackend`" do
             expect { cache }
               .to raise_error(ConvenientService::Support::Cache::Exceptions::NotSupportedBackend)
-              .with_message(error_message)
+              .with_message(exception_message)
           end
         end
 

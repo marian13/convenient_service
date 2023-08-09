@@ -13,7 +13,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::Assert
       context "when `container` does NOT include `ConvenientService::DependencyContainer::Export`" do
         let(:container) { Module.new }
 
-        let(:error_message) do
+        let(:exception_message) do
           <<~TEXT
             Module `#{container}` can NOT export methods.
 
@@ -24,7 +24,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::Assert
         it "raises `ConvenientService::Support::DependencyContainer::Exceptions::NotExportableModule`" do
           expect { command_result }
             .to raise_error(ConvenientService::Support::DependencyContainer::Exceptions::NotExportableModule)
-            .with_message(error_message)
+            .with_message(exception_message)
         end
       end
 

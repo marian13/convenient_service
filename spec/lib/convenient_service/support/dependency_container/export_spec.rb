@@ -40,7 +40,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Export do
         let(:container) { Class.new }
         let(:include_module_result) { container.include described_class }
 
-        let(:error_message) do
+        let(:exception_message) do
           <<~TEXT
             `#{container.inspect}` is NOT a Module.
           TEXT
@@ -49,7 +49,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Export do
         it "raises `ConvenientService::Support::DependencyContainer::Exceptions::NotModule`" do
           expect { include_module_result }
             .to raise_error(ConvenientService::Support::DependencyContainer::Exceptions::NotModule)
-            .with_message(error_message)
+            .with_message(exception_message)
         end
       end
     end

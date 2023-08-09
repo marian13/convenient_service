@@ -37,7 +37,7 @@ RSpec.describe ConvenientService::Support::Castable do
 
   example_group "class methods" do
     describe ".cast" do
-      let(:error_message) do
+      let(:exception_message) do
         <<~TEXT
           `#{klass}` should implement abstract class method `cast`.
         TEXT
@@ -46,7 +46,7 @@ RSpec.describe ConvenientService::Support::Castable do
       it "raises `ConvenientService::Support::AbstractMethod::Exceptions::AbstractMethodNotOverridden`" do
         expect { klass.cast(other) }
           .to raise_error(ConvenientService::Support::AbstractMethod::Exceptions::AbstractMethodNotOverridden)
-          .with_message(error_message)
+          .with_message(exception_message)
       end
     end
 

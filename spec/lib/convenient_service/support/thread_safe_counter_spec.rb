@@ -134,7 +134,7 @@ RSpec.describe ConvenientService::Support::ThreadSafeCounter do
       context "when current value + n is greater than max value" do
         let(:max_value) { 10 }
 
-        let(:error_message) do
+        let(:exception_message) do
           <<~TEXT
             Value after increment by `#{n}` is greater than the max value.
 
@@ -147,7 +147,7 @@ RSpec.describe ConvenientService::Support::ThreadSafeCounter do
         it "raises `ConvenientService::Support::ThreadSafeCounter::Exceptions::ValueAfterIncrementIsGreaterThanMaxValue`" do
           expect { counter.increment!(n) }
             .to raise_error(ConvenientService::Support::ThreadSafeCounter::Exceptions::ValueAfterIncrementIsGreaterThanMaxValue)
-            .with_message(error_message)
+            .with_message(exception_message)
         end
 
         it "does NOT changes current value" do
@@ -251,7 +251,7 @@ RSpec.describe ConvenientService::Support::ThreadSafeCounter do
       context "when current value - n is lower than min value" do
         let(:min_value) { -10 }
 
-        let(:error_message) do
+        let(:exception_message) do
           <<~TEXT
             Value after decrement by `#{n}` is lower than the min value.
 
@@ -264,7 +264,7 @@ RSpec.describe ConvenientService::Support::ThreadSafeCounter do
         it "raises `ConvenientService::Support::ThreadSafeCounter::Exceptions::ValueAfterDecrementIsLowerThanMinValue`" do
           expect { counter.decrement!(n) }
             .to raise_error(ConvenientService::Support::ThreadSafeCounter::Exceptions::ValueAfterDecrementIsLowerThanMinValue)
-            .with_message(error_message)
+            .with_message(exception_message)
         end
 
         it "does NOT changes current value" do

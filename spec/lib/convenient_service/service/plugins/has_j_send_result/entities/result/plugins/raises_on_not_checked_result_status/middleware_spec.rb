@@ -71,7 +71,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           result.internals.cache.delete(:has_checked_status)
         end
 
-        let(:error_message) do
+        let(:exception_message) do
           <<~TEXT
             Attribute `#{method_name}` is accessed before result status is checked.
 
@@ -82,7 +82,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         it "raises `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::RaisesOnNotCheckedResultStatus::Exceptions::StatusIsNotChecked`" do
           expect { method_value }
             .to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::RaisesOnNotCheckedResultStatus::Exceptions::StatusIsNotChecked)
-            .with_message(error_message)
+            .with_message(exception_message)
         end
       end
 

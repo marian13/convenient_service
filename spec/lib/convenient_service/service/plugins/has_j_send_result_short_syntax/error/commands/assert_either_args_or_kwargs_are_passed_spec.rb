@@ -49,7 +49,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultShortSyntax::E
         context "when kwargs are passed" do
           let(:kwargs) { {message: message, code: code} }
 
-          let(:error_message) do
+          let(:exception_message) do
             <<~TEXT
               Both `args` and `kwargs` are passed to the `error` method.
 
@@ -66,7 +66,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultShortSyntax::E
           it "raises `ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Error::Exceptions::BothArgsAndKwargsArePassed`" do
             expect { command_result }
               .to raise_error(ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Error::Exceptions::BothArgsAndKwargsArePassed)
-              .with_message(error_message)
+              .with_message(exception_message)
           end
         end
       end

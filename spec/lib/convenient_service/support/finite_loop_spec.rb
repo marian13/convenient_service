@@ -70,7 +70,7 @@ RSpec.describe ConvenientService::Support::FiniteLoop do
           end
         end
 
-        let(:error_message) do
+        let(:exception_message) do
           <<~TEXT
             `finite_loop` always expects a block to be given.
           TEXT
@@ -79,7 +79,7 @@ RSpec.describe ConvenientService::Support::FiniteLoop do
         it "raises `ConvenientService::Support::FiniteLoop::Exceptions::NoBlockGiven`" do
           expect { instance.foo }
             .to raise_error(ConvenientService::Support::FiniteLoop::Exceptions::NoBlockGiven)
-            .with_message(error_message)
+            .with_message(exception_message)
         end
       end
 
@@ -103,7 +103,7 @@ RSpec.describe ConvenientService::Support::FiniteLoop do
       end
 
       context "when `max_iteration_count` is exceeded" do
-        let(:error_message) do
+        let(:exception_message) do
           <<~TEXT
             Max iteration count is exceeded. Current limit is #{max_iteration_count}.
 
@@ -128,7 +128,7 @@ RSpec.describe ConvenientService::Support::FiniteLoop do
           it "defaults `raise_on_exceedance` to `true`" do
             expect { instance.foo }
               .to raise_error(ConvenientService::Support::FiniteLoop::Exceptions::MaxIterationCountExceeded)
-              .with_message(error_message)
+              .with_message(exception_message)
           end
         end
 
@@ -189,7 +189,7 @@ RSpec.describe ConvenientService::Support::FiniteLoop do
           it "raises `ConvenientService::Support::FiniteLoop::Exceptions::MaxIterationCountExceeded`" do
             expect { instance.foo }
               .to raise_error(ConvenientService::Support::FiniteLoop::Exceptions::MaxIterationCountExceeded)
-              .with_message(error_message)
+              .with_message(exception_message)
           end
         end
       end
@@ -250,7 +250,7 @@ RSpec.describe ConvenientService::Support::FiniteLoop do
       context "when NO block is given" do
         let(:loop_result) { described_class.finite_loop }
 
-        let(:error_message) do
+        let(:exception_message) do
           <<~TEXT
             `finite_loop` always expects a block to be given.
           TEXT
@@ -259,7 +259,7 @@ RSpec.describe ConvenientService::Support::FiniteLoop do
         it "raises `ConvenientService::Support::FiniteLoop::Exceptions::NoBlockGiven`" do
           expect { loop_result }
             .to raise_error(ConvenientService::Support::FiniteLoop::Exceptions::NoBlockGiven)
-            .with_message(error_message)
+            .with_message(exception_message)
         end
       end
 
@@ -276,7 +276,7 @@ RSpec.describe ConvenientService::Support::FiniteLoop do
       end
 
       context "when `max_iteration_count` is exceeded" do
-        let(:error_message) do
+        let(:exception_message) do
           <<~TEXT
             Max iteration count is exceeded. Current limit is #{max_iteration_count}.
 
@@ -294,7 +294,7 @@ RSpec.describe ConvenientService::Support::FiniteLoop do
           it "defaults `raise_on_exceedance` to `true`" do
             expect { loop_result }
               .to raise_error(ConvenientService::Support::FiniteLoop::Exceptions::MaxIterationCountExceeded)
-              .with_message(error_message)
+              .with_message(exception_message)
           end
         end
 
@@ -334,7 +334,7 @@ RSpec.describe ConvenientService::Support::FiniteLoop do
           it "raises `ConvenientService::Support::FiniteLoop::Exceptions::MaxIterationCountExceeded`" do
             expect { loop_result }
               .to raise_error(ConvenientService::Support::FiniteLoop::Exceptions::MaxIterationCountExceeded)
-              .with_message(error_message)
+              .with_message(exception_message)
           end
         end
       end

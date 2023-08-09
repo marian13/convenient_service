@@ -38,7 +38,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Entiti
         context "when step is NOT valid" do
           let(:step) { 42 }
 
-          let(:error_message) do
+          let(:exception_message) do
             <<~TEXT
               Step `#{step}` is NOT valid.
 
@@ -57,7 +57,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Entiti
           it "raises `ConvenientService::RSpec::Matchers::Custom::Results::Base::Exceptions::InvalidStep`" do
             expect { command_result }
               .to raise_error(ConvenientService::RSpec::Matchers::Custom::Results::Base::Exceptions::InvalidStep)
-              .with_message(error_message)
+              .with_message(exception_message)
           end
         end
 

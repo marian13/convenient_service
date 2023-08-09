@@ -113,7 +113,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultShortSyntax::E
           context "when more than two args are passed" do
             let(:args) { ["Helpful text", :descriptive_code, "extra argument"] }
 
-            let(:error_message) do
+            let(:exception_message) do
               <<~TEXT
                 More than two `args` are passed to the `error` method.
 
@@ -127,7 +127,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultShortSyntax::E
             it "raises `ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Error::Exceptions::MoreThanTwoArgsArePassed`" do
               expect { method_value }
                 .to raise_error(ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Error::Exceptions::MoreThanTwoArgsArePassed)
-                .with_message(error_message)
+                .with_message(exception_message)
             end
           end
         end
@@ -135,7 +135,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultShortSyntax::E
         context "when `kwargs` are passed" do
           let(:kwargs) { {message: "Helpful text", code: :descriptive_code} }
 
-          let(:error_message) do
+          let(:exception_message) do
             <<~TEXT
               Both `args` and `kwargs` are passed to the `error` method.
 
@@ -152,7 +152,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultShortSyntax::E
           it "raises `ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Error::Exceptions::BothArgsAndKwargsArePassed`" do
             expect { method_value }
               .to raise_error(ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Error::Exceptions::BothArgsAndKwargsArePassed)
-              .with_message(error_message)
+              .with_message(exception_message)
           end
         end
       end

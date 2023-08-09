@@ -42,7 +42,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultShortSyntax::E
       context "when args count is greater than two" do
         let(:args) { [message, code, anything] }
 
-        let(:error_message) do
+        let(:exception_message) do
           <<~TEXT
             More than two `args` are passed to the `error` method.
 
@@ -56,7 +56,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultShortSyntax::E
         it "raises `ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Error::Exceptions::MoreThanTwoArgsArePassed`" do
           expect { command_result }
             .to raise_error(ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Error::Exceptions::MoreThanTwoArgsArePassed)
-            .with_message(error_message)
+            .with_message(exception_message)
         end
       end
     end

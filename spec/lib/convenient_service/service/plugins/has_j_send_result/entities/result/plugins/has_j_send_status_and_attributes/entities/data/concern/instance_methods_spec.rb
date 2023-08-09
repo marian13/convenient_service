@@ -83,7 +83,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       end
 
       context "when NO `data` attribute exist for passed key" do
-        let(:error_message) do
+        let(:exception_message) do
           <<~TEXT
             Data attribute `abc` does NOT exist. Make sure the corresponding result returns it.
           TEXT
@@ -92,7 +92,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         it "raises `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Exceptions::NotExistingAttribute`" do
           expect { data[:abc] }
             .to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Exceptions::NotExistingAttribute)
-            .with_message(error_message)
+            .with_message(exception_message)
         end
       end
     end

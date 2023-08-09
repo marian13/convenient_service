@@ -47,7 +47,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultShortSyntax::F
       context "when kwargs contain non JSend key" do
         let(:kwargs) { {data: {foo: :bar}, non_jsend_key: anything} }
 
-        let(:error_message) do
+        let(:exception_message) do
           <<~TEXT
             When `kwargs` with `data` key are passed to `failure` method, they can NOT contain non JSend keys like `:non_jsend_key`.
 
@@ -62,7 +62,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultShortSyntax::F
         it "raises `ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Failure::Exceptions::KwargsContainNonJSendKey`" do
           expect { command_result }
             .to raise_error(ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Failure::Exceptions::KwargsContainNonJSendKey)
-            .with_message(error_message)
+            .with_message(exception_message)
         end
       end
     end

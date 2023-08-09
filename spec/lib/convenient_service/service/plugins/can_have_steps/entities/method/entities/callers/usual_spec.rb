@@ -62,7 +62,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
       context "when container does NOT have defined method" do
         let(:service_class) { Class.new }
 
-        let(:error_message) do
+        let(:exception_message) do
           <<~TEXT
             `in` method `#{method.name}` is NOT defined in `#{container.klass}`.
 
@@ -73,7 +73,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
         it "raises `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::InputMethodIsNotDefinedInContainer`" do
           expect { caller.validate_as_input_for_container!(container, method: method) }
             .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::InputMethodIsNotDefinedInContainer)
-            .with_message(error_message)
+            .with_message(exception_message)
         end
       end
 
@@ -96,7 +96,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
       end
 
       context "when container has defined method" do
-        let(:error_message) do
+        let(:exception_message) do
           <<~TEXT
             `out` method `#{method.name}` is already defined in `#{container.klass}`.
 
@@ -107,7 +107,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
         it "raises `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::OutputMethodIsDefinedInContainer`" do
           expect { caller.validate_as_output_for_container!(container, method: method) }
             .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::OutputMethodIsDefinedInContainer)
-            .with_message(error_message)
+            .with_message(exception_message)
         end
       end
     end

@@ -40,7 +40,7 @@ RSpec.describe ConvenientService::Utils::Array::Merge do
       context "when `overrides` contains non integer keys" do
         let(:overrides) { {:a => :foo, 1 => :bar} }
 
-        let(:error_message) do
+        let(:exception_message) do
           <<~TEXT
             Index `:a` is NOT an integer.
           TEXT
@@ -60,7 +60,7 @@ RSpec.describe ConvenientService::Utils::Array::Merge do
           it "raises `ConvenientService::Utils::Array::Exceptions::NonIntegerIndex`" do
             expect { result }
               .to raise_error(ConvenientService::Utils::Array::Exceptions::NonIntegerIndex)
-              .with_message(error_message)
+              .with_message(exception_message)
           end
         end
 
@@ -70,7 +70,7 @@ RSpec.describe ConvenientService::Utils::Array::Merge do
           it "raises `ConvenientService::Utils::Array::Exceptions::NonIntegerIndex`" do
             expect { result }
               .to raise_error(ConvenientService::Utils::Array::Exceptions::NonIntegerIndex)
-              .with_message(error_message)
+              .with_message(exception_message)
           end
         end
       end

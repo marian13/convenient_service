@@ -464,7 +464,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
       end
 
       context "when call original chaining is already used" do
-        let(:error_message) do
+        let(:exception_message) do
           <<~TEXT
             Call original chaining is already set.
 
@@ -479,7 +479,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
         it "raises error `ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::ChainingsCollection::Exceptions::CallOriginalChainingIsAlreadySet`" do
           expect { chainings_collection.call_original = call_original_chaining }
             .to raise_error(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::ChainingsCollection::Exceptions::CallOriginalChainingIsAlreadySet)
-            .with_message(error_message)
+            .with_message(exception_message)
         end
       end
     end
@@ -498,7 +498,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
       end
 
       context "when arguments chaining is already used" do
-        let(:error_message) do
+        let(:exception_message) do
           <<~TEXT
             Arguments chaining is already set.
 
@@ -513,7 +513,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
         it "raises error `ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::ChainingsCollection::Exceptions::ArgumentsChainingIsAlreadySet`" do
           expect { chainings_collection.arguments = arguments_chaining }
             .to raise_error(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::ChainingsCollection::Exceptions::ArgumentsChainingIsAlreadySet)
-            .with_message(error_message)
+            .with_message(exception_message)
         end
       end
     end
@@ -532,7 +532,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
       end
 
       context "when return its value chaining is already used" do
-        let(:error_message) do
+        let(:exception_message) do
           <<~TEXT
             Returns its value chaining is already set.
 
@@ -547,7 +547,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities:
         it "raises error `ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::ChainingsCollection::Exceptions::ReturnItsValueChainingIsAlreadySet`" do
           expect { chainings_collection.return_its_value = return_its_value_chaining }
             .to raise_error(ConvenientService::RSpec::Matchers::Custom::DelegateTo::Entities::Matcher::Entities::ChainingsCollection::Exceptions::ReturnItsValueChainingIsAlreadySet)
-            .with_message(error_message)
+            .with_message(exception_message)
         end
       end
     end

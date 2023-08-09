@@ -303,7 +303,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
       context "when `method` does NOT have `organizer`" do
         let(:method_instance) { method_class.new(**ConvenientService::Utils::Hash.except(method_kwargs, [:organizer])) }
 
-        let(:error_message) do
+        let(:exception_message) do
           <<~TEXT
             Organizer for method `:#{method.name}` is NOT assigned yet.
 
@@ -314,7 +314,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
         it "returns `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::MethodHasNoOrganizer`" do
           expect { method.value }
             .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::MethodHasNoOrganizer)
-            .with_message(error_message)
+            .with_message(exception_message)
         end
       end
 

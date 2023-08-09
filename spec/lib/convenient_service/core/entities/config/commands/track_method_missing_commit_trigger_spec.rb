@@ -39,7 +39,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Commands::TrackMethodM
           end
 
           context "when `method_missing` counter is NOT incremented" do
-            let(:error_message) do
+            let(:exception_message) do
               <<~TEXT
                 `#{config.klass}` config is committed too many times from `method_missing`.
 
@@ -67,7 +67,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Commands::TrackMethodM
             it "raises `ConvenientService::Core::Entities::Config::Exceptions::TooManyCommitsFromMethodMissing`" do
               expect { command_result }
                 .to raise_error(ConvenientService::Core::Entities::Config::Exceptions::TooManyCommitsFromMethodMissing)
-                .with_message(error_message)
+                .with_message(exception_message)
             end
           end
 
@@ -94,7 +94,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Commands::TrackMethodM
           end
 
           context "when `method_missing` counter is NOT incremented" do
-            let(:error_message) do
+            let(:exception_message) do
               <<~TEXT
                 `#{config.klass}` config is committed too many times from `method_missing`.
 
@@ -122,7 +122,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Commands::TrackMethodM
             it "raises `ConvenientService::Core::Entities::Config::Exceptions::TooManyCommitsFromMethodMissing`" do
               expect { command_result }
                 .to raise_error(ConvenientService::Core::Entities::Config::Exceptions::TooManyCommitsFromMethodMissing)
-                .with_message(error_message)
+                .with_message(exception_message)
             end
           end
 

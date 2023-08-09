@@ -33,7 +33,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
     describe "#validate_as_input_for_container!" do
       let(:options) { {direction: :input} }
 
-      let(:error_message) do
+      let(:exception_message) do
         <<~TEXT
           Method `#{method.name}` is NOT an `in` method.
         TEXT
@@ -42,7 +42,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
       it "raises `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::MethodIsNotInputMethod`" do
         expect { direction.validate_as_input_for_container!(container, method: method) }
           .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::MethodIsNotInputMethod)
-          .with_message(error_message)
+          .with_message(exception_message)
       end
     end
 

@@ -86,7 +86,7 @@ RSpec.describe ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue
           end
         end
 
-        let(:error_message) do
+        let(:exception_message) do
           <<~TEXT
             Return value of service `#{service_class}` is NOT a `Result`.
             It is `String`.
@@ -98,7 +98,7 @@ RSpec.describe ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue
         it "raises `ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Exceptions::ReturnValueNotKindOfResult`" do
           expect { method_value }
             .to raise_error(ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Exceptions::ReturnValueNotKindOfResult)
-            .with_message(error_message)
+            .with_message(exception_message)
         end
       end
 

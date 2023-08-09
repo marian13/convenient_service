@@ -87,7 +87,7 @@ RSpec.describe ConvenientService::Service::Plugins::RaisesOnDoubleResult::Middle
           service_instance.internals.cache.write(:has_j_send_result, true)
         end
 
-        let(:error_message) do
+        let(:exception_message) do
           <<~TEXT
             `#{service_class}` service has a double result.
 
@@ -109,7 +109,7 @@ RSpec.describe ConvenientService::Service::Plugins::RaisesOnDoubleResult::Middle
         it "raises `ConvenientService::Service::Plugins::RaisesOnDoubleResult::Exceptions::DoubleResult`" do
           expect { method_value }
             .to raise_error(ConvenientService::Service::Plugins::RaisesOnDoubleResult::Exceptions::DoubleResult)
-            .with_message(error_message)
+            .with_message(exception_message)
         end
 
         ##

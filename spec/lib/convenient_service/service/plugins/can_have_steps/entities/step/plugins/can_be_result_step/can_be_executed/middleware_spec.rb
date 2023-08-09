@@ -121,7 +121,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
             end
           end
 
-          let(:error_message) do
+          let(:exception_message) do
             <<~TEXT
               Service `#{container}` tries to use `:result` method in a step, but it is NOT defined.
 
@@ -132,7 +132,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           it "raises `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeResultStep::CanBeExecuted::Exceptions::MethodForStepIsNotDefined`" do
             expect { method_value }
               .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeResultStep::CanBeExecuted::Exceptions::MethodForStepIsNotDefined)
-              .with_message(error_message)
+              .with_message(exception_message)
           end
         end
 

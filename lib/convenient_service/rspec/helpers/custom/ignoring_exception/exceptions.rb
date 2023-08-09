@@ -6,14 +6,14 @@ module ConvenientService
       module Custom
         class IgnoringException < Support::Command
           module Exceptions
-            class IgnoredErrorIsNotRaised < ::ConvenientService::Exception
+            class IgnoredExceptionIsNotRaised < ::ConvenientService::Exception
               ##
-              # @param error [Exception]
+              # @param exception [StandardError]
               # @return [void]
               #
-              def initialize(error:)
+              def initialize(exception:)
                 message = <<~TEXT
-                  Error `#{error}` is NOT raised. That is why it is NOT ignored.
+                  Exception `#{exception}` is NOT raised. That is why it is NOT ignored.
                 TEXT
 
                 super(message)

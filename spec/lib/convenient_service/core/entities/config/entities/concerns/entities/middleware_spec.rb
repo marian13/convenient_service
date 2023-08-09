@@ -109,7 +109,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns::En
               end
             end
 
-            let(:error_message) do
+            let(:exception_message) do
               <<~TEXT
                 `#{described_class}` should implement abstract class method `concern`.
               TEXT
@@ -118,7 +118,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns::En
             it "raises `ConvenientService::Support::AbstractMethod::Exceptions::AbstractMethodNotOverridden`" do
               expect { described_class == other }
                 .to raise_error(ConvenientService::Support::AbstractMethod::Exceptions::AbstractMethodNotOverridden)
-                .with_message(error_message)
+                .with_message(exception_message)
             end
           end
         end

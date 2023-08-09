@@ -102,7 +102,7 @@ RSpec.describe ConvenientService::Utils::Module::GetOwnInstanceMethod do
 
         let(:max_iteration_count) { 2 }
 
-        let(:error_message) do
+        let(:exception_message) do
           <<~TEXT
             Max iteration count is exceeded. Current limit is #{max_iteration_count}.
 
@@ -117,7 +117,7 @@ RSpec.describe ConvenientService::Utils::Module::GetOwnInstanceMethod do
         it "raises `ConvenientService::Support::FiniteLoop::Exceptions::MaxIterationCountExceeded`" do
           expect { described_class.call(klass, method_name) }
             .to raise_error(ConvenientService::Support::FiniteLoop::Exceptions::MaxIterationCountExceeded)
-            .with_message(error_message)
+            .with_message(exception_message)
         end
 
         it "supports `max_iteration_count` option" do

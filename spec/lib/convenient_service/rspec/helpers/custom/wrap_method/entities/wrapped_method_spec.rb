@@ -60,7 +60,7 @@ RSpec.xdescribe ConvenientService::RSpec::Helpers::Custom::WrapMethod::Entities:
 
     describe "#chain_value" do
       context "when chain is NOT called" do
-        let(:error_message) do
+        let(:exception_message) do
           <<~TEXT
             Chain attribute `value` is accessed before the chain is called.
           TEXT
@@ -69,7 +69,7 @@ RSpec.xdescribe ConvenientService::RSpec::Helpers::Custom::WrapMethod::Entities:
         it "raises `ConvenientService::RSpec::Helpers::Custom::WrapMethod::Exceptions::ChainAttributePreliminaryAccess`" do
           expect { method.chain_value }
             .to raise_error(ConvenientService::RSpec::Helpers::Custom::WrapMethod::Exceptions::ChainAttributePreliminaryAccess)
-            .with_message(error_message)
+            .with_message(exception_message)
         end
       end
 
@@ -98,7 +98,7 @@ RSpec.xdescribe ConvenientService::RSpec::Helpers::Custom::WrapMethod::Entities:
       end
 
       context "when chain is NOT called" do
-        let(:error_message) do
+        let(:exception_message) do
           <<~TEXT
             Chain attribute `args` is accessed before the chain is called.
           TEXT
@@ -107,7 +107,7 @@ RSpec.xdescribe ConvenientService::RSpec::Helpers::Custom::WrapMethod::Entities:
         it "raises `ConvenientService::RSpec::Helpers::Custom::WrapMethod::Exceptions::ChainAttributePreliminaryAccess`" do
           expect { method.chain_args }
             .to raise_error(ConvenientService::RSpec::Helpers::Custom::WrapMethod::Exceptions::ChainAttributePreliminaryAccess)
-            .with_message(error_message)
+            .with_message(exception_message)
         end
       end
 
@@ -136,7 +136,7 @@ RSpec.xdescribe ConvenientService::RSpec::Helpers::Custom::WrapMethod::Entities:
       end
 
       context "when chain is NOT called" do
-        let(:error_message) do
+        let(:exception_message) do
           <<~TEXT
             Chain attribute `kwargs` is accessed before the chain is called.
           TEXT
@@ -145,7 +145,7 @@ RSpec.xdescribe ConvenientService::RSpec::Helpers::Custom::WrapMethod::Entities:
         it "raises `ConvenientService::RSpec::Helpers::Custom::WrapMethod::Exceptions::ChainAttributePreliminaryAccess`" do
           expect { method.chain_kwargs }
             .to raise_error(ConvenientService::RSpec::Helpers::Custom::WrapMethod::Exceptions::ChainAttributePreliminaryAccess)
-            .with_message(error_message)
+            .with_message(exception_message)
         end
       end
 
@@ -174,7 +174,7 @@ RSpec.xdescribe ConvenientService::RSpec::Helpers::Custom::WrapMethod::Entities:
       end
 
       context "when chain is NOT called" do
-        let(:error_message) do
+        let(:exception_message) do
           <<~TEXT
             Chain attribute `block` is accessed before the chain is called.
           TEXT
@@ -183,7 +183,7 @@ RSpec.xdescribe ConvenientService::RSpec::Helpers::Custom::WrapMethod::Entities:
         it "raises `ConvenientService::RSpec::Helpers::Custom::WrapMethod::Exceptions::ChainAttributePreliminaryAccess`" do
           expect { method.chain_block }
             .to raise_error(ConvenientService::RSpec::Helpers::Custom::WrapMethod::Exceptions::ChainAttributePreliminaryAccess)
-            .with_message(error_message)
+            .with_message(exception_message)
         end
       end
 
@@ -218,7 +218,7 @@ RSpec.xdescribe ConvenientService::RSpec::Helpers::Custom::WrapMethod::Entities:
       end
 
       context "when chain is NOT called" do
-        let(:error_message) do
+        let(:exception_message) do
           <<~TEXT
             Chain attribute `exception` is accessed before the chain is called.
           TEXT
@@ -227,7 +227,7 @@ RSpec.xdescribe ConvenientService::RSpec::Helpers::Custom::WrapMethod::Entities:
         it "raises `ConvenientService::RSpec::Helpers::Custom::WrapMethod::Exceptions::ChainAttributePreliminaryAccess`" do
           expect { method.chain_exception }
             .to raise_error(ConvenientService::RSpec::Helpers::Custom::WrapMethod::Exceptions::ChainAttributePreliminaryAccess)
-            .with_message(error_message)
+            .with_message(exception_message)
         end
       end
 

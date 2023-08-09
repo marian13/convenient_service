@@ -62,7 +62,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
         end
 
         context "when step is NOT completed" do
-          let(:error_message) do
+          let(:exception_message) do
             <<~TEXT
               `out` method `#{method}` is called before its corresponding step `#{step.printable_service}` is completed.
 
@@ -73,7 +73,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
           it "raises `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::NotCompletedStep`" do
             expect { organizer_service_instance.bar }
               .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::NotCompletedStep)
-              .with_message(error_message)
+              .with_message(exception_message)
           end
         end
 
@@ -89,7 +89,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
             let(:out) { {key => :bar} }
             let(:key) { :baz }
 
-            let(:error_message) do
+            let(:exception_message) do
               <<~TEXT
                 Step `#{step.printable_service}` result does NOT return `#{key}` data attribute.
 
@@ -102,7 +102,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
             it "returns step service result data attribute by key" do
               expect { organizer_service_instance.bar }
                 .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::NotExistingStepResultDataAttribute)
-                .with_message(error_message)
+                .with_message(exception_message)
             end
 
             specify do
