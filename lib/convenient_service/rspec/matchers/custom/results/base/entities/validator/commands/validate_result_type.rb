@@ -73,6 +73,8 @@ module ConvenientService
                     #   TODO: `commands.IsResult`.
                     #
                     def call
+                      return false unless matcher.result
+
                       commands.is_result?(result)
                     end
                   end

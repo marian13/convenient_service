@@ -67,6 +67,8 @@ module ConvenientService
                     #   IMPORTANT: Result status is NOT marked as checked intentionally, since it is a mutable operation.
                     #
                     def call
+                      return false unless matcher.result
+
                       result.status.in?(casted_statuses)
                     end
 

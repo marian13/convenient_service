@@ -70,10 +70,8 @@ module ConvenientService
                     #
                     # @return [Boolean]
                     #
-                    # @internal
-                    #   TODO: Failed to cast.
-                    #
                     def call
+                      return false unless matcher.result
                       return true unless chain.used_code?
 
                       casted_code.public_send(comparison_method, result.unsafe_code)

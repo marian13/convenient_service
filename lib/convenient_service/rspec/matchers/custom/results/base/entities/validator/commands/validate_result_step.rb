@@ -68,6 +68,7 @@ module ConvenientService
                     #   TODO: Import via commands.
                     #
                     def call
+                      return false unless matcher.result
                       return true unless chain.used_step?
 
                       case step

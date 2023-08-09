@@ -24,8 +24,16 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Entiti
 
       let(:result) { service.result }
 
-      context "when step chain is NOT used" do
+      context "when matcher has NO result" do
         let(:matcher) { be_success }
+
+        it "returns `false`" do
+          expect(command_result).to eq(false)
+        end
+      end
+
+      context "when step chain is NOT used" do
+        let(:matcher) { be_success.tap { |matcher| matcher.matches?(result) } }
 
         it "returns `true`" do
           expect(command_result).to eq(true)
