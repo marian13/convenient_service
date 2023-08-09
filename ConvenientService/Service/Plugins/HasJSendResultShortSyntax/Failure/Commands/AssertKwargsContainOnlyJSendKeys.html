@@ -343,7 +343,7 @@
     <li>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="../Errors/KwargsContainNonJSendKey.html" title="ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Failure::Errors::KwargsContainNonJSendKey (class)">ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Failure::Errors::KwargsContainNonJSendKey</a></span></tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="../Exceptions/KwargsContainNonJSendKey.html" title="ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Failure::Exceptions::KwargsContainNonJSendKey (class)">ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Failure::Exceptions::KwargsContainNonJSendKey</a></span></tt>)</span>
       
       
       
@@ -365,7 +365,7 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result_short_syntax/failure/commands/assert_kwargs_contain_only_j_send_keys.rb', line 28</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span>
-  <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="../../../../../Support/Command/Errors.html" title="ConvenientService::Support::Command::Errors (module)">Errors</a></span></span><span class='op'>::</span><span class='const'>KwargsContainNonJSendKey</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='label'>key:</span> <span class='id identifier rubyid_non_jsend_keys'>non_jsend_keys</span><span class='period'>.</span><span class='id identifier rubyid_first'>first</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_non_jsend_keys'>non_jsend_keys</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span>
+  <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="../../../../../Support/Command/Exceptions.html" title="ConvenientService::Support::Command::Exceptions (module)">Exceptions</a></span></span><span class='op'>::</span><span class='const'>KwargsContainNonJSendKey</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='label'>key:</span> <span class='id identifier rubyid_non_jsend_keys'>non_jsend_keys</span><span class='period'>.</span><span class='id identifier rubyid_first'>first</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_non_jsend_keys'>non_jsend_keys</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -377,7 +377,7 @@
 </div>
 
       <div id="footer">
-  Generated on Tue Aug  8 23:48:52 2023 by
+  Generated on Wed Aug  9 18:34:13 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>

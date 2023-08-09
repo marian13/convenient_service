@@ -107,7 +107,7 @@
 <p class="children">
   
     
-      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Counter/Errors.html" title="ConvenientService::Support::Counter::Errors (module)">Errors</a></span>
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Counter/Exceptions.html" title="ConvenientService::Support::Counter::Exceptions (module)">Exceptions</a></span>
     
   
     
@@ -1005,7 +1005,7 @@ If incremented successfully then returns <code>true</code>, otherwise - returns 
     <li>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="Counter/Errors/ValueAfterDecrementIsLowerThanMinValue.html" title="ConvenientService::Support::Counter::Errors::ValueAfterDecrementIsLowerThanMinValue (class)">ConvenientService::Support::ThreadSafeCounter::Errors::ValueAfterDecrementIsLowerThanMinValue</a></span></tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="Counter/Exceptions/ValueAfterDecrementIsLowerThanMinValue.html" title="ConvenientService::Support::Counter::Exceptions::ValueAfterDecrementIsLowerThanMinValue (class)">ConvenientService::Support::ThreadSafeCounter::Exceptions::ValueAfterDecrementIsLowerThanMinValue</a></span></tt>)</span>
       
       
       
@@ -1029,7 +1029,7 @@ If incremented successfully then returns <code>true</code>, otherwise - returns 
       <pre class="code"><span class="info file"># File 'lib/convenient_service/support/counter.rb', line 178</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_decrement!'>decrement!</span><span class='lparen'>(</span><span class='id identifier rubyid_n'>n</span> <span class='op'>=</span> <span class='int'>1</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="Counter/Errors.html" title="ConvenientService::Support::Counter::Errors (module)">Errors</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Counter/Errors/ValueAfterDecrementIsLowerThanMinValue.html" title="ConvenientService::Support::Counter::Errors::ValueAfterDecrementIsLowerThanMinValue (class)">ValueAfterDecrementIsLowerThanMinValue</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Counter/Errors/ValueAfterDecrementIsLowerThanMinValue.html#initialize-instance_method" title="ConvenientService::Support::Counter::Errors::ValueAfterDecrementIsLowerThanMinValue#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>n:</span> <span class='id identifier rubyid_n'>n</span><span class='comma'>,</span> <span class='label'>current_value:</span> <span class='ivar'>@current_value</span><span class='comma'>,</span> <span class='label'>min_value:</span> <span class='ivar'>@min_value</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='ivar'>@current_value</span> <span class='op'>-</span> <span class='id identifier rubyid_n'>n</span> <span class='op'>&lt;</span> <span class='ivar'>@min_value</span>
+  <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="Counter/Exceptions.html" title="ConvenientService::Support::Counter::Exceptions (module)">Exceptions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Counter/Exceptions/ValueAfterDecrementIsLowerThanMinValue.html" title="ConvenientService::Support::Counter::Exceptions::ValueAfterDecrementIsLowerThanMinValue (class)">ValueAfterDecrementIsLowerThanMinValue</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Counter/Exceptions/ValueAfterDecrementIsLowerThanMinValue.html#initialize-instance_method" title="ConvenientService::Support::Counter::Exceptions::ValueAfterDecrementIsLowerThanMinValue#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>n:</span> <span class='id identifier rubyid_n'>n</span><span class='comma'>,</span> <span class='label'>current_value:</span> <span class='ivar'>@current_value</span><span class='comma'>,</span> <span class='label'>min_value:</span> <span class='ivar'>@min_value</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='ivar'>@current_value</span> <span class='op'>-</span> <span class='id identifier rubyid_n'>n</span> <span class='op'>&lt;</span> <span class='ivar'>@min_value</span>
 
   <span class='ivar'>@current_value</span> <span class='op'>-=</span> <span class='id identifier rubyid_n'>n</span>
 <span class='kw'>end</span></pre>
@@ -1164,7 +1164,7 @@ If incremented successfully then returns <code>true</code>, otherwise - returns 
     <li>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="Counter/Errors/ValueAfterIncrementIsGreaterThanMaxValue.html" title="ConvenientService::Support::Counter::Errors::ValueAfterIncrementIsGreaterThanMaxValue (class)">ConvenientService::Support::ThreadSafeCounter::Errors::ValueAfterIncrementIsGreaterThanMaxValue</a></span></tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="Counter/Exceptions/ValueAfterIncrementIsGreaterThanMaxValue.html" title="ConvenientService::Support::Counter::Exceptions::ValueAfterIncrementIsGreaterThanMaxValue (class)">ConvenientService::Support::ThreadSafeCounter::Exceptions::ValueAfterIncrementIsGreaterThanMaxValue</a></span></tt>)</span>
       
       
       
@@ -1188,7 +1188,7 @@ If incremented successfully then returns <code>true</code>, otherwise - returns 
       <pre class="code"><span class="info file"># File 'lib/convenient_service/support/counter.rb', line 125</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_increment!'>increment!</span><span class='lparen'>(</span><span class='id identifier rubyid_n'>n</span> <span class='op'>=</span> <span class='int'>1</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="Counter/Errors.html" title="ConvenientService::Support::Counter::Errors (module)">Errors</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Counter/Errors/ValueAfterIncrementIsGreaterThanMaxValue.html" title="ConvenientService::Support::Counter::Errors::ValueAfterIncrementIsGreaterThanMaxValue (class)">ValueAfterIncrementIsGreaterThanMaxValue</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Counter/Errors/ValueAfterIncrementIsGreaterThanMaxValue.html#initialize-instance_method" title="ConvenientService::Support::Counter::Errors::ValueAfterIncrementIsGreaterThanMaxValue#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>n:</span> <span class='id identifier rubyid_n'>n</span><span class='comma'>,</span> <span class='label'>current_value:</span> <span class='ivar'>@current_value</span><span class='comma'>,</span> <span class='label'>max_value:</span> <span class='ivar'>@max_value</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='ivar'>@current_value</span> <span class='op'>+</span> <span class='id identifier rubyid_n'>n</span> <span class='op'>&gt;</span> <span class='ivar'>@max_value</span>
+  <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="Counter/Exceptions.html" title="ConvenientService::Support::Counter::Exceptions (module)">Exceptions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Counter/Exceptions/ValueAfterIncrementIsGreaterThanMaxValue.html" title="ConvenientService::Support::Counter::Exceptions::ValueAfterIncrementIsGreaterThanMaxValue (class)">ValueAfterIncrementIsGreaterThanMaxValue</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Counter/Exceptions/ValueAfterIncrementIsGreaterThanMaxValue.html#initialize-instance_method" title="ConvenientService::Support::Counter::Exceptions::ValueAfterIncrementIsGreaterThanMaxValue#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>n:</span> <span class='id identifier rubyid_n'>n</span><span class='comma'>,</span> <span class='label'>current_value:</span> <span class='ivar'>@current_value</span><span class='comma'>,</span> <span class='label'>max_value:</span> <span class='ivar'>@max_value</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='ivar'>@current_value</span> <span class='op'>+</span> <span class='id identifier rubyid_n'>n</span> <span class='op'>&gt;</span> <span class='ivar'>@max_value</span>
 
   <span class='ivar'>@current_value</span> <span class='op'>+=</span> <span class='id identifier rubyid_n'>n</span>
 <span class='kw'>end</span></pre>
@@ -1232,7 +1232,7 @@ If incremented successfully then returns <code>true</code>, otherwise - returns 
 </div>
 
       <div id="footer">
-  Generated on Tue Aug  8 23:48:39 2023 by
+  Generated on Wed Aug  9 18:34:00 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>

@@ -426,7 +426,7 @@
     <li>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="../Errors/ProtoEntityHasNoName.html" title="ConvenientService::Common::Plugins::CanHaveUserProvidedEntity::Errors::ProtoEntityHasNoName (class)">Errors::ProtoEntityHasNoName</a></span></tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="../Exceptions/ProtoEntityHasNoName.html" title="ConvenientService::Common::Plugins::CanHaveUserProvidedEntity::Exceptions::ProtoEntityHasNoName (class)">Exceptions::ProtoEntityHasNoName</a></span></tt>)</span>
       
       
       
@@ -495,8 +495,8 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/can_have_user_provided_entity/commands/find_or_create_entity.rb', line 34</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span>
-  <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="../../../../Support/Command/Errors.html" title="ConvenientService::Support::Command::Errors (module)">Errors</a></span></span><span class='op'>::</span><span class='const'>ProtoEntityHasNoName</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='label'>proto_entity:</span> <span class='id identifier rubyid_proto_entity'>proto_entity</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_proto_entity_name'>proto_entity_name</span>
-  <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="../../../../Support/Command/Errors.html" title="ConvenientService::Support::Command::Errors (module)">Errors</a></span></span><span class='op'>::</span><span class='const'>ProtoEntityHasNoConcern</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='label'>proto_entity:</span> <span class='id identifier rubyid_proto_entity'>proto_entity</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_proto_entity_concern'>proto_entity_concern</span>
+  <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="../../../../Support/Command/Exceptions.html" title="ConvenientService::Support::Command::Exceptions (module)">Exceptions</a></span></span><span class='op'>::</span><span class='const'>ProtoEntityHasNoName</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='label'>proto_entity:</span> <span class='id identifier rubyid_proto_entity'>proto_entity</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_proto_entity_name'>proto_entity_name</span>
+  <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="../../../../Support/Command/Exceptions.html" title="ConvenientService::Support::Command::Exceptions (module)">Exceptions</a></span></span><span class='op'>::</span><span class='const'>ProtoEntityHasNoConcern</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='label'>proto_entity:</span> <span class='id identifier rubyid_proto_entity'>proto_entity</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_proto_entity_concern'>proto_entity_concern</span>
 
   <span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_include'>include</span> <span class='const'><span class='object_link'><a href="../../../../Core.html" title="ConvenientService::Core (module)">Core</a></span></span>
 
@@ -554,7 +554,7 @@
 </div>
 
       <div id="footer">
-  Generated on Tue Aug  8 23:48:49 2023 by
+  Generated on Wed Aug  9 18:34:10 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>
