@@ -4,7 +4,7 @@
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>
-  Exception: ConvenientService::RSpec::Helpers::Custom::IgnoringError::Exceptions::IgnoredErrorIsNotRaised
+  Exception: ConvenientService::RSpec::Helpers::Custom::IgnoringException::Exceptions::IgnoredExceptionIsNotRaised
   
     &mdash; Documentation by YARD 0.9.34
   
@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="../../../../../../css/common.css" type="text/css" />
 
 <script type="text/javascript">
-  pathId = "ConvenientService::RSpec::Helpers::Custom::IgnoringError::Exceptions::IgnoredErrorIsNotRaised";
+  pathId = "ConvenientService::RSpec::Helpers::Custom::IgnoringException::Exceptions::IgnoredExceptionIsNotRaised";
   relpath = '../../../../../../';
 </script>
 
@@ -37,9 +37,9 @@
         <div id="menu">
   
     <a href="../../../../../../_index.html">Index (I)</a> &raquo;
-    <span class='title'><span class='object_link'><a href="../../../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../../../RSpec.html" title="ConvenientService::RSpec (module)">RSpec</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../../Helpers.html" title="ConvenientService::RSpec::Helpers (module)">Helpers</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Custom.html" title="ConvenientService::RSpec::Helpers::Custom (module)">Custom</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../IgnoringError.html" title="ConvenientService::RSpec::Helpers::Custom::IgnoringError (class)">IgnoringError</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Exceptions.html" title="ConvenientService::RSpec::Helpers::Custom::IgnoringError::Exceptions (module)">Exceptions</a></span></span>
+    <span class='title'><span class='object_link'><a href="../../../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../../../RSpec.html" title="ConvenientService::RSpec (module)">RSpec</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../../Helpers.html" title="ConvenientService::RSpec::Helpers (module)">Helpers</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Custom.html" title="ConvenientService::RSpec::Helpers::Custom (module)">Custom</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../IgnoringException.html" title="ConvenientService::RSpec::Helpers::Custom::IgnoringException (class)">IgnoringException</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Exceptions.html" title="ConvenientService::RSpec::Helpers::Custom::IgnoringException::Exceptions (module)">Exceptions</a></span></span>
      &raquo; 
-    <span class="title">IgnoredErrorIsNotRaised</span>
+    <span class="title">IgnoredExceptionIsNotRaised</span>
   
 </div>
 
@@ -59,7 +59,7 @@
         <div class="clear"></div>
       </div>
 
-      <div id="content"><h1>Exception: ConvenientService::RSpec::Helpers::Custom::IgnoringError::Exceptions::IgnoredErrorIsNotRaised
+      <div id="content"><h1>Exception: ConvenientService::RSpec::Helpers::Custom::IgnoringException::Exceptions::IgnoredExceptionIsNotRaised
   
   
   
@@ -78,7 +78,7 @@
           
             <li class="next"><span class='object_link'><a href="../../../../../Exception.html" title="ConvenientService::Exception (class)">Exception</a></span></li>
           
-            <li class="next">ConvenientService::RSpec::Helpers::Custom::IgnoringError::Exceptions::IgnoredErrorIsNotRaised</li>
+            <li class="next">ConvenientService::RSpec::Helpers::Custom::IgnoringException::Exceptions::IgnoredExceptionIsNotRaised</li>
           
         </ul>
         <a href="#" class="inheritanceTree">show all</a>
@@ -98,7 +98,7 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/convenient_service/rspec/helpers/custom/ignoring_error/exceptions.rb</dd>
+    <dd>lib/convenient_service/rspec/helpers/custom/ignoring_exception/exceptions.rb</dd>
   </dl>
   
 </div>
@@ -145,7 +145,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(error:)  &#x21d2; void </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(exception:)  &#x21d2; void </a>
     
 
     
@@ -182,7 +182,7 @@
     <div class="method_details first">
   <h3 class="signature first" id="initialize-instance_method">
   
-    #<strong>initialize</strong>(error:)  &#x21d2; <tt>void</tt> 
+    #<strong>initialize</strong>(exception:)  &#x21d2; <tt>void</tt> 
   
 
   
@@ -200,10 +200,10 @@
   
     <li>
       
-        <span class='name'>error</span>
+        <span class='name'>exception</span>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="../../../../../Exception.html" title="ConvenientService::Exception (class)">Exception</a></span></tt>)</span>
+        <span class='type'>(<tt>StandardError</tt>)</span>
       
       
       
@@ -242,11 +242,11 @@
 20</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/custom/ignoring_error/exceptions.rb', line 14</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/custom/ignoring_exception/exceptions.rb', line 14</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>error:</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>exception:</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_message'>message</span> <span class='op'>=</span> <span class='heredoc_beg'>&lt;&lt;~TEXT</span>
-<span class='tstring_content'>    Error `</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_error'>error</span><span class='embexpr_end'>}</span><span class='tstring_content'>` is NOT raised. That is why it is NOT ignored.
+<span class='tstring_content'>    Exception `</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_exception'>exception</span><span class='embexpr_end'>}</span><span class='tstring_content'>` is NOT raised. That is why it is NOT ignored.
 </span><span class='heredoc_end'>  TEXT
 </span>
   <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_message'>message</span><span class='rparen'>)</span>
@@ -262,7 +262,7 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Aug  9 18:34:04 2023 by
+  Generated on Wed Aug  9 19:55:17 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>
