@@ -37,7 +37,7 @@ RSpec.describe ConvenientService::Service::Plugins::CollectsServicesInException:
 
   example_group "instance methods" do
     describe "#call" do
-      include ConvenientService::RSpec::Helpers::IgnoringError
+      include ConvenientService::RSpec::Helpers::IgnoringException
       include ConvenientService::RSpec::Helpers::WrapMethod
 
       include ConvenientService::RSpec::Matchers::CallChainNext
@@ -106,7 +106,7 @@ RSpec.describe ConvenientService::Service::Plugins::CollectsServicesInException:
           it "defines `:services` singleton method on exception" do
             allow(service_instance).to receive(:exception).and_return(exception)
 
-            expect { ignoring_error(exception_class) { method_value } }.to change { exception.respond_to?(:services) }.from(false).to(true)
+            expect { ignoring_exception(exception_class) { method_value } }.to change { exception.respond_to?(:services) }.from(false).to(true)
           end
 
           specify do
@@ -115,9 +115,9 @@ RSpec.describe ConvenientService::Service::Plugins::CollectsServicesInException:
             ##
             # NOTE: Called in order to define `services` method on exception.
             #
-            ignoring_error(exception_class) { method.call }
+            ignoring_exception(exception_class) { method.call }
 
-            expect { ignoring_error(exception_class) { method.call } }
+            expect { ignoring_exception(exception_class) { method.call } }
               .to delegate_to(ConvenientService::Utils::Array, :limited_push)
               .with_arguments(exception.services, service_details, limit: ConvenientService::Service::Plugins::CollectsServicesInException::Constants::DEFAULT_MAX_SERVICES_SIZE)
           end
@@ -125,14 +125,14 @@ RSpec.describe ConvenientService::Service::Plugins::CollectsServicesInException:
           specify do
             allow(service_instance).to receive(:exception).and_return(exception)
 
-            expect { ignoring_error(exception_class) { method_value } }
+            expect { ignoring_exception(exception_class) { method_value } }
               .to delegate_to(ConvenientService::Service::Plugins::CollectsServicesInException::Commands::ExtractServiceDetails, :call)
               .with_arguments(service: service_instance, method: :result)
           end
 
           example_group "defined `:services` method" do
             it "returns services" do
-              ignoring_error(exception_class) { method_value }
+              ignoring_exception(exception_class) { method_value }
 
               expect(exception.services).to eq([service_details])
             end
@@ -155,7 +155,7 @@ RSpec.describe ConvenientService::Service::Plugins::CollectsServicesInException:
           it "reuses existing `:services` singleton method on exception" do
             allow(service_instance).to receive(:exception).and_return(exception)
 
-            ignoring_error(exception_class) { method_value }
+            ignoring_exception(exception_class) { method_value }
 
             expect(exception.services).to eq([:original_service, service_details])
           end
@@ -163,7 +163,7 @@ RSpec.describe ConvenientService::Service::Plugins::CollectsServicesInException:
           specify do
             allow(service_instance).to receive(:exception).and_return(exception)
 
-            expect { ignoring_error(exception_class) { method_value } }
+            expect { ignoring_exception(exception_class) { method_value } }
               .to delegate_to(ConvenientService::Service::Plugins::CollectsServicesInException::Commands::ExtractServiceDetails, :call)
               .with_arguments(service: service_instance, method: :result)
           end
@@ -171,7 +171,7 @@ RSpec.describe ConvenientService::Service::Plugins::CollectsServicesInException:
           specify do
             allow(service_instance).to receive(:exception).and_return(exception)
 
-            expect { ignoring_error(exception_class) { method_value } }
+            expect { ignoring_exception(exception_class) { method_value } }
               .to delegate_to(ConvenientService::Utils::Array, :limited_push)
               .with_arguments(exception.services, service_details, limit: ConvenientService::Service::Plugins::CollectsServicesInException::Constants::DEFAULT_MAX_SERVICES_SIZE)
           end
@@ -214,9 +214,9 @@ RSpec.describe ConvenientService::Service::Plugins::CollectsServicesInException:
             ##
             # NOTE: Called in order to define `services` method on exception.
             #
-            ignoring_error(exception_class) { method.call }
+            ignoring_exception(exception_class) { method.call }
 
-            expect { ignoring_error(exception_class) { method.call } }
+            expect { ignoring_exception(exception_class) { method.call } }
               .to delegate_to(ConvenientService::Utils::Array, :limited_push)
               .with_arguments(exception.services, service_details, limit: max_services_size)
           end

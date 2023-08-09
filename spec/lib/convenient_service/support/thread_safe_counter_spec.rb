@@ -6,7 +6,7 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Support::ThreadSafeCounter do
-  include ConvenientService::RSpec::Helpers::IgnoringError
+  include ConvenientService::RSpec::Helpers::IgnoringException
   include ConvenientService::RSpec::Helpers::InThreads
 
   let(:counter) { described_class.new(initial_value: initial_value, min_value: min_value, max_value: max_value) }
@@ -151,7 +151,7 @@ RSpec.describe ConvenientService::Support::ThreadSafeCounter do
         end
 
         it "does NOT changes current value" do
-          expect { ignoring_error(ConvenientService::Support::ThreadSafeCounter::Exceptions::ValueAfterIncrementIsGreaterThanMaxValue) { counter.increment!(n) } }.not_to change(counter, :current_value)
+          expect { ignoring_exception(ConvenientService::Support::ThreadSafeCounter::Exceptions::ValueAfterIncrementIsGreaterThanMaxValue) { counter.increment!(n) } }.not_to change(counter, :current_value)
         end
       end
 
@@ -268,7 +268,7 @@ RSpec.describe ConvenientService::Support::ThreadSafeCounter do
         end
 
         it "does NOT changes current value" do
-          expect { ignoring_error(ConvenientService::Support::ThreadSafeCounter::Exceptions::ValueAfterDecrementIsLowerThanMinValue) { counter.decrement!(n) } }.not_to change(counter, :current_value)
+          expect { ignoring_exception(ConvenientService::Support::ThreadSafeCounter::Exceptions::ValueAfterDecrementIsLowerThanMinValue) { counter.decrement!(n) } }.not_to change(counter, :current_value)
         end
       end
 

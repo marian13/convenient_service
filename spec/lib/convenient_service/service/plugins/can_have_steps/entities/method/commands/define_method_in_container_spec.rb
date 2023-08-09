@@ -6,7 +6,7 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Commands::DefineMethodInContainer do
-  include ConvenientService::RSpec::Helpers::IgnoringError
+  include ConvenientService::RSpec::Helpers::IgnoringException
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   ##
@@ -106,7 +106,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
             end
 
             specify do
-              expect { ignoring_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::NotExistingStepResultDataAttribute) { organizer_service_instance.bar } }
+              expect { ignoring_exception(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::NotExistingStepResultDataAttribute) { organizer_service_instance.bar } }
                 .to delegate_to(step.result.unsafe_data, :has_attribute?)
                 .with_arguments(method.key.to_sym)
             end

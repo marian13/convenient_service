@@ -6,7 +6,7 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Failure::Middleware do
-  include ConvenientService::RSpec::Helpers::IgnoringError
+  include ConvenientService::RSpec::Helpers::IgnoringException
 
   include ConvenientService::RSpec::Matchers::DelegateTo
 
@@ -120,7 +120,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultShortSyntax::F
           end
 
           specify do
-            expect { ignoring_error(ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Failure::Exceptions::KwargsContainNonJSendKey) { method_value } }
+            expect { ignoring_exception(ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Failure::Exceptions::KwargsContainNonJSendKey) { method_value } }
               .to delegate_to(ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Failure::Commands::AssertKwargsContainOnlyJSendKeys, :call)
               .with_arguments(kwargs: {data: {foo: :bar}, non_jsend_key: "anything"})
           end

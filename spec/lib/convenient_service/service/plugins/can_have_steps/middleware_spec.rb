@@ -6,7 +6,7 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Middleware do
-  include ConvenientService::RSpec::Helpers::IgnoringError
+  include ConvenientService::RSpec::Helpers::IgnoringException
 
   include ConvenientService::RSpec::Matchers::DelegateTo
 
@@ -150,11 +150,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Middleware do
           end
 
           it "does NOT mark intermediate step as completed before checking status" do
-            expect { ignoring_error(exception) { method_value } }.not_to change(service_instance.steps[0], :completed?).from(false)
+            expect { ignoring_exception(exception) { method_value } }.not_to change(service_instance.steps[0], :completed?).from(false)
           end
 
           it "does NOT trigger callback for intermediate step before checking status" do
-            expect { ignoring_error(exception) { method_value } }
+            expect { ignoring_exception(exception) { method_value } }
               .not_to delegate_to(service_instance.steps[0], :trigger_callback)
               .without_arguments
           end
@@ -239,21 +239,21 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Middleware do
           end
 
           it "does NOT mark intermediate step as completed before checking status" do
-            expect { ignoring_error(exception) { method_value } }.not_to change(service_instance.steps[0], :completed?).from(false)
+            expect { ignoring_exception(exception) { method_value } }.not_to change(service_instance.steps[0], :completed?).from(false)
           end
 
           it "does NOT trigger callback for intermediate step before checking status" do
-            expect { ignoring_error(exception) { method_value } }
+            expect { ignoring_exception(exception) { method_value } }
               .not_to delegate_to(service_instance.steps[0], :trigger_callback)
               .without_arguments
           end
 
           it "does NOT mark last step as completed before checking status" do
-            expect { ignoring_error(exception) { method_value } }.not_to change(service_instance.steps[1], :completed?).from(false)
+            expect { ignoring_exception(exception) { method_value } }.not_to change(service_instance.steps[1], :completed?).from(false)
           end
 
           it "does NOT trigger callback for last step before checking status" do
-            expect { ignoring_error(exception) { method_value } }
+            expect { ignoring_exception(exception) { method_value } }
               .not_to delegate_to(service_instance.steps[1], :trigger_callback)
               .without_arguments
           end

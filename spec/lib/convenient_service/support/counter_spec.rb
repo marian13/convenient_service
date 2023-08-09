@@ -6,7 +6,7 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Support::Counter do
-  include ConvenientService::RSpec::Helpers::IgnoringError
+  include ConvenientService::RSpec::Helpers::IgnoringException
 
   let(:counter) { described_class.new(initial_value: initial_value, min_value: min_value, max_value: max_value) }
   let(:initial_value) { 0 }
@@ -140,7 +140,7 @@ RSpec.describe ConvenientService::Support::Counter do
         end
 
         it "does NOT changes current value" do
-          expect { ignoring_error(ConvenientService::Support::Counter::Exceptions::ValueAfterIncrementIsGreaterThanMaxValue) { counter.increment!(n) } }.not_to change(counter, :current_value)
+          expect { ignoring_exception(ConvenientService::Support::Counter::Exceptions::ValueAfterIncrementIsGreaterThanMaxValue) { counter.increment!(n) } }.not_to change(counter, :current_value)
         end
       end
     end
@@ -236,7 +236,7 @@ RSpec.describe ConvenientService::Support::Counter do
         end
 
         it "does NOT changes current value" do
-          expect { ignoring_error(ConvenientService::Support::Counter::Exceptions::ValueAfterDecrementIsLowerThanMinValue) { counter.decrement!(n) } }.not_to change(counter, :current_value)
+          expect { ignoring_exception(ConvenientService::Support::Counter::Exceptions::ValueAfterDecrementIsLowerThanMinValue) { counter.decrement!(n) } }.not_to change(counter, :current_value)
         end
       end
     end

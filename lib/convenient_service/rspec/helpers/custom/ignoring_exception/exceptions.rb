@@ -4,7 +4,7 @@ module ConvenientService
   module RSpec
     module Helpers
       module Custom
-        class IgnoringError < Support::Command
+        class IgnoringException < Support::Command
           module Exceptions
             class IgnoredErrorIsNotRaised < ::ConvenientService::Exception
               ##

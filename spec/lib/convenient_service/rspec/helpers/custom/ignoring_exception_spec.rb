@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::RSpec::Helpers::Custom::IgnoringError do
+RSpec.describe ConvenientService::RSpec::Helpers::Custom::IgnoringException do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   example_group "instance methods" do
@@ -22,9 +22,9 @@ RSpec.describe ConvenientService::RSpec::Helpers::Custom::IgnoringError do
           TEXT
         end
 
-        it "raises `ConvenientService::RSpec::Helpers::Custom::IgnoringError::Exceptions::IgnoredErrorIsNotRaised`" do
+        it "raises `ConvenientService::RSpec::Helpers::Custom::IgnoringException::Exceptions::IgnoredErrorIsNotRaised`" do
           expect { command_result }
-            .to raise_error(ConvenientService::RSpec::Helpers::Custom::IgnoringError::Exceptions::IgnoredErrorIsNotRaised)
+            .to raise_error(ConvenientService::RSpec::Helpers::Custom::IgnoringException::Exceptions::IgnoredErrorIsNotRaised)
             .with_message(error_message)
         end
       end

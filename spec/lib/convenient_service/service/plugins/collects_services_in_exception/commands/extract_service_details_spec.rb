@@ -8,7 +8,7 @@ require "convenient_service"
 RSpec.describe ConvenientService::Service::Plugins::CollectsServicesInException::Commands::ExtractServiceDetails do
   example_group "class methods" do
     describe ".call" do
-      include ConvenientService::RSpec::Helpers::IgnoringError
+      include ConvenientService::RSpec::Helpers::IgnoringException
 
       let(:command_result) { described_class.call(service: service_instance, method: method) }
 
@@ -23,7 +23,7 @@ RSpec.describe ConvenientService::Service::Plugins::CollectsServicesInException:
         # This a library code. That is why using `send` is okish here.
         # Do not use `send` without strong arguments in a business appication code.
         #
-        ignoring_error(exception_class) { service_instance.send(method) }
+        ignoring_exception(exception_class) { service_instance.send(method) }
       end
 
       context "when `method` is NOT `:result`" do

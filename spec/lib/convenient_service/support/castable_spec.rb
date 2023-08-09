@@ -52,7 +52,7 @@ RSpec.describe ConvenientService::Support::Castable do
 
     describe ".cast!" do
       context "when `other` is NOT castable" do
-        include ConvenientService::RSpec::Helpers::IgnoringError
+        include ConvenientService::RSpec::Helpers::IgnoringException
 
         let(:message) do
           <<~TEXT
@@ -69,7 +69,7 @@ RSpec.describe ConvenientService::Support::Castable do
           # NOTE: Error is NOT the purpose of this spec. That is why it is caught.
           # But if it is NOT caught, the spec should fail.
           #
-          ignoring_error(ConvenientService::Support::Castable::Exceptions::FailedToCast) { klass.cast!(other) }
+          ignoring_exception(ConvenientService::Support::Castable::Exceptions::FailedToCast) { klass.cast!(other) }
 
           expect(klass).to have_received(:cast).with(other)
         end

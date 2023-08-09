@@ -1,17 +1,17 @@
 # frozen_string_literal: true
 
-require_relative "ignoring_error/exceptions"
+require_relative "ignoring_exception/exceptions"
 
 module ConvenientService
   module RSpec
     module Helpers
       module Custom
-        class IgnoringError < Support::Command
+        class IgnoringException < Support::Command
           ##
-          # @!attribute [r] error
+          # @!attribute [r] exception
           #   @return [StandardError]
           #
-          attr_reader :error
+          attr_reader :exception
 
           ##
           # @!attribute [r] block
@@ -20,17 +20,17 @@ module ConvenientService
           attr_reader :block
 
           ##
-          # @param error [StandardError]
+          # @param exception [StandardError]
           # @param block [Proc]
           #
-          def initialize(error, &block)
-            @error = error
+          def initialize(exception, &block)
+            @exception = exception
             @block = block
           end
 
           ##
           # @return [ConvenientService::Support::UniqueValue]
-          # @raise [ConvenientService::RSpec::Helpers::Custom::IgnoringError::Exceptions::IgnoredErrorIsNotRaised]
+          # @raise [ConvenientService::RSpec::Helpers::Custom::IgnoringException::Exceptions::IgnoredErrorIsNotRaised]
           #
           # @note Rescue `StandardError`, NOT `Exception`.
           # @see https://thoughtbot.com/blog/rescue-standarderror-not-exception

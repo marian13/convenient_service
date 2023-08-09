@@ -3,9 +3,9 @@
 module ConvenientService
   module RSpec
     module Helpers
-      module IgnoringError
-        def ignoring_error(...)
-          Custom::IgnoringError.call(...)
+      module IgnoringException
+        def ignoring_exception(...)
+          Custom::IgnoringException.call(...)
         end
       end
     end

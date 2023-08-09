@@ -81,7 +81,7 @@ RSpec.describe ConvenientService::Service::Plugins::RaisesOnDoubleResult::Middle
       end
 
       context "when service has result" do
-        include ConvenientService::RSpec::Helpers::IgnoringError
+        include ConvenientService::RSpec::Helpers::IgnoringException
 
         before do
           service_instance.internals.cache.write(:has_j_send_result, true)
@@ -117,7 +117,7 @@ RSpec.describe ConvenientService::Service::Plugins::RaisesOnDoubleResult::Middle
         # But if it is NOT caught, the spec should fail.
         #
         specify do
-          expect { ignoring_error(ConvenientService::Service::Plugins::RaisesOnDoubleResult::Exceptions::DoubleResult) { method_value } }
+          expect { ignoring_exception(ConvenientService::Service::Plugins::RaisesOnDoubleResult::Exceptions::DoubleResult) { method_value } }
             .not_to call_chain_next.on(method)
         end
       end
