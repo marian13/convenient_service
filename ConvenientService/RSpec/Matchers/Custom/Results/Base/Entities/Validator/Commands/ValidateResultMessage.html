@@ -568,16 +568,18 @@
       <pre class="lines">
 
 
+73
+74
+75
 76
 77
-78
-79
-80</pre>
+78</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/results/base/entities/validator/commands/validate_result_message.rb', line 76</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/results/base/entities/validator/commands/validate_result_message.rb', line 73</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span>
+  <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>unless</span> <span class='id identifier rubyid_matcher'>matcher</span><span class='period'>.</span><span class='id identifier rubyid_result'>result</span>
   <span class='kw'>return</span> <span class='kw'>true</span> <span class='kw'>unless</span> <span class='id identifier rubyid_chain'>chain</span><span class='period'>.</span><span class='id identifier rubyid_used_message?'>used_message?</span>
 
   <span class='id identifier rubyid_casted_message'>casted_message</span><span class='period'>.</span><span class='id identifier rubyid_public_send'>public_send</span><span class='lparen'>(</span><span class='id identifier rubyid_comparison_method'>comparison_method</span><span class='comma'>,</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_unsafe_message'>unsafe_message</span><span class='rparen'>)</span>
@@ -927,7 +929,7 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Aug  9 22:38:30 2023 by
+  Generated on Wed Aug  9 23:18:41 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>

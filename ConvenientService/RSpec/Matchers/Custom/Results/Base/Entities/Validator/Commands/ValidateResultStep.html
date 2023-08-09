@@ -569,12 +569,14 @@
 77
 78
 79
-80</pre>
+80
+81</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/results/base/entities/validator/commands/validate_result_step.rb', line 70</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span>
+  <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>unless</span> <span class='id identifier rubyid_matcher'>matcher</span><span class='period'>.</span><span class='id identifier rubyid_result'>result</span>
   <span class='kw'>return</span> <span class='kw'>true</span> <span class='kw'>unless</span> <span class='id identifier rubyid_chain'>chain</span><span class='period'>.</span><span class='id identifier rubyid_used_step?'>used_step?</span>
 
   <span class='kw'>case</span> <span class='id identifier rubyid_step'>step</span>
@@ -863,7 +865,7 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Aug  9 22:38:30 2023 by
+  Generated on Wed Aug  9 23:18:41 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>
