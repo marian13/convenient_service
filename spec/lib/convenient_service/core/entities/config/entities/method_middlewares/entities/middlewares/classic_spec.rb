@@ -5,15 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Classic do
-  let(:middleware_instance) { middleware_class.new(stack) }
-
-  let(:middleware_class) do
-    Class.new(described_class) do
-      def call(...)
-        stack.call(...)
-      end
-    end
-  end
+  let(:middleware_instance) { described_class.new(stack) }
 
   let(:stack) { ConvenientService::Support::Middleware::StackBuilder.new }
   let(:env) { {foo: :bar} }
