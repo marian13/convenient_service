@@ -66,6 +66,24 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Entiti
       end
     end
 
+    describe "#description" do
+      it "returns description" do
+        expect(printer.description).to eq(printer.expected_parts)
+      end
+    end
+
+    describe "#failure_message" do
+      it "returns message" do
+        expect(printer.failure_message).to eq("expected result to be\n#{printer.expected_parts}\n\n#{printer.got_parts}")
+      end
+    end
+
+    describe "#failure_message_when_negated" do
+      it "returns message" do
+        expect(printer.failure_message_when_negated).to eq("expected result NOT to be\n#{printer.expected_parts}\n\n#{printer.got_parts}")
+      end
+    end
+
     describe "#expected_parts" do
       specify do
         expect { printer.expected_parts }

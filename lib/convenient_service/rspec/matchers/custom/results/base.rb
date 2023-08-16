@@ -49,9 +49,24 @@ module ConvenientService
 
               ##
               # IMPORTANT: Makes `result.class.include?` idempotent.
-              # TODO: Explainer when `result.commit_config!` is required.
               #
-              result.commit_config!(trigger: Constants::Triggers::BE_RESULT) if result.respond_to?(:commit_config!)
+              # TODO: Explainer when `result.class.commit_config!` is required. It was introduced in panic when the first thread-safety issues occurred. Looks like it is an outdated operation now. It is probably useful only when a config has almost zero plugins.
+              #
+              # TODO: Resolve a bug in `delegate_to`. It makes `respond_to?` always return `true`, even for classes that do NOT have the `commit_config!` method. See specs for details.
+              #
+              #   let(:result) { "foo" }
+              #
+              #   specify do
+              #     expect { matcher.matches?(result) }
+              #       .not_to delegate_to(result.class, :commit_config!)
+              #       .with_any_arguments
+              #       .without_calling_original
+              #   end
+              #
+              #   `result.class.method(:commit_config!)`
+              #   # => <Method: String.commit_config!(*args, &block) /usr/local/bundle/gems/rspec-mocks-3.11.2/lib/rspec/mocks/method_double.rb:63>
+              #
+              result.class.commit_config!(trigger: Constants::Triggers::BE_RESULT) if result.class.respond_to?(:commit_config!)
 
               validator.valid_result?
             end

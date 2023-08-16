@@ -83,6 +83,30 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base do
           .without_arguments
           .and_return_its_value
       end
+
+      ##
+      # TODO: Resolve a bug in `delegate_to`. It does NOT work as expected with `respond_to?`. See source for details.
+      #
+      # context "when result does NOT respond to `commit_config!`" do
+      #   let(:result) { "foo" }
+      #
+      #   specify do
+      #     expect { matcher.matches?(result) }
+      #       .not_to delegate_to(result.class, :commit_config!)
+      #       .with_any_arguments
+      #       .without_calling_original
+      #   end
+      # end
+
+      context "when result responds to `commit_config!`" do
+        let(:result) { service.result }
+
+        specify do
+          expect { matcher.matches?(result) }
+            .to delegate_to(result.class, :commit_config!)
+            .with_arguments(trigger: ConvenientService::RSpec::Matchers::Custom::Results::Base::Constants::Triggers::BE_RESULT)
+        end
+      end
     end
 
     describe "#description" do

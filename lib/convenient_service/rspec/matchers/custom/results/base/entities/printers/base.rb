@@ -62,9 +62,6 @@ module ConvenientService
                   #
                   # @return [String]
                   #
-                  # @internal
-                  #   TODO: Specs.
-                  #
                   def description
                     expected_parts
                   end
@@ -74,9 +71,6 @@ module ConvenientService
                   #
                   # @return [String]
                   #
-                  # @internal
-                  #   TODO: Specs.
-                  #
                   def failure_message
                     "expected result to be\n#{default_text}"
                   end
@@ -85,9 +79,6 @@ module ConvenientService
                   # @api private
                   #
                   # @return [String]
-                  #
-                  # @internal
-                  #   TODO: Specs.
                   #
                   def failure_message_when_negated
                     "expected result NOT to be\n#{default_text}"
@@ -203,7 +194,7 @@ module ConvenientService
                   # @return [String]
                   #
                   def default_text
-                    expected_parts << "\n\n" << got_parts
+                    "#{expected_parts}\n\n#{got_parts}"
                   end
                 end
               end
