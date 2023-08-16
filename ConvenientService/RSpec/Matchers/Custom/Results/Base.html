@@ -1625,9 +1625,9 @@
   <span class='comment'>##
 </span>  <span class='comment'># IMPORTANT: Makes `result.class.include?` idempotent.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># TODO:  Explainer when `result.class.commit_config!` is required. It was introduced in panic when the first thread-safety issues occurred. Looks like it is an outdated operation now. It is probably useful only when a config has almost zero plugins.
+</span>  <span class='comment'># TODO: Explainer when `result.class.commit_config!` is required. It was introduced in panic when the first thread-safety issues occurred. Looks like it is an outdated operation now. It is probably useful only when a config has almost zero plugins.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># TODO: Resolve a bug in `delegate_to`. It makes `respond_to?` to always return `true`, even for classes that does NOT have `commit_config!` method. See specs for details.
+</span>  <span class='comment'># TODO: Resolve a bug in `delegate_to`. It makes `respond_to?` always return `true`, even for classes that do NOT have the `commit_config!` method. See specs for details.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#   let(:result) { &quot;foo&quot; }
 </span>  <span class='comment'>#
@@ -2430,7 +2430,7 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Aug 16 23:47:53 2023 by
+  Generated on Wed Aug 16 23:49:41 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>
