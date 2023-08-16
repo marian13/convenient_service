@@ -81,6 +81,7 @@ module ConvenientService
 
                     ##
                     # @api private
+                    #
                     # @return [Boolean]
                     # @raise [ConvenientService::RSpec::Matchers::Custom::Results::Base::Exceptions::InvalidStep]
                     #
@@ -91,18 +92,22 @@ module ConvenientService
                     private
 
                     ##
-                    # @return [Array<Boolean>]
+                    # @return [Enumerator]
+                    #
+                    # @internal
+                    #   NOTE: `Enumerator` is used to delay validations till the last moment.
+                    #   NOTE: `Enumerator` is used to skip following validations if the previous validation is NOT satisfied.
                     #
                     def validations
-                      [
-                        valid_result_type?,
-                        valid_result_status?,
-                        valid_result_service?,
-                        valid_result_step?,
-                        valid_result_data?,
-                        valid_result_message?,
-                        valid_result_code?
-                      ]
+                      ::Enumerator.new do |yielder|
+                        yielder.yield(valid_result_type?)
+                        yielder.yield(valid_result_status?)
+                        yielder.yield(valid_result_service?)
+                        yielder.yield(valid_result_step?)
+                        yielder.yield(valid_result_data?)
+                        yielder.yield(valid_result_message?)
+                        yielder.yield(valid_result_code?)
+                      end
                     end
                   end
                 end
