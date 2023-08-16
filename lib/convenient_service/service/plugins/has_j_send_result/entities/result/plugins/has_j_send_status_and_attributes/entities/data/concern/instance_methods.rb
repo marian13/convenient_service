@@ -119,8 +119,12 @@ module ConvenientService
 
                           return false if result.class != other.result.class
 
-                          case [value, other.value]
-                          in [::Hash, ::Hash]
+                          ##
+                          # NOTE: Pattern matching is removed since it causes a huge and annoying warning in Ruby 2.7 apps. Users are too confused by it.
+                          #
+                          # TODO: Implement a Rubocop cop that forbids the usage of pattern matching until Ruby 2.7 is dropped.
+                          #
+                          if value.instance_of?(::Hash) && other.value.instance_of?(::Hash)
                             return false unless Utils::Hash.triple_equality_compare(value, other.value)
                           else
                             return false unless value === other.value
