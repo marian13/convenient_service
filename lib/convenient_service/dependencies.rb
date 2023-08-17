@@ -13,6 +13,32 @@ module ConvenientService
   module Dependencies
     class << self
       ##
+      # @api private
+      #
+      # @return [Boolean]
+      # @see ConvenientService.Dependencies.require_has_j_send_result_params_validations_using_active_model_validations
+      #
+      def support_has_j_send_result_params_validations_using_active_model_validations?
+        return false unless active_model.loaded?
+        return false if ruby.version >= 3.0 && active_model.version < 6.0
+
+        true
+      end
+
+      ##
+      # @api private
+      #
+      # @return [Boolean]
+      #
+      # @see https://github.com/ruby/logger/commit/74690b87b15244e19dd91cd06ae295251e1e5781
+      #
+      def support_logger_non_integer_levels?
+        logger.version >= "1.3.0"
+      end
+
+      ##
+      # @api public
+      #
       # @return [Boolean]
       # @note Expected to be called from app entry points like `initializers` in Rails.
       #
@@ -21,6 +47,8 @@ module ConvenientService
       end
 
       ##
+      # @api public
+      #
       # @return [Boolean]
       # @note Expected to be called from app entry points like `initializers` in Rails.
       #
@@ -36,6 +64,8 @@ module ConvenientService
       end
 
       ##
+      # @api public
+      #
       # @return [Boolean]
       # @note Expected to be called from app entry points like `initializers` in Rails.
       #
@@ -50,6 +80,8 @@ module ConvenientService
       end
 
       ##
+      # @api public
+      #
       # @return [Boolean]
       # @note Expected to be called from app entry points like `initializers` in Rails.
       #
@@ -58,6 +90,8 @@ module ConvenientService
       end
 
       ##
+      # @api public
+      #
       # @return [Boolean]
       # @note Expected to be called from app entry points like `initializers` in Rails.
       #
@@ -73,6 +107,8 @@ module ConvenientService
       end
 
       ##
+      # @api public
+      #
       # @return [Boolean]
       # @note Expected to be called from app entry points like `initializers` in Rails.
       #
@@ -94,17 +130,8 @@ module ConvenientService
       end
 
       ##
-      # @return [Boolean]
-      # @api private
+      # @api public
       #
-      def support_has_j_send_result_params_validations_using_active_model_validations?
-        return false unless active_model.loaded?
-        return false if ruby.version >= 3.0 && active_model.version < 6.0
-
-        true
-      end
-
-      ##
       # @return [Boolean]
       # @note Expected to be called from app entry points like `initializers` in Rails.
       #
@@ -122,6 +149,8 @@ module ConvenientService
       end
 
       ##
+      # @api public
+      #
       # @return [Boolean]
       # @note Expected to be called from app entry points like `initializers` in Rails.
       #
@@ -136,6 +165,8 @@ module ConvenientService
       end
 
       ##
+      # @api public
+      #
       # @return [Boolean]
       # @note Expected to be called from app entry points like `initializers` in Rails.
       #
@@ -144,6 +175,8 @@ module ConvenientService
       end
 
       ##
+      # @api public
+      #
       # @return [Boolean]
       # @note Expected to be called from app entry points like `initializers` in Rails.
       #
@@ -152,6 +185,8 @@ module ConvenientService
       end
 
       ##
+      # @api private
+      #
       # @return [Boolean]
       # @note Expected to be called from `irb`, `pry`, `spec_helper.rb`, etc.
       #
@@ -212,6 +247,8 @@ module ConvenientService
       end
 
       ##
+      # @api private
+      #
       # @return [Boolean]
       # @note Expected to be called from `spec_helper.rb`.
       #
@@ -235,6 +272,8 @@ module ConvenientService
       end
 
       ##
+      # @api public
+      #
       # Loads RSpec extensions like `be_success` matcher, `stub_service` helper, etc.
       #
       # @return [Boolean]
@@ -249,10 +288,11 @@ module ConvenientService
       end
 
       ##
+      # @api private
+      #
       # Loads standard config examples.
       #
       # @return [Boolean]
-      # @api private
       #
       def require_standard_examples
         ##
@@ -293,10 +333,11 @@ module ConvenientService
       end
 
       ##
+      # @api private
+      #
       # Loads rails config examples.
       #
       # @return [Boolean]
-      # @api private
       #
       def require_rails_examples
         ##
@@ -320,10 +361,11 @@ module ConvenientService
       end
 
       ##
+      # @api private
+      #
       # Loads dry config examples.
       #
       # @return [Boolean]
-      # @api private
       #
       def require_dry_examples
         ##
@@ -347,27 +389,39 @@ module ConvenientService
       end
 
       ##
-      # @return [ConvenientService::Support::Ruby]
       # @api private
+      #
+      # @return [ConvenientService::Support::Ruby]
       #
       def ruby
         Support::Ruby
       end
 
       ##
-      # @return [ConvenientService::Support::RSpec]
       # @api private
+      #
+      # @return [ConvenientService::Support::RSpec]
       #
       def rspec
         Support::Gems::RSpec
       end
 
       ##
-      # @return [ConvenientService::Support::Gems::ActiveModel]
       # @api private
+      #
+      # @return [ConvenientService::Support::Gems::ActiveModel]
       #
       def active_model
         Support::Gems::ActiveModel
+      end
+
+      ##
+      # @api private
+      #
+      # @return [ConvenientService::Support::Gems::Logger]
+      #
+      def logger
+        Support::Gems::Logger
       end
     end
   end
