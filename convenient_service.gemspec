@@ -125,6 +125,10 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "mutant", "~> 0.11.21"
   spec.add_development_dependency "mutant-rspec", "~> 0.11.21"
 
+  ##
+  # Used for coloring logs.
+  # - https://github.com/janlelis/paint
+  #
   spec.add_development_dependency "paint"
 
   spec.add_development_dependency "progressbar"

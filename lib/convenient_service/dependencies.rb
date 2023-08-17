@@ -423,6 +423,15 @@ module ConvenientService
       def logger
         Support::Gems::Logger
       end
+
+      ##
+      # @api private
+      #
+      # @return [ConvenientService::Support::Gems::Paint]
+      #
+      def paint
+        Support::Gems::Paint
+      end
     end
   end
 end

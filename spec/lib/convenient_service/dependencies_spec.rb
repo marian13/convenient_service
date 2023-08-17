@@ -111,6 +111,12 @@ RSpec.describe ConvenientService::Dependencies do
         expect(described_class.logger).to eq(ConvenientService::Support::Gems::Logger)
       end
     end
+
+    describe ".paint" do
+      it "returns `ConvenientService::Support::Gems::Paint`" do
+        expect(described_class.paint).to eq(ConvenientService::Support::Gems::Paint)
+      end
+    end
   end
 end
 # rubocop:enable RSpec/NestedGroups
