@@ -41,3 +41,16 @@ require_relative "convenient_service/feature"
 #   Convenient Service Aliases.
 #
 require_relative "convenient_service/aliases"
+
+module ConvenientService
+  class << self
+    ##
+    # @api public
+    #
+    # @return [ConvenientService::Logger]
+    #
+    def logger
+      Logger.instance
+    end
+  end
+end
