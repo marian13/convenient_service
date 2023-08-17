@@ -25,7 +25,7 @@ module ConvenientService
           # @return [ConvenientService::Support::Version]
           #
           # @internal
-          #   - https://github.com/ruby/logger/blob/v1.5.3/lib/logger/version.rb
+          #   - https://github.com/janlelis/paint/blob/v2.2.1/lib/paint/version.rb
           #
           def version
             loaded? ? Support::Version.new(::Paint::VERSION) : Support::Version.null_version
