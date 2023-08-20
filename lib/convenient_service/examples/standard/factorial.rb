@@ -12,7 +12,7 @@ require_relative "factorial/utils"
 module ConvenientService
   module Examples
     module Standard
-      module Factorial
+      class Factorial
         include ConvenientService::Feature
 
         entry :calculate do |number|

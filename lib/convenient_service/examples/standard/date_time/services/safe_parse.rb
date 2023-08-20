@@ -3,7 +3,7 @@
 module ConvenientService
   module Examples
     module Standard
-      module DateTime
+      class DateTime
         module Services
           class SafeParse
             include ConvenientService::Standard::Config

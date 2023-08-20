@@ -31,7 +31,7 @@
 module ConvenientService
   module Examples
     module Standard
-      module Gemfile
+      class Gemfile
         module Services
           class FormatGemsWithEnvs
             BLOCK_END = "end"

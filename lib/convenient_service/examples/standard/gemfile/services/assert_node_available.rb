@@ -8,7 +8,7 @@
 module ConvenientService
   module Examples
     module Standard
-      module Gemfile
+      class Gemfile
         module Services
           class AssertNodeAvailable
             include ConvenientService::Standard::Config

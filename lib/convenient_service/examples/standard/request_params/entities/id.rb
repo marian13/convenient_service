@@ -3,7 +3,7 @@
 module ConvenientService
   module Examples
     module Standard
-      module RequestParams
+      class RequestParams
         module Entities
           ##
           # TODO: https://ruby-doc.org/3.1.3/stdlibs/yaml/YAML/DBM.html

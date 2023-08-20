@@ -27,7 +27,7 @@
 module ConvenientService
   module Examples
     module Standard
-      module Gemfile
+      class Gemfile
         module Services
           class ParseContent
             RUBY_REGEX = /\A\s*ruby/

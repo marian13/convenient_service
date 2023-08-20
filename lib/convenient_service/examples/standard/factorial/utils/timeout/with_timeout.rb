@@ -3,7 +3,7 @@
 module ConvenientService
   module Examples
     module Standard
-      module Factorial
+      class Factorial
         module Utils
           module Timeout
             class WithTimeout < ConvenientService::Command

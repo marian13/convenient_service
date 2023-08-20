@@ -35,7 +35,7 @@
 module ConvenientService
   module Examples
     module Standard
-      module Gemfile
+      class Gemfile
         module Services
           class FormatGemsWithoutEnvs
             EMPTY_LINE = ""

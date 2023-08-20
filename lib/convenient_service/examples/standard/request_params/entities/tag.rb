@@ -3,7 +3,7 @@
 module ConvenientService
   module Examples
     module Standard
-      module RequestParams
+      class RequestParams
         module Entities
           class Tag
             def initialize(value:)

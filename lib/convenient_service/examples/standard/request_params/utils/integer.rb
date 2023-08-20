@@ -9,7 +9,7 @@ require_relative "integer/safe_parse"
 module ConvenientService
   module Examples
     module Standard
-      module RequestParams
+      class RequestParams
         module Utils
           module Integer
             class << self

@@ -6,7 +6,7 @@ require_relative "request/parse_path"
 module ConvenientService
   module Examples
     module Standard
-      module RequestParams
+      class RequestParams
         module Utils
           module HTTP
             module Request

@@ -23,8 +23,6 @@ module ConvenientService
       # @return [ConvenientService::Logger]
       #
       # @internal
-      #   TODO: Specs for `super(::STDOUT)`.
-      #
       #   NOTE: `super` is `::Logger.new`.
       #   - https://ruby-doc.org/stdlib-2.7.0/libdoc/logger/rdoc/Logger.html#method-c-new
       #
@@ -33,6 +31,8 @@ module ConvenientService
       #   - https://github.com/ruby/logger/blob/v1.2.8.1/lib/logger.rb#L740
       #   - https://github.com/ruby/logger/blob/v1.5.3/lib/logger.rb#L651
       #   - https://github.com/ruby/logger/blob/v1.5.3/lib/logger.rb#L397
+      #
+      #   TODO: Specs for `super(::STDOUT)`.
       #
       # rubocop:disable Style/GlobalStdStream
       def new
@@ -94,6 +94,8 @@ module ConvenientService
     #
     #   NOTE: `Warning.warn` is chosen over `Kernel.warn` in order to have a simple to track delegation from RSpec.
     #   - https://ruby-doc.org/core-2.7.0/Warning.html#method-i-warn
+    #
+    # TODO: Tag/prefix for all Convenient Service logs.
     #
     def level=(severity)
       if Dependencies.support_logger_non_integer_levels?

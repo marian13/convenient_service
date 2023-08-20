@@ -24,7 +24,6 @@ RSpec.describe ConvenientService::Feature do
       end
 
       it { is_expected.to include_module(ConvenientService::Support::DependencyContainer::Entry) }
-      it { is_expected.to include_module(ConvenientService::Support::DependencyContainer::Export) }
     end
   end
 end

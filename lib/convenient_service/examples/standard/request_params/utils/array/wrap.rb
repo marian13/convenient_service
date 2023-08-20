@@ -3,7 +3,7 @@
 module ConvenientService
   module Examples
     module Standard
-      module RequestParams
+      class RequestParams
         module Utils
           module Array
             class Wrap < ConvenientService::Command

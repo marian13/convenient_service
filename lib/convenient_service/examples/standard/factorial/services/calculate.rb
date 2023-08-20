@@ -3,7 +3,7 @@
 module ConvenientService
   module Examples
     module Standard
-      module Factorial
+      class Factorial
         module Services
           class Calculate
             include ConvenientService::Standard::Config

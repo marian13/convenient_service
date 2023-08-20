@@ -36,7 +36,7 @@ require_relative "request_params/utils"
 module ConvenientService
   module Examples
     module Standard
-      module RequestParams
+      class RequestParams
         include ConvenientService::Feature
 
         entry :prepare do |request|

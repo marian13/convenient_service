@@ -3,7 +3,7 @@
 module ConvenientService
   module Examples
     module Standard
-      module Cowsay
+      class Cowsay
         module Services
           class BuildCloud
             include ConvenientService::Standard::Config

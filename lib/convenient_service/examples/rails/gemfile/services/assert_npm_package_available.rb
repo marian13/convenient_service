@@ -8,7 +8,7 @@
 module ConvenientService
   module Examples
     module Rails
-      module Gemfile
+      class Gemfile
         module Services
           class AssertNpmPackageAvailable
             include RailsService::Config

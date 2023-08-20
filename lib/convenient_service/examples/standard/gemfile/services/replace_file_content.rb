@@ -3,7 +3,7 @@
 module ConvenientService
   module Examples
     module Standard
-      module Gemfile
+      class Gemfile
         module Services
           class ReplaceFileContent
             include ConvenientService::Standard::Config

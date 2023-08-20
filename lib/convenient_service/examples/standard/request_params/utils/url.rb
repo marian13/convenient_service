@@ -5,7 +5,7 @@ require_relative "url/valid"
 module ConvenientService
   module Examples
     module Standard
-      module RequestParams
+      class RequestParams
         module Utils
           module URL
             class << self

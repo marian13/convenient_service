@@ -23,7 +23,7 @@
 module ConvenientService
   module Examples
     module Rails
-      module Gemfile
+      class Gemfile
         module Services
           class FormatHeader
             FROZEN_STRING_LITERAL = "# frozen_string_literal: true"

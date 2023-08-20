@@ -11,6 +11,10 @@ module ConvenientService
   module Core
     include Support::Concern
 
+    ##
+    # @internal
+    #   TODO: Allow to include `Core` only to classes?
+    #
     included do |entity_class|
       entity_class.include Concern
     end

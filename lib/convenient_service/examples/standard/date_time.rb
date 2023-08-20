@@ -11,7 +11,7 @@ require_relative "date_time/services"
 module ConvenientService
   module Examples
     module Standard
-      module DateTime
+      class DateTime
         include ConvenientService::Feature
 
         entry :safe_parse do |string, format|

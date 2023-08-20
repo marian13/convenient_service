@@ -5,7 +5,7 @@ require_relative "timeout/with_timeout"
 module ConvenientService
   module Examples
     module Standard
-      module Factorial
+      class Factorial
         module Utils
           module Timeout
             class << self

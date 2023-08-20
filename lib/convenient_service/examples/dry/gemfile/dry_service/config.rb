@@ -9,7 +9,7 @@
 module ConvenientService
   module Examples
     module Dry
-      module Gemfile
+      class Gemfile
         class DryService
           module Config
             include Support::Concern

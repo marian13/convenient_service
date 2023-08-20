@@ -3,7 +3,7 @@
 module ConvenientService
   module Examples
     module Rails
-      module Gemfile
+      class Gemfile
         module Services
           class AssertValidRubySyntax
             include RailsService::Config

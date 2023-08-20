@@ -5,7 +5,7 @@ require_relative "json/safe_parse"
 module ConvenientService
   module Examples
     module Standard
-      module RequestParams
+      class RequestParams
         module Utils
           module JSON
             class << self

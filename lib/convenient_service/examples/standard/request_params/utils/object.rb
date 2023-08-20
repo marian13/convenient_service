@@ -6,7 +6,7 @@ require_relative "object/present"
 module ConvenientService
   module Examples
     module Standard
-      module RequestParams
+      class RequestParams
         module Utils
           module Object
             class << self

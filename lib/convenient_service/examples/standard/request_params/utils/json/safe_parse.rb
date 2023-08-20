@@ -11,7 +11,7 @@
 module ConvenientService
   module Examples
     module Standard
-      module RequestParams
+      class RequestParams
         module Utils
           module JSON
             class SafeParse < ConvenientService::Command

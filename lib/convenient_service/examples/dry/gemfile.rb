@@ -13,7 +13,7 @@ require_relative "gemfile/services"
 module ConvenientService
   module Examples
     module Dry
-      module Gemfile
+      class Gemfile
         include ConvenientService::Feature
 
         entry :format do |path|

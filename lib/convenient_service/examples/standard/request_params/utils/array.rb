@@ -5,7 +5,7 @@ require_relative "array/wrap"
 module ConvenientService
   module Examples
     module Standard
-      module RequestParams
+      class RequestParams
         module Utils
           module Array
             class << self

@@ -3,7 +3,7 @@
 module ConvenientService
   module Examples
     module Dry
-      module Gemfile
+      class Gemfile
         module Services
           class AssertValidRubySyntax
             include DryService::Config

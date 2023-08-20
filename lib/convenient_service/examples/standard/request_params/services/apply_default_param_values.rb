@@ -3,7 +3,7 @@
 module ConvenientService
   module Examples
     module Standard
-      module RequestParams
+      class RequestParams
         module Services
           class ApplyDefaultParamValues
             include ConvenientService::Standard::Config

@@ -9,7 +9,7 @@
 module ConvenientService
   module Examples
     module Rails
-      module Gemfile
+      class Gemfile
         module Services
           class Format
             include RailsService::Config

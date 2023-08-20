@@ -12,7 +12,7 @@ require_relative "cowsay/services"
 module ConvenientService
   module Examples
     module Standard
-      module Cowsay
+      class Cowsay
         include ConvenientService::Feature
 
         entry :print do |text = "Hello World!", out: $stdout|
