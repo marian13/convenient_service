@@ -77,5 +77,6 @@
 | Low | 🚧 | Rubocop cop that complains when a service does NOT have its own suite of specs | |
 | High | 🚧 | Add specs for `WrappedMethod#call` | |
 | High | 🚧 | Check whether ignoring error was used properly | |
+| High | 🚧 | Steps are great for `and` logic, but what to do with `or` logic? | Create third service |
 
 Search for `TODO`s in the codebase for more tasks.
