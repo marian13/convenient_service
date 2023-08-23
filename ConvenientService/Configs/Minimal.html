@@ -107,9 +107,9 @@ use Plugins::Common::NormalizesEnv::Middleware</p>
 <pre class="code ruby"><code class="ruby"><span class='comment'># ...
 </span></code></pre>
 <p>end</p>
-<p>In turn, <code>:try_result</code> is added by <code>use Plugins::Service::CanBeTried::Concern</code> in <code>Standard</code>.
+<p>In turn, <code>:fallback_result</code> is added by <code>use Plugins::Service::CanHaveFallback::Concern</code> in <code>Standard</code>.
 That is why it is the responsibility of the <code>Standard</code> config, to define:</p>
-<p>middlewares :try_result do
+<p>middlewares :fallback_result do
 use Plugins::Common::NormalizesEnv::Middleware</p>
 <pre class="code ruby"><code class="ruby"><span class='comment'># ...
 </span></code></pre>
@@ -148,7 +148,7 @@ use Plugins::Common::NormalizesEnv::Middleware</p>
 </div>
 
       <div id="footer">
-  Generated on Mon Aug 21 20:56:40 2023 by
+  Generated on Wed Aug 23 18:15:46 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>
