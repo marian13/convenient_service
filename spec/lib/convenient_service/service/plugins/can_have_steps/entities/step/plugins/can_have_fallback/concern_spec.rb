@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeTried::Concern do
+RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallback::Concern do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   let(:step_service_class) do
@@ -28,7 +28,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         success
       end
 
-      def try_result
+      def fallback_result
         success
       end
     end
@@ -80,20 +80,20 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
   end
 
   example_group "instance methods" do
-    describe "#try_step?" do
+    describe "#fallback_step?" do
       specify do
-        expect { step.try_step? }
+        expect { step.fallback_step? }
           .to delegate_to(step.params.extra_kwargs, :[])
-          .with_arguments(:try)
+          .with_arguments(:fallback)
       end
 
       ##
       # TODO: Create copies for all utils used inside matchers.
       #
       # specify do
-      #   expect { step.try_step? }
+      #   expect { step.fallback_step? }
       #     .to delegate_to(ConvenientService::Utils, :to_bool)
-      #     .with_arguments(step.params.extra_kwargs[:try])
+      #     .with_arguments(step.params.extra_kwargs[:fallback])
       #     .and_return_its_value
       # end
 
@@ -109,7 +109,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         end
 
         it "defaults to `false`" do
-          expect(step.try_step?).to eq(false)
+          expect(step.fallback_step?).to eq(false)
         end
       end
 
@@ -119,13 +119,13 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
             klass.class_exec(step_service_class) do |step_service_class|
               include ConvenientService::Configs::Standard
 
-              step step_service_class, try: false
+              step step_service_class, fallback: false
             end
           end
         end
 
         it "returns `false`" do
-          expect(step.try_step?).to eq(false)
+          expect(step.fallback_step?).to eq(false)
         end
       end
 
@@ -135,18 +135,18 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
             klass.class_exec(step_service_class) do |step_service_class|
               include ConvenientService::Configs::Standard
 
-              step step_service_class, try: true
+              step step_service_class, fallback: true
             end
           end
         end
 
         it "returns `true`" do
-          expect(step.try_step?).to eq(true)
+          expect(step.fallback_step?).to eq(true)
         end
       end
     end
 
-    describe "#service_try_result" do
+    describe "#service_fallback_result" do
       context "when `organizer` is NOT set" do
         let(:message) do
           <<~TEXT
@@ -157,7 +157,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         end
 
         it "returns `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::MethodHasNoOrganizer`" do
-          expect { step.copy(overrides: {kwargs: {organizer: nil}}).service_try_result }
+          expect { step.copy(overrides: {kwargs: {organizer: nil}}).service_fallback_result }
             .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::MethodHasNoOrganizer)
             .with_message(message)
         end
@@ -167,15 +167,15 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         specify do
           service.commit_config!
 
-          expect { step.service_try_result }
-            .to delegate_to(step.service.klass, :try_result)
+          expect { step.service_fallback_result }
+            .to delegate_to(step.service.klass, :fallback_result)
             .with_arguments(**step.input_values)
             .and_return_its_value
         end
       end
     end
 
-    describe "#try_result" do
+    describe "#fallback_result" do
       context "when `organizer` is NOT set" do
         let(:message) do
           <<~TEXT
@@ -186,7 +186,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         end
 
         it "returns `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::MethodHasNoOrganizer`" do
-          expect { step.copy(overrides: {kwargs: {organizer: nil}}).try_result }
+          expect { step.copy(overrides: {kwargs: {organizer: nil}}).fallback_result }
             .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::MethodHasNoOrganizer)
             .with_message(message)
         end
@@ -194,8 +194,8 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
       context "when `organizer` is set" do
         specify do
-          expect { step.try_result }
-            .to delegate_to(step.service_try_result, :copy)
+          expect { step.fallback_result }
+            .to delegate_to(step.service_fallback_result, :copy)
             .with_arguments(overrides: {kwargs: {step: step, service: organizer}})
             .and_return_its_value
         end

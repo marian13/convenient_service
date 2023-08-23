@@ -87,7 +87,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       end
 
       example_group "`extra_kwargs`" do
-        let(:default_kwargs) { {in: [:foo], out: [:bar], index: index, organizer: organizer, try: false} }
+        let(:default_kwargs) { {in: [:foo], out: [:bar], index: index, organizer: organizer, fallback: false} }
 
         specify do
           expect { command_result }
@@ -96,7 +96,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         end
 
         it "returns `kwargs` without `[:in, :out, :index, :container, :organizer]` keys as `extra_kwargs`" do
-          expect(command_result.extra_kwargs).to eq({try: false})
+          expect(command_result.extra_kwargs).to eq({fallback: false})
         end
       end
     end

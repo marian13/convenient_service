@@ -45,7 +45,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::RailsService::Config
               ConvenientService::Service::Plugins::HasJSendResultStatusCheckShortSyntax::Concern,
               ConvenientService::Common::Plugins::HasCallbacks::Concern,
               ConvenientService::Common::Plugins::HasAroundCallbacks::Concern,
-              ConvenientService::Service::Plugins::CanBeTried::Concern,
+              ConvenientService::Service::Plugins::CanHaveFallback::Concern,
               ConvenientService::Service::Plugins::HasMermaidFlowchart::Concern,
               ConvenientService::Common::Plugins::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment::Concern,
               ConvenientService::Common::Plugins::HasAttributes::UsingActiveModelAttributes::Concern,
@@ -100,19 +100,19 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::RailsService::Config
           end
         end
 
-        example_group "#try_result middlewares" do
-          let(:try_result_middlewares) do
+        example_group "#fallback_result middlewares" do
+          let(:fallback_result_middlewares) do
             [
               ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
               ConvenientService::Service::Plugins::CollectsServicesInException::Middleware,
               ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
               ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Middleware,
-              ConvenientService::Service::Plugins::CanBeTried::Middleware
+              ConvenientService::Service::Plugins::CanHaveFallback::Middleware
             ]
           end
 
-          it "sets service middlewares for `#try_result`" do
-            expect(service_class.middlewares(:try_result).to_a).to eq(try_result_middlewares)
+          it "sets service middlewares for `#fallback_result`" do
+            expect(service_class.middlewares(:fallback_result).to_a).to eq(fallback_result_middlewares)
           end
         end
 
@@ -222,7 +222,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::RailsService::Config
                 ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanRecalculateResult::Concern,
                 ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanHaveStep::Concern,
                 ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeOwnResult::Concern,
-                ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeTried::Concern,
+                ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanHaveFallback::Concern,
                 ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanHaveParentResult::Concern,
                 ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanHaveCheckedStatus::Concern,
                 ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeStubbedResult::Concern,
@@ -447,7 +447,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::RailsService::Config
                 ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeResultStep::Concern,
                 ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::HasInspect::Concern,
                 ConvenientService::Common::Plugins::HasJSendResultDuckShortSyntax::Concern,
-                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeTried::Concern
+                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallback::Concern
               ]
             end
 
@@ -476,7 +476,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::RailsService::Config
               [
                 ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
                 ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
-                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeTried::Middleware,
+                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallback::Middleware,
                 ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveParentResult::Middleware
               ]
             end
@@ -486,29 +486,29 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::RailsService::Config
             end
           end
 
-          example_group "#service_try_result middlewares" do
-            let(:service_try_result_middlewares) do
+          example_group "#service_fallback_result middlewares" do
+            let(:service_fallback_result_middlewares) do
               [
                 ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
                 ConvenientService::Common::Plugins::CachesReturnValue::Middleware
               ]
             end
 
-            it "sets service middlewares for `#service_try_result`" do
-              expect(service_class::Step.middlewares(:service_try_result).to_a).to eq(service_try_result_middlewares)
+            it "sets service middlewares for `#service_fallback_result`" do
+              expect(service_class::Step.middlewares(:service_fallback_result).to_a).to eq(service_fallback_result_middlewares)
             end
           end
 
-          example_group "#try_result middlewares" do
-            let(:try_result_middlewares) do
+          example_group "#fallback_result middlewares" do
+            let(:fallback_result_middlewares) do
               [
                 ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
                 ConvenientService::Common::Plugins::CachesReturnValue::Middleware
               ]
             end
 
-            it "sets service middlewares for `#try_result`" do
-              expect(service_class::Step.middlewares(:try_result).to_a).to eq(try_result_middlewares)
+            it "sets service middlewares for `#fallback_result`" do
+              expect(service_class::Step.middlewares(:fallback_result).to_a).to eq(fallback_result_middlewares)
             end
           end
 

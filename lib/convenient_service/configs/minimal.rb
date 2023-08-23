@@ -18,10 +18,10 @@ module ConvenientService
     #       # ...
     #     end
     #
-    #   In turn, `:try_result` is added by `use Plugins::Service::CanBeTried::Concern` in `Standard`.
+    #   In turn, `:fallback_result` is added by `use Plugins::Service::CanHaveFallback::Concern` in `Standard`.
     #   That is why it is the responsibility of the `Standard` config, to define:
     #
-    #     middlewares :try_result do
+    #     middlewares :fallback_result do
     #       use Plugins::Common::NormalizesEnv::Middleware
     #
     #       # ...

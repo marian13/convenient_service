@@ -3,9 +3,9 @@
 module ConvenientService
   module Service
     module Plugins
-      module CanBeTried
+      module CanHaveFallback
         class Middleware < MethodChainMiddleware
-          intended_for :try_result, entity: :service
+          intended_for :fallback_result, entity: :service
 
           ##
           # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
@@ -14,11 +14,11 @@ module ConvenientService
           #   NOTE: Copy is returned to have a fresh status.
           #
           def next(...)
-            try_result = chain.next(...)
+            fallback_result = chain.next(...)
 
-            raise Exceptions::ServiceTryReturnValueNotSuccess.new(service: entity, result: try_result) unless try_result.success?
+            raise Exceptions::ServiceFallbackReturnValueNotSuccess.new(service: entity, result: fallback_result) unless fallback_result.success?
 
-            try_result.copy(overrides: {kwargs: {try_result: true}})
+            fallback_result.copy(overrides: {kwargs: {fallback_result: true}})
           end
         end
       end

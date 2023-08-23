@@ -30,7 +30,7 @@ module ConvenientService
           use Plugins::Common::HasCallbacks::Concern
           use Plugins::Common::HasAroundCallbacks::Concern
 
-          use Plugins::Service::CanBeTried::Concern
+          use Plugins::Service::CanHaveFallback::Concern
           use Plugins::Service::HasMermaidFlowchart::Concern
         end
 
@@ -64,15 +64,15 @@ module ConvenientService
 
         ##
         # @internal
-        #   NOTE: Check `Minimal` docs to understand why `use Plugins::Common::NormalizesEnv::Middleware` for `:try_result` is used in `Standard`, not in `Minimal` config.
+        #   NOTE: Check `Minimal` docs to understand why `use Plugins::Common::NormalizesEnv::Middleware` for `:fallback_result` is used in `Standard`, not in `Minimal` config.
         #
-        middlewares :try_result do
+        middlewares :fallback_result do
           use Plugins::Common::NormalizesEnv::Middleware
           use Plugins::Service::CollectsServicesInException::Middleware
           use Plugins::Common::CachesReturnValue::Middleware
 
           use Plugins::Service::RaisesOnNotResultReturnValue::Middleware
-          use Plugins::Service::CanBeTried::Middleware
+          use Plugins::Service::CanHaveFallback::Middleware
         end
 
         middlewares :step do
@@ -99,7 +99,7 @@ module ConvenientService
 
             use Plugins::Result::CanHaveStep::Concern
             use Plugins::Result::CanBeOwnResult::Concern
-            use Plugins::Result::CanBeTried::Concern
+            use Plugins::Result::CanHaveFallback::Concern
             use Plugins::Result::CanHaveParentResult::Concern
             use Plugins::Result::CanHaveCheckedStatus::Concern
           end
@@ -144,20 +144,20 @@ module ConvenientService
         class self::Step
           concerns do
             use Plugins::Common::HasJSendResultDuckShortSyntax::Concern
-            use Plugins::Step::CanBeTried::Concern
+            use Plugins::Step::CanHaveFallback::Concern
           end
 
           middlewares :result do
-            use Plugins::Step::CanBeTried::Middleware
+            use Plugins::Step::CanHaveFallback::Middleware
             use Plugins::Step::CanHaveParentResult::Middleware
           end
 
-          middlewares :service_try_result do
+          middlewares :service_fallback_result do
             use Plugins::Common::NormalizesEnv::Middleware
             use Plugins::Common::CachesReturnValue::Middleware
           end
 
-          middlewares :try_result do
+          middlewares :fallback_result do
             use Plugins::Common::NormalizesEnv::Middleware
             use Plugins::Common::CachesReturnValue::Middleware
           end

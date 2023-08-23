@@ -3,7 +3,7 @@
 require_relative "plugins/can_recalculate_result"
 require_relative "plugins/can_be_own_result"
 require_relative "plugins/can_be_stubbed_result"
-require_relative "plugins/can_be_tried"
+require_relative "plugins/can_have_fallback"
 require_relative "plugins/has_j_send_status_and_attributes"
 require_relative "plugins/has_inspect"
 require_relative "plugins/has_stubbed_result_invocations_counter"

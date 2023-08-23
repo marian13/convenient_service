@@ -3,27 +3,27 @@
 module ConvenientService
   module Service
     module Plugins
-      module CanBeTried
+      module CanHaveFallback
         module Exceptions
-          class TryResultIsNotOverridden < ::ConvenientService::Exception
+          class FallbackResultIsNotOverridden < ::ConvenientService::Exception
             def initialize(service:)
               message = <<~TEXT
-                Try result method (#try_result) of `#{service.class}` is NOT overridden.
+                Fallback result method (#fallback_result) of `#{service.class}` is NOT overridden.
 
-                NOTE: Make sure overridden `try_result` returns `success` with reasonable "null" data.
+                NOTE: Make sure overridden `fallback_result` returns `success` with reasonable "null" data.
               TEXT
 
               super(message)
             end
           end
 
-          class ServiceTryReturnValueNotSuccess < ::ConvenientService::Exception
+          class ServiceFallbackReturnValueNotSuccess < ::ConvenientService::Exception
             def initialize(service:, result:)
               message = <<~TEXT
                 Return value of service `#{service.class}` try is NOT a `success`.
                 It is `#{result.status}`.
 
-                Did you accidentally call `failure` or `error` instead of `success` from the `try_result` method?
+                Did you accidentally call `failure` or `error` instead of `success` from the `fallback_result` method?
               TEXT
 
               super(message)

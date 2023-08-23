@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::Service::Plugins::CanBeTried::Concern do
+RSpec.describe ConvenientService::Service::Plugins::CanHaveFallback::Concern do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   let(:service_class) do
@@ -43,37 +43,37 @@ RSpec.describe ConvenientService::Service::Plugins::CanBeTried::Concern do
   end
 
   example_group "instance methods" do
-    describe "#try_result" do
+    describe "#fallback_result" do
       let(:exception_message) do
         <<~TEXT
-          Try result method (#try_result) of `#{service_class}` is NOT overridden.
+          Fallback result method (#fallback_result) of `#{service_class}` is NOT overridden.
 
-          NOTE: Make sure overridden `try_result` returns `success` with reasonable "null" data.
+          NOTE: Make sure overridden `fallback_result` returns `success` with reasonable "null" data.
         TEXT
       end
 
-      it "raises `ConvenientService::Service::Plugins::CanBeTried::Exceptions::TryResultIsNotOverridden`" do
-        expect { service_instance.try_result }
-          .to raise_error(ConvenientService::Service::Plugins::CanBeTried::Exceptions::TryResultIsNotOverridden)
+      it "raises `ConvenientService::Service::Plugins::CanHaveFallback::Exceptions::FallbackResultIsNotOverridden`" do
+        expect { service_instance.fallback_result }
+          .to raise_error(ConvenientService::Service::Plugins::CanHaveFallback::Exceptions::FallbackResultIsNotOverridden)
           .with_message(exception_message)
       end
     end
   end
 
   example_group "class methods" do
-    describe ".try_result" do
+    describe ".fallback_result" do
       let(:service_class) do
         Class.new do
           include ConvenientService::Configs::Standard
 
-          def try_result
+          def fallback_result
             success
           end
         end
       end
 
       specify do
-        expect { service_class.try_result(*args, **kwargs, &block) }
+        expect { service_class.fallback_result(*args, **kwargs, &block) }
           .to delegate_to(service_class, :new)
           .with_arguments(*args, **kwargs, &block)
       end
@@ -81,8 +81,8 @@ RSpec.describe ConvenientService::Service::Plugins::CanBeTried::Concern do
       specify do
         allow(service_class).to receive(:new).and_return(service_instance)
 
-        expect { service_class.try_result(*args, **kwargs, &block) }
-          .to delegate_to(service_instance, :try_result)
+        expect { service_class.fallback_result(*args, **kwargs, &block) }
+          .to delegate_to(service_instance, :fallback_result)
           .and_return_its_value
       end
     end

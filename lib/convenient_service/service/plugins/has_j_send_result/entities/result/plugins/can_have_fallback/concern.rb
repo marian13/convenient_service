@@ -7,7 +7,7 @@ module ConvenientService
         module Entities
           class Result
             module Plugins
-              module CanBeTried
+              module CanHaveFallback
                 module Concern
                   include Support::Concern
 
@@ -15,8 +15,8 @@ module ConvenientService
                     ##
                     # @return [Boolean]
                     #
-                    def try_result?
-                      Utils.to_bool(extra_kwargs[:try_result])
+                    def fallback_result?
+                      Utils.to_bool(extra_kwargs[:fallback_result])
                     end
                   end
                 end

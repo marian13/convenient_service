@@ -276,7 +276,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         end
 
         context "when `other` has different extra kwargs" do
-          let(:other) { step_class.new(*args, **kwargs.merge(try: false)) }
+          let(:other) { step_class.new(*args, **kwargs.merge(fallback: false)) }
 
           it "ignores them" do
             expect(step == other).to eq(true)
@@ -616,7 +616,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         end
 
         context "when constructor kwargs have extra values" do
-          let(:kwargs) { {try: true, in: inputs, out: outputs, index: index, container: container, organizer: organizer} }
+          let(:kwargs) { {fallback: true, in: inputs, out: outputs, index: index, container: container, organizer: organizer} }
 
           let(:kwargs_representation) do
             {
@@ -625,7 +625,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
               index: step.index,
               container: step.container,
               organizer: step.organizer,
-              try: true
+              fallback: true
             }
           end
 

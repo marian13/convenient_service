@@ -16,7 +16,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       let(:index) { 0 }
       let(:container) { Class.new }
       let(:organizer) { container.new }
-      let(:extra_kwargs) { {try: false} }
+      let(:extra_kwargs) { {fallback: false} }
 
       let(:original_params) do
         ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Structs::Params.new(

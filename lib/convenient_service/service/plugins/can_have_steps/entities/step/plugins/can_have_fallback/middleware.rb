@@ -7,7 +7,7 @@ module ConvenientService
         module Entities
           class Step
             module Plugins
-              module CanBeTried
+              module CanHaveFallback
                 class Middleware < MethodChainMiddleware
                   intended_for :result, entity: :step
 
@@ -17,11 +17,11 @@ module ConvenientService
                   def next(...)
                     result = chain.next(...)
 
-                    return result unless entity.try_step?
+                    return result unless entity.fallback_step?
 
                     return result if result.success?(mark_status_as_checked: false)
 
-                    entity.try_result(...)
+                    entity.fallback_result(...)
                   end
                 end
               end

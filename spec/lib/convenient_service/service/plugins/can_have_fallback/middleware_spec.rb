@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
-RSpec.describe ConvenientService::Service::Plugins::CanBeTried::Middleware do
+RSpec.describe ConvenientService::Service::Plugins::CanHaveFallback::Middleware do
   let(:middleware) { described_class }
 
   example_group "inheritance" do
@@ -20,7 +20,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanBeTried::Middleware do
     describe ".intended_methods" do
       let(:spec) do
         Class.new(ConvenientService::MethodChainMiddleware) do
-          intended_for :try_result, entity: :service
+          intended_for :fallback_result, entity: :service
         end
       end
 
@@ -40,18 +40,18 @@ RSpec.describe ConvenientService::Service::Plugins::CanBeTried::Middleware do
 
       subject(:method_value) { method.call }
 
-      let(:method) { wrap_method(service_instance, :try_result, observe_middleware: middleware) }
+      let(:method) { wrap_method(service_instance, :fallback_result, observe_middleware: middleware) }
 
       let(:service_class) do
         Class.new.tap do |klass|
           klass.class_exec(middleware) do |middleware|
             include ConvenientService::Configs::Standard
 
-            middlewares :try_result do
+            middlewares :fallback_result do
               observe middleware
             end
 
-            def try_result
+            def fallback_result
               success
             end
           end
@@ -70,11 +70,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanBeTried::Middleware do
             klass.class_exec(middleware) do |middleware|
               include ConvenientService::Configs::Standard
 
-              middlewares :try_result do
+              middlewares :fallback_result do
                 observe middleware
               end
 
-              def try_result
+              def fallback_result
                 error
               end
             end
@@ -86,13 +86,13 @@ RSpec.describe ConvenientService::Service::Plugins::CanBeTried::Middleware do
             Return value of service `#{service_class}` try is NOT a `success`.
             It is `error`.
 
-            Did you accidentally call `failure` or `error` instead of `success` from the `try_result` method?
+            Did you accidentally call `failure` or `error` instead of `success` from the `fallback_result` method?
           TEXT
         end
 
-        it "raises `ConvenientService::Service::Plugins::CanBeTried::Exceptions::ServiceTryReturnValueNotSuccess`" do
+        it "raises `ConvenientService::Service::Plugins::CanHaveFallback::Exceptions::ServiceFallbackReturnValueNotSuccess`" do
           expect { method_value }
-            .to raise_error(ConvenientService::Service::Plugins::CanBeTried::Exceptions::ServiceTryReturnValueNotSuccess)
+            .to raise_error(ConvenientService::Service::Plugins::CanHaveFallback::Exceptions::ServiceFallbackReturnValueNotSuccess)
             .with_message(exception_message)
         end
       end
@@ -103,31 +103,31 @@ RSpec.describe ConvenientService::Service::Plugins::CanBeTried::Middleware do
             klass.class_exec(middleware) do |middleware|
               include ConvenientService::Configs::Standard
 
-              middlewares :try_result do
+              middlewares :fallback_result do
                 observe middleware
               end
 
-              def try_result
+              def fallback_result
                 success
               end
             end
           end
         end
 
-        let(:try_result) { service_instance.success }
+        let(:fallback_result) { service_instance.success }
 
         before do
-          allow(service_instance).to receive(:success).and_return(try_result)
+          allow(service_instance).to receive(:success).and_return(fallback_result)
         end
 
-        it "returns `try_result`" do
-          expect(method_value).to eq(try_result)
+        it "returns `fallback_result`" do
+          expect(method_value).to eq(fallback_result)
         end
 
         specify do
           expect { method_value }
-            .to delegate_to(try_result, :copy)
-            .with_arguments(overrides: {kwargs: {try_result: true}})
+            .to delegate_to(fallback_result, :copy)
+            .with_arguments(overrides: {kwargs: {fallback_result: true}})
             .and_return_its_value
         end
       end

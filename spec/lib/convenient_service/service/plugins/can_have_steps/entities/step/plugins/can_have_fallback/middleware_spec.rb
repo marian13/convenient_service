@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeTried::Middleware do
+RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallback::Middleware do
   let(:middleware) { described_class }
 
   example_group "inheritance" do
@@ -69,8 +69,8 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
             success(from: :result)
           end
 
-          def try_result
-            success(from: :try_result)
+          def fallback_result
+            success(from: :fallback_result)
           end
         end
       end
@@ -99,7 +99,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
                 end
               end
 
-              step first_step, try: true
+              step first_step, fallback: true
             end
           end
         end
@@ -113,19 +113,19 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
                 failure(from: :result)
               end
 
-              def try_result
-                success(from: :try_result)
+              def fallback_result
+                success(from: :fallback_result)
               end
             end
           end
 
           it "returns result" do
-            expect(method_value).to be_success.with_data(from: :try_result).of_step(first_step)
+            expect(method_value).to be_success.with_data(from: :fallback_result).of_step(first_step)
           end
 
           specify do
             expect { method_value }
-              .to delegate_to(step, :try_result)
+              .to delegate_to(step, :fallback_result)
               .without_arguments
               .and_return_its_value
           end
@@ -140,8 +140,8 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
                 success(from: :result)
               end
 
-              def try_result
-                success(from: :try_result)
+              def fallback_result
+                success(from: :fallback_result)
               end
             end
           end

@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeTried::Concern do
+RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanHaveFallback::Concern do
   include ConvenientService::RSpec::Matchers::CacheItsValue
 
   example_group "modules" do
@@ -31,7 +31,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
   end
 
   example_group "instance methods" do
-    describe "#try_result?" do
+    describe "#fallback_result?" do
       let(:result) { service.result }
 
       let(:service) do
@@ -42,25 +42,25 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
             success
           end
 
-          def try_result
+          def fallback_result
             success
           end
         end
       end
 
-      context "when result is NOT from `try_result` method" do
+      context "when result is NOT from `fallback_result` method" do
         let(:result) { service.result }
 
         it "returns `false`" do
-          expect(result.try_result?).to eq(false)
+          expect(result.fallback_result?).to eq(false)
         end
       end
 
-      context "when result is from `try_result` method" do
-        let(:result) { service.try_result }
+      context "when result is from `fallback_result` method" do
+        let(:result) { service.fallback_result }
 
         it "returns `true`" do
-          expect(result.try_result?).to eq(true)
+          expect(result.fallback_result?).to eq(true)
         end
       end
     end

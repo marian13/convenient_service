@@ -7,7 +7,7 @@ module ConvenientService
         module Entities
           class Step
             module Plugins
-              module CanBeTried
+              module CanHaveFallback
                 module Concern
                   include Support::Concern
 
@@ -15,31 +15,31 @@ module ConvenientService
                     ##
                     # @return [Bool]
                     #
-                    def try_step?
-                      Utils.to_bool(params.extra_kwargs[:try])
+                    def fallback_step?
+                      Utils.to_bool(params.extra_kwargs[:fallback])
                     end
 
                     ##
                     # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
                     # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepHasNoOrganizer]
                     #
-                    # @note `service_try_result` has middlewares.
+                    # @note `service_fallback_result` has middlewares.
                     #
                     # @internal
-                    #   IMPORTANT: `service.klass.try_result(**input_values)` is the reason, why services should have only kwargs as arguments.
+                    #   IMPORTANT: `service.klass.fallback_result(**input_values)` is the reason, why services should have only kwargs as arguments.
                     #   TODO: Extract `StepDefinition`. This way `has_organizer?` check can be avoided completely.
                     #
-                    def service_try_result
-                      service.klass.try_result(**input_values)
+                    def service_fallback_result
+                      service.klass.fallback_result(**input_values)
                     end
 
                     ##
                     # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
                     # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepHasNoOrganizer]
-                    # @note `try_result` has middlewares.
+                    # @note `fallback_result` has middlewares.
                     #
-                    def try_result
-                      convert_to_step_result(service_try_result)
+                    def fallback_result
+                      convert_to_step_result(service_fallback_result)
                     end
                   end
                 end
