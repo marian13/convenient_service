@@ -76,7 +76,10 @@
 | Low | 🚧 | Generator to create a spec default structure | |
 | Low | 🚧 | Rubocop cop that complains when a service does NOT have its own suite of specs | |
 | High | 🚧 | Add specs for `WrappedMethod#call` | |
-| High | 🚧 | Check whether ignoring error was used properly | |
-| High | 🚧 | Steps are great for `and` logic, but what to do with `or` logic? | Create third service |
+| High | 🚧 | Check whether ignoring the error was used properly | |
+| High | 🚧 | Steps are great for `and` logic, but what to do with `or` logic? | Create the third service | |
+| High | 🚧 | Steps are great for `and` logic, but what to do with `case when` logic? | Create the third service | | 
+| High | 🚧 | Cacing of services | It is relatively simple to add caching for steps, but not for all services, since steps are managed by framework | |
+| High | 🚧 | Fallback should return result with already checked status |  |
 
 Search for `TODO`s in the codebase for more tasks.
