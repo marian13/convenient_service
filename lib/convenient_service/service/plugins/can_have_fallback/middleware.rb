@@ -10,6 +10,8 @@ module ConvenientService
           ##
           # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
           #
+          # @note `fallback_result` is always successful, that is why its status is pre-checked.
+          #
           # @internal
           #   NOTE: Copy is returned to have a fresh status.
           #
@@ -19,6 +21,7 @@ module ConvenientService
             raise Exceptions::ServiceFallbackReturnValueNotSuccess.new(service: entity, result: fallback_result) unless fallback_result.success?
 
             fallback_result.copy(overrides: {kwargs: {fallback_result: true}})
+              .tap { |result| result.success? }
           end
         end
       end

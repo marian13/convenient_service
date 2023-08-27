@@ -128,7 +128,10 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveFallback::Middleware 
           expect { method_value }
             .to delegate_to(fallback_result, :copy)
             .with_arguments(overrides: {kwargs: {fallback_result: true}})
-            .and_return_its_value
+        end
+
+        it "returns result with checked status" do
+          expect(method_value.has_checked_status?).to eq(true)
         end
       end
     end
