@@ -1,5 +1,143 @@
 # Changelog
 
+## 0.13.0 (2023-08-27)
+
+
+### ⚠ BREAKING CHANGES
+
+* **has_j_send_result:** rename HasResult to HasJSendResult
+* **has_result_short_syntax:** allow to pass message to failures
+* **core:** disallow config commitment by missing private method
+* **can_have_stubbed_result:** state explicitly cache backend
+* **has_j_send_status_and_attributes:** use Jsend to JSend
+
+### Features
+
+* **alias:** introduce CS alias ([14652d7](https://github.com/marian13/convenient_service/commit/14652d77b6518d1b4ba75fa88eea6aba20ee0e5f))
+* **array-based-cache:** add array-based cache implementation ([795888a](https://github.com/marian13/convenient_service/commit/795888a15dbd1e488fe824e6bb8094b9997044e3))
+* **be_result:** add trigger for BE_RESULT ([d7a416e](https://github.com/marian13/convenient_service/commit/d7a416e39377378655740d9997695c0100b60258))
+* **be_result:** introduce comparing_by ([c304fa7](https://github.com/marian13/convenient_service/commit/c304fa7e4eb15aeae2da075a7947ae835759a605))
+* **cache:** introduce thread safe array ([b592853](https://github.com/marian13/convenient_service/commit/b5928536a7dc3e804d386c553da5b9b1e3da1291))
+* **call_chain_next:** introduce with_any_arguments ([17316d1](https://github.com/marian13/convenient_service/commit/17316d1f4d6f172f81cc0752ddfb36b9bb8338da))
+* **can_be_own_result:** introduce new plugin ([ba7111c](https://github.com/marian13/convenient_service/commit/ba7111c2e01e758affa0e71a4638049fce206243))
+* **can_be_tried:** inroduce CanBeTried for result ([9e68538](https://github.com/marian13/convenient_service/commit/9e68538df1207b5bd7906203728b3860324c6d6c))
+* **can_be_tried:** introduce step try option ([9c1f493](https://github.com/marian13/convenient_service/commit/9c1f4932b3bf8986624dde9c40580e76b0a0a7ac))
+* **can_have_checked_status:** refactor marks_result_status_as_checked to have an ability of a pure status check ([86750dd](https://github.com/marian13/convenient_service/commit/86750dd826ad9b6b8f84e6d26182ac16ec769b8c))
+* **can_have_steps:** allow to pass extra kwargs to step definition ([bd867e3](https://github.com/marian13/convenient_service/commit/bd867e3d7e1147889dab982e2b7bea49a95a3d90))
+* **can_have_steps:** introduce Step#resolved_result ([68ee612](https://github.com/marian13/convenient_service/commit/68ee612800e61e09e3fb9e18a418ee09261da0bc))
+* **can_have_stubbed_results:** use thread safe array backend ([45b9e24](https://github.com/marian13/convenient_service/commit/45b9e249052e154123e1a014a16df0b2b165268b))
+* **can_have_try_result:** introduce middleware ([da24051](https://github.com/marian13/convenient_service/commit/da24051cd240a4ec90f3a970f9f721ec13160dc8))
+* **can_have_try_result:** introduce Service.try_result ([92914dc](https://github.com/marian13/convenient_service/commit/92914dc3090774baa455e59709bb79a6b8c8c48a))
+* **can_have_try_result:** introduce Service#try_result ([521e80f](https://github.com/marian13/convenient_service/commit/521e80f5909bb2c0373a340cb2f4e4c7f3b790c1))
+* **can_have_try_result:** use in minimal config ([bf1135d](https://github.com/marian13/convenient_service/commit/bf1135df3bb650ee4190cbfba7bc2c52bec21885))
+* **can_utilize_finite_loop:** introduce new plugin ([b161ecf](https://github.com/marian13/convenient_service/commit/b161ecf062e9ef2484862d00eadf5ed7cab6c628))
+* **collects_services_in_exception:** add initial version of plugin ([720267a](https://github.com/marian13/convenient_service/commit/720267ab070225892db9743aa379935f16a4b0b5))
+* **configs:** add ok? and not_ok? aliases for success? and not_success? ([5dfb378](https://github.com/marian13/convenient_service/commit/5dfb378ea905bf0fd12e0a78b812ecc208efdf2a))
+* **core:** add trigger for RESOLVE_METHOD_MIDDLEWARES_SUPER_METHOD ([d419985](https://github.com/marian13/convenient_service/commit/d419985dca3e348b1ee8607aadfd2ea4a0cc84be))
+* **core:** commit config from .new ([9e252a0](https://github.com/marian13/convenient_service/commit/9e252a0094e8d55fa5d51c0c33b867f6e16d1882))
+* **core:** introduce has_committed_config? ([ae01495](https://github.com/marian13/convenient_service/commit/ae01495c5360675a1a7e825e90f1993c38392d70))
+* **core:** introduce middleware arguments ([5ca7868](https://github.com/marian13/convenient_service/commit/5ca7868181d44f0f1eb1f2958270e4c6bbb76646))
+* **core:** introduce Middleware.with ([4272262](https://github.com/marian13/convenient_service/commit/427226258cce031679c51a5b4ea900506c995c4a))
+* **core:** introduce MiddlewareCreator ([d1b6ce8](https://github.com/marian13/convenient_service/commit/d1b6ce89fdc008359f9fd0ed080c3cfb28bd39b7))
+* **core:** introduce observable middleware ([f767a13](https://github.com/marian13/convenient_service/commit/f767a13272bcdd4dd7171a9d0bdf4bb8d7f425d7))
+* **core:** introduce observe and use_and_observe ([c19f624](https://github.com/marian13/convenient_service/commit/c19f6246689b3c222d87ff16bba8b65d7b1c04f5))
+* **core:** MiddlewareCreator#new ([e36cee9](https://github.com/marian13/convenient_service/commit/e36cee97a8cceb70fe7564bde516dc31f4b37157))
+* **core:** track method_missing commit triggers ([f3a7264](https://github.com/marian13/convenient_service/commit/f3a7264e3ddb67976fbf2e1c875df15f6f133c0b))
+* **debug:** add Step#output_values without specs ([b7e4712](https://github.com/marian13/convenient_service/commit/b7e47126b22fa93d29198b9e6843a395c4eaad7c))
+* **delegate_to:** add with_any_arguments ([f296e53](https://github.com/marian13/convenient_service/commit/f296e53f19b57128e45cc25cc10edac010ba671c))
+* **depencency_container:** introduce entry ([a905b6e](https://github.com/marian13/convenient_service/commit/a905b6e90cf656a409246f17be84d39c3b4f79c6))
+* **feature:** introduce initial feature ([7413273](https://github.com/marian13/convenient_service/commit/7413273af1d5abad4aee912cc8bffe8f1d6d1d0b))
+* **has_awesome_print_inspect:** add initial has_awesome_print_inspect for result ([8437efe](https://github.com/marian13/convenient_service/commit/8437efe19601f73b333544de2b9522642b313e1e))
+* **has_awesome_print_inspect:** add initial has_awesome_print_inspect for service ([0e5d3c0](https://github.com/marian13/convenient_service/commit/0e5d3c0021e05b6bea10817fc27d23628ef00a04))
+* **has_awesome_print_inspect:** add initial has_awesome_print_inspect for step ([d192327](https://github.com/marian13/convenient_service/commit/d1923276309f044ccb7f6793bc099257aa7970e3))
+* **has_awesome_print_inspect:** add initial HasAwesomePrintInspect for Data ([b5a9b7b](https://github.com/marian13/convenient_service/commit/b5a9b7b8c67f3ee22ee711d8417959918a942630))
+* **has_inspect:** show anonymous class ([87cc634](https://github.com/marian13/convenient_service/commit/87cc63469cb8ecaacc4dbab4817bf43e91cb3e86))
+* **has_inspect:** show anonymous class ([5dc7779](https://github.com/marian13/convenient_service/commit/5dc7779f86431492d6fdbbc2386410c41b5f9164))
+* **has_j_send_status_and_attributes:** add public creators ([a954ef2](https://github.com/marian13/convenient_service/commit/a954ef2cd8020fc8158eba864883e15f0442630b))
+* **has_j_send_status_and_attributes:** allow to compare code by #=== ([54b5025](https://github.com/marian13/convenient_service/commit/54b502580e2e326bb319c4a7de050242bacdf0ba))
+* **has_j_send_status_and_attributes:** allow to compare data by #=== ([a5ce835](https://github.com/marian13/convenient_service/commit/a5ce835da8c0d920dc4a45baf2e599071867511e))
+* **has_j_send_status_and_attributes:** allow to compare message by #=== ([ddd5ffd](https://github.com/marian13/convenient_service/commit/ddd5ffd16596fd4288273df980b9a5c150cdbb1b))
+* **has_j_send_status_and_attributes:** introduce Code.=== ([c2414cc](https://github.com/marian13/convenient_service/commit/c2414cc251c754b6d405494ed2d6e241457e71ff))
+* **has_j_send_status_and_attributes:** introduce Data.=== ([d47202d](https://github.com/marian13/convenient_service/commit/d47202d164fa6215f730d4c75914fd2b53ef7734))
+* **has_j_send_status_and_attributes:** introduce Message.=== ([f936fae](https://github.com/marian13/convenient_service/commit/f936fae60a3743c97ea84ceada6c7bc59d59ece6))
+* **has_j_send_status_and_attributes:** introduce Status.=== ([494a9b3](https://github.com/marian13/convenient_service/commit/494a9b3b9b5cdd8df737c941c93bdbfbb771115f))
+* **has_j_send_status_and_attributes:** link result to status, data, message, code ([dd87723](https://github.com/marian13/convenient_service/commit/dd877234c300151053bae45fd9ae9aac9b74711a))
+* **has_j_send_status_and_attributes:** respect RSpec argument matchers via #=== ([c163b32](https://github.com/marian13/convenient_service/commit/c163b3207bd7fdfec1c5ff1a222de80210f1e6fd))
+* **has_j_send_status_and_attributes:** support partial data matching ([154a4fd](https://github.com/marian13/convenient_service/commit/154a4fda1a83135cabf6fb31b6b65bb6cec3916f))
+* **has_jsend_status_and_attributes:** allow user to provide Code, Data, Message and Status classes ([ff9703e](https://github.com/marian13/convenient_service/commit/ff9703e91c310d6223fbf8c9142c9e41d58498ba))
+* **has_mermaid_flowchart:** introduce experimental flowchart ([73475e6](https://github.com/marian13/convenient_service/commit/73475e6f7067439b867a7d9d193d9759dbfa41cf))
+* **has_result_status_check_short_syntax:** Add two more short bool result checks ([a8a8a8b](https://github.com/marian13/convenient_service/commit/a8a8a8b2c7d6ff90249488dffff892dff90bf914))
+* **has_result:** export commands.is_result? ([17e6bb6](https://github.com/marian13/convenient_service/commit/17e6bb60638f521728735baddab5a623d81e91fd))
+* **has_result:** introduce Commands::IsResult ([94e337a](https://github.com/marian13/convenient_service/commit/94e337a93e4724b7382d6afbfc802ac5601c1cad))
+* **logger:** add version class ([2e5b236](https://github.com/marian13/convenient_service/commit/2e5b2361caf87d6e08854f7b7c53d2d90cc31a60))
+* **logger:** provide fallback for older loggers ([6bbefdc](https://github.com/marian13/convenient_service/commit/6bbefdcd2cceee20588a482af0725b380f897c87))
+* **method_middlewares:** introduce #next_arguments ([a878d51](https://github.com/marian13/convenient_service/commit/a878d511bc8cefabd434d38a0502949bc2604de6))
+* **middlewares:** add intended entity ([d1a5a0f](https://github.com/marian13/convenient_service/commit/d1a5a0fe6b87cc47ab4f9c85722a2707518777f8))
+* **paint:** add version class ([118c650](https://github.com/marian13/convenient_service/commit/118c650c45c8cac20cc9a8c7411b5b091a77b5e0))
+* **rescues_result_unhandled_exceptions:** read max_backtrace_size from middleware arguments ([6d7de5e](https://github.com/marian13/convenient_service/commit/6d7de5ecd38d2a9bc7bc719aa44e86f3a31694d7))
+* **result:** introduce CanBeStubbed plugin ([9a41145](https://github.com/marian13/convenient_service/commit/9a41145a5c100a4bc3169fda34ffb0574edc01ab))
+* **ruby_middleware:** add support of middleware creators ([06bcc15](https://github.com/marian13/convenient_service/commit/06bcc15f6f600e4fc40ec7e1842495f2b37edfd0))
+* **ruby:** check if truffleruby ([341ced1](https://github.com/marian13/convenient_service/commit/341ced193953cd8c51a97ac3c4cb8822433485f0))
+* **service:** extract RaisesOnNotResultReturnValue ([4de15bc](https://github.com/marian13/convenient_service/commit/4de15bce4fbb4f190fdd79a5a478a8e12a5843a2))
+* **sets_parent_to_foreign_result:** include foreign result into parents enum ([b680678](https://github.com/marian13/convenient_service/commit/b680678ee32c2797993084ef4f4a1f18fb01e4f2))
+* **step:** add Step#method_step? ([caefe8e](https://github.com/marian13/convenient_service/commit/caefe8e28ce75fece673998de2181c7d94cc4029))
+* **stub_service:** add trigger for STUB_SERVICE ([047c835](https://github.com/marian13/convenient_service/commit/047c8358cafd86d84ced0f300440d4a08ee10994))
+* **stub_service:** introduce Service::CountsStubbedResultsInvocations and Result::HasStubbedResultInvocationsCounter ([88860a5](https://github.com/marian13/convenient_service/commit/88860a5917f88362670b0fc830b97de79ae83732))
+* **stub_service:** use result stubs by service instances ([3dde79b](https://github.com/marian13/convenient_service/commit/3dde79bdbedfa03abe94f979475cbdb8ee40d799))
+* **support:** add default for finite_loop ([e1c14b9](https://github.com/marian13/convenient_service/commit/e1c14b9b6e221b521714e1742001d44ac57f0d31))
+* **support:** introduce anything ([4a4a287](https://github.com/marian13/convenient_service/commit/4a4a28754aa4325e434e6bce11735e8837680e50))
+* **support:** safe_method ([b37d735](https://github.com/marian13/convenient_service/commit/b37d735c03b08e57d930c9d5cb1c7cd089a07e0a))
+* **support:** ThreadSafeCounter#current_value= ([bf703bb](https://github.com/marian13/convenient_service/commit/bf703bb80e4bdac62edff930ea9e524012dbd221))
+* **utils:** add protected option for Method#defined? ([2bfd1f6](https://github.com/marian13/convenient_service/commit/2bfd1f6210c2774a7f3bb88e9ce7dbb18c40c777))
+* **utils:** introduce clamp_class ([ae1712c](https://github.com/marian13/convenient_service/commit/ae1712c3750d256a61d846e052fedd00856b1aa5))
+* **utils:** introduce Class#display_name ([5316ec1](https://github.com/marian13/convenient_service/commit/5316ec18d58dbbf017683592f177a3185572c7ff))
+* **utils:** introduce Hash#assert_valid_keys ([35b3f68](https://github.com/marian13/convenient_service/commit/35b3f681aa2e544cab7a1c81d00e187325802ad1))
+* **utils:** introduce Hash#triple_equality_compare ([4aeb91f](https://github.com/marian13/convenient_service/commit/4aeb91f8c702b7f6b32d1964b2e5153f67fca9dd))
+* **utils:** introduce shorter Utils.to_bool ([8713470](https://github.com/marian13/convenient_service/commit/87134707bac542f550ea8dae941bb7c0112b33f0))
+* **utils:** introduce String.truncate ([f08e053](https://github.com/marian13/convenient_service/commit/f08e0536b3381e01cd88015bc49036999db58160))
+
+
+### Bug Fixes
+
+* **be_result:** do not always show JSend attributes ([83c7d20](https://github.com/marian13/convenient_service/commit/83c7d20cc3ada10489abed99ab67c9751739f4f0))
+* **cache:** change order of require ([ba20e90](https://github.com/marian13/convenient_service/commit/ba20e90f822c7fb90819a04256929429f0375136))
+* **cache:** remove accidentally added file ([fac0105](https://github.com/marian13/convenient_service/commit/fac0105885541a950befe441c081bd03a095f58e))
+* **can_be_stubbed_result:** remove typo ([cf9ece7](https://github.com/marian13/convenient_service/commit/cf9ece771b0a97823b0a3f9f1192457b74fa5ef7))
+* **can_have_fallback:** precheck status of fallback results ([e7c0468](https://github.com/marian13/convenient_service/commit/e7c04688d20d22595e228cd164f992fa01821b66))
+* **can_have_try_result:** return copy to have fresh state ([ba5e86d](https://github.com/marian13/convenient_service/commit/ba5e86d8a3a015e54143b6193bf3a806dfe87d95))
+* **can_have_user_provided_entity:** include Core to proto entity as well ([086d15c](https://github.com/marian13/convenient_service/commit/086d15ce2724e8daa7c0ccbe363dea1a1b8fd9fb))
+* **contain_exactly:** using `tally` method ([9639f28](https://github.com/marian13/convenient_service/commit/9639f28900143e9873a579d4dd471bb227217dab))
+* **core:** disallow config commitment by missing private method ([7b3a20b](https://github.com/marian13/convenient_service/commit/7b3a20bedaf0d3c3cfbcab6a5a0d7a004b673a3b))
+* **core:** disallow config commitment by missing private method ([a40d5d1](https://github.com/marian13/convenient_service/commit/a40d5d16abdf9e3c05052adce8caca363834573d))
+* **has_j_send_status_and_attributes:** compare by === manually since Hash does NOT have its own === ([31d5782](https://github.com/marian13/convenient_service/commit/31d57820b5e8d6160d40da3ddf25ab73e6bcef32))
+* **has_j_send_status_and_attributes:** correct comparison order ([a9def90](https://github.com/marian13/convenient_service/commit/a9def90e772324450f9f2cd6a177df5cef7018c9))
+* **has_result_status_check_short_syntax:** Correct implementation of two methods ([5cf6004](https://github.com/marian13/convenient_service/commit/5cf6004bdfe49973452846e452dbcd087074b723))
+* **kwargs:** add compatibility between Ruby 2 and 3 ([a361ad7](https://github.com/marian13/convenient_service/commit/a361ad7334df88339fd372a5bf3f44005234c36e))
+* **method_collection:** fix failed specs ([baa7e1f](https://github.com/marian13/convenient_service/commit/baa7e1f7e5ab694c61cf7d3422b3673e36e57ab4))
+* **middleware_spec:** removed unused require ([0a39c4f](https://github.com/marian13/convenient_service/commit/0a39c4f394fdf484b2cdf20b8e6be5f291fd05c0))
+* Remove /gemfiles directory ([4f11a14](https://github.com/marian13/convenient_service/commit/4f11a140bf53bcf1298707dbee2365c053041824))
+* **support:** move lock to thread safe counter ([b90f2e7](https://github.com/marian13/convenient_service/commit/b90f2e7f424568d75be8cad6cb71a288ce13b1ce))
+* **yard:** remove colon in tags ([81239d7](https://github.com/marian13/convenient_service/commit/81239d7bd37a92de5c727224c992db94e9fe2b61))
+
+
+### Performance Improvements
+
+* **core:** improve commit_config slightly ([c1738b4](https://github.com/marian13/convenient_service/commit/c1738b4de855a2b3a3f5fa25565f52ccfbd30bb0))
+* **core:** improve config.committed? ([283c9ca](https://github.com/marian13/convenient_service/commit/283c9ca30728dfc6311e472d17a69a3dcfcb565b))
+
+
+### Miscellaneous Chores
+
+* release 0.13.0 ([7373f3e](https://github.com/marian13/convenient_service/commit/7373f3ecba7ded1a949d4a95aeb99a35214ef806))
+
+
+### Code Refactoring
+
+* **can_have_stubbed_result:** state explicitly cache backend ([b2e4228](https://github.com/marian13/convenient_service/commit/b2e4228708c0e247a1c509c6a04ae39920998eae))
+* **has_j_send_result:** rename HasResult to HasJSendResult ([fd6846c](https://github.com/marian13/convenient_service/commit/fd6846c78edd9524eaf0121e77ce4e5a64980974))
+* **has_j_send_status_and_attributes:** use Jsend to JSend ([ffb2642](https://github.com/marian13/convenient_service/commit/ffb26424f9ce8f176a148c146c238a2bb1c77ce6))
+* **has_result_short_syntax:** allow to pass message to failures ([4a07a38](https://github.com/marian13/convenient_service/commit/4a07a38ac36cb1564059c9ad39a5c4c007db0f82))
+
 ## [0.12.0](https://github.com/marian13/convenient_service/compare/v0.11.0...v0.12.0) (2023-04-01)
 
 
