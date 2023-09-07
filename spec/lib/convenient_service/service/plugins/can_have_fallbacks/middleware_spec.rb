@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
-RSpec.describe ConvenientService::Service::Plugins::CanHaveFallback::Middleware do
+RSpec.describe ConvenientService::Service::Plugins::CanHaveFallbacks::Middleware do
   let(:middleware) { described_class }
 
   example_group "inheritance" do
@@ -87,9 +87,9 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveFallback::Middleware 
             TEXT
           end
 
-          it "raises `ConvenientService::Service::Plugins::CanHaveFallback::Exceptions::ServiceFallbackReturnValueNotSuccess`" do
+          it "raises `ConvenientService::Service::Plugins::CanHaveFallbacks::Exceptions::ServiceFallbackReturnValueNotSuccess`" do
             expect { method_value }
-              .to raise_error(ConvenientService::Service::Plugins::CanHaveFallback::Exceptions::ServiceFallbackReturnValueNotSuccess)
+              .to raise_error(ConvenientService::Service::Plugins::CanHaveFallbacks::Exceptions::ServiceFallbackReturnValueNotSuccess)
               .with_message(exception_message)
           end
         end

@@ -30,7 +30,7 @@ module ConvenientService
           use Plugins::Common::HasCallbacks::Concern
           use Plugins::Common::HasAroundCallbacks::Concern
 
-          use Plugins::Service::CanHaveFallback::Concern
+          use Plugins::Service::CanHaveFallbacks::Concern
           use Plugins::Service::HasMermaidFlowchart::Concern
         end
 
@@ -72,7 +72,7 @@ module ConvenientService
           use Plugins::Common::CachesReturnValue::Middleware
 
           use Plugins::Service::RaisesOnNotResultReturnValue::Middleware
-          use Plugins::Service::CanHaveFallback::Middleware.with(status: :failure)
+          use Plugins::Service::CanHaveFallbacks::Middleware.with(status: :failure)
         end
 
         ##
@@ -85,7 +85,7 @@ module ConvenientService
           use Plugins::Common::CachesReturnValue::Middleware
 
           use Plugins::Service::RaisesOnNotResultReturnValue::Middleware
-          use Plugins::Service::CanHaveFallback::Middleware.with(status: :error)
+          use Plugins::Service::CanHaveFallbacks::Middleware.with(status: :error)
         end
 
         middlewares :step do
@@ -112,7 +112,7 @@ module ConvenientService
 
             use Plugins::Result::CanHaveStep::Concern
             use Plugins::Result::CanBeOwnResult::Concern
-            use Plugins::Result::CanHaveFallback::Concern
+            use Plugins::Result::CanHaveFallbacks::Concern
             use Plugins::Result::CanHaveParentResult::Concern
             use Plugins::Result::CanHaveCheckedStatus::Concern
           end
@@ -157,11 +157,11 @@ module ConvenientService
         class self::Step
           concerns do
             use Plugins::Common::HasJSendResultDuckShortSyntax::Concern
-            use Plugins::Step::CanHaveFallback::Concern
+            use Plugins::Step::CanHaveFallbacks::Concern
           end
 
           middlewares :result do
-            use Plugins::Step::CanHaveFallback::Middleware
+            use Plugins::Step::CanHaveFallbacks::Middleware
             use Plugins::Step::CanHaveParentResult::Middleware
           end
 

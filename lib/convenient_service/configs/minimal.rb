@@ -18,7 +18,7 @@ module ConvenientService
     #       # ...
     #     end
     #
-    #   In turn, `:fallback_result` is added by `use Plugins::Service::CanHaveFallback::Concern` in `Standard`.
+    #   In turn, `:fallback_result` is added by `use Plugins::Service::CanHaveFallbacks::Concern` in `Standard`.
     #   That is why it is the responsibility of the `Standard` config, to define:
     #
     #     middlewares :fallback_result do

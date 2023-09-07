@@ -3,7 +3,7 @@
 module ConvenientService
   module Service
     module Plugins
-      module CanHaveFallback
+      module CanHaveFallbacks
         class Middleware < MethodChainMiddleware
           intended_for [:fallback_failure_result, :fallback_error_result], entity: :service
 

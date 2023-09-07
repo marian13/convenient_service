@@ -3,7 +3,7 @@
 module ConvenientService
   module Service
     module Plugins
-      module CanHaveFallback
+      module CanHaveFallbacks
         module Concern
           include Support::Concern
 
@@ -11,7 +11,7 @@ module ConvenientService
             ##
             # Returns `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result` when overridden.
             #
-            # @raise [ConvenientService::Service::Plugins::CanHaveFallback::Exceptions::FallbackResultIsNotOverridden]
+            # @raise [ConvenientService::Service::Plugins::CanHaveFallbacks::Exceptions::FallbackResultIsNotOverridden]
             #
             def fallback_failure_result
               raise Exceptions::FallbackResultIsNotOverridden.new(service: self, status: :failure)
@@ -20,7 +20,7 @@ module ConvenientService
             ##
             # Returns `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result` when overridden.
             #
-            # @raise [ConvenientService::Service::Plugins::CanHaveFallback::Exceptions::FallbackResultIsNotOverridden]
+            # @raise [ConvenientService::Service::Plugins::CanHaveFallbacks::Exceptions::FallbackResultIsNotOverridden]
             #
             def fallback_error_result
               raise Exceptions::FallbackResultIsNotOverridden.new(service: self, status: :error)
@@ -31,7 +31,7 @@ module ConvenientService
             ##
             # Returns `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result` when `#fallback_result` is overridden.
             #
-            # @raise [ConvenientService::Service::Plugins::CanHaveFallback::Exceptions::FallbackResultIsNotOverridden]
+            # @raise [ConvenientService::Service::Plugins::CanHaveFallbacks::Exceptions::FallbackResultIsNotOverridden]
             #
             def fallback_failure_result(...)
               new(...).fallback_failure_result
@@ -40,7 +40,7 @@ module ConvenientService
             ##
             # Returns `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result` when `#fallback_result` is overridden.
             #
-            # @raise [ConvenientService::Service::Plugins::CanHaveFallback::Exceptions::FallbackResultIsNotOverridden]
+            # @raise [ConvenientService::Service::Plugins::CanHaveFallbacks::Exceptions::FallbackResultIsNotOverridden]
             #
             # @example `fallback_error_result` method MUST always return `success` with reasonable "null" data.
             #

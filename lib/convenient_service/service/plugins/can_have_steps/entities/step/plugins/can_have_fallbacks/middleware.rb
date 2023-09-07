@@ -7,7 +7,7 @@ module ConvenientService
         module Entities
           class Step
             module Plugins
-              module CanHaveFallback
+              module CanHaveFallbacks
                 class Middleware < MethodChainMiddleware
                   intended_for :result, entity: :step
 

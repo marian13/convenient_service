@@ -3,7 +3,7 @@
 module ConvenientService
   module Service
     module Plugins
-      module CanHaveFallback
+      module CanHaveFallbacks
         module Exceptions
           class FallbackResultIsNotOverridden < ::ConvenientService::Exception
             def initialize(service:, status:)
