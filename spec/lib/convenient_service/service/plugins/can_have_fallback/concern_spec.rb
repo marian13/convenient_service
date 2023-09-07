@@ -43,17 +43,33 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveFallback::Concern do
   end
 
   example_group "instance methods" do
-    describe "#fallback_result" do
+    describe "#fallback_failure_result" do
       let(:exception_message) do
         <<~TEXT
-          Fallback result method (#fallback_result) of `#{service_class}` is NOT overridden.
+          Fallback failure result method (#fallback_failure_result) of `#{service_class}` is NOT overridden.
 
-          NOTE: Make sure overridden `fallback_result` returns `success` with reasonable "null" data.
+          NOTE: Make sure overridden `fallback_failure_result` returns `success` with reasonable "null" data.
         TEXT
       end
 
       it "raises `ConvenientService::Service::Plugins::CanHaveFallback::Exceptions::FallbackResultIsNotOverridden`" do
-        expect { service_instance.fallback_result }
+        expect { service_instance.fallback_failure_result }
+          .to raise_error(ConvenientService::Service::Plugins::CanHaveFallback::Exceptions::FallbackResultIsNotOverridden)
+          .with_message(exception_message)
+      end
+    end
+
+    describe "#fallback_error_result" do
+      let(:exception_message) do
+        <<~TEXT
+          Fallback error result method (#fallback_error_result) of `#{service_class}` is NOT overridden.
+
+          NOTE: Make sure overridden `fallback_error_result` returns `success` with reasonable "null" data.
+        TEXT
+      end
+
+      it "raises `ConvenientService::Service::Plugins::CanHaveFallback::Exceptions::FallbackResultIsNotOverridden`" do
+        expect { service_instance.fallback_error_result }
           .to raise_error(ConvenientService::Service::Plugins::CanHaveFallback::Exceptions::FallbackResultIsNotOverridden)
           .with_message(exception_message)
       end
@@ -61,19 +77,19 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveFallback::Concern do
   end
 
   example_group "class methods" do
-    describe ".fallback_result" do
+    describe ".fallback_failure_result" do
       let(:service_class) do
         Class.new do
           include ConvenientService::Configs::Standard
 
-          def fallback_result
+          def fallback_failure_result
             success
           end
         end
       end
 
       specify do
-        expect { service_class.fallback_result(*args, **kwargs, &block) }
+        expect { service_class.fallback_failure_result(*args, **kwargs, &block) }
           .to delegate_to(service_class, :new)
           .with_arguments(*args, **kwargs, &block)
       end
@@ -81,8 +97,34 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveFallback::Concern do
       specify do
         allow(service_class).to receive(:new).and_return(service_instance)
 
-        expect { service_class.fallback_result(*args, **kwargs, &block) }
-          .to delegate_to(service_instance, :fallback_result)
+        expect { service_class.fallback_failure_result(*args, **kwargs, &block) }
+          .to delegate_to(service_instance, :fallback_failure_result)
+          .and_return_its_value
+      end
+    end
+
+    describe ".fallback_error_result" do
+      let(:service_class) do
+        Class.new do
+          include ConvenientService::Configs::Standard
+
+          def fallback_error_result
+            success
+          end
+        end
+      end
+
+      specify do
+        expect { service_class.fallback_error_result(*args, **kwargs, &block) }
+          .to delegate_to(service_class, :new)
+          .with_arguments(*args, **kwargs, &block)
+      end
+
+      specify do
+        allow(service_class).to receive(:new).and_return(service_instance)
+
+        expect { service_class.fallback_error_result(*args, **kwargs, &block) }
+          .to delegate_to(service_instance, :fallback_error_result)
           .and_return_its_value
       end
     end

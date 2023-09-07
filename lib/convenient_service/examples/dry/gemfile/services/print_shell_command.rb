@@ -33,7 +33,7 @@ module ConvenientService
               success
             end
 
-            def fallback_result
+            def fallback_error_result
               success
             end
           end

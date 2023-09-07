@@ -17,11 +17,14 @@ module ConvenientService
                   def next(...)
                     result = chain.next(...)
 
-                    return result unless entity.fallback_step?
-
-                    return result if result.success?(mark_status_as_checked: false)
-
-                    entity.fallback_result(...)
+                    case result.status.to_sym
+                    when :success
+                      result
+                    when :failure
+                      entity.fallback_failure_step? ? entity.fallback_failure_result(...) : result
+                    when :error
+                      entity.fallback_error_step? ? entity.fallback_error_result(...) : result
+                    end
                   end
                 end
               end

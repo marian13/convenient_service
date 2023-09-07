@@ -81,79 +81,212 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           .without_arguments
       end
 
-      context "when step is NOT try step" do
+      context "when step is NOT fallback step" do
         it "returns result" do
           expect(method_value).to be_success.with_data(from: :result).of_step(first_step)
         end
       end
 
-      context "when step is try step" do
-        let(:container) do
-          Class.new.tap do |klass|
-            klass.class_exec(first_step, middleware) do |first_step, middleware|
-              include ConvenientService::Configs::Standard
+      context "when step is fallback step" do
+        context "when step is fallback failure step" do
+          let(:container) do
+            Class.new.tap do |klass|
+              klass.class_exec(first_step, middleware) do |first_step, middleware|
+                include ConvenientService::Configs::Standard
 
-              self::Step.class_exec(middleware) do |middleware|
-                middlewares :result do
-                  observe middleware
+                self::Step.class_exec(middleware) do |middleware|
+                  middlewares :result do
+                    observe middleware
+                  end
+                end
+
+                step first_step, fallback: [:failure]
+              end
+            end
+          end
+
+          context "when result has `:failure` status" do
+            let(:first_step) do
+              Class.new do
+                include ConvenientService::Configs::Standard
+
+                def result
+                  failure(from: :result)
+                end
+
+                def fallback_failure_result
+                  success(from: :fallback_failure_result)
                 end
               end
+            end
 
-              step first_step, fallback: true
+            it "returns fallback failure result" do
+              expect(method_value).to be_success.with_data(from: :fallback_failure_result).of_step(first_step)
+            end
+
+            specify do
+              expect { method_value }
+                .to delegate_to(step, :fallback_failure_result)
+                .without_arguments
+                .and_return_its_value
+            end
+
+            it "returns result with checked status" do
+              expect(method_value.has_checked_status?).to eq(false)
+            end
+          end
+
+          context "when result has `:error` status" do
+            let(:first_step) do
+              Class.new do
+                include ConvenientService::Configs::Standard
+
+                def result
+                  error("from result")
+                end
+
+                def fallback_failure_result
+                  success(from: :fallback_failure_result)
+                end
+              end
+            end
+
+            let(:result) { first_step.success }
+
+            it "returns result" do
+              expect(method_value).to be_error.with_message("from result").of_step(first_step)
+            end
+
+            it "returns result with unchecked status" do
+              expect(method_value.has_checked_status?).to eq(false)
+            end
+          end
+
+          context "when result has `:success` status" do
+            let(:first_step) do
+              Class.new do
+                include ConvenientService::Configs::Standard
+
+                def result
+                  success(from: :result)
+                end
+
+                def fallback_failure_result
+                  success(from: :fallback_failure_result)
+                end
+              end
+            end
+
+            let(:result) { first_step.success }
+
+            it "returns result" do
+              expect(method_value).to be_success.with_data(from: :result).of_step(first_step)
+            end
+
+            it "returns result with unchecked status" do
+              expect(method_value.has_checked_status?).to eq(false)
             end
           end
         end
 
-        context "when result is NOT successful" do
-          let(:first_step) do
-            Class.new do
-              include ConvenientService::Configs::Standard
+        context "when step is fallback error step" do
+          let(:container) do
+            Class.new.tap do |klass|
+              klass.class_exec(first_step, middleware) do |first_step, middleware|
+                include ConvenientService::Configs::Standard
 
-              def result
-                failure(from: :result)
-              end
+                self::Step.class_exec(middleware) do |middleware|
+                  middlewares :result do
+                    observe middleware
+                  end
+                end
 
-              def fallback_result
-                success(from: :fallback_result)
-              end
-            end
-          end
-
-          it "returns result" do
-            expect(method_value).to be_success.with_data(from: :fallback_result).of_step(first_step)
-          end
-
-          specify do
-            expect { method_value }
-              .to delegate_to(step, :fallback_result)
-              .without_arguments
-              .and_return_its_value
-          end
-        end
-
-        context "when result is successful" do
-          let(:first_step) do
-            Class.new do
-              include ConvenientService::Configs::Standard
-
-              def result
-                success(from: :result)
-              end
-
-              def fallback_result
-                success(from: :fallback_result)
+                step first_step, fallback: [:error]
               end
             end
           end
 
-          let(:result) { first_step.success }
+          context "when result has `:failure` status" do
+            let(:first_step) do
+              Class.new do
+                include ConvenientService::Configs::Standard
 
-          it "returns result" do
-            expect(method_value).to be_success.with_data(from: :result).of_step(first_step)
+                def result
+                  failure(from: :result)
+                end
+
+                def fallback_error_result
+                  success(from: :fallback_error_result)
+                end
+              end
+            end
+
+            let(:result) { first_step.success }
+
+            it "returns result" do
+              expect(method_value).to be_failure.with_data(from: :result).of_step(first_step)
+            end
+
+            it "returns result with unchecked status" do
+              expect(method_value.has_checked_status?).to eq(false)
+            end
           end
 
-          it "returns result with unchecked status" do
-            expect(method_value.has_checked_status?).to eq(false)
+          context "when result has `:error` status" do
+            let(:first_step) do
+              Class.new do
+                include ConvenientService::Configs::Standard
+
+                def result
+                  error("from result")
+                end
+
+                def fallback_error_result
+                  success(from: :fallback_error_result)
+                end
+              end
+            end
+
+            it "returns fallback error result" do
+              expect(method_value).to be_success.with_data(from: :fallback_error_result).of_step(first_step)
+            end
+
+            specify do
+              expect { method_value }
+                .to delegate_to(step, :fallback_error_result)
+                .without_arguments
+                .and_return_its_value
+            end
+
+            it "returns result with checked status" do
+              expect(method_value.has_checked_status?).to eq(false)
+            end
+          end
+
+          context "when result has `:success` status" do
+            let(:first_step) do
+              Class.new do
+                include ConvenientService::Configs::Standard
+
+                def result
+                  success(from: :result)
+                end
+
+                def fallback_error_result
+                  success(from: :fallback_error_result)
+                end
+              end
+            end
+
+            let(:result) { first_step.success }
+
+            it "returns result" do
+              expect(method_value).to be_success.with_data(from: :result).of_step(first_step)
+            end
+
+            it "returns result with unchecked status" do
+              expect(method_value.has_checked_status?).to eq(false)
+            end
           end
         end
       end

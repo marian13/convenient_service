@@ -20,7 +20,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveFallback::Middleware 
     describe ".intended_methods" do
       let(:spec) do
         Class.new(ConvenientService::MethodChainMiddleware) do
-          intended_for :fallback_result, entity: :service
+          intended_for [:fallback_failure_result, :fallback_error_result], entity: :service
         end
       end
 
@@ -30,110 +30,120 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveFallback::Middleware 
     end
   end
 
-  example_group "instance methods" do
-    describe "#call" do
-      include ConvenientService::RSpec::Helpers::WrapMethod
+  shared_examples "verify middleware behavior" do
+    example_group "instance methods" do
+      describe "#call" do
+        include ConvenientService::RSpec::Helpers::WrapMethod
 
-      include ConvenientService::RSpec::Matchers::CallChainNext
-      include ConvenientService::RSpec::Matchers::DelegateTo
-      include ConvenientService::RSpec::Matchers::Results
+        include ConvenientService::RSpec::Matchers::CallChainNext
+        include ConvenientService::RSpec::Matchers::DelegateTo
+        include ConvenientService::RSpec::Matchers::Results
 
-      subject(:method_value) { method.call }
+        subject(:method_value) { method.call }
 
-      let(:method) { wrap_method(service_instance, :fallback_result, observe_middleware: middleware) }
+        let(:method) { wrap_method(service_instance, method_name, observe_middleware: middleware.with(status: status)) }
 
-      let(:service_class) do
-        Class.new.tap do |klass|
-          klass.class_exec(middleware) do |middleware|
-            include ConvenientService::Configs::Standard
-
-            middlewares :fallback_result do
-              observe middleware
-            end
-
-            def fallback_result
-              success
-            end
-          end
-        end
-      end
-
-      let(:service_instance) { service_class.new }
-
-      specify do
-        expect { method_value }.to call_chain_next.on(method)
-      end
-
-      context "when `result` is NOT success" do
         let(:service_class) do
           Class.new.tap do |klass|
-            klass.class_exec(middleware) do |middleware|
+            klass.class_exec(status, method_name, middleware) do |status, method_name, middleware|
               include ConvenientService::Configs::Standard
 
-              middlewares :fallback_result do
-                observe middleware
+              middlewares method_name do
+                observe middleware.with(status: status)
               end
 
-              def fallback_result
-                error
-              end
+              define_method(method_name) { success }
             end
           end
         end
 
-        let(:exception_message) do
-          <<~TEXT
-            Return value of service `#{service_class}` try is NOT a `success`.
-            It is `error`.
-
-            Did you accidentally call `failure` or `error` instead of `success` from the `fallback_result` method?
-          TEXT
-        end
-
-        it "raises `ConvenientService::Service::Plugins::CanHaveFallback::Exceptions::ServiceFallbackReturnValueNotSuccess`" do
-          expect { method_value }
-            .to raise_error(ConvenientService::Service::Plugins::CanHaveFallback::Exceptions::ServiceFallbackReturnValueNotSuccess)
-            .with_message(exception_message)
-        end
-      end
-
-      context "when `result` is success" do
-        let(:service_class) do
-          Class.new.tap do |klass|
-            klass.class_exec(middleware) do |middleware|
-              include ConvenientService::Configs::Standard
-
-              middlewares :fallback_result do
-                observe middleware
-              end
-
-              def fallback_result
-                success
-              end
-            end
-          end
-        end
-
-        let(:fallback_result) { service_instance.success }
-
-        before do
-          allow(service_instance).to receive(:success).and_return(fallback_result)
-        end
-
-        it "returns `fallback_result`" do
-          expect(method_value).to eq(fallback_result)
-        end
+        let(:service_instance) { service_class.new }
 
         specify do
-          expect { method_value }
-            .to delegate_to(fallback_result, :copy)
-            .with_arguments(overrides: {kwargs: {fallback_result: true}})
+          expect { method_value }.to call_chain_next.on(method)
         end
 
-        it "returns result with checked status" do
-          expect(method_value.has_checked_status?).to eq(true)
+        context "when `result` is NOT success" do
+          let(:service_class) do
+            Class.new.tap do |klass|
+              klass.class_exec(status, method_name, middleware) do |status, method_name, middleware|
+                include ConvenientService::Configs::Standard
+
+                middlewares method_name do
+                  observe middleware.with(status: status)
+                end
+
+                define_method(method_name) { error }
+              end
+            end
+          end
+
+          let(:exception_message) do
+            <<~TEXT
+              Return value of service `#{service_class}` `#{status}` fallback is NOT a `success`.
+              It is `error`.
+
+              Did you accidentally call `failure` or `error` instead of `success` from the `#{method_name}` method?
+            TEXT
+          end
+
+          it "raises `ConvenientService::Service::Plugins::CanHaveFallback::Exceptions::ServiceFallbackReturnValueNotSuccess`" do
+            expect { method_value }
+              .to raise_error(ConvenientService::Service::Plugins::CanHaveFallback::Exceptions::ServiceFallbackReturnValueNotSuccess)
+              .with_message(exception_message)
+          end
+        end
+
+        context "when `result` is success" do
+          let(:service_class) do
+            Class.new.tap do |klass|
+              klass.class_exec(status, method_name, middleware) do |status, method_name, middleware|
+                include ConvenientService::Configs::Standard
+
+                middlewares method_name do
+                  observe middleware.with(status: status)
+                end
+
+                define_method(method_name) { success }
+              end
+            end
+          end
+
+          let(:fallback_result) { service_instance.success }
+
+          before do
+            allow(service_instance).to receive(:success).and_return(fallback_result)
+          end
+
+          it "returns `fallback_result`" do
+            expect(method_value).to eq(fallback_result)
+          end
+
+          specify do
+            expect { method_value }
+              .to delegate_to(fallback_result, :copy)
+              .with_arguments(overrides: {kwargs: {method_name => true}})
+          end
+
+          it "returns result with checked status" do
+            expect(method_value.has_checked_status?).to eq(true)
+          end
         end
       end
+    end
+  end
+
+  context "when status is failure" do
+    include_examples "verify middleware behavior" do
+      let(:status) { :failure }
+      let(:method_name) { :fallback_failure_result }
+    end
+  end
+
+  context "when status is error" do
+    include_examples "verify middleware behavior" do
+      let(:status) { :error }
+      let(:method_name) { :fallback_error_result }
     end
   end
 end

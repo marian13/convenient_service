@@ -13,14 +13,17 @@ module ConvenientService
             #
             # @raise [ConvenientService::Service::Plugins::CanHaveFallback::Exceptions::FallbackResultIsNotOverridden]
             #
-            # @internal
-            #   NOTE: name is inspired by Ruby's `fallback_convert` methods.
-            #   - https://blog.saeloun.com/2021/08/03/ruby-adds-integer-try-convert
+            def fallback_failure_result
+              raise Exceptions::FallbackResultIsNotOverridden.new(service: self, status: :failure)
+            end
+
+            ##
+            # Returns `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result` when overridden.
             #
-            #   TODO: A plugin that checks that a `success` is returned from `fallback_result`.
+            # @raise [ConvenientService::Service::Plugins::CanHaveFallback::Exceptions::FallbackResultIsNotOverridden]
             #
-            def fallback_result
-              raise Exceptions::FallbackResultIsNotOverridden.new(service: self)
+            def fallback_error_result
+              raise Exceptions::FallbackResultIsNotOverridden.new(service: self, status: :error)
             end
           end
 
@@ -30,7 +33,16 @@ module ConvenientService
             #
             # @raise [ConvenientService::Service::Plugins::CanHaveFallback::Exceptions::FallbackResultIsNotOverridden]
             #
-            # @example `fallback_result` method MUST always return `success` with reasonable "null" data.
+            def fallback_failure_result(...)
+              new(...).fallback_failure_result
+            end
+
+            ##
+            # Returns `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result` when `#fallback_result` is overridden.
+            #
+            # @raise [ConvenientService::Service::Plugins::CanHaveFallback::Exceptions::FallbackResultIsNotOverridden]
+            #
+            # @example `fallback_error_result` method MUST always return `success` with reasonable "null" data.
             #
             #   For example, check the following service:
             #
@@ -48,14 +60,14 @@ module ConvenientService
             #       # ...
             #     end
             #
-            #   Since `result` returns relation for `users` when it is successful, its corresponding `fallback_result` must also return a relation.
+            #   Since `result` returns relation for `users` when it is successful, its corresponding `fallback_error_result` must also return a relation.
             #
             #     class SelectActiveUsers
             #       include ConvenientService::Standard::Config
             #
             #       # ...
             #
-            #       def fallback_result
+            #       def fallback_error_result
             #         # ...
             #
             #         success(users: ::User.none)
@@ -66,13 +78,13 @@ module ConvenientService
             #
             #   This way a significant amount of extra `if` statements can be avoided.
             #
-            #   result = SelectActiveUsers.result # or `result = SelectActiveUsers.fallback_result`
+            #   result = SelectActiveUsers.result # or `result = SelectActiveUsers.fallback_error_result`
             #
             #   if result.success?
             #     result.data[:users].count
             #   end
             #
-            #   It is safe to invoke `count` for both `result` and `fallback_result` since `result.data[:users]` return same class.
+            #   It is safe to invoke `count` for both `result` and `fallback_error_result` since `result.data[:users]` return same class.
             #
             #   This idea can be applied in a broader sense by utilizing the Null object pattern.
             #
@@ -80,10 +92,10 @@ module ConvenientService
             # @see https://en.wikipedia.org/wiki/Null_object_pattern
             #
             # @internal
-            #   TODO: Is it necessary to use `SetsParentToForeignResult` for `fallback_result`?
+            #   TODO: Is it necessary to use `SetsParentToForeignResult` for `fallback_error_result`?
             #
-            def fallback_result(...)
-              new(...).fallback_result
+            def fallback_error_result(...)
+              new(...).fallback_error_result
             end
           end
         end

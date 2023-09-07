@@ -64,15 +64,28 @@ module ConvenientService
 
         ##
         # @internal
-        #   NOTE: Check `Minimal` docs to understand why `use Plugins::Common::NormalizesEnv::Middleware` for `:fallback_result` is used in `Standard`, not in `Minimal` config.
+        #   NOTE: Check `Minimal` docs to understand why `use Plugins::Common::NormalizesEnv::Middleware` for `:fallback_failure_result` is used in `Standard`, not in `Minimal` config.
         #
-        middlewares :fallback_result do
+        middlewares :fallback_failure_result do
           use Plugins::Common::NormalizesEnv::Middleware
           use Plugins::Service::CollectsServicesInException::Middleware
           use Plugins::Common::CachesReturnValue::Middleware
 
           use Plugins::Service::RaisesOnNotResultReturnValue::Middleware
-          use Plugins::Service::CanHaveFallback::Middleware
+          use Plugins::Service::CanHaveFallback::Middleware.with(status: :failure)
+        end
+
+        ##
+        # @internal
+        #   NOTE: Check `Minimal` docs to understand why `use Plugins::Common::NormalizesEnv::Middleware` for `:fallback_error_result` is used in `Standard`, not in `Minimal` config.
+        #
+        middlewares :fallback_error_result do
+          use Plugins::Common::NormalizesEnv::Middleware
+          use Plugins::Service::CollectsServicesInException::Middleware
+          use Plugins::Common::CachesReturnValue::Middleware
+
+          use Plugins::Service::RaisesOnNotResultReturnValue::Middleware
+          use Plugins::Service::CanHaveFallback::Middleware.with(status: :error)
         end
 
         middlewares :step do
@@ -152,12 +165,22 @@ module ConvenientService
             use Plugins::Step::CanHaveParentResult::Middleware
           end
 
-          middlewares :service_fallback_result do
+          middlewares :service_fallback_failure_result do
             use Plugins::Common::NormalizesEnv::Middleware
             use Plugins::Common::CachesReturnValue::Middleware
           end
 
-          middlewares :fallback_result do
+          middlewares :fallback_failure_result do
+            use Plugins::Common::NormalizesEnv::Middleware
+            use Plugins::Common::CachesReturnValue::Middleware
+          end
+
+          middlewares :service_fallback_error_result do
+            use Plugins::Common::NormalizesEnv::Middleware
+            use Plugins::Common::CachesReturnValue::Middleware
+          end
+
+          middlewares :fallback_error_result do
             use Plugins::Common::NormalizesEnv::Middleware
             use Plugins::Common::CachesReturnValue::Middleware
           end
