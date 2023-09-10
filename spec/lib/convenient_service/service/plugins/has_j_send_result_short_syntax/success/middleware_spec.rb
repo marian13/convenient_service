@@ -61,11 +61,11 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultShortSyntax::S
           .with_arguments(kwargs: {})
       end
 
-      context "when `kwargs` do NOT passed" do
+      context "when `kwargs` are NOT passed" do
         subject(:method_value) { method.call }
 
-        it "returns success with default data" do
-          expect(method_value).to be_success.with_data({})
+        it "returns success without data" do
+          expect(method_value).to be_success.without_data
         end
       end
 
@@ -100,11 +100,12 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultShortSyntax::S
                 # Longer form. More explicit.
                 success(data: {foo: :bar})
 
-                # (Advanced) Longer form also supports any variation of `data`, `message` and `code`.
+                # (Advanced) Longer form also supports any other variation of `data`, `message` and `code`...
                 success(data: {foo: :bar}, message: "foo")
                 success(data: {foo: :bar}, code: :foo)
-                success(message: "foo", code: :foo)
                 success(data: {foo: :bar}, message: "foo", code: :foo)
+                success(message: "foo")
+                success(code: :foo)
               TEXT
             end
 
@@ -138,11 +139,12 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultShortSyntax::S
                 # Longer form. More explicit.
                 success(data: {foo: :bar})
 
-                # (Advanced) Longer form also supports any variation of `data`, `message` and `code`.
+                # (Advanced) Longer form also supports any other variation of `data`, `message` and `code`...
                 success(data: {foo: :bar}, message: "foo")
                 success(data: {foo: :bar}, code: :foo)
-                success(message: "foo", code: :foo)
                 success(data: {foo: :bar}, message: "foo", code: :foo)
+                success(message: "foo")
+                success(code: :foo)
               TEXT
             end
 
@@ -176,11 +178,12 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultShortSyntax::S
                 # Longer form. More explicit.
                 success(data: {foo: :bar})
 
-                # (Advanced) Longer form also supports any variation of `data`, `message` and `code`.
+                # (Advanced) Longer form also supports any other variation of `data`, `message` and `code`...
                 success(data: {foo: :bar}, message: "foo")
                 success(data: {foo: :bar}, code: :foo)
-                success(message: "foo", code: :foo)
                 success(data: {foo: :bar}, message: "foo", code: :foo)
+                success(message: "foo")
+                success(code: :foo)
               TEXT
             end
 

@@ -6,7 +6,7 @@ module ConvenientService
       module HasJSendResultShortSyntax
         module Error
           class Middleware < MethodChainMiddleware
-            intended_for :failure, entity: :service
+            intended_for :error, entity: :service
 
             ##
             # @param args [Array<Object>]

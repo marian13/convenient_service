@@ -81,15 +81,14 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultShortSyntax::E
             end
           end
 
-          context "when more than two `args` are passed" do
-            subject(:method_value) { method.call("foo", :foo, :bar) }
-
-            ##
-            # TODO: Spec.
-            #
-            # it "raises" do
-            # end
-          end
+          # context "when more than two `args` are passed" do
+          #   subject(:method_value) { method.call("foo", :foo, :bar) }
+          #
+          #   TODO: Spec.
+          #
+          #   it "raises" do
+          #   end
+          # end
         end
       end
 
