@@ -57,7 +57,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultShortSyntax::S
 
       specify do
         expect { method_value }
-          .to delegate_to(ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Success::Commands::RefuteKwargsContainDataAndExtraKeys, :call)
+          .to delegate_to(ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Success::Commands::RefuteKwargsContainJSendAndExtraKeys, :call)
           .with_arguments(kwargs: {})
       end
 
@@ -70,7 +70,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultShortSyntax::S
       end
 
       context "when `kwargs` are passed" do
-        context "when `kwargs` do NOT contain `:data` key" do
+        context "when `kwargs` do NOT contain `:data`, `:message` and `code` keys" do
           subject(:method_value) { method.call(foo: :bar) }
 
           it "returns success with data" do
@@ -84,26 +84,111 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultShortSyntax::S
           it "returns success with data" do
             expect(method_value).to be_success.with_data(foo: :bar)
           end
+
+          context "when `kwargs` contain extra keys" do
+            subject(:method_value) { method.call(data: {foo: :bar}, extra_key: "anything") }
+
+            let(:exception_message) do
+              <<~TEXT
+                `kwargs` passed to `success` method contain JSend keys and extra keys. That's NOT allowed.
+
+                Please, consider something like:
+
+                # Shorter form. Assumes that all kwargs are `data`.
+                success(foo: :bar)
+
+                # Longer form. More explicit.
+                success(data: {foo: :bar})
+
+                # (Advanced) Longer form also supports any variation of `data`, `message` and `code`.
+                success(data: {foo: :bar}, message: "foo")
+                success(data: {foo: :bar}, code: :foo)
+                success(message: "foo", code: :foo)
+                success(data: {foo: :bar}, message: "foo", code: :foo)
+              TEXT
+            end
+
+            it "raises `ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Success::Exceptions::KwargsContainJSendAndExtraKeys`" do
+              expect { method_value }
+                .to raise_error(ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Success::Exceptions::KwargsContainJSendAndExtraKeys)
+                .with_message(exception_message)
+            end
+          end
         end
 
-        context "when `kwargs` contain extra keys" do
-          subject(:method_value) { method.call(data: {foo: :bar}, extra_key: "anything") }
+        context "when `kwargs` contain `:message` key" do
+          subject(:method_value) { method.call(message: "foo") }
 
-          let(:exception_message) do
-            <<~TEXT
-              `kwargs` passed to `success` method contain `data` and extra keys. That's NOT allowed.
-
-              Please, consider something like:
-
-              success(foo: :bar)
-              success(data: {foo: :bar})
-            TEXT
+          it "returns success with message" do
+            expect(method_value).to be_success.with_message("foo")
           end
 
-          it "raises `ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Success::Exceptions::KwargsContainDataAndExtraKeys`" do
-            expect { method_value }
-              .to raise_error(ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Success::Exceptions::KwargsContainDataAndExtraKeys)
-              .with_message(exception_message)
+          context "when `kwargs` contain extra keys" do
+            subject(:method_value) { method.call(message: "foo", extra_key: "anything") }
+
+            let(:exception_message) do
+              <<~TEXT
+                `kwargs` passed to `success` method contain JSend keys and extra keys. That's NOT allowed.
+
+                Please, consider something like:
+
+                # Shorter form. Assumes that all kwargs are `data`.
+                success(foo: :bar)
+
+                # Longer form. More explicit.
+                success(data: {foo: :bar})
+
+                # (Advanced) Longer form also supports any variation of `data`, `message` and `code`.
+                success(data: {foo: :bar}, message: "foo")
+                success(data: {foo: :bar}, code: :foo)
+                success(message: "foo", code: :foo)
+                success(data: {foo: :bar}, message: "foo", code: :foo)
+              TEXT
+            end
+
+            it "raises `ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Success::Exceptions::KwargsContainJSendAndExtraKeys`" do
+              expect { method_value }
+                .to raise_error(ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Success::Exceptions::KwargsContainJSendAndExtraKeys)
+                .with_message(exception_message)
+            end
+          end
+        end
+
+        context "when `kwargs` contain `:code` key" do
+          subject(:method_value) { method.call(code: :foo) }
+
+          it "returns success with code" do
+            expect(method_value).to be_success.with_code(:foo)
+          end
+
+          context "when `kwargs` contain extra keys" do
+            subject(:method_value) { method.call(code: :foo, extra_key: "anything") }
+
+            let(:exception_message) do
+              <<~TEXT
+                `kwargs` passed to `success` method contain JSend keys and extra keys. That's NOT allowed.
+
+                Please, consider something like:
+
+                # Shorter form. Assumes that all kwargs are `data`.
+                success(foo: :bar)
+
+                # Longer form. More explicit.
+                success(data: {foo: :bar})
+
+                # (Advanced) Longer form also supports any variation of `data`, `message` and `code`.
+                success(data: {foo: :bar}, message: "foo")
+                success(data: {foo: :bar}, code: :foo)
+                success(message: "foo", code: :foo)
+                success(data: {foo: :bar}, message: "foo", code: :foo)
+              TEXT
+            end
+
+            it "raises `ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Success::Exceptions::KwargsContainJSendAndExtraKeys`" do
+              expect { method_value }
+                .to raise_error(ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Success::Exceptions::KwargsContainJSendAndExtraKeys)
+                .with_message(exception_message)
+            end
           end
         end
       end

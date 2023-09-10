@@ -6,15 +6,27 @@ module ConvenientService
       module HasJSendResultShortSyntax
         module Success
           module Exceptions
-            class KwargsContainDataAndExtraKeys < ::ConvenientService::Exception
+            class KwargsContainJSendAndExtraKeys < ::ConvenientService::Exception
+              ##
+              # @return [void]
+              #
               def initialize
                 message = <<~TEXT
-                  `kwargs` passed to `success` method contain `data` and extra keys. That's NOT allowed.
+                  `kwargs` passed to `success` method contain JSend keys and extra keys. That's NOT allowed.
 
                   Please, consider something like:
 
+                  # Shorter form. Assumes that all kwargs are `data`.
                   success(foo: :bar)
+
+                  # Longer form. More explicit.
                   success(data: {foo: :bar})
+
+                  # (Advanced) Longer form also supports any variation of `data`, `message` and `code`.
+                  success(data: {foo: :bar}, message: "foo")
+                  success(data: {foo: :bar}, code: :foo)
+                  success(message: "foo", code: :foo)
+                  success(data: {foo: :bar}, message: "foo", code: :foo)
                 TEXT
 
                 super(message)
