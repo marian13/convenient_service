@@ -6,20 +6,28 @@ module ConvenientService
       module HasJSendResultShortSyntax
         module Error
           class Middleware < MethodChainMiddleware
-            intended_for :error, entity: :service
+            intended_for :failure, entity: :service
 
+            ##
+            # @param args [Array<Object>]
+            # @param kwargs [Hash{Symbol => Object}]
+            # @param block [Proc, nil]
+            # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
+            #
             def next(*args, **kwargs, &block)
-              Commands::AssertEitherArgsOrKwargsArePassed.call(args: args, kwargs: kwargs)
+              if kwargs.any?
+                Commands::RefuteKwargsContainJSendAndExtraKeys[kwargs: kwargs]
 
-              return chain.next(**kwargs) if kwargs.any?
+                return ([:data, :message, :code].any? { |key| kwargs.has_key?(key) }) ? chain.next(**kwargs) : chain.next(data: kwargs)
+              end
 
-              Commands::AssertArgsCountLowerThanThree.call(args: args)
-
-              return chain.next if args.none?
-
-              return chain.next(message: args.first) if args.one?
-
-              chain.next(message: args.first, code: args.last) # NOTE: if args.count == 2
+              if args.size == 0
+                chain.next
+              elsif args.size == 1
+                chain.next(message: args[0])
+              elsif args.size >= 2
+                chain.next(message: args[0], code: args[1])
+              end
             end
           end
         end

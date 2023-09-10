@@ -1,4 +1,3 @@
 # frozen_string_literal: true
 
-require_relative "commands/assert_args_count_lower_than_three"
-require_relative "commands/assert_either_args_or_kwargs_are_passed"
+require_relative "commands/refute_kwargs_contain_j_send_and_extra_keys"

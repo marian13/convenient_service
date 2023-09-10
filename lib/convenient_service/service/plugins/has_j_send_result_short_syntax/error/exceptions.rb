@@ -6,33 +6,38 @@ module ConvenientService
       module HasJSendResultShortSyntax
         module Error
           module Exceptions
-            class BothArgsAndKwargsArePassed < ::ConvenientService::Exception
+            class KwargsContainJSendAndExtraKeys < ::ConvenientService::Exception
+              ##
+              # @return [void]
+              #
               def initialize
                 message = <<~TEXT
-                  Both `args` and `kwargs` are passed to the `error` method.
+                  `kwargs` passed to `error` method contain JSend keys and extra keys. That's NOT allowed.
 
-                  Did you mean something like:
+                  Please, consider something like:
 
-                  error("Helpful text")
-                  error("Helpful text", :descriptive_code)
+                  # Shorter form with one arg. Assumes that arg is `message`.
+                  error("foo")
 
-                  error(message: "Helpful text")
-                  error(message: "Helpful text", code: :descriptive_code)
-                TEXT
+                  # Shorter form with two args. Assumes that first arg is `message` and second is `code`.
+                  error("foo", :foo)
 
-                super(message)
-              end
-            end
+                  # Shorter form with kwargs. Assumes that all kwargs are `data`.
+                  error(foo: :bar)
 
-            class MoreThanTwoArgsArePassed < ::ConvenientService::Exception
-              def initialize
-                message = <<~TEXT
-                  More than two `args` are passed to the `error` method.
+                  # Longer form. More explicit `message`.
+                  error(message: "foo")
 
-                  Did you mean something like:
+                  # Longer form. More explicit `code`.
+                  error(code: :foo)
 
-                  error("Helpful text")
-                  error("Helpful text", :descriptive_code)
+                  # Longer form. More explicit `message` and `code` together.
+                  error(message: "foo", code: :foo)
+
+                  # (Advanced) Longer form also supports any other variation of `data`, `message` and `code`.
+                  error(data: {foo: :bar}, message: "foo")
+                  error(data: {foo: :bar}, code: :foo)
+                  error(data: {foo: :bar}, message: "foo", code: :foo)
                 TEXT
 
                 super(message)
