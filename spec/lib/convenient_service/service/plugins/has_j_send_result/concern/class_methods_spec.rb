@@ -19,32 +19,28 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Concern::Cla
     end
   end
 
-  let(:service_instance) { service_class.new(*args, **kwargs, &block) }
+  let(:service_instance) { service_class.new }
+  let(:not_initialized_service_instance) { service_class.new_without_initialize }
 
-  let(:args) { [:foo] }
-  let(:kwargs) { {foo: :bar} }
-  let(:block) { proc { :foo } }
+  let(:params) { {service: service_instance, data: data, message: message, code: code} }
+  let(:data) { {foo: "bar"} }
+  let(:message) { "foo" }
+  let(:code) { :custom }
 
   let(:constants) { ConvenientService::Service::Plugins::HasJSendResult::Constants }
 
   example_group "class methods" do
-    include ConvenientService::RSpec::Matchers::BeDescendantOf
-    include ConvenientService::RSpec::Matchers::DelegateTo
-
     describe "#success" do
       let(:result) { service_class.success(**params) }
-      let(:params) { {service: service_instance, data: data} }
-      let(:data) { {foo: :bar} }
 
       specify do
         expect { result }
           .to delegate_to(service_class.result_class, :new)
-          .with_arguments(service: service_instance, status: constants::SUCCESS_STATUS, data: data, message: constants::SUCCESS_MESSAGE, code: constants::SUCCESS_CODE)
+          .with_arguments(**params.merge(service: service_instance, status: constants::SUCCESS_STATUS))
       end
 
       context "when `service` is NOT passed" do
         let(:result) { service_class.success(**ConvenientService::Utils::Hash.except(params, [:service])) }
-        let(:not_initialized_service_instance) { double }
 
         before do
           allow(service_class).to receive(:new_without_initialize).and_return(not_initialized_service_instance)
@@ -63,27 +59,46 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Concern::Cla
         end
 
         it "defaults `data` to `ConvenientService::Service::Plugins::HasJSendResult::Constants::DEFAUTL_SUCCESS_DATA`" do
-          expect(result.data).to eq(service_class.result_class.data(value: constants::DEFAULT_SUCCESS_DATA))
+          expect(result.data).to eq(result.create_data(constants::DEFAULT_SUCCESS_DATA))
+        end
+      end
+
+      context "when `message` is NOT passed" do
+        let(:result) { service_class.success(**ConvenientService::Utils::Hash.except(params, [:message])) }
+
+        before do
+          result.success?
+        end
+
+        it "defaults `message` to `ConvenientService::Service::Plugins::HasJSendResult::Constants::DEFAULT_SUCCESS_MESSAGE`" do
+          expect(result.message).to eq(result.create_message(constants::DEFAULT_SUCCESS_MESSAGE))
+        end
+      end
+
+      context "when `code` is NOT passed" do
+        let(:result) { service_class.success(**ConvenientService::Utils::Hash.except(params, [:code])) }
+
+        before do
+          result.success?
+        end
+
+        it "defaults `code` to `ConvenientService::Service::Plugins::HasJSendResult::Constants::DEFAULT_SUCCESS_CODE`" do
+          expect(result.code).to eq(result.create_code(ConvenientService::Service::Plugins::HasJSendResult::Constants::DEFAULT_SUCCESS_CODE))
         end
       end
     end
 
     describe "#failure" do
       let(:result) { service_class.failure(**params) }
-      let(:params) { {service: service_instance, data: data, message: message} }
-      let(:data) { {foo: "bar"} }
-      let(:message) { "foo" }
-      let(:first_pair_message) { data.first.join(" ") }
 
       specify do
         expect { result }
           .to delegate_to(service_class.result_class, :new)
-          .with_arguments(service: service_instance, status: constants::FAILURE_STATUS, data: data, message: message, code: constants::FAILURE_CODE)
+          .with_arguments(**params.merge(service: service_instance, status: constants::FAILURE_STATUS))
       end
 
       context "when `service` is NOT passed" do
         let(:result) { service_class.failure(**ConvenientService::Utils::Hash.except(params, [:service])) }
-        let(:not_initialized_service_instance) { double }
 
         before do
           allow(service_class).to receive(:new_without_initialize).and_return(not_initialized_service_instance)
@@ -98,54 +113,50 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Concern::Cla
         let(:result) { service_class.failure(**ConvenientService::Utils::Hash.except(params, [:data])) }
 
         before do
-          result.success?
+          result.failure?
         end
 
-        it "defaults `data` to `ConvenientService::Service::Plugins::HasJSendResult::Constants::DEFAULT_FAILURE_DATA`" do
-          expect(result.data).to eq(service_class.result_class.data(value: constants::DEFAULT_FAILURE_DATA))
+        it "defaults `data` to `ConvenientService::Service::Plugins::HasJSendResult::Constants::DEFAUTL_FAILURE_DATA`" do
+          expect(result.data).to eq(result.create_data(constants::DEFAULT_FAILURE_DATA))
         end
       end
 
       context "when `message` is NOT passed" do
         let(:result) { service_class.failure(**ConvenientService::Utils::Hash.except(params, [:message])) }
 
-        context "when `data` is NOT empty" do
-          before do
-            result.success?
-          end
-
-          it "defaults `message` to concatenated by space first key and first value from `data`" do
-            expect(result.message).to eq(service_class.result_class.message(value: first_pair_message))
-          end
+        before do
+          result.failure?
         end
 
-        context "when `data` is empty" do
-          let(:result) { service_class.failure(**ConvenientService::Utils::Hash.except(params, [:message]).merge(data: {})) }
+        it "defaults `message` to `ConvenientService::Service::Plugins::HasJSendResult::Constants::DEFAULT_FAILURE_MESSAGE`" do
+          expect(result.message).to eq(result.create_message(constants::DEFAULT_FAILURE_MESSAGE))
+        end
+      end
 
-          it "internally passes `ConvenientService::Service::Plugins::HasJSendResult::Constants::DEFAULT_FAILURE_MESSAGE` as `message` to result constructor" do
-            expect { result }
-              .to delegate_to(service_class.result_class, :new)
-              .with_arguments(service: service_instance, status: constants::FAILURE_STATUS, data: {}, message: constants::DEFAULT_FAILURE_MESSAGE, code: constants::FAILURE_CODE)
-          end
+      context "when `code` is NOT passed" do
+        let(:result) { service_class.failure(**ConvenientService::Utils::Hash.except(params, [:code])) }
+
+        before do
+          result.failure?
+        end
+
+        it "defaults `code` to `ConvenientService::Service::Plugins::HasJSendResult::Constants::DEFAULT_FAILURE_CODE`" do
+          expect(result.code).to eq(result.create_code(ConvenientService::Service::Plugins::HasJSendResult::Constants::DEFAULT_FAILURE_CODE))
         end
       end
     end
 
     describe "#error" do
       let(:result) { service_class.error(**params) }
-      let(:params) { {service: service_instance, message: message, code: code} }
-      let(:message) { "foo" }
-      let(:code) { :custom }
 
       specify do
         expect { result }
           .to delegate_to(service_class.result_class, :new)
-          .with_arguments(service: service_instance, status: constants::ERROR_STATUS, data: constants::ERROR_DATA, message: message, code: code)
+          .with_arguments(**params.merge(service: service_instance, status: constants::ERROR_STATUS))
       end
 
       context "when `service` is NOT passed" do
         let(:result) { service_class.error(**ConvenientService::Utils::Hash.except(params, [:service])) }
-        let(:not_initialized_service_instance) { double }
 
         before do
           allow(service_class).to receive(:new_without_initialize).and_return(not_initialized_service_instance)
@@ -156,15 +167,27 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Concern::Cla
         end
       end
 
+      context "when `data` is NOT passed" do
+        let(:result) { service_class.error(**ConvenientService::Utils::Hash.except(params, [:data])) }
+
+        before do
+          result.error?
+        end
+
+        it "defaults `data` to `ConvenientService::Service::Plugins::HasJSendResult::Constants::DEFAUTL_ERROR_DATA`" do
+          expect(result.data).to eq(result.create_data(constants::DEFAULT_ERROR_DATA))
+        end
+      end
+
       context "when `message` is NOT passed" do
         let(:result) { service_class.error(**ConvenientService::Utils::Hash.except(params, [:message])) }
 
         before do
-          result.success?
+          result.error?
         end
 
         it "defaults `message` to `ConvenientService::Service::Plugins::HasJSendResult::Constants::DEFAULT_ERROR_MESSAGE`" do
-          expect(result.message).to eq(service_class.result_class.message(value: constants::DEFAULT_ERROR_MESSAGE))
+          expect(result.message).to eq(result.create_message(constants::DEFAULT_ERROR_MESSAGE))
         end
       end
 
@@ -172,11 +195,11 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Concern::Cla
         let(:result) { service_class.error(**ConvenientService::Utils::Hash.except(params, [:code])) }
 
         before do
-          result.success?
+          result.error?
         end
 
         it "defaults `code` to `ConvenientService::Service::Plugins::HasJSendResult::Constants::DEFAULT_ERROR_CODE`" do
-          expect(result.code).to eq(service_class.result_class.code(value: ConvenientService::Service::Plugins::HasJSendResult::Constants::DEFAULT_ERROR_CODE))
+          expect(result.code).to eq(result.create_code(ConvenientService::Service::Plugins::HasJSendResult::Constants::DEFAULT_ERROR_CODE))
         end
       end
     end
