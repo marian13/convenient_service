@@ -6,16 +6,38 @@ module ConvenientService
       module HasJSendResultShortSyntax
         module Failure
           module Exceptions
-            class KwargsContainNonJSendKey < ::ConvenientService::Exception
-              def initialize(key:)
+            class KwargsContainJSendAndExtraKeys < ::ConvenientService::Exception
+              ##
+              # @return [void]
+              #
+              def initialize
                 message = <<~TEXT
-                  When `kwargs` with `data` key are passed to `failure` method, they can NOT contain non JSend keys like `#{key.inspect}`.
+                  `kwargs` passed to `failure` method contain JSend keys and extra keys. That's NOT allowed.
 
                   Please, consider something like:
 
-                  failure(foo: :bar) # short version does NOT support custom message
-                  failure(data: {foo: :bar}) # long version
-                  failure(data: {foo: :bar}, message: "foo") # long version with custom message
+                  # Shorter form with one arg. Assumes that arg is `message`.
+                  failure("foo")
+
+                  # Shorter form with two args. Assumes that first arg is `message` and second is `code`.
+                  failure("foo", :foo)
+
+                  # Shorter form with kwargs. Assumes that all kwargs are `data`.
+                  failure(foo: :bar)
+
+                  # Longer form. More explicit `message`.
+                  failure(message: "foo")
+
+                  # Longer form. More explicit `code`.
+                  failure(code: :foo)
+
+                  # Longer form. More explicit `message` and `code` together.
+                  failure(message: "foo", code: :foo)
+
+                  # (Advanced) Longer form also supports any other variation of `data`, `message` and `code`.
+                  failure(data: {foo: :bar}, message: "foo")
+                  failure(data: {foo: :bar}, code: :foo)
+                  failure(data: {foo: :bar}, message: "foo", code: :foo)
                 TEXT
 
                 super(message)
