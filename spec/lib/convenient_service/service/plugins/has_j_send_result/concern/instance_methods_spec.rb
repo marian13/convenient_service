@@ -4,205 +4,54 @@ require "spec_helper"
 
 require "convenient_service"
 
-# rubocop:disable RSpec/NestedGroups
+# rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Concern::InstanceMethods do
-  let(:base_service_class) do
-    Class.new.tap do |klass|
-      klass.class_exec(described_class) do |mod|
-        include mod
+  include ConvenientService::RSpec::Matchers::DelegateTo
 
-        class << self
-          def success(**kwargs)
-            "success"
-          end
+  let(:service_class) do
+    Class.new do
+      include ConvenientService::Configs::Minimal
 
-          def failure(**kwargs)
-            "failure"
-          end
-
-          def error(**kwargs)
-            "error"
-          end
-        end
+      def result
+        success
       end
     end
   end
 
   let(:service_instance) { service_class.new }
-  let(:result) { service_instance.result }
+
+  let(:attributes) { {data: data, message: message, code: code} }
+  let(:data) { {foo: "bar"} }
+  let(:message) { "foo" }
+  let(:code) { :custom }
 
   example_group "instance methods" do
-    include ConvenientService::RSpec::Matchers::BeDescendantOf
-
     describe "#success" do
-      let(:service_class) do
-        Class.new(base_service_class) do
-          def result
-            success
-          end
-        end
-      end
-
-      it "delegates to `self.class.success`" do
-        allow(service_class).to receive(:success).and_call_original
-
-        result
-
-        expect(service_class).to have_received(:success)
-      end
-
-      it "returns `self.class.success`" do
-        expect(result).to eq(service_class.success)
-      end
-
-      it "passes `self` as service to `self.class.success`" do
-        allow(service_class).to receive(:success).with(hash_including(service: service_instance))
-
-        result
-
-        expect(service_class).to have_received(:success)
-      end
-
-      context "when `data` is passed" do
-        let(:service_class) do
-          Class.new(base_service_class).tap do |klass|
-            klass.class_exec(data) do |data|
-              define_method(:result) { success(data: data) }
-            end
-          end
-        end
-
-        let(:data) { {foo: :bar} }
-
-        it "passes `data` to `self.class.success`" do
-          allow(service_class).to receive(:success).with(hash_including(data: data)).and_call_original
-
-          result
-
-          expect(service_class).to have_received(:success)
-        end
+      specify do
+        expect { service_instance.success(**attributes) }
+          .to delegate_to(service_class, :success)
+          .with_arguments(**attributes.merge(service: service_instance))
+          .and_return_its_value
       end
     end
 
     describe "#failure" do
-      let(:service_class) do
-        Class.new(base_service_class) do
-          def result
-            failure
-          end
-        end
-      end
-
-      it "delegates to `self.class.failure`" do
-        allow(service_class).to receive(:failure).and_call_original
-
-        result
-
-        expect(service_class).to have_received(:failure)
-      end
-
-      it "returns `self.class.failure`" do
-        expect(result).to eq(service_class.failure)
-      end
-
-      it "passes `self` as service to `self.class.failure`" do
-        allow(service_class).to receive(:failure).with(hash_including(service: service_instance))
-
-        result
-
-        expect(service_class).to have_received(:failure)
-      end
-
-      context "when `data` is passed" do
-        let(:service_class) do
-          Class.new(base_service_class).tap do |klass|
-            klass.class_exec(data) do |data|
-              define_method(:result) { failure(data: data) }
-            end
-          end
-        end
-
-        let(:data) { {foo: "bar"} }
-
-        it "passes `data` to `self.class.failure`" do
-          allow(service_class).to receive(:failure).with(hash_including(data: data)).and_call_original
-
-          result
-
-          expect(service_class).to have_received(:failure)
-        end
+      specify do
+        expect { service_instance.failure(**attributes) }
+          .to delegate_to(service_class, :failure)
+          .with_arguments(**attributes.merge(service: service_instance))
+          .and_return_its_value
       end
     end
 
     describe "#error" do
-      let(:service_class) do
-        Class.new(base_service_class) do
-          def result
-            error
-          end
-        end
-      end
-
-      it "delegates to `self.class.error`" do
-        allow(service_class).to receive(:error).and_call_original
-
-        result
-
-        expect(service_class).to have_received(:error)
-      end
-
-      it "returns `self.class.error`" do
-        expect(result).to eq(service_class.error)
-      end
-
-      it "passes `self` as service to `self.class.error`" do
-        allow(service_class).to receive(:error).with(hash_including(service: service_instance))
-
-        result
-
-        expect(service_class).to have_received(:error)
-      end
-
-      context "when `message` is passed" do
-        let(:service_class) do
-          Class.new(base_service_class).tap do |klass|
-            klass.class_exec(message) do |message|
-              define_method(:result) { error(message: message) }
-            end
-          end
-        end
-
-        let(:message) { "foo" }
-
-        it "passes `message` to `self.class.error`" do
-          allow(service_class).to receive(:error).with(hash_including(message: message)).and_call_original
-
-          result
-
-          expect(service_class).to have_received(:error)
-        end
-      end
-
-      context "when `code` is passed" do
-        let(:service_class) do
-          Class.new(base_service_class).tap do |klass|
-            klass.class_exec(code) do |code|
-              define_method(:result) { error(code: code) }
-            end
-          end
-        end
-
-        let(:code) { :foo }
-
-        it "passes `code` to `self.class.error`" do
-          allow(service_class).to receive(:error).with(hash_including(code: code)).and_call_original
-
-          result
-
-          expect(service_class).to have_received(:error)
-        end
+      specify do
+        expect { service_instance.error(**attributes) }
+          .to delegate_to(service_class, :error)
+          .with_arguments(**attributes.merge(service: service_instance))
+          .and_return_its_value
       end
     end
   end
 end
-# rubocop:enable RSpec/NestedGroups
+# rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
