@@ -9,7 +9,7 @@ module ConvenientService
             intended_for :result, entity: :service
 
             def next(...)
-              return entity.failure(data: errors) if errors.any?
+              return entity.failure(data: errors, message: errors.first.to_a.map(&:to_s).join(" ")) if errors.any?
 
               chain.next(...)
             end

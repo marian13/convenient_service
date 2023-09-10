@@ -129,7 +129,11 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultParamsValidati
         let(:errors) { service_class.contract.new.call(**service_instance.constructor_arguments.kwargs).errors.to_h.transform_values(&:first) }
 
         it "returns failure with first error message for each invalid attribute as data" do
-          expect(method_value).to be_failure.with_data(errors)
+          expect(method_value).to be_failure.with_data(errors).with_message(errors.first.to_a.map(&:to_s).join(" "))
+        end
+
+        it "returns failure with first error key/value joined by space as message" do
+          expect(method_value).to be_failure.with_message(errors.first.to_a.map(&:to_s).join(" "))
         end
       end
     end
