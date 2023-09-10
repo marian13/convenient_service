@@ -63,7 +63,7 @@ module ConvenientService
 
                         return status_part if [chain.used_data?, chain.used_message?, chain.used_code?].none?
 
-                        [status_part, message_part, code_part].reject(&:empty?).join("\n")
+                        [status_part, data_part, message_part, code_part].reject(&:empty?).join("\n")
                       end
 
                       private
@@ -78,6 +78,13 @@ module ConvenientService
                       ##
                       # @return [String]
                       #
+                      def data_part
+                        data.empty? ? "" : "with data `#{data}`"
+                      end
+
+                      ##
+                      # @return [String]
+                      #
                       def message_part
                         message.empty? ? "with empty message" : "with message `#{message}`"
                       end
@@ -86,12 +93,14 @@ module ConvenientService
                       # @return [String]
                       #
                       def code_part
-                        ##
-                        # NOTE: `return "" if result.has_custom_code?`.
-                        #
-                        return "" if code == constants.DEFAULT_ERROR_CODE
+                        (code == constants.DEFAULT_ERROR_CODE) ? "" : "with code `#{code}`"
+                      end
 
-                        "with code `#{code}`"
+                      ##
+                      # @return [Hash{Symbol => Object}]
+                      #
+                      def data
+                        @data ||= result.unsafe_data.to_h
                       end
 
                       ##

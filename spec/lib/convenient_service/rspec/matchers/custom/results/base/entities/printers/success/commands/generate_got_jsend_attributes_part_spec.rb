@@ -32,6 +32,8 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Entiti
 
       let(:status_part) { "with `success` status" }
       let(:data_part) { "with data `#{data}`" }
+      let(:message_part) { "with message `#{message}`" }
+      let(:code_part) { "with code `#{code}`" }
 
       context "when matcher has NOT result" do
         let(:matcher) { base_matcher }
@@ -75,6 +77,54 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Entiti
                 expect(command_result).to eq([status_part, data_part].join("\n"))
               end
             end
+
+            context "when result has NOT empty message" do
+              let(:service) do
+                Class.new do
+                  include ConvenientService::Configs::Standard
+
+                  def result
+                    success(data: {foo: :bar}, message: "foo")
+                  end
+                end
+              end
+
+              it "returns status and with data and message parts" do
+                expect(command_result).to eq([status_part, data_part, message_part].join("\n"))
+              end
+            end
+
+            context "when result has NOT default code" do
+              let(:service) do
+                Class.new do
+                  include ConvenientService::Configs::Standard
+
+                  def result
+                    success(data: {foo: :bar}, code: :foo)
+                  end
+                end
+              end
+
+              it "returns status and with data and message and code parts" do
+                expect(command_result).to eq([status_part, data_part, code_part].join("\n"))
+              end
+            end
+
+            context "when result has both NOT empty message and NOT default code" do
+              let(:service) do
+                Class.new do
+                  include ConvenientService::Configs::Standard
+
+                  def result
+                    success(data: {foo: :bar}, message: "foo", code: :foo)
+                  end
+                end
+              end
+
+              it "returns status and with data and message and code parts" do
+                expect(command_result).to eq([status_part, data_part, message_part, code_part].join("\n"))
+              end
+            end
           end
 
           context "when `with_message` is used" do
@@ -101,12 +151,60 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Entiti
                 expect(command_result).to eq([status_part, data_part].join("\n"))
               end
             end
+
+            context "when result has NOT empty message" do
+              let(:service) do
+                Class.new do
+                  include ConvenientService::Configs::Standard
+
+                  def result
+                    success(data: {foo: :bar}, message: "foo")
+                  end
+                end
+              end
+
+              it "returns status and with data and message parts" do
+                expect(command_result).to eq([status_part, data_part, message_part].join("\n"))
+              end
+            end
+
+            context "when result has NOT default code" do
+              let(:service) do
+                Class.new do
+                  include ConvenientService::Configs::Standard
+
+                  def result
+                    success(data: {foo: :bar}, code: :foo)
+                  end
+                end
+              end
+
+              it "returns status and with data and message and code parts" do
+                expect(command_result).to eq([status_part, data_part, code_part].join("\n"))
+              end
+            end
+
+            context "when result has both NOT empty message and NOT default code" do
+              let(:service) do
+                Class.new do
+                  include ConvenientService::Configs::Standard
+
+                  def result
+                    success(data: {foo: :bar}, message: "foo", code: :foo)
+                  end
+                end
+              end
+
+              it "returns status and with data and message and code parts" do
+                expect(command_result).to eq([status_part, data_part, message_part, code_part].join("\n"))
+              end
+            end
           end
 
           context "when `with_code` is used" do
             let(:matcher) { base_matcher.with_code(code).tap { |matcher| matcher.matches?(result) } }
 
-            it "returns status, with empty data and without message parts" do
+            it "returns status with message parts" do
               expect(command_result).to eq([status_part, data_part].join("\n"))
             end
 
@@ -125,6 +223,54 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Entiti
 
               it "returns status and with empty data parts" do
                 expect(command_result).to eq([status_part, data_part].join("\n"))
+              end
+            end
+
+            context "when result has NOT empty message" do
+              let(:service) do
+                Class.new do
+                  include ConvenientService::Configs::Standard
+
+                  def result
+                    success(data: {foo: :bar}, message: "foo")
+                  end
+                end
+              end
+
+              it "returns status and with data and message parts" do
+                expect(command_result).to eq([status_part, data_part, message_part].join("\n"))
+              end
+            end
+
+            context "when result has NOT default code" do
+              let(:service) do
+                Class.new do
+                  include ConvenientService::Configs::Standard
+
+                  def result
+                    success(data: {foo: :bar}, code: :foo)
+                  end
+                end
+              end
+
+              it "returns status and with data and message and code parts" do
+                expect(command_result).to eq([status_part, data_part, code_part].join("\n"))
+              end
+            end
+
+            context "when result has both NOT empty message and NOT default code" do
+              let(:service) do
+                Class.new do
+                  include ConvenientService::Configs::Standard
+
+                  def result
+                    success(data: {foo: :bar}, message: "foo", code: :foo)
+                  end
+                end
+              end
+
+              it "returns status and with data and message and code parts" do
+                expect(command_result).to eq([status_part, data_part, message_part, code_part].join("\n"))
               end
             end
           end

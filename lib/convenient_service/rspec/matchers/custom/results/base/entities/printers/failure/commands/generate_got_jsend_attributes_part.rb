@@ -12,6 +12,7 @@ module ConvenientService
                   module Commands
                     class GenerateGotJsendAttributesPart < Support::Command
                       include Support::Delegate
+                      include Support::DependencyContainer::Import
 
                       ##
                       # @api private
@@ -38,6 +39,13 @@ module ConvenientService
                       ##
                       # @api private
                       #
+                      # @return [Symbol]
+                      #
+                      import :"constants.DEFAULT_FAILURE_CODE", from: Service::Plugins::HasJSendResult::Container
+
+                      ##
+                      # @api private
+                      #
                       # @param printer [ConvenientService::RSpec::Matchers::Custom::Results::Base::Entities::Printers::Base]
                       # @return [void]
                       #
@@ -55,7 +63,7 @@ module ConvenientService
 
                         return status_part if [chain.used_data?, chain.used_message?, chain.used_code?].none?
 
-                        [status_part, data_part, message_part].reject(&:empty?).join("\n")
+                        [status_part, data_part, message_part, code_part].reject(&:empty?).join("\n")
                       end
 
                       private
@@ -71,28 +79,21 @@ module ConvenientService
                       # @return [String]
                       #
                       def data_part
-                        data.empty? ? "with empty data" : "with data `#{data}`"
+                        data.empty? ? "" : "with data `#{data}`"
                       end
 
                       ##
                       # @return [String]
                       #
-                      # @internal
-                      #   TODO: Duplicated in `HasJSendResult::ClassMethods`.
-                      #
-                      #   NOTE: `message` and `data.first.to_a.join(" ")` are NOT equal only when:
-                      #   - Only `with_message` is used.
-                      #   - `with_data` and `with_message` are used together.
-                      #
-                      #   NOTE: This method is responsible for the `got` part, that is why it compares `message` and `data.first.to_a.join(" ")`.
-                      #
                       def message_part
-                        ##
-                        # TODO: `return "" if result.has_custom_message?`.
-                        #
-                        return "" if message == data.first.to_a.join(" ")
-
                         message.empty? ? "with empty message" : "with message `#{message}`"
+                      end
+
+                      ##
+                      # @return [String]
+                      #
+                      def code_part
+                        (code == constants.DEFAULT_FAILURE_CODE) ? "" : "with code `#{code}`"
                       end
 
                       ##
@@ -107,6 +108,13 @@ module ConvenientService
                       #
                       def message
                         @message ||= result.unsafe_message.to_s
+                      end
+
+                      ##
+                      # @return [Symbol]
+                      #
+                      def code
+                        @code ||= result.unsafe_code.to_sym
                       end
                     end
                   end

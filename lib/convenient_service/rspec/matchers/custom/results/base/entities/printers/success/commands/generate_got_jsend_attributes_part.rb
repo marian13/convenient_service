@@ -12,6 +12,7 @@ module ConvenientService
                   module Commands
                     class GenerateGotJsendAttributesPart < Support::Command
                       include Support::Delegate
+                      include Support::DependencyContainer::Import
 
                       ##
                       # @api private
@@ -38,6 +39,13 @@ module ConvenientService
                       ##
                       # @api private
                       #
+                      # @return [Symbol]
+                      #
+                      import :"constants.DEFAULT_SUCCESS_CODE", from: Service::Plugins::HasJSendResult::Container
+
+                      ##
+                      # @api private
+                      #
                       # @param printer [ConvenientService::RSpec::Matchers::Custom::Results::Base::Entities::Printers::Base]
                       # @return [void]
                       #
@@ -50,15 +58,12 @@ module ConvenientService
                       #
                       # @return [String]
                       #
-                      # @internal
-                      #   TODO: Specs for `...].none?`.
-                      #
                       def call
                         return "" unless result
 
                         return status_part if [chain.used_data?, chain.used_message?, chain.used_code?].none?
 
-                        [status_part, data_part].join("\n")
+                        [status_part, data_part, message_part, code_part].reject(&:empty?).join("\n")
                       end
 
                       private
@@ -78,10 +83,38 @@ module ConvenientService
                       end
 
                       ##
+                      # @return [String]
+                      #
+                      def message_part
+                        message.empty? ? "" : "with message `#{message}`"
+                      end
+
+                      ##
+                      # @return [String]
+                      #
+                      def code_part
+                        (code == constants.DEFAULT_SUCCESS_CODE) ? "" : "with code `#{code}`"
+                      end
+
+                      ##
                       # @return [Hash{Symbol => Object}]
                       #
                       def data
                         @data ||= result.unsafe_data.to_h
+                      end
+
+                      ##
+                      # @return [String]
+                      #
+                      def message
+                        @message ||= result.unsafe_message.to_s
+                      end
+
+                      ##
+                      # @return [Symbol]
+                      #
+                      def code
+                        @code ||= result.unsafe_code.to_sym
                       end
                     end
                   end
