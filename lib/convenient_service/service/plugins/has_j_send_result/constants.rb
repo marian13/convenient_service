@@ -11,14 +11,14 @@ module ConvenientService
 
           DEFAULT_SUCCESS_DATA = {}
           DEFAULT_FAILURE_DATA = {}
-          ERROR_DATA = {}
+          DEFAULT_ERROR_DATA = {}
 
-          SUCCESS_MESSAGE = ""
+          DEFAULT_SUCCESS_MESSAGE = ""
           DEFAULT_FAILURE_MESSAGE = ""
           DEFAULT_ERROR_MESSAGE = ""
 
-          SUCCESS_CODE = :success
-          FAILURE_CODE = :failure
+          DEFAULT_SUCCESS_CODE = :default_success
+          DEFAULT_FAILURE_CODE = :default_failure
           DEFAULT_ERROR_CODE = :default_error
         end
       end
