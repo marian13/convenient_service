@@ -91,7 +91,7 @@
   
   <dl>
       <dt>Includes:</dt>
-      <dd><span class='object_link'><a href="../../../../../../../../../Support/Delegate.html" title="ConvenientService::Support::Delegate (module)">Support::Delegate</a></span></dd>
+      <dd><span class='object_link'><a href="../../../../../../../../../Support/Delegate.html" title="ConvenientService::Support::Delegate (module)">Support::Delegate</a></span>, <span class='object_link'><a href="../../../../../../../../../Support/DependencyContainer/Import.html" title="ConvenientService::Support::DependencyContainer::Import (module)">Support::DependencyContainer::Import</a></span></dd>
   </dl>
   
   
@@ -296,6 +296,12 @@
   
   
   
+  
+  
+  
+  
+  
+  
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="../../../../../../../../../Support/Command.html" title="ConvenientService::Support::Command (class)">Support::Command</a></span></h3>
   <p class="inherited"><span class='object_link'><a href="../../../../../../../../../Support/Command.html#[]-class_method" title="ConvenientService::Support::Command.[] (method)">[]</a></span>, <span class='object_link'><a href="../../../../../../../../../Support/Command.html#call-class_method" title="ConvenientService::Support::Command.call (method)">call</a></span></p>
 <div id="constructor_details" class="method_details_list">
@@ -359,12 +365,12 @@
       <pre class="lines">
 
 
-44
-45
-46</pre>
+52
+53
+54</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/results/base/entities/printers/failure/commands/generate_got_jsend_attributes_part.rb', line 44</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/results/base/entities/printers/failure/commands/generate_got_jsend_attributes_part.rb', line 52</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>printer:</span><span class='rparen'>)</span>
   <span class='ivar'>@printer</span> <span class='op'>=</span> <span class='id identifier rubyid_printer'>printer</span>
@@ -424,12 +430,12 @@
       <pre class="lines">
 
 
-22
 23
-24</pre>
+24
+25</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/results/base/entities/printers/failure/commands/generate_got_jsend_attributes_part.rb', line 22</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/results/base/entities/printers/failure/commands/generate_got_jsend_attributes_part.rb', line 23</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_printer'>printer</span>
   <span class='ivar'>@printer</span>
@@ -502,23 +508,23 @@
       <pre class="lines">
 
 
-53
-54
-55
-56
-57
-58
-59</pre>
+61
+62
+63
+64
+65
+66
+67</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/results/base/entities/printers/failure/commands/generate_got_jsend_attributes_part.rb', line 53</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/results/base/entities/printers/failure/commands/generate_got_jsend_attributes_part.rb', line 61</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span>
   <span class='kw'>return</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>unless</span> <span class='id identifier rubyid_result'>result</span>
 
   <span class='kw'>return</span> <span class='id identifier rubyid_status_part'>status_part</span> <span class='kw'>if</span> <span class='lbracket'>[</span><span class='id identifier rubyid_chain'>chain</span><span class='period'>.</span><span class='id identifier rubyid_used_data?'>used_data?</span><span class='comma'>,</span> <span class='id identifier rubyid_chain'>chain</span><span class='period'>.</span><span class='id identifier rubyid_used_message?'>used_message?</span><span class='comma'>,</span> <span class='id identifier rubyid_chain'>chain</span><span class='period'>.</span><span class='id identifier rubyid_used_code?'>used_code?</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_none?'>none?</span>
 
-  <span class='lbracket'>[</span><span class='id identifier rubyid_status_part'>status_part</span><span class='comma'>,</span> <span class='id identifier rubyid_data_part'>data_part</span><span class='comma'>,</span> <span class='id identifier rubyid_message_part'>message_part</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_reject'>reject</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:empty?</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='lbracket'>[</span><span class='id identifier rubyid_status_part'>status_part</span><span class='comma'>,</span> <span class='id identifier rubyid_data_part'>data_part</span><span class='comma'>,</span> <span class='id identifier rubyid_message_part'>message_part</span><span class='comma'>,</span> <span class='id identifier rubyid_code_part'>code_part</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_reject'>reject</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:empty?</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -581,10 +587,10 @@
       <pre class="lines">
 
 
-29</pre>
+30</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/results/base/entities/printers/failure/commands/generate_got_jsend_attributes_part.rb', line 29</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/results/base/entities/printers/failure/commands/generate_got_jsend_attributes_part.rb', line 30</span>
 
 <span class='id identifier rubyid_delegate'>delegate</span> <span class='symbol'>:chain</span><span class='comma'>,</span> <span class='label'>to:</span> <span class='symbol'>:printer</span></pre>
     </td>
@@ -648,10 +654,10 @@
       <pre class="lines">
 
 
-36</pre>
+37</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/results/base/entities/printers/failure/commands/generate_got_jsend_attributes_part.rb', line 36</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/custom/results/base/entities/printers/failure/commands/generate_got_jsend_attributes_part.rb', line 37</span>
 
 <span class='id identifier rubyid_delegate'>delegate</span> <span class='symbol'>:result</span><span class='comma'>,</span> <span class='label'>to:</span> <span class='symbol'>:printer</span></pre>
     </td>
@@ -664,7 +670,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Sep  7 21:47:21 2023 by
+  Generated on Sun Sep 10 23:08:15 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>
