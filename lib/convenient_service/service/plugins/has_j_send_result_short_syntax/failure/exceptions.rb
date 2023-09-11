@@ -43,6 +43,45 @@ module ConvenientService
                 super(message)
               end
             end
+
+            class BothArgsAndKwargsArePassed < ::ConvenientService::Exception
+              ##
+              # @return [void]
+              #
+              def initialize
+                message = <<~TEXT
+                  Both `args` and `kwargs` are passed to the `failure` method.
+
+                  Did you mean something like:
+
+                  failure("Helpful text")
+                  failure("Helpful text", :descriptive_code)
+
+                  failure(message: "Helpful text")
+                  failure(message: "Helpful text", code: :descriptive_code)
+                TEXT
+
+                super(message)
+              end
+            end
+
+            class MoreThanTwoArgsArePassed < ::ConvenientService::Exception
+              ##
+              # @return [void]
+              #
+              def initialize
+                message = <<~TEXT
+                  More than two `args` are passed to the `failure` method.
+
+                  Did you mean something like:
+
+                  failure("Helpful text")
+                  failure("Helpful text", :descriptive_code)
+                TEXT
+
+                super(message)
+              end
+            end
           end
         end
       end

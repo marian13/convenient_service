@@ -15,19 +15,38 @@ module ConvenientService
             # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
             #
             def next(*args, **kwargs, &block)
-              if kwargs.any?
-                Commands::RefuteKwargsContainJSendAndExtraKeys[kwargs: kwargs]
+              raise Exceptions::BothArgsAndKwargsArePassed.new if args.any? && kwargs.any?
 
-                return ([:data, :message, :code].any? { |key| kwargs.has_key?(key) }) ? chain.next(**kwargs) : chain.next(data: kwargs)
-              end
+              args.any? ? error_from_args : error_from_kwargs
+            end
 
-              if args.size == 0
-                chain.next
-              elsif args.size == 1
-                chain.next(message: args[0])
-              elsif args.size >= 2
-                chain.next(message: args[0], code: args[1])
+            private
+
+            ##
+            # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
+            #
+            def error_from_args
+              case next_arguments.args.size
+              when 0 then chain.next
+              when 1 then chain.next(message: next_arguments.args[0])
+              when 2 then chain.next(message: next_arguments.args[0], code: next_arguments.args[1])
+              else
+                raise Exceptions::MoreThanTwoArgsArePassed.new
               end
+            end
+
+            ##
+            # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
+            #
+            # @internal
+            #   TODO: Constant for `[:data, :message, :code]`.
+            #
+            def error_from_kwargs
+              return chain.next(data: next_arguments.kwargs) if [:data, :message, :code].none? { |key| next_arguments.kwargs.has_key?(key) }
+
+              raise Exceptions::KwargsContainJSendAndExtraKeys.new if next_arguments.kwargs.keys.difference([:data, :message, :code]).any?
+
+              chain.next(**next_arguments.kwargs)
             end
           end
         end

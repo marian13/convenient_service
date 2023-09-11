@@ -81,14 +81,26 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultShortSyntax::F
             end
           end
 
-          # context "when more than two `args` are passed" do
-          #   subject(:method_value) { method.call("foo", :foo, :bar) }
-          #
-          #   TODO: Spec.
-          #
-          #   it "raises" do
-          #   end
-          # end
+          context "when more than two `args` are passed" do
+            subject(:method_value) { method.call("foo", :foo, :bar) }
+
+            let(:exception_message) do
+              <<~TEXT
+                More than two `args` are passed to the `failure` method.
+
+                Did you mean something like:
+
+                failure("Helpful text")
+                failure("Helpful text", :descriptive_code)
+              TEXT
+            end
+
+            it "raises `ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Failure::Exceptions::MoreThanTwoArgsArePassed`" do
+              expect { method_value }
+                .to raise_error(ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Failure::Exceptions::MoreThanTwoArgsArePassed)
+                .with_message(exception_message)
+            end
+          end
         end
       end
 
@@ -99,12 +111,6 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultShortSyntax::F
 
             it "returns failure with data" do
               expect(method_value).to be_failure.with_data(foo: :bar)
-            end
-
-            specify do
-              expect { method_value }
-                .to delegate_to(ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Failure::Commands::RefuteKwargsContainJSendAndExtraKeys, :call)
-                .with_arguments(kwargs: {foo: :bar})
             end
           end
 
@@ -256,13 +262,29 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultShortSyntax::F
           end
         end
 
-        ##
-        # TODO: Spec.
-        #
-        # context "when `args` are passed" do
-        #   it "raises" do
-        #   end
-        # end
+        context "when `args` are passed" do
+          subject(:method_value) { method.call("foo", code: :foo) }
+
+          let(:exception_message) do
+            <<~TEXT
+              Both `args` and `kwargs` are passed to the `failure` method.
+
+              Did you mean something like:
+
+              failure("Helpful text")
+              failure("Helpful text", :descriptive_code)
+
+              failure(message: "Helpful text")
+              failure(message: "Helpful text", code: :descriptive_code)
+            TEXT
+          end
+
+          it "raises `ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Failure::Exceptions::BothArgsAndKwargsArePassed`" do
+            expect { method_value }
+              .to raise_error(ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Failure::Exceptions::BothArgsAndKwargsArePassed)
+              .with_message(exception_message)
+          end
+        end
       end
     end
   end
