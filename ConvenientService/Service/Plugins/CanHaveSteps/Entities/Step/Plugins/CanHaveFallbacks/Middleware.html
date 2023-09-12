@@ -205,9 +205,9 @@
   <span class='kw'>when</span> <span class='symbol'>:success</span>
     <span class='id identifier rubyid_result'>result</span>
   <span class='kw'>when</span> <span class='symbol'>:failure</span>
-    <span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_fallback_failure_step?'>fallback_failure_step?</span> <span class='op'>?</span> <span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_fallback_failure_result'>fallback_failure_result</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span> <span class='op'>:</span> <span class='id identifier rubyid_result'>result</span>
+    <span class='id identifier rubyid_fallback_failure_step?'>fallback_failure_step?</span> <span class='op'>?</span> <span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_fallback_failure_result'>fallback_failure_result</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span> <span class='op'>:</span> <span class='id identifier rubyid_result'>result</span>
   <span class='kw'>when</span> <span class='symbol'>:error</span>
-    <span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_fallback_error_step?'>fallback_error_step?</span> <span class='op'>?</span> <span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_fallback_error_result'>fallback_error_result</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span> <span class='op'>:</span> <span class='id identifier rubyid_result'>result</span>
+    <span class='id identifier rubyid_fallback_error_step?'>fallback_error_step?</span> <span class='op'>?</span> <span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_fallback_error_result'>fallback_error_result</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span> <span class='op'>:</span> <span class='id identifier rubyid_result'>result</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -220,7 +220,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Sep 11 21:20:53 2023 by
+  Generated on Tue Sep 12 00:21:47 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>
