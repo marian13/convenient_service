@@ -5,3 +5,4 @@ ConvenientService::Dependencies.require_has_attributes_using_active_model_attrib
 ConvenientService::Dependencies.require_has_j_send_result_params_validations_using_active_model_validations
 
 ConvenientService::Dependencies.require_rails_examples
+ConvenientService::Dependencies.require_rails_examples(version: "v1")

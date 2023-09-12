@@ -4,3 +4,4 @@ ConvenientService::Dependencies.require_assigns_attributes_in_constructor_using_
 ConvenientService::Dependencies.require_has_j_send_result_params_validations_using_dry_validation
 
 ConvenientService::Dependencies.require_dry_examples
+ConvenientService::Dependencies.require_dry_examples(version: "v1")

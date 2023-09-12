@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "standard/v1"
+require_relative "standard/aliases"
 
 module ConvenientService
   module Configs

@@ -292,9 +292,10 @@ module ConvenientService
       #
       # Loads standard config examples.
       #
+      # @param version [String]
       # @return [Boolean]
       #
-      def require_standard_examples
+      def require_standard_examples(version: "")
         ##
         # - https://ruby-doc.org/stdlib-2.7.0/libdoc/date/rdoc/Date.html
         # - https://ruby-doc.org/stdlib-2.7.0/libdoc/date/rdoc/DateTime.html
@@ -325,11 +326,11 @@ module ConvenientService
         #
         require "uri"
 
-        require_relative "examples/standard/cowsay"
-        require_relative "examples/standard/date_time"
-        require_relative "examples/standard/factorial"
-        require_relative "examples/standard/gemfile"
-        require_relative "examples/standard/request_params"
+        require_relative ::File.join("examples", "standard", version, "cowsay")
+        require_relative ::File.join("examples", "standard", version, "date_time")
+        require_relative ::File.join("examples", "standard", version, "factorial")
+        require_relative ::File.join("examples", "standard", version, "gemfile")
+        require_relative ::File.join("examples", "standard", version, "request_params")
       end
 
       ##
@@ -337,9 +338,10 @@ module ConvenientService
       #
       # Loads rails config examples.
       #
+      # @param version [String]
       # @return [Boolean]
       #
-      def require_rails_examples
+      def require_rails_examples(version: "")
         ##
         # - https://ruby-doc.org/stdlib-2.7.0/libdoc/json/rdoc/JSON.html
         # - https://github.com/flori/json
@@ -357,7 +359,7 @@ module ConvenientService
         #
         require "webrick"
 
-        require_relative "examples/rails/gemfile"
+        require_relative ::File.join("examples", "rails", version, "gemfile")
       end
 
       ##
@@ -365,9 +367,10 @@ module ConvenientService
       #
       # Loads dry config examples.
       #
+      # @param version [String]
       # @return [Boolean]
       #
-      def require_dry_examples
+      def require_dry_examples(version: "")
         ##
         # - https://ruby-doc.org/stdlib-2.7.0/libdoc/json/rdoc/JSON.html
         # - https://github.com/flori/json
@@ -385,7 +388,7 @@ module ConvenientService
         #
         require "webrick"
 
-        require_relative "examples/dry/gemfile"
+        require_relative ::File.join("examples", "dry", version, "gemfile")
       end
 
       ##
