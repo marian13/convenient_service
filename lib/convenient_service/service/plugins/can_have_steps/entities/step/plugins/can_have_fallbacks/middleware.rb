@@ -21,10 +21,47 @@ module ConvenientService
                     when :success
                       result
                     when :failure
-                      entity.fallback_failure_step? ? entity.fallback_failure_result(...) : result
+                      fallback_failure_step? ? entity.fallback_failure_result(...) : result
                     when :error
-                      entity.fallback_error_step? ? entity.fallback_error_result(...) : result
+                      fallback_error_step? ? entity.fallback_error_result(...) : result
                     end
+                  end
+
+                  private
+
+                  ##
+                  # @return [Boolean]
+                  #
+                  def fallback_failure_step?
+                    entity.fallback_failure_step? || fallback_true_step_as_failure_step?
+                  end
+
+                  ##
+                  # @return [Boolean]
+                  #
+                  def fallback_true_step_as_failure_step?
+                    entity.fallback_true_step? && fallback_true_status == :failure
+                  end
+
+                  ##
+                  # @return [Boolean]
+                  #
+                  def fallback_error_step?
+                    entity.fallback_error_step? || fallback_true_step_as_error_step?
+                  end
+
+                  ##
+                  # @return [Boolean]
+                  #
+                  def fallback_true_step_as_error_step?
+                    entity.fallback_true_step? && fallback_true_status == :error
+                  end
+
+                  ##
+                  # @return [Symbol]
+                  #
+                  def fallback_true_status
+                    middleware_arguments.kwargs.fetch(:fallback_true_status) { :failure }
                   end
                 end
               end

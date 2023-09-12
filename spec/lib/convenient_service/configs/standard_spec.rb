@@ -484,7 +484,7 @@ RSpec.describe ConvenientService::Configs::Standard do
               [
                 ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
                 ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
-                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallbacks::Middleware,
+                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallbacks::Middleware.with(fallback_true_status: :error),
                 ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveParentResult::Middleware
               ]
             end

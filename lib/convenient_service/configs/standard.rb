@@ -161,7 +161,7 @@ module ConvenientService
           end
 
           middlewares :result do
-            use Plugins::Step::CanHaveFallbacks::Middleware
+            use Plugins::Step::CanHaveFallbacks::Middleware.with(fallback_true_status: :error)
             use Plugins::Step::CanHaveParentResult::Middleware
           end
 

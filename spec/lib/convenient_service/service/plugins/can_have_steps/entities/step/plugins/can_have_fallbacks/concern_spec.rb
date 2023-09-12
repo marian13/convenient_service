@@ -329,8 +329,8 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
             end
           end
 
-          it "returns `true`" do
-            expect(step.fallback_error_step?).to eq(true)
+          it "returns `false`" do
+            expect(step.fallback_error_step?).to eq(false)
           end
         end
       end
@@ -420,8 +420,64 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       end
     end
 
+    describe "#fallback_true_step?" do
+      specify do
+        expect { step.fallback_true_step? }
+          .to delegate_to(step.params.extra_kwargs, :[])
+          .with_arguments(:fallback)
+      end
+
+      context "when `fallback` option is NOT passed" do
+        let(:organizer_service_class) do
+          Class.new.tap do |klass|
+            klass.class_exec(step_service_class) do |step_service_class|
+              include ConvenientService::Configs::Standard
+
+              step step_service_class
+            end
+          end
+        end
+
+        it "defaults to `false`" do
+          expect(step.fallback_true_step?).to eq(false)
+        end
+      end
+
+      context "when `fallback` option is NOT `true`" do
+        let(:organizer_service_class) do
+          Class.new.tap do |klass|
+            klass.class_exec(step_service_class) do |step_service_class|
+              include ConvenientService::Configs::Standard
+
+              step step_service_class, fallback: nil
+            end
+          end
+        end
+
+        it "returns `false`" do
+          expect(step.fallback_true_step?).to eq(false)
+        end
+      end
+
+      context "when `fallback` option is `true`" do
+        let(:organizer_service_class) do
+          Class.new.tap do |klass|
+            klass.class_exec(step_service_class) do |step_service_class|
+              include ConvenientService::Configs::Standard
+
+              step step_service_class, fallback: true
+            end
+          end
+        end
+
+        it "returns `true`" do
+          expect(step.fallback_true_step?).to eq(true)
+        end
+      end
+    end
+
     describe "#fallback_step?" do
-      context "when step neither fallback failure nor fallback error step" do
+      context "when step none of fallback tru, fallback failure or fallback error step" do
         let(:organizer_service_class) do
           Class.new.tap do |klass|
             klass.class_exec(step_service_class) do |step_service_class|
@@ -434,6 +490,22 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
         it "returns `false`" do
           expect(step.fallback_step?).to eq(false)
+        end
+      end
+
+      context "when step is fallback true step" do
+        let(:organizer_service_class) do
+          Class.new.tap do |klass|
+            klass.class_exec(step_service_class) do |step_service_class|
+              include ConvenientService::Configs::Standard
+
+              step step_service_class, fallback: true
+            end
+          end
+        end
+
+        it "returns `true`" do
+          expect(step.fallback_step?).to eq(true)
         end
       end
 

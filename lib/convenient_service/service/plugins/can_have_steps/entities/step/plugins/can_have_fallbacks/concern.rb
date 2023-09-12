@@ -15,6 +15,13 @@ module ConvenientService
                     ##
                     # @return [Bool]
                     #
+                    def fallback_true_step?
+                      params.extra_kwargs[:fallback] == true
+                    end
+
+                    ##
+                    # @return [Bool]
+                    #
                     def fallback_failure_step?
                       Utils::Array.wrap(params.extra_kwargs[:fallback]).include?(:failure)
                     end
@@ -23,8 +30,6 @@ module ConvenientService
                     # @return [Bool]
                     #
                     def fallback_error_step?
-                      return true if params.extra_kwargs[:fallback] == true
-
                       Utils::Array.wrap(params.extra_kwargs[:fallback]).include?(:error)
                     end
 
@@ -32,7 +37,7 @@ module ConvenientService
                     # @return [Bool]
                     #
                     def fallback_step?
-                      fallback_failure_step? || fallback_error_step?
+                      fallback_true_step? || fallback_failure_step? || fallback_error_step?
                     end
 
                     ##
