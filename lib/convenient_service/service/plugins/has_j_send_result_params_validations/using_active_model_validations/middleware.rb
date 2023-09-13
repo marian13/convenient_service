@@ -38,7 +38,7 @@ module ConvenientService
             # @return [Symbol]
             #
             def status
-              middleware_arguments.kwargs.fetch(:status) { :error }
+              middleware_arguments.kwargs.fetch(:status) { :failure }
             end
           end
         end

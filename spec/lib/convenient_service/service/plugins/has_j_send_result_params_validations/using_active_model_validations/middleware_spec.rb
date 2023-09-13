@@ -195,8 +195,8 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultParamsValidati
 
     let(:service_instance) { service_class.new(foo: "bar") }
 
-    it "defaults to `:failure`" do
-      expect(method_value).to be_failure
+    it "defaults to `:error`" do
+      expect(method_value).to be_error
     end
   end
 
