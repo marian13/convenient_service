@@ -40,7 +40,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
       subject(:method_value) { method.call }
 
-      let(:method) { wrap_method(step, :result, observe_middleware: middleware.with(fallback_true_status: :error)) }
+      let(:method) { wrap_method(step, :result, observe_middleware: middleware.with(fallback_true_status: :failure)) }
 
       let(:organizer) { container.new }
       let(:step) { organizer.steps.first }
@@ -52,7 +52,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
             self::Step.class_exec(middleware) do |middleware|
               middlewares :result do
-                observe middleware.with(fallback_true_status: :error)
+                observe middleware.with(fallback_true_status: :failure)
               end
             end
 
@@ -102,7 +102,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
                   self::Step.class_exec(middleware) do |middleware|
                     middlewares :result do
-                      replace middleware.with(fallback_true_status: :error), middleware
+                      replace middleware.with(fallback_true_status: :failure), middleware
 
                       observe middleware
                     end
@@ -207,8 +207,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
                   self::Step.class_exec(middleware) do |middleware|
                     middlewares :result do
-                      replace middleware.with(fallback_true_status: :error), middleware.with(fallback_true_status: :failure)
-
                       observe middleware.with(fallback_true_status: :failure)
                     end
                   end
@@ -312,6 +310,8 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
                   self::Step.class_exec(middleware) do |middleware|
                     middlewares :result do
+                      replace middleware.with(fallback_true_status: :failure), middleware.with(fallback_true_status: :error)
+
                       observe middleware.with(fallback_true_status: :error)
                     end
                   end
@@ -414,7 +414,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
                 self::Step.class_exec(middleware) do |middleware|
                   middlewares :result do
-                    observe middleware.with(fallback_true_status: :error)
+                    observe middleware.with(fallback_true_status: :failure)
                   end
                 end
 
@@ -515,7 +515,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
                 self::Step.class_exec(middleware) do |middleware|
                   middlewares :result do
-                    observe middleware.with(fallback_true_status: :error)
+                    observe middleware.with(fallback_true_status: :failure)
                   end
                 end
 

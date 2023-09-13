@@ -22,10 +22,10 @@ module ConvenientService
             end
 
             def result
-              return failure(command: "Command is `nil`") if command.nil?
-              return failure(command: "Command is empty?") if command.empty?
+              return error(command: "Command is `nil`") if command.nil?
+              return error(command: "Command is empty?") if command.empty?
 
-              return error("Printing of shell command `#{command}` is skipped") if skip
+              return failure("Printing of shell command `#{command}` is skipped") if skip
 
               out.puts
 
@@ -34,7 +34,7 @@ module ConvenientService
               success
             end
 
-            def fallback_error_result
+            def fallback_failure_result
               success
             end
           end
