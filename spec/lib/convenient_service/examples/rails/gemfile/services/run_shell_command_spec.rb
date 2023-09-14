@@ -38,8 +38,8 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::RunShellCo
           context "when command is NOT present" do
             let(:command) { "" }
 
-            it "returns failure with data" do
-              expect(result).to be_failure.with_data(command: "can't be blank").of_service(described_class).without_step
+            it "returns error with data" do
+              expect(result).to be_error.with_data(command: "can't be blank").of_service(described_class).without_step
             end
           end
         end

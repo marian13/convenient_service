@@ -48,16 +48,16 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::ReplaceFil
         context "when path is NOT present" do
           let(:path) { nil }
 
-          it "returns failure with data" do
-            expect(result).to be_failure.with_data(path: "can't be blank").of_service(described_class).without_step
+          it "returns error with data" do
+            expect(result).to be_error.with_data(path: "can't be blank").of_service(described_class).without_step
           end
         end
 
         context "when content is `nil`" do
           let(:content) { nil }
 
-          it "returns failure with data" do
-            expect(result).to be_failure.with_data(content: "can't be nil").of_service(described_class).without_step
+          it "returns error with data" do
+            expect(result).to be_error.with_data(content: "can't be nil").of_service(described_class).without_step
           end
         end
       end

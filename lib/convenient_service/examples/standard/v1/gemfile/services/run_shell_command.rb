@@ -14,10 +14,6 @@ module ConvenientService
               step :validate_command,
                 in: :command
 
-              step Services::PrintShellCommand,
-                in: [:command, {skip: -> { !debug }}],
-                fallback: true
-
               step :result,
                 in: :command
 

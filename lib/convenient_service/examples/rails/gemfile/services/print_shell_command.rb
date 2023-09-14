@@ -3,7 +3,7 @@
 ##
 # Usage example:
 #
-#   ConvenientService::Examples::Rails::Gemfile::Services::PrintShellCommand.result(text: "ls -a")
+#   ConvenientService::Examples::Rails::Gemfile::Services::PrintShellCommand.result(command: "ls -a")
 #
 module ConvenientService
   module Examples
@@ -20,7 +20,7 @@ module ConvenientService
             validates :command, presence: true if ConvenientService::Dependencies.support_has_j_send_result_params_validations_using_active_model_validations?
 
             def result
-              return error("Printing of shell command `#{command}` is skipped") if skip
+              return failure("Printing of shell command `#{command}` is skipped") if skip
 
               out.puts
 
@@ -29,7 +29,7 @@ module ConvenientService
               success
             end
 
-            def fallback_error_result
+            def fallback_failure_result
               success
             end
           end

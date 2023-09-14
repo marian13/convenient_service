@@ -38,7 +38,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::RunShellComm
           let(:command) { "" }
 
           it "returns failure with data" do
-            expect(result).to be_failure.with_data(command: "must be filled").of_service(described_class).without_step
+            expect(result).to be_error.with_data(command: "must be filled").of_service(described_class).without_step
           end
         end
 

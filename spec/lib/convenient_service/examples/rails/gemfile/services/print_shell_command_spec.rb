@@ -30,8 +30,8 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::PrintShell
           context "when command is NOT present" do
             let(:command) { "" }
 
-            it "returns failure with data" do
-              expect(result).to be_failure.with_data(command: "can't be blank")
+            it "returns error with data" do
+              expect(result).to be_error.with_data(command: "can't be blank")
             end
           end
         end
@@ -39,8 +39,8 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::PrintShell
         context "when skipping" do
           let(:skip) { true }
 
-          it "returns error with message" do
-            expect(result).to be_error.with_message("Printing of shell command `#{command}` is skipped").of_service(described_class).without_step
+          it "returns failure with message" do
+            expect(result).to be_failure.with_message("Printing of shell command `#{command}` is skipped").of_service(described_class).without_step
           end
         end
       end

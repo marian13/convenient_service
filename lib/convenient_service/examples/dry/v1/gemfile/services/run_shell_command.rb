@@ -19,10 +19,6 @@ module ConvenientService
                 end
               end
 
-              step Services::PrintShellCommand,
-                in: [:command, {skip: -> { !debug }}],
-                fallback: true
-
               step :result,
                 in: :command
 

@@ -26,8 +26,8 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::ReadFileCo
           context "when path is NOT present" do
             let(:path) { "" }
 
-            it "returns failure with data" do
-              expect(result).to be_failure.with_data(path: "can't be blank").without_step
+            it "returns error with data" do
+              expect(result).to be_error.with_data(path: "can't be blank").without_step
             end
           end
         end

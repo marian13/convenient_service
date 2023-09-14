@@ -27,7 +27,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::FormatGemsWi
           let(:parsed_content) { [] }
 
           it "returns `failure`" do
-            expect(result).to be_failure.with_data(parsed_content: "must be a hash").of_service(described_class).without_step
+            expect(result).to be_error.with_data(parsed_content: "must be a hash").of_service(described_class).without_step
           end
         end
 
@@ -37,7 +37,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::FormatGemsWi
               let(:parsed_content) { {gems: {}} }
 
               it "returns `failure`" do
-                expect(result).to be_failure.with_data(parsed_content: [:gems, ["must be an array"]]).of_service(described_class).without_step
+                expect(result).to be_error.with_data(parsed_content: [:gems, ["must be an array"]]).of_service(described_class).without_step
               end
             end
 
@@ -46,7 +46,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::FormatGemsWi
                 let(:parsed_content) { {gems: [42]} }
 
                 it "returns `failure`" do
-                  expect(result).to be_failure.with_data(parsed_content: [:gems, {0 => ["must be a hash"]}]).of_service(described_class).without_step
+                  expect(result).to be_error.with_data(parsed_content: [:gems, {0 => ["must be a hash"]}]).of_service(described_class).without_step
                 end
               end
 
@@ -63,7 +63,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::FormatGemsWi
                   end
 
                   it "returns `failure`" do
-                    expect(result).to be_failure.with_data(parsed_content: [:gems, {0 => {envs: ["is missing"]}}]).of_service(described_class).without_step
+                    expect(result).to be_error.with_data(parsed_content: [:gems, {0 => {envs: ["is missing"]}}]).of_service(described_class).without_step
                   end
                 end
 
@@ -79,7 +79,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::FormatGemsWi
                   end
 
                   it "returns `failure`" do
-                    expect(result).to be_failure.with_data(parsed_content: [:gems, {0 => {line: ["is missing"]}}]).of_service(described_class).without_step
+                    expect(result).to be_error.with_data(parsed_content: [:gems, {0 => {line: ["is missing"]}}]).of_service(described_class).without_step
                   end
                 end
               end

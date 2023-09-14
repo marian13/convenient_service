@@ -25,12 +25,6 @@ RSpec.describe ConvenientService::Examples::Standard::V1::Gemfile::Services::Run
 
   example_group "class methods" do
     describe ".result" do
-      before do
-        stub_service(ConvenientService::Examples::Standard::V1::Gemfile::Services::PrintShellCommand)
-          .with_arguments(command: command, skip: debug)
-          .to return_success
-      end
-
       context "when running of shell command is NOT successful" do
         context "when `command` is NOT valid" do
           context "when `command` is `nil`" do
@@ -78,12 +72,6 @@ RSpec.describe ConvenientService::Examples::Standard::V1::Gemfile::Services::Run
           # This particular case prevent shell commands execution.
           #
           allow(service).to receive(:system).with(command).and_return(true)
-        end
-
-        it "prints shell command" do
-          expect { result }
-            .to delegate_to(ConvenientService::Examples::Standard::V1::Gemfile::Services::PrintShellCommand, :result)
-            .with_arguments(command: command, skip: !debug)
         end
 
         it "returns success" do

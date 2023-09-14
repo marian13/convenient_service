@@ -28,7 +28,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::FormatHeader
           let(:parsed_content) { [] }
 
           it "returns `failure`" do
-            expect(result).to be_failure.with_data(parsed_content: "must be a hash").of_service(described_class).without_step
+            expect(result).to be_error.with_data(parsed_content: "must be a hash").of_service(described_class).without_step
           end
         end
 
@@ -38,7 +38,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::FormatHeader
               let(:parsed_content) { {ruby: {}} }
 
               it "returns `failure`" do
-                expect(result).to be_failure.with_data(parsed_content: [:ruby, ["must be an array"]]).of_service(described_class).without_step
+                expect(result).to be_error.with_data(parsed_content: [:ruby, ["must be an array"]]).of_service(described_class).without_step
               end
             end
 
@@ -47,7 +47,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::FormatHeader
                 let(:parsed_content) { {ruby: [42]} }
 
                 it "returns `failure`" do
-                  expect(result).to be_failure.with_data(parsed_content: [:ruby, {0 => ["must be a string"]}]).of_service(described_class).without_step
+                  expect(result).to be_error.with_data(parsed_content: [:ruby, {0 => ["must be a string"]}]).of_service(described_class).without_step
                 end
               end
             end
@@ -58,7 +58,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::FormatHeader
               let(:parsed_content) { {source: {}} }
 
               it "returns `failure`" do
-                expect(result).to be_failure.with_data(parsed_content: [:source, ["must be an array"]]).of_service(described_class).without_step
+                expect(result).to be_error.with_data(parsed_content: [:source, ["must be an array"]]).of_service(described_class).without_step
               end
             end
 
@@ -67,7 +67,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::FormatHeader
                 let(:parsed_content) { {source: [42]} }
 
                 it "returns `failure`" do
-                  expect(result).to be_failure.with_data(parsed_content: [:source, {0 => ["must be a string"]}]).of_service(described_class).without_step
+                  expect(result).to be_error.with_data(parsed_content: [:source, {0 => ["must be a string"]}]).of_service(described_class).without_step
                 end
               end
             end
@@ -78,7 +78,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::FormatHeader
               let(:parsed_content) { {git_source: {}} }
 
               it "returns `failure`" do
-                expect(result).to be_failure.with_data(parsed_content: [:git_source, ["must be an array"]]).of_service(described_class).without_step
+                expect(result).to be_error.with_data(parsed_content: [:git_source, ["must be an array"]]).of_service(described_class).without_step
               end
             end
 
@@ -87,7 +87,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::FormatHeader
                 let(:parsed_content) { {git_source: [42]} }
 
                 it "returns `failure`" do
-                  expect(result).to be_failure.with_data(parsed_content: [:git_source, {0 => ["must be a string"]}]).of_service(described_class).without_step
+                  expect(result).to be_error.with_data(parsed_content: [:git_source, {0 => ["must be a string"]}]).of_service(described_class).without_step
                 end
               end
             end
@@ -98,7 +98,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::FormatHeader
           let(:skip_frozen_string_literal) { 42 }
 
           it "returns `failure`" do
-            expect(result).to be_failure.with_data(skip_frozen_string_literal: "must be boolean").of_service(described_class).without_step
+            expect(result).to be_error.with_data(skip_frozen_string_literal: "must be boolean").of_service(described_class).without_step
           end
         end
       end

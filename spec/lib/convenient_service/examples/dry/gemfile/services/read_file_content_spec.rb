@@ -26,7 +26,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::ReadFileCont
           let(:path) { "" }
 
           it "returns `failure` with `data`" do
-            expect(result).to be_failure.with_data(path: "must be filled").of_service(described_class).without_step
+            expect(result).to be_error.with_data(path: "must be filled").of_service(described_class).without_step
           end
         end
       end

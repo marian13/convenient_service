@@ -82,8 +82,8 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::StripComme
       context "when content is NOT present" do
         let(:content) { "" }
 
-        it "returns failure with data" do
-          expect(result).to be_failure.with_data(content: "can't be blank")
+        it "returns error with data" do
+          expect(result).to be_error.with_data(content: "can't be blank")
         end
       end
     end

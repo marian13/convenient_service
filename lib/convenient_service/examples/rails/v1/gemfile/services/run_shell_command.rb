@@ -14,10 +14,6 @@ module ConvenientService
 
               validates :command, presence: true if ConvenientService::Dependencies.support_has_j_send_result_params_validations_using_active_model_validations?
 
-              step Services::PrintShellCommand,
-                in: [:command, {skip: -> { !debug }}],
-                fallback: true
-
               step :result,
                 in: :command
 

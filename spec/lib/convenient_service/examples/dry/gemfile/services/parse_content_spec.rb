@@ -155,7 +155,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::ParseContent
       let(:content) { "" }
 
       it "returns failure with data" do
-        expect(result).to be_failure.with_data(content: "must be filled")
+        expect(result).to be_error.with_data(content: "must be filled")
       end
     end
 

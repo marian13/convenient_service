@@ -31,7 +31,6 @@ module ConvenientService
             use Plugins::Common::HasCallbacks::Concern
             use Plugins::Common::HasAroundCallbacks::Concern
 
-            use Plugins::Service::CanHaveFallbacks::Concern
             use Plugins::Service::HasMermaidFlowchart::Concern
           end
 
@@ -63,32 +62,6 @@ module ConvenientService
               Plugins::Service::SetsParentToForeignResult::Middleware
           end
 
-          ##
-          # @internal
-          #   NOTE: Check `Minimal` docs to understand why `use Plugins::Common::NormalizesEnv::Middleware` for `:fallback_failure_result` is used in `Standard`, not in `Minimal` config.
-          #
-          middlewares :fallback_failure_result do
-            use Plugins::Common::NormalizesEnv::Middleware
-            use Plugins::Service::CollectsServicesInException::Middleware
-            use Plugins::Common::CachesReturnValue::Middleware
-
-            use Plugins::Service::RaisesOnNotResultReturnValue::Middleware
-            use Plugins::Service::CanHaveFallbacks::Middleware.with(status: :failure)
-          end
-
-          ##
-          # @internal
-          #   NOTE: Check `Minimal` docs to understand why `use Plugins::Common::NormalizesEnv::Middleware` for `:fallback_error_result` is used in `Standard`, not in `Minimal` config.
-          #
-          middlewares :fallback_error_result do
-            use Plugins::Common::NormalizesEnv::Middleware
-            use Plugins::Service::CollectsServicesInException::Middleware
-            use Plugins::Common::CachesReturnValue::Middleware
-
-            use Plugins::Service::RaisesOnNotResultReturnValue::Middleware
-            use Plugins::Service::CanHaveFallbacks::Middleware.with(status: :error)
-          end
-
           middlewares :step do
             use Plugins::Common::HasCallbacks::Middleware
             use Plugins::Common::HasAroundCallbacks::Middleware
@@ -113,7 +86,6 @@ module ConvenientService
 
               use Plugins::Result::CanHaveStep::Concern
               use Plugins::Result::CanBeOwnResult::Concern
-              use Plugins::Result::CanHaveFallbacks::Concern
               use Plugins::Result::CanHaveParentResult::Concern
               use Plugins::Result::CanHaveCheckedStatus::Concern
             end
@@ -158,32 +130,10 @@ module ConvenientService
           class self::Step
             concerns do
               use Plugins::Common::HasJSendResultDuckShortSyntax::Concern
-              use Plugins::Step::CanHaveFallbacks::Concern
             end
 
             middlewares :result do
-              use Plugins::Step::CanHaveFallbacks::Middleware.with(fallback_true_status: :error)
               use Plugins::Step::CanHaveParentResult::Middleware
-            end
-
-            middlewares :service_fallback_failure_result do
-              use Plugins::Common::NormalizesEnv::Middleware
-              use Plugins::Common::CachesReturnValue::Middleware
-            end
-
-            middlewares :fallback_failure_result do
-              use Plugins::Common::NormalizesEnv::Middleware
-              use Plugins::Common::CachesReturnValue::Middleware
-            end
-
-            middlewares :service_fallback_error_result do
-              use Plugins::Common::NormalizesEnv::Middleware
-              use Plugins::Common::CachesReturnValue::Middleware
-            end
-
-            middlewares :fallback_error_result do
-              use Plugins::Common::NormalizesEnv::Middleware
-              use Plugins::Common::CachesReturnValue::Middleware
             end
           end
 
