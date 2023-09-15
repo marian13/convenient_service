@@ -24,16 +24,16 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::AssertF
           context "when `path` is `nil`" do
             let(:path) { nil }
 
-            it "returns `failure` with `data`" do
-              expect(result).to be_failure.with_data(path: "Path is `nil`").of_service(described_class).without_step
+            it "returns `error` with `data`" do
+              expect(result).to be_error.with_message("Path is `nil`").of_service(described_class).without_step
             end
           end
 
           context "when `path` is empty" do
             let(:path) { "" }
 
-            it "returns `failure` with `data`" do
-              expect(result).to be_failure.with_data(path: "Path is empty").of_service(described_class).without_step
+            it "returns `error` with `data`" do
+              expect(result).to be_error.with_message("Path is empty").of_service(described_class).without_step
             end
           end
         end
@@ -41,8 +41,8 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::AssertF
         context "when file with `path` does NOT exist" do
           let(:path) { "non_existing_path" }
 
-          it "returns `error` with `message`" do
-            expect(result).to be_error.with_message("File with path `#{path}` does NOT exist").of_service(described_class).without_step
+          it "returns `failure` with `message`" do
+            expect(result).to be_failure.with_message("File with path `#{path}` does NOT exist").of_service(described_class).without_step
           end
         end
       end

@@ -35,8 +35,8 @@ module ConvenientService
             private
 
             def validate_name
-              return failure(name: "Name is `nil`") if name.nil?
-              return failure(name: "Name is empty") if name.empty?
+              return error("Name is `nil`") if name.nil?
+              return error("Name is empty") if name.empty?
 
               success
             end

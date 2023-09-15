@@ -89,8 +89,8 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::StripCo
       # TODO: Integration test.
       # TODO: different content variations.
       #
-      it "returns success with content without comments" do
-        expect(result).to be_success.with_data({content_without_comments: ""})
+      it "returns `success` with content without comments" do
+        expect(result).to be_success.with_data(content_without_comments: "")
       end
     end
   end

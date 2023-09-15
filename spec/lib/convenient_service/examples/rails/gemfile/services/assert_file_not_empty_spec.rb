@@ -26,8 +26,8 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::AssertFile
           context "when `path` is NOT present" do
             let(:path) { "" }
 
-            it "returns `error` with `data`" do
-              expect(result).to be_error.with_data(path: "can't be blank").of_service(described_class).without_step
+            it "returns `error` with `message`" do
+              expect(result).to be_error.with_message("path can't be blank").of_service(described_class).without_step
             end
           end
         end
@@ -39,8 +39,8 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::AssertFile
           let(:tempfile) { Tempfile.new }
           let(:path) { tempfile.path }
 
-          it "returns `error` with `message`" do
-            expect(result).to be_error.with_message("File with path `#{path}` is empty").of_service(described_class).without_step
+          it "returns `failure` with `message`" do
+            expect(result).to be_failure.with_message("File with path `#{path}` is empty").of_service(described_class).without_step
           end
         end
       end

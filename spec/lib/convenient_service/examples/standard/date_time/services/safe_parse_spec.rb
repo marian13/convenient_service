@@ -28,8 +28,8 @@ RSpec.describe ConvenientService::Examples::Standard::DateTime::Services::SafePa
           let(:data) { {exception: instance_of(Date::Error)} }
           let(:message) { "Failed to parse `DateTime` object from `#{string}` with `#{format}`" }
 
-          it "returns `failure` with `data` and `message`" do
-            expect(result).to be_failure.with_data(data).and_message(message).comparing_by(:===)
+          it "returns `erros` with `data` and `message`" do
+            expect(result).to be_error.with_data(data).and_message(message).comparing_by(:===)
           end
         end
       end

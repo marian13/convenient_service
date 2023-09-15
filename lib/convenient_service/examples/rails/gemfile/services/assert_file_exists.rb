@@ -13,7 +13,7 @@ module ConvenientService
             validates :path, presence: true if ConvenientService::Dependencies.support_has_j_send_result_params_validations_using_active_model_validations?
 
             def result
-              return error("File with path `#{path}` does NOT exist") unless ::File.exist?(path)
+              return failure("File with path `#{path}` does NOT exist") unless ::File.exist?(path)
 
               success
             end

@@ -32,15 +32,15 @@ module ConvenientService
             end
 
             def validate_header
-              return failure(header: "Header is `nil`") if header.nil?
-              return failure(header: "Header is empty") if header.empty?
+              return error("Header is `nil`") if header.nil?
+              return error("Header is empty") if header.empty?
 
               success
             end
 
             def validate_body
-              return failure(body: "Body is `nil`") if body.nil?
-              return failure(body: "Body is empty") if body.empty?
+              return error("Body is `nil`") if body.nil?
+              return error("Body is empty") if body.empty?
 
               success
             end

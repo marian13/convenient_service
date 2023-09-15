@@ -14,10 +14,10 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::F
 
       let(:params) { {id: "1000000", title: "Check the official User Docs", verified: true} }
 
-      context "when params does NOT only permitted keys" do
+      context "when `params` does NOT only permitted keys" do
         let(:permitted_keys) { [:id, :title] }
 
-        it "returns success with `params` without unpermitted keys" do
+        it "returns `success` with `params` without unpermitted keys" do
           expect(result).to be_success.with_data(params: params.slice(*permitted_keys))
         end
       end
@@ -25,7 +25,7 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::F
       context "when `params` have only permitted keys" do
         let(:permitted_keys) { [:id, :title, :verified] }
 
-        it "returns success with original `params`" do
+        it "returns `success` with original `params`" do
           expect(result).to be_success.with_data(params: params)
         end
       end

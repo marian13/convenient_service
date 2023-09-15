@@ -61,16 +61,16 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::MergeSe
         context "when header is `nil`" do
           let(:header) { nil }
 
-          it "returns failure with data" do
-            expect(result).to be_failure.with_data(header: "Header is `nil`").of_service(described_class).of_step(:validate_header)
+          it "returns `error` with `message`" do
+            expect(result).to be_error.with_message("Header is `nil`").of_service(described_class).of_step(:validate_header)
           end
         end
 
         context "when header is empty string" do
           let(:header) { "" }
 
-          it "returns failure with data" do
-            expect(result).to be_failure.with_data(header: "Header is empty").of_service(described_class).of_step(:validate_header)
+          it "returns `error` with `message`" do
+            expect(result).to be_error.with_message("Header is empty").of_service(described_class).of_step(:validate_header)
           end
         end
       end
@@ -79,23 +79,23 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::MergeSe
         context "when body is `nil`" do
           let(:body) { nil }
 
-          it "returns failure with data" do
-            expect(result).to be_failure.with_data(body: "Body is `nil`").of_service(described_class).of_step(:validate_body)
+          it "returns `error` with `message`" do
+            expect(result).to be_error.with_message("Body is `nil`").of_service(described_class).of_step(:validate_body)
           end
         end
 
         context "when body is empty string" do
           let(:body) { "" }
 
-          it "returns failure with data" do
-            expect(result).to be_failure.with_data(body: "Body is empty").of_service(described_class).of_step(:validate_body)
+          it "returns `error` with `message`" do
+            expect(result).to be_error.with_message("Body is empty").of_service(described_class).of_step(:validate_body)
           end
         end
       end
     end
 
     context "when merging of sections is successful" do
-      it "returns success with contated header and body" do
+      it "returns `success` with contated header and body" do
         expect(result).to be_success.with_data(merged_sections: "#{header}\n#{body}").of_service(described_class).of_step(:result)
       end
     end

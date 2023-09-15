@@ -177,8 +177,8 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::Format do
           context "when path is NOT present" do
             let(:path) { nil }
 
-            it "returns error with data" do
-              expect(result).to be_error.with_data(path: "can't be blank").of_service(described_class).without_step
+            it "returns `error` with `message`" do
+              expect(result).to be_error.with_message("path can't be blank").of_service(described_class).without_step
             end
           end
         end
@@ -251,7 +251,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::Format do
             .with_arguments(path: path, content: formatted_content)
         end
 
-        it "returns success" do
+        it "returns `success`" do
           expect(result).to be_success.of_service(described_class)
         end
 

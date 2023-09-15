@@ -15,7 +15,7 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::A
       let(:params) { {id: "1000000", title: "Check the official User Docs"} }
       let(:defaults) { {tags: [], sources: []} }
 
-      it "returns success with params and defaults" do
+      it "returns `success` with params and defaults" do
         expect(result).to be_success.with_data(params: {id: "1000000", title: "Check the official User Docs", tags: [], sources: []})
       end
 

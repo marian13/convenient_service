@@ -52,7 +52,7 @@ module ConvenientService
             step :result, in: :content, out: :parsed_content
 
             def result
-              success(data: {parsed_content: parse_content})
+              success(parsed_content: parse_content)
             end
 
             def parse_content

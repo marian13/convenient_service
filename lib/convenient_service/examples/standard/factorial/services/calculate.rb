@@ -16,9 +16,9 @@ module ConvenientService
             end
 
             def result
-              return failure(number: "is `nil`") if number.nil?
-              return failure(number: "is NOT an integer") unless number.instance_of?(::Integer)
-              return failure(number: "is lower than `0`") if number < 0
+              return error("is `nil`") if number.nil?
+              return error("is NOT an integer") unless number.instance_of?(::Integer)
+              return error("is lower than `0`") if number < 0
 
               return error("Timeout (`#{timeout_seconds}` seconds) is exceeded for `#{number}`") if factorial.timeout?
 

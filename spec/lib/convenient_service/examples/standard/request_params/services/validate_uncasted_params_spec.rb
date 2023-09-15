@@ -34,7 +34,7 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::V
         context "when ID is NOT present" do
           let(:id) { "" }
 
-          it "returns error with message" do
+          it "returns `error` with `message`" do
             expect(result).to be_error.with_message("ID is NOT present")
           end
         end
@@ -42,7 +42,7 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::V
         context "when ID is NOT valid integer" do
           let(:id) { "abc" }
 
-          it "returns error with message" do
+          it "returns `error` with `message`" do
             expect(result).to be_error.with_message("ID `#{id}` is NOT a valid integer")
           end
         end
@@ -50,7 +50,7 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::V
         context "when format is NOT json" do
           let(:format) { "html" }
 
-          it "returns error with message" do
+          it "returns `error` with `message`" do
             expect(result).to be_error.with_message("Format `#{format}` is NOT supported, only JSON is allowed")
           end
         end
@@ -58,7 +58,7 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::V
         context "when title is NOT present" do
           let(:title) { "" }
 
-          it "returns error with message" do
+          it "returns `error` with `message`" do
             expect(result).to be_error.with_message("Title is NOT present")
           end
         end
@@ -66,14 +66,14 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::V
         context "when description is NOT present" do
           let(:description) { "" }
 
-          it "returns error with message" do
+          it "returns `error` with `message`" do
             expect(result).to be_error.with_message("Description is NOT present")
           end
         end
       end
 
       context "when params are valid" do
-        it "returns success without data" do
+        it "returns `success` without data" do
           expect(result).to be_success.without_data
         end
       end

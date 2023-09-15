@@ -181,16 +181,16 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::Format 
           context "when path is `nil`" do
             let(:path) { nil }
 
-            it "returns failure with data" do
-              expect(result).to be_failure.with_data(path: "Path is `nil`").of_service(described_class).of_step(:validate_path)
+            it "returns `error` with message" do
+              expect(result).to be_error.with_message("Path is `nil`").of_service(described_class).of_step(:validate_path)
             end
           end
 
           context "when path is empty string" do
             let(:path) { "" }
 
-            it "returns failure with data" do
-              expect(result).to be_failure.with_data(path: "Path is empty").of_service(described_class).of_step(:validate_path)
+            it "returns `error` with message" do
+              expect(result).to be_error.with_message("Path is empty").of_service(described_class).of_step(:validate_path)
             end
           end
         end
@@ -261,7 +261,7 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::Format 
             .with_arguments(path: path, content: formatted_content)
         end
 
-        it "returns success" do
+        it "returns `success`" do
           expect(result).to be_success.of_service(described_class)
         end
 

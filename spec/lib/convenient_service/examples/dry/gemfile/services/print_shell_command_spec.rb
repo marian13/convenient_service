@@ -29,15 +29,15 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::PrintShellCo
         context "when command is NOT present" do
           let(:command) { "" }
 
-          it "returns failure with data" do
-            expect(result).to be_error.with_data(command: "must be filled")
+          it "returns `error` with `message`" do
+            expect(result).to be_error.with_message("command must be filled")
           end
         end
 
         context "when skipping" do
           let(:skip) { true }
 
-          it "returns failure with message" do
+          it "returns `failure` with `message`" do
             expect(result).to be_failure.with_message("Printing of shell command `#{command}` is skipped").of_service(described_class).without_step
           end
         end
@@ -58,7 +58,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::PrintShellCo
             .with_arguments("$ #{command}", :blue, :bold)
         end
 
-        it "returns success" do
+        it "returns `success`" do
           expect(result).to be_success.without_data.of_service(described_class).without_step
         end
       end

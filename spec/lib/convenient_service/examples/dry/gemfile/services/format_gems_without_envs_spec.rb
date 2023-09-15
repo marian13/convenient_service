@@ -26,8 +26,8 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::FormatGemsWi
         context "when `parsed_content` is NOT hash" do
           let(:parsed_content) { [] }
 
-          it "returns `failure`" do
-            expect(result).to be_error.with_data(parsed_content: "must be a hash").of_service(described_class).without_step
+          it "returns `error` with `message`" do
+            expect(result).to be_error.with_message("parsed_content must be a hash").of_service(described_class).without_step
           end
         end
 
@@ -36,7 +36,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::FormatGemsWi
             context "when value for `gems` is NOT array" do
               let(:parsed_content) { {gems: {}} }
 
-              it "returns `failure`" do
+              it "returns `error` with `data`" do
                 expect(result).to be_error.with_data(parsed_content: [:gems, ["must be an array"]]).of_service(described_class).without_step
               end
             end
@@ -45,7 +45,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::FormatGemsWi
               context "when any item from that array is NOT hash" do
                 let(:parsed_content) { {gems: [42]} }
 
-                it "returns `failure`" do
+                it "returns `error` with `data`" do
                   expect(result).to be_error.with_data(parsed_content: [:gems, {0 => ["must be a hash"]}]).of_service(described_class).without_step
                 end
               end
@@ -62,7 +62,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::FormatGemsWi
                     }
                   end
 
-                  it "returns `failure`" do
+                  it "returns `error` with `data`" do
                     expect(result).to be_error.with_data(parsed_content: [:gems, {0 => {envs: ["is missing"]}}]).of_service(described_class).without_step
                   end
                 end
@@ -78,7 +78,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::FormatGemsWi
                     }
                   end
 
-                  it "returns `failure`" do
+                  it "returns `error` with `data`" do
                     expect(result).to be_error.with_data(parsed_content: [:gems, {0 => {line: ["is missing"]}}]).of_service(described_class).without_step
                   end
                 end
@@ -126,7 +126,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::FormatGemsWi
           RUBY
         end
 
-        it "returns success with gems without envs as formatted content" do
+        it "returns `success` with gems without envs as formatted content" do
           expect(result).to be_success.with_data(formatted_content: formatted_content).of_service(described_class).without_step
         end
 

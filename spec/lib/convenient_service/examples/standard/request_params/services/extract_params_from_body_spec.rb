@@ -105,7 +105,7 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::E
           }
         end
 
-        it "returns success with params with symbolized keys" do
+        it "returns `success` with params with symbolized keys" do
           expect(result).to be_success.with_data(params: params)
         end
       end

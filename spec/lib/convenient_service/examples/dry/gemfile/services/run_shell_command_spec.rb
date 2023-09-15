@@ -37,8 +37,8 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::RunShellComm
         context "when command is NOT present" do
           let(:command) { "" }
 
-          it "returns failure with data" do
-            expect(result).to be_error.with_data(command: "must be filled").of_service(described_class).without_step
+          it "returns `error` with `message`" do
+            expect(result).to be_error.with_message("command must be filled").of_service(described_class).without_step
           end
         end
 
@@ -54,7 +54,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::RunShellComm
             allow(service).to receive(:system).with(command).and_return(false)
           end
 
-          it "returns error with message" do
+          it "returns `error` with `message`" do
             expect(result).to be_error.with_message("#{command} returned non-zero exit code").of_service(described_class).of_step(:result)
           end
         end
@@ -78,7 +78,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::RunShellComm
             .with_arguments(command: command, skip: !debug)
         end
 
-        it "returns success" do
+        it "returns `success`" do
           expect(result).to be_success.without_data.of_service(described_class).of_step(:result)
         end
       end

@@ -26,7 +26,7 @@ module ConvenientService
             end
 
             def result
-              success(data: {content_without_comments: file_without_comments.read})
+              success(content_without_comments: file_without_comments.read)
             end
 
             private

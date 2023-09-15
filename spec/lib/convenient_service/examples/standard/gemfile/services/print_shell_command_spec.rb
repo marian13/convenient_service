@@ -27,7 +27,7 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::PrintSh
         context "when skipping" do
           let(:skip) { true }
 
-          it "returns failure with message" do
+          it "returns `failure` with `message`" do
             expect(result).to be_failure.with_message("Printing of shell command `#{command}` is skipped").of_service(described_class).without_step
           end
         end
@@ -48,7 +48,7 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::PrintSh
             .with_arguments("$ #{command}", :blue, :bold)
         end
 
-        it "returns success" do
+        it "returns `success`" do
           expect(result).to be_success.without_data.of_service(described_class).without_step
         end
       end

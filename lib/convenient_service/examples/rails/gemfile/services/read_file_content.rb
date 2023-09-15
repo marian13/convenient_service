@@ -17,7 +17,7 @@ module ConvenientService
             step :result, in: :path, out: :content
 
             def result
-              success(data: {content: ::File.read(path)})
+              success(content: ::File.read(path))
             end
           end
         end

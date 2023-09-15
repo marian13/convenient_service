@@ -31,8 +31,8 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::AssertNpmP
             context "when `name` is NOT present" do
               let(:name) { "" }
 
-              it "returns `error` with `data`" do
-                expect(result).to be_error.with_data(name: "can't be blank").of_service(described_class).without_step
+              it "returns `error` with `message`" do
+                expect(result).to be_error.with_message("name can't be blank").of_service(described_class).without_step
               end
             end
           end

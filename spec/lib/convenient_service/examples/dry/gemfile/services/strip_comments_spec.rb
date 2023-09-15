@@ -57,8 +57,8 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::StripComment
     context "when content is NOT present" do
       let(:content) { "" }
 
-      it "returns failure with data" do
-        expect(result).to be_error.with_data(content: "must be filled")
+      it "returns `error` with `message`" do
+        expect(result).to be_error.with_message("content must be filled")
       end
     end
 
@@ -92,7 +92,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::StripComment
       # TODO: Integration test.
       # TODO: different content variations.
       #
-      it "returns success with content without comments" do
+      it "returns `success` with content without comments" do
         expect(result).to be_success.with_data({content_without_comments: ""})
       end
     end

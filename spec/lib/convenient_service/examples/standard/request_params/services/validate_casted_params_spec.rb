@@ -52,7 +52,7 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::V
         context "when original id is NOT castable" do
           let(:original_id) { nil }
 
-          it "returns error with message" do
+          it "returns `error` with `message`" do
             expect(result).to be_error.with_message("Failed to cast `#{original_id.inspect}` into `ID`")
           end
         end
@@ -60,7 +60,7 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::V
         context "when original format is NOT castable" do
           let(:casted_format) { nil }
 
-          it "returns error with message" do
+          it "returns `error` with `message`" do
             expect(result).to be_error.with_message("Failed to cast `#{original_format.inspect}` into `Format`")
           end
         end
@@ -68,7 +68,7 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::V
         context "when original title is NOT castable" do
           let(:casted_title) { nil }
 
-          it "returns error with message" do
+          it "returns `error` with `message`" do
             expect(result).to be_error.with_message("Failed to cast `#{original_title.inspect}` into `Title`")
           end
         end
@@ -76,7 +76,7 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::V
         context "when original description is NOT castable" do
           let(:casted_description) { nil }
 
-          it "returns error with message" do
+          it "returns `error` with `message`" do
             expect(result).to be_error.with_message("Failed to cast `#{original_description.inspect}` into `Description`")
           end
         end

@@ -67,8 +67,8 @@ module ConvenientService
             private
 
             def validate_path
-              return failure(path: "Path is `nil`") if path.nil?
-              return failure(path: "Path is empty") if path.empty?
+              return error("Path is `nil`") if path.nil?
+              return error("Path is empty") if path.empty?
 
               success
             end

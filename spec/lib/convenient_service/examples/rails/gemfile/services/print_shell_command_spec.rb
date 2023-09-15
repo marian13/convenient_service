@@ -30,8 +30,8 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::PrintShell
           context "when command is NOT present" do
             let(:command) { "" }
 
-            it "returns error with data" do
-              expect(result).to be_error.with_data(command: "can't be blank")
+            it "returns `error` with message" do
+              expect(result).to be_error.with_message("command can't be blank")
             end
           end
         end
@@ -60,7 +60,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::PrintShell
             .with_arguments("$ #{command}", :blue, :bold)
         end
 
-        it "returns success" do
+        it "returns `success`" do
           expect(result).to be_success.without_data.of_service(described_class).without_step
         end
       end

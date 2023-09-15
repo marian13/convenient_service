@@ -34,15 +34,15 @@ module ConvenientService
               if system(command)
                 success
               else
-                error(message: "#{command} returned non-zero exit code")
+                error("#{command} returned non-zero exit code")
               end
             end
 
             private
 
             def validate_command
-              return failure(command: "Command is `nil`") if command.nil?
-              return failure(command: "Command is empty") if command.empty?
+              return error("Command is `nil`") if command.nil?
+              return error("Command is empty") if command.empty?
 
               success
             end

@@ -48,16 +48,16 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::ReplaceFil
         context "when path is NOT present" do
           let(:path) { nil }
 
-          it "returns error with data" do
-            expect(result).to be_error.with_data(path: "can't be blank").of_service(described_class).without_step
+          it "returns `error` with `message`" do
+            expect(result).to be_error.with_message("path can't be blank").of_service(described_class).without_step
           end
         end
 
         context "when content is `nil`" do
           let(:content) { nil }
 
-          it "returns error with data" do
-            expect(result).to be_error.with_data(content: "can't be nil").of_service(described_class).without_step
+          it "returns `error` with `message`" do
+            expect(result).to be_error.with_message("content can't be nil").of_service(described_class).without_step
           end
         end
       end
@@ -72,7 +72,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::ReplaceFil
     end
 
     context "when replacing of file content is successful" do
-      it "returns success with contated header and body" do
+      it "returns `success` with contated header and body" do
         expect(result).to be_success.without_data.of_service(described_class).of_step(:result)
       end
     end

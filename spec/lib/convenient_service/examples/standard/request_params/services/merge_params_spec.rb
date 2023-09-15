@@ -34,7 +34,7 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::M
         }
       end
 
-      it "returns success with original merged params" do
+      it "returns `success` with original merged params" do
         expect(result).to be_success.with_data(params: merged_params)
       end
 

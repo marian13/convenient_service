@@ -17,7 +17,7 @@ module ConvenientService
             end
 
             def result
-              return error("File with path `#{path}` does NOT exist") unless ::File.exist?(path)
+              return failure("File with path `#{path}` does NOT exist") unless ::File.exist?(path)
 
               success
             end

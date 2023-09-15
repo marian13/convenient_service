@@ -24,7 +24,7 @@ module ConvenientService
             step :result, in: :file_without_comments, out: :content_without_comments
 
             def result
-              success(data: {content_without_comments: file_without_comments.read})
+              success(content_without_comments: file_without_comments.read)
             end
 
             ##

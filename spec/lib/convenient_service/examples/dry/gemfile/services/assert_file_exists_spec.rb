@@ -25,16 +25,16 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::AssertFileEx
         context "when `path` is NOT present" do
           let(:path) { "" }
 
-          it "returns `failure` with `data`" do
-            expect(result).to be_error.with_data(path: "must be filled").of_service(described_class).without_step
+          it "returns `error` with `message`" do
+            expect(result).to be_error.with_message("path must be filled").of_service(described_class).without_step
           end
         end
 
         context "when file with `path` does NOT exist" do
           let(:path) { "non_existing_path" }
 
-          it "returns `error` with `message`" do
-            expect(result).to be_error.with_message("File with path `#{path}` does NOT exist").of_service(described_class).without_step
+          it "returns `failure` with `message`" do
+            expect(result).to be_failure.with_message("File with path `#{path}` does NOT exist").of_service(described_class).without_step
           end
         end
       end

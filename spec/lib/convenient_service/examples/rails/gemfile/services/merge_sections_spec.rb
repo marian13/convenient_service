@@ -56,23 +56,23 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::MergeSecti
         context "when header is NOT present" do
           let(:header) { "" }
 
-          it "returns error with data" do
-            expect(result).to be_error.with_data(header: "can't be blank").of_service(described_class).without_step
+          it "returns `error` with `message`" do
+            expect(result).to be_error.with_message("header can't be blank").of_service(described_class).without_step
           end
         end
 
         context "when body is NOT present" do
           let(:body) { "" }
 
-          it "returns error with data" do
-            expect(result).to be_error.with_data(body: "can't be blank").of_service(described_class).without_step
+          it "returns `error` with `message`" do
+            expect(result).to be_error.with_message("body can't be blank").of_service(described_class).without_step
           end
         end
       end
     end
 
     context "when merging of sections is successful" do
-      it "returns success with contated header and body" do
+      it "returns `success` with contated header and body" do
         expect(result).to be_success.with_data(merged_sections: "#{header}\n#{body}").of_service(described_class).without_step
       end
     end

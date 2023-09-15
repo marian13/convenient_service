@@ -51,14 +51,14 @@ module ConvenientService
             end
 
             def result
-              success(data: {parsed_content: parse_content})
+              success(parsed_content: parse_content)
             end
 
             private
 
             def validate_content
-              return failure(content: "Content is `nil`") if content.nil?
-              return failure(content: "Content is empty") if content.empty?
+              return error("Content is `nil`") if content.nil?
+              return error("Content is empty") if content.empty?
 
               success
             end

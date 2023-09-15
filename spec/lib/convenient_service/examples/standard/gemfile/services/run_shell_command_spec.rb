@@ -36,16 +36,16 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::RunShel
           context "when `command` is `nil`" do
             let(:command) { nil }
 
-            it "returns `failure` with `data`" do
-              expect(result).to be_failure.with_data(command: "Command is `nil`").of_service(described_class).of_step(:validate_command)
+            it "returns `error` with `message`" do
+              expect(result).to be_error.with_message("Command is `nil`").of_service(described_class).of_step(:validate_command)
             end
           end
 
           context "when `command` is empty" do
             let(:command) { "" }
 
-            it "returns `failure` with `data`" do
-              expect(result).to be_failure.with_data(command: "Command is empty").of_service(described_class).of_step(:validate_command)
+            it "returns `error` with `message`" do
+              expect(result).to be_error.with_message("Command is empty").of_service(described_class).of_step(:validate_command)
             end
           end
         end
@@ -86,7 +86,7 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::RunShel
             .with_arguments(command: command, skip: !debug)
         end
 
-        it "returns success" do
+        it "returns `success`" do
           expect(result).to be_success.without_data.of_service(described_class).of_step(:result)
         end
       end

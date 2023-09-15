@@ -175,7 +175,7 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::ParseCo
           .to return_success
       end
 
-      it "returns success with parsed content" do
+      it "returns `success` with parsed content" do
         expect(result).to be_success.with_data(parsed_content: parsed_content)
       end
 
@@ -183,7 +183,7 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::ParseCo
         let(:content) { remove(%(ruby "3.0.1"\n), from: default_content) }
         let(:parsed_content) { remove(:ruby, from: default_parsed_content) }
 
-        it "returns success with parsed content without `ruby`" do
+        it "returns `success` with parsed content without `ruby`" do
           expect(result).to be_success.with_data(parsed_content: parsed_content)
         end
       end
@@ -201,7 +201,7 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::ParseCo
         let(:content) { remove(%(git_source(:github) { |repo| "https://github.com/\#{repo}.git" }\n), from: default_content) }
         let(:parsed_content) { remove(:git_source, from: default_parsed_content) }
 
-        it "returns success with parsed content without `git_source`" do
+        it "returns `success` with parsed content without `git_source`" do
           expect(result).to be_success.with_data(parsed_content: parsed_content)
         end
       end
@@ -210,7 +210,7 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::ParseCo
         let(:content) { remove(/^gem.*?\n/, from: default_content) }
         let(:parsed_content) { remove(:gems, condition: ->(gem) { gem[:envs].none? }, from: default_parsed_content) }
 
-        it "returns success with parsed content without `gems` without envs" do
+        it "returns `success` with parsed content without `gems` without envs" do
           expect(result).to be_success.with_data(parsed_content: parsed_content)
         end
       end
@@ -219,7 +219,7 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::ParseCo
         let(:content) { remove(/^group.*?end\n/m, from: default_content) }
         let(:parsed_content) { remove(:gems, condition: ->(gem) { gem[:envs].any? }, from: default_parsed_content) }
 
-        it "returns success with parsed content without `gems` with envs" do
+        it "returns `success` with parsed content without `gems` with envs" do
           expect(result).to be_success.with_data(parsed_content: parsed_content)
         end
       end
@@ -248,7 +248,7 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::ParseCo
           )
         end
 
-        it "returns success with parsed content with combined gems for same group" do
+        it "returns `success` with parsed content with combined gems for same group" do
           expect(result).to be_success.with_data(parsed_content: parsed_content)
         end
       end

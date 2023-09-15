@@ -154,8 +154,8 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::ParseContent
     context "when content is NOT present" do
       let(:content) { "" }
 
-      it "returns failure with data" do
-        expect(result).to be_error.with_data(content: "must be filled")
+      it "returns `error` with `message`" do
+        expect(result).to be_error.with_message("content must be filled")
       end
     end
 
@@ -178,7 +178,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::ParseContent
           .to return_success
       end
 
-      it "returns success with parsed content" do
+      it "returns `success` with parsed content" do
         expect(result).to be_success.with_data(parsed_content: parsed_content)
       end
 
@@ -186,7 +186,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::ParseContent
         let(:content) { remove(%(ruby "3.0.1"\n), from: default_content) }
         let(:parsed_content) { remove(:ruby, from: default_parsed_content) }
 
-        it "returns success with parsed content without `ruby`" do
+        it "returns `success` with parsed content without `ruby`" do
           expect(result).to be_success.with_data(parsed_content: parsed_content)
         end
       end
@@ -195,7 +195,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::ParseContent
         let(:content) { remove(%(source "https://rubygems.org"\n), from: default_content) }
         let(:parsed_content) { remove(:source, from: default_parsed_content) }
 
-        it "returns success with parsed content without `source`" do
+        it "returns `success` with parsed content without `source`" do
           expect(result).to be_success.with_data(parsed_content: parsed_content)
         end
       end
@@ -204,7 +204,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::ParseContent
         let(:content) { remove(%(git_source(:github) { |repo| "https://github.com/\#{repo}.git" }\n), from: default_content) }
         let(:parsed_content) { remove(:git_source, from: default_parsed_content) }
 
-        it "returns success with parsed content without `git_source`" do
+        it "returns `success` with parsed content without `git_source`" do
           expect(result).to be_success.with_data(parsed_content: parsed_content)
         end
       end
@@ -213,7 +213,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::ParseContent
         let(:content) { remove(/^gem.*?\n/, from: default_content) }
         let(:parsed_content) { remove(:gems, condition: ->(gem) { gem[:envs].none? }, from: default_parsed_content) }
 
-        it "returns success with parsed content without `gems` without envs" do
+        it "returns `success` with parsed content without `gems` without envs" do
           expect(result).to be_success.with_data(parsed_content: parsed_content)
         end
       end
@@ -222,7 +222,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::ParseContent
         let(:content) { remove(/^group.*?end\n/m, from: default_content) }
         let(:parsed_content) { remove(:gems, condition: ->(gem) { gem[:envs].any? }, from: default_parsed_content) }
 
-        it "returns success with parsed content without `gems` with envs" do
+        it "returns `success` with parsed content without `gems` with envs" do
           expect(result).to be_success.with_data(parsed_content: parsed_content)
         end
       end
@@ -251,7 +251,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::ParseContent
           )
         end
 
-        it "returns success with parsed content with combined gems for same group" do
+        it "returns `success` with parsed content with combined gems for same group" do
           expect(result).to be_success.with_data(parsed_content: parsed_content)
         end
       end

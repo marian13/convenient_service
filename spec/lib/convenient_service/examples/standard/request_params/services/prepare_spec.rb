@@ -190,7 +190,7 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::P
       end
 
       context "when casted params are valid" do
-        it "returns success with casted params" do
+        it "returns `success` with casted params" do
           expect(result).to be_success.with_data(params: casted_params)
         end
       end

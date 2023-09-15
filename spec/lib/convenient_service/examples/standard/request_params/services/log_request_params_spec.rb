@@ -66,7 +66,7 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::L
           .without_calling_original
       end
 
-      it "returns success" do
+      it "returns `success`" do
         expect(result).to be_success.without_data
       end
 

@@ -26,24 +26,24 @@ RSpec.describe ConvenientService::Examples::Standard::Factorial::Services::Calcu
           context "when `number` is `nil`" do
             let(:number) { nil }
 
-            it "returns `failure` with `data`" do
-              expect(result).to be_failure.with_data(number: "is `nil`").of_service(described_class).without_step
+            it "returns `error` with `message`" do
+              expect(result).to be_error.with_message("is `nil`").of_service(described_class).without_step
             end
           end
 
           context "when `number` is NOT integer" do
             let(:number) { "foo" }
 
-            it "returns `failure` with `data`" do
-              expect(result).to be_failure.with_data(number: "is NOT an integer").of_service(described_class).without_step
+            it "returns `error` with `message`" do
+              expect(result).to be_error.with_message("is NOT an integer").of_service(described_class).without_step
             end
           end
 
           context "when `number` is lower than `0`" do
             let(:number) { -1 }
 
-            it "returns `failure` with `data`" do
-              expect(result).to be_failure.with_data(number: "is lower than `0`").of_service(described_class).without_step
+            it "returns `error` with `message`" do
+              expect(result).to be_error.with_message("is lower than `0`").of_service(described_class).without_step
             end
           end
         end

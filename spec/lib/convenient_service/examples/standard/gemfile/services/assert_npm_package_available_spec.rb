@@ -28,16 +28,16 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::AssertN
           context "when `name` is `nil`" do
             let(:name) { nil }
 
-            it "returns `failure` with `data`" do
-              expect(result).to be_failure.with_data(name: "Name is `nil`").of_service(described_class).of_step(:validate_name)
+            it "returns `error` with `message`" do
+              expect(result).to be_error.with_message("Name is `nil`").of_service(described_class).of_step(:validate_name)
             end
           end
 
           context "when `name` is empty" do
             let(:name) { "" }
 
-            it "returns `failure` with `data`" do
-              expect(result).to be_failure.with_data(name: "Name is empty").of_service(described_class).of_step(:validate_name)
+            it "returns `error` with `message`" do
+              expect(result).to be_error.with_message("Name is empty").of_service(described_class).of_step(:validate_name)
             end
           end
         end

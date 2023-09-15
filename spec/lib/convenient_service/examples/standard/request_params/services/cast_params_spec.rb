@@ -34,7 +34,7 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::C
         }
       end
 
-      it "returns success with original and casted params" do
+      it "returns `success` with original and casted params" do
         expect(result).to be_success.with_data(original_params: original_params, casted_params: casted_params)
       end
     end

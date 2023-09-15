@@ -29,7 +29,7 @@ module ConvenientService
               if system(command)
                 success
               else
-                error(message: "#{command} returned non-zero exit code")
+                error("#{command} returned non-zero exit code")
               end
             end
           end

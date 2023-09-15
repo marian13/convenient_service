@@ -13,7 +13,7 @@ module ConvenientService
             validates :path, presence: true if ConvenientService::Dependencies.support_has_j_send_result_params_validations_using_active_model_validations?
 
             def result
-              return error(message: "File with path `#{path}` is empty") if ::File.zero?(path)
+              return failure("File with path `#{path}` is empty") if ::File.zero?(path)
 
               success
             end
