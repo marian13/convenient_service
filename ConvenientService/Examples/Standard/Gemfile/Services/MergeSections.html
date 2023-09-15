@@ -601,8 +601,8 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/examples/standard/gemfile/services/merge_sections.rb', line 41</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_validate_body'>validate_body</span>
-  <span class='kw'>return</span> <span class='id identifier rubyid_failure'>failure</span><span class='lparen'>(</span><span class='label'>body:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Body is `nil`</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_body'>body</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
-  <span class='kw'>return</span> <span class='id identifier rubyid_failure'>failure</span><span class='lparen'>(</span><span class='label'>body:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Body is empty</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_body'>body</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_error'>error</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Body is `nil`</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_body'>body</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_error'>error</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Body is empty</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_body'>body</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
 
   <span class='id identifier rubyid_success'>success</span>
 <span class='kw'>end</span></pre>
@@ -661,8 +661,8 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/examples/standard/gemfile/services/merge_sections.rb', line 34</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_validate_header'>validate_header</span>
-  <span class='kw'>return</span> <span class='id identifier rubyid_failure'>failure</span><span class='lparen'>(</span><span class='label'>header:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Header is `nil`</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_header'>header</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
-  <span class='kw'>return</span> <span class='id identifier rubyid_failure'>failure</span><span class='lparen'>(</span><span class='label'>header:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Header is empty</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_header'>header</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_error'>error</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Header is `nil`</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_header'>header</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_error'>error</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Header is empty</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_header'>header</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
 
   <span class='id identifier rubyid_success'>success</span>
 <span class='kw'>end</span></pre>
@@ -676,7 +676,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Sep 14 00:33:51 2023 by
+  Generated on Fri Sep 15 00:11:37 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>
