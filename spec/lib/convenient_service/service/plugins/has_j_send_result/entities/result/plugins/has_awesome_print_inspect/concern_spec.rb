@@ -63,6 +63,78 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           .to delegate_to(result.service.inspect_values, :[])
           .with_arguments(:name)
       end
+
+      context "when result has data" do
+        let(:service) do
+          Class.new do
+            include ConvenientService::Configs::Minimal
+
+            include ConvenientService::Configs::AwesomePrintInspect
+
+            def self.name
+              "ImportantService"
+            end
+
+            def result
+              success(data: {foo: :bar})
+            end
+          end
+        end
+
+        let(:keywords) { ["ConvenientService", "entity", "Result", "service", "ImportantService", "status", ":success", "data_keys", "foo"] }
+
+        it "includes data keys into `inspect` representation of result" do
+          expect(result.inspect).to include(*keywords)
+        end
+
+        context "when data has multiple keys" do
+          let(:service) do
+            Class.new do
+              include ConvenientService::Configs::Minimal
+
+              include ConvenientService::Configs::AwesomePrintInspect
+
+              def self.name
+                "ImportantService"
+              end
+
+              def result
+                success(data: {foo: :bar, baz: :qux, quux: :quuz})
+              end
+            end
+          end
+
+          let(:keywords) { ["ConvenientService", "entity", "Result", "service", "ImportantService", "status", ":success", "data_keys", "foo", "baz", "quux"] }
+
+          it "delegates to `data.keys.inspect`" do
+            expect(result.inspect).to include(*keywords)
+          end
+        end
+      end
+
+      context "when result has message" do
+        let(:service) do
+          Class.new do
+            include ConvenientService::Configs::Minimal
+
+            include ConvenientService::Configs::AwesomePrintInspect
+
+            def self.name
+              "ImportantService"
+            end
+
+            def result
+              error(message: "foo")
+            end
+          end
+        end
+
+        let(:keywords) { ["ConvenientService", "entity", "Result", "service", "ImportantService", "status", ":error", "message", "foo"] }
+
+        it "includes message into `inspect` representation of result" do
+          expect(result.inspect).to include(*keywords)
+        end
+      end
     end
   end
 end

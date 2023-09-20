@@ -24,6 +24,9 @@ module ConvenientService
                         }
                       }
 
+                      metadata[:data_keys] = unsafe_data.keys if unsafe_data.keys.any?
+                      metadata[:message] = unsafe_message unless unsafe_message.empty?
+
                       metadata.ai
                     end
                   end
