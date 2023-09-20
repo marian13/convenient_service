@@ -16,7 +16,15 @@ module ConvenientService
                     # @return [String]
                     #
                     def inspect
-                      "<#{service.inspect_values[:name]}::Result status: :#{status}>"
+                      parts = [
+                        "#{service.inspect_values[:name]}::Result",
+                        "status: :#{status}"
+                      ]
+
+                      parts << "data_keys: #{unsafe_data.keys.inspect}" if unsafe_data.keys.any?
+                      parts << "message: \"#{unsafe_message}\"" unless unsafe_message.empty?
+
+                      "<#{parts.join(" ")}>"
                     end
                   end
                 end

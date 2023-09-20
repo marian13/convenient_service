@@ -59,6 +59,66 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           .to delegate_to(result.service.inspect_values, :[])
           .with_arguments(:name)
       end
+
+      context "when result has data" do
+        let(:service) do
+          Class.new do
+            include ConvenientService::Configs::Minimal
+
+            def self.name
+              "Service"
+            end
+
+            def result
+              success(data: {foo: :bar})
+            end
+          end
+        end
+
+        it "includes data keys into `inspect` representation of result" do
+          expect(result.inspect).to eq("<#{result.service.inspect_values[:name]}::Result status: :#{result.status} data_keys: [:foo]>")
+        end
+
+        context "when data has multiple keys" do
+          let(:service) do
+            Class.new do
+              include ConvenientService::Configs::Minimal
+
+              def self.name
+                "Service"
+              end
+
+              def result
+                success(data: {foo: :bar, baz: :qux, quux: :quuz})
+              end
+            end
+          end
+
+          it "delegates to `data.keys.inspect`" do
+            expect(result.inspect).to eq("<#{result.service.inspect_values[:name]}::Result status: :#{result.status} data_keys: [:foo, :baz, :quux]>")
+          end
+        end
+      end
+
+      context "when result has message" do
+        let(:service) do
+          Class.new do
+            include ConvenientService::Configs::Minimal
+
+            def self.name
+              "Service"
+            end
+
+            def result
+              error(message: "foo")
+            end
+          end
+        end
+
+        it "includes message into `inspect` representation of result" do
+          expect(result.inspect).to eq("<#{result.service.inspect_values[:name]}::Result status: :#{result.status} message: \"foo\">")
+        end
+      end
     end
   end
 end
