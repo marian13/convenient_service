@@ -73,6 +73,15 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       end
     end
 
+    describe "#keys" do
+      specify do
+        expect { data.keys }
+          .to delegate_to(data.value, :keys)
+          .without_arguments
+          .and_return_its_value
+      end
+    end
+
     describe "#[]" do
       it "returns `data` attribute by string key" do
         expect(data["foo"]).to eq(:bar)

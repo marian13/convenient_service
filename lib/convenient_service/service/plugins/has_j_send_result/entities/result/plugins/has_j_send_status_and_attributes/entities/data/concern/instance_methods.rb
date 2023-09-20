@@ -64,6 +64,13 @@ module ConvenientService
                         end
 
                         ##
+                        # @return [Array<Symbol>]
+                        #
+                        def keys
+                          value.keys
+                        end
+
+                        ##
                         # @param other [Object] Can be any type.
                         # @return [Boolean, nil]
                         #
