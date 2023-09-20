@@ -17,6 +17,7 @@ RSpec.describe ConvenientService::Examples::Standard::Factorial::Services::Calcu
     subject { described_class }
 
     it { is_expected.to include_module(ConvenientService::Standard::Config) }
+    it { is_expected.to include_module(ConvenientService::AwesomePrintInspect::Config) }
   end
 
   example_group "class methods" do
