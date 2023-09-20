@@ -1,5 +1,50 @@
 # Changelog
 
+## [0.14.0](https://github.com/marian13/convenient_service/compare/v0.13.0...v0.14.0) (2023-09-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* **has_j_send_result_params_validations:** return errors on validation issues
+* **has_j_send_result_params_validations:** return errors on validation issues
+* **can_have_fallbacks:** fallback only failures by default
+* **be_result:** update got part
+* **has_j_send_result_short:** update constants
+* **fallbacks:** create separate fallbacks failures and errors, run only error fallback when true
+
+### Features
+
+* **be_result:** introduce be_result ([f8fc85b](https://github.com/marian13/convenient_service/commit/f8fc85bb9141851c130a040731e4bb99114050d2))
+* **can_have_fallbacks:** allow to pass fallback_true_status ([584dabe](https://github.com/marian13/convenient_service/commit/584dabe83f87c2d794ea779a3e5c7f0b0ea97f65))
+* **can_have_fallbacks:** fallback only failures by default ([58650a7](https://github.com/marian13/convenient_service/commit/58650a736be0a4daaf283c6eef9e0867a34d44d4))
+* **configs:** create copy of v1 ([bb039c8](https://github.com/marian13/convenient_service/commit/bb039c83f53607c4cf59f634c662fc604f13ff7b))
+* **examples:** create copy of v1 ([70bd3fe](https://github.com/marian13/convenient_service/commit/70bd3febc4a88ebe7e7c3d33c7dd2e1c03331ccb))
+* **has_awesome_print_inspect:** add message and data keys ([14e0a3f](https://github.com/marian13/convenient_service/commit/14e0a3f088edf8ea8565ba7ff06ca0212c4116e9))
+* **has_inspect:** add message and data keys ([8f30b7a](https://github.com/marian13/convenient_service/commit/8f30b7a905b8a953d514061ed381a404b65c81af))
+* **has_j_send_result_params_validations:** return errors on validation issues ([e25e1a4](https://github.com/marian13/convenient_service/commit/e25e1a4f94cc309035533220dbcfbfccbb94cc94))
+* **has_j_send_result_params_validations:** return errors on validation issues ([09a9b94](https://github.com/marian13/convenient_service/commit/09a9b948070f3132818d1da9ef009d1d15655ab9))
+* **has_j_send_result_short_syntax:** allow to pass data, message, code to all results ([aabf2f9](https://github.com/marian13/convenient_service/commit/aabf2f98d32407616159cbcd2bcc6349a9a3b98f))
+* **has_j_send_result_short_syntax:** allow to pass message and code to short form of error ([1af3153](https://github.com/marian13/convenient_service/commit/1af3153aa1bf385eadcf73f30e13a3cc5126d793))
+* **has_j_send_result_short_syntax:** allow to pass message and code to short form of failure ([7390630](https://github.com/marian13/convenient_service/commit/73906300f94ec6488f312d4a611f433d8c850691))
+* **has_j_send_result_short_syntax:** allow to pass message and code to short form of success ([fdf2ab2](https://github.com/marian13/convenient_service/commit/fdf2ab23ade8941ed2c6dd10d17769eaebecc855))
+* **has_j_send_status_and_attributes:** introduce Data#keys ([27f43e1](https://github.com/marian13/convenient_service/commit/27f43e1594988cc523e9bb3608e90a40e4c2b442))
+* **has_j_send_status_and_attributes:** introduce Message#empty? ([6c1452d](https://github.com/marian13/convenient_service/commit/6c1452d99d71be45bb6cb95159a2fd32ffca668e))
+* **rescues_result_unhandled_exceptions:** allow to pass status ([2ef85f2](https://github.com/marian13/convenient_service/commit/2ef85f2970dd56802bd22f467529da6242faf967))
+* **using_active_model_validations:** allow to pass status to middleware ([bc5bb70](https://github.com/marian13/convenient_service/commit/bc5bb7027fe94724a8d28a3770b68c731b37ff10))
+* **using_dry_validation:** allow to pass status to middleware ([3a5ef12](https://github.com/marian13/convenient_service/commit/3a5ef120219a8a94b1d15bb7226f265db967ce9e))
+
+
+### Miscellaneous Chores
+
+* release 0.14.0 ([c7cef07](https://github.com/marian13/convenient_service/commit/c7cef0721d8360329c19b8ad4d636bcec83805c6))
+
+
+### Code Refactoring
+
+* **be_result:** update got part ([428280a](https://github.com/marian13/convenient_service/commit/428280a8eb2aed09f49bd949f84b7e10ef933708))
+* **fallbacks:** create separate fallbacks failures and errors, run only error fallback when true ([bbab564](https://github.com/marian13/convenient_service/commit/bbab5647d09ecdba9c9727bef3e2dc6b8138710b))
+* **has_j_send_result_short:** update constants ([2074acd](https://github.com/marian13/convenient_service/commit/2074acd001115dd4c60d432e71a4fef58794c881))
+
 ## 0.13.0 (2023-08-27)
 
 
