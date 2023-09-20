@@ -37,6 +37,13 @@ module ConvenientService
                         end
 
                         ##
+                        # @return [Boolean]
+                        #
+                        def empty?
+                          value.empty?
+                        end
+
+                        ##
                         # @param other [Object] Can be any type.
                         # @return [Boolean, nil]
                         #

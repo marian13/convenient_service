@@ -43,6 +43,23 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       it { is_expected.to have_attr_reader(:result) }
     end
 
+    describe "#empty?" do
+      ##
+      # NOTE: `value` is unfrozen in order to allow stubs on it. Otherwise an excepion like the following is raised:
+      #
+      #   ArgumentError:
+      #     Cannot proxy frozen objects, rspec-mocks relies on proxies for method stubbing and expectations.
+      #
+      let(:value) { +"foo" }
+
+      specify do
+        expect { message.empty? }
+          .to delegate_to(message.value, :empty?)
+          .without_arguments
+          .and_return_its_value
+      end
+    end
+
     example_group "comparisons" do
       describe "#==" do
         ##
