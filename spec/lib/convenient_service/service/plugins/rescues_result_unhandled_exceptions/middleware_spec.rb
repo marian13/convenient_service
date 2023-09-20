@@ -49,6 +49,14 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
 
         let(:max_backtrace_size) { 5 }
 
+        let(:formatted_exception) do
+          <<~MESSAGE.chomp
+            #{exception.class}:
+              #{exception.message}
+            #{exception.backtrace.take(max_backtrace_size).map { |line| "# #{line}" }.join("\n")}
+          MESSAGE
+        end
+
         context "when service result does NOT raise exceptions" do
           let(:service_class) do
             Class.new.tap do |klass|
@@ -75,44 +83,88 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
         end
 
         context "when service result raises exceptions" do
-          let(:service_class) do
-            Class.new.tap do |klass|
-              klass.class_exec(middleware, scope, max_backtrace_size) do |middleware, scope, max_backtrace_size|
-                include ConvenientService::Configs::Minimal
+          context "when `status` is NOT passed" do
+            let(:service_class) do
+              Class.new.tap do |klass|
+                klass.class_exec(middleware, scope) do |middleware, scope|
+                  include ConvenientService::Configs::Minimal
 
-                middlewares :result, scope: scope do
-                  use_and_observe middleware.with(max_backtrace_size: max_backtrace_size)
-                end
+                  middlewares :result, scope: scope do
+                    use_and_observe middleware
+                  end
 
-                def result
-                  raise StandardError, "exception message", caller.take(5)
+                  def result
+                    raise StandardError, "exception message", caller.take(5)
+                  end
                 end
               end
             end
+
+            let(:method) { wrap_method(entity, :result, observe_middleware: middleware) }
+
+            it "defaults to `:error`" do
+              expect(method_value).to be_error.with_data(exception: exception).and_message(formatted_exception)
+            end
           end
 
-          let(:formatted_exception) do
-            <<~MESSAGE.chomp
-              #{exception.class}:
-                #{exception.message}
-              #{exception.backtrace.take(max_backtrace_size).map { |line| "# #{line}" }.join("\n")}
-            MESSAGE
-          end
+          context "when status is passed" do
+            let(:method) { wrap_method(entity, :result, observe_middleware: middleware.with(status: status, max_backtrace_size: max_backtrace_size)) }
 
-          specify do
-            expect { method_value }
-              .to call_chain_next.on(method)
-              .with_arguments(*result_arguments.args, **result_arguments.kwargs, &result_arguments.block)
-          end
+            let(:service_class) do
+              Class.new.tap do |klass|
+                klass.class_exec(middleware, scope, status, max_backtrace_size) do |middleware, scope, status, max_backtrace_size|
+                  include ConvenientService::Configs::Minimal
 
-          specify do
-            expect { method_value }
-              .to delegate_to(ConvenientService::Service::Plugins::RescuesResultUnhandledExceptions::Commands::FormatException, :call)
-              .with_arguments(exception: exception, args: result_arguments.args, kwargs: result_arguments.kwargs, block: result_arguments.block, max_backtrace_size: max_backtrace_size)
-          end
+                  middlewares :result, scope: scope do
+                    use_and_observe middleware.with(status: status, max_backtrace_size: max_backtrace_size)
+                  end
 
-          it "returns failure with formatted exception" do
-            expect(method_value).to be_failure.with_data(exception: exception).and_message(formatted_exception)
+                  def result
+                    raise StandardError, "exception message", caller.take(5)
+                  end
+                end
+              end
+            end
+
+            context "when `status` is `:failure`" do
+              let(:status) { :failure }
+
+              specify do
+                expect { method_value }
+                  .to call_chain_next.on(method)
+                  .with_arguments(*result_arguments.args, **result_arguments.kwargs, &result_arguments.block)
+              end
+
+              specify do
+                expect { method_value }
+                  .to delegate_to(ConvenientService::Service::Plugins::RescuesResultUnhandledExceptions::Commands::FormatException, :call)
+                  .with_arguments(exception: exception, args: result_arguments.args, kwargs: result_arguments.kwargs, block: result_arguments.block, max_backtrace_size: max_backtrace_size)
+              end
+
+              it "returns failure with formatted exception" do
+                expect(method_value).to be_failure.with_data(exception: exception).and_message(formatted_exception)
+              end
+            end
+
+            context "when `status` is `:error`" do
+              let(:status) { :error }
+
+              specify do
+                expect { method_value }
+                  .to call_chain_next.on(method)
+                  .with_arguments(*result_arguments.args, **result_arguments.kwargs, &result_arguments.block)
+              end
+
+              specify do
+                expect { method_value }
+                  .to delegate_to(ConvenientService::Service::Plugins::RescuesResultUnhandledExceptions::Commands::FormatException, :call)
+                  .with_arguments(exception: exception, args: result_arguments.args, kwargs: result_arguments.kwargs, block: result_arguments.block, max_backtrace_size: max_backtrace_size)
+              end
+
+              it "returns error with formatted exception" do
+                expect(method_value).to be_error.with_data(exception: exception).and_message(formatted_exception)
+              end
+            end
           end
 
           context "when `max_backtrace_size` is NOT passed" do

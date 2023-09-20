@@ -56,7 +56,7 @@ module ConvenientService
           def next(*args, **kwargs, &block)
             chain.next(*args, **kwargs, &block)
           rescue => exception
-            failure_result_from(exception, *args, **kwargs, &block)
+            result_from_exception(exception, *args, **kwargs, &block)
           end
 
           private
@@ -68,8 +68,9 @@ module ConvenientService
           # @param block [Proc, nil]
           # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
           #
-          def failure_result_from(exception, *args, **kwargs, &block)
-            entity.failure(
+          def result_from_exception(exception, *args, **kwargs, &block)
+            entity.public_send(
+              status,
               data: {exception: exception},
               message: format_exception(exception, *args, **kwargs, &block)
             )
@@ -91,6 +92,13 @@ module ConvenientService
           #
           def max_backtrace_size
             middleware_arguments.kwargs.fetch(:max_backtrace_size) { Constants::DEFAULT_MAX_BACKTRACE_SIZE }
+          end
+
+          ##
+          # @return [Integer]
+          #
+          def status
+            middleware_arguments.kwargs.fetch(:status) { :error }
           end
         end
       end
