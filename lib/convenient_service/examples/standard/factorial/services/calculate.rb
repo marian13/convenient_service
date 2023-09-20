@@ -1,5 +1,10 @@
 # frozen_string_literal: true
 
+##
+# Usage example:
+#
+#   result = ConvenientService::Examples::Standard::Factorial::Services::Calculate.result(number: 10)
+#
 module ConvenientService
   module Examples
     module Standard
@@ -7,6 +12,7 @@ module ConvenientService
         module Services
           class Calculate
             include ConvenientService::Standard::Config
+            include ConvenientService::AwesomePrintInspect::Config
 
             attr_reader :number, :timeout_seconds
 

@@ -3,8 +3,8 @@
 ##
 # Usage example:
 #
-# result = ConvenientService::Examples::Standard::Gemfile::Services::Format.result(path: "Gemfile")
-# result = ConvenientService::Examples::Standard::Gemfile::Services::Format.result(path: "spec/cli/gemfile/format/fixtures/Gemfile")
+#   result = ConvenientService::Examples::Standard::Gemfile::Services::Format.result(path: "Gemfile")
+#   result = ConvenientService::Examples::Standard::Gemfile::Services::Format.result(path: "spec/cli/gemfile/format/fixtures/Gemfile")
 #
 module ConvenientService
   module Examples
