@@ -89,7 +89,7 @@
   
   <dl>
       <dt>Includes:</dt>
-      <dd><span class='object_link'><a href="../../../../Configs/Standard.html" title="ConvenientService::Configs::Standard (module)">Configs::Standard</a></span></dd>
+      <dd><span class='object_link'><a href="../../../../Configs/AwesomePrintInspect.html" title="ConvenientService::Configs::AwesomePrintInspect (module)">Configs::AwesomePrintInspect</a></span>, <span class='object_link'><a href="../../../../Configs/Standard.html" title="ConvenientService::Configs::Standard (module)">Configs::Standard</a></span></dd>
   </dl>
   
   
@@ -269,7 +269,13 @@
   
   <h3 class="inherited">Methods included from <span class='object_link'><a href="../../../../Support/Concern.html" title="ConvenientService::Support::Concern (module)">Support::Concern</a></span></h3>
   <p class="inherited"><span class='object_link'><a href="../../../../Support/Concern.html#included-class_method" title="ConvenientService::Support::Concern.included (method)">included</a></span></p>
-<div id="constructor_details" class="method_details_list">
+
+  
+  
+  
+  
+  
+  <div id="constructor_details" class="method_details_list">
   <h2>Constructor Details</h2>
   
     <div class="method_details first">
@@ -312,13 +318,13 @@
       <pre class="lines">
 
 
-13
-14
-15
-16</pre>
+19
+20
+21
+22</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/examples/standard/factorial/services/calculate.rb', line 13</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/examples/standard/factorial/services/calculate.rb', line 19</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>number:</span><span class='comma'>,</span> <span class='label'>timeout_seconds:</span> <span class='int'>10</span><span class='rparen'>)</span>
   <span class='ivar'>@number</span> <span class='op'>=</span> <span class='id identifier rubyid_number'>number</span>
@@ -375,12 +381,12 @@
       <pre class="lines">
 
 
-11
-12
-13</pre>
+17
+18
+19</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/examples/standard/factorial/services/calculate.rb', line 11</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/examples/standard/factorial/services/calculate.rb', line 17</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_number'>number</span>
   <span class='ivar'>@number</span>
@@ -431,12 +437,12 @@
       <pre class="lines">
 
 
-11
-12
-13</pre>
+17
+18
+19</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/examples/standard/factorial/services/calculate.rb', line 11</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/examples/standard/factorial/services/calculate.rb', line 17</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_timeout_seconds'>timeout_seconds</span>
   <span class='ivar'>@timeout_seconds</span>
@@ -492,18 +498,18 @@
       <pre class="lines">
 
 
-18
-19
-20
-21
-22
-23
 24
 25
-26</pre>
+26
+27
+28
+29
+30
+31
+32</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/examples/standard/factorial/services/calculate.rb', line 18</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/examples/standard/factorial/services/calculate.rb', line 24</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_result'>result</span>
   <span class='kw'>return</span> <span class='id identifier rubyid_error'>error</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>is `nil`</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_number'>number</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
@@ -524,7 +530,7 @@
 </div>
 
       <div id="footer">
-  Generated on Fri Sep 15 00:11:36 2023 by
+  Generated on Wed Sep 20 21:54:07 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>
