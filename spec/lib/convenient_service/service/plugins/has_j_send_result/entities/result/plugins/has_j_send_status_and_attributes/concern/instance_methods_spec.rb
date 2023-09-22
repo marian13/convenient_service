@@ -10,7 +10,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
 
   let(:service_class) do
     Class.new do
-      include ConvenientService::Configs::Minimal
+      include ConvenientService::Service::Configs::Minimal
     end
   end
 

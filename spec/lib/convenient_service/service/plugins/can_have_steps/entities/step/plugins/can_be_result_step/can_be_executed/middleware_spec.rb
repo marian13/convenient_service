@@ -48,7 +48,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         let(:container) do
           Class.new.tap do |klass|
             klass.class_exec(first_step, middleware) do |first_step, middleware|
-              include ConvenientService::Configs::Minimal
+              include ConvenientService::Service::Configs::Minimal
 
               self::Step.class_exec(middleware) do |middleware|
                 middlewares :service_result do
@@ -63,7 +63,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
         let(:first_step) do
           Class.new do
-            include ConvenientService::Configs::Minimal
+            include ConvenientService::Service::Configs::Minimal
 
             def result
               success
@@ -83,7 +83,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         let(:container) do
           Class.new.tap do |klass|
             klass.class_exec(middleware) do |middleware|
-              include ConvenientService::Configs::Minimal
+              include ConvenientService::Service::Configs::Minimal
 
               self::Step.class_exec(middleware) do |middleware|
                 middlewares :service_result do
@@ -108,7 +108,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           let(:container) do
             Class.new.tap do |klass|
               klass.class_exec(middleware) do |middleware|
-                include ConvenientService::Configs::Minimal
+                include ConvenientService::Service::Configs::Minimal
 
                 self::Step.class_exec(middleware) do |middleware|
                   middlewares :service_result do
@@ -140,7 +140,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           let(:container) do
             Class.new.tap do |klass|
               klass.class_exec(prepend_module, middleware) do |prepend_module, middleware|
-                include ConvenientService::Configs::Minimal
+                include ConvenientService::Service::Configs::Minimal
 
                 self::Step.class_exec(middleware) do |middleware|
                   middlewares :service_result do

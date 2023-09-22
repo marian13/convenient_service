@@ -15,7 +15,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Entiti
 
       let(:service) do
         Class.new do
-          include ConvenientService::Configs::Standard
+          include ConvenientService::Service::Configs::Standard
 
           def result
             error(message: "foo")
@@ -48,7 +48,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Entiti
           context "when result service is NOT instance of chain service" do
             let(:chain_service) do
               Class.new do
-                include ConvenientService::Configs::Standard
+                include ConvenientService::Service::Configs::Standard
 
                 def result
                   success

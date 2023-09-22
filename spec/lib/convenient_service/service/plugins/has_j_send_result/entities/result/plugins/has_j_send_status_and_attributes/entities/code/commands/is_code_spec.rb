@@ -21,7 +21,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       context "when result includes `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code::Concern`" do
         let(:service) do
           Class.new do
-            include ConvenientService::Configs::Minimal
+            include ConvenientService::Service::Configs::Minimal
 
             def result
               success

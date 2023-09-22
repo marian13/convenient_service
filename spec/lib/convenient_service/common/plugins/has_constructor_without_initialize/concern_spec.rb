@@ -34,7 +34,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasConstructorWithoutInitiali
     describe "#new_without_initialize" do
       let(:klass) do
         Class.new do
-          include ConvenientService::Configs::Minimal
+          include ConvenientService::Service::Configs::Minimal
 
           ##
           # Needed for `delegate_to`.

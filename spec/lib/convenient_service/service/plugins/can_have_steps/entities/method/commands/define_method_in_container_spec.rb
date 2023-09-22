@@ -14,7 +14,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
   #
   let(:organizer_service_class) do
     Class.new do
-      include ConvenientService::Configs::Minimal
+      include ConvenientService::Service::Configs::Minimal
 
       def foo
         "foo"
@@ -26,7 +26,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
 
   let(:step_service_class) do
     Class.new do
-      include ConvenientService::Configs::Minimal
+      include ConvenientService::Service::Configs::Minimal
 
       def result
         success(data: {bar: "bar"})

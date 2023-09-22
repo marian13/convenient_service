@@ -12,7 +12,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Concern do
   # rubocop:disable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
   let(:service_class) do
     Class.new do
-      include ConvenientService::Configs::Minimal
+      include ConvenientService::Service::Configs::Minimal
     end
   end
   # rubocop:enable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock

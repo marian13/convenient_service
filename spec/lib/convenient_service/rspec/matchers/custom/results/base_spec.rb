@@ -14,7 +14,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base do
 
   let(:service) do
     Class.new do
-      include ConvenientService::Configs::Standard
+      include ConvenientService::Service::Configs::Standard
 
       def result
         success
@@ -235,7 +235,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base do
     describe "#of_service" do
       let(:service) do
         Class.new do
-          include ConvenientService::Configs::Standard
+          include ConvenientService::Service::Configs::Standard
 
           def result
             success
@@ -257,7 +257,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base do
     describe "#of_step" do
       let(:service) do
         Class.new do
-          include ConvenientService::Configs::Standard
+          include ConvenientService::Service::Configs::Standard
 
           step :foo
 

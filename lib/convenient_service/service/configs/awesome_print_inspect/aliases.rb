@@ -2,6 +2,6 @@
 
 module ConvenientService
   module AwesomePrintInspect
-    Config = ::ConvenientService::Configs::AwesomePrintInspect
+    Config = ::ConvenientService::Service::Configs::AwesomePrintInspect
   end
 end

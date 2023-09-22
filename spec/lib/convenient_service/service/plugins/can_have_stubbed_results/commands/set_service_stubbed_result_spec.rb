@@ -17,7 +17,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStubbedResults::Comma
 
       let(:service) do
         Class.new do
-          include ConvenientService::Configs::Standard
+          include ConvenientService::Service::Configs::Standard
 
           def result
             success

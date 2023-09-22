@@ -34,7 +34,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
     describe "#inspect" do
       let(:service) do
         Class.new do
-          include ConvenientService::Configs::Minimal
+          include ConvenientService::Service::Configs::Minimal
 
           def result
             success(data: {foo: :bar})

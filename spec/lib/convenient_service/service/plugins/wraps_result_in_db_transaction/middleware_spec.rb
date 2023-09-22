@@ -44,7 +44,7 @@
 #       let(:service_class) do
 #         Class.new.tap do |klass|
 #           klass.class_exec(middleware) do |middleware|
-#             include ConvenientService::Configs::Standard
+#             include ConvenientService::Service::Configs::Standard
 #
 #             middlewares :result do
 #               delete ConvenientService::Service::Plugins::HasJSendResult::Middleware

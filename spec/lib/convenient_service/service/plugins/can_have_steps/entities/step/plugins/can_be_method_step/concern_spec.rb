@@ -36,7 +36,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
   example_group "instance methods" do
     let(:service_class) do
       Class.new do
-        include ConvenientService::Configs::Standard
+        include ConvenientService::Service::Configs::Standard
 
         step :foo
 

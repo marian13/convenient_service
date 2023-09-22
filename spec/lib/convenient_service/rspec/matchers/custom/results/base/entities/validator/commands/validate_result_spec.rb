@@ -15,7 +15,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Entiti
 
       let(:service) do
         Class.new do
-          include ConvenientService::Configs::Standard
+          include ConvenientService::Service::Configs::Standard
 
           def result
             success
@@ -129,7 +129,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Entiti
 
           let(:other_service) do
             Class.new do
-              include ConvenientService::Configs::Standard
+              include ConvenientService::Service::Configs::Standard
 
               def result
                 success
@@ -157,7 +157,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Entiti
 
           let(:step_service) do
             Class.new do
-              include ConvenientService::Configs::Standard
+              include ConvenientService::Service::Configs::Standard
 
               def result
                 success
@@ -205,7 +205,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Entiti
 
           let(:service) do
             Class.new do
-              include ConvenientService::Configs::Standard
+              include ConvenientService::Service::Configs::Standard
 
               def result
                 error("foo")
@@ -234,7 +234,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Entiti
 
           let(:service) do
             Class.new do
-              include ConvenientService::Configs::Standard
+              include ConvenientService::Service::Configs::Standard
 
               def result
                 error(message: "foo", code: :foo)

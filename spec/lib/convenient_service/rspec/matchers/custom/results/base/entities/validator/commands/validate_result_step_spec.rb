@@ -14,7 +14,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Entiti
 
       let(:service) do
         Class.new do
-          include ConvenientService::Configs::Standard
+          include ConvenientService::Service::Configs::Standard
 
           def result
             success
@@ -72,7 +72,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Entiti
         context "when step is valid" do
           let(:first_step) do
             Class.new do
-              include ConvenientService::Configs::Standard
+              include ConvenientService::Service::Configs::Standard
 
               def result
                 success
@@ -86,7 +86,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Entiti
             context "when result has NO step" do
               let(:service) do
                 Class.new do
-                  include ConvenientService::Configs::Standard
+                  include ConvenientService::Service::Configs::Standard
 
                   def result
                     success
@@ -103,7 +103,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Entiti
               context "when result step is NOT same as service" do
                 let(:service) do
                   Class.new do
-                    include ConvenientService::Configs::Standard
+                    include ConvenientService::Service::Configs::Standard
 
                     step :result
 
@@ -122,7 +122,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Entiti
                 let(:service) do
                   Class.new.tap do |service_class|
                     service_class.class_exec(first_step) do |first_step|
-                      include ConvenientService::Configs::Standard
+                      include ConvenientService::Service::Configs::Standard
 
                       step first_step
                     end
@@ -143,7 +143,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Entiti
               context "when result has NO step" do
                 let(:service) do
                   Class.new do
-                    include ConvenientService::Configs::Standard
+                    include ConvenientService::Service::Configs::Standard
 
                     def result
                       success
@@ -160,7 +160,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Entiti
                 context "when result step is NOT same as method" do
                   let(:service) do
                     Class.new do
-                      include ConvenientService::Configs::Standard
+                      include ConvenientService::Service::Configs::Standard
 
                       step :bar
 
@@ -178,7 +178,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Entiti
                 context "when result step is same as method" do
                   let(:service) do
                     Class.new do
-                      include ConvenientService::Configs::Standard
+                      include ConvenientService::Service::Configs::Standard
 
                       step :foo
 
@@ -201,7 +201,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Entiti
               context "when result has NO step" do
                 let(:service) do
                   Class.new do
-                    include ConvenientService::Configs::Standard
+                    include ConvenientService::Service::Configs::Standard
 
                     def result
                       success
@@ -218,7 +218,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Entiti
                 context "when result step is NOT `:result` method" do
                   let(:service) do
                     Class.new do
-                      include ConvenientService::Configs::Standard
+                      include ConvenientService::Service::Configs::Standard
 
                       step :foo
 
@@ -236,7 +236,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Entiti
                 context "when result step is `:result` method" do
                   let(:service) do
                     Class.new do
-                      include ConvenientService::Configs::Standard
+                      include ConvenientService::Service::Configs::Standard
 
                       step :result
 
@@ -260,7 +260,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Entiti
             context "when result has NO step" do
               let(:service) do
                 Class.new do
-                  include ConvenientService::Configs::Standard
+                  include ConvenientService::Service::Configs::Standard
 
                   def result
                     success
@@ -276,7 +276,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Entiti
             context "when result has step" do
               let(:service) do
                 Class.new do
-                  include ConvenientService::Configs::Standard
+                  include ConvenientService::Service::Configs::Standard
 
                   step :result
 

@@ -33,7 +33,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       let(:container) do
         Class.new.tap do |klass|
           klass.class_exec(service) do |service|
-            include ConvenientService::Configs::Minimal
+            include ConvenientService::Service::Configs::Minimal
 
             step service
 
@@ -46,7 +46,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
       let(:service) do
         Class.new do
-          include ConvenientService::Configs::Minimal
+          include ConvenientService::Service::Configs::Minimal
 
           def self.name
             "StepService"
@@ -63,7 +63,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       context "when step is method step" do
         let(:container) do
           Class.new do
-            include ConvenientService::Configs::Minimal
+            include ConvenientService::Service::Configs::Minimal
 
             step :result
 

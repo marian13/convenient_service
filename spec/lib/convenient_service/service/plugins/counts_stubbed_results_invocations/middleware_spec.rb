@@ -52,7 +52,7 @@ RSpec.describe ConvenientService::Service::Plugins::CountsStubbedResultsInvocati
         let(:service_class) do
           Class.new.tap do |klass|
             klass.class_exec(middleware, scope) do |middleware, scope|
-              include ConvenientService::Configs::Standard
+              include ConvenientService::Service::Configs::Standard
 
               middlewares :result, scope: scope do
                 observe middleware

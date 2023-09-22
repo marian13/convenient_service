@@ -17,7 +17,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::Custom::StubService::Entities:
 
   let(:service_class) do
     Class.new do
-      include ConvenientService::Configs::Standard
+      include ConvenientService::Service::Configs::Standard
 
       def result
         success

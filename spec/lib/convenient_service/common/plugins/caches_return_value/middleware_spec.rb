@@ -42,7 +42,7 @@ RSpec.describe ConvenientService::Common::Plugins::CachesReturnValue::Middleware
       let(:service_class) do
         Class.new.tap do |klass|
           klass.class_exec(service_result_value, middleware) do |service_result_value, middleware|
-            include ConvenientService::Configs::Standard
+            include ConvenientService::Service::Configs::Standard
 
             middlewares :result do
               observe middleware

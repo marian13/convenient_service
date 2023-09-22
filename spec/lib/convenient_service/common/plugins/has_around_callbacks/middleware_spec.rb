@@ -46,7 +46,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasAroundCallbacks::Middlewar
       let(:service_class) do
         Class.new.tap do |klass|
           klass.class_exec(result_original_value, out, middleware) do |result_original_value, out, middleware|
-            include ConvenientService::Configs::Standard
+            include ConvenientService::Service::Configs::Standard
 
             middlewares :result do
               observe middleware
@@ -317,7 +317,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasAroundCallbacks::Middlewar
         let(:service_class) do
           Class.new.tap do |klass|
             klass.class_exec(middleware) do |middleware|
-              include ConvenientService::Configs::Standard
+              include ConvenientService::Service::Configs::Standard
 
               middlewares :result do
                 observe middleware
@@ -358,7 +358,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasAroundCallbacks::Middlewar
         let(:service_class) do
           Class.new.tap do |klass|
             klass.class_exec(result_original_value, out, middleware) do |result_original_value, out, middleware|
-              include ConvenientService::Configs::Standard
+              include ConvenientService::Service::Configs::Standard
 
               middlewares :result do
                 observe middleware

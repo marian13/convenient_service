@@ -48,7 +48,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Middleware do
         let(:service_class) do
           Class.new.tap do |klass|
             klass.class_exec(middleware) do |middleware|
-              include ConvenientService::Configs::Standard
+              include ConvenientService::Service::Configs::Standard
 
               middlewares :result do
                 observe middleware
@@ -72,7 +72,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Middleware do
       context "when intermediate step is NOT successful" do
         let(:first_step) do
           Class.new do
-            include ConvenientService::Configs::Standard
+            include ConvenientService::Service::Configs::Standard
 
             def result
               error
@@ -82,7 +82,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Middleware do
 
         let(:second_step) do
           Class.new do
-            include ConvenientService::Configs::Standard
+            include ConvenientService::Service::Configs::Standard
 
             def result
               success
@@ -93,7 +93,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Middleware do
         let(:service_class) do
           Class.new.tap do |klass|
             klass.class_exec(first_step, second_step, middleware) do |first_step, second_step, middleware|
-              include ConvenientService::Configs::Standard
+              include ConvenientService::Service::Configs::Standard
 
               middlewares :result do
                 observe middleware
@@ -164,7 +164,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Middleware do
       context "when all steps are successful" do
         let(:first_step) do
           Class.new do
-            include ConvenientService::Configs::Standard
+            include ConvenientService::Service::Configs::Standard
 
             def result
               success
@@ -174,7 +174,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Middleware do
 
         let(:second_step) do
           Class.new do
-            include ConvenientService::Configs::Standard
+            include ConvenientService::Service::Configs::Standard
 
             def result
               success
@@ -185,7 +185,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Middleware do
         let(:service_class) do
           Class.new.tap do |klass|
             klass.class_exec(first_step, second_step, middleware) do |first_step, second_step, middleware|
-              include ConvenientService::Configs::Standard
+              include ConvenientService::Service::Configs::Standard
 
               middlewares :result do
                 observe middleware

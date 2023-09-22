@@ -24,7 +24,7 @@ RSpec.describe ConvenientService::Examples::Dry::V1::Gemfile::DryService::Config
         end
       end
 
-      specify { expect(service_class).to include_module(ConvenientService::Configs::Standard::V1) }
+      specify { expect(service_class).to include_module(ConvenientService::Service::Configs::Standard::V1) }
 
       example_group "service" do
         example_group "concerns" do

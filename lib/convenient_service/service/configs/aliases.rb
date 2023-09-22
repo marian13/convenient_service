@@ -2,6 +2,6 @@
 
 module ConvenientService
   module Standard
-    Config = ::ConvenientService::Configs::Standard
+    Config = ::ConvenientService::Service::Configs::Standard
   end
 end

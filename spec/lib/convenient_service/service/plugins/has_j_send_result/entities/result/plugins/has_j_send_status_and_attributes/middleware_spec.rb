@@ -53,7 +53,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       let(:service) do
         Class.new.tap do |klass|
           klass.class_exec(middleware) do |middleware|
-            include ConvenientService::Configs::Minimal
+            include ConvenientService::Service::Configs::Minimal
 
             self::Result.class_exec(middleware) do |middleware|
               middlewares :initialize do

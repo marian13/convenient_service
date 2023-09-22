@@ -35,7 +35,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasConstructor::Concern do
     describe "#create" do
       let(:klass) do
         Class.new do
-          include ConvenientService::Configs::Minimal
+          include ConvenientService::Service::Configs::Minimal
 
           attr_reader :args, :kwargs, :block
 

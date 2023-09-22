@@ -33,7 +33,7 @@ RSpec.describe ConvenientService::Common::Plugins::CanBeCopied::Concern do
 
     let(:service_class) do
       Class.new do
-        include ConvenientService::Configs::Standard
+        include ConvenientService::Service::Configs::Standard
       end
     end
 

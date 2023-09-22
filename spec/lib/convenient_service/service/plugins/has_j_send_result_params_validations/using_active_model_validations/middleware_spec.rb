@@ -46,7 +46,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultParamsValidati
         let(:service_class) do
           Class.new.tap do |klass|
             klass.class_exec(status, middleware) do |status, middleware|
-              include ConvenientService::Configs::Standard
+              include ConvenientService::Service::Configs::Standard
 
               concerns do
                 use ConvenientService::Service::Plugins::HasJSendResultParamsValidations::UsingActiveModelValidations::Concern
@@ -138,7 +138,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultParamsValidati
     let(:service_class) do
       Class.new.tap do |klass|
         klass.class_exec(middleware) do |middleware|
-          include ConvenientService::Configs::Standard
+          include ConvenientService::Service::Configs::Standard
 
           concerns do
             use ConvenientService::Service::Plugins::HasJSendResultParamsValidations::UsingActiveModelValidations::Concern

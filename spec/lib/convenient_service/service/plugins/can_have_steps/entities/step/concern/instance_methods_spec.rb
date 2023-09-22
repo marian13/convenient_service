@@ -8,7 +8,7 @@ require "convenient_service"
 RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Concern::InstanceMethods do
   let(:step_service_klass) do
     Class.new do
-      include ConvenientService::Configs::Minimal
+      include ConvenientService::Service::Configs::Minimal
 
       def initialize(foo:)
         @foo = foo
@@ -22,7 +22,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
   let(:organizer_service_klass) do
     Class.new do
-      include ConvenientService::Configs::Minimal
+      include ConvenientService::Service::Configs::Minimal
 
       def result
         success

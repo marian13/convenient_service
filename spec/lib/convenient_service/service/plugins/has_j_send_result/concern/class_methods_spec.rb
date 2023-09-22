@@ -11,7 +11,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Concern::Cla
 
   let(:service_class) do
     Class.new do
-      include ConvenientService::Configs::Minimal
+      include ConvenientService::Service::Configs::Minimal
 
       def result
         success

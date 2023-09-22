@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::Configs::Standard do
+RSpec.describe ConvenientService::Service::Configs::Minimal do
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
 
@@ -22,29 +22,19 @@ RSpec.describe ConvenientService::Configs::Standard do
         end
       end
 
-      specify { expect(service_class).to include_module(ConvenientService::Configs::Minimal) }
+      specify { expect(service_class).to include_module(ConvenientService::Core) }
 
       example_group "service" do
         example_group "concerns" do
           let(:concerns) do
             [
-              ConvenientService::Service::Plugins::CanHaveStubbedResults::Concern,
               ConvenientService::Common::Plugins::HasInternals::Concern,
               ConvenientService::Service::Plugins::HasInspect::Concern,
               ConvenientService::Common::Plugins::HasConstructor::Concern,
               ConvenientService::Plugins::Common::HasConstructorWithoutInitialize::Concern,
               ConvenientService::Service::Plugins::HasResult::Concern,
               ConvenientService::Service::Plugins::HasJSendResult::Concern,
-              ConvenientService::Service::Plugins::CanHaveSteps::Concern,
-              ConvenientService::Common::Plugins::CachesConstructorArguments::Concern,
-              ConvenientService::Common::Plugins::CanBeCopied::Concern,
-              ConvenientService::Service::Plugins::CanRecalculateResult::Concern,
-              ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Concern,
-              ConvenientService::Service::Plugins::HasJSendResultStatusCheckShortSyntax::Concern,
-              ConvenientService::Common::Plugins::HasCallbacks::Concern,
-              ConvenientService::Common::Plugins::HasAroundCallbacks::Concern,
-              ConvenientService::Service::Plugins::CanHaveFallbacks::Concern,
-              ConvenientService::Service::Plugins::HasMermaidFlowchart::Concern
+              ConvenientService::Service::Plugins::CanHaveSteps::Concern
             ]
           end
 
@@ -56,9 +46,7 @@ RSpec.describe ConvenientService::Configs::Standard do
         example_group "#initialize middlewares" do
           let(:initialize_middlewares) do
             [
-              ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-              ConvenientService::Service::Plugins::CollectsServicesInException::Middleware,
-              ConvenientService::Common::Plugins::CachesConstructorArguments::Middleware
+              ConvenientService::Common::Plugins::NormalizesEnv::Middleware
             ]
           end
 
@@ -71,20 +59,9 @@ RSpec.describe ConvenientService::Configs::Standard do
           let(:result_middlewares) do
             [
               ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-              ConvenientService::Service::Plugins::CountsStubbedResultsInvocations::Middleware,
-              ConvenientService::Service::Plugins::CanHaveStubbedResults::Middleware,
-              ConvenientService::Service::Plugins::CollectsServicesInException::Middleware,
               ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
-              ConvenientService::Common::Plugins::HasCallbacks::Middleware,
-              ConvenientService::Common::Plugins::HasAroundCallbacks::Middleware,
-              ConvenientService::Service::Plugins::SetsParentToForeignResult::Middleware,
               ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Middleware,
               ConvenientService::Service::Plugins::CanHaveSteps::Middleware
-
-              ##
-              # TODO: Rewrite. This plugin does NOT do what it states. Probably I was NOT with a clear mind while writing it (facepalm).
-              #
-              # ConvenientService::Service::Plugins::RaisesOnDoubleResult::Middleware,
             ]
           end
 
@@ -93,44 +70,10 @@ RSpec.describe ConvenientService::Configs::Standard do
           end
         end
 
-        example_group "#fallback_failure_result middlewares" do
-          let(:fallback_failure_result_middlewares) do
-            [
-              ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-              ConvenientService::Service::Plugins::CollectsServicesInException::Middleware,
-              ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
-              ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Middleware,
-              ConvenientService::Service::Plugins::CanHaveFallbacks::Middleware.with(status: :failure)
-            ]
-          end
-
-          it "sets service middlewares for `#fallback_failure_result`" do
-            expect(service_class.middlewares(:fallback_failure_result).to_a).to eq(fallback_failure_result_middlewares)
-          end
-        end
-
-        example_group "#fallback_error_result middlewares" do
-          let(:fallback_error_result_middlewares) do
-            [
-              ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-              ConvenientService::Service::Plugins::CollectsServicesInException::Middleware,
-              ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
-              ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Middleware,
-              ConvenientService::Service::Plugins::CanHaveFallbacks::Middleware.with(status: :error)
-            ]
-          end
-
-          it "sets service middlewares for `#fallback_error_result`" do
-            expect(service_class.middlewares(:fallback_error_result).to_a).to eq(fallback_error_result_middlewares)
-          end
-        end
-
         example_group "#step middlewares" do
           let(:step_middlewares) do
             [
-              ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-              ConvenientService::Common::Plugins::HasCallbacks::Middleware,
-              ConvenientService::Common::Plugins::HasAroundCallbacks::Middleware
+              ConvenientService::Common::Plugins::NormalizesEnv::Middleware
             ]
           end
 
@@ -142,8 +85,7 @@ RSpec.describe ConvenientService::Configs::Standard do
         example_group "#success middlewares" do
           let(:success_middlewares) do
             [
-              ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-              ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Success::Middleware
+              ConvenientService::Common::Plugins::NormalizesEnv::Middleware
             ]
           end
 
@@ -155,8 +97,7 @@ RSpec.describe ConvenientService::Configs::Standard do
         example_group "#failure middlewares" do
           let(:failure_middlewares) do
             [
-              ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-              ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Failure::Middleware
+              ConvenientService::Common::Plugins::NormalizesEnv::Middleware
             ]
           end
 
@@ -168,8 +109,7 @@ RSpec.describe ConvenientService::Configs::Standard do
         example_group "#error middlewares" do
           let(:error_middlewares) do
             [
-              ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-              ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Error::Middleware
+              ConvenientService::Common::Plugins::NormalizesEnv::Middleware
             ]
           end
 
@@ -194,8 +134,7 @@ RSpec.describe ConvenientService::Configs::Standard do
         example_group ".result middlewares" do
           let(:class_result_middlewares) do
             [
-              ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-              ConvenientService::Service::Plugins::CountsStubbedResultsInvocations::Middleware, ConvenientService::Service::Plugins::CanHaveStubbedResults::Middleware
+              ConvenientService::Common::Plugins::NormalizesEnv::Middleware
             ]
           end
 
@@ -226,16 +165,7 @@ RSpec.describe ConvenientService::Configs::Standard do
                 ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasInspect::Concern,
                 ConvenientService::Common::Plugins::HasConstructor::Concern,
                 ConvenientService::Common::Plugins::HasConstructorWithoutInitialize::Concern,
-                ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Concern,
-                ConvenientService::Common::Plugins::HasJSendResultDuckShortSyntax::Concern,
-                ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanRecalculateResult::Concern,
-                ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanHaveStep::Concern,
-                ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeOwnResult::Concern,
-                ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanHaveFallbacks::Concern,
-                ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanHaveParentResult::Concern,
-                ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanHaveCheckedStatus::Concern,
-                ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeStubbedResult::Concern,
-                ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasStubbedResultInvocationsCounter::Concern
+                ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Concern
               ]
             end
 
@@ -248,7 +178,7 @@ RSpec.describe ConvenientService::Configs::Standard do
             let(:initialize_middlewares) do
               [
                 ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-                ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasStubbedResultInvocationsCounter::Middleware, ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Middleware
+                ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Middleware
               ]
             end
 
@@ -260,8 +190,7 @@ RSpec.describe ConvenientService::Configs::Standard do
           example_group "#success? middlewares" do
             let(:is_success_middlewares) do
               [
-                ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-                ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanHaveCheckedStatus::Middleware
+                ConvenientService::Common::Plugins::NormalizesEnv::Middleware
               ]
             end
 
@@ -273,8 +202,7 @@ RSpec.describe ConvenientService::Configs::Standard do
           example_group "#failure? middlewares" do
             let(:is_failure_middlewares) do
               [
-                ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-                ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanHaveCheckedStatus::Middleware
+                ConvenientService::Common::Plugins::NormalizesEnv::Middleware
               ]
             end
 
@@ -286,8 +214,7 @@ RSpec.describe ConvenientService::Configs::Standard do
           example_group "#error? middlewares" do
             let(:is_error_middlewares) do
               [
-                ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-                ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanHaveCheckedStatus::Middleware
+                ConvenientService::Common::Plugins::NormalizesEnv::Middleware
               ]
             end
 
@@ -299,8 +226,7 @@ RSpec.describe ConvenientService::Configs::Standard do
           example_group "#not_success? middlewares" do
             let(:is_not_success_middlewares) do
               [
-                ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-                ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanHaveCheckedStatus::Middleware
+                ConvenientService::Common::Plugins::NormalizesEnv::Middleware
               ]
             end
 
@@ -312,8 +238,7 @@ RSpec.describe ConvenientService::Configs::Standard do
           example_group "#not_failure? middlewares" do
             let(:is_not_failure_middlewares) do
               [
-                ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-                ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanHaveCheckedStatus::Middleware
+                ConvenientService::Common::Plugins::NormalizesEnv::Middleware
               ]
             end
 
@@ -325,8 +250,7 @@ RSpec.describe ConvenientService::Configs::Standard do
           example_group "#not_error? middlewares" do
             let(:is_not_error_middlewares) do
               [
-                ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-                ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanHaveCheckedStatus::Middleware
+                ConvenientService::Common::Plugins::NormalizesEnv::Middleware
               ]
             end
 
@@ -338,8 +262,7 @@ RSpec.describe ConvenientService::Configs::Standard do
           example_group "#data middlewares" do
             let(:data_middlewares) do
               [
-                ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-                ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::RaisesOnNotCheckedResultStatus::Middleware
+                ConvenientService::Common::Plugins::NormalizesEnv::Middleware
               ]
             end
 
@@ -351,8 +274,7 @@ RSpec.describe ConvenientService::Configs::Standard do
           example_group "#message middlewares" do
             let(:message_middlewares) do
               [
-                ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-                ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::RaisesOnNotCheckedResultStatus::Middleware
+                ConvenientService::Common::Plugins::NormalizesEnv::Middleware
               ]
             end
 
@@ -364,8 +286,7 @@ RSpec.describe ConvenientService::Configs::Standard do
           example_group "#code middlewares" do
             let(:code_middlewares) do
               [
-                ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-                ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::RaisesOnNotCheckedResultStatus::Middleware
+                ConvenientService::Common::Plugins::NormalizesEnv::Middleware
               ]
             end
 
@@ -453,9 +374,7 @@ RSpec.describe ConvenientService::Configs::Standard do
                 ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeCompleted::Concern,
                 ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeMethodStep::Concern,
                 ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeResultStep::Concern,
-                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::HasInspect::Concern,
-                ConvenientService::Common::Plugins::HasJSendResultDuckShortSyntax::Concern,
-                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallbacks::Concern
+                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::HasInspect::Concern
               ]
             end
 
@@ -483,66 +402,12 @@ RSpec.describe ConvenientService::Configs::Standard do
             let(:result_middlewares) do
               [
                 ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-                ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
-                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallbacks::Middleware.with(fallback_true_status: :failure),
-                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveParentResult::Middleware
+                ConvenientService::Common::Plugins::CachesReturnValue::Middleware
               ]
             end
 
             it "sets service step middlewares for `#result`" do
               expect(service_class::Step.middlewares(:result).to_a).to eq(result_middlewares)
-            end
-          end
-
-          example_group "#service_fallback_failure_result middlewares" do
-            let(:service_fallback_failure_result_middlewares) do
-              [
-                ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-                ConvenientService::Common::Plugins::CachesReturnValue::Middleware
-              ]
-            end
-
-            it "sets service middlewares for `#service_fallback_failure_result`" do
-              expect(service_class::Step.middlewares(:service_fallback_failure_result).to_a).to eq(service_fallback_failure_result_middlewares)
-            end
-          end
-
-          example_group "#fallback_failure_result middlewares" do
-            let(:fallback_failure_result_middlewares) do
-              [
-                ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-                ConvenientService::Common::Plugins::CachesReturnValue::Middleware
-              ]
-            end
-
-            it "sets service middlewares for `#fallback_failure_result`" do
-              expect(service_class::Step.middlewares(:fallback_failure_result).to_a).to eq(fallback_failure_result_middlewares)
-            end
-          end
-
-          example_group "#service_fallback_error_result middlewares" do
-            let(:service_fallback_error_result_middlewares) do
-              [
-                ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-                ConvenientService::Common::Plugins::CachesReturnValue::Middleware
-              ]
-            end
-
-            it "sets service middlewares for `#service_fallback_error_result`" do
-              expect(service_class::Step.middlewares(:service_fallback_error_result).to_a).to eq(service_fallback_error_result_middlewares)
-            end
-          end
-
-          example_group "#fallback_error_result middlewares" do
-            let(:fallback_error_result_middlewares) do
-              [
-                ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-                ConvenientService::Common::Plugins::CachesReturnValue::Middleware
-              ]
-            end
-
-            it "sets service middlewares for `#fallback_error_result`" do
-              expect(service_class::Step.middlewares(:fallback_error_result).to_a).to eq(fallback_error_result_middlewares)
             end
           end
 
@@ -579,7 +444,7 @@ RSpec.describe ConvenientService::Configs::Standard do
       # https://github.com/marian13/convenient_service/discussions/43
       #
       it "applies its `included` block only once" do
-        expect(service_class.middlewares(:result).to_a.size).to eq(10)
+        expect(service_class.middlewares(:result).to_a.size).to eq(4)
       end
     end
   end

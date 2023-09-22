@@ -21,7 +21,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
       context "when exception has backtrace with short backtrace" do
         let(:service_class) do
           Class.new do
-            include ConvenientService::Configs::Minimal
+            include ConvenientService::Service::Configs::Minimal
 
             def result
               raise StandardError, "exception message", caller.take(5)
@@ -43,7 +43,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
       context "when exception has backtrace with long backtrace" do
         let(:service_class) do
           Class.new do
-            include ConvenientService::Configs::Minimal
+            include ConvenientService::Service::Configs::Minimal
 
             def result
               raise StandardError, "exception message", caller + ["# /line.rb:1:in `foo'"] * 10
@@ -68,7 +68,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
 
         let(:service_class) do
           Class.new do
-            include ConvenientService::Configs::Minimal
+            include ConvenientService::Service::Configs::Minimal
 
             def result
               raise StandardError, "exception message", caller + ["# /line.rb:1:in `foo'"] * 10

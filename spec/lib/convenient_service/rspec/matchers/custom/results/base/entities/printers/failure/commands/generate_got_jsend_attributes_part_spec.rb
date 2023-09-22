@@ -16,7 +16,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Entiti
 
       let(:service) do
         Class.new do
-          include ConvenientService::Configs::Standard
+          include ConvenientService::Service::Configs::Standard
 
           def result
             failure(message: "foo")
@@ -63,7 +63,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Entiti
             context "when result has empty message" do
               let(:service) do
                 Class.new do
-                  include ConvenientService::Configs::Standard
+                  include ConvenientService::Service::Configs::Standard
 
                   def result
                     failure(message: "")
@@ -81,7 +81,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Entiti
             context "when result has NOT empty data" do
               let(:service) do
                 Class.new do
-                  include ConvenientService::Configs::Standard
+                  include ConvenientService::Service::Configs::Standard
 
                   def result
                     failure(data: {foo: :bar}, message: "foo")
@@ -97,7 +97,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Entiti
             context "when result has NOT default code" do
               let(:service) do
                 Class.new do
-                  include ConvenientService::Configs::Standard
+                  include ConvenientService::Service::Configs::Standard
 
                   def result
                     failure(message: "foo", code: :foo)
@@ -113,7 +113,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Entiti
             context "when result has both NOT empty data and NOT default code" do
               let(:service) do
                 Class.new do
-                  include ConvenientService::Configs::Standard
+                  include ConvenientService::Service::Configs::Standard
 
                   def result
                     failure(data: {foo: :bar}, message: "foo", code: :foo)
@@ -137,7 +137,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Entiti
             context "when result has empty message" do
               let(:service) do
                 Class.new do
-                  include ConvenientService::Configs::Standard
+                  include ConvenientService::Service::Configs::Standard
 
                   def result
                     failure(message: "")
@@ -155,7 +155,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Entiti
             context "when result has NOT empty data" do
               let(:service) do
                 Class.new do
-                  include ConvenientService::Configs::Standard
+                  include ConvenientService::Service::Configs::Standard
 
                   def result
                     failure(data: {foo: :bar}, message: "foo")
@@ -171,7 +171,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Entiti
             context "when result has NOT default code" do
               let(:service) do
                 Class.new do
-                  include ConvenientService::Configs::Standard
+                  include ConvenientService::Service::Configs::Standard
 
                   def result
                     failure(message: "foo", code: :foo)
@@ -187,7 +187,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Entiti
             context "when result has both NOT empty data and NOT default code" do
               let(:service) do
                 Class.new do
-                  include ConvenientService::Configs::Standard
+                  include ConvenientService::Service::Configs::Standard
 
                   def result
                     failure(data: {foo: :bar}, message: "foo", code: :foo)
@@ -211,7 +211,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Entiti
             context "when result has empty message" do
               let(:service) do
                 Class.new do
-                  include ConvenientService::Configs::Standard
+                  include ConvenientService::Service::Configs::Standard
 
                   def result
                     failure(message: "")
@@ -229,7 +229,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Entiti
             context "when result has NOT empty data" do
               let(:service) do
                 Class.new do
-                  include ConvenientService::Configs::Standard
+                  include ConvenientService::Service::Configs::Standard
 
                   def result
                     failure(data: {foo: :bar}, message: "foo")
@@ -245,7 +245,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Entiti
             context "when result has NOT default code" do
               let(:service) do
                 Class.new do
-                  include ConvenientService::Configs::Standard
+                  include ConvenientService::Service::Configs::Standard
 
                   def result
                     failure(message: "foo", code: :foo)
@@ -261,7 +261,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Custom::Results::Base::Entiti
             context "when result has both NOT empty data and NOT default code" do
               let(:service) do
                 Class.new do
-                  include ConvenientService::Configs::Standard
+                  include ConvenientService::Service::Configs::Standard
 
                   def result
                     failure(data: {foo: :bar}, message: "foo", code: :foo)

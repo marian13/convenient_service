@@ -34,7 +34,7 @@ RSpec.describe ConvenientService::Common::Plugins::CachesConstructorArguments::C
     describe "#constructor_arguments" do
       let(:service_class) do
         Class.new do
-          include ConvenientService::Configs::Standard
+          include ConvenientService::Service::Configs::Standard
         end
       end
 
