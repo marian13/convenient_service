@@ -154,7 +154,7 @@
   
   
   
-  
+  <span class="private note title">private</span>
 
   
     <span class="summary_desc"><div class='inline'></div></span>
@@ -189,7 +189,7 @@
   
   
   
-  
+  <span class="private note title">private</span>
 
   
     <span class="summary_desc"><div class='inline'></div></span>
@@ -325,7 +325,7 @@
   
   
   
-  
+  <span class="private note title">private</span>
 
   
     <span class="summary_desc"><div class='inline'></div></span>
@@ -351,7 +351,11 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
+    <p class="note private">
+  <strong>This method is part of a private API.</strong>
+  You should avoid using this method if possible, as it may be removed or be changed in the future.
+</p>
+
 
   </div>
 </div>
@@ -396,12 +400,12 @@
       <pre class="lines">
 
 
-21
-22
-23</pre>
+25
+26
+27</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step_collection.rb', line 21</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step_collection.rb', line 25</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>steps:</span> <span class='lbracket'>[</span><span class='rbracket'>]</span><span class='rparen'>)</span>
   <span class='ivar'>@steps</span> <span class='op'>=</span> <span class='id identifier rubyid_steps'>steps</span>
@@ -429,7 +433,11 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
+    <p class="note private">
+  <strong>This method is part of a private API.</strong>
+  You should avoid using this method if possible, as it may be removed or be changed in the future.
+</p>
+
 
   </div>
 </div>
@@ -457,12 +465,12 @@
       <pre class="lines">
 
 
-15
-16
-17</pre>
+17
+18
+19</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step_collection.rb', line 15</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step_collection.rb', line 17</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_steps'>steps</span>
   <span class='ivar'>@steps</span>
@@ -490,7 +498,11 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
+    <p class="note private">
+  <strong>This method is part of a private API.</strong>
+  You should avoid using this method if possible, as it may be removed or be changed in the future.
+</p>
+
 
   </div>
 </div>
@@ -546,14 +558,14 @@
       <pre class="lines">
 
 
-75
-76
-77
-78
-79</pre>
+89
+90
+91
+92
+93</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step_collection.rb', line 75</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step_collection.rb', line 89</span>
 
 <span class='kw'>def</span> <span class='op'>&lt;&lt;</span><span class='lparen'>(</span><span class='id identifier rubyid_step'>step</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_steps'>steps</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_step'>step</span><span class='period'>.</span><span class='id identifier rubyid_copy'>copy</span><span class='lparen'>(</span><span class='label'>overrides:</span> <span class='lbrace'>{</span><span class='label'>kwargs:</span> <span class='lbrace'>{</span><span class='label'>index:</span> <span class='id identifier rubyid_next_available_index'>next_available_index</span><span class='rbrace'>}</span><span class='rbrace'>}</span><span class='rparen'>)</span>
@@ -636,16 +648,16 @@
       <pre class="lines">
 
 
-85
-86
-87
-88
-89
-90
-91</pre>
+101
+102
+103
+104
+105
+106
+107</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step_collection.rb', line 85</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step_collection.rb', line 101</span>
 
 <span class='kw'>def</span> <span class='op'>==</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='rparen'>)</span>
@@ -741,12 +753,12 @@
       <pre class="lines">
 
 
-67
-68
-69</pre>
+79
+80
+81</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step_collection.rb', line 67</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step_collection.rb', line 79</span>
 
 <span class='kw'>def</span> <span class='op'>[]</span><span class='lparen'>(</span><span class='id identifier rubyid_index'>index</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_steps'>steps</span><span class='lbracket'>[</span><span class='id identifier rubyid_index'>index</span><span class='rbracket'>]</span>
@@ -820,16 +832,16 @@
       <pre class="lines">
 
 
-35
-36
-37
-38
-39
-40
-41</pre>
+41
+42
+43
+44
+45
+46
+47</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step_collection.rb', line 35</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step_collection.rb', line 41</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_commit!'>commit!</span>
   <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='id identifier rubyid_committed?'>committed?</span>
@@ -895,12 +907,12 @@
       <pre class="lines">
 
 
-46
-47
-48</pre>
+54
+55
+56</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step_collection.rb', line 46</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step_collection.rb', line 54</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_committed?'>committed?</span>
   <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_frozen?'>frozen?</span>
@@ -977,12 +989,12 @@
       <pre class="lines">
 
 
-54
-55
-56</pre>
+64
+65
+66</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step_collection.rb', line 54</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step_collection.rb', line 64</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_each'>each</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
@@ -997,7 +1009,7 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Sep 20 22:45:29 2023 by
+  Generated on Fri Sep 22 20:59:26 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>
