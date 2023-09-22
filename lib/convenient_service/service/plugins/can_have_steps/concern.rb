@@ -14,6 +14,9 @@ module ConvenientService
             # @note May be useful for debugging purposes.
             # @see https://marian13.github.io/convenient_service_docs/guides/how_to_debug_services_via_callbacks
             #
+            # @note `steps` are frozen.
+            # @see https://marian13.github.io/convenient_service_docs/faq#is-it-possible-to-modify-the-step-collection-from-a-callback
+            #
             # @return [Array<ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step>]
             #
             # @internal
