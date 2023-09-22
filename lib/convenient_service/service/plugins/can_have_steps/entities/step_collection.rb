@@ -9,12 +9,16 @@ module ConvenientService
             include ::Enumerable
 
             ##
+            # @api private
+            #
             # @!attribute [r] steps
             #   @return [Array<ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step>]
             #
             attr_reader :steps
 
             ##
+            # @api private
+            #
             # @param steps [Array<ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step>]
             # @return [void]
             #
@@ -23,6 +27,8 @@ module ConvenientService
             end
 
             ##
+            # @api public
+            #
             # @return [Boolean] true if called for the first time, false otherwise (similarly as Kernel#require).
             #
             # @see https://ruby-doc.org/core-3.1.2/Kernel.html#method-i-require
@@ -41,6 +47,8 @@ module ConvenientService
             end
 
             ##
+            # @api public
+            #
             # @return [Boolean]
             #
             def committed?
@@ -48,6 +56,8 @@ module ConvenientService
             end
 
             ##
+            # @api public
+            #
             # @param block [Proc, nil]
             # @return [Array<ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step>, Enumerator]
             #
@@ -56,6 +66,8 @@ module ConvenientService
             end
 
             ##
+            # @api public
+            #
             # Returns step by index.
             #
             # @param index [Integer]
@@ -69,6 +81,8 @@ module ConvenientService
             end
 
             ##
+            # @api private
+            #
             # @param step [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step]
             # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::StepCollection]
             #
@@ -79,6 +93,8 @@ module ConvenientService
             end
 
             ##
+            # @api public
+            #
             # @param other [Object] Can be any type.
             # @return [Boolean, nil]
             #

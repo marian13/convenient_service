@@ -9,6 +9,11 @@ module ConvenientService
 
           instance_methods do
             ##
+            # @api public
+            #
+            # @note May be useful for debugging purposes.
+            # @see https://marian13.github.io/convenient_service_docs/guides/how_to_debug_services_via_callbacks
+            #
             # @return [Array<ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step>]
             #
             # @internal
@@ -20,6 +25,7 @@ module ConvenientService
                   .steps
                   .tap(&:commit!)
                   .map { |step| step.copy(overrides: {kwargs: {organizer: self}}) }
+                  .freeze
               end
             end
 
