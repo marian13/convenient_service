@@ -50,3 +50,8 @@
 # Check `HasMermaidFlowchart` for details.
 #
 flowchart.html
+
+##
+# NOTE: Ignores `TODO.md`. Usually, this file is used for notes that are NOT ready to be shared with the outside world.
+#
+TODO.md
