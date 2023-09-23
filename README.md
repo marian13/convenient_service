@@ -38,7 +38,7 @@ Yet another approach to revisit the service object pattern, but this time focusi
 <!-- general_description:end -->
 
 <!-- warning:start -->
-## WARNING ❗❗❗
+## ❗❗❗ WARNING ❗❗❗
 
 This library is under heavy development. Public API may be subject to change. The first major release is still to come. Use the current version at your own risk. Ruby 2.7+, JRuby 9.4+ (TruffleRuby support is planned as well). Thanks.
 <!-- features:end -->
