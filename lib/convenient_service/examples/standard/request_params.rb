@@ -37,7 +37,7 @@ module ConvenientService
   module Examples
     module Standard
       class RequestParams
-        include ConvenientService::Feature
+        include ConvenientService::Feature::Standard::Config
 
         entry :prepare do |request|
           Services::Prepare[request: request]

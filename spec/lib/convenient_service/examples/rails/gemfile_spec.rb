@@ -12,7 +12,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile do
 
     subject { described_class }
 
-    it { is_expected.to include_module(ConvenientService::Feature) }
+    it { is_expected.to include_module(ConvenientService::Feature::Configs::Standard) }
   end
 
   example_group "class methods" do

@@ -15,7 +15,7 @@ module ConvenientService
     module Dry
       module V1
         class Gemfile
-          include ConvenientService::Feature
+          include ConvenientService::Feature::Standard::Config
 
           entry :format do |path|
             Services::Format[path: path]

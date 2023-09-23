@@ -14,7 +14,7 @@ module ConvenientService
     module Standard
       module V1
         class Factorial
-          include ConvenientService::Feature
+          include ConvenientService::Feature::Standard::Config
 
           entry :calculate do |number|
             Services::Calculate[number: number]

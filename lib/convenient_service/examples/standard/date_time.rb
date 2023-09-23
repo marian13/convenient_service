@@ -12,7 +12,7 @@ module ConvenientService
   module Examples
     module Standard
       class DateTime
-        include ConvenientService::Feature
+        include ConvenientService::Feature::Standard::Config
 
         entry :safe_parse do |string, format|
           Services::SafeParse[string: string, format: format]
