@@ -124,6 +124,61 @@
 
 
 
+  
+    <h2>
+      Class Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#export-class_method" title="export (class method)">.<strong>export</strong>(slug, scope: Constants::DEFAULT_SCOPE, &amp;body)  &#x21d2; ConvenientService::Support::DependencyContainer::Entities::Method </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#exported_methods-class_method" title="exported_methods (class method)">.<strong>exported_methods</strong>  &#x21d2; ConvenientService::Support::DependencyContainer::Entities::MethodCollection </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
 
   
   
@@ -131,16 +186,199 @@
   
   
   
-  <h2>Method Summary</h2>
+  
   
   <h3 class="inherited">Methods included from <span class='object_link'><a href="../Concern.html" title="ConvenientService::Support::Concern (module)">Concern</a></span></h3>
   <p class="inherited"><span class='object_link'><a href="../Concern.html#included-class_method" title="ConvenientService::Support::Concern.included (method)">included</a></span></p>
 
 
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="export-class_method">
+  
+    .<strong>export</strong>(slug, scope: Constants::DEFAULT_SCOPE, &amp;body)  &#x21d2; <tt><span class='object_link'><a href="Entities/Method.html" title="ConvenientService::Support::DependencyContainer::Entities::Method (class)">ConvenientService::Support::DependencyContainer::Entities::Method</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>slug</span>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt>Symbol</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>scope</span>
+      
+      
+        <span class='type'>(<tt>:instance</tt>, <tt>:class</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>Constants::DEFAULT_SCOPE</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>body</span>
+      
+      
+        <span class='type'>(<tt>Proc</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Entities/Method.html" title="ConvenientService::Support::DependencyContainer::Entities::Method (class)">ConvenientService::Support::DependencyContainer::Entities::Method</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Since:</p>
+<ul class="since">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'><p>0.3.0</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+30
+31
+32
+33
+34</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/dependency_container/export.rb', line 30</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_export'>export</span><span class='lparen'>(</span><span class='id identifier rubyid_slug'>slug</span><span class='comma'>,</span> <span class='label'>scope:</span> <span class='const'><span class='object_link'><a href="Constants.html" title="ConvenientService::Support::DependencyContainer::Constants (module)">Constants</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Constants.html#DEFAULT_SCOPE-constant" title="ConvenientService::Support::DependencyContainer::Constants::DEFAULT_SCOPE (constant)">DEFAULT_SCOPE</a></span></span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_body'>body</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="Commands.html" title="ConvenientService::Support::DependencyContainer::Commands (module)">Commands</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Commands/AssertValidScope.html" title="ConvenientService::Support::DependencyContainer::Commands::AssertValidScope (class)">AssertValidScope</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="Commands/AssertValidScope.html#call-instance_method" title="ConvenientService::Support::DependencyContainer::Commands::AssertValidScope#call (method)">call</a></span></span><span class='lparen'>(</span><span class='label'>scope:</span> <span class='id identifier rubyid_scope'>scope</span><span class='rparen'>)</span>
+
+  <span class='const'><span class='object_link'><a href="Entities.html" title="ConvenientService::Support::DependencyContainer::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Method.html" title="ConvenientService::Support::DependencyContainer::Entities::Method (class)">Method</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Entities/Method.html#initialize-instance_method" title="ConvenientService::Support::DependencyContainer::Entities::Method#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>slug:</span> <span class='id identifier rubyid_slug'>slug</span><span class='comma'>,</span> <span class='label'>scope:</span> <span class='id identifier rubyid_scope'>scope</span><span class='comma'>,</span> <span class='label'>body:</span> <span class='id identifier rubyid_body'>body</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_tap'>tap</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_method'>method</span><span class='op'>|</span> <span class='id identifier rubyid_exported_methods'>exported_methods</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_method'>method</span> <span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="exported_methods-class_method">
+  
+    .<strong>exported_methods</strong>  &#x21d2; <tt><span class='object_link'><a href="Entities/MethodCollection.html" title="ConvenientService::Support::DependencyContainer::Entities::MethodCollection (class)">ConvenientService::Support::DependencyContainer::Entities::MethodCollection</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Entities/MethodCollection.html" title="ConvenientService::Support::DependencyContainer::Entities::MethodCollection (class)">ConvenientService::Support::DependencyContainer::Entities::MethodCollection</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Since:</p>
+<ul class="since">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'><p>0.3.0</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+39
+40
+41</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/dependency_container/export.rb', line 39</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_exported_methods'>exported_methods</span>
+  <span class='ivar'>@exported_methods</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="Entities.html" title="ConvenientService::Support::DependencyContainer::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/MethodCollection.html" title="ConvenientService::Support::DependencyContainer::Entities::MethodCollection (class)">MethodCollection</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Entities/MethodCollection.html#initialize-instance_method" title="ConvenientService::Support::DependencyContainer::Entities::MethodCollection#initialize (method)">new</a></span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
 </div>
 
       <div id="footer">
-  Generated on Sat Sep 23 16:23:59 2023 by
+  Generated on Sun Sep 24 22:31:54 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>

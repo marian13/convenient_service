@@ -288,6 +288,23 @@
   
   
   
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="../../../../Service/Configs/Standard.html" title="ConvenientService::Service::Configs::Standard (module)">Service::Configs::Standard</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../../../../Service/Configs/Standard.html#fallback_error_result-instance_method" title="ConvenientService::Service::Configs::Standard#fallback_error_result (method)">#fallback_error_result</a></span>, <span class='object_link'><a href="../../../../Service/Configs/Standard.html#fallback_failure_result-instance_method" title="ConvenientService::Service::Configs::Standard#fallback_failure_result (method)">#fallback_failure_result</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -348,7 +365,7 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/examples/standard/request_params/services/log_request_params.rb', line 13</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>request:</span><span class='comma'>,</span> <span class='label'>params:</span><span class='comma'>,</span> <span class='label'>tag:</span> <span class='const'><span class='object_link'><a href="../Constants.html" title="ConvenientService::Examples::Standard::RequestParams::Constants (module)">Constants</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Constants/Tags.html" title="ConvenientService::Examples::Standard::RequestParams::Constants::Tags (module)">Tags</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Constants/Tags.html#EMPTY-constant" title="ConvenientService::Examples::Standard::RequestParams::Constants::Tags::EMPTY (constant)">EMPTY</a></span></span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>request:</span><span class='comma'>,</span> <span class='label'>params:</span><span class='comma'>,</span> <span class='label'>tag:</span> <span class='const'><span class='object_link'><a href="../../../../Core/Constants.html" title="ConvenientService::Core::Constants (module)">Constants</a></span></span><span class='op'>::</span><span class='const'>Tags</span><span class='op'>::</span><span class='const'>EMPTY</span><span class='rparen'>)</span>
   <span class='ivar'>@request</span> <span class='op'>=</span> <span class='id identifier rubyid_request'>request</span>
   <span class='ivar'>@params</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span>
   <span class='ivar'>@tag</span> <span class='op'>=</span> <span class='id identifier rubyid_tag'>tag</span>
@@ -587,7 +604,7 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/examples/standard/request_params/services/log_request_params.rb', line 19</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_result'>result</span>
-  <span class='const'><span class='object_link'><a href="../Entities.html" title="ConvenientService::Examples::Standard::RequestParams::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Entities/Logger.html" title="ConvenientService::Examples::Standard::RequestParams::Entities::Logger (class)">Logger</a></span></span><span class='period'>.</span><span class='id identifier rubyid_log'><span class='object_link'><a href="../Entities/Logger.html#log-class_method" title="ConvenientService::Examples::Standard::RequestParams::Entities::Logger.log (method)">log</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_message'>message</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="../../../../Core/Entities.html" title="ConvenientService::Core::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'>Logger</span><span class='period'>.</span><span class='id identifier rubyid_log'>log</span><span class='lparen'>(</span><span class='id identifier rubyid_message'>message</span><span class='rparen'>)</span>
 
   <span class='id identifier rubyid_success'>success</span>
 <span class='kw'>end</span></pre>
@@ -601,7 +618,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Sep 23 16:24:08 2023 by
+  Generated on Sun Sep 24 22:32:05 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>

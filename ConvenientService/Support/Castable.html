@@ -69,6 +69,11 @@
 
   
   
+  <dl>
+      <dt>Extended by:</dt>
+      <dd><span class='object_link'><a href="AbstractMethod.html" title="ConvenientService::Support::AbstractMethod (module)">AbstractMethod</a></span></dd>
+  </dl>
+  
   
   
   <dl>
@@ -122,6 +127,39 @@
 
 
 
+  
+    <h2>
+      Class Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#cast!-class_method" title="cast! (class method)">.<strong>cast!</strong>(other, **options)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
 
   
   
@@ -129,16 +167,93 @@
   
   
   
-  <h2>Method Summary</h2>
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="AbstractMethod.html" title="ConvenientService::Support::AbstractMethod (module)">AbstractMethod</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="AbstractMethod.html#abstract_method-class_method" title="ConvenientService::Support::AbstractMethod.abstract_method (method)">abstract_method</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
   
   <h3 class="inherited">Methods included from <span class='object_link'><a href="Concern.html" title="ConvenientService::Support::Concern (module)">Concern</a></span></h3>
   <p class="inherited"><span class='object_link'><a href="Concern.html#included-class_method" title="ConvenientService::Support::Concern.included (method)">included</a></span></p>
 
 
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="cast!-class_method">
+  
+    .<strong>cast!</strong>(other, **options)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Castable/Exceptions/FailedToCast.html" title="ConvenientService::Support::Castable::Exceptions::FailedToCast (class)">Exceptions::FailedToCast</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+34
+35
+36
+37
+38
+39
+40</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/castable.rb', line 34</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_cast!'>cast!</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_casted'>casted</span> <span class='op'>=</span> <span class='id identifier rubyid_cast'>cast</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
+
+  <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="Castable/Exceptions.html" title="ConvenientService::Support::Castable::Exceptions (module)">Exceptions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Castable/Exceptions/FailedToCast.html" title="ConvenientService::Support::Castable::Exceptions::FailedToCast (class)">FailedToCast</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Castable/Exceptions/FailedToCast.html#initialize-instance_method" title="ConvenientService::Support::Castable::Exceptions::FailedToCast#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>other:</span> <span class='id identifier rubyid_other'>other</span><span class='comma'>,</span> <span class='label'>klass:</span> <span class='kw'>self</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_casted'>casted</span>
+
+  <span class='id identifier rubyid_casted'>casted</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
 </div>
 
       <div id="footer">
-  Generated on Sat Sep 23 16:23:59 2023 by
+  Generated on Sun Sep 24 22:31:53 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>

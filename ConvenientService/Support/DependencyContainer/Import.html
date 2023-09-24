@@ -124,6 +124,39 @@
 
 
 
+  
+    <h2>
+      Class Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#import-class_method" title="import (class method)">.<strong>import</strong>(slug, from:, as: Support::NOT_PASSED, scope: Constants::DEFAULT_SCOPE, prepend: Constants::DEFAULT_PREPEND)  &#x21d2; ConvenientService::Support::DependencyContainer::Entities::Method </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
 
   
   
@@ -131,16 +164,174 @@
   
   
   
-  <h2>Method Summary</h2>
+  
   
   <h3 class="inherited">Methods included from <span class='object_link'><a href="../Concern.html" title="ConvenientService::Support::Concern (module)">Concern</a></span></h3>
   <p class="inherited"><span class='object_link'><a href="../Concern.html#included-class_method" title="ConvenientService::Support::Concern.included (method)">included</a></span></p>
 
 
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="import-class_method">
+  
+    .<strong>import</strong>(slug, from:, as: Support::NOT_PASSED, scope: Constants::DEFAULT_SCOPE, prepend: Constants::DEFAULT_PREPEND)  &#x21d2; <tt><span class='object_link'><a href="Entities/Method.html" title="ConvenientService::Support::DependencyContainer::Entities::Method (class)">ConvenientService::Support::DependencyContainer::Entities::Method</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>slug</span>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt>Symbol</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>as</span>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt>Symbol</tt>, <tt>nil</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>Support::NOT_PASSED</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>from</span>
+      
+      
+        <span class='type'>(<tt>Module</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>scope</span>
+      
+      
+        <span class='type'>(<tt>:instance</tt>, <tt>:class</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>Constants::DEFAULT_SCOPE</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>prepend</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>Constants::DEFAULT_PREPEND</tt>)</em>
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Entities/Method.html" title="ConvenientService::Support::DependencyContainer::Entities::Method (class)">ConvenientService::Support::DependencyContainer::Entities::Method</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Since:</p>
+<ul class="since">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'><p>0.3.0</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/dependency_container/import.rb', line 18</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_import'>import</span><span class='lparen'>(</span><span class='id identifier rubyid_slug'>slug</span><span class='comma'>,</span> <span class='label'>from:</span><span class='comma'>,</span> <span class='label'>as:</span> <span class='const'><span class='object_link'><a href="../../Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Support.html#NOT_PASSED-constant" title="ConvenientService::Support::NOT_PASSED (constant)">NOT_PASSED</a></span></span><span class='comma'>,</span> <span class='label'>scope:</span> <span class='const'><span class='object_link'><a href="Constants.html" title="ConvenientService::Support::DependencyContainer::Constants (module)">Constants</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Constants.html#DEFAULT_SCOPE-constant" title="ConvenientService::Support::DependencyContainer::Constants::DEFAULT_SCOPE (constant)">DEFAULT_SCOPE</a></span></span><span class='comma'>,</span> <span class='label'>prepend:</span> <span class='const'><span class='object_link'><a href="Constants.html" title="ConvenientService::Support::DependencyContainer::Constants (module)">Constants</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Constants.html#DEFAULT_PREPEND-constant" title="ConvenientService::Support::DependencyContainer::Constants::DEFAULT_PREPEND (constant)">DEFAULT_PREPEND</a></span></span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="Commands.html" title="ConvenientService::Support::DependencyContainer::Commands (module)">Commands</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Commands/AssertValidScope.html" title="ConvenientService::Support::DependencyContainer::Commands::AssertValidScope (class)">AssertValidScope</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="Commands/AssertValidScope.html#call-instance_method" title="ConvenientService::Support::DependencyContainer::Commands::AssertValidScope#call (method)">call</a></span></span><span class='lparen'>(</span><span class='label'>scope:</span> <span class='id identifier rubyid_scope'>scope</span><span class='rparen'>)</span>
+
+  <span class='const'><span class='object_link'><a href="Commands.html" title="ConvenientService::Support::DependencyContainer::Commands (module)">Commands</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Commands/AssertValidContainer.html" title="ConvenientService::Support::DependencyContainer::Commands::AssertValidContainer (class)">AssertValidContainer</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="Commands/AssertValidContainer.html#call-instance_method" title="ConvenientService::Support::DependencyContainer::Commands::AssertValidContainer#call (method)">call</a></span></span><span class='lparen'>(</span><span class='label'>container:</span> <span class='id identifier rubyid_from'>from</span><span class='rparen'>)</span>
+
+  <span class='const'><span class='object_link'><a href="Commands.html" title="ConvenientService::Support::DependencyContainer::Commands (module)">Commands</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Commands/AssertValidMethod.html" title="ConvenientService::Support::DependencyContainer::Commands::AssertValidMethod (class)">AssertValidMethod</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="Commands/AssertValidMethod.html#call-instance_method" title="ConvenientService::Support::DependencyContainer::Commands::AssertValidMethod#call (method)">call</a></span></span><span class='lparen'>(</span><span class='label'>slug:</span> <span class='id identifier rubyid_slug'>slug</span><span class='comma'>,</span> <span class='label'>scope:</span> <span class='id identifier rubyid_scope'>scope</span><span class='comma'>,</span> <span class='label'>container:</span> <span class='id identifier rubyid_from'>from</span><span class='rparen'>)</span>
+
+  <span class='id identifier rubyid_method'>method</span> <span class='op'>=</span> <span class='id identifier rubyid_from'>from</span><span class='period'>.</span><span class='id identifier rubyid_exported_methods'>exported_methods</span><span class='period'>.</span><span class='id identifier rubyid_find_by'>find_by</span><span class='lparen'>(</span><span class='label'>slug:</span> <span class='id identifier rubyid_slug'>slug</span><span class='comma'>,</span> <span class='label'>scope:</span> <span class='id identifier rubyid_scope'>scope</span><span class='rparen'>)</span>
+
+  <span class='id identifier rubyid_method'>method</span> <span class='op'>=</span> <span class='id identifier rubyid_method'>method</span><span class='period'>.</span><span class='id identifier rubyid_copy'>copy</span><span class='lparen'>(</span><span class='label'>overrides:</span> <span class='lbrace'>{</span><span class='label'>kwargs:</span> <span class='lbrace'>{</span><span class='label'>alias_slug:</span> <span class='id identifier rubyid_as'>as</span><span class='rbrace'>}</span><span class='rbrace'>}</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_as'>as</span> <span class='op'>!=</span> <span class='const'><span class='object_link'><a href="../../Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Support.html#NOT_PASSED-constant" title="ConvenientService::Support::NOT_PASSED (constant)">NOT_PASSED</a></span></span>
+
+  <span class='const'><span class='object_link'><a href="Commands.html" title="ConvenientService::Support::DependencyContainer::Commands (module)">Commands</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Commands/ImportMethod.html" title="ConvenientService::Support::DependencyContainer::Commands::ImportMethod (class)">ImportMethod</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="Commands/ImportMethod.html#call-instance_method" title="ConvenientService::Support::DependencyContainer::Commands::ImportMethod#call (method)">call</a></span></span><span class='lparen'>(</span><span class='label'>importing_module:</span> <span class='kw'>self</span><span class='comma'>,</span> <span class='label'>exported_method:</span> <span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='label'>prepend:</span> <span class='id identifier rubyid_prepend'>prepend</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
 </div>
 
       <div id="footer">
-  Generated on Sat Sep 23 16:23:59 2023 by
+  Generated on Sun Sep 24 22:31:54 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.1.4).
 </div>
