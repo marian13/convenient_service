@@ -1,4 +1,6 @@
 ##
+# NOTE: This config is used by `task docs:generate`.
+#
 # NOTE: `.yardopts` docs.
 # https://rubydoc.info/gems/yard/YARD/CLI/Yardoc
 #
@@ -9,5 +11,6 @@
 --markup-provider commonmarker
 --output-dir docs
 --tag internal --hide-tag internal
+--plugin convenient_service_concern
 'lib/**/*.rb' -
 README.md
