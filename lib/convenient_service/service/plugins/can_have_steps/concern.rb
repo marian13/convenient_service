@@ -61,9 +61,6 @@ module ConvenientService
             end
 
             ##
-            # @param value [Object] Can be any type.
-            # @return [ConvenientService::Support::RawValue]
-            #
             # Allows to pass a value to `in` method without its intermediate processing.
             # @see https://marian13.github.io/convenient_service_docs/basics/step_to_result_translation_table
             #
