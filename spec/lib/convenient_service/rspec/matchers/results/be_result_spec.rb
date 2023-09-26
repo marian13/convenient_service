@@ -7,27 +7,39 @@ require "convenient_service"
 RSpec.describe ConvenientService::RSpec::Matchers::Results::BeResult do
   include ConvenientService::RSpec::Matchers::Results
 
-  specify do
-    expect(be_result(:success)).to eq(ConvenientService::RSpec::Matchers::Classes::Results::BeSuccess.new)
-  end
+  example_group "instance methods" do
+    let(:klass) do
+      Class.new.tap do |klass|
+        klass.class_exec(described_class) do |mod|
+          include mod
+        end
+      end
+    end
 
-  specify do
-    expect(be_result(:failure)).to eq(ConvenientService::RSpec::Matchers::Classes::Results::BeFailure.new)
-  end
+    let(:instance) { klass.new }
 
-  specify do
-    expect(be_result(:error)).to eq(ConvenientService::RSpec::Matchers::Classes::Results::BeError.new)
-  end
+    specify do
+      expect(be_result(:success)).to eq(ConvenientService::RSpec::Matchers::Classes::Results::BeSuccess.new)
+    end
 
-  specify do
-    expect(be_result(:not_success)).to eq(ConvenientService::RSpec::Matchers::Classes::Results::BeNotSuccess.new)
-  end
+    specify do
+      expect(be_result(:failure)).to eq(ConvenientService::RSpec::Matchers::Classes::Results::BeFailure.new)
+    end
 
-  specify do
-    expect(be_result(:not_failure)).to eq(ConvenientService::RSpec::Matchers::Classes::Results::BeNotFailure.new)
-  end
+    specify do
+      expect(be_result(:error)).to eq(ConvenientService::RSpec::Matchers::Classes::Results::BeError.new)
+    end
 
-  specify do
-    expect(be_result(:not_error)).to eq(ConvenientService::RSpec::Matchers::Classes::Results::BeNotError.new)
+    specify do
+      expect(be_result(:not_success)).to eq(ConvenientService::RSpec::Matchers::Classes::Results::BeNotSuccess.new)
+    end
+
+    specify do
+      expect(be_result(:not_failure)).to eq(ConvenientService::RSpec::Matchers::Classes::Results::BeNotFailure.new)
+    end
+
+    specify do
+      expect(be_result(:not_error)).to eq(ConvenientService::RSpec::Matchers::Classes::Results::BeNotError.new)
+    end
   end
 end

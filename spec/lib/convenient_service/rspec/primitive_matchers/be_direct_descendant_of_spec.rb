@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-RSpec.describe ConvenientService::RSpec::Matchers::Export do
+RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::BeDirectDescendantOf do
   include ConvenientService::RSpec::PrimitiveMatchers::DelegateTo
 
   example_group "instance methods" do
@@ -18,12 +18,12 @@ RSpec.describe ConvenientService::RSpec::Matchers::Export do
 
     let(:instance) { klass.new }
 
-    let(:method) { :foo }
+    let(:parent) { String }
 
     specify do
-      expect { instance.export(method) }
-        .to delegate_to(ConvenientService::RSpec::Matchers::Classes::Export, :new)
-        .with_arguments(method)
+      expect { instance.be_direct_descendant_of(parent) }
+        .to delegate_to(ConvenientService::RSpec::PrimitiveMatchers::Classes::BeDirectDescendantOf, :new)
+        .with_arguments(parent)
     end
   end
 end

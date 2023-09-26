@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-RSpec.describe ConvenientService::RSpec::Matchers::Export do
+RSpec.describe ConvenientService::RSpec::Matchers::DelegateTo do
   include ConvenientService::RSpec::PrimitiveMatchers::DelegateTo
 
   example_group "instance methods" do
@@ -18,12 +18,13 @@ RSpec.describe ConvenientService::RSpec::Matchers::Export do
 
     let(:instance) { klass.new }
 
+    let(:object) { OpenStruct.new(foo: :bar) }
     let(:method) { :foo }
 
     specify do
-      expect { instance.export(method) }
-        .to delegate_to(ConvenientService::RSpec::Matchers::Classes::Export, :new)
-        .with_arguments(method)
+      expect { instance.delegate_to(object, method) }
+        .to delegate_to(ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo, :new)
+        .with_arguments(object, method)
     end
   end
 end

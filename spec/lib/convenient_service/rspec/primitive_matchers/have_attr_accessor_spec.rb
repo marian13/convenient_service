@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-RSpec.describe ConvenientService::RSpec::Matchers::Export do
+RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::HaveAttrAccessor do
   include ConvenientService::RSpec::PrimitiveMatchers::DelegateTo
 
   example_group "instance methods" do
@@ -21,8 +21,8 @@ RSpec.describe ConvenientService::RSpec::Matchers::Export do
     let(:method) { :foo }
 
     specify do
-      expect { instance.export(method) }
-        .to delegate_to(ConvenientService::RSpec::Matchers::Classes::Export, :new)
+      expect { instance.have_attr_accessor(method) }
+        .to delegate_to(ConvenientService::RSpec::PrimitiveMatchers::Classes::HaveAttrAccessor, :new)
         .with_arguments(method)
     end
   end

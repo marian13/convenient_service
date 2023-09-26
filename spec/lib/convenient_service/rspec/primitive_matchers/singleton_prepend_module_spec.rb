@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-RSpec.describe ConvenientService::RSpec::Matchers::Export do
+RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::SingletonPrependModule do
   include ConvenientService::RSpec::PrimitiveMatchers::DelegateTo
 
   example_group "instance methods" do
@@ -18,12 +18,12 @@ RSpec.describe ConvenientService::RSpec::Matchers::Export do
 
     let(:instance) { klass.new }
 
-    let(:method) { :foo }
+    let(:mod) { Module.new }
 
     specify do
-      expect { instance.export(method) }
-        .to delegate_to(ConvenientService::RSpec::Matchers::Classes::Export, :new)
-        .with_arguments(method)
+      expect { instance.singleton_prepend_module(mod) }
+        .to delegate_to(ConvenientService::RSpec::PrimitiveMatchers::Classes::SingletonPrependModule, :new)
+        .with_arguments(mod)
     end
   end
 end

@@ -4,8 +4,8 @@ require "spec_helper"
 
 require "convenient_service"
 
-RSpec.describe ConvenientService::RSpec::Matchers::Results::BeNotFailure do
-  include ConvenientService::RSpec::Matchers::DelegateTo
+RSpec.describe ConvenientService::RSpec::Matchers::CallChainNext do
+  include ConvenientService::RSpec::PrimitiveMatchers::DelegateTo
 
   example_group "instance methods" do
     let(:klass) do
@@ -19,10 +19,9 @@ RSpec.describe ConvenientService::RSpec::Matchers::Results::BeNotFailure do
     let(:instance) { klass.new }
 
     specify do
-      expect { instance.be_not_failure }
-        .to delegate_to(ConvenientService::RSpec::Matchers::Classes::Results::BeNotFailure, :new)
+      expect { instance.call_chain_next }
+        .to delegate_to(ConvenientService::RSpec::Matchers::Classes::CallChainNext, :new)
         .without_arguments
-        .and_return_its_value
     end
   end
 end

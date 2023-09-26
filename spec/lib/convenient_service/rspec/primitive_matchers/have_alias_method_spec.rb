@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-RSpec.describe ConvenientService::RSpec::Matchers::Export do
+RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::HaveAliasMethod do
   include ConvenientService::RSpec::PrimitiveMatchers::DelegateTo
 
   example_group "instance methods" do
@@ -19,11 +19,12 @@ RSpec.describe ConvenientService::RSpec::Matchers::Export do
     let(:instance) { klass.new }
 
     let(:method) { :foo }
+    let(:alias_method) { :bar }
 
     specify do
-      expect { instance.export(method) }
-        .to delegate_to(ConvenientService::RSpec::Matchers::Classes::Export, :new)
-        .with_arguments(method)
+      expect { instance.have_alias_method(method, alias_method) }
+        .to delegate_to(ConvenientService::RSpec::PrimitiveMatchers::Classes::HaveAliasMethod, :new)
+        .with_arguments(method, alias_method)
     end
   end
 end
