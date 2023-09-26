@@ -4,11 +4,11 @@ require "spec_helper"
 
 require "convenient_service"
 
-RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::HaveAttrAccessor do
+RSpec.describe ConvenientService::RSpec::PrimitiveHelpers::InThreads do
   include ConvenientService::RSpec::PrimitiveMatchers::DelegateTo
 
   example_group "instance methods" do
-    describe "#have_attr_accessor" do
+    describe "#in_threads" do
       let(:klass) do
         Class.new.tap do |klass|
           klass.class_exec(described_class) do |mod|
@@ -19,12 +19,14 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::HaveAttrAccessor do
 
       let(:instance) { klass.new }
 
-      let(:method) { :foo }
+      let(:n) { 2 }
+      let(:array) { [] }
+      let(:block) { proc { |array| array << :foo } }
 
       specify do
-        expect { instance.have_attr_accessor(method) }
-          .to delegate_to(ConvenientService::RSpec::PrimitiveMatchers::Classes::HaveAttrAccessor, :new)
-          .with_arguments(method)
+        expect { instance.in_threads(n, array, &block) }
+          .to delegate_to(ConvenientService::RSpec::PrimitiveHelpers::Classes::InThreads, :new)
+          .with_arguments(n, array, &block)
       end
     end
   end

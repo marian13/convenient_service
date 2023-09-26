@@ -8,22 +8,24 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::SingletonPrependModu
   include ConvenientService::RSpec::PrimitiveMatchers::DelegateTo
 
   example_group "instance methods" do
-    let(:klass) do
-      Class.new.tap do |klass|
-        klass.class_exec(described_class) do |mod|
-          include mod
+    describe "#singleton_prepend_module" do
+      let(:klass) do
+        Class.new.tap do |klass|
+          klass.class_exec(described_class) do |mod|
+            include mod
+          end
         end
       end
-    end
 
-    let(:instance) { klass.new }
+      let(:instance) { klass.new }
 
-    let(:mod) { Module.new }
+      let(:mod) { Module.new }
 
-    specify do
-      expect { instance.singleton_prepend_module(mod) }
-        .to delegate_to(ConvenientService::RSpec::PrimitiveMatchers::Classes::SingletonPrependModule, :new)
-        .with_arguments(mod)
+      specify do
+        expect { instance.singleton_prepend_module(mod) }
+          .to delegate_to(ConvenientService::RSpec::PrimitiveMatchers::Classes::SingletonPrependModule, :new)
+          .with_arguments(mod)
+      end
     end
   end
 end

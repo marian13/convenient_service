@@ -8,22 +8,24 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::BeDirectDescendantOf
   include ConvenientService::RSpec::PrimitiveMatchers::DelegateTo
 
   example_group "instance methods" do
-    let(:klass) do
-      Class.new.tap do |klass|
-        klass.class_exec(described_class) do |mod|
-          include mod
+    describe "#be_direct_descendant_of" do
+      let(:klass) do
+        Class.new.tap do |klass|
+          klass.class_exec(described_class) do |mod|
+            include mod
+          end
         end
       end
-    end
 
-    let(:instance) { klass.new }
+      let(:instance) { klass.new }
 
-    let(:parent) { String }
+      let(:parent) { String }
 
-    specify do
-      expect { instance.be_direct_descendant_of(parent) }
-        .to delegate_to(ConvenientService::RSpec::PrimitiveMatchers::Classes::BeDirectDescendantOf, :new)
-        .with_arguments(parent)
+      specify do
+        expect { instance.be_direct_descendant_of(parent) }
+          .to delegate_to(ConvenientService::RSpec::PrimitiveMatchers::Classes::BeDirectDescendantOf, :new)
+          .with_arguments(parent)
+      end
     end
   end
 end
