@@ -2,7 +2,7 @@
 
 module ConvenientService
   module RSpec
-    module Helpers
+    module PrimitiveHelpers
       module Classes
         # @internal
         #   TODO: Specs.

@@ -22,19 +22,19 @@ module ConvenientService
       include Support::Concern
 
       included do
-        include PrimitiveMatchers::BeDescendantOf
-        include PrimitiveMatchers::BeDirectDescendantOf
-        include PrimitiveMatchers::CacheItsValue
-        include PrimitiveMatchers::DelegateTo
-        include PrimitiveMatchers::ExtendModule
-        include PrimitiveMatchers::HaveAbstractMethod
-        include PrimitiveMatchers::HaveAliasMethod
-        include PrimitiveMatchers::HaveAttrAccessor
-        include PrimitiveMatchers::HaveAttrReader
-        include PrimitiveMatchers::HaveAttrWriter
-        include PrimitiveMatchers::IncludeModule
-        include PrimitiveMatchers::PrependModule
-        include PrimitiveMatchers::SingletonPrependModule
+        include BeDescendantOf
+        include BeDirectDescendantOf
+        include CacheItsValue
+        include DelegateTo
+        include ExtendModule
+        include HaveAbstractMethod
+        include HaveAliasMethod
+        include HaveAttrAccessor
+        include HaveAttrReader
+        include HaveAttrWriter
+        include IncludeModule
+        include PrependModule
+        include SingletonPrependModule
       end
     end
   end

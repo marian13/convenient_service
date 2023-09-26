@@ -14,11 +14,11 @@ module ConvenientService
       include Support::Concern
 
       included do
-        include Matchers::CallChainNext
-        include Matchers::DelegateTo
-        include Matchers::Export
-        include Matchers::IncludeModule
-        include Matchers::Results
+        include CallChainNext
+        include DelegateTo
+        include Export
+        include IncludeModule
+        include Results
       end
     end
   end

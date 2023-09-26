@@ -2,7 +2,7 @@
 
 module ConvenientService
   module RSpec
-    module Helpers
+    module PrimitiveHelpers
       module Classes
         class IgnoringException < Support::Command
           module Exceptions

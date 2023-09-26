@@ -6,8 +6,8 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Support::ThreadSafeCounter do
-  include ConvenientService::RSpec::Helpers::IgnoringException
-  include ConvenientService::RSpec::Helpers::InThreads
+  include ConvenientService::RSpec::PrimitiveHelpers::IgnoringException
+  include ConvenientService::RSpec::PrimitiveHelpers::InThreads
 
   let(:counter) { described_class.new(initial_value: initial_value, min_value: min_value, max_value: max_value) }
   let(:initial_value) { 0 }

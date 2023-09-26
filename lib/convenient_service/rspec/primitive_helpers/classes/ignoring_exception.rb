@@ -4,7 +4,7 @@ require_relative "ignoring_exception/exceptions"
 
 module ConvenientService
   module RSpec
-    module Helpers
+    module PrimitiveHelpers
       module Classes
         class IgnoringException < Support::Command
           ##
@@ -30,7 +30,7 @@ module ConvenientService
 
           ##
           # @return [ConvenientService::Support::UniqueValue]
-          # @raise [ConvenientService::RSpec::Helpers::Classes::IgnoringException::Exceptions::IgnoredExceptionIsNotRaised]
+          # @raise [ConvenientService::RSpec::PrimitiveHelpers::Classes::IgnoringException::Exceptions::IgnoredExceptionIsNotRaised]
           #
           # @note Rescue `StandardError`, NOT `Exception`.
           # @see https://thoughtbot.com/blog/rescue-standarderror-not-exception

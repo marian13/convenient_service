@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::RSpec::Helpers::Classes::IgnoringException do
+RSpec.describe ConvenientService::RSpec::PrimitiveHelpers::Classes::IgnoringException do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   example_group "instance methods" do
@@ -22,9 +22,9 @@ RSpec.describe ConvenientService::RSpec::Helpers::Classes::IgnoringException do
           TEXT
         end
 
-        it "raises `ConvenientService::RSpec::Helpers::Classes::IgnoringException::Exceptions::IgnoredExceptionIsNotRaised`" do
+        it "raises `ConvenientService::RSpec::PrimitiveHelpers::Classes::IgnoringException::Exceptions::IgnoredExceptionIsNotRaised`" do
           expect { command_result }
-            .to raise_error(ConvenientService::RSpec::Helpers::Classes::IgnoringException::Exceptions::IgnoredExceptionIsNotRaised)
+            .to raise_error(ConvenientService::RSpec::PrimitiveHelpers::Classes::IgnoringException::Exceptions::IgnoredExceptionIsNotRaised)
             .with_message(exception_message)
         end
       end
