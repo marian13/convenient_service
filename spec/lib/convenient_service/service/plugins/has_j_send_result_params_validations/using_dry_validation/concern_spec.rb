@@ -8,7 +8,7 @@ return unless defined? ConvenientService::Service::Plugins::HasJSendResultParams
 
 RSpec.describe ConvenientService::Service::Plugins::HasJSendResultParamsValidations::UsingDryValidation::Concern do
   include ConvenientService::RSpec::Matchers::IncludeModule
-  include ConvenientService::RSpec::Matchers::ExtendModule
+  include ConvenientService::RSpec::PrimitiveMatchers::ExtendModule
 
   example_group "modules" do
     subject { described_class }

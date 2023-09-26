@@ -20,10 +20,10 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
 
   example_group "instance methods" do
     include ConvenientService::RSpec::Matchers::DelegateTo
-    include ConvenientService::RSpec::Matchers::CacheItsValue
+    include ConvenientService::RSpec::PrimitiveMatchers::CacheItsValue
 
     example_group "abstract methods" do
-      include ConvenientService::RSpec::Matchers::HaveAbstractMethod
+      include ConvenientService::RSpec::PrimitiveMatchers::HaveAbstractMethod
 
       subject { ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Base.new(stack) }
 

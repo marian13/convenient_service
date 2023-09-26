@@ -7,7 +7,7 @@ require "convenient_service"
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Entities::Callback do
   example_group "attributes" do
-    include ConvenientService::RSpec::Matchers::HaveAttrReader
+    include ConvenientService::RSpec::PrimitiveMatchers::HaveAttrReader
 
     subject { described_class.new(types: [:foo, :bar], block: proc { :foo }) }
 
@@ -29,7 +29,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Entities::Callb
   end
 
   example_group "instance alias methods" do
-    include ConvenientService::RSpec::Matchers::HaveAliasMethod
+    include ConvenientService::RSpec::PrimitiveMatchers::HaveAliasMethod
 
     subject { described_class.new(types: [], block: double) }
 

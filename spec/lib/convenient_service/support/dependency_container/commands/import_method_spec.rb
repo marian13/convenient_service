@@ -10,9 +10,9 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::Import
     describe ".call" do
       include ConvenientService::RSpec::Matchers::DelegateTo
       include ConvenientService::RSpec::Matchers::IncludeModule
-      include ConvenientService::RSpec::Matchers::ExtendModule
-      include ConvenientService::RSpec::Matchers::PrependModule
-      include ConvenientService::RSpec::Matchers::SingletonPrependModule
+      include ConvenientService::RSpec::PrimitiveMatchers::ExtendModule
+      include ConvenientService::RSpec::PrimitiveMatchers::PrependModule
+      include ConvenientService::RSpec::PrimitiveMatchers::SingletonPrependModule
 
       subject(:command_result) { described_class.call(importing_module: importing_module, exported_method: exported_method, prepend: prepend) }
 

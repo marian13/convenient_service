@@ -57,7 +57,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns::En
 
   example_group "instance methods" do
     example_group "instance alias methods" do
-      include ConvenientService::RSpec::Matchers::HaveAliasMethod
+      include ConvenientService::RSpec::PrimitiveMatchers::HaveAliasMethod
 
       subject { stack }
 

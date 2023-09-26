@@ -8,7 +8,7 @@ require "convenient_service"
 RSpec.describe ConvenientService::Common::Plugins::CanHaveUserProvidedEntity::Commands::FindOrCreateEntity do
   example_group "class methods" do
     describe ".call" do
-      include ConvenientService::RSpec::Matchers::BeDescendantOf
+      include ConvenientService::RSpec::PrimitiveMatchers::BeDescendantOf
       include ConvenientService::RSpec::Matchers::IncludeModule
 
       subject(:command_result) { described_class.call(namespace: namespace, proto_entity: proto_entity) }

@@ -7,7 +7,7 @@ require "convenient_service"
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Concern::ClassMethods do
   include ConvenientService::RSpec::Matchers::DelegateTo
-  include ConvenientService::RSpec::Matchers::CacheItsValue
+  include ConvenientService::RSpec::PrimitiveMatchers::CacheItsValue
 
   let(:service_class) do
     Class.new do

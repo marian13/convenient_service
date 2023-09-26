@@ -7,12 +7,12 @@ require "convenient_service"
 RSpec.describe ConvenientService::Core::Concern do
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
-    include ConvenientService::RSpec::Matchers::ExtendModule
+    include ConvenientService::RSpec::PrimitiveMatchers::ExtendModule
 
     ##
     # TODO: Uncomment.
     #
-    # include ConvenientService::RSpec::Matchers::HaveAliasMethod
+    # include ConvenientService::RSpec::PrimitiveMatchers::HaveAliasMethod
 
     subject { described_class }
 

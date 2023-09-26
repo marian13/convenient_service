@@ -7,7 +7,7 @@ require "convenient_service"
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Service::Plugins::HasMermaidFlowchart::Entities::Flowchart do
   include ConvenientService::RSpec::Matchers::DelegateTo
-  include ConvenientService::RSpec::Matchers::CacheItsValue
+  include ConvenientService::RSpec::PrimitiveMatchers::CacheItsValue
 
   example_group "instance methods" do
     let(:flowchart) { described_class.new(service: service) }
@@ -23,7 +23,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasMermaidFlowchart::Entitie
     end
 
     example_group "attributes" do
-      include ConvenientService::RSpec::Matchers::HaveAttrReader
+      include ConvenientService::RSpec::PrimitiveMatchers::HaveAttrReader
 
       subject { flowchart }
 

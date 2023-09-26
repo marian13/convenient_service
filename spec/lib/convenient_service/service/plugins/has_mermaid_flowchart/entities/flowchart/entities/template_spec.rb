@@ -8,7 +8,7 @@ require "convenient_service"
 RSpec.describe ConvenientService::Service::Plugins::HasMermaidFlowchart::Entities::Flowchart::Entities::Template do
   example_group "instance methods" do
     include ConvenientService::RSpec::Matchers::DelegateTo
-    include ConvenientService::RSpec::Matchers::CacheItsValue
+    include ConvenientService::RSpec::PrimitiveMatchers::CacheItsValue
 
     let(:template) { described_class.new }
 

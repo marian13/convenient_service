@@ -15,7 +15,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Namesp
   let(:block) { proc { :foo } }
 
   example_group "attributes" do
-    include ConvenientService::RSpec::Matchers::HaveAttrReader
+    include ConvenientService::RSpec::PrimitiveMatchers::HaveAttrReader
 
     subject { namespace }
 

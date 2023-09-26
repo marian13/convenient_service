@@ -6,14 +6,14 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::MiddlewareCreators::Observable do
-  include ConvenientService::RSpec::Matchers::CacheItsValue
+  include ConvenientService::RSpec::PrimitiveMatchers::CacheItsValue
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   let(:middleware_creator) { described_class.new(middleware: middleware) }
   let(:middleware) { Class.new(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Chain) }
 
   example_group "inheritance" do
-    include ConvenientService::RSpec::Matchers::BeDescendantOf
+    include ConvenientService::RSpec::PrimitiveMatchers::BeDescendantOf
 
     subject { described_class }
 

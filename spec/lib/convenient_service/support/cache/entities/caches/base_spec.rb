@@ -35,7 +35,7 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Base do
 
   example_group "instance methods" do
     example_group "abstract methods" do
-      include ConvenientService::RSpec::Matchers::HaveAbstractMethod
+      include ConvenientService::RSpec::PrimitiveMatchers::HaveAbstractMethod
 
       subject { cache }
 

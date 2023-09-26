@@ -7,7 +7,7 @@ require "convenient_service"
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Examples::Standard::V1::Gemfile::Services::ReplaceFileContent do
   include ConvenientService::RSpec::Matchers::Results
-  include ConvenientService::RSpec::Matchers::HaveAttrReader
+  include ConvenientService::RSpec::PrimitiveMatchers::HaveAttrReader
   include ConvenientService::RSpec::Matchers::IncludeModule
 
   let(:service) { described_class.new(**default_options) }

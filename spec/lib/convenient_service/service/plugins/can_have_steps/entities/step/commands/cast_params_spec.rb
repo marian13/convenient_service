@@ -6,7 +6,7 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Commands::CastParams do
-  include ConvenientService::RSpec::Matchers::CacheItsValue
+  include ConvenientService::RSpec::PrimitiveMatchers::CacheItsValue
 
   example_group "class methods" do
     describe ".call" do

@@ -7,7 +7,7 @@ require "convenient_service"
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Entities::TypeCollection do
   example_group "attributes" do
-    include ConvenientService::RSpec::Matchers::HaveAttrReader
+    include ConvenientService::RSpec::PrimitiveMatchers::HaveAttrReader
 
     subject { described_class.new(types: [:before, :result]) }
 

@@ -28,7 +28,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasMermaidFlowchart::Entitie
 
   example_group "instance methods" do
     example_group "attributes" do
-      include ConvenientService::RSpec::Matchers::HaveAttrReader
+      include ConvenientService::RSpec::PrimitiveMatchers::HaveAttrReader
 
       subject { settings }
 

@@ -6,7 +6,7 @@ require "convenient_service"
 
 RSpec.describe ConvenientService::Common::Plugins::HasInternals::Concern do
   include ConvenientService::RSpec::Matchers::DelegateTo
-  include ConvenientService::RSpec::Matchers::CacheItsValue
+  include ConvenientService::RSpec::PrimitiveMatchers::CacheItsValue
 
   let(:entity_class) do
     Class.new.tap do |klass|

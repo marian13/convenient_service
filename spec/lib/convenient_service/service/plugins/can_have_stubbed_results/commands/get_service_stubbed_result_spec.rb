@@ -7,7 +7,7 @@ require "convenient_service"
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Service::Plugins::CanHaveStubbedResults::Commands::GetServiceStubbedResult do
   include ConvenientService::RSpec::Matchers::DelegateTo
-  include ConvenientService::RSpec::Matchers::CacheItsValue
+  include ConvenientService::RSpec::PrimitiveMatchers::CacheItsValue
 
   include ConvenientService::RSpec::Helpers::StubService
 

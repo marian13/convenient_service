@@ -7,7 +7,7 @@ require "convenient_service"
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Support::Delegate do
   include ConvenientService::RSpec::Matchers::IncludeModule
-  include ConvenientService::RSpec::Matchers::ExtendModule
+  include ConvenientService::RSpec::PrimitiveMatchers::ExtendModule
 
   example_group "modules" do
     subject { described_class }

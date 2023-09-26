@@ -12,7 +12,7 @@ RSpec.describe ConvenientService::Examples::Rails::V1::Gemfile::Services::Format
 
   include ConvenientService::RSpec::Matchers::DelegateTo
   include ConvenientService::RSpec::Matchers::IncludeModule
-  include ConvenientService::RSpec::Matchers::HaveAttrReader
+  include ConvenientService::RSpec::PrimitiveMatchers::HaveAttrReader
   include ConvenientService::RSpec::Matchers::Results
 
   let(:service) { described_class.new(path: path) }

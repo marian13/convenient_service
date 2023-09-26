@@ -13,7 +13,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
   let(:middleware_arguments) { ConvenientService::Support::Arguments.new(:foo, foo: :bar) { :foo } }
 
   example_group "inheritance" do
-    include ConvenientService::RSpec::Matchers::BeDescendantOf
+    include ConvenientService::RSpec::PrimitiveMatchers::BeDescendantOf
 
     subject { described_class }
 
@@ -34,7 +34,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
 
   example_group "instance methods" do
     example_group "attributes" do
-      include ConvenientService::RSpec::Matchers::HaveAttrReader
+      include ConvenientService::RSpec::PrimitiveMatchers::HaveAttrReader
 
       subject { middleware_creator }
 

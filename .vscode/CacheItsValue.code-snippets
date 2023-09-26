@@ -8,7 +8,7 @@
     "scope": "ruby",
     "prefix": "CacheItsValue",
     "body": [
-      "include ConvenientService::RSpec::Matchers::CacheItsValue",
+      "include ConvenientService::RSpec::PrimitiveMatchers::CacheItsValue",
     ],
     "description": "`CacheItsValue` - a module that allows to use custom RSpec matcher `cache_its_value` to verify caching"
   }

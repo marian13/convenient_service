@@ -7,7 +7,7 @@ require "convenient_service"
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Core::Entities::Config do
   include ConvenientService::RSpec::Matchers::DelegateTo
-  include ConvenientService::RSpec::Matchers::CacheItsValue
+  include ConvenientService::RSpec::PrimitiveMatchers::CacheItsValue
 
   let(:config) { described_class.new(klass: service_class) }
 
@@ -26,7 +26,7 @@ RSpec.describe ConvenientService::Core::Entities::Config do
   end
 
   example_group "attributes" do
-    include ConvenientService::RSpec::Matchers::HaveAttrReader
+    include ConvenientService::RSpec::PrimitiveMatchers::HaveAttrReader
 
     subject { config }
 

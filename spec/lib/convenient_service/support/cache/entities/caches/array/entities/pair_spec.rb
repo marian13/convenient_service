@@ -12,7 +12,7 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Array::Entit
   let(:value) { :bar }
 
   example_group "attributes" do
-    include ConvenientService::RSpec::Matchers::HaveAttrReader
+    include ConvenientService::RSpec::PrimitiveMatchers::HaveAttrReader
 
     subject { pair }
 

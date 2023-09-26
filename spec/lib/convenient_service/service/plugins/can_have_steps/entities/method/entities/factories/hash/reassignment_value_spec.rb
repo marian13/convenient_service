@@ -13,7 +13,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
   let(:value) { ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Values::Reassignment.new(:bar) }
 
   example_group "inheritance" do
-    include ConvenientService::RSpec::Matchers::BeDescendantOf
+    include ConvenientService::RSpec::PrimitiveMatchers::BeDescendantOf
 
     subject { described_class }
 

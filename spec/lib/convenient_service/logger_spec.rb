@@ -9,7 +9,7 @@ RSpec.describe ConvenientService::Logger do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   example_group "inheritance" do
-    include ConvenientService::RSpec::Matchers::BeDescendantOf
+    include ConvenientService::RSpec::PrimitiveMatchers::BeDescendantOf
 
     subject { described_class }
 

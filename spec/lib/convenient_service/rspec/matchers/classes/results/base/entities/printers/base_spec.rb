@@ -30,7 +30,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
   end
 
   example_group "attributes" do
-    include ConvenientService::RSpec::Matchers::HaveAttrReader
+    include ConvenientService::RSpec::PrimitiveMatchers::HaveAttrReader
 
     subject { printer }
 
@@ -39,7 +39,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
 
   example_group "instance methods" do
     example_group "abstract methods" do
-      include ConvenientService::RSpec::Matchers::HaveAbstractMethod
+      include ConvenientService::RSpec::PrimitiveMatchers::HaveAbstractMethod
 
       subject { printer }
 

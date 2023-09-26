@@ -7,7 +7,7 @@ require "convenient_service"
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Service::Plugins::CanHaveStubbedResults::Concern do
   include ConvenientService::RSpec::Matchers::DelegateTo
-  include ConvenientService::RSpec::Matchers::CacheItsValue
+  include ConvenientService::RSpec::PrimitiveMatchers::CacheItsValue
 
   let(:service_class) do
     Class.new.tap do |klass|
@@ -19,7 +19,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStubbedResults::Conce
 
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
-    include ConvenientService::RSpec::Matchers::ExtendModule
+    include ConvenientService::RSpec::PrimitiveMatchers::ExtendModule
 
     subject { described_class }
 

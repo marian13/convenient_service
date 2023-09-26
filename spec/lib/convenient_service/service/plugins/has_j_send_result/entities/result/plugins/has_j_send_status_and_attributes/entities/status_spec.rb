@@ -11,7 +11,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
 
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
-    include ConvenientService::RSpec::Matchers::ExtendModule
+    include ConvenientService::RSpec::PrimitiveMatchers::ExtendModule
 
     subject { status.class }
 
@@ -20,7 +20,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
   end
 
   example_group "attributes" do
-    include ConvenientService::RSpec::Matchers::HaveAttrReader
+    include ConvenientService::RSpec::PrimitiveMatchers::HaveAttrReader
 
     subject { status }
 

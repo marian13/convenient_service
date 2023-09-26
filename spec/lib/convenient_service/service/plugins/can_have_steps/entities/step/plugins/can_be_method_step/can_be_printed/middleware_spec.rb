@@ -9,7 +9,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
   let(:middleware) { described_class }
 
   example_group "inheritance" do
-    include ConvenientService::RSpec::Matchers::BeDescendantOf
+    include ConvenientService::RSpec::PrimitiveMatchers::BeDescendantOf
 
     subject { middleware }
 

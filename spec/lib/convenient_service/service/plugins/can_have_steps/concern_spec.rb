@@ -6,7 +6,7 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Concern do
-  include ConvenientService::RSpec::Matchers::CacheItsValue
+  include ConvenientService::RSpec::PrimitiveMatchers::CacheItsValue
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   # rubocop:disable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
@@ -25,7 +25,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Concern do
 
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
-    include ConvenientService::RSpec::Matchers::ExtendModule
+    include ConvenientService::RSpec::PrimitiveMatchers::ExtendModule
 
     subject { described_class }
 

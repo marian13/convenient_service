@@ -8,7 +8,7 @@ require "convenient_service"
 RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Entities::Type do
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
-    include ConvenientService::RSpec::Matchers::ExtendModule
+    include ConvenientService::RSpec::PrimitiveMatchers::ExtendModule
 
     subject { described_class }
 
@@ -18,7 +18,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Entities::Type 
   end
 
   example_group "attributes" do
-    include ConvenientService::RSpec::Matchers::HaveAttrReader
+    include ConvenientService::RSpec::PrimitiveMatchers::HaveAttrReader
 
     subject { described_class.new(value: :before) }
 

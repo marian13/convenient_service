@@ -9,7 +9,7 @@ RSpec.describe ConvenientService::Support::Arguments::NullArguments do
   let(:null_arguments) { described_class.new }
 
   example_group "inheritance" do
-    include ConvenientService::RSpec::Matchers::BeDescendantOf
+    include ConvenientService::RSpec::PrimitiveMatchers::BeDescendantOf
 
     subject { described_class }
 

@@ -5,7 +5,7 @@ module ConvenientService
     module Matchers
       module DelegateTo
         def delegate_to(...)
-          Classes::DelegateTo.new(...)
+          RSpec::PrimitiveMatchers::Classes::DelegateTo.new(...)
         end
       end
     end

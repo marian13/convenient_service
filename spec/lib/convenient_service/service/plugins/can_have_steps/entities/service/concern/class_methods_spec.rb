@@ -6,7 +6,7 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Service::Concern::ClassMethods do
-  include ConvenientService::RSpec::Matchers::CacheItsValue
+  include ConvenientService::RSpec::PrimitiveMatchers::CacheItsValue
 
   let(:service_class) { ConvenientService::Service::Plugins::CanHaveSteps::Entities::Service }
 

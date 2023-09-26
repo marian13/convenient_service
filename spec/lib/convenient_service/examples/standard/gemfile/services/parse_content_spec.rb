@@ -8,7 +8,7 @@ require "convenient_service"
 RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::ParseContent do
   include ConvenientService::RSpec::Helpers::StubService
   include ConvenientService::RSpec::Matchers::Results
-  include ConvenientService::RSpec::Matchers::HaveAttrReader
+  include ConvenientService::RSpec::PrimitiveMatchers::HaveAttrReader
   include ConvenientService::RSpec::Matchers::IncludeModule
 
   let(:service) { described_class.new(**default_options) }

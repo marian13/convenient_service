@@ -10,7 +10,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
   let(:options) { {direction: :output} }
 
   example_group "inheritance" do
-    include ConvenientService::RSpec::Matchers::BeDescendantOf
+    include ConvenientService::RSpec::PrimitiveMatchers::BeDescendantOf
 
     subject { described_class }
 

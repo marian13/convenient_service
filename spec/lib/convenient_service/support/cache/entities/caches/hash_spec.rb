@@ -9,7 +9,7 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Hash do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   example_group "inheritance" do
-    include ConvenientService::RSpec::Matchers::BeDescendantOf
+    include ConvenientService::RSpec::PrimitiveMatchers::BeDescendantOf
 
     subject { described_class }
 
@@ -289,7 +289,7 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Hash do
     end
 
     describe "#scope" do
-      include ConvenientService::RSpec::Matchers::CacheItsValue
+      include ConvenientService::RSpec::PrimitiveMatchers::CacheItsValue
 
       it "returns sub cache" do
         expect(cache.scope(:foo)).to eq(described_class.new)

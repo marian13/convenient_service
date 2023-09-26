@@ -6,7 +6,7 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status::Concern::InstanceMethods do
-  include ConvenientService::RSpec::Matchers::CacheItsValue
+  include ConvenientService::RSpec::PrimitiveMatchers::CacheItsValue
 
   let(:status) { ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status.new(value: value, result: result) }
   let(:value) { :foo }
@@ -36,7 +36,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
     include ConvenientService::RSpec::Matchers::DelegateTo
 
     example_group "attributes" do
-      include ConvenientService::RSpec::Matchers::HaveAttrReader
+      include ConvenientService::RSpec::PrimitiveMatchers::HaveAttrReader
 
       subject { status }
 

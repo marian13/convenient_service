@@ -9,7 +9,7 @@ return unless defined? ConvenientService::Examples::Rails
 RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::StripComments do
   include ConvenientService::RSpec::Helpers::StubService
   include ConvenientService::RSpec::Matchers::Results
-  include ConvenientService::RSpec::Matchers::HaveAttrAccessor
+  include ConvenientService::RSpec::PrimitiveMatchers::HaveAttrAccessor
   include ConvenientService::RSpec::Matchers::IncludeModule
   ##
   # NOTE: Waits for `should-matchers` full support.

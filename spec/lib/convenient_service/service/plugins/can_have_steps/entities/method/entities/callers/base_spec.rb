@@ -22,7 +22,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
     include ConvenientService::RSpec::Matchers::DelegateTo
 
     example_group "attributes" do
-      include ConvenientService::RSpec::Matchers::HaveAttrReader
+      include ConvenientService::RSpec::PrimitiveMatchers::HaveAttrReader
 
       subject { caller }
 
@@ -30,7 +30,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
     end
 
     example_group "abstract methods" do
-      include ConvenientService::RSpec::Matchers::HaveAbstractMethod
+      include ConvenientService::RSpec::PrimitiveMatchers::HaveAbstractMethod
 
       subject { caller }
 

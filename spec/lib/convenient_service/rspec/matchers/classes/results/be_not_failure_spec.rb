@@ -6,7 +6,7 @@ require "convenient_service"
 
 RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::BeNotFailure do
   example_group "inheritance" do
-    include ConvenientService::RSpec::Matchers::BeDescendantOf
+    include ConvenientService::RSpec::PrimitiveMatchers::BeDescendantOf
 
     subject { described_class }
 

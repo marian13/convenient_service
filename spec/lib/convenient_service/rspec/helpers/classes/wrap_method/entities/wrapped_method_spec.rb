@@ -13,7 +13,7 @@ require "convenient_service"
 RSpec.xdescribe ConvenientService::RSpec::Helpers::Classes::WrapMethod::Entities::WrappedMethod do
   include ConvenientService::RSpec::Helpers::IgnoringException
 
-  include ConvenientService::RSpec::Matchers::CacheItsValue
+  include ConvenientService::RSpec::PrimitiveMatchers::CacheItsValue
 
   subject(:method) { described_class.new(entity: entity, method: method_name, observe_middleware: middleware) }
 

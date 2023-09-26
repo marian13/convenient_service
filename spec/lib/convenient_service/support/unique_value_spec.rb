@@ -11,7 +11,7 @@ RSpec.describe ConvenientService::Support::UniqueValue do
   let(:default_label) { "unique_value_#{unique_value.object_id}" }
 
   example_group "attributes" do
-    include ConvenientService::RSpec::Matchers::HaveAttrReader
+    include ConvenientService::RSpec::PrimitiveMatchers::HaveAttrReader
 
     subject { unique_value }
 

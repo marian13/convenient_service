@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 RSpec.describe ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Error::Exceptions do
-  include ConvenientService::RSpec::Matchers::BeDescendantOf
+  include ConvenientService::RSpec::PrimitiveMatchers::BeDescendantOf
 
   specify { expect(described_class::BothArgsAndKwargsArePassed).to be_descendant_of(ConvenientService::Exception) }
   specify { expect(described_class::KwargsContainJSendAndExtraKeys).to be_descendant_of(ConvenientService::Exception) }

@@ -52,7 +52,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
-    include ConvenientService::RSpec::Matchers::ExtendModule
+    include ConvenientService::RSpec::PrimitiveMatchers::ExtendModule
 
     subject { described_class }
 
@@ -61,7 +61,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
   end
 
   example_group "instance methods" do
-    include ConvenientService::RSpec::Matchers::CacheItsValue
+    include ConvenientService::RSpec::PrimitiveMatchers::CacheItsValue
     include ConvenientService::RSpec::Matchers::DelegateTo
 
     describe "#success?" do

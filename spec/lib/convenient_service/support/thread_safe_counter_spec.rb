@@ -16,14 +16,14 @@ RSpec.describe ConvenientService::Support::ThreadSafeCounter do
   let(:n) { 1_000 }
 
   example_group "exceptions" do
-    include ConvenientService::RSpec::Matchers::BeDescendantOf
+    include ConvenientService::RSpec::PrimitiveMatchers::BeDescendantOf
 
     specify { expect(described_class::Exceptions::ValueAfterIncrementIsGreaterThanMaxValue).to be_descendant_of(ConvenientService::Exception) }
     specify { expect(described_class::Exceptions::ValueAfterDecrementIsLowerThanMinValue).to be_descendant_of(ConvenientService::Exception) }
   end
 
   example_group "attributes" do
-    include ConvenientService::RSpec::Matchers::HaveAttrReader
+    include ConvenientService::RSpec::PrimitiveMatchers::HaveAttrReader
 
     subject { counter }
 

@@ -12,7 +12,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
   let(:printer) { described_class.new(matcher: be_failure) }
 
   example_group "inheritance" do
-    include ConvenientService::RSpec::Matchers::BeDescendantOf
+    include ConvenientService::RSpec::PrimitiveMatchers::BeDescendantOf
 
     subject { described_class }
 

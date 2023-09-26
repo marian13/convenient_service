@@ -7,7 +7,7 @@ require "convenient_service"
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base do
   include ConvenientService::RSpec::Matchers::DelegateTo
-  include ConvenientService::RSpec::Matchers::CacheItsValue
+  include ConvenientService::RSpec::PrimitiveMatchers::CacheItsValue
 
   let(:matcher) { described_class.new(statuses: statuses, result: result) }
   let(:statuses) { [:success] }
@@ -55,7 +55,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base do
 
   example_group "instance methods" do
     example_group "attributes" do
-      include ConvenientService::RSpec::Matchers::HaveAttrReader
+      include ConvenientService::RSpec::PrimitiveMatchers::HaveAttrReader
 
       subject { matcher }
 
@@ -63,7 +63,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base do
     end
 
     example_group "abstract methods" do
-      include ConvenientService::RSpec::Matchers::HaveAbstractMethod
+      include ConvenientService::RSpec::PrimitiveMatchers::HaveAbstractMethod
 
       subject { matcher }
 

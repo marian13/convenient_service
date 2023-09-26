@@ -17,7 +17,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasInternals::Entities::Inter
 
   example_group "instance methods" do
     include ConvenientService::RSpec::Matchers::DelegateTo
-    include ConvenientService::RSpec::Matchers::CacheItsValue
+    include ConvenientService::RSpec::PrimitiveMatchers::CacheItsValue
 
     describe "#cache" do
       let(:internals) { internals_instance }
