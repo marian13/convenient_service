@@ -5,7 +5,7 @@ module ConvenientService
     module Matchers
       module Export
         def export(...)
-          Custom::Export.new(...)
+          Classes::Export.new(...)
         end
       end
     end

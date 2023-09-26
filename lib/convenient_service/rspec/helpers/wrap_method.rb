@@ -5,7 +5,7 @@ module ConvenientService
     module Helpers
       module WrapMethod
         def wrap_method(...)
-          Custom::WrapMethod.call(...)
+          Classes::WrapMethod.call(...)
         end
       end
     end

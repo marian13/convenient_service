@@ -5,7 +5,7 @@ module ConvenientService
     module Matchers
       module IncludeModule
         def include_module(...)
-          Custom::IncludeModule.new(...)
+          Classes::IncludeModule.new(...)
         end
       end
     end

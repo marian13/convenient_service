@@ -5,7 +5,7 @@ module ConvenientService
     module Matchers
       module HaveAliasMethod
         def have_alias_method(...)
-          Custom::HaveAliasMethod.new(...)
+          Classes::HaveAliasMethod.new(...)
         end
       end
     end

@@ -5,7 +5,7 @@ module ConvenientService
     module Matchers
       module BeDescendantOf
         def be_descendant_of(...)
-          Custom::BeDescendantOf.new(...)
+          Classes::BeDescendantOf.new(...)
         end
       end
     end

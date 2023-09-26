@@ -5,7 +5,7 @@ module ConvenientService
     module Helpers
       module InThreads
         def in_threads(...)
-          Custom::InThreads.call(...)
+          Classes::InThreads.call(...)
         end
       end
     end

@@ -5,7 +5,7 @@ module ConvenientService
     module Matchers
       module CacheItsValue
         def cache_its_value(...)
-          Custom::CacheItsValue.new(...)
+          Classes::CacheItsValue.new(...)
         end
       end
     end

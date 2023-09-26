@@ -5,7 +5,7 @@ module ConvenientService
     module Helpers
       module IgnoringException
         def ignoring_exception(...)
-          Custom::IgnoringException.call(...)
+          Classes::IgnoringException.call(...)
         end
       end
     end

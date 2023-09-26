@@ -5,23 +5,23 @@ module ConvenientService
     module Helpers
       module StubService
         def stub_service(...)
-          Custom::StubService.call(...)
+          Classes::StubService.call(...)
         end
 
         def return_result(status)
-          Custom::StubService::Entities::ResultSpec.new(status: status)
+          Classes::StubService::Entities::ResultSpec.new(status: status)
         end
 
         def return_success
-          Custom::StubService::Entities::ResultSpec.new(status: :success)
+          Classes::StubService::Entities::ResultSpec.new(status: :success)
         end
 
         def return_failure
-          Custom::StubService::Entities::ResultSpec.new(status: :failure)
+          Classes::StubService::Entities::ResultSpec.new(status: :failure)
         end
 
         def return_error
-          Custom::StubService::Entities::ResultSpec.new(status: :error)
+          Classes::StubService::Entities::ResultSpec.new(status: :error)
         end
       end
     end

@@ -5,7 +5,7 @@ module ConvenientService
     module Matchers
       module HaveAbstractMethod
         def have_abstract_method(...)
-          Custom::HaveAbstractMethod.new(...)
+          Classes::HaveAbstractMethod.new(...)
         end
       end
     end

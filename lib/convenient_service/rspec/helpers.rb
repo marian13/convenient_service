@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "helpers/custom"
+require_relative "helpers/classes"
 
 require_relative "helpers/ignoring_exception"
 require_relative "helpers/in_threads"

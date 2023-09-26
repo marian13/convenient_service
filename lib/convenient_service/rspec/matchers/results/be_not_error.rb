@@ -9,7 +9,7 @@ module ConvenientService
           # @api public
           #
           def be_not_error(...)
-            Custom::Results::BeNotError.new(...)
+            Classes::Results::BeNotError.new(...)
           end
         end
       end

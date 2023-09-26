@@ -5,7 +5,7 @@ module ConvenientService
     module Matchers
       module CallChainNext
         def call_chain_next(...)
-          Custom::CallChainNext.new(...)
+          Classes::CallChainNext.new(...)
         end
       end
     end

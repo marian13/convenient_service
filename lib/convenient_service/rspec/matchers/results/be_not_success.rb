@@ -9,7 +9,7 @@ module ConvenientService
           # @api public
           #
           def be_not_success(...)
-            Custom::Results::BeNotSuccess.new(...)
+            Classes::Results::BeNotSuccess.new(...)
           end
         end
       end

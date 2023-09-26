@@ -5,7 +5,7 @@ module ConvenientService
     module Matchers
       module ExtendModule
         def extend_module(...)
-          Custom::ExtendModule.new(...)
+          Classes::ExtendModule.new(...)
         end
       end
     end

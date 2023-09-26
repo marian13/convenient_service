@@ -5,7 +5,7 @@ module ConvenientService
     module Matchers
       module PrependModule
         def prepend_module(...)
-          Custom::PrependModule.new(...)
+          Classes::PrependModule.new(...)
         end
       end
     end

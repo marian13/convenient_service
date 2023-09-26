@@ -5,7 +5,7 @@ module ConvenientService
     module Matchers
       module DelegateTo
         def delegate_to(...)
-          Custom::DelegateTo.new(...)
+          Classes::DelegateTo.new(...)
         end
       end
     end

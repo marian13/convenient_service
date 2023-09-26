@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "matchers/custom"
+require_relative "matchers/classes"
 
 require_relative "matchers/be_descendant_of"
 require_relative "matchers/be_direct_descendant_of"

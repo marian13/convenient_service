@@ -5,7 +5,7 @@ module ConvenientService
     module Matchers
       module HaveAttrWriter
         def have_attr_writer(...)
-          Custom::HaveAttrWriter.new(...)
+          Classes::HaveAttrWriter.new(...)
         end
       end
     end

@@ -20,7 +20,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Export do
 
   specify do
     expect { klass_instance.export(method) }
-      .to delegate_to(ConvenientService::RSpec::Matchers::Custom::Export, :new)
+      .to delegate_to(ConvenientService::RSpec::Matchers::Classes::Export, :new)
       .with_arguments(method)
   end
 end

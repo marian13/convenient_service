@@ -9,7 +9,7 @@ module ConvenientService
           # @api public
           #
           def be_not_failure(...)
-            Custom::Results::BeNotFailure.new(...)
+            Classes::Results::BeNotFailure.new(...)
           end
         end
       end

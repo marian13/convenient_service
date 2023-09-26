@@ -5,7 +5,7 @@ module ConvenientService
     module Matchers
       module HaveAttrReader
         def have_attr_reader(...)
-          Custom::HaveAttrReader.new(...)
+          Classes::HaveAttrReader.new(...)
         end
       end
     end

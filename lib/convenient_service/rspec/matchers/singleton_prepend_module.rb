@@ -5,7 +5,7 @@ module ConvenientService
     module Matchers
       module SingletonPrependModule
         def singleton_prepend_module(...)
-          Custom::SingletonPrependModule.new(...)
+          Classes::SingletonPrependModule.new(...)
         end
       end
     end

@@ -10,7 +10,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Results::BeSuccess do
 
   specify do
     expect { be_success }
-      .to delegate_to(ConvenientService::RSpec::Matchers::Custom::Results::BeSuccess, :new)
+      .to delegate_to(ConvenientService::RSpec::Matchers::Classes::Results::BeSuccess, :new)
       .without_arguments
       .and_return_its_value
   end

@@ -5,7 +5,7 @@ module ConvenientService
     module Matchers
       module HaveAttrAccessor
         def have_attr_accessor(...)
-          Custom::HaveAttrAccessor.new(...)
+          Classes::HaveAttrAccessor.new(...)
         end
       end
     end
