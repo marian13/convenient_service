@@ -225,6 +225,8 @@ module ConvenientService
               use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
               use ConvenientService::Plugins::Common::CachesReturnValue::Middleware
 
+              use ConvenientService::Plugins::Step::RaisesOnNotResultReturnValue::Middleware
+
               use ConvenientService::Plugins::Step::CanBeResultStep::CanBeExecuted::Middleware
               use ConvenientService::Plugins::Step::CanBeMethodStep::CanBeExecuted::Middleware
             end

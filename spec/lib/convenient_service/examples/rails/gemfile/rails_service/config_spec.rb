@@ -477,6 +477,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::RailsService::Config
               [
                 ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
                 ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
+                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::RaisesOnNotResultReturnValue::Middleware,
                 ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeResultStep::CanBeExecuted::Middleware,
                 ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeMethodStep::CanBeExecuted::Middleware
               ]
@@ -506,7 +507,8 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::RailsService::Config
             let(:service_fallback_failure_result_middlewares) do
               [
                 ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-                ConvenientService::Common::Plugins::CachesReturnValue::Middleware
+                ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
+                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::RaisesOnNotResultReturnValue::Middleware
               ]
             end
 
@@ -532,7 +534,8 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::RailsService::Config
             let(:service_fallback_error_result_middlewares) do
               [
                 ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
-                ConvenientService::Common::Plugins::CachesReturnValue::Middleware
+                ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
+                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::RaisesOnNotResultReturnValue::Middleware
               ]
             end
 

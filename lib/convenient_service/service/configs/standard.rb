@@ -172,6 +172,7 @@ module ConvenientService
             middlewares :service_fallback_failure_result do
               use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
               use ConvenientService::Plugins::Common::CachesReturnValue::Middleware
+              use ConvenientService::Plugins::Step::RaisesOnNotResultReturnValue::Middleware
             end
 
             middlewares :fallback_failure_result do
@@ -182,6 +183,7 @@ module ConvenientService
             middlewares :service_fallback_error_result do
               use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
               use ConvenientService::Plugins::Common::CachesReturnValue::Middleware
+              use ConvenientService::Plugins::Step::RaisesOnNotResultReturnValue::Middleware
             end
 
             middlewares :fallback_error_result do
