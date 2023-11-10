@@ -1,5 +1,27 @@
 # Changelog
 
+## [0.15.0](https://github.com/marian13/convenient_service/compare/v0.14.0...v0.15.0) (2023-11-10)
+
+
+### ⚠ BREAKING CHANGES
+
+* **feature:** allow to use plugins for features
+
+### Features
+
+* **can_have_steps:** do not allow to modify steps from callbacks ([b90b7f7](https://github.com/marian13/convenient_service/commit/b90b7f7b5ba7b9cb12151d02495d1ad1c230504e))
+* **feature:** allow to use plugins for features ([17645f8](https://github.com/marian13/convenient_service/commit/17645f888849b5cb42c2ae45aa8430cb96e28eff))
+
+
+### Bug Fixes
+
+* **can_have_steps:** introduce raises_on_not_result_return_value for steps ([bb27527](https://github.com/marian13/convenient_service/commit/bb27527b708747df356980cf831c660757fb4093))
+
+
+### Miscellaneous Chores
+
+* release 0.15.0 ([7f6a6a7](https://github.com/marian13/convenient_service/commit/7f6a6a74b722eaf26ae7195351a9078c944032dd))
+
 ## [0.14.0](https://github.com/marian13/convenient_service/compare/v0.13.0...v0.14.0) (2023-09-20)
 
 
