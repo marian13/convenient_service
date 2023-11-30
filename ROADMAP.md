@@ -78,8 +78,13 @@
 | High | 🚧 | Add specs for `WrappedMethod#call` | |
 | High | 🚧 | Check whether ignoring the error was used properly | |
 | High | 🚧 | Steps are great for `and` logic, but what to do with `or` logic? | Create the third service | |
-| High | 🚧 | Steps are great for `and` logic, but what to do with `case when` logic? | Create the third service | | 
+| High | 🚧 | Steps are great for `and` logic, but what to do with `case when` logic? | Create the third service | |
 | High | 🚧 | Cacing of services | It is relatively simple to add caching for steps, but not for all services, since steps are managed by framework | |
 | High | 🚧 | Fallback should return result with already checked status |  |
+| Medium | 🚧 | Licence: Commercial Support docs | See [Sidekiq Commercial Support](https://github.com/sidekiq/sidekiq/wiki/Commercial-Support) |
+| Meduim | 🚧 | Licence: Acknowledgements - Government End Users | See [GraphQL Ruby Commercial Licence](https://graphql.pro/COMM-LICENSE.html) |
+| Medium | 🚧 | Licence: Applicable Law and Jurisdiction (Miscellaneous - Governing Law) | See [Kiba Applicable Law and Jurisdiction](https://github.com/thbar/kiba/blob/master/COMM-LICENSE.md) |
+| Medium | 🚧 | Licence: Contact email `info@convenientservice.org` | |
+| Medium | 🚧 | Contributing Guide | See [Sidekiq Contributing](https://github.com/sidekiq/sidekiq/blob/main/.github/contributing.md) |
 
 Search for `TODO`s in the codebase for more tasks.
