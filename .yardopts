@@ -9,7 +9,7 @@
 #
 --markup markdown
 --markup-provider commonmarker
---output-dir docs
+--output-dir docs/api
 --tag internal --hide-tag internal
 --plugin convenient_service_concern
 'lib/**/*.rb' -
