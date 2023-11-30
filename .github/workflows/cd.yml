@@ -52,6 +52,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./docs/api
+          cname: apidocs.convenientservice.org
 
   create_github_release:
     runs-on: ubuntu-20.04
