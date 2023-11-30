@@ -86,5 +86,7 @@
 | Medium | 🚧 | Licence: Applicable Law and Jurisdiction (Miscellaneous - Governing Law) | See [Kiba Applicable Law and Jurisdiction](https://github.com/thbar/kiba/blob/master/COMM-LICENSE.md) |
 | Medium | 🚧 | Licence: Contact email `info@convenientservice.org` | |
 | Medium | 🚧 | Contributing Guide | See [Sidekiq Contributing](https://github.com/sidekiq/sidekiq/blob/main/.github/contributing.md) |
+| High | 🚧 | `comparing_by` for `delegate_to` | |
+| High | 🚧 | Remove extra files from bundled gem version | |
 
 Search for `TODO`s in the codebase for more tasks.
