@@ -10,13 +10,13 @@
 | Medium | 🚧 | [Rails Current Attributes integration](https://api.rubyonrails.org/classes/ActiveSupport/CurrentAttributes.html) to cache repeated results | |
 | Low | 🚧 | [Capybara](https://github.com/teamcapybara/capybara) examples | |
 | Medium | 🚧 | Inline step sequence | |
-| High | 🚧 | Move callbacks to internals | |
+| High | 🚧 | Move callbacks to internals | In order to NOT pollute the public interface of users services |
 | Low | 🚧 | Create an example of `id_or_record` [attribute](https://api.rubyonrails.org/classes/ActiveRecord/Attributes/ClassMethods.html) |
 | Low | 🚧 | GitHub Wiki/Gists for Support | |
 | Low | 🚧 | Contribute to Shoulda Matchers | |
 | High | ✅ | `respond_to_missing?` | [ConvenientService::Core::ClassMethods#respond_to_missing?](https://github.com/marian13/convenient_service/blob/main/lib/convenient_service/core/class_methods.rb#L105), [ConvenientService::Core::InstanceMethods#respond_to_missing?](https://github.com/marian13/convenient_service/blob/main/lib/convenient_service/core/instance_methods.rb#L30) |
 | High | ⏳ | Custom matcher to track `ConvenientService::Logger` messages | |
-| Medium | 🚧 | Remove `respond_to?` from `Copyable` | Investigate before making any decision |
+| Medium | ✅ | Remove `respond_to?` from `Copyable` | [7d2a676c171d201301f1c35d498c3b1caf8579b1](https://github.com/marian13/convenient_service/commit/7d2a676c171d201301f1c35d498c3b1caf8579b1) |
 | High | 🚧 | Unified `inspect` | Remove `internals` from inspect, ivars wrapperd by double underscore |
 | High | ✅ | Remove race condition for `method_missing` | https://github.com/marian13/convenient_service/pull/5 |
 | High | ✅ | Remove incompatiility of [Module#include](https://gist.github.com/marian13/9c25041f835564e945d978839097d419) | https://github.com/marian13/convenient_service/pull/3 |
@@ -27,12 +27,12 @@
 | Medium | ✅ | A way to check if block has one required positional argument | [#proc_has_one_positional_argument?](https://github.com/marian13/convenient_service/blob/main/lib/convenient_service/utils/proc/exec_config.rb#L96) |
 | Low | 🚧 | Define method middleware caller with visibility | |
 | Low | 🚧 | Dependency containers to remove high coupling | |
-| Low | 🚧 | Measure performance | |
-| Low | 🚧 | Rewrite middleware backend to count [convenient_service](https://github.com/marian13/convenient_service) specifics | |
+| Low | 🚧 | Measure performance | See [benchmark](https://github.com/marian13/convenient_service/tree/main/benchmark) |
+| Low | 🚧 | Write [Convenient Service](https://github.com/marian13/convenient_service) specific middleware backend | |
 | High | 🚧 | Optimize `stack.dup` in `MethodMiddlewares#call` | Core v3 |
 | Medium | 🚧 | Make a decision of what to do with `printable_block` in custom RSpec matchers | |
 | Medium | 🚧 | User-friendly exception messages | |
-| High | 🚧 | Factory for POROs in specs ❗❗❗ | Start with `result_class`, `class self::Result`, `service_class`, `step_class`, `organizer_class` |
+| High | ❌ | Factory for POROs in specs ❗❗❗ | Proxy config antipattern |
 | High | 🚧 | Resolve warning during specs | |
 | Medium | 🚧 | Consider to change/rewrite `delegate` backend to minify its interface | |
 | Medium | 🚧 | Same order of attr macros, delegators, initialize, class methods, attr methods, queries, actions, `to_*`, comparison, inspect | |
