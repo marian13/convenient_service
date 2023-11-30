@@ -89,4 +89,4 @@
 | High | 🚧 | `comparing_by` for `delegate_to` | |
 | High | 🚧 | Remove extra files from bundled gem version | |
 
-Search for `TODO`s in the codebase for more tasks.
+Search for `TODO`s in the codebase or check [discussions](https://github.com/marian13/convenient_service/discussions) for more tasks.
