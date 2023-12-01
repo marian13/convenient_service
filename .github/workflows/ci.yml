@@ -139,8 +139,8 @@ jobs:
           bundler-cache: true
       ##
       # NOTE: Installs Task (task runner).
-      # https://taskfile.dev/installation/#github-actions
-      # https://github.com/go-task/task
+      # - https://taskfile.dev/installation/#github-actions
+      # - https://github.com/go-task/task
       #
       - name: Install Task (task runner)
         uses: arduino/setup-task@v1
@@ -169,10 +169,10 @@ jobs:
           node-version: 16.x
       ##
       # NOTE: `lcov-result-merger` docs.
-      # https://github.com/mweibel/lcov-result-merger
+      # - https://github.com/mweibel/lcov-result-merger
       #
       # NOTE: `npx --yes` option.
-      # https://stackoverflow.com/questions/70742968/automatically-accept-installing-npx-package
+      # - https://stackoverflow.com/questions/70742968/automatically-accept-installing-npx-package
       #
       # NOTE: `lcov-result-merger` uses `vinyl-fs` for globs which in turn uses `node-glob`.
       # - https://github.com/mweibel/lcov-result-merger/blob/v3.3.0/bin/lcov-result-merger.js#L38
@@ -200,7 +200,7 @@ jobs:
     # NOTE: If there are no memory, performance, or cost constraints, prefer to use as standard Linux distribution as it is possible.
     # In a general case, you simply won't have enough time to resolve all the "quirks" of more specific distributions if you are an application developer.
     # That is why the well-known Ubuntu is used.
-    # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#choosing-github-hosted-runners
+    # - https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#choosing-github-hosted-runners
     #
     runs-on: ubuntu-20.04
     name: Gather coverage

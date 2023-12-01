@@ -30,7 +30,7 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.1
+          ruby-version: 3.2
           ##
           # NOTE: Installs the latest compatible Bundler version, runs `bundle install` and caches installed gems.
           # - https://github.com/ruby/setup-ruby#usage
@@ -39,8 +39,8 @@ jobs:
           bundler-cache: true
       ##
       # NOTE: Installs Task (task runner).
-      # https://taskfile.dev/installation/#github-actions
-      # https://github.com/go-task/task
+      # - https://taskfile.dev/installation/#github-actions
+      # - https://github.com/go-task/task
       #
       - name: Install Task (task runner)
         uses: arduino/setup-task@v1
