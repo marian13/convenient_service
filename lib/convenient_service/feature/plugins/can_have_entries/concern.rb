@@ -10,7 +10,7 @@ module ConvenientService
           class_methods do
             ##
             # @param name [String, Symbol]
-            # @param body [Proc]
+            # @param body [Proc, nil]
             # @return [String, Symbol]
             #
             def entry(name, &body)

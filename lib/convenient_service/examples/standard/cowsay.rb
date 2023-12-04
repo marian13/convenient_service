@@ -15,7 +15,9 @@ module ConvenientService
       class Cowsay
         include ConvenientService::Feature::Standard::Config
 
-        entry :print do |text = "Hello World!", out: $stdout|
+        entry :print
+
+        def print(text = "Hello World!", out: $stdout)
           Services::Print[text: text, out: out]
         end
       end

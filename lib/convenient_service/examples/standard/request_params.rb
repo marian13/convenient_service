@@ -39,7 +39,9 @@ module ConvenientService
       class RequestParams
         include ConvenientService::Feature::Standard::Config
 
-        entry :prepare do |request|
+        entry :prepare
+
+        def prepare(request)
           Services::Prepare[request: request]
         end
       end

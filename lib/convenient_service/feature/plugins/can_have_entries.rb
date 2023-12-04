@@ -2,3 +2,4 @@
 
 require_relative "can_have_entries/commands"
 require_relative "can_have_entries/concern"
+require_relative "can_have_entries/exceptions"

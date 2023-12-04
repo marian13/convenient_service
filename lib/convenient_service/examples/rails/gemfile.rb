@@ -16,7 +16,9 @@ module ConvenientService
       class Gemfile
         include ConvenientService::Feature::Standard::Config
 
-        entry :format do |path|
+        entry :format
+
+        def format(path)
           Services::Format[path: path]
         end
       end

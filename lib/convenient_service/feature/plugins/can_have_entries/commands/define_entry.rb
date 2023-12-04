@@ -47,7 +47,11 @@ module ConvenientService
                 define_singleton_method(name) { |*args, **kwargs, &block| new.public_send(name, *args, **kwargs, &block) }
               end
 
-              feature_class.define_method(name, &body)
+              if body
+                feature_class.define_method(name, &body)
+              else
+                feature_class.define_method(name) { raise ::ConvenientService::Feature::Plugins::CanHaveEntries::Exceptions::NotDefinedEntryMethod.new(name: __method__, feature: self) }
+              end
 
               name
             end

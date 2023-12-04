@@ -14,7 +14,9 @@ module ConvenientService
       class DateTime
         include ConvenientService::Feature::Standard::Config
 
-        entry :safe_parse do |string, format|
+        entry :safe_parse
+
+        def safe_parse(string, format)
           Services::SafeParse[string: string, format: format]
         end
       end
