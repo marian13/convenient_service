@@ -69,6 +69,30 @@ module ConvenientService
                         # @see https://rspec.info/documentation/3.12/rspec-mocks/RSpec/Mocks/ArgumentMatchers.html
                         # @see https://github.com/rspec/rspec-mocks/blob/v3.12.3/lib/rspec/mocks/argument_matchers.rb#L282
                         #
+                        # @example Just code does NOT work in case/when.
+                        #
+                        #   case result.code # `result.code` returns fancy object
+                        #   when :full_queue
+                        #     notify_devops
+                        #   when :duplicated_job
+                        #     notify_devs
+                        #   else
+                        #     # ...
+                        #   end
+                        #
+                        # @example Code converted to symbol works in case/when.
+                        #
+                        #   case result.code.to_sym
+                        #   when :full_queue
+                        #     notify_devops
+                        #   when :duplicated_job
+                        #     notify_devs
+                        #   else
+                        #     # ...
+                        #   end
+                        #
+                        # @see https://userdocs.convenientservice.org/faq#why-casewhen-does-not-work-with-just-result-codes
+                        #
                         # @internal
                         #   IMPORTANT: Must be kept in sync with `#==`.
                         #   NOTE: Ruby does NOT have `!==` operator.
