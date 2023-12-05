@@ -612,6 +612,34 @@
       
       <pre class="example code"><code><span class='id identifier rubyid_expect'>expect</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to'>to</span> <span class='id identifier rubyid_be_success'>be_success</span><span class='period'>.</span><span class='id identifier rubyid_with_code'>with_code</span><span class='lparen'>(</span><span class='id identifier rubyid_instance_of'>instance_of</span><span class='lparen'>(</span><span class='const'>Symbol</span><span class='rparen'>)</span><span class='rparen'>)</span></code></pre>
     
+      
+        <p class="example_title"><div class='inline'><p>Just code does NOT work in case/when.</p>
+</div></p>
+      
+      <pre class="example code"><code>
+<span class='kw'>case</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_code'>code</span> <span class='comment'># `result.code` returns fancy object
+</span><span class='kw'>when</span> <span class='symbol'>:full_queue</span>
+  <span class='id identifier rubyid_notify_devops'>notify_devops</span>
+<span class='kw'>when</span> <span class='symbol'>:duplicated_job</span>
+  <span class='id identifier rubyid_notify_devs'>notify_devs</span>
+<span class='kw'>else</span>
+  <span class='comment'># ...
+</span><span class='kw'>end</span></code></pre>
+    
+      
+        <p class="example_title"><div class='inline'><p>Code converted to symbol works in case/when.</p>
+</div></p>
+      
+      <pre class="example code"><code>
+<span class='kw'>case</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_code'>code</span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span>
+<span class='kw'>when</span> <span class='symbol'>:full_queue</span>
+  <span class='id identifier rubyid_notify_devops'>notify_devops</span>
+<span class='kw'>when</span> <span class='symbol'>:duplicated_job</span>
+  <span class='id identifier rubyid_notify_devs'>notify_devs</span>
+<span class='kw'>else</span>
+  <span class='comment'># ...
+</span><span class='kw'>end</span></code></pre>
+    
   </div>
 <p class="tag_title">Parameters:</p>
 <ul class="param">
@@ -662,6 +690,8 @@
     
       <li><a href="https://github.com/rspec/rspec-mocks/blob/v3.12.3/lib/rspec/mocks/argument_matchers.rb#L282" target="_parent" title="https://github.com/rspec/rspec-mocks/blob/v3.12.3/lib/rspec/mocks/argument_matchers.rb#L282">https://github.com/rspec/rspec-mocks/blob/v3.12.3/lib/rspec/mocks/argument_matchers.rb#L282</a></li>
     
+      <li><a href="https://userdocs.convenientservice.org/faq#why-casewhen-does-not-work-with-just-result-codes" target="_parent" title="https://userdocs.convenientservice.org/faq#why-casewhen-does-not-work-with-just-result-codes">https://userdocs.convenientservice.org/faq#why-casewhen-does-not-work-with-just-result-codes</a></li>
+    
   </ul>
 <p class="tag_title">Since:</p>
 <ul class="since">
@@ -685,17 +715,17 @@
       <pre class="lines">
 
 
-76
-77
-78
-79
-80
-81
-82
-83</pre>
+100
+101
+102
+103
+104
+105
+106
+107</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/has_j_send_status_and_attributes/entities/code/concern/instance_methods.rb', line 76</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/has_j_send_status_and_attributes/entities/code/concern/instance_methods.rb', line 100</span>
 
 <span class='kw'>def</span> <span class='op'>===</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='rparen'>)</span>
@@ -846,12 +876,12 @@
       <pre class="lines">
 
 
-95
-96
-97</pre>
+119
+120
+121</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/has_j_send_status_and_attributes/entities/code/concern/instance_methods.rb', line 95</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/has_j_send_status_and_attributes/entities/code/concern/instance_methods.rb', line 119</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_arguments'>to_arguments</span>
   <span class='ivar'>@to_arguments</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="../../../../../../../../../../Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../../../../Support/Arguments.html" title="ConvenientService::Support::Arguments (class)">Arguments</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../../../../../../../../../Support/Arguments.html#initialize-instance_method" title="ConvenientService::Support::Arguments#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>value:</span> <span class='id identifier rubyid_value'>value</span><span class='comma'>,</span> <span class='label'>result:</span> <span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span>
@@ -913,12 +943,12 @@
       <pre class="lines">
 
 
-88
-89
-90</pre>
+112
+113
+114</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/has_j_send_status_and_attributes/entities/code/concern/instance_methods.rb', line 88</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/has_j_send_status_and_attributes/entities/code/concern/instance_methods.rb', line 112</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_kwargs'>to_kwargs</span>
   <span class='id identifier rubyid_to_arguments'>to_arguments</span><span class='period'>.</span><span class='id identifier rubyid_kwargs'>kwargs</span>
@@ -980,12 +1010,12 @@
       <pre class="lines">
 
 
-102
-103
-104</pre>
+126
+127
+128</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/has_j_send_status_and_attributes/entities/code/concern/instance_methods.rb', line 102</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/has_j_send_status_and_attributes/entities/code/concern/instance_methods.rb', line 126</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_s'>to_s</span>
   <span class='ivar'>@to_s</span> <span class='op'>||=</span> <span class='id identifier rubyid_value'>value</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
@@ -1047,12 +1077,12 @@
       <pre class="lines">
 
 
-109
-110
-111</pre>
+133
+134
+135</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/has_j_send_status_and_attributes/entities/code/concern/instance_methods.rb', line 109</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/has_j_send_status_and_attributes/entities/code/concern/instance_methods.rb', line 133</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_sym'>to_sym</span>
   <span class='ivar'>@to_sym</span> <span class='op'>||=</span> <span class='id identifier rubyid_value'>value</span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span>
@@ -1067,7 +1097,7 @@
 </div>
 
       <div id="footer">
-  Generated on Tue Dec  5 19:25:38 2023 by
+  Generated on Tue Dec  5 21:56:35 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.2.2).
 </div>
