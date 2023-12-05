@@ -537,7 +537,11 @@
 50
 51
 52
-53</pre>
+53
+54
+55
+56
+57</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/feature/plugins/can_have_entries/commands/define_entry.rb', line 41</span>
@@ -551,7 +555,11 @@
     <span class='id identifier rubyid_define_singleton_method'>define_singleton_method</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='op'>|</span> <span class='id identifier rubyid_new'>new</span><span class='period'>.</span><span class='id identifier rubyid_public_send'>public_send</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
   <span class='kw'>end</span>
 
-  <span class='id identifier rubyid_feature_class'>feature_class</span><span class='period'>.</span><span class='id identifier rubyid_define_method'>define_method</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_body'>body</span><span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_body'>body</span>
+    <span class='id identifier rubyid_feature_class'>feature_class</span><span class='period'>.</span><span class='id identifier rubyid_define_method'>define_method</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_body'>body</span><span class='rparen'>)</span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_feature_class'>feature_class</span><span class='period'>.</span><span class='id identifier rubyid_define_method'>define_method</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_raise'>raise</span> <span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Feature.html" title="ConvenientService::Feature (module)">Feature</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Plugins.html" title="ConvenientService::Feature::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../CanHaveEntries.html" title="ConvenientService::Feature::Plugins::CanHaveEntries (module)">CanHaveEntries</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Exceptions.html" title="ConvenientService::Feature::Plugins::CanHaveEntries::Exceptions (module)">Exceptions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Exceptions/NotDefinedEntryMethod.html" title="ConvenientService::Feature::Plugins::CanHaveEntries::Exceptions::NotDefinedEntryMethod (class)">NotDefinedEntryMethod</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Exceptions/NotDefinedEntryMethod.html#initialize-instance_method" title="ConvenientService::Feature::Plugins::CanHaveEntries::Exceptions::NotDefinedEntryMethod#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>name:</span> <span class='id identifier rubyid___method__'>__method__</span><span class='comma'>,</span> <span class='label'>feature:</span> <span class='kw'>self</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
+  <span class='kw'>end</span>
 
   <span class='id identifier rubyid_name'>name</span>
 <span class='kw'>end</span></pre>
@@ -565,7 +573,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Dec  4 22:53:14 2023 by
+  Generated on Tue Dec  5 01:27:27 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.2.2).
 </div>
