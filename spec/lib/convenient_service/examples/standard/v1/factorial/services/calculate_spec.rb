@@ -48,8 +48,8 @@ RSpec.describe ConvenientService::Examples::Standard::V1::Factorial::Services::C
           end
         end
 
-        context "when file with `path` does NOT exist" do
-          let(:number) { 200_000 }
+        context "when `timeout` is exceeded" do
+          let(:number) { 300_000 }
           let(:timeout_seconds) { 1 }
 
           it "returns `error` with `message`" do
