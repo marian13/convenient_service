@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.16.0](https://github.com/marian13/convenient_service/compare/v0.15.0...v0.16.0) (2023-12-05)
+
+
+### Features
+
+* **entry:** allow to use instance method, just like field in graphql-ruby ([ad445fa](https://github.com/marian13/convenient_service/commit/ad445fae5ace9671745b2cacd2f6fae7b5a0e26e))
+
 ## [0.15.0](https://github.com/marian13/convenient_service/compare/v0.14.0...v0.15.0) (2023-11-10)
 
 
