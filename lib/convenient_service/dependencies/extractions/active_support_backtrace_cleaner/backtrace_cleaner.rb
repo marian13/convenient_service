@@ -7,15 +7,17 @@ module ConvenientService
       # @internal
       #   NOTE:
       #     Copied from `rails/rails` without any logic modification.
-      #     Version: v7.0.4.3.
+      #     Version: v7.1.2.
       #     Wrapped in a namespace `ConvenientService::Dependencies::Extractions::ActiveSupportBacktraceCleaner`.
       #
-      #   - https://api.rubyonrails.org/v7.0.4.3/classes/ActiveSupport/BacktraceCleaner.html
-      #   - https://github.com/rails/rails/blob/v7.0.4.3/activesupport/lib/active_support/backtrace_cleaner.rb
+      #   - https://api.rubyonrails.org/v7.1.2/classes/ActiveSupport/BacktraceCleaner.html
+      #   - https://github.com/rails/rails/blob/v7.1.2/activesupport/lib/active_support/backtrace_cleaner.rb
       #   - https://github.com/marian13/rails/blob/main/activesupport/lib/active_support/backtrace_cleaner.rb
       #   - https://github.com/rails/rails
       #
       module ActiveSupportBacktraceCleaner
+        # = Backtrace Cleaner
+        #
         # Backtraces often include many lines that are not relevant for the context
         # under review. This makes it hard to find the signal amongst the backtrace
         # noise, and adds debugging time. With a BacktraceCleaner, filters and
@@ -34,7 +36,7 @@ module ConvenientService
         #   bc.add_silencer { |line| /puma|rubygems/.match?(line) } # skip any lines from puma or rubygems
         #   bc.clean(exception.backtrace) # perform the cleanup
         #
-        # To reconfigure an existing BacktraceCleaner (like the default one in Rails)
+        # To reconfigure an existing BacktraceCleaner (like the default one in \Rails)
         # and show as much data as possible, you can always call
         # BacktraceCleaner#remove_silencers!, which will restore the
         # backtrace to a pristine state. If you need to reconfigure an existing
@@ -67,11 +69,29 @@ module ConvenientService
           end
           alias :filter :clean
 
+          # Returns the frame with all filters applied.
+          # returns +nil+ if the frame was silenced.
+          def clean_frame(frame, kind = :silent)
+            frame = frame.to_s
+            @filters.each do |f|
+              frame = f.call(frame.to_s)
+            end
+
+            case kind
+            when :silent
+              frame unless @silencers.any? { |s| s.call(frame) }
+            when :noise
+              frame if @silencers.any? { |s| s.call(frame) }
+            else
+              frame
+            end
+          end
+
           # Adds a filter from the block provided. Each line in the backtrace will be
           # mapped against this filter.
           #
           #   # Will turn "/my/rails/root/app/models/person.rb" into "/app/models/person.rb"
-          #   backtrace_cleaner.add_filter { |line| line.gsub(Rails.root, '') }
+          #   backtrace_cleaner.add_filter { |line| line.gsub(Rails.root.to_s, '') }
           def add_filter(&block)
             @filters << block
           end
@@ -121,7 +141,7 @@ module ConvenientService
 
             def filter_backtrace(backtrace)
               @filters.each do |f|
-                backtrace = backtrace.map { |line| f.call(line) }
+                backtrace = backtrace.map { |line| f.call(line.to_s) }
               end
 
               backtrace
@@ -129,7 +149,7 @@ module ConvenientService
 
             def silence(backtrace)
               @silencers.each do |s|
-                backtrace = backtrace.reject { |line| s.call(line) }
+                backtrace = backtrace.reject { |line| s.call(line.to_s) }
               end
 
               backtrace
@@ -138,7 +158,7 @@ module ConvenientService
             def noise(backtrace)
               backtrace.select do |line|
                 @silencers.any? do |s|
-                  s.call(line)
+                  s.call(line.to_s)
                 end
               end
             end
