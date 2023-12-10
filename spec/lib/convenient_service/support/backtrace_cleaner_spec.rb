@@ -9,7 +9,7 @@ RSpec.describe ConvenientService::Support::BacktraceCleaner do
   ##
   # example_group "class methods" do
   #   ##
-  #   # NOTE: `.new` is tested indirectly by `add_convenient_service_silencer`.
+  #   # NOTE: `.new` is tested indirectly by `#clean`.
   #   #
   #   describe ".new" do
   #     # ...
@@ -18,13 +18,38 @@ RSpec.describe ConvenientService::Support::BacktraceCleaner do
   #
   example_group "instance methods" do
     let(:backtrace_cleaner) { described_class.new }
-    let(:backtrace) { ["foo", "convenient_service"] }
 
     describe "#clean" do
-      it "calls super" do
-        backtrace_cleaner.clean(backtrace)
+      ##
+      # NOTE: Tested indirectly by the following specs.
+      #
+      # it "calls super" do
+      #   # ...
+      # end
 
-        expect(backtrace_cleaner.clean(backtrace)).to eq(["foo"])
+      ##
+      # - https://github.com/rails/rails/blob/v7.1.2/activesupport/test/clean_backtrace_test.rb#L11https://github.com/rails/rails/blob/v7.1.2/activesupport/test/clean_backtrace_test.rb#L11
+      #
+      it "does NOT filter prefixes" do
+        expect(backtrace_cleaner.clean(["/my/prefix/my/class.rb", "/my/prefix/my/module.rb"])).to eq(["/my/prefix/my/class.rb", "/my/prefix/my/module.rb"])
+      end
+
+      ##
+      # - https://github.com/rails/rails/blob/v7.1.2/activesupport/test/clean_backtrace_test.rb#L105
+      #
+      it "does NOT silence gems" do
+        expect(backtrace_cleaner.clean(["#{Gem.default_dir}/bundler/gems/nosuchgem-1.2.3/lib/foo.rb"])).to eq(["#{Gem.default_dir}/bundler/gems/nosuchgem-1.2.3/lib/foo.rb"])
+      end
+
+      ##
+      # - https://github.com/rails/rails/blob/v7.1.2/activesupport/test/clean_backtrace_test.rb#L111
+      #
+      it "silences stdlib" do
+        expect(backtrace_cleaner.clean(["#{RbConfig::CONFIG["rubylibdir"]}/lib/foo.rb"])).to eq([])
+      end
+
+      it "silences Convenient Service" do
+        expect(backtrace_cleaner.clean(["convenient_service/lib/foo.rb"])).to eq([])
       end
 
       context "when backtrace is `nil`" do

@@ -85,7 +85,7 @@ module ConvenientService
       end
 
       ##
-      # Works exactly in the same way as the original `clean`, except it falls back to an empty array in case of any exceptions inside filters or silencers.
+      # Works exactly in the same way as the original `clean`, except it falls back to the original backtrace in case of any exceptions inside filters or silencers.
       # Also returns an empty array, when `backtrace` is `nil`.
       #
       # @return [Array<String>]
