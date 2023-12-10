@@ -80,6 +80,9 @@ module ConvenientService
       #
       # @return [void]
       #
+      # @internal
+      #   TODO: Specs.
+      #
       def add_convenient_service_silencer
         add_silencer { |line| /convenient_service/.match?(line) }
       end
