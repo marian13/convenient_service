@@ -268,9 +268,6 @@
       <pre class="lines">
 
 
-64
-65
-66
 67
 68
 69
@@ -284,10 +281,13 @@
 77
 78
 79
-80</pre>
+80
+81
+82
+83</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/logger.rb', line 64</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/logger.rb', line 67</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_colored_formatter'>colored_formatter</span>
   <span class='kw'>return</span> <span class='id identifier rubyid_original_formatter'>original_formatter</span> <span class='kw'>unless</span> <span class='const'><span class='object_link'><a href="Dependencies.html" title="ConvenientService::Dependencies (module)">Dependencies</a></span></span><span class='period'>.</span><span class='id identifier rubyid_paint'><span class='object_link'><a href="Dependencies.html#paint-class_method" title="ConvenientService::Dependencies.paint (method)">paint</a></span></span><span class='period'>.</span><span class='id identifier rubyid_loaded?'><span class='object_link'><a href="Support/Gems/Paint.html#loaded%3F-class_method" title="ConvenientService::Support::Gems::Paint.loaded? (method)">loaded?</a></span></span>
@@ -349,16 +349,16 @@
       <pre class="lines">
 
 
-38
-39
-40
 41
 42
 43
-44</pre>
+44
+45
+46
+47</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/logger.rb', line 38</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/logger.rb', line 41</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_new'>new</span>
   <span class='kw'>super</span><span class='lparen'>(</span><span class='op'>::</span><span class='const'>STDOUT</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_tap'>tap</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_logger'><span class='object_link'><a href="../top-level-namespace.html#logger-instance_method" title="#logger (method)">logger</a></span></span><span class='op'>|</span>
@@ -409,12 +409,12 @@
       <pre class="lines">
 
 
-50
-51
-52</pre>
+53
+54
+55</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/logger.rb', line 50</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/logger.rb', line 53</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_original_formatter'>original_formatter</span>
   <span class='op'>::</span><span class='const'>Logger</span><span class='op'>::</span><span class='const'>Formatter</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
@@ -455,9 +455,6 @@
       <pre class="lines">
 
 
-100
-101
-102
 103
 104
 105
@@ -469,10 +466,13 @@
 111
 112
 113
-114</pre>
+114
+115
+116
+117</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/logger.rb', line 100</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/logger.rb', line 103</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_level='>level=</span><span class='lparen'>(</span><span class='id identifier rubyid_severity'>severity</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='const'><span class='object_link'><a href="Dependencies.html" title="ConvenientService::Dependencies (module)">Dependencies</a></span></span><span class='period'>.</span><span class='id identifier rubyid_support_logger_non_integer_levels?'><span class='object_link'><a href="Dependencies.html#support_logger_non_integer_levels%3F-class_method" title="ConvenientService::Dependencies.support_logger_non_integer_levels? (method)">support_logger_non_integer_levels?</a></span></span>
@@ -499,7 +499,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Dec  9 23:28:58 2023 by
+  Generated on Sun Dec 10 00:59:35 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.2.2).
 </div>

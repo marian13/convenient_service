@@ -167,6 +167,29 @@ By default, it uses only <code>add_stdlib_silencer</code> and <code>add_convenie
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#clean-instance_method" title="#clean (instance method)">#<strong>clean</strong>(backtrace, *args)  &#x21d2; Array&lt;String&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Works exactly in the same way as the original <code>clean</code>, except it falls back to an empty array in case of any exceptions inside filters or silencers.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>  &#x21d2; void </a>
     
 
@@ -201,7 +224,7 @@ By default, it uses only <code>add_stdlib_silencer</code> and <code>add_convenie
   
   
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="../Dependencies/Extractions/ActiveSupportBacktraceCleaner/BacktraceCleaner.html" title="ConvenientService::Dependencies::Extractions::ActiveSupportBacktraceCleaner::BacktraceCleaner (class)">Dependencies::Extractions::ActiveSupportBacktraceCleaner::BacktraceCleaner</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="../Dependencies/Extractions/ActiveSupportBacktraceCleaner/BacktraceCleaner.html#add_filter-instance_method" title="ConvenientService::Dependencies::Extractions::ActiveSupportBacktraceCleaner::BacktraceCleaner#add_filter (method)">#add_filter</a></span>, <span class='object_link'><a href="../Dependencies/Extractions/ActiveSupportBacktraceCleaner/BacktraceCleaner.html#add_silencer-instance_method" title="ConvenientService::Dependencies::Extractions::ActiveSupportBacktraceCleaner::BacktraceCleaner#add_silencer (method)">#add_silencer</a></span>, <span class='object_link'><a href="../Dependencies/Extractions/ActiveSupportBacktraceCleaner/BacktraceCleaner.html#clean-instance_method" title="ConvenientService::Dependencies::Extractions::ActiveSupportBacktraceCleaner::BacktraceCleaner#clean (method)">#clean</a></span>, <span class='object_link'><a href="../Dependencies/Extractions/ActiveSupportBacktraceCleaner/BacktraceCleaner.html#clean_frame-instance_method" title="ConvenientService::Dependencies::Extractions::ActiveSupportBacktraceCleaner::BacktraceCleaner#clean_frame (method)">#clean_frame</a></span>, <span class='object_link'><a href="../Dependencies/Extractions/ActiveSupportBacktraceCleaner/BacktraceCleaner.html#remove_filters!-instance_method" title="ConvenientService::Dependencies::Extractions::ActiveSupportBacktraceCleaner::BacktraceCleaner#remove_filters! (method)">#remove_filters!</a></span>, <span class='object_link'><a href="../Dependencies/Extractions/ActiveSupportBacktraceCleaner/BacktraceCleaner.html#remove_silencers!-instance_method" title="ConvenientService::Dependencies::Extractions::ActiveSupportBacktraceCleaner::BacktraceCleaner#remove_silencers! (method)">#remove_silencers!</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="../Dependencies/Extractions/ActiveSupportBacktraceCleaner/BacktraceCleaner.html#add_filter-instance_method" title="ConvenientService::Dependencies::Extractions::ActiveSupportBacktraceCleaner::BacktraceCleaner#add_filter (method)">#add_filter</a></span>, <span class='object_link'><a href="../Dependencies/Extractions/ActiveSupportBacktraceCleaner/BacktraceCleaner.html#add_silencer-instance_method" title="ConvenientService::Dependencies::Extractions::ActiveSupportBacktraceCleaner::BacktraceCleaner#add_silencer (method)">#add_silencer</a></span>, <span class='object_link'><a href="../Dependencies/Extractions/ActiveSupportBacktraceCleaner/BacktraceCleaner.html#clean_frame-instance_method" title="ConvenientService::Dependencies::Extractions::ActiveSupportBacktraceCleaner::BacktraceCleaner#clean_frame (method)">#clean_frame</a></span>, <span class='object_link'><a href="../Dependencies/Extractions/ActiveSupportBacktraceCleaner/BacktraceCleaner.html#remove_filters!-instance_method" title="ConvenientService::Dependencies::Extractions::ActiveSupportBacktraceCleaner::BacktraceCleaner#remove_filters! (method)">#remove_filters!</a></span>, <span class='object_link'><a href="../Dependencies/Extractions/ActiveSupportBacktraceCleaner/BacktraceCleaner.html#remove_silencers!-instance_method" title="ConvenientService::Dependencies::Extractions::ActiveSupportBacktraceCleaner::BacktraceCleaner#remove_silencers! (method)">#remove_silencers!</a></span></p>
 <div id="constructor_details" class="method_details_list">
   <h2>Constructor Details</h2>
   
@@ -339,12 +362,97 @@ This silencer removes all Convenient Service lines from backtraces.</p>
 </table>
 </div>
     
+      <div class="method_details ">
+  <h3 class="signature " id="clean-instance_method">
+  
+    #<strong>clean</strong>(backtrace, *args)  &#x21d2; <tt>Array&lt;String&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Works exactly in the same way as the original <code>clean</code>, except it falls back to an empty array in case of any exceptions inside filters or silencers.
+Also returns an empty array, when <code>backtrace</code> is <code>nil</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://api.rubyonrails.org/classes/ActiveSupport/BacktraceCleaner.html#method-i-clean" target="_parent" title="https://api.rubyonrails.org/classes/ActiveSupport/BacktraceCleaner.html#method-i-clean">https://api.rubyonrails.org/classes/ActiveSupport/BacktraceCleaner.html#method-i-clean</a></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/backtrace_cleaner.rb', line 100</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_clean'>clean</span><span class='lparen'>(</span><span class='id identifier rubyid_backtrace'>backtrace</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_backtrace'>backtrace</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+    <span class='op'>::</span><span class='const'><span class='object_link'><a href="../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='period'>.</span><span class='id identifier rubyid_logger'><span class='object_link'><a href="../../ConvenientService.html#logger-class_method" title="ConvenientService.logger (method)">logger</a></span></span><span class='period'>.</span><span class='id identifier rubyid_warn'>warn</span> <span class='lbrace'>{</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[BacktraceCleaner] `nil` backtrace | Empty array is used as fallback</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span>
+
+    <span class='kw'>return</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>begin</span>
+    <span class='kw'>super</span>
+  <span class='kw'>rescue</span>
+    <span class='op'>::</span><span class='const'><span class='object_link'><a href="../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='period'>.</span><span class='id identifier rubyid_logger'><span class='object_link'><a href="../../ConvenientService.html#logger-class_method" title="ConvenientService.logger (method)">logger</a></span></span><span class='period'>.</span><span class='id identifier rubyid_warn'>warn</span> <span class='lbrace'>{</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[BacktraceCleaner] Some filter or silencer is broken | Original backtrace is used as fallback</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span>
+
+    <span class='id identifier rubyid_backtrace'>backtrace</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
   </div>
 
 </div>
 
       <div id="footer">
-  Generated on Sat Dec  9 23:28:59 2023 by
+  Generated on Sun Dec 10 00:59:35 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.2.2).
 </div>
