@@ -83,6 +83,35 @@ module ConvenientService
       def add_convenient_service_silencer
         add_silencer { |line| /convenient_service/.match?(line) }
       end
+
+      ##
+      # Works exactly in the same way as the original `clean`, except it falls back to an empty array in case of any exceptions inside filters or silencers.
+      # Also returns an empty array, when `backtrace` is `nil`.
+      #
+      # @return [Array<String>]
+      #
+      # @see https://api.rubyonrails.org/classes/ActiveSupport/BacktraceCleaner.html#method-i-clean
+      #
+      # @internal
+      #   IMPORTANT: Sometimes `exception.backtrace` can be `nil`.
+      #   - https://blog.kalina.tech/2019/04/exception-without-backtrace-in-ruby.html
+      #   - https://github.com/jruby/jruby/issues/4467
+      #
+      def clean(backtrace, *args)
+        if backtrace.nil?
+          ::ConvenientService.logger.warn { "[BacktraceCleaner] `nil` backtrace | Empty array is used as fallback" }
+
+          return []
+        end
+
+        begin
+          super
+        rescue
+          ::ConvenientService.logger.warn { "[BacktraceCleaner] Some filter or silencer is broken | Original backtrace is used as fallback" }
+
+          backtrace
+        end
+      end
     end
   end
 end

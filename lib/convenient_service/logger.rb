@@ -14,6 +14,9 @@ module ConvenientService
   ##
   # @internal
   #   TODO: Custom matcher to track log messages.
+  #   TODO: Fallback for logging methods. Just like with `#clean` in backtrace cleaner.
+  #   TODO: Highlight vertical bars.
+  #   TODO: Highlight tag brackets.
   #
   class Logger < ::Logger
     include ::Singleton
@@ -92,7 +95,7 @@ module ConvenientService
     #
     #   NOTE: Early return is NOT used, since it is NOT possible to return custom values from `writer` methods.
     #
-    #   NOTE: `Warning.warn` is chosen over `Kernel.warn` in order to have a simple to track delegation from RSpec.
+    #   NOTE: `Warning.warn` is chosen over `Kernel.warn` in order to have a simple way to track delegation from RSpec.
     #   - https://ruby-doc.org/core-2.7.0/Warning.html#method-i-warn
     #
     # TODO: Tag/prefix for all Convenient Service logs.
