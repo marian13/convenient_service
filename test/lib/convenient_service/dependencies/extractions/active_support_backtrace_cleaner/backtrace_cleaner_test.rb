@@ -36,7 +36,7 @@ class BacktraceCleanerFilterTest < Minitest::Test
   end
 
   should "backtrace should contain unaltered lines if they don't match a filter" do
-    assert_equal "/my/other_prefix/my/class.rb", @bc.clean([ "/my/other_prefix/my/class.rb" ]).first
+    assert_equal "/my/other_prefix/my/class.rb", @bc.clean(["/my/other_prefix/my/class.rb"]).first
   end
 end
 
@@ -48,8 +48,8 @@ class BacktraceCleanerSilencerTest < Minitest::Test
 
   should "backtrace should not contain lines that match the silencer" do
     assert_equal \
-      [ "/other/class.rb" ],
-      @bc.clean([ "/mongrel/class.rb", "/other/class.rb", "/mongrel/stuff.rb" ])
+      ["/other/class.rb"],
+      @bc.clean(["/mongrel/class.rb", "/other/class.rb", "/mongrel/stuff.rb"])
   end
 
   should "backtrace cleaner should allow removing silencer" do
@@ -67,27 +67,27 @@ class BacktraceCleanerMultipleSilencersTest < Minitest::Test
 
   should "backtrace should not contain lines that match the silencers" do
     assert_equal \
-      [ "/other/class.rb" ],
-      @bc.clean([ "/mongrel/class.rb", "/other/class.rb", "/mongrel/stuff.rb", "/other/yolo.rb" ])
+      ["/other/class.rb"],
+      @bc.clean(["/mongrel/class.rb", "/other/class.rb", "/mongrel/stuff.rb", "/other/yolo.rb"])
   end
 
   should "backtrace should only contain lines that match the silencers" do
     assert_equal \
-      [ "/mongrel/class.rb", "/mongrel/stuff.rb", "/other/yolo.rb" ],
-      @bc.clean([ "/mongrel/class.rb", "/other/class.rb", "/mongrel/stuff.rb", "/other/yolo.rb" ],
-                :noise)
+      ["/mongrel/class.rb", "/mongrel/stuff.rb", "/other/yolo.rb"],
+      @bc.clean(["/mongrel/class.rb", "/other/class.rb", "/mongrel/stuff.rb", "/other/yolo.rb"],
+        :noise)
   end
 end
 
 class BacktraceCleanerFilterAndSilencerTest < Minitest::Test
   def setup
     @bc = ConvenientService::Dependencies::Extractions::ActiveSupportBacktraceCleaner::BacktraceCleaner.new
-    @bc.add_filter   { |line| line.gsub("/mongrel", "") }
+    @bc.add_filter { |line| line.gsub("/mongrel", "") }
     @bc.add_silencer { |line| line.include?("mongrel") }
   end
 
   should "backtrace should not silence lines that has first had their silence hook filtered out" do
-    assert_equal [ "/class.rb" ], @bc.clean([ "/mongrel/class.rb" ])
+    assert_equal ["/class.rb"], @bc.clean(["/mongrel/class.rb"])
   end
 end
 
@@ -97,7 +97,7 @@ class BacktraceCleanerDefaultFilterAndSilencerTest < Minitest::Test
   end
 
   should "should format installed gems correctly" do
-    backtrace = [ "#{Gem.default_dir}/gems/nosuchgem-1.2.3/lib/foo.rb" ]
+    backtrace = ["#{Gem.default_dir}/gems/nosuchgem-1.2.3/lib/foo.rb"]
     result = @bc.clean(backtrace, :all)
     assert_equal "nosuchgem (1.2.3) lib/foo.rb", result[0]
   end
@@ -106,20 +106,20 @@ class BacktraceCleanerDefaultFilterAndSilencerTest < Minitest::Test
     target_dir = Gem.path.detect { |p| p != Gem.default_dir }
     # skip this test if default_dir is the only directory on Gem.path
     if target_dir
-      backtrace = [ "#{target_dir}/gems/nosuchgem-1.2.3/lib/foo.rb" ]
+      backtrace = ["#{target_dir}/gems/nosuchgem-1.2.3/lib/foo.rb"]
       result = @bc.clean(backtrace, :all)
       assert_equal "nosuchgem (1.2.3) lib/foo.rb", result[0]
     end
   end
 
   should "should format gems installed by bundler" do
-    backtrace = [ "#{Gem.default_dir}/bundler/gems/nosuchgem-1.2.3/lib/foo.rb" ]
+    backtrace = ["#{Gem.default_dir}/bundler/gems/nosuchgem-1.2.3/lib/foo.rb"]
     result = @bc.clean(backtrace, :all)
     assert_equal "nosuchgem (1.2.3) lib/foo.rb", result[0]
   end
 
   should "should silence gems from the backtrace" do
-    backtrace = [ "#{Gem.path[0]}/gems/nosuchgem-1.2.3/lib/foo.rb" ]
+    backtrace = ["#{Gem.path[0]}/gems/nosuchgem-1.2.3/lib/foo.rb"]
     result = @bc.clean(backtrace)
     assert_empty result
   end
