@@ -87,7 +87,7 @@ module ConvenientService
       # @return [void]
       #
       def add_convenient_service_silencer
-        add_silencer { |line| line.include?(::ConvenientService.root.to_s) && !line.include?(::ConvenientService.examples_root.to_s) }
+        add_silencer { |line| line.start_with?(::ConvenientService.root.to_s) && !line.start_with?(::ConvenientService.examples_root.to_s) }
       end
 
       ##

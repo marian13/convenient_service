@@ -53,18 +53,27 @@ module ConvenientService
     end
 
     ##
+    # Returns Convenient Service root folder. Inspired by `Rails.root`.
+    # For example, it may return something like: `/Users/user/.asdf/installs/ruby/2.7.0/lib/ruby/gems/2.7.0/gems/convenient_service-0.16.0`.
+    #
     # @api public
     #
     # @return [Pathname]
+    #
+    # @see https://ruby-doc.org/core-2.7.1/Kernel.html#method-i-__dir__
+    # @see https://api.rubyonrails.org/classes/Rails.html#method-c-root
     #
     # @internal
     #   TODO: Specs.
     #
     def root
-      @root ||= ::Pathname.new(__dir__)
+      @root ||= ::Pathname.new(::File.expand_path(::File.join(__dir__, "..")))
     end
 
     ##
+    # Returns Convenient Service Examples folder.
+    # For example, it may return something like: `/Users/user/.asdf/installs/ruby/2.7.0/lib/ruby/gems/2.7.0/gems/convenient_service-0.16.0/lib/convenient_service/examples`.
+    #
     # @api private
     #
     # @return [Pathname]
@@ -73,7 +82,7 @@ module ConvenientService
     #   TODO: Specs.
     #
     def examples_root
-      @examples_root ||= ::Pathname.new(::File.join(root, "examples"))
+      @examples_root ||= ::Pathname.new(::File.join(root, "lib", "convenient_service", "examples"))
     end
   end
 end
