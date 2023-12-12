@@ -240,6 +240,13 @@ By default, it uses only <code>add_stdlib_silencer</code> and <code>add_convenie
 </h3><div class="docstring">
   <div class="discussion">
     
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p><code>ConvenientService::Support::BacktraceCleaner</code> intentionally does NOT exclude external gems lines from backtrace.</p>
+</div>
+  </div>
+
+
 
   </div>
 </div>
@@ -261,12 +268,6 @@ By default, it uses only <code>add_stdlib_silencer</code> and <code>add_convenie
       <pre class="lines">
 
 
-28
-29
-30
-31
-32
-33
 34
 35
 36
@@ -278,10 +279,16 @@ By default, it uses only <code>add_stdlib_silencer</code> and <code>add_convenie
 42
 43
 44
-45</pre>
+45
+46
+47
+48
+49
+50
+51</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/backtrace_cleaner.rb', line 28</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/backtrace_cleaner.rb', line 34</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
   <span class='kw'>super</span>
@@ -347,15 +354,15 @@ This silencer removes all Convenient Service lines from backtraces.</p>
       <pre class="lines">
 
 
-86
-87
-88</pre>
+89
+90
+91</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/backtrace_cleaner.rb', line 86</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/backtrace_cleaner.rb', line 89</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_add_convenient_service_silencer'>add_convenient_service_silencer</span>
-  <span class='id identifier rubyid_add_silencer'>add_silencer</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_line'>line</span><span class='op'>|</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>convenient_service</span><span class='regexp_end'>/</span></span><span class='period'>.</span><span class='id identifier rubyid_match?'>match?</span><span class='lparen'>(</span><span class='id identifier rubyid_line'>line</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
+  <span class='id identifier rubyid_add_silencer'>add_silencer</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_line'>line</span><span class='op'>|</span> <span class='id identifier rubyid_line'>line</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='period'>.</span><span class='id identifier rubyid_root'><span class='object_link'><a href="../../ConvenientService.html#root-class_method" title="ConvenientService.root (method)">root</a></span></span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='id identifier rubyid_line'>line</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='period'>.</span><span class='id identifier rubyid_examples_root'><span class='object_link'><a href="../../ConvenientService.html#examples_root-class_method" title="ConvenientService.examples_root (method)">examples_root</a></span></span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -408,9 +415,6 @@ Also returns an empty array, when <code>backtrace</code> is <code>nil</code>.</p
       <pre class="lines">
 
 
-103
-104
-105
 106
 107
 108
@@ -422,10 +426,13 @@ Also returns an empty array, when <code>backtrace</code> is <code>nil</code>.</p
 114
 115
 116
-117</pre>
+117
+118
+119
+120</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/backtrace_cleaner.rb', line 103</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/backtrace_cleaner.rb', line 106</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_clean'>clean</span><span class='lparen'>(</span><span class='id identifier rubyid_backtrace'>backtrace</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_backtrace'>backtrace</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
@@ -452,7 +459,7 @@ Also returns an empty array, when <code>backtrace</code> is <code>nil</code>.</p
 </div>
 
       <div id="footer">
-  Generated on Mon Dec 11 21:59:54 2023 by
+  Generated on Tue Dec 12 00:39:22 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.2.2).
 </div>
