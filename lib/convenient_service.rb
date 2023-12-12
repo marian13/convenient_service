@@ -51,5 +51,29 @@ module ConvenientService
     def logger
       Logger.instance
     end
+
+    ##
+    # @api public
+    #
+    # @return [Pathname]
+    #
+    # @internal
+    #   TODO: Specs.
+    #
+    def root
+      @root ||= ::Pathname.new(__dir__)
+    end
+
+    ##
+    # @api private
+    #
+    # @return [Pathname]
+    #
+    # @internal
+    #   TODO: Specs.
+    #
+    def examples_root
+      @examples_root ||= ::Pathname.new(::File.join(root, "examples"))
+    end
   end
 end

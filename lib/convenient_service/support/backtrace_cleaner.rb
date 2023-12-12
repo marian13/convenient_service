@@ -22,8 +22,14 @@ module ConvenientService
       ##
       # @return [void]
       #
+      # @note `ConvenientService::Support::BacktraceCleaner` intentionally does NOT exclude external gems lines from backtrace.
+      #
       # @see https://api.rubyonrails.org/classes/ActiveSupport/BacktraceCleaner.html
       # @see https://github.com/rails/rails/blob/v7.1.2/activesupport/lib/active_support/backtrace_cleaner.rb#L34
+      #
+      # @internal
+      #   IMPORTANT: Convenient Service integrates with external gems.
+      #   This means that external gems exceptions should NOT be considered as Convenient Service internal exceptions.
       #
       def initialize(...)
         super
@@ -80,11 +86,8 @@ module ConvenientService
       #
       # @return [void]
       #
-      # @internal
-      #   TODO: Specs.
-      #
       def add_convenient_service_silencer
-        add_silencer { |line| /convenient_service/.match?(line) }
+        add_silencer { |line| line.include?(::ConvenientService.root.to_s) && !line.include?(::ConvenientService.examples_root.to_s) }
       end
 
       ##

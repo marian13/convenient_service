@@ -19,6 +19,33 @@ RSpec.describe ConvenientService::Support::BacktraceCleaner do
   example_group "instance methods" do
     let(:backtrace_cleaner) { described_class.new }
 
+    ##
+    # NOTE: Tested by `test/lib/convenient_service/dependencies/extractions/active_support_backtrace_cleaner/backtrace_cleaner_test.rb`.
+    # NOTE: Tested by `#clean`.
+    #
+    # describe "#add_gem_filter" do
+    #   # ...
+    # end
+    #
+    # NOTE: Tested by `test/lib/convenient_service/dependencies/extractions/active_support_backtrace_cleaner/backtrace_cleaner_test.rb`.
+    # NOTE: Tested by `#clean`.
+    #
+    # describe "#add_gem_silencer" do
+    #   # ...
+    # end
+    #
+    # NOTE: Tested by `test/lib/convenient_service/dependencies/extractions/active_support_backtrace_cleaner/backtrace_cleaner_test.rb`.
+    # NOTE: Tested by `#clean`.
+    #
+    # describe "#add_stdlib_silencer" do
+    #   # ...
+    # end
+    #
+    # NOTE: Tested by `#clean`.
+    #
+    # describe "#add_convenient_service_silencer" do
+    # end
+    #
     describe "#clean" do
       ##
       # NOTE: Tested indirectly by the following specs.
@@ -49,7 +76,11 @@ RSpec.describe ConvenientService::Support::BacktraceCleaner do
       end
 
       it "silences Convenient Service" do
-        expect(backtrace_cleaner.clean(["convenient_service/lib/foo.rb"])).to eq([])
+        expect(backtrace_cleaner.clean(["#{ConvenientService.root}/common/foo.rb"])).to eq([])
+      end
+
+      it "does NOT silences Convenient Service examples" do
+        expect(backtrace_cleaner.clean(["#{ConvenientService.root}/examples/foo.rb"])).to eq(["#{ConvenientService.root}/examples/foo.rb"])
       end
 
       context "when backtrace is `nil`" do

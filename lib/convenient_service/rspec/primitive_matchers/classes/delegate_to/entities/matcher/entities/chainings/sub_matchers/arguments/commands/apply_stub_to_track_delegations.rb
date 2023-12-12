@@ -45,6 +45,10 @@ module ConvenientService
                             # NOTE: That is why `and_wrap_original` is used.
                             # https://relishapp.com/rspec/rspec-mocks/docs/configuring-responses/wrapping-the-original-implementation
                             #
+                            # TODO: Check whether `matcher.object.frozen?` in order to show more explanatory exception instead of the following (provide an example of how to avoid it in the exception message):
+                            #   ArgumentError:
+                            #     Cannot proxy frozen objects, rspec-mocks relies on proxies for method stubbing and expectations
+                            #
                             allow(matcher.object).to receive(matcher.method).and_wrap_original do |original, *actual_args, **actual_kwargs, &actual_block|
                               ##
                               # TODO: Add backtrace for easier reason tracing.
