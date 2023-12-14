@@ -84,5 +84,51 @@ module ConvenientService
     def examples_root
       @examples_root ||= ::Pathname.new(::File.join(root, "lib", "convenient_service", "examples"))
     end
+
+    ##
+    # @api public
+    #
+    # @return [ConvenientService::Support::BacktraceCleaner]
+    #
+    # @internal
+    #   TODO: Specs.
+    #
+    def backtrace_cleaner
+      @backtrace_cleaner ||= Support::BacktraceCleaner.new
+    end
+
+    ##
+    # @api public
+    #
+    # @param original_exception [StandardError]
+    #
+    # @raise [StandardError]
+    #
+    # @internal
+    #   NOTE: `rescue ::StandardError => exception` is the same as `rescue => exception`.
+    #   TODO: Specs.
+    #
+    def raise(original_exception)
+      ::Kernel.raise original_exception
+    rescue => exception
+      ::Kernel.raise exception.class, exception.message, backtrace_cleaner.clean(exception.backtrace), cause: exception.cause
+    end
+
+    ##
+    # @api public
+    #
+    # @return [Object] Can be any type.
+    #
+    # @raise [StandardError]
+    #
+    # @internal
+    #   NOTE: `rescue ::StandardError => exception` is the same as `rescue => exception`.
+    #   TODO: Specs.
+    #
+    def reraise
+      yield
+    rescue => exception
+      ::Kernel.raise exception.class, exception.message, backtrace_cleaner.clean(exception.backtrace), cause: exception.cause
+    end
   end
 end
