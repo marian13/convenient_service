@@ -63,9 +63,6 @@ module ConvenientService
     # @see https://ruby-doc.org/core-2.7.1/Kernel.html#method-i-__dir__
     # @see https://api.rubyonrails.org/classes/Rails.html#method-c-root
     #
-    # @internal
-    #   TODO: Specs.
-    #
     def root
       @root ||= ::Pathname.new(::File.expand_path(::File.join(__dir__, "..")))
     end
@@ -78,9 +75,6 @@ module ConvenientService
     #
     # @return [Pathname]
     #
-    # @internal
-    #   TODO: Specs.
-    #
     def examples_root
       @examples_root ||= ::Pathname.new(::File.join(root, "lib", "convenient_service", "examples"))
     end
@@ -89,9 +83,6 @@ module ConvenientService
     # @api public
     #
     # @return [ConvenientService::Support::BacktraceCleaner]
-    #
-    # @internal
-    #   TODO: Specs.
     #
     def backtrace_cleaner
       @backtrace_cleaner ||= Support::BacktraceCleaner.new
