@@ -97,7 +97,6 @@ module ConvenientService
     #
     # @internal
     #   NOTE: `rescue ::StandardError => exception` is the same as `rescue => exception`.
-    #   TODO: Specs.
     #
     def raise(original_exception)
       ::Kernel.raise original_exception
@@ -114,7 +113,6 @@ module ConvenientService
     #
     # @internal
     #   NOTE: `rescue ::StandardError => exception` is the same as `rescue => exception`.
-    #   TODO: Specs.
     #
     def reraise
       yield

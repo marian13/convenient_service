@@ -2,8 +2,9 @@
 
 require "convenient_service"
 
+# rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService do
-  include ConvenientService::RSpec::PrimitiveMatchers::CacheItsValue
+  include described_class::RSpec::PrimitiveMatchers::CacheItsValue
 
   example_group "constants" do
     describe "::VERSION" do
@@ -38,12 +39,114 @@ RSpec.describe ConvenientService do
 
     describe ".backtrace_cleaner" do
       it "returns backtrace cleaner" do
-        expect(described_class.backtrace_cleaner).to be_instance_of(ConvenientService::Support::BacktraceCleaner)
+        expect(described_class.backtrace_cleaner).to be_instance_of(described_class::Support::BacktraceCleaner)
       end
 
       specify do
         expect { described_class.backtrace_cleaner }.to cache_its_value
       end
     end
+
+    describe ".raise" do
+      let(:exception) do
+        raise Class.new(StandardError), "Custom message", ["#{described_class.root}/foo.rb"], cause: Class.new(StandardError).new
+      rescue => error
+        error
+      end
+
+      it "raises `exception` with `class` and `message`" do
+        expect { described_class.raise(exception) }
+          .to raise_error(exception.class)
+          .with_message(exception.message)
+      end
+
+      # rubocop:disable RSpec/MultipleExpectations
+      it "raises `exception` with `cause`" do
+        expect { described_class.raise(exception) }.to raise_error { |error| expect(error.cause.class).to eq(exception.cause.class) }
+      end
+      # rubocop:enable RSpec/MultipleExpectations
+
+      context "when backtrace cleaner has no silencers" do
+        before do
+          allow(described_class).to receive(:backtrace_cleaner).and_return(described_class::Support::BacktraceCleaner.new.tap(&:remove_silencers!))
+        end
+
+        # rubocop:disable RSpec/MultipleExpectations
+        it "does NOT clean `exception` backtrace" do
+          expect { described_class.raise(exception) }.to raise_error { |error| expect(error.backtrace.none? { |line| line.start_with?(described_class.root.to_s) }).to eq(false) }
+        end
+        # rubocop:enable RSpec/MultipleExpectations
+      end
+
+      context "when backtrace cleaner has any silencer" do
+        before do
+          allow(described_class).to receive(:backtrace_cleaner).and_return(described_class::Support::BacktraceCleaner.new.tap(&:add_convenient_service_silencer))
+        end
+
+        # rubocop:disable RSpec/MultipleExpectations
+        it "cleans `exception` backtrace" do
+          expect { described_class.raise(exception) }.to raise_error { |error| expect(error.backtrace.none? { |line| line.start_with?(described_class.root.to_s) }).to eq(true) }
+        end
+        # rubocop:enable RSpec/MultipleExpectations
+      end
+    end
+
+    describe ".reraise" do
+      context "when `block` does NOT raise exception" do
+        let(:block) { proc { value } }
+        let(:value) { :foo }
+
+        it "returns `block` value" do
+          expect(described_class.reraise(&block)).to eq(value)
+        end
+      end
+
+      context "when `block` raises `exception`" do
+        let(:exception) do
+          raise Class.new(StandardError), "Custom message", ["#{described_class.root}/foo.rb"], cause: Class.new(StandardError).new
+        rescue => error
+          error
+        end
+
+        let(:block) { proc { raise exception.class, exception.message, exception.backtrace, cause: exception.cause } }
+
+        it "raises that `exception` with `class` and `message`" do
+          expect { described_class.reraise(&block) }
+            .to raise_error(exception.class)
+            .with_message(exception.message)
+        end
+
+        # rubocop:disable RSpec/MultipleExpectations
+        it "raises that `exception` with `cause`" do
+          expect { described_class.reraise(&block) }.to raise_error { |error| expect(error.cause.class).to eq(exception.cause.class) }
+        end
+        # rubocop:enable RSpec/MultipleExpectations
+
+        context "when backtrace cleaner has no silencers" do
+          before do
+            allow(described_class).to receive(:backtrace_cleaner).and_return(described_class::Support::BacktraceCleaner.new.tap(&:remove_silencers!))
+          end
+
+          # rubocop:disable RSpec/MultipleExpectations
+          it "does NOT clean `exception` backtrace" do
+            expect { described_class.reraise(&block) }.to raise_error { |error| expect(error.backtrace.none? { |line| line.start_with?(described_class.root.to_s) }).to eq(false) }
+          end
+          # rubocop:enable RSpec/MultipleExpectations
+        end
+
+        context "when backtrace cleaner has any silencer" do
+          before do
+            allow(described_class).to receive(:backtrace_cleaner).and_return(described_class::Support::BacktraceCleaner.new.tap(&:add_convenient_service_silencer))
+          end
+
+          # rubocop:disable RSpec/MultipleExpectations
+          it "cleans `exception` backtrace" do
+            expect { described_class.reraise(&block) }.to raise_error { |error| expect(error.backtrace.none? { |line| line.start_with?(described_class.root.to_s) }).to eq(true) }
+          end
+          # rubocop:enable RSpec/MultipleExpectations
+        end
+      end
+    end
   end
 end
+# rubocop:enable RSpec/NestedGroups
