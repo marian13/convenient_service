@@ -173,7 +173,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
             include ConvenientService::Service::Configs::Minimal
 
             def result
-              message <<~TEXT
+              message = <<~TEXT
                 exception message first line
                 exception message second line
                 exception message second line
