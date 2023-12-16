@@ -92,7 +92,7 @@ module ConvenientService
                     #   NOTE: Check the following link in order to get an idea why two versions of `define_method_middlewares_caller` exist.
                     #   - https://gist.github.com/marian13/9c25041f835564e945d978839097d419
                     #
-                    if ConvenientService::Dependencies.ruby.version >= 3.0
+                    if Dependencies.ruby.version >= 3.0
                       def define_method_middlewares_caller
                         <<~RUBY.tap { |code| methods_middlewares_callers.module_eval(code, __FILE__, __LINE__ + 1) }
                           def #{method}(*args, **kwargs, &block)

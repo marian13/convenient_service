@@ -244,6 +244,11 @@ module ConvenientService
         require_relative "dependencies/extractions/byebug_syntax_highlighting" unless ruby.jruby?
 
         require_relative "dependencies/extractions/b" unless ruby.jruby?
+
+        ##
+        #
+        #
+        require_relative "dependencies/extractions/ce"
       end
 
       ##
