@@ -6,6 +6,8 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Core::Concern::ClassMethods do
+  include ConvenientService::RSpec::Helpers::IgnoringException
+
   include ConvenientService::RSpec::Matchers::DelegateTo
   include ConvenientService::RSpec::PrimitiveMatchers::CacheItsValue
 
@@ -230,7 +232,13 @@ RSpec.describe ConvenientService::Core::Concern::ClassMethods do
           ##
           # NOTE: Intentionally calling missed method that won't be included (no concerns with it).
           #
-          expect { service_class.foo }.to raise_error(NoMethodError).with_message("undefined method `foo' for #{service_class}")
+          # NOTE: After the reraising of the original error, `DidYouMean` started to add its suggestions in Ruby 2.7, which is why the `with_message` string is replaced by regex.
+          #
+          expect { service_class.foo }.to raise_error(NoMethodError).with_message(/undefined method `foo' for #{service_class}/)
+        end
+
+        specify do
+          expect { ignoring_exception(NoMethodError) { service_class.foo } }.to delegate_to(ConvenientService, :reraise)
         end
       end
 
@@ -248,6 +256,17 @@ RSpec.describe ConvenientService::Core::Concern::ClassMethods do
           # NOTE: Intentionally calling missed method that won't be included (no concerns with it), but has middlewares.
           #
           expect { service_class.foo }.to raise_error(NoMethodError).with_message("super: no superclass method `foo' for #{service_class}")
+        end
+
+        if ConvenientService::Dependencies.ruby.version >= 3.0
+          ##
+          # NOTE: Check the following files/links in order to get an idea why this spec is NOT working for Ruby 2.7.
+          # - `lib/convenient_service/core/entities/config/entities/method_middlewares/entities/caller/commands/define_method_middlewares_caller.rb`
+          # - https://gist.github.com/marian13/9c25041f835564e945d978839097d419
+          #
+          specify do
+            expect { ignoring_exception(NoMethodError) { service_class.foo } }.to delegate_to(ConvenientService, :reraise)
+          end
         end
       end
     end
@@ -276,9 +295,12 @@ RSpec.describe ConvenientService::Core::Concern::ClassMethods do
       end
 
       it "is private" do
+        ##
+        # NOTE: After the reraising of the original error, `DidYouMean` started to add its suggestions in Ruby 2.7, which is why the `with_message` string is replaced by regex.
+        #
         expect { service_class.respond_to_missing?(method_name, include_private) }
           .to raise_error(NoMethodError)
-          .with_message("private method `respond_to_missing?' called for #{service_class}")
+          .with_message(/private method `respond_to_missing\?' called for #{service_class}/)
       end
 
       context "when `include_private` is `false`" do
