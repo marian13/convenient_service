@@ -90,7 +90,7 @@ RSpec.describe ConvenientService::Core::Concern::InstanceMethods do
         ##
         # NOTE: Intentionally calling missed method that won't be included (no concerns with it).
         #
-        # NOTE: After the reraising of the original error, `DidYouMean` started to add its suggestions in Ruby 2.7, which is why the `with_message` string is replaced by regex.
+        # NOTE: Depending on the `did_you_mean` version, an additional line may be added to the exception message, which is why the `with_message` string is replaced by regex.
         #
         expect { service_instance.foo }.to raise_error(NoMethodError).with_message(/undefined method `foo' for #{service_instance}/)
       end
@@ -113,7 +113,9 @@ RSpec.describe ConvenientService::Core::Concern::InstanceMethods do
         ##
         # NOTE: Intentionally calling missed method that won't be included (no concerns with it), but has middlewares.
         #
-        expect { service_instance.foo }.to raise_error(NoMethodError).with_message("super: no superclass method `foo' for #{service_instance}")
+        # NOTE: Depending on the `did_you_mean` version, an additional line may be added to the exception message, which is why the `with_message` string is replaced by regex.
+        #
+        expect { service_instance.foo }.to raise_error(NoMethodError).with_message(/super: no superclass method `foo' for #{service_instance}/)
       end
 
       if ConvenientService::Dependencies.ruby.version >= 3.0
@@ -152,7 +154,7 @@ RSpec.describe ConvenientService::Core::Concern::InstanceMethods do
 
     it "is private" do
       ##
-      # NOTE: After the reraising of the original error, `DidYouMean` started to add its suggestions in Ruby 2.7, which is why the `with_message` string is replaced by regex.
+      # NOTE: Depending on the `did_you_mean` version, an additional line may be added to the exception message, which is why the `with_message` string is replaced by regex.
       #
       expect { service_instance.respond_to_missing?(method_name, include_private) }
         .to raise_error(NoMethodError)
