@@ -48,10 +48,26 @@ RSpec.describe ConvenientService do
     end
 
     describe ".raise" do
-      let(:exception) do
-        raise Class.new(StandardError), "Custom message", ["#{described_class.root}/foo.rb"], cause: Class.new(StandardError).new
-      rescue => error
-        error
+      ##
+      # IMPORTANT: CRuby `Kernel.raise` supports `cause` keyword starting from 2.6.
+      # JRuby 9.4 says that it is Ruby 3.1 compatible, but it still does NOT support `cause` keyword.
+      # - https://ruby-doc.org/core-2.5.0/Kernel.html#method-i-raise
+      # - https://ruby-doc.org/core-2.6/Kernel.html#method-i-raise
+      # - https://github.com/jruby/jruby/blob/9.4.0.0/core/src/main/java/org/jruby/RubyKernel.java#L881
+      # - https://github.com/ruby/spec/blob/master/core/kernel/raise_spec.rb#L5
+      #
+      if ConvenientService::Dependencies.ruby.jruby?
+        let(:exception) do
+          raise Class.new(StandardError), "Custom message", ["#{described_class.root}/foo.rb"]
+        rescue => error
+          error
+        end
+      else
+        let(:exception) do
+          raise Class.new(StandardError), "Custom message", ["#{described_class.root}/foo.rb"], cause: Class.new(StandardError).new
+        rescue => error
+          error
+        end
       end
 
       it "raises `exception` with `class` and `message`" do
@@ -60,11 +76,13 @@ RSpec.describe ConvenientService do
           .with_message(exception.message)
       end
 
-      # rubocop:disable RSpec/MultipleExpectations
-      it "raises `exception` with `cause`" do
-        expect { described_class.raise(exception) }.to raise_error { |error| expect(error.cause.class).to eq(exception.cause.class) }
+      if !ConvenientService::Dependencies.ruby.jruby?
+        # rubocop:disable RSpec/MultipleExpectations
+        it "raises `exception` with `cause`" do
+          expect { described_class.raise(exception) }.to raise_error { |error| expect(error.cause.class).to eq(exception.cause.class) }
+        end
+        # rubocop:enable RSpec/MultipleExpectations
       end
-      # rubocop:enable RSpec/MultipleExpectations
 
       context "when backtrace cleaner has no silencers" do
         before do
@@ -102,13 +120,31 @@ RSpec.describe ConvenientService do
       end
 
       context "when `block` raises `exception`" do
-        let(:exception) do
-          raise Class.new(StandardError), "Custom message", ["#{described_class.root}/foo.rb"], cause: Class.new(StandardError).new
-        rescue => error
-          error
-        end
+        ##
+        # IMPORTANT: CRuby `Kernel.raise` supports `cause` keyword starting from 2.6.
+        # JRuby 9.4 says that it is Ruby 3.1 compatible, but it still does NOT support `cause` keyword.
+        # - https://ruby-doc.org/core-2.5.0/Kernel.html#method-i-raise
+        # - https://ruby-doc.org/core-2.6/Kernel.html#method-i-raise
+        # - https://github.com/jruby/jruby/blob/9.4.0.0/core/src/main/java/org/jruby/RubyKernel.java#L881
+        # - https://github.com/ruby/spec/blob/master/core/kernel/raise_spec.rb#L5
+        #
+        if ConvenientService::Dependencies.ruby.jruby?
+          let(:exception) do
+            raise Class.new(StandardError), "Custom message", ["#{described_class.root}/foo.rb"]
+          rescue => error
+            error
+          end
 
-        let(:block) { proc { raise exception.class, exception.message, exception.backtrace, cause: exception.cause } }
+          let(:block) { proc { raise exception.class, exception.message, exception.backtrace } }
+        else
+          let(:exception) do
+            raise Class.new(StandardError), "Custom message", ["#{described_class.root}/foo.rb"], cause: Class.new(StandardError).new
+          rescue => error
+            error
+          end
+
+          let(:block) { proc { raise exception.class, exception.message, exception.backtrace, cause: exception.cause } }
+        end
 
         it "raises that `exception` with `class` and `message`" do
           expect { described_class.reraise(&block) }
@@ -116,11 +152,13 @@ RSpec.describe ConvenientService do
             .with_message(exception.message)
         end
 
-        # rubocop:disable RSpec/MultipleExpectations
-        it "raises that `exception` with `cause`" do
-          expect { described_class.reraise(&block) }.to raise_error { |error| expect(error.cause.class).to eq(exception.cause.class) }
+        if !ConvenientService::Dependencies.ruby.jruby?
+          # rubocop:disable RSpec/MultipleExpectations
+          it "raises that `exception` with `cause`" do
+            expect { described_class.reraise(&block) }.to raise_error { |error| expect(error.cause.class).to eq(exception.cause.class) }
+          end
+          # rubocop:enable RSpec/MultipleExpectations
         end
-        # rubocop:enable RSpec/MultipleExpectations
 
         context "when backtrace cleaner has no silencers" do
           before do

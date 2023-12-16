@@ -98,10 +98,25 @@ module ConvenientService
     # @internal
     #   NOTE: `rescue ::StandardError => exception` is the same as `rescue => exception`.
     #
-    def raise(original_exception)
-      ::Kernel.raise original_exception
-    rescue => exception
-      ::Kernel.raise exception.class, exception.message, backtrace_cleaner.clean(exception.backtrace), cause: exception.cause
+    #   IMPORTANT: CRuby `Kernel.raise` supports `cause` keyword starting from 2.6.
+    #   JRuby 9.4 says that it is Ruby 3.1 compatible, but it still does NOT support `cause` keyword.
+    #   - https://ruby-doc.org/core-2.5.0/Kernel.html#method-i-raise
+    #   - https://ruby-doc.org/core-2.6/Kernel.html#method-i-raise
+    #   - https://github.com/jruby/jruby/blob/9.4.0.0/core/src/main/java/org/jruby/RubyKernel.java#L881
+    #   - https://github.com/ruby/spec/blob/master/core/kernel/raise_spec.rb#L5
+    #
+    if Dependencies.ruby.jruby?
+      def raise(original_exception)
+        ::Kernel.raise original_exception
+      rescue => exception
+        ::Kernel.raise exception.class, exception.message, backtrace_cleaner.clean(exception.backtrace)
+      end
+    else
+      def raise(original_exception)
+        ::Kernel.raise original_exception
+      rescue => exception
+        ::Kernel.raise exception.class, exception.message, backtrace_cleaner.clean(exception.backtrace), cause: exception.cause
+      end
     end
 
     ##
@@ -114,10 +129,25 @@ module ConvenientService
     # @internal
     #   NOTE: `rescue ::StandardError => exception` is the same as `rescue => exception`.
     #
-    def reraise
-      yield
-    rescue => exception
-      ::Kernel.raise exception.class, exception.message, backtrace_cleaner.clean(exception.backtrace), cause: exception.cause
+    #   IMPORTANT: CRuby `Kernel.raise` supports `cause` keyword starting from 2.6.
+    #   JRuby 9.4 says that it is Ruby 3.1 compatible, but it still does NOT support `cause` keyword.
+    #   - https://ruby-doc.org/core-2.5.0/Kernel.html#method-i-raise
+    #   - https://ruby-doc.org/core-2.6/Kernel.html#method-i-raise
+    #   - https://github.com/jruby/jruby/blob/9.4.0.0/core/src/main/java/org/jruby/RubyKernel.java#L881
+    #   - https://github.com/ruby/spec/blob/master/core/kernel/raise_spec.rb#L5
+    #
+    if Dependencies.ruby.jruby?
+      def reraise
+        yield
+      rescue => exception
+        ::Kernel.raise exception.class, exception.message, backtrace_cleaner.clean(exception.backtrace)
+      end
+    else
+      def reraise
+        yield
+      rescue => exception
+        ::Kernel.raise exception.class, exception.message, backtrace_cleaner.clean(exception.backtrace), cause: exception.cause
+      end
     end
   end
 end
