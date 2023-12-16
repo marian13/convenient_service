@@ -62,7 +62,7 @@ module ConvenientService
         def method_missing(method, *args, **kwargs, &block)
           self.class.commit_config!(trigger: Constants::Triggers::INSTANCE_METHOD_MISSING)
 
-          return super unless Utils::Module.instance_method_defined?(self.class, method, public: true, protected: false, private: false)
+          return ::ConvenientService.reraise { super } unless Utils::Module.instance_method_defined?(self.class, method, public: true, protected: false, private: false)
 
           return super if self.class.middlewares(method, scope: :instance).defined_without_super_method?
 

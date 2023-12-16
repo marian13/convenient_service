@@ -6,6 +6,8 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Core::Concern::InstanceMethods do
+  include ConvenientService::RSpec::Helpers::IgnoringException
+
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   let(:service_class) do
@@ -88,7 +90,13 @@ RSpec.describe ConvenientService::Core::Concern::InstanceMethods do
         ##
         # NOTE: Intentionally calling missed method that won't be included (no concerns with it).
         #
-        expect { service_instance.foo }.to raise_error(NoMethodError).with_message("undefined method `foo' for #{service_instance}")
+        # NOTE: After the reraising of the original error, `DidYouMean` started to add its suggestions in Ruby 2.7, which is why the `with_message` string is replaced by regex.
+        #
+        expect { service_instance.foo }.to raise_error(NoMethodError).with_message(/undefined method `foo' for #{service_instance}/)
+      end
+
+      specify do
+        expect { ignoring_exception(NoMethodError) { service_instance.foo } }.to delegate_to(ConvenientService, :reraise)
       end
     end
 
@@ -132,9 +140,12 @@ RSpec.describe ConvenientService::Core::Concern::InstanceMethods do
     end
 
     it "is private" do
+      ##
+      # NOTE: After the reraising of the original error, `DidYouMean` started to add its suggestions in Ruby 2.7, which is why the `with_message` string is replaced by regex.
+      #
       expect { service_instance.respond_to_missing?(method_name, include_private) }
         .to raise_error(NoMethodError)
-        .with_message("private method `respond_to_missing?' called for #{service_instance}")
+        .with_message(/private method `respond_to_missing\?' called for #{service_instance}/)
     end
 
     context "when `include_private` is `false`" do
