@@ -115,6 +115,17 @@ RSpec.describe ConvenientService::Core::Concern::InstanceMethods do
         #
         expect { service_instance.foo }.to raise_error(NoMethodError).with_message("super: no superclass method `foo' for #{service_instance}")
       end
+
+      if ConvenientService::Dependencies.ruby.version >= 3.0
+        ##
+        # NOTE: Check the following files/links in order to get an idea why this spec is NOT working for Ruby 2.7.
+        # - `lib/convenient_service/core/entities/config/entities/method_middlewares/entities/caller/commands/define_method_middlewares_caller.rb`
+        # - https://gist.github.com/marian13/9c25041f835564e945d978839097d419
+        #
+        specify do
+          expect { ignoring_exception(NoMethodError) { service_instance.foo } }.to delegate_to(ConvenientService, :reraise)
+        end
+      end
     end
   end
 

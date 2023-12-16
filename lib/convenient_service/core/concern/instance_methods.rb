@@ -59,12 +59,16 @@ module ConvenientService
         #
         #   TODO: Include `method` into trigger metadata.
         #
+        #   IMPORTANT: Ruby 2.7 and Ruby 3.0+ invoke this `method_missing` differently, check the following files/links:
+        #   - `lib/convenient_service/core/entities/config/entities/method_middlewares/entities/caller/commands/define_method_middlewares_caller.rb`
+        #   - https://gist.github.com/marian13/9c25041f835564e945d978839097d419
+        #
         def method_missing(method, *args, **kwargs, &block)
           self.class.commit_config!(trigger: Constants::Triggers::INSTANCE_METHOD_MISSING)
 
           return ::ConvenientService.reraise { super } unless Utils::Module.instance_method_defined?(self.class, method, public: true, protected: false, private: false)
 
-          return super if self.class.middlewares(method, scope: :instance).defined_without_super_method?
+          return ::ConvenientService.reraise { super } if self.class.middlewares(method, scope: :instance).defined_without_super_method?
 
           ConvenientService.logger.debug { "[Core] Committed config for `#{self.class}` | Triggered by `method_missing` | Method: `##{method}`" }
 
