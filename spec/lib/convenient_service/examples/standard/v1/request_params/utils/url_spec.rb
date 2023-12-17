@@ -9,7 +9,7 @@ RSpec.describe ConvenientService::Examples::Standard::V1::RequestParams::Utils::
 
   example_group "class methods" do
     describe ".valid?" do
-      let(:url) { "https://marian13.github.io/convenient_service_docs" }
+      let(:url) { "https://userdocs.convenientservice.org" }
 
       specify do
         expect { described_class.valid?(url) }

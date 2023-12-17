@@ -12,10 +12,10 @@ module ConvenientService
             # @api public
             #
             # @note May be useful for debugging purposes.
-            # @see https://marian13.github.io/convenient_service_docs/guides/how_to_debug_services_via_callbacks
+            # @see https://userdocs.convenientservice.org/guides/how_to_debug_services_via_callbacks
             #
             # @note `steps` are frozen.
-            # @see https://marian13.github.io/convenient_service_docs/faq#is-it-possible-to-modify-the-step-collection-from-a-callback
+            # @see https://userdocs.convenientservice.org/faq#is-it-possible-to-modify-the-step-collection-from-a-callback
             #
             # @return [Array<ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step>]
             #
@@ -62,7 +62,7 @@ module ConvenientService
 
             ##
             # Allows to pass a value to `in` method without its intermediate processing.
-            # @see https://marian13.github.io/convenient_service_docs/basics/step_to_result_translation_table
+            # @see https://userdocs.convenientservice.org/basics/step_to_result_translation_table
             #
             # @example `:chat_v2` is passed to `AssertFeatureEnabled` as it is.
             #   step AssertFeatureEnabled, in: {name: raw(:chat_v2)}

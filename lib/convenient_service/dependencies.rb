@@ -135,7 +135,7 @@ module ConvenientService
       # @return [Boolean]
       # @note Expected to be called from app entry points like `initializers` in Rails.
       #
-      # @see https://marian13.github.io/convenient_service_docs/troubleshooting/i18n_translate_wrong_number_of_arguments
+      # @see https://userdocs.convenientservice.org/troubleshooting/i18n_translate_wrong_number_of_arguments
       #
       def require_has_j_send_result_params_validations_using_active_model_validations
         ##
