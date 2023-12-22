@@ -172,6 +172,15 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       end
     end
 
+    describe "#to_bool" do
+      specify do
+        expect { result_instance.to_bool }
+          .to delegate_to(result_instance.status, :to_bool)
+          .without_arguments
+          .and_return_its_value
+      end
+    end
+
     describe "#==" do
       let(:result) { result_class.new(**params) }
 

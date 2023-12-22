@@ -262,6 +262,58 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           expect { status.to_sym }.to cache_its_value
         end
       end
+
+      describe "#to_bool" do
+        context "when `value` is NOT valid" do
+          let(:value) { :foo }
+
+          it "returns `nil`" do
+            expect(status.to_bool).to be_nil
+          end
+
+          specify do
+            expect { status.to_bool }.to cache_its_value
+          end
+        end
+
+        context "when `value` is valid" do
+          context "when `value` is `:success`" do
+            let(:value) { :success }
+
+            it "returns `true`" do
+              expect(status.to_bool).to eq(true)
+            end
+
+            specify do
+              expect { status.to_bool }.to cache_its_value
+            end
+          end
+
+          context "when `value` is `:failure`" do
+            let(:value) { :failure }
+
+            it "returns `false`" do
+              expect(status.to_bool).to eq(false)
+            end
+
+            specify do
+              expect { status.to_bool }.to cache_its_value
+            end
+          end
+
+          context "when `value` is `:error`" do
+            let(:value) { :error }
+
+            it "returns `nil`" do
+              expect(status.to_bool).to be_nil
+            end
+
+            specify do
+              expect { status.to_bool }.to cache_its_value
+            end
+          end
+        end
+      end
     end
   end
 end

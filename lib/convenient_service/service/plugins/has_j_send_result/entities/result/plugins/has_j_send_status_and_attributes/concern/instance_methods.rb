@@ -165,6 +165,13 @@ module ConvenientService
                         **extra_kwargs
                       )
                     end
+
+                    ##
+                    # @return [Boolean, nil]
+                    #
+                    def to_bool
+                      status.to_bool
+                    end
                   end
                 end
               end

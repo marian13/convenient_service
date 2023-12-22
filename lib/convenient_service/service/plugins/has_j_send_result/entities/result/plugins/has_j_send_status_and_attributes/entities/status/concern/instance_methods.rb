@@ -126,6 +126,20 @@ module ConvenientService
                         def to_sym
                           @to_sym ||= value.to_sym
                         end
+
+                        ##
+                        # @return [Boolean, nil]
+                        #
+                        def to_bool
+                          return @to_bool if defined? @to_bool
+
+                          @to_bool =
+                            case value
+                            when :success then true
+                            when :failure then false
+                            when :error then nil
+                            end
+                        end
                       end
                     end
                   end
