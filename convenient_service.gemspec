@@ -72,10 +72,13 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "byebug", "~> 10.0" unless ConvenientService::Support::Ruby.jruby?
 
   ##
+  # Used for parsing Markdown in YARD docs.
+  # - https://github.com/gjtorikian/commonmarker
+  #
   # NOTE: `commonmarker` has C extensions, that is why it is NOT supported in JRuby.
   # - https://github.com/gjtorikian/commonmarker/tree/main/ext/commonmarker
   #
-  spec.add_development_dependency "commonmarker" unless ConvenientService::Support::Ruby.jruby?
+  spec.add_development_dependency "commonmarker", "~> 0.23.10" unless ConvenientService::Support::Ruby.jruby?
 
   ##
   # Used for debugging CRuby code.
