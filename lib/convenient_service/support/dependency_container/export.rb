@@ -11,7 +11,7 @@ module ConvenientService
         # @return [Module]
         #
         included do |klass|
-          raise Exceptions::NotModule.new(klass: klass) unless klass.instance_of?(::Module)
+          ::ConvenientService.raise Exceptions::NotModule.new(klass: klass) unless klass.instance_of?(::Module)
         end
 
         class_methods do

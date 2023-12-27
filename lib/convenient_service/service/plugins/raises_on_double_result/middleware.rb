@@ -48,7 +48,7 @@ module ConvenientService
           def refute_has_j_send_result!
             return unless entity.internals.cache.exist?(:has_j_send_result)
 
-            raise Exceptions::DoubleResult.new(service: entity)
+            ::ConvenientService.raise Exceptions::DoubleResult.new(service: entity)
           end
 
           ##

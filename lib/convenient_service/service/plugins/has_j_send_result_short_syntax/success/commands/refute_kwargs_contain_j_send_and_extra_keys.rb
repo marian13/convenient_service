@@ -56,7 +56,7 @@ module ConvenientService
 
                 return if kwargs.keys.difference([:data, :message, :code]).none?
 
-                raise Exceptions::KwargsContainJSendAndExtraKeys.new
+                ::ConvenientService.raise Exceptions::KwargsContainJSendAndExtraKeys.new
               end
             end
           end

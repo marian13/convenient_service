@@ -23,7 +23,7 @@ module ConvenientService
             # @raise [ConvenientService::Service::Plugins::HasResult::Exceptions::ResultIsNotOverridden]
             #
             def result
-              raise Exceptions::ResultIsNotOverridden.new(service: self)
+              ::ConvenientService.raise Exceptions::ResultIsNotOverridden.new(service: self)
             end
           end
         end

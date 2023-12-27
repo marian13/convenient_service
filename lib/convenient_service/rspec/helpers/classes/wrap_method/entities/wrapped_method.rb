@@ -132,7 +132,7 @@ module ConvenientService
               # @raise [ConvenientService::RSpec::Helpers::Classes::WrapMethod::Exceptions::ChainAttributePreliminaryAccess]
               #
               def chain_value
-                raise Exceptions::ChainAttributePreliminaryAccess.new(attribute: :value) unless chain_called?
+                ::ConvenientService.raise Exceptions::ChainAttributePreliminaryAccess.new(attribute: :value) unless chain_called?
 
                 @chain_value
               end
@@ -142,7 +142,7 @@ module ConvenientService
               # @raise [ConvenientService::RSpec::Helpers::Classes::WrapMethod::Exceptions::ChainAttributePreliminaryAccess]
               #
               def chain_args
-                raise Exceptions::ChainAttributePreliminaryAccess.new(attribute: :args) unless chain_called?
+                ::ConvenientService.raise Exceptions::ChainAttributePreliminaryAccess.new(attribute: :args) unless chain_called?
 
                 @chain_arguments.args
               end
@@ -152,7 +152,7 @@ module ConvenientService
               # @raise [ConvenientService::RSpec::Helpers::Classes::WrapMethod::Exceptions::ChainAttributePreliminaryAccess]
               #
               def chain_kwargs
-                raise Exceptions::ChainAttributePreliminaryAccess.new(attribute: :kwargs) unless chain_called?
+                ::ConvenientService.raise Exceptions::ChainAttributePreliminaryAccess.new(attribute: :kwargs) unless chain_called?
 
                 @chain_arguments.kwargs
               end
@@ -162,7 +162,7 @@ module ConvenientService
               # @raise [ConvenientService::RSpec::Helpers::Classes::WrapMethod::Exceptions::ChainAttributePreliminaryAccess]
               #
               def chain_block
-                raise Exceptions::ChainAttributePreliminaryAccess.new(attribute: :block) unless chain_called?
+                ::ConvenientService.raise Exceptions::ChainAttributePreliminaryAccess.new(attribute: :block) unless chain_called?
 
                 @chain_arguments.block
               end
@@ -172,7 +172,7 @@ module ConvenientService
               # @raise [ConvenientService::RSpec::Helpers::Classes::WrapMethod::Exceptions::ChainAttributePreliminaryAccess]
               #
               def chain_exception
-                raise Exceptions::ChainAttributePreliminaryAccess.new(attribute: :exception) unless chain_called?
+                ::ConvenientService.raise Exceptions::ChainAttributePreliminaryAccess.new(attribute: :exception) unless chain_called?
 
                 @chain_exception
               end

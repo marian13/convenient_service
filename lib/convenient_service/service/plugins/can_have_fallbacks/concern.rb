@@ -14,7 +14,7 @@ module ConvenientService
             # @raise [ConvenientService::Service::Plugins::CanHaveFallbacks::Exceptions::FallbackResultIsNotOverridden]
             #
             def fallback_failure_result
-              raise Exceptions::FallbackResultIsNotOverridden.new(service: self, status: :failure)
+              ::ConvenientService.raise Exceptions::FallbackResultIsNotOverridden.new(service: self, status: :failure)
             end
 
             ##
@@ -23,7 +23,7 @@ module ConvenientService
             # @raise [ConvenientService::Service::Plugins::CanHaveFallbacks::Exceptions::FallbackResultIsNotOverridden]
             #
             def fallback_error_result
-              raise Exceptions::FallbackResultIsNotOverridden.new(service: self, status: :error)
+              ::ConvenientService.raise Exceptions::FallbackResultIsNotOverridden.new(service: self, status: :error)
             end
           end
 

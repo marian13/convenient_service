@@ -61,7 +61,7 @@ module ConvenientService
                 # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::MethodHasNoOrganizer]
                 #
                 def organizer(raise_when_missing: true)
-                  raise Exceptions::MethodHasNoOrganizer.new(method: self) if @organizer.nil? && raise_when_missing
+                  ::ConvenientService.raise Exceptions::MethodHasNoOrganizer.new(method: self) if @organizer.nil? && raise_when_missing
 
                   @organizer
                 end

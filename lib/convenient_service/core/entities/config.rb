@@ -162,7 +162,7 @@ module ConvenientService
         def assert_not_committed!
           return unless committed?
 
-          raise Exceptions::ConfigIsCommitted.new(config: self)
+          ::ConvenientService.raise Exceptions::ConfigIsCommitted.new(config: self)
         end
       end
     end

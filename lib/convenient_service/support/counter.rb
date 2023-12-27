@@ -123,7 +123,7 @@ module ConvenientService
       #   - https://api.rubyonrails.org/classes/ActiveRecord/Persistence.html#method-i-save-21
       #
       def increment!(n = 1)
-        raise Exceptions::ValueAfterIncrementIsGreaterThanMaxValue.new(n: n, current_value: @current_value, max_value: @max_value) if @current_value + n > @max_value
+        ::ConvenientService.raise Exceptions::ValueAfterIncrementIsGreaterThanMaxValue.new(n: n, current_value: @current_value, max_value: @max_value) if @current_value + n > @max_value
 
         @current_value += n
       end
@@ -176,7 +176,7 @@ module ConvenientService
       #   - https://api.rubyonrails.org/classes/ActiveRecord/Persistence.html#method-i-save-21
       #
       def decrement!(n = 1)
-        raise Exceptions::ValueAfterDecrementIsLowerThanMinValue.new(n: n, current_value: @current_value, min_value: @min_value) if @current_value - n < @min_value
+        ::ConvenientService.raise Exceptions::ValueAfterDecrementIsLowerThanMinValue.new(n: n, current_value: @current_value, min_value: @min_value) if @current_value - n < @min_value
 
         @current_value -= n
       end

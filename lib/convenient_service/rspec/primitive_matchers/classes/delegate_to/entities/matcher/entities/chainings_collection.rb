@@ -136,7 +136,7 @@ module ConvenientService
                   # @raise [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Exceptions::ReturnItsValueChainingIsAlreadySet]
                   #
                   def call_original=(chaining)
-                    raise Exceptions::CallOriginalChainingIsAlreadySet.new if @call_original
+                    ::ConvenientService.raise Exceptions::CallOriginalChainingIsAlreadySet.new if @call_original
 
                     @call_original = chaining
                   end
@@ -146,7 +146,7 @@ module ConvenientService
                   # @raise [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Exceptions::ArgumentsChainingIsAlreadySet]
                   #
                   def arguments=(chaining)
-                    raise Exceptions::ArgumentsChainingIsAlreadySet.new if @arguments
+                    ::ConvenientService.raise Exceptions::ArgumentsChainingIsAlreadySet.new if @arguments
 
                     @arguments = chaining
                   end
@@ -156,7 +156,7 @@ module ConvenientService
                   # @raise [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Exceptions::ReturnItsValueChainingIsAlreadySet]
                   #
                   def return_its_value=(chaining)
-                    raise Exceptions::ReturnItsValueChainingIsAlreadySet.new if @return_its_value
+                    ::ConvenientService.raise Exceptions::ReturnItsValueChainingIsAlreadySet.new if @return_its_value
 
                     @return_its_value = chaining
                   end

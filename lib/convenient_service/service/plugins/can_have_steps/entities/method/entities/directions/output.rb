@@ -10,7 +10,7 @@ module ConvenientService
               module Directions
                 class Output < Base
                   def validate_as_input_for_container!(container, method:)
-                    raise Exceptions::MethodIsNotInputMethod.new(method: method, container: container)
+                    ::ConvenientService.raise Exceptions::MethodIsNotInputMethod.new(method: method, container: container)
                   end
 
                   def validate_as_output_for_container!(container, method:)

@@ -15,7 +15,7 @@ module ConvenientService
           def next(...)
             fallback_result = chain.next(...)
 
-            raise Exceptions::ServiceFallbackReturnValueNotSuccess.new(service: entity, result: fallback_result, status: status) unless fallback_result.success?
+            ::ConvenientService.raise Exceptions::ServiceFallbackReturnValueNotSuccess.new(service: entity, result: fallback_result, status: status) unless fallback_result.success?
 
             fallback_result.copy(overrides: {kwargs: {method => true}})
               .tap { |result| result.success? }

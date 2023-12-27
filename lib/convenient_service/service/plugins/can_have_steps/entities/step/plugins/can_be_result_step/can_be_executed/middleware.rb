@@ -24,7 +24,7 @@ module ConvenientService
 
                       return own_method.call if own_method
 
-                      raise Exceptions::MethodForStepIsNotDefined.new(service_class: organizer.class, method_name: method_name)
+                      ::ConvenientService.raise Exceptions::MethodForStepIsNotDefined.new(service_class: organizer.class, method_name: method_name)
                     end
 
                     private

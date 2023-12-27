@@ -14,11 +14,11 @@ module ConvenientService
                   end
 
                   def validate_as_output_for_container!(container, method:)
-                    raise Exceptions::MethodIsNotOutputMethod.new(method: method, container: container)
+                    ::ConvenientService.raise Exceptions::MethodIsNotOutputMethod.new(method: method, container: container)
                   end
 
                   def define_output_in_container!(container, index:, method:)
-                    raise Exceptions::MethodIsNotOutputMethod.new(method: method, container: container)
+                    ::ConvenientService.raise Exceptions::MethodIsNotOutputMethod.new(method: method, container: container)
                   end
                 end
               end

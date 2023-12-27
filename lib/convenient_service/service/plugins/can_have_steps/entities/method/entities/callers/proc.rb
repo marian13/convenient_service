@@ -21,7 +21,7 @@ module ConvenientService
                     ##
                     # TODO: Better error message.
                     #
-                    raise Exceptions::OutputMethodProc.new(method: method, container: container)
+                    ::ConvenientService.raise Exceptions::OutputMethodProc.new(method: method, container: container)
                   end
 
                   def define_output_in_container!(container, index:, method:)

@@ -24,7 +24,7 @@ module ConvenientService
           # @raise [ConvenientService::Support::DependencyContainer::Exceptions::InvalidScope]
           #
           def call
-            raise Exceptions::InvalidScope.new(scope: scope) unless Constants::SCOPES.include?(scope)
+            ::ConvenientService.raise Exceptions::InvalidScope.new(scope: scope) unless Constants::SCOPES.include?(scope)
           end
         end
       end

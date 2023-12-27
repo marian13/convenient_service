@@ -21,7 +21,7 @@ module ConvenientService
           when Constants::Backends::THREAD_SAFE_ARRAY
             Entities::Caches::ThreadSafeArray.new
           else
-            raise Exceptions::NotSupportedBackend.new(backend: backend)
+            ::ConvenientService.raise Exceptions::NotSupportedBackend.new(backend: backend)
           end
         end
       end

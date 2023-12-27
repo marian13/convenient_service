@@ -178,7 +178,7 @@ module ConvenientService
                 def organizer(raise_when_missing: true)
                   @organizer ||= params.organizer
 
-                  raise Exceptions::StepHasNoOrganizer.new(step: self) if @organizer.nil? && raise_when_missing
+                  ::ConvenientService.raise Exceptions::StepHasNoOrganizer.new(step: self) if @organizer.nil? && raise_when_missing
 
                   @organizer
                 end

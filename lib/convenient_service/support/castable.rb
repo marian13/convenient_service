@@ -34,7 +34,7 @@ module ConvenientService
         def cast!(other, **options)
           casted = cast(other, **options)
 
-          raise Exceptions::FailedToCast.new(other: other, klass: self) unless casted
+          ::ConvenientService.raise Exceptions::FailedToCast.new(other: other, klass: self) unless casted
 
           casted
         end

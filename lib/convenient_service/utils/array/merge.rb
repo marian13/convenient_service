@@ -55,7 +55,7 @@ module ConvenientService
 
           return if overrides.size == integer_key_overrides.size
 
-          raise Exceptions::NonIntegerIndex.new(index: non_integer_index)
+          ::ConvenientService.raise Exceptions::NonIntegerIndex.new(index: non_integer_index)
         end
 
         ##

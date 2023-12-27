@@ -22,11 +22,11 @@ module ConvenientService
                   # TODO: Separate `in` and `out` methods?
                   #
                   def calculate_value(method)
-                    raise Exceptions::CallerCanNotCalculateReassignment.new(method: method)
+                    ::ConvenientService.raise Exceptions::CallerCanNotCalculateReassignment.new(method: method)
                   end
 
                   def validate_as_input_for_container!(container, method:)
-                    raise Exceptions::InputMethodReassignment.new(method: method, container: container)
+                    ::ConvenientService.raise Exceptions::InputMethodReassignment.new(method: method, container: container)
                   end
 
                   def validate_as_output_for_container!(container, method:)

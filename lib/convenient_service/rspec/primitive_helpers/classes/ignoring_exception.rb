@@ -42,7 +42,7 @@ module ConvenientService
           rescue exception
             Support::UNDEFINED
           else
-            raise Exceptions::IgnoredExceptionIsNotRaised.new(exception: exception)
+            ::ConvenientService.raise Exceptions::IgnoredExceptionIsNotRaised.new(exception: exception)
           end
         end
       end

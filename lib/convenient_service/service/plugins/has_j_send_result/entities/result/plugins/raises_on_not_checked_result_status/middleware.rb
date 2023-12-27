@@ -34,7 +34,7 @@ module ConvenientService
                   def assert_has_checked_status!
                     return if entity.internals.cache.exist?(:has_checked_status)
 
-                    raise Exceptions::StatusIsNotChecked.new(attribute: method)
+                    ::ConvenientService.raise Exceptions::StatusIsNotChecked.new(attribute: method)
                   end
                 end
               end

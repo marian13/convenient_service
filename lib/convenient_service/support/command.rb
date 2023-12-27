@@ -57,7 +57,7 @@ module ConvenientService
       # @raise [ConvenientService::Support::Command::Exceptions::CallIsNotOverridden]
       #
       def call
-        raise Exceptions::CallIsNotOverridden.new(command: self)
+        ::ConvenientService.raise Exceptions::CallIsNotOverridden.new(command: self)
       end
     end
   end

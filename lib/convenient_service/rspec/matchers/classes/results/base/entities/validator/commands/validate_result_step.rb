@@ -76,7 +76,7 @@ module ConvenientService
                       when :result then match_result_method_step?
                       when ::Symbol then match_method_step?
                       when nil then match_without_step?
-                      else raise Exceptions::InvalidStep.new(step: step)
+                      else ::ConvenientService.raise Exceptions::InvalidStep.new(step: step)
                       end
                     end
 

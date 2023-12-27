@@ -50,7 +50,7 @@ module ConvenientService
               if body
                 feature_class.define_method(name, &body)
               else
-                feature_class.define_method(name) { raise ::ConvenientService::Feature::Plugins::CanHaveEntries::Exceptions::NotDefinedEntryMethod.new(name: __method__, feature: self) }
+                feature_class.define_method(name) { ::ConvenientService.raise ::ConvenientService::Feature::Plugins::CanHaveEntries::Exceptions::NotDefinedEntryMethod.new(name: __method__, feature: self) }
               end
 
               name

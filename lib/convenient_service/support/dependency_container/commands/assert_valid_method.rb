@@ -40,7 +40,7 @@ module ConvenientService
           # @raise [ConvenientService::Support::DependencyContainer::Exceptions::NotExportedMethod]
           #
           def call
-            raise Exceptions::NotExportedMethod.new(method_name: slug, method_scope: scope, mod: container) unless method
+            ::ConvenientService.raise Exceptions::NotExportedMethod.new(method_name: slug, method_scope: scope, mod: container) unless method
           end
 
           private
