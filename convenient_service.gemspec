@@ -78,6 +78,8 @@ Gem::Specification.new do |spec|
   # NOTE: `commonmarker` has C extensions, that is why it is NOT supported in JRuby.
   # - https://github.com/gjtorikian/commonmarker/tree/main/ext/commonmarker
   #
+  # TODO: `commonmarker` v1 does NOT work with `yard-junk`.
+  #
   spec.add_development_dependency "commonmarker", "~> 0.23.10" unless ConvenientService::Support::Ruby.jruby?
 
   ##
