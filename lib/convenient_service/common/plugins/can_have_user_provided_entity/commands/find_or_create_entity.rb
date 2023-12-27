@@ -32,8 +32,8 @@ module ConvenientService
             # @return [void]
             #
             def call
-              raise Exceptions::ProtoEntityHasNoName.new(proto_entity: proto_entity) unless proto_entity_name
-              raise Exceptions::ProtoEntityHasNoConcern.new(proto_entity: proto_entity) unless proto_entity_concern
+              ::ConvenientService.raise Exceptions::ProtoEntityHasNoName.new(proto_entity: proto_entity) unless proto_entity_name
+              ::ConvenientService.raise Exceptions::ProtoEntityHasNoConcern.new(proto_entity: proto_entity) unless proto_entity_concern
 
               entity.include Core
 

@@ -64,6 +64,11 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveUserProvidedEntity::Co
             .to raise_error(ConvenientService::Common::Plugins::CanHaveUserProvidedEntity::Exceptions::ProtoEntityHasNoName)
             .with_message(exception_message)
         end
+
+        specify do
+          expect { ignoring_exception(ConvenientService::Common::Plugins::CanHaveUserProvidedEntity::Exceptions::ProtoEntityHasNoName) { command_result } }
+            .to delegate_to(ConvenientService, :raise)
+        end
       end
 
       context "when `proto_entity` does NOT have concern" do
@@ -89,6 +94,11 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveUserProvidedEntity::Co
           expect { command_result }
             .to raise_error(ConvenientService::Common::Plugins::CanHaveUserProvidedEntity::Exceptions::ProtoEntityHasNoConcern)
             .with_message(exception_message)
+        end
+
+        specify do
+          expect { ignoring_exception(ConvenientService::Common::Plugins::CanHaveUserProvidedEntity::Exceptions::ProtoEntityHasNoConcern) { command_result } }
+            .to delegate_to(ConvenientService, :raise)
         end
       end
 
