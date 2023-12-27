@@ -190,9 +190,18 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "webrick"
 
-  spec.add_development_dependency "yard", "~> 0.9.28"
+  ##
+  # Used for generation of API docs for Ruby code.
+  # - https://github.com/lsegal/yard
+  # - https://yardoc.org
+  #
+  spec.add_development_dependency "yard", "~> 0.9.34"
 
-  spec.add_development_dependency "yard-junk"
+  ##
+  # Used for linting YARD docs.
+  # - https://github.com/zverok/yard-junk
+  #
+  spec.add_development_dependency "yard-junk", "~> 0.0.9"
 
   ##
   # The following gems are Convenient Service alternatives.
