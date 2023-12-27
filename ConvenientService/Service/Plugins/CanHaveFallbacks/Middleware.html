@@ -206,19 +206,6 @@
     </li>
   
 </ul>
-<p class="tag_title">Raises:</p>
-<ul class="raise">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt><span class='object_link'><a href="Exceptions/ServiceFallbackReturnValueNotSuccess.html" title="ConvenientService::Service::Plugins::CanHaveFallbacks::Exceptions::ServiceFallbackReturnValueNotSuccess (class)">Exceptions::ServiceFallbackReturnValueNotSuccess</a></span></tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
 <p class="tag_title">Since:</p>
 <ul class="since">
   
@@ -256,7 +243,7 @@
 <span class='kw'>def</span> <span class='kw'>next</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_fallback_result'>fallback_result</span> <span class='op'>=</span> <span class='id identifier rubyid_chain'>chain</span><span class='period'>.</span><span class='id identifier rubyid_next'>next</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
 
-  <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="Exceptions.html" title="ConvenientService::Service::Plugins::CanHaveFallbacks::Exceptions (module)">Exceptions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Exceptions/ServiceFallbackReturnValueNotSuccess.html" title="ConvenientService::Service::Plugins::CanHaveFallbacks::Exceptions::ServiceFallbackReturnValueNotSuccess (class)">ServiceFallbackReturnValueNotSuccess</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../../Exception.html#new-class_method" title="ConvenientService::Exception.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>service:</span> <span class='id identifier rubyid_entity'>entity</span><span class='comma'>,</span> <span class='label'>result:</span> <span class='id identifier rubyid_fallback_result'>fallback_result</span><span class='comma'>,</span> <span class='label'>status:</span> <span class='id identifier rubyid_status'>status</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_fallback_result'>fallback_result</span><span class='period'>.</span><span class='id identifier rubyid_success?'>success?</span>
+  <span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='period'>.</span><span class='id identifier rubyid_raise'><span class='object_link'><a href="../../../../ConvenientService.html#raise-instance_method" title="ConvenientService#raise (method)">raise</a></span></span> <span class='const'><span class='object_link'><a href="Exceptions.html" title="ConvenientService::Service::Plugins::CanHaveFallbacks::Exceptions (module)">Exceptions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Exceptions/ServiceFallbackReturnValueNotSuccess.html" title="ConvenientService::Service::Plugins::CanHaveFallbacks::Exceptions::ServiceFallbackReturnValueNotSuccess (class)">ServiceFallbackReturnValueNotSuccess</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../../Exception.html#new-class_method" title="ConvenientService::Exception.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>service:</span> <span class='id identifier rubyid_entity'>entity</span><span class='comma'>,</span> <span class='label'>result:</span> <span class='id identifier rubyid_fallback_result'>fallback_result</span><span class='comma'>,</span> <span class='label'>status:</span> <span class='id identifier rubyid_status'>status</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_fallback_result'>fallback_result</span><span class='period'>.</span><span class='id identifier rubyid_success?'>success?</span>
 
   <span class='id identifier rubyid_fallback_result'>fallback_result</span><span class='period'>.</span><span class='id identifier rubyid_copy'>copy</span><span class='lparen'>(</span><span class='label'>overrides:</span> <span class='lbrace'>{</span><span class='label'>kwargs:</span> <span class='lbrace'>{</span><span class='id identifier rubyid_method'>method</span> <span class='op'>=&gt;</span> <span class='kw'>true</span><span class='rbrace'>}</span><span class='rbrace'>}</span><span class='rparen'>)</span>
     <span class='period'>.</span><span class='id identifier rubyid_tap'>tap</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_result'>result</span><span class='op'>|</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_success?'>success?</span> <span class='rbrace'>}</span>
@@ -271,7 +258,7 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Dec 27 22:56:22 2023 by
+  Generated on Wed Dec 27 23:11:05 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.2.2).
 </div>
