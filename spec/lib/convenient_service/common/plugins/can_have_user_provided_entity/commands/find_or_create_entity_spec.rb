@@ -6,6 +6,10 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Common::Plugins::CanHaveUserProvidedEntity::Commands::FindOrCreateEntity do
+  include ConvenientService::RSpec::Helpers::IgnoringException
+
+  include ConvenientService::RSpec::Matchers::DelegateTo
+
   example_group "class methods" do
     describe ".call" do
       include ConvenientService::RSpec::PrimitiveMatchers::BeDescendantOf

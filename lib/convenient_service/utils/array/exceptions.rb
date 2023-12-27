@@ -5,12 +5,12 @@ module ConvenientService
     module Array
       module Exceptions
         class NonIntegerIndex < ::ConvenientService::Exception
-          def initialize(index:)
+          def initialize_with_kwargs(index:)
             message = <<~TEXT
               Index `#{index.inspect}` is NOT an integer.
             TEXT
 
-            super(message)
+            initialize(message)
           end
         end
       end

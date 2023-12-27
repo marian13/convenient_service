@@ -10,14 +10,14 @@ module ConvenientService
             # @param config [ConvenientService::Core::Entities::Config]
             # @return [void]
             #
-            def initialize(config:)
+            def initialize_with_kwargs(config:)
               message = <<~TEXT
                 Config for `#{config.klass}` is already committed. Only uncommitted configs can be modified.
 
                 Did you accidentally call `concerns(&configuration_block)` or `middlewares(method, scope: scope, &configuration_block)` after using any plugin, after calling `commit_config!`?
               TEXT
 
-              super(message)
+              initialize(message)
             end
           end
 
@@ -30,7 +30,7 @@ module ConvenientService
             #   TODO: Create a troubleshooting page with possible reasons (preliminary RSpec mocks etc).
             #   Append a link to it to the error message.
             #
-            def initialize(config:)
+            def initialize_with_kwargs(config:)
               message = <<~TEXT
                 `#{config.klass}` config is committed too many times from `method_missing`.
 
@@ -54,7 +54,7 @@ module ConvenientService
                   end
               TEXT
 
-              super(message)
+              initialize(message)
             end
           end
         end

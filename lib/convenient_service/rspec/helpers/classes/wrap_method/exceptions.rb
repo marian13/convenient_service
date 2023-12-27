@@ -11,12 +11,12 @@ module ConvenientService
               # @param attribute [Symbol]
               # @return [void]
               #
-              def initialize(attribute:)
+              def initialize_with_kwargs(attribute:)
                 message = <<~TEXT
                   Chain attribute `#{attribute}` is accessed before the chain is called.
                 TEXT
 
-                super(message)
+                initialize(message)
               end
             end
           end

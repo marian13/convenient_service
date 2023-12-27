@@ -6,12 +6,12 @@ module ConvenientService
       module HasJSendResult
         module Exceptions
           class ResultIsNotOverridden < ::ConvenientService::Exception
-            def initialize(service:)
+            def initialize_with_kwargs(service:)
               message = <<~TEXT
                 Result method (#result) of `#{service.class}` is NOT overridden.
               TEXT
 
-              super(message)
+              initialize(message)
             end
           end
         end

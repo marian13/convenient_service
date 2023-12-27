@@ -14,12 +14,12 @@ module ConvenientService
                     # @param attribute [Symbol]
                     # @return [void]
                     #
-                    def initialize(attribute:)
+                    def initialize_with_kwargs(attribute:)
                       message = <<~TEXT
                         Data attribute `#{attribute}` does NOT exist. Make sure the corresponding result returns it.
                       TEXT
 
-                      super(message)
+                      initialize(message)
                     end
                   end
                 end

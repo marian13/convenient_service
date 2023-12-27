@@ -10,7 +10,7 @@ module ConvenientService
               ##
               # @return [void]
               #
-              def initialize
+              def initialize_without_arguments
                 message = <<~TEXT
                   `kwargs` passed to `failure` method contain JSend keys and extra keys. That's NOT allowed.
 
@@ -40,7 +40,7 @@ module ConvenientService
                   failure(data: {foo: :bar}, message: "foo", code: :foo)
                 TEXT
 
-                super(message)
+                initialize(message)
               end
             end
 
@@ -48,7 +48,7 @@ module ConvenientService
               ##
               # @return [void]
               #
-              def initialize
+              def initialize_without_arguments
                 message = <<~TEXT
                   Both `args` and `kwargs` are passed to the `failure` method.
 
@@ -61,7 +61,7 @@ module ConvenientService
                   failure(message: "Helpful text", code: :descriptive_code)
                 TEXT
 
-                super(message)
+                initialize(message)
               end
             end
 
@@ -69,7 +69,7 @@ module ConvenientService
               ##
               # @return [void]
               #
-              def initialize
+              def initialize_without_arguments
                 message = <<~TEXT
                   More than two `args` are passed to the `failure` method.
 
@@ -79,7 +79,7 @@ module ConvenientService
                   failure("Helpful text", :descriptive_code)
                 TEXT
 
-                super(message)
+                initialize(message)
               end
             end
           end

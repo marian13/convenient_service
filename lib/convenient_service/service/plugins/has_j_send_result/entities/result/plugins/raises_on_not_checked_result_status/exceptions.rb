@@ -10,14 +10,14 @@ module ConvenientService
               module RaisesOnNotCheckedResultStatus
                 module Exceptions
                   class StatusIsNotChecked < ::ConvenientService::Exception
-                    def initialize(attribute:)
+                    def initialize_with_kwargs(attribute:)
                       message = <<~TEXT
                         Attribute `#{attribute}` is accessed before result status is checked.
 
                         Did you forget to call `success?`, `failure?`, or `error?` on result?
                       TEXT
 
-                      super(message)
+                      initialize(message)
                     end
                   end
                 end

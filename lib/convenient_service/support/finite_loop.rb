@@ -14,14 +14,14 @@ module ConvenientService
           # @param limit [Integer]
           # @return [void]
           #
-          def initialize(limit:)
+          def initialize_with_kwargs(limit:)
             message = <<~TEXT
               Max iteration count is exceeded. Current limit is #{limit}.
 
               Consider using `max_iteration_count` or `raise_on_exceedance` options if that is not the expected behavior.
             TEXT
 
-            super(message)
+            initialize(message)
           end
         end
 
@@ -29,12 +29,12 @@ module ConvenientService
           ##
           # @return [void]
           #
-          def initialize
+          def initialize_without_arguments
             message = <<~TEXT
               `finite_loop` always expects a block to be given.
             TEXT
 
-            super(message)
+            initialize(message)
           end
         end
       end

@@ -11,12 +11,12 @@ module ConvenientService
               # @param exception [StandardError]
               # @return [void]
               #
-              def initialize(exception:)
+              def initialize_with_kwargs(exception:)
                 message = <<~TEXT
                   Exception `#{exception}` is NOT raised. That is why it is NOT ignored.
                 TEXT
 
-                super(message)
+                initialize(message)
               end
             end
           end

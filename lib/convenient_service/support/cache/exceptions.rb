@@ -9,14 +9,14 @@ module ConvenientService
           # @param backend [Symbol]
           # @return [void]
           #
-          def initialize(backend:)
+          def initialize_with_kwargs(backend:)
             message = <<~TEXT
               Backend `#{backend}` is NOT supported.
 
               Supported backends are #{printable_backends}.
             TEXT
 
-            super(message)
+            initialize(message)
           end
 
           private

@@ -15,14 +15,14 @@ module ConvenientService
                 # @internal
                 #   TODO: Introduce `Method#step` for more verbose message?
                 #
-                def initialize(method:)
+                def initialize_with_kwargs(method:)
                   message = <<~TEXT
                     Organizer for method `:#{method.name}` is NOT assigned yet.
 
                     Did you forget to set it?
                   TEXT
 
-                  super(message)
+                  initialize(message)
                 end
               end
 
@@ -32,14 +32,14 @@ module ConvenientService
                 # @param container [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Service]
                 # @return [void]
                 #
-                def initialize(method:, container:)
+                def initialize_with_kwargs(method:, container:)
                   message = <<~TEXT
                     `in` method `#{method.name}` is NOT defined in `#{container.klass}`.
 
                     Did you forget to define it?
                   TEXT
 
-                  super(message)
+                  initialize(message)
                 end
               end
 
@@ -49,14 +49,14 @@ module ConvenientService
                 # @param container [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Service]
                 # @return [void]
                 #
-                def initialize(method:, container:)
+                def initialize_with_kwargs(method:, container:)
                   message = <<~TEXT
                     `out` method `#{method.name}` is already defined in `#{container.klass}`.
 
                     Did you forget to remove it?
                   TEXT
 
-                  super(message)
+                  initialize(message)
                 end
               end
 
@@ -66,14 +66,14 @@ module ConvenientService
                 # @param container [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Service]
                 # @return [void]
                 #
-                def initialize(method:, container:)
+                def initialize_with_kwargs(method:, container:)
                   message = <<~TEXT
                     Alias `in` method `#{method.name}` is NOT defined in `#{container.klass}`.
 
                     Did you forget to define it?
                   TEXT
 
-                  super(message)
+                  initialize(message)
                 end
               end
 
@@ -83,14 +83,14 @@ module ConvenientService
                 # @param container [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Service]
                 # @return [void]
                 #
-                def initialize(method:, container:)
+                def initialize_with_kwargs(method:, container:)
                   message = <<~TEXT
                     Alias `out` method `#{method.name}` is already defined in `#{container.klass}`.
 
                     Did you forget to remove it?
                   TEXT
 
-                  super(message)
+                  initialize(message)
                 end
               end
 
@@ -100,12 +100,12 @@ module ConvenientService
                 # @param container [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Service]
                 # @return [void]
                 #
-                def initialize(method:, container:)
+                def initialize_with_kwargs(method:, container:)
                   message = <<~TEXT
                     Procs are not allowed for `out` methods.
                   TEXT
 
-                  super(message)
+                  initialize(message)
                 end
               end
 
@@ -115,12 +115,12 @@ module ConvenientService
                 # @param container [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Service]
                 # @return [void]
                 #
-                def initialize(method:, container:)
+                def initialize_with_kwargs(method:, container:)
                   message = <<~TEXT
                     Raw values are not allowed for `out` methods.
                   TEXT
 
-                  super(message)
+                  initialize(message)
                 end
               end
 
@@ -129,14 +129,14 @@ module ConvenientService
                 # @param method [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method]
                 # @return [void]
                 #
-                def initialize(method:)
+                def initialize_with_kwargs(method:)
                   message = <<~TEXT
                     Method caller failed to calculate reassignment for `#{method.name}`.
 
                     Method callers can calculate only `in` methods, while reassignments are always `out` methods.
                   TEXT
 
-                  super(message)
+                  initialize(message)
                 end
               end
 
@@ -146,12 +146,12 @@ module ConvenientService
                 # @param container [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Service]
                 # @return [void]
                 #
-                def initialize(method:, container:)
+                def initialize_with_kwargs(method:, container:)
                   message = <<~TEXT
                     Reassignments are not allowed for `in` methods.
                   TEXT
 
-                  super(message)
+                  initialize(message)
                 end
               end
 
@@ -161,12 +161,12 @@ module ConvenientService
                 # @param container [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Service]
                 # @return [void]
                 #
-                def initialize(method:, container:)
+                def initialize_with_kwargs(method:, container:)
                   message = <<~TEXT
                     Method `#{method.name}` is NOT an `in` method.
                   TEXT
 
-                  super(message)
+                  initialize(message)
                 end
               end
 
@@ -176,12 +176,12 @@ module ConvenientService
                 # @param container [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Service]
                 # @return [void]
                 #
-                def initialize(method:, container:)
+                def initialize_with_kwargs(method:, container:)
                   message = <<~TEXT
                     Method `#{method.name}` is NOT an `out` method.
                   TEXT
 
-                  super(message)
+                  initialize(message)
                 end
               end
 
@@ -191,14 +191,14 @@ module ConvenientService
                 # @param step [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step]
                 # @return [void]
                 #
-                def initialize(method_name:, step:)
+                def initialize_with_kwargs(method_name:, step:)
                   message = <<~TEXT
                     `out` method `#{method_name}` is called before its corresponding step `#{step.printable_service}` is completed.
 
                     Maybe it makes sense to change the steps order?
                   TEXT
 
-                  super(message)
+                  initialize(message)
                 end
               end
 
@@ -208,7 +208,7 @@ module ConvenientService
                 # @param step [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step]
                 # @return [void]
                 #
-                def initialize(key:, step:)
+                def initialize_with_kwargs(key:, step:)
                   message = <<~TEXT
                     Step `#{step.printable_service}` result does NOT return `#{key}` data attribute.
 
@@ -217,7 +217,7 @@ module ConvenientService
                     Or `success` of `#{step.printable_service}` accepts a wrong key?
                   TEXT
 
-                  super(message)
+                  initialize(message)
                 end
               end
             end

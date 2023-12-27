@@ -6,7 +6,7 @@ module ConvenientService
       module RaisesOnDoubleResult
         module Exceptions
           class DoubleResult < ::ConvenientService::Exception
-            def initialize(service:)
+            def initialize_with_kwargs(service:)
               message = <<~TEXT
                 `#{service.class}` service has a double result.
 
@@ -24,7 +24,7 @@ module ConvenientService
                 end
               TEXT
 
-              super(message)
+              initialize(message)
             end
           end
         end

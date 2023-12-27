@@ -6,7 +6,7 @@ module ConvenientService
       module CanHaveEntries
         module Exceptions
           class NotDefinedEntryMethod < ::ConvenientService::Exception
-            def initialize(name:, feature:)
+            def initialize_with_kwargs(name:, feature:)
               message = <<~TEXT
                 Entry for `#{name}` is registered inside `#{feature.class}` feature, but its corresponding method is NOT defined.
 
@@ -25,7 +25,7 @@ module ConvenientService
                 end
               TEXT
 
-              super(message)
+              initialize(message)
             end
           end
         end

@@ -8,14 +8,14 @@ module ConvenientService
           class Step
             module Exceptions
               class StepHasNoOrganizer < ::ConvenientService::Exception
-                def initialize(step:)
+                def initialize_with_kwargs(step:)
                   message = <<~TEXT
                     Step `#{step.printable_service}` has not assigned organizer.
 
                     Did you forget to set it?
                   TEXT
 
-                  super(message)
+                  initialize(message)
                 end
               end
             end

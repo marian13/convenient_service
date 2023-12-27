@@ -14,7 +14,7 @@ module ConvenientService
                 # @param step [ConvenientService::Service, Symbol]
                 # @return [void]
                 #
-                def initialize(step:)
+                def initialize_with_kwargs(step:)
                   message = <<~TEXT
                     Step `#{step}` is NOT valid.
 
@@ -29,7 +29,7 @@ module ConvenientService
                     be_success.without_step
                   TEXT
 
-                  super(message)
+                  initialize(message)
                 end
               end
             end

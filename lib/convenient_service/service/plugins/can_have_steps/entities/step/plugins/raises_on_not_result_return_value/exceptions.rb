@@ -10,7 +10,7 @@ module ConvenientService
               module RaisesOnNotResultReturnValue
                 module Exceptions
                   class ReturnValueNotKindOfResult < ::ConvenientService::Exception
-                    def initialize(step:, result:)
+                    def initialize_with_kwargs(step:, result:)
                       message = <<~TEXT
                         Return value of step `#{step.printable_service}` is NOT a `Result`.
                         It is `#{result.class}`.
@@ -18,7 +18,7 @@ module ConvenientService
                         Did you forget to call `success`, `failure`, or `error`?
                       TEXT
 
-                      super(message)
+                      initialize(message)
                     end
                   end
                 end

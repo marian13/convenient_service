@@ -8,12 +8,12 @@ module ConvenientService
     class Command
       module Exceptions
         class CallIsNotOverridden < ::ConvenientService::Exception
-          def initialize(command:)
+          def initialize_with_kwargs(command:)
             message = <<~TEXT
               Call method (#call) of `#{command.class}` is NOT overridden.
             TEXT
 
-            super(message)
+            initialize(message)
           end
         end
       end

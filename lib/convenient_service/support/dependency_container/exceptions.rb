@@ -9,14 +9,14 @@ module ConvenientService
           # @param scope [Object]
           # @return [void]
           #
-          def initialize(scope:)
+          def initialize_with_kwargs(scope:)
             message = <<~TEXT
               Scope `#{scope.inspect}` is NOT valid.
 
               Valid options are #{printable_valid_scopes}.
             TEXT
 
-            super(message)
+            initialize(message)
           end
 
           private
@@ -34,14 +34,14 @@ module ConvenientService
           # @param mod [Module]
           # @return [void]
           #
-          def initialize(mod:)
+          def initialize_with_kwargs(mod:)
             message = <<~TEXT
               Module `#{mod}` can NOT export methods.
 
               Did you forget to include `ConvenientService::DependencyContainer::Export` into it?
             TEXT
 
-            super(message)
+            initialize(message)
           end
         end
 
@@ -52,7 +52,7 @@ module ConvenientService
           # @param mod [Module]
           # @return [void]
           #
-          def initialize(method_name:, method_scope:, mod:)
+          def initialize_with_kwargs(method_name:, method_scope:, mod:)
             message = <<~TEXT
               Module `#{mod}` does NOT export method `#{method_name}` with `#{method_scope}` scope.
 
@@ -65,7 +65,7 @@ module ConvenientService
               end
             TEXT
 
-            super(message)
+            initialize(message)
           end
         end
 
@@ -74,12 +74,12 @@ module ConvenientService
           # @param klass [Class]
           # @return [void]
           #
-          def initialize(klass:)
+          def initialize_with_kwargs(klass:)
             message = <<~TEXT
               `#{klass.inspect}` is NOT a Module.
             TEXT
 
-            super(message)
+            initialize(message)
           end
         end
       end

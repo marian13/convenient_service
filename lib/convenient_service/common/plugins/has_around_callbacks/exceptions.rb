@@ -6,7 +6,7 @@ module ConvenientService
       module HasAroundCallbacks
         module Exceptions
           class AroundCallbackChainIsNotContinued < ::ConvenientService::Exception
-            def initialize(callback:)
+            def initialize_with_kwargs(callback:)
               message = <<~TEXT
                 Around callback chain is NOT continued from `#{callback.block.source_location}`.
 
@@ -19,7 +19,7 @@ module ConvenientService
                 end
               TEXT
 
-              super(message)
+              initialize(message)
             end
           end
         end

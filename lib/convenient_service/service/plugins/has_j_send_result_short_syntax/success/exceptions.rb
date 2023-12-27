@@ -10,7 +10,7 @@ module ConvenientService
               ##
               # @return [void]
               #
-              def initialize
+              def initialize_without_arguments
                 message = <<~TEXT
                   `kwargs` passed to `success` method contain JSend keys and extra keys. That's NOT allowed.
 
@@ -30,7 +30,7 @@ module ConvenientService
                   success(code: :foo)
                 TEXT
 
-                super(message)
+                initialize(message)
               end
             end
           end

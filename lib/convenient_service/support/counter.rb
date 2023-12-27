@@ -19,7 +19,7 @@ module ConvenientService
           # @param max_value [Integer]
           # @return [void]
           #
-          def initialize(n:, current_value:, max_value:)
+          def initialize_with_kwargs(n:, current_value:, max_value:)
             message = <<~TEXT
               Value after increment by `#{n}` is greater than the max value.
 
@@ -28,7 +28,7 @@ module ConvenientService
               Max value is `#{max_value}`.
             TEXT
 
-            super(message)
+            initialize(message)
           end
         end
 
@@ -39,7 +39,7 @@ module ConvenientService
           # @param min_value [Integer]
           # @return [void]
           #
-          def initialize(n:, current_value:, min_value:)
+          def initialize_with_kwargs(n:, current_value:, min_value:)
             message = <<~TEXT
               Value after decrement by `#{n}` is lower than the min value.
 
@@ -48,7 +48,7 @@ module ConvenientService
               Min value is `#{min_value}`.
             TEXT
 
-            super(message)
+            initialize(message)
           end
         end
       end

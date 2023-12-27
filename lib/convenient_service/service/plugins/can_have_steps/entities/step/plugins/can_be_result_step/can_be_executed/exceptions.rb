@@ -16,14 +16,14 @@ module ConvenientService
                       # @param method_name [Symbol]
                       # @return [void]
                       #
-                      def initialize(service_class:, method_name:)
+                      def initialize_with_kwargs(service_class:, method_name:)
                         message = <<~TEXT
                           Service `#{service_class}` tries to use `:#{method_name}` method in a step, but it is NOT defined.
 
                           Did you forget to define it?
                         TEXT
 
-                        super(message)
+                        initialize(message)
                       end
                     end
                   end

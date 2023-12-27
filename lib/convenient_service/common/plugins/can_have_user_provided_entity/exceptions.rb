@@ -6,7 +6,7 @@ module ConvenientService
       module CanHaveUserProvidedEntity
         module Exceptions
           class ProtoEntityHasNoName < ::ConvenientService::Exception
-            def initialize(proto_entity:)
+            def initialize_with_kwargs(proto_entity:)
               message = <<~TEXT
                 Proto entity `#{proto_entity}` has no name.
 
@@ -18,12 +18,12 @@ module ConvenientService
                 NOTE: Anonymous classes do NOT have names. Are you passing an anonymous class?
               TEXT
 
-              super(message)
+              initialize(message)
             end
           end
 
           class ProtoEntityHasNoConcern < ::ConvenientService::Exception
-            def initialize(proto_entity:)
+            def initialize_with_kwargs(proto_entity:)
               message = <<~TEXT
                 Proto entity `#{proto_entity}` has no concern.
 
@@ -32,7 +32,7 @@ module ConvenientService
                 It is an example of a valid proto entity.
               TEXT
 
-              super(message)
+              initialize(message)
             end
           end
         end
