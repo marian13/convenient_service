@@ -632,9 +632,9 @@
 <span class='tstring_content'>    def </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='tstring_content'>
 </span><span class='tstring_content'>      step, key, method_name = steps[</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_index'>index</span><span class='embexpr_end'>}</span><span class='tstring_content'>], :</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_key'>key</span><span class='embexpr_end'>}</span><span class='tstring_content'>, :</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='tstring_content'>
 </span><span class='tstring_content'>
-</span><span class='tstring_content'>      raise </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_not_completed_step_error'>not_completed_step_error</span><span class='embexpr_end'>}</span><span class='tstring_content'>.new(step: step, method_name: method_name) unless step.completed?
+</span><span class='tstring_content'>      ::ConvenientService.raise </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_not_completed_step_error'>not_completed_step_error</span><span class='embexpr_end'>}</span><span class='tstring_content'>.new(step: step, method_name: method_name) unless step.completed?
 </span><span class='tstring_content'>
-</span><span class='tstring_content'>      raise </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_not_existing_step_result_data_attribute_error'>not_existing_step_result_data_attribute_error</span><span class='embexpr_end'>}</span><span class='tstring_content'>.new(step: step, key: key) unless step.result.unsafe_data.has_attribute?(key)
+</span><span class='tstring_content'>      ::ConvenientService.raise </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_not_existing_step_result_data_attribute_error'>not_existing_step_result_data_attribute_error</span><span class='embexpr_end'>}</span><span class='tstring_content'>.new(step: step, key: key) unless step.result.unsafe_data.has_attribute?(key)
 </span><span class='tstring_content'>
 </span><span class='tstring_content'>      step.result.unsafe_data[key]
 </span><span class='tstring_content'>    end
@@ -652,7 +652,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Dec 28 00:56:10 2023 by
+  Generated on Thu Dec 28 01:08:08 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.2.2).
 </div>
