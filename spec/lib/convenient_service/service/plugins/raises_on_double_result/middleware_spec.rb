@@ -6,6 +6,8 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Service::Plugins::RaisesOnDoubleResult::Middleware do
+  include ConvenientService::RSpec::Helpers::IgnoringException
+
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   let(:middleware) { described_class }
@@ -110,6 +112,11 @@ RSpec.describe ConvenientService::Service::Plugins::RaisesOnDoubleResult::Middle
           expect { method_value }
             .to raise_error(ConvenientService::Service::Plugins::RaisesOnDoubleResult::Exceptions::DoubleResult)
             .with_message(exception_message)
+        end
+
+        specify do
+          expect { ignoring_exception(ConvenientService::Service::Plugins::RaisesOnDoubleResult::Exceptions::DoubleResult) { method_value } }
+            .to delegate_to(ConvenientService, :raise)
         end
 
         ##

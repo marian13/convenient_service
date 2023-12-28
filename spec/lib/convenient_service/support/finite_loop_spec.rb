@@ -6,6 +6,10 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Support::FiniteLoop do
+  include ConvenientService::RSpec::Helpers::IgnoringException
+
+  include ConvenientService::RSpec::Matchers::DelegateTo
+
   example_group "constants" do
     describe "::MAX_ITERATION_COUNT" do
       it "is equal to 1000" do
@@ -81,6 +85,11 @@ RSpec.describe ConvenientService::Support::FiniteLoop do
             .to raise_error(ConvenientService::Support::FiniteLoop::Exceptions::NoBlockGiven)
             .with_message(exception_message)
         end
+
+        specify do
+          expect { ignoring_exception(ConvenientService::Support::FiniteLoop::Exceptions::NoBlockGiven) { instance.foo } }
+            .to delegate_to(ConvenientService, :raise)
+        end
       end
 
       context "when `max_iteration_count` is NOT exceeded" do
@@ -129,6 +138,11 @@ RSpec.describe ConvenientService::Support::FiniteLoop do
             expect { instance.foo }
               .to raise_error(ConvenientService::Support::FiniteLoop::Exceptions::MaxIterationCountExceeded)
               .with_message(exception_message)
+          end
+
+          specify do
+            expect { ignoring_exception(ConvenientService::Support::FiniteLoop::Exceptions::MaxIterationCountExceeded) { instance.foo } }
+              .to delegate_to(ConvenientService, :raise)
           end
         end
 
@@ -190,6 +204,11 @@ RSpec.describe ConvenientService::Support::FiniteLoop do
             expect { instance.foo }
               .to raise_error(ConvenientService::Support::FiniteLoop::Exceptions::MaxIterationCountExceeded)
               .with_message(exception_message)
+          end
+
+          specify do
+            expect { ignoring_exception(ConvenientService::Support::FiniteLoop::Exceptions::MaxIterationCountExceeded) { instance.foo } }
+              .to delegate_to(ConvenientService, :raise)
           end
         end
       end
@@ -261,6 +280,11 @@ RSpec.describe ConvenientService::Support::FiniteLoop do
             .to raise_error(ConvenientService::Support::FiniteLoop::Exceptions::NoBlockGiven)
             .with_message(exception_message)
         end
+
+        specify do
+          expect { ignoring_exception(ConvenientService::Support::FiniteLoop::Exceptions::NoBlockGiven) { loop_result } }
+            .to delegate_to(ConvenientService, :raise)
+        end
       end
 
       context "when `max_iteration_count` is NOT exceeded" do
@@ -295,6 +319,11 @@ RSpec.describe ConvenientService::Support::FiniteLoop do
             expect { loop_result }
               .to raise_error(ConvenientService::Support::FiniteLoop::Exceptions::MaxIterationCountExceeded)
               .with_message(exception_message)
+          end
+
+          specify do
+            expect { ignoring_exception(ConvenientService::Support::FiniteLoop::Exceptions::MaxIterationCountExceeded) { loop_result } }
+              .to delegate_to(ConvenientService, :raise)
           end
         end
 
@@ -335,6 +364,11 @@ RSpec.describe ConvenientService::Support::FiniteLoop do
             expect { loop_result }
               .to raise_error(ConvenientService::Support::FiniteLoop::Exceptions::MaxIterationCountExceeded)
               .with_message(exception_message)
+          end
+
+          specify do
+            expect { ignoring_exception(ConvenientService::Support::FiniteLoop::Exceptions::MaxIterationCountExceeded) { loop_result } }
+              .to delegate_to(ConvenientService, :raise)
           end
         end
       end

@@ -6,6 +6,10 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Concern::InstanceMethods do
+  include ConvenientService::RSpec::Helpers::IgnoringException
+
+  include ConvenientService::RSpec::Matchers::DelegateTo
+
   let(:step_service_klass) do
     Class.new do
       include ConvenientService::Service::Configs::Minimal
@@ -377,6 +381,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
               .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepHasNoOrganizer)
               .with_message(message)
           end
+
+          specify do
+            expect { ignoring_exception(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepHasNoOrganizer) { step.organizer } }
+              .to delegate_to(ConvenientService, :raise)
+          end
         end
 
         context "when `raise_when_missing` is `false`" do
@@ -398,6 +407,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
             expect { step.organizer(raise_when_missing: true) }
               .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepHasNoOrganizer)
               .with_message(message)
+          end
+
+          specify do
+            expect { ignoring_exception(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepHasNoOrganizer) { step.organizer(raise_when_missing: true) } }
+              .to delegate_to(ConvenientService, :raise)
           end
         end
       end
@@ -476,6 +490,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
             .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::MethodHasNoOrganizer)
             .with_message(message)
         end
+
+        specify do
+          expect { ignoring_exception(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::MethodHasNoOrganizer) { step.input_values } }
+            .to delegate_to(ConvenientService, :raise)
+        end
       end
 
       context "when `organizer` is set" do
@@ -503,6 +522,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           expect { step.output_values }
             .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::MethodHasNoOrganizer)
             .with_message(message)
+        end
+
+        specify do
+          expect { ignoring_exception(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::MethodHasNoOrganizer) { step.output_values } }
+            .to delegate_to(ConvenientService, :raise)
         end
       end
 
@@ -532,6 +556,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
             .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::MethodHasNoOrganizer)
             .with_message(message)
         end
+
+        specify do
+          expect { ignoring_exception(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::MethodHasNoOrganizer) { step.service_result } }
+            .to delegate_to(ConvenientService, :raise)
+        end
       end
 
       context "when `organizer` is set" do
@@ -560,6 +589,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           expect { step.result }
             .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::MethodHasNoOrganizer)
             .with_message(message)
+        end
+
+        specify do
+          expect { ignoring_exception(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::MethodHasNoOrganizer) { step.result } }
+            .to delegate_to(ConvenientService, :raise)
         end
       end
 

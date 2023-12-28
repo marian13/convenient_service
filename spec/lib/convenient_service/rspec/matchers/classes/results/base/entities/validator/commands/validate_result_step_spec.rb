@@ -6,6 +6,9 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entities::Validator::Commands::ValidateResultStep do
+  include ConvenientService::RSpec::Helpers::IgnoringException
+
+  include ConvenientService::RSpec::Matchers::DelegateTo
   include ConvenientService::RSpec::Matchers::Results
 
   example_group "class methods" do
@@ -66,6 +69,11 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
             expect { command_result }
               .to raise_error(ConvenientService::RSpec::Matchers::Classes::Results::Base::Exceptions::InvalidStep)
               .with_message(exception_message)
+          end
+
+          specify do
+            expect { ignoring_exception(ConvenientService::RSpec::Matchers::Classes::Results::Base::Exceptions::InvalidStep) { command_result } }
+              .to delegate_to(ConvenientService, :raise)
           end
         end
 

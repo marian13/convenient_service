@@ -6,6 +6,10 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Utils::Array::Merge do
+  include ConvenientService::RSpec::Helpers::IgnoringException
+
+  include ConvenientService::RSpec::Matchers::DelegateTo
+
   describe ".call" do
     subject(:result) { described_class.call(array, overrides, raise_on_non_integer_index: raise_on_non_integer_index) }
 
@@ -62,6 +66,11 @@ RSpec.describe ConvenientService::Utils::Array::Merge do
               .to raise_error(ConvenientService::Utils::Array::Exceptions::NonIntegerIndex)
               .with_message(exception_message)
           end
+
+          specify do
+            expect { ignoring_exception(ConvenientService::Utils::Array::Exceptions::NonIntegerIndex) { result } }
+              .to delegate_to(ConvenientService, :raise)
+          end
         end
 
         context "when `raise_on_non_integer_index` is NOT passed" do
@@ -71,6 +80,11 @@ RSpec.describe ConvenientService::Utils::Array::Merge do
             expect { result }
               .to raise_error(ConvenientService::Utils::Array::Exceptions::NonIntegerIndex)
               .with_message(exception_message)
+          end
+
+          specify do
+            expect { ignoring_exception(ConvenientService::Utils::Array::Exceptions::NonIntegerIndex) { result } }
+              .to delegate_to(ConvenientService, :raise)
           end
         end
       end

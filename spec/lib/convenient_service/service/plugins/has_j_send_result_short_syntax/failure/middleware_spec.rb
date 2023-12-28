@@ -6,6 +6,8 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Failure::Middleware do
+  include ConvenientService::RSpec::Helpers::IgnoringException
+
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   let(:middleware) { described_class }
@@ -100,6 +102,11 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultShortSyntax::F
                 .to raise_error(ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Failure::Exceptions::MoreThanTwoArgsArePassed)
                 .with_message(exception_message)
             end
+
+            specify do
+              expect { ignoring_exception(ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Failure::Exceptions::MoreThanTwoArgsArePassed) { method_value } }
+                .to delegate_to(ConvenientService, :raise)
+            end
           end
         end
       end
@@ -160,6 +167,11 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultShortSyntax::F
                   .to raise_error(ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Failure::Exceptions::KwargsContainJSendAndExtraKeys)
                   .with_message(exception_message)
               end
+
+              specify do
+                expect { ignoring_exception(ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Failure::Exceptions::KwargsContainJSendAndExtraKeys) { method_value } }
+                  .to delegate_to(ConvenientService, :raise)
+              end
             end
           end
 
@@ -208,6 +220,11 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultShortSyntax::F
                 expect { method_value }
                   .to raise_error(ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Failure::Exceptions::KwargsContainJSendAndExtraKeys)
                   .with_message(exception_message)
+              end
+
+              specify do
+                expect { ignoring_exception(ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Failure::Exceptions::KwargsContainJSendAndExtraKeys) { method_value } }
+                  .to delegate_to(ConvenientService, :raise)
               end
             end
           end
@@ -258,6 +275,11 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultShortSyntax::F
                   .to raise_error(ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Failure::Exceptions::KwargsContainJSendAndExtraKeys)
                   .with_message(exception_message)
               end
+
+              specify do
+                expect { ignoring_exception(ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Failure::Exceptions::KwargsContainJSendAndExtraKeys) { method_value } }
+                  .to delegate_to(ConvenientService, :raise)
+              end
             end
           end
         end
@@ -283,6 +305,11 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultShortSyntax::F
             expect { method_value }
               .to raise_error(ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Failure::Exceptions::BothArgsAndKwargsArePassed)
               .with_message(exception_message)
+          end
+
+          specify do
+            expect { ignoring_exception(ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Failure::Exceptions::BothArgsAndKwargsArePassed) { method_value } }
+              .to delegate_to(ConvenientService, :raise)
           end
         end
       end

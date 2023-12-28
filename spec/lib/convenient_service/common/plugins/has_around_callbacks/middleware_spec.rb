@@ -6,6 +6,10 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Common::Plugins::HasAroundCallbacks::Middleware do
+  include ConvenientService::RSpec::Helpers::IgnoringException
+
+  include ConvenientService::RSpec::Matchers::DelegateTo
+
   let(:middleware) { described_class }
 
   example_group "inheritance" do
@@ -226,6 +230,11 @@ RSpec.describe ConvenientService::Common::Plugins::HasAroundCallbacks::Middlewar
               .to raise_error(ConvenientService::Common::Plugins::HasAroundCallbacks::Exceptions::AroundCallbackChainIsNotContinued)
               .with_message(exception_message)
           end
+
+          specify do
+            expect { ignoring_exception(ConvenientService::Common::Plugins::HasAroundCallbacks::Exceptions::AroundCallbackChainIsNotContinued) { method_value } }
+              .to delegate_to(ConvenientService, :raise)
+          end
         end
 
         context "when intermediate around callback does NOT call callback `chain.yield`" do
@@ -272,6 +281,11 @@ RSpec.describe ConvenientService::Common::Plugins::HasAroundCallbacks::Middlewar
               .to raise_error(ConvenientService::Common::Plugins::HasAroundCallbacks::Exceptions::AroundCallbackChainIsNotContinued)
               .with_message(exception_message)
           end
+
+          specify do
+            expect { ignoring_exception(ConvenientService::Common::Plugins::HasAroundCallbacks::Exceptions::AroundCallbackChainIsNotContinued) { method_value } }
+              .to delegate_to(ConvenientService, :raise)
+          end
         end
 
         context "when last around callback does NOT call callback `chain.yield`" do
@@ -309,6 +323,11 @@ RSpec.describe ConvenientService::Common::Plugins::HasAroundCallbacks::Middlewar
             expect { method_value }
               .to raise_error(ConvenientService::Common::Plugins::HasAroundCallbacks::Exceptions::AroundCallbackChainIsNotContinued)
               .with_message(exception_message)
+          end
+
+          specify do
+            expect { ignoring_exception(ConvenientService::Common::Plugins::HasAroundCallbacks::Exceptions::AroundCallbackChainIsNotContinued) { method_value } }
+              .to delegate_to(ConvenientService, :raise)
           end
         end
       end

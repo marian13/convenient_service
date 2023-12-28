@@ -13,6 +13,7 @@ require "convenient_service"
 RSpec.xdescribe ConvenientService::RSpec::Helpers::Classes::WrapMethod::Entities::WrappedMethod do
   include ConvenientService::RSpec::Helpers::IgnoringException
 
+  include ConvenientService::RSpec::Matchers::DelegateTo
   include ConvenientService::RSpec::PrimitiveMatchers::CacheItsValue
 
   subject(:method) { described_class.new(entity: entity, method: method_name, observe_middleware: middleware) }
@@ -71,6 +72,11 @@ RSpec.xdescribe ConvenientService::RSpec::Helpers::Classes::WrapMethod::Entities
             .to raise_error(ConvenientService::RSpec::Helpers::Classes::WrapMethod::Exceptions::ChainAttributePreliminaryAccess)
             .with_message(exception_message)
         end
+
+        specify do
+          expect { ignoring_exception(ConvenientService::RSpec::Helpers::Classes::WrapMethod::Exceptions::ChainAttributePreliminaryAccess) { method.chain_value } }
+            .to delegate_to(ConvenientService, :raise)
+        end
       end
 
       context "when chain is called" do
@@ -108,6 +114,11 @@ RSpec.xdescribe ConvenientService::RSpec::Helpers::Classes::WrapMethod::Entities
           expect { method.chain_args }
             .to raise_error(ConvenientService::RSpec::Helpers::Classes::WrapMethod::Exceptions::ChainAttributePreliminaryAccess)
             .with_message(exception_message)
+        end
+
+        specify do
+          expect { ignoring_exception(ConvenientService::RSpec::Helpers::Classes::WrapMethod::Exceptions::ChainAttributePreliminaryAccess) { method.chain_args } }
+            .to delegate_to(ConvenientService, :raise)
         end
       end
 
@@ -147,6 +158,11 @@ RSpec.xdescribe ConvenientService::RSpec::Helpers::Classes::WrapMethod::Entities
             .to raise_error(ConvenientService::RSpec::Helpers::Classes::WrapMethod::Exceptions::ChainAttributePreliminaryAccess)
             .with_message(exception_message)
         end
+
+        specify do
+          expect { ignoring_exception(ConvenientService::RSpec::Helpers::Classes::WrapMethod::Exceptions::ChainAttributePreliminaryAccess) { method.chain_kwargs } }
+            .to delegate_to(ConvenientService, :raise)
+        end
       end
 
       context "when chain is called" do
@@ -184,6 +200,11 @@ RSpec.xdescribe ConvenientService::RSpec::Helpers::Classes::WrapMethod::Entities
           expect { method.chain_block }
             .to raise_error(ConvenientService::RSpec::Helpers::Classes::WrapMethod::Exceptions::ChainAttributePreliminaryAccess)
             .with_message(exception_message)
+        end
+
+        specify do
+          expect { ignoring_exception(ConvenientService::RSpec::Helpers::Classes::WrapMethod::Exceptions::ChainAttributePreliminaryAccess) { method.chain_block } }
+            .to delegate_to(ConvenientService, :raise)
         end
       end
 
@@ -228,6 +249,11 @@ RSpec.xdescribe ConvenientService::RSpec::Helpers::Classes::WrapMethod::Entities
           expect { method.chain_exception }
             .to raise_error(ConvenientService::RSpec::Helpers::Classes::WrapMethod::Exceptions::ChainAttributePreliminaryAccess)
             .with_message(exception_message)
+        end
+
+        specify do
+          expect { ignoring_exception(ConvenientService::RSpec::Helpers::Classes::WrapMethod::Exceptions::ChainAttributePreliminaryAccess) { method.chain_exception } }
+            .to delegate_to(ConvenientService, :raise)
         end
       end
 

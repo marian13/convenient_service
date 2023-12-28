@@ -6,6 +6,10 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExceptions::Middleware do
+  include ConvenientService::RSpec::Helpers::IgnoringException
+
+  include ConvenientService::RSpec::Matchers::DelegateTo
+
   let(:middleware) { described_class }
 
   example_group "inheritance" do
@@ -57,7 +61,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
           MESSAGE
         end
 
-        context "when service result does NOT ::ConvenientService.raise Exceptions" do
+        context "when service result does NOT raise exceptions" do
           let(:service_class) do
             Class.new.tap do |klass|
               klass.class_exec(middleware, scope, max_backtrace_size) do |middleware, scope, max_backtrace_size|

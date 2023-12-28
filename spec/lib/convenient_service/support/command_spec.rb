@@ -27,6 +27,11 @@ RSpec.describe ConvenientService::Support::Command do
           .to raise_error(ConvenientService::Support::Command::Exceptions::CallIsNotOverridden)
           .with_message(exception_message)
       end
+
+      specify do
+        expect { ignoring_exception(ConvenientService::Support::Command::Exceptions::CallIsNotOverridden) { command_instance.call } }
+          .to delegate_to(ConvenientService, :raise)
+      end
     end
   end
 

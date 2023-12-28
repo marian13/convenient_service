@@ -6,6 +6,8 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Core::Entities::Config do
+  include ConvenientService::RSpec::Helpers::IgnoringException
+
   include ConvenientService::RSpec::Matchers::DelegateTo
   include ConvenientService::RSpec::PrimitiveMatchers::CacheItsValue
 
@@ -100,6 +102,11 @@ RSpec.describe ConvenientService::Core::Entities::Config do
             expect { config.concerns(&configuration_block) }
               .to raise_error(ConvenientService::Core::Entities::Config::Exceptions::ConfigIsCommitted)
               .with_message(committed_config_error_message)
+          end
+
+          specify do
+            expect { ignoring_exception(ConvenientService::Core::Entities::Config::Exceptions::ConfigIsCommitted) { config.concerns(&configuration_block) } }
+              .to delegate_to(ConvenientService, :raise)
           end
         end
       end
@@ -257,6 +264,11 @@ RSpec.describe ConvenientService::Core::Entities::Config do
                 .to raise_error(ConvenientService::Core::Entities::Config::Exceptions::ConfigIsCommitted)
                 .with_message(committed_config_error_message)
             end
+
+            specify do
+              expect { ignoring_exception(ConvenientService::Core::Entities::Config::Exceptions::ConfigIsCommitted) { config.middlewares(method, &configuration_block) } }
+                .to delegate_to(ConvenientService, :raise)
+            end
           end
         end
 
@@ -310,6 +322,11 @@ RSpec.describe ConvenientService::Core::Entities::Config do
                   .to raise_error(ConvenientService::Core::Entities::Config::Exceptions::ConfigIsCommitted)
                   .with_message(committed_config_error_message)
               end
+
+              specify do
+                expect { ignoring_exception(ConvenientService::Core::Entities::Config::Exceptions::ConfigIsCommitted) { config.middlewares(method, scope: scope, &configuration_block) } }
+                  .to delegate_to(ConvenientService, :raise)
+              end
             end
           end
 
@@ -361,6 +378,11 @@ RSpec.describe ConvenientService::Core::Entities::Config do
                 expect { config.middlewares(method, scope: scope, &configuration_block) }
                   .to raise_error(ConvenientService::Core::Entities::Config::Exceptions::ConfigIsCommitted)
                   .with_message(committed_config_error_message)
+              end
+
+              specify do
+                expect { ignoring_exception(ConvenientService::Core::Entities::Config::Exceptions::ConfigIsCommitted) { config.middlewares(method, scope: scope, &configuration_block) } }
+                  .to delegate_to(ConvenientService, :raise)
               end
             end
           end

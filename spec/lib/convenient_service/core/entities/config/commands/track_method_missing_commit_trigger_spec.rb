@@ -6,6 +6,10 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Core::Entities::Config::Commands::TrackMethodMissingCommitTrigger do
+  include ConvenientService::RSpec::Helpers::IgnoringException
+
+  include ConvenientService::RSpec::Matchers::DelegateTo
+
   example_group "class methods" do
     subject(:command_result) { described_class.call(config: config, trigger: trigger) }
 
@@ -69,6 +73,11 @@ RSpec.describe ConvenientService::Core::Entities::Config::Commands::TrackMethodM
                 .to raise_error(ConvenientService::Core::Entities::Config::Exceptions::TooManyCommitsFromMethodMissing)
                 .with_message(exception_message)
             end
+
+            specify do
+              expect { ignoring_exception(ConvenientService::Core::Entities::Config::Exceptions::TooManyCommitsFromMethodMissing) { command_result } }
+                .to delegate_to(ConvenientService, :raise)
+            end
           end
 
           context "when `method_missing` counter is incremented" do
@@ -123,6 +132,11 @@ RSpec.describe ConvenientService::Core::Entities::Config::Commands::TrackMethodM
               expect { command_result }
                 .to raise_error(ConvenientService::Core::Entities::Config::Exceptions::TooManyCommitsFromMethodMissing)
                 .with_message(exception_message)
+            end
+
+            specify do
+              expect { ignoring_exception(ConvenientService::Core::Entities::Config::Exceptions::TooManyCommitsFromMethodMissing) { command_result } }
+                .to delegate_to(ConvenientService, :raise)
             end
           end
 

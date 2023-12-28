@@ -6,6 +6,10 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Feature::Plugins::CanHaveEntries::Commands::DefineEntry do
+  include ConvenientService::RSpec::Helpers::IgnoringException
+
+  include ConvenientService::RSpec::Matchers::DelegateTo
+
   example_group "class methods" do
     describe ".call" do
       include ConvenientService::RSpec::Matchers::DelegateTo
@@ -79,6 +83,13 @@ RSpec.describe ConvenientService::Feature::Plugins::CanHaveEntries::Commands::De
               .to raise_error(ConvenientService::Feature::Plugins::CanHaveEntries::Exceptions::NotDefinedEntryMethod)
               .with_message(exception_message)
           end
+
+          specify do
+            command_result
+
+            expect { ignoring_exception(ConvenientService::Feature::Plugins::CanHaveEntries::Exceptions::NotDefinedEntryMethod) { feature_class.foo } }
+              .to delegate_to(ConvenientService, :raise)
+          end
         end
 
         context "when class method with `name` on `feature_class` already defined after entry" do
@@ -115,6 +126,13 @@ RSpec.describe ConvenientService::Feature::Plugins::CanHaveEntries::Commands::De
               .to raise_error(ConvenientService::Feature::Plugins::CanHaveEntries::Exceptions::NotDefinedEntryMethod)
               .with_message(exception_message)
           end
+
+          specify do
+            command_result
+
+            expect { ignoring_exception(ConvenientService::Feature::Plugins::CanHaveEntries::Exceptions::NotDefinedEntryMethod) { feature_instance.foo } }
+              .to delegate_to(ConvenientService, :raise)
+          end
         end
 
         context "when instance method with `name` on `feature_class` already defined after entry" do
@@ -141,6 +159,13 @@ RSpec.describe ConvenientService::Feature::Plugins::CanHaveEntries::Commands::De
               .to raise_error(ConvenientService::Feature::Plugins::CanHaveEntries::Exceptions::NotDefinedEntryMethod)
               .with_message(exception_message)
           end
+
+          specify do
+            command_result
+
+            expect { ignoring_exception(ConvenientService::Feature::Plugins::CanHaveEntries::Exceptions::NotDefinedEntryMethod) { feature_class.foo } }
+              .to delegate_to(ConvenientService, :raise)
+          end
         end
 
         example_group "generated instance method" do
@@ -150,6 +175,13 @@ RSpec.describe ConvenientService::Feature::Plugins::CanHaveEntries::Commands::De
             expect { feature_instance.foo }
               .to raise_error(ConvenientService::Feature::Plugins::CanHaveEntries::Exceptions::NotDefinedEntryMethod)
               .with_message(exception_message)
+          end
+
+          specify do
+            command_result
+
+            expect { ignoring_exception(ConvenientService::Feature::Plugins::CanHaveEntries::Exceptions::NotDefinedEntryMethod) { feature_instance.foo } }
+              .to delegate_to(ConvenientService, :raise)
           end
         end
       end

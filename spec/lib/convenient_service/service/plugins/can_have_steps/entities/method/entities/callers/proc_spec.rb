@@ -6,6 +6,10 @@ require "convenient_service"
 
 # rubocop:disable RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Callers::Proc do
+  include ConvenientService::RSpec::Helpers::IgnoringException
+
+  include ConvenientService::RSpec::Matchers::DelegateTo
+
   let(:caller) { described_class.new(proc) }
   let(:proc) { -> { :bar } }
   let(:direction) { :input }
@@ -69,6 +73,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
         expect { caller.validate_as_output_for_container!(container, method: method) }
           .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::OutputMethodProc)
           .with_message(exception_message)
+      end
+
+      specify do
+        expect { ignoring_exception(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::OutputMethodProc) { caller.validate_as_output_for_container!(container, method: method) } }
+          .to delegate_to(ConvenientService, :raise)
       end
     end
 

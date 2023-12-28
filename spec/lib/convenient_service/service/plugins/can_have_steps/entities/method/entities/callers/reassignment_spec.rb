@@ -6,6 +6,8 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Callers::Reassignment do
+  include ConvenientService::RSpec::Helpers::IgnoringException
+
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   let(:caller) { described_class.new(reassignemnt) }
@@ -55,6 +57,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
           .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::CallerCanNotCalculateReassignment)
           .with_message(exception_message)
       end
+
+      specify do
+        expect { ignoring_exception(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::CallerCanNotCalculateReassignment) { caller.calculate_value(method) } }
+          .to delegate_to(ConvenientService, :raise)
+      end
     end
 
     describe "#validate_as_input_for_container!" do
@@ -70,6 +77,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
         expect { caller.validate_as_input_for_container!(container, method: method) }
           .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::InputMethodReassignment)
           .with_message(exception_message)
+      end
+
+      specify do
+        expect { ignoring_exception(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::InputMethodReassignment) { caller.validate_as_input_for_container!(container, method: method) } }
+          .to delegate_to(ConvenientService, :raise)
       end
     end
 
@@ -94,12 +106,12 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
         caller.define_output_in_container!(container, index: index, method: method)
       end
 
-      specify {
+      specify do
         expect { caller.define_output_in_container!(container, index: index, method: method) }
           .to delegate_to(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Callers::Reassignment::Commands::DefineMethodInContainer, :call)
           .with_arguments(method: method, container: container, index: index)
           .and_return_its_value
-      }
+      end
     end
   end
 end

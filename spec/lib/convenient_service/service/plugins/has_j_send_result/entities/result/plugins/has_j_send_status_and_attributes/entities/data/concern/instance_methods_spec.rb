@@ -6,6 +6,8 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data::Concern::InstanceMethods do
+  include ConvenientService::RSpec::Helpers::IgnoringException
+
   include ConvenientService::RSpec::PrimitiveMatchers::CacheItsValue
   include ConvenientService::RSpec::Matchers::DelegateTo
 
@@ -102,6 +104,11 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           expect { data[:abc] }
             .to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Exceptions::NotExistingAttribute)
             .with_message(exception_message)
+        end
+
+        specify do
+          expect { ignoring_exception(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Exceptions::NotExistingAttribute) { data[:abc] } }
+            .to delegate_to(ConvenientService, :raise)
         end
       end
     end

@@ -6,6 +6,10 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Middleware do
+  include ConvenientService::RSpec::Helpers::IgnoringException
+
+  include ConvenientService::RSpec::Matchers::DelegateTo
+
   let(:middleware) { described_class }
 
   example_group "inheritance" do
@@ -99,6 +103,11 @@ RSpec.describe ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue
           expect { method_value }
             .to raise_error(ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Exceptions::ReturnValueNotKindOfResult)
             .with_message(exception_message)
+        end
+
+        specify do
+          expect { ignoring_exception(ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Exceptions::ReturnValueNotKindOfResult) { method_value } }
+            .to delegate_to(ConvenientService, :raise)
         end
       end
 

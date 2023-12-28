@@ -6,6 +6,10 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Concern::InstanceMethods do
+  include ConvenientService::RSpec::Helpers::IgnoringException
+
+  include ConvenientService::RSpec::Matchers::DelegateTo
+
   let(:method_class) do
     Class.new.tap do |klass|
       klass.class_exec(described_class) do |mod|
@@ -259,6 +263,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
               .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::MethodHasNoOrganizer)
               .with_message(message)
           end
+
+          specify do
+            expect { ignoring_exception(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::MethodHasNoOrganizer) { method.organizer } }
+              .to delegate_to(ConvenientService, :raise)
+          end
         end
 
         context "when `raise_when_missing` is `false`" do
@@ -282,6 +291,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
             expect { method.organizer(raise_when_missing: true) }
               .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::MethodHasNoOrganizer)
               .with_message(message)
+          end
+
+          specify do
+            expect { ignoring_exception(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::MethodHasNoOrganizer) { method.organizer(raise_when_missing: true) } }
+              .to delegate_to(ConvenientService, :raise)
           end
         end
       end
@@ -315,6 +329,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
           expect { method.value }
             .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::MethodHasNoOrganizer)
             .with_message(exception_message)
+        end
+
+        specify do
+          expect { ignoring_exception(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::MethodHasNoOrganizer) { method.value } }
+            .to delegate_to(ConvenientService, :raise)
         end
       end
 

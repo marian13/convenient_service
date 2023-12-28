@@ -6,6 +6,10 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Support::DependencyContainer::Commands::AssertValidMethod do
+  include ConvenientService::RSpec::Helpers::IgnoringException
+
+  include ConvenientService::RSpec::Matchers::DelegateTo
+
   example_group "class methods" do
     describe ".call" do
       subject(:command_result) { described_class.call(slug: slug, scope: scope, container: container) }
@@ -38,6 +42,11 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::Assert
           expect { command_result }
             .to raise_error(ConvenientService::Support::DependencyContainer::Exceptions::NotExportedMethod)
             .with_message(exception_message)
+        end
+
+        specify do
+          expect { ignoring_exception(ConvenientService::Support::DependencyContainer::Exceptions::NotExportedMethod) { command_result } }
+            .to delegate_to(ConvenientService, :raise)
         end
       end
 

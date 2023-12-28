@@ -6,6 +6,10 @@ require "convenient_service"
 
 # rubocop:disable RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern do
+  include ConvenientService::RSpec::Helpers::IgnoringException
+
+  include ConvenientService::RSpec::Matchers::DelegateTo
+
   let(:service_class) do
     Class.new do
       include ConvenientService::Service::Configs::Minimal
@@ -55,6 +59,11 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern do
         expect { result }
           .to raise_error(ConvenientService::Service::Plugins::HasResult::Exceptions::ResultIsNotOverridden)
           .with_message(exception_message)
+      end
+
+      specify do
+        expect { ignoring_exception(ConvenientService::Service::Plugins::HasResult::Exceptions::ResultIsNotOverridden) { result } }
+          .to delegate_to(ConvenientService, :raise)
       end
     end
   end

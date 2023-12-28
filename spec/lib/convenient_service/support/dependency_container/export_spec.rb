@@ -6,6 +6,8 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Support::DependencyContainer::Export do
+  include ConvenientService::RSpec::Helpers::IgnoringException
+
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   let(:container) do
@@ -50,6 +52,11 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Export do
           expect { include_module_result }
             .to raise_error(ConvenientService::Support::DependencyContainer::Exceptions::NotModule)
             .with_message(exception_message)
+        end
+
+        specify do
+          expect { ignoring_exception(ConvenientService::Support::DependencyContainer::Exceptions::NotModule) { include_module_result } }
+            .to delegate_to(ConvenientService, :raise)
         end
       end
     end

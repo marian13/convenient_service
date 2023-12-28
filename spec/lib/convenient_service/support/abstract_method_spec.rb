@@ -6,6 +6,10 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Support::AbstractMethod do
+  include ConvenientService::RSpec::Helpers::IgnoringException
+
+  include ConvenientService::RSpec::Matchers::DelegateTo
+
   example_group "modules" do
     it "extends `ConvenientService::Support::Concern`" do
       expect(described_class.included_modules).to include(ConvenientService::Support::Concern)
@@ -89,6 +93,11 @@ RSpec.describe ConvenientService::Support::AbstractMethod do
               .to raise_error(ConvenientService::Support::AbstractMethod::Exceptions::AbstractMethodNotOverridden)
               .with_message(exception_message)
           end
+
+          specify do
+            expect { ignoring_exception(ConvenientService::Support::AbstractMethod::Exceptions::AbstractMethodNotOverridden) { instance.foo } }
+              .to delegate_to(ConvenientService, :raise)
+          end
         end
 
         context "when instance is descandant of class" do
@@ -112,6 +121,11 @@ RSpec.describe ConvenientService::Support::AbstractMethod do
             expect { klass.foo }
               .to raise_error(ConvenientService::Support::AbstractMethod::Exceptions::AbstractMethodNotOverridden)
               .with_message(exception_message)
+          end
+
+          specify do
+            expect { ignoring_exception(ConvenientService::Support::AbstractMethod::Exceptions::AbstractMethodNotOverridden) { klass.foo } }
+              .to delegate_to(ConvenientService, :raise)
           end
         end
       end

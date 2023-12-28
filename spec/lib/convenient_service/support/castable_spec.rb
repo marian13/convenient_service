@@ -6,6 +6,10 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Support::Castable do
+  include ConvenientService::RSpec::Helpers::IgnoringException
+
+  include ConvenientService::RSpec::Matchers::DelegateTo
+
   let(:klass) do
     Class.new.tap do |klass|
       klass.class_exec(described_class) do |mod|
@@ -48,6 +52,11 @@ RSpec.describe ConvenientService::Support::Castable do
           .to raise_error(ConvenientService::Support::AbstractMethod::Exceptions::AbstractMethodNotOverridden)
           .with_message(exception_message)
       end
+
+      specify do
+        expect { ignoring_exception(ConvenientService::Support::AbstractMethod::Exceptions::AbstractMethodNotOverridden) { klass.cast(other) } }
+          .to delegate_to(ConvenientService, :raise)
+      end
     end
 
     describe ".cast!" do
@@ -78,6 +87,11 @@ RSpec.describe ConvenientService::Support::Castable do
           expect { klass.cast!(other) }
             .to raise_error(ConvenientService::Support::Castable::Exceptions::FailedToCast)
             .with_message(message)
+        end
+
+        specify do
+          expect { ignoring_exception(ConvenientService::Support::Castable::Exceptions::FailedToCast) { klass.cast!(other) } }
+            .to delegate_to(ConvenientService, :raise)
         end
       end
 

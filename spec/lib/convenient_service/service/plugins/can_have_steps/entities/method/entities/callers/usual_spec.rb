@@ -6,6 +6,8 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Callers::Usual do
+  include ConvenientService::RSpec::Helpers::IgnoringException
+
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   let(:caller) { described_class.new(:foo) }
@@ -75,6 +77,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
             .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::InputMethodIsNotDefinedInContainer)
             .with_message(exception_message)
         end
+
+        specify do
+          expect { ignoring_exception(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::InputMethodIsNotDefinedInContainer) { caller.validate_as_input_for_container!(container, method: method) } }
+            .to delegate_to(ConvenientService, :raise)
+        end
       end
 
       context "when container has defined method" do
@@ -109,6 +116,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
             .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::OutputMethodIsDefinedInContainer)
             .with_message(exception_message)
         end
+
+        specify do
+          expect { ignoring_exception(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::OutputMethodIsDefinedInContainer) { caller.validate_as_output_for_container!(container, method: method) } }
+            .to delegate_to(ConvenientService, :raise)
+        end
       end
     end
 
@@ -116,12 +128,12 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
       let(:direction) { :output }
       let(:index) { 0 }
 
-      specify {
+      specify do
         expect { caller.define_output_in_container!(container, index: index, method: method) }
           .to delegate_to(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Commands::DefineMethodInContainer, :call)
           .with_arguments(container: container, index: index, method: method)
           .and_return_its_value
-      }
+      end
     end
   end
 end

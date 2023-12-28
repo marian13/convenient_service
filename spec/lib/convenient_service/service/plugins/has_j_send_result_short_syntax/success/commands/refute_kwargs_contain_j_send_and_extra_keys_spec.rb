@@ -6,6 +6,9 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Success::Commands::RefuteKwargsContainJSendAndExtraKeys do
+  include ConvenientService::RSpec::Helpers::IgnoringException
+
+  include ConvenientService::RSpec::Matchers::DelegateTo
   include ConvenientService::RSpec::Matchers::Results
 
   example_group "class methods" do
@@ -58,6 +61,11 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultShortSyntax::S
               .to raise_error(ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Success::Exceptions::KwargsContainJSendAndExtraKeys)
               .with_message(exception_message)
           end
+
+          specify do
+            expect { ignoring_exception(ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Success::Exceptions::KwargsContainJSendAndExtraKeys) { command_result } }
+              .to delegate_to(ConvenientService, :raise)
+          end
         end
       end
 
@@ -99,6 +107,11 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultShortSyntax::S
               .to raise_error(ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Success::Exceptions::KwargsContainJSendAndExtraKeys)
               .with_message(exception_message)
           end
+
+          specify do
+            expect { ignoring_exception(ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Success::Exceptions::KwargsContainJSendAndExtraKeys) { command_result } }
+              .to delegate_to(ConvenientService, :raise)
+          end
         end
       end
 
@@ -139,6 +152,11 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultShortSyntax::S
             expect { command_result }
               .to raise_error(ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Success::Exceptions::KwargsContainJSendAndExtraKeys)
               .with_message(exception_message)
+          end
+
+          specify do
+            expect { ignoring_exception(ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Success::Exceptions::KwargsContainJSendAndExtraKeys) { command_result } }
+              .to delegate_to(ConvenientService, :raise)
           end
         end
       end

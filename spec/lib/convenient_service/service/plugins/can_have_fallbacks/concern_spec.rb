@@ -6,6 +6,8 @@ require "convenient_service"
 
 # rubocop:disable RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Service::Plugins::CanHaveFallbacks::Concern do
+  include ConvenientService::RSpec::Helpers::IgnoringException
+
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   let(:service_class) do
@@ -57,6 +59,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveFallbacks::Concern do
           .to raise_error(ConvenientService::Service::Plugins::CanHaveFallbacks::Exceptions::FallbackResultIsNotOverridden)
           .with_message(exception_message)
       end
+
+      specify do
+        expect { ignoring_exception(ConvenientService::Service::Plugins::CanHaveFallbacks::Exceptions::FallbackResultIsNotOverridden) { service_instance.fallback_failure_result } }
+          .to delegate_to(ConvenientService, :raise)
+      end
     end
 
     describe "#fallback_error_result" do
@@ -72,6 +79,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveFallbacks::Concern do
         expect { service_instance.fallback_error_result }
           .to raise_error(ConvenientService::Service::Plugins::CanHaveFallbacks::Exceptions::FallbackResultIsNotOverridden)
           .with_message(exception_message)
+      end
+
+      specify do
+        expect { ignoring_exception(ConvenientService::Service::Plugins::CanHaveFallbacks::Exceptions::FallbackResultIsNotOverridden) { service_instance.fallback_error_result } }
+          .to delegate_to(ConvenientService, :raise)
       end
     end
   end

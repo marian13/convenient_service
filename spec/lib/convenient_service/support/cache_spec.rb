@@ -6,6 +6,10 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Support::Cache do
+  include ConvenientService::RSpec::Helpers::IgnoringException
+
+  include ConvenientService::RSpec::Matchers::DelegateTo
+
   example_group "class methods" do
     describe ".create" do
       let(:cache) { described_class.create(backend: backend) }
@@ -36,6 +40,11 @@ RSpec.describe ConvenientService::Support::Cache do
             expect { cache }
               .to raise_error(ConvenientService::Support::Cache::Exceptions::NotSupportedBackend)
               .with_message(exception_message)
+          end
+
+          specify do
+            expect { ignoring_exception(ConvenientService::Support::Cache::Exceptions::NotSupportedBackend) { cache } }
+              .to delegate_to(ConvenientService, :raise)
           end
         end
 

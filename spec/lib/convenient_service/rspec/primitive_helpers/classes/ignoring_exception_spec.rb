@@ -6,6 +6,8 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::RSpec::PrimitiveHelpers::Classes::IgnoringException do
+  include ConvenientService::RSpec::Helpers::IgnoringException
+
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   example_group "instance methods" do
@@ -26,6 +28,11 @@ RSpec.describe ConvenientService::RSpec::PrimitiveHelpers::Classes::IgnoringExce
           expect { command_result }
             .to raise_error(ConvenientService::RSpec::PrimitiveHelpers::Classes::IgnoringException::Exceptions::IgnoredExceptionIsNotRaised)
             .with_message(exception_message)
+        end
+
+        specify do
+          expect { ignoring_exception(ConvenientService::RSpec::PrimitiveHelpers::Classes::IgnoringException::Exceptions::IgnoredExceptionIsNotRaised) { command_result } }
+            .to delegate_to(ConvenientService, :raise)
         end
       end
 

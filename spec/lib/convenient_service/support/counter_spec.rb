@@ -8,6 +8,8 @@ require "convenient_service"
 RSpec.describe ConvenientService::Support::Counter do
   include ConvenientService::RSpec::Helpers::IgnoringException
 
+  include ConvenientService::RSpec::Matchers::DelegateTo
+
   let(:counter) { described_class.new(initial_value: initial_value, min_value: min_value, max_value: max_value) }
   let(:initial_value) { 0 }
   let(:min_value) { -1_000_000 }
@@ -139,6 +141,11 @@ RSpec.describe ConvenientService::Support::Counter do
             .with_message(exception_message)
         end
 
+        specify do
+          expect { ignoring_exception(ConvenientService::Support::Counter::Exceptions::ValueAfterIncrementIsGreaterThanMaxValue) { counter.increment!(n) } }
+            .to delegate_to(ConvenientService, :raise)
+        end
+
         it "does NOT changes current value" do
           expect { ignoring_exception(ConvenientService::Support::Counter::Exceptions::ValueAfterIncrementIsGreaterThanMaxValue) { counter.increment!(n) } }.not_to change(counter, :current_value)
         end
@@ -233,6 +240,11 @@ RSpec.describe ConvenientService::Support::Counter do
           expect { counter.decrement!(n) }
             .to raise_error(ConvenientService::Support::Counter::Exceptions::ValueAfterDecrementIsLowerThanMinValue)
             .with_message(exception_message)
+        end
+
+        specify do
+          expect { ignoring_exception(ConvenientService::Support::Counter::Exceptions::ValueAfterDecrementIsLowerThanMinValue) { counter.decrement!(n) } }
+            .to delegate_to(ConvenientService, :raise)
         end
 
         it "does NOT changes current value" do
