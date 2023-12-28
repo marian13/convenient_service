@@ -7,6 +7,7 @@ require "convenient_service"
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Commands::DefineMethodInContainer do
   include ConvenientService::RSpec::Helpers::IgnoringException
+
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   ##
@@ -75,6 +76,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
               .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::NotCompletedStep)
               .with_message(exception_message)
           end
+
+          specify do
+            expect { ignoring_exception(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::NotCompletedStep) { organizer_service_instance.bar } }
+              .to delegate_to(ConvenientService, :raise)
+          end
         end
 
         context "when step is completed" do
@@ -103,6 +109,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
               expect { organizer_service_instance.bar }
                 .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::NotExistingStepResultDataAttribute)
                 .with_message(exception_message)
+            end
+
+            specify do
+              expect { ignoring_exception(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::NotExistingStepResultDataAttribute) { organizer_service_instance.bar } }
+                .to delegate_to(ConvenientService, :raise)
             end
 
             specify do

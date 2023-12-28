@@ -41,7 +41,7 @@ module ConvenientService
           hash.each_key do |key|
             next if valid_keys.include?(key)
 
-            raise ::ArgumentError.new("Unknown key: #{key.inspect}. Valid keys are: #{valid_keys.map(&:inspect).join(", ")}")
+            ::ConvenientService.raise ::ArgumentError.new("Unknown key: #{key.inspect}. Valid keys are: #{valid_keys.map(&:inspect).join(", ")}")
           end
         end
       end

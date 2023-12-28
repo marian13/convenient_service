@@ -28,9 +28,9 @@ module ConvenientService
                     def #{name}
                       step, key, method_name = steps[#{index}], :#{key}, :#{name}
 
-                      raise #{not_completed_step_error}.new(step: step, method_name: method_name) unless step.completed?
+                      ::ConvenientService.raise #{not_completed_step_error}.new(step: step, method_name: method_name) unless step.completed?
 
-                      raise #{not_existing_step_result_data_attribute_error}.new(step: step, key: key) unless step.result.unsafe_data.has_attribute?(key)
+                      ::ConvenientService.raise #{not_existing_step_result_data_attribute_error}.new(step: step, key: key) unless step.result.unsafe_data.has_attribute?(key)
 
                       step.result.unsafe_data[key]
                     end
