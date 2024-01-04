@@ -127,8 +127,13 @@ Gem::Specification.new do |spec|
   # - https://github.com/mbj/mutant/blob/main/docs/mutant-rspec.md
   # - https://github.com/mbj/mutant/blob/main/docs/incremental.md
   #
-  spec.add_development_dependency "mutant", "~> 0.11.21"
-  spec.add_development_dependency "mutant-rspec", "~> 0.11.21"
+  # NOTE: How to get a licence key?
+  # - https://github.com/mbj/mutant/issues/1396
+  #
+  if ::ENV["CONVENIENT_SERVICE_MUTANT_LICENCE_KEY"]
+    spec.add_development_dependency "mutant", "~> 0.11.21"
+    spec.add_development_dependency "mutant-rspec", "~> 0.11.21"
+  end
 
   ##
   # Used for coloring logs.
