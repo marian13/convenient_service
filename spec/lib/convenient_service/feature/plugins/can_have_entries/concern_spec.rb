@@ -39,13 +39,13 @@ RSpec.describe ConvenientService::Feature::Plugins::CanHaveEntries::Concern do
 
   example_group "class methods" do
     describe ".entry" do
-      let(:name) { :foo }
+      let(:names) { [:foo, :bar] }
       let(:body) { proc { :foo } }
 
       specify do
-        expect { feature_class.entry(name, &body) }
-          .to delegate_to(ConvenientService::Feature::Plugins::CanHaveEntries::Commands::DefineEntry, :call)
-          .with_arguments(feature_class: feature_class, name: name, body: body)
+        expect { feature_class.entry(*names, &body) }
+          .to delegate_to(ConvenientService::Feature::Plugins::CanHaveEntries::Commands::DefineEntries, :call)
+          .with_arguments(feature_class: feature_class, names: names, body: body)
           .and_return_its_value
       end
     end

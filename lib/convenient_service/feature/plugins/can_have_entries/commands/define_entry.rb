@@ -20,14 +20,14 @@ module ConvenientService
 
             ##
             # @!attribute [r] body
-            #   @return [Proc]
+            #   @return [Proc, nil]
             #
             attr_reader :body
 
             ##
             # @param feature_class [Class]
             # @param name [String, Symbol]
-            # @param body [Proc]
+            # @param body [Proc, nil]
             #
             def initialize(feature_class:, name:, body:)
               @feature_class = feature_class

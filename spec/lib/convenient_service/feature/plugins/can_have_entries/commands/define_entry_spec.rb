@@ -12,8 +12,6 @@ RSpec.describe ConvenientService::Feature::Plugins::CanHaveEntries::Commands::De
 
   example_group "class methods" do
     describe ".call" do
-      include ConvenientService::RSpec::Matchers::DelegateTo
-
       subject(:command_result) { described_class.call(feature_class: feature_class, name: name, body: body) }
 
       let(:feature_class) do

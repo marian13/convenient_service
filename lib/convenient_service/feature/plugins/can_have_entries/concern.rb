@@ -9,12 +9,12 @@ module ConvenientService
 
           class_methods do
             ##
-            # @param name [String, Symbol]
+            # @param names [Array<String, Symbol>]
             # @param body [Proc, nil]
             # @return [String, Symbol]
             #
-            def entry(name, &body)
-              Commands::DefineEntry.call(feature_class: self, name: name, body: body)
+            def entry(*names, &body)
+              Commands::DefineEntries.call(feature_class: self, names: names, body: body)
             end
           end
         end
