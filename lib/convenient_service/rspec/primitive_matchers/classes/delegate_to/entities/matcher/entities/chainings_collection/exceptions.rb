@@ -39,7 +39,7 @@ module ConvenientService
                         message = <<~TEXT
                           Returns its value chaining is already set.
 
-                          Did you use `and_returns_its_value` multiple times?
+                          Did you use `and_return_its_value` multiple times?
                         TEXT
 
                         initialize(message)

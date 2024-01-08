@@ -10,14 +10,24 @@ module ConvenientService
               message = <<~TEXT
                 Entry for `#{name}` is registered inside `#{feature.class}` feature, but its corresponding method is NOT defined.
 
-                Did you forget to define it? For example:
+                Did you forget to define it? For example, using method form:
 
                 class #{feature.class}
                   entry :#{name}
 
                   # ...
 
-                  def #{name}
+                  def #{name}(...)
+                    # ...
+                  end
+
+                  # ...
+                end
+
+                Or using block form:
+
+                class #{feature.class}
+                  entry :#{name} do |*args, **kwargs, &block|
                     # ...
                   end
 

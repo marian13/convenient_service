@@ -44,13 +44,27 @@ module ConvenientService
               # That is why `feature_class.class_exec` wrapper is required.
               #
               feature_class.class_exec(name) do |name|
-                define_singleton_method(name) { |*args, **kwargs, &block| new.public_send(name, *args, **kwargs, &block) }
+                define_singleton_method(name) { |*args, **kwargs, &block| new.entry(name, *args, **kwargs, &block) }
               end
 
               if body
                 feature_class.define_method(name, &body)
               else
-                feature_class.define_method(name) { ::ConvenientService.raise ::ConvenientService::Feature::Plugins::CanHaveEntries::Exceptions::NotDefinedEntryMethod.new(name: __method__, feature: self) }
+                feature_class.define_method(name) { |*args, **kwargs, &block| ::ConvenientService.raise ::ConvenientService::Feature::Plugins::CanHaveEntries::Exceptions::NotDefinedEntryMethod.new(name: __method__, feature: self) }
+              end
+
+              ##
+              # NOTE: Just `feature_class.instance_proxy_class.define_method` does NOT create a closure for `name`.
+              # That is why `feature_class.instance_proxy_class.class_exec` wrapper is required.
+              #
+              feature_class.instance_proxy_class.class_exec(name) do |name|
+                define_method(name) do |*args, **kwargs, &block|
+                  instance_proxy_target.entry(name, *args, **kwargs, &block)
+                end
+              end
+
+              feature_class.instance_proxy_class.define_method(:entry) do |*args, **kwargs, &block|
+                instance_proxy_target.entry(*args, **kwargs, &block)
               end
 
               name

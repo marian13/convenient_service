@@ -14,6 +14,7 @@ require_relative "plugins/has_around_callbacks"
 require_relative "plugins/has_constructor"
 require_relative "plugins/has_constructor_without_initialize"
 require_relative "plugins/has_internals"
+require_relative "plugins/has_instance_proxy"
 require_relative "plugins/has_j_send_result_duck_short_syntax"
 
 require_relative "plugins/aliases"

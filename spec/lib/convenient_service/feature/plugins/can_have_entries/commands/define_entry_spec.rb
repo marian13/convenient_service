@@ -23,137 +23,166 @@ RSpec.describe ConvenientService::Feature::Plugins::CanHaveEntries::Commands::De
       let(:feature_instance) { feature_class.new }
 
       let(:name) { :foo }
+      let(:body) { proc { |*args, **kwargs, &block| :foo } }
 
-      context "when `body` is `nil`" do
-        let(:body) { nil }
+      let(:args) { [:foo] }
+      let(:kwargs) { {foo: :bar} }
+      let(:block) { proc { |*args, **kwargs, &block| [:foo, args, kwargs, block] } }
 
-        let(:exception_message) do
-          <<~TEXT
-            Entry for `#{name}` is registered inside `#{feature_class}` feature, but its corresponding method is NOT defined.
+      it "defines class method with `name` on `feature_class`" do
+        ##
+        # NOTE: `false` in `methods(false)` means own methods.
+        # - https://ruby-doc.org/core-2.7.0/Object.html#method-i-methods
+        #
+        expect { command_result }.to change { feature_class.methods(false).include?(name.to_sym) }.from(false).to(true)
+      end
 
-            Did you forget to define it? For example:
+      it "defines instance method with `name` on `feature_class`" do
+        ##
+        # NOTE: `false` in `instance_methods(false)` means own methods.
+        # - https://ruby-doc.org/core-2.7.0/Object.html#method-i-methods
+        #
+        expect { command_result }.to change { feature_class.instance_methods(false).include?(name.to_sym) }.from(false).to(true)
+      end
 
-            class #{feature_class}
-              entry :#{name}
+      it "defines instance method with `name` on `feature_class.instance_proxy_class`" do
+        ##
+        # NOTE: `false` in `methods(false)` means own methods.
+        # - https://ruby-doc.org/core-2.7.0/Object.html#method-i-methods
+        #
+        expect { command_result }.to change { feature_class.instance_proxy_class.instance_methods(false).include?(name.to_sym) }.from(false).to(true)
+      end
 
-              # ...
+      it "defines `entry` instance method on `feature_class.instance_proxy_class`" do
+        ##
+        # NOTE: `false` in `methods(false)` means own methods.
+        # - https://ruby-doc.org/core-2.7.0/Object.html#method-i-methods
+        #
+        expect { command_result }.to change { feature_class.instance_proxy_class.instance_methods(false).include?(:entry) }.from(false).to(true)
+      end
 
-              def #{name}
+      it "returns `name`" do
+        expect(command_result).to eq(name)
+      end
+
+      context "when class method with `name` on `feature_class` already defined before entry" do
+        let(:feature_class) do
+          Class.new do
+            include ConvenientService::Feature::Configs::Standard
+
+            def self.foo(*args, **kwargs, &block)
+              :foo
+            end
+          end
+        end
+
+        it "overrides that already defined before entry class method" do
+          command_result
+
+          expect(feature_class.foo(*args, **kwargs, &block)).to eq(body.call(*args, **kwargs, &block))
+        end
+      end
+
+      context "when class method with `name` on `feature_class` already defined after entry" do
+        # rubocop:disable RSpec/ExampleLength
+        it "does NOT override that already defined after entry class method" do
+          command_result
+
+          feature_class.class_exec do
+            def self.foo(*args, **kwargs, &block)
+              :foo
+            end
+          end
+
+          expect(feature_class.foo(*args, **kwargs, &block)).to eq(:foo)
+        end
+        # rubocop:enable RSpec/ExampleLength
+      end
+
+      context "when instance method with `name` on `feature_class` already defined before entry" do
+        let(:feature_class) do
+          Class.new do
+            include ConvenientService::Feature::Configs::Standard
+
+            def foo(*args, **kwargs, &block)
+              :foo
+            end
+          end
+        end
+
+        it "overrides that already defined before entry instance method" do
+          command_result
+
+          expect(feature_class.foo(*args, **kwargs, &block)).to eq(body.call(*args, **kwargs, &block))
+        end
+      end
+
+      context "when instance method with `name` on `feature_class` already defined after entry" do
+        # rubocop:disable RSpec/ExampleLength
+        it "does NOT override that already defined after entry instance method" do
+          command_result
+
+          feature_class.class_exec do
+            def foo(*args, **kwargs, &block)
+              :foo
+            end
+          end
+
+          expect(feature_instance.foo(*args, **kwargs, &block)).to eq(:foo)
+        end
+        # rubocop:enable RSpec/ExampleLength
+      end
+
+      example_group "generated class method" do
+        specify do
+          allow(feature_class).to receive(:new).and_return(feature_instance)
+
+          command_result
+
+          expect { feature_class.foo(*args, **kwargs, &block) }
+            .to delegate_to(feature_instance, :entry)
+            .with_arguments(name, *args, **kwargs, &block)
+        end
+      end
+
+      example_group "generated instance method" do
+        context "when `body` is `nil`" do
+          let(:body) { nil }
+
+          let(:exception_message) do
+            <<~TEXT
+              Entry for `#{name}` is registered inside `#{feature_class}` feature, but its corresponding method is NOT defined.
+
+              Did you forget to define it? For example, using method form:
+
+              class #{feature_class}
+                entry :#{name}
+
+                # ...
+
+                def #{name}(...)
+                  # ...
+                end
+
                 # ...
               end
 
-              # ...
-            end
-          TEXT
-        end
+              Or using block form:
 
-        it "returns `name`" do
-          expect(command_result).to eq(name)
-        end
+              class #{feature_class}
+                entry :#{name} do |*args, **kwargs, &block|
+                  # ...
+                end
 
-        it "defines class method with `name` on `feature_class`" do
-          ##
-          # NOTE: `false` in `methods(false)` means own methods.
-          # - https://ruby-doc.org/core-2.7.0/Object.html#method-i-methods
-          #
-          expect { command_result }.to change { feature_class.methods(false).include?(name.to_sym) }.from(false).to(true)
-        end
-
-        it "defines instance method with `name` on `feature_class`" do
-          ##
-          # NOTE: `false` in `instance_methods(false)` means own methods.
-          # - https://ruby-doc.org/core-2.7.0/Object.html#method-i-methods
-          #
-          expect { command_result }.to change { feature_class.instance_methods(false).include?(name.to_sym) }.from(false).to(true)
-        end
-
-        context "when class method with `name` on `feature_class` already defined before entry" do
-          let(:feature_class) do
-            Class.new do
-              include ConvenientService::Feature::Configs::Standard
-            end
-          end
-
-          it "overrides that already defined before entry class method" do
-            command_result
-
-            expect { feature_class.foo }
-              .to raise_error(ConvenientService::Feature::Plugins::CanHaveEntries::Exceptions::NotDefinedEntryMethod)
-              .with_message(exception_message)
-          end
-
-          specify do
-            command_result
-
-            expect { ignoring_exception(ConvenientService::Feature::Plugins::CanHaveEntries::Exceptions::NotDefinedEntryMethod) { feature_class.foo } }
-              .to delegate_to(ConvenientService, :raise)
-          end
-        end
-
-        context "when class method with `name` on `feature_class` already defined after entry" do
-          # rubocop:disable RSpec/ExampleLength
-          it "does NOT override that already defined after entry class method" do
-            command_result
-
-            feature_class.class_exec do
-              def self.foo
-                :foo
+                # ...
               end
-            end
-
-            expect(feature_class.foo).to eq(:foo)
-          end
-          # rubocop:enable RSpec/ExampleLength
-        end
-
-        context "when instance method with `name` on `feature_class` already defined before entry" do
-          let(:feature_class) do
-            Class.new do
-              include ConvenientService::Feature::Configs::Standard
-
-              def foo
-                :foo
-              end
-            end
+            TEXT
           end
 
-          it "overrides that already defined before entry instance method" do
-            command_result
-
-            expect { feature_instance.foo }
-              .to raise_error(ConvenientService::Feature::Plugins::CanHaveEntries::Exceptions::NotDefinedEntryMethod)
-              .with_message(exception_message)
-          end
-
-          specify do
-            command_result
-
-            expect { ignoring_exception(ConvenientService::Feature::Plugins::CanHaveEntries::Exceptions::NotDefinedEntryMethod) { feature_instance.foo } }
-              .to delegate_to(ConvenientService, :raise)
-          end
-        end
-
-        context "when instance method with `name` on `feature_class` already defined after entry" do
-          # rubocop:disable RSpec/ExampleLength
-          it "does NOT override that already defined after entry instance method" do
-            command_result
-
-            feature_class.class_exec do
-              def foo
-                :foo
-              end
-            end
-
-            expect(feature_instance.foo).to eq(:foo)
-          end
-          # rubocop:enable RSpec/ExampleLength
-        end
-
-        example_group "generated class method" do
           it "raises `ConvenientService::Feature::Plugins::CanHaveEntries::Exceptions::NotDefinedEntryMethod`" do
             command_result
 
-            expect { feature_class.foo }
+            expect { feature_instance.foo(*args, **kwargs, &block) }
               .to raise_error(ConvenientService::Feature::Plugins::CanHaveEntries::Exceptions::NotDefinedEntryMethod)
               .with_message(exception_message)
           end
@@ -161,158 +190,39 @@ RSpec.describe ConvenientService::Feature::Plugins::CanHaveEntries::Commands::De
           specify do
             command_result
 
-            expect { ignoring_exception(ConvenientService::Feature::Plugins::CanHaveEntries::Exceptions::NotDefinedEntryMethod) { feature_class.foo } }
+            expect { ignoring_exception(ConvenientService::Feature::Plugins::CanHaveEntries::Exceptions::NotDefinedEntryMethod) { feature_instance.foo(*args, **kwargs, &block) } }
               .to delegate_to(ConvenientService, :raise)
           end
         end
 
-        example_group "generated instance method" do
-          it "raises `ConvenientService::Feature::Plugins::CanHaveEntries::Exceptions::NotDefinedEntryMethod`" do
+        context "when `body` is proc" do
+          let(:body) { proc { |*args, **kwargs, &block| [__method__, args, kwargs, block] } }
+
+          it "returns `body` value" do
             command_result
 
-            expect { feature_instance.foo }
-              .to raise_error(ConvenientService::Feature::Plugins::CanHaveEntries::Exceptions::NotDefinedEntryMethod)
-              .with_message(exception_message)
-          end
-
-          specify do
-            command_result
-
-            expect { ignoring_exception(ConvenientService::Feature::Plugins::CanHaveEntries::Exceptions::NotDefinedEntryMethod) { feature_instance.foo } }
-              .to delegate_to(ConvenientService, :raise)
+            expect(feature_instance.foo(*args, **kwargs, &block)).to eq([name, args, kwargs, block])
           end
         end
       end
 
-      context "when `body` is proc" do
-        let(:body) { proc { |*args, **kwargs, &block| [__method__, args, kwargs, block] } }
+      example_group "generated instance proxy instance method" do
+        specify do
+          command_result
 
-        it "returns `name`" do
-          expect(command_result).to eq(name)
+          expect { feature_instance.foo(*args, **kwargs, &block) }
+            .to delegate_to(feature_instance.instance_proxy_target, :entry)
+            .with_arguments(name, *args, **kwargs, &block)
         end
+      end
 
-        it "defines class method with `name` on `feature_class`" do
-          ##
-          # NOTE: `false` in `methods(false)` means own methods.
-          # - https://ruby-doc.org/core-2.7.0/Object.html#method-i-methods
-          #
-          expect { command_result }.to change { feature_class.methods(false).include?(name.to_sym) }.from(false).to(true)
-        end
+      example_group "generated instance proxy `entry` instance method" do
+        specify do
+          command_result
 
-        it "defines instance method with `name` on `feature_class`" do
-          ##
-          # NOTE: `false` in `instance_methods(false)` means own methods.
-          # - https://ruby-doc.org/core-2.7.0/Object.html#method-i-methods
-          #
-          expect { command_result }.to change { feature_class.instance_methods(false).include?(name.to_sym) }.from(false).to(true)
-        end
-
-        context "when class method with `name` on `feature_class` already defined before entry" do
-          let(:feature_class) do
-            Class.new do
-              include ConvenientService::Feature::Configs::Standard
-
-              def self.foo
-                :foo
-              end
-            end
-          end
-
-          it "overrides that already defined before entry class method" do
-            command_result
-
-            expect(feature_class.foo).to eq([name, [], {}, nil])
-          end
-        end
-
-        context "when class method with `name` on `feature_class` already defined after entry" do
-          # rubocop:disable RSpec/ExampleLength
-          it "does NOT override that already defined after entry class method" do
-            command_result
-
-            feature_class.class_exec do
-              def self.foo
-                :foo
-              end
-            end
-
-            expect(feature_class.foo).to eq(:foo)
-          end
-          # rubocop:enable RSpec/ExampleLength
-        end
-
-        context "when instance method with `name` on `feature_class` already defined before entry" do
-          let(:feature_class) do
-            Class.new do
-              include ConvenientService::Feature::Configs::Standard
-
-              def foo
-                :foo
-              end
-            end
-          end
-
-          it "overrides that already defined before entry instance method" do
-            command_result
-
-            expect(feature_instance.foo).to eq([name, [], {}, nil])
-          end
-        end
-
-        context "when instance method with `name` on `feature_class` already defined after entry" do
-          # rubocop:disable RSpec/ExampleLength
-          it "does NOT override that already defined after entry instance method" do
-            command_result
-
-            feature_class.class_exec do
-              def foo
-                :foo
-              end
-            end
-
-            expect(feature_instance.foo).to eq(:foo)
-          end
-          # rubocop:enable RSpec/ExampleLength
-        end
-
-        example_group "generated class method" do
-          it "returns `body` value" do
-            command_result
-
-            expect(feature_class.foo).to eq([name, [], {}, nil])
-          end
-
-          context "when `body` accepts arguments" do
-            let(:args) { [:foo] }
-            let(:kwargs) { {foo: :bar} }
-            let(:block) { proc { :foo } }
-
-            it "accepts same arguments as `body`" do
-              command_result
-
-              expect(feature_class.foo(*args, **kwargs, &block)).to eq([name, args, kwargs, block])
-            end
-          end
-        end
-
-        example_group "generated instance method" do
-          it "returns `body` value" do
-            command_result
-
-            expect(feature_instance.foo).to eq([name, [], {}, nil])
-          end
-
-          context "when `body` accepts arguments" do
-            let(:args) { [:foo] }
-            let(:kwargs) { {foo: :bar} }
-            let(:block) { proc { :foo } }
-
-            it "accepts same arguments as `body`" do
-              command_result
-
-              expect(feature_instance.foo(*args, **kwargs, &block)).to eq([name, args, kwargs, block])
-            end
-          end
+          expect { feature_instance.entry(*args, **kwargs, &block) }
+            .to delegate_to(feature_instance.instance_proxy_target, :entry)
+            .with_arguments(*args, **kwargs, &block)
         end
       end
     end

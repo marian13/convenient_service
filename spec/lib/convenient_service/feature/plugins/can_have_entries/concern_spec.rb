@@ -14,6 +14,8 @@ RSpec.describe ConvenientService::Feature::Plugins::CanHaveEntries::Concern do
     end
   end
 
+  let(:feature_instance) { feature_class.new }
+
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
     include ConvenientService::RSpec::PrimitiveMatchers::ExtendModule
@@ -34,6 +36,34 @@ RSpec.describe ConvenientService::Feature::Plugins::CanHaveEntries::Concern do
       end
 
       it { is_expected.to extend_module(described_class::ClassMethods) }
+    end
+  end
+
+  example_group "instance methods" do
+    describe "#entry" do
+      let(:name) { :foo }
+      let(:args) { [:foo] }
+      let(:kwargs) { {foo: :bar} }
+      let(:block) { proc { :foo } }
+
+      let(:feature_class) do
+        Class.new do
+          include ConvenientService::Feature::Configs::Standard
+
+          entry :foo
+
+          def foo(*args, **kwargs, &block)
+            :foo
+          end
+        end
+      end
+
+      specify do
+        expect { feature_instance.entry(name, *args, **kwargs, &block) }
+          .to delegate_to(feature_instance.instance_proxy_target, :public_send)
+          .with_arguments(name, *args, **kwargs, &block)
+          .and_return_its_value
+      end
     end
   end
 

@@ -14,6 +14,14 @@ module ConvenientService
 
           concerns do
             use ConvenientService::Plugins::Feature::CanHaveEntries::Concern
+
+            use ConvenientService::Plugins::Common::HasInstanceProxy::Concern
+          end
+
+          middlewares :new, scope: :class do
+            use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
+
+            use ConvenientService::Plugins::Common::HasInstanceProxy::Middleware
           end
         end
       end

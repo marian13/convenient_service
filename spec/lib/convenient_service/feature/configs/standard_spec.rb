@@ -28,12 +28,26 @@ RSpec.describe ConvenientService::Feature::Configs::Standard do
         example_group "concerns" do
           let(:concerns) do
             [
-              ConvenientService::Feature::Plugins::CanHaveEntries::Concern
+              ConvenientService::Feature::Plugins::CanHaveEntries::Concern,
+              ConvenientService::Common::Plugins::HasInstanceProxy::Concern
             ]
           end
 
           it "sets feature concerns" do
             expect(feature_class.concerns.to_a).to eq(concerns)
+          end
+        end
+
+        example_group ".new middlewares" do
+          let(:class_new_middlewares) do
+            [
+              ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
+              ConvenientService::Common::Plugins::HasInstanceProxy::Middleware
+            ]
+          end
+
+          it "sets feature middlewares for `.new`" do
+            expect(feature_class.middlewares(:new, scope: :class).to_a).to eq(class_new_middlewares)
           end
         end
       end
