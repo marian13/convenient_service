@@ -16,8 +16,7 @@ module ConvenientService
               # @param service_class [Class]
               # @param chain [Hash]
               # @return [void]
-              # @since 0.1.0
-              #
+
               def initialize(status:, service_class: nil, chain: {})
                 @status = status
                 @service_class = service_class
@@ -27,8 +26,7 @@ module ConvenientService
               ##
               # @param service_class [Class]
               # @return [ConvenientService::RSpec::Helpers::Classes::StubService::Entities::ResultSpec]
-              # @since 0.1.0
-              #
+
               def for(service_class)
                 self.class.new(status: status, service_class: service_class, chain: chain)
               end
@@ -36,8 +34,7 @@ module ConvenientService
               ##
               # @param data [Hash]
               # @return [ConvenientService::RSpec::Helpers::Classes::StubService::Entities::ResultSpec]
-              # @since 0.1.0
-              #
+
               def with_data(data)
                 chain[:data] = data
 
@@ -47,8 +44,7 @@ module ConvenientService
               ##
               # @param message [String]
               # @return [ConvenientService::RSpec::Helpers::Classes::StubService::Entities::ResultSpec]
-              # @since 0.1.0
-              #
+
               def with_message(message)
                 chain[:message] = message
 
@@ -58,8 +54,7 @@ module ConvenientService
               ##
               # @param code [String]
               # @return [ConvenientService::RSpec::Helpers::Classes::StubService::Entities::ResultSpec]
-              # @since 0.1.0
-              #
+
               def with_code(code)
                 chain[:code] = code
 
@@ -69,8 +64,7 @@ module ConvenientService
               ##
               # @param data [Hash]
               # @return [ConvenientService::RSpec::Helpers::Classes::StubService::Entities::ResultSpec]
-              # @since 0.1.0
-              #
+
               def and_data(data)
                 chain[:data] = data
 
@@ -80,8 +74,7 @@ module ConvenientService
               ##
               # @param message [String]
               # @return [ConvenientService::RSpec::Helpers::Classes::StubService::Entities::ResultSpec]
-              # @since 0.1.0
-              #
+
               def and_message(message)
                 chain[:message] = message
 
@@ -91,8 +84,7 @@ module ConvenientService
               ##
               # @param code [String]
               # @return [ConvenientService::RSpec::Helpers::Classes::StubService::Entities::ResultSpec]
-              # @since 0.1.0
-              #
+
               def and_code(code)
                 chain[:code] = code
 

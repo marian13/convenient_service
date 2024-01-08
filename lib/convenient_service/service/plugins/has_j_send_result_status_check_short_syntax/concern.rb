@@ -10,64 +10,56 @@ module ConvenientService
           class_methods do
             ##
             # @return [Boolean]
-            # @since 0.2.0
-            #
+
             def success?(...)
               result(...).success?
             end
 
             ##
             # @return [Boolean]
-            # @since 0.2.0
-            #
+
             def error?(...)
               result(...).error?
             end
 
             ##
             # @return [Boolean]
-            # @since 0.2.0
-            #
+
             def failure?(...)
               result(...).failure?
             end
 
             ##
             # @return [Boolean]
-            # @since 0.2.0
-            #
+
             def not_success?(...)
               result(...).not_success?
             end
 
             ##
             # @return [Boolean]
-            # @since 0.2.0
-            #
+
             def not_error?(...)
               result(...).not_error?
             end
 
             ##
             # @return [Boolean]
-            # @since 0.2.0
-            #
+
             def not_failure?(...)
               result(...).not_failure?
             end
 
             ##
             # @return [Boolean]
-            # @since 0.12.0
-            #
+
             def ok?(...)
               result(...).success?
             end
 
             ##
             # @return [Boolean]
-            # @since 0.12.0
-            #
+
             def not_ok?(...)
               result(...).not_success?
             end

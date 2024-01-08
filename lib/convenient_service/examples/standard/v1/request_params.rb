@@ -6,7 +6,6 @@ require_relative "request_params/services"
 require_relative "request_params/utils"
 
 ##
-# @since 0.3.0
 #
 # @internal
 #   Usage example:
