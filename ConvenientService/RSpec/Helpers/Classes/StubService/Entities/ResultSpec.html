@@ -99,31 +99,7 @@
   
 </div>
 
-<h2>Overview</h2><div class="docstring">
-  <div class="discussion">
-    
 
-  </div>
-</div>
-<div class="tags">
-  
-<p class="tag_title">Since:</p>
-<ul class="since">
-  
-    <li>
-      
-      
-      
-      
-        
-        <div class='inline'><p>0.3.0</p>
-</div>
-      
-    </li>
-  
-</ul>
-
-</div>
 
 
 
@@ -424,21 +400,6 @@
   
 </ul>
 
-<p class="tag_title">Since:</p>
-<ul class="since">
-  
-    <li>
-      
-      
-      
-      
-        
-        <div class='inline'><p>0.1.0</p>
-</div>
-      
-    </li>
-  
-</ul>
 
 </div><table class="source_code">
   <tr>
@@ -446,14 +407,14 @@
       <pre class="lines">
 
 
+20
 21
 22
 23
-24
-25</pre>
+24</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/classes/stub_service/entities/result_spec.rb', line 21</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/classes/stub_service/entities/result_spec.rb', line 20</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>status:</span><span class='comma'>,</span> <span class='label'>service_class:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>chain:</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='ivar'>@status</span> <span class='op'>=</span> <span class='id identifier rubyid_status'>status</span>
@@ -521,21 +482,6 @@
     </li>
   
 </ul>
-<p class="tag_title">Since:</p>
-<ul class="since">
-  
-    <li>
-      
-      
-      
-      
-        
-        <div class='inline'><p>0.3.0</p>
-</div>
-      
-    </li>
-  
-</ul>
 
 </div><table class="source_code">
   <tr>
@@ -543,18 +489,18 @@
       <pre class="lines">
 
 
-116
-117
-118
-119
-120
-121
-122
-123
-124</pre>
+108
+109
+110
+111
+112
+113
+114
+115
+116</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/classes/stub_service/entities/result_spec.rb', line 116</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/classes/stub_service/entities/result_spec.rb', line 108</span>
 
 <span class='kw'>def</span> <span class='op'>==</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='rparen'>)</span>
@@ -615,21 +561,6 @@
     </li>
   
 </ul>
-<p class="tag_title">Since:</p>
-<ul class="since">
-  
-    <li>
-      
-      
-      
-      
-        
-        <div class='inline'><p>0.1.0</p>
-</div>
-      
-    </li>
-  
-</ul>
 
 </div><table class="source_code">
   <tr>
@@ -637,14 +568,14 @@
       <pre class="lines">
 
 
-96
-97
-98
-99
-100</pre>
+88
+89
+90
+91
+92</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/classes/stub_service/entities/result_spec.rb', line 96</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/classes/stub_service/entities/result_spec.rb', line 88</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_and_code'>and_code</span><span class='lparen'>(</span><span class='id identifier rubyid_code'>code</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_chain'>chain</span><span class='lbracket'>[</span><span class='symbol'>:code</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_code'>code</span>
@@ -701,21 +632,6 @@
     </li>
   
 </ul>
-<p class="tag_title">Since:</p>
-<ul class="since">
-  
-    <li>
-      
-      
-      
-      
-        
-        <div class='inline'><p>0.1.0</p>
-</div>
-      
-    </li>
-  
-</ul>
 
 </div><table class="source_code">
   <tr>
@@ -723,14 +639,14 @@
       <pre class="lines">
 
 
-74
-75
-76
-77
-78</pre>
+68
+69
+70
+71
+72</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/classes/stub_service/entities/result_spec.rb', line 74</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/classes/stub_service/entities/result_spec.rb', line 68</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_and_data'>and_data</span><span class='lparen'>(</span><span class='id identifier rubyid_data'>data</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_chain'>chain</span><span class='lbracket'>[</span><span class='symbol'>:data</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_data'>data</span>
@@ -787,21 +703,6 @@
     </li>
   
 </ul>
-<p class="tag_title">Since:</p>
-<ul class="since">
-  
-    <li>
-      
-      
-      
-      
-        
-        <div class='inline'><p>0.1.0</p>
-</div>
-      
-    </li>
-  
-</ul>
 
 </div><table class="source_code">
   <tr>
@@ -809,14 +710,14 @@
       <pre class="lines">
 
 
-85
-86
-87
-88
-89</pre>
+78
+79
+80
+81
+82</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/classes/stub_service/entities/result_spec.rb', line 85</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/classes/stub_service/entities/result_spec.rb', line 78</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_and_message'>and_message</span><span class='lparen'>(</span><span class='id identifier rubyid_message'>message</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_chain'>chain</span><span class='lbracket'>[</span><span class='symbol'>:message</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_message'>message</span>
@@ -858,21 +759,6 @@
     </li>
   
 </ul>
-<p class="tag_title">Since:</p>
-<ul class="since">
-  
-    <li>
-      
-      
-      
-      
-        
-        <div class='inline'><p>0.3.0</p>
-</div>
-      
-    </li>
-  
-</ul>
 
 </div><table class="source_code">
   <tr>
@@ -880,12 +766,12 @@
       <pre class="lines">
 
 
-108
-109
-110</pre>
+100
+101
+102</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/classes/stub_service/entities/result_spec.rb', line 108</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/classes/stub_service/entities/result_spec.rb', line 100</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_calculate_value'>calculate_value</span>
   <span class='id identifier rubyid_service_class'>service_class</span><span class='period'>.</span><span class='id identifier rubyid___send__'>__send__</span><span class='lparen'>(</span><span class='id identifier rubyid_status'>status</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_copy'>copy</span><span class='lparen'>(</span><span class='label'>overrides:</span> <span class='lbrace'>{</span><span class='label'>kwargs:</span> <span class='lbrace'>{</span><span class='label'>stubbed_result:</span> <span class='kw'>true</span><span class='rbrace'>}</span><span class='rbrace'>}</span><span class='rparen'>)</span>
@@ -940,21 +826,6 @@
     </li>
   
 </ul>
-<p class="tag_title">Since:</p>
-<ul class="since">
-  
-    <li>
-      
-      
-      
-      
-        
-        <div class='inline'><p>0.1.0</p>
-</div>
-      
-    </li>
-  
-</ul>
 
 </div><table class="source_code">
   <tr>
@@ -962,12 +833,12 @@
       <pre class="lines">
 
 
-32
-33
-34</pre>
+30
+31
+32</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/classes/stub_service/entities/result_spec.rb', line 32</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/classes/stub_service/entities/result_spec.rb', line 30</span>
 
 <span class='kw'>def</span> <span class='kw'>for</span><span class='lparen'>(</span><span class='id identifier rubyid_service_class'>service_class</span><span class='rparen'>)</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='label'>status:</span> <span class='id identifier rubyid_status'>status</span><span class='comma'>,</span> <span class='label'>service_class:</span> <span class='id identifier rubyid_service_class'>service_class</span><span class='comma'>,</span> <span class='label'>chain:</span> <span class='id identifier rubyid_chain'>chain</span><span class='rparen'>)</span>
@@ -1022,21 +893,6 @@
     </li>
   
 </ul>
-<p class="tag_title">Since:</p>
-<ul class="since">
-  
-    <li>
-      
-      
-      
-      
-        
-        <div class='inline'><p>0.1.0</p>
-</div>
-      
-    </li>
-  
-</ul>
 
 </div><table class="source_code">
   <tr>
@@ -1044,14 +900,14 @@
       <pre class="lines">
 
 
-63
-64
-65
-66
-67</pre>
+58
+59
+60
+61
+62</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/classes/stub_service/entities/result_spec.rb', line 63</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/classes/stub_service/entities/result_spec.rb', line 58</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_with_code'>with_code</span><span class='lparen'>(</span><span class='id identifier rubyid_code'>code</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_chain'>chain</span><span class='lbracket'>[</span><span class='symbol'>:code</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_code'>code</span>
@@ -1108,21 +964,6 @@
     </li>
   
 </ul>
-<p class="tag_title">Since:</p>
-<ul class="since">
-  
-    <li>
-      
-      
-      
-      
-        
-        <div class='inline'><p>0.1.0</p>
-</div>
-      
-    </li>
-  
-</ul>
 
 </div><table class="source_code">
   <tr>
@@ -1130,14 +971,14 @@
       <pre class="lines">
 
 
+38
+39
+40
 41
-42
-43
-44
-45</pre>
+42</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/classes/stub_service/entities/result_spec.rb', line 41</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/classes/stub_service/entities/result_spec.rb', line 38</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_with_data'>with_data</span><span class='lparen'>(</span><span class='id identifier rubyid_data'>data</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_chain'>chain</span><span class='lbracket'>[</span><span class='symbol'>:data</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_data'>data</span>
@@ -1194,21 +1035,6 @@
     </li>
   
 </ul>
-<p class="tag_title">Since:</p>
-<ul class="since">
-  
-    <li>
-      
-      
-      
-      
-        
-        <div class='inline'><p>0.1.0</p>
-</div>
-      
-    </li>
-  
-</ul>
 
 </div><table class="source_code">
   <tr>
@@ -1216,14 +1042,14 @@
       <pre class="lines">
 
 
-52
-53
-54
-55
-56</pre>
+48
+49
+50
+51
+52</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/classes/stub_service/entities/result_spec.rb', line 52</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/classes/stub_service/entities/result_spec.rb', line 48</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_with_message'>with_message</span><span class='lparen'>(</span><span class='id identifier rubyid_message'>message</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_chain'>chain</span><span class='lbracket'>[</span><span class='symbol'>:message</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_message'>message</span>
@@ -1240,7 +1066,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Jan  8 19:30:29 2024 by
+  Generated on Mon Jan  8 19:40:27 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.2.2).
 </div>
