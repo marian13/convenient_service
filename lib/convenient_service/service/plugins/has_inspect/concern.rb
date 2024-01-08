@@ -10,7 +10,7 @@ module ConvenientService
           instance_methods do
             ##
             # @return [String]
-
+            #
             def inspect
               "<#{inspect_values[:name]}>"
             end
