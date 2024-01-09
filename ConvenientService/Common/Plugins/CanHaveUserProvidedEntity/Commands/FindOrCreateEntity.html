@@ -476,7 +476,12 @@
 80
 81
 82
-83</pre>
+83
+84
+85
+86
+87
+88</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/can_have_user_provided_entity/commands/find_or_create_entity.rb', line 34</span>
@@ -521,7 +526,12 @@
 </span>  <span class='comment'>#
 </span>  <span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_class_exec'>class_exec</span><span class='lparen'>(</span><span class='id identifier rubyid_proto_entity'>proto_entity</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_proto_entity'>proto_entity</span><span class='op'>|</span>
     <span class='id identifier rubyid_define_singleton_method'>define_singleton_method</span><span class='lparen'>(</span><span class='symbol'>:proto_entity</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_proto_entity'>proto_entity</span> <span class='rbrace'>}</span>
-    <span class='id identifier rubyid_define_singleton_method'>define_singleton_method</span><span class='lparen'>(</span><span class='symbol'>:==</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_other'>other</span><span class='op'>|</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_proto_entity'>proto_entity</span> <span class='op'>==</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_proto_entity'>proto_entity</span> <span class='kw'>if</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='symbol'>:proto_entity</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
+
+    <span class='comment'>##
+</span>    <span class='comment'># @internal
+</span>    <span class='comment'>#   TODO: Try `self.proto_entity == other.proto_entity if self &lt; proto_entity_concern`.
+</span>    <span class='comment'>#
+</span>    <span class='id identifier rubyid_define_singleton_method'>define_singleton_method</span><span class='lparen'>(</span><span class='symbol'>:==</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_other'>other</span><span class='op'>|</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_proto_entity'>proto_entity</span> <span class='op'>==</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_proto_entity'>proto_entity</span> <span class='kw'>if</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='symbol'>:proto_entity</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
 
     <span class='comment'>##
 </span>    <span class='comment'># TODO: `inspect`.
@@ -541,7 +551,7 @@
 </div>
 
       <div id="footer">
-  Generated on Tue Jan  9 23:34:00 2024 by
+  Generated on Tue Jan  9 23:49:06 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.2.2).
 </div>

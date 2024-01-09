@@ -377,7 +377,10 @@
 48
 49
 50
-51</pre>
+51
+52
+53
+54</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/middlewares/base/commands/create_observable_middleware.rb', line 31</span>
@@ -392,6 +395,9 @@
     <span class='comment'>##
 </span>    <span class='comment'># @param other [Object] Can be any type.
 </span>    <span class='comment'># @return [Boolean, nil]
+</span>    <span class='comment'>#
+</span>    <span class='comment'># @internal
+</span>    <span class='comment'>#   TODO: Try `self.middleware == other.middleware if self &lt; ::ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Base`.
 </span>    <span class='comment'>#
 </span>    <span class='id identifier rubyid_define_singleton_method'>define_singleton_method</span><span class='lparen'>(</span><span class='symbol'>:==</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_other'>other</span><span class='op'>|</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_middleware'>middleware</span> <span class='op'>==</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_middleware'>middleware</span> <span class='kw'>if</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='symbol'>:middleware</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
 
@@ -413,7 +419,7 @@
 </div>
 
       <div id="footer">
-  Generated on Tue Jan  9 23:34:02 2024 by
+  Generated on Tue Jan  9 23:49:08 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.2.2).
 </div>
