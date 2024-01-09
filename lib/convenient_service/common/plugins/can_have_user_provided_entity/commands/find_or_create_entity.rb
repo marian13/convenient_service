@@ -71,6 +71,11 @@ module ConvenientService
               #
               entity.class_exec(proto_entity) do |proto_entity|
                 define_singleton_method(:proto_entity) { proto_entity }
+
+                ##
+                # @internal
+                #   TODO: Try `self.proto_entity == other.proto_entity if self < proto_entity_concern`.
+                #
                 define_singleton_method(:==) { |other| self.proto_entity == other.proto_entity if other.respond_to?(:proto_entity) }
 
                 ##

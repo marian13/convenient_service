@@ -39,6 +39,9 @@ module ConvenientService
                           # @param other [Object] Can be any type.
                           # @return [Boolean, nil]
                           #
+                          # @internal
+                          #   TODO: Try `self.middleware == other.middleware if self < ::ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Base`.
+                          #
                           define_singleton_method(:==) { |other| self.middleware == other.middleware if other.respond_to?(:middleware) }
 
                           ##

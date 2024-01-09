@@ -61,6 +61,11 @@ module ConvenientService
               #
               klass.class_exec(namespace) do |namespace|
                 define_singleton_method(:namespace) { namespace }
+
+                ##
+                # @internal
+                #   TODO: Try `self.namespace == other.namespace if self < ::ConvenientService::Common::Plugins::HasInstanceProxy::Entities::InstanceProxy`.
+                #
                 define_singleton_method(:==) { |other| self.namespace == other.namespace if other.respond_to?(:namespace) }
 
                 ##
