@@ -169,7 +169,9 @@ RSpec.describe ConvenientService::Core::Concern::ClassMethods do
         end
       end
     end
+  end
 
+  example_group "private class methods" do
     describe ".method_missing" do
       let(:service_class) do
         Class.new do

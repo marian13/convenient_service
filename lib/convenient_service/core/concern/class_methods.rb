@@ -70,6 +70,7 @@ module ConvenientService
 
         ##
         # @see https://thoughtbot.com/blog/always-define-respond-to-missing-when-overriding
+        # @see https://blog.marc-andre.ca/2010/11/15/methodmissing-politely
         # @see https://stackoverflow.com/a/3304683/12201472
         #
         # @param method_name [Symbol, String]
