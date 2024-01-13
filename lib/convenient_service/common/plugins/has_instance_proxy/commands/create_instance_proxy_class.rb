@@ -54,18 +54,23 @@ module ConvenientService
               #   # end
               #
               klass.class_exec(target_class) do |target_class|
+                ##
+                # @return [Class]
+                #
                 define_singleton_method(:target_class) { target_class }
 
                 ##
+                # @return [Boolean, nil]
+                #
                 # @internal
                 #   TODO: Try `self.target_class == other.target_class if self < ::ConvenientService::Common::Plugins::HasInstanceProxy::Entities::InstanceProxy`.
                 #
                 define_singleton_method(:==) { |other| self.target_class == other.target_class if other.respond_to?(:target_class) }
 
                 ##
-                # TODO: `inspect`.
+                # @return [String]
                 #
-                # define_singleton_method(:inspect) { "#{target_class}InstanceProxy" }
+                define_singleton_method(:inspect) { "#{target_class}::InstanceProxy" }
               end
 
               klass
