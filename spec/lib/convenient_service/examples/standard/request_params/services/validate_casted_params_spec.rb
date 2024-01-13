@@ -6,10 +6,10 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::ValidateCastedParams do
+  include ConvenientService::RSpec::Matchers::Results
+
   example_group "class methods" do
     describe ".result" do
-      include ConvenientService::RSpec::Matchers::Results
-
       subject(:result) { described_class.result(original_params: original_params, casted_params: casted_params) }
 
       let(:original_params) do
@@ -48,41 +48,43 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::V
       let(:casted_tags) { [ConvenientService::Examples::Standard::RequestParams::Entities::Tag.cast(original_params[:tags])] }
       let(:casted_sources) { [ConvenientService::Examples::Standard::RequestParams::Entities::Source.cast(original_params[:sources])] }
 
-      context "when params are NOT valid" do
-        context "when original id is NOT castable" do
-          let(:original_id) { nil }
+      context "when `ValidateCastedParams` is NOT successful" do
+        context "when params are NOT valid" do
+          context "when original id is NOT castable" do
+            let(:original_id) { nil }
 
-          it "returns `error` with `message`" do
-            expect(result).to be_error.with_message("Failed to cast `#{original_id.inspect}` into `ID`")
+            it "returns `error` with `message`" do
+              expect(result).to be_error.with_message("Failed to cast `#{original_id.inspect}` into `ID`")
+            end
           end
-        end
 
-        context "when original format is NOT castable" do
-          let(:casted_format) { nil }
+          context "when original format is NOT castable" do
+            let(:casted_format) { nil }
 
-          it "returns `error` with `message`" do
-            expect(result).to be_error.with_message("Failed to cast `#{original_format.inspect}` into `Format`")
+            it "returns `error` with `message`" do
+              expect(result).to be_error.with_message("Failed to cast `#{original_format.inspect}` into `Format`")
+            end
           end
-        end
 
-        context "when original title is NOT castable" do
-          let(:casted_title) { nil }
+          context "when original title is NOT castable" do
+            let(:casted_title) { nil }
 
-          it "returns `error` with `message`" do
-            expect(result).to be_error.with_message("Failed to cast `#{original_title.inspect}` into `Title`")
+            it "returns `error` with `message`" do
+              expect(result).to be_error.with_message("Failed to cast `#{original_title.inspect}` into `Title`")
+            end
           end
-        end
 
-        context "when original description is NOT castable" do
-          let(:casted_description) { nil }
+          context "when original description is NOT castable" do
+            let(:casted_description) { nil }
 
-          it "returns `error` with `message`" do
-            expect(result).to be_error.with_message("Failed to cast `#{original_description.inspect}` into `Description`")
+            it "returns `error` with `message`" do
+              expect(result).to be_error.with_message("Failed to cast `#{original_description.inspect}` into `Description`")
+            end
           end
         end
       end
 
-      context "when params are valid" do
+      context "when `ValidateCastedParams` is successful" do
         it "returns success without data" do
           expect(result).to be_success.without_data
         end

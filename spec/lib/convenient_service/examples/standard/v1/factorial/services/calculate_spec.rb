@@ -22,7 +22,7 @@ RSpec.describe ConvenientService::Examples::Standard::V1::Factorial::Services::C
 
   example_group "class methods" do
     describe ".result" do
-      context "when calculation is NOT successful" do
+      context "when `Calculate` is NOT successful" do
         context "when `number` is NOT valid" do
           context "when `number` is `nil`" do
             let(:number) { nil }
@@ -59,7 +59,7 @@ RSpec.describe ConvenientService::Examples::Standard::V1::Factorial::Services::C
         end
       end
 
-      context "when calculation is successful" do
+      context "when `Calculate` is successful" do
         let(:number) { 10 }
         let(:factorial) { 10 * 9 * 8 * 7 * 6 * 5 * 4 * 3 * 2 * 1 }
 

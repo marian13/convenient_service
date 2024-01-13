@@ -6,80 +6,82 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::ExtractParamsFromBody do
+  include ConvenientService::RSpec::Matchers::Results
+
   example_group "class methods" do
     describe ".result" do
-      include ConvenientService::RSpec::Matchers::Results
-
       subject(:result) { described_class.result(request: request) }
 
       let(:request) { ConvenientService::Examples::Standard::RequestParams::Entities::Request.new(http_string: http_string) }
 
-      context "when request is NOT valid for HTTP parsing" do
-        let(:http_string) do
-          <<~TEXT
-            POST /rules/1000000.json HTTP/1.1
-            User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36
-            Host: code-review.com
-            Content-Type: application/json; charset=utf-8
-            Content-Length: 105
-            Accept-Language: en-us
-            {"title":"Avoid error shadowing","description":"Check the official User Docs","tags":["error-shadowing"]}
-            Accept-Encoding: gzip, deflate
-            Connection: Keep-Alive
-          TEXT
+      context "when `ExtractParamsFromBody` is NOT successful" do
+        context "when request is NOT valid for HTTP parsing" do
+          let(:http_string) do
+            <<~TEXT
+              POST /rules/1000000.json HTTP/1.1
+              User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36
+              Host: code-review.com
+              Content-Type: application/json; charset=utf-8
+              Content-Length: 105
+              Accept-Language: en-us
+              {"title":"Avoid error shadowing","description":"Check the official User Docs","tags":["error-shadowing"]}
+              Accept-Encoding: gzip, deflate
+              Connection: Keep-Alive
+            TEXT
+          end
+
+          let(:error_message) do
+            <<~MESSAGE
+              Failed to resolve body since request is NOT HTTP parsable.
+
+              Request:
+              ---
+              #{request}
+              ---
+            MESSAGE
+          end
+
+          it "returns `error` with message" do
+            expect(result).to be_error.with_message(error_message)
+          end
         end
 
-        let(:error_message) do
-          <<~MESSAGE
-            Failed to resolve body since request is NOT HTTP parsable.
+        context "when request body is NOT valid for JSON parsing" do
+          let(:http_string) do
+            <<~TEXT
+              POST /rules/1000000.json HTTP/1.1
+              User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36
+              Host: code-review.com
+              Content-Type: application/json; charset=utf-8
+              Content-Length: #{body.length}
+              Accept-Language: en-us
+              Accept-Encoding: gzip, deflate
+              Connection: Keep-Alive
 
-            Request:
-            ---
-            #{request}
-            ---
-          MESSAGE
-        end
+              #{body}
+            TEXT
+          end
 
-        it "fails to parse request body" do
-          expect(result).to be_error.with_message(error_message)
+          let(:body) { "abc" }
+
+          let(:error_message) do
+            <<~MESSAGE
+              Request body contains invalid json.
+
+              Request:
+              ---
+              #{request}
+              ---
+            MESSAGE
+          end
+
+          it "returns `error` with message" do
+            expect(result).to be_error.with_message(error_message)
+          end
         end
       end
 
-      context "when request body is NOT valid for JSON parsing" do
-        let(:http_string) do
-          <<~TEXT
-            POST /rules/1000000.json HTTP/1.1
-            User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36
-            Host: code-review.com
-            Content-Type: application/json; charset=utf-8
-            Content-Length: #{body.length}
-            Accept-Language: en-us
-            Accept-Encoding: gzip, deflate
-            Connection: Keep-Alive
-
-            #{body}
-          TEXT
-        end
-
-        let(:body) { "abc" }
-
-        let(:error_message) do
-          <<~MESSAGE
-            Request body contains invalid json.
-
-            Request:
-            ---
-            #{request}
-            ---
-          MESSAGE
-        end
-
-        it "fails to parse JSON from request body" do
-          expect(result).to be_error.with_message(error_message)
-        end
-      end
-
-      context "when request body is valid for both HTTP and then JSON parsing" do
+      context "when `ExtractParamsFromBody` is successful" do
         let(:http_string) do
           <<~TEXT
             POST /rules/1000000.json HTTP/1.1

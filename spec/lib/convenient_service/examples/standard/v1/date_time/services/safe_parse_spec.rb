@@ -22,7 +22,7 @@ RSpec.describe ConvenientService::Examples::Standard::V1::DateTime::Services::Sa
 
   example_group "class methods" do
     describe ".result" do
-      context "when safe parsing is NOT successful" do
+      context "when `SafeParse` is NOT successful" do
         context "when `string` has invalid format" do
           let(:string) { "foo" }
 
@@ -35,7 +35,7 @@ RSpec.describe ConvenientService::Examples::Standard::V1::DateTime::Services::Sa
         end
       end
 
-      context "when safe parsing is successful" do
+      context "when `SafeParse` is successful" do
         let(:string) { "24-02-2022" }
         let(:format) { "%d-%m-%Y" }
         let(:date_time) { DateTime.strptime(string, format) }
