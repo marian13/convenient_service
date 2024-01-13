@@ -12,7 +12,7 @@ module ConvenientService
             # @return [Class] Can be any type.
             #
             def instance_proxy_class
-              @instance_proxy_class ||= Commands::CreateInstanceProxyClass[namespace: self]
+              @instance_proxy_class ||= Commands::CreateInstanceProxyClass[target_class: self]
             end
           end
         end

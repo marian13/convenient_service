@@ -50,7 +50,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasInstanceProxy::Concern do
       specify do
         expect { klass.instance_proxy_class }
           .to delegate_to(ConvenientService::Common::Plugins::HasInstanceProxy::Commands::CreateInstanceProxyClass, :call)
-          .with_arguments(namespace: klass)
+          .with_arguments(target_class: klass)
           .and_return_its_value
       end
 

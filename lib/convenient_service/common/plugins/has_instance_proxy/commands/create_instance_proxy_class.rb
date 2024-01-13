@@ -7,27 +7,21 @@ module ConvenientService
         module Commands
           class CreateInstanceProxyClass < Support::Command
             ##
-            # @!attribute [r] namespace
+            # @!attribute [r] target_class
             #   @return [Class]
             #
-            attr_reader :namespace
+            attr_reader :target_class
 
             ##
-            # @param namespace [Class]
+            # @param target_class [Class]
             # @return [void]
             #
-            # @internal
-            #   TODO: Direct Specs.
-            #
-            def initialize(namespace:)
-              @namespace = namespace
+            def initialize(target_class:)
+              @target_class = target_class
             end
 
             ##
             # @return [void]
-            #
-            # @internal
-            #   TODO: Direct Specs.
             #
             def call
               klass = ::Class.new(Entities::InstanceProxy)
@@ -36,7 +30,7 @@ module ConvenientService
               # @example Result for feature.
               #
               #   klass = ConvenientService::Common::Plugins::HasInstanceProxy::Commands::CreateInstanceProxyClass.call(
-              #     namespace: SomeFeature
+              #     target_class: SomeFeature
               #   )
               #
               #   ##
@@ -44,34 +38,34 @@ module ConvenientService
               #   #
               #   # class InstanceProxy < ConvenientService::Service::Plugins::HasInstanceProxy::Entities::InstanceProxy
               #   #   class << self
-              #   #     def namespace
+              #   #     def target_class
               #   #       ##
-              #   #       # NOTE: Returns `namespace` passed to `CreateInstanceProxyClass`.
+              #   #       # NOTE: Returns `target_class` passed to `CreateInstanceProxyClass`.
               #   #       #
-              #   #       namespace
+              #   #       target_class
               #   #     end
               #   #
               #   #     def ==(other)
-              #   #       return unless other.respond_to?(:namespace)
+              #   #       return unless other.respond_to?(:target_class)
               #   #
-              #   #       self.namespace == other.namespace
+              #   #       self.target_class == other.target_class
               #   #     end
               #   #   end
               #   # end
               #
-              klass.class_exec(namespace) do |namespace|
-                define_singleton_method(:namespace) { namespace }
+              klass.class_exec(target_class) do |target_class|
+                define_singleton_method(:target_class) { target_class }
 
                 ##
                 # @internal
-                #   TODO: Try `self.namespace == other.namespace if self < ::ConvenientService::Common::Plugins::HasInstanceProxy::Entities::InstanceProxy`.
+                #   TODO: Try `self.target_class == other.target_class if self < ::ConvenientService::Common::Plugins::HasInstanceProxy::Entities::InstanceProxy`.
                 #
-                define_singleton_method(:==) { |other| self.namespace == other.namespace if other.respond_to?(:namespace) }
+                define_singleton_method(:==) { |other| self.target_class == other.target_class if other.respond_to?(:target_class) }
 
                 ##
                 # TODO: `inspect`.
                 #
-                # define_singleton_method(:inspect) { "#{namespace}InstanceProxy" }
+                # define_singleton_method(:inspect) { "#{target_class}InstanceProxy" }
               end
 
               klass
