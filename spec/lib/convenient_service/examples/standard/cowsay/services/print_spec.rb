@@ -9,88 +9,79 @@ RSpec.describe ConvenientService::Examples::Standard::Cowsay::Services::Print do
   include ConvenientService::RSpec::Matchers::Results
   include ConvenientService::RSpec::Matchers::IncludeModule
 
-  let(:text) { "foo" }
-  let(:out) { Tempfile.new }
-
   example_group "modules" do
     subject { described_class }
 
     it { is_expected.to include_module(ConvenientService::Standard::Config) }
   end
 
-  example_group "attributes" do
-    include ConvenientService::RSpec::PrimitiveMatchers::HaveAttrReader
-
-    subject { service }
-
-    let(:service) { described_class.new(text: text, out: out) }
-
-    it { is_expected.to have_attr_reader(:text) }
-    it { is_expected.to have_attr_reader(:out) }
-  end
-
   example_group "class methods" do
     describe ".result" do
-      context "when `text` is NOT passed" do
-        subject(:result) { described_class.result(out: out) }
+      context "when `Print` is successful" do
+        let(:text) { "foo" }
+        let(:out) { Tempfile.new }
 
-        let(:content) do
-          <<~'HEREDOC'
-             ______________
-            < Hello World! >
-             --------------
-                      \   ^__^
-                       \  (oo)\_______
-                          (__)\       )\/\
-                              ||----w |
-                              ||     ||
-          HEREDOC
+        context "when `text` is NOT passed" do
+          subject(:result) { described_class.result(out: out) }
+
+          let(:content) do
+            <<~'HEREDOC'
+               ______________
+              < Hello World! >
+               --------------
+                        \   ^__^
+                         \  (oo)\_______
+                            (__)\       )\/\
+                                ||----w |
+                                ||     ||
+            HEREDOC
+          end
+
+          it "returns success" do
+            expect(result).to be_success.without_data
+          end
+
+          it "prints cloud and cow to out" do
+            result
+
+            expect(out.tap(&:rewind).read).to eq(content)
+          end
         end
 
-        it "returns success" do
-          expect(result).to be_success.without_data
-        end
+        context "when `text` is passed" do
+          subject(:result) { described_class.result(text: text, out: out) }
 
-        it "prints cloud and cow to out" do
-          result
+          let(:content) do
+            <<~'HEREDOC'
+               _____
+              < Hi! >
+               -----
+                        \   ^__^
+                         \  (oo)\_______
+                            (__)\       )\/\
+                                ||----w |
+                                ||     ||
+            HEREDOC
+          end
 
-          expect(out.tap(&:rewind).read).to eq(content)
-        end
-      end
+          let(:text) { "Hi!" }
 
-      context "when `text` is passed" do
-        subject(:result) { described_class.result(text: text, out: out) }
+          it "returns `success`" do
+            expect(result).to be_success.without_data
+          end
 
-        let(:content) do
-          <<~'HEREDOC'
-             _____
-            < Hi! >
-             -----
-                      \   ^__^
-                       \  (oo)\_______
-                          (__)\       )\/\
-                              ||----w |
-                              ||     ||
-          HEREDOC
-        end
+          it "prints cloud and cow to out" do
+            result
 
-        let(:text) { "Hi!" }
+            expect(out.tap(&:rewind).read).to eq(content)
+          end
 
-        it "returns `success`" do
-          expect(result).to be_success.without_data
-        end
+          context "when `out` is NOT passed" do
+            subject(:result) { described_class.result(text: text) }
 
-        it "prints cloud and cow to out" do
-          result
-
-          expect(out.tap(&:rewind).read).to eq(content)
-        end
-
-        context "when `out` is NOT passed" do
-          subject(:result) { described_class.result(text: text) }
-
-          it "defaults to `stdout`" do
-            expect { result }.to output(content).to_stdout
+            it "defaults to `stdout`" do
+              expect { result }.to output(content).to_stdout
+            end
           end
         end
       end

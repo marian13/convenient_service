@@ -17,19 +17,21 @@ RSpec.describe ConvenientService::Examples::Standard::Cowsay::Services::BuildClo
 
   example_group "class methods" do
     describe ".result" do
-      context "when text is NOT passed" do
-        subject(:result) { described_class.result }
+      context "when `BuildCloud` is successful" do
+        context "when text is NOT passed" do
+          subject(:result) { described_class.result }
 
-        let(:cloud) do
-          <<~HEREDOC
-             ______________
-            < Hello World! >
-             --------------
-          HEREDOC
-        end
+          let(:cloud) do
+            <<~HEREDOC
+               ______________
+              < Hello World! >
+               --------------
+            HEREDOC
+          end
 
-        it "returns success with cloud with \"Hello World!\"" do
-          expect(result).to be_success.with_data(cloud: cloud)
+          it "returns success with cloud with \"Hello World!\"" do
+            expect(result).to be_success.with_data(cloud: cloud)
+          end
         end
       end
 
