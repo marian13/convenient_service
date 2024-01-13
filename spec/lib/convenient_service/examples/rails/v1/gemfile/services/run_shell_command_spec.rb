@@ -4,8 +4,10 @@ require "spec_helper"
 
 require "convenient_service"
 
+return unless defined? ConvenientService::Examples::Rails
+
 # rubocop:disable RSpec/NestedGroups
-RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::RunShellCommand do
+RSpec.describe ConvenientService::Examples::Rails::V1::Gemfile::Services::RunShellCommand do
   include ConvenientService::RSpec::Helpers::StubService
 
   include ConvenientService::RSpec::Matchers::DelegateTo
@@ -15,7 +17,7 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::RunShel
   example_group "modules" do
     subject { described_class }
 
-    it { is_expected.to include_module(ConvenientService::Standard::Config) }
+    it { is_expected.to include_module(ConvenientService::Standard::V1::Config) }
   end
 
   example_group "class methods" do
@@ -27,27 +29,13 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::RunShel
       let(:command) { "ls -a" }
       let(:debug) { true }
 
-      before do
-        stub_service(ConvenientService::Examples::Standard::Gemfile::Services::PrintShellCommand)
-          .with_arguments(command: command, skip: debug)
-          .to return_success
-      end
-
       context "when `RunShellCommand` is NOT successful" do
-        context "when `command` is NOT valid" do
-          context "when `command` is `nil`" do
+        if ConvenientService::Dependencies.support_has_j_send_result_params_validations_using_active_model_validations?
+          context "when command is NOT present" do
             let(:command) { nil }
 
-            it "returns `error` with `message`" do
-              expect(result).to be_error.with_message("Command is `nil`").of_service(described_class).of_step(:validate_command)
-            end
-          end
-
-          context "when `command` is empty" do
-            let(:command) { "" }
-
-            it "returns `error` with `message`" do
-              expect(result).to be_error.with_message("Command is empty").of_service(described_class).of_step(:validate_command)
+            it "returns `failure` with `data`" do
+              expect(result).to be_failure.with_data(command: "can't be blank").of_service(described_class).without_step
             end
           end
         end
@@ -80,12 +68,6 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::RunShel
           # This particular case prevent shell commands execution.
           #
           allow(service).to receive(:system).with(command).and_return(true)
-        end
-
-        it "prints shell command" do
-          expect { result }
-            .to delegate_to(ConvenientService::Examples::Standard::Gemfile::Services::PrintShellCommand, :result)
-            .with_arguments(command: command, skip: !debug)
         end
 
         it "returns `success`" do

@@ -14,11 +14,6 @@ RSpec.describe ConvenientService::Examples::Dry::V1::Gemfile::Services::RunShell
   include ConvenientService::RSpec::Matchers::Results
   include ConvenientService::RSpec::Matchers::IncludeModule
 
-  let(:service) { described_class.new(command: command, debug: debug) }
-  let(:result) { service.result }
-  let(:command) { "ls -a" }
-  let(:debug) { true }
-
   example_group "modules" do
     subject { described_class }
 
@@ -27,11 +22,17 @@ RSpec.describe ConvenientService::Examples::Dry::V1::Gemfile::Services::RunShell
 
   example_group "class methods" do
     describe ".result" do
-      context "when running of shell command is NOT successful" do
+      subject(:result) { service.result }
+
+      let(:service) { described_class.new(command: command, debug: debug) }
+      let(:command) { "ls -a" }
+      let(:debug) { true }
+
+      context "when `RunShellCommand` is NOT successful" do
         context "when command is NOT present" do
           let(:command) { "" }
 
-          it "returns failure with data" do
+          it "returns `failure` with `data`" do
             expect(result).to be_failure.with_data(command: "must be filled").of_service(described_class).without_step
           end
         end
@@ -48,13 +49,13 @@ RSpec.describe ConvenientService::Examples::Dry::V1::Gemfile::Services::RunShell
             allow(service).to receive(:system).with(command).and_return(false)
           end
 
-          it "returns error with message" do
+          it "returns `error` with `message`" do
             expect(result).to be_error.with_message("#{command} returned non-zero exit code").of_service(described_class).of_step(:result)
           end
         end
       end
 
-      context "when running of shell command is successful" do
+      context "when `RunShellCommand` is successful" do
         before do
           ##
           # Stubs private method Kernel#system.
@@ -66,7 +67,7 @@ RSpec.describe ConvenientService::Examples::Dry::V1::Gemfile::Services::RunShell
           allow(service).to receive(:system).with(command).and_return(true)
         end
 
-        it "returns success" do
+        it "returns `success`" do
           expect(result).to be_success.without_data.of_service(described_class).of_step(:result)
         end
       end

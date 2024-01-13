@@ -11,9 +11,6 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::FormatGemsWi
   include ConvenientService::RSpec::Matchers::Results
   include ConvenientService::RSpec::Matchers::IncludeModule
 
-  let(:result) { described_class.result(parsed_content: parsed_content) }
-  let(:parsed_content) { {} }
-
   example_group "modules" do
     subject { described_class }
 
@@ -22,7 +19,11 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::FormatGemsWi
 
   example_group "class methods" do
     describe ".result" do
-      context "when formatting of gems without envs is NOT successful" do
+      subject(:result) { described_class.result(parsed_content: parsed_content) }
+
+      let(:parsed_content) { {} }
+
+      context "when `FormatGemsWithoutEnvs` is NOT successful" do
         context "when `parsed_content` is NOT hash" do
           let(:parsed_content) { [] }
 
@@ -88,7 +89,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::FormatGemsWi
         end
       end
 
-      context "when formatting of gems without envs is successful" do
+      context "when `FormatGemsWithoutEnvs` is successful" do
         let(:parsed_content) do
           {
             gems: [

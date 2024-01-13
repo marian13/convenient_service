@@ -9,8 +9,6 @@ RSpec.describe ConvenientService::Examples::Standard::V1::Gemfile::Services::Ass
   include ConvenientService::RSpec::Matchers::Results
   include ConvenientService::RSpec::Matchers::IncludeModule
 
-  let(:result) { described_class.result(path: path) }
-
   example_group "modules" do
     subject { described_class }
 
@@ -19,12 +17,14 @@ RSpec.describe ConvenientService::Examples::Standard::V1::Gemfile::Services::Ass
 
   example_group "class methods" do
     describe ".result" do
-      context "when assertion that file is NOT empty is NOT successful" do
+      subject(:result) { described_class.result(path: path) }
+
+      context "when `AssertFileNotEmpty` is NOT successful" do
         context "when `path` is NOT valid" do
           context "when `path` is `nil`" do
             let(:path) { nil }
 
-            it "returns `failure` with `data`" do
+            it "returns `failure` with `message`" do
               expect(result).to be_failure.with_data(path: "Path is `nil`").of_service(described_class).without_step
             end
           end
@@ -32,7 +32,7 @@ RSpec.describe ConvenientService::Examples::Standard::V1::Gemfile::Services::Ass
           context "when `path` is empty" do
             let(:path) { "" }
 
-            it "returns `failure` with `data`" do
+            it "returns `failure` with `message`" do
               expect(result).to be_failure.with_data(path: "Path is empty").of_service(described_class).without_step
             end
           end
@@ -51,7 +51,7 @@ RSpec.describe ConvenientService::Examples::Standard::V1::Gemfile::Services::Ass
         end
       end
 
-      context "when assertion that file is NOT empty is successful" do
+      context "when `AssertFileNotEmpty` is successful" do
         ##
         # NOTE: Tempfile uses its own `let` in order to prevent its premature garbage collection.
         #

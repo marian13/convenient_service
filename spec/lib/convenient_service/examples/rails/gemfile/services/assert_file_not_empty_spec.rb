@@ -11,8 +11,6 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::AssertFile
   include ConvenientService::RSpec::Matchers::Results
   include ConvenientService::RSpec::Matchers::IncludeModule
 
-  let(:result) { described_class.result(path: path) }
-
   example_group "modules" do
     subject { described_class }
 
@@ -21,7 +19,9 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::AssertFile
 
   example_group "class methods" do
     describe ".result" do
-      context "when assertion that file is NOT empty is NOT successful" do
+      subject(:result) { described_class.result(path: path) }
+
+      context "when `AssertFileNotEmpty` is NOT successful" do
         if ConvenientService::Dependencies.support_has_j_send_result_params_validations_using_active_model_validations?
           context "when `path` is NOT present" do
             let(:path) { "" }
@@ -45,7 +45,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::AssertFile
         end
       end
 
-      context "when assertion that file is NOT empty is successful" do
+      context "when `AssertFileNotEmpty` is successful" do
         ##
         # NOTE: Tempfile uses its own `let` in order to prevent its premature garbage collection.
         #

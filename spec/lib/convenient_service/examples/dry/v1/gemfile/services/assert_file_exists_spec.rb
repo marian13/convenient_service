@@ -11,8 +11,6 @@ RSpec.describe ConvenientService::Examples::Dry::V1::Gemfile::Services::AssertFi
   include ConvenientService::RSpec::Matchers::Results
   include ConvenientService::RSpec::Matchers::IncludeModule
 
-  let(:result) { described_class.result(path: path) }
-
   example_group "modules" do
     subject { described_class }
 
@@ -21,7 +19,9 @@ RSpec.describe ConvenientService::Examples::Dry::V1::Gemfile::Services::AssertFi
 
   example_group "class methods" do
     describe ".result" do
-      context "when assertion that file exists is NOT successful" do
+      subject(:result) { described_class.result(path: path) }
+
+      context "when `AssertFileExists` is NOT successful" do
         context "when `path` is NOT present" do
           let(:path) { "" }
 
@@ -39,7 +39,7 @@ RSpec.describe ConvenientService::Examples::Dry::V1::Gemfile::Services::AssertFi
         end
       end
 
-      context "when assertion that file exists is successful" do
+      context "when `AssertFileExists` is successful" do
         ##
         # NOTE: Tempfile uses its own `let` in order to prevent its premature garbage collection.
         #

@@ -12,11 +12,6 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::PrintShell
   include ConvenientService::RSpec::Matchers::IncludeModule
   include ConvenientService::RSpec::Matchers::DelegateTo
 
-  let(:result) { described_class.result(command: command, skip: skip, out: out) }
-  let(:command) { "ls -a" }
-  let(:skip) { false }
-  let(:out) { Tempfile.new }
-
   example_group "modules" do
     subject { described_class }
 
@@ -25,7 +20,13 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::PrintShell
 
   example_group "class methods" do
     describe ".result" do
-      context "when printing of shell command is NOT successful" do
+      subject(:result) { described_class.result(command: command, skip: skip, out: out) }
+
+      let(:command) { "ls -a" }
+      let(:skip) { false }
+      let(:out) { Tempfile.new }
+
+      context "when `PrintShellCommand` is NOT successful" do
         if ConvenientService::Dependencies.support_has_j_send_result_params_validations_using_active_model_validations?
           context "when command is NOT present" do
             let(:command) { "" }
@@ -45,7 +46,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::PrintShell
         end
       end
 
-      context "when printing of shell command is successful" do
+      context "when `PrintShellCommand` is successful" do
         let(:out_content) { out.tap(&:rewind).read }
 
         it "prints command" do

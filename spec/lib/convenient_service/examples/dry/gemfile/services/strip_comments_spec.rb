@@ -6,6 +6,7 @@ require "convenient_service"
 
 return unless defined? ConvenientService::Examples::Dry
 
+# rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::StripComments do
   include ConvenientService::RSpec::Helpers::StubService
   include ConvenientService::RSpec::Matchers::Results
@@ -23,78 +24,83 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::Services::StripComment
     it { is_expected.to include_module(ConvenientService::Examples::Dry::Gemfile::DryService::Config) }
   end
 
-  describe "#result" do
-    subject(:result) { service.result }
+  example_group "class methods" do
+    describe ".result" do
+      subject(:result) { service.result }
 
-    let(:content) do
-      <<~RUBY
-        ##
-        # Coloring for debugging.
-        #
-        gem "awesome_print", "~> 1.9.2"
+      let(:content) do
+        <<~RUBY
+          ##
+          # Coloring for debugging.
+          #
+          gem "awesome_print", "~> 1.9.2"
 
-        ##
-        # Helps to avoid N + 1 in GraphQL resolvers.
-        #
-        gem "batch-loader", "~> 2.0.1"
-      RUBY
-    end
-
-    let(:content_without_comments) do
-      <<~RUBY
-
-
-
-        gem "awesome_print", "~> 1.9.2"
-
-
-
-
-        gem "batch-loader", "~> 2.0.1"
-      RUBY
-    end
-
-    context "when content is NOT present" do
-      let(:content) { "" }
-
-      it "returns `error` with `message`" do
-        expect(result).to be_error.with_message("content must be filled")
-      end
-    end
-
-    context "when `strip-comments` npm package is not available" do
-      before do
-        stub_service(ConvenientService::Examples::Dry::Gemfile::Services::AssertNpmPackageAvailable)
-          .with_arguments(name: npm_package_name)
-          .to return_error
+          ##
+          # Helps to avoid N + 1 in GraphQL resolvers.
+          #
+          gem "batch-loader", "~> 2.0.1"
+        RUBY
       end
 
-      it "returns intermediate step result" do
-        expect(result).to be_not_success.of_step(ConvenientService::Examples::Dry::Gemfile::Services::AssertNpmPackageAvailable)
-      end
-    end
+      let(:content_without_comments) do
+        <<~RUBY
 
-    context "when `strip-comments` npm package is available" do
-      before do
-        stub_service(ConvenientService::Examples::Dry::Gemfile::Services::AssertNpmPackageAvailable)
-          .with_arguments(name: npm_package_name)
-          .to return_success
+
+
+          gem "awesome_print", "~> 1.9.2"
+
+
+
+
+          gem "batch-loader", "~> 2.0.1"
+        RUBY
+      end
+
+      context "when `StripComments` is NOT successful" do
+        context "when content is NOT present" do
+          let(:content) { "" }
+
+          it "returns `error` with `message`" do
+            expect(result).to be_error.with_message("content must be filled")
+          end
+        end
+
+        context "when `strip-comments` npm package is not available" do
+          before do
+            stub_service(ConvenientService::Examples::Dry::Gemfile::Services::AssertNpmPackageAvailable)
+              .with_arguments(name: npm_package_name)
+              .to return_error
+          end
+
+          it "returns intermediate step result" do
+            expect(result).to be_not_success.of_step(ConvenientService::Examples::Dry::Gemfile::Services::AssertNpmPackageAvailable)
+          end
+        end
+      end
+
+      context "when `StripComments` is successful" do
+        before do
+          stub_service(ConvenientService::Examples::Dry::Gemfile::Services::AssertNpmPackageAvailable)
+            .with_arguments(name: npm_package_name)
+            .to return_success
+
+          ##
+          # NOTE: Stub for environments where Node.js is not available.
+          # TODO: Node.js independent examples.
+          #
+          stub_service(ConvenientService::Examples::Dry::Gemfile::Services::RunShellCommand).to return_success
+        end
 
         ##
         # NOTE: Stub for environments where Node.js is not available.
-        # TODO: Node.js independent examples.
+        # TODO: Integration test.
+        # TODO: different content variations.
         #
-        stub_service(ConvenientService::Examples::Dry::Gemfile::Services::RunShellCommand).to return_success
-      end
-
-      ##
-      # NOTE: Stub for environments where Node.js is not available.
-      # TODO: Integration test.
-      # TODO: different content variations.
-      #
-      it "returns `success` with content without comments" do
-        expect(result).to be_success.with_data({content_without_comments: ""})
+        it "returns `success` with content without comments" do
+          expect(result).to be_success.with_data({content_without_comments: ""})
+        end
       end
     end
   end
 end
+# rubocop:enable RSpec/NestedGroups

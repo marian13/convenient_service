@@ -10,9 +10,6 @@ RSpec.describe ConvenientService::Examples::Standard::V1::Gemfile::Services::For
   include ConvenientService::RSpec::Matchers::IncludeModule
   include ConvenientService::RSpec::Matchers::DelegateTo
 
-  let(:result) { described_class.result(parsed_content: parsed_content) }
-  let(:parsed_content) { {} }
-
   example_group "modules" do
     subject { described_class }
 
@@ -21,7 +18,11 @@ RSpec.describe ConvenientService::Examples::Standard::V1::Gemfile::Services::For
 
   example_group "class methods" do
     describe ".result" do
-      context "when formatting of gems of body is successful" do
+      subject(:result) { described_class.result(parsed_content: parsed_content) }
+
+      let(:parsed_content) { {} }
+
+      context "when `FormatBody` is successful" do
         let(:parsed_content) do
           {
             gems: [

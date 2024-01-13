@@ -14,11 +14,6 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::RunShellCo
   include ConvenientService::RSpec::Matchers::Results
   include ConvenientService::RSpec::Matchers::IncludeModule
 
-  let(:service) { described_class.new(command: command, debug: debug) }
-  let(:result) { service.result }
-  let(:command) { "ls -a" }
-  let(:debug) { true }
-
   example_group "modules" do
     subject { described_class }
 
@@ -27,13 +22,19 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::RunShellCo
 
   example_group "class methods" do
     describe ".result" do
+      subject(:result) { service.result }
+
+      let(:service) { described_class.new(command: command, debug: debug) }
+      let(:command) { "ls -a" }
+      let(:debug) { true }
+
       before do
         stub_service(ConvenientService::Examples::Rails::Gemfile::Services::PrintShellCommand)
           .with_arguments(command: command, skip: debug)
           .to return_success
       end
 
-      context "when running of shell command is NOT successful" do
+      context "when `RunShellCommand` is NOT successful" do
         if ConvenientService::Dependencies.support_has_j_send_result_params_validations_using_active_model_validations?
           context "when command is NOT present" do
             let(:command) { "" }
@@ -62,7 +63,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::RunShellCo
         end
       end
 
-      context "when running of shell command is successful" do
+      context "when `RunShellCommand` is successful" do
         before do
           ##
           # Stubs private method Kernel#system.

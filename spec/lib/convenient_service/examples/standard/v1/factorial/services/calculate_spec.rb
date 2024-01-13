@@ -9,7 +9,8 @@ RSpec.describe ConvenientService::Examples::Standard::V1::Factorial::Services::C
   include ConvenientService::RSpec::Matchers::Results
   include ConvenientService::RSpec::Matchers::IncludeModule
 
-  let(:result) { described_class.result(number: number, timeout_seconds: timeout_seconds) }
+  subject(:result) { described_class.result(number: number, timeout_seconds: timeout_seconds) }
+
   let(:number) { 10 }
   let(:timeout_seconds) { 5 }
 
@@ -67,7 +68,7 @@ RSpec.describe ConvenientService::Examples::Standard::V1::Factorial::Services::C
         end
 
         context "when `timeout_seconds` are NOT passed" do
-          let(:result) { described_class.result(number: number) }
+          subject(:result) { described_class.result(number: number) }
 
           it "defaults to `10`" do
             expect(result.service.timeout_seconds).to eq(10)

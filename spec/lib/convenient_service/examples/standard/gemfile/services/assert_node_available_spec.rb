@@ -10,8 +10,6 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::AssertN
   include ConvenientService::RSpec::Matchers::Results
   include ConvenientService::RSpec::Matchers::IncludeModule
 
-  let(:result) { described_class.result }
-
   example_group "modules" do
     subject { described_class }
 
@@ -20,9 +18,11 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::AssertN
 
   example_group "class methods" do
     describe ".result" do
+      subject(:result) { described_class.result }
+
       let(:node_available_command) { "which node > /dev/null 2>&1" }
 
-      context "when assertion that node is available is NOT successful" do
+      context "when `AssertNodeAvailable` is NOT successful" do
         context "when node is NOT available" do
           before do
             stub_service(ConvenientService::Examples::Standard::Gemfile::Services::RunShellCommand)
@@ -36,7 +36,7 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::AssertN
         end
       end
 
-      context "when assertion that node is available is successful" do
+      context "when `AssertNodeAvailable` is successful" do
         before do
           stub_service(ConvenientService::Examples::Standard::Gemfile::Services::RunShellCommand)
             .with_arguments(command: node_available_command)

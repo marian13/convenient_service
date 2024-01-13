@@ -10,9 +10,6 @@ RSpec.describe ConvenientService::Examples::Standard::V1::Gemfile::Services::Ass
   include ConvenientService::RSpec::Matchers::Results
   include ConvenientService::RSpec::Matchers::IncludeModule
 
-  let(:result) { described_class.result(name: name) }
-  let(:name) { "strip-comments" }
-
   example_group "modules" do
     subject { described_class }
 
@@ -21,14 +18,17 @@ RSpec.describe ConvenientService::Examples::Standard::V1::Gemfile::Services::Ass
 
   example_group "class methods" do
     describe ".result" do
+      subject(:result) { described_class.result(name: name) }
+
+      let(:name) { "strip-comments" }
       let(:npm_package_available_command) { "npm list #{name} --depth=0 > /dev/null 2>&1" }
 
-      context "when assertion that npm package is available is NOT successful" do
+      context "when `AssertNpmPackageAvailable` is NOT successful" do
         context "when `name` is NOT valid" do
           context "when `name` is `nil`" do
             let(:name) { nil }
 
-            it "returns `failure` with `data`" do
+            it "returns `failure` with `message`" do
               expect(result).to be_failure.with_data(name: "Name is `nil`").of_service(described_class).of_step(:validate_name)
             end
           end
@@ -36,7 +36,7 @@ RSpec.describe ConvenientService::Examples::Standard::V1::Gemfile::Services::Ass
           context "when `name` is empty" do
             let(:name) { "" }
 
-            it "returns `failure` with `data`" do
+            it "returns `failure` with `message`" do
               expect(result).to be_failure.with_data(name: "Name is empty").of_service(described_class).of_step(:validate_name)
             end
           end
@@ -68,7 +68,7 @@ RSpec.describe ConvenientService::Examples::Standard::V1::Gemfile::Services::Ass
         end
       end
 
-      context "when assertion that npm package is available is successful" do
+      context "when `AssertNpmPackageAvailable` is successful" do
         before do
           stub_service(ConvenientService::Examples::Standard::V1::Gemfile::Services::RunShellCommand)
             .with_arguments(command: npm_package_available_command)

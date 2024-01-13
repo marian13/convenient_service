@@ -12,9 +12,6 @@ RSpec.describe ConvenientService::Examples::Dry::V1::Gemfile::Services::AssertNp
   include ConvenientService::RSpec::Matchers::Results
   include ConvenientService::RSpec::Matchers::IncludeModule
 
-  let(:result) { described_class.result(name: name) }
-  let(:name) { "strip-comments" }
-
   example_group "modules" do
     subject { described_class }
 
@@ -23,16 +20,19 @@ RSpec.describe ConvenientService::Examples::Dry::V1::Gemfile::Services::AssertNp
 
   example_group "class methods" do
     describe ".result" do
+      subject(:result) { described_class.result(name: name) }
+
+      let(:name) { "strip-comments" }
       let(:npm_package_available_command) { "npm list #{name} --depth=0 > /dev/null 2>&1" }
 
-      context "when assertion that npm package is available is NOT successful" do
+      context "when `AssertNpmPackageAvailable` is NOT successful" do
         if ConvenientService::Dependencies.support_has_j_send_result_params_validations_using_active_model_validations?
           context "when `name` is NOT valid" do
             context "when `name` is NOT present" do
               let(:name) { "" }
 
-              it "returns `failure` with `data`" do
-                expect(result).to be_failure.with_data(name: "can't be blank").of_service(described_class).without_step
+              it "returns `error` with `message`" do
+                expect(result).to be_error.with_message("name can't be blank").of_service(described_class).without_step
               end
             end
           end
@@ -64,7 +64,7 @@ RSpec.describe ConvenientService::Examples::Dry::V1::Gemfile::Services::AssertNp
         end
       end
 
-      context "when assertion that npm package is available is successful" do
+      context "when `AssertNpmPackageAvailable` is successful" do
         before do
           stub_service(ConvenientService::Examples::Dry::V1::Gemfile::Services::RunShellCommand)
             .with_arguments(command: npm_package_available_command)

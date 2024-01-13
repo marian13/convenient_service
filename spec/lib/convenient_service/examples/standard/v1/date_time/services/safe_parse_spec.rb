@@ -9,7 +9,8 @@ RSpec.describe ConvenientService::Examples::Standard::V1::DateTime::Services::Sa
   include ConvenientService::RSpec::Matchers::Results
   include ConvenientService::RSpec::Matchers::IncludeModule
 
-  let(:result) { described_class.result(string: string, format: format) }
+  subject(:result) { described_class.result(string: string, format: format) }
+
   let(:string) { "24-02-2022" }
   let(:format) { "%d-%m-%Y" }
 

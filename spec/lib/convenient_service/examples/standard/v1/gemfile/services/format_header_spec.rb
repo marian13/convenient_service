@@ -9,10 +9,6 @@ RSpec.describe ConvenientService::Examples::Standard::V1::Gemfile::Services::For
   include ConvenientService::RSpec::Matchers::Results
   include ConvenientService::RSpec::Matchers::IncludeModule
 
-  let(:result) { described_class.result(parsed_content: parsed_content, skip_frozen_string_literal: skip_frozen_string_literal) }
-  let(:parsed_content) { {} }
-  let(:skip_frozen_string_literal) { false }
-
   example_group "modules" do
     subject { described_class }
 
@@ -21,7 +17,12 @@ RSpec.describe ConvenientService::Examples::Standard::V1::Gemfile::Services::For
 
   example_group "class methods" do
     describe ".result" do
-      context "when formatting of header is successful" do
+      subject(:result) { described_class.result(parsed_content: parsed_content, skip_frozen_string_literal: skip_frozen_string_literal) }
+
+      let(:parsed_content) { {} }
+      let(:skip_frozen_string_literal) { false }
+
+      context "when `FormatHeader` is successful" do
         let(:skip_frozen_string_literal) { false }
 
         let(:parsed_content) do

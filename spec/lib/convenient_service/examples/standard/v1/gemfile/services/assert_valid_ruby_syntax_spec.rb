@@ -9,9 +9,6 @@ RSpec.describe ConvenientService::Examples::Standard::V1::Gemfile::Services::Ass
   include ConvenientService::RSpec::Matchers::Results
   include ConvenientService::RSpec::Matchers::IncludeModule
 
-  let(:result) { described_class.result(content: content) }
-  let(:content) { double }
-
   example_group "modules" do
     subject { described_class }
 
@@ -20,7 +17,11 @@ RSpec.describe ConvenientService::Examples::Standard::V1::Gemfile::Services::Ass
 
   example_group "class methods" do
     describe ".result" do
-      context "when assertion that ruby syntax is valid is NOT successful" do
+      subject(:result) { described_class.result(content: content) }
+
+      let(:content) { double }
+
+      context "when `AssertValidRubySyntax` is NOT successful" do
         context "when `content` does NOT contain valid Ruby syntax" do
           let(:content) { "2 */ 2" }
 
@@ -30,7 +31,7 @@ RSpec.describe ConvenientService::Examples::Standard::V1::Gemfile::Services::Ass
         end
       end
 
-      context "when assertion that ruby syntax is valid is successful" do
+      context "when `AssertValidRubySyntax` is successful" do
         let(:content) { "2 + 2" }
 
         it "returns `success`" do

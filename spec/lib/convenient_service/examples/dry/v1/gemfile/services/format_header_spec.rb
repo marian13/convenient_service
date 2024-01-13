@@ -11,10 +11,6 @@ RSpec.describe ConvenientService::Examples::Dry::V1::Gemfile::Services::FormatHe
   include ConvenientService::RSpec::Matchers::Results
   include ConvenientService::RSpec::Matchers::IncludeModule
 
-  let(:result) { described_class.result(parsed_content: parsed_content, skip_frozen_string_literal: skip_frozen_string_literal) }
-  let(:parsed_content) { {} }
-  let(:skip_frozen_string_literal) { false }
-
   example_group "modules" do
     subject { described_class }
 
@@ -23,11 +19,16 @@ RSpec.describe ConvenientService::Examples::Dry::V1::Gemfile::Services::FormatHe
 
   example_group "class methods" do
     describe ".result" do
-      context "when formatting of header is NOT successful" do
+      subject(:result) { described_class.result(parsed_content: parsed_content, skip_frozen_string_literal: skip_frozen_string_literal) }
+
+      let(:parsed_content) { {} }
+      let(:skip_frozen_string_literal) { false }
+
+      context "when `FormatHeader` is NOT successful" do
         context "when `parsed_content` is NOT hash" do
           let(:parsed_content) { [] }
 
-          it "returns `failure`" do
+          it "returns `failure` with `data`" do
             expect(result).to be_failure.with_data(parsed_content: "must be a hash").of_service(described_class).without_step
           end
         end
@@ -37,7 +38,7 @@ RSpec.describe ConvenientService::Examples::Dry::V1::Gemfile::Services::FormatHe
             context "when value for `ruby` is NOT array" do
               let(:parsed_content) { {ruby: {}} }
 
-              it "returns `failure`" do
+              it "returns `failure` with `data`" do
                 expect(result).to be_failure.with_data(parsed_content: [:ruby, ["must be an array"]]).of_service(described_class).without_step
               end
             end
@@ -46,7 +47,7 @@ RSpec.describe ConvenientService::Examples::Dry::V1::Gemfile::Services::FormatHe
               context "when any item from that array is NOT string" do
                 let(:parsed_content) { {ruby: [42]} }
 
-                it "returns `failure`" do
+                it "returns `failure` with `data`" do
                   expect(result).to be_failure.with_data(parsed_content: [:ruby, {0 => ["must be a string"]}]).of_service(described_class).without_step
                 end
               end
@@ -57,7 +58,7 @@ RSpec.describe ConvenientService::Examples::Dry::V1::Gemfile::Services::FormatHe
             context "when value for `source` is NOT array" do
               let(:parsed_content) { {source: {}} }
 
-              it "returns `failure`" do
+              it "returns `failure` with `data`" do
                 expect(result).to be_failure.with_data(parsed_content: [:source, ["must be an array"]]).of_service(described_class).without_step
               end
             end
@@ -66,7 +67,7 @@ RSpec.describe ConvenientService::Examples::Dry::V1::Gemfile::Services::FormatHe
               context "when any item from that array is NOT string" do
                 let(:parsed_content) { {source: [42]} }
 
-                it "returns `failure`" do
+                it "returns `failure` with `data`" do
                   expect(result).to be_failure.with_data(parsed_content: [:source, {0 => ["must be a string"]}]).of_service(described_class).without_step
                 end
               end
@@ -77,7 +78,7 @@ RSpec.describe ConvenientService::Examples::Dry::V1::Gemfile::Services::FormatHe
             context "when value for `git_source` is NOT array" do
               let(:parsed_content) { {git_source: {}} }
 
-              it "returns `failure`" do
+              it "returns `failure` with `data`" do
                 expect(result).to be_failure.with_data(parsed_content: [:git_source, ["must be an array"]]).of_service(described_class).without_step
               end
             end
@@ -86,7 +87,7 @@ RSpec.describe ConvenientService::Examples::Dry::V1::Gemfile::Services::FormatHe
               context "when any item from that array is NOT string" do
                 let(:parsed_content) { {git_source: [42]} }
 
-                it "returns `failure`" do
+                it "returns `failure` with `data`" do
                   expect(result).to be_failure.with_data(parsed_content: [:git_source, {0 => ["must be a string"]}]).of_service(described_class).without_step
                 end
               end
@@ -97,13 +98,13 @@ RSpec.describe ConvenientService::Examples::Dry::V1::Gemfile::Services::FormatHe
         context "when `skip_frozen_string_literal` is NOT boolean" do
           let(:skip_frozen_string_literal) { 42 }
 
-          it "returns `failure`" do
+          it "returns `failure` with `data`" do
             expect(result).to be_failure.with_data(skip_frozen_string_literal: "must be boolean").of_service(described_class).without_step
           end
         end
       end
 
-      context "when formatting of header is successful" do
+      context "when `FormatHeader` is successful" do
         let(:skip_frozen_string_literal) { false }
 
         let(:parsed_content) do

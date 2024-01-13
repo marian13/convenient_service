@@ -12,11 +12,6 @@ RSpec.describe ConvenientService::Examples::Standard::V1::Gemfile::Services::Run
   include ConvenientService::RSpec::Matchers::Results
   include ConvenientService::RSpec::Matchers::IncludeModule
 
-  let(:service) { described_class.new(command: command, debug: debug) }
-  let(:result) { service.result }
-  let(:command) { "ls -a" }
-  let(:debug) { true }
-
   example_group "modules" do
     subject { described_class }
 
@@ -25,7 +20,14 @@ RSpec.describe ConvenientService::Examples::Standard::V1::Gemfile::Services::Run
 
   example_group "class methods" do
     describe ".result" do
-      context "when running of shell command is NOT successful" do
+      subject(:result) { service.result }
+
+      let(:service) { described_class.new(command: command, debug: debug) }
+
+      let(:command) { "ls -a" }
+      let(:debug) { true }
+
+      context "when `RunShellCommand` is NOT successful" do
         context "when `command` is NOT valid" do
           context "when `command` is `nil`" do
             let(:command) { nil }
@@ -62,7 +64,7 @@ RSpec.describe ConvenientService::Examples::Standard::V1::Gemfile::Services::Run
         end
       end
 
-      context "when running of shell command is successful" do
+      context "when `RunShellCommand` is successful" do
         before do
           ##
           # Stubs private method Kernel#system.
@@ -74,7 +76,7 @@ RSpec.describe ConvenientService::Examples::Standard::V1::Gemfile::Services::Run
           allow(service).to receive(:system).with(command).and_return(true)
         end
 
-        it "returns success" do
+        it "returns `success`" do
           expect(result).to be_success.without_data.of_service(described_class).of_step(:result)
         end
       end

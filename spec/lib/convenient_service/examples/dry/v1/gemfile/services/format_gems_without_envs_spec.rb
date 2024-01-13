@@ -11,9 +11,6 @@ RSpec.describe ConvenientService::Examples::Dry::V1::Gemfile::Services::FormatGe
   include ConvenientService::RSpec::Matchers::Results
   include ConvenientService::RSpec::Matchers::IncludeModule
 
-  let(:result) { described_class.result(parsed_content: parsed_content) }
-  let(:parsed_content) { {} }
-
   example_group "modules" do
     subject { described_class }
 
@@ -22,11 +19,15 @@ RSpec.describe ConvenientService::Examples::Dry::V1::Gemfile::Services::FormatGe
 
   example_group "class methods" do
     describe ".result" do
-      context "when formatting of gems without envs is NOT successful" do
+      subject(:result) { described_class.result(parsed_content: parsed_content) }
+
+      let(:parsed_content) { {} }
+
+      context "when `FormatGemsWithoutEnvs` is NOT successful" do
         context "when `parsed_content` is NOT hash" do
           let(:parsed_content) { [] }
 
-          it "returns `failure`" do
+          it "returns `failure` with `data`" do
             expect(result).to be_failure.with_data(parsed_content: "must be a hash").of_service(described_class).without_step
           end
         end
@@ -36,7 +37,7 @@ RSpec.describe ConvenientService::Examples::Dry::V1::Gemfile::Services::FormatGe
             context "when value for `gems` is NOT array" do
               let(:parsed_content) { {gems: {}} }
 
-              it "returns `failure`" do
+              it "returns `failure` with `data`" do
                 expect(result).to be_failure.with_data(parsed_content: [:gems, ["must be an array"]]).of_service(described_class).without_step
               end
             end
@@ -45,7 +46,7 @@ RSpec.describe ConvenientService::Examples::Dry::V1::Gemfile::Services::FormatGe
               context "when any item from that array is NOT hash" do
                 let(:parsed_content) { {gems: [42]} }
 
-                it "returns `failure`" do
+                it "returns `failure` with `data`" do
                   expect(result).to be_failure.with_data(parsed_content: [:gems, {0 => ["must be a hash"]}]).of_service(described_class).without_step
                 end
               end
@@ -62,7 +63,7 @@ RSpec.describe ConvenientService::Examples::Dry::V1::Gemfile::Services::FormatGe
                     }
                   end
 
-                  it "returns `failure`" do
+                  it "returns `failure` with `data`" do
                     expect(result).to be_failure.with_data(parsed_content: [:gems, {0 => {envs: ["is missing"]}}]).of_service(described_class).without_step
                   end
                 end
@@ -78,7 +79,7 @@ RSpec.describe ConvenientService::Examples::Dry::V1::Gemfile::Services::FormatGe
                     }
                   end
 
-                  it "returns `failure`" do
+                  it "returns `failure` with `data`" do
                     expect(result).to be_failure.with_data(parsed_content: [:gems, {0 => {line: ["is missing"]}}]).of_service(described_class).without_step
                   end
                 end
@@ -88,7 +89,7 @@ RSpec.describe ConvenientService::Examples::Dry::V1::Gemfile::Services::FormatGe
         end
       end
 
-      context "when formatting of gems without envs is successful" do
+      context "when `FormatGemsWithoutEnvs` is successful" do
         let(:parsed_content) do
           {
             gems: [
@@ -126,7 +127,7 @@ RSpec.describe ConvenientService::Examples::Dry::V1::Gemfile::Services::FormatGe
           RUBY
         end
 
-        it "returns success with gems without envs as formatted content" do
+        it "returns `success` with gems without envs as formatted content" do
           expect(result).to be_success.with_data(formatted_content: formatted_content).of_service(described_class).without_step
         end
 
