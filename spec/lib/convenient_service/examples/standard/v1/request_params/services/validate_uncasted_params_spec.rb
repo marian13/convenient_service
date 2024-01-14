@@ -6,10 +6,10 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Examples::Standard::V1::RequestParams::Services::ValidateUncastedParams do
+  include ConvenientService::RSpec::Matchers::Results
+
   example_group "class methods" do
     describe ".result" do
-      include ConvenientService::RSpec::Matchers::Results
-
       subject(:result) { described_class.result(params: params) }
 
       let(:params) do
@@ -30,50 +30,52 @@ RSpec.describe ConvenientService::Examples::Standard::V1::RequestParams::Service
       let(:tags) { "ruby" }
       let(:sources) { "https://www.rubyguides.com/2019/07/ruby-instance-variables/" }
 
-      context "when params are NOT valid" do
-        context "when ID is NOT present" do
-          let(:id) { "" }
+      context "when `ValidateUncastedParams` is NOT successful" do
+        context "when params are NOT valid" do
+          context "when ID is NOT present" do
+            let(:id) { "" }
 
-          it "returns error with message" do
-            expect(result).to be_error.with_message("ID is NOT present")
+            it "returns `error` with `message`" do
+              expect(result).to be_error.with_message("ID is NOT present")
+            end
           end
-        end
 
-        context "when ID is NOT valid integer" do
-          let(:id) { "abc" }
+          context "when ID is NOT valid integer" do
+            let(:id) { "abc" }
 
-          it "returns error with message" do
-            expect(result).to be_error.with_message("ID `#{id}` is NOT a valid integer")
+            it "returns `error` with `message`" do
+              expect(result).to be_error.with_message("ID `#{id}` is NOT a valid integer")
+            end
           end
-        end
 
-        context "when format is NOT json" do
-          let(:format) { "html" }
+          context "when format is NOT json" do
+            let(:format) { "html" }
 
-          it "returns error with message" do
-            expect(result).to be_error.with_message("Format `#{format}` is NOT supported, only JSON is allowed")
+            it "returns `error` with `message`" do
+              expect(result).to be_error.with_message("Format `#{format}` is NOT supported, only JSON is allowed")
+            end
           end
-        end
 
-        context "when title is NOT present" do
-          let(:title) { "" }
+          context "when title is NOT present" do
+            let(:title) { "" }
 
-          it "returns error with message" do
-            expect(result).to be_error.with_message("Title is NOT present")
+            it "returns `error` with `message`" do
+              expect(result).to be_error.with_message("Title is NOT present")
+            end
           end
-        end
 
-        context "when description is NOT present" do
-          let(:description) { "" }
+          context "when description is NOT present" do
+            let(:description) { "" }
 
-          it "returns error with message" do
-            expect(result).to be_error.with_message("Description is NOT present")
+            it "returns `error` with `message`" do
+              expect(result).to be_error.with_message("Description is NOT present")
+            end
           end
         end
       end
 
-      context "when params are valid" do
-        it "returns success without data" do
+      context "when `ValidateUncastedParams` is successful" do
+        it "returns `success` without data" do
           expect(result).to be_success.without_data
         end
       end

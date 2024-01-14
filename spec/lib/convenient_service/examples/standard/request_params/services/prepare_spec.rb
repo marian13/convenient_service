@@ -6,11 +6,11 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::Prepare do
+  include ConvenientService::RSpec::Matchers::DelegateTo
+  include ConvenientService::RSpec::Matchers::Results
+
   example_group "class methods" do
     describe ".result" do
-      include ConvenientService::RSpec::Matchers::DelegateTo
-      include ConvenientService::RSpec::Matchers::Results
-
       subject(:result) { described_class.result(request: request) }
 
       let(:request) { ConvenientService::Examples::Standard::RequestParams::Entities::Request.new(http_string: http_string) }
@@ -49,13 +49,9 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::P
       end
 
       let(:path) { "/rules/%{id}.%{format}" % path_params }
-
       let(:path_params) { {id: id, format: format} }
-
       let(:id) { "1000000" }
-
       let(:format) { "json" }
-
       let(:body) { JSON.generate(json_body) }
 
       let(:json_body) do
@@ -69,13 +65,9 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::P
       end
 
       let(:body_params) { json_body.transform_keys(&:to_sym) }
-
       let(:merged_params) { path_params.merge(body_params) }
-
       let(:permitted_params) { merged_params.slice(*(merged_params.keys - [:verified])) }
-
       let(:params_with_defaults) { defaults.merge(permitted_params) }
-
       let(:original_params) { params_with_defaults }
 
       let(:casted_params) do
@@ -96,100 +88,84 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::P
         allow(ConvenientService::Examples::Standard::RequestParams::Entities::Logger).to receive(:log).with(anything)
       end
 
-      context "when request is NOT valid to extract params from path" do
-        ##
-        # Contains invalid path.
-        # https://www.w3.org/TR/2011/WD-html5-20110525/urls.html
-        #
-        let(:path) { "/ru*les/1.json" }
-        let(:pattern) { /^\/rules\/(?<id>\d+)\.(?<format>\w+)$/ }
-
-        it "fails to extract params from path" do
-          expect(result).to be_error.of_step(ConvenientService::Examples::Standard::RequestParams::Services::ExtractParamsFromPath)
-        end
-      end
-
-      context "when request is NOT valid to extract params from body" do
-        ##
-        # Contains unparsable JSON body.
-        #
-        let(:body) { "abc" }
-
-        it "fails to extract params from body" do
-          expect(result).to be_error.of_step(ConvenientService::Examples::Standard::RequestParams::Services::ExtractParamsFromBody)
-        end
-      end
-
-      context "when request is valid to extract params from both path and body" do
-        it "merges params extracted from path and body" do
+      context "when `Prepare` is NOT successful" do
+        context "when `ExtractParamsFromPath` is NOT successful" do
           ##
-          # TODO: Introduce `delegate_to_service` to hide `commit_config!`.
+          # Contains invalid path.
+          # https://www.w3.org/TR/2011/WD-html5-20110525/urls.html
           #
-          ConvenientService::Examples::Standard::RequestParams::Services::MergeParams.commit_config!
+          let(:path) { "/ru*les/1.json" }
+          let(:pattern) { /^\/rules\/(?<id>\d+)\.(?<format>\w+)$/ }
 
+          it "returns intermediate step result" do
+            expect(result).to be_not_success.of_step(ConvenientService::Examples::Standard::RequestParams::Services::ExtractParamsFromPath)
+          end
+        end
+
+        context "when `ExtractParamsFromBody` is NOT successful" do
+          ##
+          # Contains unparsable JSON body.
+          #
+          let(:body) { "abc" }
+
+          it "returns intermediate step result" do
+            expect(result).to be_not_success.of_step(ConvenientService::Examples::Standard::RequestParams::Services::ExtractParamsFromBody)
+          end
+        end
+
+        context "when uncasted params are NOT valid" do
+          ##
+          # Contains unsupported format, only JSON is available.
+          #
+          let(:path) { "/rules/1.html" }
+
+          it "returns intermediate step result" do
+            expect(result).to be_not_success.of_step(ConvenientService::Examples::Standard::RequestParams::Services::ValidateUncastedParams)
+          end
+        end
+
+        context "when casted params are NOT valid" do
+          before do
+            allow(ConvenientService::Examples::Standard::RequestParams::Entities::ID).to receive(:cast).and_return(nil)
+          end
+
+          it "returns intermediate step result" do
+            expect(result).to be_not_success.of_step(ConvenientService::Examples::Standard::RequestParams::Services::ValidateCastedParams)
+          end
+        end
+      end
+
+      context "when `Prepare` is successful" do
+        specify do
           expect { result }
             .to delegate_to(ConvenientService::Examples::Standard::RequestParams::Services::MergeParams, :result)
             .with_arguments(params_from_path: path_params, params_from_body: body_params)
         end
 
-        it "logs merged params from path and body with \"Uncasted\" tag" do
-          ##
-          # TODO: Introduce `delegate_to_service` to hide `commit_config!`.
-          #
-          ConvenientService::Examples::Standard::RequestParams::Services::LogRequestParams.commit_config!
-
+        specify do
           expect { result }
             .to delegate_to(ConvenientService::Examples::Standard::RequestParams::Services::LogRequestParams, :result)
             .with_arguments(request: request, params: merged_params, tag: "Uncasted")
         end
 
-        it "filters out unpermitted keys" do
-          ConvenientService::Examples::Standard::RequestParams::Services::FilterOutUnpermittedParams.commit_config!
-
+        specify do
           expect { result }
             .to delegate_to(ConvenientService::Examples::Standard::RequestParams::Services::FilterOutUnpermittedParams, :result)
             .with_arguments(params: merged_params, permitted_keys: permitted_keys)
         end
 
-        it "applies default values" do
-          ConvenientService::Examples::Standard::RequestParams::Services::ApplyDefaultParamValues.commit_config!
-
+        specify do
           expect { result }
             .to delegate_to(ConvenientService::Examples::Standard::RequestParams::Services::ApplyDefaultParamValues, :result)
             .with_arguments(params: permitted_params, defaults: defaults)
         end
-      end
 
-      context "when uncasted params are NOT valid" do
-        ##
-        # Contains unsupported format, only JSON is available.
-        #
-        let(:path) { "/rules/1.html" }
-
-        it "fails to validate uncasted params" do
-          expect(result).to be_error.of_step(ConvenientService::Examples::Standard::RequestParams::Services::ValidateUncastedParams)
-        end
-      end
-
-      context "when uncasted params are valid" do
-        it "logs casted params with \"Casted\" tag" do
+        specify do
           expect { result }
             .to delegate_to(ConvenientService::Examples::Standard::RequestParams::Services::LogRequestParams, :result)
             .with_arguments(request: request, params: casted_params, tag: "Casted")
         end
-      end
 
-      context "when casted params are NOT valid" do
-        before do
-          allow(ConvenientService::Examples::Standard::RequestParams::Entities::ID).to receive(:cast).and_return(nil)
-        end
-
-        it "fails to validate casted params" do
-          expect(result).to be_error.of_step(ConvenientService::Examples::Standard::RequestParams::Services::ValidateCastedParams)
-        end
-      end
-
-      context "when casted params are valid" do
         it "returns `success` with casted params" do
           expect(result).to be_success.with_data(params: casted_params)
         end

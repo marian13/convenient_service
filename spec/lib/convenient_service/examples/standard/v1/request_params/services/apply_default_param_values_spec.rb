@@ -6,24 +6,26 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Examples::Standard::V1::RequestParams::Services::ApplyDefaultParamValues do
+  include ConvenientService::RSpec::Matchers::Results
+
   example_group "class methods" do
     describe ".result" do
-      include ConvenientService::RSpec::Matchers::Results
+      context "when `ApplyDefaultParamValues` is successful" do
+        subject(:result) { described_class.result(params: params, defaults: defaults) }
 
-      subject(:result) { described_class.result(params: params, defaults: defaults) }
+        let(:params) { {id: "1000000", title: "Check the official User Docs"} }
+        let(:defaults) { {tags: [], sources: []} }
 
-      let(:params) { {id: "1000000", title: "Check the official User Docs"} }
-      let(:defaults) { {tags: [], sources: []} }
+        it "returns `success` with params and defaults" do
+          expect(result).to be_success.with_data(params: {id: "1000000", title: "Check the official User Docs", tags: [], sources: []})
+        end
 
-      it "returns success with params and defaults" do
-        expect(result).to be_success.with_data(params: {id: "1000000", title: "Check the official User Docs", tags: [], sources: []})
-      end
+        context "when `params` and `defaults` have same keys" do
+          let(:params) { {id: "1000000", title: "Check the official User Docs", tags: ["ruby"]} }
 
-      context "when `params` and `defaults` have same keys" do
-        let(:params) { {id: "1000000", title: "Check the official User Docs", tags: ["ruby"]} }
-
-        it "takes value from `params`" do
-          expect(result).to be_success.with_data(params: {id: "1000000", title: "Check the official User Docs", tags: ["ruby"], sources: []})
+          it "takes value from `params`" do
+            expect(result).to be_success.with_data(params: {id: "1000000", title: "Check the official User Docs", tags: ["ruby"], sources: []})
+          end
         end
       end
     end
