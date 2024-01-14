@@ -1,5 +1,35 @@
 # Changelog
 
+## [0.17.0](https://github.com/marian13/convenient_service/compare/v0.16.0...v0.17.0) (2024-01-14)
+
+
+### Features
+
+* **backtrace_cleaner:** introduce add_convenient_service_silencer ([07ce10f](https://github.com/marian13/convenient_service/commit/07ce10fbd96c7e6b3074922d0ca8af6547416725))
+* **backtrace_cleaner:** upgrade to Rails 7.1.2 Backtrace Cleaner ([6416691](https://github.com/marian13/convenient_service/commit/6416691d99d3b22544b78ea81aed5a3a4aa513fe))
+* **core:** clean backtrace in method_missing ([0642198](https://github.com/marian13/convenient_service/commit/06421981ccf39d2d0b07f2bce30284c604bba950))
+* **core:** clean backtrace in method_missing ([81d0531](https://github.com/marian13/convenient_service/commit/81d05317d842d9afa2ef7034b34b850034a8f1dd))
+* **core:** clean backtrace in method_missing ([f07c354](https://github.com/marian13/convenient_service/commit/f07c354e8fc14f1062df68f938b9d4b9fa8484c5))
+* **entry:** allow to define multiple entries at once ([a9bca88](https://github.com/marian13/convenient_service/commit/a9bca880da4849866f6afc30b3f099be88834f64))
+* **exception:** allow to pass message or kwargs or no arguments ([a92a040](https://github.com/marian13/convenient_service/commit/a92a04002687c878618479804d0176e69b3d4fa4))
+* **exceptions:** use backtrace_cleaner ([7bc566e](https://github.com/marian13/convenient_service/commit/7bc566e78cfa3fcc28b6b2318ca955ff4d797ce8))
+* **exceptions:** use backtrace_cleaner ([b8d87a5](https://github.com/marian13/convenient_service/commit/b8d87a56cb4afda043ba0de6c1ba3cd967d2aa7c))
+* **feature:** allow to use middlewares for all entries at once ([a2025dc](https://github.com/marian13/convenient_service/commit/a2025dccbf660cdc313f9db7df155ccd7a4cd3b8))
+* **has_instance_proxy:** delegate to target missing proxy methods ([6be8d3b](https://github.com/marian13/convenient_service/commit/6be8d3b6bf556bc2af9ff29a7b0782b352a8effb))
+* **has_instance_proxy:** introduce #inspect ([078d219](https://github.com/marian13/convenient_service/commit/078d21927b1b523b266e85d945f87aa3030de0f4))
+* **has_j_send_result:** expose result? ([f4d5f7f](https://github.com/marian13/convenient_service/commit/f4d5f7fb9afde955295602db022d12f084f60d9e))
+* **has_j_send_status_and_attributes:** introduce #to_bool ([ec5ee1e](https://github.com/marian13/convenient_service/commit/ec5ee1ec0f4a540a109f80e3ffafa1b937d1af60))
+* **root:** introduce ConvenientService.raise and ConvenientService.reraise ([65f0148](https://github.com/marian13/convenient_service/commit/65f0148d052c31c3e305470b2b9daee5c746794e))
+* **root:** introduce ConvenientService.root ([dc5af36](https://github.com/marian13/convenient_service/commit/dc5af365374a76d615fa09613b59bb9cd080bc1b))
+* **support:** add initial backtrace cleaner ([14733f3](https://github.com/marian13/convenient_service/commit/14733f3d5b622c08aec1fe0b80a2b7c5699b4d4f))
+
+
+### Bug Fixes
+
+* **backtrace_cleaner:** resolve JRuby incompatibilites ([3ff9055](https://github.com/marian13/convenient_service/commit/3ff90555a0f78f1ba51fa7c538cc84c7c4e69bdb))
+* **rescues_result_unhandled_exceptions:** fix false-positive test ([e792c01](https://github.com/marian13/convenient_service/commit/e792c01613a74da529f2f7833248527c40f1ac7b))
+* **specs:** remove did_you_mean flakiness ([709faf6](https://github.com/marian13/convenient_service/commit/709faf6c8ac9eb28451f3ea734d5588159481648))
+
 ## [0.16.0](https://github.com/marian13/convenient_service/compare/v0.15.0...v0.16.0) (2023-12-05)
 
 
