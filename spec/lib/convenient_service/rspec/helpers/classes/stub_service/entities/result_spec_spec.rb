@@ -75,7 +75,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::Classes::StubService::Entities
       context "when result spec for error" do
         let(:result_spec) { described_class.new(status: :error, service_class: service_class) }
 
-        it "returns error" do
+        it "returns `error`" do
           expect(result_spec.calculate_value).to be_error
         end
 
@@ -87,7 +87,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::Classes::StubService::Entities
           let(:result_spec) { described_class.new(status: :error, service_class: service_class).with_message(message) }
           let(:message) { "foo" }
 
-          it "returns error with message" do
+          it "returns `error` with message" do
             expect(result_spec.calculate_value).to be_error.with_message(message)
           end
 
@@ -95,7 +95,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::Classes::StubService::Entities
             let(:result_spec) { described_class.new(status: :error, service_class: service_class).with_message(message).and_code(code) }
             let(:code) { :foo }
 
-            it "returns error with message" do
+            it "returns `error` with message" do
               expect(result_spec.calculate_value).to be_error.with_message(message).and_code(code)
             end
           end
@@ -105,7 +105,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::Classes::StubService::Entities
           let(:result_spec) { described_class.new(status: :error, service_class: service_class).with_code(code) }
           let(:code) { :foo }
 
-          it "returns error with code" do
+          it "returns `error` with code" do
             expect(result_spec.calculate_value).to be_error.with_code(code)
           end
 
@@ -113,7 +113,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::Classes::StubService::Entities
             let(:result_spec) { described_class.new(status: :error, service_class: service_class).with_code(code).and_message(message) }
             let(:message) { "foo" }
 
-            it "returns error with message" do
+            it "returns `error` with message" do
               expect(result_spec.calculate_value).to be_error.with_code(code).and_message(message)
             end
           end

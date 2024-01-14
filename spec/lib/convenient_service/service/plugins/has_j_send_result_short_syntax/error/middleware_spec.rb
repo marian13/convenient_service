@@ -61,7 +61,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultShortSyntax::E
         context "when `args` are NOT passed" do
           subject(:method_value) { method.call }
 
-          it "returns error without data" do
+          it "returns `error` without data" do
             expect(method_value).to be_error.without_data
           end
         end
@@ -70,7 +70,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultShortSyntax::E
           context "when only one `arg` is passed" do
             subject(:method_value) { method.call("foo") }
 
-            it "returns error with message" do
+            it "returns `error` with message" do
               expect(method_value).to be_error.with_message("foo")
             end
           end
@@ -78,7 +78,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultShortSyntax::E
           context "when only two `args` are passed" do
             subject(:method_value) { method.call("foo", :foo) }
 
-            it "returns error with message" do
+            it "returns `error` with message" do
               expect(method_value).to be_error.with_message("foo").with_code(:foo)
             end
           end
@@ -116,7 +116,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultShortSyntax::E
           context "when `kwargs` do NOT contain `:data`, `:message` and `code` keys" do
             subject(:method_value) { method.call(foo: :bar) }
 
-            it "returns error with data" do
+            it "returns `error` with data" do
               expect(method_value).to be_error.with_data(foo: :bar)
             end
           end
@@ -124,7 +124,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultShortSyntax::E
           context "when `kwargs` contain `:data` key" do
             subject(:method_value) { method.call(data: {foo: :bar}) }
 
-            it "returns error with data" do
+            it "returns `error` with data" do
               expect(method_value).to be_error.with_data(foo: :bar)
             end
 
@@ -178,7 +178,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultShortSyntax::E
           context "when `kwargs` contain `:message` key" do
             subject(:method_value) { method.call(message: "foo") }
 
-            it "returns error with message" do
+            it "returns `error` with message" do
               expect(method_value).to be_error.with_message("foo")
             end
 
@@ -232,7 +232,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultShortSyntax::E
           context "when `kwargs` contain `:code` key" do
             subject(:method_value) { method.call(code: :foo) }
 
-            it "returns error with code" do
+            it "returns `error` with code" do
               expect(method_value).to be_error.with_code(:foo)
             end
 

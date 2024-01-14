@@ -52,7 +52,7 @@ RSpec.describe ConvenientService::Examples::Rails::V1::Gemfile::Services::RunShe
             allow(service).to receive(:system).with(command).and_return(false)
           end
 
-          it "returns error with message" do
+          it "returns `error` with message" do
             expect(result).to be_error.with_message("#{command} returned non-zero exit code").of_service(described_class).of_step(:result)
           end
         end

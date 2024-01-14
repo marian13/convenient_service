@@ -165,7 +165,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
                   .with_arguments(exception: exception, args: result_arguments.args, kwargs: result_arguments.kwargs, block: result_arguments.block, max_backtrace_size: max_backtrace_size)
               end
 
-              it "returns error with formatted exception" do
+              it "returns `error` with formatted exception" do
                 expect(method_value).to be_error.with_data(exception: exception).and_message(formatted_exception)
               end
             end

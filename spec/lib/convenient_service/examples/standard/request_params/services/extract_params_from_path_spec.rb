@@ -46,7 +46,7 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::E
             MESSAGE
           end
 
-          it "returns error with message" do
+          it "returns `error` with message" do
             expect(result).to be_error.with_message(error_message)
           end
         end
@@ -57,7 +57,7 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::E
 
           let(:error_message) { "Path `#{path}` does NOT match pattern `#{pattern}`." }
 
-          it "returns error with message" do
+          it "returns `error` with message" do
             expect(result).to be_error.with_message(error_message)
           end
         end
