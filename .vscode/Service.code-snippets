@@ -4,22 +4,20 @@
   // NOTE: More information about VS Code Snippets can be found here:
   // - https://code.visualstudio.com/docs/editor/userdefinedsnippets
   //
-  " RSpec matcher": {
+  "Service - minimal service": {
     "scope": "ruby",
-    "prefix": "service",
+    "prefix": "Service",
     "body": [
-      "class $1",
+      "class ${1:Service}",
       "  include ::ConvenientService::Standard::Config",
       "",
-      "  step $2",
-      "",
-      "  step :result",
-      "",
       "  def result"
-      "    $3",
+      "    ${2:# ...}",
+      "",
+      "    success",
       "  end",
       "end"
     ],
-    "description": "`cache_its_value` - a custom RSpec matcher to verify caching"
+    "description": "`Service` - a minimal service using ConvenientService"
   }
 }
