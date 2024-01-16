@@ -108,6 +108,10 @@ RSpec.describe ConvenientService::Common::Plugins::HasInstanceProxy::Entities::I
           .with_arguments(:foo, *args, **kwargs, &block)
           .and_return_its_value
       end
+
+      specify do
+        expect { instance_proxy.foo(*args, **kwargs, &block) }.to delegate_to(ConvenientService, :reraise)
+      end
     end
   end
 end

@@ -66,7 +66,7 @@ module ConvenientService
             # @return [Object] Can be any type.
             #
             def method_missing(...)
-              instance_proxy_target.public_send(...)
+              ::ConvenientService.reraise { instance_proxy_target.public_send(...) }
             end
           end
         end
