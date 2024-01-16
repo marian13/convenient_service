@@ -309,7 +309,7 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/has_instance_proxy/entities/instance_proxy.rb', line 68</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_method_missing'>method_missing</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_instance_proxy_target'>instance_proxy_target</span><span class='period'>.</span><span class='id identifier rubyid_public_send'>public_send</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
+  <span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='period'>.</span><span class='id identifier rubyid_reraise'><span class='object_link'><a href="../../../../../ConvenientService.html#reraise-instance_method" title="ConvenientService#reraise (method)">reraise</a></span></span> <span class='lbrace'>{</span> <span class='id identifier rubyid_instance_proxy_target'>instance_proxy_target</span><span class='period'>.</span><span class='id identifier rubyid_public_send'>public_send</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -464,7 +464,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Jan 15 10:06:03 2024 by
+  Generated on Tue Jan 16 20:22:25 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.2.2).
 </div>
