@@ -185,7 +185,7 @@
   
   
   
-  
+  <span class="private note title">private</span>
 
   
     <span class="summary_desc"><div class='inline'></div></span>
@@ -207,7 +207,7 @@
   
   
   
-  
+  <span class="private note title">private</span>
 
   
     <span class="summary_desc"><div class='inline'></div></span>
@@ -238,7 +238,7 @@
   
   
   
-  
+  <span class="private note title">private</span>
 
   
     <span class="summary_desc"><div class='inline'><p>Returns step by index.</p>
@@ -366,12 +366,12 @@
       <pre class="lines">
 
 
-75
-76
-77</pre>
+80
+81
+82</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/concern.rb', line 75</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/concern.rb', line 80</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_raw'>raw</span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="../../../Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Support/RawValue.html" title="ConvenientService::Support::RawValue (class)">RawValue</a></span></span><span class='period'>.</span><span class='id identifier rubyid_wrap'><span class='object_link'><a href="../../../Support/RawValue.html#wrap-class_method" title="ConvenientService::Support::RawValue.wrap (method)">wrap</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
@@ -433,12 +433,12 @@
       <pre class="lines">
 
 
-83
-84
-85</pre>
+90
+91
+92</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/concern.rb', line 83</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/concern.rb', line 90</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_reassign'>reassign</span><span class='lparen'>(</span><span class='id identifier rubyid_method_name'>method_name</span><span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="Entities.html" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Method.html" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method (class)">Method</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Method/Entities.html" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Method/Entities/Values.html" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Values (module)">Values</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Method/Entities/Values/Reassignment.html" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Values::Reassignment (class)">Reassignment</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Entities/Method/Entities/Values/Reassignment.html#initialize-instance_method" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Values::Reassignment#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_method_name'>method_name</span><span class='rparen'>)</span>
@@ -512,17 +512,15 @@
       <pre class="lines">
 
 
-58
-59
-60
-61</pre>
+62
+63
+64</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/concern.rb', line 58</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/concern.rb', line 62</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_step'>step</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_step_class'>step_class</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='label'>container:</span> <span class='kw'>self</span><span class='rparen'>)</span><span class='rparen'>)</span>
-    <span class='period'>.</span><span class='id identifier rubyid_tap'>tap</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_step_instance'>step_instance</span><span class='op'>|</span> <span class='id identifier rubyid_steps'>steps</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_step_instance'>step_instance</span> <span class='rbrace'>}</span>
+  <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_register'>register</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -540,7 +538,11 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
+    <p class="note private">
+  <strong>This method is part of a private API.</strong>
+  You should avoid using this method if possible, as it may be removed or be changed in the future.
+</p>
+
 
   </div>
 </div>
@@ -566,12 +568,12 @@
       <pre class="lines">
 
 
-97
-98
-99</pre>
+108
+109
+110</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/concern.rb', line 97</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/concern.rb', line 108</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_step_class'>step_class</span>
   <span class='ivar'>@step_class</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="Commands.html" title="ConvenientService::Service::Plugins::CanHaveSteps::Commands (module)">Commands</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Commands/CreateStepClass.html" title="ConvenientService::Service::Plugins::CanHaveSteps::Commands::CreateStepClass (class)">CreateStepClass</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="Commands/CreateStepClass.html#call-instance_method" title="ConvenientService::Service::Plugins::CanHaveSteps::Commands::CreateStepClass#call (method)">call</a></span></span><span class='lparen'>(</span><span class='label'>service_class:</span> <span class='kw'>self</span><span class='rparen'>)</span>
@@ -592,7 +594,11 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
+    <p class="note private">
+  <strong>This method is part of a private API.</strong>
+  You should avoid using this method if possible, as it may be removed or be changed in the future.
+</p>
+
 
   </div>
 </div>
@@ -618,15 +624,15 @@
       <pre class="lines">
 
 
-90
-91
-92</pre>
+99
+100
+101</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/concern.rb', line 90</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/concern.rb', line 99</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_steps'>steps</span>
-  <span class='ivar'>@steps</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="Entities.html" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/StepCollection.html" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities::StepCollection (class)">StepCollection</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Entities/StepCollection.html#initialize-instance_method" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities::StepCollection#initialize (method)">new</a></span></span>
+  <span class='ivar'>@steps</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="Entities.html" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/StepCollection.html" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities::StepCollection (class)">StepCollection</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Entities/StepCollection.html#initialize-instance_method" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities::StepCollection#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>container:</span> <span class='kw'>self</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -650,7 +656,11 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
+    <p class="note private">
+  <strong>This method is part of a private API.</strong>
+  You should avoid using this method if possible, as it may be removed or be changed in the future.
+</p>
+
   <div class="note notetag">
     <strong>Note:</strong>
     <div class='inline'><p>This method was initially designed as a hook (callback trigger).</p>
@@ -707,12 +717,12 @@ Returns <code>nil</code> when index is out of range.</p>
       <pre class="lines">
 
 
-45
-46
-47</pre>
+47
+48
+49</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/concern.rb', line 45</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/concern.rb', line 47</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_step'>step</span><span class='lparen'>(</span><span class='id identifier rubyid_index'>index</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_steps'>steps</span><span class='lbracket'>[</span><span class='id identifier rubyid_index'>index</span><span class='rbracket'>]</span>
@@ -813,9 +823,9 @@ Returns <code>nil</code> when index is out of range.</p>
 </div>
 
       <div id="footer">
-  Generated on Tue Jan 16 20:22:19 2024 by
+  Generated on Fri Jan 19 23:17:36 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.34 (ruby-3.2.2).
+  0.9.34 (ruby-3.2.3).
 </div>
 
     </div>
