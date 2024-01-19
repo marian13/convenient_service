@@ -51,7 +51,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveMethodSteps::Middlewa
         end
       end
 
-      let(:kwargs) { {in: :foo, out: :bar, index: 0} }
+      let(:kwargs) { {in: :foo, out: :bar, container: container} }
 
       context "when step service is NOT symbol" do
         let(:service) { Class.new }
@@ -64,6 +64,8 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveMethodSteps::Middlewa
 
         it "returns original step" do
           method_value
+
+          # TODO
 
           expect(container.steps.first).to eq(container.step(service, **kwargs))
         end
@@ -81,6 +83,8 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveMethodSteps::Middlewa
 
         it "returns customized step" do
           method_value
+
+          # TODO
 
           expect(container.steps.first).to eq(container.step(container, **kwargs.merge(method: method_name)))
         end

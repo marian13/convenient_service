@@ -33,6 +33,8 @@ module ConvenientService
             end
 
             ##
+            # @api private
+            #
             # Returns step by index.
             # Returns `nil` when index is out of range.
             #
@@ -49,6 +51,8 @@ module ConvenientService
 
           class_methods do
             ##
+            # @api public
+            #
             # Registers a step (step definition).
             #
             # @param args [Array<Object>]
@@ -56,11 +60,12 @@ module ConvenientService
             # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step]
             #
             def step(*args, **kwargs)
-              step_class.new(*args, **kwargs.merge(container: self))
-                .tap { |step_instance| steps << step_instance }
+              steps.register(*args, **kwargs)
             end
 
             ##
+            # @api public
+            #
             # Allows to pass a value to `in` method without its intermediate processing.
             # @see https://userdocs.convenientservice.org/basics/step_to_result_translation_table
             #
@@ -77,6 +82,8 @@ module ConvenientService
             end
 
             ##
+            # @api public
+            #
             # @param method_name [String, Symbol]
             # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Values::Reassignment]
             #
@@ -85,6 +92,8 @@ module ConvenientService
             end
 
             ##
+            # @api private
+            #
             # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::StepCollection]
             #
             def steps
@@ -92,6 +101,8 @@ module ConvenientService
             end
 
             ##
+            # @api private
+            #
             # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step]
             #
             def step_class

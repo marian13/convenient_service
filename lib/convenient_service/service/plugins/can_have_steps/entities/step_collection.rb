@@ -37,6 +37,21 @@ module ConvenientService
             end
 
             ##
+            # @api private
+            #
+            # @param args [Array<Object>]
+            # @param kwargs [Hash{Symbol => Object}]
+            # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step]
+            #
+            def register(*args, **kwargs)
+              step = step_class.new(*args, **kwargs.merge(container: container, index: next_available_index))
+
+              steps << step
+
+              step
+            end
+
+            ##
             # @api public
             #
             # @return [Boolean] true if called for the first time, false otherwise (similarly as Kernel#require).
@@ -97,7 +112,7 @@ module ConvenientService
             # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::StepCollection]
             #
             def <<(step)
-              steps << step.copy(overrides: {kwargs: {index: next_available_index}})
+              steps << step
 
               self
             end
@@ -124,6 +139,13 @@ module ConvenientService
             #
             def next_available_index
               steps.size
+            end
+
+            ##
+            # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step]
+            #
+            def step_class
+              container.step_class
             end
           end
         end

@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-# rubocop:disable RSpec/NestedGroups
+# rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::StepCollection do
   let(:step_collection) { described_class.new(container: container) }
 
@@ -37,7 +37,10 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
   example_group "instance methods" do
     include ConvenientService::RSpec::Matchers::DelegateTo
 
-    let(:step) { ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step.new(Class.new, in: :foo, out: :bar, container: Class.new) }
+    let(:step) { container.step_class.new(*args, **kwargs) }
+
+    let(:args) { [Class.new] }
+    let(:kwargs) { {in: :foo, out: :bar, container: container} }
 
     describe "#container" do
       it "returns `container` passed to constructor" do
@@ -61,6 +64,27 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         it "returns array with those `steps`" do
           expect(step_collection.steps).to eq(steps)
         end
+      end
+    end
+
+    describe "#register" do
+      let(:step_without_index) { step }
+      let(:step_with_index) { step.copy(overrides: {kwargs: {index: 0}}) }
+
+      it "adds `step` with container and index to `steps`" do
+        step_collection.register(*args, **kwargs)
+
+        expect(step_collection.steps).to eq([step_with_index])
+      end
+
+      it "increments index for next steps" do
+        3.times { step_collection.register(*args, **kwargs) }
+
+        expect(step_collection.steps.map(&:index)).to eq([0, 1, 2])
+      end
+
+      it "returns step" do
+        expect(step_collection.register(*args, **kwargs)).to eq(step_with_index)
       end
     end
 
@@ -192,23 +216,14 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
     end
 
     describe "#<<" do
-      let(:step_without_index) { step }
-      let(:step_with_index) { step.copy(overrides: {kwargs: {index: 0}}) }
+      it "adds `step`" do
+        step_collection << step
 
-      it "adds `step` copy with index to `steps`" do
-        step_collection << step_without_index
-
-        expect(step_collection.steps).to eq([step_with_index])
-      end
-
-      it "increments index for next steps" do
-        3.times { step_collection << step_without_index }
-
-        expect(step_collection.steps.map(&:index)).to eq([0, 1, 2])
+        expect(step_collection.steps).to eq([step])
       end
 
       it "returns step collection" do
-        expect(step_collection << step_without_index).to eq(step_collection)
+        expect(step_collection << step).to eq(step_collection)
       end
     end
 
@@ -249,4 +264,4 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
     end
   end
 end
-# rubocop:enable RSpec/NestedGroups
+# rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
