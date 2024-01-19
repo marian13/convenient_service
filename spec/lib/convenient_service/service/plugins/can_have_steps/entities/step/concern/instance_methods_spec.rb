@@ -45,7 +45,8 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
   let(:organizer) { organizer_service_klass.new }
 
   let(:args) { [service] }
-  let(:kwargs) { {in: inputs, out: outputs, index: index, container: container, organizer: organizer} }
+  let(:kwargs) { {in: inputs, out: outputs, index: index, container: container, organizer: organizer, **extra_kwargs} }
+  let(:extra_kwargs) { {method_name: :foo} }
 
   let(:step_class) { organizer_service_klass.step_class }
 
@@ -282,8 +283,8 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         context "when `other` has different extra kwargs" do
           let(:other) { step_class.new(*args, **kwargs.merge(fallback: false)) }
 
-          it "ignores them" do
-            expect(step == other).to eq(true)
+          it "returns `false`" do
+            expect(step == other).to eq(false)
           end
         end
 
@@ -624,7 +625,8 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           out: step.outputs,
           index: step.index,
           container: step.container,
-          organizer: step.organizer
+          organizer: step.organizer,
+          **extra_kwargs
         }
       end
 
