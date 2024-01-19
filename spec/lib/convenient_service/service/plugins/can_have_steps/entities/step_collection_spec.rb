@@ -6,7 +6,13 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::StepCollection do
-  let(:step_collection) { described_class.new }
+  let(:step_collection) { described_class.new(container: container) }
+
+  let(:container) do
+    Class.new do
+      include ConvenientService::Service::Configs::Minimal
+    end
+  end
 
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
@@ -19,7 +25,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
   example_group "class methods" do
     describe ".new" do
       context "when `steps` are NOT passed" do
-        let(:step_collection) { described_class.new }
+        let(:step_collection) { described_class.new(container: container) }
 
         it "sets steps to empty array" do
           expect(step_collection.steps).to eq([])
@@ -33,8 +39,33 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
     let(:step) { ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step.new(Class.new, in: :foo, out: :bar, container: Class.new) }
 
+    describe "#container" do
+      it "returns `container` passed to constructor" do
+        expect(step_collection.container).to eq(container)
+      end
+    end
+
+    describe "#steps" do
+      context "when `step collection` has NO `steps`" do
+        let(:step_collection) { described_class.new(container: container) }
+
+        it "returns empty array" do
+          expect(step_collection.steps).to eq([])
+        end
+      end
+
+      context "when `step collection` has `steps`" do
+        let(:step_collection) { described_class.new(container: container, steps: steps) }
+        let(:steps) { [step] }
+
+        it "returns array with those `steps`" do
+          expect(step_collection.steps).to eq(steps)
+        end
+      end
+    end
+
     describe "#commit!" do
-      let(:step_collection) { described_class.new(steps: steps) }
+      let(:step_collection) { described_class.new(container: container, steps: steps) }
       let(:steps) { [step] }
 
       context "when step collection is NOT committed" do
@@ -90,7 +121,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
     end
 
     describe "#committed?" do
-      let(:step_collection) { described_class.new(steps: steps) }
+      let(:step_collection) { described_class.new(container: container, steps: steps) }
       let(:steps) { [step] }
 
       context "when `steps` are NOT frozen" do
@@ -153,11 +184,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       # - https://github.com/rspec/rspec-mocks/issues/1182
       # - https://stackoverflow.com/questions/27244034/test-if-a-block-is-passed-with-rspec-mocks
       #
-      specify {
+      specify do
         expect { step_collection.each(&block) }
           .to delegate_to(step_collection, :steps)
           .and_return_its_value
-      }
+      end
     end
 
     describe "#<<" do
@@ -191,8 +222,16 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           end
         end
 
+        context "when `other` has different `container`" do
+          let(:other) { described_class.new(container: Class.new) }
+
+          it "returns `false`" do
+            expect(step_collection == other).to eq(false)
+          end
+        end
+
         context "when `other` has different `steps`" do
-          let(:other) { described_class.new.tap { |collection| collection << step } }
+          let(:other) { described_class.new(container: container).tap { |collection| collection << step } }
 
           it "returns `false`" do
             expect(step_collection == other).to eq(false)
@@ -200,7 +239,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         end
 
         context "when `other` has same attributes" do
-          let(:other) { described_class.new }
+          let(:other) { described_class.new(container: container) }
 
           it "returns `true`" do
             expect(step_collection == other).to eq(true)

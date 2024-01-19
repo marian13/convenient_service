@@ -11,6 +11,14 @@ module ConvenientService
             ##
             # @api private
             #
+            # @!attribute [r] container
+            #   @return [ConvenientService::Service]
+            #
+            attr_reader :container
+
+            ##
+            # @api private
+            #
             # @!attribute [r] steps
             #   @return [Array<ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step>]
             #
@@ -19,10 +27,12 @@ module ConvenientService
             ##
             # @api private
             #
+            # @param container [ConvenientService::Service]
             # @param steps [Array<ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step>]
             # @return [void]
             #
-            def initialize(steps: [])
+            def initialize(container:, steps: [])
+              @container = container
               @steps = steps
             end
 
@@ -101,6 +111,7 @@ module ConvenientService
             def ==(other)
               return unless other.instance_of?(self.class)
 
+              return false if container != other.container
               return false if steps != other.steps
 
               true

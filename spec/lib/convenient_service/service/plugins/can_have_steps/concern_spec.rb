@@ -9,13 +9,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Concern do
   include ConvenientService::RSpec::PrimitiveMatchers::CacheItsValue
   include ConvenientService::RSpec::Matchers::DelegateTo
 
-  # rubocop:disable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
   let(:service_class) do
     Class.new do
       include ConvenientService::Service::Configs::Minimal
     end
   end
-  # rubocop:enable RSpec/LeakyConstantDeclaration, Lint/ConstantDefinitionInBlock
 
   let(:service_instance) { service_class.new }
 
@@ -131,11 +129,12 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Concern do
     end
 
     describe ".steps" do
-      specify {
+      specify do
         expect { service_class.steps }
           .to delegate_to(ConvenientService::Service::Plugins::CanHaveSteps::Entities::StepCollection, :new)
+          .with_arguments(container: service_class)
           .and_return_its_value
-      }
+      end
 
       specify { expect { service_class.steps }.to cache_its_value }
     end
