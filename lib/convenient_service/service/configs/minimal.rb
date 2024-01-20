@@ -55,6 +55,7 @@ module ConvenientService
             use ConvenientService::Plugins::Common::HasConstructorWithoutInitialize::Concern
 
             use ConvenientService::Plugins::Service::HasResult::Concern
+            use ConvenientService::Plugins::Service::HasNegatedResult::Concern
             use ConvenientService::Plugins::Service::HasJSendResult::Concern
             use ConvenientService::Plugins::Service::CanHaveSteps::Concern
           end

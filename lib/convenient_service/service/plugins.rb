@@ -5,6 +5,8 @@
 #   NOTE: Order matters.
 #
 require_relative "plugins/has_result"
+require_relative "plugins/has_negated_result"
+
 require_relative "plugins/has_j_send_result"
 
 require_relative "plugins/can_recalculate_result"
