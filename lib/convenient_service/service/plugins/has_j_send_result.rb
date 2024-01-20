@@ -5,7 +5,6 @@ require_relative "has_j_send_result/constants"
 require_relative "has_j_send_result/container"
 require_relative "has_j_send_result/commands"
 require_relative "has_j_send_result/entities"
-require_relative "has_j_send_result/exceptions"
 
 module ConvenientService
   module Service
