@@ -13,6 +13,10 @@ RSpec.describe ConvenientService::Service::Plugins::HasNegatedResult::Concern do
   let(:service_class) do
     Class.new do
       include ConvenientService::Service::Configs::Standard
+
+      concerns do
+        delete ConvenientService::Service::Plugins::HasNegatedJSendResult::Concern
+      end
     end
   end
 
@@ -75,6 +79,10 @@ RSpec.describe ConvenientService::Service::Plugins::HasNegatedResult::Concern do
     let(:service_class) do
       Class.new do
         include ConvenientService::Service::Configs::Standard
+
+        concerns do
+          delete ConvenientService::Service::Plugins::HasNegatedJSendResult::Concern
+        end
 
         def negated_result
           failure

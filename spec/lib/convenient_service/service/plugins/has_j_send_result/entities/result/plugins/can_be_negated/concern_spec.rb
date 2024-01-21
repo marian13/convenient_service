@@ -48,7 +48,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         let(:result) { service.result }
 
         it "returns `false`" do
-          expect(result.negated_result?).to eq(false)
+          expect(result.negated?).to eq(false)
         end
       end
 
@@ -56,7 +56,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         let(:result) { service.negated_result }
 
         it "returns `true`" do
-          expect(result.negated_result?).to eq(true)
+          expect(result.negated?).to eq(true)
         end
       end
     end
