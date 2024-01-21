@@ -12,7 +12,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasNegatedResult::Concern do
 
   let(:service_class) do
     Class.new do
-      include ConvenientService::Service::Configs::Minimal
+      include ConvenientService::Service::Configs::Standard
     end
   end
 
@@ -74,7 +74,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasNegatedResult::Concern do
 
     let(:service_class) do
       Class.new do
-        include ConvenientService::Service::Configs::Minimal
+        include ConvenientService::Service::Configs::Standard
 
         def negated_result
           failure

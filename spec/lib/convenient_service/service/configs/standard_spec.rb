@@ -34,7 +34,6 @@ RSpec.describe ConvenientService::Service::Configs::Standard do
               ConvenientService::Common::Plugins::HasConstructor::Concern,
               ConvenientService::Plugins::Common::HasConstructorWithoutInitialize::Concern,
               ConvenientService::Service::Plugins::HasResult::Concern,
-              ConvenientService::Service::Plugins::HasNegatedResult::Concern,
               ConvenientService::Service::Plugins::HasJSendResult::Concern,
               ConvenientService::Service::Plugins::CanHaveSteps::Concern,
               ConvenientService::Common::Plugins::CachesConstructorArguments::Concern,
@@ -44,6 +43,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard do
               ConvenientService::Service::Plugins::HasJSendResultStatusCheckShortSyntax::Concern,
               ConvenientService::Common::Plugins::HasCallbacks::Concern,
               ConvenientService::Common::Plugins::HasAroundCallbacks::Concern,
+              ConvenientService::Service::Plugins::HasNegatedResult::Concern,
               ConvenientService::Service::Plugins::CanHaveFallbacks::Concern,
               ConvenientService::Service::Plugins::HasMermaidFlowchart::Concern
             ]
@@ -231,6 +231,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard do
                 ConvenientService::Common::Plugins::HasJSendResultDuckShortSyntax::Concern,
                 ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanRecalculateResult::Concern,
                 ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanHaveStep::Concern,
+                ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeNegated::Concern,
                 ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeOwnResult::Concern,
                 ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanHaveFallbacks::Concern,
                 ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanHaveParentResult::Concern,

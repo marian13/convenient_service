@@ -34,6 +34,7 @@ module ConvenientService
             use ConvenientService::Plugins::Common::HasCallbacks::Concern
             use ConvenientService::Plugins::Common::HasAroundCallbacks::Concern
 
+            use ConvenientService::Plugins::Service::HasNegatedResult::Concern
             use ConvenientService::Plugins::Service::CanHaveFallbacks::Concern
             use ConvenientService::Plugins::Service::HasMermaidFlowchart::Concern
           end
