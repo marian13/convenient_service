@@ -80,6 +80,18 @@ module ConvenientService
     end
 
     ##
+    # Returns Convenient Service Specs folder.
+    # For example, it may return something like: `/Users/user/.asdf/installs/ruby/2.7.0/lib/ruby/gems/2.7.0/gems/convenient_service-0.16.0/spec`.
+    #
+    # @api private
+    #
+    # @return [Pathname]
+    #
+    def spec_root
+      @spec_root ||= ::Pathname.new(::File.join(root, "spec"))
+    end
+
+    ##
     # @api public
     #
     # @return [ConvenientService::Support::BacktraceCleaner]

@@ -83,6 +83,10 @@ RSpec.describe ConvenientService::Support::BacktraceCleaner do
         expect(backtrace_cleaner.clean(["#{ConvenientService.examples_root}/foo.rb"])).to eq(["#{ConvenientService.examples_root}/foo.rb"])
       end
 
+      it "does NOT silences Convenient Service specs" do
+        expect(backtrace_cleaner.clean(["#{ConvenientService.spec_root}/foo_spec.rb"])).to eq(["#{ConvenientService.spec_root}/foo_spec.rb"])
+      end
+
       context "when backtrace is `nil`" do
         let(:backtrace) { nil }
 

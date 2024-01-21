@@ -37,6 +37,12 @@ RSpec.describe ConvenientService do
       end
     end
 
+    describe ".spec_root" do
+      it "returns Convenient Service Specs root folder" do
+        expect(described_class.spec_root).to eq(Pathname.new(File.join(Dir.pwd, "spec")))
+      end
+    end
+
     describe ".backtrace_cleaner" do
       it "returns backtrace cleaner" do
         expect(described_class.backtrace_cleaner).to be_instance_of(described_class::Support::BacktraceCleaner)
