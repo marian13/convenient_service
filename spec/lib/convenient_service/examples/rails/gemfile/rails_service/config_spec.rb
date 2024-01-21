@@ -46,6 +46,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::RailsService::Config
               ConvenientService::Common::Plugins::HasCallbacks::Concern,
               ConvenientService::Common::Plugins::HasAroundCallbacks::Concern,
               ConvenientService::Service::Plugins::HasNegatedResult::Concern,
+              ConvenientService::Service::Plugins::HasNegatedJSendResult::Concern,
               ConvenientService::Service::Plugins::CanHaveFallbacks::Concern,
               ConvenientService::Service::Plugins::HasMermaidFlowchart::Concern,
               ConvenientService::Common::Plugins::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment::Concern,
@@ -130,6 +131,21 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::RailsService::Config
 
           it "sets service middlewares for `#fallback_error_result`" do
             expect(service_class.middlewares(:fallback_error_result).to_a).to eq(fallback_error_result_middlewares)
+          end
+        end
+
+        example_group "#negated_result middlewares" do
+          let(:negated_result_middlewares) do
+            [
+              ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
+              ConvenientService::Service::Plugins::CollectsServicesInException::Middleware,
+              ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
+              ConvenientService::Service::Plugins::HasNegatedJSendResult::Middleware
+            ]
+          end
+
+          it "sets service middlewares for `#negated_result`" do
+            expect(service_class.middlewares(:negated_result).to_a).to eq(negated_result_middlewares)
           end
         end
 

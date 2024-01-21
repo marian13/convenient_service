@@ -35,6 +35,7 @@ module ConvenientService
             use ConvenientService::Plugins::Common::HasAroundCallbacks::Concern
 
             use ConvenientService::Plugins::Service::HasNegatedResult::Concern
+            use ConvenientService::Plugins::Service::HasNegatedJSendResult::Concern
             use ConvenientService::Plugins::Service::CanHaveFallbacks::Concern
             use ConvenientService::Plugins::Service::HasMermaidFlowchart::Concern
           end
@@ -91,6 +92,18 @@ module ConvenientService
 
             use ConvenientService::Plugins::Service::RaisesOnNotResultReturnValue::Middleware
             use ConvenientService::Plugins::Service::CanHaveFallbacks::Middleware.with(status: :error)
+          end
+
+          ##
+          # @internal
+          #   NOTE: Check `Minimal` docs to understand why `use ConvenientService::Plugins::Common::NormalizesEnv::Middleware` for `:negated_result` is used in `Standard`, not in `Minimal` config.
+          #
+          middlewares :negated_result do
+            use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
+            use ConvenientService::Plugins::Service::CollectsServicesInException::Middleware
+            use ConvenientService::Plugins::Common::CachesReturnValue::Middleware
+
+            use ConvenientService::Plugins::Service::HasNegatedJSendResult::Middleware
           end
 
           middlewares :step do

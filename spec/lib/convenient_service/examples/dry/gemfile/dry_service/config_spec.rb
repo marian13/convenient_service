@@ -131,6 +131,21 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::DryService::Config do
           end
         end
 
+        example_group "#negated_result middlewares" do
+          let(:negated_result_middlewares) do
+            [
+              ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
+              ConvenientService::Service::Plugins::CollectsServicesInException::Middleware,
+              ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
+              ConvenientService::Service::Plugins::HasNegatedJSendResult::Middleware
+            ]
+          end
+
+          it "sets service middlewares for `#negated_result`" do
+            expect(service_class.middlewares(:negated_result).to_a).to eq(negated_result_middlewares)
+          end
+        end
+
         example_group "#step middlewares" do
           let(:step_middlewares) do
             [
