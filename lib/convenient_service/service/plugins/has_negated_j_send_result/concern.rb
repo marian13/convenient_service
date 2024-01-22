@@ -12,16 +12,28 @@ module ConvenientService
             # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
             #
             # @internal
-            #   TODO: Specs.
+            #   NOTE: `original_result = result` is used to cache `result` independently, without relying on `CachesReturnValue` plugin.
+            #
+            #   TODO: `Utils::String.concat_if`? How?
+            #   - https://stackoverflow.com/a/28648594/12201472
             #
             def negated_result
               original_result = result
 
-              if original_result.success?(mark_status_as_checked: false)
-                failure(message: "Original result is successful")
-              elsif original_result.failure?(mark_status_as_checked: false)
-                success(message: original_result.message)
-              elsif original_result.error?(mark_status_as_checked: false)
+              case result.status.to_sym
+              when :success
+                failure(
+                  data: original_result.unsafe_data,
+                  message: "Original `result` is `success`#{" with `message` - #{original_result.unsafe_message}" unless original_result.unsafe_message.empty?}",
+                  code: "negated_#{original_result.unsafe_code}"
+                )
+              when :failure
+                success(
+                  data: original_result.unsafe_data,
+                  message: "Original `result` is `failure`#{" with `message` - #{original_result.unsafe_message}" unless original_result.unsafe_message.empty?}",
+                  code: "negated_#{original_result.unsafe_code}"
+                )
+              when :error
                 original_result.copy
               end
             end
