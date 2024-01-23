@@ -28,11 +28,23 @@ Gem::Specification.new do |spec|
   spec.metadata["source_code_uri"] = spec.homepage
   spec.metadata["changelog_uri"] = "#{spec.homepage}/CHANGELOG.md"
 
-  # Specify which files should be added to the gem when it is released.
-  # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
-  spec.files = Dir.chdir(File.expand_path(__dir__)) do
-    `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
-  end
+  ##
+  # Includes the minimal possible amount of files to the bundled Convenient Service version.
+  #
+  # NOTE: At the moment of writing this comment, Convenient Service weighed 170+ MB.
+  # That was a problem in the space limited environments.
+  #
+  # NOTE: If you would like to play with Convenient Service specs, consider to `git clone` the gem.
+  # - https://github.com/marian13/convenient_service
+  #
+  # NOTE: More thoughts on what should be included in the production version of a gem.
+  # - https://github.com/rubocop/rubocop/blob/v1.60.1/rubocop.gemspec
+  # - https://github.com/rails/rails/blob/v7.1.3/activerecord/activerecord.gemspec#L20
+  # - https://github.com/mvz/gir_ffi/blob/master/gir_ffi.gemspec#L27
+  # - https://github.com/payolapayments/payola/issues/292
+  # - https://github.com/rubocop/rubocop/issues/1555
+  #
+  spec.files = ::Dir["COMM-LICENSE.txt", "LICENSE.txt", "README.rdoc", "lib/**/*"] - ::Dir["lib/convenient_service/examples/**/*"]
 
   spec.require_paths = ["lib"]
 
