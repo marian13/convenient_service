@@ -179,6 +179,14 @@ tasks:
       - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
         msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
 
+  docker:bash:ruby_3.3:
+    cmds:
+      - docker run --rm -it -v $(pwd):/gem convenient_service:3.3 bash
+    interactive: true
+    preconditions:
+      - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
+        msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
+
   ##
   # NOTE: TruffleRuby 22.3 aims CRuby 3.1 compatibility.
   # - https://github.com/oracle/truffleruby/blob/master/doc/user/compatibility.md
@@ -197,6 +205,7 @@ tasks:
       - task: docker:build:ruby_3.0
       - task: docker:build:ruby_3.1
       - task: docker:build:ruby_3.2
+      - task: docker:build:ruby_3.3
       - task: docker:build:jruby_9.4
       - task: docker:build:truffleruby_22.3
     preconditions:
@@ -288,6 +297,23 @@ tasks:
       - rm Gemfile.3.2.lock 2> /dev/null || true
       - cp Gemfile Gemfile.3.2
       - docker build . -f docker/3.2/Dockerfile -t convenient_service:3.2
+    preconditions:
+      - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
+        msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
+
+  docker:build:ruby_3.3:
+    cmds:
+      ##
+      # NOTE: Meaning of `|| 2> /dev/null`.
+      # https://stackoverflow.com/a/10250395/12201472
+      #
+      # NOTE: Meaning of `|| true`.
+      # https://superuser.com/a/887349/1180656
+      #
+      - rm Gemfile.3.3 2> /dev/null || true
+      - rm Gemfile.3.3.lock 2> /dev/null || true
+      - cp Gemfile Gemfile.3.3
+      - docker build . -f docker/3.3/Dockerfile -t convenient_service:3.3
     preconditions:
       - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
         msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
