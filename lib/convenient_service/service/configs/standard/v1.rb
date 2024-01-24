@@ -85,7 +85,6 @@ module ConvenientService
                 use ConvenientService::Plugins::Common::HasJSendResultDuckShortSyntax::Concern
                 use ConvenientService::Plugins::Result::CanRecalculateResult::Concern
 
-                use ConvenientService::Plugins::Result::CanHaveStep::Concern
                 use ConvenientService::Plugins::Result::CanBeOwnResult::Concern
                 use ConvenientService::Plugins::Result::CanHaveParentResult::Concern
                 use ConvenientService::Plugins::Result::CanHaveCheckedStatus::Concern

@@ -118,6 +118,8 @@ module ConvenientService
               use ConvenientService::Plugins::Common::HasConstructorWithoutInitialize::Concern
 
               use ConvenientService::Plugins::Result::HasJSendStatusAndAttributes::Concern
+
+              use ConvenientService::Plugins::Result::CanHaveStep::Concern
             end
 
             middlewares :initialize do
