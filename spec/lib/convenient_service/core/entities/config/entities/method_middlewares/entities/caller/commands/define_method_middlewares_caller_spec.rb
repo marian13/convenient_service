@@ -96,11 +96,18 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
               end
             end
 
-            it "raises `NoMethodError`" do
-              ##
-              # NOTE: Depending on the `did_you_mean` version, an additional line may be added to the exception message, which is why the `with_message` string is replaced by regex.
-              #
-              expect { service_instance.result }.to raise_error(NoMethodError).with_message(/super: no superclass method `result' for #{service_instance}/)
+            ##
+            # NOTE: Depending on the `did_you_mean` version, an additional line may be added to the exception message, which is why the `with_message` string is replaced by regex.
+            #
+            # rubocop:disable RSpec/RepeatedDescription
+            if ConvenientService::Dependencies.ruby.version >= 3.3
+              it "raises `NoMethodError`" do
+                expect { service_instance.result }.to raise_error(NoMethodError).with_message(/super: no superclass method `result' for an instance of #{service_instance.class}/)
+              end
+            else
+              it "raises `NoMethodError`" do
+                expect { service_instance.result }.to raise_error(NoMethodError).with_message(/super: no superclass method `result' for #{service_instance}/)
+              end
             end
           end
 
@@ -180,12 +187,20 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
               end
             end
 
-            it "raises `NoMethodError`" do
-              ##
-              # NOTE: Depending on the `did_you_mean` version, an additional line may be added to the exception message, which is why the `with_message` string is replaced by regex.
-              #
-              expect { service_class.result }.to raise_error(NoMethodError).with_message(/super: no superclass method `result' for #{service_class}/)
+            ##
+            # NOTE: Depending on the `did_you_mean` version, an additional line may be added to the exception message, which is why the `with_message` string is replaced by regex.
+            #
+            # rubocop:disable RSpec/RepeatedDescription
+            if ConvenientService::Dependencies.ruby.version >= 3.3
+              it "raises `NoMethodError`" do
+                expect { service_class.result }.to raise_error(NoMethodError).with_message(/super: no superclass method `result' for class #{service_class}/)
+              end
+            else
+              it "raises `NoMethodError`" do
+                expect { service_class.result }.to raise_error(NoMethodError).with_message(/super: no superclass method `result' for #{service_class}/)
+              end
             end
+            # rubocop:enable RSpec/RepeatedDescription
           end
 
           context "when super is defined" do

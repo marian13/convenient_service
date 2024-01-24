@@ -230,13 +230,24 @@ RSpec.describe ConvenientService::Core::Concern::ClassMethods do
           end
         end
 
-        it "raises `NoMethodError`" do
-          ##
-          # NOTE: Intentionally calling missed method that won't be included (no concerns with it).
-          #
-          # NOTE: Depending on the `did_you_mean` version, an additional line may be added to the exception message, which is why the `with_message` string is replaced by regex.
-          #
-          expect { service_class.foo }.to raise_error(NoMethodError).with_message(/undefined method `foo' for #{service_class}/)
+        ##
+        # NOTE: Depending on the `did_you_mean` version, an additional line may be added to the exception message, which is why the `with_message` string is replaced by regex.
+        #
+        # rubocop:disable RSpec/RepeatedDescription
+        if ConvenientService::Dependencies.ruby.version >= 3.3
+          it "raises `NoMethodError`" do
+            ##
+            # NOTE: Intentionally calling missed method that won't be included (no concerns with it).
+            #
+            expect { service_class.foo }.to raise_error(NoMethodError).with_message(/undefined method `foo' for class #{service_class}/)
+          end
+        else
+          it "raises `NoMethodError`" do
+            ##
+            # NOTE: Intentionally calling missed method that won't be included (no concerns with it).
+            #
+            expect { service_class.foo }.to raise_error(NoMethodError).with_message(/undefined method `foo' for #{service_class}/)
+          end
         end
 
         specify do
@@ -253,14 +264,26 @@ RSpec.describe ConvenientService::Core::Concern::ClassMethods do
           end
         end
 
-        it "raises `NoMethodError`" do
-          ##
-          # NOTE: Intentionally calling missed method that won't be included (no concerns with it), but has middlewares.
-          #
-          # NOTE: Depending on the `did_you_mean` version, an additional line may be added to the exception message, which is why the `with_message` string is replaced by regex.
-          #
-          expect { service_class.foo }.to raise_error(NoMethodError).with_message(/super: no superclass method `foo' for #{service_class}/)
+        ##
+        # NOTE: Depending on the `did_you_mean` version, an additional line may be added to the exception message, which is why the `with_message` string is replaced by regex.
+        #
+        # rubocop:disable RSpec/RepeatedDescription
+        if ConvenientService::Dependencies.ruby.version >= 3.3
+          it "raises `NoMethodError`" do
+            ##
+            # NOTE: Intentionally calling missed method that won't be included (no concerns with it), but has middlewares.
+            #
+            expect { service_class.foo }.to raise_error(NoMethodError).with_message(/super: no superclass method `foo' for class #{service_class}/)
+          end
+        else
+          it "raises `NoMethodError`" do
+            ##
+            # NOTE: Intentionally calling missed method that won't be included (no concerns with it), but has middlewares.
+            #
+            expect { service_class.foo }.to raise_error(NoMethodError).with_message(/super: no superclass method `foo' for #{service_class}/)
+          end
         end
+        # rubocop:enable RSpec/RepeatedDescription
 
         if ConvenientService::Dependencies.ruby.version >= 3.0
           ##
@@ -298,14 +321,24 @@ RSpec.describe ConvenientService::Core::Concern::ClassMethods do
         end
       end
 
-      it "is private" do
-        ##
-        # NOTE: Depending on the `did_you_mean` version, an additional line may be added to the exception message, which is why the `with_message` string is replaced by regex.
-        #
-        expect { service_class.respond_to_missing?(method_name, include_private) }
-          .to raise_error(NoMethodError)
-          .with_message(/private method `respond_to_missing\?' called for #{service_class}/)
+      ##
+      # NOTE: Depending on the `did_you_mean` version, an additional line may be added to the exception message, which is why the `with_message` string is replaced by regex.
+      #
+      # rubocop:disable RSpec/RepeatedDescription
+      if ConvenientService::Dependencies.ruby.version >= 3.3
+        it "is private" do
+          expect { service_class.respond_to_missing?(method_name, include_private) }
+            .to raise_error(NoMethodError)
+            .with_message(/private method `respond_to_missing\?' called for class #{service_class}/)
+        end
+      else
+        it "is private" do
+          expect { service_class.respond_to_missing?(method_name, include_private) }
+            .to raise_error(NoMethodError)
+            .with_message(/private method `respond_to_missing\?' called for #{service_class}/)
+        end
       end
+      # rubocop:enable RSpec/RepeatedDescription
 
       context "when `include_private` is `false`" do
         let(:include_private) { false }
