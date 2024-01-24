@@ -133,10 +133,14 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
               end
 
               specify do
+                ##
+                # TODO: Remove when `step.service`.
+                #
+                step.service.klass.commit_config!
+
                 expect { method_value }
-                  .to delegate_to(step, :fallback_failure_result)
-                  .without_arguments
-                  .and_return_its_value
+                  .to delegate_to(step.service.klass, :fallback_failure_result)
+                  .with_arguments(**step.input_values)
               end
 
               it "returns result with NOT checked status" do
@@ -236,10 +240,14 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
               end
 
               specify do
+                ##
+                # TODO: Remove when `step.service`.
+                #
+                step.service.klass.commit_config!
+
                 expect { method_value }
-                  .to delegate_to(step, :fallback_failure_result)
-                  .without_arguments
-                  .and_return_its_value
+                  .to delegate_to(step.service.klass, :fallback_failure_result)
+                  .with_arguments(**step.input_values)
               end
 
               it "returns result with NOT checked status" do
@@ -367,10 +375,14 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
               end
 
               specify do
+                ##
+                # TODO: Remove when `step.service`.
+                #
+                step.service.klass.commit_config!
+
                 expect { method_value }
-                  .to delegate_to(step, :fallback_error_result)
-                  .without_arguments
-                  .and_return_its_value
+                  .to delegate_to(step.service.klass, :fallback_error_result)
+                  .with_arguments(**step.input_values)
               end
 
               it "returns result with NOT checked status" do
@@ -443,10 +455,14 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
             end
 
             specify do
+              ##
+              # TODO: Remove when `step.service`.
+              #
+              step.service.klass.commit_config!
+
               expect { method_value }
-                .to delegate_to(step, :fallback_failure_result)
-                .without_arguments
-                .and_return_its_value
+                .to delegate_to(step.service.klass, :fallback_failure_result)
+                .with_arguments(**step.input_values)
             end
 
             it "returns result with NOT checked status" do
@@ -570,10 +586,14 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
             end
 
             specify do
+              ##
+              # TODO: Remove when `step.service`.
+              #
+              step.service.klass.commit_config!
+
               expect { method_value }
-                .to delegate_to(step, :fallback_error_result)
-                .without_arguments
-                .and_return_its_value
+                .to delegate_to(step.service.klass, :fallback_error_result)
+                .with_arguments(**step.input_values)
             end
 
             it "returns result with NOT checked status" do

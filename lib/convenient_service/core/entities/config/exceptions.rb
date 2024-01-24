@@ -30,6 +30,8 @@ module ConvenientService
             #   TODO: Create a troubleshooting page with possible reasons (preliminary RSpec mocks etc).
             #   Append a link to it to the error message.
             #
+            #   TODO: Add a note of the most common when scenario when this issue appears - when RSpec stub is used before auto config commitment. For example, with `delegate_to`.
+            #
             def initialize_with_kwargs(config:)
               message = <<~TEXT
                 `#{config.klass}` config is committed too many times from `method_missing`.

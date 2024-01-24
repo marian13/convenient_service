@@ -220,19 +220,6 @@ module ConvenientService
                 end
 
                 ##
-                # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
-                # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepHasNoOrganizer]
-                #
-                # @note `result` has middlewares.
-                #
-                # @internal
-                #   NOTE: Convents a foreign result received from `service_result` to own result.
-                #
-                def result
-                  convert_to_step_result(service_result)
-                end
-
-                ##
                 # @return [String]
                 #
                 def printable_service
@@ -319,14 +306,6 @@ module ConvenientService
                 #
                 def calculate_input_values
                   inputs.reduce({}) { |values, input| values.merge(input.key.to_sym => input.value) }
-                end
-
-                ##
-                # @param result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
-                # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
-                #
-                def convert_to_step_result(result)
-                  result.copy(overrides: {kwargs: {step: self, service: organizer}})
                 end
 
                 ##

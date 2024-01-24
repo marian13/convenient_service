@@ -183,28 +183,6 @@ module ConvenientService
               use ConvenientService::Plugins::Step::CanHaveFallbacks::Middleware.with(fallback_true_status: :failure)
               use ConvenientService::Plugins::Step::CanHaveParentResult::Middleware
             end
-
-            middlewares :service_fallback_failure_result do
-              use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
-              use ConvenientService::Plugins::Common::CachesReturnValue::Middleware
-              use ConvenientService::Plugins::Step::RaisesOnNotResultReturnValue::Middleware
-            end
-
-            middlewares :fallback_failure_result do
-              use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
-              use ConvenientService::Plugins::Common::CachesReturnValue::Middleware
-            end
-
-            middlewares :service_fallback_error_result do
-              use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
-              use ConvenientService::Plugins::Common::CachesReturnValue::Middleware
-              use ConvenientService::Plugins::Step::RaisesOnNotResultReturnValue::Middleware
-            end
-
-            middlewares :fallback_error_result do
-              use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
-              use ConvenientService::Plugins::Common::CachesReturnValue::Middleware
-            end
           end
 
           if Dependencies.rspec.loaded?

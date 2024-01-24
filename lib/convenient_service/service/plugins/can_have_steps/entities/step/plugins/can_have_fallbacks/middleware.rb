@@ -21,9 +21,9 @@ module ConvenientService
                     when :success
                       result
                     when :failure
-                      fallback_failure_step? ? entity.fallback_failure_result(...) : result
+                      fallback_failure_step? ? fallback_failure_result(...) : result
                     when :error
-                      fallback_error_step? ? entity.fallback_error_result(...) : result
+                      fallback_error_step? ? fallback_error_result(...) : result
                     end
                   end
 
@@ -62,6 +62,30 @@ module ConvenientService
                   #
                   def fallback_true_status
                     middleware_arguments.kwargs.fetch(:fallback_true_status) { :failure }
+                  end
+
+                  ##
+                  # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
+                  # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepHasNoOrganizer]
+                  #
+                  # @internal
+                  #   IMPORTANT: `service.klass.fallback_failure_result(**input_values)` is the reason, why services should have only kwargs as arguments.
+                  #   TODO: `entity.service.fallback_failure_result`.
+                  #
+                  def fallback_failure_result
+                    entity.service.klass.fallback_failure_result(**entity.input_values)
+                  end
+
+                  ##
+                  # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
+                  # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepHasNoOrganizer]
+                  #
+                  # @internal
+                  #   IMPORTANT: `service.klass.fallback_error_result(**input_values)` is the reason, why services should have only kwargs as arguments.
+                  #   TODO: `entity.service.fallback_error_result`.
+                  #
+                  def fallback_error_result
+                    entity.service.klass.fallback_error_result(**entity.input_values)
                   end
                 end
               end

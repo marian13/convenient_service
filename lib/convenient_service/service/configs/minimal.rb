@@ -213,6 +213,8 @@ module ConvenientService
             concerns do
               use ConvenientService::Plugins::Common::HasInternals::Concern
 
+              use ConvenientService::Plugins::Step::HasResult::Concern
+
               use ConvenientService::Plugins::Step::CanBeCompleted::Concern
 
               use ConvenientService::Plugins::Step::CanBeMethodStep::Concern
@@ -221,6 +223,9 @@ module ConvenientService
               use ConvenientService::Plugins::Step::HasInspect::Concern
             end
 
+            ##
+            # TODO: Move to `result`. Remove `service_result` middlewares completely.
+            #
             middlewares :service_result do
               use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
               use ConvenientService::Plugins::Common::CachesReturnValue::Middleware
@@ -234,6 +239,8 @@ module ConvenientService
             middlewares :result do
               use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
               use ConvenientService::Plugins::Common::CachesReturnValue::Middleware
+
+              use ConvenientService::Plugins::Step::HasResult::Middleware
             end
 
             ##
