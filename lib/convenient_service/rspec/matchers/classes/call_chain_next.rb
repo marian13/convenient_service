@@ -11,6 +11,13 @@ module ConvenientService
         #     .with_arguments(*args, **kwargs, &block)
         #     .and_return_its_value
         #
+        # @internal
+        #   TODO:
+        #     expect { method.call }
+        #       .to call_chain_next.on(method)
+        #       .with_arguments(*args, **kwargs, &block)
+        #       .and_return { |chain_value| chain_value.copy(kwargs: {overrides: {foo: :bar}})}
+        #
         class CallChainNext
           include ::RSpec::Expectations
           include ::RSpec::Matchers
@@ -43,6 +50,10 @@ module ConvenientService
 
             if used_and_return_its_value?
               expect(value).to eq(method.chain_value)
+            end
+
+            if used_and_return?
+              expect(value).to eq(return_block.call(method.chain_value))
             end
 
             true
@@ -86,6 +97,10 @@ module ConvenientService
 
             if used_and_return_its_value?
               expect(value).not_to eq(method.chain_value)
+            end
+
+            if used_and_return?
+              expect(value).not_to eq(return_block.call(method.chain_value))
             end
 
             true
@@ -170,6 +185,18 @@ module ConvenientService
             self
           end
 
+          ##
+          # @param value[Object, ConvenientService::Support::NOT_PASSED]
+          # @param block [Proc, nil]
+          #
+          # @return [ConvenientService::RSpec::Matchers::Classes::CallChainNext]
+          #
+          def and_return(value = Support::NOT_PASSED, &block)
+            chain[:and_return] = (value == Support::NOT_PASSED) ? block : proc { value }
+
+            self
+          end
+
           private
 
           ##
@@ -190,6 +217,13 @@ module ConvenientService
           #
           def used_and_return_its_value?
             chain.key?(:and_return_its_value)
+          end
+
+          ##
+          # @return [Boolean]
+          #
+          def used_and_return?
+            chain.key?(:and_return)
           end
 
           ##
@@ -240,6 +274,13 @@ module ConvenientService
             return @block if defined? @block
 
             @block = chain.dig(:with_arguments, :block)
+          end
+
+          ##
+          # @return [Proc]
+          #
+          def return_block
+            @return_block ||= chain[:and_return]
           end
 
           ##

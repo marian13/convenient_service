@@ -20,7 +20,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
     describe ".intended_methods" do
       let(:spec) do
         Class.new(ConvenientService::MethodChainMiddleware) do
-          intended_for :service_result, entity: :step
+          intended_for :result, entity: :step
         end
       end
 
@@ -36,10 +36,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
       include ConvenientService::RSpec::Matchers::CallChainNext
       include ConvenientService::RSpec::Matchers::DelegateTo
+      include ConvenientService::RSpec::Matchers::Results
 
       subject(:method_value) { method.call }
 
-      let(:method) { wrap_method(step, :service_result, observe_middleware: middleware) }
+      let(:method) { wrap_method(step, :result, observe_middleware: middleware) }
 
       let(:organizer) { container.new }
       let(:step) { organizer.steps.first }
@@ -51,7 +52,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
               include ConvenientService::Service::Configs::Minimal
 
               self::Step.class_exec(middleware) do |middleware|
-                middlewares :service_result do
+                middlewares :result do
                   observe middleware
                 end
               end
@@ -74,8 +75,8 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         specify do
           expect { method_value }
             .to call_chain_next.on(method)
-            .without_arguments
-            .and_return_its_value
+              .without_arguments
+              .and_return { |chain_value| chain_value.copy(overrides: {kwargs: {step: step, service: organizer}}) }
         end
       end
 
@@ -86,7 +87,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
               include ConvenientService::Service::Configs::Minimal
 
               self::Step.class_exec(middleware) do |middleware|
-                middlewares :service_result do
+                middlewares :result do
                   observe middleware
                 end
               end

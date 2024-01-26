@@ -226,23 +226,18 @@ module ConvenientService
             end
 
             ##
-            # TODO: Move to `result`. Remove `service_result` middlewares completely.
+            # TODO: Simple debug for middlewares. For one service only.
             #
-            middlewares :service_result do
-              use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
-              use ConvenientService::Plugins::Common::CachesReturnValue::Middleware
-
-              use ConvenientService::Plugins::Step::RaisesOnNotResultReturnValue::Middleware
-
-              use ConvenientService::Plugins::Step::CanBeResultStep::CanBeExecuted::Middleware
-              use ConvenientService::Plugins::Step::CanBeMethodStep::CanBeExecuted::Middleware
-            end
-
             middlewares :result do
               use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
               use ConvenientService::Plugins::Common::CachesReturnValue::Middleware
 
               use ConvenientService::Plugins::Step::HasResult::Middleware
+
+              use ConvenientService::Plugins::Step::RaisesOnNotResultReturnValue::Middleware
+
+              use ConvenientService::Plugins::Step::CanBeResultStep::CanBeExecuted::Middleware
+              use ConvenientService::Plugins::Step::CanBeMethodStep::CanBeExecuted::Middleware
             end
 
             ##

@@ -11,8 +11,20 @@ module ConvenientService
                 class Middleware < MethodChainMiddleware
                   intended_for :result, entity: :step
 
+                  ##
+                  # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
+                  # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepHasNoOrganizer]
+                  #
+                  # @internal
+                  #   IMPORTANT: `CanHaveParentResult` middleware MUST be placed after `HasResult` middleware.
+                  #
+                  #   NOTE: `result` at the moment of this middleware is still a `service_result` (or `method_result`). It is only later converted to `step_result` by `HasResult` middleware.
+                  #   That is why `result` is used as `parent` here.
+                  #
                   def next(...)
-                    chain.next(...).copy(overrides: {kwargs: {parent: entity.service_result}})
+                    result = chain.next(...)
+
+                    result.copy(overrides: {kwargs: {parent: result}})
                   end
                 end
               end

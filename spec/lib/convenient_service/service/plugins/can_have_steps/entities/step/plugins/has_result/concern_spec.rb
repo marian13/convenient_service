@@ -29,6 +29,9 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
   end
 
   example_group "instance methods" do
+    include ConvenientService::RSpec::Helpers::IgnoringException
+
+    include ConvenientService::RSpec::Matchers::DelegateTo
     include ConvenientService::RSpec::Matchers::Results
 
     describe "#result" do
@@ -52,10 +55,41 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         end
       end
 
-      let(:step) { container.new.steps.first }
+      describe "#result" do
+        context "when `organizer` is NOT set" do
+          let(:step) { container.steps.first }
 
-      it "returns service result" do
-        expect(step.result).to be_success.with_data(foo: :bar)
+          let(:message) do
+            <<~TEXT
+              Step `#{step.printable_service}` has not assigned organizer.
+
+              Did you forget to set it?
+            TEXT
+          end
+
+          it "raises `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::MethodHasNoOrganizer`" do
+            expect { step.result }
+              .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepHasNoOrganizer)
+              .with_message(message)
+          end
+
+          specify do
+            expect { ignoring_exception(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepHasNoOrganizer) { step.result } }
+              .to delegate_to(ConvenientService, :raise)
+          end
+        end
+
+        context "when `organizer` is set" do
+          let(:step) { container.new.steps.first }
+
+          specify do
+            expect { step.result }.to delegate_to(step, :service_result)
+          end
+
+          it "returns service result" do
+            expect(step.result).to be_success.with_data(foo: :bar)
+          end
+        end
       end
     end
   end

@@ -10,7 +10,7 @@ module ConvenientService
               module CanBeResultStep
                 module CanBeExecuted
                   class Middleware < MethodChainMiddleware
-                    intended_for :service_result, entity: :step
+                    intended_for :result, entity: :step
 
                     ##
                     # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]

@@ -59,6 +59,9 @@ module ConvenientService
           #
           # @internal
           #   TODO: `overload do`?
+          #   TODO: Raise when object is an immediate value.
+          #   TODO: Raise when object already has a stub.
+          #   TODO: `and_return`.
           #
           def initialize(object = nil, method = nil, matcher: nil)
             @matcher = matcher || Entities::Matcher.new(object, method)

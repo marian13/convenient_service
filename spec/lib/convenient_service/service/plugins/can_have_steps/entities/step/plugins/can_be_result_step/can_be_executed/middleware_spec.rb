@@ -24,7 +24,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
     describe ".intended_methods" do
       let(:spec) do
         Class.new(ConvenientService::MethodChainMiddleware) do
-          intended_for :service_result, entity: :step
+          intended_for :result, entity: :step
         end
       end
 
@@ -40,10 +40,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
       include ConvenientService::RSpec::Matchers::CallChainNext
       include ConvenientService::RSpec::Matchers::DelegateTo
+      include ConvenientService::RSpec::Matchers::Results
 
       subject(:method_value) { method.call }
 
-      let(:method) { wrap_method(step, :service_result, observe_middleware: middleware) }
+      let(:method) { wrap_method(step, :result, observe_middleware: middleware) }
 
       let(:organizer) { container.new }
       let(:step) { organizer.steps.first }
@@ -55,7 +56,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
               include ConvenientService::Service::Configs::Minimal
 
               self::Step.class_exec(middleware) do |middleware|
-                middlewares :service_result do
+                middlewares :result do
                   observe middleware
                 end
               end
@@ -76,10 +77,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         end
 
         specify do
-          expect { method_value }
-            .to call_chain_next.on(method)
-            .without_arguments
-            .and_return_its_value
+          expect { method_value }.to call_chain_next.on(method).without_arguments
+        end
+
+        it "return method step result" do
+          expect(method_value).to be_success.without_data.of_step(first_step).of_service(container)
         end
       end
 
@@ -90,7 +92,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
               include ConvenientService::Service::Configs::Minimal
 
               self::Step.class_exec(middleware) do |middleware|
-                middlewares :service_result do
+                middlewares :result do
                   observe middleware
                 end
               end
@@ -115,7 +117,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
                 include ConvenientService::Service::Configs::Minimal
 
                 self::Step.class_exec(middleware) do |middleware|
-                  middlewares :service_result do
+                  middlewares :result do
                     observe middleware
                   end
                 end
@@ -152,7 +154,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
                 include ConvenientService::Service::Configs::Minimal
 
                 self::Step.class_exec(middleware) do |middleware|
-                  middlewares :service_result do
+                  middlewares :result do
                     observe middleware
                   end
                 end

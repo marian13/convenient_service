@@ -44,7 +44,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
       subject(:method_value) { method.call }
 
-      let(:method) { wrap_method(step, :service_result, observe_middleware: middleware) }
+      let(:method) { wrap_method(step, :result, observe_middleware: middleware) }
 
       let(:organizer) { container.new }
       let(:step) { organizer.steps.first }
@@ -58,7 +58,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
               include ConvenientService::Service::Configs::Minimal
 
               self::Step.class_exec(middleware) do |middleware|
-                middlewares :service_result do
+                middlewares :result do
                   observe middleware
                 end
               end
@@ -109,7 +109,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
               include ConvenientService::Service::Configs::Minimal
 
               self::Step.class_exec(middleware) do |middleware|
-                middlewares :service_result do
+                middlewares :result do
                   observe middleware
                 end
               end
