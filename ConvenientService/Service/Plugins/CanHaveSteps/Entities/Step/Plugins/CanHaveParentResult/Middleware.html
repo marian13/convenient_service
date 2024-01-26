@@ -117,7 +117,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#next-instance_method" title="#next (instance method)">#<strong>next</strong>  &#x21d2; Object </a>
+      <a href="#next-instance_method" title="#next (instance method)">#<strong>next</strong>  &#x21d2; ConvenientService::Service::Plugins::HasJSendResult::Entities::Result </a>
     
 
     
@@ -148,27 +148,66 @@
       <div class="method_details first">
   <h3 class="signature first" id="next-instance_method">
   
-    #<strong>next</strong>  &#x21d2; <tt>Object</tt> 
+    #<strong>next</strong>  &#x21d2; <tt><span class='object_link'><a href="../../../../../HasJSendResult/Entities/Result.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result (class)">ConvenientService::Service::Plugins::HasJSendResult::Entities::Result</a></span></tt> 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../../../HasJSendResult/Entities/Result.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result (class)">ConvenientService::Service::Plugins::HasJSendResult::Entities::Result</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../Exceptions/StepHasNoOrganizer.html" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepHasNoOrganizer (class)">ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepHasNoOrganizer</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-14
-15
-16</pre>
+24
+25
+26
+27
+28</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/plugins/can_have_parent_result/middleware.rb', line 14</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/plugins/can_have_parent_result/middleware.rb', line 24</span>
 
 <span class='kw'>def</span> <span class='kw'>next</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_chain'>chain</span><span class='period'>.</span><span class='id identifier rubyid_next'>next</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_copy'>copy</span><span class='lparen'>(</span><span class='label'>overrides:</span> <span class='lbrace'>{</span><span class='label'>kwargs:</span> <span class='lbrace'>{</span><span class='label'>parent:</span> <span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_service_result'>service_result</span><span class='rbrace'>}</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='id identifier rubyid_chain'>chain</span><span class='period'>.</span><span class='id identifier rubyid_next'>next</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
+
+  <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_copy'>copy</span><span class='lparen'>(</span><span class='label'>overrides:</span> <span class='lbrace'>{</span><span class='label'>kwargs:</span> <span class='lbrace'>{</span><span class='label'>parent:</span> <span class='id identifier rubyid_result'>result</span><span class='rbrace'>}</span><span class='rbrace'>}</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -180,7 +219,7 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Jan 24 22:26:33 2024 by
+  Generated on Fri Jan 26 01:30:48 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.2.3).
 </div>

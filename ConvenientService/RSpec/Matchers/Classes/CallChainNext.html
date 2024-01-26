@@ -145,6 +145,28 @@
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#and_return-instance_method" title="#and_return (instance method)">#<strong>and_return</strong>(value = Support::NOT_PASSED, &amp;block)  &#x21d2; ConvenientService::RSpec::Matchers::Classes::CallChainNext </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#and_return_its_value-instance_method" title="#and_return_its_value (instance method)">#<strong>and_return_its_value</strong>  &#x21d2; ConvenientService::RSpec::Matchers::Classes::CallChainNext </a>
     
 
@@ -397,7 +419,91 @@
 
     
       <div class="method_details first">
-  <h3 class="signature first" id="and_return_its_value-instance_method">
+  <h3 class="signature first" id="and_return-instance_method">
+  
+    #<strong>and_return</strong>(value = Support::NOT_PASSED, &amp;block)  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::RSpec::Matchers::Classes::CallChainNext (class)">ConvenientService::RSpec::Matchers::Classes::CallChainNext</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>value</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>, <tt><span class='object_link'><a href="../../../Support.html#NOT_PASSED-constant" title="ConvenientService::Support::NOT_PASSED (constant)">ConvenientService::Support::NOT_PASSED</a></span></tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>Support::NOT_PASSED</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>block</span>
+      
+      
+        <span class='type'>(<tt>Proc</tt>, <tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="ConvenientService::RSpec::Matchers::Classes::CallChainNext (class)">ConvenientService::RSpec::Matchers::Classes::CallChainNext</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+194
+195
+196
+197
+198</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/classes/call_chain_next.rb', line 194</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_and_return'>and_return</span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Support.html#NOT_PASSED-constant" title="ConvenientService::Support::NOT_PASSED (constant)">NOT_PASSED</a></span></span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_chain'>chain</span><span class='lbracket'>[</span><span class='symbol'>:and_return</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span> <span class='op'>==</span> <span class='const'><span class='object_link'><a href="../../../Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Support.html#NOT_PASSED-constant" title="ConvenientService::Support::NOT_PASSED (constant)">NOT_PASSED</a></span></span><span class='rparen'>)</span> <span class='op'>?</span> <span class='id identifier rubyid_block'>block</span> <span class='op'>:</span> <span class='id identifier rubyid_proc'>proc</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_value'>value</span> <span class='rbrace'>}</span>
+
+  <span class='kw'>self</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="and_return_its_value-instance_method">
   
     #<strong>and_return_its_value</strong>  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::RSpec::Matchers::Classes::CallChainNext (class)">ConvenientService::RSpec::Matchers::Classes::CallChainNext</a></span></tt> 
   
@@ -433,14 +539,14 @@
       <pre class="lines">
 
 
-167
-168
-169
-170
-171</pre>
+182
+183
+184
+185
+186</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/classes/call_chain_next.rb', line 167</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/classes/call_chain_next.rb', line 182</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_and_return_its_value'>and_return_its_value</span>
   <span class='id identifier rubyid_chain'>chain</span><span class='lbracket'>[</span><span class='symbol'>:and_return_its_value</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='kw'>true</span>
@@ -489,12 +595,12 @@
       <pre class="lines">
 
 
-104
-105
-106</pre>
+119
+120
+121</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/classes/call_chain_next.rb', line 104</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/classes/call_chain_next.rb', line 119</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_description'>description</span>
   <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>call `chain.next`</span><span class='tstring_end'>&quot;</span></span>
@@ -569,17 +675,6 @@
       <pre class="lines">
 
 
-63
-64
-65
-66
-67
-68
-69
-70
-71
-72
-73
 74
 75
 76
@@ -598,10 +693,25 @@
 89
 90
 91
-92</pre>
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/classes/call_chain_next.rb', line 63</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/classes/call_chain_next.rb', line 74</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_does_not_match?'>does_not_match?</span><span class='lparen'>(</span><span class='id identifier rubyid_block_expectation'>block_expectation</span><span class='rparen'>)</span>
   <span class='ivar'>@block_expectation</span> <span class='op'>=</span> <span class='id identifier rubyid_block_expectation'>block_expectation</span>
@@ -629,6 +739,10 @@
 
   <span class='kw'>if</span> <span class='id identifier rubyid_used_and_return_its_value?'>used_and_return_its_value?</span>
     <span class='id identifier rubyid_expect'>expect</span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_not_to'>not_to</span> <span class='id identifier rubyid_eq'>eq</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='period'>.</span><span class='id identifier rubyid_chain_value'>chain_value</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>if</span> <span class='id identifier rubyid_used_and_return?'>used_and_return?</span>
+    <span class='id identifier rubyid_expect'>expect</span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_not_to'>not_to</span> <span class='id identifier rubyid_eq'>eq</span><span class='lparen'>(</span><span class='id identifier rubyid_return_block'>return_block</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='period'>.</span><span class='id identifier rubyid_chain_value'>chain_value</span><span class='rparen'>)</span><span class='rparen'>)</span>
   <span class='kw'>end</span>
 
   <span class='kw'>true</span>
@@ -675,12 +789,12 @@
       <pre class="lines">
 
 
-111
-112
-113</pre>
+126
+127
+128</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/classes/call_chain_next.rb', line 111</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/classes/call_chain_next.rb', line 126</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_failure_message'>failure_message</span>
   <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>expected to call `chain.next`</span><span class='tstring_end'>&quot;</span></span>
@@ -727,12 +841,12 @@
       <pre class="lines">
 
 
-118
-119
-120</pre>
+133
+134
+135</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/classes/call_chain_next.rb', line 118</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/classes/call_chain_next.rb', line 133</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_failure_message_when_negated'>failure_message_when_negated</span>
   <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>expected NOT to call `chain.next`</span><span class='tstring_end'>&quot;</span></span>
@@ -807,13 +921,6 @@
       <pre class="lines">
 
 
-31
-32
-33
-34
-35
-36
-37
 38
 39
 40
@@ -825,10 +932,21 @@
 46
 47
 48
-49</pre>
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/classes/call_chain_next.rb', line 31</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/classes/call_chain_next.rb', line 38</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_matches?'>matches?</span><span class='lparen'>(</span><span class='id identifier rubyid_block_expectation'>block_expectation</span><span class='rparen'>)</span>
   <span class='ivar'>@block_expectation</span> <span class='op'>=</span> <span class='id identifier rubyid_block_expectation'>block_expectation</span>
@@ -845,6 +963,10 @@
 
   <span class='kw'>if</span> <span class='id identifier rubyid_used_and_return_its_value?'>used_and_return_its_value?</span>
     <span class='id identifier rubyid_expect'>expect</span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to'>to</span> <span class='id identifier rubyid_eq'>eq</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='period'>.</span><span class='id identifier rubyid_chain_value'>chain_value</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>if</span> <span class='id identifier rubyid_used_and_return?'>used_and_return?</span>
+    <span class='id identifier rubyid_expect'>expect</span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to'>to</span> <span class='id identifier rubyid_eq'>eq</span><span class='lparen'>(</span><span class='id identifier rubyid_return_block'>return_block</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='period'>.</span><span class='id identifier rubyid_chain_value'>chain_value</span><span class='rparen'>)</span><span class='rparen'>)</span>
   <span class='kw'>end</span>
 
   <span class='kw'>true</span>
@@ -906,16 +1028,16 @@
       <pre class="lines">
 
 
-126
-127
-128
-129
-130
-131
-132</pre>
+141
+142
+143
+144
+145
+146
+147</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/classes/call_chain_next.rb', line 126</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/classes/call_chain_next.rb', line 141</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_on'>on</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_method'>method</span><span class='period'>.</span><span class='id identifier rubyid_reset!'>reset!</span>
@@ -966,12 +1088,12 @@
       <pre class="lines">
 
 
-97
-98
-99</pre>
+112
+113
+114</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/classes/call_chain_next.rb', line 97</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/classes/call_chain_next.rb', line 112</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_supports_block_expectations?'>supports_block_expectations?</span>
   <span class='kw'>true</span>
@@ -1018,14 +1140,14 @@
       <pre class="lines">
 
 
-149
-150
-151
-152
-153</pre>
+164
+165
+166
+167
+168</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/classes/call_chain_next.rb', line 149</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/classes/call_chain_next.rb', line 164</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_with_any_arguments'>with_any_arguments</span>
   <span class='id identifier rubyid_chain'>chain</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='symbol'>:with_arguments</span><span class='rparen'>)</span>
@@ -1111,14 +1233,14 @@
       <pre class="lines">
 
 
-140
-141
-142
-143
-144</pre>
+155
+156
+157
+158
+159</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/classes/call_chain_next.rb', line 140</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/classes/call_chain_next.rb', line 155</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_with_arguments'>with_arguments</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_chain'>chain</span><span class='lbracket'>[</span><span class='symbol'>:with_arguments</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='label'>args:</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='label'>kwargs:</span> <span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='label'>block:</span> <span class='id identifier rubyid_block'>block</span><span class='rbrace'>}</span>
@@ -1167,14 +1289,14 @@
       <pre class="lines">
 
 
-158
-159
-160
-161
-162</pre>
+173
+174
+175
+176
+177</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/classes/call_chain_next.rb', line 158</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/classes/call_chain_next.rb', line 173</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_without_arguments'>without_arguments</span>
   <span class='id identifier rubyid_chain'>chain</span><span class='lbracket'>[</span><span class='symbol'>:with_arguments</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='label'>args:</span> <span class='lbracket'>[</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='label'>kwargs:</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='label'>block:</span> <span class='kw'>nil</span><span class='rbrace'>}</span>
@@ -1191,7 +1313,7 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Jan 24 22:26:27 2024 by
+  Generated on Fri Jan 26 01:30:43 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.2.3).
 </div>
