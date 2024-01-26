@@ -45,6 +45,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard do
               ConvenientService::Common::Plugins::HasAroundCallbacks::Concern,
               ConvenientService::Service::Plugins::HasNegatedResult::Concern,
               ConvenientService::Service::Plugins::HasNegatedJSendResult::Concern,
+              ConvenientService::Service::Plugins::CanHaveConnectedSteps::Concern,
               ConvenientService::Service::Plugins::CanHaveFallbacks::Concern,
               ConvenientService::Service::Plugins::HasMermaidFlowchart::Concern
             ]

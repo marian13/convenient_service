@@ -11,6 +11,7 @@ require_relative "plugins/has_j_send_result"
 require_relative "plugins/has_negated_j_send_result"
 
 require_relative "plugins/can_recalculate_result"
+require_relative "plugins/can_have_connected_steps"
 require_relative "plugins/can_have_method_steps"
 require_relative "plugins/can_have_steps"
 require_relative "plugins/can_have_stubbed_results"

@@ -36,6 +36,7 @@ module ConvenientService
 
             use ConvenientService::Plugins::Service::HasNegatedResult::Concern
             use ConvenientService::Plugins::Service::HasNegatedJSendResult::Concern
+            use ConvenientService::Plugins::Service::CanHaveConnectedSteps::Concern
             use ConvenientService::Plugins::Service::CanHaveFallbacks::Concern
             use ConvenientService::Plugins::Service::HasMermaidFlowchart::Concern
           end

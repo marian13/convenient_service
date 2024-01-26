@@ -18,8 +18,8 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Concern do
   let(:service_instance) { service_class.new }
 
   let(:args) { [Class.new] }
-  let(:kwargs) { {in: :foo, out: :bar, container: service_class, index: 0} }
-  let(:step) { service_class.step_class.new(*args, **kwargs) }
+  let(:kwargs) { {in: :foo, out: :bar, container: service_class} }
+  let(:step) { service_class.step_class.new(*args, **kwargs.merge(index: 0)) }
 
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
