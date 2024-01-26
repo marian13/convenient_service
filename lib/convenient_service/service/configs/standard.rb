@@ -185,6 +185,9 @@ module ConvenientService
               insert_after \
                 ConvenientService::Plugins::Step::HasResult::Middleware,
                 ConvenientService::Plugins::Step::CanHaveParentResult::Middleware
+
+              use ConvenientService::Plugins::Step::CanHaveNegatedSteps::Middleware
+              use ConvenientService::Plugins::Step::CanHaveAlternativeSteps::Middleware
             end
           end
 
