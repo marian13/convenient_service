@@ -482,7 +482,8 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::DryService::Config do
                 ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeResultStep::Concern,
                 ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::HasInspect::Concern,
                 ConvenientService::Common::Plugins::HasJSendResultDuckShortSyntax::Concern,
-                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallbacks::Concern
+                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallbacks::Concern,
+                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveNegatedSteps::Concern
               ]
             end
 
