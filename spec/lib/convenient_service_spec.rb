@@ -19,6 +19,28 @@ RSpec.describe ConvenientService do
   end
 
   example_group "class methods" do
+    describe ".debug?" do
+      context "when `ENV[\"CONVENIENT_SERVICE_DEBUG\"]` is NOT set to `false`" do
+        before do
+          allow(ENV).to receive(:[]).with("CONVENIENT_SERVICE_DEBUG").and_return(nil)
+        end
+
+        it "return `false`" do
+          expect(described_class.debug?).to eq(false)
+        end
+      end
+
+      context "when `ENV[\"CONVENIENT_SERVICE_DEBUG\"]` is set to `\"true\"`" do
+        before do
+          allow(ENV).to receive(:[]).with("CONVENIENT_SERVICE_DEBUG").and_return("true")
+        end
+
+        it "return `true`" do
+          expect(described_class.debug?).to eq(true)
+        end
+      end
+    end
+
     describe ".logger" do
       it "returns logger instance" do
         expect(described_class.logger).to eq(described_class::Logger.instance)

@@ -44,6 +44,15 @@ require_relative "convenient_service/aliases"
 module ConvenientService
   class << self
     ##
+    # @api private
+    #
+    # @return [Boolean]
+    #
+    def debug?
+      ::ENV["CONVENIENT_SERVICE_DEBUG"] == "true"
+    end
+
+    ##
     # @api public
     #
     # @return [ConvenientService::Logger]
