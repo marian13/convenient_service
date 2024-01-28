@@ -18,7 +18,7 @@ module ConvenientService
             # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step]
             #
             def not_step(*args, **kwargs)
-              steps.register(*args, **kwargs.merge(negated: true))
+              step(*args, **kwargs.merge(negated: true))
             end
 
             ##
@@ -31,7 +31,7 @@ module ConvenientService
             # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step]
             #
             def and_step(*args, **kwargs)
-              steps.register(*args, **kwargs)
+              step(*args, **kwargs)
             end
 
             ##
@@ -44,7 +44,7 @@ module ConvenientService
             # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step]
             #
             def and_not_step(*args, **kwargs)
-              steps.register(*args, **kwargs.merge(negated: true))
+              step(*args, **kwargs.merge(negated: true))
             end
           end
         end

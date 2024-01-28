@@ -14,8 +14,13 @@ module ConvenientService
                   ##
                   # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
                   #
+                  # @internal
+                  #   TODO: Write a tutorial on why decorator middleware should be preferred over proxy middleware.
+                  #
                   def next(...)
-                    chain.next(...)
+                    result = chain.next(...)
+
+                    entity.negated_step? ? result.negated_result : result
                   end
                 end
               end

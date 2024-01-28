@@ -54,6 +54,12 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
       it "adds negated `step` to `steps`" do
         expect { service_class.not_step(*args, **kwargs) }.to change { service_class.steps.include?(negated_step) }.from(false).to(true)
       end
+
+      specify do
+        expect { service_class.not_step(*args, **kwargs) }
+          .to delegate_to(service_class, :step)
+          .with_arguments(*args, **kwargs.merge(negated: true))
+      end
     end
 
     describe ".and_step" do
@@ -64,6 +70,12 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
       it "adds `step` to `steps`" do
         expect { service_class.and_step(*args, **kwargs) }.to change { service_class.steps.include?(step) }.from(false).to(true)
       end
+
+      specify do
+        expect { service_class.and_step(*args, **kwargs) }
+          .to delegate_to(service_class, :step)
+          .with_arguments(*args, **kwargs)
+      end
     end
 
     describe ".and_not_step" do
@@ -73,6 +85,12 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
 
       it "adds negated `step` to `steps`" do
         expect { service_class.and_not_step(*args, **kwargs) }.to change { service_class.steps.include?(negated_step) }.from(false).to(true)
+      end
+
+      specify do
+        expect { service_class.and_not_step(*args, **kwargs) }
+          .to delegate_to(service_class, :step)
+          .with_arguments(*args, **kwargs.merge(negated: true))
       end
     end
   end
