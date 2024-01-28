@@ -36,11 +36,19 @@ module ConvenientService
       #   - https://github.com/ruby/logger/blob/v1.5.3/lib/logger.rb#L397
       #
       #   TODO: Specs for `super(::STDOUT)`.
+      #   TODO: Warning and fallback when `CONVENIENT_SERVICE_LOGGER_LEVEL` is NOT valid.
       #
       # rubocop:disable Style/GlobalStdStream
       def new
         super(::STDOUT).tap do |logger|
-          logger.level = ::ENV["CONVENIENT_SERVICE_LOGGER_LEVEL"] || ::Logger::INFO
+          logger.level =
+            if ::ENV["CONVENIENT_SERVICE_DEBUG"] == "true"
+              ::Logger::DEBUG
+            elsif ::ENV["CONVENIENT_SERVICE_LOGGER_LEVEL"]
+              ::ENV["CONVENIENT_SERVICE_LOGGER_LEVEL"]
+            else
+              ::Logger::INFO
+            end
 
           logger.formatter = (::ENV["CONVENIENT_SERVICE_LOGGER_ENABLE_COLORS"] == "true") ? colored_formatter : original_formatter
         end

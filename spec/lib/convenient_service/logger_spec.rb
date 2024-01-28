@@ -42,17 +42,41 @@ RSpec.describe ConvenientService::Logger do
 
           expect(logger.level).to eq(Logger::INFO)
         end
+
+        context "when `ENV[\"CONVENIENT_SERVICE_DEBUG\"]` is set to `\"true\"`" do
+          before do
+            allow(ENV).to receive(:[]).with("CONVENIENT_SERVICE_DEBUG").and_return("true")
+          end
+
+          it "sets logger level to `Logger::DEBUG` ignoring `ENV[\"CONVENIENT_SERVICE_LOGGER_LEVEL\"]` value" do
+            logger
+
+            expect(logger.level).to eq(Logger::DEBUG)
+          end
+        end
       end
 
       context "when `ENV[\"CONVENIENT_SERVICE_LOGGER_LEVEL\"]` is passed" do
         before do
-          allow(ENV).to receive(:[]).with("CONVENIENT_SERVICE_LOGGER_LEVEL").and_return(Logger::DEBUG)
+          allow(ENV).to receive(:[]).with("CONVENIENT_SERVICE_LOGGER_LEVEL").and_return(Logger::WARN)
         end
 
         it "sets logger level to `ENV[\"CONVENIENT_SERVICE_LOGGER_LEVEL\"]`" do
           logger
 
-          expect(logger.level).to eq(ENV["CONVENIENT_SERVICE_LOGGER_LEVEL"])
+          expect(logger.level).to eq(Logger::WARN)
+        end
+
+        context "when `ENV[\"CONVENIENT_SERVICE_DEBUG\"]` is set to `\"true\"`" do
+          before do
+            allow(ENV).to receive(:[]).with("CONVENIENT_SERVICE_DEBUG").and_return("true")
+          end
+
+          it "sets logger level to `Logger::DEBUG` ignoring `ENV[\"CONVENIENT_SERVICE_LOGGER_LEVEL\"]` value" do
+            logger
+
+            expect(logger.level).to eq(Logger::DEBUG)
+          end
         end
       end
 
