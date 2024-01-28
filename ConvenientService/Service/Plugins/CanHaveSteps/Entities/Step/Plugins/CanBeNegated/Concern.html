@@ -4,7 +4,7 @@
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>
-  Module: ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveNegatedSteps::Concern
+  Module: ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeNegated::Concern
   
     &mdash; Documentation by YARD 0.9.34
   
@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="../../../../../../../../css/common.css" type="text/css" />
 
 <script type="text/javascript">
-  pathId = "ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveNegatedSteps::Concern";
+  pathId = "ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeNegated::Concern";
   relpath = '../../../../../../../../';
 </script>
 
@@ -37,7 +37,7 @@
         <div id="menu">
   
     <a href="../../../../../../../../_index.html">Index (C)</a> &raquo;
-    <span class='title'><span class='object_link'><a href="../../../../../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../../../../../Service.html" title="ConvenientService::Service (module)">Service</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../../../../Plugins.html" title="ConvenientService::Service::Plugins (module)">Plugins</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../../../CanHaveSteps.html" title="ConvenientService::Service::Plugins::CanHaveSteps (module)">CanHaveSteps</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../../Entities.html" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities (module)">Entities</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Step.html" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step (class)">Step</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Plugins.html" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins (module)">Plugins</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../CanHaveNegatedSteps.html" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveNegatedSteps (module)">CanHaveNegatedSteps</a></span></span>
+    <span class='title'><span class='object_link'><a href="../../../../../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../../../../../Service.html" title="ConvenientService::Service (module)">Service</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../../../../Plugins.html" title="ConvenientService::Service::Plugins (module)">Plugins</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../../../CanHaveSteps.html" title="ConvenientService::Service::Plugins::CanHaveSteps (module)">CanHaveSteps</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../../Entities.html" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities (module)">Entities</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Step.html" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step (class)">Step</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Plugins.html" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins (module)">Plugins</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../CanBeNegated.html" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeNegated (module)">CanBeNegated</a></span></span>
      &raquo; 
     <span class="title">Concern</span>
   
@@ -59,7 +59,7 @@
         <div class="clear"></div>
       </div>
 
-      <div id="content"><h1>Module: ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveNegatedSteps::Concern
+      <div id="content"><h1>Module: ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeNegated::Concern
   
   
   
@@ -83,7 +83,7 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/convenient_service/service/plugins/can_have_steps/entities/step/plugins/can_have_negated_steps/concern.rb</dd>
+    <dd>lib/convenient_service/service/plugins/can_have_steps/entities/step/plugins/can_be_negated/concern.rb</dd>
   </dl>
   
 </div>
@@ -187,7 +187,7 @@
 20</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/plugins/can_have_negated_steps/concern.rb', line 18</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/plugins/can_be_negated/concern.rb', line 18</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_negated_step?'>negated_step?</span>
   <span class='const'><span class='object_link'><a href="../../../../../../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='period'>.</span><span class='id identifier rubyid_to_bool'><span class='object_link'><a href="../../../../../../../Utils.html#to_bool-class_method" title="ConvenientService::Utils.to_bool (method)">to_bool</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_extra_kwargs'>extra_kwargs</span><span class='lbracket'>[</span><span class='symbol'>:negated</span><span class='rbracket'>]</span><span class='rparen'>)</span>
@@ -202,7 +202,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Jan 28 21:21:56 2024 by
+  Generated on Sun Jan 28 21:53:22 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.2.3).
 </div>
