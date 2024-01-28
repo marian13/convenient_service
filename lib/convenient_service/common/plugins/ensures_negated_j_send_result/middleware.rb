@@ -1,17 +1,19 @@
 # frozen_string_literal: true
 
 module ConvenientService
-  module Service
+  module Common
     module Plugins
-      module HasNegatedJSendResult
+      module EnsuresNegatedJSendResult
         class Middleware < MethodChainMiddleware
-          intended_for :negated_result, entity: :service
+          intended_for :negated_result, entity: any_entity
 
           ##
           # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
           #
           def next(...)
-            chain.next(...).copy(overrides: {kwargs: {negated: true}})
+            result = chain.next(...)
+
+            result.negated? ? result : result.copy(overrides: {kwargs: {negated: true}})
           end
         end
       end

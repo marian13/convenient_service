@@ -104,7 +104,7 @@ module ConvenientService
             use ConvenientService::Plugins::Service::CollectsServicesInException::Middleware
             use ConvenientService::Plugins::Common::CachesReturnValue::Middleware
 
-            use ConvenientService::Plugins::Service::HasNegatedJSendResult::Middleware
+            use ConvenientService::Plugins::Common::EnsuresNegatedJSendResult::Middleware
           end
 
           middlewares :step do
@@ -171,6 +171,12 @@ module ConvenientService
             middlewares :code do
               use ConvenientService::Plugins::Result::RaisesOnNotCheckedResultStatus::Middleware
             end
+
+            middlewares :negated_result do
+              use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
+
+              use ConvenientService::Plugins::Common::EnsuresNegatedJSendResult::Middleware
+            end
           end
 
           class self::Step
@@ -187,7 +193,10 @@ module ConvenientService
                 ConvenientService::Plugins::Step::HasResult::Middleware,
                 ConvenientService::Plugins::Step::CanHaveParentResult::Middleware
 
-              use ConvenientService::Plugins::Step::CanHaveNegatedSteps::Middleware
+              insert_after \
+                ConvenientService::Plugins::Step::HasResult::Middleware,
+                ConvenientService::Plugins::Step::CanHaveNegatedSteps::Middleware
+
               use ConvenientService::Plugins::Step::CanHaveAlternativeSteps::Middleware
             end
           end

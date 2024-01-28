@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::Service::Plugins::HasNegatedJSendResult::Middleware do
+RSpec.describe ConvenientService::Common::Plugins::EnsuresNegatedJSendResult::Middleware do
   include ConvenientService::RSpec::Helpers::IgnoringException
 
   include ConvenientService::RSpec::Matchers::DelegateTo
@@ -24,7 +24,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasNegatedJSendResult::Middl
     describe ".intended_methods" do
       let(:spec) do
         Class.new(ConvenientService::MethodChainMiddleware) do
-          intended_for :negated_result, entity: :service
+          intended_for :negated_result, entity: any_entity
         end
       end
 
@@ -47,30 +47,58 @@ RSpec.describe ConvenientService::Service::Plugins::HasNegatedJSendResult::Middl
       let(:method) { wrap_method(service_instance, method_name, observe_middleware: middleware) }
       let(:method_name) { :negated_result }
 
-      let(:service_class) do
-        Class.new.tap do |klass|
-          klass.class_exec(middleware) do |middleware|
-            include ConvenientService::Service::Configs::Standard
+      let(:service_instance) { service_class.new }
 
-            middlewares :negated_result do
-              observe middleware
-            end
+      context "when result is NOT already negated" do
+        let(:service_class) do
+          Class.new.tap do |klass|
+            klass.class_exec(middleware) do |middleware|
+              include ConvenientService::Service::Configs::Standard
 
-            def result
-              success
+              middlewares :negated_result do
+                observe middleware
+              end
+
+              def negated_result
+                success
+              end
             end
           end
         end
+
+        specify do
+          expect { method_value }.to call_chain_next.on(method)
+        end
+
+        it "returns negated result" do
+          expect(method_value.negated?).to eq(true)
+        end
       end
 
-      let(:service_instance) { service_class.new }
+      context "when result is already negated" do
+        let(:service_class) do
+          Class.new.tap do |klass|
+            klass.class_exec(middleware) do |middleware|
+              include ConvenientService::Service::Configs::Standard
 
-      specify do
-        expect { method_value }.to call_chain_next.on(method)
-      end
+              middlewares :negated_result do
+                observe middleware
+              end
 
-      it "returns negated result" do
-        expect(method_value.negated?).to eq(true)
+              def negated_result
+                success.negated_result
+              end
+            end
+          end
+        end
+
+        specify do
+          expect { method_value }.to call_chain_next.on(method)
+        end
+
+        it "returns negated result" do
+          expect(method_value.negated?).to eq(true)
+        end
       end
     end
   end

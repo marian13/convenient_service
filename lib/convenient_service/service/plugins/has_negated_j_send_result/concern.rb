@@ -10,7 +10,7 @@ module ConvenientService
           instance_methods do
             ##
             # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
-            # @note Users may override this method to provider custom `negataed_result` behavior.
+            # @note Users may override this method to provide custom `negataed_result` behavior.
             #
             def negated_result
               result.negated_result
