@@ -7,6 +7,8 @@ require_relative "../../lib/convenient_service/dependencies/extractions/b"
 
 require "convenient_service"
 
+ConvenientService.backtrace_cleaner.remove_silencers! if ::ConvenientService.debug?
+
 ConvenientService::Dependencies.require_can_utilize_finite_loop
 ConvenientService::Dependencies.require_awesome_print_inspect
 ConvenientService::Dependencies.require_rescues_result_unhandled_exceptions
