@@ -100,7 +100,7 @@
   <dl>
     <dt>Defined in:</dt>
     <dd>lib/convenient_service/rspec/primitive_matchers/classes/delegate_to.rb<span class="defines">,<br />
-  lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/matcher.rb,<br /> lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/matcher/entities/delegation.rb,<br /> lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/matcher/entities/chainings_collection.rb,<br /> lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/matcher/entities/chainings/values/base.rb,<br /> lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/matcher/commands/generate_printable_method.rb,<br /> lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/matcher/entities/chainings/sub_matchers/base.rb,<br /> lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/matcher/entities/chainings_collection/exceptions.rb,<br /> lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/matcher/entities/chainings/sub_matchers/arguments.rb,<br /> lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/matcher/entities/chainings/values/with_calling_original.rb,<br /> lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/matcher/entities/chainings/sub_matchers/return_its_value.rb,<br /> lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/matcher/entities/chainings/sub_matchers/without_arguments.rb,<br /> lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/matcher/entities/chainings/sub_matchers/with_any_arguments.rb,<br /> lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/matcher/entities/chainings/values/without_calling_original.rb,<br /> lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/matcher/entities/chainings/sub_matchers/with_concrete_arguments.rb,<br /> lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/matcher/entities/chainings/sub_matchers/arguments/commands/generate_printable_arguments.rb,<br /> lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/matcher/entities/chainings/sub_matchers/arguments/commands/apply_stub_to_track_delegations.rb</span>
+  lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/matcher.rb,<br /> lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/matcher/entities/delegation.rb,<br /> lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/matcher/entities/chainings_collection.rb,<br /> lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/matcher/entities/chainings/values/base.rb,<br /> lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/matcher/commands/generate_printable_method.rb,<br /> lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/matcher/entities/chainings/sub_matchers/base.rb,<br /> lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/matcher/entities/chainings_collection/exceptions.rb,<br /> lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/matcher/entities/chainings/sub_matchers/arguments.rb,<br /> lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/matcher/entities/chainings/sub_matchers/return_value.rb,<br /> lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/matcher/entities/chainings/values/with_calling_original.rb,<br /> lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/matcher/entities/chainings/sub_matchers/without_arguments.rb,<br /> lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/matcher/entities/chainings/sub_matchers/with_any_arguments.rb,<br /> lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/matcher/entities/chainings/values/without_calling_original.rb,<br /> lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/matcher/entities/chainings/sub_matchers/return_custom_value.rb,<br /> lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/matcher/entities/chainings/sub_matchers/return_delegation_value.rb,<br /> lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/matcher/entities/chainings/sub_matchers/with_concrete_arguments.rb,<br /> lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/matcher/entities/chainings/sub_matchers/arguments/commands/generate_printable_arguments.rb,<br /> lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/matcher/entities/chainings/sub_matchers/arguments/commands/apply_stub_to_track_delegations.rb</span>
 </dd>
   </dl>
   
@@ -130,6 +130,28 @@
     </h2>
 
     <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#and_return-instance_method" title="#and_return (instance method)">#<strong>and_return</strong>  &#x21d2; ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  <span class="private note title">private</span>
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
       
         <li class="public ">
   <span class="summary_signature">
@@ -520,12 +542,12 @@
       <pre class="lines">
 
 
-66
-67
-68</pre>
+82
+83
+84</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to.rb', line 66</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to.rb', line 82</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_object'>object</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_method'>method</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>matcher:</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='ivar'>@matcher</span> <span class='op'>=</span> <span class='id identifier rubyid_matcher'>matcher</span> <span class='op'>||</span> <span class='const'><span class='object_link'><a href="DelegateTo/Entities.html" title="ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="DelegateTo/Entities/Matcher.html" title="ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher (class)">Matcher</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="DelegateTo/Entities/Matcher.html#initialize-instance_method" title="ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_object'>object</span><span class='comma'>,</span> <span class='id identifier rubyid_method'>method</span><span class='rparen'>)</span>
@@ -543,7 +565,80 @@
 
     
       <div class="method_details first">
-  <h3 class="signature first" id="and_return_its_value-instance_method">
+  <h3 class="signature first" id="and_return-instance_method">
+  
+    #<strong>and_return</strong>  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo (class)">ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p class="note private">
+  <strong>This method is part of a private API.</strong>
+  You should avoid using this method if possible, as it may be removed or be changed in the future.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo (class)">ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Exceptions::ReturnItsValueChainingIsAlreadySet</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+143
+144
+145
+146
+147</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to.rb', line 143</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_and_return'>and_return</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_matcher'>matcher</span><span class='period'>.</span><span class='id identifier rubyid_and_return'>and_return</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
+
+  <span class='kw'>self</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="and_return_its_value-instance_method">
   
     #<strong>and_return_its_value</strong>  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo (class)">ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo</a></span></tt> 
   
@@ -592,14 +687,14 @@
       <pre class="lines">
 
 
-104
-105
-106
-107
-108</pre>
+128
+129
+130
+131
+132</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to.rb', line 104</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to.rb', line 128</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_and_return_its_value'>and_return_its_value</span>
   <span class='id identifier rubyid_matcher'>matcher</span><span class='period'>.</span><span class='id identifier rubyid_and_return_its_value'>and_return_its_value</span>
@@ -648,10 +743,10 @@
       <pre class="lines">
 
 
-37</pre>
+45</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to.rb', line 37</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to.rb', line 45</span>
 
 <span class='id identifier rubyid_delegate'>delegate</span> <span class='symbol'>:description</span><span class='comma'>,</span> <span class='label'>to:</span> <span class='symbol'>:matcher</span></pre>
     </td>
@@ -696,10 +791,10 @@
       <pre class="lines">
 
 
-42</pre>
+52</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to.rb', line 42</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to.rb', line 52</span>
 
 <span class='id identifier rubyid_delegate'>delegate</span> <span class='symbol'>:failure_message</span><span class='comma'>,</span> <span class='label'>to:</span> <span class='symbol'>:matcher</span></pre>
     </td>
@@ -744,10 +839,10 @@
       <pre class="lines">
 
 
-47</pre>
+59</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to.rb', line 47</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to.rb', line 59</span>
 
 <span class='id identifier rubyid_delegate'>delegate</span> <span class='symbol'>:failure_message_when_negated</span><span class='comma'>,</span> <span class='label'>to:</span> <span class='symbol'>:matcher</span></pre>
     </td>
@@ -792,10 +887,10 @@
       <pre class="lines">
 
 
-25</pre>
+29</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to.rb', line 25</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to.rb', line 29</span>
 
 <span class='id identifier rubyid_delegate'>delegate</span> <span class='symbol'>:matches?</span><span class='comma'>,</span> <span class='label'>to:</span> <span class='symbol'>:matcher</span></pre>
     </td>
@@ -812,16 +907,25 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-32</pre>
+38</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to.rb', line 32</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to.rb', line 38</span>
 
 <span class='id identifier rubyid_delegate'>delegate</span> <span class='symbol'>:supports_block_expectations?</span><span class='comma'>,</span> <span class='label'>to:</span> <span class='symbol'>:matcher</span></pre>
     </td>
@@ -879,14 +983,14 @@
       <pre class="lines">
 
 
-84
-85
-86
-87
-88</pre>
+104
+105
+106
+107
+108</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to.rb', line 84</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to.rb', line 104</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_with_any_arguments'>with_any_arguments</span>
   <span class='id identifier rubyid_matcher'>matcher</span><span class='period'>.</span><span class='id identifier rubyid_with_any_arguments'>with_any_arguments</span>
@@ -948,14 +1052,14 @@
       <pre class="lines">
 
 
-74
-75
-76
-77
-78</pre>
+92
+93
+94
+95
+96</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to.rb', line 74</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to.rb', line 92</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_with_arguments'>with_arguments</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_matcher'>matcher</span><span class='period'>.</span><span class='id identifier rubyid_with_arguments'>with_arguments</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
@@ -1017,14 +1121,14 @@
       <pre class="lines">
 
 
-94
-95
-96
-97
-98</pre>
+116
+117
+118
+119
+120</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to.rb', line 94</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to.rb', line 116</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_without_arguments'>without_arguments</span>
   <span class='id identifier rubyid_matcher'>matcher</span><span class='period'>.</span><span class='id identifier rubyid_without_arguments'>without_arguments</span>
@@ -1073,14 +1177,14 @@
       <pre class="lines">
 
 
-122
-123
-124
-125
-126</pre>
+154
+155
+156
+157
+158</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to.rb', line 122</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to.rb', line 154</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_without_calling_original'>without_calling_original</span>
   <span class='id identifier rubyid_matcher'>matcher</span><span class='period'>.</span><span class='id identifier rubyid_without_calling_original'>without_calling_original</span>
@@ -1097,7 +1201,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Jan 28 21:53:26 2024 by
+  Generated on Sun Jan 28 23:59:48 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.2.3).
 </div>
