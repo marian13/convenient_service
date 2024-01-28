@@ -129,7 +129,7 @@ module ConvenientService
               use ConvenientService::Plugins::Common::HasJSendResultDuckShortSyntax::Concern
               use ConvenientService::Plugins::Result::CanRecalculateResult::Concern
 
-              use ConvenientService::Plugins::Result::CanBeNegated::Concern
+              use ConvenientService::Plugins::Result::HasNegatedResult::Concern
               use ConvenientService::Plugins::Result::CanBeOwnResult::Concern
               use ConvenientService::Plugins::Result::CanHaveFallbacks::Concern
               use ConvenientService::Plugins::Result::CanHaveParentResult::Concern

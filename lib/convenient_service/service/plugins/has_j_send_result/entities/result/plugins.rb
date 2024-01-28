@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "plugins/can_recalculate_result"
-require_relative "plugins/can_be_negated"
+require_relative "plugins/has_negated_result"
 require_relative "plugins/can_be_own_result"
 require_relative "plugins/can_be_stubbed_result"
 require_relative "plugins/can_have_fallbacks"
