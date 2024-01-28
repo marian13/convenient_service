@@ -183,7 +183,7 @@ module ConvenientService
             concerns do
               use ConvenientService::Plugins::Common::HasJSendResultDuckShortSyntax::Concern
               use ConvenientService::Plugins::Step::CanHaveFallbacks::Concern
-              use ConvenientService::Plugins::Step::CanHaveNegatedSteps::Concern
+              use ConvenientService::Plugins::Step::CanBeNegated::Concern
             end
 
             middlewares :result do
@@ -195,7 +195,7 @@ module ConvenientService
 
               insert_after \
                 ConvenientService::Plugins::Step::HasResult::Middleware,
-                ConvenientService::Plugins::Step::CanHaveNegatedSteps::Middleware
+                ConvenientService::Plugins::Step::CanBeNegated::Middleware
 
               use ConvenientService::Plugins::Step::CanHaveAlternativeSteps::Middleware
             end

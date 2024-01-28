@@ -7,7 +7,7 @@ module ConvenientService
         module Entities
           class Step
             module Plugins
-              module CanHaveNegatedSteps
+              module CanBeNegated
                 class Middleware < MethodChainMiddleware
                   intended_for :result, entity: :step
 

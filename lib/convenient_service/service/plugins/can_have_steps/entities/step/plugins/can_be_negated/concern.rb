@@ -7,7 +7,7 @@ module ConvenientService
         module Entities
           class Step
             module Plugins
-              module CanHaveNegatedSteps
+              module CanBeNegated
                 module Concern
                   include Support::Concern
 
