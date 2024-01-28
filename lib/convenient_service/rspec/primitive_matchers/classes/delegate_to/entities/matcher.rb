@@ -14,12 +14,12 @@ module ConvenientService
       module Classes
         ##
         # @internal
-        #   specify {
+        #   specify do
         #     expect { method_class.cast(other, **options) }
         #       .to delegate_to(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Commands::CastMethod, :call)
         #       .with_arguments(other: other, options: options)
         #       .and_return_its_value
-        #   }
+        #   end
         #
         #   { method_class.cast(other, **options) }
         #   # => block_expectation
@@ -63,6 +63,12 @@ module ConvenientService
               attr_reader :block_expectation
 
               ##
+              # @!attribute [r] expected_return_value_block
+              #   @return [Proc]
+              #
+              attr_reader :expected_return_value_block
+
+              ##
               # @return [Boolean]
               #
               delegate :should_call_original?, to: :chainings
@@ -85,6 +91,8 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
               # @param block_expectation [Proc]
               # @return [Boolean]
               #
@@ -98,6 +106,8 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
               # @internal
               #   NOTE: Required by RSpec.
               #   https://relishapp.com/rspec/rspec-expectations/v/3-8/docs/custom-matchers/define-a-matcher-supporting-block-expectations
@@ -107,6 +117,8 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
               # @return [String]
               #
               def description
@@ -114,6 +126,8 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
               # @return [String]
               #
               def failure_message
@@ -121,6 +135,8 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
               # @return [String]
               #
               def failure_message_when_negated
@@ -128,6 +144,8 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
               # @return [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo]
               # @raise [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Exceptions::ArgumentsChainingIsAlreadySet]
               #
@@ -140,6 +158,8 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
               # @return [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo]
               # @raise [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Exceptions::ArgumentsChainingIsAlreadySet]
               #
@@ -150,6 +170,8 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
               # @return [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo]
               # @raise [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Exceptions::ArgumentsChainingIsAlreadySet]
               #
@@ -160,16 +182,36 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
               # @return [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo]
-              # @raise [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Exceptions::ReturnItsValueChainingIsAlreadySet]
+              # @raise [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Exceptions::ReturnValueChainingIsAlreadySet]
               #
               def and_return_its_value
-                chainings.return_its_value = Entities::Chainings::SubMatchers::ReturnItsValue.new(matcher: self)
+                chainings.return_value = Entities::Chainings::SubMatchers::ReturnDelegationValue.new(matcher: self)
 
                 self
               end
 
               ##
+              # @return [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo]
+              # @raise [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Exceptions::ReturnValueChainingIsAlreadySet]
+              #
+              def and_return(*args, &block)
+                ##
+                # TODO: Raise.
+                # TODO: Specs for different block return values.
+                #
+                self.expected_return_value_block = args.any? ? proc { args.first } : block
+
+                chainings.return_value = Entities::Chainings::SubMatchers::ReturnCustomValue.new(matcher: self)
+
+                self
+              end
+
+              ##
+              # @api public
+              #
               # @return [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo]
               #
               def with_calling_original
@@ -179,6 +221,8 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
               # @return [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo]
               #
               def without_calling_original
@@ -205,6 +249,16 @@ module ConvenientService
               end
 
               ##
+              # @param block [Proc]
+              # @return [Proc]
+              #
+              def expected_return_value_block=(block)
+                Utils::Object.instance_variable_delete(self, :@expected_return_value_block)
+
+                @expected_return_value_block = block
+              end
+
+              ##
               # @return [Object] Can be any type.
               #
               # @internal
@@ -223,16 +277,12 @@ module ConvenientService
 
               ##
               # @return [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::Chainings]
-              # @api private
-              #
               def chainings
                 @chainings ||= Entities::ChainingsCollection.new(matcher: self)
               end
 
               ##
               # @return [Array]
-              # @api private
-              #
               def delegations
                 @delegations ||= []
               end

@@ -33,15 +33,15 @@ module ConvenientService
 
                   ##
                   # @!attribute [r] arguments
-                  #   @return [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::Base, nil]
+                  #   @return [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::Arguments, nil]
                   #
                   attr_reader :arguments
 
                   ##
-                  # @!attribute [r] return_its_value
-                  #   @return [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::Base, nil]
+                  # @!attribute [r] return_value
+                  #   @return [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::ReturnValue, nil]
                   #
-                  attr_reader :return_its_value
+                  attr_reader :return_value
 
                   ##
                   # @param matcher [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher]
@@ -93,7 +93,7 @@ module ConvenientService
                   #   IMPORTANT: Order of sub matcher chainings matters.
                   #
                   def sub_matchers
-                    [arguments, return_its_value].compact
+                    [arguments, return_value].compact
                   end
 
                   ##
@@ -127,8 +127,8 @@ module ConvenientService
                   ##
                   # @return [Boolean]
                   #
-                  def has_return_its_value?
-                    Utils.to_bool(return_its_value)
+                  def has_return_value?
+                    Utils.to_bool(return_value)
                   end
 
                   ##
@@ -142,7 +142,7 @@ module ConvenientService
                   end
 
                   ##
-                  # @param chaining [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::Base]
+                  # @param chaining [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::Arguments]
                   # @raise [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Exceptions::ArgumentsChainingIsAlreadySet]
                   #
                   def arguments=(chaining)
@@ -152,13 +152,13 @@ module ConvenientService
                   end
 
                   ##
-                  # @param chaining [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::Base]
-                  # @raise [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Exceptions::ReturnItsValueChainingIsAlreadySet]
+                  # @param chaining [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::ReturnValue]
+                  # @raise [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Exceptions::ReturnValueChainingIsAlreadySet]
                   #
-                  def return_its_value=(chaining)
-                    ::ConvenientService.raise Exceptions::ReturnItsValueChainingIsAlreadySet.new if @return_its_value
+                  def return_value=(chaining)
+                    ::ConvenientService.raise Exceptions::ReturnValueChainingIsAlreadySet.new if @return_value
 
-                    @return_its_value = chaining
+                    @return_value = chaining
                   end
                 end
               end

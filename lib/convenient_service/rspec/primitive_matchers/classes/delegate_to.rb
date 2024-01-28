@@ -7,6 +7,8 @@ require_relative "delegate_to/entities"
 #   IMPORTANT: This matcher has a dedicated end-user doc. Do NOT forget to update it when needed.
 #   https://github.com/marian13/convenient_service_docs/blob/main/docs/api/tests/rspec/matchers/delegate_to.mdx
 #
+#   TODO: `compare_by`.
+#
 module ConvenientService
   module RSpec
     module PrimitiveMatchers
@@ -20,11 +22,15 @@ module ConvenientService
           include Support::Delegate
 
           ##
+          # @api public
+          #
           # @return [Boolean]
           #
           delegate :matches?, to: :matcher
 
           ##
+          # @api public
+          #
           # @internal
           #   NOTE: Required by RSpec.
           #   https://relishapp.com/rspec/rspec-expectations/v/3-8/docs/custom-matchers/define-a-matcher-supporting-block-expectations
@@ -32,27 +38,37 @@ module ConvenientService
           delegate :supports_block_expectations?, to: :matcher
 
           ##
+          # @api public
+          #
           # @return [String]
           #
           delegate :description, to: :matcher
 
           ##
+          # @api public
+          #
           # @return [String]
           #
           delegate :failure_message, to: :matcher
 
           ##
+          # @api public
+          #
           # @return [String]
           #
           delegate :failure_message_when_negated, to: :matcher
 
           ##
           # @overload initialize(object, method)
+          #   @api public
+          #
           #   @param object [Object]
           #   @param method [String, Symbol]
           #   @return [void]
           #
           # @overload initialize(matcher)
+          #   @api private
+          #
           #   @param matcher [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher]
           #   @return [void]
           #   @api private
@@ -68,6 +84,8 @@ module ConvenientService
           end
 
           ##
+          # @api public
+          #
           # @return [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo]
           # @raise [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Exceptions::ArgumentsChainingIsAlreadySet]
           #
@@ -78,6 +96,8 @@ module ConvenientService
           end
 
           ##
+          # @api public
+          #
           # @return [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo]
           # @raise [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Exceptions::ArgumentsChainingIsAlreadySet]
           #
@@ -88,6 +108,8 @@ module ConvenientService
           end
 
           ##
+          # @api public
+          #
           # @return [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo]
           # @raise [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Exceptions::ArgumentsChainingIsAlreadySet]
           #
@@ -98,6 +120,8 @@ module ConvenientService
           end
 
           ##
+          # @api public
+          #
           # @return [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo]
           # @raise [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Exceptions::ReturnItsValueChainingIsAlreadySet]
           #
@@ -108,15 +132,23 @@ module ConvenientService
           end
 
           ##
-          # TODO: `and_return`.
+          # @api private
           #
-          # def and_return(...)
-          #   matcher.and_return(...)
+          # @return [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo]
+          # @raise [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Exceptions::ReturnItsValueChainingIsAlreadySet]
           #
-          #   self
-          # end
+          # @internal
+          #   NOTE: NOT ready for public usage since it currently reuses `and_return_its_value` failure messages.
+          #
+          def and_return(...)
+            matcher.and_return(...)
+
+            self
+          end
 
           ##
+          # @api public
+          #
           # @return [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo]
           #
           def without_calling_original

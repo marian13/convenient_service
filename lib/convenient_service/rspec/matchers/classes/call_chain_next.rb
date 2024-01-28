@@ -191,8 +191,8 @@ module ConvenientService
           #
           # @return [ConvenientService::RSpec::Matchers::Classes::CallChainNext]
           #
-          def and_return(value = Support::NOT_PASSED, &block)
-            chain[:and_return] = (value == Support::NOT_PASSED) ? block : proc { value }
+          def and_return(*args, &block)
+            chain[:and_return] = args.any? ? proc { args.first } : block
 
             self
           end

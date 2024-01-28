@@ -52,6 +52,7 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo:
     it { is_expected.to have_attr_reader(:object) }
     it { is_expected.to have_attr_reader(:method) }
     it { is_expected.to have_attr_reader(:block_expectation) }
+    it { is_expected.to have_attr_reader(:expected_return_value_block) }
   end
 
   example_group "class methods" do
@@ -457,6 +458,69 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo:
           end
         end
       end
+
+      context "when used with `and_return`" do
+        let(:matcher) { described_class.new(object, method).and_return { |delegation_value| delegation_value } }
+
+        ##
+        # NOTE: `expect { object.foo }.to delegate_to(object, :bar).and_return { |delegation_value| delegation_value }`
+        #
+        context "when `block_expectation` does NOT delegate" do
+          let(:block_expectation) { proc {} }
+
+          it "returns `false`" do
+            expect(matcher_result).to eq(false)
+          end
+        end
+
+        context "when `block_expectation` delegates once" do
+          ##
+          # NOTE: `expect { object.foo; 42 }.to delegate_to(object, :bar).and_return { |delegation_value| delegation_value }`
+          #
+          context "when `block_expectation` does NOT return delegation value" do
+            let(:block_expectation) { proc { object.foo; 42 } }
+
+            it "returns `false`" do
+              expect(matcher_result).to eq(false)
+            end
+          end
+
+          ##
+          # NOTE: `expect { object.foo }.to delegate_to(object, :bar).and_return { |delegation_value| delegation_value }`
+          #
+          context "when `block_expectation` returns delegation value" do
+            let(:block_expectation) { proc { object.foo } }
+
+            it "returns `true`" do
+              expect(matcher_result).to eq(true)
+            end
+          end
+        end
+
+        context "when `block_expectation` delegates multiple times" do
+          ##
+          # NOTE: `expect { object.foo; object.foo; 42 }.to delegate_to(object, :bar).and_return { |delegation_value| delegation_value }`
+          #
+          context "when `block_expectation` does NOT return delegation value" do
+            let(:block_expectation) { proc { object.foo; object.foo; 42 } }
+
+            it "returns `false`" do
+              expect(matcher_result).to eq(false)
+            end
+          end
+
+          ##
+          # NOTE: `expect { object.foo; object.foo; object.foo }.to delegate_to(object, :bar).and_return_its_value`
+          #
+          context "when `block_expectation` returns delegation value" do
+            let(:block_expectation) { proc { object.foo; object.foo; object.foo } }
+
+            it "returns `true`" do
+              expect(matcher_result).to eq(true)
+            end
+          end
+        end
+      end
     end
 
     describe "#description" do
@@ -522,14 +586,26 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo:
     end
 
     describe "#and_return_its_value" do
-      it "sets `ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::ReturnItsValue` instance as argument chaining" do
+      it "sets `ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::ReturnDelegationValue` instance as return value chaining" do
         matcher.and_return_its_value
 
-        expect(matcher.chainings.return_its_value).to be_instance_of(ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::ReturnItsValue)
+        expect(matcher.chainings.return_value).to be_instance_of(ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::ReturnDelegationValue)
       end
 
       it "returns matcher" do
         expect(matcher.and_return_its_value).to eq(matcher)
+      end
+    end
+
+    describe "#and_return" do
+      it "sets `ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::ReturnCustomValue` instance as return value chaining" do
+        matcher.and_return { |delegation_value| delegation_value }
+
+        expect(matcher.chainings.return_value).to be_instance_of(ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::ReturnCustomValue)
+      end
+
+      it "returns matcher" do
+        expect(matcher.and_return { |delegation_value| delegation_value }).to eq(matcher)
       end
     end
 

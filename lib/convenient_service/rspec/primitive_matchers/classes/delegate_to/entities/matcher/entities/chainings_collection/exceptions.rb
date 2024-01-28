@@ -34,12 +34,12 @@ module ConvenientService
                       end
                     end
 
-                    class ReturnItsValueChainingIsAlreadySet < ::ConvenientService::Exception
+                    class ReturnValueChainingIsAlreadySet < ::ConvenientService::Exception
                       def initialize_without_arguments
                         message = <<~TEXT
-                          Returns its value chaining is already set.
+                          Returns value chaining is already set.
 
-                          Did you use `and_return_its_value` multiple times?
+                          Did you use `and_return_its_value` or `and_return { |delegation_value| ... }` multiple times? Or a combination of them?
                         TEXT
 
                         initialize(message)

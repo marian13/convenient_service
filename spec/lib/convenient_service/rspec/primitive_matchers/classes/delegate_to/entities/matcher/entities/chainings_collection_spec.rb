@@ -29,7 +29,8 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo:
   let(:block_expectation_value) { block_expectation.call }
 
   let(:arguments_chaining) { ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::WithAnyArguments.new(matcher: matcher) }
-  let(:return_its_value_chaining) { ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::ReturnItsValue.new(matcher: matcher) }
+  let(:return_its_value_chaining) { ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::ReturnDelegationValue.new(matcher: matcher) }
+  let(:return_custom_value_chaining) { ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::ReturnCustomValue.new(matcher: matcher) }
 
   let(:without_calling_original_chaining) { ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::Chainings::Values::WithoutCallingOriginal.new(matcher: matcher) }
   let(:with_calling_original_chaining) { ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::Chainings::Values::WithCallingOriginal.new(matcher: matcher) }
@@ -44,7 +45,7 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo:
     it { is_expected.to have_attr_reader(:block_expectation_value) }
     it { is_expected.to have_attr_reader(:call_original) }
     it { is_expected.to have_attr_reader(:arguments) }
-    it { is_expected.to have_attr_reader(:return_its_value) }
+    it { is_expected.to have_attr_reader(:return_value) }
   end
 
   example_group "instance methods" do
@@ -83,20 +84,20 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo:
         end
       end
 
-      context "when return its value chaining is used" do
+      context "when return value chaining is used" do
         before do
-          chainings_collection.return_its_value = return_its_value_chaining
+          chainings_collection.return_value = return_its_value_chaining
         end
 
-        it "applies return its value chaining stubs" do
-          allow(chainings_collection.return_its_value).to receive(:apply_stubs!).and_call_original
+        it "applies return value chaining stubs" do
+          allow(chainings_collection.return_value).to receive(:apply_stubs!).and_call_original
 
           chainings_collection.sub_matchers_match?(block_expectation)
 
-          expect(chainings_collection.return_its_value).to have_received(:apply_stubs!)
+          expect(chainings_collection.return_value).to have_received(:apply_stubs!)
         end
 
-        context "when return its value chaining does NOT match" do
+        context "when return value chaining does NOT match" do
           let(:block_expectation) { proc { object } }
 
           it "returns `false`" do
@@ -111,7 +112,7 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo:
 
           chainings_collection.call_original = call_original_chaining
 
-          chainings_collection.return_its_value = return_its_value_chaining
+          chainings_collection.return_value = return_its_value_chaining
         end
 
         context "when any of those chainigns does NOT match" do
@@ -207,7 +208,7 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo:
 
       context "when return its value chaining is used" do
         before do
-          chainings_collection.return_its_value = return_its_value_chaining
+          chainings_collection.return_value = return_its_value_chaining
 
           chainings_collection.sub_matchers_match?(block_expectation)
         end
@@ -216,7 +217,7 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo:
           let(:block_expectation) { proc { object } }
 
           it "returns return its value chaining failure message" do
-            expect(chainings_collection.failure_message).to eq(chainings_collection.return_its_value.failure_message)
+            expect(chainings_collection.failure_message).to eq(chainings_collection.return_value.failure_message)
           end
         end
 
@@ -235,7 +236,7 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo:
 
           chainings_collection.call_original = call_original_chaining
 
-          chainings_collection.return_its_value = return_its_value_chaining
+          chainings_collection.return_value = return_its_value_chaining
 
           chainings_collection.sub_matchers_match?(block_expectation)
         end
@@ -304,7 +305,7 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo:
 
       context "when return its value chaining is used" do
         before do
-          chainings_collection.return_its_value = return_its_value_chaining
+          chainings_collection.return_value = return_its_value_chaining
 
           chainings_collection.sub_matchers_match?(block_expectation)
         end
@@ -321,7 +322,7 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo:
           let(:block_expectation) { proc { object.foo } }
 
           it "returns return its value chaining failure message when negated" do
-            expect(chainings_collection.failure_message_when_negated).to eq(chainings_collection.return_its_value.failure_message_when_negated)
+            expect(chainings_collection.failure_message_when_negated).to eq(chainings_collection.return_value.failure_message_when_negated)
           end
         end
       end
@@ -332,7 +333,7 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo:
 
           chainings_collection.call_original = call_original_chaining
 
-          chainings_collection.return_its_value = return_its_value_chaining
+          chainings_collection.return_value = return_its_value_chaining
 
           chainings_collection.sub_matchers_match?(block_expectation)
         end
@@ -359,11 +360,11 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo:
     describe "#sub_matchers" do
       context "when any type of matcher chainings is missed" do
         before do
-          chainings_collection.return_its_value = return_its_value_chaining
+          chainings_collection.return_value = return_its_value_chaining
         end
 
         it "returns ordered matcher chainings skipping that missed matcher chaining" do
-          expect(chainings_collection.sub_matchers).to eq([chainings_collection.return_its_value])
+          expect(chainings_collection.sub_matchers).to eq([chainings_collection.return_value])
         end
       end
 
@@ -371,11 +372,11 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo:
         before do
           chainings_collection.arguments = arguments_chaining
 
-          chainings_collection.return_its_value = return_its_value_chaining
+          chainings_collection.return_value = return_its_value_chaining
         end
 
         it "returns ordered matcher chainings" do
-          expect(chainings_collection.sub_matchers).to eq([chainings_collection.arguments, chainings_collection.return_its_value])
+          expect(chainings_collection.sub_matchers).to eq([chainings_collection.arguments, chainings_collection.return_value])
         end
       end
     end
@@ -434,20 +435,20 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo:
       end
     end
 
-    describe "#has_return_its_value?" do
-      context "when return its value chaining is NOT used" do
+    describe "#has_return_value?" do
+      context "when return value chaining is NOT used" do
         it "returns `false`" do
-          expect(chainings_collection.has_return_its_value?).to eq(false)
+          expect(chainings_collection.has_return_value?).to eq(false)
         end
       end
 
-      context "when return its value chaining is used" do
+      context "when return value chaining is used" do
         before do
-          chainings_collection.return_its_value = return_its_value_chaining
+          chainings_collection.return_value = return_its_value_chaining
         end
 
         it "returns `true`" do
-          expect(chainings_collection.has_return_its_value?).to eq(true)
+          expect(chainings_collection.has_return_value?).to eq(true)
         end
       end
     end
@@ -536,42 +537,42 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo:
       end
     end
 
-    describe "#return_its_value=" do
+    describe "#return_value=" do
       context "when return its value chaining is NOT used yet" do
         it "set return its value chaining" do
-          chainings_collection.return_its_value = return_its_value_chaining
+          chainings_collection.return_value = return_its_value_chaining
 
-          expect(chainings_collection.return_its_value).to eq(return_its_value_chaining)
+          expect(chainings_collection.return_value).to eq(return_its_value_chaining)
         end
 
         it "returns set return its value chaining" do
-          expect(chainings_collection.return_its_value = return_its_value_chaining).to eq(return_its_value_chaining)
+          expect(chainings_collection.return_value = return_its_value_chaining).to eq(return_its_value_chaining)
         end
       end
 
-      context "when return its value chaining is already used" do
+      context "when return value chaining is already used" do
         let(:exception_message) do
           <<~TEXT
-            Returns its value chaining is already set.
+            Returns value chaining is already set.
 
-            Did you use `and_return_its_value` multiple times?
+            Did you use `and_return_its_value` or `and_return { |delegation_value| ... }` multiple times? Or a combination of them?
           TEXT
         end
 
         before do
-          chainings_collection.return_its_value = return_its_value_chaining
+          chainings_collection.return_value = return_its_value_chaining
         end
 
-        it "raises error `ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::ChainingsCollection::Exceptions::ReturnItsValueChainingIsAlreadySet`" do
-          expect { chainings_collection.return_its_value = return_its_value_chaining }
-            .to raise_error(ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::ChainingsCollection::Exceptions::ReturnItsValueChainingIsAlreadySet)
+        it "raises error `ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::ChainingsCollection::Exceptions::ReturnValueChainingIsAlreadySet`" do
+          expect { chainings_collection.return_value = return_custom_value_chaining }
+            .to raise_error(ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::ChainingsCollection::Exceptions::ReturnValueChainingIsAlreadySet)
             .with_message(exception_message)
         end
 
         it "delegates to `ConvenientService.raise`" do
           allow(ConvenientService).to receive(:raise).and_call_original
 
-          ignoring_exception(ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::ChainingsCollection::Exceptions::ReturnItsValueChainingIsAlreadySet) { chainings_collection.return_its_value = return_its_value_chaining }
+          ignoring_exception(ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::ChainingsCollection::Exceptions::ReturnValueChainingIsAlreadySet) { chainings_collection.return_value = return_custom_value_chaining }
 
           expect(ConvenientService).to have_received(:raise)
         end

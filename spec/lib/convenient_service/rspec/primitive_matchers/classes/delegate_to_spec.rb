@@ -172,6 +172,30 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo 
       end
     end
 
+    describe "#and_return" do
+      let(:args) { [:foo] }
+      let(:block) { -> { :foo } }
+
+      it "delegates to `matcher#and_return`" do
+        allow(matcher).to receive(:and_return).and_call_original
+
+        facade.and_return(*args, &block)
+      end
+
+      ##
+      # NOTE: You can NOT use `delegate_to` to test `delegate_to`.
+      #
+      it "passes `args, `block` to `matcher#and_return`" do
+        allow(matcher).to receive(:and_return) { |*actual_args, &actual_block| expect([actual_args, actual_block]).to eq([args, block]) }
+
+        facade.and_return(*args, &block)
+      end
+
+      it "returns facade" do
+        expect(facade.without_arguments).to eq(facade)
+      end
+    end
+
     describe "#without_calling_original" do
       it "delegates to `matcher#without_calling_original`" do
         allow(matcher).to receive(:without_calling_original).and_call_original
