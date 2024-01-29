@@ -63,10 +63,8 @@ RSpec.describe ConvenientService::Common::Plugins::HasInstanceProxy::Middleware 
         expect { method_value }
           .to call_chain_next.on(method)
           .with_arguments(*args, **kwargs, &block)
-      end
-
-      it "returns instance proxy" do
-        expect(method_value).to be_instance_of(klass.instance_proxy_class)
+          .and_return(instance_of(klass.instance_proxy_class))
+          .comparing_by(:===)
       end
 
       example_group "instance proxy" do

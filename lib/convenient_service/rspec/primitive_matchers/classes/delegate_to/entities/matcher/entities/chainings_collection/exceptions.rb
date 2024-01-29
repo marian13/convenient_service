@@ -45,6 +45,18 @@ module ConvenientService
                         initialize(message)
                       end
                     end
+
+                    class ComparingByChainingIsAlreadySet < ::ConvenientService::Exception
+                      def initialize_without_arguments
+                        message = <<~TEXT
+                          Comparing by chaining is already set.
+
+                          Did you use `comparing_by` multiple times?
+                        TEXT
+
+                        initialize(message)
+                      end
+                    end
                   end
                 end
               end

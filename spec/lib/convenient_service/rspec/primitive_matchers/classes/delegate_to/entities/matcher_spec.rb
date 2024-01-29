@@ -550,14 +550,20 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo:
     end
 
     describe "#with_arguments" do
+      it "sets `expected_arguments`" do
+        matcher.with_arguments(*args, **kwargs, &block)
+
+        expect(matcher.expected_arguments).to eq(ConvenientService::Support::Arguments.new(*args, **kwargs, &block))
+      end
+
       it "sets `ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::WithConcreteArguments` instance as argument chaining" do
-        matcher.with_arguments
+        matcher.with_arguments(*args, **kwargs, &block)
 
         expect(matcher.chainings.arguments).to be_instance_of(ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::WithConcreteArguments)
       end
 
       it "returns matcher" do
-        expect(matcher.with_arguments).to eq(matcher)
+        expect(matcher.with_arguments(*args, **kwargs, &block)).to eq(matcher)
       end
     end
 
@@ -598,14 +604,22 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo:
     end
 
     describe "#and_return" do
+      let(:return_value_block) { proc { |delegation_value| delegation_value } }
+
+      it "sets `expected_return_value_block`" do
+        matcher.and_return(&return_value_block)
+
+        expect(matcher.expected_return_value_block).to eq(return_value_block)
+      end
+
       it "sets `ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::ReturnCustomValue` instance as return value chaining" do
-        matcher.and_return { |delegation_value| delegation_value }
+        matcher.and_return(&return_value_block)
 
         expect(matcher.chainings.return_value).to be_instance_of(ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::ReturnCustomValue)
       end
 
       it "returns matcher" do
-        expect(matcher.and_return { |delegation_value| delegation_value }).to eq(matcher)
+        expect(matcher.and_return(&return_value_block)).to eq(matcher)
       end
     end
 
@@ -630,6 +644,24 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo:
 
       it "returns matcher" do
         expect(matcher.without_calling_original).to eq(matcher)
+      end
+    end
+
+    describe "#comparing_by" do
+      it "sets `comparison_method`" do
+        matcher.comparing_by("===")
+
+        expect(matcher.comparison_method).to eq("===")
+      end
+
+      it "sets `ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::Chainings::Values::ComparisonMethod` instance as comparing by chaining" do
+        matcher.comparing_by("===")
+
+        expect(matcher.chainings.comparing_by).to be_instance_of(ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::Chainings::Values::ComparisonMethod)
+      end
+
+      it "returns matcher" do
+        expect(matcher.comparing_by("===")).to eq(matcher)
       end
     end
 

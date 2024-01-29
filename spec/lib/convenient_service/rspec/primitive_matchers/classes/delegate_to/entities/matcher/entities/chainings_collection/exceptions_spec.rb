@@ -10,4 +10,5 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo:
   specify { expect(described_class::CallOriginalChainingIsAlreadySet).to be_descendant_of(ConvenientService::Exception) }
   specify { expect(described_class::ArgumentsChainingIsAlreadySet).to be_descendant_of(ConvenientService::Exception) }
   specify { expect(described_class::ReturnValueChainingIsAlreadySet).to be_descendant_of(ConvenientService::Exception) }
+  specify { expect(described_class::ComparingByChainingIsAlreadySet).to be_descendant_of(ConvenientService::Exception) }
 end

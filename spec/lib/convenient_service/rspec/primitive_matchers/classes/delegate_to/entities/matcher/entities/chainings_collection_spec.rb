@@ -36,6 +36,8 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo:
   let(:with_calling_original_chaining) { ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::Chainings::Values::WithCallingOriginal.new(matcher: matcher) }
   let(:call_original_chaining) { with_calling_original_chaining }
 
+  let(:comparing_by_chaining) { ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::Chainings::Values::ComparisonMethod.new(matcher: matcher) }
+
   example_group "attributes" do
     include ConvenientService::RSpec::PrimitiveMatchers::HaveAttrReader
 
@@ -391,10 +393,11 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo:
       context "when all types of value chainings are used" do
         before do
           chainings_collection.call_original = call_original_chaining
+          chainings_collection.comparing_by = comparing_by_chaining
         end
 
         it "returns ordered value chainings" do
-          expect(chainings_collection.values).to eq([chainings_collection.call_original])
+          expect(chainings_collection.values).to eq([chainings_collection.call_original, chainings_collection.comparing_by])
         end
       end
     end
@@ -573,6 +576,48 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo:
           allow(ConvenientService).to receive(:raise).and_call_original
 
           ignoring_exception(ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::ChainingsCollection::Exceptions::ReturnValueChainingIsAlreadySet) { chainings_collection.return_value = return_custom_value_chaining }
+
+          expect(ConvenientService).to have_received(:raise)
+        end
+      end
+    end
+
+    describe "#comparing_by=" do
+      context "when return its value chaining is NOT used yet" do
+        it "set return its value chaining" do
+          chainings_collection.comparing_by = comparing_by_chaining
+
+          expect(chainings_collection.comparing_by).to eq(comparing_by_chaining)
+        end
+
+        it "returns set return its value chaining" do
+          expect(chainings_collection.comparing_by = comparing_by_chaining).to eq(comparing_by_chaining)
+        end
+      end
+
+      context "when return value chaining is already used" do
+        let(:exception_message) do
+          <<~TEXT
+            Comparing by chaining is already set.
+
+            Did you use `comparing_by` multiple times?
+          TEXT
+        end
+
+        before do
+          chainings_collection.comparing_by = comparing_by_chaining
+        end
+
+        it "raises error `ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::ChainingsCollection::Exceptions::ComparingByChainingIsAlreadySet`" do
+          expect { chainings_collection.comparing_by = comparing_by_chaining }
+            .to raise_error(ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::ChainingsCollection::Exceptions::ComparingByChainingIsAlreadySet)
+            .with_message(exception_message)
+        end
+
+        it "delegates to `ConvenientService.raise`" do
+          allow(ConvenientService).to receive(:raise).and_call_original
+
+          ignoring_exception(ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::ChainingsCollection::Exceptions::ComparingByChainingIsAlreadySet) { chainings_collection.comparing_by = comparing_by_chaining }
 
           expect(ConvenientService).to have_received(:raise)
         end

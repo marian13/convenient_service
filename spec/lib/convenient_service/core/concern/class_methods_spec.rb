@@ -146,10 +146,8 @@ RSpec.describe ConvenientService::Core::Concern::ClassMethods do
           expect { service_class.new(*args, **kwargs, &block) }
             .to delegate_to(service_class, :method_missing)
             .with_arguments(:new, *args, **kwargs, &block)
-        end
-
-        it "returns new instance" do
-          expect(service_class.new(*args, **kwargs, &block)).to be_instance_of(service_class)
+            .and_return(instance_of(service_class))
+            .comparing_by(:===)
         end
       end
 
@@ -162,10 +160,8 @@ RSpec.describe ConvenientService::Core::Concern::ClassMethods do
           expect { service_class.new(*args, **kwargs, &block) }
             .not_to delegate_to(service_class, :method_missing)
             .with_arguments(:new, *args, **kwargs, &block)
-        end
-
-        it "returns new instance" do
-          expect(service_class.new(*args, **kwargs, &block)).to be_instance_of(service_class)
+            .and_return(instance_of(service_class))
+            .comparing_by(:===)
         end
       end
     end

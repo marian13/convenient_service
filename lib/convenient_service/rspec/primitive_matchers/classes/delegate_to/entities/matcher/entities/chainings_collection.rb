@@ -27,9 +27,15 @@ module ConvenientService
 
                   ##
                   # @!attribute [r] call_original
-                  #   @return [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::Chainings::Permissions:Base, nil]
+                  #   @return [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::Chainings::Values::Base, nil]
                   #
                   attr_reader :call_original
+
+                  ##
+                  # @!attribute [r] comparing_by
+                  #   @return [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::Chainings::Values::ComparisonMethod, nil]
+                  #
+                  attr_reader :comparing_by
 
                   ##
                   # @!attribute [r] arguments
@@ -99,8 +105,11 @@ module ConvenientService
                   ##
                   # @return [Array]
                   #
+                  # @internal
+                  #   TODO: Consider to remove.
+                  #
                   def values
-                    [call_original].compact
+                    [call_original, comparing_by].compact
                   end
 
                   ##
@@ -115,6 +124,13 @@ module ConvenientService
                   #
                   def has_call_original?
                     Utils.to_bool(call_original)
+                  end
+
+                  ##
+                  # @return [Boolean]
+                  #
+                  def has_comparing_by?
+                    Utils.to_bool(comparing_by)
                   end
 
                   ##
@@ -159,6 +175,16 @@ module ConvenientService
                     ::ConvenientService.raise Exceptions::ReturnValueChainingIsAlreadySet.new if @return_value
 
                     @return_value = chaining
+                  end
+
+                  ##
+                  # @param chaining [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::Chainings::Values::ComparisonMethod]
+                  # @raise [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Exceptions::ComparingByChainingIsAlreadySet]
+                  #
+                  def comparing_by=(chaining)
+                    ::ConvenientService.raise Exceptions::ComparingByChainingIsAlreadySet.new if @comparing_by
+
+                    @comparing_by = chaining
                   end
                 end
               end

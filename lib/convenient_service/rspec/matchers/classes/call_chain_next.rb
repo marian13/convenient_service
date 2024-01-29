@@ -43,17 +43,48 @@ module ConvenientService
             expect { value = block_expectation.call }.to change(method, :chain_called?).from(false).to(true)
 
             if used_with_arguments?
-              expect(method.chain_args).to eq(expected_args)
-              expect(method.chain_kwargs).to eq(expected_kwargs)
-              expect(method.chain_block).to eq(expected_block)
+              ##
+              # NOTE: When `comparison_method` is `:==`.
+              #
+              # expect(expected_args == method.chain_args).to eq(true)
+              # expect(expected_kwargs == method.chain_kwargs).to eq(true)
+              # expect(expected_block == method.chain_block).to eq(true)
+              #
+              # NOTE: When `comparison_method` is `:===`.
+              #
+              # expect(expected_args === method.chain_args).to eq(true)
+              # expect(expected_kwargs === method.chain_kwargs).to eq(true)
+              # expect(expected_block === method.chain_block).to eq(true)
+              #
+              expect(expected_args.public_send(comparison_method, method.chain_args)).to eq(true)
+              expect(expected_kwargs.public_send(comparison_method, method.chain_kwargs)).to eq(true)
+              expect(expected_block.public_send(comparison_method, method.chain_block)).to eq(true)
             end
 
             if used_and_return_its_value?
-              expect(value).to eq(method.chain_value)
+              ##
+              # NOTE: When `comparison_method` is `:==`.
+              #
+              # expect(method.chain_value == value).to eq(true)
+              #
+              # NOTE: When `comparison_method` is `:===`.
+              #
+              # expect(method.chain_value === value).to eq(true)
+              #
+              expect(method.chain_value.public_send(comparison_method, value)).to eq(true)
             end
 
             if used_and_return?
-              expect(value).to eq(return_block.call(method.chain_value))
+              ##
+              # NOTE: When `comparison_method` is `:==`.
+              #
+              # expect(return_block.call(method.chain_value) == value).to eq(true)
+              #
+              # NOTE: When `comparison_method` is `:===`.
+              #
+              # expect(return_block.call(method.chain_value) === value).to eq(true)
+              #
+              expect(return_block.call(method.chain_value).public_send(comparison_method, value)).to eq(true)
             end
 
             true
@@ -197,6 +228,17 @@ module ConvenientService
             self
           end
 
+          ##
+          # @param comparison_method [String, Symbol]
+          #
+          # @return [ConvenientService::RSpec::Matchers::Classes::CallChainNext]
+          #
+          def comparing_by(comparison_method)
+            chain[:comparing_by] = comparison_method
+
+            self
+          end
+
           private
 
           ##
@@ -224,6 +266,13 @@ module ConvenientService
           #
           def used_and_return?
             chain.key?(:and_return)
+          end
+
+          ##
+          # @return [Boolean]
+          #
+          def used_comparing_by?
+            chain.key?(:comparing_by)
           end
 
           ##
@@ -277,6 +326,11 @@ module ConvenientService
           end
 
           ##
+          # @return [Proc, nil]
+          #
+          alias_method :expected_block, :block
+
+          ##
           # @return [Proc]
           #
           def return_block
@@ -284,9 +338,11 @@ module ConvenientService
           end
 
           ##
-          # @return [Proc, nil]
+          # @return [String, Symbol]
           #
-          alias_method :expected_block, :block
+          def comparison_method
+            @comparison_method ||= chain[:comparing_by] || :==
+          end
         end
       end
     end

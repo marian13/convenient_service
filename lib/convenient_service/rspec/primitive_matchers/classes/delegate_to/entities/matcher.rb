@@ -101,6 +101,7 @@ module ConvenientService
 
                 chainings.arguments = Entities::Chainings::SubMatchers::WithAnyArguments.new(matcher: self) unless chainings.has_arguments?
                 chainings.call_original = Entities::Chainings::Values::WithCallingOriginal.new(matcher: self) unless chainings.has_call_original?
+                chainings.comparing_by = Entities::Chainings::Values::ComparisonMethod.new(matcher: self) unless chainings.has_comparing_by?
 
                 chainings.sub_matchers_match?(block_expectation)
               end
@@ -146,7 +147,7 @@ module ConvenientService
               ##
               # @api public
               #
-              # @return [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo]
+              # @return [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher]
               # @raise [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Exceptions::ArgumentsChainingIsAlreadySet]
               #
               def with_arguments(...)
@@ -160,7 +161,7 @@ module ConvenientService
               ##
               # @api public
               #
-              # @return [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo]
+              # @return [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher]
               # @raise [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Exceptions::ArgumentsChainingIsAlreadySet]
               #
               def with_any_arguments
@@ -172,7 +173,7 @@ module ConvenientService
               ##
               # @api public
               #
-              # @return [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo]
+              # @return [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher]
               # @raise [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Exceptions::ArgumentsChainingIsAlreadySet]
               #
               def without_arguments
@@ -184,7 +185,7 @@ module ConvenientService
               ##
               # @api public
               #
-              # @return [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo]
+              # @return [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher]
               # @raise [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Exceptions::ReturnValueChainingIsAlreadySet]
               #
               def and_return_its_value
@@ -194,7 +195,7 @@ module ConvenientService
               end
 
               ##
-              # @return [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo]
+              # @return [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher]
               # @raise [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Exceptions::ReturnValueChainingIsAlreadySet]
               #
               def and_return(*args, &block)
@@ -212,7 +213,7 @@ module ConvenientService
               ##
               # @api public
               #
-              # @return [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo]
+              # @return [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher]
               #
               def with_calling_original
                 chainings.call_original = Entities::Chainings::Values::WithCallingOriginal.new(matcher: self)
@@ -223,10 +224,24 @@ module ConvenientService
               ##
               # @api public
               #
-              # @return [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo]
+              # @return [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher]
               #
               def without_calling_original
                 chainings.call_original = Entities::Chainings::Values::WithoutCallingOriginal.new(matcher: self)
+
+                self
+              end
+
+              ##
+              # @api public
+              #
+              # @param comparison_method [Symbo, String]
+              # @return [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher]
+              #
+              def comparing_by(comparison_method)
+                self.comparison_method = comparison_method
+
+                chainings.comparing_by = Entities::Chainings::Values::ComparisonMethod.new(matcher: self)
 
                 self
               end
@@ -256,6 +271,23 @@ module ConvenientService
                 Utils::Object.instance_variable_delete(self, :@expected_return_value_block)
 
                 @expected_return_value_block = block
+              end
+
+              ##
+              # @return [Symbol, String]
+              #
+              def comparison_method
+                @comparison_method ||= :==
+              end
+
+              ##
+              # @param value [Symbol, String]
+              # @return [Symbol, String]
+              #
+              def comparison_method=(value)
+                Utils::Object.instance_variable_delete(self, :@comparison_method)
+
+                @comparison_method = value
               end
 
               ##

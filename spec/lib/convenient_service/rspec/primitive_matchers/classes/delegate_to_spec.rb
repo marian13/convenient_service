@@ -192,7 +192,21 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo 
       end
 
       it "returns facade" do
-        expect(facade.without_arguments).to eq(facade)
+        expect(facade.and_return(*args, &block)).to eq(facade)
+      end
+    end
+
+    describe "#with_calling_original" do
+      it "delegates to `matcher#with_calling_original`" do
+        allow(matcher).to receive(:with_calling_original).and_call_original
+
+        facade.with_calling_original
+
+        expect(matcher).to have_received(:with_calling_original)
+      end
+
+      it "returns facade" do
+        expect(facade.with_calling_original).to eq(facade)
       end
     end
 
@@ -207,6 +221,29 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo 
 
       it "returns facade" do
         expect(facade.without_calling_original).to eq(facade)
+      end
+    end
+
+    describe "#comparing_by" do
+      let(:args) { [:foo] }
+
+      it "delegates to `matcher#comparing_by`" do
+        allow(matcher).to receive(:comparing_by).and_call_original
+
+        facade.comparing_by(*args)
+      end
+
+      ##
+      # NOTE: You can NOT use `delegate_to` to test `delegate_to`.
+      #
+      it "passes `args to `matcher#comparing_by`" do
+        allow(matcher).to receive(:comparing_by) { |*actual_args| expect([actual_args]).to eq([args]) }
+
+        facade.comparing_by(*args)
+      end
+
+      it "returns facade" do
+        expect(facade.comparing_by(*args)).to eq(facade)
       end
     end
   end

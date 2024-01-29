@@ -151,8 +151,34 @@ module ConvenientService
           #
           # @return [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo]
           #
+          def with_calling_original
+            matcher.with_calling_original
+
+            self
+          end
+
+          ##
+          # @api public
+          #
+          # @return [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo]
+          #
           def without_calling_original
             matcher.without_calling_original
+
+            self
+          end
+
+          ##
+          # @api private
+          #
+          # @param comparison_method [Symbo, String]
+          # @return [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo]
+          #
+          # @internal
+          #   NOTE: NOT ready for public usage. Probably requires values chainings removal.
+          #
+          def comparing_by(...)
+            matcher.comparing_by(...)
 
             self
           end

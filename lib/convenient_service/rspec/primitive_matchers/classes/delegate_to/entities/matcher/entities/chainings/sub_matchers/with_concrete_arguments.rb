@@ -14,8 +14,11 @@ module ConvenientService
                       ##
                       # @return [Boolean]
                       #
+                      # @internal
+                      #   TODO: Specs for `comparison_method`.
+                      #
                       def matches_arguments?(arguments)
-                        Utils.to_bool(arguments == matcher.expected_arguments)
+                        Utils.to_bool(matcher.expected_arguments.public_send(matcher.comparison_method, arguments))
                       end
 
                       ##
