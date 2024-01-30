@@ -7,48 +7,6 @@ module ConvenientService
         module Concern
           include Support::Concern
 
-          instance_methods do
-            ##
-            # @api public
-            #
-            # @note May be useful for debugging purposes.
-            # @see https://userdocs.convenientservice.org/guides/how_to_debug_services_via_callbacks
-            #
-            # @note `steps` are frozen.
-            # @see https://userdocs.convenientservice.org/faq#is-it-possible-to-modify-the-step-collection-from-a-callback
-            #
-            # @return [Array<ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step>]
-            #
-            # @internal
-            #   IMPORTANT: `map` result is NOT wrapped by `StepCollection` in order to NOT expose too much internals to the end-user.
-            #
-            def steps
-              internals.cache.fetch(:steps) do
-                self.class
-                  .steps
-                  .tap(&:commit!)
-                  .map { |step| step.copy(overrides: {kwargs: {organizer: self}}) }
-                  .freeze
-              end
-            end
-
-            ##
-            # @api private
-            #
-            # Returns step by index.
-            # Returns `nil` when index is out of range.
-            #
-            # @param index [Integer]
-            # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step]
-            #
-            # @note This method was initially designed as a hook (callback trigger).
-            # @see ConvenientService::Service::Plugins::CanHaveSteps::Middleware#next
-            #
-            def step(index)
-              steps[index]
-            end
-          end
-
           class_methods do
             ##
             # @api public
@@ -107,6 +65,48 @@ module ConvenientService
             #
             def step_class
               @step_class ||= Commands::CreateStepClass.call(service_class: self)
+            end
+          end
+
+          instance_methods do
+            ##
+            # @api public
+            #
+            # @note May be useful for debugging purposes.
+            # @see https://userdocs.convenientservice.org/guides/how_to_debug_services_via_callbacks
+            #
+            # @note `steps` are frozen.
+            # @see https://userdocs.convenientservice.org/faq#is-it-possible-to-modify-the-step-collection-from-a-callback
+            #
+            # @return [Array<ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step>]
+            #
+            # @internal
+            #   IMPORTANT: `map` result is NOT wrapped by `StepCollection` in order to NOT expose too much internals to the end-user.
+            #
+            def steps
+              internals.cache.fetch(:steps) do
+                self.class
+                  .steps
+                  .tap(&:commit!)
+                  .map { |step| step.copy(overrides: {kwargs: {organizer: self}}) }
+                  .freeze
+              end
+            end
+
+            ##
+            # @api private
+            #
+            # Returns step by index.
+            # Returns `nil` when index is out of range.
+            #
+            # @param index [Integer]
+            # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step]
+            #
+            # @note This method was initially designed as a hook (callback trigger).
+            # @see ConvenientService::Service::Plugins::CanHaveSteps::Middleware#next
+            #
+            def step(index)
+              steps[index]
             end
           end
         end
