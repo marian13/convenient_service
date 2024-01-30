@@ -434,6 +434,7 @@ tasks:
   lint:autocorrect:
     cmds:
       - task: rubocop:autocorrect
+      - task: docs:lint
 
   ##
   # TODO: Add to CI.

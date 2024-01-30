@@ -186,7 +186,7 @@ module ConvenientService
           end
 
           ##
-          # @param value[Object, ConvenientService::Support::NOT_PASSED]
+          # @param args [Array<Object>]
           # @param block [Proc, nil]
           #
           # @return [ConvenientService::RSpec::Matchers::Classes::CallChainNext]
