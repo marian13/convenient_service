@@ -36,7 +36,6 @@ module ConvenientService
 
             use ConvenientService::Plugins::Service::HasNegatedResult::Concern
             use ConvenientService::Plugins::Service::HasNegatedJSendResult::Concern
-            use ConvenientService::Plugins::Service::CanHaveConnectedSteps::Concern
             use ConvenientService::Plugins::Service::CanHaveFallbacks::Concern
             use ConvenientService::Plugins::Service::HasMermaidFlowchart::Concern
           end
@@ -183,7 +182,6 @@ module ConvenientService
             concerns do
               use ConvenientService::Plugins::Common::HasJSendResultDuckShortSyntax::Concern
               use ConvenientService::Plugins::Step::CanHaveFallbacks::Concern
-              use ConvenientService::Plugins::Step::CanBeNegated::Concern
             end
 
             middlewares :result do
@@ -192,12 +190,6 @@ module ConvenientService
               insert_after \
                 ConvenientService::Plugins::Step::HasResult::Middleware,
                 ConvenientService::Plugins::Step::CanHaveParentResult::Middleware
-
-              insert_after \
-                ConvenientService::Plugins::Step::HasResult::Middleware,
-                ConvenientService::Plugins::Step::CanBeNegated::Middleware
-
-              use ConvenientService::Plugins::Step::CanHaveAlternativeSteps::Middleware
             end
           end
 

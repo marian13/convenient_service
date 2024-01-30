@@ -47,7 +47,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::DryService::Config do
               ConvenientService::Common::Plugins::HasAroundCallbacks::Concern,
               ConvenientService::Service::Plugins::HasNegatedResult::Concern,
               ConvenientService::Service::Plugins::HasNegatedJSendResult::Concern,
-              ConvenientService::Service::Plugins::CanHaveConnectedSteps::Concern,
+
               ConvenientService::Service::Plugins::CanHaveFallbacks::Concern,
               ConvenientService::Service::Plugins::HasMermaidFlowchart::Concern,
               ConvenientService::Common::Plugins::AssignsAttributesInConstructor::UsingDryInitializer::Concern,
@@ -482,8 +482,8 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::DryService::Config do
                 ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeResultStep::Concern,
                 ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::HasInspect::Concern,
                 ConvenientService::Common::Plugins::HasJSendResultDuckShortSyntax::Concern,
-                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallbacks::Concern,
-                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeNegated::Concern
+                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallbacks::Concern
+
               ]
             end
 
@@ -498,13 +498,13 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::DryService::Config do
                 ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
                 ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
                 ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::HasResult::Middleware,
-                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeNegated::Middleware,
+
                 ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveParentResult::Middleware,
                 ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::RaisesOnNotResultReturnValue::Middleware,
                 ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeResultStep::CanBeExecuted::Middleware,
                 ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeMethodStep::CanBeExecuted::Middleware,
-                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallbacks::Middleware.with(fallback_true_status: :failure),
-                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveAlternativeSteps::Middleware
+                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallbacks::Middleware.with(fallback_true_status: :failure)
+
               ]
             end
 
