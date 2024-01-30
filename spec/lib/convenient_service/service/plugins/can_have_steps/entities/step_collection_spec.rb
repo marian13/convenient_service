@@ -183,7 +183,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
       context "when step collection has step by index" do
         before do
-          step_collection << step
+          step_collection.register(*args, **kwargs)
         end
 
         it "returns step by index" do
@@ -215,18 +215,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       end
     end
 
-    describe "#<<" do
-      it "adds `step`" do
-        step_collection << step
-
-        expect(step_collection.steps).to eq([step])
-      end
-
-      it "returns step collection" do
-        expect(step_collection << step).to eq(step_collection)
-      end
-    end
-
     example_group "comparison" do
       describe "#==" do
         context "when `other` has different class" do
@@ -246,7 +234,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         end
 
         context "when `other` has different `steps`" do
-          let(:other) { described_class.new(container: container).tap { |collection| collection << step } }
+          let(:other) { described_class.new(container: container).tap { |collection| collection.register(*args, **kwargs) } }
 
           it "returns `false`" do
             expect(step_collection == other).to eq(false)

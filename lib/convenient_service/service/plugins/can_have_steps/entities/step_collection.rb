@@ -106,18 +106,6 @@ module ConvenientService
             end
 
             ##
-            # @api private
-            #
-            # @param step [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step]
-            # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::StepCollection]
-            #
-            def <<(step)
-              steps << step
-
-              self
-            end
-
-            ##
             # @api public
             #
             # @param other [Object] Can be any type.
