@@ -175,16 +175,6 @@ module ConvenientService
       end
 
       ##
-      # @api public
-      #
-      # @return [Boolean]
-      # @note Expected to be called from app entry points like `initializers` in Rails.
-      #
-      def require_cleans_exception_backtrace
-        require_relative "dependencies/extractions/active_support_backtrace_cleaner"
-      end
-
-      ##
       # @api private
       #
       # @return [Boolean]
