@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::StepCollection do
+RSpec.describe ConvenientService::Service::Plugins::CanHaveSequentialSteps::Entities::StepCollection do
   let(:step_collection) { described_class.new(container: container) }
 
   let(:container) do
@@ -109,8 +109,8 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         end
 
         context "when step collection has multiple steps" do
-          let(:steps) { [step] }
-          let(:other_step) { ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step.new(Class.new, in: :baz, out: :qux, container: Class.new) }
+          let(:steps) { [step, other_step] }
+          let(:other_step) { container.step_class.new(*args, **kwargs) }
 
           it "returns `true`" do
             expect(step_collection.commit!).to eq(true)

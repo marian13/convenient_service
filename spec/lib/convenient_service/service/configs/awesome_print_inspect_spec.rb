@@ -97,7 +97,7 @@ RSpec.describe ConvenientService::Service::Configs::AwesomePrintInspect do
       # https://github.com/marian13/convenient_service/discussions/43
       #
       it "applies its `included` block only once" do
-        expect(service_class.concerns.to_a.size).to eq(8)
+        expect(service_class.concerns.to_a.size).to eq(9)
       end
     end
   end

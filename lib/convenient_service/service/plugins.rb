@@ -10,9 +10,11 @@ require_relative "plugins/has_negated_result"
 require_relative "plugins/has_j_send_result"
 require_relative "plugins/has_negated_j_send_result"
 
+require_relative "plugins/can_have_steps"
+require_relative "plugins/can_have_sequential_steps"
+
 require_relative "plugins/can_recalculate_result"
 require_relative "plugins/can_have_method_steps"
-require_relative "plugins/can_have_steps"
 require_relative "plugins/can_have_stubbed_results"
 require_relative "plugins/can_have_fallbacks"
 require_relative "plugins/collects_services_in_exception"
@@ -24,6 +26,10 @@ require_relative "plugins/has_mermaid_flowchart"
 require_relative "plugins/raises_on_not_result_return_value"
 require_relative "plugins/raises_on_double_result"
 require_relative "plugins/sets_parent_to_foreign_result"
+
+##
+# TODO: Move to dependencies.
+#
 require_relative "plugins/wraps_result_in_db_transaction"
 
 require_relative "plugins/aliases"

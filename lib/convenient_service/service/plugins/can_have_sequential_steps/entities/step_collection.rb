@@ -3,7 +3,7 @@
 module ConvenientService
   module Service
     module Plugins
-      module CanHaveSteps
+      module CanHaveSequentialSteps
         module Entities
           class StepCollection
             include ::Enumerable

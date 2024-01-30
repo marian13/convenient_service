@@ -33,9 +33,9 @@ RSpec.describe ConvenientService::Service::Configs::Minimal do
               ConvenientService::Common::Plugins::HasConstructor::Concern,
               ConvenientService::Plugins::Common::HasConstructorWithoutInitialize::Concern,
               ConvenientService::Service::Plugins::HasResult::Concern,
-
               ConvenientService::Service::Plugins::HasJSendResult::Concern,
-              ConvenientService::Service::Plugins::CanHaveSteps::Concern
+              ConvenientService::Service::Plugins::CanHaveSteps::Concern,
+              ConvenientService::Service::Plugins::CanHaveSequentialSteps::Concern
             ]
           end
 
@@ -62,7 +62,7 @@ RSpec.describe ConvenientService::Service::Configs::Minimal do
               ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
               ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
               ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Middleware,
-              ConvenientService::Service::Plugins::CanHaveSteps::Middleware
+              ConvenientService::Service::Plugins::CanHaveSequentialSteps::Middleware
             ]
           end
 

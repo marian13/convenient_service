@@ -36,6 +36,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard do
               ConvenientService::Service::Plugins::HasResult::Concern,
               ConvenientService::Service::Plugins::HasJSendResult::Concern,
               ConvenientService::Service::Plugins::CanHaveSteps::Concern,
+              ConvenientService::Service::Plugins::CanHaveSequentialSteps::Concern,
               ConvenientService::Common::Plugins::CachesConstructorArguments::Concern,
               ConvenientService::Common::Plugins::CanBeCopied::Concern,
               ConvenientService::Service::Plugins::CanRecalculateResult::Concern,
@@ -45,7 +46,6 @@ RSpec.describe ConvenientService::Service::Configs::Standard do
               ConvenientService::Common::Plugins::HasAroundCallbacks::Concern,
               ConvenientService::Service::Plugins::HasNegatedResult::Concern,
               ConvenientService::Service::Plugins::HasNegatedJSendResult::Concern,
-
               ConvenientService::Service::Plugins::CanHaveFallbacks::Concern,
               ConvenientService::Service::Plugins::HasMermaidFlowchart::Concern
             ]
@@ -82,7 +82,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard do
               ConvenientService::Common::Plugins::HasAroundCallbacks::Middleware,
               ConvenientService::Service::Plugins::SetsParentToForeignResult::Middleware,
               ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Middleware,
-              ConvenientService::Service::Plugins::CanHaveSteps::Middleware
+              ConvenientService::Service::Plugins::CanHaveSequentialSteps::Middleware
 
               ##
               # TODO: Rewrite. This plugin does NOT do what it states. Probably I was NOT with a clear mind while writing it (facepalm).

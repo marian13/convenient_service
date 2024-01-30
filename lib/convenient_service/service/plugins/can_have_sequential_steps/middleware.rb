@@ -3,7 +3,7 @@
 module ConvenientService
   module Service
     module Plugins
-      module CanHaveSteps
+      module CanHaveSequentialSteps
         class Middleware < MethodChainMiddleware
           intended_for :result, entity: :service
 
