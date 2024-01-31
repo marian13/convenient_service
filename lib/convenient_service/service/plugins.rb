@@ -27,9 +27,4 @@ require_relative "plugins/raises_on_not_result_return_value"
 require_relative "plugins/raises_on_double_result"
 require_relative "plugins/sets_parent_to_foreign_result"
 
-##
-# TODO: Move to dependencies.
-#
-require_relative "plugins/wraps_result_in_db_transaction"
-
 require_relative "plugins/aliases"

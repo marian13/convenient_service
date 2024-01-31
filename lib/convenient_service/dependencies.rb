@@ -178,6 +178,23 @@ module ConvenientService
       # @api private
       #
       # @return [Boolean]
+      # @note Expected to be called from app entry points like `initializers` in Rails.
+      #
+      def require_wraps_result_in_db_transaction
+        ##
+        # - https://edgeguides.rubyonrails.org/active_record_basics.html
+        # - https://api.rubyonrails.org/classes/ActiveRecord.html
+        # - https://github.com/rails/rails/tree/main/activerecord
+        #
+        require "active_record"
+
+        require_relative "service/plugins/wraps_result_in_db_transaction"
+      end
+
+      ##
+      # @api private
+      #
+      # @return [Boolean]
       # @note Expected to be called from `irb`, `pry`, `spec_helper.rb`, etc.
       #
       # @internal
