@@ -30,6 +30,8 @@ RSpec.describe ConvenientService::Logger do
 
       before do
         allow(ENV).to receive(:[]).and_call_original
+
+        allow(ENV).to receive(:[]).with("CONVENIENT_SERVICE_DEBUG").and_return(nil)
       end
 
       context "when `ENV[\"CONVENIENT_SERVICE_LOGGER_LEVEL\"]` is NOT passed" do
