@@ -107,6 +107,8 @@ module ConvenientService
                 delegate :not_error?, to: :result
 
                 ##
+                # @api private
+                #
                 # @param args [Array<Object>]
                 # @param kwargs [Hash{Symbol => Object}]
                 # @return [void]
@@ -117,6 +119,8 @@ module ConvenientService
                 end
 
                 ##
+                # @api private
+                #
                 # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Structs::Params]
                 #
                 # @internal
@@ -127,6 +131,8 @@ module ConvenientService
                 end
 
                 ##
+                # @api private
+                #
                 # @return [ConvenientService::Service]
                 # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepHasNoOrganizer]
                 #
@@ -144,6 +150,8 @@ module ConvenientService
                 end
 
                 ##
+                # @api public
+                #
                 # @return [Array<ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method>]
                 #
                 def inputs
@@ -151,6 +159,8 @@ module ConvenientService
                 end
 
                 ##
+                # @api public
+                #
                 # @return [Hash{Symbol => Object}]
                 # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepHasNoOrganizer]
                 #
@@ -159,6 +169,8 @@ module ConvenientService
                 end
 
                 ##
+                # @api public
+                #
                 # @return [Hash{Symbol => Object}]
                 # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepHasNoOrganizer]
                 #
@@ -167,6 +179,8 @@ module ConvenientService
                 end
 
                 ##
+                # @api public
+                #
                 # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method, nil]
                 # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepHasNoOrganizer]
                 #
@@ -175,6 +189,8 @@ module ConvenientService
                 end
 
                 ##
+                # @api private
+                #
                 # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
                 # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepHasNoOrganizer]
                 #
@@ -190,6 +206,8 @@ module ConvenientService
                 end
 
                 ##
+                # @api private
+                #
                 # @return [String]
                 #
                 def printable_service
@@ -197,6 +215,8 @@ module ConvenientService
                 end
 
                 ##
+                # @api private
+                #
                 # @return [Class]
                 #
                 def service_class
@@ -204,6 +224,8 @@ module ConvenientService
                 end
 
                 ##
+                # @api private
+                #
                 # @return [Boolean]
                 #
                 def has_organizer?
@@ -211,6 +233,8 @@ module ConvenientService
                 end
 
                 ##
+                # @api public
+                #
                 # @return [Boolean]
                 # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepHasNoOrganizer]
                 #
@@ -219,6 +243,8 @@ module ConvenientService
                 end
 
                 ##
+                # @api private
+                #
                 # @return [void]
                 # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepHasNoOrganizer]
                 #
@@ -227,6 +253,18 @@ module ConvenientService
                 end
 
                 ##
+                # @api private
+                #
+                # @param organizer [ConvenientService::Service]
+                # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step]
+                #
+                def with_organizer(organizer)
+                  copy(overrides: {kwargs: {organizer: organizer}})
+                end
+
+                ##
+                # @api private
+                #
                 # @return [void]
                 # @raise [ConvenientService::Error]
                 #
@@ -239,6 +277,8 @@ module ConvenientService
                 end
 
                 ##
+                # @api private
+                #
                 # @return [void]
                 #
                 def define!
@@ -248,6 +288,8 @@ module ConvenientService
                 end
 
                 ##
+                # @api private
+                #
                 # @param other [Object] Can be any type.
                 # @return [Boolean, nil]
                 #
@@ -266,6 +308,8 @@ module ConvenientService
                 end
 
                 ##
+                # @api private
+                #
                 # @return [Array<Object>]
                 #
                 def to_args
@@ -273,6 +317,8 @@ module ConvenientService
                 end
 
                 ##
+                # @api private
+                #
                 # @return [Hash{Symbol => Object}]
                 #
                 def to_kwargs
@@ -280,6 +326,8 @@ module ConvenientService
                 end
 
                 ##
+                # @api private
+                #
                 # @return [ConveninentService::Support::Arguments]
                 #
                 def to_arguments

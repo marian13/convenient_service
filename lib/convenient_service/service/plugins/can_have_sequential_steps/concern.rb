@@ -51,7 +51,7 @@ module ConvenientService
                 self.class
                   .steps
                   .tap(&:commit!)
-                  .map { |step| step.copy(overrides: {kwargs: {organizer: self}}) }
+                  .map { |step| step.with_organizer(self) }
                   .freeze
               end
             end

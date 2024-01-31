@@ -481,6 +481,15 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       end
     end
 
+    describe "#with_organizer" do
+      specify do
+        expect { step.with_organizer(organizer) }
+          .to delegate_to(step, :copy)
+          .with_arguments(overrides: {kwargs: {organizer: organizer}})
+          .and_return_its_value
+      end
+    end
+
     describe "#validate!" do
       specify do
         expect { step.validate! }
