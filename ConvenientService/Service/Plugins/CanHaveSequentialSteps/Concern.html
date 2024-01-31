@@ -527,7 +527,7 @@ Returns <code>nil</code> when index is out of range.</p>
     <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span>
       <span class='period'>.</span><span class='id identifier rubyid_steps'>steps</span>
       <span class='period'>.</span><span class='id identifier rubyid_tap'>tap</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:commit!</span><span class='rparen'>)</span>
-      <span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_step'>step</span><span class='op'>|</span> <span class='id identifier rubyid_step'>step</span><span class='period'>.</span><span class='id identifier rubyid_copy'>copy</span><span class='lparen'>(</span><span class='label'>overrides:</span> <span class='lbrace'>{</span><span class='label'>kwargs:</span> <span class='lbrace'>{</span><span class='label'>organizer:</span> <span class='kw'>self</span><span class='rbrace'>}</span><span class='rbrace'>}</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
+      <span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_step'>step</span><span class='op'>|</span> <span class='id identifier rubyid_step'>step</span><span class='period'>.</span><span class='id identifier rubyid_with_organizer'>with_organizer</span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
       <span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -541,7 +541,7 @@ Returns <code>nil</code> when index is out of range.</p>
 </div>
 
       <div id="footer">
-  Generated on Wed Jan 31 00:06:51 2024 by
+  Generated on Wed Jan 31 00:45:22 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.2.3).
 </div>
