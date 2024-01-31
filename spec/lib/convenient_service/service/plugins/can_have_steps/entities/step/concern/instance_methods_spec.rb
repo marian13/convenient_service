@@ -70,60 +70,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
     include ConvenientService::RSpec::Matchers::DelegateTo
     include ConvenientService::RSpec::Matchers::Results
 
-    describe "#success?" do
-      specify do
-        expect { step.success? }
-          .to delegate_to(step.result, :success?)
-          .without_arguments
-          .and_return_its_value
-      end
-    end
-
-    describe "#failure?" do
-      specify do
-        expect { step.failure? }
-          .to delegate_to(step.result, :failure?)
-          .without_arguments
-          .and_return_its_value
-      end
-    end
-
-    describe "#error?" do
-      specify do
-        expect { step.error? }
-          .to delegate_to(step.result, :error?)
-          .without_arguments
-          .and_return_its_value
-      end
-    end
-
-    describe "#not_success?" do
-      specify do
-        expect { step.not_success? }
-          .to delegate_to(step.result, :not_success?)
-          .without_arguments
-          .and_return_its_value
-      end
-    end
-
-    describe "#not_failure?" do
-      specify do
-        expect { step.not_failure? }
-          .to delegate_to(step.result, :not_failure?)
-          .without_arguments
-          .and_return_its_value
-      end
-    end
-
-    describe "#not_error?" do
-      specify do
-        expect { step.not_error? }
-          .to delegate_to(step.result, :not_error?)
-          .without_arguments
-          .and_return_its_value
-      end
-    end
-
     describe "#data" do
       specify do
         expect { step.data }
@@ -223,138 +169,57 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       end
     end
 
-    example_group "comparison" do
-      describe "#==" do
-        context "when `other` has different class" do
-          let(:other) { "string" }
-
-          it "returns `nil`" do
-            expect(step == other).to eq(nil)
-          end
-        end
-
-        context "when `other` has different service" do
-          let(:other) { step_class.new(Class.new, **kwargs) }
-
-          it "returns `false`" do
-            expect(step == other).to eq(false)
-          end
-        end
-
-        context "when `other` has different inputs" do
-          let(:other) { step_class.new(*args, **kwargs.merge(in: [])) }
-
-          it "returns `false`" do
-            expect(step == other).to eq(false)
-          end
-        end
-
-        context "when `other` has different outputs" do
-          let(:other) { step_class.new(*args, **kwargs.merge(out: [])) }
-
-          it "returns `false`" do
-            expect(step == other).to eq(false)
-          end
-        end
-
-        context "when `other` has different index" do
-          let(:other) { step_class.new(*args, **kwargs.merge(index: 1)) }
-
-          it "returns `false`" do
-            expect(step == other).to eq(false)
-          end
-        end
-
-        context "when `other` has different container" do
-          let(:other) { step_class.new(*args, **kwargs.merge(container: Class.new)) }
-
-          it "returns `false`" do
-            expect(step == other).to eq(false)
-          end
-        end
-
-        context "when `other` has different organizer" do
-          let(:other) { step_class.new(*args, **kwargs.merge(organizer: nil)) }
-
-          it "returns `false`" do
-            expect(step == other).to eq(false)
-          end
-        end
-
-        context "when `other` has different extra kwargs" do
-          let(:other) { step_class.new(*args, **kwargs.merge(fallback: false)) }
-
-          it "returns `false`" do
-            expect(step == other).to eq(false)
-          end
-        end
-
-        context "when `other` has same attributes" do
-          let(:other) { step_class.new(*args, **kwargs) }
-
-          it "returns `true`" do
-            expect(step == other).to eq(true)
-          end
-        end
+    describe "#success?" do
+      specify do
+        expect { step.success? }
+          .to delegate_to(step.result, :success?)
+          .without_arguments
+          .and_return_its_value
       end
     end
 
-    describe "#has_organizer?" do
-      context "when `organizer` is NOT set" do
-        let(:organizer) { nil }
-
-        it "returns `false`" do
-          expect(step.has_organizer?).to eq(false)
-        end
-      end
-
-      context "when `organizer` is set" do
-        let(:organizer) { double }
-
-        it "returns `true`" do
-          expect(step.has_organizer?).to eq(true)
-        end
+    describe "#failure?" do
+      specify do
+        expect { step.failure? }
+          .to delegate_to(step.result, :failure?)
+          .without_arguments
+          .and_return_its_value
       end
     end
 
-    describe "#has_reassignment?" do
-      let(:name) { :bar }
-
-      context "when `step` has NO reassignemnt output" do
-        let(:outputs) { [:bar] }
-
-        it "returns `false`" do
-          expect(step.has_reassignment?(name)).to eq(false)
-        end
-      end
-
-      context "when `step` has reassignemnt output" do
-        let(:outputs) { [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Values::Reassignment.new(:bar)] }
-
-        it "returns `true`" do
-          expect(step.has_reassignment?(name)).to eq(true)
-        end
+    describe "#error?" do
+      specify do
+        expect { step.error? }
+          .to delegate_to(step.result, :error?)
+          .without_arguments
+          .and_return_its_value
       end
     end
 
-    describe "#reassignment" do
-      let(:name) { :bar }
-
-      context "when `step` has NO reassignemnt output" do
-        let(:outputs) { [:bar] }
-
-        it "returns `nil`" do
-          expect(step.reassignment(name)).to be_nil
-        end
+    describe "#not_success?" do
+      specify do
+        expect { step.not_success? }
+          .to delegate_to(step.result, :not_success?)
+          .without_arguments
+          .and_return_its_value
       end
+    end
 
-      context "when `step` has reassignemnt output" do
-        let(:reassignemnt) { ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Values::Reassignment.new(:bar) }
-        let(:outputs) { [reassignemnt] }
+    describe "#not_failure?" do
+      specify do
+        expect { step.not_failure? }
+          .to delegate_to(step.result, :not_failure?)
+          .without_arguments
+          .and_return_its_value
+      end
+    end
 
-        it "returns that reassignemnt" do
-          expect(step.reassignment(name)).to eq(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method.cast(reassignemnt, direction: :output))
-        end
+    describe "#not_error?" do
+      specify do
+        expect { step.not_error? }
+          .to delegate_to(step.result, :not_error?)
+          .without_arguments
+          .and_return_its_value
       end
     end
 
@@ -437,44 +302,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       end
     end
 
-    describe "#trigger_callback" do
-      specify do
-        expect { step.trigger_callback }
-          .to delegate_to(step.organizer, :step)
-          .with_arguments(index)
-      end
-    end
-
-    describe "#validate!" do
-      specify do
-        expect { step.validate! }
-          .to delegate_to(step.inputs.first, :validate_as_input_for_container!)
-          .with_arguments(step.container)
-      end
-
-      specify do
-        expect { step.validate! }
-          .to delegate_to(step.outputs.first, :validate_as_output_for_container!)
-          .with_arguments(step.container)
-      end
-
-      it "returns `true`" do
-        expect(step.validate!).to eq(true)
-      end
-    end
-
-    describe "#define!" do
-      specify do
-        expect { step.define! }
-          .to delegate_to(step.outputs.first, :define_output_in_container!)
-          .with_arguments(step.container, index: index)
-      end
-
-      it "returns `true`" do
-        expect(step.define!).to eq(true)
-      end
-    end
-
     describe "#input_values" do
       context "when `organizer` is NOT set" do
         let(:organizer) { nil }
@@ -541,6 +368,27 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       end
     end
 
+    describe "#reassignment" do
+      let(:name) { :bar }
+
+      context "when `step` has NO reassignemnt output" do
+        let(:outputs) { [:bar] }
+
+        it "returns `nil`" do
+          expect(step.reassignment(name)).to be_nil
+        end
+      end
+
+      context "when `step` has reassignemnt output" do
+        let(:reassignemnt) { ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Values::Reassignment.new(:bar) }
+        let(:outputs) { [reassignemnt] }
+
+        it "returns that reassignemnt" do
+          expect(step.reassignment(name)).to eq(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method.cast(reassignemnt, direction: :output))
+        end
+      end
+    end
+
     describe "#service_result" do
       context "when `organizer` is NOT set" do
         let(:organizer) { nil }
@@ -578,6 +426,164 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
     describe "#printable_service" do
       it "returns printable service as string" do
         expect(step.printable_service).to eq(step.service.klass.to_s)
+      end
+    end
+
+    describe "#service_class" do
+      it "returns service class" do
+        expect(step.service_class).to eq(step.service.klass)
+      end
+    end
+
+    describe "#has_organizer?" do
+      context "when `organizer` is NOT set" do
+        let(:organizer) { nil }
+
+        it "returns `false`" do
+          expect(step.has_organizer?).to eq(false)
+        end
+      end
+
+      context "when `organizer` is set" do
+        let(:organizer) { double }
+
+        it "returns `true`" do
+          expect(step.has_organizer?).to eq(true)
+        end
+      end
+    end
+
+    describe "#has_reassignment?" do
+      let(:name) { :bar }
+
+      context "when `step` has NO reassignemnt output" do
+        let(:outputs) { [:bar] }
+
+        it "returns `false`" do
+          expect(step.has_reassignment?(name)).to eq(false)
+        end
+      end
+
+      context "when `step` has reassignemnt output" do
+        let(:outputs) { [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Values::Reassignment.new(:bar)] }
+
+        it "returns `true`" do
+          expect(step.has_reassignment?(name)).to eq(true)
+        end
+      end
+    end
+
+    describe "#trigger_callback" do
+      specify do
+        expect { step.trigger_callback }
+          .to delegate_to(step.organizer, :step)
+          .with_arguments(index)
+      end
+    end
+
+    describe "#validate!" do
+      specify do
+        expect { step.validate! }
+          .to delegate_to(step.inputs.first, :validate_as_input_for_container!)
+          .with_arguments(step.container)
+      end
+
+      specify do
+        expect { step.validate! }
+          .to delegate_to(step.outputs.first, :validate_as_output_for_container!)
+          .with_arguments(step.container)
+      end
+
+      it "returns `true`" do
+        expect(step.validate!).to eq(true)
+      end
+    end
+
+    describe "#define!" do
+      specify do
+        expect { step.define! }
+          .to delegate_to(step.outputs.first, :define_output_in_container!)
+          .with_arguments(step.container, index: index)
+      end
+
+      it "returns `true`" do
+        expect(step.define!).to eq(true)
+      end
+    end
+
+    example_group "comparison" do
+      describe "#==" do
+        context "when `other` has different class" do
+          let(:other) { "string" }
+
+          it "returns `nil`" do
+            expect(step == other).to eq(nil)
+          end
+        end
+
+        context "when `other` has different service" do
+          let(:other) { step_class.new(Class.new, **kwargs) }
+
+          it "returns `false`" do
+            expect(step == other).to eq(false)
+          end
+        end
+
+        context "when `other` has different inputs" do
+          let(:other) { step_class.new(*args, **kwargs.merge(in: [])) }
+
+          it "returns `false`" do
+            expect(step == other).to eq(false)
+          end
+        end
+
+        context "when `other` has different outputs" do
+          let(:other) { step_class.new(*args, **kwargs.merge(out: [])) }
+
+          it "returns `false`" do
+            expect(step == other).to eq(false)
+          end
+        end
+
+        context "when `other` has different index" do
+          let(:other) { step_class.new(*args, **kwargs.merge(index: 1)) }
+
+          it "returns `false`" do
+            expect(step == other).to eq(false)
+          end
+        end
+
+        context "when `other` has different container" do
+          let(:other) { step_class.new(*args, **kwargs.merge(container: Class.new)) }
+
+          it "returns `false`" do
+            expect(step == other).to eq(false)
+          end
+        end
+
+        context "when `other` has different organizer" do
+          let(:other) { step_class.new(*args, **kwargs.merge(organizer: nil)) }
+
+          it "returns `false`" do
+            expect(step == other).to eq(false)
+          end
+        end
+
+        context "when `other` has different extra kwargs" do
+          let(:other) { step_class.new(*args, **kwargs.merge(fallback: false)) }
+
+          it "returns `false`" do
+            expect(step == other).to eq(false)
+          end
+        end
+
+        context "when `other` has same attributes" do
+          let(:other) { step_class.new(*args, **kwargs) }
+
+          it "returns `true`" do
+            expect(step == other).to eq(true)
+          end
+        end
       end
     end
 

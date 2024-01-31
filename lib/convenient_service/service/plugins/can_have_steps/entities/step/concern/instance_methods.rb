@@ -16,36 +16,6 @@ module ConvenientService
                 include Support::Delegate
 
                 ##
-                # @return [Boolean]
-                #
-                delegate :success?, to: :result
-
-                ##
-                # @return [Boolean]
-                #
-                delegate :failure?, to: :result
-
-                ##
-                # @return [Boolean]
-                #
-                delegate :error?, to: :result
-
-                ##
-                # @return [Boolean]
-                #
-                delegate :not_success?, to: :result
-
-                ##
-                # @return [Boolean]
-                #
-                delegate :not_failure?, to: :result
-
-                ##
-                # @return [Boolean]
-                #
-                delegate :not_error?, to: :result
-
-                ##
                 # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data]
                 #
                 delegate :data, to: :result
@@ -107,6 +77,36 @@ module ConvenientService
                 delegate :extra_kwargs, to: :params
 
                 ##
+                # @return [Boolean]
+                #
+                delegate :success?, to: :result
+
+                ##
+                # @return [Boolean]
+                #
+                delegate :failure?, to: :result
+
+                ##
+                # @return [Boolean]
+                #
+                delegate :error?, to: :result
+
+                ##
+                # @return [Boolean]
+                #
+                delegate :not_success?, to: :result
+
+                ##
+                # @return [Boolean]
+                #
+                delegate :not_failure?, to: :result
+
+                ##
+                # @return [Boolean]
+                #
+                delegate :not_error?, to: :result
+
+                ##
                 # @param args [Array<Object>]
                 # @param kwargs [Hash{Symbol => Object}]
                 # @return [void]
@@ -117,48 +117,10 @@ module ConvenientService
                 end
 
                 ##
-                # @param other [Object] Can be any type.
-                # @return [Boolean, nil]
-                #
-                def ==(other)
-                  return unless other.instance_of?(self.class)
-
-                  return false if service != other.service
-                  return false if inputs != other.inputs
-                  return false if outputs != other.outputs
-                  return false if index != other.index
-                  return false if container != other.container
-                  return false if organizer(raise_when_missing: false) != other.organizer(raise_when_missing: false)
-                  return false if extra_kwargs != other.extra_kwargs
-
-                  true
-                end
-
-                ##
-                # @return [Boolean]
-                #
-                def has_organizer?
-                  Utils.to_bool(organizer(raise_when_missing: false))
-                end
-
-                ##
-                # @return [Boolean]
-                # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepHasNoOrganizer]
-                #
-                def has_reassignment?(name)
-                  outputs.any? { |output| output.reassignment?(name) }
-                end
-
-                ##
-                # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method, nil]
-                # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepHasNoOrganizer]
-                #
-                def reassignment(name)
-                  outputs.find { |output| output.reassignment?(name) }
-                end
-
-                ##
                 # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Structs::Params]
+                #
+                # @internal
+                #   TODO: Direct specs.
                 #
                 def params
                   @params ||= resolve_params
@@ -205,6 +167,14 @@ module ConvenientService
                 end
 
                 ##
+                # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method, nil]
+                # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepHasNoOrganizer]
+                #
+                def reassignment(name)
+                  outputs.find { |output| output.reassignment?(name) }
+                end
+
+                ##
                 # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
                 # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepHasNoOrganizer]
                 #
@@ -234,6 +204,21 @@ module ConvenientService
                 end
 
                 ##
+                # @return [Boolean]
+                #
+                def has_organizer?
+                  Utils.to_bool(organizer(raise_when_missing: false))
+                end
+
+                ##
+                # @return [Boolean]
+                # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepHasNoOrganizer]
+                #
+                def has_reassignment?(name)
+                  outputs.any? { |output| output.reassignment?(name) }
+                end
+
+                ##
                 # @return [void]
                 # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepHasNoOrganizer]
                 #
@@ -258,6 +243,24 @@ module ConvenientService
                 #
                 def define!
                   outputs.each { |output| output.define_output_in_container!(container, index: index) }
+
+                  true
+                end
+
+                ##
+                # @param other [Object] Can be any type.
+                # @return [Boolean, nil]
+                #
+                def ==(other)
+                  return unless other.instance_of?(self.class)
+
+                  return false if service != other.service
+                  return false if inputs != other.inputs
+                  return false if outputs != other.outputs
+                  return false if index != other.index
+                  return false if container != other.container
+                  return false if organizer(raise_when_missing: false) != other.organizer(raise_when_missing: false)
+                  return false if extra_kwargs != other.extra_kwargs
 
                   true
                 end
