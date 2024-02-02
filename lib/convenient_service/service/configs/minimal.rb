@@ -58,7 +58,8 @@ module ConvenientService
             use ConvenientService::Plugins::Service::HasJSendResult::Concern
 
             use ConvenientService::Plugins::Service::CanHaveSteps::Concern
-            use ConvenientService::Plugins::Service::CanHaveSequentialSteps::Concern
+            # use ConvenientService::Plugins::Service::CanHaveSequentialSteps::Concern
+            use ConvenientService::Plugins::Service::CanHaveConnectedSteps::Concern
           end
 
           middlewares :initialize do
@@ -71,7 +72,8 @@ module ConvenientService
 
             use ConvenientService::Plugins::Service::RaisesOnNotResultReturnValue::Middleware
 
-            use ConvenientService::Plugins::Service::CanHaveSequentialSteps::Middleware
+            # use ConvenientService::Plugins::Service::CanHaveSequentialSteps::Middleware
+            use ConvenientService::Plugins::Service::CanHaveConnectedSteps::Middleware
           end
 
           middlewares :step do

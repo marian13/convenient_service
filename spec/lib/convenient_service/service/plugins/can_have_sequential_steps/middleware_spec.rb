@@ -50,7 +50,17 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSequentialSteps::Midd
             klass.class_exec(middleware) do |middleware|
               include ConvenientService::Service::Configs::Standard
 
+              concerns do
+                replace \
+                  ConvenientService::Service::Plugins::CanHaveConnectedSteps::Concern,
+                  ConvenientService::Service::Plugins::CanHaveSequentialSteps::Concern
+              end
+
               middlewares :result do
+                replace \
+                  ConvenientService::Service::Plugins::CanHaveConnectedSteps::Middleware,
+                  middleware
+
                 observe middleware
               end
 
@@ -95,7 +105,17 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSequentialSteps::Midd
             klass.class_exec(first_step, second_step, middleware) do |first_step, second_step, middleware|
               include ConvenientService::Service::Configs::Standard
 
+              concerns do
+                replace \
+                  ConvenientService::Service::Plugins::CanHaveConnectedSteps::Concern,
+                  ConvenientService::Service::Plugins::CanHaveSequentialSteps::Concern
+              end
+
               middlewares :result do
+                replace \
+                  ConvenientService::Service::Plugins::CanHaveConnectedSteps::Middleware,
+                  middleware
+
                 observe middleware
               end
 
@@ -187,7 +207,17 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSequentialSteps::Midd
             klass.class_exec(first_step, second_step, middleware) do |first_step, second_step, middleware|
               include ConvenientService::Service::Configs::Standard
 
+              concerns do
+                replace \
+                  ConvenientService::Service::Plugins::CanHaveConnectedSteps::Concern,
+                  ConvenientService::Service::Plugins::CanHaveSequentialSteps::Concern
+              end
+
               middlewares :result do
+                replace \
+                  ConvenientService::Service::Plugins::CanHaveConnectedSteps::Middleware,
+                  middleware
+
                 observe middleware
               end
 

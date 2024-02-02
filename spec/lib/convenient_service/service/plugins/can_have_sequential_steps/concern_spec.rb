@@ -12,6 +12,18 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSequentialSteps::Conc
   let(:service_class) do
     Class.new do
       include ConvenientService::Service::Configs::Minimal
+
+      concerns do
+        replace \
+          ConvenientService::Service::Plugins::CanHaveConnectedSteps::Concern,
+          ConvenientService::Service::Plugins::CanHaveSequentialSteps::Concern
+      end
+
+      middlewares :result do
+        replace \
+          ConvenientService::Service::Plugins::CanHaveConnectedSteps::Middleware,
+          ConvenientService::Service::Plugins::CanHaveSequentialSteps::Middleware
+      end
     end
   end
 
