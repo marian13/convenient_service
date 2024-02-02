@@ -106,7 +106,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#around-class_method" title="around (class method)">.<strong>around</strong>(type, &amp;block)  &#x21d2; Object </a>
+      <a href="#around-class_method" title="around (class method)">.<strong>around</strong>(type, &amp;block)  &#x21d2; ConvenientService::Common::Plugins::HasCallbacks::Entities::Callback </a>
     
 
     
@@ -148,24 +148,46 @@
       <div class="method_details first">
   <h3 class="signature first" id="around-class_method">
   
-    .<strong>around</strong>(type, &amp;block)  &#x21d2; <tt>Object</tt> 
+    .<strong>around</strong>(type, &amp;block)  &#x21d2; <tt><span class='object_link'><a href="../HasCallbacks/Entities/Callback.html" title="ConvenientService::Common::Plugins::HasCallbacks::Entities::Callback (class)">ConvenientService::Common::Plugins::HasCallbacks::Entities::Callback</a></span></tt> 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../HasCallbacks/Entities/Callback.html" title="ConvenientService::Common::Plugins::HasCallbacks::Entities::Callback (class)">ConvenientService::Common::Plugins::HasCallbacks::Entities::Callback</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-11
-12
-13</pre>
+16
+17
+18</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/has_around_callbacks/concern.rb', line 11</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/has_around_callbacks/concern.rb', line 16</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_around'>around</span><span class='lparen'>(</span><span class='id identifier rubyid_type'>type</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="../../Plugins.html" title="ConvenientService::Common::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../HasCallbacks.html" title="ConvenientService::Common::Plugins::HasCallbacks (module)">HasCallbacks</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../HasCallbacks/Entities.html" title="ConvenientService::Common::Plugins::HasCallbacks::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../HasCallbacks/Entities/Callback.html" title="ConvenientService::Common::Plugins::HasCallbacks::Entities::Callback (class)">Callback</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../HasCallbacks/Entities/Callback.html#initialize-instance_method" title="ConvenientService::Common::Plugins::HasCallbacks::Entities::Callback#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>types:</span> <span class='lbracket'>[</span><span class='symbol'>:around</span><span class='comma'>,</span> <span class='id identifier rubyid_type'>type</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='label'>block:</span> <span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_tap'>tap</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_callback'>callback</span><span class='op'>|</span> <span class='id identifier rubyid_callbacks'>callbacks</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_callback'>callback</span> <span class='rbrace'>}</span>
@@ -180,7 +202,7 @@
 </div>
 
       <div id="footer">
-  Generated on Fri Feb  2 16:23:55 2024 by
+  Generated on Fri Feb  2 17:52:46 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.2.3).
 </div>

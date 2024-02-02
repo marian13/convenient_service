@@ -350,7 +350,7 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_sequential_steps/concern.rb', line 29</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_steps'>steps</span>
-  <span class='ivar'>@steps</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="Entities.html" title="ConvenientService::Service::Plugins::CanHaveSequentialSteps::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/StepCollection.html" title="ConvenientService::Service::Plugins::CanHaveSequentialSteps::Entities::StepCollection (class)">StepCollection</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Entities/StepCollection.html#initialize-instance_method" title="ConvenientService::Service::Plugins::CanHaveSequentialSteps::Entities::StepCollection#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>container:</span> <span class='kw'>self</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_internals_class'>internals_class</span><span class='period'>.</span><span class='id identifier rubyid_cache'>cache</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='symbol'>:steps</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='const'><span class='object_link'><a href="Entities.html" title="ConvenientService::Service::Plugins::CanHaveSequentialSteps::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/StepCollection.html" title="ConvenientService::Service::Plugins::CanHaveSequentialSteps::Entities::StepCollection (class)">StepCollection</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Entities/StepCollection.html#initialize-instance_method" title="ConvenientService::Service::Plugins::CanHaveSequentialSteps::Entities::StepCollection#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>container:</span> <span class='kw'>self</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -541,7 +541,7 @@ Returns <code>nil</code> when index is out of range.</p>
 </div>
 
       <div id="footer">
-  Generated on Fri Feb  2 16:23:55 2024 by
+  Generated on Fri Feb  2 17:52:46 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.2.3).
 </div>
