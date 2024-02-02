@@ -8,6 +8,11 @@ module ConvenientService
           include Support::Concern
 
           class_methods do
+            ##
+            # @api public
+            #
+            # @return [ConvenientService::Common::Plugins::HasCallbacks::Entities::Callback]
+            #
             def around(type, &block)
               Plugins::HasCallbacks::Entities::Callback.new(types: [:around, type], block: block).tap { |callback| callbacks << callback }
             end

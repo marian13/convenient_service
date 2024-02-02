@@ -41,7 +41,7 @@ module ConvenientService
             #   end
             # end
             #
-            around_callbacks = entity.callbacks.for([:around, method])
+            around_callbacks = callbacks.for([:around, method])
 
             ##
             #
@@ -131,6 +131,12 @@ module ConvenientService
             ::ConvenientService.raise Exceptions::AroundCallbackChainIsNotContinued.new(callback: around_callbacks.last) if initial_around_callback.not_called?
 
             original_value
+          end
+
+          private
+
+          def callbacks
+            entity.class.callbacks
           end
         end
       end
