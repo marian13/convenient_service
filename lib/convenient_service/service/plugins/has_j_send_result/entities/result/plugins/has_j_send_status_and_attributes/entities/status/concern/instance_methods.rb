@@ -129,15 +129,22 @@ module ConvenientService
 
                         ##
                         # @return [Boolean, nil]
+                        # @raise [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status::Exceptions::ErrorHasNoBooleanRepresentation]
+                        #
+                        # @internal
+                        #   TODO: `Support::NeverReachHere`.
                         #
                         def to_bool
                           return @to_bool if defined? @to_bool
 
                           @to_bool =
                             case value
-                            when :success then true
-                            when :failure then false
-                            when :error then nil
+                            when :success
+                              true
+                            when :failure
+                              false
+                            when :error
+                              raise ::ConvenientService.raise Exceptions::ErrorHasNoBooleanRepresentation.new
                             end
                         end
                       end

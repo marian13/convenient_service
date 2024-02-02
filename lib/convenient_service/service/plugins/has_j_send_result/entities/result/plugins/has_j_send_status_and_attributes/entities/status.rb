@@ -2,6 +2,7 @@
 
 require_relative "status/commands"
 require_relative "status/concern"
+require_relative "status/exceptions"
 require_relative "status/plugins"
 
 module ConvenientService
