@@ -1192,6 +1192,19 @@
     </li>
   
 </ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Exceptions/ErrorHasNoBooleanRepresentation.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status::Exceptions::ErrorHasNoBooleanRepresentation (class)">ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status::Exceptions::ErrorHasNoBooleanRepresentation</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
 
 </div><table class="source_code">
   <tr>
@@ -1199,28 +1212,34 @@
       <pre class="lines">
 
 
-133
-134
-135
-136
 137
 138
 139
 140
 141
-142</pre>
+142
+143
+144
+145
+146
+147
+148
+149</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/has_j_send_status_and_attributes/entities/status/concern/instance_methods.rb', line 133</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/has_j_send_status_and_attributes/entities/status/concern/instance_methods.rb', line 137</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_bool'>to_bool</span>
   <span class='kw'>return</span> <span class='ivar'>@to_bool</span> <span class='kw'>if</span> <span class='kw'>defined?</span> <span class='ivar'>@to_bool</span>
 
   <span class='ivar'>@to_bool</span> <span class='op'>=</span>
     <span class='kw'>case</span> <span class='id identifier rubyid_value'>value</span>
-    <span class='kw'>when</span> <span class='symbol'>:success</span> <span class='kw'>then</span> <span class='kw'>true</span>
-    <span class='kw'>when</span> <span class='symbol'>:failure</span> <span class='kw'>then</span> <span class='kw'>false</span>
-    <span class='kw'>when</span> <span class='symbol'>:error</span> <span class='kw'>then</span> <span class='kw'>nil</span>
+    <span class='kw'>when</span> <span class='symbol'>:success</span>
+      <span class='kw'>true</span>
+    <span class='kw'>when</span> <span class='symbol'>:failure</span>
+      <span class='kw'>false</span>
+    <span class='kw'>when</span> <span class='symbol'>:error</span>
+      <span class='id identifier rubyid_raise'>raise</span> <span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='period'>.</span><span class='id identifier rubyid_raise'><span class='object_link'><a href="../../../../../../../../../../../ConvenientService.html#raise-instance_method" title="ConvenientService#raise (method)">raise</a></span></span> <span class='const'><span class='object_link'><a href="../Exceptions.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status::Exceptions (module)">Exceptions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Exceptions/ErrorHasNoBooleanRepresentation.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status::Exceptions::ErrorHasNoBooleanRepresentation (class)">ErrorHasNoBooleanRepresentation</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../../../../../../../../../Exception.html#new-class_method" title="ConvenientService::Exception.new (method)">new</a></span></span>
     <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -1389,7 +1408,7 @@
 </div>
 
       <div id="footer">
-  Generated on Fri Feb  2 17:52:48 2024 by
+  Generated on Fri Feb  2 18:19:39 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.2.3).
 </div>
