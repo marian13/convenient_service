@@ -27,7 +27,7 @@ module ConvenientService
             # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::StepCollection]
             #
             def steps
-              @steps ||= Entities::StepCollection.new(container: self)
+              internals_class.cache.fetch(:steps) { Entities::StepCollection.new(container: self) }
             end
           end
 
