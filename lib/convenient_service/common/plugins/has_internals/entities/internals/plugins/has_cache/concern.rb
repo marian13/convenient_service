@@ -15,6 +15,18 @@ module ConvenientService
                 module Concern
                   include Support::Concern
 
+                  class_methods do
+                    ##
+                    # @return [ConvenientService::Support::Cache]
+                    #
+                    # @internal
+                    #   TODO: `Support::Cache.create(backend: :thread_safe_hash)`.
+                    #
+                    def cache
+                      @cache ||= Support::Cache.create(backend: :hash)
+                    end
+                  end
+
                   instance_methods do
                     ##
                     # @return [ConvenientService::Support::Cache]
