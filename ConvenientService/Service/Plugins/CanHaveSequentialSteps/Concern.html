@@ -183,7 +183,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#steps-instance_method" title="#steps (instance method)">#<strong>steps</strong>  &#x21d2; Array&lt;ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step&gt; </a>
+      <a href="#steps-instance_method" title="#steps (instance method)">#<strong>steps</strong>  &#x21d2; ConvenientService::Service::Plugins::CanHaveSteps::Entities::StepСollection </a>
     
 
     
@@ -435,12 +435,12 @@ Returns <code>nil</code> when index is out of range.</p>
       <pre class="lines">
 
 
-71
-72
-73</pre>
+68
+69
+70</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_sequential_steps/concern.rb', line 71</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_sequential_steps/concern.rb', line 68</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_step'>step</span><span class='lparen'>(</span><span class='id identifier rubyid_index'>index</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_steps'>steps</span><span class='lbracket'>[</span><span class='id identifier rubyid_index'>index</span><span class='rbracket'>]</span>
@@ -453,7 +453,7 @@ Returns <code>nil</code> when index is out of range.</p>
       <div class="method_details ">
   <h3 class="signature " id="steps-instance_method">
   
-    #<strong>steps</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="../CanHaveSteps/Entities/Step.html" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step (class)">ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step</a></span>&gt;</tt> 
+    #<strong>steps</strong>  &#x21d2; <tt><span class='object_link'><a href="../CanHaveSteps/Entities/Step.html" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step (class)">ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step</a></span>Сollection</tt> 
   
 
   
@@ -486,7 +486,7 @@ Returns <code>nil</code> when index is out of range.</p>
     <li>
       
       
-        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="../CanHaveSteps/Entities/Step.html" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step (class)">ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step</a></span>&gt;</tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="../CanHaveSteps/Entities/Step.html" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step (class)">ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step</a></span>Сollection</tt>)</span>
       
       
       
@@ -509,26 +509,26 @@ Returns <code>nil</code> when index is out of range.</p>
       <pre class="lines">
 
 
+46
+47
+48
 49
 50
 51
 52
 53
-54
-55
-56
-57</pre>
+54</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_sequential_steps/concern.rb', line 49</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_sequential_steps/concern.rb', line 46</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_steps'>steps</span>
   <span class='id identifier rubyid_internals'>internals</span><span class='period'>.</span><span class='id identifier rubyid_cache'>cache</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='symbol'>:steps</span><span class='rparen'>)</span> <span class='kw'>do</span>
     <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span>
       <span class='period'>.</span><span class='id identifier rubyid_steps'>steps</span>
       <span class='period'>.</span><span class='id identifier rubyid_tap'>tap</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:commit!</span><span class='rparen'>)</span>
-      <span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_step'>step</span><span class='op'>|</span> <span class='id identifier rubyid_step'>step</span><span class='period'>.</span><span class='id identifier rubyid_with_organizer'>with_organizer</span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
-      <span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
+      <span class='period'>.</span><span class='id identifier rubyid_with_organizer'>with_organizer</span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span>
+      <span class='period'>.</span><span class='id identifier rubyid_tap'>tap</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:commit!</span><span class='rparen'>)</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -541,7 +541,7 @@ Returns <code>nil</code> when index is out of range.</p>
 </div>
 
       <div id="footer">
-  Generated on Sun Feb  4 22:25:47 2024 by
+  Generated on Sun Feb  4 22:50:02 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.2.3).
 </div>

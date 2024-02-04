@@ -358,6 +358,28 @@
 </li>
 
       
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#with_organizer-instance_method" title="#with_organizer (instance method)">#<strong>with_organizer</strong>(organizer)  &#x21d2; ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::StepCollection </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
     </ul>
   
 
@@ -596,17 +618,17 @@
       <pre class="lines">
 
 
-122
-123
-124
-125
-126
-127
-128
-129</pre>
+132
+133
+134
+135
+136
+137
+138
+139</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_sequential_steps/entities/step_collection.rb', line 122</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_sequential_steps/entities/step_collection.rb', line 132</span>
 
 <span class='kw'>def</span> <span class='op'>==</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='rparen'>)</span>
@@ -688,12 +710,12 @@
       <pre class="lines">
 
 
-112
-113
-114</pre>
+122
+123
+124</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_sequential_steps/entities/step_collection.rb', line 112</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_sequential_steps/entities/step_collection.rb', line 122</span>
 
 <span class='kw'>def</span> <span class='op'>[]</span><span class='lparen'>(</span><span class='id identifier rubyid_index'>index</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_steps'>steps</span><span class='lbracket'>[</span><span class='id identifier rubyid_index'>index</span><span class='rbracket'>]</span>
@@ -752,21 +774,25 @@
       <pre class="lines">
 
 
-74
-75
-76
-77
-78
-79
-80</pre>
+82
+83
+84
+85
+86
+87
+88
+89
+90</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_sequential_steps/entities/step_collection.rb', line 74</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_sequential_steps/entities/step_collection.rb', line 82</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_commit!'>commit!</span>
   <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='id identifier rubyid_committed?'>committed?</span>
 
   <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:define!</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
+
+  <span class='id identifier rubyid_freeze'>freeze</span>
 
   <span class='kw'>true</span>
 <span class='kw'>end</span></pre>
@@ -812,12 +838,12 @@
       <pre class="lines">
 
 
-87
-88
-89</pre>
+97
+98
+99</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_sequential_steps/entities/step_collection.rb', line 87</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_sequential_steps/entities/step_collection.rb', line 97</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_committed?'>committed?</span>
   <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_frozen?'>frozen?</span>
@@ -961,12 +987,12 @@
       <pre class="lines">
 
 
-97
-98
-99</pre>
+107
+108
+109</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_sequential_steps/entities/step_collection.rb', line 97</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_sequential_steps/entities/step_collection.rb', line 107</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_each'>each</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
@@ -1051,12 +1077,79 @@
 </table>
 </div>
     
+      <div class="method_details ">
+  <h3 class="signature " id="with_organizer-instance_method">
+  
+    #<strong>with_organizer</strong>(organizer)  &#x21d2; <tt>ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::StepCollection</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>organizer</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../../Service.html" title="ConvenientService::Service (module)">ConvenientService::Service</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::StepCollection</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+66
+67
+68</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_sequential_steps/entities/step_collection.rb', line 66</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_with_organizer'>with_organizer</span><span class='lparen'>(</span><span class='id identifier rubyid_organizer'>organizer</span><span class='rparen'>)</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='label'>container:</span> <span class='id identifier rubyid_container'>container</span><span class='comma'>,</span> <span class='label'>steps:</span> <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_step'>step</span><span class='op'>|</span> <span class='id identifier rubyid_step'>step</span><span class='period'>.</span><span class='id identifier rubyid_with_organizer'>with_organizer</span><span class='lparen'>(</span><span class='id identifier rubyid_organizer'>organizer</span><span class='rparen'>)</span> <span class='rbrace'>}</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
   </div>
 
 </div>
 
       <div id="footer">
-  Generated on Sun Feb  4 22:25:55 2024 by
+  Generated on Sun Feb  4 22:50:10 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.2.3).
 </div>
