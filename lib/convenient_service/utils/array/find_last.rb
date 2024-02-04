@@ -6,7 +6,7 @@ module ConvenientService
       class FindLast < Support::Command
         ##
         # @!attribute [r] array
-        #   @return [Array]
+        #   @return [Array, Enumerable]
         #
         attr_reader :array
 
@@ -17,7 +17,7 @@ module ConvenientService
         attr_reader :block
 
         ##
-        # @param array [Array]
+        # @param array [Array, Enumerable]
         # @param block [Proc, nil]
         # @return [void]
         #
@@ -29,8 +29,13 @@ module ConvenientService
         ##
         # @return [Object] Can be any type.
         #
+        # @note Works with custom `Enumerable` objects.
+        # @see https://ruby-doc.org/core-2.7.0/Enumerable.html
+        #
         def call
-          array.reverse.find(&block)
+          array.reverse_each { |item| return item if block.call(item) }
+
+          nil
         end
       end
     end
