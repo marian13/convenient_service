@@ -14,6 +14,8 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSequentialSteps::Enti
     end
   end
 
+  let(:organizer) { container.new }
+
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
 
@@ -119,6 +121,18 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSequentialSteps::Enti
       end
     end
 
+    describe "#with_organizer" do
+      let(:step_collection) { described_class.new(container: container, steps: steps) }
+      let(:steps) { [step] }
+
+      specify do
+        expect { step_collection.with_organizer(organizer) }
+          .to delegate_to(step_collection.class, :new)
+          .with_arguments(container: container, steps: steps.map { |step| step.with_organizer(organizer) })
+          .and_return_its_value
+      end
+    end
+
     describe "#commit!" do
       let(:step_collection) { described_class.new(container: container, steps: steps) }
       let(:steps) { [step] }
@@ -126,6 +140,13 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSequentialSteps::Enti
       context "when step collection is NOT committed" do
         it "returns `true`" do
           expect(step_collection.commit!).to eq(true)
+        end
+
+        ##
+        # NOTE: Stubs on `freeze` generate warnings.
+        #
+        it "freezes step collection" do
+          expect { step_collection.commit! }.to change(step_collection, :frozen?).from(false).to(true)
         end
 
         ##

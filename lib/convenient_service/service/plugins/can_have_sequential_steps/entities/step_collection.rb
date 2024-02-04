@@ -60,6 +60,14 @@ module ConvenientService
             end
 
             ##
+            # @param organizer [ConvenientService::Service]
+            # @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::StepCollection]
+            #
+            def with_organizer(organizer)
+              self.class.new(container: container, steps: steps.map { |step| step.with_organizer(organizer) })
+            end
+
+            ##
             # @api public
             #
             # @return [Boolean] true if called for the first time, false otherwise (similarly as Kernel#require).
@@ -75,6 +83,8 @@ module ConvenientService
               return false if committed?
 
               steps.each(&:define!).freeze
+
+              freeze
 
               true
             end

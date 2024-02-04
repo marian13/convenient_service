@@ -84,7 +84,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSequentialSteps::Conc
       specify { expect { service_instance.steps }.to delegate_to(service_class.steps, :commit!) }
 
       it "returns `self.class.steps` with `organizer` set to each of them" do
-        expect(service_instance.steps).to eq(service_class.steps.map { |step| step.with_organizer(service_instance) })
+        expect(service_instance.steps).to eq(service_class.steps.with_organizer(service_instance))
       end
 
       specify { expect { service_instance.steps }.to cache_its_value }
