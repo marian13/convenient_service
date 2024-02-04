@@ -59,8 +59,11 @@ module ConvenientService
           ##
           # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step]
           #
+          # @internal
+          #   NOTE: Custom `Enumerable` objects do NOT implement the `last` method. It is available for `Array` instances.
+          #
           def just_take_last_step_since_all_steps_are_successful
-            entity.steps.last
+            entity.steps[-1]
           end
         end
       end
