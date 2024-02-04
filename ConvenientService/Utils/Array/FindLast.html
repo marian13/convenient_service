@@ -265,7 +265,7 @@
         <span class='name'>array</span>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="../Array.html" title="ConvenientService::Utils::Array (module)">Array</a></span></tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="../Array.html" title="ConvenientService::Utils::Array (module)">Array</a></span></tt>, <tt>Enumerable</tt>)</span>
       
       
       
@@ -415,7 +415,14 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Can be any type.</p>
+    
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p>Works with custom <code>Enumerable</code> objects.</p>
+</div>
+  </div>
+
+<p>Returns Can be any type.</p>
 
 
   </div>
@@ -440,21 +447,32 @@
   
 </ul>
 
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://ruby-doc.org/core-2.7.0/Enumerable.html" target="_parent" title="https://ruby-doc.org/core-2.7.0/Enumerable.html">https://ruby-doc.org/core-2.7.0/Enumerable.html</a></li>
+    
+  </ul>
+
 </div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-32
-33
-34</pre>
+35
+36
+37
+38
+39</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/array/find_last.rb', line 32</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/array/find_last.rb', line 35</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span>
-  <span class='id identifier rubyid_array'>array</span><span class='period'>.</span><span class='id identifier rubyid_reverse'>reverse</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_array'>array</span><span class='period'>.</span><span class='id identifier rubyid_reverse_each'>reverse_each</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_item'>item</span><span class='op'>|</span> <span class='kw'>return</span> <span class='id identifier rubyid_item'>item</span> <span class='kw'>if</span> <span class='id identifier rubyid_block'>block</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_item'>item</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
+
+  <span class='kw'>nil</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -466,7 +484,7 @@
 </div>
 
       <div id="footer">
-  Generated on Fri Feb  2 18:19:39 2024 by
+  Generated on Sun Feb  4 22:18:57 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.2.3).
 </div>
