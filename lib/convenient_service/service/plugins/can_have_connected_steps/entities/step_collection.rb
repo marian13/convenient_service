@@ -45,6 +45,13 @@ module ConvenientService
             end
 
             ##
+            # @return [Array<Integer>]
+            #
+            def indices
+              expression.indices
+            end
+
+            ##
             # @api private
             #
             # @param args [Array<Object>]

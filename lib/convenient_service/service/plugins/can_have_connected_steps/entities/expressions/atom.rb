@@ -29,6 +29,13 @@ module ConvenientService
               end
 
               ##
+              # @return [Array<Integer>]
+              #
+              def indices
+                [step.index]
+              end
+
+              ##
               # @return [Boolean]
               #
               def success?

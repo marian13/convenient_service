@@ -37,6 +37,13 @@ module ConvenientService
               end
 
               ##
+              # @return [Array<Integer>]
+              #
+              def indices
+                left_expression.indices[..-2] + [Utils::Array.wrap(left_expression.indices[-1]) + right_expression.indices]
+              end
+
+              ##
               # @return [Boolean]
               #
               def success?

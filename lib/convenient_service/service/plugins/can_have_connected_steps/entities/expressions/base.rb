@@ -20,6 +20,11 @@ module ConvenientService
               abstract_method :result
 
               ##
+              # @return [Array<Integer>]
+              #
+              abstract_method :indices
+
+              ##
               # @return [Boolean]
               #
               abstract_method :success?

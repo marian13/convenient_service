@@ -21,6 +21,13 @@ module ConvenientService
               end
 
               ##
+              # @return [Array<Integer>]
+              #
+              def indices
+                []
+              end
+
+              ##
               # @raise [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::None::Exceptions::NoneHasNoStatus]
               #
               def success?

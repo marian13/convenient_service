@@ -37,6 +37,13 @@ module ConvenientService
               end
 
               ##
+              # @return [Array<Integer>]
+              #
+              def indices
+                left_expression.indices + right_expression.indices
+              end
+
+              ##
               # @return [Boolean]
               #
               def success?
