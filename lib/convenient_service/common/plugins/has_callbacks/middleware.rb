@@ -8,6 +8,11 @@ module ConvenientService
           intended_for any_method, scope: any_scope, entity: any_entity
 
           ##
+          # @param args [Array<Object>]
+          # @param kwargs [Hash{Symbol => Object}]
+          # @param block [Proc, nil]
+          # @return [Object] Can be any type.
+          #
           # @internal
           #   TODO: Move to command.
           #
@@ -21,7 +26,7 @@ module ConvenientService
             #   end
             # end
             #
-            entity.callbacks.for([:before, method]).each { |callback| callback.call_in_context_with_arguments(entity, *args, **kwargs, &block) }
+            callbacks.for([:before, method]).each { |callback| callback.call_in_context_with_arguments(entity, *args, **kwargs, &block) }
 
             original_value = chain.next(*args, **kwargs, &block)
 
@@ -37,9 +42,18 @@ module ConvenientService
             #   end
             # end
             #
-            entity.callbacks.for([:after, method]).reverse_each { |callback| callback.call_in_context_with_value_and_arguments(entity, original_value, *args, **kwargs, &block) }
+            callbacks.for([:after, method]).reverse_each { |callback| callback.call_in_context_with_value_and_arguments(entity, original_value, *args, **kwargs, &block) }
 
             original_value
+          end
+
+          private
+
+          ##
+          # @return [ConvenientService::Common::Plugins::HasCallbacks::Entities::CallbackCollection]
+          #
+          def callbacks
+            entity.class.callbacks
           end
         end
       end

@@ -233,7 +233,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSequentialSteps::Midd
         end
 
         it "returns result of last step" do
-          expect(method_value).to eq(service_instance.steps.last.result)
+          expect(method_value).to eq(service_instance.steps[-1].result)
         end
 
         it "returns result with unchecked status" do

@@ -213,7 +213,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasAroundCallbacks::Middlewar
 
           let(:exception_message) do
             <<~TEXT
-              Around callback chain is NOT continued from `#{service_instance.callbacks.for([:around, :result]).first.block.source_location}`.
+              Around callback chain is NOT continued from `#{service_class.callbacks.for([:around, :result]).first.block.source_location}`.
 
               Did you forget to call `chain.yield`? For example:
 
@@ -264,7 +264,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasAroundCallbacks::Middlewar
 
           let(:exception_message) do
             <<~TEXT
-              Around callback chain is NOT continued from `#{service_instance.callbacks.for([:around, :result])[1].block.source_location}`.
+              Around callback chain is NOT continued from `#{service_class.callbacks.for([:around, :result])[1].block.source_location}`.
 
               Did you forget to call `chain.yield`? For example:
 
@@ -307,7 +307,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasAroundCallbacks::Middlewar
 
           let(:exception_message) do
             <<~TEXT
-              Around callback chain is NOT continued from `#{service_instance.callbacks.for([:around, :result]).last.block.source_location}`.
+              Around callback chain is NOT continued from `#{service_class.callbacks.for([:around, :result]).last.block.source_location}`.
 
               Did you forget to call `chain.yield`? For example:
 

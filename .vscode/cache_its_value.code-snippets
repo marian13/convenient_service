@@ -4,20 +4,12 @@
   // NOTE: More information about VS Code Snippets can be found here:
   // - https://code.visualstudio.com/docs/editor/userdefinedsnippets
   //
-  " RSpec matcher": {
+  "cache_its_value RSpec matcher": {
     "scope": "ruby",
-    "prefix": "service",
+    "prefix": "cache_its_value",
     "body": [
-      "class $1",
-      "  include ::ConvenientService::Standard::Config",
-      "",
-      "  step $2",
-      "",
-      "  step :result",
-      "",
-      "  def result"
-      "    $3",
-      "  end",
+      "specify do",
+      "  expect { $1 }.to cache_its_value",
       "end"
     ],
     "description": "`cache_its_value` - a custom RSpec matcher to verify caching"

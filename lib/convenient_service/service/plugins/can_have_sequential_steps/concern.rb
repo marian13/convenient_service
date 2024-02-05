@@ -18,7 +18,7 @@ module ConvenientService
             # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step]
             #
             def step(*args, **kwargs)
-              steps.register(*args, **kwargs)
+              steps.register(steps.create(*args, **kwargs))
             end
 
             ##
@@ -27,7 +27,7 @@ module ConvenientService
             # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::StepCollection]
             #
             def steps
-              @steps ||= Entities::StepCollection.new(container: self)
+              internals_class.cache.fetch(:steps) { Entities::StepCollection.new(container: self) }
             end
           end
 
@@ -41,18 +41,15 @@ module ConvenientService
             # @note `steps` are frozen.
             # @see https://userdocs.convenientservice.org/faq#is-it-possible-to-modify-the-step-collection-from-a-callback
             #
-            # @return [Array<ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step>]
-            #
-            # @internal
-            #   IMPORTANT: `map` result is NOT wrapped by `StepCollection` in order to NOT expose too much internals to the end-user.
+            # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::StepСollection]
             #
             def steps
               internals.cache.fetch(:steps) do
                 self.class
                   .steps
                   .tap(&:commit!)
-                  .map { |step| step.with_organizer(self) }
-                  .freeze
+                  .with_organizer(self)
+                  .tap(&:commit!)
               end
             end
 

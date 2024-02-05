@@ -4,8 +4,10 @@ require "spec_helper"
 
 require "convenient_service"
 
-# rubocop:disable RSpec/NestedGroups
+# rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status::Concern::InstanceMethods do
+  include ConvenientService::RSpec::Helpers::IgnoringException
+
   include ConvenientService::RSpec::PrimitiveMatchers::CacheItsValue
 
   let(:status) { ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status.new(value: value, result: result) }
@@ -304,12 +306,23 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           context "when `value` is `:error`" do
             let(:value) { :error }
 
-            it "returns `nil`" do
-              expect(status.to_bool).to be_nil
+            let(:exception_message) do
+              <<~TEXT
+                Error results have no boolean representation.
+
+                They are semantically similar to exceptions.
+              TEXT
+            end
+
+            it "raises `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status::Exceptions::ErrorHasNoBooleanRepresentation`" do
+              expect { status.to_bool }
+                .to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status::Exceptions::ErrorHasNoBooleanRepresentation)
+                .with_message(exception_message)
             end
 
             specify do
-              expect { status.to_bool }.to cache_its_value
+              expect { ignoring_exception(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status::Exceptions::ErrorHasNoBooleanRepresentation) { status.to_bool } }
+                .to delegate_to(ConvenientService, :raise)
             end
           end
         end
@@ -317,4 +330,4 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
     end
   end
 end
-# rubocop:enable RSpec/NestedGroups
+# rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers

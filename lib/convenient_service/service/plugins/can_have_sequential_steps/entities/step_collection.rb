@@ -43,12 +43,28 @@ module ConvenientService
             # @param kwargs [Hash{Symbol => Object}]
             # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step]
             #
-            def register(*args, **kwargs)
-              step = step_class.new(*args, **kwargs.merge(container: container, index: next_available_index))
+            def create(*args, **kwargs)
+              step_class.new(*args, **kwargs.merge(container: container, index: next_available_index))
+            end
 
+            ##
+            # @api private
+            #
+            # @param step [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step]
+            # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step]
+            #
+            def register(step)
               steps << step
 
               step
+            end
+
+            ##
+            # @param organizer [ConvenientService::Service]
+            # @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::StepCollection]
+            #
+            def with_organizer(organizer)
+              self.class.new(container: container, steps: steps.map { |step| step.with_organizer(organizer) })
             end
 
             ##
@@ -67,6 +83,8 @@ module ConvenientService
               return false if committed?
 
               steps.each(&:define!).freeze
+
+              freeze
 
               true
             end
