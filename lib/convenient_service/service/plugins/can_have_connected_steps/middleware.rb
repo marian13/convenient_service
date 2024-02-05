@@ -8,18 +8,18 @@ module ConvenientService
           intended_for :result, entity: :service
 
           ##
-          # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step]
+          # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
           #
           def next(...)
             return chain.next(...) if entity.steps.none?
 
-            entity.steps_expression.each_evaluated_step do |step|
+            entity.steps.each_evaluated_step do |step|
               step.mark_as_completed!
 
               step.trigger_callback
             end
 
-            entity.steps_expression.result
+            entity.steps.result
           end
         end
       end

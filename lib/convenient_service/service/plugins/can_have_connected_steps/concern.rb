@@ -161,7 +161,7 @@ module ConvenientService
             ##
             # @api private
             #
-            # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::StepCollection]
+            # @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::StepCollection]
             #
             def steps
               @steps ||= Entities::StepCollection.new(container: self)
@@ -169,24 +169,6 @@ module ConvenientService
           end
 
           instance_methods do
-            ##
-            # @api private
-            #
-            #
-            #
-            # @internal
-            #   TODO: Name.
-            #
-            def steps_expression
-              internals.cache.fetch(:steps_expression) do
-                self.class
-                  .steps
-                  .tap(&:commit!)
-                  .with_organizer(self)
-                  .tap(&:commit!)
-              end
-            end
-
             ##
             # @api public
             #
@@ -196,16 +178,15 @@ module ConvenientService
             # @note `steps` are frozen.
             # @see https://userdocs.convenientservice.org/faq#is-it-possible-to-modify-the-step-collection-from-a-callback
             #
-            # @return [Array<ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step>]
-            #
-            # @internal
-            #   IMPORTANT: `map` result is NOT wrapped by `StepCollection` in order to NOT expose too much internals to the end-user.
+            # @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::StepCollection]
             #
             def steps
-              internals.cache.fetch(:steps) do
-                steps_expression
-                  .to_a
-                  .freeze
+              internals.cache.fetch(:steps_expression) do
+                self.class
+                  .steps
+                  .tap(&:commit!)
+                  .with_organizer(self)
+                  .tap(&:commit!)
               end
             end
 
@@ -219,7 +200,7 @@ module ConvenientService
             # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step]
             #
             # @note This method was initially designed as a hook (callback trigger).
-            # @see ConvenientService::Service::Plugins::CanHaveSequentialSteps::Middleware#next
+            # @see ConvenientService::Service::Plugins::CanHaveConnectedSteps::Middleware#next
             #
             def step(index)
               steps[index]

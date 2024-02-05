@@ -130,6 +130,28 @@ module ConvenientService
               expression.each_evaluated_step(&block)
             end
 
+            ##
+            # @return [Array<ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step>]
+            #
+            def steps
+              @steps ||= to_a
+            end
+
+            ##
+            # @api public
+            #
+            # Returns step by index.
+            #
+            # @param index [Integer]
+            # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step]
+            #
+            # @note Works in a similar way as `Array#[]`.
+            # @see https://ruby-doc.org/core-2.7.0/Array.html#method-i-5B-5D
+            #
+            def [](index)
+              steps[index]
+            end
+
             private
 
             ##
