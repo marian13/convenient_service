@@ -88,6 +88,8 @@ module ConvenientService
 
               expression.each_step(&:define!).freeze
 
+              freeze
+
               true
             end
 
@@ -134,7 +136,7 @@ module ConvenientService
             # @return [Array<ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step>]
             #
             def steps
-              @steps ||= to_a
+              to_a
             end
 
             ##
