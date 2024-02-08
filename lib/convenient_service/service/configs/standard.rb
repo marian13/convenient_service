@@ -106,6 +106,16 @@ module ConvenientService
             use ConvenientService::Plugins::Common::EnsuresNegatedJSendResult::Middleware
           end
 
+          ##
+          # TODO:
+          #   `after :step do |step|` is executed after step result is calculated.
+          #    This completely makes sence and is useful for debugging for example.
+          #
+          #   But `before :step do` is alos executed after step result is calculated.
+          #   That confuses the end-users a lot.
+          #   Probably a dedicated plugin is needed?
+          #   Or to forbid `before :step do`?
+          #
           middlewares :step do
             use ConvenientService::Plugins::Common::HasCallbacks::Middleware
             use ConvenientService::Plugins::Common::HasAroundCallbacks::Middleware

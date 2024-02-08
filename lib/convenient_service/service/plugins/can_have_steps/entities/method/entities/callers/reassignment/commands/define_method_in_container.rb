@@ -50,6 +50,12 @@ module ConvenientService
                           end
                         RUBY
 
+                        <<~RUBY.tap { |code| reassigned_methods.module_eval(code, __FILE__, __LINE__ + 1) }
+                          def #{name}
+                            super
+                          end
+                        RUBY
+
                         true
                       end
 

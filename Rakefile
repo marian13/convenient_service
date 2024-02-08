@@ -50,5 +50,97 @@ task :playground do
   #
   ARGV.clear
 
+  class SuccessService
+    include ::ConvenientService::Standard::Config
+
+    def result
+      puts "run `SuccessService`"
+
+      success
+    end
+  end
+
+  class FailureService
+    include ::ConvenientService::Standard::Config
+
+    def result
+      puts "run `FailureService`"
+
+      failure
+    end
+  end
+
+  class ErrorService
+    include ::ConvenientService::Standard::Config
+
+    def result
+      puts "run `ErrorService`"
+
+      error
+    end
+  end
+
+  class ServiceWithSteps
+    include ::ConvenientService::Standard::Config
+
+    after :step do |step|
+      puts "step #{step.printable_service} (index: #{step.index})"
+    end
+
+    step FailureService # 0 - run
+
+    or_step :failure_method # 1 - run
+
+    or_step SuccessService # 2 - run
+
+    or_step FailureService # 3 - skip
+
+    or_step SuccessService # 4 - skip
+
+    step :success_method # 5 - run
+
+    or_step FailureService # 6 - skip
+
+    or_step FailureService # 7 - skip
+
+    or_step SuccessService # 8 - skip
+
+    step SuccessService # 9 - run
+
+    step FailureService # 10 - run --- How to make higher precedence of `or`?
+
+    or_step FailureService # 11 - run
+
+    or_step :failure_method # 12 - run
+
+    or_not_step FailureService # 13 - run
+
+    or_step FailureService # 14 - skip
+
+    or_step SuccessService # 15 - skip
+
+    step :success_method # 16 - run
+
+    not_step FailureService # 17 - run
+
+    def success_method
+      puts "run `success_method`"
+
+      success
+    end
+
+    def failure_method
+      puts "run `failure_method`"
+
+      failure
+    end
+
+    def error_method
+      puts "run `error_method`"
+
+      error
+    end
+  end
+
   IRB.start(__FILE__)
 end

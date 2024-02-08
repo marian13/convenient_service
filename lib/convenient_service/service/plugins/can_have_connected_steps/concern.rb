@@ -181,7 +181,7 @@ module ConvenientService
             # @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::StepCollection]
             #
             def steps
-              internals.cache.fetch(:steps_expression) do
+              internals.cache.fetch(:steps) do
                 self.class
                   .steps
                   .tap(&:commit!)

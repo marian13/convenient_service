@@ -41,6 +41,8 @@ module ConvenientService
             # @raise [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::None::Exceptions::NoneHasNoResult]
             #
             def result
+              byebug
+
               expression.result
             end
 

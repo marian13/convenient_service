@@ -53,6 +53,11 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base]
               #
               abstract_method :with_organizer
+
+              ##
+              # @return [String]
+              #
+              abstract_method :inspect
             end
           end
         end

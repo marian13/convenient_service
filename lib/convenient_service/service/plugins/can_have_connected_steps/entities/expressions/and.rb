@@ -96,6 +96,13 @@ module ConvenientService
               def with_organizer(organizer)
                 self.class.new(left_expression.with_organizer(organizer), right_expression.with_organizer(organizer))
               end
+
+              ##
+              # @return [String]
+              #
+              def inspect
+                "#{left_expression.inspect} and #{right_expression.inspect}"
+              end
             end
           end
         end

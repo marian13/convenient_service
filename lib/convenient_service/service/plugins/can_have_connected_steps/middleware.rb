@@ -14,9 +14,11 @@ module ConvenientService
             return chain.next(...) if entity.steps.none?
 
             entity.steps.each_evaluated_step do |step|
-              step.mark_as_completed!
+              step.output_values.each_pair { |key, value| entity.internals.cache.scope(:step_output_values).write(key, value) }
 
               step.trigger_callback
+
+              step.mark_as_completed!
             end
 
             entity.steps.result

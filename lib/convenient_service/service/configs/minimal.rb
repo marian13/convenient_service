@@ -100,6 +100,36 @@ module ConvenientService
             use ConvenientService::Plugins::Service::CanHaveMethodSteps::Middleware
           end
 
+          middlewares :not_step, scope: :class do
+            use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
+
+            use ConvenientService::Plugins::Service::CanHaveMethodSteps::Middleware
+          end
+
+          middlewares :and_step, scope: :class do
+            use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
+
+            use ConvenientService::Plugins::Service::CanHaveMethodSteps::Middleware
+          end
+
+          middlewares :and_not_step, scope: :class do
+            use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
+
+            use ConvenientService::Plugins::Service::CanHaveMethodSteps::Middleware
+          end
+
+          middlewares :or_step, scope: :class do
+            use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
+
+            use ConvenientService::Plugins::Service::CanHaveMethodSteps::Middleware
+          end
+
+          middlewares :or_not_step, scope: :class do
+            use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
+
+            use ConvenientService::Plugins::Service::CanHaveMethodSteps::Middleware
+          end
+
           class self::Internals
             include Core
 

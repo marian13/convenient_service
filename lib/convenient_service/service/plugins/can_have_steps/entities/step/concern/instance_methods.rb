@@ -175,7 +175,12 @@ module ConvenientService
                 # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepHasNoOrganizer]
                 #
                 def output_values
-                  @output_values ||= result.unsafe_data.to_h.slice(*outputs.map(&:key).map(&:to_sym))
+                  @output_values ||=
+                    if result.success?(mark_status_as_checked: false)
+                      outputs.map { |output| [output.name.to_sym, result.unsafe_data[output.key.to_sym]] }.to_h
+                    else
+                      {}
+                    end
                 end
 
                 ##

@@ -36,6 +36,16 @@ module ConvenientService
                     end
                   RUBY
 
+                  <<~RUBY.tap { |code| container.klass.class_eval(code, __FILE__, __LINE__ + 1) }
+                    def #{name}
+                      method_name = :#{name}
+
+                      ::ConvenientService.raise #{not_existing_step_result_data_attribute_error}.new(step: step, key: method_name) unless internals.cache.scope(:step_output_values).exist?(method_name)
+
+                      internals.cache.scope(:step_output_values).read(method_name)
+                    end
+                  RUBY
+
                   true
                 end
 

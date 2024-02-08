@@ -71,7 +71,9 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base]
               #
               def each_evaluated_step(&block)
-                yield(step.tap(&:result))
+                yield(step)
+
+                step.tap(&:result) # For before hook? For completed step?
 
                 self
               end
@@ -81,6 +83,13 @@ module ConvenientService
               #
               def with_organizer(organizer)
                 self.class.new(step.with_organizer(organizer))
+              end
+
+              ##
+              # @return [String]
+              #
+              def inspect
+                "step(#{step.index})"
               end
             end
           end

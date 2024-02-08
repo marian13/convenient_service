@@ -82,6 +82,13 @@ module ConvenientService
               def with_organizer(organizer)
                 self.class.new(expression.with_organizer(organizer))
               end
+
+              ##
+              # @return [String]
+              #
+              def inspect
+                "not #{expression.inspect}"
+              end
             end
           end
         end
