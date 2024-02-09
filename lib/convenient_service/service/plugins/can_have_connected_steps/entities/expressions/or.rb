@@ -108,6 +108,13 @@ module ConvenientService
               def inspect
                 "#{left_expression.inspect} or #{right_expression.inspect}"
               end
+
+              ##
+              # @return [Boolean]
+              #
+              def or?
+                true
+              end
             end
           end
         end

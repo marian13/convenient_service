@@ -89,6 +89,13 @@ module ConvenientService
               def inspect
                 "not #{expression.inspect}"
               end
+
+              ##
+              # @return [Boolean]
+              #
+              def not?
+                true
+              end
             end
           end
         end

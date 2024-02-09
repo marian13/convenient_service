@@ -34,21 +34,21 @@ module ConvenientService
 
                         return false if Utils::Module.instance_method_defined?(reassigned_methods, method, private: true)
 
-                        <<~RUBY.tap { |code| reassigned_methods.module_eval(code, __FILE__, __LINE__ + 1) }
-                          def #{name}
-                            step =
-                              steps
-                                .select { |step| step.has_reassignment?(__method__) }
-                                .select(&:completed?)
-                                .last
+                        # <<~RUBY.tap { |code| reassigned_methods.module_eval(code, __FILE__, __LINE__ + 1) }
+                        #   def #{name}
+                        #     step =
+                        #       steps
+                        #         .select { |step| step.has_reassignment?(__method__) }
+                        #         .select(&:completed?)
+                        #         .last
 
-                            return super unless step
+                        #     return super unless step
 
-                            key = step.reassignment(__method__).key.to_sym
+                        #     key = step.reassignment(__method__).key.to_sym
 
-                            step.result.unsafe_data[key]
-                          end
-                        RUBY
+                        #     step.result.unsafe_data[key]
+                        #   end
+                        # RUBY
 
                         <<~RUBY.tap { |code| reassigned_methods.module_eval(code, __FILE__, __LINE__ + 1) }
                           def #{name}

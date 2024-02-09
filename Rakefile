@@ -142,5 +142,162 @@ task :playground do
     end
   end
 
+  class ServiceWithGroupedSteps
+    include ::ConvenientService::Standard::Config
+
+    after :step do |step|
+      puts "step #{step.printable_service} (index: #{step.index})"
+    end
+
+    group do
+      step FailureService
+
+      or_step FailureService
+
+      or_step SuccessService
+
+      or_step FailureService
+    end
+
+    and_group do
+      step FailureService
+
+      or_step FailureService
+
+      or_step SuccessService
+
+      or_step FailureService
+    end
+
+    def success_method
+      puts "run `success_method`"
+
+      success
+    end
+
+    def failure_method
+      puts "run `failure_method`"
+
+      failure
+    end
+
+    def error_method
+      puts "run `error_method`"
+
+      error
+    end
+  end
+
+  class ServiceWithOrGroupedSteps
+    include ::ConvenientService::Standard::Config
+
+    after :step do |step|
+      puts "step #{step.printable_service} (index: #{step.index})"
+    end
+
+    group do
+      step FailureService
+
+      or_step FailureService
+
+      or_step FailureService
+
+      or_step FailureService
+    end
+
+    or_group do
+      step FailureService
+
+      or_step FailureService
+
+      or_step SuccessService
+
+      or_step FailureService
+    end
+
+    or_group do
+      step FailureService
+
+      or_step SuccessService
+
+      or_step FailureService
+
+      or_step FailureService
+    end
+
+    def success_method
+      puts "run `success_method`"
+
+      success
+    end
+
+    def failure_method
+      puts "run `failure_method`"
+
+      failure
+    end
+
+    def error_method
+      puts "run `error_method`"
+
+      error
+    end
+  end
+
+  class ServiceWithNestedGroupedSteps
+    include ::ConvenientService::Standard::Config
+
+    after :step do |step|
+      puts "step #{step.printable_service} (index: #{step.index})"
+    end
+
+    group do
+      step FailureService
+
+      or_step FailureService
+
+      or_group do
+        step SuccessService
+
+        and_not_step FailureService
+      end
+    end
+
+    and_group do
+      group do
+        step FailureService
+
+        or_step SuccessService
+      end
+
+      or_step SuccessService
+
+      or_step FailureService
+    end
+
+    and_not_group do
+      step FailureService
+    end
+
+    def success_method
+      puts "run `success_method`"
+
+      success
+    end
+
+    def failure_method
+      puts "run `failure_method`"
+
+      failure
+    end
+
+    def error_method
+      puts "run `error_method`"
+
+      error
+    end
+  end
+
+
   IRB.start(__FILE__)
 end

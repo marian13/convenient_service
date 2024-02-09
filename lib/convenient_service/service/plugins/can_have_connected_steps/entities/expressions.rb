@@ -7,3 +7,5 @@ require_relative "expressions/atom"
 require_relative "expressions/and"
 require_relative "expressions/not"
 require_relative "expressions/or"
+
+require_relative "expressions/group"

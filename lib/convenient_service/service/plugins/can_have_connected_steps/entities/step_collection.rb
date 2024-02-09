@@ -19,6 +19,14 @@ module ConvenientService
             ##
             # @api private
             #
+            # @!attribute [r] steps
+            #   @return [Array<ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step>]
+            #
+            attr_reader :steps
+
+            ##
+            # @api private
+            #
             # @!attribute [r] expression
             #   @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base]
             #
@@ -28,11 +36,13 @@ module ConvenientService
             # @api private
             #
             # @param container [Class<ConvenientService::Service>]
+            # @param steps [Array<ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step>]
             # @param expression [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base]
             # @return [void]
             #
-            def initialize(container:, expression: Entities::Expressions::None.new)
+            def initialize(container:, steps: [], expression: Entities::Expressions::None.new)
               @container = container
+              @steps = steps
               @expression = expression
             end
 
@@ -41,8 +51,6 @@ module ConvenientService
             # @raise [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::None::Exceptions::NoneHasNoResult]
             #
             def result
-              byebug
-
               expression.result
             end
 
@@ -61,8 +69,11 @@ module ConvenientService
             # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step]
             #
             def create(*args, **kwargs)
-              step_class.new(*args, **kwargs.merge(container: container, index: next_available_index))
-                .tap { self.next_available_index += 1 }
+              step = step_class.new(*args, **kwargs.merge(container: container, index: next_available_index))
+
+              steps << step
+
+              step
             end
 
             ##
@@ -70,7 +81,7 @@ module ConvenientService
             # @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::StepCollection]
             #
             def with_organizer(organizer)
-              self.class.new(container: container, expression: expression.with_organizer(organizer))
+              self.class.new(container: container, steps: steps, expression: expression.with_organizer(organizer))
             end
 
             ##
@@ -135,13 +146,6 @@ module ConvenientService
             end
 
             ##
-            # @return [Array<ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step>]
-            #
-            def steps
-              to_a
-            end
-
-            ##
             # @api public
             #
             # Returns step by index.
@@ -159,16 +163,10 @@ module ConvenientService
             private
 
             ##
-            # @!attribute [r] next_available_index
-            #   @return [Integer]
-            #
-            attr_writer :next_available_index
-
-            ##
             # @return [Integer]
             #
             def next_available_index
-              @next_available_index ||= 0
+              steps.size
             end
 
             ##

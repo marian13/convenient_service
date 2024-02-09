@@ -6,65 +6,54 @@ module ConvenientService
       module CanHaveConnectedSteps
         module Entities
           module Expressions
-            class And < Entities::Expressions::Base
+            class Group < Entities::Expressions::Base
               ##
-              # @!attribute [r] left_expression
+              # @!attribute [r] expression
               #   @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base]
               #
-              attr_reader :left_expression
+              attr_reader :expression
 
               ##
-              # @!attribute [r] right_expression
-              #   @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base]
-              #
-              attr_reader :right_expression
-
-              ##
-              # @param left_expression [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base]
-              # @param right_expression [[ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base]
+              # @param expression [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base]
               # @return [void]
               #
-              def initialize(left_expression, right_expression)
-                @left_expression = left_expression
-                @right_expression = right_expression
+              def initialize(expression)
+                @expression = expression
               end
 
               ##
               # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
               #
               def result
-                left_expression.success? ? right_expression.result : left_expression.result
+                expression.result
               end
 
               ##
               # @return [Array<Integer>]
               #
               def indices
-                left_expression.indices + right_expression.indices
+                expression.indices
               end
 
               ##
               # @return [Boolean]
               #
               def success?
-                left_expression.success? && right_expression.success?
+                expression.success?
               end
 
               ##
               # @return [Boolean]
               #
               def failure?
-                return true if left_expression.failure?
-                return false if left_expression.error?
-
-                right_expression.failure?
+                expression.failure?
               end
 
               ##
               # @return [Boolean]
               #
               def error?
-                left_expression.error? || right_expression.error?
+                expression.error?
               end
 
               ##
@@ -72,8 +61,7 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base]
               #
               def each_step(&block)
-                left_expression.each_step(&block)
-                right_expression.each_step(&block)
+                expression.each_step(&block)
 
                 self
               end
@@ -83,9 +71,7 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base]
               #
               def each_evaluated_step(&block)
-                left_expression.each_evaluated_step(&block)
-
-                right_expression.each_evaluated_step(&block) if left_expression.success?
+                expression.each_evaluated_step(&block)
 
                 self
               end
@@ -94,20 +80,20 @@ module ConvenientService
               # @param organizer [ConvenientService::Service]
               #
               def with_organizer(organizer)
-                self.class.new(left_expression.with_organizer(organizer), right_expression.with_organizer(organizer))
+                self.class.new(expression.with_organizer(organizer))
               end
 
               ##
               # @return [String]
               #
               def inspect
-                "#{left_expression.inspect} and #{right_expression.inspect}"
+                "(#{expression.inspect})"
               end
 
               ##
               # @return [Boolean]
               #
-              def and?
+              def group?
                 true
               end
             end

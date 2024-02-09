@@ -24,17 +24,17 @@ module ConvenientService
                   ##
                   # NOTE: Assignement in the beginning for easier debugging.
                   #
-                  <<~RUBY.tap { |code| container.klass.class_eval(code, __FILE__, __LINE__ + 1) }
-                    def #{name}
-                      step, key, method_name = steps[#{index}], :#{key}, :#{name}
+                  # <<~RUBY.tap { |code| container.klass.class_eval(code, __FILE__, __LINE__ + 1) }
+                  #   def #{name}
+                  #     step, key, method_name = steps[#{index}], :#{key}, :#{name}
 
-                      ::ConvenientService.raise #{not_completed_step_error}.new(step: step, method_name: method_name) unless step.completed?
+                  #     ::ConvenientService.raise #{not_completed_step_error}.new(step: step, method_name: method_name) unless step.completed?
 
-                      ::ConvenientService.raise #{not_existing_step_result_data_attribute_error}.new(step: step, key: key) unless step.result.unsafe_data.has_attribute?(key)
+                  #     ::ConvenientService.raise #{not_existing_step_result_data_attribute_error}.new(step: step, key: key) unless step.result.unsafe_data.has_attribute?(key)
 
-                      step.result.unsafe_data[key]
-                    end
-                  RUBY
+                  #     step.result.unsafe_data[key]
+                  #   end
+                  # RUBY
 
                   <<~RUBY.tap { |code| container.klass.class_eval(code, __FILE__, __LINE__ + 1) }
                     def #{name}

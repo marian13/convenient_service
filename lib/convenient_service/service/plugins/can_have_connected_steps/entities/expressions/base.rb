@@ -58,6 +58,41 @@ module ConvenientService
               # @return [String]
               #
               abstract_method :inspect
+
+              ##
+              # @return [Boolean]
+              #
+              def not?
+                false
+              end
+
+              ##
+              # @return [Boolean]
+              #
+              def and?
+                false
+              end
+
+              ##
+              # @return [Boolean]
+              #
+              def or?
+                false
+              end
+
+              ##
+              # @return [Boolean]
+              #
+              def group?
+                false
+              end
+
+              ##
+              # @return [Boolean]
+              #
+              def none?
+                false
+              end
             end
           end
         end

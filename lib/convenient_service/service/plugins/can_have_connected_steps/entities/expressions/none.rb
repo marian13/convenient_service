@@ -70,6 +70,13 @@ module ConvenientService
               def with_organizer(organizer)
                 self
               end
+
+              ##
+              # @return [Boolean]
+              #
+              def none?
+                true
+              end
             end
           end
         end

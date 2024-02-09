@@ -89,7 +89,7 @@ module ConvenientService
               # @return [String]
               #
               def inspect
-                "step(#{step.index})"
+                "steps[#{step.index}]"
               end
             end
           end

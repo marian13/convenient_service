@@ -125,10 +125,26 @@ module ConvenientService
               step = steps.create(*args, **kwargs)
 
               steps.expression =
-                Entities::Expressions::Or.new(
-                  steps.expression,
-                  Entities::Expressions::Atom.new(step)
-                )
+                if steps.expression.and?
+                  Entities::Expressions::And.new(
+                    steps.expression.left_expression,
+                    Entities::Expressions::Or.new(
+                      steps.expression.right_expression,
+                      Entities::Expressions::Atom.new(step)
+                    )
+                  )
+                else
+                  Entities::Expressions::Or.new(
+                    steps.expression,
+                    Entities::Expressions::Atom.new(step)
+                  )
+                end
+
+              # steps.expression =
+              #   Entities::Expressions::Or.new(
+              #     steps.expression,
+              #     Entities::Expressions::Atom.new(step)
+              #   )
 
               step
             end
@@ -148,14 +164,196 @@ module ConvenientService
               step = steps.create(*args, **kwargs)
 
               steps.expression =
-                Entities::Expressions::Or.new(
-                  steps.expression,
+                if steps.expression.and?
+                  Entities::Expressions::And.new(
+                    steps.expression.left_expression,
+                    Entities::Expressions::Or.new(
+                      steps.expression.right_expression,
+                      Entities::Expressions::Not.new(
+                        Entities::Expressions::Atom.new(step)
+                      )
+                    )
+                  )
+                else
+                  Entities::Expressions::Or.new(
+                    steps.expression,
+                    Entities::Expressions::Not.new(
+                      Entities::Expressions::Atom.new(step)
+                    )
+                  )
+                end
+
+              # steps.expression =
+              #   Entities::Expressions::Or.new(
+              #     steps.expression,
+              #     Entities::Expressions::Not.new(
+              #       Entities::Expressions::Atom.new(step)
+              #     )
+              #   )
+
+              step
+            end
+
+            ##
+            # @api public
+            #
+            # @param block [Proc]
+            # @return [nil]
+            #
+            def group(&block)
+              if steps.any?
+                previous_expression = steps.expression
+
+                steps.expression = Entities::Expressions::None.new
+
+                yield
+
+                steps.expression =
+                  Entities::Expressions::And.new(
+                    previous_expression,
+                    Entities::Expressions::Group.new(steps.expression)
+                  )
+              else
+                yield
+
+                steps.expression =
+                  Entities::Expressions::Group.new(steps.expression)
+              end
+
+              nil
+            end
+
+            ##
+            # @api public
+            #
+            # @param block [Proc]
+            # @return [nil]
+            #
+            def not_group(&block)
+              if steps.any?
+                previous_expression = steps.expression
+
+                steps.expression = Entities::Expressions::None.new
+
+                yield
+
+                steps.expression =
+                  Entities::Expressions::And.new(
+                    previous_expression,
+                    Entities::Expressions::Not.new(
+                      Entities::Expressions::Group.new(steps.expression)
+                    )
+                  )
+              else
+                yield
+
+                steps.expression =
                   Entities::Expressions::Not.new(
-                    Entities::Expressions::Atom.new(step)
+                    Entities::Expressions::Group.new(steps.expression)
+                  )
+              end
+
+              nil
+            end
+
+            ##
+            # @api public
+            #
+            # @param block [Proc]
+            # @return [nil]
+            #
+            def and_group(&block)
+              raise Exceptions::FirstStepIsNotSet.new(container: self) if steps.none?
+
+              previous_expression = steps.expression
+
+              steps.expression = Entities::Expressions::None.new
+
+              yield
+
+              steps.expression =
+                Entities::Expressions::And.new(
+                  previous_expression,
+                  Entities::Expressions::Group.new(steps.expression)
+                )
+
+              nil
+            end
+
+            ##
+            # @api public
+            #
+            # @param block [Proc]
+            # @return [nil]
+            #
+            def and_not_group(&block)
+              raise Exceptions::FirstStepIsNotSet.new(container: self) if steps.none?
+
+              previous_expression = steps.expression
+
+              steps.expression = Entities::Expressions::None.new
+
+              yield
+
+              steps.expression =
+                Entities::Expressions::And.new(
+                  previous_expression,
+                  Entities::Expressions::Not.new(
+                    Entities::Expressions::Group.new(steps.expression)
                   )
                 )
 
-              step
+              nil
+            end
+
+            ##
+            # @api public
+            #
+            # @param block [Proc]
+            # @return [nil]
+            #
+            def or_group(&block)
+              raise Exceptions::FirstStepIsNotSet.new(container: self) if steps.none?
+
+              previous_expression = steps.expression
+
+              steps.expression = Entities::Expressions::None.new
+
+              yield
+
+              steps.expression =
+                Entities::Expressions::Or.new(
+                  previous_expression,
+                  Entities::Expressions::Group.new(steps.expression)
+                )
+
+              nil
+            end
+
+            ##
+            # @api public
+            #
+            # @param block [Proc]
+            # @return [nil]
+            #
+            def or_not_group(&block)
+              raise Exceptions::FirstStepIsNotSet.new(container: self) if steps.none?
+
+              previous_expression = steps.expression
+
+              steps.expression = Entities::Expressions::None.new
+
+              yield
+
+              steps.expression =
+                Entities::Expressions::Or.new(
+                  previous_expression,
+                  Entities::Expressions::Not.new(
+                    Entities::Expressions::Group.new(steps.expression)
+                  )
+                )
+
+              nil
             end
 
             ##
