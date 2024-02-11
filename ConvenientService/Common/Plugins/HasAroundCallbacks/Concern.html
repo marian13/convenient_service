@@ -161,7 +161,33 @@
   </div>
 </div>
 <div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
   
+    <li>
+      
+        <span class='name'>type</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>block</span>
+      
+      
+        <span class='type'>(<tt>Proc</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
 <p class="tag_title">Returns:</p>
 <ul class="return">
   
@@ -182,15 +208,15 @@
       <pre class="lines">
 
 
-16
-17
-18</pre>
+18
+19
+20</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/has_around_callbacks/concern.rb', line 16</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/has_around_callbacks/concern.rb', line 18</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_around'>around</span><span class='lparen'>(</span><span class='id identifier rubyid_type'>type</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-  <span class='const'><span class='object_link'><a href="../../Plugins.html" title="ConvenientService::Common::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../HasCallbacks.html" title="ConvenientService::Common::Plugins::HasCallbacks (module)">HasCallbacks</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../HasCallbacks/Entities.html" title="ConvenientService::Common::Plugins::HasCallbacks::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../HasCallbacks/Entities/Callback.html" title="ConvenientService::Common::Plugins::HasCallbacks::Entities::Callback (class)">Callback</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../HasCallbacks/Entities/Callback.html#initialize-instance_method" title="ConvenientService::Common::Plugins::HasCallbacks::Entities::Callback#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>types:</span> <span class='lbracket'>[</span><span class='symbol'>:around</span><span class='comma'>,</span> <span class='id identifier rubyid_type'>type</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='label'>block:</span> <span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_tap'>tap</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_callback'>callback</span><span class='op'>|</span> <span class='id identifier rubyid_callbacks'>callbacks</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_callback'>callback</span> <span class='rbrace'>}</span>
+  <span class='id identifier rubyid_callbacks'>callbacks</span><span class='period'>.</span><span class='id identifier rubyid_create'>create</span><span class='lparen'>(</span><span class='label'>types:</span> <span class='lbracket'>[</span><span class='symbol'>:around</span><span class='comma'>,</span> <span class='id identifier rubyid_type'>type</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='label'>block:</span> <span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -202,7 +228,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Feb 11 19:03:43 2024 by
+  Generated on Sun Feb 11 19:44:25 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.2.3).
 </div>
