@@ -22,6 +22,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSequentialSteps::Enti
     subject { described_class }
 
     it { is_expected.to include_module(::Enumerable) }
+    it { is_expected.to include_module(ConvenientService::Support::Copyable) }
   end
 
   example_group "class methods" do
@@ -127,8 +128,8 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSequentialSteps::Enti
 
       specify do
         expect { step_collection.with_organizer(organizer) }
-          .to delegate_to(step_collection.class, :new)
-          .with_arguments(container: container, steps: steps.map { |step| step.with_organizer(organizer) })
+          .to delegate_to(step_collection, :copy)
+          .with_arguments(overrides: {kwargs: {steps: steps.map { |step| step.with_organizer(organizer) }}})
           .and_return_its_value
       end
     end
