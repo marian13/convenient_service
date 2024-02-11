@@ -18,7 +18,7 @@ module ConvenientService
             # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step]
             #
             def step(*args, **kwargs)
-              steps.register(steps.create(*args, **kwargs))
+              steps.create(*args, **kwargs)
             end
 
             ##

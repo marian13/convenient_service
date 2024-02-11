@@ -47,18 +47,7 @@ module ConvenientService
             #
             def create(*args, **kwargs)
               step_class.new(*args, **kwargs.merge(container: container, index: next_available_index))
-            end
-
-            ##
-            # @api private
-            #
-            # @param step [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step]
-            # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step]
-            #
-            def register(step)
-              steps << step
-
-              step
+                .tap { |step| steps << step }
             end
 
             ##
