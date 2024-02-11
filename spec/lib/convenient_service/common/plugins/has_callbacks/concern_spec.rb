@@ -61,30 +61,20 @@ RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Concern do
       end
 
       describe ".before" do
-        let(:callback) { ConvenientService::Common::Plugins::HasCallbacks::Entities::Callback.new(types: [:before, type], block: block) }
-
-        it "adds before callback to `callbacks`" do
-          service_class.before(type, &block)
-
-          expect(service_class.callbacks).to include(callback)
-        end
-
-        it "returns before callback" do
-          expect(service_class.before(type, &block)).to eq(callback)
+        specify do
+          expect { service_class.before(type, &block) }
+            .to delegate_to(service_class.callbacks, :create)
+            .with_arguments(types: [:before, type], block: block)
+            .and_return_its_value
         end
       end
 
       describe ".after" do
-        let(:callback) { ConvenientService::Common::Plugins::HasCallbacks::Entities::Callback.new(types: [:after, type], block: block) }
-
-        it "adds after callback to `callbacks`" do
-          service_class.after(type, &block)
-
-          expect(service_class.callbacks).to include(callback)
-        end
-
-        it "returns after callback" do
-          expect(service_class.after(type, &block)).to eq(callback)
+        specify do
+          expect { service_class.after(type, &block) }
+            .to delegate_to(service_class.callbacks, :create)
+            .with_arguments(types: [:after, type], block: block)
+            .and_return_its_value
         end
       end
     end

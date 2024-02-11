@@ -57,7 +57,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSequentialSteps::Conc
 
       specify do
         expect { service_class.step(*args, **kwargs) }
-          .to delegate_to(service_class.step_collection, :create)
+          .to delegate_to(service_class.steps, :create)
           .with_arguments(*args, **kwargs)
       end
     end

@@ -81,7 +81,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSequentialSteps::Enti
       it "adds `step` to `steps`" do
         step_collection.create(*args, **kwargs)
 
-        expect(step_collection.steps).to eq([step])
+        expect(step_collection.steps).to eq([step_with_index])
       end
 
       specify do

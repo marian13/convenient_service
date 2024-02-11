@@ -38,7 +38,7 @@ module ConvenientService
             # @return [Class<ConvenientService::Common::Plugins::HasCallbacks::Entities::Callback>]
             #
             def callback_class
-              ConvenientService::Common::Plugins::HasCallbacks::Entities::Callback
+              Entities::Callback
             end
 
             ##
@@ -54,13 +54,12 @@ module ConvenientService
             ##
             # @api private
             #
-            # @param callback [ConvenientService::Common::Plugins::HasCallbacks::Entities::Callback]
-            # @return [ConvenientService::Common::Plugins::HasCallbacks::Entities::CallbackCollection]
+            # @param kwargs [Hash{Symbol => Object}]
+            # @return [ConvenientService::Common::Plugins::HasCallbacks::Entities::Callback]
             #
-            def <<(callback)
-              callbacks << callback
-
-              self
+            def create(**kwargs)
+              Entities::Callback.new(**kwargs)
+                .tap { |callback| callbacks << callback }
             end
 
             ##
