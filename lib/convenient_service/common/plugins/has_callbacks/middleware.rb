@@ -5,7 +5,11 @@ module ConvenientService
     module Plugins
       module HasCallbacks
         class Middleware < MethodChainMiddleware
-          intended_for any_method, scope: any_scope, entity: any_entity
+          ##
+          # @internal
+          #   TODO: Support of callbacks for class methods.
+          #
+          intended_for any_method, entity: any_entity
 
           ##
           # @param args [Array<Object>]
