@@ -185,36 +185,16 @@ module ConvenientService
                 end
               end
 
-              class NotCompletedStep < ::ConvenientService::Exception
+              class OutMethodStepIsNotCompleted < ::ConvenientService::Exception
                 ##
                 # @param method_name [Symbol]
-                # @param step [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step]
                 # @return [void]
                 #
-                def initialize_with_kwargs(method_name:, step:)
+                def initialize_with_kwargs(method_name:)
                   message = <<~TEXT
-                    `out` method `#{method_name}` is called before its corresponding step `#{step.printable_service}` is completed.
+                    `out` method `#{method_name}` is called before its corresponding step is completed.
 
-                    Maybe it makes sense to change the steps order?
-                  TEXT
-
-                  initialize(message)
-                end
-              end
-
-              class NotExistingStepResultDataAttribute < ::ConvenientService::Exception
-                ##
-                # @param key [Symbol]
-                # @param step [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step]
-                # @return [void]
-                #
-                def initialize_with_kwargs(key:, step:)
-                  message = <<~TEXT
-                    Step `#{step.printable_service}` result does NOT return `#{key}` data attribute.
-
-                    Maybe there is a typo in `out` definition?
-
-                    Or `success` of `#{step.printable_service}` accepts a wrong key?
+                    Maybe it makes sense to change steps order?
                   TEXT
 
                   initialize(message)

@@ -10,47 +10,66 @@ module ConvenientService
               class DefineMethodInContainer < Support::Command
                 include Support::Delegate
 
-                attr_reader :method, :container, :index
+                ##
+                # @!attribute [r] method
+                #   @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method]
+                #
+                attr_reader :method
 
-                delegate :key, :name, to: :method
+                ##
+                # @!attribute [r] container
+                #   @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Service]
+                #
+                attr_reader :container
 
+                ##
+                # @!attribute [r] index
+                #   @return [Integer]
+                #
+                attr_reader :index
+
+                ##
+                # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Key]
+                #
+                delegate :key, to: :method
+
+                ##
+                # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Name]
+                #
+                delegate :name, to: :method
+
+                ##
+                # @param method [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method]
+                # @param container [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Service]
+                # @param index [Integer]
+                # @return [void]
+                #
                 def initialize(method:, container:, index:)
                   @method = method
                   @container = container
                   @index = index
                 end
 
+                ##
+                # @return [Boolean]
+                #
+                # @internal
+                #   IMPORTANT: Do NOT depend on `index` inside generated method. It breaks reassignments.
+                #
                 def call
-                  ##
-                  # NOTE: Assignement in the beginning for easier debugging.
-                  #
                   <<~RUBY.tap { |code| container.klass.class_eval(code, __FILE__, __LINE__ + 1) }
+                    ##
+                    # @return [Object] Can be any type.
+                    # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::OutMethodStepIsNotCompleted]
+                    #
                     def #{name}
-                      step, key, method_name = steps[#{index}], :#{key}, :#{name}
-
-                      ::ConvenientService.raise #{not_completed_step_error}.new(step: step, method_name: method_name) unless step.completed?
-
-                      ::ConvenientService.raise #{not_existing_step_result_data_attribute_error}.new(step: step, key: key) unless step.result.unsafe_data.has_attribute?(key)
-
-                      step.result.unsafe_data[key]
+                      internals.cache.scope(:step_output_values).fetch(__method__) do
+                        ::ConvenientService.raise ::ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::OutMethodStepIsNotCompleted.new(method_name: __method__)
+                      end
                     end
                   RUBY
 
                   true
-                end
-
-                private
-
-                def not_completed_step_error
-                  <<~RUBY.chomp
-                    ::ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::NotCompletedStep
-                  RUBY
-                end
-
-                def not_existing_step_result_data_attribute_error
-                  <<~RUBY.chomp
-                    ::ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::NotExistingStepResultDataAttribute
-                  RUBY
                 end
               end
             end
