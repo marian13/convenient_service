@@ -384,7 +384,8 @@
 66
 67
 68
-69</pre>
+69
+70</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/matcher/entities/chainings/sub_matchers/arguments/commands/apply_stub_to_track_delegations.rb', line 37</span>
@@ -418,6 +419,7 @@
 
     <span class='comment'>##
 </span>    <span class='comment'># NOTE: Imitates `and_call_original`.
+</span>    <span class='comment'># TODO: What to do when `original.call` raises an exception?
 </span>    <span class='comment'>#
 </span>    <span class='id identifier rubyid_original'>original</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_actual_args'>actual_args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_actual_kwargs'>actual_kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_actual_block'>actual_block</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_matcher'>matcher</span><span class='period'>.</span><span class='id identifier rubyid_should_call_original?'>should_call_original?</span>
   <span class='kw'>end</span>
@@ -432,7 +434,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Feb 11 19:44:36 2024 by
+  Generated on Tue Feb 13 22:58:14 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.2.3).
 </div>
