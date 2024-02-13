@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative "reassignment/commands"
-
 module ConvenientService
   module Service
     module Plugins

@@ -108,7 +108,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
 
       specify do
         expect { caller.define_output_in_container!(container, index: index, method: method) }
-          .to delegate_to(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Callers::Reassignment::Commands::DefineMethodInContainer, :call)
+          .to delegate_to(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Commands::DefineMethodInContainer, :call)
           .with_arguments(method: method, container: container, index: index)
           .and_return_its_value
       end
