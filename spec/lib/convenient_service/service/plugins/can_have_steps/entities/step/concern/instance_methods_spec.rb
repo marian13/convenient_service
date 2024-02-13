@@ -662,6 +662,109 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       end
     end
 
+    describe "#save_outputs_in_organizer!" do
+      context "when step has NO output values" do
+        let(:step_service_klass) do
+          Class.new do
+            include ConvenientService::Service::Configs::Minimal
+
+            def initialize(foo:)
+              @foo = foo
+            end
+
+            def result
+              success
+            end
+          end
+        end
+
+        let(:outputs) { [] }
+
+        specify do
+          expect { step.save_outputs_in_organizer! }
+            .not_to delegate_to(step.organizer.internals.cache.scope(:step_output_values), :write)
+        end
+      end
+
+      context "when step has one output value" do
+        let(:step_service_klass) do
+          Class.new do
+            include ConvenientService::Service::Configs::Minimal
+
+            def initialize(foo:)
+              @foo = foo
+            end
+
+            def result
+              success(data: {bar: :step_service_bar})
+            end
+          end
+        end
+
+        let(:outputs) { [:bar] }
+
+        specify do
+          expect { step.save_outputs_in_organizer! }
+            .to delegate_to(step.organizer.internals.cache.scope(:step_output_values), :write)
+            .with_arguments(step.output_values.keys.first, step.output_values.values.first)
+        end
+      end
+
+      context "when step has multiple output values" do
+        let(:step_service_klass) do
+          Class.new do
+            include ConvenientService::Service::Configs::Minimal
+
+            def initialize(foo:)
+              @foo = foo
+            end
+
+            def result
+              success(data: {bar: :step_service_bar, baz: :step_service_baz})
+            end
+          end
+        end
+
+        let(:outputs) { [:bar, :baz] }
+
+        specify do
+          expect { step.save_outputs_in_organizer! }
+            .to delegate_to(step.organizer.internals.cache.scope(:step_output_values), :write)
+            .with_arguments(step.output_values.keys[0], step.output_values.values[0])
+        end
+
+        specify do
+          expect { step.save_outputs_in_organizer! }
+            .to delegate_to(step.organizer.internals.cache.scope(:step_output_values), :write)
+            .with_arguments(step.output_values.keys[1], step.output_values.values[1])
+        end
+      end
+
+      context "when step has output with alias" do
+        let(:step_service_klass) do
+          Class.new do
+            include ConvenientService::Service::Configs::Minimal
+
+            def initialize(foo:)
+              @foo = foo
+            end
+
+            def result
+              success(data: {bar: :step_service_baz})
+            end
+          end
+        end
+
+        let(:outputs) { [{bar: :baz}] }
+
+        specify do
+          expect { step.save_outputs_in_organizer! }
+            .to delegate_to(step.organizer.internals.cache.scope(:step_output_values), :write)
+            .with_arguments(step.output_values.keys[0], step.output_values.values[0])
+        end
+      end
+    end
+
     describe "#with_organizer" do
       specify do
         expect { step.with_organizer(organizer) }

@@ -260,6 +260,21 @@ module ConvenientService
                 ##
                 # @api private
                 #
+                # @return [Boolean]
+                # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::MethodHasNoOrganizer]
+                #
+                # @internal
+                #   TODO: Create `OutputMethod`. Move `save` into it.
+                #
+                def save_outputs_in_organizer!
+                  output_values.each_pair { |key, value| organizer.internals.cache.scope(:step_output_values).write(key, value) }
+
+                  true
+                end
+
+                ##
+                # @api private
+                #
                 # @param organizer [ConvenientService::Service]
                 # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step]
                 #
@@ -288,21 +303,6 @@ module ConvenientService
                 #
                 def define!
                   outputs.each { |output| output.define_output_in_container!(container, index: index) }
-
-                  true
-                end
-
-                ##
-                # @api private
-                #
-                # @return [Boolean]
-                # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::MethodHasNoOrganizer]
-                #
-                # @internal
-                #   TODO: Create `OutputMethod`. Move `save` into it.
-                #
-                def save_outputs!
-                  output_values.each_pair { |key, value| organizer.internals.cache.scope(:step_output_values).write(key, value) }
 
                   true
                 end

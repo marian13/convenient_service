@@ -78,7 +78,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
             ##
             # NOTE: Completes the step.
             #
-            organizer.steps[0].save_outputs!
+            organizer.steps[0].save_outputs_in_organizer!
           end
 
           it "returns corresponding step service result data attribute by key" do
@@ -112,8 +112,8 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
               ##
               # NOTE: Completes the steps.
               #
-              organizer.steps[0].save_outputs!
-              organizer.steps[1].save_outputs!
+              organizer.steps[0].save_outputs_in_organizer!
+              organizer.steps[1].save_outputs_in_organizer!
             end
 
             it "returns last corresponding step service result data attribute by key" do
@@ -137,7 +137,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
             ##
             # NOTE: Completes the step.
             #
-            organizer.steps[0].save_outputs!
+            organizer.steps[0].save_outputs_in_organizer!
           end
 
           it "returns corresponding step service result data attribute by key" do
