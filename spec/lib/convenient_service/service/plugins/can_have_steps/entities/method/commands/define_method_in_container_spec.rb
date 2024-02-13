@@ -82,7 +82,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
           end
 
           it "returns corresponding step service result data attribute by key" do
-            expect(organizer.foo).to eq(organizer.steps[0].result.unsafe_data[method.key])
+            expect(organizer.foo).to eq(organizer.steps[0].result.unsafe_data[:foo])
           end
 
           context "when multiple corresponding steps are completed" do
@@ -117,8 +117,31 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
             end
 
             it "returns last corresponding step service result data attribute by key" do
-              expect(organizer.foo).to eq(organizer.steps[1].result.unsafe_data[method.key])
+              expect(organizer.foo).to eq(organizer.steps[1].result.unsafe_data[:foo])
             end
+          end
+        end
+
+        context "when method has alias" do
+          let(:container) do
+            Class.new.tap do |klass|
+              klass.class_exec(first_step_service) do |first_step_service|
+                include ConvenientService::Service::Configs::Minimal
+
+                step first_step_service, out: {foo: :bar}
+              end
+            end
+          end
+
+          before do
+            ##
+            # NOTE: Completes the step.
+            #
+            organizer.steps[0].save_outputs!
+          end
+
+          it "returns corresponding step service result data attribute by key" do
+            expect(organizer.bar).to eq(organizer.steps[0].result.unsafe_data[:foo])
           end
         end
       end

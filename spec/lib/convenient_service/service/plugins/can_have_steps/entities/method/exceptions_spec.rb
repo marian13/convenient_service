@@ -19,5 +19,4 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
   specify { expect(described_class::MethodIsNotInputMethod).to be_descendant_of(ConvenientService::Exception) }
   specify { expect(described_class::MethodIsNotOutputMethod).to be_descendant_of(ConvenientService::Exception) }
   specify { expect(described_class::OutMethodStepIsNotCompleted).to be_descendant_of(ConvenientService::Exception) }
-  specify { expect(described_class::NotExistingStepResultDataAttribute).to be_descendant_of(ConvenientService::Exception) }
 end

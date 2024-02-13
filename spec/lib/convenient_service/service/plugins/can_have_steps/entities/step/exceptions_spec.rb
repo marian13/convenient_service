@@ -8,4 +8,5 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
   include ConvenientService::RSpec::PrimitiveMatchers::BeDescendantOf
 
   specify { expect(described_class::StepHasNoOrganizer).to be_descendant_of(ConvenientService::Exception) }
+  specify { expect(described_class::StepResultDataNotExistingAttribute).to be_descendant_of(ConvenientService::Exception) }
 end
