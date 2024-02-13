@@ -22,6 +22,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSequentialSteps::Enti
     subject { described_class }
 
     it { is_expected.to include_module(::Enumerable) }
+    it { is_expected.to include_module(ConvenientService::Support::Copyable) }
   end
 
   example_group "class methods" do
@@ -77,29 +78,35 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSequentialSteps::Enti
         expect(step_collection.create(*args, **kwargs)).to eq(step_with_index)
       end
 
+      it "adds `step` to `steps`" do
+        step_collection.create(*args, **kwargs)
+
+        expect(step_collection.steps).to eq([step_with_index])
+      end
+
       specify do
         expect { step_collection.create(*args, **kwargs) }
           .to delegate_to(container.step_class, :new)
           .with_arguments(*args, **kwargs.merge(container: container, index: 0))
       end
 
-      context "when previous created `step` is registered" do
+      context "when called twice" do
         let(:previous_step) { step_collection.create(*args, **kwargs) }
         let(:next_step) { step_collection.create(*args, **kwargs) }
 
         before do
-          step_collection.register(previous_step)
+          previous_step
         end
 
         it "increments index for next created `step`" do
           expect(next_step.index).to eq(1)
         end
 
-        context "when multiple previous created steps are registered" do
+        context "when called more than twice" do
           let(:other_previous_step) { step_collection.create(*args, **kwargs) }
 
           before do
-            step_collection.register(other_previous_step)
+            other_previous_step
           end
 
           it "increments index for next created `step`" do
@@ -109,26 +116,14 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSequentialSteps::Enti
       end
     end
 
-    describe "#register" do
-      it "adds `step` to `steps`" do
-        step_collection.register(step)
-
-        expect(step_collection.steps).to eq([step])
-      end
-
-      it "returns `step`" do
-        expect(step_collection.register(step)).to eq(step)
-      end
-    end
-
     describe "#with_organizer" do
       let(:step_collection) { described_class.new(container: container, steps: steps) }
       let(:steps) { [step] }
 
       specify do
         expect { step_collection.with_organizer(organizer) }
-          .to delegate_to(step_collection.class, :new)
-          .with_arguments(container: container, steps: steps.map { |step| step.with_organizer(organizer) })
+          .to delegate_to(step_collection, :copy)
+          .with_arguments(overrides: {kwargs: {steps: steps.map { |step| step.with_organizer(organizer) }}})
           .and_return_its_value
       end
     end
@@ -235,7 +230,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSequentialSteps::Enti
 
       context "when step collection has step by index" do
         before do
-          step_collection.register(step)
+          step_collection.create(*args, **kwargs)
         end
 
         it "returns step by index" do
@@ -286,7 +281,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSequentialSteps::Enti
         end
 
         context "when `other` has different `steps`" do
-          let(:other) { described_class.new(container: container).tap { |collection| collection.register(step) } }
+          let(:other) { described_class.new(container: container).tap { |collection| collection.create(*args, **kwargs) } }
 
           it "returns `false`" do
             expect(step_collection == other).to eq(false)

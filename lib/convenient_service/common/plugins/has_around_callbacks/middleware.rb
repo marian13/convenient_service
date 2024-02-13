@@ -5,16 +5,28 @@ module ConvenientService
     module Plugins
       module HasAroundCallbacks
         class Middleware < MethodChainMiddleware
+          include Support::Delegate
+
           ##
+          # @internal
+          #   TODO: Support of callbacks for class methods.
+          #
+          intended_for any_method, entity: any_entity
+
+          ##
+          # @return [Class<ConvenientService::Common::Plugins::HasCallbacks::Entities::Callback>]
+          #
+          delegate :callback_class, to: :callbacks
+
+          ##
+          # @param args [Array<Object>]
+          # @param kwargs [Hash{Symbol => Object}]
+          # @param block [Proc, nil]
+          # @return [Object] Can be any type.
+          #
           # @internal
           #   TODO: Move to command.
           #
-          include Support::DependencyContainer::Import
-
-          import :"entities.Callback", from: Common::Plugins::HasCallbacks::Container
-
-          intended_for any_method, scope: any_scope, entity: any_entity
-
           def next(*args, **kwargs, &block)
             ##
             # A variable that stores return value of middleware `chain.next` aka `original_value`.
@@ -46,7 +58,7 @@ module ConvenientService
             ##
             #
             #
-            initial_around_callback = entities.Callback.new(
+            initial_around_callback = callback_class.new(
               types: [:around, method],
               block: proc { original_value = chain.next(*args, **kwargs, &block) }
             )
@@ -135,6 +147,9 @@ module ConvenientService
 
           private
 
+          ##
+          # @return [ConvenientService::Common::Plugins::HasCallbacks::Entities::CallbackCollection]
+          #
           def callbacks
             entity.class.callbacks
           end

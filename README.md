@@ -7,7 +7,7 @@
 <!-- stand_with_ukraine:end -->
 
 <!-- header:start -->
-<!-- TODO: Remove html to display in YARD with commonmark -->
+<!-- TODO: Remove html to display in YARD with common mark -->
 <h1 align="center">
   Convenient Service
 </h1>
@@ -27,7 +27,7 @@
 <!-- badges:end -->
 
 <!-- logo:start -->
-<!-- TODO: Remove html to display in YARD with commonmark -->
+<!-- TODO: Remove html to display in YARD with common mark -->
 <p align="center">
   <img src="https://raw.githubusercontent.com/marian13/convenient_service/main/logo.png" width="300">
 </p>
@@ -51,7 +51,7 @@ This library is under heavy development. Public API may be subject to change. Th
 
 - Check out [Convenient Service Official User Docs](https://userdocs.convenientservice.org/) for installation, requirements, and usage guides.
 
-- Read [the API docs](https://marian13.github.io/convenient_service) to get familiar with the newest functionality that is not documented yet.
+- Read [the API docs](https://apidocs.convenientservice.org/) to get familiar with the newest functionality that is not documented yet.
 
 - Create [an issue](https://github.com/marian13/convenient_service/issues) if you are going to report a bug.
 
@@ -70,5 +70,5 @@ This library is under heavy development. Public API may be subject to change. Th
 ---
 
 <!-- author:start -->
-Copyright (c) 2022-2023 [Marian Kostyk](http://mariankostyk.com).
+Copyright (c) 2022-2024 [Marian Kostyk](http://mariankostyk.com).
 <!-- author:end -->

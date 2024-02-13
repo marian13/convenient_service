@@ -12,6 +12,14 @@ RSpec.describe ConvenientService::Common::Plugins::HasAroundCallbacks::Middlewar
 
   let(:middleware) { described_class }
 
+  example_group "modules" do
+    include ConvenientService::RSpec::Matchers::IncludeModule
+
+    subject { middleware }
+
+    it { is_expected.to include_module(ConvenientService::Support::Delegate) }
+  end
+
   example_group "inheritance" do
     include ConvenientService::RSpec::PrimitiveMatchers::BeDescendantOf
 
@@ -24,7 +32,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasAroundCallbacks::Middlewar
     describe ".intended_methods" do
       let(:spec) do
         Class.new(ConvenientService::MethodChainMiddleware) do
-          intended_for any_method, scope: any_scope, entity: any_entity
+          intended_for any_method, entity: any_entity
         end
       end
 

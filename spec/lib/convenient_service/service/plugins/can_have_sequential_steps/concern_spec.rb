@@ -66,6 +66,12 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSequentialSteps::Conc
       it "adds `step` to `steps`" do
         expect { service_class.step(*args, **kwargs) }.to change { service_class.steps.include?(step) }.from(false).to(true)
       end
+
+      specify do
+        expect { service_class.step(*args, **kwargs) }
+          .to delegate_to(service_class.steps, :create)
+          .with_arguments(*args, **kwargs)
+      end
     end
 
     describe ".steps" do

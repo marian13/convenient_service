@@ -63,6 +63,7 @@ module ConvenientService
 
                               ##
                               # NOTE: Imitates `and_call_original`.
+                              # TODO: What to do when `original.call` raises an exception?
                               #
                               original.call(*actual_args, **actual_kwargs, &actual_block) if matcher.should_call_original?
                             end

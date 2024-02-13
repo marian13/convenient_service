@@ -20,19 +20,23 @@ module ConvenientService
             ##
             # @api public
             #
+            # @param type [Symbol]
+            # @param block [Proc]
             # @return [ConvenientService::Common::Plugins::HasCallbacks::Entities::Callback]
             #
             def before(type, &block)
-              Entities::Callback.new(types: [:before, type], block: block).tap { |callback| callbacks << callback }
+              callbacks.create(types: [:before, type], block: block)
             end
 
             ##
             # @api public
             #
+            # @param type [Symbol]
+            # @param block [Proc]
             # @return [ConvenientService::Common::Plugins::HasCallbacks::Entities::Callback]
             #
             def after(type, &block)
-              Entities::Callback.new(types: [:after, type], block: block).tap { |callback| callbacks << callback }
+              callbacks.create(types: [:after, type], block: block)
             end
           end
         end

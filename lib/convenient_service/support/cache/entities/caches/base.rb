@@ -89,6 +89,9 @@ module ConvenientService
             # @param key [Object] Can be any type.
             # @return [ConvenientService::Support::Cache::Entities::Caches::Base]
             #
+            # @internal
+            #   TODO: What to do if `scope` was called accidentally? Currently, its `key` will NOT be garbage-collected.
+            #
             def scope(key)
               fetch(key) { self.class.new }
             end

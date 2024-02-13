@@ -11,10 +11,12 @@ module ConvenientService
             ##
             # @api public
             #
+            # @param type [Symbol]
+            # @param block [Proc]
             # @return [ConvenientService::Common::Plugins::HasCallbacks::Entities::Callback]
             #
             def around(type, &block)
-              Plugins::HasCallbacks::Entities::Callback.new(types: [:around, type], block: block).tap { |callback| callbacks << callback }
+              callbacks.create(types: [:around, type], block: block)
             end
           end
         end

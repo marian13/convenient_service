@@ -142,6 +142,10 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSequentialSteps::Midd
           expect { method_value }.not_to delegate_to(second_step, :new)
         end
 
+        it "saves intermediate step outputs into organizer" do
+          expect { method_value }.to delegate_to(service_instance.steps[0], :save_outputs_in_organizer!).without_arguments
+        end
+
         it "marks intermediate step as completed" do
           expect { method_value }.to change(service_instance.steps[0], :completed?).from(false).to(true)
         end
@@ -150,6 +154,10 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSequentialSteps::Midd
           expect { method_value }
             .to delegate_to(service_instance.steps[0], :trigger_callback)
             .without_arguments
+        end
+
+        it "saves step outputs into organizer" do
+          expect { method_value }.not_to delegate_to(service_instance.steps[1], :save_outputs_in_organizer!)
         end
 
         it "does NOT mark following steps as completed" do
@@ -167,6 +175,10 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSequentialSteps::Midd
 
           before do
             allow(service_instance.steps[0]).to receive(:not_success?).and_raise(exception)
+          end
+
+          it "does NOT save step outputs into organizer before checking status" do
+            expect { ignoring_exception(exception) { method_value } }.not_to delegate_to(service_instance.steps[0], :save_outputs_in_organizer!)
           end
 
           it "does NOT mark intermediate step as completed before checking status" do
@@ -240,6 +252,12 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSequentialSteps::Midd
           expect(method_value.has_checked_status?).to eq(false)
         end
 
+        it "saves intermediate step outputs into organizer" do
+          expect { method_value }
+            .to delegate_to(service_instance.steps[0], :save_outputs_in_organizer!)
+            .without_arguments
+        end
+
         it "marks intermediate step as completed" do
           expect { method_value }.to change(service_instance.steps[0], :completed?).from(false).to(true)
         end
@@ -247,6 +265,12 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSequentialSteps::Midd
         it "triggers callback for intermediate step" do
           expect { method_value }
             .to delegate_to(service_instance.steps[0], :trigger_callback)
+            .without_arguments
+        end
+
+        it "saves last step outputs into organizer" do
+          expect { method_value }
+            .to delegate_to(service_instance.steps[1], :save_outputs_in_organizer!)
             .without_arguments
         end
 
@@ -268,6 +292,10 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSequentialSteps::Midd
             allow(service_instance.steps[1]).to receive(:not_success?).and_raise(exception)
           end
 
+          it "does NOT save intermediate step outputs into organizer before checking status" do
+            expect { ignoring_exception(exception) { method_value } }.not_to delegate_to(service_instance.steps[0], :save_outputs_in_organizer!)
+          end
+
           it "does NOT mark intermediate step as completed before checking status" do
             expect { ignoring_exception(exception) { method_value } }.not_to change(service_instance.steps[0], :completed?).from(false)
           end
@@ -276,6 +304,10 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSequentialSteps::Midd
             expect { ignoring_exception(exception) { method_value } }
               .not_to delegate_to(service_instance.steps[0], :trigger_callback)
               .without_arguments
+          end
+
+          it "does NOT save last step outputs into organizer before checking status" do
+            expect { ignoring_exception(exception) { method_value } }.not_to delegate_to(service_instance.steps[1], :save_outputs_in_organizer!)
           end
 
           it "does NOT mark last step as completed before checking status" do

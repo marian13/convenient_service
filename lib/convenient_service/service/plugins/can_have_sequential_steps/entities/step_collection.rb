@@ -8,6 +8,8 @@ module ConvenientService
           class StepCollection
             include ::Enumerable
 
+            include Support::Copyable
+
             ##
             # @api private
             #
@@ -45,18 +47,7 @@ module ConvenientService
             #
             def create(*args, **kwargs)
               step_class.new(*args, **kwargs.merge(container: container, index: next_available_index))
-            end
-
-            ##
-            # @api private
-            #
-            # @param step [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step]
-            # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step]
-            #
-            def register(step)
-              steps << step
-
-              step
+                .tap { |step| steps << step }
             end
 
             ##
@@ -64,7 +55,7 @@ module ConvenientService
             # @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::StepCollection]
             #
             def with_organizer(organizer)
-              self.class.new(container: container, steps: steps.map { |step| step.with_organizer(organizer) })
+              copy(overrides: {kwargs: {steps: steps.map { |step| step.with_organizer(organizer) }}})
             end
 
             ##
@@ -136,6 +127,13 @@ module ConvenientService
               return false if steps != other.steps
 
               true
+            end
+
+            ##
+            # @return [ConvenientService::Support::Arguments]
+            #
+            def to_arguments
+              Support::Arguments.new(container: container, steps: steps)
             end
 
             private

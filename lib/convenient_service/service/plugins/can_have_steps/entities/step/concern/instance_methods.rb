@@ -16,6 +16,11 @@ module ConvenientService
                 include Support::Delegate
 
                 ##
+                # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status]
+                #
+                delegate :status, to: :result
+
+                ##
                 # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data]
                 #
                 delegate :data, to: :result
@@ -172,15 +177,10 @@ module ConvenientService
                 # @api public
                 #
                 # @return [Hash{Symbol => Object}]
-                # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepHasNoOrganizer]
+                # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepHasNoOrganizer, ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepResultDataNotExistingDataAttribute]
                 #
                 def output_values
-                  @output_values ||=
-                    if result.success?(mark_status_as_checked: false)
-                      outputs.map { |output| [output.name.to_sym, result.unsafe_data[output.key.to_sym]] }.to_h
-                    else
-                      {}
-                    end
+                  @output_values ||= calculate_output_values
                 end
 
                 ##
@@ -255,6 +255,21 @@ module ConvenientService
                 #
                 def trigger_callback
                   organizer.step(index)
+                end
+
+                ##
+                # @api private
+                #
+                # @return [Boolean]
+                # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::MethodHasNoOrganizer]
+                #
+                # @internal
+                #   TODO: Create `OutputMethod`. Move `save` into it.
+                #
+                def save_outputs_in_organizer!
+                  output_values.each_pair { |key, value| organizer.internals.cache.scope(:step_output_values).write(key, value) }
+
+                  true
                 end
 
                 ##
@@ -362,6 +377,23 @@ module ConvenientService
                 #
                 def calculate_input_values
                   inputs.reduce({}) { |values, input| values.merge(input.key.to_sym => input.value) }
+                end
+
+                ##
+                # @return [Hash{Symbol => Object}]
+                # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepHasNoOrganizer, ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepResultDataNotExistingAttribute]
+                #
+                # @internal
+                #   TODO: Commands instead of private methods.
+                #   IMPORTANT: `status.success?` is used instead of `success?` or `result.status?` in order to NOT mark result as checked.
+                #   TODO: Create `OutputMethod`. Move `validate_as_output_for_result` into it.
+                #
+                def calculate_output_values
+                  return {} unless status.success?
+
+                  outputs.each { |output| ::ConvenientService.raise Exceptions::StepResultDataNotExistingAttribute.new(step: self, key: output.key.to_sym) unless unsafe_data.has_attribute?(output.key.to_sym) }
+
+                  outputs.reduce({}) { |values, output| values.merge(output.name.to_sym => unsafe_data[output.key.to_sym]) }
                 end
 
                 ##

@@ -51,8 +51,8 @@ module ConvenientService
           def find_first_not_successful_step_with_side_effects_during_lookup
             entity.steps.find do |step|
               step.not_success?(mark_status_as_checked: false)
-                .tap { step.output_values.each_pair { |key, value| entity.internals.cache.scope(:step_output_values).write(key, value) } }
-                .tap { step.mark_as_completed! } # TODO: Not needed anymore?
+                .tap { step.save_outputs_in_organizer! }
+                .tap { step.mark_as_completed! }
                 .tap { step.trigger_callback }
             end
           end

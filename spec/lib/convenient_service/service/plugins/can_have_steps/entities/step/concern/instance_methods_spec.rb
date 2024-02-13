@@ -8,6 +8,7 @@ require "convenient_service"
 RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Concern::InstanceMethods do
   include ConvenientService::RSpec::Helpers::IgnoringException
 
+  include ConvenientService::RSpec::PrimitiveMatchers::CacheItsValue
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   let(:step_service_klass) do
@@ -24,7 +25,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
     end
   end
 
-  let(:organizer_service_klass) do
+  let(:container) do
     Class.new do
       include ConvenientService::Service::Configs::Minimal
 
@@ -41,14 +42,13 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
   let(:service) { step_service_klass }
   let(:inputs) { [:foo] }
   let(:outputs) { [:bar] }
-  let(:container) { organizer_service_klass }
-  let(:organizer) { organizer_service_klass.new }
+  let(:organizer) { container.new }
 
   let(:args) { [service] }
   let(:kwargs) { {in: inputs, out: outputs, index: index, container: container, organizer: organizer, **extra_kwargs} }
   let(:extra_kwargs) { {method_name: :foo} }
 
-  let(:step_class) { organizer_service_klass.step_class }
+  let(:step_class) { container.step_class }
 
   let(:step_instance) { step_class.new(*args, **kwargs) }
   let(:step) { step_instance }
@@ -69,6 +69,15 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
     include ConvenientService::RSpec::PrimitiveMatchers::CacheItsValue
     include ConvenientService::RSpec::Matchers::DelegateTo
     include ConvenientService::RSpec::Matchers::Results
+
+    describe "#status" do
+      specify do
+        expect { step.status }
+          .to delegate_to(step.result, :status)
+          .without_arguments
+          .and_return_its_value
+      end
+    end
 
     describe "#data" do
       specify do
@@ -360,11 +369,183 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       end
 
       context "when `organizer` is set" do
-        it "returns output values" do
-          expect(step.output_values).to eq({bar: :step_service_bar})
+        specify do
+          expect { step.output_values }.to cache_its_value
         end
 
-        specify { expect { step.output_values }.to delegate_to(step.outputs.first.key, :to_sym) }
+        context "when `step` result has success status" do
+          context "when `step` has NO outputs" do
+            let(:outputs) { [] }
+
+            it "returns empty hash" do
+              expect(step.output_values).to eq({})
+            end
+          end
+
+          context "when `step` has one output" do
+            let(:step_service_klass) do
+              Class.new do
+                include ConvenientService::Service::Configs::Minimal
+
+                def initialize(foo:)
+                  @foo = foo
+                end
+
+                def result
+                  success(data: {bar: :step_service_bar})
+                end
+              end
+            end
+
+            context "when step result does NOT have attribute by output key" do
+              let(:outputs) { [:baz] }
+
+              let(:exception_message) do
+                <<~TEXT
+                  Step `#{step.printable_service}` result does NOT return `:baz` data attribute.
+
+                  Maybe there is a typo in `out` definition?
+
+                  Or `success` of `#{step.printable_service}` accepts a wrong key?
+                TEXT
+              end
+
+              it "raises `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepResultDataNotExistingAttribute`" do
+                expect { step.output_values }
+                  .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepResultDataNotExistingAttribute)
+                  .with_message(exception_message)
+              end
+
+              specify do
+                expect { ignoring_exception(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepResultDataNotExistingAttribute) { step.output_values } }
+                  .to delegate_to(ConvenientService, :raise)
+              end
+            end
+
+            context "when step result has attribute by output keys" do
+              let(:outputs) { [:bar] }
+
+              it "returns output values" do
+                expect(step.output_values).to eq({bar: :step_service_bar})
+              end
+            end
+          end
+
+          context "when `step` has multiple outputs" do
+            let(:step_service_klass) do
+              Class.new do
+                include ConvenientService::Service::Configs::Minimal
+
+                def initialize(foo:)
+                  @foo = foo
+                end
+
+                def result
+                  success(data: {bar: :step_service_bar, baz: :step_service_baz})
+                end
+              end
+            end
+
+            context "when step result does NOT have any attribute by output key" do
+              let(:outputs) { [:bar, :qux] }
+
+              let(:exception_message) do
+                <<~TEXT
+                  Step `#{step.printable_service}` result does NOT return `:qux` data attribute.
+
+                  Maybe there is a typo in `out` definition?
+
+                  Or `success` of `#{step.printable_service}` accepts a wrong key?
+                TEXT
+              end
+
+              it "raises `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepResultDataNotExistingAttribute`" do
+                expect { step.output_values }
+                  .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepResultDataNotExistingAttribute)
+                  .with_message(exception_message)
+              end
+
+              specify do
+                expect { ignoring_exception(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepResultDataNotExistingAttribute) { step.output_values } }
+                  .to delegate_to(ConvenientService, :raise)
+              end
+            end
+
+            context "when step result has all attributes by output keys" do
+              let(:outputs) { [:bar, :baz] }
+
+              it "returns output values" do
+                expect(step.output_values).to eq({bar: :step_service_bar, baz: :step_service_baz})
+              end
+            end
+          end
+        end
+
+        context "when `step` result has failure status" do
+          let(:step_service_klass) do
+            Class.new do
+              include ConvenientService::Service::Configs::Minimal
+
+              def initialize(foo:)
+                @foo = foo
+              end
+
+              def result
+                failure
+              end
+            end
+          end
+
+          it "returns empty hash" do
+            expect(step.output_values).to eq({})
+          end
+        end
+
+        context "when `step` result has error status" do
+          let(:step_service_klass) do
+            Class.new do
+              include ConvenientService::Service::Configs::Minimal
+
+              def initialize(foo:)
+                @foo = foo
+              end
+
+              def result
+                error
+              end
+            end
+          end
+
+          it "returns empty hash" do
+            expect(step.output_values).to eq({})
+          end
+        end
+
+        context "when `out` has `alias`" do
+          let(:step_service_klass) do
+            Class.new do
+              include ConvenientService::Service::Configs::Minimal
+
+              def initialize(foo:)
+                @foo = foo
+              end
+
+              def result
+                success(data: {bar: :step_service_bar})
+              end
+            end
+          end
+
+          let(:outputs) { [{bar: :baz}] }
+
+          it "uses output `name` as output value key" do
+            expect(step.output_values.keys.first).to eq(:baz)
+          end
+
+          it "uses output `key` to get value from step result data" do
+            expect(step.output_values.values.first).to eq(:step_service_bar)
+          end
+        end
       end
     end
 
@@ -478,6 +659,109 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         expect { step.trigger_callback }
           .to delegate_to(step.organizer, :step)
           .with_arguments(index)
+      end
+    end
+
+    describe "#save_outputs_in_organizer!" do
+      context "when step has NO output values" do
+        let(:step_service_klass) do
+          Class.new do
+            include ConvenientService::Service::Configs::Minimal
+
+            def initialize(foo:)
+              @foo = foo
+            end
+
+            def result
+              success
+            end
+          end
+        end
+
+        let(:outputs) { [] }
+
+        specify do
+          expect { step.save_outputs_in_organizer! }
+            .not_to delegate_to(step.organizer.internals.cache.scope(:step_output_values), :write)
+        end
+      end
+
+      context "when step has one output value" do
+        let(:step_service_klass) do
+          Class.new do
+            include ConvenientService::Service::Configs::Minimal
+
+            def initialize(foo:)
+              @foo = foo
+            end
+
+            def result
+              success(data: {bar: :step_service_bar})
+            end
+          end
+        end
+
+        let(:outputs) { [:bar] }
+
+        specify do
+          expect { step.save_outputs_in_organizer! }
+            .to delegate_to(step.organizer.internals.cache.scope(:step_output_values), :write)
+            .with_arguments(step.output_values.keys.first, step.output_values.values.first)
+        end
+      end
+
+      context "when step has multiple output values" do
+        let(:step_service_klass) do
+          Class.new do
+            include ConvenientService::Service::Configs::Minimal
+
+            def initialize(foo:)
+              @foo = foo
+            end
+
+            def result
+              success(data: {bar: :step_service_bar, baz: :step_service_baz})
+            end
+          end
+        end
+
+        let(:outputs) { [:bar, :baz] }
+
+        specify do
+          expect { step.save_outputs_in_organizer! }
+            .to delegate_to(step.organizer.internals.cache.scope(:step_output_values), :write)
+            .with_arguments(step.output_values.keys[0], step.output_values.values[0])
+        end
+
+        specify do
+          expect { step.save_outputs_in_organizer! }
+            .to delegate_to(step.organizer.internals.cache.scope(:step_output_values), :write)
+            .with_arguments(step.output_values.keys[1], step.output_values.values[1])
+        end
+      end
+
+      context "when step has output with alias" do
+        let(:step_service_klass) do
+          Class.new do
+            include ConvenientService::Service::Configs::Minimal
+
+            def initialize(foo:)
+              @foo = foo
+            end
+
+            def result
+              success(data: {bar: :step_service_baz})
+            end
+          end
+        end
+
+        let(:outputs) { [{bar: :baz}] }
+
+        specify do
+          expect { step.save_outputs_in_organizer! }
+            .to delegate_to(step.organizer.internals.cache.scope(:step_output_values), :write)
+            .with_arguments(step.output_values.keys[0], step.output_values.values[0])
+        end
       end
     end
 
