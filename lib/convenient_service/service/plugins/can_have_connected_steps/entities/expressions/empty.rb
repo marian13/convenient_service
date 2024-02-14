@@ -1,0 +1,79 @@
+# frozen_string_literal: true
+
+module ConvenientService
+  module Service
+    module Plugins
+      module CanHaveConnectedSteps
+        module Entities
+          module Expressions
+            class Empty < Entities::Expressions::Base
+              ##
+              # @return [void]
+              #
+              def initialize
+              end
+
+              ##
+              # @raise [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Exceptions::EmptyExpressionHasNoResult]
+              #
+              def result
+                raise Exceptions::EmptyExpressionHasNoResult.new
+              end
+
+              ##
+              # @raise [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Exceptions::EmptyExpressionHasNoStatus]
+              #
+              def success?
+                raise Exceptions::EmptyExpressionHasNoStatus.new
+              end
+
+              ##
+              # @raise [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Exceptions::EmptyExpressionHasNoStatus]
+              #
+              def failure?
+                raise Exceptions::EmptyExpressionHasNoStatus.new
+              end
+
+              ##
+              # @raise [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Exceptions::EmptyExpressionHasNoStatus]
+              #
+              def error?
+                raise Exceptions::EmptyExpressionHasNoStatus.new
+              end
+
+              ##
+              # @param block [Proc]
+              # @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base]
+              #
+              def each_step(&block)
+                self
+              end
+
+              ##
+              # @param block [Proc]
+              # @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base]
+              #
+              def each_evaluated_step(&block)
+                self
+              end
+
+              ##
+              # @param organizer [ConvenientService::Service]
+              #
+              def with_organizer(organizer)
+                self
+              end
+
+              ##
+              # @return [Boolean]
+              #
+              def empty?
+                true
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+end
