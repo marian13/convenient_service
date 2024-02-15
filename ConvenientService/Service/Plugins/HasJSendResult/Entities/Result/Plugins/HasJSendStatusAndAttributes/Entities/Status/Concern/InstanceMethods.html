@@ -472,6 +472,72 @@
 </li>
 
       
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#unsafe_error%3F-instance_method" title="#unsafe_error? (instance method)">#<strong>unsafe_error?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#unsafe_failure%3F-instance_method" title="#unsafe_failure? (instance method)">#<strong>unsafe_failure?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#unsafe_success%3F-instance_method" title="#unsafe_success? (instance method)">#<strong>unsafe_success?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
     </ul>
   
 
@@ -818,12 +884,12 @@
       <pre class="lines">
 
 
-98
-99
-100</pre>
+119
+120
+121</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/has_j_send_status_and_attributes/entities/status/concern/instance_methods.rb', line 98</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/has_j_send_status_and_attributes/entities/status/concern/instance_methods.rb', line 119</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_in?'>in?</span><span class='lparen'>(</span><span class='id identifier rubyid_statuses'>statuses</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_statuses'>statuses</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_status'>status</span><span class='op'>|</span> <span class='kw'>self</span> <span class='op'>==</span> <span class='id identifier rubyid_status'>status</span> <span class='rbrace'>}</span>
@@ -939,15 +1005,15 @@
       <pre class="lines">
 
 
-90
-91
-92</pre>
+111
+112
+113</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/has_j_send_status_and_attributes/entities/status/concern/instance_methods.rb', line 90</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/has_j_send_status_and_attributes/entities/status/concern/instance_methods.rb', line 111</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_not_error?'>not_error?</span>
-  <span class='op'>!</span><span class='id identifier rubyid_error?'>error?</span>
+  <span class='id identifier rubyid_value'>value</span> <span class='op'>!=</span> <span class='symbol'>:error</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -991,15 +1057,15 @@
       <pre class="lines">
 
 
-83
-84
-85</pre>
+104
+105
+106</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/has_j_send_status_and_attributes/entities/status/concern/instance_methods.rb', line 83</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/has_j_send_status_and_attributes/entities/status/concern/instance_methods.rb', line 104</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_not_failure?'>not_failure?</span>
-  <span class='op'>!</span><span class='id identifier rubyid_failure?'>failure?</span>
+  <span class='id identifier rubyid_value'>value</span> <span class='op'>!=</span> <span class='symbol'>:failure</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1043,15 +1109,15 @@
       <pre class="lines">
 
 
-76
-77
-78</pre>
+97
+98
+99</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/has_j_send_status_and_attributes/entities/status/concern/instance_methods.rb', line 76</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/has_j_send_status_and_attributes/entities/status/concern/instance_methods.rb', line 97</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_not_success?'>not_success?</span>
-  <span class='op'>!</span><span class='id identifier rubyid_success?'>success?</span>
+  <span class='id identifier rubyid_value'>value</span> <span class='op'>!=</span> <span class='symbol'>:success</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1147,12 +1213,12 @@
       <pre class="lines">
 
 
-112
-113
-114</pre>
+133
+134
+135</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/has_j_send_status_and_attributes/entities/status/concern/instance_methods.rb', line 112</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/has_j_send_status_and_attributes/entities/status/concern/instance_methods.rb', line 133</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_arguments'>to_arguments</span>
   <span class='ivar'>@to_arguments</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="../../../../../../../../../../Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../../../../Support/Arguments.html" title="ConvenientService::Support::Arguments (class)">Arguments</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../../../../../../../../../Support/Arguments.html#initialize-instance_method" title="ConvenientService::Support::Arguments#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>value:</span> <span class='id identifier rubyid_value'>value</span><span class='comma'>,</span> <span class='label'>result:</span> <span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span>
@@ -1212,22 +1278,22 @@
       <pre class="lines">
 
 
-137
-138
-139
-140
-141
-142
-143
-144
-145
-146
-147
-148
-149</pre>
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/has_j_send_status_and_attributes/entities/status/concern/instance_methods.rb', line 137</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/has_j_send_status_and_attributes/entities/status/concern/instance_methods.rb', line 158</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_bool'>to_bool</span>
   <span class='kw'>return</span> <span class='ivar'>@to_bool</span> <span class='kw'>if</span> <span class='kw'>defined?</span> <span class='ivar'>@to_bool</span>
@@ -1284,12 +1350,12 @@
       <pre class="lines">
 
 
-105
-106
-107</pre>
+126
+127
+128</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/has_j_send_status_and_attributes/entities/status/concern/instance_methods.rb', line 105</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/has_j_send_status_and_attributes/entities/status/concern/instance_methods.rb', line 126</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_kwargs'>to_kwargs</span>
   <span class='id identifier rubyid_to_arguments'>to_arguments</span><span class='period'>.</span><span class='id identifier rubyid_kwargs'>kwargs</span>
@@ -1336,12 +1402,12 @@
       <pre class="lines">
 
 
-119
-120
-121</pre>
+140
+141
+142</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/has_j_send_status_and_attributes/entities/status/concern/instance_methods.rb', line 119</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/has_j_send_status_and_attributes/entities/status/concern/instance_methods.rb', line 140</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_s'>to_s</span>
   <span class='ivar'>@to_s</span> <span class='op'>||=</span> <span class='id identifier rubyid_value'>value</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
@@ -1388,15 +1454,171 @@
       <pre class="lines">
 
 
-126
-127
-128</pre>
+147
+148
+149</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/has_j_send_status_and_attributes/entities/status/concern/instance_methods.rb', line 126</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/has_j_send_status_and_attributes/entities/status/concern/instance_methods.rb', line 147</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_sym'>to_sym</span>
   <span class='ivar'>@to_sym</span> <span class='op'>||=</span> <span class='id identifier rubyid_value'>value</span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="unsafe_error?-instance_method">
+  
+    #<strong>unsafe_error?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+90
+91
+92</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/has_j_send_status_and_attributes/entities/status/concern/instance_methods.rb', line 90</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_unsafe_error?'>unsafe_error?</span>
+  <span class='id identifier rubyid_value'>value</span> <span class='op'>==</span> <span class='symbol'>:error</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="unsafe_failure?-instance_method">
+  
+    #<strong>unsafe_failure?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+83
+84
+85</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/has_j_send_status_and_attributes/entities/status/concern/instance_methods.rb', line 83</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_unsafe_failure?'>unsafe_failure?</span>
+  <span class='id identifier rubyid_value'>value</span> <span class='op'>==</span> <span class='symbol'>:failure</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="unsafe_success?-instance_method">
+  
+    #<strong>unsafe_success?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+76
+77
+78</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/has_j_send_status_and_attributes/entities/status/concern/instance_methods.rb', line 76</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_unsafe_success?'>unsafe_success?</span>
+  <span class='id identifier rubyid_value'>value</span> <span class='op'>==</span> <span class='symbol'>:success</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1408,7 +1630,7 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Feb 14 01:01:19 2024 by
+  Generated on Thu Feb 15 20:44:03 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.2.3).
 </div>
