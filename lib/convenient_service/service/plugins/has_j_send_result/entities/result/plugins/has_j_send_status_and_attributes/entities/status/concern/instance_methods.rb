@@ -73,22 +73,43 @@ module ConvenientService
                         ##
                         # @return [Boolean]
                         #
+                        def unsafe_success?
+                          value == :success
+                        end
+
+                        ##
+                        # @return [Boolean]
+                        #
+                        def unsafe_failure?
+                          value == :failure
+                        end
+
+                        ##
+                        # @return [Boolean]
+                        #
+                        def unsafe_error?
+                          value == :error
+                        end
+
+                        ##
+                        # @return [Boolean]
+                        #
                         def not_success?
-                          !success?
+                          value != :success
                         end
 
                         ##
                         # @return [Boolean]
                         #
                         def not_failure?
-                          !failure?
+                          value != :failure
                         end
 
                         ##
                         # @return [Boolean]
                         #
                         def not_error?
-                          !error?
+                          value != :error
                         end
 
                         ##

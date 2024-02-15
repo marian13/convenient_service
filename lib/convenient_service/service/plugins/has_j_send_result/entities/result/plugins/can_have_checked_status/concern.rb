@@ -15,8 +15,8 @@ module ConvenientService
                     ##
                     # @return [Boolean]
                     #
-                    def has_checked_status?
-                      Utils.to_bool(internals.cache[:has_checked_status])
+                    def checked?
+                      status.checked?
                     end
                   end
                 end

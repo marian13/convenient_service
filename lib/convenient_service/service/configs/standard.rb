@@ -135,30 +135,6 @@ module ConvenientService
               use ConvenientService::Plugins::Result::CanHaveCheckedStatus::Concern
             end
 
-            middlewares :success? do
-              use ConvenientService::Plugins::Result::CanHaveCheckedStatus::Middleware
-            end
-
-            middlewares :failure? do
-              use ConvenientService::Plugins::Result::CanHaveCheckedStatus::Middleware
-            end
-
-            middlewares :error? do
-              use ConvenientService::Plugins::Result::CanHaveCheckedStatus::Middleware
-            end
-
-            middlewares :not_success? do
-              use ConvenientService::Plugins::Result::CanHaveCheckedStatus::Middleware
-            end
-
-            middlewares :not_failure? do
-              use ConvenientService::Plugins::Result::CanHaveCheckedStatus::Middleware
-            end
-
-            middlewares :not_error? do
-              use ConvenientService::Plugins::Result::CanHaveCheckedStatus::Middleware
-            end
-
             middlewares :data do
               use ConvenientService::Plugins::Result::RaisesOnNotCheckedResultStatus::Middleware
             end
@@ -175,6 +151,36 @@ module ConvenientService
               use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
 
               use ConvenientService::Plugins::Common::EnsuresNegatedJSendResult::Middleware
+            end
+
+            class self::Status
+              concerns do
+                use ConvenientService::Plugins::Status::CanBeChecked::Concern
+              end
+
+              middlewares :success? do
+                use ConvenientService::Plugins::Status::CanBeChecked::Middleware
+              end
+
+              middlewares :failure? do
+                use ConvenientService::Plugins::Status::CanBeChecked::Middleware
+              end
+
+              middlewares :error? do
+                use ConvenientService::Plugins::Status::CanBeChecked::Middleware
+              end
+
+              middlewares :not_success? do
+                use ConvenientService::Plugins::Status::CanBeChecked::Middleware
+              end
+
+              middlewares :not_failure? do
+                use ConvenientService::Plugins::Status::CanBeChecked::Middleware
+              end
+
+              middlewares :not_error? do
+                use ConvenientService::Plugins::Status::CanBeChecked::Middleware
+              end
             end
           end
 

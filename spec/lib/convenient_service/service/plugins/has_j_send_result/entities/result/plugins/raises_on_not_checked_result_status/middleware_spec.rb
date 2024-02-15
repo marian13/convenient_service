@@ -71,10 +71,6 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       let(:method_name) { :data }
 
       context "when result does NOT have checked status" do
-        before do
-          result.internals.cache.delete(:has_checked_status)
-        end
-
         let(:exception_message) do
           <<~TEXT
             Attribute `#{method_name}` is accessed before result status is checked.
@@ -97,7 +93,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
 
       context "when result has checked status" do
         before do
-          result.internals.cache.write(:has_checked_status, true)
+          result.success?
         end
 
         specify do

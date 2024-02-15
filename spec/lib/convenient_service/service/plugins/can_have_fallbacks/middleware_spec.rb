@@ -135,7 +135,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveFallbacks::Middleware
           end
 
           it "returns result with checked status" do
-            expect(method_value.has_checked_status?).to eq(true)
+            expect(method_value.checked?).to eq(true)
           end
         end
       end

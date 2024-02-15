@@ -32,7 +32,7 @@ module ConvenientService
                   # @raise [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::RaisesOnNotCheckedResultStatus::Exceptions::StatusIsNotChecked]
                   #
                   def assert_has_checked_status!
-                    return if entity.internals.cache.exist?(:has_checked_status)
+                    return if entity.checked?
 
                     ::ConvenientService.raise Exceptions::StatusIsNotChecked.new(attribute: method)
                   end

@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
-RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanHaveCheckedStatus::Concern do
+RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status::Plugins::CanBeChecked::Concern do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   example_group "modules" do
@@ -42,32 +42,26 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
     end
 
     let(:result) { service.result }
+    let(:status) { result.status }
 
     describe "#checked?" do
-      specify do
-        expect { result.checked? }
-          .to delegate_to(result.status, :checked?)
-          .without_arguments
-          .and_return_its_value
-      end
-
-      context "when status is NOT checked" do
+      context "when `status` is NOT checked" do
         before do
-          result.success?(mark_as_checked: false)
+          status.success?(mark_as_checked: false)
         end
 
         it "returns `false`" do
-          expect(result.checked?).to eq(false)
+          expect(status.checked?).to eq(false)
         end
       end
 
-      context "when status is checked" do
+      context "when `status` is checked" do
         before do
-          result.success?
+          status.success?
         end
 
         it "returns `true`" do
-          expect(result.checked?).to eq(true)
+          expect(status.checked?).to eq(true)
         end
       end
     end

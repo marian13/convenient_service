@@ -142,6 +142,9 @@ module ConvenientService
         # @internal
         #   IMPORTANT: `commit!` MUST be thread safe.
         #
+        #   NOTE: Inspired by `Response#commit!` and others.
+        #   - https://github.com/rails/rails/blob/36c1591bcb5e0ee3084759c7f42a706fe5bb7ca7/actionpack/lib/action_controller/metal/live.rb#L307
+        #
         def commit!(trigger: Constants::Triggers::USER)
           (committed? ? false : concerns.include!)
             .tap { Commands::TrackMethodMissingCommitTrigger.call(config: self, trigger: trigger) }

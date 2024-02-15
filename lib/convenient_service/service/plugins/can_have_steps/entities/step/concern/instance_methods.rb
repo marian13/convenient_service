@@ -385,11 +385,11 @@ module ConvenientService
                 #
                 # @internal
                 #   TODO: Commands instead of private methods.
-                #   IMPORTANT: `status.success?` is used instead of `success?` or `result.status?` in order to NOT mark result as checked.
+                #   IMPORTANT: `status.unsafe_success?` is used instead of `success?` or `result.status?` in order to NOT mark result as checked.
                 #   TODO: Create `OutputMethod`. Move `validate_as_output_for_result` into it.
                 #
                 def calculate_output_values
-                  return {} unless status.success?
+                  return {} unless status.unsafe_success?
 
                   outputs.each { |output| ::ConvenientService.raise Exceptions::StepResultDataNotExistingAttribute.new(step: self, key: output.key.to_sym) unless unsafe_data.has_attribute?(output.key.to_sym) }
 

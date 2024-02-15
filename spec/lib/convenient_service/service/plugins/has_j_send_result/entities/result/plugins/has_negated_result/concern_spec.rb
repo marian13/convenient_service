@@ -92,7 +92,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         end
 
         it "returns `failure` with NOT checked status" do
-          expect(result.negated_result.has_checked_status?).to eq(false)
+          expect(result.negated_result.checked?).to eq(false)
         end
 
         context "when that `success` has `data`" do
@@ -186,7 +186,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         end
 
         it "returns `success` with NOT checked status" do
-          expect(result.negated_result.has_checked_status?).to eq(false)
+          expect(result.negated_result.checked?).to eq(false)
         end
 
         context "when that `failure` has `data`" do
@@ -280,7 +280,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         end
 
         it "returns copy of that original `error` with NOT checked status" do
-          expect(result.negated_result.has_checked_status?).to eq(false)
+          expect(result.negated_result.checked?).to eq(false)
         end
 
         context "when that original `error` has `data`" do

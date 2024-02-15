@@ -373,6 +373,12 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           expect { step.output_values }.to cache_its_value
         end
 
+        specify do
+          expect { step.output_values }
+            .to delegate_to(step.status, :unsafe_success?)
+            .without_arguments
+        end
+
         context "when `step` result has success status" do
           context "when `step` has NO outputs" do
             let(:outputs) { [] }

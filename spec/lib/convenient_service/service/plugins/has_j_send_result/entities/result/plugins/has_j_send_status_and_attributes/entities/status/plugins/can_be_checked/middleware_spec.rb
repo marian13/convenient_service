@@ -4,8 +4,8 @@ require "spec_helper"
 
 require "convenient_service"
 
-# rubocop:disable RSpec/NestedGroups
-RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanHaveCheckedStatus::Middleware do
+# rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
+RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status::Plugins::CanBeChecked::Middleware do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   let(:middleware) { described_class }
@@ -47,7 +47,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
 
       subject(:method_value) { method.call(**kwargs) }
 
-      let(:method) { wrap_method(result, :success?, observe_middleware: middleware) }
+      let(:method) { wrap_method(status, :success?, observe_middleware: middleware) }
 
       let(:service) do
         Class.new.tap do |klass|
@@ -55,8 +55,10 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
             include ConvenientService::Service::Configs::Standard
 
             self::Result.class_exec(middleware) do |middleware|
-              middlewares :success? do
-                observe middleware
+              self::Status.class_exec(middleware) do |middleware|
+                middlewares :success? do
+                  observe middleware
+                end
               end
             end
 
@@ -68,14 +70,15 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       end
 
       let(:result) { service.result }
+      let(:status) { result.status }
 
-      context "when `mark_status_as_checked` option is NOT passed" do
+      context "when `mark_as_checked` option is NOT passed" do
         let(:kwargs) { {} }
 
         specify do
           expect { method_value }
-            .to delegate_to(result.internals.cache, :write)
-            .with_arguments(:has_checked_status, true)
+            .to delegate_to(status.internals.cache, :write)
+            .with_arguments(:checked, true)
         end
 
         specify do
@@ -86,12 +89,12 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         end
       end
 
-      context "when `mark_status_as_checked` option is `false`" do
-        let(:kwargs) { {mark_status_as_checked: false} }
+      context "when `mark_as_checked` option is `false`" do
+        let(:kwargs) { {mark_as_checked: false} }
 
         specify do
           expect { method_value }
-            .not_to delegate_to(result.internals.cache, :write)
+            .not_to delegate_to(status.internals.cache, :write)
             .with_any_arguments
         end
 
@@ -103,13 +106,13 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         end
       end
 
-      context "when `mark_status_as_checked` option is `true`" do
-        let(:kwargs) { {mark_status_as_checked: true} }
+      context "when `mark_as_checked` option is `true`" do
+        let(:kwargs) { {mark_as_checked: true} }
 
         specify do
           expect { method_value }
-            .to delegate_to(result.internals.cache, :write)
-            .with_arguments(:has_checked_status, true)
+            .to delegate_to(status.internals.cache, :write)
+            .with_arguments(:checked, true)
         end
 
         specify do
@@ -122,4 +125,4 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
     end
   end
 end
-# rubocop:enable RSpec/NestedGroups
+# rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers

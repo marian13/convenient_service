@@ -130,30 +130,6 @@ module ConvenientService
               use ConvenientService::Plugins::Result::HasJSendStatusAndAttributes::Middleware
             end
 
-            middlewares :success? do
-              use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
-            end
-
-            middlewares :failure? do
-              use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
-            end
-
-            middlewares :error? do
-              use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
-            end
-
-            middlewares :not_success? do
-              use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
-            end
-
-            middlewares :not_failure? do
-              use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
-            end
-
-            middlewares :not_error? do
-              use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
-            end
-
             middlewares :data do
               use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
             end
@@ -198,7 +174,41 @@ module ConvenientService
               include Core
 
               concerns do
+                use ConvenientService::Plugins::Common::HasInternals::Concern
+
                 use ConvenientService::Plugins::Status::HasInspect::Concern
+              end
+
+              middlewares :success? do
+                use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
+              end
+
+              middlewares :failure? do
+                use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
+              end
+
+              middlewares :error? do
+                use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
+              end
+
+              middlewares :not_success? do
+                use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
+              end
+
+              middlewares :not_failure? do
+                use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
+              end
+
+              middlewares :not_error? do
+                use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
+              end
+
+              class self::Internals
+                include Core
+
+                concerns do
+                  use ConvenientService::Plugins::Internals::HasCache::Concern
+                end
               end
             end
 
