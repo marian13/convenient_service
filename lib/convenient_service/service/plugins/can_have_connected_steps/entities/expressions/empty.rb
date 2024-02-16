@@ -65,6 +65,13 @@ module ConvenientService
               end
 
               ##
+              # @return [String]
+              #
+              def inspect
+                ""
+              end
+
+              ##
               # @return [Boolean]
               #
               def empty?

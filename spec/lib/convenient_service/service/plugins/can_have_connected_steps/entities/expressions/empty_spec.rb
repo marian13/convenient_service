@@ -113,6 +113,12 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
       end
     end
 
+    describe "#inspect" do
+      it "returns empty string" do
+        expect(expression.inspect).to eq("")
+      end
+    end
+
     describe "#empty?" do
       it "returns `true`" do
         expect(expression.empty?).to eq(true)
