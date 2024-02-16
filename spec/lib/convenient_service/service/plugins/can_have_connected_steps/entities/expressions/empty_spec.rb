@@ -8,6 +8,14 @@ require "convenient_service"
 RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Empty do
   let(:expression) { described_class.new }
 
+  let(:container) do
+    Class.new do
+      include ConvenientService::Service::Configs::Minimal
+    end
+  end
+
+  let(:organizer) { container.new }
+
   example_group "inheritance" do
     include ConvenientService::RSpec::PrimitiveMatchers::BeDescendantOf
 
@@ -98,16 +106,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
     end
 
     describe "#with_organizer" do
-      let(:block) { proc { :foo } }
-
-      let(:container) do
-        Class.new do
-          include ConvenientService::Service::Configs::Minimal
-        end
-      end
-
-      let(:organizer) { container.new }
-
       it "returns `expression`" do
         expect(expression.with_organizer(organizer)).to eq(expression)
       end
@@ -122,6 +120,38 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
     describe "#empty?" do
       it "returns `true`" do
         expect(expression.empty?).to eq(true)
+      end
+    end
+
+    example_group "comparison" do
+      describe "#==" do
+        let(:expression) { described_class.new }
+
+        context "when `other` has different class" do
+          let(:other) { 42 }
+
+          it "returns `nil`" do
+            expect(expression == other).to be_nil
+          end
+        end
+
+        context "when `other` has same class" do
+          let(:other) { described_class.new }
+
+          it "returns `true`" do
+            expect(expression == other).to eq(true)
+          end
+        end
+      end
+    end
+
+    example_group "conversions" do
+      let(:arguments) { ConvenientService::Support::Arguments.new }
+
+      describe "#to_arguments" do
+        it "returns arguments representation of caller" do
+          expect(expression.to_arguments).to eq(arguments)
+        end
       end
     end
   end

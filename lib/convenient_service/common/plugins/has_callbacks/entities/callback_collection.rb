@@ -66,7 +66,7 @@ module ConvenientService
             # @api private
             #
             # @param other [Object] Can be any type.
-            # @return [Array<ConvenientService::Common::Plugins::HasCallbacks::Entities::Callback>]
+            # @return [Boolean]
             #
             def ==(other)
               return unless other.instance_of?(self.class)

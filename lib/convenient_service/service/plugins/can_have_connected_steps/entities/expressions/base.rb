@@ -56,6 +56,16 @@ module ConvenientService
               abstract_method :inspect
 
               ##
+              # @return [Boolean, nil]
+              #
+              abstract_method :==
+
+              ##
+              # @return [Boolean, nil]
+              #
+              abstract_method :to_arguments
+
+              ##
               # @return [Boolean]
               #
               def scalar?

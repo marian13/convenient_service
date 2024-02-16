@@ -32,6 +32,8 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
       it { is_expected.to have_abstract_method(:each_evaluated_step) }
       it { is_expected.to have_abstract_method(:with_organizer) }
       it { is_expected.to have_abstract_method(:inspect) }
+      it { is_expected.to have_abstract_method(:==) }
+      it { is_expected.to have_abstract_method(:to_arguments) }
     end
 
     describe "#scalar?" do

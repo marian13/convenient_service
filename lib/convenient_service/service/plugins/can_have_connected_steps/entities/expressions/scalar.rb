@@ -6,76 +6,93 @@ module ConvenientService
       module CanHaveConnectedSteps
         module Entities
           module Expressions
-            class Empty < Entities::Expressions::Base
+            class Scalar < Entities::Expressions::Base
               ##
+              # @!attribute [r] step
+              #   @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step]
+              #
+              attr_reader :step
+
+              ##
+              # @param step [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step]
               # @return [void]
               #
-              def initialize
+              def initialize(step)
+                @step = step
               end
 
               ##
-              # @raise [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Exceptions::EmptyExpressionHasNoResult]
+              # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
               #
               def result
-                raise Exceptions::EmptyExpressionHasNoResult.new
+                step.result
               end
 
               ##
-              # @raise [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Exceptions::EmptyExpressionHasNoStatus]
+              # @return [Boolean]
               #
               def success?
-                raise Exceptions::EmptyExpressionHasNoStatus.new
+                step.result.status.unsafe_success?
               end
 
               ##
-              # @raise [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Exceptions::EmptyExpressionHasNoStatus]
+              # @return [Boolean]
               #
               def failure?
-                raise Exceptions::EmptyExpressionHasNoStatus.new
+                step.result.status.unsafe_failure?
               end
 
               ##
-              # @raise [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Exceptions::EmptyExpressionHasNoStatus]
+              # @return [Boolean]
               #
               def error?
-                raise Exceptions::EmptyExpressionHasNoStatus.new
+                step.result.status.unsafe_error?
               end
 
               ##
               # @param block [Proc]
-              # @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base]
+              # @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Scalar]
               #
               def each_step(&block)
+                yield(step)
+
                 self
               end
 
               ##
               # @param block [Proc]
-              # @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base]
+              # @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Scalar]
+              #
+              # @internal
+              #   NOTE: `step.result` is called to evaluate step.
               #
               def each_evaluated_step(&block)
+                yield(step)
+
+                step.result
+
                 self
               end
 
               ##
               # @param organizer [ConvenientService::Service]
-              # @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Empty]
+              # @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Scalar]
               #
               def with_organizer(organizer)
-                self
+                copy(overrides: {args: {0 => step.with_organizer(organizer)}})
               end
 
               ##
               # @return [String]
               #
               def inspect
-                ""
+                "steps[#{step.index}]"
               end
 
               ##
               # @return [Boolean]
               #
-              def empty?
+              def scalar?
                 true
               end
 
@@ -86,6 +103,8 @@ module ConvenientService
               def ==(other)
                 return unless other.instance_of?(self.class)
 
+                return false if step != other.step
+
                 true
               end
 
@@ -93,7 +112,7 @@ module ConvenientService
               # @return [ConvenientService::Support::Arguemnts]
               #
               def to_arguments
-                Support::Arguments.new
+                Support::Arguments.new(step)
               end
             end
           end
