@@ -14,6 +14,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
     subject { described_class }
 
     it { is_expected.to include_module(ConvenientService::Support::AbstractMethod) }
+    it { is_expected.to include_module(ConvenientService::Support::Copyable) }
   end
 
   example_group "instance methods" do
@@ -31,6 +32,12 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
       it { is_expected.to have_abstract_method(:each_evaluated_step) }
       it { is_expected.to have_abstract_method(:with_organizer) }
       it { is_expected.to have_abstract_method(:inspect) }
+    end
+
+    describe "#scalar?" do
+      it "returns `false`" do
+        expect(expression.scalar?).to eq(false)
+      end
     end
 
     describe "#not?" do

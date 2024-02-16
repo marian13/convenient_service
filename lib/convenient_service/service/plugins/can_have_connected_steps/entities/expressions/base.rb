@@ -8,6 +8,7 @@ module ConvenientService
           module Expressions
             class Base
               include Support::AbstractMethod
+              include Support::Copyable
 
               ##
               # @return [void]
@@ -53,6 +54,13 @@ module ConvenientService
               # @return [String]
               #
               abstract_method :inspect
+
+              ##
+              # @return [Boolean]
+              #
+              def scalar?
+                false
+              end
 
               ##
               # @return [Boolean]
