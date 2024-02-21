@@ -88,5 +88,6 @@
 | Medium | 🚧 | Contributing Guide | See [Sidekiq Contributing](https://github.com/sidekiq/sidekiq/blob/main/.github/contributing.md) |
 | High | 🚧 | `comparing_by` for `delegate_to` | |
 | High | 🚧 | Remove extra files from bundled gem version | |
+| High | 🚧 | Introduce DSL for High Order Services | |
 
 Search for `TODO`s in the codebase or check [discussions](https://github.com/marian13/convenient_service/discussions) for more tasks.
