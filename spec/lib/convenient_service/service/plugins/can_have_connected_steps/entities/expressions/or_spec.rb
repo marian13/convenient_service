@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::And do
+RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Or do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   let(:left_sub_expression) { ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(first_step) }
@@ -87,17 +87,19 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
         end
 
         specify do
+          ##
+          # NOTE: Ensures that `left_sub_expression` is evaluated.
+          #
           expect { expression.result }
             .to delegate_to(left_sub_expression, :result)
             .without_arguments
-            .and_return_its_value
         end
 
         specify do
-          ##
-          # NOTE: Ensures that `right_sub_expression` is NOT evaluated.
-          #
-          expect { expression.result }.not_to delegate_to(right_sub_expression, :result)
+          expect { expression.result }
+            .to delegate_to(right_sub_expression, :result)
+            .without_arguments
+            .and_return_its_value
         end
       end
 
@@ -124,45 +126,8 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
         end
 
         specify do
-          ##
-          # NOTE: Ensures that `left_sub_expression` is evaluated.
-          #
           expect { expression.result }
             .to delegate_to(left_sub_expression, :result)
-            .without_arguments
-        end
-
-        specify do
-          expect { expression.result }
-            .to delegate_to(right_sub_expression, :result)
-            .without_arguments
-            .and_return_its_value
-        end
-      end
-    end
-
-    describe "#success?" do
-      context "when `left_sub_expression` is NOT `success`" do
-        let(:container) do
-          Class.new do
-            include ConvenientService::Service::Configs::Standard
-
-            step :foo
-            step :bar
-
-            def foo
-              failure(data: {from: :foo})
-            end
-
-            def bar
-              success(data: {from: :bar})
-            end
-          end
-        end
-
-        specify do
-          expect { expression.success? }
-            .to delegate_to(left_sub_expression, :success?)
             .without_arguments
             .and_return_its_value
         end
@@ -170,9 +135,90 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
         specify do
           ##
           # NOTE: Ensures that `right_sub_expression` is NOT evaluated.
-          # NOTE: Any of `success?`, `failure?`, and `error?` calls `result` under the hood. This reduces the possibility of the false-positive spec.
           #
-          expect { expression.success? }.not_to delegate_to(right_sub_expression, :result)
+          expect { expression.result }.not_to delegate_to(right_sub_expression, :result)
+        end
+      end
+    end
+
+    describe "#success?" do
+      context "when `left_sub_expression` is NOT `success`" do
+        context "when `left_sub_expression` is `failure`" do
+          let(:container) do
+            Class.new do
+              include ConvenientService::Service::Configs::Standard
+
+              step :foo
+              step :bar
+
+              def foo
+                failure(data: {from: :foo})
+              end
+
+              def bar
+                success(data: {from: :bar})
+              end
+            end
+          end
+
+          specify do
+            expect { expression.success? }
+              .to delegate_to(left_sub_expression, :success?)
+              .without_arguments
+          end
+
+          specify do
+            expect { expression.success? }
+              .to delegate_to(left_sub_expression, :error?)
+              .without_arguments
+          end
+
+          specify do
+            expect { expression.success? }
+              .to delegate_to(right_sub_expression, :success?)
+              .without_arguments
+              .and_return_its_value
+          end
+        end
+
+        context "when `left_sub_expression` is `error`" do
+          let(:container) do
+            Class.new do
+              include ConvenientService::Service::Configs::Standard
+
+              step :foo
+              step :bar
+
+              def foo
+                error(data: {from: :foo})
+              end
+
+              def bar
+                success(data: {from: :bar})
+              end
+            end
+          end
+
+          specify do
+            expect { expression.success? }
+              .to delegate_to(left_sub_expression, :success?)
+              .without_arguments
+          end
+
+          specify do
+            expect { expression.success? }
+              .to delegate_to(left_sub_expression, :error?)
+                .without_arguments
+                .and_return { false }
+          end
+
+          specify do
+            ##
+            # NOTE: Ensures that `right_sub_expression` is NOT evaluated.
+            # NOTE: Any of `success?`, `failure?`, and `error?` calls `result` under the hood. This reduces the possibility of the false-positive spec.
+            #
+            expect { expression.success? }.not_to delegate_to(right_sub_expression, :result)
+          end
         end
       end
 
@@ -195,14 +241,22 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
         end
 
         specify do
-          expect { expression.success? }.to delegate_to(left_sub_expression, :success?)
+          expect { expression.success? }
+            .to delegate_to(left_sub_expression, :success?)
+              .without_arguments
+              .and_return { true }
         end
 
         specify do
-          expect { expression.success? }
-            .to delegate_to(right_sub_expression, :success?)
-            .without_arguments
-            .and_return_its_value
+          expect { expression.success? }.not_to delegate_to(left_sub_expression, :error?)
+        end
+
+        specify do
+          ##
+          # NOTE: Ensures that `right_sub_expression` is NOT evaluated.
+          # NOTE: Any of `success?`, `failure?`, and `error?` calls `result` under the hood. This reduces the possibility of the false-positive spec.
+          #
+          expect { expression.success? }.not_to delegate_to(right_sub_expression, :result)
         end
       end
     end
@@ -229,17 +283,21 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
 
           specify do
             expect { expression.failure? }
-              .to delegate_to(left_sub_expression, :failure?)
-                .without_arguments
-                .and_return { true }
+              .to delegate_to(left_sub_expression, :success?)
+              .without_arguments
           end
 
           specify do
-            ##
-            # NOTE: Ensures that `right_sub_expression` is NOT evaluated.
-            # NOTE: Any of `success?`, `failure?`, and `error?` calls `result` under the hood. This reduces the possibility of the false-positive spec.
-            #
-            expect { expression.failure? }.not_to delegate_to(right_sub_expression, :result)
+            expect { expression.failure? }
+              .to delegate_to(left_sub_expression, :error?)
+              .without_arguments
+          end
+
+          specify do
+            expect { expression.failure? }
+              .to delegate_to(right_sub_expression, :failure?)
+              .without_arguments
+              .and_return_its_value
           end
         end
 
@@ -263,7 +321,13 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
 
           specify do
             expect { expression.failure? }
-              .to delegate_to(left_sub_expression, :failure?)
+              .to delegate_to(left_sub_expression, :success?)
+              .without_arguments
+          end
+
+          specify do
+            expect { expression.failure? }
+              .to delegate_to(left_sub_expression, :error?)
                 .without_arguments
                 .and_return { false }
           end
@@ -298,21 +362,21 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
 
         specify do
           expect { expression.failure? }
-            .to delegate_to(left_sub_expression, :failure?)
-            .without_arguments
+            .to delegate_to(left_sub_expression, :success?)
+              .without_arguments
+              .and_return { false }
         end
 
         specify do
-          expect { expression.failure? }
-            .to delegate_to(left_sub_expression, :error?)
-            .without_arguments
+          expect { expression.failure? }.not_to delegate_to(left_sub_expression, :error?)
         end
 
         specify do
-          expect { expression.failure? }
-            .to delegate_to(right_sub_expression, :failure?)
-            .without_arguments
-            .and_return_its_value
+          ##
+          # NOTE: Ensures that `right_sub_expression` is NOT evaluated.
+          # NOTE: Any of `success?`, `failure?`, and `error?` calls `result` under the hood. This reduces the possibility of the false-positive spec.
+          #
+          expect { expression.failure? }.not_to delegate_to(right_sub_expression, :result)
         end
       end
     end
@@ -415,25 +479,52 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
       end
 
       context "when `left_sub_expression` is NOT `success`" do
-        let(:container) do
-          Class.new do
-            include ConvenientService::Service::Configs::Standard
+        context "when `left_sub_expression` is `failure`" do
+          let(:container) do
+            Class.new do
+              include ConvenientService::Service::Configs::Standard
 
-            step :foo
-            step :bar
+              step :foo
+              step :bar
 
-            def foo
-              error(data: {from: :foo})
+              def foo
+                failure(data: {from: :foo})
+              end
+
+              def bar
+                success(data: {from: :bar})
+              end
             end
+          end
 
-            def bar
-              success(data: {from: :bar})
-            end
+          specify do
+            expect { expression.each_evaluated_step(&block) }
+              .to delegate_to(right_sub_expression, :each_evaluated_step)
+              .with_arguments(&block)
           end
         end
 
-        specify do
-          expect { expression.each_evaluated_step(&block) }.not_to delegate_to(right_sub_expression, :each_evaluated_step)
+        context "when `left_sub_expression` is `error`" do
+          let(:container) do
+            Class.new do
+              include ConvenientService::Service::Configs::Standard
+
+              step :foo
+              step :bar
+
+              def foo
+                error(data: {from: :foo})
+              end
+
+              def bar
+                success(data: {from: :bar})
+              end
+            end
+          end
+
+          specify do
+            expect { expression.each_evaluated_step(&block) }.not_to delegate_to(right_sub_expression, :each_evaluated_step)
+          end
         end
       end
 
@@ -456,9 +547,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
         end
 
         specify do
-          expect { expression.each_evaluated_step(&block) }
-            .to delegate_to(right_sub_expression, :each_evaluated_step)
-            .with_arguments(&block)
+          expect { expression.each_evaluated_step(&block) }.not_to delegate_to(right_sub_expression, :each_evaluated_step)
         end
       end
 
@@ -478,13 +567,13 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
 
     describe "#inspect" do
       it "returns inspect representation" do
-        expect(expression.inspect).to eq("#{left_sub_expression.inspect} and #{right_sub_expression.inspect}")
+        expect(expression.inspect).to eq("#{left_sub_expression.inspect} or #{right_sub_expression.inspect}")
       end
     end
 
-    describe "#and?" do
+    describe "#or?" do
       it "returns `true`" do
-        expect(expression.and?).to eq(true)
+        expect(expression.or?).to eq(true)
       end
     end
 

@@ -149,7 +149,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
       let(:arguments) { ConvenientService::Support::Arguments.new }
 
       describe "#to_arguments" do
-        it "returns arguments representation of caller" do
+        it "returns arguments representation of `expression`" do
           expect(expression.to_arguments).to eq(arguments)
         end
       end
