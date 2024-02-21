@@ -61,27 +61,45 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
     describe "#success?" do
       specify do
         expect { expression.success? }
-          .to delegate_to(expression.result.status, :unsafe_success?)
+          .to delegate_to(step.result.status, :unsafe_success?)
           .without_arguments
           .and_return_its_value
+      end
+
+      specify do
+        expect { expression.success? }
+          .to delegate_to(expression, :result)
+          .without_arguments
       end
     end
 
     describe "#failure?" do
       specify do
         expect { expression.failure? }
-          .to delegate_to(expression.result.status, :unsafe_failure?)
+          .to delegate_to(step.result.status, :unsafe_failure?)
           .without_arguments
           .and_return_its_value
+      end
+
+      specify do
+        expect { expression.failure? }
+          .to delegate_to(expression, :result)
+          .without_arguments
       end
     end
 
     describe "#error?" do
       specify do
         expect { expression.error? }
-          .to delegate_to(expression.result.status, :unsafe_error?)
+          .to delegate_to(step.result.status, :unsafe_error?)
           .without_arguments
           .and_return_its_value
+      end
+
+      specify do
+        expect { expression.error? }
+          .to delegate_to(expression, :result)
+          .without_arguments
       end
     end
 
@@ -106,7 +124,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
 
       specify do
         expect { expression.each_evaluated_step(&block) }
-          .to delegate_to(step, :result)
+          .to delegate_to(expression, :result)
           .without_arguments
       end
 

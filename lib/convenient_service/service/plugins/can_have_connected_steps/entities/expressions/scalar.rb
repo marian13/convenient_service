@@ -31,22 +31,31 @@ module ConvenientService
               ##
               # @return [Boolean]
               #
+              # @internal
+              #   IMPORTANT: `success?` calls `result` to be able to use the same RSpec spy for both `success?` and `result?`.
+              #
               def success?
-                step.result.status.unsafe_success?
+                result.status.unsafe_success?
               end
 
               ##
               # @return [Boolean]
+              #
+              # @internal
+              #   IMPORTANT: `failure?` calls `result` to be able to use the same RSpec spy for both `failure?` and `result?`.
               #
               def failure?
-                step.result.status.unsafe_failure?
+                result.status.unsafe_failure?
               end
 
               ##
               # @return [Boolean]
               #
+              # @internal
+              #   IMPORTANT: `error?` calls `result` to be able to use the same RSpec spy for both `error?` and `result?`.
+              #
               def error?
-                step.result.status.unsafe_error?
+                result.status.unsafe_error?
               end
 
               ##
@@ -64,12 +73,13 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Scalar]
               #
               # @internal
-              #   NOTE: `step.result` is called to evaluate step.
+              #   NOTE: `result` is called to evaluate step.
+              #   IMPORTANT: `each_evaluated_step` calls `result` to be able to use the same RSpec spy for both `each_evaluated_step` and `result?`.
               #
               def each_evaluated_step(&block)
                 yield(step)
 
-                step.result
+                result
 
                 self
               end
@@ -109,7 +119,7 @@ module ConvenientService
               end
 
               ##
-              # @return [ConvenientService::Support::Arguemnts]
+              # @return [ConvenientService::Support::Arguments]
               #
               def to_arguments
                 Support::Arguments.new(step)

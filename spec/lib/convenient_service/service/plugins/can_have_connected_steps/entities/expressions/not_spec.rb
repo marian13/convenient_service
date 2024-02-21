@@ -38,7 +38,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
   example_group "class methods" do
     describe ".new" do
       it "is overridden" do
-        expect { described_class.new(step) }.not_to raise_error
+        expect { described_class.new(sub_expression) }.not_to raise_error
       end
     end
   end

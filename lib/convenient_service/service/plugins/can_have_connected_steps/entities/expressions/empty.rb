@@ -90,7 +90,7 @@ module ConvenientService
               end
 
               ##
-              # @return [ConvenientService::Support::Arguemnts]
+              # @return [ConvenientService::Support::Arguments]
               #
               def to_arguments
                 Support::Arguments.new
