@@ -43,6 +43,16 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
   end
 
   example_group "instance methods" do
+    describe "#steps" do
+      it "returns `steps` received from `each_step`" do
+        expect(expression.steps).to eq([step])
+      end
+
+      specify do
+        expect { expression.steps }.to delegate_to(expression, :each_step)
+      end
+    end
+
     describe "#step" do
       it "returns `step` passed to constructor" do
         expect(expression.step).to eq(step)

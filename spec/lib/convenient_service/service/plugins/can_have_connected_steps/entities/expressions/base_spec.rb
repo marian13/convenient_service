@@ -6,6 +6,8 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base do
+  include ConvenientService::RSpec::Matchers::DelegateTo
+
   let(:expression) { described_class.allocate }
 
   example_group "modules" do
@@ -34,6 +36,30 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
       it { is_expected.to have_abstract_method(:inspect) }
       it { is_expected.to have_abstract_method(:==) }
       it { is_expected.to have_abstract_method(:to_arguments) }
+    end
+
+    describe "#steps" do
+      let(:expression_class) do
+        Class.new(described_class) do
+          def each_step(&block)
+            yield("first step")
+            yield("second step")
+            yield("third step")
+
+            self
+          end
+        end
+      end
+
+      let(:expression) { expression_class.allocate }
+
+      it "returns `steps` received from `each_step`" do
+        expect(expression.steps).to eq(["first step", "second step", "third step"])
+      end
+
+      specify do
+        expect { expression.steps }.to delegate_to(expression, :each_step)
+      end
     end
 
     describe "#scalar?" do

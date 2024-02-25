@@ -6,6 +6,8 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Empty do
+  include ConvenientService::RSpec::Matchers::DelegateTo
+
   let(:expression) { described_class.new }
 
   let(:container) do
@@ -33,6 +35,16 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
   end
 
   example_group "instance methods" do
+    describe "#steps" do
+      it "returns `steps` received from `each_step`" do
+        expect(expression.steps).to eq([])
+      end
+
+      specify do
+        expect { expression.steps }.to delegate_to(expression, :each_step)
+      end
+    end
+
     describe "#result" do
       let(:exception_message) do
         <<~TEXT

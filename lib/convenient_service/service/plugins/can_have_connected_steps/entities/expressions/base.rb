@@ -66,6 +66,17 @@ module ConvenientService
               abstract_method :to_arguments
 
               ##
+              # @return [Array<ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step>]
+              #
+              def steps
+                array = []
+
+                each_step { |step| array << step }
+
+                array
+              end
+
+              ##
               # @return [Boolean]
               #
               def scalar?
