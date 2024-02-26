@@ -450,6 +450,8 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
       specify { expect { service_instance.steps }.to cache_its_value }
 
       specify { expect(service_instance.steps).to be_frozen }
+
+      specify { expect(service_instance.steps).to be_committed }
     end
 
     describe "#step" do
