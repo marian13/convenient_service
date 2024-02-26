@@ -25,17 +25,6 @@ RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Entities::Type 
     it { is_expected.to have_attr_reader(:value) }
   end
 
-  ##
-  # NOTE: Waits for `should-matchers` full support.
-  #
-  # example_group "delegators" do
-  #   include Shoulda::Matchers::Independent
-  #
-  #   subject { described_class.new(value: :before) }
-  #
-  #   it { is_expected.to delegate_method(:hash).to(:value) }
-  # end
-
   example_group "instance methods" do
     let(:type) { described_class.new(value: value) }
     let(:value) { :before }
@@ -44,7 +33,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Entities::Type 
       context "when types have different classes" do
         let(:other) { "string" }
 
-        it "returns nil" do
+        it "returns `nil`" do
           expect(type == other).to eq(nil)
         end
       end
@@ -52,7 +41,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Entities::Type 
       context "when types have different values" do
         let(:other) { described_class.new(value: :after) }
 
-        it "returns false" do
+        it "returns `false`" do
           expect(type == other).to eq(false)
         end
       end
@@ -60,7 +49,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Entities::Type 
       context "when types have same attributes" do
         let(:other) { described_class.new(value: value) }
 
-        it "returns true" do
+        it "returns `true`" do
           expect(type == other).to eq(true)
         end
       end
@@ -71,23 +60,23 @@ RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Entities::Type 
         let(:other) { 42 }
 
         it "returns `false`" do
-          expect(type == other).to be_nil
+          expect(type.eql?(other)).to be_nil
         end
       end
 
       context "when types have different hashes" do
         let(:other) { described_class.new(value: :after) }
 
-        it "returns false" do
-          expect(type == other).to eq(false)
+        it "returns `false`" do
+          expect(type.eql?(other)).to eq(false)
         end
       end
 
       context "when types have same hashes" do
         let(:other) { described_class.new(value: value) }
 
-        it "returns true" do
-          expect(type == other).to eq(true)
+        it "returns `true`" do
+          expect(type.eql?(other)).to eq(true)
         end
       end
     end
