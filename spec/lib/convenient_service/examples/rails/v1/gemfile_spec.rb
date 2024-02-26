@@ -19,11 +19,13 @@ RSpec.describe ConvenientService::Examples::Rails::V1::Gemfile do
     include ConvenientService::RSpec::Matchers::DelegateTo
 
     describe ".format" do
+      subject(:entry) { described_class.format(path) }
+
       let(:file) { Tempfile.new }
       let(:path) { file.path }
 
       specify do
-        expect { described_class.format(path) }
+        expect { entry }
           .to delegate_to(described_class::Services::Format, :result)
           .with_arguments(path: path)
           .and_return_its_value

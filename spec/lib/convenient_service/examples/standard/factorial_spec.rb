@@ -17,10 +17,12 @@ RSpec.describe ConvenientService::Examples::Standard::Factorial do
     include ConvenientService::RSpec::Matchers::DelegateTo
 
     describe ".calculate" do
+      subject(:entry) { described_class.calculate(number) }
+
       let(:number) { 10 }
 
       specify do
-        expect { described_class.calculate(number) }
+        expect { entry }
           .to delegate_to(described_class::Services::Calculate, :result)
           .with_arguments(number: number)
           .and_return_its_value

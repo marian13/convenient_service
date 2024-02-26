@@ -18,6 +18,8 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams do
     include ConvenientService::RSpec::Matchers::DelegateTo
 
     describe ".prepare" do
+      subject(:entry) { described_class.prepare(request) }
+
       let(:http_string) do
         <<~TEXT
           POST /rules/1.json HTTP/1.1
@@ -36,7 +38,7 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams do
       let(:request) { described_class::Entities::Request.new(http_string: http_string) }
 
       specify do
-        expect { described_class.prepare(request) }
+        expect { entry }
           .to delegate_to(described_class::Services::Prepare, :result)
           .with_arguments(request: request)
           .and_return_its_value

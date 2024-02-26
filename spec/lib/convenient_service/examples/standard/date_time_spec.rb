@@ -17,11 +17,13 @@ RSpec.describe ConvenientService::Examples::Standard::DateTime do
     include ConvenientService::RSpec::Matchers::DelegateTo
 
     describe ".safe_parse" do
+      subject(:entry) { described_class.safe_parse(string, format) }
+
       let(:string) { "24-02-2022" }
       let(:format) { "%d-%m-%Y" }
 
       specify do
-        expect { described_class.safe_parse(string, format) }
+        expect { entry }
           .to delegate_to(described_class::Services::SafeParse, :result)
           .with_arguments(string: string, format: format)
           .and_return_its_value
