@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::Service::Plugins::CanHaveSequentialSteps::Entities::StepCollection do
+RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::StepCollection do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   let(:step_collection) { described_class.new(container: container) }
@@ -23,6 +23,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSequentialSteps::Enti
   let(:args) { [Class.new] }
   let(:kwargs) { {in: :foo, out: :bar, container: container} }
 
+  let(:expression) { ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(step) }
   let(:steps) { [step] }
 
   example_group "modules" do
@@ -36,6 +37,14 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSequentialSteps::Enti
 
   example_group "class methods" do
     describe ".new" do
+      context "when `expression` is NOT passed" do
+        let(:step_collection) { described_class.new(container: container) }
+
+        it "sets `expression` to empty expression" do
+          expect(step_collection.expression).to eq(ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Empty.new)
+        end
+      end
+
       context "when `steps` are NOT passed" do
         let(:step_collection) { described_class.new(container: container) }
 
@@ -50,6 +59,24 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSequentialSteps::Enti
     describe "#container" do
       it "returns `container` passed to constructor" do
         expect(step_collection.container).to eq(container)
+      end
+    end
+
+    describe "#expression" do
+      context "when `step collection` has NO `expression`" do
+        let(:step_collection) { described_class.new(container: container) }
+
+        it "returns empty expression" do
+          expect(step_collection.expression).to eq(ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Empty.new)
+        end
+      end
+
+      context "when `step collection` has `expression`" do
+        let(:step_collection) { described_class.new(container: container, expression: expression) }
+
+        it "returns that `expression`" do
+          expect(step_collection.expression).to eq(expression)
+        end
       end
     end
 
@@ -118,18 +145,18 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSequentialSteps::Enti
     end
 
     describe "#with_organizer" do
-      let(:step_collection) { described_class.new(container: container, steps: steps) }
+      let(:step_collection) { described_class.new(container: container, expression: expression, steps: steps) }
 
       specify do
         expect { step_collection.with_organizer(organizer) }
           .to delegate_to(step_collection, :copy)
-          .with_arguments(overrides: {kwargs: {steps: steps.map { |step| step.with_organizer(organizer) }}})
+          .with_arguments(overrides: {kwargs: {expression: expression.with_organizer(organizer), steps: steps.map { |step| step.with_organizer(organizer) }}})
           .and_return_its_value
       end
     end
 
     describe "#commit!" do
-      let(:step_collection) { described_class.new(container: container, steps: steps) }
+      let(:step_collection) { described_class.new(container: container, expression: expression, steps: steps) }
 
       context "when step collection is NOT committed" do
         it "returns `true`" do
@@ -146,6 +173,13 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSequentialSteps::Enti
         ##
         # NOTE: Stubs on `freeze` generate warnings.
         #
+        it "freezes step collection `expression`" do
+          expect { step_collection.commit! }.to change(expression, :frozen?).from(false).to(true)
+        end
+
+        ##
+        # NOTE: Stubs on `freeze` generate warnings.
+        #
         it "freezes step collection `steps`" do
           expect { step_collection.commit! }.to change(steps, :frozen?).from(false).to(true)
         end
@@ -155,6 +189,13 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSequentialSteps::Enti
         end
 
         context "when step collection has multiple steps" do
+          let(:expression) do
+            ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Or.new(
+              ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(step),
+              ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(other_step)
+            )
+          end
+
           let(:steps) { [step, other_step] }
           let(:other_step) { container.step_class.new(*args, **kwargs) }
 
@@ -184,17 +225,17 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSequentialSteps::Enti
     end
 
     describe "#committed?" do
-      let(:step_collection) { described_class.new(container: container, steps: steps) }
+      let(:step_collection) { described_class.new(container: container, expression: expression, steps: steps) }
 
-      context "when `steps` are NOT frozen" do
+      context "when `expression` is NOT frozen" do
         it "returns `false`" do
           expect(step_collection.committed?).to eq(false)
         end
       end
 
-      context "when `steps` are frozen" do
+      context "when `expression` is frozen" do
         before do
-          steps.freeze
+          expression.freeze
         end
 
         it "returns `true`" do
@@ -240,15 +281,32 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSequentialSteps::Enti
     describe "#each" do
       let(:block) { proc { |step| } }
 
-      ##
-      # TODO: `with_block`.
-      #
-      # - https://github.com/rspec/rspec-mocks/issues/1182
-      # - https://stackoverflow.com/questions/27244034/test-if-a-block-is-passed-with-rspec-mocks
-      #
       specify do
         expect { step_collection.each(&block) }
-          .to delegate_to(step_collection, :steps)
+          .to delegate_to(step_collection.expression, :each_step)
+          .with_arguments(&block)
+          .and_return_its_value
+      end
+    end
+
+    describe "#each_step" do
+      let(:block) { proc { |step| } }
+
+      specify do
+        expect { step_collection.each_step(&block) }
+          .to delegate_to(step_collection.expression, :each_step)
+          .with_arguments(&block)
+          .and_return_its_value
+      end
+    end
+
+    describe "#each_evaluated_step" do
+      let(:block) { proc { |step| } }
+
+      specify do
+        expect { step_collection.each_evaluated_step(&block) }
+          .to delegate_to(step_collection.expression, :each_evaluated_step)
+          .with_arguments(&block)
           .and_return_its_value
       end
     end
@@ -265,6 +323,14 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSequentialSteps::Enti
 
         context "when `other` has different `container`" do
           let(:other) { described_class.new(container: Class.new) }
+
+          it "returns `false`" do
+            expect(step_collection == other).to eq(false)
+          end
+        end
+
+        context "when `other` has different `expression`" do
+          let(:other) { described_class.new(container: container).tap { |collection| collection.expression = ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(step.copy(overrides: {kwargs: {index: -1}})) } }
 
           it "returns `false`" do
             expect(step_collection == other).to eq(false)
@@ -290,8 +356,8 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSequentialSteps::Enti
     end
 
     example_group "conversions" do
-      let(:step_collection) { described_class.new(container: container, steps: steps) }
-      let(:arguments) { ConvenientService::Support::Arguments.new(container: container, steps: steps) }
+      let(:step_collection) { described_class.new(container: container, expression: expression, steps: steps) }
+      let(:arguments) { ConvenientService::Support::Arguments.new(container: container, expression: expression, steps: steps) }
 
       describe "#to_arguments" do
         it "returns arguments representation of `step collection`" do
