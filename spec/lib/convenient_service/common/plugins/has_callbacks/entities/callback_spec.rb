@@ -6,6 +6,8 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Entities::Callback do
+  include ConvenientService::RSpec::Matchers::DelegateTo
+
   example_group "attributes" do
     include ConvenientService::RSpec::PrimitiveMatchers::HaveAttrReader
 
@@ -175,23 +177,14 @@ RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Entities::Callb
           expect(callback == other).to eq(false)
         end
 
-        ##
-        # TODO: Refactor.
-        #
-        # rubocop:disable Lint/Void, RSpec/ExampleLength
         it "uses `source_location` to compare blocks" do
-          callback_block_source_location = double
-          other_callback_block_source_location = double
+          allow(callback.block).to receive(:source_location).and_return(OpenStruct.new)
 
-          allow(params[:block]).to receive(:source_location).and_return(callback_block_source_location)
-          allow(other_callback_block).to receive(:source_location).and_return(other_callback_block_source_location)
-          allow(callback_block_source_location).to receive(:==).with(other_callback_block_source_location)
-
-          callback == other
-
-          expect(callback_block_source_location).to have_received(:==)
+          expect { callback == other }
+            .to delegate_to(callback.block.source_location, :==)
+            .with_arguments(other.block.source_location)
+            .and_return_its_value
         end
-        # rubocop:enable Lint/Void, RSpec/ExampleLength
       end
 
       context "when calbacks have same attributes" do
