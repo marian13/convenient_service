@@ -6,6 +6,13 @@ module ConvenientService
       module CanHaveConnectedSteps
         module Exceptions
           class FirstStepIsNotSet < ::ConvenientService::Exception
+            ##
+            # @param container [Class<ConvenientService::Service>]
+            # @return [void]
+            #
+            # @internal
+            #   TODO: Use `display_name`.
+            #
             def initialize_with_kwargs(container:)
               message = <<~TEXT
                 First step of `#{container}` is NOT set.
@@ -26,6 +33,13 @@ module ConvenientService
           end
 
           class FirstGroupStepIsNotSet < ::ConvenientService::Exception
+            ##
+            # @param container [Class<ConvenientService::Service>]
+            # @return [void]
+            #
+            # @internal
+            #   TODO: Use `display_name`.
+            #
             def initialize_with_kwargs(container:)
               message = <<~TEXT
                 First step of group from `#{container}` is NOT set.
@@ -50,6 +64,9 @@ module ConvenientService
           end
 
           class EmptyExpressionHasNoResult < ::ConvenientService::Exception
+            ##
+            # @return [void]
+            #
             def initialize_without_arguments
               message = <<~TEXT
                 Empty expression has NO result.
@@ -60,6 +77,9 @@ module ConvenientService
           end
 
           class EmptyExpressionHasNoStatus < ::ConvenientService::Exception
+            ##
+            # @return [void]
+            #
             def initialize_without_arguments
               message = <<~TEXT
                 Empty expression has NO status.
