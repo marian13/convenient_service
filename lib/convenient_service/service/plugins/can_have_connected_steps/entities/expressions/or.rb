@@ -107,7 +107,7 @@ module ConvenientService
               # @return [String]
               #
               def inspect
-                "#{left_expression.inspect} or #{right_expression.inspect}"
+                "#{left_expression.inspect} || #{right_expression.inspect}"
               end
 
               ##

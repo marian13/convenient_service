@@ -135,7 +135,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
 
     describe "#inspect" do
       it "returns inspect representation" do
-        expect(expression.inspect).to eq("not #{sub_expression.inspect}")
+        expect(expression.inspect).to eq("!#{sub_expression.inspect}")
       end
     end
 

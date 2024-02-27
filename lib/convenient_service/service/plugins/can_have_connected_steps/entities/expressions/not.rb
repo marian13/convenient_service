@@ -81,7 +81,7 @@ module ConvenientService
               # @return [String]
               #
               def inspect
-                "not #{expression.inspect}"
+                "!#{expression.inspect}"
               end
 
               ##

@@ -581,7 +581,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
 
     describe "#inspect" do
       it "returns inspect representation" do
-        expect(expression.inspect).to eq("#{left_sub_expression.inspect} or #{right_sub_expression.inspect}")
+        expect(expression.inspect).to eq("#{left_sub_expression.inspect} || #{right_sub_expression.inspect}")
       end
     end
 

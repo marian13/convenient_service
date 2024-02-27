@@ -42,6 +42,10 @@ module ConvenientService
             # @param kwargs [Hash{Symbol => Object}]
             # @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base]
             #
+            # @note `not` from `not_step` has a similar precedence as Ruby's `!`.
+            # @note `not_step` is a rought equivalent of `!step`.
+            # @see https://ruby-doc.org/core-2.7.1/doc/syntax/precedence_rdoc.html
+            #
             def not_step(*args, **kwargs)
               previous_expression = steps.expression
 
@@ -71,6 +75,10 @@ module ConvenientService
             # @param kwargs [Hash{Symbol => Object}]
             # @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base]
             #
+            # @note `and` from `and_step` has a similar precedence as Ruby's `&&`.
+            # @note `and_step` is a rought equivalent of `&& step`.
+            # @see https://ruby-doc.org/core-2.7.1/doc/syntax/precedence_rdoc.html
+            #
             def and_step(*args, **kwargs)
               previous_expression = steps.expression
 
@@ -93,6 +101,11 @@ module ConvenientService
             # @param args [Array<Object>]
             # @param kwargs [Hash{Symbol => Object}]
             # @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base]
+            #
+            # @note `and` from `and_step` has a similar precedence as Ruby's `&&`.
+            # @note `not` from `and_not_step` has a similar precedence as Ruby's `!`.
+            # @note `and_not_step` is a rought equivalent of `&& !step`.
+            # @see https://ruby-doc.org/core-2.7.1/doc/syntax/precedence_rdoc.html
             #
             def and_not_step(*args, **kwargs)
               previous_expression = steps.expression
@@ -118,6 +131,10 @@ module ConvenientService
             # @param args [Array<Object>]
             # @param kwargs [Hash{Symbol => Object}]
             # @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base]
+            #
+            # @note `or` from `or_step` has a similar precedence as Ruby's `||`.
+            # @note `or_step` is a rought equivalent of `|| step`.
+            # @see https://ruby-doc.org/core-2.7.1/doc/syntax/precedence_rdoc.html
             #
             # @internal
             #   NOTE: Decomposing of the `and` expression is needed to make its priority higher.
@@ -154,6 +171,11 @@ module ConvenientService
             # @param args [Array<Object>]
             # @param kwargs [Hash{Symbol => Object}]
             # @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base]
+            #
+            # @note `or` from `or_not_step` has a similar precedence as Ruby's `||`.
+            # @note `not` from `or_not_step` has a similar precedence as Ruby's `!`.
+            # @note `or_not_step` is a rought equivalent of `|| !step`.
+            # @see https://ruby-doc.org/core-2.7.1/doc/syntax/precedence_rdoc.html
             #
             # @internal
             #   NOTE: Decomposing of the `and` expression is needed to make its priority higher.
@@ -192,6 +214,10 @@ module ConvenientService
             # @param block [Proc, nil]
             # @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base]
             #
+            # @note `group` has a similar precedence as Ruby's `()`.
+            # @note `group` is a rought equivalent of `()`.
+            # @see https://ruby-doc.org/core-2.7.1/doc/syntax/precedence_rdoc.html
+            #
             def group(&block)
               previous_expression = steps.expression
 
@@ -219,6 +245,11 @@ module ConvenientService
             #
             # @param block [Proc, nil]
             # @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base]
+            #
+            # @note `not` from `not_group` has a similar precedence as Ruby's `!`.
+            # @note `group` from `not_group` has a similar precedence as Ruby's `()`.
+            # @note `not_group` is a rought equivalent of `!()`.
+            # @see https://ruby-doc.org/core-2.7.1/doc/syntax/precedence_rdoc.html
             #
             def not_group(&block)
               previous_expression = steps.expression
@@ -252,6 +283,11 @@ module ConvenientService
             # @param block [Proc, nil]
             # @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base]
             #
+            # @note `and` from `and_group` has a similar precedence as Ruby's `&&`.
+            # @note `group` from `and_group` has a similar precedence as Ruby's `()`.
+            # @note `not_group` is a rought equivalent of `&& ()`.
+            # @see https://ruby-doc.org/core-2.7.1/doc/syntax/precedence_rdoc.html
+            #
             def and_group(&block)
               previous_expression = steps.expression
 
@@ -277,6 +313,12 @@ module ConvenientService
             #
             # @param block [Proc, nil]
             # @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base]
+            #
+            # @note `and` from `and_not_group` has a similar precedence as Ruby's `&&`.
+            # @note `not` from `and_not_group` has a similar precedence as Ruby's `!`.
+            # @note `group` from `and_not_group` has a similar precedence as Ruby's `()`.
+            # @note `and_not_group` is a rought equivalent of `&& !()`.
+            # @see https://ruby-doc.org/core-2.7.1/doc/syntax/precedence_rdoc.html
             #
             def and_not_group(&block)
               previous_expression = steps.expression
@@ -308,6 +350,11 @@ module ConvenientService
             #
             # @internal
             #   NOTE: Decomposing of the `and` expression is needed to make its priority higher.
+            #
+            # @note `or` from `or_group` has a similar precedence as Ruby's `||`.
+            # @note `group` from `or_group` has a similar precedence as Ruby's `()`.
+            # @note `or_group` is a rought equivalent of `|| ()`
+            # @see https://ruby-doc.org/core-2.7.1/doc/syntax/precedence_rdoc.html
             #
             def or_group(&block)
               previous_expression = steps.expression
@@ -347,6 +394,12 @@ module ConvenientService
             #
             # @internal
             #   NOTE: Decomposing of the `and` expression is needed to make its priority higher.
+            #
+            # @note `or` from `or_not_group` has a similar precedence as Ruby's `||`.
+            # @note `not` from `or_not_group` has a similar precedence as Ruby's `!`.
+            # @note `group` from `or_not_group` has a similar precedence as Ruby's `()`.
+            # @note `or_not_group` is a rought equivalent of `|| !()`
+            # @see https://ruby-doc.org/core-2.7.1/doc/syntax/precedence_rdoc.html
             #
             def or_not_group(&block)
               previous_expression = steps.expression

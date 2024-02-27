@@ -95,7 +95,7 @@ module ConvenientService
               # @return [String]
               #
               def inspect
-                "#{left_expression.inspect} and #{right_expression.inspect}"
+                "#{left_expression.inspect} && #{right_expression.inspect}"
               end
 
               ##
