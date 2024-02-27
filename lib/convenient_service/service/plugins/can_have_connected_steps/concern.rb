@@ -15,7 +15,7 @@ module ConvenientService
             #
             # @param args [Array<Object>]
             # @param kwargs [Hash{Symbol => Object}]
-            # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step]
+            # @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base]
             #
             def step(*args, **kwargs)
               previous_expression = steps.expression
@@ -40,7 +40,7 @@ module ConvenientService
             #
             # @param args [Array<Object>]
             # @param kwargs [Hash{Symbol => Object}]
-            # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step]
+            # @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base]
             #
             def not_step(*args, **kwargs)
               previous_expression = steps.expression
@@ -69,7 +69,7 @@ module ConvenientService
             #
             # @param args [Array<Object>]
             # @param kwargs [Hash{Symbol => Object}]
-            # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step]
+            # @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base]
             #
             def and_step(*args, **kwargs)
               previous_expression = steps.expression
@@ -92,7 +92,7 @@ module ConvenientService
             #
             # @param args [Array<Object>]
             # @param kwargs [Hash{Symbol => Object}]
-            # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step]
+            # @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base]
             #
             def and_not_step(*args, **kwargs)
               previous_expression = steps.expression
@@ -117,7 +117,7 @@ module ConvenientService
             #
             # @param args [Array<Object>]
             # @param kwargs [Hash{Symbol => Object}]
-            # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step]
+            # @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base]
             #
             # @internal
             #   NOTE: Decomposing of the `and` expression is needed to make its priority higher.
@@ -153,7 +153,7 @@ module ConvenientService
             #
             # @param args [Array<Object>]
             # @param kwargs [Hash{Symbol => Object}]
-            # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step]
+            # @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base]
             #
             # @internal
             #   NOTE: Decomposing of the `and` expression is needed to make its priority higher.
@@ -181,6 +181,202 @@ module ConvenientService
                     previous_expression,
                     Entities::Expressions::Not.new(
                       Entities::Expressions::Scalar.new(new_step)
+                    )
+                  )
+                end
+            end
+
+            ##
+            # @api public
+            #
+            # @param block [Proc, nil]
+            # @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base]
+            #
+            def group(&block)
+              previous_expression = steps.expression
+
+              steps.expression = Entities::Expressions::Empty.new
+
+              block&.call
+
+              current_expression = steps.expression
+
+              raise Exceptions::FirstGroupStepIsNotSet.new(container: self, method: __method__) if current_expression.empty?
+
+              steps.expression =
+                if previous_expression.empty?
+                  Entities::Expressions::Group.new(current_expression)
+                else
+                  Entities::Expressions::And.new(
+                    previous_expression,
+                    Entities::Expressions::Group.new(current_expression)
+                  )
+                end
+            end
+
+            ##
+            # @api public
+            #
+            # @param block [Proc, nil]
+            # @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base]
+            #
+            def not_group(&block)
+              previous_expression = steps.expression
+
+              steps.expression = Entities::Expressions::Empty.new
+
+              block&.call
+
+              current_expression = steps.expression
+
+              raise Exceptions::FirstGroupStepIsNotSet.new(container: self, method: __method__) if current_expression.empty?
+
+              steps.expression =
+                if previous_expression.empty?
+                  Entities::Expressions::Not.new(
+                    Entities::Expressions::Group.new(current_expression)
+                  )
+                else
+                  Entities::Expressions::And.new(
+                    previous_expression,
+                    Entities::Expressions::Not.new(
+                      Entities::Expressions::Group.new(current_expression)
+                    )
+                  )
+                end
+            end
+
+            ##
+            # @api public
+            #
+            # @param block [Proc, nil]
+            # @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base]
+            #
+            def and_group(&block)
+              previous_expression = steps.expression
+
+              raise Exceptions::FirstStepIsNotSet.new(container: self) if previous_expression.empty?
+
+              steps.expression = Entities::Expressions::Empty.new
+
+              block&.call
+
+              current_expression = steps.expression
+
+              raise Exceptions::FirstGroupStepIsNotSet.new(container: self, method: __method__) if current_expression.empty?
+
+              steps.expression =
+                Entities::Expressions::And.new(
+                  previous_expression,
+                  Entities::Expressions::Group.new(current_expression)
+                )
+            end
+
+            ##
+            # @api public
+            #
+            # @param block [Proc, nil]
+            # @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base]
+            #
+            def and_not_group(&block)
+              previous_expression = steps.expression
+
+              raise Exceptions::FirstStepIsNotSet.new(container: self) if previous_expression.empty?
+
+              steps.expression = Entities::Expressions::Empty.new
+
+              block&.call
+
+              current_expression = steps.expression
+
+              raise Exceptions::FirstGroupStepIsNotSet.new(container: self, method: __method__) if current_expression.empty?
+
+              steps.expression =
+                Entities::Expressions::And.new(
+                  previous_expression,
+                  Entities::Expressions::Not.new(
+                    Entities::Expressions::Group.new(current_expression)
+                  )
+                )
+            end
+
+            ##
+            # @api public
+            #
+            # @param block [Proc, nil]
+            # @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base]
+            #
+            # @internal
+            #   NOTE: Decomposing of the `and` expression is needed to make its priority higher.
+            #
+            def or_group(&block)
+              previous_expression = steps.expression
+
+              raise Exceptions::FirstStepIsNotSet.new(container: self) if previous_expression.empty?
+
+              steps.expression = Entities::Expressions::Empty.new
+
+              block&.call
+
+              current_expression = steps.expression
+
+              raise Exceptions::FirstGroupStepIsNotSet.new(container: self, method: __method__) if current_expression.empty?
+
+              steps.expression =
+                if previous_expression.and?
+                  Entities::Expressions::And.new(
+                    previous_expression.left_expression,
+                    Entities::Expressions::Or.new(
+                      previous_expression.right_expression,
+                      Entities::Expressions::Group.new(current_expression)
+                    )
+                  )
+                else
+                  Entities::Expressions::Or.new(
+                    previous_expression,
+                    Entities::Expressions::Group.new(current_expression)
+                  )
+                end
+            end
+
+            ##
+            # @api public
+            #
+            # @param block [Proc, nil]
+            # @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base]
+            #
+            # @internal
+            #   NOTE: Decomposing of the `and` expression is needed to make its priority higher.
+            #
+            def or_not_group(&block)
+              previous_expression = steps.expression
+
+              raise Exceptions::FirstStepIsNotSet.new(container: self) if previous_expression.empty?
+
+              steps.expression = Entities::Expressions::Empty.new
+
+              block&.call
+
+              current_expression = steps.expression
+
+              raise Exceptions::FirstGroupStepIsNotSet.new(container: self, method: __method__) if current_expression.empty?
+
+              steps.expression =
+                if previous_expression.and?
+                  Entities::Expressions::And.new(
+                    previous_expression.left_expression,
+                    Entities::Expressions::Or.new(
+                      previous_expression.right_expression,
+                      Entities::Expressions::Not.new(
+                        Entities::Expressions::Group.new(current_expression)
+                      )
+                    )
+                  )
+                else
+                  Entities::Expressions::Or.new(
+                    previous_expression,
+                    Entities::Expressions::Not.new(
+                      Entities::Expressions::Group.new(current_expression)
                     )
                   )
                 end
@@ -225,7 +421,7 @@ module ConvenientService
             # Returns `nil` when index is out of range.
             #
             # @param index [Integer]
-            # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step]
+            # @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base]
             #
             # @note This method was initially designed as a hook (callback trigger).
             # @see ConvenientService::Service::Plugins::CanHaveConnectedSteps::Middleware#next

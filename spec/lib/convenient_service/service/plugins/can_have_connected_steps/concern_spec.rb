@@ -258,6 +258,10 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
       end
 
       context "when `previous expression` is NOT empty" do
+        before do
+          service_class.step(*args, **kwargs)
+        end
+
         context "when `previous expression` is NOT `and expression`" do
           let(:previous_expression) { ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(first_step) }
           let(:new_expression) do
@@ -265,10 +269,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
               ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(first_step),
               ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(second_step)
             )
-          end
-
-          before do
-            service_class.step(*args, **kwargs)
           end
 
           it "returns `new expression` that includes `previous expression`" do
@@ -295,7 +295,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
           end
 
           before do
-            service_class.step(*args, **kwargs)
             service_class.and_step(*args, **kwargs)
           end
 
@@ -340,6 +339,10 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
       end
 
       context "when `previous expression` is NOT empty" do
+        before do
+          service_class.step(*args, **kwargs)
+        end
+
         context "when `previous expression` is NOT `and expression`" do
           let(:previous_expression) { ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(first_step) }
           let(:new_expression) do
@@ -349,10 +352,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
                 ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(second_step)
               )
             )
-          end
-
-          before do
-            service_class.step(*args, **kwargs)
           end
 
           it "returns `new expression` that includes `previous expression`" do
@@ -381,7 +380,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
           end
 
           before do
-            service_class.step(*args, **kwargs)
             service_class.and_step(*args, **kwargs)
           end
 
@@ -410,6 +408,738 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
 
         it "raises `ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstStepIsNotSet`" do
           expect { service_class.or_not_step(*args, **kwargs) }
+            .to raise_error(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstStepIsNotSet)
+            .with_message(exception_message)
+        end
+      end
+    end
+
+    describe ".group" do
+      let(:block) { proc { service_class.step(*args, **kwargs) } }
+
+      context "when `previous expression` is NOT empty" do
+        let(:previous_expression) { ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(first_step) }
+
+        before do
+          service_class.step(*args, **kwargs)
+        end
+
+        context "when `block` is NOT passed" do
+          let(:exception_message) do
+            <<~TEXT
+              First step of `group` from `#{service_class}` is NOT set.
+
+              Did you forget to use `step`? For example:
+
+              class #{service_class}
+                # ...
+
+                group do
+                  step SomeService
+
+                  # ...
+                end
+
+                # ...
+              end
+            TEXT
+          end
+
+          it "raises `ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstGroupStepIsNotSet`" do
+            expect { service_class.group }
+              .to raise_error(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstGroupStepIsNotSet)
+              .with_message(exception_message)
+          end
+        end
+
+        context "when `block` is passed" do
+          context "when `block` does NOT add any steps" do
+            let(:block) { proc {} }
+
+            let(:exception_message) do
+              <<~TEXT
+                First step of `group` from `#{service_class}` is NOT set.
+
+                Did you forget to use `step`? For example:
+
+                class #{service_class}
+                  # ...
+
+                  group do
+                    step SomeService
+
+                    # ...
+                  end
+
+                  # ...
+                end
+              TEXT
+            end
+
+            it "raises `ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstGroupStepIsNotSet`" do
+              expect { service_class.group {} }
+                .to raise_error(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstGroupStepIsNotSet)
+                .with_message(exception_message)
+            end
+          end
+
+          context "when `block` adds some steps" do
+            let(:block) { proc { service_class.step(*args, **kwargs) } }
+
+            let(:new_expression) do
+              ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::And.new(
+                ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(first_step),
+                ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Group.new(
+                  ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(second_step)
+                )
+              )
+            end
+
+            it "returns `new expression` that includes `previous expression`" do
+              expect(service_class.group(&block)).to eq(new_expression)
+            end
+          end
+        end
+      end
+
+      context "when `previous expression is empty`" do
+        let(:new_expression) do
+          ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Group.new(
+            ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(first_step)
+          )
+        end
+
+        it "returns `new expression` that does NOT include `previous expression`" do
+          expect(service_class.group(&block)).to eq(new_expression)
+        end
+      end
+    end
+
+    describe ".not_group" do
+      let(:block) { proc { service_class.step(*args, **kwargs) } }
+
+      context "when `previous expression` is NOT empty" do
+        let(:previous_expression) { ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(first_step) }
+
+        before do
+          service_class.step(*args, **kwargs)
+        end
+
+        context "when `block` is NOT passed" do
+          let(:exception_message) do
+            <<~TEXT
+              First step of `not_group` from `#{service_class}` is NOT set.
+
+              Did you forget to use `step`? For example:
+
+              class #{service_class}
+                # ...
+
+                not_group do
+                  step SomeService
+
+                  # ...
+                end
+
+                # ...
+              end
+            TEXT
+          end
+
+          it "raises `ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstGroupStepIsNotSet`" do
+            expect { service_class.not_group }
+              .to raise_error(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstGroupStepIsNotSet)
+              .with_message(exception_message)
+          end
+        end
+
+        context "when `block` is passed" do
+          context "when `block` does NOT add any steps" do
+            let(:block) { proc {} }
+
+            let(:exception_message) do
+              <<~TEXT
+                First step of `not_group` from `#{service_class}` is NOT set.
+
+                Did you forget to use `step`? For example:
+
+                class #{service_class}
+                  # ...
+
+                  not_group do
+                    step SomeService
+
+                    # ...
+                  end
+
+                  # ...
+                end
+              TEXT
+            end
+
+            it "raises `ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstGroupStepIsNotSet`" do
+              expect { service_class.not_group {} }
+                .to raise_error(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstGroupStepIsNotSet)
+                .with_message(exception_message)
+            end
+          end
+
+          context "when `block` adds some steps" do
+            let(:block) { proc { service_class.step(*args, **kwargs) } }
+
+            let(:new_expression) do
+              ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::And.new(
+                ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(first_step),
+                ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Not.new(
+                  ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Group.new(
+                    ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(second_step)
+                  )
+                )
+              )
+            end
+
+            it "returns `new expression` that includes `previous expression`" do
+              expect(service_class.not_group(&block)).to eq(new_expression)
+            end
+          end
+        end
+      end
+
+      context "when `previous expression is empty`" do
+        let(:new_expression) do
+          ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Not.new(
+            ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Group.new(
+              ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(first_step)
+            )
+          )
+        end
+
+        it "returns `new expression` that does NOT include `previous expression`" do
+          expect(service_class.not_group(&block)).to eq(new_expression)
+        end
+      end
+    end
+
+    describe ".and_group" do
+      let(:block) { proc { service_class.step(*args, **kwargs) } }
+
+      context "when `previous expression` is NOT empty" do
+        let(:previous_expression) { ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(first_step) }
+
+        before do
+          service_class.step(*args, **kwargs)
+        end
+
+        context "when `block` is NOT passed" do
+          let(:exception_message) do
+            <<~TEXT
+              First step of `and_group` from `#{service_class}` is NOT set.
+
+              Did you forget to use `step`? For example:
+
+              class #{service_class}
+                # ...
+
+                and_group do
+                  step SomeService
+
+                  # ...
+                end
+
+                # ...
+              end
+            TEXT
+          end
+
+          it "raises `ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstGroupStepIsNotSet`" do
+            expect { service_class.and_group }
+              .to raise_error(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstGroupStepIsNotSet)
+              .with_message(exception_message)
+          end
+        end
+
+        context "when `block` is passed" do
+          context "when `block` does NOT add any steps" do
+            let(:block) { proc {} }
+
+            let(:exception_message) do
+              <<~TEXT
+                First step of `and_group` from `#{service_class}` is NOT set.
+
+                Did you forget to use `step`? For example:
+
+                class #{service_class}
+                  # ...
+
+                  and_group do
+                    step SomeService
+
+                    # ...
+                  end
+
+                  # ...
+                end
+              TEXT
+            end
+
+            it "raises `ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstGroupStepIsNotSet`" do
+              expect { service_class.and_group {} }
+                .to raise_error(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstGroupStepIsNotSet)
+                .with_message(exception_message)
+            end
+          end
+
+          context "when `block` adds some steps" do
+            let(:block) { proc { service_class.step(*args, **kwargs) } }
+
+            let(:new_expression) do
+              ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::And.new(
+                ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(first_step),
+                ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Group.new(
+                  ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(second_step)
+                )
+              )
+            end
+
+            it "returns `new expression` that includes `previous expression`" do
+              expect(service_class.and_group(&block)).to eq(new_expression)
+            end
+          end
+        end
+      end
+
+      context "when `previous expression is empty`" do
+        let(:exception_message) do
+          <<~TEXT
+            First step of `#{service_class}` is NOT set.
+
+            Did you forget to use `step`? For example:
+
+            class #{service_class}
+              # ...
+
+              step SomeService
+
+              # ...
+            end
+          TEXT
+        end
+
+        it "raises `ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstStepIsNotSet`" do
+          expect { service_class.and_group(&block) }
+            .to raise_error(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstStepIsNotSet)
+            .with_message(exception_message)
+        end
+      end
+    end
+
+    describe ".and_not_group" do
+      let(:block) { proc { service_class.step(*args, **kwargs) } }
+
+      context "when `previous expression` is NOT empty" do
+        let(:previous_expression) { ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(first_step) }
+
+        before do
+          service_class.step(*args, **kwargs)
+        end
+
+        context "when `block` is NOT passed" do
+          let(:exception_message) do
+            <<~TEXT
+              First step of `and_not_group` from `#{service_class}` is NOT set.
+
+              Did you forget to use `step`? For example:
+
+              class #{service_class}
+                # ...
+
+                and_not_group do
+                  step SomeService
+
+                  # ...
+                end
+
+                # ...
+              end
+            TEXT
+          end
+
+          it "raises `ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstGroupStepIsNotSet`" do
+            expect { service_class.and_not_group }
+              .to raise_error(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstGroupStepIsNotSet)
+              .with_message(exception_message)
+          end
+        end
+
+        context "when `block` is passed" do
+          context "when `block` does NOT add any steps" do
+            let(:block) { proc {} }
+
+            let(:exception_message) do
+              <<~TEXT
+                First step of `and_not_group` from `#{service_class}` is NOT set.
+
+                Did you forget to use `step`? For example:
+
+                class #{service_class}
+                  # ...
+
+                  and_not_group do
+                    step SomeService
+
+                    # ...
+                  end
+
+                  # ...
+                end
+              TEXT
+            end
+
+            it "raises `ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstGroupStepIsNotSet`" do
+              expect { service_class.and_not_group {} }
+                .to raise_error(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstGroupStepIsNotSet)
+                .with_message(exception_message)
+            end
+          end
+
+          context "when `block` adds some steps" do
+            let(:block) { proc { service_class.step(*args, **kwargs) } }
+
+            let(:new_expression) do
+              ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::And.new(
+                ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(first_step),
+                ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Not.new(
+                  ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Group.new(
+                    ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(second_step)
+                  )
+                )
+              )
+            end
+
+            it "returns `new expression` that includes `previous expression`" do
+              expect(service_class.and_not_group(&block)).to eq(new_expression)
+            end
+          end
+        end
+      end
+
+      context "when `previous expression is empty`" do
+        let(:exception_message) do
+          <<~TEXT
+            First step of `#{service_class}` is NOT set.
+
+            Did you forget to use `step`? For example:
+
+            class #{service_class}
+              # ...
+
+              step SomeService
+
+              # ...
+            end
+          TEXT
+        end
+
+        it "raises `ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstStepIsNotSet`" do
+          expect { service_class.and_not_group(&block) }
+            .to raise_error(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstStepIsNotSet)
+            .with_message(exception_message)
+        end
+      end
+    end
+
+    describe ".or_group" do
+      let(:block) { proc { service_class.step(*args, **kwargs) } }
+
+      context "when `previous expression` is NOT empty" do
+        let(:previous_expression) { ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(first_step) }
+
+        before do
+          service_class.step(*args, **kwargs)
+        end
+
+        context "when `block` is NOT passed" do
+          let(:exception_message) do
+            <<~TEXT
+              First step of `or_group` from `#{service_class}` is NOT set.
+
+              Did you forget to use `step`? For example:
+
+              class #{service_class}
+                # ...
+
+                or_group do
+                  step SomeService
+
+                  # ...
+                end
+
+                # ...
+              end
+            TEXT
+          end
+
+          it "raises `ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstGroupStepIsNotSet`" do
+            expect { service_class.or_group }
+              .to raise_error(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstGroupStepIsNotSet)
+              .with_message(exception_message)
+          end
+        end
+
+        context "when `block` is passed" do
+          context "when `block` does NOT add any steps" do
+            let(:block) { proc {} }
+
+            let(:exception_message) do
+              <<~TEXT
+                First step of `or_group` from `#{service_class}` is NOT set.
+
+                Did you forget to use `step`? For example:
+
+                class #{service_class}
+                  # ...
+
+                  or_group do
+                    step SomeService
+
+                    # ...
+                  end
+
+                  # ...
+                end
+              TEXT
+            end
+
+            it "raises `ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstGroupStepIsNotSet`" do
+              expect { service_class.or_group {} }
+                .to raise_error(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstGroupStepIsNotSet)
+                .with_message(exception_message)
+            end
+          end
+
+          context "when `block` adds some steps" do
+            context "when `previous expression` is NOT `and expression`" do
+              let(:block) { proc { service_class.step(*args, **kwargs) } }
+
+              let(:new_expression) do
+                ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Or.new(
+                  ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(first_step),
+                  ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Group.new(
+                    ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(second_step)
+                  )
+                )
+              end
+
+              it "returns `new expression` that includes `previous expression`" do
+                expect(service_class.or_group(&block)).to eq(new_expression)
+              end
+            end
+
+            context "when `previous expression` is `and expression`" do
+              let(:block) { proc { service_class.step(*args, **kwargs) } }
+
+              let(:previous_expression) do
+                ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::And.new(
+                  ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(first_step),
+                  ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(second_step)
+                )
+              end
+
+              let(:new_expression) do
+                ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::And.new(
+                  ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(first_step),
+                  ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Or.new(
+                    ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(second_step),
+                    ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Group.new(
+                      ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(third_step)
+                    )
+                  )
+                )
+              end
+
+              before do
+                service_class.and_step(*args, **kwargs)
+              end
+
+              it "returns `new expression` that includes `previous expression`" do
+                expect(service_class.or_group(&block)).to eq(new_expression)
+              end
+            end
+          end
+        end
+      end
+
+      context "when `previous expression is empty`" do
+        let(:exception_message) do
+          <<~TEXT
+            First step of `#{service_class}` is NOT set.
+
+            Did you forget to use `step`? For example:
+
+            class #{service_class}
+              # ...
+
+              step SomeService
+
+              # ...
+            end
+          TEXT
+        end
+
+        it "raises `ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstStepIsNotSet`" do
+          expect { service_class.or_group(&block) }
+            .to raise_error(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstStepIsNotSet)
+            .with_message(exception_message)
+        end
+      end
+    end
+
+    describe ".or_not_group" do
+      let(:block) { proc { service_class.step(*args, **kwargs) } }
+
+      context "when `previous expression` is NOT empty" do
+        let(:previous_expression) { ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(first_step) }
+
+        before do
+          service_class.step(*args, **kwargs)
+        end
+
+        context "when `block` is NOT passed" do
+          let(:exception_message) do
+            <<~TEXT
+              First step of `or_not_group` from `#{service_class}` is NOT set.
+
+              Did you forget to use `step`? For example:
+
+              class #{service_class}
+                # ...
+
+                or_not_group do
+                  step SomeService
+
+                  # ...
+                end
+
+                # ...
+              end
+            TEXT
+          end
+
+          it "raises `ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstGroupStepIsNotSet`" do
+            expect { service_class.or_not_group }
+              .to raise_error(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstGroupStepIsNotSet)
+              .with_message(exception_message)
+          end
+        end
+
+        context "when `block` is passed" do
+          context "when `block` does NOT add any steps" do
+            let(:block) { proc {} }
+
+            let(:exception_message) do
+              <<~TEXT
+                First step of `or_not_group` from `#{service_class}` is NOT set.
+
+                Did you forget to use `step`? For example:
+
+                class #{service_class}
+                  # ...
+
+                  or_not_group do
+                    step SomeService
+
+                    # ...
+                  end
+
+                  # ...
+                end
+              TEXT
+            end
+
+            it "raises `ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstGroupStepIsNotSet`" do
+              expect { service_class.or_not_group {} }
+                .to raise_error(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstGroupStepIsNotSet)
+                .with_message(exception_message)
+            end
+          end
+
+          context "when `block` adds some steps" do
+            context "when `block` adds some steps" do
+              context "when `previous expression` is NOT `and expression`" do
+                let(:block) { proc { service_class.step(*args, **kwargs) } }
+
+                let(:new_expression) do
+                  ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Or.new(
+                    ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(first_step),
+                    ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Not.new(
+                      ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Group.new(
+                        ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(second_step)
+                      )
+                    )
+                  )
+                end
+
+                it "returns `new expression` that includes `previous expression`" do
+                  expect(service_class.or_not_group(&block)).to eq(new_expression)
+                end
+              end
+
+              context "when `previous expression` is `and expression`" do
+                let(:block) { proc { service_class.step(*args, **kwargs) } }
+
+                let(:previous_expression) do
+                  ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::And.new(
+                    ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(first_step),
+                    ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(second_step)
+                  )
+                end
+
+                let(:new_expression) do
+                  ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::And.new(
+                    ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(first_step),
+                    ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Or.new(
+                      ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(second_step),
+                      ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Not.new(
+                        ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Group.new(
+                          ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(third_step)
+                        )
+                      )
+                    )
+                  )
+                end
+
+                before do
+                  service_class.and_step(*args, **kwargs)
+                end
+
+                it "returns `new expression` that includes `previous expression`" do
+                  expect(service_class.or_not_group(&block)).to eq(new_expression)
+                end
+              end
+            end
+          end
+        end
+      end
+
+      context "when `previous expression is empty`" do
+        let(:exception_message) do
+          <<~TEXT
+            First step of `#{service_class}` is NOT set.
+
+            Did you forget to use `step`? For example:
+
+            class #{service_class}
+              # ...
+
+              step SomeService
+
+              # ...
+            end
+          TEXT
+        end
+
+        it "raises `ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstStepIsNotSet`" do
+          expect { service_class.or_not_group(&block) }
             .to raise_error(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstStepIsNotSet)
             .with_message(exception_message)
         end

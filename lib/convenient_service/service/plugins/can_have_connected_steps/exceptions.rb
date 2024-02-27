@@ -40,16 +40,16 @@ module ConvenientService
             # @internal
             #   TODO: Use `display_name`.
             #
-            def initialize_with_kwargs(container:)
+            def initialize_with_kwargs(container:, method:)
               message = <<~TEXT
-                First step of group from `#{container}` is NOT set.
+                First step of `#{method}` from `#{container}` is NOT set.
 
                 Did you forget to use `step`? For example:
 
                 class #{container}
                   # ...
 
-                  group do
+                  #{method} do
                     step SomeService
 
                     # ...
