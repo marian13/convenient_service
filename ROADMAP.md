@@ -89,5 +89,6 @@
 | High | 🚧 | `comparing_by` for `delegate_to` | |
 | High | 🚧 | Remove extra files from bundled gem version | |
 | High | 🚧 | Introduce DSL for High Order Services | |
+| Medium | 🚧 | Use [RequestStore](https://github.com/steveklabnik/request_store) or [RequestStore::Fibers](https://github.com/BMorearty/request_store-fibers) when available? | Any additional changes for [RequestStore::Sidekiq](https://github.com/madebylotus/request_store-sidekiq)? Check [RuboCop::ThreadSafety](https://github.com/rubocop/rubocop-thread_safety?tab=readme-ov-file#correcting-code-for-thread-safety) for details |
 
 Search for `TODO`s in the codebase or check [discussions](https://github.com/marian13/convenient_service/discussions) for more tasks.
