@@ -20,7 +20,18 @@ Gem::Specification.new do |spec|
 
   spec.version = ConvenientService::VERSION
 
-  spec.license = "MIT"
+  ##
+  # Sets licence. See also `LICENSE.txt` and `COMM-LICENSE.txt` for more details.
+  #
+  # - https://guides.rubygems.org/specification-reference/#license=
+  # - https://github.com/sidekiq/sidekiq/blob/main/sidekiq.gemspec
+  # - https://github.com/rmosolgo/graphql-ruby/blob/master/graphql.gemspec
+  # - https://github.com/thbar/kiba/blob/master/kiba.gemspec
+  # - https://github.com/mbj/mutant/blob/main/mutant.gemspec
+  # - https://github.com/github/licensed/tree/main?tab=readme-ov-file#disclaimer
+  # - https://github.com/sergey-alekseev/bundler-licensed
+  #
+  spec.license = "LGPL-3.0"
 
   spec.required_ruby_version = Gem::Requirement.new(">= 2.7.0")
 
