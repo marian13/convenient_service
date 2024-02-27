@@ -481,6 +481,25 @@
 </h3><div class="docstring">
   <div class="discussion">
     
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p><code>and</code> from <code>and_group</code> has a similar precedence as Ruby's <code>&amp;&amp;</code>.</p>
+</div>
+  </div>
+
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p><code>group</code> from <code>and_group</code> has a similar precedence as Ruby's <code>()</code>.</p>
+</div>
+  </div>
+
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p><code>not_group</code> is a rought equivalent of <code>&amp;&amp; ()</code>.</p>
+</div>
+  </div>
+
+
 
   </div>
 </div>
@@ -528,34 +547,41 @@
   
 </ul>
 
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://ruby-doc.org/core-2.7.1/doc/syntax/precedence_rdoc.html" target="_parent" title="https://ruby-doc.org/core-2.7.1/doc/syntax/precedence_rdoc.html">https://ruby-doc.org/core-2.7.1/doc/syntax/precedence_rdoc.html</a></li>
+    
+  </ul>
+
 </div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-255
-256
-257
-258
-259
-260
-261
-262
-263
-264
-265
-266
-267
-268
-269
-270
-271
-272
-273</pre>
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 255</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 291</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_and_group'>and_group</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_previous_expression'>previous_expression</span> <span class='op'>=</span> <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_expression'>expression</span>
@@ -593,6 +619,31 @@
 </h3><div class="docstring">
   <div class="discussion">
     
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p><code>and</code> from <code>and_not_group</code> has a similar precedence as Ruby's <code>&amp;&amp;</code>.</p>
+</div>
+  </div>
+
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p><code>not</code> from <code>and_not_group</code> has a similar precedence as Ruby's <code>!</code>.</p>
+</div>
+  </div>
+
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p><code>group</code> from <code>and_not_group</code> has a similar precedence as Ruby's <code>()</code>.</p>
+</div>
+  </div>
+
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p><code>and_not_group</code> is a rought equivalent of <code>&amp;&amp; !()</code>.</p>
+</div>
+  </div>
+
+
 
   </div>
 </div>
@@ -640,36 +691,43 @@
   
 </ul>
 
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://ruby-doc.org/core-2.7.1/doc/syntax/precedence_rdoc.html" target="_parent" title="https://ruby-doc.org/core-2.7.1/doc/syntax/precedence_rdoc.html">https://ruby-doc.org/core-2.7.1/doc/syntax/precedence_rdoc.html</a></li>
+    
+  </ul>
+
 </div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-281
-282
-283
-284
-285
-286
-287
-288
-289
-290
-291
-292
-293
-294
-295
-296
-297
-298
-299
-300
-301</pre>
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 281</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 323</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_and_not_group'>and_not_group</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_previous_expression'>previous_expression</span> <span class='op'>=</span> <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_expression'>expression</span>
@@ -708,7 +766,26 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Registers a negated step (step definition).</p>
+    
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p><code>and</code> from <code>and_step</code> has a similar precedence as Ruby's <code>&amp;&amp;</code>.</p>
+</div>
+  </div>
+
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p><code>not</code> from <code>and_not_step</code> has a similar precedence as Ruby's <code>!</code>.</p>
+</div>
+  </div>
+
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p><code>and_not_step</code> is a rought equivalent of <code>&amp;&amp; !step</code>.</p>
+</div>
+  </div>
+
+<p>Registers a negated step (step definition).</p>
 
 
   </div>
@@ -768,30 +845,37 @@
   
 </ul>
 
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://ruby-doc.org/core-2.7.1/doc/syntax/precedence_rdoc.html" target="_parent" title="https://ruby-doc.org/core-2.7.1/doc/syntax/precedence_rdoc.html">https://ruby-doc.org/core-2.7.1/doc/syntax/precedence_rdoc.html</a></li>
+    
+  </ul>
+
 </div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-97
-98
-99
-100
-101
-102
-103
-104
-105
-106
-107
-108
-109
 110
-111</pre>
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 97</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 110</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_and_not_step'>and_not_step</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_previous_expression'>previous_expression</span> <span class='op'>=</span> <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_expression'>expression</span>
@@ -824,7 +908,20 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Registers a step (step definition).</p>
+    
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p><code>and</code> from <code>and_step</code> has a similar precedence as Ruby's <code>&amp;&amp;</code>.</p>
+</div>
+  </div>
+
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p><code>and_step</code> is a rought equivalent of <code>&amp;&amp; step</code>.</p>
+</div>
+  </div>
+
+<p>Registers a step (step definition).</p>
 
 
   </div>
@@ -884,28 +981,35 @@
   
 </ul>
 
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://ruby-doc.org/core-2.7.1/doc/syntax/precedence_rdoc.html" target="_parent" title="https://ruby-doc.org/core-2.7.1/doc/syntax/precedence_rdoc.html">https://ruby-doc.org/core-2.7.1/doc/syntax/precedence_rdoc.html</a></li>
+    
+  </ul>
+
 </div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-74
-75
-76
-77
-78
-79
-80
-81
 82
 83
 84
 85
-86</pre>
+86
+87
+88
+89
+90
+91
+92
+93
+94</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 74</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 82</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_and_step'>and_step</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_previous_expression'>previous_expression</span> <span class='op'>=</span> <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_expression'>expression</span>
@@ -937,6 +1041,19 @@
 </h3><div class="docstring">
   <div class="discussion">
     
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p><code>group</code> has a similar precedence as Ruby's <code>()</code>.</p>
+</div>
+  </div>
+
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p><code>group</code> is a rought equivalent of <code>()</code>.</p>
+</div>
+  </div>
+
+
 
   </div>
 </div>
@@ -984,36 +1101,43 @@
   
 </ul>
 
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://ruby-doc.org/core-2.7.1/doc/syntax/precedence_rdoc.html" target="_parent" title="https://ruby-doc.org/core-2.7.1/doc/syntax/precedence_rdoc.html">https://ruby-doc.org/core-2.7.1/doc/syntax/precedence_rdoc.html</a></li>
+    
+  </ul>
+
 </div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-195
-196
-197
-198
-199
-200
-201
-202
-203
-204
-205
-206
-207
-208
-209
-210
-211
-212
-213
-214
-215</pre>
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 195</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 221</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_group'>group</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_previous_expression'>previous_expression</span> <span class='op'>=</span> <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_expression'>expression</span>
@@ -1053,6 +1177,25 @@
 </h3><div class="docstring">
   <div class="discussion">
     
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p><code>not</code> from <code>not_group</code> has a similar precedence as Ruby's <code>!</code>.</p>
+</div>
+  </div>
+
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p><code>group</code> from <code>not_group</code> has a similar precedence as Ruby's <code>()</code>.</p>
+</div>
+  </div>
+
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p><code>not_group</code> is a rought equivalent of <code>!()</code>.</p>
+</div>
+  </div>
+
+
 
   </div>
 </div>
@@ -1100,40 +1243,47 @@
   
 </ul>
 
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://ruby-doc.org/core-2.7.1/doc/syntax/precedence_rdoc.html" target="_parent" title="https://ruby-doc.org/core-2.7.1/doc/syntax/precedence_rdoc.html">https://ruby-doc.org/core-2.7.1/doc/syntax/precedence_rdoc.html</a></li>
+    
+  </ul>
+
 </div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-223
-224
-225
-226
-227
-228
-229
-230
-231
-232
-233
-234
-235
-236
-237
-238
-239
-240
-241
-242
-243
-244
-245
-246
-247</pre>
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 223</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 254</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_not_group'>not_group</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_previous_expression'>previous_expression</span> <span class='op'>=</span> <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_expression'>expression</span>
@@ -1176,7 +1326,20 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Registers a negated step (step definition).</p>
+    
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p><code>not</code> from <code>not_step</code> has a similar precedence as Ruby's <code>!</code>.</p>
+</div>
+  </div>
+
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p><code>not_step</code> is a rought equivalent of <code>!step</code>.</p>
+</div>
+  </div>
+
+<p>Registers a negated step (step definition).</p>
 
 
   </div>
@@ -1223,16 +1386,19 @@
   
 </ul>
 
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://ruby-doc.org/core-2.7.1/doc/syntax/precedence_rdoc.html" target="_parent" title="https://ruby-doc.org/core-2.7.1/doc/syntax/precedence_rdoc.html">https://ruby-doc.org/core-2.7.1/doc/syntax/precedence_rdoc.html</a></li>
+    
+  </ul>
+
 </div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-45
-46
-47
-48
 49
 50
 51
@@ -1247,10 +1413,14 @@
 60
 61
 62
-63</pre>
+63
+64
+65
+66
+67</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 45</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 49</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_not_step'>not_step</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_previous_expression'>previous_expression</span> <span class='op'>=</span> <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_expression'>expression</span>
@@ -1288,6 +1458,25 @@
 </h3><div class="docstring">
   <div class="discussion">
     
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p><code>or</code> from <code>or_group</code> has a similar precedence as Ruby's <code>||</code>.</p>
+</div>
+  </div>
+
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p><code>group</code> from <code>or_group</code> has a similar precedence as Ruby's <code>()</code>.</p>
+</div>
+  </div>
+
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p><code>or_group</code> is a rought equivalent of <code>|| ()</code></p>
+</div>
+  </div>
+
+
 
   </div>
 </div>
@@ -1335,44 +1524,51 @@
   
 </ul>
 
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://ruby-doc.org/core-2.7.1/doc/syntax/precedence_rdoc.html" target="_parent" title="https://ruby-doc.org/core-2.7.1/doc/syntax/precedence_rdoc.html">https://ruby-doc.org/core-2.7.1/doc/syntax/precedence_rdoc.html</a></li>
+    
+  </ul>
+
 </div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-312
-313
-314
-315
-316
-317
-318
-319
-320
-321
-322
-323
-324
-325
-326
-327
-328
-329
-330
-331
-332
-333
-334
-335
-336
-337
-338
-339
-340</pre>
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 312</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 359</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_or_group'>or_group</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_previous_expression'>previous_expression</span> <span class='op'>=</span> <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_expression'>expression</span>
@@ -1420,6 +1616,31 @@
 </h3><div class="docstring">
   <div class="discussion">
     
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p><code>or</code> from <code>or_not_group</code> has a similar precedence as Ruby's <code>||</code>.</p>
+</div>
+  </div>
+
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p><code>not</code> from <code>or_not_group</code> has a similar precedence as Ruby's <code>!</code>.</p>
+</div>
+  </div>
+
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p><code>group</code> from <code>or_not_group</code> has a similar precedence as Ruby's <code>()</code>.</p>
+</div>
+  </div>
+
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p><code>or_not_group</code> is a rought equivalent of <code>|| !()</code></p>
+</div>
+  </div>
+
+
 
   </div>
 </div>
@@ -1467,48 +1688,55 @@
   
 </ul>
 
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://ruby-doc.org/core-2.7.1/doc/syntax/precedence_rdoc.html" target="_parent" title="https://ruby-doc.org/core-2.7.1/doc/syntax/precedence_rdoc.html">https://ruby-doc.org/core-2.7.1/doc/syntax/precedence_rdoc.html</a></li>
+    
+  </ul>
+
 </div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-351
-352
-353
-354
-355
-356
-357
-358
-359
-360
-361
-362
-363
-364
-365
-366
-367
-368
-369
-370
-371
-372
-373
-374
-375
-376
-377
-378
-379
-380
-381
-382
-383</pre>
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 351</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 404</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_or_not_group'>or_not_group</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_previous_expression'>previous_expression</span> <span class='op'>=</span> <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_expression'>expression</span>
@@ -1559,7 +1787,26 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Registers a negated alternative step (step definition).</p>
+    
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p><code>or</code> from <code>or_not_step</code> has a similar precedence as Ruby's <code>||</code>.</p>
+</div>
+  </div>
+
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p><code>not</code> from <code>or_not_step</code> has a similar precedence as Ruby's <code>!</code>.</p>
+</div>
+  </div>
+
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p><code>or_not_step</code> is a rought equivalent of <code>|| !step</code>.</p>
+</div>
+  </div>
+
+<p>Registers a negated alternative step (step definition).</p>
 
 
   </div>
@@ -1619,42 +1866,49 @@
   
 </ul>
 
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://ruby-doc.org/core-2.7.1/doc/syntax/precedence_rdoc.html" target="_parent" title="https://ruby-doc.org/core-2.7.1/doc/syntax/precedence_rdoc.html">https://ruby-doc.org/core-2.7.1/doc/syntax/precedence_rdoc.html</a></li>
+    
+  </ul>
+
 </div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-161
-162
-163
-164
-165
-166
-167
-168
-169
-170
-171
-172
-173
-174
-175
-176
-177
-178
-179
-180
-181
-182
 183
 184
 185
 186
-187</pre>
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 161</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 183</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_or_not_step'>or_not_step</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_previous_expression'>previous_expression</span> <span class='op'>=</span> <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_expression'>expression</span>
@@ -1699,7 +1953,20 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Registers an alternative step (step definition).</p>
+    
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p><code>or</code> from <code>or_step</code> has a similar precedence as Ruby's <code>||</code>.</p>
+</div>
+  </div>
+
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p><code>or_step</code> is a rought equivalent of <code>|| step</code>.</p>
+</div>
+  </div>
+
+<p>Registers an alternative step (step definition).</p>
 
 
   </div>
@@ -1759,38 +2026,45 @@
   
 </ul>
 
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://ruby-doc.org/core-2.7.1/doc/syntax/precedence_rdoc.html" target="_parent" title="https://ruby-doc.org/core-2.7.1/doc/syntax/precedence_rdoc.html">https://ruby-doc.org/core-2.7.1/doc/syntax/precedence_rdoc.html</a></li>
+    
+  </ul>
+
 </div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-125
-126
-127
-128
-129
-130
-131
-132
-133
-134
-135
-136
-137
-138
-139
-140
-141
 142
 143
 144
 145
 146
-147</pre>
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 125</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 142</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_or_step'>or_step</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_previous_expression'>previous_expression</span> <span class='op'>=</span> <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_expression'>expression</span>
@@ -1964,12 +2238,12 @@
       <pre class="lines">
 
 
-390
-391
-392</pre>
+443
+444
+445</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 390</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 443</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_steps'>steps</span>
   <span class='id identifier rubyid_internals_class'>internals_class</span><span class='period'>.</span><span class='id identifier rubyid_cache'>cache</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='symbol'>:steps</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='const'><span class='object_link'><a href="Entities.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/StepCollection.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::StepCollection (class)">StepCollection</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Entities/StepCollection.html#initialize-instance_method" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::StepCollection#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>container:</span> <span class='kw'>self</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
@@ -2057,12 +2331,12 @@ Returns <code>nil</code> when index is out of range.</p>
       <pre class="lines">
 
 
-429
-430
-431</pre>
+482
+483
+484</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 429</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 482</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_step'>step</span><span class='lparen'>(</span><span class='id identifier rubyid_index'>index</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_steps'>steps</span><span class='lbracket'>[</span><span class='id identifier rubyid_index'>index</span><span class='rbracket'>]</span>
@@ -2131,18 +2405,18 @@ Returns <code>nil</code> when index is out of range.</p>
       <pre class="lines">
 
 
-407
-408
-409
-410
-411
-412
-413
-414
-415</pre>
+460
+461
+462
+463
+464
+465
+466
+467
+468</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 407</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 460</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_steps'>steps</span>
   <span class='id identifier rubyid_internals'>internals</span><span class='period'>.</span><span class='id identifier rubyid_cache'>cache</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='symbol'>:steps</span><span class='rparen'>)</span> <span class='kw'>do</span>
@@ -2163,7 +2437,7 @@ Returns <code>nil</code> when index is out of range.</p>
 </div>
 
       <div id="footer">
-  Generated on Tue Feb 27 23:19:27 2024 by
+  Generated on Tue Feb 27 23:49:58 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.2.3).
 </div>
