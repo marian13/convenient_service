@@ -147,29 +147,6 @@ module ConvenientService
                         def to_sym
                           @to_sym ||= value.to_sym
                         end
-
-                        ##
-                        # @return [Boolean]
-                        # @raise [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status::Exceptions::ErrorHasNoBooleanRepresentation]
-                        #
-                        # @internal
-                        #   NOTE: When `value` is NOT `:success`, `:failure` or `:error`, then something fatal has happened.
-                        #
-                        def to_bool
-                          return @to_bool if defined? @to_bool
-
-                          @to_bool =
-                            case value
-                            when :success
-                              true
-                            when :failure
-                              false
-                            when :error
-                              raise ::ConvenientService.raise Exceptions::ErrorHasNoBooleanRepresentation.new
-                            else
-                              raise ::ConvenientService.raise Support::NeverReachHere.new(extra_message: "Unknown status value `#{value}`.")
-                            end
-                        end
                       end
                     end
                   end

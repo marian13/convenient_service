@@ -22,6 +22,21 @@ module ConvenientService
                       initialize(message)
                     end
                   end
+
+                  class ErrorHasNoOtherTypeRepresentation < ::ConvenientService::Exception
+                    ##
+                    # @return [void]
+                    #
+                    def initialize_with_kwargs(type:)
+                      message = <<~TEXT
+                        Error results have no `#{type}` representation.
+
+                        They are semantically similar to exceptions.
+                      TEXT
+
+                      initialize(message)
+                    end
+                  end
                 end
               end
             end
