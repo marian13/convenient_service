@@ -317,12 +317,23 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         context "when `value` is NOT valid" do
           let(:value) { :foo }
 
-          it "returns `nil`" do
-            expect(status.to_bool).to be_nil
+          let(:exception_message) do
+            <<~TEXT
+              The code that was supposed to be unreachable was executed.
+
+              Unknown status value `#{value}`.
+            TEXT
+          end
+
+          it "raises `ConvenientService::Support::NeverReachHere`" do
+            expect { status.to_bool }
+              .to raise_error(ConvenientService::Support::NeverReachHere)
+              .with_message(exception_message)
           end
 
           specify do
-            expect { status.to_bool }.to cache_its_value
+            expect { ignoring_exception(ConvenientService::Support::NeverReachHere) { status.to_bool } }
+              .to delegate_to(ConvenientService, :raise)
           end
         end
 

@@ -191,6 +191,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
             .to raise_error(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstStepIsNotSet)
             .with_message(exception_message)
         end
+
+        specify do
+          expect { ignoring_exception(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstStepIsNotSet) { service_class.and_step(*args, **kwargs) } }
+            .to delegate_to(ConvenientService, :raise)
+        end
       end
     end
 
@@ -244,6 +249,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
           expect { service_class.and_not_step(*args, **kwargs) }
             .to raise_error(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstStepIsNotSet)
             .with_message(exception_message)
+        end
+
+        specify do
+          expect { ignoring_exception(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstStepIsNotSet) { service_class.and_not_step(*args, **kwargs) } }
+            .to delegate_to(ConvenientService, :raise)
         end
       end
     end
@@ -325,6 +335,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
           expect { service_class.or_step(*args, **kwargs) }
             .to raise_error(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstStepIsNotSet)
             .with_message(exception_message)
+        end
+
+        specify do
+          expect { ignoring_exception(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstStepIsNotSet) { service_class.or_step(*args, **kwargs) } }
+            .to delegate_to(ConvenientService, :raise)
         end
       end
     end
@@ -411,6 +426,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
             .to raise_error(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstStepIsNotSet)
             .with_message(exception_message)
         end
+
+        specify do
+          expect { ignoring_exception(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstStepIsNotSet) { service_class.or_not_step(*args, **kwargs) } }
+            .to delegate_to(ConvenientService, :raise)
+        end
       end
     end
 
@@ -450,6 +470,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
               .to raise_error(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstGroupStepIsNotSet)
               .with_message(exception_message)
           end
+
+          specify do
+            expect { ignoring_exception(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstGroupStepIsNotSet) { service_class.group } }
+              .to delegate_to(ConvenientService, :raise)
+          end
         end
 
         context "when `block` is passed" do
@@ -480,6 +505,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
               expect { service_class.group {} }
                 .to raise_error(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstGroupStepIsNotSet)
                 .with_message(exception_message)
+            end
+
+            specify do
+              expect { ignoring_exception(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstGroupStepIsNotSet) { service_class.group {} } }
+                .to delegate_to(ConvenientService, :raise)
             end
           end
 
@@ -551,6 +581,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
               .to raise_error(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstGroupStepIsNotSet)
               .with_message(exception_message)
           end
+
+          specify do
+            expect { ignoring_exception(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstGroupStepIsNotSet) { service_class.not_group } }
+              .to delegate_to(ConvenientService, :raise)
+          end
         end
 
         context "when `block` is passed" do
@@ -581,6 +616,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
               expect { service_class.not_group {} }
                 .to raise_error(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstGroupStepIsNotSet)
                 .with_message(exception_message)
+            end
+
+            specify do
+              expect { ignoring_exception(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstGroupStepIsNotSet) { service_class.not_group {} } }
+                .to delegate_to(ConvenientService, :raise)
             end
           end
 
@@ -656,6 +696,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
               .to raise_error(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstGroupStepIsNotSet)
               .with_message(exception_message)
           end
+
+          specify do
+            expect { ignoring_exception(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstGroupStepIsNotSet) { service_class.and_group } }
+              .to delegate_to(ConvenientService, :raise)
+          end
         end
 
         context "when `block` is passed" do
@@ -686,6 +731,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
               expect { service_class.and_group {} }
                 .to raise_error(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstGroupStepIsNotSet)
                 .with_message(exception_message)
+            end
+
+            specify do
+              expect { ignoring_exception(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstGroupStepIsNotSet) { service_class.and_group {} } }
+                .to delegate_to(ConvenientService, :raise)
             end
           end
 
@@ -730,6 +780,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
             .to raise_error(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstStepIsNotSet)
             .with_message(exception_message)
         end
+
+        specify do
+          expect { ignoring_exception(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstStepIsNotSet) { service_class.and_group(&block) } }
+            .to delegate_to(ConvenientService, :raise)
+        end
       end
     end
 
@@ -769,6 +824,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
               .to raise_error(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstGroupStepIsNotSet)
               .with_message(exception_message)
           end
+
+          specify do
+            expect { ignoring_exception(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstGroupStepIsNotSet) { service_class.and_not_group } }
+              .to delegate_to(ConvenientService, :raise)
+          end
         end
 
         context "when `block` is passed" do
@@ -799,6 +859,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
               expect { service_class.and_not_group {} }
                 .to raise_error(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstGroupStepIsNotSet)
                 .with_message(exception_message)
+            end
+
+            specify do
+              expect { ignoring_exception(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstGroupStepIsNotSet) { service_class.and_not_group {} } }
+                .to delegate_to(ConvenientService, :raise)
             end
           end
 
@@ -845,6 +910,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
             .to raise_error(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstStepIsNotSet)
             .with_message(exception_message)
         end
+
+        specify do
+          expect { ignoring_exception(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstStepIsNotSet) { service_class.and_not_group(&block) } }
+            .to delegate_to(ConvenientService, :raise)
+        end
       end
     end
 
@@ -884,6 +954,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
               .to raise_error(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstGroupStepIsNotSet)
               .with_message(exception_message)
           end
+
+          specify do
+            expect { ignoring_exception(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstGroupStepIsNotSet) { service_class.or_group } }
+              .to delegate_to(ConvenientService, :raise)
+          end
         end
 
         context "when `block` is passed" do
@@ -914,6 +989,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
               expect { service_class.or_group {} }
                 .to raise_error(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstGroupStepIsNotSet)
                 .with_message(exception_message)
+            end
+
+            specify do
+              expect { ignoring_exception(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstGroupStepIsNotSet) { service_class.or_group {} } }
+                .to delegate_to(ConvenientService, :raise)
             end
           end
 
@@ -991,6 +1071,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
             .to raise_error(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstStepIsNotSet)
             .with_message(exception_message)
         end
+
+        specify do
+          expect { ignoring_exception(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstStepIsNotSet) { service_class.or_group(&block) } }
+            .to delegate_to(ConvenientService, :raise)
+        end
       end
     end
 
@@ -1030,6 +1115,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
               .to raise_error(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstGroupStepIsNotSet)
               .with_message(exception_message)
           end
+
+          specify do
+            expect { ignoring_exception(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstGroupStepIsNotSet) { service_class.or_not_group } }
+              .to delegate_to(ConvenientService, :raise)
+          end
         end
 
         context "when `block` is passed" do
@@ -1060,6 +1150,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
               expect { service_class.or_not_group {} }
                 .to raise_error(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstGroupStepIsNotSet)
                 .with_message(exception_message)
+            end
+
+            specify do
+              expect { ignoring_exception(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstGroupStepIsNotSet) { service_class.or_not_group {} } }
+                .to delegate_to(ConvenientService, :raise)
             end
           end
 
@@ -1142,6 +1237,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
           expect { service_class.or_not_group(&block) }
             .to raise_error(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstStepIsNotSet)
             .with_message(exception_message)
+        end
+
+        specify do
+          expect { ignoring_exception(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstStepIsNotSet) { service_class.or_not_group(&block) } }
+            .to delegate_to(ConvenientService, :raise)
         end
       end
     end

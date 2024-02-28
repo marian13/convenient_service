@@ -23,13 +23,15 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
   let(:params) do
     {
       service: service_instance,
-      status: :foo,
+      status: status,
       data: {foo: :bar},
       message: "foo",
       code: :foo,
       **extra_kwargs
     }
   end
+
+  let(:status) { :foo }
 
   let(:extra_kwargs) { {} }
 
@@ -173,6 +175,8 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
     end
 
     describe "#to_bool" do
+      let(:status) { :success }
+
       specify do
         expect { result_instance.to_bool }
           .to delegate_to(result_instance.status, :to_bool)

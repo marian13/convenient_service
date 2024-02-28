@@ -167,7 +167,15 @@ module ConvenientService
                     end
 
                     ##
-                    # @return [Boolean, nil]
+                    # Returns a boolean representation of `result`.
+                    # `success` may be considered as `true`.
+                    # `failure` may be considered as `false`.
+                    # `error` may be considered as `raise exception`.
+                    #
+                    # @note This method is useful for learning purposes, to show similarities with Ruby's booleans. Please, do NOT depend on it in production.
+                    #
+                    # @return [Boolean]
+                    # @raise [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status::Exceptions::ErrorHasNoBooleanRepresentation]
                     #
                     def to_bool
                       status.to_bool

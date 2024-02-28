@@ -82,7 +82,7 @@ module ConvenientService
             def and_step(*args, **kwargs)
               previous_expression = steps.expression
 
-              raise Exceptions::FirstStepIsNotSet.new(container: self) if previous_expression.empty?
+              ::ConvenientService.raise Exceptions::FirstStepIsNotSet.new(container: self) if previous_expression.empty?
 
               new_step = steps.create(*args, **kwargs)
 
@@ -110,7 +110,7 @@ module ConvenientService
             def and_not_step(*args, **kwargs)
               previous_expression = steps.expression
 
-              raise Exceptions::FirstStepIsNotSet.new(container: self) if previous_expression.empty?
+              ::ConvenientService.raise Exceptions::FirstStepIsNotSet.new(container: self) if previous_expression.empty?
 
               new_step = steps.create(*args, **kwargs)
 
@@ -142,7 +142,7 @@ module ConvenientService
             def or_step(*args, **kwargs)
               previous_expression = steps.expression
 
-              raise Exceptions::FirstStepIsNotSet.new(container: self) if previous_expression.empty?
+              ::ConvenientService.raise Exceptions::FirstStepIsNotSet.new(container: self) if previous_expression.empty?
 
               new_step = steps.create(*args, **kwargs)
 
@@ -183,7 +183,7 @@ module ConvenientService
             def or_not_step(*args, **kwargs)
               previous_expression = steps.expression
 
-              raise Exceptions::FirstStepIsNotSet.new(container: self) if previous_expression.empty?
+              ::ConvenientService.raise Exceptions::FirstStepIsNotSet.new(container: self) if previous_expression.empty?
 
               new_step = steps.create(*args, **kwargs)
 
@@ -227,7 +227,7 @@ module ConvenientService
 
               current_expression = steps.expression
 
-              raise Exceptions::FirstGroupStepIsNotSet.new(container: self, method: __method__) if current_expression.empty?
+              ::ConvenientService.raise Exceptions::FirstGroupStepIsNotSet.new(container: self, method: __method__) if current_expression.empty?
 
               steps.expression =
                 if previous_expression.empty?
@@ -260,7 +260,7 @@ module ConvenientService
 
               current_expression = steps.expression
 
-              raise Exceptions::FirstGroupStepIsNotSet.new(container: self, method: __method__) if current_expression.empty?
+              ::ConvenientService.raise Exceptions::FirstGroupStepIsNotSet.new(container: self, method: __method__) if current_expression.empty?
 
               steps.expression =
                 if previous_expression.empty?
@@ -291,7 +291,7 @@ module ConvenientService
             def and_group(&block)
               previous_expression = steps.expression
 
-              raise Exceptions::FirstStepIsNotSet.new(container: self) if previous_expression.empty?
+              ::ConvenientService.raise Exceptions::FirstStepIsNotSet.new(container: self) if previous_expression.empty?
 
               steps.expression = Entities::Expressions::Empty.new
 
@@ -299,7 +299,7 @@ module ConvenientService
 
               current_expression = steps.expression
 
-              raise Exceptions::FirstGroupStepIsNotSet.new(container: self, method: __method__) if current_expression.empty?
+              ::ConvenientService.raise Exceptions::FirstGroupStepIsNotSet.new(container: self, method: __method__) if current_expression.empty?
 
               steps.expression =
                 Entities::Expressions::And.new(
@@ -323,7 +323,7 @@ module ConvenientService
             def and_not_group(&block)
               previous_expression = steps.expression
 
-              raise Exceptions::FirstStepIsNotSet.new(container: self) if previous_expression.empty?
+              ::ConvenientService.raise Exceptions::FirstStepIsNotSet.new(container: self) if previous_expression.empty?
 
               steps.expression = Entities::Expressions::Empty.new
 
@@ -331,7 +331,7 @@ module ConvenientService
 
               current_expression = steps.expression
 
-              raise Exceptions::FirstGroupStepIsNotSet.new(container: self, method: __method__) if current_expression.empty?
+              ::ConvenientService.raise Exceptions::FirstGroupStepIsNotSet.new(container: self, method: __method__) if current_expression.empty?
 
               steps.expression =
                 Entities::Expressions::And.new(
@@ -359,7 +359,7 @@ module ConvenientService
             def or_group(&block)
               previous_expression = steps.expression
 
-              raise Exceptions::FirstStepIsNotSet.new(container: self) if previous_expression.empty?
+              ::ConvenientService.raise Exceptions::FirstStepIsNotSet.new(container: self) if previous_expression.empty?
 
               steps.expression = Entities::Expressions::Empty.new
 
@@ -367,7 +367,7 @@ module ConvenientService
 
               current_expression = steps.expression
 
-              raise Exceptions::FirstGroupStepIsNotSet.new(container: self, method: __method__) if current_expression.empty?
+              ::ConvenientService.raise Exceptions::FirstGroupStepIsNotSet.new(container: self, method: __method__) if current_expression.empty?
 
               steps.expression =
                 if previous_expression.and?
@@ -404,7 +404,7 @@ module ConvenientService
             def or_not_group(&block)
               previous_expression = steps.expression
 
-              raise Exceptions::FirstStepIsNotSet.new(container: self) if previous_expression.empty?
+              ::ConvenientService.raise Exceptions::FirstStepIsNotSet.new(container: self) if previous_expression.empty?
 
               steps.expression = Entities::Expressions::Empty.new
 
@@ -412,7 +412,7 @@ module ConvenientService
 
               current_expression = steps.expression
 
-              raise Exceptions::FirstGroupStepIsNotSet.new(container: self, method: __method__) if current_expression.empty?
+              ::ConvenientService.raise Exceptions::FirstGroupStepIsNotSet.new(container: self, method: __method__) if current_expression.empty?
 
               steps.expression =
                 if previous_expression.and?
