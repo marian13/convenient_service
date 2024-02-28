@@ -4,12 +4,12 @@
   // NOTE: More information about VS Code Snippets can be found here:
   // - https://code.visualstudio.com/docs/editor/userdefinedsnippets
   //
-  "IgnoringException RSpec module": {
+  "IgnoringException RSpec helper": {
     "scope": "ruby",
     "prefix": "IgnoringException",
     "body": [
       "include ConvenientService::RSpec::Helpers::IgnoringException",
     ],
-    "description": "`IgnoringException` - a module that allows to use custom RSpec helper `ignoring_exception`"
+    "description": "`IgnoringException` - a helper that allows to use custom RSpec helper `ignoring_exception`"
   }
 }
