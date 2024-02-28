@@ -4,6 +4,14 @@ require "spec_helper"
 
 require "convenient_service"
 
+##
+# NOTE: Looks like `frozen_string_literal: true` is NOT consistent in JRuby.
+# - https://github.com/jruby/jruby/issues/4970#issuecomment-369459500
+# - https://github.com/jruby/jruby/issues/5070
+# - https://github.com/ruby/spec/blob/369c006a488f6a853b875d869871687e329faa02/core/string/freeze_spec.rb#L5-L7
+#
+return if ConvenientService::Dependencies.ruby.jruby?
+
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Specification do
   example_group "constants" do
