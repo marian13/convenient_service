@@ -42,6 +42,9 @@ module ConvenientService
       # @param other [Object] Can be any type.
       # @return [Boolean]
       #
+      # @internal
+      #   TODO: What to do in case unique value is used as hash key? See `ConveninetService::Support::Cache::Entities::Key`.
+      #
       def eql?(other)
         self == other
       end

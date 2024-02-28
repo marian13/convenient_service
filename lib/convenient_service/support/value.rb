@@ -40,7 +40,19 @@ module ConvenientService
       # @return [Boolean]
       #
       def eql?(other)
-        self == other
+        return unless other.instance_of?(self.class)
+
+        hash == other.hash
+      end
+
+      ##
+      # @return [Integer]
+      #
+      # @internal
+      #   IMPORTANT: What to do with collisions?
+      #
+      def hash
+        label.hash
       end
 
       ##

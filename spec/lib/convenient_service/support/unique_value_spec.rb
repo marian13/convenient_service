@@ -7,7 +7,7 @@ require "convenient_service"
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Support::UniqueValue do
   let(:unique_value) { described_class.new(label) }
-  let(:label) { :foo }
+  let(:label) { "foo" }
   let(:default_label) { "unique_value_#{unique_value.object_id}" }
 
   example_group "attributes" do

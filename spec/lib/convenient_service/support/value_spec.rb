@@ -7,7 +7,7 @@ require "convenient_service"
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Support::Value do
   let(:value) { described_class.new(label) }
-  let(:label) { :foo }
+  let(:label) { "foo" }
   let(:default_label) { "value" }
 
   example_group "attributes" do
@@ -31,6 +31,12 @@ RSpec.describe ConvenientService::Support::Value do
   end
 
   example_group "instance methods" do
+    describe "#hash" do
+      it "returns label hash" do
+        expect(value.hash).to eq(label.hash)
+      end
+    end
+
     describe "#inspect" do
       let(:inspect_representation) { label }
 
@@ -125,7 +131,7 @@ RSpec.describe ConvenientService::Support::Value do
           end
         end
 
-        context "when `other` has different `label`" do
+        context "when `other` has different `hash`" do
           let(:other) { described_class.new("bar") }
 
           it "returns `false`" do
@@ -133,7 +139,7 @@ RSpec.describe ConvenientService::Support::Value do
           end
         end
 
-        context "when `other` has same `label`" do
+        context "when `other` has same `hash`" do
           let(:other) { described_class.new("foo") }
 
           it "returns `true`" do
