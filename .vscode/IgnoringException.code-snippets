@@ -1,0 +1,15 @@
+{
+  ////
+  // NOTE: `.code-snippets` files support only C-style comments.
+  // NOTE: More information about VS Code Snippets can be found here:
+  // - https://code.visualstudio.com/docs/editor/userdefinedsnippets
+  //
+  "IgnoringException RSpec module": {
+    "scope": "ruby",
+    "prefix": "IgnoringException",
+    "body": [
+      "include ConvenientService::RSpec::Helpers::IgnoringException",
+    ],
+    "description": "`IgnoringException` - a module that allows to use custom RSpec helper `ignoring_exception`"
+  }
+}
