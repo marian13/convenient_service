@@ -190,6 +190,54 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       end
     end
 
+    describe "#unsafe_not_success?" do
+      context "when `value` is NOT `:success`" do
+        it "returns `true`" do
+          expect(status.unsafe_not_success?).to eq(true)
+        end
+      end
+
+      context "when `value` is `:success`" do
+        let(:value) { :success }
+
+        it "returns `false`" do
+          expect(status.unsafe_not_success?).to eq(false)
+        end
+      end
+    end
+
+    describe "#unsafe_not_failure?" do
+      context "when `value` is NOT `:failure`" do
+        it "returns `true`" do
+          expect(status.unsafe_not_failure?).to eq(true)
+        end
+      end
+
+      context "when `value` is `:failure`" do
+        let(:value) { :failure }
+
+        it "returns `false`" do
+          expect(status.unsafe_not_failure?).to eq(false)
+        end
+      end
+    end
+
+    describe "#unsafe_not_error?" do
+      context "when `value` is NOT `:error`" do
+        it "returns `true`" do
+          expect(status.unsafe_not_error?).to eq(true)
+        end
+      end
+
+      context "when `value` is `:error`" do
+        let(:value) { :error }
+
+        it "returns `false`" do
+          expect(status.unsafe_not_error?).to eq(false)
+        end
+      end
+    end
+
     describe "#in?" do
       context "when `statuses` are NOT empty" do
         context "when `status` is NOT equal to any of those statuses" do

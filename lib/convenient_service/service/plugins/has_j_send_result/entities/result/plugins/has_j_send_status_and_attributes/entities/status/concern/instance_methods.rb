@@ -113,6 +113,27 @@ module ConvenientService
                         end
 
                         ##
+                        # @return [Boolean]
+                        #
+                        def unsafe_not_success?
+                          value != :success
+                        end
+
+                        ##
+                        # @return [Boolean]
+                        #
+                        def unsafe_not_failure?
+                          value != :failure
+                        end
+
+                        ##
+                        # @return [Boolean]
+                        #
+                        def unsafe_not_error?
+                          value != :error
+                        end
+
+                        ##
                         # @param statuses [Array<ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status>]
                         # @return [Boolean]
                         #
