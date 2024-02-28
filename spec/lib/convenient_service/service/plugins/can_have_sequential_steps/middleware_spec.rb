@@ -154,7 +154,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSequentialSteps::Midd
           let(:exception) { Class.new(StandardError) }
 
           before do
-            allow(service_instance.steps[0]).to receive(:not_success?).and_raise(exception)
+            allow(service_instance.steps[0].status).to receive(:unsafe_not_success?).and_raise(exception)
           end
 
           it "does NOT save step outputs into organizer before checking status" do
@@ -258,8 +258,8 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSequentialSteps::Midd
           let(:exception) { Class.new(StandardError) }
 
           before do
-            allow(service_instance.steps[0]).to receive(:not_success?).and_raise(exception)
-            allow(service_instance.steps[1]).to receive(:not_success?).and_raise(exception)
+            allow(service_instance.steps[0].status).to receive(:unsafe_not_success?).and_raise(exception)
+            allow(service_instance.steps[1].status).to receive(:unsafe_not_success?).and_raise(exception)
           end
 
           it "does NOT save intermediate step outputs into organizer before checking status" do

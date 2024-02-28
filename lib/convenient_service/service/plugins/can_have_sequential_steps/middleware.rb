@@ -50,7 +50,7 @@ module ConvenientService
           #
           def find_first_not_successful_step_with_side_effects_during_lookup
             entity.steps.find do |step|
-              step.not_success?(mark_as_checked: false)
+              step.status.unsafe_not_success?
                 .tap { step.save_outputs_in_organizer! }
                 .tap { step.mark_as_completed! }
                 .tap { step.trigger_callback }
