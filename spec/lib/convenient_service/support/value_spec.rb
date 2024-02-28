@@ -5,15 +5,15 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
-RSpec.describe ConvenientService::Support::UniqueValue do
-  let(:unique_value) { described_class.new(label) }
+RSpec.describe ConvenientService::Support::Value do
+  let(:value) { described_class.new(label) }
   let(:label) { :foo }
-  let(:default_label) { "unique_value_#{unique_value.object_id}" }
+  let(:default_label) { "value" }
 
   example_group "attributes" do
     include ConvenientService::RSpec::PrimitiveMatchers::HaveAttrReader
 
-    subject { unique_value }
+    subject { value }
 
     it { is_expected.to have_attr_reader(:label) }
   end
@@ -21,10 +21,10 @@ RSpec.describe ConvenientService::Support::UniqueValue do
   example_group "class methods" do
     describe ".new" do
       context "when `label` is NOT passed" do
-        let(:unique_value) { described_class.new }
+        let(:value) { described_class.new }
 
-        it "defaults to `object_id.to_s`" do
-          expect(unique_value.label).to eq(default_label)
+        it "defaults to `\"value\"`" do
+          expect(value.label).to eq(default_label)
         end
       end
     end
@@ -35,7 +35,7 @@ RSpec.describe ConvenientService::Support::UniqueValue do
       let(:inspect_representation) { label }
 
       it "returns inspect representation with label" do
-        expect(unique_value.inspect).to eq(inspect_representation)
+        expect(value.inspect).to eq(inspect_representation)
       end
 
       context "when `label` is `nil`" do
@@ -43,7 +43,7 @@ RSpec.describe ConvenientService::Support::UniqueValue do
         let(:inspect_representation) { default_label }
 
         it "returns inspect representation with default label" do
-          expect(unique_value.inspect).to eq(inspect_representation)
+          expect(value.inspect).to eq(inspect_representation)
         end
       end
 
@@ -52,92 +52,92 @@ RSpec.describe ConvenientService::Support::UniqueValue do
         let(:inspect_representation) { default_label }
 
         it "returns inspect representation with default label" do
-          expect(unique_value.inspect).to eq(inspect_representation)
+          expect(value.inspect).to eq(inspect_representation)
         end
       end
     end
 
     example_group "comparison" do
       describe "#==" do
-        let(:unique_value) { described_class.new("foo") }
+        let(:value) { described_class.new("foo") }
 
         context "when `other` has different class" do
           let(:other) { 42 }
 
           it "returns `nil`" do
-            expect(unique_value == other).to be_nil
+            expect(value == other).to be_nil
           end
         end
 
-        context "when `other` has different `object_id`" do
+        context "when `other` has different `label`" do
           let(:other) { described_class.new("bar") }
 
           it "returns `false`" do
-            expect(unique_value == other).to eq(false)
+            expect(value == other).to eq(false)
           end
         end
 
-        context "when `other` has same `object_id`" do
-          let(:other) { unique_value }
+        context "when `other` has same `label`" do
+          let(:other) { described_class.new("foo") }
 
           it "returns `true`" do
-            expect(unique_value == other).to eq(true)
+            expect(value == other).to eq(true)
           end
         end
       end
 
       describe "#===" do
-        let(:unique_value) { described_class.new("foo") }
+        let(:value) { described_class.new("foo") }
 
         context "when `other` has different class" do
           let(:other) { 42 }
 
           it "returns `nil`" do
-            expect(unique_value === other).to be_nil
+            expect(value === other).to be_nil
           end
         end
 
-        context "when `other` has different `object_id`" do
+        context "when `other` has different `label`" do
           let(:other) { described_class.new("bar") }
 
           it "returns `false`" do
-            expect(unique_value === other).to eq(false)
+            expect(value === other).to eq(false)
           end
         end
 
-        context "when `other` has same `object_id`" do
-          let(:other) { unique_value }
+        context "when `other` has same `label`" do
+          let(:other) { described_class.new("foo") }
 
           it "returns `true`" do
-            expect(unique_value === other).to eq(true)
+            expect(value === other).to eq(true)
           end
         end
       end
 
       describe ".eql?" do
-        let(:unique_value) { described_class.new("foo") }
+        let(:value) { described_class.new("foo") }
 
         context "when `other` has different class" do
           let(:other) { 42 }
 
           it "returns `nil`" do
-            expect(unique_value.eql?(other)).to be_nil
+            expect(value.eql?(other)).to be_nil
           end
         end
 
-        context "when `other` has different `object_id`" do
+        context "when `other` has different `label`" do
           let(:other) { described_class.new("bar") }
 
           it "returns `false`" do
-            expect(unique_value.eql?(other)).to eq(false)
+            expect(value.eql?(other)).to eq(false)
           end
         end
 
-        context "when `other` has same `object_id`" do
-          let(:other) { unique_value }
+        context "when `other` has same `label`" do
+          let(:other) { described_class.new("foo") }
 
           it "returns `true`" do
-            expect(unique_value.eql?(other)).to eq(true)
+            expect(value.eql?(other)).to eq(true)
           end
         end
       end
