@@ -17,6 +17,8 @@ module ConvenientService
             # @param kwargs [Hash{Symbol => Object}]
             # @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base]
             #
+            # @note It is NOT recommended to rely on the return value of this method, since it may differ across different `step` related plugins.
+            #
             def step(*args, **kwargs)
               previous_expression = steps.expression
 
@@ -44,6 +46,7 @@ module ConvenientService
             #
             # @note `not` from `not_step` has a similar precedence as Ruby's `!`.
             # @note `not_step` is a rought equivalent of `!step`.
+            # @note It is NOT recommended to rely on the return value of this method, since it may differ across different `step` related plugins.
             # @see https://ruby-doc.org/core-2.7.1/doc/syntax/precedence_rdoc.html
             #
             def not_step(*args, **kwargs)
@@ -77,6 +80,7 @@ module ConvenientService
             #
             # @note `and` from `and_step` has a similar precedence as Ruby's `&&`.
             # @note `and_step` is a rought equivalent of `&& step`.
+            # @note It is NOT recommended to rely on the return value of this method, since it may differ across different `step` related plugins.
             # @see https://ruby-doc.org/core-2.7.1/doc/syntax/precedence_rdoc.html
             #
             def and_step(*args, **kwargs)
@@ -105,6 +109,7 @@ module ConvenientService
             # @note `and` from `and_step` has a similar precedence as Ruby's `&&`.
             # @note `not` from `and_not_step` has a similar precedence as Ruby's `!`.
             # @note `and_not_step` is a rought equivalent of `&& !step`.
+            # @note It is NOT recommended to rely on the return value of this method, since it may differ across different `step` related plugins.
             # @see https://ruby-doc.org/core-2.7.1/doc/syntax/precedence_rdoc.html
             #
             def and_not_step(*args, **kwargs)
@@ -134,6 +139,7 @@ module ConvenientService
             #
             # @note `or` from `or_step` has a similar precedence as Ruby's `||`.
             # @note `or_step` is a rought equivalent of `|| step`.
+            # @note It is NOT recommended to rely on the return value of this method, since it may differ across different `step` related plugins.
             # @see https://ruby-doc.org/core-2.7.1/doc/syntax/precedence_rdoc.html
             #
             # @internal
@@ -175,6 +181,7 @@ module ConvenientService
             # @note `or` from `or_not_step` has a similar precedence as Ruby's `||`.
             # @note `not` from `or_not_step` has a similar precedence as Ruby's `!`.
             # @note `or_not_step` is a rought equivalent of `|| !step`.
+            # @note It is NOT recommended to rely on the return value of this method, since it may differ across different `step` related plugins.
             # @see https://ruby-doc.org/core-2.7.1/doc/syntax/precedence_rdoc.html
             #
             # @internal
@@ -216,6 +223,7 @@ module ConvenientService
             #
             # @note `group` has a similar precedence as Ruby's `()`.
             # @note `group` is a rought equivalent of `()`.
+            # @note It is NOT recommended to rely on the return value of this method, since it may differ across different `step` related plugins.
             # @see https://ruby-doc.org/core-2.7.1/doc/syntax/precedence_rdoc.html
             #
             def group(&block)
@@ -249,6 +257,7 @@ module ConvenientService
             # @note `not` from `not_group` has a similar precedence as Ruby's `!`.
             # @note `group` from `not_group` has a similar precedence as Ruby's `()`.
             # @note `not_group` is a rought equivalent of `!()`.
+            # @note It is NOT recommended to rely on the return value of this method, since it may differ across different `step` related plugins.
             # @see https://ruby-doc.org/core-2.7.1/doc/syntax/precedence_rdoc.html
             #
             def not_group(&block)
@@ -286,6 +295,7 @@ module ConvenientService
             # @note `and` from `and_group` has a similar precedence as Ruby's `&&`.
             # @note `group` from `and_group` has a similar precedence as Ruby's `()`.
             # @note `not_group` is a rought equivalent of `&& ()`.
+            # @note It is NOT recommended to rely on the return value of this method, since it may differ across different `step` related plugins.
             # @see https://ruby-doc.org/core-2.7.1/doc/syntax/precedence_rdoc.html
             #
             def and_group(&block)
@@ -318,6 +328,7 @@ module ConvenientService
             # @note `not` from `and_not_group` has a similar precedence as Ruby's `!`.
             # @note `group` from `and_not_group` has a similar precedence as Ruby's `()`.
             # @note `and_not_group` is a rought equivalent of `&& !()`.
+            # @note It is NOT recommended to rely on the return value of this method, since it may differ across different `step` related plugins.
             # @see https://ruby-doc.org/core-2.7.1/doc/syntax/precedence_rdoc.html
             #
             def and_not_group(&block)
@@ -348,13 +359,14 @@ module ConvenientService
             # @param block [Proc, nil]
             # @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base]
             #
-            # @internal
-            #   NOTE: Decomposing of the `and` expression is needed to make its priority higher.
-            #
             # @note `or` from `or_group` has a similar precedence as Ruby's `||`.
             # @note `group` from `or_group` has a similar precedence as Ruby's `()`.
             # @note `or_group` is a rought equivalent of `|| ()`
+            # @note It is NOT recommended to rely on the return value of this method, since it may differ across different `step` related plugins.
             # @see https://ruby-doc.org/core-2.7.1/doc/syntax/precedence_rdoc.html
+            #
+            # @internal
+            #   NOTE: Decomposing of the `and` expression is needed to make its priority higher.
             #
             def or_group(&block)
               previous_expression = steps.expression
@@ -392,14 +404,15 @@ module ConvenientService
             # @param block [Proc, nil]
             # @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base]
             #
-            # @internal
-            #   NOTE: Decomposing of the `and` expression is needed to make its priority higher.
-            #
             # @note `or` from `or_not_group` has a similar precedence as Ruby's `||`.
             # @note `not` from `or_not_group` has a similar precedence as Ruby's `!`.
             # @note `group` from `or_not_group` has a similar precedence as Ruby's `()`.
             # @note `or_not_group` is a rought equivalent of `|| !()`
+            # @note It is NOT recommended to rely on the return value of this method, since it may differ across different `step` related plugins.
             # @see https://ruby-doc.org/core-2.7.1/doc/syntax/precedence_rdoc.html
+            #
+            # @internal
+            #   NOTE: Decomposing of the `and` expression is needed to make its priority higher.
             #
             def or_not_group(&block)
               previous_expression = steps.expression
@@ -474,7 +487,7 @@ module ConvenientService
             # Returns `nil` when index is out of range.
             #
             # @param index [Integer]
-            # @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base]
+            # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step]
             #
             # @note This method was initially designed as a hook (callback trigger).
             # @see ConvenientService::Service::Plugins::CanHaveConnectedSteps::Middleware#next

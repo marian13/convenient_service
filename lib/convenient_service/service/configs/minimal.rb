@@ -58,9 +58,12 @@ module ConvenientService
             use ConvenientService::Plugins::Service::HasJSendResult::Concern
 
             use ConvenientService::Plugins::Service::CanHaveSteps::Concern
-            use ConvenientService::Plugins::Service::CanHaveSequentialSteps::Concern
+            use ConvenientService::Plugins::Service::CanHaveConnectedSteps::Concern
           end
 
+          ##
+          # TODO: Move `NormalizesEnv` inside `Core`.
+          #
           middlewares :initialize do
             use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
           end
@@ -71,7 +74,7 @@ module ConvenientService
 
             use ConvenientService::Plugins::Service::RaisesOnNotResultReturnValue::Middleware
 
-            use ConvenientService::Plugins::Service::CanHaveSequentialSteps::Middleware
+            use ConvenientService::Plugins::Service::CanHaveConnectedSteps::Middleware
           end
 
           middlewares :step do
@@ -95,6 +98,36 @@ module ConvenientService
           end
 
           middlewares :step, scope: :class do
+            use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
+
+            use ConvenientService::Plugins::Service::CanHaveMethodSteps::Middleware
+          end
+
+          middlewares :not_step, scope: :class do
+            use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
+
+            use ConvenientService::Plugins::Service::CanHaveMethodSteps::Middleware
+          end
+
+          middlewares :and_step, scope: :class do
+            use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
+
+            use ConvenientService::Plugins::Service::CanHaveMethodSteps::Middleware
+          end
+
+          middlewares :and_not_step, scope: :class do
+            use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
+
+            use ConvenientService::Plugins::Service::CanHaveMethodSteps::Middleware
+          end
+
+          middlewares :or_step, scope: :class do
+            use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
+
+            use ConvenientService::Plugins::Service::CanHaveMethodSteps::Middleware
+          end
+
+          middlewares :or_not_step, scope: :class do
             use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
 
             use ConvenientService::Plugins::Service::CanHaveMethodSteps::Middleware

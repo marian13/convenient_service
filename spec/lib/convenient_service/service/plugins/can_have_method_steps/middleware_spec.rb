@@ -66,7 +66,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveMethodSteps::Middlewa
         it "returns original step" do
           method_value
 
-          expect(container.steps.first).to eq(container.step(service, **kwargs).copy(overrides: {kwargs: {index: index}}))
+          expect(container.steps.first).to eq(container.step_class.new(service, **kwargs.merge(index: index)))
         end
       end
 
@@ -83,7 +83,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveMethodSteps::Middlewa
         it "returns customized step" do
           method_value
 
-          expect(container.steps.first).to eq(container.step(container, **kwargs.merge(method: method_name)).copy(overrides: {kwargs: {index: index}}))
+          expect(container.steps.first).to eq(container.step_class.new(container, **kwargs.merge(method: method_name, index: index)))
         end
       end
     end

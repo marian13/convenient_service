@@ -33,6 +33,10 @@ module ConvenientService
               use ConvenientService::Plugins::Common::HasAroundCallbacks::Concern
 
               use ConvenientService::Plugins::Service::HasMermaidFlowchart::Concern
+
+              replace \
+                ConvenientService::Plugins::Service::CanHaveConnectedSteps::Concern,
+                ConvenientService::Plugins::Service::CanHaveSequentialSteps::Concern
             end
 
             middlewares :initialize do
@@ -61,6 +65,10 @@ module ConvenientService
               insert_before \
                 ConvenientService::Plugins::Service::RaisesOnNotResultReturnValue::Middleware,
                 ConvenientService::Plugins::Service::SetsParentToForeignResult::Middleware
+
+              replace \
+                ConvenientService::Plugins::Service::CanHaveConnectedSteps::Middleware,
+                ConvenientService::Plugins::Service::CanHaveSequentialSteps::Middleware
             end
 
             middlewares :step do

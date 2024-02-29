@@ -14,12 +14,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
   let(:service_class) do
     Class.new do
       include ConvenientService::Service::Configs::Minimal
-
-      concerns do
-        replace \
-          ConvenientService::Plugins::Service::CanHaveSequentialSteps::Concern,
-          ConvenientService::Plugins::Service::CanHaveConnectedSteps::Concern
-      end
     end
   end
 
