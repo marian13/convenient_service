@@ -196,6 +196,29 @@
 </li>
 
       
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#step-instance_method" title="#step (instance method)">#<strong>step</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>TODO:   <code>after :step do |step|</code> is executed after step result is calculated.</p>
+</div></span>
+  
+</li>
+
+      
     </ul>
   
 
@@ -206,6 +229,11 @@
   
   
   
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="Minimal.html" title="ConvenientService::Service::Configs::Minimal (module)">Minimal</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Minimal.html#initialize-instance_method" title="ConvenientService::Service::Configs::Minimal#initialize (method)">#initialize</a></span></p>
+
   
   
   
@@ -346,12 +374,60 @@
 </table>
 </div>
     
+      <div class="method_details ">
+  <h3 class="signature " id="step-instance_method">
+  
+    #<strong>step</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>TODO:
+<code>after :step do |step|</code> is executed after step result is calculated.
+This completely makes sence and is useful for debugging for example.</p>
+<p>But <code>before :step do</code> is alos executed after step result is calculated.
+That confuses the end-users a lot.
+Probably a dedicated plugin is needed?
+Or to forbid <code>before :step do</code>?</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+119
+120
+121
+122</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/configs/standard.rb', line 119</span>
+
+<span class='id identifier rubyid_middlewares'>middlewares</span> <span class='symbol'>:step</span> <span class='kw'>do</span>
+  <span class='id identifier rubyid_use'>use</span> <span class='const'><span class='object_link'><a href="../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Plugins.html" title="ConvenientService::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Plugins.html#Common-constant" title="ConvenientService::Plugins::Common (constant)">Common</a></span></span><span class='op'>::</span><span class='const'>HasCallbacks</span><span class='op'>::</span><span class='const'>Middleware</span>
+  <span class='id identifier rubyid_use'>use</span> <span class='const'><span class='object_link'><a href="../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Plugins.html" title="ConvenientService::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Plugins.html#Common-constant" title="ConvenientService::Plugins::Common (constant)">Common</a></span></span><span class='op'>::</span><span class='const'>HasAroundCallbacks</span><span class='op'>::</span><span class='const'>Middleware</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
   </div>
 
 </div>
 
       <div id="footer">
-  Generated on Thu Feb 29 01:07:01 2024 by
+  Generated on Thu Feb 29 02:19:12 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.35 (ruby-3.2.3).
 </div>
