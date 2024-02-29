@@ -146,11 +146,12 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
 
     describe "#with_organizer" do
       let(:step_collection) { described_class.new(container: container, expression: expression, steps: steps) }
+      let(:expression_with_organizer) { expression.with_organizer(organizer) }
 
       specify do
         expect { step_collection.with_organizer(organizer) }
           .to delegate_to(step_collection, :copy)
-          .with_arguments(overrides: {kwargs: {expression: expression.with_organizer(organizer), steps: steps.map { |step| step.with_organizer(organizer) }}})
+          .with_arguments(overrides: {kwargs: {expression: expression_with_organizer, steps: expression_with_organizer.steps}})
           .and_return_its_value
       end
     end

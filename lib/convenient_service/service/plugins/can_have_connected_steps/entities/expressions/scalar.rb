@@ -77,9 +77,9 @@ module ConvenientService
               #   IMPORTANT: `each_evaluated_step` calls `result` to be able to use the same RSpec spy for both `each_evaluated_step` and `result?`.
               #
               def each_evaluated_step(&block)
-                yield(step)
-
                 result
+
+                yield(step)
 
                 self
               end

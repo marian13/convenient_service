@@ -6,6 +6,8 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Scalar do
+  include ConvenientService::RSpec::Helpers::IgnoringException
+
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   let(:expression) { described_class.new(step) }
@@ -129,11 +131,17 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
       let(:block) { proc { |step| step.index } }
 
       specify do
-        expect { |block| expression.each_evaluated_step(&block) }.to yield_with_args(step)
+        expect { expression.each_evaluated_step(&block) }
+          .to delegate_to(expression, :result)
+          .without_arguments
       end
 
       specify do
-        expect { expression.each_evaluated_step(&block) }
+        expect { |block| expression.each_evaluated_step(&block) }.to yield_with_args(step)
+      end
+
+      it "calls `result` before `yield`" do
+        expect { ignoring_exception(ArgumentError) { expression.each_evaluated_step { raise ArgumentError } } }
           .to delegate_to(expression, :result)
           .without_arguments
       end

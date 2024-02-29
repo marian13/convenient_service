@@ -81,7 +81,9 @@ module ConvenientService
             # @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::StepCollection]
             #
             def with_organizer(organizer)
-              copy(overrides: {kwargs: {expression: expression.with_organizer(organizer), steps: steps.map { |step| step.with_organizer(organizer) }}})
+              expression_with_organizer = expression.with_organizer(organizer)
+
+              copy(overrides: {kwargs: {expression: expression_with_organizer, steps: expression_with_organizer.steps}})
             end
 
             ##
