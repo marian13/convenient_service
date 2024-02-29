@@ -6,7 +6,7 @@
 <title>
   Class: ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::StepCollection
   
-    &mdash; Documentation by YARD 0.9.34
+    &mdash; Documentation by YARD 0.9.35
   
 </title>
 
@@ -789,18 +789,18 @@
       <pre class="lines">
 
 
-171
-172
 173
 174
 175
 176
 177
 178
-179</pre>
+179
+180
+181</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/step_collection.rb', line 171</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/step_collection.rb', line 173</span>
 
 <span class='kw'>def</span> <span class='op'>==</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='rparen'>)</span>
@@ -883,12 +883,12 @@
       <pre class="lines">
 
 
-161
-162
-163</pre>
+163
+164
+165</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/step_collection.rb', line 161</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/step_collection.rb', line 163</span>
 
 <span class='kw'>def</span> <span class='op'>[]</span><span class='lparen'>(</span><span class='id identifier rubyid_index'>index</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_steps'>steps</span><span class='lbracket'>[</span><span class='id identifier rubyid_index'>index</span><span class='rbracket'>]</span>
@@ -947,8 +947,6 @@
       <pre class="lines">
 
 
-99
-100
 101
 102
 103
@@ -957,10 +955,12 @@
 106
 107
 108
-109</pre>
+109
+110
+111</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/step_collection.rb', line 99</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/step_collection.rb', line 101</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_commit!'>commit!</span>
   <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='id identifier rubyid_committed?'>committed?</span>
@@ -1015,12 +1015,12 @@
       <pre class="lines">
 
 
-116
-117
-118</pre>
+118
+119
+120</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/step_collection.rb', line 116</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/step_collection.rb', line 118</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_committed?'>committed?</span>
   <span class='id identifier rubyid_expression'>expression</span><span class='period'>.</span><span class='id identifier rubyid_frozen?'>frozen?</span>
@@ -1166,12 +1166,12 @@
       <pre class="lines">
 
 
-126
-127
-128</pre>
+128
+129
+130</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/step_collection.rb', line 126</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/step_collection.rb', line 128</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_each'>each</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_expression'>expression</span><span class='period'>.</span><span class='id identifier rubyid_each_step'>each_step</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
@@ -1233,12 +1233,12 @@
       <pre class="lines">
 
 
-146
-147
-148</pre>
+148
+149
+150</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/step_collection.rb', line 146</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/step_collection.rb', line 148</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_each_evaluated_step'>each_evaluated_step</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_expression'>expression</span><span class='period'>.</span><span class='id identifier rubyid_each_evaluated_step'>each_evaluated_step</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
@@ -1300,12 +1300,12 @@
       <pre class="lines">
 
 
-136
-137
-138</pre>
+138
+139
+140</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/step_collection.rb', line 136</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/step_collection.rb', line 138</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_each_step'>each_step</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_expression'>expression</span><span class='period'>.</span><span class='id identifier rubyid_each_step'>each_step</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
@@ -1417,12 +1417,12 @@
       <pre class="lines">
 
 
-184
-185
-186</pre>
+186
+187
+188</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/step_collection.rb', line 184</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/step_collection.rb', line 186</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_arguments'>to_arguments</span>
   <span class='const'><span class='object_link'><a href="../../../../Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Support/Arguments.html" title="ConvenientService::Support::Arguments (class)">Arguments</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../../../Support/Arguments.html#initialize-instance_method" title="ConvenientService::Support::Arguments#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>container:</span> <span class='id identifier rubyid_container'>container</span><span class='comma'>,</span> <span class='label'>expression:</span> <span class='id identifier rubyid_expression'>expression</span><span class='comma'>,</span> <span class='label'>steps:</span> <span class='id identifier rubyid_steps'>steps</span><span class='rparen'>)</span>
@@ -1486,13 +1486,17 @@
 
 83
 84
-85</pre>
+85
+86
+87</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/step_collection.rb', line 83</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_with_organizer'>with_organizer</span><span class='lparen'>(</span><span class='id identifier rubyid_organizer'>organizer</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_copy'>copy</span><span class='lparen'>(</span><span class='label'>overrides:</span> <span class='lbrace'>{</span><span class='label'>kwargs:</span> <span class='lbrace'>{</span><span class='label'>expression:</span> <span class='id identifier rubyid_expression'>expression</span><span class='period'>.</span><span class='id identifier rubyid_with_organizer'>with_organizer</span><span class='lparen'>(</span><span class='id identifier rubyid_organizer'>organizer</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='label'>steps:</span> <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_step'>step</span><span class='op'>|</span> <span class='id identifier rubyid_step'>step</span><span class='period'>.</span><span class='id identifier rubyid_with_organizer'>with_organizer</span><span class='lparen'>(</span><span class='id identifier rubyid_organizer'>organizer</span><span class='rparen'>)</span> <span class='rbrace'>}</span><span class='rbrace'>}</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_expression_with_organizer'>expression_with_organizer</span> <span class='op'>=</span> <span class='id identifier rubyid_expression'>expression</span><span class='period'>.</span><span class='id identifier rubyid_with_organizer'>with_organizer</span><span class='lparen'>(</span><span class='id identifier rubyid_organizer'>organizer</span><span class='rparen'>)</span>
+
+  <span class='id identifier rubyid_copy'>copy</span><span class='lparen'>(</span><span class='label'>overrides:</span> <span class='lbrace'>{</span><span class='label'>kwargs:</span> <span class='lbrace'>{</span><span class='label'>expression:</span> <span class='id identifier rubyid_expression_with_organizer'>expression_with_organizer</span><span class='comma'>,</span> <span class='label'>steps:</span> <span class='id identifier rubyid_expression_with_organizer'>expression_with_organizer</span><span class='period'>.</span><span class='id identifier rubyid_steps'>steps</span><span class='rbrace'>}</span><span class='rbrace'>}</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1504,9 +1508,9 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Feb 28 02:42:55 2024 by
+  Generated on Thu Feb 29 01:07:10 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.34 (ruby-3.2.3).
+  0.9.35 (ruby-3.2.3).
 </div>
 
     </div>
