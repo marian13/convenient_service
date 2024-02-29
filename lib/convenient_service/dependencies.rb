@@ -343,6 +343,7 @@ module ConvenientService
         require_relative ::File.join("examples", "standard", version, "factorial")
         require_relative ::File.join("examples", "standard", version, "gemfile")
         require_relative ::File.join("examples", "standard", version, "request_params")
+        require_relative ::File.join("examples", "standard", version, "comprehensive_suite") if version.empty?
       end
 
       ##

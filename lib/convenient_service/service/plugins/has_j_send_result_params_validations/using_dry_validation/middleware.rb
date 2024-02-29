@@ -4,6 +4,10 @@ module ConvenientService
   module Service
     module Plugins
       module HasJSendResultParamsValidations
+        ##
+        # @internal
+        #   TODO: Consider to add versioning, since `dry` gems often modify thier public API.
+        #
         module UsingDryValidation
           class Middleware < MethodChainMiddleware
             intended_for :result, entity: :service
