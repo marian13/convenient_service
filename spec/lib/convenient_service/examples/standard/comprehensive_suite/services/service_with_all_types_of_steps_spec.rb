@@ -52,7 +52,6 @@ RSpec.describe ConvenientService::Examples::Standard::ComprehensiveSuite::Servic
 
         ##
         # TODO: Implement a way to check delegation to method step.
-        # TODO: Implement a way to pass overridden arguments to method step.
         #
         # specify do
         #   expect { result }
@@ -68,7 +67,6 @@ RSpec.describe ConvenientService::Examples::Standard::ComprehensiveSuite::Servic
 
         ##
         # TODO: Implement a way to check delegation to method step.
-        # TODO: Implement a way to pass overridden arguments to method step.
         #
         # specify do
         #   expect { result }
@@ -84,7 +82,6 @@ RSpec.describe ConvenientService::Examples::Standard::ComprehensiveSuite::Servic
 
         ##
         # TODO: Implement a way to check delegation to method step.
-        # TODO: Implement a way to pass overridden arguments to method step.
         #
         # specify do
         #   expect { result }
@@ -96,7 +93,7 @@ RSpec.describe ConvenientService::Examples::Standard::ComprehensiveSuite::Servic
         # TODO: `of_step`, `of_not_step`, `of_and_step`, `of_or_step`, `of_not_or_step`? Or generic `of_step(step, with: type)?`
         #
         it "returns `success`" do
-          expect(result).to be_success.of_service(described_class).of_step(:failure_method)
+          expect(result).to be_success.with_data(index: 5).of_service(described_class).of_step(:failure_method)
         end
 
         it "prints progress bar after each step" do

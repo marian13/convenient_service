@@ -24,10 +24,29 @@ module ConvenientService
 
                       ::ConvenientService.raise Exceptions::MethodForStepIsNotDefined.new(service_class: organizer.class, method_name: method_name) unless own_method
 
-                      own_method.call
+                      call_method(own_method)
                     end
 
                     private
+
+                    ##
+                    # @param method [Method]
+                    # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
+                    #
+                    # @internal
+                    #   TODO: Add specs.
+                    #
+                    def call_method(method)
+                      rest = method.parameters.any? { |type, _name| type == :keyrest }
+
+                      return method.call(**input_values) if rest
+
+                      keys = method.parameters.select { |type, _name| [:keyreq, :key].include?(type) }.map { |_type, name| name }
+
+                      return method.call(**input_values.slice(*keys)) if keys.any?
+
+                      method.call
+                    end
 
                     ##
                     # @return [Method, nil]
@@ -59,6 +78,13 @@ module ConvenientService
                     #
                     def method_name
                       @method_name ||= entity.method
+                    end
+
+                    ##
+                    # @return [Hash{Symbol => Object}]
+                    #
+                    def input_values
+                      @input_values ||= entity.input_values
                     end
                   end
                 end

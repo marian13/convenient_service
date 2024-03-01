@@ -49,12 +49,12 @@ module ConvenientService
 
             private
 
-            def success_method
-              success
+            def success_method(index:)
+              success(index: index)
             end
 
-            def failure_method
-              failure
+            def failure_method(index:)
+              failure(index: index)
             end
 
             def puts(...)
