@@ -265,7 +265,6 @@ module ConvenientService
               use ConvenientService::Plugins::Step::CanBeCompleted::Concern
 
               use ConvenientService::Plugins::Step::CanBeMethodStep::Concern
-              use ConvenientService::Plugins::Step::CanBeResultStep::Concern
 
               use ConvenientService::Plugins::Step::HasInspect::Concern
             end
@@ -281,7 +280,6 @@ module ConvenientService
 
               use ConvenientService::Plugins::Step::RaisesOnNotResultReturnValue::Middleware
 
-              use ConvenientService::Plugins::Step::CanBeResultStep::CanBeExecuted::Middleware
               use ConvenientService::Plugins::Step::CanBeMethodStep::CanBeExecuted::Middleware
             end
 

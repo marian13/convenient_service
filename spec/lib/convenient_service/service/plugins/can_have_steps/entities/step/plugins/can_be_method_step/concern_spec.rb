@@ -76,6 +76,68 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         end
       end
     end
+
+    describe "#result_step?" do
+      context "when `step` does NOT have method" do
+        let(:service_class) do
+          Class.new do
+            include ConvenientService::Service::Configs::Standard
+
+            step :result
+
+            def result
+              success
+            end
+          end
+        end
+
+        before do
+          step.extra_kwargs.delete(:method)
+        end
+
+        it "returns `false`" do
+          expect(step.result_step?).to eq(false)
+        end
+      end
+
+      context "when `step` has method" do
+        context "when that method value is NOT `:result`" do
+          let(:service_class) do
+            Class.new do
+              include ConvenientService::Service::Configs::Standard
+
+              step :foo
+
+              def foo
+                success
+              end
+            end
+          end
+
+          it "returns `false`" do
+            expect(step.result_step?).to eq(false)
+          end
+        end
+
+        context "when that method value is `:result`" do
+          let(:service_class) do
+            Class.new do
+              include ConvenientService::Service::Configs::Standard
+
+              step :result
+
+              def result
+                success
+              end
+            end
+          end
+
+          it "returns `true`" do
+            expect(step.result_step?).to eq(true)
+          end
+        end
+      end
+    end
   end
 end
 # rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers

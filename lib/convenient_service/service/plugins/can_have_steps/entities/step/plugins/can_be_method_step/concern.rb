@@ -25,6 +25,13 @@ module ConvenientService
                     def method_step?
                       Utils.to_bool(method)
                     end
+
+                    ##
+                    # @return [Boolean]
+                    #
+                    def result_step?
+                      method_step? && method == :result
+                    end
                   end
                 end
               end

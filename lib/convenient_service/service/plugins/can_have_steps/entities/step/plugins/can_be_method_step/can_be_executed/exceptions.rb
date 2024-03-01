@@ -7,7 +7,7 @@ module ConvenientService
         module Entities
           class Step
             module Plugins
-              module CanBeResultStep
+              module CanBeMethodStep
                 module CanBeExecuted
                   module Exceptions
                     class MethodForStepIsNotDefined < ::ConvenientService::Exception
