@@ -328,6 +328,16 @@ module ConvenientService
                 end
 
                 ##
+                # @return [String]
+                #
+                # @internal
+                #   TODO: Remove `printable_service` completely. Leave only `to_s`.
+                #
+                def to_s
+                  printable_service
+                end
+
+                ##
                 # @api private
                 #
                 # @return [Array<Object>]

@@ -902,6 +902,15 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         }
       end
 
+      describe "#to_s" do
+        specify do
+          expect { step.to_s }
+            .to delegate_to(step, :printable_service)
+            .without_arguments
+            .and_return_its_value
+        end
+      end
+
       describe "#to_args" do
         specify do
           allow(step).to receive(:to_arguments).and_return(arguments)
