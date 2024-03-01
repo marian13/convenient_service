@@ -93,11 +93,11 @@ RSpec.describe ConvenientService::Examples::Standard::ComprehensiveSuite::Servic
         # end
 
         ##
-        # FIX: Modify copy of original result to create negated result.
+        # TODO: `of_step`, `of_not_step`, `of_and_step`, `of_or_step`, `of_not_or_step`? Or generic `of_step(step, with: type)?`
         #
-        # it "returns `success`" do
-        #   expect(result).to be_success.of_service(described_class).of_step(:failure_method)
-        # end
+        it "returns `success`" do
+          expect(result).to be_success.of_service(described_class).of_step(:failure_method)
+        end
 
         it "prints progress bar after each step" do
           result

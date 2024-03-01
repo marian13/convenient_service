@@ -28,19 +28,33 @@ module ConvenientService
                     #   TODO: `Utils::String.concat_if`? How?
                     #   - https://stackoverflow.com/a/28648594/12201472
                     #
+                    #   IMPORTNANT: `copy` is used instead of `service.success`, or `service.failure` in order to reuse the original result extra kwargs, like `step`, `parent`, etc.
+                    #
+                    #   TODO: A simple way to get constant without referencing other plugin.
+                    #
                     def negated_result
                       case status.to_sym
                       when :success
-                        service.failure(
-                          data: unsafe_data,
-                          message: "Original `result` is `success`#{" with `message` - #{unsafe_message}" unless unsafe_message.empty?}",
-                          code: "negated_#{unsafe_code}"
+                        copy(
+                          overrides: {
+                            kwargs: {
+                              status: :failure,
+                              data: unsafe_data,
+                              message: "Original `result` is `success`#{" with `message` - #{unsafe_message}" unless unsafe_message.empty?}",
+                              code: "negated_#{unsafe_code}"
+                            }
+                          }
                         )
                       when :failure
-                        service.success(
-                          data: unsafe_data,
-                          message: "Original `result` is `failure`#{" with `message` - #{unsafe_message}" unless unsafe_message.empty?}",
-                          code: "negated_#{unsafe_code}"
+                        copy(
+                          overrides: {
+                            kwargs: {
+                              status: :success,
+                              data: unsafe_data,
+                              message: "Original `result` is `failure`#{" with `message` - #{unsafe_message}" unless unsafe_message.empty?}",
+                              code: "negated_#{unsafe_code}"
+                            }
+                          }
                         )
                       when :error
                         copy

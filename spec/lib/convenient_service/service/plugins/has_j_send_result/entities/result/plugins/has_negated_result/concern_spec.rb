@@ -79,6 +79,14 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           end
         end
 
+        ##
+        # NOTE: This check is needed to make sure that `negated_result` is reusing original `result` extra kwargs, like `step`, `parent`, etc.
+        #
+        specify do
+          expect { result.negated_result }
+            .to delegate_to(result, :copy)
+        end
+
         it "returns `failure`" do
           expect(result.negated_result).to be_failure
         end
@@ -173,6 +181,14 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           end
         end
 
+        ##
+        # NOTE: This check is needed to make sure that `negated_result` is reusing original `result` extra kwargs, like `step`, `parent`, etc.
+        #
+        specify do
+          expect { result.negated_result }
+            .to delegate_to(result, :copy)
+        end
+
         it "returns `success`" do
           expect(result.negated_result).to be_success
         end
@@ -265,6 +281,14 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
               error
             end
           end
+        end
+
+        ##
+        # NOTE: This check is needed to make sure that `negated_result` is reusing original `result` extra kwargs, like `step`, `parent`, etc.
+        #
+        specify do
+          expect { result.negated_result }
+            .to delegate_to(result, :copy)
         end
 
         it "returns copy of that original `error`" do
