@@ -18,24 +18,24 @@ RSpec.describe ConvenientService::Examples::Standard::ComprehensiveSuite::Servic
   example_group "class methods" do
     describe ".result" do
       context "when `ErrorService` is NOT successful" do
-        context "when `message` is NOT passed" do
+        context "when `index` is NOT passed" do
           subject(:result) { described_class.result }
 
-          let(:default_message) { "foo" }
+          let(:default_index) { -1 }
 
-          it "returns `error` with `default message`" do
-            expect(result).to be_error.with_message(default_message).of_service(described_class).without_step
+          it "returns `error` with `default index`" do
+            expect(result).to be_error.with_data(index: default_index).of_service(described_class).without_step
           end
         end
       end
 
-      context "when `message` is passed" do
-        subject(:result) { described_class.result(message: message) }
+      context "when `index` is passed" do
+        subject(:result) { described_class.result(index: index) }
 
-        let(:message) { "bar" }
+        let(:index) { 0 }
 
-        it "returns `error` with that passed `message`" do
-          expect(result).to be_error.with_message(message).of_service(described_class).without_step
+        it "returns `error` with that passed `index`" do
+          expect(result).to be_error.with_data(index: index).of_service(described_class).without_step
         end
       end
     end

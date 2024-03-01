@@ -17,25 +17,25 @@ RSpec.describe ConvenientService::Examples::Standard::ComprehensiveSuite::Servic
 
   example_group "class methods" do
     describe ".result" do
-      context "when `SuccessService` is successful" do
-        context "when `data` is NOT passed" do
+      context "when `SuccessService` is NOT successful" do
+        context "when `index` is NOT passed" do
           subject(:result) { described_class.result }
 
-          let(:default_data) { {foo: :bar} }
+          let(:default_index) { -1 }
 
-          it "returns `success` with `default data`" do
-            expect(result).to be_success.with_data(default_data).of_service(described_class).without_step
+          it "returns `success` with `default index`" do
+            expect(result).to be_success.with_data(index: default_index).of_service(described_class).without_step
           end
         end
       end
 
-      context "when `data` is passed" do
-        subject(:result) { described_class.result(data: data) }
+      context "when `index` is passed" do
+        subject(:result) { described_class.result(index: index) }
 
-        let(:data) { {baz: :qux, quux: :quuz} }
+        let(:index) { 0 }
 
-        it "returns `success` with that passed `data`" do
-          expect(result).to be_success.with_data(data).of_service(described_class).without_step
+        it "returns `success` with that passed `index`" do
+          expect(result).to be_success.with_data(index: index).of_service(described_class).without_step
         end
       end
     end

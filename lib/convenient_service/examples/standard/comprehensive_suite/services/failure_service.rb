@@ -9,24 +9,24 @@ module ConvenientService
             include ConvenientService::Standard::Config
 
             ##
-            # @!attribute [r] message
-            #   @return [String]
+            # @!attribute [r] index
+            #   @return [Integer]
             #
-            attr_reader :message
+            attr_reader :index
 
             ##
-            # @param message [String]
+            # @param index [Integer]
             # @return [void]
             #
-            def initialize(message: "foo")
-              @message = message
+            def initialize(index: -1)
+              @index = index
             end
 
             ##
             # @return [ConvenientService::Result]
             #
             def result
-              failure(message)
+              failure(index: index)
             end
           end
         end

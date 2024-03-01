@@ -9,24 +9,24 @@ module ConvenientService
             include ConvenientService::Standard::Config
 
             ##
-            # @!attribute [r] data
-            #   @return [Hash{Symbol => Object}]
+            # @!attribute [r] index
+            #   @return [Integer]
             #
-            attr_reader :data
+            attr_reader :index
 
             ##
-            # @param data [Hash{Symbol => Object}]
+            # @param index [Integer]
             # @return [void]
             #
-            def initialize(data: {foo: :bar})
-              @data = data
+            def initialize(index: -1)
+              @index = index
             end
 
             ##
             # @return [ConvenientService::Result]
             #
             def result
-              success(**data)
+              success(index: index)
             end
           end
         end
