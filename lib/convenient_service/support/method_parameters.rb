@@ -26,17 +26,17 @@ module ConvenientService
       end
 
       ##
-      # @!attribute [r] parameters
+      # @!attribute [r] method_parameters
       #   @return [Array]
       #
-      attr_reader :parameters
+      attr_reader :method_parameters
 
       ##
-      # @param parameters [Array]
+      # @param method_parameters [Array]
       # @return [void]
       #
-      def initialize(parameters)
-        @parameters = parameters
+      def initialize(method_parameters)
+        @method_parameters = method_parameters
       end
 
       ##
@@ -62,7 +62,7 @@ module ConvenientService
       def has_rest_kwargs?
         return @has_rest_kwargs if defined? @has_rest_kwargs
 
-        @has_rest_kwargs = parameters.any? { |type, _name| type == Constants::Types::REST_KEYWORDS }
+        @has_rest_kwargs = method_parameters.any? { |type, _name| type == Constants::Types::REST_KEYWORDS }
       end
 
       ##
@@ -80,7 +80,7 @@ module ConvenientService
       # @see https://ruby-doc.org/core-2.7.1/Method.html#method-i-parameters
       #
       def named_kwargs_keys
-        @named_kwargs_keys ||= parameters.select { |type, _name| type == Constants::Types::REQUIRED_KEYWORD || type == Constants::Types::OPTIONAL_KEYWORD }.map { |_type, name| name }
+        @named_kwargs_keys ||= method_parameters.select { |type, _name| type == Constants::Types::REQUIRED_KEYWORD || type == Constants::Types::OPTIONAL_KEYWORD }.map { |_type, name| name }
       end
 
       ##
@@ -97,7 +97,7 @@ module ConvenientService
       # @see https://ruby-doc.org/core-2.7.1/Method.html#method-i-parameters
       #
       def required_kwargs_keys
-        @required_kwargs_keys ||= parameters.select { |type, _name| type == Constants::Types::REQUIRED_KEYWORD }.map { |_type, name| name }
+        @required_kwargs_keys ||= method_parameters.select { |type, _name| type == Constants::Types::REQUIRED_KEYWORD }.map { |_type, name| name }
       end
 
       ##
@@ -114,7 +114,7 @@ module ConvenientService
       # @see https://ruby-doc.org/core-2.7.1/Method.html#method-i-parameters
       #
       def optional_kwargs_keys
-        @optional_kwargs_keys ||= parameters.select { |type, _name| type == Constants::Types::OPTIONAL_KEYWORD }.map { |_type, name| name }
+        @optional_kwargs_keys ||= method_parameters.select { |type, _name| type == Constants::Types::OPTIONAL_KEYWORD }.map { |_type, name| name }
       end
     end
   end
