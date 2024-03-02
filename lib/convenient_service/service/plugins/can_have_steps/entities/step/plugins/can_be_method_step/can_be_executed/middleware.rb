@@ -37,13 +37,11 @@ module ConvenientService
                     #   TODO: Add specs.
                     #
                     def call_method(method)
-                      rest = method.parameters.any? { |type, _name| type == :keyrest }
+                      params = Support::MethodParameters.new(method.parameters)
 
-                      return method.call(**input_values) if rest
+                      return method.call(**input_values) if params.has_rest_kwargs?
 
-                      keys = method.parameters.select { |type, _name| [:keyreq, :key].include?(type) }.map { |_type, name| name }
-
-                      return method.call(**input_values.slice(*keys)) if keys.any?
+                      return method.call(**input_values.slice(*params.named_kwargs_keys)) if params.named_kwargs_keys.any?
 
                       method.call
                     end
