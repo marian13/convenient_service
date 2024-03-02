@@ -244,6 +244,7 @@ module ConvenientService
               #
               def expected_arguments=(arguments)
                 Utils::Object.instance_variable_delete(self, :@delegation_value)
+                Utils::Object.instance_variable_delete(self, :@custom_return_value)
 
                 @expected_arguments = arguments
               end
@@ -273,6 +274,17 @@ module ConvenientService
                     &expected_arguments.block
                   )
                 end
+              end
+
+              ##
+              # @return [Object] Can be any type.
+              #
+              # @internal
+              #   IMPORTANT: Must be refreshed when `expected_arguments` are reset.
+              #   TODO: Specs.
+              #
+              def custom_return_value
+                Utils::Object.memoize_including_falsy_values(self, :@custom_return_value) { expected_return_value_block.call(delegation_value) }
               end
 
               ##

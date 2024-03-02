@@ -70,6 +70,26 @@ module ConvenientService
                         #
                         block_expectation_value == matcher.delegation_value
                       end
+
+                      ##
+                      # @return [String]
+                      #
+                      def failure_message_when_negated
+                        "expected `#{matcher.printable_block_expectation}` NOT to delegate to `#{matcher.printable_method}` and return its value, but it did."
+                      end
+
+                      private
+
+                      ##
+                      # @return [String]
+                      #
+                      def failure_message_permanent_part
+                        <<~MESSAGE.chomp
+                          expected `#{matcher.printable_block_expectation}` to delegate to `#{matcher.printable_method}` and return its value, but it didn't.
+
+                          `#{matcher.printable_block_expectation}` returns `#{block_expectation_value.inspect}`, but delegation returns `#{matcher.delegation_value.inspect}`.
+                        MESSAGE
+                      end
                     end
                   end
                 end

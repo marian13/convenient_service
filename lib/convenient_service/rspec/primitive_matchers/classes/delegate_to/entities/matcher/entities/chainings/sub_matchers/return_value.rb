@@ -26,22 +26,7 @@ module ConvenientService
                         [failure_message_permanent_part, same_visual_output_note].reject(&:empty?).join("\n\n")
                       end
 
-                      ##
-                      # @return [String]
-                      #
-                      def failure_message_when_negated
-                        "expected `#{matcher.printable_block_expectation}` NOT to delegate to `#{matcher.printable_method}` and return its value, but it did."
-                      end
-
                       private
-
-                      def failure_message_permanent_part
-                        <<~MESSAGE.chomp
-                          expected `#{matcher.printable_block_expectation}` to delegate to `#{matcher.printable_method}` and return its value, but it didn't.
-
-                          `#{matcher.printable_block_expectation}` returns `#{block_expectation_value.inspect}`, but delegation returns `#{matcher.delegation_value.inspect}`.
-                        MESSAGE
-                      end
 
                       ##
                       # @internal

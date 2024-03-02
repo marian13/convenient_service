@@ -660,12 +660,26 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo:
         expect(matcher.expected_arguments = arguments).to eq(arguments)
       end
 
-      it "delegates to `ConvenientService::Utils::Object`" do
-        allow(ConvenientService::Utils::Object).to receive(:instance_variable_delete).with(matcher, :@delegation_value).and_call_original
+      example_group "resets" do
+        before do
+          allow(ConvenientService::Utils::Object).to receive(:instance_variable_delete).and_call_original
+        end
 
-        matcher.expected_arguments = arguments
+        it "delegates to `ConvenientService::Utils::Object` to reset `delegation_value`" do
+          allow(ConvenientService::Utils::Object).to receive(:instance_variable_delete).with(matcher, :@delegation_value).and_call_original
 
-        expect(ConvenientService::Utils::Object).to have_received(:instance_variable_delete).with(matcher, :@delegation_value)
+          matcher.expected_arguments = arguments
+
+          expect(ConvenientService::Utils::Object).to have_received(:instance_variable_delete).with(matcher, :@delegation_value)
+        end
+
+        it "delegates to `ConvenientService::Utils::Object` to reset `custom_return_value`" do
+          allow(ConvenientService::Utils::Object).to receive(:instance_variable_delete).with(matcher, :@custom_return_value).and_call_original
+
+          matcher.expected_arguments = arguments
+
+          expect(ConvenientService::Utils::Object).to have_received(:instance_variable_delete).with(matcher, :@custom_return_value)
+        end
       end
     end
 
