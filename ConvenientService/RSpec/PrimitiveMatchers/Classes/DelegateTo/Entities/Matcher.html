@@ -337,6 +337,29 @@
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#custom_return_value-instance_method" title="#custom_return_value (instance method)">#<strong>custom_return_value</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Can be any type.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#delegation_value-instance_method" title="#delegation_value (instance method)">#<strong>delegation_value</strong>  &#x21d2; Object </a>
     
 
@@ -1096,18 +1119,18 @@
       <pre class="lines">
 
 
-311
-312
-313
-314
-315
-316
-317
-318
-319</pre>
+323
+324
+325
+326
+327
+328
+329
+330
+331</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/matcher.rb', line 311</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/matcher.rb', line 323</span>
 
 <span class='kw'>def</span> <span class='op'>==</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='rparen'>)</span>
@@ -1310,15 +1333,72 @@
       <pre class="lines">
 
 
-280
-281
-282</pre>
+292
+293
+294</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/matcher.rb', line 280</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/matcher.rb', line 292</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_chainings'>chainings</span>
   <span class='ivar'>@chainings</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="Matcher/Entities.html" title="ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Matcher/Entities/ChainingsCollection.html" title="ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::ChainingsCollection (class)">ChainingsCollection</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Matcher/Entities/ChainingsCollection.html#initialize-instance_method" title="ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::ChainingsCollection#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>matcher:</span> <span class='kw'>self</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="custom_return_value-instance_method">
+  
+    #<strong>custom_return_value</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Can be any type.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Can be any type.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+286
+287
+288</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/matcher.rb', line 286</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_custom_return_value'>custom_return_value</span>
+  <span class='const'><span class='object_link'><a href="../../../../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../Utils/Object.html" title="ConvenientService::Utils::Object (module)">Object</a></span></span><span class='period'>.</span><span class='id identifier rubyid_memoize_including_falsy_values'><span class='object_link'><a href="../../../../../Utils/Object.html#memoize_including_falsy_values-class_method" title="ConvenientService::Utils::Object.memoize_including_falsy_values (method)">memoize_including_falsy_values</a></span></span><span class='lparen'>(</span><span class='kw'>self</span><span class='comma'>,</span> <span class='symbol'>:@custom_return_value</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_expected_return_value_block'>expected_return_value_block</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_delegation_value'>delegation_value</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1367,7 +1447,6 @@
       <pre class="lines">
 
 
-267
 268
 269
 270
@@ -1376,10 +1455,11 @@
 273
 274
 275
-276</pre>
+276
+277</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/matcher.rb', line 267</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/matcher.rb', line 268</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delegation_value'>delegation_value</span>
   <span class='const'><span class='object_link'><a href="../../../../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../Utils/Object.html" title="ConvenientService::Utils::Object (module)">Object</a></span></span><span class='period'>.</span><span class='id identifier rubyid_memoize_including_falsy_values'><span class='object_link'><a href="../../../../../Utils/Object.html#memoize_including_falsy_values-class_method" title="ConvenientService::Utils::Object.memoize_including_falsy_values (method)">memoize_including_falsy_values</a></span></span><span class='lparen'>(</span><span class='kw'>self</span><span class='comma'>,</span> <span class='symbol'>:@delegation_value</span><span class='rparen'>)</span> <span class='kw'>do</span>
@@ -1433,12 +1513,12 @@
       <pre class="lines">
 
 
-286
-287
-288</pre>
+298
+299
+300</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/matcher.rb', line 286</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/matcher.rb', line 298</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delegations'>delegations</span>
   <span class='ivar'>@delegations</span> <span class='op'>||=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
@@ -1608,13 +1688,15 @@
 246
 247
 248
-249</pre>
+249
+250</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/matcher.rb', line 245</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_expected_arguments='>expected_arguments=</span><span class='lparen'>(</span><span class='id identifier rubyid_arguments'>arguments</span><span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="../../../../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../Utils/Object.html" title="ConvenientService::Utils::Object (module)">Object</a></span></span><span class='period'>.</span><span class='id identifier rubyid_instance_variable_delete'><span class='object_link'><a href="../../../../../Utils/Object.html#instance_variable_delete-class_method" title="ConvenientService::Utils::Object.instance_variable_delete (method)">instance_variable_delete</a></span></span><span class='lparen'>(</span><span class='kw'>self</span><span class='comma'>,</span> <span class='symbol'>:@delegation_value</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="../../../../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../Utils/Object.html" title="ConvenientService::Utils::Object (module)">Object</a></span></span><span class='period'>.</span><span class='id identifier rubyid_instance_variable_delete'><span class='object_link'><a href="../../../../../Utils/Object.html#instance_variable_delete-class_method" title="ConvenientService::Utils::Object.instance_variable_delete (method)">instance_variable_delete</a></span></span><span class='lparen'>(</span><span class='kw'>self</span><span class='comma'>,</span> <span class='symbol'>:@custom_return_value</span><span class='rparen'>)</span>
 
   <span class='ivar'>@expected_arguments</span> <span class='op'>=</span> <span class='id identifier rubyid_arguments'>arguments</span>
 <span class='kw'>end</span></pre>
@@ -1841,12 +1923,12 @@
       <pre class="lines">
 
 
-300
-301
-302</pre>
+312
+313
+314</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/matcher.rb', line 300</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/matcher.rb', line 312</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_printable_block_expectation'>printable_block_expectation</span>
   <span class='ivar'>@printable_block_expectation</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="../../../../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../Utils/Proc.html" title="ConvenientService::Utils::Proc (module)">Proc</a></span></span><span class='period'>.</span><span class='id identifier rubyid_display'><span class='object_link'><a href="../../../../../Utils/Proc.html#display-class_method" title="ConvenientService::Utils::Proc.display (method)">display</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_block_expectation'>block_expectation</span><span class='rparen'>)</span>
@@ -1893,12 +1975,12 @@
       <pre class="lines">
 
 
-293
-294
-295</pre>
+305
+306
+307</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/matcher.rb', line 293</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/matcher.rb', line 305</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_printable_method'>printable_method</span>
   <span class='ivar'>@printable_method</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="Matcher/Commands.html" title="ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Commands (module)">Commands</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Matcher/Commands/GeneratePrintableMethod.html" title="ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Commands::GeneratePrintableMethod (class)">GeneratePrintableMethod</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="Matcher/Commands/GeneratePrintableMethod.html#call-instance_method" title="ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Commands::GeneratePrintableMethod#call (method)">call</a></span></span><span class='lparen'>(</span><span class='label'>object:</span> <span class='id identifier rubyid_object'>object</span><span class='comma'>,</span> <span class='label'>method:</span> <span class='id identifier rubyid_method'>method</span><span class='rparen'>)</span>
@@ -2336,7 +2418,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Mar  2 23:24:16 2024 by
+  Generated on Sun Mar  3 00:10:31 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.36 (ruby-3.2.3).
 </div>
