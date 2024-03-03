@@ -203,6 +203,12 @@ Gem::Specification.new do |spec|
   ##
 
   ##
+  # Used as a set of rules for rubocop for linting magic numbers in Ruby files.
+  # - https://github.com/rubocop/rubocop-magic_numbers
+  #
+  spec.add_development_dependency "rubocop-magic_numbers", "~> 0.4.0"
+
+  ##
   # Used as a set of rules for rubocop for linting RSpec files.
   # - https://github.com/rubocop/rubocop-rspec
   #

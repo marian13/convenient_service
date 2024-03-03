@@ -22,6 +22,12 @@ require:
   #
   - rubocop-performance
   ##
+  # RuboCop Cop that detects the use of magic numbers.
+  # - https://github.com/meetcleo/rubocop-magic_numbers
+  #
+  # TODO: Leave explanation to every `MagicNumbers` cops complaints.
+  # - rubocop-magic_numbers
+  ##
   # Rubocop for common thread safety issues.
   # - https://github.com/covermymeds/rubocop-thread_safety
   #
@@ -57,3 +63,15 @@ AllCops:
     # NOTE: Excludes dependencies from linting.
     #
     - lib/convenient_service/dependencies/**/*
+
+MagicNumbers:
+  Exclude:
+    ##
+    # NOTE: Excludes the following files/folders from linting magic numbers.
+    # - https://github.com/meetcleo/rubocop-magic_numbers
+    # - https://docs.rubocop.org/rubocop/configuration.html#includingexcluding-files
+    #
+    - Rakefile
+    - benchmark/**/*
+    - spec/**/*
+    - test/**/*
