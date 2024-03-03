@@ -5,7 +5,7 @@
 #   - Use `ConvenientService::Support::Ruby.truffleruby?` directly only in the files that do not require to load all dependencies.
 #   - Prefer `ConvenientService::Dependencies.ruby.truffleruby?` for the rest of the files.
 #
-require_relative "../lib/convenient_service/support/ruby"
+require "convenient_service/support/ruby"
 
 ##
 # NOTE: TruffleRuby 22.3 does NOT implement `running?`, but it is in master.

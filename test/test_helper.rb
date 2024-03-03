@@ -11,11 +11,6 @@ require_relative "../env"
 require_relative "coverage_helper"
 
 ##
-# Allows to require gems listed in `Gemfile` and `gemspec`.
-#
-require "bundler/setup"
-
-##
 # TODO: More docs for `autorun`.
 # - https://github.com/minitest/minitest
 # - https://minitest.rubystyle.guide
