@@ -186,23 +186,41 @@ Gem::Specification.new do |spec|
 
   ##
   # Used for linting Ruby files.
-  # https://github.com/rubocop/rubocop
+  # - https://github.com/rubocop/rubocop
   #
-  spec.add_development_dependency "rubocop", "~> 1.52.0"
+  spec.add_development_dependency "rubocop", "~> 1.61.0"
+
+  ##
+  # Used as a set of rules for rubocop for linting common performance issues in Ruby files.
+  # - https://github.com/rubocop/rubocop-performance
+  #
+  # NOTE:
+  #   `rubocop-performance` is automatically bundled with Standard.
+  #    That is why it is NOT listed as a separate dependency for now.
+  #   Once the need for a specific version becomes mandatory, the following line should be uncommented
+  #
+  # spec.add_development_dependency "rubocop-performance"
+  ##
 
   ##
   # Used as a set of rules for rubocop for linting RSpec files.
-  # https://github.com/rubocop/rubocop-rspec
+  # - https://github.com/rubocop/rubocop-rspec
   #
-  spec.add_development_dependency "rubocop-rspec", "~> 2.22.0"
+  spec.add_development_dependency "rubocop-rspec", "~> 2.27.0"
+
+  ##
+  # Used as a set of rules for rubocop for linting common thread-safety issues in Ruby files.
+  # - https://github.com/rubocop/rubocop-thread_safety
+  #
+  spec.add_development_dependency "rubocop-thread_safety", "~> 0.5.1"
 
   spec.add_development_dependency "tty-prompt"
 
   ##
   # Used as a set of rules for robocop for linting source files.
-  # https://github.com/testdouble/standard
+  # - https://github.com/testdouble/standard
   #
-  spec.add_development_dependency "standard", "~> 1.30.1"
+  spec.add_development_dependency "standard", "~> 1.34.0"
 
   spec.add_development_dependency "simplecov"
 
