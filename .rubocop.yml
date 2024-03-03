@@ -10,15 +10,29 @@ inherit_from:
 require:
   ##
   # Rubocop for RSpec files.
-  # https://github.com/rubocop/rubocop-rspec#usage
+  # - https://github.com/rubocop/rubocop-rspec
   #
   - rubocop-rspec
   ##
+  # Rubocop for common performance issues.
+  # - https://github.com/rubocop/rubocop-performance
+  #
   # NOTE: `rubocop-performance` is automatically bundled with Standard.
+  # - https://github.com/standardrb/standard
   #
   - rubocop-performance
   ##
+  # Rubocop for common thread safety issues.
+  # - https://github.com/covermymeds/rubocop-thread_safety
+  #
+  # TODO: Leave explanation to every `ThreadSafety/InstanceVariableInClassMethod`.
+  # - https://github.com/covermymeds/rubocop-thread_safety/blob/master/spec/rubocop/cop/thread_safety/instance_variable_in_class_method_spec.rb
+  # - https://workingwithruby.com/wwrt/good_oo
+  #
+  # - rubocop-thread_safety
+  ##
   # NOTE: Custom Standard cop that should be loaded before `config/base.yml`.
+  # - https://github.com/standardrb/standard-custom/blob/main/lib/standard/cop/block_single_line_braces.rb
   #
   - standard/cop/block_single_line_braces
 
