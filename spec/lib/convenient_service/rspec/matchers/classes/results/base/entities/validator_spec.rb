@@ -36,7 +36,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
     describe "#valid_result?" do
       specify do
         expect { validator.valid_result? }
-          .to delegate_to(ConvenientService::RSpec::Matchers::Classes::Results::Base::Entities::Validator::Commands::ValidateResult, :call)
+          .to delegate_to(described_class::Commands::ValidateResult, :call)
           .with_arguments(validator: validator)
           .and_return_its_value
       end
@@ -45,7 +45,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
     describe "#valid_result_code?" do
       specify do
         expect { validator.valid_result_code? }
-          .to delegate_to(ConvenientService::RSpec::Matchers::Classes::Results::Base::Entities::Validator::Commands::ValidateResultCode, :call)
+          .to delegate_to(described_class::Commands::ValidateResultCode, :call)
           .with_arguments(validator: validator)
           .and_return_its_value
       end
@@ -54,7 +54,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
     describe "#valid_result_data?" do
       specify do
         expect { validator.valid_result_data? }
-          .to delegate_to(ConvenientService::RSpec::Matchers::Classes::Results::Base::Entities::Validator::Commands::ValidateResultData, :call)
+          .to delegate_to(described_class::Commands::ValidateResultData, :call)
           .with_arguments(validator: validator)
           .and_return_its_value
       end
@@ -63,7 +63,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
     describe "#valid_result_message?" do
       specify do
         expect { validator.valid_result_message? }
-          .to delegate_to(ConvenientService::RSpec::Matchers::Classes::Results::Base::Entities::Validator::Commands::ValidateResultMessage, :call)
+          .to delegate_to(described_class::Commands::ValidateResultMessage, :call)
           .with_arguments(validator: validator)
           .and_return_its_value
       end
@@ -72,7 +72,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
     describe "#valid_result_service?" do
       specify do
         expect { validator.valid_result_service? }
-          .to delegate_to(ConvenientService::RSpec::Matchers::Classes::Results::Base::Entities::Validator::Commands::ValidateResultService, :call)
+          .to delegate_to(described_class::Commands::ValidateResultService, :call)
           .with_arguments(validator: validator)
           .and_return_its_value
       end
@@ -81,7 +81,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
     describe "#valid_result_status?" do
       specify do
         expect { validator.valid_result_status? }
-          .to delegate_to(ConvenientService::RSpec::Matchers::Classes::Results::Base::Entities::Validator::Commands::ValidateResultStatus, :call)
+          .to delegate_to(described_class::Commands::ValidateResultStatus, :call)
           .with_arguments(validator: validator)
           .and_return_its_value
       end
@@ -90,7 +90,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
     describe "#valid_result_step?" do
       specify do
         expect { validator.valid_result_step? }
-          .to delegate_to(ConvenientService::RSpec::Matchers::Classes::Results::Base::Entities::Validator::Commands::ValidateResultStep, :call)
+          .to delegate_to(described_class::Commands::ValidateResultStep, :call)
           .with_arguments(validator: validator)
           .and_return_its_value
       end
@@ -99,7 +99,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
     describe "#valid_result_type?" do
       specify do
         expect { validator.valid_result_type? }
-          .to delegate_to(ConvenientService::RSpec::Matchers::Classes::Results::Base::Entities::Validator::Commands::ValidateResultType, :call)
+          .to delegate_to(described_class::Commands::ValidateResultType, :call)
           .with_arguments(validator: validator)
           .and_return_its_value
       end

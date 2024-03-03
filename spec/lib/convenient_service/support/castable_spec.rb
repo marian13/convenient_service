@@ -78,19 +78,19 @@ RSpec.describe ConvenientService::Support::Castable do
           # NOTE: Error is NOT the purpose of this spec. That is why it is caught.
           # But if it is NOT caught, the spec should fail.
           #
-          ignoring_exception(ConvenientService::Support::Castable::Exceptions::FailedToCast) { klass.cast!(other) }
+          ignoring_exception(described_class::Exceptions::FailedToCast) { klass.cast!(other) }
 
           expect(klass).to have_received(:cast).with(other)
         end
 
         it "raises `ConvenientService::Support::Castable::Exceptions::FailedToCast`" do
           expect { klass.cast!(other) }
-            .to raise_error(ConvenientService::Support::Castable::Exceptions::FailedToCast)
+            .to raise_error(described_class::Exceptions::FailedToCast)
             .with_message(message)
         end
 
         specify do
-          expect { ignoring_exception(ConvenientService::Support::Castable::Exceptions::FailedToCast) { klass.cast!(other) } }
+          expect { ignoring_exception(described_class::Exceptions::FailedToCast) { klass.cast!(other) } }
             .to delegate_to(ConvenientService, :raise)
         end
       end

@@ -6,7 +6,7 @@ require "convenient_service"
 
 RSpec.describe ConvenientService::RSpec::PrimitiveMatchers do
   example_group "modules" do
-    include ConvenientService::RSpec::PrimitiveMatchers::IncludeModule
+    include described_class::IncludeModule
 
     subject { described_class }
 
@@ -23,19 +23,19 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers do
         end
       end
 
-      it { is_expected.to include_module(ConvenientService::RSpec::PrimitiveMatchers::BeDescendantOf) }
-      it { is_expected.to include_module(ConvenientService::RSpec::PrimitiveMatchers::BeDirectDescendantOf) }
-      it { is_expected.to include_module(ConvenientService::RSpec::PrimitiveMatchers::CacheItsValue) }
-      it { is_expected.to include_module(ConvenientService::RSpec::PrimitiveMatchers::DelegateTo) }
-      it { is_expected.to include_module(ConvenientService::RSpec::PrimitiveMatchers::ExtendModule) }
-      it { is_expected.to include_module(ConvenientService::RSpec::PrimitiveMatchers::HaveAbstractMethod) }
-      it { is_expected.to include_module(ConvenientService::RSpec::PrimitiveMatchers::HaveAliasMethod) }
-      it { is_expected.to include_module(ConvenientService::RSpec::PrimitiveMatchers::HaveAttrAccessor) }
-      it { is_expected.to include_module(ConvenientService::RSpec::PrimitiveMatchers::HaveAttrReader) }
-      it { is_expected.to include_module(ConvenientService::RSpec::PrimitiveMatchers::HaveAttrWriter) }
-      it { is_expected.to include_module(ConvenientService::RSpec::PrimitiveMatchers::IncludeModule) }
-      it { is_expected.to include_module(ConvenientService::RSpec::PrimitiveMatchers::PrependModule) }
-      it { is_expected.to include_module(ConvenientService::RSpec::PrimitiveMatchers::SingletonPrependModule) }
+      it { is_expected.to include_module(described_class::BeDescendantOf) }
+      it { is_expected.to include_module(described_class::BeDirectDescendantOf) }
+      it { is_expected.to include_module(described_class::CacheItsValue) }
+      it { is_expected.to include_module(described_class::DelegateTo) }
+      it { is_expected.to include_module(described_class::ExtendModule) }
+      it { is_expected.to include_module(described_class::HaveAbstractMethod) }
+      it { is_expected.to include_module(described_class::HaveAliasMethod) }
+      it { is_expected.to include_module(described_class::HaveAttrAccessor) }
+      it { is_expected.to include_module(described_class::HaveAttrReader) }
+      it { is_expected.to include_module(described_class::HaveAttrWriter) }
+      it { is_expected.to include_module(described_class::IncludeModule) }
+      it { is_expected.to include_module(described_class::PrependModule) }
+      it { is_expected.to include_module(described_class::SingletonPrependModule) }
     end
   end
 end

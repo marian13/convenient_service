@@ -23,7 +23,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
     describe "#got_jsend_attributes_part" do
       specify do
         expect { printer.got_jsend_attributes_part }
-          .to delegate_to(ConvenientService::RSpec::Matchers::Classes::Results::Base::Entities::Printers::Failure::Commands::GenerateGotJsendAttributesPart, :call)
+          .to delegate_to(described_class::Commands::GenerateGotJsendAttributesPart, :call)
           .with_arguments(printer: printer)
           .and_return_its_value
       end

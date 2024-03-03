@@ -38,7 +38,7 @@ RSpec.describe ConvenientService::Core::Entities::Config do
   example_group "instance methods" do
     describe "#concerns" do
       context "when `configuration_block` is NOT passed" do
-        let(:concerns) { ConvenientService::Core::Entities::Config::Entities::Concerns.new(klass: service_class) }
+        let(:concerns) { described_class::Entities::Concerns.new(klass: service_class) }
 
         context "when concerns are NOT configured" do
           specify { expect { config.concerns }.not_to cache_its_value }
@@ -64,7 +64,7 @@ RSpec.describe ConvenientService::Core::Entities::Config do
         # NOTE: Simplest concern is just a module.
         #
         let(:concern) { Module.new }
-        let(:concerns) { ConvenientService::Core::Entities::Config::Entities::Concerns.new(klass: service_class).configure(&configuration_block) }
+        let(:concerns) { described_class::Entities::Concerns.new(klass: service_class).configure(&configuration_block) }
         let(:configuration_block) { proc { |stack| stack.use concern } }
 
         context "when config is NOT committed" do
@@ -100,12 +100,12 @@ RSpec.describe ConvenientService::Core::Entities::Config do
 
           it "raises `ConvenientService::Core::Entities::Config::Exceptions::ConfigIsCommitted`" do
             expect { config.concerns(&configuration_block) }
-              .to raise_error(ConvenientService::Core::Entities::Config::Exceptions::ConfigIsCommitted)
+              .to raise_error(described_class::Exceptions::ConfigIsCommitted)
               .with_message(committed_config_error_message)
           end
 
           specify do
-            expect { ignoring_exception(ConvenientService::Core::Entities::Config::Exceptions::ConfigIsCommitted) { config.concerns(&configuration_block) } }
+            expect { ignoring_exception(described_class::Exceptions::ConfigIsCommitted) { config.concerns(&configuration_block) } }
               .to delegate_to(ConvenientService, :raise)
           end
         end
@@ -118,8 +118,8 @@ RSpec.describe ConvenientService::Core::Entities::Config do
       context "when `configuration_block` is NOT passed" do
         let(:result) { config.middlewares(method, **kwargs) }
 
-        let(:instance_method_middlewares) { ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares.new(scope: :instance, method: method, klass: service_class) }
-        let(:class_method_middlewares) { ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares.new(scope: :class, method: method, klass: service_class) }
+        let(:instance_method_middlewares) { described_class::Entities::MethodMiddlewares.new(scope: :instance, method: method, klass: service_class) }
+        let(:class_method_middlewares) { described_class::Entities::MethodMiddlewares.new(scope: :class, method: method, klass: service_class) }
 
         context "when middlewares are NOT configured" do
           context "when `scope` is NOT passed" do
@@ -205,13 +205,13 @@ RSpec.describe ConvenientService::Core::Entities::Config do
         let(:class_method_configuration_block) { proc { |stack| stack.use class_method_middleware } }
 
         let(:instance_method_middlewares) do
-          ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares
+          described_class::Entities::MethodMiddlewares
             .new(scope: :instance, method: method, klass: service_class)
             .configure(&instance_method_configuration_block)
         end
 
         let(:class_method_middlewares) do
-          ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares
+          described_class::Entities::MethodMiddlewares
             .new(scope: :class, method: method, klass: service_class)
             .configure(&class_method_configuration_block)
         end
@@ -261,12 +261,12 @@ RSpec.describe ConvenientService::Core::Entities::Config do
 
             it "raises `ConvenientService::Core::Entities::Config::Exceptions::ConfigIsCommitted`" do
               expect { config.middlewares(method, &configuration_block) }
-                .to raise_error(ConvenientService::Core::Entities::Config::Exceptions::ConfigIsCommitted)
+                .to raise_error(described_class::Exceptions::ConfigIsCommitted)
                 .with_message(committed_config_error_message)
             end
 
             specify do
-              expect { ignoring_exception(ConvenientService::Core::Entities::Config::Exceptions::ConfigIsCommitted) { config.middlewares(method, &configuration_block) } }
+              expect { ignoring_exception(described_class::Exceptions::ConfigIsCommitted) { config.middlewares(method, &configuration_block) } }
                 .to delegate_to(ConvenientService, :raise)
             end
           end
@@ -319,12 +319,12 @@ RSpec.describe ConvenientService::Core::Entities::Config do
 
               it "raises `ConvenientService::Core::Entities::Config::Exceptions::ConfigIsCommitted`" do
                 expect { config.middlewares(method, scope: scope, &configuration_block) }
-                  .to raise_error(ConvenientService::Core::Entities::Config::Exceptions::ConfigIsCommitted)
+                  .to raise_error(described_class::Exceptions::ConfigIsCommitted)
                   .with_message(committed_config_error_message)
               end
 
               specify do
-                expect { ignoring_exception(ConvenientService::Core::Entities::Config::Exceptions::ConfigIsCommitted) { config.middlewares(method, scope: scope, &configuration_block) } }
+                expect { ignoring_exception(described_class::Exceptions::ConfigIsCommitted) { config.middlewares(method, scope: scope, &configuration_block) } }
                   .to delegate_to(ConvenientService, :raise)
               end
             end
@@ -376,12 +376,12 @@ RSpec.describe ConvenientService::Core::Entities::Config do
 
               it "raises `ConvenientService::Core::Entities::Config::Exceptions::ConfigIsCommitted`" do
                 expect { config.middlewares(method, scope: scope, &configuration_block) }
-                  .to raise_error(ConvenientService::Core::Entities::Config::Exceptions::ConfigIsCommitted)
+                  .to raise_error(described_class::Exceptions::ConfigIsCommitted)
                   .with_message(committed_config_error_message)
               end
 
               specify do
-                expect { ignoring_exception(ConvenientService::Core::Entities::Config::Exceptions::ConfigIsCommitted) { config.middlewares(method, scope: scope, &configuration_block) } }
+                expect { ignoring_exception(described_class::Exceptions::ConfigIsCommitted) { config.middlewares(method, scope: scope, &configuration_block) } }
                   .to delegate_to(ConvenientService, :raise)
               end
             end
@@ -488,7 +488,7 @@ RSpec.describe ConvenientService::Core::Entities::Config do
 
         specify do
           expect { config.commit! }
-            .to delegate_to(ConvenientService::Core::Entities::Config::Commands::TrackMethodMissingCommitTrigger, :call)
+            .to delegate_to(described_class::Commands::TrackMethodMissingCommitTrigger, :call)
             .with_arguments(config: config, trigger: ConvenientService::Core::Constants::Triggers::USER)
         end
 
@@ -507,7 +507,7 @@ RSpec.describe ConvenientService::Core::Entities::Config do
 
           specify do
             expect { config.commit! }
-              .to delegate_to(ConvenientService::Core::Entities::Config::Commands::TrackMethodMissingCommitTrigger, :call)
+              .to delegate_to(described_class::Commands::TrackMethodMissingCommitTrigger, :call)
               .with_arguments(config: config, trigger: ConvenientService::Core::Constants::Triggers::USER)
           end
 
@@ -531,7 +531,7 @@ RSpec.describe ConvenientService::Core::Entities::Config do
 
         specify do
           expect { config.commit! }
-            .to delegate_to(ConvenientService::Core::Entities::Config::Commands::TrackMethodMissingCommitTrigger, :call)
+            .to delegate_to(described_class::Commands::TrackMethodMissingCommitTrigger, :call)
             .with_arguments(config: config, trigger: ConvenientService::Core::Constants::Triggers::USER)
         end
 
@@ -550,7 +550,7 @@ RSpec.describe ConvenientService::Core::Entities::Config do
 
           specify do
             expect { config.commit! }
-              .to delegate_to(ConvenientService::Core::Entities::Config::Commands::TrackMethodMissingCommitTrigger, :call)
+              .to delegate_to(described_class::Commands::TrackMethodMissingCommitTrigger, :call)
               .with_arguments(config: config, trigger: ConvenientService::Core::Constants::Triggers::USER)
           end
 
@@ -564,7 +564,7 @@ RSpec.describe ConvenientService::Core::Entities::Config do
         context "when `trigger` is NOT passed" do
           it "defaults `ConvenientService::Core::Constants::Triggers::USER`" do
             expect { config.commit! }
-              .to delegate_to(ConvenientService::Core::Entities::Config::Commands::TrackMethodMissingCommitTrigger, :call)
+              .to delegate_to(described_class::Commands::TrackMethodMissingCommitTrigger, :call)
               .with_arguments(config: config, trigger: ConvenientService::Core::Constants::Triggers::USER)
           end
         end
@@ -572,7 +572,7 @@ RSpec.describe ConvenientService::Core::Entities::Config do
         context "when `trigger` is passed" do
           specify do
             expect { config.commit!(trigger: ConvenientService::Core::Constants::Triggers::INSTANCE_METHOD_MISSING) }
-              .to delegate_to(ConvenientService::Core::Entities::Config::Commands::TrackMethodMissingCommitTrigger, :call)
+              .to delegate_to(described_class::Commands::TrackMethodMissingCommitTrigger, :call)
               .with_arguments(config: config, trigger: ConvenientService::Core::Constants::Triggers::INSTANCE_METHOD_MISSING)
           end
         end

@@ -63,7 +63,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasMermaidFlowchart::Entitie
     describe "#code" do
       specify do
         expect { flowchart.code }
-          .to delegate_to(ConvenientService::Service::Plugins::HasMermaidFlowchart::Entities::Flowchart::Entities::Code, :new)
+          .to delegate_to(described_class::Entities::Code, :new)
           .with_arguments(flowchart: flowchart)
           .and_return_its_value
       end
@@ -76,7 +76,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasMermaidFlowchart::Entitie
     describe "#settings" do
       specify do
         expect { flowchart.settings }
-          .to delegate_to(ConvenientService::Service::Plugins::HasMermaidFlowchart::Entities::Flowchart::Entities::Settings, :new)
+          .to delegate_to(described_class::Entities::Settings, :new)
           .with_arguments(flowchart: flowchart)
           .and_return_its_value
       end
@@ -89,7 +89,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasMermaidFlowchart::Entitie
     describe "#template" do
       specify do
         expect { flowchart.template }
-          .to delegate_to(ConvenientService::Service::Plugins::HasMermaidFlowchart::Entities::Flowchart::Entities::Template, :new)
+          .to delegate_to(described_class::Entities::Template, :new)
           .without_arguments
           .and_return_its_value
       end

@@ -12,7 +12,7 @@ RSpec.describe ConvenientService::Utils::Module do
 
     specify do
       expect { described_class.fetch_own_const(mod, const_name, &fallback_block) }
-        .to delegate_to(ConvenientService::Utils::Module::FetchOwnConst, :call)
+        .to delegate_to(described_class::FetchOwnConst, :call)
         .with_arguments(mod, const_name, &fallback_block)
         .and_return_its_value
     end
@@ -24,7 +24,7 @@ RSpec.describe ConvenientService::Utils::Module do
 
     specify do
       expect { described_class.get_own_const(mod, const_name) }
-        .to delegate_to(ConvenientService::Utils::Module::GetOwnConst, :call)
+        .to delegate_to(described_class::GetOwnConst, :call)
         .with_arguments(mod, const_name)
         .and_return_its_value
     end
@@ -36,7 +36,7 @@ RSpec.describe ConvenientService::Utils::Module do
 
     specify do
       expect { described_class.get_own_instance_method(mod, method_name) }
-        .to delegate_to(ConvenientService::Utils::Module::GetOwnInstanceMethod, :call)
+        .to delegate_to(described_class::GetOwnInstanceMethod, :call)
         .with_arguments(mod, method_name)
         .and_return_its_value
     end
@@ -48,7 +48,7 @@ RSpec.describe ConvenientService::Utils::Module do
 
     specify do
       expect { described_class.include_module?(mod, other_mod) }
-        .to delegate_to(ConvenientService::Utils::Module::IncludeModule, :call)
+        .to delegate_to(described_class::IncludeModule, :call)
         .with_arguments(mod, other_mod)
         .and_return_its_value
     end
@@ -60,7 +60,7 @@ RSpec.describe ConvenientService::Utils::Module do
 
     specify do
       expect { described_class.has_own_instance_method?(mod, method_name) }
-        .to delegate_to(ConvenientService::Utils::Module::HasOwnInstanceMethod, :call)
+        .to delegate_to(described_class::HasOwnInstanceMethod, :call)
         .with_arguments(mod, method_name)
         .and_return_its_value
     end

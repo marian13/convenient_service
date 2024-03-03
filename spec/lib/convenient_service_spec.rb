@@ -84,7 +84,7 @@ RSpec.describe ConvenientService do
       # - https://github.com/jruby/jruby/blob/9.4.0.0/core/src/main/java/org/jruby/RubyKernel.java#L881
       # - https://github.com/ruby/spec/blob/master/core/kernel/raise_spec.rb#L5
       #
-      if ConvenientService::Dependencies.ruby.jruby?
+      if described_class::Dependencies.ruby.jruby?
         let(:exception) do
           raise Class.new(StandardError), "Custom message", ["#{described_class.root}/foo.rb"]
         rescue => error
@@ -104,7 +104,7 @@ RSpec.describe ConvenientService do
           .with_message(exception.message)
       end
 
-      if !ConvenientService::Dependencies.ruby.jruby?
+      if !described_class::Dependencies.ruby.jruby?
         # rubocop:disable RSpec/MultipleExpectations
         it "raises `exception` with `cause`" do
           expect { described_class.raise(exception) }.to raise_error { |error| expect(error.cause.class).to eq(exception.cause.class) }
@@ -156,7 +156,7 @@ RSpec.describe ConvenientService do
         # - https://github.com/jruby/jruby/blob/9.4.0.0/core/src/main/java/org/jruby/RubyKernel.java#L881
         # - https://github.com/ruby/spec/blob/master/core/kernel/raise_spec.rb#L5
         #
-        if ConvenientService::Dependencies.ruby.jruby?
+        if described_class::Dependencies.ruby.jruby?
           let(:exception) do
             raise Class.new(StandardError), "Custom message", ["#{described_class.root}/foo.rb"]
           rescue => error
@@ -180,7 +180,7 @@ RSpec.describe ConvenientService do
             .with_message(exception.message)
         end
 
-        if !ConvenientService::Dependencies.ruby.jruby?
+        if !described_class::Dependencies.ruby.jruby?
           # rubocop:disable RSpec/MultipleExpectations
           it "raises that `exception` with `cause`" do
             expect { described_class.reraise(&block) }.to raise_error { |error| expect(error.cause.class).to eq(exception.cause.class) }

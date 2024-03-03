@@ -60,11 +60,11 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo:
   example_group "instance methods" do
     describe "#apply_stubs!" do
       it "delegates to `ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::Arguments::Commands::ApplyStubToTrackDelegations`" do
-        allow(ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::Arguments::Commands::ApplyStubToTrackDelegations).to receive(:call).with(matcher: matcher).and_call_original
+        allow(described_class::Commands::ApplyStubToTrackDelegations).to receive(:call).with(matcher: matcher).and_call_original
 
         chaining.apply_stubs!
 
-        expect(ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::Arguments::Commands::ApplyStubToTrackDelegations).to have_received(:call).with(matcher: matcher)
+        expect(described_class::Commands::ApplyStubToTrackDelegations).to have_received(:call).with(matcher: matcher)
       end
     end
 
@@ -128,7 +128,7 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo:
       end
 
       context "when matcher has one delegation" do
-        let(:printable_arguments) { ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::Arguments::Commands::GeneratePrintableArguments.call(arguments: matcher.delegations.first.arguments).prepend("with ") }
+        let(:printable_arguments) { described_class::Commands::GeneratePrintableArguments.call(arguments: matcher.delegations.first.arguments).prepend("with ") }
 
         before do
           matcher.delegations << delegation
@@ -142,7 +142,7 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo:
       context "when matcher has multiple delegations" do
         let(:printable_arguments) do
           matcher.delegations
-            .map { |delegation| ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::Arguments::Commands::GeneratePrintableArguments.call(arguments: delegation.arguments) }
+            .map { |delegation| described_class::Commands::GeneratePrintableArguments.call(arguments: delegation.arguments) }
             .join(", ")
             .prepend("with ")
         end

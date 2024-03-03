@@ -35,7 +35,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
           let(:type) { :before_call }
 
           it "returns event" do
-            expect(middleware_creator.middleware_events[type]).to eq(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::MiddlewareCreators::Observable::Entities::Event.new(type: type))
+            expect(middleware_creator.middleware_events[type]).to eq(described_class::Entities::Event.new(type: type))
           end
 
           it "sets event" do

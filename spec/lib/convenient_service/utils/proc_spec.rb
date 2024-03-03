@@ -12,7 +12,7 @@ RSpec.describe ConvenientService::Utils::Proc do
 
     specify do
       expect { described_class.conjunct(procs) }
-        .to delegate_to(ConvenientService::Utils::Proc::Conjunct, :call)
+        .to delegate_to(described_class::Conjunct, :call)
         .with_arguments(procs)
         .and_return_its_value
     end
@@ -23,7 +23,7 @@ RSpec.describe ConvenientService::Utils::Proc do
 
     specify do
       expect { described_class.display(proc) }
-        .to delegate_to(ConvenientService::Utils::Proc::Display, :call)
+        .to delegate_to(described_class::Display, :call)
         .with_arguments(proc)
         .and_return_its_value
     end
@@ -35,7 +35,7 @@ RSpec.describe ConvenientService::Utils::Proc do
 
     specify do
       expect { described_class.exec_config(proc, object) }
-        .to delegate_to(ConvenientService::Utils::Proc::ExecConfig, :call)
+        .to delegate_to(described_class::ExecConfig, :call)
         .with_arguments(proc, object)
         .and_return_its_value
     end

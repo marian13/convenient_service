@@ -26,7 +26,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Constants do
 
     describe "::DEFAULT_SCOPE" do
       it "returns `ConvenientService::Support::DependencyContainer::Constants::INSTANCE_SCOPE`" do
-        expect(described_class::DEFAULT_SCOPE).to eq(ConvenientService::Support::DependencyContainer::Constants::INSTANCE_SCOPE)
+        expect(described_class::DEFAULT_SCOPE).to eq(described_class::INSTANCE_SCOPE)
       end
     end
 

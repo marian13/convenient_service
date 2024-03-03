@@ -33,7 +33,7 @@ module ConvenientService
         # @return [Object] Value of ivar. Can be any type.
         #
         def call
-          return object.remove_instance_variable(ivar_name) if object.instance_variable_defined?(ivar_name)
+          object.remove_instance_variable(ivar_name) if object.instance_variable_defined?(ivar_name)
         end
       end
     end

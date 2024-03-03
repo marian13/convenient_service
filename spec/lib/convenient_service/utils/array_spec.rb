@@ -13,7 +13,7 @@ RSpec.describe ConvenientService::Utils::Array do
 
     specify do
       expect { described_class.contain_exactly?(first_array, second_array) }
-        .to delegate_to(ConvenientService::Utils::Array::ContainExactly, :call)
+        .to delegate_to(described_class::ContainExactly, :call)
         .with_arguments(first_array, second_array)
         .and_return_its_value
     end
@@ -26,7 +26,7 @@ RSpec.describe ConvenientService::Utils::Array do
 
     specify do
       expect { described_class.drop_while(array, &condition_block) }
-        .to delegate_to(ConvenientService::Utils::Array::DropWhile, :call)
+        .to delegate_to(described_class::DropWhile, :call)
         .with_arguments(array, &condition_block)
         .and_return_its_value
     end
@@ -38,7 +38,7 @@ RSpec.describe ConvenientService::Utils::Array do
 
     specify do
       expect { described_class.find_yield(array, &block) }
-        .to delegate_to(ConvenientService::Utils::Array::FindYield, :call)
+        .to delegate_to(described_class::FindYield, :call)
         .with_arguments(array, &block)
         .and_return_its_value
     end
@@ -50,7 +50,7 @@ RSpec.describe ConvenientService::Utils::Array do
 
     specify do
       expect { described_class.find_last(array, &block) }
-        .to delegate_to(ConvenientService::Utils::Array::FindLast, :call)
+        .to delegate_to(described_class::FindLast, :call)
         .with_arguments(array, &block)
         .and_return_its_value
     end
@@ -62,7 +62,7 @@ RSpec.describe ConvenientService::Utils::Array do
 
     specify do
       expect { described_class.keep_after(array, object) }
-        .to delegate_to(ConvenientService::Utils::Array::KeepAfter, :call)
+        .to delegate_to(described_class::KeepAfter, :call)
         .with_arguments(array, object)
         .and_return_its_value
     end
@@ -75,7 +75,7 @@ RSpec.describe ConvenientService::Utils::Array do
 
     specify do
       expect { described_class.limited_push(array, object, limit: limit) }
-        .to delegate_to(ConvenientService::Utils::Array::LimitedPush, :call)
+        .to delegate_to(described_class::LimitedPush, :call)
         .with_arguments(array, object, limit: limit)
         .and_return_its_value
     end
@@ -88,7 +88,7 @@ RSpec.describe ConvenientService::Utils::Array do
 
     specify do
       expect { described_class.merge(array, overrides, raise_on_non_integer_index: raise_on_non_integer_index) }
-        .to delegate_to(ConvenientService::Utils::Array::Merge, :call)
+        .to delegate_to(described_class::Merge, :call)
         .with_arguments(array, overrides, raise_on_non_integer_index: raise_on_non_integer_index)
         .and_return_its_value
     end
@@ -101,7 +101,7 @@ RSpec.describe ConvenientService::Utils::Array do
 
     specify do
       expect { described_class.rjust(array, size, pad) }
-        .to delegate_to(ConvenientService::Utils::Array::Rjust, :call)
+        .to delegate_to(described_class::Rjust, :call)
         .with_arguments(array, size, pad)
         .and_return_its_value
     end
@@ -112,7 +112,7 @@ RSpec.describe ConvenientService::Utils::Array do
 
     specify do
       expect { described_class.wrap(object) }
-        .to delegate_to(ConvenientService::Utils::Array::Wrap, :call)
+        .to delegate_to(described_class::Wrap, :call)
         .with_arguments(object)
         .and_return_its_value
     end

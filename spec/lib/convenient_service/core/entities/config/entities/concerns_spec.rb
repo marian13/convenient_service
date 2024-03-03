@@ -24,7 +24,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns do
 
   let(:klass) { service_class }
 
-  let(:default_concern) { ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::DefaultConcern }
+  let(:default_concern) { described_class::Entities::DefaultConcern }
 
   let(:concern) do
     Module.new do

@@ -30,7 +30,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::Classes::WrapMethod do
 
       specify do
         expect { command_result }
-          .to delegate_to(ConvenientService::RSpec::Helpers::Classes::WrapMethod::Entities::WrappedMethod, :new)
+          .to delegate_to(described_class::Entities::WrappedMethod, :new)
           .with_arguments(entity: entity, method: method, observe_middleware: middleware)
           .and_return_its_value
       end

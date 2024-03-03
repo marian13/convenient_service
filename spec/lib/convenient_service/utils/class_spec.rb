@@ -12,7 +12,7 @@ RSpec.describe ConvenientService::Utils::Class do
 
     specify do
       expect { described_class.display_name(klass) }
-        .to delegate_to(ConvenientService::Utils::Class::DisplayName, :call)
+        .to delegate_to(described_class::DisplayName, :call)
         .with_arguments(klass)
         .and_return_its_value
     end

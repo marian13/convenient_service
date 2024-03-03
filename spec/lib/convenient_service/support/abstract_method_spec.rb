@@ -90,12 +90,12 @@ RSpec.describe ConvenientService::Support::AbstractMethod do
 
           it "raises `ConvenientService::Support::AbstractMethod::Exceptions::AbstractMethodNotOverridden`" do
             expect { instance.foo }
-              .to raise_error(ConvenientService::Support::AbstractMethod::Exceptions::AbstractMethodNotOverridden)
+              .to raise_error(described_class::Exceptions::AbstractMethodNotOverridden)
               .with_message(exception_message)
           end
 
           specify do
-            expect { ignoring_exception(ConvenientService::Support::AbstractMethod::Exceptions::AbstractMethodNotOverridden) { instance.foo } }
+            expect { ignoring_exception(described_class::Exceptions::AbstractMethodNotOverridden) { instance.foo } }
               .to delegate_to(ConvenientService, :raise)
           end
         end
@@ -119,12 +119,12 @@ RSpec.describe ConvenientService::Support::AbstractMethod do
 
           it "raises `ConvenientService::Support::AbstractMethod::Exceptions::AbstractMethodNotOverridden`" do
             expect { klass.foo }
-              .to raise_error(ConvenientService::Support::AbstractMethod::Exceptions::AbstractMethodNotOverridden)
+              .to raise_error(described_class::Exceptions::AbstractMethodNotOverridden)
               .with_message(exception_message)
           end
 
           specify do
-            expect { ignoring_exception(ConvenientService::Support::AbstractMethod::Exceptions::AbstractMethodNotOverridden) { klass.foo } }
+            expect { ignoring_exception(described_class::Exceptions::AbstractMethodNotOverridden) { klass.foo } }
               .to delegate_to(ConvenientService, :raise)
           end
         end

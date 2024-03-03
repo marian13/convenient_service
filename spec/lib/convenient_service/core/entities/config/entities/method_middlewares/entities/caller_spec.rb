@@ -10,6 +10,6 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
 
     subject { described_class }
 
-    it { is_expected.to include_module(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Caller::Concern) }
+    it { is_expected.to include_module(described_class::Concern) }
   end
 end

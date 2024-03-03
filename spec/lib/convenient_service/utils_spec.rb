@@ -35,7 +35,7 @@ RSpec.describe ConvenientService::Utils do
 
       specify do
         expect { described_class.memoize_including_falsy_values(object, ivar_name, &value_block) }
-          .to delegate_to(ConvenientService::Utils::Object::MemoizeIncludingFalsyValues, :call)
+          .to delegate_to(described_class::Object::MemoizeIncludingFalsyValues, :call)
           .with_arguments(object, ivar_name, &value_block)
           .and_return_its_value
       end

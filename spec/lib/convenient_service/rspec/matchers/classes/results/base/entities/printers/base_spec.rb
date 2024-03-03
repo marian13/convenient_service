@@ -87,7 +87,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
     describe "#expected_parts" do
       specify do
         expect { printer.expected_parts }
-          .to delegate_to(ConvenientService::RSpec::Matchers::Classes::Results::Base::Entities::Printers::Base::Commands::GenerateExpectedParts, :call)
+          .to delegate_to(described_class::Commands::GenerateExpectedParts, :call)
           .with_arguments(printer: printer)
           .and_return_its_value
       end
@@ -96,7 +96,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
     describe "#got_parts" do
       specify do
         expect { printer.got_parts }
-          .to delegate_to(ConvenientService::RSpec::Matchers::Classes::Results::Base::Entities::Printers::Base::Commands::GenerateGotParts, :call)
+          .to delegate_to(described_class::Commands::GenerateGotParts, :call)
           .with_arguments(printer: printer)
           .and_return_its_value
       end
@@ -105,7 +105,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
     describe "#expected_code_part" do
       specify do
         expect { printer.expected_code_part }
-          .to delegate_to(ConvenientService::RSpec::Matchers::Classes::Results::Base::Entities::Printers::Base::Commands::GenerateExpectedCodePart, :call)
+          .to delegate_to(described_class::Commands::GenerateExpectedCodePart, :call)
           .with_arguments(printer: printer)
           .and_return_its_value
       end
@@ -114,7 +114,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
     describe "#expected_data_part" do
       specify do
         expect { printer.expected_data_part }
-          .to delegate_to(ConvenientService::RSpec::Matchers::Classes::Results::Base::Entities::Printers::Base::Commands::GenerateExpectedDataPart, :call)
+          .to delegate_to(described_class::Commands::GenerateExpectedDataPart, :call)
           .with_arguments(printer: printer)
           .and_return_its_value
       end
@@ -123,7 +123,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
     describe "#expected_message_part" do
       specify do
         expect { printer.expected_message_part }
-          .to delegate_to(ConvenientService::RSpec::Matchers::Classes::Results::Base::Entities::Printers::Base::Commands::GenerateExpectedMessagePart, :call)
+          .to delegate_to(described_class::Commands::GenerateExpectedMessagePart, :call)
           .with_arguments(printer: printer)
           .and_return_its_value
       end
@@ -132,7 +132,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
     describe "#expected_service_part" do
       specify do
         expect { printer.expected_service_part }
-          .to delegate_to(ConvenientService::RSpec::Matchers::Classes::Results::Base::Entities::Printers::Base::Commands::GenerateExpectedServicePart, :call)
+          .to delegate_to(described_class::Commands::GenerateExpectedServicePart, :call)
           .with_arguments(printer: printer)
           .and_return_its_value
       end
@@ -141,7 +141,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
     describe "#expected_status_part" do
       specify do
         expect { printer.expected_status_part }
-          .to delegate_to(ConvenientService::RSpec::Matchers::Classes::Results::Base::Entities::Printers::Base::Commands::GenerateExpectedStatusPart, :call)
+          .to delegate_to(described_class::Commands::GenerateExpectedStatusPart, :call)
           .with_arguments(printer: printer)
           .and_return_its_value
       end
@@ -150,7 +150,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
     describe "#expected_step_part" do
       specify do
         expect { printer.expected_step_part }
-          .to delegate_to(ConvenientService::RSpec::Matchers::Classes::Results::Base::Entities::Printers::Base::Commands::GenerateExpectedStepPart, :call)
+          .to delegate_to(described_class::Commands::GenerateExpectedStepPart, :call)
           .with_arguments(printer: printer)
           .and_return_its_value
       end
@@ -159,7 +159,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
     describe "#got_step_part" do
       specify do
         expect { printer.got_step_part }
-          .to delegate_to(ConvenientService::RSpec::Matchers::Classes::Results::Base::Entities::Printers::Base::Commands::GenerateGotStepPart, :call)
+          .to delegate_to(described_class::Commands::GenerateGotStepPart, :call)
           .with_arguments(printer: printer)
           .and_return_its_value
       end
@@ -168,7 +168,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
     describe "#got_service_part" do
       specify do
         expect { printer.got_service_part }
-          .to delegate_to(ConvenientService::RSpec::Matchers::Classes::Results::Base::Entities::Printers::Base::Commands::GenerateGotServicePart, :call)
+          .to delegate_to(described_class::Commands::GenerateGotServicePart, :call)
           .with_arguments(printer: printer)
           .and_return_its_value
       end

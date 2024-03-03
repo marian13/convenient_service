@@ -18,7 +18,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
 
         specify do
           expect { described_class.create(matcher: matcher) }
-            .to delegate_to(ConvenientService::RSpec::Matchers::Classes::Results::Base::Entities::Printers::Null, :new)
+            .to delegate_to(described_class::Null, :new)
             .with_arguments(matcher: matcher)
             .and_return_its_value
         end
@@ -40,7 +40,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
 
           specify do
             expect { described_class.create(matcher: matcher) }
-              .to delegate_to(ConvenientService::RSpec::Matchers::Classes::Results::Base::Entities::Printers::Success, :new)
+              .to delegate_to(described_class::Success, :new)
               .with_arguments(matcher: matcher)
               .and_return_its_value
           end
@@ -61,7 +61,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
 
           specify do
             expect { described_class.create(matcher: matcher) }
-              .to delegate_to(ConvenientService::RSpec::Matchers::Classes::Results::Base::Entities::Printers::Failure, :new)
+              .to delegate_to(described_class::Failure, :new)
               .with_arguments(matcher: matcher)
               .and_return_its_value
           end
@@ -82,7 +82,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
 
           specify do
             expect { described_class.create(matcher: matcher) }
-              .to delegate_to(ConvenientService::RSpec::Matchers::Classes::Results::Base::Entities::Printers::Error, :new)
+              .to delegate_to(described_class::Error, :new)
               .with_arguments(matcher: matcher)
               .and_return_its_value
           end
@@ -103,7 +103,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
 
           specify do
             expect { described_class.create(matcher: matcher) }
-              .to delegate_to(ConvenientService::RSpec::Matchers::Classes::Results::Base::Entities::Printers::Null, :new)
+              .to delegate_to(described_class::Null, :new)
               .with_arguments(matcher: matcher)
               .and_return_its_value
           end

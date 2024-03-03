@@ -26,12 +26,12 @@ RSpec.describe ConvenientService::RSpec::PrimitiveHelpers::Classes::IgnoringExce
 
         it "raises `ConvenientService::RSpec::PrimitiveHelpers::Classes::IgnoringException::Exceptions::IgnoredExceptionIsNotRaised`" do
           expect { command_result }
-            .to raise_error(ConvenientService::RSpec::PrimitiveHelpers::Classes::IgnoringException::Exceptions::IgnoredExceptionIsNotRaised)
+            .to raise_error(described_class::Exceptions::IgnoredExceptionIsNotRaised)
             .with_message(exception_message)
         end
 
         specify do
-          expect { ignoring_exception(ConvenientService::RSpec::PrimitiveHelpers::Classes::IgnoringException::Exceptions::IgnoredExceptionIsNotRaised) { command_result } }
+          expect { ignoring_exception(described_class::Exceptions::IgnoredExceptionIsNotRaised) { command_result } }
             .to delegate_to(ConvenientService, :raise)
         end
       end

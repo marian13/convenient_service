@@ -146,12 +146,12 @@ RSpec.describe ConvenientService::Support::ThreadSafeCounter do
 
         it "raises `ConvenientService::Support::ThreadSafeCounter::Exceptions::ValueAfterIncrementIsGreaterThanMaxValue`" do
           expect { counter.increment!(n) }
-            .to raise_error(ConvenientService::Support::ThreadSafeCounter::Exceptions::ValueAfterIncrementIsGreaterThanMaxValue)
+            .to raise_error(described_class::Exceptions::ValueAfterIncrementIsGreaterThanMaxValue)
             .with_message(exception_message)
         end
 
         it "does NOT changes current value" do
-          expect { ignoring_exception(ConvenientService::Support::ThreadSafeCounter::Exceptions::ValueAfterIncrementIsGreaterThanMaxValue) { counter.increment!(n) } }.not_to change(counter, :current_value)
+          expect { ignoring_exception(described_class::Exceptions::ValueAfterIncrementIsGreaterThanMaxValue) { counter.increment!(n) } }.not_to change(counter, :current_value)
         end
       end
 
@@ -263,12 +263,12 @@ RSpec.describe ConvenientService::Support::ThreadSafeCounter do
 
         it "raises `ConvenientService::Support::ThreadSafeCounter::Exceptions::ValueAfterDecrementIsLowerThanMinValue`" do
           expect { counter.decrement!(n) }
-            .to raise_error(ConvenientService::Support::ThreadSafeCounter::Exceptions::ValueAfterDecrementIsLowerThanMinValue)
+            .to raise_error(described_class::Exceptions::ValueAfterDecrementIsLowerThanMinValue)
             .with_message(exception_message)
         end
 
         it "does NOT changes current value" do
-          expect { ignoring_exception(ConvenientService::Support::ThreadSafeCounter::Exceptions::ValueAfterDecrementIsLowerThanMinValue) { counter.decrement!(n) } }.not_to change(counter, :current_value)
+          expect { ignoring_exception(described_class::Exceptions::ValueAfterDecrementIsLowerThanMinValue) { counter.decrement!(n) } }.not_to change(counter, :current_value)
         end
       end
 

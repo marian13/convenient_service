@@ -137,17 +137,17 @@ RSpec.describe ConvenientService::Support::Counter do
 
         it "raises `ConvenientService::Support::Counter::Exceptions::ValueAfterIncrementIsGreaterThanMaxValue`" do
           expect { counter.increment!(n) }
-            .to raise_error(ConvenientService::Support::Counter::Exceptions::ValueAfterIncrementIsGreaterThanMaxValue)
+            .to raise_error(described_class::Exceptions::ValueAfterIncrementIsGreaterThanMaxValue)
             .with_message(exception_message)
         end
 
         specify do
-          expect { ignoring_exception(ConvenientService::Support::Counter::Exceptions::ValueAfterIncrementIsGreaterThanMaxValue) { counter.increment!(n) } }
+          expect { ignoring_exception(described_class::Exceptions::ValueAfterIncrementIsGreaterThanMaxValue) { counter.increment!(n) } }
             .to delegate_to(ConvenientService, :raise)
         end
 
         it "does NOT changes current value" do
-          expect { ignoring_exception(ConvenientService::Support::Counter::Exceptions::ValueAfterIncrementIsGreaterThanMaxValue) { counter.increment!(n) } }.not_to change(counter, :current_value)
+          expect { ignoring_exception(described_class::Exceptions::ValueAfterIncrementIsGreaterThanMaxValue) { counter.increment!(n) } }.not_to change(counter, :current_value)
         end
       end
     end
@@ -238,17 +238,17 @@ RSpec.describe ConvenientService::Support::Counter do
 
         it "raises `ConvenientService::Support::Counter::Exceptions::ValueAfterDecrementIsLowerThanMinValue`" do
           expect { counter.decrement!(n) }
-            .to raise_error(ConvenientService::Support::Counter::Exceptions::ValueAfterDecrementIsLowerThanMinValue)
+            .to raise_error(described_class::Exceptions::ValueAfterDecrementIsLowerThanMinValue)
             .with_message(exception_message)
         end
 
         specify do
-          expect { ignoring_exception(ConvenientService::Support::Counter::Exceptions::ValueAfterDecrementIsLowerThanMinValue) { counter.decrement!(n) } }
+          expect { ignoring_exception(described_class::Exceptions::ValueAfterDecrementIsLowerThanMinValue) { counter.decrement!(n) } }
             .to delegate_to(ConvenientService, :raise)
         end
 
         it "does NOT changes current value" do
-          expect { ignoring_exception(ConvenientService::Support::Counter::Exceptions::ValueAfterDecrementIsLowerThanMinValue) { counter.decrement!(n) } }.not_to change(counter, :current_value)
+          expect { ignoring_exception(described_class::Exceptions::ValueAfterDecrementIsLowerThanMinValue) { counter.decrement!(n) } }.not_to change(counter, :current_value)
         end
       end
     end

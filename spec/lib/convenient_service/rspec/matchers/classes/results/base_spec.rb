@@ -23,7 +23,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base do
   end
 
   let(:result) { service.result }
-  let(:chain) { ConvenientService::RSpec::Matchers::Classes::Results::Base::Entities::Chain.new.tap { |chain| chain.statuses = statuses } }
+  let(:chain) { described_class::Entities::Chain.new.tap { |chain| chain.statuses = statuses } }
 
   example_group "class methods" do
     describe ".new" do
@@ -104,7 +104,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base do
         specify do
           expect { matcher.matches?(result) }
             .to delegate_to(result.class, :commit_config!)
-            .with_arguments(trigger: ConvenientService::RSpec::Matchers::Classes::Results::Base::Constants::Triggers::BE_RESULT)
+            .with_arguments(trigger: described_class::Constants::Triggers::BE_RESULT)
         end
       end
     end
@@ -319,7 +319,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base do
     describe "#printer" do
       specify do
         expect { matcher.printer }
-          .to delegate_to(ConvenientService::RSpec::Matchers::Classes::Results::Base::Entities::Printers, :create)
+          .to delegate_to(described_class::Entities::Printers, :create)
           .with_arguments(matcher: matcher)
           .and_return_its_value
       end
@@ -332,7 +332,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base do
     describe "#validator" do
       specify do
         expect { matcher.validator }
-          .to delegate_to(ConvenientService::RSpec::Matchers::Classes::Results::Base::Entities::Validator, :new)
+          .to delegate_to(described_class::Entities::Validator, :new)
           .with_arguments(matcher: matcher)
           .and_return_its_value
       end

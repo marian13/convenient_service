@@ -82,12 +82,12 @@ RSpec.describe ConvenientService::Support::FiniteLoop do
 
         it "raises `ConvenientService::Support::FiniteLoop::Exceptions::NoBlockGiven`" do
           expect { instance.foo }
-            .to raise_error(ConvenientService::Support::FiniteLoop::Exceptions::NoBlockGiven)
+            .to raise_error(described_class::Exceptions::NoBlockGiven)
             .with_message(exception_message)
         end
 
         specify do
-          expect { ignoring_exception(ConvenientService::Support::FiniteLoop::Exceptions::NoBlockGiven) { instance.foo } }
+          expect { ignoring_exception(described_class::Exceptions::NoBlockGiven) { instance.foo } }
             .to delegate_to(ConvenientService, :raise)
         end
       end
@@ -136,12 +136,12 @@ RSpec.describe ConvenientService::Support::FiniteLoop do
 
           it "defaults `raise_on_exceedance` to `true`" do
             expect { instance.foo }
-              .to raise_error(ConvenientService::Support::FiniteLoop::Exceptions::MaxIterationCountExceeded)
+              .to raise_error(described_class::Exceptions::MaxIterationCountExceeded)
               .with_message(exception_message)
           end
 
           specify do
-            expect { ignoring_exception(ConvenientService::Support::FiniteLoop::Exceptions::MaxIterationCountExceeded) { instance.foo } }
+            expect { ignoring_exception(described_class::Exceptions::MaxIterationCountExceeded) { instance.foo } }
               .to delegate_to(ConvenientService, :raise)
           end
         end
@@ -202,12 +202,12 @@ RSpec.describe ConvenientService::Support::FiniteLoop do
 
           it "raises `ConvenientService::Support::FiniteLoop::Exceptions::MaxIterationCountExceeded`" do
             expect { instance.foo }
-              .to raise_error(ConvenientService::Support::FiniteLoop::Exceptions::MaxIterationCountExceeded)
+              .to raise_error(described_class::Exceptions::MaxIterationCountExceeded)
               .with_message(exception_message)
           end
 
           specify do
-            expect { ignoring_exception(ConvenientService::Support::FiniteLoop::Exceptions::MaxIterationCountExceeded) { instance.foo } }
+            expect { ignoring_exception(described_class::Exceptions::MaxIterationCountExceeded) { instance.foo } }
               .to delegate_to(ConvenientService, :raise)
           end
         end
@@ -277,12 +277,12 @@ RSpec.describe ConvenientService::Support::FiniteLoop do
 
         it "raises `ConvenientService::Support::FiniteLoop::Exceptions::NoBlockGiven`" do
           expect { loop_result }
-            .to raise_error(ConvenientService::Support::FiniteLoop::Exceptions::NoBlockGiven)
+            .to raise_error(described_class::Exceptions::NoBlockGiven)
             .with_message(exception_message)
         end
 
         specify do
-          expect { ignoring_exception(ConvenientService::Support::FiniteLoop::Exceptions::NoBlockGiven) { loop_result } }
+          expect { ignoring_exception(described_class::Exceptions::NoBlockGiven) { loop_result } }
             .to delegate_to(ConvenientService, :raise)
         end
       end
@@ -317,12 +317,12 @@ RSpec.describe ConvenientService::Support::FiniteLoop do
 
           it "defaults `raise_on_exceedance` to `true`" do
             expect { loop_result }
-              .to raise_error(ConvenientService::Support::FiniteLoop::Exceptions::MaxIterationCountExceeded)
+              .to raise_error(described_class::Exceptions::MaxIterationCountExceeded)
               .with_message(exception_message)
           end
 
           specify do
-            expect { ignoring_exception(ConvenientService::Support::FiniteLoop::Exceptions::MaxIterationCountExceeded) { loop_result } }
+            expect { ignoring_exception(described_class::Exceptions::MaxIterationCountExceeded) { loop_result } }
               .to delegate_to(ConvenientService, :raise)
           end
         end
@@ -362,12 +362,12 @@ RSpec.describe ConvenientService::Support::FiniteLoop do
 
           it "raises `ConvenientService::Support::FiniteLoop::Exceptions::MaxIterationCountExceeded`" do
             expect { loop_result }
-              .to raise_error(ConvenientService::Support::FiniteLoop::Exceptions::MaxIterationCountExceeded)
+              .to raise_error(described_class::Exceptions::MaxIterationCountExceeded)
               .with_message(exception_message)
           end
 
           specify do
-            expect { ignoring_exception(ConvenientService::Support::FiniteLoop::Exceptions::MaxIterationCountExceeded) { loop_result } }
+            expect { ignoring_exception(described_class::Exceptions::MaxIterationCountExceeded) { loop_result } }
               .to delegate_to(ConvenientService, :raise)
           end
         end

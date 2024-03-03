@@ -13,10 +13,10 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
   let(:scope) { :instance }
   let(:method) { :result }
   let(:klass) { service_class }
-  let(:container) { ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Container.new(klass: klass) }
+  let(:container) { described_class::Entities::Container.new(klass: klass) }
 
-  let(:prefix) { ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Caller::Constants::INSTANCE_PREFIX }
-  let(:caller) { ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Caller.new(prefix: prefix) }
+  let(:prefix) { described_class::Entities::Caller::Constants::INSTANCE_PREFIX }
+  let(:caller) { described_class::Entities::Caller.new(prefix: prefix) }
 
   let(:service_class) do
     Class.new do
@@ -264,7 +264,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
 
       specify do
         expect { method_middlewares.define! }
-          .to delegate_to(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Caller::Commands::DefineMethodMiddlewaresCaller, :call)
+          .to delegate_to(described_class::Entities::Caller::Commands::DefineMethodMiddlewaresCaller, :call)
           .with_arguments(scope: scope, method: method, container: container, caller: caller)
           .and_return_its_value
       end

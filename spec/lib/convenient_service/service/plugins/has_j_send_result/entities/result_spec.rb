@@ -11,7 +11,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
 
     subject { described_class }
 
-    it { is_expected.to include_module(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Concern) }
+    it { is_expected.to include_module(described_class::Concern) }
   end
 end
 # rubocop:enable RSpec/NestedGroups

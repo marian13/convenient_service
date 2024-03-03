@@ -14,13 +14,13 @@ RSpec.describe ConvenientService::Support::Cache do
     describe ".create" do
       let(:cache) { described_class.create(backend: backend) }
 
-      let(:backend) { ConvenientService::Support::Cache::Constants::Backends::HASH }
+      let(:backend) { described_class::Constants::Backends::HASH }
 
       context "when `backend` is NOT passed" do
         let(:cache) { described_class.create }
 
         it "defaults `backend` to `:hash`" do
-          expect(cache).to be_instance_of(ConvenientService::Support::Cache::Entities::Caches::Hash)
+          expect(cache).to be_instance_of(described_class::Entities::Caches::Hash)
         end
       end
 
@@ -38,38 +38,38 @@ RSpec.describe ConvenientService::Support::Cache do
 
           it "raises `ConvenientService::Support::Cache::Exceptions::NotSupportedBackend`" do
             expect { cache }
-              .to raise_error(ConvenientService::Support::Cache::Exceptions::NotSupportedBackend)
+              .to raise_error(described_class::Exceptions::NotSupportedBackend)
               .with_message(exception_message)
           end
 
           specify do
-            expect { ignoring_exception(ConvenientService::Support::Cache::Exceptions::NotSupportedBackend) { cache } }
+            expect { ignoring_exception(described_class::Exceptions::NotSupportedBackend) { cache } }
               .to delegate_to(ConvenientService, :raise)
           end
         end
 
         context "when `backend` is supported" do
           context "when `backend` is `:hash`" do
-            let(:backend) { ConvenientService::Support::Cache::Constants::Backends::HASH }
+            let(:backend) { described_class::Constants::Backends::HASH }
 
             it "creates hash-based cache" do
-              expect(cache).to be_instance_of(ConvenientService::Support::Cache::Entities::Caches::Hash)
+              expect(cache).to be_instance_of(described_class::Entities::Caches::Hash)
             end
           end
 
           context "when `backend` is `:array`" do
-            let(:backend) { ConvenientService::Support::Cache::Constants::Backends::ARRAY }
+            let(:backend) { described_class::Constants::Backends::ARRAY }
 
             it "creates array-based cache" do
-              expect(cache).to be_instance_of(ConvenientService::Support::Cache::Entities::Caches::Array)
+              expect(cache).to be_instance_of(described_class::Entities::Caches::Array)
             end
           end
 
           context "when `backend` is `:thread_safe_array`" do
-            let(:backend) { ConvenientService::Support::Cache::Constants::Backends::THREAD_SAFE_ARRAY }
+            let(:backend) { described_class::Constants::Backends::THREAD_SAFE_ARRAY }
 
             it "creates thread safe array-based cache" do
-              expect(cache).to be_instance_of(ConvenientService::Support::Cache::Entities::Caches::ThreadSafeArray)
+              expect(cache).to be_instance_of(described_class::Entities::Caches::ThreadSafeArray)
             end
           end
         end

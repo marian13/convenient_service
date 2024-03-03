@@ -6,7 +6,7 @@ require "convenient_service"
 
 RSpec.describe ConvenientService::RSpec::Matchers do
   example_group "modules" do
-    include ConvenientService::RSpec::Matchers::IncludeModule
+    include described_class::IncludeModule
 
     subject { described_class }
 
@@ -23,10 +23,10 @@ RSpec.describe ConvenientService::RSpec::Matchers do
         end
       end
 
-      it { is_expected.to include_module(ConvenientService::RSpec::Matchers::CallChainNext) }
-      it { is_expected.to include_module(ConvenientService::RSpec::Matchers::DelegateTo) }
-      it { is_expected.to include_module(ConvenientService::RSpec::Matchers::Export) }
-      it { is_expected.to include_module(ConvenientService::RSpec::Matchers::Results) }
+      it { is_expected.to include_module(described_class::CallChainNext) }
+      it { is_expected.to include_module(described_class::DelegateTo) }
+      it { is_expected.to include_module(described_class::Export) }
+      it { is_expected.to include_module(described_class::Results) }
     end
   end
 end

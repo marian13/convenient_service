@@ -13,7 +13,7 @@ RSpec.describe ConvenientService::Utils::Method do
 
     specify do
       expect { described_class.defined?(method, klass) }
-        .to delegate_to(ConvenientService::Utils::Method::Defined, :call)
+        .to delegate_to(described_class::Defined, :call)
         .with_arguments(method, klass)
         .and_return_its_value
     end

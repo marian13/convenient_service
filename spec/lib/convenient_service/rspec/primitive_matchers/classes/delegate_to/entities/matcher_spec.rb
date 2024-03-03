@@ -553,7 +553,7 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo:
       it "sets `ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::WithConcreteArguments` instance as argument chaining" do
         matcher.with_arguments
 
-        expect(matcher.chainings.arguments).to be_instance_of(ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::WithConcreteArguments)
+        expect(matcher.chainings.arguments).to be_instance_of(described_class::Entities::Chainings::SubMatchers::WithConcreteArguments)
       end
 
       it "returns matcher" do
@@ -565,7 +565,7 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo:
       it "sets `ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::WithAnyArguments` instance as argument chaining" do
         matcher.with_any_arguments
 
-        expect(matcher.chainings.arguments).to be_instance_of(ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::WithAnyArguments)
+        expect(matcher.chainings.arguments).to be_instance_of(described_class::Entities::Chainings::SubMatchers::WithAnyArguments)
       end
 
       it "returns matcher" do
@@ -577,7 +577,7 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo:
       it "sets `ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::WithoutArguments` instance as argument chaining" do
         matcher.without_arguments
 
-        expect(matcher.chainings.arguments).to be_instance_of(ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::WithoutArguments)
+        expect(matcher.chainings.arguments).to be_instance_of(described_class::Entities::Chainings::SubMatchers::WithoutArguments)
       end
 
       it "returns matcher" do
@@ -589,7 +589,7 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo:
       it "sets `ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::ReturnDelegationValue` instance as return value chaining" do
         matcher.and_return_its_value
 
-        expect(matcher.chainings.return_value).to be_instance_of(ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::ReturnDelegationValue)
+        expect(matcher.chainings.return_value).to be_instance_of(described_class::Entities::Chainings::SubMatchers::ReturnDelegationValue)
       end
 
       it "returns matcher" do
@@ -601,7 +601,7 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo:
       it "sets `ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::ReturnCustomValue` instance as return value chaining" do
         matcher.and_return { |delegation_value| delegation_value }
 
-        expect(matcher.chainings.return_value).to be_instance_of(ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::Chainings::SubMatchers::ReturnCustomValue)
+        expect(matcher.chainings.return_value).to be_instance_of(described_class::Entities::Chainings::SubMatchers::ReturnCustomValue)
       end
 
       it "returns matcher" do
@@ -613,7 +613,7 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo:
       it "sets `ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::Chainings::Values::WithCallingOriginal` instance as call original chaining" do
         matcher.with_calling_original
 
-        expect(matcher.chainings.call_original).to be_instance_of(ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::Chainings::Values::WithCallingOriginal)
+        expect(matcher.chainings.call_original).to be_instance_of(described_class::Entities::Chainings::Values::WithCallingOriginal)
       end
 
       it "returns matcher" do
@@ -625,7 +625,7 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo:
       it "sets `ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::Chainings::Values::WithoutCallingOriginal` instance as call original chaining" do
         matcher.without_calling_original
 
-        expect(matcher.chainings.call_original).to be_instance_of(ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::Chainings::Values::WithoutCallingOriginal)
+        expect(matcher.chainings.call_original).to be_instance_of(described_class::Entities::Chainings::Values::WithoutCallingOriginal)
       end
 
       it "returns matcher" do
@@ -685,15 +685,15 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo:
 
     describe "#printable_method" do
       it "delegates to `ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Commands::GeneratePrintableMethod`" do
-        allow(ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Commands::GeneratePrintableMethod).to receive(:call).with(object: matcher.object, method: matcher.method).and_call_original
+        allow(described_class::Commands::GeneratePrintableMethod).to receive(:call).with(object: matcher.object, method: matcher.method).and_call_original
 
         matcher.printable_method
 
-        expect(ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Commands::GeneratePrintableMethod).to have_received(:call).with(object: matcher.object, method: matcher.method)
+        expect(described_class::Commands::GeneratePrintableMethod).to have_received(:call).with(object: matcher.object, method: matcher.method)
       end
 
       it "returns `ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Commands::GeneratePrintableMethod` value" do
-        expect(matcher.printable_method).to eq(ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Commands::GeneratePrintableMethod.call(object: matcher.object, method: matcher.method))
+        expect(matcher.printable_method).to eq(described_class::Commands::GeneratePrintableMethod.call(object: matcher.object, method: matcher.method))
       end
 
       it "caches its value" do

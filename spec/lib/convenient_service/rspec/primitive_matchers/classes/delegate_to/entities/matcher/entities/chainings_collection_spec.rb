@@ -481,14 +481,14 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo:
 
         it "raises error `ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::ChainingsCollection::Exceptions::CallOriginalChainingIsAlreadySet`" do
           expect { chainings_collection.call_original = call_original_chaining }
-            .to raise_error(ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::ChainingsCollection::Exceptions::CallOriginalChainingIsAlreadySet)
+            .to raise_error(described_class::Exceptions::CallOriginalChainingIsAlreadySet)
             .with_message(exception_message)
         end
 
         it "delegates to `ConvenientService.raise`" do
           allow(ConvenientService).to receive(:raise).and_call_original
 
-          ignoring_exception(ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::ChainingsCollection::Exceptions::CallOriginalChainingIsAlreadySet) { chainings_collection.call_original = call_original_chaining }
+          ignoring_exception(described_class::Exceptions::CallOriginalChainingIsAlreadySet) { chainings_collection.call_original = call_original_chaining }
 
           expect(ConvenientService).to have_received(:raise)
         end
@@ -523,14 +523,14 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo:
 
         it "raises error `ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::ChainingsCollection::Exceptions::ArgumentsChainingIsAlreadySet`" do
           expect { chainings_collection.arguments = arguments_chaining }
-            .to raise_error(ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::ChainingsCollection::Exceptions::ArgumentsChainingIsAlreadySet)
+            .to raise_error(described_class::Exceptions::ArgumentsChainingIsAlreadySet)
             .with_message(exception_message)
         end
 
         it "delegates to `ConvenientService.raise`" do
           allow(ConvenientService).to receive(:raise).and_call_original
 
-          ignoring_exception(ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::ChainingsCollection::Exceptions::ArgumentsChainingIsAlreadySet) { chainings_collection.arguments = arguments_chaining }
+          ignoring_exception(described_class::Exceptions::ArgumentsChainingIsAlreadySet) { chainings_collection.arguments = arguments_chaining }
 
           expect(ConvenientService).to have_received(:raise)
         end
@@ -565,14 +565,14 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo:
 
         it "raises error `ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::ChainingsCollection::Exceptions::ReturnValueChainingIsAlreadySet`" do
           expect { chainings_collection.return_value = return_custom_value_chaining }
-            .to raise_error(ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::ChainingsCollection::Exceptions::ReturnValueChainingIsAlreadySet)
+            .to raise_error(described_class::Exceptions::ReturnValueChainingIsAlreadySet)
             .with_message(exception_message)
         end
 
         it "delegates to `ConvenientService.raise`" do
           allow(ConvenientService).to receive(:raise).and_call_original
 
-          ignoring_exception(ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Matcher::Entities::ChainingsCollection::Exceptions::ReturnValueChainingIsAlreadySet) { chainings_collection.return_value = return_custom_value_chaining }
+          ignoring_exception(described_class::Exceptions::ReturnValueChainingIsAlreadySet) { chainings_collection.return_value = return_custom_value_chaining }
 
           expect(ConvenientService).to have_received(:raise)
         end

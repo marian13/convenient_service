@@ -20,7 +20,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult do
 
       specify do
         expect { described_class.result?(result) }
-          .to delegate_to(ConvenientService::Service::Plugins::HasJSendResult::Commands::IsResult, :call)
+          .to delegate_to(described_class::Commands::IsResult, :call)
           .with_arguments(result: result)
           .and_return_its_value
       end

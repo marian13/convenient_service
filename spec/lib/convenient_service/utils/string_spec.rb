@@ -12,7 +12,7 @@ RSpec.describe ConvenientService::Utils::String do
 
     specify do
       expect { described_class.camelize(string) }
-        .to delegate_to(ConvenientService::Utils::String::Camelize, :call)
+        .to delegate_to(described_class::Camelize, :call)
         .with_arguments(string)
         .and_return_its_value
     end
@@ -23,7 +23,7 @@ RSpec.describe ConvenientService::Utils::String do
 
     specify do
       expect { described_class.demodulize(string) }
-        .to delegate_to(ConvenientService::Utils::String::Demodulize, :call)
+        .to delegate_to(described_class::Demodulize, :call)
         .with_arguments(string)
         .and_return_its_value
     end
@@ -35,7 +35,7 @@ RSpec.describe ConvenientService::Utils::String do
 
     specify do
       expect { described_class.split(string, *delimiters) }
-        .to delegate_to(ConvenientService::Utils::String::Split, :call)
+        .to delegate_to(described_class::Split, :call)
         .with_arguments(string, *delimiters)
         .and_return_its_value
     end
@@ -48,7 +48,7 @@ RSpec.describe ConvenientService::Utils::String do
 
     specify do
       expect { described_class.truncate(string, truncate_at, omission: omission) }
-        .to delegate_to(ConvenientService::Utils::String::Truncate, :call)
+        .to delegate_to(described_class::Truncate, :call)
         .with_arguments(string, truncate_at, omission: omission)
         .and_return_its_value
     end

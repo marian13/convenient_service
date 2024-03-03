@@ -13,7 +13,7 @@ RSpec.describe ConvenientService::Utils::Hash do
 
     specify do
       expect { described_class.assert_valid_keys(hash, valid_keys) }
-        .to delegate_to(ConvenientService::Utils::Hash::AssertValidKeys, :call)
+        .to delegate_to(described_class::AssertValidKeys, :call)
         .with_arguments(hash, valid_keys)
         .and_return_its_value
     end
@@ -25,7 +25,7 @@ RSpec.describe ConvenientService::Utils::Hash do
 
     specify do
       expect { described_class.except(hash, keys) }
-        .to delegate_to(ConvenientService::Utils::Hash::Except, :call)
+        .to delegate_to(described_class::Except, :call)
         .with_arguments(hash, keys)
         .and_return_its_value
     end
@@ -37,7 +37,7 @@ RSpec.describe ConvenientService::Utils::Hash do
 
     specify do
       expect { described_class.triple_equality_compare(hash, other_hash) }
-        .to delegate_to(ConvenientService::Utils::Hash::TripleEqualityCompare, :call)
+        .to delegate_to(described_class::TripleEqualityCompare, :call)
         .with_arguments(hash, other_hash)
         .and_return_its_value
     end
