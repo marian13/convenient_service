@@ -215,6 +215,12 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rubocop-rspec", "~> 2.27.0"
 
   ##
+  # Used as a set of rules for rubocop for enforcing Ruby gem packaging best practices.
+  # - https://github.com/utkarsh2102/rubocop-packaging
+  #
+  spec.add_development_dependency "rubocop-packaging", "~> 0.5.2"
+
+  ##
   # Used as a set of rules for rubocop for linting common thread-safety issues in Ruby files.
   # - https://github.com/rubocop/rubocop-thread_safety
   #
