@@ -24,26 +24,7 @@ RSpec.describe ConvenientService::Examples::Standard::ComprehensiveSuite::Servic
 
       let(:out) { Tempfile.new }
 
-      let(:actual_output) { out.tap(&:rewind).read }
-
-      let(:expected_output) do
-        <<~TEXT
-          Started service `#{described_class}`.
-            Run step `ConvenientService::Examples::Standard::ComprehensiveSuite::Services::SuccessService` (steps[0]).
-            Run step `:failure_method` (steps[1]).
-            Run step `ConvenientService::Examples::Standard::ComprehensiveSuite::Services::SuccessService` (steps[2]).
-            Run step `:success_method` (steps[3]).
-            Run step `ConvenientService::Examples::Standard::ComprehensiveSuite::Services::FailureService` (steps[4]).
-            Run step `:failure_method` (steps[5]).
-          Completed service `#{described_class}`.
-        TEXT
-      end
-
       context "when `ServiceWithAllTypesOfSteps` is successful" do
-        before do
-          allow(service).to receive(:puts).and_call_original
-        end
-
         specify do
           expect { result }
             .to delegate_to(ConvenientService::Examples::Standard::ComprehensiveSuite::Services::SuccessService, :result)
@@ -96,10 +77,31 @@ RSpec.describe ConvenientService::Examples::Standard::ComprehensiveSuite::Servic
           expect(result).to be_success.with_data(index: 5).of_service(described_class).of_step(:failure_method)
         end
 
-        it "prints progress bar after each step" do
-          result
+        example_group "logs" do
+          let(:actual_output) { out.tap(&:rewind).read }
 
-          expect(actual_output).to eq(expected_output)
+          let(:expected_output) do
+            <<~TEXT
+              Started service `#{described_class}`.
+                Run step `ConvenientService::Examples::Standard::ComprehensiveSuite::Services::SuccessService` (steps[0]).
+                Run step `:failure_method` (steps[1]).
+                Run step `ConvenientService::Examples::Standard::ComprehensiveSuite::Services::SuccessService` (steps[2]).
+                Run step `:success_method` (steps[3]).
+                Run step `ConvenientService::Examples::Standard::ComprehensiveSuite::Services::FailureService` (steps[4]).
+                Run step `:failure_method` (steps[5]).
+              Completed service `#{described_class}`.
+            TEXT
+          end
+
+          before do
+            allow(service).to receive(:puts).and_call_original
+          end
+
+          it "prints progress bar after each step" do
+            result
+
+            expect(actual_output).to eq(expected_output)
+          end
         end
       end
     end
