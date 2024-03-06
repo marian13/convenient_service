@@ -312,6 +312,15 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
       end
     end
 
+    describe "#inspect" do
+      specify do
+        expect { step_collection.inspect }
+          .to delegate_to(step_collection.expression, :inspect)
+          .without_arguments
+          .and_return_its_value
+      end
+    end
+
     example_group "comparison" do
       describe "#==" do
         context "when `other` has different class" do

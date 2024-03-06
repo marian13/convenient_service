@@ -165,6 +165,13 @@ module ConvenientService
             end
 
             ##
+            # @return [String]
+            #
+            def inspect
+              expression.inspect
+            end
+
+            ##
             # @api public
             #
             # @param other [Object] Can be any type.
