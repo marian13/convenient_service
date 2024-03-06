@@ -97,7 +97,7 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo:
 
         context "when matcher has NO delegations" do
           before do
-            matcher.delegations.clear
+            matcher.outputs.delegations.clear
           end
 
           it "returns `false`" do
@@ -108,7 +108,7 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo:
         context "when matcher has one delegation" do
           context "when that one delegation has NOT expected arguments" do
             before do
-              matcher.delegations << delegation_with_not_expected_arguments
+              matcher.outputs.delegations << delegation_with_not_expected_arguments
             end
 
             it "returns `false`" do
@@ -118,7 +118,7 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo:
 
           context "when that one delegation has expected arguments" do
             before do
-              matcher.delegations << delegation_with_expected_arguments
+              matcher.outputs.delegations << delegation_with_expected_arguments
             end
 
             it "returns `true`" do
@@ -130,7 +130,7 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo:
         context "when matcher has multiple delegations" do
           context "when all those multiple delegations have NOT expected arguments" do
             before do
-              2.times { matcher.delegations << delegation_with_not_expected_arguments }
+              2.times { matcher.outputs.delegations << delegation_with_not_expected_arguments }
             end
 
             it "returns `false`" do
@@ -140,9 +140,9 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo:
 
           context "when any of those multiple delegations has expected arguments" do
             before do
-              matcher.delegations << delegation_with_not_expected_arguments
+              matcher.outputs.delegations << delegation_with_not_expected_arguments
 
-              matcher.delegations << delegation_with_expected_arguments
+              matcher.outputs.delegations << delegation_with_expected_arguments
             end
 
             it "returns `true`" do

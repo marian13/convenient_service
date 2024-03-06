@@ -83,7 +83,7 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo:
         end
 
         before do
-          matcher.delegations.clear
+          matcher.outputs.delegations.clear
         end
 
         it "returns message" do
@@ -101,7 +101,7 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo:
         end
 
         before do
-          matcher.delegations << delegation
+          matcher.outputs.delegations << delegation
         end
 
         it "returns message" do
@@ -128,10 +128,10 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo:
       end
 
       context "when matcher has one delegation" do
-        let(:printable_arguments) { described_class::Commands::GeneratePrintableArguments.call(arguments: matcher.delegations.first.arguments).prepend("with ") }
+        let(:printable_arguments) { described_class::Commands::GeneratePrintableArguments.call(arguments: matcher.outputs.delegations.first.arguments).prepend("with ") }
 
         before do
-          matcher.delegations << delegation
+          matcher.outputs.delegations << delegation
         end
 
         it "returns printable arguments for that delegation" do
@@ -141,14 +141,14 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo:
 
       context "when matcher has multiple delegations" do
         let(:printable_arguments) do
-          matcher.delegations
+          matcher.outputs.delegations
             .map { |delegation| described_class::Commands::GeneratePrintableArguments.call(arguments: delegation.arguments) }
             .join(", ")
             .prepend("with ")
         end
 
         before do
-          2.times { matcher.delegations << delegation }
+          2.times { matcher.outputs.delegations << delegation }
         end
 
         it "returns printable arguments concatted by command for those delegations" do

@@ -64,7 +64,7 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo:
         it "does NOT add any delegation to matcher" do
           block_expectation.call
 
-          expect(matcher.delegations).to eq(delegations)
+          expect(matcher.outputs.delegations).to eq(delegations)
         end
       end
 
@@ -75,7 +75,7 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo:
         it "adds that one delegation to matcher" do
           block_expectation.call
 
-          expect(matcher.delegations).to eq(delegations)
+          expect(matcher.outputs.delegations).to eq(delegations)
         end
 
         it "calls original method once" do
@@ -106,7 +106,7 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo:
         it "adds all those delegations to matcher" do
           block_expectation.call
 
-          expect(matcher.delegations).to eq(delegations)
+          expect(matcher.outputs.delegations).to eq(delegations)
         end
 
         it "calls original method n times" do

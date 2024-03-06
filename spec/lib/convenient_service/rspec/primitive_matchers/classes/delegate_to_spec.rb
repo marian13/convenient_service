@@ -46,16 +46,29 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo 
     subject { matcher }
 
     it { is_expected.to have_attr_reader(:inputs) }
+    it { is_expected.to have_attr_reader(:outputs) }
   end
 
   example_group "class methods" do
     describe "#new" do
+      let(:matcher) { described_class.new(object, method, block_expectation) }
+
+      it "sets `inputs` initial value" do
+        expect(matcher.inputs).to eq(described_class::Entities::Inputs.new(object: object, method: method, block_expectation: block_expectation))
+      end
+
+      it "sets `outputs` initial value" do
+        expect(matcher.outputs).to eq(described_class::Entities::Outputs.new)
+      end
+
       context "when `block_expectation` is NOT passed" do
+        let(:matcher) { described_class.new(object, method) }
+
         it "defaults to empty proc" do
           ##
           # TODO: Introduce to `be_empty_proc` matcher.
           #
-          expect([matcher.inputs.block_expectation.instance_of?(Proc), matcher.inputs.block_expectation.call.nil?]).to all eq(true)
+          expect([matcher.inputs.block_expectation.instance_of?(Proc), matcher.inputs.block_expectation.call == ConvenientService::Support::UNDEFINED]).to all eq(true)
         end
       end
     end
@@ -1448,16 +1461,6 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo 
       end
     end
 
-    describe "#delegations" do
-      it "returns empty array" do
-        expect(matcher.delegations).to eq([])
-      end
-
-      specify do
-        expect { matcher.delegations }.to cache_its_value
-      end
-    end
-
     example_group "comparison" do
       describe "#==" do
         let(:matcher) { described_class.new(object, method, block_expectation) }
@@ -1488,6 +1491,14 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo 
 
         context "when `other` has different `block_expectation`" do
           let(:other) { described_class.new(object, method, proc { :qux }) }
+
+          it "returns `false`" do
+            expect(matcher == other).to eq(false)
+          end
+        end
+
+        context "when `other` has different `delegations`" do
+          let(:other) { described_class.new(object, method, block_expectation).tap { |matcher| matcher.outputs.delegations << double } }
 
           it "returns `false`" do
             expect(matcher == other).to eq(false)

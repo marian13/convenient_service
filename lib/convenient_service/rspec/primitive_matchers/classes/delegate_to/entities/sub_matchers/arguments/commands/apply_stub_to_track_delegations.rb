@@ -50,7 +50,7 @@ module ConvenientService
                         ##
                         # TODO: Add backtrace for easier reason tracing.
                         #
-                        matcher.delegations << Entities::Delegation.new(
+                        matcher.outputs.delegations << Entities::Delegation.new(
                           object: matcher.inputs.object,
                           method: matcher.inputs.method,
                           args: actual_args,

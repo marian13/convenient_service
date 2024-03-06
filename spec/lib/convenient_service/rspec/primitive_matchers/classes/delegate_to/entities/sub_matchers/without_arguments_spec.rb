@@ -97,7 +97,7 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo:
 
         context "when matcher has NO delegations" do
           before do
-            matcher.delegations.clear
+            matcher.outputs.delegations.clear
           end
 
           it "returns `false`" do
@@ -108,7 +108,7 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo:
         context "when matcher has one delegation" do
           context "when that one delegation without arguments" do
             before do
-              matcher.delegations << delegation_without_arguments
+              matcher.outputs.delegations << delegation_without_arguments
             end
 
             it "returns `true`" do
@@ -118,7 +118,7 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo:
 
           context "when that one delegation rguments" do
             before do
-              matcher.delegations << delegation_with_arguments
+              matcher.outputs.delegations << delegation_with_arguments
             end
 
             it "returns `false`" do
@@ -130,9 +130,9 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo:
         context "when matcher has multiple delegations" do
           context "when any of those multiple delegations without arguments" do
             before do
-              matcher.delegations << delegation_with_arguments
+              matcher.outputs.delegations << delegation_with_arguments
 
-              matcher.delegations << delegation_without_arguments
+              matcher.outputs.delegations << delegation_without_arguments
             end
 
             it "returns `true`" do
@@ -142,7 +142,7 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo:
 
           context "when all those multiple delegations have arguments" do
             before do
-              2.times { matcher.delegations << delegation_with_arguments }
+              2.times { matcher.outputs.delegations << delegation_with_arguments }
             end
 
             it "returns `false`" do

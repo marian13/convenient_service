@@ -68,7 +68,7 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo:
 
       context "when matcher has NO delegations" do
         before do
-          matcher.delegations.clear
+          matcher.outputs.delegations.clear
         end
 
         it "returns `false`" do
@@ -78,7 +78,7 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo:
 
       context "when matcher has one delegation" do
         before do
-          matcher.delegations << delegation
+          matcher.outputs.delegations << delegation
         end
 
         it "returns `true`" do
@@ -88,7 +88,7 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo:
 
       context "when matcher has multiple delegations" do
         before do
-          2.times { matcher.delegations << delegation }
+          2.times { matcher.outputs.delegations << delegation }
         end
 
         it "returns `true`" do

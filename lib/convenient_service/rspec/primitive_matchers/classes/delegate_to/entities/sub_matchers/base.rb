@@ -82,6 +82,13 @@ module ConvenientService
                 def inputs
                   matcher.inputs
                 end
+
+                ##
+                # @return [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Inputs]
+                #
+                def outputs
+                  matcher.outputs
+                end
               end
             end
           end

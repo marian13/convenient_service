@@ -44,6 +44,14 @@ module ConvenientService
           ##
           # @api private
           #
+          # @!attribute [r] outputs
+          #   @return [ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Outputs]
+          #
+          attr_reader :outputs
+
+          ##
+          # @api private
+          #
           # @param object [Object]
           # @param method [String, Symbol]
           # @param block_expectation [Proc]
@@ -55,8 +63,9 @@ module ConvenientService
           #   TODO: `with_warmup`.
           #   TODO: `compare_by`.
           #
-          def initialize(object, method, block_expectation = proc {})
+          def initialize(object, method, block_expectation = proc { Support::UNDEFINED })
             @inputs = Entities::Inputs.new(object: object, method: method, block_expectation: block_expectation)
+            @outputs = Entities::Outputs.new
           end
 
           ##
@@ -231,15 +240,6 @@ module ConvenientService
           ##
           # @api private
           #
-          # @return [Array]
-          #
-          def delegations
-            @delegations ||= []
-          end
-
-          ##
-          # @api private
-          #
           # @param other [Object] Can be any type.
           # @return [Boolean, nil]
           #
@@ -247,6 +247,7 @@ module ConvenientService
             return unless other.instance_of?(self.class)
 
             return false if inputs != other.inputs
+            return false if outputs != other.outputs
 
             true
           end

@@ -24,7 +24,7 @@ module ConvenientService
                 def matches?(block_expectation_value)
                   super
 
-                  matcher.delegations.any? { |delegation| matches_arguments?(delegation.arguments) }
+                  outputs.delegations.any? { |delegation| matches_arguments?(delegation.arguments) }
                 end
 
                 ##
@@ -52,9 +52,9 @@ module ConvenientService
                 # @return [String]
                 #
                 def printable_actual_arguments
-                  return "" if matcher.delegations.none?
+                  return "" if outputs.delegations.none?
 
-                  matcher.delegations
+                  outputs.delegations
                     .map { |delegation| Commands::GeneratePrintableArguments.call(arguments: delegation.arguments) }
                     .join(", ")
                     .prepend("with ")
@@ -73,7 +73,7 @@ module ConvenientService
                 #   TODO: String diff.
                 #
                 def failure_message_got_part
-                  if matcher.delegations.any?
+                  if outputs.delegations.any?
                     "got delegated #{printable_actual_arguments}"
                   else
                     "got not delegated at all"
