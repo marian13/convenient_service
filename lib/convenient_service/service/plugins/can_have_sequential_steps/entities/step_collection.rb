@@ -115,6 +115,13 @@ module ConvenientService
             end
 
             ##
+            # @return [String]
+            #
+            def inspect
+              steps.inspect
+            end
+
+            ##
             # @api public
             #
             # @param other [Object] Can be any type.

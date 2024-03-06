@@ -289,6 +289,15 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSequentialSteps::Enti
       end
     end
 
+    describe "#inspect" do
+      specify do
+        expect { step_collection.inspect }
+          .to delegate_to(step_collection.steps, :inspect)
+          .without_arguments
+          .and_return_its_value
+      end
+    end
+
     example_group "conversions" do
       let(:step_collection) { described_class.new(container: container, steps: steps) }
       let(:arguments) { ConvenientService::Support::Arguments.new(container: container, steps: steps) }
