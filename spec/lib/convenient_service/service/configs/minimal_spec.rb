@@ -34,8 +34,11 @@ RSpec.describe ConvenientService::Service::Configs::Minimal do
               ConvenientService::Plugins::Common::HasConstructorWithoutInitialize::Concern,
               ConvenientService::Service::Plugins::HasResult::Concern,
               ConvenientService::Service::Plugins::HasJSendResult::Concern,
+              ConvenientService::Service::Plugins::HasNegatedResult::Concern,
+              ConvenientService::Service::Plugins::HasNegatedJSendResult::Concern,
               ConvenientService::Service::Plugins::CanHaveSteps::Concern,
-              ConvenientService::Service::Plugins::CanHaveConnectedSteps::Concern
+              ConvenientService::Service::Plugins::CanHaveConnectedSteps::Concern,
+              ConvenientService::Service::Plugins::CanHaveFallbacks::Concern
             ]
           end
 

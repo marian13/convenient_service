@@ -57,8 +57,13 @@ module ConvenientService
             use ConvenientService::Plugins::Service::HasResult::Concern
             use ConvenientService::Plugins::Service::HasJSendResult::Concern
 
+            use ConvenientService::Plugins::Service::HasNegatedResult::Concern
+            use ConvenientService::Plugins::Service::HasNegatedJSendResult::Concern
+
             use ConvenientService::Plugins::Service::CanHaveSteps::Concern
             use ConvenientService::Plugins::Service::CanHaveConnectedSteps::Concern
+
+            use ConvenientService::Plugins::Service::CanHaveFallbacks::Concern
           end
 
           ##

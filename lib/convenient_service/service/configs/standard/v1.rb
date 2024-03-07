@@ -34,9 +34,14 @@ module ConvenientService
 
               use ConvenientService::Plugins::Service::HasMermaidFlowchart::Concern
 
+              delete ConvenientService::Plugins::Service::HasNegatedResult::Concern
+              delete ConvenientService::Plugins::Service::HasNegatedJSendResult::Concern
+
               replace \
                 ConvenientService::Plugins::Service::CanHaveConnectedSteps::Concern,
                 ConvenientService::Plugins::Service::CanHaveSequentialSteps::Concern
+
+              delete ConvenientService::Plugins::Service::CanHaveFallbacks::Concern
             end
 
             middlewares :initialize do

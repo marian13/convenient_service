@@ -35,8 +35,11 @@ RSpec.describe ConvenientService::Service::Configs::Standard do
               ConvenientService::Plugins::Common::HasConstructorWithoutInitialize::Concern,
               ConvenientService::Service::Plugins::HasResult::Concern,
               ConvenientService::Service::Plugins::HasJSendResult::Concern,
+              ConvenientService::Service::Plugins::HasNegatedResult::Concern,
+              ConvenientService::Service::Plugins::HasNegatedJSendResult::Concern,
               ConvenientService::Service::Plugins::CanHaveSteps::Concern,
               ConvenientService::Service::Plugins::CanHaveConnectedSteps::Concern,
+              ConvenientService::Service::Plugins::CanHaveFallbacks::Concern,
               ConvenientService::Common::Plugins::CachesConstructorArguments::Concern,
               ConvenientService::Common::Plugins::CanBeCopied::Concern,
               ConvenientService::Service::Plugins::CanRecalculateResult::Concern,
@@ -44,9 +47,6 @@ RSpec.describe ConvenientService::Service::Configs::Standard do
               ConvenientService::Service::Plugins::HasJSendResultStatusCheckShortSyntax::Concern,
               ConvenientService::Common::Plugins::HasCallbacks::Concern,
               ConvenientService::Common::Plugins::HasAroundCallbacks::Concern,
-              ConvenientService::Service::Plugins::HasNegatedResult::Concern,
-              ConvenientService::Service::Plugins::HasNegatedJSendResult::Concern,
-              ConvenientService::Service::Plugins::CanHaveFallbacks::Concern,
               ConvenientService::Service::Plugins::HasMermaidFlowchart::Concern
             ]
           end
