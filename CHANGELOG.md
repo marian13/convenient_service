@@ -1,5 +1,74 @@
 # Changelog
 
+## [0.18.0](https://github.com/marian13/convenient_service/compare/v0.17.0...v0.18.0) (2024-03-07)
+
+
+### ⚠ BREAKING CHANGES
+
+* **can_have_steps:** make step not fully compatible with result since it is an independent entity
+
+### Features
+
+* **backtrace_cleaner:** do not clean specs ([11f8f0c](https://github.com/marian13/convenient_service/commit/11f8f0cf33bcf08f1c76b9dedeeeabe934a6efad))
+* **can_be_negated:** introduce Result#negated? ([1362b9b](https://github.com/marian13/convenient_service/commit/1362b9be2bd3a32963b6c02303a146c055a90c9c))
+* **can_connected_steps:** add inspect ([d1318bd](https://github.com/marian13/convenient_service/commit/d1318bd6981b95c819fa7c162047c804086e4969))
+* **can_connected_steps:** introduce group, not_group, and_group, and_not_group, or_group, or_not_group ([c517ef5](https://github.com/marian13/convenient_service/commit/c517ef5f4ee73e3572120810bb5e8766f19a9cfa))
+* **can_have_connected_steps:** add inspect for empty expression ([40496c1](https://github.com/marian13/convenient_service/commit/40496c135012c643f724d1b05bfb36bfd8cc1c19))
+* **can_have_connected_steps:** add StepCollection#inspect ([0523136](https://github.com/marian13/convenient_service/commit/052313621175f8b910b993e2621021641853a466))
+* **can_have_connected_steps:** define exceptions ([f481b33](https://github.com/marian13/convenient_service/commit/f481b33636d61c6c74759e5bcdc409d46a2eeb07))
+* **can_have_connected_steps:** introduce #scalar? ([6ff4b38](https://github.com/marian13/convenient_service/commit/6ff4b38e10fb73b81d8f294704c350551c4006df))
+* **can_have_connected_steps:** introduce and expression ([c654351](https://github.com/marian13/convenient_service/commit/c654351f6c37c8bc3e83816d5aff8cf7362c9ed7))
+* **can_have_connected_steps:** introduce base expression ([d5243a3](https://github.com/marian13/convenient_service/commit/d5243a369563123b79cee21fe93acd70d86951db))
+* **can_have_connected_steps:** introduce empty expression ([222c053](https://github.com/marian13/convenient_service/commit/222c053d8741c01fbf093807b39dbcec4e5dfb75))
+* **can_have_connected_steps:** introduce expression#steps ([7644a44](https://github.com/marian13/convenient_service/commit/7644a44d3116b631beb49cfd2a2e1a72b921efdc))
+* **can_have_connected_steps:** introduce group expression ([7f0ceff](https://github.com/marian13/convenient_service/commit/7f0ceff9f8b1fdb7c3b62581f35934f6654c0b92))
+* **can_have_connected_steps:** introduce middleware ([4d5f409](https://github.com/marian13/convenient_service/commit/4d5f409ada210025c353e9e8c01bf1792649501e))
+* **can_have_connected_steps:** introduce not expression ([583ddc4](https://github.com/marian13/convenient_service/commit/583ddc4f1049b2d7fd27b8d11354f40f2df033b3))
+* **can_have_connected_steps:** introduce not_step ([1336cb1](https://github.com/marian13/convenient_service/commit/1336cb1b128cfa764cc1d9c024a5fa7aadb8270f))
+* **can_have_connected_steps:** introduce or expression ([b4d72a5](https://github.com/marian13/convenient_service/commit/b4d72a5d5d4b7d62ba91df73fbfd55e086c3de10))
+* **can_have_connected_steps:** introduce scaalar ([20bee82](https://github.com/marian13/convenient_service/commit/20bee824e72e6f193e8d1d74e3f7c52b05d95c82))
+* **can_have_connected_steps:** start to use can_have_connected_steps by default ([16fb5e2](https://github.com/marian13/convenient_service/commit/16fb5e247f1bcda1d0eb59b047041914c5863254))
+* **can_have_negated_steps:** introduce and_step, not_step, and_not_step ([fab351c](https://github.com/marian13/convenient_service/commit/fab351c93b8c113012470bccd49b60b0d3386d6b))
+* **can_have_sequential_steps:** add StepCollection#inspect ([8ba096f](https://github.com/marian13/convenient_service/commit/8ba096f6a269cd1a1c55d1f8f843ba6fe6f2b941))
+* **can_have_steps:** allow to override inputs in method steps ([9d5e129](https://github.com/marian13/convenient_service/commit/9d5e1292dbaef933e4616501fe0994fa565bd0a0))
+* **delegate_to:** add failure message for and_return ([eebfcb4](https://github.com/marian13/convenient_service/commit/eebfcb43df970f8c9c653f82061441770e7608c7))
+* **delegate_to:** introduce not reaady for public usage and_return { ... } ([30b1757](https://github.com/marian13/convenient_service/commit/30b17573e8ca3d69b1f0caf1450d9b01d1d2b268))
+* **has_have_steps:** introduce Step#to_s ([19b1958](https://github.com/marian13/convenient_service/commit/19b1958f30fde8af9e246de04f9c779d39b3df17))
+* **has_j_send_result:** raise exception when to_bool called on error ([5cfcefa](https://github.com/marian13/convenient_service/commit/5cfcefa8d93c360fda39b5137b27d3d9beda8cd8))
+* **has_j_send_status_and_attributes:** introduce #to_bool, #to_object, #to_a, #to_h, #to_s for learning purposes ([a3c1782](https://github.com/marian13/convenient_service/commit/a3c1782c3e4d09475a1fa980ae37c83b6864e1e9))
+* **has_negated_result:** introduce #negated_result ([6890cef](https://github.com/marian13/convenient_service/commit/6890ceff47a082f5dee389ce65420275265929f5))
+* **has_negated_result:** introduce initial HasNegatedResult plugin ([8c8fd70](https://github.com/marian13/convenient_service/commit/8c8fd706ce06a1099d4837e8427a8d4b1c6340c3))
+* **has_negated_result:** use HasNegatedResult plugin ([6cb4e48](https://github.com/marian13/convenient_service/commit/6cb4e484d0010560b2d78fe1a6431873d401d251))
+* **has_result_steps:** introduce unsafe nott statuses ([fe845b0](https://github.com/marian13/convenient_service/commit/fe845b07d72d7b4f6d7826853688f508519c660d))
+* **internals:** add cache to class ([b1363c7](https://github.com/marian13/convenient_service/commit/b1363c78f25354458c0a32e5fe5445e5f6e8f3ad))
+* **support:** introduce never reach here ([c974f6b](https://github.com/marian13/convenient_service/commit/c974f6b746c5ef6499eb43d1be04084530918846))
+* **support:** introduce value ([987455b](https://github.com/marian13/convenient_service/commit/987455b1e85932fd11ac23e6d682b1d27b1a6f9d))
+* **utils:** allow to pass custom enumerablesto .find_last ([85892da](https://github.com/marian13/convenient_service/commit/85892da96624a8b5c586c6e361f985f62de8ba78))
+
+
+### Bug Fixes
+
+* **can_have_sequential_steps:** do not rely on automation plugin inside essential plugin ([d9fe475](https://github.com/marian13/convenient_service/commit/d9fe475ed0efd5b44a957a26fa3ead76775b6f57))
+* **can_have_steps:** use extra kwargs while comparing steps ([82fb2b6](https://github.com/marian13/convenient_service/commit/82fb2b6bd43e60dafce94aa8b9dc8da27f8a5395))
+* **gemspec:** use README.md ([299e1cd](https://github.com/marian13/convenient_service/commit/299e1cdb9d8061dc86f87ee9e26a4b2b633701ab))
+* **has_callbacks:** state explicitly that callbacks for class methods are not supported yet ([5f03829](https://github.com/marian13/convenient_service/commit/5f038291fda6ce251d69b03dd2b9e948710fe5bd))
+* **has_instance_proxy:** reraise rescued exception ([fc3f8ee](https://github.com/marian13/convenient_service/commit/fc3f8ee64e826eb145dd01a8c38044631c830eca))
+* **has_jsend_result:** remove outdated exception ([a92fa15](https://github.com/marian13/convenient_service/commit/a92fa159037982d37bdae89144c4471674439c7e))
+* **has_negated_result:** use copy to not lose original result extra kwargs ([80d5f10](https://github.com/marian13/convenient_service/commit/80d5f10d32c5fbab959004e848c9dd77b4c52cc2))
+* **has_negated_result:** use HasNegatedResult only for Standard config, not for minimal or v1 ([b28453c](https://github.com/marian13/convenient_service/commit/b28453ca31de04cd203b7f01eac252ff4ca5b5d6))
+* **support:** compare value by hash in eql? ([a68ee68](https://github.com/marian13/convenient_service/commit/a68ee683cbf043edb3bfa64649d72ed241b933ba))
+* **vscode:** bring back cache_its_value ([e73ad88](https://github.com/marian13/convenient_service/commit/e73ad88ab224a1d9f566af4d15f385e5d4ae3214))
+
+
+### Miscellaneous Chores
+
+* release 0.18.0 ([343176f](https://github.com/marian13/convenient_service/commit/343176fc9b530edde2a134824a72cb1e15b45d4b))
+
+
+### Code Refactoring
+
+* **can_have_steps:** make step not fully compatible with result since it is an independent entity ([5cea95d](https://github.com/marian13/convenient_service/commit/5cea95db9caed37d5d06a28b1202d96de513c3ec))
+
 ## [0.17.0](https://github.com/marian13/convenient_service/compare/v0.16.0...v0.17.0) (2024-01-14)
 
 
