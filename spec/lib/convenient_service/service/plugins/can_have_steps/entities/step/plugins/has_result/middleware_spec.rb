@@ -47,7 +47,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       let(:container) do
         Class.new.tap do |klass|
           klass.class_exec(first_step, middleware) do |first_step, middleware|
-            include ConvenientService::Service::Configs::Minimal
+            include ConvenientService::Service::Configs::Essential
 
             self::Step.class_exec(middleware) do |middleware|
               middlewares :result do
@@ -62,7 +62,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
       let(:first_step) do
         Class.new do
-          include ConvenientService::Service::Configs::Minimal
+          include ConvenientService::Service::Configs::Essential
 
           def result
             success(data: {foo: :bar})

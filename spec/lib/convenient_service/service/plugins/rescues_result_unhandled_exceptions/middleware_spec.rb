@@ -65,7 +65,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
           let(:service_class) do
             Class.new.tap do |klass|
               klass.class_exec(middleware, scope, max_backtrace_size) do |middleware, scope, max_backtrace_size|
-                include ConvenientService::Service::Configs::Minimal
+                include ConvenientService::Service::Configs::Essential
 
                 middlewares :result, scope: scope do
                   use_and_observe middleware.with(max_backtrace_size: max_backtrace_size)
@@ -91,7 +91,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
             let(:service_class) do
               Class.new.tap do |klass|
                 klass.class_exec(middleware, scope) do |middleware, scope|
-                  include ConvenientService::Service::Configs::Minimal
+                  include ConvenientService::Service::Configs::Essential
 
                   middlewares :result, scope: scope do
                     use_and_observe middleware
@@ -117,7 +117,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
             let(:service_class) do
               Class.new.tap do |klass|
                 klass.class_exec(middleware, scope, status, max_backtrace_size) do |middleware, scope, status, max_backtrace_size|
-                  include ConvenientService::Service::Configs::Minimal
+                  include ConvenientService::Service::Configs::Essential
 
                   middlewares :result, scope: scope do
                     use_and_observe middleware.with(status: status, max_backtrace_size: max_backtrace_size)
@@ -175,7 +175,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
             let(:service_class) do
               Class.new.tap do |klass|
                 klass.class_exec(middleware, scope) do |middleware, scope|
-                  include ConvenientService::Service::Configs::Minimal
+                  include ConvenientService::Service::Configs::Essential
 
                   middlewares :result, scope: scope do
                     use_and_observe middleware

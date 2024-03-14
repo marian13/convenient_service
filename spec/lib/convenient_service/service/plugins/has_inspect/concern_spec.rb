@@ -33,7 +33,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasInspect::Concern do
   example_group "instance methods" do
     let(:service_class) do
       Class.new do
-        include ConvenientService::Service::Configs::Minimal
+        include ConvenientService::Service::Configs::Essential
 
         def self.name
           "ImportantService"
@@ -66,7 +66,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasInspect::Concern do
       context "when service class is anonymous" do
         let(:service_class) do
           Class.new do
-            include ConvenientService::Service::Configs::Minimal
+            include ConvenientService::Service::Configs::Essential
           end
         end
 

@@ -13,7 +13,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
   let(:step_service_klass) do
     Class.new do
-      include ConvenientService::Service::Configs::Minimal
+      include ConvenientService::Service::Configs::Essential
 
       def initialize(foo:)
         @foo = foo
@@ -27,7 +27,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
   let(:container) do
     Class.new do
-      include ConvenientService::Service::Configs::Minimal
+      include ConvenientService::Service::Configs::Essential
 
       def result
         success
@@ -391,7 +391,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           context "when `step` has one output" do
             let(:step_service_klass) do
               Class.new do
-                include ConvenientService::Service::Configs::Minimal
+                include ConvenientService::Service::Configs::Essential
 
                 def initialize(foo:)
                   @foo = foo
@@ -440,7 +440,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           context "when `step` has multiple outputs" do
             let(:step_service_klass) do
               Class.new do
-                include ConvenientService::Service::Configs::Minimal
+                include ConvenientService::Service::Configs::Essential
 
                 def initialize(foo:)
                   @foo = foo
@@ -490,7 +490,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         context "when `step` result has failure status" do
           let(:step_service_klass) do
             Class.new do
-              include ConvenientService::Service::Configs::Minimal
+              include ConvenientService::Service::Configs::Essential
 
               def initialize(foo:)
                 @foo = foo
@@ -510,7 +510,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         context "when `step` result has error status" do
           let(:step_service_klass) do
             Class.new do
-              include ConvenientService::Service::Configs::Minimal
+              include ConvenientService::Service::Configs::Essential
 
               def initialize(foo:)
                 @foo = foo
@@ -530,7 +530,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         context "when `out` has `alias`" do
           let(:step_service_klass) do
             Class.new do
-              include ConvenientService::Service::Configs::Minimal
+              include ConvenientService::Service::Configs::Essential
 
               def initialize(foo:)
                 @foo = foo
@@ -672,7 +672,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       context "when step has NO output values" do
         let(:step_service_klass) do
           Class.new do
-            include ConvenientService::Service::Configs::Minimal
+            include ConvenientService::Service::Configs::Essential
 
             def initialize(foo:)
               @foo = foo
@@ -695,7 +695,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       context "when step has one output value" do
         let(:step_service_klass) do
           Class.new do
-            include ConvenientService::Service::Configs::Minimal
+            include ConvenientService::Service::Configs::Essential
 
             def initialize(foo:)
               @foo = foo
@@ -719,7 +719,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       context "when step has multiple output values" do
         let(:step_service_klass) do
           Class.new do
-            include ConvenientService::Service::Configs::Minimal
+            include ConvenientService::Service::Configs::Essential
 
             def initialize(foo:)
               @foo = foo
@@ -749,7 +749,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       context "when step has output with alias" do
         let(:step_service_klass) do
           Class.new do
-            include ConvenientService::Service::Configs::Minimal
+            include ConvenientService::Service::Configs::Essential
 
             def initialize(foo:)
               @foo = foo

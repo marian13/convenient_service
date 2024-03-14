@@ -22,7 +22,7 @@ RSpec.describe ConvenientService::Service::Configs::AwesomePrintInspect do
         end
       end
 
-      specify { expect(service_class).to include_module(ConvenientService::Service::Configs::Minimal) }
+      specify { expect(service_class).to include_module(ConvenientService::Service::Configs::Essential) }
 
       example_group "service" do
         example_group "concerns" do

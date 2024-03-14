@@ -10,8 +10,8 @@ module ConvenientService
       #
       # @note
       #   `use ConvenientService::Plugins::Common::NormalizesEnv::Middleware` should be used in a config that has the first `concern` that introduces a method.
-      #   For example, `:result` is added by `use ConvenientService::Plugins::Service::HasJSendResult::Concern` in `Minimal`.
-      #   That is why the following code is written in the `Minimal` config.
+      #   For example, `:result` is added by `use ConvenientService::Plugins::Service::HasJSendResult::Concern` in `Essential`.
+      #   That is why the following code is written in the `Essential` config.
       #
       #     middlewares :result do
       #       use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
@@ -31,7 +31,7 @@ module ConvenientService
       # @internal
       #   NOTE: Heavily used in specs to test concerns and middlewares in isolation.
       #
-      module Minimal
+      module Essential
         include Support::Concern
 
         ##

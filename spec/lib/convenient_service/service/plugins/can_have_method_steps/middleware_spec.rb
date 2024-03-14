@@ -42,7 +42,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveMethodSteps::Middlewa
       let(:container) do
         Class.new.tap do |klass|
           klass.class_exec(middleware) do |middleware|
-            include ConvenientService::Service::Configs::Minimal
+            include ConvenientService::Service::Configs::Essential
 
             middlewares :step, scope: :class do
               observe middleware

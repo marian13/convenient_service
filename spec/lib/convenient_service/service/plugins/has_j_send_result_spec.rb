@@ -12,7 +12,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult do
     describe ".result?" do
       let(:service) do
         Class.new do
-          include ConvenientService::Service::Configs::Minimal
+          include ConvenientService::Service::Configs::Essential
         end
       end
 

@@ -13,7 +13,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
   let(:container) do
     Class.new.tap do |klass|
       klass.class_exec(first_step_service) do |first_step_service|
-        include ConvenientService::Service::Configs::Minimal
+        include ConvenientService::Service::Configs::Essential
 
         step first_step_service, out: :foo
       end
@@ -24,7 +24,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
 
   let(:first_step_service) do
     Class.new do
-      include ConvenientService::Service::Configs::Minimal
+      include ConvenientService::Service::Configs::Essential
 
       def result
         success(data: {foo: "foo from first step"})
@@ -89,7 +89,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
             let(:container) do
               Class.new.tap do |klass|
                 klass.class_exec(first_step_service, second_step_service) do |first_step_service, second_step_service|
-                  include ConvenientService::Service::Configs::Minimal
+                  include ConvenientService::Service::Configs::Essential
 
                   step first_step_service, out: :foo
 
@@ -100,7 +100,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
 
             let(:second_step_service) do
               Class.new do
-                include ConvenientService::Service::Configs::Minimal
+                include ConvenientService::Service::Configs::Essential
 
                 def result
                   success(data: {foo: "foo from second step"})
@@ -126,7 +126,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
           let(:container) do
             Class.new.tap do |klass|
               klass.class_exec(first_step_service) do |first_step_service|
-                include ConvenientService::Service::Configs::Minimal
+                include ConvenientService::Service::Configs::Essential
 
                 step first_step_service, out: {foo: :bar}
               end

@@ -8,7 +8,7 @@ module ConvenientService
 
         # rubocop:disable Lint/ConstantDefinitionInBlock
         included do
-          include Configs::Minimal
+          include Configs::Essential
 
           ##
           # @internal

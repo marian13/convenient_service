@@ -22,7 +22,7 @@ module ConvenientService
         #
         # rubocop:disable Lint/ConstantDefinitionInBlock
         included do
-          include Configs::Minimal
+          include Configs::Essential
 
           concerns do
             use ConvenientService::Plugins::Common::CachesConstructorArguments::Concern
@@ -67,7 +67,7 @@ module ConvenientService
 
           ##
           # @internal
-          #   NOTE: Check `Minimal` docs to understand why `use ConvenientService::Plugins::Common::NormalizesEnv::Middleware` for `:fallback_failure_result` is used in `Standard`, not in `Minimal` config.
+          #   NOTE: Check `Essential` docs to understand why `use ConvenientService::Plugins::Common::NormalizesEnv::Middleware` for `:fallback_failure_result` is used in `Standard`, not in `Essential` config.
           #
           middlewares :fallback_failure_result do
             use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
@@ -80,7 +80,7 @@ module ConvenientService
 
           ##
           # @internal
-          #   NOTE: Check `Minimal` docs to understand why `use ConvenientService::Plugins::Common::NormalizesEnv::Middleware` for `:fallback_error_result` is used in `Standard`, not in `Minimal` config.
+          #   NOTE: Check `Essential` docs to understand why `use ConvenientService::Plugins::Common::NormalizesEnv::Middleware` for `:fallback_error_result` is used in `Standard`, not in `Essential` config.
           #
           middlewares :fallback_error_result do
             use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
@@ -93,7 +93,7 @@ module ConvenientService
 
           ##
           # @internal
-          #   NOTE: Check `Minimal` docs to understand why `use ConvenientService::Plugins::Common::NormalizesEnv::Middleware` for `:negated_result` is used in `Standard`, not in `Minimal` config.
+          #   NOTE: Check `Essential` docs to understand why `use ConvenientService::Plugins::Common::NormalizesEnv::Middleware` for `:negated_result` is used in `Standard`, not in `Essential` config.
           #
           middlewares :negated_result do
             use ConvenientService::Plugins::Common::NormalizesEnv::Middleware

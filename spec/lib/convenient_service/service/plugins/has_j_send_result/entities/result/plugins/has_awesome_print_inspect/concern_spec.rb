@@ -34,7 +34,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
     describe "#inspect" do
       let(:service) do
         Class.new do
-          include ConvenientService::Service::Configs::Minimal
+          include ConvenientService::Service::Configs::Essential
 
           include ConvenientService::Service::Configs::AwesomePrintInspect
 
@@ -67,7 +67,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       context "when result has data" do
         let(:service) do
           Class.new do
-            include ConvenientService::Service::Configs::Minimal
+            include ConvenientService::Service::Configs::Essential
 
             include ConvenientService::Service::Configs::AwesomePrintInspect
 
@@ -90,7 +90,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         context "when data has multiple keys" do
           let(:service) do
             Class.new do
-              include ConvenientService::Service::Configs::Minimal
+              include ConvenientService::Service::Configs::Essential
 
               include ConvenientService::Service::Configs::AwesomePrintInspect
 
@@ -115,7 +115,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       context "when result has message" do
         let(:service) do
           Class.new do
-            include ConvenientService::Service::Configs::Minimal
+            include ConvenientService::Service::Configs::Essential
 
             include ConvenientService::Service::Configs::AwesomePrintInspect
 
