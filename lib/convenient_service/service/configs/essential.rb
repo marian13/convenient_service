@@ -4,7 +4,7 @@ module ConvenientService
   module Service
     module Configs
       ##
-      # Defines minimal configuration that adds a constructor, JSend-inspired result, steps, basic inspects, and internals to services.
+      # Defines essential configuration that adds a constructor, JSend-inspired result, steps, basic inspects, and internals to services.
       #
       # @note This config is NOT intented for the end-user usage. Use `Standard` instead.
       #
