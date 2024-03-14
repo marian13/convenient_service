@@ -57,6 +57,13 @@ module ConvenientService
             end
 
             ##
+            # @return [Integer]
+            #
+            def size
+              steps.size
+            end
+
+            ##
             # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
             # @raise [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Exceptions::EmptyExpressionHasNoResult]
             #

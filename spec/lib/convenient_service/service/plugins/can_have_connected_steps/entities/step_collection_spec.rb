@@ -98,6 +98,15 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
       end
     end
 
+    describe "#size" do
+      specify do
+        expect { step_collection.size }
+          .to delegate_to(step_collection.steps, :size)
+          .without_arguments
+          .and_return_its_value
+      end
+    end
+
     describe "#create" do
       let(:step_without_index) { step }
       let(:step_with_index) { step.copy(overrides: {kwargs: {index: 0}}) }

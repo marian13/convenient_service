@@ -39,6 +39,13 @@ module ConvenientService
             end
 
             ##
+            # @return [Integer]
+            #
+            def size
+              steps.size
+            end
+
+            ##
             # @api private
             #
             # @param args [Array<Object>]
