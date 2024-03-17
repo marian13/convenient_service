@@ -361,7 +361,7 @@ tasks:
   #
   # TODO: Contribute. Forward `--parse-option LIBERAL_HTML_TAG` to commonmarker.
   #
-  # NOTE: options are specified in the `.yardopts` file.
+  # NOTE: Options are specified in the `.yardopts` file.
   #
   docs:generate:
     cmds:
@@ -376,7 +376,10 @@ tasks:
   docs:generate:open:
     cmds:
       - task: docs:generate
-      - task: docs:open
+      - open docs/index.html
+    preconditions:
+      - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
+        msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
 
   docs:lint:
     cmds:
@@ -385,16 +388,35 @@ tasks:
   docs:missed:
     cmds:
       ##
+      # NOTE: `RUBYLIB` is used to extend Ruby's `$LOAD_PATH`. This way yard treats `./yard` folder as a directory with custom gems.
       # NOTE: Options are taken from `.inch.yml`.
       #
-      - bundle exec inch
+      - RUBYLIB=./yard bundle exec inch
 
-  docs:open:
+  ##
+  # NOTE: `yard` server is running on `localhost:8808` be default.
+  #
+  docs:server:
     cmds:
-      - open docs/index.html
+      ##
+      # NOTE: `RUBYLIB` is used to extend Ruby's `$LOAD_PATH`. This way yard treats `./yard` folder as a directory with custom gems.
+      # NOTE: Options are specified in the `.yardopts` file.
+      #
+      - RUBYLIB=./yard bundle exec yard server
     preconditions:
       - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
         msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
+
+  ##
+  # NOTE: `yard` server is running on `localhost:8808` be default.
+  #
+  docs:server:open:
+    cmds:
+      ##
+      # NOTE: See https://ss64.com/mac/open.html for `open` options.
+      #
+      - open -na "Google Chrome" --args --new-window --incognito "http://localhost:8808"
+      - task: docs:server
 
   ##
   # NOTE: Dev only command.
