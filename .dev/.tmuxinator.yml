@@ -16,7 +16,11 @@ windows:
       root: .
       panes:
         - task docker:bash:ruby_2.7
-        - task docker:bash:ruby_3.0
-        - task docker:bash:jruby_9.4
-        - task docker:bash:truffleruby_22.3
-        - git status
+        - task docker:bash:ruby_3.3
+        - git statuss
+  - api_docs:
+      layout: even-vertical
+      root: .
+      panes:
+        - task docs:server:open
+        - task docs:missed

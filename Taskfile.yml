@@ -458,9 +458,6 @@ tasks:
       - task: rubocop:autocorrect
       - task: docs:lint
 
-  ##
-  # TODO: Add to CI.
-  #
   minitest:
     cmds:
       - bundle exec ruby minitest.rb
