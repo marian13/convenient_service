@@ -17,7 +17,7 @@ windows:
       panes:
         - task docker:bash:ruby_2.7
         - task docker:bash:ruby_3.3
-        - git statuss
+        - git status
   - api_docs:
       layout: even-vertical
       root: .
