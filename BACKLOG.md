@@ -4,11 +4,11 @@
 
 \***Complexity levels:** Easy, Moderate, Hard, Extreme.
 
-\*Different naming conventions for priority and complexity is used intentionally to simplify task lookup.
+\*Different naming conventions for priority and complexity are used intentionally to simplify task lookup.
 
 ----
 
-### Allow to include `Core` only into classes
+### Allow to include `Core` only in classes
 
 | Priority | Complexity | Status | Tags |
 | - | - | - | - |
@@ -16,7 +16,7 @@
 
 **Notes:**
 
-- Place a check inside in the beginning of the `included` block.
+- Place a check at the beginning of the `included` block.
   ```ruby
   included do |entity_class|
     # ...
@@ -29,7 +29,7 @@
 
 ----
 
-### Extract auto commitment behaviour from `Core` into separate concern
+### Extract auto commitment behavior from the `Core` into a separate concern
 
 | Priority | Complexity | Status | Tags |
 | - | - | - | - |
@@ -37,9 +37,9 @@
 
 **Notes:**
 
-- Ensure it can be easily integrated with other extractions.
+- Ensure it can be easily integrated with other extractions, e,g: new middleware backend.
 
-- Probably inheritance is a way to go for now.
+- Probably inheritance is a compromise way to go for now.
 
 ----
 
@@ -53,9 +53,9 @@
 
 - [amazing_print](https://github.com/awesome-print/awesome_print) has the same issues with Ruby 3 as [awesome_print](https://github.com/awesome-print/awesome_print).
 
-- Leave a note about minimal [amazing_print](https://github.com/awesome-print/awesome_print) version that has no issues with Ruby 3 in the user docs.
+- Leave a note about the minimal [amazing_print](https://github.com/awesome-print/awesome_print) version that has no issues with Ruby 3 in the user docs.
 
-- Use `AwesomePrintInspect` as a example.
+- Use `AwesomePrintInspect` as an example.
 
   ```ruby
   module ConvenientService
@@ -95,6 +95,65 @@
       end
     end
   end
+  ```
 
 ----
 
+### Convert the `Specification` module into a singleton class
+
+| Priority | Complexity | Status | Tags |
+| - | - | - | - |
+| Low | Low | TODO | specification, gemspec, singleton |
+
+- That is required to have a simple way to test the `gemspec` by RSpec.
+
+  For example, the `spec.files` config is very error-prone, but it has no reliable specs for now.
+
+  ```ruby
+  module ConvenientService
+    class Specification
+      include ::Singleton
+
+      # ...
+
+      def to_gemspec
+        # ...
+      end
+    end
+  end
+  ```
+
+---
+
+### Respect service last step `out` aliases
+
+| Priority | Complexity | Status | Tags |
+| - | - | - | - |
+| High | Moderate | TODO | last-step, out-alias |
+
+- Consider the following services:
+
+  ```ruby
+  class LastStep
+    include ConvenientService::Standard::Config
+
+    def result
+      success(foo: "foo")
+    end
+  end
+
+  class ServiceWithSteps
+    include ConvenientService::Standard::Config
+
+    step LastStep,
+      out: {foo: :bar}
+  end
+  ```
+
+- `ServiceWithSteps.result` returns `LastStep.result`, but it ignores `out` alias.
+
+  In other words, `ServiceWithSteps.result.data[:bar]` raises an exception.
+
+  That is not intuitive.
+
+----
