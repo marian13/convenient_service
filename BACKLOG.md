@@ -156,4 +156,22 @@
 
   That is not intuitive.
 
-----
+---
+
+### Add Dockerfiles for TruffleRuby 23.0 and 24.0
+
+| Priority | Complexity | Status | Tags |
+| - | - | - | - |
+| Low | Moderate | TODO | truffle-ruby, dockerfile |
+
+**Notes:**
+
+- [TruffleRuby 24 Docker image](https://github.com/graalvm/container/pkgs/container/truffleruby-community/193001493?tag=24.0.0).
+
+- [TruffleRuby 23 Docker image](https://github.com/graalvm/container/pkgs/container/truffleruby-community/103900821?tag=23.0.0).
+
+- [List of available TruffleRuby Docker images](https://github.com/graalvm/container/pkgs/container/truffleruby-community/versions?filters%5Bversion_type%5D=tagged).
+
+- Consider to add [TruffleRuby to CI](https://github.com/marketplace/actions/setup-ruby-jruby-and-truffleruby).
+
+---
