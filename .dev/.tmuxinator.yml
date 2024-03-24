@@ -15,8 +15,8 @@ windows:
       layout: even-vertical
       root: .
       panes:
-        - task docker:bash:ruby_2.7
-        - task docker:bash:ruby_3.3
+        - task docker:bash ENGINE=ruby VERSION=2.7
+        - task docker:bash ENGINE=ruby VERSION=3.3
         - git status
   - api_docs:
       layout: even-vertical

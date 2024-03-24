@@ -117,7 +117,7 @@ jobs:
           #
           # IMPORTANT: TruffleRuby 22.3 is currently disabled since too many specs are failing due to CRuby uncompatible code.
           #
-          # NOTE: Use `task docker:bash:truffleruby_22.3` and then `task rspec` to reproduce them locally.
+          # NOTE: Use `task docker:bash ENGINE=truffleruby VERSION=22.3` and then `task rspec` to reproduce them locally.
           #
           # TODO: Make ConvenientService TruffleRuby 22.3 compatible.
           #
