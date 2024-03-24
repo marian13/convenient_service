@@ -11,13 +11,13 @@
 #   cd convenient_service
 #   cp Gemfile Gemfile.jruby-9.4
 #   docker build . -f docker/jruby-9.4/Dockerfile -t convenient_service:jruby-9.4
-#   # or `task docker:build:jruby_9.4`
+#   # or `task docker:build ENGINE=jruby VERSION=9.4`
 #
 # NOTE: A command to run bash in container.
 #
 #   cd convenient_service
 #   docker run --rm -it -v $(pwd):/gem convenient_service:jruby-9.4 bash
-#   # or `task docker:bash:jruby_9.4`
+#   # or `task docker:bash ENGINE=jruby VERSION=9.4`
 #
 # NOTE: If there are no memory, performance, or cost constraints, prefer to use as standard Linux distribution as it is possible.
 # In a general case, you simply won't have enough time to resolve all the "quirks" of more specific distributions if you are an application developer.

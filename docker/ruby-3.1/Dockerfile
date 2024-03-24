@@ -1,35 +1,35 @@
 ##
-# Ruby 3.0 with Node.js 16.x.
+# Ruby 3.1 with Node.js 16.x.
 #
 # NOTE: Linted by hadolint.
 #
-#   docker run --rm -i ghcr.io/hadolint/hadolint < docker/3.0/Dockerfile
+#   docker run --rm -i ghcr.io/hadolint/hadolint < docker/ruby-3.1/Dockerfile
 #
 # NOTE: A command to build image.
 #
 #   cd convenient_service
-#   cp Gemfile Gemfile.3.0
-#   docker build . -f docker/3.0/Dockerfile -t convenient_service:3.0
-#   # or `task docker:build:ruby_3.0`
+#   cp Gemfile Gemfile.ruby-3.1
+#   docker build . -f docker/ruby-3.1/Dockerfile -t convenient_service:ruby-3.1
+#   # or `task docker:build ENGINE=ruby VERSION=3.1`
 #
 # NOTE: A command to run bash in container.
 #
 #   cd convenient_service
-#   docker run --rm -it -v $(pwd):/gem convenient_service:3.0 bash
-#   # or `task docker:bash:ruby_3.0`
+#   docker run --rm -it -v $(pwd):/gem convenient_service:ruby-3.1 bash
+#   # or `task docker:bash ENGINE=ruby VERSION=3.1`
 #
 # NOTE: If there are no memory, performance, or cost constraints, prefer to use as standard Linux distribution as it is possible.
 # In a general case, you simply won't have enough time to resolve all the "quirks" of more specific distributions if you are an application developer.
 # That is why a `slim` version is used instead of `alpine`.
 # Also `slim` is more similar to Ubuntu.
-# - https://github.com/timbru31/docker-ruby-node/tree/master/3.0/16
+# - https://github.com/timbru31/docker-ruby-node/tree/master/ruby-3.1/16
 # - https://medium.com/swlh/alpine-slim-stretch-buster-jessie-bullseye-bookworm-what-are-the-differences-in-docker-62171ed4531d
 # - https://hub.docker.com/r/timbru31/ruby-node/tags
 #
 # NOTE: Gallium means Node.js 16.x.
 # https://github.com/nodejs/Release
 #
-FROM timbru31/ruby-node:3.0-slim-gallium
+FROM timbru31/ruby-node:3.1-slim-gallium
 
 ##
 # NOTE: `bundle install` dependencies.
@@ -52,7 +52,7 @@ COPY . /gem
 # - https://docs.docker.com/engine/reference/builder/#env
 # - https://stackoverflow.com/questions/48863711/is-it-possible-to-override-gemfile-for-local-development
 #
-ENV BUNDLE_GEMFILE=Gemfile.3.0
+ENV BUNDLE_GEMFILE=Gemfile.ruby-3.1
 
 RUN bundle install
 
