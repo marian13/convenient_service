@@ -146,19 +146,19 @@ jobs:
       - name: Install Task (task runner)
         uses: arduino/setup-task@v1
       - name: Run RSpec without appraisals
-        run: task rspec:standard
+        run: task rspec
       - name: Install dependencies for appraisals
         run: task deps:install
       - name: Run RSpec with Rails 7.0
-        run: task rspec:rails_7.0
+        run: APPRAISAL=rails_7.0 task rspec
       - name: Run RSpec with Rails 6.1
-        run: task rspec:rails_6.1
+        run: APPRAISAL=rails_6.1 task rspec
       - name: Run RSpec with Rails 6.0
-        run: task rspec:rails_6.0
+        run: APPRAISAL=rails_6.0 task rspec
       - name: Run RSpec with Rails 5.2
-        run: task rspec:rails_5.2
+        run: APPRAISAL=rails_5.2 task rspec
       - name: Run RSpec with Dry
-        run: task rspec:dry
+        run: APPRAISAL=dry task rspec
       - name: Run Minitest
         run: task minitest
       ##

@@ -97,19 +97,6 @@ tasks:
     requires:
       vars: [ENGINE, VERSION]
 
-  docker:build:all:
-    cmds:
-      - task: docker:build ENGINE=ruby VERSION=2.7
-      - task: docker:build ENGINE=ruby VERSION=3.0
-      - task: docker:build ENGINE=ruby VERSION=3.1
-      - task: docker:build ENGINE=ruby VERSION=3.2
-      - task: docker:build ENGINE=ruby VERSION=3.3
-      - task: docker:build ENGINE=jruby VERSION=9.4
-      - task: docker:build ENGINE=truffleruby VERSION=22.3
-    preconditions:
-      - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
-        msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
-
   ##
   # NOTE: Usage examples.
   #   task docker:build ENGINE=ruby VERSION=2.7
@@ -146,6 +133,19 @@ tasks:
         msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
     requires:
       vars: [ENGINE, VERSION]
+
+  docker:build:all:
+    cmds:
+      - task: docker:build ENGINE=ruby VERSION=2.7
+      - task: docker:build ENGINE=ruby VERSION=3.0
+      - task: docker:build ENGINE=ruby VERSION=3.1
+      - task: docker:build ENGINE=ruby VERSION=3.2
+      - task: docker:build ENGINE=ruby VERSION=3.3
+      - task: docker:build ENGINE=jruby VERSION=9.4
+      - task: docker:build ENGINE=truffleruby VERSION=22.3
+    preconditions:
+      - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
+        msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
 
   ##
   # NOTE: Dev only command.
@@ -303,136 +303,57 @@ tasks:
     cmds:
       - gem release
 
+  ##
+  # NOTE: Usage examples.
+  #   task rspec
+  #   APPRAISAL=all task rspec
+  #   APPRAISAL=dry task rspec
+  #   APPRAISAL=rails_5.2 task rspec
+  #   APPRAISAL=rails_6.0 task rspec
+  #   APPRAISAL=rails_6.1 task rspec
+  #   APPRAISAL=rails_7.0 task rspec
+  #
+  # NOTE: It is also possible to run specs only for git staged files.
+  #   APPRAISAL=rails_7.0 STAGED=true task rspec
+  #
+  # NOTE: git staged docs.
+  # - https://githowto.com/staging_and_committing
+  #
+  # NOTE: Setting `APPRAISAL` after `task rspec` does NOT work. Consider to open an issue.
+  # NOTE: `APPRAISAL_COMMAND` must be kept in sync with `Appraisals` file.
+  #
   rspec:
     cmds:
-      - task: rspec:standard
-      - task: rspec:rails_7.0
-      - task: rspec:rails_6.1
-      - task: rspec:rails_6.0
-      - task: rspec:rails_5.2
-      - task: rspec:dry
-
-  ##
-  # NOTE: Run rspec only for git staged spec files.
-  # https://githowto.com/staging_and_committing
-  #
-  rspec:staged:
-    cmds:
-      - task: rspec:standard:staged
-      - task: rspec:rails_5.2:staged
-      - task: rspec:rails_6.0:staged
-      - task: rspec:rails_6.1:staged
-      - task: rspec:rails_7.0:staged
-      - task: rspec:dry:staged
-
-  ##
-  # NOTE: `APPRAISAL_NAME` should be kept in sync with `Appraisals` file.
-  #
-  rspec:dry:
-    cmds:
-      - bundle exec appraisal {{.APPRAISAL_NAME}} rspec --format progress --require dry_helper {{.GIT_STAGED_SPEC_FILES}} {{.CLI_ARGS}}
+      - bundle exec {{.APPRAISAL_PREFIX}} rspec --format progress {{.REQUIRE_SUFFIX}} {{.GIT_STAGED_SPEC_FILES}} {{.CLI_ARGS}}
     vars:
-      APPRAISAL_NAME:
-        sh: ruby -e 'print [::RUBY_ENGINE, ::RUBY_VERSION, "dry"].join("_")'
+      APPRAISAL_PREFIX:
+        sh: ruby -e 'puts "appraisal" + " " + RUBY_ENGINE + "_" + RUBY_VERSION + "_" + ENV["APPRAISAL"] unless ENV["APPRAISAL"].to_s.empty?'
+      REQUIRE_SUFFIX:
+        sh: ruby -e 'puts case ENV["APPRAISAL"] when /rails/ then "--require rails_helper" when /dry/ then "--require dry_helper" end'
+      GIT_STAGED_SPEC_FILES:
+        ##
+        # NOTE: `task: git:staged:specs` does NOT work.
+        #
+        sh: ruby -e 'puts `task git:staged:specs --silent` if ENV["STAGED"] == "true"'
 
-  rspec:dry:staged:
-    - task: rspec:dry
-      vars:
-        GIT_STAGED_SPEC_FILES:
-          ##
-          # NOTE: `task: git:staged:specs` does NOT work.
-          #
-          sh: task git:staged:specs --silent
-
-  ##
-  # NOTE: `APPRAISAL_NAME` should be kept in sync with `Appraisals` file.
-  #
-  rspec:rails_5.2:
+  rspec:all:
     cmds:
-      - bundle exec appraisal {{.APPRAISAL_NAME}} rspec --format progress --require rails_helper {{.GIT_STAGED_SPEC_FILES}} {{.CLI_ARGS}}
-    vars:
-      APPRAISAL_NAME:
-        sh: ruby -e 'print [::RUBY_ENGINE, ::RUBY_VERSION, "rails_5.2"].join("_")'
-
-  rspec:rails_5.2:staged:
-    - task: rspec:rails_5.2
-      vars:
-        GIT_STAGED_SPEC_FILES:
-          ##
-          # NOTE: `task: git:staged:specs` does NOT work.
-          #
-          sh: task git:staged:specs --silent
-
-  ##
-  # NOTE: `APPRAISAL_NAME` should be kept in sync with `Appraisals` file.
-  #
-  rspec:rails_6.0:
-    cmds:
-      - bundle exec appraisal {{.APPRAISAL_NAME}} rspec --format progress --require rails_helper {{.GIT_STAGED_SPEC_FILES}} {{.CLI_ARGS}}
-    vars:
-      APPRAISAL_NAME:
-        sh: ruby -e 'print [::RUBY_ENGINE, ::RUBY_VERSION, "rails_6.0"].join("_")'
-
-  rspec:rails_6.0:staged:
-    - task: rspec:rails_6.0
-      vars:
-        GIT_STAGED_SPEC_FILES:
-          ##
-          # NOTE: `task: git:staged:specs` does NOT work.
-          #
-          sh: task git:staged:specs --silent
-
-  ##
-  # NOTE: `APPRAISAL_NAME` should be kept in sync with `Appraisals` file.
-  #
-  rspec:rails_6.1:
-    cmds:
-      - bundle exec appraisal {{.APPRAISAL_NAME}} rspec --format progress --require rails_helper {{.GIT_STAGED_SPEC_FILES}} {{.CLI_ARGS}}
-    vars:
-      APPRAISAL_NAME:
-        sh: ruby -e 'print [::RUBY_ENGINE, ::RUBY_VERSION, "rails_6.1"].join("_")'
-
-  rspec:rails_6.1:staged:
-    - task: rspec:rails_6.1
-      vars:
-        GIT_STAGED_SPEC_FILES:
-          ##
-          # NOTE: `task: git:staged:specs` does NOT work.
-          #
-          sh: task git:staged:specs --silent
-
-  ##
-  # NOTE: `APPRAISAL_NAME` should be kept in sync with `Appraisals` file.
-  #
-  rspec:rails_7.0:
-    cmds:
-      - bundle exec appraisal {{.APPRAISAL_NAME}} rspec --format progress --require rails_helper {{.GIT_STAGED_SPEC_FILES}} {{.CLI_ARGS}}
-    vars:
-      APPRAISAL_NAME:
-        sh: ruby -e 'print [::RUBY_ENGINE, ::RUBY_VERSION, "rails_7.0"].join("_")'
-
-  rspec:rails_7.0:staged:
-    - task: rspec:rails_7.0
-      vars:
-        GIT_STAGED_SPEC_FILES:
-          ##
-          # NOTE: `task: git:staged:specs` does NOT work.
-          #
-          sh: task git:staged:specs --silent
-
-  rspec:standard:
-    cmds:
-      - bundle exec rspec --format progress {{.GIT_STAGED_SPEC_FILES}} {{.CLI_ARGS}}
-
-  rspec:standard:staged:
-    cmds:
-      - task: rspec:standard
+      - task: rspec
+      - task: rspec
         vars:
-          GIT_STAGED_SPEC_FILES:
-            ##
-            # NOTE: `task: git:staged:specs` does NOT work.
-            #
-            sh: task git:staged:specs --silent
+          APPRAISAL: rails_7.0
+      - task: rspec
+        vars:
+          APPRAISAL: rails_6.1
+      - task: rspec
+        vars:
+          APPRAISAL: rails_6.0
+      - task: rspec
+        vars:
+          APPRAISAL: rails_5.2
+      - task: rspec
+        vars:
+          APPRAISAL: dry
 
   rubocop:
     cmds:
