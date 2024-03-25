@@ -11,7 +11,7 @@
 #   cd convenient_service
 #   cp Gemfile Gemfile.jruby-9.4
 #   docker build . -f docker/jruby-9.4/Dockerfile -t convenient_service:jruby-9.4
-#   # or `task docker:build ENGINE=jruby RUBY_VERSION=9.4`
+#   # or `ENGINE=jruby RUBY_VERSION=9.4 task docker:build`
 #
 # NOTE: A command to run bash in container.
 #

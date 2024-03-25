@@ -100,13 +100,13 @@ tasks:
 
   ##
   # NOTE: Usage examples.
-  #   task docker:build RUBY_ENGINE=ruby RUBY_VERSION=2.7
-  #   task docker:build RUBY_ENGINE=ruby RUBY_VERSION=3.0
-  #   task docker:build RUBY_ENGINE=ruby RUBY_VERSION=3.1
-  #   task docker:build RUBY_ENGINE=ruby RUBY_VERSION=3.2
-  #   task docker:build RUBY_ENGINE=ruby RUBY_VERSION=3.3
-  #   task docker:build RUBY_ENGINE=jruby RUBY_VERSION=9.4
-  #   task docker:build RUBY_ENGINE=truffleruby RUBY_VERSION=22.3
+  #   RUBY_ENGINE=ruby RUBY_VERSION=2.7 task docker:build
+  #   RUBY_ENGINE=ruby RUBY_VERSION=3.0 task docker:build
+  #   RUBY_ENGINE=ruby RUBY_VERSION=3.1 task docker:build
+  #   RUBY_ENGINE=ruby RUBY_VERSION=3.2 task docker:build
+  #   RUBY_ENGINE=ruby RUBY_VERSION=3.3 task docker:build
+  #   RUBY_ENGINE=jruby RUBY_VERSION=9.4 task docker:build
+  #   RUBY_ENGINE=truffleruby RUBY_VERSION=22.3 task docker:build
   #
   # NOTE: JRuby 9.4 aims CRuby 3.1 compatibility.
   # - https://www.jruby.org/download

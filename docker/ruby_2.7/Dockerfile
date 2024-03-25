@@ -10,7 +10,7 @@
 #   cd convenient_service
 #   cp Gemfile Gemfile.ruby-2.7
 #   docker build . -f docker/ruby-2.7/Dockerfile -t convenient_service:ruby-2.7
-#   # or `task docker:build RUBY_ENGINE=ruby RUBY_VERSION=2.7`
+#   # or `RUBY_ENGINE=ruby RUBY_VERSION=2.7 task docker:build`
 #
 # NOTE: A command to run bash in container.
 #

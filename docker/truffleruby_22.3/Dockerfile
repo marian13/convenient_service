@@ -12,7 +12,7 @@
 #   cd convenient_service
 #   cp Gemfile Gemfile.truffleruby-22.3
 #   docker build . -f docker/truffleruby-22.3/Dockerfile -t convenient_service:truffleruby-22.3
-#   # or `task docker:build RUBY_ENGINE=truffleruby RUBY_VERSION=22.3`
+#   # or `RUBY_ENGINE=truffleruby RUBY_VERSION=22.3 task docker:build`
 #
 # NOTE: A command to run bash in container.
 #

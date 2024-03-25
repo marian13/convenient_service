@@ -10,7 +10,7 @@
 #   cd convenient_service
 #   cp Gemfile Gemfile.ruby-3.0
 #   docker build . -f docker/ruby-3.0/Dockerfile -t convenient_service:ruby-3.0
-#   # or `task docker:build RUBY_ENGINE=ruby RUBY_VERSION=3.0`
+#   # or `RUBY_ENGINE=ruby RUBY_VERSION=3.0 task docker:build`
 #
 # NOTE: A command to run bash in container.
 #
