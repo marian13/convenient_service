@@ -344,25 +344,21 @@ tasks:
       GIT_STAGED_RSPEC_FILES:
         sh: ruby -e 'puts `task git:staged:rspec --silent` if ENV["STAGED"] == "true"'
 
+  ##
+  # NOTE: `task rspec APPRAISAL=rails_6.1` does NOT work.
+  # NOTE: Also does NOT work.
+  #   - task: rspec
+  #     vars
+  #       APPRAISAL: rails_7.0
+  #
   rspec:all:
     cmds:
       - task: rspec
-      - task: rspec
-        vars:
-          APPRAISAL: rails_7.0
-      - task: rspec
-        vars:
-          APPRAISAL: rails_6.1
-      - task: rspec
-        vars:
-          APPRAISAL: rails_6.0
-      - task: rspec
-        vars:
-          APPRAISAL: rails_5.2
-      - task: rspec
-        vars:
-          APPRAISAL: dry
-
+      - APPRAISAL=rails_7.0 task rspec
+      - APPRAISAL=dry task rspec
+      - APPRAISAL=rails_6.1 task rspec
+      - APPRAISAL=rails_6.0 task rspec
+      - APPRAISAL=rails_5.2 task rspec
   ##
   # NOTE: Usage examples.
   #   task rubocop
