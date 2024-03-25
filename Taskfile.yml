@@ -66,7 +66,7 @@ tasks:
   deps:clean:
     cmds:
       - "bundle exec rake confirm \"This task removes Gemfile*.lock and gemfiles/**/*. Are you sure?\""
-      - rm Gemfile*.lock
+      - rm Gemfile*.
       - rm -rf gemfiles
 
   ##
