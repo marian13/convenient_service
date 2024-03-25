@@ -60,10 +60,6 @@ COPY . /gem
 #
 ENV BUNDLE_GEMFILE=Gemfile.truffleruby-22.3
 
-RUN bundle install
-
-RUN bundle exec appraisal install
-
 ##
 # NOTE: Installs `task`.
 # https://taskfile.dev/installation/#install-script
@@ -71,6 +67,8 @@ RUN bundle exec appraisal install
 # NOTE: `task` is installed into `~/bin`. That is why `-b /bin` is used. See `echo ${PATH}` to debug.
 #
 RUN sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b /bin
+
+RUN task deps:install
 
 ##
 # NOTE: Intalls Node.js 16.x and `yarn`.
