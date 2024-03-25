@@ -129,6 +129,10 @@ tasks:
       - rm Gemfile.{{.RUBY_ENGINE}}_{{.RUBY_VERSION}}.lock 2> /dev/null || true
       - cp Gemfile Gemfile.{{.RUBY_ENGINE}}_{{.RUBY_VERSION}}
       - docker build . -f docker/{{.RUBY_ENGINE}}_{{.RUBY_VERSION}}/Dockerfile -t convenient_service:{{.RUBY_ENGINE}}_{{.RUBY_VERSION}}
+      ##
+      # NOTE: Gemfiles created during the build time are NOT persisted. The following commands persist them by triggering `bundle install` in the run time.
+      #
+      - docker run --rm -it -v $(pwd):/gem convenient_service:{{.RUBY_ENGINE}}_{{.RUBY_VERSION}} bash -c "task deps:install"
     preconditions:
       - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
         msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
