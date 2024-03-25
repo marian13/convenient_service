@@ -10,13 +10,13 @@
 #   cd convenient_service
 #   cp Gemfile Gemfile.ruby-2.7
 #   docker build . -f docker/ruby-2.7/Dockerfile -t convenient_service:ruby-2.7
-#   # or `task docker:build ENGINE=ruby VERSION=2.7`
+#   # or `task docker:build RUBY_ENGINE=ruby RUBY_VERSION=2.7`
 #
 # NOTE: A command to run bash in container.
 #
 #   cd convenient_service
 #   docker run --rm -it -v $(pwd):/gem convenient_service:ruby-2.7 bash
-#   # or `task docker:bash ENGINE=ruby VERSION=2.7`
+#   # or `task docker:bash RUBY_ENGINE=ruby RUBY_VERSION=2.7`
 #
 # NOTE: If there are no memory, performance, or cost constraints, prefer to use as standard Linux distribution as it is possible.
 # In a general case, you simply won't have enough time to resolve all the "quirks" of more specific distributions if you are an application developer.

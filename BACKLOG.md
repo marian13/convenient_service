@@ -188,13 +188,13 @@ The following command (`task docker:build`) works in both cases.
 With leading ENV variables.
 
 ```bash
-ENGINE=ruby VERSION=2.7 task docker:build
+RUBY_ENGINE=ruby RUBY_VERSION=2.7 task docker:build
 ```
 
 With trailing ENV variables.
 
 ```bash
-task docker:build ENGINE=ruby VERSION=2.7
+task docker:build RUBY_ENGINE=ruby RUBY_VERSION=2.7
 ```
 
 But at the same time`task rspec` works only with leading ENV variables.

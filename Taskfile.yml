@@ -70,13 +70,13 @@ tasks:
 
   ##
   # NOTE: Usage examples.
-  #   task docker:bash ENGINE=ruby VERSION=2.7
-  #   task docker:bash ENGINE=ruby VERSION=3.0
-  #   task docker:bash ENGINE=ruby VERSION=3.1
-  #   task docker:bash ENGINE=ruby VERSION=3.2
-  #   task docker:bash ENGINE=ruby VERSION=3.3
-  #   task docker:bash ENGINE=jruby VERSION=9.4
-  #   task docker:bash ENGINE=truffleruby VERSION=22.3
+  #   task docker:bash RUBY_ENGINE=ruby RUBY_VERSION=2.7
+  #   task docker:bash RUBY_ENGINE=ruby RUBY_VERSION=3.0
+  #   task docker:bash RUBY_ENGINE=ruby RUBY_VERSION=3.1
+  #   task docker:bash RUBY_ENGINE=ruby RUBY_VERSION=3.2
+  #   task docker:bash RUBY_ENGINE=ruby RUBY_VERSION=3.3
+  #   task docker:bash RUBY_ENGINE=jruby RUBY_VERSION=9.4
+  #   task docker:bash RUBY_ENGINE=truffleruby RUBY_VERSION=22.3
   #
   # NOTE: JRuby 9.4 aims CRuby 3.1 compatibility.
   # - https://www.jruby.org/download
@@ -84,28 +84,28 @@ tasks:
   # NOTE: TruffleRuby 22.3 aims CRuby 3.1 compatibility.
   # - https://github.com/oracle/truffleruby/blob/master/doc/user/compatibility.md
   #
-  # NOTE: Naming `ENGINE` is inspired by `ruby_engine` gem.
+  # NOTE: Naming `RUBY_ENGINE` is inspired by `ruby_engine` gem.
   # - https://github.com/janlelis/ruby_engine
   #
   docker:bash:
     cmds:
-      - docker run --rm -it -v $(pwd):/gem convenient_service:{{.ENGINE}}-{{.VERSION}} bash
+      - docker run --rm -it -v $(pwd):/gem convenient_service:{{.RUBY_ENGINE}}_{{.RUBY_VERSION}} bash
     interactive: true
     preconditions:
       - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
         msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
     requires:
-      vars: [ENGINE, VERSION]
+      vars: [RUBY_ENGINE, RUBY_VERSION]
 
   ##
   # NOTE: Usage examples.
-  #   task docker:build ENGINE=ruby VERSION=2.7
-  #   task docker:build ENGINE=ruby VERSION=3.0
-  #   task docker:build ENGINE=ruby VERSION=3.1
-  #   task docker:build ENGINE=ruby VERSION=3.2
-  #   task docker:build ENGINE=ruby VERSION=3.3
-  #   task docker:build ENGINE=jruby VERSION=9.4
-  #   task docker:build ENGINE=truffleruby VERSION=22.3
+  #   task docker:build RUBY_ENGINE=ruby RUBY_VERSION=2.7
+  #   task docker:build RUBY_ENGINE=ruby RUBY_VERSION=3.0
+  #   task docker:build RUBY_ENGINE=ruby RUBY_VERSION=3.1
+  #   task docker:build RUBY_ENGINE=ruby RUBY_VERSION=3.2
+  #   task docker:build RUBY_ENGINE=ruby RUBY_VERSION=3.3
+  #   task docker:build RUBY_ENGINE=jruby RUBY_VERSION=9.4
+  #   task docker:build RUBY_ENGINE=truffleruby RUBY_VERSION=22.3
   #
   # NOTE: JRuby 9.4 aims CRuby 3.1 compatibility.
   # - https://www.jruby.org/download
@@ -113,7 +113,7 @@ tasks:
   # NOTE: TruffleRuby 22.3 aims CRuby 3.1 compatibility.
   # - https://github.com/oracle/truffleruby/blob/master/doc/user/compatibility.md
   #
-  # NOTE: Naming `ENGINE` is inspired by `ruby_engine` gem.
+  # NOTE: Naming `RUBY_ENGINE` is inspired by `ruby_engine` gem.
   # - https://github.com/janlelis/ruby_engine
   #
   # NOTE: Meaning of `|| 2> /dev/null`.
@@ -124,25 +124,25 @@ tasks:
   #
   docker:build:
     cmds:
-      - rm Gemfile.{{.ENGINE}}-{{.VERSION}} 2> /dev/null || true
-      - rm Gemfile.{{.ENGINE}}-{{.VERSION}}.lock 2> /dev/null || true
-      - cp Gemfile Gemfile.{{.ENGINE}}-{{.VERSION}}
-      - docker build . -f docker/{{.ENGINE}}-{{.VERSION}}/Dockerfile -t convenient_service:{{.ENGINE}}-{{.VERSION}}
+      - rm Gemfile.{{.RUBY_ENGINE}}_{{.RUBY_VERSION}} 2> /dev/null || true
+      - rm Gemfile.{{.RUBY_ENGINE}}_{{.RUBY_VERSION}}.lock 2> /dev/null || true
+      - cp Gemfile Gemfile.{{.RUBY_ENGINE}}_{{.RUBY_VERSION}}
+      - docker build . -f docker/{{.RUBY_ENGINE}}_{{.RUBY_VERSION}}/Dockerfile -t convenient_service:{{.RUBY_ENGINE}}_{{.RUBY_VERSION}}
     preconditions:
       - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
         msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
     requires:
-      vars: [ENGINE, VERSION]
+      vars: [RUBY_ENGINE, RUBY_VERSION]
 
   docker:build:all:
     cmds:
-      - task: docker:build ENGINE=ruby VERSION=2.7
-      - task: docker:build ENGINE=ruby VERSION=3.0
-      - task: docker:build ENGINE=ruby VERSION=3.1
-      - task: docker:build ENGINE=ruby VERSION=3.2
-      - task: docker:build ENGINE=ruby VERSION=3.3
-      - task: docker:build ENGINE=jruby VERSION=9.4
-      - task: docker:build ENGINE=truffleruby VERSION=22.3
+      - task: docker:build RUBY_ENGINE=ruby RUBY_VERSION=2.7
+      - task: docker:build RUBY_ENGINE=ruby RUBY_VERSION=3.0
+      - task: docker:build RUBY_ENGINE=ruby RUBY_VERSION=3.1
+      - task: docker:build RUBY_ENGINE=ruby RUBY_VERSION=3.2
+      - task: docker:build RUBY_ENGINE=ruby RUBY_VERSION=3.3
+      - task: docker:build RUBY_ENGINE=jruby RUBY_VERSION=9.4
+      - task: docker:build RUBY_ENGINE=truffleruby RUBY_VERSION=22.3
     preconditions:
       - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
         msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
