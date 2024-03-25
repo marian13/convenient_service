@@ -239,7 +239,7 @@ tasks:
   #
   git:staged:minitest:
     cmds:
-      - git diff --cached --name-only --diff-filter=d "spec/**"
+      - git diff --cached --name-only --diff-filter=d "test/**"
 
   ##
   # NOTE: A trailing "/**" matches everything inside.
@@ -264,14 +264,14 @@ tasks:
     cmds:
       - task: deps:install
 
+  ##
+  # NOTE: Usage examples.
+  #   task lint
+  #   AUTOCORRECT=true task lint
+  #
   lint:
     cmds:
       - task: rubocop
-      - task: docs:lint
-
-  lint:autocorrect:
-    cmds:
-      - task: rubocop:autocorrect
       - task: docs:lint
 
   minitest:
@@ -325,7 +325,7 @@ tasks:
   #   APPRAISAL=rails_7.0 task rspec
   #
   # NOTE: It is also possible to run specs only for git staged files.
-  #   APPRAISAL=rails_7.0 STAGED=true task rspec
+  #   STAGED=true APPRAISAL=rails_7.0 task rspec
   #
   # NOTE: git staged docs.
   # - https://githowto.com/staging_and_committing
@@ -363,17 +363,21 @@ tasks:
         vars:
           APPRAISAL: dry
 
+  ##
+  # NOTE: Usage examples.
+  #   task rubocop
+  #   AUTOCORRECT=true task rubocop
+  #
   rubocop:
     cmds:
-      - bundle exec rubocop --config .rubocop.yml {{.CLI_ARGS}}
-
-  rubocop:autocorrect:
-    cmds:
-      - bundle exec rubocop --config .rubocop.yml -A {{.CLI_ARGS}}
+      - bundle exec rubocop --config .rubocop.yml {{.AUTOCORRECT_SUFFIX}} {{.CLI_ARGS}}
+    vars:
+      AUTOCORRECT_SUFFIX:
+        sh: ruby -e 'puts "-A" if ENV["AUTOCORRECT"] == "true"'
 
   test:
     cmds:
-      - task: rspec
+      - task: rspec:all
       - task: minitest
 
   ##

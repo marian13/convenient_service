@@ -1,8 +1,8 @@
 # Backlog
 
-\***Priority levels:** Low, Medium, High, Critical.
+\***Priority levels:** Low, Medium, High, Critical, Unknown.
 
-\***Complexity levels:** Easy, Moderate, Hard, Extreme.
+\***Complexity levels:** Easy, Moderate, Hard, Extreme, Unknown.
 
 \*Different naming conventions for priority and complexity are used intentionally to simplify task lookup.
 
@@ -175,3 +175,36 @@
 - Consider to add [TruffleRuby to CI](https://github.com/marketplace/actions/setup-ruby-jruby-and-truffleruby).
 
 ---
+
+### Provide a way to use trailing ENV variables in go-tasks
+
+| Priority | Complexity | Status | Tags |
+| - | - | - | - |
+| Low | Unknown | TODO | go-task, Taskfile, leading-env-variable, trailing-env-variable |
+
+
+The following command (`task docker:build`) works in both cases.
+
+With leading ENV variables.
+
+```bash
+ENGINE=ruby VERSION=2.7 task docker:build
+```
+
+With trailing ENV variables.
+
+```bash
+task docker:build ENGINE=ruby VERSION=2.7
+```
+
+But at the same time`task rspec` works only with leading ENV variables.
+
+```bash
+APPRAISAL=rails_7.0 task rspec
+```
+
+That is happening because `task rspec` accesses `APPRAISAL` using [Dynamic Variables](https://taskfile.dev/usage/#dynamic-variables).
+
+**Notes:**
+
+- Consider to open a [Github issue](https://github.com/go-task/task/issues).
