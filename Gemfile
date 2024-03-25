@@ -1,5 +1,11 @@
 # frozen_string_literal: true
 
+##
+# NOTE: Run the following commands any time you modify gemfile or gemspec.
+#   task deps:clean
+#   task docker:build:all
+##
+
 source "https://rubygems.org"
 
 ##
