@@ -216,12 +216,12 @@ module ConvenientService
         ##
         # - https://github.com/deivid-rodriguez/byebug
         #
-        require "byebug" unless ruby.jruby?
+        require "byebug" if ruby.mri?
 
         ##
         # - https://github.com/ruby/debug
         #
-        require "debug" unless ruby.jruby?
+        require "debug" if ruby.mri?
 
         ##
         # - https://ruby-doc.org/stdlib-2.7.0/libdoc/ostruct/rdoc/OpenStruct.html
@@ -248,9 +248,9 @@ module ConvenientService
         ##
         # - https://gist.github.com/marian13/5dade20a431d7254db30e543167058ce
         #
-        require_relative "dependencies/extractions/byebug_syntax_highlighting" unless ruby.jruby?
+        require_relative "dependencies/extractions/byebug_syntax_highlighting" if ruby.mri?
 
-        require_relative "dependencies/extractions/b" unless ruby.jruby?
+        require_relative "dependencies/extractions/b" if ruby.mri?
 
         ##
         #

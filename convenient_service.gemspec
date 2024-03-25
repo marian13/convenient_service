@@ -92,7 +92,7 @@ Gem::Specification.new do |spec|
   # - https://github.com/deivid-rodriguez/byebug/tree/master/ext/byebug
   # - https://github.com/deivid-rodriguez/byebug/issues/179#issuecomment-152727003
   #
-  spec.add_development_dependency "byebug", "~> 10.0" unless ConvenientService::Support::Ruby.jruby?
+  spec.add_development_dependency "byebug", "~> 10.0" if ConvenientService::Support::Ruby.mri?
 
   ##
   # Used for parsing Markdown in YARD docs.
@@ -103,7 +103,7 @@ Gem::Specification.new do |spec|
   #
   # TODO: `commonmarker` v1 does NOT work with `yard-junk`.
   #
-  spec.add_development_dependency "commonmarker", "~> 0.23.10" unless ConvenientService::Support::Ruby.jruby?
+  spec.add_development_dependency "commonmarker", "~> 0.23.10" if ConvenientService::Support::Ruby.mri?
 
   ##
   # Used for debugging CRuby code.
@@ -118,7 +118,7 @@ Gem::Specification.new do |spec|
   # NOTE: `debug` has C extensions, that is why it is NOT supported in JRuby.
   # - https://github.com/ruby/debug/tree/master/ext/debug
   #
-  spec.add_development_dependency "debug" unless ConvenientService::Support::Ruby.jruby?
+  spec.add_development_dependency "debug" if ConvenientService::Support::Ruby.mri?
 
   spec.add_development_dependency "faker"
 
@@ -249,7 +249,7 @@ Gem::Specification.new do |spec|
   # - https://github.com/tmm1/stackprof
   # - https://www.johnnunemaker.com/how-to-benchmark-your-ruby-gem
   #
-  spec.add_development_dependency "stackprof", "~> 0.2.25" unless ConvenientService::Support::Ruby.jruby?
+  spec.add_development_dependency "stackprof", "~> 0.2.25" if ConvenientService::Support::Ruby.mri?
 
   spec.add_development_dependency "webrick"
 

@@ -13,6 +13,98 @@ RSpec.describe ConvenientService::Support::Ruby do
       end
     end
 
+    describe ".mri?" do
+      context "when `::RUBY_ENGINE` is NOT valid" do
+        context "when `::RUBY_ENGINE` is `nil`" do
+          before do
+            stub_const("RUBY_ENGINE", nil)
+          end
+
+          it "returns `false`" do
+            expect(described_class.mri?).to eq(false)
+          end
+        end
+
+        context "when `::RUBY_ENGINE` is empty string" do
+          before do
+            stub_const("RUBY_ENGINE", "")
+          end
+
+          it "returns `false`" do
+            expect(described_class.mri?).to eq(false)
+          end
+        end
+      end
+
+      context "when `::RUBY_ENGINE` is valid" do
+        context "when `::RUBY_ENGINE` does NOT equal to `\"ruby\"`" do
+          before do
+            stub_const("RUBY_ENGINE", "jruby")
+          end
+
+          it "returns `false`" do
+            expect(described_class.mri?).to eq(false)
+          end
+        end
+
+        context "when `::RUBY_ENGINE` equals to `\"ruby\"`" do
+          before do
+            stub_const("RUBY_ENGINE", "ruby")
+          end
+
+          it "returns `true`" do
+            expect(described_class.mri?).to eq(true)
+          end
+        end
+      end
+    end
+
+    describe ".ruby?" do
+      context "when `::RUBY_ENGINE` is NOT valid" do
+        context "when `::RUBY_ENGINE` is `nil`" do
+          before do
+            stub_const("RUBY_ENGINE", nil)
+          end
+
+          it "returns `false`" do
+            expect(described_class.ruby?).to eq(false)
+          end
+        end
+
+        context "when `::RUBY_ENGINE` is empty string" do
+          before do
+            stub_const("RUBY_ENGINE", "")
+          end
+
+          it "returns `false`" do
+            expect(described_class.ruby?).to eq(false)
+          end
+        end
+      end
+
+      context "when `::RUBY_ENGINE` is valid" do
+        context "when `::RUBY_ENGINE` does NOT equal to `\"ruby\"`" do
+          before do
+            stub_const("RUBY_ENGINE", "jruby")
+          end
+
+          it "returns `false`" do
+            expect(described_class.ruby?).to eq(false)
+          end
+        end
+
+        context "when `::RUBY_ENGINE` equals to `\"ruby\"`" do
+          before do
+            stub_const("RUBY_ENGINE", "ruby")
+          end
+
+          it "returns `true`" do
+            expect(described_class.ruby?).to eq(true)
+          end
+        end
+      end
+    end
+
     describe ".jruby?" do
       context "when `::RUBY_PLATFORM` is NOT valid" do
         context "when `::RUBY_PLATFORM` is `nil`" do

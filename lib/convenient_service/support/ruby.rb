@@ -18,6 +18,23 @@ module ConvenientService
         end
 
         ##
+        # Returns `true` when MRI, `false` otherwise.
+        #
+        # @return [Boolean]
+        #
+        # @see https://github.com/janlelis/ruby_engine
+        #
+        # @internal
+        #   NOTE: Gratefully copied from the `ruby_engine` gem. Version `1.1.4`.
+        #   - https://github.com/janlelis/ruby_engine/blob/v2.0.0/lib/ruby_engine.rb#L19
+        #
+        def mri?
+          ::RUBY_ENGINE.to_s == "ruby"
+        end
+
+        alias_method :ruby?, :mri?
+
+        ##
         # Returns `true` when JRuby, `false` otherwise.
         #
         # @return [Boolean]
@@ -29,6 +46,7 @@ module ConvenientService
         #   - https://github.com/rdp/os/blob/v1.1.4/lib/os.rb#L101
         #
         #   NOTE: Modified original implementation in order to return a boolean.
+        #   NOTE: Consider to use `RUBY_ENGINE` as for others?
         #
         def jruby?
           ::RUBY_PLATFORM.to_s.match?(/java/)
