@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.19.0](https://github.com/marian13/convenient_service/compare/v0.18.0...v0.19.0) (2024-03-25)
+
+
+### Features
+
+* **can_have_steps:** introduce StepCollection#size ([6360e2e](https://github.com/marian13/convenient_service/commit/6360e2ea7acc5653723be1bea03cdf81b9b0ea1c))
+
+
+### Miscellaneous Chores
+
+* release 0.19.0 ([4df0c8b](https://github.com/marian13/convenient_service/commit/4df0c8b8d80dabf14419594b8630cd3c469ae75b))
+
 ## [0.18.0](https://github.com/marian13/convenient_service/compare/v0.17.0...v0.18.0) (2024-03-07)
 
 
