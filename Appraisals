@@ -44,7 +44,7 @@
 # @return [void]
 #
 # @internal
-#   Taskfile uses a combination of Ruby engine, Ruby version and `appraisal_name` as `{{.APPRAISAL_NAME}}`.
+#   Taskfile uses a combination of Ruby engine, Ruby version and `appraisal_name` inside `{{.APPRAISAL_COMMAND}}`.
 #
 def appraise(appraisal_name, &block)
   super([::RUBY_ENGINE, ::RUBY_VERSION, appraisal_name].join("_"), &block)
@@ -111,7 +111,7 @@ appraise "dry" do
 end
 
 ##
-# NOTE: A combination of all the highest versions of gems. Just for quick hacking in `task console:all`.
+# NOTE: A combination of all the highest versions of gems. Just for quick hacking in `APPRAISAL=all task console`.
 # IMPORTANT: Should not be enforced in CI, since integrity checks between external gems are not the goal of this library (a least for now).
 #
 appraise "all" do
