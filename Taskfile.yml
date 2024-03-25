@@ -25,6 +25,7 @@ tasks:
   #   APPRAISAL=rails_6.0 task console
   #   APPRAISAL=rails_6.1 task console
   #   APPRAISAL=rails_7.0 task console
+  #   APPRAISAL=rails_7.1 task console
   #   task console
   #
   # NOTE: Setting `APPRAISAL` after `task console` does NOT work. Consider to open an issue.
@@ -296,6 +297,7 @@ tasks:
   #   APPRAISAL=rails_6.0 task playground
   #   APPRAISAL=rails_6.1 task playground
   #   APPRAISAL=rails_7.0 task playground
+  #   APPRAISAL=rails_7.1 task playground
   #   task playground
   #
   # NOTE: Setting `APPRAISAL` after `task playground` does NOT work. Consider to open an issue.
@@ -323,6 +325,7 @@ tasks:
   #   APPRAISAL=rails_6.0 task rspec
   #   APPRAISAL=rails_6.1 task rspec
   #   APPRAISAL=rails_7.0 task rspec
+  #   APPRAISAL=rails_7.1 task rspec
   #
   # NOTE: It is also possible to run specs only for git staged files.
   #   STAGED=true APPRAISAL=rails_7.0 task rspec
@@ -354,8 +357,9 @@ tasks:
   rspec:all:
     cmds:
       - task: rspec
-      - APPRAISAL=rails_7.0 task rspec
+      - APPRAISAL=rails_7.1 task rspec
       - APPRAISAL=dry task rspec
+      - APPRAISAL=rails_7.0 task rspec
       - APPRAISAL=rails_6.1 task rspec
       - APPRAISAL=rails_6.0 task rspec
       - APPRAISAL=rails_5.2 task rspec
