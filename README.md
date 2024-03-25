@@ -63,6 +63,8 @@ This library is under heavy development. Public API may be subject to change. Th
 
 - [Static Content](https://github.com/marian13/static_content/tree/main/convenient_service) repo.
 
+- [Convenient Service Integration](https://github.com/marian13/convenient_service_integration) machinery.
+
 - Have a look at [Convenient Service Development Wiki](https://github.com/marian13/convenient_service/wiki) for the contribution tutorials.
 
 <!-- links:end -->
