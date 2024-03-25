@@ -141,13 +141,13 @@ tasks:
 
   docker:build:all:
     cmds:
-      - task: docker:build RUBY_ENGINE=ruby RUBY_VERSION=2.7
-      - task: docker:build RUBY_ENGINE=ruby RUBY_VERSION=3.0
-      - task: docker:build RUBY_ENGINE=ruby RUBY_VERSION=3.1
-      - task: docker:build RUBY_ENGINE=ruby RUBY_VERSION=3.2
-      - task: docker:build RUBY_ENGINE=ruby RUBY_VERSION=3.3
-      - task: docker:build RUBY_ENGINE=jruby RUBY_VERSION=9.4
-      - task: docker:build RUBY_ENGINE=truffleruby RUBY_VERSION=22.3
+      - RUBY_ENGINE=ruby RUBY_VERSION=2.7 task docker:build
+      - RUBY_ENGINE=ruby RUBY_VERSION=3.0 task docker:build
+      - RUBY_ENGINE=ruby RUBY_VERSION=3.1 task docker:build
+      - RUBY_ENGINE=ruby RUBY_VERSION=3.2 task docker:build
+      - RUBY_ENGINE=ruby RUBY_VERSION=3.3 task docker:build
+      - RUBY_ENGINE=jruby RUBY_VERSION=9.4 task docker:build
+      - RUBY_ENGINE=truffleruby RUBY_VERSION=22.3 task docker:build
     preconditions:
       - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
         msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
