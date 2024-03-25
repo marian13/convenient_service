@@ -235,9 +235,17 @@ tasks:
 
   ##
   # NOTE: A trailing "/**" matches everything inside.
-  # https://git-scm.com/docs/gitignore
+  # - https://git-scm.com/docs/gitignore
   #
-  git:staged:specs:
+  git:staged:minitest:
+    cmds:
+      - git diff --cached --name-only --diff-filter=d "spec/**"
+
+  ##
+  # NOTE: A trailing "/**" matches everything inside.
+  # - https://git-scm.com/docs/gitignore
+  #
+  git:staged:rspec:
     cmds:
       - git diff --cached --name-only --diff-filter=d "spec/**"
 
@@ -268,7 +276,10 @@ tasks:
 
   minitest:
     cmds:
-      - bundle exec ruby minitest.rb
+      - bundle exec ruby minitest.rb {{.GIT_STAGED_MINITEST_FILES}} {{.CLI_ARGS}}
+    vars:
+      GIT_STAGED_MINITEST_FILES:
+        sh: ruby -e 'puts `task git:staged:minitest --silent` if ENV["STAGED"] == "true"'
 
   ##
   # - https://github.com/mbj/mutant/blob/main/docs/mutant-rspec.md#run-through-example
@@ -324,17 +335,14 @@ tasks:
   #
   rspec:
     cmds:
-      - bundle exec {{.APPRAISAL_PREFIX}} rspec --format progress {{.REQUIRE_SUFFIX}} {{.GIT_STAGED_SPEC_FILES}} {{.CLI_ARGS}}
+      - bundle exec {{.APPRAISAL_PREFIX}} rspec --format progress {{.REQUIRE_SUFFIX}} {{.GIT_STAGED_RSPEC_FILES}} {{.CLI_ARGS}}
     vars:
       APPRAISAL_PREFIX:
         sh: ruby -e 'puts "appraisal" + " " + RUBY_ENGINE + "_" + RUBY_VERSION + "_" + ENV["APPRAISAL"] unless ENV["APPRAISAL"].to_s.empty?'
       REQUIRE_SUFFIX:
         sh: ruby -e 'puts case ENV["APPRAISAL"] when /rails/ then "--require rails_helper" when /dry/ then "--require dry_helper" end'
-      GIT_STAGED_SPEC_FILES:
-        ##
-        # NOTE: `task: git:staged:specs` does NOT work.
-        #
-        sh: ruby -e 'puts `task git:staged:specs --silent` if ENV["STAGED"] == "true"'
+      GIT_STAGED_RSPEC_FILES:
+        sh: ruby -e 'puts `task git:staged:rspec --silent` if ENV["STAGED"] == "true"'
 
   rspec:all:
     cmds:
