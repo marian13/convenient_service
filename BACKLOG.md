@@ -215,4 +215,5 @@ That is happening because `task rspec` accesses `APPRAISAL` using [Dynamic Varia
 
 Once the first major version is released, add [Convenient Service](https://github.com/marian13/convenient_service) to the [Ruby Toolbox Catalogue](https://www.ruby-toolbox.com/categories/Service_Objects).
 
-- Open a PR the modifies the following [file](https://github.com/rubytoolbox/catalog/blob/main/catalog/Code_Organization/Service_Objects.yml).
+- Open a PR that modifies the following [file](https://github.com/rubytoolbox/catalog/blob/main/catalog/Code_Organization/Service_Objects.yml).
+
