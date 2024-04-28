@@ -400,6 +400,13 @@ tasks:
     cmds:
       - tmuxinator start convenient_service --project-config=.dev/.tmuxinator.yml
 
+  ##
+  # NOTE: Dev only command.
+  #
+  tmuxinator:stop:
+    cmds:
+      - tmuxinator stop convenient_service --project-config=.dev/.tmuxinator.yml
+
   yard_junk:
     cmds:
       - mkdir -p docs
