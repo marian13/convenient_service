@@ -399,11 +399,10 @@ module ConvenientService
                 #   TODO: Create `OutputMethod`. Move `validate_as_output_for_result` into it.
                 #
                 def calculate_output_values
-                  return {} unless status.unsafe_success?
+                  return {} if status.unsafe_not_success?
+                  return {} if outputs.none?
 
-                  outputs.each { |output| ::ConvenientService.raise Exceptions::StepResultDataNotExistingAttribute.new(step: self, key: output.key.to_sym) unless unsafe_data.has_attribute?(output.key.to_sym) }
-
-                  outputs.reduce({}) { |values, output| values.merge(output.name.to_sym => unsafe_data[output.key.to_sym]) }
+                  unsafe_data.to_h
                 end
 
                 ##

@@ -375,7 +375,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
         specify do
           expect { step.output_values }
-            .to delegate_to(step.status, :unsafe_success?)
+            .to delegate_to(step.status, :unsafe_not_success?)
             .without_arguments
         end
 

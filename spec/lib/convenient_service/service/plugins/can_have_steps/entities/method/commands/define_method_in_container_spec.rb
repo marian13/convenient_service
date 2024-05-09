@@ -141,7 +141,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
           end
 
           it "returns corresponding step service result data attribute by key" do
-            expect(organizer.bar).to eq(organizer.steps[0].result.unsafe_data[:foo])
+            expect(organizer.bar).to eq(organizer.steps[0].result.unsafe_data[:bar])
           end
         end
       end

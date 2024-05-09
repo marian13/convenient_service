@@ -6,6 +6,9 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::HasResult::Middleware do
+  include ConvenientService::RSpec::Helpers::IgnoringException
+  include ConvenientService::RSpec::Matchers::DelegateTo
+
   let(:middleware) { described_class }
 
   example_group "inheritance" do
@@ -65,7 +68,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           include ConvenientService::Service::Configs::Essential
 
           def result
-            success(data: {foo: :bar})
+            success(data: {foo: :foo, bar: :bar, baz: :baz})
           end
         end
       end
@@ -77,7 +80,213 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       end
 
       it "returns service result with step and organizer" do
-        expect(step.result).to be_success.with_data(foo: :bar).of_step(first_step).of_service(container)
+        expect(step.result).to be_success.with_data(foo: :foo, bar: :bar, baz: :baz).of_step(first_step).of_service(container)
+      end
+
+      context "when `step` result has success status" do
+        context "when `step` has no outputs" do
+          let(:container) do
+            Class.new.tap do |klass|
+              klass.class_exec(first_step, middleware) do |first_step, middleware|
+                include ConvenientService::Service::Configs::Essential
+
+                self::Step.class_exec(middleware) do |middleware|
+                  middlewares :result do
+                    observe middleware
+                  end
+                end
+
+                step first_step
+              end
+            end
+          end
+
+          it "returns service result with original data keys" do
+            expect(step.result).to be_success.with_data(foo: :foo, bar: :bar, baz: :baz).of_step(first_step).of_service(container)
+          end
+        end
+
+        context "when `step` has outputs" do
+          context "when `step` has one output" do
+            context "when step result does NOT have attribute by that output key" do
+              let(:container) do
+                Class.new.tap do |klass|
+                  klass.class_exec(first_step, middleware) do |first_step, middleware|
+                    include ConvenientService::Service::Configs::Essential
+
+                    self::Step.class_exec(middleware) do |middleware|
+                      middlewares :result do
+                        observe middleware
+                      end
+                    end
+
+                    step first_step, out: :qux
+                  end
+                end
+              end
+
+              let(:exception_message) do
+                <<~TEXT
+                  Step `#{step.printable_service}` result does NOT return `:qux` data attribute.
+
+                  Maybe there is a typo in `out` definition?
+
+                  Or `success` of `#{step.printable_service}` accepts a wrong key?
+                TEXT
+              end
+
+              it "raises `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepResultDataNotExistingAttribute`" do
+                expect { step.result }
+                  .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepResultDataNotExistingAttribute)
+                  .with_message(exception_message)
+              end
+
+              specify do
+                expect { ignoring_exception(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepResultDataNotExistingAttribute) { step.result } }
+                  .to delegate_to(ConvenientService, :raise)
+              end
+            end
+
+            context "when step result has attribute by that output key" do
+              let(:container) do
+                Class.new.tap do |klass|
+                  klass.class_exec(first_step, middleware) do |first_step, middleware|
+                    include ConvenientService::Service::Configs::Essential
+
+                    self::Step.class_exec(middleware) do |middleware|
+                      middlewares :result do
+                        observe middleware
+                      end
+                    end
+
+                    step first_step, out: :foo
+                  end
+                end
+              end
+
+              it "returns service result only with that output data key" do
+                expect(step.result).to be_success.with_data(foo: :foo).of_step(first_step).of_service(container)
+              end
+            end
+          end
+
+          context "when `step` has multiple outputs" do
+            context "when step result does NOT have any attribute by those output keys" do
+              let(:container) do
+                Class.new.tap do |klass|
+                  klass.class_exec(first_step, middleware) do |first_step, middleware|
+                    include ConvenientService::Service::Configs::Essential
+
+                    self::Step.class_exec(middleware) do |middleware|
+                      middlewares :result do
+                        observe middleware
+                      end
+                    end
+
+                    step first_step, out: [:baz, :qux]
+                  end
+                end
+              end
+
+              let(:exception_message) do
+                <<~TEXT
+                  Step `#{step.printable_service}` result does NOT return `:qux` data attribute.
+
+                  Maybe there is a typo in `out` definition?
+
+                  Or `success` of `#{step.printable_service}` accepts a wrong key?
+                TEXT
+              end
+
+              it "raises `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepResultDataNotExistingAttribute`" do
+                expect { step.result }
+                  .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepResultDataNotExistingAttribute)
+                  .with_message(exception_message)
+              end
+
+              specify do
+                expect { ignoring_exception(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepResultDataNotExistingAttribute) { step.result } }
+                  .to delegate_to(ConvenientService, :raise)
+              end
+            end
+
+            context "when step result has all attributes by those output keys" do
+              let(:container) do
+                Class.new.tap do |klass|
+                  klass.class_exec(first_step, middleware) do |first_step, middleware|
+                    include ConvenientService::Service::Configs::Essential
+
+                    self::Step.class_exec(middleware) do |middleware|
+                      middlewares :result do
+                        observe middleware
+                      end
+                    end
+
+                    step first_step, out: [:foo, :bar]
+                  end
+                end
+              end
+
+              it "returns service result only with those output data keys" do
+                expect(step.result).to be_success.with_data(foo: :foo, bar: :bar).of_step(first_step).of_service(container)
+              end
+            end
+          end
+
+          context "when `step` has any output with alias" do
+            let(:container) do
+              Class.new.tap do |klass|
+                klass.class_exec(first_step, middleware) do |first_step, middleware|
+                  include ConvenientService::Service::Configs::Essential
+
+                  self::Step.class_exec(middleware) do |middleware|
+                    middlewares :result do
+                      observe middleware
+                    end
+                  end
+
+                  step first_step, out: [{foo: :abc}, :bar]
+                end
+              end
+            end
+
+            it "returns service result only with outputs data keys respecting aliases" do
+              expect(step.result).to be_success.with_data(abc: :foo, bar: :bar).of_step(first_step).of_service(container)
+            end
+          end
+        end
+      end
+
+      context "when `step` result has failure status" do
+        let(:first_step) do
+          Class.new do
+            include ConvenientService::Service::Configs::Essential
+
+            def result
+              failure(data: {foo: :foo, bar: :bar, baz: :baz})
+            end
+          end
+        end
+
+        it "returns service result with original data keys" do
+          expect(step.result).to be_failure.with_data(foo: :foo, bar: :bar, baz: :baz).of_step(first_step).of_service(container)
+        end
+      end
+
+      context "when `step` result has error status" do
+        let(:first_step) do
+          Class.new do
+            include ConvenientService::Service::Configs::Essential
+
+            def result
+              error(data: {foo: :foo, bar: :bar, baz: :baz})
+            end
+          end
+        end
+
+        it "returns service result with original data keys" do
+          expect(step.result).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz).of_step(first_step).of_service(container)
+        end
       end
     end
   end
