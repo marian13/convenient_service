@@ -117,6 +117,9 @@ module ConvenientService
         #   - `lib/convenient_service/core/entities/config/entities/method_middlewares/entities/caller/commands/define_method_middlewares_caller.rb`
         #   - https://gist.github.com/marian13/9c25041f835564e945d978839097d419
         #
+        #   IMPORTANT: Psych has a monkey-patch `y` in IRB. That is why calling `Service.y` raise `private method called` instead of `undefined method`.
+        #   - https://github.com/ruby/psych/blob/v5.1.2/lib/psych/y.rb#L5
+        #
         def method_missing(method, *args, **kwargs, &block)
           commit_config!(trigger: Constants::Triggers::CLASS_METHOD_MISSING)
 
