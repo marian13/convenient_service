@@ -2,16 +2,39 @@ version: '3'
 
 ##
 # IMPORTANT: All tasks listed in this file should be executed from the root folder.
-# https://taskfile.dev/usage/#task-directory
+# - https://taskfile.dev/usage/#task-directory
 #
 # NOTE: Examples of multiline strings in YAML.
-# https://yaml-multiline.info/
+# - https://yaml-multiline.info/
 #
 # NOTE: Use `[ "${IN_DOCKER_CONTAINER}" == "true" ] && echo true || echo false` to debug ``[ "${IN_DOCKER_CONTAINER}" == "true" ]`.
 #
 # NOTE: Forwarding CLI arguments to commands ({{.CLI_ARGS}}).
-# https://taskfile.dev/usage/#forwarding-cli-arguments-to-commands
+# - https://taskfile.dev/usage/#forwarding-cli-arguments-to-commands
 #
+# NOTE: All tasks are sorted alphabetically.
+#
+# NOTE: `open` tasks only navigate/open apps. They are NOT running any other commands.
+#
+# TODO: Global preconditions are imitated using YAML anchors. Replace anchors once native support added.
+# - https://github.com/go-task/task/issues/294
+##
+
+##
+# Ensures that a task is executed for host OS.
+#
+from-host-os: &from-host-os
+  sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
+  msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
+
+##
+# Ensures that a task is executed for macOS.
+# - https://stackoverflow.com/a/17072017/12201472
+#
+from-mac-os: &from-mac-os
+  sh: '[ "$(uname)" == "Darwin" ]'
+  msg: This task uses macOS specific commands. Try to adjust it your OS and/or run it manually.
+
 tasks:
   default:
     cmds:
@@ -48,12 +71,14 @@ tasks:
     cmds:
       - open coverage/index.html
     preconditions:
-      - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
-        msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
+      - *from-host-os
+      - *from-mac-os
 
   deps:
     cmds:
       - task: deps:install
+    requires:
+      vars: [RUBY_ENGINE, RUBY_VERSION]
 
   ##
   # NOTE: `task deps:install` is also aliased as `task install`.
@@ -63,6 +88,8 @@ tasks:
       - cp Gemfile Gemfile.{{.RUBY_ENGINE}}_{{.RUBY_VERSION}}
       - bundle install
       - bundle exec appraisal install
+    requires:
+      vars: [RUBY_ENGINE, RUBY_VERSION]
 
   ##
   # NOTE: Meaning of `2> /dev/null`.
@@ -102,8 +129,7 @@ tasks:
       - docker run --rm -it -v $(pwd):/gem convenient_service:{{.RUBY_ENGINE}}_{{.RUBY_VERSION}} bash
     interactive: true
     preconditions:
-      - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
-        msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
+      - *from-host-os
     requires:
       vars: [RUBY_ENGINE, RUBY_VERSION]
 
@@ -143,8 +169,7 @@ tasks:
       #
       - docker run --rm -it -v $(pwd):/gem convenient_service:{{.RUBY_ENGINE}}_{{.RUBY_VERSION}} bash -c "task deps:install"
     preconditions:
-      - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
-        msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
+      - *from-host-os
     requires:
       vars: [RUBY_ENGINE, RUBY_VERSION]
 
@@ -158,8 +183,7 @@ tasks:
       - RUBY_ENGINE=jruby RUBY_VERSION=9.4 task docker:build
       - RUBY_ENGINE=truffleruby RUBY_VERSION=22.3 task docker:build
     preconditions:
-      - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
-        msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
+      - *from-host-os
 
   ##
   # NOTE: Dev only command.
@@ -168,6 +192,9 @@ tasks:
   docker:start:
     cmds:
       - open -a Docker
+    preconditions:
+      - *from-host-os
+      - *from-mac-os
 
   ##
   # NOTE: `sdoc` (wrapper for `rdoc`) is replaced by `yard`, since you have a feeling like every time is a first time with `rdoc`.
@@ -200,8 +227,8 @@ tasks:
       - task: docs:generate
       - open docs/index.html
     preconditions:
-      - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
-        msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
+      - *from-host-os
+      - *from-mac-os
 
   docs:lint:
     cmds:
@@ -226,8 +253,7 @@ tasks:
       #
       - RUBYLIB=./yard bundle exec yard server
     preconditions:
-      - sh: '[ "${IN_DOCKER_CONTAINER}" != "true" ]'
-        msg: This task can be invoked only from the host operating system (https://www.ibm.com/cloud/learn/containerization)
+      - *from-host-os
 
   ##
   # NOTE: `yard` server is running on `localhost:8808` be default.
@@ -239,6 +265,9 @@ tasks:
       #
       - open -na "Google Chrome" --args --new-window --incognito "http://localhost:8808"
       - task: docs:server
+    preconditions:
+      - *from-host-os
+      - *from-mac-os
 
   ##
   # NOTE: Dev only command.
@@ -246,6 +275,9 @@ tasks:
   editor:open:
     cmds:
       - code .
+    preconditions:
+      - *from-host-os
+      - *from-mac-os
 
   ##
   # NOTE: A trailing "/**" matches everything inside.
@@ -254,6 +286,8 @@ tasks:
   git:staged:minitest:
     cmds:
       - git diff --cached --name-only --diff-filter=d "test/**"
+    preconditions:
+      - *from-host-os
 
   ##
   # NOTE: A trailing "/**" matches everything inside.
@@ -262,6 +296,8 @@ tasks:
   git:staged:rspec:
     cmds:
       - git diff --cached --name-only --diff-filter=d "spec/**"
+    preconditions:
+      - *from-host-os
 
   ##
   # NOTE: Dev only command.
@@ -270,6 +306,9 @@ tasks:
   github:open:
     cmds:
       - open -na "Google Chrome" --args --new-window --incognito "https://github.com/marian13/convenient_service"
+    preconditions:
+      - *from-host-os
+      - *from-mac-os
 
   ##
   # NOTE: `task install` is also aliased as `task deps:install`.
@@ -277,6 +316,8 @@ tasks:
   install:
     cmds:
       - task: deps:install
+    requires:
+      vars: [RUBY_ENGINE, RUBY_VERSION]
 
   ##
   # NOTE: Usage examples.
@@ -399,6 +440,8 @@ tasks:
   tmuxinator:start:
     cmds:
       - tmuxinator start convenient_service --project-config=.dev/.tmuxinator.yml
+    preconditions:
+      - *from-host-os
 
   ##
   # NOTE: Dev only command.
@@ -406,6 +449,8 @@ tasks:
   tmuxinator:stop:
     cmds:
       - tmuxinator stop convenient_service --project-config=.dev/.tmuxinator.yml
+    preconditions:
+      - *from-host-os
 
   yard_junk:
     cmds:
