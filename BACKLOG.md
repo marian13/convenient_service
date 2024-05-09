@@ -125,39 +125,6 @@
 
 ---
 
-### Respect service last step `out` aliases
-
-| Priority | Complexity | Status | Tags |
-| - | - | - | - |
-| High | Moderate | TODO | last-step, out-alias |
-
-- Consider the following services:
-
-  ```ruby
-  class LastStep
-    include ConvenientService::Standard::Config
-
-    def result
-      success(foo: "foo")
-    end
-  end
-
-  class ServiceWithSteps
-    include ConvenientService::Standard::Config
-
-    step LastStep,
-      out: {foo: :bar}
-  end
-  ```
-
-- `ServiceWithSteps.result` returns `LastStep.result`, but it ignores `out` alias.
-
-  In other words, `ServiceWithSteps.result.data[:bar]` raises an exception.
-
-  That is not intuitive.
-
----
-
 ### Add Dockerfiles for TruffleRuby 23.0 and 24.0
 
 | Priority | Complexity | Status | Tags |
@@ -217,3 +184,39 @@ Once the first major version is released, add [Convenient Service](https://githu
 
 - Open a PR that modifies the following [file](https://github.com/rubytoolbox/catalog/blob/main/catalog/Code_Organization/Service_Objects.yml).
 
+---
+
+### Respect service last step `out` aliases
+
+| Priority | Complexity | Status | Tags |
+| - | - | - | - |
+| High | Moderate | Done | last-step, out-alias |
+
+Resolved by [b8285e3](https://github.com/marian13/convenient_service/commit/b8285e33c764a61bd8fa1df6e126e45c4491a5a6).
+
+- Consider the following services:
+
+  ```ruby
+  class LastStep
+    include ConvenientService::Standard::Config
+
+    def result
+      success(foo: "foo")
+    end
+  end
+
+  class ServiceWithSteps
+    include ConvenientService::Standard::Config
+
+    step LastStep,
+      out: {foo: :bar}
+  end
+  ```
+
+- `ServiceWithSteps.result` returns `LastStep.result`, but it ignores `out` alias.
+
+  In other words, `ServiceWithSteps.result.data[:bar]` raises an exception.
+
+  That is not intuitive.
+
+---
