@@ -60,11 +60,21 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   ##
+  # Used for pretty printing when debugging Ruby code. `amazing_print` is `awesome_print` successor.
+  # - https://github.com/amazing-print/amazing_print
+  #
+  spec.add_development_dependency "amazing_print"
+
+  ##
   # Used to run specs with multiple versions of gems.
   # - https://github.com/thoughtbot/appraisal
   #
   spec.add_development_dependency "appraisal", "~> 2.5.0"
 
+  ##
+  # Used for pretty printing when debugging Ruby code. `awesome_print` is NOT maintained anymore.
+  # - https://github.com/awesome-print/awesome_print
+  #
   spec.add_development_dependency "awesome_print"
 
   ##

@@ -112,6 +112,29 @@ module ConvenientService
       # @return [Boolean]
       # @note Expected to be called from app entry points like `initializers` in Rails.
       #
+      def require_amazing_print_inspect
+        ##
+        # - https://github.com/amazing-print/amazing_print
+        #
+        require "amazing_print"
+
+        require_relative "service/plugins/has_amazing_print_inspect"
+        require_relative "service/plugins/has_j_send_result/entities/result/plugins/has_amazing_print_inspect"
+        require_relative "service/plugins/has_j_send_result/entities/result/plugins/has_j_send_status_and_attributes/entities/data/plugins/has_amazing_print_inspect"
+        require_relative "service/plugins/has_j_send_result/entities/result/plugins/has_j_send_status_and_attributes/entities/message/plugins/has_amazing_print_inspect"
+        require_relative "service/plugins/has_j_send_result/entities/result/plugins/has_j_send_status_and_attributes/entities/status/plugins/has_amazing_print_inspect"
+        require_relative "service/plugins/has_j_send_result/entities/result/plugins/has_j_send_status_and_attributes/entities/code/plugins/has_amazing_print_inspect"
+        require_relative "service/plugins/can_have_steps/entities/step/plugins/has_amazing_print_inspect"
+        require_relative "service/configs/amazing_print_inspect"
+        require_relative "service/configs/amazing_print_inspect/aliases"
+      end
+
+      ##
+      # @api public
+      #
+      # @return [Boolean]
+      # @note Expected to be called from app entry points like `initializers` in Rails.
+      #
       def require_awesome_print_inspect
         ##
         # - https://github.com/awesome-print/awesome_print
@@ -202,11 +225,16 @@ module ConvenientService
       #   - https://github.com/deivid-rodriguez/byebug/tree/master/ext/byebug
       #   - https://github.com/deivid-rodriguez/byebug/issues/179#issuecomment-152727003
       #
-      def require_development_tools
+      def require_development_tools(amazing_print: false, awesome_print: true)
         ##
         # - https://github.com/awesome-print/awesome_print
         #
-        require "awesome_print"
+        require "awesome_print" if awesome_print
+
+        ##
+        # - https://github.com/amazing-print/amazing_print
+        #
+        require "amazing_print" if amazing_print
 
         ##
         # - https://github.com/gsamokovarov/break
