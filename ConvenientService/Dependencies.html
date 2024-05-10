@@ -201,6 +201,28 @@
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#require_amazing_print_inspect-class_method" title="require_amazing_print_inspect (class method)">.<strong>require_amazing_print_inspect</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#require_assigns_attributes_in_constructor_using_active_model_attribute_assignment-class_method" title="require_assigns_attributes_in_constructor_using_active_model_attribute_assignment (class method)">.<strong>require_assigns_attributes_in_constructor_using_active_model_attribute_assignment</strong>  &#x21d2; Boolean </a>
     
 
@@ -289,7 +311,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#require_development_tools-class_method" title="require_development_tools (class method)">.<strong>require_development_tools</strong>  &#x21d2; Boolean </a>
+      <a href="#require_development_tools-class_method" title="require_development_tools (class method)">.<strong>require_development_tools</strong>(amazing_print: false, awesome_print: true)  &#x21d2; Boolean </a>
     
 
     
@@ -670,12 +692,12 @@
       <pre class="lines">
 
 
-430
-431
-432</pre>
+458
+459
+460</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies.rb', line 430</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies.rb', line 458</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_active_model'>active_model</span>
   <span class='const'><span class='object_link'><a href="Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Support/Gems.html" title="ConvenientService::Support::Gems (module)">Gems</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Support/Gems/ActiveModel.html" title="ConvenientService::Support::Gems::ActiveModel (class)">ActiveModel</a></span></span>
@@ -726,12 +748,12 @@
       <pre class="lines">
 
 
-439
-440
-441</pre>
+467
+468
+469</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies.rb', line 439</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies.rb', line 467</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_logger'><span class='object_link'><a href="../top-level-namespace.html#logger-instance_method" title="#logger (method)">logger</a></span></span>
   <span class='const'><span class='object_link'><a href="Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Support/Gems.html" title="ConvenientService::Support::Gems (module)">Gems</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Support/Gems/Logger.html" title="ConvenientService::Support::Gems::Logger (class)">Logger</a></span></span>
@@ -782,12 +804,12 @@
       <pre class="lines">
 
 
-448
-449
-450</pre>
+476
+477
+478</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies.rb', line 448</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies.rb', line 476</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_paint'>paint</span>
   <span class='const'><span class='object_link'><a href="Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Support/Gems.html" title="ConvenientService::Support::Gems (module)">Gems</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Support/Gems/Paint.html" title="ConvenientService::Support::Gems::Paint (class)">Paint</a></span></span>
@@ -850,6 +872,91 @@
 
 <span class='kw'>def</span> <span class='id identifier rubyid_require_alias'>require_alias</span>
   <span class='id identifier rubyid_require_relative'>require_relative</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>alias</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="require_amazing_print_inspect-class_method">
+  
+    .<strong>require_amazing_print_inspect</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p>Expected to be called from app entry points like <code>initializers</code> in Rails.</p>
+</div>
+  </div>
+
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies.rb', line 115</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_require_amazing_print_inspect'>require_amazing_print_inspect</span>
+  <span class='comment'>##
+</span>  <span class='comment'># - https://github.com/amazing-print/amazing_print
+</span>  <span class='comment'>#
+</span>  <span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>amazing_print</span><span class='tstring_end'>&quot;</span></span>
+
+  <span class='id identifier rubyid_require_relative'>require_relative</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>service/plugins/has_amazing_print_inspect</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_require_relative'>require_relative</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>service/plugins/has_j_send_result/entities/result/plugins/has_amazing_print_inspect</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_require_relative'>require_relative</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>service/plugins/has_j_send_result/entities/result/plugins/has_j_send_status_and_attributes/entities/data/plugins/has_amazing_print_inspect</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_require_relative'>require_relative</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>service/plugins/has_j_send_result/entities/result/plugins/has_j_send_status_and_attributes/entities/message/plugins/has_amazing_print_inspect</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_require_relative'>require_relative</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>service/plugins/has_j_send_result/entities/result/plugins/has_j_send_status_and_attributes/entities/status/plugins/has_amazing_print_inspect</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_require_relative'>require_relative</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>service/plugins/has_j_send_result/entities/result/plugins/has_j_send_status_and_attributes/entities/code/plugins/has_amazing_print_inspect</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_require_relative'>require_relative</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>service/plugins/can_have_steps/entities/step/plugins/has_amazing_print_inspect</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_require_relative'>require_relative</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>service/configs/amazing_print_inspect</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_require_relative'>require_relative</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>service/configs/amazing_print_inspect/aliases</span><span class='tstring_end'>&quot;</span></span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1044,25 +1151,25 @@
       <pre class="lines">
 
 
-115
-116
-117
-118
-119
-120
-121
-122
-123
-124
-125
-126
-127
-128
-129
-130</pre>
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies.rb', line 115</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies.rb', line 138</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_require_awesome_print_inspect'>require_awesome_print_inspect</span>
   <span class='comment'>##
@@ -1147,7 +1254,7 @@
       <div class="method_details ">
   <h3 class="signature " id="require_development_tools-class_method">
   
-    .<strong>require_development_tools</strong>  &#x21d2; <tt>Boolean</tt> 
+    .<strong>require_development_tools</strong>(amazing_print: false, awesome_print: true)  &#x21d2; <tt>Boolean</tt> 
   
 
   
@@ -1192,29 +1299,6 @@
       <pre class="lines">
 
 
-205
-206
-207
-208
-209
-210
-211
-212
-213
-214
-215
-216
-217
-218
-219
-220
-221
-222
-223
-224
-225
-226
-227
 228
 229
 230
@@ -1246,16 +1330,49 @@
 256
 257
 258
-259</pre>
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies.rb', line 205</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies.rb', line 228</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_require_development_tools'>require_development_tools</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_require_development_tools'>require_development_tools</span><span class='lparen'>(</span><span class='label'>amazing_print:</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='label'>awesome_print:</span> <span class='kw'>true</span><span class='rparen'>)</span>
   <span class='comment'>##
 </span>  <span class='comment'># - https://github.com/awesome-print/awesome_print
 </span>  <span class='comment'>#
-</span>  <span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>awesome_print</span><span class='tstring_end'>&quot;</span></span>
+</span>  <span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>awesome_print</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_awesome_print'>awesome_print</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># - https://github.com/amazing-print/amazing_print
+</span>  <span class='comment'>#
+</span>  <span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>amazing_print</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_amazing_print'>amazing_print</span>
 
   <span class='comment'>##
 </span>  <span class='comment'># - https://github.com/gsamokovarov/break
@@ -1370,29 +1487,29 @@
       <pre class="lines">
 
 
-386
-387
-388
-389
-390
-391
-392
-393
-394
-395
-396
-397
-398
-399
-400
-401
-402
-403
-404
-405</pre>
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies.rb', line 386</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies.rb', line 414</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_require_dry_examples'>require_dry_examples</span><span class='lparen'>(</span><span class='label'>version:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
   <span class='comment'>##
@@ -1543,19 +1660,19 @@
       <pre class="lines">
 
 
-140
-141
-142
-143
-144
-145
-146
-147
-148
-149</pre>
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies.rb', line 140</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies.rb', line 163</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_require_has_j_send_result_params_validations_using_active_model_validations'>require_has_j_send_result_params_validations_using_active_model_validations</span>
   <span class='comment'>##
@@ -1616,18 +1733,18 @@
       <pre class="lines">
 
 
-157
-158
-159
-160
-161
-162
-163
-164
-165</pre>
+180
+181
+182
+183
+184
+185
+186
+187
+188</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies.rb', line 157</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies.rb', line 180</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_require_has_j_send_result_params_validations_using_dry_validation'>require_has_j_send_result_params_validations_using_dry_validation</span>
   <span class='comment'>##
@@ -1702,29 +1819,29 @@
       <pre class="lines">
 
 
-357
-358
-359
-360
-361
-362
-363
-364
-365
-366
-367
-368
-369
-370
-371
-372
-373
-374
-375
-376</pre>
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies.rb', line 357</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies.rb', line 385</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_require_rails_examples'>require_rails_examples</span><span class='lparen'>(</span><span class='label'>version:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
   <span class='comment'>##
@@ -1795,12 +1912,12 @@
       <pre class="lines">
 
 
-173
-174
-175</pre>
+196
+197
+198</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies.rb', line 173</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies.rb', line 196</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_require_rescues_result_unhandled_exceptions'>require_rescues_result_unhandled_exceptions</span>
   <span class='id identifier rubyid_require_relative'>require_relative</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>service/plugins/rescues_result_unhandled_exceptions</span><span class='tstring_end'>&quot;</span></span>
@@ -1855,16 +1972,16 @@
       <pre class="lines">
 
 
-294
-295
-296
-297
-298
-299
-300</pre>
+322
+323
+324
+325
+326
+327
+328</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies.rb', line 294</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies.rb', line 322</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_require_rspec_extentions'>require_rspec_extentions</span>
   <span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>rspec/expectations</span><span class='tstring_end'>&quot;</span></span>
@@ -1937,34 +2054,6 @@
       <pre class="lines">
 
 
-310
-311
-312
-313
-314
-315
-316
-317
-318
-319
-320
-321
-322
-323
-324
-325
-326
-327
-328
-329
-330
-331
-332
-333
-334
-335
-336
-337
 338
 339
 340
@@ -1974,10 +2063,38 @@
 344
 345
 346
-347</pre>
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies.rb', line 310</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies.rb', line 338</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_require_standard_examples'>require_standard_examples</span><span class='lparen'>(</span><span class='label'>version:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
   <span class='comment'>##
@@ -2070,27 +2187,27 @@
       <pre class="lines">
 
 
-267
-268
-269
-270
-271
-272
-273
-274
-275
-276
-277
-278
-279
-280
-281
-282
-283
-284</pre>
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies.rb', line 267</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies.rb', line 295</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_require_test_tools'>require_test_tools</span>
   <span class='comment'>##
@@ -2163,19 +2280,19 @@
       <pre class="lines">
 
 
-183
-184
-185
-186
-187
-188
-189
-190
-191
-192</pre>
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies.rb', line 183</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies.rb', line 206</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_require_wraps_result_in_db_transaction'>require_wraps_result_in_db_transaction</span>
   <span class='comment'>##
@@ -2233,12 +2350,12 @@
       <pre class="lines">
 
 
-421
-422
-423</pre>
+449
+450
+451</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies.rb', line 421</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies.rb', line 449</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_rspec'>rspec</span>
   <span class='const'><span class='object_link'><a href="Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Support/Gems.html" title="ConvenientService::Support::Gems (module)">Gems</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Support/Gems/RSpec.html" title="ConvenientService::Support::Gems::RSpec (class)">RSpec</a></span></span>
@@ -2289,12 +2406,12 @@
       <pre class="lines">
 
 
-412
-413
-414</pre>
+440
+441
+442</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies.rb', line 412</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies.rb', line 440</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_ruby'>ruby</span>
   <span class='const'><span class='object_link'><a href="Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Support/Ruby.html" title="ConvenientService::Support::Ruby (class)">Ruby</a></span></span>
@@ -2441,7 +2558,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu May  9 22:42:36 2024 by
+  Generated on Thu May  9 23:59:48 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.36 (ruby-3.2.4).
 </div>
