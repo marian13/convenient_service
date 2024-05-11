@@ -7,7 +7,7 @@ require "convenient_service"
 return unless defined? ConvenientService::Examples::Rails
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::Format, type: :standard do
+RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::Format, type: :rails do
   include ConvenientService::RSpec::Helpers::StubService
 
   include ConvenientService::RSpec::Matchers::DelegateTo
