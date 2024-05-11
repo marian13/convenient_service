@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-RSpec.describe ConvenientService::Examples::Standard::V1::RequestParams::Utils::JSON::SafeParse do
+RSpec.describe ConvenientService::Examples::Standard::V1::RequestParams::Utils::JSON::SafeParse, type: :standard do
   describe ".call" do
     let(:default_value) { "some default value" }
 

@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
-RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Base do
+RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Base, type: :standard do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   let(:cache) { described_class.new }

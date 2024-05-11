@@ -7,7 +7,7 @@ require "convenient_service"
 return unless defined? ConvenientService::Service::Plugins::HasJSendResultParamsValidations::UsingDryValidation
 
 # rubocop:disable RSpec/NestedGroups
-RSpec.describe ConvenientService::Service::Plugins::HasJSendResultParamsValidations::UsingDryValidation::Concern::ClassMethods do
+RSpec.describe ConvenientService::Service::Plugins::HasJSendResultParamsValidations::UsingDryValidation::Concern::ClassMethods, type: :standard do
   example_group "class methods" do
     describe ".contract" do
       include ConvenientService::RSpec::PrimitiveMatchers::BeDirectDescendantOf

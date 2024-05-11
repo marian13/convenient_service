@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entities::Printers::Failure do
+RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entities::Printers::Failure, type: :standard do
   include ConvenientService::RSpec::Matchers::DelegateTo
   include ConvenientService::RSpec::Matchers::Results
 

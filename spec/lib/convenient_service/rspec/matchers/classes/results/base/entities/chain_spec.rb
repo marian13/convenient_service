@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entities::Chain do
+RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entities::Chain, type: :standard do
   example_group "instance methods" do
     describe "#used_data?" do
       context "when data is NOT set" do

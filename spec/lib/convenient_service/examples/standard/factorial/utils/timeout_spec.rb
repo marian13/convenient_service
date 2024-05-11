@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-RSpec.describe ConvenientService::Examples::Standard::Factorial::Utils::Timeout do
+RSpec.describe ConvenientService::Examples::Standard::Factorial::Utils::Timeout, type: :standard do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   example_group "class methods" do

@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares do
+RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares, type: :standard do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   let(:method_middlewares) { described_class.new(scope: scope, method: method, klass: klass) }

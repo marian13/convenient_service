@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
-RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::HaveAbstractMethod do
+RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::HaveAbstractMethod, type: :standard do
   subject(:matcher_result) { matcher.matches?(object) }
 
   let(:matcher) { described_class.new(method_name) }

@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-RSpec.describe ConvenientService::Utils::Object::MemoizeIncludingFalsyValues do
+RSpec.describe ConvenientService::Utils::Object::MemoizeIncludingFalsyValues, type: :standard do
   describe ".call" do
     include ConvenientService::RSpec::Matchers::DelegateTo
 

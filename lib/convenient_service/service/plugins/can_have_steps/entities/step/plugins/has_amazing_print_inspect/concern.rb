@@ -16,7 +16,7 @@ module ConvenientService
                     # @return [String]
                     #
                     # @internal
-                    #   NOTE: `ai` is a part of public interface of `awesome_print`.
+                    #   NOTE: `ai` is a part of public interface of `amazing_print`.
                     #   - https://github.com/amazing-print/amazing_print?tab=readme-ov-file#usage
                     #   - https://github.com/amazing-print/amazing_print/blob/master/lib/amazing_print/core_ext/kernel.rb
                     #

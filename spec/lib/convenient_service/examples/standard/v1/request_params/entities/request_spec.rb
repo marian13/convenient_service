@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::Examples::Standard::V1::RequestParams::Entities::Request do
+RSpec.describe ConvenientService::Examples::Standard::V1::RequestParams::Entities::Request, type: :standard do
   let(:request) { described_class.new(http_string: http_string) }
 
   let(:http_string) do

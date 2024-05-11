@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
-RSpec.describe ConvenientService::Examples::Standard::Cowsay::Services::Print do
+RSpec.describe ConvenientService::Examples::Standard::Cowsay::Services::Print, type: :standard do
   include ConvenientService::RSpec::Matchers::Results
   include ConvenientService::RSpec::Matchers::IncludeModule
 

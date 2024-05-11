@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Inputs do
+RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::Inputs, type: :standard do
   include ConvenientService::RSpec::PrimitiveMatchers::CacheItsValue
 
   let(:inputs) { described_class.new(object: object, method: method, block_expectation: block_expectation) }

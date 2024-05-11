@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::Support::DependencyContainer::Entities::NamespaceCollection do
+RSpec.describe ConvenientService::Support::DependencyContainer::Entities::NamespaceCollection, type: :standard do
   let(:namespace_collection) { described_class.new(namespaces: namespaces) }
   let(:namespaces) { [namespace] }
   let(:namespace) { ConvenientService::Support::DependencyContainer::Entities::Namespace.new(name: :foo) }

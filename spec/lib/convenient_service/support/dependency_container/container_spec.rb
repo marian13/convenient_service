@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-RSpec.describe ConvenientService::Support::DependencyContainer::Container do
+RSpec.describe ConvenientService::Support::DependencyContainer::Container, type: :standard do
   subject { described_class }
 
   example_group "modules" do

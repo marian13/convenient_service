@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-RSpec.describe ConvenientService::Support::DependencyContainer::Constants do
+RSpec.describe ConvenientService::Support::DependencyContainer::Constants, type: :standard do
   example_group "constants" do
     describe "::SCOPES" do
       it "returns scopes as array" do

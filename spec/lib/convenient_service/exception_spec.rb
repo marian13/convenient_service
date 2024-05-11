@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
-RSpec.describe ConvenientService::Exception do
+RSpec.describe ConvenientService::Exception, type: :standard do
   example_group "inheritance" do
     include ConvenientService::RSpec::PrimitiveMatchers::BeDescendantOf
 

@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/DescribeClass
-RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Constants do
+RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Constants, type: :standard do
   example_group "constants" do
     describe "::Triggers::BE_RESULT" do
       it "returns `ConvenientService::Support::UniqueValue` instance" do

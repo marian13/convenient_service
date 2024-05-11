@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::Service::Plugins::CanHaveSequentialSteps::Entities::StepCollection do
+RSpec.describe ConvenientService::Service::Plugins::CanHaveSequentialSteps::Entities::StepCollection, type: :standard do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   let(:step_collection) { described_class.new(container: container) }

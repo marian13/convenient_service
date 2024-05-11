@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-RSpec.describe ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Error::Exceptions do
+RSpec.describe ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Error::Exceptions, type: :standard do
   include ConvenientService::RSpec::PrimitiveMatchers::BeDescendantOf
 
   specify { expect(described_class::BothArgsAndKwargsArePassed).to be_descendant_of(ConvenientService::Exception) }

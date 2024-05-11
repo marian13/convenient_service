@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
-RSpec.describe ConvenientService::Support::Copyable do
+RSpec.describe ConvenientService::Support::Copyable, type: :standard do
   example_group "instance methods" do
     describe "#copy" do
       let(:base_class) do

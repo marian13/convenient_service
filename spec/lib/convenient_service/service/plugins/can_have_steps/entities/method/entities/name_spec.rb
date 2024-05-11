@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
-RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Name do
+RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Name, type: :standard do
   let(:name) { described_class.new(:foo) }
   let(:value) { :foo }
 

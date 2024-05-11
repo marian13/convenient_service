@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Middleware do
+RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Middleware, type: :standard do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   let(:middleware_result) { middleware_instance.call(env) }

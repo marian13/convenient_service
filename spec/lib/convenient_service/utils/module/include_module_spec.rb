@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
-RSpec.describe ConvenientService::Utils::Module::IncludeModule do
+RSpec.describe ConvenientService::Utils::Module::IncludeModule, type: :standard do
   describe ".call" do
     let(:other_mod) { Module.new }
 

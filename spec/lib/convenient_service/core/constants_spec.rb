@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/DescribeClass
-RSpec.describe ConvenientService::Core::Constants do
+RSpec.describe ConvenientService::Core::Constants, type: :standard do
   example_group "constants" do
     describe "::Commits::METHOD_MISSING_MAX_TRIES" do
       it "returns `10`" do

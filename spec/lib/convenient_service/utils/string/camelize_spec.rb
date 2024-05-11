@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-RSpec.describe ConvenientService::Utils::String::Camelize do
+RSpec.describe ConvenientService::Utils::String::Camelize, type: :standard do
   describe ".call" do
     subject(:result) { described_class.call(string) }
 

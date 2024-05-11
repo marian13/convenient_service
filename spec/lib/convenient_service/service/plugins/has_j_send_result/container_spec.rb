@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Container do
+RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Container, type: :standard do
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
 

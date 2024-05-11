@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-RSpec.describe ConvenientService::Utils::Hash do
+RSpec.describe ConvenientService::Utils::Hash, type: :standard do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   describe ".assert_valid_keys" do

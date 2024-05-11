@@ -7,7 +7,7 @@ require "convenient_service"
 return unless defined? ConvenientService::Service::Plugins::HasJSendResultParamsValidations::UsingDryValidation
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::Service::Plugins::HasJSendResultParamsValidations::UsingDryValidation::Middleware do
+RSpec.describe ConvenientService::Service::Plugins::HasJSendResultParamsValidations::UsingDryValidation::Middleware, type: :standard do
   let(:middleware) { described_class }
 
   example_group "inheritance" do

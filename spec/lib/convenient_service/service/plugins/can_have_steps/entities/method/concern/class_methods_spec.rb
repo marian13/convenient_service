@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Concern::ClassMethods do
+RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Concern::ClassMethods, type: :standard do
   example_group "class methods" do
     let(:method_class) do
       Class.new.tap do |klass|

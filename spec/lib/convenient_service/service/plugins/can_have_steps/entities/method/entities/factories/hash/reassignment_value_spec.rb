@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
-RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Factories::Hash::ReassignmentValue do
+RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Factories::Hash::ReassignmentValue, type: :standard do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   let(:factory) { described_class.new(other: hash) }

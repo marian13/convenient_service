@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
-RSpec.describe ConvenientService::Examples::Standard::V1::Gemfile::Services::AssertFileNotEmpty do
+RSpec.describe ConvenientService::Examples::Standard::V1::Gemfile::Services::AssertFileNotEmpty, type: :standard do
   include ConvenientService::RSpec::Matchers::Results
   include ConvenientService::RSpec::Matchers::IncludeModule
 

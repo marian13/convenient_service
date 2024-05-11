@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-RSpec.describe ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Plugins::HasCache::Concern do
+RSpec.describe ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Plugins::HasCache::Concern, type: :standard do
   let(:internals_class) do
     Class.new.tap do |klass|
       klass.class_exec(described_class) do |mod|

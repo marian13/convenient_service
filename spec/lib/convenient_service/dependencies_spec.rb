@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
-RSpec.describe ConvenientService::Dependencies do
+RSpec.describe ConvenientService::Dependencies, type: :standard do
   example_group "class methods" do
     describe ".support_logger_non_integer_levels?" do
       context "when `logger` version is lower than 1.3.0" do

@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::Support::DependencyContainer::Import do
+RSpec.describe ConvenientService::Support::DependencyContainer::Import, type: :standard do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   let(:user) do

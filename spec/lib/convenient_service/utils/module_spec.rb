@@ -2,7 +2,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-RSpec.describe ConvenientService::Utils::Module do
+RSpec.describe ConvenientService::Utils::Module, type: :standard do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   describe ".fetch_own_const" do

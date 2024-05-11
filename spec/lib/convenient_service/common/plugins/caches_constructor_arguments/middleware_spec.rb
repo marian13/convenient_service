@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::Common::Plugins::CachesConstructorArguments::Middleware do
+RSpec.describe ConvenientService::Common::Plugins::CachesConstructorArguments::Middleware, type: :standard do
   let(:middleware) { described_class }
 
   example_group "inheritance" do

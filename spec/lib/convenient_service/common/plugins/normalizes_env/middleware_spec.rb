@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-RSpec.describe ConvenientService::Common::Plugins::NormalizesEnv::Middleware do
+RSpec.describe ConvenientService::Common::Plugins::NormalizesEnv::Middleware, type: :standard do
   example_group "inheritance" do
     include ConvenientService::RSpec::PrimitiveMatchers::BeDescendantOf
 

@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Concern do
+RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Concern, type: :standard do
   include ConvenientService::RSpec::Helpers::IgnoringException
 
   include ConvenientService::RSpec::PrimitiveMatchers::CacheItsValue

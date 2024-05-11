@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-RSpec.describe ConvenientService::Utils::Method do
+RSpec.describe ConvenientService::Utils::Method, type: :standard do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   describe ".defined?" do

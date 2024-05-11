@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-RSpec.describe ConvenientService::Examples::Standard::V1::DateTime do
+RSpec.describe ConvenientService::Examples::Standard::V1::DateTime, type: :standard do
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
 

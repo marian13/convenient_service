@@ -9,7 +9,7 @@ require "convenient_service"
 # NOTE: Do not forget to check coverage when modifying source.
 #
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo do
+RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo, type: :standard do
   include ConvenientService::RSpec::PrimitiveHelpers::IgnoringException
 
   include ConvenientService::RSpec::PrimitiveMatchers::CacheItsValue

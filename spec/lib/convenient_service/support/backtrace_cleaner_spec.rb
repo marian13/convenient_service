@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::Support::BacktraceCleaner do
+RSpec.describe ConvenientService::Support::BacktraceCleaner, type: :standard do
   ##
   # example_group "class methods" do
   #   ##

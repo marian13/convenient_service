@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
-RSpec.describe ConvenientService::Support::Gems::ActiveModel do
+RSpec.describe ConvenientService::Support::Gems::ActiveModel, type: :standard do
   example_group "class methods" do
     if described_class.loaded?
       describe "version" do

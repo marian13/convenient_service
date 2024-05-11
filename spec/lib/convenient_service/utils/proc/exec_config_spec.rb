@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
-RSpec.describe ConvenientService::Utils::Proc::ExecConfig do
+RSpec.describe ConvenientService::Utils::Proc::ExecConfig, type: :standard do
   describe ".call" do
     let(:object) { OpenStruct.new(method_from_object_context: method_from_object_context_value) }
     let(:method_from_enclosing_context) { method_from_enclosing_context_value }

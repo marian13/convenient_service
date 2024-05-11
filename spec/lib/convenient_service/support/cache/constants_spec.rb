@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/DescribeClass
-RSpec.describe ConvenientService::Support::Cache::Constants do
+RSpec.describe ConvenientService::Support::Cache::Constants, type: :standard do
   example_group "constants" do
     describe "::Backends::ARRAY" do
       it "returns `:array`" do

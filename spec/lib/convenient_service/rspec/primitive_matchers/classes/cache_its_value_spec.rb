@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::CacheItsValue do
+RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::CacheItsValue, type: :standard do
   subject(:matcher_result) { matcher.matches?(block_expectation) }
 
   let(:matcher) { described_class.new }

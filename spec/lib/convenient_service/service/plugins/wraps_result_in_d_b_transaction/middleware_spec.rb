@@ -7,7 +7,7 @@
 #
 # require "convenient_service"
 #
-# RSpec.describe ConvenientService::Service::Plugins::WrapsResultInDBTransaction::Middleware do
+# RSpec.describe ConvenientService::Service::Plugins::WrapsResultInDBTransaction::Middleware, type: :standard do
 #   let(:middleware) { described_class }
 #
 #   example_group "inheritance" do

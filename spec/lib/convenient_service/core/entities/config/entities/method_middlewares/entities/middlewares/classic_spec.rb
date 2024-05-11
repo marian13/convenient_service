@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Classic do
+RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Classic, type: :standard do
   let(:middleware_instance) { described_class.new(stack) }
 
   let(:stack) { ConvenientService::Support::Middleware::StackBuilder.new }

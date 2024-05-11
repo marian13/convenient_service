@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-RSpec.describe ConvenientService::Utils::String do
+RSpec.describe ConvenientService::Utils::String, type: :standard do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   describe ".camelize" do

@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entities::Printers::Success::Commands::GenerateGotJsendAttributesPart do
+RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entities::Printers::Success::Commands::GenerateGotJsendAttributesPart, type: :standard do
   include ConvenientService::RSpec::Matchers::Results
 
   example_group "class methods" do

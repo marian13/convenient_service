@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-RSpec.describe ConvenientService::Utils::Object do
+RSpec.describe ConvenientService::Utils::Object, type: :standard do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   describe ".clamp_class" do

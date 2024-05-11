@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Container::Concern::ClassMethods do
+RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Container::Concern::ClassMethods, type: :standard do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   let(:container_class) do

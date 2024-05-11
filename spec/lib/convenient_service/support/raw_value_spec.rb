@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
-RSpec.describe ConvenientService::Support::RawValue do
+RSpec.describe ConvenientService::Support::RawValue, type: :standard do
   let(:object) { 42 }
 
   example_group "class methods" do

@@ -8,7 +8,7 @@ require "convenient_service"
 # TODO:  with WithArguments.
 #
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::SubMatchers::WithAnyArguments do
+RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::SubMatchers::WithAnyArguments, type: :standard do
   let(:sub_matcher) { described_class.new(matcher: matcher) }
 
   let(:matcher) { ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo.new(object, method) }

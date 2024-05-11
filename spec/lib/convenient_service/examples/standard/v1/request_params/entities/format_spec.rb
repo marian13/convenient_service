@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::Examples::Standard::V1::RequestParams::Entities::Format do
+RSpec.describe ConvenientService::Examples::Standard::V1::RequestParams::Entities::Format, type: :standard do
   example_group "class methods" do
     describe ".cast" do
       let(:casted) { described_class.cast(other) }

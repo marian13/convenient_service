@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/DescribeClass
-RSpec.describe ConvenientService::Common::Plugins::CanUtilizeFiniteLoop::Constants do
+RSpec.describe ConvenientService::Common::Plugins::CanUtilizeFiniteLoop::Constants, type: :standard do
   example_group "constants" do
     describe "::MAX_ITERATION_COUNT" do
       it "returns `1_000`" do

@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-RSpec.describe ConvenientService::Utils::Class do
+RSpec.describe ConvenientService::Utils::Class, type: :standard do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   describe ".display_name" do

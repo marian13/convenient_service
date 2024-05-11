@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::Support::ThreadSafeCounter do
+RSpec.describe ConvenientService::Support::ThreadSafeCounter, type: :standard do
   include ConvenientService::RSpec::PrimitiveHelpers::IgnoringException
   include ConvenientService::RSpec::PrimitiveHelpers::InThreads
 

@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Exceptions do
+RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Exceptions, type: :standard do
   include ConvenientService::RSpec::PrimitiveMatchers::BeDescendantOf
 
   specify { expect(described_class::CallOriginalChainingIsAlreadySet).to be_descendant_of(ConvenientService::Exception) }

@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::BeFailure do
+RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::BeFailure, type: :standard do
   example_group "inheritance" do
     include ConvenientService::RSpec::PrimitiveMatchers::BeDescendantOf
 

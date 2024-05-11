@@ -10,13 +10,13 @@ require "convenient_service"
 ConvenientService.backtrace_cleaner.remove_silencers! if ::ConvenientService.debug?
 
 ConvenientService::Dependencies.require_can_utilize_finite_loop
-ConvenientService::Dependencies.require_amazing_print_inspect
 ConvenientService::Dependencies.require_awesome_print_inspect
+ConvenientService::Dependencies.require_amazing_print_inspect
 ConvenientService::Dependencies.require_rescues_result_unhandled_exceptions
 
 ConvenientService::Dependencies.require_rspec_extentions
 ConvenientService::Dependencies.require_test_tools
-ConvenientService::Dependencies.require_development_tools
+ConvenientService::Dependencies.require_development_tools(amazing_print: true, awesome_print: false)
 
 ConvenientService::Dependencies.require_standard_examples
 ConvenientService::Dependencies.require_standard_examples(version: "v1")

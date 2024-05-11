@@ -6,7 +6,7 @@ require "convenient_service"
 
 return unless defined? ConvenientService::Examples::Rails
 
-RSpec.describe ConvenientService::Examples::Rails::Gemfile do
+RSpec.describe ConvenientService::Examples::Rails::Gemfile, type: :standard do
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
 

@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-RSpec.describe ConvenientService::Common::Plugins::HasConstructorWithoutInitialize::Concern do
+RSpec.describe ConvenientService::Common::Plugins::HasConstructorWithoutInitialize::Concern, type: :standard do
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
     include ConvenientService::RSpec::PrimitiveMatchers::ExtendModule

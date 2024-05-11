@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-RSpec.describe ConvenientService::Service::Plugins::CanHaveFallbacks::Exceptions do
+RSpec.describe ConvenientService::Service::Plugins::CanHaveFallbacks::Exceptions, type: :standard do
   include ConvenientService::RSpec::PrimitiveMatchers::BeDescendantOf
 
   specify { expect(described_class::FallbackResultIsNotOverridden).to be_descendant_of(ConvenientService::Exception) }

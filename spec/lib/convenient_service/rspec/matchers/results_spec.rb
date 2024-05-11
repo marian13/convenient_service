@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-RSpec.describe ConvenientService::RSpec::Matchers::Results do
+RSpec.describe ConvenientService::RSpec::Matchers::Results, type: :standard do
   example_group "modules" do
     include ConvenientService::RSpec::PrimitiveMatchers::IncludeModule
 

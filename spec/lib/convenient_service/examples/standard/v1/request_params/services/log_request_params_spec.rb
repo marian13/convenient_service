@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
-RSpec.describe ConvenientService::Examples::Standard::V1::RequestParams::Services::LogRequestParams do
+RSpec.describe ConvenientService::Examples::Standard::V1::RequestParams::Services::LogRequestParams, type: :standard do
   include ConvenientService::RSpec::Matchers::DelegateTo
   include ConvenientService::RSpec::Matchers::Results
 

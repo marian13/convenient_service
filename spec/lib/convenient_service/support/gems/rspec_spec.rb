@@ -9,7 +9,7 @@ require "convenient_service"
 # The rest is verified by `test/lib/convenient_service/support/gems/rspec_test.rb`.
 #
 # rubocop:disable RSpec/NestedGroups
-RSpec.describe ConvenientService::Support::Gems::RSpec do
+RSpec.describe ConvenientService::Support::Gems::RSpec, type: :standard do
   example_group "class methods" do
     describe ".loaded?" do
       it "returns `true`" do

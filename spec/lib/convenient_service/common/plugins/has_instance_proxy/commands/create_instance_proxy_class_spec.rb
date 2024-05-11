@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
-RSpec.describe ConvenientService::Common::Plugins::HasInstanceProxy::Commands::CreateInstanceProxyClass do
+RSpec.describe ConvenientService::Common::Plugins::HasInstanceProxy::Commands::CreateInstanceProxyClass, type: :standard do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   example_group "class methods" do

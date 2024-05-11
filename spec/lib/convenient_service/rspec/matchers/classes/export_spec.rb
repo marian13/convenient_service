@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/MultipleMemoizedHelpers, RSpec/NestedGroups
-RSpec.describe ConvenientService::RSpec::Matchers::Classes::Export do
+RSpec.describe ConvenientService::RSpec::Matchers::Classes::Export, type: :standard do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   subject(:matcher_result) { matcher.matches?(container) }

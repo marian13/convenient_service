@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::Service::Plugins::HasMermaidFlowchart::Concern do
+RSpec.describe ConvenientService::Service::Plugins::HasMermaidFlowchart::Concern, type: :standard do
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
     include ConvenientService::RSpec::PrimitiveMatchers::ExtendModule

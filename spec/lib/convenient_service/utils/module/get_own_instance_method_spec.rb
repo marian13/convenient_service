@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
-RSpec.describe ConvenientService::Utils::Module::GetOwnInstanceMethod do
+RSpec.describe ConvenientService::Utils::Module::GetOwnInstanceMethod, type: :standard do
   describe ".call" do
     let(:method_name) { :result }
 

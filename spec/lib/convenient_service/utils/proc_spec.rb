@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-RSpec.describe ConvenientService::Utils::Proc do
+RSpec.describe ConvenientService::Utils::Proc, type: :standard do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   describe ".conjunct" do

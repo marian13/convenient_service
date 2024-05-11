@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/DescribeClass
-RSpec.describe "convenient_service/support/undefined" do
+RSpec.describe "convenient_service/support/undefined", type: :standard do
   example_group "constants" do
     describe "::UNDEFINED" do
       it "returns `ConvenientService::Support::UniqueValue` instance" do

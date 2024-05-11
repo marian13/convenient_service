@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
-RSpec.describe ConvenientService::Service::Plugins::HasMermaidFlowchart::Entities::Flowchart::Entities::Template do
+RSpec.describe ConvenientService::Service::Plugins::HasMermaidFlowchart::Entities::Flowchart::Entities::Template, type: :standard do
   example_group "instance methods" do
     include ConvenientService::RSpec::Matchers::DelegateTo
     include ConvenientService::RSpec::PrimitiveMatchers::CacheItsValue

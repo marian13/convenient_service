@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::Utils::Module::InstanceMethodDefined do
+RSpec.describe ConvenientService::Utils::Module::InstanceMethodDefined, type: :standard do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   example_group "class methhods" do

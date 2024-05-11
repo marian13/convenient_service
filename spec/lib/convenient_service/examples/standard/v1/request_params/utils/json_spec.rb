@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
-RSpec.describe ConvenientService::Examples::Standard::V1::RequestParams::Utils::JSON do
+RSpec.describe ConvenientService::Examples::Standard::V1::RequestParams::Utils::JSON, type: :standard do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   example_group "class methods" do

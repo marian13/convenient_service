@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-RSpec.describe ConvenientService::Utils::Array do
+RSpec.describe ConvenientService::Utils::Array, type: :standard do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   describe ".contain_exactly?" do

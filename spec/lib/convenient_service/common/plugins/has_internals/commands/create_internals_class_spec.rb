@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
-RSpec.describe ConvenientService::Common::Plugins::HasInternals::Commands::CreateInternalsClass do
+RSpec.describe ConvenientService::Common::Plugins::HasInternals::Commands::CreateInternalsClass, type: :standard do
   example_group "class methods" do
     describe ".call" do
       include ConvenientService::RSpec::Matchers::DelegateTo

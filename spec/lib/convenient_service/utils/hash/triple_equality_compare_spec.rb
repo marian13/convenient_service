@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
-RSpec.describe ConvenientService::Utils::Hash::TripleEqualityCompare do
+RSpec.describe ConvenientService::Utils::Hash::TripleEqualityCompare, type: :standard do
   example_group "class methods" do
     describe ".call" do
       let(:command_result) { described_class.call(hash, other_hash) }

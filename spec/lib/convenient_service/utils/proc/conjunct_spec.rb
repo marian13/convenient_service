@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
-RSpec.describe ConvenientService::Utils::Proc::Conjunct do
+RSpec.describe ConvenientService::Utils::Proc::Conjunct, type: :standard do
   describe ".call" do
     subject(:conjuction) { described_class.call(procs) }
 

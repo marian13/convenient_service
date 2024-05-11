@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
-RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Array::Entities::Pair do
+RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Array::Entities::Pair, type: :standard do
   let(:pair) { described_class.new(key: key, value: value) }
 
   let(:key) { :foo }

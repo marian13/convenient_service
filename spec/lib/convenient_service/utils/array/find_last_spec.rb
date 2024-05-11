@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-RSpec.describe ConvenientService::Utils::Array::FindLast do
+RSpec.describe ConvenientService::Utils::Array::FindLast, type: :standard do
   describe ".call" do
     subject(:result) { described_class.call(array) { |item| item[0] == "b" } }
 

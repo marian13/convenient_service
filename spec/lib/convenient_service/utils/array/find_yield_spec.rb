@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-RSpec.describe ConvenientService::Utils::Array::FindYield do
+RSpec.describe ConvenientService::Utils::Array::FindYield, type: :standard do
   describe ".call" do
     subject(:result) { described_class.call(array) { |string| string.match(regex) } }
 

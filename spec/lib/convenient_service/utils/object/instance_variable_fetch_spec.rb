@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
-RSpec.describe ConvenientService::Utils::Object::InstanceVariableFetch do
+RSpec.describe ConvenientService::Utils::Object::InstanceVariableFetch, type: :standard do
   describe ".call" do
     let(:object) { Object.new }
     let(:ivar_name) { :@foo }

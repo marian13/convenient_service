@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Middleware do
+RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Middleware, type: :standard do
   let(:middleware) { described_class }
 
   example_group "inheritance" do

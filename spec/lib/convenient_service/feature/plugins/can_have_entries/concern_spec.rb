@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::Feature::Plugins::CanHaveEntries::Concern do
+RSpec.describe ConvenientService::Feature::Plugins::CanHaveEntries::Concern, type: :standard do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   let(:feature_class) do

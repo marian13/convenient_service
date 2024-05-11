@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
-RSpec.describe ConvenientService::Utils::Array::Rjust do
+RSpec.describe ConvenientService::Utils::Array::Rjust, type: :standard do
   describe ".call" do
     subject(:result) { described_class.call(array, size, pad) }
 

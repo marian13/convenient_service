@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-RSpec.describe ConvenientService::Utils::Object::DuckClass do
+RSpec.describe ConvenientService::Utils::Object::DuckClass, type: :standard do
   describe ".call" do
     let(:util_result) { described_class.call(object) }
 

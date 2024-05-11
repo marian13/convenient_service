@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-RSpec.describe ConvenientService::Utils::Bool do
+RSpec.describe ConvenientService::Utils::Bool, type: :standard do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   describe ".to_bool" do

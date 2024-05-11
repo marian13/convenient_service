@@ -6,7 +6,7 @@ require "convenient_service"
 
 return unless defined? ConvenientService::Common::Plugins::HasAttributes::UsingActiveModelAttributes
 
-RSpec.describe ConvenientService::Common::Plugins::HasAttributes::UsingActiveModelAttributes::Concern do
+RSpec.describe ConvenientService::Common::Plugins::HasAttributes::UsingActiveModelAttributes::Concern, type: :standard do
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
 

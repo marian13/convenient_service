@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-RSpec.describe ConvenientService::RSpec::Matchers::Results::BeNotError do
+RSpec.describe ConvenientService::RSpec::Matchers::Results::BeNotError, type: :standard do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   example_group "instance methods" do

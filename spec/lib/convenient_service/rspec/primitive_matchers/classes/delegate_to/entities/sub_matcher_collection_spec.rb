@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::SubMatcherCollection do
+RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::SubMatcherCollection, type: :standard do
   include ConvenientService::RSpec::PrimitiveHelpers::IgnoringException
 
   let(:sub_matcher_collection) { described_class.new(matcher: matcher) }

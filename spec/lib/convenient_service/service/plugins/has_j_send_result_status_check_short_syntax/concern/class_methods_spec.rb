@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-RSpec.describe ConvenientService::Service::Plugins::HasJSendResultStatusCheckShortSyntax::Concern::ClassMethods do
+RSpec.describe ConvenientService::Service::Plugins::HasJSendResultStatusCheckShortSyntax::Concern::ClassMethods, type: :standard do
   example_group "instance methods" do
     include ConvenientService::RSpec::Matchers::DelegateTo
 

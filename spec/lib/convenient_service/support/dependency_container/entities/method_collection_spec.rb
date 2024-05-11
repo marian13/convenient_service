@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::Support::DependencyContainer::Entities::MethodCollection do
+RSpec.describe ConvenientService::Support::DependencyContainer::Entities::MethodCollection, type: :standard do
   let(:method_collection) { described_class.new(methods: methods) }
   let(:methods) { [method] }
   let(:method) { ConvenientService::Support::DependencyContainer::Entities::Method.new(slug: :foo, scope: :instance, body: body) }

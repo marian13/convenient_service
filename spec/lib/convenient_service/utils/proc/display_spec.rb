@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-RSpec.describe ConvenientService::Utils::Proc::Display do
+RSpec.describe ConvenientService::Utils::Proc::Display, type: :standard do
   describe ".call" do
     subject(:display) { described_class.call(proc) }
 

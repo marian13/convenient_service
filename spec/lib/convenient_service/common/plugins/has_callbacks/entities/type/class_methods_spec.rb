@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
-RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Entities::Type::ClassMethods do
+RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Entities::Type::ClassMethods, type: :standard do
   describe "#cast" do
     let(:type_class) { ConvenientService::Common::Plugins::HasCallbacks::Entities::Type }
 

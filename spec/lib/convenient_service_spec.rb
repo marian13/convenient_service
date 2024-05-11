@@ -3,7 +3,7 @@
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
-RSpec.describe ConvenientService do
+RSpec.describe ConvenientService, type: :standard do
   include described_class::RSpec::PrimitiveMatchers::CacheItsValue
 
   example_group "constants" do

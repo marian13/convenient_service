@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
-RSpec.describe ConvenientService::Support::UniqueValue do
+RSpec.describe ConvenientService::Support::UniqueValue, type: :standard do
   let(:unique_value) { described_class.new(label) }
   let(:label) { "foo" }
   let(:default_label) { "unique_value_#{unique_value.object_id}" }

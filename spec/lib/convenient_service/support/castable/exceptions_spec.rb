@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-RSpec.describe ConvenientService::Support::Castable::Exceptions do
+RSpec.describe ConvenientService::Support::Castable::Exceptions, type: :standard do
   include ConvenientService::RSpec::PrimitiveMatchers::BeDescendantOf
 
   specify { expect(described_class::CastIsNotOverridden).to be_descendant_of(ConvenientService::Exception) }

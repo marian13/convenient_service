@@ -6,7 +6,7 @@ require "convenient_service"
 
 return unless defined? ConvenientService::Service::Plugins::HasJSendResultParamsValidations::UsingDryValidation
 
-RSpec.describe ConvenientService::Service::Plugins::HasJSendResultParamsValidations::UsingDryValidation::Concern do
+RSpec.describe ConvenientService::Service::Plugins::HasJSendResultParamsValidations::UsingDryValidation::Concern, type: :standard do
   include ConvenientService::RSpec::Matchers::IncludeModule
   include ConvenientService::RSpec::PrimitiveMatchers::ExtendModule
 

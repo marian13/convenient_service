@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanRecalculateResult::Concern::InstanceMethods do
+RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanRecalculateResult::Concern::InstanceMethods, type: :standard do
   example_group "instance methods" do
     let(:service) { OpenStruct.new(recalculate_result: Object.new) }
 

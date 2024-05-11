@@ -7,7 +7,7 @@ require "convenient_service"
 # frozen_string_literal: true
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::RSpec::Helpers::Classes::StubService::Entities::StubbedService do
+RSpec.describe ConvenientService::RSpec::Helpers::Classes::StubService::Entities::StubbedService, type: :standard do
   include ConvenientService::RSpec::Helpers::StubService
 
   include ConvenientService::RSpec::Matchers::DelegateTo

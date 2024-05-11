@@ -6,7 +6,7 @@ require "convenient_service"
 
 return unless defined? ConvenientService::Common::Plugins::AssignsAttributesInConstructor::UsingDryInitializer
 
-RSpec.describe ConvenientService::Common::Plugins::AssignsAttributesInConstructor::UsingDryInitializer::Concern do
+RSpec.describe ConvenientService::Common::Plugins::AssignsAttributesInConstructor::UsingDryInitializer::Concern, type: :standard do
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
     include ConvenientService::RSpec::PrimitiveMatchers::ExtendModule

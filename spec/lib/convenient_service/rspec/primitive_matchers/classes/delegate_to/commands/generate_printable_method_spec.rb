@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Commands::GeneratePrintableMethod do
+RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Commands::GeneratePrintableMethod, type: :standard do
   example_group "class methods" do
     describe ".call" do
       let(:command_result) { described_class.call(object: object, method: method) }

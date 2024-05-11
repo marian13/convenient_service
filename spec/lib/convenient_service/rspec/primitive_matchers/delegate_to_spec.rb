@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::DelegateTo do
+RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::DelegateTo, type: :standard do
   include described_class
 
   example_group "instance methods" do

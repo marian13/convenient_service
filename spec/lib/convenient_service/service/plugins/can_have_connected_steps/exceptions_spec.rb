@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Exceptions do
+RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Exceptions, type: :standard do
   include ConvenientService::RSpec::PrimitiveMatchers::BeDescendantOf
 
   specify { expect(described_class::FirstStepIsNotSet).to be_descendant_of(ConvenientService::Exception) }

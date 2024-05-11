@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::Feature::Plugins::CanHaveEntries::Commands::DefineEntries do
+RSpec.describe ConvenientService::Feature::Plugins::CanHaveEntries::Commands::DefineEntries, type: :standard do
   example_group "class methods" do
     describe ".call" do
       include ConvenientService::RSpec::Matchers::DelegateTo

@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-RSpec.describe ConvenientService::Examples::Standard::RequestParams::Utils::Array do
+RSpec.describe ConvenientService::Examples::Standard::RequestParams::Utils::Array, type: :standard do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   example_group "class methods" do

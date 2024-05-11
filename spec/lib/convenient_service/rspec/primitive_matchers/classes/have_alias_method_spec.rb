@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
-RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::HaveAliasMethod do
+RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::HaveAliasMethod, type: :standard do
   subject(:matcher_result) { matcher.matches?(object) }
 
   let(:matcher) { described_class.new(alias_name, original_name) }

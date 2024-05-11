@@ -13,7 +13,7 @@ require "convenient_service"
 return if ConvenientService::Dependencies.ruby.jruby?
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::Specification do
+RSpec.describe ConvenientService::Specification, type: :standard do
   example_group "constants" do
     describe "::VERSION" do
       it "returns name" do

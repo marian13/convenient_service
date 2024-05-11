@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::Support::Arguments do
+RSpec.describe ConvenientService::Support::Arguments, type: :standard do
   let(:arguments) { described_class.new(*args, **kwargs, &block) }
 
   let(:args) { [:foo] }

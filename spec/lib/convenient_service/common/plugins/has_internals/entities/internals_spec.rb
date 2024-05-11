@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-RSpec.describe ConvenientService::Common::Plugins::HasInternals::Entities::Internals do
+RSpec.describe ConvenientService::Common::Plugins::HasInternals::Entities::Internals, type: :standard do
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
 

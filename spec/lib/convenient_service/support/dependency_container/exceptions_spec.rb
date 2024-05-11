@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-RSpec.describe ConvenientService::Support::DependencyContainer::Exceptions do
+RSpec.describe ConvenientService::Support::DependencyContainer::Exceptions, type: :standard do
   include ConvenientService::RSpec::PrimitiveMatchers::BeDescendantOf
 
   specify { expect(described_class::InvalidScope).to be_descendant_of(ConvenientService::Exception) }

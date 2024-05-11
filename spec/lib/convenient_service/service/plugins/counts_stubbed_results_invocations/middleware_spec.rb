@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::Service::Plugins::CountsStubbedResultsInvocations::Middleware do
+RSpec.describe ConvenientService::Service::Plugins::CountsStubbedResultsInvocations::Middleware, type: :standard do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   let(:middleware) { described_class }

@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-RSpec.describe ConvenientService::Common::Plugins::HasInstanceProxy::Concern do
+RSpec.describe ConvenientService::Common::Plugins::HasInstanceProxy::Concern, type: :standard do
   let(:concern) { described_class }
 
   example_group "modules" do

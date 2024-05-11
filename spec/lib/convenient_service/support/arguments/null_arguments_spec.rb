@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::Support::Arguments::NullArguments do
+RSpec.describe ConvenientService::Support::Arguments::NullArguments, type: :standard do
   let(:null_arguments) { described_class.new }
 
   example_group "inheritance" do

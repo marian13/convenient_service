@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::PrependModule do
+RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::PrependModule, type: :standard do
   subject(:matcher_result) { matcher.matches?(klass) }
 
   let(:matcher) { described_class.new(mod) }

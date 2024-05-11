@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
-RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Middleware::Commands::CastMiddleware do
+RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Middleware::Commands::CastMiddleware, type: :standard do
   example_group "class methods" do
     describe ".call" do
       let(:casted) { described_class.call(other: other) }

@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
-RSpec.describe ConvenientService::Support::MethodParameters do
+RSpec.describe ConvenientService::Support::MethodParameters, type: :standard do
   example_group "constants" do
     describe "::Constants::Types::REQUIRED_KEYWORD" do
       it "is equal to `:keyreq`" do

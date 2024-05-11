@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/DescribeClass
-RSpec.describe "lib/convenient_service/service/plugins/has_mermaid_flowchart/entities/flowchart/templates/flowchart.html.erb" do
+RSpec.describe "lib/convenient_service/service/plugins/has_mermaid_flowchart/entities/flowchart/templates/flowchart.html.erb", type: :standard do
   let(:template_path) { "lib/convenient_service/service/plugins/has_mermaid_flowchart/entities/flowchart/templates/flowchart.html.erb" }
 
   let(:template_html_erb) do

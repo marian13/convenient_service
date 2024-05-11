@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::Examples::Standard::V1::RequestParams::Entities::Logger do
+RSpec.describe ConvenientService::Examples::Standard::V1::RequestParams::Entities::Logger, type: :standard do
   example_group "class methods" do
     describe ".log" do
       let(:out) { Tempfile.new }

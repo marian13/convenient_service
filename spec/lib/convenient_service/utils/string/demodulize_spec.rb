@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-RSpec.describe ConvenientService::Utils::String::Demodulize do
+RSpec.describe ConvenientService::Utils::String::Demodulize, type: :standard do
   describe ".call" do
     subject(:util_result) { described_class.call(string) }
 

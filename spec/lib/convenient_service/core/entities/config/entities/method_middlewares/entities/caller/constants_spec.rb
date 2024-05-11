@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Caller::Constants do
+RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Caller::Constants, type: :standard do
   example_group "constants" do
     describe "::INSTANCE_PREFIX" do
       it "is equal to `\"self.class.\"`" do

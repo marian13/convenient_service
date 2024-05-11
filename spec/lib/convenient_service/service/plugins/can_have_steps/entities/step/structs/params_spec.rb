@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
-RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Structs::Params do
+RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Structs::Params, type: :standard do
   example_group "instance methods" do
     describe "#==" do
       let(:kwargs) { {service: Class.new, inputs: [:foo], outputs: [:bar], index: 0, organizer: Object.new, extra_kwargs: {fallback: true}} }

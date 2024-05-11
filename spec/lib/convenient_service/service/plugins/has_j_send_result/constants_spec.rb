@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Constants do
+RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Constants, type: :standard do
   example_group "constants" do
     describe "::SUCCESS_STATUS" do
       it "returns `:success`" do
