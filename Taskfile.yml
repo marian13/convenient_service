@@ -397,7 +397,7 @@ tasks:
       APPRAISAL_PREFIX:
         sh: ruby -e 'puts "appraisal" + " " + RUBY_ENGINE + "_" + RUBY_VERSION + "_" + ENV["APPRAISAL"] unless ENV["APPRAISAL"].to_s.empty?'
       REQUIRE_SUFFIX:
-        sh: ruby -e 'puts case ENV["APPRAISAL"] when /rails/ then "--require rails_helper" when /dry/ then "--require dry_helper" end'
+        sh: ruby -e 'puts case ENV["APPRAISAL"] when /rails/ then "--require rails_helper" when /dry/ then "--require dry_helper" else "--require standard_helper" end'
       GIT_STAGED_RSPEC_FILES:
         sh: ruby -e 'puts `task git:staged:rspec --silent` if ENV["STAGED"] == "true"'
 

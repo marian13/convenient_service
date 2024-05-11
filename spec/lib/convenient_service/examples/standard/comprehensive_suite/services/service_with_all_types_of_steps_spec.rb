@@ -5,6 +5,8 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
+return unless defined? ConvenientService::Examples::Standard
+
 RSpec.describe ConvenientService::Examples::Standard::ComprehensiveSuite::Services::ServiceWithAllTypesOfSteps, type: :standard do
   include ConvenientService::RSpec::Matchers::Results
   include ConvenientService::RSpec::Matchers::DelegateTo

@@ -4,6 +4,8 @@ require "spec_helper"
 
 require "convenient_service"
 
+return unless defined? ConvenientService::Examples::Standard
+
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Examples::Standard::V1::Cowsay::Services::BuildCow, type: :standard do
   include ConvenientService::RSpec::Matchers::Results

@@ -5,3 +5,5 @@ ConvenientService::Dependencies.require_has_j_send_result_params_validations_usi
 
 ConvenientService::Dependencies.require_dry_examples
 ConvenientService::Dependencies.require_dry_examples(version: "v1")
+
+ConvenientService::Dependencies.require_development_tools

@@ -4,6 +4,8 @@ require "spec_helper"
 
 require "convenient_service"
 
+return unless defined? ConvenientService::Examples::Standard
+
 RSpec.describe ConvenientService::Examples::Standard::V1::RequestParams::Utils::HTTP::Request, type: :standard do
   include ConvenientService::RSpec::Matchers::DelegateTo
 

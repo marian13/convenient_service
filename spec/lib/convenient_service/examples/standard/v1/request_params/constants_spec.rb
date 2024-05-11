@@ -4,6 +4,8 @@ require "spec_helper"
 
 require "convenient_service"
 
+return unless defined? ConvenientService::Examples::Standard
+
 RSpec.describe ConvenientService::Examples::Standard::V1::RequestParams::Constants, type: :standard do
   example_group "constants" do
     describe "Tags::EMPTY" do

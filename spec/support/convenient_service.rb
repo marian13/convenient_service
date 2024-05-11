@@ -16,9 +16,5 @@ ConvenientService::Dependencies.require_rescues_result_unhandled_exceptions
 
 ConvenientService::Dependencies.require_rspec_extentions
 ConvenientService::Dependencies.require_test_tools
-ConvenientService::Dependencies.require_development_tools(amazing_print: true, awesome_print: false)
-
-ConvenientService::Dependencies.require_standard_examples
-ConvenientService::Dependencies.require_standard_examples(version: "v1")
 
 ConvenientService::Dependencies.require_alias
