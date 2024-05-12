@@ -136,6 +136,7 @@ module ConvenientService
               use ConvenientService::Plugins::Result::CanRecalculateResult::Concern
 
               use ConvenientService::Plugins::Result::HasNegatedResult::Concern
+              use ConvenientService::Plugins::Result::CanBeFromException::Concern
               use ConvenientService::Plugins::Result::CanBeOwnResult::Concern
               use ConvenientService::Plugins::Result::CanHaveFallbacks::Concern
               use ConvenientService::Plugins::Result::CanHaveParentResult::Concern

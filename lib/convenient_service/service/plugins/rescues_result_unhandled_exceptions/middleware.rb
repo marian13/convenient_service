@@ -74,6 +74,7 @@ module ConvenientService
               data: {exception: exception},
               message: format_exception(exception, *args, **kwargs, &block)
             )
+              .copy(overrides: {kwargs: {from_exception: true}})
           end
 
           ##
