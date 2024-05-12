@@ -119,9 +119,17 @@ appraise "dry" do
   gem "dry-core", "~> 0.8.0"
 end
 
+appraise "amazing_print" do
+  gem "amazing_print", "~> 1.5.0"
+end
+
+appraise "awesome_print" do
+  gem "awesome_print", "~> 1.9.2"
+end
+
 ##
 # NOTE: A combination of all the highest versions of gems. Just for quick hacking in `APPRAISAL=all task console`.
-# IMPORTANT: Should not be enforced in CI, since integrity checks between external gems are not the goal of this library (a least for now).
+# IMPORTANT: Should not be enforced in CI, since integrity checks between external gems are not the goal of this library (at least for now).
 #
 appraise "all" do
   gem "activemodel", "~> 7.0.0"
@@ -152,4 +160,8 @@ appraise "all" do
   # NOTE: Waits for `should-matchers` full support.
   #
   # gem "shoulda-matchers", "~> 5.0.0"
+
+  gem "amazing_print", "~> 1.5.0"
+
+  gem "awesome_print", "~> 1.9.2"
 end

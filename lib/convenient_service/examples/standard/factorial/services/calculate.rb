@@ -12,7 +12,6 @@ module ConvenientService
         module Services
           class Calculate
             include ConvenientService::Standard::Config
-            include ConvenientService::AwesomePrintInspect::Config
 
             attr_reader :number, :timeout_seconds
 

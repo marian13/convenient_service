@@ -4,8 +4,10 @@ require "spec_helper"
 
 require "convenient_service"
 
+return unless defined? ConvenientService::AwesomePrintInspect::Config
+
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::Service::Configs::AwesomePrintInspect, type: :standard do
+RSpec.describe ConvenientService::Service::Configs::AwesomePrintInspect, type: :awesome_print do
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
 
