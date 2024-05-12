@@ -77,8 +77,6 @@ tasks:
   deps:
     cmds:
       - task: deps:install
-    requires:
-      vars: [RUBY_ENGINE, RUBY_VERSION]
 
   ##
   # NOTE: `task deps:install` is also aliased as `task install`.
@@ -88,8 +86,11 @@ tasks:
       - cp Gemfile Gemfile.{{.RUBY_ENGINE}}_{{.RUBY_VERSION}}
       - bundle install
       - bundle exec appraisal install
-    requires:
-      vars: [RUBY_ENGINE, RUBY_VERSION]
+    vars:
+      RUBY_ENGINE:
+        sh: ruby -e 'puts ENV["RUBY_ENGINE"] || RUBY_ENGINE'
+      RUBY_VERSION:
+        sh: ruby -e 'puts ENV["RUBY_VERSION"] || RUBY_VERSION[/\d+.\d+/]'
 
   ##
   # NOTE: Meaning of `2> /dev/null`.
@@ -316,8 +317,6 @@ tasks:
   install:
     cmds:
       - task: deps:install
-    requires:
-      vars: [RUBY_ENGINE, RUBY_VERSION]
 
   ##
   # NOTE: Usage examples.
@@ -417,6 +416,7 @@ tasks:
       - APPRAISAL=rails_6.1 task rspec
       - APPRAISAL=rails_6.0 task rspec
       - APPRAISAL=rails_5.2 task rspec
+
   ##
   # NOTE: Usage examples.
   #   task rubocop

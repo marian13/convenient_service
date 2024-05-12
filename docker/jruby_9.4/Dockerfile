@@ -50,7 +50,7 @@ WORKDIR /gem
 
 COPY . /gem
 
-ENV RUBY_ENGINE=ruby
+ENV RUBY_ENGINE=jruby
 
 ##
 # NOTE: Every container has its own copy of `Gemfile`. This way a developer doesn't need to delete `Gemfile.lock` all the time when changing containers.
