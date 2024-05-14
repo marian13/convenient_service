@@ -77,4 +77,26 @@ RSpec.describe ConvenientService::Utils::Object, type: :standard do
         .and_return_its_value
     end
   end
+
+  describe ".safe_send" do
+    let(:object) do
+      Object.new.tap do |object|
+        object.define_singleton_method(:foo) do |*args, **kwargs, &block|
+          [__method__, args, kwargs, block]
+        end
+      end
+    end
+
+    let(:method) { :foo }
+    let(:args) { [:foo] }
+    let(:kwargs) { {foo: :bar} }
+    let(:block) { proc { :foo } }
+
+    specify do
+      expect { described_class.safe_send(object, method, *args, **kwargs, &block) }
+        .to delegate_to(described_class::SafeSend, :call)
+        .with_arguments(object, method, *args, **kwargs, &block)
+        .and_return_its_value
+    end
+  end
 end

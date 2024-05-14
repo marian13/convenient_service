@@ -6,6 +6,7 @@ require_relative "object/instance_variable_delete"
 require_relative "object/instance_variable_fetch"
 require_relative "object/memoize_including_falsy_values"
 require_relative "object/resolve_type"
+require_relative "object/safe_send"
 
 module ConvenientService
   module Utils
@@ -59,6 +60,14 @@ module ConvenientService
         #
         def resolve_type(...)
           ResolveType.call(...)
+        end
+
+        ##
+        # @example
+        #   ConvenientService::Utils::Object.safe_send(object, method, *args, **kwargs, &block)
+        #
+        def safe_send(...)
+          SafeSend.call(...)
         end
       end
     end
