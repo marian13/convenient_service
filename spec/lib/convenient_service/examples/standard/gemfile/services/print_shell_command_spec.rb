@@ -19,12 +19,12 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::PrintSh
   end
 
   example_group "class methods" do
+    let(:command) { "ls -a" }
+    let(:skip) { false }
+    let(:out) { Tempfile.new }
+
     describe ".result" do
       subject(:result) { described_class.result(command: command, skip: skip, out: out) }
-
-      let(:command) { "ls -a" }
-      let(:skip) { false }
-      let(:out) { Tempfile.new }
 
       context "when `PrintShellCommand` is NOT successful" do
         context "when skipping" do
@@ -54,6 +54,14 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::PrintSh
         it "returns `success`" do
           expect(result).to be_success.without_data.of_service(described_class).without_step
         end
+      end
+    end
+
+    describe ".fallback_result" do
+      subject(:fallback_result) { described_class.fallback_result(command: command, skip: skip, out: out) }
+
+      it "returns `success`" do
+        expect(fallback_result).to be_success.without_data.of_service(described_class).without_step
       end
     end
   end

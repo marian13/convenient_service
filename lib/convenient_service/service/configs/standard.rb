@@ -93,6 +93,19 @@ module ConvenientService
 
           ##
           # @internal
+          #   NOTE: Check `Essential` docs to understand why `use ConvenientService::Plugins::Common::NormalizesEnv::Middleware` for `:fallback_error_result` is used in `Standard`, not in `Essential` config.
+          #
+          middlewares :fallback_result do
+            use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
+            use ConvenientService::Plugins::Service::CollectsServicesInException::Middleware
+            use ConvenientService::Plugins::Common::CachesReturnValue::Middleware
+
+            use ConvenientService::Plugins::Service::RaisesOnNotResultReturnValue::Middleware
+            use ConvenientService::Plugins::Service::CanHaveFallbacks::Middleware.with(status: nil)
+          end
+
+          ##
+          # @internal
           #   NOTE: Check `Essential` docs to understand why `use ConvenientService::Plugins::Common::NormalizesEnv::Middleware` for `:negated_result` is used in `Standard`, not in `Essential` config.
           #
           middlewares :negated_result do

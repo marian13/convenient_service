@@ -25,6 +25,15 @@ module ConvenientService
             def fallback_error_result
               ::ConvenientService.raise Exceptions::FallbackResultIsNotOverridden.new(service: self, status: :error)
             end
+
+            ##
+            # Returns `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result` when overridden.
+            #
+            # @raise [ConvenientService::Service::Plugins::CanHaveFallbacks::Exceptions::FallbackResultIsNotOverridden]
+            #
+            def fallback_result
+              ::ConvenientService.raise Exceptions::FallbackResultIsNotOverridden.new(service: self, status: nil)
+            end
           end
 
           class_methods do
@@ -96,6 +105,15 @@ module ConvenientService
             #
             def fallback_error_result(...)
               new(...).fallback_error_result
+            end
+
+            ##
+            # Returns `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result` when `#fallback_result` is overridden.
+            #
+            # @raise [ConvenientService::Service::Plugins::CanHaveFallbacks::Exceptions::FallbackResultIsNotOverridden]
+            #
+            def fallback_result(...)
+              new(...).fallback_result
             end
           end
         end

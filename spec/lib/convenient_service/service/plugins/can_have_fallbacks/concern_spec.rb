@@ -86,6 +86,27 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveFallbacks::Concern, t
           .to delegate_to(ConvenientService, :raise)
       end
     end
+
+    describe "#fallback_result" do
+      let(:exception_message) do
+        <<~TEXT
+          Fallback result method (#fallback_result) of `#{service_class}` is NOT overridden.
+
+          NOTE: Make sure overridden `fallback_result` returns `success` with reasonable "null" data.
+        TEXT
+      end
+
+      it "raises `ConvenientService::Service::Plugins::CanHaveFallbacks::Exceptions::FallbackResultIsNotOverridden`" do
+        expect { service_instance.fallback_result }
+          .to raise_error(ConvenientService::Service::Plugins::CanHaveFallbacks::Exceptions::FallbackResultIsNotOverridden)
+          .with_message(exception_message)
+      end
+
+      specify do
+        expect { ignoring_exception(ConvenientService::Service::Plugins::CanHaveFallbacks::Exceptions::FallbackResultIsNotOverridden) { service_instance.fallback_result } }
+          .to delegate_to(ConvenientService, :raise)
+      end
+    end
   end
 
   example_group "class methods" do
@@ -137,6 +158,32 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveFallbacks::Concern, t
 
         expect { service_class.fallback_error_result(*args, **kwargs, &block) }
           .to delegate_to(service_instance, :fallback_error_result)
+          .and_return_its_value
+      end
+    end
+
+    describe ".fallback_result" do
+      let(:service_class) do
+        Class.new do
+          include ConvenientService::Service::Configs::Standard
+
+          def fallback_result
+            success
+          end
+        end
+      end
+
+      specify do
+        expect { service_class.fallback_result(*args, **kwargs, &block) }
+          .to delegate_to(service_class, :new)
+          .with_arguments(*args, **kwargs, &block)
+      end
+
+      specify do
+        allow(service_class).to receive(:new).and_return(service_instance)
+
+        expect { service_class.fallback_result(*args, **kwargs, &block) }
+          .to delegate_to(service_instance, :fallback_result)
           .and_return_its_value
       end
     end

@@ -24,7 +24,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveFallbacks::Middleware
     describe ".intended_methods" do
       let(:spec) do
         Class.new(ConvenientService::MethodChainMiddleware) do
-          intended_for [:fallback_failure_result, :fallback_error_result], entity: :service
+          intended_for [:fallback_failure_result, :fallback_error_result, :fallback_result], entity: :service
         end
       end
 
@@ -84,7 +84,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveFallbacks::Middleware
 
           let(:exception_message) do
             <<~TEXT
-              Return value of service `#{service_class}` `#{status}` fallback is NOT a `success`.
+              Return value of service `#{service_class}`#{ConvenientService::Utils::String.enclose(status, " ")}fallback is NOT a `success`.
               It is `error`.
 
               Did you accidentally call `failure` or `error` instead of `success` from the `#{method_name}` method?
@@ -142,17 +142,24 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveFallbacks::Middleware
     end
   end
 
-  context "when status is failure" do
+  context "when status is `failure`" do
     include_examples "verify middleware behavior" do
       let(:status) { :failure }
       let(:method_name) { :fallback_failure_result }
     end
   end
 
-  context "when status is error" do
+  context "when status is `error`" do
     include_examples "verify middleware behavior" do
       let(:status) { :error }
       let(:method_name) { :fallback_error_result }
+    end
+  end
+
+  context "when status is `nil`" do
+    include_examples "verify middleware behavior" do
+      let(:status) { nil }
+      let(:method_name) { :fallback_result }
     end
   end
 end

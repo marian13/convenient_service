@@ -56,6 +56,8 @@ module ConvenientService
                     #   - https://ruby-doc.org/core-2.7.1/UnboundMethod.html#method-i-bind_call
                     #   - https://blog.saeloun.com/2019/10/17/ruby-2-7-adds-unboundmethod-bind_call-method.html
                     #
+                    #   TODO: Util.
+                    #
                     def own_method
                       method = Utils::Module.get_own_instance_method(organizer.class, method_name, private: true)
 

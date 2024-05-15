@@ -133,6 +133,22 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::DryService::Config, ty
           end
         end
 
+        example_group "#fallback_result middlewares" do
+          let(:fallback_result_middlewares) do
+            [
+              ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
+              ConvenientService::Service::Plugins::CollectsServicesInException::Middleware,
+              ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
+              ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Middleware,
+              ConvenientService::Service::Plugins::CanHaveFallbacks::Middleware.with(status: nil)
+            ]
+          end
+
+          it "sets service middlewares for `#fallback_result`" do
+            expect(service_class.middlewares(:fallback_result).to_a).to eq(fallback_result_middlewares)
+          end
+        end
+
         example_group "#negated_result middlewares" do
           let(:negated_result_middlewares) do
             [
