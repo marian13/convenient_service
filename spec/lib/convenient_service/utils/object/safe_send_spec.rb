@@ -4,6 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
+# rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Utils::Object::SafeSend, type: :standard do
   describe ".call" do
     let(:result) { described_class.call(object, method, *args, **kwargs, &block) }
@@ -38,7 +39,7 @@ RSpec.describe ConvenientService::Utils::Object::SafeSend, type: :standard do
         end
       end
 
-      context "when `method` is public" do
+      context "when `method` is protected" do
         let(:klass) do
           Class.new do
             protected
@@ -54,7 +55,7 @@ RSpec.describe ConvenientService::Utils::Object::SafeSend, type: :standard do
         end
       end
 
-      context "when `method` is public" do
+      context "when `method` is private" do
         let(:klass) do
           Class.new do
             private
@@ -72,3 +73,4 @@ RSpec.describe ConvenientService::Utils::Object::SafeSend, type: :standard do
     end
   end
 end
+# rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
