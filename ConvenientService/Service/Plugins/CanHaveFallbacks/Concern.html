@@ -149,6 +149,29 @@
 </li>
 
       
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#fallback_result-class_method" title="fallback_result (class method)">.<strong>fallback_result</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns <code>ConvenientService::Service::Plugins::HasJSendResult::Entities::Result</code> when <code>#fallback_result</code> is overridden.</p>
+</div></span>
+  
+</li>
+
+      
     </ul>
   
     <h2>
@@ -185,6 +208,29 @@
   <span class="summary_signature">
     
       <a href="#fallback_failure_result-instance_method" title="#fallback_failure_result (instance method)">#<strong>fallback_failure_result</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns <code>ConvenientService::Service::Plugins::HasJSendResult::Entities::Result</code> when overridden.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#fallback_result-instance_method" title="#fallback_result (instance method)">#<strong>fallback_result</strong>  &#x21d2; Object </a>
     
 
     
@@ -325,12 +371,12 @@ This idea can be applied in a broader sense by utilizing the Null object pattern
       <pre class="lines">
 
 
-97
-98
-99</pre>
+106
+107
+108</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_fallbacks/concern.rb', line 97</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_fallbacks/concern.rb', line 106</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_fallback_error_result'>fallback_error_result</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_fallback_error_result'>fallback_error_result</span>
@@ -378,15 +424,68 @@ This idea can be applied in a broader sense by utilizing the Null object pattern
       <pre class="lines">
 
 
-36
-37
-38</pre>
+45
+46
+47</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_fallbacks/concern.rb', line 36</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_fallbacks/concern.rb', line 45</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_fallback_failure_result'>fallback_failure_result</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_fallback_failure_result'>fallback_failure_result</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="fallback_result-class_method">
+  
+    .<strong>fallback_result</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns <code>ConvenientService::Service::Plugins::HasJSendResult::Entities::Result</code> when <code>#fallback_result</code> is overridden.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Exceptions/FallbackResultIsNotOverridden.html" title="ConvenientService::Service::Plugins::CanHaveFallbacks::Exceptions::FallbackResultIsNotOverridden (class)">ConvenientService::Service::Plugins::CanHaveFallbacks::Exceptions::FallbackResultIsNotOverridden</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+115
+116
+117</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_fallbacks/concern.rb', line 115</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_fallback_result'>fallback_result</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_fallback_result'>fallback_result</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -505,12 +604,65 @@ This idea can be applied in a broader sense by utilizing the Null object pattern
 </table>
 </div>
     
+      <div class="method_details ">
+  <h3 class="signature " id="fallback_result-instance_method">
+  
+    #<strong>fallback_result</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns <code>ConvenientService::Service::Plugins::HasJSendResult::Entities::Result</code> when overridden.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Exceptions/FallbackResultIsNotOverridden.html" title="ConvenientService::Service::Plugins::CanHaveFallbacks::Exceptions::FallbackResultIsNotOverridden (class)">ConvenientService::Service::Plugins::CanHaveFallbacks::Exceptions::FallbackResultIsNotOverridden</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+34
+35
+36</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_fallbacks/concern.rb', line 34</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_fallback_result'>fallback_result</span>
+  <span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='period'>.</span><span class='id identifier rubyid_raise'><span class='object_link'><a href="../../../../ConvenientService.html#raise-instance_method" title="ConvenientService#raise (method)">raise</a></span></span> <span class='const'><span class='object_link'><a href="Exceptions.html" title="ConvenientService::Service::Plugins::CanHaveFallbacks::Exceptions (module)">Exceptions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Exceptions/FallbackResultIsNotOverridden.html" title="ConvenientService::Service::Plugins::CanHaveFallbacks::Exceptions::FallbackResultIsNotOverridden (class)">FallbackResultIsNotOverridden</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../../Exception.html#new-class_method" title="ConvenientService::Exception.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>service:</span> <span class='kw'>self</span><span class='comma'>,</span> <span class='label'>status:</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
   </div>
 
 </div>
 
       <div id="footer">
-  Generated on Sun May 12 23:42:54 2024 by
+  Generated on Sat May 18 12:00:04 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.36 (ruby-3.2.4).
 </div>

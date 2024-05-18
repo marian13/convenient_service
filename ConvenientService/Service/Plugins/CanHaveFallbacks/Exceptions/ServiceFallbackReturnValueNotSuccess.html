@@ -176,26 +176,26 @@
       <pre class="lines">
 
 
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30</pre>
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_fallbacks/exceptions.rb', line 21</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_fallbacks/exceptions.rb', line 30</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize_with_kwargs'>initialize_with_kwargs</span><span class='lparen'>(</span><span class='label'>service:</span><span class='comma'>,</span> <span class='label'>result:</span><span class='comma'>,</span> <span class='label'>status:</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_message'>message</span> <span class='op'>=</span> <span class='heredoc_beg'>&lt;&lt;~TEXT</span>
-<span class='tstring_content'>    Return value of service `</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='embexpr_end'>}</span><span class='tstring_content'>` `</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_status'>status</span><span class='embexpr_end'>}</span><span class='tstring_content'>` fallback is NOT a `success`.
+<span class='tstring_content'>    Return value of service `</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='embexpr_end'>}</span><span class='tstring_content'>`</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_enclose'>enclose</span><span class='lparen'>(</span><span class='id identifier rubyid_status'>status</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='embexpr_end'>}</span><span class='tstring_content'>fallback is NOT a `success`.
 </span><span class='tstring_content'>    It is `</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_status'>status</span><span class='embexpr_end'>}</span><span class='tstring_content'>`.
 </span><span class='tstring_content'>
-</span><span class='tstring_content'>    Did you accidentally call `failure` or `error` instead of `success` from the `fallback_</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_status'>status</span><span class='embexpr_end'>}</span><span class='tstring_content'>_result` method?
+</span><span class='tstring_content'>    Did you accidentally call `failure` or `error` instead of `success` from the `fallback</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_enclose'>enclose</span><span class='lparen'>(</span><span class='id identifier rubyid_status'>status</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>_</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='embexpr_end'>}</span><span class='tstring_content'>result` method?
 </span><span class='heredoc_end'>  TEXT
 </span>
   <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_message'>message</span><span class='rparen'>)</span>
@@ -210,7 +210,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sun May 12 23:42:59 2024 by
+  Generated on Sat May 18 12:00:09 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.36 (ruby-3.2.4).
 </div>

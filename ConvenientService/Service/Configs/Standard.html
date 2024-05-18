@@ -177,6 +177,28 @@
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#fallback_result-instance_method" title="#fallback_result (instance method)">#<strong>fallback_result</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#negated_result-instance_method" title="#negated_result (instance method)">#<strong>negated_result</strong>  &#x21d2; Object </a>
     
 
@@ -337,9 +359,9 @@
 </div>
     
       <div class="method_details ">
-  <h3 class="signature " id="negated_result-instance_method">
+  <h3 class="signature " id="fallback_result-instance_method">
   
-    #<strong>negated_result</strong>  &#x21d2; <tt>Object</tt> 
+    #<strong>fallback_result</strong>  &#x21d2; <tt>Object</tt> 
   
 
   
@@ -357,10 +379,50 @@
 101
 102
 103
-104</pre>
+104
+105</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/service/configs/standard.rb', line 98</span>
+
+<span class='id identifier rubyid_middlewares'>middlewares</span> <span class='symbol'>:fallback_result</span> <span class='kw'>do</span>
+  <span class='id identifier rubyid_use'>use</span> <span class='const'><span class='object_link'><a href="../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Plugins.html" title="ConvenientService::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Plugins.html#Common-constant" title="ConvenientService::Plugins::Common (constant)">Common</a></span></span><span class='op'>::</span><span class='const'>NormalizesEnv</span><span class='op'>::</span><span class='const'>Middleware</span>
+  <span class='id identifier rubyid_use'>use</span> <span class='const'><span class='object_link'><a href="../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Plugins.html" title="ConvenientService::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Plugins.html#Service-constant" title="ConvenientService::Plugins::Service (constant)">Service</a></span></span><span class='op'>::</span><span class='const'>CollectsServicesInException</span><span class='op'>::</span><span class='const'>Middleware</span>
+  <span class='id identifier rubyid_use'>use</span> <span class='const'><span class='object_link'><a href="../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Plugins.html" title="ConvenientService::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Plugins.html#Common-constant" title="ConvenientService::Plugins::Common (constant)">Common</a></span></span><span class='op'>::</span><span class='const'>CachesReturnValue</span><span class='op'>::</span><span class='const'>Middleware</span>
+
+  <span class='id identifier rubyid_use'>use</span> <span class='const'><span class='object_link'><a href="../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Plugins.html" title="ConvenientService::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Plugins.html#Service-constant" title="ConvenientService::Plugins::Service (constant)">Service</a></span></span><span class='op'>::</span><span class='const'>RaisesOnNotResultReturnValue</span><span class='op'>::</span><span class='const'>Middleware</span>
+  <span class='id identifier rubyid_use'>use</span> <span class='const'><span class='object_link'><a href="../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Plugins.html" title="ConvenientService::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Plugins.html#Service-constant" title="ConvenientService::Plugins::Service (constant)">Service</a></span></span><span class='op'>::</span><span class='const'>CanHaveFallbacks</span><span class='op'>::</span><span class='const'>Middleware</span><span class='period'>.</span><span class='id identifier rubyid_with'>with</span><span class='lparen'>(</span><span class='label'>status:</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="negated_result-instance_method">
+  
+    #<strong>negated_result</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+111
+112
+113
+114
+115
+116
+117</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/configs/standard.rb', line 111</span>
 
 <span class='id identifier rubyid_middlewares'>middlewares</span> <span class='symbol'>:negated_result</span> <span class='kw'>do</span>
   <span class='id identifier rubyid_use'>use</span> <span class='const'><span class='object_link'><a href="../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Plugins.html" title="ConvenientService::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Plugins.html#Common-constant" title="ConvenientService::Plugins::Common (constant)">Common</a></span></span><span class='op'>::</span><span class='const'>NormalizesEnv</span><span class='op'>::</span><span class='const'>Middleware</span>
@@ -405,13 +467,13 @@ Or to forbid <code>before :step do</code>?</p>
       <pre class="lines">
 
 
-116
-117
-118
-119</pre>
+129
+130
+131
+132</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/configs/standard.rb', line 116</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/configs/standard.rb', line 129</span>
 
 <span class='id identifier rubyid_middlewares'>middlewares</span> <span class='symbol'>:step</span> <span class='kw'>do</span>
   <span class='id identifier rubyid_use'>use</span> <span class='const'><span class='object_link'><a href="../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Plugins.html" title="ConvenientService::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Plugins.html#Common-constant" title="ConvenientService::Plugins::Common (constant)">Common</a></span></span><span class='op'>::</span><span class='const'>HasCallbacks</span><span class='op'>::</span><span class='const'>Middleware</span>
@@ -427,7 +489,7 @@ Or to forbid <code>before :step do</code>?</p>
 </div>
 
       <div id="footer">
-  Generated on Sun May 12 23:42:54 2024 by
+  Generated on Sat May 18 12:00:04 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.36 (ruby-3.2.4).
 </div>

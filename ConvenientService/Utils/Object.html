@@ -79,7 +79,7 @@
   <dl>
     <dt>Defined in:</dt>
     <dd>lib/convenient_service/utils/object.rb<span class="defines">,<br />
-  lib/convenient_service/utils/object/duck_class.rb,<br /> lib/convenient_service/utils/object/clamp_class.rb,<br /> lib/convenient_service/utils/object/resolve_type.rb,<br /> lib/convenient_service/utils/object/instance_variable_fetch.rb,<br /> lib/convenient_service/utils/object/instance_variable_delete.rb,<br /> lib/convenient_service/utils/object/memoize_including_falsy_values.rb</span>
+  lib/convenient_service/utils/object/safe_send.rb,<br /> lib/convenient_service/utils/object/duck_class.rb,<br /> lib/convenient_service/utils/object/clamp_class.rb,<br /> lib/convenient_service/utils/object/resolve_type.rb,<br /> lib/convenient_service/utils/object/instance_variable_fetch.rb,<br /> lib/convenient_service/utils/object/instance_variable_delete.rb,<br /> lib/convenient_service/utils/object/memoize_including_falsy_values.rb</span>
 </dd>
   </dl>
   
@@ -91,7 +91,7 @@
     
   
     
-      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Object/ClampClass.html" title="ConvenientService::Utils::Object::ClampClass (class)">ClampClass</a></span>, <span class='object_link'><a href="Object/DuckClass.html" title="ConvenientService::Utils::Object::DuckClass (class)">DuckClass</a></span>, <span class='object_link'><a href="Object/InstanceVariableDelete.html" title="ConvenientService::Utils::Object::InstanceVariableDelete (class)">InstanceVariableDelete</a></span>, <span class='object_link'><a href="Object/InstanceVariableFetch.html" title="ConvenientService::Utils::Object::InstanceVariableFetch (class)">InstanceVariableFetch</a></span>, <span class='object_link'><a href="Object/MemoizeIncludingFalsyValues.html" title="ConvenientService::Utils::Object::MemoizeIncludingFalsyValues (class)">MemoizeIncludingFalsyValues</a></span>, <span class='object_link'><a href="Object/ResolveType.html" title="ConvenientService::Utils::Object::ResolveType (class)">ResolveType</a></span>
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Object/ClampClass.html" title="ConvenientService::Utils::Object::ClampClass (class)">ClampClass</a></span>, <span class='object_link'><a href="Object/DuckClass.html" title="ConvenientService::Utils::Object::DuckClass (class)">DuckClass</a></span>, <span class='object_link'><a href="Object/InstanceVariableDelete.html" title="ConvenientService::Utils::Object::InstanceVariableDelete (class)">InstanceVariableDelete</a></span>, <span class='object_link'><a href="Object/InstanceVariableFetch.html" title="ConvenientService::Utils::Object::InstanceVariableFetch (class)">InstanceVariableFetch</a></span>, <span class='object_link'><a href="Object/MemoizeIncludingFalsyValues.html" title="ConvenientService::Utils::Object::MemoizeIncludingFalsyValues (class)">MemoizeIncludingFalsyValues</a></span>, <span class='object_link'><a href="Object/ResolveType.html" title="ConvenientService::Utils::Object::ResolveType (class)">ResolveType</a></span>, <span class='object_link'><a href="Object/SafeSend.html" title="ConvenientService::Utils::Object::SafeSend (class)">SafeSend</a></span>
     
   
 </p>
@@ -242,6 +242,28 @@
 </li>
 
       
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#safe_send-class_method" title="safe_send (class method)">.<strong>safe_send</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
     </ul>
   
 
@@ -283,12 +305,12 @@
       <pre class="lines">
 
 
-18
 19
-20</pre>
+20
+21</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/object.rb', line 18</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/object.rb', line 19</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_clamp_class'>clamp_class</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="Object/ClampClass.html" title="ConvenientService::Utils::Object::ClampClass (class)">ClampClass</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="Object/ClampClass.html#call-instance_method" title="ConvenientService::Utils::Object::ClampClass#call (method)">call</a></span></span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
@@ -330,12 +352,12 @@
       <pre class="lines">
 
 
-26
 27
-28</pre>
+28
+29</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/object.rb', line 26</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/object.rb', line 27</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_duck_class'>duck_class</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="Object/DuckClass.html" title="ConvenientService::Utils::Object::DuckClass (class)">DuckClass</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="Object/DuckClass.html#call-instance_method" title="ConvenientService::Utils::Object::DuckClass#call (method)">call</a></span></span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
@@ -377,12 +399,12 @@
       <pre class="lines">
 
 
-34
 35
-36</pre>
+36
+37</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/object.rb', line 34</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/object.rb', line 35</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_instance_variable_delete'>instance_variable_delete</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="Object/InstanceVariableDelete.html" title="ConvenientService::Utils::Object::InstanceVariableDelete (class)">InstanceVariableDelete</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="Object/InstanceVariableDelete.html#call-instance_method" title="ConvenientService::Utils::Object::InstanceVariableDelete#call (method)">call</a></span></span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
@@ -424,12 +446,12 @@
       <pre class="lines">
 
 
-42
 43
-44</pre>
+44
+45</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/object.rb', line 42</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/object.rb', line 43</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_instance_variable_fetch'>instance_variable_fetch</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="Object/InstanceVariableFetch.html" title="ConvenientService::Utils::Object::InstanceVariableFetch (class)">InstanceVariableFetch</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="Object/InstanceVariableFetch.html#call-instance_method" title="ConvenientService::Utils::Object::InstanceVariableFetch#call (method)">call</a></span></span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
@@ -473,12 +495,12 @@
       <pre class="lines">
 
 
-52
 53
-54</pre>
+54
+55</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/object.rb', line 52</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/object.rb', line 53</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_memoize_including_falsy_values'>memoize_including_falsy_values</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="Object/MemoizeIncludingFalsyValues.html" title="ConvenientService::Utils::Object::MemoizeIncludingFalsyValues (class)">MemoizeIncludingFalsyValues</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="Object/MemoizeIncludingFalsyValues.html#call-instance_method" title="ConvenientService::Utils::Object::MemoizeIncludingFalsyValues#call (method)">call</a></span></span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
@@ -520,15 +542,62 @@
       <pre class="lines">
 
 
-60
 61
-62</pre>
+62
+63</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/object.rb', line 60</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/object.rb', line 61</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_resolve_type'>resolve_type</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="Object/ResolveType.html" title="ConvenientService::Utils::Object::ResolveType (class)">ResolveType</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="Object/ResolveType.html#call-instance_method" title="ConvenientService::Utils::Object::ResolveType#call (method)">call</a></span></span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="safe_send-class_method">
+  
+    .<strong>safe_send</strong>  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::Utils::Object (module)">Object</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='const'><span class='object_link'><a href="../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="ConvenientService::Utils::Object (module)">Object</a></span></span><span class='period'>.</span><span class='id identifier rubyid_safe_send'>safe_send</span><span class='lparen'>(</span><span class='id identifier rubyid_object'>object</span><span class='comma'>,</span> <span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span></code></pre>
+    
+  </div>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+69
+70
+71</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/object.rb', line 69</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_safe_send'>safe_send</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="Object/SafeSend.html" title="ConvenientService::Utils::Object::SafeSend (class)">SafeSend</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="Object/SafeSend.html#call-instance_method" title="ConvenientService::Utils::Object::SafeSend#call (method)">call</a></span></span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -540,7 +609,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sun May 12 23:42:53 2024 by
+  Generated on Sat May 18 12:00:04 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.36 (ruby-3.2.4).
 </div>
