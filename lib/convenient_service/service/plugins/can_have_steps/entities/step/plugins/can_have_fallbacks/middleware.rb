@@ -88,44 +88,22 @@ module ConvenientService
                   ##
                   # @return [Method, nil]
                   #
-                  # @internal
-                  #   TODO: Util.
-                  #   TODO: Comprehensive suite.
-                  #
                   def fallback_failure_result_own_method
-                    method = Utils::Module.get_own_instance_method(service.class, :fallback_failure_result, private: true)
-
-                    return unless method
-
-                    method.bind(service)
+                    Utils::Object.own_method(service, :fallback_failure_result, private: true)
                   end
 
                   ##
                   # @return [Method, nil]
-                  #
-                  # @internal
-                  #   TODO: Util.
                   #
                   def fallback_error_result_own_method
-                    method = Utils::Module.get_own_instance_method(service.class, :fallback_error_result, private: true)
-
-                    return unless method
-
-                    method.bind(service)
+                    Utils::Object.own_method(service, :fallback_error_result, private: true)
                   end
 
                   ##
                   # @return [Method, nil]
                   #
-                  # @internal
-                  #   TODO: Util.
-                  #
                   def fallback_result_own_method
-                    method = Utils::Module.get_own_instance_method(service.class, :fallback_result, private: true)
-
-                    return unless method
-
-                    method.bind(service)
+                    Utils::Object.own_method(service, :fallback_result, private: true)
                   end
 
                   ##

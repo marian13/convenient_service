@@ -2,6 +2,7 @@
 
 require_relative "object/clamp_class"
 require_relative "object/duck_class"
+require_relative "object/get_own_method"
 require_relative "object/instance_variable_delete"
 require_relative "object/instance_variable_fetch"
 require_relative "object/memoize_including_falsy_values"
@@ -52,6 +53,20 @@ module ConvenientService
         #
         def memoize_including_falsy_values(...)
           MemoizeIncludingFalsyValues.call(...)
+        end
+
+        ##
+        # @example
+        #   object = Object.new.tap { |object| object.instance_eval { self.class.attr_reader :foo } }
+        #
+        #   ConvenientService::Utils::Object.own_method(object, :foo)
+        #   # => #<Method: #<Object:0x0000555e524252d8>.foo() ...>
+        #
+        #   ConvenientService::Utils::Object.own_method(object, :puts)
+        #   # => nil
+        #
+        def own_method(...)
+          GetOwnMethod.call(...)
         end
 
         ##

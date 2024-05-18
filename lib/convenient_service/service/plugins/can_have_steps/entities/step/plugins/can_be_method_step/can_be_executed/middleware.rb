@@ -52,18 +52,8 @@ module ConvenientService
                     # @internal
                     #   TODO: A possible bottleneck. Should be removed if receives negative feedback.
                     #
-                    #   NOTE: `own_method.bind(organizer).call` is logically the same as `own_method.bind_call(organizer)`.
-                    #   - https://ruby-doc.org/core-2.7.1/UnboundMethod.html#method-i-bind_call
-                    #   - https://blog.saeloun.com/2019/10/17/ruby-2-7-adds-unboundmethod-bind_call-method.html
-                    #
-                    #   TODO: Util.
-                    #
                     def own_method
-                      method = Utils::Module.get_own_instance_method(organizer.class, method_name, private: true)
-
-                      return unless method
-
-                      method.bind(organizer)
+                      Utils.memoize_including_falsy_values(self, :@own_method) { Utils::Object.own_method(organizer, method_name, private: true) }
                     end
 
                     ##
