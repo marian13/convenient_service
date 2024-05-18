@@ -93,7 +93,7 @@ module ConvenientService
 
           ##
           # @internal
-          #   NOTE: Check `Essential` docs to understand why `use ConvenientService::Plugins::Common::NormalizesEnv::Middleware` for `:fallback_error_result` is used in `Standard`, not in `Essential` config.
+          #   NOTE: Check `Essential` docs to understand why `use ConvenientService::Plugins::Common::NormalizesEnv::Middleware` for `:fallback_result` is used in `Standard`, not in `Essential` config.
           #
           middlewares :fallback_result do
             use ConvenientService::Plugins::Common::NormalizesEnv::Middleware

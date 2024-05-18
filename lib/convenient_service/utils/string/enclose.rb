@@ -1,5 +1,16 @@
 # frozen_string_literal: true
 
+##
+# @example Common usage.
+#   ConvenientService::Utils::String::Enclose.call("foo", "_")
+#   # => "_foo_"
+#
+#   ConvenientService::Utils::String::Enclose.call("", "_")
+#   # => "_"
+#
+#   ConvenientService::Utils::String::Enclose.call(nil, "_")
+#   # => "_"
+#
 module ConvenientService
   module Utils
     module String
@@ -17,7 +28,7 @@ module ConvenientService
         attr_reader :char
 
         ##
-        # @param string [#to_s]
+        # @param string [String]
         # @param char [String]
         # @return [void]
         #
@@ -31,6 +42,7 @@ module ConvenientService
         #
         def call
           return char unless string
+          return char if string.empty?
 
           "#{char}#{string}#{char}"
         end
