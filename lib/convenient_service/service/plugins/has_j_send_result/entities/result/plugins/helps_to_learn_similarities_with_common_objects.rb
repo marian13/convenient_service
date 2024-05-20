@@ -1,0 +1,4 @@
+# frozen_string_literal: true
+
+require_relative "helps_to_learn_similarities_with_common_objects/concern"
+require_relative "helps_to_learn_similarities_with_common_objects/exceptions"
