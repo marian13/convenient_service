@@ -35,7 +35,7 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Services::E
 
       context "when `ExtractParamsFromPath` is NOT successful" do
         context "when request is NOT valid for HTTP parsing" do
-          let(:path) { "abc" }
+          let(:path) { "a%b" }
 
           let(:error_message) do
             <<~MESSAGE

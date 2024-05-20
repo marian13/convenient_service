@@ -261,6 +261,8 @@ Gem::Specification.new do |spec|
   #
   spec.add_development_dependency "stackprof", "~> 0.2.25" if ConvenientService::Support::Ruby.mri?
 
+  spec.add_development_dependency "uri"
+
   spec.add_development_dependency "webrick"
 
   ##
