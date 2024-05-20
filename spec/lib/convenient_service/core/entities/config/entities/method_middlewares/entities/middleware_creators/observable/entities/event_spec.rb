@@ -20,13 +20,9 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
 
   let(:observer) { observer_class.new }
 
-  example_group "modules" do
-    include ConvenientService::RSpec::Matchers::IncludeModule
-
-    subject { described_class }
-
-    it { is_expected.to include_module(Observable) }
-  end
+  let(:args) { [:foo] }
+  let(:kwargs) { {foo: :bar} }
+  let(:block) { proc { :foo } }
 
   example_group "instance methods" do
     example_group "attributes" do
@@ -45,17 +41,44 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
 
     describe "#add_observer" do
       context "when `func` is NOT passed" do
-        it "defaults to `default_handler_name`" do
-          expect { event.add_observer(observer) }.not_to raise_error
+        specify do
+          event.add_observer(observer)
+
+          expect { event.notify_observers(*args, **kwargs, &block) }
+            .to delegate_to(observer, event.default_handler_name)
+            .with_arguments(*args, **kwargs, &block)
+        end
+      end
+
+      context "when `func` is passed" do
+        let(:observer_class) do
+          Class.new do
+            def foo(...)
+            end
+          end
+        end
+
+        let(:func) { :foo }
+
+        specify do
+          event.add_observer(observer, func)
+
+          expect { event.notify_observers(*args, **kwargs, &block) }
+            .to delegate_to(observer, func)
+            .with_arguments(*args, **kwargs, &block)
         end
       end
     end
 
     describe "#notify_observers" do
+      before do
+        event.add_observer(observer)
+      end
+
       specify do
-        expect { event.notify_observers }
-          .to delegate_to(event, :changed)
-          .without_arguments
+        expect { event.notify_observers(*args, **kwargs, &block) }
+          .to delegate_to(observer, event.default_handler_name)
+          .with_arguments(*args, **kwargs, &block)
       end
     end
 

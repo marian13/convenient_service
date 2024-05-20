@@ -8,11 +8,16 @@ module ConvenientService
           class MethodMiddlewares
             module Entities
               module MiddlewareCreators
+                ##
+                # NOTE: `observer` is NOT a part of Ruby stdlib starting from Ruby 3.4. That is why a custom observer is implemented.
+                #
+                # @internal
+                #   - https://ruby-doc.org/stdlib-2.7.0/libdoc/observer/rdoc/Observable.html
+                #   - https://github.com/ruby/observer
+                #
                 class Observable < MiddlewareCreators::Base
                   module Entities
                     class Event
-                      include ::Observable
-
                       ##
                       # @!attribute [r] type
                       #   @return [Symbol]
@@ -41,7 +46,7 @@ module ConvenientService
                       # @see https://ruby-doc.org/stdlib-2.7.0/libdoc/observer/rdoc/Observable.html#method-i-add_observer
                       #
                       def add_observer(observer, func = default_handler_name)
-                        super
+                        observers[observer] = func
                       end
 
                       ##
@@ -50,10 +55,8 @@ module ConvenientService
                       # @see https://ruby-doc.org/stdlib-2.7.0/libdoc/observer/rdoc/Observable.html#method-i-changed
                       # @see https://ruby-doc.org/stdlib-2.7.0/libdoc/observer/rdoc/Observable.html#method-i-notify_observers
                       #
-                      def notify_observers(...)
-                        changed
-
-                        super
+                      def notify_observers(*args, **kwargs, &block)
+                        observers.each { |observer, method| observer.__send__(method, *args, **kwargs, &block) }
                       end
 
                       ##
@@ -64,7 +67,7 @@ module ConvenientService
                         return unless other.instance_of?(self.class)
 
                         return false if type != other.type
-                        return false if observer_peers != other.observer_peers
+                        return false if observers != other.observers
 
                         true
                       end
@@ -74,13 +77,8 @@ module ConvenientService
                       ##
                       # @return [Hash]
                       #
-                      # @see https://ruby-doc.org/stdlib-2.7.0/libdoc/observer/rdoc/Observable.html#method-i-count_observers
-                      #
-                      # @internal
-                      #   IMPORTANT: This method is using inherited private instance varaible. Ruby may change its name without any warning.
-                      #
-                      def observer_peers
-                        @observer_peers if defined? @observer_peers
+                      def observers
+                        @observers ||= {}
                       end
                     end
                   end
