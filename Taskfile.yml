@@ -60,7 +60,7 @@ tasks:
       - bundle exec {{.APPRAISAL_COMMAND}} rake playground
     vars:
       APPRAISAL_COMMAND:
-        sh: ruby -e 'puts "appraisal" + " " + RUBY_ENGINE + "_" + RUBY_VERSION + "_" + ENV["APPRAISAL"] unless ENV["APPRAISAL"].to_s.empty?'
+        sh: ruby -e 'puts "appraisal" + " " + RUBY_ENGINE + "_" + RUBY_VERSION[/\d+.\d+/] + "_" + ENV["APPRAISAL"] unless ENV["APPRAISAL"].to_s.empty?'
     interactive: true
 
   coverage:lcov:merge:
@@ -90,7 +90,7 @@ tasks:
       RUBY_ENGINE:
         sh: ruby -e 'puts ENV["RUBY_ENGINE"] || RUBY_ENGINE'
       RUBY_VERSION:
-        sh: ruby -e 'puts ENV["RUBY_VERSION"] || RUBY_VERSION[/\d+.\d+/]'
+        sh: ruby -e 'puts ENV["RUBY_VERSION"].to_s[/\d+.\d+/] || RUBY_VERSION[/\d+.\d+/]'
 
   ##
   # NOTE: Meaning of `2> /dev/null`.
@@ -362,7 +362,7 @@ tasks:
       - bundle exec {{.APPRAISAL_COMMAND}} rake playground
     vars:
       APPRAISAL_COMMAND:
-        sh: ruby -e 'puts "appraisal" + " " + RUBY_ENGINE + "_" + RUBY_VERSION + "_" + ENV["APPRAISAL"] unless ENV["APPRAISAL"].to_s.empty?'
+        sh: ruby -e 'puts "appraisal" + " " + RUBY_ENGINE + "_" + RUBY_VERSION[/\d+.\d+/] + "_" + ENV["APPRAISAL"] unless ENV["APPRAISAL"].to_s.empty?'
     interactive: true
 
   release:
@@ -394,7 +394,7 @@ tasks:
       - bundle exec {{.APPRAISAL_PREFIX}} rspec --format progress {{.REQUIRE_SUFFIX}} {{.GIT_STAGED_RSPEC_FILES}} {{.CLI_ARGS}}
     vars:
       APPRAISAL_PREFIX:
-        sh: ruby -e 'puts "appraisal" + " " + RUBY_ENGINE + "_" + RUBY_VERSION + "_" + ENV["APPRAISAL"] unless ENV["APPRAISAL"].to_s.empty?'
+        sh: ruby -e 'puts "appraisal" + " " + RUBY_ENGINE + "_" + RUBY_VERSION[/\d+.\d+/] + "_" + ENV["APPRAISAL"] unless ENV["APPRAISAL"].to_s.empty?'
       REQUIRE_SUFFIX:
         sh: ruby -e 'puts case ENV["APPRAISAL"] when /rails/ then "--require rails_helper" when /dry/ then "--require dry_helper" when /amazing_print/ then "--require amazing_print_helper" when /awesome_print/ then "--require awesome_print_helper" else "--require standard_helper" end'
       GIT_STAGED_RSPEC_FILES:

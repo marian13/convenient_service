@@ -18,6 +18,6 @@ puts "ENV[\"APPRAISAL_NAME\"] -> `#{ENV["APPRAISAL_NAME"]}`"
 # NOTE: Ruby version may be set by docker.
 # https://github.com/docker-library/ruby/blob/master/3.1/alpine3.16/Dockerfile#L30
 #
-ENV["RUBY_VERSION"] ||= ::RUBY_VERSION
+ENV["RUBY_VERSION"] = ENV["RUBY_VERSION"].to_s[/\d+.\d+/] || ::RUBY_VERSION[/\d+.\d+/]
 
 puts "ENV[\"RUBY_VERSION\"] -> `#{ENV["RUBY_VERSION"]}`"
