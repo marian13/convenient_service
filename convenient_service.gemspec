@@ -8,6 +8,7 @@ require_relative "lib/convenient_service/version"
 #   - Use `ConvenientService::Support::Ruby.jruby?` directly only in the files that do not require to load all dependencies.
 #   - Prefer `ConvenientService::Dependencies.ruby.jruby?` for the rest of the files.
 #
+require_relative "lib/convenient_service/support/version"
 require_relative "lib/convenient_service/support/ruby"
 
 Gem::Specification.new do |spec|
@@ -277,7 +278,7 @@ Gem::Specification.new do |spec|
   # Used inside examples (internally by Webrick).
   # - https://github.com/ruby/mutex_m
   #
-  spec.add_development_dependency "uri" if ConvenientService::Support::Ruby.version >= 3.0
+  spec.add_development_dependency "uri", "~> 0.13.0"
 
   ##
   # Used inside examples.
