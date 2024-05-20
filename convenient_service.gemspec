@@ -281,7 +281,7 @@ Gem::Specification.new do |spec|
   if ConvenientService::Support::Ruby.version >= 3.0
     spec.add_development_dependency "uri", "~> 0.13.0"
   else
-    spec.add_development_dependency "uri", "~> 0.10.0"
+    spec.add_development_dependency "uri", "0.10.0.2"
   end
 
   ##
