@@ -276,7 +276,7 @@ Gem::Specification.new do |spec|
 
   ##
   # Used inside examples (internally by Webrick).
-  # - https://github.com/ruby/mutex_m
+  # - https://github.com/ruby/uri
   #
   if ConvenientService::Support::Ruby.version >= 3.0
     spec.add_development_dependency "uri", "~> 0.13.0"
