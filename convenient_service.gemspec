@@ -78,6 +78,12 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "awesome_print", "~> 1.9.2"
 
   ##
+  # Used inside examples (internally by Active Model).
+  # - https://github.com/ruby/base64
+  #
+  spec.add_development_dependency "base64"
+
+  ##
   # Used for benchmarking (iteration per second). See `benchmark` directory.
   # - https://github.com/evanphx/benchmark-ips
   # - https://www.johnnunemaker.com/how-to-benchmark-your-ruby-gem
@@ -167,6 +173,12 @@ Gem::Specification.new do |spec|
     spec.add_development_dependency "mutant", "~> 0.11.21"
     spec.add_development_dependency "mutant-rspec", "~> 0.11.21"
   end
+
+  ##
+  # Used inside examples (internally by Active Model).
+  # - https://github.com/ruby/mutex_m
+  #
+  spec.add_development_dependency "mutex_m"
 
   ##
   # Used for coloring logs.
@@ -261,8 +273,16 @@ Gem::Specification.new do |spec|
   #
   spec.add_development_dependency "stackprof", "~> 0.2.25" if ConvenientService::Support::Ruby.mri?
 
+  ##
+  # Used inside examples (internally by Webrick).
+  # - https://github.com/ruby/mutex_m
+  #
   spec.add_development_dependency "uri"
 
+  ##
+  # Used inside examples.
+  # - https://github.com/ruby/mutex_m
+  #
   spec.add_development_dependency "webrick"
 
   ##
