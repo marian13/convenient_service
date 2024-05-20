@@ -278,7 +278,7 @@ Gem::Specification.new do |spec|
   # Used inside examples (internally by Webrick).
   # - https://github.com/ruby/mutex_m
   #
-  spec.add_development_dependency "uri", "~> 0.13.0"
+  spec.add_development_dependency "uri", "~> 0.10.0"
 
   ##
   # Used inside examples.
