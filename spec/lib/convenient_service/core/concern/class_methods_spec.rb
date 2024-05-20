@@ -231,10 +231,20 @@ RSpec.describe ConvenientService::Core::Concern::ClassMethods, type: :standard d
         end
 
         ##
+        # NOTE: Ruby 3.4 changes exception messages and backtrace displays.
+        # - https://www.ruby-lang.org/en/news/2024/05/16/ruby-3-4-0-preview1-released
+        #
         # NOTE: Depending on the `did_you_mean` version, an additional line may be added to the exception message, which is why the `with_message` string is replaced by regex.
         #
         # rubocop:disable RSpec/RepeatedDescription
-        if ConvenientService::Dependencies.ruby.version >= 3.3
+        if ConvenientService::Dependencies.ruby.version >= 3.4
+          it "raises `NoMethodError`" do
+            ##
+            # NOTE: Intentionally calling missed method that won't be included (no concerns with it).
+            #
+            expect { service_class.foo }.to raise_error(NoMethodError).with_message(/undefined method 'foo' for class #{service_class}/)
+          end
+        elsif ConvenientService::Dependencies.ruby.version >= 3.3
           it "raises `NoMethodError`" do
             ##
             # NOTE: Intentionally calling missed method that won't be included (no concerns with it).
@@ -265,10 +275,20 @@ RSpec.describe ConvenientService::Core::Concern::ClassMethods, type: :standard d
         end
 
         ##
+        # NOTE: Ruby 3.4 changes exception messages and backtrace displays.
+        # - https://www.ruby-lang.org/en/news/2024/05/16/ruby-3-4-0-preview1-released
+        #
         # NOTE: Depending on the `did_you_mean` version, an additional line may be added to the exception message, which is why the `with_message` string is replaced by regex.
         #
         # rubocop:disable RSpec/RepeatedDescription
-        if ConvenientService::Dependencies.ruby.version >= 3.3
+        if ConvenientService::Dependencies.ruby.version >= 3.4
+          it "raises `NoMethodError`" do
+            ##
+            # NOTE: Intentionally calling missed method that won't be included (no concerns with it), but has middlewares.
+            #
+            expect { service_class.foo }.to raise_error(NoMethodError).with_message(/super: no superclass method 'foo' for class #{service_class}/)
+          end
+        elsif ConvenientService::Dependencies.ruby.version >= 3.3
           it "raises `NoMethodError`" do
             ##
             # NOTE: Intentionally calling missed method that won't be included (no concerns with it), but has middlewares.
@@ -322,10 +342,19 @@ RSpec.describe ConvenientService::Core::Concern::ClassMethods, type: :standard d
       end
 
       ##
+      # NOTE: Ruby 3.4 changes exception messages and backtrace displays.
+      # - https://www.ruby-lang.org/en/news/2024/05/16/ruby-3-4-0-preview1-released
+      #
       # NOTE: Depending on the `did_you_mean` version, an additional line may be added to the exception message, which is why the `with_message` string is replaced by regex.
       #
       # rubocop:disable RSpec/RepeatedDescription
-      if ConvenientService::Dependencies.ruby.version >= 3.3
+      if ConvenientService::Dependencies.ruby.version >= 3.4
+        it "is private" do
+          expect { service_class.respond_to_missing?(method_name, include_private) }
+            .to raise_error(NoMethodError)
+            .with_message(/private method 'respond_to_missing\?' called for class #{service_class}/)
+        end
+      elsif ConvenientService::Dependencies.ruby.version >= 3.3
         it "is private" do
           expect { service_class.respond_to_missing?(method_name, include_private) }
             .to raise_error(NoMethodError)

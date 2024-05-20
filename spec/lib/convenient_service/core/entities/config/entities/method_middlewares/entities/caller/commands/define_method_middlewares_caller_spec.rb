@@ -97,10 +97,17 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
             end
 
             ##
+            # NOTE: Ruby 3.4 changes exception messages and backtrace displays.
+            # - https://www.ruby-lang.org/en/news/2024/05/16/ruby-3-4-0-preview1-released
+            #
             # NOTE: Depending on the `did_you_mean` version, an additional line may be added to the exception message, which is why the `with_message` string is replaced by regex.
             #
             # rubocop:disable RSpec/RepeatedDescription
-            if ConvenientService::Dependencies.ruby.version >= 3.3
+            if ConvenientService::Dependencies.ruby.version >= 3.4
+              it "raises `NoMethodError`" do
+                expect { service_instance.result }.to raise_error(NoMethodError).with_message(/super: no superclass method 'result' for an instance of #{service_instance.class}/)
+              end
+            elsif ConvenientService::Dependencies.ruby.version >= 3.3
               it "raises `NoMethodError`" do
                 expect { service_instance.result }.to raise_error(NoMethodError).with_message(/super: no superclass method `result' for an instance of #{service_instance.class}/)
               end
@@ -188,10 +195,17 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
             end
 
             ##
+            # NOTE: Ruby 3.4 changes exception messages and backtrace displays.
+            # - https://www.ruby-lang.org/en/news/2024/05/16/ruby-3-4-0-preview1-released
+            #
             # NOTE: Depending on the `did_you_mean` version, an additional line may be added to the exception message, which is why the `with_message` string is replaced by regex.
             #
             # rubocop:disable RSpec/RepeatedDescription
-            if ConvenientService::Dependencies.ruby.version >= 3.3
+            if ConvenientService::Dependencies.ruby.version >= 3.4
+              it "raises `NoMethodError`" do
+                expect { service_class.result }.to raise_error(NoMethodError).with_message(/super: no superclass method 'result' for class #{service_class}/)
+              end
+            elsif ConvenientService::Dependencies.ruby.version >= 3.3
               it "raises `NoMethodError`" do
                 expect { service_class.result }.to raise_error(NoMethodError).with_message(/super: no superclass method `result' for class #{service_class}/)
               end
