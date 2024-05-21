@@ -41,6 +41,7 @@ task :playground do
   require "convenient_service"
 
   require_relative "spec/support/convenient_service"
+  require_relative "spec/support/convenient_service/standard"
   require_relative "spec/support/convenient_service/rails" if ENV["APPRAISAL_NAME"] == "all" || ENV["APPRAISAL_NAME"].include?("rails")
   require_relative "spec/support/convenient_service/dry" if ENV["APPRAISAL_NAME"] == "all" || ENV["APPRAISAL_NAME"].include?("dry")
 
