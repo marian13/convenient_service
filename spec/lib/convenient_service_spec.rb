@@ -5,6 +5,7 @@ require "convenient_service"
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService, type: :standard do
   include described_class::RSpec::PrimitiveMatchers::CacheItsValue
+  include described_class::RSpec::Matchers::DelegateTo
 
   example_group "constants" do
     describe "::VERSION" do
@@ -38,6 +39,46 @@ RSpec.describe ConvenientService, type: :standard do
         it "return `true`" do
           expect(described_class.debug?).to eq(true)
         end
+      end
+    end
+
+    describe ".service_class?" do
+      let(:service_class) do
+        Class.new do
+          include ConvenientService::Service::Configs::Standard
+
+          def result
+            success
+          end
+        end
+      end
+
+      specify do
+        expect { described_class.service_class?(service_class) }
+          .to delegate_to(ConvenientService::Commands::IsServiceClass, :call)
+          .with_arguments(service_class: service_class)
+          .and_return_its_value
+      end
+    end
+
+    describe ".service?" do
+      let(:service_class) do
+        Class.new do
+          include ConvenientService::Service::Configs::Standard
+
+          def result
+            success
+          end
+        end
+      end
+
+      let(:service) { service_class.new }
+
+      specify do
+        expect { described_class.service?(service) }
+          .to delegate_to(ConvenientService::Commands::IsService, :call)
+          .with_arguments(service: service)
+          .and_return_its_value
       end
     end
 

@@ -37,6 +37,12 @@ require_relative "convenient_service/feature"
 
 ##
 # @internal
+#   Convenient Service Commands.
+#
+require_relative "convenient_service/commands"
+
+##
+# @internal
 #   Convenient Service Aliases.
 #
 require_relative "convenient_service/aliases"
@@ -50,6 +56,62 @@ module ConvenientService
     #
     def debug?
       ::ENV["CONVENIENT_SERVICE_DEBUG"] == "true"
+    end
+
+    ##
+    # Checks whether a class is a service class.
+    #
+    # @api public
+    #
+    # @param service_class [Object] Can be any type.
+    # @return [Boolean]
+    #
+    # @example Simple usage.
+    #   class Service
+    #     include ConvenientService::Standard::Config
+    #
+    #     def result
+    #       success
+    #     end
+    #   end
+    #
+    #   ConvenientService.service_class?(Service)
+    #   # => true
+    #
+    #   ConvenientService.service_class?(42)
+    #   # => false
+    #
+    def service_class?(service_class)
+      Commands::IsServiceClass[service_class: service_class]
+    end
+
+    ##
+    # Checks whether an object is a service instance.
+    #
+    # @api public
+    #
+    # @param service [Object] Can be any type.
+    # @return [Boolean]
+    #
+    # @example Simple usage.
+    #   class Service
+    #     include ConvenientService::Standard::Config
+    #
+    #     def result
+    #       success
+    #     end
+    #   end
+    #
+    #   service = Service.new
+    #
+    #   ConvenientService.service?(service)
+    #   # => true
+    #
+    #   ConvenientService.service?(42)
+    #   # => false
+    #
+    def service?(service)
+      Commands::IsService[service: service]
     end
 
     ##
