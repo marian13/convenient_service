@@ -13,6 +13,13 @@ module ConvenientService
 
                   instance_methods do
                     ##
+                    # @return [Boolean]
+                    #
+                    def from_step?
+                      Utils.to_bool(step)
+                    end
+
+                    ##
                     # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step, nil]
                     #
                     def step

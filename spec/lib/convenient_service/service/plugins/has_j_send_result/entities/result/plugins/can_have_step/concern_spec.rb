@@ -31,6 +31,56 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
   end
 
   example_group "instance methods" do
+    describe "#from_step?" do
+      let(:result) { service.result }
+
+      context "when result is NOT from step" do
+        let(:service) do
+          Class.new do
+            include ConvenientService::Service::Configs::Standard
+
+            def result
+              success
+            end
+          end
+        end
+
+        it "returns `false`" do
+          expect(result.from_step?).to eq(false)
+        end
+      end
+
+      context "when result is from step" do
+        let(:service) do
+          Class.new.tap do |klass|
+            klass.class_exec(first_step) do |first_step|
+              include ConvenientService::Service::Configs::Standard
+
+              step first_step
+
+              def result
+                success
+              end
+            end
+          end
+        end
+
+        let(:first_step) do
+          Class.new do
+            include ConvenientService::Service::Configs::Standard
+
+            def result
+              error
+            end
+          end
+        end
+
+        it "returns `true`" do
+          expect(result.from_step?).to eq(true)
+        end
+      end
+    end
+
     describe "#step" do
       let(:result) { service.result }
 
