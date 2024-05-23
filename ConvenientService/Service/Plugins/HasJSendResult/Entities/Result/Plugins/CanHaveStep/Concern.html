@@ -106,6 +106,28 @@
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#from_step%3F-instance_method" title="#from_step? (instance method)">#<strong>from_step?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#step-instance_method" title="#step (instance method)">#<strong>step</strong>  &#x21d2; ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step<sup>?</sup> </a>
     
 
@@ -146,7 +168,59 @@
 
     
       <div class="method_details first">
-  <h3 class="signature first" id="step-instance_method">
+  <h3 class="signature first" id="from_step?-instance_method">
+  
+    #<strong>from_step?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+18
+19
+20</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/can_have_step/concern.rb', line 18</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_from_step?'>from_step?</span>
+  <span class='const'><span class='object_link'><a href="../../../../../../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='period'>.</span><span class='id identifier rubyid_to_bool'><span class='object_link'><a href="../../../../../../../Utils.html#to_bool-class_method" title="ConvenientService::Utils.to_bool (method)">to_bool</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_step'>step</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="step-instance_method">
   
     #<strong>step</strong>  &#x21d2; <tt><span class='object_link'><a href="../../../../../CanHaveSteps/Entities/Step.html" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step (class)">ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step</a></span></tt><sup>?</sup> 
   
@@ -182,12 +256,12 @@
       <pre class="lines">
 
 
-18
-19
-20</pre>
+25
+26
+27</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/can_have_step/concern.rb', line 18</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/can_have_step/concern.rb', line 25</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_step'>step</span>
   <span class='const'><span class='object_link'><a href="../../../../../../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='period'>.</span><span class='id identifier rubyid_memoize_including_falsy_values'><span class='object_link'><a href="../../../../../../../Utils.html#memoize_including_falsy_values-class_method" title="ConvenientService::Utils.memoize_including_falsy_values (method)">memoize_including_falsy_values</a></span></span><span class='lparen'>(</span><span class='kw'>self</span><span class='comma'>,</span> <span class='symbol'>:@step</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_extra_kwargs'>extra_kwargs</span><span class='lbracket'>[</span><span class='symbol'>:step</span><span class='rbracket'>]</span> <span class='rbrace'>}</span>
@@ -202,7 +276,7 @@
 </div>
 
       <div id="footer">
-  Generated on Wed May 22 17:02:20 2024 by
+  Generated on Thu May 23 19:20:05 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.36 (ruby-3.2.4).
 </div>
