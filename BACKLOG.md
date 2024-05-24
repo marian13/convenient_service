@@ -220,3 +220,17 @@ Resolved by [b8285e3](https://github.com/marian13/convenient_service/commit/b828
   That is not intuitive.
 
 ---
+
+### Consider to replace `CachesReturnValue`
+
+| Priority | Complexity | Status | Tags |
+| - | - | - | - |
+| Medium | Moderate | TODO | performance-optimization, CachesReturnValue |
+
+Services and steps are caching their results utilizing the `CachesReturnValue` plugin.
+
+Although it is very flexible and easy to reuse from the maintenance point of view, that is not the best option from the performance point of view.
+
+In case it starts to cause any visible performance penalty, it can be refactored using regular `||=` or `if defined?`.
+
+---

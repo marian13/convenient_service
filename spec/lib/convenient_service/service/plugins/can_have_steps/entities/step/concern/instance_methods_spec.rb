@@ -607,6 +607,10 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
             .with_arguments(**step.input_values)
             .and_return_its_value
         end
+
+        specify do
+          expect { step.service_result }.to cache_its_value
+        end
       end
     end
 

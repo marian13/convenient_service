@@ -207,7 +207,7 @@ module ConvenientService
                 #   NOTE: `service_result` returns a foreign result that is later converted to own result by `HasResult` middleware.
                 #
                 def service_result
-                  service.klass.result(**input_values)
+                  @service_result ||= service.klass.result(**input_values)
                 end
 
                 ##
