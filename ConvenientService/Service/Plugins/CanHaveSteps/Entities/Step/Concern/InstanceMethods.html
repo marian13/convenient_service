@@ -2624,7 +2624,7 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 209</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_service_result'>service_result</span>
-  <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_klass'>klass</span><span class='period'>.</span><span class='id identifier rubyid_result'>result</span><span class='lparen'>(</span><span class='op'>**</span><span class='id identifier rubyid_input_values'>input_values</span><span class='rparen'>)</span>
+  <span class='ivar'>@service_result</span> <span class='op'>||=</span> <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_klass'>klass</span><span class='period'>.</span><span class='id identifier rubyid_result'>result</span><span class='lparen'>(</span><span class='op'>**</span><span class='id identifier rubyid_input_values'>input_values</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -3287,7 +3287,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu May 23 19:20:05 2024 by
+  Generated on Fri May 24 22:41:53 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.36 (ruby-3.2.4).
 </div>
