@@ -16,9 +16,6 @@ module ConvenientService
                     # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
                     # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeMethodStep::CanBeExecuted::Exceptions::MethodForStepIsNotDefined]
                     #
-                    # @internal
-                    #   NOTE: `kwargs` are intentionally NOT passed to `own_method.call`, since all the corresponding methods are available inside `own_method` body.
-                    #
                     def next(...)
                       return chain.next(...) unless entity.method_step?
 
@@ -32,9 +29,6 @@ module ConvenientService
                     ##
                     # @param method [Method]
                     # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
-                    #
-                    # @internal
-                    #   TODO: Add specs.
                     #
                     def call_method(method)
                       params = Support::MethodParameters.new(method.parameters)
