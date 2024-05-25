@@ -123,10 +123,42 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
               expect(result).to be_success.without_data.of_service(service).without_step
             end
 
-            it "does NOT trigger rollback" do
+            it "does NOT trigger service rollback" do
               result
 
               expect(output).to eq(text)
+            end
+
+            context "when service has NO rollback" do
+              let(:service) do
+                Class.new.tap do |klass|
+                  klass.class_exec(config, out) do |config, out|
+                    include config
+
+                    define_method(:out) { out }
+
+                    def result
+                      success.tap { out.puts "original service success" }
+                    end
+
+                    def self.name
+                      "OriginalService"
+                    end
+                  end
+                end
+              end
+
+              let(:text) do
+                <<~TEXT
+                  original service success
+                TEXT
+              end
+
+              it "skips service rollback" do
+                result
+
+                expect(output).to eq(text)
+              end
             end
           end
 
@@ -164,10 +196,42 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
               expect(result).to be_failure.without_data.of_service(service).without_step
             end
 
-            it "triggers rollback" do
+            it "triggers service rollback" do
               result
 
               expect(output).to eq(text)
+            end
+
+            context "when service has NO rollback" do
+              let(:service) do
+                Class.new.tap do |klass|
+                  klass.class_exec(config, out) do |config, out|
+                    include config
+
+                    define_method(:out) { out }
+
+                    def result
+                      failure.tap { out.puts "original service failure" }
+                    end
+
+                    def self.name
+                      "OriginalService"
+                    end
+                  end
+                end
+              end
+
+              let(:text) do
+                <<~TEXT
+                  original service failure
+                TEXT
+              end
+
+              it "skips service rollback" do
+                result
+
+                expect(output).to eq(text)
+              end
             end
           end
 
@@ -205,10 +269,42 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
               expect(result).to be_error.without_data.of_service(service).without_step
             end
 
-            it "triggers rollback" do
+            it "triggers service rollback" do
               result
 
               expect(output).to eq(text)
+            end
+
+            context "when service has NO rollback" do
+              let(:service) do
+                Class.new.tap do |klass|
+                  klass.class_exec(config, out) do |config, out|
+                    include config
+
+                    define_method(:out) { out }
+
+                    def result
+                      error.tap { out.puts "original service error" }
+                    end
+
+                    def self.name
+                      "OriginalService"
+                    end
+                  end
+                end
+              end
+
+              let(:text) do
+                <<~TEXT
+                  original service error
+                TEXT
+              end
+
+              it "skips service rollback" do
+                result
+
+                expect(output).to eq(text)
+              end
             end
           end
         end
@@ -279,6 +375,76 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
 
               expect(output).to eq(text)
             end
+
+            context "when service has NO rollback" do
+              let(:service) do
+                Class.new.tap do |klass|
+                  klass.class_exec(config, out, first_step) do |config, out, first_step|
+                    include config
+
+                    step first_step
+
+                    step :result
+
+                    define_method(:out) { out }
+
+                    def result
+                      success.tap { out.puts "original service success" }
+                    end
+
+                    def self.name
+                      "OriginalService"
+                    end
+                  end
+                end
+              end
+
+              let(:text) do
+                <<~TEXT
+                  first step success
+                  original service success
+                TEXT
+              end
+
+              it "skips service rollback" do
+                result
+
+                expect(output).to eq(text)
+              end
+            end
+
+            context "when step has NO rollback" do
+              let(:first_step) do
+                Class.new.tap do |klass|
+                  klass.class_exec(config, out) do |config, out|
+                    include config
+
+                    define_method(:out) { out }
+
+                    def result
+                      success.tap { out.puts "first step success" }
+                    end
+
+                    def self.name
+                      "FirstStep"
+                    end
+                  end
+                end
+              end
+
+              let(:text) do
+                <<~TEXT
+                  first step success
+                  original service success
+                TEXT
+              end
+
+              it "skips step rollback" do
+                result
+
+                expect(output).to eq(text)
+              end
+            end
           end
 
           context "when service result is failure" do
@@ -326,6 +492,78 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
 
               expect(output).to eq(text)
             end
+
+            context "when service has NO rollback" do
+              let(:service) do
+                Class.new.tap do |klass|
+                  klass.class_exec(config, out, first_step) do |config, out, first_step|
+                    include config
+
+                    step first_step
+
+                    step :result
+
+                    define_method(:out) { out }
+
+                    def result
+                      failure.tap { out.puts "original service failure" }
+                    end
+
+                    def self.name
+                      "OriginalService"
+                    end
+                  end
+                end
+              end
+
+              let(:text) do
+                <<~TEXT
+                  first step success
+                  original service failure
+                  first step rollback
+                TEXT
+              end
+
+              it "skips service rollback" do
+                result
+
+                expect(output).to eq(text)
+              end
+            end
+
+            context "when step has NO rollback" do
+              let(:first_step) do
+                Class.new.tap do |klass|
+                  klass.class_exec(config, out) do |config, out|
+                    include config
+
+                    define_method(:out) { out }
+
+                    def result
+                      success.tap { out.puts "first step success" }
+                    end
+
+                    def self.name
+                      "FirstStep"
+                    end
+                  end
+                end
+              end
+
+              let(:text) do
+                <<~TEXT
+                  first step success
+                  original service failure
+                  original service rollback
+                TEXT
+              end
+
+              it "skips step rollback" do
+                result
+
+                expect(output).to eq(text)
+              end
+            end
           end
 
           context "when service result is error" do
@@ -372,6 +610,390 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
               result
 
               expect(output).to eq(text)
+            end
+
+            context "when service has NO rollback" do
+              let(:service) do
+                Class.new.tap do |klass|
+                  klass.class_exec(config, out, first_step) do |config, out, first_step|
+                    include config
+
+                    step first_step
+
+                    step :result
+
+                    define_method(:out) { out }
+
+                    def result
+                      error.tap { out.puts "original service error" }
+                    end
+
+                    def self.name
+                      "OriginalService"
+                    end
+                  end
+                end
+              end
+
+              let(:text) do
+                <<~TEXT
+                  first step success
+                  original service error
+                  first step rollback
+                TEXT
+              end
+
+              it "skips service rollback" do
+                result
+
+                expect(output).to eq(text)
+              end
+            end
+
+            context "when step has NO rollback" do
+              let(:first_step) do
+                Class.new.tap do |klass|
+                  klass.class_exec(config, out) do |config, out|
+                    include config
+
+                    define_method(:out) { out }
+
+                    def result
+                      success.tap { out.puts "first step success" }
+                    end
+
+                    def self.name
+                      "FirstStep"
+                    end
+                  end
+                end
+              end
+
+              let(:text) do
+                <<~TEXT
+                  first step success
+                  original service error
+                  original service rollback
+                TEXT
+              end
+
+              it "skips step rollback" do
+                result
+
+                expect(output).to eq(text)
+              end
+            end
+          end
+        end
+
+        context "when service has nested steps" do
+          let(:first_step_nested_step) do
+            Class.new.tap do |klass|
+              klass.class_exec(config, out) do |config, out|
+                include config
+
+                define_method(:out) { out }
+
+                def result
+                  success.tap { out.puts "first step nested step success" }
+                end
+
+                def rollback_result
+                  out.puts "first step nested step rollback"
+                end
+
+                def self.name
+                  "FirstStep::NestedStep"
+                end
+              end
+            end
+          end
+
+          let(:first_step) do
+            Class.new.tap do |klass|
+              klass.class_exec(config, out, first_step_nested_step) do |config, out, first_step_nested_step|
+                include config
+
+                define_method(:out) { out }
+
+                step first_step_nested_step
+
+                step :result
+
+                def result
+                  success.tap { out.puts "first step success" }
+                end
+
+                def rollback_result
+                  out.puts "first step rollback"
+                end
+
+                def self.name
+                  "FirstStep"
+                end
+              end
+            end
+          end
+
+          context "when service result is success" do
+            let(:service) do
+              Class.new.tap do |klass|
+                klass.class_exec(config, out, first_step) do |config, out, first_step|
+                  include config
+
+                  step first_step
+
+                  step :result
+
+                  define_method(:out) { out }
+
+                  def result
+                    success.tap { out.puts "original service success" }
+                  end
+
+                  def rollback_result
+                    out.puts "original service rollback"
+                  end
+
+                  def self.name
+                    "OriginalService"
+                  end
+                end
+              end
+            end
+
+            let(:text) do
+              <<~TEXT
+                first step nested step success
+                first step success
+                original service success
+              TEXT
+            end
+
+            it "returns that success" do
+              expect(result).to be_success.without_data.of_service(service).of_step(:result)
+            end
+
+            it "does NOT trigger any rollbacks" do
+              result
+
+              expect(output).to eq(text)
+            end
+
+            context "when service has NO rollback" do
+              let(:service) do
+                Class.new.tap do |klass|
+                  klass.class_exec(config, out, first_step) do |config, out, first_step|
+                    include config
+
+                    step first_step
+
+                    step :result
+
+                    define_method(:out) { out }
+
+                    def result
+                      success.tap { out.puts "original service success" }
+                    end
+
+                    def self.name
+                      "OriginalService"
+                    end
+                  end
+                end
+              end
+
+              let(:text) do
+                <<~TEXT
+                  first step nested step success
+                  first step success
+                  original service success
+                TEXT
+              end
+
+              it "skips service rollback" do
+                result
+
+                expect(output).to eq(text)
+              end
+            end
+          end
+
+          context "when service result is failure" do
+            let(:service) do
+              Class.new.tap do |klass|
+                klass.class_exec(config, out, first_step) do |config, out, first_step|
+                  include config
+
+                  step first_step
+
+                  step :result
+
+                  define_method(:out) { out }
+
+                  def result
+                    failure.tap { out.puts "original service failure" }
+                  end
+
+                  def rollback_result
+                    out.puts "original service rollback"
+                  end
+
+                  def self.name
+                    "OriginalService"
+                  end
+                end
+              end
+            end
+
+            let(:text) do
+              <<~TEXT
+                first step nested step success
+                first step success
+                original service failure
+                original service rollback
+                first step rollback
+                first step nested step rollback
+              TEXT
+            end
+
+            it "returns that failure" do
+              expect(result).to be_failure.without_data.of_service(service).of_step(:result)
+            end
+
+            it "triggers service, steps and nested steps rollbacks in reverse order" do
+              result
+
+              expect(output).to eq(text)
+            end
+
+            context "when service has NO rollback" do
+              let(:service) do
+                Class.new.tap do |klass|
+                  klass.class_exec(config, out, first_step) do |config, out, first_step|
+                    include config
+
+                    step first_step
+
+                    step :result
+
+                    define_method(:out) { out }
+
+                    def result
+                      failure.tap { out.puts "original service failure" }
+                    end
+
+                    def self.name
+                      "OriginalService"
+                    end
+                  end
+                end
+              end
+
+              let(:text) do
+                <<~TEXT
+                  first step nested step success
+                  first step success
+                  original service failure
+                  first step rollback
+                  first step nested step rollback
+                TEXT
+              end
+
+              it "skips service rollback" do
+                result
+
+                expect(output).to eq(text)
+              end
+            end
+          end
+
+          context "when service result is error" do
+            let(:service) do
+              Class.new.tap do |klass|
+                klass.class_exec(config, out, first_step) do |config, out, first_step|
+                  include config
+
+                  step first_step
+
+                  step :result
+
+                  define_method(:out) { out }
+
+                  def result
+                    error.tap { out.puts "original service error" }
+                  end
+
+                  def rollback_result
+                    out.puts "original service rollback"
+                  end
+
+                  def self.name
+                    "OriginalService"
+                  end
+                end
+              end
+            end
+
+            let(:text) do
+              <<~TEXT
+                first step nested step success
+                first step success
+                original service error
+                original service rollback
+                first step rollback
+                first step nested step rollback
+              TEXT
+            end
+
+            it "returns that error" do
+              expect(result).to be_error.without_data.of_service(service).of_step(:result)
+            end
+
+            it "triggers service, steps and nested steps rollbacks in reverse order" do
+              result
+
+              expect(output).to eq(text)
+            end
+
+            context "when service has NO rollback" do
+              let(:service) do
+                Class.new.tap do |klass|
+                  klass.class_exec(config, out, first_step) do |config, out, first_step|
+                    include config
+
+                    step first_step
+
+                    step :result
+
+                    define_method(:out) { out }
+
+                    def result
+                      error.tap { out.puts "original service error" }
+                    end
+
+                    def self.name
+                      "OriginalService"
+                    end
+                  end
+                end
+              end
+
+              let(:text) do
+                <<~TEXT
+                  first step nested step success
+                  first step success
+                  original service error
+                  first step rollback
+                  first step nested step rollback
+                TEXT
+              end
+
+              it "skips service rollback" do
+                result
+
+                expect(output).to eq(text)
+              end
             end
           end
         end
