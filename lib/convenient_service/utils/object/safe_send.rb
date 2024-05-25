@@ -3,6 +3,19 @@
 module ConvenientService
   module Utils
     module Object
+      ##
+      # Returns `nil` when `object` does NOT respond to `method`.
+      # Otherwise it calls `method` on `object` and returns its value.
+      # If calling `method` on `object` raises an exception, it is rescued and `nil` is returned.
+      # Only `StandardError` exceptions are rescued.
+      # Uses `__send__` under the hood.
+      #
+      # @note `ArgumentError` is `StandardError` descendant, so it is also rescued. It is up to the client code to ensure that valid arguments are passed.
+      # @see https://ruby-doc.org/core-2.7.0/BasicObject.html#method-i-__send__
+      # @see https://ruby-doc.org/core-2.7.0/Object.html#method-i-respond_to-3F
+      # @see https://ruby-doc.org/core-2.7.0/StandardError.html
+      # @see https://ruby-doc.org/core-2.7.0/ArgumentError.html
+      #
       class SafeSend < Support::Command
         ##
         # @!attribute [r] object
@@ -59,7 +72,11 @@ module ConvenientService
         def call
           return unless object.respond_to?(method, true)
 
-          object.__send__(method, *args, **kwargs, &block)
+          begin
+            object.__send__(method, *args, **kwargs, &block)
+          rescue
+            nil
+          end
         end
       end
     end

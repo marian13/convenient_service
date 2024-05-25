@@ -7,7 +7,7 @@ require "convenient_service"
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Utils::Object::SafeSend, type: :standard do
   describe ".call" do
-    let(:result) { described_class.call(object, method, *args, **kwargs, &block) }
+    let(:util_result) { described_class.call(object, method, *args, **kwargs, &block) }
 
     let(:object) { klass.new }
 
@@ -20,7 +20,7 @@ RSpec.describe ConvenientService::Utils::Object::SafeSend, type: :standard do
       let(:klass) { Class.new }
 
       it "returns `nil`" do
-        expect(result).to be_nil
+        expect(util_result).to be_nil
       end
     end
 
@@ -35,7 +35,21 @@ RSpec.describe ConvenientService::Utils::Object::SafeSend, type: :standard do
         end
 
         it "returns original method value" do
-          expect(result).to eq([method, args, kwargs, block])
+          expect(util_result).to eq([method, args, kwargs, block])
+        end
+
+        context "when `method` raises exception" do
+          let(:klass) do
+            Class.new do
+              def foo(*args, **kwargs, &block)
+                raise ArgumentError
+              end
+            end
+          end
+
+          it "returns `nil`" do
+            expect(util_result).to be_nil
+          end
         end
       end
 
@@ -51,7 +65,23 @@ RSpec.describe ConvenientService::Utils::Object::SafeSend, type: :standard do
         end
 
         it "returns original method value" do
-          expect(result).to eq([method, args, kwargs, block])
+          expect(util_result).to eq([method, args, kwargs, block])
+        end
+
+        context "when `method` raises exception" do
+          let(:klass) do
+            Class.new do
+              protected
+
+              def foo(*args, **kwargs, &block)
+                raise ArgumentError
+              end
+            end
+          end
+
+          it "returns `nil`" do
+            expect(util_result).to be_nil
+          end
         end
       end
 
@@ -67,7 +97,23 @@ RSpec.describe ConvenientService::Utils::Object::SafeSend, type: :standard do
         end
 
         it "returns original method value" do
-          expect(result).to eq([method, args, kwargs, block])
+          expect(util_result).to eq([method, args, kwargs, block])
+        end
+
+        context "when `method` raises exception" do
+          let(:klass) do
+            Class.new do
+              private
+
+              def foo(*args, **kwargs, &block)
+                raise ArgumentError
+              end
+            end
+          end
+
+          it "returns `nil`" do
+            expect(util_result).to be_nil
+          end
         end
       end
     end
