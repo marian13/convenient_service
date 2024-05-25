@@ -160,6 +160,42 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
                 expect(output).to eq(text)
               end
             end
+
+            context "when service rollback raises exception" do
+              let(:service) do
+                Class.new.tap do |klass|
+                  klass.class_exec(config, out) do |config, out|
+                    include config
+
+                    define_method(:out) { out }
+
+                    def result
+                      success.tap { out.puts "original service success" }
+                    end
+
+                    def rollback_result
+                      raise ArgumentError
+                    end
+
+                    def self.name
+                      "OriginalService"
+                    end
+                  end
+                end
+              end
+
+              let(:text) do
+                <<~TEXT
+                  original service success
+                TEXT
+              end
+
+              it "rescues service rollback exception" do
+                result
+
+                expect(output).to eq(text)
+              end
+            end
           end
 
           context "when service result is failure" do
@@ -233,6 +269,42 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
                 expect(output).to eq(text)
               end
             end
+
+            context "when service rollback raises exception" do
+              let(:service) do
+                Class.new.tap do |klass|
+                  klass.class_exec(config, out) do |config, out|
+                    include config
+
+                    define_method(:out) { out }
+
+                    def result
+                      failure.tap { out.puts "original service failure" }
+                    end
+
+                    def rollback_result
+                      raise ArgumentError
+                    end
+
+                    def self.name
+                      "OriginalService"
+                    end
+                  end
+                end
+              end
+
+              let(:text) do
+                <<~TEXT
+                  original service failure
+                TEXT
+              end
+
+              it "rescues service rollback exception" do
+                result
+
+                expect(output).to eq(text)
+              end
+            end
           end
 
           context "when service result is error" do
@@ -301,6 +373,42 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
               end
 
               it "skips service rollback" do
+                result
+
+                expect(output).to eq(text)
+              end
+            end
+
+            context "when service rollback raises exception" do
+              let(:service) do
+                Class.new.tap do |klass|
+                  klass.class_exec(config, out) do |config, out|
+                    include config
+
+                    define_method(:out) { out }
+
+                    def result
+                      error.tap { out.puts "original service error" }
+                    end
+
+                    def rollback_result
+                      raise ArgumentError
+                    end
+
+                    def self.name
+                      "OriginalService"
+                    end
+                  end
+                end
+              end
+
+              let(:text) do
+                <<~TEXT
+                  original service error
+                TEXT
+              end
+
+              it "rescues service rollback exception" do
                 result
 
                 expect(output).to eq(text)
