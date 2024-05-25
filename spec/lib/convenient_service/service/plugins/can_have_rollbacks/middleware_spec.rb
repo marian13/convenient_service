@@ -417,7 +417,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
           end
         end
 
-        context "when service has steps" do
+        context "when service has some service steps" do
           let(:first_step) do
             Class.new.tap do |klass|
               klass.class_exec(config, out) do |config, out|
@@ -426,11 +426,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
                 define_method(:out) { out }
 
                 def result
-                  success.tap { out.puts "first step success" }
+                  success.tap { out.puts "first service step success" }
                 end
 
                 def rollback_result
-                  out.puts "first step rollback"
+                  out.puts "first service step rollback"
                 end
 
                 def self.name
@@ -469,7 +469,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
 
             let(:text) do
               <<~TEXT
-                first step success
+                first service step success
                 original service success
               TEXT
             end
@@ -509,7 +509,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
 
               let(:text) do
                 <<~TEXT
-                  first step success
+                  first service step success
                   original service success
                 TEXT
               end
@@ -550,7 +550,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
 
               let(:text) do
                 <<~TEXT
-                  first step success
+                  first service step success
                   original service success
                 TEXT
               end
@@ -571,7 +571,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
                     define_method(:out) { out }
 
                     def result
-                      success.tap { out.puts "first step success" }
+                      success.tap { out.puts "first service step success" }
                     end
 
                     def self.name
@@ -583,7 +583,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
 
               let(:text) do
                 <<~TEXT
-                  first step success
+                  first service step success
                   original service success
                 TEXT
               end
@@ -604,7 +604,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
                     define_method(:out) { out }
 
                     def result
-                      success.tap { out.puts "first step success" }
+                      success.tap { out.puts "first service step success" }
                     end
 
                     def rollback_result
@@ -620,7 +620,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
 
               let(:text) do
                 <<~TEXT
-                  first step success
+                  first service step success
                   original service success
                 TEXT
               end
@@ -662,10 +662,10 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
 
             let(:text) do
               <<~TEXT
-                first step success
+                first service step success
                 original service failure
                 original service rollback
-                first step rollback
+                first service step rollback
               TEXT
             end
 
@@ -704,9 +704,9 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
 
               let(:text) do
                 <<~TEXT
-                  first step success
+                  first service step success
                   original service failure
-                  first step rollback
+                  first service step rollback
                 TEXT
               end
 
@@ -746,9 +746,9 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
 
               let(:text) do
                 <<~TEXT
-                  first step success
+                  first service step success
                   original service failure
-                  first step rollback
+                  first service step rollback
                 TEXT
               end
 
@@ -768,7 +768,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
                     define_method(:out) { out }
 
                     def result
-                      success.tap { out.puts "first step success" }
+                      success.tap { out.puts "first service step success" }
                     end
 
                     def self.name
@@ -780,7 +780,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
 
               let(:text) do
                 <<~TEXT
-                  first step success
+                  first service step success
                   original service failure
                   original service rollback
                 TEXT
@@ -802,7 +802,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
                     define_method(:out) { out }
 
                     def result
-                      success.tap { out.puts "first step success" }
+                      success.tap { out.puts "first service step success" }
                     end
 
                     def rollback_result
@@ -818,7 +818,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
 
               let(:text) do
                 <<~TEXT
-                  first step success
+                  first service step success
                   original service failure
                   original service rollback
                 TEXT
@@ -861,10 +861,10 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
 
             let(:text) do
               <<~TEXT
-                first step success
+                first service step success
                 original service error
                 original service rollback
-                first step rollback
+                first service step rollback
               TEXT
             end
 
@@ -903,9 +903,9 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
 
               let(:text) do
                 <<~TEXT
-                  first step success
+                  first service step success
                   original service error
-                  first step rollback
+                  first service step rollback
                 TEXT
               end
 
@@ -945,9 +945,9 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
 
               let(:text) do
                 <<~TEXT
-                  first step success
+                  first service step success
                   original service error
-                  first step rollback
+                  first service step rollback
                 TEXT
               end
 
@@ -967,7 +967,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
                     define_method(:out) { out }
 
                     def result
-                      success.tap { out.puts "first step success" }
+                      success.tap { out.puts "first service step success" }
                     end
 
                     def self.name
@@ -979,7 +979,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
 
               let(:text) do
                 <<~TEXT
-                  first step success
+                  first service step success
                   original service error
                   original service rollback
                 TEXT
@@ -1001,7 +1001,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
                     define_method(:out) { out }
 
                     def result
-                      success.tap { out.puts "first step success" }
+                      success.tap { out.puts "first service step success" }
                     end
 
                     def rollback_result
@@ -1017,7 +1017,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
 
               let(:text) do
                 <<~TEXT
-                  first step success
+                  first service step success
                   original service error
                   original service rollback
                 TEXT
@@ -1041,11 +1041,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
                 define_method(:out) { out }
 
                 def result
-                  success.tap { out.puts "first step nested step success" }
+                  success.tap { out.puts "first service step nested service step success" }
                 end
 
                 def rollback_result
-                  out.puts "first step nested step rollback"
+                  out.puts "first service step nested service step rollback"
                 end
 
                 def self.name
@@ -1110,7 +1110,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
 
             let(:text) do
               <<~TEXT
-                first step nested step success
+                first service step nested service step success
                 first step success
                 original service success
               TEXT
@@ -1151,7 +1151,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
 
               let(:text) do
                 <<~TEXT
-                  first step nested step success
+                  first service step nested service step success
                   first step success
                   original service success
                 TEXT
@@ -1193,7 +1193,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
 
               let(:text) do
                 <<~TEXT
-                  first step nested step success
+                  first service step nested service step success
                   first step success
                   original service success
                 TEXT
@@ -1231,7 +1231,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
 
               let(:text) do
                 <<~TEXT
-                  first step nested step success
+                  first service step nested service step success
                   first step success
                   original service success
                 TEXT
@@ -1273,7 +1273,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
 
               let(:text) do
                 <<~TEXT
-                  first step nested step success
+                  first service step nested service step success
                   first step success
                   original service success
                 TEXT
@@ -1295,7 +1295,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
                     define_method(:out) { out }
 
                     def result
-                      success.tap { out.puts "first step nested step success" }
+                      success.tap { out.puts "first service step nested service step success" }
                     end
 
                     def self.name
@@ -1307,7 +1307,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
 
               let(:text) do
                 <<~TEXT
-                  first step nested step success
+                  first service step nested service step success
                   first step success
                   original service success
                 TEXT
@@ -1329,7 +1329,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
                     define_method(:out) { out }
 
                     def result
-                      success.tap { out.puts "first step nested step success" }
+                      success.tap { out.puts "first service step nested service step success" }
                     end
 
                     def rollback_result
@@ -1345,7 +1345,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
 
               let(:text) do
                 <<~TEXT
-                  first step nested step success
+                  first service step nested service step success
                   first step success
                   original service success
                 TEXT
@@ -1388,12 +1388,12 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
 
             let(:text) do
               <<~TEXT
-                first step nested step success
+                first service step nested service step success
                 first step success
                 original service failure
                 original service rollback
                 first step rollback
-                first step nested step rollback
+                first service step nested service step rollback
               TEXT
             end
 
@@ -1432,11 +1432,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
 
               let(:text) do
                 <<~TEXT
-                  first step nested step success
+                  first service step nested service step success
                   first step success
                   original service failure
                   first step rollback
-                  first step nested step rollback
+                  first service step nested service step rollback
                 TEXT
               end
 
@@ -1476,11 +1476,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
 
               let(:text) do
                 <<~TEXT
-                  first step nested step success
+                  first service step nested service step success
                   first step success
                   original service failure
                   first step rollback
-                  first step nested step rollback
+                  first service step nested service step rollback
                 TEXT
               end
 
@@ -1516,11 +1516,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
 
               let(:text) do
                 <<~TEXT
-                  first step nested step success
+                  first service step nested service step success
                   first step success
                   original service failure
                   original service rollback
-                  first step nested step rollback
+                  first service step nested service step rollback
                 TEXT
               end
 
@@ -1560,11 +1560,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
 
               let(:text) do
                 <<~TEXT
-                  first step nested step success
+                  first service step nested service step success
                   first step success
                   original service failure
                   original service rollback
-                  first step nested step rollback
+                  first service step nested service step rollback
                 TEXT
               end
 
@@ -1584,7 +1584,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
                     define_method(:out) { out }
 
                     def result
-                      success.tap { out.puts "first step nested step success" }
+                      success.tap { out.puts "first service step nested service step success" }
                     end
 
                     def self.name
@@ -1596,7 +1596,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
 
               let(:text) do
                 <<~TEXT
-                  first step nested step success
+                  first service step nested service step success
                   first step success
                   original service failure
                   original service rollback
@@ -1620,7 +1620,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
                     define_method(:out) { out }
 
                     def result
-                      success.tap { out.puts "first step nested step success" }
+                      success.tap { out.puts "first service step nested service step success" }
                     end
 
                     def rollback_result
@@ -1636,7 +1636,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
 
               let(:text) do
                 <<~TEXT
-                  first step nested step success
+                  first service step nested service step success
                   first step success
                   original service failure
                   original service rollback
@@ -1681,12 +1681,12 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
 
             let(:text) do
               <<~TEXT
-                first step nested step success
+                first service step nested service step success
                 first step success
                 original service error
                 original service rollback
                 first step rollback
-                first step nested step rollback
+                first service step nested service step rollback
               TEXT
             end
 
@@ -1725,11 +1725,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
 
               let(:text) do
                 <<~TEXT
-                  first step nested step success
+                  first service step nested service step success
                   first step success
                   original service error
                   first step rollback
-                  first step nested step rollback
+                  first service step nested service step rollback
                 TEXT
               end
 
@@ -1769,11 +1769,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
 
               let(:text) do
                 <<~TEXT
-                  first step nested step success
+                  first service step nested service step success
                   first step success
                   original service error
                   first step rollback
-                  first step nested step rollback
+                  first service step nested service step rollback
                 TEXT
               end
 
@@ -1809,11 +1809,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
 
               let(:text) do
                 <<~TEXT
-                  first step nested step success
+                  first service step nested service step success
                   first step success
                   original service error
                   original service rollback
-                  first step nested step rollback
+                  first service step nested service step rollback
                 TEXT
               end
 
@@ -1853,11 +1853,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
 
               let(:text) do
                 <<~TEXT
-                  first step nested step success
+                  first service step nested service step success
                   first step success
                   original service error
                   original service rollback
-                  first step nested step rollback
+                  first service step nested service step rollback
                 TEXT
               end
 
@@ -1877,7 +1877,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
                     define_method(:out) { out }
 
                     def result
-                      success.tap { out.puts "first step nested step success" }
+                      success.tap { out.puts "first service step nested service step success" }
                     end
 
                     def self.name
@@ -1889,7 +1889,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
 
               let(:text) do
                 <<~TEXT
-                  first step nested step success
+                  first service step nested service step success
                   first step success
                   original service error
                   original service rollback
@@ -1913,7 +1913,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
                     define_method(:out) { out }
 
                     def result
-                      success.tap { out.puts "first step nested step success" }
+                      success.tap { out.puts "first service step nested service step success" }
                     end
 
                     def rollback_result
@@ -1929,7 +1929,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
 
               let(:text) do
                 <<~TEXT
-                  first step nested step success
+                  first service step nested service step success
                   first step success
                   original service error
                   original service rollback
@@ -1942,6 +1942,507 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
 
                 expect(output).to eq(text)
               end
+            end
+          end
+        end
+
+        context "when service has only method steps" do
+          context "when service result is success" do
+            let(:service) do
+              Class.new.tap do |klass|
+                klass.class_exec(config, out) do |config, out|
+                  include config
+
+                  step :first_step
+
+                  step :result
+
+                  define_method(:out) { out }
+
+                  def result
+                    success.tap { out.puts "original service success" }
+                  end
+
+                  def rollback_result
+                    out.puts "original service rollback"
+                  end
+
+                  def first_step
+                    success.tap { out.puts "first method step success" }
+                  end
+
+                  def self.name
+                    "OriginalService"
+                  end
+                end
+              end
+            end
+
+            let(:text) do
+              <<~TEXT
+                first method step success
+                original service success
+              TEXT
+            end
+
+            it "returns that success" do
+              expect(result).to be_success.without_data.of_service(service).of_step(:result)
+            end
+
+            it "does NOT trigger any rollbacks" do
+              result
+
+              expect(output).to eq(text)
+            end
+
+            context "when service has NO rollback" do
+              let(:service) do
+                Class.new.tap do |klass|
+                  klass.class_exec(config, out) do |config, out|
+                    include config
+
+                    step :first_step
+
+                    step :result
+
+                    define_method(:out) { out }
+
+                    def result
+                      success.tap { out.puts "original service success" }
+                    end
+
+                    def first_step
+                      success.tap { out.puts "first method step success" }
+                    end
+
+                    def self.name
+                      "OriginalService"
+                    end
+                  end
+                end
+              end
+
+              let(:text) do
+                <<~TEXT
+                  first method step success
+                  original service success
+                TEXT
+              end
+
+              it "does NOT trigger service rollback" do
+                result
+
+                expect(output).to eq(text)
+              end
+            end
+
+            context "when service rollback raises exception" do
+              let(:service) do
+                Class.new.tap do |klass|
+                  klass.class_exec(config, out) do |config, out|
+                    include config
+
+                    step :first_step
+
+                    step :result
+
+                    define_method(:out) { out }
+
+                    def result
+                      success.tap { out.puts "original service success" }
+                    end
+
+                    def rollback_result
+                      raise ArgumentError
+                    end
+
+                    def first_step
+                      success.tap { out.puts "first method step success" }
+                    end
+
+                    def self.name
+                      "OriginalService"
+                    end
+                  end
+                end
+              end
+
+              let(:text) do
+                <<~TEXT
+                  first method step success
+                  original service success
+                TEXT
+              end
+
+              it "does NOT trigger service rollback" do
+                result
+
+                expect(output).to eq(text)
+              end
+            end
+          end
+
+          context "when service result is failure" do
+            let(:service) do
+              Class.new.tap do |klass|
+                klass.class_exec(config, out) do |config, out|
+                  include config
+
+                  step :first_step
+
+                  step :result
+
+                  define_method(:out) { out }
+
+                  def result
+                    failure.tap { out.puts "original service failure" }
+                  end
+
+                  def rollback_result
+                    out.puts "original service rollback"
+                  end
+
+                  def first_step
+                    success.tap { out.puts "first method step success" }
+                  end
+
+                  def self.name
+                    "OriginalService"
+                  end
+                end
+              end
+            end
+
+            let(:text) do
+              <<~TEXT
+                first method step success
+                original service failure
+                original service rollback
+              TEXT
+            end
+
+            it "returns that failure" do
+              expect(result).to be_failure.without_data.of_service(service).of_step(:result)
+            end
+
+            it "triggers service rollback" do
+              result
+
+              expect(output).to eq(text)
+            end
+
+            context "when service has NO rollback" do
+              let(:service) do
+                Class.new.tap do |klass|
+                  klass.class_exec(config, out) do |config, out|
+                    include config
+
+                    step :first_step
+
+                    step :result
+
+                    define_method(:out) { out }
+
+                    def result
+                      failure.tap { out.puts "original service failure" }
+                    end
+
+                    def first_step
+                      success.tap { out.puts "first method step success" }
+                    end
+
+                    def self.name
+                      "OriginalService"
+                    end
+                  end
+                end
+              end
+
+              let(:text) do
+                <<~TEXT
+                  first method step success
+                  original service failure
+                TEXT
+              end
+
+              it "skips service rollback" do
+                result
+
+                expect(output).to eq(text)
+              end
+            end
+
+            context "when service rollback raises exception" do
+              let(:service) do
+                Class.new.tap do |klass|
+                  klass.class_exec(config, out) do |config, out|
+                    include config
+
+                    step :first_step
+
+                    step :result
+
+                    define_method(:out) { out }
+
+                    def result
+                      failure.tap { out.puts "original service failure" }
+                    end
+
+                    def rollback_result
+                      raise ArgumentError
+                    end
+
+                    def first_step
+                      success.tap { out.puts "first method step success" }
+                    end
+
+                    def self.name
+                      "OriginalService"
+                    end
+                  end
+                end
+              end
+
+              let(:text) do
+                <<~TEXT
+                  first method step success
+                  original service failure
+                TEXT
+              end
+
+              it "rescues service rollback exception" do
+                result
+
+                expect(output).to eq(text)
+              end
+            end
+          end
+
+          context "when service result is error" do
+            let(:service) do
+              Class.new.tap do |klass|
+                klass.class_exec(config, out) do |config, out|
+                  include config
+
+                  step :first_step
+
+                  step :result
+
+                  define_method(:out) { out }
+
+                  def result
+                    error.tap { out.puts "original service error" }
+                  end
+
+                  def rollback_result
+                    out.puts "original service rollback"
+                  end
+
+                  def first_step
+                    success.tap { out.puts "first method step success" }
+                  end
+
+                  def self.name
+                    "OriginalService"
+                  end
+                end
+              end
+            end
+
+            let(:text) do
+              <<~TEXT
+                first method step success
+                original service error
+                original service rollback
+              TEXT
+            end
+
+            it "returns that error" do
+              expect(result).to be_error.without_data.of_service(service).of_step(:result)
+            end
+
+            it "triggers service rollback" do
+              result
+
+              expect(output).to eq(text)
+            end
+
+            context "when service has NO rollback" do
+              let(:service) do
+                Class.new.tap do |klass|
+                  klass.class_exec(config, out) do |config, out|
+                    include config
+
+                    step :first_step
+
+                    step :result
+
+                    define_method(:out) { out }
+
+                    def result
+                      error.tap { out.puts "original service error" }
+                    end
+
+                    def first_step
+                      success.tap { out.puts "first method step success" }
+                    end
+
+                    def self.name
+                      "OriginalService"
+                    end
+                  end
+                end
+              end
+
+              let(:text) do
+                <<~TEXT
+                  first method step success
+                  original service error
+                TEXT
+              end
+
+              it "skips service rollback" do
+                result
+
+                expect(output).to eq(text)
+              end
+            end
+
+            context "when service rollback raises exception" do
+              let(:service) do
+                Class.new.tap do |klass|
+                  klass.class_exec(config, out) do |config, out|
+                    include config
+
+                    step :first_step
+
+                    step :result
+
+                    define_method(:out) { out }
+
+                    def result
+                      error.tap { out.puts "original service error" }
+                    end
+
+                    def rollback_result
+                      raise ArgumentError
+                    end
+
+                    def first_step
+                      success.tap { out.puts "first method step success" }
+                    end
+
+                    def self.name
+                      "OriginalService"
+                    end
+                  end
+                end
+              end
+
+              let(:text) do
+                <<~TEXT
+                  first method step success
+                  original service error
+                TEXT
+              end
+
+              it "rescues service rollback exception" do
+                result
+
+                expect(output).to eq(text)
+              end
+            end
+          end
+        end
+
+        context "when service has not completed steps" do
+          let(:first_step) do
+            Class.new.tap do |klass|
+              klass.class_exec(config, out) do |config, out|
+                include config
+
+                define_method(:out) { out }
+
+                def result
+                  failure.tap { out.puts "first service step failure" }
+                end
+
+                def rollback_result
+                  out.puts "first service step rollback"
+                end
+
+                def self.name
+                  "FirstStep"
+                end
+              end
+            end
+          end
+
+          let(:second_step) do
+            Class.new.tap do |klass|
+              klass.class_exec(config, out) do |config, out|
+                include config
+
+                define_method(:out) { out }
+
+                def result
+                  success.tap { out.puts "second service step success" }
+                end
+
+                def rollback_result
+                  out.puts "second service step rollback"
+                end
+
+                def self.name
+                  "SecondStep"
+                end
+              end
+            end
+          end
+
+          let(:service) do
+            Class.new.tap do |klass|
+              klass.class_exec(config, out, first_step, second_step) do |config, out, first_step, second_step|
+                include config
+
+                step first_step
+
+                step second_step
+
+                step :result
+
+                define_method(:out) { out }
+
+                def result
+                  success.tap { out.puts "original service success" }
+                end
+
+                def rollback_result
+                  out.puts "original service rollback"
+                end
+
+                def self.name
+                  "OriginalService"
+                end
+              end
+            end
+
+            let(:text) do
+              <<~TEXT
+                first service step failure
+                first service step rollback
+                original service rollback
+              TEXT
+            end
+
+            it "returns last completed step result" do
+              expect(result).to be_failure.without_data.of_service(service).of_service(first_step)
+            end
+
+            it "triggers service and completed steps rollbacks in reverse order" do
+              result
+
+              expect(output).to eq(text)
             end
           end
         end
