@@ -101,7 +101,41 @@
   
 </div>
 
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p><code>ArgumentError</code> is <code>StandardError</code> descendant, so it is also rescued. It is up to the client code to ensure that valid arguments are passed.</p>
+</div>
+  </div>
 
+<p>Returns <code>nil</code> when <code>object</code> does NOT respond to <code>method</code>.
+Otherwise it calls <code>method</code> on <code>object</code> and returns its value.
+If calling <code>method</code> on <code>object</code> raises an exception, it is rescued and <code>nil</code> is returned.
+Only <code>StandardError</code> exceptions are rescued.
+Uses <code>__send__</code> under the hood.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://ruby-doc.org/core-2.7.0/BasicObject.html#method-i-__send__" target="_parent" title="https://ruby-doc.org/core-2.7.0/BasicObject.html#method-i-__send__">https://ruby-doc.org/core-2.7.0/BasicObject.html#method-i-__send__</a></li>
+    
+      <li><a href="https://ruby-doc.org/core-2.7.0/Object.html#method-i-respond_to-3F" target="_parent" title="https://ruby-doc.org/core-2.7.0/Object.html#method-i-respond_to-3F">https://ruby-doc.org/core-2.7.0/Object.html#method-i-respond_to-3F</a></li>
+    
+      <li><a href="https://ruby-doc.org/core-2.7.0/StandardError.html" target="_parent" title="https://ruby-doc.org/core-2.7.0/StandardError.html">https://ruby-doc.org/core-2.7.0/StandardError.html</a></li>
+    
+      <li><a href="https://ruby-doc.org/core-2.7.0/ArgumentError.html" target="_parent" title="https://ruby-doc.org/core-2.7.0/ArgumentError.html">https://ruby-doc.org/core-2.7.0/ArgumentError.html</a></li>
+    
+  </ul>
+
+</div>
 
 
 
@@ -414,16 +448,16 @@
       <pre class="lines">
 
 
-44
-45
-46
-47
-48
-49
-50</pre>
+57
+58
+59
+60
+61
+62
+63</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/object/safe_send.rb', line 44</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/object/safe_send.rb', line 57</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_object'>object</span><span class='comma'>,</span> <span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='ivar'>@object</span> <span class='op'>=</span> <span class='id identifier rubyid_object'>object</span>
@@ -469,12 +503,12 @@
       <pre class="lines">
 
 
-23
-24
-25</pre>
+36
+37
+38</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/object/safe_send.rb', line 23</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/object/safe_send.rb', line 36</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_args'>args</span>
   <span class='ivar'>@args</span>
@@ -511,12 +545,12 @@
       <pre class="lines">
 
 
-35
-36
-37</pre>
+48
+49
+50</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/object/safe_send.rb', line 35</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/object/safe_send.rb', line 48</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_block'>block</span>
   <span class='ivar'>@block</span>
@@ -553,12 +587,12 @@
       <pre class="lines">
 
 
-29
-30
-31</pre>
+42
+43
+44</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/object/safe_send.rb', line 29</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/object/safe_send.rb', line 42</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_kwargs'>kwargs</span>
   <span class='ivar'>@kwargs</span>
@@ -595,12 +629,12 @@
       <pre class="lines">
 
 
-17
-18
-19</pre>
+30
+31
+32</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/object/safe_send.rb', line 17</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/object/safe_send.rb', line 30</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_method'>method</span>
   <span class='ivar'>@method</span>
@@ -637,12 +671,12 @@
       <pre class="lines">
 
 
-11
-12
-13</pre>
+24
+25
+26</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/object/safe_send.rb', line 11</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/object/safe_send.rb', line 24</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_object'>object</span>
   <span class='ivar'>@object</span>
@@ -701,19 +735,27 @@
       <pre class="lines">
 
 
-59
-60
-61
-62
-63</pre>
+72
+73
+74
+75
+76
+77
+78
+79
+80</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/object/safe_send.rb', line 59</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/object/safe_send.rb', line 72</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span>
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_object'>object</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='kw'>true</span><span class='rparen'>)</span>
 
-  <span class='id identifier rubyid_object'>object</span><span class='period'>.</span><span class='id identifier rubyid___send__'>__send__</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='kw'>begin</span>
+    <span class='id identifier rubyid_object'>object</span><span class='period'>.</span><span class='id identifier rubyid___send__'>__send__</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='kw'>rescue</span>
+    <span class='kw'>nil</span>
+  <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -725,7 +767,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat May 25 14:43:47 2024 by
+  Generated on Sat May 25 22:50:19 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.36 (ruby-3.2.4).
 </div>
