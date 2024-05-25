@@ -154,7 +154,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
                 TEXT
               end
 
-              it "skips service rollback" do
+              it "does NOT trigger service rollback" do
                 result
 
                 expect(output).to eq(text)
@@ -190,7 +190,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
                 TEXT
               end
 
-              it "rescues service rollback exception" do
+              it "does NOT trigger service rollback" do
                 result
 
                 expect(output).to eq(text)
@@ -514,7 +514,48 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
                 TEXT
               end
 
-              it "skips service rollback" do
+              it "does NOT trigger service rollback" do
+                result
+
+                expect(output).to eq(text)
+              end
+            end
+
+            context "when service rollback raises exception" do
+              let(:service) do
+                Class.new.tap do |klass|
+                  klass.class_exec(config, out, first_step) do |config, out, first_step|
+                    include config
+
+                    step first_step
+
+                    step :result
+
+                    define_method(:out) { out }
+
+                    def result
+                      success.tap { out.puts "original service success" }
+                    end
+
+                    def rollback_result
+                      raise ArgumentError
+                    end
+
+                    def self.name
+                      "OriginalService"
+                    end
+                  end
+                end
+              end
+
+              let(:text) do
+                <<~TEXT
+                  first step success
+                  original service success
+                TEXT
+              end
+
+              it "does NOT trigger service rollback" do
                 result
 
                 expect(output).to eq(text)
@@ -547,7 +588,44 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
                 TEXT
               end
 
-              it "skips step rollback" do
+              it "does NOT trigger step rollback" do
+                result
+
+                expect(output).to eq(text)
+              end
+            end
+
+            context "when step rollback raises exception" do
+              let(:first_step) do
+                Class.new.tap do |klass|
+                  klass.class_exec(config, out) do |config, out|
+                    include config
+
+                    define_method(:out) { out }
+
+                    def result
+                      success.tap { out.puts "first step success" }
+                    end
+
+                    def rollback_result
+                      raise ArgumentError
+                    end
+
+                    def self.name
+                      "FirstStep"
+                    end
+                  end
+                end
+              end
+
+              let(:text) do
+                <<~TEXT
+                  first step success
+                  original service success
+                TEXT
+              end
+
+              it "does NOT trigger step rollback" do
                 result
 
                 expect(output).to eq(text)
@@ -639,6 +717,48 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
               end
             end
 
+            context "when service rollback raises exception" do
+              let(:service) do
+                Class.new.tap do |klass|
+                  klass.class_exec(config, out, first_step) do |config, out, first_step|
+                    include config
+
+                    step first_step
+
+                    step :result
+
+                    define_method(:out) { out }
+
+                    def result
+                      failure.tap { out.puts "original service failure" }
+                    end
+
+                    def rollback_result
+                      raise ArgumentError
+                    end
+
+                    def self.name
+                      "OriginalService"
+                    end
+                  end
+                end
+              end
+
+              let(:text) do
+                <<~TEXT
+                  first step success
+                  original service failure
+                  first step rollback
+                TEXT
+              end
+
+              it "rescues service rollback exception" do
+                result
+
+                expect(output).to eq(text)
+              end
+            end
+
             context "when step has NO rollback" do
               let(:first_step) do
                 Class.new.tap do |klass|
@@ -667,6 +787,44 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
               end
 
               it "skips step rollback" do
+                result
+
+                expect(output).to eq(text)
+              end
+            end
+
+            context "when step rollback raises exception" do
+              let(:first_step) do
+                Class.new.tap do |klass|
+                  klass.class_exec(config, out) do |config, out|
+                    include config
+
+                    define_method(:out) { out }
+
+                    def result
+                      success.tap { out.puts "first step success" }
+                    end
+
+                    def rollback_result
+                      raise ArgumentError
+                    end
+
+                    def self.name
+                      "FirstStep"
+                    end
+                  end
+                end
+              end
+
+              let(:text) do
+                <<~TEXT
+                  first step success
+                  original service failure
+                  original service rollback
+                TEXT
+              end
+
+              it "rescues service rollback exception" do
                 result
 
                 expect(output).to eq(text)
@@ -758,6 +916,48 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
               end
             end
 
+            context "when service rollback raises exception" do
+              let(:service) do
+                Class.new.tap do |klass|
+                  klass.class_exec(config, out, first_step) do |config, out, first_step|
+                    include config
+
+                    step first_step
+
+                    step :result
+
+                    define_method(:out) { out }
+
+                    def result
+                      error.tap { out.puts "original service error" }
+                    end
+
+                    def rollback_result
+                      raise ArgumentError
+                    end
+
+                    def self.name
+                      "OriginalService"
+                    end
+                  end
+                end
+              end
+
+              let(:text) do
+                <<~TEXT
+                  first step success
+                  original service error
+                  first step rollback
+                TEXT
+              end
+
+              it "rescues service rollback exception" do
+                result
+
+                expect(output).to eq(text)
+              end
+            end
+
             context "when step has NO rollback" do
               let(:first_step) do
                 Class.new.tap do |klass|
@@ -786,6 +986,44 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
               end
 
               it "skips step rollback" do
+                result
+
+                expect(output).to eq(text)
+              end
+            end
+
+            context "when step rollback raises exception" do
+              let(:first_step) do
+                Class.new.tap do |klass|
+                  klass.class_exec(config, out) do |config, out|
+                    include config
+
+                    define_method(:out) { out }
+
+                    def result
+                      success.tap { out.puts "first step success" }
+                    end
+
+                    def rollback_result
+                      raise ArgumentError
+                    end
+
+                    def self.name
+                      "FirstStep"
+                    end
+                  end
+                end
+              end
+
+              let(:text) do
+                <<~TEXT
+                  first step success
+                  original service error
+                  original service rollback
+                TEXT
+              end
+
+              it "rescues service rollback exception" do
                 result
 
                 expect(output).to eq(text)
@@ -919,7 +1157,49 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
                 TEXT
               end
 
-              it "skips service rollback" do
+              it "does NOT trigger service rollback" do
+                result
+
+                expect(output).to eq(text)
+              end
+            end
+
+            context "when service rollback raises exception" do
+              let(:service) do
+                Class.new.tap do |klass|
+                  klass.class_exec(config, out, first_step) do |config, out, first_step|
+                    include config
+
+                    step first_step
+
+                    step :result
+
+                    define_method(:out) { out }
+
+                    def result
+                      success.tap { out.puts "original service success" }
+                    end
+
+                    def rollback_result
+                      raise ArgumentError
+                    end
+
+                    def self.name
+                      "OriginalService"
+                    end
+                  end
+                end
+              end
+
+              let(:text) do
+                <<~TEXT
+                  first step nested step success
+                  first step success
+                  original service success
+                TEXT
+              end
+
+              it "does NOT trigger service rollback" do
                 result
 
                 expect(output).to eq(text)
@@ -957,7 +1237,49 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
                 TEXT
               end
 
-              it "skips step rollback" do
+              it "does NOT trigger step rollback" do
+                result
+
+                expect(output).to eq(text)
+              end
+            end
+
+            context "when step rollback raises exception" do
+              let(:first_step) do
+                Class.new.tap do |klass|
+                  klass.class_exec(config, out, first_step_nested_step) do |config, out, first_step_nested_step|
+                    include config
+
+                    define_method(:out) { out }
+
+                    step first_step_nested_step
+
+                    step :result
+
+                    def result
+                      success.tap { out.puts "first step success" }
+                    end
+
+                    def rollback_result
+                      raise ArgumentError
+                    end
+
+                    def self.name
+                      "FirstStep"
+                    end
+                  end
+                end
+              end
+
+              let(:text) do
+                <<~TEXT
+                  first step nested step success
+                  first step success
+                  original service success
+                TEXT
+              end
+
+              it "does NOT trigger step rollback" do
                 result
 
                 expect(output).to eq(text)
@@ -992,6 +1314,44 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
               end
 
               it "skips nested step rollback" do
+                result
+
+                expect(output).to eq(text)
+              end
+            end
+
+            context "when nested step rollback raises exception" do
+              let(:first_step_nested_step) do
+                Class.new.tap do |klass|
+                  klass.class_exec(config, out) do |config, out|
+                    include config
+
+                    define_method(:out) { out }
+
+                    def result
+                      success.tap { out.puts "first step nested step success" }
+                    end
+
+                    def rollback_result
+                      raise ArgumentError
+                    end
+
+                    def self.name
+                      "FirstStep::NestedStep"
+                    end
+                  end
+                end
+              end
+
+              let(:text) do
+                <<~TEXT
+                  first step nested step success
+                  first step success
+                  original service success
+                TEXT
+              end
+
+              it "does NOT trigger nested step rollback" do
                 result
 
                 expect(output).to eq(text)
@@ -1087,6 +1447,50 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
               end
             end
 
+            context "when service rollback raises exception" do
+              let(:service) do
+                Class.new.tap do |klass|
+                  klass.class_exec(config, out, first_step) do |config, out, first_step|
+                    include config
+
+                    step first_step
+
+                    step :result
+
+                    define_method(:out) { out }
+
+                    def result
+                      failure.tap { out.puts "original service failure" }
+                    end
+
+                    def rollback_result
+                      raise ArgumentError
+                    end
+
+                    def self.name
+                      "OriginalService"
+                    end
+                  end
+                end
+              end
+
+              let(:text) do
+                <<~TEXT
+                  first step nested step success
+                  first step success
+                  original service failure
+                  first step rollback
+                  first step nested step rollback
+                TEXT
+              end
+
+              it "rescues service rollback exception" do
+                result
+
+                expect(output).to eq(text)
+              end
+            end
+
             context "when step has NO rollback" do
               let(:first_step) do
                 Class.new.tap do |klass|
@@ -1127,6 +1531,50 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
               end
             end
 
+            context "when step rollback raises exception" do
+              let(:first_step) do
+                Class.new.tap do |klass|
+                  klass.class_exec(config, out, first_step_nested_step) do |config, out, first_step_nested_step|
+                    include config
+
+                    define_method(:out) { out }
+
+                    step first_step_nested_step
+
+                    step :result
+
+                    def result
+                      success.tap { out.puts "first step success" }
+                    end
+
+                    def rollback_result
+                      raise ArgumentError
+                    end
+
+                    def self.name
+                      "FirstStep"
+                    end
+                  end
+                end
+              end
+
+              let(:text) do
+                <<~TEXT
+                  first step nested step success
+                  first step success
+                  original service failure
+                  original service rollback
+                  first step nested step rollback
+                TEXT
+              end
+
+              it "rescues step rollback exception" do
+                result
+
+                expect(output).to eq(text)
+              end
+            end
+
             context "when nested step has NO rollback" do
               let(:first_step_nested_step) do
                 Class.new.tap do |klass|
@@ -1157,6 +1605,46 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
               end
 
               it "skips nested step rollback" do
+                result
+
+                expect(output).to eq(text)
+              end
+            end
+
+            context "when nested step rollback raises exception" do
+              let(:first_step_nested_step) do
+                Class.new.tap do |klass|
+                  klass.class_exec(config, out) do |config, out|
+                    include config
+
+                    define_method(:out) { out }
+
+                    def result
+                      success.tap { out.puts "first step nested step success" }
+                    end
+
+                    def rollback_result
+                      raise ArgumentError
+                    end
+
+                    def self.name
+                      "FirstStep::NestedStep"
+                    end
+                  end
+                end
+              end
+
+              let(:text) do
+                <<~TEXT
+                  first step nested step success
+                  first step success
+                  original service failure
+                  original service rollback
+                  first step rollback
+                TEXT
+              end
+
+              it "rescues nested step rollback exception" do
                 result
 
                 expect(output).to eq(text)
@@ -1252,6 +1740,50 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
               end
             end
 
+            context "when service rollback raises exception" do
+              let(:service) do
+                Class.new.tap do |klass|
+                  klass.class_exec(config, out, first_step) do |config, out, first_step|
+                    include config
+
+                    step first_step
+
+                    step :result
+
+                    define_method(:out) { out }
+
+                    def result
+                      error.tap { out.puts "original service error" }
+                    end
+
+                    def rollback_result
+                      raise ArgumentError
+                    end
+
+                    def self.name
+                      "OriginalService"
+                    end
+                  end
+                end
+              end
+
+              let(:text) do
+                <<~TEXT
+                  first step nested step success
+                  first step success
+                  original service error
+                  first step rollback
+                  first step nested step rollback
+                TEXT
+              end
+
+              it "rescues service rollback exception" do
+                result
+
+                expect(output).to eq(text)
+              end
+            end
+
             context "when step has NO rollback" do
               let(:first_step) do
                 Class.new.tap do |klass|
@@ -1292,6 +1824,50 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
               end
             end
 
+            context "when step rollback raises exception" do
+              let(:first_step) do
+                Class.new.tap do |klass|
+                  klass.class_exec(config, out, first_step_nested_step) do |config, out, first_step_nested_step|
+                    include config
+
+                    define_method(:out) { out }
+
+                    step first_step_nested_step
+
+                    step :result
+
+                    def result
+                      success.tap { out.puts "first step success" }
+                    end
+
+                    def rollback_result
+                      raise ArgumentError
+                    end
+
+                    def self.name
+                      "FirstStep"
+                    end
+                  end
+                end
+              end
+
+              let(:text) do
+                <<~TEXT
+                  first step nested step success
+                  first step success
+                  original service error
+                  original service rollback
+                  first step nested step rollback
+                TEXT
+              end
+
+              it "rescues step rollback exception" do
+                result
+
+                expect(output).to eq(text)
+              end
+            end
+
             context "when nested step has NO rollback" do
               let(:first_step_nested_step) do
                 Class.new.tap do |klass|
@@ -1322,6 +1898,46 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
               end
 
               it "skips nested step rollback" do
+                result
+
+                expect(output).to eq(text)
+              end
+            end
+
+            context "when nested step rollback raises exception" do
+              let(:first_step_nested_step) do
+                Class.new.tap do |klass|
+                  klass.class_exec(config, out) do |config, out|
+                    include config
+
+                    define_method(:out) { out }
+
+                    def result
+                      success.tap { out.puts "first step nested step success" }
+                    end
+
+                    def rollback_result
+                      raise ArgumentError
+                    end
+
+                    def self.name
+                      "FirstStep::NestedStep"
+                    end
+                  end
+                end
+              end
+
+              let(:text) do
+                <<~TEXT
+                  first step nested step success
+                  first step success
+                  original service error
+                  original service rollback
+                  first step rollback
+                TEXT
+              end
+
+              it "rescues nested step rollback exception" do
                 result
 
                 expect(output).to eq(text)
