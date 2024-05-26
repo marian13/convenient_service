@@ -421,7 +421,7 @@ tasks:
   #
   rspec:
     cmds:
-      - bundle exec {{.APPRAISAL_PREFIX}} rspec --format progress {{.REQUIRE_SUFFIX}} {{.GIT_STAGED_RSPEC_FILES}} {{.CLI_ARGS}}
+      - bundle exec {{.APPRAISAL_PREFIX}} rspec --color --format progress {{.REQUIRE_SUFFIX}} {{.GIT_STAGED_RSPEC_FILES}} {{.CLI_ARGS}}
     vars:
       APPRAISAL_PREFIX:
         sh: ruby -e 'puts "appraisal" + " " + RUBY_ENGINE + "_" + RUBY_VERSION[/\d+.\d+/] + "_" + "{{.APPRAISAL}}" unless "{{.APPRAISAL}}".to_s.empty?'
