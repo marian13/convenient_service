@@ -18,6 +18,15 @@ version: '3'
 #
 # TODO: Global preconditions are imitated using YAML anchors. Replace anchors once native support added.
 # - https://github.com/go-task/task/issues/294
+#
+# NOTE: Prefer to utilize task vars when possible since it allows to pass CLI_ARGS with no hacks.
+#   # Okish
+#   - APPRAISAL=rails_7.1 task rspec
+#
+#   # Better, since CLI_ARGS now works out of the box.
+#   - task: rspec
+#     vars:
+#       APPRAISAL: rails_7.1
 ##
 
 ##
@@ -60,7 +69,7 @@ tasks:
       - bundle exec {{.APPRAISAL_COMMAND}} rake playground
     vars:
       APPRAISAL_COMMAND:
-        sh: ruby -e 'puts "appraisal" + " " + RUBY_ENGINE + "_" + RUBY_VERSION[/\d+.\d+/] + "_" + ENV["APPRAISAL"] unless ENV["APPRAISAL"].to_s.empty?'
+        sh: ruby -e 'puts "appraisal" + " " + RUBY_ENGINE + "_" + RUBY_VERSION[/\d+.\d+/] + "_" + "{{.APPRAISAL}}" unless "{{.APPRAISAL}}".to_s.empty?'
     interactive: true
 
   coverage:lcov:merge:
@@ -88,9 +97,9 @@ tasks:
       - bundle exec appraisal install
     vars:
       RUBY_ENGINE:
-        sh: ruby -e 'puts ENV["RUBY_ENGINE"] || RUBY_ENGINE'
+        sh: ruby -e 'puts ["{{.RUBY_VERSION}}", ENV["RUBY_ENGINE"], RUBY_ENGINE].map(&:to_s).reject(&:empty).first'
       RUBY_VERSION:
-        sh: ruby -e 'puts ENV["RUBY_VERSION"].to_s[/\d+.\d+/] || RUBY_VERSION[/\d+.\d+/]'
+        sh: ruby -e 'puts "{{.RUBY_VERSION}}".to_s[/\d+.\d+/] || ENV["RUBY_VERSION"].to_s[/\d+.\d+/] || RUBY_VERSION[/\d+.\d+/]'
 
   ##
   # NOTE: Meaning of `2> /dev/null`.
@@ -176,13 +185,34 @@ tasks:
 
   docker:build:all:
     cmds:
-      - RUBY_ENGINE=ruby RUBY_VERSION=2.7 task docker:build
-      - RUBY_ENGINE=ruby RUBY_VERSION=3.0 task docker:build
-      - RUBY_ENGINE=ruby RUBY_VERSION=3.1 task docker:build
-      - RUBY_ENGINE=ruby RUBY_VERSION=3.2 task docker:build
-      - RUBY_ENGINE=ruby RUBY_VERSION=3.3 task docker:build
-      - RUBY_ENGINE=jruby RUBY_VERSION=9.4 task docker:build
-      - RUBY_ENGINE=truffleruby RUBY_VERSION=22.3 task docker:build
+      - task: docker:build
+        vars:
+          RUBY_ENGINE: ruby
+          RUBY_VERSION: 2.7
+      - task: docker:build
+        vars:
+          RUBY_ENGINE: ruby
+          RUBY_VERSION: 3.0
+      - task: docker:build
+        vars:
+          RUBY_ENGINE: ruby
+          RUBY_VERSION: 3.1
+      - task: docker:build
+        vars:
+          RUBY_ENGINE: ruby
+          RUBY_VERSION: 3.2
+      - task: docker:build
+        vars:
+          RUBY_ENGINE: ruby
+          RUBY_VERSION: 3.3
+      - task: docker:build
+        vars:
+          RUBY_ENGINE: jruby
+          RUBY_VERSION: 9.4
+      - task: docker:build
+        vars:
+          RUBY_ENGINE: truffleruby
+          RUBY_VERSION: 22.3
     preconditions:
       - *from-host-os
 
@@ -333,7 +363,7 @@ tasks:
       - bundle exec ruby minitest.rb {{.GIT_STAGED_MINITEST_FILES}} {{.CLI_ARGS}}
     vars:
       GIT_STAGED_MINITEST_FILES:
-        sh: ruby -e 'puts `task git:staged:minitest --silent` if ENV["STAGED"] == "true"'
+        sh: ruby -e 'puts `task git:staged:minitest --silent` if "{{.STAGED}}" == "true"'
 
   ##
   # - https://github.com/mbj/mutant/blob/main/docs/mutant-rspec.md#run-through-example
@@ -362,7 +392,7 @@ tasks:
       - bundle exec {{.APPRAISAL_COMMAND}} rake playground
     vars:
       APPRAISAL_COMMAND:
-        sh: ruby -e 'puts "appraisal" + " " + RUBY_ENGINE + "_" + RUBY_VERSION[/\d+.\d+/] + "_" + ENV["APPRAISAL"] unless ENV["APPRAISAL"].to_s.empty?'
+        sh: ruby -e 'puts "appraisal" + " " + RUBY_ENGINE + "_" + RUBY_VERSION[/\d+.\d+/] + "_" + "{{.APPRAISAL}}" unless "{{.APPRAISAL}}".to_s.empty?'
     interactive: true
 
   release:
@@ -394,28 +424,36 @@ tasks:
       - bundle exec {{.APPRAISAL_PREFIX}} rspec --format progress {{.REQUIRE_SUFFIX}} {{.GIT_STAGED_RSPEC_FILES}} {{.CLI_ARGS}}
     vars:
       APPRAISAL_PREFIX:
-        sh: ruby -e 'puts "appraisal" + " " + RUBY_ENGINE + "_" + RUBY_VERSION[/\d+.\d+/] + "_" + ENV["APPRAISAL"] unless ENV["APPRAISAL"].to_s.empty?'
+        sh: ruby -e 'puts "appraisal" + " " + RUBY_ENGINE + "_" + RUBY_VERSION[/\d+.\d+/] + "_" + "{{.APPRAISAL}}" unless "{{.APPRAISAL}}".to_s.empty?'
       REQUIRE_SUFFIX:
-        sh: ruby -e 'puts case ENV["APPRAISAL"] when /rails/ then "--require rails_helper" when /dry/ then "--require dry_helper" when /amazing_print/ then "--require amazing_print_helper" when /awesome_print/ then "--require awesome_print_helper" else "--require standard_helper" end'
+        sh: ruby -e 'puts case "{{.APPRAISAL}}" when /rails/ then "--require rails_helper" when /dry/ then "--require dry_helper" when /amazing_print/ then "--require amazing_print_helper" when /awesome_print/ then "--require awesome_print_helper" else "--require standard_helper" end'
       GIT_STAGED_RSPEC_FILES:
-        sh: ruby -e 'puts `task git:staged:rspec --silent` if ENV["STAGED"] == "true"'
+        sh: ruby -e 'puts `task git:staged:rspec --silent` if "{{.STAGED}}" == "true"'
 
   ##
   # NOTE: `task rspec APPRAISAL=rails_6.1` does NOT work.
-  # NOTE: Also does NOT work.
-  #   - task: rspec
-  #     vars
-  #       APPRAISAL: rails_7.0
   #
   rspec:all:
     cmds:
       - task: rspec
-      - APPRAISAL=rails_7.1 task rspec
-      - APPRAISAL=dry task rspec
-      - APPRAISAL=rails_7.0 task rspec
-      - APPRAISAL=rails_6.1 task rspec
-      - APPRAISAL=rails_6.0 task rspec
-      - APPRAISAL=rails_5.2 task rspec
+      - task: rspec
+        vars:
+          APPRAISAL: rails_7.1
+      - task: rspec
+        vars:
+          APPRAISAL: dry
+      - task: rspec
+        vars:
+          APPRAISAL: rails_7.0
+      - task: rspec
+        vars:
+          APPRAISAL: rails_6.1
+      - task: rspec
+        vars:
+          APPRAISAL: rails_6.0
+      - task: rspec
+        vars:
+          APPRAISAL: rails_5.2
 
   ##
   # NOTE: Usage examples.
@@ -427,7 +465,7 @@ tasks:
       - bundle exec rubocop --config .rubocop.yml {{.AUTOCORRECT_SUFFIX}} {{.CLI_ARGS}}
     vars:
       AUTOCORRECT_SUFFIX:
-        sh: ruby -e 'puts "-A" if ENV["AUTOCORRECT"] == "true"'
+        sh: ruby -e 'puts "-A" if "{{.AUTOCORRECT}}" == "true"'
 
   test:
     cmds:
