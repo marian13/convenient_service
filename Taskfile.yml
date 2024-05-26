@@ -97,7 +97,7 @@ tasks:
       - bundle exec appraisal install
     vars:
       RUBY_ENGINE:
-        sh: ruby -e 'puts ["{{.RUBY_VERSION}}", ENV["RUBY_ENGINE"], RUBY_ENGINE].map(&:to_s).reject(&:empty).first'
+        sh: ruby -e 'puts ["{{.RUBY_VERSION}}", ENV["RUBY_ENGINE"], RUBY_ENGINE].map(&:to_s).reject(&:empty?).first'
       RUBY_VERSION:
         sh: ruby -e 'puts "{{.RUBY_VERSION}}".to_s[/\d+.\d+/] || ENV["RUBY_VERSION"].to_s[/\d+.\d+/] || RUBY_VERSION[/\d+.\d+/]'
 
