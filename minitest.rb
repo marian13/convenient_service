@@ -19,16 +19,20 @@ current_dir = ::Dir.pwd
 $LOAD_PATH.unshift("#{current_dir}/test") unless $LOAD_PATH.include?("#{current_dir}/test")
 
 ##
-# Recursively selects all `*_test.rb` files from the `test` folder or takes files passed in `ARGV`.
+# Recursively selects all `*_test.rb` files from the `test` folder or takes files passed in `ARGV` (files that do NOT end with `_test.rb` are filtered out).
 # - https://lofic.github.io/tips/ruby-recursive_globbing.html
 #
 # Prepends `current_dir` to all files that are passed withoout a leading slash.
+#
+# TODO: Do not run `_test.rb` from vendor.
 #
 files =
   if ::ARGV.empty?
     ::Dir.glob("#{current_dir}/test/**/*_test.rb")
   else
-    ::ARGV.to_a.map { |file| file.start_with?("/") ? file : "#{current_dir}/#{file}" }
+    ::ARGV.to_a
+      .map { |file| file.start_with?("/") ? file : "#{current_dir}/#{file}" }
+      .select { |file| file.end_with?("_test.rb") }
   end
 
 ##

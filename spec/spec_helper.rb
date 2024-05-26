@@ -20,6 +20,12 @@ RSpec.configure do |config|
   config.expect_with :rspec do |c|
     c.syntax = :expect
   end
+
+  ##
+  # NOTE: Does NOT work.
+  # - https://rspec.info/features/3-12/rspec-core/command-line/pattern-option
+  #
+  # config.pattern = "spec/**/*_spec.rb"
 end
 
 require_relative "support/convenient_service"
