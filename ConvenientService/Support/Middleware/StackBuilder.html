@@ -206,6 +206,28 @@
 </li>
 
       
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#unshift-instance_method" title="#unshift (instance method)">#<strong>unshift</strong>(middleware, *args, &amp;block)  &#x21d2; ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Stack </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
     </ul>
   
 
@@ -366,17 +388,17 @@
       <pre class="lines">
 
 
-34
-35
-36
-37
-38
-39
-40
-41</pre>
+49
+50
+51
+52
+53
+54
+55
+56</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/middleware/stack_builder.rb', line 34</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/middleware/stack_builder.rb', line 49</span>
 
 <span class='kw'>def</span> <span class='op'>==</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='rparen'>)</span>
@@ -428,25 +450,25 @@
       <pre class="lines">
 
 
-59
-60
-61
-62
-63
-64
-65
-66
-67
-68
-69
-70
-71
-72
-73
-74</pre>
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/middleware/stack_builder.rb', line 59</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/middleware/stack_builder.rb', line 74</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_dup'>dup</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
@@ -506,15 +528,108 @@
       <pre class="lines">
 
 
-52
-53
-54</pre>
+67
+68
+69</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/middleware/stack_builder.rb', line 52</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/middleware/stack_builder.rb', line 67</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_a'>to_a</span>
   <span class='id identifier rubyid_stack'>stack</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="unshift-instance_method">
+  
+    #<strong>unshift</strong>(middleware, *args, &amp;block)  &#x21d2; <tt><span class='object_link'><a href="../../Core/Entities/Config/Entities/MethodMiddlewares/Entities/Stack.html" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Stack (class)">ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Stack</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>middleware</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../Core/Entities/Config/Entities/MethodMiddlewares/Entities/Middlewares/Base.html" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Base (class)">ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Base</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>args</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Object&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>block</span>
+      
+      
+        <span class='type'>(<tt>Proc</tt>, <tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../Core/Entities/Config/Entities/MethodMiddlewares/Entities/Stack.html" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Stack (class)">ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Stack</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+39
+40
+41
+42
+43</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/middleware/stack_builder.rb', line 39</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_unshift'>unshift</span><span class='lparen'>(</span><span class='id identifier rubyid_middleware'>middleware</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_stack'>stack</span><span class='period'>.</span><span class='id identifier rubyid_unshift'>unshift</span><span class='lparen'>(</span><span class='lbracket'>[</span><span class='id identifier rubyid_middleware'>middleware</span><span class='comma'>,</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='id identifier rubyid_block'>block</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+
+  <span class='kw'>self</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -526,7 +641,7 @@
 </div>
 
       <div id="footer">
-  Generated on Tue May 28 00:26:36 2024 by
+  Generated on Tue May 28 20:35:59 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.36 (ruby-3.2.4).
 </div>

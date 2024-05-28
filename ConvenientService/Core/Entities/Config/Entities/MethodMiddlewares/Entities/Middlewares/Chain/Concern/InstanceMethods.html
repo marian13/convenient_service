@@ -346,12 +346,12 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/middlewares/chain/concern/instance_methods.rb', line 44</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_env'>env</span><span class='rparen'>)</span>
-  <span class='ivar'>@__env__</span> <span class='op'>=</span> <span class='id identifier rubyid_env'>env</span>
+  <span class='ivar'>@__env__</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../Commands.html" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Chain::Commands (module)">Commands</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Commands/NormalizeEnv.html" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Chain::Commands::NormalizeEnv (class)">NormalizeEnv</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="../Commands/NormalizeEnv.html#call-instance_method" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Chain::Commands::NormalizeEnv#call (method)">call</a></span></span><span class='lparen'>(</span><span class='label'>env:</span> <span class='id identifier rubyid_env'>env</span><span class='rparen'>)</span>
 
   <span class='comment'>##
 </span>  <span class='comment'># IMPORTANT: This is a library code. Do NOT do things like this in your application code.
 </span>  <span class='comment'>#
-</span>  <span class='id identifier rubyid_chain'>chain</span><span class='period'>.</span><span class='id identifier rubyid_instance_variable_set'>instance_variable_set</span><span class='lparen'>(</span><span class='symbol'>:@env</span><span class='comma'>,</span> <span class='id identifier rubyid_env'>env</span><span class='rparen'>)</span>
+</span>  <span class='id identifier rubyid_chain'>chain</span><span class='period'>.</span><span class='id identifier rubyid_instance_variable_set'>instance_variable_set</span><span class='lparen'>(</span><span class='symbol'>:@env</span><span class='comma'>,</span> <span class='ivar'>@__env__</span><span class='rparen'>)</span>
 
   <span class='comment'>##
 </span>  <span class='comment'># NOTE: `__send__` is used since `next` is ruby keyword.
@@ -359,7 +359,7 @@
 </span>  <span class='comment'>#
 </span>  <span class='comment'># TODO: Enforce to always pass args, kwargs, block.
 </span>  <span class='comment'>#
-</span>  <span class='id identifier rubyid___send__'>__send__</span><span class='lparen'>(</span><span class='symbol'>:next</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_env'>env</span><span class='lbracket'>[</span><span class='symbol'>:args</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_env'>env</span><span class='lbracket'>[</span><span class='symbol'>:kwargs</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_env'>env</span><span class='lbracket'>[</span><span class='symbol'>:block</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+</span>  <span class='id identifier rubyid___send__'>__send__</span><span class='lparen'>(</span><span class='symbol'>:next</span><span class='comma'>,</span> <span class='op'>*</span><span class='ivar'>@__env__</span><span class='lbracket'>[</span><span class='symbol'>:args</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='op'>**</span><span class='ivar'>@__env__</span><span class='lbracket'>[</span><span class='symbol'>:kwargs</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='ivar'>@__env__</span><span class='lbracket'>[</span><span class='symbol'>:block</span><span class='rbracket'>]</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -698,7 +698,7 @@ This way middleware stack is stopped in the &quot;middle&quot; and its &quot;mid
 </div>
 
       <div id="footer">
-  Generated on Tue May 28 00:26:34 2024 by
+  Generated on Tue May 28 20:35:57 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.36 (ruby-3.2.4).
 </div>
