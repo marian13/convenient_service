@@ -166,6 +166,8 @@
     
 
     
+      (also: #remove)
+    
   </span>
   
   
@@ -628,16 +630,16 @@
       <pre class="lines">
 
 
-182
-183
-184
-185
-186
 187
-188</pre>
+188
+189
+190
+191
+192
+193</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/concerns/entities/stack.rb', line 182</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/concerns/entities/stack.rb', line 187</span>
 
 <span class='kw'>def</span> <span class='op'>==</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='rparen'>)</span>
@@ -737,6 +739,10 @@
     #<strong>delete</strong>(index_or_concern)  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack (class)">ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack</a></span></tt> 
   
 
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='remove-instance_method'>remove</span></span>
+    </span>
   
 
   
@@ -898,12 +904,12 @@
       <pre class="lines">
 
 
-174
-175
-176</pre>
+179
+180
+181</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/concerns/entities/stack.rb', line 174</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/concerns/entities/stack.rb', line 179</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_empty?'>empty?</span>
   <span class='id identifier rubyid_to_a'>to_a</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
@@ -1517,12 +1523,12 @@
       <pre class="lines">
 
 
-193
-194
-195</pre>
+198
+199
+200</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/concerns/entities/stack.rb', line 193</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/concerns/entities/stack.rb', line 198</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_a'>to_a</span>
   <span class='id identifier rubyid_plain_stack'>plain_stack</span><span class='period'>.</span><span class='id identifier rubyid_to_a'>to_a</span>
@@ -1710,14 +1716,14 @@
       <pre class="lines">
 
 
-165
-166
-167
-168
-169</pre>
+170
+171
+172
+173
+174</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/concerns/entities/stack.rb', line 165</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/concerns/entities/stack.rb', line 170</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_use'>use</span><span class='lparen'>(</span><span class='id identifier rubyid_concern'>concern</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_plain_stack'>plain_stack</span><span class='period'>.</span><span class='id identifier rubyid_use'>use</span><span class='lparen'>(</span><span class='id identifier rubyid_cast'>cast</span><span class='lparen'>(</span><span class='id identifier rubyid_concern'>concern</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
@@ -1734,7 +1740,7 @@
 </div>
 
       <div id="footer">
-  Generated on Tue May 28 21:50:49 2024 by
+  Generated on Tue May 28 21:55:37 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.36 (ruby-3.2.4).
 </div>
