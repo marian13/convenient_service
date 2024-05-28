@@ -602,6 +602,8 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
       context "when `organizer` is set" do
         specify do
+          step.service.klass.commit_config!
+
           expect { step.service_result }
             .to delegate_to(step.service.klass, :result)
             .with_arguments(**step.input_values)

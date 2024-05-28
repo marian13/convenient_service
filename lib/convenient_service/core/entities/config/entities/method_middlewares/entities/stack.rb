@@ -50,6 +50,18 @@ module ConvenientService
                 end
 
                 ##
+                # @param middleware [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Base]
+                # @param args [Array<Object>]
+                # @param block [Proc, nil]
+                # @return [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Stack]
+                #
+                def unshift(middleware, *args, &block)
+                  plain_stack.unshift(middleware, *args, &block)
+
+                  self
+                end
+
+                ##
                 # @param index_or_middleware [Integer, ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Base]
                 # @param middleware [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Base]
                 # @param args [Array<Object>]

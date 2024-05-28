@@ -8,26 +8,6 @@ module ConvenientService
       #
       # @note This config is NOT intented for the end-user usage. Use `Standard` instead.
       #
-      # @note
-      #   `use ConvenientService::Plugins::Common::NormalizesEnv::Middleware` should be used in a config that has the first `concern` that introduces a method.
-      #   For example, `:result` is added by `use ConvenientService::Plugins::Service::HasJSendResult::Concern` in `Essential`.
-      #   That is why the following code is written in the `Essential` config.
-      #
-      #     middlewares :result do
-      #       use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
-      #
-      #       # ...
-      #     end
-      #
-      #   In turn, `:fallback_result` is added by `use ConvenientService::Plugins::Service::CanHaveFallbacks::Concern` in `Standard`.
-      #   That is why it is the responsibility of the `Standard` config, to define:
-      #
-      #     middlewares :fallback_result do
-      #       use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
-      #
-      #       # ...
-      #     end
-      #
       # @internal
       #   NOTE: Heavily used in specs to test concerns and middlewares in isolation.
       #
@@ -66,15 +46,7 @@ module ConvenientService
             use ConvenientService::Plugins::Service::CanHaveFallbacks::Concern
           end
 
-          ##
-          # TODO: Move `NormalizesEnv` inside `Core`.
-          #
-          middlewares :initialize do
-            use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
-          end
-
           middlewares :result do
-            use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
             use ConvenientService::Plugins::Common::CachesReturnValue::Middleware
 
             use ConvenientService::Plugins::Service::RaisesOnNotResultReturnValue::Middleware
@@ -82,59 +54,27 @@ module ConvenientService
             use ConvenientService::Plugins::Service::CanHaveConnectedSteps::Middleware
           end
 
-          middlewares :step do
-            use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
-          end
-
-          middlewares :success do
-            use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
-          end
-
-          middlewares :failure do
-            use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
-          end
-
-          middlewares :error do
-            use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
-          end
-
-          middlewares :result, scope: :class do
-            use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
-          end
-
           middlewares :step, scope: :class do
-            use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
-
             use ConvenientService::Plugins::Service::CanHaveMethodSteps::Middleware
           end
 
           middlewares :not_step, scope: :class do
-            use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
-
             use ConvenientService::Plugins::Service::CanHaveMethodSteps::Middleware
           end
 
           middlewares :and_step, scope: :class do
-            use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
-
             use ConvenientService::Plugins::Service::CanHaveMethodSteps::Middleware
           end
 
           middlewares :and_not_step, scope: :class do
-            use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
-
             use ConvenientService::Plugins::Service::CanHaveMethodSteps::Middleware
           end
 
           middlewares :or_step, scope: :class do
-            use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
-
             use ConvenientService::Plugins::Service::CanHaveMethodSteps::Middleware
           end
 
           middlewares :or_not_step, scope: :class do
-            use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
-
             use ConvenientService::Plugins::Service::CanHaveMethodSteps::Middleware
           end
 
@@ -163,25 +103,7 @@ module ConvenientService
             end
 
             middlewares :initialize do
-              use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
-
               use ConvenientService::Plugins::Result::HasJSendStatusAndAttributes::Middleware
-            end
-
-            middlewares :data do
-              use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
-            end
-
-            middlewares :message do
-              use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
-            end
-
-            middlewares :code do
-              use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
-            end
-
-            middlewares :to_kwargs do
-              use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
             end
 
             class self::Data
@@ -215,30 +137,6 @@ module ConvenientService
                 use ConvenientService::Plugins::Common::HasInternals::Concern
 
                 use ConvenientService::Plugins::Status::HasInspect::Concern
-              end
-
-              middlewares :success? do
-                use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
-              end
-
-              middlewares :failure? do
-                use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
-              end
-
-              middlewares :error? do
-                use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
-              end
-
-              middlewares :not_success? do
-                use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
-              end
-
-              middlewares :not_failure? do
-                use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
-              end
-
-              middlewares :not_error? do
-                use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
               end
 
               class self::Internals
@@ -278,7 +176,6 @@ module ConvenientService
             # TODO: Simple debug for middlewares. For one service only.
             #
             middlewares :result do
-              use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
               use ConvenientService::Plugins::Common::CachesReturnValue::Middleware
 
               use ConvenientService::Plugins::Step::HasResult::Middleware
@@ -292,8 +189,6 @@ module ConvenientService
             # TODO: Rename.
             #
             middlewares :printable_service do
-              use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
-
               use ConvenientService::Plugins::Step::CanBeMethodStep::CanBePrinted::Middleware
             end
 

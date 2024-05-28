@@ -2,7 +2,7 @@
 
 ##
 # @internal
-#   NOTE: Order matters.
+#   NOTE: Some plugins are order-dependent.
 #
 require_relative "plugins/has_result"
 require_relative "plugins/has_negated_result"

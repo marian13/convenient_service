@@ -28,6 +28,21 @@ module ConvenientService
         end
 
         ##
+        # @param middleware [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Base]
+        # @param args [Array<Object>]
+        # @param block [Proc, nil]
+        # @return [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Stack]
+        #
+        # @internal
+        #   TODO: Rewrite middleware backend. Consider to use `Array` descendant?
+        #
+        def unshift(middleware, *args, &block)
+          stack.unshift([middleware, args, block])
+
+          self
+        end
+
+        ##
         # @param other [ConvenientService::Support::Middleware::StackBuilder, Object]
         # @return [Boolean, nil]
         #

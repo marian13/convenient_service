@@ -19,8 +19,6 @@ module ConvenientService
           end
 
           middlewares :new, scope: :class do
-            use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
-
             use ConvenientService::Plugins::Common::HasInstanceProxy::Middleware
           end
         end

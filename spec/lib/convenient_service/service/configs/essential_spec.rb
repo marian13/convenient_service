@@ -47,22 +47,9 @@ RSpec.describe ConvenientService::Service::Configs::Essential, type: :standard d
           end
         end
 
-        example_group "#initialize middlewares" do
-          let(:initialize_middlewares) do
-            [
-              ConvenientService::Common::Plugins::NormalizesEnv::Middleware
-            ]
-          end
-
-          it "sets service middlewares for `#initialize`" do
-            expect(service_class.middlewares(:initialize).to_a).to eq(initialize_middlewares)
-          end
-        end
-
         example_group "#result middlewares" do
           let(:result_middlewares) do
             [
-              ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
               ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
               ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Middleware,
               ConvenientService::Service::Plugins::CanHaveConnectedSteps::Middleware
@@ -74,76 +61,15 @@ RSpec.describe ConvenientService::Service::Configs::Essential, type: :standard d
           end
         end
 
-        example_group "#step middlewares" do
-          let(:step_middlewares) do
-            [
-              ConvenientService::Common::Plugins::NormalizesEnv::Middleware
-            ]
-          end
-
-          it "sets service middlewares for `#step`" do
-            expect(service_class.middlewares(:step).to_a).to eq(step_middlewares)
-          end
-        end
-
-        example_group "#success middlewares" do
-          let(:success_middlewares) do
-            [
-              ConvenientService::Common::Plugins::NormalizesEnv::Middleware
-            ]
-          end
-
-          it "sets service middlewares for `#success`" do
-            expect(service_class.middlewares(:success).to_a).to eq(success_middlewares)
-          end
-        end
-
-        example_group "#failure middlewares" do
-          let(:failure_middlewares) do
-            [
-              ConvenientService::Common::Plugins::NormalizesEnv::Middleware
-            ]
-          end
-
-          it "sets service middlewares for `#failure`" do
-            expect(service_class.middlewares(:failure).to_a).to eq(failure_middlewares)
-          end
-        end
-
-        example_group "#error middlewares" do
-          let(:error_middlewares) do
-            [
-              ConvenientService::Common::Plugins::NormalizesEnv::Middleware
-            ]
-          end
-
-          it "sets service middlewares for `#error`" do
-            expect(service_class.middlewares(:error).to_a).to eq(error_middlewares)
-          end
-        end
-
         example_group ".step middlewares" do
           let(:class_step_middlewares) do
             [
-              ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
               ConvenientService::Service::Plugins::CanHaveMethodSteps::Middleware
             ]
           end
 
           it "sets service middlewares for `.step`" do
             expect(service_class.middlewares(:step, scope: :class).to_a).to eq(class_step_middlewares)
-          end
-        end
-
-        example_group ".result middlewares" do
-          let(:class_result_middlewares) do
-            [
-              ConvenientService::Common::Plugins::NormalizesEnv::Middleware
-            ]
-          end
-
-          it "sets service middlewares for `.result`" do
-            expect(service_class.middlewares(:result, scope: :class).to_a).to eq(class_result_middlewares)
           end
         end
 
@@ -182,49 +108,12 @@ RSpec.describe ConvenientService::Service::Configs::Essential, type: :standard d
           example_group "#initialize middlewares" do
             let(:initialize_middlewares) do
               [
-                ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
                 ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Middleware
               ]
             end
 
             it "sets service result middlewares for `#initialize`" do
               expect(service_class::Result.middlewares(:initialize).to_a).to eq(initialize_middlewares)
-            end
-          end
-
-          example_group "#data middlewares" do
-            let(:data_middlewares) do
-              [
-                ConvenientService::Common::Plugins::NormalizesEnv::Middleware
-              ]
-            end
-
-            it "sets service result middlewares for `#data`" do
-              expect(service_class::Result.middlewares(:data).to_a).to eq(data_middlewares)
-            end
-          end
-
-          example_group "#message middlewares" do
-            let(:message_middlewares) do
-              [
-                ConvenientService::Common::Plugins::NormalizesEnv::Middleware
-              ]
-            end
-
-            it "sets service result middlewares for `#message`" do
-              expect(service_class::Result.middlewares(:message).to_a).to eq(message_middlewares)
-            end
-          end
-
-          example_group "#code middlewares" do
-            let(:code_middlewares) do
-              [
-                ConvenientService::Common::Plugins::NormalizesEnv::Middleware
-              ]
-            end
-
-            it "sets service result middlewares for `#code`" do
-              expect(service_class::Result.middlewares(:code).to_a).to eq(code_middlewares)
             end
           end
 
@@ -282,78 +171,6 @@ RSpec.describe ConvenientService::Service::Configs::Essential, type: :standard d
               it "sets service result status concerns" do
                 expect(service_class::Result::Status.concerns.to_a).to eq(concerns)
               end
-
-              example_group "#success? middlewares" do
-                let(:is_success_middlewares) do
-                  [
-                    ConvenientService::Common::Plugins::NormalizesEnv::Middleware
-                  ]
-                end
-
-                it "sets service result status middlewares for `#success?`" do
-                  expect(service_class::Result::Status.middlewares(:success?).to_a).to eq(is_success_middlewares)
-                end
-              end
-
-              example_group "#failure? middlewares" do
-                let(:is_failure_middlewares) do
-                  [
-                    ConvenientService::Common::Plugins::NormalizesEnv::Middleware
-                  ]
-                end
-
-                it "sets service result status middlewares for `#failure?`" do
-                  expect(service_class::Result::Status.middlewares(:failure?).to_a).to eq(is_failure_middlewares)
-                end
-              end
-
-              example_group "#error? middlewares" do
-                let(:is_error_middlewares) do
-                  [
-                    ConvenientService::Common::Plugins::NormalizesEnv::Middleware
-                  ]
-                end
-
-                it "sets service result status middlewares for `#error?`" do
-                  expect(service_class::Result::Status.middlewares(:error?).to_a).to eq(is_error_middlewares)
-                end
-              end
-
-              example_group "#not_success? middlewares" do
-                let(:is_not_success_middlewares) do
-                  [
-                    ConvenientService::Common::Plugins::NormalizesEnv::Middleware
-                  ]
-                end
-
-                it "sets service result status middlewares for `#not_success?`" do
-                  expect(service_class::Result::Status.middlewares(:not_success?).to_a).to eq(is_not_success_middlewares)
-                end
-              end
-
-              example_group "#not_failure? middlewares" do
-                let(:is_not_failure_middlewares) do
-                  [
-                    ConvenientService::Common::Plugins::NormalizesEnv::Middleware
-                  ]
-                end
-
-                it "sets service result status middlewares for `#not_failure?`" do
-                  expect(service_class::Result::Status.middlewares(:not_failure?).to_a).to eq(is_not_failure_middlewares)
-                end
-              end
-
-              example_group "#not_error? middlewares" do
-                let(:is_not_error_middlewares) do
-                  [
-                    ConvenientService::Common::Plugins::NormalizesEnv::Middleware
-                  ]
-                end
-
-                it "sets service result status middlewares for `#not_error?`" do
-                  expect(service_class::Result::Status.middlewares(:not_error?).to_a).to eq(is_not_error_middlewares)
-                end
-              end
             end
 
             example_group "service result status internals" do
@@ -407,7 +224,6 @@ RSpec.describe ConvenientService::Service::Configs::Essential, type: :standard d
           example_group "#result middlewares" do
             let(:result_middlewares) do
               [
-                ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
                 ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
                 ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::HasResult::Middleware,
                 ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::RaisesOnNotResultReturnValue::Middleware, ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeMethodStep::CanBeExecuted::Middleware
@@ -449,10 +265,10 @@ RSpec.describe ConvenientService::Service::Configs::Essential, type: :standard d
 
       ##
       # NOTE: Check the following discussion for details:
-      # https://github.com/marian13/convenient_service/discussions/43
+      # - https://github.com/marian13/convenient_service/discussions/43
       #
       it "applies its `included` block only once" do
-        expect(service_class.middlewares(:result).to_a.size).to eq(4)
+        expect(service_class.middlewares(:result).to_a.size).to eq(3)
       end
     end
   end

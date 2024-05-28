@@ -43,9 +43,7 @@ module ConvenientService
           end
 
           middlewares :result do
-            insert_after \
-              ConvenientService::Plugins::Common::NormalizesEnv::Middleware,
-              ConvenientService::Plugins::Service::CollectsServicesInException::Middleware
+            unshift ConvenientService::Plugins::Service::CollectsServicesInException::Middleware
 
             insert_before \
               ConvenientService::Plugins::Service::RaisesOnNotResultReturnValue::Middleware,
@@ -65,12 +63,7 @@ module ConvenientService
               ConvenientService::Plugins::Service::SetsParentToForeignResult::Middleware
           end
 
-          ##
-          # @internal
-          #   NOTE: Check `Essential` docs to understand why `use ConvenientService::Plugins::Common::NormalizesEnv::Middleware` for `:fallback_failure_result` is used in `Standard`, not in `Essential` config.
-          #
           middlewares :fallback_failure_result do
-            use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
             use ConvenientService::Plugins::Service::CollectsServicesInException::Middleware
             use ConvenientService::Plugins::Common::CachesReturnValue::Middleware
 
@@ -78,12 +71,7 @@ module ConvenientService
             use ConvenientService::Plugins::Service::CanHaveFallbacks::Middleware.with(status: :failure)
           end
 
-          ##
-          # @internal
-          #   NOTE: Check `Essential` docs to understand why `use ConvenientService::Plugins::Common::NormalizesEnv::Middleware` for `:fallback_error_result` is used in `Standard`, not in `Essential` config.
-          #
           middlewares :fallback_error_result do
-            use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
             use ConvenientService::Plugins::Service::CollectsServicesInException::Middleware
             use ConvenientService::Plugins::Common::CachesReturnValue::Middleware
 
@@ -91,12 +79,7 @@ module ConvenientService
             use ConvenientService::Plugins::Service::CanHaveFallbacks::Middleware.with(status: :error)
           end
 
-          ##
-          # @internal
-          #   NOTE: Check `Essential` docs to understand why `use ConvenientService::Plugins::Common::NormalizesEnv::Middleware` for `:fallback_result` is used in `Standard`, not in `Essential` config.
-          #
           middlewares :fallback_result do
-            use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
             use ConvenientService::Plugins::Service::CollectsServicesInException::Middleware
             use ConvenientService::Plugins::Common::CachesReturnValue::Middleware
 
@@ -104,12 +87,7 @@ module ConvenientService
             use ConvenientService::Plugins::Service::CanHaveFallbacks::Middleware.with(status: nil)
           end
 
-          ##
-          # @internal
-          #   NOTE: Check `Essential` docs to understand why `use ConvenientService::Plugins::Common::NormalizesEnv::Middleware` for `:negated_result` is used in `Standard`, not in `Essential` config.
-          #
           middlewares :negated_result do
-            use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
             use ConvenientService::Plugins::Service::CollectsServicesInException::Middleware
             use ConvenientService::Plugins::Common::CachesReturnValue::Middleware
 
@@ -121,7 +99,7 @@ module ConvenientService
           #   `after :step do |step|` is executed after step result is calculated.
           #    This completely makes sence and is useful for debugging for example.
           #
-          #   But `before :step do` is alos executed after step result is calculated.
+          #   But `before :step do` is also executed after step result is calculated.
           #   That confuses the end-users a lot.
           #   Probably a dedicated plugin is needed?
           #   Or to forbid `before :step do`?
@@ -169,8 +147,6 @@ module ConvenientService
             end
 
             middlewares :negated_result do
-              use ConvenientService::Plugins::Common::NormalizesEnv::Middleware
-
               use ConvenientService::Plugins::Common::EnsuresNegatedJSendResult::Middleware
             end
 
@@ -224,13 +200,11 @@ module ConvenientService
 
           if Dependencies.rspec.loaded?
             concerns do
-              insert_before 0, ConvenientService::Plugins::Service::CanHaveStubbedResults::Concern
+              unshift ConvenientService::Plugins::Service::CanHaveStubbedResults::Concern
             end
 
             middlewares :result do
-              insert_after \
-                ConvenientService::Plugins::Common::NormalizesEnv::Middleware,
-                ConvenientService::Plugins::Service::CanHaveStubbedResults::Middleware
+              unshift ConvenientService::Plugins::Service::CanHaveStubbedResults::Middleware
 
               insert_before \
                 ConvenientService::Plugins::Service::CanHaveStubbedResults::Middleware,
@@ -238,9 +212,7 @@ module ConvenientService
             end
 
             middlewares :result, scope: :class do
-              insert_after \
-                ConvenientService::Plugins::Common::NormalizesEnv::Middleware,
-                ConvenientService::Plugins::Service::CanHaveStubbedResults::Middleware
+              unshift ConvenientService::Plugins::Service::CanHaveStubbedResults::Middleware
 
               insert_before \
                 ConvenientService::Plugins::Service::CanHaveStubbedResults::Middleware,

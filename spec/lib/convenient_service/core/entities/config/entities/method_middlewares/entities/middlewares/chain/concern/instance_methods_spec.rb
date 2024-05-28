@@ -37,12 +37,20 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
     end
 
     describe "#call" do
-      it "sets middleware @env instance variable to `env`" do
-        expect { middleware_result }.to change { middleware_instance.instance_variable_get(:@__env__) }.from({}).to(env)
+      let(:normalized_env) { ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Chain::Commands::NormalizeEnv.call(env: env) }
+
+      specify do
+        expect { middleware_result }
+          .to delegate_to(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Chain::Commands::NormalizeEnv, :call)
+          .with_arguments(env: env)
       end
 
-      it "sets middleware chain @env instance variable to `env`" do
-        expect { middleware_result }.to change { middleware_instance.chain.instance_variable_get(:@env) }.from({}).to(env)
+      it "sets middleware @env instance variable to normalized `env`" do
+        expect { middleware_result }.to change { middleware_instance.instance_variable_get(:@__env__) }.from({}).to(normalized_env)
+      end
+
+      it "sets middleware chain @env instance variable to normalized `env`" do
+        expect { middleware_result }.to change { middleware_instance.chain.instance_variable_get(:@env) }.from({}).to(normalized_env)
       end
 
       specify do

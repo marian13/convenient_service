@@ -50,9 +50,7 @@ module ConvenientService
             end
 
             middlewares :result do
-              insert_after \
-                ConvenientService::Plugins::Common::NormalizesEnv::Middleware,
-                ConvenientService::Plugins::Service::CollectsServicesInException::Middleware
+              unshift ConvenientService::Plugins::Service::CollectsServicesInException::Middleware
 
               insert_before \
                 ConvenientService::Plugins::Service::RaisesOnNotResultReturnValue::Middleware,
@@ -163,9 +161,7 @@ module ConvenientService
               end
 
               middlewares :result do
-                insert_after \
-                  ConvenientService::Plugins::Common::NormalizesEnv::Middleware,
-                  ConvenientService::Plugins::Service::CanHaveStubbedResults::Middleware
+                unshift ConvenientService::Plugins::Service::CanHaveStubbedResults::Middleware
 
                 insert_before \
                   ConvenientService::Plugins::Service::CanHaveStubbedResults::Middleware,
@@ -173,9 +169,7 @@ module ConvenientService
               end
 
               middlewares :result, scope: :class do
-                insert_after \
-                  ConvenientService::Plugins::Common::NormalizesEnv::Middleware,
-                  ConvenientService::Plugins::Service::CanHaveStubbedResults::Middleware
+                unshift ConvenientService::Plugins::Service::CanHaveStubbedResults::Middleware
 
                 insert_before \
                   ConvenientService::Plugins::Service::CanHaveStubbedResults::Middleware,

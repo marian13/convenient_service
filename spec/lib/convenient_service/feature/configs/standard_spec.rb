@@ -41,7 +41,6 @@ RSpec.describe ConvenientService::Feature::Configs::Standard, type: :standard do
         example_group ".new middlewares" do
           let(:class_new_middlewares) do
             [
-              ConvenientService::Common::Plugins::NormalizesEnv::Middleware,
               ConvenientService::Common::Plugins::HasInstanceProxy::Middleware
             ]
           end

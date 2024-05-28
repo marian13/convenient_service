@@ -42,12 +42,12 @@ module ConvenientService
                       # @return [Object] Can be any type.
                       #
                       def call(env)
-                        @__env__ = env
+                        @__env__ = Commands::NormalizeEnv.call(env: env)
 
                         ##
                         # IMPORTANT: This is a library code. Do NOT do things like this in your application code.
                         #
-                        chain.instance_variable_set(:@env, env)
+                        chain.instance_variable_set(:@env, @__env__)
 
                         ##
                         # NOTE: `__send__` is used since `next` is ruby keyword.
@@ -55,7 +55,7 @@ module ConvenientService
                         #
                         # TODO: Enforce to always pass args, kwargs, block.
                         #
-                        __send__(:next, *env[:args], **env[:kwargs], &env[:block])
+                        __send__(:next, *@__env__[:args], **@__env__[:kwargs], &@__env__[:block])
                       end
 
                       ##

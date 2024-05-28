@@ -49,6 +49,18 @@ module ConvenientService
                 end
 
                 ##
+                # @param concern [ConvenientService::Support::Concern, Module]
+                # @param args [Array<Object>]
+                # @param block [Proc, nil]
+                # @return [ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack]
+                #
+                def unshift(concern, *args, &block)
+                  plain_stack.unshift(cast(concern), *args, &block)
+
+                  self
+                end
+
+                ##
                 # @param index_or_concern [Integer, ConvenientService::Support::Concern, Module]
                 # @param concern [ConvenientService::Support::Concern, Module]
                 # @param args [Array<Object>]
