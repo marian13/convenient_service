@@ -444,6 +444,12 @@ tasks:
           APPRAISAL: dry
       - task: rspec
         vars:
+          APPRAISAL: awesome_print
+      - task: rspec
+        vars:
+          APPRAISAL: amazing_print
+      - task: rspec
+        vars:
           APPRAISAL: rails_7.0
       - task: rspec
         vars:
