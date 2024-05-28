@@ -312,6 +312,36 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns::En
       end
     end
 
+    describe "#remove" do
+      before do
+        stack.use other_concern
+      end
+
+      context "when index passed" do
+        specify do
+          expect { stack.remove(index) }
+            .to delegate_to(plain_stack, :delete)
+            .with_arguments(index)
+        end
+
+        it "returns stack" do
+          expect(stack.remove(index)).to eq(stack)
+        end
+      end
+
+      context "when concern passed" do
+        specify do
+          expect { stack.remove(other_concern) }
+            .to delegate_to(plain_stack, :delete)
+            .with_arguments(other_middleware)
+        end
+
+        it "returns stack" do
+          expect(stack.remove(other_concern)).to eq(stack)
+        end
+      end
+    end
+
     describe "#use" do
       specify do
         expect { stack.use(concern, *args, &block) }

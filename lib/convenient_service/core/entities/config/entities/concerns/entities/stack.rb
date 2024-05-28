@@ -155,6 +155,11 @@ module ConvenientService
                 end
 
                 ##
+                # @return [ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack]
+                #
+                alias_method :remove, :delete
+
+                ##
                 # @param concern [ConvenientService::Support::Concern, Module]
                 # @param args [Array<Object>]
                 # @param block [Proc, nil]

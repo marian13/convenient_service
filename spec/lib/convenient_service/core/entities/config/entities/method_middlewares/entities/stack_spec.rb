@@ -323,6 +323,36 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
       end
     end
 
+    describe "#remove" do
+      before do
+        stack.use other_middleware
+      end
+
+      context "when index passed" do
+        specify do
+          expect { stack.remove(index) }
+            .to delegate_to(plain_stack, :delete)
+            .with_arguments(index)
+        end
+
+        it "returns stack" do
+          expect(stack.remove(index)).to eq(stack)
+        end
+      end
+
+      context "when middleware passed" do
+        specify do
+          expect { stack.remove(other_middleware) }
+            .to delegate_to(plain_stack, :delete)
+            .with_arguments(other_middleware)
+        end
+
+        it "returns stack" do
+          expect(stack.remove(other_middleware)).to eq(stack)
+        end
+      end
+    end
+
     describe "#use" do
       specify do
         expect { stack.use(middleware, *args, &block) }

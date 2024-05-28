@@ -158,6 +158,11 @@ module ConvenientService
                 end
 
                 ##
+                # @return [ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack]
+                #
+                alias_method :remove, :delete
+
+                ##
                 # @param middleware [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Base]
                 # @param args [Array<Object>]
                 # @param block [Proc, nil]
