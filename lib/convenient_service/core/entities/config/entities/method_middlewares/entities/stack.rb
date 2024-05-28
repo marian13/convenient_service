@@ -62,6 +62,11 @@ module ConvenientService
                 end
 
                 ##
+                # @return [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Stack]
+                #
+                alias_method :prepend, :unshift
+
+                ##
                 # @param index_or_middleware [Integer, ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Base]
                 # @param middleware [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Base]
                 # @param args [Array<Object>]

@@ -118,6 +118,18 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns::En
       end
     end
 
+    describe "#prepend" do
+      specify do
+        expect { stack.prepend(concern, *args, &block) }
+          .to delegate_to(plain_stack, :unshift)
+          .with_arguments(middleware, *args, &block)
+      end
+
+      it "returns stack" do
+        expect(stack.prepend(concern, *args, &block)).to eq(stack)
+      end
+    end
+
     describe "#insert" do
       before do
         stack.use other_concern
@@ -144,6 +156,36 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns::En
 
         it "returns stack" do
           expect(stack.insert(other_concern, concern, *args, &block)).to eq(stack)
+        end
+      end
+    end
+
+    describe "#insert_before" do
+      before do
+        stack.use other_concern
+      end
+
+      context "when index passed" do
+        specify do
+          expect { stack.insert_before(index, concern, *args, &block) }
+            .to delegate_to(plain_stack, :insert)
+            .with_arguments(index, middleware, *args, &block)
+        end
+
+        it "returns stack" do
+          expect(stack.insert_before(index, concern, *args, &block)).to eq(stack)
+        end
+      end
+
+      context "when concern passed" do
+        specify do
+          expect { stack.insert_before(other_concern, concern, *args, &block) }
+            .to delegate_to(plain_stack, :insert)
+            .with_arguments(other_middleware, middleware, *args, &block)
+        end
+
+        it "returns stack" do
+          expect(stack.insert_before(other_concern, concern, *args, &block)).to eq(stack)
         end
       end
     end

@@ -27,6 +27,20 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder, type: :stan
       end
     end
 
+    describe "#prepend" do
+      let(:middleware) { proc { :foo } }
+
+      let(:args) { [:foo] }
+      let(:block) { proc { :foo } }
+
+      specify do
+        expect { stack_builder.prepend(middleware, *args, &block) }
+          .to delegate_to(stack, :unshift)
+            .with_arguments([middleware, args, block])
+            .and_return { stack_builder }
+      end
+    end
+
     describe "#to_a" do
       it "returns stack" do
         expect(stack_builder.to_a).to eq(stack)

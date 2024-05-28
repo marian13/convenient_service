@@ -129,6 +129,18 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
       end
     end
 
+    describe "#prepend" do
+      specify do
+        expect { stack.prepend(middleware, *args, &block) }
+          .to delegate_to(plain_stack, :unshift)
+          .with_arguments(middleware, *args, &block)
+      end
+
+      it "returns stack" do
+        expect(stack.prepend(middleware, *args, &block)).to eq(stack)
+      end
+    end
+
     describe "#insert" do
       before do
         stack.use other_middleware
@@ -155,6 +167,36 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
 
         it "returns stack" do
           expect(stack.insert(other_middleware, middleware, *args, &block)).to eq(stack)
+        end
+      end
+    end
+
+    describe "#insert_before" do
+      before do
+        stack.use other_middleware
+      end
+
+      context "when index passed" do
+        specify do
+          expect { stack.insert_before(index, middleware, *args, &block) }
+            .to delegate_to(plain_stack, :insert)
+            .with_arguments(index, middleware, *args, &block)
+        end
+
+        it "returns stack" do
+          expect(stack.insert_before(index, middleware, *args, &block)).to eq(stack)
+        end
+      end
+
+      context "when middleware passed" do
+        specify do
+          expect { stack.insert_before(other_middleware, middleware, *args, &block) }
+            .to delegate_to(plain_stack, :insert)
+            .with_arguments(other_middleware, middleware, *args, &block)
+        end
+
+        it "returns stack" do
+          expect(stack.insert_before(other_middleware, middleware, *args, &block)).to eq(stack)
         end
       end
     end

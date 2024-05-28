@@ -46,6 +46,19 @@ module ConvenientService
         end
 
         ##
+        # @return [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Stack]
+        #
+        alias_method :prepend, :unshift
+
+        ##
+        # @return [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Stack]
+        #
+        # @internal
+        #   TODO: Direct specs.
+        #
+        alias_method :remove, :delete
+
+        ##
         # @param other [ConvenientService::Support::Middleware::StackBuilder, Object]
         # @return [Boolean, nil]
         #

@@ -61,6 +61,11 @@ module ConvenientService
                 end
 
                 ##
+                # @return [ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack]
+                #
+                alias_method :prepend, :unshift
+
+                ##
                 # @param index_or_concern [Integer, ConvenientService::Support::Concern, Module]
                 # @param concern [ConvenientService::Support::Concern, Module]
                 # @param args [Array<Object>]
