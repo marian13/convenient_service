@@ -213,6 +213,8 @@
     
 
     
+      (also: #prepend)
+    
   </span>
   
   
@@ -304,17 +306,17 @@
       <pre class="lines">
 
 
-21
-22
-23
 24
 25
 26
 27
-28</pre>
+28
+29
+30
+31</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/middleware/stack_builder.rb', line 21</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/middleware/stack_builder.rb', line 24</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_opts'>opts</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='kw'>super</span>
@@ -388,17 +390,17 @@
       <pre class="lines">
 
 
-49
-50
-51
-52
-53
-54
-55
-56</pre>
+68
+69
+70
+71
+72
+73
+74
+75</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/middleware/stack_builder.rb', line 49</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/middleware/stack_builder.rb', line 68</span>
 
 <span class='kw'>def</span> <span class='op'>==</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='rparen'>)</span>
@@ -450,25 +452,25 @@
       <pre class="lines">
 
 
-74
-75
-76
-77
-78
-79
-80
-81
-82
-83
-84
-85
-86
-87
-88
-89</pre>
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/middleware/stack_builder.rb', line 74</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/middleware/stack_builder.rb', line 96</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_dup'>dup</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
@@ -528,12 +530,12 @@
       <pre class="lines">
 
 
-67
-68
-69</pre>
+86
+87
+88</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/middleware/stack_builder.rb', line 67</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/middleware/stack_builder.rb', line 86</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_a'>to_a</span>
   <span class='id identifier rubyid_stack'>stack</span>
@@ -549,6 +551,10 @@
     #<strong>unshift</strong>(middleware, *args, &amp;block)  &#x21d2; <tt><span class='object_link'><a href="../../Core/Entities/Config/Entities/MethodMiddlewares/Entities/Stack.html" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Stack (class)">ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Stack</a></span></tt> 
   
 
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='prepend-instance_method'>prepend</span></span>
+    </span>
   
 
   
@@ -617,14 +623,14 @@
       <pre class="lines">
 
 
-39
-40
-41
 42
-43</pre>
+43
+44
+45
+46</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/middleware/stack_builder.rb', line 39</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/middleware/stack_builder.rb', line 42</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_unshift'>unshift</span><span class='lparen'>(</span><span class='id identifier rubyid_middleware'>middleware</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_stack'>stack</span><span class='period'>.</span><span class='id identifier rubyid_unshift'>unshift</span><span class='lparen'>(</span><span class='lbracket'>[</span><span class='id identifier rubyid_middleware'>middleware</span><span class='comma'>,</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='id identifier rubyid_block'>block</span><span class='rbracket'>]</span><span class='rparen'>)</span>
@@ -641,7 +647,7 @@
 </div>
 
       <div id="footer">
-  Generated on Tue May 28 20:35:59 2024 by
+  Generated on Tue May 28 21:50:46 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.36 (ruby-3.2.4).
 </div>
