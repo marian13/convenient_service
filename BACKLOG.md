@@ -234,3 +234,17 @@ Although it is very flexible and easy to reuse from the maintenance point of vie
 In case it starts to cause any visible performance penalty, it can be refactored using regular `||=` or `if defined?`.
 
 ---
+
+### Consider to create parent result while copying results
+
+| Priority | Complexity | Status | Tags |
+| - | - | - | - |
+| Medium | Moderate | TODO | parent-result |
+
+Fallbacks have no access to their original results.
+
+When fallback result is used, original result is NOT in the parents chain.
+
+It is OK?
+
+---

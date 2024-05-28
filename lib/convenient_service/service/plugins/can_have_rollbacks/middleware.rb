@@ -4,9 +4,6 @@ module ConvenientService
   module Service
     module Plugins
       module CanHaveRollbacks
-        ##
-        # @api private
-        #
         class Middleware < MethodChainMiddleware
           intended_for :result, entity: :service
 
@@ -26,6 +23,9 @@ module ConvenientService
           ##
           # @param result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
           # @return [void]
+          #
+          # @internal
+          #   IMPORTANT: Uses recursion inside `rollback_organizer`. Recursion has two exit conditions. When service has no steps. When service has only method steps.
           #
           def rollback_result(result)
             result.from_step? ? rollback_organizer(result.service) : rollback_service(result.service)

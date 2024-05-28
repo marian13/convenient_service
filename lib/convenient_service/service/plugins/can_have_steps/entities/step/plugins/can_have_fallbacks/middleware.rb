@@ -71,17 +71,21 @@ module ConvenientService
 
                   ##
                   # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
-                  # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallbacks::Exceptions::FallbackResultIsNotOverridden]
+                  # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallbacks::Exceptions::FallbackResultIsNotOverridden, ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallbacks::Exceptions::MethodStepCanNotHaveFallback]
                   #
                   def fallback_failure_result
+                    refute_method_step!
+
                     fallback_failure_result_own_method&.call || fallback_result_own_method&.call || ::ConvenientService.raise(Exceptions::FallbackResultIsNotOverridden.new(step: step, service: service, status: :failure))
                   end
 
                   ##
                   # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
-                  # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallbacks::Exceptions::FallbackResultIsNotOverridden]
+                  # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallbacks::Exceptions::FallbackResultIsNotOverridden, ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallbacks::Exceptions::MethodStepCanNotHaveFallback]
                   #
                   def fallback_error_result
+                    refute_method_step!
+
                     fallback_error_result_own_method&.call || fallback_result_own_method&.call || ::ConvenientService.raise(Exceptions::FallbackResultIsNotOverridden.new(step: step, service: service, status: :error))
                   end
 
@@ -114,6 +118,19 @@ module ConvenientService
                   #
                   def service
                     @service ||= step.service.klass.new(**step.input_values)
+                  end
+
+                  ##
+                  # @return [void]
+                  # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallbacks::Exceptions::MethodStepCanNotHaveFallback]
+                  #
+                  # @internal
+                  #   TODO: Consider to move this assertion to the build time.
+                  #
+                  def refute_method_step!
+                    return unless step.method_step?
+
+                    raise Exceptions::MethodStepCanNotHaveFallback.new(step: step)
                   end
                 end
               end

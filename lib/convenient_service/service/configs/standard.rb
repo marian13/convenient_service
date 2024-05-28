@@ -212,11 +212,13 @@ module ConvenientService
             end
 
             middlewares :result do
-              use ConvenientService::Plugins::Step::CanHaveFallbacks::Middleware.with(fallback_true_status: :failure)
-
               insert_after \
                 ConvenientService::Plugins::Step::HasResult::Middleware,
                 ConvenientService::Plugins::Step::CanHaveParentResult::Middleware
+
+              insert_after \
+                ConvenientService::Plugins::Step::HasResult::Middleware,
+                ConvenientService::Plugins::Step::CanHaveFallbacks::Middleware.with(fallback_true_status: :failure)
             end
           end
 

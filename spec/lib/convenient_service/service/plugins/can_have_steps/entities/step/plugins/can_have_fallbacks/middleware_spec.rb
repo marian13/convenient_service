@@ -262,6 +262,44 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
                   expect(method_value.checked?).to eq(false)
                 end
               end
+
+              context "when step is method step" do
+                let(:container) do
+                  Class.new.tap do |klass|
+                    klass.class_exec(first_step, middleware) do |first_step, middleware|
+                      include ConvenientService::Service::Configs::Standard
+
+                      self::Step.class_exec(middleware) do |middleware|
+                        middlewares :result do
+                          replace middleware.with(fallback_true_status: :failure), middleware
+
+                          observe middleware
+                        end
+                      end
+
+                      step :foo, fallback: true
+
+                      def foo
+                        failure("from method step")
+                      end
+                    end
+                  end
+                end
+
+                let(:exception_message) do
+                  <<~TEXT
+                    Method step can NOT have fallback.
+
+                    Either remove `fallback` option from step `:foo` in `#{container}` or consider to refactor it into a service step.
+                  TEXT
+                end
+
+                it "raises `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallbacks::Exceptions::MethodStepCanNotHaveFallback`" do
+                  expect { method_value }
+                    .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallbacks::Exceptions::MethodStepCanNotHaveFallback)
+                    .with_message(exception_message)
+                end
+              end
             end
 
             context "when result has `:error` status" do
@@ -437,6 +475,42 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
                 it "returns result with NOT checked status" do
                   expect(method_value.checked?).to eq(false)
+                end
+              end
+
+              context "when step is method step" do
+                let(:container) do
+                  Class.new.tap do |klass|
+                    klass.class_exec(first_step, middleware) do |first_step, middleware|
+                      include ConvenientService::Service::Configs::Standard
+
+                      self::Step.class_exec(middleware) do |middleware|
+                        middlewares :result do
+                          observe middleware.with(fallback_true_status: :failure)
+                        end
+                      end
+
+                      step :foo, fallback: true
+
+                      def foo
+                        failure("from method step")
+                      end
+                    end
+                  end
+                end
+
+                let(:exception_message) do
+                  <<~TEXT
+                    Method step can NOT have fallback.
+
+                    Either remove `fallback` option from step `:foo` in `#{container}` or consider to refactor it into a service step.
+                  TEXT
+                end
+
+                it "raises `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallbacks::Exceptions::MethodStepCanNotHaveFallback`" do
+                  expect { method_value }
+                    .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallbacks::Exceptions::MethodStepCanNotHaveFallback)
+                    .with_message(exception_message)
                 end
               end
             end
@@ -642,6 +716,44 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
                   expect(method_value.checked?).to eq(false)
                 end
               end
+
+              context "when step is method step" do
+                let(:container) do
+                  Class.new.tap do |klass|
+                    klass.class_exec(first_step, middleware) do |first_step, middleware|
+                      include ConvenientService::Service::Configs::Standard
+
+                      self::Step.class_exec(middleware) do |middleware|
+                        middlewares :result do
+                          replace middleware.with(fallback_true_status: :failure), middleware.with(fallback_true_status: :error)
+
+                          observe middleware.with(fallback_true_status: :error)
+                        end
+                      end
+
+                      step :foo, fallback: true
+
+                      def foo
+                        error("from method step")
+                      end
+                    end
+                  end
+                end
+
+                let(:exception_message) do
+                  <<~TEXT
+                    Method step can NOT have fallback.
+
+                    Either remove `fallback` option from step `:foo` in `#{container}` or consider to refactor it into a service step.
+                  TEXT
+                end
+
+                it "raises `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallbacks::Exceptions::MethodStepCanNotHaveFallback`" do
+                  expect { method_value }
+                    .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallbacks::Exceptions::MethodStepCanNotHaveFallback)
+                    .with_message(exception_message)
+                end
+              end
             end
 
             context "when result has `:success` status" do
@@ -794,6 +906,42 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
               it "returns result with NOT checked status" do
                 expect(method_value.checked?).to eq(false)
+              end
+            end
+
+            context "when step is method step" do
+              let(:container) do
+                Class.new.tap do |klass|
+                  klass.class_exec(first_step, middleware) do |first_step, middleware|
+                    include ConvenientService::Service::Configs::Standard
+
+                    self::Step.class_exec(middleware) do |middleware|
+                      middlewares :result do
+                        observe middleware.with(fallback_true_status: :failure)
+                      end
+                    end
+
+                    step :foo, fallback: [:failure]
+
+                    def foo
+                      failure("from method step")
+                    end
+                  end
+                end
+              end
+
+              let(:exception_message) do
+                <<~TEXT
+                  Method step can NOT have fallback.
+
+                  Either remove `fallback` option from step `:foo` in `#{container}` or consider to refactor it into a service step.
+                TEXT
+              end
+
+              it "raises `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallbacks::Exceptions::MethodStepCanNotHaveFallback`" do
+                expect { method_value }
+                  .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallbacks::Exceptions::MethodStepCanNotHaveFallback)
+                  .with_message(exception_message)
               end
             end
           end
@@ -993,6 +1141,42 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
               it "returns result with NOT checked status" do
                 expect(method_value.checked?).to eq(false)
+              end
+            end
+
+            context "when step is method step" do
+              let(:container) do
+                Class.new.tap do |klass|
+                  klass.class_exec(first_step, middleware) do |first_step, middleware|
+                    include ConvenientService::Service::Configs::Standard
+
+                    self::Step.class_exec(middleware) do |middleware|
+                      middlewares :result do
+                        observe middleware.with(fallback_true_status: :failure)
+                      end
+                    end
+
+                    step :foo, fallback: [:error]
+
+                    def foo
+                      error("from method step")
+                    end
+                  end
+                end
+              end
+
+              let(:exception_message) do
+                <<~TEXT
+                  Method step can NOT have fallback.
+
+                  Either remove `fallback` option from step `:foo` in `#{container}` or consider to refactor it into a service step.
+                TEXT
+              end
+
+              it "raises `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallbacks::Exceptions::MethodStepCanNotHaveFallback`" do
+                expect { method_value }
+                  .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallbacks::Exceptions::MethodStepCanNotHaveFallback)
+                  .with_message(exception_message)
               end
             end
           end
