@@ -9,6 +9,20 @@ module ConvenientService
             module Entities
               module Middlewares
                 ##
+                # Class `ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Classic` allows to define middlewares that interacts with `call` and `env` directly.
+                # For example `ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Chain::Commands::NormalizeEnv` was implemeted as middleware up to v0.18.
+                #
+                #   class Middleware < MethodClassicMiddleware
+                #     intended_for any_method, scope: any_scope, entity: any_entity
+                #
+                #     def call(env = nil)
+                #       env = env.to_h
+                #       env = env.merge(args: env[:args].to_a, kwargs: env[:kwargs].to_h, block: env[:block])
+                #
+                #       stack.call(env)
+                #     end
+                #   end
+                #
                 # @abstract Subclass and override `#call`.
                 #
                 # @internal

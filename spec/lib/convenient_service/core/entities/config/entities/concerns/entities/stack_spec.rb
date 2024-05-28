@@ -106,6 +106,18 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns::En
       end
     end
 
+    describe "#unshift" do
+      specify do
+        expect { stack.unshift(concern, *args, &block) }
+          .to delegate_to(plain_stack, :unshift)
+          .with_arguments(middleware, *args, &block)
+      end
+
+      it "returns stack" do
+        expect(stack.unshift(concern, *args, &block)).to eq(stack)
+      end
+    end
+
     describe "#insert" do
       before do
         stack.use other_concern
@@ -131,7 +143,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns::En
         end
 
         it "returns stack" do
-          expect(stack.insert(index, concern, *args, &block)).to eq(stack)
+          expect(stack.insert(other_concern, concern, *args, &block)).to eq(stack)
         end
       end
     end
@@ -161,7 +173,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns::En
         end
 
         it "returns stack" do
-          expect(stack.insert_after(index, concern, *args, &block)).to eq(stack)
+          expect(stack.insert_after(other_concern, concern, *args, &block)).to eq(stack)
         end
       end
     end
@@ -178,7 +190,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns::En
       end
 
       it "returns stack" do
-        expect(stack.insert_before_each(index, concern, *args, &block)).to eq(stack)
+        expect(stack.insert_before_each(concern, *args, &block)).to eq(stack)
       end
     end
 
@@ -194,7 +206,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns::En
       end
 
       it "returns stack" do
-        expect(stack.insert_after_each(index, concern, *args, &block)).to eq(stack)
+        expect(stack.insert_after_each(concern, *args, &block)).to eq(stack)
       end
     end
 
@@ -223,7 +235,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns::En
         end
 
         it "returns stack" do
-          expect(stack.replace(index, concern, *args, &block)).to eq(stack)
+          expect(stack.replace(other_concern, concern, *args, &block)).to eq(stack)
         end
       end
     end
@@ -253,7 +265,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns::En
         end
 
         it "returns stack" do
-          expect(stack.delete(index)).to eq(stack)
+          expect(stack.delete(other_concern)).to eq(stack)
         end
       end
     end

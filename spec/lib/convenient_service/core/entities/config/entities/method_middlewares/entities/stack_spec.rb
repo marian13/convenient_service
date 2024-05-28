@@ -117,6 +117,18 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
       end
     end
 
+    describe "#unshift" do
+      specify do
+        expect { stack.unshift(middleware, *args, &block) }
+          .to delegate_to(plain_stack, :unshift)
+          .with_arguments(middleware, *args, &block)
+      end
+
+      it "returns stack" do
+        expect(stack.unshift(middleware, *args, &block)).to eq(stack)
+      end
+    end
+
     describe "#insert" do
       before do
         stack.use other_middleware
@@ -142,7 +154,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
         end
 
         it "returns stack" do
-          expect(stack.insert(index, middleware, *args, &block)).to eq(stack)
+          expect(stack.insert(other_middleware, middleware, *args, &block)).to eq(stack)
         end
       end
     end
@@ -172,7 +184,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
         end
 
         it "returns stack" do
-          expect(stack.insert_after(index, middleware, *args, &block)).to eq(stack)
+          expect(stack.insert_after(other_middleware, middleware, *args, &block)).to eq(stack)
         end
       end
     end
@@ -234,7 +246,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
         end
 
         it "returns stack" do
-          expect(stack.replace(index, middleware, *args, &block)).to eq(stack)
+          expect(stack.replace(other_middleware, middleware, *args, &block)).to eq(stack)
         end
       end
     end
@@ -264,7 +276,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
         end
 
         it "returns stack" do
-          expect(stack.delete(index)).to eq(stack)
+          expect(stack.delete(other_middleware)).to eq(stack)
         end
       end
     end

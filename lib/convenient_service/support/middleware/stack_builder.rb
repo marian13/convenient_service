@@ -18,6 +18,9 @@ module ConvenientService
         #
         # @see https://github.com/marian13/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L43
         #
+        # @internal
+        #   TODO: Direct specs.
+        #
         def initialize(opts = {}, &block)
           super
 
@@ -46,6 +49,9 @@ module ConvenientService
         # @param other [ConvenientService::Support::Middleware::StackBuilder, Object]
         # @return [Boolean, nil]
         #
+        # @internal
+        #   TODO: Direct specs.
+        #
         def ==(other)
           return unless other.instance_of?(self.class)
 
@@ -70,6 +76,9 @@ module ConvenientService
 
         ##
         # @return [ConvenientService::Support::Middleware::StackBuilder]
+        #
+        # @internal
+        #   TODO: Direct specs.
         #
         def dup
           self.class.new(
