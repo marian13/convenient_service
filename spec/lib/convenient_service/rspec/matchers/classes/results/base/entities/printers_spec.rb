@@ -30,7 +30,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
 
           let(:service) do
             Class.new do
-              include ConvenientService::Service::Configs::Standard
+              include ConvenientService::Standard::Config
 
               def result
                 success
@@ -51,7 +51,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
 
           let(:service) do
             Class.new do
-              include ConvenientService::Service::Configs::Standard
+              include ConvenientService::Standard::Config
 
               def result
                 failure
@@ -72,7 +72,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
 
           let(:service) do
             Class.new do
-              include ConvenientService::Service::Configs::Standard
+              include ConvenientService::Standard::Config
 
               def result
                 error
@@ -93,7 +93,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
 
           let(:service) do
             Class.new do
-              include ConvenientService::Service::Configs::Standard
+              include ConvenientService::Standard::Config
 
               def result
                 success.copy(overrides: {kwargs: {status: :unknown}})

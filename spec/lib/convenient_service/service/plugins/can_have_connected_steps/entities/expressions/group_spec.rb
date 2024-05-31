@@ -13,7 +13,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
 
   let(:container) do
     Class.new do
-      include ConvenientService::Service::Configs::Standard
+      include ConvenientService::Standard::Config
 
       step :foo
 

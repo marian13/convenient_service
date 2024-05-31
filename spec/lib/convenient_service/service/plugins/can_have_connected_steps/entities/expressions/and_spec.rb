@@ -14,7 +14,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
 
   let(:container) do
     Class.new do
-      include ConvenientService::Service::Configs::Standard
+      include ConvenientService::Standard::Config
 
       step :foo
       step :bar
@@ -81,7 +81,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
       context "when `left_sub_expression` is NOT `success`" do
         let(:container) do
           Class.new do
-            include ConvenientService::Service::Configs::Standard
+            include ConvenientService::Standard::Config
 
             step :foo
             step :bar
@@ -118,7 +118,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
       context "when `left_sub_expression` is `success`" do
         let(:container) do
           Class.new do
-            include ConvenientService::Service::Configs::Standard
+            include ConvenientService::Standard::Config
 
             step :foo
             step :bar
@@ -159,7 +159,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
       context "when `left_sub_expression` is NOT `success`" do
         let(:container) do
           Class.new do
-            include ConvenientService::Service::Configs::Standard
+            include ConvenientService::Standard::Config
 
             step :foo
             step :bar
@@ -193,7 +193,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
       context "when `left_sub_expression` is `success`" do
         let(:container) do
           Class.new do
-            include ConvenientService::Service::Configs::Standard
+            include ConvenientService::Standard::Config
 
             step :foo
             step :bar
@@ -226,7 +226,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
         context "when `left_sub_expression` is `failure`" do
           let(:container) do
             Class.new do
-              include ConvenientService::Service::Configs::Standard
+              include ConvenientService::Standard::Config
 
               step :foo
               step :bar
@@ -260,7 +260,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
         context "when `left_sub_expression` is `error`" do
           let(:container) do
             Class.new do
-              include ConvenientService::Service::Configs::Standard
+              include ConvenientService::Standard::Config
 
               step :foo
               step :bar
@@ -295,7 +295,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
       context "when `left_sub_expression` is `success`" do
         let(:container) do
           Class.new do
-            include ConvenientService::Service::Configs::Standard
+            include ConvenientService::Standard::Config
 
             step :foo
             step :bar
@@ -335,7 +335,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
       context "when `left_sub_expression` is NOT `error`" do
         let(:container) do
           Class.new do
-            include ConvenientService::Service::Configs::Standard
+            include ConvenientService::Standard::Config
 
             step :foo
             step :bar
@@ -367,7 +367,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
       context "when `left_sub_expression` is `error`" do
         let(:container) do
           Class.new do
-            include ConvenientService::Service::Configs::Standard
+            include ConvenientService::Standard::Config
 
             step :foo
             step :bar
@@ -431,7 +431,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
       context "when `left_sub_expression` is NOT `success`" do
         let(:container) do
           Class.new do
-            include ConvenientService::Service::Configs::Standard
+            include ConvenientService::Standard::Config
 
             step :foo
             step :bar
@@ -454,7 +454,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
       context "when `left_sub_expression` is `success`" do
         let(:container) do
           Class.new do
-            include ConvenientService::Service::Configs::Standard
+            include ConvenientService::Standard::Config
 
             step :foo
             step :bar

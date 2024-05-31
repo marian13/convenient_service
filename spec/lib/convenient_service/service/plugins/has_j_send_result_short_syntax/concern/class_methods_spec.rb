@@ -11,7 +11,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultShortSyntax::C
 
       let(:service_class) do
         Class.new do
-          include ConvenientService::Service::Configs::Standard
+          include ConvenientService::Standard::Config
 
           def result
             success

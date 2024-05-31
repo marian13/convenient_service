@@ -54,7 +54,7 @@ RSpec.describe ConvenientService::Service::Plugins::CollectsServicesInException:
         let(:service_class) do
           Class.new.tap do |klass|
             klass.class_exec(middleware) do |middleware|
-              include ConvenientService::Service::Configs::Standard
+              include ConvenientService::Standard::Config
 
               middlewares :result do
                 observe middleware
@@ -80,7 +80,7 @@ RSpec.describe ConvenientService::Service::Plugins::CollectsServicesInException:
         let(:service_class) do
           Class.new.tap do |klass|
             klass.class_exec(exception, middleware) do |exception, middleware|
-              include ConvenientService::Service::Configs::Standard
+              include ConvenientService::Standard::Config
 
               middlewares :result do
                 observe middleware
@@ -189,7 +189,7 @@ RSpec.describe ConvenientService::Service::Plugins::CollectsServicesInException:
           let(:service_class) do
             Class.new.tap do |klass|
               klass.class_exec(exception, middleware, max_services_size) do |exception, middleware, max_services_size|
-                include ConvenientService::Service::Configs::Standard
+                include ConvenientService::Standard::Config
 
                 middlewares :result do
                   replace middleware, middleware.with(max_services_size: max_services_size)

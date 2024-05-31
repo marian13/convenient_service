@@ -39,7 +39,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
 
       let(:service) do
         Class.new do
-          include ConvenientService::Service::Configs::Standard
+          include ConvenientService::Standard::Config
 
           def result
             success
@@ -71,7 +71,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       context "when original result is `success`" do
         let(:service_class) do
           Class.new do
-            include ConvenientService::Service::Configs::Standard
+            include ConvenientService::Standard::Config
 
             def result
               success
@@ -106,7 +106,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         context "when that `success` has `data`" do
           let(:service_class) do
             Class.new do
-              include ConvenientService::Service::Configs::Standard
+              include ConvenientService::Standard::Config
 
               def result
                 success(data: {foo: :bar})
@@ -128,7 +128,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         context "when that `success` has NOT empty `message`" do
           let(:service_class) do
             Class.new do
-              include ConvenientService::Service::Configs::Standard
+              include ConvenientService::Standard::Config
 
               def result
                 success(message: "foo")
@@ -150,7 +150,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         context "when that `success` has `code`" do
           let(:service_class) do
             Class.new do
-              include ConvenientService::Service::Configs::Standard
+              include ConvenientService::Standard::Config
 
               def result
                 success(data: {code: :foo})
@@ -173,7 +173,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       context "when original result is `failure`" do
         let(:service_class) do
           Class.new do
-            include ConvenientService::Service::Configs::Standard
+            include ConvenientService::Standard::Config
 
             def result
               failure
@@ -208,7 +208,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         context "when that `failure` has `data`" do
           let(:service_class) do
             Class.new do
-              include ConvenientService::Service::Configs::Standard
+              include ConvenientService::Standard::Config
 
               def result
                 failure(data: {foo: :bar})
@@ -230,7 +230,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         context "when that `failure` has NOT empty `message`" do
           let(:service_class) do
             Class.new do
-              include ConvenientService::Service::Configs::Standard
+              include ConvenientService::Standard::Config
 
               def result
                 failure(message: "foo")
@@ -252,7 +252,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         context "when that `failure` has `code`" do
           let(:service_class) do
             Class.new do
-              include ConvenientService::Service::Configs::Standard
+              include ConvenientService::Standard::Config
 
               def result
                 failure(code: :foo)
@@ -275,7 +275,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       context "when original result is `error`" do
         let(:service_class) do
           Class.new do
-            include ConvenientService::Service::Configs::Standard
+            include ConvenientService::Standard::Config
 
             def result
               error
@@ -310,7 +310,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         context "when that original `error` has `data`" do
           let(:service_class) do
             Class.new do
-              include ConvenientService::Service::Configs::Standard
+              include ConvenientService::Standard::Config
 
               def result
                 error(data: {foo: :bar})
@@ -326,7 +326,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         context "when that original `error` has NOT empty `message`" do
           let(:service_class) do
             Class.new do
-              include ConvenientService::Service::Configs::Standard
+              include ConvenientService::Standard::Config
 
               def result
                 error(message: "foo")
@@ -342,7 +342,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         context "when that original `error` has `code`" do
           let(:service_class) do
             Class.new do
-              include ConvenientService::Service::Configs::Standard
+              include ConvenientService::Standard::Config
 
               def result
                 error(code: :foo)

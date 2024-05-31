@@ -41,7 +41,7 @@ RSpec.describe ConvenientService::Common::Plugins::CanUtilizeFiniteLoop::Concern
     describe "#finite_loop" do
       let(:service_class) do
         Class.new do
-          include ConvenientService::Service::Configs::Standard
+          include ConvenientService::Standard::Config
 
           concerns do
             use ConvenientService::Common::Plugins::CanUtilizeFiniteLoop::Concern
@@ -91,7 +91,7 @@ RSpec.describe ConvenientService::Common::Plugins::CanUtilizeFiniteLoop::Concern
     describe "#finite_loop_exceeded" do
       let(:service_class) do
         Class.new do
-          include ConvenientService::Service::Configs::Standard
+          include ConvenientService::Standard::Config
 
           concerns do
             use ConvenientService::Common::Plugins::CanUtilizeFiniteLoop::Concern

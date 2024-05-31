@@ -46,7 +46,7 @@ RSpec.describe ConvenientService::Service::Plugins::SetsParentToForeignResult::M
 
       let(:other_service_class) do
         Class.new do
-          include ConvenientService::Service::Configs::Standard
+          include ConvenientService::Standard::Config
 
           def self.name
             "OtherService"
@@ -63,7 +63,7 @@ RSpec.describe ConvenientService::Service::Plugins::SetsParentToForeignResult::M
           let(:service_class) do
             Class.new.tap do |klass|
               klass.class_exec(middleware) do |middleware|
-                include ConvenientService::Service::Configs::Standard
+                include ConvenientService::Standard::Config
 
                 middlewares :result do
                   observe middleware
@@ -101,7 +101,7 @@ RSpec.describe ConvenientService::Service::Plugins::SetsParentToForeignResult::M
             let(:service_class) do
               Class.new.tap do |klass|
                 klass.class_exec(other_service_class, middleware) do |other_service_class, middleware|
-                  include ConvenientService::Service::Configs::Standard
+                  include ConvenientService::Standard::Config
 
                   middlewares :result do
                     observe middleware
@@ -136,7 +136,7 @@ RSpec.describe ConvenientService::Service::Plugins::SetsParentToForeignResult::M
             let(:service_class) do
               Class.new.tap do |klass|
                 klass.class_exec(middleware) do |middleware|
-                  include ConvenientService::Service::Configs::Standard
+                  include ConvenientService::Standard::Config
 
                   middlewares :result do
                     observe middleware
@@ -178,7 +178,7 @@ RSpec.describe ConvenientService::Service::Plugins::SetsParentToForeignResult::M
           let(:service_class) do
             Class.new.tap do |klass|
               klass.class_exec(other_service_class, middleware) do |other_service_class, middleware|
-                include ConvenientService::Service::Configs::Standard
+                include ConvenientService::Standard::Config
 
                 middlewares :result do
                   observe middleware
@@ -210,7 +210,7 @@ RSpec.describe ConvenientService::Service::Plugins::SetsParentToForeignResult::M
           context "when result is from nested step" do
             let(:other_service_class) do
               Class.new do
-                include ConvenientService::Service::Configs::Standard
+                include ConvenientService::Standard::Config
 
                 step :foo
 
@@ -235,7 +235,7 @@ RSpec.describe ConvenientService::Service::Plugins::SetsParentToForeignResult::M
             let(:service_class) do
               Class.new.tap do |klass|
                 klass.class_exec(other_service_class, middleware) do |other_service_class, middleware|
-                  include ConvenientService::Service::Configs::Standard
+                  include ConvenientService::Standard::Config
 
                   middlewares :result do
                     observe middleware

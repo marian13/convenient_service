@@ -47,7 +47,7 @@ RSpec.describe ConvenientService::Common::Plugins::AssignsAttributesInConstructo
       let(:service_class) do
         Class.new.tap do |service_class|
           service_class.class_exec(concern, middleware) do |concern, middleware|
-            include ConvenientService::Service::Configs::Standard
+            include ConvenientService::Standard::Config
 
             concerns do
               use concern

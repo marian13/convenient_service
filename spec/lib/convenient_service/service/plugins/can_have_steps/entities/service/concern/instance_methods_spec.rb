@@ -10,7 +10,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Serv
 
   let(:klass) do
     Class.new do
-      include ConvenientService::Service::Configs::Standard
+      include ConvenientService::Standard::Config
     end
   end
 
@@ -28,7 +28,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Serv
     describe "#result" do
       let(:klass) do
         Class.new do
-          include ConvenientService::Service::Configs::Standard
+          include ConvenientService::Standard::Config
 
           def result
             success

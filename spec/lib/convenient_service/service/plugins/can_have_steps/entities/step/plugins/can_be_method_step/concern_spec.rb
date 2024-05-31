@@ -36,7 +36,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
   example_group "instance methods" do
     let(:service_class) do
       Class.new do
-        include ConvenientService::Service::Configs::Standard
+        include ConvenientService::Standard::Config
 
         step :foo
 
@@ -81,7 +81,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       context "when `step` does NOT have method" do
         let(:service_class) do
           Class.new do
-            include ConvenientService::Service::Configs::Standard
+            include ConvenientService::Standard::Config
 
             step :result
 
@@ -104,7 +104,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         context "when that method value is NOT `:result`" do
           let(:service_class) do
             Class.new do
-              include ConvenientService::Service::Configs::Standard
+              include ConvenientService::Standard::Config
 
               step :foo
 
@@ -122,7 +122,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         context "when that method value is `:result`" do
           let(:service_class) do
             Class.new do
-              include ConvenientService::Service::Configs::Standard
+              include ConvenientService::Standard::Config
 
               step :result
 

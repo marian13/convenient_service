@@ -7,7 +7,7 @@ require "convenient_service"
 RSpec.describe ConvenientService::Common::Plugins::HasAroundCallbacks::Concern, type: :standard do
   let(:service_class) do
     Class.new do
-      include ConvenientService::Service::Configs::Standard
+      include ConvenientService::Standard::Config
     end
   end
 

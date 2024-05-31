@@ -36,7 +36,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
 
       let(:service) do
         Class.new do
-          include ConvenientService::Service::Configs::Standard
+          include ConvenientService::Standard::Config
 
           def result
             success
@@ -53,7 +53,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       context "when result is created by `stub_service`" do
         let(:service) do
           Class.new do
-            include ConvenientService::Service::Configs::Standard
+            include ConvenientService::Standard::Config
 
             middlewares :result do
               use ConvenientService::Plugins::Service::RescuesResultUnhandledExceptions::Middleware

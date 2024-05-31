@@ -14,7 +14,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::Classes::WrapMethod, type: :st
 
       let(:service_class) do
         Class.new do
-          include ConvenientService::Service::Configs::Standard
+          include ConvenientService::Standard::Config
 
           middlewares :result do
             observe ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Middleware

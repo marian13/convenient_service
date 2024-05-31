@@ -37,7 +37,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       context "when result has NO parent" do
         let(:service) do
           Class.new do
-            include ConvenientService::Service::Configs::Standard
+            include ConvenientService::Standard::Config
 
             def result
               success
@@ -54,7 +54,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         let(:service) do
           Class.new.tap do |klass|
             klass.class_exec(first_step) do |first_step|
-              include ConvenientService::Service::Configs::Standard
+              include ConvenientService::Standard::Config
 
               step first_step
 
@@ -67,7 +67,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
 
         let(:first_step) do
           Class.new do
-            include ConvenientService::Service::Configs::Standard
+            include ConvenientService::Standard::Config
 
             def result
               error
@@ -91,7 +91,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       context "when result has NO parent" do
         let(:service) do
           Class.new do
-            include ConvenientService::Service::Configs::Standard
+            include ConvenientService::Standard::Config
 
             def result
               success
@@ -112,7 +112,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         let(:service) do
           Class.new.tap do |klass|
             klass.class_exec(first_step) do |first_step|
-              include ConvenientService::Service::Configs::Standard
+              include ConvenientService::Standard::Config
 
               step first_step
 
@@ -125,7 +125,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
 
         let(:first_step) do
           Class.new do
-            include ConvenientService::Service::Configs::Standard
+            include ConvenientService::Standard::Config
 
             def result
               error
@@ -148,7 +148,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         let(:service) do
           Class.new.tap do |klass|
             klass.class_exec(first_step) do |first_step|
-              include ConvenientService::Service::Configs::Standard
+              include ConvenientService::Standard::Config
 
               step first_step
 
@@ -162,7 +162,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         let(:first_step) do
           Class.new.tap do |klass|
             klass.class_exec(second_step) do |second_step|
-              include ConvenientService::Service::Configs::Standard
+              include ConvenientService::Standard::Config
 
               step second_step
 
@@ -175,7 +175,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
 
         let(:second_step) do
           Class.new do
-            include ConvenientService::Service::Configs::Standard
+            include ConvenientService::Standard::Config
 
             def result
               error
@@ -198,7 +198,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         let(:service) do
           Class.new.tap do |klass|
             klass.class_exec(first_step) do |first_step|
-              include ConvenientService::Service::Configs::Standard
+              include ConvenientService::Standard::Config
 
               step first_step
 
@@ -212,7 +212,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         let(:first_step) do
           Class.new.tap do |klass|
             klass.class_exec(second_step) do |second_step|
-              include ConvenientService::Service::Configs::Standard
+              include ConvenientService::Standard::Config
 
               step second_step
 
@@ -225,7 +225,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
 
         let(:second_step) do
           Class.new do
-            include ConvenientService::Service::Configs::Standard
+            include ConvenientService::Standard::Config
 
             def result
               error
@@ -264,7 +264,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         let(:service) do
           Class.new.tap do |klass|
             klass.class_exec(first_step) do |first_step|
-              include ConvenientService::Service::Configs::Standard
+              include ConvenientService::Standard::Config
 
               step first_step
 
@@ -278,7 +278,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         let(:first_step) do
           Class.new.tap do |klass|
             klass.class_exec(second_step) do |second_step|
-              include ConvenientService::Service::Configs::Standard
+              include ConvenientService::Standard::Config
 
               step second_step
 
@@ -291,7 +291,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
 
         let(:second_step) do
           Class.new do
-            include ConvenientService::Service::Configs::Standard
+            include ConvenientService::Standard::Config
 
             def result
               error
@@ -327,7 +327,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       let(:service) do
         Class.new.tap do |klass|
           klass.class_exec(first_step) do |first_step|
-            include ConvenientService::Service::Configs::Standard
+            include ConvenientService::Standard::Config
 
             step first_step
 
@@ -341,7 +341,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       let(:first_step) do
         Class.new.tap do |klass|
           klass.class_exec(second_step) do |second_step|
-            include ConvenientService::Service::Configs::Standard
+            include ConvenientService::Standard::Config
 
             step second_step
 
@@ -354,7 +354,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
 
       let(:second_step) do
         Class.new do
-          include ConvenientService::Service::Configs::Standard
+          include ConvenientService::Standard::Config
 
           def result
             error

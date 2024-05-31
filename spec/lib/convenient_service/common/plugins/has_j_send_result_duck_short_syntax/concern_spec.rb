@@ -34,7 +34,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasJSendResultDuckShortSyntax
 
       let(:service) do
         Class.new do
-          include ConvenientService::Service::Configs::Standard
+          include ConvenientService::Standard::Config
 
           def result
             success(data: {foo: :bar})
@@ -111,7 +111,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasJSendResultDuckShortSyntax
 
       let(:service) do
         Class.new do
-          include ConvenientService::Service::Configs::Standard
+          include ConvenientService::Standard::Config
 
           step :result
 

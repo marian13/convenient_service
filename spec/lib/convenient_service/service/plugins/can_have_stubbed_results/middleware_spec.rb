@@ -50,7 +50,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStubbedResults::Middl
         let(:service_class) do
           Class.new.tap do |klass|
             klass.class_exec(middleware, scope) do |middleware, scope|
-              include ConvenientService::Service::Configs::Standard
+              include ConvenientService::Standard::Config
 
               middlewares :result, scope: scope do
                 observe middleware

@@ -45,7 +45,7 @@ RSpec.describe ConvenientService, type: :standard do
     describe ".service_class?" do
       let(:service_class) do
         Class.new do
-          include ConvenientService::Service::Configs::Standard
+          include ConvenientService::Standard::Config
 
           def result
             success
@@ -64,7 +64,7 @@ RSpec.describe ConvenientService, type: :standard do
     describe ".service?" do
       let(:service_class) do
         Class.new do
-          include ConvenientService::Service::Configs::Standard
+          include ConvenientService::Standard::Config
 
           def result
             success
