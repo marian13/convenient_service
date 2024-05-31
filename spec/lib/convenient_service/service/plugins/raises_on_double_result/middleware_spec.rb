@@ -46,7 +46,7 @@ RSpec.describe ConvenientService::Service::Plugins::RaisesOnDoubleResult::Middle
       let(:service_class) do
         Class.new.tap do |klass|
           klass.class_exec(middleware) do |middleware|
-            include ConvenientService::Service::Configs::Standard
+            include ConvenientService::Standard::Config
 
             middlewares :result do
               use_and_observe middleware

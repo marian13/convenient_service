@@ -12,7 +12,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveFallbacks::Concern, t
 
   let(:service_class) do
     Class.new do
-      include ConvenientService::Service::Configs::Standard
+      include ConvenientService::Standard::Config
     end
   end
 
@@ -113,7 +113,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveFallbacks::Concern, t
     describe ".fallback_failure_result" do
       let(:service_class) do
         Class.new do
-          include ConvenientService::Service::Configs::Standard
+          include ConvenientService::Standard::Config
 
           def fallback_failure_result
             success
@@ -139,7 +139,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveFallbacks::Concern, t
     describe ".fallback_error_result" do
       let(:service_class) do
         Class.new do
-          include ConvenientService::Service::Configs::Standard
+          include ConvenientService::Standard::Config
 
           def fallback_error_result
             success
@@ -165,7 +165,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveFallbacks::Concern, t
     describe ".fallback_result" do
       let(:service_class) do
         Class.new do
-          include ConvenientService::Service::Configs::Standard
+          include ConvenientService::Standard::Config
 
           def fallback_result
             success

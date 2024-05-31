@@ -35,7 +35,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasNegatedJSendResult::Conce
     describe "#negated_result" do
       let(:service_class) do
         Class.new do
-          include ConvenientService::Service::Configs::Standard
+          include ConvenientService::Standard::Config
 
           def result
             success

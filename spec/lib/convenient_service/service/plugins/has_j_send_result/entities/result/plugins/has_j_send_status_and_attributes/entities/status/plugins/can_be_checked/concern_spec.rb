@@ -33,7 +33,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
   example_group "instance methods" do
     let(:service) do
       Class.new do
-        include ConvenientService::Service::Configs::Standard
+        include ConvenientService::Standard::Config
 
         def result
           success

@@ -50,7 +50,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveFallbacks::Middleware
         let(:service_class) do
           Class.new.tap do |klass|
             klass.class_exec(status, method_name, middleware) do |status, method_name, middleware|
-              include ConvenientService::Service::Configs::Standard
+              include ConvenientService::Standard::Config
 
               middlewares method_name do
                 observe middleware.with(status: status)
@@ -71,7 +71,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveFallbacks::Middleware
           let(:service_class) do
             Class.new.tap do |klass|
               klass.class_exec(status, method_name, middleware) do |status, method_name, middleware|
-                include ConvenientService::Service::Configs::Standard
+                include ConvenientService::Standard::Config
 
                 middlewares method_name do
                   observe middleware.with(status: status)
@@ -107,7 +107,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveFallbacks::Middleware
           let(:service_class) do
             Class.new.tap do |klass|
               klass.class_exec(status, method_name, middleware) do |status, method_name, middleware|
-                include ConvenientService::Service::Configs::Standard
+                include ConvenientService::Standard::Config
 
                 middlewares method_name do
                   observe middleware.with(status: status)

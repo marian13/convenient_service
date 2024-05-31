@@ -12,7 +12,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasMermaidFlowchart::Entitie
 
   let(:service) do
     Class.new do
-      include ConvenientService::Service::Configs::Standard
+      include ConvenientService::Standard::Config
 
       def result
         success
@@ -175,7 +175,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasMermaidFlowchart::Entitie
 
           let(:other_service) do
             Class.new do
-              include ConvenientService::Service::Configs::Standard
+              include ConvenientService::Standard::Config
 
               def result
                 success

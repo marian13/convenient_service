@@ -50,7 +50,7 @@ RSpec.describe ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue
       let(:service_class) do
         Class.new.tap do |klass|
           klass.class_exec(middleware) do |middleware|
-            include ConvenientService::Service::Configs::Standard
+            include ConvenientService::Standard::Config
 
             middlewares :result do
               observe middleware
@@ -77,7 +77,7 @@ RSpec.describe ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue
         let(:service_class) do
           Class.new.tap do |klass|
             klass.class_exec(middleware) do |middleware|
-              include ConvenientService::Service::Configs::Standard
+              include ConvenientService::Standard::Config
 
               middlewares :result do
                 observe middleware
@@ -115,7 +115,7 @@ RSpec.describe ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue
         let(:service_class) do
           Class.new.tap do |klass|
             klass.class_exec(middleware) do |middleware|
-              include ConvenientService::Service::Configs::Standard
+              include ConvenientService::Standard::Config
 
               middlewares :result do
                 observe middleware

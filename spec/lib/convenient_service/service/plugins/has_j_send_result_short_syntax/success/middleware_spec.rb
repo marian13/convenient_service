@@ -46,7 +46,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultShortSyntax::S
       let(:service_class) do
         Class.new.tap do |klass|
           klass.class_exec(middleware) do |middleware|
-            include ConvenientService::Service::Configs::Standard
+            include ConvenientService::Standard::Config
 
             middlewares :success do
               observe middleware

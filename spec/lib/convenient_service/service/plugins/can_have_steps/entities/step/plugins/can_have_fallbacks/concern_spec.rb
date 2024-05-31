@@ -10,7 +10,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
   let(:step_service_class) do
     Class.new do
-      include ConvenientService::Service::Configs::Standard
+      include ConvenientService::Standard::Config
 
       ##
       # @internal
@@ -41,7 +41,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
   let(:organizer_service_class) do
     Class.new.tap do |klass|
       klass.class_exec(step_service_class) do |step_service_class|
-        include ConvenientService::Service::Configs::Standard
+        include ConvenientService::Standard::Config
 
         step step_service_class, in: :foo
 
@@ -105,7 +105,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         let(:organizer_service_class) do
           Class.new.tap do |klass|
             klass.class_exec(step_service_class) do |step_service_class|
-              include ConvenientService::Service::Configs::Standard
+              include ConvenientService::Standard::Config
 
               step step_service_class
             end
@@ -121,7 +121,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         let(:organizer_service_class) do
           Class.new.tap do |klass|
             klass.class_exec(step_service_class) do |step_service_class|
-              include ConvenientService::Service::Configs::Standard
+              include ConvenientService::Standard::Config
 
               step step_service_class, fallback: nil
             end
@@ -138,7 +138,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           let(:organizer_service_class) do
             Class.new.tap do |klass|
               klass.class_exec(step_service_class) do |step_service_class|
-                include ConvenientService::Service::Configs::Standard
+                include ConvenientService::Standard::Config
 
                 step step_service_class, fallback: false
               end
@@ -154,7 +154,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           let(:organizer_service_class) do
             Class.new.tap do |klass|
               klass.class_exec(step_service_class) do |step_service_class|
-                include ConvenientService::Service::Configs::Standard
+                include ConvenientService::Standard::Config
 
                 step step_service_class, fallback: true
               end
@@ -172,7 +172,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           let(:organizer_service_class) do
             Class.new.tap do |klass|
               klass.class_exec(step_service_class) do |step_service_class|
-                include ConvenientService::Service::Configs::Standard
+                include ConvenientService::Standard::Config
 
                 step step_service_class, fallback: :error
               end
@@ -188,7 +188,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           let(:organizer_service_class) do
             Class.new.tap do |klass|
               klass.class_exec(step_service_class) do |step_service_class|
-                include ConvenientService::Service::Configs::Standard
+                include ConvenientService::Standard::Config
 
                 step step_service_class, fallback: :failure
               end
@@ -206,7 +206,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           let(:organizer_service_class) do
             Class.new.tap do |klass|
               klass.class_exec(step_service_class) do |step_service_class|
-                include ConvenientService::Service::Configs::Standard
+                include ConvenientService::Standard::Config
 
                 step step_service_class, fallback: []
               end
@@ -222,7 +222,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           let(:organizer_service_class) do
             Class.new.tap do |klass|
               klass.class_exec(step_service_class) do |step_service_class|
-                include ConvenientService::Service::Configs::Standard
+                include ConvenientService::Standard::Config
 
                 step step_service_class, fallback: [:error]
               end
@@ -238,7 +238,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           let(:organizer_service_class) do
             Class.new.tap do |klass|
               klass.class_exec(step_service_class) do |step_service_class|
-                include ConvenientService::Service::Configs::Standard
+                include ConvenientService::Standard::Config
 
                 step step_service_class, fallback: [:failure]
               end
@@ -273,7 +273,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         let(:organizer_service_class) do
           Class.new.tap do |klass|
             klass.class_exec(step_service_class) do |step_service_class|
-              include ConvenientService::Service::Configs::Standard
+              include ConvenientService::Standard::Config
 
               step step_service_class
             end
@@ -289,7 +289,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         let(:organizer_service_class) do
           Class.new.tap do |klass|
             klass.class_exec(step_service_class) do |step_service_class|
-              include ConvenientService::Service::Configs::Standard
+              include ConvenientService::Standard::Config
 
               step step_service_class, fallback: nil
             end
@@ -306,7 +306,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           let(:organizer_service_class) do
             Class.new.tap do |klass|
               klass.class_exec(step_service_class) do |step_service_class|
-                include ConvenientService::Service::Configs::Standard
+                include ConvenientService::Standard::Config
 
                 step step_service_class, fallback: false
               end
@@ -322,7 +322,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           let(:organizer_service_class) do
             Class.new.tap do |klass|
               klass.class_exec(step_service_class) do |step_service_class|
-                include ConvenientService::Service::Configs::Standard
+                include ConvenientService::Standard::Config
 
                 step step_service_class, fallback: true
               end
@@ -340,7 +340,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           let(:organizer_service_class) do
             Class.new.tap do |klass|
               klass.class_exec(step_service_class) do |step_service_class|
-                include ConvenientService::Service::Configs::Standard
+                include ConvenientService::Standard::Config
 
                 step step_service_class, fallback: :failure
               end
@@ -356,7 +356,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           let(:organizer_service_class) do
             Class.new.tap do |klass|
               klass.class_exec(step_service_class) do |step_service_class|
-                include ConvenientService::Service::Configs::Standard
+                include ConvenientService::Standard::Config
 
                 step step_service_class, fallback: :error
               end
@@ -374,7 +374,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           let(:organizer_service_class) do
             Class.new.tap do |klass|
               klass.class_exec(step_service_class) do |step_service_class|
-                include ConvenientService::Service::Configs::Standard
+                include ConvenientService::Standard::Config
 
                 step step_service_class, fallback: []
               end
@@ -390,7 +390,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           let(:organizer_service_class) do
             Class.new.tap do |klass|
               klass.class_exec(step_service_class) do |step_service_class|
-                include ConvenientService::Service::Configs::Standard
+                include ConvenientService::Standard::Config
 
                 step step_service_class, fallback: [:failure]
               end
@@ -406,7 +406,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           let(:organizer_service_class) do
             Class.new.tap do |klass|
               klass.class_exec(step_service_class) do |step_service_class|
-                include ConvenientService::Service::Configs::Standard
+                include ConvenientService::Standard::Config
 
                 step step_service_class, fallback: [:error]
               end
@@ -431,7 +431,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         let(:organizer_service_class) do
           Class.new.tap do |klass|
             klass.class_exec(step_service_class) do |step_service_class|
-              include ConvenientService::Service::Configs::Standard
+              include ConvenientService::Standard::Config
 
               step step_service_class
             end
@@ -447,7 +447,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         let(:organizer_service_class) do
           Class.new.tap do |klass|
             klass.class_exec(step_service_class) do |step_service_class|
-              include ConvenientService::Service::Configs::Standard
+              include ConvenientService::Standard::Config
 
               step step_service_class, fallback: nil
             end
@@ -463,7 +463,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         let(:organizer_service_class) do
           Class.new.tap do |klass|
             klass.class_exec(step_service_class) do |step_service_class|
-              include ConvenientService::Service::Configs::Standard
+              include ConvenientService::Standard::Config
 
               step step_service_class, fallback: true
             end
@@ -481,7 +481,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         let(:organizer_service_class) do
           Class.new.tap do |klass|
             klass.class_exec(step_service_class) do |step_service_class|
-              include ConvenientService::Service::Configs::Standard
+              include ConvenientService::Standard::Config
 
               step step_service_class, fallback: []
             end
@@ -497,7 +497,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         let(:organizer_service_class) do
           Class.new.tap do |klass|
             klass.class_exec(step_service_class) do |step_service_class|
-              include ConvenientService::Service::Configs::Standard
+              include ConvenientService::Standard::Config
 
               step step_service_class, fallback: true
             end
@@ -513,7 +513,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         let(:organizer_service_class) do
           Class.new.tap do |klass|
             klass.class_exec(step_service_class) do |step_service_class|
-              include ConvenientService::Service::Configs::Standard
+              include ConvenientService::Standard::Config
 
               step step_service_class, fallback: [:failure]
             end
@@ -529,7 +529,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         let(:organizer_service_class) do
           Class.new.tap do |klass|
             klass.class_exec(step_service_class) do |step_service_class|
-              include ConvenientService::Service::Configs::Standard
+              include ConvenientService::Standard::Config
 
               step step_service_class, fallback: [:error]
             end

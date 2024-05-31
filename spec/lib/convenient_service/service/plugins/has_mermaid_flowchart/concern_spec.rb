@@ -35,7 +35,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasMermaidFlowchart::Concern
     describe ".mermaid_flowchart" do
       let(:service) do
         Class.new do
-          include ConvenientService::Service::Configs::Standard
+          include ConvenientService::Standard::Config
 
           def result
             success

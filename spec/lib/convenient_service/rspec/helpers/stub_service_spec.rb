@@ -21,7 +21,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::StubService, type: :standard d
     describe "#stub_service" do
       let(:service_class) do
         Class.new do
-          include ConvenientService::Service::Configs::Standard
+          include ConvenientService::Standard::Config
         end
       end
 

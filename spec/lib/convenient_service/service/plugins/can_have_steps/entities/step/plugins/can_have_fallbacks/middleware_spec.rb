@@ -50,7 +50,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       let(:container) do
         Class.new.tap do |klass|
           klass.class_exec(first_step, middleware) do |first_step, middleware|
-            include ConvenientService::Service::Configs::Standard
+            include ConvenientService::Standard::Config
 
             self::Step.class_exec(middleware) do |middleware|
               middlewares :result do
@@ -65,7 +65,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
       let(:first_step) do
         Class.new do
-          include ConvenientService::Service::Configs::Standard
+          include ConvenientService::Standard::Config
 
           def result
             success(from: :result)
@@ -88,7 +88,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           let(:container) do
             Class.new.tap do |klass|
               klass.class_exec(first_step, middleware) do |first_step, middleware|
-                include ConvenientService::Service::Configs::Standard
+                include ConvenientService::Standard::Config
 
                 self::Step.class_exec(middleware) do |middleware|
                   middlewares :result do
@@ -110,7 +110,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           let(:container) do
             Class.new.tap do |klass|
               klass.class_exec(first_step, middleware) do |first_step, middleware|
-                include ConvenientService::Service::Configs::Standard
+                include ConvenientService::Standard::Config
 
                 self::Step.class_exec(middleware) do |middleware|
                   middlewares :result do
@@ -140,7 +140,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
             let(:container) do
               Class.new.tap do |klass|
                 klass.class_exec(first_step, middleware) do |first_step, middleware|
-                  include ConvenientService::Service::Configs::Standard
+                  include ConvenientService::Standard::Config
 
                   self::Step.class_exec(middleware) do |middleware|
                     middlewares :result do
@@ -159,7 +159,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
               context "when step service does NOT override neither `fallback_failure_result` nor `fallback_result` methods" do
                 let(:first_step) do
                   Class.new do
-                    include ConvenientService::Service::Configs::Standard
+                    include ConvenientService::Standard::Config
 
                     def result
                       failure("from result")
@@ -190,7 +190,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
               context "when step service overrides `fallback_failure_result` method" do
                 let(:first_step) do
                   Class.new do
-                    include ConvenientService::Service::Configs::Standard
+                    include ConvenientService::Standard::Config
 
                     def result
                       failure("from result")
@@ -214,7 +214,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
               context "when step service overrides `fallback_result` method" do
                 let(:first_step) do
                   Class.new do
-                    include ConvenientService::Service::Configs::Standard
+                    include ConvenientService::Standard::Config
 
                     def result
                       failure("from result")
@@ -238,7 +238,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
               context "when step service overrides both `fallback_failure_result` and `fallback_result` methods" do
                 let(:first_step) do
                   Class.new do
-                    include ConvenientService::Service::Configs::Standard
+                    include ConvenientService::Standard::Config
 
                     def result
                       failure("from result")
@@ -267,7 +267,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
                 let(:container) do
                   Class.new.tap do |klass|
                     klass.class_exec(first_step, middleware) do |first_step, middleware|
-                      include ConvenientService::Service::Configs::Standard
+                      include ConvenientService::Standard::Config
 
                       self::Step.class_exec(middleware) do |middleware|
                         middlewares :result do
@@ -305,7 +305,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
             context "when result has `:error` status" do
               let(:first_step) do
                 Class.new do
-                  include ConvenientService::Service::Configs::Standard
+                  include ConvenientService::Standard::Config
 
                   def result
                     error("from result")
@@ -329,7 +329,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
             context "when result has `:success` status" do
               let(:first_step) do
                 Class.new do
-                  include ConvenientService::Service::Configs::Standard
+                  include ConvenientService::Standard::Config
 
                   def result
                     success(from: :result)
@@ -357,7 +357,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
             let(:container) do
               Class.new.tap do |klass|
                 klass.class_exec(first_step, middleware) do |first_step, middleware|
-                  include ConvenientService::Service::Configs::Standard
+                  include ConvenientService::Standard::Config
 
                   self::Step.class_exec(middleware) do |middleware|
                     middlewares :result do
@@ -374,7 +374,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
               context "when step service does NOT override neither `fallback_failure_result` nor `fallback_result` methods" do
                 let(:first_step) do
                   Class.new do
-                    include ConvenientService::Service::Configs::Standard
+                    include ConvenientService::Standard::Config
 
                     def result
                       failure("from result")
@@ -405,7 +405,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
               context "when step service overrides `fallback_failure_result` method" do
                 let(:first_step) do
                   Class.new do
-                    include ConvenientService::Service::Configs::Standard
+                    include ConvenientService::Standard::Config
 
                     def result
                       failure("from result")
@@ -429,7 +429,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
               context "when step service overrides `fallback_result` method" do
                 let(:first_step) do
                   Class.new do
-                    include ConvenientService::Service::Configs::Standard
+                    include ConvenientService::Standard::Config
 
                     def result
                       failure("from result")
@@ -453,7 +453,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
               context "when step service overrides both `fallback_failure_result` and `fallback_result` methods" do
                 let(:first_step) do
                   Class.new do
-                    include ConvenientService::Service::Configs::Standard
+                    include ConvenientService::Standard::Config
 
                     def result
                       failure("from result")
@@ -482,7 +482,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
                 let(:container) do
                   Class.new.tap do |klass|
                     klass.class_exec(first_step, middleware) do |first_step, middleware|
-                      include ConvenientService::Service::Configs::Standard
+                      include ConvenientService::Standard::Config
 
                       self::Step.class_exec(middleware) do |middleware|
                         middlewares :result do
@@ -518,7 +518,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
             context "when result has `:error` status" do
               let(:first_step) do
                 Class.new do
-                  include ConvenientService::Service::Configs::Standard
+                  include ConvenientService::Standard::Config
 
                   def result
                     error("from result")
@@ -542,7 +542,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
             context "when result has `:success` status" do
               let(:first_step) do
                 Class.new do
-                  include ConvenientService::Service::Configs::Standard
+                  include ConvenientService::Standard::Config
 
                   def result
                     success(from: :result)
@@ -570,7 +570,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
             let(:container) do
               Class.new.tap do |klass|
                 klass.class_exec(first_step, middleware) do |first_step, middleware|
-                  include ConvenientService::Service::Configs::Standard
+                  include ConvenientService::Standard::Config
 
                   self::Step.class_exec(middleware) do |middleware|
                     middlewares :result do
@@ -588,7 +588,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
             context "when result has `:failure` status" do
               let(:first_step) do
                 Class.new do
-                  include ConvenientService::Service::Configs::Standard
+                  include ConvenientService::Standard::Config
 
                   def result
                     failure("from result")
@@ -613,7 +613,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
               context "when step service does NOT override neither `fallback_error_result` nor `fallback_result` methods" do
                 let(:first_step) do
                   Class.new do
-                    include ConvenientService::Service::Configs::Standard
+                    include ConvenientService::Standard::Config
 
                     def result
                       error("from result")
@@ -644,7 +644,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
               context "when step service overrides `fallback_error_result` method" do
                 let(:first_step) do
                   Class.new do
-                    include ConvenientService::Service::Configs::Standard
+                    include ConvenientService::Standard::Config
 
                     def result
                       error("from result")
@@ -668,7 +668,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
               context "when step service overrides `fallback_result` method" do
                 let(:first_step) do
                   Class.new do
-                    include ConvenientService::Service::Configs::Standard
+                    include ConvenientService::Standard::Config
 
                     def result
                       error("from result")
@@ -692,7 +692,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
               context "when step service overrides both `fallback_error_result` and `fallback_result` methods" do
                 let(:first_step) do
                   Class.new do
-                    include ConvenientService::Service::Configs::Standard
+                    include ConvenientService::Standard::Config
 
                     def result
                       error("from result")
@@ -721,7 +721,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
                 let(:container) do
                   Class.new.tap do |klass|
                     klass.class_exec(first_step, middleware) do |first_step, middleware|
-                      include ConvenientService::Service::Configs::Standard
+                      include ConvenientService::Standard::Config
 
                       self::Step.class_exec(middleware) do |middleware|
                         middlewares :result do
@@ -759,7 +759,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
             context "when result has `:success` status" do
               let(:first_step) do
                 Class.new do
-                  include ConvenientService::Service::Configs::Standard
+                  include ConvenientService::Standard::Config
 
                   def result
                     success(from: :result)
@@ -788,7 +788,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           let(:container) do
             Class.new.tap do |klass|
               klass.class_exec(first_step, middleware) do |first_step, middleware|
-                include ConvenientService::Service::Configs::Standard
+                include ConvenientService::Standard::Config
 
                 self::Step.class_exec(middleware) do |middleware|
                   middlewares :result do
@@ -805,7 +805,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
             context "when step service does NOT override neither `fallback_failure_result` nor `fallback_result` methods" do
               let(:first_step) do
                 Class.new do
-                  include ConvenientService::Service::Configs::Standard
+                  include ConvenientService::Standard::Config
 
                   def result
                     failure("from result")
@@ -836,7 +836,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
             context "when step service overrides `fallback_failure_result` method" do
               let(:first_step) do
                 Class.new do
-                  include ConvenientService::Service::Configs::Standard
+                  include ConvenientService::Standard::Config
 
                   def result
                     failure("from result")
@@ -860,7 +860,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
             context "when step service overrides `fallback_result` method" do
               let(:first_step) do
                 Class.new do
-                  include ConvenientService::Service::Configs::Standard
+                  include ConvenientService::Standard::Config
 
                   def result
                     failure("from result")
@@ -884,7 +884,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
             context "when step service overrides both `fallback_failure_result` and `fallback_result` methods" do
               let(:first_step) do
                 Class.new do
-                  include ConvenientService::Service::Configs::Standard
+                  include ConvenientService::Standard::Config
 
                   def result
                     failure("from result")
@@ -913,7 +913,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
               let(:container) do
                 Class.new.tap do |klass|
                   klass.class_exec(first_step, middleware) do |first_step, middleware|
-                    include ConvenientService::Service::Configs::Standard
+                    include ConvenientService::Standard::Config
 
                     self::Step.class_exec(middleware) do |middleware|
                       middlewares :result do
@@ -949,7 +949,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           context "when result has `:error` status" do
             let(:first_step) do
               Class.new do
-                include ConvenientService::Service::Configs::Standard
+                include ConvenientService::Standard::Config
 
                 def result
                   error("from result")
@@ -973,7 +973,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           context "when result has `:success` status" do
             let(:first_step) do
               Class.new do
-                include ConvenientService::Service::Configs::Standard
+                include ConvenientService::Standard::Config
 
                 def result
                   success(from: :result)
@@ -999,7 +999,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           let(:container) do
             Class.new.tap do |klass|
               klass.class_exec(first_step, middleware) do |first_step, middleware|
-                include ConvenientService::Service::Configs::Standard
+                include ConvenientService::Standard::Config
 
                 self::Step.class_exec(middleware) do |middleware|
                   middlewares :result do
@@ -1015,7 +1015,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           context "when result has `:failure` status" do
             let(:first_step) do
               Class.new do
-                include ConvenientService::Service::Configs::Standard
+                include ConvenientService::Standard::Config
 
                 def result
                   failure("from result")
@@ -1040,7 +1040,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
             context "when step service does NOT override neither `fallback_error_result` nor `fallback_result` methods" do
               let(:first_step) do
                 Class.new do
-                  include ConvenientService::Service::Configs::Standard
+                  include ConvenientService::Standard::Config
 
                   def result
                     error("from result")
@@ -1071,7 +1071,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
             context "when step service overrides `fallback_error_result` method" do
               let(:first_step) do
                 Class.new do
-                  include ConvenientService::Service::Configs::Standard
+                  include ConvenientService::Standard::Config
 
                   def result
                     error("from result")
@@ -1095,7 +1095,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
             context "when step service overrides `fallback_result` method" do
               let(:first_step) do
                 Class.new do
-                  include ConvenientService::Service::Configs::Standard
+                  include ConvenientService::Standard::Config
 
                   def result
                     error("from result")
@@ -1119,7 +1119,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
             context "when step service overrides both `fallback_error_result` and `fallback_result` methods" do
               let(:first_step) do
                 Class.new do
-                  include ConvenientService::Service::Configs::Standard
+                  include ConvenientService::Standard::Config
 
                   def result
                     error("from result")
@@ -1148,7 +1148,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
               let(:container) do
                 Class.new.tap do |klass|
                   klass.class_exec(first_step, middleware) do |first_step, middleware|
-                    include ConvenientService::Service::Configs::Standard
+                    include ConvenientService::Standard::Config
 
                     self::Step.class_exec(middleware) do |middleware|
                       middlewares :result do
@@ -1184,7 +1184,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           context "when result has `:success` status" do
             let(:first_step) do
               Class.new do
-                include ConvenientService::Service::Configs::Standard
+                include ConvenientService::Standard::Config
 
                 def result
                   success(from: :result)

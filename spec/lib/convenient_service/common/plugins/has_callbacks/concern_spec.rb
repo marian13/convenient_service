@@ -35,7 +35,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Concern, type: 
   example_group "class methods" do
     let(:service_class) do
       Class.new do
-        include ConvenientService::Service::Configs::Standard
+        include ConvenientService::Standard::Config
       end
     end
 

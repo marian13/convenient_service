@@ -30,7 +30,7 @@ RSpec.describe ConvenientService::Service::Plugins::CollectsServicesInException:
         let(:service_class) do
           Class.new.tap do |klass|
             klass.class_exec(exception) do |exception|
-              include ConvenientService::Service::Configs::Standard
+              include ConvenientService::Standard::Config
 
               def initialize
                 raise exception
@@ -55,7 +55,7 @@ RSpec.describe ConvenientService::Service::Plugins::CollectsServicesInException:
           let(:service_class) do
             Class.new.tap do |klass|
               klass.class_exec(exception) do |exception|
-                include ConvenientService::Service::Configs::Standard
+                include ConvenientService::Standard::Config
 
                 def result
                   raise exception
@@ -76,7 +76,7 @@ RSpec.describe ConvenientService::Service::Plugins::CollectsServicesInException:
             let(:service_class) do
               Class.new.tap do |klass|
                 klass.class_exec(exception) do |exception|
-                  include ConvenientService::Service::Configs::Standard
+                  include ConvenientService::Standard::Config
 
                   step :foo
 
@@ -105,7 +105,7 @@ RSpec.describe ConvenientService::Service::Plugins::CollectsServicesInException:
             let(:service_class) do
               Class.new.tap do |klass|
                 klass.class_exec(exception) do |exception|
-                  include ConvenientService::Service::Configs::Standard
+                  include ConvenientService::Standard::Config
 
                   step :foo
 

@@ -34,7 +34,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Container, t
 
       let(:service) do
         Class.new do
-          include ConvenientService::Service::Configs::Standard
+          include ConvenientService::Standard::Config
 
           def result
             success

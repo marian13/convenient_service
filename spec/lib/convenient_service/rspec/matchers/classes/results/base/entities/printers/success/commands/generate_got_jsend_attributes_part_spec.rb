@@ -16,7 +16,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
 
       let(:service) do
         Class.new do
-          include ConvenientService::Service::Configs::Standard
+          include ConvenientService::Standard::Config
 
           def result
             success(data: {foo: :bar})
@@ -63,7 +63,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
             context "when result has empty data" do
               let(:service) do
                 Class.new do
-                  include ConvenientService::Service::Configs::Standard
+                  include ConvenientService::Standard::Config
 
                   def result
                     success(data: {})
@@ -81,7 +81,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
             context "when result has NOT empty message" do
               let(:service) do
                 Class.new do
-                  include ConvenientService::Service::Configs::Standard
+                  include ConvenientService::Standard::Config
 
                   def result
                     success(data: {foo: :bar}, message: "foo")
@@ -97,7 +97,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
             context "when result has NOT default code" do
               let(:service) do
                 Class.new do
-                  include ConvenientService::Service::Configs::Standard
+                  include ConvenientService::Standard::Config
 
                   def result
                     success(data: {foo: :bar}, code: :foo)
@@ -113,7 +113,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
             context "when result has both NOT empty message and NOT default code" do
               let(:service) do
                 Class.new do
-                  include ConvenientService::Service::Configs::Standard
+                  include ConvenientService::Standard::Config
 
                   def result
                     success(data: {foo: :bar}, message: "foo", code: :foo)
@@ -137,7 +137,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
             context "when result has empty data" do
               let(:service) do
                 Class.new do
-                  include ConvenientService::Service::Configs::Standard
+                  include ConvenientService::Standard::Config
 
                   def result
                     success(data: {})
@@ -155,7 +155,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
             context "when result has NOT empty message" do
               let(:service) do
                 Class.new do
-                  include ConvenientService::Service::Configs::Standard
+                  include ConvenientService::Standard::Config
 
                   def result
                     success(data: {foo: :bar}, message: "foo")
@@ -171,7 +171,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
             context "when result has NOT default code" do
               let(:service) do
                 Class.new do
-                  include ConvenientService::Service::Configs::Standard
+                  include ConvenientService::Standard::Config
 
                   def result
                     success(data: {foo: :bar}, code: :foo)
@@ -187,7 +187,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
             context "when result has both NOT empty message and NOT default code" do
               let(:service) do
                 Class.new do
-                  include ConvenientService::Service::Configs::Standard
+                  include ConvenientService::Standard::Config
 
                   def result
                     success(data: {foo: :bar}, message: "foo", code: :foo)
@@ -211,7 +211,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
             context "when result has empty data" do
               let(:service) do
                 Class.new do
-                  include ConvenientService::Service::Configs::Standard
+                  include ConvenientService::Standard::Config
 
                   def result
                     success(data: {})
@@ -229,7 +229,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
             context "when result has NOT empty message" do
               let(:service) do
                 Class.new do
-                  include ConvenientService::Service::Configs::Standard
+                  include ConvenientService::Standard::Config
 
                   def result
                     success(data: {foo: :bar}, message: "foo")
@@ -245,7 +245,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
             context "when result has NOT default code" do
               let(:service) do
                 Class.new do
-                  include ConvenientService::Service::Configs::Standard
+                  include ConvenientService::Standard::Config
 
                   def result
                     success(data: {foo: :bar}, code: :foo)
@@ -261,7 +261,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
             context "when result has both NOT empty message and NOT default code" do
               let(:service) do
                 Class.new do
-                  include ConvenientService::Service::Configs::Standard
+                  include ConvenientService::Standard::Config
 
                   def result
                     success(data: {foo: :bar}, message: "foo", code: :foo)

@@ -20,7 +20,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
 
       let(:service) do
         Class.new do
-          include ConvenientService::Service::Configs::Standard
+          include ConvenientService::Standard::Config
 
           step :foo
 
