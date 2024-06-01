@@ -95,6 +95,15 @@ appraise "rails_7.1" do
   # gem "shoulda-matchers", "~> 5.0.0"
 end
 
+appraise "rails_7.2" do
+  gem "activemodel", "~> 7.2.0.beta1"
+
+  ##
+  # NOTE: Waits for `should-matchers` full support.
+  #
+  # gem "shoulda-matchers", "~> 5.0.0"
+end
+
 appraise "dry" do
   gem "dry-initializer", "~> 3.0.0"
 

@@ -158,6 +158,8 @@ jobs:
         run: APPRAISAL=awesome_print task rspec
       - name: Run RSpec with Amazing Print
         run: APPRAISAL=amazing_print task rspec
+      - name: Run RSpec with Rails 7.2
+        run: APPRAISAL=rails_7.2 task rspec
       - name: Run RSpec with Rails 7.0
         run: APPRAISAL=rails_7.0 task rspec
       - name: Run RSpec with Rails 6.1
