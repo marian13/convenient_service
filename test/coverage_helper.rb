@@ -1,11 +1,6 @@
 # frozen_string_literal: true
 
-##
-# NOTE:
-#   - Use `ConvenientService::Support::Ruby.truffleruby?` directly only in the files that do not require to load all dependencies.
-#   - Prefer `ConvenientService::Dependencies.ruby.truffleruby?` for the rest of the files.
-#
-require "convenient_service/support/ruby"
+require "convenient_service/dependencies/only_queries"
 
 ##
 # NOTE: TruffleRuby 22.3 does NOT implement `running?`, but it is in master.
@@ -16,7 +11,7 @@ require "convenient_service/support/ruby"
 #
 # NOTE: Fixing `running?` causes the domino effect, that is why coverage for TruffeRuby 22.3 is disabled.
 #
-return if ConvenientService::Support::Ruby.truffleruby?
+return if ConvenientService::Dependencies.ruby.truffleruby?
 
 ##
 # Coverage using SimpleCov.

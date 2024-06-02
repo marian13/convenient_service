@@ -17,7 +17,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStubbedResults::Comma
 
       context "when `RSpec` current example is NOT set" do
         before do
-          allow(ConvenientService::Support::Gems::RSpec).to receive(:current_example).and_return(nil)
+          allow(ConvenientService::Dependencies::Queries::Gems::RSpec).to receive(:current_example).and_return(nil)
         end
 
         it "returns empty cache" do

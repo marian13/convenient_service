@@ -95,7 +95,7 @@ tasks:
     cmds:
       - cp Gemfile Gemfile.{{.RUBY_ENGINE}}_{{.RUBY_VERSION}}
       - bundle install
-      - bundle exec appraisal install
+      - bin/appraisal install
     vars:
       RUBY_ENGINE:
         sh: ruby -e 'puts ["{{.RUBY_VERSION}}", ENV["RUBY_ENGINE"], RUBY_ENGINE].map(&:to_s).reject(&:empty?).first'
@@ -422,12 +422,14 @@ tasks:
   # NOTE: Setting `APPRAISAL` after `task rspec` does NOT work. Consider to open an issue.
   # NOTE: `APPRAISAL_COMMAND` must be kept in sync with `Appraisals` file.
   #
+  # NOTE: Ruby ternary operator can NOT be used since it contains colon that has special meaning in YAML. That is why `if/then/else/end` is used.
+  #
   rspec:
     cmds:
-      - bundle exec {{.APPRAISAL_PREFIX}} rspec --color --format progress {{.REQUIRE_SUFFIX}} {{.GIT_STAGED_RSPEC_FILES}} {{.CLI_ARGS}}
+      - "{{.RSPEC_RUNNER}} --color --format progress {{.REQUIRE_SUFFIX}} {{.GIT_STAGED_RSPEC_FILES}} {{.CLI_ARGS}}"
     vars:
-      APPRAISAL_PREFIX:
-        sh: ruby -e 'puts "appraisal" + " " + RUBY_ENGINE + "_" + RUBY_VERSION[/\d+.\d+/] + "_" + "{{.APPRAISAL}}" unless "{{.APPRAISAL}}".to_s.empty?'
+      RSPEC_RUNNER:
+        sh: ruby -e 'puts (if "{{.APPRAISAL}}".empty? then "bundle exec rspec" else "bin/appraisal %s_%s_%s rspec" % [RUBY_ENGINE, RUBY_VERSION[/\d+.\d+/], "{{.APPRAISAL}}"] end)'
       REQUIRE_SUFFIX:
         sh: ruby -e 'puts case "{{.APPRAISAL}}" when /rails/ then "--require rails_helper" when /dry/ then "--require dry_helper" when /amazing_print/ then "--require amazing_print_helper" when /awesome_print/ then "--require awesome_print_helper" else "--require standard_helper" end'
       GIT_STAGED_RSPEC_FILES:

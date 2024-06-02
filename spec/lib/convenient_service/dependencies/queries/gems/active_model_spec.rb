@@ -5,12 +5,12 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
-RSpec.describe ConvenientService::Support::Gems::ActiveModel, type: :standard do
+RSpec.describe ConvenientService::Dependencies::Queries::Gems::ActiveModel, type: :standard do
   example_group "class methods" do
     if described_class.loaded?
       describe "version" do
         it "returns version" do
-          expect(described_class.version).to eq(ConvenientService::Support::Version.new(::ActiveModel.version))
+          expect(described_class.version).to eq(ConvenientService::Dependencies::Queries::Version.new(::ActiveModel.version))
         end
       end
     end
@@ -21,7 +21,7 @@ RSpec.describe ConvenientService::Support::Gems::ActiveModel, type: :standard do
       end
 
       it "returns null version" do
-        expect(described_class.version).to be_instance_of(ConvenientService::Support::Version::NullVersion)
+        expect(described_class.version).to be_instance_of(ConvenientService::Dependencies::Queries::Version::NullVersion)
       end
     end
   end

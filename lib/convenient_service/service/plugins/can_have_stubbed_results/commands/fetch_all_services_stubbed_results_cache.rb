@@ -16,8 +16,8 @@ module ConvenientService
             #   - https://relishapp.com/rspec/rspec-core/docs/metadata/current-example
             #
             def call
-              if Support::Gems::RSpec.current_example
-                Utils::Object.memoize_including_falsy_values(Support::Gems::RSpec.current_example, :@__convenient_service_stubbed_results__) { Support::Cache.create(backend: :thread_safe_array) }
+              if Dependencies.rspec.current_example
+                Utils::Object.memoize_including_falsy_values(Dependencies.rspec.current_example, :@__convenient_service_stubbed_results__) { Support::Cache.create(backend: :thread_safe_array) }
               else
                 Support::Cache.create(backend: :thread_safe_array)
               end

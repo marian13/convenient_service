@@ -95,13 +95,15 @@ appraise "rails_7.1" do
   # gem "shoulda-matchers", "~> 5.0.0"
 end
 
-appraise "rails_7.2" do
-  gem "activemodel", "~> 7.2.0.beta1"
+if ConvenientService::Dependencies.ruby.version >= 3.1
+  appraise "rails_7.2" do
+    gem "activemodel", "~> 7.2.0.beta1"
 
-  ##
-  # NOTE: Waits for `should-matchers` full support.
-  #
-  # gem "shoulda-matchers", "~> 5.0.0"
+    ##
+    # NOTE: Waits for `should-matchers` full support.
+    #
+    # gem "shoulda-matchers", "~> 5.0.0"
+  end
 end
 
 appraise "dry" do

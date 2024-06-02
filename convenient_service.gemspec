@@ -3,13 +3,7 @@
 require_relative "lib/convenient_service/specification"
 require_relative "lib/convenient_service/version"
 
-##
-# NOTE:
-#   - Use `ConvenientService::Support::Ruby.jruby?` directly only in the files that do not require to load all dependencies.
-#   - Prefer `ConvenientService::Dependencies.ruby.jruby?` for the rest of the files.
-#
-require_relative "lib/convenient_service/support/version"
-require_relative "lib/convenient_service/support/ruby"
+require_relative "lib/convenient_service/dependencies/only_queries"
 
 Gem::Specification.new do |spec|
   spec.name = ConvenientService::Specification::NAME
@@ -109,7 +103,7 @@ Gem::Specification.new do |spec|
   # - https://github.com/deivid-rodriguez/byebug/tree/master/ext/byebug
   # - https://github.com/deivid-rodriguez/byebug/issues/179#issuecomment-152727003
   #
-  spec.add_development_dependency "byebug", "~> 10.0" if ConvenientService::Support::Ruby.mri?
+  spec.add_development_dependency "byebug", "~> 10.0" if ConvenientService::Dependencies.ruby.mri?
 
   ##
   # Used for parsing Markdown in YARD docs.
@@ -120,7 +114,7 @@ Gem::Specification.new do |spec|
   #
   # TODO: `commonmarker` v1 does NOT work with `yard-junk`.
   #
-  spec.add_development_dependency "commonmarker", "~> 0.23.10" if ConvenientService::Support::Ruby.mri?
+  spec.add_development_dependency "commonmarker", "~> 0.23.10" if ConvenientService::Dependencies.ruby.mri?
 
   ##
   # Used for debugging CRuby code.
@@ -135,7 +129,7 @@ Gem::Specification.new do |spec|
   # NOTE: `debug` has C extensions, that is why it is NOT supported in JRuby.
   # - https://github.com/ruby/debug/tree/master/ext/debug
   #
-  spec.add_development_dependency "debug" if ConvenientService::Support::Ruby.mri?
+  spec.add_development_dependency "debug" if ConvenientService::Dependencies.ruby.mri?
 
   spec.add_development_dependency "faker"
 
@@ -272,13 +266,13 @@ Gem::Specification.new do |spec|
   # - https://github.com/tmm1/stackprof
   # - https://www.johnnunemaker.com/how-to-benchmark-your-ruby-gem
   #
-  spec.add_development_dependency "stackprof", "~> 0.2.25" if ConvenientService::Support::Ruby.mri?
+  spec.add_development_dependency "stackprof", "~> 0.2.25" if ConvenientService::Dependencies.ruby.mri?
 
   ##
   # Used inside examples (internally by Webrick).
   # - https://github.com/ruby/uri
   #
-  if ConvenientService::Support::Ruby.version >= 3.0
+  if ConvenientService::Dependencies.ruby.version >= 3.0
     spec.add_development_dependency "uri", "~> 0.13.0"
   else
     spec.add_development_dependency "uri", "0.10.0.2"
