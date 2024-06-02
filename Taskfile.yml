@@ -70,7 +70,7 @@ tasks:
       - bundle exec {{.APPRAISAL_COMMAND}} rake playground
     vars:
       APPRAISAL_COMMAND:
-        sh: ruby -e 'puts "appraisal" + " " + RUBY_ENGINE + "_" + RUBY_VERSION[/\d+.\d+/] + "_" + "{{.APPRAISAL}}" unless "{{.APPRAISAL}}".to_s.empty?'
+        sh: ruby -e 'puts "appraisal" + " " + RUBY_ENGINE + "_" + RUBY_ENGINE_VERSION[/\d+\.\d+/] + "_" + "{{.APPRAISAL}}" unless "{{.APPRAISAL}}".to_s.empty?'
     interactive: true
 
   coverage:lcov:merge:
@@ -93,14 +93,14 @@ tasks:
   #
   deps:install:
     cmds:
-      - cp Gemfile Gemfile.{{.RUBY_ENGINE}}_{{.RUBY_VERSION}}
+      - cp Gemfile Gemfile.{{.RUBY_ENGINE}}_{{.RUBY_ENGINE_VERSION}}
       - bundle install
       - bin/appraisal install
     vars:
       RUBY_ENGINE:
-        sh: ruby -e 'puts ["{{.RUBY_VERSION}}", ENV["RUBY_ENGINE"], RUBY_ENGINE].map(&:to_s).reject(&:empty?).first'
-      RUBY_VERSION:
-        sh: ruby -e 'puts "{{.RUBY_VERSION}}".to_s[/\d+.\d+/] || ENV["RUBY_VERSION"].to_s[/\d+.\d+/] || RUBY_VERSION[/\d+.\d+/]'
+        sh: ruby -e 'puts ["{{.RUBY_ENGINE_VERSION}}", ENV["RUBY_ENGINE"], RUBY_ENGINE].map(&:to_s).reject(&:empty?).first'
+      RUBY_ENGINE_VERSION:
+        sh: ruby -e 'puts "{{.RUBY_ENGINE_VERSION}}".to_s[/\d+\.\d+/] || ENV["RUBY_ENGINE_VERSION"].to_s[/\d+\.\d+/] || RUBY_ENGINE_VERSION[/\d+\.\d+/]'
 
   ##
   # NOTE: Meaning of `2> /dev/null`.
@@ -118,13 +118,13 @@ tasks:
 
   ##
   # NOTE: Usage examples.
-  #   task docker:bash RUBY_ENGINE=ruby RUBY_VERSION=2.7
-  #   task docker:bash RUBY_ENGINE=ruby RUBY_VERSION=3.0
-  #   task docker:bash RUBY_ENGINE=ruby RUBY_VERSION=3.1
-  #   task docker:bash RUBY_ENGINE=ruby RUBY_VERSION=3.2
-  #   task docker:bash RUBY_ENGINE=ruby RUBY_VERSION=3.3
-  #   task docker:bash RUBY_ENGINE=jruby RUBY_VERSION=9.4
-  #   task docker:bash RUBY_ENGINE=truffleruby RUBY_VERSION=22.3
+  #   task docker:bash RUBY_ENGINE=ruby RUBY_ENGINE_VERSION=2.7
+  #   task docker:bash RUBY_ENGINE=ruby RUBY_ENGINE_VERSION=3.0
+  #   task docker:bash RUBY_ENGINE=ruby RUBY_ENGINE_VERSION=3.1
+  #   task docker:bash RUBY_ENGINE=ruby RUBY_ENGINE_VERSION=3.2
+  #   task docker:bash RUBY_ENGINE=ruby RUBY_ENGINE_VERSION=3.3
+  #   task docker:bash RUBY_ENGINE=jruby RUBY_ENGINE_VERSION=9.4
+  #   task docker:bash RUBY_ENGINE=truffleruby RUBY_ENGINE_VERSION=22.3
   #
   # NOTE: JRuby 9.4 aims CRuby 3.1 compatibility.
   # - https://www.jruby.org/download
@@ -137,22 +137,22 @@ tasks:
   #
   docker:bash:
     cmds:
-      - docker run --rm -it -v $(pwd):/gem convenient_service:{{.RUBY_ENGINE}}_{{.RUBY_VERSION}} bash
+      - docker run --rm -it -v $(pwd):/gem convenient_service:{{.RUBY_ENGINE}}_{{.RUBY_ENGINE_VERSION}} bash
     interactive: true
     preconditions:
       - *from-host-os
     requires:
-      vars: [RUBY_ENGINE, RUBY_VERSION]
+      vars: [RUBY_ENGINE, RUBY_ENGINE_VERSION]
 
   ##
   # NOTE: Usage examples.
-  #   RUBY_ENGINE=ruby RUBY_VERSION=2.7 task docker:build
-  #   RUBY_ENGINE=ruby RUBY_VERSION=3.0 task docker:build
-  #   RUBY_ENGINE=ruby RUBY_VERSION=3.1 task docker:build
-  #   RUBY_ENGINE=ruby RUBY_VERSION=3.2 task docker:build
-  #   RUBY_ENGINE=ruby RUBY_VERSION=3.3 task docker:build
-  #   RUBY_ENGINE=jruby RUBY_VERSION=9.4 task docker:build
-  #   RUBY_ENGINE=truffleruby RUBY_VERSION=22.3 task docker:build
+  #   RUBY_ENGINE=ruby RUBY_ENGINE_VERSION=2.7 task docker:build
+  #   RUBY_ENGINE=ruby RUBY_ENGINE_VERSION=3.0 task docker:build
+  #   RUBY_ENGINE=ruby RUBY_ENGINE_VERSION=3.1 task docker:build
+  #   RUBY_ENGINE=ruby RUBY_ENGINE_VERSION=3.2 task docker:build
+  #   RUBY_ENGINE=ruby RUBY_ENGINE_VERSION=3.3 task docker:build
+  #   RUBY_ENGINE=jruby RUBY_ENGINE_VERSION=9.4 task docker:build
+  #   RUBY_ENGINE=truffleruby RUBY_ENGINE_VERSION=22.3 task docker:build
   #
   # NOTE: JRuby 9.4 aims CRuby 3.1 compatibility.
   # - https://www.jruby.org/download
@@ -171,49 +171,49 @@ tasks:
   #
   docker:build:
     cmds:
-      - rm Gemfile.{{.RUBY_ENGINE}}_{{.RUBY_VERSION}} 2> /dev/null || true
-      - rm Gemfile.{{.RUBY_ENGINE}}_{{.RUBY_VERSION}}.lock 2> /dev/null || true
-      - cp Gemfile Gemfile.{{.RUBY_ENGINE}}_{{.RUBY_VERSION}}
-      - docker build . -f docker/{{.RUBY_ENGINE}}_{{.RUBY_VERSION}}/Dockerfile -t convenient_service:{{.RUBY_ENGINE}}_{{.RUBY_VERSION}}
+      - rm Gemfile.{{.RUBY_ENGINE}}_{{.RUBY_ENGINE_VERSION}} 2> /dev/null || true
+      - rm Gemfile.{{.RUBY_ENGINE}}_{{.RUBY_ENGINE_VERSION}}.lock 2> /dev/null || true
+      - cp Gemfile Gemfile.{{.RUBY_ENGINE}}_{{.RUBY_ENGINE_VERSION}}
+      - docker build . -f docker/{{.RUBY_ENGINE}}_{{.RUBY_ENGINE_VERSION}}/Dockerfile -t convenient_service:{{.RUBY_ENGINE}}_{{.RUBY_ENGINE_VERSION}}
       ##
       # NOTE: Gemfiles created during the build time are NOT persisted. The following commands persist them by triggering `bundle install` in the run time.
       #
-      - docker run --rm -it -v $(pwd):/gem convenient_service:{{.RUBY_ENGINE}}_{{.RUBY_VERSION}} bash -c "task deps:install"
+      - docker run --rm -it -v $(pwd):/gem convenient_service:{{.RUBY_ENGINE}}_{{.RUBY_ENGINE_VERSION}} bash -c "task deps:install"
     preconditions:
       - *from-host-os
     requires:
-      vars: [RUBY_ENGINE, RUBY_VERSION]
+      vars: [RUBY_ENGINE, RUBY_ENGINE_VERSION]
 
   docker:build:all:
     cmds:
       - task: docker:build
         vars:
           RUBY_ENGINE: ruby
-          RUBY_VERSION: 2.7
+          RUBY_ENGINE_VERSION: 2.7
       - task: docker:build
         vars:
           RUBY_ENGINE: ruby
-          RUBY_VERSION: 3.0
+          RUBY_ENGINE_VERSION: 3.0
       - task: docker:build
         vars:
           RUBY_ENGINE: ruby
-          RUBY_VERSION: 3.1
+          RUBY_ENGINE_VERSION: 3.1
       - task: docker:build
         vars:
           RUBY_ENGINE: ruby
-          RUBY_VERSION: 3.2
+          RUBY_ENGINE_VERSION: 3.2
       - task: docker:build
         vars:
           RUBY_ENGINE: ruby
-          RUBY_VERSION: 3.3
+          RUBY_ENGINE_VERSION: 3.3
       - task: docker:build
         vars:
           RUBY_ENGINE: jruby
-          RUBY_VERSION: 9.4
+          RUBY_ENGINE_VERSION: 9.4
       - task: docker:build
         vars:
           RUBY_ENGINE: truffleruby
-          RUBY_VERSION: 22.3
+          RUBY_ENGINE_VERSION: 22.3
     preconditions:
       - *from-host-os
 
@@ -394,7 +394,7 @@ tasks:
       - bundle exec {{.APPRAISAL_COMMAND}} rake playground
     vars:
       APPRAISAL_COMMAND:
-        sh: ruby -e 'puts "appraisal" + " " + RUBY_ENGINE + "_" + RUBY_VERSION[/\d+.\d+/] + "_" + "{{.APPRAISAL}}" unless "{{.APPRAISAL}}".to_s.empty?'
+        sh: ruby -e 'puts "appraisal" + " " + RUBY_ENGINE + "_" + RUBY_ENGINE_VERSION[/\d+\.\d+/] + "_" + "{{.APPRAISAL}}" unless "{{.APPRAISAL}}".to_s.empty?'
     interactive: true
 
   release:
@@ -429,7 +429,7 @@ tasks:
       - "{{.RSPEC_RUNNER}} --color --format progress {{.REQUIRE_SUFFIX}} {{.GIT_STAGED_RSPEC_FILES}} {{.CLI_ARGS}}"
     vars:
       RSPEC_RUNNER:
-        sh: ruby -e 'puts (if "{{.APPRAISAL}}".empty? then "bundle exec rspec" else "bin/appraisal %s_%s_%s rspec" % [RUBY_ENGINE, RUBY_VERSION[/\d+.\d+/], "{{.APPRAISAL}}"] end)'
+        sh: ruby -e 'puts (if "{{.APPRAISAL}}".empty? then "bundle exec rspec" else "bin/appraisal %s_%s_%s rspec" % [RUBY_ENGINE, RUBY_ENGINE_VERSION[/\d+\.\d+/], "{{.APPRAISAL}}"] end)'
       REQUIRE_SUFFIX:
         sh: ruby -e 'puts case "{{.APPRAISAL}}" when /rails/ then "--require rails_helper" when /dry/ then "--require dry_helper" when /amazing_print/ then "--require amazing_print_helper" when /awesome_print/ then "--require awesome_print_helper" else "--require standard_helper" end'
       GIT_STAGED_RSPEC_FILES:

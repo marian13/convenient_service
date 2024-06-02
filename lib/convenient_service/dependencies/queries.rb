@@ -487,6 +487,37 @@ module ConvenientService
       def paint
         Gems::Paint
       end
+
+      ##
+      # @api private
+      #
+      # @return [String]
+      #
+      # @internal
+      #   NOTE: Appraisal sets `BUNDLE_GEMFILE` env variable. This is how appraisals can be differentiated from each other.
+      #   - https://github.com/thoughtbot/appraisal/blob/v2.4.1/lib/appraisal/command.rb#L36
+      #
+      #   NOTE: If `BUNDLE_GEMFILE` is an empty string, then `APPRAISAL_NAME` is resolved to an empty string as well. User passed `APPRAISAL_NAME` has a precedence.
+      #
+      #   IMPORTANT: `APPRAISAL_NAME` env variable should be initialized as far as it is possible.
+      #
+      #   IMPORTANT: ENV variables declared in this file should NOT be used inside the lib folder.
+      #
+      def appraisal_name
+        ::ENV["BUNDLE_GEMFILE"]
+          .to_s
+          .then(&::File.method(:basename))
+          .then { |name| name.end_with?(".gemfile") ? name.delete_suffix(".gemfile") : "" }
+      end
+
+      ##
+      # @api private
+      #
+      # @return [String]
+      #
+      def appraisal_coverage_name
+        appraisal_name.empty ? "without_appraisal" : appraisal_name
+      end
     end
   end
 end

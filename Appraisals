@@ -47,7 +47,7 @@
 #   Taskfile uses a combination of Ruby engine, Ruby version and `appraisal_name` inside `{{.APPRAISAL_COMMAND}}`.
 #
 def appraise(appraisal_name, &block)
-  super([::RUBY_ENGINE, ::RUBY_VERSION[/\d+.\d+/], appraisal_name].join("_"), &block)
+  super([ConvenientService::Dependencies.ruby.engine, ConvenientService::Dependencies.ruby.version.major_minor, appraisal_name].join("_"), &block)
 end
 
 appraise "rails_5.2" do

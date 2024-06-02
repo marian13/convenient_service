@@ -43,14 +43,14 @@ SimpleCov::Formatter::LcovFormatter.config do |config|
   escape = ->(name) { name.tr(".", "_") }
 
   ##
-  # NOTE: `ENV["APPRAISAL_NAME"]` is set in `env.rb`.
   #
-  appraisal_name = escape[ENV["APPRAISAL_NAME"].to_s.empty? ? "without_appraisal" : ENV["APPRAISAL_NAME"].to_s]
+  #
+  appraisal_name = escape[ConvenientService::Dependencies.appraisal_coverage_name]
 
   ##
-  # NOTE: `ENV["RUBY_VERSION"]` is set in `env.rb`.
   #
-  ruby_version = escape[ENV["RUBY_VERSION"].to_s]
+  #
+  ruby_version = escape[ConvenientService::Dependencies.ruby.engine_version.major_minor]
 
   ##
   # NOTE: There is also `minitest`.

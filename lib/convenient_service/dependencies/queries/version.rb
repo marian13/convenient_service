@@ -44,6 +44,13 @@ module ConvenientService
         end
 
         ##
+        # @return [String]
+        #
+        def major_minor
+          to_s[/\d+\.\d+/]
+        end
+
+        ##
         # @param other [Object] Can be any type.
         # @return [Boolean, nil]
         #

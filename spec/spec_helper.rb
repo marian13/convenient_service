@@ -1,11 +1,6 @@
 # frozen_string_literal: true
 
 ##
-# Makes sure that internal `ENV` variables are available.
-#
-require_relative "../env"
-
-##
 # Configures coverage tracking.
 #
 require_relative "coverage_helper"

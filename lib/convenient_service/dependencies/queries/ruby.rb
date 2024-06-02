@@ -12,10 +12,35 @@ module ConvenientService
           # @return [ConvenientService::Dependencies::Queries::Version]
           #
           # @internal
-          #   https://ruby-doc.org/core-2.7.2/doc/globals_rdoc.html
+          #   NOTE: Ruby defines `RUBY_VERSION` global variable.
+          #   - https://ruby-doc.org/core-2.7.2/doc/globals_rdoc.html
           #
           def version
             @version ||= Version.new(::RUBY_VERSION)
+          end
+
+          ##
+          # @return [String]
+          #
+          def engine
+            ::RUBY_ENGINE.to_s
+          end
+
+          ##
+          # @return [ConvenientService::Dependencies::Queries::Version]
+          #
+          # @internal
+          #   NOTE: Ruby defines `RUBY_ENGINE_VERSION` global variable.
+          #   - https://ruby-doc.org/core-2.7.2/doc/globals_rdoc.html
+          #
+          #   NOTE: JRuby defines `RUBY_ENGINE_VERSION` global variable.
+          #   - https://github.com/jruby/jruby/blob/9.4.0.0/spec/jruby/compat_spec.rb#L6
+          #
+          #   NOTE: TruffleRuby defines `RUBY_ENGINE_VERSION` global variable.
+          #   - https://github.com/oracle/truffleruby/blob/vm-22.3.0/spec/truffle/identity_spec.rb#L23
+          #
+          def engine_version
+            @version ||= Version.new(::RUBY_ENGINE_VERSION)
           end
 
           ##
