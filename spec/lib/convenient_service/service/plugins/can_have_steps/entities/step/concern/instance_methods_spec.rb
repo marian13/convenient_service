@@ -616,9 +616,21 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       end
     end
 
+    describe "#printable_container" do
+      it "returns printable service as string" do
+        expect { step.printable_container }
+          .to delegate_to(ConvenientService::Utils::Class, :display_name)
+          .with_arguments(step.container.klass)
+          .and_return_its_value
+      end
+    end
+
     describe "#printable_service" do
       it "returns printable service as string" do
-        expect(step.printable_service).to eq(step.service.klass.to_s)
+        expect { step.printable_service }
+          .to delegate_to(ConvenientService::Utils::Class, :display_name)
+          .with_arguments(step.service.klass)
+          .and_return_its_value
       end
     end
 

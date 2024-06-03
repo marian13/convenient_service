@@ -196,6 +196,24 @@ module ConvenientService
                 ##
                 # @api private
                 #
+                # @return [String]
+                #
+                def printable_container
+                  Utils::Class.display_name(container.klass)
+                end
+
+                ##
+                # @api private
+                #
+                # @return [String]
+                #
+                def printable_service
+                  Utils::Class.display_name(service.klass)
+                end
+
+                ##
+                # @api private
+                #
                 # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
                 # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepHasNoOrganizer]
                 #
@@ -208,15 +226,6 @@ module ConvenientService
                 #
                 def service_result
                   @service_result ||= service.klass.result(**input_values)
-                end
-
-                ##
-                # @api private
-                #
-                # @return [String]
-                #
-                def printable_service
-                  service.klass.to_s
                 end
 
                 ##
