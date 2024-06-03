@@ -299,6 +299,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
                     .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallbacks::Exceptions::MethodStepCanNotHaveFallback)
                     .with_message(exception_message)
                 end
+
+                specify do
+                  expect { ignoring_exception(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallbacks::Exceptions::MethodStepCanNotHaveFallback) { method_value } }
+                    .to delegate_to(ConvenientService, :raise)
+                end
               end
             end
 
@@ -511,6 +516,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
                   expect { method_value }
                     .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallbacks::Exceptions::MethodStepCanNotHaveFallback)
                     .with_message(exception_message)
+                end
+
+                specify do
+                  expect { ignoring_exception(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallbacks::Exceptions::MethodStepCanNotHaveFallback) { method_value } }
+                    .to delegate_to(ConvenientService, :raise)
                 end
               end
             end
@@ -753,6 +763,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
                     .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallbacks::Exceptions::MethodStepCanNotHaveFallback)
                     .with_message(exception_message)
                 end
+
+                specify do
+                  expect { ignoring_exception(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallbacks::Exceptions::MethodStepCanNotHaveFallback) { method_value } }
+                    .to delegate_to(ConvenientService, :raise)
+                end
               end
             end
 
@@ -942,6 +957,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
                 expect { method_value }
                   .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallbacks::Exceptions::MethodStepCanNotHaveFallback)
                   .with_message(exception_message)
+              end
+
+              specify do
+                expect { ignoring_exception(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallbacks::Exceptions::MethodStepCanNotHaveFallback) { method_value } }
+                  .to delegate_to(ConvenientService, :raise)
               end
             end
           end
@@ -1177,6 +1197,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
                 expect { method_value }
                   .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallbacks::Exceptions::MethodStepCanNotHaveFallback)
                   .with_message(exception_message)
+              end
+
+              specify do
+                expect { ignoring_exception(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallbacks::Exceptions::MethodStepCanNotHaveFallback) { method_value } }
+                  .to delegate_to(ConvenientService, :raise)
               end
             end
           end

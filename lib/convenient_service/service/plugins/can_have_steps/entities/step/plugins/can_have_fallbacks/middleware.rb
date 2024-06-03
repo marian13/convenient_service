@@ -130,7 +130,7 @@ module ConvenientService
                   def refute_method_step!
                     return unless step.method_step?
 
-                    raise Exceptions::MethodStepCanNotHaveFallback.new(step: step)
+                    ::ConvenientService.raise Exceptions::MethodStepCanNotHaveFallback.new(step: step)
                   end
                 end
               end
