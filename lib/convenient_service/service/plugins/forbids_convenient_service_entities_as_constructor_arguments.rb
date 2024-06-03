@@ -1,0 +1,4 @@
+# frozen_string_literal: true
+
+require_relative "forbids_convenient_service_entities_as_constructor_arguments/exceptions"
+require_relative "forbids_convenient_service_entities_as_constructor_arguments/middleware"
