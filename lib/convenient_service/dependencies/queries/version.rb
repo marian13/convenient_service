@@ -46,6 +46,9 @@ module ConvenientService
         ##
         # @return [String]
         #
+        # @internal
+        #   TODO: Add direct specs.
+        #
         def major_minor
           to_s[/\d+\.\d+/]
         end

@@ -19,6 +19,9 @@ version: '3'
 # TODO: Global preconditions are imitated using YAML anchors. Replace anchors once native support added.
 # - https://github.com/go-task/task/issues/294
 #
+# NOTE: Use the following snippet to test what exactly anchors are generating from irb.
+#   yaml = ["yaml", "awesome_print"].each(&method(:require)).then { File.read("Taskfile.yml") }.then { |text| YAML.load(text, aliases: true) }.tap { |yaml| ap yaml }
+#
 # NOTE: Prefer to utilize task vars when possible since it allows to pass CLI_ARGS with no hacks.
 #   # Okish
 #   - APPRAISAL=rails_7.1 task rspec
@@ -44,6 +47,13 @@ from-mac-os: &from-mac-os
   sh: '[ "$(uname)" == "Darwin" ]'
   msg: This task uses macOS specific commands. Try to adjust it your OS and/or run it manually.
 
+##
+# Prepends `bundle exec` when no Appraisal is set.
+# Prepends `APPRAISAL_NAME=name bin/appraisal` when an Appraisal is set.
+#
+BUNDLE_EXEC_PREFIX: &BUNDLE_EXEC_PREFIX
+  sh: ruby -e 'puts (if "{{.APPRAISAL}}".empty? then "bundle exec" else "APPRAISAL_NAME={{.APPRAISAL}} bin/appraisal %s_%s_%s" % [RUBY_ENGINE, RUBY_ENGINE_VERSION[/\d+\.\d+/], "{{.APPRAISAL}}"] end)'
+
 tasks:
   default:
     cmds:
@@ -63,14 +73,13 @@ tasks:
   #
   # NOTE: Setting `APPRAISAL` after `task console` does NOT work. Consider to open an issue.
   # NOTE: `task console` is also aliased as `task playground`.
-  # NOTE: `APPRAISAL_COMMAND` must be kept in sync with `Appraisals` file.
+  # NOTE: `BUNDLE_EXEC_PREFIX` must be kept in sync with `Appraisals` file.
   #
   console:
     cmds:
-      - bundle exec {{.APPRAISAL_COMMAND}} rake playground
+      - "{{.BUNDLE_EXEC_PREFIX}} rake playground"
     vars:
-      APPRAISAL_COMMAND:
-        sh: ruby -e 'puts "appraisal" + " " + RUBY_ENGINE + "_" + RUBY_ENGINE_VERSION[/\d+\.\d+/] + "_" + "{{.APPRAISAL}}" unless "{{.APPRAISAL}}".to_s.empty?'
+      BUNDLE_EXEC_PREFIX: *BUNDLE_EXEC_PREFIX
     interactive: true
 
   coverage:lcov:merge:
@@ -391,10 +400,9 @@ tasks:
   #
   playground:
     cmds:
-      - bundle exec {{.APPRAISAL_COMMAND}} rake playground
+      - "{{.BUNDLE_EXEC_PREFIX}} rake playground"
     vars:
-      APPRAISAL_COMMAND:
-        sh: ruby -e 'puts "appraisal" + " " + RUBY_ENGINE + "_" + RUBY_ENGINE_VERSION[/\d+\.\d+/] + "_" + "{{.APPRAISAL}}" unless "{{.APPRAISAL}}".to_s.empty?'
+      BUNDLE_EXEC_PREFIX: *BUNDLE_EXEC_PREFIX
     interactive: true
 
   release:
@@ -426,14 +434,13 @@ tasks:
   #
   rspec:
     cmds:
-      - "{{.RSPEC_RUNNER}} --color --format progress {{.REQUIRE_SUFFIX}} {{.GIT_STAGED_RSPEC_FILES}} {{.CLI_ARGS}}"
+      - "{{.BUNDLE_EXEC_PREFIX}} rspec --color --format progress {{.REQUIRE_SUFFIX}} {{.GIT_STAGED_RSPEC_FILES}} {{.CLI_ARGS}}"
     vars:
-      RSPEC_RUNNER:
-        sh: ruby -e 'puts (if "{{.APPRAISAL}}".empty? then "bundle exec rspec" else "bin/appraisal %s_%s_%s rspec" % [RUBY_ENGINE, RUBY_ENGINE_VERSION[/\d+\.\d+/], "{{.APPRAISAL}}"] end)'
       REQUIRE_SUFFIX:
         sh: ruby -e 'puts case "{{.APPRAISAL}}" when /rails/ then "--require rails_helper" when /dry/ then "--require dry_helper" when /amazing_print/ then "--require amazing_print_helper" when /awesome_print/ then "--require awesome_print_helper" else "--require standard_helper" end'
       GIT_STAGED_RSPEC_FILES:
         sh: ruby -e 'puts `task git:staged:rspec --silent` if "{{.STAGED}}" == "true"'
+      BUNDLE_EXEC_PREFIX: *BUNDLE_EXEC_PREFIX
 
   ##
   # NOTE: `task rspec APPRAISAL=rails_6.1` does NOT work.

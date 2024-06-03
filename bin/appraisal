@@ -34,4 +34,16 @@ require "bundler/setup"
 #
 require "convenient_service/dependencies/only_queries"
 
+if ConvenientService::Dependencies.ruby.version < 3.1 && ConvenientService::Dependencies.appraisal_name.include?("rails_7.2")
+  puts <<~TEXT
+    Rails 7.2 does NOT support Rubies lower than 3.1.
+    - https://github.com/rails/rails/blob/v7.2.0.beta1/activemodel/activemodel.gemspec#L12
+    - https://github.com/rails/rails/pull/50491
+
+    So this appraisal is skipped with the zero exit code.
+  TEXT
+
+  exit(0)
+end
+
 load Gem.bin_path("appraisal", "appraisal")

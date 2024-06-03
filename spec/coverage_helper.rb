@@ -45,7 +45,7 @@ SimpleCov::Formatter::LcovFormatter.config do |config|
   ##
   #
   #
-  appraisal_name = escape[ConvenientService::Dependencies.appraisal_coverage_name]
+  appraisal_name = escape[ConvenientService::Dependencies.appraisal_name_for_coverage]
 
   ##
   #

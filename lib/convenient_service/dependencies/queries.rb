@@ -494,20 +494,25 @@ module ConvenientService
       # @return [String]
       #
       # @internal
-      #   NOTE: Appraisal sets `BUNDLE_GEMFILE` env variable. This is how appraisals can be differentiated from each other.
+      #   IMPORTANT: `appraisal_name` MUST NOT be used inside the lib folder.
+      #
+      #   NOTE: Previous appraisal name detection logic was relying on a a fact that `appraisals` gem sets `BUNDLE_GEMFILE` env variable.
       #   - https://github.com/thoughtbot/appraisal/blob/v2.4.1/lib/appraisal/command.rb#L36
       #
-      #   NOTE: If `BUNDLE_GEMFILE` is an empty string, then `APPRAISAL_NAME` is resolved to an empty string as well. User passed `APPRAISAL_NAME` has a precedence.
+      #   When `BUNDLE_GEMFILE` was an empty string, then `APPRAISAL_NAME` was resolved to an empty string as well. For example:
+      #     ::ENV["BUNDLE_GEMFILE"]
+      #       .to_s
+      #       .then(&::File.method(:basename))
+      #       .then { |name| name.end_with?(".gemfile") ? name.delete_suffix(".gemfile") : "" }
       #
-      #   IMPORTANT: `APPRAISAL_NAME` env variable should be initialized as far as it is possible.
+      #   Now, appraisal name detection logic is based on `ENV["APPRAISAL_NAME"]` passed for Taskfile.
       #
-      #   IMPORTANT: ENV variables declared in this file should NOT be used inside the lib folder.
+      #
+      # @internal
+      #   TODO: Add direct specs.
       #
       def appraisal_name
-        ::ENV["BUNDLE_GEMFILE"]
-          .to_s
-          .then(&::File.method(:basename))
-          .then { |name| name.end_with?(".gemfile") ? name.delete_suffix(".gemfile") : "" }
+        ::ENV["APPRAISAL_NAME"].to_s
       end
 
       ##
@@ -515,8 +520,11 @@ module ConvenientService
       #
       # @return [String]
       #
-      def appraisal_coverage_name
-        appraisal_name.empty ? "without_appraisal" : appraisal_name
+      # @internal
+      #   TODO: Add direct specs.
+      #
+      def appraisal_name_for_coverage
+        appraisal_name.empty? ? "without_appraisal" : appraisal_name
       end
     end
   end

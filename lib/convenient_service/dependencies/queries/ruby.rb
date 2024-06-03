@@ -22,6 +22,9 @@ module ConvenientService
           ##
           # @return [String]
           #
+          # @internal
+          #   TODO: Add direct specs.
+          #
           def engine
             ::RUBY_ENGINE.to_s
           end
@@ -38,6 +41,8 @@ module ConvenientService
           #
           #   NOTE: TruffleRuby defines `RUBY_ENGINE_VERSION` global variable.
           #   - https://github.com/oracle/truffleruby/blob/vm-22.3.0/spec/truffle/identity_spec.rb#L23
+          #
+          #   TODO: Add direct specs.
           #
           def engine_version
             @version ||= Version.new(::RUBY_ENGINE_VERSION)
