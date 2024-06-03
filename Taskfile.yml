@@ -107,7 +107,7 @@ tasks:
       - bin/appraisal install
     vars:
       RUBY_ENGINE:
-        sh: ruby -e 'puts ["{{.RUBY_ENGINE_VERSION}}", ENV["RUBY_ENGINE"], RUBY_ENGINE].map(&:to_s).reject(&:empty?).first'
+        sh: ruby -e 'puts ["{{.RUBY_ENGINE}}", ENV["RUBY_ENGINE"], RUBY_ENGINE].map(&:to_s).reject(&:empty?).first'
       RUBY_ENGINE_VERSION:
         sh: ruby -e 'puts "{{.RUBY_ENGINE_VERSION}}".to_s[/\d+\.\d+/] || ENV["RUBY_ENGINE_VERSION"].to_s[/\d+\.\d+/] || RUBY_ENGINE_VERSION[/\d+\.\d+/]'
 

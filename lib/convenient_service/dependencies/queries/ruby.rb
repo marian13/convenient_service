@@ -45,7 +45,7 @@ module ConvenientService
           #   TODO: Add direct specs.
           #
           def engine_version
-            @version ||= Version.new(::RUBY_ENGINE_VERSION)
+            @engine_version ||= Version.new(::RUBY_ENGINE_VERSION)
           end
 
           ##
