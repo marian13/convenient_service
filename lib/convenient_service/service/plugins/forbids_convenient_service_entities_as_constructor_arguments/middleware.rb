@@ -65,7 +65,7 @@ module ConvenientService
           def refute_result!(collection_type, key, value)
             return unless ::ConvenientService::Plugins::Service::HasJSendResult.result?(value)
 
-            raise Exceptions::ResultPassedAsConstructorArgument.new(selector: selector_from(collection_type, key), service: service, result: value)
+            ::ConvenientService.raise Exceptions::ResultPassedAsConstructorArgument.new(selector: selector_from(collection_type, key), service: service, result: value)
           end
 
           ##
@@ -78,7 +78,7 @@ module ConvenientService
           def refute_step!(collection_type, key, value)
             return unless ::ConvenientService::Plugins::Service::CanHaveSteps.step?(value)
 
-            raise Exceptions::StepPassedAsConstructorArgument.new(selector: selector_from(collection_type, key), service: service, step: value)
+            ::ConvenientService.raise Exceptions::StepPassedAsConstructorArgument.new(selector: selector_from(collection_type, key), service: service, step: value)
           end
 
           ##
