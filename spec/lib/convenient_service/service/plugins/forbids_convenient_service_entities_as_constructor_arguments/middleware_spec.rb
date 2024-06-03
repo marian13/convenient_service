@@ -8,6 +8,8 @@ require "convenient_service"
 RSpec.describe ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Middleware, type: :standard do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
+  include ConvenientService::RSpec::Helpers::IgnoringException
+
   let(:middleware) { described_class }
 
   example_group "inheritance" do
@@ -149,6 +151,11 @@ RSpec.describe ConvenientService::Service::Plugins::ForbidsConvenientServiceEnti
                   .to raise_error(ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::ServicePassedAsConstructorArgument)
                   .with_message(exception_message)
               end
+
+              specify do
+                expect { ignoring_exception(ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::ServicePassedAsConstructorArgument) { service } }
+                  .to delegate_to(ConvenientService, :raise)
+              end
             end
 
             context "when one of those args is result" do
@@ -168,6 +175,11 @@ RSpec.describe ConvenientService::Service::Plugins::ForbidsConvenientServiceEnti
                 expect { service }
                   .to raise_error(ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::ResultPassedAsConstructorArgument)
                   .with_message(exception_message)
+              end
+
+              specify do
+                expect { ignoring_exception(ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::ResultPassedAsConstructorArgument) { service } }
+                  .to delegate_to(ConvenientService, :raise)
               end
             end
 
@@ -189,6 +201,11 @@ RSpec.describe ConvenientService::Service::Plugins::ForbidsConvenientServiceEnti
                   .to raise_error(ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::StepPassedAsConstructorArgument)
                   .with_message(exception_message)
               end
+
+              specify do
+                expect { ignoring_exception(ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::StepPassedAsConstructorArgument) { service } }
+                  .to delegate_to(ConvenientService, :raise)
+              end
             end
           end
 
@@ -209,6 +226,11 @@ RSpec.describe ConvenientService::Service::Plugins::ForbidsConvenientServiceEnti
               expect { service }
                 .to raise_error(ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::ServicePassedAsConstructorArgument)
                 .with_message(exception_message)
+            end
+
+            specify do
+              expect { ignoring_exception(ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::ServicePassedAsConstructorArgument) { service } }
+                .to delegate_to(ConvenientService, :raise)
             end
           end
         end
@@ -239,6 +261,11 @@ RSpec.describe ConvenientService::Service::Plugins::ForbidsConvenientServiceEnti
                   .to raise_error(ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::ServicePassedAsConstructorArgument)
                   .with_message(exception_message)
               end
+
+              specify do
+                expect { ignoring_exception(ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::ServicePassedAsConstructorArgument) { service } }
+                  .to delegate_to(ConvenientService, :raise)
+              end
             end
 
             context "when one of those kwargs is result" do
@@ -258,6 +285,11 @@ RSpec.describe ConvenientService::Service::Plugins::ForbidsConvenientServiceEnti
                 expect { service }
                   .to raise_error(ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::ResultPassedAsConstructorArgument)
                   .with_message(exception_message)
+              end
+
+              specify do
+                expect { ignoring_exception(ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::ResultPassedAsConstructorArgument) { service } }
+                  .to delegate_to(ConvenientService, :raise)
               end
             end
 
@@ -279,6 +311,11 @@ RSpec.describe ConvenientService::Service::Plugins::ForbidsConvenientServiceEnti
                   .to raise_error(ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::StepPassedAsConstructorArgument)
                   .with_message(exception_message)
               end
+
+              specify do
+                expect { ignoring_exception(ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::StepPassedAsConstructorArgument) { service } }
+                  .to delegate_to(ConvenientService, :raise)
+              end
             end
           end
 
@@ -299,6 +336,11 @@ RSpec.describe ConvenientService::Service::Plugins::ForbidsConvenientServiceEnti
               expect { service }
                 .to raise_error(ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::ServicePassedAsConstructorArgument)
                 .with_message(exception_message)
+            end
+
+            specify do
+              expect { ignoring_exception(ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::ServicePassedAsConstructorArgument) { service } }
+                .to delegate_to(ConvenientService, :raise)
             end
           end
         end

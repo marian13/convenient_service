@@ -52,7 +52,7 @@ module ConvenientService
           def refute_service!(collection_type, key, value)
             return unless ::ConvenientService.service?(value)
 
-            raise Exceptions::ServicePassedAsConstructorArgument.new(selector: selector_from(collection_type, key), service: service, other_service: value)
+            ::ConvenientService.raise Exceptions::ServicePassedAsConstructorArgument.new(selector: selector_from(collection_type, key), service: service, other_service: value)
           end
 
           ##
