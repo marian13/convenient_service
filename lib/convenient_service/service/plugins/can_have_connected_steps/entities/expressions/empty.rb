@@ -17,28 +17,28 @@ module ConvenientService
               # @raise [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Exceptions::EmptyExpressionHasNoResult]
               #
               def result
-                raise Exceptions::EmptyExpressionHasNoResult.new
+                ::ConvenientService.raise Exceptions::EmptyExpressionHasNoResult.new
               end
 
               ##
               # @raise [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Exceptions::EmptyExpressionHasNoStatus]
               #
               def success?
-                raise Exceptions::EmptyExpressionHasNoStatus.new
+                ::ConvenientService.raise Exceptions::EmptyExpressionHasNoStatus.new
               end
 
               ##
               # @raise [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Exceptions::EmptyExpressionHasNoStatus]
               #
               def failure?
-                raise Exceptions::EmptyExpressionHasNoStatus.new
+                ::ConvenientService.raise Exceptions::EmptyExpressionHasNoStatus.new
               end
 
               ##
               # @raise [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Exceptions::EmptyExpressionHasNoStatus]
               #
               def error?
-                raise Exceptions::EmptyExpressionHasNoStatus.new
+                ::ConvenientService.raise Exceptions::EmptyExpressionHasNoStatus.new
               end
 
               ##

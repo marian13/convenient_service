@@ -8,6 +8,8 @@ require "convenient_service"
 RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Empty, type: :standard do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
+  include ConvenientService::RSpec::Helpers::IgnoringException
+
   let(:expression) { described_class.new }
 
   let(:container) do
@@ -57,6 +59,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
           .to raise_error(ConvenientService::Service::Plugins::CanHaveConnectedSteps::Exceptions::EmptyExpressionHasNoResult)
           .with_message(exception_message)
       end
+
+      specify do
+        expect { ignoring_exception(ConvenientService::Service::Plugins::CanHaveConnectedSteps::Exceptions::EmptyExpressionHasNoResult) { expression.result } }
+          .to delegate_to(ConvenientService, :raise)
+      end
     end
 
     describe "#success?" do
@@ -70,6 +77,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
         expect { expression.success? }
           .to raise_error(ConvenientService::Service::Plugins::CanHaveConnectedSteps::Exceptions::EmptyExpressionHasNoStatus)
           .with_message(exception_message)
+      end
+
+      specify do
+        expect { ignoring_exception(ConvenientService::Service::Plugins::CanHaveConnectedSteps::Exceptions::EmptyExpressionHasNoStatus) { expression.success? } }
+          .to delegate_to(ConvenientService, :raise)
       end
     end
 
@@ -85,6 +97,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
           .to raise_error(ConvenientService::Service::Plugins::CanHaveConnectedSteps::Exceptions::EmptyExpressionHasNoStatus)
           .with_message(exception_message)
       end
+
+      specify do
+        expect { ignoring_exception(ConvenientService::Service::Plugins::CanHaveConnectedSteps::Exceptions::EmptyExpressionHasNoStatus) { expression.failure? } }
+          .to delegate_to(ConvenientService, :raise)
+      end
     end
 
     describe "#error?" do
@@ -98,6 +115,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
         expect { expression.error? }
           .to raise_error(ConvenientService::Service::Plugins::CanHaveConnectedSteps::Exceptions::EmptyExpressionHasNoStatus)
           .with_message(exception_message)
+      end
+
+      specify do
+        expect { ignoring_exception(ConvenientService::Service::Plugins::CanHaveConnectedSteps::Exceptions::EmptyExpressionHasNoStatus) { expression.error? } }
+          .to delegate_to(ConvenientService, :raise)
       end
     end
 
