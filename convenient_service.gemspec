@@ -131,7 +131,18 @@ Gem::Specification.new do |spec|
   #
   spec.add_development_dependency "debug" if ConvenientService::Dependencies.ruby.mri?
 
+  ##
+  # Used for finding diffs between strings. Useful in console or specs.
+  # - https://github.com/samg/diffy
+  #
+  spec.add_development_dependency "diffy", "~> 3.4.0"
+
   spec.add_development_dependency "faker"
+
+  ##
+  # Used internally by `rerun`.
+  #
+  spec.add_development_dependency "ffi", "~> 1.16.0"
 
   spec.add_development_dependency "gem-release"
 

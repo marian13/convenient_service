@@ -295,6 +295,11 @@ module ConvenientService
         #
         #
         require "convenient_service/dependencies/extractions/ce"
+
+        ##
+        #
+        #
+        require "convenient_service/dependencies/extractions/ds"
       end
 
       ##
