@@ -1,0 +1,4 @@
+# frozen_string_literal: true
+
+require_relative "counts_result_resolutions_invocations/concern"
+require_relative "counts_result_resolutions_invocations/middleware"

@@ -49,6 +49,10 @@ module ConvenientService
           # @raise [ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::ServicePassedAsConstructorArgument]
           # @return [void]
           #
+          # @internal
+          #   NOTE: `refute` is `!assert`.
+          #   - https://docs.seattlerb.org/minitest
+          #
           def refute_service!(collection_type, key, value)
             return unless ::ConvenientService.service?(value)
 
@@ -62,6 +66,10 @@ module ConvenientService
           # @raise [ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::ResultPassedAsConstructorArgument]
           # @return [void]
           #
+          # @internal
+          #   NOTE: `refute` is `!assert`.
+          #   - https://docs.seattlerb.org/minitest
+          #
           def refute_result!(collection_type, key, value)
             return unless ::ConvenientService::Plugins::Service::HasJSendResult.result?(value)
 
@@ -74,6 +82,10 @@ module ConvenientService
           # @param value [Object] Can be any type.
           # @raise [ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::StepPassedAsConstructorArgument]
           # @return [void]
+          #
+          # @internal
+          #   NOTE: `refute` is `!assert`.
+          #   - https://docs.seattlerb.org/minitest
           #
           def refute_step!(collection_type, key, value)
             return unless ::ConvenientService::Plugins::Service::CanHaveSteps.step?(value)

@@ -2,6 +2,7 @@
 
 module ConvenientService
   module Support
+    ##
     # @internal
     #   NOTE: Mutex and Semaphore docs.
     #   - https://ruby-doc.org/core-2.7.0/Mutex.html

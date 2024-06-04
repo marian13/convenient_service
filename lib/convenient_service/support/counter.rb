@@ -200,11 +200,43 @@ module ConvenientService
       end
 
       ##
+      # @return [Integer]
+      #
       # @internal
       #   NOTE: Instance variables are accessed directly to release the lock faster.
       #
       def reset
         @current_value = @initial_value
+      end
+
+      ##
+      # @param block [Proc]
+      # @return [Object] Can be any type.
+      #
+      # @note Lock inside lock causes deadlock. That is why `with_reset` is NOT overridden in `ThreadSafeCounter`.
+      #   require "thread"
+      #
+      #   lock = Mutex.new
+      #
+      #   thread = Thread.new do
+      #     lock.synchronize do
+      #       lock.synchronize do
+      #         puts "foo"
+      #       end
+      #     end
+      #   end
+      #
+      #   thread.join
+      #   =>
+      #   <Thread:0x0000000126f43450 run> terminated with exception (report_on_exception is true):
+      #   `synchronize': deadlock; recursive locking (ThreadError)
+      #
+      def with_reset(&block)
+        reset
+
+        yield(self)
+      ensure
+        reset
       end
     end
   end
