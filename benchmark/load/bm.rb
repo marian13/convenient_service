@@ -4,7 +4,6 @@ require "bundler/setup"
 require "convenient_service"
 require "benchmark"
 
-ConvenientService::Dependencies.require_awesome_print_inspect
 ConvenientService::Dependencies.require_standard_examples
 
 # rubocop:disable Style/MixinUsage
@@ -124,7 +123,7 @@ end
 # root@f9031ad86910:/gem# ruby -v
 # ruby 2.7.8p225 (2023-03-30 revision 1f4d455848) [x86_64-linux]
 #
-# root@f9031ad86910:/gem# ruby benchmark/stress/bm.rb
+# root@f9031ad86910:/gem# ruby benchmark/load/bm.rb
 #                                      user     system      total        real
 # Build service with `12` steps    0.006079   0.000014   0.006093 (  0.006313)
 # Build service with `120` steps   0.018545   0.000127   0.018672 (  0.019022)
@@ -143,8 +142,7 @@ end
 # root@2e8a2e361492:/gem# ruby -v
 # ruby 3.3.0 (2023-12-25 revision 5124f9ac75) [x86_64-linux]
 #
-# root@2e8a2e361492:/gem# ruby benchmark/stress/bm.rb
-# /gem/lib/convenient_service/dependencies/built_in.rb:36: warning: observer was loaded from the standard library, but will no longer be part of the default gems since Ruby 3.4.0. Add observer to your Gemfile or gemspec.
+# root@2e8a2e361492:/gem# ruby benchmark/load/bm.rb
 #                                      user     system      total        real
 # Build service with `12` steps    0.007629   0.000000   0.007629 (  0.007775)
 # Build service with `120` steps   0.022653   0.000000   0.022653 (  0.022785)
@@ -162,7 +160,7 @@ end
 ##
 # root@47ba080093a1:/gem# ruby -v
 # jruby 9.4.5.0 (3.1.4) 2023-11-02 1abae2700f OpenJDK 64-Bit Server VM 25.392-b08 on 1.8.0_392-b08 +jit [x86_64-linux]
-# root@47ba080093a1:/gem# ruby benchmark/stress/bm.rb
+# root@47ba080093a1:/gem# ruby benchmark/load/bm.rb
 #                                      user     system      total        real
 # Build service with `12` steps    0.180000   0.010000   0.190000 (  0.067743)
 # Build service with `120` steps   0.220000   0.030000   0.250000 (  0.105525)

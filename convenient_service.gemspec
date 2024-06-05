@@ -86,6 +86,14 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "benchmark-ips", "~> 2.12.0"
 
   ##
+  # Used for benchmarking (memory allocation). See `benchmark` directory.
+  # - https://github.com/michaelherold/benchmark-memory
+  # - https://medium.com/swlh/benchmarking-in-ruby-86a6c28c1e97
+  # - https://thoughtbot.com/blog/a-crash-course-in-analyzing-memory-usage-in-ruby
+  #
+  spec.add_development_dependency "benchmark-memory", "~> 0.2.0"
+
+  ##
   # Used for debugging any Ruby code (CRuby, JRuby, etc), since it written in plain Ruby.
   # Has minimalistic interface.
   # Does NOT support frame filtering.
@@ -154,6 +162,7 @@ Gem::Specification.new do |spec|
   # Used for memory profiling of Ruby code.
   # - https://github.com/SamSaffron/memory_profiler
   # - https://thoughtbot.com/blog/a-crash-course-in-analyzing-memory-usage-in-ruby
+  # - https://www.toptal.com/ruby/hunting-ruby-memory-issues
   #
   spec.add_development_dependency "memory_profiler"
 
