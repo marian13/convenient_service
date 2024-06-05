@@ -68,7 +68,9 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
                 include ConvenientService::Standard::Config
 
                 middlewares :result, scope: scope do
-                  use_and_observe middleware.with(max_backtrace_size: max_backtrace_size)
+                  unshift middleware.with(max_backtrace_size: max_backtrace_size)
+
+                  observe middleware.with(max_backtrace_size: max_backtrace_size)
                 end
 
                 def result
@@ -94,7 +96,9 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
                   include ConvenientService::Standard::Config
 
                   middlewares :result, scope: scope do
-                    use_and_observe middleware
+                    unshift middleware
+
+                    observe middleware
                   end
 
                   def result
@@ -120,7 +124,9 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
                   include ConvenientService::Standard::Config
 
                   middlewares :result, scope: scope do
-                    use_and_observe middleware.with(status: status, max_backtrace_size: max_backtrace_size)
+                    unshift middleware.with(status: status, max_backtrace_size: max_backtrace_size)
+
+                    observe middleware.with(status: status, max_backtrace_size: max_backtrace_size)
                   end
 
                   def result
@@ -186,7 +192,9 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
                   include ConvenientService::Standard::Config
 
                   middlewares :result, scope: scope do
-                    use_and_observe middleware
+                    unshift middleware
+
+                    observe middleware
                   end
 
                   def result

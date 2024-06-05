@@ -56,7 +56,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
             include ConvenientService::Standard::Config
 
             middlewares :result do
-              use ConvenientService::Plugins::Service::RescuesResultUnhandledExceptions::Middleware
+              unshift ConvenientService::Plugins::Service::RescuesResultUnhandledExceptions::Middleware
             end
 
             def result

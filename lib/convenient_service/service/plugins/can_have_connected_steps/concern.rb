@@ -460,6 +460,37 @@ module ConvenientService
 
           instance_methods do
             ##
+            # @api private
+            #
+            # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
+            #
+            def steps_result
+              steps.each_evaluated_step do |step|
+                step.save_outputs_in_organizer!
+
+                step.trigger_callback
+
+                step.mark_as_completed!
+              end
+
+              steps.result
+            end
+
+            ##
+            # @api private
+            #
+            # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
+            # @raise [ConvenientService::Service::Plugins::HasResult::Exceptions::ResultIsNotOverridden]
+            #
+            def regular_result
+              method = Utils::Object.own_method(self, :result, private: true)
+
+              ::ConvenientService.raise ConvenientService::Service::Plugins::HasResult::Exceptions::ResultIsNotOverridden.new(service: self) unless method
+
+              method.call
+            end
+
+            ##
             # @api public
             #
             # @note May be useful for debugging purposes.

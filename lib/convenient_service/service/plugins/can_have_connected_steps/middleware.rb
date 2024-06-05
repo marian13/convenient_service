@@ -7,21 +7,13 @@ module ConvenientService
         class Middleware < MethodChainMiddleware
           intended_for :result, entity: :service
 
+          alias_method :service, :entity
+
           ##
           # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
           #
           def next(...)
-            return chain.next(...) if entity.steps.none?
-
-            entity.steps.each_evaluated_step do |step|
-              step.save_outputs_in_organizer!
-
-              step.trigger_callback
-
-              step.mark_as_completed!
-            end
-
-            entity.steps.result
+            service.steps.any? ? service.steps_result(...) : service.regular_result(...)
           end
         end
       end

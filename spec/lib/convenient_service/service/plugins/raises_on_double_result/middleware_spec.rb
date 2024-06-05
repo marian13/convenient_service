@@ -49,7 +49,9 @@ RSpec.describe ConvenientService::Service::Plugins::RaisesOnDoubleResult::Middle
             include ConvenientService::Standard::Config
 
             middlewares :result do
-              use_and_observe middleware
+              unshift middleware
+
+              observe middleware
             end
 
             def result
