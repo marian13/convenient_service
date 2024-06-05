@@ -200,6 +200,8 @@ module ConvenientService
       end
 
       ##
+      # @return [Integer]
+      #
       # @internal
       #   NOTE: Instance variables are accessed directly to release the lock faster.
       #
