@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "yard"
 
 ##
@@ -11,34 +13,36 @@ require "yard"
 # @see https://stackoverflow.com/a/901109/12201472
 #
 module YARD
-  module Concern
-    class IncludedHandler < YARD::Handlers::Ruby::Base
-      handles method_call(:included)
+  module ConvenientService
+    module Concern
+      class IncludedHandler < YARD::Handlers::Ruby::Base
+        handles method_call(:included)
 
-      namespace_only
+        namespace_only
 
-      def process
-        parse_block(statement.last.last, namespace: namespace, scope: :instance)
+        def process
+          parse_block(statement.last.last, namespace: namespace, scope: :instance)
+        end
       end
-    end
 
-    class InstanceMethodsHandler < YARD::Handlers::Ruby::Base
-      handles method_call(:instance_methods)
+      class InstanceMethodsHandler < YARD::Handlers::Ruby::Base
+        handles method_call(:instance_methods)
 
-      namespace_only
+        namespace_only
 
-      def process
-        parse_block(statement.last.last, namespace: namespace, scope: :instance)
+        def process
+          parse_block(statement.last.last, namespace: namespace, scope: :instance)
+        end
       end
-    end
 
-    class ClassMethodsHandler < YARD::Handlers::Ruby::Base
-      handles method_call(:class_methods)
+      class ClassMethodsHandler < YARD::Handlers::Ruby::Base
+        handles method_call(:class_methods)
 
-      namespace_only
+        namespace_only
 
-      def process
-        parse_block(statement.last.last, namespace: namespace, scope: :class)
+        def process
+          parse_block(statement.last.last, namespace: namespace, scope: :class)
+        end
       end
     end
   end

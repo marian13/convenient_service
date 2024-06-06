@@ -1,16 +1,11 @@
-##
-# NOTE: This config is used by `task docs:generate`.
-#
-# NOTE: `.yardopts` docs.
-# https://rubydoc.info/gems/yard/YARD/CLI/Yardoc
-#
-# NOTE: `@internal` tag.
-# https://github.com/lsegal/yard/issues/484#issuecomment-442596174
-#
 --markup markdown
 --markup-provider commonmarker
 --output-dir docs/api
---tag internal --hide-tag internal
+--no-private
+--tag internal
+--hide-tag internal
 --plugin convenient_service_concern
-'lib/**/*.rb' -
+--plugin convenient_service_exclude_self_classes
+'lib/**/*.rb'
+-
 README.md

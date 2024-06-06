@@ -253,6 +253,31 @@ tasks:
   #
   # NOTE: Options are specified in the `.yardopts` file.
   #
+  # NOTE: Check `yard` own sources to find comprehensive usage examples.
+  # - https://github.com/lsegal/yard
+  #
+  # NOTE: `.yardopts` docs.
+  # - https://rubydoc.info/gems/yard/YARD/CLI/Yardoc
+  #
+  # NOTE: Examples of `.yardopts`.
+  # - https://github.com/lsegal/yard/blob/main/.yardopts
+  # - https://github.com/rspec/rspec-core/blob/main/.yardopts
+  #
+  # NOTE: `yard` intentionally does NOT support `:nodoc`. Internal API must be also documented for contributors.
+  # - https://rubydoc.tenderapp.com/kb/getting-started-with-rubydocinfo/where-is-my-nodoc
+  #
+  # NOTE: `@internal` tag docs.
+  # - https://github.com/lsegal/yard/issues/484#issuecomment-442596174
+  #
+  # NOTE: `@private` tag docs.
+  # - https://rubydoc.tenderapp.com/kb/getting-started-with-rubydocinfo/where-is-my-nodoc
+  #
+  # NOTE: `.yardopts` does NOT support comments, that is why all notes are inside this Taskfile.
+  # - https://github.com/lsegal/yard/blob/v0.9.36/lib/yard/core_ext/string.rb#L8
+  #
+  # TODO: Consider to utilize `yard-spec-plugin`.
+  # - https://github.com/lsegal/yard-spec-plugin
+  #
   docs:generate:
     cmds:
       ##
