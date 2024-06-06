@@ -266,7 +266,7 @@ tasks:
   docs:generate:open:
     cmds:
       - task: docs:generate
-      - open docs/index.html
+      - open docs/api/index.html
     preconditions:
       - *from-host-os
       - *from-mac-os
