@@ -70,6 +70,14 @@ AllCops:
     #
     - lib/convenient_service/dependencies/**/*
 
+##
+# NOTE: Forces to use `# frozen_string_literal: true` in every Ruby file.
+# - https://docs.rubocop.org/rubocop/cops_style.html#stylefrozenstringliteralcomment
+#
+Style/FrozenStringLiteralComment:
+  Enabled: true
+  EnforcedStyle: always_true
+
 # MagicNumbers:
 #   Exclude:
 #     ##

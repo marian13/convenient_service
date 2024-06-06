@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ##
 # A custom runner for minitest.
 # It is created to have a "simpler" interface than original rake task provides.

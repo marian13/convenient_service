@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ##
 # Reset `faker` seed before every spec to have deterministic results.
 # - https://github.com/faker-ruby/faker#deterministic-random
