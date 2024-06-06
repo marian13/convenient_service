@@ -54,3 +54,5 @@ module YARD
     end
   end
 end
+
+puts "[Convenient Service][YARD]: `yard-convenient_service_exclude_self_classes` plugin loaded."

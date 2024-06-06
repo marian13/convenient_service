@@ -47,3 +47,5 @@ module YARD
     end
   end
 end
+
+puts "[Convenient Service][YARD]: `yard-convenient_service_concern` plugin loaded."
