@@ -317,7 +317,15 @@ tasks:
       # NOTE: `RUBYLIB` is used to extend Ruby's `$LOAD_PATH`. This way yard treats `./yard` folder as a directory with custom gems.
       # NOTE: Options are specified in the `.yardopts` file.
       #
-      - RUBYLIB=./yard bundle exec yard server
+      # NOTE: `--reload` option docs.
+      # - `yard server --help`.
+      # - https://yardoc.org/index.html
+      # - https://github.com/lsegal/yard/blob/main/lib/yard/cli/server.rb#L173
+      # - https://groups.google.com/g/yardoc/c/PU-XJzsvL4Q
+      #
+      # NOTE: Use `--debug` option for verbose logging and debugging.
+      #
+      - RUBYLIB=./yard bundle exec yard server --reload
     preconditions:
       - *from-host-os
 
