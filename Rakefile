@@ -40,8 +40,10 @@ task :playground do
 
   require_relative "spec/support/convenient_service"
   require_relative "spec/support/convenient_service/standard"
-  require_relative "spec/support/convenient_service/rails" if ENV["APPRAISAL_NAME"] == "all" || ENV["APPRAISAL_NAME"].include?("rails")
-  require_relative "spec/support/convenient_service/dry" if ENV["APPRAISAL_NAME"] == "all" || ENV["APPRAISAL_NAME"].include?("dry")
+  require_relative "spec/support/convenient_service/rails" if ENV["APPRAISAL_NAME"] == "all" || ENV["APPRAISAL_NAME"].to_s.include?("rails")
+  require_relative "spec/support/convenient_service/dry" if ENV["APPRAISAL_NAME"] == "all" || ENV["APPRAISAL_NAME"].to_s.include?("dry")
+  require_relative "spec/support/convenient_service/awesome_print" if ENV["APPRAISAL_NAME"] == "all" || ENV["APPRAISAL_NAME"].to_s.include?("awesome_print")
+  require_relative "spec/support/convenient_service/amazing_print" if ENV["APPRAISAL_NAME"].to_s.include?("amazing_print")
 
   ##
   # NOTE: Clears `ARGV` since both `rake` and `irb` uses it.
