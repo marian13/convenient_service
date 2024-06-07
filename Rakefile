@@ -36,8 +36,6 @@ end
 task :playground do
   require "irb"
 
-  require_relative "env"
-
   require "convenient_service"
 
   require_relative "spec/support/convenient_service"
