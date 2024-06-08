@@ -59,7 +59,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
       let(:step) { container.new.steps.first }
 
-      let(:keywords) { ["ConvenientService", "entity", "Step", "container", "ContainerService", "service", "StepService"] }
+      let(:keywords) { ["ConvenientService", ":entity", "Step", ":container", "ContainerService", ":service", "StepService"] }
 
       it "returns `inspect` representation of step" do
         expect(step.inspect).to include(*keywords)
@@ -83,7 +83,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           end
         end
 
-        let(:keywords) { ["ConvenientService", "entity", "Step", "container", "ContainerService", "method", ":result"] }
+        let(:keywords) { ["ConvenientService", ":entity", "Step", ":container", "ContainerService", ":method", ":result"] }
 
         it "returns `inspect` representation of step" do
           expect(step.inspect).to include(*keywords)

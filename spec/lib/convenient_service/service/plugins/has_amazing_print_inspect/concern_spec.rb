@@ -47,7 +47,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasAmazingPrintInspect::Conc
 
     let(:service_instance) { service_class.new }
     let(:inspect_values) { {name: service_class.name} }
-    let(:keywords) { ["ConvenientService", "entity", "Service", "name", "ImportantService"] }
+    let(:keywords) { ["ConvenientService", ":entity", "Service", ":name", "ImportantService"] }
 
     describe "#inspect" do
       it "returns `inspect` representation of service" do

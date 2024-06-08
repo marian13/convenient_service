@@ -48,7 +48,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
 
       let(:data) { service.result.data }
 
-      let(:keywords) { ["ConvenientService", "entity", "Data", "result", data.result.class.name, "values", ":foo", "bar"] }
+      let(:keywords) { ["ConvenientService", ":entity", "Data", ":result", data.result.class.name, ":values", ":foo", "bar"] }
 
       before do
         ##
@@ -80,7 +80,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           end
         end
 
-        let(:keywords) { ["ConvenientService", "entity", "Data", "result", data.result.class.name, "values", "{}"] }
+        let(:keywords) { ["ConvenientService", ":entity", "Data", ":result", data.result.class.name, ":values", "{}"] }
 
         it "returns `inspect` representation of data" do
           expect(data.inspect).to include(*keywords)

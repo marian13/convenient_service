@@ -48,7 +48,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
 
       let(:status) { service.result.status }
 
-      let(:keywords) { ["ConvenientService", "entity", "Status", "result", status.result.class.name, "type", ":success"] }
+      let(:keywords) { ["ConvenientService", ":entity", "Status", ":result", status.result.class.name, ":type", ":success"] }
 
       before do
         ##

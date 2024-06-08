@@ -52,7 +52,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
 
       let(:result) { service.result }
 
-      let(:keywords) { ["ConvenientService", "entity", "Result", "service", "ImportantService", "status", ":success"] }
+      let(:keywords) { ["ConvenientService", ":entity", "Result", ":service", "ImportantService", ":status", ":success"] }
 
       it "returns `inspect` representation of result" do
         expect(result.inspect).to include(*keywords)
@@ -83,7 +83,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           end
         end
 
-        let(:keywords) { ["ConvenientService", "entity", "Result", "service", "ImportantService", "status", ":success", "data_keys", "foo"] }
+        let(:keywords) { ["ConvenientService", ":entity", "Result", ":service", "ImportantService", ":status", ":success", ":data_keys", "foo"] }
 
         it "includes data keys into `inspect` representation of result" do
           expect(result.inspect).to include(*keywords)
@@ -106,7 +106,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
             end
           end
 
-          let(:keywords) { ["ConvenientService", "entity", "Result", "service", "ImportantService", "status", ":success", "data_keys", "foo", "baz", "quux"] }
+          let(:keywords) { ["ConvenientService", ":entity", "Result", ":service", "ImportantService", ":status", ":success", ":data_keys", "foo", "baz", "quux"] }
 
           it "delegates to `data.keys.inspect`" do
             expect(result.inspect).to include(*keywords)
@@ -131,7 +131,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           end
         end
 
-        let(:keywords) { ["ConvenientService", "entity", "Result", "service", "ImportantService", "status", ":error", "message", "foo"] }
+        let(:keywords) { ["ConvenientService", ":entity", "Result", ":service", "ImportantService", ":status", ":error", ":message", "foo"] }
 
         it "includes message into `inspect` representation of result" do
           expect(result.inspect).to include(*keywords)
