@@ -14,7 +14,7 @@ module ConvenientService
               step SuccessService,
                 in: {index: -> { 0 }}
 
-              or_step :success_method,
+              or_step :error_method,
                 in: {index: -> { 1 }}
             end
 
@@ -46,7 +46,7 @@ module ConvenientService
               not_step SuccessService,
                 in: {index: -> { 8 }}
 
-              and_not_step :success_method,
+              and_not_step :error_method,
                 in: {index: -> { 9 }}
             end
 
@@ -82,6 +82,10 @@ module ConvenientService
 
             def failure_method(index:)
               failure(index: index)
+            end
+
+            def error_method(index:)
+              error(index: index)
             end
 
             def puts(...)
