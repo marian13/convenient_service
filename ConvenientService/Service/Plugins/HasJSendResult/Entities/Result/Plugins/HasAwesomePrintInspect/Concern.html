@@ -204,8 +204,8 @@
     <span class='rbrace'>}</span>
   <span class='rbrace'>}</span>
 
-  <span class='id identifier rubyid_metadata'>metadata</span><span class='lbracket'>[</span><span class='symbol'>:data_keys</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_unsafe_data'>unsafe_data</span><span class='period'>.</span><span class='id identifier rubyid_keys'>keys</span> <span class='kw'>if</span> <span class='id identifier rubyid_unsafe_data'>unsafe_data</span><span class='period'>.</span><span class='id identifier rubyid_keys'>keys</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span>
-  <span class='id identifier rubyid_metadata'>metadata</span><span class='lbracket'>[</span><span class='symbol'>:message</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_unsafe_message'>unsafe_message</span> <span class='kw'>unless</span> <span class='id identifier rubyid_unsafe_message'>unsafe_message</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+  <span class='id identifier rubyid_metadata'>metadata</span><span class='lbracket'>[</span><span class='symbol'>:ConvenientService</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='symbol'>:data_keys</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_unsafe_data'>unsafe_data</span><span class='period'>.</span><span class='id identifier rubyid_keys'>keys</span> <span class='kw'>if</span> <span class='id identifier rubyid_unsafe_data'>unsafe_data</span><span class='period'>.</span><span class='id identifier rubyid_keys'>keys</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span>
+  <span class='id identifier rubyid_metadata'>metadata</span><span class='lbracket'>[</span><span class='symbol'>:ConvenientService</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='symbol'>:message</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_unsafe_message'>unsafe_message</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span> <span class='kw'>unless</span> <span class='id identifier rubyid_unsafe_message'>unsafe_message</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
 
   <span class='id identifier rubyid_metadata'>metadata</span><span class='period'>.</span><span class='id identifier rubyid_ai'>ai</span>
 <span class='kw'>end</span></pre>
@@ -219,7 +219,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Jun  8 01:30:57 2024 by
+  Generated on Sat Jun  8 15:02:23 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.36 (ruby-3.2.4).
 </div>
