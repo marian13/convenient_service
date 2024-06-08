@@ -1,5 +1,54 @@
 # Changelog
 
+## [0.19.0](https://github.com/marian13/convenient_service/compare/v0.18.0...v0.19.0) (2024-06-08)
+
+
+### Features
+
+* **can_have_steps:** introduce StepCollection#size ([6360e2e](https://github.com/marian13/convenient_service/commit/6360e2ea7acc5653723be1bea03cdf81b9b0ea1c))
+* **configs:** introduce AmazingPrintInspect config ([3035523](https://github.com/marian13/convenient_service/commit/303552349b6890971a16f4ad91d1a672bf67cc13))
+* **docker:** add Ruby 3.4.0-preview1 ([a115459](https://github.com/marian13/convenient_service/commit/a115459b42f8e4580950b0b0ab1dba27b3c23271))
+* **fallback:** introduce fallback_result that is called for both failure and error, but has lower priority when specific method is defined ([498bde0](https://github.com/marian13/convenient_service/commit/498bde0a3215869c5c3184cb4177aac2e3c7c13c))
+* **fallbacks:** do not allow fallbacks for method steps ([f90abdd](https://github.com/marian13/convenient_service/commit/f90abddbaabbc340b9273a9c39da9b1ad3a68c5b))
+* **middleware_stack:** introduce alias #prepend for #unshift, #remove for #delete ([527bb34](https://github.com/marian13/convenient_service/commit/527bb342e290a3c925bceb8500bc6c133fb6c3b5))
+* **plugins:** introduce ForbidsConvenientServiceEntitiesAsConstructorArguments ([088505d](https://github.com/marian13/convenient_service/commit/088505db8ab01dda5814d92756a4c3dbc6a0d07d))
+* **result:** introduce Result#from_exception? ([a47838a](https://github.com/marian13/convenient_service/commit/a47838a47a5db998e045c6d9ac2ff90fb77c6818))
+* **result:** introduce Result#from_step? ([66cdf2a](https://github.com/marian13/convenient_service/commit/66cdf2a817b86312c4542a8904a3f256ba751831))
+* **rollback:** introduce initial version of HasRollbacks ([306960d](https://github.com/marian13/convenient_service/commit/306960d075a7d62a2e4c0db2dc5bcf03f7d7b514))
+* **service:** introduce ConvenientService::Service::Plugins::CanHaveSteps.step? ([340d327](https://github.com/marian13/convenient_service/commit/340d32724bd16d44a2a55389b50953c8c19eaedd))
+* **service:** introduce ConvenientService.service? and ConvenientService.service_class? ([c4caf14](https://github.com/marian13/convenient_service/commit/c4caf144affdea74fb32728ca9377eb7ff7f0aea))
+* **step:** cache Step#service_result ([2fd0cd9](https://github.com/marian13/convenient_service/commit/2fd0cd97ffdd4cbb3c3aee1e6c6ad71510780824))
+* **step:** introduce Step#printable_container ([9a555bd](https://github.com/marian13/convenient_service/commit/9a555bd276e6eb903dccf340e145687540d3ab16))
+* **support:** introduce Ruby#mri? ([a336874](https://github.com/marian13/convenient_service/commit/a336874532e0a5e06e6721068876efeff9278bb1))
+* **utils:** introduce Object.own_method ([39e3c08](https://github.com/marian13/convenient_service/commit/39e3c0861fe33fb3c866280999cd726674a46c24))
+* **utils:** introduce Object.safe_send ([c66a551](https://github.com/marian13/convenient_service/commit/c66a5517e55f2a718472612be112d88f71178204))
+* **utils:** introduce String.enclose ([10971c5](https://github.com/marian13/convenient_service/commit/10971c5e7cf329ab926ea8271aa3b5d1bcab9fa8))
+* **utils:** rescue all standard error exceptions from Object.safe_send ([2470a62](https://github.com/marian13/convenient_service/commit/2470a626f69b400b05280a78869c5248a4c404fc))
+
+
+### Bug Fixes
+
+* **awesome/amazing_print:** use message key as nested ([86e41bf](https://github.com/marian13/convenient_service/commit/86e41bf57ea4fdefc8f6cceca47f208374c09b76))
+* **BACKLOG:** remove typo ([3fcae2b](https://github.com/marian13/convenient_service/commit/3fcae2bb33c16ad66708df739da1b411237eebc5))
+* **can_have_connected_steps:** do not evaluate right expression when it can be avoided ([131f911](https://github.com/marian13/convenient_service/commit/131f911bc3a32784e1bb2cd28ffc7a02ca75c5f7))
+* **can_have_connected_steps:** use ConvenientService.raise ([a19ce55](https://github.com/marian13/convenient_service/commit/a19ce55dffe870abd3500d58520663a716cec56e))
+* **can_have_fallbacks:** use ConvenientService.raise ([148317d](https://github.com/marian13/convenient_service/commit/148317df2d9973692ff2d60b404021c72c3c8cab))
+* **forbids_convenient_service_entities_as_constructor_arguments:** use ConvenientService.raise ([1e5a260](https://github.com/marian13/convenient_service/commit/1e5a2600f723a8356f7c067d8db2d88585c0245a))
+* **forbids_convenient_service_entities_as_constructor_arguments:** use ConvenientService.raise ([ca89de8](https://github.com/marian13/convenient_service/commit/ca89de850fca336408b7c4dc90a271d196687a56))
+* **ruby_engine_version:** remove wrong memoization ([addbd54](https://github.com/marian13/convenient_service/commit/addbd545df02011fd3c140024b699db60645d81a))
+* **step:** respect aliases for last(all) steps ([b8285e3](https://github.com/marian13/convenient_service/commit/b8285e33c764a61bd8fa1df6e126e45c4491a5a6))
+* **Taskfile:** remove typo ([a577fbd](https://github.com/marian13/convenient_service/commit/a577fbd5a5949fa11963b024e76fe6dab1ce509c))
+
+
+### Performance Improvements
+
+* **method_middleware:** inline env normalization ([2dfe210](https://github.com/marian13/convenient_service/commit/2dfe2104834cce1fd0bfbfc9dd5436f78d54beee))
+
+
+### Miscellaneous Chores
+
+* release 0.19.0 ([4df0c8b](https://github.com/marian13/convenient_service/commit/4df0c8b8d80dabf14419594b8630cd3c469ae75b))
+
 ## [0.18.0](https://github.com/marian13/convenient_service/compare/v0.17.0...v0.18.0) (2024-03-07)
 
 
