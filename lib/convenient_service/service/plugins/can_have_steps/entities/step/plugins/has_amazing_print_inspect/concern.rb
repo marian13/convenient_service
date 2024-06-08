@@ -26,10 +26,11 @@ module ConvenientService
                       metadata = {
                         ConvenientService: {
                           entity: "Step",
-                          container: container.klass.name,
-                          **(method_step? ? {method: ":#{method}"} : {service: service.klass.name})
+                          container: container.klass.name
                         }
                       }
+
+                      metadata[:ConvenientService].merge!(method_step? ? {method: ":#{method}"} : {service: service.klass.name})
 
                       metadata.ai
                     end
