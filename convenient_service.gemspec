@@ -154,6 +154,12 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "gem-release"
 
+  ##
+  # Used as console/playground with loaded Convenient Service.
+  # - https://github.com/ruby/irb
+  #
+  spec.add_development_dependency "irb", "~> 1.13.1"
+
   spec.add_development_dependency "inch"
 
   spec.add_development_dependency "json"
@@ -203,7 +209,17 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "progressbar"
 
-  spec.add_development_dependency "rake", "~> 12.0"
+  ##
+  # Used as console/playground with loaded Convenient Service.
+  # - https://github.com/pry/pry
+  #
+  spec.add_development_dependency "pry", "~> 0.14.2"
+
+  ##
+  # Used as Ruby task runner.
+  # - https://github.com/ruby/rake
+  #
+  spec.add_development_dependency "rake", "~> 12.3.3"
 
   spec.add_development_dependency "rerun"
 

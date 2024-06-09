@@ -392,6 +392,16 @@ tasks:
       - task: deps:install
 
   ##
+  # NOTE: See `task console` for usage examples.
+  #
+  irb:
+    cmds:
+      - "{{.BUNDLE_EXEC_PREFIX}} rake irb"
+    vars:
+      BUNDLE_EXEC_PREFIX: *BUNDLE_EXEC_PREFIX
+    interactive: true
+
+  ##
   # NOTE: Usage examples.
   #   task lint
   #   AUTOCORRECT=true task lint
@@ -434,6 +444,16 @@ tasks:
   playground:
     cmds:
       - "{{.BUNDLE_EXEC_PREFIX}} rake console"
+    vars:
+      BUNDLE_EXEC_PREFIX: *BUNDLE_EXEC_PREFIX
+    interactive: true
+
+  ##
+  # NOTE: See `task console` for usage examples.
+  #
+  pry:
+    cmds:
+      - "{{.BUNDLE_EXEC_PREFIX}} rake pry"
     vars:
       BUNDLE_EXEC_PREFIX: *BUNDLE_EXEC_PREFIX
     interactive: true
