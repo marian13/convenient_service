@@ -77,7 +77,7 @@ tasks:
   #
   console:
     cmds:
-      - "{{.BUNDLE_EXEC_PREFIX}} rake playground"
+      - "{{.BUNDLE_EXEC_PREFIX}} rake console"
     vars:
       BUNDLE_EXEC_PREFIX: *BUNDLE_EXEC_PREFIX
     interactive: true
@@ -120,10 +120,10 @@ tasks:
   #
   deps:clean:
     cmds:
-      - "bundle exec rake confirm \"This task removes Gemfile.* and gemfiles/**/*. Are you sure?\""
       - rm Gemfile.* 2> /dev/null || true
       - rm -rf gemfiles
       - touch gemfiles/.gitkeep
+    prompt: This task removes Gemfile.* and gemfiles/**/*. Are you sure?
 
   ##
   # NOTE: Usage examples.
@@ -433,7 +433,7 @@ tasks:
   #
   playground:
     cmds:
-      - "{{.BUNDLE_EXEC_PREFIX}} rake playground"
+      - "{{.BUNDLE_EXEC_PREFIX}} rake console"
     vars:
       BUNDLE_EXEC_PREFIX: *BUNDLE_EXEC_PREFIX
     interactive: true

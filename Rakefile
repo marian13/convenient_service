@@ -1,39 +1,15 @@
 # frozen_string_literal: true
 
-require "bundler/gem_tasks"
-
 ##
 # NOTE: Why not `bin` folder? It has a different purpose. It should contain "binaries/executables" that can be used by the end user.
 # Search for `bin` in the following links for more info.
 # - https://guides.rubygems.org/what-is-a-gem/
 # - https://guides.rubygems.org/faqs/
-#
-task :confirm do
-  require "tty-prompt"
+##
 
-  ##
-  # NOTE: `ARGV[0]` contains `confirm` (this task name).
-  #
-  message = ARGV[1] || "Are you sure?"
+require "bundler/gem_tasks"
 
-  ##
-  # NOTE: Why "tty-prompt"? No time to write, maintain complex, cross-platform bash scripts if you are a full-time application developer.
-  #
-  prompt = TTY::Prompt.new
-
-  ##
-  # NOTE: `prompt.yes?` docs.
-  # https://github.com/piotrmurach/tty-prompt#25-yesno
-  #
-  yes = prompt.yes?(message)
-
-  ##
-  # NOTE: Use `echo $?` to debug exit code (0 means ok, 1 - error).
-  #
-  yes ? exit(0) : exit(1)
-end
-
-task :playground do
+task :console do
   require "irb"
 
   require "convenient_service"
