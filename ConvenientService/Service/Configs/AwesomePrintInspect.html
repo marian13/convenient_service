@@ -88,7 +88,125 @@
   
 </div>
 
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>Patches services to use Awesome Print to generate colored <code>inspect</code> strings.
+Useful for debugging.
+Works as expected for <code>byebug</code> and <code>pry</code>.</p>
+<p>Has issues with escaping colors for <code>binding.break</code> and <code>irb</code>.
+There is a workaround in the examples, but its possible negative outcome has not been investigated yet. Use it at your own risk.</p>
 
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p><code>AwesomePrintInspect</code> output for <code>byebug</code> or <code>pry</code>.</p>
+</div></p>
+      
+      <pre class="example code"><code>class Service
+  include ::ConvenientService::Standard::Config
+  include ::ConvenientService::AwesomePrintInspect::Config
+
+  def result
+    success(foo: :bar)
+  end
+end
+
+Service.result
+# =&gt;
+{
+  :ConvenientService =&gt; {
+         :entity =&gt; &quot;Result&quot;,
+        :service =&gt; &quot;Service&quot;,
+         :status =&gt; :success,
+      :data_keys =&gt; [
+          [0] :foo
+      ]
+  }
+}</code></pre>
+    
+      
+        <p class="example_title"><div class='inline'><p><code>AwesomePrintInspect</code> output for <code>binding.break</code> or <code>irb</code>.</p>
+</div></p>
+      
+      <pre class="example code"><code>
+class Service
+  include ::ConvenientService::Standard::Config
+  include ::ConvenientService::AwesomePrintInspect::Config
+
+  def result
+    success(foo: :bar)
+  end
+end
+
+Service.result
+# =&gt;
+{
+  :ConvenientService^[[0;37m =&gt; ^[[0m{
+         :entity^[[0;37m =&gt; ^[[0m^[[0;33m&quot;Result&quot;^[[0m,
+        :service^[[0;37m =&gt; ^[[0m^[[0;33m&quot;Service&quot;^[[0m,
+         :status^[[0;37m =&gt; ^[[0m^[[0;36m:success^[[0m,
+      :data_keys^[[0;37m =&gt; ^[[0m[
+          ^[[1;37m[0] ^[[0m^[[0;36m:foo^[[0m
+      ]
+    }
+}</code></pre>
+    
+      
+        <p class="example_title"><div class='inline'><p><code>AwesomePrintInspect</code> output for <code>binding.break</code> or <code>irb</code> with <code>Reline</code> hack.</p>
+</div></p>
+      
+      <pre class="example code"><code>
+class Service
+  include ::ConvenientService::Standard::Config
+  include ::ConvenientService::AwesomePrintInspect::Config
+
+  def result
+    success(foo: :bar)
+  end
+end
+
+class Reline::Unicode
+  def self.escape_for_print(str)
+    str
+  end
+end
+
+Service.result
+# =&gt;
+{
+  :ConvenientService =&gt; {
+         :entity =&gt; &quot;Result&quot;,
+        :service =&gt; &quot;Service&quot;,
+         :status =&gt; :success,
+      :data_keys =&gt; [
+          [0] :foo
+      ]
+  }
+}</code></pre>
+    
+  </div>
+
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://github.com/awesome-print/awesome_print" target="_parent" title="https://github.com/awesome-print/awesome_print">https://github.com/awesome-print/awesome_print</a></li>
+    
+      <li><a href="https://github.com/ruby/irb/blob/v1.13.1/lib/irb/inspector.rb#L113" target="_parent" title="https://github.com/ruby/irb/blob/v1.13.1/lib/irb/inspector.rb#L113">https://github.com/ruby/irb/blob/v1.13.1/lib/irb/inspector.rb#L113</a></li>
+    
+      <li><a href="https://github.com/ruby/irb/blob/v1.13.1/lib/irb/color.rb#L150" target="_parent" title="https://github.com/ruby/irb/blob/v1.13.1/lib/irb/color.rb#L150">https://github.com/ruby/irb/blob/v1.13.1/lib/irb/color.rb#L150</a></li>
+    
+      <li><a href="https://github.com/ruby/reline/blob/v0.5.8/lib/reline/unicode.rb#L30" target="_parent" title="https://github.com/ruby/reline/blob/v0.5.8/lib/reline/unicode.rb#L30">https://github.com/ruby/reline/blob/v0.5.8/lib/reline/unicode.rb#L30</a></li>
+    
+  </ul>
+
+</div>
 
 
 
@@ -118,7 +236,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Jun  9 18:15:27 2024 by
+  Generated on Sun Jun  9 22:37:29 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.36 (ruby-3.2.4).
 </div>
