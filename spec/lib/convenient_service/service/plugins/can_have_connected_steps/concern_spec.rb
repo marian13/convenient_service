@@ -1279,7 +1279,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
     end
 
     describe "#steps_result" do
-      context "when service has NOT steps" do
+      context "when service has NO steps" do
         let(:exception_message) do
           <<~TEXT
             #{ConvenientService::Utils::Class.display_name(service_class)} has NO steps.
