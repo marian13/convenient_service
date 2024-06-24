@@ -11,4 +11,5 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Excep
   specify { expect(described_class::FirstGroupStepIsNotSet).to be_descendant_of(ConvenientService::Exception) }
   specify { expect(described_class::EmptyExpressionHasNoResult).to be_descendant_of(ConvenientService::Exception) }
   specify { expect(described_class::EmptyExpressionHasNoStatus).to be_descendant_of(ConvenientService::Exception) }
+  specify { expect(described_class::ServiceHasNoSteps).to be_descendant_of(ConvenientService::Exception) }
 end

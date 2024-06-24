@@ -23,7 +23,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::Format, ty
 
   example_group "class methods" do
     describe ".result" do
-      subject(:result) { service.result(path: path) }
+      subject(:result) { service.result }
 
       let(:service) { described_class.new(path: path) }
       let(:path) { file.path }

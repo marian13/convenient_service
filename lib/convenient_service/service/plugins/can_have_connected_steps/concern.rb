@@ -481,6 +481,24 @@ module ConvenientService
             end
 
             ##
+            # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
+            # @raise [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Exceptions::ServiceHasNoSteps]
+            #
+            def steps_result
+              ::ConvenientService.raise Exceptions::ServiceHasNoSteps.new(service_class: self.class) if steps.none?
+
+              steps.each_evaluated_step do |step|
+                step.save_outputs_in_organizer!
+
+                step.trigger_callback
+
+                step.mark_as_completed!
+              end
+
+              steps.result
+            end
+
+            ##
             # @api private
             #
             # Returns step by index.

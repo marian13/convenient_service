@@ -1278,6 +1278,244 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
       specify { expect(service_instance.steps).to be_committed }
     end
 
+    describe "#steps_result" do
+      context "when service has NOT steps" do
+        let(:exception_message) do
+          <<~TEXT
+            #{ConvenientService::Utils::Class.display_name(service_class)} has NO steps.
+          TEXT
+        end
+
+        it "raises `ConvenientService::Service::Plugins::CanHaveConnectedSteps::Exceptions::ServiceHasNoSteps`" do
+          expect { service_instance.steps_result }
+            .to raise_error(ConvenientService::Service::Plugins::CanHaveConnectedSteps::Exceptions::ServiceHasNoSteps)
+            .with_message(exception_message)
+        end
+
+        specify do
+          expect { ignoring_exception(ConvenientService::Service::Plugins::CanHaveConnectedSteps::Exceptions::ServiceHasNoSteps) { service_instance.steps_result } }
+            .to delegate_to(ConvenientService, :raise)
+        end
+      end
+
+      context "when service has steps" do
+        context "when intermediate step is NOT successful" do
+          let(:first_step) do
+            Class.new do
+              include ConvenientService::Standard::Config
+
+              def result
+                error
+              end
+            end
+          end
+
+          let(:second_step) do
+            Class.new do
+              include ConvenientService::Standard::Config
+
+              def result
+                success
+              end
+            end
+          end
+
+          let(:service_class) do
+            Class.new.tap do |klass|
+              klass.class_exec(first_step, second_step) do |first_step, second_step|
+                include ConvenientService::Standard::Config
+
+                step first_step
+
+                step second_step
+
+                def result
+                  success
+                end
+              end
+            end
+          end
+
+          it "returns result of intermediate step" do
+            expect(service_instance.steps_result).to eq(ConvenientService::Utils::Array.find_last(service_instance.steps, &:completed?).result)
+          end
+
+          it "returns result with unchecked status" do
+            expect(service_instance.steps_result.checked?).to eq(false)
+          end
+
+          it "does NOT evaluate results of following steps" do
+            expect { service_instance.steps_result }.not_to delegate_to(second_step, :new)
+          end
+
+          it "saves intermediate step outputs into organizer" do
+            expect { service_instance.steps_result }.to delegate_to(service_instance.steps[0], :save_outputs_in_organizer!).without_arguments
+          end
+
+          it "marks intermediate step as completed" do
+            expect { service_instance.steps_result }.to change(service_instance.steps[0], :completed?).from(false).to(true)
+          end
+
+          it "triggers callback for intermediate step" do
+            expect { service_instance.steps_result }
+              .to delegate_to(service_instance.steps[0], :trigger_callback)
+              .without_arguments
+          end
+
+          it "saves step outputs into organizer" do
+            expect { service_instance.steps_result }.not_to delegate_to(service_instance.steps[1], :save_outputs_in_organizer!)
+          end
+
+          it "does NOT mark following steps as completed" do
+            expect { service_instance.steps_result }.not_to change(service_instance.steps[1], :completed?).from(false)
+          end
+
+          it "does NOT trigger callback for following steps" do
+            expect { service_instance.steps_result }
+              .not_to delegate_to(service_instance.steps[1], :trigger_callback)
+              .without_arguments
+          end
+
+          example_group "order of side effects" do
+            let(:exception) { Class.new(StandardError) }
+
+            before do
+              allow(service_instance.steps[0]).to receive(:result).and_raise(exception)
+            end
+
+            it "does NOT save step outputs into organizer before checking status" do
+              expect { ignoring_exception(exception) { service_instance.steps_result } }.not_to delegate_to(service_instance.steps[0], :save_outputs_in_organizer!)
+            end
+
+            it "does NOT mark intermediate step as completed before checking status" do
+              expect { ignoring_exception(exception) { service_instance.steps_result } }.not_to change(service_instance.steps[0], :completed?).from(false)
+            end
+
+            it "does NOT trigger callback for intermediate step before checking status" do
+              expect { ignoring_exception(exception) { service_instance.steps_result } }
+                .not_to delegate_to(service_instance.steps[0], :trigger_callback)
+                .without_arguments
+            end
+          end
+        end
+
+        context "when all steps are successful" do
+          let(:first_step) do
+            Class.new do
+              include ConvenientService::Standard::Config
+
+              def result
+                success
+              end
+            end
+          end
+
+          let(:second_step) do
+            Class.new do
+              include ConvenientService::Standard::Config
+
+              def result
+                success
+              end
+            end
+          end
+
+          let(:service_class) do
+            Class.new.tap do |klass|
+              klass.class_exec(first_step, second_step) do |first_step, second_step|
+                include ConvenientService::Standard::Config
+
+                step first_step
+
+                step second_step
+
+                def result
+                  success
+                end
+              end
+            end
+          end
+
+          it "returns result of last step" do
+            expect(service_instance.steps_result).to eq(service_instance.steps[-1].result)
+          end
+
+          it "returns result with unchecked status" do
+            expect(service_instance.steps_result.checked?).to eq(false)
+          end
+
+          it "saves intermediate step outputs into organizer" do
+            expect { service_instance.steps_result }
+              .to delegate_to(service_instance.steps[0], :save_outputs_in_organizer!)
+              .without_arguments
+          end
+
+          it "marks intermediate step as completed" do
+            expect { service_instance.steps_result }.to change(service_instance.steps[0], :completed?).from(false).to(true)
+          end
+
+          it "triggers callback for intermediate step" do
+            expect { service_instance.steps_result }
+              .to delegate_to(service_instance.steps[0], :trigger_callback)
+              .without_arguments
+          end
+
+          it "saves last step outputs into organizer" do
+            expect { service_instance.steps_result }
+              .to delegate_to(service_instance.steps[1], :save_outputs_in_organizer!)
+              .without_arguments
+          end
+
+          it "marks last step as completed" do
+            expect { service_instance.steps_result }.to change(service_instance.steps[1], :completed?).from(false).to(true)
+          end
+
+          it "triggers callback for last step" do
+            expect { service_instance.steps_result }
+              .to delegate_to(service_instance.steps[1], :trigger_callback)
+              .without_arguments
+          end
+
+          example_group "order of side effects" do
+            let(:exception) { Class.new(StandardError) }
+
+            before do
+              allow(service_instance.steps[0]).to receive(:result).and_raise(exception)
+              allow(service_instance.steps[1].status).to receive(:unsafe_not_success?).and_raise(exception)
+            end
+
+            it "does NOT save intermediate step outputs into organizer before checking status" do
+              expect { ignoring_exception(exception) { service_instance.steps_result } }.not_to delegate_to(service_instance.steps[0], :save_outputs_in_organizer!)
+            end
+
+            it "does NOT mark intermediate step as completed before checking status" do
+              expect { ignoring_exception(exception) { service_instance.steps_result } }.not_to change(service_instance.steps[0], :completed?).from(false)
+            end
+
+            it "does NOT trigger callback for intermediate step before checking status" do
+              expect { ignoring_exception(exception) { service_instance.steps_result } }
+                .not_to delegate_to(service_instance.steps[0], :trigger_callback)
+                .without_arguments
+            end
+
+            it "does NOT save last step outputs into organizer before checking status" do
+              expect { ignoring_exception(exception) { service_instance.steps_result } }.not_to delegate_to(service_instance.steps[1], :save_outputs_in_organizer!)
+            end
+
+            it "does NOT mark last step as completed before checking status" do
+              expect { ignoring_exception(exception) { service_instance.steps_result } }.not_to change(service_instance.steps[1], :completed?).from(false)
+            end
+
+            it "does NOT trigger callback for last step before checking status" do
+              expect { ignoring_exception(exception) { service_instance.steps_result } }
+                .not_to delegate_to(service_instance.steps[1], :trigger_callback)
+                .without_arguments
+            end
+          end
+        end
+      end
+    end
+
     describe "#step" do
       let(:index) { 0 }
 

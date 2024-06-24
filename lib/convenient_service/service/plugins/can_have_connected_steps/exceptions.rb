@@ -88,6 +88,20 @@ module ConvenientService
               initialize(message)
             end
           end
+
+          class ServiceHasNoSteps < ::ConvenientService::Exception
+            ##
+            # @param service_class [Class<ConvenientService::Service>]
+            # @return [void]
+            #
+            def initialize_with_kwargs(service_class:)
+              message = <<~TEXT
+                #{Utils::Class.display_name(service_class)} has NO steps.
+              TEXT
+
+              initialize(message)
+            end
+          end
         end
       end
     end
