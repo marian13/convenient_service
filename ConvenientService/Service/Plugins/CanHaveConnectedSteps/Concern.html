@@ -449,6 +449,28 @@
 </li>
 
       
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#steps_result-instance_method" title="#steps_result (instance method)">#<strong>steps_result</strong>  &#x21d2; ConvenientService::Service::Plugins::HasJSendResult::Entities::Result </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
     </ul>
   
 
@@ -2269,12 +2291,12 @@ Returns <code>nil</code> when index is out of range.</p>
       <pre class="lines">
 
 
-495
-496
-497</pre>
+513
+514
+515</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 495</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 513</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_step'>step</span><span class='lparen'>(</span><span class='id identifier rubyid_index'>index</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_steps'>steps</span><span class='lbracket'>[</span><span class='id identifier rubyid_index'>index</span><span class='rbracket'>]</span>
@@ -2370,12 +2392,97 @@ Returns <code>nil</code> when index is out of range.</p>
 </table>
 </div>
     
+      <div class="method_details ">
+  <h3 class="signature " id="steps_result-instance_method">
+  
+    #<strong>steps_result</strong>  &#x21d2; <tt><span class='object_link'><a href="../HasJSendResult/Entities/Result.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result (class)">ConvenientService::Service::Plugins::HasJSendResult::Entities::Result</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../HasJSendResult/Entities/Result.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result (class)">ConvenientService::Service::Plugins::HasJSendResult::Entities::Result</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Exceptions/ServiceHasNoSteps.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Exceptions::ServiceHasNoSteps (class)">ConvenientService::Service::Plugins::CanHaveConnectedSteps::Exceptions::ServiceHasNoSteps</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 487</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_steps_result'>steps_result</span>
+  <span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='period'>.</span><span class='id identifier rubyid_raise'><span class='object_link'><a href="../../../../ConvenientService.html#raise-instance_method" title="ConvenientService#raise (method)">raise</a></span></span> <span class='const'><span class='object_link'><a href="Exceptions.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Exceptions (module)">Exceptions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Exceptions/ServiceHasNoSteps.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Exceptions::ServiceHasNoSteps (class)">ServiceHasNoSteps</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../../Exception.html#new-class_method" title="ConvenientService::Exception.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>service_class:</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_none?'>none?</span>
+
+  <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_each_evaluated_step'>each_evaluated_step</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_step'>step</span><span class='op'>|</span>
+    <span class='id identifier rubyid_step'>step</span><span class='period'>.</span><span class='id identifier rubyid_save_outputs_in_organizer!'>save_outputs_in_organizer!</span>
+
+    <span class='id identifier rubyid_step'>step</span><span class='period'>.</span><span class='id identifier rubyid_trigger_callback'>trigger_callback</span>
+
+    <span class='id identifier rubyid_step'>step</span><span class='period'>.</span><span class='id identifier rubyid_mark_as_completed!'>mark_as_completed!</span>
+  <span class='kw'>end</span>
+
+  <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_result'>result</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
   </div>
 
 </div>
 
       <div id="footer">
-  Generated on Sun Jun  9 22:37:30 2024 by
+  Generated on Mon Jun 24 23:29:48 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.36 (ruby-3.2.4).
 </div>
