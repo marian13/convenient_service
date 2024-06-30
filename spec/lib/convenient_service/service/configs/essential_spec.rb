@@ -29,7 +29,6 @@ RSpec.describe ConvenientService::Service::Configs::Essential, type: :standard d
           let(:concerns) do
             [
               ConvenientService::Common::Plugins::HasInternals::Concern,
-              ConvenientService::Service::Plugins::HasInspect::Concern,
               ConvenientService::Common::Plugins::HasConstructor::Concern,
               ConvenientService::Plugins::Common::HasConstructorWithoutInitialize::Concern,
               ConvenientService::Service::Plugins::HasResult::Concern,
@@ -92,7 +91,6 @@ RSpec.describe ConvenientService::Service::Configs::Essential, type: :standard d
             let(:concerns) do
               [
                 ConvenientService::Common::Plugins::HasInternals::Concern,
-                ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasInspect::Concern,
                 ConvenientService::Common::Plugins::HasConstructor::Concern,
                 ConvenientService::Common::Plugins::HasConstructorWithoutInitialize::Concern,
                 ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Concern,
@@ -117,54 +115,11 @@ RSpec.describe ConvenientService::Service::Configs::Essential, type: :standard d
             end
           end
 
-          example_group "service result data" do
-            example_group "concerns" do
-              let(:concerns) do
-                [
-                  ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data::Plugins::HasInspect::Concern
-                ]
-              end
-
-              it "sets service result data concerns" do
-                expect(service_class::Result::Data.concerns.to_a).to eq(concerns)
-              end
-            end
-          end
-
-          example_group "service result message" do
-            example_group "concerns" do
-              let(:concerns) do
-                [
-                  ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message::Plugins::HasInspect::Concern
-                ]
-              end
-
-              it "sets service result message concerns" do
-                expect(service_class::Result::Message.concerns.to_a).to eq(concerns)
-              end
-            end
-          end
-
-          example_group "service result code" do
-            example_group "concerns" do
-              let(:concerns) do
-                [
-                  ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code::Plugins::HasInspect::Concern
-                ]
-              end
-
-              it "sets service result code concerns" do
-                expect(service_class::Result::Code.concerns.to_a).to eq(concerns)
-              end
-            end
-          end
-
           example_group "service result status" do
             example_group "concerns" do
               let(:concerns) do
                 [
-                  ConvenientService::Common::Plugins::HasInternals::Concern,
-                  ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status::Plugins::HasInspect::Concern
+                  ConvenientService::Common::Plugins::HasInternals::Concern
                 ]
               end
 
@@ -210,9 +165,7 @@ RSpec.describe ConvenientService::Service::Configs::Essential, type: :standard d
                 ConvenientService::Common::Plugins::HasInternals::Concern,
                 ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::HasResult::Concern,
                 ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeCompleted::Concern,
-                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeMethodStep::Concern,
-
-                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::HasInspect::Concern
+                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeMethodStep::Concern
               ]
             end
 
