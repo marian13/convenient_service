@@ -29,8 +29,6 @@ module ConvenientService
           concerns do
             use ConvenientService::Plugins::Common::HasInternals::Concern
 
-            use ConvenientService::Plugins::Service::HasInspect::Concern
-
             use ConvenientService::Plugins::Common::HasConstructor::Concern
             use ConvenientService::Plugins::Common::HasConstructorWithoutInitialize::Concern
 
@@ -92,8 +90,6 @@ module ConvenientService
             concerns do
               use ConvenientService::Plugins::Common::HasInternals::Concern
 
-              use ConvenientService::Plugins::Result::HasInspect::Concern
-
               use ConvenientService::Plugins::Common::HasConstructor::Concern
               use ConvenientService::Plugins::Common::HasConstructorWithoutInitialize::Concern
 
@@ -108,26 +104,14 @@ module ConvenientService
 
             class self::Data
               include Core
-
-              concerns do
-                use ConvenientService::Plugins::Data::HasInspect::Concern
-              end
             end
 
             class self::Message
               include Core
-
-              concerns do
-                use ConvenientService::Plugins::Message::HasInspect::Concern
-              end
             end
 
             class self::Code
               include Core
-
-              concerns do
-                use ConvenientService::Plugins::Code::HasInspect::Concern
-              end
             end
 
             class self::Status
@@ -135,8 +119,6 @@ module ConvenientService
 
               concerns do
                 use ConvenientService::Plugins::Common::HasInternals::Concern
-
-                use ConvenientService::Plugins::Status::HasInspect::Concern
               end
 
               class self::Internals
@@ -168,8 +150,6 @@ module ConvenientService
               use ConvenientService::Plugins::Step::CanBeCompleted::Concern
 
               use ConvenientService::Plugins::Step::CanBeMethodStep::Concern
-
-              use ConvenientService::Plugins::Step::HasInspect::Concern
             end
 
             ##

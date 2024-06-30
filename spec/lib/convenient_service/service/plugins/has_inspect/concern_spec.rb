@@ -34,6 +34,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasInspect::Concern, type: :
     let(:service_class) do
       Class.new do
         include ConvenientService::Service::Configs::Essential
+        include ConvenientService::Service::Configs::Inspect
 
         def self.name
           "ImportantService"
@@ -67,6 +68,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasInspect::Concern, type: :
         let(:service_class) do
           Class.new do
             include ConvenientService::Service::Configs::Essential
+            include ConvenientService::Service::Configs::Inspect
           end
         end
 

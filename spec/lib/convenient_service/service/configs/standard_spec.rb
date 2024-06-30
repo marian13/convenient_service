@@ -23,6 +23,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
       end
 
       specify { expect(service_class).to include_module(ConvenientService::Service::Configs::Essential) }
+      specify { expect(service_class).to include_module(ConvenientService::Service::Configs::Inspect) }
 
       example_group "service" do
         example_group "concerns" do
@@ -30,7 +31,6 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
             [
               ConvenientService::Service::Plugins::CanHaveStubbedResults::Concern,
               ConvenientService::Common::Plugins::HasInternals::Concern,
-              ConvenientService::Service::Plugins::HasInspect::Concern,
               ConvenientService::Common::Plugins::HasConstructor::Concern,
               ConvenientService::Plugins::Common::HasConstructorWithoutInitialize::Concern,
               ConvenientService::Service::Plugins::HasResult::Concern,
@@ -40,6 +40,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
               ConvenientService::Service::Plugins::CanHaveSteps::Concern,
               ConvenientService::Service::Plugins::CanHaveConnectedSteps::Concern,
               ConvenientService::Service::Plugins::CanHaveFallbacks::Concern,
+              ConvenientService::Service::Plugins::HasInspect::Concern,
               ConvenientService::Common::Plugins::CachesConstructorArguments::Concern,
               ConvenientService::Common::Plugins::CanBeCopied::Concern,
               ConvenientService::Service::Plugins::CanRecalculateResult::Concern,
@@ -245,11 +246,11 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
             let(:concerns) do
               [
                 ConvenientService::Common::Plugins::HasInternals::Concern,
-                ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasInspect::Concern,
                 ConvenientService::Common::Plugins::HasConstructor::Concern,
                 ConvenientService::Common::Plugins::HasConstructorWithoutInitialize::Concern,
                 ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Concern,
                 ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanHaveStep::Concern,
+                ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasInspect::Concern,
                 ConvenientService::Common::Plugins::HasJSendResultDuckShortSyntax::Concern,
                 ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanRecalculateResult::Concern,
                 ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasNegatedResult::Concern,
