@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.20.0](https://github.com/marian13/convenient_service/compare/v0.19.0...v0.20.0) (2024-06-30)
+
+
+### Features
+
+* **can_have_connected_steps:** allow to create middlewares for specifically for steps result, but not regular result ([894cb36](https://github.com/marian13/convenient_service/commit/894cb36ec1e80da504aac26373d99250202f2373))
+* **configs:** extract Inspect config ([1b58f69](https://github.com/marian13/convenient_service/commit/1b58f69446c04e251dfb20180a41c389a53bd8ad))
+
 ## [0.19.0](https://github.com/marian13/convenient_service/compare/v0.18.0...v0.19.0) (2024-06-08)
 
 
