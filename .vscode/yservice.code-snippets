@@ -1,0 +1,15 @@
+{
+  ////
+  // NOTE: `.code-snippets` files support only C-style comments.
+  // NOTE: More information about VS Code Snippets can be found here:
+  // - https://code.visualstudio.com/docs/editor/userdefinedsnippets
+  //
+  "YARD type for ConvenientService::Service": {
+    "scope": "ruby",
+    "prefix": "yservice",
+    "body": [
+      "[ConvenientService::Service]",
+    ],
+    "description": "YARD type for ConvenientService::Service"
+  }
+}
