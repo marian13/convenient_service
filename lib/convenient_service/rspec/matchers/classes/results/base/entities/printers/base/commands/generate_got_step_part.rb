@@ -53,7 +53,7 @@ module ConvenientService
                       def call
                         return "" unless chain.used_step?
 
-                        result.step.nil? ? "without step" : "of step `#{result.step.printable_action}`"
+                        result.from_step? ? "of step `#{result.step.printable_action}`" : "without step"
                       end
                     end
                   end

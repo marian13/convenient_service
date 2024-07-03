@@ -113,7 +113,7 @@ module ConvenientService
                     # @return [Boolean]
                     #
                     def match_without_step?
-                      result.step.nil?
+                      !result.from_step?
                     end
                   end
                 end
