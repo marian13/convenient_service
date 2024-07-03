@@ -19,7 +19,7 @@ module ConvenientService
 
                     ##
                     # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
-                    # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeMethodStep::CanBeExecuted::Exceptions::MethodForStepIsNotDefined]
+                    # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeMethodStep::CanBeExecuted::Exceptions::StepIsNotMethodStep, ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeMethodStep::CanBeExecuted::Exceptions::MethodForStepIsNotDefined]
                     #
                     def next(...)
                       step.method_step? ? step.method_result : chain.next(...)

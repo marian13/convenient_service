@@ -35,7 +35,7 @@ module ConvenientService
 
                     ##
                     # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
-                    # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeMethodStep::CanBeExecuted::Exceptions::MethodForStepIsNotDefined]
+                    # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeMethodStep::CanBeExecuted::Exceptions::StepIsNotMethodStep, ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeMethodStep::CanBeExecuted::Exceptions::MethodForStepIsNotDefined]
                     #
                     def method_result
                       Commands::CalculateMethodResult.call(step: self)
