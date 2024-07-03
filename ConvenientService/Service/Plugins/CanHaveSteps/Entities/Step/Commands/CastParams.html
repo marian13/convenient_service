@@ -152,6 +152,29 @@
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#action-instance_method" title="#action (instance method)">#<strong>action</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Can be any type.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#call-instance_method" title="#call (instance method)">#<strong>call</strong>  &#x21d2; ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Structs::Params </a>
     
 
@@ -327,28 +350,6 @@
 </li>
 
       
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#service-instance_method" title="#service (instance method)">#<strong>service</strong>  &#x21d2; ConvenientService::Service::Plugins::CanHaveSteps::Entities::Service </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
     </ul>
   
 
@@ -475,7 +476,64 @@
 
     
       <div class="method_details first">
-  <h3 class="signature first" id="call-instance_method">
+  <h3 class="signature first" id="action-instance_method">
+  
+    #<strong>action</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Can be any type.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Can be any type.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+43
+44
+45</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/commands/cast_params.rb', line 43</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_action'>action</span>
+  <span class='ivar'>@action</span> <span class='op'>||=</span> <span class='id identifier rubyid_original_params'>original_params</span><span class='period'>.</span><span class='id identifier rubyid_action'>action</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="call-instance_method">
   
     #<strong>call</strong>  &#x21d2; <tt><span class='object_link'><a href="../Structs/Params.html" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Structs::Params (class)">ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Structs::Params</a></span></tt> 
   
@@ -528,7 +586,7 @@
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span>
   <span class='const'><span class='object_link'><a href="../Structs.html" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Structs (module)">Structs</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Structs/Params.html" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Structs::Params (class)">Params</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
-    <span class='label'>service:</span> <span class='id identifier rubyid_service'>service</span><span class='comma'>,</span>
+    <span class='label'>action:</span> <span class='id identifier rubyid_action'>action</span><span class='comma'>,</span>
     <span class='label'>inputs:</span> <span class='id identifier rubyid_inputs'>inputs</span><span class='comma'>,</span>
     <span class='label'>outputs:</span> <span class='id identifier rubyid_outputs'>outputs</span><span class='comma'>,</span>
     <span class='label'>index:</span> <span class='id identifier rubyid_index'>index</span><span class='comma'>,</span>
@@ -854,64 +912,12 @@
 </table>
 </div>
     
-      <div class="method_details ">
-  <h3 class="signature " id="service-instance_method">
-  
-    #<strong>service</strong>  &#x21d2; <tt><span class='object_link'><a href="../../Service.html" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities::Service (class)">ConvenientService::Service::Plugins::CanHaveSteps::Entities::Service</a></span></tt> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    
-
-  </div>
-</div>
-<div class="tags">
-  
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt><span class='object_link'><a href="../../Service.html" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities::Service (class)">ConvenientService::Service::Plugins::CanHaveSteps::Entities::Service</a></span></tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-43
-44
-45</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/commands/cast_params.rb', line 43</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_service'>service</span>
-  <span class='ivar'>@service</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="../../../Entities.html" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Service.html" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities::Service (class)">Service</a></span></span><span class='period'>.</span><span class='id identifier rubyid_cast!'>cast!</span><span class='lparen'>(</span><span class='id identifier rubyid_original_params'>original_params</span><span class='period'>.</span><span class='id identifier rubyid_service'>service</span><span class='rparen'>)</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
   </div>
 
 </div>
 
       <div id="footer">
-  Generated on Wed Jul  3 00:48:18 2024 by
+  Generated on Wed Jul  3 23:01:34 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.36 (ruby-3.2.4).
 </div>

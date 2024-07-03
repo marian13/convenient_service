@@ -251,7 +251,7 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/plugins/can_be_method_step/concern.rb', line 18</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_method'>method</span>
-  <span class='id identifier rubyid_extra_kwargs'>extra_kwargs</span><span class='lbracket'>[</span><span class='symbol'>:method</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_action'>action</span> <span class='kw'>if</span> <span class='id identifier rubyid_method_step?'>method_step?</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -294,7 +294,7 @@
     <li>
       
       
-        <span class='type'>(<tt>ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeMethodStep::CanBeExecuted::Exceptions::MethodForStepIsNotDefined</tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="Exceptions/StepIsNotMethodStep.html" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeMethodStep::Exceptions::StepIsNotMethodStep (class)">ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeMethodStep::Exceptions::StepIsNotMethodStep</a></span></tt>, <tt><span class='object_link'><a href="Exceptions/MethodForStepIsNotDefined.html" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeMethodStep::Exceptions::MethodForStepIsNotDefined (class)">ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeMethodStep::Exceptions::MethodForStepIsNotDefined</a></span></tt>)</span>
       
       
       
@@ -368,7 +368,7 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/plugins/can_be_method_step/concern.rb', line 25</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_method_step?'>method_step?</span>
-  <span class='const'><span class='object_link'><a href="../../../../../../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='period'>.</span><span class='id identifier rubyid_to_bool'><span class='object_link'><a href="../../../../../../../Utils.html#to_bool-class_method" title="ConvenientService::Utils.to_bool (method)">to_bool</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_action'>action</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='const'>Symbol</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -432,7 +432,7 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Jul  3 00:48:11 2024 by
+  Generated on Wed Jul  3 23:01:27 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.36 (ruby-3.2.4).
 </div>
