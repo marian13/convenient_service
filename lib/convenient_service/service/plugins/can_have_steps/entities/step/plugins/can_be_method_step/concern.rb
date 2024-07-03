@@ -32,6 +32,14 @@ module ConvenientService
                     def result_step?
                       method_step? && method == :result
                     end
+
+                    ##
+                    # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
+                    # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeMethodStep::CanBeExecuted::Exceptions::MethodForStepIsNotDefined]
+                    #
+                    def method_result
+                      Commands::CalculateMethodResult.call(step: self)
+                    end
                   end
                 end
               end

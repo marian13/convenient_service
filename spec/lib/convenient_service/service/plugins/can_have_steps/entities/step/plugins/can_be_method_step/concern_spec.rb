@@ -138,6 +138,27 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         end
       end
     end
+
+    describe "#method_result" do
+      let(:service_class) do
+        Class.new do
+          include ConvenientService::Standard::Config
+
+          step :result
+
+          def result
+            success
+          end
+        end
+      end
+
+      specify do
+        expect { step.method_result }
+          .to delegate_to(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeMethodStep::Commands::CalculateMethodResult, :call)
+          .with_arguments(step: step)
+          .and_return_its_value
+      end
+    end
   end
 end
 # rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
