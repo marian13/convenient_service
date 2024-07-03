@@ -82,7 +82,7 @@ module ConvenientService
                     # @return [String]
                     #
                     def sub_service_lines
-                      Commands::GenerateServiceLines[service: step.service.klass, ids: ids, settings: settings]
+                      Commands::GenerateServiceLines[service: step.service_class, ids: ids, settings: settings]
                     end
 
                     ##
@@ -106,14 +106,14 @@ module ConvenientService
                     # @return [String]
                     #
                     def service_step_id
-                      "#{service_id}-#{step.service.klass.object_id}"
+                      "#{service_id}-#{step.service_class.object_id}"
                     end
 
                     ##
                     # @return [String]
                     #
                     def service_step_name
-                      Utils::Class.display_name(step.service.klass)
+                      Utils::Class.display_name(step.service_class)
                     end
                   end
                 end

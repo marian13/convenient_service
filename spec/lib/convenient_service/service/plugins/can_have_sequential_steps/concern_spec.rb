@@ -12,6 +12,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSequentialSteps::Conc
   let(:service_class) do
     Class.new do
       include ConvenientService::Service::Configs::Essential
+      include ConvenientService::Service::Configs::Inspect
 
       concerns do
         replace \

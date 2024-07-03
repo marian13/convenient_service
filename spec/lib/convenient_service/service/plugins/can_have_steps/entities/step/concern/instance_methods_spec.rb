@@ -14,7 +14,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
   let(:step_service_klass) do
     Class.new do
       include ConvenientService::Service::Configs::Essential
-
+      include ConvenientService::Service::Configs::Inspect
       def initialize(foo:)
         @foo = foo
       end
@@ -28,7 +28,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
   let(:container) do
     Class.new do
       include ConvenientService::Service::Configs::Essential
-
+      include ConvenientService::Service::Configs::Inspect
       def result
         success
       end
@@ -39,12 +39,12 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
     end
   end
 
-  let(:service) { step_service_klass }
+  let(:action) { step_service_klass }
   let(:inputs) { [:foo] }
   let(:outputs) { [:bar] }
   let(:organizer) { container.new }
 
-  let(:args) { [service] }
+  let(:args) { [action] }
   let(:kwargs) { {in: inputs, out: outputs, index: index, container: container, organizer: organizer, **extra_kwargs} }
   let(:extra_kwargs) { {method_name: :foo} }
 
@@ -133,10 +133,10 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       end
     end
 
-    describe "#service" do
+    describe "#action" do
       specify do
-        expect { step.service }
-          .to delegate_to(step.params, :service)
+        expect { step.action }
+          .to delegate_to(step.params, :action)
           .without_arguments
           .and_return_its_value
       end
@@ -246,7 +246,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         context "when `raise_when_missing` is NOT passed" do
           let(:message) do
             <<~TEXT
-              Step `#{step.printable_service}` has not assigned organizer.
+              Step `#{step.printable_action}` has not assigned organizer.
 
               Did you forget to set it?
             TEXT
@@ -273,7 +273,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         context "when `raise_when_missing` is `true`" do
           let(:message) do
             <<~TEXT
-              Step `#{step.printable_service}` has not assigned organizer.
+              Step `#{step.printable_action}` has not assigned organizer.
 
               Did you forget to set it?
             TEXT
@@ -392,7 +392,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
             let(:step_service_klass) do
               Class.new do
                 include ConvenientService::Service::Configs::Essential
-
+                include ConvenientService::Service::Configs::Inspect
                 def initialize(foo:)
                   @foo = foo
                 end
@@ -408,11 +408,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
               let(:exception_message) do
                 <<~TEXT
-                  Step `#{step.printable_service}` result does NOT return `:baz` data attribute.
+                  Step `#{step.printable_action}` result does NOT return `:baz` data attribute.
 
                   Maybe there is a typo in `out` definition?
 
-                  Or `success` of `#{step.printable_service}` accepts a wrong key?
+                  Or `success` of `#{step.printable_action}` accepts a wrong key?
                 TEXT
               end
 
@@ -441,7 +441,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
             let(:step_service_klass) do
               Class.new do
                 include ConvenientService::Service::Configs::Essential
-
+                include ConvenientService::Service::Configs::Inspect
                 def initialize(foo:)
                   @foo = foo
                 end
@@ -457,11 +457,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
               let(:exception_message) do
                 <<~TEXT
-                  Step `#{step.printable_service}` result does NOT return `:qux` data attribute.
+                  Step `#{step.printable_action}` result does NOT return `:qux` data attribute.
 
                   Maybe there is a typo in `out` definition?
 
-                  Or `success` of `#{step.printable_service}` accepts a wrong key?
+                  Or `success` of `#{step.printable_action}` accepts a wrong key?
                 TEXT
               end
 
@@ -491,7 +491,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           let(:step_service_klass) do
             Class.new do
               include ConvenientService::Service::Configs::Essential
-
+              include ConvenientService::Service::Configs::Inspect
               def initialize(foo:)
                 @foo = foo
               end
@@ -511,7 +511,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           let(:step_service_klass) do
             Class.new do
               include ConvenientService::Service::Configs::Essential
-
+              include ConvenientService::Service::Configs::Inspect
               def initialize(foo:)
                 @foo = foo
               end
@@ -531,7 +531,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           let(:step_service_klass) do
             Class.new do
               include ConvenientService::Service::Configs::Essential
-
+              include ConvenientService::Service::Configs::Inspect
               def initialize(foo:)
                 @foo = foo
               end
@@ -576,46 +576,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       end
     end
 
-    describe "#service_result" do
-      context "when `organizer` is NOT set" do
-        let(:organizer) { nil }
-
-        let(:message) do
-          <<~TEXT
-            Organizer for method `:#{inputs.first}` is NOT assigned yet.
-
-            Did you forget to set it?
-          TEXT
-        end
-
-        it "returns `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::MethodHasNoOrganizer`" do
-          expect { step.service_result }
-            .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::MethodHasNoOrganizer)
-            .with_message(message)
-        end
-
-        specify do
-          expect { ignoring_exception(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::MethodHasNoOrganizer) { step.service_result } }
-            .to delegate_to(ConvenientService, :raise)
-        end
-      end
-
-      context "when `organizer` is set" do
-        specify do
-          step.service.klass.commit_config!
-
-          expect { step.service_result }
-            .to delegate_to(step.service.klass, :result)
-            .with_arguments(**step.input_values)
-            .and_return_its_value
-        end
-
-        specify do
-          expect { step.service_result }.to cache_its_value
-        end
-      end
-    end
-
     describe "#printable_container" do
       it "returns printable container as string" do
         expect { step.printable_container }
@@ -625,18 +585,12 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       end
     end
 
-    describe "#printable_service" do
+    describe "#printable_action" do
       it "returns printable service as string" do
-        expect { step.printable_service }
-          .to delegate_to(ConvenientService::Utils::Class, :display_name)
-          .with_arguments(step.service.klass)
+        expect { step.printable_action }
+          .to delegate_to(step.action, :inspect)
+          .without_arguments
           .and_return_its_value
-      end
-    end
-
-    describe "#service_class" do
-      it "returns service class" do
-        expect(step.service_class).to eq(step.service.klass)
       end
     end
 
@@ -691,7 +645,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         let(:step_service_klass) do
           Class.new do
             include ConvenientService::Service::Configs::Essential
-
+            include ConvenientService::Service::Configs::Inspect
             def initialize(foo:)
               @foo = foo
             end
@@ -714,7 +668,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         let(:step_service_klass) do
           Class.new do
             include ConvenientService::Service::Configs::Essential
-
+            include ConvenientService::Service::Configs::Inspect
             def initialize(foo:)
               @foo = foo
             end
@@ -738,7 +692,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         let(:step_service_klass) do
           Class.new do
             include ConvenientService::Service::Configs::Essential
-
+            include ConvenientService::Service::Configs::Inspect
             def initialize(foo:)
               @foo = foo
             end
@@ -768,7 +722,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         let(:step_service_klass) do
           Class.new do
             include ConvenientService::Service::Configs::Essential
-
+            include ConvenientService::Service::Configs::Inspect
             def initialize(foo:)
               @foo = foo
             end
@@ -838,7 +792,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           end
         end
 
-        context "when `other` has different service" do
+        context "when `other` has different action" do
           let(:other) { step_class.new(Class.new, **kwargs) }
 
           it "returns `false`" do
@@ -907,7 +861,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
     example_group "conversions" do
       let(:arguments) { ConvenientService::Support::Arguments.new(*args_representation, **kwargs_representation) }
 
-      let(:args_representation) { [step.service] }
+      let(:args_representation) { [step.action] }
 
       let(:kwargs_representation) do
         {
@@ -923,7 +877,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       describe "#to_s" do
         specify do
           expect { step.to_s }
-            .to delegate_to(step, :printable_service)
+            .to delegate_to(step, :printable_action)
             .without_arguments
             .and_return_its_value
         end

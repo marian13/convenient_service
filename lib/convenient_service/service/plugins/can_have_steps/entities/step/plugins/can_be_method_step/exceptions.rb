@@ -16,7 +16,7 @@ module ConvenientService
                     #
                     def initialize_with_kwargs(step:)
                       message = <<~TEXT
-                        Step `#{step.printable_service}` is NOT a method step.
+                        Step `#{step.printable_action}` is NOT a method step.
                       TEXT
 
                       initialize(message)

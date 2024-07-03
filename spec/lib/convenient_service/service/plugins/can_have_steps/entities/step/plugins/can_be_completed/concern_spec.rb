@@ -11,7 +11,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
   let(:service_class) do
     Class.new do
       include ConvenientService::Service::Configs::Essential
-
+      include ConvenientService::Service::Configs::Inspect
       step :foo
 
       def foo

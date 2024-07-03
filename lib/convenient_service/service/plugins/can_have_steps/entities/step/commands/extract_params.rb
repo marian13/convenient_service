@@ -17,7 +17,7 @@ module ConvenientService
 
                 def call
                   Structs::Params.new(
-                    service: args.first,
+                    action: args.first,
                     inputs: Utils::Array.wrap(kwargs[:in]),
                     outputs: Utils::Array.wrap(kwargs[:out]),
                     index: kwargs[:index],

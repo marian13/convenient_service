@@ -13,14 +13,10 @@ module ConvenientService
 
                   instance_methods do
                     ##
-                    # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
-                    # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepHasNoOrganizer]
-                    #
-                    # @internal
-                    #   TODO: `service.result`.
+                    # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::HasResult::Exceptions::StepHasUnknownType]
                     #
                     def result
-                      service_result
+                      ::ConvenientService.raise Exceptions::StepHasUnknownType.new(step: self)
                     end
                   end
                 end

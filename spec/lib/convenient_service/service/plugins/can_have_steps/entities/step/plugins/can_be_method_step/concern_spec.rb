@@ -46,23 +46,71 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       end
     end
 
+    let(:first_step) do
+      Class.new do
+        include ConvenientService::Standard::Config
+
+        step :result
+
+        def result
+          success
+        end
+      end
+    end
+
     let(:service_instance) { service_class.new }
 
     let(:step) { service_instance.steps.first }
 
     describe "#method" do
-      specify do
-        expect { step.method }
-          .to delegate_to(step.extra_kwargs, :[])
-          .with_arguments(:method)
-          .and_return_its_value
+      context "when `step` is NOT method step" do
+        let(:service_class) do
+          Class.new.tap do |klass|
+            klass.class_exec(first_step) do |first_step|
+              include ConvenientService::Standard::Config
+
+              step first_step
+            end
+          end
+        end
+
+        it "returns `nil`" do
+          expect(step.method).to be_nil
+        end
+      end
+
+      context "when `step` is method step" do
+        let(:service_class) do
+          Class.new do
+            include ConvenientService::Standard::Config
+
+            step :foo
+
+            def foo
+              success
+            end
+          end
+        end
+
+        specify do
+          expect { step.method }
+            .to delegate_to(step, :action)
+            .without_arguments
+            .and_return_its_value
+        end
       end
     end
 
     describe "#method_step?" do
-      context "when `step` does NOT have method" do
-        before do
-          step.extra_kwargs.delete(:method)
+      context "when `step` action is NOT instance of `Symbol`" do
+        let(:service_class) do
+          Class.new.tap do |klass|
+            klass.class_exec(first_step) do |first_step|
+              include ConvenientService::Standard::Config
+
+              step first_step
+            end
+          end
         end
 
         it "returns `false`" do
@@ -70,7 +118,19 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         end
       end
 
-      context "when `step` has method" do
+      context "when `step` action is instance of `Symbol`" do
+        let(:service_class) do
+          Class.new do
+            include ConvenientService::Standard::Config
+
+            step :foo
+
+            def foo
+              success
+            end
+          end
+        end
+
         it "returns `true`" do
           expect(step.method_step?).to eq(true)
         end
@@ -78,21 +138,15 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
     end
 
     describe "#result_step?" do
-      context "when `step` does NOT have method" do
+      context "when `step` is NOT method step" do
         let(:service_class) do
-          Class.new do
-            include ConvenientService::Standard::Config
+          Class.new.tap do |klass|
+            klass.class_exec(first_step) do |first_step|
+              include ConvenientService::Standard::Config
 
-            step :result
-
-            def result
-              success
+              step first_step
             end
           end
-        end
-
-        before do
-          step.extra_kwargs.delete(:method)
         end
 
         it "returns `false`" do
@@ -100,8 +154,8 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         end
       end
 
-      context "when `step` has method" do
-        context "when that method value is NOT `:result`" do
+      context "when `step` is method step" do
+        context "when `step` method is NOT `:result`" do
           let(:service_class) do
             Class.new do
               include ConvenientService::Standard::Config
@@ -119,7 +173,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           end
         end
 
-        context "when that method value is `:result`" do
+        context "when `step` method is `:result`" do
           let(:service_class) do
             Class.new do
               include ConvenientService::Standard::Config

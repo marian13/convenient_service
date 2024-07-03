@@ -16,14 +16,14 @@ module ConvenientService
                     # @return [Symbol, nil]
                     #
                     def method
-                      extra_kwargs[:method]
+                      action if method_step?
                     end
 
                     ##
                     # @return [Boolean]
                     #
                     def method_step?
-                      Utils.to_bool(method)
+                      action.instance_of?(Symbol)
                     end
 
                     ##
@@ -35,7 +35,7 @@ module ConvenientService
 
                     ##
                     # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
-                    # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeMethodStep::CanBeExecuted::Exceptions::StepIsNotMethodStep, ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeMethodStep::CanBeExecuted::Exceptions::MethodForStepIsNotDefined]
+                    # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeMethodStep::Exceptions::StepIsNotMethodStep, ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeMethodStep::Exceptions::MethodForStepIsNotDefined]
                     #
                     def method_result
                       Commands::CalculateMethodResult.call(step: self)

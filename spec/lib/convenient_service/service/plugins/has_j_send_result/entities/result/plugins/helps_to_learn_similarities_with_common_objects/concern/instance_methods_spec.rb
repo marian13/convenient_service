@@ -13,7 +13,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
   let(:service_class) do
     Class.new do
       include ConvenientService::Service::Configs::Essential
-
+      include ConvenientService::Service::Configs::Inspect
       # rubocop:disable Lint/ConstantDefinitionInBlock, RSpec/LeakyConstantDeclaration
       class self::Result
         concerns do

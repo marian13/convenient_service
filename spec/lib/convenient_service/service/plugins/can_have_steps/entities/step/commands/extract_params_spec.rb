@@ -18,9 +18,9 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       let(:organizer) { Object.new }
       let(:command_result) { described_class.call(args: args, kwargs: kwargs) }
 
-      example_group "`service`" do
-        it "returns `args.first` as `service`" do
-          expect(command_result.service).to eq(args.first)
+      example_group "`action`" do
+        it "returns `args.first` as `action`" do
+          expect(command_result.action).to eq(args.first)
         end
       end
 

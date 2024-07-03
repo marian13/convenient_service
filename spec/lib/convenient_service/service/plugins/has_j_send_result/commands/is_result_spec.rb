@@ -16,7 +16,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Commands::Is
         let(:service) do
           Class.new do
             include ConvenientService::Service::Configs::Essential
-
+            include ConvenientService::Service::Configs::Inspect
             middlewares :result do
               delete ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Middleware
             end
@@ -36,7 +36,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Commands::Is
         let(:service) do
           Class.new do
             include ConvenientService::Service::Configs::Essential
-
+            include ConvenientService::Service::Configs::Inspect
             def result
               success
             end

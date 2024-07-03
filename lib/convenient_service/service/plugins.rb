@@ -15,7 +15,6 @@ require_relative "plugins/can_have_sequential_steps"
 require_relative "plugins/can_have_connected_steps"
 
 require_relative "plugins/can_recalculate_result"
-require_relative "plugins/can_have_method_steps"
 require_relative "plugins/can_have_stubbed_results"
 require_relative "plugins/can_have_fallbacks"
 require_relative "plugins/can_have_rollbacks"

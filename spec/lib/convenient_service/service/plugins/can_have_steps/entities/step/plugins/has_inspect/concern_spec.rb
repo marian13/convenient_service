@@ -58,8 +58,46 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
       let(:step) { container.new.steps.first }
 
-      it "returns `inspect` representation of step" do
-        expect(step.inspect).to eq("<#{step.container.klass.name}::Step service: #{step.service.klass.name}>")
+      context "when step is neither service nor method step" do
+        let(:container) do
+          Class.new.tap do |klass|
+            klass.class_exec(service) do |service|
+              include ConvenientService::Service::Configs::Essential
+              include ConvenientService::Service::Configs::Inspect
+
+              step "abc"
+
+              def self.name
+                "ContainerService"
+              end
+            end
+          end
+        end
+
+        it "returns `inspect` representation of step without additional info" do
+          expect(step.inspect).to eq("<#{step.container.klass.name}::Step>")
+        end
+      end
+
+      context "when step is service step" do
+        let(:container) do
+          Class.new.tap do |klass|
+            klass.class_exec(service) do |service|
+              include ConvenientService::Service::Configs::Essential
+              include ConvenientService::Service::Configs::Inspect
+
+              step service
+
+              def self.name
+                "ContainerService"
+              end
+            end
+          end
+        end
+
+        it "returns `inspect` representation of step with service class" do
+          expect(step.inspect).to eq("<#{step.container.klass.name}::Step service: #{step.service_class.name}>")
+        end
       end
 
       context "when step is method step" do
@@ -80,7 +118,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           end
         end
 
-        it "returns `inspect` representation of step" do
+        it "returns `inspect` representation of step with method" do
           expect(step.inspect).to eq("<#{step.container.klass.name}::Step method: :result>")
         end
       end

@@ -35,61 +35,35 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
     include ConvenientService::RSpec::Matchers::Results
 
     describe "#result" do
-      let(:container) do
-        Class.new.tap do |klass|
-          klass.class_exec(service) do |service|
-            include ConvenientService::Service::Configs::Essential
-
-            step service
-          end
-        end
-      end
-
-      let(:service) do
+      let(:service_class) do
         Class.new do
           include ConvenientService::Service::Configs::Essential
-
-          def result
-            success(data: {foo: :bar})
-          end
+          include ConvenientService::Service::Configs::Inspect
+          step "abc"
         end
       end
 
-      describe "#result" do
-        context "when `organizer` is NOT set" do
-          let(:step) { container.steps.first }
+      let(:service_instance) { service_class.new }
 
-          let(:message) do
-            <<~TEXT
-              Step `#{step.printable_service}` has not assigned organizer.
+      let(:step) { service_instance.steps.first }
 
-              Did you forget to set it?
-            TEXT
-          end
+      let(:exception_message) do
+        <<~TEXT
+          Step `#{step.printable_action}` has unknown type.
 
-          it "raises `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::MethodHasNoOrganizer`" do
-            expect { step.result }
-              .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepHasNoOrganizer)
-              .with_message(message)
-          end
+          Please, ensure the first `step` argument has NO typos.
+        TEXT
+      end
 
-          specify do
-            expect { ignoring_exception(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepHasNoOrganizer) { step.result } }
-              .to delegate_to(ConvenientService, :raise)
-          end
-        end
+      it "raises `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::HasResult::Exceptions::StepHasUnknownType`" do
+        expect { step.result }
+          .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::HasResult::Exceptions::StepHasUnknownType)
+          .with_message(exception_message)
+      end
 
-        context "when `organizer` is set" do
-          let(:step) { container.new.steps.first }
-
-          specify do
-            expect { step.result }.to delegate_to(step, :service_result)
-          end
-
-          it "returns service result" do
-            expect(step.result).to be_success.with_data(foo: :bar)
-          end
-        end
+      specify do
+        expect { ignoring_exception(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::HasResult::Exceptions::StepHasUnknownType) { step.result } }
+          .to delegate_to(ConvenientService, :raise)
       end
     end
   end

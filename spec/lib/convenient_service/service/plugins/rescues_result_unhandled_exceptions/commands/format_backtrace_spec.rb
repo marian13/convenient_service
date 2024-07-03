@@ -22,7 +22,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
         let(:service_class) do
           Class.new do
             include ConvenientService::Service::Configs::Essential
-
+            include ConvenientService::Service::Configs::Inspect
             def result
               raise StandardError, "exception message", caller.take(5)
             end
@@ -44,7 +44,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
         let(:service_class) do
           Class.new do
             include ConvenientService::Service::Configs::Essential
-
+            include ConvenientService::Service::Configs::Inspect
             def result
               raise StandardError, "exception message", caller + ["# /line.rb:1:in `foo'"] * 10
             end
@@ -69,7 +69,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
         let(:service_class) do
           Class.new do
             include ConvenientService::Service::Configs::Essential
-
+            include ConvenientService::Service::Configs::Inspect
             def result
               raise StandardError, "exception message", caller + ["# /line.rb:1:in `foo'"] * 10
             end

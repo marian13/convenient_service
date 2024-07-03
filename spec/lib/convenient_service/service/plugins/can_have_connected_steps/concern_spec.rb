@@ -14,6 +14,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
   let(:service_class) do
     Class.new do
       include ConvenientService::Service::Configs::Essential
+      include ConvenientService::Service::Configs::Inspect
     end
   end
 

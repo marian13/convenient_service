@@ -31,7 +31,7 @@ RSpec.describe ConvenientService::Commands::IsServiceClass, type: :standard do
           let(:service_class) do
             Class.new do
               include ConvenientService::Service::Configs::Essential
-
+              include ConvenientService::Service::Configs::Inspect
               def result
                 success
               end

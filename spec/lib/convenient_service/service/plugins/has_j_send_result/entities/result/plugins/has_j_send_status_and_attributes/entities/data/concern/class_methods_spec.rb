@@ -67,7 +67,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         let(:service) do
           Class.new do
             include ConvenientService::Service::Configs::Essential
-
+            include ConvenientService::Service::Configs::Inspect
             def result
               success(data: {foo: :bar})
             end

@@ -56,7 +56,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
           end
 
           it "returns part with step" do
-            expect(command_result).to eq("of step `#{result.step.printable_service}`")
+            expect(command_result).to eq("of step `#{result.step.printable_action}`")
           end
         end
       end

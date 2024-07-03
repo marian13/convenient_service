@@ -24,7 +24,7 @@ module ConvenientService
         #
         # rubocop:disable Lint/ConstantDefinitionInBlock
         included do
-          include Core
+          include ConvenientService::Core
 
           concerns do
             use ConvenientService::Plugins::Common::HasInternals::Concern
@@ -52,32 +52,8 @@ module ConvenientService
             use ConvenientService::Plugins::Service::CanHaveConnectedSteps::Middleware
           end
 
-          middlewares :step, scope: :class do
-            use ConvenientService::Plugins::Service::CanHaveMethodSteps::Middleware
-          end
-
-          middlewares :not_step, scope: :class do
-            use ConvenientService::Plugins::Service::CanHaveMethodSteps::Middleware
-          end
-
-          middlewares :and_step, scope: :class do
-            use ConvenientService::Plugins::Service::CanHaveMethodSteps::Middleware
-          end
-
-          middlewares :and_not_step, scope: :class do
-            use ConvenientService::Plugins::Service::CanHaveMethodSteps::Middleware
-          end
-
-          middlewares :or_step, scope: :class do
-            use ConvenientService::Plugins::Service::CanHaveMethodSteps::Middleware
-          end
-
-          middlewares :or_not_step, scope: :class do
-            use ConvenientService::Plugins::Service::CanHaveMethodSteps::Middleware
-          end
-
           class self::Internals
-            include Core
+            include ConvenientService::Core
 
             concerns do
               use ConvenientService::Plugins::Internals::HasCache::Concern
@@ -85,7 +61,7 @@ module ConvenientService
           end
 
           class self::Result
-            include Core
+            include ConvenientService::Core
 
             concerns do
               use ConvenientService::Plugins::Common::HasInternals::Concern
@@ -103,26 +79,26 @@ module ConvenientService
             end
 
             class self::Data
-              include Core
+              include ConvenientService::Core
             end
 
             class self::Message
-              include Core
+              include ConvenientService::Core
             end
 
             class self::Code
-              include Core
+              include ConvenientService::Core
             end
 
             class self::Status
-              include Core
+              include ConvenientService::Core
 
               concerns do
                 use ConvenientService::Plugins::Common::HasInternals::Concern
               end
 
               class self::Internals
-                include Core
+                include ConvenientService::Core
 
                 concerns do
                   use ConvenientService::Plugins::Internals::HasCache::Concern
@@ -131,7 +107,7 @@ module ConvenientService
             end
 
             class self::Internals
-              include Core
+              include ConvenientService::Core
 
               concerns do
                 use ConvenientService::Plugins::Internals::HasCache::Concern
@@ -140,7 +116,7 @@ module ConvenientService
           end
 
           class self::Step
-            include Core
+            include ConvenientService::Core
 
             concerns do
               use ConvenientService::Plugins::Common::HasInternals::Concern
@@ -149,6 +125,7 @@ module ConvenientService
 
               use ConvenientService::Plugins::Step::CanBeCompleted::Concern
 
+              use ConvenientService::Plugins::Step::CanBeServiceStep::Concern
               use ConvenientService::Plugins::Step::CanBeMethodStep::Concern
             end
 
@@ -162,18 +139,20 @@ module ConvenientService
 
               use ConvenientService::Plugins::Step::RaisesOnNotResultReturnValue::Middleware
 
-              use ConvenientService::Plugins::Step::CanBeMethodStep::CanBeExecuted::Middleware
+              use ConvenientService::Plugins::Step::CanBeServiceStep::Middleware
+              use ConvenientService::Plugins::Step::CanBeMethodStep::Middleware
             end
 
-            ##
-            # TODO: Rename.
-            #
-            middlewares :printable_service do
-              use ConvenientService::Plugins::Step::CanBeMethodStep::CanBePrinted::Middleware
+            middlewares :method_result do
+              use ConvenientService::Plugins::Common::CachesReturnValue::Middleware
+            end
+
+            middlewares :service_result do
+              use ConvenientService::Plugins::Common::CachesReturnValue::Middleware
             end
 
             class self::Internals
-              include Core
+              include ConvenientService::Core
 
               concerns do
                 use ConvenientService::Plugins::Internals::HasCache::Concern

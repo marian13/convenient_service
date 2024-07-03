@@ -20,8 +20,9 @@ module ConvenientService
                     #
                     def inspect
                       return "<#{container.klass.name}::Step method: :#{method}>" if method_step?
+                      return "<#{container.klass.name}::Step service: #{service_class.name}>" if service_step?
 
-                      "<#{container.klass.name}::Step service: #{service.klass.name}>"
+                      "<#{container.klass.name}::Step>"
                     end
                   end
                 end

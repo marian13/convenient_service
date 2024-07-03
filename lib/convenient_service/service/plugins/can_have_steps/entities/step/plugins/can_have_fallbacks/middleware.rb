@@ -114,10 +114,10 @@ module ConvenientService
                   # @return [ConvenientService::Service]
                   #
                   # @internal
-                  #   IMPORTANT: `step.service.klass.new(**input_values)` is the reason, why services should have only kwargs as arguments.
+                  #   IMPORTANT: `step.service_class.new(**input_values)` is the reason, why services should have only kwargs as arguments.
                   #
                   def service
-                    @service ||= step.service.klass.new(**step.input_values)
+                    @service ||= step.service_class.new(**step.input_values)
                   end
 
                   ##

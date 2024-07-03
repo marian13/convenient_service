@@ -10,7 +10,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
   example_group "class methods" do
     describe ".call" do
-      let(:service) { Class.new }
+      let(:action) { Class.new }
       let(:inputs) { [:foo] }
       let(:outputs) { [:bar] }
       let(:index) { 0 }
@@ -20,7 +20,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
       let(:original_params) do
         ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Structs::Params.new(
-          service: service,
+          action: action,
           inputs: inputs,
           outputs: outputs,
           index: index,
@@ -32,21 +32,13 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
       let(:command_result) { described_class.call(original_params: original_params) }
 
-      example_group "`service`" do
-        it "returns `original_params.service` casted to `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Service` as `service`" do
-          expect(command_result.service).to eq(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Service.cast(original_params.service))
+      example_group "`action`" do
+        it "returns `original_params.action`" do
+          expect(command_result.action).to eq(original_params.action)
         end
 
         specify do
-          expect { command_result.service }.to cache_its_value
-        end
-
-        context "when `service` is NOT castable" do
-          let(:service) { 42 }
-
-          it "raises `ConvenientService::Support::Castable::Exceptions::FailedToCast`" do
-            expect { command_result }.to raise_error(ConvenientService::Support::Castable::Exceptions::FailedToCast)
-          end
+          expect { command_result.action }.to cache_its_value
         end
       end
 

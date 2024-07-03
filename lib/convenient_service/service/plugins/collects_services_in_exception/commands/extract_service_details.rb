@@ -47,7 +47,7 @@ module ConvenientService
               return {method: ":result"} if service.steps.none?
               return {step: "Unknown Step", index: -1} unless first_not_completed_step
 
-              {step: first_not_completed_step.printable_service, index: first_not_completed_step.index}
+              {step: first_not_completed_step.printable_action, index: first_not_completed_step.index}
             end
 
             ##

@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeMethodStep::CanBeExecuted::Middleware, type: :standard do
+RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeMethodStep::Middleware, type: :standard do
   include ConvenientService::RSpec::Helpers::IgnoringException
 
   include ConvenientService::RSpec::Matchers::DelegateTo
@@ -54,9 +54,19 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           Class.new.tap do |klass|
             klass.class_exec(first_step, middleware) do |first_step, middleware|
               include ConvenientService::Service::Configs::Essential
+              include ConvenientService::Service::Configs::Inspect
 
               self::Step.class_exec(middleware) do |middleware|
                 middlewares :result do
+                  ##
+                  # TODO: Swap middlewares.
+                  #
+                  delete ConvenientService::Plugins::Step::CanBeServiceStep::Middleware
+
+                  insert_after \
+                    middleware,
+                    ConvenientService::Plugins::Step::CanBeServiceStep::Middleware
+
                   observe middleware
                 end
               end
@@ -69,6 +79,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         let(:first_step) do
           Class.new do
             include ConvenientService::Service::Configs::Essential
+            include ConvenientService::Service::Configs::Inspect
 
             def result
               success
@@ -82,10 +93,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
               .without_arguments
               .and_return { |chain_value| chain_value.copy(overrides: {kwargs: {step: step, service: organizer}}) }
         end
-
-        it "return method step result" do
-          expect(method_value).to be_success.without_data.of_step(first_step).of_service(container)
-        end
       end
 
       context "when step is method step" do
@@ -93,6 +100,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           Class.new.tap do |klass|
             klass.class_exec(middleware) do |middleware|
               include ConvenientService::Service::Configs::Essential
+              include ConvenientService::Service::Configs::Inspect
 
               self::Step.class_exec(middleware) do |middleware|
                 middlewares :result do
@@ -116,8 +124,8 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         specify do
           expect { method_value }
             .to delegate_to(step, :method_result)
-            .without_arguments
-            .and_return_its_value
+              .without_arguments
+              .and_return { |chain_value| chain_value.copy(overrides: {kwargs: {step: step, service: organizer}}) }
         end
       end
     end

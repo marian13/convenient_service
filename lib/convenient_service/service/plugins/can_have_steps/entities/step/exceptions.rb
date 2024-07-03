@@ -10,7 +10,7 @@ module ConvenientService
               class StepHasNoOrganizer < ::ConvenientService::Exception
                 def initialize_with_kwargs(step:)
                   message = <<~TEXT
-                    Step `#{step.printable_service}` has not assigned organizer.
+                    Step `#{step.printable_action}` has not assigned organizer.
 
                     Did you forget to set it?
                   TEXT
@@ -27,11 +27,11 @@ module ConvenientService
                 #
                 def initialize_with_kwargs(key:, step:)
                   message = <<~TEXT
-                    Step `#{step.printable_service}` result does NOT return `:#{key}` data attribute.
+                    Step `#{step.printable_action}` result does NOT return `:#{key}` data attribute.
 
                     Maybe there is a typo in `out` definition?
 
-                    Or `success` of `#{step.printable_service}` accepts a wrong key?
+                    Or `success` of `#{step.printable_action}` accepts a wrong key?
                   TEXT
 
                   initialize(message)

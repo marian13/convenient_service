@@ -56,7 +56,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           Class.new.tap do |klass|
             klass.class_exec(middleware) do |middleware|
               include ConvenientService::Service::Configs::Essential
-
+              include ConvenientService::Service::Configs::Inspect
               self::Step.class_exec(middleware) do |middleware|
                 middlewares :result do
                   observe middleware
@@ -74,7 +74,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
         let(:exception_message) do
           <<~TEXT
-            Return value of step `#{step.printable_service}` is NOT a `Result`.
+            Return value of step `#{step.printable_action}` is NOT a `Result`.
             It is `String`.
 
             Did you forget to call `success`, `failure`, or `error`?
@@ -107,7 +107,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           Class.new.tap do |klass|
             klass.class_exec(middleware) do |middleware|
               include ConvenientService::Service::Configs::Essential
-
+              include ConvenientService::Service::Configs::Inspect
               self::Step.class_exec(middleware) do |middleware|
                 middlewares :result do
                   observe middleware

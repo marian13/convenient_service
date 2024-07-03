@@ -43,7 +43,7 @@ module ConvenientService
                     return result.unsafe_data.to_h if result.status.unsafe_not_success?
                     return result.unsafe_data.to_h if step.outputs.none?
 
-                    step.outputs.each { |output| ::ConvenientService.raise Exceptions::StepResultDataNotExistingAttribute.new(step: step, key: output.key.to_sym) unless result.unsafe_data.has_attribute?(output.key.to_sym) }
+                    step.outputs.each { |output| ::ConvenientService.raise Step::Exceptions::StepResultDataNotExistingAttribute.new(step: step, key: output.key.to_sym) unless result.unsafe_data.has_attribute?(output.key.to_sym) }
 
                     step.outputs.reduce({}) { |values, output| values.merge(output.name.to_sym => result.unsafe_data[output.key.to_sym]) }
                   end

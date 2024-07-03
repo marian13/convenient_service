@@ -30,7 +30,8 @@ module ConvenientService
                         }
                       }
 
-                      metadata[:ConvenientService].merge!(method_step? ? {method: ":#{method}"} : {service: service.klass.name})
+                      metadata[:ConvenientService][:method] = ":#{method}" if method_step?
+                      metadata[:ConvenientService][:service] = service_class.name if service_step?
 
                       metadata.ai
                     end

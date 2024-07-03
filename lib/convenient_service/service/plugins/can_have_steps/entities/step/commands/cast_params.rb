@@ -27,7 +27,7 @@ module ConvenientService
                 #
                 def call
                   Structs::Params.new(
-                    service: service,
+                    action: action,
                     inputs: inputs,
                     outputs: outputs,
                     index: index,
@@ -38,10 +38,10 @@ module ConvenientService
                 end
 
                 ##
-                # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Service]
+                # @return [Object] Can be any type.
                 #
-                def service
-                  @service ||= Entities::Service.cast!(original_params.service)
+                def action
+                  @action ||= original_params.action
                 end
 
                 ##

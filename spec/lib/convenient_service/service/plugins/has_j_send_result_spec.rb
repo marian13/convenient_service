@@ -13,6 +13,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult, type: :stand
       let(:service) do
         Class.new do
           include ConvenientService::Service::Configs::Essential
+          include ConvenientService::Service::Configs::Inspect
         end
       end
 

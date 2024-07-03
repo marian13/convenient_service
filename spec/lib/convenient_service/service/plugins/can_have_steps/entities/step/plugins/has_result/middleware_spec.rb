@@ -51,7 +51,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         Class.new.tap do |klass|
           klass.class_exec(first_step, middleware) do |first_step, middleware|
             include ConvenientService::Service::Configs::Essential
-
+            include ConvenientService::Service::Configs::Inspect
             self::Step.class_exec(middleware) do |middleware|
               middlewares :result do
                 observe middleware
@@ -66,7 +66,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       let(:first_step) do
         Class.new do
           include ConvenientService::Service::Configs::Essential
-
+          include ConvenientService::Service::Configs::Inspect
           def result
             success(data: {foo: :foo, bar: :bar, baz: :baz})
           end
@@ -89,7 +89,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
             Class.new.tap do |klass|
               klass.class_exec(first_step, middleware) do |first_step, middleware|
                 include ConvenientService::Service::Configs::Essential
-
+                include ConvenientService::Service::Configs::Inspect
                 self::Step.class_exec(middleware) do |middleware|
                   middlewares :result do
                     observe middleware
@@ -113,7 +113,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
                 Class.new.tap do |klass|
                   klass.class_exec(first_step, middleware) do |first_step, middleware|
                     include ConvenientService::Service::Configs::Essential
-
+                    include ConvenientService::Service::Configs::Inspect
                     self::Step.class_exec(middleware) do |middleware|
                       middlewares :result do
                         observe middleware
@@ -127,11 +127,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
               let(:exception_message) do
                 <<~TEXT
-                  Step `#{step.printable_service}` result does NOT return `:qux` data attribute.
+                  Step `#{step.printable_action}` result does NOT return `:qux` data attribute.
 
                   Maybe there is a typo in `out` definition?
 
-                  Or `success` of `#{step.printable_service}` accepts a wrong key?
+                  Or `success` of `#{step.printable_action}` accepts a wrong key?
                 TEXT
               end
 
@@ -152,7 +152,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
                 Class.new.tap do |klass|
                   klass.class_exec(first_step, middleware) do |first_step, middleware|
                     include ConvenientService::Service::Configs::Essential
-
+                    include ConvenientService::Service::Configs::Inspect
                     self::Step.class_exec(middleware) do |middleware|
                       middlewares :result do
                         observe middleware
@@ -176,7 +176,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
                 Class.new.tap do |klass|
                   klass.class_exec(first_step, middleware) do |first_step, middleware|
                     include ConvenientService::Service::Configs::Essential
-
+                    include ConvenientService::Service::Configs::Inspect
                     self::Step.class_exec(middleware) do |middleware|
                       middlewares :result do
                         observe middleware
@@ -190,11 +190,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
               let(:exception_message) do
                 <<~TEXT
-                  Step `#{step.printable_service}` result does NOT return `:qux` data attribute.
+                  Step `#{step.printable_action}` result does NOT return `:qux` data attribute.
 
                   Maybe there is a typo in `out` definition?
 
-                  Or `success` of `#{step.printable_service}` accepts a wrong key?
+                  Or `success` of `#{step.printable_action}` accepts a wrong key?
                 TEXT
               end
 
@@ -215,7 +215,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
                 Class.new.tap do |klass|
                   klass.class_exec(first_step, middleware) do |first_step, middleware|
                     include ConvenientService::Service::Configs::Essential
-
+                    include ConvenientService::Service::Configs::Inspect
                     self::Step.class_exec(middleware) do |middleware|
                       middlewares :result do
                         observe middleware
@@ -238,7 +238,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
               Class.new.tap do |klass|
                 klass.class_exec(first_step, middleware) do |first_step, middleware|
                   include ConvenientService::Service::Configs::Essential
-
+                  include ConvenientService::Service::Configs::Inspect
                   self::Step.class_exec(middleware) do |middleware|
                     middlewares :result do
                       observe middleware
@@ -261,7 +261,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         let(:first_step) do
           Class.new do
             include ConvenientService::Service::Configs::Essential
-
+            include ConvenientService::Service::Configs::Inspect
             def result
               failure(data: {foo: :foo, bar: :bar, baz: :baz})
             end
@@ -277,7 +277,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         let(:first_step) do
           Class.new do
             include ConvenientService::Service::Configs::Essential
-
+            include ConvenientService::Service::Configs::Inspect
             def result
               error(data: {foo: :foo, bar: :bar, baz: :baz})
             end

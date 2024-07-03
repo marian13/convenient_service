@@ -140,18 +140,6 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
           end
         end
 
-        example_group ".step middlewares" do
-          let(:class_step_middlewares) do
-            [
-              ConvenientService::Service::Plugins::CanHaveMethodSteps::Middleware
-            ]
-          end
-
-          it "sets service middlewares for `.step`" do
-            expect(service_class.middlewares(:step, scope: :class).to_a).to eq(class_step_middlewares)
-          end
-        end
-
         example_group ".result middlewares" do
           let(:class_result_middlewares) do
             [
@@ -421,6 +409,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
                 ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::HasResult::Concern,
 
                 ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeCompleted::Concern,
+                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeServiceStep::Concern,
                 ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeMethodStep::Concern,
 
                 ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::HasInspect::Concern,
@@ -439,13 +428,38 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
                 ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
                 ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::HasResult::Middleware,
                 ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::RaisesOnNotResultReturnValue::Middleware,
-                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeMethodStep::CanBeExecuted::Middleware,
+                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeServiceStep::Middleware,
+                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeMethodStep::Middleware,
                 ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveParentResult::Middleware
               ]
             end
 
             it "sets service step middlewares for `#result`" do
               expect(service_class::Step.middlewares(:result).to_a).to eq(result_middlewares)
+            end
+          end
+
+          example_group "#service_result middlewares" do
+            let(:service_result_middlewares) do
+              [
+                ConvenientService::Common::Plugins::CachesReturnValue::Middleware
+              ]
+            end
+
+            it "sets service step middlewares for `#service_result`" do
+              expect(service_class::Step.middlewares(:service_result).to_a).to eq(service_result_middlewares)
+            end
+          end
+
+          example_group "#method_result middlewares" do
+            let(:method_result_middlewares) do
+              [
+                ConvenientService::Common::Plugins::CachesReturnValue::Middleware
+              ]
+            end
+
+            it "sets service step middlewares for `#method_result`" do
+              expect(service_class::Step.middlewares(:method_result).to_a).to eq(method_result_middlewares)
             end
           end
 

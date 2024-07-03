@@ -53,10 +53,7 @@ module ConvenientService
                 ##
                 # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Service]
                 #
-                # @internal
-                #   TODO: Return service instance to be compatible with result.
-                #
-                delegate :service, to: :params
+                delegate :action, to: :params
 
                 ##
                 # @return [Array<ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method>]
@@ -207,34 +204,8 @@ module ConvenientService
                 #
                 # @return [String]
                 #
-                def printable_service
-                  Utils::Class.display_name(service.klass)
-                end
-
-                ##
-                # @api private
-                #
-                # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
-                # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepHasNoOrganizer]
-                #
-                # @note `service_result` has middlewares.
-                #
-                # @internal
-                #   IMPORTANT: `service.result(**input_values)` is the reason, why services should have only kwargs as arguments.
-                #
-                #   NOTE: `service_result` returns a foreign result that is later converted to own result by `HasResult` middleware.
-                #
-                def service_result
-                  @service_result ||= service.klass.result(**input_values)
-                end
-
-                ##
-                # @api private
-                #
-                # @return [Class]
-                #
-                def service_class
-                  service.klass
+                def printable_action
+                  action.inspect
                 end
 
                 ##
@@ -325,7 +296,7 @@ module ConvenientService
                 def ==(other)
                   return unless other.instance_of?(self.class)
 
-                  return false if service != other.service
+                  return false if action != other.action
                   return false if inputs != other.inputs
                   return false if outputs != other.outputs
                   return false if index != other.index
@@ -340,10 +311,10 @@ module ConvenientService
                 # @return [String]
                 #
                 # @internal
-                #   TODO: Remove `printable_service` completely. Leave only `to_s`.
+                #   TODO: Remove `printable_action` completely. Leave only `to_s`.
                 #
                 def to_s
-                  printable_service
+                  printable_action
                 end
 
                 ##
@@ -370,7 +341,7 @@ module ConvenientService
                 # @return [ConveninentService::Support::Arguments]
                 #
                 def to_arguments
-                  Support::Arguments.new(service, **kwargs.merge(in: inputs, out: outputs, index: index, container: container, organizer: organizer(raise_when_missing: false), **extra_kwargs))
+                  Support::Arguments.new(action, **kwargs.merge(in: inputs, out: outputs, index: index, container: container, organizer: organizer(raise_when_missing: false), **extra_kwargs))
                 end
 
                 private

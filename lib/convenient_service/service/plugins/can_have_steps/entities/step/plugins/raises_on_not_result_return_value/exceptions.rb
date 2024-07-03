@@ -12,7 +12,7 @@ module ConvenientService
                   class ReturnValueNotKindOfResult < ::ConvenientService::Exception
                     def initialize_with_kwargs(step:, result:)
                       message = <<~TEXT
-                        Return value of step `#{step.printable_service}` is NOT a `Result`.
+                        Return value of step `#{step.printable_action}` is NOT a `Result`.
                         It is `#{result.class}`.
 
                         Did you forget to call `success`, `failure`, or `error`?
