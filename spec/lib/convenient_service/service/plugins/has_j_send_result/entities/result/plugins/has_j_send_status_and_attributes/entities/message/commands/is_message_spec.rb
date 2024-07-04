@@ -23,6 +23,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           Class.new do
             include ConvenientService::Service::Configs::Essential
             include ConvenientService::Service::Configs::Inspect
+
             def result
               error(message: "foo")
             end

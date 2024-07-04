@@ -57,6 +57,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
             klass.class_exec(middleware) do |middleware|
               include ConvenientService::Service::Configs::Essential
               include ConvenientService::Service::Configs::Inspect
+
               self::Step.class_exec(middleware) do |middleware|
                 middlewares :result do
                   observe middleware
@@ -108,6 +109,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
             klass.class_exec(middleware) do |middleware|
               include ConvenientService::Service::Configs::Essential
               include ConvenientService::Service::Configs::Inspect
+
               self::Step.class_exec(middleware) do |middleware|
                 middlewares :result do
                   observe middleware

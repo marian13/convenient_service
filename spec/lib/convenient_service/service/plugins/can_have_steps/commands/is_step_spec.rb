@@ -23,6 +23,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Commands::IsSt
           Class.new do
             include ConvenientService::Service::Configs::Essential
             include ConvenientService::Service::Configs::Inspect
+
             step :result
 
             def result

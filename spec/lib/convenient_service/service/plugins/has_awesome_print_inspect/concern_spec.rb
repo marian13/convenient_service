@@ -36,7 +36,6 @@ RSpec.describe ConvenientService::Service::Plugins::HasAwesomePrintInspect::Conc
     let(:service_class) do
       Class.new do
         include ConvenientService::Service::Configs::Essential
-        include ConvenientService::Service::Configs::Inspect
         include ConvenientService::Service::Configs::AwesomePrintInspect
 
         def self.name
@@ -72,7 +71,6 @@ RSpec.describe ConvenientService::Service::Plugins::HasAwesomePrintInspect::Conc
         let(:service_class) do
           Class.new do
             include ConvenientService::Service::Configs::Essential
-            include ConvenientService::Service::Configs::Inspect
             include ConvenientService::Service::Configs::AwesomePrintInspect
           end
         end

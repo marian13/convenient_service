@@ -39,6 +39,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         Class.new do
           include ConvenientService::Service::Configs::Essential
           include ConvenientService::Service::Configs::Inspect
+
           step "abc"
         end
       end

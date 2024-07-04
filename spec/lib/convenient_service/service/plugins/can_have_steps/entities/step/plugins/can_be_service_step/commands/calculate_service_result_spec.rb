@@ -25,6 +25,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           Class.new do
             include ConvenientService::Service::Configs::Essential
             include ConvenientService::Service::Configs::Inspect
+
             step :foo
 
             def foo
@@ -57,6 +58,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
             klass.class_exec(first_step) do |first_step|
               include ConvenientService::Service::Configs::Essential
               include ConvenientService::Service::Configs::Inspect
+
               step first_step,
                 in: [:foo, :bar]
 
@@ -75,6 +77,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           Class.new do
             include ConvenientService::Service::Configs::Essential
             include ConvenientService::Service::Configs::Inspect
+
             def result
               success
             end

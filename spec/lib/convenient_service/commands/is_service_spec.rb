@@ -16,6 +16,7 @@ RSpec.describe ConvenientService::Commands::IsService, type: :standard do
         Class.new do
           include ConvenientService::Service::Configs::Essential
           include ConvenientService::Service::Configs::Inspect
+
           def result
             success
           end

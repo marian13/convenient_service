@@ -77,6 +77,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern, type: :s
       Class.new do
         include ConvenientService::Service::Configs::Essential
         include ConvenientService::Service::Configs::Inspect
+
         def result
           success
         end

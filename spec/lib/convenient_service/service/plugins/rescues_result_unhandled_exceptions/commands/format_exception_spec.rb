@@ -28,6 +28,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
         Class.new do
           include ConvenientService::Service::Configs::Essential
           include ConvenientService::Service::Configs::Inspect
+
           def result
             raise StandardError, "exception message"
           end
@@ -63,6 +64,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
           Class.new do
             include ConvenientService::Service::Configs::Essential
             include ConvenientService::Service::Configs::Inspect
+
             def result
               ##
               # NOTE: Sometimes exceptions may have no backtrace, especially when they are created by developers manually, NOT by Ruby internals.
@@ -95,6 +97,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
           Class.new do
             include ConvenientService::Service::Configs::Essential
             include ConvenientService::Service::Configs::Inspect
+
             def result
               raise StandardError, "exception message", caller.take(5)
             end
@@ -119,6 +122,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
           Class.new do
             include ConvenientService::Service::Configs::Essential
             include ConvenientService::Service::Configs::Inspect
+
             def result
               raise StandardError, "exception message", caller + ["# /line.rb:1:in `foo'"] * 5
             end
@@ -144,6 +148,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
           Class.new do
             include ConvenientService::Service::Configs::Essential
             include ConvenientService::Service::Configs::Inspect
+
             def result
               raise StandardError, nil, caller
             end
@@ -172,6 +177,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
           Class.new do
             include ConvenientService::Service::Configs::Essential
             include ConvenientService::Service::Configs::Inspect
+
             def result
               message = <<~TEXT
                 exception message first line
@@ -203,6 +209,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
           Class.new do
             include ConvenientService::Service::Configs::Essential
             include ConvenientService::Service::Configs::Inspect
+
             def result
               raise StandardError, "cause message"
             rescue
@@ -237,6 +244,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
           Class.new do
             include ConvenientService::Service::Configs::Essential
             include ConvenientService::Service::Configs::Inspect
+
             def result
               raise StandardError, "exception message", caller + ["# /line.rb:1:in `foo'"] * 10
             end

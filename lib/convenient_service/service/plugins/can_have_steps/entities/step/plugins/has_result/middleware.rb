@@ -7,6 +7,9 @@ module ConvenientService
         module Entities
           class Step
             module Plugins
+              ##
+              # TODO: Rename.
+              #
               module HasResult
                 class Middleware < MethodChainMiddleware
                   intended_for :result, entity: :step

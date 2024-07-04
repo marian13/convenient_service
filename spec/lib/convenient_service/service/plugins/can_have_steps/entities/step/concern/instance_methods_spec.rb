@@ -15,6 +15,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
     Class.new do
       include ConvenientService::Service::Configs::Essential
       include ConvenientService::Service::Configs::Inspect
+
       def initialize(foo:)
         @foo = foo
       end
@@ -29,6 +30,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
     Class.new do
       include ConvenientService::Service::Configs::Essential
       include ConvenientService::Service::Configs::Inspect
+
       def result
         success
       end
@@ -393,6 +395,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
               Class.new do
                 include ConvenientService::Service::Configs::Essential
                 include ConvenientService::Service::Configs::Inspect
+
                 def initialize(foo:)
                   @foo = foo
                 end
@@ -442,6 +445,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
               Class.new do
                 include ConvenientService::Service::Configs::Essential
                 include ConvenientService::Service::Configs::Inspect
+
                 def initialize(foo:)
                   @foo = foo
                 end
@@ -492,6 +496,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
             Class.new do
               include ConvenientService::Service::Configs::Essential
               include ConvenientService::Service::Configs::Inspect
+
               def initialize(foo:)
                 @foo = foo
               end
@@ -512,6 +517,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
             Class.new do
               include ConvenientService::Service::Configs::Essential
               include ConvenientService::Service::Configs::Inspect
+
               def initialize(foo:)
                 @foo = foo
               end
@@ -532,6 +538,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
             Class.new do
               include ConvenientService::Service::Configs::Essential
               include ConvenientService::Service::Configs::Inspect
+
               def initialize(foo:)
                 @foo = foo
               end
@@ -646,6 +653,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           Class.new do
             include ConvenientService::Service::Configs::Essential
             include ConvenientService::Service::Configs::Inspect
+
             def initialize(foo:)
               @foo = foo
             end
@@ -669,6 +677,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           Class.new do
             include ConvenientService::Service::Configs::Essential
             include ConvenientService::Service::Configs::Inspect
+
             def initialize(foo:)
               @foo = foo
             end
@@ -693,6 +702,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           Class.new do
             include ConvenientService::Service::Configs::Essential
             include ConvenientService::Service::Configs::Inspect
+
             def initialize(foo:)
               @foo = foo
             end
@@ -723,6 +733,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           Class.new do
             include ConvenientService::Service::Configs::Essential
             include ConvenientService::Service::Configs::Inspect
+
             def initialize(foo:)
               @foo = foo
             end

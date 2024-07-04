@@ -13,6 +13,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Concern::Cla
     Class.new do
       include ConvenientService::Service::Configs::Essential
       include ConvenientService::Service::Configs::Inspect
+
       def result
         success
       end

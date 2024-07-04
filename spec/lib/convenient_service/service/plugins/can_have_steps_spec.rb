@@ -14,6 +14,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps, type: :standar
         Class.new do
           include ConvenientService::Service::Configs::Essential
           include ConvenientService::Service::Configs::Inspect
+
           step :result
 
           def result

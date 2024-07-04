@@ -37,6 +37,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasConstructor::Concern, type
         Class.new do
           include ConvenientService::Service::Configs::Essential
           include ConvenientService::Service::Configs::Inspect
+
           attr_reader :args, :kwargs, :block
 
           def initialize(*args, **kwargs, &block)
