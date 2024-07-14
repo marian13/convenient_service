@@ -229,13 +229,13 @@ Resolved by [b8285e3](https://github.com/marian13/convenient_service/commit/b828
 
 Services and steps are caching their results utilizing the `CachesReturnValue` plugin.
 
-Although it is very flexible and easy to reuse from the maintenance point of view, that is not the best option from the performance point of view.
+Although it is very flexible and easy to reuse from a maintenance point of view, that is not the best option from a performance point of view.
 
-In case it starts to cause any visible performance penalty, it can be refactored using regular `||=` or `if defined?`.
+If it starts to cause any visible performance penalty, it can be refactored using regular `||=` or `if defined?`.
 
 ---
 
-### Consider to create parent result while copying results
+### Consider creating parent results while copying results
 
 | Priority | Complexity | Status | Tags |
 | - | - | - | - |
@@ -243,8 +243,49 @@ In case it starts to cause any visible performance penalty, it can be refactored
 
 Fallbacks have no access to their original results.
 
-When fallback result is used, original result is NOT in the parents chain.
+When a fallback result is used, the original result is NOT in the parent's chain.
 
-It is OK?
+Is it OK?
 
 ---
+
+### Consider making result codes `Symbol` descendants
+
+| Priority | Complexity | Status | Tags |
+| - | - | - | - |
+| Medium | Easy | TODO | result-code, case-when, symbol-descendant |
+
+This way the code below:
+
+```ruby
+if result.not_success?
+  case result.code.to_sym
+  when :full_queue
+    notify_devops
+  when :duplicated_job
+    notify_devs
+  else
+    # ...
+  end
+end
+```
+
+Can be rewritten as follows:
+
+```ruby
+if result.not_success?
+  case result.code
+  when :full_queue
+    notify_devops
+  when :duplicated_job
+    notify_devs
+  else
+    # ...
+  end
+end
+```
+
+That leads to more idiomatic and natural Ruby. 
+
+---
+
