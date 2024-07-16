@@ -27,6 +27,7 @@ require_relative "plugins/has_j_send_result_status_check_short_syntax"
 require_relative "plugins/has_mermaid_flowchart"
 require_relative "plugins/raises_on_not_result_return_value"
 require_relative "plugins/raises_on_double_result"
+require_relative "plugins/rescues_result_unhandled_exceptions"
 require_relative "plugins/sets_parent_to_foreign_result"
 
 require_relative "plugins/aliases"

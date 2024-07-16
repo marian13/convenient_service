@@ -8,4 +8,8 @@ module ConvenientService
   module Inspect
     Config = ::ConvenientService::Service::Configs::Inspect
   end
+
+  module FaultTolerance
+    Config = ::ConvenientService::Service::Configs::FaultTolerance
+  end
 end

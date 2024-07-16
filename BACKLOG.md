@@ -289,6 +289,40 @@ That leads to more idiomatic and natural Ruby.
 
 ---
 
+### Introduce an ability to uninclude configs
+
+| Priority | Complexity | Status | Tags |
+| - | - | - | - |
+| High | High | TODO | config, uninclude |
+
+For example:
+
+```ruby
+class Service
+  include ConvenientService::Standard::Config
+
+  include ConvenientService::FaultTolerance::Config
+
+  uninclude ConvenientService::FaultTolerance::Config
+
+  def result
+    success
+  end
+end
+```
+
+Otherwise, the config inclusion API must be changes before v1.0.0.
+
+**Notes:**
+
+- [Uninclude](https://github.com/rosylilly/uninclude).
+
+- [add uninclude and unextend method](https://bugs.ruby-lang.org/issues/8967).
+
+- [Add uninclude please](https://bugs.ruby-lang.org/issues/9887?tab=history).
+
+---
+
 ## Memory
 
 ### Consider to drop references to already calculated steps

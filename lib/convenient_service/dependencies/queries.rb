@@ -8,7 +8,9 @@ require_relative "queries/gems"
 # `ConvenientService::Dependencies` can dynamically require plugins/extensions that have external dependencies.
 #
 # @internal
-#   https://github.com/marian13/convenient_service/wiki/Docs:-Dependencies
+#   - https://github.com/marian13/convenient_service/wiki/Docs:-Dependencies
+#
+#   TODO: Add `plugin`, `config` suffixes to `require` methods.
 #
 module ConvenientService
   module Dependencies
@@ -196,16 +198,6 @@ module ConvenientService
         require "dry-validation"
 
         require "convenient_service/service/plugins/has_j_send_result_params_validations/using_dry_validation"
-      end
-
-      ##
-      # @api public
-      #
-      # @return [Boolean]
-      # @note Expected to be called from app entry points like `initializers` in Rails.
-      #
-      def require_rescues_result_unhandled_exceptions
-        require "convenient_service/service/plugins/rescues_result_unhandled_exceptions"
       end
 
       ##
