@@ -285,7 +285,18 @@ if result.not_success?
 end
 ```
 
-That leads to more idiomatic and natural Ruby. 
+That leads to more idiomatic and natural Ruby.
 
 ---
 
+## Memory
+
+### Consider to drop references to already calculated steps
+
+| Priority | Complexity | Status | Tags |
+| - | - | - | - |
+| Low | High | TODO | memory, drop-calculated-steps |
+
+**Drawbacks:**
+
+- Services that do NOT keep references to already calculated steps can NOT utilize `CanHaveRollbacks` plugin.
