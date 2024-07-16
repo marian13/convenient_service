@@ -26,7 +26,7 @@ RSpec.describe ConvenientService::Examples::Dry::V1::Gemfile::Services::AssertNp
       let(:npm_package_available_command) { "npm list #{name} --depth=0 > /dev/null 2>&1" }
 
       context "when `AssertNpmPackageAvailable` is NOT successful" do
-        if ConvenientService::Dependencies.support_has_j_send_result_params_validations_using_active_model_validations?
+        if ConvenientService::Dependencies.support_has_j_send_result_params_validations_using_active_model_validations_plugin?
           context "when `name` is NOT valid" do
             context "when `name` is NOT present" do
               let(:name) { "" }

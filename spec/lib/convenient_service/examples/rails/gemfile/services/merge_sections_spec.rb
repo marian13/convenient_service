@@ -51,7 +51,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::MergeSecti
       end
 
       context "when `MergeSections` is NOT successful" do
-        if ConvenientService::Dependencies.support_has_j_send_result_params_validations_using_active_model_validations?
+        if ConvenientService::Dependencies.support_has_j_send_result_params_validations_using_active_model_validations_plugin?
           context "when header is NOT present" do
             let(:header) { "" }
 

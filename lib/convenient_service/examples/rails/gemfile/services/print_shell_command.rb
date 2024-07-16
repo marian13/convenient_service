@@ -17,7 +17,7 @@ module ConvenientService
             attribute :skip, :boolean, default: false
             attribute :out, default: $stdout
 
-            validates :command, presence: true if ConvenientService::Dependencies.support_has_j_send_result_params_validations_using_active_model_validations?
+            validates :command, presence: true if ConvenientService::Dependencies.support_has_j_send_result_params_validations_using_active_model_validations_plugin?
 
             def result
               return failure("Printing of shell command `#{command}` is skipped") if skip

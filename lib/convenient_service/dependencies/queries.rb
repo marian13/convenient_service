@@ -29,9 +29,9 @@ module ConvenientService
       # @api private
       #
       # @return [Boolean]
-      # @see ConvenientService.Dependencies.require_has_j_send_result_params_validations_using_active_model_validations
+      # @see ConvenientService.Dependencies.require_has_j_send_result_params_validations_using_active_model_validations_plugin
       #
-      def support_has_j_send_result_params_validations_using_active_model_validations?
+      def support_has_j_send_result_params_validations_using_active_model_validations_plugin?
         return false unless active_model.loaded?
         return false if ruby.version >= 3.0 && active_model.version < 6.0
 
@@ -65,7 +65,7 @@ module ConvenientService
       # @return [Boolean]
       # @note Expected to be called from app entry points like `initializers` in Rails.
       #
-      def require_assigns_attributes_in_constructor_using_active_model_attribute_assignment
+      def require_assigns_attributes_in_constructor_using_active_model_attribute_assignment_plugin
         ##
         # - https://edgeguides.rubyonrails.org/active_model_basics.html
         # - https://api.rubyonrails.org/classes/ActiveModel.html
@@ -82,7 +82,7 @@ module ConvenientService
       # @return [Boolean]
       # @note Expected to be called from app entry points like `initializers` in Rails.
       #
-      def require_assigns_attributes_in_constructor_using_dry_initializer
+      def require_assigns_attributes_in_constructor_using_dry_initializer_plugin
         ##
         # - https://dry-rb.org/gems/dry-initializer/main
         # - https://github.com/dry-rb/dry-initializer
@@ -98,7 +98,7 @@ module ConvenientService
       # @return [Boolean]
       # @note Expected to be called from app entry points like `initializers` in Rails.
       #
-      def require_can_utilize_finite_loop
+      def require_can_utilize_finite_loop_plugin
         require "convenient_service/common/plugins/can_utilize_finite_loop"
       end
 
@@ -108,7 +108,7 @@ module ConvenientService
       # @return [Boolean]
       # @note Expected to be called from app entry points like `initializers` in Rails.
       #
-      def require_has_attributes_using_active_model_attributes
+      def require_has_attributes_using_active_model_attributes_plugin
         ##
         # - https://edgeguides.rubyonrails.org/active_model_basics.html
         # - https://api.rubyonrails.org/classes/ActiveModel.html
@@ -125,7 +125,7 @@ module ConvenientService
       # @return [Boolean]
       # @note Expected to be called from app entry points like `initializers` in Rails.
       #
-      def require_amazing_print_inspect
+      def require_amazing_print_inspect_config
         ##
         # - https://github.com/amazing-print/amazing_print
         #
@@ -148,7 +148,7 @@ module ConvenientService
       # @return [Boolean]
       # @note Expected to be called from app entry points like `initializers` in Rails.
       #
-      def require_awesome_print_inspect
+      def require_awesome_print_inspect_config
         ##
         # - https://github.com/awesome-print/awesome_print
         #
@@ -173,7 +173,7 @@ module ConvenientService
       #
       # @see https://userdocs.convenientservice.org/troubleshooting/i18n_translate_wrong_number_of_arguments
       #
-      def require_has_j_send_result_params_validations_using_active_model_validations
+      def require_has_j_send_result_params_validations_using_active_model_validations_plugin
         ##
         # - https://edgeguides.rubyonrails.org/active_model_basics.html
         # - https://api.rubyonrails.org/classes/ActiveModel.html
@@ -190,7 +190,7 @@ module ConvenientService
       # @return [Boolean]
       # @note Expected to be called from app entry points like `initializers` in Rails.
       #
-      def require_has_j_send_result_params_validations_using_dry_validation
+      def require_has_j_send_result_params_validations_using_dry_validation_plugin
         ##
         # - https://dry-rb.org/gems/dry-validation/main/
         # - https://github.com/dry-rb/dry-validation
@@ -206,7 +206,7 @@ module ConvenientService
       # @return [Boolean]
       # @note Expected to be called from app entry points like `initializers` in Rails.
       #
-      def require_wraps_result_in_db_transaction
+      def require_wraps_result_in_db_transaction_plugin
         ##
         # - https://edgeguides.rubyonrails.org/active_record_basics.html
         # - https://api.rubyonrails.org/classes/ActiveRecord.html

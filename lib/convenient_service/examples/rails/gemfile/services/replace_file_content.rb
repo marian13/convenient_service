@@ -11,9 +11,9 @@ module ConvenientService
             attribute :path, :string
             attribute :content, :string
 
-            validates :path, presence: true if ConvenientService::Dependencies.support_has_j_send_result_params_validations_using_active_model_validations?
+            validates :path, presence: true if ConvenientService::Dependencies.support_has_j_send_result_params_validations_using_active_model_validations_plugin?
 
-            validate :content_not_nil if ConvenientService::Dependencies.support_has_j_send_result_params_validations_using_active_model_validations?
+            validate :content_not_nil if ConvenientService::Dependencies.support_has_j_send_result_params_validations_using_active_model_validations_plugin?
 
             step Services::AssertFileExists, in: :path
             step :result, in: :path

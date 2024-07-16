@@ -12,7 +12,7 @@ module ConvenientService
               attribute :command, :string
               attribute :debug, :boolean, default: false
 
-              validates :command, presence: true if ConvenientService::Dependencies.support_has_j_send_result_params_validations_using_active_model_validations?
+              validates :command, presence: true if ConvenientService::Dependencies.support_has_j_send_result_params_validations_using_active_model_validations_plugin?
 
               step :result,
                 in: :command

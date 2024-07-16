@@ -170,7 +170,7 @@ RSpec.describe ConvenientService::Examples::Rails::V1::Gemfile::Services::ParseC
       end
 
       context "when `ParseContent` is NOT successful" do
-        if ConvenientService::Dependencies.support_has_j_send_result_params_validations_using_active_model_validations?
+        if ConvenientService::Dependencies.support_has_j_send_result_params_validations_using_active_model_validations_plugin?
           context "when content is NOT present" do
             let(:content) { "" }
 

@@ -30,7 +30,7 @@ RSpec.describe ConvenientService::Examples::Rails::V1::Gemfile::Services::RunShe
       let(:debug) { true }
 
       context "when `RunShellCommand` is NOT successful" do
-        if ConvenientService::Dependencies.support_has_j_send_result_params_validations_using_active_model_validations?
+        if ConvenientService::Dependencies.support_has_j_send_result_params_validations_using_active_model_validations_plugin?
           context "when command is NOT present" do
             let(:command) { nil }
 

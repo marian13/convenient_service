@@ -311,7 +311,7 @@ class Service
 end
 ```
 
-Otherwise, the config inclusion API must be changes before v1.0.0.
+Otherwise, the config inclusion API must be changed before v1.0.0.
 
 **Notes:**
 
@@ -320,6 +320,8 @@ Otherwise, the config inclusion API must be changes before v1.0.0.
 - [add uninclude and unextend method](https://bugs.ruby-lang.org/issues/8967).
 
 - [Add uninclude please](https://bugs.ruby-lang.org/issues/9887?tab=history).
+
+- [rb_include_module(VALUE klass, VALUE module)](https://github.com/ruby/ruby/blob/v3_3_4/class.c#L1179).
 
 ---
 

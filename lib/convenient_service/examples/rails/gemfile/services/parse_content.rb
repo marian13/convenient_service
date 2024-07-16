@@ -42,7 +42,7 @@ module ConvenientService
 
             attribute :content, :string
 
-            validates :content, presence: true if ConvenientService::Dependencies.support_has_j_send_result_params_validations_using_active_model_validations?
+            validates :content, presence: true if ConvenientService::Dependencies.support_has_j_send_result_params_validations_using_active_model_validations_plugin?
 
             step Services::AssertValidRubySyntax, in: :content
             step :result, in: :content, out: :parsed_content
