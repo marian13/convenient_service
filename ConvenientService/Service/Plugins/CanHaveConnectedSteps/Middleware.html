@@ -182,19 +182,15 @@
       <pre class="lines">
 
 
-13
-14
-15
-16
-17</pre>
+18
+19
+20</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/middleware.rb', line 13</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/middleware.rb', line 18</span>
 
 <span class='kw'>def</span> <span class='kw'>next</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
-  <span class='kw'>return</span> <span class='id identifier rubyid_chain'>chain</span><span class='period'>.</span><span class='id identifier rubyid_next'>next</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_none?'>none?</span>
-
-  <span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_steps_result'>steps_result</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span> <span class='op'>?</span> <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_steps_result'>steps_result</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span> <span class='op'>:</span> <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_regular_result'>regular_result</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -206,7 +202,7 @@
 </div>
 
       <div id="footer">
-  Generated on Tue Jul 16 23:40:08 2024 by
+  Generated on Wed Jul 17 23:49:09 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.36 (ruby-3.2.4).
 </div>
