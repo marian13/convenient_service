@@ -460,6 +460,24 @@ module ConvenientService
 
           instance_methods do
             ##
+            # @api private
+            #
+            # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
+            #
+            # @internal
+            #   NOTE: Both `regular_result` and `result` do NOT have arguments in the real-world scenarios.
+            #   IMPORTANT: But in case `result` starts to accept arguments, `regular_result` MUST mimic that behavior automatically. That is why argument forwarding is used here.
+            #   TODO: Justify usage of external plugin constant.
+            #
+            def regular_result(...)
+              method = Utils::Object.own_method(self, :result, private: true)
+
+              ::ConvenientService.raise HasResult::Exceptions::ResultIsNotOverridden.new(service: self) unless method
+
+              method.call(...)
+            end
+
+            ##
             # @api public
             #
             # @note May be useful for debugging purposes.

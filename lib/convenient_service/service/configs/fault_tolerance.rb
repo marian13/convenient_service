@@ -10,11 +10,15 @@ module ConvenientService
         included do
           include Configs::Essential
 
-          ##
-          # TODO: `Service#steps_result`, `Service#regular_result`.
-          # TODO: Ensure `RescuesResultUnhandledExceptions` is used as last middleware. Add `proxy`, `decorator` specifiers?
-          #
           middlewares :result, scope: :class do
+            use ConvenientService::Plugins::Service::RescuesResultUnhandledExceptions::Middleware
+          end
+
+          middlewares :regular_result do
+            use ConvenientService::Plugins::Service::RescuesResultUnhandledExceptions::Middleware
+          end
+
+          middlewares :steps_result do
             use ConvenientService::Plugins::Service::RescuesResultUnhandledExceptions::Middleware
           end
         end

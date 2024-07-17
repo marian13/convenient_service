@@ -48,7 +48,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
             include ConvenientService::Standard::Config
 
             middlewares :result do
-              use_and_observe middleware
+              insert_before \
+                ConvenientService::Service::Plugins::CanHaveConnectedSteps::Middleware,
+                middleware
+
+              observe middleware
             end
 
             def result

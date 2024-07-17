@@ -61,11 +61,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Middl
           end
         end
 
-        it "calls super" do
-          ##
-          # NOTE: Should return success, see how result is defined above.
-          #
-          expect(method_value).to be_success
+        specify do
+          expect { method_value }
+            .to delegate_to(service_instance, :regular_result)
+            .without_arguments
+            .and_return_its_value
         end
       end
 

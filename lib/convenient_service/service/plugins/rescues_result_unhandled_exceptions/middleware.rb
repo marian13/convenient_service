@@ -5,7 +5,8 @@ module ConvenientService
     module Plugins
       module RescuesResultUnhandledExceptions
         class Middleware < MethodChainMiddleware
-          intended_for :result, scope: any_scope, entity: :service
+          intended_for [:regular_result, :steps_result], scope: :instance, entity: :service
+          intended_for :result, scope: :class, entity: :service
 
           ##
           # @param args [Array<Object>]

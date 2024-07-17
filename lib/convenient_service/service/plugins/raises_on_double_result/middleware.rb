@@ -5,7 +5,7 @@ module ConvenientService
     module Plugins
       module RaisesOnDoubleResult
         class Middleware < MethodChainMiddleware
-          intended_for :result, entity: :service
+          intended_for :regular_result, entity: :service
 
           ##
           # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]

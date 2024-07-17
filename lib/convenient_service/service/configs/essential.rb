@@ -52,6 +52,14 @@ module ConvenientService
             use ConvenientService::Plugins::Service::CanHaveConnectedSteps::Middleware
           end
 
+          middlewares :regular_result do
+            use ConvenientService::Plugins::Common::CachesReturnValue::Middleware
+          end
+
+          middlewares :steps_result do
+            use ConvenientService::Plugins::Common::CachesReturnValue::Middleware
+          end
+
           class self::Internals
             include ConvenientService::Core
 

@@ -27,7 +27,19 @@ RSpec.describe ConvenientService::Service::Configs::FaultTolerance, type: :stand
       example_group "service" do
         example_group ".result middlewares" do
           it "adds `ConvenientService::Service::Plugins::RescuesResultUnhandledExceptions::Middleware` to service middlewares for `.result`" do
-            expect(service_class.middlewares(:result, scope: :class).to_a).to include(ConvenientService::Service::Plugins::RescuesResultUnhandledExceptions::Middleware)
+            expect(service_class.middlewares(:result, scope: :class).to_a.last).to eq(ConvenientService::Service::Plugins::RescuesResultUnhandledExceptions::Middleware)
+          end
+        end
+
+        example_group "#regular_result middlewares" do
+          it "adds `ConvenientService::Service::Plugins::RescuesResultUnhandledExceptions::Middleware` to service middlewares for `#regular_result`" do
+            expect(service_class.middlewares(:regular_result).to_a.last).to eq(ConvenientService::Service::Plugins::RescuesResultUnhandledExceptions::Middleware)
+          end
+        end
+
+        example_group "#steps_result middlewares" do
+          it "adds `ConvenientService::Service::Plugins::RescuesResultUnhandledExceptions::Middleware` to service middlewares for `#steps_result`" do
+            expect(service_class.middlewares(:steps_result).to_a.last).to eq(ConvenientService::Service::Plugins::RescuesResultUnhandledExceptions::Middleware)
           end
         end
       end

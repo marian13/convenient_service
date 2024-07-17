@@ -8,12 +8,15 @@ module ConvenientService
           intended_for :result, entity: :service
 
           ##
+          # @return [ConvenientService::Service]
+          #
+          alias_method :service, :entity
+
+          ##
           # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
           #
           def next(...)
-            return chain.next(...) if entity.steps.none?
-
-            entity.steps_result(...)
+            service.steps.any? ? service.steps_result(...) : service.regular_result(...)
           end
         end
       end

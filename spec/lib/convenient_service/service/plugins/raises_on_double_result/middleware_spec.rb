@@ -24,7 +24,7 @@ RSpec.describe ConvenientService::Service::Plugins::RaisesOnDoubleResult::Middle
     describe ".intended_methods" do
       let(:spec) do
         Class.new(ConvenientService::MethodChainMiddleware) do
-          intended_for :result, entity: :service
+          intended_for :regular_result, entity: :service
         end
       end
 
@@ -41,14 +41,14 @@ RSpec.describe ConvenientService::Service::Plugins::RaisesOnDoubleResult::Middle
 
       subject(:method_value) { method.call }
 
-      let(:method) { wrap_method(service_instance, method_name, observe_middleware: middleware) }
+      let(:method) { wrap_method(service_instance, :regular_result, observe_middleware: middleware) }
 
       let(:service_class) do
         Class.new.tap do |klass|
           klass.class_exec(middleware) do |middleware|
             include ConvenientService::Standard::Config
 
-            middlewares :result do
+            middlewares :regular_result do
               use_and_observe middleware
             end
 
@@ -61,8 +61,7 @@ RSpec.describe ConvenientService::Service::Plugins::RaisesOnDoubleResult::Middle
 
       let(:service_instance) { service_class.new }
 
-      let(:method_name) { :result }
-      let(:key) { ConvenientService::Service::Plugins::RaisesOnDoubleResult::Entities::Key.new(method: method_name, args: [], kwargs: {}, block: nil) }
+      let(:key) { ConvenientService::Service::Plugins::RaisesOnDoubleResult::Entities::Key.new(method: :regular_result, args: [], kwargs: {}, block: nil) }
 
       context "when service does NOT have result" do
         before do

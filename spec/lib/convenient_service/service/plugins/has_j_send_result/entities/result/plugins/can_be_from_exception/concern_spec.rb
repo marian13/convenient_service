@@ -44,18 +44,18 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         end
       end
 
-      context "when result is NOT created by `stub_service`" do
+      context "when result is NOT created by `from_exception`" do
         it "returns `false`" do
           expect(result.from_exception?).to eq(false)
         end
       end
 
-      context "when result is created by `stub_service`" do
+      context "when result is created by `from_exception`" do
         let(:service) do
           Class.new do
             include ConvenientService::Standard::Config
 
-            middlewares :result do
+            middlewares :regular_result do
               use ConvenientService::Plugins::Service::RescuesResultUnhandledExceptions::Middleware
             end
 

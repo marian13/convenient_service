@@ -95,6 +95,30 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
           end
         end
 
+        example_group "#regular_result middlewares" do
+          let(:regular_result_middlewares) do
+            [
+              ConvenientService::Common::Plugins::CachesReturnValue::Middleware
+            ]
+          end
+
+          it "sets service middlewares for `#regular_result`" do
+            expect(service_class.middlewares(:regular_result).to_a).to eq(regular_result_middlewares)
+          end
+        end
+
+        example_group "#steps_result middlewares" do
+          let(:steps_result_middlewares) do
+            [
+              ConvenientService::Common::Plugins::CachesReturnValue::Middleware
+            ]
+          end
+
+          it "sets service middlewares for `#steps_result`" do
+            expect(service_class.middlewares(:steps_result).to_a).to eq(steps_result_middlewares)
+          end
+        end
+
         example_group "#fallback_failure_result middlewares" do
           let(:fallback_failure_result_middlewares) do
             [
