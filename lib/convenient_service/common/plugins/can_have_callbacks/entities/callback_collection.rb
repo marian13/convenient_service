@@ -3,7 +3,7 @@
 module ConvenientService
   module Common
     module Plugins
-      module HasCallbacks
+      module CanHaveCallbacks
         module Entities
           class CallbackCollection
             include ::Enumerable
@@ -14,14 +14,14 @@ module ConvenientService
             # @api private
             #
             # @!attribute [r] types
-            #   @return [ConvenientService::Common::Plugins::HasCallbacks::Entities::TypeCollection]
+            #   @return [ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::TypeCollection]
             #
             attr_reader :callbacks
 
             ##
             # @api private
             #
-            # @return [Array<ConvenientService::Common::Plugins::HasCallbacks::Entities::Callback>]
+            # @return [Array<ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Callback>]
             #
             delegate :each, to: :callbacks
 
@@ -35,7 +35,7 @@ module ConvenientService
             end
 
             ##
-            # @return [Class<ConvenientService::Common::Plugins::HasCallbacks::Entities::Callback>]
+            # @return [Class<ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Callback>]
             #
             def callback_class
               Entities::Callback
@@ -45,7 +45,7 @@ module ConvenientService
             # @api private
             #
             # @param types [Array<Symbol>]
-            # @return [Array<ConvenientService::Common::Plugins::HasCallbacks::Entities::Callback>]
+            # @return [Array<ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Callback>]
             #
             def for(types)
               callbacks.select { |callback| callback.types.contain_exactly?(types) }
@@ -55,7 +55,7 @@ module ConvenientService
             # @api private
             #
             # @param kwargs [Hash{Symbol => Object}]
-            # @return [ConvenientService::Common::Plugins::HasCallbacks::Entities::Callback]
+            # @return [ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Callback]
             #
             def create(**kwargs)
               Entities::Callback.new(**kwargs)

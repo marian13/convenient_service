@@ -3,12 +3,12 @@
 module ConvenientService
   module Common
     module Plugins
-      module HasCallbacks
+      module CanHaveCallbacks
         module Entities
           class Callback
             ##
             # @!attribute [r] types
-            #   @return [ConvenientService::Common::Plugins::HasCallbacks::Entities::TypeCollection]
+            #   @return [ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::TypeCollection]
             #
             attr_reader :types
 
@@ -19,7 +19,7 @@ module ConvenientService
             attr_reader :block
 
             ##
-            # @param types [ConvenientService::Common::Plugins::HasCallbacks::Entities::TypeCollection]
+            # @param types [ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::TypeCollection]
             # @param block [Proc, nil]
             # @return [void]
             #
@@ -66,7 +66,7 @@ module ConvenientService
 
             ##
             # @param context [Object] Can be any type.
-            # @return [ConvenientService::Common::Plugins::HasCallbacks::Entities::Callback]
+            # @return [ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Callback]
             #
             def call_in_context(context)
               call_callback_in_context(context)
@@ -77,7 +77,7 @@ module ConvenientService
             # @param args [Array<Object>]
             # @param kwargs [Hash{Symbol => Object}]
             # @param block [Proc, nil]
-            # @return [ConvenientService::Common::Plugins::HasCallbacks::Entities::Callback]
+            # @return [ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Callback]
             #
             def call_in_context_with_arguments(context, *args, **kwargs, &block)
               call_callback_in_context(context, arguments(*args, **kwargs, &block))
@@ -89,7 +89,7 @@ module ConvenientService
             # @param args [Array<Object>]
             # @param kwargs [Hash{Symbol => Object}]
             # @param block [Proc, nil]
-            # @return [ConvenientService::Common::Plugins::HasCallbacks::Entities::Callback]
+            # @return [ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Callback]
             #
             def call_in_context_with_value_and_arguments(context, value, *args, **kwargs, &block)
               call_callback_in_context(context, value, arguments(*args, **kwargs, &block))

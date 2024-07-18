@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
-RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Entities::CallbackCollection, type: :standard do
+RSpec.describe ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::CallbackCollection, type: :standard do
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
 
@@ -39,7 +39,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Entities::Callb
   example_group "instance methods" do
     subject(:callback_collection) { described_class.new }
 
-    let(:callback) { ConvenientService::Common::Plugins::HasCallbacks::Entities::Callback.new(**kwargs) }
+    let(:callback) { ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Callback.new(**kwargs) }
 
     let(:kwargs) { {types: types, block: block} }
     let(:types) { [:before, :result] }
@@ -64,8 +64,8 @@ RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Entities::Callb
     end
 
     describe "#callback_class" do
-      it "returns `ConvenientService::Common::Plugins::HasCallbacks::Entities::Callback`" do
-        expect(callback_collection.callback_class).to eq(ConvenientService::Common::Plugins::HasCallbacks::Entities::Callback)
+      it "returns `ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Callback`" do
+        expect(callback_collection.callback_class).to eq(ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Callback)
       end
     end
 

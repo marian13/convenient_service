@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Entities::Callback, type: :standard do
+RSpec.describe ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Callback, type: :standard do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   example_group "attributes" do
@@ -22,9 +22,9 @@ RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Entities::Callb
       subject(:callback) { described_class.new(types: types, block: double) }
 
       let(:types) { [:before, :result] }
-      let(:casted_types) { ConvenientService::Common::Plugins::HasCallbacks::Entities::TypeCollection.new(types: types) }
+      let(:casted_types) { ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::TypeCollection.new(types: types) }
 
-      it "casts types to `ConvenientService::Common::Plugins::HasCallbacks::Entities::TypeCollection` instance" do
+      it "casts types to `ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::TypeCollection` instance" do
         expect(callback.types).to eq(casted_types)
       end
     end

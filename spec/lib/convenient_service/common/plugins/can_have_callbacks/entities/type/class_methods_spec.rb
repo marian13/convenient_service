@@ -5,9 +5,9 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
-RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Entities::Type::ClassMethods, type: :standard do
+RSpec.describe ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Type::ClassMethods, type: :standard do
   describe "#cast" do
-    let(:type_class) { ConvenientService::Common::Plugins::HasCallbacks::Entities::Type }
+    let(:type_class) { ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Type }
 
     context "when `other` is NOT castable" do
       let(:other) { 42 }
@@ -22,7 +22,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Entities::Type:
         let(:other) { "before" }
 
         it "returns that string casted to `type`" do
-          expect(type_class.cast(other)).to eq(ConvenientService::Common::Plugins::HasCallbacks::Entities::Type.new(value: :before))
+          expect(type_class.cast(other)).to eq(ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Type.new(value: :before))
         end
 
         it "casts that string to symbol" do
@@ -34,15 +34,15 @@ RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Entities::Type:
         let(:other) { :before }
 
         it "returns that string casted to `type`" do
-          expect(type_class.cast(other)).to eq(ConvenientService::Common::Plugins::HasCallbacks::Entities::Type.new(value: :before))
+          expect(type_class.cast(other)).to eq(ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Type.new(value: :before))
         end
       end
 
-      context "when `other` is `ConvenientService::Common::Plugins::HasCallbacks::Entities::Type`" do
-        let(:other) { ConvenientService::Common::Plugins::HasCallbacks::Entities::Type.new(value: :before) }
+      context "when `other` is `ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Type`" do
+        let(:other) { ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Type.new(value: :before) }
 
         it "returns that type casted to `type`" do
-          expect(type_class.cast(other)).to eq(ConvenientService::Common::Plugins::HasCallbacks::Entities::Type.new(value: :before))
+          expect(type_class.cast(other)).to eq(ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Type.new(value: :before))
         end
       end
     end

@@ -30,7 +30,7 @@ module ConvenientService
               use ConvenientService::Plugins::Service::HasJSendResultShortSyntax::Concern
               use ConvenientService::Plugins::Service::HasJSendResultStatusCheckShortSyntax::Concern
 
-              use ConvenientService::Plugins::Common::HasCallbacks::Concern
+              use ConvenientService::Plugins::Common::CanHaveCallbacks::Concern
 
               use ConvenientService::Plugins::Service::HasMermaidFlowchart::Concern
 
@@ -54,7 +54,7 @@ module ConvenientService
 
               insert_before \
                 ConvenientService::Plugins::Service::RaisesOnNotResultReturnValue::Middleware,
-                ConvenientService::Plugins::Common::HasCallbacks::Middleware
+                ConvenientService::Plugins::Common::CanHaveCallbacks::Middleware
 
               ##
               # TODO: Rewrite. This plugin does NOT do what it states. Probably I was NOT with a clear mind while writing it (facepalm).
@@ -71,7 +71,7 @@ module ConvenientService
             end
 
             middlewares :step do
-              use ConvenientService::Plugins::Common::HasCallbacks::Middleware
+              use ConvenientService::Plugins::Common::CanHaveCallbacks::Middleware
             end
 
             middlewares :success do

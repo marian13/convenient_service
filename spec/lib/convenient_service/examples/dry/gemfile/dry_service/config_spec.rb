@@ -47,7 +47,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::DryService::Config, ty
               ConvenientService::Service::Plugins::CanRecalculateResult::Concern,
               ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Concern,
               ConvenientService::Service::Plugins::HasJSendResultStatusCheckShortSyntax::Concern,
-              ConvenientService::Common::Plugins::HasCallbacks::Concern,
+              ConvenientService::Common::Plugins::CanHaveCallbacks::Concern,
               ConvenientService::Service::Plugins::HasMermaidFlowchart::Concern,
               ConvenientService::Common::Plugins::AssignsAttributesInConstructor::UsingDryInitializer::Concern,
               ConvenientService::Service::Plugins::HasJSendResultParamsValidations::UsingDryValidation::Concern
@@ -79,7 +79,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::DryService::Config, ty
               ConvenientService::Service::Plugins::CanHaveStubbedResults::Middleware,
               ConvenientService::Service::Plugins::CollectsServicesInException::Middleware,
               ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
-              ConvenientService::Common::Plugins::HasCallbacks::Middleware,
+              ConvenientService::Common::Plugins::CanHaveCallbacks::Middleware,
               ConvenientService::Service::Plugins::SetsParentToForeignResult::Middleware,
               ConvenientService::Service::Plugins::HasJSendResultParamsValidations::UsingDryValidation::Middleware,
               ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Middleware,
@@ -183,7 +183,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::DryService::Config, ty
         example_group "#step middlewares" do
           let(:step_middlewares) do
             [
-              ConvenientService::Common::Plugins::HasCallbacks::Middleware
+              ConvenientService::Common::Plugins::CanHaveCallbacks::Middleware
             ]
           end
 

@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
-RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Concern, type: :standard do
+RSpec.describe ConvenientService::Common::Plugins::CanHaveCallbacks::Concern, type: :standard do
   include ConvenientService::RSpec::PrimitiveMatchers::CacheItsValue
   include ConvenientService::RSpec::Matchers::DelegateTo
 
@@ -44,8 +44,8 @@ RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Concern, type: 
 
     example_group "class methods" do
       describe ".callbacks" do
-        it "returns `ConvenientService::Common::Plugins::HasCallbacks::Entities::CallbackCollection` instance" do
-          expect(service_class.callbacks).to eq(ConvenientService::Common::Plugins::HasCallbacks::Entities::CallbackCollection.new)
+        it "returns `ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::CallbackCollection` instance" do
+          expect(service_class.callbacks).to eq(ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::CallbackCollection.new)
         end
 
         specify do
@@ -79,7 +79,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Concern, type: 
       end
 
       describe ".around" do
-        let(:callback) { ConvenientService::Common::Plugins::HasCallbacks::Entities::Callback.new(types: [:around, type], block: block) }
+        let(:callback) { ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Callback.new(types: [:around, type], block: block) }
 
         it "adds around callback to `callbacks`" do
           service_class.around(type, &block)

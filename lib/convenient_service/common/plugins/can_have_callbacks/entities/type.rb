@@ -5,7 +5,7 @@ require_relative "type/class_methods"
 module ConvenientService
   module Common
     module Plugins
-      module HasCallbacks
+      module CanHaveCallbacks
         module Entities
           class Type
             include Support::Castable

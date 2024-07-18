@@ -3,7 +3,7 @@
 module ConvenientService
   module Common
     module Plugins
-      module HasCallbacks
+      module CanHaveCallbacks
         module Entities
           class TypeCollection
             attr_reader :types

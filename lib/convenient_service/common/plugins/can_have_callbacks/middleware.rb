@@ -3,7 +3,7 @@
 module ConvenientService
   module Common
     module Plugins
-      module HasCallbacks
+      module CanHaveCallbacks
         class Middleware < MethodChainMiddleware
           ##
           # @internal
@@ -213,7 +213,7 @@ module ConvenientService
           end
 
           ##
-          # @return [ConvenientService::Common::Plugins::HasCallbacks::Entities::CallbackCollection]
+          # @return [ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::CallbackCollection]
           #
           def callbacks
             @callbacks ||= entity.class.callbacks

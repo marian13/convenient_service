@@ -46,7 +46,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
               ConvenientService::Service::Plugins::CanRecalculateResult::Concern,
               ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Concern,
               ConvenientService::Service::Plugins::HasJSendResultStatusCheckShortSyntax::Concern,
-              ConvenientService::Common::Plugins::HasCallbacks::Concern,
+              ConvenientService::Common::Plugins::CanHaveCallbacks::Concern,
               ConvenientService::Service::Plugins::HasMermaidFlowchart::Concern
             ]
           end
@@ -76,7 +76,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
               ConvenientService::Service::Plugins::CanHaveStubbedResults::Middleware,
               ConvenientService::Service::Plugins::CollectsServicesInException::Middleware,
               ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
-              ConvenientService::Common::Plugins::HasCallbacks::Middleware,
+              ConvenientService::Common::Plugins::CanHaveCallbacks::Middleware,
               ConvenientService::Service::Plugins::SetsParentToForeignResult::Middleware,
               ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Middleware,
               ConvenientService::Service::Plugins::CanHaveConnectedSteps::Middleware
@@ -179,7 +179,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
         example_group "#step middlewares" do
           let(:step_middlewares) do
             [
-              ConvenientService::Common::Plugins::HasCallbacks::Middleware
+              ConvenientService::Common::Plugins::CanHaveCallbacks::Middleware
             ]
           end
 

@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
-RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Entities::TypeCollection, type: :standard do
+RSpec.describe ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::TypeCollection, type: :standard do
   example_group "attributes" do
     include ConvenientService::RSpec::PrimitiveMatchers::HaveAttrReader
 
@@ -19,9 +19,9 @@ RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Entities::TypeC
       subject(:type_collection) { described_class.new(types: types) }
 
       let(:types) { [:before, :result] }
-      let(:casted_types) { types.map(&ConvenientService::Common::Plugins::HasCallbacks::Entities::Type.method(:cast!)) }
+      let(:casted_types) { types.map(&ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Type.method(:cast!)) }
 
-      it "casts types to `ConvenientService::Common::Plugins::HasCallbacks::Entities::Type` instances" do
+      it "casts types to `ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Type` instances" do
         expect(type_collection.types).to eq(casted_types)
       end
     end
@@ -32,8 +32,8 @@ RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Entities::TypeC
 
     let(:types) { [:before, :result] }
     let(:other_types) { [:after, :step] }
-    let(:casted_types) { types.map(&ConvenientService::Common::Plugins::HasCallbacks::Entities::Type.method(:cast!)) }
-    let(:casted_other_types) { other_types.map(&ConvenientService::Common::Plugins::HasCallbacks::Entities::Type.method(:cast!)) }
+    let(:casted_types) { types.map(&ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Type.method(:cast!)) }
+    let(:casted_other_types) { other_types.map(&ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Type.method(:cast!)) }
 
     describe "#contain_exactly?" do
       it "casts other types" do
@@ -42,12 +42,12 @@ RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Entities::TypeC
         #
         type_collection
 
-        allow(ConvenientService::Common::Plugins::HasCallbacks::Entities::Type).to receive(:cast!).with(other_types[0]).and_call_original
-        allow(ConvenientService::Common::Plugins::HasCallbacks::Entities::Type).to receive(:cast!).with(other_types[1]).and_call_original
+        allow(ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Type).to receive(:cast!).with(other_types[0]).and_call_original
+        allow(ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Type).to receive(:cast!).with(other_types[1]).and_call_original
 
         type_collection.contain_exactly?(other_types)
 
-        expect(ConvenientService::Common::Plugins::HasCallbacks::Entities::Type).to have_received(:cast!).twice
+        expect(ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Type).to have_received(:cast!).twice
       end
 
       it "delegates to `ConvenientService::Utils::Array.contain_exactly?`" do

@@ -3,7 +3,7 @@
 module ConvenientService
   module Common
     module Plugins
-      module HasCallbacks
+      module CanHaveCallbacks
         module Concern
           include Support::Concern
 
@@ -11,7 +11,7 @@ module ConvenientService
             ##
             # @api private
             #
-            # @return [ConvenientService::Common::Plugins::HasCallbacks::Entities::CallbackCollection]
+            # @return [ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::CallbackCollection]
             #
             def callbacks
               internals_class.cache.fetch(:callbacks) { Entities::CallbackCollection.new }
@@ -22,7 +22,7 @@ module ConvenientService
             #
             # @param type [Symbol]
             # @param block [Proc]
-            # @return [ConvenientService::Common::Plugins::HasCallbacks::Entities::Callback]
+            # @return [ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Callback]
             #
             def before(type, &block)
               callbacks.create(types: [:before, type], block: block)
@@ -33,7 +33,7 @@ module ConvenientService
             #
             # @param type [Symbol]
             # @param block [Proc]
-            # @return [ConvenientService::Common::Plugins::HasCallbacks::Entities::Callback]
+            # @return [ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Callback]
             #
             def after(type, &block)
               callbacks.create(types: [:after, type], block: block)
@@ -44,7 +44,7 @@ module ConvenientService
             #
             # @param type [Symbol]
             # @param block [Proc]
-            # @return [ConvenientService::Common::Plugins::HasCallbacks::Entities::Callback]
+            # @return [ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Callback]
             #
             def around(type, &block)
               callbacks.create(types: [:around, type], block: block)
