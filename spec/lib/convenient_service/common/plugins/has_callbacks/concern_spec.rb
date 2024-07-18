@@ -77,6 +77,20 @@ RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Concern, type: 
             .and_return_its_value
         end
       end
+
+      describe ".around" do
+        let(:callback) { ConvenientService::Common::Plugins::HasCallbacks::Entities::Callback.new(types: [:around, type], block: block) }
+
+        it "adds around callback to `callbacks`" do
+          service_class.around(type, &block)
+
+          expect(service_class.callbacks).to include(callback)
+        end
+
+        it "returns around callback" do
+          expect(service_class.around(type, &block)).to eq(callback)
+        end
+      end
     end
   end
 end

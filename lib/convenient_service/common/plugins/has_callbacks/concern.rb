@@ -38,6 +38,17 @@ module ConvenientService
             def after(type, &block)
               callbacks.create(types: [:after, type], block: block)
             end
+
+            ##
+            # @api public
+            #
+            # @param type [Symbol]
+            # @param block [Proc]
+            # @return [ConvenientService::Common::Plugins::HasCallbacks::Entities::Callback]
+            #
+            def around(type, &block)
+              callbacks.create(types: [:around, type], block: block)
+            end
           end
         end
       end

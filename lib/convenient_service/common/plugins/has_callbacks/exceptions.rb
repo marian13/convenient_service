@@ -3,7 +3,7 @@
 module ConvenientService
   module Common
     module Plugins
-      module HasAroundCallbacks
+      module HasCallbacks
         module Exceptions
           class AroundCallbackChainIsNotContinued < ::ConvenientService::Exception
             def initialize_with_kwargs(callback:)

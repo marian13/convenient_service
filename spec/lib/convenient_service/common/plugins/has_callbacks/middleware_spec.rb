@@ -6,6 +6,10 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Middleware, type: :standard do
+  include ConvenientService::RSpec::Helpers::IgnoringException
+
+  include ConvenientService::RSpec::Matchers::DelegateTo
+
   let(:middleware) { described_class }
 
   example_group "inheritance" do
@@ -74,221 +78,545 @@ RSpec.describe ConvenientService::Common::Plugins::HasCallbacks::Middleware, typ
           TEXT
         end
 
-        it "runs only `chain.next`" do
+        it "runs only middleware `chain.next`" do
           method_value
 
           expect(output).to eq(text)
         end
       end
 
-      context "when service class has one before callback" do
-        let(:text) do
-          <<~TEXT
-            first before result
-            original result
-          TEXT
-        end
-
-        before do
-          service_class.before(:result) { out.puts "first before result" }
-        end
-
-        it "runs that before callback in addition to `chain.next`" do
-          method_value
-
-          expect(output).to eq(text)
-        end
-      end
-
-      context "when service class has one after callback" do
-        let(:text) do
-          <<~TEXT
-            original result
-            first after result
-          TEXT
-        end
-
-        before do
-          service_class.after(:result) { out.puts "first after result" }
-        end
-
-        it "runs that after callback in addition to `chain.next`" do
-          method_value
-
-          expect(output).to eq(text)
-        end
-      end
-
-      context "when service class has multiple before callbacks" do
-        let(:text) do
-          <<~TEXT
-            first before result
-            second before result
-            original result
-          TEXT
-        end
-
-        before do
-          service_class.before(:result) { out.puts "first before result" }
-          service_class.before(:result) { out.puts "second before result" }
-        end
-
-        it "runs those before callbacks in addition to `chain.next`" do
-          method_value
-
-          expect(output).to eq(text)
-        end
-      end
-
-      context "when service class has multiple after callbacks" do
-        let(:text) do
-          <<~TEXT
-            original result
-            second after result
-            first after result
-          TEXT
-        end
-
-        before do
-          service_class.after(:result) { out.puts "first after result" }
-          service_class.after(:result) { out.puts "second after result" }
-        end
-
-        it "runs those after callbacks in addition to `chain.next`" do
-          method_value
-
-          expect(output).to eq(text)
-        end
-      end
-
-      context "when service class has before and after callbacks" do
-        let(:text) do
-          <<~TEXT
-            first before result
-            second before result
-            original result
-            second after result
-            first after result
-          TEXT
-        end
-
-        before do
-          service_class.before(:result) { out.puts "first before result" }
-          service_class.before(:result) { out.puts "second before result" }
-
-          service_class.after(:result) { out.puts "first after result" }
-          service_class.after(:result) { out.puts "second after result" }
-        end
-
-        it "runs those before and after callbacks in addition to `chain.next`" do
-          method_value
-
-          expect(output).to eq(text)
-        end
-      end
-
-      example_group "after callbacks first argument" do
-        before do
-          ##
-          # NOTE: `result_original_value` is NOT available inside service instance context.
-          # That is why "chain next value" literal is used.
-          #
-          service_class.after(:result) { |result| raise if result.unsafe_data[:value] != "result original value" }
-        end
-
-        it "passes `chain.next` to all after callbacks as first argument" do
-          expect { method_value }.not_to raise_error
-        end
-      end
-
-      example_group "context" do
-        let(:service_class) do
-          Class.new.tap do |klass|
-            klass.class_exec(middleware) do |middleware|
-              include ConvenientService::Standard::Config
-
-              middlewares :result do
-                observe middleware
-              end
-
-              def some_instance_method
-              end
-
-              def result
-                success
-              end
-            end
+      example_group "before/after callbacks" do
+        context "when service class has one before callback" do
+          let(:text) do
+            <<~TEXT
+              first before result
+              original result
+            TEXT
           end
-        end
 
-        example_group "before callbacks context" do
           before do
-            service_class.before(:result) { some_instance_method }
+            service_class.before(:result) { out.puts "first before result" }
           end
 
-          it "executes before callbacks in instance context" do
+          it "runs that before callback in addition to `chain.next`" do
+            method_value
+
+            expect(output).to eq(text)
+          end
+        end
+
+        context "when service class has one after callback" do
+          let(:text) do
+            <<~TEXT
+              original result
+              first after result
+            TEXT
+          end
+
+          before do
+            service_class.after(:result) { out.puts "first after result" }
+          end
+
+          it "runs that after callback in addition to `chain.next`" do
+            method_value
+
+            expect(output).to eq(text)
+          end
+        end
+
+        context "when service class has multiple before callbacks" do
+          let(:text) do
+            <<~TEXT
+              first before result
+              second before result
+              original result
+            TEXT
+          end
+
+          before do
+            service_class.before(:result) { out.puts "first before result" }
+            service_class.before(:result) { out.puts "second before result" }
+          end
+
+          it "runs those before callbacks in addition to `chain.next`" do
+            method_value
+
+            expect(output).to eq(text)
+          end
+        end
+
+        context "when service class has multiple after callbacks" do
+          let(:text) do
+            <<~TEXT
+              original result
+              second after result
+              first after result
+            TEXT
+          end
+
+          before do
+            service_class.after(:result) { out.puts "first after result" }
+            service_class.after(:result) { out.puts "second after result" }
+          end
+
+          it "runs those after callbacks in addition to `chain.next`" do
+            method_value
+
+            expect(output).to eq(text)
+          end
+        end
+
+        context "when service class has before and after callbacks" do
+          let(:text) do
+            <<~TEXT
+              first before result
+              second before result
+              original result
+              second after result
+              first after result
+            TEXT
+          end
+
+          before do
+            service_class.before(:result) { out.puts "first before result" }
+            service_class.before(:result) { out.puts "second before result" }
+
+            service_class.after(:result) { out.puts "first after result" }
+            service_class.after(:result) { out.puts "second after result" }
+          end
+
+          it "runs those before and after callbacks in addition to `chain.next`" do
+            method_value
+
+            expect(output).to eq(text)
+          end
+        end
+
+        example_group "after callbacks first argument" do
+          before do
+            ##
+            # NOTE: `result_original_value` is NOT available inside service instance context.
+            # That is why "chain next value" literal is used.
+            #
+            service_class.after(:result) { |result| raise if result.unsafe_data[:value] != "result original value" }
+          end
+
+          it "passes `chain.next` to all after callbacks as first argument" do
             expect { method_value }.not_to raise_error
           end
         end
 
-        example_group "after callbacks context" do
-          before do
-            service_class.after(:result) { some_instance_method }
+        example_group "context" do
+          let(:service_class) do
+            Class.new.tap do |klass|
+              klass.class_exec(middleware) do |middleware|
+                include ConvenientService::Standard::Config
+
+                middlewares :result do
+                  observe middleware
+                end
+
+                def some_instance_method
+                end
+
+                def result
+                  success
+                end
+              end
+            end
           end
 
-          it "executes after callbacks in instance context" do
-            expect { method_value }.not_to raise_error
+          example_group "before callbacks context" do
+            before do
+              service_class.before(:result) { some_instance_method }
+            end
+
+            it "executes before callbacks in instance context" do
+              expect { method_value }.not_to raise_error
+            end
+          end
+
+          example_group "after callbacks context" do
+            before do
+              service_class.after(:result) { some_instance_method }
+            end
+
+            it "executes after callbacks in instance context" do
+              expect { method_value }.not_to raise_error
+            end
+          end
+        end
+
+        example_group "method arguments" do
+          subject(:method_value) { method.call(*args, **kwargs, &block) }
+
+          let(:args) { [:foo] }
+          let(:kwargs) { {foo: :bar} }
+          let(:block) { proc { :foo } }
+
+          let(:service_class) do
+            Class.new.tap do |klass|
+              klass.class_exec(result_original_value, out, middleware) do |result_original_value, out, middleware|
+                include ConvenientService::Standard::Config
+
+                middlewares :result do
+                  observe middleware
+                end
+
+                define_method(:result) { |*args, **kwargs, &block| success(value: result_original_value) }
+              end
+            end
+          end
+
+          example_group "before callbacks method arguments" do
+            before do
+              service_class.before(:result) do |arguments|
+                raise if arguments.args != [:foo]
+                raise if arguments.kwargs != {foo: :bar}
+                raise if arguments.block.call != :foo
+              end
+            end
+
+            it "passes args, kwargs, block as arguments object" do
+              expect { method_value }.not_to raise_error
+            end
+          end
+
+          example_group "after callbacks method arguments" do
+            before do
+              service_class.after(:result) do |original_value, arguments|
+                raise if original_value.unsafe_data[:value] != "result original value"
+                raise if arguments.args != [:foo]
+                raise if arguments.kwargs != {foo: :bar}
+                raise if arguments.block.call != :foo
+              end
+            end
+
+            it "passes original value and args, kwargs, block as arguments object" do
+              expect { method_value }.not_to raise_error
+            end
           end
         end
       end
 
-      example_group "method arguments" do
-        subject(:method_value) { method.call(*args, **kwargs, &block) }
+      example_group "around callbacks" do
+        context "when service class has one around callback" do
+          let(:text) do
+            <<~TEXT
+              first around before result
+              original result
+              first around after result
+            TEXT
+          end
 
-        let(:args) { [:foo] }
-        let(:kwargs) { {foo: :bar} }
-        let(:block) { proc { :foo } }
+          before do
+            service_class.around(:result) do |chain|
+              out.puts "first around before result"
 
-        let(:service_class) do
-          Class.new.tap do |klass|
-            klass.class_exec(result_original_value, out, middleware) do |result_original_value, out, middleware|
-              include ConvenientService::Standard::Config
+              chain.yield
 
-              middlewares :result do
-                observe middleware
+              out.puts "first around after result"
+            end
+          end
+
+          it "runs that around callback in addition to middleware `chain.next`" do
+            method_value
+
+            expect(output).to eq(text)
+          end
+        end
+
+        context "when service class has multiple around callbacks" do
+          let(:text) do
+            <<~TEXT
+              first around before result
+              second around before result
+              original result
+              second around after result
+              first around after result
+            TEXT
+          end
+
+          before do
+            service_class.around(:result) do |chain|
+              out.puts "first around before result"
+
+              chain.yield
+
+              out.puts "first around after result"
+            end
+
+            service_class.around(:result) do |chain|
+              out.puts "second around before result"
+
+              chain.yield
+
+              out.puts "second around after result"
+            end
+          end
+
+          it "runs that around callback in addition to middleware `chain.next`" do
+            method_value
+
+            expect(output).to eq(text)
+          end
+        end
+
+        example_group "after callbacks first argument" do
+          before do
+            service_class.after(:result) { |result| raise if result.unsafe_data[:value] != "result original value" }
+          end
+
+          it "passes middleware `chain.next` to all after callbacks as first argument" do
+            expect { method_value }.not_to raise_error
+          end
+        end
+
+        example_group "callback `chain.yield` return value in around callbacks" do
+          before do
+            service_class.around(:result) do |chain|
+              out.puts "first around before result"
+
+              result = chain.yield
+
+              ##
+              # NOTE: `result_original_value` is NOT available inside service instance context.
+              # That is why "result original value" literal is used.
+              #
+              raise if result.unsafe_data[:value] != "result original value"
+
+              out.puts "first around after result"
+            end
+
+            service_class.around(:result) do |chain|
+              out.puts "second around before result"
+
+              result = chain.yield
+
+              ##
+              # NOTE: `result_original_value` is NOT available inside service instance context.
+              # That is why "result original value" literal is used.
+              #
+              raise if result.unsafe_data[:value] != "result original value"
+
+              out.puts "second around after result"
+            end
+          end
+
+          it "passes middleware `chain.next` to all after callbacks as first argument" do
+            expect { method_value }.not_to raise_error
+          end
+        end
+
+        example_group "NOT called callback `chain.yield`" do
+          context "when first around callback does NOT call callback `chain.yield`" do
+            before do
+              service_class.around(:result) do |chain|
+                out.puts "first around before result"
+
+                out.puts "first around after result"
               end
 
-              define_method(:result) { |*args, **kwargs, &block| success(value: result_original_value) }
+              service_class.around(:result) do |chain|
+                out.puts "second around before result"
+
+                chain.yield
+
+                out.puts "second around after result"
+              end
+            end
+
+            let(:exception_message) do
+              <<~TEXT
+                Around callback chain is NOT continued from `#{service_class.callbacks.for([:around, :result]).first.block.source_location}`.
+
+                Did you forget to call `chain.yield`? For example:
+
+                around :result do |chain|
+                  # ...
+                  chain.yield
+                  # ...
+                end
+              TEXT
+            end
+
+            it "raises `ConvenientService::Common::Plugins::HasCallbacks::Exceptions::AroundCallbackChainIsNotContinued`" do
+              expect { method_value }
+                .to raise_error(ConvenientService::Common::Plugins::HasCallbacks::Exceptions::AroundCallbackChainIsNotContinued)
+                .with_message(exception_message)
+            end
+
+            specify do
+              expect { ignoring_exception(ConvenientService::Common::Plugins::HasCallbacks::Exceptions::AroundCallbackChainIsNotContinued) { method_value } }
+                .to delegate_to(ConvenientService, :raise)
+            end
+          end
+
+          context "when intermediate around callback does NOT call callback `chain.yield`" do
+            before do
+              service_class.around(:result) do |chain|
+                out.puts "first around before result"
+
+                chain.yield
+
+                out.puts "first around after result"
+              end
+
+              service_class.around(:result) do |chain|
+                out.puts "second around before result"
+
+                out.puts "second around after result"
+              end
+
+              service_class.around(:result) do |chain|
+                out.puts "trird around before result"
+
+                chain.yield
+
+                out.puts "trird around after result"
+              end
+            end
+
+            let(:exception_message) do
+              <<~TEXT
+                Around callback chain is NOT continued from `#{service_class.callbacks.for([:around, :result])[1].block.source_location}`.
+
+                Did you forget to call `chain.yield`? For example:
+
+                around :result do |chain|
+                  # ...
+                  chain.yield
+                  # ...
+                end
+              TEXT
+            end
+
+            it "raises `ConvenientService::Common::Plugins::HasCallbacks::Exceptions::AroundCallbackChainIsNotContinued`" do
+              expect { method_value }
+                .to raise_error(ConvenientService::Common::Plugins::HasCallbacks::Exceptions::AroundCallbackChainIsNotContinued)
+                .with_message(exception_message)
+            end
+
+            specify do
+              expect { ignoring_exception(ConvenientService::Common::Plugins::HasCallbacks::Exceptions::AroundCallbackChainIsNotContinued) { method_value } }
+                .to delegate_to(ConvenientService, :raise)
+            end
+          end
+
+          context "when last around callback does NOT call callback `chain.yield`" do
+            before do
+              service_class.around(:result) do |chain|
+                out.puts "first around before result"
+
+                chain.yield
+
+                out.puts "first around after result"
+              end
+
+              service_class.around(:result) do |chain|
+                out.puts "second around before result"
+
+                out.puts "second around after result"
+              end
+            end
+
+            let(:exception_message) do
+              <<~TEXT
+                Around callback chain is NOT continued from `#{service_class.callbacks.for([:around, :result]).last.block.source_location}`.
+
+                Did you forget to call `chain.yield`? For example:
+
+                around :result do |chain|
+                  # ...
+                  chain.yield
+                  # ...
+                end
+              TEXT
+            end
+
+            it "raises `ConvenientService::Common::Plugins::HasCallbacks::Exceptions::AroundCallbackChainIsNotContinued`" do
+              expect { method_value }
+                .to raise_error(ConvenientService::Common::Plugins::HasCallbacks::Exceptions::AroundCallbackChainIsNotContinued)
+                .with_message(exception_message)
+            end
+
+            specify do
+              expect { ignoring_exception(ConvenientService::Common::Plugins::HasCallbacks::Exceptions::AroundCallbackChainIsNotContinued) { method_value } }
+                .to delegate_to(ConvenientService, :raise)
             end
           end
         end
 
-        example_group "before callbacks method arguments" do
-          before do
-            service_class.before(:result) do |arguments|
-              raise if arguments.args != [:foo]
-              raise if arguments.kwargs != {foo: :bar}
-              raise if arguments.block.call != :foo
+        example_group "context" do
+          let(:service_class) do
+            Class.new.tap do |klass|
+              klass.class_exec(middleware) do |middleware|
+                include ConvenientService::Standard::Config
+
+                middlewares :result do
+                  observe middleware
+                end
+
+                def some_instance_method
+                end
+
+                def result
+                  success
+                end
+              end
             end
           end
 
-          it "passes args, kwargs, block as arguments object" do
-            expect { method_value }.not_to raise_error
+          example_group "around callbacks context" do
+            before do
+              service_class.around(:result) do |chain|
+                some_instance_method
+
+                chain.yield
+              end
+            end
+
+            it "executes around callbacks in instance context" do
+              expect { method_value }.not_to raise_error
+            end
           end
         end
 
-        example_group "after callbacks method arguments" do
-          before do
-            service_class.after(:result) do |original_value, arguments|
-              raise if original_value.unsafe_data[:value] != "result original value"
-              raise if arguments.args != [:foo]
-              raise if arguments.kwargs != {foo: :bar}
-              raise if arguments.block.call != :foo
+        example_group "method arguments" do
+          subject(:method_value) { method.call(*args, **kwargs, &block) }
+
+          let(:args) { [:foo] }
+          let(:kwargs) { {foo: :bar} }
+          let(:block) { proc { :foo } }
+
+          let(:service_class) do
+            Class.new.tap do |klass|
+              klass.class_exec(result_original_value, out, middleware) do |result_original_value, out, middleware|
+                include ConvenientService::Standard::Config
+
+                middlewares :result do
+                  observe middleware
+                end
+
+                define_method(:result) { |*args, **kwargs, &block| success(value: result_original_value) }
+              end
             end
           end
 
-          it "passes original value and args, kwargs, block as arguments object" do
-            expect { method_value }.not_to raise_error
+          example_group "before callbacks method arguments" do
+            before do
+              service_class.around(:result) do |chain, arguments|
+                raise if arguments.args != [:foo]
+                raise if arguments.kwargs != {foo: :bar}
+                raise if arguments.block.call != :foo
+
+                chain.yield
+              end
+            end
+
+            it "passes chain and args, kwargs, block as arguments object" do
+              expect { method_value }.not_to raise_error
+            end
           end
         end
       end

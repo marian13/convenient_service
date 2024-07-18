@@ -43,7 +43,6 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
               ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Concern,
               ConvenientService::Service::Plugins::HasJSendResultStatusCheckShortSyntax::Concern,
               ConvenientService::Common::Plugins::HasCallbacks::Concern,
-              ConvenientService::Common::Plugins::HasAroundCallbacks::Concern,
               ConvenientService::Service::Plugins::HasMermaidFlowchart::Concern
             ]
           end
@@ -74,7 +73,6 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
               ConvenientService::Service::Plugins::CollectsServicesInException::Middleware,
               ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
               ConvenientService::Common::Plugins::HasCallbacks::Middleware,
-              ConvenientService::Common::Plugins::HasAroundCallbacks::Middleware,
               ConvenientService::Service::Plugins::SetsParentToForeignResult::Middleware,
               ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Middleware,
               ConvenientService::Service::Plugins::CanHaveSequentialSteps::Middleware
@@ -94,8 +92,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
         example_group "#step middlewares" do
           let(:step_middlewares) do
             [
-              ConvenientService::Common::Plugins::HasCallbacks::Middleware,
-              ConvenientService::Common::Plugins::HasAroundCallbacks::Middleware
+              ConvenientService::Common::Plugins::HasCallbacks::Middleware
             ]
           end
 
@@ -496,7 +493,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
       # https://github.com/marian13/convenient_service/discussions/43
       #
       it "applies its `included` block only once" do
-        expect(service_class.middlewares(:result).to_a.size).to eq(9)
+        expect(service_class.middlewares(:result).to_a.size).to eq(8)
       end
     end
   end
