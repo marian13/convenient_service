@@ -39,7 +39,7 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveCallbacks::Concern, ty
       end
     end
 
-    let(:type) { :result }
+    let(:method) { :result }
     let(:block) { proc {} }
 
     example_group "class methods" do
@@ -62,33 +62,45 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveCallbacks::Concern, ty
 
       describe ".before" do
         specify do
-          expect { service_class.before(type, &block) }
-            .to delegate_to(service_class.callbacks, :create)
-            .with_arguments(types: [:before, type], block: block)
+          service_class.commit_config!
+
+          expect { service_class.before(method, &block) }
+            .to delegate_to(service_class, :callback)
+            .with_arguments(:before, method, &block)
             .and_return_its_value
         end
       end
 
       describe ".after" do
         specify do
-          expect { service_class.after(type, &block) }
-            .to delegate_to(service_class.callbacks, :create)
-            .with_arguments(types: [:after, type], block: block)
+          service_class.commit_config!
+
+          expect { service_class.after(method, &block) }
+            .to delegate_to(service_class, :callback)
+            .with_arguments(:after, method, &block)
             .and_return_its_value
         end
       end
 
       describe ".around" do
-        let(:callback) { ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Callback.new(types: [:around, type], block: block) }
+        specify do
+          service_class.commit_config!
 
-        it "adds around callback to `callbacks`" do
-          service_class.around(type, &block)
-
-          expect(service_class.callbacks).to include(callback)
+          expect { service_class.around(method, &block) }
+            .to delegate_to(service_class, :callback)
+            .with_arguments(:around, method, &block)
+            .and_return_its_value
         end
+      end
 
-        it "returns around callback" do
-          expect(service_class.around(type, &block)).to eq(callback)
+      describe ".callback" do
+        let(:type) { :before }
+
+        specify do
+          expect { service_class.callback(type, method, &block) }
+            .to delegate_to(service_class.callbacks, :create)
+            .with_arguments(types: [type, method], block: block)
+            .and_return_its_value
         end
       end
     end

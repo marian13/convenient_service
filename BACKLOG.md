@@ -325,6 +325,40 @@ Otherwise, the config inclusion API must be changed before v1.0.0.
 
 ---
 
+### Pass method name to `TooManyCommitsFromMethodMissing` exception
+
+| Priority | Complexity | Status | Tags |
+| - | - | - | - |
+| Medium | Moderate | TODO | config, method-missing, auto-commit |
+
+The `TooManyCommitsFromMethodMissing` exception is already beneficial.
+
+```ruby
+##
+# `Service` config is committed too many times from `method_missing`.
+# In order to resolve this issue try to commit it manually before usage of any config-dependent method.
+#
+# Example 1 (outside class):
+#   # Commitment:
+#   Service.commit_config!
+#
+#   # Few lines later - usage:
+#   Service.result # or whatever method.
+#
+# Example 2 (inside class):
+#
+#   class Service
+#     # ...
+#     commit_config!
+#
+#     step :result # or any other method that becomes available after config commitment.
+#   end
+```
+
+However, it does not give any information on which exact method causes too many method-missing invocations.
+
+---
+
 ## Memory
 
 ### Consider to drop references to already calculated steps

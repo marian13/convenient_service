@@ -20,34 +20,46 @@ module ConvenientService
             ##
             # @api public
             #
-            # @param type [Symbol]
+            # @param method [Symbol]
             # @param block [Proc]
             # @return [ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Callback]
             #
-            def before(type, &block)
-              callbacks.create(types: [:before, type], block: block)
+            def before(method, &block)
+              callback(:before, method, &block)
+            end
+
+            ##
+            # @api public
+            #
+            # @param method [Symbol]
+            # @param block [Proc]
+            # @return [ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Callback]
+            #
+            def after(method, &block)
+              callback(:after, method, &block)
+            end
+
+            ##
+            # @api public
+            #
+            # @param method [Symbol]
+            # @param block [Proc]
+            # @return [ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Callback]
+            #
+            def around(method, &block)
+              callback(:around, method, &block)
             end
 
             ##
             # @api public
             #
             # @param type [Symbol]
+            # @param method [Symbol]
             # @param block [Proc]
             # @return [ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Callback]
             #
-            def after(type, &block)
-              callbacks.create(types: [:after, type], block: block)
-            end
-
-            ##
-            # @api public
-            #
-            # @param type [Symbol]
-            # @param block [Proc]
-            # @return [ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Callback]
-            #
-            def around(type, &block)
-              callbacks.create(types: [:around, type], block: block)
+            def callback(type, method, &block)
+              callbacks.create(types: [type, method], block: block)
             end
           end
         end
