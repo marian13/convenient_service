@@ -503,8 +503,8 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::DryService::Config, ty
 
                 ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::HasInspect::Concern,
                 ConvenientService::Common::Plugins::HasJSendResultDuckShortSyntax::Concern,
+                ConvenientService::Common::Plugins::CanHaveCallbacks::Concern,
                 ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallbacks::Concern
-
               ]
             end
 
@@ -521,6 +521,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::DryService::Config, ty
 
                 ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallbacks::Middleware.with(fallback_true_status: :failure),
                 ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveParentResult::Middleware,
+                ConvenientService::Common::Plugins::CanHaveCallbacks::Middleware,
                 ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::RaisesOnNotResultReturnValue::Middleware,
                 ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeServiceStep::Middleware,
                 ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeMethodStep::Middleware
@@ -589,7 +590,7 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::DryService::Config, ty
       # https://github.com/marian13/convenient_service/discussions/43
       #
       it "applies its `included` block only once" do
-        expect(service_class.middlewares(:result).to_a.size).to eq(10)
+        expect(service_class.middlewares(:result).to_a.size).to eq(9)
       end
     end
   end

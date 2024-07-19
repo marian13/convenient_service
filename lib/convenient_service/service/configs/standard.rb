@@ -179,10 +179,15 @@ module ConvenientService
           class self::Step
             concerns do
               use ConvenientService::Plugins::Common::HasJSendResultDuckShortSyntax::Concern
+              use ConvenientService::Plugins::Common::CanHaveCallbacks::Concern
               use ConvenientService::Plugins::Step::CanHaveFallbacks::Concern
             end
 
             middlewares :result do
+              insert_before \
+                ConvenientService::Plugins::Step::RaisesOnNotResultReturnValue::Middleware,
+                ConvenientService::Plugins::Common::CanHaveCallbacks::Middleware
+
               insert_after \
                 ConvenientService::Plugins::Step::HasResult::Middleware,
                 ConvenientService::Plugins::Step::CanHaveParentResult::Middleware

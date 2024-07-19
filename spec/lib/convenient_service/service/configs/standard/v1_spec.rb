@@ -410,7 +410,8 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
                 ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeMethodStep::Concern,
 
                 ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::HasInspect::Concern,
-                ConvenientService::Common::Plugins::HasJSendResultDuckShortSyntax::Concern
+                ConvenientService::Common::Plugins::HasJSendResultDuckShortSyntax::Concern,
+                ConvenientService::Common::Plugins::CanHaveCallbacks::Concern
               ]
             end
 
@@ -424,6 +425,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
               [
                 ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
                 ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::HasResult::Middleware,
+                ConvenientService::Common::Plugins::CanHaveCallbacks::Middleware,
                 ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::RaisesOnNotResultReturnValue::Middleware,
                 ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeServiceStep::Middleware,
                 ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeMethodStep::Middleware,
