@@ -639,14 +639,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       end
     end
 
-    describe "#trigger_callback" do
-      specify do
-        expect { step.trigger_callback }
-          .to delegate_to(step.organizer, :step)
-          .with_arguments(index)
-      end
-    end
-
     describe "#save_outputs_in_organizer!" do
       context "when step has NO output values" do
         let(:step_service_klass) do

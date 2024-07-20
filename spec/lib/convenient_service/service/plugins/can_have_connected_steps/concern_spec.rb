@@ -1435,24 +1435,12 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
             expect { service_instance.steps_result }.to change(service_instance.steps[0], :completed?).from(false).to(true)
           end
 
-          it "triggers callback for intermediate step" do
-            expect { service_instance.steps_result }
-              .to delegate_to(service_instance.steps[0], :trigger_callback)
-              .without_arguments
-          end
-
           it "saves step outputs into organizer" do
             expect { service_instance.steps_result }.not_to delegate_to(service_instance.steps[1], :save_outputs_in_organizer!)
           end
 
           it "does NOT mark following steps as completed" do
             expect { service_instance.steps_result }.not_to change(service_instance.steps[1], :completed?).from(false)
-          end
-
-          it "does NOT trigger callback for following steps" do
-            expect { service_instance.steps_result }
-              .not_to delegate_to(service_instance.steps[1], :trigger_callback)
-              .without_arguments
           end
 
           example_group "order of side effects" do
@@ -1468,12 +1456,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
 
             it "does NOT mark intermediate step as completed before checking status" do
               expect { ignoring_exception(exception) { service_instance.steps_result } }.not_to change(service_instance.steps[0], :completed?).from(false)
-            end
-
-            it "does NOT trigger callback for intermediate step before checking status" do
-              expect { ignoring_exception(exception) { service_instance.steps_result } }
-                .not_to delegate_to(service_instance.steps[0], :trigger_callback)
-                .without_arguments
             end
           end
         end
@@ -1533,12 +1515,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
             expect { service_instance.steps_result }.to change(service_instance.steps[0], :completed?).from(false).to(true)
           end
 
-          it "triggers callback for intermediate step" do
-            expect { service_instance.steps_result }
-              .to delegate_to(service_instance.steps[0], :trigger_callback)
-              .without_arguments
-          end
-
           it "saves last step outputs into organizer" do
             expect { service_instance.steps_result }
               .to delegate_to(service_instance.steps[1], :save_outputs_in_organizer!)
@@ -1547,12 +1523,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
 
           it "marks last step as completed" do
             expect { service_instance.steps_result }.to change(service_instance.steps[1], :completed?).from(false).to(true)
-          end
-
-          it "triggers callback for last step" do
-            expect { service_instance.steps_result }
-              .to delegate_to(service_instance.steps[1], :trigger_callback)
-              .without_arguments
           end
 
           example_group "order of side effects" do
@@ -1571,12 +1541,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
               expect { ignoring_exception(exception) { service_instance.steps_result } }.not_to change(service_instance.steps[0], :completed?).from(false)
             end
 
-            it "does NOT trigger callback for intermediate step before checking status" do
-              expect { ignoring_exception(exception) { service_instance.steps_result } }
-                .not_to delegate_to(service_instance.steps[0], :trigger_callback)
-                .without_arguments
-            end
-
             it "does NOT save last step outputs into organizer before checking status" do
               expect { ignoring_exception(exception) { service_instance.steps_result } }.not_to delegate_to(service_instance.steps[1], :save_outputs_in_organizer!)
             end
@@ -1584,45 +1548,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
             it "does NOT mark last step as completed before checking status" do
               expect { ignoring_exception(exception) { service_instance.steps_result } }.not_to change(service_instance.steps[1], :completed?).from(false)
             end
-
-            it "does NOT trigger callback for last step before checking status" do
-              expect { ignoring_exception(exception) { service_instance.steps_result } }
-                .not_to delegate_to(service_instance.steps[1], :trigger_callback)
-                .without_arguments
-            end
           end
-        end
-      end
-    end
-
-    describe "#step" do
-      let(:index) { 0 }
-
-      specify do
-        ##
-        # NOTE: `service_instance.steps` returns frozen object, that is why it is stubbed.
-        #
-        allow(service_instance).to receive(:steps).and_return([])
-
-        expect { service_instance.step(index) }
-          .to delegate_to(service_instance.steps, :[])
-          .with_arguments(index)
-          .and_return_its_value
-      end
-
-      context "when steps have NO step by index" do
-        it "returns `nil`" do
-          expect(service_instance.step(index)).to be_nil
-        end
-      end
-
-      context "when steps have step by index" do
-        before do
-          service_class.step Class.new, in: :foo, out: :bar
-        end
-
-        it "returns step by index" do
-          expect(service_instance.step(index)).to eq(service_instance.steps[index])
         end
       end
     end

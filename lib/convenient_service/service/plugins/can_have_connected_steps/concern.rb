@@ -508,28 +508,10 @@ module ConvenientService
               steps.each_evaluated_step do |step|
                 step.save_outputs_in_organizer!
 
-                step.trigger_callback
-
                 step.mark_as_completed!
               end
 
               steps.result
-            end
-
-            ##
-            # @api private
-            #
-            # Returns step by index.
-            # Returns `nil` when index is out of range.
-            #
-            # @param index [Integer]
-            # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step]
-            #
-            # @note This method was initially designed as a hook (callback trigger).
-            # @see ConvenientService::Service::Plugins::CanHaveConnectedSteps::Middleware#next
-            #
-            def step(index)
-              steps[index]
             end
           end
         end

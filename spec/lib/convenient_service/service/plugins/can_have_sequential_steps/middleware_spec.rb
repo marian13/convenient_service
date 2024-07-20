@@ -151,24 +151,12 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSequentialSteps::Midd
             expect { method_value }.to change(service_instance.steps[0], :completed?).from(false).to(true)
           end
 
-          it "triggers callback for intermediate step" do
-            expect { method_value }
-              .to delegate_to(service_instance.steps[0], :trigger_callback)
-              .without_arguments
-          end
-
           it "saves step outputs into organizer" do
             expect { method_value }.not_to delegate_to(service_instance.steps[1], :save_outputs_in_organizer!)
           end
 
           it "does NOT mark following steps as completed" do
             expect { method_value }.not_to change(service_instance.steps[1], :completed?).from(false)
-          end
-
-          it "does NOT trigger callback for following steps" do
-            expect { method_value }
-              .not_to delegate_to(service_instance.steps[1], :trigger_callback)
-              .without_arguments
           end
 
           example_group "order of side effects" do
@@ -184,12 +172,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSequentialSteps::Midd
 
             it "does NOT mark intermediate step as completed before checking status" do
               expect { ignoring_exception(exception) { method_value } }.not_to change(service_instance.steps[0], :completed?).from(false)
-            end
-
-            it "does NOT trigger callback for intermediate step before checking status" do
-              expect { ignoring_exception(exception) { method_value } }
-                .not_to delegate_to(service_instance.steps[0], :trigger_callback)
-                .without_arguments
             end
           end
         end
@@ -263,12 +245,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSequentialSteps::Midd
             expect { method_value }.to change(service_instance.steps[0], :completed?).from(false).to(true)
           end
 
-          it "triggers callback for intermediate step" do
-            expect { method_value }
-              .to delegate_to(service_instance.steps[0], :trigger_callback)
-              .without_arguments
-          end
-
           it "saves last step outputs into organizer" do
             expect { method_value }
               .to delegate_to(service_instance.steps[1], :save_outputs_in_organizer!)
@@ -277,12 +253,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSequentialSteps::Midd
 
           it "marks last step as completed" do
             expect { method_value }.to change(service_instance.steps[1], :completed?).from(false).to(true)
-          end
-
-          it "triggers callback for last step" do
-            expect { method_value }
-              .to delegate_to(service_instance.steps[1], :trigger_callback)
-              .without_arguments
           end
 
           example_group "order of side effects" do
@@ -301,24 +271,12 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSequentialSteps::Midd
               expect { ignoring_exception(exception) { method_value } }.not_to change(service_instance.steps[0], :completed?).from(false)
             end
 
-            it "does NOT trigger callback for intermediate step before checking status" do
-              expect { ignoring_exception(exception) { method_value } }
-                .not_to delegate_to(service_instance.steps[0], :trigger_callback)
-                .without_arguments
-            end
-
             it "does NOT save last step outputs into organizer before checking status" do
               expect { ignoring_exception(exception) { method_value } }.not_to delegate_to(service_instance.steps[1], :save_outputs_in_organizer!)
             end
 
             it "does NOT mark last step as completed before checking status" do
               expect { ignoring_exception(exception) { method_value } }.not_to change(service_instance.steps[1], :completed?).from(false)
-            end
-
-            it "does NOT trigger callback for last step before checking status" do
-              expect { ignoring_exception(exception) { method_value } }
-                .not_to delegate_to(service_instance.steps[1], :trigger_callback)
-                .without_arguments
             end
           end
         end

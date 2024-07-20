@@ -230,16 +230,6 @@ module ConvenientService
                 ##
                 # @api private
                 #
-                # @return [void]
-                # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepHasNoOrganizer]
-                #
-                def trigger_callback
-                  organizer.step(index)
-                end
-
-                ##
-                # @api private
-                #
                 # @return [Boolean]
                 # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::MethodHasNoOrganizer]
                 #

@@ -102,10 +102,6 @@ module ConvenientService
             use ConvenientService::Plugins::Common::EnsuresNegatedJSendResult::Middleware
           end
 
-          middlewares :step do
-            use ConvenientService::Plugins::Common::CanHaveCallbacks::Middleware
-          end
-
           middlewares :success do
             use ConvenientService::Plugins::Service::HasJSendResultShortSyntax::Success::Middleware
           end

@@ -53,7 +53,6 @@ module ConvenientService
               step.status.unsafe_not_success?
                 .tap { step.save_outputs_in_organizer! }
                 .tap { step.mark_as_completed! }
-                .tap { step.trigger_callback }
             end
           end
 

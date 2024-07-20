@@ -112,38 +112,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSequentialSteps::Conc
 
       specify { expect(service_instance.steps).to be_committed }
     end
-
-    describe "#step" do
-      let(:index) { 0 }
-
-      specify do
-        ##
-        # NOTE: `service_instance.steps` returns frozen object, that is why it is stubbed.
-        #
-        allow(service_instance).to receive(:steps).and_return([])
-
-        expect { service_instance.step(index) }
-          .to delegate_to(service_instance.steps, :[])
-          .with_arguments(index)
-          .and_return_its_value
-      end
-
-      context "when steps have NO step by index" do
-        it "returns `nil`" do
-          expect(service_instance.step(index)).to be_nil
-        end
-      end
-
-      context "when steps have step by index" do
-        before do
-          service_class.step Class.new, in: :foo, out: :bar
-        end
-
-        it "returns step by index" do
-          expect(service_instance.step(index)).to eq(service_instance.steps[index])
-        end
-      end
-    end
   end
 end
 # rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers

@@ -132,18 +132,6 @@ RSpec.describe ConvenientService::Examples::Rails::V1::Gemfile::RailsService::Co
           end
         end
 
-        example_group "#step middlewares" do
-          let(:step_middlewares) do
-            [
-              ConvenientService::Common::Plugins::CanHaveCallbacks::Middleware
-            ]
-          end
-
-          it "sets service middlewares for `#step`" do
-            expect(service_class.middlewares(:step).to_a).to eq(step_middlewares)
-          end
-        end
-
         example_group "#success middlewares" do
           let(:success_middlewares) do
             [
