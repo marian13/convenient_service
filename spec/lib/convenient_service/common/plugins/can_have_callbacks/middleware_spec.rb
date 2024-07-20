@@ -204,7 +204,7 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveCallbacks::Middleware,
           ##
           # TODO: Use `expect(output).to eq(text)`. Otherwise this spec may become false-positive after not careful source changes.
           #
-          it "passes `chain.next` to all after callbacks as first argument" do
+          it "passes original value to all after callbacks as first argument" do
             expect { method_value }.not_to raise_error
           end
         end
