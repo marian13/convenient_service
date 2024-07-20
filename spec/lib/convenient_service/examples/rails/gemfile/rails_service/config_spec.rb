@@ -74,6 +74,42 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::RailsService::Config
           end
         end
 
+        example_group ".before middlewares" do
+          let(:class_before_middlewares) do
+            [
+              ConvenientService::Service::Plugins::CanHaveBeforeStepCallbacks::Middleware
+            ]
+          end
+
+          it "sets service middlewares for `.before`" do
+            expect(service_class.middlewares(:before, scope: :class).to_a).to eq(class_before_middlewares)
+          end
+        end
+
+        example_group ".around middlewares" do
+          let(:class_around_middlewares) do
+            [
+              ConvenientService::Service::Plugins::CanHaveAroundStepCallbacks::Middleware
+            ]
+          end
+
+          it "sets service middlewares for `.around`" do
+            expect(service_class.middlewares(:around, scope: :class).to_a).to eq(class_around_middlewares)
+          end
+        end
+
+        example_group ".after middlewares" do
+          let(:class_after_middlewares) do
+            [
+              ConvenientService::Service::Plugins::CanHaveAfterStepCallbacks::Middleware
+            ]
+          end
+
+          it "sets service middlewares for `.after`" do
+            expect(service_class.middlewares(:after, scope: :class).to_a).to eq(class_after_middlewares)
+          end
+        end
+
         example_group "#result middlewares" do
           let(:result_middlewares) do
             [

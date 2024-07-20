@@ -49,6 +49,18 @@ module ConvenientService
               use ConvenientService::Plugins::Common::CachesConstructorArguments::Middleware
             end
 
+            middlewares :before, scope: :class do
+              use ConvenientService::Plugins::Service::CanHaveBeforeStepCallbacks::Middleware
+            end
+
+            middlewares :around, scope: :class do
+              use ConvenientService::Plugins::Service::CanHaveAroundStepCallbacks::Middleware
+            end
+
+            middlewares :after, scope: :class do
+              use ConvenientService::Plugins::Service::CanHaveAfterStepCallbacks::Middleware
+            end
+
             middlewares :result do
               unshift ConvenientService::Plugins::Service::CollectsServicesInException::Middleware
 

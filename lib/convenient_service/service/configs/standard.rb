@@ -37,6 +37,11 @@ module ConvenientService
             use ConvenientService::Plugins::Service::HasMermaidFlowchart::Concern
           end
 
+          middlewares :initialize do
+            use ConvenientService::Plugins::Service::CollectsServicesInException::Middleware
+            use ConvenientService::Plugins::Common::CachesConstructorArguments::Middleware
+          end
+
           middlewares :before, scope: :class do
             use ConvenientService::Plugins::Service::CanHaveBeforeStepCallbacks::Middleware
           end
@@ -47,11 +52,6 @@ module ConvenientService
 
           middlewares :after, scope: :class do
             use ConvenientService::Plugins::Service::CanHaveAfterStepCallbacks::Middleware
-          end
-
-          middlewares :initialize do
-            use ConvenientService::Plugins::Service::CollectsServicesInException::Middleware
-            use ConvenientService::Plugins::Common::CachesConstructorArguments::Middleware
           end
 
           middlewares :result do
