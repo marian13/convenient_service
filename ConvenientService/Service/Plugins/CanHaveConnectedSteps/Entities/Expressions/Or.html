@@ -711,17 +711,17 @@
       <pre class="lines">
 
 
-124
-125
-126
 127
 128
 129
 130
-131</pre>
+131
+132
+133
+134</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/or.rb', line 124</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/or.rb', line 127</span>
 
 <span class='kw'>def</span> <span class='op'>==</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='rparen'>)</span>
@@ -788,19 +788,19 @@
       <pre class="lines">
 
 
-87
-88
-89
 90
 91
 92
 93
 94
 95
-96</pre>
+96
+97
+98
+99</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/or.rb', line 87</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/or.rb', line 90</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_each_evaluated_step'>each_evaluated_step</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_left_expression'>left_expression</span><span class='period'>.</span><span class='id identifier rubyid_each_evaluated_step'>each_evaluated_step</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
@@ -869,15 +869,15 @@
       <pre class="lines">
 
 
-76
-77
-78
 79
 80
-81</pre>
+81
+82
+83
+84</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/or.rb', line 76</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/or.rb', line 79</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_each_step'>each_step</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_left_expression'>left_expression</span><span class='period'>.</span><span class='id identifier rubyid_each_step'>each_step</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
@@ -929,13 +929,19 @@
 
 68
 69
-70</pre>
+70
+71
+72
+73</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/or.rb', line 68</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_error?'>error?</span>
-  <span class='id identifier rubyid_left_expression'>left_expression</span><span class='period'>.</span><span class='id identifier rubyid_error?'>error?</span> <span class='op'>||</span> <span class='id identifier rubyid_right_expression'>right_expression</span><span class='period'>.</span><span class='id identifier rubyid_error?'>error?</span>
+  <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='id identifier rubyid_left_expression'>left_expression</span><span class='period'>.</span><span class='id identifier rubyid_success?'>success?</span>
+  <span class='kw'>return</span> <span class='kw'>true</span> <span class='kw'>if</span> <span class='id identifier rubyid_left_expression'>left_expression</span><span class='period'>.</span><span class='id identifier rubyid_error?'>error?</span>
+
+  <span class='id identifier rubyid_right_expression'>right_expression</span><span class='period'>.</span><span class='id identifier rubyid_error?'>error?</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1037,12 +1043,12 @@
       <pre class="lines">
 
 
-109
-110
-111</pre>
+112
+113
+114</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/or.rb', line 109</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/or.rb', line 112</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_inspect'>inspect</span>
   <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_left_expression'>left_expression</span><span class='period'>.</span><span class='id identifier rubyid_inspect'>inspect</span><span class='embexpr_end'>}</span><span class='tstring_content'> || </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_right_expression'>right_expression</span><span class='period'>.</span><span class='id identifier rubyid_inspect'>inspect</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
@@ -1089,12 +1095,12 @@
       <pre class="lines">
 
 
-116
-117
-118</pre>
+119
+120
+121</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/or.rb', line 116</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/or.rb', line 119</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_or?'>or?</span>
   <span class='kw'>true</span>
@@ -1251,12 +1257,12 @@
       <pre class="lines">
 
 
-136
-137
-138</pre>
+139
+140
+141</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/or.rb', line 136</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/or.rb', line 139</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_arguments'>to_arguments</span>
   <span class='const'><span class='object_link'><a href="../../../../../Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../Support/Arguments.html" title="ConvenientService::Support::Arguments (class)">Arguments</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../../../../Support/Arguments.html#initialize-instance_method" title="ConvenientService::Support::Arguments#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_left_expression'>left_expression</span><span class='comma'>,</span> <span class='id identifier rubyid_right_expression'>right_expression</span><span class='rparen'>)</span>
@@ -1318,12 +1324,12 @@
       <pre class="lines">
 
 
-102
-103
-104</pre>
+105
+106
+107</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/or.rb', line 102</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/or.rb', line 105</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_with_organizer'>with_organizer</span><span class='lparen'>(</span><span class='id identifier rubyid_organizer'>organizer</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_copy'>copy</span><span class='lparen'>(</span><span class='label'>overrides:</span> <span class='lbrace'>{</span><span class='label'>args:</span> <span class='lbrace'>{</span><span class='int'>0</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_left_expression'>left_expression</span><span class='period'>.</span><span class='id identifier rubyid_with_organizer'>with_organizer</span><span class='lparen'>(</span><span class='id identifier rubyid_organizer'>organizer</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='int'>1</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_right_expression'>right_expression</span><span class='period'>.</span><span class='id identifier rubyid_with_organizer'>with_organizer</span><span class='lparen'>(</span><span class='id identifier rubyid_organizer'>organizer</span><span class='rparen'>)</span><span class='rbrace'>}</span><span class='rbrace'>}</span><span class='rparen'>)</span>
@@ -1338,7 +1344,7 @@
 </div>
 
       <div id="footer">
-  Generated on Fri Jul 19 15:55:59 2024 by
+  Generated on Sat Jul 20 18:16:50 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.36 (ruby-3.2.4).
 </div>
