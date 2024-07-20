@@ -63,7 +63,7 @@ module ConvenientService
           def next(method, &block)
             return chain.next(method, &block) if method != :step
 
-            entity.step_class.class_exec(block) do
+            entity.step_class.class_exec(block) do |block|
               before :result do |arguments|
                 organizer.instance_exec(arguments, &block)
               end
