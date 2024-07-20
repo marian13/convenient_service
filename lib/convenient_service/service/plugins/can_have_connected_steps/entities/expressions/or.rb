@@ -66,7 +66,10 @@ module ConvenientService
               # @return [Boolean]
               #
               def error?
-                left_expression.error? || right_expression.error?
+                return false if left_expression.success?
+                return true if left_expression.error?
+
+                right_expression.error?
               end
 
               ##

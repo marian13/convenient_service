@@ -396,39 +396,87 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
     end
 
     describe "#error?" do
-      context "when `left_sub_expression` is NOT `error`" do
-        let(:container) do
-          Class.new do
-            include ConvenientService::Standard::Config
+      context "when `left_sub_expression` is NOT `success`" do
+        context "when `left_sub_expression` is `failure`" do
+          let(:container) do
+            Class.new do
+              include ConvenientService::Standard::Config
 
-            step :foo
-            step :bar
+              step :foo
+              step :bar
 
-            def foo
-              failure(data: {from: :foo})
+              def foo
+                failure(data: {from: :foo})
+              end
+
+              def bar
+                success(data: {from: :bar})
+              end
             end
+          end
 
-            def bar
-              success(data: {from: :bar})
-            end
+          specify do
+            expect { expression.error? }
+              .to delegate_to(left_sub_expression, :success?)
+              .without_arguments
+          end
+
+          specify do
+            expect { expression.error? }
+              .to delegate_to(left_sub_expression, :error?)
+              .without_arguments
+          end
+
+          specify do
+            expect { expression.error? }
+              .to delegate_to(right_sub_expression, :error?)
+              .without_arguments
+              .and_return_its_value
           end
         end
 
-        specify do
-          expect { expression.error? }
-            .to delegate_to(left_sub_expression, :error?)
-            .without_arguments
-        end
+        context "when `left_sub_expression` is `error`" do
+          let(:container) do
+            Class.new do
+              include ConvenientService::Standard::Config
 
-        specify do
-          expect { expression.error? }
-            .to delegate_to(right_sub_expression, :error?)
-            .without_arguments
-            .and_return_its_value
+              step :foo
+              step :bar
+
+              def foo
+                error(data: {from: :foo})
+              end
+
+              def bar
+                success(data: {from: :bar})
+              end
+            end
+          end
+
+          specify do
+            expect { expression.error? }
+              .to delegate_to(left_sub_expression, :success?)
+              .without_arguments
+          end
+
+          specify do
+            expect { expression.error? }
+              .to delegate_to(left_sub_expression, :error?)
+                .without_arguments
+                .and_return { true }
+          end
+
+          specify do
+            ##
+            # NOTE: Ensures that `right_sub_expression` is NOT evaluated.
+            # NOTE: Any of `success?`, `failure?`, and `error?` calls `result` under the hood. This reduces the possibility of the false-positive spec.
+            #
+            expect { expression.error? }.not_to delegate_to(right_sub_expression, :result)
+          end
         end
       end
 
-      context "when `left_sub_expression` is `error`" do
+      context "when `left_sub_expression` is `success`" do
         let(:container) do
           Class.new do
             include ConvenientService::Standard::Config
@@ -437,7 +485,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
             step :bar
 
             def foo
-              error(data: {from: :foo})
+              success(data: {from: :foo})
             end
 
             def bar
@@ -448,9 +496,13 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
 
         specify do
           expect { expression.error? }
-            .to delegate_to(left_sub_expression, :error?)
-            .without_arguments
-            .and_return_its_value
+            .to delegate_to(left_sub_expression, :success?)
+              .without_arguments
+              .and_return { false }
+        end
+
+        specify do
+          expect { expression.error? }.not_to delegate_to(left_sub_expression, :error?)
         end
 
         specify do
