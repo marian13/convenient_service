@@ -37,6 +37,18 @@ module ConvenientService
             use ConvenientService::Plugins::Service::HasMermaidFlowchart::Concern
           end
 
+          middlewares :before, scope: :class do
+            use ConvenientService::Plugins::Service::CanHaveBeforeStepCallbacks::Middleware
+          end
+
+          middlewares :around, scope: :class do
+            use ConvenientService::Plugins::Service::CanHaveAroundStepCallbacks::Middleware
+          end
+
+          middlewares :after, scope: :class do
+            use ConvenientService::Plugins::Service::CanHaveAfterStepCallbacks::Middleware
+          end
+
           middlewares :initialize do
             use ConvenientService::Plugins::Service::CollectsServicesInException::Middleware
             use ConvenientService::Plugins::Common::CachesConstructorArguments::Middleware
@@ -90,16 +102,6 @@ module ConvenientService
             use ConvenientService::Plugins::Common::EnsuresNegatedJSendResult::Middleware
           end
 
-          ##
-          # TODO:
-          #   `after :step do |step|` is executed after step result is calculated.
-          #    This completely makes sence and is useful for debugging for example.
-          #
-          #   But `before :step do` is also executed after step result is calculated.
-          #   That confuses the end-users a lot.
-          #   Probably a dedicated plugin is needed?
-          #   Or to forbid `before :step do`?
-          #
           middlewares :step do
             use ConvenientService::Plugins::Common::CanHaveCallbacks::Middleware
           end
@@ -185,7 +187,7 @@ module ConvenientService
 
             middlewares :result do
               insert_before \
-                ConvenientService::Plugins::Step::RaisesOnNotResultReturnValue::Middleware,
+                ConvenientService::Plugins::Step::HasResult::Middleware,
                 ConvenientService::Plugins::Common::CanHaveCallbacks::Middleware
 
               insert_after \

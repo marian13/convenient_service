@@ -148,7 +148,7 @@ module ConvenientService
 
               middlewares :result do
                 insert_before \
-                  ConvenientService::Plugins::Step::RaisesOnNotResultReturnValue::Middleware,
+                  ConvenientService::Plugins::Step::HasResult::Middleware,
                   ConvenientService::Plugins::Common::CanHaveCallbacks::Middleware
 
                 use ConvenientService::Plugins::Step::CanHaveParentResult::Middleware
