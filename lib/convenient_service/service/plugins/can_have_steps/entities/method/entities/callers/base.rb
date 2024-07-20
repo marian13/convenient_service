@@ -28,18 +28,6 @@ module ConvenientService
 
                   ##
                   # @return [Boolean]
-                  # @raise [ConvenientService::Error]
-                  #
-                  abstract_method :validate_as_input_for_container!
-
-                  ##
-                  # @return [Boolean]
-                  # @raise [ConvenientService::Error]
-                  #
-                  abstract_method :validate_as_output_for_container!
-
-                  ##
-                  # @return [Boolean]
                   #
                   abstract_method :define_output_in_container!
 

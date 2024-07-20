@@ -90,30 +90,6 @@ module ConvenientService
 
                 ##
                 # @param container [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Service]
-                # @return [void]
-                #
-                def validate_as_input_for_container!(container)
-                  direction.validate_as_input_for_container!(container, method: self)
-
-                  caller.validate_as_input_for_container!(container, method: self)
-
-                  true
-                end
-
-                ##
-                # @param container [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Service]
-                # @return [void]
-                #
-                def validate_as_output_for_container!(container)
-                  direction.validate_as_output_for_container!(container, method: self)
-
-                  caller.validate_as_output_for_container!(container, method: self)
-
-                  true
-                end
-
-                ##
-                # @param container [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Service]
                 # @param index [Integer]
                 # @return [void]
                 #

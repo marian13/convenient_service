@@ -256,20 +256,6 @@ module ConvenientService
                 # @api private
                 #
                 # @return [void]
-                # @raise [ConvenientService::Error]
-                #
-                def validate!
-                  inputs.each { |input| input.validate_as_input_for_container!(container) }
-
-                  outputs.each { |output| output.validate_as_output_for_container!(container) }
-
-                  true
-                end
-
-                ##
-                # @api private
-                #
-                # @return [void]
                 #
                 def define!
                   outputs.each { |output| output.define_output_in_container!(container, index: index) }

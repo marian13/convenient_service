@@ -13,18 +13,6 @@ module ConvenientService
                     method.organizer.__send__(method.name.to_s)
                   end
 
-                  def validate_as_input_for_container!(container, method:)
-                    return true if container.has_defined_method?(method)
-
-                    ::ConvenientService.raise Exceptions::InputMethodIsNotDefinedInContainer.new(method: method, container: container)
-                  end
-
-                  def validate_as_output_for_container!(container, method:)
-                    return true unless container.has_defined_method?(method)
-
-                    ::ConvenientService.raise Exceptions::OutputMethodIsDefinedInContainer.new(method: method, container: container)
-                  end
-
                   def define_output_in_container!(container, index:, method:)
                     Commands::DefineMethodInContainer.call(method: method, container: container, index: index)
                   end

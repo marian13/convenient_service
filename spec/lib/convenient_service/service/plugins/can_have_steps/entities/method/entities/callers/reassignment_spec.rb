@@ -64,38 +64,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
       end
     end
 
-    describe "#validate_as_input_for_container!" do
-      let(:direction) { :input }
-
-      let(:exception_message) do
-        <<~TEXT
-          Reassignments are not allowed for `in` methods.
-        TEXT
-      end
-
-      it "raises `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::InputMethodReassignment`" do
-        expect { caller.validate_as_input_for_container!(container, method: method) }
-          .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::InputMethodReassignment)
-          .with_message(exception_message)
-      end
-
-      specify do
-        expect { ignoring_exception(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::InputMethodReassignment) { caller.validate_as_input_for_container!(container, method: method) } }
-          .to delegate_to(ConvenientService, :raise)
-      end
-    end
-
-    describe "#validate_as_output_for_container!" do
-      let(:direction) { :output }
-
-      ##
-      # TODO: Raise when container has two reassignments with same name.
-      #
-      it "returns `true`" do
-        expect(caller.validate_as_output_for_container!(container, method: method)).to eq(true)
-      end
-    end
-
     describe "#define_output_in_container!" do
       let(:index) { 0 }
 

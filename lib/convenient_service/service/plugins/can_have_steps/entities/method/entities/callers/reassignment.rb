@@ -23,17 +23,6 @@ module ConvenientService
                     ::ConvenientService.raise Exceptions::CallerCanNotCalculateReassignment.new(method: method)
                   end
 
-                  def validate_as_input_for_container!(container, method:)
-                    ::ConvenientService.raise Exceptions::InputMethodReassignment.new(method: method, container: container)
-                  end
-
-                  def validate_as_output_for_container!(container, method:)
-                    ##
-                    # TODO: Raise when container has two reassignments with same name.
-                    #
-                    true
-                  end
-
                   def define_output_in_container!(container, index:, method:)
                     Commands::DefineMethodInContainer.call(method: method, container: container, index: index)
                   end

@@ -168,59 +168,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
       end
     end
 
-    describe "#validate_as_input_for_container!" do
-      let(:method_options) { {direction: :input} }
-
-      let(:service_class) do
-        Class.new.tap do |klass|
-          klass.class_exec(method_other, method_return_value) do |method_other, method_return_value|
-            define_method(method_other) { method_return_value }
-          end
-        end
-      end
-
-      it "returns `true`" do
-        expect(method.validate_as_input_for_container!(container)).to eq(true)
-      end
-
-      specify do
-        expect { method.validate_as_input_for_container!(container) }
-          .to delegate_to(direction, :validate_as_input_for_container!)
-          .with_arguments(container, method: method)
-          .and_return_its_value
-      end
-
-      specify do
-        expect { method.validate_as_input_for_container!(container) }
-          .to delegate_to(caller, :validate_as_input_for_container!)
-          .with_arguments(container, method: method)
-          .and_return_its_value
-      end
-    end
-
-    describe "#validate_as_output_for_container!" do
-      let(:method_options) { {direction: :output} }
-      let(:service_class) { Class.new }
-
-      it "returns `true`" do
-        expect(method.validate_as_output_for_container!(container)).to eq(true)
-      end
-
-      specify do
-        expect { method.validate_as_output_for_container!(container) }
-          .to delegate_to(direction, :validate_as_output_for_container!)
-          .with_arguments(container, method: method)
-          .and_return_its_value
-      end
-
-      specify do
-        expect { method.validate_as_output_for_container!(container) }
-          .to delegate_to(caller, :validate_as_output_for_container!)
-          .with_arguments(container, method: method)
-          .and_return_its_value
-      end
-    end
-
     describe "#define_output_in_container!" do
       let(:method_options) { {direction: :output} }
       let(:service_class) { Class.new }

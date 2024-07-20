@@ -34,35 +34,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
         .copy(overrides: {kwargs: {organizer: organizer}})
     end
 
-    describe "#validate_as_input_for_container!" do
-      let(:options) { {direction: :input} }
-
-      let(:exception_message) do
-        <<~TEXT
-          Method `#{method.name}` is NOT an `in` method.
-        TEXT
-      end
-
-      it "raises `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::MethodIsNotInputMethod`" do
-        expect { direction.validate_as_input_for_container!(container, method: method) }
-          .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::MethodIsNotInputMethod)
-          .with_message(exception_message)
-      end
-
-      specify do
-        expect { ignoring_exception(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::MethodIsNotInputMethod) { direction.validate_as_input_for_container!(container, method: method) } }
-          .to delegate_to(ConvenientService, :raise)
-      end
-    end
-
-    describe "#validate_as_output_for_container!" do
-      let(:options) { {direction: :output} }
-
-      it "returns `true`" do
-        expect(direction.validate_as_output_for_container!(container, method: method)).to eq(true)
-      end
-    end
-
     describe "#define_output_in_container!" do
       let(:options) { {direction: :output} }
       let(:index) { 0 }

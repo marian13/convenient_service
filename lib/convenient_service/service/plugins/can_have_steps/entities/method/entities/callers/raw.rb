@@ -13,17 +13,6 @@ module ConvenientService
                     raw_value.unwrap
                   end
 
-                  def validate_as_input_for_container!(container, method:)
-                    true
-                  end
-
-                  def validate_as_output_for_container!(container, method:)
-                    ##
-                    # TODO: Better error message.
-                    #
-                    ::ConvenientService.raise Exceptions::OutputMethodRawValue.new(container: container, method: method)
-                  end
-
                   def define_output_in_container!(container, index:, method:)
                     true
                   end

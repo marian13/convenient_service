@@ -755,24 +755,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       end
     end
 
-    describe "#validate!" do
-      specify do
-        expect { step.validate! }
-          .to delegate_to(step.inputs.first, :validate_as_input_for_container!)
-          .with_arguments(step.container)
-      end
-
-      specify do
-        expect { step.validate! }
-          .to delegate_to(step.outputs.first, :validate_as_output_for_container!)
-          .with_arguments(step.container)
-      end
-
-      it "returns `true`" do
-        expect(step.validate!).to eq(true)
-      end
-    end
-
     describe "#define!" do
       specify do
         expect { step.define! }

@@ -23,8 +23,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
 
       subject { direction }
 
-      it { is_expected.to have_abstract_method(:validate_as_input_for_container!) }
-      it { is_expected.to have_abstract_method(:validate_as_output_for_container!) }
       it { is_expected.to have_abstract_method(:define_output_in_container!) }
     end
 
