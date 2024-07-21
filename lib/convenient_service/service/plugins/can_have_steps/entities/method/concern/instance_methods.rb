@@ -81,14 +81,6 @@ module ConvenientService
                 end
 
                 ##
-                # @param name [Symbol, String]
-                # @return [Boolean]
-                #
-                def reassignment?(name)
-                  caller.reassignment?(name)
-                end
-
-                ##
                 # @param container [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Service]
                 # @param index [Integer]
                 # @return [void]

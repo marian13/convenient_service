@@ -181,16 +181,6 @@ module ConvenientService
                 end
 
                 ##
-                # @api public
-                #
-                # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method, nil]
-                # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepHasNoOrganizer]
-                #
-                def reassignment(name)
-                  outputs.find { |output| output.reassignment?(name) }
-                end
-
-                ##
                 # @api private
                 #
                 # @return [String]
@@ -215,16 +205,6 @@ module ConvenientService
                 #
                 def has_organizer?
                   Utils.to_bool(organizer(raise_when_missing: false))
-                end
-
-                ##
-                # @api public
-                #
-                # @return [Boolean]
-                # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepHasNoOrganizer]
-                #
-                def has_reassignment?(name)
-                  outputs.any? { |output| output.reassignment?(name) }
                 end
 
                 ##

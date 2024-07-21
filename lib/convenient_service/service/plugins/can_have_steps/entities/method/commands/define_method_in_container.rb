@@ -53,9 +53,6 @@ module ConvenientService
                 ##
                 # @return [Boolean]
                 #
-                # @internal
-                #   IMPORTANT: Do NOT depend on `index` inside generated method. It breaks reassignments.
-                #
                 def call
                   <<~RUBY.tap { |code| container.klass.class_eval(code, __FILE__, __LINE__ + 1) }
                     ##

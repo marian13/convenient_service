@@ -64,7 +64,6 @@
 | Medium | 🚧 | Add `shoulda-context` to test conditionals when `RSpec` is not loaded | [shoulda-context](https://github.com/thoughtbot/shoulda-context) |
 | High | 🚧 | Abstract factory for `CastMethod` | |
 | Medium | 🚧 | `delegate_to` - option to specify of how to compare blocks | |
-| High | 🚧 | Add specs for [Reassignment::Commands::DefineMethodInContainer](https://github.com/marian13/convenient_service/blob/v0.6.0/lib/convenient_service/service/plugins/has_result_steps/entities/method/entities/callers/reassignment/commands/define_method_in_container.rb#L13) | |
 | High | 🚧 | Example for dependency containers | |
 | Low | 🚧 | `delegate_to.and_return_value` | |
 | Medium | 🚧 | Support two Cache implementations, array-based and hash-based | |

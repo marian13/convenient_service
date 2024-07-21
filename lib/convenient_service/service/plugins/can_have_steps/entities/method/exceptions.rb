@@ -26,22 +26,6 @@ module ConvenientService
                 end
               end
 
-              class CallerCanNotCalculateReassignment < ::ConvenientService::Exception
-                ##
-                # @param method [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method]
-                # @return [void]
-                #
-                def initialize_with_kwargs(method:)
-                  message = <<~TEXT
-                    Method caller failed to calculate reassignment for `#{method.name}`.
-
-                    Method callers can calculate only `in` methods, while reassignments are always `out` methods.
-                  TEXT
-
-                  initialize(message)
-                end
-              end
-
               class MethodIsNotOutputMethod < ::ConvenientService::Exception
                 ##
                 # @param method [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method]

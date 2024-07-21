@@ -41,7 +41,6 @@ module ConvenientService
                     when ::Symbol then cast_symbol
                     when ::String then cast_string
                     when ::Hash then cast_hash
-                    when Entities::Values::Reassignment then cast_reassignment
                     when Method then cast_method
                     end
                   end
@@ -71,13 +70,6 @@ module ConvenientService
                 ##
                 # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Factries::Base, nil]
                 #
-                def cast_reassignment
-                  Entities::Factories::Reassignment
-                end
-
-                ##
-                # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Factries::Base, nil]
-                #
                 def cast_hash
                   return unless other.keys.one?
 
@@ -92,8 +84,6 @@ module ConvenientService
                     Entities::Factories::Hash::ProcValue
                   when Support::RawValue
                     Entities::Factories::Hash::RawValue
-                  when Entities::Values::Reassignment
-                    Entities::Factories::Hash::ReassignmentValue
                   end
                 end
 

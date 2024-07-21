@@ -85,15 +85,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
               expect(casted).to eq(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Factories::Hash::RawValue.new(other: other))
             end
           end
-
-          context "when value by that key is reassignment" do
-            let(:reassignment) { ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Values::Reassignment.new(:bar) }
-            let(:other) { {foo: reassignment} }
-
-            it "returns hash with reassignment value factory" do
-              expect(casted).to eq(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Factories::Hash::ReassignmentValue.new(other: other))
-            end
-          end
         end
 
         context "when that hash has multiple keys" do
@@ -105,19 +96,10 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
         end
       end
 
-      context "when `other` is reassignment" do
-        let(:reassignment) { ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Values::Reassignment.new("foo") }
-        let(:other) { reassignment }
-
-        it "returns hash with reassignment value factory" do
-          expect(casted).to eq(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Factories::Reassignment.new(other: other))
-        end
-      end
-
       context "when `other` is method" do
         let(:other) { ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method.cast(:foo, direction: :input) }
 
-        it "returns hash with reassignment value factory" do
+        it "returns method factory" do
           expect(casted).to eq(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Factories::Method.new(other: other))
         end
       end

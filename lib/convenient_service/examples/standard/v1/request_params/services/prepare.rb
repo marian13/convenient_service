@@ -28,18 +28,18 @@ module ConvenientService
 
               step Services::FilterOutUnpermittedParams, \
                 in: [:params, {permitted_keys: raw([:id, :format, :title, :description, :tags, :sources])}],
-                out: reassign(:params)
+                out: :params
 
               step Services::ApplyDefaultParamValues, \
                 in: [:params, defaults: raw({format: "json", tags: [], sources: []})],
-                out: reassign(:params)
+                out: :params
 
               step Services::ValidateUncastedParams, \
                 in: :params
 
               step Services::CastParams, \
                 in: :params,
-                out: [:original_params, {casted_params: reassign(:params)}]
+                out: [:original_params, {casted_params: :params}]
 
               step Services::LogRequestParams, \
                 in: [:request, :params, tag: raw("Casted")]
@@ -49,7 +49,7 @@ module ConvenientService
 
               step :result, \
                 in: :params,
-                out: reassign(:params)
+                out: :params
 
               def initialize(request:)
                 @request = request

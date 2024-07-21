@@ -8,7 +8,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
   include ConvenientService::RSpec::PrimitiveMatchers::BeDescendantOf
 
   specify { expect(described_class::MethodHasNoOrganizer).to be_descendant_of(ConvenientService::Exception) }
-  specify { expect(described_class::CallerCanNotCalculateReassignment).to be_descendant_of(ConvenientService::Exception) }
   specify { expect(described_class::MethodIsNotOutputMethod).to be_descendant_of(ConvenientService::Exception) }
   specify { expect(described_class::OutMethodStepIsNotCompleted).to be_descendant_of(ConvenientService::Exception) }
 end

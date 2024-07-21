@@ -27,16 +27,6 @@ module ConvenientService
             end
 
             ##
-            # @api public
-            #
-            # @param method_name [String, Symbol]
-            # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Values::Reassignment]
-            #
-            def reassign(method_name)
-              Entities::Method::Entities::Values::Reassignment.new(method_name)
-            end
-
-            ##
             # @api private
             #
             # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step]

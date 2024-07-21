@@ -14,7 +14,7 @@ module ConvenientService
               step :parse_body, in: :request, out: :body
               step :parse_json, in: :body, out: :json
               step :extract_params, in: :json, out: :params
-              step :symbolize_keys, in: :params, out: reassign(:params)
+              step :symbolize_keys, in: :params, out: :params
 
               def initialize(request:)
                 @request = request

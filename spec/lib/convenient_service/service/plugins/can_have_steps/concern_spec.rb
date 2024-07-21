@@ -57,17 +57,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Concern, type:
       end
     end
 
-    describe ".reassign" do
-      let(:method_name) { :foo }
-
-      specify do
-        expect { service_class.reassign(method_name) }
-          .to delegate_to(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Values::Reassignment, :new)
-          .with_arguments(method_name)
-          .and_return_its_value
-      end
-    end
-
     describe ".step_class" do
       specify do
         expect { service_class.step_class }

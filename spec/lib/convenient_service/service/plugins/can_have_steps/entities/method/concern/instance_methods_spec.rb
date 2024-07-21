@@ -157,17 +157,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
       end
     end
 
-    describe "#reassignment?" do
-      let(:name) { :foo }
-
-      specify do
-        expect { method.reassignment?(name) }
-          .to delegate_to(caller, :reassignment?)
-          .with_arguments(name)
-          .and_return_its_value
-      end
-    end
-
     describe "#define_output_in_container!" do
       let(:method_options) { {direction: :output} }
       let(:service_class) { Class.new }

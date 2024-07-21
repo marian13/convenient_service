@@ -40,14 +40,6 @@ module ConvenientService
                   end
 
                   ##
-                  # @param name [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Name]
-                  # @return [Boolean]
-                  #
-                  def reassignment?(name)
-                    false
-                  end
-
-                  ##
                   # @param other [Object] Can be any type.
                   # @return [Boolean, nil]
                   #
