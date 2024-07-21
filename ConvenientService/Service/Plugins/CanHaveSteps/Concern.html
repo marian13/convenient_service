@@ -129,28 +129,6 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#reassign-class_method" title="reassign (class method)">.<strong>reassign</strong>(method_name)  &#x21d2; ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Values::Reassignment </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
       <a href="#step_class-class_method" title="step_class (class method)">.<strong>step_class</strong>  &#x21d2; ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step </a>
     
 
@@ -278,73 +256,6 @@
 </div>
     
       <div class="method_details ">
-  <h3 class="signature " id="reassign-class_method">
-  
-    .<strong>reassign</strong>(method_name)  &#x21d2; <tt><span class='object_link'><a href="Entities/Method/Entities/Values/Reassignment.html" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Values::Reassignment (class)">ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Values::Reassignment</a></span></tt> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    
-
-  </div>
-</div>
-<div class="tags">
-  <p class="tag_title">Parameters:</p>
-<ul class="param">
-  
-    <li>
-      
-        <span class='name'>method_name</span>
-      
-      
-        <span class='type'>(<tt>String</tt>, <tt>Symbol</tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
-
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt><span class='object_link'><a href="Entities/Method/Entities/Values/Reassignment.html" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Values::Reassignment (class)">ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Values::Reassignment</a></span></tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-35
-36
-37</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/concern.rb', line 35</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_reassign'>reassign</span><span class='lparen'>(</span><span class='id identifier rubyid_method_name'>method_name</span><span class='rparen'>)</span>
-  <span class='const'><span class='object_link'><a href="Entities.html" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Method.html" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method (class)">Method</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Method/Entities.html" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Method/Entities/Values.html" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Values (module)">Values</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Method/Entities/Values/Reassignment.html" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Values::Reassignment (class)">Reassignment</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Entities/Method/Entities/Values/Reassignment.html#initialize-instance_method" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Values::Reassignment#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_method_name'>method_name</span><span class='rparen'>)</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
   <h3 class="signature " id="step_class-class_method">
   
     .<strong>step_class</strong>  &#x21d2; <tt><span class='object_link'><a href="Entities/Step.html" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step (class)">ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step</a></span></tt> 
@@ -385,12 +296,12 @@
       <pre class="lines">
 
 
-44
-45
-46</pre>
+34
+35
+36</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/concern.rb', line 44</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/concern.rb', line 34</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_step_class'>step_class</span>
   <span class='ivar'>@step_class</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="Commands.html" title="ConvenientService::Service::Plugins::CanHaveSteps::Commands (module)">Commands</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Commands/CreateStepClass.html" title="ConvenientService::Service::Plugins::CanHaveSteps::Commands::CreateStepClass (class)">CreateStepClass</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="Commands/CreateStepClass.html#call-instance_method" title="ConvenientService::Service::Plugins::CanHaveSteps::Commands::CreateStepClass#call (method)">call</a></span></span><span class='lparen'>(</span><span class='label'>service_class:</span> <span class='kw'>self</span><span class='rparen'>)</span>
@@ -405,7 +316,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Jul 20 21:04:10 2024 by
+  Generated on Sun Jul 21 00:38:41 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.36 (ruby-3.2.4).
 </div>
