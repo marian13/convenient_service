@@ -118,20 +118,48 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveBeforeStepCallbacks::
               end
             end
 
-            example_group "service before `:step` callbacks context (step before `:result` callbacks context)" do
-              let(:text) do
-                <<~TEXT
-                  first before step
-                  some instance method
-                  step :foo
-                TEXT
+            let(:text) do
+              <<~TEXT
+                first before step
+                some instance method
+                step :foo
+              TEXT
+            end
+
+            before do
+              service_class.before(:step) do
+                out.puts "first before step"
+
+                some_instance_method
               end
+            end
 
-              before do
-                service_class.before(:step) do
-                  out.puts "first before step"
+            it "executes service before `:step` callbacks context (step before `:result` callbacks context) in service instance context" do
+              service_class.result
 
-                  some_instance_method
+              expect(output).to eq(text)
+            end
+
+            context "when callback `block` uses service private instance methods" do
+              let(:service_class) do
+                Class.new.tap do |klass|
+                  klass.class_exec(out) do |out|
+                    include ConvenientService::Standard::Config
+
+                    step :foo
+
+                    def foo
+                      success.tap { out.puts "step :foo" }
+                    end
+
+                    define_method(:out) { out }
+
+                    private
+
+                    def some_instance_method
+                      out.puts "some instance method"
+                    end
+                  end
                 end
               end
 
@@ -140,43 +168,10 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveBeforeStepCallbacks::
 
                 expect(output).to eq(text)
               end
-
-              context "when callback `block` uses service private instance methods" do
-                let(:service_class) do
-                  Class.new.tap do |klass|
-                    klass.class_exec(out) do |out|
-                      include ConvenientService::Standard::Config
-
-                      step :foo
-
-                      def foo
-                        success.tap { out.puts "step :foo" }
-                      end
-
-                      define_method(:out) { out }
-
-                      private
-
-                      def some_instance_method
-                        out.puts "some instance method"
-                      end
-                    end
-                  end
-                end
-
-                it "executes service before `:step` callbacks context (step before `:result` callbacks context) in service instance context" do
-                  service_class.result
-
-                  expect(output).to eq(text)
-                end
-              end
             end
           end
 
           example_group "method arguments" do
-            let(:out) { Tempfile.new }
-            let(:output) { out.tap(&:rewind).read }
-
             let(:args) { [:foo] }
             let(:kwargs) { {foo: :bar} }
             let(:block) { proc { :foo } }
@@ -201,32 +196,30 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveBeforeStepCallbacks::
               end
             end
 
-            example_group "service before `:step` callbacks method arguments (step before `:result` callbacks method arguments)" do
-              let(:text) do
-                <<~TEXT
-                  first before step
-                    args - [:foo]
-                    kwargs - {:foo=>:bar}
-                    block - proc { :foo }
-                  step :foo
-                TEXT
+            let(:text) do
+              <<~TEXT
+                first before step
+                  args - [:foo]
+                  kwargs - {:foo=>:bar}
+                  block - proc { :foo }
+                step :foo
+              TEXT
+            end
+
+            before do
+              service_class.before(:step) do |arguments|
+                out.puts "first before step"
+
+                out.puts "  args - #{arguments.args.inspect}"
+                out.puts "  kwargs - #{arguments.kwargs.inspect}"
+                out.puts "  block - proc { #{arguments.block.call.inspect} }"
               end
+            end
 
-              before do
-                service_class.before(:step) do |arguments|
-                  out.puts "first before step"
+            it "passes args, kwargs, block as arguments object" do
+              service_class.new.steps.first.result(*args, **kwargs, &block)
 
-                  out.puts "  args - #{arguments.args.inspect}"
-                  out.puts "  kwargs - #{arguments.kwargs.inspect}"
-                  out.puts "  block - proc { #{arguments.block.call.inspect} }"
-                end
-              end
-
-              it "passes args, kwargs, block as arguments object" do
-                service_class.new.steps.first.result(*args, **kwargs, &block)
-
-                expect(output).to eq(text)
-              end
+              expect(output).to eq(text)
             end
           end
         end

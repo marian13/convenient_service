@@ -377,12 +377,15 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveCallbacks::Middleware,
           end
         end
 
-        example_group "after callbacks first argument" do
+        example_group "around callbacks first argument" do
           before do
-            service_class.after(:result) { |result| raise if result.unsafe_data[:value] != "result original value" }
+            service_class.around(:result) { |chain| raise if chain.yield.unsafe_data[:value] != "result original value" }
           end
 
-          it "passes middleware `chain.next` to all after callbacks as first argument" do
+          ##
+          # TODO: Use `expect(output).to eq(text)`. Otherwise this spec may become false-positive after not careful source changes.
+          #
+          it "passes middleware `chain.next` to all around callbacks as first argument" do
             expect { method_value }.not_to raise_error
           end
         end

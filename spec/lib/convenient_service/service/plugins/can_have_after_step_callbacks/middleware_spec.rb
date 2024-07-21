@@ -97,7 +97,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveAfterStepCallbacks::M
           let(:out) { Tempfile.new }
           let(:output) { out.tap(&:rewind).read }
 
-          example_group "service after `:step` callbacks context (step after `:result` callbacks context) first argument" do
+          example_group "first argument" do
             let(:service_class) do
               Class.new.tap do |klass|
                 klass.class_exec(out) do |out|
@@ -132,7 +132,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveAfterStepCallbacks::M
             ##
             # TODO: Use `expect(output).to eq(text)`. Otherwise this spec may become false-positive after not careful source changes.
             #
-            it "passes step to all after callbacks as first argument" do
+            it "passes step to after callbacks as first argument" do
               service_class.result
 
               expect(output).to eq(text)
@@ -160,20 +160,48 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveAfterStepCallbacks::M
               end
             end
 
-            example_group "service after `:step` callbacks context (step after `:result` callbacks context)" do
-              let(:text) do
-                <<~TEXT
-                  step :foo
-                  first after step
-                  some instance method
-                TEXT
+            let(:text) do
+              <<~TEXT
+                step :foo
+                first after step
+                some instance method
+              TEXT
+            end
+
+            before do
+              service_class.after(:step) do
+                out.puts "first after step"
+
+                some_instance_method
               end
+            end
 
-              before do
-                service_class.after(:step) do
-                  out.puts "first after step"
+            it "executes service after `:step` callbacks context (step after `:result` callbacks context) in service instance context" do
+              service_class.result
 
-                  some_instance_method
+              expect(output).to eq(text)
+            end
+
+            context "when callback `block` uses service private instance methods" do
+              let(:service_class) do
+                Class.new.tap do |klass|
+                  klass.class_exec(out) do |out|
+                    include ConvenientService::Standard::Config
+
+                    step :foo
+
+                    def foo
+                      success.tap { out.puts "step :foo" }
+                    end
+
+                    define_method(:out) { out }
+
+                    private
+
+                    def some_instance_method
+                      out.puts "some instance method"
+                    end
+                  end
                 end
               end
 
@@ -182,43 +210,10 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveAfterStepCallbacks::M
 
                 expect(output).to eq(text)
               end
-
-              context "when callback `block` uses service private instance methods" do
-                let(:service_class) do
-                  Class.new.tap do |klass|
-                    klass.class_exec(out) do |out|
-                      include ConvenientService::Standard::Config
-
-                      step :foo
-
-                      def foo
-                        success.tap { out.puts "step :foo" }
-                      end
-
-                      define_method(:out) { out }
-
-                      private
-
-                      def some_instance_method
-                        out.puts "some instance method"
-                      end
-                    end
-                  end
-                end
-
-                it "executes service after `:step` callbacks context (step after `:result` callbacks context) in service instance context" do
-                  service_class.result
-
-                  expect(output).to eq(text)
-                end
-              end
             end
           end
 
           example_group "method arguments" do
-            let(:out) { Tempfile.new }
-            let(:output) { out.tap(&:rewind).read }
-
             let(:args) { [:foo] }
             let(:kwargs) { {foo: :bar} }
             let(:block) { proc { :foo } }
@@ -243,32 +238,30 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveAfterStepCallbacks::M
               end
             end
 
-            example_group "service after `:step` callbacks method arguments (step after `:result` callbacks method arguments)" do
-              let(:text) do
-                <<~TEXT
-                  step :foo
-                  first after step
-                    args - [:foo]
-                    kwargs - {:foo=>:bar}
-                    block - proc { :foo }
-                TEXT
+            let(:text) do
+              <<~TEXT
+                step :foo
+                first after step
+                  args - [:foo]
+                  kwargs - {:foo=>:bar}
+                  block - proc { :foo }
+              TEXT
+            end
+
+            before do
+              service_class.after(:step) do |step, arguments|
+                out.puts "first after step"
+
+                out.puts "  args - #{arguments.args.inspect}"
+                out.puts "  kwargs - #{arguments.kwargs.inspect}"
+                out.puts "  block - proc { #{arguments.block.call.inspect} }"
               end
+            end
 
-              before do
-                service_class.after(:step) do |step, arguments|
-                  out.puts "first after step"
+            it "passes args, kwargs, block as arguments object" do
+              service_class.new.steps.first.result(*args, **kwargs, &block)
 
-                  out.puts "  args - #{arguments.args.inspect}"
-                  out.puts "  kwargs - #{arguments.kwargs.inspect}"
-                  out.puts "  block - proc { #{arguments.block.call.inspect} }"
-                end
-              end
-
-              it "passes args, kwargs, block as arguments object" do
-                service_class.new.steps.first.result(*args, **kwargs, &block)
-
-                expect(output).to eq(text)
-              end
+              expect(output).to eq(text)
             end
           end
         end
