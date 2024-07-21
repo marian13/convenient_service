@@ -72,6 +72,15 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
     include ConvenientService::RSpec::Matchers::DelegateTo
     include ConvenientService::RSpec::Matchers::Results
 
+    example_group "attributes" do
+      include ConvenientService::RSpec::PrimitiveMatchers::HaveAttrReader
+
+      subject { step }
+
+      it { is_expected.to have_attr_reader(:args) }
+      it { is_expected.to have_attr_reader(:kwargs) }
+    end
+
     describe "#status" do
       specify do
         expect { step.status }

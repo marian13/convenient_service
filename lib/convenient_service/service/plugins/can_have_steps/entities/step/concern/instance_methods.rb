@@ -16,6 +16,18 @@ module ConvenientService
                 include Support::Delegate
 
                 ##
+                # @!attribute [r] args
+                #   @return [Array]
+                #
+                attr_reader :args
+
+                ##
+                # @!attribute [r] kwargs
+                #   @return [Hash]
+                #
+                attr_reader :kwargs
+
+                ##
                 # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status]
                 #
                 delegate :status, to: :result
@@ -301,18 +313,6 @@ module ConvenientService
                 end
 
                 private
-
-                ##
-                # @!attribute [r] args
-                #   @return [Array]
-                #
-                attr_reader :args
-
-                ##
-                # @!attribute [r] kwargs
-                #   @return [Hash]
-                #
-                attr_reader :kwargs
 
                 ##
                 # @return [Hash{Symbol => Object}]

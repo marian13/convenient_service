@@ -172,23 +172,17 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveBeforeStepCallbacks::
           end
 
           example_group "method arguments" do
-            let(:args) { [:foo] }
-            let(:kwargs) { {foo: :bar} }
-            let(:block) { proc { :foo } }
-
             let(:service_class) do
               Class.new.tap do |klass|
                 klass.class_exec(out) do |out|
                   include ConvenientService::Standard::Config
 
-                  step_class.class_exec do
-                    define_method(:result) { |*args, **kwargs, &block| super() }
-                  end
-
-                  step :foo
+                  step :foo,
+                    in: :bar,
+                    out: :baz
 
                   def foo
-                    success.tap { out.puts "step :foo" }
+                    success(baz: :baz).tap { out.puts "step :foo" }
                   end
 
                   define_method(:out) { out }
@@ -200,8 +194,8 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveBeforeStepCallbacks::
               <<~TEXT
                 first before step
                   args - [:foo]
-                  kwargs - {:foo=>:bar}
-                  block - proc { :foo }
+                  kwargs.keys - [:in, :out, :index]
+                  block - nil
                 step :foo
               TEXT
             end
@@ -211,15 +205,52 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveBeforeStepCallbacks::
                 out.puts "first before step"
 
                 out.puts "  args - #{arguments.args.inspect}"
-                out.puts "  kwargs - #{arguments.kwargs.inspect}"
-                out.puts "  block - proc { #{arguments.block.call.inspect} }"
+                out.puts "  kwargs.keys - #{arguments.kwargs.keys.inspect}"
+                out.puts "  block - #{arguments.block.inspect}"
               end
             end
 
-            it "passes args, kwargs, block as arguments object" do
-              service_class.new.steps.first.result(*args, **kwargs, &block)
+            it "passes step args, kwargs(except container, organizer)" do
+              service_class.result
 
               expect(output).to eq(text)
+            end
+
+            context "when step has extra kwargs" do
+              let(:service_class) do
+                Class.new.tap do |klass|
+                  klass.class_exec(out) do |out|
+                    include ConvenientService::Standard::Config
+
+                    step :foo,
+                      in: :bar,
+                      out: :baz,
+                      cache: false
+
+                    def foo
+                      success(baz: :baz).tap { out.puts "step :foo" }
+                    end
+
+                    define_method(:out) { out }
+                  end
+                end
+              end
+
+              let(:text) do
+                <<~TEXT
+                  first before step
+                    args - [:foo]
+                    kwargs.keys - [:in, :out, :cache, :index]
+                    block - nil
+                  step :foo
+                TEXT
+              end
+
+              it "passes step args, kwargs(except container, organizer) with extra kwargs" do
+                service_class.result
+
+                expect(output).to eq(text)
+              end
             end
           end
         end

@@ -64,8 +64,15 @@ module ConvenientService
             return chain.next(method, &block) if method != :step
 
             entity.step_class.class_exec(block) do |block|
-              after :result do |result, arguments|
-                organizer.instance_exec(result.step, arguments, &block)
+              after :result do |result|
+                organizer.instance_exec(
+                  result.step,
+                  Support::Arguments.new(
+                    *args,
+                    **Utils::Hash.except(kwargs, [:organizer, :container])
+                  ),
+                  &block
+                )
               end
             end
           end
