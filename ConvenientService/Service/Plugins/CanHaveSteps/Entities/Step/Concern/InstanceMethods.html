@@ -92,6 +92,67 @@
 
 
 
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#args-instance_method" title="#args (instance method)">#<strong>args</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the value of attribute args.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#kwargs-instance_method" title="#kwargs (instance method)">#<strong>kwargs</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the value of attribute kwargs.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
 
 
 
@@ -912,6 +973,95 @@
   <h3 class="inherited">Methods included from <span class='object_link'><a href="../../../../../../Support/Copyable.html" title="ConvenientService::Support::Copyable (module)">ConvenientService::Support::Copyable</a></span></h3>
   <p class="inherited"><span class='object_link'><a href="../../../../../../Support/Copyable.html#copy-instance_method" title="ConvenientService::Support::Copyable#copy (method)">#copy</a></span></p>
 
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id=""></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="args-instance_method">
+  
+    #<strong>args</strong>  &#x21d2; <tt>Object</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the value of attribute args.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+22
+23
+24</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 22</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_args'>args</span>
+  <span class='ivar'>@args</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="kwargs-instance_method">
+  
+    #<strong>kwargs</strong>  &#x21d2; <tt>Object</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the value of attribute kwargs.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+28
+29
+30</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 28</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_kwargs'>kwargs</span>
+  <span class='ivar'>@kwargs</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
 
   <div id="instance_method_details" class="method_details_list">
     <h2>Instance Method Details</h2>
@@ -977,22 +1127,22 @@
       <pre class="lines">
 
 
-252
-253
-254
-255
-256
-257
-258
-259
-260
-261
-262
-263
-264</pre>
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 252</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 264</span>
 
 <span class='kw'>def</span> <span class='op'>==</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='rparen'>)</span>
@@ -1049,10 +1199,10 @@
       <pre class="lines">
 
 
-56</pre>
+68</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 56</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 68</span>
 
 <span class='id identifier rubyid_delegate'>delegate</span> <span class='symbol'>:action</span><span class='comma'>,</span> <span class='label'>to:</span> <span class='symbol'>:params</span></pre>
     </td>
@@ -1097,10 +1247,10 @@
       <pre class="lines">
 
 
-36</pre>
+48</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 36</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 48</span>
 
 <span class='id identifier rubyid_delegate'>delegate</span> <span class='symbol'>:code</span><span class='comma'>,</span> <span class='label'>to:</span> <span class='symbol'>:result</span></pre>
     </td>
@@ -1145,10 +1295,10 @@
       <pre class="lines">
 
 
-74</pre>
+86</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 74</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 86</span>
 
 <span class='id identifier rubyid_delegate'>delegate</span> <span class='symbol'>:container</span><span class='comma'>,</span> <span class='label'>to:</span> <span class='symbol'>:params</span></pre>
     </td>
@@ -1193,10 +1343,10 @@
       <pre class="lines">
 
 
-26</pre>
+38</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 26</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 38</span>
 
 <span class='id identifier rubyid_delegate'>delegate</span> <span class='symbol'>:data</span><span class='comma'>,</span> <span class='label'>to:</span> <span class='symbol'>:result</span></pre>
     </td>
@@ -1232,14 +1382,14 @@
       <pre class="lines">
 
 
-240
-241
-242
-243
-244</pre>
+252
+253
+254
+255
+256</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 240</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 252</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_define!'>define!</span>
   <span class='id identifier rubyid_outputs'>outputs</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_output'>output</span><span class='op'>|</span> <span class='id identifier rubyid_output'>output</span><span class='period'>.</span><span class='id identifier rubyid_define_output_in_container!'>define_output_in_container!</span><span class='lparen'>(</span><span class='id identifier rubyid_container'>container</span><span class='comma'>,</span> <span class='label'>index:</span> <span class='id identifier rubyid_index'>index</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
@@ -1288,10 +1438,10 @@
       <pre class="lines">
 
 
-94</pre>
+106</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 94</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 106</span>
 
 <span class='id identifier rubyid_delegate'>delegate</span> <span class='symbol'>:error?</span><span class='comma'>,</span> <span class='label'>to:</span> <span class='symbol'>:result</span></pre>
     </td>
@@ -1336,10 +1486,10 @@
       <pre class="lines">
 
 
-79</pre>
+91</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 79</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 91</span>
 
 <span class='id identifier rubyid_delegate'>delegate</span> <span class='symbol'>:extra_kwargs</span><span class='comma'>,</span> <span class='label'>to:</span> <span class='symbol'>:params</span></pre>
     </td>
@@ -1384,10 +1534,10 @@
       <pre class="lines">
 
 
-89</pre>
+101</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 89</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 101</span>
 
 <span class='id identifier rubyid_delegate'>delegate</span> <span class='symbol'>:failure?</span><span class='comma'>,</span> <span class='label'>to:</span> <span class='symbol'>:result</span></pre>
     </td>
@@ -1436,12 +1586,12 @@
       <pre class="lines">
 
 
-206
-207
-208</pre>
+218
+219
+220</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 206</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 218</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_has_organizer?'>has_organizer?</span>
   <span class='const'><span class='object_link'><a href="../../../../../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='period'>.</span><span class='id identifier rubyid_to_bool'><span class='object_link'><a href="../../../../../../Utils.html#to_bool-class_method" title="ConvenientService::Utils.to_bool (method)">to_bool</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_organizer'>organizer</span><span class='lparen'>(</span><span class='label'>raise_when_missing:</span> <span class='kw'>false</span><span class='rparen'>)</span><span class='rparen'>)</span>
@@ -1488,10 +1638,10 @@
       <pre class="lines">
 
 
-69</pre>
+81</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 69</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 81</span>
 
 <span class='id identifier rubyid_delegate'>delegate</span> <span class='symbol'>:index</span><span class='comma'>,</span> <span class='label'>to:</span> <span class='symbol'>:params</span></pre>
     </td>
@@ -1553,13 +1703,13 @@
       <pre class="lines">
 
 
-118
-119
-120
-121</pre>
+130
+131
+132
+133</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 118</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 130</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
   <span class='ivar'>@args</span> <span class='op'>=</span> <span class='id identifier rubyid_args'>args</span>
@@ -1620,12 +1770,12 @@
       <pre class="lines">
 
 
-169
-170
-171</pre>
+181
+182
+183</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 169</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 181</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_input_values'>input_values</span>
   <span class='ivar'>@input_values</span> <span class='op'>||=</span> <span class='id identifier rubyid_calculate_input_values'>calculate_input_values</span>
@@ -1672,12 +1822,12 @@
       <pre class="lines">
 
 
-159
-160
-161</pre>
+171
+172
+173</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 159</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 171</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_inputs'>inputs</span>
   <span class='ivar'>@inputs</span> <span class='op'>||=</span> <span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_inputs'>inputs</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_input'>input</span><span class='op'>|</span> <span class='id identifier rubyid_input'>input</span><span class='period'>.</span><span class='id identifier rubyid_copy'>copy</span><span class='lparen'>(</span><span class='label'>overrides:</span> <span class='lbrace'>{</span><span class='label'>kwargs:</span> <span class='lbrace'>{</span><span class='label'>organizer:</span> <span class='id identifier rubyid_organizer'>organizer</span><span class='lparen'>(</span><span class='label'>raise_when_missing:</span> <span class='kw'>false</span><span class='rparen'>)</span><span class='rbrace'>}</span><span class='rbrace'>}</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
@@ -1724,10 +1874,10 @@
       <pre class="lines">
 
 
-31</pre>
+43</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 31</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 43</span>
 
 <span class='id identifier rubyid_delegate'>delegate</span> <span class='symbol'>:message</span><span class='comma'>,</span> <span class='label'>to:</span> <span class='symbol'>:result</span></pre>
     </td>
@@ -1772,10 +1922,10 @@
       <pre class="lines">
 
 
-109</pre>
+121</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 109</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 121</span>
 
 <span class='id identifier rubyid_delegate'>delegate</span> <span class='symbol'>:not_error?</span><span class='comma'>,</span> <span class='label'>to:</span> <span class='symbol'>:result</span></pre>
     </td>
@@ -1820,10 +1970,10 @@
       <pre class="lines">
 
 
-104</pre>
+116</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 104</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 116</span>
 
 <span class='id identifier rubyid_delegate'>delegate</span> <span class='symbol'>:not_failure?</span><span class='comma'>,</span> <span class='label'>to:</span> <span class='symbol'>:result</span></pre>
     </td>
@@ -1868,10 +2018,10 @@
       <pre class="lines">
 
 
-99</pre>
+111</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 99</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 111</span>
 
 <span class='id identifier rubyid_delegate'>delegate</span> <span class='symbol'>:not_success?</span><span class='comma'>,</span> <span class='label'>to:</span> <span class='symbol'>:result</span></pre>
     </td>
@@ -1933,16 +2083,16 @@
       <pre class="lines">
 
 
-146
-147
-148
-149
-150
-151
-152</pre>
+158
+159
+160
+161
+162
+163
+164</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 146</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 158</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_organizer'>organizer</span><span class='lparen'>(</span><span class='label'>raise_when_missing:</span> <span class='kw'>true</span><span class='rparen'>)</span>
   <span class='ivar'>@organizer</span> <span class='op'>||=</span> <span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_organizer'>organizer</span>
@@ -2006,12 +2156,12 @@
       <pre class="lines">
 
 
-179
-180
-181</pre>
+191
+192
+193</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 179</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 191</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_output_values'>output_values</span>
   <span class='ivar'>@output_values</span> <span class='op'>||=</span> <span class='id identifier rubyid_calculate_output_values'>calculate_output_values</span>
@@ -2058,10 +2208,10 @@
       <pre class="lines">
 
 
-64</pre>
+76</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 64</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 76</span>
 
 <span class='id identifier rubyid_delegate'>delegate</span> <span class='symbol'>:outputs</span><span class='comma'>,</span> <span class='label'>to:</span> <span class='symbol'>:params</span></pre>
     </td>
@@ -2110,12 +2260,12 @@
       <pre class="lines">
 
 
-131
-132
-133</pre>
+143
+144
+145</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 131</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 143</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_params'>params</span>
   <span class='ivar'>@params</span> <span class='op'>||=</span> <span class='id identifier rubyid_resolve_params'>resolve_params</span>
@@ -2166,12 +2316,12 @@
       <pre class="lines">
 
 
-197
-198
-199</pre>
+209
+210
+211</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 197</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 209</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_printable_action'>printable_action</span>
   <span class='id identifier rubyid_action'>action</span><span class='period'>.</span><span class='id identifier rubyid_inspect'>inspect</span>
@@ -2222,12 +2372,12 @@
       <pre class="lines">
 
 
-188
-189
-190</pre>
+200
+201
+202</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 188</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 200</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_printable_container'>printable_container</span>
   <span class='const'><span class='object_link'><a href="../../../../../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../Utils/Class.html" title="ConvenientService::Utils::Class (module)">Class</a></span></span><span class='period'>.</span><span class='id identifier rubyid_display_name'><span class='object_link'><a href="../../../../../../Utils/Class.html#display_name-class_method" title="ConvenientService::Utils::Class.display_name (method)">display_name</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_container'>container</span><span class='period'>.</span><span class='id identifier rubyid_klass'>klass</span><span class='rparen'>)</span>
@@ -2291,14 +2441,14 @@
       <pre class="lines">
 
 
-219
-220
-221
-222
-223</pre>
+231
+232
+233
+234
+235</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 219</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 231</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_save_outputs_in_organizer!'>save_outputs_in_organizer!</span>
   <span class='id identifier rubyid_output_values'>output_values</span><span class='period'>.</span><span class='id identifier rubyid_each_pair'>each_pair</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_key'>key</span><span class='comma'>,</span> <span class='id identifier rubyid_value'>value</span><span class='op'>|</span> <span class='id identifier rubyid_organizer'>organizer</span><span class='period'>.</span><span class='id identifier rubyid_internals'>internals</span><span class='period'>.</span><span class='id identifier rubyid_cache'>cache</span><span class='period'>.</span><span class='id identifier rubyid_scope'>scope</span><span class='lparen'>(</span><span class='symbol'>:step_output_values</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_write'>write</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='comma'>,</span> <span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
@@ -2347,10 +2497,10 @@
       <pre class="lines">
 
 
-21</pre>
+33</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 21</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 33</span>
 
 <span class='id identifier rubyid_delegate'>delegate</span> <span class='symbol'>:status</span><span class='comma'>,</span> <span class='label'>to:</span> <span class='symbol'>:result</span></pre>
     </td>
@@ -2395,10 +2545,10 @@
       <pre class="lines">
 
 
-84</pre>
+96</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 84</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 96</span>
 
 <span class='id identifier rubyid_delegate'>delegate</span> <span class='symbol'>:success?</span><span class='comma'>,</span> <span class='label'>to:</span> <span class='symbol'>:result</span></pre>
     </td>
@@ -2447,12 +2597,12 @@
       <pre class="lines">
 
 
-281
-282
-283</pre>
+293
+294
+295</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 281</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 293</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_args'>to_args</span>
   <span class='id identifier rubyid_to_arguments'>to_arguments</span><span class='period'>.</span><span class='id identifier rubyid_args'>args</span>
@@ -2503,12 +2653,12 @@
       <pre class="lines">
 
 
-299
-300
-301</pre>
+311
+312
+313</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 299</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 311</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_arguments'>to_arguments</span>
   <span class='const'><span class='object_link'><a href="../../../../../../Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../Support/Arguments.html" title="ConvenientService::Support::Arguments (class)">Arguments</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../../../../../Support/Arguments.html#initialize-instance_method" title="ConvenientService::Support::Arguments#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_action'>action</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='label'>in:</span> <span class='id identifier rubyid_inputs'>inputs</span><span class='comma'>,</span> <span class='label'>out:</span> <span class='id identifier rubyid_outputs'>outputs</span><span class='comma'>,</span> <span class='label'>index:</span> <span class='id identifier rubyid_index'>index</span><span class='comma'>,</span> <span class='label'>container:</span> <span class='id identifier rubyid_container'>container</span><span class='comma'>,</span> <span class='label'>organizer:</span> <span class='id identifier rubyid_organizer'>organizer</span><span class='lparen'>(</span><span class='label'>raise_when_missing:</span> <span class='kw'>false</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_extra_kwargs'>extra_kwargs</span><span class='rparen'>)</span><span class='rparen'>)</span>
@@ -2559,12 +2709,12 @@
       <pre class="lines">
 
 
-290
-291
-292</pre>
+302
+303
+304</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 290</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 302</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_kwargs'>to_kwargs</span>
   <span class='id identifier rubyid_to_arguments'>to_arguments</span><span class='period'>.</span><span class='id identifier rubyid_kwargs'>kwargs</span>
@@ -2611,12 +2761,12 @@
       <pre class="lines">
 
 
-272
-273
-274</pre>
+284
+285
+286</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 272</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 284</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_s'>to_s</span>
   <span class='id identifier rubyid_printable_action'>printable_action</span>
@@ -2663,10 +2813,10 @@
       <pre class="lines">
 
 
-51</pre>
+63</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 51</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 63</span>
 
 <span class='id identifier rubyid_delegate'>delegate</span> <span class='symbol'>:unsafe_code</span><span class='comma'>,</span> <span class='label'>to:</span> <span class='symbol'>:result</span></pre>
     </td>
@@ -2711,10 +2861,10 @@
       <pre class="lines">
 
 
-41</pre>
+53</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 41</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 53</span>
 
 <span class='id identifier rubyid_delegate'>delegate</span> <span class='symbol'>:unsafe_data</span><span class='comma'>,</span> <span class='label'>to:</span> <span class='symbol'>:result</span></pre>
     </td>
@@ -2759,10 +2909,10 @@
       <pre class="lines">
 
 
-46</pre>
+58</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 46</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 58</span>
 
 <span class='id identifier rubyid_delegate'>delegate</span> <span class='symbol'>:unsafe_message</span><span class='comma'>,</span> <span class='label'>to:</span> <span class='symbol'>:result</span></pre>
     </td>
@@ -2826,12 +2976,12 @@
       <pre class="lines">
 
 
-231
-232
-233</pre>
+243
+244
+245</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 231</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb', line 243</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_with_organizer'>with_organizer</span><span class='lparen'>(</span><span class='id identifier rubyid_organizer'>organizer</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_copy'>copy</span><span class='lparen'>(</span><span class='label'>overrides:</span> <span class='lbrace'>{</span><span class='label'>kwargs:</span> <span class='lbrace'>{</span><span class='label'>organizer:</span> <span class='id identifier rubyid_organizer'>organizer</span><span class='rbrace'>}</span><span class='rbrace'>}</span><span class='rparen'>)</span>
@@ -2846,7 +2996,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Jul 21 01:44:37 2024 by
+  Generated on Sun Jul 21 13:29:59 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.36 (ruby-3.2.4).
 </div>
