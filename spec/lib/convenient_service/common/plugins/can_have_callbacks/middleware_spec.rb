@@ -446,7 +446,7 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveCallbacks::Middleware,
 
             let(:exception_message) do
               <<~TEXT
-                Around callback chain is NOT continued from `#{service_class.callbacks.for([:around, :result]).first.block.source_location}`.
+                Around callback chain is NOT continued from `#{service_class.callbacks.for([:around, :result]).first.source_location_joined_by_colon}`.
 
                 Did you forget to call `chain.yield`? For example:
 
@@ -497,7 +497,7 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveCallbacks::Middleware,
 
             let(:exception_message) do
               <<~TEXT
-                Around callback chain is NOT continued from `#{service_class.callbacks.for([:around, :result])[1].block.source_location}`.
+                Around callback chain is NOT continued from `#{service_class.callbacks.for([:around, :result])[1].source_location_joined_by_colon}`.
 
                 Did you forget to call `chain.yield`? For example:
 
@@ -540,7 +540,7 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveCallbacks::Middleware,
 
             let(:exception_message) do
               <<~TEXT
-                Around callback chain is NOT continued from `#{service_class.callbacks.for([:around, :result]).last.block.source_location}`.
+                Around callback chain is NOT continued from `#{service_class.callbacks.for([:around, :result]).last.source_location_joined_by_colon}`.
 
                 Did you forget to call `chain.yield`? For example:
 

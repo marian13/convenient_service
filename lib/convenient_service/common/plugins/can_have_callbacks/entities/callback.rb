@@ -37,6 +37,16 @@ module ConvenientService
             end
 
             ##
+            # @return [String]
+            #
+            # @internal
+            #   TODO: Util.
+            #
+            def source_location_joined_by_colon
+              source_location.join(":")
+            end
+
+            ##
             # @return [Boolean]
             #
             def called?
@@ -128,6 +138,9 @@ module ConvenientService
 
             ##
             # @return [Boolean]
+            #
+            # @internal
+            #   FIX: What if method is executed second time? Callback `called` status is NOT reset.
             #
             def mark_as_called
               @called = true

@@ -192,11 +192,62 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveAroundStepCallbacks::
             end
           end
 
-          ##
-          # TODO: Ability to pass custom source location to callback.
-          #
-          # example_group "NOT called callback `chain.yield`" do
-          # end
+          example_group "NOT called callback `chain.yield`" do
+            context "when around callback does NOT call callback `chain.yield`" do
+              let(:service_class) do
+                Class.new.tap do |klass|
+                  klass.class_exec(out) do |out|
+                    include ConvenientService::Standard::Config
+
+                    step :foo
+
+                    def foo
+                      success.tap { out.puts "step :foo" }
+                    end
+
+                    define_method(:out) { out }
+                  end
+                end
+              end
+
+              let(:exception_message) do
+                <<~TEXT
+                  Around callback chain is NOT continued from `#{callback_block.source_location.join(":")}`.
+
+                  Did you forget to call `chain.yield`? For example:
+
+                  around :result do |chain|
+                    # ...
+                    chain.yield
+                    # ...
+                  end
+                TEXT
+              end
+
+              let(:callback_block) do
+                proc do |chain|
+                  out.puts "first around before result"
+
+                  out.puts "first around after result"
+                end
+              end
+
+              before do
+                service_class.around(:step, &callback_block)
+              end
+
+              it "raises `ConvenientService::Common::Plugins::CanHaveCallbacks::Exceptions::AroundCallbackChainIsNotContinued`" do
+                expect { service_class.result }
+                  .to raise_error(ConvenientService::Common::Plugins::CanHaveCallbacks::Exceptions::AroundCallbackChainIsNotContinued)
+                  .with_message(exception_message)
+              end
+
+              specify do
+                expect { ignoring_exception(ConvenientService::Common::Plugins::CanHaveCallbacks::Exceptions::AroundCallbackChainIsNotContinued) { service_class.result } }
+                  .to delegate_to(ConvenientService, :raise)
+              end
+            end
+          end
 
           example_group "context" do
             let(:service_class) do

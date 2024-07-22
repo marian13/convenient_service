@@ -23,7 +23,7 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::C
 
       let(:types) { [:before, :result] }
       let(:block) { proc { :foo } }
-      let(:source_location) { "source_location" }
+      let(:source_location) { ["source_location", 1] }
       let(:casted_types) { ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::TypeCollection.new(types: types) }
 
       it "casts types to `ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::TypeCollection` instance" do
@@ -43,7 +43,7 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::C
   example_group "instance alias methods" do
     include ConvenientService::RSpec::PrimitiveMatchers::HaveAliasMethod
 
-    subject { described_class.new(types: [], block: proc { :foo }, source_location: "source_location") }
+    subject { described_class.new(types: [], block: proc { :foo }, source_location: ["/source_location", 1]) }
 
     it { is_expected.to have_alias_method(:yield, :call) }
     it { is_expected.to have_alias_method(:[], :call) }
@@ -56,13 +56,19 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::C
     let(:params) { {types: types, block: callback_block, source_location: source_location} }
     let(:types) { [:before, :result] }
     let(:callback_block) { proc { :callback } }
-    let(:source_location) { "source_location" }
+    let(:source_location) { ["/source_location", 1] }
 
     let(:arguments_args) { [:foo, :bar] }
     let(:arguments_kwargs) { {foo: :bar} }
     let(:arguments_block) { proc { :foo } }
 
     let(:arguments) { ConvenientService::Support::Arguments.new(*arguments_args, **arguments_kwargs, &arguments_block) }
+
+    describe "#source_location_joined_by_colon" do
+      it "returns source location joined by colon" do
+        expect(callback.source_location_joined_by_colon).to eq(callback.source_location.join(":"))
+      end
+    end
 
     describe "#called?" do
       context "when callback is NOT called" do
@@ -190,7 +196,7 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::C
       end
 
       context "when calbacks have different source locations" do
-        let(:other) { described_class.new(**params.merge(source_location: "other_source_location")) }
+        let(:other) { described_class.new(**params.merge(source_location: ["/other_source_location", 1])) }
 
         it "returns false" do
           expect(callback == other).to eq(false)

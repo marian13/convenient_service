@@ -32,6 +32,9 @@ module ConvenientService
             use ConvenientService::Plugins::Service::HasJSendResultShortSyntax::Concern
             use ConvenientService::Plugins::Service::HasJSendResultStatusCheckShortSyntax::Concern
 
+            ##
+            # TODO: Extract callbacks into separate config.
+            #
             use ConvenientService::Plugins::Common::CanHaveCallbacks::Concern
 
             use ConvenientService::Plugins::Service::HasMermaidFlowchart::Concern
