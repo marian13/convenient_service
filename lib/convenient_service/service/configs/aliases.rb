@@ -5,6 +5,10 @@ module ConvenientService
     Config = ::ConvenientService::Service::Configs::Standard
   end
 
+  module Callbacks
+    Config = ::ConvenientService::Service::Configs::Callbacks
+  end
+
   module Inspect
     Config = ::ConvenientService::Service::Configs::Inspect
   end

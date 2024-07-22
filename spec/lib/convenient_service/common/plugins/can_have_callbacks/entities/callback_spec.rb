@@ -23,7 +23,7 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::C
 
       let(:types) { [:before, :result] }
       let(:block) { proc { :foo } }
-      let(:source_location) { ["source_location", 1] }
+      let(:source_location) { ["/source_location", 1] }
       let(:casted_types) { ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::TypeCollection.new(types: types) }
 
       it "casts types to `ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::TypeCollection` instance" do

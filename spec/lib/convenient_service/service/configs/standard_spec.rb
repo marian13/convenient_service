@@ -23,6 +23,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
       end
 
       specify { expect(service_class).to include_module(ConvenientService::Service::Configs::Essential) }
+      specify { expect(service_class).to include_module(ConvenientService::Service::Configs::Callbacks) }
       specify { expect(service_class).to include_module(ConvenientService::Service::Configs::Inspect) }
 
       example_group "service" do
@@ -40,13 +41,13 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
               ConvenientService::Service::Plugins::CanHaveSteps::Concern,
               ConvenientService::Service::Plugins::CanHaveConnectedSteps::Concern,
               ConvenientService::Service::Plugins::CanHaveFallbacks::Concern,
+              ConvenientService::Common::Plugins::CanHaveCallbacks::Concern,
               ConvenientService::Service::Plugins::HasInspect::Concern,
               ConvenientService::Common::Plugins::CachesConstructorArguments::Concern,
               ConvenientService::Common::Plugins::CanBeCopied::Concern,
               ConvenientService::Service::Plugins::CanRecalculateResult::Concern,
               ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Concern,
               ConvenientService::Service::Plugins::HasJSendResultStatusCheckShortSyntax::Concern,
-              ConvenientService::Common::Plugins::CanHaveCallbacks::Concern,
               ConvenientService::Service::Plugins::HasMermaidFlowchart::Concern
             ]
           end
@@ -520,11 +521,11 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
                 ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeServiceStep::Concern,
                 ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeMethodStep::Concern,
 
-                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::HasInspect::Concern,
-                ConvenientService::Common::Plugins::HasJSendResultDuckShortSyntax::Concern,
                 ConvenientService::Common::Plugins::CanHaveCallbacks::Concern,
-                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallbacks::Concern
+                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::HasInspect::Concern,
 
+                ConvenientService::Common::Plugins::HasJSendResultDuckShortSyntax::Concern,
+                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallbacks::Concern
               ]
             end
 

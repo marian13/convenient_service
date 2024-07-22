@@ -41,13 +41,13 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::RailsService::Config
               ConvenientService::Service::Plugins::CanHaveSteps::Concern,
               ConvenientService::Service::Plugins::CanHaveConnectedSteps::Concern,
               ConvenientService::Service::Plugins::CanHaveFallbacks::Concern,
+              ConvenientService::Common::Plugins::CanHaveCallbacks::Concern,
               ConvenientService::Service::Plugins::HasInspect::Concern,
               ConvenientService::Common::Plugins::CachesConstructorArguments::Concern,
               ConvenientService::Common::Plugins::CanBeCopied::Concern,
               ConvenientService::Service::Plugins::CanRecalculateResult::Concern,
               ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Concern,
               ConvenientService::Service::Plugins::HasJSendResultStatusCheckShortSyntax::Concern,
-              ConvenientService::Common::Plugins::CanHaveCallbacks::Concern,
               ConvenientService::Service::Plugins::HasMermaidFlowchart::Concern,
               ConvenientService::Common::Plugins::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment::Concern,
               ConvenientService::Common::Plugins::HasAttributes::UsingActiveModelAttributes::Concern,
@@ -526,10 +526,10 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::RailsService::Config
                 ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeCompleted::Concern,
                 ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeServiceStep::Concern,
                 ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeMethodStep::Concern,
+                ConvenientService::Common::Plugins::CanHaveCallbacks::Concern,
 
                 ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::HasInspect::Concern,
                 ConvenientService::Common::Plugins::HasJSendResultDuckShortSyntax::Concern,
-                ConvenientService::Common::Plugins::CanHaveCallbacks::Concern,
                 ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallbacks::Concern
               ]
             end

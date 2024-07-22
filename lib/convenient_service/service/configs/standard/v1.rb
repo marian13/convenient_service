@@ -21,6 +21,8 @@ module ConvenientService
           # rubocop:disable Lint/ConstantDefinitionInBlock
           included do
             include Configs::Essential
+
+            include Configs::Callbacks
             include Configs::Inspect
 
             concerns do
@@ -29,8 +31,6 @@ module ConvenientService
               use ConvenientService::Plugins::Service::CanRecalculateResult::Concern
               use ConvenientService::Plugins::Service::HasJSendResultShortSyntax::Concern
               use ConvenientService::Plugins::Service::HasJSendResultStatusCheckShortSyntax::Concern
-
-              use ConvenientService::Plugins::Common::CanHaveCallbacks::Concern
 
               use ConvenientService::Plugins::Service::HasMermaidFlowchart::Concern
 
@@ -49,24 +49,8 @@ module ConvenientService
               use ConvenientService::Plugins::Common::CachesConstructorArguments::Middleware
             end
 
-            middlewares :before, scope: :class do
-              use ConvenientService::Plugins::Service::CanHaveBeforeStepCallbacks::Middleware
-            end
-
-            middlewares :around, scope: :class do
-              use ConvenientService::Plugins::Service::CanHaveAroundStepCallbacks::Middleware
-            end
-
-            middlewares :after, scope: :class do
-              use ConvenientService::Plugins::Service::CanHaveAfterStepCallbacks::Middleware
-            end
-
             middlewares :result do
               unshift ConvenientService::Plugins::Service::CollectsServicesInException::Middleware
-
-              insert_before \
-                ConvenientService::Plugins::Service::RaisesOnNotResultReturnValue::Middleware,
-                ConvenientService::Plugins::Common::CanHaveCallbacks::Middleware
 
               ##
               # TODO: Rewrite. This plugin does NOT do what it states. Probably I was NOT with a clear mind while writing it (facepalm).
@@ -155,14 +139,9 @@ module ConvenientService
             class self::Step
               concerns do
                 use ConvenientService::Plugins::Common::HasJSendResultDuckShortSyntax::Concern
-                use ConvenientService::Plugins::Common::CanHaveCallbacks::Concern
               end
 
               middlewares :result do
-                insert_before \
-                  ConvenientService::Plugins::Step::HasResult::Middleware,
-                  ConvenientService::Plugins::Common::CanHaveCallbacks::Middleware
-
                 use ConvenientService::Plugins::Step::CanHaveParentResult::Middleware
               end
             end
