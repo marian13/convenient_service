@@ -41,6 +41,7 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveCallbacks::Concern, ty
 
     let(:method) { :result }
     let(:block) { proc {} }
+    let(:source_location) { "source_location" }
 
     example_group "class methods" do
       describe ".callbacks" do
@@ -64,9 +65,9 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveCallbacks::Concern, ty
         specify do
           service_class.commit_config!
 
-          expect { service_class.before(method, &block) }
+          expect { service_class.before(method, source_location: source_location, &block) }
             .to delegate_to(service_class, :callback)
-            .with_arguments(:before, method, &block)
+            .with_arguments(:before, method, source_location: source_location, &block)
             .and_return_its_value
         end
       end
@@ -75,9 +76,9 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveCallbacks::Concern, ty
         specify do
           service_class.commit_config!
 
-          expect { service_class.after(method, &block) }
+          expect { service_class.after(method, source_location: source_location, &block) }
             .to delegate_to(service_class, :callback)
-            .with_arguments(:after, method, &block)
+            .with_arguments(:after, method, source_location: source_location, &block)
             .and_return_its_value
         end
       end
@@ -86,9 +87,9 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveCallbacks::Concern, ty
         specify do
           service_class.commit_config!
 
-          expect { service_class.around(method, &block) }
+          expect { service_class.around(method, source_location: source_location, &block) }
             .to delegate_to(service_class, :callback)
-            .with_arguments(:around, method, &block)
+            .with_arguments(:around, method, source_location: source_location, &block)
             .and_return_its_value
         end
       end
@@ -97,9 +98,9 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveCallbacks::Concern, ty
         let(:type) { :before }
 
         specify do
-          expect { service_class.callback(type, method, &block) }
+          expect { service_class.callback(type, method, source_location: source_location, &block) }
             .to delegate_to(service_class.callbacks, :create)
-            .with_arguments(types: [type, method], block: block)
+            .with_arguments(types: [type, method], block: block, source_location: source_location)
             .and_return_its_value
         end
       end

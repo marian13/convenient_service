@@ -11,7 +11,7 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::C
   example_group "attributes" do
     include ConvenientService::RSpec::PrimitiveMatchers::HaveAttrReader
 
-    subject { described_class.new(types: [:foo, :bar], block: proc { :foo }) }
+    subject { described_class.new(types: [:foo, :bar], block: proc { :foo }, source_location: "source_location") }
 
     it { is_expected.to have_attr_reader(:types) }
     it { is_expected.to have_attr_reader(:block) }
@@ -19,13 +19,23 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::C
 
   example_group "class methods" do
     describe ".new" do
-      subject(:callback) { described_class.new(types: types, block: double) }
+      subject(:callback) { described_class.new(types: types, block: block, source_location: source_location) }
 
       let(:types) { [:before, :result] }
+      let(:block) { proc { :foo } }
+      let(:source_location) { "source_location" }
       let(:casted_types) { ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::TypeCollection.new(types: types) }
 
       it "casts types to `ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::TypeCollection` instance" do
         expect(callback.types).to eq(casted_types)
+      end
+
+      context "when `source_location` is NOT passed" do
+        subject(:callback) { described_class.new(types: types, block: block) }
+
+        it "defaults `source_location` to `block.source_location`" do
+          expect(callback.source_location).to eq(block.source_location)
+        end
       end
     end
   end
@@ -33,7 +43,7 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::C
   example_group "instance alias methods" do
     include ConvenientService::RSpec::PrimitiveMatchers::HaveAliasMethod
 
-    subject { described_class.new(types: [], block: double) }
+    subject { described_class.new(types: [], block: proc { :foo }, source_location: "source_location") }
 
     it { is_expected.to have_alias_method(:yield, :call) }
     it { is_expected.to have_alias_method(:[], :call) }
@@ -41,11 +51,12 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::C
   end
 
   example_group "instance methods" do
-    subject(:callback) { described_class.new(types: types, block: callback_block) }
+    subject(:callback) { described_class.new(types: types, block: callback_block, source_location: source_location) }
 
-    let(:params) { {types: types, block: callback_block} }
+    let(:params) { {types: types, block: callback_block, source_location: source_location} }
     let(:types) { [:before, :result] }
     let(:callback_block) { proc { :callback } }
+    let(:source_location) { "source_location" }
 
     let(:arguments_args) { [:foo, :bar] }
     let(:arguments_kwargs) { {foo: :bar} }
@@ -176,14 +187,13 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::C
         it "returns false" do
           expect(callback == other).to eq(false)
         end
+      end
 
-        it "uses `source_location` to compare blocks" do
-          allow(callback.block).to receive(:source_location).and_return(OpenStruct.new)
+      context "when calbacks have different source locations" do
+        let(:other) { described_class.new(**params.merge(source_location: "other_source_location")) }
 
-          expect { callback == other }
-            .to delegate_to(callback.block.source_location, :==)
-            .with_arguments(other.block.source_location)
-            .and_return_its_value
+        it "returns false" do
+          expect(callback == other).to eq(false)
         end
       end
 

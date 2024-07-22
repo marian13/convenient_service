@@ -93,6 +93,12 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveBeforeStepCallbacks::
           expect(service_class.step_class.callbacks.for([:before, :result])).not_to be_empty
         end
 
+        it "passes original block source location to before `:result` callback for service step class" do
+          method_value
+
+          expect(service_class.step_class.callbacks.for([:before, :result]).first.source_location).to eq(block.source_location)
+        end
+
         example_group "comprehensive suite" do
           let(:out) { Tempfile.new }
           let(:output) { out.tap(&:rewind).read }

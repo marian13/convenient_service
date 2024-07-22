@@ -19,13 +19,21 @@ module ConvenientService
             attr_reader :block
 
             ##
+            # @!attribute [r] source_location
+            #   @return [String]
+            #
+            attr_reader :source_location
+
+            ##
             # @param types [ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::TypeCollection]
             # @param block [Proc, nil]
+            # @param extra_kwargs [Hash{Symbol => Object}]
             # @return [void]
             #
-            def initialize(types:, block:)
+            def initialize(types:, block:, **extra_kwargs)
               @types = Entities::TypeCollection.new(types: types)
               @block = block
+              @source_location = extra_kwargs.fetch(:source_location) { block.source_location }
             end
 
             ##
@@ -103,7 +111,8 @@ module ConvenientService
               return unless other.instance_of?(self.class)
 
               return false if types != other.types
-              return false if block&.source_location != other.block&.source_location
+              return false if block != other.block
+              return false if source_location != other.source_location
 
               true
             end

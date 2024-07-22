@@ -60,16 +60,16 @@ module ConvenientService
           #     end
           #   end
           #
-          def next(method, &block)
-            return chain.next(method, &block) if method != :step
+          def next(method, **kwargs, &block)
+            return chain.next(method, **kwargs, &block) if method != :step
 
-            entity.step_class.class_exec(block) do |block|
-              after :result do |result|
+            entity.step_class.class_exec(kwargs, block) do |kwargs, block|
+              after :result, **kwargs.merge(source_location: block.source_location) do |result|
                 organizer.instance_exec(
                   result.step,
                   Support::Arguments.new(
                     *args,
-                    **Utils::Hash.except(kwargs, [:organizer, :container])
+                    **Utils::Hash.except(self.kwargs, [:organizer, :container])
                   ),
                   &block
                 )
