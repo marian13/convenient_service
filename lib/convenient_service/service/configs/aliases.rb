@@ -13,11 +13,15 @@ module ConvenientService
     Config = ::ConvenientService::Service::Configs::Fallbacks
   end
 
+  module FaultTolerance
+    Config = ::ConvenientService::Service::Configs::FaultTolerance
+  end
+
   module Inspect
     Config = ::ConvenientService::Service::Configs::Inspect
   end
 
-  module FaultTolerance
-    Config = ::ConvenientService::Service::Configs::FaultTolerance
+  module RSpec
+    Config = ::ConvenientService::Service::Configs::RSpec
   end
 end
