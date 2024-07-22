@@ -117,7 +117,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#next-instance_method" title="#next (instance method)">#<strong>next</strong>(method, &amp;block)  &#x21d2; ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Callback </a>
+      <a href="#next-instance_method" title="#next (instance method)">#<strong>next</strong>(method, **kwargs, &amp;block)  &#x21d2; ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Callback </a>
     
 
     
@@ -148,7 +148,7 @@
       <div class="method_details first">
   <h3 class="signature first" id="next-instance_method">
   
-    #<strong>next</strong>(method, &amp;block)  &#x21d2; <tt><span class='object_link'><a href="../../../Common/Plugins/CanHaveCallbacks/Entities/Callback.html" title="ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Callback (class)">ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Callback</a></span></tt> 
+    #<strong>next</strong>(method, **kwargs, &amp;block)  &#x21d2; <tt><span class='object_link'><a href="../../../Common/Plugins/CanHaveCallbacks/Entities/Callback.html" title="ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Callback (class)">ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Callback</a></span></tt> 
   
 
   
@@ -284,15 +284,15 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_before_step_callbacks/middleware.rb', line 63</span>
 
-<span class='kw'>def</span> <span class='kw'>next</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-  <span class='kw'>return</span> <span class='id identifier rubyid_chain'>chain</span><span class='period'>.</span><span class='id identifier rubyid_next'>next</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_method'>method</span> <span class='op'>!=</span> <span class='symbol'>:step</span>
+<span class='kw'>def</span> <span class='kw'>next</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_chain'>chain</span><span class='period'>.</span><span class='id identifier rubyid_next'>next</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_method'>method</span> <span class='op'>!=</span> <span class='symbol'>:step</span>
 
-  <span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_step_class'>step_class</span><span class='period'>.</span><span class='id identifier rubyid_class_exec'>class_exec</span><span class='lparen'>(</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_block'>block</span><span class='op'>|</span>
-    <span class='id identifier rubyid_before'>before</span> <span class='symbol'>:result</span> <span class='kw'>do</span>
+  <span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_step_class'>step_class</span><span class='period'>.</span><span class='id identifier rubyid_class_exec'>class_exec</span><span class='lparen'>(</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='id identifier rubyid_block'>block</span><span class='op'>|</span>
+    <span class='id identifier rubyid_before'>before</span> <span class='symbol'>:result</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='label'>source_location:</span> <span class='id identifier rubyid_block'>block</span><span class='period'>.</span><span class='id identifier rubyid_source_location'>source_location</span><span class='rparen'>)</span> <span class='kw'>do</span>
       <span class='id identifier rubyid_organizer'>organizer</span><span class='period'>.</span><span class='id identifier rubyid_instance_exec'>instance_exec</span><span class='lparen'>(</span>
         <span class='const'><span class='object_link'><a href="../../../Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Support/Arguments.html" title="ConvenientService::Support::Arguments (class)">Arguments</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../../Support/Arguments.html#initialize-instance_method" title="ConvenientService::Support::Arguments#initialize (method)">new</a></span></span><span class='lparen'>(</span>
           <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span>
-          <span class='op'>**</span><span class='const'><span class='object_link'><a href="../../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Utils/Hash.html" title="ConvenientService::Utils::Hash (module)">Hash</a></span></span><span class='period'>.</span><span class='id identifier rubyid_except'><span class='object_link'><a href="../../../Utils/Hash.html#except-class_method" title="ConvenientService::Utils::Hash.except (method)">except</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='lbracket'>[</span><span class='symbol'>:organizer</span><span class='comma'>,</span> <span class='symbol'>:container</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+          <span class='op'>**</span><span class='const'><span class='object_link'><a href="../../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Utils/Hash.html" title="ConvenientService::Utils::Hash (module)">Hash</a></span></span><span class='period'>.</span><span class='id identifier rubyid_except'><span class='object_link'><a href="../../../Utils/Hash.html#except-class_method" title="ConvenientService::Utils::Hash.except (method)">except</a></span></span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='lbracket'>[</span><span class='symbol'>:organizer</span><span class='comma'>,</span> <span class='symbol'>:container</span><span class='rbracket'>]</span><span class='rparen'>)</span>
         <span class='rparen'>)</span><span class='comma'>,</span>
         <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
       <span class='rparen'>)</span>
@@ -309,7 +309,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Jul 21 13:30:05 2024 by
+  Generated on Mon Jul 22 01:51:07 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.36 (ruby-3.2.4).
 </div>
