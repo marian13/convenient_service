@@ -25,6 +25,7 @@ module ConvenientService
           include Configs::Essential
 
           include Configs::Callbacks
+          include Configs::Fallbacks
           include Configs::Inspect
 
           concerns do
@@ -55,30 +56,6 @@ module ConvenientService
               ConvenientService::Plugins::Service::SetsParentToForeignResult::Middleware
           end
 
-          middlewares :fallback_failure_result do
-            use ConvenientService::Plugins::Service::CollectsServicesInException::Middleware
-            use ConvenientService::Plugins::Common::CachesReturnValue::Middleware
-
-            use ConvenientService::Plugins::Service::RaisesOnNotResultReturnValue::Middleware
-            use ConvenientService::Plugins::Service::CanHaveFallbacks::Middleware.with(status: :failure)
-          end
-
-          middlewares :fallback_error_result do
-            use ConvenientService::Plugins::Service::CollectsServicesInException::Middleware
-            use ConvenientService::Plugins::Common::CachesReturnValue::Middleware
-
-            use ConvenientService::Plugins::Service::RaisesOnNotResultReturnValue::Middleware
-            use ConvenientService::Plugins::Service::CanHaveFallbacks::Middleware.with(status: :error)
-          end
-
-          middlewares :fallback_result do
-            use ConvenientService::Plugins::Service::CollectsServicesInException::Middleware
-            use ConvenientService::Plugins::Common::CachesReturnValue::Middleware
-
-            use ConvenientService::Plugins::Service::RaisesOnNotResultReturnValue::Middleware
-            use ConvenientService::Plugins::Service::CanHaveFallbacks::Middleware.with(status: nil)
-          end
-
           middlewares :negated_result do
             use ConvenientService::Plugins::Service::CollectsServicesInException::Middleware
             use ConvenientService::Plugins::Common::CachesReturnValue::Middleware
@@ -106,7 +83,6 @@ module ConvenientService
               use ConvenientService::Plugins::Result::HasNegatedResult::Concern
               use ConvenientService::Plugins::Result::CanBeFromException::Concern
               use ConvenientService::Plugins::Result::CanBeOwnResult::Concern
-              use ConvenientService::Plugins::Result::CanHaveFallbacks::Concern
               use ConvenientService::Plugins::Result::CanHaveParentResult::Concern
               use ConvenientService::Plugins::Result::CanHaveCheckedStatus::Concern
             end
@@ -161,17 +137,12 @@ module ConvenientService
           class self::Step
             concerns do
               use ConvenientService::Plugins::Common::HasJSendResultDuckShortSyntax::Concern
-              use ConvenientService::Plugins::Step::CanHaveFallbacks::Concern
             end
 
             middlewares :result do
               insert_after \
                 ConvenientService::Plugins::Step::HasResult::Middleware,
                 ConvenientService::Plugins::Step::CanHaveParentResult::Middleware
-
-              insert_after \
-                ConvenientService::Plugins::Step::HasResult::Middleware,
-                ConvenientService::Plugins::Step::CanHaveFallbacks::Middleware.with(fallback_true_status: :failure)
             end
           end
 
