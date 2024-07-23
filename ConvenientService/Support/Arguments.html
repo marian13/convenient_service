@@ -95,7 +95,7 @@
   <dl>
     <dt>Defined in:</dt>
     <dd>lib/convenient_service/support/arguments.rb<span class="defines">,<br />
-  lib/convenient_service/support/arguments/null_arguments.rb</span>
+  lib/convenient_service/support/arguments/exceptions.rb,<br /> lib/convenient_service/support/arguments/null_arguments.rb</span>
 </dd>
   </dl>
   
@@ -108,6 +108,8 @@
 <h2>Defined Under Namespace</h2>
 <p class="children">
   
+    
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Arguments/Exceptions.html" title="ConvenientService::Support::Arguments::Exceptions (module)">Exceptions</a></span>
     
   
     
@@ -275,6 +277,29 @@
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#[]-instance_method" title="#[] (instance method)">#<strong>[]</strong>(key)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Can be any type.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#any%3F-instance_method" title="#any? (instance method)">#<strong>any?</strong>  &#x21d2; Booleam </a>
     
 
@@ -429,14 +454,14 @@
       <pre class="lines">
 
 
-32
 33
 34
 35
-36</pre>
+36
+37</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/arguments.rb', line 32</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/arguments.rb', line 33</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='ivar'>@args</span> <span class='op'>=</span> <span class='id identifier rubyid_args'>args</span>
@@ -480,12 +505,12 @@
       <pre class="lines">
 
 
-12
 13
-14</pre>
+14
+15</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/arguments.rb', line 12</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/arguments.rb', line 13</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_args'>args</span>
   <span class='ivar'>@args</span>
@@ -522,12 +547,12 @@
       <pre class="lines">
 
 
-24
 25
-26</pre>
+26
+27</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/arguments.rb', line 24</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/arguments.rb', line 25</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_block'>block</span>
   <span class='ivar'>@block</span>
@@ -564,12 +589,12 @@
       <pre class="lines">
 
 
-18
 19
-20</pre>
+20
+21</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/arguments.rb', line 18</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/arguments.rb', line 19</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_kwargs'>kwargs</span>
   <span class='ivar'>@kwargs</span>
@@ -623,12 +648,12 @@
       <pre class="lines">
 
 
-42
 43
-44</pre>
+44
+45</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/arguments.rb', line 42</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/arguments.rb', line 43</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_null_arguments'>null_arguments</span>
   <span class='ivar'>@null_arguments</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="../Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="ConvenientService::Support::Arguments (class)">Arguments</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Arguments/NullArguments.html" title="ConvenientService::Support::Arguments::NullArguments (class)">NullArguments</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Arguments/NullArguments.html#initialize-instance_method" title="ConvenientService::Support::Arguments::NullArguments#initialize (method)">new</a></span></span>
@@ -696,18 +721,18 @@
       <pre class="lines">
 
 
-76
-77
-78
-79
-80
-81
-82
-83
-84</pre>
+88
+89
+90
+91
+92
+93
+94
+95
+96</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/arguments.rb', line 76</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/arguments.rb', line 88</span>
 
 <span class='kw'>def</span> <span class='op'>==</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='rparen'>)</span>
@@ -717,6 +742,71 @@
   <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='id identifier rubyid_block'>block</span> <span class='op'>!=</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_block'>block</span>
 
   <span class='kw'>true</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="[]-instance_method">
+  
+    #<strong>[]</strong>(key)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Can be any type.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Can be any type.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+76
+77
+78
+79
+80
+81
+82</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/arguments.rb', line 76</span>
+
+<span class='kw'>def</span> <span class='op'>[]</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='rparen'>)</span>
+  <span class='kw'>case</span> <span class='id identifier rubyid_key'>key</span>
+  <span class='kw'>when</span> <span class='const'>Integer</span> <span class='kw'>then</span> <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span>
+  <span class='kw'>when</span> <span class='const'>Symbol</span> <span class='kw'>then</span> <span class='id identifier rubyid_kwargs'>kwargs</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span>
+  <span class='kw'>else</span> <span class='op'>::</span><span class='const'><span class='object_link'><a href="../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='period'>.</span><span class='id identifier rubyid_raise'><span class='object_link'><a href="../../ConvenientService.html#raise-instance_method" title="ConvenientService#raise (method)">raise</a></span></span> <span class='const'><span class='object_link'><a href="Arguments/Exceptions.html" title="ConvenientService::Support::Arguments::Exceptions (module)">Exceptions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Arguments/Exceptions/InvalidKeyType.html" title="ConvenientService::Support::Arguments::Exceptions::InvalidKeyType (class)">InvalidKeyType</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Exception.html#new-class_method" title="ConvenientService::Exception.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>key:</span> <span class='id identifier rubyid_key'>key</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -760,16 +850,16 @@
       <pre class="lines">
 
 
-57
 58
 59
 60
 61
 62
-63</pre>
+63
+64</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/arguments.rb', line 57</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/arguments.rb', line 58</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_any?'>any?</span>
   <span class='kw'>return</span> <span class='kw'>true</span> <span class='kw'>if</span> <span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span>
@@ -820,12 +910,12 @@
       <pre class="lines">
 
 
-68
 69
-70</pre>
+70
+71</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/arguments.rb', line 68</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/arguments.rb', line 69</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_none?'>none?</span>
   <span class='op'>!</span><span class='id identifier rubyid_any?'>any?</span>
@@ -872,12 +962,12 @@
       <pre class="lines">
 
 
-50
 51
-52</pre>
+52
+53</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/arguments.rb', line 50</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/arguments.rb', line 51</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_null_arguments?'>null_arguments?</span>
   <span class='kw'>false</span>
@@ -892,7 +982,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Jul 22 23:58:25 2024 by
+  Generated on Tue Jul 23 21:24:57 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.36 (ruby-3.2.4).
 </div>
