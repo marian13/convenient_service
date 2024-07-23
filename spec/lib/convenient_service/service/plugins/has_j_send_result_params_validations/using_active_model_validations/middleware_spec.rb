@@ -123,6 +123,10 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultParamsValidati
           it "returns result with first error key/value joined by space as message" do
             expect(method_value).to be_result(status).with_message(errors.first.to_a.map(&:to_s).join(" "))
           end
+
+          it "returns result with `:unsatisfied_active_model_validations` as code" do
+            expect(method_value).to be_result(status).with_code(:unsatisfied_active_model_validations)
+          end
         end
       end
     end

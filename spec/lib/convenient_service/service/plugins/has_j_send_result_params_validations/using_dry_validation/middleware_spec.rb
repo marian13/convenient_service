@@ -135,6 +135,10 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultParamsValidati
           it "returns result with first error key/value joined by space as message" do
             expect(method_value).to be_result(status).with_message(errors.first.to_a.map(&:to_s).join(" "))
           end
+
+          it "returns result with `:unsatisfied_dry_validation` as code" do
+            expect(method_value).to be_result(status).with_code(:unsatisfied_dry_validation)
+          end
         end
       end
     end

@@ -12,12 +12,24 @@ module ConvenientService
             # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
             #
             def next(...)
-              return entity.public_send(status, data: errors, message: errors.first.to_a.map(&:to_s).join(" ")) if errors.any?
+              return result_from_active_model_validations if active_model_validations_errors.any?
 
               chain.next(...)
             end
 
             private
+
+            ##
+            # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
+            #
+            def result_from_active_model_validations
+              @result_from_active_model_validations ||= entity.public_send(
+                status,
+                data: active_model_validations_errors,
+                message: active_model_validations_errors.first.to_a.map(&:to_s).join(" "),
+                code: :unsatisfied_active_model_validations
+              )
+            end
 
             ##
             # @internal
@@ -30,8 +42,8 @@ module ConvenientService
             #   Quote (this method - errors):
             #   > This method is only useful after validations have been run, because it only inspects the errors collection and does not trigger validations itself.
             #
-            def errors
-              @errors ||= entity.tap(&:valid?).errors.messages.transform_values(&:first)
+            def active_model_validations_errors
+              @active_model_validations_errors ||= entity.tap(&:valid?).errors.messages.transform_values(&:first)
             end
 
             ##

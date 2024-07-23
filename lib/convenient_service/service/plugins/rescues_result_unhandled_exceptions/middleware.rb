@@ -73,7 +73,8 @@ module ConvenientService
             entity.public_send(
               status,
               data: {exception: exception},
-              message: format_exception(exception, *args, **kwargs, &block)
+              message: format_exception(exception, *args, **kwargs, &block),
+              code: :unhandled_exception
             )
               .copy(overrides: {kwargs: {exception: exception}})
           end

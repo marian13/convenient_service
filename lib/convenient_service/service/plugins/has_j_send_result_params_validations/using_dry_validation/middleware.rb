@@ -16,12 +16,24 @@ module ConvenientService
             # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
             #
             def next(...)
-              return entity.public_send(status, data: errors, message: errors.first.to_a.map(&:to_s).join(" ")) if errors.any?
+              return result_from_dry_validation if dry_validation_errors.any?
 
               chain.next(...)
             end
 
             private
+
+            ##
+            # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
+            #
+            def result_from_dry_validation
+              entity.public_send(
+                status,
+                data: dry_validation_errors,
+                message: dry_validation_errors.first.to_a.map(&:to_s).join(" "),
+                code: :unsatisfied_dry_validation
+              )
+            end
 
             ##
             # @return [Hash{Symbol => Object}]
@@ -32,8 +44,8 @@ module ConvenientService
             #
             #   TODO: Return one or all errors?
             #
-            def errors
-              @errors ||= resolve_errors
+            def dry_validation_errors
+              @dry_validation_errors ||= resolve_dry_validation_errors
             end
 
             ##
@@ -51,9 +63,16 @@ module ConvenientService
             end
 
             ##
+            # @return [Symbol]
+            #
+            def status
+              middleware_arguments.kwargs.fetch(:status) { :error }
+            end
+
+            ##
             # @return [Hash{Symbol => Object}]
             #
-            def resolve_errors
+            def resolve_dry_validation_errors
               return {} unless contract.schema
 
               contract.new
@@ -61,13 +80,6 @@ module ConvenientService
                 .errors
                 .to_h
                 .transform_values(&:first)
-            end
-
-            ##
-            # @return [Symbol]
-            #
-            def status
-              middleware_arguments.kwargs.fetch(:status) { :error }
             end
           end
         end
