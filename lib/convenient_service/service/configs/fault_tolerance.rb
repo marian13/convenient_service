@@ -21,6 +21,12 @@ module ConvenientService
           middlewares :steps_result do
             use ConvenientService::Plugins::Service::RescuesResultUnhandledExceptions::Middleware
           end
+
+          class self::Result
+            concerns do
+              use ConvenientService::Plugins::Result::CanBeFromException::Concern
+            end
+          end
         end
         # rubocop:enable Lint/ConstantDefinitionInBlock
       end

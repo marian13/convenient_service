@@ -69,8 +69,11 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
             Class.new.tap do |klass|
               klass.class_exec(middleware, max_backtrace_size) do |middleware, max_backtrace_size|
                 include ConvenientService::Standard::Config
+                include ConvenientService::FaultTolerance::Config
 
                 middlewares :result, scope: :class do
+                  delete middleware
+
                   use_and_observe middleware.with(max_backtrace_size: max_backtrace_size)
                 end
 
@@ -95,9 +98,10 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
               Class.new.tap do |klass|
                 klass.class_exec(middleware) do |middleware|
                   include ConvenientService::Standard::Config
+                  include ConvenientService::FaultTolerance::Config
 
                   middlewares :result, scope: :class do
-                    use_and_observe middleware
+                    observe middleware
                   end
 
                   def result
@@ -121,9 +125,16 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
               Class.new.tap do |klass|
                 klass.class_exec(middleware, status, max_backtrace_size) do |middleware, status, max_backtrace_size|
                   include ConvenientService::Standard::Config
+                  include ConvenientService::FaultTolerance::Config
 
                   middlewares :result, scope: :class do
+                    delete middleware
+
                     use_and_observe middleware.with(status: status, max_backtrace_size: max_backtrace_size)
+                  end
+
+                  middlewares :regular_result do
+                    delete middleware
                   end
 
                   def result
@@ -155,6 +166,10 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
               it "returns `failure` from exception" do
                 expect(method_value.from_exception?).to eq(true)
               end
+
+              it "returns `failure` with exception" do
+                expect(method_value.exception).to eq(exception)
+              end
             end
 
             context "when `status` is `:error`" do
@@ -179,6 +194,10 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
               it "returns `error` from exception" do
                 expect(method_value.from_exception?).to eq(true)
               end
+
+              it "returns `error` with exception" do
+                expect(method_value.exception).to eq(exception)
+              end
             end
           end
 
@@ -187,9 +206,14 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
               Class.new.tap do |klass|
                 klass.class_exec(middleware) do |middleware|
                   include ConvenientService::Standard::Config
+                  include ConvenientService::FaultTolerance::Config
 
                   middlewares :result, scope: :class do
-                    use_and_observe middleware
+                    observe middleware
+                  end
+
+                  middlewares :regular_result do
+                    delete middleware
                   end
 
                   def result
@@ -241,8 +265,11 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
             Class.new.tap do |klass|
               klass.class_exec(middleware, max_backtrace_size) do |middleware, max_backtrace_size|
                 include ConvenientService::Standard::Config
+                include ConvenientService::FaultTolerance::Config
 
                 middlewares :regular_result do
+                  delete middleware
+
                   use_and_observe middleware.with(max_backtrace_size: max_backtrace_size)
                 end
 
@@ -267,9 +294,10 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
               Class.new.tap do |klass|
                 klass.class_exec(middleware) do |middleware|
                   include ConvenientService::Standard::Config
+                  include ConvenientService::FaultTolerance::Config
 
                   middlewares :regular_result do
-                    use_and_observe middleware
+                    observe middleware
                   end
 
                   def result
@@ -293,8 +321,11 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
               Class.new.tap do |klass|
                 klass.class_exec(middleware, status, max_backtrace_size) do |middleware, status, max_backtrace_size|
                   include ConvenientService::Standard::Config
+                  include ConvenientService::FaultTolerance::Config
 
                   middlewares :regular_result do
+                    delete middleware
+
                     use_and_observe middleware.with(status: status, max_backtrace_size: max_backtrace_size)
                   end
 
@@ -327,6 +358,10 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
               it "returns `failure` from exception" do
                 expect(method_value.from_exception?).to eq(true)
               end
+
+              it "returns `failure` with exception" do
+                expect(method_value.exception).to eq(exception)
+              end
             end
 
             context "when `status` is `:error`" do
@@ -351,6 +386,10 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
               it "returns `error` from exception" do
                 expect(method_value.from_exception?).to eq(true)
               end
+
+              it "returns `error` with exception" do
+                expect(method_value.exception).to eq(exception)
+              end
             end
           end
 
@@ -359,9 +398,10 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
               Class.new.tap do |klass|
                 klass.class_exec(middleware) do |middleware|
                   include ConvenientService::Standard::Config
+                  include ConvenientService::FaultTolerance::Config
 
                   middlewares :regular_result do
-                    use_and_observe middleware
+                    observe middleware
                   end
 
                   def result
@@ -413,8 +453,11 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
             Class.new.tap do |klass|
               klass.class_exec(middleware, max_backtrace_size) do |middleware, max_backtrace_size|
                 include ConvenientService::Standard::Config
+                include ConvenientService::FaultTolerance::Config
 
                 middlewares :steps_result do
+                  delete middleware
+
                   use_and_observe middleware.with(max_backtrace_size: max_backtrace_size)
                 end
 
@@ -441,9 +484,10 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
               Class.new.tap do |klass|
                 klass.class_exec(middleware) do |middleware|
                   include ConvenientService::Standard::Config
+                  include ConvenientService::FaultTolerance::Config
 
                   middlewares :steps_result do
-                    use_and_observe middleware
+                    observe middleware
                   end
 
                   step :foo
@@ -469,8 +513,11 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
               Class.new.tap do |klass|
                 klass.class_exec(middleware, status, max_backtrace_size) do |middleware, status, max_backtrace_size|
                   include ConvenientService::Standard::Config
+                  include ConvenientService::FaultTolerance::Config
 
                   middlewares :steps_result do
+                    delete middleware
+
                     use_and_observe middleware.with(status: status, max_backtrace_size: max_backtrace_size)
                   end
 
@@ -505,6 +552,10 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
               it "returns `failure` from exception" do
                 expect(method_value.from_exception?).to eq(true)
               end
+
+              it "returns `failure` with exception" do
+                expect(method_value.exception).to eq(exception)
+              end
             end
 
             context "when `status` is `:error`" do
@@ -529,6 +580,10 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
               it "returns `error` from exception" do
                 expect(method_value.from_exception?).to eq(true)
               end
+
+              it "returns `error` with exception" do
+                expect(method_value.exception).to eq(exception)
+              end
             end
           end
 
@@ -537,9 +592,10 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
               Class.new.tap do |klass|
                 klass.class_exec(middleware) do |middleware|
                   include ConvenientService::Standard::Config
+                  include ConvenientService::FaultTolerance::Config
 
                   middlewares :steps_result do
-                    use_and_observe middleware
+                    observe middleware
                   end
 
                   step :foo

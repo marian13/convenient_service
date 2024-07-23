@@ -18,7 +18,16 @@ module ConvenientService
                     # @return [Boolean]
                     #
                     def from_exception?
-                      Utils.to_bool(extra_kwargs[:from_exception])
+                      Utils.to_bool(exception)
+                    end
+
+                    ##
+                    # @api public
+                    #
+                    # @return [StandardError, nil]
+                    #
+                    def exception
+                      extra_kwargs[:exception]
                     end
                   end
                 end

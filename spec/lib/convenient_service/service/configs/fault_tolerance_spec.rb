@@ -42,6 +42,14 @@ RSpec.describe ConvenientService::Service::Configs::FaultTolerance, type: :stand
             expect(service_class.middlewares(:steps_result).to_a.last).to eq(ConvenientService::Service::Plugins::RescuesResultUnhandledExceptions::Middleware)
           end
         end
+
+        example_group "service result" do
+          example_group "concerns" do
+            it "adds `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeFromException::Concern` to service result concerns" do
+              expect(service_class.result_class.concerns.to_a).to include(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeFromException::Concern)
+            end
+          end
+        end
       end
     end
   end

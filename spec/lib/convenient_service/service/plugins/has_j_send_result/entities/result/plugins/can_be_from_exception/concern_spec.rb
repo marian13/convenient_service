@@ -37,6 +37,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       let(:service) do
         Class.new do
           include ConvenientService::Standard::Config
+          include ConvenientService::FaultTolerance::Config
 
           def result
             success
@@ -44,29 +45,66 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         end
       end
 
-      context "when result is NOT created by `from_exception`" do
+      context "when result is NOT created from exception`" do
         it "returns `false`" do
           expect(result.from_exception?).to eq(false)
         end
       end
 
-      context "when result is created by `from_exception`" do
+      context "when result is created from exception" do
         let(:service) do
           Class.new do
             include ConvenientService::Standard::Config
-
-            middlewares :regular_result do
-              use ConvenientService::Plugins::Service::RescuesResultUnhandledExceptions::Middleware
-            end
+            include ConvenientService::FaultTolerance::Config
 
             def result
-              16 / 0
+              raise StandardError, "exception message", caller.take(5)
             end
           end
         end
 
         it "returns `true`" do
           expect(result.from_exception?).to eq(true)
+        end
+      end
+    end
+
+    describe "#exception" do
+      let(:result) { service.result }
+
+      let(:service) do
+        Class.new do
+          include ConvenientService::Standard::Config
+          include ConvenientService::FaultTolerance::Config
+
+          def result
+            success
+          end
+        end
+      end
+
+      context "when result is NOT created from exception" do
+        it "returns `nil`" do
+          expect(result.exception).to be_nil
+        end
+      end
+
+      context "when result is created from exception" do
+        let(:service) do
+          Class.new do
+            include ConvenientService::Standard::Config
+            include ConvenientService::FaultTolerance::Config
+
+            def result
+              raise StandardError, "exception message", caller.take(5)
+            end
+          end
+        end
+
+        let(:exception) { service.new.result.unsafe_data[:exception] }
+
+        it "returns exception" do
+          expect(result.exception).to eq(exception)
         end
       end
     end
