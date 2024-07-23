@@ -27,6 +27,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
       specify { expect(service_class).to include_module(ConvenientService::Service::Configs::Fallbacks) }
       specify { expect(service_class).to include_module(ConvenientService::Service::Configs::Inspect) }
       specify { expect(service_class).to include_module(ConvenientService::Service::Configs::RSpec) }
+      specify { expect(service_class).to include_module(ConvenientService::Service::Configs::ShortSyntax) }
 
       example_group "service" do
         example_group "concerns" do
@@ -45,11 +46,11 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
               ConvenientService::Service::Plugins::CanHaveFallbacks::Concern,
               ConvenientService::Common::Plugins::CanHaveCallbacks::Concern,
               ConvenientService::Service::Plugins::HasInspect::Concern,
+              ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Concern,
+              ConvenientService::Service::Plugins::HasJSendResultStatusCheckShortSyntax::Concern,
               ConvenientService::Common::Plugins::CachesConstructorArguments::Concern,
               ConvenientService::Common::Plugins::CanBeCopied::Concern,
               ConvenientService::Service::Plugins::CanRecalculateResult::Concern,
-              ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Concern,
-              ConvenientService::Service::Plugins::HasJSendResultStatusCheckShortSyntax::Concern,
               ConvenientService::Service::Plugins::HasMermaidFlowchart::Concern
             ]
           end

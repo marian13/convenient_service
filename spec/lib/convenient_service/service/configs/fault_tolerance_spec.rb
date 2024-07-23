@@ -46,7 +46,7 @@ RSpec.describe ConvenientService::Service::Configs::FaultTolerance, type: :stand
         example_group "service result" do
           example_group "concerns" do
             it "adds `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeFromException::Concern` to service result concerns" do
-              expect(service_class.result_class.concerns.to_a).to include(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeFromException::Concern)
+              expect(service_class::Result.concerns.to_a.last).to eq(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeFromException::Concern)
             end
           end
         end

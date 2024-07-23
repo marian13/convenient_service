@@ -24,4 +24,8 @@ module ConvenientService
   module RSpec
     Config = ::ConvenientService::Service::Configs::RSpec
   end
+
+  module ShortSyntax
+    Config = ::ConvenientService::Service::Configs::ShortSyntax
+  end
 end

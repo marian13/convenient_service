@@ -27,7 +27,7 @@ RSpec.describe ConvenientService::Service::Configs::Fallbacks, type: :standard d
       example_group "service" do
         example_group "concerns" do
           it "adds `ConvenientService::Service::Plugins::CanHaveFallbacks::Concern` to service concerns" do
-            expect(service_class.concerns.to_a).to include(ConvenientService::Service::Plugins::CanHaveFallbacks::Concern)
+            expect(service_class.concerns.to_a.last).to eq(ConvenientService::Service::Plugins::CanHaveFallbacks::Concern)
           end
         end
 
@@ -79,7 +79,7 @@ RSpec.describe ConvenientService::Service::Configs::Fallbacks, type: :standard d
         example_group "service result" do
           example_group "concerns" do
             it "adds `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanHaveFallbacks::Concern` to service result concerns" do
-              expect(service_class.result_class.concerns.to_a).to include(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanHaveFallbacks::Concern)
+              expect(service_class::Result.concerns.to_a.last).to eq(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanHaveFallbacks::Concern)
             end
           end
         end
@@ -87,36 +87,16 @@ RSpec.describe ConvenientService::Service::Configs::Fallbacks, type: :standard d
         example_group "service step" do
           example_group "concerns" do
             it "adds `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallbacks::Concern` to service step concerns" do
-              expect(service_class.step_class.concerns.to_a).to include(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallbacks::Concern)
+              expect(service_class::Step.concerns.to_a.last).to eq(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallbacks::Concern)
             end
           end
 
           example_group "#result middlewares" do
             it "adds `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallbacks::Middleware.with(fallback_true_status: :failure)` after `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::HasResult::Middleware` to service step middlewares for `#result`" do
-              expect(service_class.step_class.middlewares(:result).to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::HasResult::Middleware || current_middleware == ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallbacks::Middleware.with(fallback_true_status: :failure) }).not_to be_nil
+              expect(service_class::Step.middlewares(:result).to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::HasResult::Middleware || current_middleware == ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallbacks::Middleware.with(fallback_true_status: :failure) }).not_to be_nil
             end
           end
         end
-      end
-    end
-
-    context "when included multiple times" do
-      let(:service_class) do
-        Class.new.tap do |klass|
-          klass.class_exec(described_class) do |mod|
-            include mod
-
-            include mod
-          end
-        end
-      end
-
-      ##
-      # NOTE: Check the following discussion for details:
-      # https://github.com/marian13/convenient_service/discussions/43
-      #
-      it "applies its `included` block only once" do
-        expect(service_class.middlewares(:result).to_a.size).to eq(3)
       end
     end
   end

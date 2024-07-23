@@ -28,13 +28,12 @@ module ConvenientService
           include Configs::Fallbacks
           include Configs::Inspect
           include Configs::RSpec
+          include Configs::ShortSyntax
 
           concerns do
             use ConvenientService::Plugins::Common::CachesConstructorArguments::Concern
             use ConvenientService::Plugins::Common::CanBeCopied::Concern
             use ConvenientService::Plugins::Service::CanRecalculateResult::Concern
-            use ConvenientService::Plugins::Service::HasJSendResultShortSyntax::Concern
-            use ConvenientService::Plugins::Service::HasJSendResultStatusCheckShortSyntax::Concern
 
             use ConvenientService::Plugins::Service::HasMermaidFlowchart::Concern
           end
@@ -64,21 +63,8 @@ module ConvenientService
             use ConvenientService::Plugins::Common::EnsuresNegatedJSendResult::Middleware
           end
 
-          middlewares :success do
-            use ConvenientService::Plugins::Service::HasJSendResultShortSyntax::Success::Middleware
-          end
-
-          middlewares :failure do
-            use ConvenientService::Plugins::Service::HasJSendResultShortSyntax::Failure::Middleware
-          end
-
-          middlewares :error do
-            use ConvenientService::Plugins::Service::HasJSendResultShortSyntax::Error::Middleware
-          end
-
           class self::Result
             concerns do
-              use ConvenientService::Plugins::Common::HasJSendResultDuckShortSyntax::Concern
               use ConvenientService::Plugins::Result::CanRecalculateResult::Concern
 
               use ConvenientService::Plugins::Result::HasNegatedResult::Concern
@@ -135,10 +121,6 @@ module ConvenientService
           end
 
           class self::Step
-            concerns do
-              use ConvenientService::Plugins::Common::HasJSendResultDuckShortSyntax::Concern
-            end
-
             middlewares :result do
               insert_after \
                 ConvenientService::Plugins::Step::HasResult::Middleware,

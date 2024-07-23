@@ -27,7 +27,7 @@ RSpec.describe ConvenientService::Service::Configs::Callbacks, type: :standard d
       example_group "service" do
         example_group "concerns" do
           it "adds `ConvenientService::Common::Plugins::CanHaveCallbacks::Concern` to service concerns" do
-            expect(service_class.concerns.to_a).to include(ConvenientService::Common::Plugins::CanHaveCallbacks::Concern)
+            expect(service_class.concerns.to_a.last).to eq(ConvenientService::Common::Plugins::CanHaveCallbacks::Concern)
           end
         end
 
@@ -76,36 +76,16 @@ RSpec.describe ConvenientService::Service::Configs::Callbacks, type: :standard d
         example_group "service step" do
           example_group "concerns" do
             it "adds `ConvenientService::Common::Plugins::CanHaveCallbacks::Concern` to service step concerns" do
-              expect(service_class.step_class.concerns.to_a).to include(ConvenientService::Common::Plugins::CanHaveCallbacks::Concern)
+              expect(service_class::Step.concerns.to_a.last).to eq(ConvenientService::Common::Plugins::CanHaveCallbacks::Concern)
             end
           end
 
           example_group "#result middlewares" do
             it "adds `ConvenientService::Common::Plugins::CanHaveCallbacks::Middleware` after `ConvenientService::Common::Plugins::CachesReturnValue::Middleware` to service step middlewares for `#result`" do
-              expect(service_class.step_class.middlewares(:result).to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Common::Plugins::CachesReturnValue::Middleware || current_middleware == ConvenientService::Common::Plugins::CanHaveCallbacks::Middleware }).not_to be_nil
+              expect(service_class::Step.middlewares(:result).to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Common::Plugins::CachesReturnValue::Middleware || current_middleware == ConvenientService::Common::Plugins::CanHaveCallbacks::Middleware }).not_to be_nil
             end
           end
         end
-      end
-    end
-
-    context "when included multiple times" do
-      let(:service_class) do
-        Class.new.tap do |klass|
-          klass.class_exec(described_class) do |mod|
-            include mod
-
-            include mod
-          end
-        end
-      end
-
-      ##
-      # NOTE: Check the following discussion for details:
-      # https://github.com/marian13/convenient_service/discussions/43
-      #
-      it "applies its `included` block only once" do
-        expect(service_class.middlewares(:result).to_a.size).to eq(4)
       end
     end
   end

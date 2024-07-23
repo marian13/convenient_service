@@ -12,5 +12,6 @@ RSpec.describe "convenient_service/service/configs/aliases", type: :standard do
   specify { expect(ConvenientService::FaultTolerance::Config).to eq(ConvenientService::Service::Configs::FaultTolerance) }
   specify { expect(ConvenientService::Inspect::Config).to eq(ConvenientService::Service::Configs::Inspect) }
   specify { expect(ConvenientService::RSpec::Config).to eq(ConvenientService::Service::Configs::RSpec) }
+  specify { expect(ConvenientService::ShortSyntax::Config).to eq(ConvenientService::Service::Configs::ShortSyntax) }
 end
 # rubocop:enable RSpec/DescribeClass
