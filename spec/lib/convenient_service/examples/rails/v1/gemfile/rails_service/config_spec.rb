@@ -29,21 +29,21 @@ RSpec.describe ConvenientService::Examples::Rails::V1::Gemfile::RailsService::Co
       example_group "service" do
         example_group "concerns" do
           it "adds `ConvenientService::Plugins::Common::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment::Concern` to service concerns" do
-            expect(service_class.concerns.to_a).to include(ConvenientService::Plugins::Common::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment::Concern)
+            expect(service_class.concerns.to_a[-3]).to eq(ConvenientService::Plugins::Common::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment::Concern)
           end
 
           it "adds `ConvenientService::Plugins::Common::HasAttributes::UsingActiveModelAttributes::Concern` to service concerns" do
-            expect(service_class.concerns.to_a).to include(ConvenientService::Plugins::Common::HasAttributes::UsingActiveModelAttributes::Concern)
+            expect(service_class.concerns.to_a[-2]).to eq(ConvenientService::Plugins::Common::HasAttributes::UsingActiveModelAttributes::Concern)
           end
 
           it "adds `ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingActiveModelValidations::Concern` to service concerns" do
-            expect(service_class.concerns.to_a).to include(ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingActiveModelValidations::Concern)
+            expect(service_class.concerns.to_a.last).to eq(ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingActiveModelValidations::Concern)
           end
         end
 
         example_group "#initialize middlewares" do
           it "adds `ConvenientService::Plugins::Common::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment::Middleware` to service #initialize middlewares" do
-            expect(service_class.middlewares(:initialize).to_a).to include(ConvenientService::Plugins::Common::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment::Middleware)
+            expect(service_class.middlewares(:initialize).to_a.last).to eq(ConvenientService::Plugins::Common::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment::Middleware)
           end
         end
 
