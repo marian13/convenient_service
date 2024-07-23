@@ -27,7 +27,7 @@ module ConvenientService
             # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
             #
             def result_from_dry_validation
-              entity.public_send(
+              @result_from_dry_validation ||= entity.public_send(
                 status,
                 data: dry_validation_errors,
                 message: dry_validation_errors.first.to_a.map(&:to_s).join(" "),
