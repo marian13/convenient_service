@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require_relative "arguments/exceptions"
 require_relative "arguments/null_arguments"
 
 module ConvenientService
@@ -67,6 +68,17 @@ module ConvenientService
       #
       def none?
         !any?
+      end
+
+      ##
+      # @return [Object] Can be any type.
+      #
+      def [](key)
+        case key
+        when Integer then args[key]
+        when Symbol then kwargs[key]
+        else ::ConvenientService.raise Exceptions::InvalidKeyType.new(key: key)
+        end
       end
 
       ##

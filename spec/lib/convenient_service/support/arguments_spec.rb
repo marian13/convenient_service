@@ -6,6 +6,10 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Support::Arguments, type: :standard do
+  include ConvenientService::RSpec::Helpers::IgnoringException
+
+  include ConvenientService::RSpec::Matchers::DelegateTo
+
   let(:arguments) { described_class.new(*args, **kwargs, &block) }
 
   let(:args) { [:foo] }
@@ -121,6 +125,55 @@ RSpec.describe ConvenientService::Support::Arguments, type: :standard do
 
         it "returns `true`" do
           expect(arguments.none?).to eq(true)
+        end
+      end
+    end
+
+    describe "#[]" do
+      context "when `key` is NOT valid" do
+        let(:key) { "abc" }
+
+        let(:exception_message) do
+          <<~TEXT
+            `#[]` accepts only `Integer` and `String` keys.
+
+            Key `#{key.inspect}` has `#{key.class}` class.
+          TEXT
+        end
+
+        it "raises `ConvenientService::Support::Arguments::Exceptions::InvalidKeyType`" do
+          expect { arguments[key] }
+            .to raise_error(ConvenientService::Support::Arguments::Exceptions::InvalidKeyType)
+            .with_message(exception_message)
+        end
+
+        specify do
+          expect { ignoring_exception(ConvenientService::Support::Arguments::Exceptions::InvalidKeyType) { arguments[key] } }
+            .to delegate_to(ConvenientService, :raise)
+        end
+      end
+
+      context "when `key` is valid" do
+        context "when `key` is integer" do
+          let(:key) { 0 }
+
+          specify do
+            expect { arguments[key] }
+              .to delegate_to(arguments.args, :[])
+              .with_arguments(key)
+              .and_return_its_value
+          end
+        end
+
+        context "when `key` is symbol" do
+          let(:key) { :foo }
+
+          specify do
+            expect { arguments[key] }
+              .to delegate_to(arguments.kwargs, :[])
+              .with_arguments(key)
+              .and_return_its_value
+          end
         end
       end
     end
