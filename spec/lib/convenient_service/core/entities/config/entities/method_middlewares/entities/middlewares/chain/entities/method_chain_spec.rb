@@ -11,7 +11,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
   let(:chain_result) { chain_instance.next(*args, **kwargs, &block) }
   let(:chain_instance) { described_class.new(stack: stack, env: env) }
 
-  let(:stack) { ConvenientService::Support::Middleware::StackBuilder.create }
+  let(:stack) { ConvenientService::Support::Middleware::StackBuilder.new }
 
   let(:env) { {entity: double, method: :result, args: [], kwargs: {}, block: nil} }
 
@@ -48,7 +48,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
         end
 
         context "when `other` has different `stack`" do
-          let(:other) { described_class.new(stack: ConvenientService::Support::Middleware::StackBuilder.create.use(proc { :foo })) }
+          let(:other) { described_class.new(stack: ConvenientService::Support::Middleware::StackBuilder.new.use(proc { :foo })) }
 
           it "returns `false`" do
             expect(chain_instance == other).to eq(false)

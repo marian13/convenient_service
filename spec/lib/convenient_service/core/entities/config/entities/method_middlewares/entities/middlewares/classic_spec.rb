@@ -7,7 +7,7 @@ require "convenient_service"
 RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Classic, type: :standard do
   let(:middleware_instance) { described_class.new(stack) }
 
-  let(:stack) { ConvenientService::Support::Middleware::StackBuilder.create }
+  let(:stack) { ConvenientService::Support::Middleware::StackBuilder.new }
   let(:env) { {foo: :bar} }
 
   example_group "inheritance" do

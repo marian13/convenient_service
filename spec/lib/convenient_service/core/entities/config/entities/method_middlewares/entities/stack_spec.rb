@@ -10,7 +10,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
 
   let(:stack) { described_class.new(name: name, plain_stack: plain_stack) }
   let(:name) { "stack name" }
-  let(:plain_stack) { ConvenientService::Support::Middleware::StackBuilder.create(name: name) }
+  let(:plain_stack) { ConvenientService::Support::Middleware::StackBuilder.new(name: name) }
   let(:env) { {foo: :bar} }
 
   let(:index) { 0 }
@@ -35,7 +35,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
     describe ".new" do
       context "when `plain_stack` is NOT `nil`" do
         let(:stack) { described_class.new(name: name, plain_stack: custom_plain_stack) }
-        let(:custom_plain_stack) { ConvenientService::Support::Middleware::StackBuilder.create(name: "custom plain stack") }
+        let(:custom_plain_stack) { ConvenientService::Support::Middleware::StackBuilder.new(name: "custom plain stack") }
 
         ##
         # NOTE: Since `plain_stack` reader is protected, indirect expectation is used.
@@ -49,14 +49,14 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
 
       context "when `plain_stack` is `nil`" do
         let(:stack) { described_class.new(name: name, plain_stack: nil) }
-        let(:default_plain_stack) { ConvenientService::Support::Middleware::StackBuilder.create(name: name) }
+        let(:default_plain_stack) { ConvenientService::Support::Middleware::StackBuilder.new(name: name) }
 
         ##
         # NOTE: Since `plain_stack` reader is protected, indirect expectation is used.
         #
-        it "defaults to `ConvenientService::Support::Middleware::StackBuilder.create(name: name)`" do
+        it "defaults to `ConvenientService::Support::Middleware::StackBuilder.new(name: name)`" do
           expect { stack }
-            .to delegate_to(ConvenientService::Support::Middleware::StackBuilder, :create)
+            .to delegate_to(ConvenientService::Support::Middleware::StackBuilder, :new)
             .with_arguments(name: name)
         end
       end
@@ -417,7 +417,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
         end
 
         context "when `other` has different `plain_stack`" do
-          let(:other) { described_class.new(plain_stack: ConvenientService::Support::Middleware::StackBuilder.create(name: name).tap { |stack| stack.use middleware }) }
+          let(:other) { described_class.new(plain_stack: ConvenientService::Support::Middleware::StackBuilder.new(name: name).tap { |stack| stack.use middleware }) }
 
           it "returns `false`" do
             expect(stack == other).to eq(false)

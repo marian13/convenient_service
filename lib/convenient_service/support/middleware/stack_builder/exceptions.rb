@@ -12,7 +12,7 @@ module ConvenientService
             #
             def initialize_with_kwargs(backend:)
               message = <<~TEXT
-                Middleware backend `#{backend}` is NOT supported.
+                Middleware backend `#{backend.inspect}` is NOT supported.
 
                 Supported backends are #{printable_backends}.
               TEXT
@@ -26,7 +26,7 @@ module ConvenientService
             # @return [String]
             #
             def printable_backends
-              Constants::Backends::ALL.map { |backend| "`:#{backend}`" }.join(", ")
+              Constants::Backends::ALL.map { |backend| "`#{backend.inspect}`" }.join(", ")
             end
           end
         end

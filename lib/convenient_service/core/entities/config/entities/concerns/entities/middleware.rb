@@ -91,6 +91,9 @@ module ConvenientService
                 ##
                 # @return [String]
                 #
+                # @internal
+                #   NOTE: `inspect` must be public. Otherwise `irb` ignores it.
+                #
                 def inspect
                   "#<ConcernMiddleware(#{concern})>"
                 end

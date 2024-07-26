@@ -14,7 +14,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns::En
 
   let(:mod) { Module.new }
 
-  let(:stack) { ConvenientService::Support::Middleware::StackBuilder.create }
+  let(:stack) { ConvenientService::Support::Middleware::StackBuilder.new }
   let(:env) { {klass: klass, method: :result, args: args, kwargs: kwargs, block: block} }
 
   let(:klass) { Class.new }
@@ -132,6 +132,12 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns::En
         end
       end
     end
+
+    describe ".inspect" do
+      it "returns inspect representation" do
+        expect(middleware_class.inspect).to eq("ConcernMiddleware(#{mod})")
+      end
+    end
   end
 
   example_group "instance methods" do
@@ -147,6 +153,12 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns::En
           .to delegate_to(stack, :call)
           .with_arguments(env)
           .and_return_its_value
+      end
+    end
+
+    describe "#inspect" do
+      it "returns inspect representation" do
+        expect(middleware_instance.inspect).to eq("#<ConcernMiddleware(#{mod})>")
       end
     end
   end

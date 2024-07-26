@@ -18,7 +18,7 @@ module ConvenientService
                 #   @return [void]
                 #
                 def initialize(name: nil, plain_stack: nil)
-                  @plain_stack = plain_stack || Support::Middleware::StackBuilder.create(name: name, backend: :ruby_middleware)
+                  @plain_stack = plain_stack || Support::Middleware::StackBuilder.by(Support::Middleware::StackBuilder::Constants::Backends::RUBY_MIDDLEWARE).new(name: name)
                 end
 
                 ##

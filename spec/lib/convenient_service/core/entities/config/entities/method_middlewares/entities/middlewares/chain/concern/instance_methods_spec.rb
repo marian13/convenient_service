@@ -21,7 +21,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
       end
     end
 
-    let(:stack) { ConvenientService::Support::Middleware::StackBuilder.create }
+    let(:stack) { ConvenientService::Support::Middleware::StackBuilder.new }
     let(:env) { {entity: double, method: :result, args: args, kwargs: kwargs, block: block} }
 
     let(:args) { [:foo] }

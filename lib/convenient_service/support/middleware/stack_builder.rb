@@ -10,16 +10,23 @@ module ConvenientService
       class StackBuilder
         class << self
           ##
-          # @param backend [Symbol]
           # @return [ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::RubyMiddleware, ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Rack]
+          #
+          def new(...)
+            by(Constants::Backends::DEFAULT).new(...)
+          end
+
+          ##
+          # @param backend [Symbol]
+          # @return [Class]
           # @raise [ConvenientService::Support::Middleware::StackBuilder::Exceptions::NotSupportedBackend]
           #
-          def create(*args, backend: Constants::Backends::DEFAULT, **kwargs)
+          def by(backend)
             case backend
             when Constants::Backends::RUBY_MIDDLEWARE
-              Entities::Builders::RubyMiddleware.new(*args, **kwargs)
+              Entities::Builders::RubyMiddleware
             when Constants::Backends::RACK
-              Entities::Builders::Rack.new(*args, **kwargs)
+              Entities::Builders::Rack
             else
               ::ConvenientService.raise Exceptions::NotSupportedBackend.new(backend: backend)
             end

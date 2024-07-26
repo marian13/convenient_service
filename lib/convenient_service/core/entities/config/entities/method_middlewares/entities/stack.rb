@@ -22,7 +22,7 @@ module ConvenientService
                 #   @return [void]
                 #
                 def initialize(name: nil, plain_stack: nil)
-                  @plain_stack = plain_stack || Support::Middleware::StackBuilder.create(name: name)
+                  @plain_stack = plain_stack || Support::Middleware::StackBuilder.new(name: name)
                 end
 
                 ##
