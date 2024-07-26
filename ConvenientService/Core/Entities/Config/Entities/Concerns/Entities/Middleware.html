@@ -205,6 +205,28 @@
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#inspect-class_method" title="inspect (class method)">.<strong>inspect</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#original_two_equals-class_method" title="original_two_equals (class method)">.<strong>original_two_equals</strong>  &#x21d2; Boolean </a>
     
 
@@ -266,6 +288,28 @@
   
   
     <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#inspect-instance_method" title="#inspect (instance method)">#<strong>inspect</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
   
   
   
@@ -568,6 +612,58 @@
 </div>
     
       <div class="method_details ">
+  <h3 class="signature " id="inspect-class_method">
+  
+    .<strong>inspect</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+74
+75
+76</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/concerns/entities/middleware.rb', line 74</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_inspect'>inspect</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>ConcernMiddleware(</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_concern'>concern</span><span class='embexpr_end'>}</span><span class='tstring_content'>)</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
   <h3 class="signature " id="original_two_equals-class_method">
   
     .<strong>original_two_equals</strong>  &#x21d2; <tt>Boolean</tt> 
@@ -678,14 +774,14 @@
       <pre class="lines">
 
 
-78
-79
-80
-81
-82</pre>
+85
+86
+87
+88
+89</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/concerns/entities/middleware.rb', line 78</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/concerns/entities/middleware.rb', line 85</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_env'>env</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_env'>env</span><span class='lbracket'>[</span><span class='symbol'>:klass</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_include'>include</span> <span class='id identifier rubyid_concern'>concern</span>
@@ -697,12 +793,64 @@
 </table>
 </div>
     
+      <div class="method_details ">
+  <h3 class="signature " id="inspect-instance_method">
+  
+    #<strong>inspect</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+94
+95
+96</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/concerns/entities/middleware.rb', line 94</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_inspect'>inspect</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>#&lt;ConcernMiddleware(</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_concern'>concern</span><span class='embexpr_end'>}</span><span class='tstring_content'>)&gt;</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
   </div>
 
 </div>
 
       <div id="footer">
-  Generated on Tue Jul 23 22:24:01 2024 by
+  Generated on Fri Jul 26 18:35:16 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.36 (ruby-3.2.4).
 </div>

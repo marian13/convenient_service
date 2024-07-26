@@ -255,7 +255,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#insert-instance_method" title="#insert (instance method)">#<strong>insert</strong>(index_or_concern, concern, *args, &amp;block)  &#x21d2; ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack </a>
+      <a href="#insert-instance_method" title="#insert (instance method)">#<strong>insert</strong>(index_or_concern, concern)  &#x21d2; ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack </a>
     
 
     
@@ -279,7 +279,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#insert_after-instance_method" title="#insert_after (instance method)">#<strong>insert_after</strong>(index_or_concern, concern, *args, &amp;block)  &#x21d2; ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack </a>
+      <a href="#insert_after-instance_method" title="#insert_after (instance method)">#<strong>insert_after</strong>(index_or_concern, concern)  &#x21d2; ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack </a>
     
 
     
@@ -301,7 +301,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#insert_after_each-instance_method" title="#insert_after_each (instance method)">#<strong>insert_after_each</strong>(concern, *args, &amp;block)  &#x21d2; ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack </a>
+      <a href="#insert_after_each-instance_method" title="#insert_after_each (instance method)">#<strong>insert_after_each</strong>(concern)  &#x21d2; ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack </a>
     
 
     
@@ -323,7 +323,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#insert_before_each-instance_method" title="#insert_before_each (instance method)">#<strong>insert_before_each</strong>(concern, *args, &amp;block)  &#x21d2; ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack </a>
+      <a href="#insert_before_each-instance_method" title="#insert_before_each (instance method)">#<strong>insert_before_each</strong>(concern)  &#x21d2; ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack </a>
     
 
     
@@ -367,7 +367,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#replace-instance_method" title="#replace (instance method)">#<strong>replace</strong>(index_or_concern, concern, *args, &amp;block)  &#x21d2; ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack </a>
+      <a href="#replace-instance_method" title="#replace (instance method)">#<strong>replace</strong>(index_or_concern, concern)  &#x21d2; ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack </a>
     
 
     
@@ -411,7 +411,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#unshift-instance_method" title="#unshift (instance method)">#<strong>unshift</strong>(concern, *args, &amp;block)  &#x21d2; ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack </a>
+      <a href="#unshift-instance_method" title="#unshift (instance method)">#<strong>unshift</strong>(concern)  &#x21d2; ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack </a>
     
 
     
@@ -435,7 +435,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#use-instance_method" title="#use (instance method)">#<strong>use</strong>(concern, *args, &amp;block)  &#x21d2; ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack </a>
+      <a href="#use-instance_method" title="#use (instance method)">#<strong>use</strong>(concern)  &#x21d2; ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack </a>
     
 
     
@@ -564,7 +564,7 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/concerns/entities/stack.rb', line 20</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>name:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>plain_stack:</span> <span class='kw'>nil</span><span class='rparen'>)</span>
-  <span class='ivar'>@plain_stack</span> <span class='op'>=</span> <span class='id identifier rubyid_plain_stack'>plain_stack</span> <span class='op'>||</span> <span class='const'><span class='object_link'><a href="../../../../../../Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../Support/Middleware.html" title="ConvenientService::Support::Middleware (module)">Middleware</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../Support/Middleware/StackBuilder.html" title="ConvenientService::Support::Middleware::StackBuilder (class)">StackBuilder</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../../../../../Support/Middleware/StackBuilder.html#initialize-instance_method" title="ConvenientService::Support::Middleware::StackBuilder#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>name:</span> <span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
+  <span class='ivar'>@plain_stack</span> <span class='op'>=</span> <span class='id identifier rubyid_plain_stack'>plain_stack</span> <span class='op'>||</span> <span class='const'><span class='object_link'><a href="../../../../../../Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../Support/Middleware.html" title="ConvenientService::Support::Middleware (module)">Middleware</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../Support/Middleware/StackBuilder.html" title="ConvenientService::Support::Middleware::StackBuilder (class)">StackBuilder</a></span></span><span class='period'>.</span><span class='id identifier rubyid_create'><span class='object_link'><a href="../../../../../../Support/Middleware/StackBuilder.html#create-class_method" title="ConvenientService::Support::Middleware::StackBuilder.create (method)">create</a></span></span><span class='lparen'>(</span><span class='label'>name:</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='label'>backend:</span> <span class='symbol'>:ruby_middleware</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -630,16 +630,16 @@
       <pre class="lines">
 
 
-187
-188
-189
-190
-191
-192
-193</pre>
+175
+176
+177
+178
+179
+180
+181</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/concerns/entities/stack.rb', line 187</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/concerns/entities/stack.rb', line 175</span>
 
 <span class='kw'>def</span> <span class='op'>==</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='rparen'>)</span>
@@ -796,14 +796,14 @@
       <pre class="lines">
 
 
-151
-152
-153
-154
-155</pre>
+141
+142
+143
+144
+145</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/concerns/entities/stack.rb', line 151</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/concerns/entities/stack.rb', line 141</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='id identifier rubyid_index_or_concern'>index_or_concern</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_plain_stack'>plain_stack</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='id identifier rubyid_cast'>cast</span><span class='lparen'>(</span><span class='id identifier rubyid_index_or_concern'>index_or_concern</span><span class='rparen'>)</span><span class='rparen'>)</span>
@@ -904,15 +904,15 @@
       <pre class="lines">
 
 
-179
-180
-181</pre>
+167
+168
+169</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/concerns/entities/stack.rb', line 179</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/concerns/entities/stack.rb', line 167</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_empty?'>empty?</span>
-  <span class='id identifier rubyid_to_a'>to_a</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+  <span class='id identifier rubyid_plain_stack'>plain_stack</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -922,7 +922,7 @@
       <div class="method_details ">
   <h3 class="signature " id="insert-instance_method">
   
-    #<strong>insert</strong>(index_or_concern, concern, *args, &amp;block)  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack (class)">ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack</a></span></tt> 
+    #<strong>insert</strong>(index_or_concern, concern)  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack (class)">ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack</a></span></tt> 
   
 
   
@@ -964,28 +964,6 @@
       
     </li>
   
-    <li>
-      
-        <span class='name'>args</span>
-      
-      
-        <span class='type'>(<tt>Array&lt;Object&gt;</tt>)</span>
-      
-      
-      
-    </li>
-  
-    <li>
-      
-        <span class='name'>block</span>
-      
-      
-        <span class='type'>(<tt>Proc</tt>, <tt>nil</tt>)</span>
-      
-      
-      
-    </li>
-  
 </ul>
 
 <p class="tag_title">Returns:</p>
@@ -1015,17 +993,17 @@
       <pre class="lines">
 
 
-77
-78
-79
-80
-81</pre>
+73
+74
+75
+76
+77</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/concerns/entities/stack.rb', line 77</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/concerns/entities/stack.rb', line 73</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_insert'>insert</span><span class='lparen'>(</span><span class='id identifier rubyid_index_or_concern'>index_or_concern</span><span class='comma'>,</span> <span class='id identifier rubyid_concern'>concern</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_plain_stack'>plain_stack</span><span class='period'>.</span><span class='id identifier rubyid_insert'>insert</span><span class='lparen'>(</span><span class='id identifier rubyid_cast'>cast</span><span class='lparen'>(</span><span class='id identifier rubyid_index_or_concern'>index_or_concern</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='id identifier rubyid_cast'>cast</span><span class='lparen'>(</span><span class='id identifier rubyid_concern'>concern</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_insert'>insert</span><span class='lparen'>(</span><span class='id identifier rubyid_index_or_concern'>index_or_concern</span><span class='comma'>,</span> <span class='id identifier rubyid_concern'>concern</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_plain_stack'>plain_stack</span><span class='period'>.</span><span class='id identifier rubyid_insert'>insert</span><span class='lparen'>(</span><span class='id identifier rubyid_cast'>cast</span><span class='lparen'>(</span><span class='id identifier rubyid_index_or_concern'>index_or_concern</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='id identifier rubyid_cast'>cast</span><span class='lparen'>(</span><span class='id identifier rubyid_concern'>concern</span><span class='rparen'>)</span><span class='rparen'>)</span>
 
   <span class='kw'>self</span>
 <span class='kw'>end</span></pre>
@@ -1037,7 +1015,7 @@
       <div class="method_details ">
   <h3 class="signature " id="insert_after-instance_method">
   
-    #<strong>insert_after</strong>(index_or_concern, concern, *args, &amp;block)  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack (class)">ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack</a></span></tt> 
+    #<strong>insert_after</strong>(index_or_concern, concern)  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack (class)">ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack</a></span></tt> 
   
 
   
@@ -1075,28 +1053,6 @@
       
     </li>
   
-    <li>
-      
-        <span class='name'>args</span>
-      
-      
-        <span class='type'>(<tt>Array&lt;Object&gt;</tt>)</span>
-      
-      
-      
-    </li>
-  
-    <li>
-      
-        <span class='name'>block</span>
-      
-      
-        <span class='type'>(<tt>Proc</tt>, <tt>nil</tt>)</span>
-      
-      
-      
-    </li>
-  
 </ul>
 
 <p class="tag_title">Returns:</p>
@@ -1126,17 +1082,17 @@
       <pre class="lines">
 
 
-98
-99
-100
-101
-102</pre>
+92
+93
+94
+95
+96</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/concerns/entities/stack.rb', line 98</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/concerns/entities/stack.rb', line 92</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_insert_after'>insert_after</span><span class='lparen'>(</span><span class='id identifier rubyid_index_or_concern'>index_or_concern</span><span class='comma'>,</span> <span class='id identifier rubyid_concern'>concern</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_plain_stack'>plain_stack</span><span class='period'>.</span><span class='id identifier rubyid_insert_after'>insert_after</span><span class='lparen'>(</span><span class='id identifier rubyid_cast'>cast</span><span class='lparen'>(</span><span class='id identifier rubyid_index_or_concern'>index_or_concern</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='id identifier rubyid_cast'>cast</span><span class='lparen'>(</span><span class='id identifier rubyid_concern'>concern</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_insert_after'>insert_after</span><span class='lparen'>(</span><span class='id identifier rubyid_index_or_concern'>index_or_concern</span><span class='comma'>,</span> <span class='id identifier rubyid_concern'>concern</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_plain_stack'>plain_stack</span><span class='period'>.</span><span class='id identifier rubyid_insert_after'>insert_after</span><span class='lparen'>(</span><span class='id identifier rubyid_cast'>cast</span><span class='lparen'>(</span><span class='id identifier rubyid_index_or_concern'>index_or_concern</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='id identifier rubyid_cast'>cast</span><span class='lparen'>(</span><span class='id identifier rubyid_concern'>concern</span><span class='rparen'>)</span><span class='rparen'>)</span>
 
   <span class='kw'>self</span>
 <span class='kw'>end</span></pre>
@@ -1148,7 +1104,7 @@
       <div class="method_details ">
   <h3 class="signature " id="insert_after_each-instance_method">
   
-    #<strong>insert_after_each</strong>(concern, *args, &amp;block)  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack (class)">ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack</a></span></tt> 
+    #<strong>insert_after_each</strong>(concern)  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack (class)">ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack</a></span></tt> 
   
 
   
@@ -1204,17 +1160,17 @@
       <pre class="lines">
 
 
-124
-125
-126
-127
-128</pre>
+116
+117
+118
+119
+120</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/concerns/entities/stack.rb', line 124</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/concerns/entities/stack.rb', line 116</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_insert_after_each'>insert_after_each</span><span class='lparen'>(</span><span class='id identifier rubyid_concern'>concern</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_plain_stack'>plain_stack</span><span class='period'>.</span><span class='id identifier rubyid_insert_after_each'>insert_after_each</span><span class='lparen'>(</span><span class='id identifier rubyid_cast'>cast</span><span class='lparen'>(</span><span class='id identifier rubyid_concern'>concern</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_insert_after_each'>insert_after_each</span><span class='lparen'>(</span><span class='id identifier rubyid_concern'>concern</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_plain_stack'>plain_stack</span><span class='period'>.</span><span class='id identifier rubyid_insert_after_each'>insert_after_each</span><span class='lparen'>(</span><span class='id identifier rubyid_cast'>cast</span><span class='lparen'>(</span><span class='id identifier rubyid_concern'>concern</span><span class='rparen'>)</span><span class='rparen'>)</span>
 
   <span class='kw'>self</span>
 <span class='kw'>end</span></pre>
@@ -1226,7 +1182,7 @@
       <div class="method_details ">
   <h3 class="signature " id="insert_before_each-instance_method">
   
-    #<strong>insert_before_each</strong>(concern, *args, &amp;block)  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack (class)">ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack</a></span></tt> 
+    #<strong>insert_before_each</strong>(concern)  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack (class)">ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack</a></span></tt> 
   
 
   
@@ -1248,28 +1204,6 @@
       
       
         <span class='type'>(<tt><span class='object_link'><a href="../../../../../../Support/Concern.html" title="ConvenientService::Support::Concern (module)">ConvenientService::Support::Concern</a></span></tt>, <tt>Module</tt>)</span>
-      
-      
-      
-    </li>
-  
-    <li>
-      
-        <span class='name'>args</span>
-      
-      
-        <span class='type'>(<tt>Array&lt;Object&gt;</tt>)</span>
-      
-      
-      
-    </li>
-  
-    <li>
-      
-        <span class='name'>block</span>
-      
-      
-        <span class='type'>(<tt>Proc</tt>, <tt>nil</tt>)</span>
       
       
       
@@ -1304,17 +1238,17 @@
       <pre class="lines">
 
 
-112
-113
-114
-115
-116</pre>
+104
+105
+106
+107
+108</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/concerns/entities/stack.rb', line 112</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/concerns/entities/stack.rb', line 104</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_insert_before_each'>insert_before_each</span><span class='lparen'>(</span><span class='id identifier rubyid_concern'>concern</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_plain_stack'>plain_stack</span><span class='period'>.</span><span class='id identifier rubyid_insert_before_each'>insert_before_each</span><span class='lparen'>(</span><span class='id identifier rubyid_cast'>cast</span><span class='lparen'>(</span><span class='id identifier rubyid_concern'>concern</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_insert_before_each'>insert_before_each</span><span class='lparen'>(</span><span class='id identifier rubyid_concern'>concern</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_plain_stack'>plain_stack</span><span class='period'>.</span><span class='id identifier rubyid_insert_before_each'>insert_before_each</span><span class='lparen'>(</span><span class='id identifier rubyid_cast'>cast</span><span class='lparen'>(</span><span class='id identifier rubyid_concern'>concern</span><span class='rparen'>)</span><span class='rparen'>)</span>
 
   <span class='kw'>self</span>
 <span class='kw'>end</span></pre>
@@ -1378,7 +1312,7 @@
       <div class="method_details ">
   <h3 class="signature " id="replace-instance_method">
   
-    #<strong>replace</strong>(index_or_concern, concern, *args, &amp;block)  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack (class)">ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack</a></span></tt> 
+    #<strong>replace</strong>(index_or_concern, concern)  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack (class)">ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack</a></span></tt> 
   
 
   
@@ -1416,28 +1350,6 @@
       
     </li>
   
-    <li>
-      
-        <span class='name'>args</span>
-      
-      
-        <span class='type'>(<tt>Array&lt;Object&gt;</tt>)</span>
-      
-      
-      
-    </li>
-  
-    <li>
-      
-        <span class='name'>block</span>
-      
-      
-        <span class='type'>(<tt>Proc</tt>, <tt>nil</tt>)</span>
-      
-      
-      
-    </li>
-  
 </ul>
 
 <p class="tag_title">Returns:</p>
@@ -1467,17 +1379,17 @@
       <pre class="lines">
 
 
-139
-140
-141
-142
-143</pre>
+129
+130
+131
+132
+133</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/concerns/entities/stack.rb', line 139</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/concerns/entities/stack.rb', line 129</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_replace'>replace</span><span class='lparen'>(</span><span class='id identifier rubyid_index_or_concern'>index_or_concern</span><span class='comma'>,</span> <span class='id identifier rubyid_concern'>concern</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_plain_stack'>plain_stack</span><span class='period'>.</span><span class='id identifier rubyid_replace'>replace</span><span class='lparen'>(</span><span class='id identifier rubyid_cast'>cast</span><span class='lparen'>(</span><span class='id identifier rubyid_index_or_concern'>index_or_concern</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='id identifier rubyid_cast'>cast</span><span class='lparen'>(</span><span class='id identifier rubyid_concern'>concern</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_replace'>replace</span><span class='lparen'>(</span><span class='id identifier rubyid_index_or_concern'>index_or_concern</span><span class='comma'>,</span> <span class='id identifier rubyid_concern'>concern</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_plain_stack'>plain_stack</span><span class='period'>.</span><span class='id identifier rubyid_replace'>replace</span><span class='lparen'>(</span><span class='id identifier rubyid_cast'>cast</span><span class='lparen'>(</span><span class='id identifier rubyid_index_or_concern'>index_or_concern</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='id identifier rubyid_cast'>cast</span><span class='lparen'>(</span><span class='id identifier rubyid_concern'>concern</span><span class='rparen'>)</span><span class='rparen'>)</span>
 
   <span class='kw'>self</span>
 <span class='kw'>end</span></pre>
@@ -1523,12 +1435,12 @@
       <pre class="lines">
 
 
-198
-199
-200</pre>
+186
+187
+188</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/concerns/entities/stack.rb', line 198</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/concerns/entities/stack.rb', line 186</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_a'>to_a</span>
   <span class='id identifier rubyid_plain_stack'>plain_stack</span><span class='period'>.</span><span class='id identifier rubyid_to_a'>to_a</span>
@@ -1541,7 +1453,7 @@
       <div class="method_details ">
   <h3 class="signature " id="unshift-instance_method">
   
-    #<strong>unshift</strong>(concern, *args, &amp;block)  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack (class)">ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack</a></span></tt> 
+    #<strong>unshift</strong>(concern)  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack (class)">ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack</a></span></tt> 
   
 
   
@@ -1572,28 +1484,6 @@
       
     </li>
   
-    <li>
-      
-        <span class='name'>args</span>
-      
-      
-        <span class='type'>(<tt>Array&lt;Object&gt;</tt>)</span>
-      
-      
-      
-    </li>
-  
-    <li>
-      
-        <span class='name'>block</span>
-      
-      
-        <span class='type'>(<tt>Proc</tt>, <tt>nil</tt>)</span>
-      
-      
-      
-    </li>
-  
 </ul>
 
 <p class="tag_title">Returns:</p>
@@ -1616,17 +1506,17 @@
       <pre class="lines">
 
 
+55
+56
 57
 58
-59
-60
-61</pre>
+59</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/concerns/entities/stack.rb', line 57</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/concerns/entities/stack.rb', line 55</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_unshift'>unshift</span><span class='lparen'>(</span><span class='id identifier rubyid_concern'>concern</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_plain_stack'>plain_stack</span><span class='period'>.</span><span class='id identifier rubyid_unshift'>unshift</span><span class='lparen'>(</span><span class='id identifier rubyid_cast'>cast</span><span class='lparen'>(</span><span class='id identifier rubyid_concern'>concern</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_unshift'>unshift</span><span class='lparen'>(</span><span class='id identifier rubyid_concern'>concern</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_plain_stack'>plain_stack</span><span class='period'>.</span><span class='id identifier rubyid_unshift'>unshift</span><span class='lparen'>(</span><span class='id identifier rubyid_cast'>cast</span><span class='lparen'>(</span><span class='id identifier rubyid_concern'>concern</span><span class='rparen'>)</span><span class='rparen'>)</span>
 
   <span class='kw'>self</span>
 <span class='kw'>end</span></pre>
@@ -1638,7 +1528,7 @@
       <div class="method_details ">
   <h3 class="signature " id="use-instance_method">
   
-    #<strong>use</strong>(concern, *args, &amp;block)  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack (class)">ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack</a></span></tt> 
+    #<strong>use</strong>(concern)  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack (class)">ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack</a></span></tt> 
   
 
   
@@ -1660,28 +1550,6 @@
       
       
         <span class='type'>(<tt><span class='object_link'><a href="../../../../../../Support/Concern.html" title="ConvenientService::Support::Concern (module)">ConvenientService::Support::Concern</a></span></tt>, <tt>Module</tt>)</span>
-      
-      
-      
-    </li>
-  
-    <li>
-      
-        <span class='name'>args</span>
-      
-      
-        <span class='type'>(<tt>Array&lt;Object&gt;</tt>)</span>
-      
-      
-      
-    </li>
-  
-    <li>
-      
-        <span class='name'>block</span>
-      
-      
-        <span class='type'>(<tt>Proc</tt>, <tt>nil</tt>)</span>
       
       
       
@@ -1716,17 +1584,17 @@
       <pre class="lines">
 
 
-170
-171
-172
-173
-174</pre>
+158
+159
+160
+161
+162</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/concerns/entities/stack.rb', line 170</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/concerns/entities/stack.rb', line 158</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_use'>use</span><span class='lparen'>(</span><span class='id identifier rubyid_concern'>concern</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_plain_stack'>plain_stack</span><span class='period'>.</span><span class='id identifier rubyid_use'>use</span><span class='lparen'>(</span><span class='id identifier rubyid_cast'>cast</span><span class='lparen'>(</span><span class='id identifier rubyid_concern'>concern</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_use'>use</span><span class='lparen'>(</span><span class='id identifier rubyid_concern'>concern</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_plain_stack'>plain_stack</span><span class='period'>.</span><span class='id identifier rubyid_use'>use</span><span class='lparen'>(</span><span class='id identifier rubyid_cast'>cast</span><span class='lparen'>(</span><span class='id identifier rubyid_concern'>concern</span><span class='rparen'>)</span><span class='rparen'>)</span>
 
   <span class='kw'>self</span>
 <span class='kw'>end</span></pre>
@@ -1740,7 +1608,7 @@
 </div>
 
       <div id="footer">
-  Generated on Tue Jul 23 22:24:00 2024 by
+  Generated on Fri Jul 26 18:35:15 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.36 (ruby-3.2.4).
 </div>
