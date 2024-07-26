@@ -11,7 +11,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
   let(:middleware_class) { Class.new(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Base) }
   let(:middleware) { middleware_class.new(stack) }
 
-  let(:stack) { ConvenientService::Support::Middleware::StackBuilder.new }
+  let(:stack) { ConvenientService::Support::Middleware::StackBuilder.create }
   let(:env) { {entity: double, method: :result, args: args, kwargs: kwargs, block: block} }
 
   let(:args) { [:foo] }
@@ -50,7 +50,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
         end
 
         context "when `other` has different `stack`" do
-          let(:other) { middleware_class.new(ConvenientService::Support::Middleware::StackBuilder.new.use(proc { :foo })) }
+          let(:other) { middleware_class.new(ConvenientService::Support::Middleware::StackBuilder.create.use(proc { :foo })) }
 
           it "returns `false`" do
             expect(middleware == other).to eq(false)

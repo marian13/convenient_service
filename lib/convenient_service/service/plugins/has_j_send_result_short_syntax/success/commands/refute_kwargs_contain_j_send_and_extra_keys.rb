@@ -8,7 +8,7 @@ module ConvenientService
           module Commands
             class RefuteKwargsContainJSendAndExtraKeys < Support::Command
               ##
-              # @attribute [r] kwargs
+              # @!attribute [r] kwargs
               #   @return [Hash{Symbol => Object}]
               #
               attr_reader :kwargs

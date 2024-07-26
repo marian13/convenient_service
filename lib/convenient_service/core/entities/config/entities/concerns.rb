@@ -137,7 +137,7 @@ module ConvenientService
             # @return [Array<Module>]
             #
             def plain_concerns
-              stack.to_a.map(&:first).map(&:concern)
+              stack.to_a.map(&:concern)
             end
 
             ##

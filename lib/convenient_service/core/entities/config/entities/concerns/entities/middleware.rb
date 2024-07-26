@@ -67,6 +67,13 @@ module ConvenientService
 
                     concern == other.concern
                   end
+
+                  ##
+                  # @return [String]
+                  #
+                  def inspect
+                    "ConcernMiddleware(#{concern})"
+                  end
                 end
 
                 ##
@@ -79,6 +86,13 @@ module ConvenientService
                   env[:klass].include concern
 
                   @stack.call(env)
+                end
+
+                ##
+                # @return [String]
+                #
+                def inspect
+                  "#<ConcernMiddleware(#{concern})>"
                 end
 
                 private

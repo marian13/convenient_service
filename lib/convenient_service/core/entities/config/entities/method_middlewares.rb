@@ -117,7 +117,7 @@ module ConvenientService
             # @return [Array<ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middleware>]
             #
             def to_a
-              stack.to_a.map(&:first)
+              stack.to_a
             end
 
             protected

@@ -11,7 +11,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
   let(:middleware_class) { Class.new(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Base) }
   let(:middleware) { middleware_class.new(stack) }
 
-  let(:stack) { ConvenientService::Support::Middleware::StackBuilder.new }
+  let(:stack) { ConvenientService::Support::Middleware::StackBuilder.create }
   let(:env) { {entity: double, method: :result, args: args, kwargs: kwargs, block: block} }
 
   let(:args) { [:foo] }

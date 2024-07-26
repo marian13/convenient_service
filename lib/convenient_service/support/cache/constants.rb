@@ -3,7 +3,7 @@
 module ConvenientService
   module Support
     class Cache
-      class Constants
+      module Constants
         module Backends
           ##
           # @return [Symbol]

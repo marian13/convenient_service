@@ -14,7 +14,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns::En
 
   let(:mod) { Module.new }
 
-  let(:stack) { ConvenientService::Support::Middleware::StackBuilder.new }
+  let(:stack) { ConvenientService::Support::Middleware::StackBuilder.create }
   let(:env) { {klass: klass, method: :result, args: args, kwargs: kwargs, block: block} }
 
   let(:klass) { Class.new }

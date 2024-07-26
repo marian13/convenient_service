@@ -18,7 +18,7 @@ module ConvenientService
                 #   @return [void]
                 #
                 def initialize(name: nil, plain_stack: nil)
-                  @plain_stack = plain_stack || Support::Middleware::StackBuilder.new(name: name)
+                  @plain_stack = plain_stack || Support::Middleware::StackBuilder.create(name: name, backend: :ruby_middleware)
                 end
 
                 ##
@@ -50,12 +50,10 @@ module ConvenientService
 
                 ##
                 # @param concern [ConvenientService::Support::Concern, Module]
-                # @param args [Array<Object>]
-                # @param block [Proc, nil]
                 # @return [ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack]
                 #
-                def unshift(concern, *args, &block)
-                  plain_stack.unshift(cast(concern), *args, &block)
+                def unshift(concern)
+                  plain_stack.unshift(cast(concern))
 
                   self
                 end
@@ -68,14 +66,12 @@ module ConvenientService
                 ##
                 # @param index_or_concern [Integer, ConvenientService::Support::Concern, Module]
                 # @param concern [ConvenientService::Support::Concern, Module]
-                # @param args [Array<Object>]
-                # @param block [Proc, nil]
                 # @return [ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack]
                 #
                 # @see https://github.com/marian13/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L88
                 #
-                def insert(index_or_concern, concern, *args, &block)
-                  plain_stack.insert(cast(index_or_concern), cast(concern), *args, &block)
+                def insert(index_or_concern, concern)
+                  plain_stack.insert(cast(index_or_concern), cast(concern))
 
                   self
                 end
@@ -89,28 +85,24 @@ module ConvenientService
                 ##
                 # @param index_or_concern [Integer, ConvenientService::Support::Concern, Module]
                 # @param concern [ConvenientService::Support::Concern, Module]
-                # @param args [Array<Object>]
-                # @param block [Proc, nil]
                 # @return [ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack]
                 #
                 # @see https://github.com/marian13/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L97
                 #
-                def insert_after(index_or_concern, concern, *args, &block)
-                  plain_stack.insert_after(cast(index_or_concern), cast(concern), *args, &block)
+                def insert_after(index_or_concern, concern)
+                  plain_stack.insert_after(cast(index_or_concern), cast(concern))
 
                   self
                 end
 
                 ##
                 # @param concern [ConvenientService::Support::Concern, Module]
-                # @param args [Array<Object>]
-                # @param block [Proc, nil]
                 # @return [ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack]
                 #
                 # @see https://github.com/marian13/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L104
                 #
-                def insert_before_each(concern, *args, &block)
-                  plain_stack.insert_before_each(cast(concern), *args, &block)
+                def insert_before_each(concern)
+                  plain_stack.insert_before_each(cast(concern))
 
                   self
                 end
@@ -121,8 +113,8 @@ module ConvenientService
                 #
                 # @see https://github.com/marian13/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L111
                 #
-                def insert_after_each(concern, *args, &block)
-                  plain_stack.insert_after_each(cast(concern), *args, &block)
+                def insert_after_each(concern)
+                  plain_stack.insert_after_each(cast(concern))
 
                   self
                 end
@@ -130,14 +122,12 @@ module ConvenientService
                 ##
                 # @param index_or_concern [Integer, ConvenientService::Support::Concern, Module]
                 # @param concern [ConvenientService::Support::Concern, Module]
-                # @param args [Array<Object>]
-                # @param block [Proc, nil]
                 # @return [ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack]
                 #
                 # @see https://github.com/marian13/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L118
                 #
-                def replace(index_or_concern, concern, *args, &block)
-                  plain_stack.replace(cast(index_or_concern), cast(concern), *args, &block)
+                def replace(index_or_concern, concern)
+                  plain_stack.replace(cast(index_or_concern), cast(concern))
 
                   self
                 end
@@ -161,14 +151,12 @@ module ConvenientService
 
                 ##
                 # @param concern [ConvenientService::Support::Concern, Module]
-                # @param args [Array<Object>]
-                # @param block [Proc, nil]
                 # @return [ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack]
                 #
                 # @see https://github.com/marian13/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L76
                 #
-                def use(concern, *args, &block)
-                  plain_stack.use(cast(concern), *args, &block)
+                def use(concern)
+                  plain_stack.use(cast(concern))
 
                   self
                 end
@@ -177,7 +165,7 @@ module ConvenientService
                 # @return [Boolean]
                 #
                 def empty?
-                  to_a.empty?
+                  plain_stack.empty?
                 end
 
                 ##

@@ -10,11 +10,8 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns::En
 
   let(:stack) { described_class.new(name: name, plain_stack: plain_stack) }
   let(:name) { "stack name" }
-  let(:plain_stack) { ConvenientService::Support::Middleware::StackBuilder.new(name: name) }
+  let(:plain_stack) { ConvenientService::Support::Middleware::StackBuilder.create(name: name) }
   let(:env) { {foo: :bar} }
-
-  let(:args) { [:foo] }
-  let(:block) { proc { :foo } }
 
   let(:index) { 0 }
   let(:concern) { Module.new }
@@ -27,7 +24,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns::En
     describe ".new" do
       context "when `plain_stack` is NOT `nil`" do
         let(:stack) { described_class.new(name: name, plain_stack: custom_plain_stack) }
-        let(:custom_plain_stack) { ConvenientService::Support::Middleware::StackBuilder.new(name: "custom plain stack") }
+        let(:custom_plain_stack) { ConvenientService::Support::Middleware::StackBuilder.create(name: "custom plain stack") }
 
         ##
         # NOTE: Since `plain_stack` reader is protected, indirect expectation is used.
@@ -41,15 +38,15 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns::En
 
       context "when `plain_stack` is `nil`" do
         let(:stack) { described_class.new(name: name, plain_stack: nil) }
-        let(:default_plain_stack) { ConvenientService::Support::Middleware::StackBuilder.new(name: name) }
+        let(:default_plain_stack) { ConvenientService::Support::Middleware::StackBuilder.create(name: name) }
 
         ##
         # NOTE: Since `plain_stack` reader is protected, indirect expectation is used.
         #
-        it "defaults to `ConvenientService::Support::Middleware::StackBuilder.new(name: name)`" do
+        it "defaults to `ConvenientService::Support::Middleware::StackBuilder.create(name: name)`" do
           expect { stack }
-            .to delegate_to(ConvenientService::Support::Middleware::StackBuilder, :new)
-            .with_arguments(name: name)
+            .to delegate_to(ConvenientService::Support::Middleware::StackBuilder, :create)
+            .with_arguments(name: name, backend: :ruby_middleware)
         end
       end
     end
@@ -108,25 +105,25 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns::En
 
     describe "#unshift" do
       specify do
-        expect { stack.unshift(concern, *args, &block) }
+        expect { stack.unshift(concern) }
           .to delegate_to(plain_stack, :unshift)
-          .with_arguments(middleware, *args, &block)
+          .with_arguments(middleware)
       end
 
       it "returns stack" do
-        expect(stack.unshift(concern, *args, &block)).to eq(stack)
+        expect(stack.unshift(concern)).to eq(stack)
       end
     end
 
     describe "#prepend" do
       specify do
-        expect { stack.prepend(concern, *args, &block) }
+        expect { stack.prepend(concern) }
           .to delegate_to(plain_stack, :unshift)
-          .with_arguments(middleware, *args, &block)
+          .with_arguments(middleware)
       end
 
       it "returns stack" do
-        expect(stack.prepend(concern, *args, &block)).to eq(stack)
+        expect(stack.prepend(concern)).to eq(stack)
       end
     end
 
@@ -137,25 +134,25 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns::En
 
       context "when index passed" do
         specify do
-          expect { stack.insert(index, concern, *args, &block) }
+          expect { stack.insert(index, concern) }
             .to delegate_to(plain_stack, :insert)
-            .with_arguments(index, middleware, *args, &block)
+            .with_arguments(index, middleware)
         end
 
         it "returns stack" do
-          expect(stack.insert(index, concern, *args, &block)).to eq(stack)
+          expect(stack.insert(index, concern)).to eq(stack)
         end
       end
 
       context "when concern passed" do
         specify do
-          expect { stack.insert(other_concern, concern, *args, &block) }
+          expect { stack.insert(other_concern, concern) }
             .to delegate_to(plain_stack, :insert)
-            .with_arguments(other_middleware, middleware, *args, &block)
+            .with_arguments(other_middleware, middleware)
         end
 
         it "returns stack" do
-          expect(stack.insert(other_concern, concern, *args, &block)).to eq(stack)
+          expect(stack.insert(other_concern, concern)).to eq(stack)
         end
       end
     end
@@ -167,25 +164,25 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns::En
 
       context "when index passed" do
         specify do
-          expect { stack.insert_before(index, concern, *args, &block) }
+          expect { stack.insert_before(index, concern) }
             .to delegate_to(plain_stack, :insert)
-            .with_arguments(index, middleware, *args, &block)
+            .with_arguments(index, middleware)
         end
 
         it "returns stack" do
-          expect(stack.insert_before(index, concern, *args, &block)).to eq(stack)
+          expect(stack.insert_before(index, concern)).to eq(stack)
         end
       end
 
       context "when concern passed" do
         specify do
-          expect { stack.insert_before(other_concern, concern, *args, &block) }
+          expect { stack.insert_before(other_concern, concern) }
             .to delegate_to(plain_stack, :insert)
-            .with_arguments(other_middleware, middleware, *args, &block)
+            .with_arguments(other_middleware, middleware)
         end
 
         it "returns stack" do
-          expect(stack.insert_before(other_concern, concern, *args, &block)).to eq(stack)
+          expect(stack.insert_before(other_concern, concern)).to eq(stack)
         end
       end
     end
@@ -197,25 +194,25 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns::En
 
       context "when index passed" do
         specify do
-          expect { stack.insert_after(index, concern, *args, &block) }
+          expect { stack.insert_after(index, concern) }
             .to delegate_to(plain_stack, :insert_after)
-            .with_arguments(index, middleware, *args, &block)
+            .with_arguments(index, middleware)
         end
 
         it "returns stack" do
-          expect(stack.insert_after(index, concern, *args, &block)).to eq(stack)
+          expect(stack.insert_after(index, concern)).to eq(stack)
         end
       end
 
       context "when concern passed" do
         specify do
-          expect { stack.insert_after(other_concern, concern, *args, &block) }
+          expect { stack.insert_after(other_concern, concern) }
             .to delegate_to(plain_stack, :insert_after)
-            .with_arguments(other_middleware, middleware, *args, &block)
+            .with_arguments(other_middleware, middleware)
         end
 
         it "returns stack" do
-          expect(stack.insert_after(other_concern, concern, *args, &block)).to eq(stack)
+          expect(stack.insert_after(other_concern, concern)).to eq(stack)
         end
       end
     end
@@ -226,13 +223,13 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns::En
       end
 
       specify do
-        expect { stack.insert_before_each(concern, *args, &block) }
+        expect { stack.insert_before_each(concern) }
           .to delegate_to(plain_stack, :insert_before_each)
-          .with_arguments(middleware, *args, &block)
+          .with_arguments(middleware)
       end
 
       it "returns stack" do
-        expect(stack.insert_before_each(concern, *args, &block)).to eq(stack)
+        expect(stack.insert_before_each(concern)).to eq(stack)
       end
     end
 
@@ -242,13 +239,13 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns::En
       end
 
       specify do
-        expect { stack.insert_after_each(concern, *args, &block) }
+        expect { stack.insert_after_each(concern) }
           .to delegate_to(plain_stack, :insert_after_each)
-          .with_arguments(middleware, *args, &block)
+          .with_arguments(middleware)
       end
 
       it "returns stack" do
-        expect(stack.insert_after_each(concern, *args, &block)).to eq(stack)
+        expect(stack.insert_after_each(concern)).to eq(stack)
       end
     end
 
@@ -259,25 +256,25 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns::En
 
       context "when index passed" do
         specify do
-          expect { stack.replace(index, concern, *args, &block) }
+          expect { stack.replace(index, concern) }
             .to delegate_to(plain_stack, :replace)
-            .with_arguments(index, middleware, *args, &block)
+            .with_arguments(index, middleware)
         end
 
         it "returns stack" do
-          expect(stack.replace(index, concern, *args, &block)).to eq(stack)
+          expect(stack.replace(index, concern)).to eq(stack)
         end
       end
 
       context "when concern passed" do
         specify do
-          expect { stack.replace(other_concern, concern, *args, &block) }
+          expect { stack.replace(other_concern, concern) }
             .to delegate_to(plain_stack, :replace)
-            .with_arguments(other_middleware, middleware, *args, &block)
+            .with_arguments(other_middleware, middleware)
         end
 
         it "returns stack" do
-          expect(stack.replace(other_concern, concern, *args, &block)).to eq(stack)
+          expect(stack.replace(other_concern, concern)).to eq(stack)
         end
       end
     end
@@ -344,20 +341,20 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns::En
 
     describe "#use" do
       specify do
-        expect { stack.use(concern, *args, &block) }
+        expect { stack.use(concern) }
           .to delegate_to(plain_stack, :use)
-          .with_arguments(middleware, *args, &block)
+          .with_arguments(middleware)
       end
 
       it "returns stack" do
-        expect(stack.use(concern, *args, &block)).to eq(stack)
+        expect(stack.use(concern)).to eq(stack)
       end
     end
 
     describe "#empty?" do
       specify do
         expect { stack.empty? }
-          .to delegate_to(plain_stack.to_a, :empty?)
+          .to delegate_to(plain_stack, :empty?)
           .and_return_its_value
       end
     end
@@ -381,7 +378,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns::En
         end
 
         context "when `other` has different `plain_stack`" do
-          let(:other) { described_class.new(plain_stack: ConvenientService::Support::Middleware::StackBuilder.new(name: name).tap { |stack| stack.use middleware }) }
+          let(:other) { described_class.new(plain_stack: ConvenientService::Support::Middleware::StackBuilder.create(name: name).tap { |stack| stack.use middleware }) }
 
           it "returns `false`" do
             expect(stack == other).to eq(false)
