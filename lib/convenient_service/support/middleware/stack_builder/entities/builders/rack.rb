@@ -26,7 +26,7 @@ module ConvenientService
               # @return [void]
               #
               def initialize(**kwargs)
-                @name = kwargs.fetch(:name) { "StackBuilder" }
+                @name = kwargs.fetch(:name) { "Stack" }
                 @stack = kwargs.fetch(:stack) { [] }
               end
 
@@ -35,6 +35,23 @@ module ConvenientService
               #
               def empty?
                 stack.empty?
+              end
+
+              ##
+              # @param other_middleware [#call<Hash>]
+              # @return [Boolean]
+              #
+              def has?(other_middleware)
+                stack.any? { |middleware| middleware == other_middleware }
+              end
+
+              ##
+              # @return [Boolean]
+              #
+              def clear
+                stack.clear
+
+                self
               end
 
               ##

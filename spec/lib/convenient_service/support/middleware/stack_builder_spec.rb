@@ -6,6 +6,8 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Support::Middleware::StackBuilder, type: :standard do
+  include ConvenientService::RSpec::Helpers::IgnoringException
+
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   example_group "class methods" do
@@ -45,6 +47,11 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder, type: :stan
           expect { described_class.by(backend) }
             .to raise_error(ConvenientService::Support::Middleware::StackBuilder::Exceptions::NotSupportedBackend)
             .with_message(exception_message)
+        end
+
+        specify do
+          expect { ignoring_exception(ConvenientService::Support::Middleware::StackBuilder::Exceptions::NotSupportedBackend) { described_class.by(backend) } }
+            .to delegate_to(ConvenientService, :raise)
         end
       end
 

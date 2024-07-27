@@ -20,12 +20,12 @@ module ConvenientService
               # @return [void]
               #
               # @see https://github.com/marian13/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L43
-              #
-              # @internal
-              #   TODO: Direct specs.
+              # @see https://github.com/marian13/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L59
               #
               def initialize(opts = {}, &block)
                 super
+
+                @middleware_name = opts.fetch(:name) { "Stack" }
 
                 ##
                 # https://github.com/marian13/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L174
@@ -38,6 +38,23 @@ module ConvenientService
               #
               def empty?
                 stack.empty?
+              end
+
+              ##
+              # @param other_middleware [#call<Hash>]
+              # @return [Boolean]
+              #
+              def has?(other_middleware)
+                stack.any? { |middleware| middleware == [other_middleware, [], nil] }
+              end
+
+              ##
+              # @return [Boolean]
+              #
+              def clear
+                stack.clear
+
+                self
               end
 
               ##
