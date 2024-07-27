@@ -262,6 +262,40 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
       end
     end
 
+    describe "#insert_before_each" do
+      before do
+        stack_builder.use(middleware)
+        stack_builder.use(middleware)
+      end
+
+      it "returns stack builder" do
+        expect(stack_builder.insert_before_each(other_middleware)).to eq(stack_builder)
+      end
+
+      it "adds other middleware before each middleware" do
+        stack_builder.insert_before_each(other_middleware)
+
+        expect(stack_builder.to_a).to eq([other_middleware, middleware, other_middleware, middleware])
+      end
+    end
+
+    describe "#insert_after_each" do
+      before do
+        stack_builder.use(middleware)
+        stack_builder.use(middleware)
+      end
+
+      it "returns stack builder" do
+        expect(stack_builder.insert_after_each(other_middleware)).to eq(stack_builder)
+      end
+
+      it "adds other middleware after each middleware" do
+        stack_builder.insert_after_each(other_middleware)
+
+        expect(stack_builder.to_a).to eq([middleware, other_middleware, middleware, other_middleware])
+      end
+    end
+
     describe "#replace" do
       context "when `index_or_middleware` is integer" do
         specify do

@@ -41,11 +41,11 @@ module ConvenientService
               end
 
               ##
-              # @param other_middleware [#call<Hash>]
+              # @param some_middleware [#call<Hash>]
               # @return [Boolean]
               #
-              def has?(other_middleware)
-                stack.any? { |middleware| middleware == [other_middleware, [], nil] }
+              def has?(some_middleware)
+                stack.any? { |middleware| middleware == [some_middleware, [], nil] }
               end
 
               ##

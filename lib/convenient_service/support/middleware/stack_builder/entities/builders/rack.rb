@@ -38,11 +38,11 @@ module ConvenientService
               end
 
               ##
-              # @param other_middleware [#call<Hash>]
+              # @param some_middleware [#call<Hash>]
               # @return [Boolean]
               #
-              def has?(other_middleware)
-                stack.any? { |middleware| middleware == other_middleware }
+              def has?(some_middleware)
+                stack.any? { |middleware| middleware == some_middleware }
               end
 
               ##
@@ -64,6 +64,8 @@ module ConvenientService
               # @internal
               #   NOTE: When stack is empty - `env` is returned. Just like `ruby-middleware` does.
               #   NOTE: `reduce` for empty array returns initial value.
+              #
+              #   TODO: Direct specs.
               #
               def call(env)
                 return env if stack.empty?
@@ -141,9 +143,6 @@ module ConvenientService
               # @param other_middleware [#call<Hash>]
               # @return [ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Rack]
               #
-              # @internal
-              #   TODO: Direct specs.
-              #
               def insert_before_each(other_middleware)
                 @stack = stack.reduce([]) { |stack, middleware| stack.push(other_middleware, middleware) }
 
@@ -153,9 +152,6 @@ module ConvenientService
               ##
               # @param other_middleware [#call<Hash>]
               # @return [ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Rack]
-              #
-              # @internal
-              #   TODO: Direct specs.
               #
               def insert_after_each(other_middleware)
                 @stack = stack.reduce([]) { |stack, middleware| stack.push(middleware, other_middleware) }
