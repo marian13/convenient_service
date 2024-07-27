@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.19.1](https://github.com/marian13/convenient_service/compare/v0.19.0...v0.19.1) (2024-07-27)
+
+### Bug Fixes
+
+* **connected_steps:** do not evaluate right expression when left expression is error ([3e3998d](https://github.com/marian13/convenient_service/commit/3e3998df90fe671567276a9119d762567641ecec))
+
 ## [0.19.0](https://github.com/marian13/convenient_service/compare/v0.18.0...v0.19.0) (2024-06-08)
 
 

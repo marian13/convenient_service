@@ -33,7 +33,10 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
               #
               def result
-                left_expression.success? ? left_expression.result : right_expression.result
+                return left_expression.result if left_expression.success?
+                return left_expression.result if left_expression.error?
+
+                right_expression.result
               end
 
               ##
