@@ -114,6 +114,8 @@ module ConvenientService
                 index = cast_index(index_or_middleware)
 
                 stack.insert(index, other_middleware)
+
+                self
               end
 
               ##
@@ -131,11 +133,16 @@ module ConvenientService
                 index = cast_index(index_or_middleware)
 
                 stack.insert(index + 1, other_middleware)
+
+                self
               end
 
               ##
               # @param other_middleware [#call<Hash>]
               # @return [ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Rack]
+              #
+              # @internal
+              #   TODO: Direct specs.
               #
               def insert_before_each(other_middleware)
                 @stack = stack.reduce([]) { |stack, middleware| stack.push(other_middleware, middleware) }
@@ -146,6 +153,9 @@ module ConvenientService
               ##
               # @param other_middleware [#call<Hash>]
               # @return [ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Rack]
+              #
+              # @internal
+              #   TODO: Direct specs.
               #
               def insert_after_each(other_middleware)
                 @stack = stack.reduce([]) { |stack, middleware| stack.push(middleware, other_middleware) }

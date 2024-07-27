@@ -46,9 +46,10 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
   end
 
   example_group "instance methods" do
-    describe "#has?" do
-      let(:middleware) { proc { :foo } }
+    let(:middleware) { proc { :foo } }
+    let(:other_middleware) { proc { :bar } }
 
+    describe "#has?" do
       context "when stack does NOT have middleware" do
         before do
           stack_builder.clear
@@ -89,8 +90,6 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
     end
 
     describe "#unshift" do
-      let(:middleware) { proc { :foo } }
-
       specify do
         expect { stack_builder.unshift(middleware, *args, &block) }
           .to delegate_to(stack, :unshift)
@@ -100,8 +99,6 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
     end
 
     describe "#prepend" do
-      let(:middleware) { proc { :foo } }
-
       specify do
         expect { stack_builder.prepend(middleware, *args, &block) }
           .to delegate_to(stack, :unshift)
@@ -111,8 +108,6 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
     end
 
     describe "#delete" do
-      let(:middleware) { proc { :foo } }
-
       context "when stack does NOT have middleware" do
         let(:exception_message) { "no implicit conversion from nil to integer" }
 
@@ -157,8 +152,6 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
     end
 
     describe "#remove" do
-      let(:middleware) { proc { :foo } }
-
       context "when stack does NOT have middleware" do
         before do
           stack_builder.clear
@@ -203,8 +196,74 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
     end
 
     describe "#to_a" do
-      it "returns stack" do
-        expect(stack_builder.to_a).to eq(stack)
+      before do
+        stack_builder.use(middleware)
+        stack_builder.use(other_middleware)
+      end
+
+      it "returns middlewares without args and block" do
+        expect(stack_builder.to_a).to eq([middleware, other_middleware])
+      end
+    end
+
+    describe "#dup" do
+      ##
+      # NOTE: Unfreezes string since it is NOT possible to set spy on frozen objects.
+      #
+      let(:name) { +"Stack" }
+
+      before do
+        ##
+        # NOTE: Create stack, before setting spies on `stack_class.new`, `name.dup`.
+        #
+        stack_builder
+      end
+
+      specify do
+        expect { stack_builder.dup }
+          .to delegate_to(described_class, :new)
+          .with_arguments(name: name, stack: stack, runner_class: ConvenientService::Dependencies::Extractions::RubyMiddleware::Middleware::Runner)
+          .and_return_its_value
+      end
+
+      specify { expect { stack_builder.dup }.to delegate_to(name, :dup) }
+
+      specify { expect { stack_builder.dup }.to delegate_to(stack, :dup) }
+    end
+
+    example_group "comparison" do
+      describe "#==" do
+        context "when `other` has different class" do
+          let(:other) { 42 }
+
+          it "returns `false`" do
+            expect(stack_builder == other).to be_nil
+          end
+        end
+
+        context "when `other` has different `name`" do
+          let(:other) { described_class.new(name: "OtherStack", stack: stack) }
+
+          it "returns `false`" do
+            expect(stack_builder == other).to eq(false)
+          end
+        end
+
+        context "when `other` has different `plain_stack`" do
+          let(:other) { described_class.new(name: name, stack: [[middleware, [], nil]]) }
+
+          it "returns `false`" do
+            expect(stack_builder == other).to eq(false)
+          end
+        end
+
+        context "when `other` has same attributes" do
+          let(:other) { described_class.new(name: name, stack: stack) }
+
+          it "returns `true`" do
+            expect(stack_builder == other).to eq(true)
+          end
+        end
       end
     end
   end
