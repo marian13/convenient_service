@@ -207,7 +207,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#has%3F-instance_method" title="#has? (instance method)">#<strong>has?</strong>(other_middleware)  &#x21d2; Boolean </a>
+      <a href="#has%3F-instance_method" title="#has? (instance method)">#<strong>has?</strong>(some_middleware)  &#x21d2; Boolean </a>
     
 
     
@@ -676,7 +676,7 @@
       <div class="method_details ">
   <h3 class="signature " id="has?-instance_method">
   
-    #<strong>has?</strong>(other_middleware)  &#x21d2; <tt>Boolean</tt> 
+    #<strong>has?</strong>(some_middleware)  &#x21d2; <tt>Boolean</tt> 
   
 
   
@@ -694,7 +694,7 @@
   
     <li>
       
-        <span class='name'>other_middleware</span>
+        <span class='name'>some_middleware</span>
       
       
         <span class='type'>(<tt>#<span class='object_link'><a href="../../../../../Dependencies/Extractions/RubyMiddleware/Middleware/Builder.html#call-instance_method" title="ConvenientService::Dependencies::Extractions::RubyMiddleware::Middleware::Builder#call (method)">call</a></span>&lt;Hash&gt;</tt>)</span>
@@ -732,8 +732,8 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/support/middleware/stack_builder/entities/builders/ruby_middleware.rb', line 47</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_has?'>has?</span><span class='lparen'>(</span><span class='id identifier rubyid_other_middleware'>other_middleware</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_stack'>stack</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_middleware'>middleware</span><span class='op'>|</span> <span class='id identifier rubyid_middleware'>middleware</span> <span class='op'>==</span> <span class='lbracket'>[</span><span class='id identifier rubyid_other_middleware'>other_middleware</span><span class='comma'>,</span> <span class='lbracket'>[</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='kw'>nil</span><span class='rbracket'>]</span> <span class='rbrace'>}</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_has?'>has?</span><span class='lparen'>(</span><span class='id identifier rubyid_some_middleware'>some_middleware</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_stack'>stack</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_middleware'>middleware</span><span class='op'>|</span> <span class='id identifier rubyid_middleware'>middleware</span> <span class='op'>==</span> <span class='lbracket'>[</span><span class='id identifier rubyid_some_middleware'>some_middleware</span><span class='comma'>,</span> <span class='lbracket'>[</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='kw'>nil</span><span class='rbracket'>]</span> <span class='rbrace'>}</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -894,7 +894,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Jul 27 01:29:57 2024 by
+  Generated on Sat Jul 27 01:44:51 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.36 (ruby-3.2.4).
 </div>
