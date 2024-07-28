@@ -165,7 +165,7 @@ RSpec.describe ConvenientService::Core::Concern::InstanceMethods, type: :standar
         if ConvenientService::Dependencies.ruby.version >= 3.0
           ##
           # NOTE: Check the following files/links in order to get an idea why this spec is NOT working for Ruby 2.7.
-          # - `lib/convenient_service/core/entities/config/entities/method_middlewares/entities/caller/commands/define_method_middlewares_caller.rb`
+          # - `lib/convenient_service/core/entities/config/entities/method_middlewares/entities/caller/commands/define_method_callers.rb`
           # - https://gist.github.com/marian13/9c25041f835564e945d978839097d419
           #
           specify do

@@ -49,19 +49,19 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
   example_group "instance methods" do
     include ConvenientService::RSpec::Matchers::DelegateTo
 
-    describe "#define_method_middlewares_caller!" do
+    describe "#define_method_callers!" do
       before do
         ##
         # NOTE: Returns `true` when called for the first time, `false` for all the subsequent calls.
         # NOTE: Used for `and_return_its_value`.
         # https://github.com/marian13/convenient_service/blob/c5b3adc4a0edc2d631dd1f44f914c28eeafefe1d/lib/convenient_service/rspec/matchers/custom/delegate_to.rb#L105
         #
-        caller.define_method_middlewares_caller!(scope, method, container)
+        caller.define_method_callers!(scope, method, container)
       end
 
       specify do
-        expect { caller.define_method_middlewares_caller!(scope, method, container) }
-          .to delegate_to(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Caller::Commands::DefineMethodMiddlewaresCaller, :call)
+        expect { caller.define_method_callers!(scope, method, container) }
+          .to delegate_to(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Caller::Commands::DefineMethodCallers, :call)
           .with_arguments(scope: scope, method: method, container: container, caller: caller)
           .and_return_its_value
       end

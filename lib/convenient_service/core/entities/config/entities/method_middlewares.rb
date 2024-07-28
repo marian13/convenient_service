@@ -68,7 +68,7 @@ module ConvenientService
             # @return [Boolean]
             #
             def define!
-              caller.define_method_middlewares_caller!(scope, method, container)
+              caller.define_method_callers!(scope, method, container)
             end
 
             ##

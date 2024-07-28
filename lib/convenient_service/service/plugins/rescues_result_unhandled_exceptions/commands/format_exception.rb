@@ -62,8 +62,8 @@ module ConvenientService
             #   StandardError:
             #     exception message
             #   # /gem/lib/convenient_service/factories/services.rb:120:in `result'
-            #   # /gem/lib/convenient_service/core/entities/config/entities/method_middlewares/entities/caller/commands/define_method_middlewares_caller.rb:116:in `call'
-            #   # /gem/lib/convenient_service/core/entities/config/entities/method_middlewares/entities/caller/commands/define_method_middlewares_caller.rb:116:in `block in result'
+            #   # /gem/lib/convenient_service/core/entities/config/entities/method_middlewares/entities/caller/commands/define_method_callers.rb:116:in `call'
+            #   # /gem/lib/convenient_service/core/entities/config/entities/method_middlewares/entities/caller/commands/define_method_callers.rb:116:in `block in result'
             #   # /gem/lib/convenient_service/dependencies/extractions/ruby_middleware/middleware/runner.rb:67:in `block (2 levels) in build_call_chain'
             #   # /gem/lib/convenient_service/core/entities/config/entities/method_middlewares/entities/chain.rb:35:in `next'
             #   # /gem/lib/convenient_service/common/plugins/caches_return_value/middleware.rb:17:in `block in next'
@@ -79,8 +79,8 @@ module ConvenientService
             #     exception message second line
             #     exception message third line
             #   # /gem/lib/convenient_service/factories/services.rb:120:in `result'
-            #   # /gem/lib/convenient_service/core/entities/config/entities/method_middlewares/entities/caller/commands/define_method_middlewares_caller.rb:116:in `call'
-            #   # /gem/lib/convenient_service/core/entities/config/entities/method_middlewares/entities/caller/commands/define_method_middlewares_caller.rb:116:in `block in result'
+            #   # /gem/lib/convenient_service/core/entities/config/entities/method_middlewares/entities/caller/commands/define_method_callers.rb:116:in `call'
+            #   # /gem/lib/convenient_service/core/entities/config/entities/method_middlewares/entities/caller/commands/define_method_callers.rb:116:in `block in result'
             #   # /gem/lib/convenient_service/dependencies/extractions/ruby_middleware/middleware/runner.rb:67:in `block (2 levels) in build_call_chain'
             #   # /gem/lib/convenient_service/core/entities/config/entities/method_middlewares/entities/chain.rb:35:in `next'
             #   # /gem/lib/convenient_service/common/plugins/caches_return_value/middleware.rb:17:in `block in next'
@@ -94,8 +94,8 @@ module ConvenientService
             #   StandardError:
             #     exception message
             #   # /gem/lib/convenient_service/factories/services.rb:120:in `result'
-            #   # /gem/lib/convenient_service/core/entities/config/entities/method_middlewares/entities/caller/commands/define_method_middlewares_caller.rb:116:in `call'
-            #   # /gem/lib/convenient_service/core/entities/config/entities/method_middlewares/entities/caller/commands/define_method_middlewares_caller.rb:116:in `block in result'
+            #   # /gem/lib/convenient_service/core/entities/config/entities/method_middlewares/entities/caller/commands/define_method_callers.rb:116:in `call'
+            #   # /gem/lib/convenient_service/core/entities/config/entities/method_middlewares/entities/caller/commands/define_method_callers.rb:116:in `block in result'
             #   # /gem/lib/convenient_service/dependencies/extractions/ruby_middleware/middleware/runner.rb:67:in `block (2 levels) in build_call_chain'
             #   # /gem/lib/convenient_service/core/entities/config/entities/method_middlewares/entities/chain.rb:35:in `next'
             #   # /gem/lib/convenient_service/common/plugins/caches_return_value/middleware.rb:17:in `block in next'
@@ -111,8 +111,8 @@ module ConvenientService
             #     exception message
             #   # /gem/lib/convenient_service/factories/service/class.rb:43:in `rescue in result'
             #   # /gem/lib/convenient_service/factories/service/class.rb:40:in `result'
-            #   # /gem/lib/convenient_service/core/entities/config/entities/method_middlewares/entities/caller/commands/define_method_middlewares_caller.rb:116:in `call'
-            #   # /gem/lib/convenient_service/core/entities/config/entities/method_middlewares/entities/caller/commands/define_method_middlewares_caller.rb:116:in `block in result'
+            #   # /gem/lib/convenient_service/core/entities/config/entities/method_middlewares/entities/caller/commands/define_method_callers.rb:116:in `call'
+            #   # /gem/lib/convenient_service/core/entities/config/entities/method_middlewares/entities/caller/commands/define_method_callers.rb:116:in `block in result'
             #   # /gem/lib/convenient_service/dependencies/extractions/ruby_middleware/middleware/runner.rb:67:in `block (2 levels) in build_call_chain'
             #   # /gem/lib/convenient_service/core/entities/config/entities/method_middlewares/entities/chain.rb:35:in `next'
             #   # /gem/lib/convenient_service/common/plugins/caches_return_value/middleware.rb:17:in `block in next'

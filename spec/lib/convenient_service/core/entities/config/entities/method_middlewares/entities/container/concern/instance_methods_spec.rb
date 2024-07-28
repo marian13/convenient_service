@@ -185,9 +185,9 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
       end
     end
 
-    describe "#prepend_methods_middlewares_callers_to_container" do
+    describe "#prepend_methods_callers_to_container" do
       specify do
-        expect { container.prepend_methods_middlewares_callers_to_container }
+        expect { container.prepend_methods_callers_to_container }
           .to delegate_to(container.klass, :prepend)
           .with_arguments(container.methods_middlewares_callers)
           .and_return_its_value

@@ -104,7 +104,7 @@ module ConvenientService
                     ##
                     # @return [void]
                     #
-                    def prepend_methods_middlewares_callers_to_container
+                    def prepend_methods_callers_to_container
                       klass.prepend(methods_middlewares_callers)
                     end
 

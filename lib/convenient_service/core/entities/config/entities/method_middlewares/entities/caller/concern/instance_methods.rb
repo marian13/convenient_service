@@ -32,8 +32,8 @@ module ConvenientService
                     # @param container [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Container]
                     # @return [Boolean]
                     #
-                    def define_method_middlewares_caller!(scope, method, container)
-                      Commands::DefineMethodMiddlewaresCaller.call(scope: scope, method: method, container: container, caller: self)
+                    def define_method_callers!(scope, method, container)
+                      Commands::DefineMethodCallers.call(scope: scope, method: method, container: container, caller: self)
                     end
 
                     ##

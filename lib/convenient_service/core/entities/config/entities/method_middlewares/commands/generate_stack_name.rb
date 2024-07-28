@@ -83,6 +83,8 @@ module ConvenientService
                     "QuestionMark"
                   elsif method.end_with?("!")
                     "ExclamationMark"
+                  else
+                    ""
                   end
                 end
               end

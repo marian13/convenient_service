@@ -264,7 +264,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
 
       specify do
         expect { method_middlewares.define! }
-          .to delegate_to(described_class::Entities::Caller::Commands::DefineMethodMiddlewaresCaller, :call)
+          .to delegate_to(described_class::Entities::Caller::Commands::DefineMethodCallers, :call)
           .with_arguments(scope: scope, method: method, container: container, caller: caller)
           .and_return_its_value
       end

@@ -9,7 +9,7 @@ module ConvenientService
             module Entities
               class Caller
                 module Commands
-                  class DefineMethodMiddlewaresCaller < Support::Command
+                  class DefineMethodCallers < Support::Command
                     include Support::Delegate
 
                     ##
@@ -39,7 +39,7 @@ module ConvenientService
                     ##
                     # @return [void]
                     #
-                    delegate :prepend_methods_middlewares_callers_to_container, to: :container
+                    delegate :prepend_methods_callers_to_container, to: :container
 
                     ##
                     # @return [Module]
@@ -71,14 +71,29 @@ module ConvenientService
                     def call
                       return false if Utils::Method.defined?(method, methods_middlewares_callers, private: true)
 
-                      prepend_methods_middlewares_callers_to_container
+                      prepend_methods_callers_to_container
 
-                      define_method_middlewares_caller
+                      define_method_callers
 
                       true
                     end
 
                     private
+
+                    ##
+                    # @return [String]
+                    #
+                    def method_without_middlewares
+                      name = method.to_s
+
+                      if name.end_with?("!")
+                        "#{name.delete_suffix("!")}_without_middlewares!"
+                      elsif name.end_with?("?")
+                        "#{name.delete_suffix("?")}_without_middlewares?"
+                      else
+                        "#{name}_without_middlewares"
+                      end
+                    end
 
                     ##
                     # @return [void]
@@ -89,12 +104,18 @@ module ConvenientService
                     #     method = :#{scope}
                     #     prefix = "#{prefix}"
                     #
-                    #   NOTE: Check the following link in order to get an idea why two versions of `define_method_middlewares_caller` exist.
+                    #   NOTE: Check the following link in order to get an idea why two versions of `define_method_callers` exist.
                     #   - https://gist.github.com/marian13/9c25041f835564e945d978839097d419
                     #
                     if Dependencies.ruby.version >= 3.0
-                      def define_method_middlewares_caller
+                      def define_method_callers
                         <<~RUBY.tap { |code| methods_middlewares_callers.module_eval(code, __FILE__, __LINE__ + 1) }
+                          def #{method}(*args, **kwargs, &block)
+                            super
+                          end
+
+                          alias_method :#{method_without_middlewares}, :#{method}
+
                           def #{method}(*args, **kwargs, &block)
                             method_middlewares = #{prefix}middlewares(:#{method}, scope: :#{scope})
 
@@ -106,8 +127,14 @@ module ConvenientService
                         RUBY
                       end
                     else
-                      def define_method_middlewares_caller
+                      def define_method_callers
                         <<~RUBY.tap { |code| methods_middlewares_callers.module_eval(code, __FILE__, __LINE__ + 1) }
+                          def #{method}(*args, **kwargs, &block)
+                            super
+                          end
+
+                          alias_method :#{method_without_middlewares}, :#{method}
+
                           def #{method}(*args, **kwargs, &block)
                             method_middlewares = #{prefix}middlewares(:#{method}, scope: :#{scope})
 

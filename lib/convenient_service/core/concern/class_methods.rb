@@ -114,7 +114,7 @@ module ConvenientService
         #   TODO: Include `method` into trigger metadata.
         #
         #   IMPORTANT: Ruby 2.7 and Ruby 3.0+ invoke this `method_missing` differently, check the following files/links:
-        #   - `lib/convenient_service/core/entities/config/entities/method_middlewares/entities/caller/commands/define_method_middlewares_caller.rb`
+        #   - `lib/convenient_service/core/entities/config/entities/method_middlewares/entities/caller/commands/define_method_callers.rb`
         #   - https://gist.github.com/marian13/9c25041f835564e945d978839097d419
         #
         #   IMPORTANT: Psych has a monkey-patch `y` in IRB. That is why calling `Service.y` raise `private method called` instead of `undefined method`.
