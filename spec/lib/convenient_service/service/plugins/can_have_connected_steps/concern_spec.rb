@@ -1306,7 +1306,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
         end
       end
 
-      context "when own `:result` is defined" do
+      context "when `:result` is defined" do
         let(:service_class) do
           Class.new do
             include ConvenientService::Service::Configs::Essential
@@ -1318,24 +1318,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
           end
         end
 
-        describe "#regular_result" do
-          let(:service_class) do
-            Class.new do
-              include ConvenientService::Service::Configs::Essential
-              include ConvenientService::Service::Configs::Inspect
-
-              def result
-                success
-              end
-            end
-          end
-
-          specify do
-            expect { service_instance.regular_result }
-              .to delegate_to(service_instance, :result_without_middlewares)
-              .without_arguments
-              .and_return_its_value
-          end
+        specify do
+          expect { service_instance.regular_result }
+            .to delegate_to(service_instance, :result_without_middlewares)
+            .without_arguments
+            .and_return_its_value
         end
       end
 
