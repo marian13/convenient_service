@@ -2259,23 +2259,15 @@
       <pre class="lines">
 
 
+471
 472
-473
-474
-475
-476
-477
-478</pre>
+473</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 472</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 471</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_regular_result'>regular_result</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_method'>method</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Utils/Object.html" title="ConvenientService::Utils::Object (module)">Object</a></span></span><span class='period'>.</span><span class='id identifier rubyid_own_method'><span class='object_link'><a href="../../../Utils/Object.html#own_method-class_method" title="ConvenientService::Utils::Object.own_method (method)">own_method</a></span></span><span class='lparen'>(</span><span class='kw'>self</span><span class='comma'>,</span> <span class='symbol'>:result</span><span class='comma'>,</span> <span class='label'>private:</span> <span class='kw'>true</span><span class='rparen'>)</span>
-
-  <span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='period'>.</span><span class='id identifier rubyid_raise'><span class='object_link'><a href="../../../../ConvenientService.html#raise-instance_method" title="ConvenientService#raise (method)">raise</a></span></span> <span class='const'><span class='object_link'><a href="../HasResult.html" title="ConvenientService::Service::Plugins::HasResult (module)">HasResult</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../HasResult/Exceptions.html" title="ConvenientService::Service::Plugins::HasResult::Exceptions (module)">Exceptions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../HasResult/Exceptions/ResultIsNotOverridden.html" title="ConvenientService::Service::Plugins::HasResult::Exceptions::ResultIsNotOverridden (class)">ResultIsNotOverridden</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../../Exception.html#new-class_method" title="ConvenientService::Exception.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>service:</span> <span class='kw'>self</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_method'>method</span>
-
-  <span class='id identifier rubyid_method'>method</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_result_without_middlewares'>result_without_middlewares</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -2341,18 +2333,18 @@
       <pre class="lines">
 
 
+486
+487
+488
+489
+490
 491
 492
 493
-494
-495
-496
-497
-498
-499</pre>
+494</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 491</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 486</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_steps'>steps</span>
   <span class='id identifier rubyid_internals'>internals</span><span class='period'>.</span><span class='id identifier rubyid_cache'>cache</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='symbol'>:steps</span><span class='rparen'>)</span> <span class='kw'>do</span>
@@ -2418,20 +2410,20 @@
       <pre class="lines">
 
 
+500
+501
+502
+503
+504
 505
 506
 507
 508
 509
-510
-511
-512
-513
-514
-515</pre>
+510</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 505</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 500</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_steps_result'>steps_result</span>
   <span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='period'>.</span><span class='id identifier rubyid_raise'><span class='object_link'><a href="../../../../ConvenientService.html#raise-instance_method" title="ConvenientService#raise (method)">raise</a></span></span> <span class='const'><span class='object_link'><a href="Exceptions.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Exceptions (module)">Exceptions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Exceptions/ServiceHasNoSteps.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Exceptions::ServiceHasNoSteps (class)">ServiceHasNoSteps</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../../Exception.html#new-class_method" title="ConvenientService::Exception.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>service_class:</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_none?'>none?</span>
@@ -2454,7 +2446,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Jul 27 13:52:16 2024 by
+  Generated on Sun Jul 28 23:06:18 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.36 (ruby-3.2.5).
 </div>
