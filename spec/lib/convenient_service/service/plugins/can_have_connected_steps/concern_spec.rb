@@ -1280,7 +1280,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
     end
 
     describe "#regular_result" do
-      context "when own `:result` is NOT defined" do
+      context "when `:result` is NOT defined" do
         let(:service_class) do
           Class.new do
             include ConvenientService::Service::Configs::Essential
@@ -1304,12 +1304,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
           expect { ignoring_exception(ConvenientService::Service::Plugins::HasResult::Exceptions::ResultIsNotOverridden) { service_instance.regular_result } }
             .to delegate_to(ConvenientService, :raise)
         end
-
-        specify do
-          expect { ignoring_exception(ConvenientService::Service::Plugins::HasResult::Exceptions::ResultIsNotOverridden) { service_instance.regular_result } }
-            .to delegate_to(ConvenientService::Utils::Object, :own_method)
-            .with_arguments(service_instance, :result, private: true)
-        end
       end
 
       context "when own `:result` is defined" do
@@ -1324,18 +1318,28 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
           end
         end
 
-        it "returns own `:result` value" do
-          expect(service_instance.regular_result).to eq(ConvenientService::Utils::Object.own_method(service_instance, :result, private: true).call)
-        end
+        describe "#regular_result" do
+          let(:service_class) do
+            Class.new do
+              include ConvenientService::Service::Configs::Essential
+              include ConvenientService::Service::Configs::Inspect
 
-        specify do
-          expect { service_instance.regular_result }
-            .to delegate_to(ConvenientService::Utils::Object, :own_method)
-            .with_arguments(service_instance, :result, private: true)
+              def result
+                success
+              end
+            end
+          end
+
+          specify do
+            expect { service_instance.regular_result }
+              .to delegate_to(service_instance, :result_without_middlewares)
+              .without_arguments
+              .and_return_its_value
+          end
         end
       end
 
-      context "when own `:result` accepts arguments" do
+      context "when `:result` accepts arguments" do
         let(:service_class) do
           Class.new do
             include ConvenientService::Service::Configs::Essential
@@ -1351,8 +1355,8 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
         let(:kwargs) { {foo: :bar} }
         let(:block) { proc { :foo } }
 
-        it "mimics own `:result` arguments" do
-          expect(service_instance.regular_result(*args, **kwargs, &block)).to eq(ConvenientService::Utils::Object.own_method(service_instance, :result, private: true).call(*args, **kwargs, &block))
+        it "mimics `:result` arguments" do
+          expect(service_instance.regular_result(*args, **kwargs, &block).unsafe_data.to_h).to eq({args: args, kwargs: kwargs, block: block})
         end
       end
     end
