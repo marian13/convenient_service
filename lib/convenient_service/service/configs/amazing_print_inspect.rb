@@ -4,7 +4,7 @@ module ConvenientService
   module Service
     module Configs
       module AmazingPrintInspect
-        include Support::Concern
+        include Config
 
         # rubocop:disable Lint/ConstantDefinitionInBlock
         included do

@@ -94,7 +94,7 @@ module ConvenientService
       # @see https://github.com/ruby/reline/blob/v0.5.8/lib/reline/unicode.rb#L30
       #
       module AwesomePrintInspect
-        include Support::Concern
+        include Config
 
         # rubocop:disable Lint/ConstantDefinitionInBlock
         included do

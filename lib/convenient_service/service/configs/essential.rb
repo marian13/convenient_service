@@ -12,7 +12,7 @@ module ConvenientService
       #   NOTE: Heavily used in specs to test concerns and middlewares in isolation.
       #
       module Essential
-        include Support::Concern
+        include Config
 
         ##
         # @internal

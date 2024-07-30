@@ -10,7 +10,7 @@ module ConvenientService
       # Default configuration for the user-defined services.
       #
       module Standard
-        include Support::Concern
+        include Config
 
         ##
         # @internal

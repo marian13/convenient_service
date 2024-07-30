@@ -7,7 +7,7 @@ module ConvenientService
       # Default configuration for the user-defined features.
       #
       module Standard
-        include Support::Concern
+        include Config
 
         included do
           include Core

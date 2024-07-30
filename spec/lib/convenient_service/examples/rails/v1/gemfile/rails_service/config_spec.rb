@@ -13,7 +13,7 @@ RSpec.describe ConvenientService::Examples::Rails::V1::Gemfile::RailsService::Co
 
     subject { described_class }
 
-    specify { expect(described_class).to include_module(ConvenientService::Support::Concern) }
+    specify { expect(described_class).to include_module(ConvenientService::Config) }
 
     context "when included" do
       let(:service_class) do

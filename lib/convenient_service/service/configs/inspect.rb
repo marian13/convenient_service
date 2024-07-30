@@ -4,7 +4,7 @@ module ConvenientService
   module Service
     module Configs
       module Inspect
-        include Support::Concern
+        include Config
 
         # rubocop:disable Lint/ConstantDefinitionInBlock
         included do

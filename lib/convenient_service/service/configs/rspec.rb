@@ -4,7 +4,7 @@ module ConvenientService
   module Service
     module Configs
       module RSpec
-        include Support::Concern
+        include Config
 
         included do
           include Configs::Essential

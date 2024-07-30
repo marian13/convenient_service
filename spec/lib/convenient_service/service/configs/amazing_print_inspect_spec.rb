@@ -13,7 +13,7 @@ RSpec.describe ConvenientService::Service::Configs::AmazingPrintInspect, type: :
 
     subject { described_class }
 
-    it { is_expected.to include_module(ConvenientService::Support::Concern) }
+    it { is_expected.to include_module(ConvenientService::Config) }
 
     context "when included" do
       let(:service_class) do

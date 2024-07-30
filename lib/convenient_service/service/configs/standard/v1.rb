@@ -8,7 +8,7 @@ module ConvenientService
       #
       module Standard
         module V1
-          include Support::Concern
+          include Config
 
           ##
           # @internal

@@ -13,7 +13,7 @@ module ConvenientService
         class Gemfile
           class RailsService
             module Config
-              include Support::Concern
+              include ConvenientService::Config
 
               included do
                 include ConvenientService::Standard::V1::Config
