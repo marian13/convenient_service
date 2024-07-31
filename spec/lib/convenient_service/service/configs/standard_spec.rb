@@ -25,6 +25,10 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
       specify { expect(service_class).to include_module(ConvenientService::Service::Configs::Essential) }
       specify { expect(service_class).to include_module(ConvenientService::Service::Configs::Callbacks) }
       specify { expect(service_class).to include_module(ConvenientService::Service::Configs::Fallbacks) }
+
+      specify { expect(service_class).not_to include_module(ConvenientService::Service::Configs::Rollbacks) }
+      specify { expect(service_class).not_to include_module(ConvenientService::Service::Configs::FaultTolerance) }
+
       specify { expect(service_class).to include_module(ConvenientService::Service::Configs::Inspect) }
       specify { expect(service_class).to include_module(ConvenientService::Service::Configs::RSpec) }
       specify { expect(service_class).to include_module(ConvenientService::Service::Configs::ShortSyntax) }

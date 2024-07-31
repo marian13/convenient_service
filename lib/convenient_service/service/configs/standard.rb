@@ -26,6 +26,9 @@ module ConvenientService
 
           include Configs::Callbacks
           include Configs::Fallbacks
+          # include Configs::Rollbacks
+
+          # include Configs::FaultTolerance
           include Configs::Inspect
           include Configs::RSpec
           include Configs::ShortSyntax
