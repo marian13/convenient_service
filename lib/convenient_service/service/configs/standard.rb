@@ -30,22 +30,18 @@ module ConvenientService
 
           # include Configs::FaultTolerance
           include Configs::Inspect
+          include Configs::Recalculation
           include Configs::RSpec
 
           include Configs::CodeReviewAutomation
           include Configs::ShortSyntax
 
           concerns do
-            use ConvenientService::Plugins::Common::CachesConstructorArguments::Concern
-            use ConvenientService::Plugins::Common::CanBeCopied::Concern
-            use ConvenientService::Plugins::Service::CanRecalculateResult::Concern
-
             use ConvenientService::Plugins::Service::HasMermaidFlowchart::Concern
           end
 
           middlewares :initialize do
             use ConvenientService::Plugins::Service::CollectsServicesInException::Middleware
-            use ConvenientService::Plugins::Common::CachesConstructorArguments::Middleware
           end
 
           middlewares :result do
@@ -70,8 +66,6 @@ module ConvenientService
 
           class self::Result
             concerns do
-              use ConvenientService::Plugins::Result::CanRecalculateResult::Concern
-
               use ConvenientService::Plugins::Result::HasNegatedResult::Concern
               use ConvenientService::Plugins::Result::CanBeOwnResult::Concern
               use ConvenientService::Plugins::Result::CanHaveParentResult::Concern
