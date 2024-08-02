@@ -22,6 +22,8 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
         end
       end
 
+      specify { expect(service_class).to include_module(ConvenientService::Core) }
+
       specify { expect(service_class).to include_module(ConvenientService::Service::Configs::Essential) }
       specify { expect(service_class).to include_module(ConvenientService::Service::Configs::Callbacks) }
       specify { expect(service_class).to include_module(ConvenientService::Service::Configs::Fallbacks) }

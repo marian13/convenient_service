@@ -10,7 +10,7 @@ module ConvenientService
       # Default configuration for the user-defined services.
       #
       module Standard
-        include Config
+        include ConvenientService::Config
 
         ##
         # @internal
@@ -22,6 +22,8 @@ module ConvenientService
         #
         # rubocop:disable Lint/ConstantDefinitionInBlock
         included do
+          include ConvenientService::Core
+
           include Configs::Essential
 
           include Configs::Callbacks
@@ -65,6 +67,8 @@ module ConvenientService
           end
 
           class self::Result
+            include ConvenientService::Core
+
             concerns do
               use ConvenientService::Plugins::Result::HasNegatedResult::Concern
               use ConvenientService::Plugins::Result::CanBeOwnResult::Concern
@@ -77,6 +81,8 @@ module ConvenientService
           end
 
           class self::Step
+            include ConvenientService::Core
+
             middlewares :result do
               insert_after \
                 ConvenientService::Plugins::Step::HasResult::Middleware,

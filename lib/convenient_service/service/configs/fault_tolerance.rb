@@ -4,11 +4,11 @@ module ConvenientService
   module Service
     module Configs
       module FaultTolerance
-        include Config
+        include ConvenientService::Config
 
         # rubocop:disable Lint/ConstantDefinitionInBlock
         included do
-          include Configs::Essential
+          include ConvenientService::Core
 
           middlewares :result, scope: :class do
             use ConvenientService::Plugins::Service::RescuesResultUnhandledExceptions::Middleware
@@ -23,6 +23,8 @@ module ConvenientService
           end
 
           class self::Result
+            include ConvenientService::Core
+
             concerns do
               use ConvenientService::Plugins::Result::CanBeFromException::Concern
             end

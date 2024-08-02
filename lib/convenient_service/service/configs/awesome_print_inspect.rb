@@ -94,11 +94,11 @@ module ConvenientService
       # @see https://github.com/ruby/reline/blob/v0.5.8/lib/reline/unicode.rb#L30
       #
       module AwesomePrintInspect
-        include Config
+        include ConvenientService::Config
 
         # rubocop:disable Lint/ConstantDefinitionInBlock
         included do
-          include Configs::Essential
+          include ConvenientService::Core
 
           ##
           # @internal
@@ -109,29 +109,39 @@ module ConvenientService
           end
 
           class self::Result
+            include ConvenientService::Core
+
             concerns do
               use ConvenientService::Plugins::Result::HasAwesomePrintInspect::Concern
             end
 
             class self::Data
+              include ConvenientService::Core
+
               concerns do
                 use ConvenientService::Plugins::Data::HasAwesomePrintInspect::Concern
               end
             end
 
             class self::Message
+              include ConvenientService::Core
+
               concerns do
                 use ConvenientService::Plugins::Message::HasAwesomePrintInspect::Concern
               end
             end
 
             class self::Code
+              include ConvenientService::Core
+
               concerns do
                 use ConvenientService::Plugins::Code::HasAwesomePrintInspect::Concern
               end
             end
 
             class self::Status
+              include ConvenientService::Core
+
               concerns do
                 use ConvenientService::Plugins::Status::HasAwesomePrintInspect::Concern
               end
@@ -139,6 +149,8 @@ module ConvenientService
           end
 
           class self::Step
+            include ConvenientService::Core
+
             concerns do
               use ConvenientService::Plugins::Step::HasAwesomePrintInspect::Concern
             end

@@ -4,11 +4,11 @@ module ConvenientService
   module Service
     module Configs
       module AmazingPrintInspect
-        include Config
+        include ConvenientService::Config
 
         # rubocop:disable Lint/ConstantDefinitionInBlock
         included do
-          include Configs::Essential
+          include ConvenientService::Core
 
           ##
           # @internal
@@ -19,29 +19,39 @@ module ConvenientService
           end
 
           class self::Result
+            include ConvenientService::Core
+
             concerns do
               use ConvenientService::Plugins::Result::HasAmazingPrintInspect::Concern
             end
 
             class self::Data
+              include ConvenientService::Core
+
               concerns do
                 use ConvenientService::Plugins::Data::HasAmazingPrintInspect::Concern
               end
             end
 
             class self::Message
+              include ConvenientService::Core
+
               concerns do
                 use ConvenientService::Plugins::Message::HasAmazingPrintInspect::Concern
               end
             end
 
             class self::Code
+              include ConvenientService::Core
+
               concerns do
                 use ConvenientService::Plugins::Code::HasAmazingPrintInspect::Concern
               end
             end
 
             class self::Status
+              include ConvenientService::Core
+
               concerns do
                 use ConvenientService::Plugins::Status::HasAmazingPrintInspect::Concern
               end
@@ -49,6 +59,8 @@ module ConvenientService
           end
 
           class self::Step
+            include ConvenientService::Core
+
             concerns do
               use ConvenientService::Plugins::Step::HasAmazingPrintInspect::Concern
             end

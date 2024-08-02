@@ -4,11 +4,11 @@ module ConvenientService
   module Service
     module Configs
       module ShortSyntax
-        include Config
+        include ConvenientService::Config
 
         # rubocop:disable Lint/ConstantDefinitionInBlock
         included do
-          include Configs::Essential
+          include ConvenientService::Core
 
           concerns do
             use ConvenientService::Plugins::Service::HasJSendResultShortSyntax::Concern
@@ -28,12 +28,16 @@ module ConvenientService
           end
 
           class self::Result
+            include ConvenientService::Core
+
             concerns do
               use ConvenientService::Plugins::Common::HasJSendResultDuckShortSyntax::Concern
             end
           end
 
           class self::Step
+            include ConvenientService::Core
+
             concerns do
               use ConvenientService::Plugins::Common::HasJSendResultDuckShortSyntax::Concern
             end

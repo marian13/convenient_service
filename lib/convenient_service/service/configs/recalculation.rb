@@ -4,11 +4,11 @@ module ConvenientService
   module Service
     module Configs
       module Recalculation
-        include Config
+        include ConvenientService::Config
 
         # rubocop:disable Lint/ConstantDefinitionInBlock
         included do
-          include Configs::Essential
+          include ConvenientService::Core
 
           concerns do
             use ConvenientService::Plugins::Common::CachesConstructorArguments::Concern
@@ -21,6 +21,8 @@ module ConvenientService
           end
 
           class self::Result
+            include ConvenientService::Core
+
             concerns do
               use ConvenientService::Plugins::Result::CanRecalculateResult::Concern
             end

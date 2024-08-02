@@ -8,7 +8,7 @@ module ConvenientService
       #
       module Standard
         module V1
-          include Config
+          include ConvenientService::Config
 
           ##
           # @internal
@@ -20,6 +20,8 @@ module ConvenientService
           #
           # rubocop:disable Lint/ConstantDefinitionInBlock
           included do
+            include ConvenientService::Core
+
             include Configs::Essential
 
             include Configs::Callbacks

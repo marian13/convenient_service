@@ -12,7 +12,7 @@ module ConvenientService
       #   NOTE: Heavily used in specs to test concerns and middlewares in isolation.
       #
       module Essential
-        include Config
+        include ConvenientService::Config
 
         ##
         # @internal
@@ -84,18 +84,6 @@ module ConvenientService
 
             middlewares :initialize do
               use ConvenientService::Plugins::Result::HasJSendStatusAndAttributes::Middleware
-            end
-
-            class self::Data
-              include ConvenientService::Core
-            end
-
-            class self::Message
-              include ConvenientService::Core
-            end
-
-            class self::Code
-              include ConvenientService::Core
             end
 
             class self::Status

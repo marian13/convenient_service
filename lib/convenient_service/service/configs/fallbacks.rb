@@ -4,11 +4,11 @@ module ConvenientService
   module Service
     module Configs
       module Fallbacks
-        include Config
+        include ConvenientService::Config
 
         # rubocop:disable Lint/ConstantDefinitionInBlock
         included do
-          include Configs::Essential
+          include ConvenientService::Core
 
           middlewares :fallback_failure_result do
             use ConvenientService::Plugins::Service::CollectsServicesInException::Middleware
@@ -35,12 +35,16 @@ module ConvenientService
           end
 
           class self::Result
+            include ConvenientService::Core
+
             concerns do
               use ConvenientService::Plugins::Result::CanHaveFallbacks::Concern
             end
           end
 
           class self::Step
+            include ConvenientService::Core
+
             concerns do
               use ConvenientService::Plugins::Step::CanHaveFallbacks::Concern
             end

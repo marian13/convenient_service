@@ -4,11 +4,11 @@ module ConvenientService
   module Service
     module Configs
       module Rollbacks
-        include Config
+        include ConvenientService::Config
 
         # rubocop:disable Lint/ConstantDefinitionInBlock
         included do
-          include Configs::Essential
+          include ConvenientService::Core
 
           middlewares :result do
             insert_before \

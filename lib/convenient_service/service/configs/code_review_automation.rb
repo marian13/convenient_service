@@ -4,11 +4,11 @@ module ConvenientService
   module Service
     module Configs
       module CodeReviewAutomation
-        include Config
+        include ConvenientService::Config
 
         # rubocop:disable Lint/ConstantDefinitionInBlock
         included do
-          include Configs::Essential
+          include ConvenientService::Core
 
           concerns do
             use ConvenientService::Plugins::Service::CanNotBeInherited::Concern
@@ -19,6 +19,8 @@ module ConvenientService
           end
 
           class self::Result
+            include ConvenientService::Core
+
             concerns do
               use ConvenientService::Plugins::Result::CanHaveCheckedStatus::Concern
             end
@@ -36,6 +38,8 @@ module ConvenientService
             end
 
             class self::Status
+              include ConvenientService::Core
+
               concerns do
                 use ConvenientService::Plugins::Status::CanBeChecked::Concern
               end

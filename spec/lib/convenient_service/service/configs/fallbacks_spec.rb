@@ -17,12 +17,14 @@ RSpec.describe ConvenientService::Service::Configs::Fallbacks, type: :standard d
       let(:service_class) do
         Class.new.tap do |klass|
           klass.class_exec(described_class) do |mod|
+            include ConvenientService::Service::Configs::Essential
+
             include mod
           end
         end
       end
 
-      specify { expect(service_class).to include_module(ConvenientService::Service::Configs::Essential) }
+      specify { expect(service_class).to include_module(ConvenientService::Core) }
 
       example_group "service" do
         example_group "concerns" do
