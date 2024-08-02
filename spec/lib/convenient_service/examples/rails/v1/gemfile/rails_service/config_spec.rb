@@ -49,7 +49,7 @@ RSpec.describe ConvenientService::Examples::Rails::V1::Gemfile::RailsService::Co
 
         example_group "#result middlewares" do
           it "adds `ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingActiveModelValidations::Middleware.with(status: :failure)` before `ConvenientService::Plugins::Service::RaisesOnNotResultReturnValue::Middleware` to service #result middlewares" do
-            expect(service_class.middlewares(:result).to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingActiveModelValidations::Middleware.with(status: :failure) || current_middleware == ConvenientService::Plugins::Service::RaisesOnNotResultReturnValue::Middleware }).not_to be_nil
+            expect(service_class.middlewares(:result).to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingActiveModelValidations::Middleware.with(status: :failure) && current_middleware == ConvenientService::Plugins::Service::RaisesOnNotResultReturnValue::Middleware }).not_to be_nil
           end
         end
       end

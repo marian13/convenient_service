@@ -31,6 +31,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
 
       specify { expect(service_class).to include_module(ConvenientService::Service::Configs::Inspect) }
       specify { expect(service_class).to include_module(ConvenientService::Service::Configs::Recalculation) }
+      specify { expect(service_class).to include_module(ConvenientService::Service::Configs::ResultParentsTrace) }
       specify { expect(service_class).to include_module(ConvenientService::Service::Configs::RSpec) }
 
       specify { expect(service_class).to include_module(ConvenientService::Service::Configs::CodeReviewAutomation) }
@@ -50,8 +51,8 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
               ConvenientService::Service::Plugins::HasNegatedJSendResult::Concern,
               ConvenientService::Service::Plugins::CanHaveSteps::Concern,
               ConvenientService::Service::Plugins::CanHaveConnectedSteps::Concern,
-              ConvenientService::Service::Plugins::CanHaveFallbacks::Concern,
               ConvenientService::Common::Plugins::CanHaveCallbacks::Concern,
+              ConvenientService::Service::Plugins::CanHaveFallbacks::Concern,
               ConvenientService::Service::Plugins::HasInspect::Concern,
               ConvenientService::Common::Plugins::CachesConstructorArguments::Concern,
               ConvenientService::Common::Plugins::CanBeCopied::Concern,
@@ -300,12 +301,12 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
                 ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanHaveFallbacks::Concern,
                 ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasInspect::Concern,
                 ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanRecalculateResult::Concern,
+                ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeOwnResult::Concern,
+                ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanHaveParentResult::Concern,
                 ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeStubbedResult::Concern,
                 ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasStubbedResultInvocationsCounter::Concern,
                 ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanHaveCheckedStatus::Concern,
-                ConvenientService::Common::Plugins::HasJSendResultDuckShortSyntax::Concern,
-                ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeOwnResult::Concern,
-                ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanHaveParentResult::Concern
+                ConvenientService::Common::Plugins::HasJSendResultDuckShortSyntax::Concern
               ]
             end
 

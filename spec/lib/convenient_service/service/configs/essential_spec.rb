@@ -36,8 +36,7 @@ RSpec.describe ConvenientService::Service::Configs::Essential, type: :standard d
               ConvenientService::Service::Plugins::HasNegatedResult::Concern,
               ConvenientService::Service::Plugins::HasNegatedJSendResult::Concern,
               ConvenientService::Service::Plugins::CanHaveSteps::Concern,
-              ConvenientService::Service::Plugins::CanHaveConnectedSteps::Concern,
-              ConvenientService::Service::Plugins::CanHaveFallbacks::Concern
+              ConvenientService::Service::Plugins::CanHaveConnectedSteps::Concern
             ]
           end
 

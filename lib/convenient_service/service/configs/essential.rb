@@ -40,8 +40,6 @@ module ConvenientService
 
             use ConvenientService::Plugins::Service::CanHaveSteps::Concern
             use ConvenientService::Plugins::Service::CanHaveConnectedSteps::Concern
-
-            use ConvenientService::Plugins::Service::CanHaveFallbacks::Concern
           end
 
           middlewares :result do

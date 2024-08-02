@@ -22,8 +22,6 @@ module ConvenientService
         #
         # rubocop:disable Lint/ConstantDefinitionInBlock
         included do
-          include ConvenientService::Core
-
           include Configs::Essential
 
           include Configs::Callbacks
@@ -33,6 +31,7 @@ module ConvenientService
           # include Configs::FaultTolerance
           include Configs::Inspect
           include Configs::Recalculation
+          include Configs::ResultParentsTrace
           include Configs::RSpec
 
           include Configs::CodeReviewAutomation
@@ -53,29 +52,6 @@ module ConvenientService
             # TODO: Rewrite. This plugin does NOT do what it states. Probably I was NOT with a clear mind while writing it (facepalm).
             #
             # use ConvenientService::Plugins::Service::RaisesOnDoubleResult::Middleware
-
-            insert_before \
-              ConvenientService::Plugins::Service::RaisesOnNotResultReturnValue::Middleware,
-              ConvenientService::Plugins::Service::SetsParentToForeignResult::Middleware
-          end
-
-          class self::Result
-            include ConvenientService::Core
-
-            concerns do
-              use ConvenientService::Plugins::Result::CanBeOwnResult::Concern
-              use ConvenientService::Plugins::Result::CanHaveParentResult::Concern
-            end
-          end
-
-          class self::Step
-            include ConvenientService::Core
-
-            middlewares :result do
-              insert_after \
-                ConvenientService::Plugins::Step::HasResult::Middleware,
-                ConvenientService::Plugins::Step::CanHaveParentResult::Middleware
-            end
           end
         end
         # rubocop:enable Lint/ConstantDefinitionInBlock

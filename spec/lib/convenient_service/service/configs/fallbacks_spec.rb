@@ -17,8 +17,6 @@ RSpec.describe ConvenientService::Service::Configs::Fallbacks, type: :standard d
       let(:service_class) do
         Class.new.tap do |klass|
           klass.class_exec(described_class) do |mod|
-            include ConvenientService::Service::Configs::Essential
-
             include mod
           end
         end
@@ -95,7 +93,7 @@ RSpec.describe ConvenientService::Service::Configs::Fallbacks, type: :standard d
 
           example_group "#result middlewares" do
             it "adds `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallbacks::Middleware.with(fallback_true_status: :failure)` after `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::HasResult::Middleware` to service step middlewares for `#result`" do
-              expect(service_class::Step.middlewares(:result).to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::HasResult::Middleware || current_middleware == ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallbacks::Middleware.with(fallback_true_status: :failure) }).not_to be_nil
+              expect(service_class::Step.middlewares(:result).to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::HasResult::Middleware && current_middleware == ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallbacks::Middleware.with(fallback_true_status: :failure) }).not_to be_nil
             end
           end
         end

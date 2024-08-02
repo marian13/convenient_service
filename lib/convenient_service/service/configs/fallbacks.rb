@@ -10,6 +10,10 @@ module ConvenientService
         included do
           include Configs::Essential
 
+          concerns do
+            use ConvenientService::Plugins::Service::CanHaveFallbacks::Concern
+          end
+
           middlewares :fallback_failure_result do
             use ConvenientService::Plugins::Service::CollectsServicesInException::Middleware
             use ConvenientService::Plugins::Common::CachesReturnValue::Middleware

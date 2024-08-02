@@ -10,6 +10,7 @@ require_relative "configs/rollbacks"
 require_relative "configs/fault_tolerance"
 require_relative "configs/inspect"
 require_relative "configs/recalculation"
+require_relative "configs/result_parents_trace"
 require_relative "configs/rspec"
 
 require_relative "configs/code_review_automation"
