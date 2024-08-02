@@ -60,6 +60,13 @@ module ConvenientService
             use ConvenientService::Plugins::Common::CachesReturnValue::Middleware
           end
 
+          middlewares :negated_result do
+            use ConvenientService::Plugins::Service::CollectsServicesInException::Middleware
+            use ConvenientService::Plugins::Common::CachesReturnValue::Middleware
+
+            use ConvenientService::Plugins::Common::EnsuresNegatedJSendResult::Middleware
+          end
+
           class self::Internals
             include ConvenientService::Core
 
@@ -80,10 +87,16 @@ module ConvenientService
               use ConvenientService::Plugins::Result::HasJSendStatusAndAttributes::Concern
 
               use ConvenientService::Plugins::Result::CanHaveStep::Concern
+
+              use ConvenientService::Plugins::Result::HasNegatedResult::Concern
             end
 
             middlewares :initialize do
               use ConvenientService::Plugins::Result::HasJSendStatusAndAttributes::Middleware
+            end
+
+            middlewares :negated_result do
+              use ConvenientService::Plugins::Common::EnsuresNegatedJSendResult::Middleware
             end
 
             class self::Status

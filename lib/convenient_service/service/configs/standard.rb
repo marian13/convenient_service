@@ -59,24 +59,12 @@ module ConvenientService
               ConvenientService::Plugins::Service::SetsParentToForeignResult::Middleware
           end
 
-          middlewares :negated_result do
-            use ConvenientService::Plugins::Service::CollectsServicesInException::Middleware
-            use ConvenientService::Plugins::Common::CachesReturnValue::Middleware
-
-            use ConvenientService::Plugins::Common::EnsuresNegatedJSendResult::Middleware
-          end
-
           class self::Result
             include ConvenientService::Core
 
             concerns do
-              use ConvenientService::Plugins::Result::HasNegatedResult::Concern
               use ConvenientService::Plugins::Result::CanBeOwnResult::Concern
               use ConvenientService::Plugins::Result::CanHaveParentResult::Concern
-            end
-
-            middlewares :negated_result do
-              use ConvenientService::Plugins::Common::EnsuresNegatedJSendResult::Middleware
             end
           end
 

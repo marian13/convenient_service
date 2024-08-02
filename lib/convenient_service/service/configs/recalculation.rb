@@ -8,7 +8,7 @@ module ConvenientService
 
         # rubocop:disable Lint/ConstantDefinitionInBlock
         included do
-          include ConvenientService::Core
+          include Configs::Essential
 
           concerns do
             use ConvenientService::Plugins::Common::CachesConstructorArguments::Concern

@@ -22,8 +22,6 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
         end
       end
 
-      specify { expect(service_class).to include_module(ConvenientService::Core) }
-
       specify { expect(service_class).to include_module(ConvenientService::Service::Configs::Essential) }
       specify { expect(service_class).to include_module(ConvenientService::Service::Configs::Callbacks) }
       specify { expect(service_class).to include_module(ConvenientService::Service::Configs::Inspect) }
@@ -131,6 +129,20 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
           end
         end
 
+        example_group "#negated_result middlewares" do
+          let(:negated_result_middlewares) do
+            [
+              ConvenientService::Service::Plugins::CollectsServicesInException::Middleware,
+              ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
+              ConvenientService::Common::Plugins::EnsuresNegatedJSendResult::Middleware
+            ]
+          end
+
+          it "sets service middlewares for `#negated_result`" do
+            expect(service_class.middlewares(:negated_result).to_a).to eq(negated_result_middlewares)
+          end
+        end
+
         example_group "#success middlewares" do
           let(:success_middlewares) do
             [
@@ -203,6 +215,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
                 ConvenientService::Common::Plugins::HasConstructorWithoutInitialize::Concern,
                 ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Concern,
                 ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanHaveStep::Concern,
+                ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasNegatedResult::Concern,
                 ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasInspect::Concern,
                 ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeStubbedResult::Concern,
                 ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasStubbedResultInvocationsCounter::Concern,
@@ -229,6 +242,18 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
 
             it "sets service result middlewares for `#initialize`" do
               expect(service_class::Result.middlewares(:initialize).to_a).to eq(initialize_middlewares)
+            end
+          end
+
+          example_group "#negated_result middlewares" do
+            let(:negated_result_middlewares) do
+              [
+                ConvenientService::Common::Plugins::EnsuresNegatedJSendResult::Middleware
+              ]
+            end
+
+            it "sets service result middlewares for `#negated_result`" do
+              expect(service_class::Result.middlewares(:negated_result).to_a).to eq(negated_result_middlewares)
             end
           end
 

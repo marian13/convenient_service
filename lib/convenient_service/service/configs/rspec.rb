@@ -10,7 +10,7 @@ module ConvenientService
         included do
           return unless Dependencies.rspec.loaded?
 
-          include ConvenientService::Core
+          include Configs::Essential
 
           concerns do
             unshift ConvenientService::Plugins::Service::CanHaveStubbedResults::Concern
