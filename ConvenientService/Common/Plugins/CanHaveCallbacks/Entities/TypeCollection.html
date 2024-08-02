@@ -150,7 +150,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#==-instance_method" title="#== (instance method)">#<strong>==</strong>(other)  &#x21d2; Object </a>
+      <a href="#==-instance_method" title="#== (instance method)">#<strong>==</strong>(other)  &#x21d2; Boolean<sup>?</sup> </a>
     
 
     
@@ -194,7 +194,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(types:)  &#x21d2; TypeCollection </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(types:)  &#x21d2; void </a>
     
 
     
@@ -210,8 +210,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>A new instance of TypeCollection.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'></div></span>
   
 </li>
 
@@ -225,7 +224,7 @@
     <div class="method_details first">
   <h3 class="signature first" id="initialize-instance_method">
   
-    #<strong>initialize</strong>(types:)  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::TypeCollection (class)">TypeCollection</a></span></tt> 
+    #<strong>initialize</strong>(types:)  &#x21d2; <tt>void</tt> 
   
 
   
@@ -233,13 +232,27 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a new instance of TypeCollection.</p>
-
+    
 
   </div>
 </div>
 <div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
   
+    <li>
+      
+        <span class='name'>types</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Symbol&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
 
 </div><table class="source_code">
   <tr>
@@ -247,12 +260,12 @@
       <pre class="lines">
 
 
-11
-12
-13</pre>
+19
+20
+21</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/can_have_callbacks/entities/type_collection.rb', line 11</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/can_have_callbacks/entities/type_collection.rb', line 19</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>types:</span><span class='rparen'>)</span>
   <span class='ivar'>@types</span> <span class='op'>=</span> <span class='id identifier rubyid_types'>types</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='const'><span class='object_link'><a href="../Entities.html" title="ConvenientService::Common::Plugins::CanHaveCallbacks::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Type.html" title="ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Type (class)">Type</a></span></span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:cast!</span><span class='rparen'>)</span><span class='rparen'>)</span>
@@ -294,12 +307,12 @@
       <pre class="lines">
 
 
-9
-10
-11</pre>
+13
+14
+15</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/can_have_callbacks/entities/type_collection.rb', line 9</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/can_have_callbacks/entities/type_collection.rb', line 13</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_types'>types</span>
   <span class='ivar'>@types</span>
@@ -319,28 +332,69 @@
       <div class="method_details first">
   <h3 class="signature first" id="==-instance_method">
   
-    #<strong>==</strong>(other)  &#x21d2; <tt>Object</tt> 
+    #<strong>==</strong>(other)  &#x21d2; <tt>Boolean</tt><sup>?</sup> 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>other</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Can be any type.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>, <tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-21
-22
-23
-24
-25
-26
-27</pre>
+37
+38
+39
+40
+41
+42
+43</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/can_have_callbacks/entities/type_collection.rb', line 21</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/can_have_callbacks/entities/type_collection.rb', line 37</span>
 
 <span class='kw'>def</span> <span class='op'>==</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='rparen'>)</span>
@@ -370,7 +424,22 @@
   </div>
 </div>
 <div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
   
+    <li>
+      
+        <span class='name'>other_types</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Object&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
 <p class="tag_title">Returns:</p>
 <ul class="return">
   
@@ -391,14 +460,14 @@
       <pre class="lines">
 
 
-15
-16
-17
-18
-19</pre>
+27
+28
+29
+30
+31</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/can_have_callbacks/entities/type_collection.rb', line 15</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/can_have_callbacks/entities/type_collection.rb', line 27</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_contain_exactly?'>contain_exactly?</span><span class='lparen'>(</span><span class='id identifier rubyid_other_types'>other_types</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_other_types'>other_types</span> <span class='op'>=</span> <span class='id identifier rubyid_other_types'>other_types</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='const'><span class='object_link'><a href="../Entities.html" title="ConvenientService::Common::Plugins::CanHaveCallbacks::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Type.html" title="ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Type (class)">Type</a></span></span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:cast!</span><span class='rparen'>)</span><span class='rparen'>)</span>
@@ -415,7 +484,7 @@
 </div>
 
       <div id="footer">
-  Generated on Fri Aug  2 21:13:12 2024 by
+  Generated on Fri Aug  2 21:39:50 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.36 (ruby-3.2.5).
 </div>
