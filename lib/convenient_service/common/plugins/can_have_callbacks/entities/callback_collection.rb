@@ -13,7 +13,7 @@ module ConvenientService
             ##
             # @api private
             #
-            # @!attribute [r] types
+            # @!attribute [r] callbacks
             #   @return [ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::TypeCollection]
             #
             attr_reader :callbacks
@@ -66,7 +66,7 @@ module ConvenientService
             # @api private
             #
             # @param other [Object] Can be any type.
-            # @return [Boolean]
+            # @return [Boolean, nil]
             #
             def ==(other)
               return unless other.instance_of?(self.class)

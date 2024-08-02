@@ -8,13 +8,13 @@ require "convenient_service"
 RSpec.describe ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Type, type: :standard do
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
-    include ConvenientService::RSpec::PrimitiveMatchers::ExtendModule
 
     subject { described_class }
 
     it { is_expected.to include_module(ConvenientService::Support::Castable) }
     it { is_expected.to include_module(ConvenientService::Support::Delegate) }
-    it { is_expected.to extend_module(described_class::ClassMethods) }
+
+    it { is_expected.to include_module(described_class::Concern) }
   end
 
   example_group "attributes" do

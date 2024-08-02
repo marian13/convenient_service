@@ -161,7 +161,12 @@ module ConvenientService
             end
 
             ##
+            # @param context [Object] Can be any type.
+            # @param args [Array<Object>]
             # @return [Object] Can be any type.
+            #
+            # @internal
+            #   FIX: `mark_as_called`.
             #
             def call_callback_in_context(context, *args)
               context.instance_exec(*args, &block).tap { mark_as_called }
