@@ -29,6 +29,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
       specify { expect(service_class).not_to include_module(ConvenientService::Service::Configs::Rollbacks) }
       specify { expect(service_class).not_to include_module(ConvenientService::Service::Configs::FaultTolerance) }
 
+      specify { expect(service_class).to include_module(ConvenientService::Service::Configs::ExceptionServicesTrace) }
       specify { expect(service_class).to include_module(ConvenientService::Service::Configs::Inspect) }
       specify { expect(service_class).to include_module(ConvenientService::Service::Configs::Recalculation) }
       specify { expect(service_class).to include_module(ConvenientService::Service::Configs::ResultParentsTrace) }
@@ -71,6 +72,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
         example_group "#initialize middlewares" do
           let(:initialize_middlewares) do
             [
+              ConvenientService::Service::Plugins::CollectsServicesInException::Middleware,
               ConvenientService::Common::Plugins::CachesConstructorArguments::Middleware,
               ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Middleware,
               ConvenientService::Service::Plugins::CollectsServicesInException::Middleware
@@ -124,6 +126,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
               ConvenientService::Service::Plugins::CollectsServicesInException::Middleware,
               ConvenientService::Service::Plugins::CountsStubbedResultsInvocations::Middleware,
               ConvenientService::Service::Plugins::CanHaveStubbedResults::Middleware,
+              ConvenientService::Service::Plugins::CollectsServicesInException::Middleware,
               ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
               ConvenientService::Common::Plugins::CanHaveCallbacks::Middleware,
               ConvenientService::Service::Plugins::SetsParentToForeignResult::Middleware,
@@ -585,7 +588,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
       # https://github.com/marian13/convenient_service/discussions/43
       #
       it "applies its `included` block only once" do
-        expect(service_class.middlewares(:result).to_a.size).to eq(8)
+        expect(service_class.middlewares(:result).to_a.size).to eq(9)
       end
     end
   end

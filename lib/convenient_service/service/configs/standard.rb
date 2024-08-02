@@ -28,6 +28,7 @@ module ConvenientService
           include Configs::Fallbacks
           # include Configs::Rollbacks
 
+          include Configs::ExceptionServicesTrace
           # include Configs::FaultTolerance
           include Configs::Inspect
           include Configs::Recalculation
@@ -41,18 +42,12 @@ module ConvenientService
             use ConvenientService::Plugins::Service::HasMermaidFlowchart::Concern
           end
 
-          middlewares :initialize do
-            use ConvenientService::Plugins::Service::CollectsServicesInException::Middleware
-          end
-
-          middlewares :result do
-            unshift ConvenientService::Plugins::Service::CollectsServicesInException::Middleware
-
-            ##
-            # TODO: Rewrite. This plugin does NOT do what it states. Probably I was NOT with a clear mind while writing it (facepalm).
-            #
-            # use ConvenientService::Plugins::Service::RaisesOnDoubleResult::Middleware
-          end
+          ##
+          # TODO: Rewrite. This plugin does NOT do what it states. Probably I was NOT with a clear mind while writing it (facepalm).
+          #
+          # middlewares :result do
+          #   use ConvenientService::Plugins::Service::RaisesOnDoubleResult::Middleware
+          # end
         end
         # rubocop:enable Lint/ConstantDefinitionInBlock
       end

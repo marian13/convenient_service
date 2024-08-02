@@ -72,9 +72,9 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
         example_group "#initialize middlewares" do
           let(:initialize_middlewares) do
             [
+              ConvenientService::Service::Plugins::CollectsServicesInException::Middleware,
               ConvenientService::Common::Plugins::CachesConstructorArguments::Middleware,
-              ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Middleware,
-              ConvenientService::Service::Plugins::CollectsServicesInException::Middleware
+              ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Middleware
             ]
           end
 
@@ -122,9 +122,9 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
         example_group "#result middlewares" do
           let(:result_middlewares) do
             [
-              ConvenientService::Service::Plugins::CollectsServicesInException::Middleware,
               ConvenientService::Service::Plugins::CountsStubbedResultsInvocations::Middleware,
               ConvenientService::Service::Plugins::CanHaveStubbedResults::Middleware,
+              ConvenientService::Service::Plugins::CollectsServicesInException::Middleware,
               ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
               ConvenientService::Common::Plugins::CanHaveCallbacks::Middleware,
               ConvenientService::Service::Plugins::SetsParentToForeignResult::Middleware,

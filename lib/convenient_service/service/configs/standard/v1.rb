@@ -25,6 +25,8 @@ module ConvenientService
             include Configs::Essential
 
             include Configs::Callbacks
+
+            include Configs::ExceptionServicesTrace
             include Configs::Inspect
             include Configs::Recalculation
             include Configs::ResultParentsTrace

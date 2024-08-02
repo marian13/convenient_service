@@ -7,6 +7,7 @@ require_relative "configs/callbacks"
 require_relative "configs/fallbacks"
 require_relative "configs/rollbacks"
 
+require_relative "configs/exception_services_trace"
 require_relative "configs/fault_tolerance"
 require_relative "configs/inspect"
 require_relative "configs/recalculation"
