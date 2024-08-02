@@ -21,6 +21,10 @@ module ConvenientService
               @value = value
             end
 
+            ##
+            # @param other [Object] Can be any type.
+            # @return [Boolean, nil]
+            #
             def ==(other)
               return unless other.instance_of?(self.class)
 

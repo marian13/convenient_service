@@ -115,7 +115,7 @@ module ConvenientService
 
             ##
             # @param other [Object] Can be any type.
-            # @return [Boolead]
+            # @return [Boolean, nil]
             #
             def ==(other)
               return unless other.instance_of?(self.class)

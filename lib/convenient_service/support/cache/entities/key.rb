@@ -19,7 +19,7 @@ module ConvenientService
 
           ##
           # @param other [Object] Can be any type.
-          # @return [Boolean]
+          # @return [Boolean, nil]
           #
           def ==(other)
             return unless other.instance_of?(self.class)
@@ -33,7 +33,7 @@ module ConvenientService
 
           ##
           # @param other [Object] Can be any type.
-          # @return [Boolean]
+          # @return [Boolean, nil]
           #
           # @internal
           #   IMPORTANT: `Key` instances are used as Ruby hash keys.

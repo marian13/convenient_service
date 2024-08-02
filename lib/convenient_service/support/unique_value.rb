@@ -19,7 +19,7 @@ module ConvenientService
 
       ##
       # @param other [Object] Can be any type.
-      # @return [Boolean]
+      # @return [Boolean, nil]
       #
       # @internal
       #   NOTE: Every single Ruby object responds to `object_id`.
@@ -32,7 +32,7 @@ module ConvenientService
 
       ##
       # @param other [Object] Can be any type.
-      # @return [Boolean]
+      # @return [Boolean, nil]
       #
       def ===(other)
         self == other
@@ -40,7 +40,7 @@ module ConvenientService
 
       ##
       # @param other [Object] Can be any type.
-      # @return [Boolean]
+      # @return [Boolean, nil]
       #
       # @internal
       #   TODO: What to do in case unique value is used as hash key? See `ConveninetService::Support::Cache::Entities::Key`.

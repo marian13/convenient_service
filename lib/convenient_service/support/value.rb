@@ -19,7 +19,7 @@ module ConvenientService
 
       ##
       # @param other [Object] Can be any type.
-      # @return [Boolean]
+      # @return [Boolean, nil]
       #
       def ==(other)
         return unless other.instance_of?(self.class)
@@ -29,7 +29,7 @@ module ConvenientService
 
       ##
       # @param other [Object] Can be any type.
-      # @return [Boolean]
+      # @return [Boolean, nil]
       #
       def ===(other)
         self == other
@@ -37,7 +37,7 @@ module ConvenientService
 
       ##
       # @param other [Object] Can be any type.
-      # @return [Boolean]
+      # @return [Boolean, nil]
       #
       def eql?(other)
         return unless other.instance_of?(self.class)
