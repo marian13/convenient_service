@@ -26,7 +26,6 @@ module ConvenientService
 
             include Configs::Callbacks
 
-            include Configs::ExceptionServicesTrace
             include Configs::Inspect
             include Configs::Recalculation
             include Configs::ResultParentsTrace
@@ -34,6 +33,8 @@ module ConvenientService
 
             include Configs::CodeReviewAutomation
             include Configs::ShortSyntax
+
+            include Configs::ExceptionServicesTrace # Should be added after `Fallacks` config, when it is used.
 
             concerns do
               use ConvenientService::Plugins::Service::HasMermaidFlowchart::Concern

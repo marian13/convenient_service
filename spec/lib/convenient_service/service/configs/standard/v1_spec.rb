@@ -38,6 +38,8 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
       specify { expect(service_class).to include_module(ConvenientService::Service::Configs::CodeReviewAutomation) }
       specify { expect(service_class).to include_module(ConvenientService::Service::Configs::ShortSyntax) }
 
+      specify { expect(service_class).to include_module(ConvenientService::Service::Configs::ExceptionServicesTrace) }
+
       example_group "service" do
         example_group "concerns" do
           let(:concerns) do
@@ -124,9 +126,9 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
           let(:result_middlewares) do
             [
               ConvenientService::Service::Plugins::CollectsServicesInException::Middleware,
+              ConvenientService::Service::Plugins::CollectsServicesInException::Middleware,
               ConvenientService::Service::Plugins::CountsStubbedResultsInvocations::Middleware,
               ConvenientService::Service::Plugins::CanHaveStubbedResults::Middleware,
-              ConvenientService::Service::Plugins::CollectsServicesInException::Middleware,
               ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
               ConvenientService::Common::Plugins::CanHaveCallbacks::Middleware,
               ConvenientService::Service::Plugins::SetsParentToForeignResult::Middleware,

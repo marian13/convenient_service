@@ -17,6 +17,20 @@ module ConvenientService
           middlewares :result do
             unshift ConvenientService::Plugins::Service::CollectsServicesInException::Middleware
           end
+
+          if include? Configs::Fallbacks
+            middlewares :fallback_failure_result do
+              unshift ConvenientService::Plugins::Service::CollectsServicesInException::Middleware
+            end
+
+            middlewares :fallback_error_result do
+              unshift ConvenientService::Plugins::Service::CollectsServicesInException::Middleware
+            end
+
+            middlewares :fallback_result do
+              unshift ConvenientService::Plugins::Service::CollectsServicesInException::Middleware
+            end
+          end
         end
         # rubocop:enable Lint/ConstantDefinitionInBlock
       end

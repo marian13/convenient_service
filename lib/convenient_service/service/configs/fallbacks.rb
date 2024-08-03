@@ -15,7 +15,6 @@ module ConvenientService
           end
 
           middlewares :fallback_failure_result do
-            use ConvenientService::Plugins::Service::CollectsServicesInException::Middleware
             use ConvenientService::Plugins::Common::CachesReturnValue::Middleware
 
             use ConvenientService::Plugins::Service::RaisesOnNotResultReturnValue::Middleware
@@ -23,7 +22,6 @@ module ConvenientService
           end
 
           middlewares :fallback_error_result do
-            use ConvenientService::Plugins::Service::CollectsServicesInException::Middleware
             use ConvenientService::Plugins::Common::CachesReturnValue::Middleware
 
             use ConvenientService::Plugins::Service::RaisesOnNotResultReturnValue::Middleware
@@ -31,7 +29,6 @@ module ConvenientService
           end
 
           middlewares :fallback_result do
-            use ConvenientService::Plugins::Service::CollectsServicesInException::Middleware
             use ConvenientService::Plugins::Common::CachesReturnValue::Middleware
 
             use ConvenientService::Plugins::Service::RaisesOnNotResultReturnValue::Middleware
