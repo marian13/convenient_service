@@ -21,8 +21,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       context "when result includes `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data::Concern`" do
         let(:service) do
           Class.new do
-            include ConvenientService::Service::Configs::Essential
-            include ConvenientService::Service::Configs::Inspect
+            include ConvenientService::Standard::Config
 
             def result
               success
@@ -30,7 +29,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           end
         end
 
-        let(:data) { service.result.data }
+        let(:data) { service.result.unsafe_data }
 
         it "returns `true`" do
           expect(command_result).to eq(true)

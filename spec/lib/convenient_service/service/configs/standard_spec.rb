@@ -38,6 +38,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
       specify { expect(service_class).to include_module(ConvenientService::Service::Configs::ShortSyntax) }
 
       specify { expect(service_class).to include_module(ConvenientService::Service::Configs::ExceptionServicesTrace) }
+      specify { expect(service_class).to include_module(ConvenientService::Service::Configs::PerInstanceCaching) }
 
       example_group "service" do
         example_group "concerns" do
@@ -124,13 +125,13 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
         example_group "#result middlewares" do
           let(:result_middlewares) do
             [
+              ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
               ConvenientService::Service::Plugins::CollectsServicesInException::Middleware,
               ConvenientService::Service::Plugins::CountsStubbedResultsInvocations::Middleware,
               ConvenientService::Service::Plugins::CanHaveStubbedResults::Middleware,
-              ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
-              ConvenientService::Common::Plugins::CanHaveCallbacks::Middleware,
               ConvenientService::Service::Plugins::SetsParentToForeignResult::Middleware,
               ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Middleware,
+              ConvenientService::Common::Plugins::CanHaveCallbacks::Middleware,
               ConvenientService::Service::Plugins::CanHaveConnectedSteps::Middleware
 
               ##
@@ -172,8 +173,8 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
         example_group "#fallback_failure_result middlewares" do
           let(:fallback_failure_result_middlewares) do
             [
-              ConvenientService::Service::Plugins::CollectsServicesInException::Middleware,
               ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
+              ConvenientService::Service::Plugins::CollectsServicesInException::Middleware,
               ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Middleware,
               ConvenientService::Service::Plugins::CanHaveFallbacks::Middleware.with(status: :failure)
             ]
@@ -187,8 +188,8 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
         example_group "#fallback_error_result middlewares" do
           let(:fallback_error_result_middlewares) do
             [
-              ConvenientService::Service::Plugins::CollectsServicesInException::Middleware,
               ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
+              ConvenientService::Service::Plugins::CollectsServicesInException::Middleware,
               ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Middleware,
               ConvenientService::Service::Plugins::CanHaveFallbacks::Middleware.with(status: :error)
             ]
@@ -202,8 +203,8 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
         example_group "#fallback_result middlewares" do
           let(:fallback_result_middlewares) do
             [
-              ConvenientService::Service::Plugins::CollectsServicesInException::Middleware,
               ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
+              ConvenientService::Service::Plugins::CollectsServicesInException::Middleware,
               ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Middleware,
               ConvenientService::Service::Plugins::CanHaveFallbacks::Middleware.with(status: nil)
             ]
@@ -217,8 +218,8 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
         example_group "#negated_result middlewares" do
           let(:negated_result_middlewares) do
             [
-              ConvenientService::Service::Plugins::CollectsServicesInException::Middleware,
               ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
+              ConvenientService::Service::Plugins::CollectsServicesInException::Middleware,
               ConvenientService::Common::Plugins::EnsuresNegatedJSendResult::Middleware
             ]
           end

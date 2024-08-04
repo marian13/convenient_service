@@ -15,22 +15,16 @@ module ConvenientService
           end
 
           middlewares :fallback_failure_result do
-            use ConvenientService::Plugins::Common::CachesReturnValue::Middleware
-
             use ConvenientService::Plugins::Service::RaisesOnNotResultReturnValue::Middleware
             use ConvenientService::Plugins::Service::CanHaveFallbacks::Middleware.with(status: :failure)
           end
 
           middlewares :fallback_error_result do
-            use ConvenientService::Plugins::Common::CachesReturnValue::Middleware
-
             use ConvenientService::Plugins::Service::RaisesOnNotResultReturnValue::Middleware
             use ConvenientService::Plugins::Service::CanHaveFallbacks::Middleware.with(status: :error)
           end
 
           middlewares :fallback_result do
-            use ConvenientService::Plugins::Common::CachesReturnValue::Middleware
-
             use ConvenientService::Plugins::Service::RaisesOnNotResultReturnValue::Middleware
             use ConvenientService::Plugins::Service::CanHaveFallbacks::Middleware.with(status: nil)
           end

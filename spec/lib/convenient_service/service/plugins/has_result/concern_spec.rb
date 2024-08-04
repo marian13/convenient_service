@@ -12,8 +12,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern, type: :s
 
   let(:service_class) do
     Class.new do
-      include ConvenientService::Service::Configs::Essential
-      include ConvenientService::Service::Configs::Inspect
+      include ConvenientService::Standard::Config
     end
   end
 
@@ -75,8 +74,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern, type: :s
 
     let(:service_class) do
       Class.new do
-        include ConvenientService::Service::Configs::Essential
-        include ConvenientService::Service::Configs::Inspect
+        include ConvenientService::Standard::Config
 
         def result
           success

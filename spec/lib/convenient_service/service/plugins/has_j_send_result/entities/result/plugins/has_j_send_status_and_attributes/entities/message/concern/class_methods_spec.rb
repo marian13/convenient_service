@@ -66,8 +66,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       context "when `other` is message instance in terms of `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message::Commands::IsMessage`" do
         let(:service) do
           Class.new do
-            include ConvenientService::Service::Configs::Essential
-            include ConvenientService::Service::Configs::Inspect
+            include ConvenientService::Standard::Config
 
             def result
               success
@@ -75,7 +74,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           end
         end
 
-        let(:other) { service.result.message }
+        let(:other) { service.result.unsafe_message }
 
         specify do
           expect { message_class === other }

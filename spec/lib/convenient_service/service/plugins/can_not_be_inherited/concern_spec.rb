@@ -37,8 +37,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanNotBeInherited::Concern, 
     describe ".inherited" do
       let(:service_class) do
         Class.new do
-          include ConvenientService::Service::Configs::Essential
-          include ConvenientService::Service::Configs::Inspect
+          include ConvenientService::Standard::Config
 
           concerns do
             use ConvenientService::Service::Plugins::CanNotBeInherited::Concern
@@ -57,8 +56,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanNotBeInherited::Concern, 
 
       let(:sub_service_class) do
         Class.new do
-          include ConvenientService::Service::Configs::Essential
-          include ConvenientService::Service::Configs::Inspect
+          include ConvenientService::Standard::Config
         end
       end
 
@@ -91,8 +89,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanNotBeInherited::Concern, 
             namespace.module_exec do
               # rubocop:disable Lint/ConstantDefinitionInBlock, RSpec/LeakyConstantDeclaration
               class self::Service
-                include ConvenientService::Service::Configs::Essential
-                include ConvenientService::Service::Configs::Inspect
+                include ConvenientService::Standard::Config
 
                 concerns do
                   use ConvenientService::Service::Plugins::CanNotBeInherited::Concern

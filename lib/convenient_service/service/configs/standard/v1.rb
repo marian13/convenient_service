@@ -35,6 +35,7 @@ module ConvenientService
             include Configs::ShortSyntax
 
             include Configs::ExceptionServicesTrace # Should be added after `Fallacks` config, when it is used.
+            include Configs::PerInstanceCaching # Should be added after `Fallacks` config, when it is used.
 
             concerns do
               use ConvenientService::Plugins::Service::HasMermaidFlowchart::Concern
@@ -44,13 +45,7 @@ module ConvenientService
                 ConvenientService::Plugins::Service::CanHaveSequentialSteps::Concern
             end
 
-            middlewares :initialize do
-              use ConvenientService::Plugins::Service::CollectsServicesInException::Middleware
-            end
-
             middlewares :result do
-              unshift ConvenientService::Plugins::Service::CollectsServicesInException::Middleware
-
               ##
               # TODO: Rewrite. This plugin does NOT do what it states. Probably I was NOT with a clear mind while writing it (facepalm).
               #

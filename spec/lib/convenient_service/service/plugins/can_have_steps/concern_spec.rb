@@ -11,8 +11,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Concern, type:
 
   let(:service_class) do
     Class.new do
-      include ConvenientService::Service::Configs::Essential
-      include ConvenientService::Service::Configs::Inspect
+      include ConvenientService::Standard::Config
     end
   end
 

@@ -43,34 +43,13 @@ module ConvenientService
           end
 
           middlewares :result do
-            use ConvenientService::Plugins::Common::CachesReturnValue::Middleware
-
             use ConvenientService::Plugins::Service::RaisesOnNotResultReturnValue::Middleware
 
             use ConvenientService::Plugins::Service::CanHaveConnectedSteps::Middleware
           end
 
-          middlewares :regular_result do
-            use ConvenientService::Plugins::Common::CachesReturnValue::Middleware
-          end
-
-          middlewares :steps_result do
-            use ConvenientService::Plugins::Common::CachesReturnValue::Middleware
-          end
-
           middlewares :negated_result do
-            use ConvenientService::Plugins::Service::CollectsServicesInException::Middleware
-            use ConvenientService::Plugins::Common::CachesReturnValue::Middleware
-
             use ConvenientService::Plugins::Common::EnsuresNegatedJSendResult::Middleware
-          end
-
-          class self::Internals
-            include ConvenientService::Core
-
-            concerns do
-              use ConvenientService::Plugins::Internals::HasCache::Concern
-            end
           end
 
           class self::Result
@@ -103,22 +82,6 @@ module ConvenientService
               concerns do
                 use ConvenientService::Plugins::Common::HasInternals::Concern
               end
-
-              class self::Internals
-                include ConvenientService::Core
-
-                concerns do
-                  use ConvenientService::Plugins::Internals::HasCache::Concern
-                end
-              end
-            end
-
-            class self::Internals
-              include ConvenientService::Core
-
-              concerns do
-                use ConvenientService::Plugins::Internals::HasCache::Concern
-              end
             end
           end
 
@@ -140,30 +103,12 @@ module ConvenientService
             # TODO: Simple debug for middlewares. For one service only.
             #
             middlewares :result do
-              use ConvenientService::Plugins::Common::CachesReturnValue::Middleware
-
               use ConvenientService::Plugins::Step::HasResult::Middleware
 
               use ConvenientService::Plugins::Step::RaisesOnNotResultReturnValue::Middleware
 
               use ConvenientService::Plugins::Step::CanBeServiceStep::Middleware
               use ConvenientService::Plugins::Step::CanBeMethodStep::Middleware
-            end
-
-            middlewares :method_result do
-              use ConvenientService::Plugins::Common::CachesReturnValue::Middleware
-            end
-
-            middlewares :service_result do
-              use ConvenientService::Plugins::Common::CachesReturnValue::Middleware
-            end
-
-            class self::Internals
-              include ConvenientService::Core
-
-              concerns do
-                use ConvenientService::Plugins::Internals::HasCache::Concern
-              end
             end
           end
         end

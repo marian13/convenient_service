@@ -18,6 +18,10 @@ module ConvenientService
             unshift ConvenientService::Plugins::Service::CollectsServicesInException::Middleware
           end
 
+          middlewares :negated_result do
+            unshift ConvenientService::Plugins::Service::CollectsServicesInException::Middleware
+          end
+
           if include? Configs::Fallbacks
             middlewares :fallback_failure_result do
               unshift ConvenientService::Plugins::Service::CollectsServicesInException::Middleware

@@ -26,8 +26,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
 
       let(:service_class) do
         Class.new do
-          include ConvenientService::Service::Configs::Essential
-          include ConvenientService::Service::Configs::Inspect
+          include ConvenientService::Standard::Config
 
           def result
             raise StandardError, "exception message"
@@ -62,8 +61,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
       context "when exception has NO backtrace" do
         let(:service_class) do
           Class.new do
-            include ConvenientService::Service::Configs::Essential
-            include ConvenientService::Service::Configs::Inspect
+            include ConvenientService::Standard::Config
 
             def result
               ##
@@ -95,8 +93,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
       context "when exception has backtrace with short backtrace" do
         let(:service_class) do
           Class.new do
-            include ConvenientService::Service::Configs::Essential
-            include ConvenientService::Service::Configs::Inspect
+            include ConvenientService::Standard::Config
 
             def result
               raise StandardError, "exception message", caller.take(5)
@@ -120,8 +117,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
       context "when exception has backtrace with long backtrace" do
         let(:service_class) do
           Class.new do
-            include ConvenientService::Service::Configs::Essential
-            include ConvenientService::Service::Configs::Inspect
+            include ConvenientService::Standard::Config
 
             def result
               raise StandardError, "exception message", caller + ["# /line.rb:1:in `foo'"] * 5
@@ -146,8 +142,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
       context "when exception has NO message" do
         let(:service_class) do
           Class.new do
-            include ConvenientService::Service::Configs::Essential
-            include ConvenientService::Service::Configs::Inspect
+            include ConvenientService::Standard::Config
 
             def result
               raise StandardError, nil, caller
@@ -175,8 +170,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
       context "when exception has multiline message" do
         let(:service_class) do
           Class.new do
-            include ConvenientService::Service::Configs::Essential
-            include ConvenientService::Service::Configs::Inspect
+            include ConvenientService::Standard::Config
 
             def result
               message = <<~TEXT
@@ -207,8 +201,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
       context "when exception has cause" do
         let(:service_class) do
           Class.new do
-            include ConvenientService::Service::Configs::Essential
-            include ConvenientService::Service::Configs::Inspect
+            include ConvenientService::Standard::Config
 
             def result
               raise StandardError, "cause message"
@@ -242,8 +235,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
 
         let(:service_class) do
           Class.new do
-            include ConvenientService::Service::Configs::Essential
-            include ConvenientService::Service::Configs::Inspect
+            include ConvenientService::Standard::Config
 
             def result
               raise StandardError, "exception message", caller + ["# /line.rb:1:in `foo'"] * 10

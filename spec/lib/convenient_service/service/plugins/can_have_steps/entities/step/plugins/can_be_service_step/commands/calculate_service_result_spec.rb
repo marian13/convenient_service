@@ -23,8 +23,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       context "when step is NOT service step" do
         let(:container) do
           Class.new do
-            include ConvenientService::Service::Configs::Essential
-            include ConvenientService::Service::Configs::Inspect
+            include ConvenientService::Standard::Config
 
             step :foo
 
@@ -56,8 +55,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         let(:container) do
           Class.new.tap do |klass|
             klass.class_exec(first_step) do |first_step|
-              include ConvenientService::Service::Configs::Essential
-              include ConvenientService::Service::Configs::Inspect
+              include ConvenientService::Standard::Config
 
               step first_step,
                 in: [:foo, :bar]
@@ -75,8 +73,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
         let(:first_step) do
           Class.new do
-            include ConvenientService::Service::Configs::Essential
-            include ConvenientService::Service::Configs::Inspect
+            include ConvenientService::Standard::Config
 
             def result
               success

@@ -30,8 +30,7 @@ RSpec.describe ConvenientService::Commands::IsServiceClass, type: :standard do
         context "when `service_class` does includes `ConvenientService::Service::Configs::Essential`" do
           let(:service_class) do
             Class.new do
-              include ConvenientService::Service::Configs::Essential
-              include ConvenientService::Service::Configs::Inspect
+              include ConvenientService::Standard::Config
 
               def result
                 success

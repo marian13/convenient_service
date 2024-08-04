@@ -37,6 +37,12 @@ RSpec.describe ConvenientService::Service::Configs::ExceptionServicesTrace, type
           end
         end
 
+        example_group "#negated_result middlewares" do
+          it "prepends `ConvenientService::Service::Plugins::CollectsServicesInException::Middleware` to service middlewares for `#negated_result`" do
+            expect(service_class.middlewares(:negated_result).to_a.first).to eq(ConvenientService::Plugins::Service::CollectsServicesInException::Middleware)
+          end
+        end
+
         context "when service class does NOT include `Fallbacks` config" do
           example_group "#fallback_failure_result middlewares" do
             it "does NOT add `ConvenientService::Service::Plugins::CollectsServicesInException::Middleware` to service middlewares for `#fallback_failure_result`" do

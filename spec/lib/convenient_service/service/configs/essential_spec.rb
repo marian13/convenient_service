@@ -48,7 +48,6 @@ RSpec.describe ConvenientService::Service::Configs::Essential, type: :standard d
         example_group "#result middlewares" do
           let(:result_middlewares) do
             [
-              ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
               ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Middleware,
               ConvenientService::Service::Plugins::CanHaveConnectedSteps::Middleware
             ]
@@ -59,55 +58,15 @@ RSpec.describe ConvenientService::Service::Configs::Essential, type: :standard d
           end
         end
 
-        example_group "#regular_result middlewares" do
-          let(:regular_result_middlewares) do
-            [
-              ConvenientService::Common::Plugins::CachesReturnValue::Middleware
-            ]
-          end
-
-          it "sets service middlewares for `#regular_result`" do
-            expect(service_class.middlewares(:regular_result).to_a).to eq(regular_result_middlewares)
-          end
-        end
-
-        example_group "#steps_result middlewares" do
-          let(:steps_result_middlewares) do
-            [
-              ConvenientService::Common::Plugins::CachesReturnValue::Middleware
-            ]
-          end
-
-          it "sets service middlewares for `#steps_result`" do
-            expect(service_class.middlewares(:steps_result).to_a).to eq(steps_result_middlewares)
-          end
-        end
-
         example_group "#negated_result middlewares" do
           let(:negated_result_middlewares) do
             [
-              ConvenientService::Service::Plugins::CollectsServicesInException::Middleware,
-              ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
               ConvenientService::Common::Plugins::EnsuresNegatedJSendResult::Middleware
             ]
           end
 
           it "sets service middlewares for `#negated_result`" do
             expect(service_class.middlewares(:negated_result).to_a).to eq(negated_result_middlewares)
-          end
-        end
-
-        example_group "service internals" do
-          example_group "concerns" do
-            let(:concerns) do
-              [
-                ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Plugins::HasCache::Concern
-              ]
-            end
-
-            it "sets service internals concerns" do
-              expect(service_class::Internals.concerns.to_a).to eq(concerns)
-            end
           end
         end
 
@@ -165,34 +124,6 @@ RSpec.describe ConvenientService::Service::Configs::Essential, type: :standard d
                 expect(service_class::Result::Status.concerns.to_a).to eq(concerns)
               end
             end
-
-            example_group "service result status internals" do
-              example_group "concerns" do
-                let(:concerns) do
-                  [
-                    ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Plugins::HasCache::Concern
-                  ]
-                end
-
-                it "sets service result status internals concerns" do
-                  expect(service_class::Result::Status::Internals.concerns.to_a).to eq(concerns)
-                end
-              end
-            end
-          end
-
-          example_group "service result internals" do
-            example_group "concerns" do
-              let(:concerns) do
-                [
-                  ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Plugins::HasCache::Concern
-                ]
-              end
-
-              it "sets service result internals concerns" do
-                expect(service_class::Result::Internals.concerns.to_a).to eq(concerns)
-              end
-            end
           end
         end
 
@@ -216,7 +147,6 @@ RSpec.describe ConvenientService::Service::Configs::Essential, type: :standard d
           example_group "#result middlewares" do
             let(:result_middlewares) do
               [
-                ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
                 ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::HasResult::Middleware,
                 ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::RaisesOnNotResultReturnValue::Middleware,
                 ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeServiceStep::Middleware,
@@ -226,44 +156,6 @@ RSpec.describe ConvenientService::Service::Configs::Essential, type: :standard d
 
             it "sets service step middlewares for `#result`" do
               expect(service_class::Step.middlewares(:result).to_a).to eq(result_middlewares)
-            end
-          end
-
-          example_group "#service_result middlewares" do
-            let(:service_result_middlewares) do
-              [
-                ConvenientService::Common::Plugins::CachesReturnValue::Middleware
-              ]
-            end
-
-            it "sets service step middlewares for `#service_result`" do
-              expect(service_class::Step.middlewares(:service_result).to_a).to eq(service_result_middlewares)
-            end
-          end
-
-          example_group "#method_result middlewares" do
-            let(:method_result_middlewares) do
-              [
-                ConvenientService::Common::Plugins::CachesReturnValue::Middleware
-              ]
-            end
-
-            it "sets service step middlewares for `#method_result`" do
-              expect(service_class::Step.middlewares(:method_result).to_a).to eq(method_result_middlewares)
-            end
-          end
-
-          example_group "service step internals" do
-            example_group "concerns" do
-              let(:concerns) do
-                [
-                  ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Plugins::HasCache::Concern
-                ]
-              end
-
-              it "sets service internals concerns" do
-                expect(service_class::Step::Internals.concerns.to_a).to eq(concerns)
-              end
             end
           end
         end
@@ -286,7 +178,7 @@ RSpec.describe ConvenientService::Service::Configs::Essential, type: :standard d
       # - https://github.com/marian13/convenient_service/discussions/43
       #
       it "applies its `included` block only once" do
-        expect(service_class.middlewares(:result).to_a.size).to eq(3)
+        expect(service_class.middlewares(:result).to_a.size).to eq(2)
       end
     end
   end

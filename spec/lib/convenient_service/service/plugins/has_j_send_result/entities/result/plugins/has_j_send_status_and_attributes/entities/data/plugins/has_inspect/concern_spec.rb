@@ -34,8 +34,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
     describe "#inspect" do
       let(:service) do
         Class.new do
-          include ConvenientService::Service::Configs::Essential
-          include ConvenientService::Service::Configs::Inspect
+          include ConvenientService::Standard::Config
 
           def result
             success(data: {foo: :bar})
@@ -43,7 +42,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         end
       end
 
-      let(:data) { service.result.data }
+      let(:data) { service.result.unsafe_data }
 
       before do
         ##

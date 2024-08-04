@@ -13,8 +13,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
   let(:step_service_klass) do
     Class.new do
-      include ConvenientService::Service::Configs::Essential
-      include ConvenientService::Service::Configs::Inspect
+      include ConvenientService::Standard::Config
 
       def initialize(foo:)
         @foo = foo
@@ -28,8 +27,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
   let(:container) do
     Class.new do
-      include ConvenientService::Service::Configs::Essential
-      include ConvenientService::Service::Configs::Inspect
+      include ConvenientService::Standard::Config
 
       def result
         success
@@ -82,6 +80,10 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
     end
 
     describe "#status" do
+      before do
+        step.success?
+      end
+
       specify do
         expect { step.status }
           .to delegate_to(step.result, :status)
@@ -91,6 +93,10 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
     end
 
     describe "#data" do
+      before do
+        step.success?
+      end
+
       specify do
         expect { step.data }
           .to delegate_to(step.result, :data)
@@ -100,6 +106,10 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
     end
 
     describe "#message" do
+      before do
+        step.success?
+      end
+
       specify do
         expect { step.message }
           .to delegate_to(step.result, :message)
@@ -109,6 +119,10 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
     end
 
     describe "#code" do
+      before do
+        step.success?
+      end
+
       specify do
         expect { step.code }
           .to delegate_to(step.result, :code)
@@ -402,8 +416,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           context "when `step` has one output" do
             let(:step_service_klass) do
               Class.new do
-                include ConvenientService::Service::Configs::Essential
-                include ConvenientService::Service::Configs::Inspect
+                include ConvenientService::Standard::Config
 
                 def initialize(foo:)
                   @foo = foo
@@ -452,8 +465,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           context "when `step` has multiple outputs" do
             let(:step_service_klass) do
               Class.new do
-                include ConvenientService::Service::Configs::Essential
-                include ConvenientService::Service::Configs::Inspect
+                include ConvenientService::Standard::Config
 
                 def initialize(foo:)
                   @foo = foo
@@ -503,8 +515,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         context "when `step` result has failure status" do
           let(:step_service_klass) do
             Class.new do
-              include ConvenientService::Service::Configs::Essential
-              include ConvenientService::Service::Configs::Inspect
+              include ConvenientService::Standard::Config
 
               def initialize(foo:)
                 @foo = foo
@@ -524,8 +535,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         context "when `step` result has error status" do
           let(:step_service_klass) do
             Class.new do
-              include ConvenientService::Service::Configs::Essential
-              include ConvenientService::Service::Configs::Inspect
+              include ConvenientService::Standard::Config
 
               def initialize(foo:)
                 @foo = foo
@@ -545,8 +555,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         context "when `out` has `alias`" do
           let(:step_service_klass) do
             Class.new do
-              include ConvenientService::Service::Configs::Essential
-              include ConvenientService::Service::Configs::Inspect
+              include ConvenientService::Standard::Config
 
               def initialize(foo:)
                 @foo = foo
@@ -611,8 +620,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       context "when step has NO output values" do
         let(:step_service_klass) do
           Class.new do
-            include ConvenientService::Service::Configs::Essential
-            include ConvenientService::Service::Configs::Inspect
+            include ConvenientService::Standard::Config
 
             def initialize(foo:)
               @foo = foo
@@ -635,8 +643,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       context "when step has one output value" do
         let(:step_service_klass) do
           Class.new do
-            include ConvenientService::Service::Configs::Essential
-            include ConvenientService::Service::Configs::Inspect
+            include ConvenientService::Standard::Config
 
             def initialize(foo:)
               @foo = foo
@@ -660,8 +667,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       context "when step has multiple output values" do
         let(:step_service_klass) do
           Class.new do
-            include ConvenientService::Service::Configs::Essential
-            include ConvenientService::Service::Configs::Inspect
+            include ConvenientService::Standard::Config
 
             def initialize(foo:)
               @foo = foo
@@ -691,8 +697,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       context "when step has output with alias" do
         let(:step_service_klass) do
           Class.new do
-            include ConvenientService::Service::Configs::Essential
-            include ConvenientService::Service::Configs::Inspect
+            include ConvenientService::Standard::Config
 
             def initialize(foo:)
               @foo = foo

@@ -68,8 +68,8 @@ RSpec.describe ConvenientService::Service::Configs::Callbacks, type: :standard d
         end
 
         example_group "#result middlewares" do
-          it "adds `ConvenientService::Common::Plugins::CanHaveCallbacks::Middleware` after `ConvenientService::Common::Plugins::CachesReturnValue::Middleware` to service middlewares for `#result`" do
-            expect(service_class.middlewares(:result).to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Common::Plugins::CachesReturnValue::Middleware && current_middleware == ConvenientService::Common::Plugins::CanHaveCallbacks::Middleware }).not_to be_nil
+          it "adds `ConvenientService::Common::Plugins::CanHaveCallbacks::Middleware` before `ConvenientService::Plugins::Service::CanHaveConnectedSteps::Middleware` to service middlewares for `#result`" do
+            expect(service_class.middlewares(:result).to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Common::Plugins::CanHaveCallbacks::Middleware && current_middleware == ConvenientService::Plugins::Service::CanHaveConnectedSteps::Middleware }).not_to be_nil
           end
         end
 
@@ -81,8 +81,8 @@ RSpec.describe ConvenientService::Service::Configs::Callbacks, type: :standard d
           end
 
           example_group "#result middlewares" do
-            it "adds `ConvenientService::Common::Plugins::CanHaveCallbacks::Middleware` after `ConvenientService::Common::Plugins::CachesReturnValue::Middleware` to service step middlewares for `#result`" do
-              expect(service_class::Step.middlewares(:result).to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Common::Plugins::CachesReturnValue::Middleware && current_middleware == ConvenientService::Common::Plugins::CanHaveCallbacks::Middleware }).not_to be_nil
+            it "adds `ConvenientService::Common::Plugins::CanHaveCallbacks::Middleware` before `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::HasResult::Middleware` to service step middlewares for `#result`" do
+              expect(service_class::Step.middlewares(:result).to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Common::Plugins::CanHaveCallbacks::Middleware && current_middleware == ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::HasResult::Middleware }).not_to be_nil
             end
           end
         end

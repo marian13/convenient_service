@@ -29,7 +29,6 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
       specify { expect(service_class).not_to include_module(ConvenientService::Service::Configs::Rollbacks) }
       specify { expect(service_class).not_to include_module(ConvenientService::Service::Configs::FaultTolerance) }
 
-      specify { expect(service_class).to include_module(ConvenientService::Service::Configs::ExceptionServicesTrace) }
       specify { expect(service_class).to include_module(ConvenientService::Service::Configs::Inspect) }
       specify { expect(service_class).to include_module(ConvenientService::Service::Configs::Recalculation) }
       specify { expect(service_class).to include_module(ConvenientService::Service::Configs::ResultParentsTrace) }
@@ -39,6 +38,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
       specify { expect(service_class).to include_module(ConvenientService::Service::Configs::ShortSyntax) }
 
       specify { expect(service_class).to include_module(ConvenientService::Service::Configs::ExceptionServicesTrace) }
+      specify { expect(service_class).to include_module(ConvenientService::Service::Configs::PerInstanceCaching) }
 
       example_group "service" do
         example_group "concerns" do
@@ -76,8 +76,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
             [
               ConvenientService::Service::Plugins::CollectsServicesInException::Middleware,
               ConvenientService::Common::Plugins::CachesConstructorArguments::Middleware,
-              ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Middleware,
-              ConvenientService::Service::Plugins::CollectsServicesInException::Middleware
+              ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Middleware
             ]
           end
 
@@ -125,14 +124,13 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
         example_group "#result middlewares" do
           let(:result_middlewares) do
             [
-              ConvenientService::Service::Plugins::CollectsServicesInException::Middleware,
+              ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
               ConvenientService::Service::Plugins::CollectsServicesInException::Middleware,
               ConvenientService::Service::Plugins::CountsStubbedResultsInvocations::Middleware,
               ConvenientService::Service::Plugins::CanHaveStubbedResults::Middleware,
-              ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
-              ConvenientService::Common::Plugins::CanHaveCallbacks::Middleware,
               ConvenientService::Service::Plugins::SetsParentToForeignResult::Middleware,
               ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Middleware,
+              ConvenientService::Common::Plugins::CanHaveCallbacks::Middleware,
               ConvenientService::Service::Plugins::CanHaveSequentialSteps::Middleware
 
               ##
@@ -174,8 +172,8 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
         example_group "#negated_result middlewares" do
           let(:negated_result_middlewares) do
             [
-              ConvenientService::Service::Plugins::CollectsServicesInException::Middleware,
               ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
+              ConvenientService::Service::Plugins::CollectsServicesInException::Middleware,
               ConvenientService::Common::Plugins::EnsuresNegatedJSendResult::Middleware
             ]
           end
@@ -590,7 +588,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
       # https://github.com/marian13/convenient_service/discussions/43
       #
       it "applies its `included` block only once" do
-        expect(service_class.middlewares(:result).to_a.size).to eq(9)
+        expect(service_class.middlewares(:result).to_a.size).to eq(8)
       end
     end
   end

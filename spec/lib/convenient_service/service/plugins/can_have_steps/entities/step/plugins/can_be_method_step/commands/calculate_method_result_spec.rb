@@ -24,8 +24,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         let(:container) do
           Class.new.tap do |klass|
             klass.class_exec(first_step) do |first_step|
-              include ConvenientService::Service::Configs::Essential
-              include ConvenientService::Service::Configs::Inspect
+              include ConvenientService::Standard::Config
 
               step first_step
             end
@@ -34,8 +33,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
         let(:first_step) do
           Class.new do
-            include ConvenientService::Service::Configs::Essential
-            include ConvenientService::Service::Configs::Inspect
+            include ConvenientService::Standard::Config
 
             def result
               success
@@ -65,8 +63,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         context "when step is any method step" do
           let(:container) do
             Class.new do
-              include ConvenientService::Service::Configs::Essential
-              include ConvenientService::Service::Configs::Inspect
+              include ConvenientService::Standard::Config
 
               step :foo
 
@@ -79,8 +76,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           context "when `organizer` does NOT have own `:foo` method" do
             let(:container) do
               Class.new do
-                include ConvenientService::Service::Configs::Essential
-                include ConvenientService::Service::Configs::Inspect
+                include ConvenientService::Standard::Config
 
                 step :foo
               end
@@ -119,8 +115,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
               let(:container) do
                 Class.new.tap do |klass|
                   klass.class_exec(prepend_module) do |prepend_module|
-                    include ConvenientService::Service::Configs::Essential
-                    include ConvenientService::Service::Configs::Inspect
+                    include ConvenientService::Standard::Config
 
                     step :foo
 
@@ -157,8 +152,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
                   let(:container) do
                     Class.new.tap do |klass|
                       klass.class_exec(prepend_module) do |prepend_module|
-                        include ConvenientService::Service::Configs::Essential
-                        include ConvenientService::Service::Configs::Inspect
+                        include ConvenientService::Standard::Config
 
                         step :foo
 
@@ -189,8 +183,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
                   let(:container) do
                     Class.new.tap do |klass|
                       klass.class_exec(prepend_module) do |prepend_module|
-                        include ConvenientService::Service::Configs::Essential
-                        include ConvenientService::Service::Configs::Inspect
+                        include ConvenientService::Standard::Config
 
                         step :foo,
                           in: {required_kwarg: -> { :required_kwarg_value }}
@@ -228,8 +221,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
                   let(:container) do
                     Class.new.tap do |klass|
                       klass.class_exec(prepend_module) do |prepend_module|
-                        include ConvenientService::Service::Configs::Essential
-                        include ConvenientService::Service::Configs::Inspect
+                        include ConvenientService::Standard::Config
 
                         step :foo
 
@@ -264,8 +256,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
                   let(:container) do
                     Class.new.tap do |klass|
                       klass.class_exec(prepend_module) do |prepend_module|
-                        include ConvenientService::Service::Configs::Essential
-                        include ConvenientService::Service::Configs::Inspect
+                        include ConvenientService::Standard::Config
 
                         step :foo,
                           in: {optional_kwarg: -> { :optional_kwarg_value }}
@@ -303,8 +294,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
                   let(:container) do
                     Class.new.tap do |klass|
                       klass.class_exec(prepend_module) do |prepend_module|
-                        include ConvenientService::Service::Configs::Essential
-                        include ConvenientService::Service::Configs::Inspect
+                        include ConvenientService::Standard::Config
 
                         step :foo
 
@@ -339,8 +329,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
                   let(:container) do
                     Class.new.tap do |klass|
                       klass.class_exec(prepend_module) do |prepend_module|
-                        include ConvenientService::Service::Configs::Essential
-                        include ConvenientService::Service::Configs::Inspect
+                        include ConvenientService::Standard::Config
 
                         step :foo,
                           in: {extra_kwarg: -> { :extra_kwarg_value }}
@@ -379,8 +368,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         context "when step is `:result` step" do
           let(:container) do
             Class.new do
-              include ConvenientService::Service::Configs::Essential
-              include ConvenientService::Service::Configs::Inspect
+              include ConvenientService::Standard::Config
 
               step :result
 
@@ -403,8 +391,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
               let(:container) do
                 Class.new.tap do |klass|
                   klass.class_exec(prepend_module) do |prepend_module|
-                    include ConvenientService::Service::Configs::Essential
-                    include ConvenientService::Service::Configs::Inspect
+                    include ConvenientService::Standard::Config
 
                     step :result
 
@@ -441,8 +428,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
                   let(:container) do
                     Class.new.tap do |klass|
                       klass.class_exec(prepend_module) do |prepend_module|
-                        include ConvenientService::Service::Configs::Essential
-                        include ConvenientService::Service::Configs::Inspect
+                        include ConvenientService::Standard::Config
 
                         step :result
 
@@ -473,8 +459,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
                   let(:container) do
                     Class.new.tap do |klass|
                       klass.class_exec(prepend_module) do |prepend_module|
-                        include ConvenientService::Service::Configs::Essential
-                        include ConvenientService::Service::Configs::Inspect
+                        include ConvenientService::Standard::Config
 
                         step :result,
                           in: {required_kwarg: -> { :required_kwarg_value }}
@@ -512,8 +497,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
                   let(:container) do
                     Class.new.tap do |klass|
                       klass.class_exec(prepend_module) do |prepend_module|
-                        include ConvenientService::Service::Configs::Essential
-                        include ConvenientService::Service::Configs::Inspect
+                        include ConvenientService::Standard::Config
 
                         step :result
 
@@ -548,8 +532,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
                   let(:container) do
                     Class.new.tap do |klass|
                       klass.class_exec(prepend_module) do |prepend_module|
-                        include ConvenientService::Service::Configs::Essential
-                        include ConvenientService::Service::Configs::Inspect
+                        include ConvenientService::Standard::Config
 
                         step :result,
                           in: {optional_kwarg: -> { :optional_kwarg_value }}
@@ -587,8 +570,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
                   let(:container) do
                     Class.new.tap do |klass|
                       klass.class_exec(prepend_module) do |prepend_module|
-                        include ConvenientService::Service::Configs::Essential
-                        include ConvenientService::Service::Configs::Inspect
+                        include ConvenientService::Standard::Config
 
                         step :result
 
@@ -623,8 +605,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
                   let(:container) do
                     Class.new.tap do |klass|
                       klass.class_exec(prepend_module) do |prepend_module|
-                        include ConvenientService::Service::Configs::Essential
-                        include ConvenientService::Service::Configs::Inspect
+                        include ConvenientService::Standard::Config
 
                         step :result,
                           in: {extra_kwarg: -> { :extra_kwarg_value }}

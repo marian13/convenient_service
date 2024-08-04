@@ -13,8 +13,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
 
   let(:service_class) do
     Class.new do
-      include ConvenientService::Service::Configs::Essential
-      include ConvenientService::Service::Configs::Inspect
+      include ConvenientService::Standard::Config
     end
   end
 
@@ -1283,8 +1282,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
       context "when `:result` is NOT defined" do
         let(:service_class) do
           Class.new do
-            include ConvenientService::Service::Configs::Essential
-            include ConvenientService::Service::Configs::Inspect
+            include ConvenientService::Standard::Config
           end
         end
 
@@ -1309,8 +1307,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
       context "when `:result` is defined" do
         let(:service_class) do
           Class.new do
-            include ConvenientService::Service::Configs::Essential
-            include ConvenientService::Service::Configs::Inspect
+            include ConvenientService::Standard::Config
 
             def result
               success
@@ -1329,8 +1326,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
       context "when `:result` accepts arguments" do
         let(:service_class) do
           Class.new do
-            include ConvenientService::Service::Configs::Essential
-            include ConvenientService::Service::Configs::Inspect
+            include ConvenientService::Standard::Config
 
             def result(*args, **kwargs, &block)
               success(data: {args: args, kwargs: kwargs, block: block})

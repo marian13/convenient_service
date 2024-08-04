@@ -37,7 +37,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       context "when step is neither service nor method step" do
         let(:container) do
           Class.new do
-            include ConvenientService::Service::Configs::Essential
+            include ConvenientService::Standard::Config
             include ConvenientService::Service::Configs::AmazingPrintInspect
 
             step :result
@@ -63,7 +63,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         let(:container) do
           Class.new.tap do |klass|
             klass.class_exec(service) do |service|
-              include ConvenientService::Service::Configs::Essential
+              include ConvenientService::Standard::Config
               include ConvenientService::Service::Configs::AmazingPrintInspect
 
               step service
@@ -77,8 +77,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
         let(:service) do
           Class.new do
-            include ConvenientService::Service::Configs::Essential
-            include ConvenientService::Service::Configs::Inspect
+            include ConvenientService::Standard::Config
             def self.name
               "StepService"
             end
@@ -95,7 +94,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       context "when step is method step" do
         let(:container) do
           Class.new do
-            include ConvenientService::Service::Configs::Essential
+            include ConvenientService::Standard::Config
             include ConvenientService::Service::Configs::AmazingPrintInspect
 
             step :result

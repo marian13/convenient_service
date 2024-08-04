@@ -36,7 +36,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
     describe "#inspect" do
       let(:service) do
         Class.new do
-          include ConvenientService::Service::Configs::Essential
+          include ConvenientService::Standard::Config
           include ConvenientService::Service::Configs::AmazingPrintInspect
 
           def result
@@ -45,7 +45,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         end
       end
 
-      let(:code) { service.result.code }
+      let(:code) { service.result.unsafe_code }
 
       let(:keywords) { ["ConvenientService", ":entity", "Code", ":result", code.result.class.name, ":value", ":foo"] }
 

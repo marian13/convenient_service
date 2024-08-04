@@ -27,8 +27,8 @@ module ConvenientService
           end
 
           middlewares :result do
-            insert_after \
-              ConvenientService::Plugins::Common::CachesReturnValue::Middleware,
+            insert_before \
+              ConvenientService::Plugins::Service::CanHaveConnectedSteps::Middleware,
               ConvenientService::Plugins::Common::CanHaveCallbacks::Middleware
           end
 
@@ -40,8 +40,8 @@ module ConvenientService
             end
 
             middlewares :result do
-              insert_after \
-                ConvenientService::Plugins::Common::CachesReturnValue::Middleware,
+              insert_before \
+                ConvenientService::Plugins::Step::HasResult::Middleware,
                 ConvenientService::Plugins::Common::CanHaveCallbacks::Middleware
             end
           end
