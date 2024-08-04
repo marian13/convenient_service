@@ -12,7 +12,7 @@ module ConvenientService
 
           middlewares :result do
             insert_before \
-              ConvenientService::Plugins::Service::RaisesOnNotResultReturnValue::Middleware,
+              ConvenientService::Plugins::Service::CanHaveConnectedSteps::Middleware,
               ConvenientService::Plugins::Service::SetsParentToForeignResult::Middleware
           end
 

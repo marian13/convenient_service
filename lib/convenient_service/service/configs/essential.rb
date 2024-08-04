@@ -43,8 +43,6 @@ module ConvenientService
           end
 
           middlewares :result do
-            use ConvenientService::Plugins::Service::RaisesOnNotResultReturnValue::Middleware
-
             use ConvenientService::Plugins::Service::CanHaveConnectedSteps::Middleware
           end
 
@@ -104,8 +102,6 @@ module ConvenientService
             #
             middlewares :result do
               use ConvenientService::Plugins::Step::HasResult::Middleware
-
-              use ConvenientService::Plugins::Step::RaisesOnNotResultReturnValue::Middleware
 
               use ConvenientService::Plugins::Step::CanBeServiceStep::Middleware
               use ConvenientService::Plugins::Step::CanBeMethodStep::Middleware

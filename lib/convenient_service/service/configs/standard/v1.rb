@@ -34,6 +34,7 @@ module ConvenientService
             include Configs::CodeReviewAutomation
             include Configs::ShortSyntax
 
+            include Configs::TypeSafety
             include Configs::ExceptionServicesTrace # Should be added after `Fallacks` config, when it is used.
             include Configs::PerInstanceCaching # Should be added after `Fallacks` config, when it is used.
 

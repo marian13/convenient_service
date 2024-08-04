@@ -16,6 +16,7 @@ require_relative "configs/rspec"
 require_relative "configs/code_review_automation"
 require_relative "configs/short_syntax"
 
+require_relative "configs/type_safety"
 require_relative "configs/exception_services_trace"
 require_relative "configs/per_instance_caching"
 

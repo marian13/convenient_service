@@ -21,6 +21,10 @@ module ConvenientService
     Config = ::ConvenientService::Service::Configs::Inspect
   end
 
+  module Recalculation
+    Config = ::ConvenientService::Service::Configs::Recalculation
+  end
+
   module RSpec
     Config = ::ConvenientService::Service::Configs::RSpec
   end

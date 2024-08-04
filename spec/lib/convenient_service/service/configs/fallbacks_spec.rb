@@ -34,7 +34,6 @@ RSpec.describe ConvenientService::Service::Configs::Fallbacks, type: :standard d
         example_group "#fallback_failure_result middlewares" do
           let(:fallback_failure_result_middlewares) do
             [
-              ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Middleware,
               ConvenientService::Service::Plugins::CanHaveFallbacks::Middleware.with(status: :failure)
             ]
           end
@@ -47,7 +46,6 @@ RSpec.describe ConvenientService::Service::Configs::Fallbacks, type: :standard d
         example_group "#fallback_error_result middlewares" do
           let(:fallback_error_result_middlewares) do
             [
-              ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Middleware,
               ConvenientService::Service::Plugins::CanHaveFallbacks::Middleware.with(status: :error)
             ]
           end
@@ -60,7 +58,6 @@ RSpec.describe ConvenientService::Service::Configs::Fallbacks, type: :standard d
         example_group "#fallback_result middlewares" do
           let(:fallback_result_middlewares) do
             [
-              ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Middleware,
               ConvenientService::Service::Plugins::CanHaveFallbacks::Middleware.with(status: nil)
             ]
           end

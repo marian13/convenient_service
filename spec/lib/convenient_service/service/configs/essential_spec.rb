@@ -48,7 +48,6 @@ RSpec.describe ConvenientService::Service::Configs::Essential, type: :standard d
         example_group "#result middlewares" do
           let(:result_middlewares) do
             [
-              ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Middleware,
               ConvenientService::Service::Plugins::CanHaveConnectedSteps::Middleware
             ]
           end
@@ -148,7 +147,6 @@ RSpec.describe ConvenientService::Service::Configs::Essential, type: :standard d
             let(:result_middlewares) do
               [
                 ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::HasResult::Middleware,
-                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::RaisesOnNotResultReturnValue::Middleware,
                 ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeServiceStep::Middleware,
                 ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeMethodStep::Middleware
               ]
@@ -178,7 +176,7 @@ RSpec.describe ConvenientService::Service::Configs::Essential, type: :standard d
       # - https://github.com/marian13/convenient_service/discussions/43
       #
       it "applies its `included` block only once" do
-        expect(service_class.middlewares(:result).to_a.size).to eq(2)
+        expect(service_class.middlewares(:result).to_a.size).to eq(1)
       end
     end
   end

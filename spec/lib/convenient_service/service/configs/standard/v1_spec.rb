@@ -37,6 +37,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
       specify { expect(service_class).to include_module(ConvenientService::Service::Configs::CodeReviewAutomation) }
       specify { expect(service_class).to include_module(ConvenientService::Service::Configs::ShortSyntax) }
 
+      specify { expect(service_class).to include_module(ConvenientService::Service::Configs::TypeSafety) }
       specify { expect(service_class).to include_module(ConvenientService::Service::Configs::ExceptionServicesTrace) }
       specify { expect(service_class).to include_module(ConvenientService::Service::Configs::PerInstanceCaching) }
 
@@ -128,9 +129,9 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
               ConvenientService::Service::Plugins::CollectsServicesInException::Middleware,
               ConvenientService::Service::Plugins::CountsStubbedResultsInvocations::Middleware,
               ConvenientService::Service::Plugins::CanHaveStubbedResults::Middleware,
+              ConvenientService::Common::Plugins::CanHaveCallbacks::Middleware,
               ConvenientService::Service::Plugins::SetsParentToForeignResult::Middleware,
               ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Middleware,
-              ConvenientService::Common::Plugins::CanHaveCallbacks::Middleware,
               ConvenientService::Service::Plugins::CanHaveSequentialSteps::Middleware
 
               ##
