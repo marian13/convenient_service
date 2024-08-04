@@ -38,8 +38,8 @@ module ConvenientService
           include Configs::ShortSyntax
 
           include Configs::TypeSafety
-          include Configs::ExceptionServicesTrace # Should be added after `Fallacks` config, when it is used.
-          include Configs::PerInstanceCaching # Should be added after `Fallacks` config, when it is used.
+          include Configs::ExceptionServicesTrace # Should be added after `Fallbacks` config, when it is used.
+          include Configs::PerInstanceCaching # Should be added after `Fallbacks` config, when it is used.
 
           concerns do
             use ConvenientService::Plugins::Service::HasMermaidFlowchart::Concern

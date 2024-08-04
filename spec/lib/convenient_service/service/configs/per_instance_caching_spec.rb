@@ -49,24 +49,6 @@ RSpec.describe ConvenientService::Service::Configs::PerInstanceCaching, type: :s
           end
         end
 
-        example_group "#fallback_failure_result middlewares" do
-          it "prepends `ConvenientService::Common::Plugins::CachesReturnValue::Middleware` to service middlewares for `#fallback_failure_result`" do
-            expect(service_class.middlewares(:fallback_failure_result).to_a.first).to eq(ConvenientService::Common::Plugins::CachesReturnValue::Middleware)
-          end
-        end
-
-        example_group "#fallback_error_result middlewares" do
-          it "prepends `ConvenientService::Common::Plugins::CachesReturnValue::Middleware` to service middlewares for `#fallback_error_result`" do
-            expect(service_class.middlewares(:fallback_error_result).to_a.first).to eq(ConvenientService::Common::Plugins::CachesReturnValue::Middleware)
-          end
-        end
-
-        example_group "#fallback_result middlewares" do
-          it "prepends `ConvenientService::Common::Plugins::CachesReturnValue::Middleware` to service middlewares for `#fallback_result`" do
-            expect(service_class.middlewares(:fallback_result).to_a.first).to eq(ConvenientService::Common::Plugins::CachesReturnValue::Middleware)
-          end
-        end
-
         example_group "service internals" do
           example_group "concerns" do
             it "adds `ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Plugins::HasCache::Concern` to service internals concerns" do
@@ -119,6 +101,56 @@ RSpec.describe ConvenientService::Service::Configs::PerInstanceCaching, type: :s
               it "adds `ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Plugins::HasCache::Concern` to service result internals concerns" do
                 expect(service_class::Step::Internals.concerns.to_a.last).to eq(ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Plugins::HasCache::Concern)
               end
+            end
+          end
+        end
+
+        context "when service class does NOT include `Fallbacks` config" do
+          example_group "#fallback_failure_result middlewares" do
+            it "does NOT `ConvenientService::Common::Plugins::CachesReturnValue::Middleware` to service middlewares for `#fallback_failure_result`" do
+              expect(service_class.middlewares(:fallback_failure_result).to_a).not_to include(ConvenientService::Common::Plugins::CachesReturnValue::Middleware)
+            end
+          end
+
+          example_group "#fallback_error_result middlewares" do
+            it "does NOT `ConvenientService::Common::Plugins::CachesReturnValue::Middleware` to service middlewares for `#fallback_error_result`" do
+              expect(service_class.middlewares(:fallback_error_result).to_a).not_to include(ConvenientService::Common::Plugins::CachesReturnValue::Middleware)
+            end
+          end
+
+          example_group "#fallback_result middlewares" do
+            it "does NOT `ConvenientService::Common::Plugins::CachesReturnValue::Middleware` to service middlewares for `#fallback_result`" do
+              expect(service_class.middlewares(:fallback_result).to_a).not_to include(ConvenientService::Common::Plugins::CachesReturnValue::Middleware)
+            end
+          end
+        end
+
+        context "when service class includes `Fallbacks` config" do
+          let(:service_class) do
+            Class.new.tap do |klass|
+              klass.class_exec(described_class) do |mod|
+                include ConvenientService::Service::Configs::Fallbacks
+
+                include mod
+              end
+            end
+          end
+
+          example_group "#fallback_failure_result middlewares" do
+            it "prepends `ConvenientService::Common::Plugins::CachesReturnValue::Middleware` to service middlewares for `#fallback_failure_result`" do
+              expect(service_class.middlewares(:fallback_failure_result).to_a.first).to eq(ConvenientService::Common::Plugins::CachesReturnValue::Middleware)
+            end
+          end
+
+          example_group "#fallback_error_result middlewares" do
+            it "prepends `ConvenientService::Common::Plugins::CachesReturnValue::Middleware` to service middlewares for `#fallback_error_result`" do
+              expect(service_class.middlewares(:fallback_error_result).to_a.first).to eq(ConvenientService::Common::Plugins::CachesReturnValue::Middleware)
+            end
+          end
+
+          example_group "#fallback_result middlewares" do
+            it "prepends `ConvenientService::Common::Plugins::CachesReturnValue::Middleware` to service middlewares for `#fallback_result`" do
+              expect(service_class.middlewares(:fallback_result).to_a.first).to eq(ConvenientService::Common::Plugins::CachesReturnValue::Middleware)
             end
           end
         end

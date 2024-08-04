@@ -26,18 +26,6 @@ module ConvenientService
             unshift ConvenientService::Plugins::Common::CachesReturnValue::Middleware
           end
 
-          middlewares :fallback_failure_result do
-            unshift ConvenientService::Plugins::Common::CachesReturnValue::Middleware
-          end
-
-          middlewares :fallback_error_result do
-            unshift ConvenientService::Plugins::Common::CachesReturnValue::Middleware
-          end
-
-          middlewares :fallback_result do
-            unshift ConvenientService::Plugins::Common::CachesReturnValue::Middleware
-          end
-
           class self::Internals
             include ConvenientService::Core
 
@@ -91,6 +79,20 @@ module ConvenientService
               concerns do
                 use ConvenientService::Plugins::Internals::HasCache::Concern
               end
+            end
+          end
+
+          if include? Configs::Fallbacks
+            middlewares :fallback_failure_result do
+              unshift ConvenientService::Plugins::Common::CachesReturnValue::Middleware
+            end
+
+            middlewares :fallback_error_result do
+              unshift ConvenientService::Plugins::Common::CachesReturnValue::Middleware
+            end
+
+            middlewares :fallback_result do
+              unshift ConvenientService::Plugins::Common::CachesReturnValue::Middleware
             end
           end
         end
