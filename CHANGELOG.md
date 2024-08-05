@@ -1,5 +1,62 @@
 # Changelog
 
+## [0.20.0](https://github.com/marian13/convenient_service/compare/v0.19.0...v0.20.0) (2024-07-27)
+
+
+### ⚠ BREAKING CHANGES
+
+* **steps:** remove reassignments since out already supports them without keyword
+* **dependencies:** add suffix for configs and plugins require
+* **configs:** introduce FaultTolerance config, make available by default, without require
+
+### Features
+
+* **config:** introduce CodeReviewAutomation config ([1c142d7](https://github.com/marian13/convenient_service/commit/1c142d7f8f5f491749f633b0404fa63086a8b76d))
+* **config:** introduce ExceptionServicesTrace config ([2d030ea](https://github.com/marian13/convenient_service/commit/2d030eab3a1bd40574f977e8c48d71fea2935682))
+* **config:** introduce initial Config module ([4b9715d](https://github.com/marian13/convenient_service/commit/4b9715d315e3c5abc26a10eb75dea41a74e0b9a9))
+* **config:** introduce PerInstanceCaching config ([86ce8c3](https://github.com/marian13/convenient_service/commit/86ce8c3a44c53b060ab2b10a892ac35f4b2b2e32))
+* **config:** introduce Recalculation config ([cf27622](https://github.com/marian13/convenient_service/commit/cf276227af7a925e3b85c15e21d20ce196d16ebe))
+* **config:** introduce ResultParentsTrace config ([cc611b6](https://github.com/marian13/convenient_service/commit/cc611b6f79ccff9ab03c218b038e79ec1fc7eb05))
+* **config:** introduce Rollbacks config ([e2a5d30](https://github.com/marian13/convenient_service/commit/e2a5d30577aa3c3845e58d814609d8e89ffea451))
+* **config:** introduce TypeSafety config ([3ce6de2](https://github.com/marian13/convenient_service/commit/3ce6de27b959f43592e5514ed58aff40be018c9c))
+* **core:** allow to call original method that skips middlewares ([c177c7b](https://github.com/marian13/convenient_service/commit/c177c7b21d118ee86733c1c228aa871b9ecd8b90))
+* **service:** introduce CanNotBeInherited optional plugin ([5170013](https://github.com/marian13/convenient_service/commit/5170013328ab456e49274e68cc141bc4df891212))
+* **arguments:** introduce Arguments#[] ([c5a580f](https://github.com/marian13/convenient_service/commit/c5a580f432392c67d17404d472bf951fcfccb175))
+* **callbacks:** introduce Service.callback that is called by before, after, and around ([38280a4](https://github.com/marian13/convenient_service/commit/38280a47668991decba2878306fe57d1988ae3a2))
+* **can_be_method_step:** allow to create middlewares specifically for method step result ([15b2d24](https://github.com/marian13/convenient_service/commit/15b2d24937158a22ebd1091ddaf2e9dce216ab5b))
+* **can_have_connected_steps:** allow to create middlewares for specifically for steps result, but not regular result ([894cb36](https://github.com/marian13/convenient_service/commit/894cb36ec1e80da504aac26373d99250202f2373))
+* **can_have_connected_steps:** extract regular_result method ([c2113ad](https://github.com/marian13/convenient_service/commit/c2113ad41e800d6984f9c642303745d15c4675a3))
+* **code:** add custom code to results from RescuesResultUnhandledExceptions, HasJSendResultParamsValidations::UsingActiveModelValidations and HasJSendResultParamsValidations::UsingDryValidation ([28797fd](https://github.com/marian13/convenient_service/commit/28797fd5d7f98a52d4d86350e04502fda0c41aae))
+* **configs:** extract Inspect config ([dce5037](https://github.com/marian13/convenient_service/commit/dce5037e463a72fde5c427158b19dd3e05af3007))
+* **configs:** introduce FaultTolerance config, make available by default, without require ([dbe3cb7](https://github.com/marian13/convenient_service/commit/dbe3cb7ad2f58ba3ca263216cef33b7fe2c33938))
+* **middleware:** introduce new middleware backend ([6d6dead](https://github.com/marian13/convenient_service/commit/6d6dead3fad4e90a242d5e998ad2a367cdcf85ab))
+* **result:** introduce Result#exception, move correspponding plugin to FaultTolerance config ([476a006](https://github.com/marian13/convenient_service/commit/476a00617506a3135f54c40dca3cc285d21d1424))
+* **step_callbacks:** pass step args, kwargs to callback ([82c7712](https://github.com/marian13/convenient_service/commit/82c7712ef03b4f0253be073c79d25e5cd86a3a97))
+* **steps:** add callbacks for Step#result ([91b22f5](https://github.com/marian13/convenient_service/commit/91b22f5d61fc72afda6a368eaf763d214983f34f))
+
+
+### Bug Fixes
+
+* **callbacks:** show source_location in exception joined by colon ([9a66f7f](https://github.com/marian13/convenient_service/commit/9a66f7fd4cd86920e5918ab300038eb3b674b6d1))
+* **callbacks:** trigger before step caallback before step result is calculated ([3ea9964](https://github.com/marian13/convenient_service/commit/3ea996485045ea19682b153a5316f89358e25e2e))
+* **connected_steps:** do not evaluate right expression when left expression is success ([19e4d5d](https://github.com/marian13/convenient_service/commit/19e4d5d1f5feda2fd23ef8e715d0d06b219336b5))
+
+
+### Performance Improvements
+
+* **regular_result:** use result_without_midlewares instead of own method lookup ([e0e6b60](https://github.com/marian13/convenient_service/commit/e0e6b604a570cf04e10b31bde547739a0e5f26de))
+
+
+### Miscellaneous Chores
+
+* release 0.20.0 ([ecd377e](https://github.com/marian13/convenient_service/commit/ecd377ee1a90215b1f90e8caa10aa0259f081097))
+
+
+### Code Refactoring
+
+* **dependencies:** add suffix for configs and plugins require ([f81a8a9](https://github.com/marian13/convenient_service/commit/f81a8a96d7a08b17472a2590e61ae245b48ec209))
+* **steps:** remove reassignments since out already supports them without keyword ([0374519](https://github.com/marian13/convenient_service/commit/03745193ce103d26cdbcd4f5d927d4d9ba3182ca))
+
 ## [0.19.1](https://github.com/marian13/convenient_service/compare/v0.19.0...v0.19.1) (2024-07-27)
 
 ### Bug Fixes
