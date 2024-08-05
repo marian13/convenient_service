@@ -1,5 +1,31 @@
 # Changelog
 
+## [0.20.0](https://github.com/marian13/convenient_service/compare/v0.19.1...v0.20.0) (2024-08-05)
+
+
+### Features
+
+* **config:** introduce CodeReviewAutomation config ([1c142d7](https://github.com/marian13/convenient_service/commit/1c142d7f8f5f491749f633b0404fa63086a8b76d))
+* **config:** introduce ExceptionServicesTrace config ([2d030ea](https://github.com/marian13/convenient_service/commit/2d030eab3a1bd40574f977e8c48d71fea2935682))
+* **config:** introduce initial Config module ([4b9715d](https://github.com/marian13/convenient_service/commit/4b9715d315e3c5abc26a10eb75dea41a74e0b9a9))
+* **config:** introduce PerInstanceCaching config ([86ce8c3](https://github.com/marian13/convenient_service/commit/86ce8c3a44c53b060ab2b10a892ac35f4b2b2e32))
+* **config:** introduce Recalculation config ([cf27622](https://github.com/marian13/convenient_service/commit/cf276227af7a925e3b85c15e21d20ce196d16ebe))
+* **config:** introduce ResultParentsTrace config ([cc611b6](https://github.com/marian13/convenient_service/commit/cc611b6f79ccff9ab03c218b038e79ec1fc7eb05))
+* **config:** introduce Rollbacks config ([e2a5d30](https://github.com/marian13/convenient_service/commit/e2a5d30577aa3c3845e58d814609d8e89ffea451))
+* **config:** introduce TypeSafety config ([3ce6de2](https://github.com/marian13/convenient_service/commit/3ce6de27b959f43592e5514ed58aff40be018c9c))
+* **core:** allow to call original method that skips middlewares ([c177c7b](https://github.com/marian13/convenient_service/commit/c177c7b21d118ee86733c1c228aa871b9ecd8b90))
+* **service:** introduce CanNotBeInherited optional plugin ([5170013](https://github.com/marian13/convenient_service/commit/5170013328ab456e49274e68cc141bc4df891212))
+
+
+### Performance Improvements
+
+* **regular_result:** use result_without_midlewares instead of own method lookup ([e0e6b60](https://github.com/marian13/convenient_service/commit/e0e6b604a570cf04e10b31bde547739a0e5f26de))
+
+
+### Miscellaneous Chores
+
+* release 0.20.0 ([7ee6d7d](https://github.com/marian13/convenient_service/commit/7ee6d7d5b37e740c2bcea0b9571b3a051271da95))
+
 ## [0.20.0](https://github.com/marian13/convenient_service/compare/v0.19.0...v0.20.0) (2024-07-27)
 
 
