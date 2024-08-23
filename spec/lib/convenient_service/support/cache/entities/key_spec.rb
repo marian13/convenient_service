@@ -6,6 +6,8 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Support::Cache::Entities::Key, type: :standard do
+  include ConvenientService::RSpec::Matchers::DelegateTo
+
   let(:args) { [:foo] }
   let(:kwargs) { {foo: :bar} }
   let(:block) { proc { :foo } }
@@ -78,23 +80,58 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Key, type: :standard
         let(:other) { 42 }
 
         it "returns `false`" do
-          expect(key == other).to be_nil
+          expect(key.eql?(other)).to be_nil
         end
       end
 
-      context "when keys have different hashes" do
-        let(:other) { described_class.new(:step, **kwargs, &block) }
+      context "when `other` has different `args`" do
+        let(:other) { described_class.new(:baz, **kwargs, &block) }
 
         it "returns `false`" do
-          expect(key == other).to eq(false)
+          expect(key.eql?(other)).to eq(false)
         end
       end
 
-      context "when keys have same hashes" do
+      context "when `other` has different `kwargs`" do
+        let(:other) { described_class.new(*args, baz: :qux, &block) }
+
+        it "returns `false`" do
+          expect(key.eql?(other)).to eq(false)
+        end
+      end
+
+      context "when `other` has different `block`" do
+        let(:other) { described_class.new(*args, **kwargs, &other_block) }
+        let(:other_block) { proc { :baz } }
+
+        it "returns `false`" do
+          expect(key.eql?(other)).to eq(false)
+        end
+
+        ##
+        # TODO: Refactor.
+        #
+        # rubocop:disable Lint/Void, RSpec/ExampleLength
+        it "uses `source_location` to compare blocks" do
+          constructor_arguments_source_location = double
+          other_block_source_location = double
+
+          allow(block).to receive(:source_location).and_return(constructor_arguments_source_location)
+          allow(other_block).to receive(:source_location).and_return(other_block_source_location)
+          allow(constructor_arguments_source_location).to receive(:==).with(other_block_source_location)
+
+          key.eql?(other)
+
+          expect(constructor_arguments_source_location).to have_received(:==)
+        end
+        # rubocop:enable Lint/Void, RSpec/ExampleLength
+      end
+
+      context "when `other` has same attributes" do
         let(:other) { described_class.new(*args, **kwargs, &block) }
 
         it "returns `true`" do
-          expect(key == other).to eq(true)
+          expect(key.eql?(other)).to eq(true)
         end
       end
     end
@@ -109,6 +146,121 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Key, type: :standard
 
         it "uses `nil` hash for `block`" do
           expect(key.hash).to eq([args, kwargs, nil].hash)
+        end
+      end
+    end
+  end
+
+  example_group "usage" do
+    context "when used as hash keys" do
+      let(:map) { {} }
+
+      let(:value) { :foo }
+
+      let(:command) do
+        map[key] = value
+        map[other_key] = value
+      end
+
+      context "when those keys do NOT cause collision (calling `#hash` returns different numbers)" do
+        let(:key) { described_class.new(:foo) }
+        let(:other_key) { described_class.new(:bar) }
+
+        specify do
+          expect { command }
+            .to delegate_to(key, :hash)
+            .without_arguments
+        end
+
+        specify do
+          expect { command }
+            .to delegate_to(other_key, :hash)
+            .without_arguments
+        end
+
+        specify do
+          expect { command }
+            .not_to delegate_to(key, :eql?)
+            .with_any_arguments
+        end
+
+        specify do
+          expect { command }
+            .not_to delegate_to(other_key, :eql?)
+            .with_any_arguments
+        end
+      end
+
+      context "when those keys cause collision (calling `#hash` returns same numbers)" do
+        let(:key) { described_class.new(:foo) }
+        let(:other_key) { described_class.new(:foo) }
+
+        specify do
+          expect { command }
+            .to delegate_to(key, :hash)
+            .without_arguments
+        end
+
+        specify do
+          expect { command }
+            .to delegate_to(other_key, :hash)
+            .without_arguments
+        end
+
+        specify do
+          expect { command }
+            .not_to delegate_to(key, :eql?)
+            .with_any_arguments
+        end
+
+        specify do
+          expect { command }
+            .to delegate_to(other_key, :eql?)
+            .with_arguments(key)
+        end
+
+        context "when those keys are NOT equal in `#eql?` terms" do
+          let(:collision_hash) { 42 }
+
+          before do
+            allow(key).to receive(:hash).and_return(collision_hash)
+            allow(other_key).to receive(:hash).and_return(collision_hash)
+          end
+
+          context "when `#eql?` returns `nil`" do
+            let(:key) { described_class.new(:foo) }
+            let(:other_key) { Object.new }
+
+            it "considers other key that caused collision as separate key" do
+              command
+
+              expect(map.keys.size).to eq(2)
+            end
+          end
+
+          context "when `#eql?` returns `false`" do
+            let(:key) { described_class.new(:foo) }
+            let(:other_key) { described_class.new(:bar) }
+
+            it "considers other key that caused collision as separate key" do
+              command
+
+              expect(map.keys.size).to eq(2)
+            end
+          end
+        end
+
+        context "when those keys are equal in `#eql?` terms" do
+          context "when `#eql?` returns `true`" do
+            let(:key) { described_class.new(:foo) }
+            let(:other_key) { described_class.new(:foo) }
+
+            it "considers other key that caused collision as same key" do
+              command
+
+              expect(map.keys.size).to eq(1)
+            end
+          end
         end
       end
     end
