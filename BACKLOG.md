@@ -68,6 +68,40 @@ Open a PR that modifies the following [file](https://github.com/rubytoolbox/cata
 
 ## Features
 
+### Introduce a `respond_to`-like way to process result statuses 
+
+For example:
+
+```ruby
+result = Service.result(number: 4)
+
+result.respond_to do |status|
+  status.success { }
+
+  status.failure(code: :baz) { }
+  status.failure(code: :qux) { }
+
+  status.error(code: :foo) { }
+  status.error(code: :bar) { }
+
+  status.unexpected { }
+end
+```
+
+**Notes:**
+
+- This is a crucial task before the v1.0.0 release.
+
+---
+
+### Introduce per-request caching of steps using Rails Current Attributes
+
+| Priority | Complexity | Status | Tags |
+| - | - | - | - |
+| Medium | Moderate | TODO | per-request-cache, cached-steps, current-attributes |
+
+A killer feature.
+
 ### Introduce per-request caching of steps using Rails Current Attributes
 
 | Priority | Complexity | Status | Tags |
