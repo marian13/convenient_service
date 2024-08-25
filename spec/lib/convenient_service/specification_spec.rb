@@ -44,7 +44,7 @@ RSpec.describe ConvenientService::Specification, type: :standard do
       it "returns summary" do
         expect(described_class::SUMMARY).to eq(
           <<~TEXT
-            Service object pattern implementation in Ruby.
+            Ruby Service Objects with Steps.
           TEXT
         )
       end

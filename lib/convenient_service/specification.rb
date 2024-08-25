@@ -36,7 +36,7 @@ module ConvenientService
     # @return [String]
     #
     SUMMARY = <<~TEXT
-      Service object pattern implementation in Ruby.
+      Ruby Service Objects with Steps.
     TEXT
 
     ##
