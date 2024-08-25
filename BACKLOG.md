@@ -68,7 +68,27 @@ Open a PR that modifies the following [file](https://github.com/rubytoolbox/cata
 
 ## Features
 
+### Introduce the `include_config` RSpec matcher.
+
+| Priority | Complexity | Status | Tags |
+| - | - | - | - |
+| High | Easy | TODO | include-config, rspec-matcher |
+
+```ruby
+it { is_expected.to include_config(ConvenientService::Standard::Config) }
+```
+
+**Notes:**
+
+- This is a crucial task before the v1.0.0 release.
+
+---
+
 ### Introduce a `respond_to`-like way to process result statuses 
+
+| Priority | Complexity | Status | Tags |
+| - | - | - | - |
+| High | Moderate | TODO | respond_to, pattern-matching |
 
 For example:
 
@@ -93,14 +113,6 @@ end
 - This is a crucial task before the v1.0.0 release.
 
 ---
-
-### Introduce per-request caching of steps using Rails Current Attributes
-
-| Priority | Complexity | Status | Tags |
-| - | - | - | - |
-| Medium | Moderate | TODO | per-request-cache, cached-steps, current-attributes |
-
-A killer feature.
 
 ### Introduce per-request caching of steps using Rails Current Attributes
 
