@@ -68,7 +68,7 @@ Open a PR that modifies the following [file](https://github.com/rubytoolbox/cata
 
 ## Features
 
-### Introduce per-requesr caching of steps using Rails Current Attributes
+### Introduce per-request caching of steps using Rails Current Attributes
 
 | Priority | Complexity | Status | Tags |
 | - | - | - | - |
@@ -79,6 +79,8 @@ A killer feature.
 **Notes:**
 
 - [Rails Current Attributes](https://api.rubyonrails.org/classes/ActiveSupport/CurrentAttributes.html).
+
+---
 
 ### Introduce concurent/parallel steps
 

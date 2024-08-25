@@ -66,6 +66,8 @@ This library is under heavy development. Most of the public API is polished, but
 
 - Have a look at [Convenient Service Development Wiki](https://github.com/marian13/convenient_service/wiki) for the contribution tutorials.
 
+- [Backlog](https://github.com/marian13/convenient_service/blob/main/BACKLOG.md).
+
 <!-- links:end -->
 
 ---
