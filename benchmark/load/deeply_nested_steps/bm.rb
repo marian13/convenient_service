@@ -22,7 +22,9 @@ ATTEMPTS = [
   {nesting_levels: 1, steps_per_level: 10},
   {nesting_levels: 2, steps_per_level: 10},
   {nesting_levels: 3, steps_per_level: 10},
-  {nesting_levels: 4, steps_per_level: 10}
+  {nesting_levels: 4, steps_per_level: 10},
+  {nesting_levels: 6, steps_per_level: 5},
+  {nesting_levels: 10, steps_per_level: 2}
 ]
 
 KLASSES = []
@@ -59,7 +61,7 @@ def run_service(klass)
   if result.success?
     result.data["id_1_#{klass.steps.size}"]
   else
-    raise
+    raise "Something went wrong..."
   end
 end
 
@@ -85,17 +87,21 @@ puts "\n`n` stands for nesting levels, `s` - for steps per level, `t` - for step
 # root@dd317c9e58c2:/gem# ruby -v
 # ruby 2.7.8p225 (2023-03-30 revision 1f4d455848) [x86_64-linux]
 #
-# root@dd317c9e58c2:/gem# ruby benchmark/load/deeply_nested_steps/bm.rb
+# root@dfa3422836e8:/gem# ruby benchmark/load/deeply_nested_steps/bm.rb
 #                                                          user     system      total        real
-# Build service (n = `1`, s = `10`, t = `10`)          0.005898   0.000000   0.005898 (  0.005914)
-# Build service (n = `2`, s = `10`, t = `100`)         0.012406   0.000000   0.012406 (  0.012401)
-# Build service (n = `3`, s = `10`, t = `1000`)        0.023170   0.000492   0.023662 (  0.023665)
-# Build service (n = `4`, s = `10`, t = `10000`)       0.025206   0.000000   0.025206 (  0.025212)
+# Build service (n = `1`, s = `10`, t = `10`)          0.006002   0.000000   0.006002 (  0.006091)
+# Build service (n = `2`, s = `10`, t = `100`)         0.017273   0.000000   0.017273 (  0.017282)
+# Build service (n = `3`, s = `10`, t = `1000`)        0.019433   0.000733   0.020166 (  0.020161)
+# Build service (n = `4`, s = `10`, t = `10000`)       0.029237   0.001829   0.031066 (  0.031158)
+# Build service (n = `6`, s = `5`, t = `15625`)        0.039978   0.001461   0.041439 (  0.041576)
+# Build service (n = `10`, s = `2`, t = `1024`)        0.078765   0.001385   0.080150 (  0.080251)
 #                                                          user     system      total        real
-# Run service   (n = `1`, s = `10`, t = `10`)          0.045114   0.000000   0.045114 (  0.045117)
-# Run service   (n = `2`, s = `10`, t = `100`)         0.365679   0.000000   0.365679 (  0.366577)
-# Run service   (n = `3`, s = `10`, t = `1000`)        3.550321   0.000000   3.550321 (  3.553825)
-# Run service   (n = `4`, s = `10`, t = `10000`)      35.497345   0.044394  35.541739 ( 35.546635)
+# Run service   (n = `1`, s = `10`, t = `10`)          0.044335   0.000791   0.045126 (  0.045132)
+# Run service   (n = `2`, s = `10`, t = `100`)         0.354018   0.000000   0.354018 (  0.354471)
+# Run service   (n = `3`, s = `10`, t = `1000`)        3.600247   0.002946   3.603193 (  3.609758)
+# Run service   (n = `4`, s = `10`, t = `10000`)      36.261000   0.032820  36.293820 ( 36.313460)
+# Run service   (n = `6`, s = `5`, t = `15625`)       56.163039   0.046864  56.209903 ( 56.224645)
+# Run service   (n = `10`, s = `2`, t = `1024`)        6.044170   0.000981   6.045151 (  6.049136)
 #
 # `n` stands for nesting levels, `s` - for steps per level, `t` - for steps in total
 ##
@@ -104,17 +110,21 @@ puts "\n`n` stands for nesting levels, `s` - for steps per level, `t` - for step
 # root@21d4556b62db:/gem# ruby -v
 # ruby 3.3.4 (2024-07-09 revision be1089c8ec) [x86_64-linux]
 #
-# root@21d4556b62db:/gem# ruby benchmark/load/deeply_nested_steps/bm.rb
+# root@e8c727a352dd:/gem# ruby benchmark/load/deeply_nested_steps/bm.rb
 #                                                          user     system      total        real
-# Build service (n = `1`, s = `10`, t = `10`)          0.003899   0.002390   0.006289 (  0.007990)
-# Build service (n = `2`, s = `10`, t = `100`)         0.013824   0.000000   0.013824 (  0.013888)
-# Build service (n = `3`, s = `10`, t = `1000`)        0.037154   0.001260   0.038414 (  0.039340)
-# Build service (n = `4`, s = `10`, t = `10000`)       0.024285   0.001829   0.026114 (  0.026592)
+# Build service (n = `1`, s = `10`, t = `10`)          0.005523   0.000170   0.005693 (  0.007036)
+# Build service (n = `2`, s = `10`, t = `100`)         0.014445   0.000000   0.014445 (  0.014555)
+# Build service (n = `3`, s = `10`, t = `1000`)        0.026700   0.000502   0.027202 (  0.027356)
+# Build service (n = `4`, s = `10`, t = `10000`)       0.028153   0.000000   0.028153 (  0.028310)
+# Build service (n = `6`, s = `5`, t = `15625`)        0.052858   0.000494   0.053352 (  0.053547)
+# Build service (n = `10`, s = `2`, t = `1024`)        0.067062   0.000424   0.067486 (  0.067681)
 #                                                          user     system      total        real
-# Run service   (n = `1`, s = `10`, t = `10`)          0.023308   0.000000   0.023308 (  0.023602)
-# Run service   (n = `2`, s = `10`, t = `100`)         0.158778   0.000429   0.159207 (  0.162602)
-# Run service   (n = `3`, s = `10`, t = `1000`)        1.290493   0.011324   1.301817 (  1.301932)
-# Run service   (n = `4`, s = `10`, t = `10000`)      14.057662   0.055574  14.113236 ( 14.113862)
+# Run service   (n = `1`, s = `10`, t = `10`)          0.030767   0.000757   0.031524 (  0.031591)
+# Run service   (n = `2`, s = `10`, t = `100`)         0.133289   0.000434   0.133723 (  0.133909)
+# Run service   (n = `3`, s = `10`, t = `1000`)        1.313196   0.000000   1.313196 (  1.321067)
+# Run service   (n = `4`, s = `10`, t = `10000`)      13.921593   0.049685  13.971278 ( 13.977973)
+# Run service   (n = `6`, s = `5`, t = `15625`)       23.526314   0.070861  23.597175 ( 23.606293)
+# Run service   (n = `10`, s = `2`, t = `1024`)        2.223812   0.005993   2.229805 (  2.230141)
 #
 # `n` stands for nesting levels, `s` - for steps per level, `t` - for steps in total
 ##
