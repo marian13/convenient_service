@@ -68,6 +68,35 @@ Open a PR that modifies the following [file](https://github.com/rubytoolbox/cata
 
 ## Features
 
+### Shorter syntax for inputs without options.
+
+| Priority | Complexity | Status | Tags |
+| - | - | - | - |
+| Medium | Easy | TODO | inputs, short-syntax |
+
+```ruby
+# before
+step SuccessService,
+  in: [
+    {nesting_level: raw(nesting_level)},
+    {index: index}
+  ],
+  out: :id
+
+# after
+step SuccessService,
+  in: {
+    nesting_level: raw(nesting_level),
+    index: index
+  },
+  out: :id
+```
+
+**Notes:**
+
+- This is a crucial task before the v1.0.0 release.
+
+
 ### Introduce the `include_config` RSpec matcher.
 
 | Priority | Complexity | Status | Tags |
@@ -93,6 +122,28 @@ it { is_expected.to include_config(ConvenientService::Standard::Config) }
 For example:
 
 ```ruby
+# before
+result = Service.result(number: 4)
+
+if result.success?
+  # ...
+elsif result.failure?
+  if result.code.to_sym == :baz
+    # ...
+  elsif result.code.to_sym == :qux
+    # ...
+  end
+else # result.error?
+  if result.code.to_sym == :foo
+    # ...
+  elsif result.code.to_sym == :bar
+    # ...
+  end
+end
+```
+
+```ruby
+# after
 result = Service.result(number: 4)
 
 result.respond_to do |status|
