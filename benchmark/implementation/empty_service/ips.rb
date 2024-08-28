@@ -93,7 +93,7 @@ class MutationsService < Mutations::Command
 end
 
 ##
-# Convenient Service - Service object pattern implementation in Ruby.
+# Convenient Service - Ruby Service Objects with Steps.
 # - https://github.com/marian13/convenient_service
 #
 class ConvenientServiceService

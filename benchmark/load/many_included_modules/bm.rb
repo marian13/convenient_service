@@ -34,7 +34,7 @@ def build_service(modules_count)
           success(foo: foo)
         end
       end
-  end
+    end
 end
 
 def run_service(klass)

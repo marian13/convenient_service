@@ -128,7 +128,7 @@ def build_service(super_groups_count)
           failure("Message with id `#{index}`")
         end
       end
-  end
+    end
 end
 
 def run_service(klass)
