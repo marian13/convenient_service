@@ -9,6 +9,10 @@ module ConvenientService
     Config = ::ConvenientService::Service::Configs::Callbacks
   end
 
+  module Rollbacks
+    Config = ::ConvenientService::Service::Configs::Rollbacks
+  end
+
   module Fallbacks
     Config = ::ConvenientService::Service::Configs::Fallbacks
   end
