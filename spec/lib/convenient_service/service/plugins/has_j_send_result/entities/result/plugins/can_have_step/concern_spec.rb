@@ -57,10 +57,6 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
               include ConvenientService::Standard::Config
 
               step first_step
-
-              def result
-                success
-              end
             end
           end
         end
@@ -98,6 +94,64 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         it "returns `nil`" do
           expect(result.step).to be_nil
         end
+
+        specify do
+          expect { result.step }.to cache_its_value
+        end
+      end
+
+      context "when result is from step" do
+        let(:service) do
+          Class.new.tap do |klass|
+            klass.class_exec(first_step) do |first_step|
+              include ConvenientService::Standard::Config
+
+              step first_step
+            end
+          end
+        end
+
+        let(:first_step) do
+          Class.new do
+            include ConvenientService::Standard::Config
+
+            def result
+              error
+            end
+          end
+        end
+
+        it "returns result step" do
+          expect(result.step).to eq(service.step_class.new(first_step, container: service, organizer: result.service, index: 0))
+        end
+
+        specify do
+          expect { result.step }.to cache_its_value
+        end
+      end
+    end
+
+    describe "#original_service" do
+      let(:result) { service.result }
+
+      context "when result is NOT from step" do
+        let(:service) do
+          Class.new do
+            include ConvenientService::Standard::Config
+
+            def result
+              success
+            end
+          end
+        end
+
+        it "returns `service`" do
+          expect(result.original_service).to eq(result.service)
+        end
+
+        specify do
+          expect { result.original_service }.to cache_its_value
+        end
       end
 
       context "when result is from step" do
@@ -125,12 +179,102 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           end
         end
 
-        it "returns result step" do
-          expect(result.step).to eq(service.step_class.new(first_step, container: service, organizer: result.service, index: 0))
+        it "returns result original service from step" do
+          expect(result.original_service).to be_instance_of(first_step)
         end
 
         specify do
-          expect { result.step }.to cache_its_value
+          expect { result.original_service }.to cache_its_value
+        end
+      end
+
+      context "when result is from nested step" do
+        let(:service) do
+          Class.new.tap do |klass|
+            klass.class_exec(first_step) do |first_step|
+              include ConvenientService::Standard::Config
+
+              step first_step
+            end
+          end
+        end
+
+        let(:first_step) do
+          Class.new.tap do |klass|
+            klass.class_exec(nested_step_of_first_step) do |nested_step_of_first_step|
+              include ConvenientService::Standard::Config
+
+              step nested_step_of_first_step
+            end
+          end
+        end
+
+        let(:nested_step_of_first_step) do
+          Class.new do
+            include ConvenientService::Standard::Config
+
+            def result
+              error
+            end
+          end
+        end
+
+        it "returns result original service from nested step" do
+          expect(result.original_service).to be_instance_of(nested_step_of_first_step)
+        end
+
+        specify do
+          expect { result.original_service }.to cache_its_value
+        end
+      end
+
+      context "when result is from deeply nested step" do
+        let(:service) do
+          Class.new.tap do |klass|
+            klass.class_exec(first_step) do |first_step|
+              include ConvenientService::Standard::Config
+
+              step first_step
+            end
+          end
+        end
+
+        let(:first_step) do
+          Class.new.tap do |klass|
+            klass.class_exec(nested_step_of_first_step) do |nested_step_of_first_step|
+              include ConvenientService::Standard::Config
+
+              step nested_step_of_first_step
+            end
+          end
+        end
+
+        let(:nested_step_of_first_step) do
+          Class.new.tap do |klass|
+            klass.class_exec(double_nested_step_of_first_step) do |double_nested_step_of_first_step|
+              include ConvenientService::Standard::Config
+
+              step double_nested_step_of_first_step
+            end
+          end
+        end
+
+        let(:double_nested_step_of_first_step) do
+          Class.new do
+            include ConvenientService::Standard::Config
+
+            def result
+              error
+            end
+          end
+        end
+
+        it "returns result original service from deeply nested step" do
+          expect(result.original_service).to be_instance_of(double_nested_step_of_first_step)
+        end
+
+        specify do
+          expect { result.original_service }.to cache_its_value
         end
       end
     end

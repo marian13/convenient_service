@@ -37,13 +37,11 @@ module ConvenientService
           # As a result, side effects are executed only for evaluated steps.
           #
           # Each iteration marks step as completed.
-          # Each iteration triggers callback.
           #
           # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step, nil]
           #
           # @internal
           #   IMPORTANT: `step` status MUST be checked before marking it as completed.
-          #   IMPORTANT: `step` status MUST be checked before triggering callback.
           #
           #   NOTE: @marian13 you already tried to come up with a better name to express the idea that this method has side effects numerous amount of times.
           #   Do NOT spend too much time on that again, you have a lot of other tasks to do.

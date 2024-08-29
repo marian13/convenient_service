@@ -80,7 +80,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       end
 
       it "returns service result with step and organizer" do
-        expect(step.result).to be_success.with_data(foo: :foo, bar: :bar, baz: :baz).of_step(first_step).of_service(container)
+        expect(step.result).to be_success.with_data(foo: :foo, bar: :bar, baz: :baz).of_step(first_step).of_service(container).of_original_service(first_step)
       end
 
       context "when `step` result has success status" do

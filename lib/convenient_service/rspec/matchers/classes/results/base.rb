@@ -199,6 +199,18 @@ module ConvenientService
             ##
             # @api public
             #
+            # @param service [ConvenientService::Service]
+            # @return [ConvenientService::RSpec::Matchers::Classes::Results::Base]
+            #
+            def of_original_service(service)
+              chain.original_service = service
+
+              self
+            end
+
+            ##
+            # @api public
+            #
             # @param step [Class, Symbol]
             # @return [ConvenientService::RSpec::Matchers::Classes::Results::Base]
             #

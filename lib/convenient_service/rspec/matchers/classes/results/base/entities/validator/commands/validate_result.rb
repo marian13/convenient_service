@@ -46,6 +46,13 @@ module ConvenientService
                     #
                     # @return [Boolean]
                     #
+                    delegate :valid_result_original_service?, to: :validator
+
+                    ##
+                    # @api private
+                    #
+                    # @return [Boolean]
+                    #
                     delegate :valid_result_step?, to: :validator
 
                     ##
@@ -103,6 +110,7 @@ module ConvenientService
                         yielder.yield(valid_result_type?)
                         yielder.yield(valid_result_status?)
                         yielder.yield(valid_result_service?)
+                        yielder.yield(valid_result_original_service?)
                         yielder.yield(valid_result_step?)
                         yielder.yield(valid_result_data?)
                         yielder.yield(valid_result_message?)

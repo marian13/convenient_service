@@ -30,7 +30,7 @@ module ConvenientService
                   def next(...)
                     result = chain.next(...)
 
-                    result.copy(overrides: {kwargs: {data: extract_data(result), step: step, service: step.organizer}})
+                    result.copy(overrides: {kwargs: {data: extract_data(result), step: step, service: step.organizer, original_service: result.original_service}})
                   end
 
                   private

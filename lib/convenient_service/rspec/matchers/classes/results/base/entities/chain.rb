@@ -58,6 +58,15 @@ module ConvenientService
                 #
                 # @return [Boolean]
                 #
+                def used_original_service?
+                  hash.key?(:original_service)
+                end
+
+                ##
+                # @api private
+                #
+                # @return [Boolean]
+                #
                 def used_step?
                   hash.key?(:step)
                 end
@@ -114,6 +123,15 @@ module ConvenientService
                 #
                 def service
                   hash[:service]
+                end
+
+                ##
+                # @api private
+                #
+                # @return [ConvenientService::Service]
+                #
+                def original_service
+                  hash[:original_service]
                 end
 
                 ##
@@ -183,6 +201,16 @@ module ConvenientService
                 #
                 def service=(other_service)
                   hash[:service] = other_service
+                end
+
+                ##
+                # @api private
+                #
+                # @param other_service [ConvenientService::Service]
+                # @return [ConvenientService::Service]
+                #
+                def original_service=(other_service)
+                  hash[:original_service] = other_service
                 end
 
                 ##

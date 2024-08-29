@@ -78,6 +78,15 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
       end
     end
 
+    describe "#valid_result_original_service?" do
+      specify do
+        expect { validator.valid_result_original_service? }
+          .to delegate_to(described_class::Commands::ValidateResultOriginalService, :call)
+          .with_arguments(validator: validator)
+          .and_return_its_value
+      end
+    end
+
     describe "#valid_result_status?" do
       specify do
         expect { validator.valid_result_status? }

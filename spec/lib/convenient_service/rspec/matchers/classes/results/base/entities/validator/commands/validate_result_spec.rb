@@ -62,6 +62,13 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
 
         specify do
           expect { command_result }
+            .to delegate_to(matcher.validator, :valid_result_original_service?)
+            .without_arguments
+            .and_return_its_value
+        end
+
+        specify do
+          expect { command_result }
             .to delegate_to(matcher.validator, :valid_result_step?)
             .without_arguments
             .and_return_its_value
@@ -126,6 +133,34 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
 
         context "when result has NOT valid service" do
           let(:matcher) { be_success.of_service(other_service).tap { |matcher| matcher.matches?(result) } }
+
+          let(:other_service) do
+            Class.new do
+              include ConvenientService::Standard::Config
+
+              def result
+                success
+              end
+            end
+          end
+
+          it "returns `false`" do
+            expect(command_result).to eq(false)
+          end
+
+          ##
+          # NOTE: Checks whether the following validation is skipped.
+          #
+          specify do
+            expect { command_result }
+              .not_to delegate_to(matcher.validator, :valid_result_original_service?)
+              .without_arguments
+              .and_return_its_value
+          end
+        end
+
+        context "when result has NOT valid original service" do
+          let(:matcher) { be_success.of_original_service(other_service).tap { |matcher| matcher.matches?(result) } }
 
           let(:other_service) do
             Class.new do

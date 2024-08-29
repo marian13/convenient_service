@@ -25,6 +25,13 @@ module ConvenientService
                     def step
                       Utils.memoize_including_falsy_values(self, :@step) { extra_kwargs[:step] }
                     end
+
+                    ##
+                    # @return [ConvenientService::Service]
+                    #
+                    def original_service
+                      Utils.memoize_including_falsy_values(self, :@original_service) { from_step? ? extra_kwargs[:original_service] : service }
+                    end
                   end
                 end
               end

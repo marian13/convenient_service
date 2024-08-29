@@ -78,6 +78,15 @@ module ConvenientService
                 #
                 # @return [Boolean]
                 #
+                def valid_result_original_service?
+                  Commands::ValidateResultOriginalService[validator: self]
+                end
+
+                ##
+                # @api private
+                #
+                # @return [Boolean]
+                #
                 def valid_result_status?
                   Commands::ValidateResultStatus[validator: self]
                 end
