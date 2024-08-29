@@ -95,7 +95,7 @@
   <dl>
     <dt>Defined in:</dt>
     <dd>lib/convenient_service/rspec/matchers/classes/results/base/entities/validator.rb<span class="defines">,<br />
-  lib/convenient_service/rspec/matchers/classes/results/base/entities/validator/commands/validate_result.rb,<br /> lib/convenient_service/rspec/matchers/classes/results/base/entities/validator/commands/validate_result_code.rb,<br /> lib/convenient_service/rspec/matchers/classes/results/base/entities/validator/commands/validate_result_data.rb,<br /> lib/convenient_service/rspec/matchers/classes/results/base/entities/validator/commands/validate_result_step.rb,<br /> lib/convenient_service/rspec/matchers/classes/results/base/entities/validator/commands/validate_result_type.rb,<br /> lib/convenient_service/rspec/matchers/classes/results/base/entities/validator/commands/validate_result_status.rb,<br /> lib/convenient_service/rspec/matchers/classes/results/base/entities/validator/commands/validate_result_message.rb,<br /> lib/convenient_service/rspec/matchers/classes/results/base/entities/validator/commands/validate_result_service.rb</span>
+  lib/convenient_service/rspec/matchers/classes/results/base/entities/validator/commands/validate_result.rb,<br /> lib/convenient_service/rspec/matchers/classes/results/base/entities/validator/commands/validate_result_code.rb,<br /> lib/convenient_service/rspec/matchers/classes/results/base/entities/validator/commands/validate_result_data.rb,<br /> lib/convenient_service/rspec/matchers/classes/results/base/entities/validator/commands/validate_result_step.rb,<br /> lib/convenient_service/rspec/matchers/classes/results/base/entities/validator/commands/validate_result_type.rb,<br /> lib/convenient_service/rspec/matchers/classes/results/base/entities/validator/commands/validate_result_status.rb,<br /> lib/convenient_service/rspec/matchers/classes/results/base/entities/validator/commands/validate_result_message.rb,<br /> lib/convenient_service/rspec/matchers/classes/results/base/entities/validator/commands/validate_result_service.rb,<br /> lib/convenient_service/rspec/matchers/classes/results/base/entities/validator/commands/validate_result_original_service.rb</span>
 </dd>
   </dl>
   
@@ -274,6 +274,28 @@
   <span class="summary_signature">
     
       <a href="#valid_result_message%3F-instance_method" title="#valid_result_message? (instance method)">#<strong>valid_result_message?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  <span class="private note title">private</span>
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#valid_result_original_service%3F-instance_method" title="#valid_result_original_service? (instance method)">#<strong>valid_result_original_service?</strong>  &#x21d2; Boolean </a>
     
 
     
@@ -561,16 +583,16 @@
       <pre class="lines">
 
 
-109
-110
-111
-112
-113
-114
-115</pre>
+118
+119
+120
+121
+122
+123
+124</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/classes/results/base/entities/validator.rb', line 109</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/classes/results/base/entities/validator.rb', line 118</span>
 
 <span class='kw'>def</span> <span class='op'>==</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>nil</span> <span class='kw'>unless</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='rparen'>)</span>
@@ -809,6 +831,62 @@
 </div>
     
       <div class="method_details ">
+  <h3 class="signature " id="valid_result_original_service?-instance_method">
+  
+    #<strong>valid_result_original_service?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p class="note private">
+  <strong>This method is part of a private API.</strong>
+  You should avoid using this method if possible, as it may be removed or be changed in the future.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+81
+82
+83</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/classes/results/base/entities/validator.rb', line 81</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_valid_result_original_service?'>valid_result_original_service?</span>
+  <span class='const'><span class='object_link'><a href="Validator/Commands.html" title="ConvenientService::RSpec::Matchers::Classes::Results::Base::Entities::Validator::Commands (module)">Commands</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Validator/Commands/ValidateResultOriginalService.html" title="ConvenientService::RSpec::Matchers::Classes::Results::Base::Entities::Validator::Commands::ValidateResultOriginalService (class)">ValidateResultOriginalService</a></span></span><span class='lbracket'>[</span><span class='label'>validator:</span> <span class='kw'>self</span><span class='rbracket'>]</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
   <h3 class="signature " id="valid_result_service?-instance_method">
   
     #<strong>valid_result_service?</strong>  &#x21d2; <tt>Boolean</tt> 
@@ -905,12 +983,12 @@
       <pre class="lines">
 
 
-81
-82
-83</pre>
+90
+91
+92</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/classes/results/base/entities/validator.rb', line 81</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/classes/results/base/entities/validator.rb', line 90</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_valid_result_status?'>valid_result_status?</span>
   <span class='const'><span class='object_link'><a href="Validator/Commands.html" title="ConvenientService::RSpec::Matchers::Classes::Results::Base::Entities::Validator::Commands (module)">Commands</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Validator/Commands/ValidateResultStatus.html" title="ConvenientService::RSpec::Matchers::Classes::Results::Base::Entities::Validator::Commands::ValidateResultStatus (class)">ValidateResultStatus</a></span></span><span class='lbracket'>[</span><span class='label'>validator:</span> <span class='kw'>self</span><span class='rbracket'>]</span>
@@ -961,12 +1039,12 @@
       <pre class="lines">
 
 
-90
-91
-92</pre>
+99
+100
+101</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/classes/results/base/entities/validator.rb', line 90</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/classes/results/base/entities/validator.rb', line 99</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_valid_result_step?'>valid_result_step?</span>
   <span class='const'><span class='object_link'><a href="Validator/Commands.html" title="ConvenientService::RSpec::Matchers::Classes::Results::Base::Entities::Validator::Commands (module)">Commands</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Validator/Commands/ValidateResultStep.html" title="ConvenientService::RSpec::Matchers::Classes::Results::Base::Entities::Validator::Commands::ValidateResultStep (class)">ValidateResultStep</a></span></span><span class='lbracket'>[</span><span class='label'>validator:</span> <span class='kw'>self</span><span class='rbracket'>]</span>
@@ -1017,12 +1095,12 @@
       <pre class="lines">
 
 
-99
-100
-101</pre>
+108
+109
+110</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/classes/results/base/entities/validator.rb', line 99</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/classes/results/base/entities/validator.rb', line 108</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_valid_result_type?'>valid_result_type?</span>
   <span class='const'><span class='object_link'><a href="Validator/Commands.html" title="ConvenientService::RSpec::Matchers::Classes::Results::Base::Entities::Validator::Commands (module)">Commands</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Validator/Commands/ValidateResultType.html" title="ConvenientService::RSpec::Matchers::Classes::Results::Base::Entities::Validator::Commands::ValidateResultType (class)">ValidateResultType</a></span></span><span class='lbracket'>[</span><span class='label'>validator:</span> <span class='kw'>self</span><span class='rbracket'>]</span>
@@ -1037,7 +1115,7 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Aug 28 20:10:44 2024 by
+  Generated on Thu Aug 29 00:08:12 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.36 (ruby-3.2.5).
 </div>
