@@ -14,6 +14,26 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
       subject(:command_result) { described_class.call(validator: matcher.validator) }
 
       let(:service) do
+        Class.new.tap do |klass|
+          klass.class_exec(first_step) do |first_step|
+            include ConvenientService::Standard::Config
+
+            step first_step
+          end
+        end
+      end
+
+      let(:first_step) do
+        Class.new.tap do |klass|
+          klass.class_exec(nested_step_of_first_step) do |nested_step_of_first_step|
+            include ConvenientService::Standard::Config
+
+            step nested_step_of_first_step
+          end
+        end
+      end
+
+      let(:nested_step_of_first_step) do
         Class.new do
           include ConvenientService::Standard::Config
 
@@ -45,24 +65,16 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
         context "when `of_original_service` is used" do
           let(:matcher) { be_success.of_original_service(chain_original_service).tap { |matcher| matcher.matches?(result) } }
 
-          context "when result service is NOT instance of chain original service" do
-            let(:chain_original_service) do
-              Class.new do
-                include ConvenientService::Standard::Config
-
-                def result
-                  success
-                end
-              end
-            end
+          context "when result original service is NOT instance of chain original service" do
+            let(:chain_original_service) { service }
 
             it "returns `false`" do
               expect(command_result).to eq(false)
             end
           end
 
-          context "when result service is instance of chain original service" do
-            let(:chain_original_service) { service }
+          context "when result original service is instance of chain original service" do
+            let(:chain_original_service) { nested_step_of_first_step }
 
             it "returns `true`" do
               expect(command_result).to eq(true)

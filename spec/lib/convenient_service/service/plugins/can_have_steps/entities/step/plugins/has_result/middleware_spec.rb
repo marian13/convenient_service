@@ -79,7 +79,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           .without_arguments
       end
 
-      it "returns service result with step and organizer" do
+      it "returns service result with step, organizer and original service" do
         expect(step.result).to be_success.with_data(foo: :foo, bar: :bar, baz: :baz).of_step(first_step).of_service(container).of_original_service(first_step)
       end
 
@@ -102,7 +102,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           end
 
           it "returns service result with original data keys" do
-            expect(step.result).to be_success.with_data(foo: :foo, bar: :bar, baz: :baz).of_step(first_step).of_service(container)
+            expect(step.result).to be_success.with_data(foo: :foo, bar: :bar, baz: :baz).of_step(first_step).of_service(container).of_original_service(first_step)
           end
         end
 
@@ -165,7 +165,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
               end
 
               it "returns service result only with that output data key" do
-                expect(step.result).to be_success.with_data(foo: :foo).of_step(first_step).of_service(container)
+                expect(step.result).to be_success.with_data(foo: :foo).of_step(first_step).of_service(container).of_original_service(first_step)
               end
             end
           end
@@ -228,7 +228,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
               end
 
               it "returns service result only with those output data keys" do
-                expect(step.result).to be_success.with_data(foo: :foo, bar: :bar).of_step(first_step).of_service(container)
+                expect(step.result).to be_success.with_data(foo: :foo, bar: :bar).of_step(first_step).of_service(container).of_original_service(first_step)
               end
             end
           end
@@ -251,7 +251,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
             end
 
             it "returns service result only with outputs data keys respecting aliases" do
-              expect(step.result).to be_success.with_data(abc: :foo, bar: :bar).of_step(first_step).of_service(container)
+              expect(step.result).to be_success.with_data(abc: :foo, bar: :bar).of_step(first_step).of_service(container).of_original_service(first_step)
             end
           end
         end
@@ -269,7 +269,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         end
 
         it "returns service result with original data keys" do
-          expect(step.result).to be_failure.with_data(foo: :foo, bar: :bar, baz: :baz).of_step(first_step).of_service(container)
+          expect(step.result).to be_failure.with_data(foo: :foo, bar: :bar, baz: :baz).of_step(first_step).of_service(container).of_original_service(first_step)
         end
       end
 
@@ -285,7 +285,33 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         end
 
         it "returns service result with original data keys" do
-          expect(step.result).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz).of_step(first_step).of_service(container)
+          expect(step.result).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz).of_step(first_step).of_service(container).of_original_service(first_step)
+        end
+      end
+
+      context "when `step` has nested step" do
+        let(:first_step) do
+          Class.new.tap do |klass|
+            klass.class_exec(nested_step_of_first_step) do |nested_step_of_first_step|
+              include ConvenientService::Standard::Config
+
+              step nested_step_of_first_step
+            end
+          end
+        end
+
+        let(:nested_step_of_first_step) do
+          Class.new do
+            include ConvenientService::Standard::Config
+
+            def result
+              success(data: {foo: :foo, bar: :bar, baz: :baz})
+            end
+          end
+        end
+
+        it "returns service result with step, organizer and original service" do
+          expect(step.result).to be_success.with_data(foo: :foo, bar: :bar, baz: :baz).of_step(first_step).of_service(container).of_original_service(nested_step_of_first_step)
         end
       end
     end

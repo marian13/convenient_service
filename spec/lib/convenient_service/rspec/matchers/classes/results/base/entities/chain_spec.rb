@@ -88,6 +88,30 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
       end
     end
 
+    describe "#used_original_service?" do
+      context "when service is NOT set" do
+        let(:chain) { described_class.new }
+
+        it "returns `false`" do
+          expect(chain.used_original_service?).to eq(false)
+        end
+      end
+
+      context "when service is set" do
+        let(:chain) { described_class.new.tap { |chain| chain.original_service = service } }
+
+        let(:service) do
+          Class.new do
+            include ConvenientService::Standard::Config
+          end
+        end
+
+        it "returns `true`" do
+          expect(chain.used_original_service?).to eq(true)
+        end
+      end
+    end
+
     describe "#used_step?" do
       context "when step is NOT set" do
         let(:chain) { described_class.new }
@@ -230,6 +254,34 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
       end
     end
 
+    describe "#original_service" do
+      context "when original service is NOT set" do
+        let(:chain) { described_class.new }
+
+        it "returns `nil`" do
+          expect(chain.original_service).to be_nil
+        end
+      end
+
+      context "when original service is set" do
+        let(:chain) { described_class.new.tap { |chain| chain.original_service = original_service } }
+
+        let(:original_service) do
+          Class.new do
+            include ConvenientService::Standard::Config
+
+            def result
+              success
+            end
+          end
+        end
+
+        it "returns original service" do
+          expect(chain.original_service).to eq(original_service)
+        end
+      end
+    end
+
     describe "#step" do
       context "when step is NOT set" do
         let(:chain) { described_class.new }
@@ -341,6 +393,26 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
 
       it "returns set service" do
         expect(chain.service = service).to eq(service)
+      end
+    end
+
+    describe "#original_service=" do
+      let(:chain) { described_class.new }
+
+      let(:original_service) do
+        Class.new do
+          include ConvenientService::Standard::Config
+        end
+      end
+
+      it "sets original_service" do
+        chain.original_service = original_service
+
+        expect(chain.original_service).to eq(original_service)
+      end
+
+      it "returns set original service" do
+        expect(chain.original_service = original_service).to eq(original_service)
       end
     end
 

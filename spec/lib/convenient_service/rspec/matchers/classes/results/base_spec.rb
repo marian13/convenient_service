@@ -254,6 +254,28 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base, type:
       end
     end
 
+    describe "#of_original_service" do
+      let(:service) do
+        Class.new do
+          include ConvenientService::Standard::Config
+
+          def result
+            success
+          end
+        end
+      end
+
+      it "sets chain original service" do
+        matcher.of_original_service(service)
+
+        expect(matcher.chain.original_service).to eq(service)
+      end
+
+      it "returns matcher" do
+        expect(matcher.of_original_service(service)).to eq(matcher)
+      end
+    end
+
     describe "#of_step" do
       let(:service) do
         Class.new do
