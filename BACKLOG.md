@@ -68,6 +68,20 @@ Open a PR that modifies the following [file](https://github.com/rubytoolbox/cata
 
 ## Features
 
+## Introduce `stub_entry` RSpec matcher
+
+| Priority | Complexity | Status | Tags |
+| - | - | - | - |
+| High | Medium | TODO | stub-entry, rspec-matcher |
+
+```ruby
+stub_entry(SomeFeature, :some_entry)
+  .with_arguments(*args, **kwargs, &block)
+  .to return_value(:some_value)
+```
+
+---
+
 ### Shorter syntax for inputs without options.
 
 | Priority | Complexity | Status | Tags |
