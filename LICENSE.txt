@@ -6,4 +6,4 @@ for license text.
 
 Convenient Service Pro has a commercial-friendly license.
 You can find the commercial license in COMM-LICENSE.txt.
-Please see https://convenientservice.org for purchasing options.
+Please see http://convenientservice.org for purchasing options.
