@@ -193,7 +193,7 @@ A killer feature.
 
 ---
 
-### Introduce concurent/parallel steps
+### Introduce concurrent/parallel steps
 
 | Priority | Complexity | Status | Tags |
 | - | - | - | - |
@@ -355,7 +355,40 @@ Otherwise, the config inclusion API must be changed before v1.0.0.
 
 ---
 
-### Minitests assertions
+### Consider to allow to pass positional arguments to steps
+
+| Priority | Complexity | Status | Tags |
+| - | - | - | - |
+| Low | Moderate | TODO | positional-arguments, steps |
+
+For example:
+
+```ruby
+class Service
+  include ConvenientService::Standard::Config
+
+  step NestedService, in: [
+    {0 => :foo},
+    {1 => :bar}
+  ]
+end
+```
+
+Under the hood it is converted into:
+
+```ruby
+def first_step
+  @first_step ||= NestedService.result(foo, bar)
+end
+```
+
+---
+
+### Minitest assertions
+
+| Priority | Complexity | Status | Tags |
+| - | - | - | - |
+| Medium | Moderate | TODO | minitest, assertions, matchers |
 
 ---
 
