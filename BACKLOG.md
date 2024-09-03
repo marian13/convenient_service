@@ -741,6 +741,20 @@ To hide overriden [eql?](https://github.com/marian13/convenient_service/blob/v0.
 
 ---
 
+## Compile middleware stacks.
+
+| Priority | Complexity | Status | Tags |
+| - | - | - | - |
+| Medium | High | TODO | compile, middleware-stack |
+
+## Cache unmodified configs.
+
+| Priority | Complexity | Status | Tags |
+| - | - | - | - |
+| Medium | High | TODO | cache, config |
+
+---
+
 ## Licence
 
 ### Complete licence files
