@@ -45,13 +45,13 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         end
       end
 
-      context "when result is NOT created from exception`" do
+      context "when result is NOT created from unhandled exception`" do
         it "returns `false`" do
-          expect(result.from_exception?).to eq(false)
+          expect(result.from_unhandled_exception?).to eq(false)
         end
       end
 
-      context "when result is created from exception" do
+      context "when result is created from unhandled exception" do
         let(:service) do
           Class.new do
             include ConvenientService::Standard::Config
@@ -64,12 +64,12 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         end
 
         it "returns `true`" do
-          expect(result.from_exception?).to eq(true)
+          expect(result.from_unhandled_exception?).to eq(true)
         end
       end
     end
 
-    describe "#exception" do
+    describe "#unhandled_exception" do
       let(:result) { service.result }
 
       let(:service) do
@@ -83,13 +83,13 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         end
       end
 
-      context "when result is NOT created from exception" do
+      context "when result is NOT created from unhandled exception" do
         it "returns `nil`" do
-          expect(result.exception).to be_nil
+          expect(result.unhandled_exception).to be_nil
         end
       end
 
-      context "when result is created from exception" do
+      context "when result is created from unhandled exception" do
         let(:service) do
           Class.new do
             include ConvenientService::Standard::Config
@@ -101,10 +101,10 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           end
         end
 
-        let(:exception) { service.new.result.unsafe_data[:exception] }
+        let(:exception) { service.new.result.unsafe_data[:unhandled_exception] }
 
         it "returns exception" do
-          expect(result.exception).to eq(exception)
+          expect(result.unhandled_exception).to eq(exception)
         end
       end
     end

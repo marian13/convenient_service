@@ -17,8 +17,8 @@ module ConvenientService
                     #
                     # @return [Boolean]
                     #
-                    def from_exception?
-                      Utils.to_bool(exception)
+                    def from_unhandled_exception?
+                      Utils.to_bool(unhandled_exception)
                     end
 
                     ##
@@ -26,8 +26,8 @@ module ConvenientService
                     #
                     # @return [StandardError, nil]
                     #
-                    def exception
-                      extra_kwargs[:exception]
+                    def unhandled_exception
+                      extra_kwargs[:unhandled_exception]
                     end
                   end
                 end

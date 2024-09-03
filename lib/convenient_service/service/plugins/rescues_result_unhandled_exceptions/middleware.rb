@@ -57,7 +57,7 @@ module ConvenientService
           def next(*args, **kwargs, &block)
             chain.next(*args, **kwargs, &block)
           rescue => exception
-            result_from_exception(exception, *args, **kwargs, &block)
+            result_from_unhandled_exception(exception, *args, **kwargs, &block)
           end
 
           private
@@ -69,14 +69,14 @@ module ConvenientService
           # @param block [Proc, nil]
           # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
           #
-          def result_from_exception(exception, *args, **kwargs, &block)
+          def result_from_unhandled_exception(exception, *args, **kwargs, &block)
             entity.public_send(
               status,
-              data: {exception: exception},
+              data: {unhandled_exception: exception},
               message: format_exception(exception, *args, **kwargs, &block),
               code: :unhandled_exception
             )
-              .copy(overrides: {kwargs: {exception: exception}})
+              .copy(overrides: {kwargs: {unhandled_exception: exception}})
           end
 
           ##

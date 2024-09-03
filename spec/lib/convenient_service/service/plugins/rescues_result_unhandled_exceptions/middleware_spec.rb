@@ -54,7 +54,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
 
         let(:max_backtrace_size) { 5 }
 
-        let(:exception) { service_class.result(*args, **kwargs, &block).unsafe_data[:exception] }
+        let(:exception) { service_class.result(*args, **kwargs, &block).unsafe_data[:unhandled_exception] }
 
         let(:formatted_exception) do
           <<~MESSAGE.chomp
@@ -114,7 +114,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
             let(:method) { wrap_method(service_class, :result, observe_middleware: middleware) }
 
             it "defaults to `:error`" do
-              expect(method_value).to be_error.with_data(exception: exception).and_message(formatted_exception).and_code(:unhandled_exception)
+              expect(method_value).to be_error.with_data(unhandled_exception: exception).and_message(formatted_exception).and_code(:unhandled_exception)
             end
           end
 
@@ -160,15 +160,15 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
               end
 
               it "returns `failure` with formatted exception" do
-                expect(method_value).to be_failure.with_data(exception: exception).and_message(formatted_exception).and_code(:unhandled_exception)
+                expect(method_value).to be_failure.with_data(unhandled_exception: exception).and_message(formatted_exception).and_code(:unhandled_exception)
               end
 
               it "returns `failure` from exception" do
-                expect(method_value.from_exception?).to eq(true)
+                expect(method_value.from_unhandled_exception?).to eq(true)
               end
 
               it "returns `failure` with exception" do
-                expect(method_value.exception).to eq(exception)
+                expect(method_value.unhandled_exception).to eq(exception)
               end
             end
 
@@ -188,15 +188,15 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
               end
 
               it "returns `error` with formatted exception" do
-                expect(method_value).to be_error.with_data(exception: exception).and_message(formatted_exception).and_code(:unhandled_exception)
+                expect(method_value).to be_error.with_data(unhandled_exception: exception).and_message(formatted_exception).and_code(:unhandled_exception)
               end
 
               it "returns `error` from exception" do
-                expect(method_value.from_exception?).to eq(true)
+                expect(method_value.from_unhandled_exception?).to eq(true)
               end
 
               it "returns `error` with exception" do
-                expect(method_value.exception).to eq(exception)
+                expect(method_value.unhandled_exception).to eq(exception)
               end
             end
           end
@@ -250,7 +250,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
 
         let(:max_backtrace_size) { 5 }
 
-        let(:exception) { service_class.new.result.unsafe_data[:exception] }
+        let(:exception) { service_class.new.result.unsafe_data[:unhandled_exception] }
 
         let(:formatted_exception) do
           <<~MESSAGE.chomp
@@ -310,7 +310,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
             let(:method) { wrap_method(service_instance, :regular_result, observe_middleware: middleware) }
 
             it "defaults to `:error`" do
-              expect(method_value).to be_error.with_data(exception: exception).and_message(formatted_exception).and_code(:unhandled_exception)
+              expect(method_value).to be_error.with_data(unhandled_exception: exception).and_message(formatted_exception).and_code(:unhandled_exception)
             end
           end
 
@@ -352,15 +352,15 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
               end
 
               it "returns `failure` with formatted exception" do
-                expect(method_value).to be_failure.with_data(exception: exception).and_message(formatted_exception).and_code(:unhandled_exception)
+                expect(method_value).to be_failure.with_data(unhandled_exception: exception).and_message(formatted_exception).and_code(:unhandled_exception)
               end
 
               it "returns `failure` from exception" do
-                expect(method_value.from_exception?).to eq(true)
+                expect(method_value.from_unhandled_exception?).to eq(true)
               end
 
               it "returns `failure` with exception" do
-                expect(method_value.exception).to eq(exception)
+                expect(method_value.unhandled_exception).to eq(exception)
               end
             end
 
@@ -380,15 +380,15 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
               end
 
               it "returns `error` with formatted exception" do
-                expect(method_value).to be_error.with_data(exception: exception).and_message(formatted_exception).and_code(:unhandled_exception)
+                expect(method_value).to be_error.with_data(unhandled_exception: exception).and_message(formatted_exception).and_code(:unhandled_exception)
               end
 
               it "returns `error` from exception" do
-                expect(method_value.from_exception?).to eq(true)
+                expect(method_value.from_unhandled_exception?).to eq(true)
               end
 
               it "returns `error` with exception" do
-                expect(method_value.exception).to eq(exception)
+                expect(method_value.unhandled_exception).to eq(exception)
               end
             end
           end
@@ -438,7 +438,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
 
         let(:max_backtrace_size) { 5 }
 
-        let(:exception) { service_class.new.result.unsafe_data[:exception] }
+        let(:exception) { service_class.new.result.unsafe_data[:unhandled_exception] }
 
         let(:formatted_exception) do
           <<~MESSAGE.chomp
@@ -502,7 +502,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
             let(:method) { wrap_method(service_instance, :steps_result, observe_middleware: middleware) }
 
             it "defaults to `:error`" do
-              expect(method_value).to be_error.with_data(exception: exception).and_message(formatted_exception).and_code(:unhandled_exception)
+              expect(method_value).to be_error.with_data(unhandled_exception: exception).and_message(formatted_exception).and_code(:unhandled_exception)
             end
           end
 
@@ -546,15 +546,15 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
               end
 
               it "returns `failure` with formatted exception" do
-                expect(method_value).to be_failure.with_data(exception: exception).and_message(formatted_exception).and_code(:unhandled_exception)
+                expect(method_value).to be_failure.with_data(unhandled_exception: exception).and_message(formatted_exception).and_code(:unhandled_exception)
               end
 
               it "returns `failure` from exception" do
-                expect(method_value.from_exception?).to eq(true)
+                expect(method_value.from_unhandled_exception?).to eq(true)
               end
 
               it "returns `failure` with exception" do
-                expect(method_value.exception).to eq(exception)
+                expect(method_value.unhandled_exception).to eq(exception)
               end
             end
 
@@ -574,15 +574,15 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
               end
 
               it "returns `error` with formatted exception" do
-                expect(method_value).to be_error.with_data(exception: exception).and_message(formatted_exception).and_code(:unhandled_exception)
+                expect(method_value).to be_error.with_data(unhandled_exception: exception).and_message(formatted_exception).and_code(:unhandled_exception)
               end
 
               it "returns `error` from exception" do
-                expect(method_value.from_exception?).to eq(true)
+                expect(method_value.from_unhandled_exception?).to eq(true)
               end
 
               it "returns `error` with exception" do
-                expect(method_value.exception).to eq(exception)
+                expect(method_value.unhandled_exception).to eq(exception)
               end
             end
           end
