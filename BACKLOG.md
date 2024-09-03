@@ -127,7 +127,15 @@ it { is_expected.to include_config(ConvenientService::Standard::Config) }
 
 ---
 
-### Introduce a `respond_to`-like way to process result statuses 
+### Introduce a middleware that cleans exception backtraces
+
+| Priority | Complexity | Status | Tags |
+| - | - | - | - |
+| Medium | Moderate | TODO | clean-backtrace |
+
+---
+
+### Introduce a `respond_to`-like way to process result statuses
 
 | Priority | Complexity | Status | Tags |
 | - | - | - | - |
