@@ -9,6 +9,13 @@
 
 ##
 # @internal
+#   - https://ruby-doc.org/stdlib-2.7.0/libdoc/pathname/rdoc/Pathname.html
+#   - https://github.com/ruby/pathname
+#
+require "pathname"
+
+##
+# @internal
 #   - https://ruby-doc.org/stdlib-2.7.0/libdoc/forwardable/rdoc/Forwardable.html
 #   - https://github.com/ruby/forwardable
 #
