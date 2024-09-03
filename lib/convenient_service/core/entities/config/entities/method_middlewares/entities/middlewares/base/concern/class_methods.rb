@@ -58,26 +58,27 @@ module ConvenientService
                         Commands::CreateObservableMiddleware.call(middleware: self)
                       end
 
-                      private
-
                       ##
                       # @param method [Symbol]
                       # @param scope [Symbol, ConvenientService::Support::UniqueValue]
                       # @param entity [Symbol, ConvenientService::Support::UniqueValue]
-                      # @return [Array<ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Structs::IntendedMethod>]
+                      # @return [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Structs::IntendedMethod]
                       #
                       # @internal
-                      #   TODO: Direct specs.
+                      #   NOTE: Prefer to use positional arguments when creating struct instances since they have no compatibility issues.
+                      #   - https://rubyreferences.github.io/rubychanges/3.2.html#struct-can-be-initialized-by-keyword-arguments-by-default
+                      #   - https://bugs.ruby-lang.org/issues/16806
                       #
                       def intended_for(method, entity:, scope: :instance)
-                        intended_methods << Structs::IntendedMethod.new(method, scope, entity)
+                        intended_method = Structs::IntendedMethod.new(method, scope, entity)
+
+                        intended_methods << intended_method
+
+                        intended_method
                       end
 
                       ##
                       # @return [ConvenientService::Support::UniqueValue]
-                      #
-                      # @internal
-                      #   TODO: Direct specs.
                       #
                       def any_method
                         Constants::ANY_METHOD
@@ -86,18 +87,12 @@ module ConvenientService
                       ##
                       # @return [ConvenientService::Support::UniqueValue]
                       #
-                      # @internal
-                      #   TODO: Direct specs.
-                      #
                       def any_scope
                         Constants::ANY_SCOPE
                       end
 
                       ##
                       # @return [ConvenientService::Support::UniqueValue]
-                      #
-                      # @internal
-                      #   TODO: Direct specs.
                       #
                       def any_entity
                         Constants::ANY_ENTITY

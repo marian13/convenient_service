@@ -75,6 +75,52 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
           .and_return_its_value
       end
     end
+
+    describe ".intended_for" do
+      let(:method) { :result }
+      let(:entity) { :service }
+      let(:scope) { :class }
+
+      it "adds intended method to intended methods" do
+        middleware_class.intended_for(method, entity: entity, scope: scope)
+
+        expect(middleware_class.intended_methods).to eq([ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Base::Structs::IntendedMethod.new(method, scope, entity)])
+      end
+
+      it "returns added intended method" do
+        expect(middleware_class.intended_for(method, entity: entity, scope: scope)).to eq(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Base::Structs::IntendedMethod.new(method, scope, entity))
+      end
+
+      specify do
+        expect { middleware_class.intended_for(method, entity: entity, scope: scope) }
+          .to delegate_to(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Base::Structs::IntendedMethod, :new)
+          .with_arguments(method, scope, entity)
+      end
+
+      context "when `scope` is NOT passed" do
+        it "defaults to `:instance`" do
+          expect(middleware_class.intended_for(method, entity: entity)).to eq(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Base::Structs::IntendedMethod.new(method, :instance, entity))
+        end
+      end
+    end
+
+    describe ".any_method" do
+      it "returns `ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Base::Constants::ANY_METHOD`" do
+        expect(middleware_class.any_method).to eq(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Base::Constants::ANY_METHOD)
+      end
+    end
+
+    describe ".any_scope" do
+      it "returns `ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Base::Constants::ANY_SCOPE`" do
+        expect(middleware_class.any_scope).to eq(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Base::Constants::ANY_SCOPE)
+      end
+    end
+
+    describe ".any_entity" do
+      it "returns `ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Base::Constants::ANY_ENTITY`" do
+        expect(middleware_class.any_entity).to eq(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Base::Constants::ANY_ENTITY)
+      end
+    end
   end
 end
 # rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers

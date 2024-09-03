@@ -8,12 +8,14 @@ require "convenient_service"
 RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Base::Structs::IntendedMethod, type: :standard do
   example_group "instance methods" do
     describe "#==" do
-      let(:kwargs) { {method: :result, scope: :instance, entity: :service} }
+      let(:method) { :result }
+      let(:scope) { :instance }
+      let(:entity) { :service }
 
-      let(:intented_method) { described_class.new(**kwargs) }
+      let(:intented_method) { described_class.new(method, scope, entity) }
 
       context "when `other` has different `method`" do
-        let(:other) { described_class.new(**kwargs.merge(method: :initialize)) }
+        let(:other) { described_class.new(:initialize, scope, entity) }
 
         it "returns `false`" do
           expect(intented_method == other).to eq(false)
@@ -21,7 +23,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
       end
 
       context "when `other` has different `scope`" do
-        let(:other) { described_class.new(**kwargs.merge(scope: :class)) }
+        let(:other) { described_class.new(method, :class, entity) }
 
         it "returns `false`" do
           expect(intented_method == other).to eq(false)
@@ -29,7 +31,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
       end
 
       context "when `other` has different `entity`" do
-        let(:other) { described_class.new(**kwargs.merge(entity: :result)) }
+        let(:other) { described_class.new(method, scope, :result) }
 
         it "returns `false`" do
           expect(intented_method == other).to eq(false)
@@ -37,7 +39,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
       end
 
       context "when `other` has same attributes" do
-        let(:other) { described_class.new(**kwargs) }
+        let(:other) { described_class.new(method, scope, entity) }
 
         it "returns `true`" do
           expect(intented_method == other).to eq(true)
