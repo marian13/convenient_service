@@ -17,9 +17,14 @@ module ConvenientService
             RACK = :rack
 
             ##
+            # @return [Symbol]
+            #
+            STATEFUL = :stateful
+
+            ##
             # @return [Array<Symbol>]
             #
-            ALL = [RUBY_MIDDLEWARE, RACK]
+            ALL = [RUBY_MIDDLEWARE, RACK, STATEFUL]
 
             ##
             # @return [Symbol]

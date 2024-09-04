@@ -27,6 +27,8 @@ module ConvenientService
               Entities::Builders::RubyMiddleware
             when Constants::Backends::RACK
               Entities::Builders::Rack
+            when Constants::Backends::STATEFUL
+              Entities::Builders::Stateful
             else
               ::ConvenientService.raise Exceptions::NotSupportedBackend.new(backend: backend)
             end

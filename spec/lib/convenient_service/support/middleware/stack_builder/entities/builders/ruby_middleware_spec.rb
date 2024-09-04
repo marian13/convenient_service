@@ -89,6 +89,41 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
       end
     end
 
+    ##
+    # TODO: Comprehensive specs.
+    #
+    describe "#call" do
+      let(:service) do
+        Class.new do
+          include ConvenientService::Standard::Config
+
+          step :foo
+          step :bar
+          step :baz
+
+          def foo
+            success
+          end
+
+          def bar
+            success
+          end
+
+          def baz
+            success
+          end
+        end
+      end
+
+      before do
+        stub_const("ConvenientService::Support::Middleware::StackBuilder::Constants::Backends::DEFAULT", ConvenientService::Support::Middleware::StackBuilder::Constants::Backends::RUBY_MIDDLEWARE)
+      end
+
+      it "runs middleware stack" do
+        expect(service.result.success?).to eq(true)
+      end
+    end
+
     describe "#unshift" do
       specify do
         expect { stack_builder.unshift(middleware, *args, &block) }

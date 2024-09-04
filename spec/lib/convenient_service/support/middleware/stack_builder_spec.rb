@@ -67,6 +67,12 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder, type: :stan
             expect(described_class.by(ConvenientService::Support::Middleware::StackBuilder::Constants::Backends::RACK)).to eq(ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Rack)
           end
         end
+
+        context "when `backend` is `ConvenientService::Support::Middleware::StackBuilder::Constants::Backends::STATEFUL`" do
+          it "returns `ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Stateful`" do
+            expect(described_class.by(ConvenientService::Support::Middleware::StackBuilder::Constants::Backends::STATEFUL)).to eq(ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Stateful)
+          end
+        end
       end
     end
   end

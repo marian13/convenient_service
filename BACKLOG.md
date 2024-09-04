@@ -735,6 +735,18 @@ To hide overriden [eql?](https://github.com/marian13/convenient_service/blob/v0.
 | - | - | - | - |
 | Medium | Moderate | TODO | performance, included-modules |
 
+---
+
+### Loop middleware backends in performance benchmarks
+
+| Priority | Complexity | Status | Tags |
+| - | - | - | - |
+| Medium | Moderate | TODO | middleware-backend |
+
+Consider to extract common benchmark setup.
+
+---
+
 ## Memory
 
 ### Consider to drop references to already calculated steps
@@ -754,6 +766,41 @@ To hide overriden [eql?](https://github.com/marian13/convenient_service/blob/v0.
 | Priority | Complexity | Status | Tags |
 | - | - | - | - |
 | Medium | High | TODO | compile, middleware-stack |
+
+```ruby
+module ConvenientService
+  module Support
+    module Middleware
+      class StackBuilder
+        module Constants
+          module Backends
+            ##
+            # @return [Symbol]
+            #
+            COMPILED = :compiled
+          end
+        end
+      end
+    end
+  end
+end
+```
+
+---
+
+### Unify middleware backends interfaces
+
+| Priority | Complexity | Status | Tags |
+| - | - | - | - |
+| Medium | Moderate | TODO | middleware-backend, interface |
+
+```ruby
+def run(env, original)
+  # ...
+end
+```
+
+---
 
 ### Cache unmodified configs.
 

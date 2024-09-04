@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Rack, type: :standard do
+RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Stateful, type: :standard do
   include ConvenientService::RSpec::Helpers::IgnoringException
 
   include ConvenientService::RSpec::Matchers::DelegateTo
@@ -115,7 +115,7 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
       end
 
       before do
-        stub_const("ConvenientService::Support::Middleware::StackBuilder::Constants::Backends::DEFAULT", ConvenientService::Support::Middleware::StackBuilder::Constants::Backends::RACK)
+        stub_const("ConvenientService::Support::Middleware::StackBuilder::Constants::Backends::DEFAULT", ConvenientService::Support::Middleware::StackBuilder::Constants::Backends::STATEFUL)
       end
 
       it "runs middleware stack" do
@@ -172,14 +172,14 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
             stack_builder.clear
           end
 
-          it "raises `ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Rack::Exceptions::MissingMiddleware`" do
+          it "raises `ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Stateful::Exceptions::MissingMiddleware`" do
             expect { stack_builder.insert(middleware, other_middleware) }
-              .to raise_error(ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Rack::Exceptions::MissingMiddleware)
+              .to raise_error(ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Stateful::Exceptions::MissingMiddleware)
               .with_message(exception_message)
           end
 
           specify do
-            expect { ignoring_exception(ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Rack::Exceptions::MissingMiddleware) { stack_builder.insert(middleware, other_middleware) } }
+            expect { ignoring_exception(ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Stateful::Exceptions::MissingMiddleware) { stack_builder.insert(middleware, other_middleware) } }
               .to delegate_to(ConvenientService, :raise)
           end
         end
@@ -221,14 +221,14 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
             stack_builder.clear
           end
 
-          it "raises `ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Rack::Exceptions::MissingMiddleware`" do
+          it "raises `ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Stateful::Exceptions::MissingMiddleware`" do
             expect { stack_builder.insert_before(middleware, other_middleware) }
-              .to raise_error(ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Rack::Exceptions::MissingMiddleware)
+              .to raise_error(ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Stateful::Exceptions::MissingMiddleware)
               .with_message(exception_message)
           end
 
           specify do
-            expect { ignoring_exception(ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Rack::Exceptions::MissingMiddleware) { stack_builder.insert_before(middleware, other_middleware) } }
+            expect { ignoring_exception(ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Stateful::Exceptions::MissingMiddleware) { stack_builder.insert_before(middleware, other_middleware) } }
               .to delegate_to(ConvenientService, :raise)
           end
         end
@@ -270,14 +270,14 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
             stack_builder.clear
           end
 
-          it "raises `ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Rack::Exceptions::MissingMiddleware`" do
+          it "raises `ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Stateful::Exceptions::MissingMiddleware`" do
             expect { stack_builder.insert_after(middleware, other_middleware) }
-              .to raise_error(ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Rack::Exceptions::MissingMiddleware)
+              .to raise_error(ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Stateful::Exceptions::MissingMiddleware)
               .with_message(exception_message)
           end
 
           specify do
-            expect { ignoring_exception(ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Rack::Exceptions::MissingMiddleware) { stack_builder.insert_after(middleware, other_middleware) } }
+            expect { ignoring_exception(ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Stateful::Exceptions::MissingMiddleware) { stack_builder.insert_after(middleware, other_middleware) } }
               .to delegate_to(ConvenientService, :raise)
           end
         end
@@ -353,14 +353,14 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
             stack_builder.clear
           end
 
-          it "raises `ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Rack::Exceptions::MissingMiddleware`" do
+          it "raises `ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Stateful::Exceptions::MissingMiddleware`" do
             expect { stack_builder.replace(middleware, other_middleware) }
-              .to raise_error(ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Rack::Exceptions::MissingMiddleware)
+              .to raise_error(ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Stateful::Exceptions::MissingMiddleware)
               .with_message(exception_message)
           end
 
           specify do
-            expect { ignoring_exception(ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Rack::Exceptions::MissingMiddleware) { stack_builder.replace(middleware, other_middleware) } }
+            expect { ignoring_exception(ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Stateful::Exceptions::MissingMiddleware) { stack_builder.replace(middleware, other_middleware) } }
               .to delegate_to(ConvenientService, :raise)
           end
         end
@@ -392,14 +392,14 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
           stack_builder.clear
         end
 
-        it "raises `ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Rack::Exceptions::MissingMiddleware`" do
+        it "raises `ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Stateful::Exceptions::MissingMiddleware`" do
           expect { stack_builder.delete(middleware) }
-            .to raise_error(ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Rack::Exceptions::MissingMiddleware)
+            .to raise_error(ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Stateful::Exceptions::MissingMiddleware)
             .with_message(exception_message)
         end
 
         specify do
-          expect { ignoring_exception(ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Rack::Exceptions::MissingMiddleware) { stack_builder.delete(middleware) } }
+          expect { ignoring_exception(ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Stateful::Exceptions::MissingMiddleware) { stack_builder.delete(middleware) } }
             .to delegate_to(ConvenientService, :raise)
         end
       end
@@ -433,14 +433,14 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
           TEXT
         end
 
-        it "raises `ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Rack::Exceptions::MissingMiddleware`" do
+        it "raises `ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Stateful::Exceptions::MissingMiddleware`" do
           expect { stack_builder.remove(middleware) }
-            .to raise_error(ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Rack::Exceptions::MissingMiddleware)
+            .to raise_error(ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Stateful::Exceptions::MissingMiddleware)
             .with_message(exception_message)
         end
 
         specify do
-          expect { ignoring_exception(ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Rack::Exceptions::MissingMiddleware) { stack_builder.remove(middleware) } }
+          expect { ignoring_exception(ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Stateful::Exceptions::MissingMiddleware) { stack_builder.remove(middleware) } }
             .to delegate_to(ConvenientService, :raise)
         end
       end
