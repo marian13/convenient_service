@@ -16,7 +16,12 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
   let(:container) { ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Container.new(klass: klass) }
   let(:methods_middlewares_callers) { container.methods_middlewares_callers }
   let(:klass) { service_class }
-  let(:service_class) { Class.new }
+
+  let(:service_class) do
+    Class.new do
+      include ConvenientService::Core
+    end
+  end
 
   let(:caller) { ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Caller.new(prefix: prefix) }
   let(:prefix) { ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Caller::Constants::INSTANCE_PREFIX }
@@ -240,9 +245,17 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
 
       context "when `scope` is `:class`" do
         let(:scope) { :class }
-        let(:container) { ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Container.new(klass: klass.singleton_class) }
+        let(:container) { ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Container.new(klass: klass.singleton_class, original_klass: klass) }
 
         context "when `method` caller (with middlewares) is NOT defined in methods callers" do
+          it "synchronize method definitions by mutex" do
+            allow(container.mutex).to receive(:synchronize).and_call_original
+
+            command_result
+
+            expect(container.mutex).to have_received(:synchronize)
+          end
+
           it "prepend methods callers to container" do
             command_result
 

@@ -23,6 +23,13 @@ module ConvenientService
         end
 
         ##
+        # @return [Mutex]
+        #
+        def mutex
+          @mutex ||= ::Mutex.new
+        end
+
+        ##
         # Sets or gets concerns for a service class.
         #
         # @overload concerns

@@ -15,8 +15,13 @@ module ConvenientService
     # @internal
     #   TODO: Allow to include `Core` only to classes?
     #
-    included do |entity_class|
-      entity_class.include Concern
+    included do
+      include Concern
+
+      ##
+      # IMPORTANT: Intentionally initializes config (and its mutex) to ensure thread-safety.
+      #
+      mutex
     end
   end
 end

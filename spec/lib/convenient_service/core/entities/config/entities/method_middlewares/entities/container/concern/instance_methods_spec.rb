@@ -21,7 +21,12 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
 
   let(:klass) { service_class }
 
-  let(:service_class) { Class.new }
+  let(:service_class) do
+    Class.new do
+      include ConvenientService::Core
+    end
+  end
+
   let(:service_instance) { service_class.new }
 
   let(:scope) { :instance }
@@ -87,6 +92,18 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
   #
   #   it { is_expected.to delegate_method(:ancestors).to(:class) }
   # end
+
+  example_group "class methods" do
+    describe ".new" do
+      context "when `oriiginal_klass` is NOT passed" do
+        let(:container_instance) { container_class.new(klass: klass) }
+
+        it "defaults to `klass`" do
+          expect(container_instance.original_klass).to eq(container_instance.klass)
+        end
+      end
+    end
+  end
 
   example_group "instance methods" do
     describe "#super_method_defined?" do
@@ -181,6 +198,17 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
         expect { container.methods_middlewares_callers }
           .to delegate_to(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Container::Commands::ResolveMethodsMiddlewaresCallers, :call)
           .with_arguments(container: container)
+          .and_return_its_value
+      end
+    end
+
+    describe "#mutex" do
+      let(:container_instance) { container_class.new(klass: klass.singleton_class, original_klass: klass) }
+
+      specify do
+        expect { container.mutex }
+          .to delegate_to(klass, :mutex)
+          .without_arguments
           .and_return_its_value
       end
     end
@@ -366,6 +394,8 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
 
     example_group "comparison" do
       describe "#==" do
+        let(:container_instance) { container_class.new(klass: klass.singleton_class, original_klass: klass) }
+
         context "when `other` has different class" do
           let(:other) { 42 }
 
@@ -375,7 +405,15 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
         end
 
         context "when `other` has different `klass`" do
-          let(:other) { container_class.new(klass: Class.new) }
+          let(:other) { container_class.new(klass: Class.new, original_klass: klass) }
+
+          it "returns `false`" do
+            expect(container == other).to eq(false)
+          end
+        end
+
+        context "when `other` has different `original_klass`" do
+          let(:other) { container_class.new(klass: klass.singleton_class, original_klass: Class.new) }
 
           it "returns `false`" do
             expect(container == other).to eq(false)
@@ -383,7 +421,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
         end
 
         context "when `other` has same attributes" do
-          let(:other) { container_class.new(klass: klass) }
+          let(:other) { container_class.new(klass: klass.singleton_class, original_klass: klass) }
 
           it "returns `true`" do
             expect(container == other).to eq(true)

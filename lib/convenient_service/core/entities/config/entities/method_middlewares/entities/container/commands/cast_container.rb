@@ -51,7 +51,7 @@ module ConvenientService
                       when :instance
                         Container.new(klass: hash[:klass])
                       when :class
-                        Container.new(klass: hash[:klass].singleton_class)
+                        Container.new(klass: hash[:klass].singleton_class, original_klass: hash[:klass])
                       end
                     end
 

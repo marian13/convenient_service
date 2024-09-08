@@ -91,7 +91,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
               let(:other) { {scope: scope, klass: klass} }
 
               it "returns other casted to container" do
-                expect(casted).to eq(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Container.new(klass: klass.singleton_class))
+                expect(casted).to eq(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Container.new(klass: klass.singleton_class, original_klass: klass))
               end
             end
           end

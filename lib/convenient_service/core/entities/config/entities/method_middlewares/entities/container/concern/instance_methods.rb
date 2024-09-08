@@ -20,6 +20,12 @@ module ConvenientService
                     attr_reader :klass
 
                     ##
+                    # @!attribute [r] original_klass
+                    #   @return [Class]
+                    #
+                    attr_reader :original_klass
+
+                    ##
                     # @return [Array<Class, Module>]
                     #
                     delegate :ancestors, to: :klass
@@ -28,8 +34,13 @@ module ConvenientService
                     # @param klass [Class]
                     # @return [void]
                     #
-                    def initialize(klass:)
+                    # @internal
+                    #   NOTE: `klass` is the defining class. Sometimes it is the original class, sometimes it is the singleton class of the original class. It is done to have the same interface for method callers definition.
+                    #   TODO: Rename `klass` to `defining_klass`.
+                    #
+                    def initialize(klass:, original_klass: klass)
                       @klass = klass
+                      @original_klass = original_klass
                     end
 
                     ##
@@ -102,6 +113,13 @@ module ConvenientService
                     end
 
                     ##
+                    # @return [Mutex]
+                    #
+                    def mutex
+                      original_klass.mutex
+                    end
+
+                    ##
                     # @return [void]
                     #
                     def prepend_methods_callers_to_container
@@ -143,6 +161,7 @@ module ConvenientService
                       return unless other.instance_of?(self.class)
 
                       return false if klass != other.klass
+                      return false if original_klass != other.original_klass
 
                       true
                     end

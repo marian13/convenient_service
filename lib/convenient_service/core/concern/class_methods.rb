@@ -5,6 +5,15 @@ module ConvenientService
     module Concern
       module ClassMethods
         ##
+        # @api private
+        #
+        # @return [Mutex]
+        #
+        def mutex
+          (@__convenient_service_config__ ||= Entities::Config.new(klass: self)).mutex
+        end
+
+        ##
         # @see ConvenientService::Core::Entities::Config#concerns
         #
         # @internal

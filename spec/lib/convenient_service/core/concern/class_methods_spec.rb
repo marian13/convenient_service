@@ -24,10 +24,35 @@ RSpec.describe ConvenientService::Core::Concern::ClassMethods, type: :standard d
   let(:block) { proc { :foo } }
 
   example_group "class methods" do
+    describe ".mutex" do
+      specify do
+        ##
+        # NOTE: Imitates non-initialized config instance variable.
+        #
+        service_class.remove_instance_variable(:@__convenient_service_config__)
+
+        allow(ConvenientService::Core::Entities::Config).to receive(:new).with(klass: service_class).and_return(config)
+
+        expect(service_class.mutex).to eq(config.mutex)
+      end
+
+      ##
+      # NOTE: Indirect test for `||=` in `@config ||= Entities::Config.new(klass: self)`.
+      #
+      specify do
+        expect { service_class.mutex }.to cache_its_value
+      end
+    end
+
     describe ".concerns" do
       let(:configuration_block) { proc {} }
 
       specify do
+        ##
+        # NOTE: Imitates non-initialized config instance variable.
+        #
+        service_class.remove_instance_variable(:@__convenient_service_config__)
+
         allow(ConvenientService::Core::Entities::Config).to receive(:new).with(klass: service_class).and_return(config)
 
         ##
@@ -49,7 +74,13 @@ RSpec.describe ConvenientService::Core::Concern::ClassMethods, type: :standard d
       let(:scope) { :instance }
       let(:configuration_block) { proc {} }
 
+      # rubocop:disable RSpec/ExampleLength
       specify do
+        ##
+        # NOTE: Imitates non-initialized config instance variable.
+        #
+        service_class.remove_instance_variable(:@__convenient_service_config__)
+
         allow(ConvenientService::Core::Entities::Config).to receive(:new).with(klass: service_class).and_return(config)
 
         expect { service_class.middlewares(method, scope: scope, &configuration_block) }
@@ -57,6 +88,7 @@ RSpec.describe ConvenientService::Core::Concern::ClassMethods, type: :standard d
           .with_arguments(method, scope: scope, &configuration_block)
           .and_return_its_value
       end
+      # rubocop:enable RSpec/ExampleLength
 
       ##
       # NOTE: Indirect test for `||=` in `@config ||= Entities::Config.new(klass: self)`.
@@ -68,6 +100,11 @@ RSpec.describe ConvenientService::Core::Concern::ClassMethods, type: :standard d
 
     describe ".has_committed_config?" do
       before do
+        ##
+        # NOTE: Imitates non-initialized config instance variable.
+        #
+        service_class.remove_instance_variable(:@__convenient_service_config__)
+
         allow(ConvenientService::Core::Entities::Config).to receive(:new).with(klass: service_class).and_return(config)
       end
 
@@ -97,6 +134,11 @@ RSpec.describe ConvenientService::Core::Concern::ClassMethods, type: :standard d
 
     describe ".commit_config!" do
       specify do
+        ##
+        # NOTE: Imitates non-initialized config instance variable.
+        #
+        service_class.remove_instance_variable(:@__convenient_service_config__)
+
         allow(ConvenientService::Core::Entities::Config).to receive(:new).with(klass: service_class).and_return(config)
 
         expect { service_class.commit_config! }.to delegate_to(config, :commit!)
@@ -119,6 +161,11 @@ RSpec.describe ConvenientService::Core::Concern::ClassMethods, type: :standard d
 
       example_group "`trigger` option" do
         before do
+          ##
+          # NOTE: Imitates non-initialized config instance variable.
+          #
+          service_class.remove_instance_variable(:@__convenient_service_config__)
+
           allow(ConvenientService::Core::Entities::Config).to receive(:new).with(klass: service_class).and_return(config)
         end
 
@@ -208,7 +255,7 @@ RSpec.describe ConvenientService::Core::Concern::ClassMethods, type: :standard d
 
       ##
       # TODO: `it "logs debug message"`.
-      #
+      ##
 
       it "calls `send`" do
         ##

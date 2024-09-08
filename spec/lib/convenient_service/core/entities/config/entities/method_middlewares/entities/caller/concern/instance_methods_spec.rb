@@ -25,7 +25,12 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
   let(:container) { container_instance }
 
   let(:klass) { service_class }
-  let(:service_class) { Class.new }
+
+  let(:service_class) do
+    Class.new do
+      include ConvenientService::Core
+    end
+  end
 
   let(:scope) { :instance }
   let(:method) { :result }

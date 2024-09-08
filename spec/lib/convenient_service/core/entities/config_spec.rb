@@ -36,6 +36,16 @@ RSpec.describe ConvenientService::Core::Entities::Config, type: :standard do
   end
 
   example_group "instance methods" do
+    describe "#mutex" do
+      it "returns `Mutex` instance" do
+        expect(config.mutex).to be_instance_of(Mutex)
+      end
+
+      specify do
+        expect { config.mutex }.to cache_its_value
+      end
+    end
+
     describe "#concerns" do
       context "when `configuration_block` is NOT passed" do
         let(:concerns) { described_class::Entities::Concerns.new(klass: service_class) }
