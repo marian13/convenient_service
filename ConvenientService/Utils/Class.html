@@ -6,7 +6,7 @@
 <title>
   Module: ConvenientService::Utils::Class
   
-    &mdash; Documentation by YARD 0.9.36
+    &mdash; Documentation by YARD 0.9.37
   
 </title>
 
@@ -79,7 +79,7 @@
   <dl>
     <dt>Defined in:</dt>
     <dd>lib/convenient_service/utils/class.rb<span class="defines">,<br />
-  lib/convenient_service/utils/class/display_name.rb</span>
+  lib/convenient_service/utils/class/display_name.rb,<br /> lib/convenient_service/utils/class/get_attached_object.rb</span>
 </dd>
   </dl>
   
@@ -91,7 +91,7 @@
     
   
     
-      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Class/DisplayName.html" title="ConvenientService::Utils::Class::DisplayName (class)">DisplayName</a></span>
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Class/DisplayName.html" title="ConvenientService::Utils::Class::DisplayName (class)">DisplayName</a></span>, <span class='object_link'><a href="Class/GetAttachedObject.html" title="ConvenientService::Utils::Class::GetAttachedObject (class)">GetAttachedObject</a></span>
     
   
 </p>
@@ -109,6 +109,28 @@
     </h2>
 
     <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#attached_object-class_method" title="attached_object (class method)">.<strong>attached_object</strong>  &#x21d2; Class<sup>?</sup> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  <span class="private note title">private</span>
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
       
         <li class="public ">
   <span class="summary_signature">
@@ -142,7 +164,63 @@
 
     
       <div class="method_details first">
-  <h3 class="signature first" id="display_name-class_method">
+  <h3 class="signature first" id="attached_object-class_method">
+  
+    .<strong>attached_object</strong>  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::Utils::Class (module)">Class</a></span></tt><sup>?</sup> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p class="note private">
+  <strong>This method is part of a private API.</strong>
+  You should avoid using this method if possible, as it may be removed or be changed in the future.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="ConvenientService::Utils::Class (module)">Class</a></span></tt>, <tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+24
+25
+26</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/class.rb', line 24</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_attached_object'>attached_object</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="Class/GetAttachedObject.html" title="ConvenientService::Utils::Class::GetAttachedObject (class)">GetAttachedObject</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="Class/GetAttachedObject.html#call-instance_method" title="ConvenientService::Utils::Class::GetAttachedObject#call (method)">call</a></span></span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="display_name-class_method">
   
     .<strong>display_name</strong>  &#x21d2; <tt><span class='object_link'><a href="String.html" title="ConvenientService::Utils::String (module)">String</a></span></tt> 
   
@@ -182,12 +260,12 @@
       <pre class="lines">
 
 
-14
 15
-16</pre>
+16
+17</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/class.rb', line 14</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/class.rb', line 15</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_display_name'>display_name</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="Class/DisplayName.html" title="ConvenientService::Utils::Class::DisplayName (class)">DisplayName</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="Class/DisplayName.html#call-instance_method" title="ConvenientService::Utils::Class::DisplayName#call (method)">call</a></span></span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
@@ -202,9 +280,9 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Sep  4 00:19:19 2024 by
+  Generated on Sun Sep  8 15:26:56 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.36 (ruby-3.2.5).
+  0.9.37 (ruby-3.2.5).
 </div>
 
     </div>

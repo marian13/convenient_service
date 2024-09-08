@@ -6,7 +6,7 @@
 <title>
   Module: ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code::Concern::InstanceMethods
   
-    &mdash; Documentation by YARD 0.9.36
+    &mdash; Documentation by YARD 0.9.37
   
 </title>
 
@@ -533,23 +533,23 @@
 <div class="tags">
   
   <div class="examples">
-    <p class="tag_title">Examples:</p>
+    <h4 class="tag_title">Examples:</h4>
     
       
-        <p class="example_title"><div class='inline'><p>RSpec expectation matchers.</p>
-</div></p>
+        <h5 class="example_title"><div class='inline'><p>RSpec expectation matchers.</p>
+</div></h5>
       
       <pre class="example code"><code><span class='id identifier rubyid_expect'>expect</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to'>to</span> <span class='id identifier rubyid_be_error'>be_error</span><span class='period'>.</span><span class='id identifier rubyid_with_code'>with_code</span><span class='lparen'>(</span><span class='id identifier rubyid_match'>match</span><span class='lparen'>(</span><span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>bar</span><span class='regexp_end'>/</span></span><span class='rparen'>)</span><span class='rparen'>)</span></code></pre>
     
       
-        <p class="example_title"><div class='inline'><p>RSpec mocks arguments matchers.</p>
-</div></p>
+        <h5 class="example_title"><div class='inline'><p>RSpec mocks arguments matchers.</p>
+</div></h5>
       
       <pre class="example code"><code><span class='id identifier rubyid_expect'>expect</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to'>to</span> <span class='id identifier rubyid_be_success'>be_success</span><span class='period'>.</span><span class='id identifier rubyid_with_code'>with_code</span><span class='lparen'>(</span><span class='id identifier rubyid_instance_of'>instance_of</span><span class='lparen'>(</span><span class='const'>Symbol</span><span class='rparen'>)</span><span class='rparen'>)</span></code></pre>
     
       
-        <p class="example_title"><div class='inline'><p>Just code does NOT work in case/when.</p>
-</div></p>
+        <h5 class="example_title"><div class='inline'><p>Just code does NOT work in case/when.</p>
+</div></h5>
       
       <pre class="example code"><code>
 <span class='kw'>case</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_code'>code</span> <span class='comment'># `result.code` returns fancy object
@@ -562,8 +562,8 @@
 </span><span class='kw'>end</span></code></pre>
     
       
-        <p class="example_title"><div class='inline'><p>Code converted to symbol works in case/when.</p>
-</div></p>
+        <h5 class="example_title"><div class='inline'><p>Code converted to symbol works in case/when.</p>
+</div></h5>
       
       <pre class="example code"><code>
 <span class='kw'>case</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_code'>code</span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span>
@@ -942,9 +942,9 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Sep  4 00:19:22 2024 by
+  Generated on Sun Sep  8 15:26:59 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.36 (ruby-3.2.5).
+  0.9.37 (ruby-3.2.5).
 </div>
 
     </div>

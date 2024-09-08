@@ -6,7 +6,7 @@
 <title>
   Module: ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeOwnResult::Concern
   
-    &mdash; Documentation by YARD 0.9.36
+    &mdash; Documentation by YARD 0.9.37
   
 </title>
 
@@ -262,11 +262,11 @@ Otherwise it is foreign for that particular service instance.</p>
 <div class="tags">
   
   <div class="examples">
-    <p class="tag_title">Examples:</p>
+    <h4 class="tag_title">Examples:</h4>
     
       
-        <p class="example_title"><div class='inline'><p><code>success</code>, <code>failure</code> and <code>error</code> are own results for service instance.</p>
-</div></p>
+        <h5 class="example_title"><div class='inline'><p><code>success</code>, <code>failure</code> and <code>error</code> are own results for service instance.</p>
+</div></h5>
       
       <pre class="example code"><code><span class='kw'>class</span> <span class='const'><span class='object_link'><a href="../../../../../../../Service.html" title="ConvenientService::Service (module)">Service</a></span></span>
   <span class='id identifier rubyid_include'>include</span> <span class='const'><span class='object_link'><a href="../../../../../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../Standard.html" title="ConvenientService::Standard (module)">Standard</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../Standard.html#Config-constant" title="ConvenientService::Standard::Config (constant)">Config</a></span></span>
@@ -286,8 +286,8 @@ Otherwise it is foreign for that particular service instance.</p>
 <span class='comment'># =&gt; false</span></code></pre>
     
       
-        <p class="example_title"><div class='inline'><p>Service step results are own results for service instance.</p>
-</div></p>
+        <h5 class="example_title"><div class='inline'><p>Service step results are own results for service instance.</p>
+</div></h5>
       
       <pre class="example code"><code><span class='kw'>class</span> <span class='const'><span class='object_link'><a href="../../../../../../../Service.html" title="ConvenientService::Service (module)">Service</a></span></span>
   <span class='id identifier rubyid_include'>include</span> <span class='const'><span class='object_link'><a href="../../../../../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../Standard.html" title="ConvenientService::Standard (module)">Standard</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../Standard.html#Config-constant" title="ConvenientService::Standard::Config (constant)">Config</a></span></span>
@@ -305,8 +305,8 @@ Otherwise it is foreign for that particular service instance.</p>
 <span class='comment'># =&gt; false</span></code></pre>
     
       
-        <p class="example_title"><div class='inline'><p>Method step results are own results for service instance.</p>
-</div></p>
+        <h5 class="example_title"><div class='inline'><p>Method step results are own results for service instance.</p>
+</div></h5>
       
       <pre class="example code"><code><span class='kw'>class</span> <span class='const'><span class='object_link'><a href="../../../../../../../Service.html" title="ConvenientService::Service (module)">Service</a></span></span>
   <span class='id identifier rubyid_include'>include</span> <span class='const'><span class='object_link'><a href="../../../../../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../Standard.html" title="ConvenientService::Standard (module)">Standard</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../Standard.html#Config-constant" title="ConvenientService::Standard::Config (constant)">Config</a></span></span>
@@ -328,8 +328,8 @@ Otherwise it is foreign for that particular service instance.</p>
 <span class='comment'># =&gt; false</span></code></pre>
     
       
-        <p class="example_title"><div class='inline'><p>All results that are NOT any of <code>success</code>, <code>failure</code>, <code>error</code> or step results are NOT own results for service instance. Such results are called <code>foreign</code> service results.</p>
-</div></p>
+        <h5 class="example_title"><div class='inline'><p>All results that are NOT any of <code>success</code>, <code>failure</code>, <code>error</code> or step results are NOT own results for service instance. Such results are called <code>foreign</code> service results.</p>
+</div></h5>
       
       <pre class="example code"><code><span class='kw'>class</span> <span class='const'><span class='object_link'><a href="../../../../../../../Service.html" title="ConvenientService::Service (module)">Service</a></span></span>
   <span class='id identifier rubyid_include'>include</span> <span class='const'><span class='object_link'><a href="../../../../../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../Standard.html" title="ConvenientService::Standard (module)">Standard</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../Standard.html#Config-constant" title="ConvenientService::Standard::Config (constant)">Config</a></span></span>
@@ -349,8 +349,8 @@ Otherwise it is foreign for that particular service instance.</p>
 <span class='comment'># =&gt; false</span></code></pre>
     
       
-        <p class="example_title"><div class='inline'><p>Edge case: Step results are always own even when method step result calls foreign service result.</p>
-</div></p>
+        <h5 class="example_title"><div class='inline'><p>Edge case: Step results are always own even when method step result calls foreign service result.</p>
+</div></h5>
       
       <pre class="example code"><code><span class='kw'>class</span> <span class='const'><span class='object_link'><a href="../../../../../../../Service.html" title="ConvenientService::Service (module)">Service</a></span></span>
   <span class='id identifier rubyid_include'>include</span> <span class='const'><span class='object_link'><a href="../../../../../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../Standard.html" title="ConvenientService::Standard (module)">Standard</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../Standard.html#Config-constant" title="ConvenientService::Standard::Config (constant)">Config</a></span></span>
@@ -428,9 +428,9 @@ Otherwise it is foreign for that particular service instance.</p>
 </div>
 
       <div id="footer">
-  Generated on Wed Sep  4 00:19:21 2024 by
+  Generated on Sun Sep  8 15:26:58 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.36 (ruby-3.2.5).
+  0.9.37 (ruby-3.2.5).
 </div>
 
     </div>
