@@ -296,6 +296,28 @@
 </li>
 
       
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#mutex-instance_method" title="#mutex (instance method)">#<strong>mutex</strong>  &#x21d2; Mutex </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
     </ul>
   
 
@@ -477,13 +499,13 @@ Does nothing for the subsequent calls.</p>
       <pre class="lines">
 
 
-148
-149
-150
-151</pre>
+155
+156
+157
+158</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config.rb', line 148</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config.rb', line 155</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_commit!'>commit!</span><span class='lparen'>(</span><span class='label'>trigger:</span> <span class='const'><span class='object_link'><a href="../Constants.html" title="ConvenientService::Core::Constants (module)">Constants</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Constants/Triggers.html" title="ConvenientService::Core::Constants::Triggers (module)">Triggers</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Constants/Triggers.html#USER-constant" title="ConvenientService::Core::Constants::Triggers::USER (constant)">USER</a></span></span><span class='rparen'>)</span>
   <span class='lparen'>(</span><span class='id identifier rubyid_committed?'>committed?</span> <span class='op'>?</span> <span class='kw'>false</span> <span class='op'>:</span> <span class='id identifier rubyid_concerns'>concerns</span><span class='period'>.</span><span class='id identifier rubyid_include!'>include!</span><span class='rparen'>)</span>
@@ -531,12 +553,12 @@ Does nothing for the subsequent calls.</p>
       <pre class="lines">
 
 
-129
-130
-131</pre>
+136
+137
+138</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config.rb', line 129</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config.rb', line 136</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_committed?'>committed?</span>
   <span class='ivar'>@committed</span> <span class='op'>||=</span> <span class='id identifier rubyid_concerns'>concerns</span><span class='period'>.</span><span class='id identifier rubyid_included?'>included?</span>
@@ -681,19 +703,19 @@ Does nothing for the subsequent calls.</p>
       <pre class="lines">
 
 
-44
-45
-46
-47
-48
-49
-50
 51
 52
-53</pre>
+53
+54
+55
+56
+57
+58
+59
+60</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config.rb', line 44</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config.rb', line 51</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_concerns'>concerns</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_configuration_block'>configuration_block</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_configuration_block'>configuration_block</span>
@@ -747,12 +769,12 @@ Does nothing for the subsequent calls.</p>
       <pre class="lines">
 
 
-112
-113
-114</pre>
+119
+120
+121</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config.rb', line 112</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config.rb', line 119</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_method_missing_commits_counter'>method_missing_commits_counter</span>
   <span class='ivar'>@method_missing_commits_counter</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="../../Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Support/ThreadSafeCounter.html" title="ConvenientService::Support::ThreadSafeCounter (class)">ThreadSafeCounter</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Support/ThreadSafeCounter.html#initialize-instance_method" title="ConvenientService::Support::ThreadSafeCounter#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>max_value:</span> <span class='const'><span class='object_link'><a href="../Constants.html" title="ConvenientService::Core::Constants (module)">Constants</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Constants/Commits.html" title="ConvenientService::Core::Constants::Commits (module)">Commits</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Constants/Commits.html#METHOD_MISSING_MAX_TRIES-constant" title="ConvenientService::Core::Constants::Commits::METHOD_MISSING_MAX_TRIES (constant)">METHOD_MISSING_MAX_TRIES</a></span></span><span class='rparen'>)</span>
@@ -1083,23 +1105,23 @@ Does nothing for the subsequent calls.</p>
       <pre class="lines">
 
 
-94
-95
-96
-97
-98
-99
-100
 101
 102
 103
 104
 105
 106
-107</pre>
+107
+108
+109
+110
+111
+112
+113
+114</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config.rb', line 94</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config.rb', line 101</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_middlewares'>middlewares</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='label'>scope:</span> <span class='symbol'>:instance</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_configuration_block'>configuration_block</span><span class='rparen'>)</span>
   <span class='ivar'>@middlewares</span> <span class='op'>||=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
@@ -1120,12 +1142,64 @@ Does nothing for the subsequent calls.</p>
 </table>
 </div>
     
+      <div class="method_details ">
+  <h3 class="signature " id="mutex-instance_method">
+  
+    #<strong>mutex</strong>  &#x21d2; <tt>Mutex</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Mutex</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+28
+29
+30</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config.rb', line 28</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_mutex'>mutex</span>
+  <span class='ivar'>@mutex</span> <span class='op'>||=</span> <span class='op'>::</span><span class='const'>Mutex</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
   </div>
 
 </div>
 
       <div id="footer">
-  Generated on Sun Sep  8 15:27:00 2024 by
+  Generated on Sun Sep  8 23:08:10 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.2.5).
 </div>
