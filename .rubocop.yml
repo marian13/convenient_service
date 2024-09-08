@@ -59,11 +59,12 @@ AllCops:
 
   Exclude:
     ##
-    # NOTE: Excludes vendor from linting. Needed by GitHub Actions.
+    # NOTE: Excludes `vendor` and git-ignored `TODO` folders from linting. Needed by GitHub Actions.
     # - https://github.com/rubocop/rubocop/issues/9832
     # - https://github.com/rubocop/rubocop/issues/9832#issuecomment-873398952
     #
     - vendor/**/*
+    - TODO/**/*
 
     ##
     # NOTE: Excludes dependencies from linting.
