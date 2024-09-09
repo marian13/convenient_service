@@ -245,7 +245,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
 
       context "when `scope` is `:class`" do
         let(:scope) { :class }
-        let(:container) { ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Container.new(klass: klass.singleton_class, original_klass: klass) }
+        let(:container) { ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Container.new(klass: klass.singleton_class) }
 
         context "when `method` caller (with middlewares) is NOT defined in methods callers" do
           it "synchronize method definitions by mutex" do

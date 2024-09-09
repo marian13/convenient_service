@@ -35,6 +35,16 @@ RSpec.describe ConvenientService::Core::Entities::Config, type: :standard do
     it { is_expected.to have_attr_reader(:klass) }
   end
 
+  example_group "class methods" do
+    describe ".new" do
+      specify do
+        expect { config }
+          .to delegate_to(Mutex, :new)
+          .without_arguments
+      end
+    end
+  end
+
   example_group "instance methods" do
     describe "#mutex" do
       it "returns `Mutex` instance" do
@@ -43,6 +53,12 @@ RSpec.describe ConvenientService::Core::Entities::Config, type: :standard do
 
       specify do
         expect { config.mutex }.to cache_its_value
+      end
+
+      specify do
+        config
+
+        expect { config.mutex }.not_to delegate_to(Mutex, :new)
       end
     end
 

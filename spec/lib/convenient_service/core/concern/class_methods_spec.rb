@@ -24,23 +24,35 @@ RSpec.describe ConvenientService::Core::Concern::ClassMethods, type: :standard d
   let(:block) { proc { :foo } }
 
   example_group "class methods" do
-    describe ".mutex" do
-      specify do
-        ##
-        # NOTE: Imitates non-initialized config instance variable.
-        #
-        service_class.remove_instance_variable(:@__convenient_service_config__)
+    if ConvenientService::Dependencies.ruby.version >= 3.2
+      describe ".__convenient_service_config__" do
+        specify do
+          ##
+          # NOTE: Imitates non-memoized config instance variable. For Ruby 3.2+ is is stored in `class`. For previous versions its stored in `class.singleton_class`.
+          #
+          service_class.remove_instance_variable(:@__convenient_service_config__)
 
-        allow(ConvenientService::Core::Entities::Config).to receive(:new).with(klass: service_class).and_return(config)
+          expect { service_class.__convenient_service_config__ }
+            .to delegate_to(ConvenientService::Core::Entities::Config, :new)
+            .with_arguments(klass: service_class)
+        end
 
-        expect(service_class.mutex).to eq(config.mutex)
+        it "returns config" do
+          expect(service_class.__convenient_service_config__).to be_instance_of(ConvenientService::Core::Entities::Config)
+        end
+
+        specify do
+          expect { service_class.__convenient_service_config__ }.to cache_its_value
+        end
       end
-
-      ##
-      # NOTE: Indirect test for `||=` in `@config ||= Entities::Config.new(klass: self)`.
-      #
-      specify do
-        expect { service_class.mutex }.to cache_its_value
+    else
+      describe ".__convenient_service_config__" do
+        specify do
+          expect { service_class.__convenient_service_config__ }
+            .to delegate_to(service_class.singleton_class, :__convenient_service_config__)
+            .with_arguments(klass: service_class)
+            .and_return_its_value
+        end
       end
     end
 
@@ -49,9 +61,10 @@ RSpec.describe ConvenientService::Core::Concern::ClassMethods, type: :standard d
 
       specify do
         ##
-        # NOTE: Imitates non-initialized config instance variable.
+        # NOTE: Imitates non-memoized config instance variable. For Ruby 3.2+ is is stored in `class`. For previous versions its stored in `class.singleton_class`.
         #
-        service_class.remove_instance_variable(:@__convenient_service_config__)
+        service_class.remove_instance_variable(:@__convenient_service_config__) if service_class.instance_variable_defined?(:@__convenient_service_config__)
+        service_class.singleton_class.remove_instance_variable(:@__convenient_service_config__) if service_class.singleton_class.instance_variable_defined?(:@__convenient_service_config__)
 
         allow(ConvenientService::Core::Entities::Config).to receive(:new).with(klass: service_class).and_return(config)
 
@@ -77,9 +90,10 @@ RSpec.describe ConvenientService::Core::Concern::ClassMethods, type: :standard d
       # rubocop:disable RSpec/ExampleLength
       specify do
         ##
-        # NOTE: Imitates non-initialized config instance variable.
+        # NOTE: Imitates non-memoized config instance variable. For Ruby 3.2+ is is stored in `class`. For previous versions its stored in `class.singleton_class`.
         #
-        service_class.remove_instance_variable(:@__convenient_service_config__)
+        service_class.remove_instance_variable(:@__convenient_service_config__) if service_class.instance_variable_defined?(:@__convenient_service_config__)
+        service_class.singleton_class.remove_instance_variable(:@__convenient_service_config__) if service_class.singleton_class.instance_variable_defined?(:@__convenient_service_config__)
 
         allow(ConvenientService::Core::Entities::Config).to receive(:new).with(klass: service_class).and_return(config)
 
@@ -101,9 +115,10 @@ RSpec.describe ConvenientService::Core::Concern::ClassMethods, type: :standard d
     describe ".has_committed_config?" do
       before do
         ##
-        # NOTE: Imitates non-initialized config instance variable.
+        # NOTE: Imitates non-memoized config instance variable. For Ruby 3.2+ is is stored in `class`. For previous versions its stored in `class.singleton_class`.
         #
-        service_class.remove_instance_variable(:@__convenient_service_config__)
+        service_class.remove_instance_variable(:@__convenient_service_config__) if service_class.instance_variable_defined?(:@__convenient_service_config__)
+        service_class.singleton_class.remove_instance_variable(:@__convenient_service_config__) if service_class.singleton_class.instance_variable_defined?(:@__convenient_service_config__)
 
         allow(ConvenientService::Core::Entities::Config).to receive(:new).with(klass: service_class).and_return(config)
       end
@@ -135,9 +150,10 @@ RSpec.describe ConvenientService::Core::Concern::ClassMethods, type: :standard d
     describe ".commit_config!" do
       specify do
         ##
-        # NOTE: Imitates non-initialized config instance variable.
+        # NOTE: Imitates non-memoized config instance variable. For Ruby 3.2+ is is stored in `class`. For previous versions its stored in `class.singleton_class`.
         #
-        service_class.remove_instance_variable(:@__convenient_service_config__)
+        service_class.remove_instance_variable(:@__convenient_service_config__) if service_class.instance_variable_defined?(:@__convenient_service_config__)
+        service_class.singleton_class.remove_instance_variable(:@__convenient_service_config__) if service_class.singleton_class.instance_variable_defined?(:@__convenient_service_config__)
 
         allow(ConvenientService::Core::Entities::Config).to receive(:new).with(klass: service_class).and_return(config)
 
@@ -162,9 +178,10 @@ RSpec.describe ConvenientService::Core::Concern::ClassMethods, type: :standard d
       example_group "`trigger` option" do
         before do
           ##
-          # NOTE: Imitates non-initialized config instance variable.
+          # NOTE: Imitates non-memoized config instance variable. For Ruby 3.2+ is is stored in `class`. For previous versions its stored in `class.singleton_class`.
           #
-          service_class.remove_instance_variable(:@__convenient_service_config__)
+          service_class.remove_instance_variable(:@__convenient_service_config__) if service_class.instance_variable_defined?(:@__convenient_service_config__)
+          service_class.singleton_class.remove_instance_variable(:@__convenient_service_config__) if service_class.singleton_class.instance_variable_defined?(:@__convenient_service_config__)
 
           allow(ConvenientService::Core::Entities::Config).to receive(:new).with(klass: service_class).and_return(config)
         end

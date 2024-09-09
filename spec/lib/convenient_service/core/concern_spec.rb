@@ -33,6 +33,11 @@ RSpec.describe ConvenientService::Core::Concern, type: :standard do
       it { is_expected.to extend_module(described_class::ClassMethods) }
 
       ##
+      # TODO: Custom matcher.
+      #
+      specify { expect(entity_class.singleton_class).to extend_module(described_class::SingletonClassMethods) }
+
+      ##
       # TODO: Uncomment.
       #
       # specify { expect(entity_class.singleton_class).to have_alias_method(:new_without_commit_config, :new) }

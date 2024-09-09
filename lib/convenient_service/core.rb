@@ -21,7 +21,7 @@ module ConvenientService
       ##
       # IMPORTANT: Intentionally initializes config (and its mutex) to ensure thread-safety.
       #
-      mutex
+      __convenient_service_config__
     end
   end
 end

@@ -15,18 +15,18 @@ RSpec.describe ConvenientService::Core, type: :standard do
 
     context "when included" do
       let(:entity_class) { Class.new }
-      let(:config) { ConvenientService::Core::Entities::Config.new(klass: entity_class) }
 
       specify do
         expect(entity_class.include described_class).to include_module(described_class::Concern)
       end
 
+      ##
+      # NOTE: Ensures `__convenient_service_config__` is called in the `included` block.
+      #
       specify do
-        allow(ConvenientService::Core::Entities::Config).to receive(:new).with(klass: entity_class).and_return(config)
-
         expect { entity_class.include described_class }
-          .to delegate_to(config, :mutex)
-          .without_arguments
+          .to delegate_to(ConvenientService::Core::Entities::Config, :new)
+          .with_arguments(klass: entity_class)
       end
     end
   end

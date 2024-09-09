@@ -15,18 +15,22 @@ module ConvenientService
         attr_reader :klass
 
         ##
+        # @!attribute [r] mutex
+        #   @return [Mutex]
+        #
+        attr_reader :mutex
+
+        ##
         # @param klass [Class]
         # @return [void]
         #
         def initialize(klass:)
           @klass = klass
-        end
 
-        ##
-        # @return [Mutex]
-        #
-        def mutex
-          @mutex ||= ::Mutex.new
+          ##
+          # IMPORTANT: Intentionally initializes mutex in constructor to ensure thread-safety.
+          #
+          @mutex = ::Mutex.new
         end
 
         ##

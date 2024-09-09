@@ -20,12 +20,6 @@ module ConvenientService
                     attr_reader :klass
 
                     ##
-                    # @!attribute [r] original_klass
-                    #   @return [Class]
-                    #
-                    attr_reader :original_klass
-
-                    ##
                     # @return [Array<Class, Module>]
                     #
                     delegate :ancestors, to: :klass
@@ -34,13 +28,8 @@ module ConvenientService
                     # @param klass [Class]
                     # @return [void]
                     #
-                    # @internal
-                    #   NOTE: `klass` is the defining class. Sometimes it is the original class, sometimes it is the singleton class of the original class. It is done to have the same interface for method callers definition.
-                    #   TODO: Rename `klass` to `defining_klass`.
-                    #
-                    def initialize(klass:, original_klass: klass)
+                    def initialize(klass:)
                       @klass = klass
-                      @original_klass = original_klass
                     end
 
                     ##
@@ -113,10 +102,30 @@ module ConvenientService
                     end
 
                     ##
+                    # Returns corresponding config mutex.
+                    #
                     # @return [Mutex]
                     #
+                    # @example The klass is a class.
+                    #   class Service
+                    #     include ConvenientService::Core
+                    #   end
+                    #
+                    #   Service.__convenient_service_config__.mutex
+                    #   # => Mutex:0x000000011f3fdb60 - same instance as from `Service.singleton_class.__convenient_service_config__.mutex`.
+                    #
+                    # @example The klass is a singleton class.
+                    #   class Service
+                    #     include ConvenientService::Core
+                    #   end
+                    #
+                    #   Service.singleton_class.__convenient_service_config__.mutex
+                    #   # => Mutex:0x000000011f3fdb60 - same instance as from `Service.__convenient_service_config__.mutex`.
+                    #
+                    # @note Both `class` and `class.singleton_class` return same mutex instance.
+                    #
                     def mutex
-                      original_klass.mutex
+                      klass.__convenient_service_config__.mutex
                     end
 
                     ##
@@ -161,7 +170,6 @@ module ConvenientService
                       return unless other.instance_of?(self.class)
 
                       return false if klass != other.klass
-                      return false if original_klass != other.original_klass
 
                       true
                     end
