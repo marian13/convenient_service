@@ -7,7 +7,8 @@
 #     Version: v7.0.4.3.
 #     Wrapped in a namespace `ConvenientService::Dependencies::Extractions::ActiveSupportConcern`.
 #     Added `instance_methods` that works in a similar way as `class_methods`.
-#     Also `ClassMethods` (and `InstanceMethods`) are loaded after `included` block, not as in the original implementation.
+#     Added `signleton_class_methods` that works in a similar way as `class_methods`.
+#     Also `ClassMethods` (`InstanceMethods` and `SingletonClassMethods`) are loaded after `included` block, not as in the original implementation.
 #
 #   - https://github.com/rails/rails/blob/v7.0.4.3/activesupport/lib/active_support/concern.rb
 #   - https://github.com/marian13/rails/blob/v7.0.4.3/activesupport/lib/active_support/concern.rb

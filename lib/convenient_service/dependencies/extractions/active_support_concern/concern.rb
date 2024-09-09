@@ -166,6 +166,8 @@ module ConvenientService
               base.include const_get(:InstanceMethods) if const_defined?(:InstanceMethods)
 
               base.extend const_get(:ClassMethods) if const_defined?(:ClassMethods)
+
+              base.singleton_class.extend const_get(:SingletonClassMethods) if const_defined?(:SingletonClassMethods)
             end
           end
 
@@ -267,6 +269,34 @@ module ConvenientService
               const_set(:ClassMethods, Module.new)
 
             mod.module_eval(&class_methods_module_definition)
+          end
+
+          # Define singleton class methods from given block.
+          # You can define private class methods as well.
+          #
+          #   module Example
+          #     extend ActiveSupport::Concern
+          #
+          #     singleton_class_methods do
+          #       def foo; puts 'foo'; end
+          #
+          #       private
+          #         def bar; puts 'bar'; end
+          #     end
+          #   end
+          #
+          #   class Buzz
+          #     include Example
+          #   end
+          #
+          #   Buzz.singleton_class.foo # => "foo"
+          #   Buzz.singleton_class.bar # => private method 'bar' called for Buzz:Class(NoMethodError)
+          def singleton_class_methods(&singleton_class_methods_module_definition)
+            mod = const_defined?(:SingletonClassMethods, false) ?
+              const_get(:SingletonClassMethods) :
+              const_set(:SingletonClassMethods, Module.new)
+
+            mod.module_eval(&singleton_class_methods_module_definition)
           end
         end
       end
