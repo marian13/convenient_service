@@ -57,6 +57,14 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
         let(:container) { ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Container.new(klass: klass) }
 
         context "when `method` caller (with middlewares) is NOT defined in methods callers" do
+          it "synchronize method definitions by mutex" do
+            allow(container.mutex).to receive(:synchronize).and_call_original
+
+            command_result
+
+            expect(container.mutex).to have_received(:synchronize)
+          end
+
           it "prepend methods callers to container" do
             command_result
 
@@ -99,8 +107,27 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
             methods_middlewares_callers.define_method(method) {}
           end
 
+          it "synchronize method definitions by mutex" do
+            allow(container.mutex).to receive(:synchronize).and_call_original
+
+            command_result
+
+            expect(container.mutex).to have_received(:synchronize)
+          end
+
           it "returns `false`" do
             expect(command_result).to eq(false)
+          end
+
+          ##
+          # NOTE: `prepend_methods_callers_to_container` is only called before defining. So if it is NOT called then NO redefinition happened.
+          #
+          it "does NOT redefines `method` callers" do
+            allow(container).to receive(:prepend_methods_callers_to_container).and_call_original
+
+            command_result
+
+            expect(container).not_to have_received(:prepend_methods_callers_to_container)
           end
         end
 
@@ -298,8 +325,27 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
             methods_middlewares_callers.define_method(method) {}
           end
 
+          it "synchronize method definitions by mutex" do
+            allow(container.mutex).to receive(:synchronize).and_call_original
+
+            command_result
+
+            expect(container.mutex).to have_received(:synchronize)
+          end
+
           it "returns `false`" do
             expect(command_result).to eq(false)
+          end
+
+          ##
+          # NOTE: `prepend_methods_callers_to_container` is only called before defining. So if it is NOT called then NO redefinition happened.
+          #
+          it "does NOT redefines `method` callers" do
+            allow(container).to receive(:prepend_methods_callers_to_container).and_call_original
+
+            command_result
+
+            expect(container).not_to have_received(:prepend_methods_callers_to_container)
           end
         end
 

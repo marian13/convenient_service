@@ -9,6 +9,9 @@ module ConvenientService
         #
         # @return [ConvenientService::Core::Entities::Config]
         #
+        # @internal
+        #   NOTE: The instance variable is named `@__convenient_service_config__` intentionally in order to decrease the possibility of accidental redefinition by the end-user.
+        #
         if Dependencies.ruby.version >= 3.2
           def __convenient_service_config__
             @__convenient_service_config__ ||= Entities::Config.new(klass: self)
