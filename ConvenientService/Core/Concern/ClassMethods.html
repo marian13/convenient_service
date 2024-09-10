@@ -324,9 +324,6 @@ If <code>method</code> is still NOT defined, raises <code>NoMethodError</code>, 
       <pre class="lines">
 
 
-126
-127
-128
 129
 130
 131
@@ -334,10 +331,13 @@ If <code>method</code> is still NOT defined, raises <code>NoMethodError</code>, 
 133
 134
 135
-136</pre>
+136
+137
+138
+139</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/concern/class_methods.rb', line 126</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/concern/class_methods.rb', line 129</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_method_missing'>method_missing</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_commit_config!'>commit_config!</span><span class='lparen'>(</span><span class='label'>trigger:</span> <span class='const'><span class='object_link'><a href="../Constants.html" title="ConvenientService::Core::Constants (module)">Constants</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Constants/Triggers.html" title="ConvenientService::Core::Constants::Triggers (module)">Triggers</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Constants/Triggers.html#CLASS_METHOD_MISSING-constant" title="ConvenientService::Core::Constants::Triggers::CLASS_METHOD_MISSING (constant)">CLASS_METHOD_MISSING</a></span></span><span class='rparen'>)</span>
@@ -377,12 +377,12 @@ If <code>method</code> is still NOT defined, raises <code>NoMethodError</code>, 
       <pre class="lines">
 
 
-13
-14
-15</pre>
+16
+17
+18</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/concern/class_methods.rb', line 13</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/concern/class_methods.rb', line 16</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid___convenient_service_config__'>__convenient_service_config__</span>
   <span class='ivar'>@__convenient_service_config__</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="../Entities.html" title="ConvenientService::Core::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Entities/Config.html" title="ConvenientService::Core::Entities::Config (class)">Config</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Entities/Config.html#initialize-instance_method" title="ConvenientService::Core::Entities::Config#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>klass:</span> <span class='kw'>self</span><span class='rparen'>)</span>
@@ -459,13 +459,13 @@ Does nothing for the subsequent calls.</p>
       <pre class="lines">
 
 
-52
-53
-54
-55</pre>
+55
+56
+57
+58</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/concern/class_methods.rb', line 52</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/concern/class_methods.rb', line 55</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_commit_config!'>commit_config!</span><span class='lparen'>(</span><span class='label'>trigger:</span> <span class='const'><span class='object_link'><a href="../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Core.html" title="ConvenientService::Core (module)">Core</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Constants.html" title="ConvenientService::Core::Constants (module)">Constants</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Constants/Triggers.html" title="ConvenientService::Core::Constants::Triggers (module)">Triggers</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Constants/Triggers.html#USER-constant" title="ConvenientService::Core::Constants::Triggers::USER (constant)">USER</a></span></span><span class='rparen'>)</span>
   <span class='id identifier rubyid___convenient_service_config__'>__convenient_service_config__</span><span class='period'>.</span><span class='id identifier rubyid_commit!'>commit!</span><span class='lparen'>(</span><span class='label'>trigger:</span> <span class='id identifier rubyid_trigger'>trigger</span><span class='rparen'>)</span>
@@ -507,12 +507,12 @@ Does nothing for the subsequent calls.</p>
       <pre class="lines">
 
 
-25
-26
-27</pre>
+28
+29
+30</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/concern/class_methods.rb', line 25</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/concern/class_methods.rb', line 28</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_concerns'>concerns</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
   <span class='id identifier rubyid___convenient_service_config__'>__convenient_service_config__</span><span class='period'>.</span><span class='id identifier rubyid_concerns'>concerns</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
@@ -564,12 +564,12 @@ Does nothing for the subsequent calls.</p>
       <pre class="lines">
 
 
-39
-40
-41</pre>
+42
+43
+44</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/concern/class_methods.rb', line 39</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/concern/class_methods.rb', line 42</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_has_committed_config?'>has_committed_config?</span>
   <span class='id identifier rubyid___convenient_service_config__'>__convenient_service_config__</span><span class='period'>.</span><span class='id identifier rubyid_committed?'>committed?</span>
@@ -610,12 +610,12 @@ Does nothing for the subsequent calls.</p>
       <pre class="lines">
 
 
-32
-33
-34</pre>
+35
+36
+37</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/concern/class_methods.rb', line 32</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/concern/class_methods.rb', line 35</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_middlewares'>middlewares</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
   <span class='id identifier rubyid___convenient_service_config__'>__convenient_service_config__</span><span class='period'>.</span><span class='id identifier rubyid_middlewares'>middlewares</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
@@ -704,12 +704,12 @@ Does nothing for the subsequent calls.</p>
       <pre class="lines">
 
 
-68
-69
-70</pre>
+71
+72
+73</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/concern/class_methods.rb', line 68</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/concern/class_methods.rb', line 71</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_has_committed_config?'>has_committed_config?</span> <span class='op'>?</span> <span class='kw'>super</span> <span class='op'>:</span> <span class='id identifier rubyid_method_missing'>method_missing</span><span class='lparen'>(</span><span class='symbol'>:new</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
@@ -724,7 +724,7 @@ Does nothing for the subsequent calls.</p>
 </div>
 
       <div id="footer">
-  Generated on Mon Sep  9 23:31:35 2024 by
+  Generated on Tue Sep 10 00:20:15 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.2.5).
 </div>

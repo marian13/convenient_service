@@ -707,27 +707,31 @@
       <pre class="lines">
 
 
-71
-72
-73
-74
-75
-76
-77
-78
-79</pre>
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/caller/commands/define_method_callers.rb', line 71</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/caller/commands/define_method_callers.rb', line 84</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span>
-  <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='const'><span class='object_link'><a href="../../../../../../../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../../Utils/Method.html" title="ConvenientService::Utils::Method (module)">Method</a></span></span><span class='period'>.</span><span class='id identifier rubyid_defined?'><span class='object_link'><a href="../../../../../../../../Utils/Method.html#defined%3F-class_method" title="ConvenientService::Utils::Method.defined? (method)">defined?</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='id identifier rubyid_methods_middlewares_callers'>methods_middlewares_callers</span><span class='comma'>,</span> <span class='label'>private:</span> <span class='kw'>true</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_container'>container</span><span class='period'>.</span><span class='id identifier rubyid_mutex'>mutex</span><span class='period'>.</span><span class='id identifier rubyid_synchronize'>synchronize</span> <span class='kw'>do</span>
+    <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='const'><span class='object_link'><a href="../../../../../../../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../../Utils/Method.html" title="ConvenientService::Utils::Method (module)">Method</a></span></span><span class='period'>.</span><span class='id identifier rubyid_defined?'><span class='object_link'><a href="../../../../../../../../Utils/Method.html#defined%3F-class_method" title="ConvenientService::Utils::Method.defined? (method)">defined?</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='id identifier rubyid_methods_middlewares_callers'>methods_middlewares_callers</span><span class='comma'>,</span> <span class='label'>private:</span> <span class='kw'>true</span><span class='rparen'>)</span>
 
-  <span class='id identifier rubyid_prepend_methods_callers_to_container'>prepend_methods_callers_to_container</span>
+    <span class='id identifier rubyid_prepend_methods_callers_to_container'>prepend_methods_callers_to_container</span>
 
-  <span class='id identifier rubyid_define_method_callers'>define_method_callers</span>
+    <span class='id identifier rubyid_define_method_callers'>define_method_callers</span>
 
-  <span class='kw'>true</span>
+    <span class='kw'>true</span>
+  <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -870,7 +874,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Sep  9 23:31:48 2024 by
+  Generated on Tue Sep 10 00:20:27 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.2.5).
 </div>
