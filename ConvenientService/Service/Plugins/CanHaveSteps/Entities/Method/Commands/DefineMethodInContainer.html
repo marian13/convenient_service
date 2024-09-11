@@ -227,7 +227,8 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'><p>True if method is just defined, false if already defined.</p>
+</div></span>
   
 </li>
 
@@ -570,7 +571,8 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
+    <p>Returns true if method is just defined, false if already defined.</p>
+
 
   </div>
 </div>
@@ -585,6 +587,10 @@
         <span class='type'>(<tt>Boolean</tt>)</span>
       
       
+      
+        &mdash;
+        <div class='inline'><p>true if method is just defined, false if already defined.</p>
+</div>
       
     </li>
   
@@ -604,31 +610,19 @@
 61
 62
 63
-64
-65
-66
-67
-68
-69
-70</pre>
+64</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/method/commands/define_method_in_container.rb', line 56</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span>
-  <span class='heredoc_beg'>&lt;&lt;~RUBY</span><span class='period'>.</span><span class='id identifier rubyid_tap'>tap</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_code'>code</span><span class='op'>|</span> <span class='id identifier rubyid_container'>container</span><span class='period'>.</span><span class='id identifier rubyid_klass'>klass</span><span class='period'>.</span><span class='id identifier rubyid_class_eval'>class_eval</span><span class='lparen'>(</span><span class='id identifier rubyid_code'>code</span><span class='comma'>,</span> <span class='kw'>__FILE__</span><span class='comma'>,</span> <span class='kw'>__LINE__</span> <span class='op'>+</span> <span class='int'>1</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
-<span class='tstring_content'>    ##
-</span><span class='tstring_content'>    # @return [Object] Can be any type.
-</span><span class='tstring_content'>    # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::OutMethodStepIsNotCompleted]
-</span><span class='tstring_content'>    #
-</span><span class='tstring_content'>    def </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='tstring_content'>
-</span><span class='tstring_content'>      internals.cache.scope(:step_output_values).fetch(__method__) do
-</span><span class='tstring_content'>        ::ConvenientService.raise ::ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::OutMethodStepIsNotCompleted.new(method_name: __method__)
-</span><span class='tstring_content'>      end
-</span><span class='tstring_content'>    end
-</span><span class='heredoc_end'>  RUBY
-</span>
-  <span class='kw'>true</span>
+  <span class='id identifier rubyid_container'>container</span><span class='period'>.</span><span class='id identifier rubyid_mutex'>mutex</span><span class='period'>.</span><span class='id identifier rubyid_synchronize'>synchronize</span> <span class='kw'>do</span>
+    <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='id identifier rubyid_has_defined_method?'>has_defined_method?</span>
+
+    <span class='id identifier rubyid_define_method'>define_method</span>
+
+    <span class='kw'>true</span>
+  <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -736,7 +730,7 @@
 </div>
 
       <div id="footer">
-  Generated on Tue Sep 10 00:20:26 2024 by
+  Generated on Wed Sep 11 00:25:16 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.2.5).
 </div>
