@@ -83,14 +83,15 @@ module ConvenientService
                 ##
                 # @param container [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Service]
                 # @param index [Integer]
-                # @return [void]
+                # @return [Boolean] true if method is just defined, false if already defined.
+                #
+                # @internal
+                #   TODO: Split input and output methods into separate classes.
                 #
                 def define_output_in_container!(container, index:)
                   direction.define_output_in_container!(container, index: index, method: self)
 
                   caller.define_output_in_container!(container, index: index, method: self)
-
-                  true
                 end
 
                 ##

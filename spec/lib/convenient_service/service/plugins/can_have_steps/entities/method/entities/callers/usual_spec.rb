@@ -27,6 +27,8 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
     let(:service_class) do
       Class.new.tap do |klass|
         klass.class_exec(return_value) do |return_value|
+          include ConvenientService::Core
+
           define_method(:foo) { return_value }
         end
       end
@@ -63,6 +65,8 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
       let(:index) { 0 }
 
       specify do
+        caller.define_output_in_container!(container, index: index, method: method)
+
         expect { caller.define_output_in_container!(container, index: index, method: method) }
           .to delegate_to(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Commands::DefineMethodInContainer, :call)
           .with_arguments(container: container, index: index, method: method)

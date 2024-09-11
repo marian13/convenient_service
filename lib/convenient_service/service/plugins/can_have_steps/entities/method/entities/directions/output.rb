@@ -10,7 +10,7 @@ module ConvenientService
               module Directions
                 class Output < Base
                   def define_output_in_container!(container, index:, method:)
-                    true
+                    false
                   end
                 end
               end

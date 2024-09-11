@@ -14,7 +14,7 @@ module ConvenientService
                   end
 
                   def define_output_in_container!(container, index:, method:)
-                    true
+                    false
                   end
 
                   private

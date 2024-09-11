@@ -34,6 +34,13 @@ module ConvenientService
                 end
 
                 ##
+                # @return [Mutex]
+                #
+                def mutex
+                  klass.__convenient_service_config__.mutex
+                end
+
+                ##
                 # @param method [String, Symbol]
                 # @return [Boolean]
                 #

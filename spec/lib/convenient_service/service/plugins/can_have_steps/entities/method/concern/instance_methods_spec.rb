@@ -23,6 +23,8 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
   let(:service_class) do
     Class.new.tap do |klass|
       klass.class_exec(method_other, method_return_value) do |method_other, method_return_value|
+        include ConvenientService::Core
+
         define_method(method_other) { method_return_value }
       end
     end
@@ -159,7 +161,13 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
 
     describe "#define_output_in_container!" do
       let(:method_options) { {direction: :output} }
-      let(:service_class) { Class.new }
+
+      let(:service_class) do
+        Class.new do
+          include ConvenientService::Core
+        end
+      end
+
       let(:index) { 0 }
 
       it "returns `true`" do
@@ -170,14 +178,12 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
         expect { method.define_output_in_container!(container, index: index) }
           .to delegate_to(direction, :define_output_in_container!)
           .with_arguments(container, index: index, method: method)
-          .and_return_its_value
       end
 
       specify do
         expect { method.define_output_in_container!(container, index: index) }
           .to delegate_to(caller, :define_output_in_container!)
           .with_arguments(container, index: index, method: method)
-          .and_return_its_value
       end
     end
 

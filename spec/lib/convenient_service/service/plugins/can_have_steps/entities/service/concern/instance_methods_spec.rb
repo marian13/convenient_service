@@ -61,6 +61,15 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Serv
       end
     end
 
+    describe "#mutex" do
+      specify do
+        expect { service.mutex }
+          .to delegate_to(klass.__convenient_service_config__, :mutex)
+          .without_arguments
+          .and_return_its_value
+      end
+    end
+
     describe "#has_defined_method?" do
       let(:method_name) { :foo }
       let(:method) { ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method.cast(method_name, direction: :input) }

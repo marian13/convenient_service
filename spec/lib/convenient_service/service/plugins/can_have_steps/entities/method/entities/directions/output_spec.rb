@@ -38,8 +38,8 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
       let(:options) { {direction: :output} }
       let(:index) { 0 }
 
-      it "returns `true`" do
-        expect(direction.define_output_in_container!(container, index: 0, method: method)).to eq(true)
+      it "returns `false`" do
+        expect(direction.define_output_in_container!(container, index: 0, method: method)).to eq(false)
       end
     end
   end
