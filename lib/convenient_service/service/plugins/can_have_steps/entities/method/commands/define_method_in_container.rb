@@ -76,13 +76,10 @@ module ConvenientService
                     # @return [Object] Can be any type.
                     # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::OutMethodStepIsNotCompleted]
                     #
-                    # @internal
-                    #   TODO: Direct specs.
-                    #
                     def #{name}
                       return internals.cache.scope(:step_output_values).read(__method__) if internals.cache.scope(:step_output_values).exist?(__method__)
 
-                      return #{name}_before_out_redefinition if respond_to?(:#{name}_before_out_redefinition)
+                      return #{name_before_out_redefinition} if respond_to?(:#{name_before_out_redefinition})
 
                       ::ConvenientService.raise ::ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::OutMethodStepIsNotCompleted.new(method_name: __method__)
                     end
@@ -98,6 +95,9 @@ module ConvenientService
 
                 ##
                 # @return [Boolean]
+                #
+                # @internal
+                #   TODO: Direct specs.
                 #
                 def has_defined_method?
                   return false unless container.has_defined_method?(name)

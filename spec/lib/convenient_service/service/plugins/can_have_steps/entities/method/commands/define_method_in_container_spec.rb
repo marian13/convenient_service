@@ -22,6 +22,16 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
     end
   end
 
+  let(:second_step_service) do
+    Class.new do
+      include ConvenientService::Standard::Config
+
+      def result
+        success(data: {foo: "foo from second step"})
+      end
+    end
+  end
+
   let(:step) { container.steps.first }
   let(:method) { container.steps.first.outputs.first }
 
@@ -54,23 +64,81 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
           end
 
           context "when corresponding step is NOT completed" do
-            let(:exception_message) do
-              <<~TEXT
-                `out` method `#{method}` is called before its corresponding step is completed.
+            context "when corresponding `out` method is NOT redefined (organizer service does NOT have method with same nameas `out` method)" do
+              let(:exception_message) do
+                <<~TEXT
+                  `out` method `#{method}` is called before its corresponding step is completed.
 
-                Maybe it makes sense to change steps order?
-              TEXT
+                  Maybe it makes sense to change steps order?
+                TEXT
+              end
+
+              it "raises `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::OutMethodStepIsNotCompleted`" do
+                expect { organizer.foo }
+                  .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::OutMethodStepIsNotCompleted)
+                  .with_message(exception_message)
+              end
+
+              specify do
+                expect { ignoring_exception(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::OutMethodStepIsNotCompleted) { organizer.foo } }
+                  .to delegate_to(ConvenientService, :raise)
+              end
             end
 
-            it "raises `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::OutMethodStepIsNotCompleted`" do
-              expect { organizer.foo }
-                .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::OutMethodStepIsNotCompleted)
-                .with_message(exception_message)
+            context "when corresponding `out` method is redefined (organizer service has method with same name as `out` method)" do
+              let(:container) do
+                Class.new.tap do |klass|
+                  klass.class_exec(first_step_service) do |first_step_service|
+                    include ConvenientService::Standard::Config
+
+                    step first_step_service, out: :foo
+
+                    def foo
+                      "foo from organizer"
+                    end
+                  end
+                end
+              end
+
+              it "returns that redefined `out` method value" do
+                expect(organizer.foo).to eq("foo from organizer")
+              end
+
+              specify do
+                expect { organizer.foo }
+                  .to delegate_to(organizer, :foo_before_out_redefinition)
+                  .without_arguments
+                  .and_return_its_value
+              end
             end
 
-            specify do
-              expect { ignoring_exception(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::OutMethodStepIsNotCompleted) { organizer.foo } }
-                .to delegate_to(ConvenientService, :raise)
+            context "when corresponding `out` method is redefined multiple times" do
+              let(:container) do
+                Class.new.tap do |klass|
+                  klass.class_exec(first_step_service, second_step_service) do |first_step_service, second_step_service|
+                    include ConvenientService::Standard::Config
+
+                    step first_step_service, out: :foo
+
+                    step second_step_service, out: :foo
+
+                    def foo
+                      "foo from organizer"
+                    end
+                  end
+                end
+              end
+
+              it "returns that redefined `out` method value" do
+                expect(organizer.foo).to eq("foo from organizer")
+              end
+
+              specify do
+                expect { organizer.foo }
+                  .to delegate_to(organizer, :foo_before_out_redefinition)
+                  .without_arguments
+                  .and_return_its_value
+              end
             end
           end
 
