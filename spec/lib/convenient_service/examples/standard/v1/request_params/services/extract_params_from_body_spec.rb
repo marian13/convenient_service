@@ -19,7 +19,7 @@ RSpec.describe ConvenientService::Examples::Standard::V1::RequestParams::Service
       context "when `ExtractParamsFromBody` is NOT successful" do
         context "when request is NOT valid for HTTP parsing" do
           let(:http_string) do
-            <<~TEXT
+            <<~TEXT.gsub("\n", "\r\n")
               POST /rules/1000000.json HTTP/1.1
               User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36
               Host: code-review.com
@@ -29,6 +29,7 @@ RSpec.describe ConvenientService::Examples::Standard::V1::RequestParams::Service
               {"title":"Avoid error shadowing","description":"Check the official User Docs","tags":["error-shadowing"]}
               Accept-Encoding: gzip, deflate
               Connection: Keep-Alive
+
             TEXT
           end
 
@@ -50,7 +51,7 @@ RSpec.describe ConvenientService::Examples::Standard::V1::RequestParams::Service
 
         context "when request body is NOT valid for JSON parsing" do
           let(:http_string) do
-            <<~TEXT
+            <<~TEXT.gsub("\n", "\r\n")
               POST /rules/1000000.json HTTP/1.1
               User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36
               Host: code-review.com
@@ -85,7 +86,7 @@ RSpec.describe ConvenientService::Examples::Standard::V1::RequestParams::Service
 
       context "when `ExtractParamsFromBody` is successful" do
         let(:http_string) do
-          <<~TEXT
+          <<~TEXT.gsub("\n", "\r\n")
             POST /rules/1000000.json HTTP/1.1
             User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36
             Host: code-review.com

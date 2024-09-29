@@ -316,9 +316,9 @@ Gem::Specification.new do |spec|
 
   ##
   # Used inside examples.
-  # - https://github.com/ruby/mutex_m
+  # - https://github.com/ruby/webrick
   #
-  spec.add_development_dependency "webrick"
+  spec.add_development_dependency "webrick", "~> 1.8.2"
 
   ##
   # Used for generation of API docs for Ruby code.

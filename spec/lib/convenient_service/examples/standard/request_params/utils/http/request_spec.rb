@@ -11,7 +11,7 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Utils::HTTP
 
   example_group "class methods" do
     let(:http_string) do
-      <<~TEXT
+      <<~TEXT.gsub("\n", "\r\n")
         POST /rules/1000000.json HTTP/1.1
         User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36
         Host: code-review.com
