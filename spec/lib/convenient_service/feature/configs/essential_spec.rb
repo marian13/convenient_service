@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::Feature::Configs::Standard, type: :standard do
+RSpec.describe ConvenientService::Feature::Configs::Essential, type: :standard do
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
 
@@ -22,16 +22,14 @@ RSpec.describe ConvenientService::Feature::Configs::Standard, type: :standard do
         end
       end
 
-      specify { expect(feature_class).to include_module(ConvenientService::Feature::Configs::Essential) }
-      specify { expect(feature_class).to include_module(ConvenientService::Feature::Configs::RSpec) }
+      specify { expect(feature_class).to include_module(ConvenientService::Core) }
 
       example_group "feature" do
         example_group "concerns" do
           let(:concerns) do
             [
               ConvenientService::Feature::Plugins::CanHaveEntries::Concern,
-              ConvenientService::Common::Plugins::HasInstanceProxy::Concern,
-              ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Concern
+              ConvenientService::Common::Plugins::HasInstanceProxy::Concern
             ]
           end
 

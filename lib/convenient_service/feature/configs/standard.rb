@@ -10,17 +10,8 @@ module ConvenientService
         include ConvenientService::Config
 
         included do
-          include Core
-
-          concerns do
-            use ConvenientService::Plugins::Feature::CanHaveEntries::Concern
-
-            use ConvenientService::Plugins::Common::HasInstanceProxy::Concern
-          end
-
-          middlewares :new, scope: :class do
-            use ConvenientService::Plugins::Common::HasInstanceProxy::Middleware
-          end
+          include Configs::Essential
+          include Configs::RSpec
         end
       end
     end
