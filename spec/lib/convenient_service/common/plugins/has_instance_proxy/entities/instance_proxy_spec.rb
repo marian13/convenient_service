@@ -7,6 +7,7 @@ require "convenient_service"
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Common::Plugins::HasInstanceProxy::Entities::InstanceProxy, type: :standard do
   include ConvenientService::RSpec::Matchers::DelegateTo
+  include ConvenientService::RSpec::PrimitiveMatchers::CacheItsValue
 
   let(:instance_proxy) { described_class.new(target: target) }
   let(:target) { target_klass.new }
@@ -27,6 +28,18 @@ RSpec.describe ConvenientService::Common::Plugins::HasInstanceProxy::Entities::I
 
       it "uses `@__convenient_service_instance_proxy_target__` as instance variable" do
         expect(instance_proxy.instance_proxy_target).to eq(instance_proxy.instance_variable_get(:@__convenient_service_instance_proxy_target__))
+      end
+    end
+
+    describe "#instance_proxy_class" do
+      it "returns instance proxy class" do
+        expect(instance_proxy.instance_proxy_class).to eq(described_class)
+      end
+    end
+
+    describe "#class" do
+      it "returns target class" do
+        expect(instance_proxy.class).to eq(target_klass)
       end
     end
 

@@ -26,16 +26,25 @@ module ConvenientService
             end
 
             ##
+            # @return [Class]
+            #
+            alias_method :instance_proxy_class, :class
+
+            ##
+            # @return [Class]
+            #
+            def class
+              instance_proxy_target.class
+            end
+
+            ##
             # @api public
             #
             # @param other [Object] Can be any type.
             # @return [Boolean, nil]
             #
-            # @internal
-            #   TODO: Direct Specs.
-            #
             def ==(other)
-              return unless other.instance_of?(self.class)
+              return unless other.instance_of?(instance_proxy_class)
 
               return false if instance_proxy_target != other.instance_proxy_target
 
