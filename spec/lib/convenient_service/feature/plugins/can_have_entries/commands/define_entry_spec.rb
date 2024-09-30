@@ -22,7 +22,7 @@ RSpec.describe ConvenientService::Feature::Plugins::CanHaveEntries::Commands::De
 
       let(:feature_instance) { feature_class.new }
 
-      let(:name) { :foo }
+      let(:name) { :main }
       let(:body) { proc { |*args, **kwargs, &block| :foo } }
 
       let(:args) { [:foo] }
@@ -58,7 +58,7 @@ RSpec.describe ConvenientService::Feature::Plugins::CanHaveEntries::Commands::De
         # NOTE: `false` in `methods(false)` means own methods.
         # - https://ruby-doc.org/core-2.7.0/Object.html#method-i-methods
         #
-        expect { command_result }.to change { feature_class.instance_proxy_class.instance_methods(false).include?(:entry) }.from(false).to(true)
+        expect { command_result }.to change { feature_class.instance_proxy_class.instance_methods(false).include?(:trigger) }.from(false).to(true)
       end
 
       it "returns `name`" do
@@ -70,8 +70,8 @@ RSpec.describe ConvenientService::Feature::Plugins::CanHaveEntries::Commands::De
           Class.new do
             include ConvenientService::Feature::Configs::Standard
 
-            def self.foo(*args, **kwargs, &block)
-              :foo
+            def self.main(*args, **kwargs, &block)
+              :main_entry_value
             end
           end
         end
@@ -79,7 +79,7 @@ RSpec.describe ConvenientService::Feature::Plugins::CanHaveEntries::Commands::De
         it "overrides that already defined before entry class method" do
           command_result
 
-          expect(feature_class.foo(*args, **kwargs, &block)).to eq(body.call(*args, **kwargs, &block))
+          expect(feature_class.main(*args, **kwargs, &block)).to eq(body.call(*args, **kwargs, &block))
         end
       end
 
@@ -89,12 +89,12 @@ RSpec.describe ConvenientService::Feature::Plugins::CanHaveEntries::Commands::De
           command_result
 
           feature_class.class_exec do
-            def self.foo(*args, **kwargs, &block)
-              :foo
+            def self.main(*args, **kwargs, &block)
+              :main_entry_value
             end
           end
 
-          expect(feature_class.foo(*args, **kwargs, &block)).to eq(:foo)
+          expect(feature_class.main(*args, **kwargs, &block)).to eq(:main_entry_value)
         end
         # rubocop:enable RSpec/ExampleLength
       end
@@ -104,8 +104,8 @@ RSpec.describe ConvenientService::Feature::Plugins::CanHaveEntries::Commands::De
           Class.new do
             include ConvenientService::Feature::Configs::Standard
 
-            def foo(*args, **kwargs, &block)
-              :foo
+            def main(*args, **kwargs, &block)
+              :main_entry_value
             end
           end
         end
@@ -113,7 +113,7 @@ RSpec.describe ConvenientService::Feature::Plugins::CanHaveEntries::Commands::De
         it "overrides that already defined before entry instance method" do
           command_result
 
-          expect(feature_class.foo(*args, **kwargs, &block)).to eq(body.call(*args, **kwargs, &block))
+          expect(feature_class.main(*args, **kwargs, &block)).to eq(body.call(*args, **kwargs, &block))
         end
       end
 
@@ -123,12 +123,12 @@ RSpec.describe ConvenientService::Feature::Plugins::CanHaveEntries::Commands::De
           command_result
 
           feature_class.class_exec do
-            def foo(*args, **kwargs, &block)
-              :foo
+            def main(*args, **kwargs, &block)
+              :main_entry_value
             end
           end
 
-          expect(feature_instance.foo(*args, **kwargs, &block)).to eq(:foo)
+          expect(feature_instance.main(*args, **kwargs, &block)).to eq(:main_entry_value)
         end
         # rubocop:enable RSpec/ExampleLength
       end
@@ -139,8 +139,8 @@ RSpec.describe ConvenientService::Feature::Plugins::CanHaveEntries::Commands::De
 
           command_result
 
-          expect { feature_class.foo(*args, **kwargs, &block) }
-            .to delegate_to(feature_instance, :entry)
+          expect { feature_class.main(*args, **kwargs, &block) }
+            .to delegate_to(feature_instance, :trigger)
             .with_arguments(name, *args, **kwargs, &block)
         end
       end
@@ -182,7 +182,7 @@ RSpec.describe ConvenientService::Feature::Plugins::CanHaveEntries::Commands::De
           it "raises `ConvenientService::Feature::Plugins::CanHaveEntries::Exceptions::NotDefinedEntryMethod`" do
             command_result
 
-            expect { feature_instance.foo(*args, **kwargs, &block) }
+            expect { feature_instance.main(*args, **kwargs, &block) }
               .to raise_error(ConvenientService::Feature::Plugins::CanHaveEntries::Exceptions::NotDefinedEntryMethod)
               .with_message(exception_message)
           end
@@ -190,7 +190,7 @@ RSpec.describe ConvenientService::Feature::Plugins::CanHaveEntries::Commands::De
           specify do
             command_result
 
-            expect { ignoring_exception(ConvenientService::Feature::Plugins::CanHaveEntries::Exceptions::NotDefinedEntryMethod) { feature_instance.foo(*args, **kwargs, &block) } }
+            expect { ignoring_exception(ConvenientService::Feature::Plugins::CanHaveEntries::Exceptions::NotDefinedEntryMethod) { feature_instance.main(*args, **kwargs, &block) } }
               .to delegate_to(ConvenientService, :raise)
           end
         end
@@ -201,7 +201,7 @@ RSpec.describe ConvenientService::Feature::Plugins::CanHaveEntries::Commands::De
           it "returns `body` value" do
             command_result
 
-            expect(feature_instance.foo(*args, **kwargs, &block)).to eq([name, args, kwargs, block])
+            expect(feature_instance.main(*args, **kwargs, &block)).to eq([name, args, kwargs, block])
           end
         end
       end
@@ -210,8 +210,8 @@ RSpec.describe ConvenientService::Feature::Plugins::CanHaveEntries::Commands::De
         specify do
           command_result
 
-          expect { feature_instance.foo(*args, **kwargs, &block) }
-            .to delegate_to(feature_instance.instance_proxy_target, :entry)
+          expect { feature_instance.main(*args, **kwargs, &block) }
+            .to delegate_to(feature_instance.instance_proxy_target, :trigger)
             .with_arguments(name, *args, **kwargs, &block)
         end
       end
@@ -220,9 +220,9 @@ RSpec.describe ConvenientService::Feature::Plugins::CanHaveEntries::Commands::De
         specify do
           command_result
 
-          expect { feature_instance.entry(*args, **kwargs, &block) }
-            .to delegate_to(feature_instance.instance_proxy_target, :entry)
-            .with_arguments(*args, **kwargs, &block)
+          expect { feature_instance.trigger(name, *args, **kwargs, &block) }
+            .to delegate_to(feature_instance.instance_proxy_target, :trigger)
+            .with_arguments(name, *args, **kwargs, &block)
         end
       end
     end

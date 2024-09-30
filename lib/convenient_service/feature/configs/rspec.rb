@@ -15,7 +15,11 @@ module ConvenientService
               use ConvenientService::Plugins::Feature::CanHaveStubbedEntries::Concern
             end
 
-            middlewares :entry do
+            middlewares :trigger do
+              unshift ConvenientService::Plugins::Feature::CanHaveStubbedEntries::Middleware
+            end
+
+            middlewares :trigger, scope: :class do
               unshift ConvenientService::Plugins::Feature::CanHaveStubbedEntries::Middleware
             end
           end

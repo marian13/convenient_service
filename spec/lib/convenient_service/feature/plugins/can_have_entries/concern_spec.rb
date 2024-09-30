@@ -40,8 +40,8 @@ RSpec.describe ConvenientService::Feature::Plugins::CanHaveEntries::Concern, typ
   end
 
   example_group "instance methods" do
-    describe "#entry" do
-      let(:name) { :foo }
+    describe "#trigger" do
+      let(:entry_name) { :main }
       let(:args) { [:foo] }
       let(:kwargs) { {foo: :bar} }
       let(:block) { proc { :foo } }
@@ -50,18 +50,18 @@ RSpec.describe ConvenientService::Feature::Plugins::CanHaveEntries::Concern, typ
         Class.new do
           include ConvenientService::Feature::Configs::Standard
 
-          entry :foo
+          entry :main
 
-          def foo(*args, **kwargs, &block)
-            :foo
+          def main(*args, **kwargs, &block)
+            :main_entry_value
           end
         end
       end
 
       specify do
-        expect { feature_instance.entry(name, *args, **kwargs, &block) }
+        expect { feature_instance.trigger(entry_name, *args, **kwargs, &block) }
           .to delegate_to(feature_instance.instance_proxy_target, :public_send)
-          .with_arguments(name, *args, **kwargs, &block)
+          .with_arguments(entry_name, *args, **kwargs, &block)
           .and_return_its_value
       end
     end
@@ -76,6 +76,36 @@ RSpec.describe ConvenientService::Feature::Plugins::CanHaveEntries::Concern, typ
         expect { feature_class.entry(*names, &body) }
           .to delegate_to(ConvenientService::Feature::Plugins::CanHaveEntries::Commands::DefineEntries, :call)
           .with_arguments(feature_class: feature_class, names: names, body: body)
+          .and_return_its_value
+      end
+    end
+
+    describe ".trigger" do
+      let(:feature_class) do
+        Class.new do
+          include ConvenientService::Feature::Configs::Standard
+
+          entry :main
+
+          def main(*args, **kwargs, &block)
+            :main_entry_value
+          end
+        end
+      end
+
+      let(:feature_instance) { feature_class.new }
+
+      let(:entry_name) { :main }
+      let(:args) { [:foo] }
+      let(:kwargs) { {foo: :bar} }
+      let(:block) { proc { :foo } }
+
+      specify do
+        allow(feature_class).to receive(:new).and_return(feature_instance)
+
+        expect { feature_class.trigger(entry_name, *args, **kwargs, &block) }
+          .to delegate_to(feature_instance, :trigger)
+          .with_arguments(entry_name, *args, **kwargs, &block)
           .and_return_its_value
       end
     end

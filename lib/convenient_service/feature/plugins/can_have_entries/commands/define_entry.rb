@@ -44,7 +44,7 @@ module ConvenientService
               # That is why `feature_class.class_exec` wrapper is required.
               #
               feature_class.class_exec(name) do |name|
-                define_singleton_method(name) { |*args, **kwargs, &block| new.entry(name, *args, **kwargs, &block) }
+                define_singleton_method(name) { |*args, **kwargs, &block| trigger(name, *args, **kwargs, &block) }
               end
 
               if body
@@ -59,12 +59,12 @@ module ConvenientService
               #
               feature_class.instance_proxy_class.class_exec(name) do |name|
                 define_method(name) do |*args, **kwargs, &block|
-                  instance_proxy_target.entry(name, *args, **kwargs, &block)
+                  instance_proxy_target.trigger(name, *args, **kwargs, &block)
                 end
               end
 
-              feature_class.instance_proxy_class.define_method(:entry) do |*args, **kwargs, &block|
-                instance_proxy_target.entry(*args, **kwargs, &block)
+              feature_class.instance_proxy_class.define_method(:trigger) do |*args, **kwargs, &block|
+                instance_proxy_target.trigger(*args, **kwargs, &block)
               end
 
               name

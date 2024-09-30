@@ -31,9 +31,15 @@ RSpec.describe ConvenientService::Feature::Configs::RSpec, type: :standard do
           end
         end
 
-        example_group "#entry middlewares" do
-          it "prepends `ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Middleware` to feature middlewares for `#entry`" do
-            expect(feature_class.middlewares(:entry).to_a.first).to eq(ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Middleware)
+        example_group "#trigger middlewares" do
+          it "prepends `ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Middleware` to feature middlewares for `#trigger`" do
+            expect(feature_class.middlewares(:trigger).to_a.first).to eq(ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Middleware)
+          end
+        end
+
+        example_group ".trigger middlewares" do
+          it "prepends `ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Middleware` to feature middlewares for `.trigger`" do
+            expect(feature_class.middlewares(:trigger, scope: :class).to_a.first).to eq(ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Middleware)
           end
         end
       end

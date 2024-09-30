@@ -11,7 +11,7 @@ module ConvenientService
             ##
             # @return [Object] Can be any type.
             #
-            def entry(...)
+            def trigger(...)
               public_send(...)
             end
           end
@@ -24,6 +24,13 @@ module ConvenientService
             #
             def entry(*names, &body)
               Commands::DefineEntries.call(feature_class: self, names: names, body: body)
+            end
+
+            ##
+            # @return [Object] Can be any type.
+            #
+            def trigger(...)
+              new.trigger(...)
             end
           end
         end
