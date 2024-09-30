@@ -1,0 +1,5 @@
+# frozen_string_literal: true
+
+require_relative "commands/fetch_all_features_stubbed_entries_cache"
+require_relative "commands/fetch_feature_stubbed_entries_cache"
+require_relative "commands/set_feature_stubbed_entry"

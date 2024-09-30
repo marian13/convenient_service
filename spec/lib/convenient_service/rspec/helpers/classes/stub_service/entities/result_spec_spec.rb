@@ -45,7 +45,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::Classes::StubService::Entities
     describe "#for" do
       let(:other_service_class) { Class.new }
 
-      it "returns result copy with passed service class" do
+      it "returns result spec copy with passed service class" do
         expect(result_spec.for(other_service_class)).to eq(described_class.new(status: status, service_class: other_service_class, chain: chain))
       end
     end

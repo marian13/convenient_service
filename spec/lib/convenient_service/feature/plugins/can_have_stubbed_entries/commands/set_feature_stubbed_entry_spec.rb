@@ -1,0 +1,76 @@
+# frozen_string_literal: true
+
+require "spec_helper"
+
+require "convenient_service"
+
+# rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
+RSpec.describe ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Commands::SetFeatureStubbedEntry, type: :standard do
+  include ConvenientService::RSpec::Matchers::DelegateTo
+  include ConvenientService::RSpec::PrimitiveMatchers::CacheItsValue
+
+  include ConvenientService::RSpec::Helpers::StubService
+
+  example_group "class methods" do
+    describe ".call" do
+      let(:command) { described_class }
+
+      let(:feature) do
+        Class.new do
+          include ConvenientService::Feature::Standard::Config
+
+          def main
+            :main_entry_value
+          end
+        end
+      end
+
+      let(:entry) { :main }
+
+      let(:cache) { ConvenientService::Support::Cache.create(backend: :thread_safe_array) }
+      let(:arguments) { ConvenientService::Support::Arguments.new(:foo, {foo: :bar}) { :foo } }
+      let(:key) { cache.keygen(*arguments.args, **arguments.kwargs, &arguments.block) }
+      let(:value) { :stub_value }
+
+      specify do
+        expect { command.call(feature: feature, entry: entry, arguments: arguments, value: value) }
+          .to delegate_to(ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Commands::FetchFeatureStubbedEntriesCache, :call)
+          .with_arguments(feature: feature)
+      end
+
+      specify do
+        allow(ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Commands::FetchFeatureStubbedEntriesCache).to receive(:call).with(feature: feature).and_return(cache)
+
+        expect { command.call(feature: feature, entry: entry, arguments: arguments, value: value) }
+          .to delegate_to(cache, :scope)
+          .with_arguments(entry)
+      end
+
+      specify do
+        allow(ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Commands::FetchFeatureStubbedEntriesCache).to receive(:call).with(feature: feature).and_return(cache)
+
+        expect { command.call(feature: feature, entry: entry, arguments: arguments, value: value) }
+          .to delegate_to(cache.scope(entry), :write)
+          .with_arguments(key, value)
+          .and_return_its_value
+      end
+
+      context "when `entry` is string" do
+        let(:entry) { "main" }
+
+        it "does NOT set string key to cache" do
+          command.call(feature: feature, entry: entry, arguments: arguments, value: value)
+
+          expect(feature.stubbed_entries.exist?(entry)).to eq(false)
+        end
+
+        it "sets symbol key to cache" do
+          command.call(feature: feature, entry: entry, arguments: arguments, value: value)
+
+          expect(feature.stubbed_entries.scope(entry.to_sym).read(key)).to eq(value)
+        end
+      end
+    end
+  end
+end
+# rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers

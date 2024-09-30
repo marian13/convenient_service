@@ -4,9 +4,9 @@ module ConvenientService
   module RSpec
     module Helpers
       module Classes
-        class StubService < Support::Command
+        class StubEntry < Support::Command
           module Entities
-            class StubbedService
+            class StubbedFeature
               include Support::DependencyContainer::Import
 
               ##
@@ -14,19 +14,21 @@ module ConvenientService
               #   TODO: Implement shorter form in the following way:
               #
               #   import \
-              #     command: :SetServiceStubbedResult,
-              #     from: ConvenientService::Service::Plugins::CanHaveStubbedResults
+              #     command: :SetFeatureStubbedEntry,
+              #     from: ConvenientService::Feature::Plugins::CanHaveStubbedEntries
               #
               import \
-                :"commands.SetServiceStubbedResult",
-                from: ConvenientService::Service::Plugins::CanHaveStubbedResults::Container
+                :"commands.SetFeatureStubbedEntry",
+                from: ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Container
 
               ##
-              # @param service_class [Class]
+              # @param feature_class [ConvenientService::Feature]
+              # @param entry_name [Symbol, String]
               # @return [void]
               #
-              def initialize(service_class:)
-                @service_class = service_class
+              def initialize(feature_class:, entry_name:)
+                @feature_class = feature_class
+                @entry_name = entry_name
                 @arguments = Support::Arguments.null_arguments
               end
 
@@ -49,15 +51,15 @@ module ConvenientService
               end
 
               ##
-              # @param result_spec [ConvenientService::RSpec::Helpers::Classes::StubService::Entities::ResultSpec]
+              # @param value_spec [ConvenientService::RSpec::Helpers::Classes::StubService::Entities::ResultSpec]
               # @return [ConvenientService::RSpec::Helpers::Classes::StubService::Entities::StubService]
               #
-              def to(result_spec)
-                @result_spec = result_spec
+              def to(value_spec)
+                @value_spec = value_spec
 
-                service_class.commit_config!(trigger: Constants::Triggers::STUB_SERVICE)
+                feature_class.commit_config!(trigger: Constants::Triggers::STUB_ENTRY)
 
-                commands.SetServiceStubbedResult[service: service_class, arguments: arguments, result: result]
+                commands.SetFeatureStubbedEntry[feature: feature_class, entry: entry_name, arguments: arguments, value: value]
 
                 self
               end
@@ -69,9 +71,10 @@ module ConvenientService
               def ==(other)
                 return unless other.instance_of?(self.class)
 
-                return false if service_class != other.service_class
+                return false if feature_class != other.feature_class
+                return false if entry_name != other.entry_name
                 return false if arguments != other.arguments
-                return false if result_spec != other.result_spec
+                return false if value_spec != other.value_spec
 
                 true
               end
@@ -79,10 +82,16 @@ module ConvenientService
               protected
 
               ##
-              # @!attribute [r] service_class
-              #   @return [Class]
+              # @!attribute [r] feature_class
+              #   @return [ConvenientService::Feature]
               #
-              attr_reader :service_class
+              attr_reader :feature_class
+
+              ##
+              # @!attribute [r] entry_name
+              #   @return [Symbol, String]
+              #
+              attr_reader :entry_name
 
               ##
               # @!attribute [r] arguments
@@ -91,18 +100,18 @@ module ConvenientService
               attr_reader :arguments
 
               ##
-              # @!attribute [r] result_spec
-              #   @return [ConvenientService::RSpec::Helpers::Classes::StubService::Entities::ResultSpec]
+              # @!attribute [r] value_spec
+              #   @return [ConvenientService::RSpec::Helpers::Classes::StubEntry::Entities::ValueSpec]
               #
-              attr_reader :result_spec
+              attr_reader :value_spec
 
               private
 
               ##
-              # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
+              # @return [Object] Can be any type.
               #
-              def result
-                @result ||= result_spec.for(service_class).calculate_value
+              def value
+                @value ||= value_spec.for(feature_class).calculate_value
               end
             end
           end

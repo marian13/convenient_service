@@ -27,8 +27,9 @@ RSpec.describe ConvenientService::RSpec::Helpers::StubService, type: :standard d
 
       specify do
         expect { instance.stub_service(service_class) }
-          .to delegate_to(ConvenientService::RSpec::Helpers::Classes::StubService, :new)
+          .to delegate_to(ConvenientService::RSpec::Helpers::Classes::StubService, :call)
           .with_arguments(service_class)
+          .and_return_its_value
       end
     end
 
@@ -39,6 +40,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::StubService, type: :standard d
         expect { instance.return_result(status) }
           .to delegate_to(ConvenientService::RSpec::Helpers::Classes::StubService::Entities::ResultSpec, :new)
           .with_arguments(status: status)
+          .and_return_its_value
       end
     end
 
@@ -47,6 +49,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::StubService, type: :standard d
         expect { instance.return_success }
           .to delegate_to(ConvenientService::RSpec::Helpers::Classes::StubService::Entities::ResultSpec, :new)
           .with_arguments(status: :success)
+          .and_return_its_value
       end
     end
 
@@ -55,6 +58,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::StubService, type: :standard d
         expect { instance.return_failure }
           .to delegate_to(ConvenientService::RSpec::Helpers::Classes::StubService::Entities::ResultSpec, :new)
           .with_arguments(status: :failure)
+          .and_return_its_value
       end
     end
 
@@ -63,6 +67,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::StubService, type: :standard d
         expect { instance.return_error }
           .to delegate_to(ConvenientService::RSpec::Helpers::Classes::StubService::Entities::ResultSpec, :new)
           .with_arguments(status: :error)
+          .and_return_its_value
       end
     end
   end
