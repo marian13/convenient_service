@@ -11,42 +11,56 @@ module ConvenientService
                 module Entities
                   class Handler
                     ##
+                    # @api private
+                    #
                     # @!attribute [r] result
                     #   @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
                     #
                     attr_reader :result
 
                     ##
+                    # @api private
+                    #
                     # @!attribute [r] status
                     #   @return [Object] Can be any type.
                     #
                     attr_reader :status
 
                     ##
+                    # @api private
+                    #
                     # @!attribute [r] data
                     #   @return [Object] Can be any type.
                     #
                     attr_reader :data
 
                     ##
+                    # @api private
+                    #
                     # @!attribute [r] message
                     #   @return [Object] Can be any type.
                     #
                     attr_reader :message
 
                     ##
+                    # @api private
+                    #
                     # @!attribute [r] code
                     #   @return [Object] Can be any type.
                     #
                     attr_reader :code
 
                     ##
+                    # @api private
+                    #
                     # @!attribute [r] block
                     #   @return [Proc]
                     #
                     attr_reader :block
 
                     ##
+                    # @api private
+                    #
                     # @param result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
                     # @param status [Object] Can be any type.
                     # @param data [Object] Can be any type.
@@ -65,6 +79,8 @@ module ConvenientService
                     end
 
                     ##
+                    # @api private
+                    #
                     # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status]
                     # @raise [ConvenientService::Support::Castable::Exceptions::FailedToCast]
                     #
@@ -73,6 +89,8 @@ module ConvenientService
                     end
 
                     ##
+                    # @api private
+                    #
                     # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data]
                     # @raise [ConvenientService::Support::Castable::Exceptions::FailedToCast]
                     #
@@ -81,6 +99,8 @@ module ConvenientService
                     end
 
                     ##
+                    # @api private
+                    #
                     # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message]
                     # @raise [ConvenientService::Support::Castable::Exceptions::FailedToCast]
                     #
@@ -89,6 +109,8 @@ module ConvenientService
                     end
 
                     ##
+                    # @api private
+                    #
                     # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code]
                     # @raise [ConvenientService::Support::Castable::Exceptions::FailedToCast]
                     #
@@ -97,6 +119,8 @@ module ConvenientService
                     end
 
                     ##
+                    # @api private
+                    #
                     # @return [Boolean]
                     # @raise [ConvenientService::Support::Castable::Exceptions::FailedToCast]
                     #
@@ -110,6 +134,8 @@ module ConvenientService
                     end
 
                     ##
+                    # @api private
+                    #
                     # @return [Object] Can be any type.
                     # @raise [ConvenientService::Support::Castable::Exceptions::FailedToCast]
                     #
@@ -122,6 +148,25 @@ module ConvenientService
                           code: code.nil? ? nil : casted_code
                         )
                       )
+                    end
+
+                    ##
+                    # @api private
+                    #
+                    # @param other [Object] Can be any type.
+                    # @return [Boolean, nil]
+                    #
+                    def ==(other)
+                      return unless other.instance_of?(self.class)
+
+                      return false if result != other.result
+                      return false if status != other.status
+                      return false if data != other.data
+                      return false if message != other.message
+                      return false if code != other.code
+                      return false if block != other.block
+
+                      true
                     end
                   end
                 end

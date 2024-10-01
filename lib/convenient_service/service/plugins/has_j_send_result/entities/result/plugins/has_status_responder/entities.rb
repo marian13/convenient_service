@@ -2,4 +2,4 @@
 
 require_relative "entities/collector"
 require_relative "entities/handler"
-require_relative "entities/null_handler"
+require_relative "entities/unexpected_handler"
