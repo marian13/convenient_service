@@ -67,10 +67,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
     end
 
     describe "#success" do
-      let(:success_block) do
-        proc { success_block_value }
-      end
-
+      let(:success_block) { proc { success_block_value } }
       let(:success_block_value) { "success block value" }
 
       specify do
@@ -115,10 +112,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
     end
 
     describe "#failure" do
-      let(:failure_block) do
-        proc { failure_block_value }
-      end
-
+      let(:failure_block) { proc { failure_block_value } }
       let(:failure_block_value) { "failure block value" }
 
       specify do
@@ -163,10 +157,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
     end
 
     describe "#error" do
-      let(:error_block) do
-        proc { error_block_value }
-      end
-
+      let(:error_block) { proc { error_block_value } }
       let(:error_block_value) { "error block value" }
 
       specify do
@@ -211,10 +202,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
     end
 
     describe "#unexpected" do
-      let(:unexpected_block) do
-        proc { unexpected_block_value }
-      end
-
+      let(:unexpected_block) { proc { unexpected_block_value } }
       let(:unexpected_block_value) { "unexpected block value" }
 
       it "sets unexpected handler" do
@@ -225,6 +213,97 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
 
       it "returns collector" do
         expect(collector.unexpected(&unexpected_block)).to eq(collector)
+      end
+    end
+
+    ##
+    # NOTE: Comprehensive suite for `Collector#handle` can be found in `Concern#respond_to` specs.
+    #
+    describe "#handle" do
+      let(:collector) { described_class.new(result: result, block: proc {}, handlers: [], unexpected_handler: nil) }
+
+      specify do
+        expect { collector.handle }
+          .to delegate_to(block, :call)
+          .with_arguments(collector)
+      end
+
+      context "when collector has NO handlers" do
+        context "when unexpected handler is NOT set" do
+          it "returns `nil`" do
+            expect(collector.handle).to be_nil
+          end
+        end
+
+        context "when unexpected handler is set" do
+          let(:unexpected_block) { proc { unexpected_handler_value } }
+          let(:unexpected_handler_value) { "unexpected handler value" }
+
+          before do
+            collector.unexpected(&unexpected_block)
+          end
+
+          it "returns unexpected handler value" do
+            expect(collector.handle).to eq(unexpected_handler_value)
+          end
+        end
+      end
+
+      context "when collector has handlers" do
+        before do
+          collector.failure {}
+          collector.error {}
+        end
+
+        context "when NO handlers matched" do
+          context "when unexpected handler is NOT set" do
+            it "returns `nil`" do
+              expect(collector.handle).to be_nil
+            end
+          end
+
+          context "when unexpected handler is set" do
+            let(:unexpected_block) { proc { unexpected_handler_value } }
+            let(:unexpected_handler_value) { "unexpected handler value" }
+
+            before do
+              collector.unexpected(&unexpected_block)
+            end
+
+            it "returns unexpected handler value" do
+              expect(collector.handle).to eq(unexpected_handler_value)
+            end
+          end
+        end
+
+        context "when one handler matched" do
+          let(:success_block) { proc { success_handler_value } }
+          let(:success_handler_value) { "success handler value" }
+
+          before do
+            collector.success(&success_block)
+          end
+
+          it "returns that matched handler value" do
+            expect(collector.handle).to eq(success_handler_value)
+          end
+        end
+
+        context "when multiple handlers matched" do
+          let(:first_success_block) { proc { first_success_handler_value } }
+          let(:first_success_handler_value) { "first success handler value" }
+
+          let(:second_success_block) { proc { second_success_handler_value } }
+          let(:second_success_handler_value) { "second success handler value" }
+
+          before do
+            collector.success(&success_block)
+          end
+
+          it "returns first matched handler value" do
+            expect(collector.handle).to eq(first_success_handler_value)
+          end
+        end
       end
     end
 
