@@ -99,28 +99,36 @@ module ConvenientService
                     end
 
                     ##
-                    # @return [Symbol]
+                    # @param status [Symbol]
+                    # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status]
+                    # @raise [ConvenientService::Support::Castable::Exceptions::FailedToCast]
                     #
                     def create_status(status)
                       self.class.status(value: status, result: self)
                     end
 
                     ##
-                    # @return [Hash{Symbol => Object}]
+                    # @param data [Hash{Symbol => Object}]
+                    # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data]
+                    # @raise [ConvenientService::Support::Castable::Exceptions::FailedToCast]
                     #
                     def create_data(data)
                       self.class.data(value: data, result: self)
                     end
 
                     ##
-                    # @return [String]
+                    # @param message [String]
+                    # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message]
+                    # @raise [ConvenientService::Support::Castable::Exceptions::FailedToCast]
                     #
                     def create_message(message)
                       self.class.message(value: message, result: self)
                     end
 
                     ##
-                    # @return [Symbol]
+                    # @param code [Symbol]
+                    # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code]
+                    # @raise [ConvenientService::Support::Castable::Exceptions::FailedToCast]
                     #
                     def create_code(code)
                       self.class.code(value: code, result: self)

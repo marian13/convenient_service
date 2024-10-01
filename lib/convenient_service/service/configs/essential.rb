@@ -64,6 +64,8 @@ module ConvenientService
               use ConvenientService::Plugins::Result::CanHaveStep::Concern
 
               use ConvenientService::Plugins::Result::HasNegatedResult::Concern
+
+              use ConvenientService::Plugins::Result::HasStatusResponder::Concern
             end
 
             middlewares :initialize do
