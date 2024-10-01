@@ -220,15 +220,16 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
     # NOTE: Comprehensive suite for `Collector#handle` can be found in `Concern#respond_to` specs.
     #
     describe "#handle" do
-      let(:collector) { described_class.new(result: result, block: proc {}, handlers: [], unexpected_handler: nil) }
-
-      specify do
-        expect { collector.handle }
-          .to delegate_to(block, :call)
-          .with_arguments(collector)
-      end
+      let(:collector) { described_class.new(result: result, block: block) }
+      let(:block) { proc {} }
 
       context "when collector has NO handlers" do
+        specify do
+          expect { collector.handle }
+            .to delegate_to(block, :call)
+            .with_arguments(collector)
+        end
+
         context "when unexpected handler is NOT set" do
           it "returns `nil`" do
             expect(collector.handle).to be_nil
@@ -253,6 +254,12 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         before do
           collector.failure {}
           collector.error {}
+        end
+
+        specify do
+          expect { collector.handle }
+            .to delegate_to(block, :call)
+            .with_arguments(collector)
         end
 
         context "when NO handlers matched" do
@@ -297,7 +304,8 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           let(:second_success_handler_value) { "second success handler value" }
 
           before do
-            collector.success(&success_block)
+            collector.success(&first_success_block)
+            collector.success(&second_success_block)
           end
 
           it "returns first matched handler value" do

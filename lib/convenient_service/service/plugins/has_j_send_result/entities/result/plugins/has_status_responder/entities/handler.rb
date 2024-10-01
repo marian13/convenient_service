@@ -140,14 +140,13 @@ module ConvenientService
                     # @raise [ConvenientService::Support::Castable::Exceptions::FailedToCast]
                     #
                     def handle
-                      block.call(
-                        Support::Arguments.new(
-                          status: casted_status,
-                          data: data.nil? ? nil : casted_data,
-                          message: message.nil? ? nil : casted_message,
-                          code: code.nil? ? nil : casted_code
-                        )
-                      )
+                      arguments = Support::Arguments.new(status: casted_status)
+
+                      arguments[:data] = casted_data unless data.nil?
+                      arguments[:message] = casted_message unless message.nil?
+                      arguments[:code] = casted_code unless code.nil?
+
+                      block.call(arguments)
                     end
 
                     ##
