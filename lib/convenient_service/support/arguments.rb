@@ -71,7 +71,11 @@ module ConvenientService
       end
 
       ##
+      # @param key [Integer, Symbol]
       # @return [Object] Can be any type.
+      #
+      # @internal
+      #   NOTE: `[]=` is NOT implemented, since it is NOT logical for `null_arguments`.
       #
       def [](key)
         case key

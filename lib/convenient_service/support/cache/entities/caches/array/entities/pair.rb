@@ -15,7 +15,7 @@ module ConvenientService
                 attr_reader :key
 
                 ##
-                # @!attribute [rw] value
+                # @!attribute [r] value
                 #   @return [Object] Can be any type.
                 #
                 attr_reader :value

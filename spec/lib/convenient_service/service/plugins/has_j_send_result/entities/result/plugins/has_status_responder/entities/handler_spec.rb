@@ -310,7 +310,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       specify do
         expect { handler.handle }
           .to delegate_to(block, :call)
-          .with_arguments(ConvenientService::Support::Arguments.new(status: handler.casted_status, data: nil, message: nil, code: nil))
+          .with_arguments(ConvenientService::Support::Arguments.new(status: handler.casted_status))
           .and_return_its_value
       end
 
@@ -320,7 +320,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         specify do
           expect { handler.handle }
             .to delegate_to(block, :call)
-            .with_arguments(ConvenientService::Support::Arguments.new(status: handler.casted_status, data: handler.casted_data, message: nil, code: nil))
+            .with_arguments(ConvenientService::Support::Arguments.new(status: handler.casted_status, data: handler.casted_data))
             .and_return_its_value
         end
       end
@@ -331,7 +331,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         specify do
           expect { handler.handle }
             .to delegate_to(block, :call)
-            .with_arguments(ConvenientService::Support::Arguments.new(status: handler.casted_status, data: nil, message: handler.casted_message, code: nil))
+            .with_arguments(ConvenientService::Support::Arguments.new(status: handler.casted_status, message: handler.casted_message))
             .and_return_its_value
         end
       end
@@ -342,7 +342,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         specify do
           expect { handler.handle }
             .to delegate_to(block, :call)
-            .with_arguments(ConvenientService::Support::Arguments.new(status: handler.casted_status, data: nil, message: nil, code: handler.casted_code))
+            .with_arguments(ConvenientService::Support::Arguments.new(status: handler.casted_status, code: handler.casted_code))
             .and_return_its_value
         end
       end

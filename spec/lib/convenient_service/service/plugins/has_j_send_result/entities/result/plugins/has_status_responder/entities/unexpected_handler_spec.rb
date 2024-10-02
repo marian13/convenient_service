@@ -27,7 +27,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       specify do
         expect { handler.handle }
           .to delegate_to(block, :call)
-          .with_arguments(ConvenientService::Support::Arguments.new(status: nil, data: nil, message: nil, code: nil))
+          .with_arguments(ConvenientService::Support::Arguments.null_arguments)
           .and_return_its_value
       end
     end
