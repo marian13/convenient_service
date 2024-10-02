@@ -1502,6 +1502,164 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
             end
 
             context "when first of those handlers is `failure` handler" do
+              context "when second of those handlers is `success` handler" do
+                let(:failure_handler_block_value) { "failure handler block value" }
+                let(:success_handler_block_value) { "success handler block value" }
+
+                context "when NONE of those handlers is matched" do
+                  let(:service) do
+                    Class.new do
+                      include ConvenientService::Standard::Config
+
+                      def result
+                        error
+                      end
+                    end
+                  end
+
+                  context "when `collector` does NOT have `unexpected` handler" do
+                    let(:block) do
+                      proc do |status|
+                        status.failure { failure_handler_block_value }
+                        status.success { success_handler_block_value }
+                      end
+                    end
+
+                    it "returns `nil`" do
+                      expect(result.respond_to(&block)).to be_nil
+                    end
+                  end
+
+                  context "when `collector` has `unexpected` handler" do
+                    let(:block) do
+                      proc do |status|
+                        status.failure { failure_handler_block_value }
+                        status.success { success_handler_block_value }
+                        status.unexpected { unexpected_handler_block_value }
+                      end
+                    end
+
+                    it "returns `unexpected` handler block value" do
+                      expect(result.respond_to(&block)).to eq(unexpected_handler_block_value)
+                    end
+                  end
+                end
+
+                context "when that `failure` handlers is matched" do
+                  let(:service) do
+                    Class.new do
+                      include ConvenientService::Standard::Config
+
+                      def result
+                        failure("foo")
+                      end
+                    end
+                  end
+
+                  context "when `collector` does NOT have `unexpected` handler" do
+                    let(:block) do
+                      proc do |status|
+                        status.failure(message: "foo") { failure_handler_block_value }
+                        status.success { evaluation_tracker.raise "`success` handler" }
+                      end
+                    end
+
+                    it "returns that matched `failure` handler block value" do
+                      expect(result.respond_to(&block)).to eq(failure_handler_block_value)
+                    end
+
+                    it "does NOT evaluate `success` handler" do
+                      result.respond_to(&block)
+
+                      expect(evaluation_tracker).not_to have_received(:raise).with("`success` handler")
+                    end
+                  end
+
+                  context "when `collector` has `unexpected` handler" do
+                    let(:block) do
+                      proc do |status|
+                        status.failure(message: "foo") { failure_handler_block_value }
+                        status.success { evaluation_tracker.raise "`success` handler" }
+                        status.unexpected { evaluation_tracker.raise "unexpected handler" }
+                      end
+                    end
+
+                    it "returns that matched `failure` handler block value" do
+                      expect(result.respond_to(&block)).to eq(failure_handler_block_value)
+                    end
+
+                    it "does NOT evaluate `success` handler" do
+                      result.respond_to(&block)
+
+                      expect(evaluation_tracker).not_to have_received(:raise).with("`success` handler")
+                    end
+
+                    it "does NOT evaluate `unexpected` handler" do
+                      result.respond_to(&block)
+
+                      expect(evaluation_tracker).not_to have_received(:raise).with("unexpected handler")
+                    end
+                  end
+                end
+
+                context "when that `success` handler is matched" do
+                  let(:service) do
+                    Class.new do
+                      include ConvenientService::Standard::Config
+
+                      def result
+                        success(foo: :bar)
+                      end
+                    end
+                  end
+
+                  context "when `collector` does NOT have `unexpected` handler" do
+                    let(:block) do
+                      proc do |status|
+                        status.failure { evaluation_tracker.raise "`failure` handler" }
+                        status.success(data: {foo: :bar}) { success_handler_block_value }
+                      end
+                    end
+
+                    it "does NOT evaluate `failure` handler" do
+                      result.respond_to(&block)
+
+                      expect(evaluation_tracker).not_to have_received(:raise).with("`failure` handler")
+                    end
+
+                    it "returns that matched `success` handler block value" do
+                      expect(result.respond_to(&block)).to eq(success_handler_block_value)
+                    end
+                  end
+
+                  context "when `collector` has `unexpected` handler" do
+                    let(:block) do
+                      proc do |status|
+                        status.failure { evaluation_tracker.raise "`failure` handler" }
+                        status.success(data: {foo: :bar}) { success_handler_block_value }
+                        status.unexpected { evaluation_tracker.raise "unexpected handler" }
+                      end
+                    end
+
+                    it "does NOT evaluate `failure` handler" do
+                      result.respond_to(&block)
+
+                      expect(evaluation_tracker).not_to have_received(:raise).with("`failure` handler")
+                    end
+
+                    it "returns that matched `success` handler block value" do
+                      expect(result.respond_to(&block)).to eq(success_handler_block_value)
+                    end
+
+                    it "does NOT evaluate `unexpected` handler" do
+                      result.respond_to(&block)
+
+                      expect(evaluation_tracker).not_to have_received(:raise).with("unexpected handler")
+                    end
+                  end
+                end
+              end
+
               context "when second of those handlers is `error` handler" do
                 let(:failure_handler_block_value) { "failure handler block value" }
                 let(:error_handler_block_value) { "error handler block value" }
@@ -1579,7 +1737,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
                     let(:block) do
                       proc do |status|
                         status.failure(message: "foo") { failure_handler_block_value }
-                        status.error { evaluation_tracker.raise "`failure` handler" }
+                        status.error { evaluation_tracker.raise "`error` handler" }
                         status.unexpected { evaluation_tracker.raise "unexpected handler" }
                       end
                     end
@@ -1649,6 +1807,324 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
 
                     it "returns that matched `error` handler block value" do
                       expect(result.respond_to(&block)).to eq(error_handler_block_value)
+                    end
+
+                    it "does NOT evaluate `unexpected` handler" do
+                      result.respond_to(&block)
+
+                      expect(evaluation_tracker).not_to have_received(:raise).with("unexpected handler")
+                    end
+                  end
+                end
+              end
+            end
+
+            context "when first of those handlers is `error` handler" do
+              context "when second of those handlers is `success` handler" do
+                let(:error_handler_block_value) { "error handler block value" }
+                let(:success_handler_block_value) { "success handler block value" }
+
+                context "when NONE of those handlers is matched" do
+                  let(:service) do
+                    Class.new do
+                      include ConvenientService::Standard::Config
+
+                      def result
+                        failure
+                      end
+                    end
+                  end
+
+                  context "when `collector` does NOT have `unexpected` handler" do
+                    let(:block) do
+                      proc do |status|
+                        status.error { error_handler_block_value }
+                        status.success { success_handler_block_value }
+                      end
+                    end
+
+                    it "returns `nil`" do
+                      expect(result.respond_to(&block)).to be_nil
+                    end
+                  end
+
+                  context "when `collector` has `unexpected` handler" do
+                    let(:block) do
+                      proc do |status|
+                        status.error { error_handler_block_value }
+                        status.success { success_handler_block_value }
+                        status.unexpected { unexpected_handler_block_value }
+                      end
+                    end
+
+                    it "returns `unexpected` handler block value" do
+                      expect(result.respond_to(&block)).to eq(unexpected_handler_block_value)
+                    end
+                  end
+                end
+
+                context "when that `error` handlers is matched" do
+                  let(:service) do
+                    Class.new do
+                      include ConvenientService::Standard::Config
+
+                      def result
+                        error(code: :foo)
+                      end
+                    end
+                  end
+
+                  context "when `collector` does NOT have `unexpected` handler" do
+                    let(:block) do
+                      proc do |status|
+                        status.error(code: :foo) { error_handler_block_value }
+                        status.success { evaluation_tracker.raise "`success` handler" }
+                      end
+                    end
+
+                    it "returns that matched `error` handler block value" do
+                      expect(result.respond_to(&block)).to eq(error_handler_block_value)
+                    end
+
+                    it "does NOT evaluate `success` handler" do
+                      result.respond_to(&block)
+
+                      expect(evaluation_tracker).not_to have_received(:raise).with("`success` handler")
+                    end
+                  end
+
+                  context "when `collector` has `unexpected` handler" do
+                    let(:block) do
+                      proc do |status|
+                        status.error(code: :foo) { error_handler_block_value }
+                        status.success { evaluation_tracker.raise "`success` handler" }
+                        status.unexpected { evaluation_tracker.raise "unexpected handler" }
+                      end
+                    end
+
+                    it "returns that matched `error` handler block value" do
+                      expect(result.respond_to(&block)).to eq(error_handler_block_value)
+                    end
+
+                    it "does NOT evaluate `success` handler" do
+                      result.respond_to(&block)
+
+                      expect(evaluation_tracker).not_to have_received(:raise).with("`success` handler")
+                    end
+
+                    it "does NOT evaluate `unexpected` handler" do
+                      result.respond_to(&block)
+
+                      expect(evaluation_tracker).not_to have_received(:raise).with("unexpected handler")
+                    end
+                  end
+                end
+
+                context "when that `success` handler is matched" do
+                  let(:service) do
+                    Class.new do
+                      include ConvenientService::Standard::Config
+
+                      def result
+                        success(foo: :bar)
+                      end
+                    end
+                  end
+
+                  context "when `collector` does NOT have `unexpected` handler" do
+                    let(:block) do
+                      proc do |status|
+                        status.error { evaluation_tracker.raise "`error` handler" }
+                        status.success(data: {foo: :bar}) { success_handler_block_value }
+                      end
+                    end
+
+                    it "does NOT evaluate `error` handler" do
+                      result.respond_to(&block)
+
+                      expect(evaluation_tracker).not_to have_received(:raise).with("`error` handler")
+                    end
+
+                    it "returns that matched `success` handler block value" do
+                      expect(result.respond_to(&block)).to eq(success_handler_block_value)
+                    end
+                  end
+
+                  context "when `collector` has `unexpected` handler" do
+                    let(:block) do
+                      proc do |status|
+                        status.error { evaluation_tracker.raise "`error` handler" }
+                        status.success(data: {foo: :bar}) { success_handler_block_value }
+                        status.unexpected { evaluation_tracker.raise "unexpected handler" }
+                      end
+                    end
+
+                    it "does NOT evaluate `error` handler" do
+                      result.respond_to(&block)
+
+                      expect(evaluation_tracker).not_to have_received(:raise).with("`error` handler")
+                    end
+
+                    it "returns that matched `success` handler block value" do
+                      expect(result.respond_to(&block)).to eq(success_handler_block_value)
+                    end
+
+                    it "does NOT evaluate `unexpected` handler" do
+                      result.respond_to(&block)
+
+                      expect(evaluation_tracker).not_to have_received(:raise).with("unexpected handler")
+                    end
+                  end
+                end
+              end
+
+              context "when second of those handlers is `failure` handler" do
+                let(:error_handler_block_value) { "error handler block value" }
+                let(:failure_handler_block_value) { "failure handler block value" }
+
+                context "when NONE of those handlers is matched" do
+                  let(:service) do
+                    Class.new do
+                      include ConvenientService::Standard::Config
+
+                      def result
+                        success
+                      end
+                    end
+                  end
+
+                  context "when `collector` does NOT have `unexpected` handler" do
+                    let(:block) do
+                      proc do |status|
+                        status.error { error_handler_block_value }
+                        status.failure { failure_handler_block_value }
+                      end
+                    end
+
+                    it "returns `nil`" do
+                      expect(result.respond_to(&block)).to be_nil
+                    end
+                  end
+
+                  context "when `collector` has `unexpected` handler" do
+                    let(:block) do
+                      proc do |status|
+                        status.error { error_handler_block_value }
+                        status.failure { failure_handler_block_value }
+                        status.unexpected { unexpected_handler_block_value }
+                      end
+                    end
+
+                    it "returns `unexpected` handler block value" do
+                      expect(result.respond_to(&block)).to eq(unexpected_handler_block_value)
+                    end
+                  end
+                end
+
+                context "when that `error` handler is matched" do
+                  let(:service) do
+                    Class.new do
+                      include ConvenientService::Standard::Config
+
+                      def result
+                        error(code: :foo)
+                      end
+                    end
+                  end
+
+                  context "when `collector` does NOT have `unexpected` handler" do
+                    let(:block) do
+                      proc do |status|
+                        status.error(code: :foo) { error_handler_block_value }
+                        status.failure { evaluation_tracker.raise "`failure` handler" }
+                      end
+                    end
+
+                    it "returns that matched `error` handler block value" do
+                      expect(result.respond_to(&block)).to eq(error_handler_block_value)
+                    end
+
+                    it "does NOT evaluate `failure` handler" do
+                      result.respond_to(&block)
+
+                      expect(evaluation_tracker).not_to have_received(:raise).with("`failure` handler")
+                    end
+                  end
+
+                  context "when `collector` has `unexpected` handler" do
+                    let(:block) do
+                      proc do |status|
+                        status.error(code: :foo) { error_handler_block_value }
+                        status.failure { evaluation_tracker.raise "`failure` handler" }
+                        status.unexpected { evaluation_tracker.raise "unexpected handler" }
+                      end
+                    end
+
+                    it "returns that matched `error` handler block value" do
+                      expect(result.respond_to(&block)).to eq(error_handler_block_value)
+                    end
+
+                    it "does NOT evaluate `failure` handler" do
+                      result.respond_to(&block)
+
+                      expect(evaluation_tracker).not_to have_received(:raise).with("`failure` handler")
+                    end
+
+                    it "does NOT evaluate `unexpected` handler" do
+                      result.respond_to(&block)
+
+                      expect(evaluation_tracker).not_to have_received(:raise).with("unexpected handler")
+                    end
+                  end
+                end
+
+                context "when that `failure` handler is matched" do
+                  let(:service) do
+                    Class.new do
+                      include ConvenientService::Standard::Config
+
+                      def result
+                        failure("foo")
+                      end
+                    end
+                  end
+
+                  context "when `collector` does NOT have `unexpected` handler" do
+                    let(:block) do
+                      proc do |status|
+                        status.error { evaluation_tracker.raise "`error` handler" }
+                        status.failure(message: "foo") { failure_handler_block_value }
+                      end
+                    end
+
+                    it "does NOT evaluate `error` handler" do
+                      result.respond_to(&block)
+
+                      expect(evaluation_tracker).not_to have_received(:raise).with("`error` handler")
+                    end
+
+                    it "returns that matched `failure` handler block value" do
+                      expect(result.respond_to(&block)).to eq(failure_handler_block_value)
+                    end
+                  end
+
+                  context "when `collector` has `unexpected` handler" do
+                    let(:block) do
+                      proc do |status|
+                        status.error { evaluation_tracker.raise "`error` handler" }
+                        status.failure(message: "foo") { failure_handler_block_value }
+                        status.unexpected { evaluation_tracker.raise "unexpected handler" }
+                      end
+                    end
+
+                    it "does NOT evaluate `error` handler" do
+                      result.respond_to(&block)
+
+                      expect(evaluation_tracker).not_to have_received(:raise).with("`error` handler")
+                    end
+
+                    it "returns that matched `failure` handler block value" do
+                      expect(result.respond_to(&block)).to eq(failure_handler_block_value)
                     end
 
                     it "does NOT evaluate `unexpected` handler" do
