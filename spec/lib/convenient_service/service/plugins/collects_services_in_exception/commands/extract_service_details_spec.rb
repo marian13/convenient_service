@@ -93,7 +93,7 @@ RSpec.describe ConvenientService::Service::Plugins::CollectsServicesInException:
               ##
               # PARANOID: This is NOT possible in production.
               #
-              service_instance.steps.each { |step| step.mark_as_completed! }
+              service_instance.steps.each { |step| step.mark_as_evaluated! }
             end
 
             it "returns details with unknown step (probably `ConvenientService` bug)" do

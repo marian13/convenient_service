@@ -54,7 +54,7 @@ module ConvenientService
             # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step, nil]
             #
             def first_not_completed_step
-              Utils.memoize_including_falsy_values(self, :@first_not_completed_step) { service.steps.find(&:not_completed?) }
+              Utils.memoize_including_falsy_values(self, :@first_not_completed_step) { service.steps.find(&:not_evaluated?) }
             end
           end
         end

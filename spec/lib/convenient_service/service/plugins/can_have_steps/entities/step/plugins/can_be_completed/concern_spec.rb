@@ -51,80 +51,80 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
   end
 
   example_group "instance methods" do
-    describe "#completed?" do
+    describe "#evaluated?" do
       specify do
-        expect { step_instance.completed? }
+        expect { step_instance.evaluated? }
           .to delegate_to(step_instance.internals.cache, :read)
-          .with_arguments(:completed)
+          .with_arguments(:evaluated)
       end
 
       ##
       # TODO: Create copies for all utils used inside matchers.
       #
       # specify do
-      #   expect { step_instance.completed? }
+      #   expect { step_instance.evaluated? }
       #     .to delegate_to(ConvenientService::Utils, :to_bool)
-      #     .with_arguments(step_instance.internals.cache[:completed])
+      #     .with_arguments(step_instance.internals.cache[:evaluated])
       #     .and_return_its_value
       # end
 
       context "when `step` is NOT completed" do
         it "returns `false`" do
-          expect(step_instance.completed?).to eq(false)
+          expect(step_instance.evaluated?).to eq(false)
         end
       end
 
       context "when `step` is completed" do
         it "returns `true`" do
-          step_instance.mark_as_completed!
+          step_instance.mark_as_evaluated!
 
-          expect(step_instance.completed?).to eq(true)
+          expect(step_instance.evaluated?).to eq(true)
         end
       end
     end
 
-    describe "#not_completed?" do
+    describe "#not_evaluated?" do
       specify do
-        expect { step_instance.not_completed? }
+        expect { step_instance.not_evaluated? }
           .to delegate_to(step_instance.internals.cache, :read)
-          .with_arguments(:completed)
+          .with_arguments(:evaluated)
       end
 
       ##
       # TODO: Create copies for all utils used inside matchers.
       #
       # specify do
-      #   expect { step_instance.not_completed? }
+      #   expect { step_instance.not_evaluated? }
       #     .to delegate_to(ConvenientService::Utils, :to_bool)
-      #     .with_arguments(step_instance.internals.cache[:completed])
+      #     .with_arguments(step_instance.internals.cache[:evaluated])
       #     .and_return_its_value
       # end
 
       context "when `step` is NOT completed" do
         it "returns `true`" do
-          expect(step_instance.not_completed?).to eq(true)
+          expect(step_instance.not_evaluated?).to eq(true)
         end
       end
 
       context "when `step` is completed" do
         it "returns `false`" do
-          step_instance.mark_as_completed!
+          step_instance.mark_as_evaluated!
 
-          expect(step_instance.not_completed?).to eq(false)
+          expect(step_instance.not_evaluated?).to eq(false)
         end
       end
     end
 
     describe "#mark_as_completed" do
       specify do
-        expect { step_instance.mark_as_completed! }
+        expect { step_instance.mark_as_evaluated! }
           .to delegate_to(step_instance.internals.cache, :write)
-          .with_arguments(:completed, true)
+          .with_arguments(:evaluated, true)
           .and_return_its_value
       end
 
       it "returns `true`" do
-        expect(step_instance.mark_as_completed!).to eq(true)
+        expect(step_instance.mark_as_evaluated!).to eq(true)
       end
     end
   end

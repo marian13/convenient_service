@@ -15,22 +15,22 @@ module ConvenientService
                     ##
                     # @return [Bool]
                     #
-                    def completed?
-                      Utils.to_bool(internals.cache[:completed])
+                    def evaluated?
+                      Utils.to_bool(internals.cache[:evaluated])
                     end
 
                     ##
                     # @return [Bool]
                     #
-                    def not_completed?
-                      !completed?
+                    def not_evaluated?
+                      !evaluated?
                     end
 
                     ##
                     # @return [void]
                     #
-                    def mark_as_completed!
-                      internals.cache[:completed] = true
+                    def mark_as_evaluated!
+                      internals.cache[:evaluated] = true
                     end
                   end
                 end

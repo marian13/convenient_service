@@ -50,7 +50,7 @@ module ConvenientService
             entity.steps.find do |step|
               step.status.unsafe_not_success?
                 .tap { step.save_outputs_in_organizer! }
-                .tap { step.mark_as_completed! }
+                .tap { step.mark_as_evaluated! }
             end
           end
 

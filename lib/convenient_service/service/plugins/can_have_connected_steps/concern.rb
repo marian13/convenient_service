@@ -503,7 +503,7 @@ module ConvenientService
               steps.each_evaluated_step do |step|
                 step.save_outputs_in_organizer!
 
-                step.mark_as_completed!
+                step.mark_as_evaluated!
               end
 
               steps.result

@@ -1403,7 +1403,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
           end
 
           it "returns result of intermediate step" do
-            expect(service_instance.steps_result).to eq(ConvenientService::Utils::Array.find_last(service_instance.steps, &:completed?).result)
+            expect(service_instance.steps_result).to eq(ConvenientService::Utils::Array.find_last(service_instance.steps, &:evaluated?).result)
           end
 
           it "returns result with unchecked status" do
@@ -1419,7 +1419,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
           end
 
           it "marks intermediate step as completed" do
-            expect { service_instance.steps_result }.to change(service_instance.steps[0], :completed?).from(false).to(true)
+            expect { service_instance.steps_result }.to change(service_instance.steps[0], :evaluated?).from(false).to(true)
           end
 
           it "saves step outputs into organizer" do
@@ -1427,7 +1427,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
           end
 
           it "does NOT mark following steps as completed" do
-            expect { service_instance.steps_result }.not_to change(service_instance.steps[1], :completed?).from(false)
+            expect { service_instance.steps_result }.not_to change(service_instance.steps[1], :evaluated?).from(false)
           end
 
           example_group "order of side effects" do
@@ -1442,7 +1442,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
             end
 
             it "does NOT mark intermediate step as completed before checking status" do
-              expect { ignoring_exception(exception) { service_instance.steps_result } }.not_to change(service_instance.steps[0], :completed?).from(false)
+              expect { ignoring_exception(exception) { service_instance.steps_result } }.not_to change(service_instance.steps[0], :evaluated?).from(false)
             end
           end
         end
@@ -1499,7 +1499,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
           end
 
           it "marks intermediate step as completed" do
-            expect { service_instance.steps_result }.to change(service_instance.steps[0], :completed?).from(false).to(true)
+            expect { service_instance.steps_result }.to change(service_instance.steps[0], :evaluated?).from(false).to(true)
           end
 
           it "saves last step outputs into organizer" do
@@ -1509,7 +1509,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
           end
 
           it "marks last step as completed" do
-            expect { service_instance.steps_result }.to change(service_instance.steps[1], :completed?).from(false).to(true)
+            expect { service_instance.steps_result }.to change(service_instance.steps[1], :evaluated?).from(false).to(true)
           end
 
           example_group "order of side effects" do
@@ -1525,7 +1525,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
             end
 
             it "does NOT mark intermediate step as completed before checking status" do
-              expect { ignoring_exception(exception) { service_instance.steps_result } }.not_to change(service_instance.steps[0], :completed?).from(false)
+              expect { ignoring_exception(exception) { service_instance.steps_result } }.not_to change(service_instance.steps[0], :evaluated?).from(false)
             end
 
             it "does NOT save last step outputs into organizer before checking status" do
@@ -1533,7 +1533,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
             end
 
             it "does NOT mark last step as completed before checking status" do
-              expect { ignoring_exception(exception) { service_instance.steps_result } }.not_to change(service_instance.steps[1], :completed?).from(false)
+              expect { ignoring_exception(exception) { service_instance.steps_result } }.not_to change(service_instance.steps[1], :evaluated?).from(false)
             end
           end
         end

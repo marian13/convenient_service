@@ -55,7 +55,7 @@ module ConvenientService
             rollback_service(organizer)
 
             organizer.steps
-              .select(&:completed?)
+              .select(&:evaluated?)
               .reject(&:method_step?)
               .reverse_each { |step| rollback_result(step.service_result) }
           end
