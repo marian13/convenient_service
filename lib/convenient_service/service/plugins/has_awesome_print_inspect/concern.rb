@@ -15,21 +15,11 @@ module ConvenientService
               metadata = {
                 ConvenientService: {
                   entity: "Service",
-                  name: inspect_values[:name]
+                  name: Utils::Class.display_name(self.class)
                 }
               }
 
               metadata.ai
-            end
-
-            ##
-            # @return [Hash{Symbol => Object}]
-            #
-            # @internal
-            #   NOTE: It is a coincidence that `HasInspect#inspect_values` has exactly the same implementation. There is NO intention to keep them in sync.
-            #
-            def inspect_values
-              {name: Utils::Class.display_name(self.class)}
             end
           end
         end

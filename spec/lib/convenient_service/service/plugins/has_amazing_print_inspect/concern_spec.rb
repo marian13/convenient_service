@@ -45,26 +45,11 @@ RSpec.describe ConvenientService::Service::Plugins::HasAmazingPrintInspect::Conc
     end
 
     let(:service_instance) { service_class.new }
-    let(:inspect_values) { {name: service_class.name} }
     let(:keywords) { ["ConvenientService", ":entity", "Service", ":name", "ImportantService"] }
 
     describe "#inspect" do
       it "returns `inspect` representation of service" do
         expect(service_instance.inspect).to include(*keywords)
-      end
-
-      specify do
-        allow(service_instance).to receive(:inspect_values).and_return(inspect_values)
-
-        expect { service_instance.inspect }
-          .to delegate_to(service_instance.inspect_values, :[])
-          .with_arguments(:name)
-      end
-    end
-
-    describe "#inspect_values" do
-      it "returns `inspect` values" do
-        expect(service_instance.inspect_values).to eq(inspect_values)
       end
 
       context "when service class is anonymous" do
@@ -75,8 +60,10 @@ RSpec.describe ConvenientService::Service::Plugins::HasAmazingPrintInspect::Conc
           end
         end
 
+        let(:keywords) { ["ConvenientService", ":entity", "Service", ":name", "AnonymousClass(##{service_class.object_id})"] }
+
         it "uses custom class name" do
-          expect(service_instance.inspect_values[:name]).to eq("AnonymousClass(##{service_class.object_id})")
+          expect(service_instance.inspect).to include(*keywords)
         end
       end
     end

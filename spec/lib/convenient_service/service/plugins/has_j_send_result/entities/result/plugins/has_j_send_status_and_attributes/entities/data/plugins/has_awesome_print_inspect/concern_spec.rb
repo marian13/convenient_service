@@ -39,6 +39,10 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           include ConvenientService::Standard::Config
           include ConvenientService::Service::Configs::AwesomePrintInspect
 
+          def self.name
+            "ImportantService"
+          end
+
           def result
             success(data: {foo: +"bar"})
           end
@@ -47,7 +51,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
 
       let(:data) { service.result.unsafe_data }
 
-      let(:keywords) { ["ConvenientService", ":entity", "Data", ":result", data.result.class.name, ":values", ":foo", "bar"] }
+      let(:keywords) { ["ConvenientService", ":entity", "Data", ":result", "ImportantService::Result", ":values", ":foo", "bar"] }
 
       before do
         ##
@@ -72,15 +76,38 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
             include ConvenientService::Standard::Config
             include ConvenientService::Service::Configs::AwesomePrintInspect
 
+            def self.name
+              "ImportantService"
+            end
+
             def result
               success
             end
           end
         end
 
-        let(:keywords) { ["ConvenientService", ":entity", "Data", ":result", data.result.class.name, ":values", "{}"] }
+        let(:keywords) { ["ConvenientService", ":entity", "Data", ":result", "ImportantService::Result", ":values", "{}"] }
 
         it "returns `inspect` representation of data" do
+          expect(data.inspect).to include(*keywords)
+        end
+      end
+
+      context "when service class is anonymous" do
+        let(:service) do
+          Class.new do
+            include ConvenientService::Standard::Config
+            include ConvenientService::Service::Configs::AwesomePrintInspect
+
+            def result
+              success(data: {foo: +"bar"})
+            end
+          end
+        end
+
+        let(:keywords) { ["ConvenientService", ":entity", "Data", ":result", "AnonymousClass(##{service.object_id})::Result", ":values", ":foo", "bar"] }
+
+        it "uses custom class name" do
           expect(data.inspect).to include(*keywords)
         end
       end

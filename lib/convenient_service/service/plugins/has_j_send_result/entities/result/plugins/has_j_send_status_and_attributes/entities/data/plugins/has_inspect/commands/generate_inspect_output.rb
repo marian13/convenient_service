@@ -41,7 +41,7 @@ module ConvenientService
                             # @return [String]
                             #
                             def printable_class
-                              "#{data.result.class.name}::Data"
+                              "#{Utils::Class.display_name(data.result.service.class)}::Data"
                             end
 
                             ##
@@ -51,7 +51,7 @@ module ConvenientService
                               data
                                 .to_h
                                 .map { |key, value| "#{key}: #{truncate(value.inspect)}" }
-                                .join(" ")
+                                .join(", ")
                             end
 
                             ##

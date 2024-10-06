@@ -12,14 +12,7 @@ module ConvenientService
             # @return [String]
             #
             def inspect
-              "<#{inspect_values[:name]}>"
-            end
-
-            ##
-            # @return [Hash{Symbol => Object}]
-            #
-            def inspect_values
-              {name: Utils::Class.display_name(self.class)}
+              "<#{Utils::Class.display_name(self.class)}>"
             end
           end
         end

@@ -20,8 +20,6 @@ module ConvenientService
                     #   - https://github.com/amazing-print/amazing_print?tab=readme-ov-file#usage
                     #   - https://github.com/amazing-print/amazing_print/blob/master/lib/amazing_print/core_ext/kernel.rb
                     #
-                    #   TODO: `inspect_values` for class. This way `service_class.name || ...` can be shared.
-                    #
                     def inspect
                       metadata = {
                         ConvenientService: {

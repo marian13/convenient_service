@@ -20,18 +20,16 @@ module ConvenientService
                     #   - https://github.com/awesome-print/awesome_print#usage
                     #   - https://github.com/awesome-print/awesome_print/blob/master/lib/awesome_print/core_ext/kernel.rb
                     #
-                    #   TODO: `inspect_values` for class. This way `service_class.name || ...` can be shared.
-                    #
                     def inspect
                       metadata = {
                         ConvenientService: {
                           entity: "Step",
-                          container: container.klass.name
+                          container: Utils::Class.display_name(container.klass)
                         }
                       }
 
                       metadata[:ConvenientService][:method] = ":#{method}" if method_step?
-                      metadata[:ConvenientService][:service] = service_class.name if service_step?
+                      metadata[:ConvenientService][:service] = Utils::Class.display_name(service_class) if service_step?
 
                       metadata.ai
                     end

@@ -57,14 +57,6 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         expect(result.inspect).to include(*keywords)
       end
 
-      specify do
-        allow(result.service).to receive(:inspect_values).and_return({})
-
-        expect { result.inspect }
-          .to delegate_to(result.service.inspect_values, :[])
-          .with_arguments(:name)
-      end
-
       context "when result has data" do
         let(:service) do
           Class.new do
@@ -130,6 +122,25 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         let(:keywords) { ["ConvenientService", ":entity", "Result", ":service", "ImportantService", ":status", ":error", ":message", "foo"] }
 
         it "includes message into `inspect` representation of result" do
+          expect(result.inspect).to include(*keywords)
+        end
+      end
+
+      context "when service class is anonymous" do
+        let(:service) do
+          Class.new do
+            include ConvenientService::Standard::Config
+            include ConvenientService::Service::Configs::AwesomePrintInspect
+
+            def result
+              success
+            end
+          end
+        end
+
+        let(:keywords) { ["ConvenientService", ":entity", "Result", ":service", "AnonymousClass(##{service.object_id})", ":status", ":success"] }
+
+        it "uses custom class name" do
           expect(result.inspect).to include(*keywords)
         end
       end

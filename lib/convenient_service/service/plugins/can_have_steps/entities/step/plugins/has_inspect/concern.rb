@@ -15,14 +15,11 @@ module ConvenientService
                     ##
                     # @return [String]
                     #
-                    # @internal
-                    #   TODO: `inspect_values` for class. This way `service_class.name || ...` can be shared.
-                    #
                     def inspect
-                      return "<#{container.klass.name}::Step method: :#{method}>" if method_step?
-                      return "<#{container.klass.name}::Step service: #{service_class.name}>" if service_step?
+                      return "<#{Utils::Class.display_name(container.klass)}::Step method: :#{method}>" if method_step?
+                      return "<#{Utils::Class.display_name(container.klass)}::Step service: #{Utils::Class.display_name(service_class)}>" if service_step?
 
-                      "<#{container.klass.name}::Step>"
+                      "<#{Utils::Class.display_name(container.klass)}::Step>"
                     end
                   end
                 end
