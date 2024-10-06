@@ -39,6 +39,10 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           include ConvenientService::Standard::Config
           include ConvenientService::Service::Configs::AwesomePrintInspect
 
+          def self.name
+            "ImportantService"
+          end
+
           def result
             error(code: :foo)
           end
@@ -47,7 +51,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
 
       let(:code) { service.result.unsafe_code }
 
-      let(:keywords) { ["ConvenientService", ":entity", "Code", ":result", code.result.class.name, ":value", ":foo"] }
+      let(:keywords) { ["ConvenientService", ":entity", "Code", ":result", "ImportantService::Result", ":value", ":foo"] }
 
       before do
         ##
@@ -58,6 +62,25 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
 
       it "returns `inspect` representation of code" do
         expect(code.inspect).to include(*keywords)
+      end
+
+      context "when service class is anonymous" do
+        let(:service) do
+          Class.new do
+            include ConvenientService::Standard::Config
+            include ConvenientService::Service::Configs::AwesomePrintInspect
+
+            def result
+              error(code: :foo)
+            end
+          end
+        end
+
+        let(:keywords) { ["ConvenientService", ":entity", "Code", ":result", "AnonymousClass(##{service.object_id})::Result", ":value", ":foo"] }
+
+        it "uses custom class name" do
+          expect(code.inspect).to include(*keywords)
+        end
       end
     end
   end

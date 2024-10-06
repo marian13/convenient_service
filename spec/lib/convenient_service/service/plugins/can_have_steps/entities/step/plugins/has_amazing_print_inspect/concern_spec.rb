@@ -40,11 +40,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
             include ConvenientService::Standard::Config
             include ConvenientService::Service::Configs::AmazingPrintInspect
 
-            step :result
-
-            def result
-              success
-            end
+            step "abc"
 
             def self.name
               "ContainerService"
@@ -78,6 +74,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         let(:service) do
           Class.new do
             include ConvenientService::Standard::Config
+
             def self.name
               "StepService"
             end
@@ -88,6 +85,20 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
         it "returns `inspect` representation of step with service class" do
           expect(step.inspect).to include(*keywords)
+        end
+
+        context "when that service class is anonymous" do
+          let(:service) do
+            Class.new do
+              include ConvenientService::Standard::Config
+            end
+          end
+
+          let(:keywords) { ["ConvenientService", ":entity", "Step", ":container", "ContainerService", ":service", "AnonymousClass(##{service.object_id})"] }
+
+          it "uses custom class name" do
+            expect(step.inspect).to include(*keywords)
+          end
         end
       end
 
@@ -112,6 +123,23 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         let(:keywords) { ["ConvenientService", ":entity", "Step", ":container", "ContainerService", ":method", ":result"] }
 
         it "returns `inspect` representation of step with method" do
+          expect(step.inspect).to include(*keywords)
+        end
+      end
+
+      context "when container class is anonymous" do
+        let(:container) do
+          Class.new do
+            include ConvenientService::Standard::Config
+            include ConvenientService::Service::Configs::AmazingPrintInspect
+
+            step "abc"
+          end
+        end
+
+        let(:keywords) { ["ConvenientService", ":entity", "Step", ":container", "AnonymousClass(##{container.object_id})"] }
+
+        it "uses custom class name" do
           expect(step.inspect).to include(*keywords)
         end
       end

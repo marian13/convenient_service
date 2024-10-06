@@ -20,7 +20,7 @@ module ConvenientService
                             # @return [String]
                             #
                             def inspect
-                              "<#{self.class} text: \"#{value}\">"
+                              "<#{Utils::Class.display_name(result.service.class)}::Result::Message text: \"#{value}\">"
                             end
                           end
                         end

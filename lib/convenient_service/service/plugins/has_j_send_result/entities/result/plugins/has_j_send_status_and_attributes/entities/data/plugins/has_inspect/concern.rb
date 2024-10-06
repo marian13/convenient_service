@@ -19,11 +19,12 @@ module ConvenientService
                             ##
                             # @return [String]
                             #
-                            # @internal
-                            #   TODO: Specs.
-                            #
                             def inspect
-                              Commands::GenerateInspectOutput.call(data: self)
+                              return "<#{Utils::Class.display_name(result.service.class)}::Result::Data>" if empty?
+
+                              values = to_h.map { |key, value| "#{key}: #{Utils::String.truncate(value.inspect, 15, omission: "...")}" }.join(", ")
+
+                              "<#{Utils::Class.display_name(result.service.class)}::Result::Data #{values}>"
                             end
                           end
                         end

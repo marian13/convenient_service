@@ -23,7 +23,7 @@ module ConvenientService
                               metadata = {
                                 ConvenientService: {
                                   entity: "Code",
-                                  result: result.class.name,
+                                  result: "#{Utils::Class.display_name(result.service.class)}::Result",
                                   value: to_sym
                                 }
                               }

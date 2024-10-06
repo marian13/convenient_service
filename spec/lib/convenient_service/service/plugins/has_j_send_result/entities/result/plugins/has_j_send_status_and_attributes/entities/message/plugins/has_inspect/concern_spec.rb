@@ -36,6 +36,10 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         Class.new do
           include ConvenientService::Standard::Config
 
+          def self.name
+            "ImportantService"
+          end
+
           def result
             error(message: "foo")
           end
@@ -52,7 +56,23 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       end
 
       it "returns `inspect` representation of message" do
-        expect(message.inspect).to eq("<#{message.class} text: \"#{message}\">")
+        expect(message.inspect).to eq("<ImportantService::Result::Message text: \"#{message}\">")
+      end
+
+      context "when service class is anonymous" do
+        let(:service) do
+          Class.new do
+            include ConvenientService::Standard::Config
+
+            def result
+              error(message: "foo")
+            end
+          end
+        end
+
+        it "uses custom class name" do
+          expect(message.inspect).to eq("<AnonymousClass(##{service.object_id})::Result::Message text: \"#{message}\">")
+        end
       end
     end
   end

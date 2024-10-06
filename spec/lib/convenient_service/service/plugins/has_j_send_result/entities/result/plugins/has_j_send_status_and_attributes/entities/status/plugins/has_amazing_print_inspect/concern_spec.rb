@@ -39,6 +39,10 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           include ConvenientService::Standard::Config
           include ConvenientService::Service::Configs::AmazingPrintInspect
 
+          def self.name
+            "ImportantService"
+          end
+
           def result
             success
           end
@@ -47,7 +51,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
 
       let(:status) { service.result.status }
 
-      let(:keywords) { ["ConvenientService", ":entity", "Status", ":result", status.result.class.name, ":type", ":success"] }
+      let(:keywords) { ["ConvenientService", ":entity", "Status", ":result", "ImportantService::Result", ":type", ":success"] }
 
       before do
         ##
@@ -58,6 +62,25 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
 
       it "returns `inspect` representation of status" do
         expect(status.inspect).to include(*keywords)
+      end
+
+      context "when service class is anonymous" do
+        let(:service) do
+          Class.new do
+            include ConvenientService::Standard::Config
+            include ConvenientService::Service::Configs::AmazingPrintInspect
+
+            def result
+              success
+            end
+          end
+        end
+
+        let(:keywords) { ["ConvenientService", ":entity", "Status", ":result", "AnonymousClass(##{service.object_id})::Result", ":type", ":success"] }
+
+        it "uses custom class name" do
+          expect(status.inspect).to include(*keywords)
+        end
       end
     end
   end

@@ -36,6 +36,10 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         Class.new do
           include ConvenientService::Standard::Config
 
+          def self.name
+            "ImportantService"
+          end
+
           def result
             success
           end
@@ -52,7 +56,23 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       end
 
       it "returns `inspect` representation of code" do
-        expect(code.inspect).to eq("<#{code.class} value: :#{code}>")
+        expect(code.inspect).to eq("<ImportantService::Result::Code value: :#{code}>")
+      end
+
+      context "when service class is anonymous" do
+        let(:service) do
+          Class.new do
+            include ConvenientService::Standard::Config
+
+            def result
+              success
+            end
+          end
+        end
+
+        it "uses custom class name" do
+          expect(code.inspect).to eq("<AnonymousClass(##{service.object_id})::Result::Code value: :#{code}>")
+        end
       end
     end
   end

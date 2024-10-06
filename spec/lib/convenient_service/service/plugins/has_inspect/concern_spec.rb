@@ -45,7 +45,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasInspect::Concern, type: :
 
     describe "#inspect" do
       it "returns `inspect` representation of service" do
-        expect(service_instance.inspect).to eq("<#{service_class.name}>")
+        expect(service_instance.inspect).to eq("<ImportantService>")
       end
 
       context "when service class is anonymous" do

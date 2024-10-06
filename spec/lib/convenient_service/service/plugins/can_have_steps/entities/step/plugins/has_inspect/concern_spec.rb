@@ -30,20 +30,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
   example_group "instance methods" do
     describe "#inspect" do
-      let(:container) do
-        Class.new.tap do |klass|
-          klass.class_exec(service) do |service|
-            include ConvenientService::Standard::Config
-
-            step service
-
-            def self.name
-              "ContainerService"
-            end
-          end
-        end
-      end
-
       let(:service) do
         Class.new do
           include ConvenientService::Standard::Config
@@ -72,7 +58,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         end
 
         it "returns `inspect` representation of step without additional info" do
-          expect(step.inspect).to eq("<#{step.container.klass.name}::Step>")
+          expect(step.inspect).to eq("<ContainerService::Step>")
         end
       end
 
@@ -92,7 +78,19 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         end
 
         it "returns `inspect` representation of step with service class" do
-          expect(step.inspect).to eq("<#{step.container.klass.name}::Step service: #{step.service_class.name}>")
+          expect(step.inspect).to eq("<ContainerService::Step service: StepService>")
+        end
+
+        context "when that service class is anonymous" do
+          let(:service) do
+            Class.new do
+              include ConvenientService::Standard::Config
+            end
+          end
+
+          it "uses custom class name" do
+            expect(step.inspect).to eq("<ContainerService::Step service: AnonymousClass(##{service.object_id})>")
+          end
         end
       end
 
@@ -114,7 +112,23 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         end
 
         it "returns `inspect` representation of step with method" do
-          expect(step.inspect).to eq("<#{step.container.klass.name}::Step method: :result>")
+          expect(step.inspect).to eq("<ContainerService::Step method: :result>")
+        end
+      end
+
+      context "when container class is anonymous" do
+        let(:container) do
+          Class.new.tap do |klass|
+            klass.class_exec(service) do |service|
+              include ConvenientService::Standard::Config
+
+              step "abc"
+            end
+          end
+        end
+
+        it "uses custom class name" do
+          expect(step.inspect).to eq("<AnonymousClass(##{container.object_id})::Step>")
         end
       end
     end

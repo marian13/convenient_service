@@ -20,7 +20,7 @@ module ConvenientService
                             # @return [String]
                             #
                             def inspect
-                              "<#{self.class} value: :#{value}>"
+                              "<#{Utils::Class.display_name(result.service.class)}::Result::Code value: :#{value}>"
                             end
                           end
                         end

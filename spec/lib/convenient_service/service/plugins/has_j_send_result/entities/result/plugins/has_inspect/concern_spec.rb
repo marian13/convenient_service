@@ -37,7 +37,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           include ConvenientService::Standard::Config
 
           def self.name
-            "Service"
+            "ImpoortantService"
           end
 
           def result
@@ -49,7 +49,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       let(:result) { service.result }
 
       it "returns `inspect` representation of result" do
-        expect(result.inspect).to eq("<Service::Result status: :#{result.status}>")
+        expect(result.inspect).to eq("<ImpoortantService::Result status: :#{result.status}>")
       end
 
       context "when result has data" do
@@ -58,7 +58,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
             include ConvenientService::Standard::Config
 
             def self.name
-              "Service"
+              "ImpoortantService"
             end
 
             def result
@@ -68,7 +68,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         end
 
         it "includes data keys into `inspect` representation of result" do
-          expect(result.inspect).to eq("<Service::Result status: :#{result.status}, data_keys: [:foo]>")
+          expect(result.inspect).to eq("<ImpoortantService::Result status: :#{result.status}, data_keys: [:foo]>")
         end
 
         context "when data has multiple keys" do
@@ -77,7 +77,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
               include ConvenientService::Standard::Config
 
               def self.name
-                "Service"
+                "ImpoortantService"
               end
 
               def result
@@ -87,7 +87,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           end
 
           it "delegates to `data.keys.inspect`" do
-            expect(result.inspect).to eq("<Service::Result status: :#{result.status}, data_keys: [:foo, :baz, :quux]>")
+            expect(result.inspect).to eq("<ImpoortantService::Result status: :#{result.status}, data_keys: [:foo, :baz, :quux]>")
           end
         end
       end
@@ -98,7 +98,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
             include ConvenientService::Standard::Config
 
             def self.name
-              "Service"
+              "ImpoortantService"
             end
 
             def result
@@ -108,7 +108,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         end
 
         it "includes message into `inspect` representation of result" do
-          expect(result.inspect).to eq("<Service::Result status: :#{result.status}, message: \"foo\">")
+          expect(result.inspect).to eq("<ImpoortantService::Result status: :#{result.status}, message: \"foo\">")
         end
       end
 
