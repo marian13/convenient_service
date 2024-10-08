@@ -150,16 +150,18 @@ jobs:
         run: task rspec
       - name: Install dependencies for appraisals
         run: task deps:install
-      - name: Run RSpec with Rails 7.1
-        run: APPRAISAL=rails_7.1 task rspec
+      - name: Run RSpec with Rails 7.2
+        run: APPRAISAL=rails_7.2 task rspec
       - name: Run RSpec with Dry
         run: APPRAISAL=dry task rspec
       - name: Run RSpec with Awesome Print
         run: APPRAISAL=awesome_print task rspec
       - name: Run RSpec with Amazing Print
         run: APPRAISAL=amazing_print task rspec
-      - name: Run RSpec with Rails 7.2
-        run: APPRAISAL=rails_7.2 task rspec
+      - name: Run RSpec with Rails 8.0
+        run: APPRAISAL=rails_8.0 task rspec
+      - name: Run RSpec with Rails 7.1
+        run: APPRAISAL=rails_7.1 task rspec
       - name: Run RSpec with Rails 7.0
         run: APPRAISAL=rails_7.0 task rspec
       - name: Run RSpec with Rails 6.1

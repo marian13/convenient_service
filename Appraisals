@@ -106,6 +106,17 @@ if ConvenientService::Dependencies.ruby.version >= 3.1
   end
 end
 
+if ConvenientService::Dependencies.ruby.version >= 3.2
+  appraise "rails_8.0" do
+    gem "activemodel", "~> 8.0.0.beta1"
+
+    ##
+    # NOTE: Waits for `should-matchers` full support.
+    #
+    # gem "shoulda-matchers", "~> 5.0.0"
+  end
+end
+
 appraise "dry" do
   gem "dry-initializer", "~> 3.0.0"
 

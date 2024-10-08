@@ -69,6 +69,7 @@ tasks:
   #   APPRAISAL=rails_7.0 task console
   #   APPRAISAL=rails_7.1 task console
   #   APPRAISAL=rails_7.2 task console
+  #   APPRAISAL=rails_8.0 task console
   #   task console
   #
   # NOTE: Setting `APPRAISAL` after `task console` does NOT work. Consider to open an issue.
@@ -439,6 +440,7 @@ tasks:
   #   APPRAISAL=rails_7.0 task playground
   #   APPRAISAL=rails_7.1 task playground
   #   APPRAISAL=rails_7.2 task playground
+  #   APPRAISAL=rails_8.0 task playground
   #   task playground
   #
   # NOTE: Setting `APPRAISAL` after `task playground` does NOT work. Consider to open an issue.
@@ -477,6 +479,7 @@ tasks:
   #   APPRAISAL=rails_7.0 task rspec
   #   APPRAISAL=rails_7.1 task rspec
   #   APPRAISAL=rails_7.2 task rspec
+  #   APPRAISAL=rails_8.0 task rspec
   #
   # NOTE: It is also possible to run specs only for git staged files.
   #   STAGED=true APPRAISAL=rails_7.0 task rspec
@@ -507,7 +510,7 @@ tasks:
       - task: rspec
       - task: rspec
         vars:
-          APPRAISAL: rails_7.1
+          APPRAISAL: rails_7.2
       - task: rspec
         vars:
           APPRAISAL: dry
@@ -519,7 +522,10 @@ tasks:
           APPRAISAL: amazing_print
       - task: rspec
         vars:
-          APPRAISAL: rails_7.2
+          APPRAISAL: rails_8.0
+      - task: rspec
+        vars:
+          APPRAISAL: rails_7.1
       - task: rspec
         vars:
           APPRAISAL: rails_7.0
