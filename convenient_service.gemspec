@@ -140,6 +140,12 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "debug" if ConvenientService::Dependencies.ruby.mri?
 
   ##
+  # Used for measing memory of `require "convenient_service"`.
+  # - https://github.com/zombocom/derailed_benchmarks
+  #
+  spec.add_development_dependency "derailed_benchmarks", "~> 2.1.2"
+
+  ##
   # Used for finding diffs between strings. Useful in console or specs.
   # - https://github.com/samg/diffy
   #
