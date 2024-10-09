@@ -52,8 +52,10 @@ module ConvenientService
                       #
                       def call
                         return "" unless chain.used_step?
+                        return "without step" unless result.from_step?
+                        return "of step `#{result.step.printable_action}`" unless chain.used_step_index?
 
-                        result.from_step? ? "of step `#{result.step.printable_action}`" : "without step"
+                        "of step `#{result.step.printable_action}` with index `#{result.step.index}`"
                       end
                     end
                   end

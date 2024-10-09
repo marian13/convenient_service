@@ -131,6 +131,25 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
       end
     end
 
+    describe "#used_step_index?" do
+      context "when step index is NOT set" do
+        let(:chain) { described_class.new }
+
+        it "returns `false`" do
+          expect(chain.used_step_index?).to eq(false)
+        end
+      end
+
+      context "when step index is set" do
+        let(:chain) { described_class.new.tap { |chain| chain.step_index = index } }
+        let(:index) { 0 }
+
+        it "returns `true`" do
+          expect(chain.used_step_index?).to eq(true)
+        end
+      end
+    end
+
     describe "#statuses" do
       context "when statuses is NOT set" do
         let(:chain) { described_class.new }

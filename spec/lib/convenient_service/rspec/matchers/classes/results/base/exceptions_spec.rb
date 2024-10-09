@@ -8,4 +8,5 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Excep
   include ConvenientService::RSpec::PrimitiveMatchers::BeDescendantOf
 
   specify { expect(described_class::InvalidStep).to be_descendant_of(ConvenientService::Exception) }
+  specify { expect(described_class::InvalidStepIndex).to be_descendant_of(ConvenientService::Exception) }
 end

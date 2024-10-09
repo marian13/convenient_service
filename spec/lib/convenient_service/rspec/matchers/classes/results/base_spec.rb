@@ -291,14 +291,42 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base, type:
 
       let(:step) { :foo }
 
-      it "sets chain step" do
-        matcher.of_step(step)
+      context "when `index` is NOT passed" do
+        it "sets chain step" do
+          matcher.of_step(step)
 
-        expect(matcher.chain.step).to eq(step)
+          expect(matcher.chain.step).to eq(step)
+        end
+
+        it "does NOT set chain step index" do
+          matcher.of_step(step)
+
+          expect(matcher.chain.step_index).to be_nil
+        end
+
+        it "returns matcher" do
+          expect(matcher.of_step(step)).to eq(matcher)
+        end
       end
 
-      it "returns matcher" do
-        expect(matcher.of_step(step)).to eq(matcher)
+      context "when `index` is passed" do
+        let(:index) { 0 }
+
+        it "sets chain step" do
+          matcher.of_step(step, index: index)
+
+          expect(matcher.chain.step).to eq(step)
+        end
+
+        it "sets chain step index" do
+          matcher.of_step(step, index: index)
+
+          expect(matcher.chain.step_index).to eq(index)
+        end
+
+        it "returns matcher" do
+          expect(matcher.of_step(step, index: index)).to eq(matcher)
+        end
       end
     end
 

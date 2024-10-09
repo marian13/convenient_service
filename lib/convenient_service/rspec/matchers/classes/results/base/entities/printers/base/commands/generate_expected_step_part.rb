@@ -45,8 +45,11 @@ module ConvenientService
                       #
                       def call
                         return "" unless chain.used_step?
+                        return "without step" if chain.step.nil?
+                        return "of step `#{chain.step}`" unless chain.used_step_index?
+                        return "of step `#{chain.step}`" if chain.step_index.nil?
 
-                        chain.step.nil? ? "without step" : "of step `#{chain.step}`"
+                        "of step `#{chain.step}` with index `#{chain.step_index}`"
                       end
                     end
                   end

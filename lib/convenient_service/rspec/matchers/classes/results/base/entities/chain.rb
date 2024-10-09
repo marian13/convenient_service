@@ -74,6 +74,15 @@ module ConvenientService
                 ##
                 # @api private
                 #
+                # @return [Boolean]
+                #
+                def used_step_index?
+                  hash.key?(:step_index)
+                end
+
+                ##
+                # @api private
+                #
                 # @return [Array<Symbol>]
                 #
                 def statuses
@@ -101,7 +110,7 @@ module ConvenientService
                 ##
                 # @api private
                 #
-                # @return [String, Symbol]
+                # @return [String, Symbol, nil]
                 #
                 def code
                   hash[:code]
@@ -119,7 +128,7 @@ module ConvenientService
                 ##
                 # @api private
                 #
-                # @return [ConvenientService::Service]
+                # @return [ConvenientService::Service, nil]
                 #
                 def service
                   hash[:service]
@@ -128,7 +137,7 @@ module ConvenientService
                 ##
                 # @api private
                 #
-                # @return [ConvenientService::Service]
+                # @return [ConvenientService::Service, nil]
                 #
                 def original_service
                   hash[:original_service]
@@ -137,10 +146,19 @@ module ConvenientService
                 ##
                 # @api private
                 #
-                # @return [ConvenientService::Service, Symbol]
+                # @return [ConvenientService::Service, Symbol, nil]
                 #
                 def step
                   hash[:step]
+                end
+
+                ##
+                # @api private
+                #
+                # @return [Integer, nil]
+                #
+                def step_index
+                  hash[:step_index]
                 end
 
                 ##
@@ -221,6 +239,16 @@ module ConvenientService
                 #
                 def step=(other_step)
                   hash[:step] = other_step
+                end
+
+                ##
+                # @api private
+                #
+                # @param other_step_index [Integer]
+                # @return [Integer]
+                #
+                def step_index=(other_step_index)
+                  hash[:step_index] = other_step_index
                 end
 
                 ##

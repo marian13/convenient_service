@@ -212,10 +212,12 @@ module ConvenientService
             # @api public
             #
             # @param step [Class, Symbol]
+            # @param index [Integer]
             # @return [ConvenientService::RSpec::Matchers::Classes::Results::Base]
             #
-            def of_step(step)
+            def of_step(step, index: nil)
               chain.step = step
+              chain.step_index = index if index
 
               self
             end

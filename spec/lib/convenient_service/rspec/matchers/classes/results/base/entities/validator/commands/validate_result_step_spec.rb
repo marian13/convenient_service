@@ -4,7 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-# rubocop:disable RSpec/NestedGroups
+# rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entities::Validator::Commands::ValidateResultStep, type: :standard do
   include ConvenientService::RSpec::Helpers::IgnoringException
 
@@ -53,7 +53,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
             <<~TEXT
               Step `#{step}` is NOT valid.
 
-              `of_step` only accepts a Class or a Symbol. For example:
+              `of_step` only accepts a `Class` or a `Symbol`. For example:
 
               be_success.of_step(ReadFileContent)
               be_success.of_step(:validate_path)
@@ -137,8 +137,59 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
                   end
                 end
 
-                it "returns `true`" do
-                  expect(command_result).to eq(true)
+                context "when step index chain is NOT used" do
+                  it "returns `true`" do
+                    expect(command_result).to eq(true)
+                  end
+                end
+
+                context "when step index chain is used" do
+                  let(:matcher) { be_success.of_step(step, index: step_index).tap { |matcher| matcher.matches?(result) } }
+
+                  context "when step index is NOT valid" do
+                    let(:step_index) { "abc" }
+
+                    let(:exception_message) do
+                      <<~TEXT
+                        Step index `#{step_index}` is NOT valid.
+
+                        `of_step` only accepts an `Integer` as `index`. For example:
+
+                        be_success.of_step(ReadFileContent, index: 0)
+                        be_success.of_step(:validate_path, index: 1)
+                        be_success.of_step(:result, index: 2)
+                      TEXT
+                    end
+
+                    it "raises `ConvenientService::RSpec::Matchers::Classes::Results::Base::Exceptions::InvalidStepIndex`" do
+                      expect { command_result }
+                        .to raise_error(ConvenientService::RSpec::Matchers::Classes::Results::Base::Exceptions::InvalidStepIndex)
+                        .with_message(exception_message)
+                    end
+
+                    specify do
+                      expect { ignoring_exception(ConvenientService::RSpec::Matchers::Classes::Results::Base::Exceptions::InvalidStepIndex) { command_result } }
+                        .to delegate_to(ConvenientService, :raise)
+                    end
+                  end
+
+                  context "when step index is valid" do
+                    context "when result step index is NOT same as index" do
+                      let(:step_index) { 1 }
+
+                      it "returns `false`" do
+                        expect(command_result).to eq(false)
+                      end
+                    end
+
+                    context "when result step index is same as index" do
+                      let(:step_index) { 0 }
+
+                      it "returns `true`" do
+                        expect(command_result).to eq(true)
+                      end
+                    end
+                  end
                 end
               end
             end
@@ -196,8 +247,59 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
                     end
                   end
 
-                  it "returns `true`" do
-                    expect(command_result).to eq(true)
+                  context "when step index chain is NOT used" do
+                    it "returns `true`" do
+                      expect(command_result).to eq(true)
+                    end
+                  end
+
+                  context "when step index chain is used" do
+                    let(:matcher) { be_success.of_step(step, index: step_index).tap { |matcher| matcher.matches?(result) } }
+
+                    context "when step index is NOT valid" do
+                      let(:step_index) { "abc" }
+
+                      let(:exception_message) do
+                        <<~TEXT
+                          Step index `#{step_index}` is NOT valid.
+
+                          `of_step` only accepts an `Integer` as `index`. For example:
+
+                          be_success.of_step(ReadFileContent, index: 0)
+                          be_success.of_step(:validate_path, index: 1)
+                          be_success.of_step(:result, index: 2)
+                        TEXT
+                      end
+
+                      it "raises `ConvenientService::RSpec::Matchers::Classes::Results::Base::Exceptions::InvalidStepIndex`" do
+                        expect { command_result }
+                          .to raise_error(ConvenientService::RSpec::Matchers::Classes::Results::Base::Exceptions::InvalidStepIndex)
+                          .with_message(exception_message)
+                      end
+
+                      specify do
+                        expect { ignoring_exception(ConvenientService::RSpec::Matchers::Classes::Results::Base::Exceptions::InvalidStepIndex) { command_result } }
+                          .to delegate_to(ConvenientService, :raise)
+                      end
+                    end
+
+                    context "when step index is valid" do
+                      context "when result step index is NOT same as index" do
+                        let(:step_index) { 1 }
+
+                        it "returns `false`" do
+                          expect(command_result).to eq(false)
+                        end
+                      end
+
+                      context "when result step index is same as index" do
+                        let(:step_index) { 0 }
+
+                        it "returns `true`" do
+                          expect(command_result).to eq(true)
+                        end
+                      end
+                    end
                   end
                 end
               end
@@ -254,8 +356,59 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
                     end
                   end
 
-                  it "returns `true`" do
-                    expect(command_result).to eq(true)
+                  context "when step index chain is NOT used" do
+                    it "returns `true`" do
+                      expect(command_result).to eq(true)
+                    end
+                  end
+
+                  context "when step index chain is used" do
+                    let(:matcher) { be_success.of_step(step, index: step_index).tap { |matcher| matcher.matches?(result) } }
+
+                    context "when step index is NOT valid" do
+                      let(:step_index) { "abc" }
+
+                      let(:exception_message) do
+                        <<~TEXT
+                          Step index `#{step_index}` is NOT valid.
+
+                          `of_step` only accepts an `Integer` as `index`. For example:
+
+                          be_success.of_step(ReadFileContent, index: 0)
+                          be_success.of_step(:validate_path, index: 1)
+                          be_success.of_step(:result, index: 2)
+                        TEXT
+                      end
+
+                      it "raises `ConvenientService::RSpec::Matchers::Classes::Results::Base::Exceptions::InvalidStepIndex`" do
+                        expect { command_result }
+                          .to raise_error(ConvenientService::RSpec::Matchers::Classes::Results::Base::Exceptions::InvalidStepIndex)
+                          .with_message(exception_message)
+                      end
+
+                      specify do
+                        expect { ignoring_exception(ConvenientService::RSpec::Matchers::Classes::Results::Base::Exceptions::InvalidStepIndex) { command_result } }
+                          .to delegate_to(ConvenientService, :raise)
+                      end
+                    end
+
+                    context "when step index is valid" do
+                      context "when result step index is NOT same as index" do
+                        let(:step_index) { 1 }
+
+                        it "returns `false`" do
+                          expect(command_result).to eq(false)
+                        end
+                      end
+
+                      context "when result step index is same as index" do
+                        let(:step_index) { 0 }
+
+                        it "returns `true`" do
+                          expect(command_result).to eq(true)
+                        end
+                      end
+                    end
                   end
                 end
               end
@@ -304,4 +457,4 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
     end
   end
 end
-# rubocop:enable RSpec/NestedGroups
+# rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
