@@ -83,7 +83,7 @@ module ConvenientService
                     # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data]
                     #
                     def casted_data
-                      result.create_data(data)
+                      result.create_data!(data)
                     end
                   end
                 end

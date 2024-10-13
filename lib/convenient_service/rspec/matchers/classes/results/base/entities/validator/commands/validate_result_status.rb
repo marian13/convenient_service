@@ -78,7 +78,7 @@ module ConvenientService
                     # @return [Array<ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status>]
                     #
                     def casted_statuses
-                      statuses.map { |status| result.create_status(status) }
+                      statuses.map { |status| result.create_status!(status) }
                     end
                   end
                 end

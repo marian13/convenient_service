@@ -59,7 +59,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Concern::Cla
         end
 
         it "defaults `data` to `ConvenientService::Service::Plugins::HasJSendResult::Constants::DEFAUTL_SUCCESS_DATA`" do
-          expect(result.data).to eq(result.create_data(constants::DEFAULT_SUCCESS_DATA))
+          expect(result.data).to eq(result.create_data!(constants::DEFAULT_SUCCESS_DATA))
         end
       end
 
@@ -71,7 +71,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Concern::Cla
         end
 
         it "defaults `message` to `ConvenientService::Service::Plugins::HasJSendResult::Constants::DEFAULT_SUCCESS_MESSAGE`" do
-          expect(result.message).to eq(result.create_message(constants::DEFAULT_SUCCESS_MESSAGE))
+          expect(result.message).to eq(result.create_message!(constants::DEFAULT_SUCCESS_MESSAGE))
         end
       end
 
@@ -83,7 +83,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Concern::Cla
         end
 
         it "defaults `code` to `ConvenientService::Service::Plugins::HasJSendResult::Constants::DEFAULT_SUCCESS_CODE`" do
-          expect(result.code).to eq(result.create_code(ConvenientService::Service::Plugins::HasJSendResult::Constants::DEFAULT_SUCCESS_CODE))
+          expect(result.code).to eq(result.create_code!(ConvenientService::Service::Plugins::HasJSendResult::Constants::DEFAULT_SUCCESS_CODE))
         end
       end
     end
@@ -117,7 +117,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Concern::Cla
         end
 
         it "defaults `data` to `ConvenientService::Service::Plugins::HasJSendResult::Constants::DEFAUTL_FAILURE_DATA`" do
-          expect(result.data).to eq(result.create_data(constants::DEFAULT_FAILURE_DATA))
+          expect(result.data).to eq(result.create_data!(constants::DEFAULT_FAILURE_DATA))
         end
       end
 
@@ -129,7 +129,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Concern::Cla
         end
 
         it "defaults `message` to `ConvenientService::Service::Plugins::HasJSendResult::Constants::DEFAULT_FAILURE_MESSAGE`" do
-          expect(result.message).to eq(result.create_message(constants::DEFAULT_FAILURE_MESSAGE))
+          expect(result.message).to eq(result.create_message!(constants::DEFAULT_FAILURE_MESSAGE))
         end
       end
 
@@ -141,7 +141,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Concern::Cla
         end
 
         it "defaults `code` to `ConvenientService::Service::Plugins::HasJSendResult::Constants::DEFAULT_FAILURE_CODE`" do
-          expect(result.code).to eq(result.create_code(ConvenientService::Service::Plugins::HasJSendResult::Constants::DEFAULT_FAILURE_CODE))
+          expect(result.code).to eq(result.create_code!(ConvenientService::Service::Plugins::HasJSendResult::Constants::DEFAULT_FAILURE_CODE))
         end
       end
     end
@@ -175,7 +175,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Concern::Cla
         end
 
         it "defaults `data` to `ConvenientService::Service::Plugins::HasJSendResult::Constants::DEFAUTL_ERROR_DATA`" do
-          expect(result.data).to eq(result.create_data(constants::DEFAULT_ERROR_DATA))
+          expect(result.data).to eq(result.create_data!(constants::DEFAULT_ERROR_DATA))
         end
       end
 
@@ -187,7 +187,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Concern::Cla
         end
 
         it "defaults `message` to `ConvenientService::Service::Plugins::HasJSendResult::Constants::DEFAULT_ERROR_MESSAGE`" do
-          expect(result.message).to eq(result.create_message(constants::DEFAULT_ERROR_MESSAGE))
+          expect(result.message).to eq(result.create_message!(constants::DEFAULT_ERROR_MESSAGE))
         end
       end
 
@@ -199,7 +199,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Concern::Cla
         end
 
         it "defaults `code` to `ConvenientService::Service::Plugins::HasJSendResult::Constants::DEFAULT_ERROR_CODE`" do
-          expect(result.code).to eq(result.create_code(ConvenientService::Service::Plugins::HasJSendResult::Constants::DEFAULT_ERROR_CODE))
+          expect(result.code).to eq(result.create_code!(ConvenientService::Service::Plugins::HasJSendResult::Constants::DEFAULT_ERROR_CODE))
         end
       end
     end

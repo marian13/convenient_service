@@ -83,7 +83,7 @@ module ConvenientService
                     # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message]
                     #
                     def casted_message
-                      result.create_message(message)
+                      result.create_message!(message)
                     end
                   end
                 end

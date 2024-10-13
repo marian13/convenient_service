@@ -47,7 +47,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
     describe "#casted_status" do
       specify do
         expect { handler.casted_status }
-          .to delegate_to(result, :create_status)
+          .to delegate_to(result, :create_status!)
           .with_arguments(status)
           .and_return_its_value
       end
@@ -60,7 +60,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
     describe "#casted_data" do
       specify do
         expect { handler.casted_data }
-          .to delegate_to(result, :create_data)
+          .to delegate_to(result, :create_data!)
           .with_arguments(data)
           .and_return_its_value
       end
@@ -73,7 +73,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
     describe "#casted_message" do
       specify do
         expect { handler.casted_message }
-          .to delegate_to(result, :create_message)
+          .to delegate_to(result, :create_message!)
           .with_arguments(message)
           .and_return_its_value
       end
@@ -86,7 +86,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
     describe "#casted_code" do
       specify do
         expect { handler.casted_code }
-          .to delegate_to(result, :create_code)
+          .to delegate_to(result, :create_code!)
           .with_arguments(code)
           .and_return_its_value
       end
@@ -141,15 +141,15 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         end
 
         specify do
-          expect { handler.matches? }.not_to delegate_to(result, :create_data)
+          expect { handler.matches? }.not_to delegate_to(result, :create_data!)
         end
 
         specify do
-          expect { handler.matches? }.not_to delegate_to(result, :create_message)
+          expect { handler.matches? }.not_to delegate_to(result, :create_message!)
         end
 
         specify do
-          expect { handler.matches? }.not_to delegate_to(result, :create_code)
+          expect { handler.matches? }.not_to delegate_to(result, :create_code!)
         end
 
         it "returns `true`" do

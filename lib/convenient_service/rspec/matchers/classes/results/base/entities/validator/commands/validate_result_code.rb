@@ -83,7 +83,7 @@ module ConvenientService
                     # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code]
                     #
                     def casted_code
-                      result.create_code(code)
+                      result.create_code!(code)
                     end
                   end
                 end

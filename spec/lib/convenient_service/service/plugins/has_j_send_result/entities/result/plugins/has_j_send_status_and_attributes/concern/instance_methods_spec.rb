@@ -72,7 +72,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
 
     describe "#status" do
       it "returns casted `status`" do
-        expect(result_instance.status).to eq(result_instance.create_status(params[:status]))
+        expect(result_instance.status).to eq(result_instance.create_status!(params[:status]))
       end
     end
 
@@ -82,13 +82,13 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       end
 
       it "returns casted `data`" do
-        expect(result_instance.data).to eq(result_instance.create_data(params[:data]))
+        expect(result_instance.data).to eq(result_instance.create_data!(params[:data]))
       end
     end
 
     describe "#unsafe_data" do
       it "returns casted `data`" do
-        expect(result_instance.unsafe_data).to eq(result_instance.create_data(params[:data]))
+        expect(result_instance.unsafe_data).to eq(result_instance.create_data!(params[:data]))
       end
     end
 
@@ -98,13 +98,13 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       end
 
       it "returns casted `message`" do
-        expect(result_instance.message).to eq(result_instance.create_message(params[:message]))
+        expect(result_instance.message).to eq(result_instance.create_message!(params[:message]))
       end
     end
 
     describe "#unsafe_message" do
       it "returns casted `message`" do
-        expect(result_instance.unsafe_message).to eq(result_instance.create_message(params[:message]))
+        expect(result_instance.unsafe_message).to eq(result_instance.create_message!(params[:message]))
       end
     end
 
@@ -114,13 +114,13 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       end
 
       it "returns casted `code`" do
-        expect(result_instance.code).to eq(result_instance.create_code(params[:code]))
+        expect(result_instance.code).to eq(result_instance.create_code!(params[:code]))
       end
     end
 
     describe "#unsafe_code" do
       it "returns casted `code`" do
-        expect(result_instance.unsafe_code).to eq(result_instance.create_code(params[:code]))
+        expect(result_instance.unsafe_code).to eq(result_instance.create_code!(params[:code]))
       end
     end
 
@@ -140,36 +140,36 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       end
     end
 
-    describe "#create_status" do
+    describe "#create_status!" do
       specify do
-        expect { result_instance.create_status(params[:status]) }
+        expect { result_instance.create_status!(params[:status]) }
           .to delegate_to(result_class.status_class, :cast!)
             .with_arguments(params[:status])
             .and_return { |status| status.copy(overrides: {kwargs: {result: result_instance}}) }
       end
     end
 
-    describe "#create_data" do
+    describe "#create_data!" do
       specify do
-        expect { result_instance.create_data(params[:data]) }
+        expect { result_instance.create_data!(params[:data]) }
           .to delegate_to(result_class.data_class, :cast!)
             .with_arguments(params[:data])
             .and_return { |data| data.copy(overrides: {kwargs: {result: result_instance}}) }
       end
     end
 
-    describe "#create_message" do
+    describe "#create_message!" do
       specify do
-        expect { result_instance.create_message(params[:message]) }
+        expect { result_instance.create_message!(params[:message]) }
           .to delegate_to(result_class.message_class, :cast!)
             .with_arguments(params[:message])
             .and_return { |message| message.copy(overrides: {kwargs: {result: result_instance}}) }
       end
     end
 
-    describe "#create_code" do
+    describe "#create_code!" do
       specify do
-        expect { result_instance.create_code(params[:code]) }
+        expect { result_instance.create_code!(params[:code]) }
           .to delegate_to(result_class.code_class, :cast!)
             .with_arguments(params[:code])
             .and_return { |code| code.copy(overrides: {kwargs: {result: result_instance}}) }
@@ -260,10 +260,10 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       let(:kwargs) do
         {
           service: service_instance,
-          status: result_instance.create_status(:foo),
-          data: result_instance.create_data({foo: :bar}),
-          message: result_instance.create_message("foo"),
-          code: result_instance.create_code(:foo)
+          status: result_instance.create_status!(:foo),
+          data: result_instance.create_data!({foo: :bar}),
+          message: result_instance.create_message!("foo"),
+          code: result_instance.create_code!(:foo)
         }
       end
 

@@ -82,11 +82,11 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
             end
 
             example_group "`comparing_by` chain" do
-              let(:result_message) { result.create_message(chain_message) }
+              let(:result_message) { result.create_message!(chain_message) }
 
               context "when `comparing_by` is NOT used" do
                 specify do
-                  allow(result).to receive(:create_message).with(chain_message).and_return(result_message)
+                  allow(result).to receive(:create_message!).with(chain_message).and_return(result_message)
 
                   expect { command_result }
                     .to delegate_to(result_message, :==)
@@ -100,7 +100,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
                 let(:comparison_method) { :=== }
 
                 specify do
-                  allow(result).to receive(:create_message).with(chain_message).and_return(result_message)
+                  allow(result).to receive(:create_message!).with(chain_message).and_return(result_message)
 
                   expect { command_result }
                     .to delegate_to(result_message, comparison_method)

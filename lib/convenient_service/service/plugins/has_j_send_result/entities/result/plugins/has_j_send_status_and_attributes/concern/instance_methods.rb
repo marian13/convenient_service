@@ -103,7 +103,7 @@ module ConvenientService
                     # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status]
                     # @raise [ConvenientService::Support::Castable::Exceptions::FailedToCast]
                     #
-                    def create_status(status)
+                    def create_status!(status)
                       self.class.status_class.cast!(status).copy(overrides: {kwargs: {result: self}})
                     end
 
@@ -112,7 +112,7 @@ module ConvenientService
                     # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data]
                     # @raise [ConvenientService::Support::Castable::Exceptions::FailedToCast]
                     #
-                    def create_data(data)
+                    def create_data!(data)
                       self.class.data_class.cast!(data).copy(overrides: {kwargs: {result: self}})
                     end
 
@@ -121,7 +121,7 @@ module ConvenientService
                     # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message]
                     # @raise [ConvenientService::Support::Castable::Exceptions::FailedToCast]
                     #
-                    def create_message(message)
+                    def create_message!(message)
                       self.class.message_class.cast!(message).copy(overrides: {kwargs: {result: self}})
                     end
 
@@ -130,7 +130,7 @@ module ConvenientService
                     # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code]
                     # @raise [ConvenientService::Support::Castable::Exceptions::FailedToCast]
                     #
-                    def create_code(code)
+                    def create_code!(code)
                       self.class.code_class.cast!(code).copy(overrides: {kwargs: {result: self}})
                     end
 

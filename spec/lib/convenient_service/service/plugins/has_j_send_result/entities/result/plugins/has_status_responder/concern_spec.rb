@@ -2158,7 +2158,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
             end
 
             it "passes casted `status` as `status` kwarg" do
-              expect(result.respond_to(&block)).to eq(result.create_status(:success))
+              expect(result.respond_to(&block)).to eq(result.create_status!(:success))
             end
           end
 
@@ -2229,7 +2229,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
                 end
 
                 it "passes casted `data` as `data` kwarg" do
-                  expect(result.respond_to(&block)).to eq(result.create_data(foo: :bar))
+                  expect(result.respond_to(&block)).to eq(result.create_data!(foo: :bar))
                 end
               end
             end
@@ -2302,7 +2302,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
                 end
 
                 it "passes casted `message` as `message` kwarg" do
-                  expect(result.respond_to(&block)).to eq(result.create_message("foo"))
+                  expect(result.respond_to(&block)).to eq(result.create_message!("foo"))
                 end
               end
             end
@@ -2375,7 +2375,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
                 end
 
                 it "passes casted `code` as `code` kwarg" do
-                  expect(result.respond_to(&block)).to eq(result.create_code(:foo))
+                  expect(result.respond_to(&block)).to eq(result.create_code!(:foo))
                 end
               end
             end
