@@ -140,12 +140,58 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       end
     end
 
+    describe "#create_status" do
+      specify do
+        expect { result_instance.create_status(params[:status]) }
+          .to delegate_to(result_class.status_class, :cast)
+            .with_arguments(params[:status])
+            .and_return { |status| status.copy(overrides: {kwargs: {result: result_instance}}) }
+      end
+
+      context "when `status` is NOT castable" do
+        it "returns `nil`" do
+          expect(result_instance.create_status(42)).to be_nil
+        end
+      end
+    end
+
     describe "#create_status!" do
       specify do
         expect { result_instance.create_status!(params[:status]) }
           .to delegate_to(result_class.status_class, :cast!)
             .with_arguments(params[:status])
             .and_return { |status| status.copy(overrides: {kwargs: {result: result_instance}}) }
+      end
+
+      context "when `status` NOT castable" do
+        let(:status) { 42 }
+
+        let(:exception_message) do
+          <<~TEXT
+            Failed to cast `42` into `#{result_class.status_class}`.
+          TEXT
+        end
+
+        it "raises `ConvenientService::Support::Castable::Exceptions::FailedToCast`" do
+          expect { result_instance.create_status!(42) }
+            .to raise_error(ConvenientService::Support::Castable::Exceptions::FailedToCast)
+            .with_message(exception_message)
+        end
+      end
+    end
+
+    describe "#create_data" do
+      specify do
+        expect { result_instance.create_data(params[:data]) }
+          .to delegate_to(result_class.data_class, :cast)
+            .with_arguments(params[:data])
+            .and_return { |data| data.copy(overrides: {kwargs: {result: result_instance}}) }
+      end
+
+      context "when `data` is NOT castable" do
+        it "returns `nil`" do
+          expect(result_instance.create_data(42)).to be_nil
+        end
       end
     end
 
@@ -156,6 +202,37 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
             .with_arguments(params[:data])
             .and_return { |data| data.copy(overrides: {kwargs: {result: result_instance}}) }
       end
+
+      context "when `data` NOT castable" do
+        let(:data) { 42 }
+
+        let(:exception_message) do
+          <<~TEXT
+            Failed to cast `42` into `#{result_class.data_class}`.
+          TEXT
+        end
+
+        it "raises `ConvenientService::Support::Castable::Exceptions::FailedToCast`" do
+          expect { result_instance.create_data!(42) }
+            .to raise_error(ConvenientService::Support::Castable::Exceptions::FailedToCast)
+            .with_message(exception_message)
+        end
+      end
+    end
+
+    describe "#create_message" do
+      specify do
+        expect { result_instance.create_message(params[:message]) }
+          .to delegate_to(result_class.message_class, :cast)
+            .with_arguments(params[:message])
+            .and_return { |message| message.copy(overrides: {kwargs: {result: result_instance}}) }
+      end
+
+      context "when `message` is NOT castable" do
+        it "returns `nil`" do
+          expect(result_instance.create_message(42)).to be_nil
+        end
+      end
     end
 
     describe "#create_message!" do
@@ -165,6 +242,37 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
             .with_arguments(params[:message])
             .and_return { |message| message.copy(overrides: {kwargs: {result: result_instance}}) }
       end
+
+      context "when `message` NOT castable" do
+        let(:message) { 42 }
+
+        let(:exception_message) do
+          <<~TEXT
+            Failed to cast `42` into `#{result_class.message_class}`.
+          TEXT
+        end
+
+        it "raises `ConvenientService::Support::Castable::Exceptions::FailedToCast`" do
+          expect { result_instance.create_message!(42) }
+            .to raise_error(ConvenientService::Support::Castable::Exceptions::FailedToCast)
+            .with_message(exception_message)
+        end
+      end
+    end
+
+    describe "#create_code" do
+      specify do
+        expect { result_instance.create_code(params[:code]) }
+          .to delegate_to(result_class.code_class, :cast)
+            .with_arguments(params[:code])
+            .and_return { |code| code.copy(overrides: {kwargs: {result: result_instance}}) }
+      end
+
+      context "when `code` is NOT castable" do
+        it "returns `nil`" do
+          expect(result_instance.create_code(42)).to be_nil
+        end
+      end
     end
 
     describe "#create_code!" do
@@ -173,6 +281,22 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           .to delegate_to(result_class.code_class, :cast!)
             .with_arguments(params[:code])
             .and_return { |code| code.copy(overrides: {kwargs: {result: result_instance}}) }
+      end
+
+      context "when `code` NOT castable" do
+        let(:code) { 42 }
+
+        let(:exception_message) do
+          <<~TEXT
+            Failed to cast `42` into `#{result_class.code_class}`.
+          TEXT
+        end
+
+        it "raises `ConvenientService::Support::Castable::Exceptions::FailedToCast`" do
+          expect { result_instance.create_code!(42) }
+            .to raise_error(ConvenientService::Support::Castable::Exceptions::FailedToCast)
+            .with_message(exception_message)
+        end
       end
     end
 
