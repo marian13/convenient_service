@@ -39,20 +39,27 @@ module ConvenientService
       # @param other [Object] Can be any type.
       # @return [Boolean, nil]
       #
+      # @internal
+      #   IMPORTANT: Do NOT delegate to `==` from `eql?`. When user overrides `==` then it can break `eql?`.
+      #   - https://shopify.engineering/implementing-equality-in-ruby
+      #   - https://github.com/ruby/ruby/blob/v3_3_0/hash.c#L3719
+      #   - https://belighted.com/blog/overriding-equals-equals
+      #
       def eql?(other)
         return unless other.instance_of?(self.class)
 
-        hash == other.hash
+        label == other.label
       end
 
       ##
       # @return [Integer]
       #
       # @internal
-      #   IMPORTANT: What to do with collisions?
+      #   NOTE: Common way to implement hash.
+      #   - https://shopify.engineering/implementing-equality-in-ruby
       #
       def hash
-        label.hash
+        [self.class, label].hash
       end
 
       ##

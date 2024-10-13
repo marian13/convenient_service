@@ -137,15 +137,15 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Key, type: :standard
     end
 
     describe "#hash" do
-      it "returns hash based on `args`, `kwargs`, and `block` source location" do
-        expect(key.hash).to eq([args, kwargs, block.source_location].hash)
+      it "returns hash based on class, `args`, `kwargs`, and `block` source location" do
+        expect(key.hash).to eq([described_class, args, kwargs, block.source_location].hash)
       end
 
       context "when `block` in `nil`" do
         let(:block) { nil }
 
         it "uses `nil` hash for `block`" do
-          expect(key.hash).to eq([args, kwargs, nil].hash)
+          expect(key.hash).to eq([described_class, args, kwargs, nil].hash)
         end
       end
     end

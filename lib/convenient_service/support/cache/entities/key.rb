@@ -84,8 +84,11 @@ module ConvenientService
           #   - https://shopify.engineering/implementing-equality-in-ruby
           #   - https://ruby-doc.org/core-2.7.1/Array.html#method-i-hash
           #
+          #   NOTE: Common way to implement hash.
+          #   - https://shopify.engineering/implementing-equality-in-ruby
+          #
           def hash
-            [args, kwargs, block&.source_location].hash
+            [self.class, args, kwargs, block&.source_location].hash
           end
 
           protected

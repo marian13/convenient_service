@@ -64,7 +64,7 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::T
         end
       end
 
-      context "when types have different hashes" do
+      context "when types have different values" do
         let(:other) { described_class.new(value: :after) }
 
         it "returns `false`" do
@@ -72,12 +72,18 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::T
         end
       end
 
-      context "when types have same hashes" do
+      context "when types have same attributes" do
         let(:other) { described_class.new(value: value) }
 
         it "returns `true`" do
           expect(type.eql?(other)).to eq(true)
         end
+      end
+    end
+
+    describe "#hash" do
+      it "returns hash based on class and value" do
+        expect(type.hash).to eq([described_class, value].hash)
       end
     end
   end

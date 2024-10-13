@@ -96,11 +96,11 @@ RSpec.describe ConvenientService::Utils::Array::ContainExactly, type: :standard 
             end
 
             def hash
-              value.hash
+              [self.class, value].hash
             end
 
             def eql?(other)
-              hash == other.hash
+              value == other.value
             end
           end
         end

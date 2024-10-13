@@ -31,6 +31,12 @@ RSpec.describe ConvenientService::Support::UniqueValue, type: :standard do
   end
 
   example_group "instance methods" do
+    describe "#hash" do
+      it "returns hash based on class and label" do
+        expect(unique_value.hash).to eq([described_class, label].hash)
+      end
+    end
+
     describe "#inspect" do
       let(:inspect_representation) { label }
 
@@ -114,7 +120,7 @@ RSpec.describe ConvenientService::Support::UniqueValue, type: :standard do
         end
       end
 
-      describe ".eql?" do
+      describe "#eql?" do
         let(:unique_value) { described_class.new("foo") }
 
         context "when `other` has different class" do

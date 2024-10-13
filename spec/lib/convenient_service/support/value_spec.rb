@@ -32,8 +32,8 @@ RSpec.describe ConvenientService::Support::Value, type: :standard do
 
   example_group "instance methods" do
     describe "#hash" do
-      it "returns label hash" do
-        expect(value.hash).to eq(label.hash)
+      it "returns hash based on class and label" do
+        expect(value.hash).to eq([described_class, label].hash)
       end
     end
 
@@ -120,7 +120,7 @@ RSpec.describe ConvenientService::Support::Value, type: :standard do
         end
       end
 
-      describe ".eql?" do
+      describe "#eql?" do
         let(:value) { described_class.new("foo") }
 
         context "when `other` has different class" do
@@ -131,7 +131,7 @@ RSpec.describe ConvenientService::Support::Value, type: :standard do
           end
         end
 
-        context "when `other` has different `hash`" do
+        context "when `other` has different `label`" do
           let(:other) { described_class.new("bar") }
 
           it "returns `false`" do
@@ -139,7 +139,7 @@ RSpec.describe ConvenientService::Support::Value, type: :standard do
           end
         end
 
-        context "when `other` has same `hash`" do
+        context "when `other` has same `label`" do
           let(:other) { described_class.new("foo") }
 
           it "returns `true`" do

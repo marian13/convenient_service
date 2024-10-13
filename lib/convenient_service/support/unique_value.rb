@@ -43,10 +43,26 @@ module ConvenientService
       # @return [Boolean, nil]
       #
       # @internal
-      #   TODO: What to do in case unique value is used as hash key? See `ConveninetService::Support::Cache::Entities::Key`.
+      #   IMPORTANT: Do NOT delegate to `==` from `eql?`. When user overrides `==` then it can break `eql?`.
+      #   - https://shopify.engineering/implementing-equality-in-ruby
+      #   - https://github.com/ruby/ruby/blob/v3_3_0/hash.c#L3719
+      #   - https://belighted.com/blog/overriding-equals-equals
       #
       def eql?(other)
-        self == other
+        return unless other.instance_of?(self.class)
+
+        object_id == other.object_id
+      end
+
+      ##
+      # @return [Integer]
+      #
+      # @internal
+      #   NOTE: Common way to implement hash.
+      #   - https://shopify.engineering/implementing-equality-in-ruby
+      #
+      def hash
+        [self.class, label].hash
       end
 
       ##

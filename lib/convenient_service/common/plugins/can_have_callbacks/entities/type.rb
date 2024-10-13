@@ -20,11 +20,6 @@ module ConvenientService
             attr_reader :value
 
             ##
-            # @return [Integer]
-            #
-            delegate :hash, to: :value
-
-            ##
             # @param value [Symbol]
             # @return [void]
             #
@@ -56,10 +51,28 @@ module ConvenientService
             #
             #   IMPORTANT: Do NOT use `eql?` without a strong reason, prefer `==`.
             #
+            #   IMPORTANT: Do NOT delegate to `==` from `eql?`. When user overrides `==` then it can break `eql?`.
+            #   - https://shopify.engineering/implementing-equality-in-ruby
+            #   - https://github.com/ruby/ruby/blob/v3_3_0/hash.c#L3719
+            #   - https://belighted.com/blog/overriding-equals-equals
+            #
             def eql?(other)
               return unless other.instance_of?(self.class)
 
-              hash == other.hash
+              return false if value != other.value
+
+              true
+            end
+
+            ##
+            # @return [Integer]
+            #
+            # @internal
+            #   NOTE: Common way to implement hash.
+            #   - https://shopify.engineering/implementing-equality-in-ruby
+            #
+            def hash
+              [self.class, value].hash
             end
           end
         end
