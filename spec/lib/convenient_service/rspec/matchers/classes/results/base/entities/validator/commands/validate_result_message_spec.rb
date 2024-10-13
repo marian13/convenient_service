@@ -82,7 +82,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
             end
 
             example_group "`comparing_by` chain" do
-              let(:result_message) { result.class.message(value: chain_message, result: result) }
+              let(:result_message) { result.create_message(chain_message) }
 
               context "when `comparing_by` is NOT used" do
                 specify do

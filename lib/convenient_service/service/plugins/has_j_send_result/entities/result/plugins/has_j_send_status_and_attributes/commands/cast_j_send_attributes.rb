@@ -54,7 +54,7 @@ module ConvenientService
                     # @raise [ConvenientService::Support::Castable::Exceptions::FailedToCast]
                     #
                     def status
-                      @status ||= result.class.status(value: kwargs[:status], result: result)
+                      @status ||= result.create_status(kwargs[:status])
                     end
 
                     ##
@@ -62,7 +62,7 @@ module ConvenientService
                     # @raise [ConvenientService::Support::Castable::Exceptions::FailedToCast]
                     #
                     def data
-                      @data ||= result.class.data(value: kwargs[:data], result: result)
+                      @data ||= result.create_data(kwargs[:data])
                     end
 
                     ##
@@ -70,7 +70,7 @@ module ConvenientService
                     # @raise [ConvenientService::Support::Castable::Exceptions::FailedToCast]
                     #
                     def message
-                      @message ||= result.class.message(value: kwargs[:message], result: result)
+                      @message ||= result.create_message(kwargs[:message])
                     end
 
                     ##
@@ -78,7 +78,7 @@ module ConvenientService
                     # @raise [ConvenientService::Support::Castable::Exceptions::FailedToCast]
                     #
                     def code
-                      @code ||= result.class.code(value: kwargs[:code], result: result)
+                      @code ||= result.create_code(kwargs[:code])
                     end
 
                     ##

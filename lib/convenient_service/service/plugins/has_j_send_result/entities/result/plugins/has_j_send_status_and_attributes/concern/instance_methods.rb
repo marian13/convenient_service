@@ -104,7 +104,7 @@ module ConvenientService
                     # @raise [ConvenientService::Support::Castable::Exceptions::FailedToCast]
                     #
                     def create_status(status)
-                      self.class.status(value: status, result: self)
+                      self.class.status_class.cast!(status).copy(overrides: {kwargs: {result: self}})
                     end
 
                     ##
@@ -113,7 +113,7 @@ module ConvenientService
                     # @raise [ConvenientService::Support::Castable::Exceptions::FailedToCast]
                     #
                     def create_data(data)
-                      self.class.data(value: data, result: self)
+                      self.class.data_class.cast!(data).copy(overrides: {kwargs: {result: self}})
                     end
 
                     ##
@@ -122,7 +122,7 @@ module ConvenientService
                     # @raise [ConvenientService::Support::Castable::Exceptions::FailedToCast]
                     #
                     def create_message(message)
-                      self.class.message(value: message, result: self)
+                      self.class.message_class.cast!(message).copy(overrides: {kwargs: {result: self}})
                     end
 
                     ##
@@ -131,7 +131,7 @@ module ConvenientService
                     # @raise [ConvenientService::Support::Castable::Exceptions::FailedToCast]
                     #
                     def create_code(code)
-                      self.class.code(value: code, result: self)
+                      self.class.code_class.cast!(code).copy(overrides: {kwargs: {result: self}})
                     end
 
                     ##

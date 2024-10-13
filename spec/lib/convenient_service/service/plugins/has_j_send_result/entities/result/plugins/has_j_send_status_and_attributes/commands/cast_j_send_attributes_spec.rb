@@ -32,7 +32,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       end
 
       it "returns `struct` with `kwargs[:status]` casted to `result.class.status_class` as `status`" do
-        expect(command_result.status).to eq(service_class.result_class.status(value: kwargs[:status], result: result))
+        expect(command_result.status).to eq(result.create_status(kwargs[:status]))
       end
 
       context "when `kwargs[:status]` is NOT castable" do
@@ -52,7 +52,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       end
 
       it "returns `struct` with `kwargs[:data]` casted to `result.class.data_class` as `data`" do
-        expect(command_result.data).to eq(service_class.result_class.data(value: kwargs[:data], result: result))
+        expect(command_result.data).to eq(result.create_data(kwargs[:data]))
       end
 
       context "when `kwargs[:data]` is NOT castable" do
@@ -72,7 +72,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       end
 
       it "returns `struct` with `kwargs[:message]` casted to `result.class.message_class` as `message`" do
-        expect(command_result.message).to eq(service_class.result_class.message(value: kwargs[:message], result: result))
+        expect(command_result.message).to eq(result.create_message(kwargs[:message]))
       end
 
       context "when `kwargs[:message]` is NOT castable" do
@@ -92,7 +92,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       end
 
       it "returns `struct` with `kwargs[:code]` casted to `result.class.code_class` as `code`" do
-        expect(command_result.code).to eq(service_class.result_class.code(value: kwargs[:code], result: result))
+        expect(command_result.code).to eq(result.create_code(kwargs[:code]))
       end
 
       context "when `kwargs[:code]` is NOT castable" do
