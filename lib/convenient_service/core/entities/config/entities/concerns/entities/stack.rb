@@ -162,6 +162,11 @@ module ConvenientService
                 end
 
                 ##
+                # @return [ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack]
+                #
+                alias_method :append, :use
+
+                ##
                 # @return [Boolean]
                 #
                 def empty?

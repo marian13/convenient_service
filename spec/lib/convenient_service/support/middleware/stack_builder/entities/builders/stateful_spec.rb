@@ -150,6 +150,15 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
       end
     end
 
+    describe "#append" do
+      specify do
+        expect { stack_builder.append(middleware) }
+          .to delegate_to(stack, :<<)
+            .with_arguments(middleware)
+            .and_return { stack_builder }
+      end
+    end
+
     describe "#insert" do
       context "when `index_or_middleware` is integer" do
         specify do

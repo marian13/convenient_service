@@ -351,6 +351,18 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns::En
       end
     end
 
+    describe "#append" do
+      specify do
+        expect { stack.append(concern) }
+          .to delegate_to(plain_stack, :use)
+          .with_arguments(middleware)
+      end
+
+      it "returns stack" do
+        expect(stack.append(concern)).to eq(stack)
+      end
+    end
+
     describe "#empty?" do
       specify do
         expect { stack.empty? }

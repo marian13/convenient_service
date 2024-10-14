@@ -107,6 +107,11 @@ module ConvenientService
               end
 
               ##
+              # @return [ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Rack]
+              #
+              alias_method :append, :use
+
+              ##
               # @param index_or_middleware [Integer, #call<Hash>]
               # @param other_middleware [#call<Hash>]
               # @return [ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Rack]

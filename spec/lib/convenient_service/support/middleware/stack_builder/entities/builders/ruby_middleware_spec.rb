@@ -142,6 +142,24 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
       end
     end
 
+    describe "#use" do
+      specify do
+        expect { stack_builder.use(middleware, *args, &block) }
+          .to delegate_to(stack, :<<)
+            .with_arguments([middleware, args, block])
+            .and_return { stack_builder }
+      end
+    end
+
+    describe "#append" do
+      specify do
+        expect { stack_builder.append(middleware, *args, &block) }
+          .to delegate_to(stack, :<<)
+            .with_arguments([middleware, args, block])
+            .and_return { stack_builder }
+      end
+    end
+
     describe "#delete" do
       context "when stack does NOT have middleware" do
         let(:exception_message) { "no implicit conversion from nil to integer" }

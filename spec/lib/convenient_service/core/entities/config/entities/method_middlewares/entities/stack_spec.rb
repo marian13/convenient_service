@@ -362,6 +362,18 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
       end
     end
 
+    describe "#append" do
+      specify do
+        expect { stack.append(middleware) }
+          .to delegate_to(plain_stack, :use)
+          .with_arguments(middleware)
+      end
+
+      it "returns stack" do
+        expect(stack.append(middleware)).to eq(stack)
+      end
+    end
+
     describe "#observe" do
       before do
         stack.use(middleware)

@@ -81,9 +81,17 @@ module ConvenientService
               # @return [ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::RubyMiddleware]
               #
               # @internal
-              #   TODO: Direct specs.
+              #   TODO: Direct specs when a `Builder` is passed as argument.
               #
               alias_method :remove, :delete
+
+              ##
+              # @return [ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::RubyMiddleware]
+              #
+              # @internal
+              #   TODO: Direct specs when a `Builder` is passed as argument.
+              #
+              alias_method :append, :use
 
               ##
               # @param other [ConvenientService::Support::Middleware::StackBuilder, Object]
@@ -106,7 +114,7 @@ module ConvenientService
               #
               # @internal
               #   NOTE: `use` can accept additional arguments and block, that is why `stack` contains tuples like [middleware, args, block].
-              #   https://github.com/marian13/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L76
+              #   - https://github.com/marian13/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L76
               #
               #   TODO: better name than just `to_a`.
               #
