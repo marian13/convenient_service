@@ -68,7 +68,7 @@ Open a PR that modifies the following [file](https://github.com/rubytoolbox/cata
 
 ## Features
 
-## Introduce `stub_entry` RSpec matcher
+### Introduce `stub_entry` RSpec matcher
 
 | Priority | Complexity | Status | Tags |
 | - | - | - | - |

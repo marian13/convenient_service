@@ -25,6 +25,22 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::ThreadSafeAr
           expect(cache.store).to eq([])
         end
       end
+
+      context "when `parent` is NOT passed" do
+        let(:cache) { described_class.new }
+
+        it "defaults to `nil`" do
+          expect(cache.parent).to be_nil
+        end
+      end
+
+      context "when `key` is NOT passed" do
+        let(:cache) { described_class.new }
+
+        it "defaults to `nil`" do
+          expect(cache.key).to be_nil
+        end
+      end
     end
   end
 
@@ -32,7 +48,7 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::ThreadSafeAr
     let(:cache) { described_class.new }
 
     describe "#store" do
-      let(:cache) { described_class.new(array) }
+      let(:cache) { described_class.new(store: array) }
       let(:array) { [:foo] }
 
       it "returns array that is used as store internally" do
@@ -154,6 +170,14 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::ThreadSafeAr
 
           expect(cache.read(key)).to eq(value)
         end
+
+        context "when cache is sub cache" do
+          let(:scoped_cache) { cache.scope(:bar) }
+
+          it "saves sub cache as scope in parent cache" do
+            expect { scoped_cache.write(key, value) }.to change { cache.read(:bar) }.from(nil).to(scoped_cache)
+          end
+        end
       end
 
       context "when cache has `key`" do
@@ -169,6 +193,14 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::ThreadSafeAr
           cache.write(key, :bar)
 
           expect(cache.read(key)).to eq(:bar)
+        end
+
+        context "when cache is sub cache" do
+          let(:scoped_cache) { cache.scope(:bar) }
+
+          it "saves sub cache as scope in parent cache" do
+            expect { scoped_cache.write(key, value) }.to change { cache.read(:bar) }.from(nil).to(scoped_cache)
+          end
         end
       end
 
@@ -223,6 +255,14 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::ThreadSafeAr
             cache.fetch(key, &block)
 
             expect(cache.read(key)).to eq(value)
+          end
+
+          context "when cache is sub cache" do
+            let(:scoped_cache) { cache.scope(:bar) }
+
+            it "saves sub cache as scope in parent cache" do
+              expect { scoped_cache.fetch(key, &block) }.to change { cache.read(:bar) }.from(nil).to(scoped_cache)
+            end
           end
         end
 
@@ -351,17 +391,95 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::ThreadSafeAr
         expect(cache.scope(:foo)).to eq(described_class.new)
       end
 
-      specify do
-        expect { cache.scope(:foo) }.to cache_its_value
+      context "when NO values were written to sub cache" do
+        specify do
+          expect { cache.scope(:foo) }.not_to cache_its_value
+        end
       end
 
-      context "when nested" do
-        it "returns sub cache" do
-          expect(cache.scope(:foo).scope(:bar)).to eq(described_class.new)
+      context "when any value was written to sub cache" do
+        before do
+          cache.scope(:foo)[:bar] = :baz
         end
 
         specify do
-          expect { cache.scope(:foo).scope(:bar) }.to cache_its_value
+          expect { cache.scope(:foo) }.to cache_its_value
+        end
+      end
+
+      context "when nested" do
+        it "returns nested sub cache" do
+          expect(cache.scope(:foo).scope(:bar)).to eq(described_class.new)
+        end
+
+        context "when NO values were written to nested sub cache" do
+          specify do
+            expect { cache.scope(:foo).scope(:bar) }.not_to cache_its_value
+          end
+        end
+
+        context "when any value was written to nested sub cache" do
+          before do
+            cache.scope(:foo).scope(:bar)[:baz] = :qux
+          end
+
+          specify do
+            expect { cache.scope(:foo).scope(:bar) }.to cache_its_value
+          end
+        end
+      end
+
+      ##
+      # TODO: Direct thread-safety spec.
+      #
+      # example_group "thread-safety" do
+      #   it "is thread-safe" do
+      #   end
+      # end
+    end
+
+    describe "#scope!" do
+      include ConvenientService::RSpec::PrimitiveMatchers::CacheItsValue
+
+      it "returns sub cache" do
+        expect(cache.scope!(:foo)).to eq(described_class.new)
+      end
+
+      context "when NO values were written to sub cache" do
+        specify do
+          expect { cache.scope!(:foo) }.to cache_its_value
+        end
+      end
+
+      context "when any value was written to sub cache" do
+        before do
+          cache.scope!(:foo)[:bar] = :baz
+        end
+
+        specify do
+          expect { cache.scope!(:foo) }.to cache_its_value
+        end
+      end
+
+      context "when nested" do
+        it "returns nested sub cache" do
+          expect(cache.scope!(:foo).scope!(:bar)).to eq(described_class.new)
+        end
+
+        context "when NO values were written to nested sub cache" do
+          specify do
+            expect { cache.scope!(:foo).scope!(:bar) }.to cache_its_value
+          end
+        end
+
+        context "when any value was written to nested sub cache" do
+          before do
+            cache.scope!(:foo).scope!(:bar)[:baz] = :qux
+          end
+
+          specify do
+            expect { cache.scope!(:foo).scope!(:bar) }.to cache_its_value
+          end
         end
       end
 
@@ -387,7 +505,7 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::ThreadSafeAr
         end
 
         context "when caches have different arrays" do
-          let(:other) { described_class.new([:bar]) }
+          let(:other) { described_class.new(store: [:bar]) }
 
           it "returns `true`" do
             expect(cache == other).to eq(false)

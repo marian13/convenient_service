@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
-RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Array, type: :standard do
+RSpec.describe ConvenientService::Support::Cache::Entities::Caches::ThreadSafeHash, type: :standard do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   example_group "inheritance" do
@@ -18,11 +18,11 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Array, type:
 
   example_group "class methods" do
     describe ".new" do
-      context "when `array` is NOT passed" do
+      context "when `hash` is NOT passed" do
         let(:cache) { described_class.new }
 
-        it "defaults to empty array" do
-          expect(cache.store).to eq([])
+        it "defaults to empty hash" do
+          expect(cache.store).to eq({})
         end
       end
 
@@ -48,11 +48,11 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Array, type:
     let(:cache) { described_class.new }
 
     describe "#store" do
-      let(:cache) { described_class.new(store: array) }
-      let(:array) { [:foo] }
+      let(:cache) { described_class.new(store: hash) }
+      let(:hash) { {foo: :bar} }
 
-      it "returns array that is used as store internally" do
-        expect(cache.store).to equal(array)
+      it "returns hash that is used as store internally" do
+        expect(cache.store).to equal(hash)
       end
     end
 
@@ -76,6 +76,14 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Array, type:
           expect(cache.empty?).to eq(false)
         end
       end
+
+      ##
+      # TODO: Direct thread-safety spec.
+      #
+      # example_group "thread-safety" do
+      #   it "is thread-safe" do
+      #   end
+      # end
     end
 
     describe "#exist?" do
@@ -101,6 +109,14 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Array, type:
           expect(cache.exist?(key)).to eq(true)
         end
       end
+
+      ##
+      # TODO: Direct thread-safety spec.
+      #
+      # example_group "thread-safety" do
+      #   it "is thread-safe" do
+      #   end
+      # end
     end
 
     describe "#read" do
@@ -126,6 +142,14 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Array, type:
           expect(cache.read(key)).to eq(value)
         end
       end
+
+      ##
+      # TODO: Direct thread-safety spec.
+      #
+      # example_group "thread-safety" do
+      #   it "is thread-safe" do
+      #   end
+      # end
     end
 
     describe "#write" do
@@ -179,6 +203,14 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Array, type:
           end
         end
       end
+
+      ##
+      # TODO: Direct thread-safety spec.
+      #
+      # example_group "thread-safety" do
+      #   it "is thread-safe" do
+      #   end
+      # end
     end
 
     describe "#fetch" do
@@ -250,6 +282,14 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Array, type:
           end
         end
       end
+
+      ##
+      # TODO: Direct thread-safety spec.
+      #
+      # example_group "thread-safety" do
+      #   it "is thread-safe" do
+      #   end
+      # end
     end
 
     describe "#delete" do
@@ -281,6 +321,14 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Array, type:
           expect(cache.read(key)).to be_nil
         end
       end
+
+      ##
+      # TODO: Direct thread-safety spec.
+      #
+      # example_group "thread-safety" do
+      #   it "is thread-safe" do
+      #   end
+      # end
     end
 
     describe "#clear" do
@@ -303,6 +351,14 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Array, type:
           expect { cache.clear }.to change(cache, :empty?).from(false).to(true)
         end
       end
+
+      ##
+      # TODO: Direct thread-safety spec.
+      #
+      # example_group "thread-safety" do
+      #   it "is thread-safe" do
+      #   end
+      # end
     end
 
     describe "#[]" do
@@ -372,6 +428,14 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Array, type:
           end
         end
       end
+
+      ##
+      # TODO: Direct thread-safety spec.
+      #
+      # example_group "thread-safety" do
+      #   it "is thread-safe" do
+      #   end
+      # end
     end
 
     describe "#scope!" do
@@ -418,6 +482,14 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Array, type:
           end
         end
       end
+
+      ##
+      # TODO: Direct thread-safety spec.
+      #
+      # example_group "thread-safety" do
+      #   it "is thread-safe" do
+      #   end
+      # end
     end
 
     example_group "comparison" do

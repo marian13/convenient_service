@@ -5,7 +5,7 @@ module ConvenientService
     class Cache
       module Entities
         module Caches
-          class ThreadSafeArray < Caches::Array
+          class ThreadSafeHash < Caches::Hash
             ##
             # @return [void]
             #

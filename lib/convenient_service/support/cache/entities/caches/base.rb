@@ -18,6 +18,28 @@ module ConvenientService
             end
 
             ##
+            # @!attribute [r] store
+            #   @return [Object]
+            #
+            attr_reader :store
+
+            ##
+            # @note `parent` is only present when cache is scoped.
+            #
+            # @!attribute [r] parent
+            #   @return [ConvenientService::Support::Cache::Entities::Caches::Base, nil]
+            #
+            attr_reader :parent
+
+            ##
+            # @note `key` is only present when cache is scoped.
+            #
+            # @!attribute [r] key
+            #   @return [ConvenientService::Support::Cache::Entities::Key, Object]
+            #
+            attr_reader :key
+
+            ##
             # @return [Boolean]
             #
             abstract_method :empty?
@@ -53,9 +75,25 @@ module ConvenientService
             abstract_method :clear
 
             ##
+            # @return [ConvenientService::Support::Cache::Enitities::Caches::Base]
+            #
+            abstract_method :scope
+
+            ##
+            # @return [ConvenientService::Support::Cache::Enitities::Caches::Base]
+            #
+            abstract_method :scope!
+
+            ##
+            # @param store [Object] Can be any type.
+            # @param parent [ConvenientService::Support::Cache::Entities::Caches::Base, nil]
+            # @param key [ConvenientService::Support::Cache::Entities::Key, Object]
             # @return [void]
             #
-            def initialize
+            def initialize(store: nil, parent: nil, key: nil)
+              @store = store
+              @parent = parent
+              @key = key
             end
 
             ##
@@ -86,17 +124,6 @@ module ConvenientService
             end
 
             ##
-            # @param key [Object] Can be any type.
-            # @return [ConvenientService::Support::Cache::Entities::Caches::Base]
-            #
-            # @internal
-            #   TODO: What to do if `scope` was called accidentally? Currently, its `key` will NOT be garbage-collected.
-            #
-            def scope(key)
-              fetch(key) { self.class.new }
-            end
-
-            ##
             # @param other [Object] Can be any type.
             # @return [Boolean, nil]
             #
@@ -106,6 +133,15 @@ module ConvenientService
               return false if store != other.store
 
               true
+            end
+
+            private
+
+            ##
+            # @return [void]
+            #
+            def save_self_as_scope_in_parent!
+              parent&.fetch(key) { self }
             end
           end
         end

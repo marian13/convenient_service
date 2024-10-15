@@ -636,7 +636,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
         specify do
           expect { step.save_outputs_in_organizer! }
-            .not_to delegate_to(step.organizer.internals.cache.scope(:step_output_values), :write)
+            .not_to delegate_to(step.organizer.internals.cache.scope!(:step_output_values), :write)
         end
       end
 
@@ -659,7 +659,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
         specify do
           expect { step.save_outputs_in_organizer! }
-            .to delegate_to(step.organizer.internals.cache.scope(:step_output_values), :write)
+            .to delegate_to(step.organizer.internals.cache.scope!(:step_output_values), :write)
             .with_arguments(step.output_values.keys.first, step.output_values.values.first)
         end
       end
@@ -683,13 +683,13 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
         specify do
           expect { step.save_outputs_in_organizer! }
-            .to delegate_to(step.organizer.internals.cache.scope(:step_output_values), :write)
+            .to delegate_to(step.organizer.internals.cache.scope!(:step_output_values), :write)
             .with_arguments(step.output_values.keys[0], step.output_values.values[0])
         end
 
         specify do
           expect { step.save_outputs_in_organizer! }
-            .to delegate_to(step.organizer.internals.cache.scope(:step_output_values), :write)
+            .to delegate_to(step.organizer.internals.cache.scope!(:step_output_values), :write)
             .with_arguments(step.output_values.keys[1], step.output_values.values[1])
         end
       end
@@ -713,7 +713,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
         specify do
           expect { step.save_outputs_in_organizer! }
-            .to delegate_to(step.organizer.internals.cache.scope(:step_output_values), :write)
+            .to delegate_to(step.organizer.internals.cache.scope!(:step_output_values), :write)
             .with_arguments(step.output_values.keys[0], step.output_values.values[0])
         end
       end

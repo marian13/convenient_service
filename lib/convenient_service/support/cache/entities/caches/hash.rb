@@ -7,17 +7,11 @@ module ConvenientService
         module Caches
           class Hash < Caches::Base
             ##
+            # @param store [Hash{Object => Object}]
             # @return [void]
             #
-            def initialize(hash = {})
-              @hash = hash
-            end
-
-            ##
-            # @return [Hash{Object => Object}]
-            #
-            def store
-              hash
+            def initialize(store: {}, **kwargs)
+              super
             end
 
             ##
@@ -27,7 +21,7 @@ module ConvenientService
             #   https://ruby-doc.org/core-2.7.0/Hash.html#method-i-empty-3F
             #
             def empty?
-              hash.empty?
+              store.empty?
             end
 
             ##
@@ -38,7 +32,7 @@ module ConvenientService
             #   https://api.rubyonrails.org/classes/ActiveSupport/Cache/Store.html#method-i-exist-3F
             #
             def exist?(key)
-              hash.has_key?(key)
+              store.has_key?(key)
             end
 
             ##
@@ -49,7 +43,7 @@ module ConvenientService
             #   https://api.rubyonrails.org/classes/ActiveSupport/Cache/Store.html#method-i-read
             #
             def read(key)
-              hash[key]
+              store[key]
             end
 
             ##
@@ -61,7 +55,9 @@ module ConvenientService
             #   https://api.rubyonrails.org/classes/ActiveSupport/Cache/Store.html#method-i-write
             #
             def write(key, value)
-              hash[key] = value
+              save_self_as_scope_in_parent!
+
+              store[key] = value
             end
 
             ##
@@ -73,9 +69,11 @@ module ConvenientService
             #   https://api.rubyonrails.org/classes/ActiveSupport/Cache/Store.html#method-i-fetch
             #
             def fetch(key, &block)
-              return hash[key] unless block
+              return store[key] unless block
 
-              hash.fetch(key) { hash[key] = yield }
+              save_self_as_scope_in_parent!
+
+              store.fetch(key) { store[key] = yield }
             end
 
             ##
@@ -86,25 +84,37 @@ module ConvenientService
             #   https://api.rubyonrails.org/classes/ActiveSupport/Cache/Store.html#method-i-delete
             #
             def delete(key)
-              hash.delete(key)
+              store.delete(key)
             end
 
             ##
             # @return [ConvenientService::Support::Cache::Entities::Caches::Hash]
             #
             def clear
-              hash.clear
+              store.clear
 
               self
             end
 
-            private
+            ##
+            # Creates a scoped cache. Parent cache is modified on the first write to the scoped cache.
+            #
+            # @param key [Object] Can be any type.
+            # @return [ConvenientService::Support::Cache::Entities::Caches::Base]
+            #
+            def scope(key)
+              store.fetch(key) { self.class.new(parent: self, key: key) }
+            end
 
             ##
-            # @!attribute [r] hash
-            #   @return [Hash]
+            # Creates a scoped cache. Parent cache is modified immediately.
             #
-            attr_reader :hash
+            # @param key [Object] Can be any type.
+            # @return [ConvenientService::Support::Cache::Entities::Caches::Base]
+            #
+            def scope!(key)
+              store.fetch(key) { store[key] = self.class.new(parent: self, key: key) }
+            end
           end
         end
       end

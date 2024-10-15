@@ -50,7 +50,7 @@ RSpec.describe ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Comma
         allow(ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Commands::FetchFeatureStubbedEntriesCache).to receive(:call).with(feature: feature).and_return(cache)
 
         expect { command.call(feature: feature, entry: entry, arguments: arguments, value: value) }
-          .to delegate_to(cache.scope(entry), :write)
+          .to delegate_to(cache.scope!(entry), :write)
           .with_arguments(key, value)
           .and_return_its_value
       end

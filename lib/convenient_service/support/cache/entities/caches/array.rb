@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require_relative "array/constants"
 require_relative "array/entities"
 
 module ConvenientService
@@ -9,24 +10,18 @@ module ConvenientService
         module Caches
           class Array < Caches::Base
             ##
+            # @param store [Array<ConvenientService::Support::Cache::Entities::Caches::Array::Entities::Pair>]
             # @return [void]
             #
-            def initialize(array = [])
-              @array = array
-            end
-
-            ##
-            # @return [Array<ConvenientService::Support::Cache::Entities::Caches::Array::Entities::Pair>]
-            #
-            def store
-              array
+            def initialize(store: [], **kwargs)
+              super
             end
 
             ##
             # @return [Boolean]
             #
             def empty?
-              array.empty?
+              store.empty?
             end
 
             ##
@@ -34,9 +29,7 @@ module ConvenientService
             # @return [Boolean]
             #
             def exist?(key)
-              index = index(key)
-
-              index ? true : false
+              index(key) ? true : false
             end
 
             ##
@@ -46,7 +39,7 @@ module ConvenientService
             def read(key)
               index = index(key)
 
-              array[index].value if index
+              store[index].value if index
             end
 
             ##
@@ -55,33 +48,20 @@ module ConvenientService
             # @return [Object] Can be any type.
             #
             def write(key, value)
-              index = index(key) || array.size
+              index = index(key) || store.size
 
-              array[index] = pair(key, value)
+              save_self_as_scope_in_parent!
+
+              store[index] = pair(key, value)
 
               value
             end
 
             ##
-            # @param key [Object] Can be any type.
-            # @param block [Proc, nil]
             # @return [Object] Can be any type.
             #
-            # @internal
-            #   https://api.rubyonrails.org/classes/ActiveSupport/Cache/Store.html#method-i-fetch
-            #
-            def fetch(key, &block)
-              index = index(key)
-
-              return array[index].value if index
-
-              return unless block
-
-              value = yield
-
-              array << pair(key, value)
-
-              value
+            def fetch(...)
+              _fetch(...)
             end
 
             ##
@@ -91,32 +71,48 @@ module ConvenientService
             def delete(key)
               index = index(key)
 
-              array.delete_at(index).value if index
+              store.delete_at(index).value if index
             end
 
             ##
             # @return [ConvenientService::Support::Cache::Entities::Caches::Array]
             #
             def clear
-              array.clear
+              store.clear
 
               self
             end
 
-            private
+            ##
+            # Creates a scoped cache. Parent cache is modified on the first write to the scoped cache.
+            #
+            # @param key [Object] Can be any type.
+            # @return [ConvenientService::Support::Cache::Entities::Caches::Base]
+            #
+            def scope(key)
+              value = _fetch(key, default: Constants::UNDEFINED)
+
+              (value == Constants::UNDEFINED) ? self.class.new(parent: self, key: key) : value
+            end
 
             ##
-            # @!attribute [r] array
-            #   @return [Array]
+            # Creates a scoped cache. Parent cache is modified immediately.
             #
-            attr_reader :array
+            # @param key [Object] Can be any type.
+            # @return [ConvenientService::Support::Cache::Entities::Caches::Base]
+            #
+            def scope!(key)
+              _fetch(key) { self.class.new(parent: self, key: key) }
+            end
+
+            private
 
             ##
             # @param key [Object] Can be any type.
             # @return [Integer, nil]
             #
             def index(key)
-              array.find_index { |pair| pair.key == key }
+              store.find_index { |pair| pair.key == key }
             end
 
             ##
@@ -126,6 +122,31 @@ module ConvenientService
             #
             def pair(key, value)
               Entities::Pair.new(key: key, value: value)
+            end
+
+            ##
+            # @param key [Object] Can be any type.
+            # @param block [Proc, nil]
+            # @return [Object] Can be any type.
+            #
+            # @internal
+            #   NOTE: Inspired by `ActiveSupport::Cache`.
+            #   - https://api.rubyonrails.org/classes/ActiveSupport/Cache/Store.html#method-i-fetch
+            #
+            def _fetch(key, default: nil, &block)
+              index = index(key)
+
+              return store[index].value if index
+
+              return default unless block
+
+              value = yield
+
+              save_self_as_scope_in_parent!
+
+              store << pair(key, value)
+
+              value
             end
           end
         end
