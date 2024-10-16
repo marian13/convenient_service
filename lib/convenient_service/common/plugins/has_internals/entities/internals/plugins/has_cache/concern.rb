@@ -19,11 +19,8 @@ module ConvenientService
                     ##
                     # @return [ConvenientService::Support::Cache]
                     #
-                    # @internal
-                    #   TODO: `Support::Cache.create(backend: :thread_safe_hash)`.
-                    #
                     def cache
-                      @cache ||= Support::Cache.create(backend: :hash)
+                      @cache ||= Support::Cache.backed_by(:thread_safe_hash).new
                     end
                   end
 
@@ -32,7 +29,7 @@ module ConvenientService
                     # @return [ConvenientService::Support::Cache]
                     #
                     def cache
-                      @cache ||= Support::Cache.create(backend: :hash)
+                      @cache ||= Support::Cache.backed_by(:hash).new
                     end
                   end
                 end

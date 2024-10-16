@@ -10,7 +10,7 @@ module ConvenientService
       class StackBuilder
         class << self
           ##
-          # @return [ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::RubyMiddleware, ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Rack]
+          # @return [ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::RubyMiddleware, ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Rack, ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Stateful]
           #
           def new(...)
             backed_by(Constants::Backends::DEFAULT).new(...)

@@ -27,7 +27,7 @@ RSpec.describe ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Comma
 
       let(:entry) { :main }
 
-      let(:cache) { ConvenientService::Support::Cache.create(backend: :thread_safe_array) }
+      let(:cache) { ConvenientService::Support::Cache.backed_by(:thread_safe_array).new }
       let(:arguments) { ConvenientService::Support::Arguments.new(:foo, {foo: :bar}) { :foo } }
       let(:key) { cache.keygen(*arguments.args, **arguments.kwargs, &arguments.block) }
       let(:value) { :stub_value }

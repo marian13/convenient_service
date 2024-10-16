@@ -34,11 +34,13 @@ RSpec.describe ConvenientService::Common::Plugins::HasInternals::Entities::Inter
     include ConvenientService::RSpec::PrimitiveMatchers::CacheItsValue
 
     describe ".cache" do
+      cache = ConvenientService::Support::Cache.backed_by(:thread_safe_hash).new
+
       specify do
         expect { internals_class.cache }
-          .to delegate_to(ConvenientService::Support::Cache, :create)
-          .with_arguments(backend: :hash)
-          .and_return_its_value
+          .to delegate_to(ConvenientService::Support::Cache, :backed_by)
+            .with_arguments(:thread_safe_hash)
+            .and_return { cache }
       end
 
       specify do
@@ -55,10 +57,12 @@ RSpec.describe ConvenientService::Common::Plugins::HasInternals::Entities::Inter
       let(:internals) { internals_instance }
 
       specify do
+        cache = ConvenientService::Support::Cache.backed_by(:hash).new
+
         expect { internals.cache }
-          .to delegate_to(ConvenientService::Support::Cache, :create)
-          .with_arguments(backend: :hash)
-          .and_return_its_value
+          .to delegate_to(ConvenientService::Support::Cache, :backed_by)
+            .with_arguments(:hash)
+            .and_return { cache }
       end
 
       specify do

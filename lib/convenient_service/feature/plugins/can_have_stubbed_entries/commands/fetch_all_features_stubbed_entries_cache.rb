@@ -17,9 +17,9 @@ module ConvenientService
             #
             def call
               if Dependencies.rspec.current_example
-                Utils::Object.memoize_including_falsy_values(Dependencies.rspec.current_example, :@__convenient_service_stubbed_entries__) { Support::Cache.create(backend: :thread_safe_array) }
+                Utils::Object.memoize_including_falsy_values(Dependencies.rspec.current_example, :@__convenient_service_stubbed_entries__) { Support::Cache.backed_by(:thread_safe_array).new }
               else
-                Support::Cache.create(backend: :thread_safe_array)
+                Support::Cache.backed_by(:thread_safe_array).new
               end
             end
           end

@@ -9,17 +9,26 @@ module ConvenientService
     class Cache
       class << self
         ##
-        # @param backend [Symbol]
         # @return [ConvenientService::Support::Cache::Entities::Caches::Base]
         #
-        def create(backend: Constants::Backends::HASH)
+        def new(...)
+          backed_by(Constants::Backends::DEFAULT).new(...)
+        end
+
+        ##
+        # @param backend [Symbol]
+        # @return [Class<ConvenientService::Support::Cache::Entities::Caches::Base>]
+        #
+        def backed_by(backend)
           case backend
           when Constants::Backends::ARRAY
-            Entities::Caches::Array.new
+            Entities::Caches::Array
           when Constants::Backends::HASH
-            Entities::Caches::Hash.new
+            Entities::Caches::Hash
           when Constants::Backends::THREAD_SAFE_ARRAY
-            Entities::Caches::ThreadSafeArray.new
+            Entities::Caches::ThreadSafeArray
+          when Constants::Backends::THREAD_SAFE_HASH
+            Entities::Caches::ThreadSafeHash
           else
             ::ConvenientService.raise Exceptions::NotSupportedBackend.new(backend: backend)
           end

@@ -25,7 +25,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStubbedResults::Comma
         end
       end
 
-      let(:cache) { ConvenientService::Support::Cache.create(backend: :thread_safe_array) }
+      let(:cache) { ConvenientService::Support::Cache.backed_by(:thread_safe_array).new }
       let(:arguments) { ConvenientService::Support::Arguments.new(:foo, {foo: :bar}) { :foo } }
       let(:key) { cache.keygen(*arguments.args, **arguments.kwargs, &arguments.block) }
       let(:result) { service.error }

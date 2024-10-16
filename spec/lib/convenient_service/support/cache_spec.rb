@@ -11,66 +11,72 @@ RSpec.describe ConvenientService::Support::Cache, type: :standard do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   example_group "class methods" do
-    describe ".create" do
-      let(:cache) { described_class.create(backend: backend) }
+    describe ".new" do
+      specify do
+        expect { described_class.new }
+          .to delegate_to(described_class, :backed_by)
+          .with_arguments(ConvenientService::Support::Cache::Constants::Backends::DEFAULT)
+      end
 
-      let(:backend) { described_class::Constants::Backends::HASH }
+      it "returns `ConvenientService::Support::Cache.backed_by(ConvenientService::Support::Cache::Constants::Backends::DEFAULT)` instance" do
+        expect(described_class.new).to eq(described_class.backed_by(ConvenientService::Support::Cache::Constants::Backends::DEFAULT).new)
+      end
 
-      context "when `backend` is NOT passed" do
-        let(:cache) { described_class.create }
+      context "when `kwargs` are passed" do
+        let(:kwargs) { {store: {bar: :baz}, parent: described_class.new, key: :foo} }
 
-        it "defaults `backend` to `:hash`" do
-          expect(cache).to be_instance_of(described_class::Entities::Caches::Hash)
+        it "passes those `kwargs` to `new`" do
+          expect(described_class.new(**kwargs)).to eq(described_class.backed_by(ConvenientService::Support::Cache::Constants::Backends::DEFAULT).new(**kwargs))
+        end
+      end
+    end
+
+    describe ".backed_by" do
+      context "when `backend` is NOT valid" do
+        let(:backend) { :foo }
+
+        let(:exception_message) do
+          <<~TEXT
+            Backend `#{backend.inspect}` is NOT supported.
+
+            Supported backends are #{ConvenientService::Support::Cache::Constants::Backends::ALL.map { |backend| "`#{backend.inspect}`" }.join(", ")}.
+          TEXT
+        end
+
+        it "raises `ConvenientService::Support::Cache::Exceptions::NotSupportedBackend`" do
+          expect { described_class.backed_by(backend) }
+            .to raise_error(ConvenientService::Support::Cache::Exceptions::NotSupportedBackend)
+            .with_message(exception_message)
+        end
+
+        specify do
+          expect { ignoring_exception(ConvenientService::Support::Cache::Exceptions::NotSupportedBackend) { described_class.backed_by(backend) } }
+            .to delegate_to(ConvenientService, :raise)
         end
       end
 
-      context "when `backend` is passed" do
-        context "when `backend` is NOT supported" do
-          let(:backend) { :not_supported_backend }
-
-          let(:exception_message) do
-            <<~TEXT
-              Backend `#{backend}` is NOT supported.
-
-              Supported backends are `:array`, `:hash`, `:thread_safe_array`.
-            TEXT
-          end
-
-          it "raises `ConvenientService::Support::Cache::Exceptions::NotSupportedBackend`" do
-            expect { cache }
-              .to raise_error(described_class::Exceptions::NotSupportedBackend)
-              .with_message(exception_message)
-          end
-
-          specify do
-            expect { ignoring_exception(described_class::Exceptions::NotSupportedBackend) { cache } }
-              .to delegate_to(ConvenientService, :raise)
+      context "when `backend` is valid" do
+        context "when `backend` is `ConvenientService::Support::Cache::Constants::Backends::ARRAY`" do
+          it "returns `ConvenientService::Support::Cache::Entities::Caches::Array`" do
+            expect(described_class.backed_by(ConvenientService::Support::Cache::Constants::Backends::ARRAY)).to eq(ConvenientService::Support::Cache::Entities::Caches::Array)
           end
         end
 
-        context "when `backend` is supported" do
-          context "when `backend` is `:hash`" do
-            let(:backend) { described_class::Constants::Backends::HASH }
-
-            it "creates hash-based cache" do
-              expect(cache).to be_instance_of(described_class::Entities::Caches::Hash)
-            end
+        context "when `backend` is `ConvenientService::Support::Cache::Constants::Backends::HASH`" do
+          it "returns `ConvenientService::Support::Cache::Entities::Caches::Hash`" do
+            expect(described_class.backed_by(ConvenientService::Support::Cache::Constants::Backends::HASH)).to eq(ConvenientService::Support::Cache::Entities::Caches::Hash)
           end
+        end
 
-          context "when `backend` is `:array`" do
-            let(:backend) { described_class::Constants::Backends::ARRAY }
-
-            it "creates array-based cache" do
-              expect(cache).to be_instance_of(described_class::Entities::Caches::Array)
-            end
+        context "when `backend` is `ConvenientService::Support::Cache::Constants::Backends::THREAD_SAFE_ARRAY`" do
+          it "returns `ConvenientService::Support::Cache::Entities::Caches::ThreadSafeArray`" do
+            expect(described_class.backed_by(ConvenientService::Support::Cache::Constants::Backends::THREAD_SAFE_ARRAY)).to eq(ConvenientService::Support::Cache::Entities::Caches::ThreadSafeArray)
           end
+        end
 
-          context "when `backend` is `:thread_safe_array`" do
-            let(:backend) { described_class::Constants::Backends::THREAD_SAFE_ARRAY }
-
-            it "creates thread safe array-based cache" do
-              expect(cache).to be_instance_of(described_class::Entities::Caches::ThreadSafeArray)
-            end
+        context "when `backend` is `ConvenientService::Support::Cache::Constants::Backends::THREAD_SAFE_HASH`" do
+          it "returns `ConvenientService::Support::Cache::Entities::Caches::ThreadSafeHash`" do
+            expect(described_class.backed_by(ConvenientService::Support::Cache::Constants::Backends::THREAD_SAFE_HASH)).to eq(ConvenientService::Support::Cache::Entities::Caches::ThreadSafeHash)
           end
         end
       end

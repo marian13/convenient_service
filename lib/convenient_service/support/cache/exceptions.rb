@@ -11,7 +11,7 @@ module ConvenientService
           #
           def initialize_with_kwargs(backend:)
             message = <<~TEXT
-              Backend `#{backend}` is NOT supported.
+              Backend `#{backend.inspect}` is NOT supported.
 
               Supported backends are #{printable_backends}.
             TEXT
@@ -25,7 +25,7 @@ module ConvenientService
           # @return [String]
           #
           def printable_backends
-            Constants::Backends::ALL.map { |backend| "`:#{backend}`" }.join(", ")
+            Constants::Backends::ALL.map { |backend| "`#{backend.inspect}`" }.join(", ")
           end
         end
       end
