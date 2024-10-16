@@ -13,7 +13,7 @@ module ConvenientService
           # @return [ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::RubyMiddleware, ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Rack]
           #
           def new(...)
-            by(Constants::Backends::DEFAULT).new(...)
+            backed_by(Constants::Backends::DEFAULT).new(...)
           end
 
           ##
@@ -21,7 +21,7 @@ module ConvenientService
           # @return [Class]
           # @raise [ConvenientService::Support::Middleware::StackBuilder::Exceptions::NotSupportedBackend]
           #
-          def by(backend)
+          def backed_by(backend)
             case backend
             when Constants::Backends::RUBY_MIDDLEWARE
               Entities::Builders::RubyMiddleware
