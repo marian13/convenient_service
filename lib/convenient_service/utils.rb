@@ -26,6 +26,13 @@ module ConvenientService
       def to_bool(...)
         Bool::ToBool.call(...)
       end
+
+      ##
+      # @return [Object] Can be any type.
+      #
+      def with_one_time_object(...)
+        Object::WithOneTimeObject.call(...)
+      end
     end
   end
 end

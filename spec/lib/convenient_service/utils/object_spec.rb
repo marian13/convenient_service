@@ -99,4 +99,15 @@ RSpec.describe ConvenientService::Utils::Object, type: :standard do
         .and_return_its_value
     end
   end
+
+  describe ".with_one_time_object" do
+    let(:block) { proc { |one_time_object| :foo } }
+
+    specify do
+      expect { described_class.with_one_time_object(&block) }
+        .to delegate_to(described_class::WithOneTimeObject, :call)
+        .with_arguments(&block)
+        .and_return_its_value
+    end
+  end
 end

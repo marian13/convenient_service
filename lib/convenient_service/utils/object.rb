@@ -8,6 +8,7 @@ require_relative "object/instance_variable_fetch"
 require_relative "object/memoize_including_falsy_values"
 require_relative "object/resolve_type"
 require_relative "object/safe_send"
+require_relative "object/with_one_time_object"
 
 module ConvenientService
   module Utils
@@ -83,6 +84,14 @@ module ConvenientService
         #
         def safe_send(...)
           SafeSend.call(...)
+        end
+
+        ##
+        # @example
+        #   ConvenientService::Utils::Object.with_one_time_object { |one_time_object| puts one_time_object }
+        #
+        def with_one_time_object(...)
+          WithOneTimeObject.call(...)
         end
       end
     end

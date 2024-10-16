@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require_relative "array/constants"
 require_relative "array/entities"
 
 module ConvenientService
@@ -90,9 +89,11 @@ module ConvenientService
             # @return [ConvenientService::Support::Cache::Entities::Caches::Base]
             #
             def scope(key)
-              value = _fetch(key, default: Constants::UNDEFINED)
+              Utils.with_one_time_object do |undefined|
+                value = _fetch(key, default: undefined)
 
-              (value == Constants::UNDEFINED) ? self.class.new(parent: self, key: key) : value
+                (value == undefined) ? self.class.new(parent: self, key: key) : value
+              end
             end
 
             ##
