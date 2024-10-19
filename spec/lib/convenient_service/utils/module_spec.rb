@@ -20,6 +20,17 @@ RSpec.describe ConvenientService::Utils::Module, type: :standard do
     end
   end
 
+  describe ".get_namespace" do
+    let(:mod) { Enumerator::Lazy }
+
+    specify do
+      expect { described_class.get_namespace(mod) }
+        .to delegate_to(described_class::GetNamespace, :call)
+        .with_arguments(mod)
+        .and_return_its_value
+    end
+  end
+
   describe ".get_own_const" do
     let(:mod) { Class.new }
     let(:const_name) { :NotExistingConst }

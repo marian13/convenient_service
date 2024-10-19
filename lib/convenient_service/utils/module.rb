@@ -2,6 +2,7 @@
 
 require_relative "module/class_method_defined"
 require_relative "module/fetch_own_const"
+require_relative "module/get_namespace"
 require_relative "module/get_own_instance_method"
 require_relative "module/get_own_const"
 require_relative "module/has_own_instance_method"
@@ -23,6 +24,10 @@ module ConvenientService
 
         def fetch_own_const(...)
           FetchOwnConst.call(...)
+        end
+
+        def get_namespace(...)
+          GetNamespace.call(...)
         end
 
         def get_own_instance_method(...)
