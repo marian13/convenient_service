@@ -32,8 +32,10 @@ RSpec.describe ConvenientService::Commands::IsFeatureClass, type: :standard do
             Class.new do
               include ConvenientService::Feature::Standard::Config
 
-              def result
-                success
+              entry :main
+
+              def main
+                :main_entry_value
               end
             end
           end
@@ -48,8 +50,10 @@ RSpec.describe ConvenientService::Commands::IsFeatureClass, type: :standard do
             Class.new do
               include ConvenientService::Feature::Standard::Config.with(:rspec)
 
-              def result
-                success
+              entry :main
+
+              def main
+                :main_entry_value
               end
             end
           end
@@ -64,8 +68,10 @@ RSpec.describe ConvenientService::Commands::IsFeatureClass, type: :standard do
             Class.new do
               include ConvenientService::Feature::Standard::Config.without(:rspec)
 
-              def result
-                success
+              entry :main
+
+              def main
+                :main_entry_value
               end
             end
           end
@@ -79,10 +85,6 @@ RSpec.describe ConvenientService::Commands::IsFeatureClass, type: :standard do
           let(:feature_class) do
             Class.new do
               include ConvenientService::Feature::Standard::Config.without_defaults
-
-              def result
-                success
-              end
             end
           end
 

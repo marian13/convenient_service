@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-require "convenient_feature"
+require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Commands::IsFeature, type: :standard do

@@ -23,7 +23,7 @@ module ConvenientService
       def call
         return unless service_class.instance_of?(::Class)
 
-        service_class.include?(Service::Core)
+        service_class.include?(Service::Config)
       end
     end
   end

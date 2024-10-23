@@ -9,4 +9,6 @@ module ConvenientService
   Command = ::ConvenientService::Support::Command
   Concern = ::ConvenientService::Support::Concern
   DependencyContainer = ::ConvenientService::Support::DependencyContainer
+
+  Config = ::ConvenientService::Service::Config
 end
