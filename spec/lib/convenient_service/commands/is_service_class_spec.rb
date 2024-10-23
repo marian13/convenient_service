@@ -19,7 +19,7 @@ RSpec.describe ConvenientService::Commands::IsServiceClass, type: :standard do
       end
 
       context "when `service_class` is class" do
-        context "when `service_class` does NOT include `ConvenientService::Service::Configs::Essential`" do
+        context "when `service_class` does NOT include `ConvenientService::Service::Configs::Standard`" do
           let(:service_class) { Class.new }
 
           it "returns `false`" do
@@ -27,10 +27,93 @@ RSpec.describe ConvenientService::Commands::IsServiceClass, type: :standard do
           end
         end
 
-        context "when `service_class` does includes `ConvenientService::Service::Configs::Essential`" do
+        context "when `service_class` includes `ConvenientService::Service::Configs::Standard`" do
           let(:service_class) do
             Class.new do
               include ConvenientService::Standard::Config
+
+              def result
+                success
+              end
+            end
+          end
+
+          it "returns `true`" do
+            expect(command_result).to eq(true)
+          end
+        end
+
+        context "when `service_class` includes `ConvenientService::Service::Configs::Standard`" do
+          let(:service_class) do
+            Class.new do
+              include ConvenientService::Standard::Config
+
+              def result
+                success
+              end
+            end
+          end
+
+          it "returns `true`" do
+            expect(command_result).to eq(true)
+          end
+        end
+
+        context "when `service_class` includes `ConvenientService::Service::Configs::Standard` with additional options" do
+          let(:service_class) do
+            Class.new do
+              include ConvenientService::Standard::Config.with(:rollbacks)
+
+              def result
+                success
+              end
+            end
+          end
+
+          it "returns `true`" do
+            expect(command_result).to eq(true)
+          end
+        end
+
+        context "when `service_class` includes `ConvenientService::Service::Configs::Standard` without some options" do
+          let(:service_class) do
+            Class.new do
+              include ConvenientService::Standard::Config.without(:fallbacks)
+
+              def result
+                success
+              end
+            end
+          end
+
+          it "returns `true`" do
+            expect(command_result).to eq(true)
+          end
+        end
+
+        context "when `service_class` includes `ConvenientService::Service::Configs::Standard` without default options" do
+          let(:service_class) do
+            Class.new do
+              include ConvenientService::Standard::Config.without_defaults
+
+              def result
+                success
+              end
+            end
+          end
+
+          it "returns `true`" do
+            expect(command_result).to eq(true)
+          end
+        end
+
+        ##
+        # NOTE: Indirectly ensures that `ConvenientService::Standard::Config::V1` includes `ConvenientService::Service::Configs::Standard` under the hood.
+        #
+        context "when `service_class` includes `ConvenientService::Service::Configs::Standard::V1`" do
+          let(:service_class) do
+            Class.new do
+              include ConvenientService::Standard::Config::V1
 
               def result
                 success
