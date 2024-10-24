@@ -21,6 +21,13 @@ module ConvenientService
       end
 
       ##
+      # @return [Object] Can be any type.
+      #
+      def safe_send(...)
+        Object::SafeSend.call(...)
+      end
+
+      ##
       # @return [Boolean]
       #
       def to_bool(...)

@@ -28,6 +28,30 @@ RSpec.describe ConvenientService::Utils, type: :standard do
       end
     end
 
+    describe ".safe_send" do
+      let(:klass) do
+        Class.new do
+          def foo(*args, **kwargs, &block)
+            [__method__, args, kwargs, block]
+          end
+        end
+      end
+
+      let(:object) { klass.new }
+
+      let(:method) { :foo }
+      let(:args) { [:foo] }
+      let(:kwargs) { {foo: :bar} }
+      let(:block) { proc { :foo } }
+
+      specify do
+        expect { described_class.safe_send(object, method, *args, **kwargs, &block) }
+          .to delegate_to(described_class::Object::SafeSend, :call)
+          .with_arguments(object, method, *args, **kwargs, &block)
+          .and_return_its_value
+      end
+    end
+
     describe ".memoize_including_falsy_values" do
       let(:object) { Object.new }
       let(:ivar_name) { :@foo }
