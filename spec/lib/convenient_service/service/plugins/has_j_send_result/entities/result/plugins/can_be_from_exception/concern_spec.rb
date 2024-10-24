@@ -36,8 +36,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
 
       let(:service) do
         Class.new do
-          include ConvenientService::Standard::Config
-          include ConvenientService::FaultTolerance::Config
+          include ConvenientService::Standard::Config.with(:fault_tolerance)
 
           def result
             success
@@ -54,8 +53,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       context "when result is created from unhandled exception" do
         let(:service) do
           Class.new do
-            include ConvenientService::Standard::Config
-            include ConvenientService::FaultTolerance::Config
+            include ConvenientService::Standard::Config.with(:fault_tolerance)
 
             def result
               raise StandardError, "exception message", caller.take(5)
@@ -74,8 +72,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
 
       let(:service) do
         Class.new do
-          include ConvenientService::Standard::Config
-          include ConvenientService::FaultTolerance::Config
+          include ConvenientService::Standard::Config.with(:fault_tolerance)
 
           def result
             success
@@ -92,8 +89,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       context "when result is created from unhandled exception" do
         let(:service) do
           Class.new do
-            include ConvenientService::Standard::Config
-            include ConvenientService::FaultTolerance::Config
+            include ConvenientService::Standard::Config.with(:fault_tolerance)
 
             def result
               raise StandardError, "exception message", caller.take(5)

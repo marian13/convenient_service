@@ -68,8 +68,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
           let(:service_class) do
             Class.new.tap do |klass|
               klass.class_exec(middleware, max_backtrace_size) do |middleware, max_backtrace_size|
-                include ConvenientService::Standard::Config
-                include ConvenientService::FaultTolerance::Config
+                include ConvenientService::Standard::Config.with(:fault_tolerance)
 
                 middlewares :result, scope: :class do
                   delete middleware
@@ -97,8 +96,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
             let(:service_class) do
               Class.new.tap do |klass|
                 klass.class_exec(middleware) do |middleware|
-                  include ConvenientService::Standard::Config
-                  include ConvenientService::FaultTolerance::Config
+                  include ConvenientService::Standard::Config.with(:fault_tolerance)
 
                   middlewares :result, scope: :class do
                     observe middleware
@@ -124,8 +122,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
             let(:service_class) do
               Class.new.tap do |klass|
                 klass.class_exec(middleware, status, max_backtrace_size) do |middleware, status, max_backtrace_size|
-                  include ConvenientService::Standard::Config
-                  include ConvenientService::FaultTolerance::Config
+                  include ConvenientService::Standard::Config.with(:fault_tolerance)
 
                   middlewares :result, scope: :class do
                     delete middleware
@@ -205,8 +202,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
             let(:service_class) do
               Class.new.tap do |klass|
                 klass.class_exec(middleware) do |middleware|
-                  include ConvenientService::Standard::Config
-                  include ConvenientService::FaultTolerance::Config
+                  include ConvenientService::Standard::Config.with(:fault_tolerance)
 
                   middlewares :result, scope: :class do
                     observe middleware
@@ -264,8 +260,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
           let(:service_class) do
             Class.new.tap do |klass|
               klass.class_exec(middleware, max_backtrace_size) do |middleware, max_backtrace_size|
-                include ConvenientService::Standard::Config
-                include ConvenientService::FaultTolerance::Config
+                include ConvenientService::Standard::Config.with(:fault_tolerance)
 
                 middlewares :regular_result do
                   delete middleware
@@ -293,8 +288,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
             let(:service_class) do
               Class.new.tap do |klass|
                 klass.class_exec(middleware) do |middleware|
-                  include ConvenientService::Standard::Config
-                  include ConvenientService::FaultTolerance::Config
+                  include ConvenientService::Standard::Config.with(:fault_tolerance)
 
                   middlewares :regular_result do
                     observe middleware
@@ -320,8 +314,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
             let(:service_class) do
               Class.new.tap do |klass|
                 klass.class_exec(middleware, status, max_backtrace_size) do |middleware, status, max_backtrace_size|
-                  include ConvenientService::Standard::Config
-                  include ConvenientService::FaultTolerance::Config
+                  include ConvenientService::Standard::Config.with(:fault_tolerance)
 
                   middlewares :regular_result do
                     delete middleware
@@ -397,8 +390,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
             let(:service_class) do
               Class.new.tap do |klass|
                 klass.class_exec(middleware) do |middleware|
-                  include ConvenientService::Standard::Config
-                  include ConvenientService::FaultTolerance::Config
+                  include ConvenientService::Standard::Config.with(:fault_tolerance)
 
                   middlewares :regular_result do
                     observe middleware
@@ -452,8 +444,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
           let(:service_class) do
             Class.new.tap do |klass|
               klass.class_exec(middleware, max_backtrace_size) do |middleware, max_backtrace_size|
-                include ConvenientService::Standard::Config
-                include ConvenientService::FaultTolerance::Config
+                include ConvenientService::Standard::Config.with(:fault_tolerance)
 
                 middlewares :steps_result do
                   delete middleware
@@ -483,8 +474,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
             let(:service_class) do
               Class.new.tap do |klass|
                 klass.class_exec(middleware) do |middleware|
-                  include ConvenientService::Standard::Config
-                  include ConvenientService::FaultTolerance::Config
+                  include ConvenientService::Standard::Config.with(:fault_tolerance)
 
                   middlewares :steps_result do
                     observe middleware
@@ -512,8 +502,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
             let(:service_class) do
               Class.new.tap do |klass|
                 klass.class_exec(middleware, status, max_backtrace_size) do |middleware, status, max_backtrace_size|
-                  include ConvenientService::Standard::Config
-                  include ConvenientService::FaultTolerance::Config
+                  include ConvenientService::Standard::Config.with(:fault_tolerance)
 
                   middlewares :steps_result do
                     delete middleware
@@ -591,8 +580,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
             let(:service_class) do
               Class.new.tap do |klass|
                 klass.class_exec(middleware) do |middleware|
-                  include ConvenientService::Standard::Config
-                  include ConvenientService::FaultTolerance::Config
+                  include ConvenientService::Standard::Config.with(:fault_tolerance)
 
                   middlewares :steps_result do
                     observe middleware

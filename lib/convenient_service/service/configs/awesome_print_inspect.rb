@@ -98,8 +98,6 @@ module ConvenientService
 
         # rubocop:disable Lint/ConstantDefinitionInBlock
         included do
-          include Configs::Essential
-
           ##
           # @internal
           #   TODO: Plugin groups for autoreplacement of plugins with same purpose.
@@ -108,49 +106,37 @@ module ConvenientService
             use ConvenientService::Plugins::Service::HasAwesomePrintInspect::Concern
           end
 
-          class self::Result
-            include ConvenientService::Core
-
+          entity :Result do
             concerns do
               use ConvenientService::Plugins::Result::HasAwesomePrintInspect::Concern
             end
 
-            class self::Data
-              include ConvenientService::Core
-
+            entity :Data do
               concerns do
                 use ConvenientService::Plugins::Data::HasAwesomePrintInspect::Concern
               end
             end
 
-            class self::Message
-              include ConvenientService::Core
-
+            entity :Message do
               concerns do
                 use ConvenientService::Plugins::Message::HasAwesomePrintInspect::Concern
               end
             end
 
-            class self::Code
-              include ConvenientService::Core
-
+            entity :Code do
               concerns do
                 use ConvenientService::Plugins::Code::HasAwesomePrintInspect::Concern
               end
             end
 
-            class self::Status
-              include ConvenientService::Core
-
+            entity :Status do
               concerns do
                 use ConvenientService::Plugins::Status::HasAwesomePrintInspect::Concern
               end
             end
           end
 
-          class self::Step
-            include ConvenientService::Core
-
+          entity :Step do
             concerns do
               use ConvenientService::Plugins::Step::HasAwesomePrintInspect::Concern
             end

@@ -18,8 +18,7 @@ def build_service(modules_count)
   KLASSES <<
     Class.new.tap do |klass|
       klass.class_exec(modules_count) do |modules_count|
-        include ConvenientService::Standard::Config
-        include ConvenientService::FaultTolerance::Config
+        include ConvenientService::Standard::Config.with(:fault_tolerance)
 
         modules_count.times { include Module.new }
 

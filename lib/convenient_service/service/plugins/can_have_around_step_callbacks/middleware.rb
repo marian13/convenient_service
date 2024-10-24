@@ -20,7 +20,7 @@ module ConvenientService
           #
           #     step :foo
           #
-          #     class self::Step
+          #     entity :Step do
           #       around :step do |chain, arguments|
           #         organizer.instance_exec(chain, arguments) do |chain, arguments|
           #           step = chain.yield

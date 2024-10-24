@@ -22,25 +22,6 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
         end
       end
 
-      specify { expect(service_class).to include_module(ConvenientService::Service::Configs::Essential) }
-      specify { expect(service_class).to include_module(ConvenientService::Service::Configs::Callbacks) }
-      specify { expect(service_class).to include_module(ConvenientService::Service::Configs::Fallbacks) }
-
-      specify { expect(service_class).not_to include_module(ConvenientService::Service::Configs::Rollbacks) }
-      specify { expect(service_class).not_to include_module(ConvenientService::Service::Configs::FaultTolerance) }
-
-      specify { expect(service_class).to include_module(ConvenientService::Service::Configs::Inspect) }
-      specify { expect(service_class).to include_module(ConvenientService::Service::Configs::Recalculation) }
-      specify { expect(service_class).to include_module(ConvenientService::Service::Configs::ResultParentsTrace) }
-      specify { expect(service_class).to include_module(ConvenientService::Service::Configs::RSpec) }
-
-      specify { expect(service_class).to include_module(ConvenientService::Service::Configs::CodeReviewAutomation) }
-      specify { expect(service_class).to include_module(ConvenientService::Service::Configs::ShortSyntax) }
-
-      specify { expect(service_class).to include_module(ConvenientService::Service::Configs::TypeSafety) }
-      specify { expect(service_class).to include_module(ConvenientService::Service::Configs::ExceptionServicesTrace) }
-      specify { expect(service_class).to include_module(ConvenientService::Service::Configs::PerInstanceCaching) }
-
       example_group "service" do
         example_group "concerns" do
           let(:concerns) do
@@ -269,7 +250,8 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
         example_group ".result middlewares" do
           let(:class_result_middlewares) do
             [
-              ConvenientService::Service::Plugins::CountsStubbedResultsInvocations::Middleware, ConvenientService::Service::Plugins::CanHaveStubbedResults::Middleware
+              ConvenientService::Service::Plugins::CountsStubbedResultsInvocations::Middleware,
+              ConvenientService::Service::Plugins::CanHaveStubbedResults::Middleware
             ]
           end
 

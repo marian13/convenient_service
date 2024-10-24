@@ -20,7 +20,7 @@ module ConvenientService
           #
           #     step :foo
           #
-          #     class self::Step
+          #     entity :Step do
           #       after :result do |step, arguments|
           #         organizer.instance_exec(step, arguments) do |step, arguments|
           #           log("after :step (#{step.index})")

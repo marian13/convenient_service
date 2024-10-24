@@ -24,8 +24,6 @@ RSpec.describe ConvenientService::Service::Configs::AwesomePrintInspect, type: :
         end
       end
 
-      specify { expect(service_class).to include_module(ConvenientService::Service::Configs::Essential) }
-
       example_group "service" do
         example_group "concerns" do
           it "adds `ConvenientService::Service::Plugins::HasAwesomePrintInspect::Concern` from service concerns" do

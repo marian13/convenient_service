@@ -11,7 +11,7 @@ RSpec.describe ConvenientService::Feature::Configs::Standard, type: :standard do
 
     subject { described_class }
 
-    it { is_expected.to include_module(ConvenientService::Config) }
+    it { is_expected.to include_module(ConvenientService::Feature::Config) }
 
     context "when included" do
       let(:feature_class) do
@@ -21,9 +21,6 @@ RSpec.describe ConvenientService::Feature::Configs::Standard, type: :standard do
           end
         end
       end
-
-      specify { expect(feature_class).to include_module(ConvenientService::Feature::Configs::Essential) }
-      specify { expect(feature_class).to include_module(ConvenientService::Feature::Configs::RSpec) }
 
       example_group "feature" do
         example_group "concerns" do
@@ -49,6 +46,30 @@ RSpec.describe ConvenientService::Feature::Configs::Standard, type: :standard do
 
           it "sets feature middlewares for `.new`" do
             expect(feature_class.middlewares(:new, scope: :class).to_a).to eq(class_new_middlewares)
+          end
+        end
+
+        example_group ".trigger middlewares" do
+          let(:class_trigger_middlewares) do
+            [
+              ConvenientService::Plugins::Feature::CanHaveStubbedEntries::Middleware
+            ]
+          end
+
+          it "sets feature middlewares for `.trigger`" do
+            expect(feature_class.middlewares(:trigger, scope: :class).to_a).to eq(class_trigger_middlewares)
+          end
+        end
+
+        example_group "#trigger middlewares" do
+          let(:trigger_middlewares) do
+            [
+              ConvenientService::Plugins::Feature::CanHaveStubbedEntries::Middleware
+            ]
+          end
+
+          it "sets feature middlewares for `.trigger`" do
+            expect(feature_class.middlewares(:trigger).to_a).to eq(trigger_middlewares)
           end
         end
       end

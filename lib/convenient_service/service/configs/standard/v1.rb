@@ -8,53 +8,53 @@ module ConvenientService
       #
       module Standard
         module V1
-          include ConvenientService::Config
+          include ConvenientService::Service::Config
+
+          default_options do
+            [
+              :essential,
+              :callbacks,
+              :inspect,
+              :recalculation,
+              :result_parents_trace,
+              :code_review_automation,
+              :short_syntax,
+              :type_safety,
+              :exception_services_trace,
+              :per_instance_caching,
+              :mermaid_flowchart,
+              rspec: Dependencies.rspec.loaded?
+            ]
+          end
 
           ##
           # @internal
           #   IMPORTANT: Order of plugins matters.
           #
           #   NOTE: `class_exec` (that is used under the hood by `included`) defines `class Result` in the global namespace.
-          #   That is why `class self::Result` is used.
+          #   That is why `entity :Result do` is used.
           #   - https://stackoverflow.com/a/51965126/12201472
           #
           # rubocop:disable Lint/ConstantDefinitionInBlock
           included do
-            include ConvenientService::Core
-
-            include Configs::Essential
-
-            include Configs::Callbacks
-
-            include Configs::Inspect
-            include Configs::Recalculation
-            include Configs::ResultParentsTrace
-            include Configs::RSpec
-
-            include Configs::CodeReviewAutomation
-            include Configs::ShortSyntax
-
-            include Configs::TypeSafety
-            include Configs::ExceptionServicesTrace # Should be added after `Fallbacks` config, when it is used.
-            include Configs::PerInstanceCaching # Should be added after `Fallbacks` config, when it is used.
+            include ConvenientService::Standard::Config \
+              .without_defaults
+              .with(options)
 
             concerns do
-              use ConvenientService::Plugins::Service::HasMermaidFlowchart::Concern
-
-              replace \
-                ConvenientService::Plugins::Service::CanHaveConnectedSteps::Concern,
-                ConvenientService::Plugins::Service::CanHaveSequentialSteps::Concern
+              if options.include?(:essential)
+                replace \
+                  ConvenientService::Plugins::Service::CanHaveConnectedSteps::Concern,
+                  ConvenientService::Plugins::Service::CanHaveSequentialSteps::Concern
+              end
             end
 
             middlewares :result do
-              ##
-              # TODO: Rewrite. This plugin does NOT do what it states. Probably I was NOT with a clear mind while writing it (facepalm).
-              #
-              # use ConvenientService::Plugins::Service::RaisesOnDoubleResult::Middleware
-
-              replace \
-                ConvenientService::Plugins::Service::CanHaveConnectedSteps::Middleware,
-                ConvenientService::Plugins::Service::CanHaveSequentialSteps::Middleware
+              if options.include?(:essential)
+                replace \
+                  ConvenientService::Plugins::Service::CanHaveConnectedSteps::Middleware,
+                  ConvenientService::Plugins::Service::CanHaveSequentialSteps::Middleware
+              end
             end
           end
           # rubocop:enable Lint/ConstantDefinitionInBlock

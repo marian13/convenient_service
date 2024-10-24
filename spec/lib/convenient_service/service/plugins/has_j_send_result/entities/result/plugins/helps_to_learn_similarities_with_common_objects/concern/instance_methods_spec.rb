@@ -14,7 +14,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
     Class.new do
       include ConvenientService::Standard::Config
       # rubocop:disable Lint/ConstantDefinitionInBlock, RSpec/LeakyConstantDeclaration
-      class self::Result
+      entity :Result do
         concerns do
           use ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HelpsToLearnSimilaritiesWithCommonObjects::Concern
         end
