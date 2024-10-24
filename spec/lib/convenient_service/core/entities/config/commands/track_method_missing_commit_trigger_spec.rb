@@ -13,9 +13,9 @@ RSpec.describe ConvenientService::Core::Entities::Config::Commands::TrackMethodM
   example_group "class methods" do
     subject(:command_result) { described_class.call(config: config, trigger: trigger) }
 
-    let(:config) { ConvenientService::Core::Entities::Config.new(klass: service_class) }
+    let(:config) { ConvenientService::Core::Entities::Config.new(klass: entity_class) }
 
-    let(:service_class) do
+    let(:entity_class) do
       Class.new do
         include ConvenientService::Core
       end

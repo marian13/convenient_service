@@ -112,6 +112,65 @@ RSpec.describe ConvenientService::Core::Concern::ClassMethods, type: :standard d
       end
     end
 
+    describe ".options" do
+      # rubocop:disable RSpec/ExampleLength
+      specify do
+        ##
+        # NOTE: Imitates non-memoized config instance variable. For Ruby 3.2+ is is stored in `class`. For previous versions its stored in `class.singleton_class`.
+        #
+        service_class.remove_instance_variable(:@__convenient_service_config__) if service_class.instance_variable_defined?(:@__convenient_service_config__)
+        service_class.singleton_class.remove_instance_variable(:@__convenient_service_config__) if service_class.singleton_class.instance_variable_defined?(:@__convenient_service_config__)
+
+        allow(ConvenientService::Core::Entities::Config).to receive(:new).with(klass: service_class).and_return(config)
+
+        expect { service_class.options }
+          .to delegate_to(config, :options)
+          .without_arguments
+          .and_return_its_value
+      end
+      # rubocop:enable RSpec/ExampleLength
+
+      ##
+      # NOTE: Indirect test for `||=` in `@config ||= Entities::Config.new(klass: self)`.
+      #
+      specify do
+        expect { service_class.options }.to cache_its_value
+      end
+    end
+
+    describe ".entity" do
+      let(:name) { :Result }
+      let(:configuration_block) { proc {} }
+
+      # rubocop:disable RSpec/ExampleLength
+      specify do
+        ##
+        # NOTE: Imitates non-memoized config instance variable. For Ruby 3.2+ is is stored in `class`. For previous versions its stored in `class.singleton_class`.
+        #
+        service_class.remove_instance_variable(:@__convenient_service_config__) if service_class.instance_variable_defined?(:@__convenient_service_config__)
+        service_class.singleton_class.remove_instance_variable(:@__convenient_service_config__) if service_class.singleton_class.instance_variable_defined?(:@__convenient_service_config__)
+
+        ##
+        # NOTE: `entity :Result do` creates condig for `Result` class. That is why `receive(:new).and_call_original` is used here.
+        #
+        allow(ConvenientService::Core::Entities::Config).to receive(:new).and_call_original
+        allow(ConvenientService::Core::Entities::Config).to receive(:new).with(klass: service_class).and_return(config)
+
+        expect { service_class.entity(name, &configuration_block) }
+          .to delegate_to(config, :entity)
+          .with_arguments(name, &configuration_block)
+          .and_return_its_value
+      end
+      # rubocop:enable RSpec/ExampleLength
+
+      ##
+      # NOTE: Indirect test for `||=` in `@config ||= Entities::Config.new(klass: self)`.
+      #
+      specify do
+        expect { service_class.entity(name, &configuration_block) }.to cache_its_value
+      end
+    end
+
     describe ".has_committed_config?" do
       before do
         ##

@@ -37,6 +37,20 @@ module ConvenientService
         end
 
         ##
+        # @see ConvenientService::Core::Entities::Config#options
+        #
+        def options(...)
+          __convenient_service_config__.options(...)
+        end
+
+        ##
+        # @see ConvenientService::Core::Entities::Config#entity
+        #
+        def entity(...)
+          __convenient_service_config__.entity(...)
+        end
+
+        ##
         # @return [Boolean] Returns `true` when config is committed, otherwise - `false`.
         #
         def has_committed_config?

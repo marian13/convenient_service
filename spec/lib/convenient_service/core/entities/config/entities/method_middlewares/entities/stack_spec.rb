@@ -8,7 +8,14 @@ require "convenient_service"
 RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Stack, type: :standard do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
-  let(:stack) { described_class.new(name: name, plain_stack: plain_stack) }
+  let(:stack) { described_class.new(klass: klass, name: name, plain_stack: plain_stack) }
+
+  let(:klass) do
+    Class.new do
+      include ConvenientService::Config
+    end
+  end
+
   let(:name) { "stack name" }
   let(:plain_stack) { ConvenientService::Support::Middleware::StackBuilder.new(name: name) }
   let(:env) { {foo: :bar} }
@@ -34,7 +41,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
   example_group "class methods" do
     describe ".new" do
       context "when `plain_stack` is NOT `nil`" do
-        let(:stack) { described_class.new(name: name, plain_stack: custom_plain_stack) }
+        let(:stack) { described_class.new(klass: klass, name: name, plain_stack: custom_plain_stack) }
         let(:custom_plain_stack) { ConvenientService::Support::Middleware::StackBuilder.new(name: "custom plain stack") }
 
         ##
@@ -48,7 +55,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
       end
 
       context "when `plain_stack` is `nil`" do
-        let(:stack) { described_class.new(name: name, plain_stack: nil) }
+        let(:stack) { described_class.new(klass: klass, name: name, plain_stack: nil) }
         let(:default_plain_stack) { ConvenientService::Support::Middleware::StackBuilder.new(name: name) }
 
         ##
@@ -64,12 +71,28 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
   end
 
   example_group "instance methods" do
-    example_group "instance alias methods" do
+    example_group "alias methods" do
       include ConvenientService::RSpec::PrimitiveMatchers::HaveAliasMethod
 
       subject { stack }
 
       it { is_expected.to have_alias_method(:insert_before, :insert) }
+    end
+
+    example_group "attributes" do
+      include ConvenientService::RSpec::PrimitiveMatchers::HaveAttrReader
+
+      subject { stack }
+
+      it { is_expected.to have_attr_reader(:klass) }
+    end
+
+    describe "#options" do
+      specify do
+        expect { stack.options }
+          .to delegate_to(klass, :options)
+          .and_return_its_value
+      end
     end
 
     describe "#name" do
@@ -96,9 +119,11 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
       specify do
         expect { stack.dup }
           .to delegate_to(described_class, :new)
-          .with_arguments(plain_stack: plain_stack)
+          .with_arguments(klass: klass, plain_stack: plain_stack)
           .and_return_its_value
       end
+
+      specify { expect { stack.dup }.not_to delegate_to(klass, :dup) }
 
       specify { expect { stack.dup }.to delegate_to(name, :dup) }
 
@@ -428,8 +453,22 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
           end
         end
 
+        context "when `other` has different `klass`" do
+          let(:other) { described_class.new(klass: other_klass, plain_stack: plain_stack) }
+
+          let(:other_klass) do
+            Class.new do
+              include ConvenientService::Core
+            end
+          end
+
+          it "returns `false`" do
+            expect(stack == other).to eq(false)
+          end
+        end
+
         context "when `other` has different `plain_stack`" do
-          let(:other) { described_class.new(plain_stack: ConvenientService::Support::Middleware::StackBuilder.new(name: name).tap { |stack| stack.use middleware }) }
+          let(:other) { described_class.new(klass: klass, plain_stack: ConvenientService::Support::Middleware::StackBuilder.new(name: name).tap { |stack| stack.use middleware }) }
 
           it "returns `false`" do
             expect(stack == other).to eq(false)
@@ -437,7 +476,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
         end
 
         context "when `other` has same attributes" do
-          let(:other) { described_class.new(plain_stack: plain_stack) }
+          let(:other) { described_class.new(klass: klass, plain_stack: plain_stack) }
 
           it "returns `true`" do
             expect(stack == other).to eq(true)

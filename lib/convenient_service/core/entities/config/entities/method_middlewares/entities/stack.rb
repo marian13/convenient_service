@@ -13,16 +13,32 @@ module ConvenientService
               #
               class Stack
                 ##
-                # @overload initialize(name:)
+                # @!attribute [r] klass
+                #   @return [ConvenientService::Service]
+                #
+                attr_reader :klass
+
+                ##
+                # @overload initialize(klass:, name:)
+                #   @param klass [Class]
                 #   @param name [String]
                 #   @return [void]
                 #
-                # @overload initialize(plain_stack:)
+                # @overload initialize(klass:, plain_stack:)
+                #   @param klass [Class]
                 #   @param name [ConvenientService::Support::Middleware::StackBuilder]
                 #   @return [void]
                 #
-                def initialize(name: nil, plain_stack: nil)
+                def initialize(klass:, name: nil, plain_stack: nil)
+                  @klass = klass
                   @plain_stack = plain_stack || Support::Middleware::StackBuilder.new(name: name)
+                end
+
+                ##
+                # @return [Set]
+                #
+                def options
+                  klass.options
                 end
 
                 ##
@@ -36,7 +52,7 @@ module ConvenientService
                 # @return [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Stack]
                 #
                 def dup
-                  self.class.new(plain_stack: plain_stack.dup)
+                  self.class.new(klass: klass, plain_stack: plain_stack.dup)
                 end
 
                 ##
@@ -208,6 +224,7 @@ module ConvenientService
                 def ==(other)
                   return unless other.instance_of?(self.class)
 
+                  return false if klass != other.klass
                   return false if plain_stack != other.plain_stack
 
                   true

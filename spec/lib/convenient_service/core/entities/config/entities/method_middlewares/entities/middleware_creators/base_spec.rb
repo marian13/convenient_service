@@ -17,6 +17,12 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
   let(:kwargs) { {foo: :bar} }
   let(:block) { proc { :foo } }
 
+  let(:klass) do
+    Class.new do
+      include ConvenientService::Core
+    end
+  end
+
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
 
@@ -74,7 +80,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
     end
 
     describe "#new" do
-      let(:stack) { ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Stack.new }
+      let(:stack) { ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Stack.new(klass: klass) }
       let(:env) { {foo: :bar} }
 
       it "returns instance of decorated middleware" do

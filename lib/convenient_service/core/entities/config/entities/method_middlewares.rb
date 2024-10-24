@@ -144,7 +144,7 @@ module ConvenientService
             # @return [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Stack]
             #
             def stack
-              @stack ||= Entities::Stack.new(name: stack_name)
+              @stack ||= Entities::Stack.new(name: stack_name, klass: klass)
             end
 
             private
