@@ -70,9 +70,15 @@ module ConvenientService
               #   # end
               #
               entity.class_exec(proto_entity) do |proto_entity|
+                ##
+                # @return [Class]
+                #
                 define_singleton_method(:proto_entity) { proto_entity }
 
                 ##
+                # @param other [Object] Can by any type.
+                # @return [Boolean, nil]
+                #
                 # @internal
                 #   TODO: Try `self.proto_entity == other.proto_entity if self < proto_entity_concern`.
                 #
