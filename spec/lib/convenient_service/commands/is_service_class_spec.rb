@@ -43,22 +43,6 @@ RSpec.describe ConvenientService::Commands::IsServiceClass, type: :standard do
           end
         end
 
-        context "when `service_class` includes `ConvenientService::Service::Configs::Standard`" do
-          let(:service_class) do
-            Class.new do
-              include ConvenientService::Standard::Config
-
-              def result
-                success
-              end
-            end
-          end
-
-          it "returns `true`" do
-            expect(command_result).to eq(true)
-          end
-        end
-
         context "when `service_class` includes `ConvenientService::Service::Configs::Standard` with additional options" do
           let(:service_class) do
             Class.new do

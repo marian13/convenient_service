@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "module/exceptions"
+
 require_relative "module/class_method_defined"
 require_relative "module/fetch_own_const"
 require_relative "module/get_namespace"

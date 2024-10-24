@@ -41,6 +41,7 @@ module ConvenientService
 
         ##
         # @return [Module, Class, nil]
+        # @raise [ConvenientService::Utils::Module::Exceptions::NestingUnderAnonymousNamespace]
         #
         def call
           return unless mod.name
@@ -48,7 +49,11 @@ module ConvenientService
 
           namespace_name = mod.name.split("::")[0..-2].join("::")
 
-          ::Object.const_get(namespace_name, false)
+          begin
+            ::Object.const_get(namespace_name, false)
+          rescue ::NameError
+            ::ConvenientService.raise Exceptions::NestingUnderAnonymousNamespace.new(mod: mod, namespace: namespace_name)
+          end
         end
       end
     end
