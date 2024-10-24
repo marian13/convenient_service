@@ -4,6 +4,7 @@ require "spec_helper"
 
 require "convenient_service"
 
+# rubocop:disable RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Utils, type: :standard do
   example_group "class methods" do
     include ConvenientService::RSpec::Matchers::DelegateTo
@@ -77,3 +78,4 @@ RSpec.describe ConvenientService::Utils, type: :standard do
     end
   end
 end
+# rubocop:enable RSpec/MultipleMemoizedHelpers
