@@ -10,7 +10,10 @@ module ConvenientService
       #     Version: v7.0.4.3.
       #     Wrapped in a namespace `ConvenientService::Dependencies::Extractions::ActiveSupportConcern`.
       #     Added `instance_methods` that works in a similar way as `class_methods`.
+      #     Added `singleton_class_methods` that works in a similar way as `class_methods`.
       #     Also `ClassMethods` (and `InstanceMethods`) are loaded after `included` block, not as in the original implementation.
+      #     Added `eval_included_block` to have a template method.
+      #     Added `eval_prepended_block` to have a template method.
       #
       #   - https://api.rubyonrails.org/v7.0.4.3/classes/ActiveSupport/Concern.html
       #   - https://github.com/rails/rails/blob/v7.0.4.3/activesupport/lib/active_support/concern.rb
@@ -156,7 +159,7 @@ module ConvenientService
               @_dependencies.each { |dep| base.include(dep) }
               super
 
-              base.class_eval(&@_included_block) if instance_variable_defined?(:@_included_block)
+              eval_included_block(base)
 
               ##
               # NOTE: Customization compared to original `Concern` implementation.
@@ -180,7 +183,7 @@ module ConvenientService
               @_dependencies.each { |dep| base.prepend(dep) }
               super
 
-              base.class_eval(&@_prepended_block) if instance_variable_defined?(:@_prepended_block)
+              eval_prepended_block(base)
 
               ##
               # NOTE: Customization compared to original `Concern` implementation.
@@ -297,6 +300,24 @@ module ConvenientService
               const_set(:SingletonClassMethods, Module.new)
 
             mod.module_eval(&singleton_class_methods_module_definition)
+          end
+
+          private
+
+          ##
+          # @param base [Class]
+          # @return [void]
+          #
+          def eval_included_block(base)
+            base.class_eval(&@_included_block) if instance_variable_defined?(:@_included_block)
+          end
+
+          ##
+          # @param base [Class]
+          # @return [void]
+          #
+          def eval_prepended_block(base)
+            base.class_eval(&@_prepended_block) if instance_variable_defined?(:@_prepended_block)
           end
         end
       end
