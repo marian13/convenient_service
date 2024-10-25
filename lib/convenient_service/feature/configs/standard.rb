@@ -7,7 +7,7 @@ module ConvenientService
       # Default configuration for the user-defined features.
       #
       module Standard
-        include ConvenientService::Feature::Config
+        include ConvenientService::Config
 
         default_options do
           [
@@ -17,6 +17,8 @@ module ConvenientService
         end
 
         included do
+          include ConvenientService::Feature::Core
+
           concerns do
             use ConvenientService::Plugins::Feature::CanHaveEntries::Concern if options.include?(:essential)
             use ConvenientService::Plugins::Common::HasInstanceProxy::Concern if options.include?(:essential)

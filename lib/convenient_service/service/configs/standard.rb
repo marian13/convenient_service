@@ -10,7 +10,7 @@ module ConvenientService
       # Default configuration for the user-defined services.
       #
       module Standard
-        include ConvenientService::Service::Config
+        include ConvenientService::Config
 
         default_options do
           [
@@ -42,6 +42,8 @@ module ConvenientService
         #
         # rubocop:disable Lint/ConstantDefinitionInBlock
         included do
+          include ConvenientService::Service::Core
+
           concerns do
             use ConvenientService::Plugins::Service::CanHaveStubbedResults::Concern if options.include?(:rspec)
             use ConvenientService::Plugins::Common::HasInternals::Concern if options.include?(:essential)

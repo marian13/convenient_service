@@ -8,7 +8,7 @@ module ConvenientService
       #
       module Standard
         module V1
-          include ConvenientService::Service::Config
+          include ConvenientService::Config
 
           default_options do
             [
@@ -37,7 +37,7 @@ module ConvenientService
           #
           # rubocop:disable Lint/ConstantDefinitionInBlock
           included do
-            include ConvenientService::Standard::Config \
+            include ConvenientService::Standard::Config
               .without_defaults
               .with(options)
 

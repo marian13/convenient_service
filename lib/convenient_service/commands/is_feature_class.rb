@@ -23,7 +23,7 @@ module ConvenientService
       def call
         return unless feature_class.instance_of?(::Class)
 
-        feature_class.include?(Feature::Config)
+        feature_class.include?(Feature::Core)
       end
     end
   end

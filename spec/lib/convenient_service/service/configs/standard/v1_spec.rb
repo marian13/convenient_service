@@ -22,6 +22,8 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
         end
       end
 
+      specify { expect(feature_class).to include_module(ConvenientService::Service::Core) }
+
       example_group "service" do
         example_group "concerns" do
           let(:concerns) do

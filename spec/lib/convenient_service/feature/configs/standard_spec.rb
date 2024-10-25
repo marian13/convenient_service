@@ -11,7 +11,7 @@ RSpec.describe ConvenientService::Feature::Configs::Standard, type: :standard do
 
     subject { described_class }
 
-    it { is_expected.to include_module(ConvenientService::Feature::Config) }
+    it { is_expected.to include_module(ConvenientService::Config) }
 
     context "when included" do
       let(:feature_class) do
@@ -21,6 +21,8 @@ RSpec.describe ConvenientService::Feature::Configs::Standard, type: :standard do
           end
         end
       end
+
+      specify { expect(feature_class).to include_module(ConvenientService::Feature::Core) }
 
       example_group "feature" do
         example_group "concerns" do
