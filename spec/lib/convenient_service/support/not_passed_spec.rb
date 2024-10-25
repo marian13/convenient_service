@@ -4,12 +4,40 @@ require "spec_helper"
 
 require "convenient_service"
 
-# rubocop:disable RSpec/NestedGroups, RSpec/DescribeClass
-RSpec.describe "convenient_service/support/not_passed", type: :standard do
+# rubocop:disable RSpec/NestedGroups
+RSpec.describe ConvenientService::Support::NotPassed, type: :standard do
+  example_group "inheritance" do
+    include ConvenientService::RSpec::PrimitiveMatchers::BeDescendantOf
+
+    subject { described_class }
+
+    it { is_expected.to be_descendant_of(ConvenientService::Support::UniqueValue) }
+  end
+
+  example_group "instance methods" do
+    describe "#[]" do
+      context "when `value` is NOT `ConvenientService::Support::NOT_PASSED`" do
+        let(:value) { 42 }
+
+        it "returns `false`" do
+          expect(ConvenientService::Support::NOT_PASSED[value]).to eq(false)
+        end
+      end
+
+      context "when `value` is `ConvenientService::Support::NOT_PASSED`" do
+        let(:value) { ConvenientService::Support::NOT_PASSED }
+
+        it "returns `true`" do
+          expect(ConvenientService::Support::NOT_PASSED[value]).to eq(true)
+        end
+      end
+    end
+  end
+
   example_group "constants" do
     describe "::NOT_PASSED" do
-      it "returns `ConvenientService::Support::UniqueValue` instance" do
-        expect(ConvenientService::Support::NOT_PASSED).to be_instance_of(ConvenientService::Support::UniqueValue)
+      it "returns `ConvenientService::Support::NotPassed` instance" do
+        expect(ConvenientService::Support::NOT_PASSED).to be_instance_of(described_class)
       end
 
       ##
@@ -26,4 +54,4 @@ RSpec.describe "convenient_service/support/not_passed", type: :standard do
     end
   end
 end
-# rubocop:enable RSpec/NestedGroups, RSpec/DescribeClass
+# rubocop:enable RSpec/NestedGroups

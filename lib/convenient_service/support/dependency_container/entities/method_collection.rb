@@ -22,9 +22,9 @@ module ConvenientService
           def find_by(name: Support::NOT_PASSED, slug: Support::NOT_PASSED, scope: Support::NOT_PASSED)
             rules = []
 
-            rules << ->(method) { method.name.to_s == name.to_s } if name != Support::NOT_PASSED
-            rules << ->(method) { method.slug.to_s == slug.to_s } if slug != Support::NOT_PASSED
-            rules << ->(method) { method.scope == scope } if scope != Support::NOT_PASSED
+            rules << ->(method) { method.name.to_s == name.to_s } unless Support::NOT_PASSED[name]
+            rules << ->(method) { method.slug.to_s == slug.to_s } unless Support::NOT_PASSED[slug]
+            rules << ->(method) { method.scope == scope } unless Support::NOT_PASSED[scope]
 
             condition = Utils::Proc.conjunct(rules)
 

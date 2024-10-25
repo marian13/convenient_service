@@ -20,7 +20,7 @@ module ConvenientService
           def find_by(name: Support::NOT_PASSED)
             rules = []
 
-            rules << ->(namespace) { namespace.name.to_s == name.to_s } if name != Support::NOT_PASSED
+            rules << ->(namespace) { namespace.name.to_s == name.to_s } unless Support::NOT_PASSED[name]
 
             condition = Utils::Proc.conjunct(rules)
 

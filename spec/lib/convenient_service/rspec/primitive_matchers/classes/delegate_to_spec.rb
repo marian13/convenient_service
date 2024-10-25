@@ -68,7 +68,7 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo,
           ##
           # TODO: Introduce to `be_empty_proc` matcher.
           #
-          expect([matcher.inputs.block_expectation.instance_of?(Proc), matcher.inputs.block_expectation.call == ConvenientService::Support::UNDEFINED]).to all eq(true)
+          expect([matcher.inputs.block_expectation.instance_of?(Proc), ConvenientService::Support::UNDEFINED[matcher.inputs.block_expectation.call]]).to all eq(true)
         end
       end
     end

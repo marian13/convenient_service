@@ -24,7 +24,7 @@ module ConvenientService
 
             method = from.exported_methods.find_by(slug: slug, scope: scope)
 
-            method = method.copy(overrides: {kwargs: {alias_slug: as}}) if as != Support::NOT_PASSED
+            method = method.copy(overrides: {kwargs: {alias_slug: as}}) unless Support::NOT_PASSED[as]
 
             Commands::ImportMethod.call(importing_module: self, exported_method: method, prepend: prepend)
           end

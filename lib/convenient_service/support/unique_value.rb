@@ -22,12 +22,13 @@ module ConvenientService
       # @return [Boolean, nil]
       #
       # @internal
-      #   NOTE: Every single Ruby object responds to `object_id`.
+      #   NOTE: The `equal?` method should never be overridden by subclasses as it is used to determine object identity (that is, `a.equal?(b)` if and only if `a` is the same object as `b`).
+      #   - https://ruby-doc.org/core-2.7.2/BasicObject.html#method-i-equal-3F
       #
       def ==(other)
         return unless other.instance_of?(self.class)
 
-        object_id == other.object_id
+        equal?(other)
       end
 
       ##
