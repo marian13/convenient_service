@@ -416,6 +416,632 @@ RSpec.describe ConvenientService::Core::Entities::Config, type: :standard do
       end
     end
 
+    # rubocop:disable RSpec/ExampleLength
+    describe "#options" do
+      context "when called on `entity`" do
+        context "when called before `config` module" do
+          it "returns `config` module options" do
+            Class.new.tap do |klass|
+              klass.class_exec(self) do |example|
+                include ConvenientService::Core
+
+                service_options = options
+
+                example.instance_exec(service_options) do |service_options|
+                  expect(service_options).to eq(::Set.new)
+                end
+
+                mod = Module.new do
+                  include ConvenientService::Config
+
+                  default_options do
+                    [:foo, :bar]
+                  end
+
+                  included do
+                  end
+                end
+
+                include mod
+              end
+            end
+          end
+
+          it "caches its value" do
+            Class.new.tap do |klass|
+              klass.class_exec(self) do |example|
+                include ConvenientService::Core
+
+                service_options = options
+                cached_service_options = options
+
+                example.instance_exec(service_options, cached_service_options) do |service_options, cached_service_options|
+                  expect(service_options.object_id).to eq(cached_service_options.object_id)
+                end
+
+                mod = Module.new do
+                  include ConvenientService::Config
+
+                  default_options do
+                    [:foo, :bar]
+                  end
+
+                  included do
+                  end
+                end
+
+                include mod
+              end
+            end
+          end
+        end
+
+        context "when called inside `config` module" do
+          it "returns `config` module options" do
+            Class.new.tap do |klass|
+              klass.class_exec(self) do |example|
+                mod = Module.new do
+                  include ConvenientService::Config
+
+                  default_options do
+                    [:foo, :bar]
+                  end
+
+                  included do
+                    service_options = options
+
+                    example.instance_exec(service_options) do |service_options|
+                      expect(service_options).to eq(::Set[:foo, :bar])
+                    end
+                  end
+                end
+
+                include mod
+              end
+            end
+          end
+
+          it "caches its value" do
+            Class.new.tap do |klass|
+              klass.class_exec(self) do |example|
+                mod = Module.new do
+                  include ConvenientService::Config
+
+                  default_options do
+                    [:foo, :bar]
+                  end
+
+                  included do
+                    service_options = options
+                    cached_service_options = options
+
+                    example.instance_exec(service_options, cached_service_options) do |service_options, cached_service_options|
+                      expect(service_options.object_id).to eq(cached_service_options.object_id)
+                    end
+                  end
+                end
+
+                include mod
+              end
+            end
+          end
+        end
+
+        context "when called after `config` module" do
+          let(:service_config) { service_class.__convenient_service_config__ }
+
+          let(:service_class) do
+            Class.new do
+              include ConvenientService::Core
+
+              Module.new do
+                include ConvenientService::Config
+
+                default_options do
+                  [:foo, :bar]
+                end
+              end
+            end
+          end
+
+          it "returns empty set" do
+            expect(service_config.options).to eq(Set.new)
+          end
+
+          specify do
+            expect { service_config.options }.to cache_its_value
+          end
+        end
+      end
+
+      context "when called on nested `entity`" do
+        context "when called before `config` module" do
+          it "returns `config` module options" do
+            Class.new.tap do |klass|
+              klass.class_exec(self) do |example|
+                include ConvenientService::Core
+
+                entity :Result do
+                  result_options = options
+
+                  example.instance_exec(result_options) do |result_options|
+                    expect(result_options).to eq(::Set.new)
+                  end
+                end
+
+                mod = Module.new do
+                  include ConvenientService::Config
+
+                  default_options do
+                    [:foo, :bar]
+                  end
+
+                  included do
+                  end
+                end
+
+                include mod
+              end
+            end
+          end
+
+          it "returns same options as `entity`" do
+            Class.new.tap do |klass|
+              klass.class_exec(self) do |example|
+                include ConvenientService::Core
+
+                service_options = options
+
+                entity :Result do
+                  result_options = options
+
+                  example.instance_exec(service_options, result_options) do |service_options, result_options|
+                    expect(result_options.object_id).to eq(service_options.object_id)
+                  end
+                end
+
+                mod = Module.new do
+                  include ConvenientService::Config
+
+                  default_options do
+                    [:foo, :bar]
+                  end
+
+                  included do
+                  end
+                end
+
+                include mod
+              end
+            end
+          end
+
+          it "caches its value" do
+            Class.new.tap do |klass|
+              klass.class_exec(self) do |example|
+                include ConvenientService::Core
+
+                entity :Result do
+                  result_options = options
+                  cached_result_options = options
+
+                  example.instance_exec(result_options, cached_result_options) do |result_options, cached_result_options|
+                    expect(result_options.object_id).to eq(cached_result_options.object_id)
+                  end
+                end
+
+                mod = Module.new do
+                  include ConvenientService::Config
+
+                  default_options do
+                    [:foo, :bar]
+                  end
+
+                  included do
+                  end
+                end
+
+                include mod
+              end
+            end
+          end
+        end
+
+        context "when called inside `config` module" do
+          it "returns `config` module options" do
+            Class.new.tap do |klass|
+              klass.class_exec(self) do |example|
+                mod = Module.new do
+                  include ConvenientService::Config
+
+                  default_options do
+                    [:foo, :bar]
+                  end
+
+                  included do
+                    entity :Result do
+                      result_options = options
+
+                      example.instance_exec(result_options) do |result_options|
+                        expect(result_options).to eq(::Set[:foo, :bar])
+                      end
+                    end
+                  end
+                end
+
+                include mod
+              end
+            end
+          end
+
+          it "returns same options as `entity`" do
+            Class.new.tap do |klass|
+              klass.class_exec(self) do |example|
+                mod = Module.new do
+                  include ConvenientService::Config
+
+                  default_options do
+                    [:foo, :bar]
+                  end
+
+                  included do
+                    service_options = options
+
+                    entity :Result do
+                      result_options = options
+
+                      example.instance_exec(service_options, result_options) do |service_options, result_options|
+                        expect(result_options.object_id).to eq(service_options.object_id)
+                      end
+                    end
+                  end
+                end
+
+                include mod
+              end
+            end
+          end
+
+          it "caches its value" do
+            Class.new.tap do |klass|
+              klass.class_exec(self) do |example|
+                mod = Module.new do
+                  include ConvenientService::Config
+
+                  default_options do
+                    [:foo, :bar]
+                  end
+
+                  included do
+                    entity :Result do
+                      result_options = options
+                      cached_result_options = options
+
+                      example.instance_exec(result_options, cached_result_options) do |result_options, cached_result_options|
+                        expect(result_options.object_id).to eq(cached_result_options.object_id)
+                      end
+                    end
+                  end
+                end
+
+                include mod
+              end
+            end
+          end
+        end
+
+        context "when called after `config` module" do
+          let(:service_config) { service_class.__convenient_service_config__ }
+          let(:result_config) { service_class::Result.__convenient_service_config__ }
+
+          let(:service_class) do
+            Class.new do
+              include ConvenientService::Core
+
+              entity :Result do
+              end
+            end
+          end
+
+          it "returns empty set" do
+            expect(result_config.options).to eq(Set.new)
+          end
+
+          it "returns same set as `entity`" do
+            expect(result_config.options.object_id).to eq(service_config.options.object_id)
+          end
+
+          specify do
+            expect { result_config.options }.to cache_its_value
+          end
+        end
+      end
+
+      context "when called on multiple times nested `entity`" do
+        context "when called before `config` module" do
+          it "returns `config` module options" do
+            Class.new.tap do |klass|
+              klass.class_exec(self) do |example|
+                include ConvenientService::Core
+
+                entity :Result do
+                  entity :Data do
+                    data_options = options
+
+                    example.instance_exec(data_options) do |data_options|
+                      expect(data_options).to eq(::Set.new)
+                    end
+                  end
+                end
+
+                mod = Module.new do
+                  include ConvenientService::Config
+
+                  default_options do
+                    [:foo, :bar]
+                  end
+
+                  included do
+                  end
+                end
+
+                include mod
+              end
+            end
+          end
+
+          it "returns same options as one time nested `entity`" do
+            Class.new.tap do |klass|
+              klass.class_exec(self) do |example|
+                include ConvenientService::Core
+
+                entity :Result do
+                  result_options = options
+
+                  entity :Data do
+                    data_options = options
+
+                    example.instance_exec(result_options, data_options) do |result_options, data_options|
+                      expect(data_options.object_id).to eq(result_options.object_id)
+                    end
+                  end
+                end
+
+                mod = Module.new do
+                  include ConvenientService::Config
+
+                  default_options do
+                    [:foo, :bar]
+                  end
+
+                  included do
+                  end
+                end
+
+                include mod
+              end
+            end
+          end
+
+          it "returns same options as `entity`" do
+            Class.new.tap do |klass|
+              klass.class_exec(self) do |example|
+                include ConvenientService::Core
+
+                service_options = options
+
+                entity :Result do
+                  entity :Data do
+                    data_options = options
+
+                    example.instance_exec(service_options, data_options) do |service_options, data_options|
+                      expect(data_options.object_id).to eq(service_options.object_id)
+                    end
+                  end
+                end
+
+                mod = Module.new do
+                  include ConvenientService::Config
+
+                  default_options do
+                    [:foo, :bar]
+                  end
+
+                  included do
+                  end
+                end
+
+                include mod
+              end
+            end
+          end
+
+          it "caches its value" do
+            Class.new.tap do |klass|
+              klass.class_exec(self) do |example|
+                include ConvenientService::Core
+
+                entity :Result do
+                  entity :Data do
+                    data_options = options
+                    cached_data_options = options
+
+                    example.instance_exec(data_options, cached_data_options) do |data_options, cached_data_options|
+                      expect(data_options.object_id).to eq(cached_data_options.object_id)
+                    end
+                  end
+                end
+
+                mod = Module.new do
+                  include ConvenientService::Config
+
+                  default_options do
+                    [:foo, :bar]
+                  end
+
+                  included do
+                  end
+                end
+
+                include mod
+              end
+            end
+          end
+        end
+
+        context "when called inside `config` module" do
+          it "returns `config` module options" do
+            Class.new.tap do |klass|
+              klass.class_exec(self) do |example|
+                mod = Module.new do
+                  include ConvenientService::Config
+
+                  default_options do
+                    [:foo, :bar]
+                  end
+
+                  included do
+                    entity :Result do
+                      entity :Data do
+                        data_options = options
+
+                        example.instance_exec(data_options) do |data_options|
+                          expect(data_options).to eq(::Set[:foo, :bar])
+                        end
+                      end
+                    end
+                  end
+                end
+
+                include mod
+              end
+            end
+          end
+
+          it "returns same options as one time nested `entity`" do
+            Class.new.tap do |klass|
+              klass.class_exec(self) do |example|
+                mod = Module.new do
+                  include ConvenientService::Config
+
+                  default_options do
+                    [:foo, :bar]
+                  end
+
+                  included do
+                    entity :Result do
+                      result_options = options
+
+                      entity :Data do
+                        data_options = options
+
+                        example.instance_exec(result_options, data_options) do |result_options, data_options|
+                          expect(data_options.object_id).to eq(result_options.object_id)
+                        end
+                      end
+                    end
+                  end
+                end
+
+                include mod
+              end
+            end
+          end
+
+          it "returns same options as `entity`" do
+            Class.new.tap do |klass|
+              klass.class_exec(self) do |example|
+                mod = Module.new do
+                  include ConvenientService::Config
+
+                  default_options do
+                    [:foo, :bar]
+                  end
+
+                  included do
+                    service_options = options
+
+                    entity :Result do
+                      entity :Data do
+                        data_options = options
+
+                        example.instance_exec(service_options, data_options) do |service_options, data_options|
+                          expect(data_options.object_id).to eq(service_options.object_id)
+                        end
+                      end
+                    end
+                  end
+                end
+
+                include mod
+              end
+            end
+          end
+
+          it "caches its value" do
+            Class.new.tap do |klass|
+              klass.class_exec(self) do |example|
+                mod = Module.new do
+                  include ConvenientService::Config
+
+                  default_options do
+                    [:foo, :bar]
+                  end
+
+                  included do
+                    entity :Result do
+                      result_options = options
+                      cached_result_options = options
+
+                      example.instance_exec(result_options, cached_result_options) do |result_options, cached_result_options|
+                        expect(result_options.object_id).to eq(cached_result_options.object_id)
+                      end
+                    end
+                  end
+                end
+
+                include mod
+              end
+            end
+          end
+        end
+
+        context "when called after `config` module" do
+          let(:service_config) { service_class.__convenient_service_config__ }
+          let(:result_config) { service_class::Result.__convenient_service_config__ }
+          let(:data_config) { service_class::Result::Data.__convenient_service_config__ }
+
+          let(:service_class) do
+            Class.new do
+              include ConvenientService::Core
+
+              entity :Result do
+                entity :Data do
+                end
+              end
+            end
+          end
+
+          it "returns empty set" do
+            expect(data_config.options).to eq(Set.new)
+          end
+
+          it "returns same set as one time nested `entity`" do
+            expect(data_config.options.object_id).to eq(result_config.options.object_id)
+          end
+
+          it "returns same set as `entity`" do
+            expect(data_config.options.object_id).to eq(service_config.options.object_id)
+          end
+
+          specify do
+            expect { data_config.options }.to cache_its_value
+          end
+        end
+      end
+    end
+    # rubocop:enable RSpec/ExampleLength
+
     describe "#method_missing_commits_counter" do
       it "returns `ConvenientService::Support::ThreadSafeCounter` instance" do
         expect(config.method_missing_commits_counter).to be_instance_of(ConvenientService::Support::ThreadSafeCounter)
