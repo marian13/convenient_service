@@ -1042,6 +1042,91 @@ RSpec.describe ConvenientService::Core::Entities::Config, type: :standard do
     end
     # rubocop:enable RSpec/ExampleLength
 
+    describe "#entity" do
+      let(:name) { :Result }
+
+      context "when `configuration_block` is NOT passed" do
+        specify do
+          expect { config.entity(name) }
+            .to delegate_to(ConvenientService::Core::Entities::Config::Commands::FindEntityClass, :call)
+            .with_arguments(config: config, name: name)
+            .and_return_its_value
+        end
+      end
+
+      context "when `configuration_block` is passed" do
+        let(:configuration_block) do
+          proc do
+            concerns do
+              use Module.new
+            end
+          end
+        end
+
+        context "when `config` is NOT committed" do
+          specify do
+            expect { config.entity(name, &configuration_block) }
+              .to delegate_to(ConvenientService::Core::Entities::Config::Commands::FindOrCreateEntityClass, :call)
+              .with_arguments(config: config, name: name)
+              .and_return_its_value
+          end
+
+          it "evalutes `configuration_block` in `entity` context" do
+            ##
+            # NOTE: Defines entity class.
+            #
+            config.entity(name) do
+            end
+
+            expect { config.entity(name, &configuration_block) }.to change { config.entity(name).concerns.to_a.size }.from(0).to(1)
+          end
+
+          context "when `configuration_block` calls nested `entity`" do
+            let(:nested_name) { :Data }
+
+            let(:configuration_block) do
+              proc do
+                entity :Data do
+                  concerns do
+                    use Module.new
+                  end
+                end
+              end
+            end
+
+            it "evalutes nested `configuration_block` in nested`entity` context" do
+              ##
+              # NOTE: Defines entity class.
+              #
+              config.entity(name) do
+                entity :Data do
+                end
+              end
+
+              expect { config.entity(name, &configuration_block) }.to change { config.entity(name).entity(nested_name).concerns.to_a.size }.from(0).to(1)
+            end
+          end
+        end
+
+        context "when `config` is committed" do
+          before do
+            config.commit!
+          end
+
+          it "raises `ConvenientService::Core::Entities::Config::Exceptions::ConfigIsCommitted`" do
+            expect { config.entity(name, &configuration_block) }
+              .to raise_error(described_class::Exceptions::ConfigIsCommitted)
+              .with_message(committed_config_error_message)
+          end
+
+          specify do
+            expect { ignoring_exception(described_class::Exceptions::ConfigIsCommitted) { config.entity(name, &configuration_block) } }
+              .to delegate_to(ConvenientService, :raise)
+          end
+        end
+      end
+    end
+
     describe "#method_missing_commits_counter" do
       it "returns `ConvenientService::Support::ThreadSafeCounter` instance" do
         expect(config.method_missing_commits_counter).to be_instance_of(ConvenientService::Support::ThreadSafeCounter)

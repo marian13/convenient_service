@@ -130,6 +130,25 @@ module ConvenientService
         end
 
         ##
+        # This method is intended to be used only inside config `included` blocks.
+        #
+        # @param name [Symbol]
+        # @param configuration_block [Proc, nil]
+        # @return [Class, nil]
+        #
+        def entity(name, &configuration_block)
+          return Commands::FindEntityClass.call(config: self, name: name) unless configuration_block
+
+          assert_not_committed!
+
+          entity_class = Commands::FindOrCreateEntityClass.call(config: self, name: name)
+
+          entity_class.class_exec(&configuration_block)
+
+          entity_class
+        end
+
+        ##
         # @return [ConvenientService::Support::ThreadSafeCounter]
         #
         def method_missing_commits_counter
