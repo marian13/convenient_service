@@ -42,46 +42,6 @@ RSpec.describe ConvenientService, type: :standard do
       end
     end
 
-    describe ".service_class?" do
-      let(:service_class) do
-        Class.new do
-          include ConvenientService::Standard::Config
-
-          def result
-            success
-          end
-        end
-      end
-
-      specify do
-        expect { described_class.service_class?(service_class) }
-          .to delegate_to(ConvenientService::Commands::IsServiceClass, :call)
-          .with_arguments(service_class: service_class)
-          .and_return_its_value
-      end
-    end
-
-    describe ".service?" do
-      let(:service_class) do
-        Class.new do
-          include ConvenientService::Standard::Config
-
-          def result
-            success
-          end
-        end
-      end
-
-      let(:service) { service_class.new }
-
-      specify do
-        expect { described_class.service?(service) }
-          .to delegate_to(ConvenientService::Commands::IsService, :call)
-          .with_arguments(service: service)
-          .and_return_its_value
-      end
-    end
-
     describe ".logger" do
       it "returns logger instance" do
         expect(described_class.logger).to eq(described_class::Logger.instance)

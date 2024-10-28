@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "standard/commands"
+
 module ConvenientService
   module Feature
     module Configs
@@ -35,6 +37,68 @@ module ConvenientService
 
           middlewares :trigger do
             use ConvenientService::Plugins::Feature::CanHaveStubbedEntries::Middleware if options.include?(:rspec)
+          end
+        end
+
+        class << self
+          ##
+          # Checks whether a class is a feature class.
+          #
+          # @api public
+          #
+          # @param feature_class [Object] Can be any type.
+          # @return [Boolean]
+          #
+          # @example Simple usage.
+          #   class Feature
+          #     include ConvenientService::Feature::Standard::Config
+          #
+          #     entry :main
+          #
+          #     def main
+          #       :main_entry_value
+          #     end
+          #   end
+          #
+          #    ConvenientService::Feature::Configs::Standard.feature_class?(Feature)
+          #   # => true
+          #
+          #    ConvenientService::Feature::Configs::Standard.feature_class?(42)
+          #   # => false
+          #
+          def feature_class?(feature_class)
+            Commands::IsFeatureClass[feature_class: feature_class]
+          end
+
+          ##
+          # Checks whether an object is a feature instance.
+          #
+          # @api public
+          #
+          # @param feature [Object] Can be any type.
+          # @return [Boolean]
+          #
+          # @example Simple usage.
+          #   class Feature
+          #     include ConvenientService::Feature::Standard::Config
+          #
+          #     entry :main
+          #
+          #     def main
+          #       :main_entry_value
+          #     end
+          #   end
+          #
+          #   feature = Feature.new
+          #
+          #    ConvenientService::Feature::Configs::Standard.feature?(feature)
+          #   # => true
+          #
+          #    ConvenientService::Feature::Configs::Standard.feature?(42)
+          #   # => false
+          #
+          def feature?(feature)
+            Commands::IsFeature[feature: feature]
           end
         end
       end

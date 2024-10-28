@@ -6,6 +6,8 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Feature::Configs::Standard, type: :standard do
+  include ConvenientService::RSpec::Matchers::DelegateTo
+
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
 
@@ -73,6 +75,52 @@ RSpec.describe ConvenientService::Feature::Configs::Standard, type: :standard do
           it "sets feature middlewares for `.trigger`" do
             expect(feature_class.middlewares(:trigger).to_a).to eq(trigger_middlewares)
           end
+        end
+      end
+    end
+
+    example_group "class methods" do
+      describe ".feature_class?" do
+        let(:feature_class) do
+          Class.new do
+            include ConvenientService::Feature::Standard::Config
+
+            entry :main
+
+            def main
+              :main_entry_value
+            end
+          end
+        end
+
+        specify do
+          expect { described_class.feature_class?(feature_class) }
+            .to delegate_to(ConvenientService::Feature::Configs::Standard::Commands::IsFeatureClass, :call)
+            .with_arguments(feature_class: feature_class)
+            .and_return_its_value
+        end
+      end
+
+      describe ".feature?" do
+        let(:feature_class) do
+          Class.new do
+            include ConvenientService::Feature::Standard::Config
+
+            entry :main
+
+            def main
+              :main_entry_value
+            end
+          end
+        end
+
+        let(:feature) { feature_class.new }
+
+        specify do
+          expect { described_class.feature?(feature) }
+            .to delegate_to(ConvenientService::Feature::Configs::Standard::Commands::IsFeature, :call)
+            .with_arguments(feature: feature)
+            .and_return_its_value
         end
       end
     end

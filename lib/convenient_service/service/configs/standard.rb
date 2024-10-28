@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "standard/commands"
+
 require_relative "standard/v1"
 require_relative "standard/aliases"
 
@@ -310,6 +312,64 @@ module ConvenientService
           # end
         end
         # rubocop:enable Lint/ConstantDefinitionInBlock
+
+        class << self
+          ##
+          # Checks whether a class is a service class.
+          #
+          # @api public
+          #
+          # @param service_class [Object] Can be any type.
+          # @return [Boolean]
+          #
+          # @example Simple usage.
+          #   class Service
+          #     include ConvenientService::Standard::Config
+          #
+          #     def result
+          #       success
+          #     end
+          #   end
+          #
+          #   ConvenientService::Service::Configs::Standard.service_class?(Service)
+          #   # => true
+          #
+          #   ConvenientService::Service::Configs::Standard.service_class?(42)
+          #   # => false
+          #
+          def service_class?(service_class)
+            Commands::IsServiceClass[service_class: service_class]
+          end
+
+          ##
+          # Checks whether an object is a service instance.
+          #
+          # @api public
+          #
+          # @param service [Object] Can be any type.
+          # @return [Boolean]
+          #
+          # @example Simple usage.
+          #   class Service
+          #     include ConvenientService::Standard::Config
+          #
+          #     def result
+          #       success
+          #     end
+          #   end
+          #
+          #   service = Service.new
+          #
+          #   ConvenientService::Service::Configs::Standard.service?(service)
+          #   # => true
+          #
+          #   ConvenientService::Service::Configs::Standard.service?(42)
+          #   # => false
+          #
+          def service?(service)
+            Commands::IsService[service: service]
+          end
+        end
       end
     end
   end

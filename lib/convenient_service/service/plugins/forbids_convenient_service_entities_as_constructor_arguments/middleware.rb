@@ -54,7 +54,7 @@ module ConvenientService
           #   - https://docs.seattlerb.org/minitest
           #
           def refute_service!(collection_type, key, value)
-            return unless ::ConvenientService.service?(value)
+            return unless ::ConvenientService::Standard::Config.service?(value)
 
             ::ConvenientService.raise Exceptions::ServicePassedAsConstructorArgument.new(selector: selector_from(collection_type, key), service: service, other_service: value)
           end

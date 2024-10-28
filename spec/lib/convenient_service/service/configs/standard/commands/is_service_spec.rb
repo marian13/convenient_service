@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
-RSpec.describe ConvenientService::Commands::IsService, type: :standard do
+RSpec.describe ConvenientService::Service::Configs::Standard::Commands::IsService, type: :standard do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   example_group "class methods" do
@@ -26,7 +26,7 @@ RSpec.describe ConvenientService::Commands::IsService, type: :standard do
 
       specify do
         expect { command_result }
-          .to delegate_to(ConvenientService::Commands::IsServiceClass, :call)
+          .to delegate_to(ConvenientService::Service::Configs::Standard::Commands::IsServiceClass, :call)
           .with_arguments(service_class: service.class)
           .and_return_its_value
       end

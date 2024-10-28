@@ -6,6 +6,8 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
+  include ConvenientService::RSpec::Matchers::DelegateTo
+
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
 
@@ -624,6 +626,48 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
       #
       it "applies its `included` block only once" do
         expect(service_class.middlewares(:result).to_a.size).to eq(8)
+      end
+    end
+  end
+
+  example_group "class methods" do
+    describe ".service_class?" do
+      let(:service_class) do
+        Class.new do
+          include ConvenientService::Standard::Config
+
+          def result
+            success
+          end
+        end
+      end
+
+      specify do
+        expect { described_class.service_class?(service_class) }
+          .to delegate_to(ConvenientService::Service::Configs::Standard::Commands::IsServiceClass, :call)
+          .with_arguments(service_class: service_class)
+          .and_return_its_value
+      end
+    end
+
+    describe ".service?" do
+      let(:service_class) do
+        Class.new do
+          include ConvenientService::Standard::Config
+
+          def result
+            success
+          end
+        end
+      end
+
+      let(:service) { service_class.new }
+
+      specify do
+        expect { described_class.service?(service) }
+          .to delegate_to(ConvenientService::Service::Configs::Standard::Commands::IsService, :call)
+          .with_arguments(service: service)
+          .and_return_its_value
       end
     end
   end

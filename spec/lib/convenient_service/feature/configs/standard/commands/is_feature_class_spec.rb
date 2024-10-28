@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
-RSpec.describe ConvenientService::Commands::IsFeatureClass, type: :standard do
+RSpec.describe ConvenientService::Feature::Configs::Standard::Commands::IsFeatureClass, type: :standard do
   example_group "class methods" do
     describe ".call" do
       subject(:command_result) { described_class.call(feature_class: feature_class) }
@@ -19,7 +19,7 @@ RSpec.describe ConvenientService::Commands::IsFeatureClass, type: :standard do
       end
 
       context "when `feature_class` is class" do
-        context "when `feature_class` does NOT include `ConvenientService::Service::Configs::Standard`" do
+        context "when `feature_class` does NOT include `ConvenientService::Feature::Configs::Standard`" do
           let(:feature_class) { Class.new }
 
           it "returns `false`" do
