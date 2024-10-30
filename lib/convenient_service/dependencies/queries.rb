@@ -379,7 +379,6 @@ module ConvenientService
         require ::File.join("convenient_service", "examples", "standard", version, "factorial")
         require ::File.join("convenient_service", "examples", "standard", version, "gemfile")
         require ::File.join("convenient_service", "examples", "standard", version, "request_params")
-        require ::File.join("convenient_service", "examples", "standard", version, "comprehensive_suite") if version.empty?
       end
 
       ##
