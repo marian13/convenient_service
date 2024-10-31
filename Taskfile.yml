@@ -492,9 +492,12 @@ tasks:
   #
   # NOTE: Ruby ternary operator can NOT be used since it contains colon that has special meaning in YAML. That is why `if/then/else/end` is used.
   #
+  # NOTE: RSpec `--profile` option docs.
+  # - https://rspec.info/features/3-12/rspec-core/configuration/profile
+  #
   rspec:
     cmds:
-      - "{{.BUNDLE_EXEC_PREFIX}} rspec --color --format progress {{.REQUIRE_SUFFIX}} {{.GIT_STAGED_RSPEC_FILES}} {{.CLI_ARGS}}"
+      - "{{.BUNDLE_EXEC_PREFIX}} rspec --profile --color --format progress {{.REQUIRE_SUFFIX}} {{.GIT_STAGED_RSPEC_FILES}} {{.CLI_ARGS}}"
     vars:
       REQUIRE_SUFFIX:
         sh: ruby -e 'puts case "{{.APPRAISAL}}" when /rails/ then "--require rails_helper" when /dry/ then "--require dry_helper" when /amazing_print/ then "--require amazing_print_helper" when /awesome_print/ then "--require awesome_print_helper" else "--require standard_helper" end'
