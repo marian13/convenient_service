@@ -109,7 +109,21 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Base, type: 
     ##
     # NOTE: Tested by descendants.
     #
+    # describe "#get" do
+    # end
+    ##
+
+    ##
+    # NOTE: Tested by descendants.
+    #
     # describe "#[]=" do
+    # end
+    ##
+
+    ##
+    # NOTE: Tested by descendants.
+    #
+    # describe "#set=" do
     # end
     ##
 

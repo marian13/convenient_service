@@ -341,12 +341,35 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Hash, type: 
       end
     end
 
+    describe "#get" do
+      let(:key) { :foo }
+
+      specify do
+        expect { cache.get(key) }
+          .to delegate_to(cache, :read)
+          .with_arguments(key)
+          .and_return_its_value
+      end
+    end
+
     describe "#[]=" do
       let(:key) { :foo }
       let(:value) { :foo }
 
       specify do
         expect { cache[key] = value }
+          .to delegate_to(cache, :write)
+          .with_arguments(key, value)
+          .and_return_its_value
+      end
+    end
+
+    describe "#set=" do
+      let(:key) { :foo }
+      let(:value) { :foo }
+
+      specify do
+        expect { cache.set(key, value) }
           .to delegate_to(cache, :write)
           .with_arguments(key, value)
           .and_return_its_value
