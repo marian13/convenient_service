@@ -57,12 +57,12 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
         let(:container) { ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Container.new(klass: klass) }
 
         context "when `method` caller (with middlewares) is NOT defined in methods callers" do
-          it "synchronize method definitions by mutex" do
-            allow(container.mutex).to receive(:synchronize).and_call_original
+          it "synchronize method definitions by lock" do
+            allow(container.lock).to receive(:synchronize).and_call_original
 
             command_result
 
-            expect(container.mutex).to have_received(:synchronize)
+            expect(container.lock).to have_received(:synchronize)
           end
 
           it "prepend methods callers to container" do
@@ -107,12 +107,12 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
             methods_middlewares_callers.define_method(method) {}
           end
 
-          it "synchronize method definitions by mutex" do
-            allow(container.mutex).to receive(:synchronize).and_call_original
+          it "synchronize method definitions by lock" do
+            allow(container.lock).to receive(:synchronize).and_call_original
 
             command_result
 
-            expect(container.mutex).to have_received(:synchronize)
+            expect(container.lock).to have_received(:synchronize)
           end
 
           it "returns `false`" do
@@ -275,12 +275,12 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
         let(:container) { ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Container.new(klass: klass.singleton_class) }
 
         context "when `method` caller (with middlewares) is NOT defined in methods callers" do
-          it "synchronize method definitions by mutex" do
-            allow(container.mutex).to receive(:synchronize).and_call_original
+          it "synchronize method definitions by lock" do
+            allow(container.lock).to receive(:synchronize).and_call_original
 
             command_result
 
-            expect(container.mutex).to have_received(:synchronize)
+            expect(container.lock).to have_received(:synchronize)
           end
 
           it "prepend methods callers to container" do
@@ -325,12 +325,12 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
             methods_middlewares_callers.define_method(method) {}
           end
 
-          it "synchronize method definitions by mutex" do
-            allow(container.mutex).to receive(:synchronize).and_call_original
+          it "synchronize method definitions by lock" do
+            allow(container.lock).to receive(:synchronize).and_call_original
 
             command_result
 
-            expect(container.mutex).to have_received(:synchronize)
+            expect(container.lock).to have_received(:synchronize)
           end
 
           it "returns `false`" do

@@ -190,12 +190,12 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
       end
     end
 
-    describe "#mutex" do
+    describe "#lock" do
       let(:container_instance) { container_class.new(klass: klass.singleton_class) }
 
       specify do
-        expect { container.mutex }
-          .to delegate_to(klass.__convenient_service_config__, :mutex)
+        expect { container.lock }
+          .to delegate_to(klass.__convenient_service_config__, :lock)
           .without_arguments
           .and_return_its_value
       end

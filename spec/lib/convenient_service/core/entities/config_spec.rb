@@ -46,19 +46,19 @@ RSpec.describe ConvenientService::Core::Entities::Config, type: :standard do
   end
 
   example_group "instance methods" do
-    describe "#mutex" do
+    describe "#lock" do
       it "returns `Mutex` instance" do
-        expect(config.mutex).to be_instance_of(Mutex)
+        expect(config.lock).to be_instance_of(Mutex)
       end
 
       specify do
-        expect { config.mutex }.to cache_its_value
+        expect { config.lock }.to cache_its_value
       end
 
       specify do
         config
 
-        expect { config.mutex }.not_to delegate_to(Mutex, :new)
+        expect { config.lock }.not_to delegate_to(Mutex, :new)
       end
     end
 

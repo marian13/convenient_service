@@ -102,7 +102,7 @@ module ConvenientService
                     end
 
                     ##
-                    # Returns corresponding config mutex.
+                    # Returns corresponding config lock.
                     #
                     # @return [Mutex]
                     #
@@ -111,21 +111,21 @@ module ConvenientService
                     #     include ConvenientService::Core
                     #   end
                     #
-                    #   Service.__convenient_service_config__.mutex
-                    #   # => Mutex:0x000000011f3fdb60 - same instance as from `Service.singleton_class.__convenient_service_config__.mutex`.
+                    #   Service.__convenient_service_config__.lock
+                    #   # => Mutex:0x000000011f3fdb60 - same instance as from `Service.singleton_class.__convenient_service_config__.lock`.
                     #
                     # @example The klass is a singleton class.
                     #   class Service
                     #     include ConvenientService::Core
                     #   end
                     #
-                    #   Service.singleton_class.__convenient_service_config__.mutex
-                    #   # => Mutex:0x000000011f3fdb60 - same instance as from `Service.__convenient_service_config__.mutex`.
+                    #   Service.singleton_class.__convenient_service_config__.lock
+                    #   # => Mutex:0x000000011f3fdb60 - same instance as from `Service.__convenient_service_config__.lock`.
                     #
-                    # @note Both `class` and `class.singleton_class` return same mutex instance.
+                    # @note Both `class` and `class.singleton_class` return same lock instance.
                     #
-                    def mutex
-                      klass.__convenient_service_config__.mutex
+                    def lock
+                      klass.__convenient_service_config__.lock
                     end
 
                     ##

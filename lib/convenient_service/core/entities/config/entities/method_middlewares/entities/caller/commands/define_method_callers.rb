@@ -82,7 +82,7 @@ module ConvenientService
                     #   - https://github.com/ruby/ruby/blob/v2_7_0/thread_sync.c#L525
                     #
                     def call
-                      container.mutex.synchronize do
+                      container.lock.synchronize do
                         return false if Utils::Method.defined?(method, methods_middlewares_callers, private: true)
 
                         prepend_methods_callers_to_container

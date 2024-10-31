@@ -15,10 +15,10 @@ module ConvenientService
         attr_reader :klass
 
         ##
-        # @!attribute [r] mutex
+        # @!attribute [r] lock
         #   @return [Mutex]
         #
-        attr_reader :mutex
+        attr_reader :lock
 
         ##
         # @param klass [Class]
@@ -28,9 +28,9 @@ module ConvenientService
           @klass = klass
 
           ##
-          # IMPORTANT: Intentionally initializes mutex in constructor to ensure thread-safety.
+          # IMPORTANT: Intentionally initializes `lock` in constructor to ensure thread-safety.
           #
-          @mutex = ::Mutex.new
+          @lock = ::Mutex.new
         end
 
         ##

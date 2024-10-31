@@ -61,10 +61,10 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Serv
       end
     end
 
-    describe "#mutex" do
+    describe "#lock" do
       specify do
-        expect { service.mutex }
-          .to delegate_to(klass.__convenient_service_config__, :mutex)
+        expect { service.lock }
+          .to delegate_to(klass.__convenient_service_config__, :lock)
           .without_arguments
           .and_return_its_value
       end

@@ -54,7 +54,7 @@ module ConvenientService
                 # @return [Boolean] true if method is just defined, false if already defined.
                 #
                 def call
-                  container.mutex.synchronize do
+                  container.lock.synchronize do
                     return false if has_defined_method?
 
                     define_method

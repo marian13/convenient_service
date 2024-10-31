@@ -36,8 +36,8 @@ module ConvenientService
                 ##
                 # @return [Mutex]
                 #
-                def mutex
-                  klass.__convenient_service_config__.mutex
+                def lock
+                  klass.__convenient_service_config__.lock
                 end
 
                 ##
