@@ -101,6 +101,26 @@ RSpec.describe ConvenientService::Feature::Configs::Standard, type: :standard do
   end
 
   example_group "class methods" do
+    describe ".default_options" do
+      ##
+      # NOTE: It tested by `test/lib/convenient_service/feature/configs/standard_test.rb`.
+      #
+      # context "when `RSpec` is NOT loaded" do
+      #   it "returns default options without `:rspec`" do
+      #     # ...
+      #   end
+      # end
+      ##
+
+      context "when `RSpec` is loaded" do
+        let(:default_options) { Set[:essential, :rspec] }
+
+        it "returns default options with `:rspec`" do
+          expect(described_class.default_options).to eq(default_options)
+        end
+      end
+    end
+
     describe ".feature_class?" do
       let(:feature_class) do
         Class.new do

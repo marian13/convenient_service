@@ -4,6 +4,10 @@ require "spec_helper"
 
 require "convenient_service"
 
+##
+# NOTE: This file checks only half of `ConvenientService::Service::Configs::Standard` functionality.
+# The rest is verified by `test/lib/convenient_service/service/configs/standard_test.rb`.
+#
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
   include ConvenientService::RSpec::Matchers::DelegateTo
@@ -631,6 +635,42 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
   end
 
   example_group "class methods" do
+    describe ".default_options" do
+      ##
+      # NOTE: It tested by `test/lib/convenient_service/service/configs/standard_test.rb`.
+      #
+      # context "when `RSpec` is NOT loaded" do
+      #   it "returns default options without `:rspec`" do
+      #     # ...
+      #   end
+      # end
+      ##
+
+      context "when `RSpec` is loaded" do
+        let(:default_options) do
+          Set[
+            :essential,
+            :callbacks,
+            :fallbacks,
+            :inspect,
+            :recalculation,
+            :result_parents_trace,
+            :code_review_automation,
+            :short_syntax,
+            :type_safety,
+            :exception_services_trace,
+            :per_instance_caching,
+            :mermaid_flowchart,
+            :rspec
+          ]
+        end
+
+        it "returns default options with `:rspec`" do
+          expect(described_class.default_options).to eq(default_options)
+        end
+      end
+    end
+
     describe ".service_class?" do
       let(:service_class) do
         Class.new do
