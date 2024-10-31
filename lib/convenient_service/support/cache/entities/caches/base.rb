@@ -143,6 +143,13 @@ module ConvenientService
             def save_self_as_scope_in_parent!
               parent&.fetch(key) { self }
             end
+
+            ##
+            # @return [void]
+            #
+            def delete_self_as_scope_in_parent!
+              parent&.delete(key)
+            end
           end
         end
       end

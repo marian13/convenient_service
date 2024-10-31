@@ -70,7 +70,11 @@ module ConvenientService
             def delete(key)
               index = index(key)
 
-              store.delete_at(index).value if index
+              value = store.delete_at(index).value if index
+
+              delete_self_as_scope_in_parent! if store.empty?
+
+              value
             end
 
             ##

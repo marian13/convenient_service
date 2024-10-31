@@ -84,7 +84,11 @@ module ConvenientService
             #   https://api.rubyonrails.org/classes/ActiveSupport/Cache/Store.html#method-i-delete
             #
             def delete(key)
-              store.delete(key)
+              value = store.delete(key)
+
+              delete_self_as_scope_in_parent! if store.empty?
+
+              value
             end
 
             ##

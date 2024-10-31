@@ -281,6 +281,31 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Array, type:
           expect(cache.read(key)).to be_nil
         end
       end
+
+      context "when cache is sub cache" do
+        let(:scoped_cache) { cache.scope(:foo) }
+
+        context "when `key` is NOT last sub cache key" do
+          before do
+            scoped_cache[:bar] = :bar
+            scoped_cache[:baz] = :baz
+          end
+
+          it "does NOT delete sub cache as scope in parent cache" do
+            expect { scoped_cache.delete(:bar) }.not_to change { cache.read(:foo) }.from(scoped_cache)
+          end
+        end
+
+        context "when `key` is last sub cache key" do
+          before do
+            scoped_cache[:bar] = :bar
+          end
+
+          it "deletes sub cache as scope in parent cache" do
+            expect { scoped_cache.delete(:bar) }.to change { cache.read(:foo) }.from(scoped_cache).to(nil)
+          end
+        end
+      end
     end
 
     describe "#clear" do
