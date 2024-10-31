@@ -611,6 +611,60 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
           end
         end
       end
+
+      context "when `:rollbacks` option is passed" do
+        let(:service_class) do
+          Class.new.tap do |klass|
+            klass.class_exec(described_class) do |mod|
+              include mod.with(:rollbacks)
+            end
+          end
+        end
+
+        example_group ".result middlewares" do
+          it "adds `ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware` after `ConvenientService::Plugins::Common::CanHaveCallbacks::Middleware` to service step middlewares for `#result`" do
+            expect(service_class.middlewares(:result).to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Plugins::Common::CanHaveCallbacks::Middleware && current_middleware == ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware }).not_to be_nil
+          end
+        end
+      end
+
+      context "when `:fault_tolerance` option is passed" do
+        let(:service_class) do
+          Class.new.tap do |klass|
+            klass.class_exec(described_class) do |mod|
+              include mod.with(:fault_tolerance)
+            end
+          end
+        end
+
+        example_group "service" do
+          example_group ".result middlewares" do
+            it "adds `ConvenientService::Service::Plugins::RescuesResultUnhandledExceptions::Middleware` to service middlewares for `.result`" do
+              expect(service_class.middlewares(:result, scope: :class).to_a.last).to eq(ConvenientService::Service::Plugins::RescuesResultUnhandledExceptions::Middleware)
+            end
+          end
+
+          example_group "#regular_result middlewares" do
+            it "adds `ConvenientService::Service::Plugins::RescuesResultUnhandledExceptions::Middleware` to service middlewares for `#regular_result`" do
+              expect(service_class.middlewares(:regular_result).to_a.last).to eq(ConvenientService::Service::Plugins::RescuesResultUnhandledExceptions::Middleware)
+            end
+          end
+
+          example_group "#steps_result middlewares" do
+            it "adds `ConvenientService::Service::Plugins::RescuesResultUnhandledExceptions::Middleware` to service middlewares for `#steps_result`" do
+              expect(service_class.middlewares(:steps_result).to_a.last).to eq(ConvenientService::Service::Plugins::RescuesResultUnhandledExceptions::Middleware)
+            end
+          end
+
+          example_group "service result" do
+            example_group "concerns" do
+              it "adds `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeFromException::Concern` after `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanHaveFallbacks::Concern` to service result concerns" do
+                expect(service_class::Result.concerns.to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanHaveFallbacks::Concern && current_middleware == ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeFromException::Concern }).not_to be_nil
+              end
+            end
+          end
+        end
+      end
     end
 
     context "when included multiple times" do

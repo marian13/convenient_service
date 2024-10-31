@@ -173,6 +173,7 @@ module ConvenientService
               use ConvenientService::Plugins::Result::HasStubbedResultInvocationsCounter::Concern if options.include?(:rspec)
               use ConvenientService::Plugins::Result::CanHaveCheckedStatus::Concern if options.include?(:code_review_automation)
               use ConvenientService::Plugins::Common::HasJSendResultDuckShortSyntax::Concern if options.include?(:short_syntax)
+              # use ConvenientService::Plugins::Result::HelpsToLearnSimilaritiesWithCommonObjects::Concern
             end
 
             middlewares :initialize do
