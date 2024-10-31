@@ -622,7 +622,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
 
       ##
       # NOTE: Check the following discussion for details:
-      # https://github.com/marian13/convenient_service/discussions/43
+      # - https://github.com/marian13/convenient_service/discussions/43
       #
       it "applies its `included` block only once" do
         expect(service_class.middlewares(:result).to_a.size).to eq(8)

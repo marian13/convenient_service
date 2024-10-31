@@ -187,6 +187,43 @@ end
 
 ---
 
+### Display anonymous service classes of steps
+
+| Priority | Complexity | Status | Tags |
+| - | - | - | - |
+| Medium | Easy | TODO | anonymous_service, display |
+
+```ruby
+$anonymous_service = Class.new do
+  include ConvenientService::Standard::Config
+
+  def result
+    success
+  end
+end
+
+class Service
+  include ConvenientService::Standard::Config
+
+  step $anonymous_service
+end
+```
+
+Before:
+
+```ruby
+puts Service.steps.first.action.inspect
+# => #<Class:0x00007fb57eb92f90>
+```
+
+After:
+
+```ruby
+puts Service.steps.first.action.inspect
+# => AnonymousClass(#39840)
+```
+---
+
 ### Introduce per-request caching of steps using Rails Current Attributes
 
 | Priority | Complexity | Status | Tags |

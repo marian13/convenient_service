@@ -79,49 +79,69 @@ RSpec.describe ConvenientService::Feature::Configs::Standard, type: :standard do
       end
     end
 
-    example_group "class methods" do
-      describe ".feature_class?" do
-        let(:feature_class) do
-          Class.new do
-            include ConvenientService::Feature::Standard::Config
+    context "when included multiple times" do
+      let(:feature_class) do
+        Class.new.tap do |klass|
+          klass.class_exec(described_class) do |mod|
+            include mod
 
-            entry :main
-
-            def main
-              :main_entry_value
-            end
+            include mod
           end
-        end
-
-        specify do
-          expect { described_class.feature_class?(feature_class) }
-            .to delegate_to(ConvenientService::Feature::Configs::Standard::Commands::IsFeatureClass, :call)
-            .with_arguments(feature_class: feature_class)
-            .and_return_its_value
         end
       end
 
-      describe ".feature?" do
-        let(:feature_class) do
-          Class.new do
-            include ConvenientService::Feature::Standard::Config
+      ##
+      # NOTE: Check the following discussion for details:
+      # - https://github.com/marian13/convenient_service/discussions/43
+      #
+      it "applies its `included` block only once" do
+        expect(feature_class.middlewares(:trigger).to_a.size).to eq(1)
+      end
+    end
+  end
 
-            entry :main
+  example_group "class methods" do
+    describe ".feature_class?" do
+      let(:feature_class) do
+        Class.new do
+          include ConvenientService::Feature::Standard::Config
 
-            def main
-              :main_entry_value
-            end
+          entry :main
+
+          def main
+            :main_entry_value
           end
         end
+      end
 
-        let(:feature) { feature_class.new }
+      specify do
+        expect { described_class.feature_class?(feature_class) }
+          .to delegate_to(ConvenientService::Feature::Configs::Standard::Commands::IsFeatureClass, :call)
+          .with_arguments(feature_class: feature_class)
+          .and_return_its_value
+      end
+    end
 
-        specify do
-          expect { described_class.feature?(feature) }
-            .to delegate_to(ConvenientService::Feature::Configs::Standard::Commands::IsFeature, :call)
-            .with_arguments(feature: feature)
-            .and_return_its_value
+    describe ".feature?" do
+      let(:feature_class) do
+        Class.new do
+          include ConvenientService::Feature::Standard::Config
+
+          entry :main
+
+          def main
+            :main_entry_value
+          end
         end
+      end
+
+      let(:feature) { feature_class.new }
+
+      specify do
+        expect { described_class.feature?(feature) }
+          .to delegate_to(ConvenientService::Feature::Configs::Standard::Commands::IsFeature, :call)
+          .with_arguments(feature: feature)
+          .and_return_its_value
       end
     end
   end
