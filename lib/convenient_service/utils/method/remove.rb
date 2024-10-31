@@ -3,16 +3,10 @@
 module ConvenientService
   module Utils
     module Method
-      class Defined < Support::Command
-        METHOD_DEFINED_CHECKERS = {
-          public: ->(klass, method) { klass.public_method_defined?(method) },
-          protected: ->(klass, method) { klass.protected_method_defined?(method) },
-          private: ->(klass, method) { klass.private_method_defined?(method) }
-        }
-
+      class Remove < Support::Command
         ##
         # @!attribute [r] method
-        #   @return [Symbol, String]
+        #   @return [String, Symbol]
         #
         attr_reader :method
 
@@ -61,31 +55,16 @@ module ConvenientService
         end
 
         ##
-        # @return [void]
-        #
-        def call
-          return false if selected_visibilities.none?
-
-          selected_visibilities.any? { |visibility| method_defined?(visibility) }
-        end
-
-        ##
-        # @return [Array<Symbol>]
+        # @return [Class]
         #
         # @internal
-        #   NOTE: `keep_if` seems more readable than `select` (just a personal feeling).
-        #   It is safe to use `keep_if` since a new hash is created. Prefer `select` in a general case, since it is NOT mutable.
+        #   NOTE: Returns `klass` to keep a similar behaviour to `Module#remove_method`.
+        #   - https://ruby-doc.org/core-2.7.1/Module.html#method-i-remove_method
         #
-        def selected_visibilities
-          @selected_visibilities ||= {public: public, protected: protected, private: private}.keep_if { |_, should_be_checked| should_be_checked }.keys
-        end
+        def call
+          return unless Utils::Method.defined?(method, klass, public: public, protected: protected, private: private)
 
-        ##
-        # @param visibility [Symbol]
-        # @return [Boolean]
-        #
-        def method_defined?(visibility)
-          METHOD_DEFINED_CHECKERS[visibility].call(klass, method)
+          klass.remove_method method
         end
       end
     end

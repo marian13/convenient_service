@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "method/defined"
+require_relative "method/remove"
 
 module ConvenientService
   module Utils
@@ -8,6 +9,10 @@ module ConvenientService
       class << self
         def defined?(...)
           Defined.call(...)
+        end
+
+        def remove(...)
+          Remove.call(...)
         end
       end
     end

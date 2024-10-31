@@ -5,7 +5,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::Utils::Method::Defined, type: :standard do
+RSpec.describe ConvenientService::Utils::Method::Remove, type: :standard do
   example_group "class methods" do
     describe ".call" do
       let(:method) { :foo }
@@ -15,9 +15,6 @@ RSpec.describe ConvenientService::Utils::Method::Defined, type: :standard do
       let(:protected) { false }
       let(:private) { false }
 
-      ##
-      # TODO: Formalize testing strategies.
-      #
       context "when `public` is NOT passed" do
         let(:util_result) { described_class.call(method, klass, protected: protected, private: private) }
 
@@ -31,7 +28,7 @@ RSpec.describe ConvenientService::Utils::Method::Defined, type: :standard do
         end
 
         it "defaults to `true`" do
-          expect(util_result).to eq(true)
+          expect(util_result).to eq(klass)
         end
       end
 
@@ -48,7 +45,7 @@ RSpec.describe ConvenientService::Utils::Method::Defined, type: :standard do
         end
 
         it "defaults to `true`" do
-          expect(util_result).to eq(true)
+          expect(util_result).to eq(klass)
         end
       end
 
@@ -65,7 +62,7 @@ RSpec.describe ConvenientService::Utils::Method::Defined, type: :standard do
         end
 
         it "defaults to `false`" do
-          expect(util_result).to eq(false)
+          expect(util_result).to be_nil
         end
       end
 
@@ -77,8 +74,8 @@ RSpec.describe ConvenientService::Utils::Method::Defined, type: :standard do
         context "when `class` does NOT have `method`" do
           let(:klass) { Class.new }
 
-          it "returns `false`" do
-            expect(util_result).to eq(false)
+          it "returns `nil`" do
+            expect(util_result).to be_nil
           end
         end
 
@@ -93,8 +90,12 @@ RSpec.describe ConvenientService::Utils::Method::Defined, type: :standard do
               end
             end
 
-            it "returns `true`" do
-              expect(util_result).to eq(true)
+            it "returns `klass`" do
+              expect(util_result).to eq(klass)
+            end
+
+            it "removes `method`" do
+              expect { util_result }.to change { klass.public_method_defined?(method) }.from(true).to(false)
             end
           end
 
@@ -108,8 +109,12 @@ RSpec.describe ConvenientService::Utils::Method::Defined, type: :standard do
               end
             end
 
-            it "returns `false`" do
-              expect(util_result).to eq(false)
+            it "returns `nil`" do
+              expect(util_result).to be_nil
+            end
+
+            it "does NOT remove `method`" do
+              expect { util_result }.not_to change { klass.protected_method_defined?(method) }.from(true)
             end
           end
 
@@ -123,8 +128,12 @@ RSpec.describe ConvenientService::Utils::Method::Defined, type: :standard do
               end
             end
 
-            it "returns `false`" do
-              expect(util_result).to eq(false)
+            it "returns `nil`" do
+              expect(util_result).to be_nil
+            end
+
+            it "does NOT remove `method`" do
+              expect { util_result }.not_to change { klass.private_method_defined?(method) }.from(true)
             end
           end
         end
@@ -138,8 +147,8 @@ RSpec.describe ConvenientService::Utils::Method::Defined, type: :standard do
         context "when `class` does NOT have `method`" do
           let(:klass) { Class.new }
 
-          it "returns `false`" do
-            expect(util_result).to eq(false)
+          it "returns `nil`" do
+            expect(util_result).to be_nil
           end
         end
 
@@ -154,8 +163,12 @@ RSpec.describe ConvenientService::Utils::Method::Defined, type: :standard do
               end
             end
 
-            it "returns `false`" do
-              expect(util_result).to eq(false)
+            it "returns `nil`" do
+              expect(util_result).to be_nil
+            end
+
+            it "does NOT remove `method`" do
+              expect { util_result }.not_to change { klass.public_method_defined?(method) }.from(true)
             end
           end
 
@@ -169,8 +182,12 @@ RSpec.describe ConvenientService::Utils::Method::Defined, type: :standard do
               end
             end
 
-            it "returns `true`" do
-              expect(util_result).to eq(true)
+            it "returns `klass`" do
+              expect(util_result).to eq(klass)
+            end
+
+            it "removes `method`" do
+              expect { util_result }.to change { klass.protected_method_defined?(method) }.from(true).to(false)
             end
           end
 
@@ -184,8 +201,12 @@ RSpec.describe ConvenientService::Utils::Method::Defined, type: :standard do
               end
             end
 
-            it "returns `false`" do
-              expect(util_result).to eq(false)
+            it "returns `nil`" do
+              expect(util_result).to be_nil
+            end
+
+            it "does NOT remove `method`" do
+              expect { util_result }.not_to change { klass.private_method_defined?(method) }.from(true)
             end
           end
         end
@@ -199,8 +220,8 @@ RSpec.describe ConvenientService::Utils::Method::Defined, type: :standard do
         context "when `class` does NOT have `method`" do
           let(:klass) { Class.new }
 
-          it "returns `false`" do
-            expect(util_result).to eq(false)
+          it "returns `nil`" do
+            expect(util_result).to be_nil
           end
         end
 
@@ -215,8 +236,12 @@ RSpec.describe ConvenientService::Utils::Method::Defined, type: :standard do
               end
             end
 
-            it "returns `false`" do
-              expect(util_result).to eq(false)
+            it "returns `nil`" do
+              expect(util_result).to be_nil
+            end
+
+            it "does NOT remove `method`" do
+              expect { util_result }.not_to change { klass.public_method_defined?(method) }.from(true)
             end
           end
 
@@ -230,8 +255,12 @@ RSpec.describe ConvenientService::Utils::Method::Defined, type: :standard do
               end
             end
 
-            it "returns `false`" do
-              expect(util_result).to eq(false)
+            it "returns `nil`" do
+              expect(util_result).to be_nil
+            end
+
+            it "does NOT remove `method`" do
+              expect { util_result }.not_to change { klass.protected_method_defined?(method) }.from(true)
             end
           end
 
@@ -245,8 +274,12 @@ RSpec.describe ConvenientService::Utils::Method::Defined, type: :standard do
               end
             end
 
-            it "returns `true`" do
-              expect(util_result).to eq(true)
+            it "returns `klass`" do
+              expect(util_result).to eq(klass)
+            end
+
+            it "removes `method`" do
+              expect { util_result }.to change { klass.private_method_defined?(method) }.from(true).to(false)
             end
           end
         end
@@ -260,8 +293,8 @@ RSpec.describe ConvenientService::Utils::Method::Defined, type: :standard do
         context "when `class` does NOT have `method`" do
           let(:klass) { Class.new }
 
-          it "returns `false`" do
-            expect(util_result).to eq(false)
+          it "returns `nil`" do
+            expect(util_result).to be_nil
           end
         end
 
@@ -276,8 +309,12 @@ RSpec.describe ConvenientService::Utils::Method::Defined, type: :standard do
               end
             end
 
-            it "returns `true`" do
-              expect(util_result).to eq(true)
+            it "returns `klass`" do
+              expect(util_result).to eq(klass)
+            end
+
+            it "removes `method`" do
+              expect { util_result }.to change { klass.public_method_defined?(method) }.from(true).to(false)
             end
           end
 
@@ -291,8 +328,12 @@ RSpec.describe ConvenientService::Utils::Method::Defined, type: :standard do
               end
             end
 
-            it "returns `true`" do
-              expect(util_result).to eq(true)
+            it "returns `klass`" do
+              expect(util_result).to eq(klass)
+            end
+
+            it "removes `method`" do
+              expect { util_result }.to change { klass.protected_method_defined?(method) }.from(true).to(false)
             end
           end
 
@@ -306,8 +347,12 @@ RSpec.describe ConvenientService::Utils::Method::Defined, type: :standard do
               end
             end
 
-            it "returns `false`" do
-              expect(util_result).to eq(false)
+            it "returns `nil`" do
+              expect(util_result).to be_nil
+            end
+
+            it "does NOT remove `method`" do
+              expect { util_result }.not_to change { klass.private_method_defined?(method) }.from(true)
             end
           end
         end
@@ -321,8 +366,8 @@ RSpec.describe ConvenientService::Utils::Method::Defined, type: :standard do
         context "when `class` does NOT have `method`" do
           let(:klass) { Class.new }
 
-          it "returns `false`" do
-            expect(util_result).to eq(false)
+          it "returns `nil`" do
+            expect(util_result).to be_nil
           end
         end
 
@@ -337,8 +382,12 @@ RSpec.describe ConvenientService::Utils::Method::Defined, type: :standard do
               end
             end
 
-            it "returns `true`" do
-              expect(util_result).to eq(true)
+            it "returns `klass`" do
+              expect(util_result).to eq(klass)
+            end
+
+            it "removes `method`" do
+              expect { util_result }.to change { klass.public_method_defined?(method) }.from(true).to(false)
             end
           end
 
@@ -352,8 +401,12 @@ RSpec.describe ConvenientService::Utils::Method::Defined, type: :standard do
               end
             end
 
-            it "returns `false`" do
-              expect(util_result).to eq(false)
+            it "returns `nil`" do
+              expect(util_result).to be_nil
+            end
+
+            it "does NOT remove `method`" do
+              expect { util_result }.not_to change { klass.protected_method_defined?(method) }.from(true)
             end
           end
 
@@ -367,8 +420,12 @@ RSpec.describe ConvenientService::Utils::Method::Defined, type: :standard do
               end
             end
 
-            it "returns `true`" do
-              expect(util_result).to eq(true)
+            it "returns `klass`" do
+              expect(util_result).to eq(klass)
+            end
+
+            it "removes `method`" do
+              expect { util_result }.to change { klass.private_method_defined?(method) }.from(true).to(false)
             end
           end
         end
@@ -382,8 +439,8 @@ RSpec.describe ConvenientService::Utils::Method::Defined, type: :standard do
         context "when `class` does NOT have `method`" do
           let(:klass) { Class.new }
 
-          it "returns `false`" do
-            expect(util_result).to eq(false)
+          it "returns `nil`" do
+            expect(util_result).to be_nil
           end
         end
 
@@ -398,8 +455,12 @@ RSpec.describe ConvenientService::Utils::Method::Defined, type: :standard do
               end
             end
 
-            it "returns `false`" do
-              expect(util_result).to eq(false)
+            it "returns `nil`" do
+              expect(util_result).to be_nil
+            end
+
+            it "does NOT remove `method`" do
+              expect { util_result }.not_to change { klass.public_method_defined?(method) }.from(true)
             end
           end
 
@@ -413,8 +474,12 @@ RSpec.describe ConvenientService::Utils::Method::Defined, type: :standard do
               end
             end
 
-            it "returns `true`" do
-              expect(util_result).to eq(true)
+            it "returns `klass`" do
+              expect(util_result).to eq(klass)
+            end
+
+            it "removes `method`" do
+              expect { util_result }.to change { klass.protected_method_defined?(method) }.from(true).to(false)
             end
           end
 
@@ -428,8 +493,12 @@ RSpec.describe ConvenientService::Utils::Method::Defined, type: :standard do
               end
             end
 
-            it "returns `true`" do
-              expect(util_result).to eq(true)
+            it "returns `klass`" do
+              expect(util_result).to eq(klass)
+            end
+
+            it "removes `method`" do
+              expect { util_result }.to change { klass.private_method_defined?(method) }.from(true).to(false)
             end
           end
         end
@@ -443,8 +512,8 @@ RSpec.describe ConvenientService::Utils::Method::Defined, type: :standard do
         context "when `class` does NOT have `method`" do
           let(:klass) { Class.new }
 
-          it "returns `false`" do
-            expect(util_result).to eq(false)
+          it "returns `nil`" do
+            expect(util_result).to be_nil
           end
         end
 
@@ -459,8 +528,12 @@ RSpec.describe ConvenientService::Utils::Method::Defined, type: :standard do
               end
             end
 
-            it "returns `true`" do
-              expect(util_result).to eq(true)
+            it "returns `klass`" do
+              expect(util_result).to eq(klass)
+            end
+
+            it "removes `method`" do
+              expect { util_result }.to change { klass.public_method_defined?(method) }.from(true).to(false)
             end
           end
 
@@ -474,8 +547,12 @@ RSpec.describe ConvenientService::Utils::Method::Defined, type: :standard do
               end
             end
 
-            it "returns `true`" do
-              expect(util_result).to eq(true)
+            it "returns `klass`" do
+              expect(util_result).to eq(klass)
+            end
+
+            it "removes `method`" do
+              expect { util_result }.to change { klass.protected_method_defined?(method) }.from(true).to(false)
             end
           end
 
@@ -489,8 +566,12 @@ RSpec.describe ConvenientService::Utils::Method::Defined, type: :standard do
               end
             end
 
-            it "returns `true`" do
-              expect(util_result).to eq(true)
+            it "returns `klass`" do
+              expect(util_result).to eq(klass)
+            end
+
+            it "removes `method`" do
+              expect { util_result }.to change { klass.private_method_defined?(method) }.from(true).to(false)
             end
           end
         end
