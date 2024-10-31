@@ -184,6 +184,46 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
       end
     end
 
+    describe "#any?" do
+      context "when stack is NOT empty" do
+        before do
+          method_middlewares.configure do |stack|
+            stack.use middleware
+          end
+        end
+
+        it "returns `true`" do
+          expect(method_middlewares.any?).to eq(true)
+        end
+      end
+
+      context "when stack is empty" do
+        it "returns `false`" do
+          expect(method_middlewares.any?).to eq(false)
+        end
+      end
+    end
+
+    describe "#none?" do
+      context "when stack is NOT empty" do
+        before do
+          method_middlewares.configure do |stack|
+            stack.use middleware
+          end
+        end
+
+        it "returns `false`" do
+          expect(method_middlewares.none?).to eq(false)
+        end
+      end
+
+      context "when stack is empty" do
+        it "returns `true`" do
+          expect(method_middlewares.none?).to eq(true)
+        end
+      end
+    end
+
     describe "#configure" do
       context "when `configuration_block` does NOT have one argument" do
         ##
@@ -266,6 +306,24 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
         expect { method_middlewares.define! }
           .to delegate_to(described_class::Entities::Caller::Commands::DefineMethodCallers, :call)
           .with_arguments(scope: scope, method: method, container: container, caller: caller)
+          .and_return_its_value
+      end
+    end
+
+    describe "#undefine!" do
+      before do
+        ##
+        # NOTE: Returns `true` when called for the first time, `false` for all the subsequent calls.
+        # NOTE: Used for `and_return_its_value`.
+        # https://github.com/marian13/convenient_service/blob/c5b3adc4a0edc2d631dd1f44f914c28eeafefe1d/lib/convenient_service/rspec/matchers/custom/delegate_to.rb#L105
+        #
+        method_middlewares.undefine!
+      end
+
+      specify do
+        expect { method_middlewares.undefine! }
+          .to delegate_to(described_class::Entities::Caller::Commands::UndefineMethodCallers, :call)
+          .with_arguments(scope: scope, method: method, container: container)
           .and_return_its_value
       end
     end

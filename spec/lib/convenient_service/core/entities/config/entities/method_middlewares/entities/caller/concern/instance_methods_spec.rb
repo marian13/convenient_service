@@ -72,6 +72,24 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
       end
     end
 
+    describe "#undefine_method_callers!" do
+      before do
+        ##
+        # NOTE: Returns `true` when called for the first time, `false` for all the subsequent calls.
+        # NOTE: Used for `and_return_its_value`.
+        # https://github.com/marian13/convenient_service/blob/c5b3adc4a0edc2d631dd1f44f914c28eeafefe1d/lib/convenient_service/rspec/matchers/custom/delegate_to.rb#L105
+        #
+        caller.undefine_method_callers!(scope, method, container)
+      end
+
+      specify do
+        expect { caller.undefine_method_callers!(scope, method, container) }
+          .to delegate_to(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Caller::Commands::UndefineMethodCallers, :call)
+          .with_arguments(scope: scope, method: method, container: container)
+          .and_return_its_value
+      end
+    end
+
     example_group "conversions" do
       let(:arguments) { ConvenientService::Support::Arguments.new(**kwargs) }
       let(:kwargs) { {prefix: prefix} }

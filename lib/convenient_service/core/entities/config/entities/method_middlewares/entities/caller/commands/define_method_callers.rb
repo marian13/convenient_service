@@ -99,15 +99,7 @@ module ConvenientService
                     # @return [String]
                     #
                     def method_without_middlewares
-                      name = method.to_s
-
-                      if name.end_with?("!")
-                        "#{name.delete_suffix("!")}_without_middlewares!"
-                      elsif name.end_with?("?")
-                        "#{name.delete_suffix("?")}_without_middlewares?"
-                      else
-                        "#{name}_without_middlewares"
-                      end
+                      @method_without_middlewares ||= Commands::GenerateWithoutMiddlewaresName[name: method]
                     end
 
                     ##

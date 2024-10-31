@@ -37,6 +37,16 @@ module ConvenientService
                     end
 
                     ##
+                    # @param scope [:instance, :class]
+                    # @param method [Symbol]
+                    # @param container [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Container]
+                    # @return [Boolean]
+                    #
+                    def undefine_method_callers!(scope, method, container)
+                      Commands::UndefineMethodCallers.call(scope: scope, method: method, container: container)
+                    end
+
+                    ##
                     # @param other [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Caller, Object]
                     # @return [Boolean]
                     #

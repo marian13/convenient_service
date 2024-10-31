@@ -53,6 +53,20 @@ module ConvenientService
             end
 
             ##
+            # @return [Boolean]
+            #
+            def any?
+              !stack.empty?
+            end
+
+            ##
+            # @return [Boolean]
+            #
+            def none?
+              stack.empty?
+            end
+
+            ##
             # @param configuration_block [Proc]
             # @return [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares]
             #
@@ -69,6 +83,15 @@ module ConvenientService
             #
             def define!
               caller.define_method_callers!(scope, method, container)
+            end
+
+            ##
+            # @note Works in a similar way as `Kernel.require`.
+            #
+            # @return [Boolean]
+            #
+            def undefine!
+              caller.undefine_method_callers!(scope, method, container)
             end
 
             ##
