@@ -158,7 +158,8 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
             [
               ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
               ConvenientService::Service::Plugins::CollectsServicesInException::Middleware,
-              ConvenientService::Common::Plugins::EnsuresNegatedJSendResult::Middleware
+              ConvenientService::Common::Plugins::EnsuresNegatedJSendResult::Middleware,
+              ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Middleware
             ]
           end
 

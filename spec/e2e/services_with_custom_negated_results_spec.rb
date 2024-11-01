@@ -1,0 +1,71 @@
+# frozen_string_literal: true
+
+require "spec_helper"
+
+require "convenient_service"
+
+# rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers, RSpec/DescribeClass
+RSpec.describe "Services with custom negated results", type: [:standard, :e2e] do
+  include ConvenientService::RSpec::PrimitiveMatchers::CacheItsValue
+
+  example_group "class methods" do
+    describe ".negated_result" do
+      context "when service has custom `negated_result` that returns NOT valid result" do
+        let(:service_class) do
+          Class.new do
+            include ConvenientService::Standard::Config
+
+            def negated_result
+              42
+            end
+          end
+        end
+
+        it "raises `ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Exceptions::ReturnValueNotKindOfResult`" do
+          expect { service_class.negated_result }
+            .to raise_error(ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Exceptions::ReturnValueNotKindOfResult)
+        end
+      end
+
+      context "when service has custom `negated_result` that returns valid result" do
+        let(:service_class) do
+          Class.new do
+            include ConvenientService::Standard::Config
+
+            def negated_result
+              success
+            end
+          end
+        end
+
+        it "returns negated result" do
+          expect(service_class.negated_result.negated?).to eq(true)
+        end
+      end
+
+      context "when service has custom `negated_result` that raises exception" do
+        let(:service_class) do
+          Class.new do
+            include ConvenientService::Standard::Config
+
+            def negated_result
+              raise ArgumentError
+            end
+          end
+        end
+
+        let(:service) { service_class.new }
+
+        # rubocop:disable RSpec/MultipleExpectations
+        it "adds service details to that exception" do
+          expect { service.negated_result }
+            .to raise_error(ArgumentError) do |exception|
+              expect(exception.services).to eq([{instance: service, trigger: {method: ":negated_result"}}])
+            end
+        end
+        # rubocop:enable RSpec/MultipleExpectations
+      end
+    end
+  end
+end
+# rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers, RSpec/DescribeClass

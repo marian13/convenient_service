@@ -91,6 +91,7 @@ module ConvenientService
             use ConvenientService::Plugins::Common::CachesReturnValue::Middleware if options.include?(:per_instance_caching)
             use ConvenientService::Plugins::Service::CollectsServicesInException::Middleware if options.include?(:exception_services_trace)
             use ConvenientService::Plugins::Common::EnsuresNegatedJSendResult::Middleware if options.include?(:essential)
+            use ConvenientService::Plugins::Service::RaisesOnNotResultReturnValue::Middleware if options.include?(:type_safety)
           end
 
           middlewares :regular_result do
