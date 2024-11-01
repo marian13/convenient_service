@@ -27,6 +27,14 @@ RSpec.describe ConvenientService::Core::Entities::Config, type: :standard do
     TEXT
   end
 
+  let(:middleware) do
+    Class.new(ConvenientService::MethodChainMiddleware) do
+      def next(...)
+        :middleware_value
+      end
+    end
+  end
+
   example_group "attributes" do
     include ConvenientService::RSpec::PrimitiveMatchers::HaveAttrReader
 
@@ -144,10 +152,10 @@ RSpec.describe ConvenientService::Core::Entities::Config, type: :standard do
       context "when `configuration_block` is NOT passed" do
         let(:result) { config.middlewares(method, **kwargs) }
 
-        let(:instance_method_middlewares) { described_class::Entities::MethodMiddlewares.new(scope: :instance, method: method, klass: service_class) }
-        let(:class_method_middlewares) { described_class::Entities::MethodMiddlewares.new(scope: :class, method: method, klass: service_class) }
-
         context "when middlewares are NOT configured" do
+          let(:instance_method_middlewares) { described_class::Entities::MethodMiddlewares.new(scope: :instance, method: method, klass: service_class) }
+          let(:class_method_middlewares) { described_class::Entities::MethodMiddlewares.new(scope: :class, method: method, klass: service_class) }
+
           context "when `scope` is NOT passed" do
             specify { expect { config.middlewares(method) }.not_to cache_its_value }
 
@@ -176,34 +184,94 @@ RSpec.describe ConvenientService::Core::Entities::Config, type: :standard do
         end
 
         context "when middlewares are configured at least once" do
-          context "when `scope` is NOT passed" do
-            before { config.middlewares(method) {} }
+          context "when NO middlewares are left after that configuration" do
+            let(:instance_method_middlewares) { described_class::Entities::MethodMiddlewares.new(scope: :instance, method: method, klass: service_class) }
+            let(:class_method_middlewares) { described_class::Entities::MethodMiddlewares.new(scope: :class, method: method, klass: service_class) }
 
-            specify { expect { config.middlewares(method) }.to cache_its_value }
+            context "when `scope` is NOT passed" do
+              before do
+                config.middlewares(method) {}
+              end
 
-            it "returns instance middlewares for `method`" do
-              expect(config.middlewares(method)).to eq(instance_method_middlewares)
-            end
-          end
-
-          context "when `scope` is passed" do
-            context "when `scope` is `:instance`" do
-              before { config.middlewares(method, scope: :instance) {} }
-
-              specify { expect { config.middlewares(method, scope: :instance) }.to cache_its_value }
+              specify { expect { config.middlewares(method) }.not_to cache_its_value }
 
               it "returns instance middlewares for `method`" do
-                expect(config.middlewares(method, scope: :instance)).to eq(instance_method_middlewares)
+                expect(config.middlewares(method)).to eq(instance_method_middlewares)
               end
             end
 
-            context "when `scope` is `:class`" do
-              before { config.middlewares(method, scope: :class) {} }
+            context "when `scope` is passed" do
+              context "when `scope` is `:instance`" do
+                before do
+                  config.middlewares(method, scope: :instance) {}
+                end
 
-              specify { expect { config.middlewares(method, scope: :class) }.to cache_its_value }
+                specify { expect { config.middlewares(method, scope: :instance) }.not_to cache_its_value }
 
-              it "returns class middlewares for `method`" do
-                expect(config.middlewares(method, scope: :class)).to eq(class_method_middlewares)
+                it "returns instance middlewares for `method`" do
+                  expect(config.middlewares(method, scope: :instance)).to eq(instance_method_middlewares)
+                end
+              end
+
+              context "when `scope` is `:class`" do
+                before do
+                  config.middlewares(method, scope: :class) {}
+                end
+
+                specify { expect { config.middlewares(method, scope: :class) }.not_to cache_its_value }
+
+                it "returns class middlewares for `method`" do
+                  expect(config.middlewares(method, scope: :class)).to eq(class_method_middlewares)
+                end
+              end
+            end
+          end
+
+          context "when at least one middleware is left after that configuration" do
+            let(:instance_method_middlewares) { described_class::Entities::MethodMiddlewares.new(scope: :instance, method: method, klass: service_class).configure { |stack| stack.use middleware } }
+            let(:class_method_middlewares) { described_class::Entities::MethodMiddlewares.new(scope: :class, method: method, klass: service_class).configure { |stack| stack.use middleware } }
+
+            context "when `scope` is NOT passed" do
+              before do
+                config.middlewares(method) do |stack|
+                  stack.use middleware
+                end
+              end
+
+              specify { expect { config.middlewares(method) }.to cache_its_value }
+
+              it "returns instance middlewares for `method`" do
+                expect(config.middlewares(method)).to eq(instance_method_middlewares)
+              end
+            end
+
+            context "when `scope` is passed" do
+              context "when `scope` is `:instance`" do
+                before do
+                  config.middlewares(method, scope: :instance) do |stack|
+                    stack.use middleware
+                  end
+                end
+
+                specify { expect { config.middlewares(method, scope: :instance) }.to cache_its_value }
+
+                it "returns instance middlewares for `method`" do
+                  expect(config.middlewares(method, scope: :instance)).to eq(instance_method_middlewares)
+                end
+              end
+
+              context "when `scope` is `:class`" do
+                before do
+                  config.middlewares(method, scope: :class) do |stack|
+                    stack.use middleware
+                  end
+                end
+
+                specify { expect { config.middlewares(method, scope: :class) }.to cache_its_value }
+
+                it "returns class middlewares for `method`" do
+                  expect(config.middlewares(method, scope: :class)).to eq(class_method_middlewares)
+                end
               end
             end
           end
@@ -211,96 +279,25 @@ RSpec.describe ConvenientService::Core::Entities::Config, type: :standard do
       end
 
       context "when `configuration_block` is passed" do
-        let(:instance_method_middleware) do
-          Class.new(ConvenientService::MethodChainMiddleware) do
-            def next(...)
-              chain.next(...)
-            end
-          end
-        end
+        context "when NO middlewares are left after configuration" do
+          let(:instance_method_configuration_block) { proc { |stack| stack.remove middleware if stack.has?(middleware) } }
+          let(:class_method_configuration_block) { proc { |stack| stack.remove middleware if stack.has?(middleware) } }
 
-        let(:class_method_middleware) do
-          Class.new(ConvenientService::MethodChainMiddleware) do
-            def next(...)
-              chain.next(...)
-            end
-          end
-        end
-
-        let(:instance_method_configuration_block) { proc { |stack| stack.use instance_method_middleware } }
-        let(:class_method_configuration_block) { proc { |stack| stack.use class_method_middleware } }
-
-        let(:instance_method_middlewares) do
-          described_class::Entities::MethodMiddlewares
-            .new(scope: :instance, method: method, klass: service_class)
-            .configure(&instance_method_configuration_block)
-        end
-
-        let(:class_method_middlewares) do
-          described_class::Entities::MethodMiddlewares
-            .new(scope: :class, method: method, klass: service_class)
-            .configure(&class_method_configuration_block)
-        end
-
-        context "when `scope` is NOT passed" do
-          let(:configuration_block) { instance_method_configuration_block }
-          let(:method_middlewares) { instance_method_middlewares }
-
-          context "when config is NOT committed" do
-            before do
-              ##
-              # NOTE: Configures `middlewares` in order to cache them.
-              #
-              config.middlewares(method) {}
-            end
-
-            specify do
-              expect { config.middlewares(method, &configuration_block) }
-                .to delegate_to(config, :assert_not_committed!)
-            end
-
-            specify do
-              expect { config.middlewares(method, &configuration_block) }
-                .to delegate_to(config.middlewares(method), :configure)
-                .with_arguments(&configuration_block)
-            end
-
-            specify do
-              expect { config.middlewares(method, &configuration_block) }
-                .to delegate_to(config.middlewares(method), :define!)
-            end
-
-            specify do
-              expect { config.middlewares(method, &configuration_block) }
-                .to cache_its_value
-            end
-
-            it "returns instance middlewares for `method`" do
-              expect(config.middlewares(method, &configuration_block)).to eq(method_middlewares)
-            end
+          let(:instance_method_middlewares) do
+            described_class::Entities::MethodMiddlewares
+              .new(scope: :instance, method: method, klass: service_class)
+              .configure { |stack| stack.use middleware }
+              .configure(&instance_method_configuration_block)
           end
 
-          context "when config is committed" do
-            before do
-              config.commit!
-            end
-
-            it "raises `ConvenientService::Core::Entities::Config::Exceptions::ConfigIsCommitted`" do
-              expect { config.middlewares(method, &configuration_block) }
-                .to raise_error(described_class::Exceptions::ConfigIsCommitted)
-                .with_message(committed_config_error_message)
-            end
-
-            specify do
-              expect { ignoring_exception(described_class::Exceptions::ConfigIsCommitted) { config.middlewares(method, &configuration_block) } }
-                .to delegate_to(ConvenientService, :raise)
-            end
+          let(:class_method_middlewares) do
+            described_class::Entities::MethodMiddlewares
+              .new(scope: :class, method: method, klass: service_class)
+              .configure { |stack| stack.use middleware }
+              .configure(&class_method_configuration_block)
           end
-        end
 
-        context "when `scope` is passed" do
-          context "when `scope` is `:instance`" do
-            let(:scope) { :instance }
+          context "when `scope` is NOT passed" do
             let(:configuration_block) { instance_method_configuration_block }
             let(:method_middlewares) { instance_method_middlewares }
 
@@ -309,32 +306,34 @@ RSpec.describe ConvenientService::Core::Entities::Config, type: :standard do
                 ##
                 # NOTE: Configures `middlewares` in order to cache them.
                 #
-                config.middlewares(method, scope: scope) {}
+                config.middlewares(method) do |stack|
+                  stack.use middleware
+                end
               end
 
               specify do
-                expect { config.middlewares(method, scope: scope, &configuration_block) }
+                expect { config.middlewares(method, &configuration_block) }
                   .to delegate_to(config, :assert_not_committed!)
               end
 
               specify do
-                expect { config.middlewares(method, scope: scope, &configuration_block) }
-                  .to delegate_to(config.middlewares(method, scope: scope), :configure)
+                expect { config.middlewares(method, &configuration_block) }
+                  .to delegate_to(config.middlewares(method), :configure)
                   .with_arguments(&configuration_block)
               end
 
               specify do
-                expect { config.middlewares(method, scope: scope, &configuration_block) }
-                  .to delegate_to(config.middlewares(method, scope: scope), :define!)
+                expect { config.middlewares(method, &configuration_block) }
+                  .to delegate_to(config.middlewares(method), :undefine!)
               end
 
               specify do
-                expect { config.middlewares(method, scope: scope, &configuration_block) }
-                  .to cache_its_value
+                expect { config.middlewares(method, &configuration_block) }
+                  .not_to cache_its_value
               end
 
               it "returns instance middlewares for `method`" do
-                expect(config.middlewares(method, scope: scope, &configuration_block)).to eq(method_middlewares)
+                expect(config.middlewares(method, &configuration_block)).to eq(method_middlewares)
               end
             end
 
@@ -344,54 +343,210 @@ RSpec.describe ConvenientService::Core::Entities::Config, type: :standard do
               end
 
               it "raises `ConvenientService::Core::Entities::Config::Exceptions::ConfigIsCommitted`" do
-                expect { config.middlewares(method, scope: scope, &configuration_block) }
+                expect { config.middlewares(method, &configuration_block) }
                   .to raise_error(described_class::Exceptions::ConfigIsCommitted)
                   .with_message(committed_config_error_message)
               end
 
               specify do
-                expect { ignoring_exception(described_class::Exceptions::ConfigIsCommitted) { config.middlewares(method, scope: scope, &configuration_block) } }
+                expect { ignoring_exception(described_class::Exceptions::ConfigIsCommitted) { config.middlewares(method, &configuration_block) } }
                   .to delegate_to(ConvenientService, :raise)
               end
             end
           end
 
-          context "when `scope` is `:class`" do
-            let(:scope) { :class }
-            let(:configuration_block) { class_method_configuration_block }
-            let(:method_middlewares) { class_method_middlewares }
+          context "when `scope` is passed" do
+            context "when `scope` is `:instance`" do
+              let(:scope) { :instance }
+              let(:configuration_block) { instance_method_configuration_block }
+              let(:method_middlewares) { instance_method_middlewares }
+
+              context "when config is NOT committed" do
+                before do
+                  ##
+                  # NOTE: Configures `middlewares` in order to cache them.
+                  #
+                  config.middlewares(method, scope: scope) do |stack|
+                    stack.use middleware
+                  end
+                end
+
+                specify do
+                  expect { config.middlewares(method, scope: scope, &configuration_block) }
+                    .to delegate_to(config, :assert_not_committed!)
+                end
+
+                specify do
+                  expect { config.middlewares(method, scope: scope, &configuration_block) }
+                    .to delegate_to(config.middlewares(method, scope: scope), :configure)
+                    .with_arguments(&configuration_block)
+                end
+
+                specify do
+                  expect { config.middlewares(method, scope: scope, &configuration_block) }
+                    .to delegate_to(config.middlewares(method, scope: scope), :undefine!)
+                end
+
+                specify do
+                  expect { config.middlewares(method, scope: scope, &configuration_block) }
+                    .not_to cache_its_value
+                end
+
+                it "returns instance middlewares for `method`" do
+                  expect(config.middlewares(method, scope: scope, &configuration_block)).to eq(method_middlewares)
+                end
+              end
+
+              context "when config is committed" do
+                before do
+                  config.commit!
+                end
+
+                it "raises `ConvenientService::Core::Entities::Config::Exceptions::ConfigIsCommitted`" do
+                  expect { config.middlewares(method, scope: scope, &configuration_block) }
+                    .to raise_error(described_class::Exceptions::ConfigIsCommitted)
+                    .with_message(committed_config_error_message)
+                end
+
+                specify do
+                  expect { ignoring_exception(described_class::Exceptions::ConfigIsCommitted) { config.middlewares(method, scope: scope, &configuration_block) } }
+                    .to delegate_to(ConvenientService, :raise)
+                end
+              end
+            end
+
+            context "when `scope` is `:class`" do
+              let(:scope) { :class }
+              let(:configuration_block) { class_method_configuration_block }
+              let(:method_middlewares) { class_method_middlewares }
+
+              context "when config is NOT committed" do
+                before do
+                  ##
+                  # NOTE: Configures `middlewares` in order to cache them.
+                  #
+                  config.middlewares(method, scope: scope) do |stack|
+                    stack.use middleware
+                  end
+                end
+
+                specify do
+                  expect { config.middlewares(method, scope: scope, &configuration_block) }
+                    .to delegate_to(config, :assert_not_committed!)
+                end
+
+                specify do
+                  expect { config.middlewares(method, scope: scope, &configuration_block) }
+                    .to delegate_to(config.middlewares(method, scope: scope), :configure)
+                    .with_arguments(&configuration_block)
+                end
+
+                specify do
+                  expect { config.middlewares(method, scope: scope, &configuration_block) }
+                    .to delegate_to(config.middlewares(method, scope: scope), :undefine!)
+                end
+
+                specify do
+                  expect { config.middlewares(method, scope: scope, &configuration_block) }
+                    .not_to cache_its_value
+                end
+
+                it "returns class middlewares for `method`" do
+                  expect(config.middlewares(method, scope: scope, &configuration_block)).to eq(method_middlewares)
+                end
+              end
+
+              context "when config is committed" do
+                before do
+                  config.commit!
+                end
+
+                it "raises `ConvenientService::Core::Entities::Config::Exceptions::ConfigIsCommitted`" do
+                  expect { config.middlewares(method, scope: scope, &configuration_block) }
+                    .to raise_error(described_class::Exceptions::ConfigIsCommitted)
+                    .with_message(committed_config_error_message)
+                end
+
+                specify do
+                  expect { ignoring_exception(described_class::Exceptions::ConfigIsCommitted) { config.middlewares(method, scope: scope, &configuration_block) } }
+                    .to delegate_to(ConvenientService, :raise)
+                end
+              end
+            end
+          end
+        end
+
+        context "when at least one middleware is left after configuration" do
+          let(:instance_method_middleware) do
+            Class.new(ConvenientService::MethodChainMiddleware) do
+              def next(...)
+                chain.next(...)
+              end
+            end
+          end
+
+          let(:class_method_middleware) do
+            Class.new(ConvenientService::MethodChainMiddleware) do
+              def next(...)
+                chain.next(...)
+              end
+            end
+          end
+
+          let(:instance_method_configuration_block) { proc { |stack| stack.use instance_method_middleware } }
+          let(:class_method_configuration_block) { proc { |stack| stack.use class_method_middleware } }
+
+          let(:instance_method_middlewares) do
+            described_class::Entities::MethodMiddlewares
+              .new(scope: :instance, method: method, klass: service_class)
+              .configure { |stack| stack.use middleware }
+              .configure(&instance_method_configuration_block)
+          end
+
+          let(:class_method_middlewares) do
+            described_class::Entities::MethodMiddlewares
+              .new(scope: :class, method: method, klass: service_class)
+              .configure { |stack| stack.use middleware }
+              .configure(&class_method_configuration_block)
+          end
+
+          context "when `scope` is NOT passed" do
+            let(:configuration_block) { instance_method_configuration_block }
+            let(:method_middlewares) { instance_method_middlewares }
 
             context "when config is NOT committed" do
               before do
                 ##
                 # NOTE: Configures `middlewares` in order to cache them.
                 #
-                config.middlewares(method, scope: scope) {}
+                config.middlewares(method) do |stack|
+                  stack.use middleware
+                end
               end
 
               specify do
-                expect { config.middlewares(method, scope: scope, &configuration_block) }
+                expect { config.middlewares(method, &configuration_block) }
                   .to delegate_to(config, :assert_not_committed!)
               end
 
               specify do
-                expect { config.middlewares(method, scope: scope, &configuration_block) }
-                  .to delegate_to(config.middlewares(method, scope: scope), :configure)
+                expect { config.middlewares(method, &configuration_block) }
+                  .to delegate_to(config.middlewares(method), :configure)
                   .with_arguments(&configuration_block)
               end
 
               specify do
-                expect { config.middlewares(method, scope: scope, &configuration_block) }
-                  .to delegate_to(config.middlewares(method, scope: scope), :define!)
+                expect { config.middlewares(method, &configuration_block) }
+                  .to delegate_to(config.middlewares(method), :define!)
               end
 
               specify do
-                expect { config.middlewares(method, scope: scope, &configuration_block) }
+                expect { config.middlewares(method, &configuration_block) }
                   .to cache_its_value
               end
 
-              it "returns class middlewares for `method`" do
-                expect(config.middlewares(method, scope: scope, &configuration_block)).to eq(method_middlewares)
+              it "returns instance middlewares for `method`" do
+                expect(config.middlewares(method, &configuration_block)).to eq(method_middlewares)
               end
             end
 
@@ -401,14 +556,134 @@ RSpec.describe ConvenientService::Core::Entities::Config, type: :standard do
               end
 
               it "raises `ConvenientService::Core::Entities::Config::Exceptions::ConfigIsCommitted`" do
-                expect { config.middlewares(method, scope: scope, &configuration_block) }
+                expect { config.middlewares(method, &configuration_block) }
                   .to raise_error(described_class::Exceptions::ConfigIsCommitted)
                   .with_message(committed_config_error_message)
               end
 
               specify do
-                expect { ignoring_exception(described_class::Exceptions::ConfigIsCommitted) { config.middlewares(method, scope: scope, &configuration_block) } }
+                expect { ignoring_exception(described_class::Exceptions::ConfigIsCommitted) { config.middlewares(method, &configuration_block) } }
                   .to delegate_to(ConvenientService, :raise)
+              end
+            end
+          end
+
+          context "when `scope` is passed" do
+            context "when `scope` is `:instance`" do
+              let(:scope) { :instance }
+              let(:configuration_block) { instance_method_configuration_block }
+              let(:method_middlewares) { instance_method_middlewares }
+
+              context "when config is NOT committed" do
+                before do
+                  ##
+                  # NOTE: Configures `middlewares` in order to cache them.
+                  #
+                  config.middlewares(method, scope: scope) do |stack|
+                    stack.use middleware
+                  end
+                end
+
+                specify do
+                  expect { config.middlewares(method, scope: scope, &configuration_block) }
+                    .to delegate_to(config, :assert_not_committed!)
+                end
+
+                specify do
+                  expect { config.middlewares(method, scope: scope, &configuration_block) }
+                    .to delegate_to(config.middlewares(method, scope: scope), :configure)
+                    .with_arguments(&configuration_block)
+                end
+
+                specify do
+                  expect { config.middlewares(method, scope: scope, &configuration_block) }
+                    .to delegate_to(config.middlewares(method, scope: scope), :define!)
+                end
+
+                specify do
+                  expect { config.middlewares(method, scope: scope, &configuration_block) }
+                    .to cache_its_value
+                end
+
+                it "returns instance middlewares for `method`" do
+                  expect(config.middlewares(method, scope: scope, &configuration_block)).to eq(method_middlewares)
+                end
+              end
+
+              context "when config is committed" do
+                before do
+                  config.commit!
+                end
+
+                it "raises `ConvenientService::Core::Entities::Config::Exceptions::ConfigIsCommitted`" do
+                  expect { config.middlewares(method, scope: scope, &configuration_block) }
+                    .to raise_error(described_class::Exceptions::ConfigIsCommitted)
+                    .with_message(committed_config_error_message)
+                end
+
+                specify do
+                  expect { ignoring_exception(described_class::Exceptions::ConfigIsCommitted) { config.middlewares(method, scope: scope, &configuration_block) } }
+                    .to delegate_to(ConvenientService, :raise)
+                end
+              end
+            end
+
+            context "when `scope` is `:class`" do
+              let(:scope) { :class }
+              let(:configuration_block) { class_method_configuration_block }
+              let(:method_middlewares) { class_method_middlewares }
+
+              context "when config is NOT committed" do
+                before do
+                  ##
+                  # NOTE: Configures `middlewares` in order to cache them.
+                  #
+                  config.middlewares(method, scope: scope) do |stack|
+                    stack.use middleware
+                  end
+                end
+
+                specify do
+                  expect { config.middlewares(method, scope: scope, &configuration_block) }
+                    .to delegate_to(config, :assert_not_committed!)
+                end
+
+                specify do
+                  expect { config.middlewares(method, scope: scope, &configuration_block) }
+                    .to delegate_to(config.middlewares(method, scope: scope), :configure)
+                    .with_arguments(&configuration_block)
+                end
+
+                specify do
+                  expect { config.middlewares(method, scope: scope, &configuration_block) }
+                    .to delegate_to(config.middlewares(method, scope: scope), :define!)
+                end
+
+                specify do
+                  expect { config.middlewares(method, scope: scope, &configuration_block) }
+                    .to cache_its_value
+                end
+
+                it "returns class middlewares for `method`" do
+                  expect(config.middlewares(method, scope: scope, &configuration_block)).to eq(method_middlewares)
+                end
+              end
+
+              context "when config is committed" do
+                before do
+                  config.commit!
+                end
+
+                it "raises `ConvenientService::Core::Entities::Config::Exceptions::ConfigIsCommitted`" do
+                  expect { config.middlewares(method, scope: scope, &configuration_block) }
+                    .to raise_error(described_class::Exceptions::ConfigIsCommitted)
+                    .with_message(committed_config_error_message)
+                end
+
+                specify do
+                  expect { ignoring_exception(described_class::Exceptions::ConfigIsCommitted) { config.middlewares(method, scope: scope, &configuration_block) } }
+                    .to delegate_to(ConvenientService, :raise)
+                end
               end
             end
           end

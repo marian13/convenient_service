@@ -190,6 +190,14 @@ module ConvenientService
                 end
 
                 ##
+                # @param concern [ConvenientService::Support::Concern, Module]
+                # @return [Boolean]
+                #
+                def has?(concern)
+                  plain_stack.has?(cast(concern))
+                end
+
+                ##
                 # @param other [ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack, Object]
                 # @return [Boolean, nil]
                 #

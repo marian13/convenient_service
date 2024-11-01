@@ -435,6 +435,15 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
       end
     end
 
+    describe "#has?" do
+      specify do
+        expect { stack.has?(middleware) }
+          .to delegate_to(plain_stack, :has?)
+          .with_arguments(middleware)
+          .and_return_its_value
+      end
+    end
+
     describe "#to_a" do
       specify do
         expect { stack.to_a }

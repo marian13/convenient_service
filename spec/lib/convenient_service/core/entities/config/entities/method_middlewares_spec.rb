@@ -469,12 +469,16 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
 
       context "when `service_class` has `method` (own or inherited)" do
         let(:service_class) do
-          Class.new do
-            include ConvenientService::Core
+          Class.new.tap do |klass|
+            klass.class_exec(middleware) do |middleware|
+              include ConvenientService::Core
 
-            middlewares(:result) {}
+              middlewares(:result) do |stack|
+                stack.use middleware
+              end
 
-            def result
+              def result
+              end
             end
           end
         end

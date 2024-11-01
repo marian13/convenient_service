@@ -218,6 +218,14 @@ module ConvenientService
                 end
 
                 ##
+                # @param middleware [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Base]
+                # @return [Boolean]
+                #
+                def has?(middleware)
+                  plain_stack.has?(middleware)
+                end
+
+                ##
                 # @param other [ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Stack, Object]
                 # @return [Boolean, nil]
                 #

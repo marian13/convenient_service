@@ -23,6 +23,14 @@ RSpec.describe ConvenientService::Core::Concern::ClassMethods, type: :standard d
   let(:kwargs) { {foo: :bar} }
   let(:block) { proc { :foo } }
 
+  let(:middleware) do
+    Class.new(ConvenientService::MethodChainMiddleware) do
+      def next(...)
+        chain.next(...)
+      end
+    end
+  end
+
   example_group "class methods" do
     if ConvenientService::Dependencies.ruby.version >= 3.2
       describe ".__convenient_service_config__" do
@@ -85,7 +93,12 @@ RSpec.describe ConvenientService::Core::Concern::ClassMethods, type: :standard d
     describe ".middlewares" do
       let(:method) { :result }
       let(:scope) { :instance }
-      let(:configuration_block) { proc {} }
+
+      let(:configuration_block) do
+        proc do |stack|
+          stack.use middleware
+        end
+      end
 
       # rubocop:disable RSpec/ExampleLength
       specify do
@@ -390,10 +403,14 @@ RSpec.describe ConvenientService::Core::Concern::ClassMethods, type: :standard d
 
       context "when middleware caller defined without super method" do
         let(:service_class) do
-          Class.new do
-            include ConvenientService::Core
+          Class.new.tap do |klass|
+            klass.class_exec(middleware) do |middleware|
+              include ConvenientService::Core
 
-            middlewares(:foo, scope: :class) {}
+              middlewares(:foo, scope: :class) do |stack|
+                stack.use middleware
+              end
+            end
           end
         end
 

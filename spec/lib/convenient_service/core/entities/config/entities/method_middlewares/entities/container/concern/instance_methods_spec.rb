@@ -65,6 +65,14 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
     end
   end
 
+  let(:middleware) do
+    Class.new(ConvenientService::MethodChainMiddleware) do
+      def next(...)
+        chain.next(...)
+      end
+    end
+  end
+
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
 
@@ -98,8 +106,12 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
       context "when unbound super method can NOT be resolved" do
         let(:service_class) do
           Class.new.tap do |klass|
-            klass.class_exec(concern) do |concern|
+            klass.class_exec(middleware) do |middleware|
               include ConvenientService::Core
+
+              middlewares(:result) do |stack|
+                stack.use middleware
+              end
             end
           end
         end
@@ -112,14 +124,16 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
       context "when unbound super method can be resolved" do
         let(:service_class) do
           Class.new.tap do |klass|
-            klass.class_exec(concern) do |concern|
+            klass.class_exec(concern, middleware) do |concern, middleware|
               include ConvenientService::Core
 
               concerns do |stack|
                 stack.use concern
               end
 
-              middlewares(:result) {}
+              middlewares(:result) do |stack|
+                stack.use middleware
+              end
             end
           end
         end
@@ -228,15 +242,20 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
       context "when one ancestor from `ancestors_greater_than_methods_middlewares_callers` has own method" do
         let(:service_class) do
           Class.new.tap do |klass|
-            klass.class_exec(concern) do |concern|
+            klass.class_exec(concern, middleware) do |concern, middleware|
               include ConvenientService::Core
 
               concerns do |stack|
                 stack.use concern
               end
 
-              middlewares(:result) {}
-              middlewares(:result, scope: :class) {}
+              middlewares(:result) do |stack|
+                stack.use middleware
+              end
+
+              middlewares(:result, scope: :class) do |stack|
+                stack.use middleware
+              end
             end
           end
         end
@@ -273,7 +292,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
       context "when multiple ancestors from `ancestors_greater_than_methods_middlewares_callers` have own method" do
         let(:service_class) do
           Class.new.tap do |klass|
-            klass.class_exec(concern, other_concern) do |concern, other_concern|
+            klass.class_exec(concern, other_concern, middleware) do |concern, other_concern, middleware|
               include ConvenientService::Core
 
               concerns do |stack|
@@ -282,8 +301,13 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
                 stack.use other_concern
               end
 
-              middlewares(:result) {}
-              middlewares(:result, scope: :class) {}
+              middlewares(:result) do |stack|
+                stack.use middleware
+              end
+
+              middlewares(:result, scope: :class) do |stack|
+                stack.use middleware
+              end
             end
           end
         end
@@ -336,14 +360,16 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
       context "when unbound super method can be resolved" do
         let(:service_class) do
           Class.new.tap do |klass|
-            klass.class_exec(concern) do |concern|
+            klass.class_exec(concern, middleware) do |concern, middleware|
               include ConvenientService::Core
 
               concerns do |stack|
                 stack.use concern
               end
 
-              middlewares(:result) {}
+              middlewares(:result) do |stack|
+                stack.use middleware
+              end
             end
           end
         end

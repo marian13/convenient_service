@@ -103,18 +103,28 @@ module ConvenientService
         #   middlewares(:result, scope: :class, &configuration_block)
         #
         def middlewares(method, scope: :instance, &configuration_block)
-          @middlewares ||= {}
-          @middlewares[scope] ||= {}
+          @middlewares ||= Support::Cache.backed_by(:hash).new
 
-          if configuration_block
-            assert_not_committed!
+          scoped_middlewares = @middlewares.scope(scope)
+          method_middlewares = scoped_middlewares.get(method) || Entities::MethodMiddlewares.new(scope: scope, method: method, klass: klass)
 
-            @middlewares[scope][method] ||= Entities::MethodMiddlewares.new(scope: scope, method: method, klass: klass)
-            @middlewares[scope][method].configure(&configuration_block)
-            @middlewares[scope][method].define!
+          return method_middlewares unless configuration_block
+
+          assert_not_committed!
+
+          method_middlewares.configure(&configuration_block)
+
+          if method_middlewares.any?
+            method_middlewares.define!
+
+            scoped_middlewares.set(method, method_middlewares)
+          else
+            method_middlewares.undefine!
+
+            scoped_middlewares.delete(method)
           end
 
-          @middlewares[scope][method] || Entities::MethodMiddlewares.new(scope: scope, method: method, klass: klass)
+          method_middlewares
         end
 
         ##

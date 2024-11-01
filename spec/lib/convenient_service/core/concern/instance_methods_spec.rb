@@ -25,6 +25,14 @@ RSpec.describe ConvenientService::Core::Concern::InstanceMethods, type: :standar
   let(:kwargs) { {foo: :bar} }
   let(:block) { proc { :foo } }
 
+  let(:middleware) do
+    Class.new(ConvenientService::MethodChainMiddleware) do
+      def next(...)
+        chain.next(...)
+      end
+    end
+  end
+
   example_group "private instance methods" do
     describe "#initialize" do
       it "accepts (*args, **kwargs, &block)" do
@@ -125,10 +133,14 @@ RSpec.describe ConvenientService::Core::Concern::InstanceMethods, type: :standar
 
       context "when middleware caller defined without super method" do
         let(:service_class) do
-          Class.new do
-            include ConvenientService::Core
+          Class.new.tap do |klass|
+            klass.class_exec(middleware) do |middleware|
+              include ConvenientService::Core
 
-            middlewares(:foo, scope: :instance) {}
+              middlewares(:foo, scope: :instance) do |stack|
+                stack.use middleware
+              end
+            end
           end
         end
 
