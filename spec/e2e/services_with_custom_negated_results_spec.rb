@@ -64,6 +64,22 @@ RSpec.describe "Services with custom negated results", type: [:standard, :e2e] d
             end
         end
         # rubocop:enable RSpec/MultipleExpectations
+
+        context "when service uses `fault_tolerance` config option" do
+          let(:service_class) do
+            Class.new do
+              include ConvenientService::Standard::Config.with(:fault_tolerance)
+
+              def negated_result
+                raise ArgumentError
+              end
+            end
+          end
+
+          it "adds service details to that exception" do
+            expect(service.negated_result.from_unhandled_exception?).to eq(true)
+          end
+        end
       end
     end
   end

@@ -84,6 +84,7 @@ module ConvenientService
             use ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware if options.include?(:rollbacks)
             use ConvenientService::Plugins::Service::SetsParentToForeignResult::Middleware if options.include?(:result_parents_trace)
             use ConvenientService::Plugins::Service::RaisesOnNotResultReturnValue::Middleware if options.include?(:type_safety)
+            use ConvenientService::Plugins::Service::RescuesResultUnhandledExceptions::Middleware if options.include?(:fault_tolerance)
             use ConvenientService::Plugins::Service::CanHaveConnectedSteps::Middleware if options.include?(:essential)
           end
 
@@ -92,22 +93,22 @@ module ConvenientService
             use ConvenientService::Plugins::Service::CollectsServicesInException::Middleware if options.include?(:exception_services_trace)
             use ConvenientService::Plugins::Common::EnsuresNegatedJSendResult::Middleware if options.include?(:essential)
             use ConvenientService::Plugins::Service::RaisesOnNotResultReturnValue::Middleware if options.include?(:type_safety)
+            use ConvenientService::Plugins::Service::RescuesResultUnhandledExceptions::Middleware if options.include?(:fault_tolerance)
           end
 
           middlewares :regular_result do
             use ConvenientService::Plugins::Common::CachesReturnValue::Middleware if options.include?(:per_instance_caching)
-            use ConvenientService::Plugins::Service::RescuesResultUnhandledExceptions::Middleware if options.include?(:fault_tolerance)
           end
 
           middlewares :steps_result do
             use ConvenientService::Plugins::Common::CachesReturnValue::Middleware if options.include?(:per_instance_caching)
-            use ConvenientService::Plugins::Service::RescuesResultUnhandledExceptions::Middleware if options.include?(:fault_tolerance)
           end
 
           middlewares :fallback_failure_result do
             use ConvenientService::Plugins::Common::CachesReturnValue::Middleware if options.include?(:per_instance_caching)
             use ConvenientService::Plugins::Service::CollectsServicesInException::Middleware if options.include?(:exception_services_trace)
             use ConvenientService::Plugins::Service::RaisesOnNotResultReturnValue::Middleware if options.include?(:type_safety)
+            # use ConvenientService::Plugins::Service::RescuesResultUnhandledExceptions::Middleware if options.include?(:fault_tolerance) # TODO: Dedicted `rescue`?
             use ConvenientService::Plugins::Service::CanHaveFallbacks::Middleware.with(status: :failure) if options.include?(:fallbacks)
           end
 
@@ -115,6 +116,7 @@ module ConvenientService
             use ConvenientService::Plugins::Common::CachesReturnValue::Middleware if options.include?(:per_instance_caching)
             use ConvenientService::Plugins::Service::CollectsServicesInException::Middleware if options.include?(:exception_services_trace)
             use ConvenientService::Plugins::Service::RaisesOnNotResultReturnValue::Middleware if options.include?(:type_safety)
+            # use ConvenientService::Plugins::Service::RescuesResultUnhandledExceptions::Middleware if options.include?(:fault_tolerance) # TODO: Dedicted `rescue`?
             use ConvenientService::Plugins::Service::CanHaveFallbacks::Middleware.with(status: :error) if options.include?(:fallbacks)
           end
 
@@ -122,6 +124,7 @@ module ConvenientService
             use ConvenientService::Plugins::Common::CachesReturnValue::Middleware if options.include?(:per_instance_caching)
             use ConvenientService::Plugins::Service::CollectsServicesInException::Middleware if options.include?(:exception_services_trace)
             use ConvenientService::Plugins::Service::RaisesOnNotResultReturnValue::Middleware if options.include?(:type_safety)
+            # use ConvenientService::Plugins::Service::RescuesResultUnhandledExceptions::Middleware if options.include?(:fault_tolerance) # TODO: Dedicted `rescue`?
             use ConvenientService::Plugins::Service::CanHaveFallbacks::Middleware.with(status: nil) if options.include?(:fallbacks)
           end
 

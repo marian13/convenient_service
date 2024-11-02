@@ -640,20 +640,20 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
 
         example_group "service" do
           example_group ".result middlewares" do
-            it "adds `ConvenientService::Service::Plugins::RescuesResultUnhandledExceptions::Middleware` to service middlewares for `.result`" do
-              expect(service_class.middlewares(:result, scope: :class).to_a.last).to eq(ConvenientService::Service::Plugins::RescuesResultUnhandledExceptions::Middleware)
+            it "adds `ConvenientService::Service::Plugins::RescuesResultUnhandledExceptions::Middleware` after `ConvenientService::Service::Plugins::CanHaveStubbedResults::Middleware` to service middlewares for `.result`" do
+              expect(service_class.middlewares(:result, scope: :class).to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Service::Plugins::CanHaveStubbedResults::Middleware && current_middleware == ConvenientService::Service::Plugins::RescuesResultUnhandledExceptions::Middleware }).not_to be_nil
             end
           end
 
-          example_group "#regular_result middlewares" do
-            it "adds `ConvenientService::Service::Plugins::RescuesResultUnhandledExceptions::Middleware` to service middlewares for `#regular_result`" do
-              expect(service_class.middlewares(:regular_result).to_a.last).to eq(ConvenientService::Service::Plugins::RescuesResultUnhandledExceptions::Middleware)
+          example_group "#result middlewares" do
+            it "adds `ConvenientService::Service::Plugins::RescuesResultUnhandledExceptions::Middleware` after `ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Middleware` to service middlewares for `#result`" do
+              expect(service_class.middlewares(:result).to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Middleware && current_middleware == ConvenientService::Service::Plugins::RescuesResultUnhandledExceptions::Middleware }).not_to be_nil
             end
           end
 
-          example_group "#steps_result middlewares" do
-            it "adds `ConvenientService::Service::Plugins::RescuesResultUnhandledExceptions::Middleware` to service middlewares for `#steps_result`" do
-              expect(service_class.middlewares(:steps_result).to_a.last).to eq(ConvenientService::Service::Plugins::RescuesResultUnhandledExceptions::Middleware)
+          example_group "#negated_result middlewares" do
+            it "adds `ConvenientService::Service::Plugins::RescuesResultUnhandledExceptions::Middleware` after `ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Middleware` to service middlewares for `#result`" do
+              expect(service_class.middlewares(:negated_result).to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Middleware && current_middleware == ConvenientService::Service::Plugins::RescuesResultUnhandledExceptions::Middleware }).not_to be_nil
             end
           end
 
