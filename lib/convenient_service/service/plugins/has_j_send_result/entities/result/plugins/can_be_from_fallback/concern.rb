@@ -7,7 +7,7 @@ module ConvenientService
         module Entities
           class Result
             module Plugins
-              module CanHaveFallbacks
+              module CanBeFromFallback
                 module Concern
                   include Support::Concern
 

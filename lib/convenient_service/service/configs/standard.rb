@@ -167,7 +167,7 @@ module ConvenientService
               use ConvenientService::Plugins::Result::CanHaveStep::Concern if options.include?(:essential)
               use ConvenientService::Plugins::Result::HasNegatedResult::Concern if options.include?(:essential)
               use ConvenientService::Plugins::Result::HasStatusResponder::Concern if options.include?(:essential)
-              use ConvenientService::Plugins::Result::CanHaveFallbacks::Concern if options.include?(:fallbacks)
+              use ConvenientService::Plugins::Result::CanBeFromFallback::Concern if options.include?(:fallbacks)
               use ConvenientService::Plugins::Result::CanBeFromException::Concern if options.include?(:fault_tolerance)
               use ConvenientService::Plugins::Result::HasInspect::Concern if options.include?(:inspect)
               use ConvenientService::Plugins::Result::CanRecalculateResult::Concern if options.include?(:recalculation)
