@@ -196,49 +196,45 @@ RSpec.describe "Service with all types of groups with NOT evaluated steps", type
     services
   end
 
-  example_group "modules" do
-    subject { services[:ServiceWithAllTypesOfGroupsWithNotEvaluatedSteps] }
+  example_group "Service" do
+    example_group "instance methods" do
+      describe "#result" do
+        subject(:result) { service.result }
 
-    it { is_expected.to include_module(ConvenientService::Standard::Config) }
-  end
+        let(:service) { services[:ServiceWithAllTypesOfGroupsWithNotEvaluatedSteps].new(out: out) }
 
-  example_group "class methods" do
-    describe ".result" do
-      subject(:result) { service.result }
+        let(:out) { Tempfile.new }
 
-      let(:service) { services[:ServiceWithAllTypesOfGroupsWithNotEvaluatedSteps].new(out: out) }
-
-      let(:out) { Tempfile.new }
-
-      context "when `ServiceWithAllTypesOfSteps` is successful" do
-        it "returns `success`" do
-          expect(result).to be_failure.with_data(index: 10).of_service(services[:ServiceWithAllTypesOfGroupsWithNotEvaluatedSteps]).of_step(services[:FailureService])
-        end
-
-        example_group "logs" do
-          let(:actual_output) { out.tap(&:rewind).read }
-
-          let(:expected_output) do
-            <<~TEXT
-              Started service `#{services[:ServiceWithAllTypesOfGroupsWithNotEvaluatedSteps]}`.
-                Run step `#{services[:SuccessService]}` (steps[0]).
-                Run step `#{services[:FailureService]}` (steps[2]).
-                Run step `#{services[:FailureService]}` (steps[4]).
-                Run step `#{services[:FailureService]}` (steps[6]).
-                Run step `#{services[:SuccessService]}` (steps[8]).
-                Run step `#{services[:FailureService]}` (steps[10]).
-              Completed service `#{services[:ServiceWithAllTypesOfGroupsWithNotEvaluatedSteps]}`.
-            TEXT
+        context "when `ServiceWithAllTypesOfSteps` is successful" do
+          it "returns `success`" do
+            expect(result).to be_failure.with_data(index: 10).of_service(services[:ServiceWithAllTypesOfGroupsWithNotEvaluatedSteps]).of_step(services[:FailureService])
           end
 
-          before do
-            allow(service).to receive(:puts).and_call_original
-          end
+          example_group "logs" do
+            let(:actual_output) { out.tap(&:rewind).read }
 
-          it "prints progress bar after each step" do
-            result
+            let(:expected_output) do
+              <<~TEXT
+                Started service `#{services[:ServiceWithAllTypesOfGroupsWithNotEvaluatedSteps]}`.
+                  Run step `#{services[:SuccessService]}` (steps[0]).
+                  Run step `#{services[:FailureService]}` (steps[2]).
+                  Run step `#{services[:FailureService]}` (steps[4]).
+                  Run step `#{services[:FailureService]}` (steps[6]).
+                  Run step `#{services[:SuccessService]}` (steps[8]).
+                  Run step `#{services[:FailureService]}` (steps[10]).
+                Completed service `#{services[:ServiceWithAllTypesOfGroupsWithNotEvaluatedSteps]}`.
+              TEXT
+            end
 
-            expect(actual_output).to eq(expected_output)
+            before do
+              allow(service).to receive(:puts).and_call_original
+            end
+
+            it "prints progress bar after each step" do
+              result
+
+              expect(actual_output).to eq(expected_output)
+            end
           end
         end
       end

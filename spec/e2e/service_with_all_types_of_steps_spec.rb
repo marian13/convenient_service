@@ -166,97 +166,93 @@ RSpec.describe "Service with all types of steps", type: [:standard, :e2e] do
     services
   end
 
-  example_group "modules" do
-    subject { services[:ServiceWithAllTypesOfSteps] }
+  example_group "Service" do
+    example_group "instance methods" do
+      describe "#result" do
+        subject(:result) { service.result }
 
-    it { is_expected.to include_module(ConvenientService::Standard::Config) }
-  end
+        let(:service) { services[:ServiceWithAllTypesOfSteps].new(out: out) }
 
-  example_group "class methods" do
-    describe ".result" do
-      subject(:result) { service.result }
+        let(:out) { Tempfile.new }
 
-      let(:service) { services[:ServiceWithAllTypesOfSteps].new(out: out) }
-
-      let(:out) { Tempfile.new }
-
-      context "when `ServiceWithAllTypesOfSteps` is successful" do
-        specify do
-          expect { result }
-            .to delegate_to(services[:SuccessService], :result)
-            .with_arguments(index: 0)
-        end
-
-        ##
-        # TODO: Implement a way to check delegation to method step.
-        #
-        # specify do
-        #   expect { result }
-        #     .to delegate_to(service.steps[1], :result)
-        #     .with_arguments(index: 1)
-        # end
-
-        specify do
-          expect { result }
-            .to delegate_to(services[:SuccessService], :result)
-            .with_arguments(index: 2)
-        end
-
-        ##
-        # TODO: Implement a way to check delegation to method step.
-        #
-        # specify do
-        #   expect { result }
-        #     .to delegate_to(service.steps[3], :result)
-        #     .with_arguments(index: 3)
-        # end
-
-        specify do
-          expect { result }
-            .to delegate_to(services[:FailureService], :result)
-            .with_arguments(index: 4)
-        end
-
-        ##
-        # TODO: Implement a way to check delegation to method step.
-        #
-        # specify do
-        #   expect { result }
-        #     .to delegate_to(service.steps[5], :result)
-        #     .with_arguments(index: 5)
-        # end
-
-        ##
-        # TODO: `of_step`, `of_not_step`, `of_and_step`, `of_or_step`, `of_not_or_step`? Or generic `of_step(step, with: type)?`
-        #
-        it "returns `success`" do
-          expect(result).to be_success.with_data(index: 5).of_service(services[:ServiceWithAllTypesOfSteps]).of_step(:failure_method)
-        end
-
-        example_group "logs" do
-          let(:actual_output) { out.tap(&:rewind).read }
-
-          let(:expected_output) do
-            <<~TEXT
-              Started service `#{services[:ServiceWithAllTypesOfSteps]}`.
-                Run step `#{services[:SuccessService]}` (steps[0]).
-                Run step `:failure_method` (steps[1]).
-                Run step `#{services[:SuccessService]}` (steps[2]).
-                Run step `:success_method` (steps[3]).
-                Run step `#{services[:FailureService]}` (steps[4]).
-                Run step `:failure_method` (steps[5]).
-              Completed service `#{services[:ServiceWithAllTypesOfSteps]}`.
-            TEXT
+        context "when `ServiceWithAllTypesOfSteps` is successful" do
+          specify do
+            expect { result }
+              .to delegate_to(services[:SuccessService], :result)
+              .with_arguments(index: 0)
           end
 
-          before do
-            allow(service).to receive(:puts).and_call_original
+          ##
+          # TODO: Implement a way to check delegation to method step.
+          #
+          # specify do
+          #   expect { result }
+          #     .to delegate_to(service.steps[1], :result)
+          #     .with_arguments(index: 1)
+          # end
+
+          specify do
+            expect { result }
+              .to delegate_to(services[:SuccessService], :result)
+              .with_arguments(index: 2)
           end
 
-          it "prints progress bar after each step" do
-            result
+          ##
+          # TODO: Implement a way to check delegation to method step.
+          #
+          # specify do
+          #   expect { result }
+          #     .to delegate_to(service.steps[3], :result)
+          #     .with_arguments(index: 3)
+          # end
 
-            expect(actual_output).to eq(expected_output)
+          specify do
+            expect { result }
+              .to delegate_to(services[:FailureService], :result)
+              .with_arguments(index: 4)
+          end
+
+          ##
+          # TODO: Implement a way to check delegation to method step.
+          #
+          # specify do
+          #   expect { result }
+          #     .to delegate_to(service.steps[5], :result)
+          #     .with_arguments(index: 5)
+          # end
+
+          ##
+          # TODO: `of_step`, `of_not_step`, `of_and_step`, `of_or_step`, `of_not_or_step`? Or generic `of_step(step, with: type)?`
+          #
+          it "returns `success`" do
+            expect(result).to be_success.with_data(index: 5).of_service(services[:ServiceWithAllTypesOfSteps]).of_step(:failure_method)
+          end
+
+          example_group "logs" do
+            let(:actual_output) { out.tap(&:rewind).read }
+
+            let(:expected_output) do
+              <<~TEXT
+                Started service `#{services[:ServiceWithAllTypesOfSteps]}`.
+                  Run step `#{services[:SuccessService]}` (steps[0]).
+                  Run step `:failure_method` (steps[1]).
+                  Run step `#{services[:SuccessService]}` (steps[2]).
+                  Run step `:success_method` (steps[3]).
+                  Run step `#{services[:FailureService]}` (steps[4]).
+                  Run step `:failure_method` (steps[5]).
+                Completed service `#{services[:ServiceWithAllTypesOfSteps]}`.
+              TEXT
+            end
+
+            before do
+              allow(service).to receive(:puts).and_call_original
+            end
+
+            it "prints progress bar after each step" do
+              result
+
+              expect(actual_output).to eq(expected_output)
+            end
           end
         end
       end

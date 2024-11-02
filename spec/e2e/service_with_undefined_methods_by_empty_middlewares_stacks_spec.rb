@@ -28,42 +28,44 @@ RSpec.describe "Service with undefined methods by empty middlewares stacks", typ
     end
   end
 
-  example_group "class methods" do
-    describe ".middlewares" do
-      context "when `name` is `:method_defined_before_middlewares_stack_configuration`" do
-        it "returns NO middlewares" do
-          expect(service_class.middlewares(:method_defined_before_middlewares_stack_configuration).none?).to eq(true)
+  example_group "Service" do
+    example_group "class methods" do
+      describe ".middlewares" do
+        context "when `name` is `:method_defined_before_middlewares_stack_configuration`" do
+          it "returns NO middlewares" do
+            expect(service_class.middlewares(:method_defined_before_middlewares_stack_configuration).none?).to eq(true)
+          end
+
+          specify do
+            expect { service_class.middlewares(:method_defined_before_middlewares_stack_configuration) }.not_to cache_its_value
+          end
         end
 
-        specify do
-          expect { service_class.middlewares(:method_defined_before_middlewares_stack_configuration) }.not_to cache_its_value
+        context "when `name` is `:method_defined_after_middlewares_stack_configuration`" do
+          it "returns NO middlewares" do
+            expect(service_class.middlewares(:method_defined_after_middlewares_stack_configuration).none?).to eq(true)
+          end
+
+          specify do
+            expect { service_class.middlewares(:method_defined_after_middlewares_stack_configuration) }.not_to cache_its_value
+          end
         end
-      end
-
-      context "when `name` is `:method_defined_after_middlewares_stack_configuration`" do
-        it "returns NO middlewares" do
-          expect(service_class.middlewares(:method_defined_after_middlewares_stack_configuration).none?).to eq(true)
-        end
-
-        specify do
-          expect { service_class.middlewares(:method_defined_after_middlewares_stack_configuration) }.not_to cache_its_value
-        end
-      end
-    end
-  end
-
-  example_group "instance methods" do
-    let(:service) { service_class.new }
-
-    describe "#method_defined_before_middlewares_stack_configuration" do
-      it "is NOT undefined" do
-        expect(service.method_defined_before_middlewares_stack_configuration).to eq("method_defined_before_middlewares_stack_configuration")
       end
     end
 
-    describe "#method_defined_after_middlewares_stack_configuration" do
-      it "is NOT undefined" do
-        expect(service.method_defined_after_middlewares_stack_configuration).to eq("method_defined_after_middlewares_stack_configuration")
+    example_group "instance methods" do
+      let(:service) { service_class.new }
+
+      describe "#method_defined_before_middlewares_stack_configuration" do
+        it "is NOT undefined" do
+          expect(service.method_defined_before_middlewares_stack_configuration).to eq("method_defined_before_middlewares_stack_configuration")
+        end
+      end
+
+      describe "#method_defined_after_middlewares_stack_configuration" do
+        it "is NOT undefined" do
+          expect(service.method_defined_after_middlewares_stack_configuration).to eq("method_defined_after_middlewares_stack_configuration")
+        end
       end
     end
   end
