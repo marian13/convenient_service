@@ -7,7 +7,7 @@ module ConvenientService
         module Entities
           class Result
             module Plugins
-              module CanRecalculateResult
+              module CanBeRecalculated
                 module Concern
                   include Support::Concern
 
