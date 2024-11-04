@@ -31,24 +31,30 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
   end
 
   example_group "instance methods" do
-    describe "#fallback_failure_result?" do
-      let(:result) { service.result }
+    let(:service) do
+      Class.new do
+        include ConvenientService::Standard::Config
 
-      let(:service) do
-        Class.new do
-          include ConvenientService::Standard::Config
+        def result
+          success
+        end
 
-          def result
-            success
-          end
+        def fallback_failure_result
+          success
+        end
 
-          def fallback_failure_result
-            success
-          end
+        def fallback_error_result
+          success
+        end
+
+        def fallback_result
+          success
         end
       end
+    end
 
-      context "when result is NOT from `fallback_failure_result` method" do
+    describe "#fallback_failure_result?" do
+      context "when result is from `result` method" do
         let(:result) { service.result }
 
         it "returns `false`" do
@@ -63,27 +69,35 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           expect(result.fallback_failure_result?).to eq(true)
         end
       end
-    end
 
-    describe "#fallback_error_result?" do
-      let(:result) { service.result }
+      context "when result is from `fallback_error_result` method" do
+        let(:result) { service.fallback_error_result }
 
-      let(:service) do
-        Class.new do
-          include ConvenientService::Standard::Config
-
-          def result
-            success
-          end
-
-          def fallback_error_result
-            success
-          end
+        it "returns `false`" do
+          expect(result.fallback_failure_result?).to eq(false)
         end
       end
 
-      context "when result is NOT from `fallback_error_result` method" do
+      context "when result is from `fallback_result` method" do
+        let(:result) { service.fallback_result }
+
+        it "returns `false`" do
+          expect(result.fallback_failure_result?).to eq(false)
+        end
+      end
+    end
+
+    describe "#fallback_error_result?" do
+      context "when result is from `result` method" do
         let(:result) { service.result }
+
+        it "returns `false`" do
+          expect(result.fallback_error_result?).to eq(false)
+        end
+      end
+
+      context "when result is from `fallback_failure_result` method" do
+        let(:result) { service.fallback_failure_result }
 
         it "returns `false`" do
           expect(result.fallback_error_result?).to eq(false)
@@ -97,29 +111,17 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           expect(result.fallback_error_result?).to eq(true)
         end
       end
+
+      context "when result is from `fallback_result` method" do
+        let(:result) { service.fallback_result }
+
+        it "returns `false`" do
+          expect(result.fallback_error_result?).to eq(false)
+        end
+      end
     end
 
     describe "#fallback_result?" do
-      let(:result) { service.result }
-
-      let(:service) do
-        Class.new do
-          include ConvenientService::Standard::Config
-
-          def result
-            success
-          end
-
-          def fallback_failure_result
-            success
-          end
-
-          def fallback_error_result
-            success
-          end
-        end
-      end
-
       context "when result is from `result` method" do
         let(:result) { service.result }
 
@@ -131,8 +133,42 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       context "when result is from `fallback_failure_result` method" do
         let(:result) { service.fallback_failure_result }
 
+        it "returns `false`" do
+          expect(result.fallback_result?).to eq(false)
+        end
+      end
+
+      context "when result is from `fallback_error_result` method" do
+        let(:result) { service.fallback_error_result }
+
+        it "returns `false`" do
+          expect(result.fallback_result?).to eq(false)
+        end
+      end
+
+      context "when result is from `fallback_result` method" do
+        let(:result) { service.fallback_result }
+
         it "returns `true`" do
           expect(result.fallback_result?).to eq(true)
+        end
+      end
+    end
+
+    describe "#fallback?" do
+      context "when result is from `result` method" do
+        let(:result) { service.result }
+
+        it "returns `false`" do
+          expect(result.fallback?).to eq(false)
+        end
+      end
+
+      context "when result is from `fallback_failure_result` method" do
+        let(:result) { service.fallback_failure_result }
+
+        it "returns `true`" do
+          expect(result.fallback?).to eq(true)
         end
       end
 
@@ -140,7 +176,15 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         let(:result) { service.fallback_error_result }
 
         it "returns `true`" do
-          expect(result.fallback_result?).to eq(true)
+          expect(result.fallback?).to eq(true)
+        end
+      end
+
+      context "when result is from `fallback_result` method" do
+        let(:result) { service.fallback_result }
+
+        it "returns `true`" do
+          expect(result.fallback?).to eq(true)
         end
       end
     end

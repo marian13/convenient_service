@@ -17,8 +17,7 @@ module ConvenientService
 
             ::ConvenientService.raise Exceptions::ServiceFallbackReturnValueNotSuccess.new(service: entity, result: fallback_result, status: status) unless fallback_result.success?
 
-            fallback_result.copy(overrides: {kwargs: {method => true}})
-              .tap { |result| result.success? }
+            fallback_result.copy(overrides: {kwargs: {method => true}}).tap(&:success?)
           end
 
           private
