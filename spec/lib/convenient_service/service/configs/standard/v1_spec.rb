@@ -42,7 +42,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
               ConvenientService::Service::Plugins::HasInspect::Concern,
               ConvenientService::Common::Plugins::CachesConstructorArguments::Concern,
               ConvenientService::Common::Plugins::CanBeCopied::Concern,
-              ConvenientService::Service::Plugins::CanRecalculateResult::Concern,
+              ConvenientService::Service::Plugins::CanHaveRecalculations::Concern,
               ConvenientService::Service::Plugins::CanNotBeInherited::Concern,
               ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Concern,
               ConvenientService::Service::Plugins::HasJSendResultStatusCheckShortSyntax::Concern,

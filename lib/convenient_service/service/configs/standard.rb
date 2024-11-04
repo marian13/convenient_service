@@ -62,7 +62,7 @@ module ConvenientService
             use ConvenientService::Plugins::Service::HasInspect::Concern if options.include?(:inspect)
             use ConvenientService::Plugins::Common::CachesConstructorArguments::Concern if options.include?(:recalculation)
             use ConvenientService::Plugins::Common::CanBeCopied::Concern if options.include?(:recalculation)
-            use ConvenientService::Plugins::Service::CanRecalculateResult::Concern if options.include?(:recalculation)
+            use ConvenientService::Plugins::Service::CanHaveRecalculations::Concern if options.include?(:recalculation)
             use ConvenientService::Plugins::Service::CanNotBeInherited::Concern if options.include?(:code_review_automation)
             use ConvenientService::Plugins::Service::HasJSendResultShortSyntax::Concern if options.include?(:short_syntax)
             use ConvenientService::Plugins::Service::HasJSendResultStatusCheckShortSyntax::Concern if options.include?(:short_syntax)
