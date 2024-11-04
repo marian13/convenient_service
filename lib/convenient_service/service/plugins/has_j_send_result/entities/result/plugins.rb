@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require_relative "plugins/can_be_recalculated"
 require_relative "plugins/has_negated_result"
 require_relative "plugins/can_be_from_fallback"
 require_relative "plugins/can_be_from_exception"

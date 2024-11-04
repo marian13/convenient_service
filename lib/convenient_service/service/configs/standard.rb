@@ -170,7 +170,6 @@ module ConvenientService
               use ConvenientService::Plugins::Result::CanBeFromFallback::Concern if options.include?(:fallbacks)
               use ConvenientService::Plugins::Result::CanBeFromException::Concern if options.include?(:fault_tolerance)
               use ConvenientService::Plugins::Result::HasInspect::Concern if options.include?(:inspect)
-              use ConvenientService::Plugins::Result::CanBeRecalculated::Concern if options.include?(:recalculation)
               use ConvenientService::Plugins::Result::CanBeOwnResult::Concern if options.include?(:result_parents_trace)
               use ConvenientService::Plugins::Result::CanHaveParentResult::Concern if options.include?(:result_parents_trace)
               use ConvenientService::Plugins::Result::CanBeStubbedResult::Concern if options.include?(:rspec)
