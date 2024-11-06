@@ -35,8 +35,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasAwesomePrintInspect::Conc
   example_group "instance methods" do
     let(:service_class) do
       Class.new do
-        include ConvenientService::Standard::Config
-        include ConvenientService::Service::Configs::AwesomePrintInspect
+        include ConvenientService::Standard::Config.with(:awesome_print_inspect)
 
         def self.name
           "ImportantService"
@@ -55,8 +54,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasAwesomePrintInspect::Conc
       context "when service class is anonymous" do
         let(:service_class) do
           Class.new do
-            include ConvenientService::Standard::Config
-            include ConvenientService::Service::Configs::AwesomePrintInspect
+            include ConvenientService::Standard::Config.with(:awesome_print_inspect)
           end
         end
 

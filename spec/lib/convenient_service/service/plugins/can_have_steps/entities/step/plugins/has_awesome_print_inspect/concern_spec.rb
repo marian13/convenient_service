@@ -37,8 +37,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       context "when step is neither service nor method step" do
         let(:container) do
           Class.new do
-            include ConvenientService::Standard::Config
-            include ConvenientService::Service::Configs::AwesomePrintInspect
+            include ConvenientService::Standard::Config.with(:awesome_print_inspect)
 
             step "abc"
 
@@ -59,8 +58,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         let(:container) do
           Class.new.tap do |klass|
             klass.class_exec(service) do |service|
-              include ConvenientService::Standard::Config
-              include ConvenientService::Service::Configs::AwesomePrintInspect
+              include ConvenientService::Standard::Config.with(:awesome_print_inspect)
 
               step service
 
@@ -105,8 +103,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       context "when step is method step" do
         let(:container) do
           Class.new do
-            include ConvenientService::Standard::Config
-            include ConvenientService::Service::Configs::AwesomePrintInspect
+            include ConvenientService::Standard::Config.with(:awesome_print_inspect)
 
             step :result
 
@@ -130,8 +127,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       context "when container class is anonymous" do
         let(:container) do
           Class.new do
-            include ConvenientService::Standard::Config
-            include ConvenientService::Service::Configs::AwesomePrintInspect
+            include ConvenientService::Standard::Config.with(:awesome_print_inspect)
 
             step "abc"
           end

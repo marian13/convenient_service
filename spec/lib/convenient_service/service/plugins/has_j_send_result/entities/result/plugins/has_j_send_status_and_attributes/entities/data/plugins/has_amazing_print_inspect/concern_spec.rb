@@ -36,8 +36,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
     describe "#inspect" do
       let(:service) do
         Class.new do
-          include ConvenientService::Standard::Config
-          include ConvenientService::Service::Configs::AmazingPrintInspect
+          include ConvenientService::Standard::Config.with(:amazing_print_inspect)
 
           def self.name
             "ImportantService"
@@ -73,8 +72,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       context "when `data` has no values" do
         let(:service) do
           Class.new do
-            include ConvenientService::Standard::Config
-            include ConvenientService::Service::Configs::AmazingPrintInspect
+            include ConvenientService::Standard::Config.with(:amazing_print_inspect)
 
             def self.name
               "ImportantService"
@@ -96,8 +94,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       context "when service class is anonymous" do
         let(:service) do
           Class.new do
-            include ConvenientService::Standard::Config
-            include ConvenientService::Service::Configs::AmazingPrintInspect
+            include ConvenientService::Standard::Config.with(:amazing_print_inspect)
 
             def result
               success(data: {foo: +"bar"})

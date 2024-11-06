@@ -125,7 +125,7 @@ module ConvenientService
       # @return [Boolean]
       # @note Expected to be called from app entry points like `initializers` in Rails.
       #
-      def require_amazing_print_inspect_config
+      def require_amazing_print_inspect_standard_config_option
         ##
         # - https://github.com/amazing-print/amazing_print
         #
@@ -138,8 +138,6 @@ module ConvenientService
         require "convenient_service/service/plugins/has_j_send_result/entities/result/plugins/has_j_send_status_and_attributes/entities/status/plugins/has_amazing_print_inspect"
         require "convenient_service/service/plugins/has_j_send_result/entities/result/plugins/has_j_send_status_and_attributes/entities/code/plugins/has_amazing_print_inspect"
         require "convenient_service/service/plugins/can_have_steps/entities/step/plugins/has_amazing_print_inspect"
-        require "convenient_service/service/configs/amazing_print_inspect"
-        require "convenient_service/service/configs/amazing_print_inspect/aliases"
       end
 
       ##
@@ -148,7 +146,93 @@ module ConvenientService
       # @return [Boolean]
       # @note Expected to be called from app entry points like `initializers` in Rails.
       #
-      def require_awesome_print_inspect_config
+      # Loads a config that patches services to use Awesome Print to generate colored `inspect` strings.
+      # Useful for debugging.
+      # Works as expected for `byebug` and `pry`.
+      #
+      # Has issues with escaping colors for `binding.break` and `irb`.
+      # There is a workaround in the examples, but its possible negative outcome has not been investigated yet. Use it at your own risk.
+      #
+      # @example `:awesome_print_inspect` output for `byebug` or `pry`.
+      #   class Service
+      #     include ::ConvenientService::Standard::Config.with(:awesome_print_inspect)
+      #
+      #     def result
+      #       success(foo: :bar)
+      #     end
+      #   end
+      #
+      #   Service.result
+      #   # =>
+      #   {
+      #     :ConvenientService => {
+      #            :entity => "Result",
+      #           :service => "Service",
+      #            :status => :success,
+      #         :data_keys => [
+      #             [0] :foo
+      #         ]
+      #     }
+      #   }
+      #
+      # @example `:awesome_print_inspect` output for `binding.break` or `irb`.
+      #
+      #   class Service
+      #     include ::ConvenientService::Standard::Config.with(:awesome_print_inspect)
+      #
+      #     def result
+      #       success(foo: :bar)
+      #     end
+      #   end
+      #
+      #   Service.result
+      #   # =>
+      #   {
+      #     :ConvenientService^[[0;37m => ^[[0m{
+      #            :entity^[[0;37m => ^[[0m^[[0;33m"Result"^[[0m,
+      #           :service^[[0;37m => ^[[0m^[[0;33m"Service"^[[0m,
+      #            :status^[[0;37m => ^[[0m^[[0;36m:success^[[0m,
+      #         :data_keys^[[0;37m => ^[[0m[
+      #             ^[[1;37m[0] ^[[0m^[[0;36m:foo^[[0m
+      #         ]
+      #       }
+      #   }
+      #
+      # @example `:awesome_print_inspect` output for `binding.break` or `irb` with `Reline` hack.
+      #
+      #   class Service
+      #     include ::ConvenientService::Standard::Config.with(:awesome_print_inspect)
+      #
+      #     def result
+      #       success(foo: :bar)
+      #     end
+      #   end
+      #
+      #   class Reline::Unicode
+      #     def self.escape_for_print(str)
+      #       str
+      #     end
+      #   end
+      #
+      #   Service.result
+      #   # =>
+      #   {
+      #     :ConvenientService => {
+      #            :entity => "Result",
+      #           :service => "Service",
+      #            :status => :success,
+      #         :data_keys => [
+      #             [0] :foo
+      #         ]
+      #     }
+      #   }
+      #
+      # @see https://github.com/awesome-print/awesome_print
+      # @see https://github.com/ruby/irb/blob/v1.13.1/lib/irb/inspector.rb#L113
+      # @see https://github.com/ruby/irb/blob/v1.13.1/lib/irb/color.rb#L150
+      # @see https://github.com/ruby/reline/blob/v0.5.8/lib/reline/unicode.rb#L30
+      #
+      def require_awesome_print_inspect_standard_config_option
         ##
         # - https://github.com/awesome-print/awesome_print
         #
@@ -161,8 +245,6 @@ module ConvenientService
         require "convenient_service/service/plugins/has_j_send_result/entities/result/plugins/has_j_send_status_and_attributes/entities/status/plugins/has_awesome_print_inspect"
         require "convenient_service/service/plugins/has_j_send_result/entities/result/plugins/has_j_send_status_and_attributes/entities/code/plugins/has_awesome_print_inspect"
         require "convenient_service/service/plugins/can_have_steps/entities/step/plugins/has_awesome_print_inspect"
-        require "convenient_service/service/configs/awesome_print_inspect"
-        require "convenient_service/service/configs/awesome_print_inspect/aliases"
       end
 
       ##

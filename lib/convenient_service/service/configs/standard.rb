@@ -60,6 +60,8 @@ module ConvenientService
             use ConvenientService::Plugins::Common::CanHaveCallbacks::Concern if options.include?(:callbacks)
             use ConvenientService::Plugins::Service::CanHaveFallbacks::Concern if options.include?(:fallbacks)
             use ConvenientService::Plugins::Service::HasInspect::Concern if options.include?(:inspect)
+            use ConvenientService::Plugins::Service::HasAwesomePrintInspect::Concern if options.include?(:awesome_print_inspect)
+            use ConvenientService::Plugins::Service::HasAmazingPrintInspect::Concern if options.include?(:amazing_print_inspect)
             use ConvenientService::Plugins::Common::CachesConstructorArguments::Concern if options.include?(:recalculation)
             use ConvenientService::Plugins::Common::CanBeCopied::Concern if options.include?(:recalculation)
             use ConvenientService::Plugins::Service::CanHaveRecalculations::Concern if options.include?(:recalculation)
@@ -170,6 +172,8 @@ module ConvenientService
               use ConvenientService::Plugins::Result::CanBeFromFallback::Concern if options.include?(:fallbacks)
               use ConvenientService::Plugins::Result::CanBeFromException::Concern if options.include?(:fault_tolerance)
               use ConvenientService::Plugins::Result::HasInspect::Concern if options.include?(:inspect)
+              use ConvenientService::Plugins::Result::HasAwesomePrintInspect::Concern if options.include?(:awesome_print_inspect)
+              use ConvenientService::Plugins::Result::HasAmazingPrintInspect::Concern if options.include?(:amazing_print_inspect)
               use ConvenientService::Plugins::Result::CanBeOwnResult::Concern if options.include?(:result_parents_trace)
               use ConvenientService::Plugins::Result::CanHaveParentResult::Concern if options.include?(:result_parents_trace)
               use ConvenientService::Plugins::Result::CanBeStubbedResult::Concern if options.include?(:rspec)
@@ -204,6 +208,8 @@ module ConvenientService
               concerns do
                 use ConvenientService::Plugins::Common::HasInternals::Concern if options.include?(:essential)
                 use ConvenientService::Plugins::Status::HasInspect::Concern if options.include?(:inspect)
+                use ConvenientService::Plugins::Status::HasAwesomePrintInspect::Concern if options.include?(:awesome_print_inspect)
+                use ConvenientService::Plugins::Status::HasAmazingPrintInspect::Concern if options.include?(:amazing_print_inspect)
                 use ConvenientService::Plugins::Status::CanBeChecked::Concern if options.include?(:code_review_automation)
               end
 
@@ -241,18 +247,24 @@ module ConvenientService
             entity :Data do
               concerns do
                 use ConvenientService::Plugins::Data::HasInspect::Concern if options.include?(:inspect)
+                use ConvenientService::Plugins::Data::HasAwesomePrintInspect::Concern if options.include?(:awesome_print_inspect)
+                use ConvenientService::Plugins::Data::HasAmazingPrintInspect::Concern if options.include?(:amazing_print_inspect)
               end
             end
 
             entity :Message do
               concerns do
                 use ConvenientService::Plugins::Message::HasInspect::Concern if options.include?(:inspect)
+                use ConvenientService::Plugins::Message::HasAwesomePrintInspect::Concern if options.include?(:awesome_print_inspect)
+                use ConvenientService::Plugins::Message::HasAmazingPrintInspect::Concern if options.include?(:amazing_print_inspect)
               end
             end
 
             entity :Code do
               concerns do
                 use ConvenientService::Plugins::Code::HasInspect::Concern if options.include?(:inspect)
+                use ConvenientService::Plugins::Code::HasAwesomePrintInspect::Concern if options.include?(:awesome_print_inspect)
+                use ConvenientService::Plugins::Code::HasAmazingPrintInspect::Concern if options.include?(:amazing_print_inspect)
               end
             end
 
@@ -273,6 +285,8 @@ module ConvenientService
               use ConvenientService::Plugins::Common::CanHaveCallbacks::Concern if options.include?(:callbacks)
               use ConvenientService::Plugins::Step::CanHaveFallbacks::Concern if options.include?(:fallbacks)
               use ConvenientService::Plugins::Step::HasInspect::Concern if options.include?(:inspect)
+              use ConvenientService::Plugins::Step::HasAwesomePrintInspect::Concern if options.include?(:awesome_print_inspect)
+              use ConvenientService::Plugins::Step::HasAmazingPrintInspect::Concern if options.include?(:amazing_print_inspect)
               use ConvenientService::Plugins::Common::HasJSendResultDuckShortSyntax::Concern if options.include?(:short_syntax)
             end
 
