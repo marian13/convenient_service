@@ -19,7 +19,7 @@ module ConvenientService
           def matches?(klass)
             @klass = klass
 
-            klass.included_modules.find { |mod| config == mod }
+            klass.included_modules.any? { |mod| config == mod }
           end
 
           ##
@@ -33,14 +33,14 @@ module ConvenientService
           # @return [String]
           #
           def failure_message
-            "expected `#{klass.inspect}` to include module `#{config.inspect}`"
+            "expected `#{klass.inspect}` to include config `#{config.inspect}`"
           end
 
           ##
           # @return [String]
 
           def failure_message_when_negated
-            "expected `#{klass.inspect}` NOT to include module`#{config.inspect}`"
+            "expected `#{klass.inspect}` NOT to include config `#{config.inspect}`"
           end
 
           private
@@ -49,7 +49,7 @@ module ConvenientService
           # @!attribute [r] klass
           #   @return [Class]
           #
-          attr_reader :klass, :mod
+          attr_reader :klass
 
           ##
           # @!attribute [r] config
