@@ -16,6 +16,9 @@ module ConvenientService
 
             included do
               include ConvenientService::Standard::Config
+                .with(
+                  :active_model_validations
+                )
 
               ##
               # NOTE: `AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment` plugin.
@@ -33,19 +36,6 @@ module ConvenientService
               #
               concerns do
                 use ConvenientService::Plugins::Common::HasAttributes::UsingActiveModelAttributes::Concern
-              end
-
-              ##
-              # NOTE: `HasJSendResultParamsValidations::UsingActiveModelValidations` plugin.
-              #
-              concerns do
-                use ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingActiveModelValidations::Concern
-              end
-
-              middlewares :result do
-                insert_before \
-                  ConvenientService::Plugins::Service::RaisesOnNotResultReturnValue::Middleware,
-                  ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingActiveModelValidations::Middleware
               end
             end
           end

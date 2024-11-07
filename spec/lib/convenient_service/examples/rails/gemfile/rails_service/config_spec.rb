@@ -24,32 +24,20 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::RailsService::Config
         end
       end
 
-      specify { expect(service_class).to include_module(ConvenientService::Service::Configs::Standard) }
-
       example_group "service" do
         example_group "concerns" do
           it "adds `ConvenientService::Plugins::Common::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment::Concern` to service concerns" do
-            expect(service_class.concerns.to_a[-3]).to eq(ConvenientService::Plugins::Common::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment::Concern)
+            expect(service_class.concerns.to_a).to include(ConvenientService::Plugins::Common::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment::Concern)
           end
 
           it "adds `ConvenientService::Plugins::Common::HasAttributes::UsingActiveModelAttributes::Concern` to service concerns" do
-            expect(service_class.concerns.to_a[-2]).to eq(ConvenientService::Plugins::Common::HasAttributes::UsingActiveModelAttributes::Concern)
-          end
-
-          it "adds `ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingActiveModelValidations::Concern` to service concerns" do
-            expect(service_class.concerns.to_a.last).to eq(ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingActiveModelValidations::Concern)
+            expect(service_class.concerns.to_a).to include(ConvenientService::Plugins::Common::HasAttributes::UsingActiveModelAttributes::Concern)
           end
         end
 
         example_group "#initialize middlewares" do
           it "adds `ConvenientService::Plugins::Common::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment::Middleware` to service #initialize middlewares" do
             expect(service_class.middlewares(:initialize).to_a.last).to eq(ConvenientService::Plugins::Common::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment::Middleware)
-          end
-        end
-
-        example_group "#result middlewares" do
-          it "adds `ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingActiveModelValidations::Middleware` before `ConvenientService::Plugins::Service::RaisesOnNotResultReturnValue::Middleware` to service #result middlewares" do
-            expect(service_class.middlewares(:result).to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingActiveModelValidations::Middleware && current_middleware == ConvenientService::Plugins::Service::RaisesOnNotResultReturnValue::Middleware }).not_to be_nil
           end
         end
       end

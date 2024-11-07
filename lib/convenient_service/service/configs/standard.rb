@@ -30,6 +30,7 @@ module ConvenientService
             :exception_services_trace,
             :per_instance_caching,
             :mermaid_flowchart,
+            # active_model_validations,
             rspec: Dependencies.rspec.loaded?
           ]
         end
@@ -68,6 +69,7 @@ module ConvenientService
             use ConvenientService::Plugins::Service::CanNotBeInherited::Concern if options.include?(:code_review_automation)
             use ConvenientService::Plugins::Service::HasJSendResultShortSyntax::Concern if options.include?(:short_syntax)
             use ConvenientService::Plugins::Service::HasJSendResultStatusCheckShortSyntax::Concern if options.include?(:short_syntax)
+            use ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingActiveModelValidations::Concern if options.include?(:active_model_validations)
             use ConvenientService::Plugins::Service::HasMermaidFlowchart::Concern if options.include?(:mermaid_flowchart)
           end
 
@@ -87,6 +89,7 @@ module ConvenientService
             use ConvenientService::Plugins::Service::SetsParentToForeignResult::Middleware if options.include?(:result_parents_trace)
             use ConvenientService::Plugins::Service::RaisesOnNotResultReturnValue::Middleware if options.include?(:type_safety)
             use ConvenientService::Plugins::Service::RescuesResultUnhandledExceptions::Middleware if options.include?(:fault_tolerance)
+            use ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingActiveModelValidations::Middleware if options.include?(:active_model_validations)
             use ConvenientService::Plugins::Service::CanHaveConnectedSteps::Middleware if options.include?(:essential)
           end
 

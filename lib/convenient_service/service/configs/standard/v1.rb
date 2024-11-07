@@ -55,6 +55,12 @@ module ConvenientService
                   ConvenientService::Plugins::Service::CanHaveConnectedSteps::Middleware,
                   ConvenientService::Plugins::Service::CanHaveSequentialSteps::Middleware
               end
+
+              if options.include?(:active_model_validations)
+                replace \
+                  ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingActiveModelValidations::Middleware,
+                  ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingActiveModelValidations::Middleware.with(status: :failure)
+              end
             end
           end
           # rubocop:enable Lint/ConstantDefinitionInBlock

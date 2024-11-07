@@ -621,7 +621,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
           end
         end
 
-        example_group ".result middlewares" do
+        example_group "#result middlewares" do
           it "adds `ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware` after `ConvenientService::Plugins::Common::CanHaveCallbacks::Middleware` to service step middlewares for `#result`" do
             expect(service_class.middlewares(:result).to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Plugins::Common::CanHaveCallbacks::Middleware && current_middleware == ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware }).not_to be_nil
           end
@@ -911,4 +911,33 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :awesome_pri
   end
 end
 
+RSpec.describe ConvenientService::Service::Configs::Standard, type: :rails do
+  example_group "modules" do
+    context "when included" do
+      context "when `:active_model_validations` option is passed" do
+        let(:service_class) do
+          Class.new.tap do |klass|
+            klass.class_exec(described_class) do |mod|
+              include mod.with(:active_model_validations)
+            end
+          end
+        end
+
+        example_group "service" do
+          example_group "concerns" do
+            it "adds `ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingActiveModelValidations::Concern` after `ConvenientService::Plugins::Service::HasJSendResultStatusCheckShortSyntax::Concern` to service concerns" do
+              expect(service_class.concerns.to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Plugins::Service::HasJSendResultStatusCheckShortSyntax::Concern && current_middleware == ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingActiveModelValidations::Concern }).not_to be_nil
+            end
+          end
+
+          example_group "#result middlewares" do
+            it "adds `ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingActiveModelValidations::Middleware` after `ConvenientService::Plugins::Service::RaisesOnNotResultReturnValue::Middleware` to service middlewares for `#result`" do
+              expect(service_class.middlewares(:result).to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Plugins::Service::RaisesOnNotResultReturnValue::Middleware && current_middleware == ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingActiveModelValidations::Middleware }).not_to be_nil
+            end
+          end
+        end
+      end
+    end
+  end
+end
 # rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers, RSpec/MultipleDescribes
