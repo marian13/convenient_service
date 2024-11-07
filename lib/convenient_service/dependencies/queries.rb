@@ -253,6 +253,26 @@ module ConvenientService
       # @return [Boolean]
       # @note Expected to be called from app entry points like `initializers` in Rails.
       #
+      def require_dry_initializer_standard_config_option
+        require_assigns_attributes_in_constructor_using_dry_initializer_plugin
+      end
+
+      ##
+      # @api public
+      #
+      # @return [Boolean]
+      # @note Expected to be called from app entry points like `initializers` in Rails.
+      #
+      def require_active_model_validations_standard_config_option
+        require_has_j_send_result_params_validations_using_active_model_validations_plugin
+      end
+
+      ##
+      # @api public
+      #
+      # @return [Boolean]
+      # @note Expected to be called from app entry points like `initializers` in Rails.
+      #
       # @see https://userdocs.convenientservice.org/troubleshooting/i18n_translate_wrong_number_of_arguments
       #
       def require_has_j_send_result_params_validations_using_active_model_validations_plugin

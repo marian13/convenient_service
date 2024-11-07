@@ -2,7 +2,7 @@
 
 ConvenientService::Dependencies.require_development_tools
 
-ConvenientService::Dependencies.require_assigns_attributes_in_constructor_using_dry_initializer_plugin
+ConvenientService::Dependencies.require_dry_initializer_standard_config_option
 ConvenientService::Dependencies.require_has_j_send_result_params_validations_using_dry_validation_plugin
 
 ConvenientService::Dependencies.require_dry_examples
