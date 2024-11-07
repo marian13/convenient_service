@@ -187,7 +187,7 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Key, type: :standard
         specify do
           expect { command }
             .not_to delegate_to(other_key, :eql?)
-            .with_any_arguments
+            .with_any_arguments, "Flaky collision found: key.object_id - `#{key.object_id}`, other_key.object_id - `#{other_key.object_id}`, key.hash - `#{key.hash}`, other_key.hash - `#{other_key.hash}`."
         end
       end
 
