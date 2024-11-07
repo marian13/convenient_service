@@ -113,6 +113,20 @@ module ConvenientService
           end
 
           ##
+          # @param other [Object] Can be any type.
+          # @return [Boolean, nil]
+          #
+          def ==(other)
+            return unless other.instance_of?(self.class)
+            return false unless other.include?(::ConvenientService::Config)
+
+            return false unless base.equal?(other.base)
+            return false if options != other.options
+
+            true
+          end
+
+          ##
           # @return [String]
           #
           def inspect

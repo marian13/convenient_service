@@ -465,6 +465,68 @@ RSpec.describe ConvenientService::Config, type: :standard do
               end
             end
           end
+
+          example_group "comparison" do
+            describe "#==" do
+              let(:config) do
+                Module.new.tap do |mod|
+                  mod.module_exec(described_class) do |mod|
+                    include mod
+
+                    default_options do
+                      [:foo, :bar]
+                    end
+                  end
+                end
+              end
+
+              context "when `other` has different class" do
+                let(:other) { 42 }
+
+                it "returns `false`" do
+                  expect(config == other).to be_nil
+                end
+              end
+
+              context "when `other` does NOT include `ConvenientService::Config`" do
+                let(:other) { Module.new }
+
+                it "returns `false`" do
+                  expect(config == other).to eq(false)
+                end
+              end
+
+              context "when `other` has different `base`" do
+                let(:other) do
+                  Module.new.tap do |mod|
+                    mod.module_exec(described_class) do |mod|
+                      include mod
+                    end
+                  end
+                end
+
+                it "returns `false`" do
+                  expect(config == other).to eq(false)
+                end
+              end
+
+              context "when `other` has different `options`" do
+                let(:other) { config.with(:baz, :qux) }
+
+                it "returns `false`" do
+                  expect(config == other).to eq(false)
+                end
+              end
+
+              context "when `other` has same attributes" do
+                let(:other) { config.with(:foo, :bar) }
+
+                it "returns `true`" do
+                  expect(config == other).to eq(true)
+                end
+              end
+            end
+          end
         end
       end
     end
