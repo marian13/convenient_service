@@ -8,6 +8,7 @@ require "convenient_service"
 RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standard do
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
+    include ConvenientService::RSpec::Matchers::IncludeConfig
 
     subject { described_class }
 
@@ -23,6 +24,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
       end
 
       specify { expect(service_class).to include_module(ConvenientService::Service::Core) }
+      specify { expect(service_class).to include_config(ConvenientService::Standard::Config.without_defaults.with(ConvenientService::Standard::V1::Config.options)) }
 
       example_group "service" do
         example_group "concerns" do

@@ -16,10 +16,7 @@ module ConvenientService
               include ConvenientService::Config
 
               included do
-                include ConvenientService::Standard::V1::Config
-                  .with(
-                    :active_model_validations
-                  )
+                include ConvenientService::Standard::V1::Config.with(:active_model_validations)
 
                 ##
                 # NOTE: `AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment` plugin.

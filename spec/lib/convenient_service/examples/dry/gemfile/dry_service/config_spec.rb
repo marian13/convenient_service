@@ -10,6 +10,7 @@ return unless defined? ConvenientService::Examples::Dry
 RSpec.describe ConvenientService::Examples::Dry::Gemfile::DryService::Config, type: :dry do
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
+    include ConvenientService::RSpec::Matchers::IncludeConfig
 
     subject { described_class }
 
@@ -23,6 +24,8 @@ RSpec.describe ConvenientService::Examples::Dry::Gemfile::DryService::Config, ty
           end
         end
       end
+
+      specify { expect(service_class).to include_config(ConvenientService::Standard::Config.with(:dry_initializer)) }
 
       example_group "service" do
         example_group "concerns" do

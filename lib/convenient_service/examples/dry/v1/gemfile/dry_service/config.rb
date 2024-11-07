@@ -16,10 +16,7 @@ module ConvenientService
               include ConvenientService::Config
 
               included do
-                include ConvenientService::Standard::V1::Config
-                  .with(
-                    :dry_initializer
-                  )
+                include ConvenientService::Standard::V1::Config.with(:dry_initializer)
 
                 ##
                 # NOTE: `HasJSendResultParamsValidations::UsingDryValidation` plugin.

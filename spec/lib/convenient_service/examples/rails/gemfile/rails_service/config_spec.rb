@@ -10,6 +10,7 @@ return unless defined? ConvenientService::Examples::Rails
 RSpec.describe ConvenientService::Examples::Rails::Gemfile::RailsService::Config, type: :rails do
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
+    include ConvenientService::RSpec::Matchers::IncludeConfig
 
     subject { described_class }
 
@@ -23,6 +24,8 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::RailsService::Config
           end
         end
       end
+
+      specify { expect(service_class).to include_config(ConvenientService::Standard::Config.with(:active_model_validations)) }
 
       example_group "service" do
         example_group "concerns" do

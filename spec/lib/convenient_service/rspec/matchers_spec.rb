@@ -26,6 +26,8 @@ RSpec.describe ConvenientService::RSpec::Matchers, type: :standard do
       it { is_expected.to include_module(described_class::CallChainNext) }
       it { is_expected.to include_module(described_class::DelegateTo) }
       it { is_expected.to include_module(described_class::Export) }
+      it { is_expected.to include_module(described_class::IncludeConfig) }
+      it { is_expected.to include_module(described_class::IncludeModule) }
       it { is_expected.to include_module(described_class::Results) }
     end
   end
