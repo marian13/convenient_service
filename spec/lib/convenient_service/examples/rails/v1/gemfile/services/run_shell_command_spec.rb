@@ -17,7 +17,7 @@ RSpec.describe ConvenientService::Examples::Rails::V1::Gemfile::Services::RunShe
   example_group "modules" do
     subject { described_class }
 
-    it { is_expected.to include_module(ConvenientService::Standard::V1::Config) }
+    it { is_expected.to include_module(ConvenientService::Examples::Rails::V1::Gemfile::RailsService::Config) }
   end
 
   example_group "class methods" do

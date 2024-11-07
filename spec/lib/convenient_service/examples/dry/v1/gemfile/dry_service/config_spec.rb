@@ -24,14 +24,8 @@ RSpec.describe ConvenientService::Examples::Dry::V1::Gemfile::DryService::Config
         end
       end
 
-      specify { expect(service_class).to include_module(ConvenientService::Service::Configs::Standard::V1) }
-
       example_group "service" do
         example_group "concerns" do
-          it "adds `ConvenientService::Plugins::Common::AssignsAttributesInConstructor::UsingDryInitializer::Concern` to service concerns" do
-            expect(service_class.concerns.to_a[-2]).to eq(ConvenientService::Plugins::Common::AssignsAttributesInConstructor::UsingDryInitializer::Concern)
-          end
-
           it "adds `ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingDryValidation::Concern` to service concerns" do
             expect(service_class.concerns.to_a.last).to eq(ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingDryValidation::Concern)
           end

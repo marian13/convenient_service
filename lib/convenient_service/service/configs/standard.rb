@@ -70,6 +70,7 @@ module ConvenientService
             use ConvenientService::Plugins::Service::HasJSendResultShortSyntax::Concern if options.include?(:short_syntax)
             use ConvenientService::Plugins::Service::HasJSendResultStatusCheckShortSyntax::Concern if options.include?(:short_syntax)
             use ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingActiveModelValidations::Concern if options.include?(:active_model_validations)
+            use ConvenientService::Plugins::Common::AssignsAttributesInConstructor::UsingDryInitializer::Concern if options.include?(:dry_initializer)
             use ConvenientService::Plugins::Service::HasMermaidFlowchart::Concern if options.include?(:mermaid_flowchart)
           end
 

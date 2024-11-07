@@ -16,13 +16,9 @@ module ConvenientService
 
             included do
               include ConvenientService::Standard::Config
-
-              ##
-              # NOTE: `AssignsAttributesInConstructor::UsingDryInitializer` plugin.
-              #
-              concerns do
-                use ConvenientService::Plugins::Common::AssignsAttributesInConstructor::UsingDryInitializer::Concern
-              end
+                .with(
+                  :dry_initializer
+                )
 
               ##
               # NOTE: `HasJSendResultParamsValidations::UsingDryValidation` plugin.
