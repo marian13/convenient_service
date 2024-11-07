@@ -270,6 +270,46 @@ RSpec.describe ConvenientService::Config, type: :standard do
             end
           end
 
+          describe ".with_defaults" do
+            let(:config) do
+              Module.new.tap do |mod|
+                mod.module_exec(described_class) do |mod|
+                  include mod
+
+                  default_options do
+                    [:foo, :bar]
+                  end
+                end
+              end
+            end
+
+            let(:config_copy) { config.with_defaults }
+
+            specify do
+              expect { config_copy }
+                .to delegate_to(config, :dup)
+                .without_arguments
+            end
+
+            it "returns `config` copy" do
+              expect(config_copy).to include(described_class)
+            end
+
+            example_group "`config` copy" do
+              describe ".base" do
+                it "returns original `config`" do
+                  expect(config_copy.base).to eq(config)
+                end
+              end
+
+              describe ".options" do
+                it "returns original `config` default `options`" do
+                  expect(config_copy.options).to eq(config.default_options)
+                end
+              end
+            end
+          end
+
           describe ".without_defaults" do
             let(:config) do
               Module.new.tap do |mod|
@@ -303,7 +343,7 @@ RSpec.describe ConvenientService::Config, type: :standard do
               end
 
               describe ".options" do
-                it "returns original `config` `options` merged with those additional `options`" do
+                it "returns original empty `options`" do
                   expect(config_copy.options).to eq(Set.new)
                 end
               end

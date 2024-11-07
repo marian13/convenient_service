@@ -33,13 +33,13 @@ module ConvenientService
 
           ##
           # @param options [Array<Symbol>]
-          # @return [ConvenientService::Service::Config]
+          # @return [ConvenientService::Config]
           #
           def with(*options)
             dup.tap do |mod|
               mod.module_exec(base, self.options.dup.merge(Commands::NormalizeOptions[options: options])) do |base, options|
                 ##
-                # @return [ConvenientService::Service::Config]
+                # @return [ConvenientService::Config]
                 #
                 define_singleton_method(:base) { base }
 
@@ -53,13 +53,13 @@ module ConvenientService
 
           ##
           # @param options [Array<Symbol>]
-          # @return [ConvenientService::Service::Config]
+          # @return [ConvenientService::Config]
           #
           def without(*options)
             dup.tap do |mod|
               mod.module_exec(base, self.options.dup.subtract(Commands::NormalizeOptions[options: options])) do |base, options|
                 ##
-                # @return [ConvenientService::Service::Config]
+                # @return [ConvenientService::Config]
                 #
                 define_singleton_method(:base) { base }
 
@@ -72,13 +72,32 @@ module ConvenientService
           end
 
           ##
-          # @return [ConvenientService::Service::Config]
+          # @return [ConvenientService::Config]
+          #
+          def with_defaults
+            dup.tap do |mod|
+              mod.module_exec(base, base.default_options) do |base, options|
+                ##
+                # @return [ConvenientService::Config]
+                #
+                define_singleton_method(:base) { base }
+
+                ##
+                # @return [Set]
+                #
+                define_singleton_method(:options) { options }
+              end
+            end
+          end
+
+          ##
+          # @return [ConvenientService::Config]
           #
           def without_defaults
             dup.tap do |mod|
               mod.module_exec(base, ::Set.new) do |base, options|
                 ##
-                # @return [ConvenientService::Service::Config]
+                # @return [ConvenientService::Config]
                 #
                 define_singleton_method(:base) { base }
 
@@ -91,7 +110,7 @@ module ConvenientService
           end
 
           ##
-          # @return [ConvenientService::Service::Config]
+          # @return [ConvenientService::Config]
           #
           def base
             self
