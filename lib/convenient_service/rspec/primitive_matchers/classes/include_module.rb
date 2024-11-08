@@ -19,6 +19,9 @@ module ConvenientService
           # @param klass [Class, Module]
           # @return [Boolean]
           #
+          # @internal
+          #   TODO: Util `include_module?`.
+          #
           def matches?(klass)
             @klass = klass
 

@@ -32,6 +32,9 @@ module ConvenientService
           # @param klass [Class, Module]
           # @return [Boolean]
           #
+          # @internal
+          #   TODO: Util `singleton_class_prepend_module?`.
+          #
           def matches?(klass)
             @klass = klass
 

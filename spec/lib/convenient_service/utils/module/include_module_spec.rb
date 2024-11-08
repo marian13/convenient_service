@@ -32,6 +32,20 @@ RSpec.describe ConvenientService::Utils::Module::IncludeModule, type: :standard 
         expect(result).to eq(true)
       end
     end
+
+    context "when `mod` prepends `other_mod`" do
+      let(:mod) do
+        Class.new.tap do |klass|
+          klass.instance_exec(other_mod) do |other_mod|
+            prepend other_mod
+          end
+        end
+      end
+
+      it "returns `false`" do
+        expect(result).to eq(false)
+      end
+    end
   end
 end
 # rubocop:enable RSpec/NestedGroups

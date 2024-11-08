@@ -39,6 +39,20 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::IncludeConfig, type:
         expect(matcher_result).to eq(true)
       end
     end
+
+    context "when `klass` prepends `config`" do
+      let(:klass) do
+        Class.new.tap do |klass|
+          klass.class_exec(config) do |config|
+            prepend config
+          end
+        end
+      end
+
+      it "returns `false`" do
+        expect(matcher_result).to eq(false)
+      end
+    end
   end
 
   describe "#description" do

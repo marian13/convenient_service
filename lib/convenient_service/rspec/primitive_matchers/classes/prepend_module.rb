@@ -19,6 +19,9 @@ module ConvenientService
           # @param klass [Class, Module]
           # @return [Boolean]
           #
+          # @internal
+          #   TODO: Util `prepend_module?`.
+          #
           def matches?(klass)
             @klass = klass
 

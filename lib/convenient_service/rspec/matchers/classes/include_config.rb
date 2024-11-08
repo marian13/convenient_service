@@ -16,10 +16,13 @@ module ConvenientService
           # @param klass [Class]
           # @return [Boolean]
           #
+          # @internal
+          #   TODO: Util `include_module?`.
+          #
           def matches?(klass)
             @klass = klass
 
-            klass.included_modules.any? { |mod| config == mod }
+            klass.ancestors.drop_while { |ancestor| ancestor != klass }.any? { |mod| config == mod }
           end
 
           ##

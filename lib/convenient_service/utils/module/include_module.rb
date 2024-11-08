@@ -30,7 +30,7 @@ module ConvenientService
         # @return [Boolean]
         #
         def call
-          mod.included_modules.include?(other_mod)
+          mod.ancestors.drop_while { |ancestor| ancestor != mod }.include?(other_mod)
         end
       end
     end
