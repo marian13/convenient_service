@@ -35,7 +35,7 @@ module ConvenientService
           def matches?(klass)
             @klass = klass
 
-            klass.singleton_class.ancestors.take_while { |ancestor| ancestor != klass }.include?(mod)
+            klass.singleton_class.ancestors.take_while { |ancestor| ancestor != klass.singleton_class }.include?(mod)
           end
 
           ##

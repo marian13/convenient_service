@@ -6,33 +6,59 @@ module ConvenientService
       module Classes
         class IncludeModule
           ##
-          # NOTE: `mod` since `module` is a keyword.
+          # @param mod [Module]
+          #
+          # @internal
+          #   NOTE: `mod` since `module` is a keyword.
           #
           def initialize(mod)
             @mod = mod
           end
 
+          ##
+          # @param klass [Class, Module]
+          # @return [Boolean]
+          #
           def matches?(klass)
             @klass = klass
 
-            klass.included_modules.include?(mod)
+            klass.ancestors.drop_while { |ancestor| ancestor != klass }.include?(mod)
           end
 
+          ##
+          # @return [String]
+          #
           def description
             "include module `#{mod}`"
           end
 
+          ##
+          # @return [String]
+          #
           def failure_message
             "expected `#{klass}` to include module `#{mod}`"
           end
 
+          ##
+          # @return [String]
+          #
           def failure_message_when_negated
             "expected `#{klass}` NOT to include module `#{mod}`"
           end
 
           private
 
-          attr_reader :klass, :mod
+          ##
+          # @!attribute [r] klass
+          #   @return [Class, Module]
+          #
+          attr_reader :klass
+
+          ##
+          # @!attribute [r] mod
+          #   @return [Module]
+          #
+          attr_reader :mod
         end
       end
     end

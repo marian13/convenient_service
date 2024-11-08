@@ -26,7 +26,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::IncludeConfig, type:
       end
     end
 
-    context "when `klass` does NOT include `config`" do
+    context "when `klass` includes `config`" do
       let(:klass) do
         Class.new.tap do |klass|
           klass.class_exec(config) do |config|

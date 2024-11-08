@@ -16,7 +16,7 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::SingletonPr
     context "when `klass.singleton_class` does NOT prepend `module`" do
       let(:klass) { Class.new }
 
-      it "returns false" do
+      it "returns `false`" do
         expect(matcher_result).to eq(false)
       end
     end
@@ -30,8 +30,36 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::SingletonPr
         end
       end
 
-      it "returns true" do
+      it "returns `true`" do
         expect(matcher_result).to eq(true)
+      end
+    end
+
+    context "when `klass.singleton_class` includes `module`" do
+      let(:klass) do
+        Class.new.tap do |klass|
+          klass.class_exec(mod) do |mod|
+            singleton_class.include mod
+          end
+        end
+      end
+
+      it "returns `false`" do
+        expect(matcher_result).to eq(false)
+      end
+    end
+
+    context "when `klass` extends `module`" do
+      let(:klass) do
+        Class.new.tap do |klass|
+          klass.class_exec(mod) do |mod|
+            extend mod
+          end
+        end
+      end
+
+      it "returns `false`" do
+        expect(matcher_result).to eq(false)
       end
     end
   end
