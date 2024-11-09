@@ -39,7 +39,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
     describe ".call" do
       subject(:command_result) { described_class.call(method: method, container: step.container, index: step.index) }
 
-      context "when `method` is NOT defined in container" do
+      context "when `out` method is NOT defined in container" do
         let(:container) do
           Class.new.tap do |klass|
             klass.class_exec(first_step_service) do |first_step_service|
@@ -53,18 +53,69 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
         it "returns `true`" do
           expect(command_result).to eq(true)
         end
+      end
 
-        it "defines `method` in `container`" do
-          expect { command_result }.to change { ConvenientService::Utils::Method.defined?(method.name.to_s, step.container.klass, private: true) }.from(false).to(true)
+      context "when `out` method is defined in container by user" do
+        let(:container) do
+          Class.new.tap do |klass|
+            klass.class_exec(first_step_service) do |first_step_service|
+              include ConvenientService::Standard::Config
+
+              step first_step_service, out: :foo
+
+              def foo
+                "foo from organizer"
+              end
+            end
+          end
         end
 
-        example_group "generated method" do
-          before do
-            command_result
-          end
+        it "returns `true`" do
+          expect(command_result).to eq(true)
+        end
+      end
 
+      context "when `out` method is defined in container by `DefineMethodInContainer` command" do
+        let(:container) do
+          Class.new.tap do |klass|
+            klass.class_exec(first_step_service) do |first_step_service|
+              include ConvenientService::Standard::Config
+
+              step first_step_service, out: :foo
+            end
+          end
+        end
+
+        before do
+          ##
+          # NOTE: Defines `out` method.
+          #
+          described_class.call(method: method, container: step.container, index: step.index)
+        end
+
+        it "returns `false`" do
+          expect(command_result).to eq(false)
+        end
+      end
+
+      example_group "generated method" do
+        before do
+          command_result
+        end
+
+        context "when `out` method does NOT have alias" do
           context "when corresponding step is NOT completed" do
             context "when corresponding `out` method is NOT redefined (organizer service does NOT have method with same nameas `out` method)" do
+              let(:container) do
+                Class.new.tap do |klass|
+                  klass.class_exec(first_step_service) do |first_step_service|
+                    include ConvenientService::Standard::Config
+
+                    step first_step_service, out: :foo
+                  end
+                end
+              end
+
               let(:exception_message) do
                 <<~TEXT
                   `out` method `#{method}` is called before its corresponding step is completed.
@@ -100,7 +151,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
                 end
               end
 
-              it "returns that redefined `out` method value" do
+              it "returns that method value" do
                 expect(organizer.foo).to eq("foo from organizer")
               end
 
@@ -129,7 +180,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
                 end
               end
 
-              it "returns that redefined `out` method value" do
+              it "returns that method value" do
                 expect(organizer.foo).to eq("foo from organizer")
               end
 
@@ -143,18 +194,57 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
           end
 
           context "when corresponding step is completed" do
-            before do
-              ##
-              # NOTE: Completes the step.
-              #
-              organizer.steps[0].save_outputs_in_organizer!
+            context "when corresponding `out` method is NOT redefined (organizer service does NOT have method with same nameas `out` method)" do
+              let(:container) do
+                Class.new.tap do |klass|
+                  klass.class_exec(first_step_service) do |first_step_service|
+                    include ConvenientService::Standard::Config
+
+                    step first_step_service, out: :foo
+                  end
+                end
+              end
+
+              before do
+                ##
+                # NOTE: Completes the step.
+                #
+                organizer.steps[0].save_outputs_in_organizer!
+              end
+
+              it "returns corresponding step service result data attribute by key" do
+                expect(organizer.foo).to eq("foo from first step")
+              end
             end
 
-            it "returns corresponding step service result data attribute by key" do
-              expect(organizer.foo).to eq(organizer.steps[0].result.unsafe_data[:foo])
+            context "when corresponding `out` method is redefined (organizer service does NOT have method with same nameas `out` method)" do
+              let(:container) do
+                Class.new.tap do |klass|
+                  klass.class_exec(first_step_service) do |first_step_service|
+                    include ConvenientService::Standard::Config
+
+                    step first_step_service, out: :foo
+
+                    def foo
+                      "foo from organizer"
+                    end
+                  end
+                end
+              end
+
+              before do
+                ##
+                # NOTE: Completes the step.
+                #
+                organizer.steps[0].save_outputs_in_organizer!
+              end
+
+              it "returns corresponding step service result data attribute by key" do
+                expect(organizer.foo).to eq("foo from first step")
+              end
             end
 
-            context "when multiple corresponding steps are completed" do
+            context "when corresponding `out` method is redefined multiple times" do
               let(:container) do
                 Class.new.tap do |klass|
                   klass.class_exec(first_step_service, second_step_service) do |first_step_service, second_step_service|
@@ -163,82 +253,200 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
                     step first_step_service, out: :foo
 
                     step second_step_service, out: :foo
-                  end
-                end
-              end
 
-              let(:second_step_service) do
-                Class.new do
-                  include ConvenientService::Standard::Config
-
-                  def result
-                    success(data: {foo: "foo from second step"})
+                    def foo
+                      "foo from organizer"
+                    end
                   end
                 end
               end
 
               before do
                 ##
-                # NOTE: Completes the steps.
+                # NOTE: Completes the step.
                 #
                 organizer.steps[0].save_outputs_in_organizer!
                 organizer.steps[1].save_outputs_in_organizer!
               end
 
-              it "returns last corresponding step service result data attribute by key" do
-                expect(organizer.foo).to eq(organizer.steps[1].result.unsafe_data[:foo])
+              it "returns corresponding step service result data attribute by key" do
+                expect(organizer.foo).to eq("foo from second step")
               end
             end
           end
+        end
 
-          context "when method has alias" do
-            let(:container) do
-              Class.new.tap do |klass|
-                klass.class_exec(first_step_service) do |first_step_service|
-                  include ConvenientService::Standard::Config
+        context "when `out` method has alias" do
+          context "when corresponding step is NOT completed" do
+            context "when corresponding `out` method is NOT redefined (organizer service does NOT have method with same nameas `out` method)" do
+              let(:container) do
+                Class.new.tap do |klass|
+                  klass.class_exec(first_step_service) do |first_step_service|
+                    include ConvenientService::Standard::Config
 
-                  step first_step_service, out: {foo: :bar}
+                    step first_step_service, out: {foo: :bar}
+                  end
                 end
               end
+
+              let(:exception_message) do
+                <<~TEXT
+                  `out` method `#{method}` is called before its corresponding step is completed.
+
+                  Maybe it makes sense to change steps order?
+                TEXT
+              end
+
+              it "raises `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::OutMethodStepIsNotCompleted`" do
+                expect { organizer.bar }
+                  .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::OutMethodStepIsNotCompleted)
+                  .with_message(exception_message)
+              end
+
+              specify do
+                expect { ignoring_exception(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::OutMethodStepIsNotCompleted) { organizer.bar } }
+                  .to delegate_to(ConvenientService, :raise)
+              end
             end
 
-            before do
-              ##
-              # NOTE: Completes the step.
-              #
-              organizer.steps[0].save_outputs_in_organizer!
+            context "when corresponding `out` method is redefined (organizer service has method with same name as `out` method)" do
+              let(:container) do
+                Class.new.tap do |klass|
+                  klass.class_exec(first_step_service) do |first_step_service|
+                    include ConvenientService::Standard::Config
+
+                    step first_step_service, out: {foo: :bar}
+
+                    def bar
+                      "bar from organizer"
+                    end
+                  end
+                end
+              end
+
+              it "returns that method value" do
+                expect(organizer.bar).to eq("bar from organizer")
+              end
+
+              specify do
+                expect { organizer.bar }
+                  .to delegate_to(organizer, :bar_before_out_redefinition)
+                  .without_arguments
+                  .and_return_its_value
+              end
             end
 
-            it "returns corresponding step service result data attribute by key" do
-              expect(organizer.bar).to eq(organizer.steps[0].result.unsafe_data[:bar])
-            end
-          end
-        end
-      end
+            context "when corresponding `out` method is redefined multiple times" do
+              let(:container) do
+                Class.new.tap do |klass|
+                  klass.class_exec(first_step_service, second_step_service) do |first_step_service, second_step_service|
+                    include ConvenientService::Standard::Config
 
-      context "when `method` is defined in container" do
-        let(:container) do
-          Class.new.tap do |klass|
-            klass.class_exec(first_step_service) do |first_step_service|
-              include ConvenientService::Standard::Config
+                    step first_step_service, out: {foo: :bar}
 
-              step first_step_service, out: :foo
+                    step second_step_service, out: {foo: :bar}
 
-              def foo
-                :foo
+                    def bar
+                      "bar from organizer"
+                    end
+                  end
+                end
+              end
+
+              it "returns that method value" do
+                expect(organizer.bar).to eq("bar from organizer")
+              end
+
+              specify do
+                expect { organizer.bar }
+                  .to delegate_to(organizer, :bar_before_out_redefinition)
+                  .without_arguments
+                  .and_return_its_value
               end
             end
           end
-        end
 
-        it "returns `false`" do
-          described_class.call(method: method, container: step.container, index: step.index)
+          context "when corresponding step is completed" do
+            context "when corresponding `out` method is NOT redefined (organizer service does NOT have method with same nameas `out` method)" do
+              let(:container) do
+                Class.new.tap do |klass|
+                  klass.class_exec(first_step_service) do |first_step_service|
+                    include ConvenientService::Standard::Config
 
-          expect(command_result).to eq(false)
-        end
+                    step first_step_service, out: {foo: :bar}
+                  end
+                end
+              end
 
-        it "does NOT define `method` in `container`" do
-          expect { command_result }.not_to change { ConvenientService::Utils::Method.defined?(method.name.to_s, step.container.klass, private: true) }
+              before do
+                ##
+                # NOTE: Completes the step.
+                #
+                organizer.steps[0].save_outputs_in_organizer!
+              end
+
+              it "returns corresponding step service result data attribute by key" do
+                expect(organizer.bar).to eq("foo from first step")
+              end
+            end
+
+            context "when corresponding `out` method is redefined (organizer service does NOT have method with same nameas `out` method)" do
+              let(:container) do
+                Class.new.tap do |klass|
+                  klass.class_exec(first_step_service) do |first_step_service|
+                    include ConvenientService::Standard::Config
+
+                    step first_step_service, out: {foo: :bar}
+
+                    def bar
+                      "bar from organizer"
+                    end
+                  end
+                end
+              end
+
+              before do
+                ##
+                # NOTE: Completes the step.
+                #
+                organizer.steps[0].save_outputs_in_organizer!
+              end
+
+              it "returns corresponding step service result data attribute by key" do
+                expect(organizer.bar).to eq("foo from first step")
+              end
+            end
+
+            context "when corresponding `out` method is redefined multiple times" do
+              let(:container) do
+                Class.new.tap do |klass|
+                  klass.class_exec(first_step_service, second_step_service) do |first_step_service, second_step_service|
+                    include ConvenientService::Standard::Config
+
+                    step first_step_service, out: {foo: :bar}
+
+                    step second_step_service, out: {foo: :bar}
+
+                    def bar
+                      "bar from organizer"
+                    end
+                  end
+                end
+              end
+
+              before do
+                ##
+                # NOTE: Completes the step.
+                #
+                organizer.steps[0].save_outputs_in_organizer!
+                organizer.steps[1].save_outputs_in_organizer!
+              end
+
+              it "returns corresponding step service result data attribute by key" do
+                expect(organizer.bar).to eq("foo from second step")
+              end
+            end
+          end
         end
       end
     end
