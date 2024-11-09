@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "method/defined"
+require_relative "method/name"
 require_relative "method/remove"
 
 module ConvenientService

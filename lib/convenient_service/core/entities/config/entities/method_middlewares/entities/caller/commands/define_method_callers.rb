@@ -99,7 +99,7 @@ module ConvenientService
                     # @return [String]
                     #
                     def method_without_middlewares
-                      @method_without_middlewares ||= Commands::GenerateWithoutMiddlewaresName[name: method]
+                      @method_without_middlewares ||= Utils::Method::Name.append(method, "_without_middlewares")
                     end
 
                     ##

@@ -90,7 +90,7 @@ module ConvenientService
                 # @return [String]
                 #
                 def name_before_out_redefinition
-                  "#{name}_before_out_redefinition"
+                  @name_before_out_redefinition ||= Utils::Method::Name.append(name, "_before_out_redefinition")
                 end
 
                 ##
