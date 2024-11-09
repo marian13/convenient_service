@@ -62,6 +62,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
             [
               ConvenientService::Service::Plugins::CollectsServicesInException::Middleware,
               ConvenientService::Common::Plugins::CachesConstructorArguments::Middleware,
+              ConvenientService::Service::Plugins::CanHaveSteps::Middleware,
               ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Middleware
             ]
           end

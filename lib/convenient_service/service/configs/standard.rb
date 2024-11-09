@@ -77,6 +77,7 @@ module ConvenientService
           middlewares :initialize do
             use ConvenientService::Plugins::Service::CollectsServicesInException::Middleware if options.include?(:exception_services_trace)
             use ConvenientService::Plugins::Common::CachesConstructorArguments::Middleware if options.include?(:recalculation)
+            use ConvenientService::Plugins::Service::CanHaveSteps::Middleware if options.include?(:essential)
             use ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Middleware if options.include?(:code_review_automation)
           end
 
