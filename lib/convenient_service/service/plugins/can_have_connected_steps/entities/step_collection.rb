@@ -90,7 +90,11 @@ module ConvenientService
             def with_organizer(organizer)
               expression_with_organizer = expression.with_organizer(organizer)
 
-              copy(overrides: {kwargs: {expression: expression_with_organizer, steps: expression_with_organizer.steps}})
+              if frozen?
+                copy(overrides: {kwargs: {expression: expression_with_organizer.freeze, steps: expression_with_organizer.steps.freeze}}).freeze
+              else
+                copy(overrides: {kwargs: {expression: expression_with_organizer, steps: expression_with_organizer.steps}})
+              end
             end
 
             ##
@@ -123,7 +127,7 @@ module ConvenientService
             # @return [Boolean]
             #
             def committed?
-              expression.frozen?
+              frozen?
             end
 
             ##

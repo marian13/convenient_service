@@ -489,7 +489,6 @@ module ConvenientService
                   .steps
                   .tap(&:commit!)
                   .with_organizer(self)
-                  .tap(&:commit!)
               end
             end
 

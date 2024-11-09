@@ -163,6 +163,38 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
           .with_arguments(overrides: {kwargs: {expression: expression_with_organizer, steps: expression_with_organizer.steps}})
           .and_return_its_value
       end
+
+      context "when `step_collection` is NOT frozen" do
+        it "returns NOT frozen `step_collection` with `organizer`" do
+          expect(step_collection.with_organizer(organizer)).not_to be_frozen
+        end
+
+        it "returns `step_collection` with `organizer` with NOT frozen `expression`" do
+          expect(step_collection.with_organizer(organizer).expression).not_to be_frozen
+        end
+
+        it "returns `step_collection` with `organizer` with NOT frozen `steps`" do
+          expect(step_collection.with_organizer(organizer).steps).not_to be_frozen
+        end
+      end
+
+      context "when `step_collection` is frozen" do
+        before do
+          step_collection.freeze
+        end
+
+        it "returns frozen `step_collection` with `organizer`" do
+          expect(step_collection.with_organizer(organizer)).to be_frozen
+        end
+
+        it "returns `step_collection` with `organizer` with frozen `expression`" do
+          expect(step_collection.with_organizer(organizer).expression).to be_frozen
+        end
+
+        it "returns `step_collection` with `organizer` with frozen `steps`" do
+          expect(step_collection.with_organizer(organizer).steps).to be_frozen
+        end
+      end
     end
 
     describe "#commit!" do
@@ -237,15 +269,15 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
     describe "#committed?" do
       let(:step_collection) { described_class.new(container: container, expression: expression, steps: steps) }
 
-      context "when `expression` is NOT frozen" do
+      context "when `step_collection` is NOT frozen" do
         it "returns `false`" do
           expect(step_collection.committed?).to eq(false)
         end
       end
 
-      context "when `expression` is frozen" do
+      context "when `step_collection` is frozen" do
         before do
-          expression.freeze
+          step_collection.freeze
         end
 
         it "returns `true`" do
