@@ -15,6 +15,13 @@ module ConvenientService
             end
 
             ##
+            # @return [Symbol]
+            #
+            def backend
+              Constants::Backends::HASH
+            end
+
+            ##
             # @return [Boolean]
             #
             # @internal
@@ -104,20 +111,22 @@ module ConvenientService
             # Creates a scoped cache. Parent cache is modified on the first write to the scoped cache.
             #
             # @param key [Object] Can be any type.
+            # @param backed_by [Symbol]
             # @return [ConvenientService::Support::Cache::Entities::Caches::Base]
             #
-            def scope(key)
-              store.fetch(key) { self.class.new(parent: self, key: key) }
+            def scope(key, backed_by: backend)
+              store.fetch(key) { Support::Cache.backed_by(backed_by).new(parent: self, key: key) }
             end
 
             ##
             # Creates a scoped cache. Parent cache is modified immediately.
             #
             # @param key [Object] Can be any type.
+            # @param backed_by [Symbol]
             # @return [ConvenientService::Support::Cache::Entities::Caches::Base]
             #
-            def scope!(key)
-              store.fetch(key) { store[key] = self.class.new(parent: self, key: key) }
+            def scope!(key, backed_by: backend)
+              store.fetch(key) { store[key] = Support::Cache.backed_by(backed_by).new(parent: self, key: key) }
             end
           end
         end

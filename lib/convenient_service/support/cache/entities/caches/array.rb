@@ -17,6 +17,13 @@ module ConvenientService
             end
 
             ##
+            # @return [Symbol]
+            #
+            def backend
+              Constants::Backends::ARRAY
+            end
+
+            ##
             # @return [Boolean]
             #
             def empty?
@@ -90,13 +97,14 @@ module ConvenientService
             # Creates a scoped cache. Parent cache is modified on the first write to the scoped cache.
             #
             # @param key [Object] Can be any type.
+            # @param backed_by [Symbol]
             # @return [ConvenientService::Support::Cache::Entities::Caches::Base]
             #
-            def scope(key)
+            def scope(key, backed_by: backend)
               Utils.with_one_time_object do |undefined|
                 value = _fetch(key, default: undefined)
 
-                (value == undefined) ? self.class.new(parent: self, key: key) : value
+                (value == undefined) ? Support::Cache.backed_by(backed_by).new(parent: self, key: key) : value
               end
             end
 
@@ -104,10 +112,11 @@ module ConvenientService
             # Creates a scoped cache. Parent cache is modified immediately.
             #
             # @param key [Object] Can be any type.
+            # @param backed_by [Symbol]
             # @return [ConvenientService::Support::Cache::Entities::Caches::Base]
             #
-            def scope!(key)
-              _fetch(key) { self.class.new(parent: self, key: key) }
+            def scope!(key, backed_by: backend)
+              _fetch(key) { Support::Cache.backed_by(backed_by).new(parent: self, key: key) }
             end
 
             private

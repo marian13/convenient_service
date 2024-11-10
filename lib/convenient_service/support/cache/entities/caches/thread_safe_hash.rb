@@ -16,6 +16,13 @@ module ConvenientService
             end
 
             ##
+            # @return [Symbol]
+            #
+            def backend
+              Constants::Backends::THREAD_SAFE_HASH
+            end
+
+            ##
             # @return [Boolean]
             #
             def empty?(...)

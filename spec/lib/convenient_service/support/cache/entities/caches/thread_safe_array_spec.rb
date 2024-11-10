@@ -47,6 +47,14 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::ThreadSafeAr
   example_group "instance methods" do
     let(:cache) { described_class.new }
 
+    describe "#backend" do
+      let(:cache) { described_class.new }
+
+      it "returns `ConvenientService::Support::Cache::Constants::Backends::THREAD_SAFE_ARRAY`" do
+        expect(cache.backend).to eq(ConvenientService::Support::Cache::Constants::Backends::THREAD_SAFE_ARRAY)
+      end
+    end
+
     describe "#store" do
       let(:cache) { described_class.new(store: array) }
       let(:array) { [:foo] }
@@ -477,6 +485,44 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::ThreadSafeAr
         end
       end
 
+      example_group "`backed_by` option" do
+        context "when `backed_by` option is NOT passed" do
+          context "when cache does NOT sub cache by scope" do
+            it "returns sub cache backed by cache backend" do
+              expect(cache.scope(:foo).backend).to eq(cache.backend)
+            end
+          end
+
+          context "when cache already has sub cache by scope" do
+            before do
+              cache.scope(:foo).write(:bar, :baz)
+            end
+
+            it "returns sub cache backed by cache backend" do
+              expect(cache.scope(:foo).backend).to eq(cache.backend)
+            end
+          end
+        end
+
+        context "when `backed_by` option is passed" do
+          context "when cache does NOT sub cache by scope" do
+            it "returns sub cache backed by `backed_by` option backend" do
+              expect(cache.scope(:foo, backed_by: ConvenientService::Support::Cache::Constants::Backends::HASH).backend).to eq(ConvenientService::Support::Cache::Constants::Backends::HASH)
+            end
+          end
+
+          context "when cache already has sub cache by scope" do
+            before do
+              cache.scope(:foo, backed_by: ConvenientService::Support::Cache::Constants::Backends::THREAD_SAFE_ARRAY).write(:bar, :baz)
+            end
+
+            it "returns sub cache with already set backend ignoring `backed_by` option" do
+              expect(cache.scope(:foo, backed_by: ConvenientService::Support::Cache::Constants::Backends::HASH).backend).to eq(ConvenientService::Support::Cache::Constants::Backends::THREAD_SAFE_ARRAY)
+            end
+          end
+        end
+      end
+
       ##
       # TODO: Direct thread-safety spec.
       #
@@ -527,6 +573,44 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::ThreadSafeAr
 
           specify do
             expect { cache.scope!(:foo).scope!(:bar) }.to cache_its_value
+          end
+        end
+      end
+
+      example_group "`backed_by` option" do
+        context "when `backed_by` option is NOT passed" do
+          context "when cache does NOT sub cache by scope" do
+            it "returns sub cache backed by cache backend" do
+              expect(cache.scope!(:foo).backend).to eq(cache.backend)
+            end
+          end
+
+          context "when cache already has sub cache by scope" do
+            before do
+              cache.scope!(:foo).write(:bar, :baz)
+            end
+
+            it "returns sub cache backed by cache backend" do
+              expect(cache.scope!(:foo).backend).to eq(cache.backend)
+            end
+          end
+        end
+
+        context "when `backed_by` option is passed" do
+          context "when cache does NOT sub cache by scope" do
+            it "returns sub cache backed by `backed_by` option backend" do
+              expect(cache.scope!(:foo, backed_by: ConvenientService::Support::Cache::Constants::Backends::HASH).backend).to eq(ConvenientService::Support::Cache::Constants::Backends::HASH)
+            end
+          end
+
+          context "when cache already has sub cache by scope" do
+            before do
+              cache.scope!(:foo, backed_by: ConvenientService::Support::Cache::Constants::Backends::THREAD_SAFE_ARRAY).write(:bar, :baz)
+            end
+
+            it "returns sub cache with already set backend ignoring `backed_by` option" do
+              expect(cache.scope!(:foo, backed_by: ConvenientService::Support::Cache::Constants::Backends::HASH).backend).to eq(ConvenientService::Support::Cache::Constants::Backends::THREAD_SAFE_ARRAY)
+            end
           end
         end
       end
