@@ -21,15 +21,15 @@ RSpec.describe ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Comma
         end
 
         it "returns empty cache" do
-          expect(command.call).to eq(ConvenientService::Support::Cache.backed_by(:thread_safe_array).new)
+          expect(command.call).to eq(ConvenientService::Support::Cache.backed_by(:thread_safe_hash).new)
         end
 
         specify do
-          cache = ConvenientService::Support::Cache.backed_by(:thread_safe_array).new
+          cache = ConvenientService::Support::Cache.backed_by(:thread_safe_hash).new
 
           expect { command.call }
             .to delegate_to(ConvenientService::Support::Cache, :backed_by)
-              .with_arguments(:thread_safe_array)
+              .with_arguments(:thread_safe_hash)
               .and_return { cache }
         end
 
@@ -40,7 +40,7 @@ RSpec.describe ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Comma
 
       context "when `RSpec` current example is set" do
         it "returns empty cache" do
-          expect(command.call).to eq(ConvenientService::Support::Cache.backed_by(:thread_safe_array).new)
+          expect(command.call).to eq(ConvenientService::Support::Cache.backed_by(:thread_safe_hash).new)
         end
 
         specify do

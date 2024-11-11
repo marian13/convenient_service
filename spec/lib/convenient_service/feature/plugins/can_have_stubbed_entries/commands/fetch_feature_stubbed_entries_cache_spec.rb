@@ -38,7 +38,7 @@ RSpec.describe ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Comma
 
         expect { command.call(feature: feature) }
           .to delegate_to(cache, :scope)
-          .with_arguments(feature)
+          .with_arguments(feature, backed_by: :thread_safe_hash)
           .and_return_its_value
       end
     end

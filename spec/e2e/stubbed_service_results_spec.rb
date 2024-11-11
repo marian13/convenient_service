@@ -1,0 +1,415 @@
+# frozen_string_literal: true
+
+require "spec_helper"
+
+require "convenient_service"
+
+# rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers, RSpec/DescribeClass
+RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
+  include ConvenientService::RSpec::Helpers::StubService
+
+  include ConvenientService::RSpec::Matchers::Results
+
+  example_group "Service" do
+    example_group "class methods" do
+      describe ".result" do
+        example_group "arguments" do
+          let(:service) do
+            Class.new do
+              include ConvenientService::Standard::Config
+
+              def initialize(*args, **kwargs, &block)
+              end
+
+              def result
+                success(from: "original result")
+              end
+            end
+          end
+
+          let(:args) { [:foo] }
+          let(:kwargs) { {foo: :bar} }
+          let(:block) { proc { :foo } }
+
+          let(:other_args) { [:bar] }
+          let(:other_kwargs) { {bar: :baz} }
+          let(:other_block) { proc { :bar } }
+
+          context "when NO stubs" do
+            specify { expect(service.result).to be_success.with_data(from: "original result") }
+            specify { expect(service.result(*args)).to be_success.with_data(from: "original result") }
+            specify { expect(service.result(**kwargs)).to be_success.with_data(from: "original result") }
+            specify { expect(service.result(&block)).to be_success.with_data(from: "original result") }
+            specify { expect(service.result(*args, *kwargs)).to be_success.with_data(from: "original result") }
+            specify { expect(service.result(*args, &block)).to be_success.with_data(from: "original result") }
+            specify { expect(service.result(**kwargs, &block)).to be_success.with_data(from: "original result") }
+            specify { expect(service.result(*args, **kwargs, &block)).to be_success.with_data(from: "original result") }
+          end
+
+          context "when one stub" do
+            context "when first stub without arguments" do
+              before do
+                stub_service(service).to return_failure.with_message("from first stubbed result without arguments")
+              end
+
+              specify { expect(service.result).to be_failure.with_message("from first stubbed result without arguments") }
+              specify { expect(service.result(*args)).to be_failure.with_message("from first stubbed result without arguments") }
+              specify { expect(service.result(**kwargs)).to be_failure.with_message("from first stubbed result without arguments") }
+              specify { expect(service.result(&block)).to be_failure.with_message("from first stubbed result without arguments") }
+              specify { expect(service.result(*args, *kwargs)).to be_failure.with_message("from first stubbed result without arguments") }
+              specify { expect(service.result(*args, &block)).to be_failure.with_message("from first stubbed result without arguments") }
+              specify { expect(service.result(**kwargs, &block)).to be_failure.with_message("from first stubbed result without arguments") }
+              specify { expect(service.result(*args, **kwargs, &block)).to be_failure.with_message("from first stubbed result without arguments") }
+            end
+
+            context "when first stub with args" do
+              before do
+                stub_service(service).with_arguments(*args).to return_failure.with_message("from first stubbed result with args")
+              end
+
+              specify { expect(service.result).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(*args)).to be_failure.with_message("from first stubbed result with args") }
+              specify { expect(service.result(**kwargs)).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(&block)).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(*args, *kwargs)).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(*args, &block)).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(**kwargs, &block)).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(*args, **kwargs, &block)).to be_success.with_data(from: "original result") }
+
+              specify { expect(service.result(*other_args)).to be_success.with_data(from: "original result") }
+            end
+
+            context "when first stub with kwargs" do
+              before do
+                stub_service(service).with_arguments(**kwargs).to return_failure.with_message("from first stubbed result with kwargs")
+              end
+
+              specify { expect(service.result).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(*args)).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(**kwargs)).to be_failure.with_message("from first stubbed result with kwargs") }
+              specify { expect(service.result(&block)).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(*args, *kwargs)).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(*args, &block)).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(**kwargs, &block)).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(*args, **kwargs, &block)).to be_success.with_data(from: "original result") }
+
+              specify { expect(service.result(**other_kwargs)).to be_success.with_data(from: "original result") }
+            end
+
+            context "when first stub with block" do
+              before do
+                stub_service(service).with_arguments(&block).to return_failure.with_message("from first stubbed result with block")
+              end
+
+              specify { expect(service.result).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(*args)).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(**kwargs)).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(&block)).to be_failure.with_message("from first stubbed result with block") }
+              specify { expect(service.result(*args, *kwargs)).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(*args, &block)).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(**kwargs, &block)).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(*args, **kwargs, &block)).to be_success.with_data(from: "original result") }
+
+              specify { expect(service.result(&other_block)).to be_success.with_data(from: "original result") }
+            end
+          end
+
+          context "when multiple stubs" do
+            context "when first stub without arguments, second stub without arguments" do
+              before do
+                stub_service(service).to return_failure.with_message("from first stubbed result without arguments")
+                stub_service(service).to return_failure.with_message("from second stubbed result without arguments")
+              end
+
+              specify { expect(service.result).to be_failure.with_message("from second stubbed result without arguments") }
+              specify { expect(service.result(*args)).to be_failure.with_message("from second stubbed result without arguments") }
+              specify { expect(service.result(**kwargs)).to be_failure.with_message("from second stubbed result without arguments") }
+              specify { expect(service.result(&block)).to be_failure.with_message("from second stubbed result without arguments") }
+              specify { expect(service.result(*args, *kwargs)).to be_failure.with_message("from second stubbed result without arguments") }
+              specify { expect(service.result(*args, &block)).to be_failure.with_message("from second stubbed result without arguments") }
+              specify { expect(service.result(**kwargs, &block)).to be_failure.with_message("from second stubbed result without arguments") }
+              specify { expect(service.result(*args, **kwargs, &block)).to be_failure.with_message("from second stubbed result without arguments") }
+            end
+
+            context "when first stub without arguments, second stub with args" do
+              before do
+                stub_service(service).to return_failure.with_message("from first stubbed result without arguments")
+                stub_service(service).with_arguments(*args).to return_failure.with_message("from second stubbed result with args")
+              end
+
+              specify { expect(service.result).to be_failure.with_message("from first stubbed result without arguments") }
+              specify { expect(service.result(*args)).to be_failure.with_message("from second stubbed result with args") }
+              specify { expect(service.result(**kwargs)).to be_failure.with_message("from first stubbed result without arguments") }
+              specify { expect(service.result(&block)).to be_failure.with_message("from first stubbed result without arguments") }
+              specify { expect(service.result(*args, *kwargs)).to be_failure.with_message("from first stubbed result without arguments") }
+              specify { expect(service.result(*args, &block)).to be_failure.with_message("from first stubbed result without arguments") }
+              specify { expect(service.result(**kwargs, &block)).to be_failure.with_message("from first stubbed result without arguments") }
+              specify { expect(service.result(*args, **kwargs, &block)).to be_failure.with_message("from first stubbed result without arguments") }
+
+              specify { expect(service.result(*other_args)).to be_failure.with_message("from first stubbed result without arguments") }
+            end
+
+            context "when first stub without arguments, second stub with kwargs" do
+              before do
+                stub_service(service).to return_failure.with_message("from first stubbed result without arguments")
+                stub_service(service).with_arguments(**kwargs).to return_failure.with_message("from second stubbed result with kwargs")
+              end
+
+              specify { expect(service.result).to be_failure.with_message("from first stubbed result without arguments") }
+              specify { expect(service.result(*args)).to be_failure.with_message("from first stubbed result without arguments") }
+              specify { expect(service.result(**kwargs)).to be_failure.with_message("from second stubbed result with kwargs") }
+              specify { expect(service.result(&block)).to be_failure.with_message("from first stubbed result without arguments") }
+              specify { expect(service.result(*args, *kwargs)).to be_failure.with_message("from first stubbed result without arguments") }
+              specify { expect(service.result(*args, &block)).to be_failure.with_message("from first stubbed result without arguments") }
+              specify { expect(service.result(**kwargs, &block)).to be_failure.with_message("from first stubbed result without arguments") }
+              specify { expect(service.result(*args, **kwargs, &block)).to be_failure.with_message("from first stubbed result without arguments") }
+
+              specify { expect(service.result(**other_kwargs)).to be_failure.with_message("from first stubbed result without arguments") }
+            end
+
+            context "when first stub without arguments, second stub with block" do
+              before do
+                stub_service(service).to return_failure.with_message("from first stubbed result without arguments")
+                stub_service(service).with_arguments(&block).to return_failure.with_message("from second stubbed result with block")
+              end
+
+              specify { expect(service.result).to be_failure.with_message("from first stubbed result without arguments") }
+              specify { expect(service.result(*args)).to be_failure.with_message("from first stubbed result without arguments") }
+              specify { expect(service.result(**kwargs)).to be_failure.with_message("from first stubbed result without arguments") }
+              specify { expect(service.result(&block)).to be_failure.with_message("from second stubbed result with block") }
+              specify { expect(service.result(*args, *kwargs)).to be_failure.with_message("from first stubbed result without arguments") }
+              specify { expect(service.result(*args, &block)).to be_failure.with_message("from first stubbed result without arguments") }
+              specify { expect(service.result(**kwargs, &block)).to be_failure.with_message("from first stubbed result without arguments") }
+              specify { expect(service.result(*args, **kwargs, &block)).to be_failure.with_message("from first stubbed result without arguments") }
+
+              specify { expect(service.result(&other_block)).to be_failure.with_message("from first stubbed result without arguments") }
+            end
+
+            context "when first stub with args, second stub without arguments" do
+              before do
+                stub_service(service).with_arguments(*args).to return_failure.with_message("from first stubbed result with args")
+                stub_service(service).to return_failure.with_message("from second stubbed result without arguments")
+              end
+
+              specify { expect(service.result).to be_failure.with_message("from second stubbed result without arguments") }
+              specify { expect(service.result(*args)).to be_failure.with_message("from first stubbed result with args") }
+              specify { expect(service.result(**kwargs)).to be_failure.with_message("from second stubbed result without arguments") }
+              specify { expect(service.result(&block)).to be_failure.with_message("from second stubbed result without arguments") }
+              specify { expect(service.result(*args, *kwargs)).to be_failure.with_message("from second stubbed result without arguments") }
+              specify { expect(service.result(*args, &block)).to be_failure.with_message("from second stubbed result without arguments") }
+              specify { expect(service.result(**kwargs, &block)).to be_failure.with_message("from second stubbed result without arguments") }
+              specify { expect(service.result(*args, **kwargs, &block)).to be_failure.with_message("from second stubbed result without arguments") }
+
+              specify { expect(service.result(*other_args)).to be_failure.with_message("from second stubbed result without arguments") }
+            end
+
+            context "when first stub with args, second stub with args" do
+              before do
+                stub_service(service).with_arguments(*args).to return_failure.with_message("from first stubbed result with args")
+                stub_service(service).with_arguments(*args).to return_failure.with_message("from second stubbed result with args")
+              end
+
+              specify { expect(service.result).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(*args)).to be_failure.with_message("from second stubbed result with args") }
+              specify { expect(service.result(**kwargs)).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(&block)).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(*args, *kwargs)).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(*args, &block)).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(**kwargs, &block)).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(*args, **kwargs, &block)).to be_success.with_data(from: "original result") }
+
+              specify { expect(service.result(*other_args)).to be_success.with_data(from: "original result") }
+            end
+
+            context "when first stub with args, second stub with kwargs" do
+              before do
+                stub_service(service).with_arguments(*args).to return_failure.with_message("from first stubbed result with args")
+                stub_service(service).with_arguments(**kwargs).to return_failure.with_message("from second stubbed result with kwargs")
+              end
+
+              specify { expect(service.result).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(*args)).to be_failure.with_message("from first stubbed result with args") }
+              specify { expect(service.result(**kwargs)).to be_failure.with_message("from second stubbed result with kwargs") }
+              specify { expect(service.result(&block)).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(*args, *kwargs)).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(*args, &block)).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(**kwargs, &block)).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(*args, **kwargs, &block)).to be_success.with_data(from: "original result") }
+
+              specify { expect(service.result(*other_args)).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(**other_kwargs)).to be_success.with_data(from: "original result") }
+            end
+
+            context "when first stub with args, second stub with block" do
+              before do
+                stub_service(service).with_arguments(*args).to return_failure.with_message("from first stubbed result with args")
+                stub_service(service).with_arguments(&block).to return_failure.with_message("from second stubbed result with block")
+              end
+
+              specify { expect(service.result).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(*args)).to be_failure.with_message("from first stubbed result with args") }
+              specify { expect(service.result(**kwargs)).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(&block)).to be_failure.with_message("from second stubbed result with block") }
+              specify { expect(service.result(*args, *kwargs)).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(*args, &block)).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(**kwargs, &block)).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(*args, **kwargs, &block)).to be_success.with_data(from: "original result") }
+
+              specify { expect(service.result(*other_args)).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(&other_block)).to be_success.with_data(from: "original result") }
+            end
+
+            context "when first stub with kwargs, second stub without arguments" do
+              before do
+                stub_service(service).with_arguments(**kwargs).to return_failure.with_message("from first stubbed result with kwargs")
+                stub_service(service).to return_failure.with_message("from second stubbed result without arguments")
+              end
+
+              specify { expect(service.result).to be_failure.with_message("from second stubbed result without arguments") }
+              specify { expect(service.result(*args)).to be_failure.with_message("from second stubbed result without arguments") }
+              specify { expect(service.result(**kwargs)).to be_failure.with_message("from first stubbed result with kwargs") }
+              specify { expect(service.result(&block)).to be_failure.with_message("from second stubbed result without arguments") }
+              specify { expect(service.result(*args, *kwargs)).to be_failure.with_message("from second stubbed result without arguments") }
+              specify { expect(service.result(*args, &block)).to be_failure.with_message("from second stubbed result without arguments") }
+              specify { expect(service.result(**kwargs, &block)).to be_failure.with_message("from second stubbed result without arguments") }
+              specify { expect(service.result(*args, **kwargs, &block)).to be_failure.with_message("from second stubbed result without arguments") }
+
+              specify { expect(service.result(**other_kwargs)).to be_failure.with_message("from second stubbed result without arguments") }
+            end
+
+            context "when first stub with kwargs, second stub with args" do
+              before do
+                stub_service(service).with_arguments(**kwargs).to return_failure.with_message("from first stubbed result with kwargs")
+                stub_service(service).with_arguments(*args).to return_failure.with_message("from second stubbed result with args")
+              end
+
+              specify { expect(service.result).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(*args)).to be_failure.with_message("from second stubbed result with args") }
+              specify { expect(service.result(**kwargs)).to be_failure.with_message("from first stubbed result with kwargs") }
+              specify { expect(service.result(&block)).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(*args, *kwargs)).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(*args, &block)).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(**kwargs, &block)).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(*args, **kwargs, &block)).to be_success.with_data(from: "original result") }
+
+              specify { expect(service.result(**other_kwargs)).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(*other_args)).to be_success.with_data(from: "original result") }
+            end
+
+            context "when first stub with kwargs, second stub with kwargs" do
+              before do
+                stub_service(service).with_arguments(**kwargs).to return_failure.with_message("from first stubbed result with kwargs")
+                stub_service(service).with_arguments(**kwargs).to return_failure.with_message("from second stubbed result with kwargs")
+              end
+
+              specify { expect(service.result).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(*args)).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(**kwargs)).to be_failure.with_message("from second stubbed result with kwargs") }
+              specify { expect(service.result(&block)).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(*args, *kwargs)).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(*args, &block)).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(**kwargs, &block)).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(*args, **kwargs, &block)).to be_success.with_data(from: "original result") }
+
+              specify { expect(service.result(**other_kwargs)).to be_success.with_data(from: "original result") }
+            end
+
+            context "when first stub with kwargs, second stub with block" do
+              before do
+                stub_service(service).with_arguments(**kwargs).to return_failure.with_message("from first stubbed result with kwargs")
+                stub_service(service).with_arguments(&block).to return_failure.with_message("from second stubbed result with block")
+              end
+
+              specify { expect(service.result).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(*args)).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(**kwargs)).to be_failure.with_message("from first stubbed result with kwargs") }
+              specify { expect(service.result(&block)).to be_failure.with_message("from second stubbed result with block") }
+              specify { expect(service.result(*args, *kwargs)).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(*args, &block)).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(**kwargs, &block)).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(*args, **kwargs, &block)).to be_success.with_data(from: "original result") }
+
+              specify { expect(service.result(**other_kwargs)).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(&other_block)).to be_success.with_data(from: "original result") }
+            end
+
+            context "when first stub with block, second stub without arguments" do
+              before do
+                stub_service(service).with_arguments(&block).to return_failure.with_message("from first stubbed result with block")
+                stub_service(service).to return_failure.with_message("from second stubbed result without arguments")
+              end
+
+              specify { expect(service.result).to be_failure.with_message("from second stubbed result without arguments") }
+              specify { expect(service.result(*args)).to be_failure.with_message("from second stubbed result without arguments") }
+              specify { expect(service.result(**kwargs)).to be_failure.with_message("from second stubbed result without arguments") }
+              specify { expect(service.result(&block)).to be_failure.with_message("from first stubbed result with block") }
+              specify { expect(service.result(*args, *kwargs)).to be_failure.with_message("from second stubbed result without arguments") }
+              specify { expect(service.result(*args, &block)).to be_failure.with_message("from second stubbed result without arguments") }
+              specify { expect(service.result(**kwargs, &block)).to be_failure.with_message("from second stubbed result without arguments") }
+              specify { expect(service.result(*args, **kwargs, &block)).to be_failure.with_message("from second stubbed result without arguments") }
+
+              specify { expect(service.result(&other_block)).to be_failure.with_message("from second stubbed result without arguments") }
+            end
+
+            context "when first stub with block, second stub with args" do
+              before do
+                stub_service(service).with_arguments(&block).to return_failure.with_message("from first stubbed result with block")
+                stub_service(service).with_arguments(*args).to return_failure.with_message("from second stubbed result with args")
+              end
+
+              specify { expect(service.result).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(*args)).to be_failure.with_message("from second stubbed result with args") }
+              specify { expect(service.result(**kwargs)).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(&block)).to be_failure.with_message("from first stubbed result with block") }
+              specify { expect(service.result(*args, *kwargs)).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(*args, &block)).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(**kwargs, &block)).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(*args, **kwargs, &block)).to be_success.with_data(from: "original result") }
+
+              specify { expect(service.result(&other_block)).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(*other_args)).to be_success.with_data(from: "original result") }
+            end
+
+            context "when first stub with block, second stub with kwargs" do
+              before do
+                stub_service(service).with_arguments(&block).to return_failure.with_message("from first stubbed result with block")
+                stub_service(service).with_arguments(**kwargs).to return_failure.with_message("from second stubbed result with kwargs")
+              end
+
+              specify { expect(service.result).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(*args)).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(**kwargs)).to be_failure.with_message("from second stubbed result with kwargs") }
+              specify { expect(service.result(&block)).to be_failure.with_message("from first stubbed result with block") }
+              specify { expect(service.result(*args, *kwargs)).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(*args, &block)).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(**kwargs, &block)).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(*args, **kwargs, &block)).to be_success.with_data(from: "original result") }
+
+              specify { expect(service.result(&other_block)).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(&other_kwargs)).to be_success.with_data(from: "original result") }
+            end
+
+            context "when first stub with block, second stub with block" do
+              before do
+                stub_service(service).with_arguments(&block).to return_failure.with_message("from first stubbed result with block")
+                stub_service(service).with_arguments(&block).to return_failure.with_message("from second stubbed result with block")
+              end
+
+              specify { expect(service.result).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(*args)).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(**kwargs)).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(&block)).to be_failure.with_message("from second stubbed result with block") }
+              specify { expect(service.result(*args, *kwargs)).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(*args, &block)).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(**kwargs, &block)).to be_success.with_data(from: "original result") }
+              specify { expect(service.result(*args, **kwargs, &block)).to be_success.with_data(from: "original result") }
+
+              specify { expect(service.result(&other_block)).to be_success.with_data(from: "original result") }
+            end
+          end
+        end
+      end
+    end
+  end
+end
+# rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers, RSpec/DescribeClass

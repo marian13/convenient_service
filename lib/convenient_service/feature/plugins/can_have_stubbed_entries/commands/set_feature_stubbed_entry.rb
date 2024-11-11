@@ -57,7 +57,7 @@ module ConvenientService
             # @return [ConvenientService::Support::Cache]
             #
             def cache
-              @cache ||= Commands::FetchFeatureStubbedEntriesCache.call(feature: feature).scope(entry.to_sym)
+              @cache ||= Commands::FetchFeatureStubbedEntriesCache.call(feature: feature).scope(entry.to_sym, backed_by: :thread_safe_array)
             end
 
             ##

@@ -27,7 +27,7 @@ RSpec.describe ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Comma
 
       let(:entry) { :main }
 
-      let(:cache) { ConvenientService::Support::Cache.backed_by(:thread_safe_array).new }
+      let(:cache) { ConvenientService::Support::Cache.backed_by(:thread_safe_hash).new }
       let(:arguments) { ConvenientService::Support::Arguments.new(:foo, {foo: :bar}) { :foo } }
       let(:key) { cache.keygen(*arguments.args, **arguments.kwargs, &arguments.block) }
       let(:value) { :stub_value }
@@ -43,14 +43,14 @@ RSpec.describe ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Comma
 
         expect { command.call(feature: feature, entry: entry, arguments: arguments, value: value) }
           .to delegate_to(cache, :scope)
-          .with_arguments(entry)
+          .with_arguments(entry, backed_by: :thread_safe_array)
       end
 
       specify do
         allow(ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Commands::FetchFeatureStubbedEntriesCache).to receive(:call).with(feature: feature).and_return(cache)
 
         expect { command.call(feature: feature, entry: entry, arguments: arguments, value: value) }
-          .to delegate_to(cache.scope!(entry), :write)
+          .to delegate_to(cache.scope!(entry, backed_by: :thread_safe_array), :write)
           .with_arguments(key, value)
           .and_return_its_value
       end
@@ -67,7 +67,7 @@ RSpec.describe ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Comma
         it "sets symbol key to cache" do
           command.call(feature: feature, entry: entry, arguments: arguments, value: value)
 
-          expect(feature.stubbed_entries.scope(entry.to_sym).read(key)).to eq(value)
+          expect(feature.stubbed_entries.scope(entry.to_sym, backed_by: :thread_safe_array).read(key)).to eq(value)
         end
       end
     end

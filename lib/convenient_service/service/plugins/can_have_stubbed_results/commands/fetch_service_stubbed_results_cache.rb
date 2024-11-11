@@ -24,7 +24,7 @@ module ConvenientService
             # @return [ConvenientService::Support::Cache]
             #
             def call
-              cache.scope(service)
+              cache.scope(service, backed_by: :thread_safe_array)
             end
 
             private
