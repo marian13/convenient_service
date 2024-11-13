@@ -103,15 +103,40 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStubbedResults::Middl
             end
           end
 
+          context "when that one stub with default (any arguments)" do
+            before do
+              stub_service(service_class)
+                .to return_error
+                .with_code(:with_default)
+            end
+
+            it "returns stub with default (any arguments)" do
+              expect(method_value).to be_error.with_code(:with_default)
+            end
+          end
+
+          context "when that one stub with any arguments" do
+            before do
+              stub_service(service_class)
+                .to return_error
+                .with_code(:with_any_arguments)
+            end
+
+            it "returns stub with any arguments" do
+              expect(method_value).to be_error.with_code(:with_any_arguments)
+            end
+          end
+
           context "when that one stub without arguments" do
             before do
               stub_service(service_class)
+                .without_arguments
                 .to return_error
                 .with_code(:without_arguments)
             end
 
-            it "returns stub without arguments" do
-              expect(method_value).to be_error.with_code(:without_arguments)
+            it "returns original result" do
+              expect(method_value).to be_success
             end
           end
         end
@@ -153,7 +178,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStubbedResults::Middl
             end
           end
 
-          context "when one of them with different arguments and one without arguments" do
+          context "when one of them with different arguments and one with default (any arguments)" do
             before do
               stub_service(service_class)
                 .with_arguments(:bar, **kwargs, &block)
@@ -162,11 +187,82 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStubbedResults::Middl
 
               stub_service(service_class)
                 .to return_error
+                .with_code(:with_default)
+            end
+
+            it "returns stub with any arguments" do
+              expect(method_value).to be_error.with_code(:with_default)
+            end
+          end
+
+          context "when one of them with different arguments and one with any arguments" do
+            before do
+              stub_service(service_class)
+                .with_arguments(:bar, **kwargs, &block)
+                .to return_error
+                .with_code(:different_arguments)
+
+              stub_service(service_class)
+                .with_any_arguments
+                .to return_error
+                .with_code(:with_any_arguments)
+            end
+
+            it "returns stub with any arguments" do
+              expect(method_value).to be_error.with_code(:with_any_arguments)
+            end
+          end
+
+          context "when one of them with different arguments and one without arguments" do
+            before do
+              stub_service(service_class)
+                .with_arguments(:bar, **kwargs, &block)
+                .to return_error
+                .with_code(:different_arguments)
+
+              stub_service(service_class)
+                .without_arguments
+                .to return_error
                 .with_code(:without_arguments)
             end
 
-            it "returns stub without arguments" do
-              expect(method_value).to be_error.with_code(:without_arguments)
+            it "returns original result" do
+              expect(method_value).to be_success
+            end
+          end
+
+          context "when one of them with same arguments and one with default (any arguments)" do
+            before do
+              stub_service(service_class)
+                .with_arguments(*args, **kwargs, &block)
+                .to return_error
+                .with_code(:same_arguments)
+
+              stub_service(service_class)
+                .to return_error
+                .with_code(:with_default)
+            end
+
+            it "returns stub same arguments" do
+              expect(method_value).to be_error.with_code(:same_arguments)
+            end
+          end
+
+          context "when one of them with same arguments and one with any arguments" do
+            before do
+              stub_service(service_class)
+                .with_arguments(*args, **kwargs, &block)
+                .to return_error
+                .with_code(:same_arguments)
+
+              stub_service(service_class)
+                .with_any_arguments
+                .to return_error
+                .with_code(:with_any_arguments)
+            end
+
+            it "returns stub same arguments" do
+              expect(method_value).to be_error.with_code(:same_arguments)
             end
           end
 
@@ -178,6 +274,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStubbedResults::Middl
                 .with_code(:same_arguments)
 
               stub_service(service_class)
+                .without_arguments
                 .to return_error
                 .with_code(:without_arguments)
             end

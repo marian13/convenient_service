@@ -39,8 +39,15 @@ module ConvenientService
             ##
             # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
             #
+            # @internal
+            #   NOTE: `arguments.nil?` means "match any arguments".
+            #
             def call
-              cache.write(key, result)
+              if arguments.nil?
+                cache.default = result
+              else
+                cache.write(cache.keygen(*arguments.args, **arguments.kwargs, &arguments.block), result)
+              end
             end
 
             private
@@ -50,13 +57,6 @@ module ConvenientService
             #
             def cache
               @cache ||= Commands::FetchServiceStubbedResultsCache.call(service: service)
-            end
-
-            ##
-            # @return [ConvenientService::Support::Cache::Entities::Key]
-            #
-            def key
-              @key ||= cache.keygen(*arguments.args, **arguments.kwargs, &arguments.block)
             end
           end
         end

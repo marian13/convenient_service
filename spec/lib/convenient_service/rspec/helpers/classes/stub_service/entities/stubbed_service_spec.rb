@@ -33,6 +33,28 @@ RSpec.describe ConvenientService::RSpec::Helpers::Classes::StubService::Entities
   let(:result) { result_spec.for(service_class).calculate_value }
 
   example_group "instance methods" do
+    describe "#with_any_arguments" do
+      it "returns self" do
+        expect(helper.with_any_arguments).to eq(helper)
+      end
+
+      context "when method is called without arguments" do
+        it "modifies method to return stub" do
+          stub_service(service_class).with_any_arguments.to return_error.with_code(:with_arguments)
+
+          expect(service_class.result).to be_error.with_code(:with_arguments)
+        end
+      end
+
+      context "when method is called with arguments" do
+        it "modifies method to return stub" do
+          stub_service(service_class).with_any_arguments.to return_error.with_code(:with_arguments)
+
+          expect(service_class.result(*args, **kwargs, &block)).to be_error.with_code(:with_arguments)
+        end
+      end
+    end
+
     describe "#with_arguments" do
       it "returns self" do
         expect(helper.with_arguments(*args, **kwargs, &block)).to eq(helper)
@@ -61,10 +83,10 @@ RSpec.describe ConvenientService::RSpec::Helpers::Classes::StubService::Entities
       end
 
       context "when method is NOT called without arguments" do
-        it "modifies method to return stub" do
+        it "does NOT modify method to return stub" do
           stub_service(service_class).without_arguments.to return_error.with_code(:with_arguments)
 
-          expect(service_class.result(*args, **kwargs, &block)).to be_error.with_code(:with_arguments)
+          expect(service_class.result(*args, **kwargs, &block)).to be_success
         end
       end
 
@@ -78,8 +100,6 @@ RSpec.describe ConvenientService::RSpec::Helpers::Classes::StubService::Entities
     end
 
     describe "#to" do
-      let(:key) { service_class.stubbed_results.keygen }
-
       it "returns `self`" do
         expect(helper.to(result_spec)).to eq(helper)
       end
@@ -93,12 +113,18 @@ RSpec.describe ConvenientService::RSpec::Helpers::Classes::StubService::Entities
       specify do
         expect { helper.to(result_spec) }
           .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResults::Commands::SetServiceStubbedResult, :call)
-          .with_arguments(service: service_class, arguments: ConvenientService::Support::Arguments.null_arguments, result: result)
+          .with_arguments(service: service_class, arguments: nil, result: result)
+      end
+
+      context "when used with `with_any_arguments`" do
+        specify do
+          expect { helper.with_any_arguments.to(result_spec) }
+            .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResults::Commands::SetServiceStubbedResult, :call)
+            .with_arguments(service: service_class, arguments: nil, result: result)
+        end
       end
 
       context "when used with `with_arguments`" do
-        let(:key) { service_class.stubbed_results.keygen(*args, **kwargs, &block) }
-
         specify do
           expect { helper.with_arguments(*args, **kwargs, &block).to(result_spec) }
             .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResults::Commands::SetServiceStubbedResult, :call)
@@ -107,8 +133,6 @@ RSpec.describe ConvenientService::RSpec::Helpers::Classes::StubService::Entities
       end
 
       context "when used with `without_arguments`" do
-        let(:key) { service_class.stubbed_results.keygen(*args, **kwargs, &block) }
-
         specify do
           expect { helper.without_arguments.to(result_spec) }
             .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResults::Commands::SetServiceStubbedResult, :call)

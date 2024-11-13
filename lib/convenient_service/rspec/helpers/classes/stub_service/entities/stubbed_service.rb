@@ -25,9 +25,24 @@ module ConvenientService
               # @param service_class [Class]
               # @return [void]
               #
+              # @internal
+              #   NOTE: `@arguments = nil` means "match any arguments".
+              #
               def initialize(service_class:)
                 @service_class = service_class
-                @arguments = Support::Arguments.null_arguments
+                @arguments = nil
+              end
+
+              ##
+              # @return [ConvenientService::RSpec::Helpers::Classes::StubService::Entities::StubService]
+              #
+              # @internal
+              #   NOTE: `@arguments = nil` means "match any arguments".
+              #
+              def with_any_arguments(...)
+                @arguments = nil
+
+                self
               end
 
               ##

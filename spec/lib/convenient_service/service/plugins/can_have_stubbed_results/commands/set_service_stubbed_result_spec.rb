@@ -26,23 +26,45 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStubbedResults::Comma
       end
 
       let(:cache) { ConvenientService::Support::Cache.backed_by(:thread_safe_array).new }
-      let(:arguments) { ConvenientService::Support::Arguments.new(:foo, {foo: :bar}) { :foo } }
-      let(:key) { cache.keygen(*arguments.args, **arguments.kwargs, &arguments.block) }
       let(:result) { service.error }
 
-      specify do
-        expect { command.call(service: service, arguments: arguments, result: result) }
-          .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResults::Commands::FetchServiceStubbedResultsCache, :call)
-          .with_arguments(service: service)
+      context "when `arguments` are NOT `nil` (match specific arguments)" do
+        let(:key) { cache.keygen(*arguments.args, **arguments.kwargs, &arguments.block) }
+        let(:arguments) { ConvenientService::Support::Arguments.new(:foo, {foo: :bar}) { :foo } }
+
+        specify do
+          expect { command.call(service: service, arguments: arguments, result: result) }
+            .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResults::Commands::FetchServiceStubbedResultsCache, :call)
+            .with_arguments(service: service)
+        end
+
+        specify do
+          allow(ConvenientService::Service::Plugins::CanHaveStubbedResults::Commands::FetchServiceStubbedResultsCache).to receive(:call).with(service: service).and_return(cache)
+
+          expect { command.call(service: service, arguments: arguments, result: result) }
+            .to delegate_to(cache, :write)
+            .with_arguments(key, result)
+            .and_return_its_value
+        end
       end
 
-      specify do
-        allow(ConvenientService::Service::Plugins::CanHaveStubbedResults::Commands::FetchServiceStubbedResultsCache).to receive(:call).with(service: service).and_return(cache)
+      context "when `arguments` are `nil` (match any arguments)" do
+        let(:arguments) { nil }
 
-        expect { command.call(service: service, arguments: arguments, result: result) }
-          .to delegate_to(cache, :write)
-          .with_arguments(key, result)
-          .and_return_its_value
+        specify do
+          expect { command.call(service: service, arguments: arguments, result: result) }
+            .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResults::Commands::FetchServiceStubbedResultsCache, :call)
+            .with_arguments(service: service)
+        end
+
+        specify do
+          allow(ConvenientService::Service::Plugins::CanHaveStubbedResults::Commands::FetchServiceStubbedResultsCache).to receive(:call).with(service: service).and_return(cache)
+
+          expect { command.call(service: service, arguments: arguments, result: result) }
+            .to delegate_to(cache, :default=)
+            .with_arguments(result)
+            .and_return_its_value
+        end
       end
     end
   end

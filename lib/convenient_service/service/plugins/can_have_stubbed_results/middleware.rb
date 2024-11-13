@@ -11,10 +11,7 @@ module ConvenientService
           # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
           #
           def next(...)
-            return cache[key_with_arguments] if cache.exist?(key_with_arguments)
-            return cache[key_without_arguments] if cache.exist?(key_without_arguments)
-
-            chain.next(...)
+            cache.read(key) || chain.next(...)
           end
 
           private
@@ -43,20 +40,13 @@ module ConvenientService
           #
           #   TODO: Think about two separate middlewares with shared commands.
           #
-          def key_with_arguments
-            @key_with_arguments ||=
+          def key
+            @key ||=
               if entity.instance_of?(::Class)
                 cache.keygen(*next_arguments.args, **next_arguments.kwargs, &next_arguments.block)
               else
                 cache.keygen(*entity.constructor_arguments.args, **entity.constructor_arguments.kwargs, &entity.constructor_arguments.block)
               end
-          end
-
-          ##
-          # @return [ConvenientService::Support::Cache::Entities::Key]
-          #
-          def key_without_arguments
-            @key_without_arguments ||= cache.keygen
           end
         end
       end
