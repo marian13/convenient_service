@@ -11,7 +11,7 @@ module ConvenientService
             # @return [void]
             #
             def initialize(store: {}, **kwargs)
-              super
+              super(store: ::Hash.new(kwargs[:default]).update(store), **kwargs)
             end
 
             ##
@@ -112,10 +112,14 @@ module ConvenientService
             #
             # @param key [Object] Can be any type.
             # @param backed_by [Symbol]
+            # @param default [Object] Can be any type.
             # @return [ConvenientService::Support::Cache::Entities::Caches::Base]
             #
-            def scope(key, backed_by: backend)
-              store.fetch(key) { Support::Cache.backed_by(backed_by).new(parent: self, key: key) }
+            # @internal
+            #   TODO: Add specs for `default` option transfer.
+            #
+            def scope(key, backed_by: backend, default: self.default)
+              store.fetch(key) { Support::Cache.backed_by(backed_by).new(default: default, parent: self, key: key) }
             end
 
             ##
@@ -123,10 +127,26 @@ module ConvenientService
             #
             # @param key [Object] Can be any type.
             # @param backed_by [Symbol]
+            # @param default [Object] Can be any type.
             # @return [ConvenientService::Support::Cache::Entities::Caches::Base]
             #
-            def scope!(key, backed_by: backend)
-              store.fetch(key) { store[key] = Support::Cache.backed_by(backed_by).new(parent: self, key: key) }
+            # @internal
+            #   TODO: Add specs for `default` option transfer.
+            #
+            def scope!(key, backed_by: backend, default: self.default)
+              store.fetch(key) { store[key] = Support::Cache.backed_by(backed_by).new(default: default, parent: self, key: key) }
+            end
+
+            ##
+            # @param value [Object] Can be any type.
+            # @return [Object] Can be any type.
+            #
+            def default=(value)
+              save_self_as_scope_in_parent!
+
+              store.default = value
+
+              @default = value
             end
           end
         end

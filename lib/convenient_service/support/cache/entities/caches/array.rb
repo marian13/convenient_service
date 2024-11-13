@@ -13,7 +13,7 @@ module ConvenientService
             # @return [void]
             #
             def initialize(store: [], **kwargs)
-              super
+              super(store: ::Array.new(0, kwargs[:default]).concat(store), **kwargs)
             end
 
             ##
@@ -45,7 +45,7 @@ module ConvenientService
             def read(key)
               index = index(key)
 
-              store[index].value if index
+              index ? store[index].value : default
             end
 
             ##
@@ -64,10 +64,15 @@ module ConvenientService
             end
 
             ##
+            # @param key [Object] Can be any type.
+            # @param block [Proc, nil]
             # @return [Object] Can be any type.
             #
-            def fetch(...)
-              _fetch(...)
+            # @internal
+            #   https://api.rubyonrails.org/classes/ActiveSupport/Cache/Store.html#method-i-fetch
+            #
+            def fetch(key, &block)
+              _fetch(key, default: default, &block)
             end
 
             ##
@@ -98,13 +103,17 @@ module ConvenientService
             #
             # @param key [Object] Can be any type.
             # @param backed_by [Symbol]
+            # @param default [Object] Can be any type.
             # @return [ConvenientService::Support::Cache::Entities::Caches::Base]
             #
-            def scope(key, backed_by: backend)
+            # @internal
+            #   TODO: Add specs for `default` option transfer.
+            #
+            def scope(key, backed_by: backend, default: self.default)
               Utils.with_one_time_object do |undefined|
                 value = _fetch(key, default: undefined)
 
-                (value == undefined) ? Support::Cache.backed_by(backed_by).new(parent: self, key: key) : value
+                (value == undefined) ? Support::Cache.backed_by(backed_by).new(default: default, parent: self, key: key) : value
               end
             end
 
@@ -113,10 +122,24 @@ module ConvenientService
             #
             # @param key [Object] Can be any type.
             # @param backed_by [Symbol]
+            # @param default [Object] Can be any type.
             # @return [ConvenientService::Support::Cache::Entities::Caches::Base]
             #
-            def scope!(key, backed_by: backend)
-              _fetch(key) { Support::Cache.backed_by(backed_by).new(parent: self, key: key) }
+            # @internal
+            #   TODO: Add specs for `default` option transfer.
+            #
+            def scope!(key, backed_by: backend, default: self.default)
+              _fetch(key) { Support::Cache.backed_by(backed_by).new(default: default, parent: self, key: key) }
+            end
+
+            ##
+            # @param value [Object] Can be any type.
+            # @return [Object] Can be any type.
+            #
+            def default=(value)
+              save_self_as_scope_in_parent!
+
+              @default = value
             end
 
             private

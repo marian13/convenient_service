@@ -79,6 +79,20 @@ module ConvenientService
             end
 
             ##
+            # @return [ConvenientService::Support::Cache::Entities::Caches::Array]
+            #
+            def scope!(...)
+              @lock.synchronize { super }
+            end
+
+            ##
+            # @return [Object] Can be any type.
+            #
+            def default=(...)
+              @lock.synchronize { super }
+            end
+
+            ##
             # @note NOT thread-safe.
             #
             # def ==(other)

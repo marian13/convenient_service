@@ -28,6 +28,14 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Base, type: 
         end
       end
 
+      context "when `default` is NOT passed" do
+        let(:cache) { described_class.new }
+
+        it "defaults to `nil`" do
+          expect(cache.default).to be_nil
+        end
+      end
+
       context "when `parent` is NOT passed" do
         let(:cache) { described_class.new }
 
@@ -66,6 +74,7 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Base, type: 
       subject { cache }
 
       it { is_expected.to have_attr_reader(:store) }
+      it { is_expected.to have_attr_reader(:default) }
       it { is_expected.to have_attr_reader(:parent) }
       it { is_expected.to have_attr_reader(:key) }
     end
@@ -84,6 +93,7 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Base, type: 
       it { is_expected.to have_abstract_method(:clear) }
       it { is_expected.to have_abstract_method(:scope) }
       it { is_expected.to have_abstract_method(:scope!) }
+      it { is_expected.to have_abstract_method(:default=) }
     end
 
     describe "#keygen" do
@@ -123,7 +133,14 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Base, type: 
     ##
     # NOTE: Tested by descendants.
     #
-    # describe "#set=" do
+    # describe "#set" do
+    # end
+    ##
+
+    ##
+    # NOTE: Tested by descendants.
+    #
+    # describe "#default=" do
     # end
     ##
 

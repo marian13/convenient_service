@@ -24,6 +24,12 @@ module ConvenientService
             attr_reader :store
 
             ##
+            # @!attribute [r] default
+            #   @return [Object] Can be any type.
+            #
+            attr_reader :default
+
+            ##
             # @note `parent` is only present when cache is scoped.
             #
             # @!attribute [r] parent
@@ -85,13 +91,20 @@ module ConvenientService
             abstract_method :scope!
 
             ##
+            # @return [Object] Can be any type.
+            #
+            abstract_method :default=
+
+            ##
             # @param store [Object] Can be any type.
+            # @param default [Object] Can be any type.
             # @param parent [ConvenientService::Support::Cache::Entities::Caches::Base, nil]
             # @param key [ConvenientService::Support::Cache::Entities::Key, Object]
             # @return [void]
             #
-            def initialize(store: nil, parent: nil, key: nil)
+            def initialize(store: nil, default: nil, parent: nil, key: nil)
               @store = store
+              @default = default
               @parent = parent
               @key = key
             end

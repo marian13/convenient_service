@@ -18,11 +18,42 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Hash, type: 
 
   example_group "class methods" do
     describe ".new" do
-      context "when `hash` is NOT passed" do
+      context "when `store` is NOT passed" do
         let(:cache) { described_class.new }
 
         it "defaults to empty hash" do
           expect(cache.store).to eq({})
+        end
+      end
+
+      context "when `store` is passed" do
+        let(:cache) { described_class.new(store: {}.freeze) }
+
+        it "is NOT mutated" do
+          expect { cache.store }.not_to raise_error(FrozenError)
+        end
+      end
+
+      context "when `default` is NOT passed" do
+        let(:cache) { described_class.new }
+
+        it "defaults to `nil`" do
+          expect(cache.default).to be_nil
+        end
+      end
+
+      context "when `default` is passed" do
+        context "when `cache` has missing key" do
+          let(:cache) { described_class.new(default: default_value) }
+          let(:default_value) { 42 }
+
+          it "modifies `read` to return `default` value" do
+            expect(cache.read(:missing_key)).to eq(default_value)
+          end
+
+          it "modifies `fetch` without block to return `default` value" do
+            expect(cache.fetch(:missing_key)).to eq(default_value)
+          end
         end
       end
 
@@ -56,11 +87,24 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Hash, type: 
     end
 
     describe "#store" do
-      let(:cache) { described_class.new(store: hash) }
-      let(:hash) { {foo: :bar} }
+      context "when store is NOT empty" do
+        let(:cache) { described_class.new }
 
-      it "returns hash that is used as store internally" do
-        expect(cache.store).to equal(hash)
+        before do
+          cache.set(:foo, :bar)
+        end
+
+        it "returns underlying hash" do
+          expect(cache.store).to eq({foo: :bar})
+        end
+      end
+
+      context "when store is empty" do
+        let(:cache) { described_class.new }
+
+        it "returns empty hash" do
+          expect(cache.store).to eq({})
+        end
       end
     end
 
@@ -115,13 +159,27 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Hash, type: 
       let(:key) { :foo }
       let(:value) { :foo }
 
-      context "when cache does NOT have `key`" do
+      context "when `cache` does NOT have `key`" do
         before do
           cache.clear
         end
 
-        it "returns `nil`" do
-          expect(cache.read(key)).to eq(nil)
+        context "when `cache` does NOT have `default` value" do
+          it "returns `nil`" do
+            expect(cache.read(key)).to eq(nil)
+          end
+        end
+
+        context "when `cache` has `default` value" do
+          let(:default_value) { 42 }
+
+          before do
+            cache.default = default_value
+          end
+
+          it "returns `default` value" do
+            expect(cache.read(key)).to eq(default_value)
+          end
         end
       end
 
@@ -194,17 +252,31 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Hash, type: 
       let(:value) { :bar }
 
       context "when `block` is NOT passed" do
-        context "when cache does NOT have `key`" do
+        context "when `cache` does NOT have `key`" do
           before do
             cache.clear
           end
 
-          it "returns `nil`" do
-            expect(cache.fetch(key)).to be_nil
+          context "when `cache` does have `default` value" do
+            it "returns `nil`" do
+              expect(cache.fetch(key)).to be_nil
+            end
+          end
+
+          context "when `cache` has `default` value" do
+            let(:default_value) { 42 }
+
+            before do
+              cache.default = default_value
+            end
+
+            it "returns `default` value" do
+              expect(cache.fetch(key)).to eq(default_value)
+            end
           end
         end
 
-        context "when cache has `key`" do
+        context "when `cache` has `key`" do
           before do
             cache[key] = value
           end
@@ -218,7 +290,7 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Hash, type: 
       context "when `block` is passed" do
         let(:block) { proc { value } }
 
-        context "when cache does NOT have `key`" do
+        context "when `cache` does NOT have `key`" do
           before do
             cache.clear
           end
@@ -242,7 +314,7 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Hash, type: 
           end
         end
 
-        context "when cache has `key`" do
+        context "when `cache` has `key`" do
           before do
             cache[key] = value
           end
@@ -552,6 +624,72 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Hash, type: 
       end
     end
 
+    describe "#default=" do
+      let(:default_value) { 42 }
+
+      context "when `cache` is NOT scoped cache" do
+        let(:cache) { described_class.new }
+
+        it "sets `default` value" do
+          cache.default = default_value
+
+          expect(cache.default).to eq(default_value)
+        end
+
+        it "returns `default` value" do
+          expect(cache.default = default_value).to eq(default_value)
+        end
+      end
+
+      context "when `cache` is scoped cache" do
+        let(:cache) { described_class.new }
+
+        let(:scoped_cache) { cache.scope(:foo) }
+
+        it "sets `default` value" do
+          scoped_cache.default = default_value
+
+          expect(scoped_cache.default).to eq(default_value)
+        end
+
+        it "returns `default` value" do
+          expect(scoped_cache.default = default_value).to eq(default_value)
+        end
+
+        it "saves scoped cached in parent cache" do
+          expect { scoped_cache.default = default_value }.to change { cache.exist?(:foo) }.from(false).to(true)
+        end
+      end
+
+      context "when `cache` includes scoped caches" do
+        let(:cache) { described_class.new }
+
+        before do
+          cache.scope!(:foo).default = :bar
+        end
+
+        it "does NOT set `default` value of included scoped caches" do
+          expect { cache.default = default_value }.not_to change { cache.scope!(:foo).default }.from(:bar)
+        end
+      end
+
+      context "when `cache` has missing key" do
+        let(:cache) { described_class.new }
+
+        before do
+          cache.default = default_value
+        end
+
+        it "modifies `read` to return `default` value" do
+          expect(cache.read(:missing_key)).to eq(default_value)
+        end
+
+        it "modifies `fetch` without block to return `default` value" do
+          expect(cache.fetch(:missing_key)).to eq(default_value)
+        end
+      end
+    end
+
     example_group "comparison" do
       let(:cache) { described_class.new }
 
@@ -564,8 +702,8 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Hash, type: 
           end
         end
 
-        context "when caches have different arrays" do
-          let(:other) { described_class.new(store: [:bar]) }
+        context "when caches have different hashes" do
+          let(:other) { described_class.new(store: {bar: :baz}) }
 
           it "returns `true`" do
             expect(cache == other).to eq(false)

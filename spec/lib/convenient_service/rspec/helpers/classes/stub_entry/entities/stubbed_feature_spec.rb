@@ -88,7 +88,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::Classes::StubEntry::Entities::
         it "modifies method to return stub" do
           stub_entry(feature_class, entry_name).without_arguments.to return_value(:stub_value)
 
-          expect(feature_class.main(*args, **kwargs, &block)).to eq(:stub_value)
+          expect(feature_class.main(*args, **kwargs, &block)).to eq(:main_entry_value)
         end
       end
 
@@ -96,7 +96,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::Classes::StubEntry::Entities::
         it "modifies method to return stub" do
           stub_entry(feature_class, entry_name).without_arguments.to return_value(:stub_value)
 
-          expect(feature_class.main).to eq(:main_entry_value)
+          expect(feature_class.main).to eq(:stub_value)
         end
       end
     end
@@ -117,7 +117,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::Classes::StubEntry::Entities::
       specify do
         expect { helper.to(value_spec) }
           .to delegate_to(ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Commands::SetFeatureStubbedEntry, :call)
-          .with_arguments(feature: feature_class, entry: entry_name, arguments: ConvenientService::Support::Arguments.null_arguments, value: value)
+          .with_arguments(feature: feature_class, entry: entry_name, arguments: nil, value: value)
       end
 
       context "when used with `with_arguments`" do

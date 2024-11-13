@@ -112,7 +112,7 @@ RSpec.describe ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Comma
           it "sets symbol key to cache" do
             command.call(feature: feature, entry: entry, arguments: arguments, value: value)
 
-            expect(feature.stubbed_entries.scope(entry.to_sym, backed_by: :thread_safe_array).read(key)).to eq(value)
+            expect(feature.stubbed_entries.scope(entry.to_sym, backed_by: :thread_safe_array).default).to eq(value)
           end
         end
       end
