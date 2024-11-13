@@ -26,10 +26,13 @@ module ConvenientService
               # @param entry_name [Symbol, String]
               # @return [void]
               #
+              # @internal
+              #   NOTE: `@arguments = nil` means "match any arguments".
+              #
               def initialize(feature_class:, entry_name:)
                 @feature_class = feature_class
                 @entry_name = entry_name
-                @arguments = Support::Arguments.null_arguments
+                @arguments = nil
               end
 
               ##
@@ -37,6 +40,18 @@ module ConvenientService
               #
               def with_arguments(...)
                 @arguments = Support::Arguments.new(...)
+
+                self
+              end
+
+              ##
+              # @return [ConvenientService::RSpec::Helpers::Classes::StubService::Entities::StubService]
+              #
+              # @internal
+              #   NOTE: `@arguments = nil` means "match any arguments".
+              #
+              def with_any_arguments(...)
+                @arguments = nil
 
                 self
               end

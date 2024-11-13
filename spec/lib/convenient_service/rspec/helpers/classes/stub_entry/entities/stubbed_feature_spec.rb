@@ -35,6 +35,28 @@ RSpec.describe ConvenientService::RSpec::Helpers::Classes::StubEntry::Entities::
   let(:value) { value_spec.for(feature_class).calculate_value }
 
   example_group "instance methods" do
+    describe "#with_any_arguments" do
+      it "returns self" do
+        expect(helper.with_any_arguments).to eq(helper)
+      end
+
+      context "when method is called without arguments" do
+        it "modifies method to return stub" do
+          stub_entry(feature_class, entry_name).with_any_arguments.to return_value(:with_any_arguments)
+
+          expect(feature_class.main).to eq(:with_any_arguments)
+        end
+      end
+
+      context "when method is called with arguments" do
+        it "modifies method to return stub" do
+          stub_entry(feature_class, entry_name).with_any_arguments.to return_value(:with_any_arguments)
+
+          expect(feature_class.main(*args, **kwargs, &block)).to eq(:with_any_arguments)
+        end
+      end
+    end
+
     describe "#with_arguments" do
       it "returns self" do
         expect(helper.with_arguments(*args, **kwargs, &block)).to eq(helper)
@@ -42,7 +64,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::Classes::StubEntry::Entities::
 
       context "when method is NOT called with arguments" do
         it "does NOT modify method to return stub" do
-          stub_entry(feature_class, entry_name).with_arguments(*args, **kwargs, &block).to return_value(:stub_value)
+          stub_entry(feature_class, entry_name).with_arguments(*args, **kwargs, &block).to return_value(:with_arguments)
 
           expect(feature_class.main).to eq(:main_entry_value)
         end
@@ -50,9 +72,9 @@ RSpec.describe ConvenientService::RSpec::Helpers::Classes::StubEntry::Entities::
 
       context "when method is called with arguments" do
         it "modifies method to return stub" do
-          stub_entry(feature_class, entry_name).with_arguments(*args, **kwargs, &block).to return_value(:stub_value)
+          stub_entry(feature_class, entry_name).with_arguments(*args, **kwargs, &block).to return_value(:with_arguments)
 
-          expect(feature_class.main(*args, **kwargs, &block)).to eq(:stub_value)
+          expect(feature_class.main(*args, **kwargs, &block)).to eq(:with_arguments)
         end
       end
     end
@@ -74,7 +96,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::Classes::StubEntry::Entities::
         it "modifies method to return stub" do
           stub_entry(feature_class, entry_name).without_arguments.to return_value(:stub_value)
 
-          expect(feature_class.main).to eq(:stub_value)
+          expect(feature_class.main).to eq(:main_entry_value)
         end
       end
     end

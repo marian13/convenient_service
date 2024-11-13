@@ -47,8 +47,15 @@ module ConvenientService
             ##
             # @return [Object] Can be any type.
             #
+            # @internal
+            #   NOTE: `arguments.nil?` means "match any arguments".
+            #
             def call
-              cache.write(key, value)
+              if arguments.nil?
+                cache.default = value
+              else
+                cache.write(cache.keygen(*arguments.args, **arguments.kwargs, &arguments.block), value)
+              end
             end
 
             private
@@ -58,13 +65,6 @@ module ConvenientService
             #
             def cache
               @cache ||= Commands::FetchFeatureStubbedEntriesCache.call(feature: feature).scope(entry.to_sym, backed_by: :thread_safe_array)
-            end
-
-            ##
-            # @return [ConvenientService::Support::Cache::Entities::Key]
-            #
-            def key
-              @key ||= cache.keygen(*arguments.args, **arguments.kwargs, &arguments.block)
             end
           end
         end

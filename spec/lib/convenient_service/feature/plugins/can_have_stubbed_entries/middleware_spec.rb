@@ -104,14 +104,38 @@ RSpec.describe ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Middl
             end
           end
 
+          context "when that one stub with default (any arguments)" do
+            before do
+              stub_entry(feature_class, entry_name)
+                .to return_value(:with_default)
+            end
+
+            it "returns stub with default (any arguments)" do
+              expect(method_value).to eq(:with_default)
+            end
+          end
+
+          context "when that one stub with any arguments" do
+            before do
+              stub_entry(feature_class, entry_name)
+                .with_any_arguments
+                .to return_value(:with_any_arguments)
+            end
+
+            it "returns stub with any arguments" do
+              expect(method_value).to eq(:with_any_arguments)
+            end
+          end
+
           context "when that one stub without arguments" do
             before do
               stub_entry(feature_class, entry_name)
+                .without_arguments
                 .to return_value(:without_arguments)
             end
 
-            it "returns stub without arguments" do
-              expect(method_value).to eq(:without_arguments)
+            it "returns original entry return value" do
+              expect(method_value).to eq(:main_entry_value)
             end
           end
         end
@@ -149,6 +173,37 @@ RSpec.describe ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Middl
             end
           end
 
+          context "when one of them with different arguments and one with default (any arguments)" do
+            before do
+              stub_entry(feature_class, entry_name)
+                .with_arguments(:bar, **kwargs, &block)
+                .to return_value(:different_arguments)
+
+              stub_entry(feature_class, entry_name)
+                .to return_value(:with_default)
+            end
+
+            it "returns stub with any arguments" do
+              expect(method_value).to eq(:with_default)
+            end
+          end
+
+          context "when one of them with different arguments and one with any arguments" do
+            before do
+              stub_entry(feature_class, entry_name)
+                .with_arguments(:bar, **kwargs, &block)
+                .to return_value(:different_arguments)
+
+              stub_entry(feature_class, entry_name)
+                .with_any_arguments
+                .to return_value(:with_any_arguments)
+            end
+
+            it "returns stub with any arguments" do
+              expect(method_value).to eq(:with_any_arguments)
+            end
+          end
+
           context "when one of them with different arguments and one without arguments" do
             before do
               stub_entry(feature_class, entry_name)
@@ -156,11 +211,43 @@ RSpec.describe ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Middl
                 .to return_value(:different_arguments)
 
               stub_entry(feature_class, entry_name)
+                .without_arguments
                 .to return_value(:without_arguments)
             end
 
-            it "returns stub without arguments" do
-              expect(method_value).to eq(:without_arguments)
+            it "returns original entry return value" do
+              expect(method_value).to eq(:main_entry_value)
+            end
+          end
+
+          context "when one of them with same arguments and one with default (any arguments)" do
+            before do
+              stub_entry(feature_class, entry_name)
+                .with_arguments(*args, **kwargs, &block)
+                .to return_value(:same_arguments)
+
+              stub_entry(feature_class, entry_name)
+                .to return_value(:with_default)
+            end
+
+            it "returns stub same arguments" do
+              expect(method_value).to eq(:same_arguments)
+            end
+          end
+
+          context "when one of them with same arguments and one with any arguments" do
+            before do
+              stub_entry(feature_class, entry_name)
+                .with_arguments(*args, **kwargs, &block)
+                .to return_value(:same_arguments)
+
+              stub_entry(feature_class, entry_name)
+                .with_any_arguments
+                .to return_value(:with_any_arguments)
+            end
+
+            it "returns stub same arguments" do
+              expect(method_value).to eq(:same_arguments)
             end
           end
 
@@ -171,6 +258,7 @@ RSpec.describe ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Middl
                 .to return_value(:same_arguments)
 
               stub_entry(feature_class, entry_name)
+                .without_arguments
                 .to return_value(:without_arguments)
             end
 

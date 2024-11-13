@@ -8,13 +8,10 @@ module ConvenientService
           intended_for :trigger, scope: any_scope, entity: :feature
 
           ##
-          # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
+          # @return [Object] Can be any type.
           #
           def next(...)
-            return cache[key_with_arguments] if cache.exist?(key_with_arguments)
-            return cache[key_without_arguments] if cache.exist?(key_without_arguments)
-
-            chain.next(...)
+            cache.read(key) || chain.next(...)
           end
 
           private
@@ -36,15 +33,8 @@ module ConvenientService
           ##
           # @return [ConvenientService::Support::Cache::Entities::Key]
           #
-          def key_with_arguments
-            @key_with_arguments ||= cache.keygen(*next_arguments.args[1..], **next_arguments.kwargs, &next_arguments.block)
-          end
-
-          ##
-          # @return [ConvenientService::Support::Cache::Entities::Key]
-          #
-          def key_without_arguments
-            @key_without_arguments ||= cache.keygen
+          def key
+            @key ||= cache.keygen(*next_arguments.args[1..], **next_arguments.kwargs, &next_arguments.block)
           end
         end
       end
