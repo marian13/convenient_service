@@ -23,6 +23,7 @@ RSpec.configure do |config|
   # config.pattern = "spec/**/*_spec.rb"
 end
 
+require_relative "support/thread_backtraces"
 require_relative "support/convenient_service"
 require_relative "support/faker"
 

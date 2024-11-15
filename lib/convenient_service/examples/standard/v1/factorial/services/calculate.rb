@@ -37,6 +37,8 @@ module ConvenientService
               #   NOTE: What is a Factorial?
               #   - https://en.wikipedia.org/wiki/Factorial
               #
+              #   NOTE: Minimal example: `require "timeout"; ::Timeout.timeout(10) { 1.upto(300_000).reduce(1) { |prev_value, next_value| prev_value * next_value } }`.
+              #
               def calculate_factorial
                 return 1 if [0, 1].include?(number)
 
