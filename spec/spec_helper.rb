@@ -26,6 +26,7 @@ end
 require_relative "support/thread_backtraces"
 require_relative "support/convenient_service"
 require_relative "support/faker"
+require_relative "support/timeout_debug"
 
 ##
 # NOTE: Waits for `should-matchers` full support.

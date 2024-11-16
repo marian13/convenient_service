@@ -53,7 +53,7 @@ RSpec.describe ConvenientService::Examples::Standard::Factorial::Services::Calcu
 
         context "when `timeout` is exceeded" do
           let(:number) { 300_000 }
-          let(:timeout_seconds) { 1 }
+          let(:timeout_seconds) { 2 }
 
           it "returns `error` with `message`" do
             expect(result).to be_error.with_message("Timeout (`#{timeout_seconds}` seconds) is exceeded for `#{number}`").of_service(described_class).without_step

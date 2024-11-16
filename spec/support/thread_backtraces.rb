@@ -18,7 +18,7 @@ puts "RSpec pid: `#{Process.pid}`."
 #   $ docker exec -it <container_id> /bin/sh
 #   # kill -USR1 <rspec_pid>
 #
-puts "Run `kill -USR1 #{Process.pid}` from other terminal (container) session to print all thread backtraces in case RSpec is stuck."
+puts "TIP: Run `kill -USR1 #{Process.pid}` from other terminal (container) session to print all thread backtraces in case RSpec is stuck."
 
 trap "USR1" do
   threads = Thread.list

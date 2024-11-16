@@ -39,6 +39,7 @@ module ConvenientService
             #
             #   `::RSpec.current_example` docs:
             #   - https://www.rubydoc.info/github/rspec/rspec-core/RSpec.current_example
+            #   - https://github.com/rspec/rspec-core/blob/v3.0.0/lib/rspec/core.rb#L103
             #   - https://github.com/rspec/rspec-core/blob/v3.12.0/lib/rspec/core.rb#L122
             #   - https://relishapp.com/rspec/rspec-core/docs/metadata/current-example
             #
