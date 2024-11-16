@@ -30,7 +30,7 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::ThreadSafeAr
         let(:cache) { described_class.new(store: [].freeze) }
 
         it "is NOT mutated" do
-          expect { cache.store }.not_to raise_error(FrozenError)
+          expect { cache.store }.not_to raise_error
         end
       end
 

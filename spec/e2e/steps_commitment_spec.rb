@@ -10,7 +10,7 @@ RSpec.describe "Steps commitment", type: [:standard, :e2e] do
 
   example_group "Service" do
     example_group "class methods" do
-      describe "#new" do
+      describe ".new" do
         context "when service steps are NOT committed" do
           let(:service) do
             Class.new do
