@@ -32,8 +32,15 @@ RSpec.describe ConvenientService::Core::Entities::Config::Commands::CreateEntity
         let(:sub_entity_class) { described_class.call(config: config, name: name) }
         let(:overriden_sub_entity_class) { described_class.call(config: config, name: name) }
 
+        ##
+        # NOTE: The silenced warnings are intentional. If the command is called multiple times, it intentionally redefines the constant. Check the source for more info.
+        #   /gem/lib/convenient_service/core/entities/config/commands/create_entity_class.rb:42: warning: already initialized constant #<Class:0x00007f750f8cbeb0>::Result
+        #   /gem/lib/convenient_service/core/entities/config/commands/create_entity_class.rb:42: warning: previous definition of Result was here
+        #
         it "overrides previous set sub entity class" do
-          expect(sub_entity_class.object_id).not_to eq(overriden_sub_entity_class.object_id)
+          ConvenientService::Utils::Kernel.silence_warnings do
+            expect(sub_entity_class.object_id).not_to eq(overriden_sub_entity_class.object_id)
+          end
         end
       end
 
