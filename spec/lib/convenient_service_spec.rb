@@ -54,6 +54,12 @@ RSpec.describe ConvenientService, type: :standard do
       end
     end
 
+    describe ".lib_root" do
+      it "returns Convenient Service lib folder" do
+        expect(described_class.lib_root).to eq(Pathname.new(File.join(Dir.pwd, "lib")))
+      end
+    end
+
     describe ".examples_root" do
       it "returns Convenient Service Examples root folder" do
         expect(described_class.examples_root).to eq(Pathname.new(File.join(Dir.pwd, "lib", "convenient_service", "examples")))

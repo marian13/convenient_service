@@ -88,6 +88,18 @@ module ConvenientService
     end
 
     ##
+    # Returns Convenient Service lib folder.
+    # For example, it may return something like: `/Users/user/.asdf/installs/ruby/2.7.0/lib/ruby/gems/2.7.0/gems/convenient_service-0.16.0/lib`.
+    #
+    # @api private
+    #
+    # @return [Pathname]
+    #
+    def lib_root
+      @lib_root ||= ::Pathname.new(::File.join(root, "lib"))
+    end
+
+    ##
     # Returns Convenient Service Examples folder.
     # For example, it may return something like: `/Users/user/.asdf/installs/ruby/2.7.0/lib/ruby/gems/2.7.0/gems/convenient_service-0.16.0/lib/convenient_service/examples`.
     #
