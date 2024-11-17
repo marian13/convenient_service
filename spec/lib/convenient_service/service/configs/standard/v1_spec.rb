@@ -62,6 +62,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
             [
               ConvenientService::Service::Plugins::CollectsServicesInException::Middleware,
               ConvenientService::Common::Plugins::CachesConstructorArguments::Middleware,
+              ConvenientService::Common::Plugins::CleansExceptionBacktrace::Middleware,
               ConvenientService::Service::Plugins::CanHaveSteps::Middleware,
               ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Middleware
             ]
@@ -118,6 +119,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
               ConvenientService::Common::Plugins::CanHaveCallbacks::Middleware,
               ConvenientService::Service::Plugins::SetsParentToForeignResult::Middleware,
               ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Middleware,
+              ConvenientService::Common::Plugins::CleansExceptionBacktrace::Middleware,
               ConvenientService::Service::Plugins::CanHaveSequentialSteps::Middleware
 
               ##
@@ -162,7 +164,8 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
               ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
               ConvenientService::Service::Plugins::CollectsServicesInException::Middleware,
               ConvenientService::Common::Plugins::EnsuresNegatedJSendResult::Middleware,
-              ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Middleware
+              ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Middleware,
+              ConvenientService::Common::Plugins::CleansExceptionBacktrace::Middleware
             ]
           end
 
@@ -576,7 +579,35 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
       # https://github.com/marian13/convenient_service/discussions/43
       #
       it "applies its `included` block only once" do
-        expect(service_class.middlewares(:result).to_a.size).to eq(8)
+        expect(service_class.middlewares(:result).to_a.size).to eq(9)
+      end
+    end
+  end
+
+  example_group "class methods" do
+    describe ".default_options" do
+      context "when `RSpec` is loaded" do
+        let(:default_options) do
+          Set[
+            :essential,
+            :callbacks,
+            :inspect,
+            :recalculation,
+            :result_parents_trace,
+            :code_review_automation,
+            :short_syntax,
+            :type_safety,
+            :exception_services_trace,
+            :per_instance_caching,
+            :mermaid_flowchart,
+            :backtrace_cleaner,
+            :rspec
+          ]
+        end
+
+        it "returns default options with `:rspec`" do
+          expect(described_class.default_options).to eq(default_options)
+        end
       end
     end
   end
@@ -746,8 +777,8 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :rails d
           end
 
           example_group "#result middlewares" do
-            it "adds `ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingActiveModelValidations::Middleware` after `ConvenientService::Plugins::Service::RaisesOnNotResultReturnValue::Middleware` to service middlewares for `#result`" do
-              expect(service_class.middlewares(:result).to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Plugins::Service::RaisesOnNotResultReturnValue::Middleware && current_middleware == ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingActiveModelValidations::Middleware.with(status: :failure) }).not_to be_nil
+            it "adds `ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingActiveModelValidations::Middleware` after `ConvenientService::Plugins::Common::CleansExceptionBacktrace::Middleware` to service middlewares for `#result`" do
+              expect(service_class.middlewares(:result).to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Plugins::Common::CleansExceptionBacktrace::Middleware && current_middleware == ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingActiveModelValidations::Middleware.with(status: :failure) }).not_to be_nil
             end
           end
         end

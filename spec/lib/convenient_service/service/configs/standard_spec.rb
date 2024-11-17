@@ -67,6 +67,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
             [
               ConvenientService::Service::Plugins::CollectsServicesInException::Middleware,
               ConvenientService::Common::Plugins::CachesConstructorArguments::Middleware,
+              ConvenientService::Common::Plugins::CleansExceptionBacktrace::Middleware,
               ConvenientService::Service::Plugins::CanHaveSteps::Middleware,
               ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Middleware
             ]
@@ -123,6 +124,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
               ConvenientService::Common::Plugins::CanHaveCallbacks::Middleware,
               ConvenientService::Service::Plugins::SetsParentToForeignResult::Middleware,
               ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Middleware,
+              ConvenientService::Common::Plugins::CleansExceptionBacktrace::Middleware,
               ConvenientService::Service::Plugins::CanHaveConnectedSteps::Middleware
 
               ##
@@ -167,6 +169,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
               ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
               ConvenientService::Service::Plugins::CollectsServicesInException::Middleware,
               ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Middleware,
+              ConvenientService::Common::Plugins::CleansExceptionBacktrace::Middleware,
               ConvenientService::Service::Plugins::CanHaveFallbacks::Middleware.with(status: :failure)
             ]
           end
@@ -182,6 +185,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
               ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
               ConvenientService::Service::Plugins::CollectsServicesInException::Middleware,
               ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Middleware,
+              ConvenientService::Common::Plugins::CleansExceptionBacktrace::Middleware,
               ConvenientService::Service::Plugins::CanHaveFallbacks::Middleware.with(status: :error)
             ]
           end
@@ -197,6 +201,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
               ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
               ConvenientService::Service::Plugins::CollectsServicesInException::Middleware,
               ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Middleware,
+              ConvenientService::Common::Plugins::CleansExceptionBacktrace::Middleware,
               ConvenientService::Service::Plugins::CanHaveFallbacks::Middleware.with(status: nil)
             ]
           end
@@ -212,7 +217,8 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
               ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
               ConvenientService::Service::Plugins::CollectsServicesInException::Middleware,
               ConvenientService::Common::Plugins::EnsuresNegatedJSendResult::Middleware,
-              ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Middleware
+              ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Middleware,
+              ConvenientService::Common::Plugins::CleansExceptionBacktrace::Middleware
             ]
           end
 
@@ -684,7 +690,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
       # - https://github.com/marian13/convenient_service/discussions/43
       #
       it "applies its `included` block only once" do
-        expect(service_class.middlewares(:result).to_a.size).to eq(8)
+        expect(service_class.middlewares(:result).to_a.size).to eq(9)
       end
     end
   end
@@ -716,6 +722,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
             :exception_services_trace,
             :per_instance_caching,
             :mermaid_flowchart,
+            :backtrace_cleaner,
             :rspec
           ]
         end
@@ -932,8 +939,8 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :rails do
           end
 
           example_group "#result middlewares" do
-            it "adds `ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingActiveModelValidations::Middleware` after `ConvenientService::Plugins::Service::RaisesOnNotResultReturnValue::Middleware` to service middlewares for `#result`" do
-              expect(service_class.middlewares(:result).to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Plugins::Service::RaisesOnNotResultReturnValue::Middleware && current_middleware == ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingActiveModelValidations::Middleware }).not_to be_nil
+            it "adds `ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingActiveModelValidations::Middleware` after `ConvenientService::Plugins::Common::CleansExceptionBacktrace::Middleware` to service middlewares for `#result`" do
+              expect(service_class.middlewares(:result).to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Plugins::Common::CleansExceptionBacktrace::Middleware && current_middleware == ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingActiveModelValidations::Middleware }).not_to be_nil
             end
           end
         end

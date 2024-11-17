@@ -23,6 +23,7 @@ module ConvenientService
               :exception_services_trace,
               :per_instance_caching,
               :mermaid_flowchart,
+              :backtrace_cleaner,
               rspec: Dependencies.rspec.loaded?
             ]
           end

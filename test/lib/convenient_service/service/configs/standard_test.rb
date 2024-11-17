@@ -25,7 +25,8 @@ class ConvenientService::Service::Configs::StandardTest < Minitest::Test
             :type_safety,
             :exception_services_trace,
             :per_instance_caching,
-            :mermaid_flowchart
+            :mermaid_flowchart,
+            :backtrace_cleaner
           ]
 
           assert_equal(default_options, ConvenientService::Service::Configs::Standard.default_options)

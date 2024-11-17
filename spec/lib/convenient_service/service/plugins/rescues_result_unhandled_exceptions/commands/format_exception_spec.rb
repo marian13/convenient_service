@@ -96,7 +96,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
             include ConvenientService::Standard::Config
 
             def result
-              raise StandardError, "exception message", caller.take(5)
+              raise StandardError, "exception message", caller.take(5).map { |line| line.prepend("/end_user/") }
             end
           end
         end
@@ -120,7 +120,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
             include ConvenientService::Standard::Config
 
             def result
-              raise StandardError, "exception message", caller + ["# /line.rb:1:in `foo'"] * 5
+              raise StandardError, "exception message", caller.map { |line| line.prepend("/end_user/") } + ["# /line.rb:1:in `foo'"] * 5
             end
           end
         end
@@ -145,7 +145,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
             include ConvenientService::Standard::Config
 
             def result
-              raise StandardError, nil, caller
+              raise StandardError, nil, caller.map { |line| line.prepend("/end_user/") }
             end
           end
         end
@@ -179,7 +179,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
                 exception message second line
               TEXT
 
-              raise StandardError, message, caller
+              raise StandardError, message, caller.map { |line| line.prepend("/end_user/") }
             end
           end
         end
@@ -238,7 +238,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
             include ConvenientService::Standard::Config
 
             def result
-              raise StandardError, "exception message", caller + ["# /line.rb:1:in `foo'"] * 10
+              raise StandardError, "exception message", caller.map { |line| line.prepend("/end_user/") } + ["# /line.rb:1:in `foo'"] * 10
             end
           end
         end
