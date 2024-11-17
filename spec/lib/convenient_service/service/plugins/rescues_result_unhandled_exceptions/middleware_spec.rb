@@ -103,7 +103,10 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
                   end
 
                   def result
-                    raise StandardError, "exception message", caller.take(5)
+                    ##
+                    # NOTE: `/end_user/` is added to avoid backtrace filtering.
+                    #
+                    raise StandardError, "exception message", caller.take(5).map { |line| line.prepend("/end_user/") }
                   end
                 end
               end
@@ -135,7 +138,10 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
                   end
 
                   def result
-                    raise StandardError, "exception message", caller.take(5)
+                    ##
+                    # NOTE: `/end_user/` is added to avoid backtrace filtering.
+                    #
+                    raise StandardError, "exception message", caller.take(5).map { |line| line.prepend("/end_user/") }
                   end
                 end
               end
@@ -213,7 +219,10 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
                   end
 
                   def result
-                    raise StandardError, "exception message", caller.take(5)
+                    ##
+                    # NOTE: `/end_user/` is added to avoid backtrace filtering.
+                    #
+                    raise StandardError, "exception message", caller.take(5).map { |line| line.prepend("/end_user/") }
                   end
                 end
               end
@@ -300,7 +309,10 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
                     end
 
                     define_method(method_name) do
-                      raise StandardError, "exception message", caller.take(5)
+                      ##
+                      # NOTE: `/end_user/` is added to avoid backtrace filtering.
+                      #
+                      raise StandardError, "exception message", caller.take(5).map { |line| line.prepend("/end_user/") }
                     end
                   end
                 end
@@ -328,7 +340,10 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
                     end
 
                     define_method(method_name) do
-                      raise StandardError, "exception message", caller.take(5)
+                      ##
+                      # NOTE: `/end_user/` is added to avoid backtrace filtering.
+                      #
+                      raise StandardError, "exception message", caller.take(5).map { |line| line.prepend("/end_user/") }
                     end
                   end
                 end
@@ -402,7 +417,10 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
                     end
 
                     define_method(method_name) do
-                      raise StandardError, "exception message", caller.take(5)
+                      ##
+                      # NOTE: `/end_user/` is added to avoid backtrace filtering.
+                      #
+                      raise StandardError, "exception message", caller.take(5).map { |line| line.prepend("/end_user/") }
                     end
                   end
                 end
