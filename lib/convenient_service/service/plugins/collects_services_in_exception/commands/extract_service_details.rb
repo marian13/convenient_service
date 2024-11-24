@@ -38,23 +38,23 @@ module ConvenientService
             # @return [Hash{Symbol => Object}]
             #
             # @internal
-            #   PARANOID: `unless first_not_completed_step` is a paranoid code (probably `ConvenientService` bug).
+            #   PARANOID: `unless first_not_evaluated_step` is a paranoid code (probably `ConvenientService` bug).
             #   - https://encyclopedia2.thefreedictionary.com/paranoid+programming
             #   - https://dzone.com/articles/defensive-programming-just
             #
             def trigger
               return {method: ":#{method}"} if method != :result
               return {method: ":result"} if service.steps.none?
-              return {step: "Unknown Step", index: -1} unless first_not_completed_step
+              return {step: "Unknown Step", index: -1} unless first_not_evaluated_step
 
-              {step: first_not_completed_step.printable_action, index: first_not_completed_step.index}
+              {step: first_not_evaluated_step.printable_action, index: first_not_evaluated_step.index}
             end
 
             ##
             # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step, nil]
             #
-            def first_not_completed_step
-              Utils.memoize_including_falsy_values(self, :@first_not_completed_step) { service.steps.find(&:not_evaluated?) }
+            def first_not_evaluated_step
+              Utils.memoize_including_falsy_values(self, :@first_not_evaluated_step) { service.steps.find(&:not_evaluated?) }
             end
           end
         end

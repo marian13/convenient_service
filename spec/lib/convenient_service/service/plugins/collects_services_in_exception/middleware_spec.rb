@@ -23,6 +23,9 @@ RSpec.describe ConvenientService::Service::Plugins::CollectsServicesInException:
           intended_for [
             :initialize,
             :result,
+            :negated_result,
+            :fallback_failure_result,
+            :fallback_error_result,
             :fallback_result
           ],
             entity: :service
