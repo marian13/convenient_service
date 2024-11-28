@@ -639,7 +639,7 @@ RSpec.describe "Exception services trace", type: [:standard, :e2e] do
     ##
     # FIX: Allow to use middlewares for `fallback_result` when called via `fallback: true`.
     #
-    xcontext "fallback failure result from service step" do
+    example_group "fallback failure result from service step" do
       let(:service_instance) { service_class.new }
 
       context "when fallback failure result raises exception" do
@@ -720,7 +720,7 @@ RSpec.describe "Exception services trace", type: [:standard, :e2e] do
       end
     end
 
-    xcontext "fallback error result from service step" do
+    example_group "fallback error result from service step" do
       let(:service_instance) { service_class.new }
 
       context "when fallback error result raises exception" do
@@ -769,7 +769,7 @@ RSpec.describe "Exception services trace", type: [:standard, :e2e] do
             klass.class_exec(service_step) do |service_step|
               include ConvenientService::Standard::Config
 
-              step service_step, fallback: true
+              step service_step, fallback: :error
             end
           end
         end
@@ -801,7 +801,7 @@ RSpec.describe "Exception services trace", type: [:standard, :e2e] do
       end
     end
 
-    xcontext "fallback result from service step" do
+    example_group "fallback result from service step" do
       let(:service_instance) { service_class.new }
 
       context "when fallback result raises exception" do
@@ -874,7 +874,7 @@ RSpec.describe "Exception services trace", type: [:standard, :e2e] do
         # rubocop:disable RSpec/MultipleExpectations
         it "does NOT add service details to exception cause" do
           expect { service_instance.result }.to raise_error(StandardError) do |exception|
-            expect(exception.cause.message).to eq("exception from service step")
+            expect(exception.cause.message).to eq("exception from fallback result from service step")
             expect(exception.cause).not_to respond_to(:services)
           end
         end

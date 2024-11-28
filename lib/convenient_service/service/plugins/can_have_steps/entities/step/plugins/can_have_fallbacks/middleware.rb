@@ -70,44 +70,34 @@ module ConvenientService
                   end
 
                   ##
+                  # @param args [Array<Object>]
+                  # @param kwargs [Hash{Symbol => Object}]
+                  # @param block [Proc, nil]
                   # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
                   # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallbacks::Exceptions::FallbackResultIsNotOverridden, ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallbacks::Exceptions::MethodStepCanNotHaveFallback]
                   #
-                  def fallback_failure_result
+                  def fallback_failure_result(*args, **kwargs, &block)
                     refute_method_step!
 
-                    fallback_failure_result_own_method&.call || fallback_result_own_method&.call || ::ConvenientService.raise(Exceptions::FallbackResultIsNotOverridden.new(step: step, service: service, status: :failure))
+                    return service.__send__(:fallback_failure_result, *args, **kwargs, &block) if Utils::Module.has_own_instance_method?(service_class, :fallback_failure_result, private: true)
+
+                    return service.__send__(:fallback_result, *args, **kwargs, &block) if Utils::Module.has_own_instance_method?(service_class, :fallback_result, private: true)
+
+                    ::ConvenientService.raise(Exceptions::FallbackResultIsNotOverridden.new(step: step, service: service, status: :failure))
                   end
 
                   ##
                   # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
                   # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallbacks::Exceptions::FallbackResultIsNotOverridden, ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallbacks::Exceptions::MethodStepCanNotHaveFallback]
                   #
-                  def fallback_error_result
+                  def fallback_error_result(*args, **kwargs, &block)
                     refute_method_step!
 
-                    fallback_error_result_own_method&.call || fallback_result_own_method&.call || ::ConvenientService.raise(Exceptions::FallbackResultIsNotOverridden.new(step: step, service: service, status: :error))
-                  end
+                    return service.__send__(:fallback_error_result, *args, **kwargs, &block) if Utils::Module.has_own_instance_method?(service_class, :fallback_error_result, private: true)
 
-                  ##
-                  # @return [Method, nil]
-                  #
-                  def fallback_failure_result_own_method
-                    Utils::Object.own_method(service, :fallback_failure_result, private: true)
-                  end
+                    return service.__send__(:fallback_result, *args, **kwargs, &block) if Utils::Module.has_own_instance_method?(service_class, :fallback_result, private: true)
 
-                  ##
-                  # @return [Method, nil]
-                  #
-                  def fallback_error_result_own_method
-                    Utils::Object.own_method(service, :fallback_error_result, private: true)
-                  end
-
-                  ##
-                  # @return [Method, nil]
-                  #
-                  def fallback_result_own_method
-                    Utils::Object.own_method(service, :fallback_result, private: true)
+                    ::ConvenientService.raise(Exceptions::FallbackResultIsNotOverridden.new(step: step, service: service, status: :error))
                   end
 
                   ##
@@ -117,7 +107,14 @@ module ConvenientService
                   #   IMPORTANT: `step.service_class.new(**input_values)` is the reason, why services should have only kwargs as arguments.
                   #
                   def service
-                    @service ||= step.service_class.new(**step.input_values)
+                    @service ||= service_class.new(**step.input_values)
+                  end
+
+                  ##
+                  # @return [Class<ConvenientService::Service>]
+                  #
+                  def service_class
+                    step.service_class
                   end
 
                   ##

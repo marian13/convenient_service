@@ -37,9 +37,6 @@ module ConvenientService
           # @param service [ConvenientService::Service]
           # @return [void]
           #
-          # @internal
-          #   TODO: Compare what is faster `respond_to?` or `own_method`.
-          #
           def rollback_service(service)
             Utils::Object.safe_send(service, :rollback_result)
           end
