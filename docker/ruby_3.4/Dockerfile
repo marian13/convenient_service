@@ -1,34 +1,4 @@
 ##
-# Kindly copied from `timbru31/docker-ruby-node`, but replaced `FROM`.
-# - https://github.com/timbru31/docker-ruby-node/blob/master/3.3/18/slim/Dockerfile
-#
-FROM ruby:3.4.0-preview2-slim
-LABEL maintainer "Tim Brust <github@timbrust.de>"
-
-ARG REFRESHED_AT
-ENV REFRESHED_AT $REFRESHED_AT
-ARG NODE_MAJOR=18
-
-# hadolint ignore=DL3009
-RUN apt-get update -qq && apt-get install -qq --no-install-recommends \
-    curl \
-    gnupg2 \
-    libatomic1
-
-SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-
-RUN printf 'Package: nodejs\nPin: origin deb.nodesource.com\nPin-Priority: 1001' > /etc/apt/preferences.d/nodesource \
-  && mkdir -p /etc/apt/keyrings \
-  && curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg \
-  && echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list \
-  && apt-get update -qq && apt-get install -qq --no-install-recommends \
-    nodejs \
-  && apt-get upgrade -qq \
-  && apt-get clean \
-  && rm -rf /var/lib/apt/lists/*\
-  && npm install -g yarn@1
-
-##
 # Ruby 3.4 with Node.js 18.x.
 #
 # NOTE: Linted by hadolint.
@@ -52,11 +22,14 @@ RUN printf 'Package: nodejs\nPin: origin deb.nodesource.com\nPin-Priority: 1001'
 # In a general case, you simply won't have enough time to resolve all the "quirks" of more specific distributions if you are an application developer.
 # That is why a `slim` version is used instead of `alpine`.
 # Also `slim` is more similar to Ubuntu.
+# - https://github.com/timbru31/docker-ruby-node/tree/master/ruby-3.4/18
 # - https://medium.com/swlh/alpine-slim-stretch-buster-jessie-bullseye-bookworm-what-are-the-differences-in-docker-62171ed4531d
+# - https://hub.docker.com/r/timbru31/ruby-node/tags
 #
 # NOTE: Hydrogen means Node.js 18.x.
 # https://github.com/nodejs/Release
-##
+#
+FROM timbru31/ruby-node:3.4-slim-hydrogen
 
 ##
 # NOTE: `bundle install` dependencies.

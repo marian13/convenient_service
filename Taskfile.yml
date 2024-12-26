@@ -133,6 +133,7 @@ tasks:
   #   task docker:bash RUBY_ENGINE=ruby RUBY_ENGINE_VERSION=3.1
   #   task docker:bash RUBY_ENGINE=ruby RUBY_ENGINE_VERSION=3.2
   #   task docker:bash RUBY_ENGINE=ruby RUBY_ENGINE_VERSION=3.3
+  #   task docker:bash RUBY_ENGINE=ruby RUBY_ENGINE_VERSION=3.4
   #   task docker:bash RUBY_ENGINE=jruby RUBY_ENGINE_VERSION=9.4
   #   task docker:bash RUBY_ENGINE=truffleruby RUBY_ENGINE_VERSION=22.3
   #
@@ -161,6 +162,7 @@ tasks:
   #   RUBY_ENGINE=ruby RUBY_ENGINE_VERSION=3.1 task docker:build
   #   RUBY_ENGINE=ruby RUBY_ENGINE_VERSION=3.2 task docker:build
   #   RUBY_ENGINE=ruby RUBY_ENGINE_VERSION=3.3 task docker:build
+  #   RUBY_ENGINE=ruby RUBY_ENGINE_VERSION=3.4 task docker:build
   #   RUBY_ENGINE=jruby RUBY_ENGINE_VERSION=9.4 task docker:build
   #   RUBY_ENGINE=truffleruby RUBY_ENGINE_VERSION=22.3 task docker:build
   #
@@ -513,7 +515,7 @@ tasks:
       - task: rspec
       - task: rspec
         vars:
-          APPRAISAL: rails_7.2
+          APPRAISAL: rails_8.0
       - task: rspec
         vars:
           APPRAISAL: dry
@@ -525,7 +527,7 @@ tasks:
           APPRAISAL: amazing_print
       - task: rspec
         vars:
-          APPRAISAL: rails_8.0
+          APPRAISAL: rails_7.2
       - task: rspec
         vars:
           APPRAISAL: rails_7.1

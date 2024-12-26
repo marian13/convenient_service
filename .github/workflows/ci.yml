@@ -60,7 +60,7 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.3
+          ruby-version: 3.4
           ##
           # NOTE: Installs the latest compatible Bundler version, runs `bundle install` and caches installed gems.
           # - https://github.com/ruby/setup-ruby#usage
@@ -106,7 +106,7 @@ jobs:
           - 3.1
           - 3.2
           - 3.3
-          - "3.4.0-preview2"
+          - 3.4
           ##
           # NOTE: JRuby 9.4 aims CRuby 3.1 compatibility.
           # - https://www.jruby.org/download
@@ -150,16 +150,16 @@ jobs:
         run: task rspec
       - name: Install dependencies for appraisals
         run: task deps:install
-      - name: Run RSpec with Rails 7.2
-        run: APPRAISAL=rails_7.2 task rspec
+      - name: Run RSpec with Rails 8.0
+        run: APPRAISAL=rails_8.0 task rspec
       - name: Run RSpec with Dry
         run: APPRAISAL=dry task rspec
       - name: Run RSpec with Awesome Print
         run: APPRAISAL=awesome_print task rspec
       - name: Run RSpec with Amazing Print
         run: APPRAISAL=amazing_print task rspec
-      - name: Run RSpec with Rails 8.0
-        run: APPRAISAL=rails_8.0 task rspec
+      - name: Run RSpec with Rails 7.2
+        run: APPRAISAL=rails_7.2 task rspec
       - name: Run RSpec with Rails 7.1
         run: APPRAISAL=rails_7.1 task rspec
       - name: Run RSpec with Rails 7.0
