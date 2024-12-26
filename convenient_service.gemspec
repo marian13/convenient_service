@@ -222,6 +222,15 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "pry", "~> 0.14.2"
 
   ##
+  # Used internally by Yard.
+  # - https://github.com/rack/rackup
+  # - https://github.com/lsegal/yard/blob/v0.9.37/lib/yard/server/rack_adapter.rb#L6
+  #
+  if ConvenientService::Dependencies.ruby.version >= 3.4
+    spec.add_development_dependency "rackup", "~> 2.2.1"
+  end
+
+  ##
   # Used as Ruby task runner.
   # - https://github.com/ruby/rake
   #
@@ -331,13 +340,13 @@ Gem::Specification.new do |spec|
   # - https://github.com/lsegal/yard
   # - https://yardoc.org
   #
-  spec.add_development_dependency "yard", "~> 0.9.34"
+  spec.add_development_dependency "yard", "~> 0.9.37"
 
   ##
   # Used for linting YARD docs.
   # - https://github.com/zverok/yard-junk
   #
-  spec.add_development_dependency "yard-junk", "~> 0.0.9"
+  spec.add_development_dependency "yard-junk", "~> 0.0.10"
 
   ##
   # The following gems are Convenient Service alternatives.
