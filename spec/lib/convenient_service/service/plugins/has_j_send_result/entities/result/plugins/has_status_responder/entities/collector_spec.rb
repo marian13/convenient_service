@@ -230,6 +230,12 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
             .with_arguments(collector)
         end
 
+        specify do
+          expect { collector.handle }
+            .to delegate_to(result, :success?)
+            .with_arguments(mark_as_checked: true)
+        end
+
         context "when unexpected handler is NOT set" do
           it "returns `nil`" do
             expect(collector.handle).to be_nil
@@ -260,6 +266,12 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           expect { collector.handle }
             .to delegate_to(block, :call)
             .with_arguments(collector)
+        end
+
+        specify do
+          expect { collector.handle }
+            .to delegate_to(result, :success?)
+            .with_arguments(mark_as_checked: true)
         end
 
         context "when NO handlers matched" do

@@ -126,6 +126,8 @@ module ConvenientService
                     def handle
                       block.call(self)
 
+                      result.success?(mark_as_checked: true)
+
                       return matched_handler.handle if matched_handler
                       return unexpected_handler.handle if unexpected_handler
 
