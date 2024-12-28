@@ -108,7 +108,7 @@ module ConvenientService
                     def #{name}
                       return internals.cache.scope(:step_output_values).read(:#{name}) if internals.cache.scope(:step_output_values).exist?(:#{name})
 
-                      return #{name_before_out_redefinition} if respond_to?(:#{name_before_out_redefinition})
+                      return #{name_before_out_redefinition} if respond_to?(:#{name_before_out_redefinition}, true)
 
                       ::ConvenientService.raise ::ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::OutMethodStepIsNotCompleted.new(method_name: :#{name})
                     end
