@@ -273,6 +273,21 @@ module ConvenientService
       # @return [Boolean]
       # @note Expected to be called from app entry points like `initializers` in Rails.
       #
+      def require_memo_wise_standard_config_option
+        ##
+        # - https://github.com/awesome-print/awesome_print
+        #
+        require "memo_wise"
+
+        require_has_memoization_using_memo_wise_plugin
+      end
+
+      ##
+      # @api public
+      #
+      # @return [Boolean]
+      # @note Expected to be called from app entry points like `initializers` in Rails.
+      #
       # @see https://userdocs.convenientservice.org/troubleshooting/i18n_translate_wrong_number_of_arguments
       #
       def require_has_j_send_result_params_validations_using_active_model_validations_plugin
@@ -300,6 +315,15 @@ module ConvenientService
         require "dry-validation"
 
         require "convenient_service/service/plugins/has_j_send_result_params_validations/using_dry_validation"
+      end
+
+      def require_has_memoization_using_memo_wise_plugin
+        ##
+        # - https://github.com/panorama-ed/memo_wise
+        #
+        require "memo_wise"
+
+        require "convenient_service/common/plugins/has_memoization/using_memo_wise"
       end
 
       ##

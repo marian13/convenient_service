@@ -1,0 +1,5 @@
+# frozen_string_literal: true
+
+ConvenientService::Dependencies.require_development_tools
+
+ConvenientService::Dependencies.require_memo_wise_standard_config_option

@@ -4,12 +4,12 @@ require "spec_helper"
 
 require "convenient_service"
 
-return unless defined? ConvenientService::Common::Plugins::AssignsAttributesInConstructor::UsingDryInitializer
+return unless defined? ConvenientService::Common::Plugins::HasMemoization::UsingMemoWise
 
-RSpec.describe ConvenientService::Common::Plugins::AssignsAttributesInConstructor::UsingDryInitializer::Concern, type: :dry do
+RSpec.describe ConvenientService::Common::Plugins::HasMemoization::UsingMemoWise::Concern, type: :memo_wise do
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
-    include ConvenientService::RSpec::PrimitiveMatchers::ExtendModule
+    include ConvenientService::RSpec::PrimitiveMatchers::PrependModule
 
     subject { described_class }
 
@@ -26,7 +26,7 @@ RSpec.describe ConvenientService::Common::Plugins::AssignsAttributesInConstructo
         end
       end
 
-      it { is_expected.to extend_module(Dry::Initializer) }
+      it { is_expected.to prepend_module(MemoWise) }
     end
   end
 end

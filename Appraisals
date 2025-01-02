@@ -149,6 +149,10 @@ appraise "awesome_print" do
   gem "awesome_print", "~> 1.9.2"
 end
 
+appraise "memo_wise" do
+  gem "memo_wise", "~> 1.0.0"
+end
+
 ##
 # NOTE: A combination of all the highest versions of gems. Just for quick hacking in `APPRAISAL=all task console`.
 # IMPORTANT: Should not be enforced in CI, since integrity checks between external gems are not the goal of this library (at least for now).

@@ -62,6 +62,9 @@ tasks:
   ##
   # NOTE: Usage examples.
   #   APPRAISAL=all task console
+  #   APPRAISAL=amazing_print task console
+  #   APPRAISAL=awesome_print task console
+  #   APPRAISAL=memo_wise task console
   #   APPRAISAL=dry task console
   #   APPRAISAL=rails_5.2 task console
   #   APPRAISAL=rails_6.0 task console
@@ -435,6 +438,9 @@ tasks:
   ##
   # NOTE: Usage examples.
   #   APPRAISAL=all task playground
+  #   APPRAISAL=amazing_print task playground
+  #   APPRAISAL=awesome_print task playground
+  #   APPRAISAL=memo_wise task playground
   #   APPRAISAL=dry task playground
   #   APPRAISAL=rails_5.2 task playground
   #   APPRAISAL=rails_6.0 task playground
@@ -474,6 +480,9 @@ tasks:
   # NOTE: Usage examples.
   #   task rspec
   #   APPRAISAL=all task rspec
+  #   APPRAISAL=amazing_print task rspec
+  #   APPRAISAL=awesome_print task rspec
+  #   APPRAISAL=memo_wise task rspec
   #   APPRAISAL=dry task rspec
   #   APPRAISAL=rails_5.2 task rspec
   #   APPRAISAL=rails_6.0 task rspec
@@ -502,7 +511,7 @@ tasks:
       - "{{.BUNDLE_EXEC_PREFIX}} rspec --profile --color --format progress {{.REQUIRE_SUFFIX}} {{.GIT_STAGED_RSPEC_FILES}} {{.CLI_ARGS}}"
     vars:
       REQUIRE_SUFFIX:
-        sh: ruby -e 'puts case "{{.APPRAISAL}}" when /rails/ then "--require rails_helper" when /dry/ then "--require dry_helper" when /amazing_print/ then "--require amazing_print_helper" when /awesome_print/ then "--require awesome_print_helper" else "--require standard_helper" end'
+        sh: ruby -e 'puts case "{{.APPRAISAL}}" when /rails/ then "--require rails_helper" when /dry/ then "--require dry_helper" when /amazing_print/ then "--require amazing_print_helper" when /awesome_print/ then "--require awesome_print_helper" when /memo_wise/ then "--require memo_wise_helper" else "--require standard_helper" end'
       GIT_STAGED_RSPEC_FILES:
         sh: ruby -e 'puts `task git:staged:rspec --silent` if "{{.STAGED}}" == "true"'
       BUNDLE_EXEC_PREFIX: *BUNDLE_EXEC_PREFIX
@@ -525,6 +534,9 @@ tasks:
       - task: rspec
         vars:
           APPRAISAL: amazing_print
+      - task: rspec
+        vars:
+          APPRAISAL: memo_wise
       - task: rspec
         vars:
           APPRAISAL: rails_7.2

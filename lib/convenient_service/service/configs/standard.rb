@@ -32,6 +32,8 @@ module ConvenientService
             :mermaid_flowchart,
             :backtrace_cleaner,
             # active_model_validations,
+            # dry_initializer,
+            # memo_wise,
             rspec: Dependencies.rspec.loaded?
           ]
         end
@@ -72,6 +74,7 @@ module ConvenientService
             use ConvenientService::Plugins::Service::HasJSendResultStatusCheckShortSyntax::Concern if options.include?(:short_syntax)
             use ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingActiveModelValidations::Concern if options.include?(:active_model_validations)
             use ConvenientService::Plugins::Common::AssignsAttributesInConstructor::UsingDryInitializer::Concern if options.include?(:dry_initializer)
+            use ConvenientService::Plugins::Common::HasMemoization::UsingMemoWise::Concern if options.include?(:memo_wise)
             use ConvenientService::Plugins::Service::HasMermaidFlowchart::Concern if options.include?(:mermaid_flowchart)
           end
 

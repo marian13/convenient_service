@@ -972,4 +972,28 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :dry do
     end
   end
 end
+
+RSpec.describe ConvenientService::Service::Configs::Standard, type: :memo_wise do
+  example_group "modules" do
+    context "when included" do
+      context "when `:memo_wise` option is passed" do
+        let(:service_class) do
+          Class.new.tap do |klass|
+            klass.class_exec(described_class) do |mod|
+              include mod.with(:memo_wise)
+            end
+          end
+        end
+
+        example_group "service" do
+          example_group "concerns" do
+            it "adds `ConvenientService::Plugins::Common::HasMemoization::UsingMemoWise::Concern` after `ConvenientService::Plugins::Service::HasJSendResultStatusCheckShortSyntax::Concern` to service concerns" do
+              expect(service_class.concerns.to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Plugins::Service::HasJSendResultStatusCheckShortSyntax::Concern && current_middleware == ConvenientService::Plugins::Common::HasMemoization::UsingMemoWise::Concern }).not_to be_nil
+            end
+          end
+        end
+      end
+    end
+  end
+end
 # rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers, RSpec/MultipleDescribes
