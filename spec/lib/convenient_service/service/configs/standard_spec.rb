@@ -300,7 +300,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
                 ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Concern,
                 ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanHaveStep::Concern,
                 ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasNegatedResult::Concern,
-                ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasStatusResponder::Concern,
+                ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasPatternMatchingSupport::Concern,
                 ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeFromFallback::Concern,
                 ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasInspect::Concern,
                 ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeOwnResult::Concern,

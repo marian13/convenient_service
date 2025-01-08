@@ -28,7 +28,7 @@ module ConvenientService
                     #   TODO: `Utils::String.concat_if`? How?
                     #   - https://stackoverflow.com/a/28648594/12201472
                     #
-                    #   IMPORTNANT: `copy` is used instead of `service.success`, or `service.failure` in order to reuse the original result extra kwargs, like `step`, `parent`, etc.
+                    #   IMPORTANT: `copy` is used instead of `service.success`, or `service.failure` in order to reuse the original result extra kwargs, like `step`, `parent`, etc.
                     #
                     #   TODO: A simple way to get constant without referencing other plugin.
                     #
