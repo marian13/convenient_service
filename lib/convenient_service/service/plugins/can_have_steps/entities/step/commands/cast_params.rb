@@ -51,14 +51,14 @@ module ConvenientService
                 #   TODO: `cast_many`, `cast_many!`.
                 #
                 def inputs
-                  @inputs ||= original_params.inputs.map { |input| Entities::Method.cast!(input, direction: :input) }
+                  @inputs ||= flatten_methods(original_params.inputs).map { |input| Entities::Method.cast!(input, direction: :input) }
                 end
 
                 ##
                 # @return [Array<ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method>]
                 #
                 def outputs
-                  @outputs ||= original_params.outputs.map { |output| Entities::Method.cast!(output, direction: :output) }
+                  @outputs ||= flatten_methods(original_params.outputs).map { |output| Entities::Method.cast!(output, direction: :output) }
                 end
 
                 ##
@@ -87,6 +87,23 @@ module ConvenientService
                 #
                 def extra_kwargs
                   @extra_kwargs ||= original_params.extra_kwargs
+                end
+
+                private
+
+                ##
+                # @param methods [Array<Symbol, Hash>]
+                #
+                # @internal
+                #   NOTE:
+                #     Currently, hash `inputs` and `outputs` do NOT support extra keys.
+                #     Update `size` condition once they start to support them.
+                #
+                def flatten_methods(methods)
+                  return methods unless methods.last.instance_of?(::Hash)
+                  return methods if methods.last.keys.size < 2
+
+                  methods.dup.tap(&:pop).concat(methods.last.map { |key, value| {key => value} })
                 end
               end
             end

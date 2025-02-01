@@ -58,6 +58,31 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
             expect { command_result }.to raise_error(ConvenientService::Support::Castable::Exceptions::FailedToCast)
           end
         end
+
+        context "when last input is hash" do
+          context "when that hash has 1 key" do
+            let(:inputs) { [:foo, bar: :baz] }
+
+            it "returns `original_params.inputs` casted to ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method as `inputs`" do
+              expect(command_result.inputs).to eq([
+                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method.cast(:foo, direction: :input),
+                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method.cast({bar: :baz}, direction: :input)
+              ])
+            end
+          end
+
+          context "when that hash has mutiple keys" do
+            let(:inputs) { [:foo, bar: :baz, qux: :quux] }
+
+            it "cast each key value pair separately" do
+              expect(command_result.inputs).to eq([
+                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method.cast(:foo, direction: :input),
+                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method.cast({bar: :baz}, direction: :input),
+                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method.cast({qux: :quux}, direction: :input)
+              ])
+            end
+          end
+        end
       end
 
       example_group "`outputs`" do
@@ -74,6 +99,31 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
           it "raises `ConvenientService::Support::Castable::Exceptions::FailedToCast`" do
             expect { command_result }.to raise_error(ConvenientService::Support::Castable::Exceptions::FailedToCast)
+          end
+        end
+
+        context "when last output is hash" do
+          context "when that hash has 1 key" do
+            let(:outputs) { [:foo, bar: :baz] }
+
+            it "returns `original_params.outputs` casted to ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method as `outputs`" do
+              expect(command_result.outputs).to eq([
+                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method.cast(:foo, direction: :output),
+                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method.cast({bar: :baz}, direction: :output)
+              ])
+            end
+          end
+
+          context "when that hash has mutiple keys" do
+            let(:outputs) { [:foo, bar: :baz, qux: :quux] }
+
+            it "cast each key value pair separately" do
+              expect(command_result.outputs).to eq([
+                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method.cast(:foo, direction: :output),
+                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method.cast({bar: :baz}, direction: :output),
+                ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method.cast({qux: :quux}, direction: :output)
+              ])
+            end
           end
         end
       end
