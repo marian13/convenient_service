@@ -362,7 +362,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "service_actor", "~> 3.7.0"
   spec.add_development_dependency "interactor", "~> 3.1.2"
   spec.add_development_dependency "trailblazer-operation", "~> 0.10.1"
-  spec.add_development_dependency "active_interaction", "~> 5.4.0"
+  spec.add_development_dependency "active_interaction", "~> 5.5.0"
   spec.add_development_dependency "light-service", "~> 0.18.0"
   spec.add_development_dependency "mutations", "~> 0.9.1"
 end

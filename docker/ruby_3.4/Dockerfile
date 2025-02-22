@@ -34,10 +34,19 @@ FROM timbru31/ruby-node:3.4-slim-hydrogen
 ##
 # NOTE: `bundle install` dependencies.
 #
+# NOTE: `libz-dev` for `bigdecimal`.
+# - https://github.com/ruby/bigdecimal/issues/297#issuecomment-2215111806
+#
+# NOTE: `libyaml` for `psych`.
+# - https://github.com/rails/rails/issues/53306
+# - https://stackoverflow.com/a/77088171/12201472
+#
 RUN apt-get update -qq \
   && apt-get install --no-install-recommends -y git \
   && apt-get install --no-install-recommends -y make \
   && apt-get install --no-install-recommends -y gcc \
+  && apt-get install --no-install-recommends -y libz-dev \
+  && apt-get install --no-install-recommends -y libyaml-dev \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
