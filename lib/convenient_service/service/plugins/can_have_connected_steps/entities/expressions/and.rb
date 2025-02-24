@@ -21,7 +21,7 @@ module ConvenientService
 
               ##
               # @param left_expression [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base]
-              # @param right_expression [[ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base]
+              # @param right_expression [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base]
               # @return [void]
               #
               def initialize(left_expression, right_expression)

@@ -244,10 +244,6 @@ RSpec.describe "Service with all types of steps", type: [:standard, :e2e] do
               TEXT
             end
 
-            before do
-              allow(service).to receive(:puts).and_call_original
-            end
-
             it "prints progress bar after each step" do
               result
 

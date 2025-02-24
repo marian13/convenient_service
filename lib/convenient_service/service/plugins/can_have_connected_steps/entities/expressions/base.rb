@@ -117,6 +117,27 @@ module ConvenientService
               def empty?
                 false
               end
+
+              ##
+              # @return [Boolean]
+              #
+              def if?
+                false
+              end
+
+              ##
+              # @return [Boolean]
+              #
+              def else?
+                false
+              end
+
+              ##
+              # @return [Boolean]
+              #
+              def complex_if?
+                false
+              end
             end
           end
         end

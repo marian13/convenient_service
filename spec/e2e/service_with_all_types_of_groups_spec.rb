@@ -70,7 +70,7 @@ RSpec.describe "Service with all types of groups", type: [:standard, :e2e] do
       end
     end
 
-    services[:ServiceWithAllTypesOfSteps] = Class.new.tap do |klass|
+    services[:ServiceWithAllTypesOfGroups] = Class.new.tap do |klass|
       klass.class_exec(services) do |services|
         include ConvenientService::Standard::Config
 
@@ -155,7 +155,7 @@ RSpec.describe "Service with all types of groups", type: [:standard, :e2e] do
         end
 
         def self.name
-          "ServiceWithAllTypesOfSteps"
+          "ServiceWithAllTypesOfGroups"
         end
       end
     end
@@ -168,13 +168,13 @@ RSpec.describe "Service with all types of groups", type: [:standard, :e2e] do
       describe "#result" do
         subject(:result) { service.result }
 
-        let(:service) { services[:ServiceWithAllTypesOfSteps].new(out: out) }
+        let(:service) { services[:ServiceWithAllTypesOfGroups].new(out: out) }
 
         let(:out) { Tempfile.new }
 
-        context "when `ServiceWithAllTypesOfSteps` is successful" do
+        context "when `ServiceWithAllTypesOfGroups` is successful" do
           it "returns `success`" do
-            expect(result).to be_success.with_data(index: 11).of_service(services[:ServiceWithAllTypesOfSteps]).of_step(:success_method)
+            expect(result).to be_success.with_data(index: 11).of_service(services[:ServiceWithAllTypesOfGroups]).of_step(:success_method)
           end
 
           example_group "logs" do
@@ -182,7 +182,7 @@ RSpec.describe "Service with all types of groups", type: [:standard, :e2e] do
 
             let(:expected_output) do
               <<~TEXT
-                Started service `#{services[:ServiceWithAllTypesOfSteps]}`.
+                Started service `#{services[:ServiceWithAllTypesOfGroups]}`.
                   Run step `#{services[:SuccessService]}` (steps[0]).
                   Run step `:success_method` (steps[1]).
                   Run step `#{services[:SuccessService]}` (steps[2]).
@@ -195,12 +195,8 @@ RSpec.describe "Service with all types of groups", type: [:standard, :e2e] do
                   Run step `:success_method` (steps[9]).
                   Run step `#{services[:SuccessService]}` (steps[10]).
                   Run step `:success_method` (steps[11]).
-                Completed service `#{services[:ServiceWithAllTypesOfSteps]}`.
+                Completed service `#{services[:ServiceWithAllTypesOfGroups]}`.
               TEXT
-            end
-
-            before do
-              allow(service).to receive(:puts).and_call_original
             end
 
             it "prints progress bar after each step" do

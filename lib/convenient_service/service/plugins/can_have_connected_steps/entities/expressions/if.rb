@@ -6,73 +6,62 @@ module ConvenientService
       module CanHaveConnectedSteps
         module Entities
           module Expressions
-            class Or < Entities::Expressions::Base
+            class If < Entities::Expressions::Base
               ##
-              # @!attribute [r] left_expression
+              # @!attribute [r] condition_expression
               #   @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base]
               #
-              attr_reader :left_expression
+              attr_reader :condition_expression
 
               ##
-              # @!attribute [r] right_expression
+              # @!attribute [r] then_expression
               #   @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base]
               #
-              attr_reader :right_expression
+              attr_reader :then_expression
 
               ##
-              # @param left_expression [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base]
-              # @param right_expression [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base]
+              # @param expression [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base]
               # @return [void]
               #
-              def initialize(left_expression, right_expression)
-                @left_expression = left_expression
-                @right_expression = right_expression
+              def initialize(condition_expression, then_expression)
+                @condition_expression = condition_expression
+                @then_expression = then_expression
               end
 
               ##
               # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
               #
               def result
-                return left_expression.result if left_expression.success?
-                return left_expression.result if left_expression.error?
-
-                right_expression.result
+                condition_expression.success? ? then_expression.result : condition_expression.result
               end
 
               ##
               # @return [Boolean]
-              #
-              # @internal
-              #   NOTE: `error` is like an exception, so it always stops the flow.
               #
               def success?
-                return true if left_expression.success?
-                return false if left_expression.error?
-
-                right_expression.success?
+                condition_expression.success? && then_expression.success?
               end
 
               ##
               # @return [Boolean]
               #
-              # @internal
-              #   NOTE: `error` is like an exception, so it always stops the flow.
-              #
               def failure?
-                return false if left_expression.success?
-                return false if left_expression.error?
+                return true if condition_expression.failure?
 
-                right_expression.failure?
+                return then_expression.failure? if condition_expression.success?
+
+                false
               end
 
               ##
               # @return [Boolean]
               #
               def error?
-                return false if left_expression.success?
-                return true if left_expression.error?
+                return true if condition_expression.error?
 
-                right_expression.error?
+                return then_expression.error? if condition_expression.success?
+
+                false
               end
 
               ##
@@ -80,8 +69,9 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base]
               #
               def each_step(&block)
-                left_expression.each_step(&block)
-                right_expression.each_step(&block)
+                condition_expression.each_step(&block)
+
+                then_expression.each_step(&block)
 
                 self
               end
@@ -91,12 +81,9 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base]
               #
               def each_evaluated_step(&block)
-                left_expression.each_evaluated_step(&block)
+                condition_expression.each_evaluated_step(&block)
 
-                return self if left_expression.success?
-                return self if left_expression.error?
-
-                right_expression.each_evaluated_step(&block)
+                then_expression.each_evaluated_step(&block) if condition_expression.success?
 
                 self
               end
@@ -106,20 +93,20 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Not]
               #
               def with_organizer(organizer)
-                copy(overrides: {args: {0 => left_expression.with_organizer(organizer), 1 => right_expression.with_organizer(organizer)}})
+                copy(overrides: {args: {0 => condition_expression.with_organizer(organizer), 1 => then_expression.with_organizer(organizer)}})
               end
 
               ##
               # @return [String]
               #
               def inspect
-                "#{left_expression.inspect} || #{right_expression.inspect}"
+                "if #{condition_expression.inspect} then #{then_expression.inspect} end"
               end
 
               ##
               # @return [Boolean]
               #
-              def or?
+              def if?
                 true
               end
 
@@ -130,8 +117,8 @@ module ConvenientService
               def ==(other)
                 return unless other.instance_of?(self.class)
 
-                return false if left_expression != other.left_expression
-                return false if right_expression != other.right_expression
+                return false if condition_expression != other.condition_expression
+                return false if then_expression != other.then_expression
 
                 true
               end
@@ -140,7 +127,7 @@ module ConvenientService
               # @return [ConvenientService::Support::Arguments]
               #
               def to_arguments
-                Support::Arguments.new(left_expression, right_expression)
+                Support::Arguments.new(condition_expression, then_expression)
               end
             end
           end

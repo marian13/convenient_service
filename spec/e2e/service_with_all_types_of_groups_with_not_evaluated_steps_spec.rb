@@ -226,10 +226,6 @@ RSpec.describe "Service with all types of groups with NOT evaluated steps", type
               TEXT
             end
 
-            before do
-              allow(service).to receive(:puts).and_call_original
-            end
-
             it "prints progress bar after each step" do
               result
 

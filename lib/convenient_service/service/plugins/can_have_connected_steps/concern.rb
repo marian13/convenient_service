@@ -449,6 +449,188 @@ module ConvenientService
             end
 
             ##
+            # or_if_step_group
+            #
+            def if_step_group(*args, **kwargs, &block)
+              previous_expression = steps.expression
+
+              new_step = steps.create(*args, **kwargs)
+
+              steps.expression = Entities::Expressions::Empty.new
+
+              block&.call
+
+              current_expression = steps.expression
+
+              ::ConvenientService.raise Exceptions::FirstGroupStepIsNotSet.new(container: self, method: __method__) if current_expression.empty?
+
+              steps.expression =
+                if previous_expression.empty?
+                  Entities::Expressions::ComplexIf.new(
+                    [
+                      Entities::Expressions::If.new(
+                        Entities::Expressions::Scalar.new(new_step),
+                        current_expression
+                      )
+                    ]
+                  )
+                else
+                  Entities::Expressions::And.new(
+                    previous_expression,
+                    Entities::Expressions::ComplexIf.new(
+                      [
+                        Entities::Expressions::If.new(
+                          Entities::Expressions::Scalar.new(new_step),
+                          current_expression
+                        )
+                      ]
+                    )
+                  )
+                end
+            end
+
+            ##
+            #
+            #
+            def if_not_step_group(*args, **kwargs, &block)
+              previous_expression = steps.expression
+
+              new_step = steps.create(*args, **kwargs)
+
+              steps.expression = Entities::Expressions::Empty.new
+
+              block&.call
+
+              current_expression = steps.expression
+
+              ::ConvenientService.raise Exceptions::FirstGroupStepIsNotSet.new(container: self, method: __method__) if current_expression.empty?
+
+              steps.expression =
+                if previous_expression.empty?
+                  Entities::Expressions::ComplexIf.new(
+                    [
+                      Entities::Expressions::If.new(
+                        Entities::Expressions::Not.new(
+                          Entities::Expressions::Scalar.new(new_step)
+                        ),
+                        current_expression
+                      )
+                    ]
+                  )
+                else
+                  Entities::Expressions::And.new(
+                    previous_expression,
+                    Entities::Expressions::ComplexIf.new(
+                      [
+                        Entities::Expressions::If.new(
+                          Entities::Expressions::Not.new(
+                            Entities::Expressions::Scalar.new(new_step)
+                          ),
+                          current_expression
+                        )
+                      ]
+                    )
+                  )
+                end
+            end
+
+            ##
+            #
+            #
+            def elsif_step_group(*args, **kwargs, &block)
+              # require "debug"; binding.break
+
+              previous_expression = steps.expression
+
+              ::ConvenientService.raise Exceptions::FirstStepIsNotSet.new(container: self) if previous_expression.empty?
+
+              # `and` or `or`.
+              # ::ConvenientService.raise Exceptions::FirstGroupStepIsNotSet.new(container: self, method: __method__) unless previous_expression.complex_if?
+
+              new_step = steps.create(*args, **kwargs)
+
+              steps.expression = Entities::Expressions::Empty.new
+
+              block&.call
+
+              current_expression = steps.expression
+
+              ::ConvenientService.raise Exceptions::FirstGroupStepIsNotSet.new(container: self, method: __method__) if current_expression.empty?
+
+              steps.expression =
+                Entities::Expressions::ComplexIf.new(
+                  [
+                    *previous_expression.if_expressions,
+                    Entities::Expressions::If.new(
+                      Entities::Expressions::Scalar.new(new_step),
+                      current_expression
+                    )
+                  ]
+                )
+            end
+
+            ##
+            #
+            #
+            def elsif_not_step_group(*args, **kwargs, &block)
+              previous_expression = steps.expression
+
+              ::ConvenientService.raise Exceptions::FirstStepIsNotSet.new(container: self) if previous_expression.empty?
+
+              ::ConvenientService.raise Exceptions::FirstGroupStepIsNotSet.new(container: self, method: __method__) unless previous_expression.complex_if?
+
+              new_step = steps.create(*args, **kwargs)
+
+              steps.expression = Entities::Expressions::Empty.new
+
+              block&.call
+
+              current_expression = steps.expression
+
+              ::ConvenientService.raise Exceptions::FirstGroupStepIsNotSet.new(container: self, method: __method__) if current_expression.empty?
+
+              steps.expression =
+                Entities::Expressions::ComplexIf.new(
+                  [
+                    *previous_expression.if_expressions,
+                    Entities::Expressions::If.new(
+                      Entities::Expressions::Not.new(
+                        Entities::Expressions::Scalar.new(new_step)
+                      ),
+                      current_expression
+                    )
+                  ]
+                )
+            end
+
+            ##
+            #
+            #
+            def else_group(*args, **kwargs, &block)
+              previous_expression = steps.expression
+
+              ::ConvenientService.raise Exceptions::FirstStepIsNotSet.new(container: self) if previous_expression.empty?
+
+              ::ConvenientService.raise Exceptions::FirstGroupStepIsNotSet.new(container: self, method: __method__) unless previous_expression.complex_if?
+
+              steps.expression = Entities::Expressions::Empty.new
+
+              block&.call
+
+              current_expression = steps.expression
+
+              ::ConvenientService.raise Exceptions::FirstGroupStepIsNotSet.new(container: self, method: __method__) if current_expression.empty?
+
+              steps.expression =
+                Entities::Expressions::ComplexIf.new(
+                  [
+                    *previous_expression.if_expressions
+                  ],
+                  Entities::Expressions::Else.new(current_expression)
+                )
+            end
+
+            ##
             # @api private
             #
             # @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::StepCollection]

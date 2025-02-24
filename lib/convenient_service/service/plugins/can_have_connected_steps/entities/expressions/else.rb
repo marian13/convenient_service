@@ -6,7 +6,7 @@ module ConvenientService
       module CanHaveConnectedSteps
         module Entities
           module Expressions
-            class Group < Entities::Expressions::Base
+            class Else < Entities::Expressions::Base
               ##
               # @!attribute [r] expression
               #   @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base]
@@ -81,13 +81,13 @@ module ConvenientService
               # @return [String]
               #
               def inspect
-                "(#{expression.inspect})"
+                "else #{expression.inspect} end"
               end
 
               ##
               # @return [Boolean]
               #
-              def group?
+              def else?
                 true
               end
 

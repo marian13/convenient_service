@@ -407,7 +407,15 @@ module ConvenientService
         #
         require "convenient_service/dependencies/extractions/byebug_syntax_highlighting" if ruby.mri?
 
+        ##
+        #
+        #
         require "convenient_service/dependencies/extractions/b" if ruby.mri?
+
+        ##
+        #
+        #
+        require "convenient_service/dependencies/extractions/bb" if ruby.mri?
 
         ##
         #

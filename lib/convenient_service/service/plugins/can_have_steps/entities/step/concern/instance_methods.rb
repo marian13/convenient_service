@@ -207,7 +207,7 @@ module ConvenientService
                 # @return [String]
                 #
                 def printable_action
-                  action.inspect
+                  action.instance_of?(::Class) ? Utils::Class.display_name(action) : action.inspect
                 end
 
                 ##
