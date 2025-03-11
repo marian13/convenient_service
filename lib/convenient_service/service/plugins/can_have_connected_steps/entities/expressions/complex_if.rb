@@ -98,6 +98,7 @@ module ConvenientService
               # @param block [Proc]
               # @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base]
               #
+              # rubocop:disable Lint/NonLocalExitFromIterator
               def each_evaluated_step(&block)
                 if_expressions.each do |if_expression|
                   if_expression.condition_expression.each_evaluated_step(&block)
@@ -110,6 +111,7 @@ module ConvenientService
 
                 self
               end
+              # rubocop:enable Lint/NonLocalExitFromIterator
 
               ##
               # @param organizer [ConvenientService::Service]

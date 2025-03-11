@@ -10,12 +10,12 @@ module ConvenientService
 
             ##
             # @!attribute [r] service_class
-            #   @return Class
+            #   @return [Class]
             #
             attr_reader :service_class
 
             ##
-            # @return Class
+            # @return [Class]
             #
             import :"commands.FindOrCreateEntity", from: Common::Plugins::CanHaveUserProvidedEntity::Container
 

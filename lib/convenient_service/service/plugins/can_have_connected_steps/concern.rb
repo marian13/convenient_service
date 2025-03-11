@@ -689,6 +689,21 @@ module ConvenientService
 
               steps.result
             end
+
+            ##
+            # @api public
+            #
+            # Registers a step (step definition).
+            #
+            # @param args [Array<Object>]
+            # @param kwargs [Hash{Symbol => Object}]
+            # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step]
+            #
+            # TODO: Dynamic expressions.
+            #
+            def step(*args, **kwargs)
+              self.class.step_class.new(*args, **kwargs.merge(container: self.class, organizer: self, index: nil))
+            end
           end
         end
       end

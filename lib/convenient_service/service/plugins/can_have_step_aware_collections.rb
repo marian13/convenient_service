@@ -1,0 +1,6 @@
+# frozen_string_literal: true
+
+require_relative "can_have_step_aware_collections/commands"
+require_relative "can_have_step_aware_collections/concern"
+require_relative "can_have_step_aware_collections/entities"
+require_relative "can_have_step_aware_collections/exceptions"

@@ -1,0 +1,12 @@
+# frozen_string_literal: true
+
+require_relative "step_aware_collections/base"
+require_relative "step_aware_collections/boolean_value"
+require_relative "step_aware_collections/singular_value"
+require_relative "step_aware_collections/enumerable"
+require_relative "step_aware_collections/enumerator"
+require_relative "step_aware_collections/lazy_enumerator"
+require_relative "step_aware_collections/chain_enumerator"
+
+require_relative "step_aware_collections/chunk_enumerator"
+require_relative "step_aware_collections/chunk_while_enumerator"

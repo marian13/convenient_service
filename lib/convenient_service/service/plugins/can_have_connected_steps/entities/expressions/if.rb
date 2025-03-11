@@ -20,7 +20,8 @@ module ConvenientService
               attr_reader :then_expression
 
               ##
-              # @param expression [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base]
+              # @param condition_expression [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base]
+              # @param then_expression [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base]
               # @return [void]
               #
               def initialize(condition_expression, then_expression)
