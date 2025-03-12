@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "step_aware_collections/base"
-require_relative "step_aware_collections/boolean_value"
-require_relative "step_aware_collections/singular_value"
+require_relative "step_aware_collections/terminal_value"
 require_relative "step_aware_collections/enumerable"
 require_relative "step_aware_collections/enumerator"
 require_relative "step_aware_collections/lazy_enumerator"

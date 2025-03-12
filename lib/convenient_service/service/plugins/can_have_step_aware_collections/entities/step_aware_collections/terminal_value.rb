@@ -6,7 +6,7 @@ module ConvenientService
       module CanHaveStepAwareCollections
         module Entities
           module StepAwareCollections
-            class SingularValue < Entities::StepAwareCollections::Base
+            class TerminalValue < Entities::StepAwareCollections::Base
               ##
               # @api private
               #
@@ -19,10 +19,10 @@ module ConvenientService
               # @api private
               #
               # @param organizer [ConvenientService::Service]
-              # @param result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result, nil]
+              # @param result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
               # @return [void]
               #
-              def initialize(organizer:, result: nil)
+              def initialize(organizer:, result:)
                 @organizer = organizer
                 @result = result
               end
@@ -108,6 +108,41 @@ module ConvenientService
               # @raise [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining]
               #
               def drop_while(...)
+                ::ConvenientService.raise Exceptions::AlreadyUsedTerminalChaining.new
+              end
+
+              ##
+              # @raise [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining]
+              #
+              def each_cons(...)
+                ::ConvenientService.raise Exceptions::AlreadyUsedTerminalChaining.new
+              end
+
+              ##
+              # @raise [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining]
+              #
+              def each_entry(...)
+                ::ConvenientService.raise Exceptions::AlreadyUsedTerminalChaining.new
+              end
+
+              ##
+              # @raise [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining]
+              #
+              def each_slice(...)
+                ::ConvenientService.raise Exceptions::AlreadyUsedTerminalChaining.new
+              end
+
+              ##
+              # @raise [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining]
+              #
+              def each_with_index(...)
+                ::ConvenientService.raise Exceptions::AlreadyUsedTerminalChaining.new
+              end
+
+              ##
+              # @raise [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining]
+              #
+              def each_with_object(...)
                 ::ConvenientService.raise Exceptions::AlreadyUsedTerminalChaining.new
               end
 

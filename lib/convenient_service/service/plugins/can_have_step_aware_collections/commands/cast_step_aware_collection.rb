@@ -44,9 +44,7 @@ module ConvenientService
             #
             def call
               case collection
-              when Entities::StepAwareCollections::BooleanValue
-                collection
-              when Entities::StepAwareCollections::SingularValue
+              when Entities::StepAwareCollections::TerminalValue
                 collection
               when Entities::StepAwareCollections::LazyEnumerator
                 collection
