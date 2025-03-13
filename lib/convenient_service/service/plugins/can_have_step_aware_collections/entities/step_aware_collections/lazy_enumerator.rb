@@ -6,7 +6,7 @@ module ConvenientService
       module CanHaveStepAwareCollections
         module Entities
           module StepAwareCollections
-            class LazyEnumerator < Entities::StepAwareCollections::Enumerable
+            class LazyEnumerator < Entities::StepAwareCollections::Enumerator
               ##
               # @api private
               #
@@ -20,13 +20,13 @@ module ConvenientService
               #
               # @param lazy_enumerator [Enumerator::Lazy]
               # @param organizer [ConvenientService::Service]
-              # @param result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result, nil]
+              # @param propagated_result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result, nil]
               # @return [void]
               #
-              def initialize(lazy_enumerator:, organizer:, result: nil)
+              def initialize(lazy_enumerator:, organizer:, propagated_result: nil)
                 @lazy_enumerator = lazy_enumerator
                 @organizer = organizer
-                @result = result
+                @propagated_result = propagated_result
               end
 
               ##
@@ -35,6 +35,15 @@ module ConvenientService
               # @return [Enumerator::Lazy]
               #
               def enumerable
+                lazy_enumerator
+              end
+
+              ##
+              # @api private
+              #
+              # @return [Enumerator::Lazy]
+              #
+              def enumerator
                 lazy_enumerator
               end
             end

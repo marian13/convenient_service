@@ -6,25 +6,45 @@ module ConvenientService
       module CanHaveStepAwareCollections
         module Entities
           module StepAwareCollections
-            class TerminalValue < Entities::StepAwareCollections::Base
+            class Value < Entities::StepAwareCollections::Base
               ##
               # @api private
               #
-              # @!attribute [r] result
-              #   @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
+              # @!attribute [r] value
+              #   @return [Object] Can be any type.
               #
-              attr_reader :result
+              attr_reader :value
 
               ##
               # @api private
               #
+              # @!attribute [r] propagated_result
+              #   @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
+              #
+              attr_reader :propagated_result
+
+              ##
+              # @api private
+              #
+              # @param value [Object] Can be any type.
               # @param organizer [ConvenientService::Service]
-              # @param result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
+              # @param propagated_result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
               # @return [void]
               #
-              def initialize(organizer:, result:)
+              def initialize(value:, organizer:, propagated_result:)
+                @value = value
                 @organizer = organizer
-                @result = result
+                @propagated_result = propagated_result
+              end
+
+              ##
+              # @param data_key [Symbol, nil]
+              # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
+              #
+              def result(data_key: nil)
+                return propagated_result if propagated_result
+
+                success(data_key || :value => value)
               end
 
               ##

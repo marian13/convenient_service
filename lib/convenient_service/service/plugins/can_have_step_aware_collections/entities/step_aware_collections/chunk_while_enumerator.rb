@@ -37,21 +37,21 @@ module ConvenientService
               # @param enumerable [Enumerable]
               # @param iteration_block [Proc]
               # @param organizer [ConvenientService::Service]
-              # @param result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result, nil]
+              # @param propagated_result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result, nil]
               # @return [void]
               #
-              def initialize(enumerable:, iteration_block:, organizer:, result: nil)
+              def initialize(enumerable:, iteration_block:, organizer:, propagated_result: nil)
                 @enumerable = enumerable
                 @iteration_block = iteration_block
                 @organizer = organizer
-                @result = result
+                @propagated_result = propagated_result
               end
 
               ##
               # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
               #
               def result(data_key: nil)
-                return @result if @result
+                return propagated_result if propagated_result
 
                 enumerable = enumerator.to_a
 
@@ -71,7 +71,7 @@ module ConvenientService
                   next true if value.success?
                   next false if value.failure?
 
-                  self.result = value.result
+                  @result = value.result
 
                   raise StopIteration
                 end

@@ -21,21 +21,21 @@ module ConvenientService
             attr_reader :organizer
 
             ##
-            # @!attribute [r] result
-            #   @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
+            # @!attribute [r] propagated_result
+            #   @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result, nil]
             #
-            attr_reader :result
+            attr_reader :propagated_result
 
             ##
             # @param collection [Object] Can be any type.
             # @param organizer [ConvenientService::Service]
-            # @param result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result, nil]
+            # @param propagated_result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result, nil]
             # @return [void]
             #
-            def initialize(collection:, organizer:, result: nil)
+            def initialize(collection:, organizer:, propagated_result: nil)
               @collection = collection
               @organizer = organizer
-              @result = result
+              @propagated_result = propagated_result
             end
 
             ##
@@ -44,7 +44,9 @@ module ConvenientService
             #
             def call
               case collection
-              when Entities::StepAwareCollections::TerminalValue
+              when Entities::StepAwareCollections::Value
+                collection
+              when Entities::StepAwareCollections::BooleanValue
                 collection
               when Entities::StepAwareCollections::LazyEnumerator
                 collection
@@ -53,11 +55,11 @@ module ConvenientService
               when Entities::StepAwareCollections::Enumerable
                 collection
               when ::Enumerator::Lazy
-                Entities::StepAwareCollections::LazyEnumerator.new(lazy_enumerator: collection, organizer: organizer, result: result)
+                Entities::StepAwareCollections::LazyEnumerator.new(lazy_enumerator: collection, organizer: organizer, propagated_result: propagated_result)
               when ::Enumerator
-                Entities::StepAwareCollections::Enumerator.new(enumerator: collection, organizer: organizer, result: result)
+                Entities::StepAwareCollections::Enumerator.new(enumerator: collection, organizer: organizer, propagated_result: propagated_result)
               when ::Enumerable
-                Entities::StepAwareCollections::Enumerable.new(enumerable: collection, organizer: organizer, result: result)
+                Entities::StepAwareCollections::Enumerable.new(enumerable: collection, organizer: organizer, propagated_result: propagated_result)
               else
                 ::ConvenientService.raise Exceptions::CollectionIsNotEnumerable.new(collection: collection)
               end

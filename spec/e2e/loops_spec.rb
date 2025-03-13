@@ -363,6 +363,9 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
         # invalid cast
         expect { service.collection([:success]).chain(:exception) }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::CollectionIsNotEnumerable)
 
+        # error propagation
+        expect(service.collection([:failure, :error, :exception]).each(&step_without_outputs_block).chain([:exception]).result).to be_error.without_data
+
         # already used boolean value terminal chaining
         expect { service.collection([:success]).all?.chain([:success]) }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
 

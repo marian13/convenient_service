@@ -20,13 +20,13 @@ module ConvenientService
               #
               # @param enumerator [Enumerator]
               # @param organizer [ConvenientService::Service]
-              # @param result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result, nil]
+              # @param propagated_result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result, nil]
               # @return [void]
               #
-              def initialize(enumerator:, organizer:, result: nil)
+              def initialize(enumerator:, organizer:, propagated_result: nil)
                 @enumerator = enumerator
                 @organizer = organizer
-                @result = result
+                @propagated_result = propagated_result
               end
 
               ##
