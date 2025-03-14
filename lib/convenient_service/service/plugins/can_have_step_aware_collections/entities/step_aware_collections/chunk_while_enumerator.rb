@@ -61,27 +61,17 @@ module ConvenientService
               end
 
               ##
-              # @return [Proc]
-              #
-              def step_aware_iteration_block
-                proc do |*args|
-                  value = iteration_block.call(*args)
-
-                  next value unless Plugins::CanHaveSteps.step?(value)
-                  next true if value.success?
-                  next false if value.failure?
-
-                  @result = value.result
-
-                  raise StopIteration
-                end
-              end
-
-              ##
               # @return [Enumerator]
               #
               def enumerator
                 ::Enumerator.new do |yielder|
+                  step_aware_iteration_block =
+                    step_aware_iteration_block_from(iteration_block) do |error_result|
+                      @result = error_result
+
+                      raise StopIteration
+                    end
+
                   chunk_enumerator = enumerable.chunk_while(&step_aware_iteration_block)
 
                   loop { yielder << chunk_enumerator.next }

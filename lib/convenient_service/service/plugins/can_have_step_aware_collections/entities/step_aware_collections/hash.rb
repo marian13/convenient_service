@@ -6,46 +6,36 @@ module ConvenientService
       module CanHaveStepAwareCollections
         module Entities
           module StepAwareCollections
-            class Enumerator < Entities::StepAwareCollections::Enumerable
+            class Hash < Entities::StepAwareCollections::Enumerable
               ##
               # @api private
               #
-              # @!attribute [r] enumerator
-              #   @return [Enumerator]
+              # @!attribute [r] hash
+              #   @return [Hash]
               #
-              attr_reader :enumerator
+              attr_reader :hash
 
               ##
               # @api private
               #
-              # @param enumerator [Enumerator]
+              # @param hash [Hash]
               # @param organizer [ConvenientService::Service]
               # @param propagated_result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result, nil]
               # @return [void]
               #
-              def initialize(enumerator:, organizer:, propagated_result: nil)
-                @enumerator = enumerator
+              def initialize(hash:, organizer:, propagated_result: nil)
+                @hash = hash
                 @organizer = organizer
                 @propagated_result = propagated_result
               end
 
-              # ##
-              # # @param data_key [Symbol, nil]
-              # # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
-              # #
-              # def result(data_key: nil)
-              #   return propagated_result if propagated_result
-
-              #   success(data_key || :values => enumerable)
-              # end
-
               ##
               # @api private
               #
-              # @return [Enumerator]
+              # @return [Hash]
               #
               def enumerable
-                enumerator
+                hash
               end
             end
           end

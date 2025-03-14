@@ -6,46 +6,36 @@ module ConvenientService
       module CanHaveStepAwareCollections
         module Entities
           module StepAwareCollections
-            class Enumerator < Entities::StepAwareCollections::Enumerable
+            class Range < Entities::StepAwareCollections::Enumerable
               ##
               # @api private
               #
-              # @!attribute [r] enumerator
-              #   @return [Enumerator]
+              # @!attribute [r] range
+              #   @return [Range]
               #
-              attr_reader :enumerator
+              attr_reader :range
 
               ##
               # @api private
               #
-              # @param enumerator [Enumerator]
+              # @param range [Range]
               # @param organizer [ConvenientService::Service]
               # @param propagated_result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result, nil]
               # @return [void]
               #
-              def initialize(enumerator:, organizer:, propagated_result: nil)
-                @enumerator = enumerator
+              def initialize(range:, organizer:, propagated_result: nil)
+                @range = range
                 @organizer = organizer
                 @propagated_result = propagated_result
               end
 
-              # ##
-              # # @param data_key [Symbol, nil]
-              # # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
-              # #
-              # def result(data_key: nil)
-              #   return propagated_result if propagated_result
-
-              #   success(data_key || :values => enumerable)
-              # end
-
               ##
               # @api private
               #
-              # @return [Enumerator]
+              # @return [Range]
               #
               def enumerable
-                enumerator
+                range
               end
             end
           end

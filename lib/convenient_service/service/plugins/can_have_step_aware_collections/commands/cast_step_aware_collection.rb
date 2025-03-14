@@ -39,27 +39,43 @@ module ConvenientService
             end
 
             ##
-            # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareEnumerable, ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareEnumerator, ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareLazyEnumerator]
+            # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
             # @raise [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::CollectionIsNotEnumerable]
             #
             def call
               case collection
-              when Entities::StepAwareCollections::Value
+              when ::Array
+                Entities::StepAwareCollections::Array.new(array: collection, organizer: organizer, propagated_result: propagated_result)
+              when ::Hash
+                Entities::StepAwareCollections::Hash.new(hash: collection, organizer: organizer, propagated_result: propagated_result)
+              when ::Range
+                Entities::StepAwareCollections::Range.new(range: collection, organizer: organizer, propagated_result: propagated_result)
+              when ::Set
+                Entities::StepAwareCollections::Set.new(set: collection, organizer: organizer, propagated_result: propagated_result)
+              when ::Enumerator::Lazy
+                Entities::StepAwareCollections::LazyEnumerator.new(lazy_enumerator: collection, organizer: organizer, propagated_result: propagated_result)
+              when ::Enumerator::Chain
+                Entities::StepAwareCollections::ChainEnumerator.new(chain_enumerator: collection, organizer: organizer, propagated_result: propagated_result)
+              when ::Enumerator
+                Entities::StepAwareCollections::Enumerator.new(enumerator: collection, organizer: organizer, propagated_result: propagated_result)
+              when ::Enumerable
+                Entities::StepAwareCollections::Enumerable.new(enumerable: collection, organizer: organizer, propagated_result: propagated_result)
+              when Entities::StepAwareCollections::Array
                 collection
-              when Entities::StepAwareCollections::BooleanValue
+              when Entities::StepAwareCollections::Hash
+                collection
+              when Entities::StepAwareCollections::Range
+                collection
+              when Entities::StepAwareCollections::Set
                 collection
               when Entities::StepAwareCollections::LazyEnumerator
+                collection
+              when Entities::StepAwareCollections::ChainEnumerator
                 collection
               when Entities::StepAwareCollections::Enumerator
                 collection
               when Entities::StepAwareCollections::Enumerable
                 collection
-              when ::Enumerator::Lazy
-                Entities::StepAwareCollections::LazyEnumerator.new(lazy_enumerator: collection, organizer: organizer, propagated_result: propagated_result)
-              when ::Enumerator
-                Entities::StepAwareCollections::Enumerator.new(enumerator: collection, organizer: organizer, propagated_result: propagated_result)
-              when ::Enumerable
-                Entities::StepAwareCollections::Enumerable.new(enumerable: collection, organizer: organizer, propagated_result: propagated_result)
               else
                 ::ConvenientService.raise Exceptions::CollectionIsNotEnumerable.new(collection: collection)
               end
