@@ -166,7 +166,40 @@ module ConvenientService
                 ::ConvenientService.raise Exceptions::AlreadyUsedTerminalChaining.new
               end
 
-              # ...
+              ##
+              # @raise [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining]
+              #
+              def filter(...)
+                ::ConvenientService.raise Exceptions::AlreadyUsedTerminalChaining.new
+              end
+
+              ##
+              # @raise [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining]
+              #
+              def filter_map(...)
+                ::ConvenientService.raise Exceptions::AlreadyUsedTerminalChaining.new
+              end
+
+              ##
+              # @raise [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining]
+              #
+              def find(...)
+                ::ConvenientService.raise Exceptions::AlreadyUsedTerminalChaining.new
+              end
+
+              ##
+              # @raise [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining]
+              #
+              def find_all(...)
+                ::ConvenientService.raise Exceptions::AlreadyUsedTerminalChaining.new
+              end
+
+              ##
+              # @raise [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining]
+              #
+              def find_index(...)
+                ::ConvenientService.raise Exceptions::AlreadyUsedTerminalChaining.new
+              end
 
               ##
               # @raise [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining]
@@ -178,7 +211,224 @@ module ConvenientService
               ##
               # @raise [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining]
               #
+              def flat_map(...)
+                ::ConvenientService.raise Exceptions::AlreadyUsedTerminalChaining.new
+              end
+
+              ##
+              # @raise [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining]
+              #
+              def grep(...)
+                ::ConvenientService.raise Exceptions::AlreadyUsedTerminalChaining.new
+              end
+
+              ##
+              # @raise [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining]
+              #
+              def grep_v(...)
+                ::ConvenientService.raise Exceptions::AlreadyUsedTerminalChaining.new
+              end
+
+              ##
+              # @raise [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining]
+              #
+              def group_by(...)
+                ::ConvenientService.raise Exceptions::AlreadyUsedTerminalChaining.new
+              end
+
+              ##
+              # @raise [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining]
+              #
+              def include?(...)
+                ::ConvenientService.raise Exceptions::AlreadyUsedTerminalChaining.new
+              end
+
+              ##
+              # @raise [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining]
+              #
+              def inject(...)
+                ::ConvenientService.raise Exceptions::AlreadyUsedTerminalChaining.new
+              end
+
+              ##
+              # @raise [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining]
+              #
               def map(...)
+                ::ConvenientService.raise Exceptions::AlreadyUsedTerminalChaining.new
+              end
+
+              ##
+              # @raise [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining]
+              #
+              def max(...)
+                ::ConvenientService.raise Exceptions::AlreadyUsedTerminalChaining.new
+              end
+
+              ##
+              # @raise [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining]
+              #
+              def max_by(...)
+                ::ConvenientService.raise Exceptions::AlreadyUsedTerminalChaining.new
+              end
+
+              ##
+              # @raise [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining]
+              #
+              def member?(...)
+                ::ConvenientService.raise Exceptions::AlreadyUsedTerminalChaining.new
+              end
+
+              ##
+              # @raise [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining]
+              #
+              def min(...)
+                ::ConvenientService.raise Exceptions::AlreadyUsedTerminalChaining.new
+              end
+
+              ##
+              # @raise [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining]
+              #
+              def min_by(...)
+                ::ConvenientService.raise Exceptions::AlreadyUsedTerminalChaining.new
+              end
+
+              ##
+              # @raise [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining]
+              #
+              def minmax(...)
+                ::ConvenientService.raise Exceptions::AlreadyUsedTerminalChaining.new
+              end
+
+              ##
+              # @raise [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining]
+              #
+              def minmax_by(...)
+                ::ConvenientService.raise Exceptions::AlreadyUsedTerminalChaining.new
+              end
+
+              ##
+              # @raise [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining]
+              #
+              def none?(...)
+                ::ConvenientService.raise Exceptions::AlreadyUsedTerminalChaining.new
+              end
+
+              ##
+              # @raise [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining]
+              #
+              def one?(...)
+                ::ConvenientService.raise Exceptions::AlreadyUsedTerminalChaining.new
+              end
+
+              ##
+              # @raise [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining]
+              #
+              def partition(...)
+                ::ConvenientService.raise Exceptions::AlreadyUsedTerminalChaining.new
+              end
+
+              ##
+              # @raise [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining]
+              #
+              def reduce(...)
+                ::ConvenientService.raise Exceptions::AlreadyUsedTerminalChaining.new
+              end
+
+              ##
+              # @raise [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining]
+              #
+              def reject(...)
+                ::ConvenientService.raise Exceptions::AlreadyUsedTerminalChaining.new
+              end
+
+              ##
+              # @raise [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining]
+              #
+              def reverse_each(...)
+                ::ConvenientService.raise Exceptions::AlreadyUsedTerminalChaining.new
+              end
+
+              ##
+              # @raise [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining]
+              #
+              def select(...)
+                ::ConvenientService.raise Exceptions::AlreadyUsedTerminalChaining.new
+              end
+
+              ##
+              # @raise [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining]
+              #
+              def slice_after(...)
+                ::ConvenientService.raise Exceptions::AlreadyUsedTerminalChaining.new
+              end
+
+              ##
+              # @raise [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining]
+              #
+              def slice_before(...)
+                ::ConvenientService.raise Exceptions::AlreadyUsedTerminalChaining.new
+              end
+
+              ##
+              # @raise [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining]
+              #
+              def slice_when(...)
+                ::ConvenientService.raise Exceptions::AlreadyUsedTerminalChaining.new
+              end
+
+              ##
+              # @raise [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining]
+              #
+              def sort(...)
+                ::ConvenientService.raise Exceptions::AlreadyUsedTerminalChaining.new
+              end
+
+              ##
+              # @raise [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining]
+              #
+              def sort_by(...)
+                ::ConvenientService.raise Exceptions::AlreadyUsedTerminalChaining.new
+              end
+
+              ##
+              # @raise [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining]
+              #
+              def sum(...)
+                ::ConvenientService.raise Exceptions::AlreadyUsedTerminalChaining.new
+              end
+
+              ##
+              # @raise [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining]
+              #
+              def take(...)
+                ::ConvenientService.raise Exceptions::AlreadyUsedTerminalChaining.new
+              end
+
+              ##
+              # @raise [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining]
+              #
+              def take_while(...)
+                ::ConvenientService.raise Exceptions::AlreadyUsedTerminalChaining.new
+              end
+
+              ##
+              # @raise [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining]
+              #
+              def uniq(...)
+                ::ConvenientService.raise Exceptions::AlreadyUsedTerminalChaining.new
+              end
+
+              ##
+              # @raise [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining]
+              #
+              def zip(...)
+                ::ConvenientService.raise Exceptions::AlreadyUsedTerminalChaining.new
+              end
+
+              ##
+              # @raise [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining]
+              #
+              def each(...)
                 ::ConvenientService.raise Exceptions::AlreadyUsedTerminalChaining.new
               end
             end

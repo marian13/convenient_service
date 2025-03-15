@@ -823,32 +823,108 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
         end
       end
 
-      xdescribe "#collect_concat" do
+      describe "#collect_concat" do
         specify do
-          # empty
-          expect([].collect_concat(&conditional_block).to_a).to eq([])
-          expect(service.collection([]).collect_concat(&conditional_block).result).to be_success.with_data(values: [])
-          expect(service.collection([]).collect_concat(&step_without_outputs_block).result).to be_success.with_data(values: [])
+          # NOTE: Empty collection.
+          expect([].collect_concat { |status| condition[status] }).to eq([])
+          expect(service.collection(enumerable([])).collect_concat { |status| condition[status] }.result).to be_success.with_data(values: [])
+          expect(service.collection(enumerator([])).collect_concat { |status| condition[status] }.result).to be_success.with_data(values: [])
+          expect(service.collection(lazy_enumerator([])).collect_concat { |status| condition[status] }.result).to be_success.with_data(values: [])
+          expect(service.collection(chain_enumerator([])).collect_concat { |status| condition[status] }.result).to be_success.with_data(values: [])
+          expect(service.collection([]).collect_concat { |status| condition[status] }.result).to be_success.with_data(values: [])
+          expect(service.collection(set([])).collect_concat { |status| condition[status] }.result).to be_success.with_data(values: [])
+          expect(service.collection({}).collect_concat { |status| condition[status] }.result).to be_success.with_data(values: [])
+          expect(service.collection((:success...:success)).collect_concat { |status| condition[status] }.result).to be_success.with_data(values: [])
 
-          # mapping
-          expect([:success, :failure, :success, :failure].collect_concat(&conditional_block).to_a).to eq([true, false, true, false])
-          expect(service.collection([:success, :failure, :success, :failure]).collect_concat(&conditional_block).result).to be_success.with_data(values: [true, false, true, false])
-          expect(service.collection([:success, :failure, :success, :failure]).collect_concat(&conditional_block_with_nested_arrays).result).to be_success.with_data(values: [true, false, true, false])
-          expect(service.collection([:success, :failure, :success, :failure]).collect_concat(&step_without_outputs_block).result).to be_success.with_data(values: [true, false, true, false])
-          expect(service.collection([:success, :failure, :success, :failure]).collect_concat(&step_with_one_output_block).result).to be_success.with_data(values: ["ok", nil, "ok", nil])
-          expect(service.collection([:success, :failure, :success, :failure]).collect_concat(&step_with_multiple_outputs_block).result).to be_success.with_data(values: [{status_string: "ok", status_code: 200}, {}, {status_string: "ok", status_code: 200}, {}])
+          # NOTE: Block.
+          expect([:success, :success, :success].collect_concat { |status| condition[status] }).to eq([true, true, true])
+          expect(service.collection(enumerable([:success, :success, :success])).collect_concat { |status| condition[status] }.result).to be_success.with_data(values: [true, true, true])
+          expect(service.collection(enumerator([:success, :success, :success])).collect_concat { |status| condition[status] }.result).to be_success.with_data(values: [true, true, true])
+          expect(service.collection(lazy_enumerator([:success, :success, :success])).collect_concat { |status| condition[status] }.result).to be_success.with_data(values: [true, true, true])
+          expect(service.collection(chain_enumerator([:success, :success, :success])).collect_concat { |status| condition[status] }.result).to be_success.with_data(values: [true, true, true])
+          expect(service.collection([:success, :success, :success]).collect_concat { |status| condition[status] }.result).to be_success.with_data(values: [true, true, true])
 
-          # error result
-          expect(service.collection([:success, :error, :exception]).collect_concat(&step_without_outputs_block).result).to be_error.without_data
+          expect(service.collection(set([:success])).collect_concat { |status| condition[status] }.result).to be_success.with_data(values: [true])
+          expect(service.collection({success: :success}).collect_concat { |key, value| condition[value] }.result).to be_success.with_data(values: [true])
+          expect(service.collection((:success..:success)).collect_concat { |status| condition[status] }.result).to be_success.with_data(values: [true])
 
-          # error propagation
-          expect(service.collection([:success, :error, :exception]).each(&step_without_outputs_block).collect_concat(&exception_block).result).to be_error.without_data
+          # NOTE: Flatten.
+          expect([:success, :success, :success].collect_concat { |status| [condition[status], condition[status]] }).to eq([true, true, true, true, true, true])
+          expect(service.collection(enumerable([:success, :success, :success])).collect_concat { |status| [condition[status], condition[status]] }.result).to be_success.with_data(values: [true, true, true, true, true, true])
+          expect(service.collection(enumerator([:success, :success, :success])).collect_concat { |status| [condition[status], condition[status]] }.result).to be_success.with_data(values: [true, true, true, true, true, true])
+          expect(service.collection(lazy_enumerator([:success, :success, :success])).collect_concat { |status| [condition[status], condition[status]] }.result).to be_success.with_data(values: [true, true, true, true, true, true])
+          expect(service.collection(chain_enumerator([:success, :success, :success])).collect_concat { |status| [condition[status], condition[status]] }.result).to be_success.with_data(values: [true, true, true, true, true, true])
+          expect(service.collection([:success, :success, :success]).collect_concat { |status| [condition[status], condition[status]] }.result).to be_success.with_data(values: [true, true, true, true, true, true])
 
-          # already used boolean value terminal chaining
-          expect { service.collection([:success]).all?.collect_concat(&exception_block) }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect(service.collection(set([:success])).collect_concat { |status| [condition[status], condition[status]] }.result).to be_success.with_data(values: [true, true])
+          expect(service.collection({success: :success}).collect_concat { |key, value| [condition[value], condition[value]] }.result).to be_success.with_data(values: [true, true])
+          expect(service.collection((:success..:success)).collect_concat { |status| [condition[status], condition[status]] }.result).to be_success.with_data(values: [true, true])
 
-          # already used singular value terminal chaining
-          expect { service.collection([:success]).first.collect_concat(&exception_block) }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          # NOTE: Step with no outputs.
+          expect(service.collection(enumerable([:success, :success, :success])).collect_concat { |status| step nested_service, in: [status: -> { status }] }.result).to be_success.with_data(values: [true, true, true])
+          expect(service.collection(enumerator([:success, :success, :success])).collect_concat { |status| step nested_service, in: [status: -> { status }] }.result).to be_success.with_data(values: [true, true, true])
+          expect(service.collection(lazy_enumerator([:success, :success, :success])).collect_concat { |status| step nested_service, in: [status: -> { status }] }.result).to be_success.with_data(values: [true, true, true])
+          expect(service.collection(chain_enumerator([:success, :success, :success])).collect_concat { |status| step nested_service, in: [status: -> { status }] }.result).to be_success.with_data(values: [true, true, true])
+          expect(service.collection([:success, :success, :success]).collect_concat { |status| step nested_service, in: [status: -> { status }] }.result).to be_success.with_data(values: [true, true, true])
+
+          expect(service.collection(set([:success])).collect_concat { |status| step nested_service, in: [status: -> { status }] }.result).to be_success.with_data(values: [true])
+          expect(service.collection({success: :success}).collect_concat { |key, value| step nested_service, in: [status: -> { value }] }.result).to be_success.with_data(values: [true])
+          expect(service.collection((:success..:success)).collect_concat { |status| step nested_service, in: [status: -> { status }] }.result).to be_success.with_data(values: [true])
+
+          # NOTE: Step with one output.
+          expect(service.collection(enumerable([:success, :success, :success])).collect_concat { |status| step nested_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: ["ok", "ok", "ok"])
+          expect(service.collection(enumerator([:success, :success, :success])).collect_concat { |status| step nested_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: ["ok", "ok", "ok"])
+          expect(service.collection(lazy_enumerator([:success, :success, :success])).collect_concat { |status| step nested_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: ["ok", "ok", "ok"])
+          expect(service.collection(chain_enumerator([:success, :success, :success])).collect_concat { |status| step nested_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: ["ok", "ok", "ok"])
+          expect(service.collection([:success, :success, :success]).collect_concat { |status| step nested_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: ["ok", "ok", "ok"])
+
+          expect(service.collection(set([:success])).collect_concat { |status| step nested_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: ["ok"])
+          expect(service.collection({success: :success}).collect_concat { |key, value| step nested_service, in: [status: -> { value }], out: :status_string }.result).to be_success.with_data(values: ["ok"])
+          expect(service.collection((:success..:success)).collect_concat { |status| step nested_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: ["ok"])
+
+          # NOTE: Step with multiple outputs.
+          expect(service.collection(enumerable([:success, :success, :success])).collect_concat { |status| step nested_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [{status_string: "ok", status_code: 200}, {status_string: "ok", status_code: 200}, {status_string: "ok", status_code: 200}])
+          expect(service.collection(enumerator([:success, :success, :success])).collect_concat { |status| step nested_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [{status_string: "ok", status_code: 200}, {status_string: "ok", status_code: 200}, {status_string: "ok", status_code: 200}])
+          expect(service.collection(lazy_enumerator([:success, :success, :success])).collect_concat { |status| step nested_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [{status_string: "ok", status_code: 200}, {status_string: "ok", status_code: 200}, {status_string: "ok", status_code: 200}])
+          expect(service.collection(chain_enumerator([:success, :success, :success])).collect_concat { |status| step nested_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [{status_string: "ok", status_code: 200}, {status_string: "ok", status_code: 200}, {status_string: "ok", status_code: 200}])
+          expect(service.collection([:success, :success, :success]).collect_concat { |status| step nested_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [{status_string: "ok", status_code: 200}, {status_string: "ok", status_code: 200}, {status_string: "ok", status_code: 200}])
+
+          expect(service.collection(set([:success])).collect_concat { |status| step nested_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [{status_string: "ok", status_code: 200}])
+          expect(service.collection({success: :success}).collect_concat { |key, value| step nested_service, in: [status: -> { value }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [{status_string: "ok", status_code: 200}])
+          expect(service.collection((:success..:success)).collect_concat { |status| step nested_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [{status_string: "ok", status_code: 200}])
+
+          # NOTE: Error result.
+          expect(service.collection(enumerable([:success, :error, :exception])).collect_concat { |status| step nested_service, in: [status: -> { status }] }.result).to be_error.without_data
+          expect(service.collection(enumerator([:success, :error, :exception])).collect_concat { |status| step nested_service, in: [status: -> { status }] }.result).to be_error.without_data
+          expect(service.collection(lazy_enumerator([:success, :error, :exception])).collect_concat { |status| step nested_service, in: [status: -> { status }] }.result).to be_error.without_data
+          expect(service.collection(chain_enumerator([:success, :error, :exception])).collect_concat { |status| step nested_service, in: [status: -> { status }] }.result).to be_error.without_data
+          expect(service.collection([:success, :error, :exception]).collect_concat { |status| step nested_service, in: [status: -> { status }] }.result).to be_error.without_data
+
+          expect(service.collection(set([:success, :error, :exception])).collect_concat { |status| step nested_service, in: [status: -> { status }] }.result).to be_error.without_data
+          expect(service.collection({success: :success, error: :error, exception: :exception}).collect_concat { |key, value| step nested_service, in: [status: -> { value }] }.result).to be_error.without_data
+          expect(service.collection((:error..:error)).collect_concat { |status| step nested_service, in: [status: -> { status }] }.result).to be_error.without_data
+
+          # NOTE: Error propagation.
+          expect(service.collection(enumerable([:success, :error, :exception])).select { |status| step nested_service, in: [status: -> { status }] }.collect_concat { |status| condition[status] }.result).to be_error.without_data
+          expect(service.collection(enumerator([:success, :error, :exception])).select { |status| step nested_service, in: [status: -> { status }] }.collect_concat { |status| condition[status] }.result).to be_error.without_data
+          expect(service.collection(lazy_enumerator([:success, :error, :exception])).select { |status| step nested_service, in: [status: -> { status }] }.collect_concat { |status| condition[status] }.result).to be_error.without_data
+          expect(service.collection(chain_enumerator([:success, :error, :exception])).select { |status| step nested_service, in: [status: -> { status }] }.collect_concat { |status| condition[status] }.result).to be_error.without_data
+          expect(service.collection([:success, :error, :exception]).select { |status| step nested_service, in: [status: -> { status }] }.collect_concat { |status| condition[status] }.result).to be_error.without_data
+
+          expect(service.collection(set([:success, :error, :exception])).select { |status| step nested_service, in: [status: -> { status }] }.collect_concat { |status| condition[status] }.result).to be_error.without_data
+          expect(service.collection({success: :success, error: :error, exception: :exception}).select { |key, value| step nested_service, in: [status: -> { value }] }.collect_concat { |key, value| condition[value] }.result).to be_error.without_data
+          expect(service.collection((:error..:error)).select { |status| step nested_service, in: [status: -> { status }] }.collect_concat { |status| condition[status] }.result).to be_error.without_data
+
+          # NOTE: Usage on terminal chaining.
+          expect { service.collection(enumerable([:success, :exception, :exception])).first.collect_concat { |status| condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection(enumerator([:success, :exception, :exception])).first.collect_concat { |status| condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection(lazy_enumerator([:success, :exception, :exception])).first.collect_concat { |status| condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection(chain_enumerator([:success, :exception, :exception])).first.collect_concat { |status| condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection([:success, :exception, :exception]).first.collect_concat { |status| condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+
+          expect { service.collection(set([:success, :exception, :exception])).first.collect_concat { |status| condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection({success: :success, exception: :exception}).first.collect_concat { |key, value| condition[value] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection((:success..:success)).first.collect_concat { |status| condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
         end
       end
 
@@ -1403,6 +1479,111 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
 
           # already used singular value terminal chaining
           expect { service.collection([:success]).first.first }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+        end
+      end
+
+      describe "#flat_map" do
+        specify do
+          # NOTE: Empty collection.
+          expect([].flat_map { |status| condition[status] }).to eq([])
+          expect(service.collection(enumerable([])).flat_map { |status| condition[status] }.result).to be_success.with_data(values: [])
+          expect(service.collection(enumerator([])).flat_map { |status| condition[status] }.result).to be_success.with_data(values: [])
+          expect(service.collection(lazy_enumerator([])).flat_map { |status| condition[status] }.result).to be_success.with_data(values: [])
+          expect(service.collection(chain_enumerator([])).flat_map { |status| condition[status] }.result).to be_success.with_data(values: [])
+          expect(service.collection([]).flat_map { |status| condition[status] }.result).to be_success.with_data(values: [])
+          expect(service.collection(set([])).flat_map { |status| condition[status] }.result).to be_success.with_data(values: [])
+          expect(service.collection({}).flat_map { |status| condition[status] }.result).to be_success.with_data(values: [])
+          expect(service.collection((:success...:success)).flat_map { |status| condition[status] }.result).to be_success.with_data(values: [])
+
+          # NOTE: Block.
+          expect([:success, :success, :success].flat_map { |status| condition[status] }).to eq([true, true, true])
+          expect(service.collection(enumerable([:success, :success, :success])).flat_map { |status| condition[status] }.result).to be_success.with_data(values: [true, true, true])
+          expect(service.collection(enumerator([:success, :success, :success])).flat_map { |status| condition[status] }.result).to be_success.with_data(values: [true, true, true])
+          expect(service.collection(lazy_enumerator([:success, :success, :success])).flat_map { |status| condition[status] }.result).to be_success.with_data(values: [true, true, true])
+          expect(service.collection(chain_enumerator([:success, :success, :success])).flat_map { |status| condition[status] }.result).to be_success.with_data(values: [true, true, true])
+          expect(service.collection([:success, :success, :success]).flat_map { |status| condition[status] }.result).to be_success.with_data(values: [true, true, true])
+
+          expect(service.collection(set([:success])).flat_map { |status| condition[status] }.result).to be_success.with_data(values: [true])
+          expect(service.collection({success: :success}).flat_map { |key, value| condition[value] }.result).to be_success.with_data(values: [true])
+          expect(service.collection((:success..:success)).flat_map { |status| condition[status] }.result).to be_success.with_data(values: [true])
+
+          # NOTE: Flatten.
+          expect([:success, :success, :success].flat_map { |status| [condition[status], condition[status]] }).to eq([true, true, true, true, true, true])
+          expect(service.collection(enumerable([:success, :success, :success])).flat_map { |status| [condition[status], condition[status]] }.result).to be_success.with_data(values: [true, true, true, true, true, true])
+          expect(service.collection(enumerator([:success, :success, :success])).flat_map { |status| [condition[status], condition[status]] }.result).to be_success.with_data(values: [true, true, true, true, true, true])
+          expect(service.collection(lazy_enumerator([:success, :success, :success])).flat_map { |status| [condition[status], condition[status]] }.result).to be_success.with_data(values: [true, true, true, true, true, true])
+          expect(service.collection(chain_enumerator([:success, :success, :success])).flat_map { |status| [condition[status], condition[status]] }.result).to be_success.with_data(values: [true, true, true, true, true, true])
+          expect(service.collection([:success, :success, :success]).flat_map { |status| [condition[status], condition[status]] }.result).to be_success.with_data(values: [true, true, true, true, true, true])
+
+          expect(service.collection(set([:success])).flat_map { |status| [condition[status], condition[status]] }.result).to be_success.with_data(values: [true, true])
+          expect(service.collection({success: :success}).flat_map { |key, value| [condition[value], condition[value]] }.result).to be_success.with_data(values: [true, true])
+          expect(service.collection((:success..:success)).flat_map { |status| [condition[status], condition[status]] }.result).to be_success.with_data(values: [true, true])
+
+          # NOTE: Step with no outputs.
+          expect(service.collection(enumerable([:success, :success, :success])).flat_map { |status| step nested_service, in: [status: -> { status }] }.result).to be_success.with_data(values: [true, true, true])
+          expect(service.collection(enumerator([:success, :success, :success])).flat_map { |status| step nested_service, in: [status: -> { status }] }.result).to be_success.with_data(values: [true, true, true])
+          expect(service.collection(lazy_enumerator([:success, :success, :success])).flat_map { |status| step nested_service, in: [status: -> { status }] }.result).to be_success.with_data(values: [true, true, true])
+          expect(service.collection(chain_enumerator([:success, :success, :success])).flat_map { |status| step nested_service, in: [status: -> { status }] }.result).to be_success.with_data(values: [true, true, true])
+          expect(service.collection([:success, :success, :success]).flat_map { |status| step nested_service, in: [status: -> { status }] }.result).to be_success.with_data(values: [true, true, true])
+
+          expect(service.collection(set([:success])).flat_map { |status| step nested_service, in: [status: -> { status }] }.result).to be_success.with_data(values: [true])
+          expect(service.collection({success: :success}).flat_map { |key, value| step nested_service, in: [status: -> { value }] }.result).to be_success.with_data(values: [true])
+          expect(service.collection((:success..:success)).flat_map { |status| step nested_service, in: [status: -> { status }] }.result).to be_success.with_data(values: [true])
+
+          # NOTE: Step with one output.
+          expect(service.collection(enumerable([:success, :success, :success])).flat_map { |status| step nested_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: ["ok", "ok", "ok"])
+          expect(service.collection(enumerator([:success, :success, :success])).flat_map { |status| step nested_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: ["ok", "ok", "ok"])
+          expect(service.collection(lazy_enumerator([:success, :success, :success])).flat_map { |status| step nested_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: ["ok", "ok", "ok"])
+          expect(service.collection(chain_enumerator([:success, :success, :success])).flat_map { |status| step nested_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: ["ok", "ok", "ok"])
+          expect(service.collection([:success, :success, :success]).flat_map { |status| step nested_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: ["ok", "ok", "ok"])
+
+          expect(service.collection(set([:success])).flat_map { |status| step nested_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: ["ok"])
+          expect(service.collection({success: :success}).flat_map { |key, value| step nested_service, in: [status: -> { value }], out: :status_string }.result).to be_success.with_data(values: ["ok"])
+          expect(service.collection((:success..:success)).flat_map { |status| step nested_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: ["ok"])
+
+          # NOTE: Step with multiple outputs.
+          expect(service.collection(enumerable([:success, :success, :success])).flat_map { |status| step nested_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [{status_string: "ok", status_code: 200}, {status_string: "ok", status_code: 200}, {status_string: "ok", status_code: 200}])
+          expect(service.collection(enumerator([:success, :success, :success])).flat_map { |status| step nested_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [{status_string: "ok", status_code: 200}, {status_string: "ok", status_code: 200}, {status_string: "ok", status_code: 200}])
+          expect(service.collection(lazy_enumerator([:success, :success, :success])).flat_map { |status| step nested_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [{status_string: "ok", status_code: 200}, {status_string: "ok", status_code: 200}, {status_string: "ok", status_code: 200}])
+          expect(service.collection(chain_enumerator([:success, :success, :success])).flat_map { |status| step nested_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [{status_string: "ok", status_code: 200}, {status_string: "ok", status_code: 200}, {status_string: "ok", status_code: 200}])
+          expect(service.collection([:success, :success, :success]).flat_map { |status| step nested_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [{status_string: "ok", status_code: 200}, {status_string: "ok", status_code: 200}, {status_string: "ok", status_code: 200}])
+
+          expect(service.collection(set([:success])).flat_map { |status| step nested_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [{status_string: "ok", status_code: 200}])
+          expect(service.collection({success: :success}).flat_map { |key, value| step nested_service, in: [status: -> { value }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [{status_string: "ok", status_code: 200}])
+          expect(service.collection((:success..:success)).flat_map { |status| step nested_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [{status_string: "ok", status_code: 200}])
+
+          # NOTE: Error result.
+          expect(service.collection(enumerable([:success, :error, :exception])).flat_map { |status| step nested_service, in: [status: -> { status }] }.result).to be_error.without_data
+          expect(service.collection(enumerator([:success, :error, :exception])).flat_map { |status| step nested_service, in: [status: -> { status }] }.result).to be_error.without_data
+          expect(service.collection(lazy_enumerator([:success, :error, :exception])).flat_map { |status| step nested_service, in: [status: -> { status }] }.result).to be_error.without_data
+          expect(service.collection(chain_enumerator([:success, :error, :exception])).flat_map { |status| step nested_service, in: [status: -> { status }] }.result).to be_error.without_data
+          expect(service.collection([:success, :error, :exception]).flat_map { |status| step nested_service, in: [status: -> { status }] }.result).to be_error.without_data
+
+          expect(service.collection(set([:success, :error, :exception])).flat_map { |status| step nested_service, in: [status: -> { status }] }.result).to be_error.without_data
+          expect(service.collection({success: :success, error: :error, exception: :exception}).flat_map { |key, value| step nested_service, in: [status: -> { value }] }.result).to be_error.without_data
+          expect(service.collection((:error..:error)).flat_map { |status| step nested_service, in: [status: -> { status }] }.result).to be_error.without_data
+
+          # NOTE: Error propagation.
+          expect(service.collection(enumerable([:success, :error, :exception])).select { |status| step nested_service, in: [status: -> { status }] }.flat_map { |status| condition[status] }.result).to be_error.without_data
+          expect(service.collection(enumerator([:success, :error, :exception])).select { |status| step nested_service, in: [status: -> { status }] }.flat_map { |status| condition[status] }.result).to be_error.without_data
+          expect(service.collection(lazy_enumerator([:success, :error, :exception])).select { |status| step nested_service, in: [status: -> { status }] }.flat_map { |status| condition[status] }.result).to be_error.without_data
+          expect(service.collection(chain_enumerator([:success, :error, :exception])).select { |status| step nested_service, in: [status: -> { status }] }.flat_map { |status| condition[status] }.result).to be_error.without_data
+          expect(service.collection([:success, :error, :exception]).select { |status| step nested_service, in: [status: -> { status }] }.flat_map { |status| condition[status] }.result).to be_error.without_data
+
+          expect(service.collection(set([:success, :error, :exception])).select { |status| step nested_service, in: [status: -> { status }] }.flat_map { |status| condition[status] }.result).to be_error.without_data
+          expect(service.collection({success: :success, error: :error, exception: :exception}).select { |key, value| step nested_service, in: [status: -> { value }] }.flat_map { |key, value| condition[value] }.result).to be_error.without_data
+          expect(service.collection((:error..:error)).select { |status| step nested_service, in: [status: -> { status }] }.flat_map { |status| condition[status] }.result).to be_error.without_data
+
+          # NOTE: Usage on terminal chaining.
+          expect { service.collection(enumerable([:success, :exception, :exception])).first.flat_map { |status| condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection(enumerator([:success, :exception, :exception])).first.flat_map { |status| condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection(lazy_enumerator([:success, :exception, :exception])).first.flat_map { |status| condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection(chain_enumerator([:success, :exception, :exception])).first.flat_map { |status| condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection([:success, :exception, :exception]).first.flat_map { |status| condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+
+          expect { service.collection(set([:success, :exception, :exception])).first.flat_map { |status| condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection({success: :success, exception: :exception}).first.flat_map { |key, value| condition[value] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection((:success..:success)).first.flat_map { |status| condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
         end
       end
 
