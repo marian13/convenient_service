@@ -44,7 +44,7 @@ module ConvenientService
               #   NOTE: `catch` is used to support lazy enumerators.
               #
               def process_with_block_return_boolean(*args, iteration_block, &iterator_block)
-                return step_aware_object_from(false) if self.propagated_result
+                return step_aware_object_from(false) if propagated_result
 
                 step_aware_iteration_block =
                   step_aware_iteration_block_from(iteration_block) do |error_result|
@@ -309,7 +309,7 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Object]
               #
               def step_aware_object_or_nil_from(object, propagated_result = self.propagated_result)
-                Entities::StepAwareCollections::Object.new(object: object, organizer: organizer, propagated_result: propagated_result || (failure unless value))
+                Entities::StepAwareCollections::Object.new(object: object, organizer: organizer, propagated_result: propagated_result || (failure unless object))
               end
 
               ##
