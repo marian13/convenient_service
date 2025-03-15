@@ -46,15 +46,15 @@ module ConvenientService
               #
               def all?(pattern = nil, &iteration_block)
                 if iteration_block
-                  process_with_block_return_boolean_value(iteration_block) do |step_aware_iteration_block|
+                  process_with_block_return_boolean(iteration_block) do |step_aware_iteration_block|
                     enumerable.all?(&step_aware_iteration_block)
                   end
                 elsif pattern
-                  process_without_block_return_boolean_value(pattern) do |pattern|
+                  process_without_block_return_boolean(pattern) do |pattern|
                     enumerable.all?(pattern)
                   end
                 else
-                  process_without_block_return_boolean_value do
+                  process_without_block_return_boolean do
                     enumerable.all?
                   end
                 end
@@ -67,15 +67,15 @@ module ConvenientService
               #
               def any?(pattern = nil, &iteration_block)
                 if iteration_block
-                  process_with_block_return_boolean_value(iteration_block) do |step_aware_iteration_block|
+                  process_with_block_return_boolean(iteration_block) do |step_aware_iteration_block|
                     enumerable.any?(&step_aware_iteration_block)
                   end
                 elsif pattern
-                  process_without_block_return_boolean_value(pattern) do |pattern|
+                  process_without_block_return_boolean(pattern) do |pattern|
                     enumerable.any?(pattern)
                   end
                 else
-                  process_without_block_return_boolean_value do
+                  process_without_block_return_boolean do
                     enumerable.any?
                   end
                 end
@@ -96,6 +96,7 @@ module ConvenientService
               end
 
               ##
+              # TODO: !!!
               # @param iteration_block [Proc]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
@@ -117,6 +118,7 @@ module ConvenientService
               end
 
               ##
+              # TODO: !!!
               # @param iteration_block [Proc]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
@@ -176,15 +178,15 @@ module ConvenientService
               #
               def count(item = nil, &iteration_block)
                 if iteration_block
-                  process_with_block_return_value(iteration_block) do |step_aware_iteration_block|
+                  process_with_block_return_object(iteration_block) do |step_aware_iteration_block|
                     enumerable.count(&step_aware_iteration_block)
                   end
                 elsif item
-                  process_without_block_return_value(item) do |item|
+                  process_without_block_return_object(item) do |item|
                     enumerable.count(item)
                   end
                 else
-                  process_without_block_return_value do
+                  process_without_block_return_object do
                     enumerable.count
                   end
                 end
@@ -197,7 +199,7 @@ module ConvenientService
               #
               def cycle(n = nil, &iteration_block)
                 if iteration_block
-                  process_with_block_return_value(n, iteration_block) do |n, step_aware_iteration_block|
+                  process_with_block_return_object(n, iteration_block) do |n, step_aware_iteration_block|
                     enumerable.cycle(n, &step_aware_iteration_block)
                   end
                 else
@@ -214,7 +216,7 @@ module ConvenientService
               #
               def detect(ifnone = nil, &iteration_block)
                 if iteration_block
-                  process_with_block_return_value_or_nil(ifnone, iteration_block) do |ifnone, step_aware_iteration_block|
+                  process_with_block_return_object_or_nil(ifnone, iteration_block) do |ifnone, step_aware_iteration_block|
                     enumerable.detect(ifnone, &step_aware_iteration_block)
                   end
                 else
@@ -323,7 +325,7 @@ module ConvenientService
               #
               def each_with_object(obj, &iteration_block)
                 if iteration_block
-                  process_with_block_return_value(obj, iteration_block) do |obj, step_aware_iteration_block|
+                  process_with_block_return_object(obj, iteration_block) do |obj, step_aware_iteration_block|
                     enumerable.each_with_object(obj, &step_aware_iteration_block)
                   end
                 else
@@ -348,7 +350,7 @@ module ConvenientService
               #
               def filter(&iteration_block)
                 if iteration_block
-                  process_with_block_return_enumerable_or_empty(iteration_block) do |step_aware_iteration_block|
+                  process_with_block_return_enumerable(iteration_block) do |step_aware_iteration_block|
                     enumerable.filter(&step_aware_iteration_block)
                   end
                 else
@@ -364,7 +366,7 @@ module ConvenientService
               #
               def filter_map(&iteration_block)
                 if iteration_block
-                  process_with_block_return_enumerable_or_empty(iteration_block) do |step_aware_iteration_block|
+                  process_with_block_return_enumerable(iteration_block) do |step_aware_iteration_block|
                     enumerable.filter_map(&step_aware_iteration_block)
                   end
                 else
@@ -381,7 +383,7 @@ module ConvenientService
               #
               def find(ifnone = nil, &iteration_block)
                 if iteration_block
-                  process_with_block_return_value_or_nil(ifnone, iteration_block) do |ifnone, step_aware_iteration_block|
+                  process_with_block_return_object_or_nil(ifnone, iteration_block) do |ifnone, step_aware_iteration_block|
                     enumerable.find(ifnone, &step_aware_iteration_block)
                   end
                 else
@@ -397,7 +399,7 @@ module ConvenientService
               #
               def find_all(&iteration_block)
                 if iteration_block
-                  process_with_block_return_enumerable_or_empty(iteration_block) do |step_aware_iteration_block|
+                  process_with_block_return_enumerable(iteration_block) do |step_aware_iteration_block|
                     enumerable.find_all(&step_aware_iteration_block)
                   end
                 else
@@ -414,11 +416,11 @@ module ConvenientService
               #
               def find_index(*args, &iteration_block)
                 if iteration_block
-                  process_with_block_return_value_or_nil(iteration_block) do |step_aware_iteration_block|
+                  process_with_block_return_object_or_nil(iteration_block) do |step_aware_iteration_block|
                     enumerable.find_index(&step_aware_iteration_block)
                   end
                 elsif args.any?
-                  process_with_block_return_value_or_nil(args.first) do |value|
+                  process_with_block_return_object_or_nil(args.first) do |value|
                     enumerable.find_index(value)
                   end
                 else
@@ -438,7 +440,7 @@ module ConvenientService
                     enumerable.first(n)
                   end
                 else
-                  process_without_block_return_value_or_nil do
+                  process_without_block_return_object_or_nil do
                     enumerable.first
                   end
                 end
@@ -515,7 +517,7 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
               def include?(obj)
-                process_without_block_return_boolean_value(obj) do |obj|
+                process_without_block_return_boolean(obj) do |obj|
                   enumerable.include?(obj)
                 end
               end
@@ -527,11 +529,11 @@ module ConvenientService
               #
               def inject(*args, &iteration_block)
                 if iteration_block
-                  process_with_block_return_value(*args, iteration_block) do |*args, &step_aware_iteration_block|
+                  process_with_block_return_object(*args, iteration_block) do |*args, &step_aware_iteration_block|
                     enumerable.inject(*args, &step_aware_iteration_block)
                   end
                 else
-                  process_without_block_return_value(*args) do |*args|
+                  process_without_block_return_object(*args) do |*args|
                     enumerable.inject(*args)
                   end
                 end
@@ -579,11 +581,11 @@ module ConvenientService
                     end
                   end
                 elsif iteration_block
-                  process_with_block_return_value_or_nil(iteration_block) do |step_aware_iteration_block|
+                  process_with_block_return_object_or_nil(iteration_block) do |step_aware_iteration_block|
                     enumerable.max(&step_aware_iteration_block)
                   end
                 else
-                  process_without_block_return_value_or_nil do
+                  process_without_block_return_object_or_nil do
                     enumerable.max
                   end
                 end
@@ -606,7 +608,7 @@ module ConvenientService
                     end
                   end
                 elsif iteration_block
-                  process_with_block_return_value_or_nil(iteration_block) do |step_aware_iteration_block|
+                  process_with_block_return_object_or_nil(iteration_block) do |step_aware_iteration_block|
                     enumerable.max_by(&step_aware_iteration_block)
                   end
                 else
@@ -621,7 +623,7 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
               def member?(obj)
-                process_without_block_return_boolean_value(obj) do |obj|
+                process_without_block_return_boolean(obj) do |obj|
                   enumerable.member?(obj)
                 end
               end
@@ -643,11 +645,11 @@ module ConvenientService
                     end
                   end
                 elsif iteration_block
-                  process_with_block_return_value_or_nil(iteration_block) do |step_aware_iteration_block|
+                  process_with_block_return_object_or_nil(iteration_block) do |step_aware_iteration_block|
                     enumerable.min(&step_aware_iteration_block)
                   end
                 else
-                  process_without_block_return_value_or_nil do
+                  process_without_block_return_object_or_nil do
                     enumerable.min
                   end
                 end
@@ -670,7 +672,7 @@ module ConvenientService
                     end
                   end
                 elsif iteration_block
-                  process_with_block_return_value_or_nil(iteration_block) do |step_aware_iteration_block|
+                  process_with_block_return_object_or_nil(iteration_block) do |step_aware_iteration_block|
                     enumerable.min_by(&step_aware_iteration_block)
                   end
                 else
@@ -719,15 +721,15 @@ module ConvenientService
               #
               def none?(pattern = nil, &iteration_block)
                 if iteration_block
-                  process_with_block_return_boolean_value(iteration_block) do |step_aware_iteration_block|
+                  process_with_block_return_boolean(iteration_block) do |step_aware_iteration_block|
                     enumerable.none?(&step_aware_iteration_block)
                   end
                 elsif pattern
-                  process_without_block_return_boolean_value(pattern) do |pattern|
+                  process_without_block_return_boolean(pattern) do |pattern|
                     enumerable.none?(pattern)
                   end
                 else
-                  process_without_block_return_boolean_value do
+                  process_without_block_return_boolean do
                     enumerable.none?
                   end
                 end
@@ -740,15 +742,15 @@ module ConvenientService
               #
               def one?(pattern = nil, &iteration_block)
                 if iteration_block
-                  process_with_block_return_boolean_value(iteration_block) do |step_aware_iteration_block|
+                  process_with_block_return_boolean(iteration_block) do |step_aware_iteration_block|
                     enumerable.one?(&step_aware_iteration_block)
                   end
                 elsif pattern
-                  process_without_block_return_boolean_value(pattern) do |pattern|
+                  process_without_block_return_boolean(pattern) do |pattern|
                     enumerable.one?(pattern)
                   end
                 else
-                  process_without_block_return_boolean_value do
+                  process_without_block_return_boolean do
                     enumerable.one?
                   end
                 end
@@ -777,11 +779,11 @@ module ConvenientService
               #
               def reduce(*args, &iteration_block)
                 if iteration_block
-                  process_with_block_return_value(*args, iteration_block) do |*args, &step_aware_iteration_block|
+                  process_with_block_return_object(*args, iteration_block) do |*args, &step_aware_iteration_block|
                     enumerable.reduce(*args, &step_aware_iteration_block)
                   end
                 else
-                  process_without_block_return_value(*args) do |*args|
+                  process_without_block_return_object(*args) do |*args|
                     enumerable.reduce(*args)
                   end
                 end
@@ -805,7 +807,7 @@ module ConvenientService
 
               ##
               # @param iteration_block [Proc, nil]
-              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Enumerable]
+              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
               def reverse_each(&iteration_block)
                 if iteration_block
@@ -825,7 +827,7 @@ module ConvenientService
               #
               def select(&iteration_block)
                 if iteration_block
-                  process_with_block_return_enumerable_or_empty(iteration_block) do |step_aware_iteration_block|
+                  process_with_block_return_enumerable(iteration_block) do |step_aware_iteration_block|
                     enumerable.select(&step_aware_iteration_block)
                   end
                 else
@@ -918,21 +920,21 @@ module ConvenientService
               #
               def sum(init = nil, &iteration_block)
                 if iteration_block
-                  process_with_block_return_value(init, iteration_block) do |init, step_aware_iteration_block|
+                  process_with_block_return_object(init, iteration_block) do |init, step_aware_iteration_block|
                     enumerable.sum(init, &step_aware_iteration_block)
                   end
                 else
-                  process_without_block_return_value(init) do |init|
+                  process_without_block_return_object(init) do |init|
                     enumerable.sum(init)
                   end
                 end
               end
 
               ##
-              # @param iteration_block [Proc, nil]
+              # @param n [Integer, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
-              def take(&iteration_block)
+              def take(n)
                 process_with_block_return_enumerable(n) do |n|
                   enumerable.take(n)
                 end
@@ -958,7 +960,7 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
               def tally
-                process_without_block_return_value do
+                process_without_block_return_object do
                   enumerable.tally
                 end
               end
@@ -1006,7 +1008,7 @@ module ConvenientService
                 args = args.each { |collection| cast_step_aware_collection(collection) }.map(&:enumerable)
 
                 if iteration_block
-                  process_with_block_return_value(*args, iteration_block) do |*args, step_aware_iteration_block|
+                  process_with_block_return_object(*args, iteration_block) do |*args, step_aware_iteration_block|
                     enumerable.zip(*args, &step_aware_iteration_block)
                   end
                 else
@@ -1017,19 +1019,6 @@ module ConvenientService
               end
 
               # ...
-
-
-              def select(&iteration_block)
-                if iteration_block
-                  process_with_block_return_enumerable_or_empty(iteration_block) do |step_aware_iteration_block|
-                    enumerable.select(&step_aware_iteration_block)
-                  end
-                else
-                  process_without_block_return_enumerator do
-                    enumerable.select
-                  end
-                end
-              end
 
               ##
               # @param iteration_block [Proc, nil]
@@ -1045,291 +1034,6 @@ module ConvenientService
                     enumerable.each
                   end
                 end
-              end
-
-              private
-
-              ##
-              # @param args [Array<Object>]
-              # @param iteration_block [Proc, nil]
-              # @param iterator_block [Proc]
-              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Value]
-              #
-              def process_with_block_return_boolean_value(*args, iteration_block, &iterator_block)
-                return step_aware_value_from(false) if propagated_result
-
-                step_aware_iteration_block =
-                  step_aware_iteration_block_from(iteration_block) do |error_result|
-                    return step_aware_value_from(false, error_result)
-                  end
-
-                boolean_value = yield(*args, step_aware_iteration_block)
-
-                step_aware_boolean_value_from(boolean_value)
-              end
-
-              ##
-              # @param args [Array<Object>]
-              # @param iterator_block [Proc]
-              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Enumerator]
-              #
-              def process_without_block_return_boolean_value(*args, &iterator_block)
-                return step_aware_value_from(false) if propagated_result
-
-                boolean_value = yield(*args)
-
-                step_aware_boolean_value_from(boolean_value)
-              end
-
-              ##
-              # @param args [Array<Object>]
-              # @param iteration_block [Proc, nil]
-              # @param iterator_block [Proc]
-              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Value]
-              #
-              def process_with_block_return_value(*args, iteration_block, &iterator_block)
-                return step_aware_value_from(nil) if propagated_result
-
-                step_aware_iteration_block =
-                  step_aware_iteration_block_from(iteration_block) do |error_result|
-                    return step_aware_value_from(nil, error_result)
-                  end
-
-                value = yield(*args, step_aware_iteration_block)
-
-                step_aware_value_from(value)
-              end
-
-              ##
-              # @param args [Array<Object>]
-              # @param iteration_block [Proc, nil]
-              # @param iterator_block [Proc]
-              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Value]
-              #
-              def process_with_block_return_value_or_nil(*args, iteration_block, &iterator_block)
-                return step_aware_value_or_nil_from(nil) if propagated_result
-
-                step_aware_iteration_block =
-                  step_aware_iteration_block_from(iteration_block) do |error_result|
-                    return step_aware_value_or_nil_from(nil, error_result)
-                  end
-
-                value = yield(*args, step_aware_iteration_block)
-
-                step_aware_value_or_nil_from(value)
-              end
-
-              ##
-              # @param args [Array<Object>]
-              # @param iteration_block [Proc, nil]
-              # @param iterator_block [Proc]
-              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Value]
-              #
-              def process_with_block_return_enumerable(*args, iteration_block, &iterator_block)
-                return step_aware_enumerable_from(enumerable) if propagated_result
-
-                step_aware_iteration_block =
-                  step_aware_iteration_block_from(iteration_block) do |error_result|
-                    b
-
-                    return step_aware_enumerable_from(enumerable, error_result)
-                  end
-
-                enumerable = yield(*args, step_aware_iteration_block)
-
-                step_aware_enumerable_from(enumerable)
-              end
-
-              ##
-              # @param args [Array<Object>]
-              # @param iteration_block [Proc, nil]
-              # @param iterator_block [Proc]
-              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Value]
-              #
-              def process_with_block_return_enumerable_or_empty(*args, iteration_block, &iterator_block)
-                return step_aware_enumerable_or_empty_from(enumerable) if propagated_result
-
-                step_aware_iteration_block =
-                  step_aware_iteration_block_from(iteration_block) do |error_result|
-                    return step_aware_enumerable_or_empty_from(enumerable, error_result)
-                  end
-
-                enumerable = yield(*args, step_aware_iteration_block)
-
-                step_aware_enumerable_or_empty_from(enumerable)
-              end
-
-              ##
-              # @param args [Array<Object>]
-              # @param iterator_block [Proc]
-              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Enumerator]
-              #
-              def process_without_block_return_value(*args, &iterator_block)
-                return step_aware_value_from(nil) if propagated_result
-
-                value = yield(*args)
-
-                step_aware_value_from(value)
-              end
-
-              ##
-              # @param args [Array<Object>]
-              # @param iterator_block [Proc]
-              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Enumerator]
-              #
-              def process_without_block_return_value_or_nil(*args, &iterator_block)
-                return step_aware_value_or_nil_from(nil) if propagated_result
-
-                value_or_nil = yield(*args)
-
-                step_aware_value_or_nil_from(value_or_nil)
-              end
-
-              ##
-              # @param args [Array<Object>]
-              # @param iterator_block [Proc]
-              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Enumerator]
-              #
-              def process_without_block_return_enumerable(*args, &iterator_block)
-                return step_aware_enumerable_from(enumerable) if propagated_result
-
-                enumerable = yield(*args)
-
-                step_aware_enumerable_from(enumerable)
-              end
-
-              ##
-              # @param args [Array<Object>]
-              # @param iterator_block [Proc]
-              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Enumerator]
-              #
-              def process_without_block_return_enumerator(*args, &iterator_block)
-                return step_aware_enumerator_from(enumerable.to_enum) if propagated_result
-
-                enumerator = yield(*args)
-
-                step_aware_enumerator_from(enumerator)
-              end
-
-              ##
-              # @param args [Array<Object>]
-              # @param iterator_block [Proc]
-              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Enumerator]
-              #
-              def process_without_block_return_lazy_enumerator(*args, &iterator_block)
-                return step_aware_lazy_enumerator_from(enumerable.lazy) if propagated_result
-
-                lazy_enumerator = yield(*args)
-
-                step_aware_lazy_enumerator_from(lazy_enumerator)
-              end
-
-              ##
-              # @param iteration_block [Proc]
-              # @param error_block [Proc]
-              # @return [Proc]
-              #
-              def step_aware_iteration_block_from(iteration_block, &error_block)
-                proc do |*args|
-                  value = iteration_block.call(*args)
-
-                  next value unless Plugins::CanHaveSteps.step?(value)
-
-                  if value.success?
-                    next true if value.outputs.none?
-
-                    next value.outputs.one? ? value.output_values.values.first : value.output_values
-                  end
-
-                  if value.failure?
-                    next false if value.outputs.none?
-
-                    # next value.outputs.one? ? nil : {}
-                    next nil
-                  end
-
-                  break yield(value.result)
-                end
-              end
-
-              ##
-              # @param boolean_value [Boolean]
-              # @param propagated_result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result, nil]
-              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Value]
-              #
-              def step_aware_boolean_value_from(boolean_value, propagated_result = self.propagated_result)
-                Entities::StepAwareCollections::BooleanValue.new(value: boolean_value, organizer: organizer, propagated_result: propagated_result || (failure unless boolean_value))
-              end
-
-              ##
-              # @param value [Object] Can be any type.
-              # @param propagated_result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result, nil]
-              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Value]
-              #
-              def step_aware_value_from(value, propagated_result = self.propagated_result)
-                Entities::StepAwareCollections::Value.new(value: value, organizer: organizer, propagated_result: propagated_result)
-              end
-
-              ##
-              # @param value [Object] Can be any type.
-              # @param propagated_result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result, nil]
-              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Value]
-              #
-              def step_aware_value_or_nil_from(value, propagated_result = self.propagated_result)
-                Entities::StepAwareCollections::Value.new(value: value, organizer: organizer, propagated_result: propagated_result || (failure unless value))
-              end
-
-              ##
-              # @param enumerable [Enumerable]
-              # @param propagated_result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result, nil]
-              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Enumerable]
-              #
-              def step_aware_enumerable_from(enumerable, propagated_result = self.propagated_result)
-                Entities::StepAwareCollections::Enumerable.new(enumerable: enumerable, organizer: organizer, propagated_result: propagated_result)
-              end
-
-              ##
-              # @param enumerable [Enumerable]
-              # @param propagated_result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result, nil]
-              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Enumerable]
-              #
-              def step_aware_enumerable_or_empty_from(enumerable, propagated_result = self.propagated_result)
-                Entities::StepAwareCollections::Enumerable.new(enumerable: enumerable, organizer: organizer, propagated_result: propagated_result || (failure if enumerable.size == 0))
-              end
-
-              ##
-              # @param enumerator [Enumerator]
-              # @param propagated_result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result, nil]
-              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Enumerator]
-              #
-              def step_aware_enumerator_from(enumerator, propagated_result = self.propagated_result)
-                Entities::StepAwareCollections::Enumerator.new(enumerator: enumerator, organizer: organizer, propagated_result: propagated_result)
-              end
-
-              ##
-              # @param lazy_enumerator [Enumerator]
-              # @param propagated_result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result, nil]
-              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Enumerator]
-              #
-              def step_aware_lazy_enumerator_from(lazy_enumerator, propagated_result = self.propagated_result)
-                Entities::StepAwareCollections::LazyEnumerator.new(lazy_enumerator: lazy_enumerator, organizer: organizer, propagated_result: propagated_result)
-              end
-
-              ##
-              # @param chain_enumerator [Enumerator::Chain]
-              # @param propagated_result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result, nil]
-              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Enumerator]
-              #
-              def step_aware_chain_enumerator_from(chain_enumerator, propagated_result = self.propagated_result)
-                Entities::StepAwareCollections::ChainEnumerator.new(chain_enumerator: chain_enumerator, organizer: organizer, propagated_result: propagated_result)
-              end
-
-              ##
-              # @param collection [Object] Can be any type.
-              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
-              #
-              def cast_step_aware_collection(collection)
-                Commands::CastStepAwareCollection.call(collection: collection, organizer: organizer, propagated_result: propagated_result)
               end
             end
           end

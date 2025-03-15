@@ -2,8 +2,8 @@
 
 require_relative "step_aware_collections/base"
 
-require_relative "step_aware_collections/value"
-require_relative "step_aware_collections/boolean_value"
+require_relative "step_aware_collections/object"
+require_relative "step_aware_collections/boolean"
 
 require_relative "step_aware_collections/enumerable"
 require_relative "step_aware_collections/enumerator"

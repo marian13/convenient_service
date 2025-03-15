@@ -6,7 +6,7 @@ module ConvenientService
       module CanHaveStepAwareCollections
         module Entities
           module StepAwareCollections
-            class BooleanValue < Entities::StepAwareCollections::Value
+            class Boolean < Entities::StepAwareCollections::Object
               ##
               # @param data_key [Symbol, nil]
               # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]

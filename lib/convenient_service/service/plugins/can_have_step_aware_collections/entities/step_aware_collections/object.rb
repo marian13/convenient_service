@@ -6,14 +6,14 @@ module ConvenientService
       module CanHaveStepAwareCollections
         module Entities
           module StepAwareCollections
-            class Value < Entities::StepAwareCollections::Base
+            class Object < Entities::StepAwareCollections::Base
               ##
               # @api private
               #
-              # @!attribute [r] value
+              # @!attribute [r] object
               #   @return [Object] Can be any type.
               #
-              attr_reader :value
+              attr_reader :object
 
               ##
               # @api private
@@ -26,13 +26,13 @@ module ConvenientService
               ##
               # @api private
               #
-              # @param value [Object] Can be any type.
+              # @param object [Object] Can be any type.
               # @param organizer [ConvenientService::Service]
               # @param propagated_result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
               # @return [void]
               #
-              def initialize(value:, organizer:, propagated_result:)
-                @value = value
+              def initialize(object:, organizer:, propagated_result:)
+                @object = object
                 @organizer = organizer
                 @propagated_result = propagated_result
               end
@@ -44,7 +44,7 @@ module ConvenientService
               def result(data_key: nil)
                 return propagated_result if propagated_result
 
-                success(data_key || :value => value)
+                success(data_key || :value => object)
               end
 
               ##
