@@ -47,8 +47,10 @@ module ConvenientService
                 return step_aware_object_from(false) if propagated_result
 
                 step_aware_iteration_block =
-                  step_aware_iteration_block_from(iteration_block) do |error_result|
-                    return step_aware_object_from(false, error_result)
+                  if iteration_block
+                    step_aware_iteration_block_from(iteration_block) do |error_result|
+                      return step_aware_object_from(false, error_result)
+                    end
                   end
 
                 response =
@@ -67,16 +69,7 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Enumerator]
               #
               def process_without_block_return_boolean(*args, &iterator_block)
-                return step_aware_object_from(false) if propagated_result
-
-                response =
-                  catch :propagated_result do
-                    {boolean: yield(*args)}
-                  end
-
-                return step_aware_boolean_from(false, response[:propagated_result]) if response.has_key?(:propagated_result)
-
-                step_aware_boolean_from(response[:boolean])
+                process_with_block_return_boolean(*args, nil, &iterator_block)
               end
 
               ##
@@ -89,13 +82,20 @@ module ConvenientService
                 return step_aware_object_from(nil) if propagated_result
 
                 step_aware_iteration_block =
-                  step_aware_iteration_block_from(iteration_block) do |error_result|
-                    return step_aware_object_from(nil, error_result)
+                  if iteration_block
+                    step_aware_iteration_block_from(iteration_block) do |error_result|
+                      return step_aware_object_from(nil, error_result)
+                    end
                   end
 
-                value = yield(*args, step_aware_iteration_block)
+                response =
+                  catch :propagated_result do
+                    {object: yield(*args, step_aware_iteration_block)}
+                  end
 
-                step_aware_object_from(value)
+                return step_aware_object_from(nil, response[:propagated_result]) if response.has_key?(:propagated_result)
+
+                step_aware_object_from(response[:object])
               end
 
               ##
@@ -104,11 +104,7 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Enumerator]
               #
               def process_without_block_return_object(*args, &iterator_block)
-                return step_aware_object_from(nil) if propagated_result
-
-                value = yield(*args)
-
-                step_aware_object_from(value)
+                process_with_block_return_boolean(*args, nil, &iterator_block)
               end
 
               ##
