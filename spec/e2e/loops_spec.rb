@@ -2129,6 +2129,111 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
         end
       end
 
+      describe "#grep" do
+        specify do
+          # NOTE: Empty collection.
+          expect([].grep(/success/) { |status| condition[status] }).to eq([])
+          expect(service.collection(enumerable([])).grep(/success/) { |status| condition[status] }.result).to be_success.with_data(values: [])
+          expect(service.collection(enumerator([])).grep(/success/) { |status| condition[status] }.result).to be_success.with_data(values: [])
+          expect(service.collection(lazy_enumerator([])).grep(/success/) { |status| condition[status] }.result).to be_success.with_data(values: [])
+          expect(service.collection(chain_enumerator([])).grep(/success/) { |status| condition[status] }.result).to be_success.with_data(values: [])
+          expect(service.collection([]).grep(/success/) { |status| condition[status] }.result).to be_success.with_data(values: [])
+          expect(service.collection(set([])).grep(/success/) { |status| condition[status] }.result).to be_success.with_data(values: [])
+          expect(service.collection({}).grep(/success/) { |key, value| condition[value] }.result).to be_success.with_data(values: [])
+          expect(service.collection((:success...:success)).grep(/success/) { |status| condition[status] }.result).to be_success.with_data(values: [])
+
+          # NOTE: Only pattern.
+          expect([:failure, :success, :failure, :success].grep(/success/)).to eq([:success, :success])
+          expect(service.collection(enumerable([:failure, :success, :failure, :success])).grep(/success/).result).to be_success.with_data(values: [:success, :success])
+          expect(service.collection(enumerator([:failure, :success, :failure, :success])).grep(/success/).result).to be_success.with_data(values: [:success, :success])
+          expect(service.collection(lazy_enumerator([:failure, :success, :failure, :success])).grep(/success/).result).to be_success.with_data(values: [:success, :success])
+          expect(service.collection(chain_enumerator([:failure, :success, :failure, :success])).grep(/success/).result).to be_success.with_data(values: [:success, :success])
+          expect(service.collection([:failure, :success, :failure, :success]).grep(/success/).result).to be_success.with_data(values: [:success, :success])
+
+          expect(service.collection(set([:failure, :success])).grep(/success/).result).to be_success.with_data(values: [:success])
+          expect(service.collection({failure: :failure, success: :success}).grep([:success, :success]).result).to be_success.with_data(values: [[:success, :success]])
+          expect(service.collection((:success..:success)).grep(/success/).result).to be_success.with_data(values: [:success])
+
+          # NOTE: Block.
+          expect([:failure, :success, :failure, :success].grep(/success/) { |status| condition[status] }).to eq([true, true])
+          expect(service.collection(enumerable([:failure, :success, :failure, :success])).grep(/success/) { |status| condition[status] }.result).to be_success.with_data(values: [true, true])
+          expect(service.collection(enumerator([:failure, :success, :failure, :success])).grep(/success/) { |status| condition[status] }.result).to be_success.with_data(values: [true, true])
+          expect(service.collection(lazy_enumerator([:failure, :success, :failure, :success])).grep(/success/) { |status| condition[status] }.result).to be_success.with_data(values: [true, true])
+          expect(service.collection(chain_enumerator([:failure, :success, :failure, :success])).grep(/success/) { |status| condition[status] }.result).to be_success.with_data(values: [true, true])
+          expect(service.collection([:failure, :success, :failure, :success]).grep(/success/) { |status| condition[status] }.result).to be_success.with_data(values: [true, true])
+
+          expect(service.collection(set([:failure, :success])).grep(/success/) { |status| condition[status] }.result).to be_success.with_data(values: [true])
+          expect(service.collection({failure: :failure, success: :success}).grep([:success, :success]) { |key, value| condition[value] }.result).to be_success.with_data(values: [true])
+          expect(service.collection((:success..:success)).grep(/success/) { |status| condition[status] }.result).to be_success.with_data(values: [true])
+
+          # NOTE: Step with no outputs.
+          expect(service.collection(enumerable([:failure, :success, :failure, :success])).grep(/success/) { |status| step nested_service, in: [status: -> { status }] }.result).to be_success.with_data(values: [true, true])
+          expect(service.collection(enumerator([:failure, :success, :failure, :success])).grep(/success/) { |status| step nested_service, in: [status: -> { status }] }.result).to be_success.with_data(values: [true, true])
+          expect(service.collection(lazy_enumerator([:failure, :success, :failure, :success])).grep(/success/) { |status| step nested_service, in: [status: -> { status }] }.result).to be_success.with_data(values: [true, true])
+          expect(service.collection(chain_enumerator([:failure, :success, :failure, :success])).grep(/success/) { |status| step nested_service, in: [status: -> { status }] }.result).to be_success.with_data(values: [true, true])
+          expect(service.collection([:failure, :success, :failure, :success]).grep(/success/) { |status| step nested_service, in: [status: -> { status }] }.result).to be_success.with_data(values: [true, true])
+
+          expect(service.collection(set([:failure, :success])).grep(/success/) { |status| step nested_service, in: [status: -> { status }] }.result).to be_success.with_data(values: [true])
+          expect(service.collection({failure: :failure, success: :success}).grep([:success, :success]) { |key, value| step nested_service, in: [status: -> { value }] }.result).to be_success.with_data(values: [true])
+          expect(service.collection((:success..:success)).grep(/success/) { |status| step nested_service, in: [status: -> { status }] }.result).to be_success.with_data(values: [true])
+
+          # NOTE: Step with one output.
+          expect(service.collection(enumerable([:failure, :success, :failure, :success])).grep(/success/) { |status| step nested_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: ["ok", "ok"])
+          expect(service.collection(enumerator([:failure, :success, :failure, :success])).grep(/success/) { |status| step nested_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: ["ok", "ok"])
+          expect(service.collection(lazy_enumerator([:failure, :success, :failure, :success])).grep(/success/) { |status| step nested_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: ["ok", "ok"])
+          expect(service.collection(chain_enumerator([:failure, :success, :failure, :success])).grep(/success/) { |status| step nested_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: ["ok", "ok"])
+          expect(service.collection([:failure, :success, :failure, :success]).grep(/success/) { |status| step nested_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: ["ok", "ok"])
+
+          expect(service.collection(set([:failure, :success])).grep(/success/) { |status| step nested_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: ["ok"])
+          expect(service.collection({failure: :failure, success: :success}).grep([:success, :success]) { |key, value| step nested_service, in: [status: -> { value }], out: :status_string }.result).to be_success.with_data(values: ["ok"])
+          expect(service.collection((:success..:success)).grep(/success/) { |status| step nested_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: ["ok"])
+
+          # NOTE: Step with multiple outputs.
+          expect(service.collection(enumerable([:failure, :success, :failure, :success])).grep(/success/) { |status| step nested_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [{status_string: "ok", status_code: 200}, {status_string: "ok", status_code: 200}])
+          expect(service.collection(enumerator([:failure, :success, :failure, :success])).grep(/success/) { |status| step nested_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [{status_string: "ok", status_code: 200}, {status_string: "ok", status_code: 200}])
+          expect(service.collection(lazy_enumerator([:failure, :success, :failure, :success])).grep(/success/) { |status| step nested_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [{status_string: "ok", status_code: 200}, {status_string: "ok", status_code: 200}])
+          expect(service.collection(chain_enumerator([:failure, :success, :failure, :success])).grep(/success/) { |status| step nested_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [{status_string: "ok", status_code: 200}, {status_string: "ok", status_code: 200}])
+          expect(service.collection([:failure, :success, :failure, :success]).grep(/success/) { |status| step nested_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [{status_string: "ok", status_code: 200}, {status_string: "ok", status_code: 200}])
+
+          expect(service.collection(set([:failure, :success])).grep(/success/) { |status| step nested_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [{status_string: "ok", status_code: 200}])
+          expect(service.collection({failure: :failure, success: :success}).grep([:success, :success]) { |key, value| step nested_service, in: [status: -> { value }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [{status_string: "ok", status_code: 200}])
+          expect(service.collection((:success..:success)).grep(/success/) { |status| step nested_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [{status_string: "ok", status_code: 200}])
+
+          # NOTE: Error result.
+          expect(service.collection(enumerable([:failure, :error, :exception])).grep(/error/) { |status| step nested_service, in: [status: -> { status }] }.result).to be_error.without_data
+          expect(service.collection(enumerator([:failure, :error, :exception])).grep(/error/) { |status| step nested_service, in: [status: -> { status }] }.result).to be_error.without_data
+          expect(service.collection(lazy_enumerator([:failure, :error, :exception])).grep(/error/) { |status| step nested_service, in: [status: -> { status }] }.result).to be_error.without_data
+          expect(service.collection(chain_enumerator([:failure, :error, :exception])).grep(/error/) { |status| step nested_service, in: [status: -> { status }] }.result).to be_error.without_data
+          expect(service.collection([:failure, :error, :exception]).grep(/error/) { |status| step nested_service, in: [status: -> { status }] }.result).to be_error.without_data
+
+          expect(service.collection(set([:failure, :error, :exception])).grep(/error/) { |status| step nested_service, in: [status: -> { status }] }.result).to be_error.without_data
+          expect(service.collection({failure: :failure, error: :error, exception: :exception}).grep([:error, :error]) { |key, value| step nested_service, in: [status: -> { value }] }.result).to be_error.without_data
+          expect(service.collection((:error..:error)).grep(/error/) { |status| step nested_service, in: [status: -> { status }] }.result).to be_error.without_data
+
+          # NOTE: Error propagation.
+          expect(service.collection(enumerable([:success, :error, :exception])).select { |status| step nested_service, in: [status: -> { status }] }.grep(/success/) { |status| condition[status] }.result).to be_error.without_data
+          expect(service.collection(enumerator([:success, :error, :exception])).select { |status| step nested_service, in: [status: -> { status }] }.grep(/success/) { |status| condition[status] }.result).to be_error.without_data
+          expect(service.collection(lazy_enumerator([:success, :error, :exception])).select { |status| step nested_service, in: [status: -> { status }] }.grep(/success/) { |status| condition[status] }.result).to be_error.without_data
+          expect(service.collection(chain_enumerator([:success, :error, :exception])).select { |status| step nested_service, in: [status: -> { status }] }.grep(/success/) { |status| condition[status] }.result).to be_error.without_data
+          expect(service.collection([:success, :error, :exception]).select { |status| step nested_service, in: [status: -> { status }] }.grep(/success/) { |status| condition[status] }.result).to be_error.without_data
+
+          expect(service.collection(set([:success, :error, :exception])).select { |status| step nested_service, in: [status: -> { status }] }.grep(/success/) { |status| condition[status] }.result).to be_error.without_data
+          expect(service.collection({success: :success, error: :error, exception: :exception}).select { |key, value| step nested_service, in: [status: -> { value }] }.grep([:success, :success]) { |key, value| condition[value] }.result).to be_error.without_data
+          expect(service.collection((:error..:error)).select { |status| step nested_service, in: [status: -> { status }] }.grep(/success/) { |status| condition[status] }.result).to be_error.without_data
+
+          # NOTE: Usage on terminal chaining.
+          expect { service.collection(enumerable([:success, :exception, :exception])).first.grep(/success/) { |status| condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection(enumerator([:success, :exception, :exception])).first.grep(/success/) { |status| condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection(lazy_enumerator([:success, :exception, :exception])).first.grep(/success/) { |status| condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection(chain_enumerator([:success, :exception, :exception])).first.grep(/success/) { |status| condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection([:success, :exception, :exception]).first.grep(/success/) { |status| condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+
+          expect { service.collection(set([:success, :exception, :exception])).first.grep(/success/) { |status| condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection({success: :success, exception: :exception}).first.grep([:success, :success]) { |key, value| condition[value] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection((:success..:success)).first.grep(/success/) { |status| condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+        end
+      end
+
       describe "#map" do
         specify do
           # NOTE: Empty collection.

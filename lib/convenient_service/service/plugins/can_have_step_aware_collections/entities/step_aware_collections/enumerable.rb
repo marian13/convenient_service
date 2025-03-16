@@ -473,7 +473,7 @@ module ConvenientService
                     enumerable.grep(pattern, &step_aware_iteration_block)
                   end
                 else
-                  process_with_block_return_enumerable(pattern) do |pattern|
+                  process_without_block_return_enumerable(pattern) do |pattern|
                     enumerable.grep(pattern)
                   end
                 end

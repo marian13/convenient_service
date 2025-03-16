@@ -225,7 +225,7 @@ module ConvenientService
                     lazy_enumerator.grep(pattern, &step_aware_iteration_block)
                   end
                 else
-                  process_with_block_return_lazy_enumerator(pattern) do |pattern|
+                  process_without_block_return_lazy_enumerator(pattern) do |pattern|
                     lazy_enumerator.grep(pattern)
                   end
                 end
@@ -242,7 +242,7 @@ module ConvenientService
                     lazy_enumerator.grep_v(pattern, &step_aware_iteration_block)
                   end
                 else
-                  process_with_block_return_lazy_enumerator(pattern) do |pattern|
+                  process_without_block_return_lazy_enumerator(pattern) do |pattern|
                     lazy_enumerator.grep_v(pattern)
                   end
                 end
