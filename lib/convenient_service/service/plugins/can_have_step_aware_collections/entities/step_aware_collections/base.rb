@@ -125,9 +125,14 @@ module ConvenientService
                     return step_aware_object_or_nil_from(nil, error_result)
                   end
 
-                value = yield(*args, step_aware_iteration_block)
+                response =
+                  catch :propagated_result do
+                    {object_or_nil: yield(*args, step_aware_iteration_block)}
+                  end
 
-                step_aware_object_or_nil_from(value)
+                return step_aware_object_or_nil_from(nil, response[:propagated_result]) if response.has_key?(:propagated_result)
+
+                step_aware_object_or_nil_from(response[:object_or_nil])
               end
 
               ##
@@ -138,9 +143,14 @@ module ConvenientService
               def process_without_block_return_object_or_nil(*args, &iterator_block)
                 return step_aware_object_or_nil_from(nil) if propagated_result
 
-                value_or_nil = yield(*args)
+                response =
+                  catch :propagated_result do
+                    {object_or_nil: yield(*args)}
+                  end
 
-                step_aware_object_or_nil_from(value_or_nil)
+                return step_aware_object_or_nil_from(nil, response[:propagated_result]) if response.has_key?(:propagated_result)
+
+                step_aware_object_or_nil_from(response[:object_or_nil])
               end
 
               ##
