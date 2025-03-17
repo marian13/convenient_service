@@ -108,8 +108,10 @@ module ConvenientService
                 return step_aware_object_or_nil_from(nil) if propagated_result
 
                 step_aware_iteration_block =
-                  step_aware_iteration_block_from(iteration_block) do |error_result|
-                    return step_aware_object_or_nil_from(nil, error_result)
+                  if iteration_block
+                    step_aware_iteration_block_from(iteration_block) do |error_result|
+                      return step_aware_object_or_nil_from(nil, error_result)
+                    end
                   end
 
                 response =
