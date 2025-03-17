@@ -928,6 +928,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
         end
       end
 
+      # rubocop:disable Performance/Size
       describe "#count" do
         specify do
           # NOTE: Empty collection.
@@ -1027,15 +1028,15 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.collection((:error..:error)).count { |status| step nested_service, in: [status: -> { status }] }.result).to be_error.without_data
 
           # NOTE: Error propagation.
-          expect(service.collection(enumerable([:success, :error, :exception])).select { |status| step nested_service, in: [status: -> { status }] }.count.result).to be_error.without_data
-          expect(service.collection(enumerator([:success, :error, :exception])).select { |status| step nested_service, in: [status: -> { status }] }.count.result).to be_error.without_data
-          expect(service.collection(lazy_enumerator([:success, :error, :exception])).select { |status| step nested_service, in: [status: -> { status }] }.count.result).to be_error.without_data
-          expect(service.collection(chain_enumerator([:success, :error, :exception])).select { |status| step nested_service, in: [status: -> { status }] }.count.result).to be_error.without_data
-          expect(service.collection([:success, :error, :exception]).select { |status| step nested_service, in: [status: -> { status }] }.count.result).to be_error.without_data
-          expect(service.collection(set([:success, :error, :exception])).select { |status| step nested_service, in: [status: -> { status }] }.count.result).to be_error.without_data
+          expect(service.collection(enumerable([:success, :error, :exception])).count { |status| step nested_service, in: [status: -> { status }] }.result).to be_error.without_data
+          expect(service.collection(enumerator([:success, :error, :exception])).count { |status| step nested_service, in: [status: -> { status }] }.result).to be_error.without_data
+          expect(service.collection(lazy_enumerator([:success, :error, :exception])).count { |status| step nested_service, in: [status: -> { status }] }.result).to be_error.without_data
+          expect(service.collection(chain_enumerator([:success, :error, :exception])).count { |status| step nested_service, in: [status: -> { status }] }.result).to be_error.without_data
+          expect(service.collection([:success, :error, :exception]).count { |status| step nested_service, in: [status: -> { status }] }.result).to be_error.without_data
+          expect(service.collection(set([:success, :error, :exception])).count { |status| step nested_service, in: [status: -> { status }] }.result).to be_error.without_data
 
-          expect(service.collection({success: :success, error: :error, exception: :exception}).select { |key, value| step nested_service, in: [status: -> { value }] }.count.result).to be_error.without_data
-          expect(service.collection((:error..:error)).select { |status| step nested_service, in: [status: -> { status }] }.count.result).to be_error.without_data
+          expect(service.collection({success: :success, error: :error, exception: :exception}).count { |key, value| step nested_service, in: [status: -> { value }] }.result).to be_error.without_data
+          expect(service.collection((:error..:error)).count { |status| step nested_service, in: [status: -> { status }] }.result).to be_error.without_data
 
           # NOTE: Usage on terminal chaining.
           expect { service.collection(enumerable([:success, :exception, :exception])).first.count.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
@@ -1047,40 +1048,6 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
 
           expect { service.collection({success: :success, exception: :exception}).first.count.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
           expect { service.collection((:success..:success)).first.count.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
-        end
-      end
-
-      # rubocop:disable Performance/Size
-      xdescribe "#count" do
-        specify do
-          # empty
-          expect([].count).to eq(0)
-          expect(service.collection([]).count.result).to be_success.with_data(value: 0)
-
-          # no block
-          expect([:success, :success, :success].count).to eq(3)
-          expect(service.collection([:success, :success, :success]).count.result).to be_success.with_data(value: 3)
-
-          # item
-          expect([:failure, :success, :success].count(:success)).to eq(2)
-          expect(service.collection([:failure, :success, :success]).count(:success).result).to be_success.with_data(value: 2)
-
-          # condition block
-          expect([:success, :success, :success].count(&conditional_block)).to eq(3)
-          expect(service.collection([:success, :success, :success]).count(&conditional_block).result).to be_success.with_data(value: 3)
-          expect(service.collection([:success, :success, :success]).count(&step_without_outputs_block).result).to be_success.with_data(value: 3)
-
-          # error result
-          expect(service.collection([:success, :error, :exception]).count(&step_without_outputs_block).result).to be_error.without_data
-
-          # error propagation
-          expect(service.collection([:success, :error, :exception]).each(&step_without_outputs_block).count(&exception_block).result).to be_error.without_data
-
-          # already used boolean value terminal chaining
-          expect { service.collection([:success]).all?.count(&exception_block) }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
-
-          # already used singular value terminal chaining
-          expect { service.collection([:success]).first.count(&exception_block) }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
         end
       end
       # rubocop:enable Performance/Size

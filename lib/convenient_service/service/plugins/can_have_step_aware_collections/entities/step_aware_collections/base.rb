@@ -43,7 +43,7 @@ module ConvenientService
               # @internal
               #   NOTE: `catch` is used to support lazy enumerators.
               #
-              def process_with_block_return_boolean(*args, iteration_block, &iterator_block)
+              def process_as_boolean(*args, iteration_block, &iterator_block)
                 return step_aware_object_from(false) if propagated_result
 
                 step_aware_iteration_block =
@@ -61,15 +61,6 @@ module ConvenientService
                 return step_aware_boolean_from(false, response[:propagated_result]) if response.has_key?(:propagated_result)
 
                 step_aware_boolean_from(response[:boolean])
-              end
-
-              ##
-              # @param args [Array<Object>]
-              # @param iterator_block [Proc]
-              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Enumerator]
-              #
-              def process_without_block_return_boolean(*args, &iterator_block)
-                process_with_block_return_boolean(*args, nil, &iterator_block)
               end
 
               ##
@@ -104,7 +95,7 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Enumerator]
               #
               def process_without_block_return_object(*args, &iterator_block)
-                process_with_block_return_boolean(*args, nil, &iterator_block)
+                process_as_boolean(*args, nil, &iterator_block)
               end
 
               ##
@@ -159,8 +150,10 @@ module ConvenientService
                 return step_aware_enumerable_from(enumerable) if propagated_result
 
                 step_aware_iteration_block =
-                  step_aware_iteration_block_from(iteration_block) do |error_result|
-                    return step_aware_enumerable_from(enumerable, error_result)
+                  if iteration_block
+                    step_aware_iteration_block_from(iteration_block) do |error_result|
+                      return step_aware_enumerable_from(enumerable, error_result)
+                    end
                   end
 
                 enumerable = yield(*args, step_aware_iteration_block)

@@ -49,7 +49,7 @@ module ConvenientService
               #   @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
               def all?(*args, &iteration_block)
-                process_with_block_return_boolean(*args, iteration_block) do |*args, step_aware_iteration_block|
+                process_as_boolean(*args, iteration_block) do |*args, step_aware_iteration_block|
                   enumerable.all?(*args, &step_aware_iteration_block)
                 end
               end
@@ -64,7 +64,7 @@ module ConvenientService
               #   @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
               def any?(*args, &iteration_block)
-                process_with_block_return_boolean(*args, iteration_block) do |*args, step_aware_iteration_block|
+                process_as_boolean(*args, iteration_block) do |*args, step_aware_iteration_block|
                   enumerable.any?(*args, &step_aware_iteration_block)
                 end
               end
@@ -158,12 +158,6 @@ module ConvenientService
                   end
                 end
               end
-
-              ##
-              # @param item [Object, nil]
-              # @param iteration_block [Proc, nil]
-              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
-              #
 
               ##
               # @overload count
@@ -458,32 +452,36 @@ module ConvenientService
               # @param iteration_block [Proc, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
-              def grep(pattern, &iteration_block)
-                if iteration_block
-                  process_with_block_return_enumerable(pattern, iteration_block) do |pattern, step_aware_iteration_block|
-                    enumerable.grep(pattern, &step_aware_iteration_block)
-                  end
-                else
-                  process_without_block_return_enumerable(pattern) do |pattern|
-                    enumerable.grep(pattern)
-                  end
+
+              ##
+              # @overload grep(pattern)
+              #   @param pattern [Object]
+              #   @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
+              #
+              # @overload grep(pattern, &iteration_block)
+              #   @param pattern [Object]
+              #   @param iteration_block [Proc]
+              #   @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
+              #
+              def grep(*args, &iteration_block)
+                process_with_block_return_enumerable(*args, iteration_block) do |*args, step_aware_iteration_block|
+                  enumerable.grep(*args, &step_aware_iteration_block)
                 end
               end
 
               ##
-              # @param pattern [Object] Can be any type.
-              # @param iteration_block [Proc, nil]
-              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
+              # @overload grep_v(pattern)
+              #   @param pattern [Object]
+              #   @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
-              def grep_v(pattern, &iteration_block)
-                if iteration_block
-                  process_with_block_return_enumerable(pattern, iteration_block) do |pattern, step_aware_iteration_block|
-                    enumerable.grep_v(pattern, &step_aware_iteration_block)
-                  end
-                else
-                  process_with_block_return_enumerable(pattern) do |pattern|
-                    enumerable.grep_v(pattern)
-                  end
+              # @overload grep_v(pattern, &iteration_block)
+              #   @param pattern [Object]
+              #   @param iteration_block [Proc]
+              #   @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
+              #
+              def grep_v(*args, &iteration_block)
+                process_with_block_return_enumerable(*args, iteration_block) do |*args, step_aware_iteration_block|
+                  enumerable.grep_v(*args, &step_aware_iteration_block)
                 end
               end
 
@@ -508,7 +506,7 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
               def include?(obj)
-                process_without_block_return_boolean(obj) do |obj|
+                process_as_boolean(obj) do |obj|
                   enumerable.include?(obj)
                 end
               end
@@ -614,7 +612,7 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
               def member?(obj)
-                process_without_block_return_boolean(obj) do |obj|
+                process_as_boolean(obj) do |obj|
                   enumerable.member?(obj)
                 end
               end
@@ -706,44 +704,32 @@ module ConvenientService
               end
 
               ##
-              # @param pattern [Object, nil]
-              # @param iteration_block [Proc, nil]
-              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
+              # @overload none?(pattern)
+              #   @param pattern [Object]
+              #   @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
-              def none?(pattern = nil, &iteration_block)
-                if iteration_block
-                  process_with_block_return_boolean(iteration_block) do |step_aware_iteration_block|
-                    enumerable.none?(&step_aware_iteration_block)
-                  end
-                elsif pattern
-                  process_without_block_return_boolean(pattern) do |pattern|
-                    enumerable.none?(pattern)
-                  end
-                else
-                  process_without_block_return_boolean do
-                    enumerable.none?
-                  end
+              # @overload none?(&iteration_block)
+              #   @param iteration_block [Proc]
+              #   @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
+              #
+              def none?(*args, &iteration_block)
+                process_as_boolean(*args, iteration_block) do |*args, step_aware_iteration_block|
+                  enumerable.none?(*args, &step_aware_iteration_block)
                 end
               end
 
               ##
-              # @param pattern [Object, nil]
-              # @param iteration_block [Proc, nil]
-              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
+              # @overload one?(pattern)
+              #   @param pattern [Object]
+              #   @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
-              def one?(pattern = nil, &iteration_block)
-                if iteration_block
-                  process_with_block_return_boolean(iteration_block) do |step_aware_iteration_block|
-                    enumerable.one?(&step_aware_iteration_block)
-                  end
-                elsif pattern
-                  process_without_block_return_boolean(pattern) do |pattern|
-                    enumerable.one?(pattern)
-                  end
-                else
-                  process_without_block_return_boolean do
-                    enumerable.one?
-                  end
+              # @overload one?(&iteration_block)
+              #   @param iteration_block [Proc]
+              #   @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
+              #
+              def one?(*args, &iteration_block)
+                process_as_boolean(*args, iteration_block) do |*args, step_aware_iteration_block|
+                  enumerable.one?(*args, &step_aware_iteration_block)
                 end
               end
 
