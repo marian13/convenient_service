@@ -506,7 +506,7 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
               def include?(obj)
-                process_as_boolean(obj) do |obj|
+                process_as_boolean(obj, nil) do |obj|
                   enumerable.include?(obj)
                 end
               end
@@ -612,7 +612,7 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
               def member?(obj)
-                process_as_boolean(obj) do |obj|
+                process_as_boolean(obj, nil) do |obj|
                   enumerable.member?(obj)
                 end
               end
