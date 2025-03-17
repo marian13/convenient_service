@@ -137,7 +137,7 @@ module ConvenientService
                     enumerable.collect(&step_aware_iteration_block)
                   end
                 else
-                  process_without_block_return_enumerator do
+                  process_as_enumerator(iteration_block) do
                     enumerable.collect
                   end
                 end
@@ -153,7 +153,7 @@ module ConvenientService
                     enumerable.collect_concat(&step_aware_iteration_block)
                   end
                 else
-                  process_without_block_return_enumerator do
+                  process_as_enumerator(iteration_block) do
                     enumerable.collect_concat
                   end
                 end
@@ -188,7 +188,7 @@ module ConvenientService
                     enumerable.cycle(n, &step_aware_iteration_block)
                   end
                 else
-                  process_without_block_return_enumerator(n) do |n|
+                  process_as_enumerator(n, iteration_block) do |n|
                     enumerable.cycle(n)
                   end
                 end
@@ -205,7 +205,7 @@ module ConvenientService
                     enumerable.detect(ifnone, &step_aware_iteration_block)
                   end
                 else
-                  process_without_block_return_enumerator(ifnone) do |ifnone|
+                  process_as_enumerator(ifnone) do |ifnone|
                     enumerable.detect(ifnone)
                   end
                 end
@@ -231,7 +231,7 @@ module ConvenientService
                     enumerable.drop_while(&step_aware_iteration_block)
                   end
                 else
-                  process_without_block_return_enumerator do
+                  process_as_enumerator do
                     enumerable.drop_while
                   end
                 end
@@ -248,7 +248,7 @@ module ConvenientService
                     enumerable.each_cons(n, &step_aware_iteration_block)
                   end
                 else
-                  process_without_block_return_enumerator(n) do |n|
+                  process_as_enumerator(n) do |n|
                     enumerable.each_cons(n)
                   end
                 end
@@ -264,7 +264,7 @@ module ConvenientService
                     enumerable.each_entry(&step_aware_iteration_block)
                   end
                 else
-                  process_without_block_return_enumerator do
+                  process_as_enumerator do
                     enumerable.each_entry
                   end
                 end
@@ -281,7 +281,7 @@ module ConvenientService
                     enumerable.each_slice(n, &step_aware_iteration_block)
                   end
                 else
-                  process_without_block_return_enumerator(n) do |n|
+                  process_as_enumerator(n) do |n|
                     enumerable.each_slice(n)
                   end
                 end
@@ -297,7 +297,7 @@ module ConvenientService
                     enumerable.each_with_index(&step_aware_iteration_block)
                   end
                 else
-                  process_without_block_return_enumerator do
+                  process_as_enumerator do
                     enumerable.each_with_index
                   end
                 end
@@ -314,7 +314,7 @@ module ConvenientService
                     enumerable.each_with_object(obj, &step_aware_iteration_block)
                   end
                 else
-                  process_without_block_return_enumerator(obj) do |obj|
+                  process_as_enumerator(obj) do |obj|
                     enumerable.each_with_object(obj)
                   end
                 end
@@ -339,7 +339,7 @@ module ConvenientService
                     enumerable.filter(&step_aware_iteration_block)
                   end
                 else
-                  process_without_block_return_enumerator do
+                  process_as_enumerator(iteration_block) do
                     enumerable.filter
                   end
                 end
@@ -355,7 +355,7 @@ module ConvenientService
                     enumerable.filter_map(&step_aware_iteration_block)
                   end
                 else
-                  process_without_block_return_enumerator do
+                  process_as_enumerator(iteration_block) do
                     enumerable.filter_map
                   end
                 end
@@ -372,7 +372,7 @@ module ConvenientService
                     enumerable.find(ifnone, &step_aware_iteration_block)
                   end
                 else
-                  process_without_block_return_enumerator(ifnone) do |ifnone|
+                  process_as_enumerator(ifnone) do |ifnone|
                     enumerable.find(ifnone)
                   end
                 end
@@ -388,7 +388,7 @@ module ConvenientService
                     enumerable.find_all(&step_aware_iteration_block)
                   end
                 else
-                  process_without_block_return_enumerator do
+                  process_as_enumerator(iteration_block) do
                     enumerable.find_all
                   end
                 end
@@ -409,7 +409,7 @@ module ConvenientService
                     enumerable.find_index(value)
                   end
                 else
-                  process_without_block_return_enumerator do
+                  process_as_enumerator do
                     enumerable.find_index
                   end
                 end
@@ -441,7 +441,7 @@ module ConvenientService
                     enumerable.flat_map(&step_aware_iteration_block)
                   end
                 else
-                  process_without_block_return_enumerator do
+                  process_as_enumerator(iteration_block) do
                     enumerable.flat_map
                   end
                 end
@@ -495,7 +495,7 @@ module ConvenientService
                     enumerable.group_by(&step_aware_iteration_block)
                   end
                 else
-                  process_without_block_return_enumerator do
+                  process_as_enumerator do
                     enumerable.group_by
                   end
                 end
@@ -547,7 +547,7 @@ module ConvenientService
                     enumerable.map(&step_aware_iteration_block)
                   end
                 else
-                  process_without_block_return_enumerator do
+                  process_as_enumerator(iteration_block) do
                     enumerable.map
                   end
                 end
@@ -592,7 +592,7 @@ module ConvenientService
                       enumerable.max_by(n, &step_aware_iteration_block)
                     end
                   else
-                    process_without_block_return_enumerator(n) do |n|
+                    process_as_enumerator(n) do |n|
                       enumerable.max_by(n)
                     end
                   end
@@ -601,7 +601,7 @@ module ConvenientService
                     enumerable.max_by(&step_aware_iteration_block)
                   end
                 else
-                  process_without_block_return_enumerator do
+                  process_as_enumerator do
                     enumerable.max_by
                   end
                 end
@@ -656,7 +656,7 @@ module ConvenientService
                       enumerable.min_by(n, &step_aware_iteration_block)
                     end
                   else
-                    process_without_block_return_enumerator(n) do |n|
+                    process_as_enumerator(n) do |n|
                       enumerable.min_by(n)
                     end
                   end
@@ -665,7 +665,7 @@ module ConvenientService
                     enumerable.min_by(&step_aware_iteration_block)
                   end
                 else
-                  process_without_block_return_enumerator do
+                  process_as_enumerator do
                     enumerable.min_by
                   end
                 end
@@ -697,7 +697,7 @@ module ConvenientService
                     enumerable.minmax_by(&step_aware_iteration_block)
                   end
                 else
-                  process_without_block_return_enumerator do
+                  process_as_enumerator do
                     enumerable.minmax_by
                   end
                 end
@@ -743,7 +743,7 @@ module ConvenientService
                     enumerable.partition(&step_aware_iteration_block)
                   end
                 else
-                  process_without_block_return_enumerator do
+                  process_as_enumerator do
                     enumerable.partition
                   end
                 end
@@ -776,7 +776,7 @@ module ConvenientService
                     enumerable.reject(&step_aware_iteration_block)
                   end
                 else
-                  process_without_block_return_enumerator do
+                  process_as_enumerator do
                     enumerable.reject
                   end
                 end
@@ -792,7 +792,7 @@ module ConvenientService
                     enumerable.reverse_each(&step_aware_iteration_block)
                   end
                 else
-                  process_without_block_return_enumerator do
+                  process_as_enumerator do
                     enumerable.reverse_each
                   end
                 end
@@ -808,7 +808,7 @@ module ConvenientService
                     enumerable.select(&step_aware_iteration_block)
                   end
                 else
-                  process_without_block_return_enumerator do
+                  process_as_enumerator(iteration_block) do
                     enumerable.select
                   end
                 end
@@ -825,7 +825,7 @@ module ConvenientService
                     enumerable.slice_after(&step_aware_iteration_block)
                   end
                 else
-                  process_without_block_return_enumerator(pattern) do |pattern|
+                  process_as_enumerator(pattern) do |pattern|
                     enumerable.slice_after(pattern)
                   end
                 end
@@ -842,7 +842,7 @@ module ConvenientService
                     enumerable.slice_before(&step_aware_iteration_block)
                   end
                 else
-                  process_without_block_return_enumerator(pattern) do |pattern|
+                  process_as_enumerator(pattern) do |pattern|
                     enumerable.slice_before(pattern)
                   end
                 end
@@ -884,7 +884,7 @@ module ConvenientService
                     enumerable.sort_by(&step_aware_iteration_block)
                   end
                 else
-                  process_without_block_return_enumerator do
+                  process_as_enumerator do
                     enumerable.sort_by
                   end
                 end
@@ -927,7 +927,7 @@ module ConvenientService
                     enumerable.take_while(&step_aware_iteration_block)
                   end
                 else
-                  process_without_block_return_enumerator do
+                  process_as_enumerator do
                     enumerable.take_while
                   end
                 end
@@ -1007,7 +1007,7 @@ module ConvenientService
                     enumerable.each(&step_aware_iteration_block)
                   end
                 else
-                  process_without_block_return_enumerator do
+                  process_as_enumerator do
                     enumerable.each
                   end
                 end

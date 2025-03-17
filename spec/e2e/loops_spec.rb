@@ -743,6 +743,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.collection({}).collect { |status| condition[status] }.result).to be_success.with_data(values: [])
           expect(service.collection((:success...:success)).collect { |status| condition[status] }.result).to be_success.with_data(values: [])
 
+          # NOTE: No block.
+          expect([:success, :success, :success].collect.to_a).to eq([:success, :success, :success])
+          expect(service.collection(enumerable([:success, :success, :success])).collect.result).to be_success.with_data(values: [:success, :success, :success])
+          expect(service.collection(enumerator([:success, :success, :success])).collect.result).to be_success.with_data(values: [:success, :success, :success])
+          expect { service.collection(lazy_enumerator([:success, :success, :success])).collect.result }.to raise_error(ArgumentError).with_message("tried to call lazy map without a block")
+          expect(service.collection(chain_enumerator([:success, :success, :success])).collect.result).to be_success.with_data(values: [:success, :success, :success])
+          expect(service.collection([:success, :success, :success]).collect.result).to be_success.with_data(values: [:success, :success, :success])
+
           # NOTE: Block.
           expect([:success, :success, :success].collect { |status| condition[status] }).to eq([true, true, true])
           expect(service.collection(enumerable([:success, :success, :success])).collect { |status| condition[status] }.result).to be_success.with_data(values: [true, true, true])
@@ -835,6 +843,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.collection(set([])).collect_concat { |status| condition[status] }.result).to be_success.with_data(values: [])
           expect(service.collection({}).collect_concat { |status| condition[status] }.result).to be_success.with_data(values: [])
           expect(service.collection((:success...:success)).collect_concat { |status| condition[status] }.result).to be_success.with_data(values: [])
+
+          # NOTE: No block.
+          expect([:success, :success, :success].collect_concat.to_a).to eq([:success, :success, :success])
+          expect(service.collection(enumerable([:success, :success, :success])).collect_concat.result).to be_success.with_data(values: [:success, :success, :success])
+          expect(service.collection(enumerator([:success, :success, :success])).collect_concat.result).to be_success.with_data(values: [:success, :success, :success])
+          expect { service.collection(lazy_enumerator([:success, :success, :success])).collect_concat.result }.to raise_error(ArgumentError).with_message("tried to call lazy flat_map without a block")
+          expect(service.collection(chain_enumerator([:success, :success, :success])).collect_concat.result).to be_success.with_data(values: [:success, :success, :success])
+          expect(service.collection([:success, :success, :success]).collect_concat.result).to be_success.with_data(values: [:success, :success, :success])
 
           # NOTE: Block.
           expect([:success, :success, :success].collect_concat { |status| condition[status] }).to eq([true, true, true])
@@ -1984,6 +2000,19 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.collection({}).find_all { |status| condition[status] }.result).to be_success.with_data(values: [])
           expect(service.collection((:success...:success)).find_all { |status| condition[status] }.result).to be_success.with_data(values: [])
 
+          # NOTE: No block.
+          expect([:success, :failure, :success, :failure].find_all.to_a).to eq([:success, :failure, :success, :failure])
+          expect(service.collection(enumerable([:success, :failure, :success, :failure])).find_all.result).to be_success.with_data(values: [:success, :failure, :success, :failure])
+          expect(service.collection(enumerator([:success, :failure, :success, :failure])).find_all.result).to be_success.with_data(values: [:success, :failure, :success, :failure])
+          expect { service.collection(lazy_enumerator([:success, :failure, :success, :failure])).find_all.result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
+          expect(service.collection(chain_enumerator([:success, :failure, :success, :failure])).find_all.result).to be_success.with_data(values: [:success, :failure, :success, :failure])
+          expect(service.collection([:success, :failure, :success, :failure]).find_all.result).to be_success.with_data(values: [:success, :failure, :success, :failure])
+
+          expect(service.collection(set([:success, :failure])).find_all.result).to be_success.with_data(values: [:success, :failure])
+          expect(service.collection({success: :success, failure: :failure}).find_all.result).to be_success.with_data(values: [[:success, :success], [:failure, :failure]])
+          expect(service.collection((:success..:success)).find_all.result).to be_success.with_data(values: [:success])
+          expect(service.collection((:failure..:failure)).find_all.result).to be_success.with_data(values: [:failure])
+
           # NOTE: Block.
           expect([:success, :failure, :success, :failure].find_all { |status| condition[status] }).to eq([:success, :success])
           expect(service.collection(enumerable([:success, :failure, :success, :failure])).find_all { |status| condition[status] }.result).to be_success.with_data(values: [:success, :success])
@@ -2103,6 +2132,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.collection({}).filter { |status| condition[status] }.result).to be_success.with_data(values: {})
           expect(service.collection((:success...:success)).filter { |status| condition[status] }.result).to be_success.with_data(values: [])
 
+          # NOTE: No block.
+          expect([:success, :failure, :success, :failure].filter.to_a).to eq([:success, :failure, :success, :failure])
+          expect(service.collection(enumerable([:success, :failure, :success, :failure])).filter.result).to be_success.with_data(values: [:success, :failure, :success, :failure])
+          expect(service.collection(enumerator([:success, :failure, :success, :failure])).filter.result).to be_success.with_data(values: [:success, :failure, :success, :failure])
+          expect { service.collection(lazy_enumerator([:success, :failure, :success, :failure])).filter.result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
+          expect(service.collection(chain_enumerator([:success, :failure, :success, :failure])).filter.result).to be_success.with_data(values: [:success, :failure, :success, :failure])
+          expect(service.collection([:success, :failure, :success, :failure]).filter.result).to be_success.with_data(values: [:success, :failure, :success, :failure])
+
           # NOTE: Block.
           expect([:success, :failure, :success, :failure].filter { |status| condition[status] }).to eq([:success, :success])
           expect(service.collection(enumerable([:success, :failure, :success, :failure])).filter { |status| condition[status] }.result).to be_success.with_data(values: [:success, :success])
@@ -2199,6 +2236,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.collection(set([])).flat_map { |status| condition[status] }.result).to be_success.with_data(values: [])
           expect(service.collection({}).flat_map { |status| condition[status] }.result).to be_success.with_data(values: [])
           expect(service.collection((:success...:success)).flat_map { |status| condition[status] }.result).to be_success.with_data(values: [])
+
+          # NOTE: No block.
+          expect([:success, :success, :success].flat_map.to_a).to eq([:success, :success, :success])
+          expect(service.collection(enumerable([:success, :success, :success])).flat_map.result).to be_success.with_data(values: [:success, :success, :success])
+          expect(service.collection(enumerator([:success, :success, :success])).flat_map.result).to be_success.with_data(values: [:success, :success, :success])
+          expect { service.collection(lazy_enumerator([:success, :success, :success])).flat_map.result }.to raise_error(ArgumentError).with_message("tried to call lazy flat_map without a block")
+          expect(service.collection(chain_enumerator([:success, :success, :success])).flat_map.result).to be_success.with_data(values: [:success, :success, :success])
+          expect(service.collection([:success, :success, :success]).flat_map.result).to be_success.with_data(values: [:success, :success, :success])
 
           # NOTE: Block.
           expect([:success, :success, :success].flat_map { |status| condition[status] }).to eq([true, true, true])
@@ -2409,6 +2454,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.collection(set([])).map { |status| condition[status] }.result).to be_success.with_data(values: [])
           expect(service.collection({}).map { |status| condition[status] }.result).to be_success.with_data(values: [])
           expect(service.collection((:success...:success)).map { |status| condition[status] }.result).to be_success.with_data(values: [])
+
+          # NOTE: No block.
+          expect([:success, :success, :success].map.to_a).to eq([:success, :success, :success])
+          expect(service.collection(enumerable([:success, :success, :success])).map.result).to be_success.with_data(values: [:success, :success, :success])
+          expect(service.collection(enumerator([:success, :success, :success])).map.result).to be_success.with_data(values: [:success, :success, :success])
+          expect { service.collection(lazy_enumerator([:success, :success, :success])).map.result }.to raise_error(ArgumentError).with_message("tried to call lazy map without a block")
+          expect(service.collection(chain_enumerator([:success, :success, :success])).map.result).to be_success.with_data(values: [:success, :success, :success])
+          expect(service.collection([:success, :success, :success]).map.result).to be_success.with_data(values: [:success, :success, :success])
 
           # NOTE: Block.
           expect([:success, :success, :success].map { |status| condition[status] }).to eq([true, true, true])
@@ -2848,6 +2901,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.collection(set([])).select { |status| condition[status] }.result).to be_success.with_data(values: [])
           expect(service.collection({}).select { |status| condition[status] }.result).to be_success.with_data(values: {})
           expect(service.collection((:success...:success)).select { |status| condition[status] }.result).to be_success.with_data(values: [])
+
+          # NOTE: No block.
+          expect([:success, :failure, :success, :failure].select.to_a).to eq([:success, :failure, :success, :failure])
+          expect(service.collection(enumerable([:success, :failure, :success, :failure])).select.result).to be_success.with_data(values: [:success, :failure, :success, :failure])
+          expect(service.collection(enumerator([:success, :failure, :success, :failure])).select.result).to be_success.with_data(values: [:success, :failure, :success, :failure])
+          expect { service.collection(lazy_enumerator([:success, :failure, :success, :failure])).select.result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
+          expect(service.collection(chain_enumerator([:success, :failure, :success, :failure])).select.result).to be_success.with_data(values: [:success, :failure, :success, :failure])
+          expect(service.collection([:success, :failure, :success, :failure]).select.result).to be_success.with_data(values: [:success, :failure, :success, :failure])
 
           # NOTE: Block.
           expect([:success, :failure, :success, :failure].select { |status| condition[status] }).to eq([:success, :success])

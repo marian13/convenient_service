@@ -143,7 +143,7 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
               def eager
-                process_without_block_return_enumerator do
+                process_as_enumerator do
                   lazy_enumerator.eager
                 end
               end
@@ -424,8 +424,10 @@ module ConvenientService
                 return step_aware_lazy_enumerator_from(enumerable.lazy) if propagated_result
 
                 step_aware_iteration_block =
-                  step_aware_iteration_block_from(iteration_block) do |error_result|
-                    throw :propagated_result, {propagated_result: error_result}
+                  if iteration_block
+                    step_aware_iteration_block_from(iteration_block) do |error_result|
+                      throw :propagated_result, {propagated_result: error_result}
+                    end
                   end
 
                 lazy_enumerator = yield(*args, step_aware_iteration_block)

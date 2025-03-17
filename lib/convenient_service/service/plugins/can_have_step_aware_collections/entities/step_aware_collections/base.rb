@@ -185,12 +185,19 @@ module ConvenientService
               # @param iterator_block [Proc]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Enumerator]
               #
-              def process_without_block_return_enumerator(*args, &iterator_block)
+              def process_as_enumerator(*args, iteration_block, &iterator_block)
                 return step_aware_enumerator_from(enumerable.to_enum) if propagated_result
 
-                enumerator = yield(*args)
+                step_aware_iteration_block =
+                  if iteration_block
+                    step_aware_iteration_block_from(iteration_block) do |error_result|
+                      return step_aware_enumerator_from(enumerable, error_result)
+                    end
+                  end
 
-                step_aware_enumerator_from(enumerator)
+                enumerable = yield(*args, step_aware_iteration_block)
+
+                step_aware_enumerator_from(enumerable)
               end
 
               ##
@@ -203,8 +210,10 @@ module ConvenientService
                 return step_aware_lazy_enumerator_from(enumerable.lazy) if propagated_result
 
                 step_aware_iteration_block =
-                  step_aware_iteration_block_from(iteration_block) do |error_result|
-                    return step_aware_enumerable_or_empty_from(enumerable, error_result)
+                  if iteration_block
+                    step_aware_iteration_block_from(iteration_block) do |error_result|
+                      return step_aware_enumerable_or_empty_from(enumerable, error_result)
+                    end
                   end
 
                 lazy_enumerator = yield(*args, step_aware_iteration_block)
