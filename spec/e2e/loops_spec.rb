@@ -1363,21 +1363,62 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
         end
       end
 
-      xdescribe "#drop" do
+      describe "#drop" do
         specify do
-          # 0
-          expect([].drop(0).to_a).to eq([])
-          expect(service.collection([]).drop(0).result).to be_success.with_data(values: [])
+          # NOTE: Empty collection.
+          expect([].drop(2)).to eq([])
+          expect(service.collection(enumerable([])).drop(2).result).to be_success.with_data(values: [])
+          expect(service.collection(enumerator([])).drop(2).result).to be_success.with_data(values: [])
+          expect(service.collection(lazy_enumerator([])).drop(2).result).to be_success.with_data(values: [])
+          expect(service.collection(chain_enumerator([])).drop(2).result).to be_success.with_data(values: [])
+          expect(service.collection([]).drop(2).result).to be_success.with_data(values: [])
+          expect(service.collection({}).drop(2).result).to be_success.with_data(values: [])
+          expect(service.collection((:success...:success)).drop(2).result).to be_success.with_data(values: [])
+          expect(service.collection(set([])).drop(2).result).to be_success.with_data(values: [])
 
-          # dropping
-          expect([:success, :success, :success, :success].drop(2)).to eq([:success, :success])
-          expect(service.collection([:success, :success, :success, :success]).drop(2).result).to be_success.with_data(values: [:success, :success])
+          # NOTE: 0.
+          expect([:success, :success, :failure, :failure].drop(0)).to eq([:success, :success, :failure, :failure])
+          expect(service.collection(enumerable([:success, :success, :failure, :failure])).drop(0).result).to be_success.with_data(values: [:success, :success, :failure, :failure])
+          expect(service.collection(enumerator([:success, :success, :failure, :failure])).drop(0).result).to be_success.with_data(values: [:success, :success, :failure, :failure])
+          expect(service.collection(lazy_enumerator([:success, :success, :failure, :failure])).drop(0).result).to be_success.with_data(values: [:success, :success, :failure, :failure])
+          expect(service.collection(chain_enumerator([:success, :success, :failure, :failure])).drop(0).result).to be_success.with_data(values: [:success, :success, :failure, :failure])
+          expect(service.collection([:success, :success, :failure, :failure]).drop(0).result).to be_success.with_data(values: [:success, :success, :failure, :failure])
+          expect(service.collection(set([:success, :failure])).drop(0).result).to be_success.with_data(values: [:success, :failure])
+          expect(service.collection({success: :success, failure: :failure}).drop(0).result).to be_success.with_data(values: [[:success, :success], [:failure, :failure]])
+          expect(service.collection((:success..:success)).drop(0).result).to be_success.with_data(values: [:success])
 
-          # already used boolean value terminal chaining
-          expect { service.collection([:success]).all?.drop(2) }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          # NOTE: n.
+          expect([:success, :success, :failure, :failure].drop(2)).to eq([:failure, :failure])
+          expect(service.collection(enumerable([:success, :success, :failure, :failure])).drop(2).result).to be_success.with_data(values: [:failure, :failure])
+          expect(service.collection(enumerator([:success, :success, :failure, :failure])).drop(2).result).to be_success.with_data(values: [:failure, :failure])
+          expect(service.collection(lazy_enumerator([:success, :success, :failure, :failure])).drop(2).result).to be_success.with_data(values: [:failure, :failure])
+          expect(service.collection(chain_enumerator([:success, :success, :failure, :failure])).drop(2).result).to be_success.with_data(values: [:failure, :failure])
+          expect(service.collection([:success, :success, :failure, :failure]).drop(2).result).to be_success.with_data(values: [:failure, :failure])
+          expect(service.collection(set([:success, :failure])).drop(1).result).to be_success.with_data(values: [:failure])
+          expect(service.collection({success: :success, failure: :failure}).drop(1).result).to be_success.with_data(values: [[:failure, :failure]])
+          expect(service.collection((:success..:success)).drop(1).result).to be_success.with_data(values: [])
 
-          # already used singular value terminal chaining
-          expect { service.collection([:success]).first.drop(2) }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          # NOTE: Error propagation.
+          expect(service.collection(enumerable([:success, :error, :exception])).select { |status| step status_service, in: [status: -> { status }] }.drop(2).result).to be_error.without_data
+          expect(service.collection(enumerator([:success, :error, :exception])).select { |status| step status_service, in: [status: -> { status }] }.drop(2).result).to be_error.without_data
+          expect(service.collection(lazy_enumerator([:success, :error, :exception])).select { |status| step status_service, in: [status: -> { status }] }.drop(2).result).to be_error.without_data
+          expect(service.collection(chain_enumerator([:success, :error, :exception])).select { |status| step status_service, in: [status: -> { status }] }.drop(2).result).to be_error.without_data
+          expect(service.collection([:success, :error, :exception]).select { |status| step status_service, in: [status: -> { status }] }.drop(2).result).to be_error.without_data
+          expect(service.collection(set([:success, :error, :exception])).select { |status| step status_service, in: [status: -> { status }] }.drop(2).result).to be_error.without_data
+
+          expect(service.collection({success: :success, error: :error, exception: :exception}).select { |key, value| step status_service, in: [status: -> { value }] }.drop(2).result).to be_error.without_data
+          expect(service.collection((:error..:error)).select { |status| step status_service, in: [status: -> { status }] }.drop(2).result).to be_error.without_data
+
+          # NOTE: Usage on terminal chaining.
+          expect { service.collection(enumerable([:success, :exception, :exception])).first.drop(2).result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection(enumerator([:success, :exception, :exception])).first.drop(2).result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection(lazy_enumerator([:success, :exception, :exception])).first.drop(2).result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection(chain_enumerator([:success, :exception, :exception])).first.drop(2).result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection([:success, :exception, :exception]).first.drop(2).result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection(set([:success, :exception, :exception])).first.drop(2).result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+
+          expect { service.collection({success: :success, exception: :exception}).first.drop(2).result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection((:success..:success)).first.drop(2).result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
         end
       end
 

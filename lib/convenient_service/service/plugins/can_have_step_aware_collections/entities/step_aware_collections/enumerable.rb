@@ -216,7 +216,7 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
               def drop(n)
-                process_as_enumerable(n) do |n|
+                process_as_enumerable(n, nil) do |n|
                   enumerable.drop(n)
                 end
               end
