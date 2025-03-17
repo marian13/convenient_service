@@ -2600,6 +2600,125 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
         end
       end
 
+      describe "#min" do
+        specify do
+          # NOTE: Empty collection.
+          expect([].min).to eq(nil)
+          expect(service.collection(enumerable([])).min.result).to be_failure.without_data
+          expect(service.collection(enumerator([])).min.result).to be_failure.without_data
+          expect(service.collection(lazy_enumerator([])).min.result).to be_failure.without_data
+          expect(service.collection(chain_enumerator([])).min.result).to be_failure.without_data
+          expect(service.collection([]).min.result).to be_failure.without_data
+          expect(service.collection({}).min.result).to be_failure.without_data
+          expect(service.collection((:success...:success)).min.result).to be_failure.without_data
+          expect(service.collection(set([])).min.result).to be_failure.without_data
+
+          # NOTE: No block, no n.
+          expect([0, 1, 2, 3, 4, 5].min).to eq(0)
+          expect(service.collection(enumerable([0, 1, 2, 3, 4, 5])).min.result).to be_success.with_data(value: 0)
+          expect(service.collection(enumerator([0, 1, 2, 3, 4, 5])).min.result).to be_success.with_data(value: 0)
+          expect(service.collection(lazy_enumerator([0, 1, 2, 3, 4, 5])).min.result).to be_success.with_data(value: 0)
+          expect(service.collection(chain_enumerator([0, 1, 2, 3, 4, 5])).min.result).to be_success.with_data(value: 0)
+          expect(service.collection([0, 1, 2, 3, 4, 5]).min.result).to be_success.with_data(value: 0)
+          expect(service.collection(set([0, 1, 2, 3, 4, 5])).min.result).to be_success.with_data(value: 0)
+          expect(service.collection({0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}).min.result).to be_success.with_data(value: [0, 0])
+          expect(service.collection((0..5)).min.result).to be_success.with_data(value: 0)
+
+          # NOTE: Block, no n.
+          expect([0, 1, 2, 3, 4, 5].min { |number| number.to_s.ord }).to eq(0)
+          expect(service.collection(enumerable([0, 1, 2, 3, 4, 5])).min { |number| number.to_s.ord }.result).to be_success.with_data(value: 0)
+          expect(service.collection(enumerator([0, 1, 2, 3, 4, 5])).min { |number| number.to_s.ord }.result).to be_success.with_data(value: 0)
+          expect(service.collection(lazy_enumerator([0, 1, 2, 3, 4, 5])).min { |number| number.to_s.ord }.result).to be_success.with_data(value: 0)
+          expect(service.collection(chain_enumerator([0, 1, 2, 3, 4, 5])).min { |number| number.to_s.ord }.result).to be_success.with_data(value: 0)
+          expect(service.collection([0, 1, 2, 3, 4, 5]).min { |number| number.to_s.ord }.result).to be_success.with_data(value: 0)
+          expect(service.collection(set([0, 1, 2, 3, 4, 5])).min { |number| number.to_s.ord }.result).to be_success.with_data(value: 0)
+
+          expect(service.collection({0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}).min { |key, value| value.to_s.ord }.result).to be_success.with_data(value: [0, 0])
+          expect(service.collection((0..5)).min { |number| number.to_s.ord }.result).to be_success.with_data(value: 0)
+
+          # NOTE: Block, n.
+          # - https://gist.github.com/marian13/a40f3be1379376d8991a98b9f1b37dcc
+          expect([0, 1, 2, 3, 4, 5].min(2) { |number| number.to_s.ord }).to eq([3, 2])
+          expect(service.collection(enumerable([0, 1, 2, 3, 4, 5])).min(2) { |number| number.to_s.ord }.result).to be_success.with_data(values: [3, 2])
+          expect(service.collection(enumerator([0, 1, 2, 3, 4, 5])).min(2) { |number| number.to_s.ord }.result).to be_success.with_data(values: [3, 2])
+          expect(service.collection(lazy_enumerator([0, 1, 2, 3, 4, 5])).min(2) { |number| number.to_s.ord }.result).to be_success.with_data(values: [3, 2])
+          expect(service.collection(chain_enumerator([0, 1, 2, 3, 4, 5])).min(2) { |number| number.to_s.ord }.result).to be_success.with_data(values: [3, 2])
+          expect(service.collection([0, 1, 2, 3, 4, 5]).min(2) { |number| number.to_s.ord }.result).to be_success.with_data(values: [3, 2])
+          expect(service.collection(set([0, 1, 2, 3, 4, 5])).min(2) { |number| number.to_s.ord }.result).to be_success.with_data(values: [3, 2])
+
+          expect(service.collection({0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}).min(2) { |key, value| value.to_s.ord }.result).to be_success.with_data(values: [[3, 3], [2, 2]])
+          expect(service.collection((0..5)).min(2) { |number| number.to_s.ord }.result).to be_success.with_data(values: [3, 2])
+
+          # NOTE: Step with no outputs.
+          expect { service.collection(enumerable([0, 1, 2, 3, 4, 5])).min { |number| step number_service, in: [number: -> { number }] }.result }.to raise_error(NoMethodError).with_message("undefined method '>' for true")
+          expect { service.collection(enumerator([0, 1, 2, 3, 4, 5])).min { |number| step number_service, in: [number: -> { number }] }.result }.to raise_error(NoMethodError).with_message("undefined method '>' for true")
+          expect { service.collection(lazy_enumerator([0, 1, 2, 3, 4, 5])).min { |number| step number_service, in: [number: -> { number }] }.result }.to raise_error(NoMethodError).with_message("undefined method '>' for true")
+          expect { service.collection(chain_enumerator([0, 1, 2, 3, 4, 5])).min { |number| step number_service, in: [number: -> { number }] }.result }.to raise_error(NoMethodError).with_message("undefined method '>' for true")
+          expect { service.collection([0, 1, 2, 3, 4, 5]).min { |number| step number_service, in: [number: -> { number }] }.result }.to raise_error(NoMethodError).with_message("undefined method '>' for true")
+          expect { service.collection(set([0, 1, 2, 3, 4, 5])).min { |number| step number_service, in: [number: -> { number }] }.result }.to raise_error(NoMethodError).with_message("undefined method '>' for true")
+          expect { service.collection({0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}).min { |(key, value)| step number_service, in: [number: -> { value }] }.result }.to raise_error(NoMethodError).with_message("undefined method '>' for true")
+          expect { service.collection((0..5)).min { |number| step number_service, in: [number: -> { number }] }.result }.to raise_error(NoMethodError).with_message("undefined method '>' for true")
+
+          # NOTE: Step with one output.
+          expect(service.collection(enumerable([0, 1, 2, 3, 4, 5])).min { |number| step number_service, in: [number: -> { number }], out: :number_code }.result).to be_success.with_data(value: 0)
+          expect(service.collection(enumerator([0, 1, 2, 3, 4, 5])).min { |number| step number_service, in: [number: -> { number }], out: :number_code }.result).to be_success.with_data(value: 0)
+          expect(service.collection(lazy_enumerator([0, 1, 2, 3, 4, 5])).min { |number| step number_service, in: [number: -> { number }], out: :number_code }.result).to be_success.with_data(value: 0)
+          expect(service.collection(chain_enumerator([0, 1, 2, 3, 4, 5])).min { |number| step number_service, in: [number: -> { number }], out: :number_code }.result).to be_success.with_data(value: 0)
+          expect(service.collection([0, 1, 2, 3, 4, 5]).min { |number| step number_service, in: [number: -> { number }], out: :number_code }.result).to be_success.with_data(value: 0)
+          expect(service.collection(set([0, 1, 2, 3, 4, 5])).min { |number| step number_service, in: [number: -> { number }], out: :number_code }.result).to be_success.with_data(value: 0)
+
+          expect(service.collection({0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}).min { |(key, value)| step number_service, in: [number: -> { value }], out: :number_code }.result).to be_success.with_data(value: [0, 0])
+          expect(service.collection((0..5)).min { |number| step number_service, in: [number: -> { number }], out: :number_code }.result).to be_success.with_data(value: 0)
+
+          # NOTE: Step with multiple outputs.
+          expect { service.collection(enumerable([0, 1, 2, 3, 4, 5])).min { |number| step number_service, in: [number: -> { number }], out: [:number_string, :number_code] }.result }.to raise_error(TypeError).with_message("no implicit conversion of Integer into Hash")
+          expect { service.collection(enumerator([0, 1, 2, 3, 4, 5])).min { |number| step number_service, in: [number: -> { number }], out: [:number_string, :number_code] }.result }.to raise_error(TypeError).with_message("no implicit conversion of Integer into Hash")
+          expect { service.collection(lazy_enumerator([0, 1, 2, 3, 4, 5])).min { |number| step number_service, in: [number: -> { number }], out: [:number_string, :number_code] }.result }.to raise_error(TypeError).with_message("no implicit conversion of Integer into Hash")
+          expect { service.collection(chain_enumerator([0, 1, 2, 3, 4, 5])).min { |number| step number_service, in: [number: -> { number }], out: [:number_string, :number_code] }.result }.to raise_error(TypeError).with_message("no implicit conversion of Integer into Hash")
+          expect { service.collection([0, 1, 2, 3, 4, 5]).min { |number| step number_service, in: [number: -> { number }], out: [:number_string, :number_code] }.result }.to raise_error(TypeError).with_message("no implicit conversion of Integer into Hash")
+          expect { service.collection(set([0, 1, 2, 3, 4, 5])).min { |number| step number_service, in: [number: -> { number }], out: [:number_string, :number_code] }.result }.to raise_error(TypeError).with_message("no implicit conversion of Integer into Hash")
+
+          expect { service.collection({0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}).min { |(key, value)| step number_service, in: [number: -> { value }], out: [:number_string, :number_code] }.result }.to raise_error(TypeError).with_message("no implicit conversion of Integer into Hash")
+          expect { service.collection((0..5)).min { |number| step number_service, in: [number: -> { number }], out: [:number_string, :number_code] }.result }.to raise_error(TypeError).with_message("no implicit conversion of Integer into Hash")
+
+          # NOTE: Error result.
+          expect(service.collection(enumerable([0, -1, :exception])).min { |number| step number_service, in: [number: -> { number }], out: :number_code }.result).to be_error.without_data
+          expect(service.collection(enumerator([0, -1, :exception])).min { |number| step number_service, in: [number: -> { number }], out: :number_code }.result).to be_error.without_data
+          expect(service.collection(lazy_enumerator([0, -1, :exception])).min { |number| step number_service, in: [number: -> { number }], out: :number_code }.result).to be_error.without_data
+          expect(service.collection(chain_enumerator([0, -1, :exception])).min { |number| step number_service, in: [number: -> { number }], out: :number_code }.result).to be_error.without_data
+          expect(service.collection([0, -1, :exception]).min { |number| step number_service, in: [number: -> { number }], out: :number_code }.result).to be_error.without_data
+          expect(service.collection(set([0, -1, :exception])).min { |number| step number_service, in: [number: -> { number }], out: :number_code }.result).to be_error.without_data
+
+          expect(service.collection({0 => 0, -1 => -1, :exception => :exception}).min { |(key, value)| step number_service, in: [number: -> { value }], out: :number_code }.result).to be_error.without_data
+          expect(service.collection((-2..-1)).min { |number| step number_service, in: [number: -> { number }], out: :number_code }.result).to be_error.without_data
+
+          expect((-1..-1).min { raise }).to eq(-1)
+          expect(service.collection((-1..-1)).min { raise }.result).to be_success.with_data(value: -1)
+
+          # NOTE: Error propagation.
+          expect(service.collection(enumerable([:success, :error, :exception])).select { |status| step status_service, in: [status: -> { status }] }.min.result).to be_error.without_data
+          expect(service.collection(enumerator([:success, :error, :exception])).select { |status| step status_service, in: [status: -> { status }] }.min.result).to be_error.without_data
+          expect(service.collection(lazy_enumerator([:success, :error, :exception])).select { |status| step status_service, in: [status: -> { status }] }.min.result).to be_error.without_data
+          expect(service.collection(chain_enumerator([:success, :error, :exception])).select { |status| step status_service, in: [status: -> { status }] }.min.result).to be_error.without_data
+          expect(service.collection([:success, :error, :exception]).select { |status| step status_service, in: [status: -> { status }] }.min.result).to be_error.without_data
+          expect(service.collection(set([:success, :error, :exception])).select { |status| step status_service, in: [status: -> { status }] }.min.result).to be_error.without_data
+
+          expect(service.collection({success: :success, error: :error, exception: :exception}).select { |key, value| step status_service, in: [status: -> { value }] }.min.result).to be_error.without_data
+          expect(service.collection((:error..:error)).select { |status| step status_service, in: [status: -> { status }] }.min.result).to be_error.without_data
+
+          # NOTE: Usage on terminal chaining.
+          expect { service.collection(enumerable([:success, :exception, :exception])).first.min.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection(enumerator([:success, :exception, :exception])).first.min.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection(lazy_enumerator([:success, :exception, :exception])).first.min.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection(chain_enumerator([:success, :exception, :exception])).first.min.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection([:success, :exception, :exception]).first.min.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection(set([:success, :exception, :exception])).first.min.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+
+          expect { service.collection({success: :success, exception: :exception}).first.min.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection((:success..:success)).first.min.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+        end
+      end
+
       describe "#max" do
         specify do
           # NOTE: Empty collection.
