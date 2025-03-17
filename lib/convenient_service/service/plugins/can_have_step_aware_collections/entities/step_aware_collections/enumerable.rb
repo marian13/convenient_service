@@ -137,7 +137,7 @@ module ConvenientService
                     enumerable.collect(&step_aware_iteration_block)
                   end
                 else
-                  process_as_enumerator(iteration_block) do
+                  process_as_enumerator(nil) do
                     enumerable.collect
                   end
                 end
@@ -776,7 +776,7 @@ module ConvenientService
                     enumerable.reject(&step_aware_iteration_block)
                   end
                 else
-                  process_as_enumerator do
+                  process_as_enumerator(nil) do
                     enumerable.reject
                   end
                 end
