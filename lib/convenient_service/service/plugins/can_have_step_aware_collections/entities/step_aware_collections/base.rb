@@ -158,9 +158,14 @@ module ConvenientService
                     end
                   end
 
-                enumerable = yield(*args, step_aware_iteration_block)
+                response =
+                  catch :propagated_result do
+                    {values: yield(*args, step_aware_iteration_block)}
+                  end
 
-                step_aware_enumerable_from(enumerable)
+                return step_aware_enumerable_from(enumerable, response[:propagated_result]) if response.has_key?(:propagated_result)
+
+                step_aware_enumerable_from(response[:values])
               end
 
               ##

@@ -324,7 +324,7 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
               def entries
-                process_as_enumerable do
+                process_as_enumerable(nil) do
                   enumerable.entries
                 end
               end
