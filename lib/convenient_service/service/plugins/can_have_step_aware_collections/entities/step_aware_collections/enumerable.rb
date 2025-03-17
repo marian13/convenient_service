@@ -133,7 +133,7 @@ module ConvenientService
               #
               def collect(&iteration_block)
                 if iteration_block
-                  process_with_block_return_enumerable(iteration_block) do |step_aware_iteration_block|
+                  process_as_enumerable(iteration_block) do |step_aware_iteration_block|
                     enumerable.collect(&step_aware_iteration_block)
                   end
                 else
@@ -149,7 +149,7 @@ module ConvenientService
               #
               def collect_concat(&iteration_block)
                 if iteration_block
-                  process_with_block_return_enumerable(iteration_block) do |step_aware_iteration_block|
+                  process_as_enumerable(iteration_block) do |step_aware_iteration_block|
                     enumerable.collect_concat(&step_aware_iteration_block)
                   end
                 else
@@ -216,7 +216,7 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
               def drop(n)
-                process_without_block_return_enumerable(n) do |n|
+                process_as_enumerable(n) do |n|
                   enumerable.drop(n)
                 end
               end
@@ -227,7 +227,7 @@ module ConvenientService
               #
               def drop_while(&iteration_block)
                 if iteration_block
-                  process_with_block_return_enumerable(iteration_block) do |step_aware_iteration_block|
+                  process_as_enumerable(iteration_block) do |step_aware_iteration_block|
                     enumerable.drop_while(&step_aware_iteration_block)
                   end
                 else
@@ -244,7 +244,7 @@ module ConvenientService
               #
               def each_cons(n, &iteration_block)
                 if iteration_block
-                  process_with_block_return_enumerable(n, iteration_block) do |n, step_aware_iteration_block|
+                  process_as_enumerable(n, iteration_block) do |n, step_aware_iteration_block|
                     enumerable.each_cons(n, &step_aware_iteration_block)
                   end
                 else
@@ -260,7 +260,7 @@ module ConvenientService
               #
               def each_entry(&iteration_block)
                 if iteration_block
-                  process_with_block_return_enumerable(iteration_block) do |step_aware_iteration_block|
+                  process_as_enumerable(iteration_block) do |step_aware_iteration_block|
                     enumerable.each_entry(&step_aware_iteration_block)
                   end
                 else
@@ -277,7 +277,7 @@ module ConvenientService
               #
               def each_slice(n, &iteration_block)
                 if iteration_block
-                  process_with_block_return_enumerable(n, iteration_block) do |n, step_aware_iteration_block|
+                  process_as_enumerable(n, iteration_block) do |n, step_aware_iteration_block|
                     enumerable.each_slice(n, &step_aware_iteration_block)
                   end
                 else
@@ -293,7 +293,7 @@ module ConvenientService
               #
               def each_with_index(&iteration_block)
                 if iteration_block
-                  process_with_block_return_enumerable(iteration_block) do |step_aware_iteration_block|
+                  process_as_enumerable(iteration_block) do |step_aware_iteration_block|
                     enumerable.each_with_index(&step_aware_iteration_block)
                   end
                 else
@@ -324,7 +324,7 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
               def entries
-                process_without_block_return_enumerable do
+                process_as_enumerable do
                   enumerable.entries
                 end
               end
@@ -335,7 +335,7 @@ module ConvenientService
               #
               def filter(&iteration_block)
                 if iteration_block
-                  process_with_block_return_enumerable(iteration_block) do |step_aware_iteration_block|
+                  process_as_enumerable(iteration_block) do |step_aware_iteration_block|
                     enumerable.filter(&step_aware_iteration_block)
                   end
                 else
@@ -351,7 +351,7 @@ module ConvenientService
               #
               def filter_map(&iteration_block)
                 if iteration_block
-                  process_with_block_return_enumerable(iteration_block) do |step_aware_iteration_block|
+                  process_as_enumerable(iteration_block) do |step_aware_iteration_block|
                     enumerable.filter_map(&step_aware_iteration_block)
                   end
                 else
@@ -384,7 +384,7 @@ module ConvenientService
               #
               def find_all(&iteration_block)
                 if iteration_block
-                  process_with_block_return_enumerable(iteration_block) do |step_aware_iteration_block|
+                  process_as_enumerable(iteration_block) do |step_aware_iteration_block|
                     enumerable.find_all(&step_aware_iteration_block)
                   end
                 else
@@ -421,7 +421,7 @@ module ConvenientService
               #
               def first(n = nil)
                 if n
-                  process_without_block_return_enumerable(n) do |n|
+                  process_as_enumerable(n) do |n|
                     enumerable.first(n)
                   end
                 else
@@ -437,7 +437,7 @@ module ConvenientService
               #
               def flat_map(&iteration_block)
                 if iteration_block
-                  process_with_block_return_enumerable(iteration_block) do |step_aware_iteration_block|
+                  process_as_enumerable(iteration_block) do |step_aware_iteration_block|
                     enumerable.flat_map(&step_aware_iteration_block)
                   end
                 else
@@ -464,7 +464,7 @@ module ConvenientService
               #   @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
               def grep(*args, &iteration_block)
-                process_with_block_return_enumerable(*args, iteration_block) do |*args, step_aware_iteration_block|
+                process_as_enumerable(*args, iteration_block) do |*args, step_aware_iteration_block|
                   enumerable.grep(*args, &step_aware_iteration_block)
                 end
               end
@@ -480,7 +480,7 @@ module ConvenientService
               #   @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
               def grep_v(*args, &iteration_block)
-                process_with_block_return_enumerable(*args, iteration_block) do |*args, step_aware_iteration_block|
+                process_as_enumerable(*args, iteration_block) do |*args, step_aware_iteration_block|
                   enumerable.grep_v(*args, &step_aware_iteration_block)
                 end
               end
@@ -491,7 +491,7 @@ module ConvenientService
               #
               def group_by(&iteration_block)
                 if iteration_block
-                  process_with_block_return_enumerable(iteration_block) do |step_aware_iteration_block|
+                  process_as_enumerable(iteration_block) do |step_aware_iteration_block|
                     enumerable.group_by(&step_aware_iteration_block)
                   end
                 else
@@ -543,7 +543,7 @@ module ConvenientService
               #
               def map(&iteration_block)
                 if iteration_block
-                  process_with_block_return_enumerable(iteration_block) do |step_aware_iteration_block|
+                  process_as_enumerable(iteration_block) do |step_aware_iteration_block|
                     enumerable.map(&step_aware_iteration_block)
                   end
                 else
@@ -561,11 +561,11 @@ module ConvenientService
               def max(n = nil, &iteration_block)
                 if n
                   if iteration_block
-                    process_with_block_return_enumerable(n, iteration_block) do |n, step_aware_iteration_block|
+                    process_as_enumerable(n, iteration_block) do |n, step_aware_iteration_block|
                       enumerable.max(n, &step_aware_iteration_block)
                     end
                   else
-                    process_without_block_return_enumerable(n) do |n|
+                    process_as_enumerable(n) do |n|
                       enumerable.max(n)
                     end
                   end
@@ -588,7 +588,7 @@ module ConvenientService
               def max_by(n = nil, &iteration_block)
                 if n
                   if iteration_block
-                    process_with_block_return_enumerable(n, iteration_block) do |n, step_aware_iteration_block|
+                    process_as_enumerable(n, iteration_block) do |n, step_aware_iteration_block|
                       enumerable.max_by(n, &step_aware_iteration_block)
                     end
                   else
@@ -625,11 +625,11 @@ module ConvenientService
               def min(n = nil, &iteration_block)
                 if n
                   if iteration_block
-                    process_with_block_return_enumerable(n, iteration_block) do |n, step_aware_iteration_block|
+                    process_as_enumerable(n, iteration_block) do |n, step_aware_iteration_block|
                       enumerable.min(n, &step_aware_iteration_block)
                     end
                   else
-                    process_without_block_return_enumerable(n) do |n|
+                    process_as_enumerable(n) do |n|
                       enumerable.min(n)
                     end
                   end
@@ -652,7 +652,7 @@ module ConvenientService
               def min_by(n = nil, &iteration_block)
                 if n
                   if iteration_block
-                    process_with_block_return_enumerable(n, iteration_block) do |n, step_aware_iteration_block|
+                    process_as_enumerable(n, iteration_block) do |n, step_aware_iteration_block|
                       enumerable.min_by(n, &step_aware_iteration_block)
                     end
                   else
@@ -677,11 +677,11 @@ module ConvenientService
               #
               def minmax(&iteration_block)
                 if iteration_block
-                  process_with_block_return_enumerable(iteration_block) do |step_aware_iteration_block|
+                  process_as_enumerable(iteration_block) do |step_aware_iteration_block|
                     enumerable.minmax(&step_aware_iteration_block)
                   end
                 else
-                  process_with_block_return_enumerable do
+                  process_as_enumerable do
                     enumerable.minmax
                   end
                 end
@@ -693,7 +693,7 @@ module ConvenientService
               #
               def minmax_by(&iteration_block)
                 if iteration_block
-                  process_with_block_return_enumerable(iteration_block) do |step_aware_iteration_block|
+                  process_as_enumerable(iteration_block) do |step_aware_iteration_block|
                     enumerable.minmax_by(&step_aware_iteration_block)
                   end
                 else
@@ -739,7 +739,7 @@ module ConvenientService
               #
               def partition(&iteration_block)
                 if iteration_block
-                  process_with_block_return_enumerable(iteration_block) do |step_aware_iteration_block|
+                  process_as_enumerable(iteration_block) do |step_aware_iteration_block|
                     enumerable.partition(&step_aware_iteration_block)
                   end
                 else
@@ -772,7 +772,7 @@ module ConvenientService
               #
               def reject(&iteration_block)
                 if iteration_block
-                  process_with_block_return_enumerable(iteration_block) do |step_aware_iteration_block|
+                  process_as_enumerable(iteration_block) do |step_aware_iteration_block|
                     enumerable.reject(&step_aware_iteration_block)
                   end
                 else
@@ -788,7 +788,7 @@ module ConvenientService
               #
               def reverse_each(&iteration_block)
                 if iteration_block
-                  process_with_block_return_enumerable(iteration_block) do |step_aware_iteration_block|
+                  process_as_enumerable(iteration_block) do |step_aware_iteration_block|
                     enumerable.reverse_each(&step_aware_iteration_block)
                   end
                 else
@@ -804,7 +804,7 @@ module ConvenientService
               #
               def select(&iteration_block)
                 if iteration_block
-                  process_with_block_return_enumerable(iteration_block) do |step_aware_iteration_block|
+                  process_as_enumerable(iteration_block) do |step_aware_iteration_block|
                     enumerable.select(&step_aware_iteration_block)
                   end
                 else
@@ -864,11 +864,11 @@ module ConvenientService
               #
               def sort(&iteration_block)
                 if iteration_block
-                  process_with_block_return_enumerable(iteration_block) do |step_aware_iteration_block|
+                  process_as_enumerable(iteration_block) do |step_aware_iteration_block|
                     enumerable.sort(&step_aware_iteration_block)
                   end
                 else
-                  process_with_block_return_enumerable do
+                  process_as_enumerable do
                     enumerable.sort
                   end
                 end
@@ -880,7 +880,7 @@ module ConvenientService
               #
               def sort_by(&iteration_block)
                 if iteration_block
-                  process_with_block_return_enumerable(iteration_block) do |step_aware_iteration_block|
+                  process_as_enumerable(iteration_block) do |step_aware_iteration_block|
                     enumerable.sort_by(&step_aware_iteration_block)
                   end
                 else
@@ -912,7 +912,7 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
               def take(n)
-                process_with_block_return_enumerable(n) do |n|
+                process_as_enumerable(n) do |n|
                   enumerable.take(n)
                 end
               end
@@ -923,7 +923,7 @@ module ConvenientService
               #
               def take_while(&iteration_block)
                 if iteration_block
-                  process_with_block_return_enumerable(iteration_block) do |step_aware_iteration_block|
+                  process_as_enumerable(iteration_block) do |step_aware_iteration_block|
                     enumerable.take_while(&step_aware_iteration_block)
                   end
                 else
@@ -946,7 +946,7 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
               def to_a
-                process_without_block_return_enumerable do
+                process_as_enumerable do
                   enumerable.to_a
                 end
               end
@@ -955,7 +955,7 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
               def to_h
-                process_without_block_return_enumerable do
+                process_as_enumerable do
                   enumerable.to_h
                 end
               end
@@ -966,11 +966,11 @@ module ConvenientService
               #
               def uniq(&iteration_block)
                 if iteration_block
-                  process_with_block_return_enumerable(iteration_block) do |step_aware_iteration_block|
+                  process_as_enumerable(iteration_block) do |step_aware_iteration_block|
                     enumerable.uniq(&step_aware_iteration_block)
                   end
                 else
-                  process_without_block_return_enumerable do
+                  process_as_enumerable do
                     enumerable.uniq
                   end
                 end
@@ -989,7 +989,7 @@ module ConvenientService
                     enumerable.zip(*args, &step_aware_iteration_block)
                   end
                 else
-                  process_with_block_return_enumerable(*args) do |*args|
+                  process_as_enumerable(*args) do |*args|
                     enumerable.zip(*args)
                   end
                 end
@@ -1003,7 +1003,7 @@ module ConvenientService
               #
               def each(&iteration_block)
                 if iteration_block
-                  process_with_block_return_enumerable(iteration_block) do |step_aware_iteration_block|
+                  process_as_enumerable(iteration_block) do |step_aware_iteration_block|
                     enumerable.each(&step_aware_iteration_block)
                   end
                 else

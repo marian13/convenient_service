@@ -209,7 +209,7 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
               def force
-                process_without_block_return_enumerable do
+                process_as_enumerable do
                   lazy_enumerator.force
                 end
               end
@@ -355,7 +355,7 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
               def to_a
-                process_without_block_return_enumerable do
+                process_as_enumerable do
                   lazy_enumerator.to_a
                 end
               end

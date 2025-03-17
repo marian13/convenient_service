@@ -95,7 +95,7 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Enumerator]
               #
               def process_without_block_return_object(*args, &iterator_block)
-                process_as_boolean(*args, nil, &iterator_block)
+                process_with_block_return_object(*args, nil, &iterator_block)
               end
 
               ##
@@ -146,7 +146,7 @@ module ConvenientService
               # @param iterator_block [Proc]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Object]
               #
-              def process_with_block_return_enumerable(*args, iteration_block, &iterator_block)
+              def process_as_enumerable(*args, iteration_block, &iterator_block)
                 return step_aware_enumerable_from(enumerable) if propagated_result
 
                 step_aware_iteration_block =
@@ -163,24 +163,11 @@ module ConvenientService
 
               ##
               # @param args [Array<Object>]
-              # @param iterator_block [Proc]
-              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Enumerator]
-              #
-              def process_without_block_return_enumerable(*args, &iterator_block)
-                return step_aware_enumerable_from(enumerable) if propagated_result
-
-                enumerable = yield(*args)
-
-                step_aware_enumerable_from(enumerable)
-              end
-
-              ##
-              # @param args [Array<Object>]
               # @param iteration_block [Proc, nil]
               # @param iterator_block [Proc]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Object]
               #
-              def process_with_block_return_enumerable_or_empty(*args, iteration_block, &iterator_block)
+              def process_as_enumerable_or_empty(*args, iteration_block, &iterator_block)
                 return step_aware_enumerable_or_empty_from(enumerable) if propagated_result
 
                 step_aware_iteration_block =
