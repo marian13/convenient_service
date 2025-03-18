@@ -945,7 +945,7 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
               def tally
-                process_without_block_return_object do
+                process_as_hash(nil) do
                   enumerable.tally
                 end
               end

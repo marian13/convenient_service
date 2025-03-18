@@ -3877,6 +3877,54 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
         end
       end
 
+      describe "#tally" do
+        specify do
+          # NOTE: Empty collection.
+          expect([].tally).to eq({})
+          expect(service.collection(enumerable([])).tally.result).to be_success.with_data(values: {})
+          expect(service.collection(enumerator([])).tally.result).to be_success.with_data(values: {})
+          expect(service.collection(lazy_enumerator([])).tally.result).to be_success.with_data(values: {})
+          expect(service.collection(chain_enumerator([])).tally.result).to be_success.with_data(values: {})
+          expect(service.collection([]).tally.result).to be_success.with_data(values: {})
+          expect(service.collection({}).tally.result).to be_success.with_data(values: {})
+          expect(service.collection((:success...:success)).tally.result).to be_success.with_data(values: {})
+          expect(service.collection(set([])).tally.result).to be_success.with_data(values: {})
+
+          # NOTE: Not empty collection.
+          expect([1, 2, 2, 3, 3, 3].tally).to eq({1 => 1, 2 => 2, 3 => 3})
+          expect(service.collection(enumerable([1, 2, 2, 3, 3, 3])).tally.result).to be_success.with_data(values: {1 => 1, 2 => 2, 3 => 3})
+          expect(service.collection(enumerator([1, 2, 2, 3, 3, 3])).tally.result).to be_success.with_data(values: {1 => 1, 2 => 2, 3 => 3})
+          expect(service.collection(lazy_enumerator([1, 2, 2, 3, 3, 3])).tally.result).to be_success.with_data(values: {1 => 1, 2 => 2, 3 => 3})
+          expect(service.collection(chain_enumerator([1, 2, 2, 3, 3, 3])).tally.result).to be_success.with_data(values: {1 => 1, 2 => 2, 3 => 3})
+          expect(service.collection([1, 2, 2, 3, 3, 3]).tally.result).to be_success.with_data(values: {1 => 1, 2 => 2, 3 => 3})
+          expect(service.collection(set([1, 2, 3])).tally.result).to be_success.with_data(values: {1 => 1, 2 => 1, 3 => 1})
+          expect(service.collection({1 => 1, 2 => 2, 3 => 3}).tally.result).to be_success.with_data(values: {[1, 1] => 1, [2, 2] => 1, [3, 3] => 1})
+          expect(service.collection((1..3)).tally.result).to be_success.with_data(values: {1 => 1, 2 => 1, 3 => 1})
+
+          # NOTE: Error propagation.
+          expect(service.collection(enumerable([:success, :error, :exception])).select { |status| step status_service, in: [status: -> { status }] }.tally.result).to be_error.without_data
+          expect(service.collection(enumerator([:success, :error, :exception])).select { |status| step status_service, in: [status: -> { status }] }.tally.result).to be_error.without_data
+          expect(service.collection(lazy_enumerator([:success, :error, :exception])).select { |status| step status_service, in: [status: -> { status }] }.tally.result).to be_error.without_data
+          expect(service.collection(chain_enumerator([:success, :error, :exception])).select { |status| step status_service, in: [status: -> { status }] }.tally.result).to be_error.without_data
+          expect(service.collection([:success, :error, :exception]).select { |status| step status_service, in: [status: -> { status }] }.tally.result).to be_error.without_data
+          expect(service.collection(set([:success, :error, :exception])).select { |status| step status_service, in: [status: -> { status }] }.tally.result).to be_error.without_data
+
+          expect(service.collection({success: :success, error: :error, exception: :exception}).select { |key, value| step status_service, in: [status: -> { value }] }.tally.result).to be_error.without_data
+          expect(service.collection((:error..:error)).select { |status| step status_service, in: [status: -> { status }] }.tally.result).to be_error.without_data
+
+          # NOTE: Usage on terminal chaining.
+          expect { service.collection(enumerable([:success, :exception, :exception])).first.tally.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection(enumerator([:success, :exception, :exception])).first.tally.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection(lazy_enumerator([:success, :exception, :exception])).first.tally.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection(chain_enumerator([:success, :exception, :exception])).first.tally.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection([:success, :exception, :exception]).first.tally.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection(set([:success, :exception, :exception])).first.tally.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+
+          expect { service.collection({success: :success, exception: :exception}).first.tally.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection((:success..:success)).first.tally.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+        end
+      end
+
       describe "#to_a" do
         specify do
           # NOTE: Empty collection.
@@ -3993,6 +4041,8 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
 
       # reverse_each
       # sum
+
+      # check type
     end
   end
 end
