@@ -282,7 +282,7 @@ module ConvenientService
                     enumerable.each_cons(n, &step_aware_iteration_block)
                   end
                 else
-                  process_as_enumerator(n) do |n|
+                  process_as_enumerator(n, nil) do |n|
                     enumerable.each_cons(n)
                   end
                 end
