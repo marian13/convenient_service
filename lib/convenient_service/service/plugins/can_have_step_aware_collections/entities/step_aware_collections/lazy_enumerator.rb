@@ -402,7 +402,7 @@ module ConvenientService
                 args = args.each { |collection| cast_step_aware_collection(collection) }.map(&:enumerable)
 
                 if iteration_block
-                  process_with_block_return_object(*args, iteration_block) do |*args, step_aware_iteration_block|
+                  process_as_object(*args, iteration_block) do |*args, step_aware_iteration_block|
                     lazy_enumerator.zip(*args, &step_aware_iteration_block)
                   end
                 else

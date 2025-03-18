@@ -69,7 +69,7 @@ module ConvenientService
               # @param iterator_block [Proc]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Object]
               #
-              def process_with_block_return_object(*args, iteration_block, &iterator_block)
+              def process_as_object(*args, iteration_block, &iterator_block)
                 return step_aware_object_from(nil) if propagated_result
 
                 step_aware_iteration_block =
@@ -87,15 +87,6 @@ module ConvenientService
                 return step_aware_object_from(nil, response[:propagated_result]) if response.has_key?(:propagated_result)
 
                 step_aware_object_from(response[:object])
-              end
-
-              ##
-              # @param args [Array<Object>]
-              # @param iterator_block [Proc]
-              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Enumerator]
-              #
-              def process_without_block_return_object(*args, &iterator_block)
-                process_with_block_return_object(*args, nil, &iterator_block)
               end
 
               ##

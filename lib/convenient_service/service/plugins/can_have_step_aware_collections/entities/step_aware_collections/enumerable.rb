@@ -206,7 +206,7 @@ module ConvenientService
               #   @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
               def count(*args, &iteration_block)
-                process_with_block_return_object(*args, iteration_block) do |*args, step_aware_iteration_block|
+                process_as_object(*args, iteration_block) do |*args, step_aware_iteration_block|
                   enumerable.count(*args, &step_aware_iteration_block)
                 end
               end
@@ -218,7 +218,7 @@ module ConvenientService
               #
               def cycle(n = nil, &iteration_block)
                 if iteration_block
-                  process_with_block_return_object(n, iteration_block) do |n, step_aware_iteration_block|
+                  process_as_object(n, iteration_block) do |n, step_aware_iteration_block|
                     enumerable.cycle(n, &step_aware_iteration_block)
                   end
                 else
@@ -344,7 +344,7 @@ module ConvenientService
               #
               def each_with_object(obj, &iteration_block)
                 if iteration_block
-                  process_with_block_return_object(obj, iteration_block) do |obj, step_aware_iteration_block|
+                  process_as_object(obj, iteration_block) do |obj, step_aware_iteration_block|
                     enumerable.each_with_object(obj, &step_aware_iteration_block)
                   end
                 else
@@ -546,7 +546,7 @@ module ConvenientService
               #
               def inject(*args, &iteration_block)
                 if iteration_block
-                  process_with_block_return_object(*args, iteration_block) do |*args, &step_aware_iteration_block|
+                  process_as_object(*args, iteration_block) do |*args, &step_aware_iteration_block|
                     enumerable.inject(*args, &step_aware_iteration_block)
                   end
                 else
@@ -764,7 +764,7 @@ module ConvenientService
               #
               def reduce(*args, &iteration_block)
                 if iteration_block
-                  process_with_block_return_object(*args, iteration_block) do |*args, &step_aware_iteration_block|
+                  process_as_object(*args, iteration_block) do |*args, &step_aware_iteration_block|
                     enumerable.reduce(*args, &step_aware_iteration_block)
                   end
                 else
@@ -897,15 +897,27 @@ module ConvenientService
               # @param iteration_block [Proc, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
-              def sum(init = nil, &iteration_block)
-                if iteration_block
-                  process_with_block_return_object(init, iteration_block) do |init, step_aware_iteration_block|
-                    enumerable.sum(init, &step_aware_iteration_block)
-                  end
-                else
-                  process_without_block_return_object(init) do |init|
-                    enumerable.sum(init)
-                  end
+
+              ##
+              # @overload sum
+              #   @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
+              #
+              # @overload sum(init)
+              #   @param init [Integer]
+              #   @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
+              #
+              # @overload sum(&iteration_block)
+              #   @param iteration_block [Proc]
+              #   @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
+              #
+              # @overload sum(init, &iteration_block)
+              #   @param init [Integer]
+              #   @param iteration_block [Proc]
+              #   @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
+              #
+              def sum(init = 0, &iteration_block)
+                process_as_object(init, iteration_block) do |init, step_aware_iteration_block|
+                  enumerable.sum(init, &step_aware_iteration_block)
                 end
               end
 
@@ -981,7 +993,7 @@ module ConvenientService
                 args = args.each { |collection| cast_step_aware_collection(collection) }.map(&:enumerable)
 
                 if iteration_block
-                  process_with_block_return_object(*args, iteration_block) do |*args, step_aware_iteration_block|
+                  process_as_object(*args, iteration_block) do |*args, step_aware_iteration_block|
                     enumerable.zip(*args, &step_aware_iteration_block)
                   end
                 else

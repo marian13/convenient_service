@@ -3960,6 +3960,122 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
         end
       end
 
+      describe "#sum" do
+        specify do
+          # NOTE: Empty collection.
+          expect([].sum).to eq(0)
+          expect(service.collection(enumerable([])).sum.result).to be_success.with_data(value: 0)
+          expect(service.collection(enumerator([])).sum.result).to be_success.with_data(value: 0)
+          expect(service.collection(lazy_enumerator([])).sum.result).to be_success.with_data(value: 0)
+          expect(service.collection(chain_enumerator([])).sum.result).to be_success.with_data(value: 0)
+          expect(service.collection([]).sum.result).to be_success.with_data(value: 0)
+          expect(service.collection({}).sum.result).to be_success.with_data(value: 0)
+          expect(service.collection((:success...:success)).sum.result).to be_success.with_data(value: 0)
+          expect(service.collection(set([])).sum.result).to be_success.with_data(value: 0)
+
+          # NOTE: No block, no n.
+          expect([0, 1, 2, 3, 4, 5].sum).to eq(15)
+          expect(service.collection(enumerable([0, 1, 2, 3, 4, 5])).sum.result).to be_success.with_data(value: 15)
+          expect(service.collection(enumerator([0, 1, 2, 3, 4, 5])).sum.result).to be_success.with_data(value: 15)
+          expect(service.collection(lazy_enumerator([0, 1, 2, 3, 4, 5])).sum.result).to be_success.with_data(value: 15)
+          expect(service.collection(chain_enumerator([0, 1, 2, 3, 4, 5])).sum.result).to be_success.with_data(value: 15)
+          expect(service.collection([0, 1, 2, 3, 4, 5]).sum.result).to be_success.with_data(value: 15)
+          expect(service.collection(set([0, 1, 2, 3, 4, 5])).sum.result).to be_success.with_data(value: 15)
+          expect { {0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}.sum }.to raise_error(TypeError).with_message("Array can't be coerced into Integer")
+          expect { service.collection({0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}).sum.result }.to raise_error(TypeError).with_message("Array can't be coerced into Integer")
+          expect(service.collection((0..5)).sum.result).to be_success.with_data(value: 15)
+
+          # NOTE: Block, no n.
+          expect([0, 1, 2, 3, 4, 5].sum { |number| -number }).to eq(-15)
+          expect(service.collection(enumerable([0, 1, 2, 3, 4, 5])).sum { |number| -number }.result).to be_success.with_data(value: -15)
+          expect(service.collection(enumerator([0, 1, 2, 3, 4, 5])).sum { |number| -number }.result).to be_success.with_data(value: -15)
+          expect(service.collection(lazy_enumerator([0, 1, 2, 3, 4, 5])).sum { |number| -number }.result).to be_success.with_data(value: -15)
+          expect(service.collection(chain_enumerator([0, 1, 2, 3, 4, 5])).sum { |number| -number }.result).to be_success.with_data(value: -15)
+          expect(service.collection([0, 1, 2, 3, 4, 5]).sum { |number| -number }.result).to be_success.with_data(value: -15)
+          expect(service.collection(set([0, 1, 2, 3, 4, 5])).sum { |number| -number }.result).to be_success.with_data(value: -15)
+
+          expect(service.collection({0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}).sum { |key, value| -value }.result).to be_success.with_data(value: -15)
+          expect(service.collection((0..5)).sum { |number| -number }.result).to be_success.with_data(value: -15)
+
+          # NOTE: Block, n.
+          expect([0, 1, 2, 3, 4, 5].sum(15) { |number| -number }).to eq(0)
+          expect(service.collection(enumerable([0, 1, 2, 3, 4, 5])).sum(15) { |number| -number }.result).to be_success.with_data(value: 0)
+          expect(service.collection(enumerator([0, 1, 2, 3, 4, 5])).sum(15) { |number| -number }.result).to be_success.with_data(value: 0)
+          expect(service.collection(lazy_enumerator([0, 1, 2, 3, 4, 5])).sum(15) { |number| -number }.result).to be_success.with_data(value: 0)
+          expect(service.collection(chain_enumerator([0, 1, 2, 3, 4, 5])).sum(15) { |number| -number }.result).to be_success.with_data(value: 0)
+          expect(service.collection([0, 1, 2, 3, 4, 5]).sum(15) { |number| -number }.result).to be_success.with_data(value: 0)
+          expect(service.collection(set([0, 1, 2, 3, 4, 5])).sum(15) { |number| -number }.result).to be_success.with_data(value: 0)
+
+          expect(service.collection({0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}).sum(15) { |key, value| -value }.result).to be_success.with_data(value: 0)
+          expect(service.collection((0..5)).sum(15) { |number| -number }.result).to be_success.with_data(value: 0)
+
+          # NOTE: Step with no outputs.
+          expect { service.collection(enumerable([0, 1, 2, 3, 4, 5])).sum { |number| step number_service, in: [number: -> { number }] }.result }.to raise_error(TypeError).with_message("true can't be coerced into Integer")
+          expect { service.collection(enumerator([0, 1, 2, 3, 4, 5])).sum { |number| step number_service, in: [number: -> { number }] }.result }.to raise_error(TypeError).with_message("true can't be coerced into Integer")
+          expect { service.collection(lazy_enumerator([0, 1, 2, 3, 4, 5])).sum { |number| step number_service, in: [number: -> { number }] }.result }.to raise_error(TypeError).with_message("true can't be coerced into Integer")
+          expect { service.collection(chain_enumerator([0, 1, 2, 3, 4, 5])).sum { |number| step number_service, in: [number: -> { number }] }.result }.to raise_error(TypeError).with_message("true can't be coerced into Integer")
+          expect { service.collection([0, 1, 2, 3, 4, 5]).sum { |number| step number_service, in: [number: -> { number }] }.result }.to raise_error(TypeError).with_message("true can't be coerced into Integer")
+          expect { service.collection(set([0, 1, 2, 3, 4, 5])).sum { |number| step number_service, in: [number: -> { number }] }.result }.to raise_error(TypeError).with_message("true can't be coerced into Integer")
+          expect { service.collection({0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}).sum { |(key, value)| step number_service, in: [number: -> { value }] }.result }.to raise_error(TypeError).with_message("true can't be coerced into Integer")
+          expect { service.collection((0..5)).sum { |number| step number_service, in: [number: -> { number }] }.result }.to raise_error(TypeError).with_message("true can't be coerced into Integer")
+
+          # NOTE: Step with one output.
+          expect(service.collection(enumerable([0, 1, 2, 3, 4, 5])).sum { |number| step number_service, in: [number: -> { number }], out: :number_code }.result).to be_success.with_data(value: 303)
+          expect(service.collection(enumerator([0, 1, 2, 3, 4, 5])).sum { |number| step number_service, in: [number: -> { number }], out: :number_code }.result).to be_success.with_data(value: 303)
+          expect(service.collection(lazy_enumerator([0, 1, 2, 3, 4, 5])).sum { |number| step number_service, in: [number: -> { number }], out: :number_code }.result).to be_success.with_data(value: 303)
+          expect(service.collection(chain_enumerator([0, 1, 2, 3, 4, 5])).sum { |number| step number_service, in: [number: -> { number }], out: :number_code }.result).to be_success.with_data(value: 303)
+          expect(service.collection([0, 1, 2, 3, 4, 5]).sum { |number| step number_service, in: [number: -> { number }], out: :number_code }.result).to be_success.with_data(value: 303)
+          expect(service.collection(set([0, 1, 2, 3, 4, 5])).sum { |number| step number_service, in: [number: -> { number }], out: :number_code }.result).to be_success.with_data(value: 303)
+
+          expect(service.collection({0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}).sum { |(key, value)| step number_service, in: [number: -> { value }], out: :number_code }.result).to be_success.with_data(value: 303)
+          expect(service.collection((0..5)).sum { |number| step number_service, in: [number: -> { number }], out: :number_code }.result).to be_success.with_data(value: 303)
+
+          # NOTE: Step with multiple outputs.
+          expect { service.collection(enumerable([0, 1, 2, 3, 4, 5])).sum { |number| step number_service, in: [number: -> { number }], out: [:number_string, :number_code] }.result }.to raise_error(TypeError).with_message("Hash can't be coerced into Integer")
+          expect { service.collection(enumerator([0, 1, 2, 3, 4, 5])).sum { |number| step number_service, in: [number: -> { number }], out: [:number_string, :number_code] }.result }.to raise_error(TypeError).with_message("Hash can't be coerced into Integer")
+          expect { service.collection(lazy_enumerator([0, 1, 2, 3, 4, 5])).sum { |number| step number_service, in: [number: -> { number }], out: [:number_string, :number_code] }.result }.to raise_error(TypeError).with_message("Hash can't be coerced into Integer")
+          expect { service.collection(chain_enumerator([0, 1, 2, 3, 4, 5])).sum { |number| step number_service, in: [number: -> { number }], out: [:number_string, :number_code] }.result }.to raise_error(TypeError).with_message("Hash can't be coerced into Integer")
+          expect { service.collection([0, 1, 2, 3, 4, 5]).sum { |number| step number_service, in: [number: -> { number }], out: [:number_string, :number_code] }.result }.to raise_error(TypeError).with_message("Hash can't be coerced into Integer")
+          expect { service.collection(set([0, 1, 2, 3, 4, 5])).sum { |number| step number_service, in: [number: -> { number }], out: [:number_string, :number_code] }.result }.to raise_error(TypeError).with_message("Hash can't be coerced into Integer")
+
+          expect { service.collection({0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}).sum { |(key, value)| step number_service, in: [number: -> { value }], out: [:number_string, :number_code] }.result }.to raise_error(TypeError).with_message("Hash can't be coerced into Integer")
+          expect { service.collection((0..5)).sum { |number| step number_service, in: [number: -> { number }], out: [:number_string, :number_code] }.result }.to raise_error(TypeError).with_message("Hash can't be coerced into Integer")
+
+          # NOTE: Error result.
+          expect(service.collection(enumerable([0, -1, :exception])).sum { |number| step number_service, in: [number: -> { number }], out: :number_code }.result).to be_error.without_data
+          expect(service.collection(enumerator([0, -1, :exception])).sum { |number| step number_service, in: [number: -> { number }], out: :number_code }.result).to be_error.without_data
+          expect(service.collection(lazy_enumerator([0, -1, :exception])).sum { |number| step number_service, in: [number: -> { number }], out: :number_code }.result).to be_error.without_data
+          expect(service.collection(chain_enumerator([0, -1, :exception])).sum { |number| step number_service, in: [number: -> { number }], out: :number_code }.result).to be_error.without_data
+          expect(service.collection([0, -1, :exception]).sum { |number| step number_service, in: [number: -> { number }], out: :number_code }.result).to be_error.without_data
+          expect(service.collection(set([0, -1, :exception])).sum { |number| step number_service, in: [number: -> { number }], out: :number_code }.result).to be_error.without_data
+
+          expect(service.collection({0 => 0, -1 => -1, :exception => :exception}).sum { |(key, value)| step number_service, in: [number: -> { value }], out: :number_code }.result).to be_error.without_data
+          expect(service.collection((-1..-1)).sum { |number| step number_service, in: [number: -> { number }], out: :number_code }.result).to be_error.without_data
+
+          # NOTE: Error propagation.
+          expect(service.collection(enumerable([1, -1, :exception])).select { |number| step number_service, in: [number: -> { number }] }.sum.result).to be_error.without_data
+          expect(service.collection(enumerator([1, -1, :exception])).select { |number| step number_service, in: [number: -> { number }] }.sum.result).to be_error.without_data
+          expect(service.collection(lazy_enumerator([1, -1, :exception])).select { |number| step number_service, in: [number: -> { number }] }.sum.result).to be_error.without_data
+          expect(service.collection(chain_enumerator([1, -1, :exception])).select { |number| step number_service, in: [number: -> { number }] }.sum.result).to be_error.without_data
+          expect(service.collection([1, -1, :exception]).select { |number| step number_service, in: [number: -> { number }] }.sum.result).to be_error.without_data
+          expect(service.collection(set([1, -1, :exception])).select { |number| step number_service, in: [number: -> { number }] }.sum.result).to be_error.without_data
+
+          expect(service.collection({1 => 1, -1 => -1, :exception => :exception}).select { |key, value| step number_service, in: [number: -> { value }] }.sum.result).to be_error.without_data
+          expect(service.collection((-1..-1)).select { |number| step number_service, in: [number: -> { number }] }.sum.result).to be_error.without_data
+
+          # NOTE: Usage on terminal chaining.
+          expect { service.collection(enumerable([:success, :exception, :exception])).first.sum.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection(enumerator([:success, :exception, :exception])).first.sum.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection(lazy_enumerator([:success, :exception, :exception])).first.sum.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection(chain_enumerator([:success, :exception, :exception])).first.sum.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection([:success, :exception, :exception]).first.sum.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection(set([:success, :exception, :exception])).first.sum.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+
+          expect { service.collection({success: :success, exception: :exception}).first.sum.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection((:success..:success)).first.sum.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+        end
+      end
+
       describe "#take" do
         specify do
           # NOTE: Empty collection.
@@ -4292,6 +4408,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
       # check return type
       # delegate
       # select no block
+      # failure and error messages
     end
   end
 end
