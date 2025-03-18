@@ -3925,6 +3925,65 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
         end
       end
 
+      describe "#to_h" do
+        specify do
+          # NOTE: Empty collection.
+          expect([].to_h).to eq({})
+          expect(service.collection(enumerable([])).to_h.result).to be_success.with_data(values: {})
+          expect(service.collection(enumerator([])).to_h.result).to be_success.with_data(values: {})
+          expect(service.collection(lazy_enumerator([])).to_h.result).to be_success.with_data(values: {})
+          expect(service.collection(chain_enumerator([])).to_h.result).to be_success.with_data(values: {})
+          expect(service.collection([]).to_h.result).to be_success.with_data(values: {})
+          expect(service.collection(set([])).to_h.result).to be_success.with_data(values: {})
+          expect(service.collection({}).to_h.result).to be_success.with_data(values: {})
+          expect(service.collection((:success...:success)).to_h.result).to be_success.with_data(values: {})
+
+          # NOTE: Not empty collection.
+          expect([[0, 0], [1, 1], [2, 2]].to_h).to eq({0 => 0, 1 => 1, 2 => 2})
+          expect(service.collection(enumerable([[0, 0], [1, 1], [2, 2]])).to_h.result).to be_success.with_data(values: {0 => 0, 1 => 1, 2 => 2})
+          expect(service.collection(enumerator([[0, 0], [1, 1], [2, 2]])).to_h.result).to be_success.with_data(values: {0 => 0, 1 => 1, 2 => 2})
+          expect(service.collection(lazy_enumerator([[0, 0], [1, 1], [2, 2]])).to_h.result).to be_success.with_data(values: {0 => 0, 1 => 1, 2 => 2})
+          expect(service.collection(chain_enumerator([[0, 0], [1, 1], [2, 2]])).to_h.result).to be_success.with_data(values: {0 => 0, 1 => 1, 2 => 2})
+          expect(service.collection([[0, 0], [1, 1], [2, 2]]).to_h.result).to be_success.with_data(values: {0 => 0, 1 => 1, 2 => 2})
+          expect(service.collection(set([[0, 0], [1, 1], [2, 2]])).to_h.result).to be_success.with_data(values: {0 => 0, 1 => 1, 2 => 2})
+          expect(service.collection({0 => 0, 1 => 1, 2 => 2}).to_h.result).to be_success.with_data(values: {0 => 0, 1 => 1, 2 => 2})
+
+          expect { (:success..:success).to_h }.to raise_error(TypeError).with_message("wrong element type Symbol (expected array)")
+          expect { ([:success, :success]..[:success, :success]).to_h }.to raise_error(TypeError).with_message("can't iterate from Array")
+          expect { service.collection((:success..:success)).to_h.result }.to raise_error(TypeError).with_message("wrong element type Symbol (expected array)")
+          expect { service.collection(([:success, :success]..[:success, :success])).to_h.result }.to raise_error(TypeError).with_message("can't iterate from Array")
+
+          # # NOTE: Not empty collection.
+          expect { [:success, :success, :success].to_h }.to raise_error(TypeError).with_message("wrong element type Symbol at 0 (expected array)")
+          expect { service.collection(enumerable([:success, :success, :success])).to_h.result }.to raise_error(TypeError).with_message("wrong element type Symbol (expected array)")
+          expect { service.collection(enumerator([:success, :success, :success])).to_h.result }.to raise_error(TypeError).with_message("wrong element type Symbol (expected array)")
+          expect { service.collection(lazy_enumerator([:success, :success, :success])).to_h.result }.to raise_error(TypeError).with_message("wrong element type Symbol (expected array)")
+          expect { service.collection(chain_enumerator([:success, :success, :success])).to_h.result }.to raise_error(TypeError).with_message("wrong element type Symbol (expected array)")
+          expect { service.collection([:success, :success, :success]).to_h.result }.to raise_error(TypeError).with_message("wrong element type Symbol at 0 (expected array)")
+          expect { service.collection(set([:success])).to_h.result }.to raise_error(TypeError).with_message("wrong element type Symbol (expected array)")
+          expect(service.collection({success: :success}).to_h.result).to be_success.with_data(values: {success: :success})
+
+          # NOTE: Error propagation.
+          expect(service.collection(enumerable([[:success, :success], [:error, :error], [:exception, :exception]])).select { |key, value| step status_service, in: [status: -> { value }] }.to_h.result).to be_error.without_data
+          expect(service.collection(enumerator([[:success, :success], [:error, :error], [:exception, :exception]])).select { |key, value| step status_service, in: [status: -> { value }] }.to_h.result).to be_error.without_data
+          expect(service.collection(lazy_enumerator([[:success, :success], [:error, :error], [:exception, :exception]])).select { |key, value| step status_service, in: [status: -> { value }] }.to_h.result).to be_error.without_data
+          expect(service.collection(chain_enumerator([[:success, :success], [:error, :error], [:exception, :exception]])).select { |key, value| step status_service, in: [status: -> { value }] }.to_h.result).to be_error.without_data
+          expect(service.collection([[:success, :success], [:error, :error], [:exception, :exception]]).select { |key, value| step status_service, in: [status: -> { value }] }.to_h.result).to be_error.without_data
+          expect(service.collection(set([[:success, :success], [:error, :error], [:exception, :exception]])).select { |key, value| step status_service, in: [status: -> { value }] }.to_h.result).to be_error.without_data
+          expect(service.collection({success: :success, error: :error, exception: :exception}).select { |key, value| step status_service, in: [status: -> { value }] }.to_h.result).to be_error.without_data
+
+          # NOTE: Usage on terminal chaining.
+          expect { service.collection(enumerable([[:success, :success], [:exception, :exception], [:exception, :exception]])).first.to_h.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection(enumerator([[:success, :success], [:exception, :exception], [:exception, :exception]])).first.to_h.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection(lazy_enumerator([[:success, :success], [:exception, :exception], [:exception, :exception]])).first.to_h.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection(chain_enumerator([[:success, :success], [:exception, :exception], [:exception, :exception]])).first.to_h.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection([[:success, :success], [:exception, :exception], [:exception, :exception]]).first.to_h.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection(set([[:success, :success], [:exception, :exception], [:exception, :exception]])).first.to_h.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+
+          expect { service.collection({success: :success, exception: :exception}).first.to_h.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+        end
+      end
+
       # first(2) => [only_one] # What to do? success of failure?
       # cycle(2) => nil # What to do? success without data?
       # drop(2) => [] # What to do? success when nothing dropped?

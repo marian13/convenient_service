@@ -963,7 +963,7 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
               def to_h
-                process_as_enumerable do
+                process_as_hash(nil) do
                   enumerable.to_h
                 end
               end
