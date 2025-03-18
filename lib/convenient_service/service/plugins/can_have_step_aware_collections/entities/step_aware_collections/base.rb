@@ -341,7 +341,7 @@ module ConvenientService
               end
 
               ##
-              # @param enumerable [Enumerable]
+              # @param hash [Hash]
               # @param propagated_result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Enumerable]
               #
