@@ -448,12 +448,6 @@ module ConvenientService
               end
 
               ##
-              # @param pattern [Object] Can be any type.
-              # @param iteration_block [Proc, nil]
-              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
-              #
-
-              ##
               # @overload grep(pattern)
               #   @param pattern [Object]
               #   @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
@@ -892,7 +886,7 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
               def take(n)
-                process_as_enumerable(n) do |n|
+                process_as_enumerable(n, nil) do |n|
                   enumerable.take(n)
                 end
               end

@@ -336,8 +336,8 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
               def take(n)
-                process_with_block_return_lazy_enumerable(n) do |n|
-                  lazy_enumerable.take(n)
+                process_with_block_return_lazy_enumerator(n, nil) do |n|
+                  lazy_enumerator.take(n)
                 end
               end
 
