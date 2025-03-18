@@ -18,6 +18,16 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
         def each(&block)
           collection.each(&block)
         end
+
+        def ==(other)
+          return unless other.instance_of?(self.class)
+
+          collection == other.collection
+        end
+
+        def self.name
+          "Enumerable"
+        end
       end
     end
 
@@ -50,6 +60,10 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
               raise
             end
           end
+
+          def self.name
+            "StatusService"
+          end
         end
       end
 
@@ -78,6 +92,10 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
             else
               raise
             end
+          end
+
+          def self.name
+            "NumberService"
           end
         end
       end
@@ -3489,6 +3507,109 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
         end
       end
 
+      describe "#reverse_each" do
+        specify do
+          # NOTE: Empty collection.
+          expect([].reverse_each { |status| condition[status] }).to eq([])
+          expect(service.collection(enumerable([])).reverse_each { |status| condition[status] }.result).to be_success.with_data(values: [])
+          expect(service.collection(enumerator([])).reverse_each { |status| condition[status] }.result).to be_success.with_data(values: [])
+          expect(service.collection(lazy_enumerator([])).reverse_each { |status| condition[status] }.result).to be_success.with_data(values: [])
+          expect(service.collection(chain_enumerator([])).reverse_each { |status| condition[status] }.result).to be_success.with_data(values: [])
+          expect(service.collection([]).reverse_each { |status| condition[status] }.result).to be_success.with_data(values: [])
+          expect(service.collection(set([])).reverse_each { |status| condition[status] }.result).to be_success.with_data(values: [])
+          expect(service.collection({}).reverse_each { |status| condition[status] }.result).to be_success.with_data(values: {})
+          expect(service.collection((:success...:success)).reverse_each { |status| condition[status] }.result).to be_success.with_data(values: [])
+
+          # NOTE: No block.
+          expect([0, 1, 2, 3, 4, 5].reverse_each.to_a).to eq([5, 4, 3, 2, 1, 0])
+          expect(service.collection(enumerable([0, 1, 2, 3, 4, 5])).reverse_each.result).to be_success.with_data(values: [5, 4, 3, 2, 1, 0])
+          expect(service.collection(enumerator([0, 1, 2, 3, 4, 5])).reverse_each.result).to be_success.with_data(values: [5, 4, 3, 2, 1, 0])
+          expect(lazy_enumerator([0, 1, 2, 3, 4, 5]).reverse_each.to_a).to eq([5, 4, 3, 2, 1, 0])
+          expect(service.collection(lazy_enumerator([0, 1, 2, 3, 4, 5])).reverse_each.result).to be_success.with_data(values: [5, 4, 3, 2, 1, 0])
+          expect(service.collection(chain_enumerator([0, 1, 2, 3, 4, 5])).reverse_each.result).to be_success.with_data(values: [5, 4, 3, 2, 1, 0])
+          expect(service.collection([0, 1, 2, 3, 4, 5]).reverse_each.result).to be_success.with_data(values: [5, 4, 3, 2, 1, 0])
+
+          # NOTE: Block.
+          expect([0, 1, 2, 3, 4, 5].reverse_each { |number| number.to_s.ord }).to eq([0, 1, 2, 3, 4, 5])
+          expect(service.collection(enumerable([0, 1, 2, 3, 4, 5])).reverse_each { |number| number.to_s.ord }.result).to be_success.with_data(values: [0, 1, 2, 3, 4, 5])
+          expect(service.collection(enumerator([0, 1, 2, 3, 4, 5])).reverse_each { |number| number.to_s.ord }.result).to be_success.with_data(values: [0, 1, 2, 3, 4, 5])
+          expect(service.collection(lazy_enumerator([0, 1, 2, 3, 4, 5])).reverse_each { |number| number.to_s.ord }.result).to be_success.with_data(values: [0, 1, 2, 3, 4, 5])
+          expect(service.collection(chain_enumerator([0, 1, 2, 3, 4, 5])).reverse_each { |number| number.to_s.ord }.result).to be_success.with_data(values: [0, 1, 2, 3, 4, 5])
+          expect(service.collection([0, 1, 2, 3, 4, 5]).reverse_each { |number| number.to_s.ord }.result).to be_success.with_data(values: [0, 1, 2, 3, 4, 5])
+
+          expect(service.collection(set([0, 1, 2, 3, 4, 5])).reverse_each { |number| number.to_s.ord }.result).to be_success.with_data(values: [0, 1, 2, 3, 4, 5])
+          expect({0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}.reverse_each { |key, value| value.to_s.ord }.to_h).to eq({5 => 5, 4 => 4, 3 => 3, 2 => 2, 1 => 1, 0 => 0})
+          expect(service.collection({0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}).reverse_each { |key, value| value.to_s.ord }.result).to be_success.with_data(values: {5 => 5, 4 => 4, 3 => 3, 2 => 2, 1 => 1, 0 => 0})
+          expect(service.collection((0..5)).reverse_each { |number| number.to_s.ord }.result).to be_success.with_data(values: [0, 1, 2, 3, 4, 5])
+
+          # NOTE: Step with no outputs.
+          expect(service.collection(enumerable([:success, :success, :success])).reverse_each { |status| step status_service, in: [status: -> { status }] }.result).to be_success.with_data(values: [:success, :success, :success])
+          expect(service.collection(enumerator([:success, :success, :success])).reverse_each { |status| step status_service, in: [status: -> { status }] }.result).to be_success.with_data(values: [:success, :success, :success])
+          expect(service.collection(lazy_enumerator([:success, :success, :success])).reverse_each { |status| step status_service, in: [status: -> { status }] }.result).to be_success.with_data(values: [:success, :success, :success])
+          expect(service.collection(chain_enumerator([:success, :success, :success])).reverse_each { |status| step status_service, in: [status: -> { status }] }.result).to be_success.with_data(values: [:success, :success, :success])
+          expect(service.collection([:success, :success, :success]).reverse_each { |status| step status_service, in: [status: -> { status }] }.result).to be_success.with_data(values: [:success, :success, :success])
+
+          expect(service.collection(set([:success])).reverse_each { |status| step status_service, in: [status: -> { status }] }.result).to be_success.with_data(values: [:success])
+          expect(service.collection({success: :success}).reverse_each { |key, value| step status_service, in: [status: -> { value }] }.result).to be_success.with_data(values: {success: :success})
+          expect(service.collection((:success..:success)).reverse_each { |status| step status_service, in: [status: -> { status }] }.result).to be_success.with_data(values: [:success])
+
+          # NOTE: Step with one output.
+          expect(service.collection(enumerable([:success, :success, :success])).reverse_each { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: [:success, :success, :success])
+          expect(service.collection(enumerator([:success, :success, :success])).reverse_each { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: [:success, :success, :success])
+          expect(service.collection(lazy_enumerator([:success, :success, :success])).reverse_each { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: [:success, :success, :success])
+          expect(service.collection(chain_enumerator([:success, :success, :success])).reverse_each { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: [:success, :success, :success])
+          expect(service.collection([:success, :success, :success]).reverse_each { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: [:success, :success, :success])
+
+          expect(service.collection(set([:success])).reverse_each { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: [:success])
+          expect(service.collection({success: :success}).reverse_each { |key, value| step status_service, in: [status: -> { value }], out: :status_string }.result).to be_success.with_data(values: {success: :success})
+          expect(service.collection((:success..:success)).reverse_each { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: [:success])
+
+          # NOTE: Step with multiple outputs.
+          expect(service.collection(enumerable([:success, :success, :success])).reverse_each { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [:success, :success, :success])
+          expect(service.collection(enumerator([:success, :success, :success])).reverse_each { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [:success, :success, :success])
+          expect(service.collection(lazy_enumerator([:success, :success, :success])).reverse_each { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [:success, :success, :success])
+          expect(service.collection(chain_enumerator([:success, :success, :success])).reverse_each { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [:success, :success, :success])
+          expect(service.collection([:success, :success, :success]).reverse_each { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [:success, :success, :success])
+
+          expect(service.collection(set([:success])).reverse_each { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [:success])
+          expect(service.collection({success: :success}).reverse_each { |key, value| step status_service, in: [status: -> { value }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: {success: :success})
+          expect(service.collection((:success..:success)).reverse_each { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [:success])
+
+          # NOTE: Error result.
+          expect(service.collection(enumerable([:exception, :error, :success])).reverse_each { |status| step status_service, in: [status: -> { status }] }.result).to be_error.without_data
+          expect(service.collection(enumerator([:exception, :error, :success])).reverse_each { |status| step status_service, in: [status: -> { status }] }.result).to be_error.without_data
+          expect(service.collection(lazy_enumerator([:exception, :error, :success])).reverse_each { |status| step status_service, in: [status: -> { status }] }.result).to be_error.without_data
+          expect(service.collection(chain_enumerator([:exception, :error, :success])).reverse_each { |status| step status_service, in: [status: -> { status }] }.result).to be_error.without_data
+          expect(service.collection([:exception, :error, :success]).reverse_each { |status| step status_service, in: [status: -> { status }] }.result).to be_error.without_data
+
+          expect(service.collection(set([:exception, :error, :success])).reverse_each { |status| step status_service, in: [status: -> { status }] }.result).to be_error.without_data
+          expect(service.collection({exception: :exception, error: :error, success: :success}).reverse_each { |key, value| step status_service, in: [status: -> { value }] }.result).to be_error.without_data
+          expect(service.collection((:error..:error)).reverse_each { |status| step status_service, in: [status: -> { status }] }.result).to be_error.without_data
+
+          # NOTE: Error propagation.
+          expect(service.collection(enumerable([:success, :error, :exception])).filter { |status| step status_service, in: [status: -> { status }] }.reverse_each { |status| condition[status] }.result).to be_error.without_data
+          expect(service.collection(enumerator([:success, :error, :exception])).filter { |status| step status_service, in: [status: -> { status }] }.reverse_each { |status| condition[status] }.result).to be_error.without_data
+          expect(service.collection(lazy_enumerator([:success, :error, :exception])).filter { |status| step status_service, in: [status: -> { status }] }.reverse_each { |status| condition[status] }.result).to be_error.without_data
+          expect(service.collection(chain_enumerator([:success, :error, :exception])).filter { |status| step status_service, in: [status: -> { status }] }.reverse_each { |status| condition[status] }.result).to be_error.without_data
+          expect(service.collection([:success, :error, :exception]).filter { |status| step status_service, in: [status: -> { status }] }.reverse_each { |status| condition[status] }.result).to be_error.without_data
+
+          expect(service.collection(set([:success, :error, :exception])).filter { |status| step status_service, in: [status: -> { status }] }.reverse_each { |status| condition[status] }.result).to be_error.without_data
+          expect(service.collection({success: :success, error: :error, exception: :exception}).filter { |key, value| step status_service, in: [status: -> { value }] }.reverse_each { |key, value| condition[value] }.result).to be_error.without_data
+          expect(service.collection((:error..:error)).filter { |status| step status_service, in: [status: -> { status }] }.reverse_each { |status| condition[status] }.result).to be_error.without_data
+
+          # NOTE: Usage on terminal chaining.
+          expect { service.collection(enumerable([:success, :exception, :exception])).first.reverse_each { |status| condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection(enumerator([:success, :exception, :exception])).first.reverse_each { |status| condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection(lazy_enumerator([:success, :exception, :exception])).first.reverse_each { |status| condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection(chain_enumerator([:success, :exception, :exception])).first.reverse_each { |status| condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection([:success, :exception, :exception]).first.reverse_each { |status| condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+
+          expect { service.collection(set([:success, :exception, :exception])).first.reverse_each { |status| condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection({success: :success, exception: :exception}).first.reverse_each { |key, value| condition[value] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection((:success..:success)).first.reverse_each { |status| condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+        end
+      end
+
       describe "#select" do
         specify do
           # NOTE: Empty collection.
@@ -3659,6 +3780,9 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
 
       # add not_step specs.
       # failure propagation
+
+      # reverse_each
+      # sum
     end
   end
 end

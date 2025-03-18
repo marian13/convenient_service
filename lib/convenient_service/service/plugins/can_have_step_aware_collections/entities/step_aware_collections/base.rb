@@ -171,6 +171,32 @@ module ConvenientService
 
               ##
               # @param args [Array<Object>]
+              # @param iteration_block [Proc, nil]
+              # @param iterator_block [Proc]
+              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Object]
+              #
+              def process_as_hash(*args, iteration_block, &iterator_block)
+                return step_aware_hash_from(hash) if propagated_result
+
+                step_aware_iteration_block =
+                  if iteration_block
+                    step_aware_iteration_block_from(iteration_block) do |error_result|
+                      return step_aware_hash_from(hash, error_result)
+                    end
+                  end
+
+                response =
+                  catch :propagated_result do
+                    {values: yield(*args, step_aware_iteration_block)}
+                  end
+
+                return step_aware_hash_from(hash, response[:propagated_result]) if response.has_key?(:propagated_result)
+
+                step_aware_hash_from(response[:values])
+              end
+
+              ##
+              # @param args [Array<Object>]
               # @param iterator_block [Proc]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Enumerator]
               #
@@ -312,6 +338,15 @@ module ConvenientService
               #
               def step_aware_enumerable_or_empty_from(enumerable, propagated_result = self.propagated_result)
                 Entities::StepAwareCollections::Enumerable.new(enumerable: enumerable, organizer: organizer, propagated_result: propagated_result || (failure if enumerable.size == 0))
+              end
+
+              ##
+              # @param enumerable [Enumerable]
+              # @param propagated_result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result, nil]
+              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Enumerable]
+              #
+              def step_aware_hash_from(hash, propagated_result = self.propagated_result)
+                Entities::StepAwareCollections::Hash.new(hash: hash, organizer: organizer, propagated_result: propagated_result)
               end
 
               ##

@@ -33,10 +33,47 @@ module ConvenientService
               # @param data_key [Symbol, nil]
               # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
               #
+              # @internal
+              #   NOTE: `catch` is used to support lazy enumerators.
+              #
               def result(data_key: nil)
                 return propagated_result if propagated_result
 
-                success(data_key || :values => enumerable)
+                response =
+                  catch :propagated_result do
+                    {values: enumerable.to_a}
+                  end
+
+                return response[:propagated_result] if response.has_key?(:propagated_result)
+
+                success(data_key || :values => response[:values])
+              end
+
+              ##
+              # @param data_key [Symbol, nil]
+              # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
+              #
+              # @internal
+              #   NOTE: `catch` is used to support lazy enumerators.
+              #
+              def result(data_key: nil, evaluate_by: default_evaluate_by)
+                return propagated_result if propagated_result
+
+                response =
+                  catch :propagated_result do
+                    {values: enumerable.public_send(evaluate_by)}
+                  end
+
+                return response[:propagated_result] if response.has_key?(:propagated_result)
+
+                success(data_key || :values => response[:values])
+              end
+
+              ##
+              # @return [Symbol]
+              #
+              def default_evaluate_by
+                :to_a
               end
 
               ##
@@ -766,7 +803,7 @@ module ConvenientService
                     enumerable.reverse_each(&step_aware_iteration_block)
                   end
                 else
-                  process_as_enumerator do
+                  process_as_enumerator(nil) do
                     enumerable.reverse_each
                   end
                 end
@@ -981,7 +1018,7 @@ module ConvenientService
                     enumerable.each(&step_aware_iteration_block)
                   end
                 else
-                  process_as_enumerator do
+                  process_as_enumerator(nil) do
                     enumerable.each
                   end
                 end

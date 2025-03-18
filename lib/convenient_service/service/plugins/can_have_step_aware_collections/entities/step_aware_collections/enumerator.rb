@@ -30,26 +30,6 @@ module ConvenientService
               end
 
               ##
-              # @param data_key [Symbol, nil]
-              # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
-              #
-              # @internal
-              #   NOTE: `catch` is used to support lazy enumerators.
-              #
-              def result(data_key: nil)
-                return propagated_result if propagated_result
-
-                response =
-                  catch :propagated_result do
-                    {values: enumerator.to_a}
-                  end
-
-                return response[:propagated_result] if response.has_key?(:propagated_result)
-
-                success(data_key || :values => response[:values])
-              end
-
-              ##
               # @api private
               #
               # @return [Enumerator]
