@@ -973,14 +973,8 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
               def uniq(&iteration_block)
-                if iteration_block
-                  process_as_enumerable(iteration_block) do |step_aware_iteration_block|
-                    enumerable.uniq(&step_aware_iteration_block)
-                  end
-                else
-                  process_as_enumerable do
-                    enumerable.uniq
-                  end
+                process_as_enumerable(iteration_block) do |step_aware_iteration_block|
+                  enumerable.uniq(&step_aware_iteration_block)
                 end
               end
 

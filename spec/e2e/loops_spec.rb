@@ -4032,6 +4032,111 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
         end
       end
 
+      describe "#uniq" do
+        specify do
+          # NOTE: Empty collection.
+          expect([].uniq { |number| number.to_s.ord }).to eq([])
+          expect(service.collection(enumerable([])).uniq { |number| number.to_s.ord }.result).to be_success.with_data(values: [])
+          expect(service.collection(enumerator([])).uniq { |number| number.to_s.ord }.result).to be_success.with_data(values: [])
+          expect(service.collection(lazy_enumerator([])).uniq { |number| number.to_s.ord }.result).to be_success.with_data(values: [])
+          expect(service.collection(chain_enumerator([])).uniq { |number| number.to_s.ord }.result).to be_success.with_data(values: [])
+          expect(service.collection([]).uniq { |number| number.to_s.ord }.result).to be_success.with_data(values: [])
+          expect(service.collection(set([])).uniq { |number| number.to_s.ord }.result).to be_success.with_data(values: [])
+          expect(service.collection({}).uniq { |key, value| value.to_s.ord }.result).to be_success.with_data(values: [])
+          expect(service.collection((:success...:success)).uniq { |number| number.to_s.ord }.result).to be_success.with_data(values: [])
+
+          # NOTE: No block.
+          expect([1, 2, 2, 3, 3, 3].uniq.to_a).to eq([1, 2, 3])
+          expect(service.collection(enumerable([1, 2, 2, 3, 3, 3])).uniq.result).to be_success.with_data(values: [1, 2, 3])
+          expect(service.collection(enumerator([1, 2, 2, 3, 3, 3])).uniq.result).to be_success.with_data(values: [1, 2, 3])
+          expect(service.collection(lazy_enumerator([1, 2, 2, 3, 3, 3])).uniq.result).to be_success.with_data(values: [1, 2, 3])
+          expect(service.collection(chain_enumerator([1, 2, 2, 3, 3, 3])).uniq.result).to be_success.with_data(values: [1, 2, 3])
+          expect(service.collection([1, 2, 2, 3, 3, 3]).uniq.result).to be_success.with_data(values: [1, 2, 3])
+
+          expect(service.collection(set([1, 2, 3])).uniq.result).to be_success.with_data(values: [1, 2, 3])
+          expect(service.collection({1 => 1, 2 => 2, 3 => 3}).uniq.result).to be_success.with_data(values: [[1, 1], [2, 2], [3, 3]])
+          expect(service.collection((1..3)).uniq.result).to be_success.with_data(values: [1, 2, 3])
+
+          # NOTE: Block.
+          expect([1, 2, 2, 3, 3, 3].uniq { |number| number.to_s.ord }).to eq([1, 2, 3])
+          expect(service.collection(enumerable([1, 2, 2, 3, 3, 3])).uniq { |number| number.to_s.ord }.result).to be_success.with_data(values: [1, 2, 3])
+          expect(service.collection(enumerator([1, 2, 2, 3, 3, 3])).uniq { |number| number.to_s.ord }.result).to be_success.with_data(values: [1, 2, 3])
+          expect(service.collection(lazy_enumerator([1, 2, 2, 3, 3, 3])).uniq { |number| number.to_s.ord }.result).to be_success.with_data(values: [1, 2, 3])
+          expect(service.collection(chain_enumerator([1, 2, 2, 3, 3, 3])).uniq { |number| number.to_s.ord }.result).to be_success.with_data(values: [1, 2, 3])
+          expect(service.collection([1, 2, 2, 3, 3, 3]).uniq { |number| number.to_s.ord }.result).to be_success.with_data(values: [1, 2, 3])
+
+          expect(service.collection(set([1, 2, 2, 3, 3, 3])).uniq { |number| number.to_s.ord }.result).to be_success.with_data(values: [1, 2, 3])
+          expect(service.collection({1 => 1, 2 => 2, 3 => 3}).uniq { |key, value| value.to_s.ord }.result).to be_success.with_data(values: [[1, 1], [2, 2], [3, 3]])
+          expect(service.collection((1..3)).uniq { |number| number.to_s.ord }.result).to be_success.with_data(values: [1, 2, 3])
+
+          # NOTE: Step with no outputs.
+          expect(service.collection(enumerable([1, 2, 2, 3, 3, 3])).uniq { |number| step number_service, in: [number: -> { number }] }.result).to be_success.with_data(values: [1])
+          expect(service.collection(enumerator([1, 2, 2, 3, 3, 3])).uniq { |number| step number_service, in: [number: -> { number }] }.result).to be_success.with_data(values: [1])
+          expect(service.collection(lazy_enumerator([1, 2, 2, 3, 3, 3])).uniq { |number| step number_service, in: [number: -> { number }] }.result).to be_success.with_data(values: [1])
+          expect(service.collection(chain_enumerator([1, 2, 2, 3, 3, 3])).uniq { |number| step number_service, in: [number: -> { number }] }.result).to be_success.with_data(values: [1])
+          expect(service.collection([1, 2, 2, 3, 3, 3]).uniq { |number| step number_service, in: [number: -> { number }] }.result).to be_success.with_data(values: [1])
+
+          expect(service.collection(set([1, 2, 3])).uniq { |number| step number_service, in: [number: -> { number }] }.result).to be_success.with_data(values: [1])
+          expect(service.collection({1 => 1, 2 => 2, 3 => 3}).uniq { |key, value| step number_service, in: [number: -> { value }] }.result).to be_success.with_data(values: [[1, 1]])
+          expect(service.collection((1..3)).uniq { |number| step number_service, in: [number: -> { number }] }.result).to be_success.with_data(values: [1])
+
+          # NOTE: Step with one output.
+          expect(service.collection(enumerable([1, 2, 2, 3, 3, 3])).uniq { |number| step number_service, in: [number: -> { number }], out: :number_code }.result).to be_success.with_data(values: [1, 2, 3])
+          expect(service.collection(enumerator([1, 2, 2, 3, 3, 3])).uniq { |number| step number_service, in: [number: -> { number }], out: :number_code }.result).to be_success.with_data(values: [1, 2, 3])
+          expect(service.collection(lazy_enumerator([1, 2, 2, 3, 3, 3])).uniq { |number| step number_service, in: [number: -> { number }], out: :number_code }.result).to be_success.with_data(values: [1, 2, 3])
+          expect(service.collection(chain_enumerator([1, 2, 2, 3, 3, 3])).uniq { |number| step number_service, in: [number: -> { number }], out: :number_code }.result).to be_success.with_data(values: [1, 2, 3])
+          expect(service.collection([1, 2, 2, 3, 3, 3]).uniq { |number| step number_service, in: [number: -> { number }], out: :number_code }.result).to be_success.with_data(values: [1, 2, 3])
+
+          expect(service.collection(set([1, 2, 3])).uniq { |number| step number_service, in: [number: -> { number }], out: :number_code }.result).to be_success.with_data(values: [1, 2, 3])
+          expect(service.collection({1 => 1, 2 => 2, 3 => 3}).uniq { |key, value| step number_service, in: [number: -> { value }], out: :number_code }.result).to be_success.with_data(values: [[1, 1], [2, 2], [3, 3]])
+          expect(service.collection((1..3)).uniq { |number| step number_service, in: [number: -> { number }], out: :number_code }.result).to be_success.with_data(values: [1, 2, 3])
+
+          # NOTE: Step with multiple outputs.
+          expect(service.collection(enumerable([1, 2, 2, 3, 3, 3])).uniq { |number| step number_service, in: [number: -> { number }], out: [:number_string, :number_code] }.result).to be_success.with_data(values: [1, 2, 3])
+          expect(service.collection(enumerator([1, 2, 2, 3, 3, 3])).uniq { |number| step number_service, in: [number: -> { number }], out: [:number_string, :number_code] }.result).to be_success.with_data(values: [1, 2, 3])
+          expect(service.collection(lazy_enumerator([1, 2, 2, 3, 3, 3])).uniq { |number| step number_service, in: [number: -> { number }], out: [:number_string, :number_code] }.result).to be_success.with_data(values: [1, 2, 3])
+          expect(service.collection(chain_enumerator([1, 2, 2, 3, 3, 3])).uniq { |number| step number_service, in: [number: -> { number }], out: [:number_string, :number_code] }.result).to be_success.with_data(values: [1, 2, 3])
+          expect(service.collection([1, 2, 2, 3, 3, 3]).uniq { |number| step number_service, in: [number: -> { number }], out: [:number_string, :number_code] }.result).to be_success.with_data(values: [1, 2, 3])
+
+          expect(service.collection(set([1, 2, 3])).uniq { |number| step number_service, in: [number: -> { number }], out: [:number_string, :number_code] }.result).to be_success.with_data(values: [1, 2, 3])
+          expect(service.collection({1 => 1, 2 => 2, 3 => 3}).uniq { |key, value| step number_service, in: [number: -> { value }], out: [:number_string, :number_code] }.result).to be_success.with_data(values: [[1, 1], [2, 2], [3, 3]])
+          expect(service.collection((1..3)).uniq { |number| step number_service, in: [number: -> { number }], out: [:number_string, :number_code] }.result).to be_success.with_data(values: [1, 2, 3])
+
+          # NOTE: Error result.
+          expect(service.collection(enumerable([:success, :error, :exception])).uniq { |status| step status_service, in: [status: -> { status }] }.result).to be_error.without_data
+          expect(service.collection(enumerator([:success, :error, :exception])).uniq { |status| step status_service, in: [status: -> { status }] }.result).to be_error.without_data
+          expect(service.collection(lazy_enumerator([:success, :error, :exception])).uniq { |status| step status_service, in: [status: -> { status }] }.result).to be_error.without_data
+          expect(service.collection(chain_enumerator([:success, :error, :exception])).uniq { |status| step status_service, in: [status: -> { status }] }.result).to be_error.without_data
+          expect(service.collection([:success, :error, :exception]).uniq { |status| step status_service, in: [status: -> { status }] }.result).to be_error.without_data
+
+          expect(service.collection(set([:success, :error, :exception])).uniq { |status| step status_service, in: [status: -> { status }] }.result).to be_error.without_data
+          expect(service.collection({success: :success, error: :error, exception: :exception}).uniq { |key, value| step status_service, in: [status: -> { value }] }.result).to be_error.without_data
+          expect(service.collection((:error..:error)).uniq { |status| step status_service, in: [status: -> { status }] }.result).to be_error.without_data
+
+          # NOTE: Error propagation.
+          expect(service.collection(enumerable([:success, :error, :exception])).filter { |status| step status_service, in: [status: -> { status }] }.uniq { |status| condition[status] }.result).to be_error.without_data
+          expect(service.collection(enumerator([:success, :error, :exception])).filter { |status| step status_service, in: [status: -> { status }] }.uniq { |status| condition[status] }.result).to be_error.without_data
+          expect(service.collection(lazy_enumerator([:success, :error, :exception])).filter { |status| step status_service, in: [status: -> { status }] }.uniq { |status| condition[status] }.result).to be_error.without_data
+          expect(service.collection(chain_enumerator([:success, :error, :exception])).filter { |status| step status_service, in: [status: -> { status }] }.uniq { |status| condition[status] }.result).to be_error.without_data
+          expect(service.collection([:success, :error, :exception]).filter { |status| step status_service, in: [status: -> { status }] }.uniq { |status| condition[status] }.result).to be_error.without_data
+
+          expect(service.collection(set([:success, :error, :exception])).filter { |status| step status_service, in: [status: -> { status }] }.uniq { |status| condition[status] }.result).to be_error.without_data
+          expect(service.collection({success: :success, error: :error, exception: :exception}).filter { |key, value| step status_service, in: [status: -> { value }] }.uniq { |key, value| condition[value] }.result).to be_error.without_data
+          expect(service.collection((:error..:error)).filter { |status| step status_service, in: [status: -> { status }] }.uniq { |status| condition[status] }.result).to be_error.without_data
+
+          # NOTE: Usage on terminal chaining.
+          expect { service.collection(enumerable([:success, :exception, :exception])).first.uniq { |status| condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection(enumerator([:success, :exception, :exception])).first.uniq { |status| condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection(lazy_enumerator([:success, :exception, :exception])).first.uniq { |status| condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection(chain_enumerator([:success, :exception, :exception])).first.uniq { |status| condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection([:success, :exception, :exception]).first.uniq { |status| condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+
+          expect { service.collection(set([:success, :exception, :exception])).first.uniq { |status| condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection({success: :success, exception: :exception}).first.uniq { |key, value| condition[value] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection((:success..:success)).first.uniq { |status| condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+        end
+      end
+
       # first(2) => [only_one] # What to do? success of failure?
       # cycle(2) => nil # What to do? success without data?
       # drop(2) => [] # What to do? success when nothing dropped?
@@ -4042,7 +4147,9 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
       # reverse_each
       # sum
 
-      # check type
+      # check return type
+      # delegate
+      # select no block
     end
   end
 end
