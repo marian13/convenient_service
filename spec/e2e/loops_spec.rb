@@ -2400,6 +2400,78 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
         end
       end
 
+      describe "#first" do
+        specify do
+          # NOTE: Empty collection.
+          expect([].first).to eq(nil)
+          expect(service.collection(enumerable([])).first.result).to be_failure.without_data
+          expect(service.collection(enumerator([])).first.result).to be_failure.without_data
+          expect(service.collection(lazy_enumerator([])).first.result).to be_failure.without_data
+          expect(service.collection(chain_enumerator([])).first.result).to be_failure.without_data
+          expect(service.collection([]).first.result).to be_failure.without_data
+          expect(service.collection(set([])).first.result).to be_failure.without_data
+          expect(service.collection({}).first.result).to be_failure.without_data
+          expect(service.collection((:success...:success)).first.result).to be_success.with_data(value: :success)
+
+          # NOTE: No n.
+          expect([:success, :success, :failure].first).to eq(:success)
+          expect(service.collection(enumerable([:success, :failure, :failure])).first.result).to be_success.with_data(value: :success)
+          expect(service.collection(enumerator([:success, :failure, :failure])).first.result).to be_success.with_data(value: :success)
+          expect(service.collection(lazy_enumerator([:success, :failure, :failure])).first.result).to be_success.with_data(value: :success)
+          expect(service.collection(chain_enumerator([:success, :failure, :failure])).first.result).to be_success.with_data(value: :success)
+          expect(service.collection([:success, :failure, :failure]).first.result).to be_success.with_data(value: :success)
+          expect(service.collection(set([:success, :failure, :failure])).first.result).to be_success.with_data(value: :success)
+          expect(service.collection({success: :success}).first.result).to be_success.with_data(value: [:success, :success])
+          expect(service.collection((:success..:success)).first.result).to be_success.with_data(value: :success)
+
+          # NOTE: N.
+          expect([:success, :success, :failure].first(2)).to eq([:success, :success])
+          expect(service.collection(enumerable([:success, :success, :failure])).first(2).result).to be_success.with_data(values: [:success, :success])
+          expect(service.collection(enumerator([:success, :success, :failure])).first(2).result).to be_success.with_data(values: [:success, :success])
+          expect(service.collection(lazy_enumerator([:success, :success, :failure])).first(2).result).to be_success.with_data(values: [:success, :success])
+          expect(service.collection(chain_enumerator([:success, :success, :failure])).first(2).result).to be_success.with_data(values: [:success, :success])
+          expect(service.collection([:success, :success, :failure]).first(2).result).to be_success.with_data(values: [:success, :success])
+          expect(service.collection(set([:success])).first(1).result).to be_success.with_data(values: [:success])
+
+          expect(service.collection({success: :success}).first(1) { |key, value| value.to_s.ord }.result).to be_success.with_data(values: [[:success, :success]])
+          expect(service.collection((:success..:success)).first(1).result).to be_success.with_data(values: [:success])
+
+          # NOTE: Too big N.
+          expect([:success, :success].first(4)).to eq([:success, :success])
+          expect(service.collection(enumerable([:success, :success])).first(4).result).to be_success.with_data(values: [:success, :success])
+          expect(service.collection(enumerator([:success, :success])).first(4).result).to be_success.with_data(values: [:success, :success])
+          expect(service.collection(lazy_enumerator([:success, :success])).first(4).result).to be_success.with_data(values: [:success, :success])
+          expect(service.collection(chain_enumerator([:success, :success])).first(4).result).to be_success.with_data(values: [:success, :success])
+          expect(service.collection([:success, :success]).first(4).result).to be_success.with_data(values: [:success, :success])
+          expect(service.collection(set([:success])).first(4).result).to be_success.with_data(values: [:success])
+
+          expect(service.collection({success: :success}).first(4) { |key, value| value.to_s.ord }.result).to be_success.with_data(values: [[:success, :success]])
+          expect(service.collection((:success..:success)).first(4).result).to be_success.with_data(values: [:success])
+
+          # NOTE: Error propagation.
+          expect(service.collection(enumerable([:failure, :error, :exception])).find { |status| step status_service, in: [status: -> { status }] }.result).to be_error.without_data
+          expect(service.collection(enumerator([:failure, :error, :exception])).find { |status| step status_service, in: [status: -> { status }] }.result).to be_error.without_data
+          expect(service.collection(lazy_enumerator([:failure, :error, :exception])).find { |status| step status_service, in: [status: -> { status }] }.result).to be_error.without_data
+          expect(service.collection(chain_enumerator([:failure, :error, :exception])).find { |status| step status_service, in: [status: -> { status }] }.result).to be_error.without_data
+          expect(service.collection([:failure, :error, :exception]).find { |status| step status_service, in: [status: -> { status }] }.result).to be_error.without_data
+          expect(service.collection(set([:failure, :error, :exception])).find { |status| step status_service, in: [status: -> { status }] }.result).to be_error.without_data
+
+          expect(service.collection({failure: :failure, error: :error, exception: :exception}).find { |key, value| step status_service, in: [status: -> { value }] }.result).to be_error.without_data
+          expect(service.collection((:error..:error)).find { |status| step status_service, in: [status: -> { status }] }.result).to be_error.without_data
+
+          # NOTE: Usage on terminal chaining.
+          expect { service.collection(enumerable([:success, :exception, :exception])).any?.first.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection(enumerator([:success, :exception, :exception])).any?.first.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection(lazy_enumerator([:success, :exception, :exception])).any?.first.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection(chain_enumerator([:success, :exception, :exception])).any?.first.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection([:success, :exception, :exception]).any?.first.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection(set([:success, :exception, :exception])).any?.first.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+
+          expect { service.collection({success: :success, exception: :exception}).any?.first.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection((:success..:success)).any?.first.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+        end
+      end
+
       describe "#grep" do
         specify do
           # NOTE: Empty collection.
@@ -3527,6 +3599,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
       # drop(2) => [] # What to do? success when nothing dropped?
 
       # add not_step specs.
+      # failure propagation
     end
   end
 end

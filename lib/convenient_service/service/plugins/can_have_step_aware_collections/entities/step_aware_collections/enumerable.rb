@@ -201,7 +201,7 @@ module ConvenientService
               #
               def detect(ifnone = nil, &iteration_block)
                 if iteration_block
-                  process_with_block_return_object_or_nil(ifnone, iteration_block) do |ifnone, step_aware_iteration_block|
+                  process_as_object_or_nil(ifnone, iteration_block) do |ifnone, step_aware_iteration_block|
                     enumerable.detect(ifnone, &step_aware_iteration_block)
                   end
                 else
@@ -368,7 +368,7 @@ module ConvenientService
               #
               def find(ifnone = nil, &iteration_block)
                 if iteration_block
-                  process_with_block_return_object_or_nil(ifnone, iteration_block) do |ifnone, step_aware_iteration_block|
+                  process_as_object_or_nil(ifnone, iteration_block) do |ifnone, step_aware_iteration_block|
                     enumerable.find(ifnone, &step_aware_iteration_block)
                   end
                 else
@@ -401,11 +401,11 @@ module ConvenientService
               #
               def find_index(*args, &iteration_block)
                 if iteration_block
-                  process_with_block_return_object_or_nil(iteration_block) do |step_aware_iteration_block|
+                  process_as_object_or_nil(iteration_block) do |step_aware_iteration_block|
                     enumerable.find_index(&step_aware_iteration_block)
                   end
                 elsif args.any?
-                  process_with_block_return_object_or_nil(args.first) do |value|
+                  process_as_object_or_nil(args.first) do |value|
                     enumerable.find_index(value)
                   end
                 else
@@ -421,11 +421,11 @@ module ConvenientService
               #
               def first(n = nil)
                 if n
-                  process_as_enumerable(n) do |n|
+                  process_as_enumerable(n, nil) do |n|
                     enumerable.first(n)
                   end
                 else
-                  process_without_block_return_object_or_nil do
+                  process_as_object_or_nil(nil) do
                     enumerable.first
                   end
                 end
@@ -560,22 +560,12 @@ module ConvenientService
               #
               def max(n = nil, &iteration_block)
                 if n
-                  if iteration_block
-                    process_as_enumerable(n, iteration_block) do |n, step_aware_iteration_block|
-                      enumerable.max(n, &step_aware_iteration_block)
-                    end
-                  else
-                    process_as_enumerable(n) do |n|
-                      enumerable.max(n)
-                    end
-                  end
-                elsif iteration_block
-                  process_with_block_return_object_or_nil(iteration_block) do |step_aware_iteration_block|
-                    enumerable.max(&step_aware_iteration_block)
+                  process_as_enumerable(n, iteration_block) do |n, step_aware_iteration_block|
+                    enumerable.max(n, &step_aware_iteration_block)
                   end
                 else
-                  process_without_block_return_object_or_nil do
-                    enumerable.max
+                  process_as_object_or_nil(iteration_block) do |step_aware_iteration_block|
+                    enumerable.max(&step_aware_iteration_block)
                   end
                 end
               end
@@ -597,7 +587,7 @@ module ConvenientService
                     end
                   end
                 elsif iteration_block
-                  process_with_block_return_object_or_nil(iteration_block) do |step_aware_iteration_block|
+                  process_as_object_or_nil(iteration_block) do |step_aware_iteration_block|
                     enumerable.max_by(&step_aware_iteration_block)
                   end
                 else
@@ -624,22 +614,12 @@ module ConvenientService
               #
               def min(n = nil, &iteration_block)
                 if n
-                  if iteration_block
-                    process_as_enumerable(n, iteration_block) do |n, step_aware_iteration_block|
-                      enumerable.min(n, &step_aware_iteration_block)
-                    end
-                  else
-                    process_as_enumerable(n) do |n|
-                      enumerable.min(n)
-                    end
-                  end
-                elsif iteration_block
-                  process_with_block_return_object_or_nil(iteration_block) do |step_aware_iteration_block|
-                    enumerable.min(&step_aware_iteration_block)
+                  process_as_enumerable(n, iteration_block) do |n, step_aware_iteration_block|
+                    enumerable.min(n, &step_aware_iteration_block)
                   end
                 else
-                  process_without_block_return_object_or_nil do
-                    enumerable.min
+                  process_as_object_or_nil(iteration_block) do |step_aware_iteration_block|
+                    enumerable.min(&step_aware_iteration_block)
                   end
                 end
               end
@@ -661,7 +641,7 @@ module ConvenientService
                     end
                   end
                 elsif iteration_block
-                  process_with_block_return_object_or_nil(iteration_block) do |step_aware_iteration_block|
+                  process_as_object_or_nil(iteration_block) do |step_aware_iteration_block|
                     enumerable.min_by(&step_aware_iteration_block)
                   end
                 else

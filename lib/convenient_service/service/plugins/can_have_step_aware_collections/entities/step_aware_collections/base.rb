@@ -104,7 +104,7 @@ module ConvenientService
               # @param iterator_block [Proc]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Object]
               #
-              def process_with_block_return_object_or_nil(*args, iteration_block, &iterator_block)
+              def process_as_object_or_nil(*args, iteration_block, &iterator_block)
                 return step_aware_object_or_nil_from(nil) if propagated_result
 
                 step_aware_iteration_block =
@@ -117,24 +117,6 @@ module ConvenientService
                 response =
                   catch :propagated_result do
                     {object_or_nil: yield(*args, step_aware_iteration_block)}
-                  end
-
-                return step_aware_object_or_nil_from(nil, response[:propagated_result]) if response.has_key?(:propagated_result)
-
-                step_aware_object_or_nil_from(response[:object_or_nil])
-              end
-
-              ##
-              # @param args [Array<Object>]
-              # @param iterator_block [Proc]
-              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Enumerator]
-              #
-              def process_without_block_return_object_or_nil(*args, &iterator_block)
-                return step_aware_object_or_nil_from(nil) if propagated_result
-
-                response =
-                  catch :propagated_result do
-                    {object_or_nil: yield(*args)}
                   end
 
                 return step_aware_object_or_nil_from(nil, response[:propagated_result]) if response.has_key?(:propagated_result)
