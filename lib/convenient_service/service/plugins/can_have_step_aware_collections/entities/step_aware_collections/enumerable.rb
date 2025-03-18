@@ -604,22 +604,18 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
               def max_by(n = nil, &iteration_block)
-                if n
-                  if iteration_block
+                if iteration_block
+                  if n
                     process_as_enumerable(n, iteration_block) do |n, step_aware_iteration_block|
                       enumerable.max_by(n, &step_aware_iteration_block)
                     end
                   else
-                    process_as_enumerator(n) do |n|
-                      enumerable.max_by(n)
+                    process_as_object_or_nil(iteration_block) do |step_aware_iteration_block|
+                      enumerable.max_by(&step_aware_iteration_block)
                     end
                   end
-                elsif iteration_block
-                  process_as_object_or_nil(iteration_block) do |step_aware_iteration_block|
-                    enumerable.max_by(&step_aware_iteration_block)
-                  end
                 else
-                  process_as_enumerator do
+                  process_as_enumerator(n, nil) do
                     enumerable.max_by
                   end
                 end
