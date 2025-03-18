@@ -50,6 +50,13 @@ module ConvenientService
               ##
               # @raise [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining]
               #
+              def each(...)
+                ::ConvenientService.raise Exceptions::AlreadyUsedTerminalChaining.new
+              end
+
+              ##
+              # @raise [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining]
+              #
               def all?(...)
                 ::ConvenientService.raise Exceptions::AlreadyUsedTerminalChaining.new
               end
@@ -421,6 +428,13 @@ module ConvenientService
               ##
               # @raise [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining]
               #
+              def to_a(...)
+                ::ConvenientService.raise Exceptions::AlreadyUsedTerminalChaining.new
+              end
+
+              ##
+              # @raise [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining]
+              #
               def uniq(...)
                 ::ConvenientService.raise Exceptions::AlreadyUsedTerminalChaining.new
               end
@@ -429,13 +443,6 @@ module ConvenientService
               # @raise [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining]
               #
               def zip(...)
-                ::ConvenientService.raise Exceptions::AlreadyUsedTerminalChaining.new
-              end
-
-              ##
-              # @raise [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining]
-              #
-              def each(...)
                 ::ConvenientService.raise Exceptions::AlreadyUsedTerminalChaining.new
               end
             end

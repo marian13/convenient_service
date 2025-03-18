@@ -355,7 +355,7 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
               def to_a
-                process_as_enumerable do
+                process_as_enumerable(nil) do
                   lazy_enumerator.to_a
                 end
               end

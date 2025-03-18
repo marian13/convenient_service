@@ -58,6 +58,22 @@ module ConvenientService
               end
 
               ##
+              # @param iteration_block [Proc, nil]
+              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Enumerable]
+              #
+              def each(&iteration_block)
+                if iteration_block
+                  process_as_enumerable(iteration_block) do |step_aware_iteration_block|
+                    enumerable.each(&step_aware_iteration_block)
+                  end
+                else
+                  process_as_enumerator(nil) do
+                    enumerable.each
+                  end
+                end
+              end
+
+              ##
               # @overload all?(pattern)
               #   @param pattern [Object]
               #   @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
@@ -938,7 +954,7 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
               def to_a
-                process_as_enumerable do
+                process_as_enumerable(nil) do
                   enumerable.to_a
                 end
               end
@@ -983,24 +999,6 @@ module ConvenientService
                 else
                   process_as_enumerable(*args) do |*args|
                     enumerable.zip(*args)
-                  end
-                end
-              end
-
-              # ...
-
-              ##
-              # @param iteration_block [Proc, nil]
-              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Enumerable]
-              #
-              def each(&iteration_block)
-                if iteration_block
-                  process_as_enumerable(iteration_block) do |step_aware_iteration_block|
-                    enumerable.each(&step_aware_iteration_block)
-                  end
-                else
-                  process_as_enumerator(nil) do
-                    enumerable.each
                   end
                 end
               end
