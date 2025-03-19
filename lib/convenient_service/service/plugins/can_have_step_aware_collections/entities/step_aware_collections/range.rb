@@ -30,12 +30,35 @@ module ConvenientService
               end
 
               ##
+              # @return [Proc]
+              #
+              def default_evaluate_by
+                -> range { range }
+              end
+
+              ##
               # @api private
               #
               # @return [Range]
               #
               def enumerable
                 range
+              end
+
+              ##
+              # @param iteration_block [Proc, nil]
+              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Enumerable]
+              #
+              def each(&iteration_block)
+                if iteration_block
+                  process_as_range(iteration_block) do |step_aware_iteration_block|
+                    range.each(&step_aware_iteration_block)
+                  end
+                else
+                  process_as_enumerator(nil) do
+                    range.each
+                  end
+                end
               end
             end
           end

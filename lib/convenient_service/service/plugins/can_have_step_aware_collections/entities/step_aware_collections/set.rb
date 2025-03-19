@@ -30,6 +30,13 @@ module ConvenientService
               end
 
               ##
+              # @return [Proc]
+              #
+              def default_evaluate_by
+                -> set { set }
+              end
+
+              ##
               # @api private
               #
               # @return [Set]

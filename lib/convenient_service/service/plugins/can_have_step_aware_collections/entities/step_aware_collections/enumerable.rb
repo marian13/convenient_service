@@ -31,7 +31,7 @@ module ConvenientService
 
               ##
               # @param data_key [Symbol, nil]
-              # @param evaluate_by [Symbol]
+              # @param evaluate_by [Symbol, Proc]
               # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
               #
               # @internal
@@ -40,9 +40,17 @@ module ConvenientService
               def result(data_key: nil, evaluate_by: default_evaluate_by)
                 return propagated_result if propagated_result
 
+                evaluate_by_block =
+                  case evaluate_by
+                  when Symbol, String
+                    proc { |enumerable| enumerable.public_send(evaluate_by) }
+                  when Proc
+                    evaluate_by
+                  end
+
                 response =
                   catch :propagated_result do
-                    {values: enumerable.public_send(evaluate_by)}
+                    {values: evaluate_by_block.call(enumerable)}
                   end
 
                 return response[:propagated_result] if response.has_key?(:propagated_result)
