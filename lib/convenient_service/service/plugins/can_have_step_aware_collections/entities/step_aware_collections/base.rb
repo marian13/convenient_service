@@ -192,6 +192,32 @@ module ConvenientService
               # @param iterator_block [Proc]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Object]
               #
+              def process_as_set(*args, iteration_block, &iterator_block)
+                return step_aware_set_from(set) if propagated_result
+
+                step_aware_iteration_block =
+                  if iteration_block
+                    step_aware_iteration_block_from(iteration_block) do |error_result|
+                      return step_aware_set_from(set, error_result)
+                    end
+                  end
+
+                response =
+                  catch :propagated_result do
+                    {values: yield(*args, step_aware_iteration_block)}
+                  end
+
+                return step_aware_set_from(set, response[:propagated_result]) if response.has_key?(:propagated_result)
+
+                step_aware_set_from(response[:values])
+              end
+
+              ##
+              # @param args [Array<Object>]
+              # @param iteration_block [Proc, nil]
+              # @param iterator_block [Proc]
+              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Object]
+              #
               def process_as_range(*args, iteration_block, &iterator_block)
                 return step_aware_range_from(range) if propagated_result
 
@@ -364,6 +390,15 @@ module ConvenientService
               #
               def step_aware_hash_from(hash, propagated_result = self.propagated_result)
                 Entities::StepAwareCollections::Hash.new(hash: hash, organizer: organizer, propagated_result: propagated_result)
+              end
+
+              ##
+              # @param set [Set]
+              # @param propagated_result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result, nil]
+              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Enumerable]
+              #
+              def step_aware_set_from(set, propagated_result = self.propagated_result)
+                Entities::StepAwareCollections::Set.new(set: set, organizer: organizer, propagated_result: propagated_result)
               end
 
               ##

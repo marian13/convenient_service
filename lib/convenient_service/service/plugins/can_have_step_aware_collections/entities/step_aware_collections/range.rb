@@ -33,7 +33,7 @@ module ConvenientService
               # @return [Proc]
               #
               def default_evaluate_by
-                -> range { range }
+                ->(range) { range }
               end
 
               ##

@@ -78,11 +78,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           end
 
           def result
-            case
-            when statuses.include?(:exception) then raise
-            when statuses.include?(:error) then error
-            when statuses.include?(:failure) then failure
-            when statuses.uniq.include?(:success) then success(status_string: "ok", status_code: 200)
+            if statuses.include?(:exception)
+              raise
+            elsif statuses.include?(:error)
+              error
+            elsif statuses.include?(:failure)
+              failure
+            elsif statuses.uniq.include?(:success)
+              success(status_string: "ok", status_code: 200)
             else
               raise
             end
@@ -1577,7 +1580,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.collection(lazy_enumerator([])).each { |status| condition[status] }.result).to be_success.with_data(values: [])
           expect(service.collection(chain_enumerator([])).each { |status| condition[status] }.result).to be_success.with_data(values: [])
           expect(service.collection([]).each { |status| condition[status] }.result).to be_success.with_data(values: [])
-          expect(service.collection(set([])).each { |status| condition[status] }.result).to be_success.with_data(values: [])
+          expect(service.collection(set([])).each { |status| condition[status] }.result).to be_success.with_data(values: set([]))
           expect(service.collection({}).each { |status| condition[status] }.result).to be_success.with_data(values: {})
           expect(service.collection((:success...:success)).each { |status| condition[status] }.result).to be_success.with_data(values: (:success...:success))
 
@@ -1598,7 +1601,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.collection(chain_enumerator([0, 1, 2, 3, 4, 5])).each { |number| number.to_s.ord }.result).to be_success.with_data(values: [0, 1, 2, 3, 4, 5])
           expect(service.collection([0, 1, 2, 3, 4, 5]).each { |number| number.to_s.ord }.result).to be_success.with_data(values: [0, 1, 2, 3, 4, 5])
 
-          expect(service.collection(set([0, 1, 2, 3, 4, 5])).each { |number| number.to_s.ord }.result).to be_success.with_data(values: [0, 1, 2, 3, 4, 5])
+          expect(service.collection(set([0, 1, 2, 3, 4, 5])).each { |number| number.to_s.ord }.result).to be_success.with_data(values: set([0, 1, 2, 3, 4, 5]))
           expect({0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}.each { |key, value| value.to_s.ord }.to_h).to eq({0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5})
           expect(service.collection({0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}).each { |key, value| value.to_s.ord }.result).to be_success.with_data(values: {0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5})
           expect(service.collection((0..5)).each { |number| number.to_s.ord }.result).to be_success.with_data(values: (0..5))
@@ -1610,7 +1613,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.collection(chain_enumerator([:success, :success, :success])).each { |status| step status_service, in: [status: -> { status }] }.result).to be_success.with_data(values: [:success, :success, :success])
           expect(service.collection([:success, :success, :success]).each { |status| step status_service, in: [status: -> { status }] }.result).to be_success.with_data(values: [:success, :success, :success])
 
-          expect(service.collection(set([:success])).each { |status| step status_service, in: [status: -> { status }] }.result).to be_success.with_data(values: [:success])
+          expect(service.collection(set([:success])).each { |status| step status_service, in: [status: -> { status }] }.result).to be_success.with_data(values: set([:success]))
           expect(service.collection({success: :success}).each { |key, value| step status_service, in: [status: -> { value }] }.result).to be_success.with_data(values: {success: :success})
           expect(service.collection((:success..:success)).each { |status| step status_service, in: [status: -> { status }] }.result).to be_success.with_data(values: (:success..:success))
 
@@ -1621,7 +1624,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.collection(chain_enumerator([:success, :success, :success])).each { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: [:success, :success, :success])
           expect(service.collection([:success, :success, :success]).each { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: [:success, :success, :success])
 
-          expect(service.collection(set([:success])).each { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: [:success])
+          expect(service.collection(set([:success])).each { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: set([:success]))
           expect(service.collection({success: :success}).each { |key, value| step status_service, in: [status: -> { value }], out: :status_string }.result).to be_success.with_data(values: {success: :success})
           expect(service.collection((:success..:success)).each { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: (:success..:success))
 
@@ -1632,7 +1635,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.collection(chain_enumerator([:success, :success, :success])).each { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [:success, :success, :success])
           expect(service.collection([:success, :success, :success]).each { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [:success, :success, :success])
 
-          expect(service.collection(set([:success])).each { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [:success])
+          expect(service.collection(set([:success])).each { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: set([:success]))
           expect(service.collection({success: :success}).each { |key, value| step status_service, in: [status: -> { value }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: {success: :success})
           expect(service.collection((:success..:success)).each { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: (:success..:success))
 
@@ -1685,13 +1688,13 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.collection((:success...:success)).each_cons(2) { |status| condition[status] }.result).to be_success.with_data(values: [])
 
           # NOTE: No block.
-          expect([0, 1, 2, 3, 4, 5].each_cons(2).to_a).to eq([[0, 1], [1, 2], [2, 3], [3, 4], [4, 5]] )
-          expect(service.collection(enumerable([0, 1, 2, 3, 4, 5])).each_cons(2).result).to be_success.with_data(values: [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5]] )
-          expect(service.collection(enumerator([0, 1, 2, 3, 4, 5])).each_cons(2).result).to be_success.with_data(values: [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5]] )
-          expect(lazy_enumerator([0, 1, 2, 3, 4, 5]).each_cons(2).to_a).to eq([[0, 1], [1, 2], [2, 3], [3, 4], [4, 5]] )
-          expect(service.collection(lazy_enumerator([0, 1, 2, 3, 4, 5])).each_cons(2).result).to be_success.with_data(values: [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5]] )
-          expect(service.collection(chain_enumerator([0, 1, 2, 3, 4, 5])).each_cons(2).result).to be_success.with_data(values: [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5]] )
-          expect(service.collection([0, 1, 2, 3, 4, 5]).each_cons(2).result).to be_success.with_data(values: [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5]] )
+          expect([0, 1, 2, 3, 4, 5].each_cons(2).to_a).to eq([[0, 1], [1, 2], [2, 3], [3, 4], [4, 5]])
+          expect(service.collection(enumerable([0, 1, 2, 3, 4, 5])).each_cons(2).result).to be_success.with_data(values: [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5]])
+          expect(service.collection(enumerator([0, 1, 2, 3, 4, 5])).each_cons(2).result).to be_success.with_data(values: [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5]])
+          expect(lazy_enumerator([0, 1, 2, 3, 4, 5]).each_cons(2).to_a).to eq([[0, 1], [1, 2], [2, 3], [3, 4], [4, 5]])
+          expect(service.collection(lazy_enumerator([0, 1, 2, 3, 4, 5])).each_cons(2).result).to be_success.with_data(values: [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5]])
+          expect(service.collection(chain_enumerator([0, 1, 2, 3, 4, 5])).each_cons(2).result).to be_success.with_data(values: [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5]])
+          expect(service.collection([0, 1, 2, 3, 4, 5]).each_cons(2).result).to be_success.with_data(values: [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5]])
 
           # NOTE: Block.
           expect([0, 1, 2, 3, 4, 5].each_cons(2) { |numbers| numbers.map(&:to_s).map(&:ord) }).to eq([0, 1, 2, 3, 4, 5])
