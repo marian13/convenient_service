@@ -590,11 +590,21 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
     end
 
     describe "#printable_action" do
-      it "returns printable service as string" do
-        expect { step.printable_action }
-          .to delegate_to(step.action, :inspect)
-          .without_arguments
-          .and_return_its_value
+      context "when step action is NOT class" do
+        let(:action) { :foo }
+
+        it "returns printable service as string" do
+          expect(step.printable_action).to eq(action.inspect)
+        end
+      end
+
+      context "when step action is class" do
+        it "returns printable class as string" do
+          expect { step.printable_action }
+            .to delegate_to(ConvenientService::Utils::Class, :display_name)
+            .with_arguments(step.action)
+            .and_return_its_value
+        end
       end
     end
 

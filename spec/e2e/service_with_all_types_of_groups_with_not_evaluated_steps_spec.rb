@@ -154,11 +154,11 @@ RSpec.describe "Service with all types of groups with NOT evaluated steps", type
         end
 
         before :result do
-          puts "Started service `#{self.class}`."
+          puts "Started service `#{self.class.name}`."
         end
 
         after :result do
-          puts "Completed service `#{self.class}`."
+          puts "Completed service `#{self.class.name}`."
         end
 
         after :step do |step|
@@ -215,14 +215,14 @@ RSpec.describe "Service with all types of groups with NOT evaluated steps", type
 
             let(:expected_output) do
               <<~TEXT
-                Started service `#{services[:ServiceWithAllTypesOfGroupsWithNotEvaluatedSteps]}`.
-                  Run step `#{services[:SuccessService]}` (steps[0]).
-                  Run step `#{services[:FailureService]}` (steps[2]).
-                  Run step `#{services[:FailureService]}` (steps[4]).
-                  Run step `#{services[:FailureService]}` (steps[6]).
-                  Run step `#{services[:SuccessService]}` (steps[8]).
-                  Run step `#{services[:FailureService]}` (steps[10]).
-                Completed service `#{services[:ServiceWithAllTypesOfGroupsWithNotEvaluatedSteps]}`.
+                Started service `ServiceWithAllTypesOfGroupsWithNotEvaluatedSteps`.
+                  Run step `SuccessService` (steps[0]).
+                  Run step `FailureService` (steps[2]).
+                  Run step `FailureService` (steps[4]).
+                  Run step `FailureService` (steps[6]).
+                  Run step `SuccessService` (steps[8]).
+                  Run step `FailureService` (steps[10]).
+                Completed service `ServiceWithAllTypesOfGroupsWithNotEvaluatedSteps`.
               TEXT
             end
 

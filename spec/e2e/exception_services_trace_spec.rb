@@ -380,6 +380,10 @@ RSpec.describe "Exception services trace", type: [:standard, :e2e] do
             def result
               raise StandardError, "exception from service step"
             end
+
+            def self.name
+              "ServiceStep"
+            end
           end
         end
 
@@ -392,7 +396,7 @@ RSpec.describe "Exception services trace", type: [:standard, :e2e] do
             expect(exception.services[0][:trigger]).to eq({method: ":result"})
 
             expect(exception.services[1][:instance]).to eq(service_instance)
-            expect(exception.services[1][:trigger]).to eq({index: 0, step: service_step.inspect})
+            expect(exception.services[1][:trigger]).to eq({index: 0, step: service_step.name})
           end
         end
         # rubocop:enable RSpec/MultipleExpectations, RSpec/ExampleLength
@@ -664,6 +668,10 @@ RSpec.describe "Exception services trace", type: [:standard, :e2e] do
             def fallback_failure_result
               raise StandardError, "exception from fallback failure result from service step"
             end
+
+            def self.name
+              "ServiceStep"
+            end
           end
         end
 
@@ -676,7 +684,7 @@ RSpec.describe "Exception services trace", type: [:standard, :e2e] do
             expect(exception.services[0][:trigger]).to eq({method: ":fallback_failure_result"})
 
             expect(exception.services[1][:instance]).to eq(service_instance)
-            expect(exception.services[1][:trigger]).to eq({index: 0, step: service_step.inspect})
+            expect(exception.services[1][:trigger]).to eq({index: 0, step: service_step.name})
           end
         end
         # rubocop:enable RSpec/MultipleExpectations, RSpec/ExampleLength
@@ -745,6 +753,10 @@ RSpec.describe "Exception services trace", type: [:standard, :e2e] do
             def fallback_error_result
               raise StandardError, "exception from fallback error result from service step"
             end
+
+            def self.name
+              "ServiceStep"
+            end
           end
         end
 
@@ -757,7 +769,7 @@ RSpec.describe "Exception services trace", type: [:standard, :e2e] do
             expect(exception.services[0][:trigger]).to eq({method: ":fallback_error_result"})
 
             expect(exception.services[1][:instance]).to eq(service_instance)
-            expect(exception.services[1][:trigger]).to eq({index: 0, step: service_step.inspect})
+            expect(exception.services[1][:trigger]).to eq({index: 0, step: service_step.name})
           end
         end
         # rubocop:enable RSpec/MultipleExpectations, RSpec/ExampleLength
@@ -826,6 +838,10 @@ RSpec.describe "Exception services trace", type: [:standard, :e2e] do
             def fallback_result
               raise StandardError, "exception from fallback result from service step"
             end
+
+            def self.name
+              "ServiceStep"
+            end
           end
         end
 
@@ -838,7 +854,7 @@ RSpec.describe "Exception services trace", type: [:standard, :e2e] do
             expect(exception.services[0][:trigger]).to eq({method: ":fallback_result"})
 
             expect(exception.services[1][:instance]).to eq(service_instance)
-            expect(exception.services[1][:trigger]).to eq({index: 0, step: service_step.inspect})
+            expect(exception.services[1][:trigger]).to eq({index: 0, step: service_step.name})
           end
         end
         # rubocop:enable RSpec/MultipleExpectations, RSpec/ExampleLength

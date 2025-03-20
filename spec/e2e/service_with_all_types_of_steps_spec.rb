@@ -128,11 +128,11 @@ RSpec.describe "Service with all types of steps", type: [:standard, :e2e] do
           in: {index: -> { 5 }}
 
         before :result do
-          puts "Started service `#{self.class}`."
+          puts "Started service `#{self.class.name}`."
         end
 
         after :result do
-          puts "Completed service `#{self.class}`."
+          puts "Completed service `#{self.class.name}`."
         end
 
         after :step do |step|
@@ -233,14 +233,14 @@ RSpec.describe "Service with all types of steps", type: [:standard, :e2e] do
 
             let(:expected_output) do
               <<~TEXT
-                Started service `#{services[:ServiceWithAllTypesOfSteps]}`.
-                  Run step `#{services[:SuccessService]}` (steps[0]).
+                Started service `ServiceWithAllTypesOfSteps`.
+                  Run step `SuccessService` (steps[0]).
                   Run step `:failure_method` (steps[1]).
-                  Run step `#{services[:SuccessService]}` (steps[2]).
+                  Run step `SuccessService` (steps[2]).
                   Run step `:success_method` (steps[3]).
-                  Run step `#{services[:FailureService]}` (steps[4]).
+                  Run step `FailureService` (steps[4]).
                   Run step `:failure_method` (steps[5]).
-                Completed service `#{services[:ServiceWithAllTypesOfSteps]}`.
+                Completed service `ServiceWithAllTypesOfSteps`.
               TEXT
             end
 

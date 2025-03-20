@@ -125,11 +125,11 @@ RSpec.describe "Service with all types of groups", type: [:standard, :e2e] do
         end
 
         before :result do
-          puts "Started service `#{self.class}`."
+          puts "Started service `#{self.class.name}`."
         end
 
         after :result do
-          puts "Completed service `#{self.class}`."
+          puts "Completed service `#{self.class.name}`."
         end
 
         after :step do |step|
@@ -182,20 +182,20 @@ RSpec.describe "Service with all types of groups", type: [:standard, :e2e] do
 
             let(:expected_output) do
               <<~TEXT
-                Started service `#{services[:ServiceWithAllTypesOfGroups]}`.
-                  Run step `#{services[:SuccessService]}` (steps[0]).
+                Started service `ServiceWithAllTypesOfGroups`.
+                  Run step `SuccessService` (steps[0]).
                   Run step `:success_method` (steps[1]).
-                  Run step `#{services[:SuccessService]}` (steps[2]).
+                  Run step `SuccessService` (steps[2]).
                   Run step `:failure_method` (steps[3]).
-                  Run step `#{services[:FailureService]}` (steps[4]).
+                  Run step `FailureService` (steps[4]).
                   Run step `:success_method` (steps[5]).
-                  Run step `#{services[:FailureService]}` (steps[6]).
+                  Run step `FailureService` (steps[6]).
                   Run step `:success_method` (steps[7]).
-                  Run step `#{services[:FailureService]}` (steps[8]).
+                  Run step `FailureService` (steps[8]).
                   Run step `:success_method` (steps[9]).
-                  Run step `#{services[:SuccessService]}` (steps[10]).
+                  Run step `SuccessService` (steps[10]).
                   Run step `:success_method` (steps[11]).
-                Completed service `#{services[:ServiceWithAllTypesOfGroups]}`.
+                Completed service `ServiceWithAllTypesOfGroups`.
               TEXT
             end
 
