@@ -130,6 +130,45 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
         end
       end
 
+      let(:numbers_service) do
+        Class.new do
+          include ConvenientService::Standard::Config
+
+          attr_reader :numbers
+
+          def initialize(numbers:)
+            @numbers = numbers
+          end
+
+          ##
+          # NOTE: `number_code` is ASCII Code.
+          #
+          def result
+            return error if numbers.any? { |number| (-Float::INFINITY..-1).cover?(number) }
+
+            formatted_numbers =
+              numbers.map do |number|
+                case number
+                when 0 then {string: "zero", code: 48}
+                when 1 then {string: "one", code: 49}
+                when 2 then {string: "two", code: 50}
+                when 3 then {string: "three", code: 51}
+                when 4 then {string: "four", code: 52}
+                when 5 then {string: "five", code: 53}
+                else
+                  raise
+                end
+              end
+
+            success(number_strings: formatted_numbers.map { |number| number[:string] }, number_codes: formatted_numbers.map { |number| number[:code] })
+          end
+
+          def self.name
+            "NumbersService"
+          end
+        end
+      end
+
       let(:compare_numbers_service) do
         Class.new do
           include ConvenientService::Standard::Config
@@ -4806,7 +4845,81 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect((1..1).zip([2], [3]) { |array| raise if array.sum != 6 }).to eq(nil)
           expect(service.collection((1..1)).zip([2], [3]) { |array| raise if array.sum != 6 }.result).to be_success.with_data(value: nil)
 
-          # TODO: Steps.
+          # Step with no outputs.
+          expect([1].zip([2], [3]) { |numbers| step numbers_service, in: [numbers: -> { numbers }] }).to eq(nil)
+          expect(service.collection(enumerable([1])).zip([2], [3]) { |numbers| step numbers_service, in: [numbers: -> { numbers }] }.result).to be_success.with_data(value: nil)
+          expect(service.collection(enumerator([1])).zip([2], [3]) { |numbers| step numbers_service, in: [numbers: -> { numbers }] }.result).to be_success.with_data(value: nil)
+          expect(service.collection(lazy_enumerator([1])).zip([2], [3]) { |numbers| step numbers_service, in: [numbers: -> { numbers }] }.result).to be_success.with_data(value: nil)
+          expect(service.collection(chain_enumerator([1])).zip([2], [3]) { |numbers| step numbers_service, in: [numbers: -> { numbers }] }.result).to be_success.with_data(value: nil)
+          expect(service.collection([1]).zip([2], [3]) { |numbers| step numbers_service, in: [numbers: -> { numbers }] }.result).to be_success.with_data(value: nil)
+          expect(set([1]).zip([2], [3]) { |numbers| step numbers_service, in: [numbers: -> { numbers }] }).to eq(nil)
+          expect(service.collection(set([1])).zip([2], [3]) { |numbers| step numbers_service, in: [numbers: -> { numbers }] }.result).to be_success.with_data(value: nil)
+          expect(service.collection({1 => 1}).zip({2 => 2}, {3 => 3}) { |numbers| step numbers_service, in: [numbers: -> { numbers.flatten }] }.result).to be_success.with_data(value: nil)
+          expect((1..1).zip([2], [3]) { |numbers| step numbers_service, in: [numbers: -> { numbers }] }).to eq(nil)
+          expect(service.collection((1..1)).zip([2], [3]) { |numbers| step numbers_service, in: [numbers: -> { numbers }] }.result).to be_success.with_data(value: nil)
+
+          # Step with one output.
+          expect([1].zip([2], [3]) { |numbers| step numbers_service, in: [numbers: -> { numbers }], out: :number_strings }).to eq(nil)
+          expect(service.collection(enumerable([1])).zip([2], [3]) { |numbers| step numbers_service, in: [numbers: -> { numbers }], out: :number_strings }.result).to be_success.with_data(value: nil)
+          expect(service.collection(enumerator([1])).zip([2], [3]) { |numbers| step numbers_service, in: [numbers: -> { numbers }], out: :number_strings }.result).to be_success.with_data(value: nil)
+          expect(service.collection(lazy_enumerator([1])).zip([2], [3]) { |numbers| step numbers_service, in: [numbers: -> { numbers }], out: :number_strings }.result).to be_success.with_data(value: nil)
+          expect(service.collection(chain_enumerator([1])).zip([2], [3]) { |numbers| step numbers_service, in: [numbers: -> { numbers }], out: :number_strings }.result).to be_success.with_data(value: nil)
+          expect(service.collection([1]).zip([2], [3]) { |numbers| step numbers_service, in: [numbers: -> { numbers }], out: :number_strings }.result).to be_success.with_data(value: nil)
+          expect(set([1]).zip([2], [3]) { |numbers| step numbers_service, in: [numbers: -> { numbers }], out: :number_strings }).to eq(nil)
+          expect(service.collection(set([1])).zip([2], [3]) { |numbers| step numbers_service, in: [numbers: -> { numbers }], out: :number_strings }.result).to be_success.with_data(value: nil)
+          expect(service.collection({1 => 1}).zip([2], [3]) { |numbers| step numbers_service, in: [numbers: -> { numbers.flatten }], out: :number_strings }.result).to be_success.with_data(value: nil)
+          expect(service.collection({1 => 1}).zip({2 => 2}, {3 => 3}) { |numbers| step numbers_service, in: [numbers: -> { numbers.flatten }], out: :number_strings }.result).to be_success.with_data(value: nil)
+          expect((1..1).zip([2], [3]) { |numbers| step numbers_service, in: [numbers: -> { numbers }], out: :number_strings }).to eq(nil)
+          expect(service.collection((1..1)).zip([2], [3]) { |numbers| step numbers_service, in: [numbers: -> { numbers }], out: :number_strings }.result).to be_success.with_data(value: nil)
+
+          # Step with multiple outputs.
+          expect([1].zip([2], [3]) { |numbers| step numbers_service, in: [numbers: -> { numbers }], out: [:number_strings, :number_codes] }).to eq(nil)
+          expect(service.collection(enumerable([1])).zip([2], [3]) { |numbers| step numbers_service, in: [numbers: -> { numbers }], out: [:number_strings, :number_codes] }.result).to be_success.with_data(value: nil)
+          expect(service.collection(enumerator([1])).zip([2], [3]) { |numbers| step numbers_service, in: [numbers: -> { numbers }], out: [:number_strings, :number_codes] }.result).to be_success.with_data(value: nil)
+          expect(service.collection(lazy_enumerator([1])).zip([2], [3]) { |numbers| step numbers_service, in: [numbers: -> { numbers }], out: [:number_strings, :number_codes] }.result).to be_success.with_data(value: nil)
+          expect(service.collection(chain_enumerator([1])).zip([2], [3]) { |numbers| step numbers_service, in: [numbers: -> { numbers }], out: [:number_strings, :number_codes] }.result).to be_success.with_data(value: nil)
+          expect(service.collection([1]).zip([2], [3]) { |numbers| step numbers_service, in: [numbers: -> { numbers }], out: [:number_strings, :number_codes] }.result).to be_success.with_data(value: nil)
+          expect(set([1]).zip([2], [3]) { |numbers| step numbers_service, in: [numbers: -> { numbers }], out: [:number_strings, :number_codes] }).to eq(nil)
+          expect(service.collection(set([1])).zip([2], [3]) { |numbers| step numbers_service, in: [numbers: -> { numbers }], out: [:number_strings, :number_codes] }.result).to be_success.with_data(value: nil)
+          expect(service.collection({1 => 1}).zip([2], [3]) { |numbers| step numbers_service, in: [numbers: -> { numbers.flatten }], out: [:number_strings, :number_codes] }.result).to be_success.with_data(value: nil)
+          expect(service.collection({1 => 1}).zip({2 => 2}, {3 => 3}) { |numbers| step numbers_service, in: [numbers: -> { numbers.flatten }], out: [:number_strings, :number_codes] }.result).to be_success.with_data(value: nil)
+          expect((1..1).zip([2], [3]) { |numbers| step numbers_service, in: [numbers: -> { numbers }], out: [:number_strings, :number_codes] }).to eq(nil)
+          expect(service.collection((1..1)).zip([2], [3]) { |numbers| step numbers_service, in: [numbers: -> { numbers }], out: [:number_strings, :number_codes] }.result).to be_success.with_data(value: nil)
+
+          # NOTE: Error result.
+          expect([1].zip([-1], [3]) { |numbers| step numbers_service, in: [numbers: -> { numbers }], out: [:number_strings, :number_codes] }).to eq(nil)
+          expect(service.collection(enumerable([1])).zip([-1], [3]) { |numbers| step numbers_service, in: [numbers: -> { numbers }], out: [:number_strings, :number_codes] }.result).to be_error.without_data
+          expect(service.collection(enumerator([1])).zip([-1], [3]) { |numbers| step numbers_service, in: [numbers: -> { numbers }], out: [:number_strings, :number_codes] }.result).to be_error.without_data
+          expect(service.collection(lazy_enumerator([1])).zip([-1], [3]) { |numbers| step numbers_service, in: [numbers: -> { numbers }], out: [:number_strings, :number_codes] }.result).to be_error.without_data
+          expect(service.collection(chain_enumerator([1])).zip([-1], [3]) { |numbers| step numbers_service, in: [numbers: -> { numbers }], out: [:number_strings, :number_codes] }.result).to be_error.without_data
+          expect(service.collection([1]).zip([-1], [3]) { |numbers| step numbers_service, in: [numbers: -> { numbers }], out: [:number_strings, :number_codes] }.result).to be_error.without_data
+          expect(set([1]).zip([-1], [3]) { |numbers| step numbers_service, in: [numbers: -> { numbers }], out: [:number_strings, :number_codes] }).to eq(nil)
+          expect(service.collection(set([1])).zip([-1], [3]) { |numbers| step numbers_service, in: [numbers: -> { numbers }], out: [:number_strings, :number_codes] }.result).to be_error.without_data
+          expect(service.collection({1 => 1}).zip([-1], [3]) { |numbers| step numbers_service, in: [numbers: -> { numbers.flatten }], out: [:number_strings, :number_codes] }.result).to be_error.without_data
+          expect(service.collection({1 => 1}).zip({-1 => -1}, {3 => 3}) { |numbers| step numbers_service, in: [numbers: -> { numbers.flatten }], out: [:number_strings, :number_codes] }.result).to be_error.without_data
+          expect(service.collection((1..1)).zip([-1], [3]) { |numbers| step numbers_service, in: [numbers: -> { numbers }], out: [:number_strings, :number_codes] }.result).to be_error.without_data
+
+          # NOTE: Error propagation.
+          expect(service.collection(enumerable([:success, :error, :exception])).filter { |status| step status_service, in: [status: -> { status }] }.zip([2], [3]).result).to be_error.without_data
+          expect(service.collection(enumerator([:success, :error, :exception])).filter { |status| step status_service, in: [status: -> { status }] }.zip([2], [3]).result).to be_error.without_data
+          expect(service.collection(lazy_enumerator([:success, :error, :exception])).filter { |status| step status_service, in: [status: -> { status }] }.zip([2], [3]).result).to be_error.without_data
+          expect(service.collection(chain_enumerator([:success, :error, :exception])).filter { |status| step status_service, in: [status: -> { status }] }.zip([2], [3]).result).to be_error.without_data
+          expect(service.collection([:success, :error, :exception]).filter { |status| step status_service, in: [status: -> { status }] }.zip([2], [3]).result).to be_error.without_data
+
+          expect(service.collection(set([:success, :error, :exception])).filter { |status| step status_service, in: [status: -> { status }] }.zip([2], [3]).result).to be_error.without_data
+          expect(service.collection({success: :success, error: :error, exception: :exception}).filter { |key, value| step status_service, in: [status: -> { value }] }.zip([2], [3]).result).to be_error.without_data
+          expect(service.collection((:error..:error)).filter { |status| step status_service, in: [status: -> { status }] }.zip([2], [3]).result).to be_error.without_data
+
+          # NOTE: Usage on terminal chaining.
+          expect { service.collection(enumerable([:success, :exception, :exception])).first.zip([2], [3]) }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection(enumerator([:success, :exception, :exception])).first.zip([2], [3]) }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection(lazy_enumerator([:success, :exception, :exception])).first.zip([2], [3]) }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection(chain_enumerator([:success, :exception, :exception])).first.zip([2], [3]) }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection([:success, :exception, :exception]).first.zip([2], [3]) }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+
+          expect { service.collection(set([:success, :exception, :exception])).first.zip([2], [3]) }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection({success: :success, exception: :exception}).first.zip([2], [3]).result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection((:success..:success)).first.zip([2], [3]) }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
         end
       end
 
