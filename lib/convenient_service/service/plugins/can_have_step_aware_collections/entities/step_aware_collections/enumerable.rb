@@ -941,7 +941,7 @@ module ConvenientService
                     enumerable.take_while(&step_aware_iteration_block)
                   end
                 else
-                  process_as_enumerator do
+                  process_as_enumerator(nil) do
                     enumerable.take_while
                   end
                 end
