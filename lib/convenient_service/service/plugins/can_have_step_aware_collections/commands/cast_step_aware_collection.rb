@@ -56,6 +56,8 @@ module ConvenientService
                 Entities::StepAwareCollections::LazyEnumerator.new(lazy_enumerator: collection, organizer: organizer, propagated_result: propagated_result)
               when ::Enumerator::Chain
                 Entities::StepAwareCollections::ChainEnumerator.new(chain_enumerator: collection, organizer: organizer, propagated_result: propagated_result)
+              when ::Enumerator::ArithmeticSequence
+                Entities::StepAwareCollections::ArithmeticSequenceEnumerator.new(arithmetic_sequence_enumerator: collection, organizer: organizer, propagated_result: propagated_result)
               when ::Enumerator
                 Entities::StepAwareCollections::Enumerator.new(enumerator: collection, organizer: organizer, propagated_result: propagated_result)
               when ::Enumerable
@@ -71,6 +73,8 @@ module ConvenientService
               when Entities::StepAwareCollections::LazyEnumerator
                 collection
               when Entities::StepAwareCollections::ChainEnumerator
+                collection
+              when Entities::StepAwareCollections::ArithmeticSequenceEnumerator
                 collection
               when Entities::StepAwareCollections::Enumerator
                 collection

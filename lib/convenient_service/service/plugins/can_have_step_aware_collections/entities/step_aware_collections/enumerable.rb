@@ -886,17 +886,11 @@ module ConvenientService
                     enumerable.sort_by(&step_aware_iteration_block)
                   end
                 else
-                  process_as_enumerator do
+                  process_as_enumerator(nil) do
                     enumerable.sort_by
                   end
                 end
               end
-
-              ##
-              # @param init [Object, nil]
-              # @param iteration_block [Proc, nil]
-              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
-              #
 
               ##
               # @overload sum
