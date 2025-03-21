@@ -399,14 +399,14 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
               def zip(*args, &iteration_block)
-                args = args.each { |collection| cast_step_aware_collection(collection) }.map(&:enumerable)
+                enumerables = args.map { |collection| cast_step_aware_collection(collection) }.map(&:enumerable)
 
                 if iteration_block
-                  process_as_object(*args, iteration_block) do |*args, step_aware_iteration_block|
+                  process_as_object(*enumerables, iteration_block) do |*args, step_aware_iteration_block|
                     lazy_enumerator.zip(*args, &step_aware_iteration_block)
                   end
                 else
-                  process_with_block_return_lazy_enumerator(*args) do |*args|
+                  process_with_block_return_lazy_enumerator(*enumerables, nil) do |*args, iteration_block|
                     lazy_enumerator.zip(*args)
                   end
                 end

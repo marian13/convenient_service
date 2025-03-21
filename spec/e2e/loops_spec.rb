@@ -4706,15 +4706,116 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
         end
       end
 
+      describe "#zip" do
+        specify do
+          # NOTE: Empty collection.
+          expect([].zip([2])).to eq([])
+          expect(service.collection(enumerable([])).zip([2]).result).to be_success.with_data(values: [])
+          expect(service.collection(enumerator([])).zip([2]).result).to be_success.with_data(values: [])
+          expect(service.collection(lazy_enumerator([])).zip([2]).result).to be_success.with_data(values: [])
+          expect(service.collection(chain_enumerator([])).zip([2]).result).to be_success.with_data(values: [])
+          expect(service.collection([]).zip([2]).result).to be_success.with_data(values: [])
+          expect(service.collection(set([])).zip([2]).result).to be_success.with_data(values: [])
+          expect(service.collection({}).zip([2]).result).to be_success.with_data(values: [])
+          expect(service.collection((1...1)).zip([2]).result).to be_success.with_data(values: [])
+
+          # No argument, no block.
+          expect([1].zip).to eq([[1]])
+          expect(service.collection(enumerable([1])).zip.result).to be_success.with_data(values: [[1]])
+          expect(service.collection(enumerator([1])).zip.result).to be_success.with_data(values: [[1]])
+          expect(service.collection(lazy_enumerator([1])).zip.result).to be_success.with_data(values: [[1]])
+          expect(service.collection(chain_enumerator([1])).zip.result).to be_success.with_data(values: [[1]])
+          expect(service.collection([1]).zip.result).to be_success.with_data(values: [[1]])
+          expect(service.collection(set([1])).zip.result).to be_success.with_data(values: [[1]])
+          expect({1 => 1}.zip).to eq([[[1, 1]]])
+          expect(service.collection({1 => 1}).zip.result).to be_success.with_data(values: [[[1, 1]]])
+          expect(service.collection({1 => 1}).zip.result).to be_success.with_data(values: [[[1, 1]]])
+          expect(service.collection((1..1)).zip.result).to be_success.with_data(values: [[1]])
+
+          # One argument, no block.
+          expect([1].zip([2])).to eq([[1, 2]])
+          expect(service.collection(enumerable([1])).zip([2]).result).to be_success.with_data(values: [[1, 2]])
+          expect(service.collection(enumerator([1])).zip([2]).result).to be_success.with_data(values: [[1, 2]])
+          expect(service.collection(lazy_enumerator([1])).zip([2]).result).to be_success.with_data(values: [[1, 2]])
+          expect(service.collection(chain_enumerator([1])).zip([2]).result).to be_success.with_data(values: [[1, 2]])
+          expect(service.collection([1]).zip([2]).result).to be_success.with_data(values: [[1, 2]])
+          expect(service.collection(set([1])).zip([2]).result).to be_success.with_data(values: [[1, 2]])
+          expect({1 => 1}.zip([2])).to eq([[[1, 1], 2]])
+          expect({1 => 1}.zip({2 => 2})).to eq([[[1, 1], [2, 2]]])
+          expect(service.collection({1 => 1}).zip([2]).result).to be_success.with_data(values: [[[1, 1], 2]])
+          expect(service.collection({1 => 1}).zip({2 => 2}).result).to be_success.with_data(values: [[[1, 1], [2, 2]]])
+          expect(service.collection((1..1)).zip([2]).result).to be_success.with_data(values: [[1, 2]])
+
+          # Multiple arguments, no block.
+          expect([1].zip([2], [3])).to eq([[1, 2, 3]])
+          expect(service.collection(enumerable([1])).zip([2], [3]).result).to be_success.with_data(values: [[1, 2, 3]])
+          expect(service.collection(enumerator([1])).zip([2], [3]).result).to be_success.with_data(values: [[1, 2, 3]])
+          expect(service.collection(lazy_enumerator([1])).zip([2], [3]).result).to be_success.with_data(values: [[1, 2, 3]])
+          expect(service.collection(chain_enumerator([1])).zip([2], [3]).result).to be_success.with_data(values: [[1, 2, 3]])
+          expect(service.collection([1]).zip([2], [3]).result).to be_success.with_data(values: [[1, 2, 3]])
+          expect(service.collection(set([1])).zip([2], [3]).result).to be_success.with_data(values: [[1, 2, 3]])
+          expect({1 => 1}.zip([2], [3])).to eq([[[1, 1], 2, 3]])
+          expect({1 => 1}.zip({2 => 2}, {3 => 3})).to eq([[[1, 1], [2, 2], [3, 3]]])
+          expect(service.collection({1 => 1}).zip([2], [3]).result).to be_success.with_data(values: [[[1, 1], 2, 3]])
+          expect(service.collection({1 => 1}).zip({2 => 2}, {3 => 3}).result).to be_success.with_data(values: [[[1, 1], [2, 2], [3, 3]]])
+          expect(service.collection((1..1)).zip([2], [3]).result).to be_success.with_data(values: [[1, 2, 3]])
+
+          # No argument, block.
+          expect([1].zip { |array| raise if array.sum != 1 }).to eq(nil)
+          expect(service.collection(enumerable([1])).zip { |integer| raise if integer != 1 }.result).to be_success.with_data(value: nil)
+          expect(service.collection(enumerator([1])).zip { |integer| raise if integer != 1 }.result).to be_success.with_data(value: nil)
+          expect(service.collection(lazy_enumerator([1])).zip { |integer| raise if integer != 1 }.result).to be_success.with_data(value: nil)
+          expect(service.collection(chain_enumerator([1])).zip { |integer| raise if integer != 1 }.result).to be_success.with_data(value: nil)
+          expect(service.collection([1]).zip { |array| raise if array.sum != 1 }.result).to be_success.with_data(value: nil)
+          expect(set([1]).zip { |integer| raise if integer != 1 }).to eq(nil)
+          expect(service.collection(set([1])).zip { |integer| raise if integer != 1 }.result).to be_success.with_data(value: nil)
+          expect({1 => 1}.zip { |array| raise if array.flatten.sum != 2 }).to eq(nil)
+          expect(service.collection({1 => 1}).zip { |array| raise if array.flatten.sum != 2 }.result).to be_success.with_data(value: nil)
+          expect((1..1).zip { |integer| raise if integer != 1 }).to eq(nil)
+          expect(service.collection((1..1)).zip { |integer| raise if integer != 1 }.result).to be_success.with_data(value: nil)
+
+          # One argument, block.
+          expect([1].zip([2]) { |array| raise if array.sum != 3 }).to eq(nil)
+          expect(service.collection(enumerable([1])).zip([2]) { |array| raise if array.sum != 3 }.result).to be_success.with_data(value: nil)
+          expect(service.collection(enumerator([1])).zip([2]) { |array| raise if array.sum != 3 }.result).to be_success.with_data(value: nil)
+          expect(service.collection(lazy_enumerator([1])).zip([2]) { |array| raise if array.sum != 3 }.result).to be_success.with_data(value: nil)
+          expect(service.collection(chain_enumerator([1])).zip([2]) { |array| raise if array.sum != 3 }.result).to be_success.with_data(value: nil)
+          expect(service.collection([1]).zip([2]) { |array| raise if array.sum != 3 }.result).to be_success.with_data(value: nil)
+          expect(set([1]).zip([2]) { |array| raise if array.sum != 3 }).to eq(nil)
+          expect(service.collection(set([1])).zip([2]) { |array| raise if array.sum != 3 }.result).to be_success.with_data(value: nil)
+          expect({1 => 1}.zip([2]) { |array| raise if array.flatten.sum != 4 }).to eq(nil)
+          expect({1 => 1}.zip({2 => 2}) { |array| raise if array.flatten.sum != 6 }).to eq(nil)
+          expect(service.collection({1 => 1}).zip([2]) { |array| raise if array.flatten.sum != 4 }.result).to be_success.with_data(value: nil)
+          expect(service.collection({1 => 1}).zip({2 => 2}) { |array| raise if array.flatten.sum != 6 }.result).to be_success.with_data(value: nil)
+          expect((1..1).zip([2]) { |array| raise if array.sum != 3 }).to eq(nil)
+          expect(service.collection((1..1)).zip([2]) { |array| raise if array.sum != 3 }.result).to be_success.with_data(value: nil)
+
+          # Multiple arguments, block.
+          expect([1].zip([2], [3]) { |array| raise if array.sum != 6 }).to eq(nil)
+          expect(service.collection(enumerable([1])).zip([2], [3]) { |array| raise if array.sum != 6 }.result).to be_success.with_data(value: nil)
+          expect(service.collection(enumerator([1])).zip([2], [3]) { |array| raise if array.sum != 6 }.result).to be_success.with_data(value: nil)
+          expect(service.collection(lazy_enumerator([1])).zip([2], [3]) { |array| raise if array.sum != 6 }.result).to be_success.with_data(value: nil)
+          expect(service.collection(chain_enumerator([1])).zip([2], [3]) { |array| raise if array.sum != 6 }.result).to be_success.with_data(value: nil)
+          expect(service.collection([1]).zip([2], [3]) { |array| raise if array.sum != 6 }.result).to be_success.with_data(value: nil)
+          expect(set([1]).zip([2], [3]) { |array| raise if array.sum != 6 }).to eq(nil)
+          expect(service.collection(set([1])).zip([2], [3]) { |array| raise if array.sum != 6 }.result).to be_success.with_data(value: nil)
+          expect({1 => 1}.zip([2], [3]) { |array| raise if array.flatten.sum != 7 }).to eq(nil)
+          expect({1 => 1}.zip({2 => 2}, {3 => 3}) { |array| raise if array.flatten.sum != 12 }).to eq(nil)
+          expect(service.collection({1 => 1}).zip([2], [3]) { |array| raise if array.flatten.sum != 7 }.result).to be_success.with_data(value: nil)
+          expect(service.collection({1 => 1}).zip({2 => 2}, {3 => 3}) { |array| raise if array.flatten.sum != 12 }.result).to be_success.with_data(value: nil)
+          expect((1..1).zip([2], [3]) { |array| raise if array.sum != 6 }).to eq(nil)
+          expect(service.collection((1..1)).zip([2], [3]) { |array| raise if array.sum != 6 }.result).to be_success.with_data(value: nil)
+
+          # TODO: Steps.
+        end
+      end
+
       # first(2) => [only_one] # What to do? success of failure?
       # cycle(2) => nil # What to do? success without data?
       # drop(2) => [] # What to do? success when nothing dropped?
 
       # add not_step specs.
       # failure propagation
-
-      # reverse_each
-      # sum
 
       # check return type
       # delegate
