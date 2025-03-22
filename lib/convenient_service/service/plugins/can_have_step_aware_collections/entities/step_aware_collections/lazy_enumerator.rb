@@ -288,36 +288,32 @@ module ConvenientService
               end
 
               ##
-              # @param pattern [Object, nil]
-              # @param iteration_block [Proc, nil]
-              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
+              # @overload slice_after(pattern)
+              #   @param pattern [Object] Can be any type.
+              #   @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
-              def slice_after(pattern, &iteration_block)
-                if iteration_block
-                  process_as_lazy_enumerator(iteration_block) do |step_aware_iteration_block|
-                    lazy_enumerator.slice_after(&step_aware_iteration_block)
-                  end
-                else
-                  process_as_lazy_enumerator(pattern, nil) do |pattern|
-                    lazy_enumerator.slice_after(pattern)
-                  end
+              # @overload slice_after(&iteration_block)
+              #   @param iteration_block [Proc]
+              #   @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
+              #
+              def slice_after(*args, &iteration_block)
+                process_as_lazy_enumerator(*args, iteration_block) do |*args, step_aware_iteration_block|
+                  lazy_enumerator.slice_after(*args, &step_aware_iteration_block)
                 end
               end
 
               ##
-              # @param pattern [Object, nil]
-              # @param iteration_block [Proc, nil]
-              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
+              # @overload slice_before(pattern)
+              #   @param pattern [Object] Can be any type.
+              #   @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
-              def slice_before(pattern, &iteration_block)
-                if iteration_block
-                  process_as_lazy_enumerator(iteration_block) do |step_aware_iteration_block|
-                    lazy_enumerator.slice_before(&step_aware_iteration_block)
-                  end
-                else
-                  process_as_lazy_enumerator(pattern, nil) do |pattern|
-                    lazy_enumerator.slice_before(pattern)
-                  end
+              # @overload slice_before(&iteration_block)
+              #   @param iteration_block [Proc]
+              #   @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
+              #
+              def slice_before(*args, &iteration_block)
+                process_as_lazy_enumerator(*args, iteration_block) do |*args, step_aware_iteration_block|
+                  lazy_enumerator.slice_before(*args, &step_aware_iteration_block)
                 end
               end
 

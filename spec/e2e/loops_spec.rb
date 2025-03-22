@@ -4203,6 +4203,116 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
         end
       end
 
+      describe "#slice_before" do
+        specify do
+          # NOTE: Empty collection.
+          expect([].slice_before { |number| number % 3 == 0 }.to_a).to eq([])
+          expect(service.collection(enumerable([])).slice_before { |number| number % 3 == 0 }.result).to be_success.with_data(values: [])
+          expect(service.collection(enumerator([])).slice_before { |number| number % 3 == 0 }.result).to be_success.with_data(values: [])
+          expect(service.collection(lazy_enumerator([])).slice_before { |number| number % 3 == 0 }.result).to be_success.with_data(values: [])
+          expect(service.collection(chain_enumerator([])).slice_before { |number| number % 3 == 0 }.result).to be_success.with_data(values: [])
+          expect(service.collection([]).slice_before { |number| number % 3 == 0 }.result).to be_success.with_data(values: [])
+          expect(service.collection({}).slice_before { |key, value| value <= 2 }.result).to be_success.with_data(values: [])
+          expect(service.collection((0...0)).slice_before { |number| number % 3 == 0 }.result).to be_success.with_data(values: [])
+          expect(service.collection(set([])).slice_before { |number| number % 3 == 0 }.result).to be_success.with_data(values: [])
+
+          # NOTE: No block, no pattern.
+          expect { [0, 1, 2, 3, 4, 5].slice_before.to_a }.to raise_error(ArgumentError).with_message("wrong number of arguments (given 0, expected 1)")
+          expect { service.collection(enumerable([0, 1, 2, 3, 4, 5])).slice_before.result }.to raise_error(ArgumentError).with_message("wrong number of arguments (given 0, expected 1)")
+          expect { service.collection(enumerator([0, 1, 2, 3, 4, 5])).slice_before.result }.to raise_error(ArgumentError).with_message("wrong number of arguments (given 0, expected 1)")
+          expect { service.collection(lazy_enumerator([0, 1, 2, 3, 4, 5])).slice_before.result }.to raise_error(ArgumentError).with_message("wrong number of arguments (given 0, expected 1)")
+          expect { service.collection(chain_enumerator([0, 1, 2, 3, 4, 5])).slice_before.result }.to raise_error(ArgumentError).with_message("wrong number of arguments (given 0, expected 1)")
+          expect { service.collection([0, 1, 2, 3, 4, 5]).slice_before.result }.to raise_error(ArgumentError).with_message("wrong number of arguments (given 0, expected 1)")
+          expect { service.collection(set([0, 1, 2, 3, 4, 5])).slice_before.result }.to raise_error(ArgumentError).with_message("wrong number of arguments (given 0, expected 1)")
+          expect { service.collection({0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}).slice_before.result }.to raise_error(ArgumentError).with_message("wrong number of arguments (given 0, expected 1)")
+          expect { service.collection((0..5)).slice_before.result }.to raise_error(ArgumentError).with_message("wrong number of arguments (given 0, expected 1)")
+
+          # NOTE: No block, pattern.
+          expect([0, 1, 2, 3, 4, 5].slice_before({0 => true, 3 => true}.to_proc).to_a).to eq([[0, 1, 2], [3, 4, 5]])
+          expect(service.collection(enumerable([0, 1, 2, 3, 4, 5])).slice_before({0 => true, 3 => true}.to_proc).result).to be_success.with_data(values: [[0, 1, 2], [3, 4, 5]])
+          expect(service.collection(enumerator([0, 1, 2, 3, 4, 5])).slice_before({0 => true, 3 => true}.to_proc).result).to be_success.with_data(values: [[0, 1, 2], [3, 4, 5]])
+          expect(service.collection(lazy_enumerator([0, 1, 2, 3, 4, 5])).slice_before({0 => true, 3 => true}.to_proc).result).to be_success.with_data(values: [[0, 1, 2], [3, 4, 5]])
+          expect(service.collection(chain_enumerator([0, 1, 2, 3, 4, 5])).slice_before({0 => true, 3 => true}.to_proc).result).to be_success.with_data(values: [[0, 1, 2], [3, 4, 5]])
+          expect(service.collection([0, 1, 2, 3, 4, 5]).slice_before({0 => true, 3 => true}.to_proc).result).to be_success.with_data(values: [[0, 1, 2], [3, 4, 5]])
+          expect(service.collection(set([0, 1, 2, 3, 4, 5])).slice_before({0 => true, 3 => true}.to_proc).result).to be_success.with_data(values: [[0, 1, 2], [3, 4, 5]])
+          expect(service.collection({0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}).slice_before({[0, 0] => true, [3, 3] => true}.to_proc).result).to be_success.with_data(values: [[[0, 0], [1, 1], [2, 2]], [[3, 3], [4, 4], [5, 5]]])
+          expect(service.collection((0..5)).slice_before({0 => true, 3 => true}.to_proc).result).to be_success.with_data(values: [[0, 1, 2], [3, 4, 5]])
+
+          # NOTE: Block, no pattern.
+          expect([0, 1, 2, 3, 4, 5].slice_before { |number| number % 3 == 0 }.to_a).to eq([[0, 1, 2], [3, 4, 5]])
+          expect(service.collection(enumerable([0, 1, 2, 3, 4, 5])).slice_before { |number| number % 3 == 0 }.result).to be_success.with_data(values: [[0, 1, 2], [3, 4, 5]])
+          expect(service.collection(enumerator([0, 1, 2, 3, 4, 5])).slice_before { |number| number % 3 == 0 }.result).to be_success.with_data(values: [[0, 1, 2], [3, 4, 5]])
+          expect(service.collection(lazy_enumerator([0, 1, 2, 3, 4, 5])).slice_before { |number| number % 3 == 0 }.result).to be_success.with_data(values: [[0, 1, 2], [3, 4, 5]])
+          expect(service.collection(chain_enumerator([0, 1, 2, 3, 4, 5])).slice_before { |number| number % 3 == 0 }.result).to be_success.with_data(values: [[0, 1, 2], [3, 4, 5]])
+          expect(service.collection([0, 1, 2, 3, 4, 5]).slice_before { |number| number % 3 == 0 }.result).to be_success.with_data(values: [[0, 1, 2], [3, 4, 5]])
+          expect(service.collection(set([0, 1, 2, 3, 4, 5])).slice_before { |number| number % 3 == 0 }.result).to be_success.with_data(values: [[0, 1, 2], [3, 4, 5]])
+          expect(service.collection({0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}).slice_before { |(key, value)| value % 3 == 0 }.result).to be_success.with_data(values: [[[0, 0], [1, 1], [2, 2]], [[3, 3], [4, 4], [5, 5]]])
+          expect(service.collection((0..5)).slice_before { |number| number % 3 == 0 }.result).to be_success.with_data(values: [[0, 1, 2], [3, 4, 5]])
+
+          # NOTE: Step with no outputs.
+          expect(service.collection(enumerable([:success, :success, :success])).slice_before { |status| step status_service, in: [status: -> { status }] }.result).to be_success.with_data(values: [[:success], [:success], [:success]])
+          expect(service.collection(enumerator([:success, :success, :success])).slice_before { |status| step status_service, in: [status: -> { status }] }.result).to be_success.with_data(values: [[:success], [:success], [:success]])
+          expect(service.collection(lazy_enumerator([:success, :success, :success])).slice_before { |status| step status_service, in: [status: -> { status }] }.result).to be_success.with_data(values: [[:success], [:success], [:success]])
+          expect(service.collection(chain_enumerator([:success, :success, :success])).slice_before { |status| step status_service, in: [status: -> { status }] }.result).to be_success.with_data(values: [[:success], [:success], [:success]])
+          expect(service.collection([:success, :success, :success]).slice_before { |status| step status_service, in: [status: -> { status }] }.result).to be_success.with_data(values: [[:success], [:success], [:success]])
+          expect(service.collection(set([:success])).slice_before { |status| step status_service, in: [status: -> { status }] }.result).to be_success.with_data(values: [[:success]])
+          expect(service.collection({success: :success}).slice_before { |(key, value)| step status_service, in: [status: -> { value }] }.result).to be_success.with_data(values: [[[:success, :success]]])
+          expect(service.collection((:success..:success)).slice_before { |status| step status_service, in: [status: -> { status }] }.result).to be_success.with_data(values: [[:success]])
+
+          # NOTE: Step with one output.
+          expect(service.collection(enumerable([:success, :success, :success])).slice_before { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: [[:success], [:success], [:success]])
+          expect(service.collection(enumerator([:success, :success, :success])).slice_before { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: [[:success], [:success], [:success]])
+          expect(service.collection(lazy_enumerator([:success, :success, :success])).slice_before { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: [[:success], [:success], [:success]])
+          expect(service.collection(chain_enumerator([:success, :success, :success])).slice_before { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: [[:success], [:success], [:success]])
+          expect(service.collection([:success, :success, :success]).slice_before { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: [[:success], [:success], [:success]])
+          expect(service.collection(set([:success])).slice_before { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: [[:success]])
+          expect(service.collection({success: :success}).slice_before { |(key, value)| step status_service, in: [status: -> { value }], out: :status_string }.result).to be_success.with_data(values: [[[:success, :success]]])
+          expect(service.collection((:success..:success)).slice_before { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: [[:success]])
+
+          # NOTE: Step with multiple outputs.
+          expect(service.collection(enumerable([:success, :success, :success])).slice_before { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [[:success], [:success], [:success]])
+          expect(service.collection(enumerator([:success, :success, :success])).slice_before { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [[:success], [:success], [:success]])
+          expect(service.collection(lazy_enumerator([:success, :success, :success])).slice_before { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [[:success], [:success], [:success]])
+          expect(service.collection(chain_enumerator([:success, :success, :success])).slice_before { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [[:success], [:success], [:success]])
+          expect(service.collection([:success, :success, :success]).slice_before { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [[:success], [:success], [:success]])
+          expect(service.collection(set([:success])).slice_before { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [[:success]])
+          expect(service.collection({success: :success}).slice_before { |(key, value)| step status_service, in: [status: -> { value }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [[[:success, :success]]])
+          expect(service.collection((:success..:success)).slice_before { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [[:success]])
+
+          # NOTE: Error result.
+          expect(service.collection(enumerable([:success, :error, :exception])).slice_before { |status| step status_service, in: [status: -> { status }] }.result).to be_error.without_data
+          expect(service.collection(enumerator([:success, :error, :exception])).slice_before { |status| step status_service, in: [status: -> { status }] }.result).to be_error.without_data
+          expect(service.collection(lazy_enumerator([:success, :error, :exception])).slice_before { |status| step status_service, in: [status: -> { status }] }.result).to be_error.without_data
+          expect(service.collection(chain_enumerator([:success, :error, :exception])).slice_before { |status| step status_service, in: [status: -> { status }] }.result).to be_error.without_data
+          expect(service.collection([:success, :error, :exception]).slice_before { |status| step status_service, in: [status: -> { status }] }.result).to be_error.without_data
+          expect(service.collection(set([:success, :error, :exception])).slice_before { |status| step status_service, in: [status: -> { status }] }.result).to be_error.without_data
+          expect(service.collection({success: :success, error: :error, exception: :exception}).slice_before { |(key, value)| step status_service, in: [status: -> { value }] }.result).to be_error.without_data
+          expect(service.collection((:error..:error)).slice_before { |status| step status_service, in: [status: -> { status }] }.result).to be_error.without_data
+
+          # NOTE: Error propagation.
+          expect(service.collection(enumerable([:success, :error, :exception])).select { |status| step status_service, in: [status: -> { status }] }.slice_before { |status| status == :success }.result).to be_error.without_data
+          expect(service.collection(enumerator([:success, :error, :exception])).select { |status| step status_service, in: [status: -> { status }] }.slice_before { |status| status == :success }.result).to be_error.without_data
+          expect(service.collection(lazy_enumerator([:success, :error, :exception])).select { |status| step status_service, in: [status: -> { status }] }.slice_before { |status| status == :success }.result).to be_error.without_data
+          expect(service.collection(chain_enumerator([:success, :error, :exception])).select { |status| step status_service, in: [status: -> { status }] }.slice_before { |status| status == :success }.result).to be_error.without_data
+          expect(service.collection([:success, :error, :exception]).select { |status| step status_service, in: [status: -> { status }] }.slice_before { |status| status == :success }.result).to be_error.without_data
+          expect(service.collection(set([:success, :error, :exception])).select { |status| step status_service, in: [status: -> { status }] }.slice_before { |status| status == :success }.result).to be_error.without_data
+
+          expect(service.collection({success: :success, error: :error, exception: :exception}).select { |key, value| step status_service, in: [status: -> { value }] }.slice_before { |key, value| value == :success }.result).to be_error.without_data
+          expect(service.collection((:error..:error)).select { |status| step status_service, in: [status: -> { status }] }.slice_before { |status| status == :success }.result).to be_error.without_data
+
+          # NOTE: Usage on terminal chaining.
+          expect { service.collection(enumerable([:success, :exception, :exception])).first.slice_before { |status| status == :success }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection(enumerator([:success, :exception, :exception])).first.slice_before { |status| status == :success }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection(lazy_enumerator([:success, :exception, :exception])).first.slice_before { |status| status == :success }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection(chain_enumerator([:success, :exception, :exception])).first.slice_before { |status| status == :success }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection([:success, :exception, :exception]).first.slice_before { |status| status == :success }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection(set([:success, :exception, :exception])).first.slice_before { |status| status == :success }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+
+          expect { service.collection({success: :success, exception: :exception}).first.slice_before { |key, value| value == :success }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection((:success..:success)).first.slice_before { |status| status == :success }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+        end
+      end
+
       describe "#slice_when" do
         specify do
           # NOTE: Empty collection.
@@ -4964,7 +5074,6 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect { service.collection(chain_enumerator([[:success, :success], [:exception, :exception], [:exception, :exception]])).first.to_h.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
           expect { service.collection([[:success, :success], [:exception, :exception], [:exception, :exception]]).first.to_h.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
           expect { service.collection(set([[:success, :success], [:exception, :exception], [:exception, :exception]])).first.to_h.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
-
           expect { service.collection({success: :success, exception: :exception}).first.to_h.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
         end
       end
