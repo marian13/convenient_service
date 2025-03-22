@@ -397,7 +397,7 @@ module ConvenientService
                     enumerable.filter_map(&step_aware_iteration_block)
                   end
                 else
-                  process_as_enumerator(iteration_block) do
+                  process_as_enumerator(nil) do
                     enumerable.filter_map
                   end
                 end
