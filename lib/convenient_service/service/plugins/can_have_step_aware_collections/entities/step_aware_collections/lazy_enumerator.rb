@@ -104,7 +104,7 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
               def collect(&iteration_block)
-                process_with_block_return_lazy_enumerator(iteration_block) do |step_aware_iteration_block|
+                process_as_lazy_enumerator(iteration_block) do |step_aware_iteration_block|
                   lazy_enumerator.collect(&step_aware_iteration_block)
                 end
               end
@@ -114,7 +114,7 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
               def collect_concat(&iteration_block)
-                process_with_block_return_lazy_enumerator(iteration_block) do |step_aware_iteration_block|
+                process_as_lazy_enumerator(iteration_block) do |step_aware_iteration_block|
                   lazy_enumerator.collect_concat(&step_aware_iteration_block)
                 end
               end
@@ -124,7 +124,7 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
               def drop(n)
-                process_without_block_return_lazy_enumerator(n) do |n|
+                process_as_lazy_enumerator(n, nil) do |n|
                   lazy_enumerator.drop(n)
                 end
               end
@@ -134,7 +134,7 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
               def drop_while(&iteration_block)
-                process_with_block_return_lazy_enumerator(iteration_block) do |step_aware_iteration_block|
+                process_as_lazy_enumerator(iteration_block) do |step_aware_iteration_block|
                   lazy_enumerator.drop_while(&step_aware_iteration_block)
                 end
               end
@@ -155,11 +155,11 @@ module ConvenientService
               #
               def enum_for(method = :each, *args, &iteration_block)
                 if iteration_block
-                  process_with_block_return_lazy_enumerator(method, *args, iteration_block) do |method, *args, step_aware_iteration_block|
+                  process_as_lazy_enumerator(method, *args, iteration_block) do |method, *args, step_aware_iteration_block|
                     lazy_enumerator.enum_for(method, *args, &step_aware_iteration_block)
                   end
                 else
-                  process_without_block_return_lazy_enumerator do
+                  process_as_lazy_enumerator(nil) do
                     lazy_enumerator.enum_for(method, *args)
                   end
                 end
@@ -170,7 +170,7 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
               def filter(&iteration_block)
-                process_with_block_return_lazy_enumerator(iteration_block) do |step_aware_iteration_block|
+                process_as_lazy_enumerator(iteration_block) do |step_aware_iteration_block|
                   lazy_enumerator.filter(&step_aware_iteration_block)
                 end
               end
@@ -180,7 +180,7 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
               def filter_map(&iteration_block)
-                process_with_block_return_lazy_enumerator(iteration_block) do |step_aware_iteration_block|
+                process_as_lazy_enumerator(iteration_block) do |step_aware_iteration_block|
                   lazy_enumerator.filter_map(&step_aware_iteration_block)
                 end
               end
@@ -190,7 +190,7 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
               def find_all(&iteration_block)
-                process_with_block_return_lazy_enumerator(iteration_block) do |step_aware_iteration_block|
+                process_as_lazy_enumerator(iteration_block) do |step_aware_iteration_block|
                   lazy_enumerator.find_all(&step_aware_iteration_block)
                 end
               end
@@ -200,7 +200,7 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
               def flat_map(&iteration_block)
-                process_with_block_return_lazy_enumerator(iteration_block) do |step_aware_iteration_block|
+                process_as_lazy_enumerator(iteration_block) do |step_aware_iteration_block|
                   lazy_enumerator.flat_map(&step_aware_iteration_block)
                 end
               end
@@ -221,11 +221,11 @@ module ConvenientService
               #
               def grep(pattern, &iteration_block)
                 if iteration_block
-                  process_with_block_return_lazy_enumerator(pattern, iteration_block) do |pattern, step_aware_iteration_block|
+                  process_as_lazy_enumerator(pattern, iteration_block) do |pattern, step_aware_iteration_block|
                     lazy_enumerator.grep(pattern, &step_aware_iteration_block)
                   end
                 else
-                  process_without_block_return_lazy_enumerator(pattern) do |pattern|
+                  process_as_lazy_enumerator(pattern, nil) do |pattern|
                     lazy_enumerator.grep(pattern)
                   end
                 end
@@ -238,11 +238,11 @@ module ConvenientService
               #
               def grep_v(pattern, &iteration_block)
                 if iteration_block
-                  process_with_block_return_lazy_enumerator(pattern, iteration_block) do |pattern, step_aware_iteration_block|
+                  process_as_lazy_enumerator(pattern, iteration_block) do |pattern, step_aware_iteration_block|
                     lazy_enumerator.grep_v(pattern, &step_aware_iteration_block)
                   end
                 else
-                  process_without_block_return_lazy_enumerator(pattern) do |pattern|
+                  process_as_lazy_enumerator(pattern, nil) do |pattern|
                     lazy_enumerator.grep_v(pattern)
                   end
                 end
@@ -252,7 +252,7 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
               def lazy
-                process_without_block_return_lazy_enumerator do
+                process_as_lazy_enumerator(nil) do
                   lazy_enumerator
                 end
               end
@@ -262,7 +262,7 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
               def map(&iteration_block)
-                process_with_block_return_lazy_enumerator(iteration_block) do |step_aware_iteration_block|
+                process_as_lazy_enumerator(iteration_block) do |step_aware_iteration_block|
                   lazy_enumerator.map(&step_aware_iteration_block)
                 end
               end
@@ -272,7 +272,7 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
               def reject(&iteration_block)
-                process_with_block_return_lazy_enumerator(iteration_block) do |step_aware_iteration_block|
+                process_as_lazy_enumerator(iteration_block) do |step_aware_iteration_block|
                   lazy_enumerator.reject(&step_aware_iteration_block)
                 end
               end
@@ -282,7 +282,7 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
               def select(&iteration_block)
-                process_with_block_return_lazy_enumerator(iteration_block) do |step_aware_iteration_block|
+                process_as_lazy_enumerator(iteration_block) do |step_aware_iteration_block|
                   lazy_enumerator.select(&step_aware_iteration_block)
                 end
               end
@@ -294,11 +294,11 @@ module ConvenientService
               #
               def slice_after(pattern, &iteration_block)
                 if iteration_block
-                  process_with_block_return_lazy_enumerator(iteration_block) do |step_aware_iteration_block|
+                  process_as_lazy_enumerator(iteration_block) do |step_aware_iteration_block|
                     lazy_enumerator.slice_after(&step_aware_iteration_block)
                   end
                 else
-                  process_without_block_return_lazy_enumerator(pattern) do |pattern|
+                  process_as_lazy_enumerator(pattern, nil) do |pattern|
                     lazy_enumerator.slice_after(pattern)
                   end
                 end
@@ -311,11 +311,11 @@ module ConvenientService
               #
               def slice_before(pattern, &iteration_block)
                 if iteration_block
-                  process_with_block_return_lazy_enumerator(iteration_block) do |step_aware_iteration_block|
+                  process_as_lazy_enumerator(iteration_block) do |step_aware_iteration_block|
                     lazy_enumerator.slice_before(&step_aware_iteration_block)
                   end
                 else
-                  process_without_block_return_lazy_enumerator(pattern) do |pattern|
+                  process_as_lazy_enumerator(pattern, nil) do |pattern|
                     lazy_enumerator.slice_before(pattern)
                   end
                 end
@@ -326,7 +326,7 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
               def slice_when(&iteration_block)
-                process_with_block_return_lazy_enumerator(iteration_block) do |step_aware_iteration_block|
+                process_as_lazy_enumerator(iteration_block) do |step_aware_iteration_block|
                   lazy_enumerator.slice_when(&step_aware_iteration_block)
                 end
               end
@@ -336,7 +336,7 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
               def take(n)
-                process_with_block_return_lazy_enumerator(n, nil) do |n|
+                process_as_lazy_enumerator(n, nil) do |n|
                   lazy_enumerator.take(n)
                 end
               end
@@ -346,7 +346,7 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
               def take_while(&iteration_block)
-                process_with_block_return_lazy_enumerator(iteration_block) do |step_aware_iteration_block|
+                process_as_lazy_enumerator(iteration_block) do |step_aware_iteration_block|
                   lazy_enumerator.take_while(&step_aware_iteration_block)
                 end
               end
@@ -367,11 +367,11 @@ module ConvenientService
               #
               def to_enum(method = :each, *args, &iteration_block)
                 if iteration_block
-                  process_with_block_return_lazy_enumerator(method, *args, iteration_block) do |method, *args, step_aware_iteration_block|
+                  process_as_lazy_enumerator(method, *args, iteration_block) do |method, *args, step_aware_iteration_block|
                     lazy_enumerator.to_enum(method, *args, &step_aware_iteration_block)
                   end
                 else
-                  process_without_block_return_lazy_enumerator do
+                  process_as_lazy_enumerator(nil) do
                     lazy_enumerator.to_enum(method, *args)
                   end
                 end
@@ -382,14 +382,8 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
               def uniq(&iteration_block)
-                if iteration_block
-                  process_with_block_return_lazy_enumerator(iteration_block) do |step_aware_iteration_block|
-                    lazy_enumerator.uniq(&step_aware_iteration_block)
-                  end
-                else
-                  process_without_block_return_lazy_enumerator do
-                    lazy_enumerator.uniq
-                  end
+                process_as_lazy_enumerator(iteration_block) do |step_aware_iteration_block|
+                  lazy_enumerator.uniq(&step_aware_iteration_block)
                 end
               end
 
@@ -406,33 +400,10 @@ module ConvenientService
                     lazy_enumerator.zip(*args, &step_aware_iteration_block)
                   end
                 else
-                  process_with_block_return_lazy_enumerator(*enumerables, nil) do |*args, iteration_block|
+                  process_as_lazy_enumerator(*enumerables, nil) do |*args, iteration_block|
                     lazy_enumerator.zip(*args)
                   end
                 end
-              end
-
-              private
-
-              ##
-              # @param args [Array<Object>]
-              # @param iteration_block [Proc, nil]
-              # @param iterator_block [Proc]
-              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Enumerator]
-              #
-              def process_with_block_return_lazy_enumerator(*args, iteration_block, &iterator_block)
-                return step_aware_lazy_enumerator_from(enumerable.lazy) if propagated_result
-
-                step_aware_iteration_block =
-                  if iteration_block
-                    step_aware_iteration_block_from(iteration_block) do |error_result|
-                      throw :propagated_result, {propagated_result: error_result}
-                    end
-                  end
-
-                lazy_enumerator = yield(*args, step_aware_iteration_block)
-
-                step_aware_lazy_enumerator_from(lazy_enumerator)
               end
             end
           end

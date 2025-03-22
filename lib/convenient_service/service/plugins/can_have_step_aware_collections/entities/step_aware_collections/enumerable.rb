@@ -568,7 +568,7 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
               def lazy
-                process_without_block_return_lazy_enumerator do
+                process_as_lazy_enumerator do
                   enumerable.lazy
                 end
               end
@@ -861,7 +861,7 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
               def slice_when(&iteration_block)
-                process_with_block_return_enumerator(iteration_block) do |step_aware_iteration_block|
+                process_as_enumerator_generator(iteration_block) do |step_aware_iteration_block|
                   enumerable.slice_when(&step_aware_iteration_block)
                 end
               end
