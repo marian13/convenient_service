@@ -267,6 +267,13 @@ module ConvenientService
               ##
               # @raise [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining]
               #
+              def lazy(...)
+                ::ConvenientService.raise Exceptions::AlreadyUsedTerminalChaining.new
+              end
+
+              ##
+              # @raise [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining]
+              #
               def map(...)
                 ::ConvenientService.raise Exceptions::AlreadyUsedTerminalChaining.new
               end
