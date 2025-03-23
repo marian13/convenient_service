@@ -693,7 +693,7 @@ module ConvenientService
                     enumerable.minmax_by(&step_aware_iteration_block)
                   end
                 else
-                  process_as_enumerator do
+                  process_as_enumerator(nil) do
                     enumerable.minmax_by
                   end
                 end
