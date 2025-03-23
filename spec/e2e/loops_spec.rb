@@ -215,9 +215,6 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
             @other_number = other_number
           end
 
-          ##
-          # NOTE: `number_code` is ASCII Code.
-          #
           def result
             return error if [number, other_number].any? { |value| (-Float::INFINITY..-1).cover?(value) }
 
@@ -226,6 +223,29 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
 
           def self.name
             "AddNumbersService"
+          end
+        end
+      end
+
+      let(:concat_strings_service) do
+        Class.new do
+          include ConvenientService::Standard::Config
+
+          attr_reader :string, :other_string
+
+          def initialize(string:, other_string:)
+            @string = string
+            @other_string = other_string
+          end
+
+          def result
+            return error if [string, other_string].any? { |value| (-Float::INFINITY..-1).cover?(value.to_i) }
+
+            success(concatenation: string.concat(other_string), operator: "concat")
+          end
+
+          def self.name
+            "ConcatStringsService"
           end
         end
       end
@@ -2059,85 +2079,107 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
         end
       end
 
-      # TODO: `each_with_object`.
-
-      xdescribe "#each_with_object" do
-        let(:status_service) do
-          Class.new do
-            include ConvenientService::Standard::Config
-
-            attr_reader :status, :index
-
-            def initialize(status:, index:)
-              @status = status
-              @index = index
-            end
-
-            def result
-              if status == :success then success(status_string: "ok", status_code: 200)
-              elsif status == :error then error
-              elsif status == :failure then failure
-              elsif status == :exception then raise
-              else
-                raise
-              end
-            end
-          end
-        end
-
-        let(:conditional_block) do
-          proc do |status, index|
-            if status == :success then true
-            elsif status == :error then raise
-            elsif status == :failure then false
-            elsif status == :exception then raise
-            else
-              raise
-            end
-          end
-        end
-
-        let(:step_without_outputs_block) do
-          proc do |status, index|
-            service.step status_service,
-              in: [
-                status: -> { status },
-                index: -> { index }
-              ]
-          end
-        end
-
+      describe "#each_with_object" do
         specify do
-          # empty
-          expect([].each_with_object({}).to_a).to eq([])
-          expect(service.collection([]).each_with_object({}).result).to be_success.with_data(values: instance_of(Enumerator)).comparing_by(:===)
-          expect(service.collection([]).each_with_object({}).result.unsafe_data[:values].to_a).to eq([])
+          # NOTE: Empty collection.
+          expect([].each_with_object("") { |string, object| object.concat(string) }).to eq("")
+          expect(service.collection(enumerable([])).each_with_object("") { |string, object| object.concat(string) }.result).to be_success.with_data(value: "")
+          expect(service.collection(enumerator([])).each_with_object("") { |string, object| object.concat(string) }.result).to be_success.with_data(value: "")
+          expect(service.collection(lazy_enumerator([])).each_with_object("") { |string, object| object.concat(string) }.result).to be_success.with_data(value: "")
+          expect { chain_enumerator([]).each_with_object("") { |string, object| object.concat(string) } }.to raise_error(TypeError).with_message("wrong argument type chain (expected enumerator)")
+          expect { service.collection(chain_enumerator([])).each_with_object("") { |string, object| object.concat(string) }.result }.to raise_error(TypeError).with_message("wrong argument type chain (expected enumerator)")
+          expect(service.collection([]).each_with_object("") { |string, object| object.concat(string) }.result).to be_success.with_data(value: "")
+          expect(service.collection(set([])).each_with_object("") { |string, object| object.concat(string) }.result).to be_success.with_data(value: "")
+          expect(service.collection({}).each_with_object("") { |string, object| object.concat(string) }.result).to be_success.with_data(value: "")
+          expect(service.collection((:success...:success)).each_with_object("") { |string, object| object.concat(string) }.result).to be_success.with_data(value: "")
 
-          # no block
-          expect([:success, :success, :success].each_with_object({}).to_a).to eq([[:success, {}], [:success, {}], [:success, {}]])
-          expect(service.collection([:success, :success, :success]).each_with_object({}).result).to be_success.with_data(values: instance_of(Enumerator)).comparing_by(:===)
-          expect(service.collection([:success, :success, :success]).each_with_object({}).result.unsafe_data[:values].to_a).to eq([[:success, {}], [:success, {}], [:success, {}]])
+          # NOTE: No block.
+          expect(["0", "1", "2", "3", "4", "5"].each_with_object("").to_a).to eq([["0", ""], ["1", ""], ["2", ""], ["3", ""], ["4", ""], ["5", ""]])
+          expect(service.collection(enumerable(["0", "1", "2", "3", "4", "5"])).each_with_object("").result).to be_success.with_data(values: [["0", ""], ["1", ""], ["2", ""], ["3", ""], ["4", ""], ["5", ""]])
+          expect(service.collection(enumerator(["0", "1", "2", "3", "4", "5"])).each_with_object("").result).to be_success.with_data(values: [["0", ""], ["1", ""], ["2", ""], ["3", ""], ["4", ""], ["5", ""]])
+          expect(service.collection(lazy_enumerator(["0", "1", "2", "3", "4", "5"])).each_with_object("").result).to be_success.with_data(values: [["0", ""], ["1", ""], ["2", ""], ["3", ""], ["4", ""], ["5", ""]])
+          expect(service.collection(chain_enumerator(["0", "1", "2", "3", "4", "5"])).each_with_object("").result).to be_success.with_data(values: [["0", ""], ["1", ""], ["2", ""], ["3", ""], ["4", ""], ["5", ""]])
+          expect(service.collection(["0", "1", "2", "3", "4", "5"]).each_with_object("").result).to be_success.with_data(values: [["0", ""], ["1", ""], ["2", ""], ["3", ""], ["4", ""], ["5", ""]])
 
-          # condition block
-          expect([:success, :success, :success].each_with_object({}, &conditional_block)).to eq({})
-          expect(service.collection([:success, :success, :success]).each_with_object({}, &conditional_block).result).to be_success.with_data(value: {})
-          expect(service.collection([:success, :success, :success]).each_with_object({}, &step_without_outputs_block).result).to be_success.with_data(value: {})
+          expect(service.collection(set(["0", "1", "2", "3", "4", "5"])).each_with_object("").result).to be_success.with_data(values: [["0", ""], ["1", ""], ["2", ""], ["3", ""], ["4", ""], ["5", ""]])
+          expect(service.collection({"0" => "0", "1" => "1", "2" => "2", "3" => "3", "4" => "4", "5" => "5"}).each_with_object("").result).to be_success.with_data(values: [[["0", "0"], ""], [["1", "1"], ""], [["2", "2"], ""], [["3", "3"], ""], [["4", "4"], ""], [["5", "5"], ""]])
+          expect(service.collection(("0".."5")).each_with_object("").result).to be_success.with_data(values: [["0", ""], ["1", ""], ["2", ""], ["3", ""], ["4", ""], ["5", ""]])
 
-          # error result
-          expect(service.collection([:success, :error, :exception]).each_with_object({}, &step_without_outputs_block).result).to be_error.without_data
+          # NOTE: Block.
+          expect(["0", "1", "2", "3", "4", "5"].each_with_object(+"") { |string, object| object.concat(string) }).to eq("012345")
+          expect(service.collection(enumerable(["0", "1", "2", "3", "4", "5"])).each_with_object(+"") { |string, object| object.concat(string) }.result).to be_success.with_data(value: "012345")
+          expect(service.collection(enumerator(["0", "1", "2", "3", "4", "5"])).each_with_object(+"") { |string, object| object.concat(string) }.result).to be_success.with_data(value: "012345")
+          expect(service.collection(lazy_enumerator(["0", "1", "2", "3", "4", "5"])).each_with_object(+"") { |string, object| object.concat(string) }.result).to be_success.with_data(value: "012345")
+          expect { chain_enumerator(["0", "1", "2", "3", "4", "5"]).each_with_object(+"") { |string, object| object.concat(string) } }.to raise_error(TypeError).with_message("wrong argument type chain (expected enumerator)")
+          expect { service.collection(chain_enumerator(["0", "1", "2", "3", "4", "5"])).each_with_object(+"") { |string, object| object.concat(string) }.result }.to raise_error(TypeError).with_message("wrong argument type chain (expected enumerator)")
+          expect(service.collection(["0", "1", "2", "3", "4", "5"]).each_with_object(+"") { |string, object| object.concat(string) }.result).to be_success.with_data(value: "012345")
 
-          # error propagation
-          expect(service.collection([:success, :error, :exception]).each { |status| step_without_outputs_block.call(status, :error) }.each_with_object({}, &exception_block).result).to be_error.without_data
+          expect(service.collection(set(["0", "1", "2", "3", "4", "5"])).each_with_object(+"") { |string, object| object.concat(string) }.result).to be_success.with_data(value: "012345")
+          expect({"0" => "0", "1" => "1", "2" => "2", "3" => "3", "4" => "4", "5" => "5"}.each_with_object(+"") { |(key, value), object| object.concat(value) }).to eq("012345")
+          expect(service.collection({"0" => "0", "1" => "1", "2" => "2", "3" => "3", "4" => "4", "5" => "5"}).each_with_object(+"") { |(key, value), object| object.concat(value) }.result).to be_success.with_data(value: "012345")
+          expect(service.collection(("0".."5")).each_with_object(+"") { |string, object| object.concat(string) }.result).to be_success.with_data(value: "012345")
 
-          # already used boolean value terminal chaining
-          expect { service.collection([:success]).all?.each_with_object({}, &exception_block) }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          # NOTE: Step with no outputs.
+          expect(service.collection(enumerable(["0", "1", "2", "3", "4", "5"])).each_with_object(+"") { |string, object| step concat_strings_service, in: [string: -> { object }, other_string: -> { string }] }.result).to be_success.with_data(value: "012345")
+          expect(service.collection(enumerator(["0", "1", "2", "3", "4", "5"])).each_with_object(+"") { |string, object| step concat_strings_service, in: [string: -> { object }, other_string: -> { string }] }.result).to be_success.with_data(value: "012345")
+          expect(service.collection(lazy_enumerator(["0", "1", "2", "3", "4", "5"])).each_with_object(+"") { |string, object| step concat_strings_service, in: [string: -> { object }, other_string: -> { string }] }.result).to be_success.with_data(value: "012345")
+          expect(service.collection(["0", "1", "2", "3", "4", "5"]).each_with_object(+"") { |string, object| step concat_strings_service, in: [string: -> { object }, other_string: -> { string }] }.result).to be_success.with_data(value: "012345")
 
-          # already used singular value terminal chaining
-          expect { service.collection([:success]).first.each_with_object({}, &exception_block) }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect(service.collection(set(["0", "1", "2", "3", "4", "5"])).each_with_object(+"") { |string, object| step concat_strings_service, in: [string: -> { object }, other_string: -> { string }] }.result).to be_success.with_data(value: "012345")
+          expect(service.collection({"0" => "0", "1" => "1", "2" => "2", "3" => "3", "4" => "4", "5" => "5"}).each_with_object(+"") { |(key, value), object| step concat_strings_service, in: [string: -> { object }, other_string: -> { value }] }.result).to be_success.with_data(value: "012345")
+          expect(service.collection(("0".."5")).each_with_object(+"") { |string, object| step concat_strings_service, in: [string: -> { object }, other_string: -> { string }] }.result).to be_success.with_data(value: "012345")
+
+          # NOTE: Step with one output.
+          expect(service.collection(enumerable(["0", "1", "2", "3", "4", "5"])).each_with_object(+"") { |string, object| step concat_strings_service, in: [string: -> { object }, other_string: -> { string }], out: :concatenation }.result).to be_success.with_data(value: "012345")
+          expect(service.collection(enumerator(["0", "1", "2", "3", "4", "5"])).each_with_object(+"") { |string, object| step concat_strings_service, in: [string: -> { object }, other_string: -> { string }], out: :concatenation }.result).to be_success.with_data(value: "012345")
+          expect(service.collection(lazy_enumerator(["0", "1", "2", "3", "4", "5"])).each_with_object(+"") { |string, object| step concat_strings_service, in: [string: -> { object }, other_string: -> { string }], out: :concatenation }.result).to be_success.with_data(value: "012345")
+          expect(service.collection(["0", "1", "2", "3", "4", "5"]).each_with_object(+"") { |string, object| step concat_strings_service, in: [string: -> { object }, other_string: -> { string }], out: :concatenation }.result).to be_success.with_data(value: "012345")
+
+          expect(service.collection(set(["0", "1", "2", "3", "4", "5"])).each_with_object(+"") { |string, object| step concat_strings_service, in: [string: -> { object }, other_string: -> { string }], out: :concatenation }.result).to be_success.with_data(value: "012345")
+          expect(service.collection({"0" => "0", "1" => "1", "2" => "2", "3" => "3", "4" => "4", "5" => "5"}).each_with_object(+"") { |(key, value), object| step concat_strings_service, in: [string: -> { object }, other_string: -> { value }], out: :concatenation }.result).to be_success.with_data(value: "012345")
+          expect(service.collection(("0".."5")).each_with_object(+"") { |string, object| step concat_strings_service, in: [string: -> { object }, other_string: -> { string }], out: :concatenation }.result).to be_success.with_data(value: "012345")
+
+          # NOTE: Step with multiple outputs.
+          expect(service.collection(enumerable(["0", "1", "2", "3", "4", "5"])).each_with_object(+"") { |string, object| step concat_strings_service, in: [string: -> { object }, other_string: -> { string }], out: [:concatenation, :operator] }.result).to be_success.with_data(value: "012345")
+          expect(service.collection(enumerator(["0", "1", "2", "3", "4", "5"])).each_with_object(+"") { |string, object| step concat_strings_service, in: [string: -> { object }, other_string: -> { string }], out: [:concatenation, :operator] }.result).to be_success.with_data(value: "012345")
+          expect(service.collection(lazy_enumerator(["0", "1", "2", "3", "4", "5"])).each_with_object(+"") { |string, object| step concat_strings_service, in: [string: -> { object }, other_string: -> { string }], out: [:concatenation, :operator] }.result).to be_success.with_data(value: "012345")
+          expect(service.collection(["0", "1", "2", "3", "4", "5"]).each_with_object(+"") { |string, object| step concat_strings_service, in: [string: -> { object }, other_string: -> { string }], out: [:concatenation, :operator] }.result).to be_success.with_data(value: "012345")
+
+          expect(service.collection(set(["0", "1", "2", "3", "4", "5"])).each_with_object(+"") { |string, object| step concat_strings_service, in: [string: -> { object }, other_string: -> { string }], out: [:concatenation, :operator] }.result).to be_success.with_data(value: "012345")
+          expect(service.collection({"0" => "0", "1" => "1", "2" => "2", "3" => "3", "4" => "4", "5" => "5"}).each_with_object(+"") { |(key, value), object| step concat_strings_service, in: [string: -> { object }, other_string: -> { value }], out: [:concatenation, :operator] }.result).to be_success.with_data(value: "012345")
+          expect(service.collection(("0".."5")).each_with_object(+"") { |string, object| step concat_strings_service, in: [string: -> { object }, other_string: -> { string }], out: [:concatenation, :operator] }.result).to be_success.with_data(value: "012345")
+
+          # NOTE: Error result.
+          expect(service.collection(enumerable(["0", "-1", :exception])).each_with_object(+"") { |string, object| step concat_strings_service, in: [string: -> { object }, other_string: -> { string }] }.result).to be_error.without_data
+          expect(service.collection(enumerator(["0", "-1", :exception])).each_with_object(+"") { |string, object| step concat_strings_service, in: [string: -> { object }, other_string: -> { string }] }.result).to be_error.without_data
+          expect(service.collection(lazy_enumerator(["0", "-1", :exception])).each_with_object(+"") { |string, object| step concat_strings_service, in: [string: -> { object }, other_string: -> { string }] }.result).to be_error.without_data
+          expect(service.collection(["0", "-1", :exception]).each_with_object(+"") { |string, object| step concat_strings_service, in: [string: -> { object }, other_string: -> { string }] }.result).to be_error.without_data
+          expect(service.collection(set(["0", "-1", :exception])).each_with_object(+"") { |string, object| step concat_strings_service, in: [string: -> { object }, other_string: -> { string }] }.result).to be_error.without_data
+
+          expect(service.collection({"0" => "0", "-1" => "-1", :exception => :exception}).each_with_object(+"") { |(key, value), object| step concat_strings_service, in: [string: -> { object }, other_string: -> { value }] }.result).to be_error.without_data
+          expect(service.collection(("-1".."-1")).each_with_object(+"") { |string, object| step concat_strings_service, in: [string: -> { object }, other_string: -> { string }] }.result).to be_error.without_data
+
+          # NOTE: Error propagation.
+          expect(service.collection(enumerable([:success, :error, :exception])).filter { |status| step status_service, in: [status: -> { status }] }.each_with_object(+"") { |status, object| object.concat(status.to_s) }.result).to be_error.without_data
+          expect(service.collection(enumerator([:success, :error, :exception])).filter { |status| step status_service, in: [status: -> { status }] }.each_with_object(+"") { |status, object| object.concat(status.to_s) }.result).to be_error.without_data
+          expect(service.collection(lazy_enumerator([:success, :error, :exception])).filter { |status| step status_service, in: [status: -> { status }] }.each_with_object(+"") { |status, object| object.concat(status.to_s) }.result).to be_error.without_data
+          expect(service.collection([:success, :error, :exception]).filter { |status| step status_service, in: [status: -> { status }] }.each_with_object(+"") { |status, object| object.concat(status.to_s) }.result).to be_error.without_data
+
+          expect(service.collection(set([:success, :error, :exception])).filter { |status| step status_service, in: [status: -> { status }] }.each_with_object(+"") { |status, object| object.concat(status.to_s) }.result).to be_error.without_data
+          expect(service.collection({success: :success, error: :error, exception: :exception}).filter { |key, value| step status_service, in: [status: -> { value }] }.each_with_object(+"") { |(key, value), object| object.concat(status.to_s) }.result).to be_error.without_data
+          expect(service.collection((:error..:error)).filter { |status| step status_service, in: [status: -> { status }] }.each_with_object(+"") { |status, object| object.concat(status.to_s) }.result).to be_error.without_data
+
+          # NOTE: Usage on terminal chaining.
+          expect { service.collection(enumerable([:success, :exception, :exception])).first.each_with_object(+"") { |string, object| object.concat(string) }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection(enumerator([:success, :exception, :exception])).first.each_with_object(+"") { |string, object| object.concat(string) }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection(lazy_enumerator([:success, :exception, :exception])).first.each_with_object(+"") { |string, object| object.concat(string) }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection([:success, :exception, :exception]).first.each_with_object(+"") { |string, object| object.concat(string) }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection(set([:success, :exception, :exception])).first.each_with_object(+"") { |string, object| object.concat(string) }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+
+          expect { service.collection({success: :success, exception: :exception}).first.each_with_object(+"") { |(key, value), object| object.concat(status.to_s) }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection((:success..:success)).first.each_with_object(+"") { |string, object| object.concat(string) }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
         end
       end
-
-      # ...
 
       describe "#entries" do
         specify do

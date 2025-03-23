@@ -356,7 +356,7 @@ module ConvenientService
                     enumerable.each_with_object(obj, &step_aware_iteration_block)
                   end
                 else
-                  process_as_enumerator(obj) do |obj|
+                  process_as_enumerator(obj, nil) do |obj|
                     enumerable.each_with_object(obj)
                   end
                 end
