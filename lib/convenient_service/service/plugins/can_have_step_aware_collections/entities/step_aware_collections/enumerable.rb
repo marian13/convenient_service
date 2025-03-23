@@ -442,13 +442,9 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
               def find_index(*args, &iteration_block)
-                if iteration_block
-                  process_as_object_or_nil(iteration_block) do |step_aware_iteration_block|
-                    enumerable.find_index(&step_aware_iteration_block)
-                  end
-                elsif args.any?
-                  process_as_object_or_nil(args.first) do |value|
-                    enumerable.find_index(value)
+                if iteration_block || args.any?
+                  process_as_object_or_nil(*args, iteration_block) do |*args, step_aware_iteration_block|
+                    enumerable.find_index(*args, &step_aware_iteration_block)
                   end
                 else
                   process_as_enumerator(nil) do
