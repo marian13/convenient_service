@@ -265,7 +265,7 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Enumerator]
               #
               def process_as_enumerator_generator(*args, iteration_block, &iterator_block)
-                return step_aware_lazy_enumerator_from(enumerable.lazy) if propagated_result
+                return step_aware_enumerator_from(enumerable.lazy) if propagated_result
 
                 step_aware_iteration_block =
                   if iteration_block
@@ -276,7 +276,7 @@ module ConvenientService
 
                 lazy_enumerator = yield(*args, step_aware_iteration_block)
 
-                step_aware_lazy_enumerator_from(lazy_enumerator)
+                step_aware_enumerator_from(lazy_enumerator)
               end
 
               ##

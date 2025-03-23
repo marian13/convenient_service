@@ -56,25 +56,13 @@ module ConvenientService
               end
 
               ##
-              # TODO: !!!
               # @param iteration_block [Proc]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
               def chunk(&iteration_block)
-                if propagated_result
-                  return Entities::StepAwareCollections::ChunkEnumerator.new(
-                    enumerable: enumerable,
-                    iteration_block: iteration_block,
-                    organizer: organizer,
-                    propagated_result: propagated_result
-                  )
+                process_as_lazy_enumerator(iteration_block) do |step_aware_iteration_block|
+                  lazy_enumerator.chunk(&step_aware_iteration_block)
                 end
-
-                Entities::StepAwareCollections::ChunkEnumerator.new(
-                  enumerable: enumerable,
-                  iteration_block: iteration_block,
-                  organizer: organizer
-                )
               end
 
               ##
@@ -154,14 +142,8 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
               def enum_for(method = :each, *args, &iteration_block)
-                if iteration_block
-                  process_as_lazy_enumerator(method, *args, iteration_block) do |method, *args, step_aware_iteration_block|
-                    lazy_enumerator.enum_for(method, *args, &step_aware_iteration_block)
-                  end
-                else
-                  process_as_lazy_enumerator(nil) do
-                    lazy_enumerator.enum_for(method, *args)
-                  end
+                process_as_lazy_enumerator(method, *args, iteration_block) do |method, *args, step_aware_iteration_block|
+                  lazy_enumerator.enum_for(method, *args, &step_aware_iteration_block)
                 end
               end
 
@@ -220,14 +202,8 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
               def grep(pattern, &iteration_block)
-                if iteration_block
-                  process_as_lazy_enumerator(pattern, iteration_block) do |pattern, step_aware_iteration_block|
-                    lazy_enumerator.grep(pattern, &step_aware_iteration_block)
-                  end
-                else
-                  process_as_lazy_enumerator(pattern, nil) do |pattern|
-                    lazy_enumerator.grep(pattern)
-                  end
+                process_as_lazy_enumerator(pattern, iteration_block) do |pattern, step_aware_iteration_block|
+                  lazy_enumerator.grep(pattern, &step_aware_iteration_block)
                 end
               end
 
@@ -237,14 +213,8 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
               def grep_v(pattern, &iteration_block)
-                if iteration_block
-                  process_as_lazy_enumerator(pattern, iteration_block) do |pattern, step_aware_iteration_block|
-                    lazy_enumerator.grep_v(pattern, &step_aware_iteration_block)
-                  end
-                else
-                  process_as_lazy_enumerator(pattern, nil) do |pattern|
-                    lazy_enumerator.grep_v(pattern)
-                  end
+                process_as_lazy_enumerator(pattern, iteration_block) do |pattern, step_aware_iteration_block|
+                  lazy_enumerator.grep_v(pattern, &step_aware_iteration_block)
                 end
               end
 

@@ -796,122 +796,112 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
         end
       end
 
-      xdescribe "#chunk" do
-        let(:status_service) do
-          Class.new do
-            include ConvenientService::Standard::Config
-
-            attr_reader :status
-
-            def initialize(status:)
-              @status = status
-            end
-
-            def result
-              case status
-              when :success then success(status_string: "ok", status_code: 200)
-              when :failure then failure
-              when :error then error
-              when nil then success(status_string: "ok", status_code: 200)
-              when :separator then success(status_string: "ok", status_code: 200)
-              when :alone then success(status_string: "ok", status_code: 200)
-              when :exception then raise
-              else
-                raise
-              end
-            end
-          end
-        end
-
-        let(:conditional_block) do
-          proc do |status|
-            case status
-            when :success then true
-            when :failure then false
-            when nil then nil
-            when :separator then :_separator
-            when :alone then :_alone
-            when :exception then raise
-            else
-              raise
-            end
-          end
-        end
-
-        let(:indirect_service) do
-          Class.new do
-            include ConvenientService::Standard::Config
-
-            attr_reader :status
-
-            def initialize(status:)
-              @status = status
-            end
-
-            def result
-              case status
-              when :success then success(special_key: true)
-              when :failure then success(special_key: false)
-              when :error then error
-              when nil then success(special_key: nil)
-              when :separator then success(special_key: :_separator)
-              when :alone then success(special_key: :_alone)
-              when :exception then raise
-              else
-                raise
-              end
-            end
-          end
-        end
-
-        let(:indirect_step_block) do
-          proc do |status|
-            service.step indirect_service,
-              in: [status: -> { status }],
-              out: :special_key
-          end
-        end
-
+      describe "#chunk" do
         specify do
-          # empty
-          expect([].chunk(&conditional_block).to_a).to eq([])
-          expect(service.collection([]).chunk(&conditional_block).result).to be_success.with_data(values: instance_of(Array)).comparing_by(:===)
-          expect(service.collection([]).chunk(&conditional_block).result.unsafe_data[:values].to_a).to eq([])
-          expect(service.collection([]).chunk(&step_without_outputs_block).result).to be_success.with_data(values: instance_of(Array)).comparing_by(:===)
-          expect(service.collection([]).chunk(&step_without_outputs_block).result.unsafe_data[:values].to_a).to eq([])
+          # NOTE: Empty collection.
+          expect([].chunk { |status| condition[status] }.to_a).to eq([])
+          expect(service.collection(enumerable([])).chunk { |status| condition[status] }.result).to be_success.with_data(values: [])
+          expect(service.collection(enumerator([])).chunk { |status| condition[status] }.result).to be_success.with_data(values: [])
+          expect(service.collection(lazy_enumerator([])).chunk { |status| condition[status] }.result).to be_success.with_data(values: [])
+          expect(service.collection(chain_enumerator([])).chunk { |status| condition[status] }.result).to be_success.with_data(values: [])
+          expect(service.collection([]).chunk { |status| condition[status] }.result).to be_success.with_data(values: [])
+          expect(service.collection(set([])).chunk { |status| condition[status] }.result).to be_success.with_data(values: [])
+          expect(service.collection({}).chunk { |status| condition[status] }.result).to be_success.with_data(values: [])
+          expect(service.collection((:success...:success)).chunk { |status| condition[status] }.result).to be_success.with_data(values: [])
 
-          # satisfied/not satisfied condition
-          expect([:success, :failure, :success, :failure].chunk(&conditional_block).to_a).to eq([[true, [:success]], [false, [:failure]], [true, [:success]], [false, [:failure]]])
-          expect(service.collection([:success, :failure, :success, :failure]).chunk(&conditional_block).result).to be_success.with_data(values: instance_of(Array)).comparing_by(:===)
-          expect(service.collection([:success, :failure, :success, :failure]).chunk(&conditional_block).result.unsafe_data[:values].to_a).to eq([[true, [:success]], [false, [:failure]], [true, [:success]], [false, [:failure]]])
-          expect(service.collection([:success, :failure, :success, :failure]).chunk(&step_without_outputs_block).result).to be_success.with_data(values: instance_of(Array)).comparing_by(:===)
-          expect(service.collection([:success, :failure, :success, :failure]).chunk(&step_without_outputs_block).result.unsafe_data[:values].to_a).to eq([[true, [:success]], [false, [:failure]], [true, [:success]], [false, [:failure]]])
-          expect(service.collection([:success, :failure, :success, :failure]).chunk(&step_with_one_output_block).result.unsafe_data[:values].to_a).to eq([["ok", [:success]], ["ok", [:success]]])
-          expect(service.collection([:success, :failure, :success, :failure]).chunk(&step_with_multiple_outputs_block).result.unsafe_data[:values].to_a).to eq([[{status_string: "ok", status_code: 200}, [:success]], [{}, [:failure]], [{status_string: "ok", status_code: 200}, [:success]], [{}, [:failure]]])
+          # NOTE: No block.
+          expect([:success, :success, :success].chunk.to_a).to eq([])
+          expect(service.collection(enumerable([:success, :success, :success])).chunk.result).to be_success.with_data(values: [])
+          expect(service.collection(enumerator([:success, :success, :success])).chunk.result).to be_success.with_data(values: [])
+          expect(service.collection(lazy_enumerator([:success, :success, :success])).chunk.result).to be_success.with_data(values: [])
+          expect(service.collection(chain_enumerator([:success, :success, :success])).chunk.result).to be_success.with_data(values: [])
+          expect(service.collection([:success, :success, :success]).chunk.result).to be_success.with_data(values: [])
 
-          # direct nil, separator, alone
-          expect([nil, :success, :separator, :failure, :alone].chunk(&conditional_block).to_a).to eq([[true, [:success]], [false, [:failure]], [:_alone, [:alone]]])
-          expect(service.collection([nil, :success, :separator, :failure, :alone]).chunk(&conditional_block).result).to be_success.with_data(values: instance_of(Array)).comparing_by(:===)
-          expect(service.collection([nil, :success, :separator, :failure, :alone]).chunk(&conditional_block).result.unsafe_data[:values].to_a).to eq([[true, [:success]], [false, [:failure]], [:_alone, [:alone]]])
-          expect(service.collection([nil, :success, :separator, :failure, :alone]).chunk(&step_without_outputs_block).result).to be_success.with_data(values: instance_of(Array)).comparing_by(:===)
-          expect(service.collection([nil, :success, :separator, :failure, :alone]).chunk(&step_without_outputs_block).result.unsafe_data[:values].to_a).to eq([[true, [nil, :success, :separator]], [false, [:failure]], [true, [:alone]]])
-          expect(service.collection([nil, :success, :separator, :failure, :alone]).chunk(&step_with_one_output_block).result.unsafe_data[:values].to_a).to eq([["ok", [nil, :success, :separator]], ["ok", [:alone]]])
-          expect(service.collection([nil, :success, :separator, :failure, :alone]).chunk(&step_with_multiple_outputs_block).result.unsafe_data[:values].to_a).to eq([[{status_string: "ok", status_code: 200}, [nil, :success, :separator]], [{}, [:failure]], [{status_string: "ok", status_code: 200}, [:alone]]])
+          expect(service.collection(set([:success])).chunk.result).to be_success.with_data(values: [])
+          expect(service.collection({success: :success}).chunk.result).to be_success.with_data(values: [])
+          expect(service.collection((:success..:success)).chunk.result).to be_success.with_data(values: [])
 
-          # indirect nil, separator, alone
-          expect(service.collection([nil, :success, :separator, :failure, :alone]).chunk(&indirect_step_block).result.unsafe_data[:values].to_a).to eq([[true, [:success]], [false, [:failure]], [:_alone, [:alone]]])
+          # NOTE: Block.
+          expect([:success, :failure, :success, :failure].chunk { |status| condition[status] }.to_a).to eq([[true, [:success]], [false, [:failure]], [true, [:success]], [false, [:failure]]])
+          expect(service.collection(enumerable([:success, :failure, :success, :failure])).chunk { |status| condition[status] }.result).to be_success.with_data(values: [[true, [:success]], [false, [:failure]], [true, [:success]], [false, [:failure]]])
+          expect(service.collection(enumerator([:success, :failure, :success, :failure])).chunk { |status| condition[status] }.result).to be_success.with_data(values: [[true, [:success]], [false, [:failure]], [true, [:success]], [false, [:failure]]])
+          expect(service.collection(lazy_enumerator([:success, :failure, :success, :failure])).chunk { |status| condition[status] }.result).to be_success.with_data(values: [[true, [:success]], [false, [:failure]], [true, [:success]], [false, [:failure]]])
+          expect(service.collection(chain_enumerator([:success, :failure, :success, :failure])).chunk { |status| condition[status] }.result).to be_success.with_data(values: [[true, [:success]], [false, [:failure]], [true, [:success]], [false, [:failure]]])
+          expect(service.collection([:success, :failure, :success, :failure]).chunk { |status| condition[status] }.result).to be_success.with_data(values: [[true, [:success]], [false, [:failure]], [true, [:success]], [false, [:failure]]])
 
-          # error result
-          expect(service.collection([:success, :error, :exception]).chunk(&step_without_outputs_block).result).to be_error.without_data
+          expect(service.collection(set([:success, :failure])).chunk { |status| condition[status] }.result).to be_success.with_data(values: [[true, [:success]], [false, [:failure]]])
+          expect(service.collection({success: :success, failure: :failure}).chunk { |key, value| condition[value] }.result).to be_success.with_data(values: [[true, [[:success, :success]]], [false, [[:failure, :failure]]]])
+          expect(service.collection((:success..:success)).chunk { |status| condition[status] }.result).to be_success.with_data(values: [[true, [:success]]])
+          expect(service.collection((:failure..:failure)).chunk { |status| condition[status] }.result).to be_success.with_data(values: [[false, [:failure]]])
 
-          # error propagation
-          expect(service.collection([:success, :error, :exception]).each(&step_without_outputs_block).chunk(&exception_block).result).to be_error.without_data
+          # NOTE: Step with no outputs.
+          expect(service.collection(enumerable([:success, :failure, :success, :failure])).chunk { |status| step status_service, in: [status: -> { status }] }.result).to be_success.with_data(values: [[true, [:success]], [false, [:failure]], [true, [:success]], [false, [:failure]]])
+          expect(service.collection(enumerator([:success, :failure, :success, :failure])).chunk { |status| step status_service, in: [status: -> { status }] }.result).to be_success.with_data(values: [[true, [:success]], [false, [:failure]], [true, [:success]], [false, [:failure]]])
+          expect(service.collection(lazy_enumerator([:success, :failure, :success, :failure])).chunk { |status| step status_service, in: [status: -> { status }] }.result).to be_success.with_data(values: [[true, [:success]], [false, [:failure]], [true, [:success]], [false, [:failure]]])
+          expect(service.collection(chain_enumerator([:success, :failure, :success, :failure])).chunk { |status| step status_service, in: [status: -> { status }] }.result).to be_success.with_data(values: [[true, [:success]], [false, [:failure]], [true, [:success]], [false, [:failure]]])
+          expect(service.collection([:success, :failure, :success, :failure]).chunk { |status| step status_service, in: [status: -> { status }] }.result).to be_success.with_data(values: [[true, [:success]], [false, [:failure]], [true, [:success]], [false, [:failure]]])
 
-          # already used boolean value terminal chaining
-          expect { service.collection([:success]).all?.chunk(&exception_block) }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect(service.collection(set([:success, :failure])).chunk { |status| step status_service, in: [status: -> { status }] }.result).to be_success.with_data(values: [[true, [:success]], [false, [:failure]]])
+          expect(service.collection({success: :success, failure: :failure}).chunk { |key, value| step status_service, in: [status: -> { value }] }.result).to be_success.with_data(values: [[true, [[:success, :success]]], [false, [[:failure, :failure]]]])
+          expect(service.collection((:success..:success)).chunk { |status| step status_service, in: [status: -> { status }] }.result).to be_success.with_data(values: [[true, [:success]]])
+          expect(service.collection((:failure..:failure)).chunk { |status| step status_service, in: [status: -> { status }] }.result).to be_success.with_data(values: [[false, [:failure]]])
 
-          # already used singular value terminal chaining
-          expect { service.collection([:success]).first.chunk(&exception_block) }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          # NOTE: Step with one output.
+          expect(service.collection(enumerable([:success, :failure, :success, :failure])).chunk { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: [["ok", [:success]], ["ok", [:success]]])
+          expect(service.collection(enumerator([:success, :failure, :success, :failure])).chunk { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: [["ok", [:success]], ["ok", [:success]]])
+          expect(service.collection(lazy_enumerator([:success, :failure, :success, :failure])).chunk { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: [["ok", [:success]], ["ok", [:success]]])
+          expect(service.collection(chain_enumerator([:success, :failure, :success, :failure])).chunk { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: [["ok", [:success]], ["ok", [:success]]])
+          expect(service.collection([:success, :failure, :success, :failure]).chunk { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: [["ok", [:success]], ["ok", [:success]]])
+
+          expect(service.collection(set([:success, :failure])).chunk { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: [["ok", [:success]]])
+          expect(service.collection({success: :success, failure: :failure}).chunk { |key, value| step status_service, in: [status: -> { value }], out: :status_string }.result).to be_success.with_data(values: [["ok", [[:success, :success]]]])
+          expect(service.collection((:success..:success)).chunk { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: [["ok", [:success]]])
+          expect(service.collection((:failure..:failure)).chunk { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: [])
+
+          # NOTE: Step with multiple outputs.
+          expect(service.collection(enumerable([:success, :failure, :success, :failure])).chunk { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [[{status_string: "ok", status_code: 200}, [:success]], [{status_string: "ok", status_code: 200}, [:success]]])
+          expect(service.collection(enumerator([:success, :failure, :success, :failure])).chunk { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [[{status_string: "ok", status_code: 200}, [:success]], [{status_string: "ok", status_code: 200}, [:success]]])
+          expect(service.collection(lazy_enumerator([:success, :failure, :success, :failure])).chunk { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [[{status_string: "ok", status_code: 200}, [:success]], [{status_string: "ok", status_code: 200}, [:success]]])
+          expect(service.collection(chain_enumerator([:success, :failure, :success, :failure])).chunk { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [[{status_string: "ok", status_code: 200}, [:success]], [{status_string: "ok", status_code: 200}, [:success]]])
+          expect(service.collection([:success, :failure, :success, :failure]).chunk { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [[{status_string: "ok", status_code: 200}, [:success]], [{status_string: "ok", status_code: 200}, [:success]]])
+
+          expect(service.collection(set([:success, :failure])).chunk { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [[{status_string: "ok", status_code: 200}, [:success]]])
+          expect(service.collection({success: :success, failure: :failure}).chunk { |key, value| step status_service, in: [status: -> { value }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [[{status_string: "ok", status_code: 200}, [[:success, :success]]]])
+          expect(service.collection((:success..:success)).chunk { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [[{status_string: "ok", status_code: 200}, [:success]]])
+          expect(service.collection((:failure..:failure)).chunk { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [])
+
+          # NOTE: Error result.
+          expect(service.collection(enumerable([:success, :error, :exception])).chunk { |status| step status_service, in: [status: -> { status }] }.result).to be_error.without_data
+          expect(service.collection(enumerator([:success, :error, :exception])).chunk { |status| step status_service, in: [status: -> { status }] }.result).to be_error.without_data
+          expect(service.collection(lazy_enumerator([:success, :error, :exception])).chunk { |status| step status_service, in: [status: -> { status }] }.result).to be_error.without_data
+          expect(service.collection(chain_enumerator([:success, :error, :exception])).chunk { |status| step status_service, in: [status: -> { status }] }.result).to be_error.without_data
+          expect(service.collection([:success, :error, :exception]).chunk { |status| step status_service, in: [status: -> { status }] }.result).to be_error.without_data
+
+          expect(service.collection(set([:success, :error, :exception])).chunk { |status| step status_service, in: [status: -> { status }] }.result).to be_error.without_data
+          expect(service.collection({success: :success, error: :error, exception: :exception}).chunk { |key, value| step status_service, in: [status: -> { value }] }.result).to be_error.without_data
+          expect(service.collection((:error..:error)).chunk { |status| step status_service, in: [status: -> { status }] }.result).to be_error.without_data
+
+          # NOTE: Error propagation.
+          expect(service.collection(enumerable([:success, :error, :exception])).select { |status| step status_service, in: [status: -> { status }] }.chunk { |status| condition[status] }.result).to be_error.without_data
+          expect(service.collection(enumerator([:success, :error, :exception])).select { |status| step status_service, in: [status: -> { status }] }.chunk { |status| condition[status] }.result).to be_error.without_data
+          expect(service.collection(lazy_enumerator([:success, :error, :exception])).select { |status| step status_service, in: [status: -> { status }] }.chunk { |status| condition[status] }.result).to be_error.without_data
+          expect(service.collection(chain_enumerator([:success, :error, :exception])).select { |status| step status_service, in: [status: -> { status }] }.chunk { |status| condition[status] }.result).to be_error.without_data
+          expect(service.collection([:success, :error, :exception]).select { |status| step status_service, in: [status: -> { status }] }.chunk { |status| condition[status] }.result).to be_error.without_data
+
+          expect(service.collection(set([:success, :error, :exception])).select { |status| step status_service, in: [status: -> { status }] }.chunk { |status| condition[status] }.result).to be_error.without_data
+          expect(service.collection({success: :success, error: :error, exception: :exception}).select { |key, value| step status_service, in: [status: -> { value }] }.chunk { |key, value| condition[value] }.result).to be_error.without_data
+          expect(service.collection((:error..:error)).select { |status| step status_service, in: [status: -> { status }] }.chunk { |status| condition[status] }.result).to be_error.without_data
+
+          # NOTE: Usage on terminal chaining.
+          expect { service.collection(enumerable([:success, :exception, :exception])).first.chunk { |status| condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection(enumerator([:success, :exception, :exception])).first.chunk { |status| condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection(lazy_enumerator([:success, :exception, :exception])).first.chunk { |status| condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection(chain_enumerator([:success, :exception, :exception])).first.chunk { |status| condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection([:success, :exception, :exception]).first.chunk { |status| condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+
+          expect { service.collection(set([:success, :exception, :exception])).first.chunk { |status| condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection({success: :success, exception: :exception}).first.chunk { |key, value| condition[value] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection((:success..:success)).first.chunk { |status| condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
         end
       end
 
