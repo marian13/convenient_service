@@ -204,6 +204,32 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
         end
       end
 
+      let(:add_numbers_service) do
+        Class.new do
+          include ConvenientService::Standard::Config
+
+          attr_reader :number, :other_number
+
+          def initialize(number:, other_number:)
+            @number = number
+            @other_number = other_number
+          end
+
+          ##
+          # NOTE: `number_code` is ASCII Code.
+          #
+          def result
+            return error if [number, other_number].any? { |value| (-Float::INFINITY..-1).cover?(value) }
+
+            success(sum: number + other_number, operator: "+")
+          end
+
+          def self.name
+            "AddNumbersService"
+          end
+        end
+      end
+
       let(:condition) do
         proc do |status|
           case status
@@ -4086,7 +4112,151 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
 
       # TODO: `partition`.
 
-      # TODO: `reduce`.
+      describe "#reduce" do
+        specify do
+          # NOTE: Empty collection.
+          expect([].reduce([]) { |memo, number| memo << -number }).to eq([])
+          expect(service.collection(enumerable([])).reduce([]) { |memo, number| memo << -number }.result).to be_success.with_data(value: [])
+          expect(service.collection(enumerator([])).reduce([]) { |memo, number| memo << -number }.result).to be_success.with_data(value: [])
+          expect(service.collection(lazy_enumerator([])).reduce([]) { |memo, number| memo << -number }.result).to be_success.with_data(value: [])
+          expect(service.collection(chain_enumerator([])).reduce([]) { |memo, number| memo << -number }.result).to be_success.with_data(value: [])
+          expect(service.collection([]).reduce([]) { |memo, number| memo << -number }.result).to be_success.with_data(value: [])
+          expect(service.collection(set([])).reduce([]) { |memo, number| memo << -number }.result).to be_success.with_data(value: [])
+          expect(service.collection({}).reduce([]) { |memo, number| memo << -number }.result).to be_success.with_data(value: [])
+          expect(service.collection((:success...:success)).reduce([]) { |memo, number| memo << -number }.result).to be_success.with_data(value: [])
+
+          # NOTE: No initial, no sym, no block.
+          expect { [0, 1, 2, 3, 4, 5].reduce }.to raise_error(ArgumentError).with_message("wrong number of arguments (given 0, expected 1..2)")
+          expect { service.collection(enumerable([0, 1, 2, 3, 4, 5])).reduce.result }.to raise_error(ArgumentError).with_message("wrong number of arguments (given 0, expected 1..2)")
+          expect { service.collection(enumerator([0, 1, 2, 3, 4, 5])).reduce.result }.to raise_error(ArgumentError).with_message("wrong number of arguments (given 0, expected 1..2)")
+          expect { service.collection(lazy_enumerator([0, 1, 2, 3, 4, 5])).reduce.result }.to raise_error(ArgumentError).with_message("wrong number of arguments (given 0, expected 1..2)")
+          expect { service.collection(chain_enumerator([0, 1, 2, 3, 4, 5])).reduce.result }.to raise_error(ArgumentError).with_message("wrong number of arguments (given 0, expected 1..2)")
+          expect { service.collection([0, 1, 2, 3, 4, 5]).reduce.result }.to raise_error(ArgumentError).with_message("wrong number of arguments (given 0, expected 1..2)")
+
+          expect { service.collection(set([0, 1, 2, 3, 4, 5])).reduce.result }.to raise_error(ArgumentError).with_message("wrong number of arguments (given 0, expected 1..2)")
+          expect { service.collection({0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}).reduce.result }.to raise_error(ArgumentError).with_message("wrong number of arguments (given 0, expected 1..2)")
+          expect { service.collection((0..5)).reduce.result }.to raise_error(ArgumentError).with_message("wrong number of arguments (given 0, expected 1..2)")
+
+          # NOTE: Sym.
+          expect([0, 1, 2, 3, 4, 5].reduce(:+)).to eq(15)
+          expect(service.collection(enumerable([0, 1, 2, 3, 4, 5])).reduce(:+).result).to be_success.with_data(value: 15)
+          expect(service.collection(enumerator([0, 1, 2, 3, 4, 5])).reduce(:+).result).to be_success.with_data(value: 15)
+          expect(service.collection(lazy_enumerator([0, 1, 2, 3, 4, 5])).reduce(:+).result).to be_success.with_data(value: 15)
+          expect(service.collection(chain_enumerator([0, 1, 2, 3, 4, 5])).reduce(:+).result).to be_success.with_data(value: 15)
+          expect(service.collection([0, 1, 2, 3, 4, 5]).reduce(:+).result).to be_success.with_data(value: 15)
+
+          expect(service.collection(set([0, 1, 2, 3, 4, 5])).reduce(:+).result).to be_success.with_data(value: 15)
+          expect({0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}.reduce(:+)).to eq([0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5])
+          expect(service.collection({0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}).reduce(:+).result).to be_success.with_data(value: [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5])
+          expect(service.collection((0..5)).reduce(:+).result).to be_success.with_data(value: 15)
+
+          # NOTE: Initial, sym.
+          expect([0, 1, 2, 3, 4, 5].reduce(10, :+)).to eq(25)
+          expect(service.collection(enumerable([0, 1, 2, 3, 4, 5])).reduce(10, :+).result).to be_success.with_data(value: 25)
+          expect(service.collection(enumerator([0, 1, 2, 3, 4, 5])).reduce(10, :+).result).to be_success.with_data(value: 25)
+          expect(service.collection(lazy_enumerator([0, 1, 2, 3, 4, 5])).reduce(10, :+).result).to be_success.with_data(value: 25)
+          expect(service.collection(chain_enumerator([0, 1, 2, 3, 4, 5])).reduce(10, :+).result).to be_success.with_data(value: 25)
+          expect(service.collection([0, 1, 2, 3, 4, 5]).reduce(10, :+).result).to be_success.with_data(value: 25)
+
+          expect(service.collection(set([0, 1, 2, 3, 4, 5])).reduce(10, :+).result).to be_success.with_data(value: 25)
+          expect({0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}.reduce([10, 10], :+)).to eq([10, 10, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5])
+          expect(service.collection({0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}).reduce([10, 10], :+).result).to be_success.with_data(value: [10, 10, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5])
+          expect(service.collection((0..5)).reduce(10, :+).result).to be_success.with_data(value: 25)
+
+          # NOTE: Block.
+          expect([0, 1, 2, 3, 4, 5].reduce { |memo, number| memo + number }).to eq(15)
+          expect(service.collection(enumerable([0, 1, 2, 3, 4, 5])).reduce { |memo, number| memo + number }.result).to be_success.with_data(value: 15)
+          expect(service.collection(enumerator([0, 1, 2, 3, 4, 5])).reduce { |memo, number| memo + number }.result).to be_success.with_data(value: 15)
+          expect(service.collection(lazy_enumerator([0, 1, 2, 3, 4, 5])).reduce { |memo, number| memo + number }.result).to be_success.with_data(value: 15)
+          expect(service.collection(chain_enumerator([0, 1, 2, 3, 4, 5])).reduce { |memo, number| memo + number }.result).to be_success.with_data(value: 15)
+          expect(service.collection([0, 1, 2, 3, 4, 5]).reduce { |memo, number| memo + number }.result).to be_success.with_data(value: 15)
+
+          expect(service.collection(set([0, 1, 2, 3, 4, 5])).reduce { |memo, number| memo + number }.result).to be_success.with_data(value: 15)
+          expect({0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}.reduce { |memo, number| memo + number }).to eq([0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5])
+          expect(service.collection({0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}).reduce { |memo, number| memo + number }.result).to be_success.with_data(value: [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5])
+          expect(service.collection((0..5)).reduce { |memo, number| memo + number }.result).to be_success.with_data(value: 15)
+
+          # NOTE: Initial, block.
+          expect([0, 1, 2, 3, 4, 5].reduce(10) { |memo, number| memo + number }).to eq(25)
+          expect(service.collection(enumerable([0, 1, 2, 3, 4, 5])).reduce(10) { |memo, number| memo + number }.result).to be_success.with_data(value: 25)
+          expect(service.collection(enumerator([0, 1, 2, 3, 4, 5])).reduce(10) { |memo, number| memo + number }.result).to be_success.with_data(value: 25)
+          expect(service.collection(lazy_enumerator([0, 1, 2, 3, 4, 5])).reduce(10) { |memo, number| memo + number }.result).to be_success.with_data(value: 25)
+          expect(service.collection(chain_enumerator([0, 1, 2, 3, 4, 5])).reduce(10) { |memo, number| memo + number }.result).to be_success.with_data(value: 25)
+          expect(service.collection([0, 1, 2, 3, 4, 5]).reduce(10) { |memo, number| memo + number }.result).to be_success.with_data(value: 25)
+
+          expect(service.collection(set([0, 1, 2, 3, 4, 5])).reduce(10) { |memo, number| memo + number }.result).to be_success.with_data(value: 25)
+          expect({0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}.reduce([10, 10]) { |memo, number| memo + number }).to eq([10, 10, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5])
+          expect(service.collection({0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}).reduce([10, 10]) { |memo, number| memo + number }.result).to be_success.with_data(value: [10, 10, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5])
+          expect(service.collection((0..5)).reduce(10) { |memo, number| memo + number }.result).to be_success.with_data(value: 25)
+
+          # NOTE: Step with no outputs.
+          expect { service.collection(enumerable([0, 1, 2, 3, 4, 5])).reduce { |memo, number| step add_numbers_service, in: [number: -> { memo }, other_number: -> { number }] }.result }.to raise_error(NoMethodError).with_message("undefined method '+' for true")
+          expect { service.collection(enumerator([0, 1, 2, 3, 4, 5])).reduce { |memo, number| step add_numbers_service, in: [number: -> { memo }, other_number: -> { number }] }.result }.to raise_error(NoMethodError).with_message("undefined method '+' for true")
+          expect { service.collection(lazy_enumerator([0, 1, 2, 3, 4, 5])).reduce { |memo, number| step add_numbers_service, in: [number: -> { memo }, other_number: -> { number }] }.result }.to raise_error(NoMethodError).with_message("undefined method '+' for true")
+          expect { service.collection(chain_enumerator([0, 1, 2, 3, 4, 5])).reduce { |memo, number| step add_numbers_service, in: [number: -> { memo }, other_number: -> { number }] }.result }.to raise_error(NoMethodError).with_message("undefined method '+' for true")
+          expect { service.collection([0, 1, 2, 3, 4, 5]).reduce { |memo, number| step add_numbers_service, in: [number: -> { memo }, other_number: -> { number }] }.result }.to raise_error(NoMethodError).with_message("undefined method '+' for true")
+
+          expect { service.collection(set([0, 1, 2, 3, 4, 5])).reduce { |memo, number| step add_numbers_service, in: [number: -> { memo }, other_number: -> { number }] }.result }.to raise_error(NoMethodError).with_message("undefined method '+' for true")
+          expect { service.collection({0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}).reduce(0) { |memo, (key, value)| step add_numbers_service, in: [number: -> { memo }, other_number: -> { value }] }.result }.to raise_error(NoMethodError).with_message("undefined method '+' for true")
+          expect { service.collection((0..5)).reduce { |memo, number| step add_numbers_service, in: [number: -> { memo }, other_number: -> { number }] }.result }.to raise_error(NoMethodError).with_message("undefined method '+' for true")
+
+          # NOTE: Step with one output.
+          expect(service.collection(enumerable([0, 1, 2])).reduce { |memo, number| step add_numbers_service, in: [number: -> { memo }, other_number: -> { number }], out: :sum }.result).to be_success.with_data(value: 3)
+          expect(service.collection(enumerator([0, 1, 2])).reduce { |memo, number| step add_numbers_service, in: [number: -> { memo }, other_number: -> { number }], out: :sum }.result).to be_success.with_data(value: 3)
+          expect(service.collection(lazy_enumerator([0, 1, 2])).reduce { |memo, number| step add_numbers_service, in: [number: -> { memo }, other_number: -> { number }], out: :sum }.result).to be_success.with_data(value: 3)
+          expect(service.collection(chain_enumerator([0, 1, 2])).reduce { |memo, number| step add_numbers_service, in: [number: -> { memo }, other_number: -> { number }], out: :sum }.result).to be_success.with_data(value: 3)
+          expect(service.collection([0, 1, 2]).reduce { |memo, number| step add_numbers_service, in: [number: -> { memo }, other_number: -> { number }], out: :sum }.result).to be_success.with_data(value: 3)
+
+          expect(service.collection(set([0, 1, 2])).reduce { |memo, number| step add_numbers_service, in: [number: -> { memo }, other_number: -> { number }], out: :sum }.result).to be_success.with_data(value: 3)
+          expect(service.collection({0 => 0, 1 => 1, 2 => 2}).reduce(0) { |memo, (key, value)| step add_numbers_service, in: [number: -> { memo }, other_number: -> { value }], out: :sum }.result).to be_success.with_data(value: 3)
+          expect(service.collection((0..2)).reduce { |memo, number| step add_numbers_service, in: [number: -> { memo }, other_number: -> { number }], out: :sum }.result).to be_success.with_data(value: 3)
+
+          # NOTE: Step with multiple outputs.
+          expect(service.collection(enumerable([0, 1, 2, 3, 4, 5])).reduce({sum: 0}) { |memo, number| step add_numbers_service, in: [number: -> { memo[:sum] }, other_number: -> { number }], out: [:sum, :operator] }.result).to be_success.with_data(value: {sum: 15, operator: "+"})
+          expect(service.collection(enumerator([0, 1, 2, 3, 4, 5])).reduce({sum: 0}) { |memo, number| step add_numbers_service, in: [number: -> { memo[:sum] }, other_number: -> { number }], out: [:sum, :operator] }.result).to be_success.with_data(value: {sum: 15, operator: "+"})
+          expect(service.collection(lazy_enumerator([0, 1, 2, 3, 4, 5])).reduce({sum: 0}) { |memo, number| step add_numbers_service, in: [number: -> { memo[:sum] }, other_number: -> { number }], out: [:sum, :operator] }.result).to be_success.with_data(value: {sum: 15, operator: "+"})
+          expect(service.collection(chain_enumerator([0, 1, 2, 3, 4, 5])).reduce({sum: 0}) { |memo, number| step add_numbers_service, in: [number: -> { memo[:sum] }, other_number: -> { number }], out: [:sum, :operator] }.result).to be_success.with_data(value: {sum: 15, operator: "+"})
+          expect(service.collection([0, 1, 2, 3, 4, 5]).reduce({sum: 0}) { |memo, number| step add_numbers_service, in: [number: -> { memo[:sum] }, other_number: -> { number }], out: [:sum, :operator] }.result).to be_success.with_data(value: {sum: 15, operator: "+"})
+
+          expect(service.collection(set([0, 1, 2, 3, 4, 5])).reduce({sum: 0}) { |memo, number| step add_numbers_service, in: [number: -> { memo[:sum] }, other_number: -> { number }], out: [:sum, :operator] }.result).to be_success.with_data(value: {sum: 15, operator: "+"})
+          expect(service.collection({0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}).reduce({sum: 0}) { |memo, (key, value)| step add_numbers_service, in: [number: -> { memo[:sum] }, other_number: -> { value }], out: [:sum, :operator] }.result).to be_success.with_data(value: {sum: 15, operator: "+"})
+          expect(service.collection((0..5)).reduce({sum: 0}) { |memo, number| step add_numbers_service, in: [number: -> { memo[:sum] }, other_number: -> { number }], out: [:sum, :operator] }.result).to be_success.with_data(value: {sum: 15, operator: "+"})
+
+          # NOTE: Error result.
+          expect(service.collection(enumerable([0, -1, :exception])).reduce { |memo, number| step add_numbers_service, in: [number: -> { memo }, other_number: -> { number }], out: :sum }.result).to be_error.without_data
+          expect(service.collection(enumerator([0, -1, :exception])).reduce { |memo, number| step add_numbers_service, in: [number: -> { memo }, other_number: -> { number }], out: :sum }.result).to be_error.without_data
+          expect(service.collection(lazy_enumerator([0, -1, :exception])).reduce { |memo, number| step add_numbers_service, in: [number: -> { memo }, other_number: -> { number }], out: :sum }.result).to be_error.without_data
+          expect(service.collection(chain_enumerator([0, -1, :exception])).reduce { |memo, number| step add_numbers_service, in: [number: -> { memo }, other_number: -> { number }], out: :sum }.result).to be_error.without_data
+          expect(service.collection([0, -1, :exception]).reduce { |memo, number| step add_numbers_service, in: [number: -> { memo }, other_number: -> { number }], out: :sum }.result).to be_error.without_data
+          expect(service.collection(set([0, -1, :exception])).reduce { |memo, number| step add_numbers_service, in: [number: -> { memo }, other_number: -> { number }], out: :sum }.result).to be_error.without_data
+
+          expect(service.collection({0 => 0, -1 => -1, :exception => :exception}).reduce(0) { |memo, (key, value)| step add_numbers_service, in: [number: -> { memo }, other_number: -> { value }], out: :sum }.result).to be_error.without_data
+          expect((-1..-1).reduce { |memo, number| raise }).to eq(-1)
+          expect(service.collection((-1..-1)).reduce { |memo, number| step add_numbers_service, in: [number: -> { memo }, other_number: -> { number }], out: :sum }.result).to be_success.with_data(value: -1)
+
+          # NOTE: Error propagation.
+          expect(service.collection(enumerable([:success, :error, :exception])).filter { |status| step status_service, in: [status: -> { status }] }.reduce { |memo, number| memo + number }.result).to be_error.without_data
+          expect(service.collection(enumerator([:success, :error, :exception])).filter { |status| step status_service, in: [status: -> { status }] }.reduce { |memo, number| memo + number }.result).to be_error.without_data
+          expect(service.collection(lazy_enumerator([:success, :error, :exception])).filter { |status| step status_service, in: [status: -> { status }] }.reduce { |memo, number| memo + number }.result).to be_error.without_data
+          expect(service.collection(chain_enumerator([:success, :error, :exception])).filter { |status| step status_service, in: [status: -> { status }] }.reduce { |memo, number| memo + number }.result).to be_error.without_data
+          expect(service.collection([:success, :error, :exception]).filter { |status| step status_service, in: [status: -> { status }] }.reduce { |memo, number| memo + number }.result).to be_error.without_data
+
+          expect(service.collection(set([:success, :error, :exception])).filter { |status| step status_service, in: [status: -> { status }] }.reduce { |memo, number| memo + number }.result).to be_error.without_data
+          expect(service.collection({success: :success, error: :error, exception: :exception}).filter { |key, value| step status_service, in: [status: -> { value }] }.reduce(0) { |memo, (key, value)| memo + value }.result).to be_error.without_data
+          expect(service.collection((:error..:error)).filter { |status| step status_service, in: [status: -> { status }] }.reduce { |memo, number| memo + number }.result).to be_error.without_data
+
+          # NOTE: Usage on terminal chaining.
+          expect { service.collection(enumerable([:success, :exception, :exception])).first.reduce { |memo, number| memo + number }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection(enumerator([:success, :exception, :exception])).first.reduce { |memo, number| memo + number }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection(lazy_enumerator([:success, :exception, :exception])).first.reduce { |memo, number| memo + number }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection(chain_enumerator([:success, :exception, :exception])).first.reduce { |memo, number| memo + number }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection([:success, :exception, :exception]).first.reduce { |memo, number| memo + number }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection(set([:success, :exception, :exception])).first.reduce { |memo, number| memo + number }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+
+          expect { service.collection({success: :success, exception: :exception}).first.reduce { |memo, (key, value)| memo + value }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection((:success..:success)).first.reduce { |memo, number| memo + number }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+        end
+      end
 
       describe "#reject" do
         specify do

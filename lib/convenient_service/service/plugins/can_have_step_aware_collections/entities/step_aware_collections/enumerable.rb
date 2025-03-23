@@ -757,7 +757,7 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
               def reduce(*args, &iteration_block)
-                process_as_object(*args, iteration_block) do |*args, &step_aware_iteration_block|
+                process_as_object(*args, iteration_block) do |*args, step_aware_iteration_block|
                   enumerable.reduce(*args, &step_aware_iteration_block)
                 end
               end
