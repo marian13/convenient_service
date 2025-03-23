@@ -735,7 +735,7 @@ module ConvenientService
                     enumerable.partition(&step_aware_iteration_block)
                   end
                 else
-                  process_as_enumerator do
+                  process_as_enumerator(nil) do
                     enumerable.partition
                   end
                 end
