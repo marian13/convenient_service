@@ -523,11 +523,11 @@ module ConvenientService
               #
               def group_by(&iteration_block)
                 if iteration_block
-                  process_as_enumerable(iteration_block) do |step_aware_iteration_block|
+                  process_as_hash(iteration_block) do |step_aware_iteration_block|
                     enumerable.group_by(&step_aware_iteration_block)
                   end
                 else
-                  process_as_enumerator do
+                  process_as_enumerator(nil) do
                     enumerable.group_by
                   end
                 end
