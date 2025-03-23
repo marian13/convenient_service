@@ -323,7 +323,7 @@ module ConvenientService
                     enumerable.each_slice(n, &step_aware_iteration_block)
                   end
                 else
-                  process_as_enumerator(n) do |n|
+                  process_as_enumerator(n, nil) do |n|
                     enumerable.each_slice(n)
                   end
                 end
