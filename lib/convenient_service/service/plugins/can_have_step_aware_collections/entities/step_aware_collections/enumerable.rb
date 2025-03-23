@@ -116,13 +116,11 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
               def chain(*enums)
-                return step_aware_chain_enumerator_from(enumerable.chain) if propagated_result
+                enumerables = enums.map { |collection| cast_step_aware_collection(collection) }.map(&:enumerable)
 
-                step_aware_collections = enums.map { |enum| cast_step_aware_collection(enum) }
-
-                chain_enumerator = enumerable.chain(*step_aware_collections.map(&:enumerable))
-
-                step_aware_chain_enumerator_from(chain_enumerator)
+                process_as_chain_enumerator(*enumerables, nil) do |*enums, step_aware_iteration_block|
+                  enumerable.chain(*enums)
+                end
               end
 
               ##

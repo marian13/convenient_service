@@ -301,6 +301,27 @@ module ConvenientService
               end
 
               ##
+              # @param args [Array<Object>]
+              # @param iteration_block [Proc, nil]
+              # @param iterator_block [Proc]
+              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Enumerator]
+              #
+              def process_as_chain_enumerator(*args, iteration_block, &iterator_block)
+                return step_aware_chain_enumerator_from(enumerable.chain) if propagated_result
+
+                step_aware_iteration_block =
+                  if iteration_block
+                    step_aware_iteration_block_from(iteration_block) do |error_result|
+                      throw :propagated_result, {propagated_result: error_result}
+                    end
+                  end
+
+                chain_enumerator = yield(*args, step_aware_iteration_block)
+
+                step_aware_chain_enumerator_from(chain_enumerator)
+              end
+
+              ##
               # @param iteration_block [Proc]
               # @param error_block [Proc]
               # @return [Proc]
@@ -420,7 +441,7 @@ module ConvenientService
               ##
               # @param chain_enumerator [Enumerator::Chain]
               # @param propagated_result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result, nil]
-              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Enumerator]
+              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::ChainEnumerator]
               #
               def step_aware_chain_enumerator_from(chain_enumerator, propagated_result = self.propagated_result)
                 Entities::StepAwareCollections::ChainEnumerator.new(chain_enumerator: chain_enumerator, organizer: organizer, propagated_result: propagated_result)
