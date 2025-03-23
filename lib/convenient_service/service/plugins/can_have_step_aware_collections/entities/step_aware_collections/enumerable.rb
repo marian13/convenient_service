@@ -126,7 +126,6 @@ module ConvenientService
               end
 
               ##
-              # TODO: !!!
               # @param iteration_block [Proc]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
@@ -137,25 +136,13 @@ module ConvenientService
               end
 
               ##
-              # TODO: !!!
               # @param iteration_block [Proc]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
               def chunk_while(&iteration_block)
-                if propagated_result
-                  return Entities::StepAwareCollections::ChunkWhileEnumerator.new(
-                    enumerable: enumerable,
-                    iteration_block: iteration_block,
-                    organizer: organizer,
-                    propagated_result: propagated_result
-                  )
+                process_as_enumerator_generator(iteration_block) do |step_aware_iteration_block|
+                  enumerable.chunk_while(&step_aware_iteration_block)
                 end
-
-                Entities::StepAwareCollections::ChunkWhileEnumerator.new(
-                  enumerable: enumerable,
-                  iteration_block: iteration_block,
-                  organizer: organizer
-                )
               end
 
               ##

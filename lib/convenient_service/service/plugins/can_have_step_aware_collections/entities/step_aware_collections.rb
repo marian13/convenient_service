@@ -14,6 +14,3 @@ require_relative "step_aware_collections/array"
 require_relative "step_aware_collections/hash"
 require_relative "step_aware_collections/range"
 require_relative "step_aware_collections/set"
-
-require_relative "step_aware_collections/chunk_enumerator"
-require_relative "step_aware_collections/chunk_while_enumerator"
