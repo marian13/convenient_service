@@ -917,6 +917,15 @@ module ConvenientService
               end
 
               ##
+              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
+              #
+              def to_set
+                process_as_set(nil) do
+                  enumerable.to_set
+                end
+              end
+
+              ##
               # @param iteration_block [Proc, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #

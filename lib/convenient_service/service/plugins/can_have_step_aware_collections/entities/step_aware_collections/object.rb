@@ -456,6 +456,13 @@ module ConvenientService
               ##
               # @raise [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining]
               #
+              def to_set(...)
+                ::ConvenientService.raise Exceptions::AlreadyUsedTerminalChaining.new
+              end
+
+              ##
+              # @raise [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining]
+              #
               def uniq(...)
                 ::ConvenientService.raise Exceptions::AlreadyUsedTerminalChaining.new
               end

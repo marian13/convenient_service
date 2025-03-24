@@ -30,10 +30,10 @@ module ConvenientService
               end
 
               ##
-              # @return [Proc]
+              # @return [Symbol]
               #
               def default_evaluate_by
-                ->(set) { set }
+                :to_set
               end
 
               ##

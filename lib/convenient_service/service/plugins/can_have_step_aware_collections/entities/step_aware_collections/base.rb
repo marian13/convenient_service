@@ -193,12 +193,12 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Object]
               #
               def process_as_set(*args, iteration_block, &iterator_block)
-                return step_aware_set_from(set) if propagated_result
+                return step_aware_set_from(enumerable.to_set) if propagated_result
 
                 step_aware_iteration_block =
                   if iteration_block
                     step_aware_iteration_block_from(iteration_block) do |error_result|
-                      return step_aware_set_from(set, error_result)
+                      return step_aware_set_from(enumerable.to_set, error_result)
                     end
                   end
 
@@ -207,7 +207,8 @@ module ConvenientService
                     {values: yield(*args, step_aware_iteration_block)}
                   end
 
-                return step_aware_set_from(set, response[:propagated_result]) if response.has_key?(:propagated_result)
+                # TODO: !!!
+                return step_aware_set_from(enumerable, response[:propagated_result]) if response.has_key?(:propagated_result)
 
                 step_aware_set_from(response[:values])
               end
@@ -219,6 +220,7 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Object]
               #
               def process_as_range(*args, iteration_block, &iterator_block)
+                # TODO: !!!
                 return step_aware_range_from(range) if propagated_result
 
                 step_aware_iteration_block =

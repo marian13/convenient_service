@@ -315,6 +315,15 @@ module ConvenientService
               end
 
               ##
+              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
+              #
+              def to_set
+                process_as_set(nil) do
+                  lazy_enumerator.to_set
+                end
+              end
+
+              ##
               # TODO !!! Object.
               # @param iteration_block [Proc, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]

@@ -1280,6 +1280,8 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
         end
       end
 
+      # compact
+
       # rubocop:disable Performance/Size
       describe "#count" do
         specify do
@@ -6663,6 +6665,54 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
         end
       end
 
+      describe "#to_set" do
+        specify do
+          # NOTE: Empty collection.
+          expect([].to_set).to eq(Set.new([]))
+          expect(service.collection(enumerable([])).to_set.result).to be_success.with_data(values: Set.new([]))
+          expect(service.collection(enumerator([])).to_set.result).to be_success.with_data(values: Set.new([]))
+          expect(service.collection(lazy_enumerator([])).to_set.result).to be_success.with_data(values: Set.new([]))
+          expect(service.collection(chain_enumerator([])).to_set.result).to be_success.with_data(values: Set.new([]))
+          expect(service.collection([]).to_set.result).to be_success.with_data(values: Set.new([]))
+          expect(service.collection({}).to_set.result).to be_success.with_data(values: Set.new([]))
+          expect(service.collection((:success...:success)).to_set.result).to be_success.with_data(values: Set.new([]))
+          expect(service.collection(set([])).to_set.result).to be_success.with_data(values: Set.new([]))
+
+          # NOTE: Not empty collection.
+          expect([:success, :success, :success].to_set).to eq(Set.new([:success]))
+          expect(service.collection(enumerable([:success, :success, :success])).to_set.result).to be_success.with_data(values: Set.new([:success]))
+          expect(service.collection(enumerator([:success, :success, :success])).to_set.result).to be_success.with_data(values: Set.new([:success]))
+          expect(service.collection(lazy_enumerator([:success, :success, :success])).to_set.result).to be_success.with_data(values: Set.new([:success]))
+          expect(service.collection(chain_enumerator([:success, :success, :success])).to_set.result).to be_success.with_data(values: Set.new([:success]))
+          expect(service.collection([:success, :success, :success]).to_set.result).to be_success.with_data(values: Set.new([:success]))
+          expect(service.collection(set([:success])).to_set.result).to be_success.with_data(values: Set.new([:success]))
+          expect(service.collection({success: :success}).to_set.result).to be_success.with_data(values: Set.new([[:success, :success]]))
+          expect(service.collection((:success..:success)).to_set.result).to be_success.with_data(values: Set.new([:success]))
+
+          # NOTE: Error propagation.
+          expect(service.collection(enumerable([:success, :error, :exception])).select { |status| step status_service, in: [status: -> { status }] }.to_set.result).to be_error.without_data
+          expect(service.collection(enumerator([:success, :error, :exception])).select { |status| step status_service, in: [status: -> { status }] }.to_set.result).to be_error.without_data
+          expect(service.collection(lazy_enumerator([:success, :error, :exception])).select { |status| step status_service, in: [status: -> { status }] }.to_set.result).to be_error.without_data
+          expect(service.collection(chain_enumerator([:success, :error, :exception])).select { |status| step status_service, in: [status: -> { status }] }.to_set.result).to be_error.without_data
+          expect(service.collection([:success, :error, :exception]).select { |status| step status_service, in: [status: -> { status }] }.to_set.result).to be_error.without_data
+          expect(service.collection(set([:success, :error, :exception])).select { |status| step status_service, in: [status: -> { status }] }.to_set.result).to be_error.without_data
+
+          expect(service.collection({success: :success, error: :error, exception: :exception}).select { |key, value| step status_service, in: [status: -> { value }] }.to_set.result).to be_error.without_data
+          expect(service.collection((:error..:error)).select { |status| step status_service, in: [status: -> { status }] }.to_set.result).to be_error.without_data
+
+          # NOTE: Usage on terminal chaining.
+          expect { service.collection(enumerable([:success, :exception, :exception])).first.to_set.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection(enumerator([:success, :exception, :exception])).first.to_set.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection(lazy_enumerator([:success, :exception, :exception])).first.to_set.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection(chain_enumerator([:success, :exception, :exception])).first.to_set.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection([:success, :exception, :exception]).first.to_set.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection(set([:success, :exception, :exception])).first.to_set.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+
+          expect { service.collection({success: :success, exception: :exception}).first.to_set.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection((:success..:success)).first.to_set.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+        end
+      end
+
       describe "#uniq" do
         specify do
           # NOTE: Empty collection.
@@ -6962,6 +7012,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
       # more reliable check than number.to_s.ord
       # review missing no block for set, hash
       # cast in zip and chain
+      # return step_aware_set_from(enumerable.to_set,
     end
   end
 end
