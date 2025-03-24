@@ -54,6 +54,22 @@ module ConvenientService
                   arithmetic_sequence_enumerator.each(&step_aware_iteration_block)
                 end
               end
+
+              ##
+              # @param n [Integer, nil]
+              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Array, ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Object]
+              #
+              def first(n = nil)
+                if n
+                  process_as_array(n, nil) do |n|
+                    arithmetic_sequence_enumerator.first(n)
+                  end
+                else
+                  process_as_object_or_nil(nil) do
+                    arithmetic_sequence_enumerator.first
+                  end
+                end
+              end
             end
           end
         end
