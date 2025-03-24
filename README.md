@@ -73,5 +73,5 @@ This library is under heavy development. Most of the public API is polished, but
 ---
 
 <!-- author:start -->
-Copyright (c) 2022-2024 Marian Kostyk.
+Copyright (c) 2022-2025 Marian Kostyk.
 <!-- author:end -->
