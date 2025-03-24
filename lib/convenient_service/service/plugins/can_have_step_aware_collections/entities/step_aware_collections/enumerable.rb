@@ -176,6 +176,15 @@ module ConvenientService
               end
 
               ##
+              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
+              #
+              def compact
+                process_as_enumerable(nil) do
+                  enumerable.compact
+                end
+              end
+
+              ##
               # @overload count
               #   @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #

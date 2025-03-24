@@ -1280,7 +1280,54 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
         end
       end
 
-      # compact
+      describe "#compact" do
+        specify do
+          # NOTE: Empty collection.
+          expect([].compact).to eq([])
+          expect(service.collection(enumerable([])).compact.result).to be_success.with_data(values: [])
+          expect(service.collection(enumerator([])).compact.result).to be_success.with_data(values: [])
+          expect(service.collection(lazy_enumerator([])).compact.result).to be_success.with_data(values: [])
+          expect(service.collection(chain_enumerator([])).compact.result).to be_success.with_data(values: [])
+          expect(service.collection([]).compact.result).to be_success.with_data(values: [])
+          expect(service.collection(set([])).compact.result).to be_success.with_data(values: [])
+          expect(service.collection({}).compact.result).to be_success.with_data(values: [])
+          expect(service.collection((:success...:success)).compact.result).to be_success.with_data(values: [])
+
+          # NOTE: No block.
+          expect([:success, nil, :success, false].compact.to_a).to eq([:success, :success, false])
+          expect(service.collection(enumerable([:success, nil, :success, false])).compact.result).to be_success.with_data(values: [:success, :success, false])
+          expect(service.collection(enumerator([:success, nil, :success, false])).compact.result).to be_success.with_data(values: [:success, :success, false])
+          expect(service.collection(lazy_enumerator([:success, nil, :success, false])).compact.result).to be_success.with_data(values: [:success, :success, false])
+          expect(service.collection(chain_enumerator([:success, nil, :success, false])).compact.result).to be_success.with_data(values: [:success, :success, false])
+          expect(service.collection([:success, nil, :success, false]).compact.result).to be_success.with_data(values: [:success, :success, false])
+
+          expect(service.collection(set([:success, nil, false])).compact.result).to be_success.with_data(values: [:success, false])
+          expect(service.collection({:success => :success, nil => nil, false => false}).compact.result).to be_success.with_data(values: [[:success, :success], [false, false]])
+          expect(service.collection((:success..:success)).compact.result).to be_success.with_data(values: [:success])
+
+          # NOTE: Error propagation.
+          expect(service.collection(enumerable([:success, :error, :exception])).select { |status| step status_service, in: [status: -> { status }] }.compact.result).to be_error.without_data
+          expect(service.collection(enumerator([:success, :error, :exception])).select { |status| step status_service, in: [status: -> { status }] }.compact.result).to be_error.without_data
+          expect(service.collection(lazy_enumerator([:success, :error, :exception])).select { |status| step status_service, in: [status: -> { status }] }.compact.result).to be_error.without_data
+          expect(service.collection(chain_enumerator([:success, :error, :exception])).select { |status| step status_service, in: [status: -> { status }] }.compact.result).to be_error.without_data
+          expect(service.collection([:success, :error, :exception]).select { |status| step status_service, in: [status: -> { status }] }.compact.result).to be_error.without_data
+
+          expect(service.collection(set([:success, :error, :exception])).select { |status| step status_service, in: [status: -> { status }] }.compact.result).to be_error.without_data
+          expect(service.collection({success: :success, error: :error, exception: :exception}).select { |key, value| step status_service, in: [status: -> { value }] }.compact.result).to be_error.without_data
+          expect(service.collection((:error..:error)).select { |status| step status_service, in: [status: -> { status }] }.compact.result).to be_error.without_data
+
+          # NOTE: Usage on terminal chaining.
+          expect { service.collection(enumerable([:success, :exception, :exception])).first.compact.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection(enumerator([:success, :exception, :exception])).first.compact.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection(lazy_enumerator([:success, :exception, :exception])).first.compact.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection(chain_enumerator([:success, :exception, :exception])).first.compact.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection([:success, :exception, :exception]).first.compact.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+
+          expect { service.collection(set([:success, :exception, :exception])).first.compact.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection({success: :success, exception: :exception}).first.compact { |key, value| condition[value] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.collection((:success..:success)).first.compact.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Exceptions::AlreadyUsedTerminalChaining)
+        end
+      end
 
       # rubocop:disable Performance/Size
       describe "#count" do

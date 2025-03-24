@@ -96,6 +96,15 @@ module ConvenientService
               end
 
               ##
+              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
+              #
+              def compact
+                process_as_lazy_enumerator(nil) do
+                  lazy_enumerator.compact
+                end
+              end
+
+              ##
               # @param n [Integer]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Base]
               #
