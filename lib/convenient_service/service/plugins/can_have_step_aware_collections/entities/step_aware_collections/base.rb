@@ -324,6 +324,27 @@ module ConvenientService
               end
 
               ##
+              # @param args [Array<Object>]
+              # @param iteration_block [Proc, nil]
+              # @param iterator_block [Proc]
+              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Enumerator]
+              #
+              def process_as_arithmetic_sequence_enumerator(*args, iteration_block, &iterator_block)
+                return step_aware_arithmetic_sequence_enumerator_from(enumerable) if propagated_result
+
+                step_aware_iteration_block =
+                  if iteration_block
+                    step_aware_iteration_block_from(iteration_block) do |error_result|
+                      return step_aware_arithmetic_sequence_enumerator_from(enumerable, error_result)
+                    end
+                  end
+
+                arithmetic_sequence_enumerator = yield(*args, step_aware_iteration_block)
+
+                step_aware_arithmetic_sequence_enumerator_from(arithmetic_sequence_enumerator)
+              end
+
+              ##
               # @param iteration_block [Proc]
               # @param error_block [Proc]
               # @return [Proc]
@@ -447,6 +468,15 @@ module ConvenientService
               #
               def step_aware_chain_enumerator_from(chain_enumerator, propagated_result = self.propagated_result)
                 Entities::StepAwareCollections::ChainEnumerator.new(chain_enumerator: chain_enumerator, organizer: organizer, propagated_result: propagated_result)
+              end
+
+              ##
+              # @param arithmetic_sequence_enumerator [Enumerator::ArithmeticSequence]
+              # @param propagated_result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result, nil]
+              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::ArithmeticSequence::Enumerator]
+              #
+              def step_aware_arithmetic_sequence_enumerator_from(arithmetic_sequence_enumerator, propagated_result = self.propagated_result)
+                Entities::StepAwareCollections::ArithmeticSequenceEnumerator.new(arithmetic_sequence_enumerator: arithmetic_sequence_enumerator, organizer: organizer, propagated_result: propagated_result)
               end
 
               ##

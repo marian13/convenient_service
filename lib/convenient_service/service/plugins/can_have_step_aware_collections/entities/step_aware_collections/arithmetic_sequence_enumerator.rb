@@ -6,7 +6,7 @@ module ConvenientService
       module CanHaveStepAwareCollections
         module Entities
           module StepAwareCollections
-            class ArithmeticSequenceEnumerator < Entities::StepAwareCollections::Enumerable
+            class ArithmeticSequenceEnumerator < Entities::StepAwareCollections::Enumerator
               ##
               # @api private
               #
@@ -30,12 +30,29 @@ module ConvenientService
               end
 
               ##
+              # @return [Proc]
+              #
+              def default_evaluate_by
+                ->(arithmetic_sequence_enumerator) { arithmetic_sequence_enumerator }
+              end
+
+              ##
               # @api private
               #
               # @return [Enumerator::ArithmeticSequence]
               #
               def enumerable
                 arithmetic_sequence_enumerator
+              end
+
+              ##
+              # @param iteration_block [Proc, nil]
+              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::ArithmeticSequenceEnumerator]
+              #
+              def each(&iteration_block)
+                process_as_arithmetic_sequence_enumerator(iteration_block) do |step_aware_iteration_block|
+                  arithmetic_sequence_enumerator.each(&step_aware_iteration_block)
+                end
               end
             end
           end
