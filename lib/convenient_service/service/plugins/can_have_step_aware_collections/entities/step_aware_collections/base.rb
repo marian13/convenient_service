@@ -90,6 +90,16 @@ module ConvenientService
               end
 
               ##
+              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Object]
+              #
+              alias_method :process_as_string, :process_as_object
+
+              ##
+              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareCollections::Entities::StepAwareCollections::Object]
+              #
+              alias_method :process_as_integer, :process_as_object
+
+              ##
               # @param args [Array<Object>]
               # @param iteration_block [Proc, nil]
               # @param iterator_block [Proc]
