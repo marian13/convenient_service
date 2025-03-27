@@ -61,7 +61,7 @@ module ConvenientService
             use ConvenientService::Plugins::Service::HasNegatedJSendResult::Concern if options.include?(:essential)
             use ConvenientService::Plugins::Service::CanHaveSteps::Concern if options.include?(:essential)
             use ConvenientService::Plugins::Service::CanHaveConnectedSteps::Concern if options.include?(:essential)
-            use ConvenientService::Plugins::Service::CanHaveStepAwareCollections::Concern if options.include?(:essential)
+            use ConvenientService::Plugins::Service::CanHaveStepAwareEnumerables::Concern if options.include?(:essential)
             use ConvenientService::Plugins::Common::CanHaveCallbacks::Concern if options.include?(:callbacks)
             use ConvenientService::Plugins::Service::CanHaveFallbacks::Concern if options.include?(:fallbacks)
             use ConvenientService::Plugins::Service::HasInspect::Concern if options.include?(:inspect)
