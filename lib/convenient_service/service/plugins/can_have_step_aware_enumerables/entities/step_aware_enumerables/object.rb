@@ -24,6 +24,18 @@ module ConvenientService
               private
 
               ##
+              # @param method_name [Symbol, String]
+              # @param include_private [Boolean]
+              # @return [Boolean]
+              #
+              # @internal
+              #   TODO: Actual behaviour.
+              #
+              def respond_to_missing?(method_name, include_private = false)
+                false
+              end
+
+              ##
               # @raise [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining]
               #
               def method_missing(method, *args, **kwargs, &block)

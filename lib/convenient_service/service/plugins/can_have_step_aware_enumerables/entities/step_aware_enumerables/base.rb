@@ -358,7 +358,6 @@ module ConvenientService
               end
 
               ##
-              # @param data_key [Symbol, nil]
               # @param evaluate_by [String, Symbol, Proc]
               # @param result_block [Proc]
               # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
