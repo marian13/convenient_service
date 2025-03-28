@@ -142,12 +142,14 @@ module ConvenientService
                 end
               end
 
-              ##
-              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
-              #
-              def compact
-                with_processing_return_value_as_enumerable(nil) do
-                  enumerable.compact
+              if Dependencies.ruby.version >= 3.1
+                ##
+                # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
+                #
+                def compact
+                  with_processing_return_value_as_enumerable(nil) do
+                    enumerable.compact
+                  end
                 end
               end
 
