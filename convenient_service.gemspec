@@ -256,7 +256,7 @@ Gem::Specification.new do |spec|
   # Used for linting Ruby files.
   # - https://github.com/rubocop/rubocop
   #
-  spec.add_development_dependency "rubocop", "~> 1.61.0"
+  spec.add_development_dependency "rubocop", "~> 1.61.0" if ConvenientService::Dependencies.ruby.mri?
 
   ##
   # Used as a set of rules for rubocop for linting common performance issues in Ruby files.
@@ -274,25 +274,25 @@ Gem::Specification.new do |spec|
   # Used as a set of rules for rubocop for linting magic numbers in Ruby files.
   # - https://github.com/rubocop/rubocop-magic_numbers
   #
-  spec.add_development_dependency "rubocop-magic_numbers", "~> 0.4.0"
+  spec.add_development_dependency "rubocop-magic_numbers", "~> 0.4.0" if ConvenientService::Dependencies.ruby.mri?
 
   ##
   # Used as a set of rules for rubocop for linting RSpec files.
   # - https://github.com/rubocop/rubocop-rspec
   #
-  spec.add_development_dependency "rubocop-rspec", "~> 2.27.0"
+  spec.add_development_dependency "rubocop-rspec", "~> 2.27.0" if ConvenientService::Dependencies.ruby.mri?
 
   ##
   # Used as a set of rules for rubocop for enforcing Ruby gem packaging best practices.
   # - https://github.com/utkarsh2102/rubocop-packaging
   #
-  spec.add_development_dependency "rubocop-packaging", "~> 0.5.2"
+  spec.add_development_dependency "rubocop-packaging", "~> 0.5.2" if ConvenientService::Dependencies.ruby.mri?
 
   ##
   # Used as a set of rules for rubocop for linting common thread-safety issues in Ruby files.
   # - https://github.com/rubocop/rubocop-thread_safety
   #
-  spec.add_development_dependency "rubocop-thread_safety", "~> 0.5.1"
+  spec.add_development_dependency "rubocop-thread_safety", "~> 0.5.1" if ConvenientService::Dependencies.ruby.mri?
 
   spec.add_development_dependency "tty-prompt"
 
@@ -300,7 +300,7 @@ Gem::Specification.new do |spec|
   # Used as a set of rules for robocop for linting source files.
   # - https://github.com/testdouble/standard
   #
-  spec.add_development_dependency "standard", "~> 1.34.0"
+  spec.add_development_dependency "standard", "~> 1.34.0" if ConvenientService::Dependencies.ruby.mri?
 
   spec.add_development_dependency "simplecov"
 
@@ -346,7 +346,7 @@ Gem::Specification.new do |spec|
   # Used for linting YARD docs.
   # - https://github.com/zverok/yard-junk
   #
-  spec.add_development_dependency "yard-junk", "~> 0.0.10"
+  spec.add_development_dependency "yard-junk", "~> 0.0.10" if ConvenientService::Dependencies.ruby.mri?
 
   ##
   # The following gems are Convenient Service alternatives.
