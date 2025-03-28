@@ -7832,14 +7832,13 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
       # delegate
       # select no block
       # failure and error messages
-      # range skip evaluate_by
-      # arithmetic sequence
       # more reliable check than number.to_s.ord
       # review missing no block for set, hash
       # cast in zip and chain
-      # return step_aware_set_from(enumerable.to_set,
       # add specs for not wrapped objects
       # with_index, with_object specs, cast object
+      # find step aware default
+      # null_arguments to nil_arguments
     end
   end
 end

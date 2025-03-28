@@ -37,7 +37,7 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerable]
               #
               def each(&iteration_block)
-                with_processing_return_value_as_arithmetic_sequence_enumerator(iteration_block) do |step_aware_iteration_block|
+                with_processing_return_value_as_arithmetic_sequence_enumerator(arguments(&iteration_block)) do |&step_aware_iteration_block|
                   enumerable.each(&step_aware_iteration_block)
                 end
               end

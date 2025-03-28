@@ -75,82 +75,75 @@ module ConvenientService
               private
 
               ##
-              # @param args [Array<Object>]
-              # @param iteration_block [Proc, nil]
+              # @param iterator_arguments [ConvenientService::Support::Arguments]
               # @param iterator_block [Proc]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Object]
               #
-              def with_processing_return_value_as_object(*args, iteration_block, &iterator_block)
-                with_processing_return_value(*args, iteration_block, iterator_block) { |value, propagated_result| step_aware_object_from(value, propagated_result) }
+              def with_processing_return_value_as_object(iterator_arguments = Support::Arguments.null_arguments, &iterator_block)
+                with_processing_return_value(iterator_arguments, iterator_block) { |value, propagated_result| step_aware_object_from(value, propagated_result) }
               end
 
               ##
-              # @param args [Array<Object>]
-              # @param iteration_block [Proc, nil]
+              # @param iterator_arguments [ConvenientService::Support::Arguments]
               # @param iterator_block [Proc]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Object]
               #
-              def with_processing_return_value_as_object_or_nil(*args, iteration_block, &iterator_block)
-                with_processing_return_value(*args, iteration_block, iterator_block) { |value, propagated_result| step_aware_object_or_nil_from(value, propagated_result) }
+              def with_processing_return_value_as_object_or_nil(iterator_arguments = Support::Arguments.null_arguments, &iterator_block)
+                with_processing_return_value(iterator_arguments, iterator_block) { |value, propagated_result| step_aware_object_or_nil_from(value, propagated_result) }
               end
 
               ##
-              # @param args [Array<Object>]
-              # @param iteration_block [Proc, nil]
+              # @param iterator_arguments [ConvenientService::Support::Arguments]
               # @param iterator_block [Proc]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Object]
               #
-              def with_processing_return_value_as_boolean(*args, iteration_block, &iterator_block)
-                with_processing_return_value(*args, iteration_block, iterator_block) { |value, propagated_result| step_aware_boolean_from(value, propagated_result) }
+              def with_processing_return_value_as_boolean(iterator_arguments = Support::Arguments.null_arguments, &iterator_block)
+                with_processing_return_value(iterator_arguments, iterator_block) { |value, propagated_result| step_aware_boolean_from(value, propagated_result) }
               end
 
               ##
-              # @param args [Array<Object>]
-              # @param iteration_block [Proc, nil]
+              # @param iterator_arguments [ConvenientService::Support::Arguments]
               # @param iterator_block [Proc]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Object]
               #
-              def with_processing_return_value_as_enumerable(*args, iteration_block, &iterator_block)
-                with_processing_return_value(*args, iteration_block, iterator_block) { |value, propagated_result| step_aware_enumerable_from(value, propagated_result) }
+              def with_processing_return_value_as_enumerable(iterator_arguments = Support::Arguments.null_arguments, &iterator_block)
+                with_processing_return_value(iterator_arguments, iterator_block) { |value, propagated_result| step_aware_enumerable_from(value, propagated_result) }
               end
 
               ##
-              # @param args [Array<Object>]
-              # @param iteration_block [Proc, nil]
+              # @param iterator_arguments [ConvenientService::Support::Arguments]
               # @param iterator_block [Proc]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Object]
               #
-              def with_processing_return_value_as_array(*args, iteration_block, &iterator_block)
-                with_processing_return_value(*args, iteration_block, iterator_block) { |value, propagated_result| step_aware_array_from(value, propagated_result) }
+              def with_processing_return_value_as_array(iterator_arguments = Support::Arguments.null_arguments, &iterator_block)
+                with_processing_return_value(iterator_arguments, iterator_block) { |value, propagated_result| step_aware_array_from(value, propagated_result) }
               end
 
               ##
-              # @param args [Array<Object>]
-              # @param iteration_block [Proc, nil]
+              # @param iterator_arguments [ConvenientService::Support::Arguments]
               # @param iterator_block [Proc]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Object]
               #
-              def with_processing_return_value_as_hash(*args, iteration_block, &iterator_block)
-                with_processing_return_value(*args, iteration_block, iterator_block) { |value, propagated_result| step_aware_hash_from(value, propagated_result) }
+              def with_processing_return_value_as_hash(iterator_arguments = Support::Arguments.null_arguments, &iterator_block)
+                with_processing_return_value(iterator_arguments, iterator_block) { |value, propagated_result| step_aware_hash_from(value, propagated_result) }
               end
 
               ##
-              # @param args [Array<Object>]
-              # @param iteration_block [Proc, nil]
+              # @param iterator_arguments [ConvenientService::Support::Arguments]
               # @param iterator_block [Proc]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Object]
               #
-              def with_processing_return_value_as_set(*args, iteration_block, &iterator_block)
-                with_processing_return_value(*args, iteration_block, iterator_block) { |value, propagated_result| step_aware_set_from(value, propagated_result) }
+              def with_processing_return_value_as_set(iterator_arguments = Support::Arguments.null_arguments, &iterator_block)
+                with_processing_return_value(iterator_arguments, iterator_block) { |value, propagated_result| step_aware_set_from(value, propagated_result) }
               end
 
               ##
-              # @param args [Array<Object>]
+              # @param iterator_arguments [ConvenientService::Support::Arguments]
               # @param iterator_block [Proc]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerator]
               #
-              def with_processing_return_value_as_enumerator(*args, iteration_block, &iterator_block)
-                with_processing_return_value(*args, iteration_block, iterator_block) { |value, propagated_result| step_aware_enumerator_from(value, propagated_result) }
+              def with_processing_return_value_as_enumerator(iterator_arguments = Support::Arguments.null_arguments, &iterator_block)
+                with_processing_return_value(iterator_arguments, iterator_block) { |value, propagated_result| step_aware_enumerator_from(value, propagated_result) }
               end
 
               ##
@@ -159,33 +152,30 @@ module ConvenientService
               alias_method :with_processing_return_value_as_enumerator_generator, :with_processing_return_value_as_enumerator
 
               ##
-              # @param args [Array<Object>]
-              # @param iteration_block [Proc, nil]
+              # @param iterator_arguments [ConvenientService::Support::Arguments]
               # @param iterator_block [Proc]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerator]
               #
-              def with_processing_return_value_as_lazy_enumerator(*args, iteration_block, &iterator_block)
-                with_processing_return_value(*args, iteration_block, iterator_block) { |value, propagated_result| step_aware_lazy_enumerator_from(value, propagated_result) }
+              def with_processing_return_value_as_lazy_enumerator(iterator_arguments = Support::Arguments.null_arguments, &iterator_block)
+                with_processing_return_value(iterator_arguments, iterator_block) { |value, propagated_result| step_aware_lazy_enumerator_from(value, propagated_result) }
               end
 
               ##
-              # @param args [Array<Object>]
-              # @param iteration_block [Proc, nil]
+              # @param iterator_arguments [ConvenientService::Support::Arguments]
               # @param iterator_block [Proc]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerator]
               #
-              def with_processing_return_value_as_chain_enumerator(*args, iteration_block, &iterator_block)
-                with_processing_return_value(*args, iteration_block, iterator_block) { |value, propagated_result| step_aware_chain_enumerator_from(value, propagated_result) }
+              def with_processing_return_value_as_chain_enumerator(iterator_arguments = Support::Arguments.null_arguments, &iterator_block)
+                with_processing_return_value(iterator_arguments, iterator_block) { |value, propagated_result| step_aware_chain_enumerator_from(value, propagated_result) }
               end
 
               ##
-              # @param args [Array<Object>]
-              # @param iteration_block [Proc, nil]
+              # @param iterator_arguments [ConvenientService::Support::Arguments]
               # @param iterator_block [Proc]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerator]
               #
-              def with_processing_return_value_as_arithmetic_sequence_enumerator(*args, iteration_block, &iterator_block)
-                with_processing_return_value(*args, iteration_block, iterator_block) { |value, propagated_result| step_aware_arithmetic_sequence_enumerator_from(value, propagated_result) }
+              def with_processing_return_value_as_arithmetic_sequence_enumerator(iterator_arguments = Support::Arguments.null_arguments, &iterator_block)
+                with_processing_return_value(arguments, iterator_block) { |value, propagated_result| step_aware_arithmetic_sequence_enumerator_from(value, propagated_result) }
               end
 
               ##
@@ -336,6 +326,13 @@ module ConvenientService
               end
 
               ##
+              # @return [ConvenientService::Support::Arguments]
+              #
+              def arguments(...)
+                Support::Arguments.new(...)
+              end
+
+              ##
               # @param object [Object] Can be any type.
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
               #
@@ -378,15 +375,15 @@ module ConvenientService
               end
 
               ##
-              # @param args [Array<Object>]
-              # @param iteration_block [Proc, nil]
+              # @param iterator_arguments [ConvenientService::Support::Arguments]
               # @param iterator_block [Proc]
+              # @param with_processing_return_value_block [Proc]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Object]
               #
-              def with_processing_return_value(*args, iteration_block, iterator_block, &with_processing_return_value_block)
+              def with_processing_return_value(iterator_arguments, iterator_block, &with_processing_return_value_block)
                 return yield(Support::UNDEFINED, propagated_result) if propagated_result
 
-                response = catch(:propagated_result) { {object: iterator_block.call(*args, step_aware_iteration_block_from(iteration_block))} }
+                response = catch(:propagated_result) { {object: iterator_block.call(*iterator_arguments.args, &step_aware_iteration_block_from(iterator_arguments.block))} }
 
                 return yield(Support::UNDEFINED, response[:propagated_result]) if response.has_key?(:propagated_result)
 

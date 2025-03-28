@@ -45,7 +45,7 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerator]
               #
               def with_index(offset = nil, &iteration_block)
-                with_processing_return_value_as_enumerator(offset, iteration_block) do |offset, step_aware_iteration_block|
+                with_processing_return_value_as_enumerator(arguments(offset, &iteration_block)) do |offset, &step_aware_iteration_block|
                   enumerator.with_index(offset, &step_aware_iteration_block)
                 end
               end
@@ -56,7 +56,7 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerator]
               #
               def with_object(obj, &iteration_block)
-                with_processing_return_value_as_enumerator(obj, iteration_block) do |obj, step_aware_iteration_block|
+                with_processing_return_value_as_enumerator(arguments(obj, &iteration_block)) do |obj, &step_aware_iteration_block|
                   enumerator.with_object(obj, &step_aware_iteration_block)
                 end
               end
