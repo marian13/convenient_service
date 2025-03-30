@@ -111,6 +111,16 @@ module ConvenientService
               end
 
               ##
+              # @param n [Integer]
+              # @param iterator_arguments [ConvenientService::Support::Arguments]
+              # @param iterator_block [Proc]
+              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerable]
+              #
+              def with_processing_return_value_as_exactly_enumerable(n, iterator_arguments = Support::Arguments.null_arguments, &iterator_block)
+                with_processing_return_value(iterator_arguments, exactly_enumerable_iterator_block_from(n, iterator_block)) { |value, propagated_result| step_aware_enumerable_from(value, propagated_result) }
+              end
+
+              ##
               # @param iterator_arguments [ConvenientService::Support::Arguments]
               # @param iterator_block [Proc]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Object]
@@ -152,18 +162,38 @@ module ConvenientService
               alias_method :with_processing_return_value_as_enumerator_generator, :with_processing_return_value_as_enumerator
 
               ##
+              # @param n [Integer]
               # @param iterator_arguments [ConvenientService::Support::Arguments]
               # @param iterator_block [Proc]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerator]
+              #
+              def with_processing_return_value_as_exactly_enumerator(n, iterator_arguments = Support::Arguments.null_arguments, &iterator_block)
+                with_processing_return_value(iterator_arguments, exactly_enumerator_iterator_block_from(n, iterator_block)) { |value, propagated_result| step_aware_enumerator_from(value, propagated_result) }
+              end
+
+              ##
+              # @param iterator_arguments [ConvenientService::Support::Arguments]
+              # @param iterator_block [Proc]
+              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::LazyEnumerator]
               #
               def with_processing_return_value_as_lazy_enumerator(iterator_arguments = Support::Arguments.null_arguments, &iterator_block)
                 with_processing_return_value(iterator_arguments, iterator_block) { |value, propagated_result| step_aware_lazy_enumerator_from(value, propagated_result) }
               end
 
               ##
+              # @param n [Integer]
               # @param iterator_arguments [ConvenientService::Support::Arguments]
               # @param iterator_block [Proc]
-              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerator]
+              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::LazyEnumerator]
+              #
+              def with_processing_return_value_as_exactly_lazy_enumerator(n, iterator_arguments = Support::Arguments.null_arguments, &iterator_block)
+                with_processing_return_value(iterator_arguments, exactly_lazy_enumerator_iterator_block_from(n, iterator_block)) { |value, propagated_result| step_aware_lazy_enumerator_from(value, propagated_result) }
+              end
+
+              ##
+              # @param iterator_arguments [ConvenientService::Support::Arguments]
+              # @param iterator_block [Proc]
+              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::ChainEnumerator]
               #
               def with_processing_return_value_as_chain_enumerator(iterator_arguments = Support::Arguments.null_arguments, &iterator_block)
                 with_processing_return_value(iterator_arguments, iterator_block) { |value, propagated_result| step_aware_chain_enumerator_from(value, propagated_result) }
@@ -172,7 +202,7 @@ module ConvenientService
               ##
               # @param iterator_arguments [ConvenientService::Support::Arguments]
               # @param iterator_block [Proc]
-              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerator]
+              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::ArithmeticSequenceEnumerator]
               #
               def with_processing_return_value_as_arithmetic_sequence_enumerator(iterator_arguments = Support::Arguments.null_arguments, &iterator_block)
                 with_processing_return_value(arguments, iterator_block) { |value, propagated_result| step_aware_arithmetic_sequence_enumerator_from(value, propagated_result) }
@@ -302,6 +332,122 @@ module ConvenientService
               #
               def step_aware_arithmetic_sequence_enumerator_from(arithmetic_sequence_enumerator, propagated_result)
                 Entities::StepAwareEnumerables::ArithmeticSequenceEnumerator.new(object: arithmetic_sequence_enumerator, organizer: organizer, propagated_result: propagated_result)
+              end
+
+              ##
+              # @param n [Integer]
+              # @param iterator_block [Proc, nil]
+              # @return [Proc]
+              #
+              def exactly_enumerable_iterator_block_from(n, iterator_block)
+                proc do |*args, &step_aware_iteration_block|
+                  throw :propagated_result, {propagated_result: error} if n < 0
+
+                  iterator_details = {match_count: 0}
+
+                  counter_aware_iteration_block =
+                    if step_aware_iteration_block
+                      proc do |*args|
+                        value = step_aware_iteration_block.call(*args)
+
+                        iterator_details[:match_count] += 1 if value
+
+                        throw :propagated_result, {propagated_result: failure} if iterator_details[:match_count] > n
+
+                        value
+                      end
+                    end
+
+                  values = iterator_block.call(*args, &counter_aware_iteration_block)
+
+                  throw :propagated_result, {propagated_result: failure} if iterator_details[:match_count] != n
+
+                  values
+                end
+              end
+
+              ##
+              # @param n [Integer]
+              # @param iterator_block [Proc, nil]
+              # @return [Proc]
+              #
+              def exactly_enumerator_iterator_block_from(n, iterator_block)
+                proc do |*args, &step_aware_iteration_block|
+                  ::Enumerator.new do |yielder|
+                    throw :propagated_result, {propagated_result: error} if n < 0
+
+                    original_enumerator = iterator_block.call(*args, &step_aware_iteration_block).each
+
+                    iterator_details = {match_count: 0}
+
+                    loop do
+                      value = original_enumerator.next
+
+                      iterator_details[:match_count] += 1 if value
+
+                      throw :propagated_result, {propagated_result: failure} if iterator_details[:match_count] > n
+
+                      yielder.yield(value)
+                    end
+
+                    throw :propagated_result, {propagated_result: failure} if iterator_details[:match_count] != n
+
+                    original_enumerator
+                  end
+                end
+              end
+
+              ##
+              # @param n [Integer]
+              # @param iterator_block [Proc, nil]
+              # @return [Proc]
+              #
+              def exactly_lazy_enumerator_iterator_block_from(n, iterator_block)
+                proc do |*args, &step_aware_iteration_block|
+                  enumerator =
+                    ::Enumerator.new do |yielder|
+                      throw :propagated_result, {propagated_result: error} if n < 0
+
+                      original_enumerator = iterator_block.call(*args, &step_aware_iteration_block).each
+
+                      iterator_details = {match_count: 0}
+
+                      loop do
+                        ##
+                        # HACK: For some reason `catch(:propagated_result) { throw :propagated_result, {propagated_result: ...} }` does NOT work for the following test.
+                        #
+                        #   # Place `byebug` before `catch` in `with_propagated_result_returning` and `with_processing_return_value` to see this issue in practice.
+                        #   expect(service.step_aware_enumerator(lazy_enumerator([:success, :error, :exception])).select_exactly(1) { |status| step status_service, in: [status: -> { status }] }.result).to be_error.without_data
+                        #
+                        # - https://ruby-doc.org/core-2.7.0/UncaughtThrowError.html
+                        # - https://ruby-doc.org/core-2.7.0/Kernel.html#method-i-catch
+                        #
+                        # NOTE: Probably the reason of issue is `Enumerator::Generator`.
+                        # - https://ruby-doc.org/core-2.7.0/Enumerator/Generator.html
+                        #
+                        response =
+                          begin
+                            {value: original_enumerator.next}
+                          rescue UncaughtThrowError => e
+                            e.value
+                          end
+
+                        throw :propagated_result, {propagated_result: response[:propagated_result]} if response.has_key?(:propagated_result)
+
+                        iterator_details[:match_count] += 1 if response[:value]
+
+                        throw :propagated_result, {propagated_result: failure} if iterator_details[:match_count] > n
+
+                        yielder.yield(response[:value])
+                      end
+
+                      throw :propagated_result, {propagated_result: failure} if iterator_details[:match_count] != n
+
+                      original_enumerator
+                    end
+
+                  enumerator.lazy
+                end
               end
 
               ##

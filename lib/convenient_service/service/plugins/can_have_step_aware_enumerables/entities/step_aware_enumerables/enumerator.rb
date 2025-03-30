@@ -64,10 +64,17 @@ module ConvenientService
               private
 
               ##
-              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::LazyEnumerator]
+              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerator]
               #
               def with_processing_return_value_as_enumerable(...)
                 with_processing_return_value_as_enumerator(...)
+              end
+
+              ##
+              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerator]
+              #
+              def with_processing_return_value_as_exactly_enumerable(...)
+                with_processing_return_value_as_exactly_enumerator(...)
               end
             end
           end

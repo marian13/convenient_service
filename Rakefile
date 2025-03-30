@@ -146,7 +146,7 @@ class Service
   include ConvenientService::Standard::Config
 
   def result
-    collection([1, 2, 3, 4, 5])
+    step_aware_enumerable([1, 2, 3, 4, 5])
       .collect { |number|
         step CalculateSquare,
           in: [number: -> { number }],

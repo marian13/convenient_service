@@ -36,6 +36,13 @@ module ConvenientService
               def with_processing_return_value_as_chain_enumerator(...)
                 with_processing_return_value_as_lazy_enumerator(...)
               end
+
+              ##
+              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::LazyEnumerator]
+              #
+              def with_processing_return_value_as_exactly_enumerator(...)
+                with_processing_return_value_as_exactly_lazy_enumerator(...)
+              end
             end
           end
         end

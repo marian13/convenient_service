@@ -931,6 +931,23 @@ module ConvenientService
                   end
                 end
               end
+
+              ##
+              # @param n [Integer]
+              # @param iteration_block [Proc, nil]
+              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerable, ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerator]
+              #
+              def select_exactly(n, &iteration_block)
+                if iteration_block
+                  with_processing_return_value_as_exactly_enumerable(n, arguments(&iteration_block)) do |&step_aware_iteration_block|
+                    enumerable.select(&step_aware_iteration_block)
+                  end
+                else
+                  with_processing_return_value_as_exactly_enumerator(n) do
+                    enumerable.select
+                  end
+                end
+              end
             end
           end
         end
