@@ -371,6 +371,9 @@ module ConvenientService
               # @param iterator_block [Proc, nil]
               # @return [Proc]
               #
+              # @internal
+              #   TODO: Remove.
+              #
               def exactly_enumerator_iterator_block_from(n, iterator_block)
                 proc do |*args, &step_aware_iteration_block|
                   ::Enumerator.new do |yielder|
@@ -401,6 +404,9 @@ module ConvenientService
               # @param n [Integer]
               # @param iterator_block [Proc, nil]
               # @return [Proc]
+              #
+              # @internal
+              #   TODO: Remove.
               #
               def exactly_lazy_enumerator_iterator_block_from(n, iterator_block)
                 proc do |*args, &step_aware_iteration_block|
@@ -520,20 +526,38 @@ module ConvenientService
                 yield(response[:object])
               end
 
-              ##
-              # @param iterator_arguments [ConvenientService::Support::Arguments]
-              # @param iterator_block [Proc]
-              # @param with_processing_return_value_block [Proc]
-              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Object]
-              #
-              def with_processing_return_value(iterator_arguments, iterator_block, &with_processing_return_value_block)
-                return yield(Support::UNDEFINED, propagated_result) if propagated_result
+              if Dependencies.ruby.version > 3.0
+                ##
+                # @param iterator_arguments [ConvenientService::Support::Arguments]
+                # @param iterator_block [Proc]
+                # @param with_processing_return_value_block [Proc]
+                # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Object]
+                #
+                def with_processing_return_value(iterator_arguments, iterator_block, &with_processing_return_value_block)
+                  return yield(Support::UNDEFINED, propagated_result) if propagated_result
 
-                response = catch(:propagated_result) { {object: iterator_block.call(*iterator_arguments.args, &step_aware_iteration_block_from(iterator_arguments.block))} }
+                  response = catch(:propagated_result) { {object: iterator_block.call(*iterator_arguments.args, &step_aware_iteration_block_from(iterator_arguments.block))} }
 
-                return yield(Support::UNDEFINED, response[:propagated_result]) if response.has_key?(:propagated_result)
+                  return yield(Support::UNDEFINED, response[:propagated_result]) if response.has_key?(:propagated_result)
 
-                yield(response[:object], nil)
+                  yield(response[:object], nil)
+                end
+              else
+                ##
+                # @param iterator_arguments [ConvenientService::Support::Arguments]
+                # @param iterator_block [Proc]
+                # @param with_processing_return_value_block [Proc]
+                # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Object]
+                #
+                def with_processing_return_value(iterator_arguments, iterator_block, &with_processing_return_value_block)
+                  return yield(Support::UNDEFINED, propagated_result) if propagated_result
+
+                  response = catch(:propagated_result) { {object: iterator_block.call(*iterator_arguments.args, **iterator_arguments.kwargs, &step_aware_iteration_block_from(iterator_arguments.block))} }
+
+                  return yield(Support::UNDEFINED, response[:propagated_result]) if response.has_key?(:propagated_result)
+
+                  yield(response[:object], nil)
+                end
               end
             end
           end

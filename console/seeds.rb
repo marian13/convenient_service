@@ -16,7 +16,7 @@ class CalculateSquare
   end
 end
 
-class SmallerThanNine
+class GreaterThanNine
   include ConvenientService::Standard::Config
 
   attr_reader :number
@@ -26,7 +26,7 @@ class SmallerThanNine
   end
 
   def result
-    number < 9 ? success : failure
+    (number > 9) ? success : failure
   end
 end
 
@@ -34,18 +34,16 @@ class Service
   include ConvenientService::Standard::Config
 
   def result
-    step_aware_enumerable([1, 2, 3, 4, 5])
+    step_aware_enumerable([1, 4, 2, 5, 3, 6])
       .collect { |number|
         step CalculateSquare,
           in: [number: -> { number }],
           out: :square
       }
-      .drop_while { |square|
-        step SmallerThanNine,
+      .select_exactly(3) { |square| # NOTE: `select_exactly` enumerator does not work.
+        step GreaterThanNine,
           in: [number: -> { square }]
       }
-      .select_exactly(3)
-      .with_index { |square, index| p [square, index] }
       .result
   end
 end

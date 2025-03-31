@@ -40,6 +40,8 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
               # @param offset [Integer, nil]
               # @param iteration_block [Proc, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerator]
@@ -51,6 +53,8 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
               # @param obj [Object] Can be any type.
               # @param iteration_block [Proc, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerator]
@@ -59,22 +63,6 @@ module ConvenientService
                 with_processing_return_value_as_enumerator(arguments(obj, &iteration_block)) do |obj, &step_aware_iteration_block|
                   enumerator.with_object(obj, &step_aware_iteration_block)
                 end
-              end
-
-              private
-
-              ##
-              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerator]
-              #
-              def with_processing_return_value_as_enumerable(...)
-                with_processing_return_value_as_enumerator(...)
-              end
-
-              ##
-              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerator]
-              #
-              def with_processing_return_value_as_exactly_enumerable(...)
-                with_processing_return_value_as_exactly_enumerator(...)
               end
             end
           end

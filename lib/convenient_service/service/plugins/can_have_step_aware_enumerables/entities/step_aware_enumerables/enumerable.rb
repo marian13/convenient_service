@@ -29,10 +29,12 @@ module ConvenientService
               # @return [nil]
               #
               def default_evaluate_by
-                nil
+                enumerable.is_a?(::Enumerator) ? :to_a : nil
               end
 
               ##
+              # @api public
+              #
               # @param iteration_block [Proc, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerable]
               #
@@ -49,6 +51,8 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
               # @overload all?(pattern)
               #   @param pattern [Object]
               #   @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
@@ -64,6 +68,8 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
               # @overload any?(pattern)
               #   @param pattern [Object]
               #   @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
@@ -79,6 +85,8 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
               # @param enums [Array<Enumerable>]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
               #
@@ -91,6 +99,8 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
               # @param iteration_block [Proc]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
               #
@@ -101,6 +111,8 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
               # @param iteration_block [Proc]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
               #
@@ -111,6 +123,8 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
               # @param iteration_block [Proc, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
               #
@@ -127,6 +141,8 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
               # @param iteration_block [Proc, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
               #
@@ -144,6 +160,8 @@ module ConvenientService
 
               if Dependencies.ruby.version >= 3.1
                 ##
+                # @api public
+                #
                 # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
                 #
                 def compact
@@ -154,6 +172,8 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
               # @overload count
               #   @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
               #
@@ -172,6 +192,8 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
               # @param n [Integer, nil]
               # @param iteration_block [Proc, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
@@ -189,6 +211,8 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
               # @param ifnone [Proc, nil]
               # @param iteration_block [Proc, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
@@ -206,6 +230,8 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
               # @param n [Integer]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
               #
@@ -216,6 +242,8 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
               # @param iteration_block [Proc, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
               #
@@ -232,6 +260,8 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
               # @param n [Integer]
               # @param iteration_block [Proc, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
@@ -249,6 +279,8 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
               # @param iteration_block [Proc, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
               #
@@ -265,6 +297,8 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
               # @param n [Integer]
               # @param iteration_block [Proc, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
@@ -282,6 +316,8 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
               # @param iteration_block [Proc, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
               #
@@ -298,6 +334,8 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
               # @param obj [Object] Can be any type.
               # @param iteration_block [Proc, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
@@ -315,6 +353,8 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
               #
               def entries
@@ -324,6 +364,8 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
               # @param iteration_block [Proc, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
               #
@@ -340,6 +382,8 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
               # @param iteration_block [Proc, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
               #
@@ -356,6 +400,8 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
               # @param ifnone [Proc, nil]
               # @param iteration_block [Proc, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
@@ -373,6 +419,8 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
               # @param iteration_block [Proc, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
               #
@@ -389,6 +437,8 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
               # @param args [Array<Object>]
               # @param iteration_block [Proc, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
@@ -406,6 +456,8 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
               # @param n [Integer, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
               #
@@ -422,6 +474,8 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
               # @param iteration_block [Proc, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
               #
@@ -438,6 +492,8 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
               # @overload grep(pattern)
               #   @param pattern [Object]
               #   @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
@@ -454,6 +510,8 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
               # @overload grep_v(pattern)
               #   @param pattern [Object]
               #   @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
@@ -470,6 +528,8 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
               # @param iteration_block [Proc, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
               #
@@ -486,6 +546,8 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
               # @param obj [Object] Can be any type.
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
               #
@@ -495,18 +557,38 @@ module ConvenientService
                 end
               end
 
-              ##
-              # @param args [Array<Object>]
-              # @param iteration_block [Proc, nil]
-              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
-              #
-              def inject(*args, &iteration_block)
-                with_processing_return_value_as_object(arguments(*args, &iteration_block)) do |*args, &step_aware_iteration_block|
-                  enumerable.inject(*args, &step_aware_iteration_block)
+              if Dependencies.ruby.version > 3.0
+                ##
+                # @api public
+                #
+                # @param args [Array<Object>]
+                # @param iteration_block [Proc, nil]
+                # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
+                #
+                def inject(*args, &iteration_block)
+                  with_processing_return_value_as_object(arguments(*args, &iteration_block)) do |*args, &step_aware_iteration_block|
+                    enumerable.inject(*args, &step_aware_iteration_block)
+                  end
+                end
+              else
+                ##
+                # @api public
+                #
+                # @param args [Array<Object>]
+                # @param kwargs [Hash{Symbol => Object}]
+                # @param iteration_block [Proc, nil]
+                # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
+                #
+                def inject(*args, **kwargs, &iteration_block)
+                  with_processing_return_value_as_object(arguments(*args, **kwargs, &iteration_block)) do |*args, **kwargs, &step_aware_iteration_block|
+                    enumerable.inject(*args, **kwargs, &step_aware_iteration_block)
+                  end
                 end
               end
 
               ##
+              # @api public
+              #
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
               #
               def lazy
@@ -516,6 +598,8 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
               # @param iteration_block [Proc, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
               #
@@ -532,6 +616,8 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
               # @param n [Integer, nil]
               # @param iteration_block [Proc, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
@@ -549,6 +635,8 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
               # @param n [Integer, nil]
               # @param iteration_block [Proc, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
@@ -572,6 +660,8 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
               # @param obj [Object] Can be any type.
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
               #
@@ -582,6 +672,8 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
               # @param n [Integer, nil]
               # @param iteration_block [Proc, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
@@ -599,6 +691,8 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
               # @param n [Integer, nil]
               # @param iteration_block [Proc, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
@@ -622,6 +716,8 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
               # @param iteration_block [Proc, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
               #
@@ -632,6 +728,8 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
               # @param iteration_block [Proc, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
               #
@@ -648,6 +746,8 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
               # @overload none?(pattern)
               #   @param pattern [Object]
               #   @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
@@ -663,6 +763,8 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
               # @overload one?(pattern)
               #   @param pattern [Object]
               #   @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
@@ -678,6 +780,8 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
               # @param iteration_block [Proc, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
               #
@@ -693,18 +797,38 @@ module ConvenientService
                 end
               end
 
-              ##
-              # @param args [Array<Object>]
-              # @param iteration_block [Proc, nil]
-              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
-              #
-              def reduce(*args, &iteration_block)
-                with_processing_return_value_as_object(arguments(*args, &iteration_block)) do |*args, &step_aware_iteration_block|
-                  enumerable.reduce(*args, &step_aware_iteration_block)
+              if Dependencies.ruby.version > 3.0
+                ##
+                # @api public
+                #
+                # @param args [Array<Object>]
+                # @param iteration_block [Proc, nil]
+                # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
+                #
+                def reduce(*args, &iteration_block)
+                  with_processing_return_value_as_object(arguments(*args, &iteration_block)) do |*args, &step_aware_iteration_block|
+                    enumerable.reduce(*args, &step_aware_iteration_block)
+                  end
+                end
+              else
+                ##
+                # @api public
+                #
+                # @param args [Array<Object>]
+                # @param kwargs [Hash{Symbol => Object}]
+                # @param iteration_block [Proc, nil]
+                # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
+                #
+                def reduce(*args, **kwargs, &iteration_block)
+                  with_processing_return_value_as_object(arguments(*args, **kwargs, &iteration_block)) do |*args, **kwargs, &step_aware_iteration_block|
+                    enumerable.reduce(*args, **kwargs, &step_aware_iteration_block)
+                  end
                 end
               end
 
               ##
+              # @api public
+              #
               # @param iteration_block [Proc, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
               #
@@ -721,6 +845,8 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
               # @param iteration_block [Proc, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
               #
@@ -737,6 +863,8 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
               # @param iteration_block [Proc, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
               #
@@ -753,6 +881,8 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
               # @overload slice_after(pattern)
               #   @param pattern [Object] Can be any type.
               #   @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
@@ -768,6 +898,8 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
               # @overload slice_before(pattern)
               #   @param pattern [Object] Can be any type.
               #   @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
@@ -783,6 +915,8 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
               # @param iteration_block [Proc]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
               #
@@ -793,6 +927,8 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
               # @param iteration_block [Proc, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
               #
@@ -803,6 +939,8 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
               # @param iteration_block [Proc, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
               #
@@ -819,6 +957,8 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
               # @overload sum
               #   @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
               #
@@ -842,6 +982,8 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
               # @param n [Integer, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
               #
@@ -852,6 +994,8 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
               # @param iteration_block [Proc, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
               #
@@ -868,6 +1012,8 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
               #
               def tally
@@ -877,33 +1023,53 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
+              # @param args [Array<Object>]
+              # @param iteration_block [Proc, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
               #
-              def to_a
-                with_processing_return_value_as_array do
-                  enumerable.to_a
+              # @internal
+              #   TODO: Specs for arguments.
+              #
+              def to_a(*args, &block)
+                with_processing_return_value_as_array(arguments(*args, &block)) do |*args, &step_aware_iteration_block|
+                  enumerable.to_a(*args, &step_aware_iteration_block)
                 end
               end
 
               ##
+              # @api public
+              #
+              # @param args [Array<Object>]
+              # @param iteration_block [Proc, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
               #
-              def to_h
-                with_processing_return_value_as_hash do
-                  enumerable.to_h
+              # @internal
+              #   TODO: Specs for arguments.
+              #
+              def to_h(*args, &block)
+                with_processing_return_value_as_hash(arguments(*args, &block)) do |*args, &step_aware_iteration_block|
+                  enumerable.to_h(*args, &step_aware_iteration_block)
                 end
               end
 
               ##
+              # @api public
+              #
+              # @param args [Array<Object>]
+              # @param iteration_block [Proc, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
               #
-              def to_set
-                with_processing_return_value_as_set do
-                  enumerable.to_set
+              def to_set(*args, &block)
+                with_processing_return_value_as_set(arguments(*args, &block)) do |*args, &step_aware_iteration_block|
+                  enumerable.to_set(*args, &step_aware_iteration_block)
                 end
               end
 
               ##
+              # @api public
+              #
               # @param iteration_block [Proc, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
               #
@@ -914,6 +1080,8 @@ module ConvenientService
               end
 
               ##
+              # @api public
+              #
               # @param other_enums [Array<Object>]
               # @param iteration_block [Proc, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
@@ -933,6 +1101,8 @@ module ConvenientService
               end
 
               ##
+              # @api private
+              #
               # @param n [Integer]
               # @param iteration_block [Proc, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerable, ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerator]
