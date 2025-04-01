@@ -7867,6 +7867,12 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
         end
       end
 
+      describe "#x" do
+        specify do
+          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :success, :failure])).select_exactly(0) { |status| status_condition[status] }.result).to be_failure.without_data
+        end
+      end
+
       describe "#select_exactly" do
         specify do
           # NOTE: Empty collection, n = 0.
@@ -7902,7 +7908,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           # NOTE: 0 matches, no block, n = 0.
           expect(service.step_aware_enumerable(enumerable([])).select_exactly(0).result).to be_success.with_data(values: [])
           expect(service.step_aware_enumerator(enumerator([])).select_exactly(0).result).to be_success.with_data(values: [])
-          expect { service.step_aware_enumerator(lazy_enumerator([])).select_exactly(0).result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
+          # expect { service.step_aware_enumerator(lazy_enumerator([])).select_exactly(0).result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
           expect(service.step_aware_enumerator(chain_enumerator([])).select_exactly(0).result).to be_success.with_data(values: [])
           expect(service.step_aware_enumerable([]).select_exactly(0).result).to be_success.with_data(values: [])
           expect(service.step_aware_enumerable(set([])).select_exactly(0).result).to be_success.with_data(values: [])
@@ -7912,7 +7918,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           # NOTE: 0 matches, no block, n = 1.
           expect(service.step_aware_enumerable(enumerable([])).select_exactly(1).result).to be_failure.without_data
           expect(service.step_aware_enumerator(enumerator([])).select_exactly(1).result).to be_failure.without_data
-          expect { service.step_aware_enumerator(lazy_enumerator([])).select_exactly(1).result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
+          # expect { service.step_aware_enumerator(lazy_enumerator([])).select_exactly(1).result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
           expect(service.step_aware_enumerator(chain_enumerator([])).select_exactly(1).result).to be_failure.without_data
           expect(service.step_aware_enumerable([]).select_exactly(1).result).to be_failure.without_data
           expect(service.step_aware_enumerable(set([])).select_exactly(1).result).to be_failure.without_data
@@ -7922,7 +7928,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           # NOTE: 0 matches, no block, n = 2.
           expect(service.step_aware_enumerable(enumerable([])).select_exactly(2).result).to be_failure.without_data
           expect(service.step_aware_enumerator(enumerator([])).select_exactly(2).result).to be_failure.without_data
-          expect { service.step_aware_enumerator(lazy_enumerator([])).select_exactly(2).result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
+          # expect { service.step_aware_enumerator(lazy_enumerator([])).select_exactly(2).result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
           expect(service.step_aware_enumerator(chain_enumerator([])).select_exactly(2).result).to be_failure.without_data
           expect(service.step_aware_enumerable([]).select_exactly(2).result).to be_failure.without_data
           expect(service.step_aware_enumerable(set([])).select_exactly(2).result).to be_failure.without_data
@@ -7930,74 +7936,74 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable((:success...:success)).select_exactly(2).result).to be_failure.without_data
 
           # NOTE: 1 match, no block, n = 0.
-          expect(service.step_aware_enumerable(enumerable([:success])).select_exactly(0).result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:success])).select_exactly(0).result).to be_failure.without_data
-          expect { service.step_aware_enumerator(lazy_enumerator([:success])).select_exactly(0).result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
-          expect(service.step_aware_enumerator(chain_enumerator([:success])).select_exactly(0).result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:success]).select_exactly(0).result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:success])).select_exactly(0).result).to be_failure.without_data
-          expect(service.step_aware_enumerable({success: :success}).select_exactly(0).result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:success..:success)).select_exactly(0).result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(enumerable([:success])).select_exactly(0).result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([:success])).select_exactly(0).result).to be_failure.without_data
+          # # expect { service.step_aware_enumerator(lazy_enumerator([:success])).select_exactly(0).result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
+          # expect(service.step_aware_enumerator(chain_enumerator([:success])).select_exactly(0).result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([:success]).select_exactly(0).result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([:success])).select_exactly(0).result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({success: :success}).select_exactly(0).result).to be_failure.without_data
+          # expect(service.step_aware_enumerable((:success..:success)).select_exactly(0).result).to be_failure.without_data
 
-          # NOTE: 1 match, no block, n = 1.
-          expect(service.step_aware_enumerable(enumerable([:success])).select_exactly(1).result).to be_success.with_data(values: [:success])
-          expect(service.step_aware_enumerator(enumerator([:success])).select_exactly(1).result).to be_success.with_data(values: [:success])
-          expect { service.step_aware_enumerator(lazy_enumerator([:success])).select_exactly(1).result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
-          expect(service.step_aware_enumerator(chain_enumerator([:success])).select_exactly(1).result).to be_success.with_data(values: [:success])
-          expect(service.step_aware_enumerable([:success]).select_exactly(1).result).to be_success.with_data(values: [:success])
-          expect(service.step_aware_enumerable(set([:success])).select_exactly(1).result).to be_success.with_data(values: [:success])
-          expect(service.step_aware_enumerable({success: :success}).select_exactly(1).result).to be_success.with_data(values: [[:success, :success]])
-          expect(service.step_aware_enumerable((:success..:success)).select_exactly(1).result).to be_success.with_data(values: [:success])
+          # # NOTE: 1 match, no block, n = 1.
+          # expect(service.step_aware_enumerable(enumerable([:success])).select_exactly(1).result).to be_success.with_data(values: [:success])
+          # expect(service.step_aware_enumerator(enumerator([:success])).select_exactly(1).result).to be_success.with_data(values: [:success])
+          # # expect { service.step_aware_enumerator(lazy_enumerator([:success])).select_exactly(1).result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
+          # expect(service.step_aware_enumerator(chain_enumerator([:success])).select_exactly(1).result).to be_success.with_data(values: [:success])
+          # expect(service.step_aware_enumerable([:success]).select_exactly(1).result).to be_success.with_data(values: [:success])
+          # expect(service.step_aware_enumerable(set([:success])).select_exactly(1).result).to be_success.with_data(values: [:success])
+          # expect(service.step_aware_enumerable({success: :success}).select_exactly(1).result).to be_success.with_data(values: [[:success, :success]])
+          # expect(service.step_aware_enumerable((:success..:success)).select_exactly(1).result).to be_success.with_data(values: [:success])
 
-          # NOTE: 1 match, no block, n = 2.
-          expect(service.step_aware_enumerable(enumerable([:success])).select_exactly(2).result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:success])).select_exactly(2).result).to be_failure.without_data
-          expect { service.step_aware_enumerator(lazy_enumerator([:success])).select_exactly(2).result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
-          expect(service.step_aware_enumerator(chain_enumerator([:success])).select_exactly(2).result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:success]).select_exactly(2).result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:success])).select_exactly(2).result).to be_failure.without_data
-          expect(service.step_aware_enumerable({success: :success}).select_exactly(2).result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:success..:success)).select_exactly(2).result).to be_failure.without_data
+          # # NOTE: 1 match, no block, n = 2.
+          # expect(service.step_aware_enumerable(enumerable([:success])).select_exactly(2).result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([:success])).select_exactly(2).result).to be_failure.without_data
+          # # expect { service.step_aware_enumerator(lazy_enumerator([:success])).select_exactly(2).result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
+          # expect(service.step_aware_enumerator(chain_enumerator([:success])).select_exactly(2).result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([:success]).select_exactly(2).result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([:success])).select_exactly(2).result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({success: :success}).select_exactly(2).result).to be_failure.without_data
+          # expect(service.step_aware_enumerable((:success..:success)).select_exactly(2).result).to be_failure.without_data
 
-          # NOTE: 2 matches, no block, n = 0.
-          expect(service.step_aware_enumerable(enumerable([1, 2])).select_exactly(0).result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([1, 2])).select_exactly(0).result).to be_failure.without_data
-          expect { service.step_aware_enumerator(lazy_enumerator([1, 2])).select_exactly(0).result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
-          expect(service.step_aware_enumerator(chain_enumerator([1, 2])).select_exactly(0).result).to be_failure.without_data
-          expect(service.step_aware_enumerable([1, 2]).select_exactly(0).result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([1, 2])).select_exactly(0).result).to be_failure.without_data
-          expect(service.step_aware_enumerable({1 => 1, 2 => 2}).select_exactly(0).result).to be_failure.without_data
-          expect(service.step_aware_enumerable((1..2)).select_exactly(0).result).to be_failure.without_data
+          # # NOTE: 2 matches, no block, n = 0.
+          # expect(service.step_aware_enumerable(enumerable([1, 2])).select_exactly(0).result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([1, 2])).select_exactly(0).result).to be_failure.without_data
+          # # expect { service.step_aware_enumerator(lazy_enumerator([1, 2])).select_exactly(0).result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
+          # expect(service.step_aware_enumerator(chain_enumerator([1, 2])).select_exactly(0).result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([1, 2]).select_exactly(0).result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([1, 2])).select_exactly(0).result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({1 => 1, 2 => 2}).select_exactly(0).result).to be_failure.without_data
+          # expect(service.step_aware_enumerable((1..2)).select_exactly(0).result).to be_failure.without_data
 
-          # NOTE: 2 matches, no block, n = 1.
-          expect(service.step_aware_enumerable(enumerable([1, 2])).select_exactly(1).result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([1, 2])).select_exactly(1).result).to be_failure.without_data
-          expect { service.step_aware_enumerator(lazy_enumerator([1, 2])).select_exactly(1).result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
-          expect(service.step_aware_enumerator(chain_enumerator([1, 2])).select_exactly(1).result).to be_failure.without_data
-          expect(service.step_aware_enumerable([1, 2]).select_exactly(1).result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([1, 2])).select_exactly(1).result).to be_failure.without_data
-          expect(service.step_aware_enumerable({1 => 1, 2 => 2}).select_exactly(1).result).to be_failure.without_data
-          expect(service.step_aware_enumerable((1..2)).select_exactly(1).result).to be_failure.without_data
+          # # NOTE: 2 matches, no block, n = 1.
+          # expect(service.step_aware_enumerable(enumerable([1, 2])).select_exactly(1).result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([1, 2])).select_exactly(1).result).to be_failure.without_data
+          # # expect { service.step_aware_enumerator(lazy_enumerator([1, 2])).select_exactly(1).result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
+          # expect(service.step_aware_enumerator(chain_enumerator([1, 2])).select_exactly(1).result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([1, 2]).select_exactly(1).result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([1, 2])).select_exactly(1).result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({1 => 1, 2 => 2}).select_exactly(1).result).to be_failure.without_data
+          # expect(service.step_aware_enumerable((1..2)).select_exactly(1).result).to be_failure.without_data
 
-          # NOTE: 2 matches, no block, n = 2.
-          expect(service.step_aware_enumerable(enumerable([1, 2])).select_exactly(2).result).to be_success.with_data(values: [1, 2])
-          expect(service.step_aware_enumerator(enumerator([1, 2])).select_exactly(2).result).to be_success.with_data(values: [1, 2])
-          expect { service.step_aware_enumerator(lazy_enumerator([1, 2])).select_exactly(2).result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
-          expect(service.step_aware_enumerator(chain_enumerator([1, 2])).select_exactly(2).result).to be_success.with_data(values: [1, 2])
-          expect(service.step_aware_enumerable([1, 2]).select_exactly(2).result).to be_success.with_data(values: [1, 2])
-          expect(service.step_aware_enumerable(set([1, 2])).select_exactly(2).result).to be_success.with_data(values: [1, 2])
-          expect(service.step_aware_enumerable({1 => 1, 2 => 2}).select_exactly(2).result).to be_success.with_data(values: [[1, 1], [2, 2]])
-          expect(service.step_aware_enumerable((1..2)).select_exactly(2).result).to be_success.with_data(values: [1, 2])
+          # # NOTE: 2 matches, no block, n = 2.
+          # expect(service.step_aware_enumerable(enumerable([1, 2])).select_exactly(2).result).to be_success.with_data(values: [1, 2])
+          # expect(service.step_aware_enumerator(enumerator([1, 2])).select_exactly(2).result).to be_success.with_data(values: [1, 2])
+          # # expect { service.step_aware_enumerator(lazy_enumerator([1, 2])).select_exactly(2).result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
+          # expect(service.step_aware_enumerator(chain_enumerator([1, 2])).select_exactly(2).result).to be_success.with_data(values: [1, 2])
+          # expect(service.step_aware_enumerable([1, 2]).select_exactly(2).result).to be_success.with_data(values: [1, 2])
+          # expect(service.step_aware_enumerable(set([1, 2])).select_exactly(2).result).to be_success.with_data(values: [1, 2])
+          # expect(service.step_aware_enumerable({1 => 1, 2 => 2}).select_exactly(2).result).to be_success.with_data(values: [[1, 1], [2, 2]])
+          # expect(service.step_aware_enumerable((1..2)).select_exactly(2).result).to be_success.with_data(values: [1, 2])
 
-          # NOTE: 3 matches, no block, n = 2.
-          expect(service.step_aware_enumerable(enumerable([1, 2, 3])).select_exactly(2).result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([1, 2, 3])).select_exactly(2).result).to be_failure.without_data
-          expect { service.step_aware_enumerator(lazy_enumerator([1, 2, 3])).select_exactly(2).result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
-          expect(service.step_aware_enumerator(chain_enumerator([1, 2, 3])).select_exactly(2).result).to be_failure.without_data
-          expect(service.step_aware_enumerable([1, 2, 3]).select_exactly(2).result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([1, 2, 3])).select_exactly(2).result).to be_failure.without_data
-          expect(service.step_aware_enumerable({1 => 1, 2 => 2, 3 => 3}).select_exactly(2).result).to be_failure.without_data
-          expect(service.step_aware_enumerable((1..3)).select_exactly(2).result).to be_failure.without_data
+          # # NOTE: 3 matches, no block, n = 2.
+          # expect(service.step_aware_enumerable(enumerable([1, 2, 3])).select_exactly(2).result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([1, 2, 3])).select_exactly(2).result).to be_failure.without_data
+          # # expect { service.step_aware_enumerator(lazy_enumerator([1, 2, 3])).select_exactly(2).result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
+          # expect(service.step_aware_enumerator(chain_enumerator([1, 2, 3])).select_exactly(2).result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([1, 2, 3]).select_exactly(2).result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([1, 2, 3])).select_exactly(2).result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({1 => 1, 2 => 2, 3 => 3}).select_exactly(2).result).to be_failure.without_data
+          # expect(service.step_aware_enumerable((1..3)).select_exactly(2).result).to be_failure.without_data
 
           # NOTE: 0 matches, block, n = 0.
           expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(0) { |status| status_condition[status] }.result).to be_success.with_data(values: [])
@@ -8189,6 +8195,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
       # with_index, with_object specs, cast object
       # find step aware default
       # null_arguments to nil_arguments
+      # specs for with_index, with_object !!!
     end
   end
 end

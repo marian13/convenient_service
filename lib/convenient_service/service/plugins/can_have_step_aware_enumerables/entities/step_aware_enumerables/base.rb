@@ -376,27 +376,7 @@ module ConvenientService
               #
               def exactly_enumerator_iterator_block_from(n, iterator_block)
                 proc do |*args, &step_aware_iteration_block|
-                  ::Enumerator.new do |yielder|
-                    throw :propagated_result, {propagated_result: error} if n < 0
-
-                    original_enumerator = iterator_block.call(*args, &step_aware_iteration_block).each
-
-                    iterator_details = {match_count: 0}
-
-                    loop do
-                      value = original_enumerator.next
-
-                      iterator_details[:match_count] += 1 if value
-
-                      throw :propagated_result, {propagated_result: failure} if iterator_details[:match_count] > n
-
-                      yielder.yield(value)
-                    end
-
-                    throw :propagated_result, {propagated_result: failure} if iterator_details[:match_count] != n
-
-                    original_enumerator
-                  end
+                  iterator_block.call(n, *args, &step_aware_iteration_block)
                 end
               end
 
@@ -405,54 +385,30 @@ module ConvenientService
               # @param iterator_block [Proc, nil]
               # @return [Proc]
               #
-              # @internal
-              #   TODO: Remove.
-              #
               def exactly_lazy_enumerator_iterator_block_from(n, iterator_block)
                 proc do |*args, &step_aware_iteration_block|
-                  enumerator =
-                    ::Enumerator.new do |yielder|
-                      throw :propagated_result, {propagated_result: error} if n < 0
+                  throw :propagated_result, {propagated_result: error} if n < 0
 
-                      original_enumerator = iterator_block.call(*args, &step_aware_iteration_block).each
+                  iterator_details = {match_count: 0}
 
-                      iterator_details = {match_count: 0}
+                  counter_aware_iteration_block =
+                    if step_aware_iteration_block
+                      proc do |*args|
+                        value = step_aware_iteration_block.call(*args)
 
-                      loop do
-                        ##
-                        # HACK: For some reason `catch(:propagated_result) { throw :propagated_result, {propagated_result: ...} }` does NOT work for the following test.
-                        #
-                        #   # Place `byebug` before `catch` in `with_propagated_result_returning` and `with_processing_return_value` to see this issue in practice.
-                        #   expect(service.step_aware_enumerator(lazy_enumerator([:success, :error, :exception])).select_exactly(1) { |status| step status_service, in: [status: -> { status }] }.result).to be_error.without_data
-                        #
-                        # - https://ruby-doc.org/core-2.7.0/UncaughtThrowError.html
-                        # - https://ruby-doc.org/core-2.7.0/Kernel.html#method-i-catch
-                        #
-                        # NOTE: Probably the reason of issue is `Enumerator::Generator`.
-                        # - https://ruby-doc.org/core-2.7.0/Enumerator/Generator.html
-                        #
-                        response =
-                          begin
-                            {value: original_enumerator.next}
-                          rescue UncaughtThrowError => e
-                            e.value
-                          end
-
-                        throw :propagated_result, {propagated_result: response[:propagated_result]} if response.has_key?(:propagated_result)
-
-                        iterator_details[:match_count] += 1 if response[:value]
+                        iterator_details[:match_count] += 1 if value
 
                         throw :propagated_result, {propagated_result: failure} if iterator_details[:match_count] > n
 
-                        yielder.yield(response[:value])
+                        value
                       end
-
-                      throw :propagated_result, {propagated_result: failure} if iterator_details[:match_count] != n
-
-                      original_enumerator
                     end
 
-                  enumerator.lazy
+                  # TODO: What to do when `iterator_details[:match_count] < n`.
+
+                  values = iterator_block.call(*args, &counter_aware_iteration_block)
+
+                  values
                 end
               end
 

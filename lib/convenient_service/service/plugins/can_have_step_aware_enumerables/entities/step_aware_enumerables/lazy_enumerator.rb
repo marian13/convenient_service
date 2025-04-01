@@ -326,27 +326,18 @@ module ConvenientService
                 end
               end
 
-              private
-
               ##
-              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::LazyEnumerator]
+              # @api private
               #
-              def with_processing_return_value_as_enumerator(...)
-                with_processing_return_value_as_lazy_enumerator(...)
-              end
-
-              ##
-              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::LazyEnumerator]
+              # @param n [Integer]
+              # @param iteration_block [Proc, nil]
+              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerable, ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerator]
               #
-              def with_processing_return_value_as_chain_enumerator(...)
-                with_processing_return_value_as_lazy_enumerator(...)
-              end
-
-              ##
-              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::LazyEnumerator]
-              #
-              def with_processing_return_value_as_exactly_enumerable(...)
-                with_processing_return_value_as_exactly_lazy_enumerator(...)
+              def select_exactly(n, &iteration_block)
+                step_aware_exactly_enumerable =
+                  with_processing_return_value_as_exactly_lazy_enumerator(n, arguments(&iteration_block)) do |&step_aware_iteration_block|
+                    lazy_enumerator.select(&step_aware_iteration_block)
+                  end
               end
             end
           end

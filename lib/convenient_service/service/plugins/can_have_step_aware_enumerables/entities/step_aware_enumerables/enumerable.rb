@@ -1113,9 +1113,28 @@ module ConvenientService
                     enumerable.select(&step_aware_iteration_block)
                   end
                 else
-                  with_processing_return_value_as_exactly_enumerator(n) do
-                    enumerable.select
+                  with_processing_return_value_as_exactly_enumerator(n) do |n|
+                    self.to_enum(:_select_exactly, n)
                   end
+                end
+              end
+
+              private
+
+              ##
+              # @api private
+              #
+              # @param n [Integer]
+              # @param step_aware_iteration_block [Proc, nil]
+              # @return [Enumerable, Enumerator]
+              #
+              def _select_exactly(n, &step_aware_iteration_block)
+                if step_aware_iteration_block
+                  iterator_block = proc { |&counter_aware_iteration_block| enumerable.select(&counter_aware_iteration_block) }
+
+                  exactly_enumerable_iterator_block_from(n, iterator_block).call(&step_aware_iteration_block)
+                else
+                  self.to_enum(:_select_exactly, n)
                 end
               end
             end

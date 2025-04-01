@@ -30,7 +30,7 @@ class GreaterThanNine
   end
 end
 
-class Service
+class LessThanExactlyService
   include ConvenientService::Standard::Config
 
   def result
@@ -40,7 +40,8 @@ class Service
           in: [number: -> { number }],
           out: :square
       }
-      .select_exactly(3) { |square| # NOTE: `select_exactly` enumerator does not work.
+      .select_exactly(2)
+      .with_index { |square|
         step GreaterThanNine,
           in: [number: -> { square }]
       }
@@ -48,7 +49,42 @@ class Service
   end
 end
 
-result = Service.result
+class ExactlyService
+  include ConvenientService::Standard::Config
 
-puts result.inspect
-puts result.unsafe_data.inspect
+  def result
+    step_aware_enumerable([1, 4, 2, 5, 3, 6])
+      .collect { |number|
+        step CalculateSquare,
+          in: [number: -> { number }],
+          out: :square
+      }
+      .select_exactly(3)
+      .with_index { |square|
+        step GreaterThanNine,
+          in: [number: -> { square }]
+      }
+      .result
+  end
+end
+
+class MoreThanExactlyService
+  include ConvenientService::Standard::Config
+
+  def result
+    step_aware_enumerable([1, 4, 2, 5, 3, 6])
+      .collect { |number|
+        step CalculateSquare,
+          in: [number: -> { number }],
+          out: :square
+      }
+      .select_exactly(4)
+      .with_index { |square|
+        step GreaterThanNine,
+          in: [number: -> { square }]
+      }
+      .result
+  end
+end
+
+p [LessThanExactlyService, ExactlyService, MoreThanExactlyService].map(&:result).map(&:status).map(&:to_sym)
