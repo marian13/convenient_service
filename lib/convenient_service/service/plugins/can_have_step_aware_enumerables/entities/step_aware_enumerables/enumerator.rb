@@ -44,11 +44,17 @@ module ConvenientService
               #
               # @param offset [Integer, nil]
               # @param iteration_block [Proc, nil]
-              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerator]
+              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerable, ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerator]
               #
               def with_index(offset = nil, &iteration_block)
-                with_processing_return_value_as_enumerator(arguments(offset, &iteration_block)) do |offset, &step_aware_iteration_block|
-                  enumerator.with_index(offset, &step_aware_iteration_block)
+                if iteration_block
+                  with_processing_return_value_as_enumerable(arguments(offset, &iteration_block)) do |offset, &step_aware_iteration_block|
+                    enumerator.with_index(offset, &step_aware_iteration_block)
+                  end
+                else
+                  with_processing_return_value_as_enumerator(arguments(offset)) do |offset|
+                    enumerator.with_index(offset)
+                  end
                 end
               end
 
@@ -57,11 +63,17 @@ module ConvenientService
               #
               # @param obj [Object] Can be any type.
               # @param iteration_block [Proc, nil]
-              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerator]
+              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerable, ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerator]
               #
               def with_object(obj, &iteration_block)
-                with_processing_return_value_as_enumerator(arguments(obj, &iteration_block)) do |obj, &step_aware_iteration_block|
-                  enumerator.with_object(obj, &step_aware_iteration_block)
+                if iteration_block
+                  with_processing_return_value_as_enumerable(arguments(obj, &iteration_block)) do |obj, &step_aware_iteration_block|
+                    enumerator.with_object(obj, &step_aware_iteration_block)
+                  end
+                else
+                  with_processing_return_value_as_enumerator(arguments(obj)) do |obj|
+                    enumerator.with_object(obj)
+                  end
                 end
               end
             end
