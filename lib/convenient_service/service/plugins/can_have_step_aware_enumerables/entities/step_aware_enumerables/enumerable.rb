@@ -1130,15 +1130,7 @@ module ConvenientService
               #
               def _select_exactly(n, &step_aware_iteration_block)
                 if step_aware_iteration_block
-                  modifier = modifier_for(n, step_aware_iteration_block)
-
-                  modifier[:pre_iterator_block].call
-
-                  values = enumerable.select(&modifier[:iteration_block])
-
-                  modifier[:post_iterator_block].call
-
-                  values
+                  enumerable.select(&step_aware_iteration_block)
                 else
                   self.to_enum(:_select_exactly, n)
                 end

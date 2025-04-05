@@ -14,6 +14,22 @@ module ConvenientService
               #
               alias_method :lazy_enumerator, :object
 
+              if Dependencies.ruby.version >= 3.1
+                ##
+                # @api public
+                #
+                # @param enums [Array<Enumerable>]
+                # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
+                #
+                def chain(*enums)
+                  casted_enums = enums.map { |collection| cast_step_aware_enumerable(collection) }.map(&:enumerable)
+
+                  with_processing_return_value_as_lazy_enumerator(arguments(*casted_enums)) do |*enums|
+                    enumerable.chain(*enums)
+                  end
+                end
+              end
+
               ##
               # @api public
               #
@@ -302,7 +318,7 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerator]
               #
               def with_index(offset = nil, &iteration_block)
-                with_processing_return_value_as_lazy_enumerator(arguments(*args, &iteration_block)) do |*args, &step_aware_iteration_block|
+                with_processing_return_value_as_lazy_enumerator(arguments(*args, &iteration_block), method: :with_index) do |*args, &step_aware_iteration_block|
                   lazy_enumerator.with_index(*args, &step_aware_iteration_block)
                 end
               end
@@ -331,13 +347,12 @@ module ConvenientService
               #
               # @param n [Integer]
               # @param iteration_block [Proc, nil]
-              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerable, ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerator]
+              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::LazyEnumerator]
               #
               def select_exactly(n, &iteration_block)
-                step_aware_exactly_enumerable =
-                  with_processing_return_value_as_exactly_lazy_enumerator(n, arguments(&iteration_block)) do |&step_aware_iteration_block|
-                    lazy_enumerator.select(&step_aware_iteration_block)
-                  end
+                with_processing_return_value_as_exactly_lazy_enumerator(n, arguments(&iteration_block)) do |&step_aware_iteration_block|
+                  lazy_enumerator.select(&step_aware_iteration_block)
+                end
               end
             end
           end
