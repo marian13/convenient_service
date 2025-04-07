@@ -48,37 +48,8 @@ module ConvenientService
               #
               def with_index(offset = nil, &iteration_block)
                 if iteration_block
-                  with_processing_return_value_as_enumerable(arguments(offset, &iteration_block)) do |offset, &step_aware_iteration_block|
+                  with_processing_return_value_as_enumerable(arguments(offset, &iteration_block), allow_modifier: true) do |offset, &step_aware_iteration_block|
                     enumerator.with_index(offset, &step_aware_iteration_block)
-                  end
-                else
-                  with_processing_return_value_as_enumerator(arguments(offset)) do |offset|
-                    enumerator.with_index(offset)
-                  end
-                end
-              end
-
-              def with_index(offset = nil, &iteration_block)
-                if iteration_block
-                  with_processing_return_value_as_enumerable(arguments(offset, &iteration_block)) do |offset, &step_aware_iteration_block|
-                    ##
-                    # TODO: Refactor.
-                    #
-                    if modifiers.any?
-                      old_modifier = modifiers.pop
-
-                      modifier = modifier_for(old_modifier[:n], step_aware_iteration_block)
-
-                      modifier[:pre_iterator_block].call
-
-                      values = enumerator.with_index(offset, &modifier[:iteration_block])
-
-                      modifier[:post_iterator_block].call
-
-                      values
-                    else
-                      enumerator.with_index(offset, &step_aware_iteration_block)
-                    end
                   end
                 else
                   with_processing_return_value_as_enumerator(arguments(offset)) do |offset|
@@ -96,13 +67,71 @@ module ConvenientService
               #
               def with_object(obj, &iteration_block)
                 if iteration_block
-                  with_processing_return_value_as_enumerable(arguments(obj, &iteration_block), method: :with_object) do |obj, &step_aware_iteration_block|
+                  with_processing_return_value_as_object(arguments(obj, &iteration_block), allow_modifier: true) do |obj, &step_aware_iteration_block|
                     enumerator.with_object(obj, &step_aware_iteration_block)
                   end
                 else
-                  with_processing_return_value_as_enumerator(arguments(obj), method: :with_object) do |obj|
+                  with_processing_return_value_as_enumerator(arguments(obj)) do |obj|
                     enumerator.with_object(obj)
                   end
+                end
+              end
+
+              private
+
+              ##
+              # @param iterator_arguments [ConvenientService::Support::Arguments]
+              # @param allow_modifier [Boolean]
+              # @param iterator_block [Proc]
+              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Object]
+              #
+              def with_processing_return_value_as_enumerable(iterator_arguments = Support::Arguments.null_arguments, allow_modifier: false, &iterator_block)
+                super(iterator_arguments) do |*args, &step_aware_iteration_block|
+                  next iterator_block.call(*args, &step_aware_iteration_block) unless allow_modifier
+                  next iterator_block.call(*args, &step_aware_iteration_block) if modifiers.none?
+
+                  ##
+                  # TODO: `dup`.
+                  #
+                  old_modifier = modifiers.pop
+
+                  modifier = modifier_for(old_modifier[:n], step_aware_iteration_block)
+
+                  modifier[:pre_iterator_block].call
+
+                  values = iterator_block.call(*args, &modifier[:iteration_block])
+
+                  modifier[:post_iterator_block].call
+
+                  values
+                end
+              end
+
+              ##
+              # @param iterator_arguments [ConvenientService::Support::Arguments]
+              # @param allow_modifier [Boolean]
+              # @param iterator_block [Proc]
+              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Object]
+              #
+              def with_processing_return_value_as_object(iterator_arguments = Support::Arguments.null_arguments, allow_modifier: false, &iterator_block)
+                super(iterator_arguments) do |*args, &step_aware_iteration_block|
+                  next iterator_block.call(*args, &step_aware_iteration_block) unless allow_modifier
+                  next iterator_block.call(*args, &step_aware_iteration_block) if modifiers.none?
+
+                  ##
+                  # TODO: `dup`.
+                  #
+                  old_modifier = modifiers.pop
+
+                  modifier = modifier_for(old_modifier[:n], step_aware_iteration_block)
+
+                  modifier[:pre_iterator_block].call
+
+                  values = iterator_block.call(*args, &modifier[:iteration_block])
+
+                  modifier[:post_iterator_block].call
+
+                  values
                 end
               end
             end
