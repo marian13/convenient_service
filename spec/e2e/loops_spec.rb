@@ -8034,7 +8034,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable({success: :success}).select_exactly(0).with_index(1) { |(key, value), index| status_condition[value] && number_condition[index] }.result).to be_failure.without_data
           expect(service.step_aware_enumerable((:success..:success)).select_exactly(0).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_failure.without_data
 
-          # NOTE: 1 match, no block, with_index, n = 0.
+          # NOTE: 1 match, no block, with_object, n = 0.
           expect(service.step_aware_enumerable(enumerable(["1"])).select_exactly(0).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
           expect(service.step_aware_enumerator(enumerator(["1"])).select_exactly(0).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
           expect { service.step_aware_enumerator(lazy_enumerator(["1"])).select_exactly(0).with_object(+"") { |string, object| concat_strings(object, string) }.result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
@@ -8064,7 +8064,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable({success: :success}).select_exactly(1).with_index(1) { |(key, value), index| status_condition[value] && number_condition[index] }.result).to be_success.with_data(values: {success: :success})
           expect(service.step_aware_enumerable((:success..:success)).select_exactly(1).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_success.with_data(values: [:success])
 
-          # NOTE: 1 match, no block, with_index, n = 1.
+          # NOTE: 1 match, no block, with_object, n = 1.
           expect(service.step_aware_enumerable(enumerable(["1"])).select_exactly(1).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "1")
           expect(service.step_aware_enumerator(enumerator(["1"])).select_exactly(1).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "1")
           expect { service.step_aware_enumerator(lazy_enumerator(["1"])).select_exactly(1).with_object(+"") { |string, object| concat_strings(object, string) }.result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
@@ -8184,7 +8184,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable({1 => 1, 2 => 2}).select_exactly(2).with_index(1) { |(key, value), index| number_condition[value] && number_condition[index] }.result).to be_success.with_data(values: {1 => 1, 2 => 2})
           expect(service.step_aware_enumerable((1..2)).select_exactly(2).with_index(1) { |status, index| number_condition[status] && number_condition[index] }.result).to be_success.with_data(values: [1, 2])
 
-          # NOTE: 2 matches, no block, with_index, n = 2.
+          # NOTE: 2 matches, no block, with_object, n = 2.
           expect(service.step_aware_enumerable(enumerable(["1", "2"])).select_exactly(2).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "12")
           expect(service.step_aware_enumerator(enumerator(["1", "2"])).select_exactly(2).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "12")
           expect { service.step_aware_enumerator(lazy_enumerator(["1", "2"])).select_exactly(2).with_object(+"") { |string, object| concat_strings(object, string) }.result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
@@ -8213,6 +8213,16 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable(set([1, 2, 3])).select_exactly(2).with_index(1) { |status, index| number_condition[status] && number_condition[index] }.result).to be_failure.without_data
           expect(service.step_aware_enumerable({1 => 1, 2 => 2, 3 => 3}).select_exactly(2).with_index(1) { |(key, value), index| number_condition[value] && number_condition[index] }.result).to be_failure.without_data
           expect(service.step_aware_enumerable((1..3)).select_exactly(2).with_index(1) { |status, index| number_condition[status] && number_condition[index] }.result).to be_failure.without_data
+
+          # NOTE: 3 matches, no block, with_object, n = 2.
+          expect(service.step_aware_enumerable(enumerable(["1", "2", "3"])).select_exactly(2).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
+          expect(service.step_aware_enumerator(enumerator(["1", "2", "3"])).select_exactly(2).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
+          expect { service.step_aware_enumerator(lazy_enumerator(["1", "2", "3"])).select_exactly(2).with_object(+"") { |string, object| concat_strings(object, string) }.result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
+          expect(service.step_aware_enumerator(chain_enumerator(["1", "2", "3"])).select_exactly(2).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
+          expect(service.step_aware_enumerable(["1", "2", "3"]).select_exactly(2).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
+          expect(service.step_aware_enumerable(set(["1", "2", "3"])).select_exactly(2).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
+          expect(service.step_aware_enumerable({"1" => "1", "2" => "2", "3" => "3"}).select_exactly(2).with_object(+"") { |(key, value), object| concat_strings(object, value) }.result).to be_failure.without_data
+          expect(service.step_aware_enumerable(("1".."3")).select_exactly(2).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
 
           # NOTE: 0 matches, block, n = 0.
           expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(0) { |status| status_condition[status] }.result).to be_success.with_data(values: [])
