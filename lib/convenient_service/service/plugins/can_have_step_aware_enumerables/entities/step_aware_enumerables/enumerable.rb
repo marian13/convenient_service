@@ -1032,8 +1032,8 @@ module ConvenientService
               # @internal
               #   TODO: Specs for arguments.
               #
-              def to_a(*args, &block)
-                with_processing_return_value_as_array(arguments(*args, &block)) do |*args, &step_aware_iteration_block|
+              def to_a(*args, &iteration_block)
+                with_processing_return_value_as_array(arguments(*args, &iteration_block)) do |*args, &step_aware_iteration_block|
                   enumerable.to_a(*args, &step_aware_iteration_block)
                 end
               end
@@ -1048,8 +1048,8 @@ module ConvenientService
               # @internal
               #   TODO: Specs for arguments.
               #
-              def to_h(*args, &block)
-                with_processing_return_value_as_hash(arguments(*args, &block)) do |*args, &step_aware_iteration_block|
+              def to_h(*args, &iteration_block)
+                with_processing_return_value_as_hash(arguments(*args, &iteration_block)) do |*args, &step_aware_iteration_block|
                   enumerable.to_h(*args, &step_aware_iteration_block)
                 end
               end
@@ -1061,8 +1061,8 @@ module ConvenientService
               # @param iteration_block [Proc, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
               #
-              def to_set(*args, &block)
-                with_processing_return_value_as_set(arguments(*args, &block)) do |*args, &step_aware_iteration_block|
+              def to_set(*args, &iteration_block)
+                with_processing_return_value_as_set(arguments(*args, &iteration_block)) do |*args, &step_aware_iteration_block|
                   enumerable.to_set(*args, &step_aware_iteration_block)
                 end
               end
@@ -1114,7 +1114,7 @@ module ConvenientService
                   end
                 else
                   with_processing_return_value_as_exactly_enumerator(n) do |n|
-                    self.to_enum(:_select_exactly, n)
+                    to_enum(:_select_exactly, n)
                   end
                 end
               end
@@ -1132,7 +1132,7 @@ module ConvenientService
                 if step_aware_iteration_block
                   enumerable.select(&step_aware_iteration_block)
                 else
-                  self.to_enum(:_select_exactly, n)
+                  to_enum(:_select_exactly, n)
                 end
               end
             end

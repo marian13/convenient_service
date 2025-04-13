@@ -3,6 +3,7 @@
 ##
 # TODO: Fix rubocop for `if ConvenientService::Dependencies.ruby.version > ...`.
 #
+# rubocop:disable all
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers, RSpec/DescribeClass, RSpec/ExampleLength, RSpec/MissingExampleGroupArgument, RSpec/MultipleExpectations
 RSpec.describe "Loops", type: [:standard, :e2e] do
   include ConvenientService::RSpec::Matchers::Results
@@ -8419,3 +8420,4 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
   end
 end
 # rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers, RSpec/DescribeClass, RSpec/ExampleLength, RSpec/MissingExampleGroupArgument, RSpec/MultipleExpectations
+# rubocop:enable all

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable all
 # ConvenientService.backtrace_cleaner.remove_silencers!
 
 class CalculateSquare
@@ -88,3 +89,4 @@ class MoreThanExactlyService
 end
 
 p [LessThanExactlyService, ExactlyService, MoreThanExactlyService].map(&:result).map(&:status).map(&:to_sym)
+# rubocop:enable all
