@@ -19,7 +19,7 @@
       "",
       "  step :result",
       "",
-      "  def result"
+      "  def result",
       "    ${5:# ...}",
       "",
       "    success",
