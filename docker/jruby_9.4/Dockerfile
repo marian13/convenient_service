@@ -1,4 +1,9 @@
 ##
+# @author Marian Kostyk <mariankostyk13895@gmail.com>
+# @license LGPLv3 <https://www.gnu.org/licenses/lgpl-3.0.html>
+##
+
+##
 # JRuby 9.4 (CRuby 3.1 compatible) with Node.js 16.x.
 # - https://www.jruby.org/download
 #

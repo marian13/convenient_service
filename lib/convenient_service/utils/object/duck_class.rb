@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 ##
+# @author Marian Kostyk <mariankostyk13895@gmail.com>
+# @license LGPLv3 <https://www.gnu.org/licenses/lgpl-3.0.html>
+##
+
+##
 # Converts an object to a "duck" class in terms of `Module#method_defined?` or `Module#define_method`.
 #
 # @example Avoid `if` condition for `Module#method_defined?`.

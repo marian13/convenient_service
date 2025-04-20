@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 ##
+# @author Marian Kostyk <mariankostyk13895@gmail.com>
+# @license LGPLv3 <https://www.gnu.org/licenses/lgpl-3.0.html>
+##
+
+##
 # A custom runner for minitest.
 # It is created to have a "simpler" interface than original rake task provides.
 # - https://stackoverflow.com/questions/4788288/how-to-run-all-tests-with-minitest

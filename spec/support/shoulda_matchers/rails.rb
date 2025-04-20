@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 ##
+# @author Marian Kostyk <mariankostyk13895@gmail.com>
+# @license LGPLv3 <https://www.gnu.org/licenses/lgpl-3.0.html>
+##
+
+##
 # NOTE: Waits for `should-matchers` full support.
 #
 # TODO: Contribute. Remove "shoulda-matchers" dependency on ActiveRecord.

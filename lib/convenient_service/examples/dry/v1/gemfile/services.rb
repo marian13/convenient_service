@@ -1,5 +1,10 @@
 # frozen_string_literal: true
 
+##
+# @author Marian Kostyk <mariankostyk13895@gmail.com>
+# @license LGPLv3 <https://www.gnu.org/licenses/lgpl-3.0.html>
+##
+
 require_relative "services/run_shell_command"
 
 require_relative "services/assert_file_exists"

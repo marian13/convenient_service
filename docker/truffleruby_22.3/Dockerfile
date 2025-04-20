@@ -1,4 +1,9 @@
 ##
+# @author Marian Kostyk <mariankostyk13895@gmail.com>
+# @license LGPLv3 <https://www.gnu.org/licenses/lgpl-3.0.html>
+##
+
+##
 # TruffleRuby 22.3 (CRuby 3.1 compatible) with Node.js 16.x.
 # - https://github.com/graalvm/container/blob/master/truffleruby/README.md
 # - https://github.com/oracle/truffleruby/blob/master/doc/user/compatibility.md

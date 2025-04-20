@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 ##
+# @author Marian Kostyk <mariankostyk13895@gmail.com>
+# @license LGPLv3 <https://www.gnu.org/licenses/lgpl-3.0.html>
+##
+
+##
 # @internal
 #   - https://ruby-doc.org/stdlib-2.7.0/libdoc/rubygems/rdoc/Gem/Version.html
 #   - https://github.com/rubygems/rubygems

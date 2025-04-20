@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 ##
+# @author Marian Kostyk <mariankostyk13895@gmail.com>
+# @license LGPLv3 <https://www.gnu.org/licenses/lgpl-3.0.html>
+##
+
+##
 # Tries to parse a JSON string and return the corresponding JSON object (Ruby hash, array, etc).
 # Returns default value when fails to parse (default value is set to `nil` by default).
 #

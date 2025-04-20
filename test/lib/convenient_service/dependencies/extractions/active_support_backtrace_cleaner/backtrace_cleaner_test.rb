@@ -1,5 +1,12 @@
 # frozen_string_literal: true
 
+##
+# @autor Rails Team <https://rubyonrails.org>
+# @author Marian Kostyk <mariankostyk13895@gmail.com>
+# @license LGPLv3 <https://www.gnu.org/licenses/lgpl-3.0.html>
+# @see https://github.com/rails/rails/blob/main/activesupport/lib/active_support/backtrace_cleaner.rb
+##
+
 require "test_helper"
 
 require "convenient_service"

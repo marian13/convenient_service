@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 ##
+# @author Marian Kostyk <mariankostyk13895@gmail.com>
+# @license LGPLv3 <https://www.gnu.org/licenses/lgpl-3.0.html>
+##
+
+##
 # @example
 #   {foo: (1..10), bar: /abc/} == {foo: 5, bar: :abc}
 #   # => false, since values are compared by `#==` under the hood.

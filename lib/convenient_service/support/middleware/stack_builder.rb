@@ -1,5 +1,10 @@
 # frozen_string_literal: true
 
+##
+# @author Marian Kostyk <mariankostyk13895@gmail.com>
+# @license LGPLv3 <https://www.gnu.org/licenses/lgpl-3.0.html>
+##
+
 require_relative "stack_builder/constants"
 require_relative "stack_builder/entities"
 require_relative "stack_builder/exceptions"

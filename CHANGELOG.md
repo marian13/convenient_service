@@ -1,3 +1,8 @@
+<!--
+  AUTHOR: Marian Kostyk <mariankostyk13895@gmail.com>
+  LICENSE: LGPLv3 <https://www.gnu.org/licenses/lgpl-3.0.html>
+-->
+
 # Changelog
 
 ## [0.20.0](https://github.com/marian13/convenient_service/compare/v0.19.0...v0.20.0) (2024-07-27)

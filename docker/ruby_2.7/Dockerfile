@@ -1,4 +1,9 @@
 ##
+# @author Marian Kostyk <mariankostyk13895@gmail.com>
+# @license LGPLv3 <https://www.gnu.org/licenses/lgpl-3.0.html>
+##
+
+##
 # Ruby 2.7 with Node.js 16.x.
 #
 # NOTE: Linted by hadolint.

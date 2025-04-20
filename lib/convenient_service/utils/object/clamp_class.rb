@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 ##
+# @author Marian Kostyk <mariankostyk13895@gmail.com>
+# @license LGPLv3 <https://www.gnu.org/licenses/lgpl-3.0.html>
+##
+
+##
 # Returns class when `object` is a class, module when `object` is a module or object's class.
 #
 # @example Aloid `if` condition for `ConvenientService::Core::Concern::ClassMethod#middlewares`.

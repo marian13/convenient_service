@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 ##
+# @author Marian Kostyk <mariankostyk13895@gmail.com>
+# @license LGPLv3 <https://www.gnu.org/licenses/lgpl-3.0.html>
+##
+
+##
 # @note Other gems are also trying to integrate with Rails Backtrace Cleaner.
 # @see https://github.com/sidekiq/sidekiq/pull/5796
 # @see https://github.com/sidekiq/sidekiq/issues/5589

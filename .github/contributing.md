@@ -1,3 +1,8 @@
+<!--
+  AUTHOR: Marian Kostyk <mariankostyk13895@gmail.com>
+  LICENSE: LGPLv3 <https://www.gnu.org/licenses/lgpl-3.0.html>
+-->
+
 # Contributing
 
 ## Legal

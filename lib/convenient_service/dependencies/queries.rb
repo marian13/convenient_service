@@ -1,5 +1,10 @@
 # frozen_string_literal: true
 
+##
+# @author Marian Kostyk <mariankostyk13895@gmail.com>
+# @license LGPLv3 <https://www.gnu.org/licenses/lgpl-3.0.html>
+##
+
 require_relative "queries/version"
 require_relative "queries/ruby"
 require_relative "queries/gems"

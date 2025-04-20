@@ -1,4 +1,9 @@
 ##
+# @author Marian Kostyk <mariankostyk13895@gmail.com>
+# @license LGPLv3 <https://www.gnu.org/licenses/lgpl-3.0.html>
+##
+
+##
 # Ruby 3.3 with Node.js 18.x.
 #
 # NOTE: Linted by hadolint.

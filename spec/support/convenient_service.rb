@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 ##
+# @author Marian Kostyk <mariankostyk13895@gmail.com>
+# @license LGPLv3 <https://www.gnu.org/licenses/lgpl-3.0.html>
+##
+
+##
 # NOTE: Sometimes it is needed to debug something even before `convenient_service` is loaded.
 #
 require "convenient_service/dependencies/extractions/b"

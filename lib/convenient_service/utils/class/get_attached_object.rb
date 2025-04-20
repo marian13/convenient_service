@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 ##
+# @author Marian Kostyk <mariankostyk13895@gmail.com>
+# @license LGPLv3 <https://www.gnu.org/licenses/lgpl-3.0.html>
+##
+
+##
 # @note This util is only available for Ruby 3.2+. There are no reliable and performant backports for older Rubies.
 #
 # @see https://github.com/marcandre/backports/blob/v3.25.0/lib/backports/3.2.0/class/attached_object.rb#L7

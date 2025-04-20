@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 ##
+# @author Marian Kostyk <mariankostyk13895@gmail.com>
+# @license LGPLv3 <https://www.gnu.org/licenses/lgpl-3.0.html>
+##
+
+##
 # - https://github.com/rspec/rspec-rails/issues/1353#issuecomment-93173691
 # - https://superuser.com/questions/1607829/what-does-kill-usr1-1-do
 #
