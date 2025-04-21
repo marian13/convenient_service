@@ -65,6 +65,22 @@ tasks:
       - task: test
 
   ##
+  # Displays memory usage of `require "convenient_service"` with info about each sub `require`.
+  # - https://github.com/zombocom/derailed_benchmarks?tab=readme-ov-file#memory-used-at-require-time
+  #
+  benchmark:derailed:memory:
+    cmds:
+      - CUT_OFF=0.1 bundle exec derailed bundle:mem
+
+  ##
+  # Displays object allocations count for all gems in `gemspec`.
+  # - https://github.com/zombocom/derailed_benchmarks?tab=readme-ov-file#memory-used-at-require-time
+  #
+  benchmark:derailed:objects:
+    cmds:
+      - bundle exec derailed bundle:objects production
+
+  ##
   # NOTE: Usage examples.
   #   APPRAISAL=all task console
   #   APPRAISAL=amazing_print task console
@@ -131,6 +147,7 @@ tasks:
     cmds:
       - rm Gemfile.* 2> /dev/null || true
       - rm -rf gemfiles
+      - mkdir -p gemfiles
       - touch gemfiles/.gitkeep
     prompt: This task removes Gemfile.* and gemfiles/**/*. Are you sure?
 

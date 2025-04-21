@@ -151,6 +151,12 @@ Gem::Specification.new do |spec|
   #
   spec.add_development_dependency "diffy", "~> 3.4.0"
 
+  ##
+  # Used for measing memory of `require "convenient_service"`.
+  # - https://github.com/zombocom/get_process_mem
+  #
+  spec.add_development_dependency "get_process_mem", "~> 0.2.7"
+
   spec.add_development_dependency "faker"
 
   ##
