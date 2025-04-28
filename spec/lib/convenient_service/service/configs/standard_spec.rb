@@ -1,3 +1,4 @@
+
 # frozen_string_literal: true
 
 ##
@@ -679,11 +680,11 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
         end
       end
 
-      context "when `:not_passed` option is passed" do
+      context "when `:not_passed_arguments` option is passed" do
         let(:service_class) do
           Class.new.tap do |klass|
             klass.class_exec(described_class) do |mod|
-              include mod.with(:not_passed)
+              include mod.with(:not_passed_arguments)
             end
           end
         end
