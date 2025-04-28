@@ -83,6 +83,7 @@ module ConvenientService
             use ConvenientService::Plugins::Common::AssignsAttributesInConstructor::UsingDryInitializer::Concern if options.include?(:dry_initializer)
             use ConvenientService::Plugins::Common::HasMemoization::UsingMemoWise::Concern if options.include?(:memo_wise)
             use ConvenientService::Plugins::Common::CanHaveNotPassedArguments::Concern if options.include?(:not_passed_arguments)
+            use ConvenientService::Plugins::Common::CanUtilizeFiniteLoop::Concern if options.include?(:finite_loop)
             use ConvenientService::Plugins::Service::HasMermaidFlowchart::Concern if options.include?(:mermaid_flowchart)
           end
 

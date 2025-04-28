@@ -39,7 +39,7 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveNotPassedArguments::Co
     describe "#not_passed" do
       let(:service_class) do
         Class.new do
-          include ConvenientService::Standard::Config.with(:not_passed)
+          include ConvenientService::Standard::Config.with(:not_passed_arguments)
 
           ##
           # TODO: Missing private methods trigger config commitment, but they are not immediately recalled. Why?
@@ -63,7 +63,7 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveNotPassedArguments::Co
     describe "#not_passed?" do
       let(:service_class) do
         Class.new do
-          include ConvenientService::Standard::Config.with(:not_passed)
+          include ConvenientService::Standard::Config.with(:not_passed_arguments)
 
           ##
           # TODO: Missing private methods trigger config commitment, but they are not immediately recalled. Why?
@@ -106,7 +106,7 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveNotPassedArguments::Co
     describe "#not_passed" do
       let(:service_class) do
         Class.new do
-          include ConvenientService::Standard::Config.with(:not_passed)
+          include ConvenientService::Standard::Config.with(:not_passed_arguments)
 
           ##
           # NOTE: `not_passed` is intentionally private. That's why `not_passed_public` wrapper is used.
@@ -125,7 +125,7 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveNotPassedArguments::Co
     describe "#not_passed?" do
       let(:service_class) do
         Class.new do
-          include ConvenientService::Standard::Config.with(:not_passed)
+          include ConvenientService::Standard::Config.with(:not_passed_arguments)
 
           ##
           # NOTE: `not_passed` is intentionally private. That's why `not_passed_public` wrapper is used.

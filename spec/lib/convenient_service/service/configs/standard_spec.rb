@@ -690,8 +690,24 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
         end
 
         example_group "concerns" do
-          it "adds `ConvenientService::Common::Plugins::CanHaveNotPassedArguments::Concern` after `ConvenientService::Plugins::Service::HasJSendResultStatusCheckShortSyntax::Middleware` to service step middlewares for `#result`" do
+          it "adds `ConvenientService::Common::Plugins::CanHaveNotPassedArguments::Concern` after `ConvenientService::Plugins::Service::HasJSendResultStatusCheckShortSyntax::Concern` to service concerns" do
             expect(service_class.concerns.to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Plugins::Service::HasJSendResultStatusCheckShortSyntax::Concern && current_middleware == ConvenientService::Common::Plugins::CanHaveNotPassedArguments::Concern }).not_to be_nil
+          end
+        end
+      end
+
+      context "when `:finite_loop` option is passed" do
+        let(:service_class) do
+          Class.new.tap do |klass|
+            klass.class_exec(described_class) do |mod|
+              include mod.with(:finite_loop)
+            end
+          end
+        end
+
+        example_group "concerns" do
+          it "adds `ConvenientService::Common::Plugins::CanUtilizeFiniteLoop::Concern` after `ConvenientService::Plugins::Service::HasJSendResultStatusCheckShortSyntax::Concern` to service concerns" do
+            expect(service_class.concerns.to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Plugins::Service::HasJSendResultStatusCheckShortSyntax::Concern && current_middleware == ConvenientService::Common::Plugins::CanUtilizeFiniteLoop::Concern }).not_to be_nil
           end
         end
       end
