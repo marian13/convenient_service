@@ -14,9 +14,8 @@ require "convenient_service"
 
 ConvenientService.backtrace_cleaner.remove_silencers! if ::ConvenientService.debug?
 
-ConvenientService::Dependencies.require_can_utilize_finite_loop_plugin
-
-ConvenientService::Dependencies.require_rspec_extentions
 ConvenientService::Dependencies.require_test_tools
 
-ConvenientService::Dependencies.require_alias
+require "convenient_service/extras/rspec"
+require "convenient_service/extras/alias"
+require "convenient_service/extras/plugins/can_utilize_finite_loop"

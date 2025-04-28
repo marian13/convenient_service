@@ -7,8 +7,6 @@
 
 require_relative "config/commands"
 
-# frozen_string_literal: true
-
 module ConvenientService
   module Config
     ##

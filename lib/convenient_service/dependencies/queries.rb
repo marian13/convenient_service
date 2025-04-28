@@ -55,20 +55,18 @@ module ConvenientService
       end
 
       ##
-      # @api public
+      # @api private
       #
       # @return [Boolean]
-      # @note Expected to be called from app entry points like `initializers` in Rails.
       #
       def require_alias
-        require "convenient_service/alias"
+        ::Object.const_set(:CS, ::ConvenientService)
       end
 
       ##
-      # @api public
+      # @api private
       #
       # @return [Boolean]
-      # @note Expected to be called from app entry points like `initializers` in Rails.
       #
       def require_assigns_attributes_in_constructor_using_active_model_attribute_assignment_plugin
         ##
@@ -82,10 +80,9 @@ module ConvenientService
       end
 
       ##
-      # @api public
+      # @api private
       #
       # @return [Boolean]
-      # @note Expected to be called from app entry points like `initializers` in Rails.
       #
       def require_assigns_attributes_in_constructor_using_dry_initializer_plugin
         ##
@@ -98,20 +95,18 @@ module ConvenientService
       end
 
       ##
-      # @api public
+      # @api private
       #
       # @return [Boolean]
-      # @note Expected to be called from app entry points like `initializers` in Rails.
       #
       def require_can_utilize_finite_loop_plugin
         require "convenient_service/common/plugins/can_utilize_finite_loop"
       end
 
       ##
-      # @api public
+      # @api private
       #
       # @return [Boolean]
-      # @note Expected to be called from app entry points like `initializers` in Rails.
       #
       def require_has_attributes_using_active_model_attributes_plugin
         ##
@@ -125,10 +120,9 @@ module ConvenientService
       end
 
       ##
-      # @api public
+      # @api private
       #
       # @return [Boolean]
-      # @note Expected to be called from app entry points like `initializers` in Rails.
       #
       def require_amazing_print_inspect_standard_config_option
         ##
@@ -146,10 +140,9 @@ module ConvenientService
       end
 
       ##
-      # @api public
+      # @api private
       #
       # @return [Boolean]
-      # @note Expected to be called from app entry points like `initializers` in Rails.
       #
       # Loads a config that patches services to use Awesome Print to generate colored `inspect` strings.
       # Useful for debugging.
@@ -253,30 +246,27 @@ module ConvenientService
       end
 
       ##
-      # @api public
+      # @api private
       #
       # @return [Boolean]
-      # @note Expected to be called from app entry points like `initializers` in Rails.
       #
       def require_dry_initializer_standard_config_option
         require_assigns_attributes_in_constructor_using_dry_initializer_plugin
       end
 
       ##
-      # @api public
+      # @api private
       #
       # @return [Boolean]
-      # @note Expected to be called from app entry points like `initializers` in Rails.
       #
       def require_active_model_validations_standard_config_option
         require_has_j_send_result_params_validations_using_active_model_validations_plugin
       end
 
       ##
-      # @api public
+      # @api private
       #
       # @return [Boolean]
-      # @note Expected to be called from app entry points like `initializers` in Rails.
       #
       def require_memo_wise_standard_config_option
         ##
@@ -288,10 +278,9 @@ module ConvenientService
       end
 
       ##
-      # @api public
+      # @api private
       #
       # @return [Boolean]
-      # @note Expected to be called from app entry points like `initializers` in Rails.
       #
       # @see https://userdocs.convenientservice.org/troubleshooting/i18n_translate_wrong_number_of_arguments
       #
@@ -307,10 +296,9 @@ module ConvenientService
       end
 
       ##
-      # @api public
+      # @api private
       #
       # @return [Boolean]
-      # @note Expected to be called from app entry points like `initializers` in Rails.
       #
       def require_has_j_send_result_params_validations_using_dry_validation_plugin
         ##
@@ -335,7 +323,6 @@ module ConvenientService
       # @api private
       #
       # @return [Boolean]
-      # @note Expected to be called from app entry points like `initializers` in Rails.
       #
       def require_wraps_result_in_db_transaction_plugin
         ##
@@ -459,7 +446,7 @@ module ConvenientService
       end
 
       ##
-      # @api public
+      # @api private
       #
       # Loads RSpec extensions like `be_success` matcher, `stub_service` helper, etc.
       #
