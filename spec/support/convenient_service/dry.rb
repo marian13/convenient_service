@@ -7,7 +7,8 @@
 
 ConvenientService::Dependencies.require_development_tools
 
-ConvenientService::Dependencies.require_dry_initializer_standard_config_option
+require "convenient_service/extras/standard/config/options/dry_initializer"
+
 ConvenientService::Dependencies.require_has_j_send_result_params_validations_using_dry_validation_plugin
 
 ConvenientService::Dependencies.require_dry_examples

@@ -7,4 +7,4 @@
 
 ConvenientService::Dependencies.require_development_tools(amazing_print: false, awesome_print: true)
 
-ConvenientService::Dependencies.require_awesome_print_inspect_standard_config_option
+require "convenient_service/extras/standard/config/options/awesome_print_inspect"

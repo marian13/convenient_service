@@ -7,4 +7,4 @@
 
 ConvenientService::Dependencies.require_development_tools
 
-ConvenientService::Dependencies.require_memo_wise_standard_config_option
+require "convenient_service/extras/standard/config/options/memo_wise"
