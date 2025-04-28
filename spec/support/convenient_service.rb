@@ -18,4 +18,3 @@ ConvenientService::Dependencies.require_test_tools
 
 require "convenient_service/extras/rspec"
 require "convenient_service/extras/alias"
-require "convenient_service/extras/plugins/can_utilize_finite_loop"

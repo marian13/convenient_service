@@ -99,15 +99,6 @@ module ConvenientService
       #
       # @return [Boolean]
       #
-      def require_can_utilize_finite_loop_plugin
-        require "convenient_service/common/plugins/can_utilize_finite_loop"
-      end
-
-      ##
-      # @api private
-      #
-      # @return [Boolean]
-      #
       def require_has_attributes_using_active_model_attributes_plugin
         ##
         # - https://edgeguides.rubyonrails.org/active_model_basics.html
@@ -269,11 +260,6 @@ module ConvenientService
       # @return [Boolean]
       #
       def require_memo_wise_standard_config_option
-        ##
-        # - https://github.com/awesome-print/awesome_print
-        #
-        require "memo_wise"
-
         require_has_memoization_using_memo_wise_plugin
       end
 

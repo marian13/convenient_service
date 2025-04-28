@@ -7,7 +7,7 @@
 
 ##
 # NOTE: This file is loaded by `require "convenient_service/extras/rspec"`.
-# NOTE: This file is expected to be called from app entry points like `initializers` in Rails.
+# NOTE: This file is expected to be called from RSpec entry points like `spec_helper.rb`.
 ##
 
 require "convenient_service"
