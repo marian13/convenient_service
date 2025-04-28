@@ -12,7 +12,9 @@
 #
 # require "convenient_service"
 #
-# RSpec.describe ConvenientService::Service::Plugins::WrapsResultInDBTransaction::Middleware, type: :standard do
+# RSpec.describe ConvenientService::Service::Plugins::WrapsResultInDBTransaction::UsingActiveRecordBaseTransaction::Middleware, type: :standard do
+#   include ConvenientService::RSpec::Matchers::Results
+#
 #   let(:middleware) { described_class }
 #
 #   example_group "inheritance" do
@@ -52,13 +54,11 @@
 #             include ConvenientService::Standard::Config
 #
 #             middlewares :result do
-#               delete ConvenientService::Service::Plugins::HasJSendResult::Middleware
-#
 #               use_and_observe middleware
 #             end
 #
 #             def result
-#               "result value"
+#               success(value: "result value")
 #             end
 #           end
 #         end
@@ -76,9 +76,9 @@
 #       # TODO: Write a spec that makes real SQL queries and rollbacks them.
 #       #
 #       it "is called inside `ActiveRecord::Base.transaction`" do
-#         allow(ActiveRecord::Base).to receive(:transaction).and_return("transaction value")
+#         allow(ActiveRecord::Base).to receive(:transaction).and_return(service_instance.success(value: "transaction value"))
 #
-#         expect(method_value).to eq("transaction value")
+#         expect(method_value).to be_success.with_data(value: "transaction value")
 #       end
 #
 #       specify do

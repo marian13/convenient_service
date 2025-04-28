@@ -9,11 +9,13 @@ module ConvenientService
   module Service
     module Plugins
       module WrapsResultInDBTransaction
-        class Middleware < MethodChainMiddleware
-          intended_for :result, scope: :class, entity: :service
+        module UsingActiveRecordBaseTransaction
+          class Middleware < MethodChainMiddleware
+            intended_for :result, scope: :class, entity: :service
 
-          def next(...)
-            ::ActiveRecord::Base.transaction { chain.next(...) }
+            def next(...)
+              ::ActiveRecord::Base.transaction { chain.next(...) }
+            end
           end
         end
       end

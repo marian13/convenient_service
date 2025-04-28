@@ -310,7 +310,7 @@ module ConvenientService
       #
       # @return [Boolean]
       #
-      def require_wraps_result_in_db_transaction_plugin
+      def require_wraps_result_in_db_transaction_using_active_record_base_transaction_plugin
         ##
         # - https://edgeguides.rubyonrails.org/active_record_basics.html
         # - https://api.rubyonrails.org/classes/ActiveRecord.html
@@ -318,7 +318,7 @@ module ConvenientService
         #
         require "active_record"
 
-        require "convenient_service/service/plugins/wraps_result_in_db_transaction"
+        require "convenient_service/service/plugins/wraps_result_in_db_transaction/using_active_record_base_transaction"
       end
 
       ##

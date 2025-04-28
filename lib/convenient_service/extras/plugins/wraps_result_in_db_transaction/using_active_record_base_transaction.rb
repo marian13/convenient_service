@@ -6,10 +6,10 @@
 ##
 
 ##
-# NOTE: This file is loaded by `require "convenient_service/extras/plugins/wraps_result_in_db_transaction/using_active_record"`.
+# NOTE: This file is loaded by `require "convenient_service/extras/plugins/wraps_result_in_db_transaction/using_active_record_base_transaction"`.
 # NOTE: This file is expected to be called from app entry points like `initializers` in Rails.
 ##
 
 require "convenient_service"
 
-ConvenientService::Dependencies.require_wraps_result_in_db_transaction_plugin
+ConvenientService::Dependencies.require_wraps_result_in_db_transaction_using_active_record_base_transaction_plugin
