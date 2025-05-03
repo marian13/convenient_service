@@ -4,6 +4,8 @@
 --no-private
 --tag internal
 --hide-tag internal
+--tag license
+--hide-tag license
 --plugin convenient_service_concern
 --plugin convenient_service_exclude_self_classes
 'lib/**/*.rb'
