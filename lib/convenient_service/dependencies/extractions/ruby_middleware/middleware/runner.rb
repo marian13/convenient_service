@@ -1,5 +1,5 @@
 ##
-# @autor Ruby Middleware Team <https://github.com/Ibsciss/ruby-middleware>
+# @author Ruby Middleware Team <https://github.com/Ibsciss/ruby-middleware>
 # @author Marian Kostyk <mariankostyk13895@gmail.com>
 # @license LGPLv3 <https://www.gnu.org/licenses/lgpl-3.0.html>
 # @see https://github.com/Ibsciss/ruby-middleware
