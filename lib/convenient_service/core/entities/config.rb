@@ -135,13 +135,13 @@ module ConvenientService
         ##
         # This method is intended to be used only inside config `included` blocks.
         #
-        # @return [Set]
+        # @return [ConvenientService::Config::Entities::Options]
         #
         # @internal
         #   NOTE: `namespace` is defined only for classes that were created by `Config#entity`.
         #
         def options
-          @options ||= Utils.safe_send(klass, :namespace)&.__convenient_service_config__&.options || ::Set.new
+          @options ||= Utils.safe_send(klass, :namespace)&.__convenient_service_config__&.options || ConvenientService::Config::Entities::Options.new
         end
 
         ##

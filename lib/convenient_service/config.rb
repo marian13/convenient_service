@@ -6,6 +6,8 @@
 ##
 
 require_relative "config/commands"
+require_relative "config/entities"
+require_relative "config/exceptions"
 
 module ConvenientService
   module Config
@@ -40,7 +42,7 @@ module ConvenientService
           #
           def with(*options)
             dup.tap do |mod|
-              mod.module_exec(base, self.options.dup.merge(Commands::NormalizeOptions[options: options])) do |base, options|
+              mod.module_exec(base, self.options.dup.merge(options)) do |base, options|
                 ##
                 # @return [ConvenientService::Config]
                 #
@@ -60,7 +62,7 @@ module ConvenientService
           #
           def without(*options)
             dup.tap do |mod|
-              mod.module_exec(base, self.options.dup.subtract(Commands::NormalizeOptions[options: options])) do |base, options|
+              mod.module_exec(base, self.options.dup.subtract(options)) do |base, options|
                 ##
                 # @return [ConvenientService::Config]
                 #
@@ -98,7 +100,7 @@ module ConvenientService
           #
           def without_defaults
             dup.tap do |mod|
-              mod.module_exec(base, ::Set.new) do |base, options|
+              mod.module_exec(base, Entities::Options.new) do |base, options|
                 ##
                 # @return [ConvenientService::Config]
                 #
@@ -120,18 +122,18 @@ module ConvenientService
           end
 
           ##
-          # @return [Set]
+          # @return [ConvenientService::Config::Entities::Options]
           #
           def options
-            @options ||= Commands::NormalizeOptions[options: default_options.dup]
+            @options ||= Entities::Options.new(options: default_options.dup)
           end
 
           ##
           # @param block [Proc, nil]
-          # @return [Set]
+          # @return [ConvenientService::Config::Entities::Options]
           #
           def default_options(&block)
-            block ? @default_options = Commands::NormalizeOptions[options: yield] : @default_options ||= ::Set.new
+            block ? @default_options = Entities::Options.new(options: yield) : @default_options ||= Entities::Options.new
           end
 
           ##

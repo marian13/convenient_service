@@ -6,6 +6,7 @@
 ##
 
 require_relative "bool/to_bool"
+require_relative "bool/to_env_bool"
 
 module ConvenientService
   module Utils
@@ -13,6 +14,10 @@ module ConvenientService
       class << self
         def to_bool(...)
           ToBool.call(...)
+        end
+
+        def to_env_bool(...)
+          ToEnvBool.call(...)
         end
       end
     end
