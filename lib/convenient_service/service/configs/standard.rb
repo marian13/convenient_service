@@ -274,6 +274,10 @@ module ConvenientService
                 use ConvenientService::Plugins::Data::HasAwesomePrintInspect::Concern if options.include?(:awesome_print_inspect)
                 use ConvenientService::Plugins::Data::HasAmazingPrintInspect::Concern if options.include?(:amazing_print_inspect)
               end
+
+              middlewares :initialize do
+                use ConvenientService::Plugins::Data::HasMethodReaders::Middleware if options.include?(:short_syntax)
+              end
             end
 
             entity :Message do

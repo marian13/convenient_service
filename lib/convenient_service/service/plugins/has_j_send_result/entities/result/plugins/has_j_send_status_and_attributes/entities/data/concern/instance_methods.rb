@@ -23,13 +23,29 @@ module ConvenientService
                         # @!attribute [r] value
                         #   @return [Hash]
                         #
+                        # @internal
+                        #   NOTE: This method can be overridden by the end-user when the `HasMethodReaders` plugin is utilized. Prefer to rely on `__value__` inside the library code.
+                        #
                         attr_reader :value
+
+                        ##
+                        # @return [Hash]
+                        #
+                        alias_method :__value__, :value
 
                         ##
                         # @!attribute [r] result
                         #   @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
                         #
+                        # @internal
+                        #   NOTE: This method can be overridden by the end-user when the `HasMethodReaders` plugin is utilized. Prefer to rely on `__result__` inside the library code.
+                        #
                         attr_reader :result
+
+                        ##
+                        # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
+                        #
+                        alias_method :__result__, :result
 
                         ##
                         # @param value [Hash]
@@ -56,24 +72,48 @@ module ConvenientService
                         ##
                         # @return [Boolean]
                         #
+                        # @internal
+                        #   NOTE: This method can be overridden by the end-user when the `HasMethodReaders` plugin is utilized. Prefer to rely on `__empty__?` inside the library code.
+                        #
                         def empty?
-                          value.empty?
+                          __value__.empty?
                         end
+
+                        ##
+                        # @return [Boolean]
+                        #
+                        alias_method :__empty__?, :empty?
 
                         ##
                         # @param key [String, Symbol]
                         # @return [Boolean]
                         #
+                        # @internal
+                        #   NOTE: This method can be overridden by the end-user when the `HasMethodReaders` plugin is utilized. Prefer to rely on `__has_attribute__?` inside the library code.
+                        #
                         def has_attribute?(key)
-                          value.has_key?(key.to_sym)
+                          __value__.has_key?(key.to_sym)
+                        end
+
+                        ##
+                        # @return [Boolean]
+                        #
+                        alias_method :__has_attribute__?, :has_attribute?
+
+                        ##
+                        # @return [Array<Symbol>]
+                        #
+                        # @internal
+                        #   NOTE: This method can be overridden by the end-user when the `HasMethodReaders` plugin is utilized. Prefer to rely on `__keys__` inside the library code.
+                        #
+                        def keys
+                          __value__.keys
                         end
 
                         ##
                         # @return [Array<Symbol>]
                         #
-                        def keys
-                          value.keys
-                        end
+                        alias_method :__keys__, :keys
 
                         ##
                         # @param other [Object] Can be any type.
@@ -82,8 +122,8 @@ module ConvenientService
                         def ==(other)
                           return unless other.instance_of?(self.class)
 
-                          return false if result.class != other.result.class
-                          return false if value != other.value
+                          return false if __result__.class != other.__result__.class
+                          return false if __value__ != other.__value__
 
                           true
                         end
@@ -129,17 +169,17 @@ module ConvenientService
                         def ===(other)
                           return unless other.instance_of?(self.class)
 
-                          return false if result.class != other.result.class
+                          return false if __result__.class != other.__result__.class
 
                           ##
                           # NOTE: Pattern matching is removed since it causes a huge and annoying warning in Ruby 2.7 apps. Users are too confused by it.
                           #
                           # TODO: Implement a Rubocop cop that forbids the usage of pattern matching until Ruby 2.7 is dropped.
                           #
-                          if value.instance_of?(::Hash) && other.value.instance_of?(::Hash)
-                            return false unless Utils::Hash.triple_equality_compare(value, other.value)
+                          if __value__.instance_of?(::Hash) && other.__value__.instance_of?(::Hash)
+                            return false unless Utils::Hash.triple_equality_compare(__value__, other.__value__)
                           else
-                            return false unless value === other.value
+                            return false unless __value__ === other.__value__
                           end
 
                           true
@@ -151,7 +191,7 @@ module ConvenientService
                         # @raise [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Exceptions::NotExistingAttribute]
                         #
                         def [](key)
-                          value.fetch(key.to_sym) { ::ConvenientService.raise Exceptions::NotExistingAttribute.new(attribute: key) }
+                          __value__.fetch(key.to_sym) { ::ConvenientService.raise Exceptions::NotExistingAttribute.new(attribute: key) }
                         end
 
                         ##
@@ -165,14 +205,14 @@ module ConvenientService
                         # @return [ConveninentService::Support::Arguments]
                         #
                         def to_arguments
-                          @to_arguments ||= Support::Arguments.new(value: value, result: result)
+                          @to_arguments ||= Support::Arguments.new(value: __value__, result: __result__)
                         end
 
                         ##
                         # @return [Hash]
                         #
                         def to_h
-                          @to_h ||= value.to_h
+                          @to_h ||= __value__.to_h
                         end
 
                         ##

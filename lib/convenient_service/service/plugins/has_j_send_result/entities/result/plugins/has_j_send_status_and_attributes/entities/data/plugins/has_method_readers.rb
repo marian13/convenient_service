@@ -5,7 +5,4 @@
 # @license LGPLv3 <https://www.gnu.org/licenses/lgpl-3.0.html>
 ##
 
-require_relative "plugins/has_inspect"
-require_relative "plugins/has_method_readers"
-
-require_relative "plugins/aliases"
+require_relative "has_method_readers/middleware"

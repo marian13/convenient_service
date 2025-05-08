@@ -50,7 +50,73 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       it { is_expected.to have_attr_reader(:result) }
     end
 
+    example_group "alias methods" do
+      include ConvenientService::RSpec::PrimitiveMatchers::HaveAliasMethod
+
+      subject { data }
+
+      it { is_expected.to have_alias_method(:__value__, :value) }
+      it { is_expected.to have_alias_method(:__result__, :result) }
+      it { is_expected.to have_alias_method(:__empty__?, :empty?) }
+      it { is_expected.to have_alias_method(:__has_attribute__?, :has_attribute?) }
+      it { is_expected.to have_alias_method(:__keys__, :keys) }
+    end
+
+    describe "#empty?" do
+      specify do
+        expect { data.empty? }
+          .to delegate_to(data, :__value__)
+          .without_arguments
+      end
+
+      context "when `data` has NO keys" do
+        let(:value) { {} }
+
+        it "returns `true`" do
+          expect(data.empty?).to eq(true)
+        end
+      end
+
+      context "when `data` has any key" do
+        let(:value) { {foo: :bar} }
+
+        it "returns `false`" do
+          expect(data.empty?).to eq(false)
+        end
+      end
+    end
+
+    describe "#__empty__?" do
+      specify do
+        expect { data.__empty__? }
+          .to delegate_to(data, :__value__)
+          .without_arguments
+      end
+
+      context "when `data` has NO keys" do
+        let(:value) { {} }
+
+        it "returns `true`" do
+          expect(data.__empty__?).to eq(true)
+        end
+      end
+
+      context "when `data` has any key" do
+        let(:value) { {foo: :bar} }
+
+        it "returns `false`" do
+          expect(data.__empty__?).to eq(false)
+        end
+      end
+    end
+
     describe "#has_attribute?" do
+      specify do
+        expect { data.has_attribute?(:foo) }
+          .to delegate_to(data, :__value__)
+          .without_arguments
+      end
+
       context "when `data` has NO attribute by key" do
         let(:value) { {} }
 
@@ -80,16 +146,67 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       end
     end
 
+    describe "#__has_attribute__?" do
+      specify do
+        expect { data.__has_attribute__?(:foo) }
+          .to delegate_to(data, :__value__)
+          .without_arguments
+      end
+
+      context "when `data` has NO attribute by key" do
+        let(:value) { {} }
+
+        it "returns `false`" do
+          expect(data.__has_attribute__?(:foo)).to eq(false)
+        end
+
+        context "when key is string" do
+          it "converts that key to symbol" do
+            expect(data.__has_attribute__?("foo")).to eq(false)
+          end
+        end
+      end
+
+      context "when `data` has attribute by key" do
+        let(:value) { {foo: :bar} }
+
+        it "returns `true`" do
+          expect(data.__has_attribute__?(:foo)).to eq(true)
+        end
+
+        context "when key is string" do
+          it "converts that key to symbol" do
+            expect(data.__has_attribute__?("foo")).to eq(true)
+          end
+        end
+      end
+    end
+
     describe "#keys" do
       specify do
         expect { data.keys }
-          .to delegate_to(data.value, :keys)
+          .to delegate_to(data.__value__, :keys)
+          .without_arguments
+          .and_return_its_value
+      end
+    end
+
+    describe "#__keys__" do
+      specify do
+        expect { data.__keys__ }
+          .to delegate_to(data.__value__, :keys)
           .without_arguments
           .and_return_its_value
       end
     end
 
     describe "#[]" do
+      specify do
+        expect { data[:foo] }
+          .to delegate_to(data, :__value__)
+          .without_arguments
+      end
+
       it "returns `data` attribute by string key" do
         expect(data["foo"]).to eq(:bar)
       end
@@ -198,6 +315,30 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           it "returns `true`" do
             expect(data == other).to eq(true)
           end
+
+          specify do
+            expect { data == other }
+              .to delegate_to(data, :__result__)
+              .without_arguments
+          end
+
+          specify do
+            expect { data == other }
+              .to delegate_to(other, :__result__)
+              .without_arguments
+          end
+
+          specify do
+            expect { data == other }
+              .to delegate_to(data, :__value__)
+              .without_arguments
+          end
+
+          specify do
+            expect { data == other }
+              .to delegate_to(other, :__value__)
+              .without_arguments
+          end
         end
       end
 
@@ -220,6 +361,30 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
 
             it "returns `false`" do
               expect(data === other).to eq(false)
+            end
+
+            specify do
+              expect { data === other }
+                .to delegate_to(data, :__result__)
+                .without_arguments
+            end
+
+            specify do
+              expect { data === other }
+                .to delegate_to(other, :__result__)
+                .without_arguments
+            end
+
+            specify do
+              expect { data === other }
+                .to delegate_to(data, :__value__)
+                .without_arguments
+            end
+
+            specify do
+              expect { data === other }
+                .to delegate_to(other, :__value__)
+                .without_arguments
             end
           end
 
@@ -374,6 +539,30 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           it "returns `true`" do
             expect(data === other).to eq(true)
           end
+
+          specify do
+            expect { data === other }
+              .to delegate_to(data, :__result__)
+              .without_arguments
+          end
+
+          specify do
+            expect { data === other }
+              .to delegate_to(other, :__result__)
+              .without_arguments
+          end
+
+          specify do
+            expect { data === other }
+              .to delegate_to(data, :__value__)
+              .without_arguments
+          end
+
+          specify do
+            expect { data === other }
+              .to delegate_to(other, :__value__)
+              .without_arguments
+          end
         end
       end
     end
@@ -398,6 +587,18 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       end
 
       describe "#to_arguments" do
+        specify do
+          expect { data.to_arguments }
+            .to delegate_to(data, :__value__)
+            .without_arguments
+        end
+
+        specify do
+          expect { data.to_arguments }
+            .to delegate_to(data, :__result__)
+            .without_arguments
+        end
+
         it "returns arguments representation of data" do
           expect(data.to_arguments).to eq(arguments)
         end
@@ -408,6 +609,12 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       end
 
       describe "#to_h" do
+        specify do
+          expect { data.to_h }
+            .to delegate_to(data, :__value__)
+            .without_arguments
+        end
+
         it "returns hash representation of `data`" do
           expect(data.to_h).to eq({foo: :bar})
         end

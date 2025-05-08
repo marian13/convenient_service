@@ -395,6 +395,18 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
                 expect(service_class::Result::Data.concerns.to_a).to eq(concerns)
               end
             end
+
+            example_group "#initialize middlewares" do
+              let(:initialize_middlewares) do
+                [
+                  ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data::Plugins::HasMethodReaders::Middleware
+                ]
+              end
+
+              it "sets service result data middlewares for `#initialize`" do
+                expect(service_class::Result::Data.middlewares(:initialize).to_a).to eq(initialize_middlewares)
+              end
+            end
           end
 
           example_group "service result message" do
