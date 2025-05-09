@@ -40,6 +40,12 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
         .copy(overrides: {kwargs: {organizer: organizer}})
     end
 
+    describe "#raw?" do
+      it "returns `true`" do
+        expect(caller.raw?).to eq(true)
+      end
+    end
+
     describe "#calculate_value" do
       it "delegates to `raw_value.unwrap`" do
         allow(raw_value).to receive(:unwrap).and_call_original

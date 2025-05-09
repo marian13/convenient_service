@@ -86,6 +86,42 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
     #   it { is_expected.to delegate_method(:to_s).to(:name) }
     # end
 
+    describe "#usual?" do
+      specify do
+        expect { method.usual? }
+          .to delegate_to(method.caller, :usual?)
+          .without_arguments
+          .and_return_its_value
+      end
+    end
+
+    describe "#alias?" do
+      specify do
+        expect { method.alias? }
+          .to delegate_to(method.caller, :alias?)
+          .without_arguments
+          .and_return_its_value
+      end
+    end
+
+    describe "#proc?" do
+      specify do
+        expect { method.proc? }
+          .to delegate_to(method.caller, :proc?)
+          .without_arguments
+          .and_return_its_value
+      end
+    end
+
+    describe "#raw?" do
+      specify do
+        expect { method.raw? }
+          .to delegate_to(method.caller, :raw?)
+          .without_arguments
+          .and_return_its_value
+      end
+    end
+
     example_group "comparison" do
       describe "#==" do
         context "when `other` has different class" do
@@ -300,6 +336,15 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
     example_group "conversions" do
       let(:arguments) { ConvenientService::Support::Arguments.new(**kwargs) }
       let(:kwargs) { {key: key, name: name, caller: caller, direction: direction, organizer: organizer} }
+
+      describe "#to_s" do
+        specify do
+          expect { method.to_s }
+            .to delegate_to(method.name, :to_s)
+            .without_arguments
+            .and_return_its_value
+        end
+      end
 
       describe "#to_kwargs" do
         specify do

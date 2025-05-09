@@ -71,6 +71,30 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
       end
     end
 
+    describe "#usual?" do
+      it "returns `false`" do
+        expect(caller.usual?).to eq(false)
+      end
+    end
+
+    describe "#alias?" do
+      it "returns `false`" do
+        expect(caller.alias?).to eq(false)
+      end
+    end
+
+    describe "#proc?" do
+      it "returns `false`" do
+        expect(caller.proc?).to eq(false)
+      end
+    end
+
+    describe "#raw?" do
+      it "returns `false`" do
+        expect(caller.raw?).to eq(false)
+      end
+    end
+
     example_group "conversions" do
       let(:arguments) { ConvenientService::Support::Arguments.new(*args) }
       let(:args) { [value] }

@@ -40,6 +40,12 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
         .copy(overrides: {kwargs: {organizer: organizer}})
     end
 
+    describe "#proc?" do
+      it "returns `true`" do
+        expect(caller.proc?).to eq(true)
+      end
+    end
+
     describe "#calculate_value" do
       it "delegates to `organizer.instance_exec(&proc)`" do
         ##

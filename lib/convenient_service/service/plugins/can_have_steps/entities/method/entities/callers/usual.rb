@@ -14,6 +14,13 @@ module ConvenientService
             module Entities
               module Callers
                 class Usual < Callers::Base
+                  ##
+                  # @return [Boolean]
+                  #
+                  def usual?
+                    true
+                  end
+
                   def calculate_value(method)
                     method.organizer.__send__(method.name.to_s)
                   end

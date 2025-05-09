@@ -46,14 +46,26 @@ module ConvenientService
                   #
                   # @internal
                   #   TODO: Remove `step.outputs.none?` to enforce users to specify outputs for all steps. Will be a breaking change.
+                  #   NOTE: `result_outputs` are usual and alias outputs.
+                  #   NOTE: `custom_outputs` are proc and raw outputs.
                   #
                   def extract_data(result)
                     return result.unsafe_data.to_h if result.status.unsafe_not_success?
                     return result.unsafe_data.to_h if step.outputs.none?
 
-                    step.outputs.each { |output| ::ConvenientService.raise Step::Exceptions::StepResultDataNotExistingAttribute.new(step: step, key: output.key.to_sym) unless result.unsafe_data.has_attribute?(output.key.to_sym) }
+                    result_outputs, custom_outputs = step.outputs.partition { |output| output.usual? || output.alias? }
 
-                    step.outputs.reduce({}) { |values, output| values.merge(output.name.to_sym => result.unsafe_data[output.key.to_sym]) }
+                    result_outputs.each do |output|
+                      next if result.unsafe_data.__has_attribute__?(output.key.to_sym)
+
+                      ::ConvenientService.raise Step::Exceptions::StepResultDataNotExistingAttribute.new(step: step, key: output.key.to_sym)
+                    end
+
+                    result_values = result_outputs.reduce({}) { |values, output| values.merge(output.name.to_sym => result.unsafe_data[output.key.to_sym]) }
+
+                    custom_values = custom_outputs.reduce({}) { |values, output| values.merge(output.name.to_sym => output.value) }
+
+                    result_values.merge(custom_values)
                   end
                 end
               end

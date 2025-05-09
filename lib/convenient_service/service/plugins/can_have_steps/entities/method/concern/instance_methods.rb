@@ -40,6 +40,26 @@ module ConvenientService
                 attr_reader :direction
 
                 ##
+                # @return [Boolean]
+                #
+                delegate :usual?, to: :caller
+
+                ##
+                # @return [Boolean]
+                #
+                delegate :alias?, to: :caller
+
+                ##
+                # @return [Boolean]
+                #
+                delegate :proc?, to: :caller
+
+                ##
+                # @return [Boolean]
+                #
+                delegate :raw?, to: :caller
+
+                ##
                 # @return [String]
                 #
                 delegate :to_s, to: :name

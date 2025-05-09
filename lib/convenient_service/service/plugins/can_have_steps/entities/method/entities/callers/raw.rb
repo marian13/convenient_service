@@ -14,6 +14,13 @@ module ConvenientService
             module Entities
               module Callers
                 class Raw < Callers::Base
+                  ##
+                  # @return [Boolean]
+                  #
+                  def raw?
+                    true
+                  end
+
                   def calculate_value(method)
                     raw_value.unwrap
                   end

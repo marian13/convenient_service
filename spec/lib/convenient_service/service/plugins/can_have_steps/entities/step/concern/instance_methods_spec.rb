@@ -172,15 +172,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       end
     end
 
-    describe "#outputs" do
-      specify do
-        expect { step.outputs }
-          .to delegate_to(step.params, :outputs)
-          .without_arguments
-          .and_return_its_value
-      end
-    end
-
     describe "#index" do
       specify do
         expect { step.index }
@@ -371,6 +362,14 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         end
 
         specify { expect { step.input_values }.to delegate_to(step.inputs.first.key, :to_sym) }
+      end
+    end
+
+    describe "#outputs" do
+      specify { expect { step.outputs }.to delegate_to(step.params, :outputs) }
+
+      it "returns copies of outputs with organizer set" do
+        expect(step.outputs.map(&:organizer)).to eq([organizer])
       end
     end
 

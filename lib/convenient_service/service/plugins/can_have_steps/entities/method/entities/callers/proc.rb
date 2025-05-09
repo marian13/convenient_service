@@ -14,6 +14,13 @@ module ConvenientService
             module Entities
               module Callers
                 class Proc < Callers::Base
+                  ##
+                  # @return [Boolean]
+                  #
+                  def proc?
+                    true
+                  end
+
                   def calculate_value(method)
                     method.organizer.instance_exec(&proc)
                   end

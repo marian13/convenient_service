@@ -50,6 +50,12 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
         .copy(overrides: {kwargs: {organizer: organizer}})
     end
 
+    describe "#alias?" do
+      it "returns `true`" do
+        expect(caller.alias?).to eq(true)
+      end
+    end
+
     describe "#calculate_value" do
       it "delegates to `organizer.__send__`" do
         allow(organizer).to receive(:__send__).with(method.name.to_s).and_call_original

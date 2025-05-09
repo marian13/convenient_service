@@ -45,6 +45,34 @@ module ConvenientService
                   end
 
                   ##
+                  # @return [Boolean]
+                  #
+                  def usual?
+                    false
+                  end
+
+                  ##
+                  # @return [Boolean]
+                  #
+                  def alias?
+                    false
+                  end
+
+                  ##
+                  # @return [Boolean]
+                  #
+                  def proc?
+                    false
+                  end
+
+                  ##
+                  # @return [Boolean]
+                  #
+                  def raw?
+                    false
+                  end
+
+                  ##
                   # @param other [Object] Can be any type.
                   # @return [Boolean, nil]
                   #
