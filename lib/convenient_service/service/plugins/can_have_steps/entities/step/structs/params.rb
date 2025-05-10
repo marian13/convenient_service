@@ -12,7 +12,7 @@ module ConvenientService
         module Entities
           class Step
             module Structs
-              Params = ::Struct.new(:action, :inputs, :outputs, :index, :container, :organizer, :extra_kwargs, keyword_init: true)
+              Params = ::Struct.new(:action, :inputs, :outputs, :strict, :index, :container, :organizer, :extra_kwargs, keyword_init: true)
             end
           end
         end

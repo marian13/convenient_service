@@ -16,8 +16,9 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
   example_group "class methods" do
     describe ".call" do
       let(:args) { [Class.new] }
-      let(:default_kwargs) { {in: [:foo], out: [:bar], index: index, container: container, organizer: organizer} }
+      let(:default_kwargs) { {in: [:foo], out: [:bar], strict: strict, index: index, container: container, organizer: organizer} }
       let(:kwargs) { default_kwargs }
+      let(:strict) { false }
       let(:index) { 0 }
       let(:container) { Object }
       let(:organizer) { Object.new }
@@ -70,6 +71,12 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           it "wraps `outputs` by array" do
             expect(command_result.outputs).to be_instance_of(Array)
           end
+        end
+      end
+
+      example_group "`strict`" do
+        it "returns `kwargs[:strict]` as `strict`" do
+          expect(command_result.strict).to eq(strict)
         end
       end
 

@@ -13,7 +13,7 @@ require "convenient_service"
 RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Structs::Params, type: :standard do
   example_group "instance methods" do
     describe "#==" do
-      let(:kwargs) { {action: Class.new, inputs: [:foo], outputs: [:bar], index: 0, organizer: Object.new, extra_kwargs: {fallback: true}} }
+      let(:kwargs) { {action: Class.new, inputs: [:foo], outputs: [:bar], strict: false, index: 0, organizer: Object.new, extra_kwargs: {fallback: true}} }
 
       let(:params) { described_class.new(**kwargs) }
 
@@ -35,6 +35,14 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
       context "when `other` has different `outputs`" do
         let(:other) { described_class.new(**kwargs.merge(outputs: [:qux])) }
+
+        it "returns `false`" do
+          expect(params == other).to eq(false)
+        end
+      end
+
+      context "when `other` has different `strict`" do
+        let(:other) { described_class.new(**kwargs.merge(strict: true)) }
 
         it "returns `false`" do
           expect(params == other).to eq(false)

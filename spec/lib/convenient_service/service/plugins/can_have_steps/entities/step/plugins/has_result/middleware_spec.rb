@@ -477,6 +477,28 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         it "returns service result with original data keys" do
           expect(step.result).to be_failure.with_data(foo: :foo, bar: :bar, baz: :baz).of_step(first_step).of_service(container).of_original_service(first_step)
         end
+
+        context "when `step` is strict" do
+          let(:container) do
+            Class.new.tap do |klass|
+              klass.class_exec(first_step, middleware) do |first_step, middleware|
+                include ConvenientService::Standard::Config
+
+                self::Step.class_exec(middleware) do |middleware|
+                  middlewares :result do
+                    observe middleware
+                  end
+                end
+
+                step first_step, strict: true
+              end
+            end
+          end
+
+          it "returns service result with original data keys, but with error status" do
+            expect(step.result).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz).of_step(first_step).of_service(container).of_original_service(first_step)
+          end
+        end
       end
 
       context "when `step` result has error status" do

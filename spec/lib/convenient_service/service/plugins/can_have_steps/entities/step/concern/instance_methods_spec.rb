@@ -630,6 +630,15 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       end
     end
 
+    describe "#strict?" do
+      specify do
+        expect { step.strict? }
+          .to delegate_to(step.params, :strict)
+          .without_arguments
+          .and_return_its_value
+      end
+    end
+
     describe "#save_outputs_in_organizer!" do
       context "when step has NO output values" do
         let(:step_service_klass) do

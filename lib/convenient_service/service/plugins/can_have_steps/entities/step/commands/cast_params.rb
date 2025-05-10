@@ -35,6 +35,7 @@ module ConvenientService
                     action: action,
                     inputs: inputs,
                     outputs: outputs,
+                    strict: strict,
                     index: index,
                     container: container,
                     organizer: organizer,
@@ -64,6 +65,13 @@ module ConvenientService
                 #
                 def outputs
                   @outputs ||= flatten_methods(original_params.outputs).map { |output| Entities::Method.cast!(output, direction: :output) }
+                end
+
+                ##
+                # @return [Boolean]
+                #
+                def strict
+                  Utils.memoize_including_falsy_values(self, :@strict) { Utils.to_bool(original_params.strict) }
                 end
 
                 ##

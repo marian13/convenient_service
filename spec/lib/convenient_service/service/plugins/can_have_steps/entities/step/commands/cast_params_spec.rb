@@ -18,6 +18,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       let(:action) { Class.new }
       let(:inputs) { [:foo] }
       let(:outputs) { [:bar] }
+      let(:strict) { false }
       let(:index) { 0 }
       let(:container) { Class.new }
       let(:organizer) { container.new }
@@ -28,6 +29,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           action: action,
           inputs: inputs,
           outputs: outputs,
+          strict: strict,
           index: index,
           container: container,
           organizer: organizer,
@@ -140,6 +142,34 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
         specify do
           expect { command_result.index }.to cache_its_value
+        end
+      end
+
+      example_group "`strict`" do
+        it "returns `original_params.strict`" do
+          expect(command_result.strict).to eq(original_params.strict)
+        end
+
+        specify do
+          expect { command_result.strict }.to cache_its_value
+        end
+
+        context "when `original_params.strict` is NOT boolean" do
+          context "when `original_params.strict` is truthy value" do
+            let(:strict) { 42 }
+
+            it "converts `original_params.strict` to `true`" do
+              expect(command_result.strict).to eq(true)
+            end
+          end
+
+          context "when `original_params.strict` is falsy value" do
+            let(:strict) { nil }
+
+            it "converts `original_params.strict` to `false`" do
+              expect(command_result.strict).to eq(false)
+            end
+          end
         end
       end
 

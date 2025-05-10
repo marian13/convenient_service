@@ -13,18 +13,37 @@ module ConvenientService
           class Step
             module Commands
               class ExtractParams < Support::Command
-                attr_reader :args, :kwargs
+                ##
+                # @!attribute [r] args
+                #   @return [Array<Object>]
+                #
+                attr_reader :args
 
+                ##
+                # @!attribute [r] kwargs
+                #   @return [Hash{Symbol => Object}]
+                #
+                attr_reader :kwargs
+
+                ##
+                # @param args [Array<Object>]
+                # @param kwargs [Hash{Symbol => Object}]
+                # @return [void]
+                #
                 def initialize(args:, kwargs:)
                   @args = args
                   @kwargs = kwargs
                 end
 
+                ##
+                # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Params]
+                #
                 def call
                   Structs::Params.new(
                     action: args.first,
                     inputs: Utils::Array.wrap(kwargs[:in]),
                     outputs: Utils::Array.wrap(kwargs[:out]),
+                    strict: kwargs[:strict],
                     index: kwargs[:index],
                     container: kwargs[:container],
                     organizer: kwargs[:organizer],
