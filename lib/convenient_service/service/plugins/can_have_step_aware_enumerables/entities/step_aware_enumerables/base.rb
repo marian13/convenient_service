@@ -238,6 +238,34 @@ module ConvenientService
                   if value.success?
                     next true if value.outputs.none?
 
+                    ##
+                    # NOTE: It may look very appealing to return data objects instead of hashes. For example:
+                    #   # With hashes.
+                    #   result =
+                    #     step_aware_enumerable(users)
+                    #       .map { |user| step ProcessUser, in: :user, out: [:attributes, :associations] }
+                    #       .each { |values| p [values[:attributes], values[:associations]] }
+                    #       .result(data_key: :items)
+                    #
+                    #   result.data[:items]
+                    #   # => [{attributes: {}, associations: []}, {attributes: {}, associations: []}]
+                    #
+                    #   # With data objects.
+                    #   result =
+                    #     step_aware_enumerable(users)
+                    #       .map { |user| step ProcessUser, in: :user, out: [:attributes, :associations] }
+                    #       .each { |data| p [data.attributes, data.associations] }
+                    #       .result(data_key: :items)
+                    #
+                    #   result.data[:items]
+                    #   # => [<...Data attributes: {}, associations: []>, <...Data attributes: {}, associations: []>]
+                    #
+                    #   But:
+                    #   - Is it OK to return nested data objects from results?
+                    #   - If not, how can those nested data objects be efficiently converted into hashes only for the results (data may return arrays, hashes, sets, enumerators, arithmetic sequences, etc.)?
+                    #
+                    # next value.outputs.one? ? value.output_values.values.first : value.result.create_data(value.output_values)
+
                     next value.outputs.one? ? value.output_values.values.first : value.output_values
                   end
 
