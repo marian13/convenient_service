@@ -1,0 +1,20 @@
+/**
+ * AUTHOR: Marian Kostyk <mariankostyk13895@gmail.com>
+ * LICENSE: LGPLv3 <https://www.gnu.org/licenses/lgpl-3.0.html>
+ */
+
+{
+  ////
+  // NOTE: `.code-snippets` files support only C-style comments.
+  // NOTE: More information about VS Code Snippets can be found here:
+  // - https://code.visualstudio.com/docs/editor/userdefinedsnippets
+  //
+  "YARD type for ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base": {
+    "scope": "ruby",
+    "prefix": "ystep_expression",
+    "body": [
+      "[ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base]",
+    ],
+    "description": "YARD type for ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base"
+  }
+}
