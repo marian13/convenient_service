@@ -195,4 +195,6 @@ appraise "all" do
   gem "amazing_print", "~> 1.5.0"
 
   gem "awesome_print", "~> 1.9.2"
+
+  gem "memo_wise", "~> 1.0.0"
 end
