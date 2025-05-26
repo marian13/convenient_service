@@ -30,7 +30,17 @@ module ConvenientService
                       }
 
                       metadata[:ConvenientService][:data_keys] = unsafe_data.keys if unsafe_data.keys.any?
-                      metadata[:ConvenientService][:message] = unsafe_message.to_s unless unsafe_message.empty?
+
+                      ##
+                      # TODO: Specs.
+                      # TODO: Same for `amazing_print`.
+                      #
+                      if from_unhandled_exception?
+                        metadata[:ConvenientService][:message] = unhandled_exception.message.to_s
+                        metadata[:ConvenientService][:backtrace] = unhandled_exception.backtrace.to_a.take(10) + ["..."]
+                      else
+                        metadata[:ConvenientService][:message] = unsafe_message.to_s unless unsafe_message.empty?
+                      end
 
                       metadata.ai
                     end

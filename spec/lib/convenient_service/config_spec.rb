@@ -77,7 +77,7 @@ RSpec.describe ConvenientService::Config, type: :standard do
 
                     included do
                       example.instance_exec(options) do |options|
-                        expect(options).to eq(::Set[:foo, :bar])
+                        expect(options).to eq(ConvenientService::Config::Entities::Options.new(options: [:foo, :bar]))
                       end
                     end
                   end
@@ -103,7 +103,7 @@ RSpec.describe ConvenientService::Config, type: :standard do
 
               config.eval_included_block(klass)
 
-              expect(klass.options).to eq(Set.new)
+              expect(klass.options).to eq(ConvenientService::Config::Entities::Options.new)
             end
 
             context "when `included` block raises exception" do
@@ -125,7 +125,7 @@ RSpec.describe ConvenientService::Config, type: :standard do
 
                 ignoring_exception(ArgumentError) { config.eval_included_block(klass) }
 
-                expect(klass.options).to eq(Set.new)
+                expect(klass.options).to eq(ConvenientService::Config::Entities::Options.new)
               end
             end
           end
@@ -349,7 +349,7 @@ RSpec.describe ConvenientService::Config, type: :standard do
 
               describe ".options" do
                 it "returns original empty `options`" do
-                  expect(config_copy.options).to eq(Set.new)
+                  expect(config_copy.options).to eq(ConvenientService::Config::Entities::Options.new)
                 end
               end
             end
@@ -402,7 +402,7 @@ RSpec.describe ConvenientService::Config, type: :standard do
 
             context "when `block` is NOT passed" do
               it "returns empty set" do
-                expect(config.default_options).to eq(Set.new)
+                expect(config.default_options).to eq(ConvenientService::Config::Entities::Options.new)
               end
 
               specify do

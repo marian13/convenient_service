@@ -36,7 +36,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
   example_group "instance methods" do
     include ConvenientService::RSpec::Helpers::StubService
 
-    describe "#from_exception?" do
+    describe "#from_unhandled_exception?" do
       let(:result) { service.result }
 
       let(:service) do
