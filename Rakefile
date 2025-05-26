@@ -6,7 +6,7 @@
 ##
 
 ##
-# NOTE: Why not `bin` folder? It has a different purpose. It should contain "binaries/executables" that can be used by the end user.
+# TODO: Learn more about the purpose of the `bin` and `exe` folders. Why are scripts from there not in the `Rakefile`?
 # Search for `bin` in the following links for more info.
 # - https://guides.rubygems.org/what-is-a-gem/
 # - https://guides.rubygems.org/faqs/
