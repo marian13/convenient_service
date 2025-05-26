@@ -53,6 +53,8 @@ module YARD
       # @internal
       #   TODO: Dive deep why `class self::SomeClass` is not parsed properly. Consider to open an issue/contribute.
       #
+      #   NOTE: Looks like this issue is not relevant anymore, since Convenient Service v0.20 drops usage of `self::SomeClass` notation. Now it is `entity :SomeClass do`.
+      #
       def all_objects
         Registry.all(:root, :module, :class).reject { |object| object.path.include?(".self") }
       end
