@@ -119,8 +119,15 @@ jobs:
           #
           - "jruby-9.4"
           ##
-          # NOTE: TruffleRuby 22.3 aims CRuby 3.1 compatibility.
+          # NOTE: JRuby 9.4 aims CRuby 3.4 compatibility.
           # - https://www.jruby.org/download
+          #
+          - "jruby-10.0"
+          ##
+          # NOTE: TruffleRuby 22.3 aims CRuby 3.1 compatibility.
+          # - https://github.com/oracle/truffleruby/blob/master/doc/user/compatibility.md
+          # - https://github.com/oracle/truffleruby/issues/2733
+          # - https://github.com/oracle/truffleruby/releases/tag/vm-22.3.0
           #
           # IMPORTANT: TruffleRuby 22.3 is currently disabled since too many specs are failing due to CRuby uncompatible code.
           #

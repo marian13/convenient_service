@@ -161,13 +161,19 @@ tasks:
   #   task docker:bash RUBY_ENGINE=ruby RUBY_ENGINE_VERSION=3.4
   #   task docker:bash RUBY_ENGINE=ruby RUBY_ENGINE_VERSION=3.5
   #   task docker:bash RUBY_ENGINE=jruby RUBY_ENGINE_VERSION=9.4
+  #   task docker:bash RUBY_ENGINE=jruby RUBY_ENGINE_VERSION=10.0
   #   task docker:bash RUBY_ENGINE=truffleruby RUBY_ENGINE_VERSION=22.3
   #
   # NOTE: JRuby 9.4 aims CRuby 3.1 compatibility.
   # - https://www.jruby.org/download
   #
+  # NOTE: JRuby 10.0 aims CRuby 3.4 compatibility.
+  # - https://www.jruby.org/download
+  #
   # NOTE: TruffleRuby 22.3 aims CRuby 3.1 compatibility.
   # - https://github.com/oracle/truffleruby/blob/master/doc/user/compatibility.md
+  # - https://github.com/oracle/truffleruby/issues/2733
+  # - https://github.com/oracle/truffleruby/releases/tag/vm-22.3.0
   #
   # NOTE: Naming `RUBY_ENGINE` is inspired by `ruby_engine` gem.
   # - https://github.com/janlelis/ruby_engine
@@ -191,13 +197,19 @@ tasks:
   #   RUBY_ENGINE=ruby RUBY_ENGINE_VERSION=3.4 task docker:build
   #   RUBY_ENGINE=ruby RUBY_ENGINE_VERSION=3.5 task docker:build
   #   RUBY_ENGINE=jruby RUBY_ENGINE_VERSION=9.4 task docker:build
+  #   RUBY_ENGINE=jruby RUBY_ENGINE_VERSION=10.0 task docker:build
   #   RUBY_ENGINE=truffleruby RUBY_ENGINE_VERSION=22.3 task docker:build
   #
   # NOTE: JRuby 9.4 aims CRuby 3.1 compatibility.
   # - https://www.jruby.org/download
   #
+  # NOTE: JRuby 10.0 aims CRuby 3.4 compatibility.
+  # - https://www.jruby.org/download
+  #
   # NOTE: TruffleRuby 22.3 aims CRuby 3.1 compatibility.
   # - https://github.com/oracle/truffleruby/blob/master/doc/user/compatibility.md
+  # - https://github.com/oracle/truffleruby/issues/2733
+  # - https://github.com/oracle/truffleruby/releases/tag/vm-22.3.0
   #
   # NOTE: Naming `RUBY_ENGINE` is inspired by `ruby_engine` gem.
   # - https://github.com/janlelis/ruby_engine
@@ -251,8 +263,16 @@ tasks:
           RUBY_ENGINE_VERSION: 3.4
       - task: docker:build
         vars:
+          RUBY_ENGINE: ruby
+          RUBY_ENGINE_VERSION: 3.5
+      - task: docker:build
+        vars:
           RUBY_ENGINE: jruby
           RUBY_ENGINE_VERSION: 9.4
+      - task: docker:build
+        vars:
+          RUBY_ENGINE: jruby
+          RUBY_ENGINE_VERSION: 10.0
       - task: docker:build
         vars:
           RUBY_ENGINE: truffleruby
