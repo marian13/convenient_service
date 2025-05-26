@@ -34,6 +34,29 @@ module ConvenientService
       # @api private
       #
       # @return [Boolean]
+      #
+      # @see https://github.com/deivid-rodriguez/byebug/issues/289
+      #
+      # @internal
+      #   NOTE: Ruby 3.5 does not ship with the `readline` by default. That is why `byebug` throws the following error:
+      #     Sorry, you can't use byebug without Readline. To solve this, you need to
+      #     rebuild Ruby with Readline support. If using Ubuntu, try `sudo apt-get
+      #     install libreadline-dev` and then reinstall your Ruby.
+      #
+      #     LoadError:
+      #       cannot load such file -- readline
+      #
+      #   The bigger problem is that the `readline` (`libreadline-dev`) must be available before building Ruby.
+      #   In other words, the full Docker image source should be copied, extended, and built locally.
+      #
+      def support_byebug?
+        ruby.mri? && ruby.version < 3.5
+      end
+
+      ##
+      # @api private
+      #
+      # @return [Boolean]
       # @see ConvenientService.Dependencies.require_has_j_send_result_params_validations_using_active_model_validations_plugin
       #
       def support_has_j_send_result_params_validations_using_active_model_validations_plugin?
@@ -351,7 +374,7 @@ module ConvenientService
         ##
         # - https://github.com/deivid-rodriguez/byebug
         #
-        require "byebug" if ruby.mri?
+        require "byebug" if support_byebug?
 
         ##
         # - https://github.com/ruby/debug
@@ -383,12 +406,12 @@ module ConvenientService
         ##
         # - https://gist.github.com/marian13/5dade20a431d7254db30e543167058ce
         #
-        require "convenient_service/dependencies/extractions/byebug_syntax_highlighting" if ruby.mri?
+        require "convenient_service/dependencies/extractions/byebug_syntax_highlighting" if support_byebug?
 
         ##
         #
         #
-        require "convenient_service/dependencies/extractions/b" if ruby.mri?
+        require "convenient_service/dependencies/extractions/b" if support_byebug?
 
         ##
         #

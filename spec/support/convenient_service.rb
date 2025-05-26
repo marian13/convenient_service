@@ -8,7 +8,7 @@
 ##
 # NOTE: Sometimes it is needed to debug something even before `convenient_service` is loaded.
 #
-require "convenient_service/dependencies/extractions/b"
+require "convenient_service/dependencies/extractions/b" if ConvenientService::Dependencies.support_byebug?
 
 require "convenient_service"
 
